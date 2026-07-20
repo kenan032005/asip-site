@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>非洲地区社会安全信息平台 · ASIP</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="topbar" class="topbar"></div>
+
+<div id="dbError" class="db-error" style="display:none;">
+  ⚠️ 数据未能成功加载。请刷新页面（Ctrl/Cmd + Shift + R）后重试；若持续失败，可能是网络问题，请稍后再试。已加载的上一版数据会优先展示。
+</div>
+
+<div class="container">
+
+  <section class="hero">
+    <h1>非洲地区社会安全信息平台</h1>
+    <p>Africa Security Information Platform · 所有时间均为北京时间（UTC+8）</p>
+    <div class="statusbar" id="statusbar">
+      <span>数据状态：<b id="stStatus">加载中…</b></span>
+      <span>最后更新：<b id="stUpdated">--</b></span>
+      <span>下次更新：<b id="stNext">--</b></span>
+      <span>监测国家：<b id="stCountries">--</b></span>
+      <span>近24h新增事件：<b id="stEvents24">--</b></span>
+      <span>极高风险国家：<b id="stExtreme">--</b></span>
+      <span>今日日报：<b id="stReports">--</b></span>
+    </div>
+  </section>
+
+  <section class="hp-block">
+    <h2>一、今日非洲地区安全形势概览</h2>
+    <ul class="hp-overview" id="overview"><li>加载中…</li></ul>
+  </section>
+
+  <section class="hp-block">
+    <h2>二、极高及高风险重要事件</h2>
+    <div class="hp-evlist" id="highRisk"><div class="empty-sm">加载中…</div></div>
+  </section>
+
+  <section class="hp-block">
+    <h2>三、最新重要事件</h2>
+    <div class="hp-evlist" id="latest"><div class="empty-sm">加载中…</div></div>
+  </section>
+
+  <section class="hp-block">
+    <h2>四、涉及中国企业与中国公民的信息</h2>
+    <div class="hp-evlist" id="china"><div class="empty-sm">加载中…</div></div>
+  </section>
+
+  <section class="hp-block">
+    <h2>五、非洲国家风险等级</h2>
+    <div id="riskMatrix"></div>
+  </section>
+
+  <section class="hp-block">
+    <h2>六、最新日报</h2>
+    <div id="latestReports"><div class="empty-sm">加载中…</div></div>
+  </section>
+
+  <section class="hp-block">
+    <h2>七、非洲传染病风险</h2>
+    <div class="panel" style="text-align:center;padding:24px;">
+      <div style="font-size:42px;">🦠</div>
+      <div style="font-weight:700;color:var(--brand);margin:8px 0;">非洲传染病风险模块正在建设中</div>
+      <div class="muted">后续将接入非洲疾控中心、世界卫生组织及各国卫生部门公开信息。</div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="site"></footer>
+
+<script src="assets/js/api.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+renderHeader("index.html");
+
+function evItem(e) {
+  const risk = Number(e.country_risk_level) || Number(e.risk_level) || 0;
+  const url = "event.html?id=" + encodeURIComponent(e.event_id || e.id || "");
+  return `<a class="hp-ev" href="${url}">
+    <div class="hp-ev-head">
+      <span class="hp-ev-risk risk-${risk}">${RISK_NAME[risk] || "低风险"}</span>
+      <span class="hp-ev-title">${esc(e.title_cn || e.title_original)}</span>
+    </div>
+    <div class="hp-ev-meta">${esc(e.country || "")}${e.location ? (" · " + esc(e.location)) : ""} · ${cardTime(e.published_time || e.event_time)}</div>
+    ${e.summary_cn ? `<div class="hp-ev-sum">${esc(e.summary_cn).slice(0, 160)}</div>` : ""}
+    <div class="hp-ev-meta">来源：${esc(e.source_name || "—")} · 可信度：${esc(e.confidence || "—")}</div>
+  </a>`;
+}
+
+function renderStatus(st) {
+  if (!st) return;
+  document.getElementById("stStatus").textContent = st.data_status_text || "数据正常";
+  document.getElementById("stUpdated").textContent = st.last_update_bj || st.generated_at_bj || "--";
+  document.getElementById("stNext").textContent = st.next_update_bj || "--";
+  document.getElementById("stCountries").textContent = st.monitored_country_count != null ? st.monitored_country_count : "--";
+  document.getElementById("stEvents24").textContent = st.events_24h != null ? st.events_24h : "--";
+  document.getElementById("stExtreme").textContent = st.extreme_risk_country_count != null ? st.extreme_risk_country_count : "--";
+  document.getElementById("stReports").textContent = st.reports_today != null ? st.reports_today : "--";
+  setUpdated(st.last_update_bj || st.generated_at_bj);
+}
+
+function renderRiskMatrix(countries, risk) {
+  const host = document.getElementById("riskMatrix");
+  const levels = risk.levels;
+  const tiers = risk.tiers;
+  let html = "";
+  tiers.forEach(function (t) {
+    const list = t.order.map(function (cn) {
+      const c = countries.find(function (x) { return x.cn === cn; }) || { cn: cn, en: "", capital: "", region: "", risk_level: t.level, has_daily: false };
+      const lvl = c.risk_level || t.level;
+      return `<a class="country-card" style="border-left-color:${levels[String(lvl)].color};" href="country.html?country=${encodeURIComponent(c.cn)}">
+        <div class="cn">${esc(c.cn)}</div>
+        <div class="en">${esc(c.en || "")}</div>
+        <div class="region">${esc(c.region || "")}</div>
+        <div class="meta-row">
+          <span class="badge risk-${lvl}">${RISK_NAME[lvl]}</span>
+          <span>${c.has_daily ? "📄 日报" : ""}</span>
+        </div>
+      </a>`;
+    }).join("");
+    html += `<div class="tier-block">
+      <div class="tier-head"><span class="tier-name">${esc(t.label)}</span><span class="tier-count">${t.order.length} 国</span></div>
+      <div class="matrix">${list}</div>
+    </div>`;
+  });
+  host.innerHTML = html;
+}
+
+function renderHome() {
+  Promise.all([
+    API.getCached("latest-summary"),
+    API.getCached("countries"),
+    API.getCached("risk-levels"),
+    API.getCached("events"),
+    API.getCached("status")
+  ]).then(function (res) {
+    const sum = res[0] || {}, countries = (res[1] && res[1].countries) || [], risk = res[2] || {}, ev = (res[3] && res[3].events) || [], st = res[4] || {};
+    renderStatus(st);
+
+    // 概览
+    const ov = document.getElementById("overview");
+    ov.innerHTML = (sum.overview && sum.overview.length) ? sum.overview.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") : "<li>暂无概览。</li>";
+
+    // 极高高风险事件
+    const hr = document.getElementById("highRisk");
+    const highList = (sum.high_risk_events && sum.high_risk_events.length) ? sum.high_risk_events
+      : ev.filter(function (e) { return (Number(e.country_risk_level) || 0) >= 3; }).slice(0, 12);
+    hr.innerHTML = highList.length ? highList.map(evItem).join("") : '<div class="empty-sm">近24小时暂无极高及高风险重要事件。</div>';
+
+    // 最新事件
+    const lv = document.getElementById("latest");
+    const latest = (sum.latest_events && sum.latest_events.length) ? sum.latest_events
+      : ev.slice().sort(function (a, b) { return (b.published_time || "").localeCompare(a.published_time || ""); }).slice(0, 15);
+    lv.innerHTML = latest.length ? latest.map(evItem).join("") : '<div class="empty-sm">暂无事件数据。</div>';
+
+    // 涉华
+    const ch = document.getElementById("china");
+    const china = (sum.china_related && sum.china_related.length) ? sum.china_related
+      : ev.filter(function (e) { return e.china_related || e.involves_china; });
+    ch.innerHTML = china.length ? china.map(evItem).join("") : '<div class="empty-sm">近24小时未发现经可靠来源证实的涉中国企业或中国公民重大社会安全事件。</div>';
+
+    // 风险矩阵
+    if (countries.length && risk.tiers) renderRiskMatrix(countries, risk);
+
+    // 最新日报
+    const lr = document.getElementById("latestReports");
+    const reps = (sum.latest_reports && sum.latest_reports.length) ? sum.latest_reports : [];
+    if (reps.length) {
+      lr.innerHTML = '<div class="report-links">' + reps.map(function (r) {
+        return `<a class="btn sm" href="report.html?country=${encodeURIComponent(r.country)}&date=${encodeURIComponent(r.date || "")}">${esc(r.title || r.country)}</a>`;
+      }).join(" ") + ` <a class="btn sm ghost" href="reports.html">历史日报</a></div>`;
+    } else {
+      lr.innerHTML = '<div class="empty-sm">今日日报生成中。可前往 <a href="reports.html">日报</a> 查看。</div>';
+    }
+  }).catch(function (e) {
+    showDbError();
+    console.error(e);
+  });
+}
+
+renderHome();
+</script>
+</body>
+</html>

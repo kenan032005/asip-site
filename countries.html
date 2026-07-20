@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>国家 · 非洲地区社会安全信息平台</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="topbar" class="topbar"></div>
+<div id="dbError" class="db-error" style="display:none;">
+  ⚠️ 数据未能成功加载。请刷新页面（Ctrl/Cmd + Shift + R）后重试。已加载的上一版数据会优先展示。
+</div>
+
+<div class="container">
+  <h1 style="font-size:20px;color:var(--brand);margin:0 0 6px;">非洲国家风险</h1>
+  <p class="muted" style="margin:0 0 16px;font-size:13px;">
+    风险等级依据《中国石油海外国家（地区）社会安全风险等级（第906期）》。同一国家不同地区风险不同时，按该国最高风险等级归类。"禁止中方人员进入"的国家和地区不纳入本期名单。国家基准等级为人工确定，不随单日新闻自动改变。
+  </p>
+  <div id="tiers"><div class="empty">加载中…</div></div>
+</div>
+
+<footer class="site"></footer>
+
+<script src="assets/js/api.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+renderHeader("countries.html");
+
+function count24(ev, cn) {
+  let n = 0;
+  ev.forEach(function (e) {
+    if (e.country !== cn) return;
+    const h = (Date.now() - new Date(fmtTimeBJ(e.published_time || e.event_time || "").replace(/-/g,"/")).getTime()) / 3600000;
+    if (h >= 0 && h <= 24) n++;
+  });
+  return n;
+}
+function lastUpdate(ev, cn) {
+  let last = "";
+  ev.forEach(function (e) { if (e.country === cn) { const t = e.updated_at || e.published_time || e.event_time || ""; if (t > last) last = t; } });
+  return last ? fmtDateTimeBJ(last) : "—";
+}
+
+function init() {
+  Promise.all([API.getCached("countries"), API.getCached("risk-levels"), API.getCached("events")]).then(function (res) {
+    const countries = (res[0] && res[0].countries) || [], risk = res[1] || {}, ev = (res[2] && res[2].events) || [];
+    const levels = risk.levels || {};
+    const tiers = risk.tiers || [];
+    let html = "";
+    tiers.forEach(function (t) {
+      const cards = t.order.map(function (cn) {
+        const c = countries.find(function (x) { return x.cn === cn; }) || { cn: cn, en: "", region: "", risk_level: t.level, has_daily: false };
+        const lvl = c.risk_level || t.level;
+        const col = (levels[String(lvl)] && levels[String(lvl)].color) || "#888";
+        return `<a class="country-card" style="border-left-color:${col};" href="country.html?country=${encodeURIComponent(c.cn)}">
+          <div class="cn">${esc(c.cn)}</div>
+          <div class="en">${esc(c.en || "")}</div>
+          <div class="region">${esc(c.region || "")} · 首都 ${esc(c.capital || "—")}</div>
+          <div class="meta-row">
+            <span class="badge risk-${lvl}">${RISK_NAME[lvl]}</span>
+            <span>近24h事件 ${count24(ev, c.cn)}</span>
+          </div>
+          <div class="meta-row"><span class="muted">更新 ${lastUpdate(ev, c.cn)}</span>${c.has_daily ? '<span class="badge" style="background:#e3f2fd;color:#1565c0;">📄 日报</span>' : ""}</div>
+        </a>`;
+      }).join("");
+      html += `<div class="tier-block">
+        <div class="tier-head"><span class="tier-name">${esc(t.label)}</span><span class="tier-count">${t.order.length} 国</span></div>
+        <div class="matrix">${cards}</div>
+      </div>`;
+    });
+    document.getElementById("tiers").innerHTML = html;
+  }).catch(function () { showDbError(); });
+}
+init();
+</script>
+</body>
+</html>

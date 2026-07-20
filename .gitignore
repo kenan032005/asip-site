@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+
+# 构建产物（由 build_site.py 生成；gh-pages 由 Actions 管理，不提交）
+dist/
+.deploy_tmp/
+
+# 密钥与本地配置（绝不入库）
+*.token
+.env
+sync_config.json
+tools/sync_config.json
+secrets.*
+*.secret
+
+# 操作系统
+.DS_Store
+Thumbs.db
