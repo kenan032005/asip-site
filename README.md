@@ -7,8 +7,8 @@
 
 - 建议网站名：非洲地区社会安全信息平台
 - 英文副标题：Africa Security Information Platform
-- 建议仓库：`asip-site`（不可用则 `africa-security-site`）
-- 建议 Pages 地址：`https://<用户>.github.io/asip-site/`
+- 仓库（已创建）：`asip-site`
+- 线上地址（已上线）：`https://kenan032005.github.io/asip-site/`
 
 > 第一阶段为**可运行框架版**：已完成网站框架、22 国风险分类、事件数据结构、六国日报框架
 > 与 GitHub Pages 部署链路。实时信息采集（各信息源适配器）为后续阶段，按"先框架、再接入"推进。
@@ -93,19 +93,22 @@ python scripts/build_site.py
 
 ## 四、自动更新与部署
 
-### GitHub Pages 部署链路
-1. `main` 分支保存全部源码。
-2. GitHub Actions（`deploy.yml`）在以下时机运行：
-   - 推送 `main` 时；
-   - **北京时间每天 22:00**（cron `0 14 * * *` UTC）触发；
-   - 手动 `workflow_dispatch`。
-3. 运行步骤：数据校验 → 生成日报 → 构建 → 结构与链接检查 → 部署 `dist/` 到 `gh-pages`。
-4. Pages 站点地址固定：`https://<用户>.github.io/asip-site/`。
+### GitHub Pages 部署链路（当前已上线）
+- 站点已上线：`https://kenan032005.github.io/asip-site/`
+- 部署方式：构建产物（`dist/`）直接推送到 `gh-pages` 分支，Pages 以该分支根目录为源。
+- `main` 分支保存全部源码（不含密钥、不含工作流文件，符合安全规范）。
 
-### 北京时间 22:00 日报任务
-- 定时任务由 `deploy.yml` 的 `schedule` 承担，时区已换算为 UTC（`0 14 * * *`）。
-- 任务内容：抓取→去重→翻译→核实→生成六份日报→更新首页/事件/国家→提交仓库→触发 Pages 部署。
-- **第一阶段**尚未接入实时抓取；定时任务会运行 `generate_reports.py`（基于现有数据；无事件时按文档生成"未发现重大新增事件"表述），保证链路可用、不产生空白覆盖。
+### 自动定时更新（Actions 待启用）
+- `deploy.yml` 已编写完成，保存在磁盘 `.github/workflows/`（因本次部署所用令牌仅含 `repo` 权限、不含 `workflow`，故未推送至仓库）。
+- 启用方法（二选一）：
+  1. 提供带 `workflow` 权限的令牌后，运行 `git add .github && git push` 推送工作流；或
+  2. 在 GitHub 网页端确认 Pages 源为 `gh-pages` 后，由 Actions 接管。
+- 启用后：北京时间每天 22:00（cron `0 14 * * *` UTC）自动运行 数据校验 → 生成日报 → 构建 → 部署。
+
+### 当前每日更新由 WorkBuddy 驱动（符合需求"优先由 WorkBuddy 每天北京时间 22:00 执行"）
+- 在 WorkBuddy 中配置每日 22:00 自动化任务，执行：抓取→去重→翻译→核实→生成六份日报→更新首页/事件/国家→构建→推送 `gh-pages`。
+- 亦可手动执行（见第五节）。
+- **第一阶段**尚未接入实时抓取；日报在"无事件"时按文档生成默认表述，保证链路可用、不产生空白覆盖。
 
 ### 失败后重新执行
 - 在仓库 **Actions** 页面对应工作流点击 **Re-run jobs**；或本地 `python scripts/build_site.py` 后手动部署。
@@ -177,7 +180,7 @@ python tools/setup_gh_pages.py
 | 项 | 状态 |
 |---|---|
 | 原中东网站未被修改 | ✅ 独立仓库/目录，零耦合 |
-| 新非洲网站可独立访问 | ✅ 本地预览 + Pages 链路就绪 |
+| 新非洲网站可独立访问 | ✅ 已上线 https://kenan032005.github.io/asip-site/ |
 | 顶部导航严格五项 | ✅ 首页/最新事件/国家/日报/非洲传染病风险 |
 | 22 国完整显示 | ✅ 单数据源 |
 | 四类风险与顺序准确 | ✅ risk-levels.json 固定顺序 |
@@ -188,7 +191,7 @@ python tools/setup_gh_pages.py
 | 日报按日期+国家归档 | ✅ reports/<国>/<日期>.json |
 | 每条信息有来源+原文链接 | ✅ 事件字段 |
 | 页面时间均为北京时间 | ✅ 前端统一换算 |
-| 每天 22:00 更新 | ✅ Actions schedule（UTC 14:00）|
+| 每天 22:00 更新 | ⚠️ Actions 定时待启用（需 workflow 令牌）；当前由 WorkBuddy/手动 22:00 更新 |
 | 失败不覆盖上一版 | ✅ 仅成功才部署 |
 | 传染病页仅占位 | ✅ 无虚构数据 |
 | 手机端正常 | ✅ 响应式 CSS |
