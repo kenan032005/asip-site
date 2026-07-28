@@ -75,8 +75,8 @@ def candidate_id(title, url):
 
 def source_class(src):
     pos = src.get("source_position")
-    if pos in ("official", "state_media"):
-        return "A"  # 官方/国家媒体
+    if pos in ("official", "state_media", "un_humanitarian", "china_official"):
+        return "A"  # 官方/国家媒体/联合国与人道机构/中国官方
     return "C"  # 普通媒体（默认待核实）
 
 

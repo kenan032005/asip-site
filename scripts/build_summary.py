@@ -96,7 +96,7 @@ events_24h = sum(1 for e in events if (bj_parse(e.get("published_time", "")) or 
 
 summary = {
     "generated_at_bj": GEN_BJ,
-    "window_start_bj": (cut).strftime("%Y-%m-%d %H:%M:%S"),
+    "window_start_bj": cut24.strftime("%Y-%m-%d %H:%M:%S"),
     "window_end_bj": GEN_BJ,
     "overall_risk": 4,
     "overall_risk_name": "极高",

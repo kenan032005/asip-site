@@ -122,7 +122,7 @@ def build():
         ("xinhua", "新华社/新华网", "xinhua", "domain:news.cn OR domain:xinhuanet.com"),
         ("ap", "Associated Press", "ap", "domain:apnews.com"),
         ("afp", "AFP", "afp", "domain:afp.com OR domain:france24.com"),
-        ("bbc", "BBC Afrique", "bbc", "domain:bbc.com/afrique OR domain:bbc.com/afrique"),
+        ("bbc", "BBC Afrique", "bbc", "domain:bbc.com"),
         ("rfi", "RFI Afrique", "rfi", "domain:rfi.fr"),
         ("france24", "France 24 Afrique", "france24", "domain:france24.com"),
         ("voa", "VOA Afrique", "voa", "domain:voaafrique.com"),
@@ -138,7 +138,9 @@ def build():
     for country, c_en, c_excl_note in (("乍得", "Chad", "Chad OR N'Djamena OR \"Lake Chad\" OR \"Boko Haram Chad\" OR \"Chad Sudan border\""),
                                         ("尼日尔", "Niger", "Niger OR Niamey OR Tillaberi OR Diffa OR Agadez OR \"Niger junta\" OR \"Niger border\"")):
         for key, name, grp, dom in intl:
-            q = "(%s) AND (%s)" % (dom, c_en)
+            # GDELT 语法：括号仅可包 OR 组；AND 用空格隐式表达
+            dom_part = "(%s)" % dom if " OR " in dom else dom
+            q = "%s %s" % (dom_part, c_en)
             pos = "official" if key in ("reuters",) else "international"
             notes = "强制接入" if key in ("reuters", "xinhua") else "国际大型媒体"
             sources.append(S("intl_%s_%s" % (key, "chad" if country == "乍得" else "niger"),
@@ -174,7 +176,7 @@ def build():
                                   "英语", "un_humanitarian", "un_humanitarian", "reliefweb_api",
                                   query=q, notes="联合国人道，API 可用"))
             else:
-                q = "(%s) AND %s" % ("domain:%s" % ({"unhcr": "unhcr.org", "iom": "iom.int", "wfp": "wfp.org",
+                q = "%s %s" % ("domain:%s" % ({"unhcr": "unhcr.org", "iom": "iom.int", "wfp": "wfp.org",
                        "unicef": "unicef.org", "icrc": "icrc.org", "msf": "msf.org", "fewsnet": "fews.net",
                        "unnews": "news.un.org", "au": "au.int", "crisisgroup": "crisisgroup.org", "iss": "issafrica.org",
                        "acled": "acleddata.com"}[key]), c_en)
@@ -200,7 +202,7 @@ def build():
     ]
     for country, c_cn in (("乍得", "乍得"), ("尼日尔", "尼日尔")):
         for key, name, dom, query_dom in china_list:
-            q = "(%s) AND %s" % (query_dom, c_cn)
+            q = "%s %s" % (query_dom, c_cn)
             sources.append(S("cn_%s_%s" % (key, "chad" if country == "乍得" else "niger"),
                               name + ("（乍得）" if country == "乍得" else "（尼日尔）"),
                               country, "https://www.%s" % dom,
@@ -208,16 +210,16 @@ def build():
                               "china_official" if key in ("mfa", "emb_chad", "emb_niger") else "china_media",
                               "gdelt_search", query=q, notes="中国相关来源"))
 
-    # 启用策略：本地RSS / ReliefWeb API 全部启用；国际/UN/中国中仅启用代表性子集
-    # （含强制接入的 Reuters、Xinhua），保证每国「配置≥18 / 测试≥15 / 返回≥10」，
-    # 同时控制单次采集耗时。其余来源仍保留在 sources.json（已配置，enabled=false）。
-    ENABLE_KEYS = ["reuters", "xinhua", "reliefweb", "bbc", "rfi", "aljazeera",
-                   "unhcr", "iom", "mfa", "chinanews"]
+    # 启用策略：
+    # - 本地 RSS / ReliefWeb 全部启用；
+    # - gdelt_search 全部启用（采集器已实现「同国同关键词合并为一次 OR 查询」，
+    #   增加域名不增加 API 调用次数，可最大化覆盖 Reuters/Xinhua/AP/AFP/BBC/… ）；
+    # - 仅 ACLED（需 API Key，未伪造接入）保持关闭。
     for s in sources:
-        if s["collection_method"] in ("rss", "reliefweb_api"):
-            s["enabled"] = True
+        if s.get("requires_api"):
+            s["enabled"] = False
         else:
-            s["enabled"] = any(k in s["source_id"] for k in ENABLE_KEYS)
+            s["enabled"] = True
         s["status"] = "active" if (s["enabled"] and s["tested"]) else ("paused" if not s["enabled"] else s["status"])
     return sources
 

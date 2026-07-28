@@ -30,14 +30,17 @@ UA = ("Mozilla/5.0 (compatible; ASIP-Collector/1.0; "
 HTTP_TIMEOUT = 20
 MAX_RETRIES = 2
 MIN_INTERVAL = 1.0  # 同源最小请求间隔（秒）
+# GDELT 公共 API 限流严格（429 频发），同主机请求间隔需明显更长
+HOST_INTERVALS = {"api.gdeltproject.org": 20.0}
 _max_host_hits = {}  # host -> 最近请求时间
 
 
 def _rate_limit(url):
     host = urllib.parse.urlparse(url).netloc
+    interval = HOST_INTERVALS.get(host, MIN_INTERVAL)
     now = time.time()
-    if host in _max_host_hits and now - _max_host_hits[host] < MIN_INTERVAL:
-        time.sleep(MIN_INTERVAL - (now - _max_host_hits[host]))
+    if host in _max_host_hits and now - _max_host_hits[host] < interval:
+        time.sleep(interval - (now - _max_host_hits[host]))
     _max_host_hits[host] = time.time()
 
 
@@ -55,6 +58,15 @@ def fetch_text(url, timeout=HTTP_TIMEOUT):
                     return raw.decode(enc, "ignore"), None
                 except LookupError:
                     return raw.decode("utf-8", "ignore"), None
+        except urllib.error.HTTPError as e:
+            last_err = e
+            if e.code == 429 and attempt < MAX_RETRIES:
+                # 限流：长退避（30s/60s）
+                time.sleep(30 * (attempt + 1))
+                continue
+            if attempt < MAX_RETRIES:
+                time.sleep(2 * (attempt + 1))
+                continue
         except Exception as e:
             last_err = e
             if attempt < MAX_RETRIES:

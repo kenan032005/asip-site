@@ -27,7 +27,8 @@ DEFAULT_BASIS = "基于北京时间前一日22:00至当日22:00公开来源信�
 
 
 def bj_now():
-    return datetime.now(timezone.utc) + timedelta(hours=8)
+    # 统一返回 naive 北京时间（与 to_bj 输出一致，避免 aware/naive 比较错误）
+    return datetime.now(timezone.utc).replace(tzinfo=None) + timedelta(hours=8)
 
 
 def load_json(path, default=None):
@@ -139,7 +140,7 @@ def build_report(country, dc, events_all, date_str, generated_at, win_start, win
         ],
         "overall": {
             "text": (NO_EVENT if not has else "最近24小时（北京时间前一日22:00至当日22:00）记录 {n} 起公开报道的社会安全相关事件，涉及{ts}。".format(
-                n=len(new_events), ts="、".join(sorted(set(GROUP_MAP.get(e.get("event_type", ""), "") for e in new_events if e.get("event_type"))) or "多个领域")),
+                n=len(new_events), ts="、".join(sorted(set(GROUP_MAP.get(e.get("event_type", ""), "") for e in new_events if e.get("event_type"))) or ["多个领域"]))),
             "trend": "基本稳定" if not has else "暂无法判断",
             "trend_vs_prev": "基本稳定" if not has else "相较前一日待评估",
         },
@@ -197,8 +198,9 @@ def main():
 
     bj = bj_now()
     date_str = args.date or beijing_date(bj)
-    # 窗口：当日北京 22:00 为结束，前一日北京 22:00 为开始
-    win_end = bj.replace(hour=22, minute=0, second=0, microsecond=0)
+    # 窗口：日报日期（北京）22:00 为结束，前一日 22:00 为开始；--date 可补生成历史日报
+    base = datetime.strptime(date_str, "%Y-%m-%d")
+    win_end = base.replace(hour=22, minute=0, second=0, microsecond=0)
     win_start = win_end - timedelta(hours=24)
     generated_at = bj.strftime("%Y-%m-%d %H:%M:%S")
 

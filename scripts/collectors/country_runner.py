@@ -88,6 +88,24 @@ SECURITY_POS = [
 MINE_CONTEXT = ["mine", "landmine", "land mine", "explosive", "ied", "eei",
                 "engin explosif", "bombe", "explosion", "démineur", "deminer"]
 
+# 中性复合词（含安全类单词但语义与社会安全无关）——匹配前先从文本剔除
+NEUTRAL_COMPOUNDS = [
+    "sécurité alimentaire", "securite alimentaire", "food security",
+    "sécurité sociale", "securite sociale", "social security",
+    "sécurité routière", "securite routiere", "road safety",
+    "général d'armée", "general d'armee", "général d'armee", "general d'armée",
+    "générale d'armée", "police de proximité", "police de proximite",
+    "community policing", "sécurité énergétique", "securite energetique",
+    "energy security", "粮食安全", "食品安全", "社会保障", "能源安全",
+]
+
+# 弱信号词：泛化用词（头衔/机构/常规语境），单独出现不足以判定为安全事件
+WEAK_POS = {
+    "sécurité", "securite", "police", "armée", "crise", "frontière",
+    "frontier", "fermeture", "arrestation", "arrest", "trafic", "drone",
+    "安全", "军队", "警察", "边境", "危机",
+}
+
 # ---- 确定性排除（非社会安全） ----
 EXCLUDE_SPORTS = [
     "football", "soccer", "marathon", "coupe d'afrique", "can 202", "match",
@@ -281,7 +299,11 @@ def identify_country(text, country_cfg):
 # ---------------------------------------------------------------------------
 def relevance_stage1(text):
     """返回 (is_relevant, score, matched, excluded_reason)。"""
-    t = (text or "").lower()
+    t = (text or "").lower().replace("\u2019", "'").replace("\u02bc", "'")
+    # 先剔除中性复合词（如"sécurité alimentaire"粮食安全、"général d'armée"军衔）
+    for comp in NEUTRAL_COMPOUNDS:
+        if comp in t:
+            t = t.replace(comp, " ")
     score = 0
     matched = []
     for kw in SECURITY_POS:
@@ -292,6 +314,7 @@ def relevance_stage1(text):
                     continue
             score += 1
             matched.append(kw)
+    strong = [k for k in matched if k not in WEAK_POS]
     # 确定性排除
     for fam, lst in (("sports", EXCLUDE_SPORTS), ("culture", EXCLUDE_CULTURE),
                      ("promo", EXCLUDE_PROMO), ("meeting", EXCLUDE_MEETING),
@@ -305,6 +328,9 @@ def relevance_stage1(text):
             return None, score, matched, "ambiguous:%s(%s)" % (fam, ", ".join(hit))
     if score == 0:
         return False, 0, [], "no_security_signal"
+    # 仅弱信号（头衔/机构泛词）命中 → 不自动判相关，标记待复核
+    if not strong:
+        return None, score, matched, "weak_signal_only(%s)" % ", ".join(matched)
     return True, score, matched, ""
 
 
