@@ -89,8 +89,10 @@ for c in daily:
 
 # 近7日事件数（naive 比较，避免时区感知不一致）
 naive_now = datetime.utcnow() + timedelta(hours=8)
-cut = naive_now - timedelta(days=7)
-events_7d = sum(1 for e in events if (bj_parse(e.get("published_time", "")) or datetime.min) >= cut)
+cut7 = naive_now - timedelta(days=7)
+events_7d = sum(1 for e in events if (bj_parse(e.get("published_time", "")) or datetime.min) >= cut7)
+cut24 = naive_now - timedelta(hours=24)
+events_24h = sum(1 for e in events if (bj_parse(e.get("published_time", "")) or datetime.min) >= cut24)
 
 summary = {
     "generated_at_bj": GEN_BJ,
@@ -103,6 +105,7 @@ summary = {
     "metrics": [
         {"label": "监测国家", "value": "22", "link": "countries.html"},
         {"label": "近7日事件", "value": str(events_7d), "link": "events.html"},
+        {"label": "近24小时事件", "value": str(events_24h), "link": "events.html"},
         {"label": "极高风险国", "value": "8", "link": "countries.html"},
         {"label": "今日日报", "value": str(len(latest_reports)), "link": "reports.html"},
     ],
@@ -127,7 +130,7 @@ print("  近7日事件:", events_7d)
 st = load(os.path.join(DATA, "status.json"), {})
 st["generated_at_bj"] = GEN_BJ
 st["last_update_bj"] = GEN_BJ
-st["next_update_bj"] = "1小时后（每小时自动抓取更新）"
+st["next_update_bj"] = "2小时后（每2小时自动抓取更新）"
 st["last_success_deploy_bj"] = st.get("last_success_deploy_bj", "")
 st["data_status"] = "ok"
 st["data_status_text"] = "数据正常（真实公开信息）"

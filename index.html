@@ -131,14 +131,29 @@ function renderRiskMatrix(countries, risk) {
 }
 
 function renderHome() {
-  Promise.all([
-    API.getCached("latest-summary"),
-    API.getCached("countries"),
-    API.getCached("risk-levels"),
-    API.getCached("events"),
-    API.getCached("status")
+  // 每个模块独立加载：单个数据失败不影响其他模块（修复整体加载失败）
+  function loadModule(name, elId, failMsg) {
+    return API.getCached(name)
+      .then(function (d) { return { ok: true, data: d }; })
+      .catch(function (e) {
+        console.error("[模块加载失败]", name, e);
+        const el = document.getElementById(elId);
+        if (el) el.innerHTML = '<div class="empty-sm mod-err">⚠ 模块「' + name + '」加载失败，已使用上一版本或留空。' + (failMsg || "") + '</div>';
+        return { ok: false, data: null };
+      });
+  }
+  Promise.allSettled([
+    loadModule("latest-summary", "overview"),
+    loadModule("countries", null),
+    loadModule("risk-levels", null),
+    loadModule("events", "latest"),
+    loadModule("status", null)
   ]).then(function (res) {
-    const sum = res[0] || {}, countries = (res[1] && res[1].countries) || [], risk = res[2] || {}, ev = (res[3] && res[3].events) || [], st = res[4] || {};
+    const sum = (res[0].value && res[0].value.ok && res[0].value.data) || {};
+    const countries = ((res[1].value && res[1].value.ok && res[1].value.data) || {}).countries || [];
+    const risk = (res[2].value && res[2].value.ok && res[2].value.data) || {};
+    const ev = ((res[3].value && res[3].value.ok && res[3].value.data) || {}).events || [];
+    const st = (res[4].value && res[4].value.ok && res[4].value.data) || {};
     renderStatus(st);
 
     // 概览
@@ -176,9 +191,6 @@ function renderHome() {
     } else {
       lr.innerHTML = '<div class="empty-sm">今日日报生成中。可前往 <a href="reports.html">日报</a> 查看。</div>';
     }
-  }).catch(function (e) {
-    showDbError();
-    console.error(e);
   });
 }
 

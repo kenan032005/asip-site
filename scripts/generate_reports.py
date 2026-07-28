@@ -1,19 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-ASIP 国别日报生成器（零依赖）。
+ASIP 国别日报生成器（第二轮整改：严格北京时间 24h 窗口）。
 
-为 6 个设置日报的国家（乍得、尼日尔、贝宁、南苏丹、苏丹、埃塞俄比亚）
-各生成一份日报，写入 reports/<daily_country>/<date>.json，并更新索引
-reports/<daily_country>/index.json。
+窗口：前一日北京时间 22:00 → 当日北京时间 22:00。
+- 基于事件发生时间优先；时间不明用发布时间并注明 event_time_basis=published_time；
+- 窗口内事件 → 新增事件 / 重大进展；
+- 超 24h 且无新进展 → 持续跟踪（显示原始日期），不计入新增；
+- 每份日报含 reporting_window_start/end、new/ongoing/pending/verified 计数。
 
-日报结构严格遵循需求文档的 12 节。无事件时采用文档规定的"未发现重大新增事件"
-表述，绝不编造内容。
-
-用法：
-  python scripts/generate_reports.py            # 生成今天（北京时间）的日报
-  python scripts/generate_reports.py --date 2026-07-20
-  python scripts/generate_reports.py --dry      # 仅预览，不写文件
+用法：python scripts/generate_reports.py [--date YYYY-MM-DD] [--dry]
 """
 import os
 import sys
@@ -27,7 +23,7 @@ REPORTS = os.path.join(ROOT, "reports")
 
 NO_EVENT = "过去24小时未发现经多源核实的重大新增事件。"
 NO_CHINA = "过去24小时未发现经可靠来源证实的涉中国企业或中国公民重大社会安全事件。"
-DEFAULT_BASIS = "基于截至北京时间22:00前最近24小时公开来源信息整理；结论随后续核实可能调整。"
+DEFAULT_BASIS = "基于北京时间前一日22:00至当日22:00公开来源信息整理；结论随后续核实可能调整。"
 
 
 def bj_now():
@@ -46,20 +42,43 @@ def beijing_date(d):
     return d.strftime("%Y-%m-%d")
 
 
+def to_bj(dt_utc_iso):
+    """UTC ISO -> 北京时间 datetime（naive）。失败返回 None。"""
+    if not dt_utc_iso:
+        return None
+    s = dt_utc_iso.strip()
+    try:
+        dt = datetime.fromisoformat(s.replace("Z", "+00:00"))
+        if dt.tzinfo:
+            dt = dt.astimezone(timezone.utc).replace(tzinfo=None)
+        return dt + timedelta(hours=8)
+    except ValueError:
+        try:
+            return datetime.strptime(s[:10], "%Y-%m-%d") + timedelta(hours=8)
+        except ValueError:
+            return None
+
+
+# 新事件类型枚举 -> 日报分组
+GROUP_MAP = {
+    "political_crisis": "politics", "election_security": "politics",
+    "terrorist_attack": "conflict_terror", "military_operation": "conflict_terror",
+    "armed_conflict": "conflict_terror",
+    "protest": "stability", "strike": "stability", "civil_unrest": "stability",
+    "kidnapping": "stability", "serious_crime": "stability",
+    "communal_conflict": "stability", "border_security": "stability",
+    "transport_disruption": "infrastructure", "infrastructure_security": "infrastructure",
+    "natural_disaster": "infrastructure", "public_health": "infrastructure",
+}
+
+
 def event_groups(events):
-    g = {
-        "politics": [], "conflict_terror": [], "stability": [], "infrastructure": [], "china": []
-    }
+    g = {"politics": [], "conflict_terror": [], "stability": [], "infrastructure": [], "china": []}
     for e in events:
         t = e.get("event_type", "")
-        if t in ("政变及政治危机", "选举及政治活动"):
-            g["politics"].append(e)
-        elif t in ("武装冲突", "恐怖袭击", "军事行动"):
-            g["conflict_terror"].append(e)
-        elif t in ("示威、罢工和社会骚乱", "绑架、抢劫和严重犯罪", "部族、族群和社区冲突", "边境关闭及跨境风险"):
-            g["stability"].append(e)
-        elif t in ("航空、道路、港口和交通中断", "油气、矿业、电力和重要基础设施", "自然灾害"):
-            g["infrastructure"].append(e)
+        grp = GROUP_MAP.get(t)
+        if grp:
+            g[grp].append(e)
         if e.get("china_related") or e.get("involves_china"):
             g["china"].append(e)
     return g
@@ -74,15 +93,24 @@ def summarize(group_name, evs):
     return "记录 {n} 起相关事件：\n".format(n=len(evs)) + "\n".join(lines)
 
 
-def build_report(country, dc, events, date_str, generated_at):
-    ev_c = [e for e in events if e.get("country") == country and not e.get("is_demo_disabled")]
-    # 仅取最近24h（演示数据时间若不在窗口内不影响框架；真实运行按 published_time 过滤）
-    ev_c = [e for e in ev_c if not e.get("is_demo")]
-    g = event_groups(ev_c)
-    has = len(ev_c) > 0
+def build_report(country, dc, events_all, date_str, generated_at, win_start, win_end):
+    ev_c = [e for e in events_all if e.get("country") == country and not e.get("is_demo")]
+    new_events = []
+    ongoing = []
+    for e in ev_c:
+        bj = to_bj(e.get("event_time") or e.get("published_time"))
+        if bj is None:
+            ongoing.append(e)
+            continue
+        if win_start <= bj <= win_end:
+            new_events.append(e)
+        else:
+            ongoing.append(e)
+    g = event_groups(new_events)
+    has = len(new_events) > 0
 
     major = []
-    for e in sorted(ev_c, key=lambda x: x.get("published_time", ""), reverse=True)[:6]:
+    for e in sorted(new_events, key=lambda x: x.get("published_time", ""), reverse=True)[:6]:
         major.append({
             "time": e.get("event_time", "") or e.get("published_time", ""),
             "location": e.get("location", ""),
@@ -96,9 +124,12 @@ def build_report(country, dc, events, date_str, generated_at):
         })
 
     sources = []
-    for e in ev_c:
+    for e in new_events:
         if e.get("source_name") and e.get("source_url") and e["source_url"] != "#":
             sources.append({"name": e["source_name"], "title": e.get("title_original", ""), "url": e["source_url"]})
+
+    verified_n = sum(1 for e in new_events if e.get("verification_status") in ("cross_verified", "verified"))
+    pending_n = len(new_events) - verified_n
 
     sections = {
         "conclusion": [
@@ -107,7 +138,8 @@ def build_report(country, dc, events, date_str, generated_at):
             "本日报为公开信息整理，不构成行动依据；具体决策以现场核实为准。"
         ],
         "overall": {
-            "text": (NO_EVENT if not has else "最近24小时记录 {n} 起公开报道的社会安全相关事件，涉及{ts}。".format(n=len(ev_c), ts="、".join(sorted(set(e.get("event_type","") for e in ev_c if e.get("event_type")))) or "多个领域")),
+            "text": (NO_EVENT if not has else "最近24小时（北京时间前一日22:00至当日22:00）记录 {n} 起公开报道的社会安全相关事件，涉及{ts}。".format(
+                n=len(new_events), ts="、".join(sorted(set(GROUP_MAP.get(e.get("event_type", ""), "") for e in new_events if e.get("event_type"))) or "多个领域")),
             "trend": "基本稳定" if not has else "暂无法判断",
             "trend_vs_prev": "基本稳定" if not has else "相较前一日待评估",
         },
@@ -118,7 +150,7 @@ def build_report(country, dc, events, date_str, generated_at):
         "infrastructure": summarize("交通、边境和基础设施", g["infrastructure"]) or NO_EVENT,
         "china": (summarize("涉华", g["china"]) or NO_CHINA),
         "followup": [
-            "持续跟踪过去72小时仍在发展的重大事件。",
+            "持续跟踪过去72小时仍在发展的重大事件（见持续跟踪项）。",
             "持续跟踪过去7天尚未结束的重要趋势。"
         ],
         "outlook": {
@@ -138,15 +170,20 @@ def build_report(country, dc, events, date_str, generated_at):
     }
 
     title = "《{country}社会安全信息日报（{date_cn}）》".format(
-        country=country, date_cn="%s年%s月%s日" % tuple(date_str.split("-"))
-    )
+        country=country, date_cn="%s年%s月%s日" % tuple(date_str.split("-")))
 
     return {
         "country": country,
         "country_en": dc,
         "date": date_str,
         "generated_at_bj": generated_at,
-        "window_text": "截至北京时间22:00前最近24小时",
+        "reporting_window_start": win_start.strftime("%Y-%m-%d %H:%M"),
+        "reporting_window_end": win_end.strftime("%Y-%m-%d %H:%M"),
+        "new_event_count": len(new_events),
+        "ongoing_event_count": len(ongoing),
+        "pending_event_count": pending_n,
+        "verified_event_count": verified_n,
+        "window_text": "北京时间前一日22:00至当日22:00（24小时）",
         "title": title,
         "sections": sections,
     }
@@ -155,32 +192,34 @@ def build_report(country, dc, events, date_str, generated_at):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", help="YYYY-MM-DD（北京时间），默认今天")
-    ap.add_argument("--dry", action="store_true", help="仅预览，不写文件")
+    ap.add_argument("--dry", action="store_true", help="仅预览")
     args = ap.parse_args()
 
     bj = bj_now()
     date_str = args.date or beijing_date(bj)
-    generated_at = (bj if not args.date else datetime.strptime(args.date + "22:00:00", "%Y-%m-%d%H:%M:%S") + timedelta(hours=0)).strftime("%Y-%m-%d %H:%M:%S")
+    # 窗口：当日北京 22:00 为结束，前一日北京 22:00 为开始
+    win_end = bj.replace(hour=22, minute=0, second=0, microsecond=0)
+    win_start = win_end - timedelta(hours=24)
+    generated_at = bj.strftime("%Y-%m-%d %H:%M:%S")
 
     countries = load_json(os.path.join(DATA, "countries.json"), {}).get("countries", [])
     events_all = load_json(os.path.join(DATA, "events.json"), {}).get("events", [])
     daily = [c for c in countries if c.get("has_daily")]
 
-    print("生成日报日期（北京时间）：", date_str)
+    print("日报日期（北京）：", date_str, "窗口：", win_start, "→", win_end)
     for c in daily:
         cn = c["cn"]
         dc = c.get("daily_country", cn)
-        rep = build_report(cn, dc, events_all, date_str, generated_at)
+        rep = build_report(cn, dc, events_all, date_str, generated_at, win_start, win_end)
         out_dir = os.path.join(REPORTS, dc)
         os.makedirs(out_dir, exist_ok=True)
         fname = os.path.join(out_dir, date_str + ".json")
         idx_path = os.path.join(out_dir, "index.json")
         if args.dry:
-            print("  [预览]", cn, "->", rep["title"])
+            print("  [预览]", cn, "新增=", rep["new_event_count"], "持续跟踪=", rep["ongoing_event_count"])
             continue
         with open(fname, "w", encoding="utf-8") as f:
             json.dump(rep, f, ensure_ascii=False, indent=2)
-        # 更新索引
         idx = load_json(idx_path, {"country": cn, "reports": []})
         idx["country"] = cn
         idx["reports"] = [r for r in idx.get("reports", []) if r["date"] != date_str]
@@ -188,18 +227,19 @@ def main():
         idx["reports"] = idx["reports"][:60]
         with open(idx_path, "w", encoding="utf-8") as f:
             json.dump(idx, f, ensure_ascii=False, indent=2)
-        print("  [已生成]", cn, "->", fname)
+        print("  [生成]", cn, "新增=", rep["new_event_count"], "持续跟踪=", rep["ongoing_event_count"])
 
-    # 更新 status.json
     if not args.dry:
         st = load_json(os.path.join(DATA, "status.json"), {})
         st["reports_today"] = len(daily)
         st["last_update_bj"] = generated_at
         st["generated_at_bj"] = generated_at
-        st["next_update_bj"] = (bj + timedelta(hours=1)).strftime("%Y-%m-%d %H:%M:%S") if False else "次日 22:00"
-        with open(os.path.join(DATA, "status.json"), "w", encoding="utf-8") as f:
-            json.dump(st, f, ensure_ascii=False, indent=2)
-        print("已更新 data/status.json（reports_today =", len(daily), "）")
+        st["report_window_start"] = win_start.strftime("%Y-%m-%d %H:%M")
+        st["report_window_end"] = win_end.strftime("%Y-%m-%d %H:%M")
+        st["next_update_bj"] = "次日 22:00"
+        json.dump(st, open(os.path.join(DATA, "status.json"), "w", encoding="utf-8"),
+                  ensure_ascii=False, indent=2)
+        print("已更新 status.json")
 
 
 if __name__ == "__main__":

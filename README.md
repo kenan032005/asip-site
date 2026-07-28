@@ -206,3 +206,39 @@ python tools/setup_gh_pages.py
 - 日报在"无事件"时按文档生成默认表述，未做自然语言研判（后续接入经授权的摘要能力）。
 - 传染病风险模块仅占位，未接入任何疫情数据源。
 - 六国日报的"持续跟踪/趋势判断/建议"为模板化内容，真实运行需结合多日事件与人工研判。
+
+---
+
+## 十一、第二轮整改（乍得/尼日尔，2026-07）
+
+针对国家误判、无关信息、分类错误、日报时间窗四类问题完成系统性整改：
+
+### 11.1 国家识别（scripts/collectors/country_runner.py）
+- **词边界匹配**：`(?<![a-zà-ÿ0-9])kw(?![a-zà-ÿ0-9])`，杜绝 `Lac→place`、`riot→patriot` 类误匹配。
+- **结构化判定字段**：每条候选输出 `event_location_country / mentioned_countries / country_match_score / matched_country_entities / matched_location_entities / excluded_entities / country_decision_reason`。
+- **排除优先**：Nigeria / Niger State / Niger Delta / Nigerian Army / Benin City 等命中即排除，除非同现 Niamey、"République du Niger" 或尼日尔行政地名等强实体。
+- **跨国规则**："Lake Chad / bassin du lac Tchad" 且无乍得境内行政地名 → 判 `regional`（跨国事件），不落入乍得。
+- 判定不明（仅裸词 "niger" 无地名）→ `unclear`，进待核实，不直接发布。
+- 单元测试：`scripts/tests/test_country.py`，24/24 通过。
+
+### 11.2 相关性与事件分类
+- 两级相关性过滤：确定性排除（体育/农业/宣传/会议/纯经济，中法英三语词表）+ 语义评分，`relevance_score >= 0.70` 才可进入发布链路。
+- 事件类型从标准枚举按优先级判定，**不再默认 armed_conflict**。
+
+### 11.3 三级数据池（真实实现）
+- `raw_candidates.json`（全部原始候选）→ `pending_events.json`（相关+国家判定通过）→ `events.json`（仅 A/B 级）。
+- A 级：官方/官方媒体单源 → `official_unverified`；B 级：≥2 家独立来源交叉 → `cross_verified`；C 级：单一媒体，只进待核实池，**不发布**。
+- 升级脚本：`scripts/promote_events.py --apply`；历史数据清洗：`scripts/clean_events.py`（误判/无关移入 `data/quarantine_events.json` 隔离，不物理删除）。
+
+### 11.4 信息源扩容（data/sources.json）
+- 配置 93 个源（乍得 46 / 尼日尔 47），启用 39 个（乍得 19 / 尼日尔 20）。
+- **强制接入路透社（Reuters）与新华网（Xinhua）**：通过 GDELT ArtList 域名限定检索（`domain:reuters.com` / `domain:news.cn` 等）合法公开发现，不抓取付费全文。
+- 五层结构：当地媒体（RSS）/ 国际媒体（GDELT）/ 联合国与人道机构（ReliefWeb API + GDELT）/ 中国官方与媒体 / 官方机构。
+
+### 11.5 日报时间窗与前端
+- 日报窗口严格为**北京时间前一日 22:00 → 当日 22:00**，报告含 `reporting_window_start/end`、新增/持续事件拆分。
+- 前端 `Promise.allSettled` 按模块隔离加载失败，单一数据文件异常不再导致整页无法加载。
+
+### 11.6 自动化
+- WorkBuddy 自动化：每 2 小时增量采集 + 每日北京 22:00 全量核实与日报。
+- GitHub Actions 备用：`.github/workflows/auto-update.yml`（每 2 小时 / 北京 21:30 补充 / 22:00 日报，需 workflow 权限 PAT 推送启用）。

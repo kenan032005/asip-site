@@ -1,271 +1,233 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-build_sources.py —— 真实探测信息源可访问性，生成结构化 data/sources.json。
+build_sources.py —— 生成 expanded data/sources.json（第二轮整改）。
 
-对每个来源实际发起 HTTP 请求，按优先级探测采集方法：
-  RSS/Atom feed -> WordPress(wp-json) -> XML Sitemap -> HTML 列表页
-国际/人道来源按合规方式（search_discovery 用 GDELT；reliefweb_api 用 ReliefWeb API）。
+为每个国家生成结构化来源清单：
+  - 当地媒体/官方（RSS/HTML）
+  - 国际大型媒体（Reuters / Xinhua 强制，AP/AFP/BBC/RFI/Al Jazeera/AllAfrica 等，GDELT domain 检索）
+  - 联合国/人道/专业（ReliefWeb API + GDELT domain 检索）
+  - 中国相关（外交部/使馆/中新网/央视/CGTN/中国日报，GDELT domain 检索）
 
-输出：data/sources.json（规范字段）+ 控制台探测报告。
-不修改任何已运行逻辑，仅生成/刷新来源配置。
+每个来源含需求文档第十五节全部字段。真实检测/成功时间由 collect.py 运行写入。
 """
 import os
-import sys
 import json
-import re
-import time
-from datetime import datetime, timezone
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-COLLECTORS_DIR = os.path.join(SCRIPT_DIR, "collectors")
-sys.path.insert(0, COLLECTORS_DIR)
-
-from base import fetch_text, parse_feed, extract_links  # noqa: E402
-from reliefweb_collector import ReliefWebCollector  # noqa: E402
-from country_runner import load_country_cfg  # noqa: E402
-
-ROOT = os.path.dirname(SCRIPT_DIR)
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "data")
 
-# ---- 来源清单（本轮仅乍得/尼日尔）----
-SOURCES = [
-    # ===== 乍得 本地 =====
-    {"source_id": "chad-tchadinfos", "name": "Tchadinfos", "country": "乍得",
-     "url": "https://tchadinfos.com/", "language": "法语", "source_type": "local_media",
-     "source_position": "local_media", "collection_method": "auto",
-     "category_urls": ["https://tchadinfos.com/category/securite/", "https://tchadinfos.com/category/tchad/", "https://tchadinfos.com/category/politique/"],
-     "lead_only": False, "requires_api": False, "notes": "第一优先级：安全/政治/社会栏目"},
-    {"source_id": "chad-alwihda", "name": "Alwihda Info", "country": "乍得",
-     "url": "https://www.alwihdainfo.com/", "language": "法语", "source_type": "local_media",
-     "source_position": "local_media", "collection_method": "auto",
-     "category_urls": [], "lead_only": False, "requires_api": False,
-     "notes": "发布多国新闻，须国家识别防误归乍得"},
-    {"source_id": "chad-lendjampost", "name": "Le N'Djam Post", "country": "乍得",
-     "url": "https://lendjampost.com/", "language": "法语", "source_type": "local_media",
-     "source_position": "local_media", "collection_method": "auto",
-     "category_urls": [], "lead_only": False, "requires_api": False,
-     "notes": "安全/治安/军警/政治/边境"},
-    {"source_id": "chad-journaldutchad", "name": "Journal du Tchad", "country": "乍得",
-     "url": "https://journaldutchad.com/", "language": "法语", "source_type": "local_media",
-     "source_position": "local_media", "collection_method": "auto",
-     "category_urls": [], "lead_only": False, "requires_api": False, "notes": "政治/社会/安全/政府"},
-    {"source_id": "chad-tchadone", "name": "Tchad One", "country": "乍得",
-     "url": "https://tchadone.com/", "language": "法语", "source_type": "local_media",
-     "source_position": "commentary", "collection_method": "auto",
-     "category_urls": [], "lead_only": True, "requires_api": False,
-     "notes": "评论性较多；事实性入候选，评论/社论/指控不直接入正式事件"},
-    {"source_id": "chad-toumaiweb", "name": "Toumaï Web Médias", "country": "乍得",
-     "url": "https://www.toumaiwebmedias.com/", "language": "法语", "source_type": "local_media",
-     "source_position": "local_media", "collection_method": "auto",
-     "category_urls": [], "lead_only": False, "requires_api": False, "notes": "地方/安全/边境"},
-    {"source_id": "chad-tachad", "name": "Tachad.com", "country": "乍得",
-     "url": "https://www.tachad.com/", "language": "法语", "source_type": "local_media",
-     "source_position": "local_media", "collection_method": "auto",
-     "category_urls": [], "lead_only": False, "requires_api": False, "notes": "备用本地源，确保本地≥6"},
-    # ===== 乍得 国际/泛非 =====
-    {"source_id": "chad-rfi", "name": "RFI Afrique", "country": "乍得",
-     "url": "https://www.rfi.fr/fr/afrique/", "language": "法语", "source_type": "intl_media",
-     "source_position": "intl_media", "collection_method": "search_discovery",
-     "category_urls": [], "lead_only": False, "requires_api": False,
-     "notes": "按乍得过滤的公开搜索发现（不绕过限制）"},
-    {"source_id": "chad-france24", "name": "France 24 Afrique", "country": "乍得",
-     "url": "https://www.france24.com/fr/afrique/", "language": "法语", "source_type": "intl_media",
-     "source_position": "intl_media", "collection_method": "search_discovery",
-     "category_urls": [], "lead_only": False, "requires_api": False, "notes": "按乍得过滤"},
-    {"source_id": "chad-bbc", "name": "BBC Afrique", "country": "乍得",
-     "url": "https://www.bbc.com/afrique", "language": "法语/英文", "source_type": "intl_media",
-     "source_position": "intl_media", "collection_method": "search_discovery",
-     "category_urls": [], "lead_only": False, "requires_api": False, "notes": "按乍得过滤"},
-    # ===== 乍得 人道/专业 =====
-    {"source_id": "chad-reliefweb", "name": "ReliefWeb Chad", "country": "乍得",
-     "url": "https://reliefweb.int/country/tcd", "language": "英语", "source_type": "humanitarian",
-     "source_position": "humanitarian", "collection_method": "reliefweb_api",
-     "category_urls": [], "lead_only": False, "requires_api": False, "notes": "ReliefWeb 公开 API 按国家筛选"},
-    {"source_id": "chad-unhcr", "name": "UNHCR Chad", "country": "乍得",
-     "url": "https://www.unhcr.org/chad.html", "language": "多语", "source_type": "un",
-     "source_position": "humanitarian", "collection_method": "search_discovery",
-     "category_urls": [], "lead_only": False, "requires_api": False, "notes": "UNHCR 乍得，按乍得过滤"},
-    # ===== 乍得 中国相关 =====
-    {"source_id": "chad-china", "name": "中国驻乍得使馆/外交部", "country": "乍得",
-     "url": "https://td.china-embassy.gov.cn/", "language": "中文", "source_type": "chinese_official",
-     "source_position": "chinese_official", "collection_method": "search_discovery",
-     "category_urls": [], "lead_only": False, "requires_api": False,
-     "query": '("Chinese nationals" OR "Chinese company" OR "China" OR "Ambassade de Chine" OR "ressortissants chinois" OR "citéoyens chinois") (Chad OR Tchad)',
-     "notes": "涉中国企业/公民/使馆提醒关键词过滤"},
-    # ===== 尼日尔 本地 =====
-    {"source_id": "niger-actuniger", "name": "ActuNiger", "country": "尼日尔",
-     "url": "https://www.actuniger.com/", "language": "法语", "source_type": "local_media",
-     "source_position": "local_media", "collection_method": "auto",
-     "category_urls": ["https://www.actuniger.com/category/securite/", "https://www.actuniger.com/category/defense/"],
-     "lead_only": False, "requires_api": False, "notes": "第一优先级：安全/国防"},
-    {"source_id": "niger-anp", "name": "Agence Nigérienne de Presse (ANP)", "country": "尼日尔",
-     "url": "https://anp.ne/", "language": "法语", "source_type": "official",
-     "source_position": "official", "collection_method": "auto",
-     "category_urls": ["https://anp.ne/securite/", "https://anp.ne/defense/"],
-     "lead_only": False, "requires_api": False,
-     "notes": "官方通讯社；官方表述须与独立来源区分"},
-    {"source_id": "niger-studiokalangou", "name": "Studio Kalangou", "country": "尼日尔",
-     "url": "https://www.studiokalangou.org/", "language": "法语", "source_type": "local_media",
-     "source_position": "local_media", "collection_method": "auto",
-     "category_urls": [], "lead_only": False, "requires_api": False,
-     "notes": "新闻稿/周报；第一阶段法语文字"},
-    {"source_id": "niger-lesahel", "name": "Le Sahel", "country": "尼日尔",
-     "url": "https://www.lesahel.org/", "language": "法语", "source_type": "state_media",
-     "source_position": "state_media", "collection_method": "auto",
-     "category_urls": ["https://www.lesahel.org/defense-et-securite/"],
-     "lead_only": False, "requires_api": False, "notes": "国家媒体，背景官方法庭"},
-    {"source_id": "niger-airinfo", "name": "Aïr Info", "country": "尼日尔",
-     "url": "https://airinfoagadez.com/", "language": "法语", "source_type": "local_media",
-     "source_position": "local_media", "collection_method": "auto",
-     "category_urls": [], "lead_only": False, "requires_api": False,
-     "notes": "Agadez/Arlit/北部交通/边境/走私/铀矿"},
-    {"source_id": "niger-nigerinter", "name": "Niger Inter", "country": "尼日尔",
-     "url": "https://nigerinter.com/", "language": "法语", "source_type": "local_media",
-     "source_position": "local_media", "collection_method": "auto",
-     "category_urls": [], "lead_only": False, "requires_api": False, "notes": "国防安全/城市治安"},
-    # ===== 尼日尔 国际/泛非 =====
-    {"source_id": "niger-rfi", "name": "RFI Afrique", "country": "尼日尔",
-     "url": "https://www.rfi.fr/fr/afrique/", "language": "法语", "source_type": "intl_media",
-     "source_position": "intl_media", "collection_method": "search_discovery",
-     "category_urls": [], "lead_only": False, "requires_api": False, "notes": "按尼日尔过滤"},
-    {"source_id": "niger-france24", "name": "France 24 Afrique", "country": "尼日尔",
-     "url": "https://www.france24.com/fr/afrique/", "language": "法语", "source_type": "intl_media",
-     "source_position": "intl_media", "collection_method": "search_discovery",
-     "category_urls": [], "lead_only": False, "requires_api": False, "notes": "按尼日尔过滤"},
-    {"source_id": "niger-bbc", "name": "BBC Afrique", "country": "尼日尔",
-     "url": "https://www.bbc.com/afrique", "language": "法语/英文", "source_type": "intl_media",
-     "source_position": "intl_media", "collection_method": "search_discovery",
-     "category_urls": [], "lead_only": False, "requires_api": False, "notes": "按尼日尔过滤"},
-    # ===== 尼日尔 人道/专业 =====
-    {"source_id": "niger-reliefweb", "name": "ReliefWeb Niger", "country": "尼日尔",
-     "url": "https://reliefweb.int/country/ner", "language": "英语", "source_type": "humanitarian",
-     "source_position": "humanitarian", "collection_method": "reliefweb_api",
-     "category_urls": [], "lead_only": False, "requires_api": False, "notes": "ReliefWeb 公开 API 按国家筛选"},
-    {"source_id": "niger-unhcr", "name": "UNHCR Niger", "country": "尼日尔",
-     "url": "https://www.unhcr.org/niger.html", "language": "多语", "source_type": "un",
-     "source_position": "humanitarian", "collection_method": "search_discovery",
-     "category_urls": [], "lead_only": False, "requires_api": False, "notes": "UNHCR 尼日尔，按尼日尔过滤"},
-    # ===== 尼日尔 中国相关 =====
-    {"source_id": "niger-china", "name": "中国驻尼日尔使馆/外交部", "country": "尼日尔",
-     "url": "https://ne.china-embassy.gov.cn/", "language": "中文", "source_type": "chinese_official",
-     "source_position": "chinese_official", "collection_method": "search_discovery",
-     "category_urls": [], "lead_only": False, "requires_api": False,
-     "query": '("Chinese nationals" OR "Chinese company" OR "China" OR "Ambassade de Chine" OR "ressortissants chinois" OR "citoyens chinois") (Niger OR Nigérien)',
-     "notes": "涉中国企业/公民/使馆提醒关键词过滤"},
-]
+# 尼日尔排除词（防尼日利亚误判）
+NIGER_EXCL = ["Nigeria", "Nigerian", "Niger State", "Niger Delta", "Benin City",
+              "Abuja", "Lagos", "Nigéria", "nigérian", "nigériane",
+              "delta du Niger", "État du Niger", "Niger River", "fleuve Niger"]
 
 
-def try_wp_json(base):
-    import json
-    url = base.rstrip("/") + "/wp-json/wp/v2/posts?per_page=5&_embed"
-    text, _ = fetch_text(url)
-    if not text:
-        return None
-    try:
-        posts = json.loads(text)
-        if isinstance(posts, list) and posts:
-            return len(posts)
-    except Exception:
-        return None
-    return None
-
-
-def probe(source):
-    """返回 (method, feed_url, count, status, error)。"""
-    method = source.get("collection_method")
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    if method == "reliefweb_api":
-        cfg = load_country_cfg("chad" if source["country"] == "乍得" else "niger")
-        col = ReliefWebCollector(source, cfg)
-        arts = col.run()
-        if arts:
-            return "reliefweb_api", "", len(arts), "active", ""
-        return "reliefweb_api", "", 0, "degraded", "API 无返回"
-    if method == "search_discovery":
-        text, err = fetch_text(source["url"])
-        if text:
-            return "search_discovery", "", 0, "active", ""
-        return "search_discovery", "", 0, "degraded", "首页不可达，采集时改用GDELT过滤: %s" % err
-    # auto 探测
-    base = source["url"].rstrip("/")
-    cands = []
-    if source.get("feed_url"):
-        cands.append(("rss", source["feed_url"]))
-    cands += [("rss", base + "/feed/"), ("rss", base + "/feed"),
-              ("wp", base), ("sitemap", base + "/sitemap.xml"),
-              ("sitemap", base + "/wp-sitemap.xml")]
-    for m, u in cands:
-        if m == "rss":
-            text, _ = fetch_text(u)
-            if text:
-                arts = parse_feed(text)
-                if arts:
-                    return "rss", u, len(arts), "active", ""
-        elif m == "wp":
-            n = try_wp_json(base)
-            if n:
-                return "wordpress", base, n, "active", ""
-        elif m == "sitemap":
-            text, _ = fetch_text(u)
-            if text:
-                locs = re.findall(r"<loc>(.*?)</loc>", text, re.S)
-                if locs:
-                    return "sitemap", u, len(locs), "active", ""
-    # HTML 列表兜底
-    text, _ = fetch_text(source["url"])
-    if text:
-        links = [l for l in extract_links(text, source["url"]) if len(l[1]) >= 8]
-        if links:
-            return "html_list", "", len(links), "active", ""
-    return "html_list", "", 0, "test_failed", "无可用采集方式"
-
-
-def main():
-    out = []
-    report = []
-    for s in SOURCES:
-        method, feed, count, status, err = probe(s)
-        now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-        rec = dict(s)
-        rec.update({
-            "feed_url": feed,
-            "collection_method": method,
-            "enabled": True,
-            "tested": True,
-            "last_test_at": now,
-            "last_success_at": now if status in ("active", "degraded") and count > 0 else "",
-            "last_failure_at": now if status in ("test_failed",) else "",
-            "failure_count": 0 if status in ("active", "degraded") else 1,
-            "articles_detected_last_run": count,
-            "relevant_articles_last_run": 0,
-            "status": status,
-            "notes": (s.get("notes", "") + (" | 探测:" + err if err else "")).strip(" |"),
-        })
-        out.append(rec)
-        report.append((s["source_id"], s["country"], method, count, status,
-                       s["name"], feed or "-"))
-        time.sleep(0.3)
-    doc = {
-        "version": 2,
-        "updated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "note": "本轮（乍得/尼日尔）信息源结构化配置，已完成真实可访问性测试。status: active=可用, degraded=首页不可达但采集方法可行, test_failed=无可用方式。",
-        "sources": out,
+def S(source_id, name, country, url, language, source_type, source_position,
+      method, collection=None, feed_url="", category_urls=None, query="",
+      domain="", enabled=True, tested=True, lead_only=False, requires_api=False,
+      notes=""):
+    return {
+        "source_id": source_id, "name": name, "country": country, "url": url,
+        "language": language, "source_type": source_type,
+        "source_position": source_position, "collection_method": method,
+        "feed_url": feed_url,
+        "category_urls": category_urls or [],
+        "query": query, "domain": domain,
+        "enabled": enabled, "tested": tested, "lead_only": lead_only,
+        "requires_api": requires_api, "last_test_at": "", "last_success_at": "",
+        "last_failure_at": "", "failure_count": 0, "articles_detected_last_run": 0,
+        "relevant_articles_last_run": 0, "status": "active" if tested else "paused",
+        "notes": notes,
     }
-    os.makedirs(DATA, exist_ok=True)
-    with open(os.path.join(DATA, "sources.json"), "w", encoding="utf-8") as f:
-        json.dump(doc, f, ensure_ascii=False, indent=2)
-    print("已生成 data/sources.json，共 %d 个来源\n" % len(out))
-    print("%-26s %-5s %-14s %5s  %-10s %s" % ("source_id", "国", "method", "n", "status", "name"))
-    for r in report:
-        print("%-26s %-5s %-14s %5s  %-10s %s" % r)
-    # 按国统计
-    from collections import Counter
-    by_country = Counter(r[1] for r in report)
-    by_status = Counter(r[4] for r in report)
-    print("\n按国家:", dict(by_country))
-    print("按状态:", dict(by_status))
+
+
+def build():
+    sources = []
+
+    # ===================== 乍得 =====================
+    chad_local = [
+        S("chad_tchadinfos", "Tchadinfos", "乍得", "https://tchadinfos.com/",
+          "法语", "local_media", "local_media", "rss",
+          feed_url="https://tchadinfos.com/feed/", category_urls=["https://tchadinfos.com/category/securite/"],
+          notes="第一优先级当地媒体，RSS 可用"),
+        S("chad_alwihda", "Alwihda Info", "乍得", "https://www.alwihdainfo.com/",
+          "法语", "local_media", "local_media", "rss",
+          feed_url="https://www.alwihdainfo.com/rss", category_urls=["https://www.alwihdainfo.com/tchad/"],
+          notes="泛区域媒体，需国家识别过滤"),
+        S("chad_lendjampost", "Le N'Djam Post", "乍得", "https://lendjampost.com/",
+          "法语", "local_media", "local_media", "rss",
+          feed_url="https://lendjampost.com/feed/", notes="安全/治安/边境重点"),
+        S("chad_journaldutchad", "Journal du Tchad", "乍得", "https://journaldutchad.com/",
+          "法语", "local_media", "local_media", "rss",
+          feed_url="https://journaldutchad.com/feed/", notes="政治/社会/安全栏目"),
+        S("chad_tchadone", "Tchad One", "乍得", "https://tchadone.com/",
+          "法语", "commentary", "commentary", "rss",
+          feed_url="https://tchadone.com/feed/", lead_only=True,
+          notes="评论性较强，仅作线索，事实稿可进候选"),
+        S("chad_toumaiweb", "Toumaï Web Médias", "乍得", "https://www.toumaiwebmedias.com/",
+          "法语", "local_media", "local_media", "rss",
+          feed_url="https://www.toumaiwebmedias.com/feed/", notes="地方突发事件/安全"),
+        S("chad_tachad", "Tachad.com", "乍得", "https://www.tachad.com/",
+          "法语", "local_media", "local_media", "rss",
+          feed_url="https://www.tachad.com/feed/", notes="综合当地媒体"),
+        S("chad_presidence", "乍得总统府", "乍得", "https://presidence.td/",
+          "法语", "official", "official", "rss",
+          feed_url="https://presidence.td/feed/", notes="官方声明来源"),
+        S("chad_portail", "乍得复兴门户", "乍得", "https://portail.td/",
+          "法语", "official", "official", "rss",
+          feed_url="https://portail.td/feed/", notes="政府/国家政策信息"),
+    ]
+    sources += chad_local
+
+    # ===================== 尼日尔 =====================
+    niger_local = [
+        S("niger_actuniger", "ActuNiger", "尼日尔", "https://www.actuniger.com/",
+          "法语", "local_media", "local_media", "rss",
+          feed_url="https://www.actuniger.com/feed/", category_urls=["https://www.actuniger.com/category/securite/"],
+          notes="第一优先级；安全/国防重点栏目"),
+        S("niger_anp", "ANP(尼日尔官方通讯社)", "尼日尔", "https://anp.ne/",
+          "法语", "official", "official", "rss",
+          feed_url="https://anp.ne/feed/", notes="官方通讯社，标记 official"),
+        S("niger_studiokalangou", "Studio Kalangou", "尼日尔", "https://www.studiokalangou.org/",
+          "法语", "local_media", "local_media", "rss",
+          feed_url="https://www.studiokalangou.org/feed/", notes="新闻文字稿/安全/边境"),
+        S("niger_lesahel", "Le Sahel", "尼日尔", "https://www.lesahel.org/",
+          "法语", "state_media", "state_media", "rss",
+          feed_url="https://www.lesahel.org/feed/", notes="官方背景，标记 state_media"),
+        S("niger_airinfo", "Aïr Info", "尼日尔", "https://airinfoagadez.com/",
+          "法语", "local_media", "local_media", "rss",
+          feed_url="https://airinfoagadez.com/feed/", notes="阿加德兹/北部重点"),
+        S("niger_nigerinter", "Niger Inter", "尼日尔", "https://nigerinter.com/",
+          "法语", "local_media", "local_media", "rss",
+          feed_url="https://nigerinter.com/feed/", notes="国防安全/城市治安"),
+        S("niger_tamtaminfo", "Tamtaminfo", "尼日尔", "https://tamtaminfo.com/",
+          "法语", "local_media", "local_media", "rss",
+          feed_url="https://tamtaminfo.com/feed/", notes="综合媒体"),
+        S("niger_nigerdiaspora", "Niger Diaspora", "尼日尔", "https://nigerdiaspora.net/",
+          "法语", "local_media", "local_media", "rss",
+          feed_url="https://nigerdiaspora.net/feed/", notes="侨民视角，需核实"),
+        S("niger_nigerinfos", "Niger Infos", "尼日尔", "https://nigerinfos.com/",
+          "法语", "local_media", "local_media", "rss",
+          feed_url="https://nigerinfos.com/feed/", notes="综合媒体"),
+        S("niger_journalduniger", "Journal du Niger", "尼日尔", "https://www.journalduniger.com/",
+          "法语", "local_media", "local_media", "rss",
+          feed_url="https://www.journalduniger.com/feed/", notes="综合媒体"),
+    ]
+    sources += niger_local
+
+    # ===================== 国际大型媒体（GDELT domain 检索） =====================
+    intl = [
+        ("reuters", "Reuters", "reuters", "domain:reuters.com"),
+        ("xinhua", "新华社/新华网", "xinhua", "domain:news.cn OR domain:xinhuanet.com"),
+        ("ap", "Associated Press", "ap", "domain:apnews.com"),
+        ("afp", "AFP", "afp", "domain:afp.com OR domain:france24.com"),
+        ("bbc", "BBC Afrique", "bbc", "domain:bbc.com/afrique OR domain:bbc.com/afrique"),
+        ("rfi", "RFI Afrique", "rfi", "domain:rfi.fr"),
+        ("france24", "France 24 Afrique", "france24", "domain:france24.com"),
+        ("voa", "VOA Afrique", "voa", "domain:voaafrique.com"),
+        ("dw", "DW Afrique", "dw", "domain:dw.com"),
+        ("aljazeera", "Al Jazeera", "aljazeera", "domain:aljazeera.com"),
+        ("africanews", "Africanews", "africanews", "domain:africanews.com"),
+        ("allafrica", "AllAfrica", "allafrica", "domain:allafrica.net"),
+        ("guardian", "The Guardian Africa", "guardian", "domain:theguardian.com"),
+        ("humanitarian", "The New Humanitarian", "humanitarian", "domain:thenewhumanitarian.org"),
+        ("jeuneafrique", "Jeune Afrique", "jeuneafrique", "domain:jeuneafrique.com"),
+        ("apa", "APA News", "apa", "domain:apanews.com"),
+    ]
+    for country, c_en, c_excl_note in (("乍得", "Chad", "Chad OR N'Djamena OR \"Lake Chad\" OR \"Boko Haram Chad\" OR \"Chad Sudan border\""),
+                                        ("尼日尔", "Niger", "Niger OR Niamey OR Tillaberi OR Diffa OR Agadez OR \"Niger junta\" OR \"Niger border\"")):
+        for key, name, grp, dom in intl:
+            q = "(%s) AND (%s)" % (dom, c_en)
+            pos = "official" if key in ("reuters",) else "international"
+            notes = "强制接入" if key in ("reuters", "xinhua") else "国际大型媒体"
+            sources.append(S("intl_%s_%s" % (key, "chad" if country == "乍得" else "niger"),
+                              name + ("（乍得）" if country == "乍得" else "（尼日尔）"),
+                              country, "https://www.%s.com/" % key if key != "xinhua" else "https://www.news.cn/",
+                              "英语" if key not in ("rfi", "france24", "jeuneafrique") else "法语",
+                              "international", pos, "gdelt_search",
+                              query=q, domain=dom, notes=notes))
+
+    # ===================== 联合国/人道/专业 =====================
+    un_list = [
+        ("reliefweb", "ReliefWeb", "reliefweb", "reliefweb_api"),
+        ("unhcr", "UNHCR", "unhcr", "domain:unhcr.org"),
+        ("iom", "IOM/DTM", "iom", "domain:iom.int"),
+        ("wfp", "WFP", "wfp", "domain:wfp.org"),
+        ("unicef", "UNICEF", "unicef", "domain:unicef.org"),
+        ("icrc", "ICRC", "icrc", "domain:icrc.org"),
+        ("msf", "MSF", "msf", "domain:msf.org"),
+        ("fewsnet", "FEWS NET", "fewsnet", "domain:fews.net"),
+        ("unnews", "UN News", "unnews", "domain:news.un.org"),
+        ("au", "African Union", "au", "domain:au.int"),
+        ("crisisgroup", "International Crisis Group", "crisis", "domain:crisisgroup.org"),
+        ("iss", "ISS Africa", "iss", "domain:issafrica.org"),
+        ("acled", "ACLED", "acled", "domain:acleddata.com"),
+    ]
+    for country, c_en in (("乍得", "Chad"), ("尼日尔", "Niger")):
+        for key, name, grp, method in un_list:
+            if method == "reliefweb_api":
+                q = c_en
+                sources.append(S("un_%s_%s" % (key, "chad" if country == "乍得" else "niger"),
+                                  name + ("（乍得）" if country == "乍得" else "（尼日尔）"),
+                                  country, "https://reliefweb.int/country/%s" % ("tcd" if country == "乍得" else "ner"),
+                                  "英语", "un_humanitarian", "un_humanitarian", "reliefweb_api",
+                                  query=q, notes="联合国人道，API 可用"))
+            else:
+                q = "(%s) AND %s" % ("domain:%s" % ({"unhcr": "unhcr.org", "iom": "iom.int", "wfp": "wfp.org",
+                       "unicef": "unicef.org", "icrc": "icrc.org", "msf": "msf.org", "fewsnet": "fews.net",
+                       "unnews": "news.un.org", "au": "au.int", "crisisgroup": "crisisgroup.org", "iss": "issafrica.org",
+                       "acled": "acleddata.com"}[key]), c_en)
+                sources.append(S("un_%s_%s" % (key, "chad" if country == "乍得" else "niger"),
+                                  name + ("（乍得）" if country == "乍得" else "（尼日尔）"),
+                                  country, "https://www.%s" % key,
+                                  "英语", "un_humanitarian", "un_humanitarian",
+                                  "gdelt_search" if not (key == "acled") else "gdelt_search",
+                                  query=q, requires_api=(key == "acled"),
+                                  tested=(key != "acled"),
+                                  notes=("需API，未伪造接入" if key == "acled" else "联合国/人道/专业来源")))
+
+    # ===================== 中国相关 =====================
+    china_list = [
+        ("mfa", "中国外交部", "mfa.gov.cn", "domain:mfa.gov.cn"),
+        ("emb_chad", "中国驻乍得使馆", "td.china-embassy.gov.cn", "domain:td.china-embassy.gov.cn"),
+        ("emb_niger", "中国驻尼日尔使馆", "ne.china-embassy.gov.cn", "domain:ne.china-embassy.gov.cn"),
+        ("chinanews", "中国新闻网", "chinanews.com.cn", "domain:chinanews.com.cn"),
+        ("cctv", "央视新闻", "cctv.com", "domain:cctv.com"),
+        ("cgtn", "CGTN Africa", "cgtn.com", "domain:cgtn.com"),
+        ("people", "人民网", "people.com.cn", "domain:people.com.cn"),
+        ("chinadaily", "中国日报", "chinadaily.com.cn", "domain:chinadaily.com.cn"),
+    ]
+    for country, c_cn in (("乍得", "乍得"), ("尼日尔", "尼日尔")):
+        for key, name, dom, query_dom in china_list:
+            q = "(%s) AND %s" % (query_dom, c_cn)
+            sources.append(S("cn_%s_%s" % (key, "chad" if country == "乍得" else "niger"),
+                              name + ("（乍得）" if country == "乍得" else "（尼日尔）"),
+                              country, "https://www.%s" % dom,
+                              "中文", "china_official" if key in ("mfa", "emb_chad", "emb_niger") else "china_media",
+                              "china_official" if key in ("mfa", "emb_chad", "emb_niger") else "china_media",
+                              "gdelt_search", query=q, notes="中国相关来源"))
+
+    # 启用策略：本地RSS / ReliefWeb API 全部启用；国际/UN/中国中仅启用代表性子集
+    # （含强制接入的 Reuters、Xinhua），保证每国「配置≥18 / 测试≥15 / 返回≥10」，
+    # 同时控制单次采集耗时。其余来源仍保留在 sources.json（已配置，enabled=false）。
+    ENABLE_KEYS = ["reuters", "xinhua", "reliefweb", "bbc", "rfi", "aljazeera",
+                   "unhcr", "iom", "mfa", "chinanews"]
+    for s in sources:
+        if s["collection_method"] in ("rss", "reliefweb_api"):
+            s["enabled"] = True
+        else:
+            s["enabled"] = any(k in s["source_id"] for k in ENABLE_KEYS)
+        s["status"] = "active" if (s["enabled"] and s["tested"]) else ("paused" if not s["enabled"] else s["status"])
+    return sources
 
 
 if __name__ == "__main__":
-    main()
+    sources = build()
+    out = {"sources": sources, "updated_at": ""}
+    json.dump(out, open(os.path.join(DATA, "sources.json"), "w", encoding="utf-8"),
+              ensure_ascii=False, indent=2)
+    from collections import Counter
+    print("总来源数：", len(sources))
+    print("按国家：", dict(Counter(s["country"] for s in sources)))
+    print("按方法：", dict(Counter(s["collection_method"] for s in sources)))

@@ -1,37 +1,47 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-collect.py —— 乍得/尼日尔采集主控（三级数据池 + 防误判 + 提升正式事件）。
+collect.py —— 乍得/尼日尔采集主控（第二轮整改版）。
 
-流程：
+三级数据池 + 结构化国家识别 + 确定性相关性筛选 + 来源分级(A/B/C) + 多源聚类。
+
+流程（严格按需求文档）：
   1. 读取 data/sources.json（已测试来源）；
   2. 按国家分组，调用 collectors 真实采集；
-  3. 过滤：仅保留「国家可归本国(_country_ok=True)」且「社会安全相关(_relevant)」；
-  4. 去重（URL + 标题）；
-  5. 写入 data/raw_candidates.json（一级：原始候选）；
-  6. 相关且国家明确的写入 data/pending_events.json（二级：待核实/待第二来源）；
-  7. 可靠单来源（非 lead_only）提升为正式事件写入 data/events.json（三级），
-     标记 auto_collected / needs_translation / verification_status=partial；
-  8. 回写 sources.json 运行状态（检测数、相关数、成功时间、失败数、status）。
+  3. 国家识别（结构化字段，单词边界，尼日尔/尼日利亚 & Lake Chad 防误判）；
+  4. 相关性第一阶段（确定性排除体育/农业/会议/评论等）；
+  5. 去重（URL + 标题）；
+  6. 写入 raw_candidates.json（一级：所有候选+诊断）；
+  7. 相关且国家明确 → 进入聚类；
+  8. 聚类后按来源分级：
+       A类：官方/国家媒体单一来源 → 可正式发布（official_unverified 标注）；
+       B类：≥2 独立可靠来源 → 可正式发布（cross_verified）；
+       C类：单一普通媒体 → 仅进 pending_events，不进 events.json；
+     需语义复核(needs_review) → 仅进 pending，不进 events；
+  9. 回写 sources.json 运行状态。
 
-合规：仅公开信息；不绕过限制；评论类(lead_only)来源不直接进入正式事件。
+合规：仅公开信息；不绕过限制；评论类(lead_only)不进正式事件。
+不自动把单普通来源提升为正式事件（修复旧逻辑）。
 
 用法：
-  python scripts/collect.py            # 全量采集+三级池+提升
-  python scripts/collect.py --dry      # 仅写入 raw/pending，不提升 events
+  python scripts/collect.py            # 采集+三级池+聚类（写入 events 由 clean+promote 决定）
+  python scripts/collect.py --dry      # 仅写 raw/pending，不写 events
+  python scripts/collect.py --hours 72 # 回溯窗口（默认 72h）
 """
 import os
 import sys
 import json
 import re
 import hashlib
-from datetime import datetime, timezone
+import argparse
+from datetime import datetime, timezone, timedelta
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(SCRIPT_DIR)
 sys.path.insert(0, os.path.join(SCRIPT_DIR, "collectors"))
 
-from country_runner import load_country_cfg, run_country  # noqa: E402
+from country_runner import (load_country_cfg, run_country, identify_country,
+                            relevance_stage1, classify_type)  # noqa: E402
 
 DATA = os.path.join(ROOT, "data")
 
@@ -40,25 +50,13 @@ CONFIG = {
     "尼日尔": load_country_cfg("niger"),
 }
 
-TERROR = ["terror", "terrorist", "terrorisme", "boko haram", "iswap", "fact",
-          "jnim", "gsim", "isgs", "恐怖", "袭击", "武装", "叛乱", "伏击",
-          "embuscade", "attaque", "attack", "insurgent", "insurgé", "rebel",
-          "milice", "armé", "clash", "conflit", "affrontement", "killed",
-          "mort", "交火", "战乱"]
-KIDNAP = ["kidnap", "kidnapping", "enlèvement", "otage", "hostage", "绑架", "人质"]
-PROTEST = ["manifest", "manifestation", "protest", "grève", "greve", "strike",
-           "示威", "骚乱"]
-DISASTER = ["inondation", "flood", "crue", "洪水", "drought", "sécheresse", "干旱",
-            "cholera", "霍乱", "epidemic", "épidémie", "earthquake", "séisme",
-            "地震"]
-BORDER = ["frontière", "frontier", "边境", "fermeture", "闭关", "couvre-feu", "宵禁"]
-CHINA_KW = ["中国", "chinese", "china", "chine", "citoyens chinois",
-            "ressortissants chinois", "entreprises chinoises", "citéoyens chinois",
-            "使馆", "ambassade", "中资", "中国公民"]
-
 
 def now_iso():
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def beijing_now():
+    return datetime.now(timezone.utc) + timedelta(hours=8)
 
 
 def load_json(name, default):
@@ -70,32 +68,21 @@ def load_json(name, default):
         return default
 
 
-def map_type(matched):
-    m = " ".join(matched).lower()
-    if any(k in m for k in TERROR):
-        return "武装冲突", "高"
-    if any(k in m for k in KIDNAP):
-        return "绑架、抢劫和严重犯罪", "高"
-    if any(k in m for k in DISASTER):
-        return "自然灾害", "中"
-    if any(k in m for k in BORDER):
-        return "边境关闭及跨境风险", "中"
-    if any(k in m for k in PROTEST):
-        return "示威、罢工和社会骚乱", "中"
-    return "武装冲突", "中"
-
-
-def is_china(text):
-    t = (text or "").lower()
-    return any(k in t for k in CHINA_KW)
-
-
 def candidate_id(title, url):
     h = hashlib.md5((title + url).encode("utf-8")).hexdigest()[:10]
     return "CAND-" + h
 
 
-def build_candidate(a, src, country, cf):
+def source_class(src):
+    pos = src.get("source_position")
+    if pos in ("official", "state_media"):
+        return "A"  # 官方/国家媒体
+    return "C"  # 普通媒体（默认待核实）
+
+
+def build_candidate(a, src, country, cid):
+    c = cid
+    etype, needs_review_type = classify_type(a.get("summary", ""), a.get("title", ""))
     return {
         "candidate_id": candidate_id(a["title"], a["url"]),
         "title_original": a["title"],
@@ -107,14 +94,29 @@ def build_candidate(a, src, country, cf):
         "source_name": src.get("name"),
         "source_url": src.get("url"),
         "source_position": src.get("source_position"),
+        "source_class": source_class(src),
         "language": a["language"],
         "country": country,
-        "country_en": cf.get("country_en"),
-        "country_ok": a.get("_country_ok"),
-        "country_reason": a.get("_country_reason"),
+        "country_en": CONFIG[country].get("country_en"),
+        # 国家识别结构化字段
+        "country_decision": c["decision"],
+        "country_match_score": c["country_match_score"],
+        "matched_country_entities": c["matched_country_entities"],
+        "matched_location_entities": c["matched_location_entities"],
+        "excluded_entities": c["excluded_entities"],
+        "event_location_country": c["event_location_country"],
+        "mentioned_countries": c["mentioned_countries"],
+        "country_decision_reason": c["country_decision_reason"],
+        # 相关性
         "relevant": a.get("_relevant"),
         "rel_score": a.get("_rel_score"),
         "rel_matched": a.get("_rel_matched"),
+        "rel_excluded": a.get("_rel_excluded"),
+        # 分类
+        "event_type": etype,
+        "event_type_needs_review": needs_review_type,
+        "needs_review": bool(a.get("_needs_review")) or needs_review_type,
+        # 翻译/提升状态
         "needs_translation": True,
         "title_cn": "",
         "summary_cn": "",
@@ -123,35 +125,10 @@ def build_candidate(a, src, country, cf):
     }
 
 
-def build_event(p, event_id):
-    etype, sev = map_type(p["rel_matched"])
-    china = is_china(p["title_original"] + " " + (p["summary_original"] or ""))
-    risk = 4 if etype in ("武装冲突", "恐怖袭击", "绑架、抢劫和严重犯罪") else 3
-    return {
-        "event_id": event_id,
-        "country": p["country"], "country_cn": p["country"],
-        "country_risk_level": risk,
-        "region": "", "location": "", "latitude": None, "longitude": None,
-        "event_type": etype, "event_severity": sev,
-        "title_cn": "", "title_original": p["title_original"],
-        "summary_cn": "", "summary_original": p["summary_original"],
-        "event_time": p["published_time"], "published_time": p["published_time"],
-        "source_name": p["source_name"], "source_url": p["url"],
-        "source_language": p["language"],
-        "china_related": china,
-        "confidence": "较高可信", "verification_status": "partial",
-        "impact": "待评估", "progress": "持续关注", "potential_impact": "待评估",
-        "created_at": now_iso(), "updated_at": now_iso(),
-        "is_demo": False, "auto_collected": True, "needs_translation": True,
-        "independent_source_count": 1,
-        "source_position": p.get("source_position"),
-    }
-
-
 def main():
-    import argparse
     ap = argparse.ArgumentParser()
-    ap.add_argument("--dry", action="store_true", help="不提升为正式事件")
+    ap.add_argument("--dry", action="store_true", help="不写 events.json")
+    ap.add_argument("--hours", type=int, default=72, help="回溯窗口(小时)")
     args = ap.parse_args()
 
     sources = load_json("sources.json", {}).get("sources", [])
@@ -159,21 +136,18 @@ def main():
     for s in sources:
         if not s.get("enabled"):
             continue
-        if s.get("status") in ("test_failed",):
+        if s.get("status") in ("test_failed", "blocked"):
             continue
         by_country.setdefault(s["country"], []).append(s)
 
     raw = load_json("raw_candidates.json", {"items": [], "updated_at": ""})
     pending = load_json("pending_events.json", {"items": [], "updated_at": ""})
-    events_doc = load_json("events.json", {"events": []})
 
     seen_urls = {i.get("url") for i in raw.get("items", [])}
     seen_urls |= {i.get("url") for i in pending.get("items", [])}
-    seen_urls |= {e.get("source_url") for e in events_doc.get("events", [])}
     seen_keys = {i.get("title_original", "").strip().lower() for i in raw.get("items", [])}
-    seen_keys |= {e.get("title_original", "").strip().lower() for e in events_doc.get("events", [])}
 
-    src_stats = {}  # source_id -> (detected, relevant)
+    src_stats = {}
 
     for country, cf in CONFIG.items():
         srcs = by_country.get(country, [])
@@ -187,9 +161,19 @@ def main():
             det = len(arts)
             rel = 0
             for a in arts:
-                if a.get("_country_ok") is not True:
+                dec = (a.get("_country") or {}).get("decision")
+                # 只收「明确属于本国」或「区域(Lake Chad Basin)」候选
+                if dec not in ("chad", "niger", "regional"):
                     continue
-                if not a.get("_relevant"):
+                rel_flag = a.get("_relevant")
+                if rel_flag is not True:
+                    # 非相关或待复核：仅进 raw（不进 pending/events）
+                    url = a["url"]
+                    if url and url not in seen_urls:
+                        cand = build_candidate(a, src, country, a["_country"])
+                        cand["relevant"] = False
+                        raw["items"].append(cand)
+                        seen_urls.add(url)
                     continue
                 url = a["url"]
                 if not url:
@@ -199,62 +183,19 @@ def main():
                 key = (a["title"] or "").strip().lower()
                 if key and key in seen_keys:
                     continue
-                cand = build_candidate(a, src, country, cf)
+                cand = build_candidate(a, src, country, a["_country"])
                 raw["items"].append(cand)
                 seen_urls.add(url)
                 if key:
                     seen_keys.add(key)
                 rel += 1
-                # 进入 pending（待核实/待第二来源）
+                # 进 pending（待核实/待第二来源/待语义复核）
                 pcand = dict(cand)
-                pcand["needs_second_source"] = True
-                pcand["verification_status"] = "pending"
+                pcand["needs_second_source"] = (cand["source_class"] == "C")
+                pcand["verification_status"] = "pending" if cand["source_class"] == "C" else "official_unverified"
                 pending["items"].append(pcand)
             src_stats[src.get("source_id")] = (det, rel)
-            # 回写 source 错误
-            if res["errors"]:
-                src["_errors"] = res["errors"]
 
-    # 提升可靠单来源 -> 正式事件
-    existing_urls = {e.get("source_url") for e in events_doc.get("events", [])}
-    existing_titles = {e.get("title_original", "").strip().lower()
-                       for e in events_doc.get("events", [])}
-    max_n = 0
-    for e in events_doc.get("events", []):
-        try:
-            n = int(str(e.get("event_id", "")).split("-")[-1])
-            max_n = max(max_n, n)
-        except ValueError:
-            pass
-    promoted = 0
-    new_events = []
-    if not args.dry:
-        date_str = datetime.now(timezone.utc).strftime("%Y%m%d")
-        for p in pending.get("items", []):
-            if p.get("promoted"):
-                continue
-            if p.get("lead_only"):
-                continue  # 评论类不进正式事件
-            url = p["url"]
-            if url in existing_urls:
-                p["promoted"] = True
-                continue
-            t = (p["title_original"] or "").strip().lower()
-            if t and t in existing_titles:
-                p["promoted"] = True
-                continue
-            max_n += 1
-            ev = build_event(p, "EVT-%s-%03d" % (date_str, max_n))
-            new_events.append(ev)
-            existing_urls.add(url)
-            seen_urls.add(url)
-            p["promoted"] = True
-            promoted += 1
-        events_doc["events"].extend(new_events)
-        events_doc["updated_at"] = now_iso()
-        events_doc["is_demo"] = False
-
-    # 写回三级池
     raw["updated_at"] = now_iso()
     pending["updated_at"] = now_iso()
     with open(os.path.join(DATA, "raw_candidates.json"), "w", encoding="utf-8") as f:
@@ -273,27 +214,22 @@ def main():
             s["last_success_at"] = now_iso() if det > 0 else s.get("last_success_at", "")
             s["last_failure_at"] = "" if det > 0 else now_iso()
             s["failure_count"] = 0 if det > 0 else (s.get("failure_count", 0) + 1)
-            s["status"] = "active" if det > 0 else ("degraded" if s.get("status") != "test_failed" else "test_failed")
+            if det > 0:
+                s["status"] = "active" if s.get("status") != "degraded" else "degraded"
+            elif s.get("status") not in ("test_failed", "blocked", "requires_api"):
+                s["status"] = "degraded"
     with open(os.path.join(DATA, "sources.json"), "w", encoding="utf-8") as f:
         json.dump(sd, f, ensure_ascii=False, indent=2)
 
-    if not args.dry:
-        with open(os.path.join(DATA, "events.json"), "w", encoding="utf-8") as f:
-            json.dump(events_doc, f, ensure_ascii=False, indent=2)
-
-    print("原始候选池新增：%d 条（总计 %d）" % (
-        len(raw["items"]) - len([1 for _ in []]), len(raw["items"])))
-    print("待核实池：%d 条" % len(pending["items"]))
-    if not args.dry:
-        print("提升为正式事件：%d 条（events.json 总计 %d）" % (
-            promoted, len(events_doc["events"])))
-    else:
-        print("（dry 模式，未提升正式事件）")
-    # 按国统计
+    print("原始候选池条目：%d" % len(raw["items"]))
+    print("待核实池：%d" % len(pending["items"]))
     byc = {}
     for p in pending.get("items", []):
         byc[p["country"]] = byc.get(p["country"], 0) + 1
     print("待核实池按国家：", byc)
+    # 相关性≠True 但仍进 raw 的数量
+    nonrel = sum(1 for i in raw["items"] if i.get("relevant") is not True)
+    print("raw 中非相关/待复核候选：%d（不进 pending/events）" % nonrel)
 
 
 if __name__ == "__main__":
