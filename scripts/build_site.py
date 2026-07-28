@@ -26,7 +26,7 @@ ASSETS = os.path.join(ROOT, "assets")
 REPORTS = os.path.join(ROOT, "reports")
 
 HTML_FILES = [
-    "index.html", "events.html", "countries.html", "country.html",
+    "index.html", "events.html", "event.html", "countries.html", "country.html",
     "reports.html", "report.html", "disease-risk.html", "404.html",
 ]
 

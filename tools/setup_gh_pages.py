@@ -80,7 +80,11 @@ def main():
     subprocess.run(["git", "add", "-A"], cwd=work, check=True)
     subprocess.run(["git", "commit", "-m", "Initial ASIP site"], cwd=work, check=True)
     # 若已存在 gh-pages，使用当前令牌远程强制更新
-    subprocess.run(["git", "remote", "set-url", "origin", remote], cwd=work, check=True)
+    # 新初始化的仓库尚无 origin，先 add（已存在则改用 set-url）
+    try:
+        subprocess.run(["git", "remote", "add", "origin", remote], cwd=work, check=True)
+    except subprocess.CalledProcessError:
+        subprocess.run(["git", "remote", "set-url", "origin", remote], cwd=work, check=True)
     try:
         subprocess.run(["git", "push", "-f", "-u", "origin", "gh-pages"], cwd=work, check=True)
     finally:

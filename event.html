@@ -46,7 +46,7 @@ function init() {
         ${kv("信息发布时间", fmtDateTimeBJ(e.published_time))}
         ${kv("来源名称", esc(e.source_name || "—"))}
         ${kv("原文链接", e.source_url && e.source_url !== "#" ? `<a href="${esc(e.source_url)}" target="_blank" rel="noopener">${esc(e.source_url)}</a>` : "—")}
-        ${kv("原文语言", esc(e.source_language || "—"))}
+        ${kv("原文语言", esc(langCn(e.source_language) || "—"))}
         ${kv("涉华", (e.china_related || e.involves_china) ? "是" : "否")}
         ${kv("可信度", esc(e.confidence || "—"))}
         ${kv("核实状态", esc(VERIFY_STATUS[e.verification_status] || e.verification_status || "—"))}

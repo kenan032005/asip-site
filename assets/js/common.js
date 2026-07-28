@@ -27,6 +27,22 @@ const EVENT_TYPES = [
 const CONFIDENCE = { verified: "已核实", high: "较高可信", pending: "待进一步核实" };
 const VERIFY_STATUS = { verified: "已核实", partial: "部分核实", pending: "待进一步核实", unverified: "未经证实" };
 
+// 原文语言兜底映射：数据中偶有为英文（English/French…），统一显示为中文
+const LANG_MAP = {
+  "English": "英语", "english": "英语",
+  "French": "法语", "french": "法语",
+  "German": "德语", "german": "德语",
+  "Spanish": "西班牙语", "spanish": "西班牙语",
+  "Italian": "意大利语", "italian": "意大利语",
+  "Portuguese": "葡萄牙文", "portuguese": "葡萄牙文",
+  "Portuguese (Brazil)": "葡萄牙文",
+  "Turkish": "土耳其语", "turkish": "土耳其语",
+  "Arabic": "阿拉伯文", "arabic": "阿拉伯文",
+  "Russian": "俄文", "russian": "俄文",
+  "Chinese": "中文", "chinese": "中文",
+};
+function langCn(s) { return LANG_MAP[(s || "").trim()] || (s || "—"); }
+
 function $(sel, root) { return (root || document).querySelector(sel); }
 function $all(sel, root) { return Array.from((root || document).querySelectorAll(sel)); }
 

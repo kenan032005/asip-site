@@ -33,6 +33,17 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "data")
 GDELT = "https://api.gdeltproject.org/api/v2/doc/doc"
 
+# GDELT 返回的 source_language 为英文代码（English/French…），统一存为中文
+LANG_MAP = {
+    "English": "英语", "French": "法语", "German": "德语", "Spanish": "西班牙语",
+    "Italian": "意大利语", "Portuguese": "葡萄牙文", "Turkish": "土耳其语",
+    "Arabic": "阿拉伯文", "Russian": "俄文", "Chinese": "中文",
+}
+
+
+def norm_lang(s):
+    return LANG_MAP.get((s or "").strip(), (s or "英语").strip())
+
 # 重点国家（英文匹配关键词 -> (中文名, 风险等级)）
 # 注意顺序：含空格/更具体的词（如 south sudan、nigeria）放前面，
 # 避免 "niger" 误匹配 "northern nigeria" 等子串问题。
@@ -178,11 +189,12 @@ def main():
             "latitude": None, "longitude": None,
             "event_type": etype, "event_severity": sev,
             "title_cn": title, "title_original": title,
-            "summary_cn": "（自动采集）" + title,
+            "summary_cn": "（自动采集，待翻译）" + title,
             "event_time": pub, "published_time": pub,
             "source_name": art.get("domain") or art.get("sourcecountry") or "GDELT",
             "source_url": url,
-            "source_language": art.get("language") or "英文",
+            "source_language": norm_lang(art.get("language")),
+            "needs_translation": True,
             "china_related": False,
             "confidence": "较高可信", "verification_status": "partial",
             "impact": "待评估", "progress": "持续关注", "potential_impact": "待评估",
