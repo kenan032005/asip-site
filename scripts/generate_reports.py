@@ -73,6 +73,14 @@ GROUP_MAP = {
 }
 
 
+# 分组 -> 中文领域名（用于日报文案）
+GROUP_CN = {
+    "politics": "政治", "conflict_terror": "武装冲突与恐怖主义",
+    "stability": "社会稳定与治安", "infrastructure": "公共卫生、灾害与基础设施",
+    "china": "涉华",
+}
+
+
 def event_groups(events):
     g = {"politics": [], "conflict_terror": [], "stability": [], "infrastructure": [], "china": []}
     for e in events:
@@ -140,7 +148,7 @@ def build_report(country, dc, events_all, date_str, generated_at, win_start, win
         ],
         "overall": {
             "text": (NO_EVENT if not has else "最近24小时（北京时间前一日22:00至当日22:00）记录 {n} 起公开报道的社会安全相关事件，涉及{ts}。".format(
-                n=len(new_events), ts="、".join(sorted(set(GROUP_MAP.get(e.get("event_type", ""), "") for e in new_events if e.get("event_type"))) or ["多个领域"]))),
+                n=len(new_events), ts="、".join(sorted(set(GROUP_CN.get(GROUP_MAP.get(e.get("event_type", ""), ""), "") for e in new_events if e.get("event_type")) - {""}) or ["多个领域"]))),
             "trend": "基本稳定" if not has else "暂无法判断",
             "trend_vs_prev": "基本稳定" if not has else "相较前一日待评估",
         },
