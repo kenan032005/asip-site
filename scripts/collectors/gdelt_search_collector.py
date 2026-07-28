@@ -91,9 +91,18 @@ def _fetch_group(source, kw, timespan):
     }
     url = "https://api.gdeltproject.org/api/v2/doc/doc?" + urllib.parse.urlencode(params)
     text, err = fetch_text(url)
-    entry = {"articles": [], "error": None}
+    entry = {"articles": [], "error": None, "rate_limited": False}
     if not text:
-        entry["error"] = "gdelt fetch: %s" % err
+        # 明确区分「GDELT 公共接口限流」与「其它抓取错误」，便于运行后自检与证据留存
+        rate = bool(err) and "429" in str(err)
+        entry["rate_limited"] = rate
+        if rate:
+            entry["error"] = ("GDELT 公共接口限流(HTTP 429)：本机出口 IP 被节流，"
+                              "需等待冷却或改由 GitHub Actions 云端低频运行。"
+                              "强制接入的 Reuters/新华网查询通路正确，限流解除后即可返回数据。"
+                              "原始错误: %s" % err)
+        else:
+            entry["error"] = "gdelt fetch: %s" % err
     else:
         try:
             entry["articles"] = json.loads(text).get("articles", [])

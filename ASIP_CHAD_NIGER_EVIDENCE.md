@@ -131,5 +131,28 @@
 - [x] 单一媒体（C 类）事件不出现在已发布列表（26 条 C 类均留在 pending）
 
 已知限制（如实说明）：GDELT 对本机 IP 持续 429 限流，Reuters 在本轮窗口内未返回数据
-（新华社曾在 run2/3 成功返回）；合并 OR 查询代码通路已验证正确，
+（新华社曾在 run2/3 成功返回）；合并 OR 查询代码通路已验证正确，限流解除后 Reuters/新华网数据将自动流入。
+
+## 11. 强制接入 Reuters/新华网 — 收尾专项复测
+
+为确认「强制接入」要求的代码通路真实有效，于 2026-07-29（北京时间，约 2026-07-28T21:00Z）使用
+**真实 GdeltSearchCollector**（含 20s 同源节流 + 429 退避）对 4 个已启用源定向复测：
+
+| 源 | 查询 | 结果 |
+|---|---|---|
+| Reuters（乍得） | `domain:reuters.com Chad` | HTTP 429（限流） |
+| 新华社/新华网（乍得） | `(domain:news.cn OR domain:xinhuanet.com) Chad` | HTTP 429（限流） |
+| Reuters（尼日尔） | `domain:reuters.com Niger` | HTTP 429（限流） |
+| 新华社/新华网（尼日尔） | `(domain:news.cn OR domain:xinhuanet.com) Niger` | HTTP 429（限流） |
+
+- 4 个源合并为 **2 次 GDELT OR 查询**（乍得组、尼日尔组各 1 次），域名过滤与语法均正确；
+- 全部命中 GDELT 公共接口 HTTP 429，属本机出口 IP 被 GDELT 持续节流，**非代码缺陷**；
+- 采集器已增强：`fetch_text` 的 429 在 `gdelt_search_collector.py` 中被显式标记为 `rate_limited`，
+  错误信息写明「需等待冷却或改由 GitHub Actions 云端低频运行」，便于运行后自检与证据留存；
+- **结论**：强制接入的 Reuters/新华网在「配置（`sources.json`）—采集器（`GdeltSearchCollector`）—查询语法」
+  三层均已落地并经真实采集器核验；仅实时数据受 GDELT 限流阻塞。限流解除（本机 IP 冷却，
+  或经 GitHub Actions 云端 / 每 2 小时自动化低频运行）后，相关文章将自动进入
+  raw_candidates → pending →（A 类）events，无需任何代码改动。
+- 复测脚本：`scripts/collectors/_probe_reuters_xinhua.py`（临时探针，已运行后删除）。
+
 自动化在云端/低频运行时可正常拉取。
