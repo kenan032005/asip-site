@@ -1,0 +1,58 @@
+# ASIP 每小时自动抓取并更新（GitHub Actions 方案）
+#
+# 触发：每小时第 0 分（UTC），以及 workflow_dispatch 手动触发。
+# 流程：GDELT 采集 -> 生成日报 -> 构建 -> 部署 gh-pages。
+#
+# 启用条件：需要一枚具备 workflow 权限的 GitHub Personal Access Token
+# （classic PAT 勾选 repo + workflow），用它推送本文件到 main 分支，
+# 并在仓库 Settings -> Actions 中允许运行。也可用 GitHub Web 界面直接
+# 提交本文件到 main 分支来启用（需 Actions 权限已开启）。
+#
+# 说明：本工作流使用仓库自带的 GITHUB_TOKEN 部署 gh-pages，
+# 密钥不写入任何代码或提交记录，符合平台合规要求（第二十节）。
+name: ASIP Hourly Update
+
+on:
+  schedule:
+    - cron: "0 * * * *"      # 每小时（UTC）
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Collect latest news (GDELT, 公开合规)
+        run: python scripts/collect_live.py --hours 24
+
+      - name: Generate reports & build site
+        run: |
+          python scripts/generate_reports.py
+          python scripts/build_summary.py
+          python scripts/build_site.py
+
+      - name: Commit updated data back to main
+        run: |
+          git config user.name "ASIP Bot"
+          git config user.email "asip@local"
+          git add data/events.json
+          git commit -m "data: hourly auto-update $(date +%Y-%m-%dT%H:%M)" || echo "no changes"
+          git push
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
