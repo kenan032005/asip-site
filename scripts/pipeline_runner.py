@@ -99,8 +99,11 @@ GIT_ENV = {
 }
 
 
-def git(args, timeout=120, cwd=None):
-    return run_cmd([GIT] + args, cwd=cwd, timeout=timeout, env_extra=GIT_ENV)
+def git(args, timeout=120, cwd=None, env_extra=None):
+    env = dict(GIT_ENV)
+    if env_extra:
+        env.update(env_extra)
+    return run_cmd([GIT] + args, cwd=cwd, timeout=timeout, env_extra=env)
 
 
 def git_rev_head():
@@ -142,44 +145,56 @@ def update_status_source_commit(commit):
 
 
 def deploy_gh_pages(dist_dir, token, source_commit):
-    """将 dist/ 强制推送到 gh-pages 分支。返回 (gh_pages_commit, error)。"""
-    if not (Path(dist_dir) / "index.html").exists():
-        return None, "dist/index.html 不存在"
-    tmp = tempfile.mkdtemp(prefix="asip-gh-")
-    try:
-        dst = Path(tmp)
-        # 复制 dist 内容（不使用 shell cp / rm）
-        for item in Path(dist_dir).iterdir():
-            if item.name in (".git",):
-                continue
-            tgt = dst / item.name
-            if item.is_dir():
-                shutil.copytree(item, tgt)
-            else:
-                shutil.copy2(item, tgt)
-        (dst / ".nojekyll").write_text("", encoding="utf-8")
+    """将 dist/ 强制推送到 gh-pages 分支。返回 (gh_pages_commit, error)。
 
-        rc, out, err = git(["init"], cwd=tmp)
+    实现：在主仓库内用 git plumbing（临时索引 + write-tree + commit-tree）
+    合成 gh-pages 提交。与 main 共享对象库 → push 只传增量，慢网络也能完成。
+    不再使用独立 git init 临时仓库（那会每次全量推送数百对象）。
+    """
+    dist = Path(dist_dir)
+    if not (dist / "index.html").exists():
+        return None, "dist/index.html 不存在"
+    try:
+        # 1) 用临时索引把 dist/ 内容做成一棵树
+        tmp_index = str(ROOT / ".git" / f"gh-index-{os.getpid()}")
+        env = {"GIT_INDEX_FILE": tmp_index}
+        rc, out, err = git(["--git-dir", str(ROOT / ".git"), "--work-tree", str(dist),
+                            "add", "-A", "."], cwd=dist, env_extra=env)
         if rc != 0:
-            return None, f"git init failed: {err}"
-        git(["config", "user.email", "asip-bot@github.com"], cwd=tmp)
-        git(["config", "user.name", "ASIP Pipeline"], cwd=tmp)
-        git(["add", "-A"], cwd=tmp)
-        rc, out, err = git(["commit", "-m", f"deploy: source {source_commit[:8]}"], cwd=tmp)
-        if rc != 0:
-            return None, f"commit failed: {err}"
+            return None, f"index add failed: {err}"
+        rc, tree, err = git(["write-tree"], env_extra=env)
+        if rc != 0 or not tree:
+            return None, f"write-tree failed: {err}"
+
+        # 2) 以远端 gh-pages 为父提交（存在则续链，不存在则孤儿链）
+        parent = ""
+        rc, out, _ = git(["rev-parse", "--verify", "-q", "refs/remotes/origin/gh-pages"])
+        if rc == 0 and out:
+            parent = out.strip()
+
+        msg = f"deploy: source {source_commit[:8]}"
+        args = ["commit-tree", tree, "-m", msg]
+        if parent:
+            args = ["commit-tree", tree, "-p", parent, "-m", msg]
+        commit_env = {
+            "GIT_AUTHOR_NAME": "ASIP Pipeline", "GIT_AUTHOR_EMAIL": "asip-bot@github.com",
+            "GIT_COMMITTER_NAME": "ASIP Pipeline", "GIT_COMMITTER_EMAIL": "asip-bot@github.com",
+        }
+        rc, new_commit, err = git(args, env_extra=commit_env)
+        if rc != 0 or not new_commit:
+            return None, f"commit-tree failed: {err}"
+        new_commit = new_commit.strip()
+
+        # 3) 推送该提交到 gh-pages（增量对象，网络负担最小）
         url = REPO_PUSH_URL.format(token=token)
-        rc, out, err = git(["push", "-f", url, "HEAD:gh-pages"], cwd=tmp, timeout=420)
+        rc, out, err = git(["push", "-f", url, f"{new_commit}:refs/heads/gh-pages"], timeout=420)
         if rc != 0:
             return None, f"push failed: {err}"
-        # 获取真实 gh-pages commit
-        rc, out, _ = git(["ls-remote", url, "gh-pages"], timeout=180)
-        gh = out.split()[0] if out else None
-        return (gh or "unknown"), ""
+        # 更新本地远端跟踪引用，便于下次续链
+        git(["update-ref", "refs/remotes/origin/gh-pages", new_commit])
+        return new_commit, ""
     except Exception as e:
         return None, str(e)
-    # 注意：不删除 tmp（位于系统 %TEMP%，由系统清理）。
-    # 环境的批量删除保护会在 rmtree 大目录时直接终止进程，绝不可在此删除。
 
 
 def run_mode(mode, trigger):
