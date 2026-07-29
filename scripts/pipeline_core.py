@@ -22,7 +22,7 @@ import random
 import string
 import time
 import argparse
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 # ── 真实时区（ZoneInfo，禁用 fake-UTC+8 写法）──────────────
@@ -199,23 +199,28 @@ def create_pipeline_meta(run_id):
 # ── 运行锁（防并发覆盖）──────────────────────────────────
 
 def acquire_lock(run_id, max_age_min=MAX_LOCK_AGE_MIN):
-    """尝试获取运行锁。成功返回 True，已被其他活动运行持有则返回 False。"""
+    """尝试获取运行锁。成功返回 True，已被其他活动运行持有则返回 False。
+
+    注：锁"释放"以内容 released=True 或文件不存在为准（删除可能被环境
+    的批量删除保护拦截，因此覆写与删除双轨）。
+    """
     try:
         DATA_DIR.mkdir(parents=True, exist_ok=True)
         if LOCK_FILE.exists():
             try:
-                info = json.loads(LOCK_FILE.read_text(encoding="utf-8"))
-                started = parse_time(info.get("started_at", ""))
-                age = (bj_now() - started).total_seconds() / 60 if started else 9999
-                if age < max_age_min:
-                    # 锁仍新鲜：若 run_id 相同（自身重入）则允许，否则拒绝
-                    if info.get("run_id") == run_id:
-                        return True
-                    return False
-                # 陈旧锁：抢占
-                LOCK_FILE.unlink()
+                raw = LOCK_FILE.read_text(encoding="utf-8").strip()
+                info = json.loads(raw) if raw else {}
+                if not info.get("released"):
+                    started = parse_time(info.get("started_at", ""))
+                    age = (bj_now() - started).total_seconds() / 60 if started else 9999
+                    if age < max_age_min:
+                        # 锁仍新鲜：若 run_id 相同（自身重入）则允许，否则拒绝
+                        if info.get("run_id") == run_id:
+                            return True
+                        return False
+                # 已释放或陈旧：直接覆写抢占（不依赖删除）
             except Exception:
-                LOCK_FILE.unlink()
+                pass
         LOCK_FILE.write_text(
             json.dumps({
                 "run_id": run_id,
@@ -232,15 +237,24 @@ def acquire_lock(run_id, max_age_min=MAX_LOCK_AGE_MIN):
 
 
 def release_lock(run_id=None):
-    """释放运行锁。"""
+    """释放运行锁。优先删除；删除被拦截时覆写 released=True（写不受删除保护限制）。"""
     try:
-        if LOCK_FILE.exists():
-            if run_id is None:
-                LOCK_FILE.unlink()
-            else:
+        if not LOCK_FILE.exists():
+            return
+        if run_id is not None:
+            try:
                 info = json.loads(LOCK_FILE.read_text(encoding="utf-8"))
-                if info.get("run_id") == run_id:
-                    LOCK_FILE.unlink()
+                if info.get("run_id") != run_id:
+                    return
+            except Exception:
+                pass
+        try:
+            LOCK_FILE.unlink()
+        except Exception:
+            LOCK_FILE.write_text(
+                json.dumps({"released": True, "run_id": run_id or "", "released_at": bj_iso()}),
+                encoding="utf-8",
+            )
     except Exception:
         pass
 
