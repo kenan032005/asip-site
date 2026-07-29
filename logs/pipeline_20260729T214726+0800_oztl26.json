@@ -1,0 +1,122 @@
+{
+  "pipeline_version": 2,
+  "run_id": "20260729T214726+0800_oztl26",
+  "trigger": "manual",
+  "started_at": "2026-07-29T21:47:26.014570+08:00",
+  "steps": [
+    {
+      "name": "git_pull",
+      "status": "failed",
+      "started_at": "2026-07-29T21:49:56.715102+08:00",
+      "completed_at": "2026-07-29T21:49:56.715116+08:00",
+      "details": {
+        "output": "",
+        "error": "TIMEOUT"
+      }
+    },
+    {
+      "name": "unit_tests",
+      "status": "success",
+      "started_at": "2026-07-29T21:49:56.993449+08:00",
+      "completed_at": "2026-07-29T21:49:56.993460+08:00",
+      "details": {
+        "output": "名 Niger 无地点不盲目归尼日尔\n== 乍得湖跨国防误判 ==\n  PASS  Lake Chad 尼日利亚博尔诺不归乍得\n  PASS  Lake Chad 尼日尔迪法不归乍得\n  PASS  Lake Chad + 乍得 Lac 省可归乍得\n== 相关性筛选 ==\n  PASS  体育(足球/非洲杯)不进安全事件\n  PASS  化肥交付不进武装冲突\n  PASS  银行行长会见不进武装冲突\n  PASS  真实袭击可识别\n== 事件类型分类（不再默认武装冲突） ==\n  PASS  恐袭→terrorist_attack\n  PASS  农牧民冲突→communal_conflict\n  PASS  政变→political_crisis\n  PASS  绑架→kidnapping\n  PASS  纯边境关闭→border_security\n\n结果：PASS=24  FAIL=0"
+      }
+    },
+    {
+      "name": "build_summary",
+      "status": "success",
+      "started_at": "2026-07-29T21:49:57.234040+08:00",
+      "completed_at": "2026-07-29T21:49:57.234062+08:00",
+      "details": {
+        "output": "[build_summary] run_id=20260729T214726+0800_oztl26 pipeline_version=2\n  events: 143, pending: 27, quarantine: 53, sources: 93\n  统计: 24h=0 7d=2 chad24h=0 niger24h=0 current=2\n  信源: configured=93 enabled=91 success_last_run=0 rate_limited=0\n  status.json: 24h=0, 7d=2, src_success_last_run=0\n  latest-summary.json: 24h=0, 7d=2, risk_countries=15\n\nDone. run_id: 20260729T214726+0800_oztl26"
+      }
+    },
+    {
+      "name": "generate_reports",
+      "status": "success",
+      "started_at": "2026-07-29T21:49:57.484578+08:00",
+      "completed_at": "2026-07-29T21:49:57.484595+08:00",
+      "details": {
+        "output": "[generate_reports] 自动目标日期=2026-07-28（当前北京时间 21:49:57）\n日报日期（北京）： 2026-07-28 窗口： 2026-07-27 22:00:00 → 2026-07-28 22:00:00\n  [生成] 乍得 新增= 1 持续跟踪= 1\n  [生成] 尼日尔 新增= 0 持续跟踪= 0\n  [生成] 贝宁 新增= 0 持续跟踪= 3\n  [生成] 南苏丹 新增= 0 持续跟踪= 10\n  [生成] 苏丹 新增= 0 持续跟踪= 36\n  [生成] 埃塞俄比亚 新增= 0 持续跟踪= 12\n✅ 日报已生成（目标日期 2026-07-28，窗口 2026-07-27 22:00:00 → 2026-07-28 22:00:00）"
+      }
+    },
+    {
+      "name": "validate_source",
+      "status": "success",
+      "started_at": "2026-07-29T21:49:57.752986+08:00",
+      "completed_at": "2026-07-29T21:49:57.752997+08:00",
+      "details": {
+        "output": "6-07-25.json] V10-niger/2026-07-25.json: legacy 报告（pipeline_version=None），跳过严格窗口校验\n⚠ [V10-niger/2026-07-26.json] V10-niger/2026-07-26.json: legacy 报告（pipeline_version=None），跳过严格窗口校验\n⚠ [V10-niger/2026-07-27.json] V10-niger/2026-07-27.json: legacy 报告（pipeline_version=None），跳过严格窗口校验\n✅ [V10-report] 日报时间窗口校验通过（当前 pipeline 报告：起止均为北京22:00、长度24h、结束不晚于生成时间、文件名一致；legacy 报告已跳过）\nℹ [V11~V13,V15] stage=source：dist 尚未构建，跳过 dist 相关校验\n✅ [V14-future] 无未来时间事件\n✅ [V16-summary-trace] latest-summary 的 2 个事件均可追溯且通过闸门\n\n============================================================\n校验结果: 0 个问题, 0 个严重错误\n✅ 所有关键检查通过。可以继续部署。"
+      }
+    },
+    {
+      "name": "git_commit_data",
+      "status": "success",
+      "started_at": "2026-07-29T21:49:58.700480+08:00",
+      "completed_at": "2026-07-29T21:49:58.700492+08:00",
+      "details": {
+        "commit": "ff27ba19a4a388ef0b45770d226e09811d30b318",
+        "error": ""
+      }
+    },
+    {
+      "name": "build_site",
+      "status": "success",
+      "started_at": "2026-07-29T21:49:59.742391+08:00",
+      "completed_at": "2026-07-29T21:49:59.742411+08:00",
+      "details": {
+        "output": "[build_site] run_id=20260729T214726+0800_oztl26 pipeline_version=2\n[build_site] build_time=2026-07-29 21:49:59\n构建完成 -> C:\\Users\\kenan\\WorkBuddy\\2026-07-20-22-01-23\\asip-site\\dist\n  HTML: 9 个页面\n  ASIP_BUILD_META: 已注入\n  内联数据快照: True\n  run_id: 20260729T214726+0800_oztl26",
+        "error": ""
+      }
+    },
+    {
+      "name": "validate_dist",
+      "status": "success",
+      "started_at": "2026-07-29T21:50:00.220394+08:00",
+      "completed_at": "2026-07-29T21:50:00.220409+08:00",
+      "details": {
+        "output": "ersion=None），跳过严格窗口校验\n✅ [V10-report] 日报时间窗口校验通过（当前 pipeline 报告：起止均为北京22:00、长度24h、结束不晚于生成时间、文件名一致；legacy 报告已跳过）\n✅ [V11-dist-index.html] dist/index.html 存在\n✅ [V11-dist-events.html] dist/events.html 存在\n✅ [V11-dist-data/status.json] dist/data/status.json 存在\n✅ [V11-dist-data/latest-summary.json] dist/data/latest-summary.json 存在\n✅ [V12-dist-rid] dist.run_id matches data: 20260729T214726+0800_oztl26\n✅ [V13-count] 事件数量一致: 143\n✅ [V14-future] 无未来时间事件\n✅ [V16-summary-trace] latest-summary 的 2 个事件均可追溯且通过闸门\n\n============================================================\n校验结果: 0 个问题, 0 个严重错误\n✅ 所有关键检查通过。可以继续部署。"
+      }
+    },
+    {
+      "name": "git_push_main",
+      "status": "success",
+      "started_at": "2026-07-29T21:50:45.287550+08:00",
+      "completed_at": "2026-07-29T21:50:45.287565+08:00",
+      "details": {
+        "output": ""
+      }
+    },
+    {
+      "name": "deploy_gh_pages",
+      "status": "success",
+      "started_at": "2026-07-29T21:50:54.510697+08:00",
+      "completed_at": "2026-07-29T21:50:54.510713+08:00",
+      "details": {
+        "commit": "d2c6bb28517e1904ee193253bc1168f0f0ea97cb",
+        "error": ""
+      }
+    },
+    {
+      "name": "online_verify",
+      "status": "success",
+      "started_at": "2026-07-29T21:51:40.802889+08:00",
+      "completed_at": "2026-07-29T21:51:40.802890+08:00",
+      "details": {
+        "online_run_id": "20260729T214726+0800_oztl26",
+        "pipeline_version": 2,
+        "last_updated_beijing": "2026-07-29 21:49:57",
+        "events_24h": 0,
+        "http": 200,
+        "verified_at": "2026-07-29T21:51:40.802871+08:00"
+      }
+    }
+  ],
+  "main_commit": "87b7ae3880352144b78af220034b72c778e43335",
+  "gh_pages_commit": "d2c6bb28517e1904ee193253bc1168f0f0ea97cb",
+  "online_run_id": "20260729T214726+0800_oztl26",
+  "online_verified_at": "2026-07-29T21:51:40.802871+08:00",
+  "final_status": "success",
+  "completed_at": "2026-07-29T21:51:40.802978+08:00"
+}
