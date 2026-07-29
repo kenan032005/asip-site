@@ -240,10 +240,12 @@ def run_mode(mode, trigger):
         # 8) 构建 dist
         print("\n[8] build_site ...")
         rc, out, err = run_cmd([PYTHON, str(HERE / "build_site.py"), "--run-id", run_id], timeout=120)
-        add_log_step(log, "build_site", "success" if rc == 0 else "failed", details={"output": out[-300:]})
+        add_log_step(log, "build_site", "success" if rc == 0 else "failed",
+                     details={"output": out[-300:], "error": err[-500:]})
         print(f"  build_site: {'OK' if rc == 0 else 'ERR'}")
         if rc != 0:
             print(out[-300:])
+            print(err[-500:])
             log["final_status"] = "failed"
             save_run_log(log, run_id)
             return 1
