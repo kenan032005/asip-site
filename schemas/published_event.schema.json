@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://asip.local/schemas/published_event.schema.json",
+  "title": "PublishedEvent",
+  "description": "对外公开事件模型。不得包含内部错误、私密路径、密钥、审核备注、原始完整正文、抓取元数据。",
+  "type": "object",
+  "required": [
+    "event_id", "country", "country_cn", "country_risk_level", "event_type",
+    "event_severity", "event_status", "title_cn", "verification_level",
+    "verification_label_cn", "pipeline_version", "schema_version", "run_id"
+  ],
+  "properties": {
+    "event_id": {"type": "string", "pattern": "^EVT_[0-9a-f]{16}$"},
+    "country": {"type": "string", "minLength": 2, "maxLength": 2},
+    "country_cn": {"type": "string"},
+    "country_risk_level": {"type": "integer", "minimum": 1, "maximum": 4},
+    "country_risk_label": {"type": "string"},
+    "event_type": {"type": "string"},
+    "event_severity": {"type": "string", "enum": ["low", "medium", "high", "critical"]},
+    "event_status": {"type": "string", "enum": ["new", "ongoing", "developing", "easing", "ended", "unknown"]},
+    "title_cn": {"type": "string", "minLength": 1},
+    "title_original": {"type": "string"},
+    "summary_cn": {"type": "string"},
+    "event_time": {"type": "string", "format": "date-time"},
+    "published_time": {"type": "string", "format": "date-time"},
+    "location": {"type": "string"},
+    "china_related": {"type": "boolean"},
+    "verification_level": {"type": "string", "enum": ["not_checked", "insufficient_information", "single_source", "high_reliability_single_source", "direct_official_source", "cross_verified", "conflicting_reports"]},
+    "verification_label_cn": {"type": "string"},
+    "independent_source_count": {"type": "integer", "minimum": 0},
+    "source_links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["url", "source_name"],
+        "properties": {
+          "url": {"type": "string", "format": "uri"},
+          "source_name": {"type": "string"},
+          "source_group": {"type": "string"},
+          "language": {"type": "string"}
+        }
+      }
+    },
+    "potential_impact": {"type": "string"},
+    "progress": {"type": "string"},
+    "pipeline_version": {"type": "integer", "const": 2},
+    "schema_version": {"type": "string", "const": "2.0"},
+    "run_id": {"type": "string", "pattern": "^\\d{8}T\\d{6}\\+0800_[a-z0-9]{6}$"}
+  },
+  "additionalProperties": false
+}

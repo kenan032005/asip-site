@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://asip.local/schemas/source.schema.json",
+  "title": "Source",
+  "description": "统一 Source 分类模型。来源等级与核实状态分离；Reuters 不得为 official；ReliefWeb 为聚合平台，其真实来源属性读取原始发布机构。",
+  "type": "object",
+  "required": [
+    "source_id", "source_group", "source_name", "source_type",
+    "source_reliability_tier", "enabled", "tested"
+  ],
+  "properties": {
+    "source_id": {"type": "string", "minLength": 1},
+    "source_group": {"type": "string", "minLength": 1},
+    "source_name": {"type": "string", "minLength": 1},
+    "source_type": {"type": "string", "enum": ["government", "military_or_police", "international_media", "state_media", "local_media", "humanitarian", "international_organization", "ngo", "research", "social_media", "aggregation_platform", "other"]},
+    "source_reliability_tier": {"type": "string", "enum": ["tier_1", "tier_2", "tier_3", "lead_only"]},
+    "country_scope": {"type": "array", "items": {"type": "string"}},
+    "language": {"type": "array", "items": {"type": "string"}},
+    "is_direct_origin": {"type": "boolean"},
+    "is_republication_platform": {"type": "boolean"},
+    "enabled": {"type": "boolean"},
+    "tested": {"type": "boolean"},
+    "claim_origin_type": {"type": "string", "enum": ["direct_government_statement", "direct_military_statement", "direct_international_organization_report", "direct_humanitarian_report", "media_reporting", "ngo_report", "commentary", "unknown"]},
+    "url": {"type": "string", "format": "uri"},
+    "notes": {"type": "string"},
+    "legacy_payload": {"type": "object"}
+  },
+  "additionalProperties": true
+}

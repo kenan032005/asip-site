@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://asip.local/schemas/quarantine_record.schema.json",
+  "title": "QuarantineRecord",
+  "description": "规范隔离记录。不物理删除原始数据；quarantine 不与普通待核实池混用。",
+  "type": "object",
+  "required": [
+    "quarantine_id", "original_object_type", "original_id",
+    "reason_code", "reason_cn", "detected_at", "detected_by", "restorable"
+  ],
+  "properties": {
+    "quarantine_id": {"type": "string", "pattern": "^Q_[0-9a-f]{16}$"},
+    "original_object_type": {"type": "string", "enum": ["article", "event"]},
+    "original_id": {"type": "string", "minLength": 1},
+    "reason_code": {"type": "string", "enum": ["wrong_country", "not_security_relevant", "duplicate", "invalid_url", "missing_required_fields", "unsupported_language", "conflicting_data", "low_quality_source", "legacy_invalid", "schema_validation_failed", "other"]},
+    "reason_cn": {"type": "string", "minLength": 1},
+    "detected_at": {"type": "string", "format": "date-time"},
+    "detected_by": {"type": "string"},
+    "source_file": {"type": "string"},
+    "legacy_payload": {"type": "object"},
+    "review_status": {"type": "string", "enum": ["not_required", "pending_review", "approved", "rejected"]},
+    "restorable": {"type": "boolean"}
+  },
+  "additionalProperties": true
+}
