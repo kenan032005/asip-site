@@ -178,8 +178,8 @@ def deploy_gh_pages(dist_dir, token, source_commit):
         return (gh or "unknown"), ""
     except Exception as e:
         return None, str(e)
-    finally:
-        shutil.rmtree(tmp, ignore_errors=True)
+    # 注意：不删除 tmp（位于系统 %TEMP%，由系统清理）。
+    # 环境的批量删除保护会在 rmtree 大目录时直接终止进程，绝不可在此删除。
 
 
 def run_mode(mode, trigger):

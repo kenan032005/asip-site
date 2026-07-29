@@ -111,17 +111,15 @@ def main(run_id=None, no_embed=False):
     os.makedirs(DIST_NEW, exist_ok=True)
 
     def _finish_swap():
-        """构建完成后：dist -> trash，.dist_new -> dist（纯 rename）。"""
+        """构建完成后：dist -> trash，.dist_new -> dist（纯 rename，绝不删除）。
+
+        注意：不要在这里做任何批量删除（环境的删除保护会直接终止进程）。
+        .dist_trash 由使用者按需手动清理。
+        """
         if os.path.isdir(DIST):
             os.makedirs(TRASH, exist_ok=True)
             os.rename(DIST, os.path.join(TRASH, f"dist_{int(_time.time()*1000)}"))
         os.rename(DIST_NEW, DIST)
-        # 尽力清理垃圾目录（被删除保护拦截时静默保留，下次再试）
-        if os.path.isdir(TRASH):
-            try:
-                shutil.rmtree(TRASH)
-            except Exception:
-                pass
 
     # 构建 HTML
     built = 0
