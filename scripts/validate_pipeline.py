@@ -358,16 +358,28 @@ def main(run_id=None, dist_dir=None, stage="dist"):
         for e in summary.get(grp, []):
             if isinstance(e, dict) and e.get("event_id"):
                 summary_event_ids.add(e["event_id"])
-    event_by_id = {e.get("event_id"): e for e in events_list}
+    # Stage-2 第六节：summary 由 public/published_events.json 生成（EVT_ 新 ID），
+    # 追溯目标改为 public 层；public 缺失时回退 legacy events.json。
+    pub_doc = load_json(os.path.join(DATA_DIR, "public", "published_events.json"), {})
+    pub_items = pub_doc.get("items", []) if isinstance(pub_doc, dict) else []
+    trace_pool = pub_items if pub_items else events_list
+    event_by_id = {e.get("event_id"): e for e in trace_pool}
     untraceable = []
     for eid in summary_event_ids:
         ev = event_by_id.get(eid)
-        if ev is None or not _is_current_event(ev):
+        if ev is None:
+            untraceable.append(eid)
+            continue
+        # Stage-2 第七节：历史迁移保留事件（legacy_migration_preserved 且
+        # legacy_visibility）允许展示（不计统计），视为可追溯
+        hist_visible = (ev.get("legacy_migration_preserved") is True
+                        and ev.get("legacy_visibility") is True)
+        if not _is_current_event(ev) and not hist_visible:
             untraceable.append(eid)
     if untraceable:
         fail("V16-summary-trace", f"latest-summary 含 {len(untraceable)} 个无法在公开 events 中追溯或已隔离的 event_id: {untraceable[:5]}", is_critical=True)
     else:
-        ok("V16-summary-trace", f"latest-summary 的 {len(summary_event_ids)} 个事件均可追溯且通过闸门")
+        ok("V16-summary-trace", f"latest-summary 的 {len(summary_event_ids)} 个事件均可追溯（当前政策通过或历史保留可见）")
 
     # ── 17. Stage-2 canonical 与遗留视图一致性（canonical 存在时）────
     canon_dir = os.path.join(DATA_DIR, "canonical")

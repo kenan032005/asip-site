@@ -286,11 +286,33 @@ def add_log_step(log, name, status, started_at="", completed_at="", details=None
     })
 
 
+def redact_local_paths(text):
+    """脱敏本地绝对路径（第九节：仓库任何文件不得包含用户名/机器路径）。
+
+    将形如 C:\\Users\\<name>\\... 或 /Users/<name>/... 的本地路径统一替换为
+    <local-path-redacted>；仓库根路径替换为 <repo>。
+    """
+    import re as _re
+    root_str = str(Path(__file__).resolve().parent.parent)
+    for variant in (json.dumps(root_str)[1:-1],       # JSON 转义（双反斜杠）
+                    root_str,                          # 原始反斜杠
+                    root_str.replace("\\", "/")):     # 正斜杠
+        if variant:
+            text = text.replace(variant, "<repo>")
+    text = _re.sub(r"[A-Za-z]:(?:\\\\|\\|/)+Users(?:\\\\|\\|/)+[^\"\s]*",
+                   "<local-path-redacted>", text)
+    text = _re.sub(r"/(?:home|Users)/[A-Za-z0-9_.-]+/[^\"\s]*",
+                   "<local-path-redacted>", text)
+    return text
+
+
 def save_run_log(log, run_id):
     log["completed_at"] = bj_iso()
     LOGS_DIR.mkdir(parents=True, exist_ok=True)
     path = LOGS_DIR / f"pipeline_{run_id}.json"
-    path.write_text(json.dumps(log, ensure_ascii=False, indent=2), encoding="utf-8")
+    # 第九节：写盘前统一脱敏本地绝对路径
+    payload = redact_local_paths(json.dumps(log, ensure_ascii=False, indent=2))
+    path.write_text(payload, encoding="utf-8")
     return str(path)
 
 

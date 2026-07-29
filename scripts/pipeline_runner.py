@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-pipeline_runner.py —— ASIP Stage-1 完整主链路编排器（零依赖，跨平台）。
+pipeline_runner.py —— ASIP Stage-2 完整主链路编排器（零依赖，跨平台）。
 
-一次运行执行完整流程：
-  git pull → 单元测试 → 数据汇总(status+summary+风险+类型) → [日报] →
-  数据校验 → 提交 main → 构建 dist → dist 校验 → 部署 gh-pages → 线上验证 → 日志
+一次运行执行完整流程（canonical-first）：
+  锁 → git pull --rebase（失败即中止）→ run_id → 单元测试（Stage1+Stage2，
+  失败即中止）→ canonical 发布语义与风险统一（publication_policy →
+  public → legacy 单向导出）→ build_summary（读 public）→ [日报] →
+  validate_stage2（42 项）→ validate_pipeline(source) → 提交 main →
+  构建 dist → validate_pipeline(dist) → 推送 main → 部署 gh-pages →
+  线上轮询验证 run_id → 结构化日志（本地路径已脱敏）
 
 用法：
   python scripts/pipeline_runner.py --mode {incremental|daily|full|validate-only} [--trigger {manual|scheduled|pre_daily}]
@@ -43,6 +47,9 @@ from pipeline_core import (
 # 跨平台：使用当前 Python 与 PATH 中的 git（禁止硬编码 Windows 绝对路径）
 PYTHON = sys.executable
 GIT = shutil.which("git") or "git"
+
+# 第二阶段纪律：git pull --rebase 失败必须中止本次运行（禁止基于过期本地状态继续发布）
+PULL_FAILURE_BLOCKS = True
 
 DEPLOY_TOKEN_FILE = ROOT / "deploy.token"
 REPO_URL = "https://github.com/kenan032005/asip-site.git"
@@ -203,7 +210,7 @@ def run_mode(mode, trigger):
     started = bj_iso()
 
     print("=" * 64)
-    print(f"ASIP Stage-1 Pipeline Runner")
+    print(f"ASIP Stage-2 Pipeline Runner")
     print(f"  run_id : {run_id}")
     print(f"  mode   : {mode}")
     print(f"  trigger: {trigger}")
@@ -217,31 +224,52 @@ def run_mode(mode, trigger):
         save_run_log(log, run_id)
         return 1
     try:
-        # 1) git pull --rebase
+        # 1) git pull --rebase（失败即中止，禁止基于过期本地状态发布）
         print("\n[1] git pull --rebase origin main ...")
         rc, out, err = git(["pull", "--rebase", "origin", "main"], timeout=150)
         add_log_step(log, "git_pull", "success" if rc == 0 else "failed",
                      details={"output": out[-200:], "error": err[-200:]})
-        if rc != 0:
-            print(f"  pull: ERR (继续，以本地为准) {err[-150:]}")
+        if rc != 0 and PULL_FAILURE_BLOCKS:
+            print(f"  ⛔ pull 失败，中止本次运行: {err[-200:]}")
+            log["final_status"] = "failed"
+            save_run_log(log, run_id)
+            return 1
 
-        # 2) 单元测试
-        print("\n[2] unit tests ...")
+        # 2) 单元测试（Stage-1 + Stage-2，全部通过才继续）
+        print("\n[2] unit tests (stage1 + stage2) ...")
         tests_ok = True
         tests_out = ""
-        for test_file in ("test_country.py", "test_stage1_pipeline.py"):
+        for test_file in ("test_country.py", "test_stage1_pipeline.py",
+                          "test_stage2_schema_repo.py",
+                          "test_repository_integrity.py",
+                          "test_no_local_paths.py"):
             rc, out, err = run_cmd([PYTHON, str(HERE / "tests" / test_file)], timeout=180)
             ok = rc == 0 and "FAIL=0" in out  # 以测试脚本的结果行为准（rc=0 且 FAIL=0）
             tests_ok = tests_ok and ok
             tests_out += f"[{test_file}] rc={rc} " + (out + err)[-200:] + "\n"
-        out, err = tests_out, ""
         add_log_step(log, "unit_tests", "success" if tests_ok else "failed",
-                     details={"output": tests_out[-800:]})
+                     details={"output": tests_out[-1200:]})
         print(f"  tests: {'OK' if tests_ok else 'FAIL'}")
         if not tests_ok:
-            print((out + err)[-400:])
+            print(tests_out[-600:])
+            log["final_status"] = "failed"
+            save_run_log(log, run_id)
+            return 1
 
-        # 3) 数据汇总（status + summary + 风险修正 + 类型标准化）
+        # 2.5) canonical 发布语义 + 风险统一 + public/legacy 单向导出
+        print("\n[2.5] apply_publication_semantics (canonical -> public -> legacy) ...")
+        rc, out, err = run_cmd([PYTHON, str(HERE / "data" / "apply_publication_semantics.py"),
+                                "--run-id", run_id], timeout=180)
+        add_log_step(log, "publication_semantics", "success" if rc == 0 else "failed",
+                     details={"output": out[-400:], "error": err[-300:]})
+        print(f"  semantics+export: {'OK' if rc == 0 else 'ERR'}")
+        if rc != 0:
+            print((out + err)[-400:])
+            log["final_status"] = "failed"
+            save_run_log(log, run_id)
+            return 1
+
+        # 3) 数据汇总（读取 public/published_events.json）
         print("\n[3] build_summary ...")
         rc, out, err = run_cmd([PYTHON, str(HERE / "build_summary.py"), "--run-id", run_id], timeout=120)
         add_log_step(log, "build_summary", "success" if rc == 0 else "failed", details={"output": out[-400:]})
@@ -266,6 +294,19 @@ def run_mode(mode, trigger):
         else:
             print("\n[4] skip generate_reports (incremental/validate-only)")
 
+        # 4.5) Stage-2 规范数据层校验（42 项，失败即中止）
+        print("\n[4.5] validate_stage2 (42 checks) ...")
+        rc, out, err = run_cmd([PYTHON, str(HERE / "data" / "validate_stage2.py")], timeout=180)
+        s2_ok = rc == 0
+        add_log_step(log, "validate_stage2", "success" if s2_ok else "failed",
+                     details={"output": out[-800:]})
+        print(f"  validate_stage2: {'OK' if s2_ok else 'FAIL (CRITICAL)'}")
+        if not s2_ok:
+            print(out[-1000:])
+            log["final_status"] = "failed"
+            save_run_log(log, run_id)
+            return 1
+
         # 5) 数据校验（源）
         print("\n[5] validate_pipeline (source) ...")
         rc, out, err = run_cmd([PYTHON, str(HERE / "validate_pipeline.py"), "--run-id", run_id,
@@ -281,7 +322,7 @@ def run_mode(mode, trigger):
 
         # 6) 提交 main（数据）
         print("\n[6] git commit main (data) ...")
-        data_hash, cerr = git_commit(f"data: Stage-1 run_id={run_id} (status+summary+risk+types)")
+        data_hash, cerr = git_commit(f"data: Stage-2 run_id={run_id} (canonical->public->legacy+summary)")
         add_log_step(log, "git_commit_data", "success" if data_hash else "failed",
                      details={"commit": data_hash, "error": cerr})
         print(f"  data commit: {data_hash or cerr}")
@@ -391,7 +432,7 @@ def run_mode(mode, trigger):
 
 
 def main():
-    ap = argparse.ArgumentParser(description="ASIP Stage-1 Pipeline Runner")
+    ap = argparse.ArgumentParser(description="ASIP Stage-2 Pipeline Runner")
     ap.add_argument("--mode", choices=["incremental", "daily", "full", "validate-only"],
                     default="full", help="运行模式")
     ap.add_argument("--trigger", choices=["manual", "scheduled", "pre_daily"],

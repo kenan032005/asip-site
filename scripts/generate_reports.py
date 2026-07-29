@@ -228,7 +228,13 @@ def main():
 
     run_id = args.run_id or ""
     countries = load_json(os.path.join(DATA, "countries.json"), {}).get("countries", [])
-    events_all = load_json(os.path.join(DATA, "events.json"), {}).get("events", [])
+    # Stage-2 最终收尾：唯一事件来源为 Public 导出（不再读遗留事件池）
+    _pub_items = load_json(os.path.join(DATA, "public", "published_events.json"), {}).get("items", [])
+    events_all = []
+    for _p in _pub_items:
+        _e = dict(_p)
+        _e["country"] = _p.get("country_cn", "") or _p.get("country", "")
+        events_all.append(_e)
     daily = [c for c in countries if c.get("has_daily")]
 
     print("日报日期（北京）：", date_str, "窗口：", win_start, "→", win_end)

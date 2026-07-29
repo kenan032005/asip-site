@@ -147,10 +147,14 @@ def main(run_id=None, no_embed=False):
     if os.path.isdir(ASSETS):
         shutil.copytree(ASSETS, os.path.join(DIST_NEW, "assets"))
     if os.path.isdir(DATA_DIR):
-        # 排除内部文件：backup/（本地备份不发布）、.pipeline.lock（运行锁）
+        # 排除内部文件：backup/（本地备份不发布）、.pipeline.lock（运行锁）、
+        # 隐藏目录/文件（.backups、.trash_* 等本地回滚产物一律不发布）
         shutil.copytree(
             DATA_DIR, os.path.join(DIST_NEW, "data"),
-            ignore=shutil.ignore_patterns("backup", ".pipeline.lock", "raw_candidates.json", "pending_events.json"),
+            ignore=shutil.ignore_patterns(
+                "backup", ".pipeline.lock", "raw_candidates.json",
+                "pending_events.json", ".*",
+            ),
         )
     if os.path.isdir(REPORTS):
         shutil.copytree(REPORTS, os.path.join(DIST_NEW, "reports"))
@@ -170,7 +174,7 @@ def main(run_id=None, no_embed=False):
     # 纯改名交换：.dist_new -> dist
     _finish_swap()
 
-    print(f"构建完成 -> {DIST}")
+    print(f"构建完成 -> {os.path.relpath(DIST, ROOT)}")  # 相对路径（第九节：日志不得含本地绝对路径）
     print(f"  HTML: {built} 个页面")
     print(f"  ASIP_BUILD_META: 已注入")
     print(f"  内联数据快照: {not no_embed}")

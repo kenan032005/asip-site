@@ -48,7 +48,7 @@ asip-site/
 │   ├── pipeline_runner.py   ★ 统一编排器（唯一运行入口，见第十二节）
 │   ├── pipeline_core.py     ★ 时区/run_id/锁/统计/闸门 公共库
 │   ├── validate_pipeline.py ★ 分阶段校验器（失败非零退出码）
-│   ├── tests/               单元与回归测试（test_country / test_stage1_pipeline / test_stage2_schema_repo）
+│   ├── tests/               单元与回归测试（test_country / test_stage1_pipeline / test_stage2_schema_repo / test_repository_integrity / test_no_local_paths）
 │   ├── data/                规范数据层模块：repository（唯一读写入口）/ identifiers（稳定 SHA-256 ID）/ normalizers / publication_policy（确定性发布闸门）/ schema_validator / migrate_stage2 / compatibility_export / validate_stage2 / verify_idempotency
 │   ├── collect.py           采集流水线（规范化→去重→核实→翻译，由编排器调用；写入 canonical，不直接写旧池）
 │   ├── normalize.py         字段规范化与校验
@@ -125,19 +125,17 @@ python scripts/build_site.py
 
 ## 五、手动更新方法
 
+**唯一运行入口是统一编排器**（数据文件 `events.json` 等均为单向生成视图，禁止手工编辑）：
+
 ```bash
-# 1) 维护数据（编辑 data/*.json 或用脚本处理 events.json）
-python scripts/collect.py --write     # 运行处理流水线并写回
+# 完整链路：pull → 测试 → 语义/导出 → 汇总 → 日报 → 42 项校验 → 构建 → 部署 → 线上验证
+python scripts/pipeline_runner.py --mode full --trigger manual
 
-# 2) 生成日报
-python scripts/generate_reports.py
+# 仅校验（不提交、不部署）
+python scripts/pipeline_runner.py --mode validate-only
 
-# 3) 构建并本地预览
-python scripts/build_site.py
+# 本地预览
 python server.py
-
-# 4) 推送到 GitHub（首次初始化见第七节）
-git add -A && git commit -m "更新数据" && git push
 ```
 
 ---
@@ -207,9 +205,9 @@ python tools/setup_gh_pages.py
 
 ---
 
-## 十、已知限制（第一阶段）
+## 十、已知限制
 
-- 实时信息采集适配器尚未实现；当前 `events.json` 为**演示占位数据**（已标注 `is_demo`，上线前须清空并置 `status.demo_mode=false`）。
+- 线上事件为**历史迁移保留数据**（`legacy_migration_preserved=true`，未按当前发布政策重新核实，不计入 24h/7d 统计）；当前政策通过（`current_policy_passed=true`）事件数为 0，待实时采集与核实链路产出新事件后增长。
 - 日报在"无事件"时按文档生成默认表述，未做自然语言研判（后续接入经授权的摘要能力）。
 - 传染病风险模块仅占位，未接入任何疫情数据源。
 - 六国日报的"持续跟踪/趋势判断/建议"为模板化内容，真实运行需结合多日事件与人工研判。
@@ -260,7 +258,7 @@ python tools/setup_gh_pages.py
 - **唯一入口**：手动与自动任务均只调用
   `python scripts/pipeline_runner.py --mode {incremental|daily|full} --trigger {manual|scheduled}`。
   旧 `collect.py` 直跑链路已废弃（自动任务不再调用，避免覆盖新数据）。
-- **链路**：git_pull → 单元测试 → 数据汇总 → 日报生成 → source 校验 → 提交 main → 构建 → dist 校验 → 推送 main → 部署 gh-pages → **线上验证**（轮询线上 status.json，run_id 一致才算成功）。
+- **链路**：git_pull → 单元测试 → 数据汇总 → 日报生成 → source 校验 → 提交 main → 构建 → dist 校验 → 推送 main → 部署 gh-pages → **线上验证**（轮询线上 status.json，run_id 一致才算成功）。（第二阶段收尾后链路已升级为 canonical-first，见第十四节。）
 - **失败即失败**：任一步骤失败/校验不通过/线上 run_id 不一致 → 退出码非零、不部署、不覆盖上一版。
 - **run_id**：`YYYYMMDDTHHMMSS+0800_xxxxxx`，全链路（main 提交、gh-pages 提交、线上 JSON、运行日志）一致可追溯。
 - 运行日志：`logs/pipeline_<run_id>.json`（含每步状态、main/gh-pages commit、线上验证时间）。
@@ -303,7 +301,7 @@ python tools/setup_gh_pages.py
 ### 13.1 三个检查点（独立提交，任一失败不进入下一阶段）
 - **2A 数据结构与仓储（已提交）**：`scripts/data/` 规范层（repository / identifiers / normalizers / publication_policy / schema_validator）+ `schemas/*.schema.json` + 单元测试 57 项（`test_stage2_schema_repo`）。
 - **2B 迁移与兼容（已提交）**：`scripts/data/migrate_stage2.py` 旧池→canonical 无损迁移；`compatibility_export.py` canonical→旧池单向生成；幂等验证 8/8 文件 SHA-256 两次完全一致、计数稳定（articles=328 / clusters=143 / quarantine=53 / published=143）；可回滚。
-- **2C 流水线接入（本阶段）**：`collect.py` / `promote_events.py` / `build_summary.py` 改为经 `Repository` 读写 canonical，发布判定统一走 `publication_policy.evaluate()`；新增 `validate_stage2.py`（25 项）；本 README 同步更新。
+- **2C 流水线接入（本阶段）**：`collect.py` / `promote_events.py` / `build_summary.py` 改为经 `Repository` 读写 canonical，发布判定统一走 `publication_policy.evaluate()`；新增 `validate_stage2.py`（25 项，收尾阶段扩至 42 项）；本 README 同步更新。
 
 ### 13.2 三层数据架构（严格单向）
 ```
@@ -339,7 +337,7 @@ data/*.json      旧池（events / pending_events / raw_candidates / quarantine_
 ### 13.6 校验与回归（全绿）
 | 套件 | 项 | 结果 |
 |---|---|---|
-| `validate_stage2.py` | 25 项（结构/ Schema / ID / 发布策略 / 来源分级 / 单向生成 / 1:1 / 幂等） | ✅ 25/25 |
+| `validate_stage2.py` | 42 项（结构/ Schema / ID / 发布策略 / 来源分级 / 单向生成 / 1:1 / 幂等 + 收尾 17 项，见第十四节） | ✅ 42/42 |
 | `verify_idempotency.py` | 8 文件两次 apply SHA-256 一致 | ✅ PASS |
 | `test_stage2_schema_repo`（2A） | 仓储/ID/归一化/发布闸门/导出 | ✅ 57/57 |
 | `test_stage1_pipeline`（第一阶段） | run_id/时区/窗口/统计/锁/校验退出码 | ✅ 36/36 |
@@ -348,4 +346,26 @@ data/*.json      旧池（events / pending_events / raw_candidates / quarantine_
 
 ### 13.7 范围边界（本阶段不做）
 - 不新增信息源、不改 Reuters/新华社/GDELT 采集策略、不引入 Hy3 翻译/摘要、不做自动二次核实引擎、不改首页/国家页视觉、不新增国家、不改日报正文、不等待定时任务、不批量重新抓取。
-- 验收达到 25 项指标即停止，**不进入第三阶段**。
+- 验收达到校验指标即停止，**不进入第三阶段**。
+
+---
+
+## 十四、第二阶段最终收尾（2026-07-30）
+
+在第十三节基础上关闭全部遗留问题，形成 canonical-first 的完整闭环：
+
+### 14.1 仓储层强制约束（Commit：Stage 2A Fix）
+- **保存前强制 Schema 校验**：`Repository` 所有保存路径（含临时文件回读复验）强制校验；100 条中 1 条非法 → 整个保存失败且原文件字节不变（`RepositorySchemaError`）。
+- **事务式双向关联**：`link_article_to_event` 一次事务更新 Article.linked_event_id 与 Event.article_ids，任一侧失败则两文件均回滚；重复关联不改变文件内容。
+- **来源业务规则**（`source_rules.py`）：Reuters/新华社单源转载 ≠ 官方直接来源；ReliefWeb=转载平台；`save_sources` 违规即拒绝。
+- 测试：`test_repository_integrity.py` 28/28。
+
+### 14.2 canonical-first 发布链路（Commit：Stage 2 Final）
+- **public 为唯一展示来源**：`build_summary.py` / `generate_reports.py` 只读 `data/public/published_events.json` 与 `current_metrics.json`，不再读取遗留 `events.json`。
+- **历史迁移发布语义**（`apply_publication_semantics.py`）：未达当前政策的迁移事件标记
+  `legacy_migration_preserved=true / legacy_visibility=true / current_policy_passed=false / quality_gate_passed=false`，
+  原因="历史迁移保留，未按当前政策重新核实"；保持可见但**不计入 24h/7d/首页统计**。
+- **22 国风险统一**：以 `countries.json` 为准（4=极高/3=高/2=中/1=低），cluster 顶层与 legacy_payload 同步修正。
+- **路径卫生**：日志/迁移状态中的本机绝对路径已清洗；`save_run_log` 自动脱敏；`test_no_local_paths.py` 持续扫描 main/dist/public。
+- **编排器升级**：`pipeline_runner.py` 为 Stage-2 编排器——pull 失败即中止（`PULL_FAILURE_BLOCKS`）、5 套测试全过才继续、语义与导出入链、`validate_stage2`（42 项）失败即中止、提交信息 `Stage-2 run_id=`。
+- **校验强化**：`validate_stage2.py` 从 25 项扩至 **42 项**（S26-S42：仓储强制校验、双向关联、public 溯源、同批导出、统计口径、历史语义、风险一致、业务属性、legacy_payload 不外泄、路径卫生、链路静态检查、run_id 全链路一致）。

@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-validate_stage2.py —— ASIP Stage-2 规范数据层校验（25 项检查，零依赖）。
+validate_stage2.py —— ASIP Stage-2 规范数据层校验（42 项检查，零依赖）。
 
 范围：canonical 数据完整性、Schema 合规、ID 规则、发布政策一致性、
-来源分级与核实级别分离、遗留视图单向生成一致性、迁移状态与幂等证据。
+来源分级与核实级别分离、遗留视图单向生成一致性、迁移状态与幂等证据；
+第二阶段收尾新增（S26-S42）：仓库层强制校验、双向关联、canonical-first
+管线链路、发布语义、风险统一、路径卫生、run_id 一致性等 17 项。
 
 用法：
   python scripts/data/validate_stage2.py
@@ -50,7 +52,7 @@ def load(path):
 
 def main():
     print("=" * 60)
-    print("ASIP Stage-2 规范数据层校验（25 项）")
+    print("ASIP Stage-2 规范数据层校验（42 项）")
     print("=" * 60)
 
     # ── S01-S04 文件存在且 JSON 合法 ──
@@ -121,11 +123,13 @@ def main():
     # ── S14 发布状态枚举与闸门 ──
     bad_ps = [c.get("event_id") for c in clusters
               if c.get("publication_status") not in PUBLICATION_STATUS_ENUMS]
+    # 历史迁移保留事件（legacy_migration_preserved）按第七节语义豁免质量闸门
     gate_bad = [c.get("event_id") for c in clusters
                 if c.get("publication_status") in ("publishable", "published")
-                and not c.get("quality_gate_passed")]
+                and not c.get("quality_gate_passed")
+                and not c.get("legacy_migration_preserved")]
     check("S14", not bad_ps and not gate_bad,
-          "publication_status 枚举合法，publishable/published 均通过质量闸门"
+          "publication_status 枚举合法，publishable/published 均通过质量闸门（历史保留豁免）"
           if not bad_ps and not gate_bad
           else f"非法状态 {bad_ps[:3]} / 未过闸 {gate_bad[:3]}")
 
@@ -205,6 +209,171 @@ def main():
     check("S25", st.get("error_counts") == 0 and st.get("idempotent") is True
           and rep.get("identical") is True,
           "迁移无错误（error_counts=0）且幂等验证通过（idempotency_report.identical=true）")
+
+    # ════════ 第二阶段收尾新增检查 S26-S42 ════════
+
+    def read_text(path):
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                return f.read()
+        except Exception:
+            return ""
+
+    WIN_PATH = re.compile(r"[A-Za-z]:(?:\\\\|\\|/)+Users(?:\\\\|\\|/)+[A-Za-z0-9_.-]+")
+    POSIX_PATH = re.compile(r"/(?:home|Users)/[A-Za-z0-9_.-]+/")
+
+    def has_local_path(text):
+        return bool(WIN_PATH.search(text) or POSIX_PATH.search(text))
+
+    # ── S26 Repository 保存路径强制 Schema 校验（源码静态检查）──
+    repo_src = read_text(os.path.join(SCRIPTS, "data", "repository.py"))
+    check("S26", "SCHEMA_FOR" in repo_src and "_revalidate" in repo_src
+          and "validate_instance" in repo_src and "RepositorySchemaError" in repo_src,
+          "repository.py 保存前强制调用 Schema 校验（SCHEMA_FOR/_revalidate/validate_instance）")
+
+    # ── S27 article↔cluster 双向关联一致 ──
+    cl_by_id = {c.get("event_id"): c for c in clusters}
+    bad_link = []
+    for a in arts:
+        le = a.get("linked_event_id")
+        if le:
+            c = cl_by_id.get(le)
+            if not c or a.get("article_id") not in c.get("article_ids", []):
+                bad_link.append(a.get("article_id"))
+    for c in clusters:
+        for x in c.get("article_ids", []):
+            aa = next((a for a in arts if a.get("article_id") == x), None)
+            if aa is not None and aa.get("linked_event_id") not in (None, "", c.get("event_id")):
+                bad_link.append(x)
+    check("S27", not bad_link,
+          "article.linked_event_id 与 cluster.article_ids 双向一致" if not bad_link
+          else f"{len(bad_link)} 处双向关联不一致，如 {bad_link[:3]}")
+
+    # ── S28 public 仅由 canonical 生成（event_id 全部来自 clusters）──
+    eid_set = {c.get("event_id") for c in clusters}
+    orphan_pub = [p.get("event_id") for p in pubs if p.get("event_id") not in eid_set]
+    check("S28", not orphan_pub,
+          "public/published_events 每条均来自 canonical clusters" if not orphan_pub
+          else f"{len(orphan_pub)} 条 public 事件不在 canonical 中，如 {orphan_pub[:3]}")
+
+    # ── S29 legacy 三文件与 public 同批导出（run_id 一致）──
+    pub_rid = (pub_doc or {}).get("run_id")
+    legacy_rids = {}
+    for fname in ("events.json", "pending_events.json", "raw_candidates.json"):
+        legacy_rids[fname] = (load(os.path.join(DATA, fname)) or {}).get("run_id")
+    same_batch = pub_rid and all(v == pub_rid for v in legacy_rids.values())
+    check("S29", same_batch,
+          f"legacy 三文件与 public 同批导出（run_id={pub_rid}）" if same_batch
+          else f"run_id 不一致: public={pub_rid} legacy={legacy_rids}")
+
+    # ── S30 当前统计只计 current_policy_passed=true ──
+    st_doc = load(os.path.join(DATA, "status.json")) or {}
+    n_cur = sum(1 for p in pubs if p.get("current_policy_passed") is True)
+    stats_ok = (st_doc.get("current_event_count", -1) <= n_cur
+                and st_doc.get("events_24h", -1) <= n_cur
+                and st_doc.get("events_7d", -1) <= n_cur)
+    check("S30", stats_ok,
+          f"status 统计口径 ≤ 当前政策通过事件数（current_policy_passed={n_cur}，"
+          f"current_event_count={st_doc.get('current_event_count')}）")
+
+    # ── S31 历史保留事件不得标记质量闸门/当前政策通过 ──
+    bad_hist = [p.get("event_id") for p in pubs
+                if p.get("legacy_migration_preserved") is True
+                and (p.get("quality_gate_passed") is True
+                     or p.get("current_policy_passed") is True)]
+    bad_hist += [c.get("event_id") for c in clusters
+                 if c.get("legacy_migration_preserved") is True
+                 and c.get("current_policy_passed") is True]
+    check("S31", not bad_hist,
+          "历史迁移保留事件均未标记 quality_gate_passed/current_policy_passed"
+          if not bad_hist else f"违规 {bad_hist[:3]}")
+
+    # ── S32 22 国风险等级/标签与 countries.json 一致 ──
+    RISK_LABEL = {4: "极高", 3: "高", 2: "中", 1: "低"}
+    countries = (load(os.path.join(DATA, "countries.json")) or {}).get("countries", [])
+    risk_map = {c.get("cn"): int(c.get("risk_level") or 0)
+                for c in countries if c.get("cn")}
+    bad_risk = []
+    for p in pubs:
+        cn = p.get("country_cn")
+        lv = risk_map.get(cn)
+        if lv:
+            if p.get("country_risk_level") != lv or \
+               p.get("country_risk_label") != RISK_LABEL.get(lv, ""):
+                bad_risk.append((p.get("event_id"), cn))
+    check("S32", risk_map and not bad_risk,
+          f"public 事件风险等级/标签与 countries.json 全部一致（{len(risk_map)} 国映射）"
+          if risk_map and not bad_risk else f"{len(bad_risk)} 条不一致，如 {bad_risk[:3]}")
+
+    # ── S33 Reuters/Xinhua/ReliefWeb 业务属性合规（source_rules）──
+    try:
+        from data.source_rules import validate_source_business_rules
+        src_errs = []
+        for s in srcs:
+            src_errs.extend(validate_source_business_rules(s))
+        check("S33", not src_errs,
+              "sources.json 全部通过来源业务规则（Reuters/Xinhua/ReliefWeb）"
+              if not src_errs else f"{len(src_errs)} 处违规，如 {src_errs[:2]}")
+    except Exception as e:
+        check("S33", False, f"source_rules 导入/执行失败: {e}")
+
+    # ── S34 public 不含 legacy_payload ──
+    has_lp = [p.get("event_id") for p in pubs if "legacy_payload" in p]
+    check("S34", not has_lp,
+          "public/published_events 不含 legacy_payload（内部字段不外泄）"
+          if not has_lp else f"{len(has_lp)} 条含 legacy_payload，如 {has_lp[:3]}")
+
+    # ── S35 public 目录无本地机器路径 ──
+    pub_dirty = []
+    if os.path.isdir(PUBLIC):
+        for fn in os.listdir(PUBLIC):
+            if fn.endswith(".json") and has_local_path(read_text(os.path.join(PUBLIC, fn))):
+                pub_dirty.append(fn)
+    check("S35", not pub_dirty,
+          "data/public/ 无本地机器路径" if not pub_dirty else f"含路径: {pub_dirty}")
+
+    # ── S36 migration_state.json 无本地机器路径 ──
+    check("S36", not has_local_path(read_text(os.path.join(CANON, "migration_state.json"))),
+          "canonical/migration_state.json 无本地机器路径")
+
+    # ── S37 build_summary 不再读取遗留 events.json ──
+    bs_src = read_text(os.path.join(SCRIPTS, "build_summary.py"))
+    check("S37", "published_events.json" in bs_src
+          and "load_events" not in bs_src
+          and 'os.path.join(DATA_DIR, "events.json")' not in bs_src,
+          "build_summary.py 从 public/published_events.json 读取（不读遗留 events.json）")
+
+    # ── S38 generate_reports 不再读取遗留 events.json ──
+    gr_src = read_text(os.path.join(SCRIPTS, "generate_reports.py"))
+    check("S38", "published_events.json" in gr_src
+          and 'os.path.join(DATA_DIR, "events.json")' not in gr_src
+          and '"events.json"' not in gr_src,
+          "generate_reports.py 从 public/published_events.json 读取（不读遗留 events.json）")
+
+    # ── S39 pipeline_runner 编排中调用 validate_stage2 ──
+    pr_src = read_text(os.path.join(SCRIPTS, "pipeline_runner.py"))
+    check("S39", "validate_stage2" in pr_src,
+          "pipeline_runner.py 调用 validate_stage2（第二阶段校验入链）")
+
+    # ── S40 pull 失败即中止（不允许"以本地为准"继续）──
+    check("S40", "PULL_FAILURE_BLOCKS = True" in pr_src and "以本地为准" not in pr_src,
+          "pipeline_runner.py git pull 失败即中止（PULL_FAILURE_BLOCKS）")
+
+    # ── S41 提交/日志信息使用 Stage-2 标记 ──
+    check("S41", "Stage-2 run_id=" in pr_src and "Stage-1 run_id=" not in pr_src,
+          "pipeline_runner.py 提交信息为 Stage-2 run_id=（无 Stage-1 残留）")
+
+    # ── S42 main/dist/public run_id 一致 ──
+    main_rid = st_doc.get("run_id")
+    dist_st = load(os.path.join(ROOT, "dist", "data", "status.json"))
+    dist_rid = (dist_st or {}).get("run_id") if dist_st else main_rid
+    m_doc = load(os.path.join(PUBLIC, "current_metrics.json")) or {}
+    pub_rid2 = m_doc.get("run_id")
+    rid_ok = main_rid and dist_rid == main_rid and pub_rid2 == main_rid and pub_rid == main_rid
+    check("S42", rid_ok,
+          f"main/dist/public run_id 一致（{main_rid}）" if rid_ok
+          else f"run_id 不一致: main={main_rid} dist={dist_rid} "
+               f"metrics={pub_rid2} published={pub_rid}")
 
     # ── 总结 ──
     n_fail = sum(1 for _, okf, _, crit in results if not okf and crit)

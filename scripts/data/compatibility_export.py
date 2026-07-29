@@ -76,6 +76,12 @@ def _published_from_cluster(cluster: dict, articles_by_id: dict) -> dict:
         "source_links": source_links,
         "potential_impact": cluster.get("potential_impact", ""),
         "progress": cluster.get("current_progress", ""),
+        # Stage-2 最终收尾：发布语义标记（历史迁移保留 vs 当前政策通过）
+        "current_policy_passed": bool(cluster.get("current_policy_passed", False)),
+        "quality_gate_passed": bool(cluster.get("quality_gate_passed", False)),
+        "legacy_migration_preserved": bool(cluster.get("legacy_migration_preserved", False)),
+        "legacy_visibility": bool(cluster.get("legacy_visibility", True)),
+        "publication_reason": cluster.get("publication_reason", ""),
         "pipeline_version": 2,
         "schema_version": "2.0",
         "run_id": cluster.get("run_id", ""),
@@ -149,6 +155,10 @@ def export_all(repo, run_id: str = ""):
         "published_events": len(published),
         "quarantine": len(quarantine),
         "publishable_clusters": sum(1 for c in clusters if c.get("publication_status") in ("publishable", "published")),
+        # Stage-2 最终收尾：供 build_summary 使用（不再读遗留事件池）
+        "pending_articles": len(pending),
+        "current_policy_passed_events": sum(1 for c in clusters if c.get("current_policy_passed") is True),
+        "legacy_migration_preserved_events": sum(1 for c in clusters if c.get("legacy_migration_preserved") is True),
     }
     repo.save_current_metrics(metrics, run_id)
 

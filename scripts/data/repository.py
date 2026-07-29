@@ -319,7 +319,11 @@ class Repository:
         return {"added": 0, "modified": 0, "skipped": 0, "failed": 0}
 
     def _write_validated_if_changed(self, path: Path, env: dict, schema_name: str) -> bool:
-        """信封级免重写（幂等）；需要写入时先回读校验再原子替换。返回是否写入。"""
+        """信封级免重写（同 run_id 内幂等）；需要写入时先回读校验再原子替换。返回是否写入。
+
+        跳过条件：内容（去除易变字段）未变 且 信封 run_id 一致。
+        run_id 变化时刷新信封（第六节：main/dist/public run_id 必须一致）。
+        """
         p = Path(path)
         if p.exists():
             try:
@@ -327,16 +331,20 @@ class Repository:
                 strip = lambda d: json.dumps(
                     {k: v for k, v in d.items() if k not in self.VOLATILE_KEYS},
                     sort_keys=True, ensure_ascii=False)
-                if strip(old) == strip(env):
+                if strip(old) == strip(env) and \
+                        old.get("run_id") == env.get("run_id"):
                     return False
             except Exception:
                 pass
         self._atomic_write(p, env, post_check=lambda tmp: self._revalidate(tmp, schema_name))
         return True
 
-    # ── 信封级免重写（幂等）────────────────────────────
+    # ── 信封级免重写（同 run_id 内幂等）────────────────
     def write_if_changed(self, path: Path, env: dict) -> bool:
-        """仅当去除易变字段后的内容发生变化时才写入。返回是否写入。"""
+        """内容（去除易变字段）未变且信封 run_id 一致时跳过写入。返回是否写入。
+
+        run_id 变化时刷新信封 run_id（第六节：run_id 全链路一致）。
+        """
         p = Path(path)
         if p.exists():
             try:
@@ -344,7 +352,8 @@ class Repository:
                 strip = lambda d: json.dumps(
                     {k: v for k, v in d.items() if k not in self.VOLATILE_KEYS},
                     sort_keys=True, ensure_ascii=False)
-                if strip(old) == strip(env):
+                if strip(old) == strip(env) and \
+                        old.get("run_id") == env.get("run_id"):
                     return False
             except Exception:
                 pass
@@ -408,12 +417,19 @@ class Repository:
                 local["added"] += 1
                 self.log["added"] += 1
                 new_map[iid] = it
-        # 内容完全未变（无新增/修改且 ID 集合一致）时不重写文件，
-        # 避免信封 run_id/updated_at 或传入顺序差异破坏字节级幂等。
+        # 内容完全未变（无新增/修改且 ID 集合一致）且信封 run_id 未变时
+        # 不重写文件——同一 run_id 内保证字节级幂等；run_id 变化则刷新
+        # 信封 run_id（第六节：main/dist/public run_id 必须一致）。
         if (local["added"] == 0 and local["modified"] == 0
                 and set(new_map.keys()) == set(existing.keys())
                 and path.exists()):
-            return local
+            try:
+                old_env = json.loads(path.read_text(encoding="utf-8"))
+                old_rid = old_env.get("run_id") if isinstance(old_env, dict) else None
+            except Exception:
+                old_rid = None
+            if old_rid == rid:
+                return local
         ordered = list(new_map.values())
         self._save_items(path, ordered, run_id, schema_name)
         return local
