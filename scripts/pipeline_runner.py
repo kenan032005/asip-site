@@ -50,22 +50,57 @@ REPO_PUSH_URL = "https://kenan032005:{token}@github.com/kenan032005/asip-site.gi
 SITE_BASE = "https://kenan032005.github.io/asip-site"
 
 
-def run_cmd(cmd, cwd=None, timeout=180):
-    """运行命令（列表参数，shell=False），返回 (rc, stdout, stderr)。"""
+def _kill_tree(pid):
+    """跨平台强杀整个进程树（Windows 下孙进程会占用管道导致挂死）。"""
     try:
-        r = subprocess.run(
+        if os.name == "nt":
+            subprocess.run(["taskkill", "/F", "/T", "/PID", str(pid)],
+                           capture_output=True, timeout=15)
+        else:
+            os.kill(pid, 9)
+    except Exception:
+        pass
+
+
+def run_cmd(cmd, cwd=None, timeout=180, env_extra=None):
+    """运行命令（列表参数，shell=False），返回 (rc, stdout, stderr)。
+
+    超时处理：先 taskkill /T 杀整个进程树，再回收管道——避免 Windows 下
+    subprocess.run(timeout) 因孙进程持有管道句柄而无限挂起。
+    """
+    env = dict(os.environ)
+    if env_extra:
+        env.update(env_extra)
+    try:
+        p = subprocess.Popen(
             cmd, cwd=str(cwd) if cwd else str(ROOT),
-            capture_output=True, text=True, timeout=timeout, shell=False,
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+            text=True, shell=False, env=env,
         )
-        return r.returncode, (r.stdout or "").strip(), (r.stderr or "").strip()
-    except subprocess.TimeoutExpired:
-        return -1, "", "TIMEOUT"
+        try:
+            out, err = p.communicate(timeout=timeout)
+            return p.returncode, (out or "").strip(), (err or "").strip()
+        except subprocess.TimeoutExpired:
+            _kill_tree(p.pid)
+            try:
+                out, err = p.communicate(timeout=10)
+            except Exception:
+                out, err = "", ""
+            return -1, (out or "").strip(), "TIMEOUT"
     except Exception as e:
         return -1, "", str(e)
 
 
+# git 一律禁用交互式凭据/终端提示，避免无终端环境挂起
+GIT_ENV = {
+    "GIT_TERMINAL_PROMPT": "0",
+    "GCM_INTERACTIVE": "Never",
+    "GIT_ASKPASS": "echo",
+}
+
+
 def git(args, timeout=120, cwd=None):
-    return run_cmd([GIT] + args, cwd=cwd, timeout=timeout)
+    return run_cmd([GIT] + args, cwd=cwd, timeout=timeout, env_extra=GIT_ENV)
 
 
 def git_rev_head():
