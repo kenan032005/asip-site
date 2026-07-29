@@ -91,6 +91,9 @@ class Repository:
     def _public(self, name: str) -> Path:
         return self.public_dir / name
 
+    def _data(self, name: str) -> Path:
+        return self.root / "data" / name
+
     # ── 原子写入 + 备份 ─────────────────────────────────
     def _backup(self, path: Path):
         if not self.make_backups:
@@ -135,7 +138,9 @@ class Repository:
             return []
         try:
             d = json.loads(path.read_text(encoding="utf-8"))
-            return d.get("items", []) if isinstance(d, dict) else (d if isinstance(d, list) else [])
+            if isinstance(d, dict):
+                return d.get("items") or d.get("events") or []
+            return d if isinstance(d, list) else []
         except Exception:
             return []
 
@@ -185,7 +190,68 @@ class Repository:
     def save_quarantine(self, items: list, run_id: str = "") -> dict:
         return self._save_dedup(self._canonical("quarantine.json"), items, run_id, "quarantine_id")
 
+    # ── Sources（参考配置，非运行时数据池）────────────
+    def load_sources(self) -> list:
+        p = self._data("sources.json")
+        if not p.exists():
+            return []
+        try:
+            d = json.loads(p.read_text(encoding="utf-8"))
+            return d.get("sources", []) if isinstance(d, dict) else (d if isinstance(d, list) else [])
+        except Exception:
+            return []
+
+    def save_sources(self, items: list, run_id: str = "") -> dict:
+        p = self._data("sources.json")
+        env = {
+            "schema_version": SCHEMA_VERSION,
+            "pipeline_version": PIPELINE_VERSION,
+            "run_id": run_id or self.run_id,
+            "updated_at": _now_iso(),
+            "sources": items,
+        }
+        self.write_if_changed(p, env)
+        local = {"added": 0, "modified": 0, "skipped": 0, "failed": 0}
+        return local
+
+    # ── 信封级免重写（幂等）────────────────────────────
+    def write_if_changed(self, path: Path, env: dict) -> bool:
+        """仅当去除易变字段后的内容发生变化时才写入。返回是否写入。"""
+        p = Path(path)
+        if p.exists():
+            try:
+                old = json.loads(p.read_text(encoding="utf-8"))
+                strip = lambda d: json.dumps(
+                    {k: v for k, v in d.items() if k not in self.VOLATILE_KEYS},
+                    sort_keys=True, ensure_ascii=False)
+                if strip(old) == strip(env):
+                    return False
+            except Exception:
+                pass
+        self._atomic_write(p, env)
+        return True
+
+    # ── Public metrics ────────────────────────────────
+    def save_current_metrics(self, data: dict, run_id: str = ""):
+        p = self._public("current_metrics.json")
+        env = {
+            "schema_version": SCHEMA_VERSION,
+            "pipeline_version": PIPELINE_VERSION,
+            "run_id": run_id or self.run_id,
+            "updated_at": _now_iso(),
+        }
+        env.update(data)
+        self.write_if_changed(p, env)
+
     # ── 去重保存（核心）───────────────────────────────
+    # 内容比较时忽略的易变字段：这些字段随每次运行变化，不代表业务内容变更。
+    VOLATILE_KEYS = ("run_id", "updated_at")
+
+    @classmethod
+    def _stable_dump(cls, item: dict) -> str:
+        d = {k: v for k, v in item.items() if k not in cls.VOLATILE_KEYS}
+        return json.dumps(d, sort_keys=True, ensure_ascii=False)
+
     def _save_dedup(self, path: Path, items: list, run_id: str, id_key: str) -> dict:
         existing = {it.get(id_key): it for it in self._load_items(path)}
         new_map = {}
@@ -201,18 +267,25 @@ class Repository:
             if run_id:
                 it["run_id"] = run_id
             if iid in existing:
-                if json.dumps(existing[iid], sort_keys=True, ensure_ascii=False) == \
-                   json.dumps(it, sort_keys=True, ensure_ascii=False):
+                if self._stable_dump(existing[iid]) == self._stable_dump(it):
+                    # 内容一致：完整保留旧记录（含旧 run_id），保证幂等字节不变
                     local["skipped"] += 1
                     self.log["skipped"] += 1
+                    new_map[iid] = existing[iid]
                 else:
                     local["modified"] += 1
                     self.log["modified"] += 1
-                new_map[iid] = it
+                    new_map[iid] = it
             else:
                 local["added"] += 1
                 self.log["added"] += 1
                 new_map[iid] = it
+        # 内容完全未变（无新增/修改且 ID 集合一致）时不重写文件，
+        # 避免信封 run_id/updated_at 或传入顺序差异破坏字节级幂等。
+        if (local["added"] == 0 and local["modified"] == 0
+                and set(new_map.keys()) == set(existing.keys())
+                and path.exists()):
+            return local
         ordered = list(new_map.values())
         self._save_items(path, ordered, run_id)
         return local

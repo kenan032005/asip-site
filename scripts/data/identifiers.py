@@ -116,26 +116,39 @@ def content_hash(title: str = "", summary: str = "", canonical_url: str = "") ->
 
 
 def event_id(country_code: str = "", location: str = "", event_type: str = "",
-             event_date: str = "", actor_action: str = "") -> str:
-    """稳定生成 event_id：基于国家 + 地点 + 类型 + 日期 + 行动指纹。"""
+             event_date: str = "", actor_action: str = "", seed: str = "") -> str:
+    """稳定生成 event_id：基于国家 + 地点 + 类型 + 日期 + 行动指纹。
+
+    seed（可选）：迁移时传入 legacy_event_id，保证「一 legacy 事件 → 一规范事件」
+    的严格 1:1 映射且与顺序无关；新事件（2C 由 promote 产生）不传 seed，
+    完全依赖内容指纹，满足「同输入重复迁移 ID 一致、不合并不同事件」。
+    """
     base = "|".join([
         (country_code or "").strip().upper(),
         normalize_location(location),
         (event_type or "").strip().lower(),
         (event_date or "").strip(),
         normalize_actor_action(actor_action),
+        (seed or "").strip().lower(),
     ])
     return "EVT_" + _sha16(base)
 
 
 def quarantine_id(original_object_type: str = "", original_id: str = "",
-                   reason_code: str = "", detected_at: str = "") -> str:
-    """稳定生成 quarantine_id。"""
+                   reason_code: str = "", detected_at: str = "",
+                   seed: str = "") -> str:
+    """稳定生成 quarantine_id。
+
+    seed：可选唯一性种子。历史迁移中存在大量 original_id/detected_at 为空的
+    相关性排除记录，四元组键会碰撞导致互相覆盖（有损）；迁移时传入
+    完整旧记录的稳定序列化作为 seed 可保证 1:1 无损映射。
+    """
     base = "|".join([
         (original_object_type or "").strip().lower(),
         (original_id or "").strip(),
         (reason_code or "").strip(),
         (detected_at or "").strip(),
+        (seed or "").strip(),
     ])
     return "Q_" + _sha16(base)
 
