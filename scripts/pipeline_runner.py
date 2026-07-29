@@ -7,8 +7,8 @@ pipeline_runner.py —— ASIP Stage-2 完整主链路编排器（零依赖，�
   锁 → git pull --rebase（失败即中止）→ run_id → 单元测试（Stage1+Stage2，
   失败即中止）→ canonical 发布语义与风险统一（publication_policy →
   public → legacy 单向导出）→ build_summary（读 public）→ [日报] →
-  validate_stage2（42 项）→ validate_pipeline(source) → 提交 main →
-  构建 dist → validate_pipeline(dist) → 推送 main → 部署 gh-pages →
+  预构建 dist → validate_stage2（42 项）→ validate_pipeline(source) → 提交 main →
+  注入 source_commit 重建 dist → validate_pipeline(dist) → 推送 main → 部署 gh-pages →
   线上轮询验证 run_id → 结构化日志（本地路径已脱敏）
 
 用法：
@@ -123,6 +123,8 @@ def git_commit(msg):
     rc, out, err = git(["add", "-A"])
     if rc != 0:
         return None, f"git add failed: {err}"
+    # 第二阶段纪律：绝不将 .workbuddy（智能体自动化噪声）纳入项目提交
+    git(["reset", "-q", "--", ".workbuddy"])
     rc, out, err = git(["commit", "-m", msg])
     if rc != 0:
         if "nothing to commit" in (out + err):
@@ -294,8 +296,21 @@ def run_mode(mode, trigger):
         else:
             print("\n[4] skip generate_reports (incremental/validate-only)")
 
-        # 4.5) Stage-2 规范数据层校验（42 项，失败即中止）
-        print("\n[4.5] validate_stage2 (42 checks) ...")
+        # 4.5) 预构建 dist（在 Stage-2 校验前构建，使 dist 携带本 run_id，S42 可一致）
+        print("\n[4.5] build_site (pre-validate) ...")
+        rc, out, err = run_cmd([PYTHON, str(HERE / "build_site.py"), "--run-id", run_id], timeout=120)
+        add_log_step(log, "build_site_pre", "success" if rc == 0 else "failed",
+                     details={"output": out[-300:], "error": err[-500:]})
+        print(f"  build_site(pre): {'OK' if rc == 0 else 'ERR'}")
+        if rc != 0:
+            print(out[-300:])
+            print(err[-500:])
+            log["final_status"] = "failed"
+            save_run_log(log, run_id)
+            return 1
+
+        # 4.6) Stage-2 规范数据层校验（42 项，失败即中止；此时 dist 已构建，run_id 与源一致）
+        print("\n[4.6] validate_stage2 (42 checks) ...")
         rc, out, err = run_cmd([PYTHON, str(HERE / "data" / "validate_stage2.py")], timeout=180)
         s2_ok = rc == 0
         add_log_step(log, "validate_stage2", "success" if s2_ok else "failed",
@@ -334,8 +349,8 @@ def run_mode(mode, trigger):
         final_data_hash, _ = git_commit(f"chore: set source_commit={source_commit[:8]} for run_id={run_id}")
         source_commit = final_data_hash or source_commit
 
-        # 8) 构建 dist
-        print("\n[8] build_site ...")
+        # 8) 用 source_commit 重建 dist（注入 commit 哈希；run_id 不变，仍为本次 run_id）
+        print("\n[8] build_site (final) ...")
         rc, out, err = run_cmd([PYTHON, str(HERE / "build_site.py"), "--run-id", run_id], timeout=120)
         add_log_step(log, "build_site", "success" if rc == 0 else "failed",
                      details={"output": out[-300:], "error": err[-500:]})
