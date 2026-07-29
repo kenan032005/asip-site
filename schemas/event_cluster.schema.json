@@ -23,7 +23,7 @@
     "event_severity": {"type": "string", "enum": ["low", "medium", "high", "critical"]},
     "event_status": {"type": "string", "enum": ["new", "ongoing", "developing", "easing", "ended", "unknown"]},
     "event_time": {"type": "string", "format": "date-time"},
-    "event_time_end": {"type": "string", "format": "date-time"},
+    "event_time_end": {"type": ["string", "null"], "format": "date-time"},
     "location_name": {"type": "string"},
     "location_admin1": {"type": "string"},
     "location_admin2": {"type": "string"},
@@ -49,10 +49,10 @@
     "current_progress": {"type": "string"},
     "legacy_promotion_class": {"type": "string"},
     "legacy_publication_status": {"type": "string"},
-    "first_seen_at": {"type": "string", "format": "date-time"},
-    "last_seen_at": {"type": "string", "format": "date-time"},
-    "created_at": {"type": "string", "format": "date-time"},
-    "updated_at": {"type": "string", "format": "date-time"},
+    "first_seen_at": {"type": ["string", "null"], "format": "date-time"},
+    "last_seen_at": {"type": ["string", "null"], "format": "date-time"},
+    "created_at": {"type": ["string", "null"], "format": "date-time"},
+    "updated_at": {"type": ["string", "null"], "format": "date-time"},
     "legacy_payload": {"type": "object"}
   },
   "additionalProperties": true

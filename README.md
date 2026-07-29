@@ -35,10 +35,12 @@ asip-site/
 │       ├── common.js       表头/页脚/风险徽章/北京时间换算/筛选
 │       ├── home/events/... 各页逻辑（内联于对应 HTML 的 <script>）
 ├── data/                   运行时数据（单一数据源）
+│   ├── canonical/          规范数据层（schema_version=2.0）：articles / event_clusters / quarantine / migration_state / idempotency_report
+│   ├── public/             发布视图（由 canonical 单向生成）：published_events.json / current_metrics.json
 │   ├── risk-levels.json    22 国四类固定顺序 + 风险配色
 │   ├── countries.json      22 国基础信息（首都/区域/基准等级/是否日报）
-│   ├── events.json         事件数据（当前为演示占位）
-│   ├── sources.json        五层信息源（均 tested=false，启用前需测试）
+│   ├── events.json         事件数据（★ 单向生成视图：generated_from_canonical，业务脚本不得直接写）
+│   ├── sources.json        五层信息源（2.0 升级格式，legacy_payload 保留原字段；均 tested=false）
 │   ├── status.json         更新时间/下次更新/计数/演示模式开关
 │   └── latest-summary.json 首页概览/指标/各区块摘要
 ├── reports/<国家>/          六国日报（按日期归档的 JSON）
@@ -46,8 +48,9 @@ asip-site/
 │   ├── pipeline_runner.py   ★ 统一编排器（唯一运行入口，见第十二节）
 │   ├── pipeline_core.py     ★ 时区/run_id/锁/统计/闸门 公共库
 │   ├── validate_pipeline.py ★ 分阶段校验器（失败非零退出码）
-│   ├── tests/               单元与回归测试（test_country / test_stage1_pipeline）
-│   ├── collect.py           采集流水线（规范化→去重→核实→翻译，由编排器调用）
+│   ├── tests/               单元与回归测试（test_country / test_stage1_pipeline / test_stage2_schema_repo）
+│   ├── data/                规范数据层模块：repository（唯一读写入口）/ identifiers（稳定 SHA-256 ID）/ normalizers / publication_policy（确定性发布闸门）/ schema_validator / migrate_stage2 / compatibility_export / validate_stage2 / verify_idempotency
+│   ├── collect.py           采集流水线（规范化→去重→核实→翻译，由编排器调用；写入 canonical，不直接写旧池）
 │   ├── normalize.py         字段规范化与校验
 │   ├── deduplicate.py       事件去重（多源合并）
 │   ├── verify.py            可信度推断
@@ -290,3 +293,59 @@ python tools/setup_gh_pages.py
 ### 12.7 已知限制
 - 线上生效以 WorkBuddy 桌面端在线为前提（自动任务由本机执行）。
 - 源码与配置中不含本机绝对路径（由回归测试持续扫描保障）。
+
+---
+
+## 十三、第二阶段整改（统一数据模型与发布状态模型，2026-07）
+
+针对"Article 与 Event 混用、发布状态与处理状态混淆、来源分级与核实级别混用、旧池与新数据双向漂移"等结构性问题，建立**规范数据层（canonical）**作为唯一真实来源，旧池（events/pending/raw/quarantine_events）降级为单向生成视图。
+
+### 13.1 三个检查点（独立提交，任一失败不进入下一阶段）
+- **2A 数据结构与仓储（已提交）**：`scripts/data/` 规范层（repository / identifiers / normalizers / publication_policy / schema_validator）+ `schemas/*.schema.json` + 单元测试 57 项（`test_stage2_schema_repo`）。
+- **2B 迁移与兼容（已提交）**：`scripts/data/migrate_stage2.py` 旧池→canonical 无损迁移；`compatibility_export.py` canonical→旧池单向生成；幂等验证 8/8 文件 SHA-256 两次完全一致、计数稳定（articles=328 / clusters=143 / quarantine=53 / published=143）；可回滚。
+- **2C 流水线接入（本阶段）**：`collect.py` / `promote_events.py` / `build_summary.py` 改为经 `Repository` 读写 canonical，发布判定统一走 `publication_policy.evaluate()`；新增 `validate_stage2.py`（25 项）；本 README 同步更新。
+
+### 13.2 三层数据架构（严格单向）
+```
+data/canonical/  规范数据层（唯一真实来源，schema_version=2.0, pipeline_version=2）
+      │  单向生成
+      ▼
+data/public/     发布视图（published_events.json / current_metrics.json）
+      +
+data/*.json      旧池（events / pending_events / raw_candidates / quarantine_events / sources）
+                  —— 全部带 generated_from_canonical + do_not_edit_manually 信封，业务脚本不得直接写
+```
+- 业务脚本（collect/promote/build_summary）只经 `Repository` 读写 canonical；旧池由 `compatibility_export.export_all` 在每次 apply 后自动再生成。
+- 旧字段完整保留于各记录的 `legacy_payload`（事件另有 `legacy_event_id`），迁移零信息丢失。
+
+### 13.3 关键分离（写入规范层红线）
+- **Article ≠ Event**：`article_id`（ART_）与 `event_id`（EVT_）分离；一篇报道可关联多个事件，一个事件可聚合多篇报道（cluster.article_ids）。
+- **来源分级 ≠ 核实状态**：`source_type`/`source_reliability_tier`（来源属性）与 `verification_level`（事件核实级别）互不替代。
+- **国家风险 ≠ 事件严重度**：`country_risk_level`（国家固定风险）与 `event_severity`（事件严重度）分离。
+- **提及 ≠ 事件国**：`mentioned_countries`（提及）与 `country_code`（事件主国）分离。
+- **处理状态 ≠ 发布状态**：`processing_status`（queued_for_verification / linked_to_event / …）与 `publication_status`（publishable / published / verification_pending / …）分离。
+
+### 13.4 发布状态模型（确定性，零随机）
+- `publication_policy.evaluate(verification_level)` 唯一裁决：`cross_verified` 或 `direct_official_source` → `publishable`（→ `published`）；其余（含单源媒体 `single_source`、转发平台 `high_reliability_single_source`）→ `verification_pending`，**不自动发布**。
+- 红线：Reuters/新华社等**转载**来源单源 ≠ 官方直接来源（Section 十）；ReliefWeb 为 NGO 报告聚合平台 ≠ 联合国官方直接来源。
+- 历史已发布事件迁移后保持 `published`（页面显示不变），其 `verification_level` 仍保留供后续自动核实。
+
+### 13.5 迁移与幂等（2B 证据）
+- 无损：8 类关键文件两次 apply 的 SHA-256 完全一致；计数稳定不漂移。
+- 可回滚：迁移前 5 个旧池文件由 Git 基线 `3c61e85` 标记，rollback 可恢复。
+- 唯一 ID：基于内容 SHA-256（16 位）；隔离记录 `Q_` 因旧池存在大量 `event_id/detected_at` 为空的排除类记录，引入 `seed` 保证 53 条 1:1 无损。
+- 版本标记：保留 `pipeline_version=2`，新增 `schema_version="2.0"`，**不升到 3**。
+
+### 13.6 校验与回归（全绿）
+| 套件 | 项 | 结果 |
+|---|---|---|
+| `validate_stage2.py` | 25 项（结构/ Schema / ID / 发布策略 / 来源分级 / 单向生成 / 1:1 / 幂等） | ✅ 25/25 |
+| `verify_idempotency.py` | 8 文件两次 apply SHA-256 一致 | ✅ PASS |
+| `test_stage2_schema_repo`（2A） | 仓储/ID/归一化/发布闸门/导出 | ✅ 57/57 |
+| `test_stage1_pipeline`（第一阶段） | run_id/时区/窗口/统计/锁/校验退出码 | ✅ 36/36 |
+| `test_country` | 国家识别 | ✅ 24/24 |
+| `validate_pipeline.py` | V1–V17（含 V17-canonical 一致性） | ✅ 0 严重错误 |
+
+### 13.7 范围边界（本阶段不做）
+- 不新增信息源、不改 Reuters/新华社/GDELT 采集策略、不引入 Hy3 翻译/摘要、不做自动二次核实引擎、不改首页/国家页视觉、不新增国家、不改日报正文、不等待定时任务、不批量重新抓取。
+- 验收达到 25 项指标即停止，**不进入第三阶段**。

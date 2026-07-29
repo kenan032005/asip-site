@@ -14,7 +14,12 @@ promote_events.py —— 多源聚类与正式事件提升（第三阶段）。
   - 仍需语义复核(needs_review 且 review 未通过) → 不进 events；
   - 单篇 Reuters 多转载 / 新华社中英文稿 → 计为 1 个独立来源（通过 source_group 去重）。
 
-仅当 --apply 时写回 events.json；否则预览。
+Stage-2C 起：promote 读写规范数据层（canonical articles / event_clusters），
+新事件的发布状态由确定性发布政策决定（仅 cross_verified / direct_official_source
+自动达发布门槛；单一来源进入 verification_pending，不自动发布）。
+events.json 等遗留池由 compatibility_export 单向再生成。
+
+仅当 --apply 时写回；否则预览。
 """
 import os
 import sys
@@ -25,6 +30,13 @@ from datetime import datetime, timezone
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(SCRIPT_DIR)
 DATA = os.path.join(ROOT, "data")
+sys.path.insert(0, SCRIPT_DIR)
+
+from data.repository import Repository  # noqa: E402
+from data.migrate_stage2 import (event_to_cluster, build_source_index,
+                                 _unwrap_source)  # noqa: E402
+from data.compatibility_export import export_all  # noqa: E402
+from pipeline_core import generate_run_id  # noqa: E402
 
 
 def now_iso():
@@ -42,8 +54,14 @@ def main():
     ap.add_argument("--apply", action="store_true", help="写回 events.json")
     args = ap.parse_args()
 
-    pending = json.load(open(os.path.join(DATA, "pending_events.json"), encoding="utf-8")).get("items", [])
-    events_doc = json.load(open(os.path.join(DATA, "events.json"), encoding="utf-8"))
+    # Stage-2C：读规范数据层
+    run_id = generate_run_id()
+    repo = Repository(root=ROOT, run_id=run_id)
+    articles = repo.load_articles()
+    clusters_all = repo.load_event_clusters()
+    # pending 视图（与遗留 pending_events.json 语义一致）
+    pending = [dict(a.get("legacy_payload") or {}) for a in articles
+               if a.get("processing_status") == "queued_for_verification"]
 
     # 语义复核结论
     rpath = os.path.join(DATA, "review_decisions.json")
@@ -140,17 +158,33 @@ def main():
         }
         promoted.append(ev)
 
-    # 去重写入 events.json
-    existing_urls = {e.get("source_url") for e in events_doc.get("events", [])}
-    existing_titles = {e.get("title_original", "").strip().lower() for e in events_doc.get("events", [])}
+    # 去重（对既有 clusters：URL 与标题）
+    existing_urls = set()
+    existing_titles = set()
+    for c in clusters_all:
+        lp = c.get("legacy_payload") or {}
+        for u in (lp.get("source_url"), ):
+            if u:
+                existing_urls.add(u)
+        t = (c.get("title_original") or lp.get("title_original") or "").strip().lower()
+        if t:
+            existing_titles.add(t)
+
+    # legacy 顺序号仅用于 legacy_event_id 展示（canonical event_id 为内容指纹）
     max_n = 0
-    for e in events_doc.get("events", []):
+    for c in clusters_all:
         try:
-            n = int(str(e.get("event_id", "")).split("-")[-1])
+            n = int(str(c.get("legacy_event_id", "")).split("-")[-1])
             max_n = max(max_n, n)
         except ValueError:
             pass
     date_str = datetime.now(timezone.utc).strftime("%Y%m%d")
+
+    upgraded_sources = repo.load_sources()
+    idx = build_source_index([_unwrap_source(s) for s in upgraded_sources])
+
+    new_clusters = []
+    new_src_articles = []
     added = 0
     for ev in promoted:
         if ev["source_url"] in existing_urls:
@@ -159,18 +193,44 @@ def main():
             continue
         max_n += 1
         ev["event_id"] = "EVT-%s-%03d" % (date_str, max_n)
-        events_doc["events"].append(ev)
+        cl, src_art = event_to_cluster(ev, idx, is_new=True)
+        new_clusters.append(cl)
+        new_src_articles.append(src_art)
         existing_urls.add(ev["source_url"])
         added += 1
 
     if args.apply:
-        events_doc["updated_at"] = now_iso()
-        json.dump(events_doc, open(os.path.join(DATA, "events.json"), "w", encoding="utf-8"),
-                  ensure_ascii=False, indent=2)
-        print("已写入 events.json，本次新增：%d" % added)
+        if new_clusters:
+            # 已提升候选 → 文章状态标记 linked_to_event
+            promoted_cids = {ev.get("candidate_id") for ev in promoted if ev.get("candidate_id")}
+            for a in articles:
+                lp = a.get("legacy_payload") or {}
+                if lp.get("candidate_id") in promoted_cids:
+                    a["processing_status"] = "linked_to_event"
+            # 合并来源文章
+            byid = {a["article_id"]: a for a in articles}
+            for sa in new_src_articles:
+                if sa["article_id"] in byid:
+                    byid[sa["article_id"]]["processing_status"] = "linked_to_event"
+                else:
+                    byid[sa["article_id"]] = sa
+            repo.save_articles(list(byid.values()), run_id)
+            repo.save_event_clusters(clusters_all + new_clusters, run_id)
+        # 遗留池单向再生成
+        stats = export_all(repo, run_id)
+        pub_pending = sum(1 for c in new_clusters
+                          if c["publication_status"] == "verification_pending")
+        print("已写入 canonical event_clusters，本次新增：%d（其中待核实不发布：%d）"
+              % (added, pub_pending))
+        print("兼容导出: events=%d pending=%d raw=%d published=%d"
+              % (stats["legacy_events"], stats["legacy_pending"],
+                 stats["legacy_raw"], stats["published_events"]))
     else:
         print("[预览] 可提升为正式事件：%d（A/B类）；保留在 pending：%d（C类）" % (len(promoted), stayed))
         print("本次将新增：%d" % added)
+        for c in new_clusters:
+            print("  - %s publication_status=%s (%s)"
+                  % (c["event_id"], c["publication_status"], c["verification_level"]))
     # 按国统计
     byc = {}
     for ev in promoted:

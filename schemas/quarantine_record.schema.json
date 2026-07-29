@@ -14,7 +14,7 @@
     "original_id": {"type": "string", "minLength": 1},
     "reason_code": {"type": "string", "enum": ["wrong_country", "not_security_relevant", "duplicate", "invalid_url", "missing_required_fields", "unsupported_language", "conflicting_data", "low_quality_source", "legacy_invalid", "schema_validation_failed", "other"]},
     "reason_cn": {"type": "string", "minLength": 1},
-    "detected_at": {"type": "string", "format": "date-time"},
+    "detected_at": {"type": ["string", "null"], "format": "date-time"},
     "detected_by": {"type": "string"},
     "source_file": {"type": "string"},
     "legacy_payload": {"type": "object"},

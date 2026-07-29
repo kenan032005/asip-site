@@ -23,9 +23,13 @@ collect.py —— 乍得/尼日尔采集主控（第二轮整改版）。
 合规：仅公开信息；不绕过限制；评论类(lead_only)不进正式事件。
 不自动把单普通来源提升为正式事件（修复旧逻辑）。
 
+Stage-2C 起：collect 只写规范数据层（data/canonical/articles.json，经 Repository），
+raw_candidates.json / pending_events.json 等遗留池由 compatibility_export 单向再生成，
+业务脚本不再直接写旧池。
+
 用法：
-  python scripts/collect.py            # 采集+三级池+聚类（写入 events 由 clean+promote 决定）
-  python scripts/collect.py --dry      # 仅写 raw/pending，不写 events
+  python scripts/collect.py            # 采集 → canonical articles → 兼容导出
+  python scripts/collect.py --dry      # 只统计，不写任何文件
   python scripts/collect.py --hours 72 # 回溯窗口（默认 72h）
 """
 import os
@@ -39,9 +43,16 @@ from datetime import datetime, timezone, timedelta
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(SCRIPT_DIR)
 sys.path.insert(0, os.path.join(SCRIPT_DIR, "collectors"))
+sys.path.insert(0, SCRIPT_DIR)
 
 from country_runner import (load_country_cfg, run_country, identify_country,
                             relevance_stage1, classify_type)  # noqa: E402
+# Stage-2C：写入规范数据层（canonical），遗留池由 compatibility_export 单向生成
+from data.repository import Repository  # noqa: E402
+from data.migrate_stage2 import (candidate_to_article, build_source_index,
+                                 _unwrap_source)  # noqa: E402
+from data.compatibility_export import export_all  # noqa: E402
+from pipeline_core import generate_run_id  # noqa: E402
 
 DATA = os.path.join(ROOT, "data")
 
@@ -131,22 +142,41 @@ def main():
     ap.add_argument("--hours", type=int, default=72, help="回溯窗口(小时)")
     args = ap.parse_args()
 
-    sources = load_json("sources.json", {}).get("sources", [])
+    # Stage-2C：规范数据层为唯一写入目标；遗留池只读（且为单向生成的视图）
+    run_id = generate_run_id()
+    repo = Repository(root=ROOT, run_id=run_id)
+
+    upgraded_sources = repo.load_sources()          # 2.0 升级格式（含 legacy_payload）
+    # 运行视图：升级记录 → 原始字段（country/status/source_position/lead_only 等）
+    op_sources = []
+    for rec in upgraded_sources:
+        op = _unwrap_source(rec)
+        op["enabled"] = bool(rec.get("enabled", op.get("enabled", False)))
+        op_sources.append(op)
+
     by_country = {}
-    for s in sources:
+    for s in op_sources:
         if not s.get("enabled"):
             continue
         if s.get("status") in ("test_failed", "blocked"):
             continue
         by_country.setdefault(s["country"], []).append(s)
 
-    raw = load_json("raw_candidates.json", {"items": [], "updated_at": ""})
-    pending = load_json("pending_events.json", {"items": [], "updated_at": ""})
+    # 去重基于 canonical articles（URL/标题），不再读遗留池
+    existing_articles = repo.load_articles()
+    seen_urls = set()
+    seen_keys = set()
+    for a in existing_articles:
+        for u in (a.get("article_url"), a.get("canonical_url"),
+                  (a.get("legacy_payload") or {}).get("url")):
+            if u:
+                seen_urls.add(u)
+        t = (a.get("title_original") or "").strip().lower()
+        if t:
+            seen_keys.add(t)
 
-    seen_urls = {i.get("url") for i in raw.get("items", [])}
-    seen_urls |= {i.get("url") for i in pending.get("items", [])}
-    seen_keys = {i.get("title_original", "").strip().lower() for i in raw.get("items", [])}
-
+    new_raw_cands = []      # 非相关/待复核：仅 raw 级
+    new_pending_cands = []  # 相关且国家明确：pending 级
     src_stats = {}
 
     for country, cf in CONFIG.items():
@@ -167,12 +197,12 @@ def main():
                     continue
                 rel_flag = a.get("_relevant")
                 if rel_flag is not True:
-                    # 非相关或待复核：仅进 raw（不进 pending/events）
+                    # 非相关或待复核：仅 raw 级（不进 pending/events）
                     url = a["url"]
                     if url and url not in seen_urls:
                         cand = build_candidate(a, src, country, a["_country"])
                         cand["relevant"] = False
-                        raw["items"].append(cand)
+                        new_raw_cands.append(cand)
                         seen_urls.add(url)
                     continue
                 url = a["url"]
@@ -184,52 +214,68 @@ def main():
                 if key and key in seen_keys:
                     continue
                 cand = build_candidate(a, src, country, a["_country"])
-                raw["items"].append(cand)
                 seen_urls.add(url)
                 if key:
                     seen_keys.add(key)
                 rel += 1
-                # 进 pending（待核实/待第二来源/待语义复核）
+                # pending 级（待核实/待第二来源/待语义复核）
                 pcand = dict(cand)
                 pcand["needs_second_source"] = (cand["source_class"] == "C")
                 pcand["verification_status"] = "pending" if cand["source_class"] == "C" else "official_unverified"
-                pending["items"].append(pcand)
+                new_pending_cands.append(pcand)
             src_stats[src.get("source_id")] = (det, rel)
 
-    raw["updated_at"] = now_iso()
-    pending["updated_at"] = now_iso()
-    with open(os.path.join(DATA, "raw_candidates.json"), "w", encoding="utf-8") as f:
-        json.dump(raw, f, ensure_ascii=False, indent=2)
-    with open(os.path.join(DATA, "pending_events.json"), "w", encoding="utf-8") as f:
-        json.dump(pending, f, ensure_ascii=False, indent=2)
+    # 新候选 → 规范 Article（唯一写入路径）
+    idx = build_source_index(op_sources)
+    new_articles = []
+    for cand in new_raw_cands:
+        new_articles.append(candidate_to_article(cand, from_pending=False, idx=idx))
+    for pcand in new_pending_cands:
+        new_articles.append(candidate_to_article(pcand, from_pending=True, idx=idx))
 
-    # 回写 sources.json 运行统计
-    sd = load_json("sources.json", {})
-    for s in sd.get("sources", []):
-        sid = s.get("source_id")
+    if args.dry:
+        print("[dry] 不写入任何文件。本次新增候选：raw级=%d pending级=%d"
+              % (len(new_raw_cands), len(new_pending_cands)))
+        return
+
+    # 保存 canonical articles（全量传入，_save_dedup 保证幂等与去重）
+    all_articles = existing_articles + new_articles
+    log = repo.save_articles(all_articles, run_id)
+    print("canonical articles: added=%d modified=%d skipped=%d failed=%d"
+          % (log["added"], log["modified"], log["skipped"], log["failed"]))
+
+    # 回写 sources 运行统计（更新 legacy_payload 中的运行字段，保持升级格式）
+    for rec in upgraded_sources:
+        sid = rec.get("source_id")
         if sid in src_stats:
             det, rel = src_stats[sid]
-            s["articles_detected_last_run"] = det
-            s["relevant_articles_last_run"] = rel
-            s["last_success_at"] = now_iso() if det > 0 else s.get("last_success_at", "")
-            s["last_failure_at"] = "" if det > 0 else now_iso()
-            s["failure_count"] = 0 if det > 0 else (s.get("failure_count", 0) + 1)
+            lp = rec.setdefault("legacy_payload", {})
+            lp["articles_detected_last_run"] = det
+            lp["relevant_articles_last_run"] = rel
+            lp["last_success_at"] = now_iso() if det > 0 else lp.get("last_success_at", "")
+            lp["last_failure_at"] = "" if det > 0 else now_iso()
+            lp["failure_count"] = 0 if det > 0 else (lp.get("failure_count", 0) + 1)
             if det > 0:
-                s["status"] = "active" if s.get("status") != "degraded" else "degraded"
-            elif s.get("status") not in ("test_failed", "blocked", "requires_api"):
-                s["status"] = "degraded"
-    with open(os.path.join(DATA, "sources.json"), "w", encoding="utf-8") as f:
-        json.dump(sd, f, ensure_ascii=False, indent=2)
+                lp["status"] = "active" if lp.get("status") != "degraded" else "degraded"
+            elif lp.get("status") not in ("test_failed", "blocked", "requires_api"):
+                lp["status"] = "degraded"
+    repo.save_sources(upgraded_sources, run_id)
 
-    print("原始候选池条目：%d" % len(raw["items"]))
-    print("待核实池：%d" % len(pending["items"]))
+    # 遗留池由 canonical 单向再生成（业务脚本不得直接写旧池）
+    stats = export_all(repo, run_id)
+    print("兼容导出: events=%d pending=%d raw=%d quarantine=%d published=%d"
+          % (stats["legacy_events"], stats["legacy_pending"], stats["legacy_raw"],
+             stats["legacy_quarantine"], stats["published_events"]))
+
+    arts_now = repo.load_articles()
+    n_pending = sum(1 for a in arts_now if a.get("processing_status") == "queued_for_verification")
+    print("canonical 文章总数：%d" % len(arts_now))
+    print("待核实（queued_for_verification）：%d" % n_pending)
     byc = {}
-    for p in pending.get("items", []):
+    for p in new_pending_cands:
         byc[p["country"]] = byc.get(p["country"], 0) + 1
-    print("待核实池按国家：", byc)
-    # 相关性≠True 但仍进 raw 的数量
-    nonrel = sum(1 for i in raw["items"] if i.get("relevant") is not True)
-    print("raw 中非相关/待复核候选：%d（不进 pending/events）" % nonrel)
+    print("本次新增待核实按国家：", byc)
+    print("本次新增非相关/待复核候选：%d（不进 pending/events）" % len(new_raw_cands))
 
 
 if __name__ == "__main__":

@@ -28,6 +28,10 @@ from pipeline_core import (
     event_type_cn, normalize_event_type,
     FIXED_RISK_LEVELS, TZ_BEIJING,
 )
+# Stage-2C：规范数据层（事件回填写 canonical，遗留 events.json 单向再生成）
+from data.repository import Repository
+from data.migrate_stage2 import _unwrap_source
+from data.compatibility_export import export_all
 ROOT = os.path.dirname(HERE)
 REPORTS_DIR = os.path.join(ROOT, "reports")
 
@@ -45,7 +49,19 @@ def load_quarantine():
 
 
 def load_sources():
-    return load_json(os.path.join(DATA_DIR, "sources.json"), {"sources": []}).get("sources", [])
+    """读取信源。Stage-2 升级后 sources.json 为 2.0 格式（运行字段在
+    legacy_payload 内），此处展开为运行视图供统计使用。"""
+    recs = load_json(os.path.join(DATA_DIR, "sources.json"), {"sources": []}).get("sources", [])
+    out = []
+    for r in recs:
+        op = _unwrap_source(r)
+        # 顶层 enabled/tested 优先（升级记录维护于顶层）
+        if "enabled" in r:
+            op["enabled"] = r.get("enabled")
+        if "tested" in r:
+            op["tested"] = r.get("tested")
+        out.append(op)
+    return out
 
 
 def load_countries():
@@ -279,13 +295,40 @@ def main(run_id=None, dry_run=False):
         print("[dry_run] 不写入文件。")
         return run_id
 
-    # 写回 events.json（风险/类型可能已修正）
-    events_doc = load_json(os.path.join(DATA_DIR, "events.json"), {"version": 1})
-    events_doc["events"] = events
-    events_doc["pipeline_version"] = PIPELINE_VERSION
-    events_doc["run_id"] = run_id
-    events_doc["updated_at"] = bj_iso()
-    save_json(os.path.join(DATA_DIR, "events.json"), events_doc)
+    # Stage-2C：风险/类型修正写回 canonical event_clusters，
+    # 遗留 events.json 由 compatibility_export 单向再生成（不直接写旧池）。
+    repo = Repository(root=ROOT, run_id=run_id)
+    clusters = repo.load_event_clusters()
+    if clusters:
+        ev_by_id = {e.get("event_id"): e for e in events if e.get("event_id")}
+        changed = 0
+        for c in clusters:
+            leid = c.get("legacy_event_id")
+            ev = ev_by_id.get(leid)
+            if not ev:
+                continue
+            lp = c.get("legacy_payload") or {}
+            if lp != ev:
+                c["legacy_payload"] = dict(ev)
+                # 同步顶层规范字段
+                c["event_type"] = normalize_event_type(ev.get("event_type", "")) or c.get("event_type", "")
+                if ev.get("country_risk_level") is not None:
+                    c["country_risk_level"] = ev.get("country_risk_level")
+                if ev.get("country_risk_label"):
+                    c["country_risk_label"] = ev.get("country_risk_label")
+                changed += 1
+        repo.save_event_clusters(clusters, run_id)
+        export_all(repo, run_id)
+        if changed:
+            print(f"  canonical 回填修正：{changed} 个事件簇（events.json 已单向再生成）")
+    else:
+        # canonical 尚未建立（迁移前）：保持旧行为
+        events_doc = load_json(os.path.join(DATA_DIR, "events.json"), {"version": 1})
+        events_doc["events"] = events
+        events_doc["pipeline_version"] = PIPELINE_VERSION
+        events_doc["run_id"] = run_id
+        events_doc["updated_at"] = bj_iso()
+        save_json(os.path.join(DATA_DIR, "events.json"), events_doc)
 
     save_json(os.path.join(DATA_DIR, "status.json"), status)
     save_json(os.path.join(DATA_DIR, "latest-summary.json"), summary)

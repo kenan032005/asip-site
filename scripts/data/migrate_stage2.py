@@ -57,6 +57,19 @@ BACKUP_ROOT_DEFAULT = None  # 由 migration_state 记录，rollback 时回读
 
 
 # ── 来源匹配 ──────────────────────────────────────────
+def _clamp01(x: float) -> float:
+    """relevance_score 必须为 [0,1]；旧池中存在 >1 的脏值，迁移时收敛，不丢失（原文保留于 legacy_payload）。"""
+    try:
+        v = float(x)
+    except Exception:
+        return 0.0
+    if v < 0.0:
+        return 0.0
+    if v > 1.0:
+        return 1.0
+    return v
+
+
 def _domain(url: str) -> str:
     try:
         from urllib.parse import urlsplit
@@ -171,7 +184,7 @@ def candidate_to_article(c, from_pending=False, idx=None):
         aid = article_id(source_id=c.get("source_id", ""), published_at=c.get("published_time", ""),
                          title=c.get("title_original", ""))
     src = lookup_source(idx, c.get("source_id", ""), c.get("source_name", ""), c.get("source_url", ""))
-    stype = src["source_type"]
+    stype = map_source_type(src.get("source_type", ""), src.get("source_position", ""), src["source_group"])
     corr_type, corr_direct, _, corr_tier = _apply_source_corrections(src["source_group"], src["source_name"])
     if corr_type:
         stype, is_direct, tier = corr_type, corr_direct, corr_tier
@@ -185,29 +198,29 @@ def candidate_to_article(c, from_pending=False, idx=None):
         "article_id": aid,
         "schema_version": "2.0", "pipeline_version": 2, "run_id": "",
         "source_id": src["source_id"], "source_group": src["source_group"],
-        "source_name": c.get("source_name", ""), "source_type": stype,
+        "source_name": c.get("source_name") or "", "source_type": stype,
         "source_reliability_tier": tier,
         "claim_origin_type": src.get("claim_origin_type", "unknown"),
         "article_url": url, "canonical_url": canonical,
-        "title_original": c.get("title_original", ""), "summary_original": c.get("summary_original", ""),
-        "content_excerpt": (c.get("summary_original", "") or "")[:300],
+        "title_original": c.get("title_original") or "", "summary_original": c.get("summary_original") or "",
+        "content_excerpt": (c.get("summary_original") or "")[:300],
         "language": normalize_language(c.get("language", "")),
-        "published_at": c.get("published_time", ""), "retrieved_at": c.get("fetched_at", ""),
-        "updated_at": "",
-        "detected_country": c.get("country", ""), "event_country": c.get("country", ""),
+        "published_at": c.get("published_time") or None, "retrieved_at": c.get("fetched_at") or None,
+        "updated_at": None,
+        "detected_country": c.get("country") or "", "event_country": c.get("country") or "",
         "mentioned_countries": c.get("mentioned_countries", []) or [],
         "regional_scope": "", "country_confidence": 1.0 if c.get("country_ok") else 0.0,
         "detected_locations": c.get("matched_location_entities", []) or [],
         "event_type": normalize_event_type(etype) if etype else "",
-        "relevance_score": float(c.get("rel_score", 0) or 0),
+        "relevance_score": _clamp01(c.get("rel_score", 0) or 0),
         "is_security_relevant": bool(c.get("relevant", False)),
         "china_related": False,
-        "title_cn": c.get("title_cn", ""), "summary_cn": c.get("summary_cn", ""),
+        "title_cn": c.get("title_cn") or "", "summary_cn": c.get("summary_cn") or "",
         "content_hash": content_hash(c.get("title_original", ""), c.get("summary_original", ""), canonical),
         "processing_status": "queued_for_verification" if from_pending
         else ("normalized" if c.get("relevant") else "raw"),
         "verification_queue_status": "waiting" if from_pending else "not_required",
-        "linked_event_id": "",
+        "linked_event_id": None,
         "warnings": [], "errors": [],
         "needs_translation": derive_needs_translation(c),
         "legacy_payload": dict(c),
@@ -215,7 +228,14 @@ def candidate_to_article(c, from_pending=False, idx=None):
 
 
 # ── Event Cluster 构建 ───────────────────────────────
-def event_to_cluster(ev, idx):
+def event_to_cluster(ev, idx, is_new=False):
+    """legacy 事件 → 规范 Event Cluster。
+
+    is_new=False：历史迁移路径，event_id 用 legacy_event_id 做 seed（1:1 稳定），
+                  publication_status 强制 published（页面显示不变）。
+    is_new=True ：新提升事件（promote_events 2C 起），event_id 用纯内容指纹，
+                  publication_status 由确定性发布政策 evaluate() 决定。
+    """
     country = ev.get("country", "")
     cc = normalize_country_code(country)
     risk = FIXED_RISK_LEVELS.get(country, {
@@ -225,7 +245,7 @@ def event_to_cluster(ev, idx):
     etype = normalize_event_type(ev.get("event_type", ""))
     # 事件来源 → Article
     src = lookup_source(idx, "", ev.get("source_name", ""), ev.get("source_url", ""))
-    stype = src["source_type"]
+    stype = map_source_type(src.get("source_type", ""), src.get("source_position", ""), src["source_group"])
     corr_type, corr_direct, _, corr_tier = _apply_source_corrections(src["source_group"], src["source_name"])
     if corr_type:
         stype, is_direct, tier = corr_type, corr_direct, corr_tier
@@ -247,22 +267,22 @@ def event_to_cluster(ev, idx):
         "source_reliability_tier": tier,
         "claim_origin_type": src.get("claim_origin_type", "unknown"),
         "article_url": src_url, "canonical_url": canon,
-        "title_original": ev.get("title_original", ""), "summary_original": ev.get("summary_cn", ""),
-        "content_excerpt": (ev.get("summary_cn", "") or "")[:300],
+        "title_original": ev.get("title_original") or "", "summary_original": ev.get("summary_cn") or "",
+        "content_excerpt": (ev.get("summary_cn") or "")[:300],
         "language": normalize_language(ev.get("source_language", "")),
-        "published_at": ev.get("published_time", ""), "retrieved_at": "", "updated_at": "",
+        "published_at": ev.get("published_time") or None, "retrieved_at": None, "updated_at": None,
         "detected_country": country, "event_country": country,
         "mentioned_countries": [], "regional_scope": "", "country_confidence": 1.0,
         "detected_locations": [], "event_type": etype,
         "relevance_score": 1.0, "is_security_relevant": True, "china_related": bool(ev.get("china_related", False)),
-        "title_cn": ev.get("title_cn", ""), "summary_cn": ev.get("summary_cn", ""),
+        "title_cn": ev.get("title_cn") or "", "summary_cn": ev.get("summary_cn") or "",
         "content_hash": content_hash(ev.get("title_original", ""), ev.get("summary_cn", ""), canon),
         "processing_status": "linked_to_event", "verification_queue_status": "not_required",
-        "linked_event_id": "", "warnings": [], "errors": [],
+        "linked_event_id": None, "warnings": [], "errors": [],
         "needs_translation": derive_needs_translation(ev),
         "legacy_payload": {"from_event_source": ev.get("event_id", "")},
     }
-    indep = 1
+    indep = int(ev.get("independent_source_count") or 1) if is_new else 1
     vl = derive_verification_level(
         ev, source_type=stype, source_group=src["source_group"], is_direct_origin=is_direct,
         independent_source_count=indep, claim_origin_type=src.get("claim_origin_type", "unknown"))
@@ -271,14 +291,14 @@ def event_to_cluster(ev, idx):
     event_date = dt.date().isoformat() if dt else ""
     cluster = {
         "event_id": event_id(cc, ev.get("location", ""), etype, event_date, ev.get("event_type", ""),
-                             seed=ev.get("event_id", "")),
+                             seed="" if is_new else ev.get("event_id", "")),
         "schema_version": "2.0", "pipeline_version": 2, "run_id": "",
         "legacy_event_id": ev.get("event_id", ""),
         "country_code": cc, "country_cn": country,
         "country_risk_level": risk["country_risk_level"], "country_risk_label": risk["country_risk_label"],
         "event_type": etype, "event_severity": normalize_event_severity(ev.get("event_severity", "")),
         "event_status": normalize_event_status(""),
-        "event_time": etime, "event_time_end": "",
+        "event_time": etime, "event_time_end": ev.get("event_time_end") or None,
         "location_name": ev.get("location", ""), "location_admin1": "", "location_admin2": "",
         "latitude": ev.get("latitude"), "longitude": ev.get("longitude"),
         "title_cn": ev.get("title_cn", ""), "title_original": ev.get("title_original", ""),
@@ -291,18 +311,25 @@ def event_to_cluster(ev, idx):
         "potential_impact": ev.get("potential_impact", ""), "current_progress": ev.get("progress", ""),
         "legacy_promotion_class": ev.get("source_class", "") or "",
         "legacy_publication_status": ev.get("verification_status", ""),
-        "first_seen_at": ev.get("created_at", ""), "last_seen_at": ev.get("updated_at", ""),
-        "created_at": ev.get("created_at", ""), "updated_at": ev.get("updated_at", ""),
+        "first_seen_at": ev.get("created_at") or None, "last_seen_at": ev.get("updated_at") or None,
+        "created_at": ev.get("created_at") or None, "updated_at": ev.get("updated_at") or None,
         "legacy_payload": dict(ev),
     }
     pol = evaluate(vl)
     cluster["verification_score"] = pol["verification_score"]
     cluster["verification_label_cn"] = pol["verification_label_cn"]
-    # 历史已发布事件（来自 events.json 的既有发布集）迁移后保持 published，
-    # 以保证「页面显示效果暂时不变」；verification_level 仍保留供后续自动核实使用。
-    cluster["publication_status"] = "published"
-    cluster["quality_gate_passed"] = True
-    cluster["publication_reason"] = f"历史已发布事件（迁移保留）；verification_level={vl}"
+    if is_new:
+        # 新提升事件：由确定性发布政策决定（仅 cross_verified / direct_official_source
+        # 可自动发布；其余进入 verification_pending，不自动发布单一来源）。
+        cluster["publication_status"] = pol["publication_status"]
+        cluster["quality_gate_passed"] = pol["quality_gate_passed"]
+        cluster["publication_reason"] = pol["publication_reason"]
+    else:
+        # 历史已发布事件（来自 events.json 的既有发布集）迁移后保持 published，
+        # 以保证「页面显示效果暂时不变」；verification_level 仍保留供后续自动核实使用。
+        cluster["publication_status"] = "published"
+        cluster["quality_gate_passed"] = True
+        cluster["publication_reason"] = f"历史已发布事件（迁移保留）；verification_level={vl}"
     return cluster, src_article
 
 
@@ -343,7 +370,7 @@ def quarantine_to_record(q):
     return {
         "quarantine_id": aid, "original_object_type": "event", "original_id": oid,
         "reason_code": rc, "reason_cn": reason or "隔离",
-        "detected_at": q.get("detected_at", ""),
+        "detected_at": q.get("detected_at") or None,
         "detected_by": "auto_quarantined" if q.get("review_status") == "auto_quarantined" else "pipeline",
         "source_file": "data/quarantine_events.json", "legacy_payload": dict(q),
         "review_status": "not_required" if q.get("review_status") == "auto_quarantined" else "pending_review",
@@ -428,7 +455,8 @@ def build_canonical(raw, pend, evs, quar, srcs):
     for ev in evs:
         try:
             cl, src_art = event_to_cluster(ev, idx)
-            # 来源 Article 并入
+            # 来源 Article 并入；事件来源 Article 必须关联到所属 cluster
+            src_art["linked_event_id"] = cl["event_id"]
             if src_art["article_id"] not in articles:
                 articles[src_art["article_id"]] = src_art
             else:

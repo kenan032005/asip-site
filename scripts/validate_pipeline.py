@@ -369,6 +369,29 @@ def main(run_id=None, dist_dir=None, stage="dist"):
     else:
         ok("V16-summary-trace", f"latest-summary 的 {len(summary_event_ids)} 个事件均可追溯且通过闸门")
 
+    # ── 17. Stage-2 canonical 与遗留视图一致性（canonical 存在时）────
+    canon_dir = os.path.join(DATA_DIR, "canonical")
+    if os.path.isdir(canon_dir):
+        cl_doc = load_json(os.path.join(canon_dir, "event_clusters.json")) or {}
+        clusters = cl_doc.get("items", [])
+        if not clusters:
+            fail("V17-canonical", "canonical/event_clusters.json 存在但为空或不可读", is_critical=True)
+        else:
+            legacy_ids = {e.get("event_id") for e in events_list if e.get("event_id")}
+            cluster_leids = {c.get("legacy_event_id") for c in clusters if c.get("legacy_event_id")}
+            if not events_doc.get("generated_from_canonical"):
+                fail("V17-canonical", "events.json 缺少 generated_from_canonical 标记（旧池可能被直接写入）", is_critical=True)
+            elif legacy_ids != cluster_leids:
+                only_l = list(legacy_ids - cluster_leids)[:3]
+                only_c = list(cluster_leids - legacy_ids)[:3]
+                fail("V17-canonical",
+                     f"legacy events 与 canonical clusters 的 event_id 集合不一致 (legacy_only={only_l} canonical_only={only_c})",
+                     is_critical=True)
+            else:
+                ok("V17-canonical", f"canonical clusters={len(clusters)} 与 legacy events={len(legacy_ids)} 一致，且 events.json 为单向生成视图")
+    else:
+        ok("V17-canonical", "canonical 未建立（迁移前），跳过一致性检查")
+
     # ── 总结 ────────────────────────────────────────────────
     print(f"\n{'='*60}")
     print(f"校验结果: {len(errors)} 个问题, {len(critical)} 个严重错误")
