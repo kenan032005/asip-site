@@ -227,10 +227,16 @@ def run_mode(mode, trigger):
 
         # 2) 单元测试
         print("\n[2] unit tests ...")
-        rc, out, err = run_cmd([PYTHON, str(HERE / "tests" / "test_country.py")], timeout=120)
-        tests_ok = rc == 0 and "FAIL=0" in out  # 以测试脚本的结果行为准（rc=0 且 FAIL=0）
+        tests_ok = True
+        tests_out = ""
+        for test_file in ("test_country.py", "test_stage1_pipeline.py"):
+            rc, out, err = run_cmd([PYTHON, str(HERE / "tests" / test_file)], timeout=180)
+            ok = rc == 0 and "FAIL=0" in out  # 以测试脚本的结果行为准（rc=0 且 FAIL=0）
+            tests_ok = tests_ok and ok
+            tests_out += f"[{test_file}] rc={rc} " + (out + err)[-200:] + "\n"
+        out, err = tests_out, ""
         add_log_step(log, "unit_tests", "success" if tests_ok else "failed",
-                     details={"output": (out + err)[-400:]})
+                     details={"output": tests_out[-800:]})
         print(f"  tests: {'OK' if tests_ok else 'FAIL'}")
         if not tests_ok:
             print((out + err)[-400:])

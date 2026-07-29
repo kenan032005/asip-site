@@ -43,7 +43,11 @@ asip-site/
 │   └── latest-summary.json 首页概览/指标/各区块摘要
 ├── reports/<国家>/          六国日报（按日期归档的 JSON）
 ├── scripts/
-│   ├── collect.py           采集流水线（规范化→去重→核实→翻译）
+│   ├── pipeline_runner.py   ★ 统一编排器（唯一运行入口，见第十二节）
+│   ├── pipeline_core.py     ★ 时区/run_id/锁/统计/闸门 公共库
+│   ├── validate_pipeline.py ★ 分阶段校验器（失败非零退出码）
+│   ├── tests/               单元与回归测试（test_country / test_stage1_pipeline）
+│   ├── collect.py           采集流水线（规范化→去重→核实→翻译，由编排器调用）
 │   ├── normalize.py         字段规范化与校验
 │   ├── deduplicate.py       事件去重（多源合并）
 │   ├── verify.py            可信度推断
@@ -191,7 +195,7 @@ python tools/setup_gh_pages.py
 | 日报按日期+国家归档 | ✅ reports/<国>/<日期>.json |
 | 每条信息有来源+原文链接 | ✅ 事件字段 |
 | 页面时间均为北京时间 | ✅ 前端统一换算 |
-| 每天 22:00 更新 | ⚠️ Actions 定时待启用（需 workflow 令牌）；当前由 WorkBuddy/手动 22:00 更新 |
+| 每天 22:00 更新 | ✅ WorkBuddy 自动化已实测（2026-07-29 22:53 定时触发 run_id `20260729T225349+0800_37nrdr` 全链路成功）；Actions 定时为备用（blocked_by_permission：PAT 无 workflow 权限） |
 | 失败不覆盖上一版 | ✅ 仅成功才部署 |
 | 传染病页仅占位 | ✅ 无虚构数据 |
 | 手机端正常 | ✅ 响应式 CSS |
@@ -242,3 +246,47 @@ python tools/setup_gh_pages.py
 ### 11.6 自动化
 - WorkBuddy 自动化：每 2 小时增量采集 + 每日北京 22:00 全量核实与日报。
 - GitHub Actions 备用：`.github/workflows/auto-update.yml`（每 2 小时 / 北京 21:30 补充 / 22:00 日报，需 workflow 权限 PAT 推送启用）。
+
+---
+
+## 十二、第一阶段收尾整改（2026-07-29）
+
+针对"线上数据不一致、日期硬编码、时区伪造、统计失真、校验可跳过"等 12 项遗留问题完成收尾。
+
+### 12.1 统一编排器（scripts/pipeline_runner.py，pipeline_version=2）
+- **唯一入口**：手动与自动任务均只调用
+  `python scripts/pipeline_runner.py --mode {incremental|daily|full} --trigger {manual|scheduled}`。
+  旧 `collect.py` 直跑链路已废弃（自动任务不再调用，避免覆盖新数据）。
+- **链路**：git_pull → 单元测试 → 数据汇总 → 日报生成 → source 校验 → 提交 main → 构建 → dist 校验 → 推送 main → 部署 gh-pages → **线上验证**（轮询线上 status.json，run_id 一致才算成功）。
+- **失败即失败**：任一步骤失败/校验不通过/线上 run_id 不一致 → 退出码非零、不部署、不覆盖上一版。
+- **run_id**：`YYYYMMDDTHHMMSS+0800_xxxxxx`，全链路（main 提交、gh-pages 提交、线上 JSON、运行日志）一致可追溯。
+- 运行日志：`logs/pipeline_<run_id>.json`（含每步状态、main/gh-pages commit、线上验证时间）。
+- 运行锁 `data/.pipeline.lock`（不入库）防并发覆盖。
+
+### 12.2 真实时区与日报窗口
+- 所有时间基于 `zoneinfo.ZoneInfo("Asia/Shanghai")` / `ZoneInfo("UTC")`（依赖 `tzdata`），**禁止** `utcnow()+8h` 手工换算。
+- 日报目标日期由 `get_latest_completed_report_date()` 按北京时间自动计算（<22:00 取前一日，≥22:00 取当日），**无任何日期硬编码**。
+- 日报窗口严格校验（V10）：起止均为北京 22:00、长度 24h、结束不晚于生成时间、文件名与窗口一致；legacy 报告显式标注跳过，当前 pipeline 报告不可跳过。
+
+### 12.3 校验器（scripts/validate_pipeline.py）
+- 分阶段：`--stage source`（构建前，跳过 dist 检查）/ `--stage dist`（构建后完整 16 项检查）。
+- 检查项含：JSON 合法性、三处 run_id 一致、pipeline_version=2、风险等级、event_id/source_url 完备、隔离池无重叠、质量闸门、24h/7d 统计一致、日报窗口、dist 与 source 事件数一致、无未来时间、summary 可追溯。
+- **失败返回非零退出码并阻止部署**（已由回归测试覆盖验证）。
+
+### 12.4 数据隔离与真实统计
+- 旧 pipeline（pv<2）与误判数据隔离于 `data/quarantine_events.json`，不进入首页/统计/日报；统计仅计"pv2 + 闸门通过 + 未隔离 + 字段完整"事件（`calculate_public_statistics` 单一实现，status 与 summary 共用）。
+- 信息源统计来自真实运行结果（`compute_source_statistics`），**杜绝 enabled=success**。
+
+### 12.5 测试
+- `scripts/tests/test_country.py`：国家识别 24 项。
+- `scripts/tests/test_stage1_pipeline.py`：第一阶段回归 36 项（run_id/时区/日报窗口/统计闸门/源统计/运行锁/校验退出码/绝对路径扫描/status 元数据）。
+- 两者均纳入 pipeline 单测步骤，任一 FAIL 即整体失败。
+
+### 12.6 自动任务（当前生效）
+- WorkBuddy 自动化 ×2：每 2 小时增量（`--mode incremental --trigger scheduled`）、每日北京 22:00 日报（`--mode daily --trigger scheduled`）。
+- 实测证据：2026-07-29 22:53（北京）定时触发 daily，run_id `20260729T225349+0800_37nrdr`，11 步全部 success，线上验证通过。
+- GitHub Actions 定时：**blocked_by_permission**——现有 PAT 仅 `repo` 权限、无 `workflow` scope，工作流文件无法推送。提供带 workflow 权限的令牌后 `git add .github && git push` 即可启用为备用链路。
+
+### 12.7 已知限制
+- 线上生效以 WorkBuddy 桌面端在线为前提（自动任务由本机执行）。
+- 源码与配置中不含本机绝对路径（由回归测试持续扫描保障）。
