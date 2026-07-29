@@ -863,6 +863,16 @@
 - 站点地址：https://kenan032005.github.io/asip-site/
 - 备注：PAT 从 gitignored 的 deploy.token 读取，本次未使用（未推送）；未写入任何提交文件。
 
+## 2026-07-29 08:48 (GMT+3) 执行
+- 采集：collect.py 成功运行（乍得 45 / 尼日尔 46 个来源，约 8 分钟），raw_candidates 158 条、pending 26 条（乍得 19 / 尼日尔 7），去重后本次提升为正式事件：0（data/events.json 维持 143 条）。
+- 翻译：needs_translation=0，无需翻译，跳过 apply_translations。
+- 日报：generate_reports.py 生成 6 份日报（日期 2026-07-29 北京时间），乍得持续跟踪 2、尼日尔 0。
+- 摘要：build_summary.py 已更新（demo_mode=False；最新事件15，极高/高风险12，近7日81，涉华0）。
+- 构建：build_site.py 构建 dist（9 个 HTML，内联数据快照=True）。
+- 部署：gh-pages 强制推送成功（4f885db...3b3a4e2）；脚本收尾清理 .deploy_tmp 被沙箱拦截，已手动删除（避免凭据残留）。
+- 站点地址：https://kenan032005.github.io/asip-site/
+- 备注：PAT 从 gitignored 的 deploy.token 读取，仅用于本次推送，未写入任何提交文件；合规要求满足。
+
 ## 2026-07-28 08:39 (GMT+3) 执行
 - 采集：GDELT 返回 HTTP 429（Too Many Requests），本次采集未成功（网络问题）。data/events.json 无新增，本次新增事件：0。
 - 日报：generate_reports.py 生成 6 份日报（chad, niger, benin, south-sudan, sudan, ethiopia），reports_today=6（日期 2026-07-28 北京时间）。

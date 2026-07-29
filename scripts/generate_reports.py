@@ -212,6 +212,31 @@ def main():
     win_start = win_end - timedelta(hours=24)
     generated_at = bj.strftime("%Y-%m-%d %H:%M:%S")
 
+    # ── Stage-1 日报时间窗口校验 ─────────────────────────
+    # 规则：generated_at 必须 >= win_end（日报生成时间不得早于统计窗口结束时间）
+    #       北京时间 22:00 之前不得生成当天正式日报。
+    if not args.date:
+        # 自动模式（不指定 --date）：校验时间
+        if bj < win_end:
+            print(f"⛔ 拒绝生成日报：当前北京时间 {bj.strftime('%H:%M:%S')} 早于窗口结束 22:00")
+            print(f"   窗口: {win_start.strftime('%Y-%m-%d %H:%M')} → {win_end.strftime('%Y-%m-%d %H:%M')}")
+            print(f"   规则: 北京时间 22:00 之后方可生成当天正式日报。请等待或在 22:00 后重新运行。")
+            print(f"   提示: 如需补生成历史日报，请使用 --date YYYY-MM-DD")
+            return 1  # 非零退出码，阻止构建流程
+    else:
+        # 手动补生成模式（--date）：不检查 22:00 限制，但需检查窗口不晚于生成时间
+        bj_naive = datetime(bj.year, bj.month, bj.day, bj.hour, bj.minute, bj.second)
+        if bj_naive < win_end:
+            print(f"⚠️  补生成模式：生成时间 ({bj.strftime('%Y-%m-%d %H:%M')}) 接近窗口结束 ({win_end.strftime('%Y-%m-%d %H:%M')})，允许补生成。")
+        print(f"   手动补生成日期: {date_str}")
+
+    # 确保 reporting_window_end <= generated_at（全模式通用校验）
+    bj_naive = datetime(bj.year, bj.month, bj.day, bj.hour, bj.minute, bj.second)
+    if bj_naive < win_end:
+        print(f"⛔ 严重错误：日报统计窗口结束时间 ({win_end.strftime('%Y-%m-%d %H:%M')}) 晚于生成时间 ({bj.strftime('%Y-%m-%d %H:%M')})")
+        print(f"   构建已阻止。不发布该日报。")
+        return 1
+
     countries = load_json(os.path.join(DATA, "countries.json"), {}).get("countries", [])
     events_all = load_json(os.path.join(DATA, "events.json"), {}).get("events", [])
     daily = [c for c in countries if c.get("has_daily")]

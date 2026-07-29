@@ -14,14 +14,49 @@ const NAV = [
   ["disease-risk.html", "非洲传染病风险"],
 ];
 
-// 事件类型（与 data/events.json 的 event_type 对齐）
-const EVENT_TYPES = [
-  "武装冲突", "恐怖袭击", "军事行动", "政变及政治危机",
-  "选举及政治活动", "示威、罢工和社会骚乱", "绑架、抢劫和严重犯罪",
-  "部族、族群和社区冲突", "边境关闭及跨境风险", "航空、道路、港口和交通中断",
-  "油气、矿业、电力和重要基础设施", "自然灾害", "传染病及公共卫生",
-  "涉中国企业和公民", "其他重大社会安全事件",
-];
+// 事件类型 —— Stage-1: 英文枚举代码 → 中文显示（仅此唯一映射表）
+// 数据层统一使用英文代码（如 public_health），前端统一通过此表显示中文。
+// 未识别类型统一显示「其他安全事件」。
+const EVENT_TYPE_CN = {
+  "armed_conflict": "武装冲突",
+  "terrorist_attack": "恐怖袭击",
+  "military_operation": "军事行动",
+  "political_crisis": "政治危机",
+  "election_security": "选举安全",
+  "protest": "抗议示威",
+  "strike": "罢工",
+  "civil_unrest": "社会动荡",
+  "kidnapping": "绑架劫持",
+  "serious_crime": "严重刑事犯罪",
+  "communal_conflict": "社区及部族冲突",
+  "border_security": "边境安全",
+  "transport_disruption": "交通中断",
+  "infrastructure_security": "基础设施安全",
+  "natural_disaster": "自然灾害",
+  "public_health": "传染病及公共卫生",
+  "china_related": "涉华安全事件",
+  "foreign_national_security": "外籍人员安全",
+  "policy_security": "安全政策法规",
+  "other_security": "其他安全事件",
+};
+// 中→英逆向映射（兼容旧数据中的中文类型）
+const EVENT_TYPE_EN = {};
+for (const [k, v] of Object.entries(EVENT_TYPE_CN)) { EVENT_TYPE_EN[v] = k; }
+
+function eventTypeDisplay(raw) {
+  // 输入可能是英文代码或旧中文 => 统一返回中文显示
+  if (!raw) return "其他安全事件";
+  if (EVENT_TYPE_CN[raw]) return EVENT_TYPE_CN[raw];   // 英文代码命中
+  if (EVENT_TYPE_EN[raw]) return raw;                   // 旧中文命中
+  // 模糊匹配
+  for (const [en, cn] of Object.entries(EVENT_TYPE_CN)) {
+    if (cn === raw || cn.indexOf(raw) >= 0 || raw.indexOf(cn) >= 0) return cn;
+  }
+  return "其他安全事件";
+}
+
+// 筛选/分组可用的中文标签列表（从映射表值去重生成）
+const EVENT_TYPES = [...new Set(Object.values(EVENT_TYPE_CN))].sort();
 
 // 可信度
 const CONFIDENCE = { verified: "已核实", high: "较高可信", pending: "待进一步核实" };
@@ -101,7 +136,7 @@ function eventCard(ev, opts) {
   const tags = [];
   if (ev.country) tags.push(`<span class="ec-tag">${esc(ev.country)}</span>`);
   if (ev.location && ev.location !== ev.country) tags.push(`<span class="ec-tag">${esc(ev.location)}</span>`);
-  if (ev.event_type) tags.push(`<span class="ec-tag">${esc(ev.event_type)}</span>`);
+  if (ev.event_type) tags.push(`<span class="ec-tag">${esc(eventTypeDisplay(ev.event_type))}</span>`);
   const china = (ev.china_related || ev.involves_china) ? `<span class="ec-tag" style="background:#ffe0e0;color:#b71c1c;">涉华</span>` : "";
   const timeStr = cardTime(ev.published_time || ev.event_time);
   const timeEl = timeStr ? `<span class="ec-time">${timeStr}</span>` : "";
@@ -145,7 +180,13 @@ function setUpdated(s) {
 }
 function renderFooter() {
   const f = document.querySelector("footer.site");
-  if (f) f.innerHTML = '非洲地区社会安全信息平台 · 第一阶段框架版 · 数据来源于公开信息，仅供参考，不构成行动或决策依据 · 所有时间均为北京时间（UTC+8）';
+  if (f) f.innerHTML = '非洲地区社会安全信息平台 · Stage-1 主链路重建版 · 数据来源于公开信息，仅供参考，不构成行动或决策依据 · 所有时间均为北京时间（UTC+8）<div id="asip-build-meta" style="margin-top:4px;font-size:12px;color:#8899aa;"></div>';
+  // 尝试加载 status 以显示 run_id
+  if (window.ASIP && window.ASIP.renderFooterMeta) {
+    window.ASIP.load('status').then(function(st) {
+      window.ASIP.renderFooterMeta(st);
+    }).catch(function() {});
+  }
 }
 function showDemoBanner() {
   API.get("status").then(function (st) {
