@@ -57,14 +57,15 @@ def load_db(data_dir=None):
 
 def get_build_meta(run_id=None):
     """从 status.json 读取或生成构建元数据。"""
+    status = load_json(os.path.join(DATA_DIR, "status.json"), {})
     if run_id is None:
-        status = load_json(os.path.join(DATA_DIR, "status.json"), {})
         run_id = status.get("run_id", "")
     return {
         "run_id": run_id,
         "pipeline_version": PIPELINE_VERSION,
         "build_time": bj_iso(),
         "build_time_bj": bj_format(),
+        "source_commit": (status.get("source_commit") or "")[:8],
     }
 
 

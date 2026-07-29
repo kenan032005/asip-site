@@ -13,6 +13,7 @@ import os
 import sys
 import json
 import argparse
+from datetime import datetime
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -20,12 +21,105 @@ sys.path.insert(0, HERE)
 from pipeline_core import (
     PIPELINE_VERSION, DATA_DIR, STAGE1_COUNTRIES, FIXED_RISK_LEVELS,
     bj_now, bj_iso, bj_format, parse_time,
-    load_json, passes_stage1_gate,
+    load_json, passes_stage1_gate, _is_current_event,
 )
 
 ROOT = os.path.dirname(HERE)
+REPORTS_DIR = os.path.join(ROOT, "reports")
 EXIT_OK = 0
 EXIT_FAIL = 1
+
+
+def _parse_bj(s):
+    """解析 'YYYY-MM-DD HH:MM' / 'YYYY-MM-DD HH:MM:SS' 为 naive 北京时间。"""
+    if not s:
+        return None
+    for fmt in ("%Y-%m-%d %H:%M:%S", "%Y-%m-%d %H:%M"):
+        try:
+            return datetime.strptime(s, fmt)
+        except ValueError:
+            continue
+    return None
+
+
+def validate_reports(dist_dir):
+    """真实校验乍得/尼日尔日报窗口（V10）。
+
+    返回 (passed, errors, warnings)：
+      - errors    : 当前 pipeline 报告的真实窗口错误（致命）
+      - warnings  : legacy 报告跳过等提示（不致命）
+    """
+    errors = []
+    warnings = []
+    now = bj_now()
+    countries_doc = load_json(os.path.join(DATA_DIR, "countries.json"), {"countries": []})
+    daily_map = {}
+    for c in countries_doc.get("countries", []):
+        if c.get("has_daily"):
+            daily_map[c.get("cn")] = c.get("daily_country", c.get("cn"))
+
+    for country_cn in STAGE1_COUNTRIES:
+        dc = daily_map.get(country_cn, country_cn.lower())
+        rdir = os.path.join(REPORTS_DIR, dc)
+        if not os.path.isdir(rdir):
+            warnings.append(f"V10-{dc}: reports/{dc} 目录不存在")
+            continue
+        files = sorted(f for f in os.listdir(rdir) if f.endswith(".json") and f != "index.json")
+        if not files:
+            warnings.append(f"V10-{dc}: 无日报文件")
+            continue
+        for fn in files:
+            path = os.path.join(rdir, fn)
+            rep = load_json(path)
+            if not isinstance(rep, dict):
+                errors.append(f"V10-{dc}/{fn}: 非合法 JSON")
+                continue
+            # legacy 报告（非当前 pipeline_version=2）跳过严格校验，仅警告
+            if rep.get("pipeline_version") != PIPELINE_VERSION:
+                warnings.append(f"V10-{dc}/{fn}: legacy 报告（pipeline_version={rep.get('pipeline_version')}），跳过严格窗口校验")
+                continue
+            rid = rep.get("run_id", "<none>")
+            ws = _parse_bj(rep.get("reporting_window_start", ""))
+            we = _parse_bj(rep.get("reporting_window_end", ""))
+            ga = _parse_bj(rep.get("generated_at_bj", ""))
+            rdate = rep.get("date", "")
+            # 1-3 字段存在
+            if ws is None or we is None or ga is None:
+                errors.append(f"V10-{dc}/{fn}: 缺少窗口/生成时间字段 (run_id={rid})")
+                continue
+            # 4 start < end
+            if not (ws < we):
+                errors.append(f"V10-{dc}/{fn}: 窗口 start>=end (run_id={rid})")
+                continue
+            # 5 窗口结束不晚于生成时间
+            if we > ga:
+                errors.append(f"V10-{dc}/{fn}: 窗口结束 {we} 晚于生成时间 {ga} (run_id={rid})")
+                continue
+            # 6 窗口长度 24h
+            dur = (we - ws).total_seconds() / 3600
+            if not (23.5 <= dur <= 24.5):
+                errors.append(f"V10-{dc}/{fn}: 窗口长度 {dur:.1f}h 非24h (run_id={rid})")
+                continue
+            # 7 起止均为北京 22:00
+            if not (ws.hour == 22 and ws.minute == 0 and we.hour == 22 and we.minute == 0):
+                errors.append(f"V10-{dc}/{fn}: 窗口非北京22:00起止 {ws}/{we} (run_id={rid})")
+                continue
+            # 8 文件日期 == report_date
+            if fn[:-5] != rdate:
+                errors.append(f"V10-{dc}/{fn}: 文件名日期 {fn[:-5]} != 内容 date {rdate} (run_id={rid})")
+                continue
+            # 9 禁止 22:00 前生成当天正式日报
+            if rdate == now.strftime("%Y-%m-%d") and ga < now.replace(hour=22, minute=0, second=0, microsecond=0):
+                errors.append(f"V10-{dc}/{fn}: 北京时间22:00前生成了当天({rdate})正式日报 (run_id={rid})")
+                continue
+            # 10 dist 中对应文件存在且 run_id 一致
+            drep = os.path.join(dist_dir, "reports", dc, fn)
+            if os.path.exists(drep):
+                drep_doc = load_json(drep)
+                if drep_doc.get("run_id") != rid:
+                    errors.append(f"V10-{dc}/{fn}: dist run_id {drep_doc.get('run_id')} != 源 {rid}")
+                    continue
+    return (len(errors) == 0), errors, warnings
 
 errors = []
 warnings = []
@@ -46,13 +140,14 @@ def ok(rule_id, msg):
     print(f"✅ [{rule_id}] {msg}")
 
 
-def main(run_id=None, dist_dir=None):
+def main(run_id=None, dist_dir=None, stage="dist"):
     if dist_dir is None:
         dist_dir = os.path.join(ROOT, "dist")
 
     print(f"\n{'='*60}")
     print(f"ASIP Stage-1 Pipeline Validation")
     print(f"  run_id: {run_id or '<not specified>'}")
+    print(f"  stage : {stage}")
     print(f"  pipeline_version: {PIPELINE_VERSION}")
     print(f"  time: {bj_iso()}")
     print(f"{'='*60}\n")
@@ -184,39 +279,49 @@ def main(run_id=None, dist_dir=None):
     else:
         ok("V09-7d", f"7d 一致: {status_7d}")
 
-    # ── 10. 日报窗口校验 ────────────────────────────────────
-    ok("V10-report", "日报时间窗口校验（由 generate_reports.py 负责，此处跳过）")
-
-    # ── 11. dist 文件存在性 ──────────────────────────────────
-    for fname in ["index.html", "events.html", "data/status.json", "data/latest-summary.json"]:
-        dpath = os.path.join(dist_dir, fname)
-        if os.path.exists(dpath):
-            ok(f"V11-dist-{fname}", f"dist/{fname} 存在")
-        else:
-            fail(f"V11-dist-{fname}", f"dist/{fname} 不存在")
-
-    # ── 12. dist run_id 一致性 ──────────────────────────────
-    dist_status = load_json(os.path.join(dist_dir, "data", "status.json"))
-    if dist_status:
-        ds_rid = dist_status.get("run_id", "")
-        if ds_rid and status_rid and ds_rid != status_rid:
-            fail("V12-dist-rid", f"dist status.run_id={ds_rid} != data status.run_id={status_rid}", is_critical=True)
-        else:
-            ok("V12-dist-rid", f"dist.run_id matches data: {ds_rid}")
-        ds_pv = dist_status.get("pipeline_version")
-        if ds_pv != PIPELINE_VERSION:
-            fail("V12-dist-pv", f"dist pipeline_version={ds_pv} != {PIPELINE_VERSION}", is_critical=True)
+    # ── 10. 日报窗口真实校验 ────────────────────────────────
+    rep_passed, rep_errors, rep_warns = validate_reports(dist_dir)
+    for w in rep_warns:
+        print(f"⚠ [{w.split(':',1)[0] if ':' in w else 'V10'}] {w}")
+    if rep_passed:
+        ok("V10-report", "日报时间窗口校验通过（当前 pipeline 报告：起止均为北京22:00、长度24h、结束不晚于生成时间、文件名一致；legacy 报告已跳过）")
     else:
-        fail("V12-dist-status", f"dist/data/status.json 不可读")
+        for m in rep_errors:
+            fail("V10-report", m, is_critical=True)
 
-    # ── 13. main vs dist 数据数量一致 ────────────────────────
-    dist_events = load_json(os.path.join(dist_dir, "data", "events.json"), {"events": []})
-    dist_ev_count = len(dist_events.get("events", []))
-    src_ev_count = len(events_list)
-    if dist_ev_count != src_ev_count:
-        fail("V13-count", f"dist events={dist_ev_count} != source events={src_ev_count}", is_critical=True)
+    # ── 11-13. dist 相关校验（仅 stage=dist 时执行）─────────
+    if stage == "dist":
+        for fname in ["index.html", "events.html", "data/status.json", "data/latest-summary.json"]:
+            dpath = os.path.join(dist_dir, fname)
+            if os.path.exists(dpath):
+                ok(f"V11-dist-{fname}", f"dist/{fname} 存在")
+            else:
+                fail(f"V11-dist-{fname}", f"dist/{fname} 不存在")
+
+        # ── 12. dist run_id 一致性 ──────────────────────────────
+        dist_status = load_json(os.path.join(dist_dir, "data", "status.json"))
+        if dist_status:
+            ds_rid = dist_status.get("run_id", "")
+            if ds_rid and status_rid and ds_rid != status_rid:
+                fail("V12-dist-rid", f"dist status.run_id={ds_rid} != data status.run_id={status_rid}", is_critical=True)
+            else:
+                ok("V12-dist-rid", f"dist.run_id matches data: {ds_rid}")
+            ds_pv = dist_status.get("pipeline_version")
+            if ds_pv != PIPELINE_VERSION:
+                fail("V12-dist-pv", f"dist pipeline_version={ds_pv} != {PIPELINE_VERSION}", is_critical=True)
+        else:
+            fail("V12-dist-status", f"dist/data/status.json 不可读", is_critical=True)
+
+        # ── 13. main vs dist 数据数量一致 ────────────────────────
+        dist_events = load_json(os.path.join(dist_dir, "data", "events.json"), {"events": []})
+        dist_ev_count = len(dist_events.get("events", []))
+        src_ev_count = len(events_list)
+        if dist_ev_count != src_ev_count:
+            fail("V13-count", f"dist events={dist_ev_count} != source events={src_ev_count}", is_critical=True)
+        else:
+            ok("V13-count", f"事件数量一致: {src_ev_count}")
     else:
-        ok("V13-count", f"事件数量一致: {src_ev_count}")
+        print("ℹ [V11~V13,V15] stage=source：dist 尚未构建，跳过 dist 相关校验")
 
     # ── 14. 未来时间检查 ──────────────────────────────────────
     now = bj_now()
@@ -232,10 +337,10 @@ def main(run_id=None, dist_dir=None):
     else:
         ok("V14-future", "无未来时间事件")
 
-    # ── 15. 数据文件引用存在性 ───────────────────────────────
-    # 检查 index.html 引用的数��路径在 dist 中存在
+    # ── 15. 数据文件引用存在性（仅 stage=dist）────────────────
+    # 检查 index.html 引用的数据路径在 dist 中存在
     index_path = os.path.join(dist_dir, "index.html")
-    if os.path.exists(index_path):
+    if stage == "dist" and os.path.exists(index_path):
         with open(index_path, encoding="utf-8") as f:
             html = f.read()
         data_refs = ["data/status.json", "data/latest-summary.json", "data/events.json"]
@@ -245,6 +350,23 @@ def main(run_id=None, dist_dir=None):
                     ok(f"V15-ref-{ref}", f"HTML 引用的 {ref} 在 dist 中存在")
                 else:
                     fail(f"V15-ref-{ref}", f"HTML 引用 {ref} 但 dist 中不存在")
+
+    # ── 16. summary 事件可追溯性（旧数据不得进首页）────────────
+    summary_event_ids = set()
+    for grp in ("high_risk_events", "latest_events", "china_related"):
+        for e in summary.get(grp, []):
+            if isinstance(e, dict) and e.get("event_id"):
+                summary_event_ids.add(e["event_id"])
+    event_by_id = {e.get("event_id"): e for e in events_list}
+    untraceable = []
+    for eid in summary_event_ids:
+        ev = event_by_id.get(eid)
+        if ev is None or not _is_current_event(ev):
+            untraceable.append(eid)
+    if untraceable:
+        fail("V16-summary-trace", f"latest-summary 含 {len(untraceable)} 个无法在公开 events 中追溯或已隔离的 event_id: {untraceable[:5]}", is_critical=True)
+    else:
+        ok("V16-summary-trace", f"latest-summary 的 {len(summary_event_ids)} 个事件均可追溯且通过闸门")
 
     # ── 总结 ────────────────────────────────────────────────
     print(f"\n{'='*60}")
@@ -263,5 +385,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Stage-1 Pipeline 数据质量验证")
     parser.add_argument("--run-id", type=str, help="指定 run_id")
     parser.add_argument("--dist", type=str, default=None, help="dist 目录路径")
+    parser.add_argument("--stage", type=str, default="dist", choices=["source", "dist"],
+                        help="校验阶段：source=构建前(跳过dist检查)，dist=构建后(完整检查)")
     args = parser.parse_args()
-    sys.exit(main(run_id=args.run_id, dist_dir=args.dist))
+    sys.exit(main(run_id=args.run_id, dist_dir=args.dist, stage=args.stage))

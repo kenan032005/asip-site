@@ -1,34 +1,37 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-ASIP 国别日报生成器（第二轮整改：严格北京时间 24h 窗口）。
+ASIP 国别日报生成器（Stage-1：真实北京时间 24h 窗口 + 自动目标日期）。
 
-窗口：前一日北京时间 22:00 → 当日北京时间 22:00。
-- 基于事件发生时间优先；时间不明用发布时间并注明 event_time_basis=published_time；
-- 窗口内事件 → 新增事件 / 重大进展；
-- 超 24h 且无新进展 → 持续跟踪（显示原始日期），不计入新增；
-- 每份日报含 reporting_window_start/end、new/ongoing/pending/verified 计数。
+窗口：目标日期前一日北京时间 22:00 → 目标日期当日北京时间 22:00。
+目标日期自动计算：
+  - 北京时间 < 22:00 → 前一天（其窗口已完整结束）
+  - 北京时间 >= 22:00 → 当天（其窗口刚结束）
 
-用法：python scripts/generate_reports.py [--date YYYY-MM-DD] [--dry]
+用法：
+  python scripts/generate_reports.py [--date YYYY-MM-DD] [--run-id ID] [--dry]
+  （不传 --date 时由 get_latest_completed_report_date 自动决定）
 """
 import os
 import sys
 import json
 import argparse
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+
+from pipeline_core import (
+    TZ_BEIJING, bj_now, parse_time, get_latest_completed_report_date,
+)
+
+ROOT = os.path.dirname(HERE)
 DATA = os.path.join(ROOT, "data")
 REPORTS = os.path.join(ROOT, "reports")
 
 NO_EVENT = "过去24小时未发现经多源核实的重大新增事件。"
 NO_CHINA = "过去24小时未发现经可靠来源证实的涉中国企业或中国公民重大社会安全事件。"
 DEFAULT_BASIS = "基于北京时间前一日22:00至当日22:00公开来源信息整理；结论随后续核实可能调整。"
-
-
-def bj_now():
-    # 统一返回 naive 北京时间（与 to_bj 输出一致，避免 aware/naive 比较错误）
-    return datetime.now(timezone.utc).replace(tzinfo=None) + timedelta(hours=8)
 
 
 def load_json(path, default=None):
@@ -44,23 +47,22 @@ def beijing_date(d):
 
 
 def to_bj(dt_utc_iso):
-    """UTC ISO -> 北京时间 datetime（naive）。失败返回 None。"""
+    """UTC/带偏移 ISO -> 北京时间 naive datetime；失败返回 None。"""
     if not dt_utc_iso:
         return None
     s = dt_utc_iso.strip()
     try:
         dt = datetime.fromisoformat(s.replace("Z", "+00:00"))
-        if dt.tzinfo:
-            dt = dt.astimezone(timezone.utc).replace(tzinfo=None)
-        return dt + timedelta(hours=8)
+        if dt.tzinfo is not None:
+            return dt.astimezone(TZ_BEIJING).replace(tzinfo=None)
+        return dt
     except ValueError:
         try:
-            return datetime.strptime(s[:10], "%Y-%m-%d") + timedelta(hours=8)
+            return datetime.strptime(s[:10], "%Y-%m-%d")
         except ValueError:
             return None
 
 
-# 新事件类型枚举 -> 日报分组
 GROUP_MAP = {
     "political_crisis": "politics", "election_security": "politics",
     "terrorist_attack": "conflict_terror", "military_operation": "conflict_terror",
@@ -71,9 +73,6 @@ GROUP_MAP = {
     "transport_disruption": "infrastructure", "infrastructure_security": "infrastructure",
     "natural_disaster": "infrastructure", "public_health": "infrastructure",
 }
-
-
-# 分组 -> 中文领域名（用于日报文案）
 GROUP_CN = {
     "politics": "政治", "conflict_terror": "武装冲突与恐怖主义",
     "stability": "社会稳定与治安", "infrastructure": "公共卫生、灾害与基础设施",
@@ -84,8 +83,7 @@ GROUP_CN = {
 def event_groups(events):
     g = {"politics": [], "conflict_terror": [], "stability": [], "infrastructure": [], "china": []}
     for e in events:
-        t = e.get("event_type", "")
-        grp = GROUP_MAP.get(t)
+        grp = GROUP_MAP.get(e.get("event_type", ""))
         if grp:
             g[grp].append(e)
         if e.get("china_related") or e.get("involves_china"):
@@ -96,16 +94,13 @@ def event_groups(events):
 def summarize(group_name, evs):
     if not evs:
         return None
-    lines = []
-    for e in evs[:6]:
-        lines.append("· " + (e.get("title_cn") or e.get("title_original") or ""))
+    lines = ["· " + (e.get("title_cn") or e.get("title_original") or "") for e in evs[:6]]
     return "记录 {n} 起相关事件：\n".format(n=len(evs)) + "\n".join(lines)
 
 
-def build_report(country, dc, events_all, date_str, generated_at, win_start, win_end):
+def build_report(country, dc, events_all, date_str, generated_at, generated_at_iso, win_start, win_end, run_id):
     ev_c = [e for e in events_all if e.get("country") == country and not e.get("is_demo")]
-    new_events = []
-    ongoing = []
+    new_events, ongoing = [], []
     for e in ev_c:
         bj = to_bj(e.get("event_time") or e.get("published_time"))
         if bj is None:
@@ -144,11 +139,12 @@ def build_report(country, dc, events_all, date_str, generated_at, win_start, win
         "conclusion": [
             ("今日" + country + "整体安全形势" + ("总体平稳，未记录重大新增事件。" if not has else "存在需关注的安全事件，详见下文。")),
             "管理层重点关注人员出行、营地与办公场所安全及信息报送。",
-            "本日报为公开信息整理，不构成行动依据；具体决策以现场核实为准。"
+            "本日报为公开信息整理，不构成行动依据；具体决策以现场核实为准。",
         ],
         "overall": {
             "text": (NO_EVENT if not has else "最近24小时（北京时间前一日22:00至当日22:00）记录 {n} 起公开报道的社会安全相关事件，涉及{ts}。".format(
-                n=len(new_events), ts="、".join(sorted(set(GROUP_CN.get(GROUP_MAP.get(e.get("event_type", ""), ""), "") for e in new_events if e.get("event_type")) - {""}) or ["多个领域"]))),
+                n=len(new_events),
+                ts="、".join(sorted(set(GROUP_CN.get(GROUP_MAP.get(e.get("event_type", ""), ""), "") for e in new_events if e.get("event_type")) - {""}) or ["多个领域"]))),
             "trend": "基本稳定" if not has else "暂无法判断",
             "trend_vs_prev": "基本稳定" if not has else "相较前一日待评估",
         },
@@ -160,7 +156,7 @@ def build_report(country, dc, events_all, date_str, generated_at, win_start, win
         "china": (summarize("涉华", g["china"]) or NO_CHINA),
         "followup": [
             "持续跟踪过去72小时仍在发展的重大事件（见持续跟踪项）。",
-            "持续跟踪过去7天尚未结束的重要趋势。"
+            "持续跟踪过去7天尚未结束的重要趋势。",
         ],
         "outlook": {
             "most_likely": ["需关注武装冲突、恐怖主义及社会治安类风险的外溢。"] if has else ["近期未出现明显新增风险信号。"],
@@ -173,7 +169,7 @@ def build_report(country, dc, events_all, date_str, generated_at, win_start, win
             "保持信息报送畅通，关注官方与使领馆安全提醒。",
             "人员出行避开示威、集会及敏感地点。",
             "营地与办公场所落实出入管理与应急通信准备。",
-            "涉及边境及跨地区移动前确认通行与安全风险。"
+            "涉及边境及跨地区移动前确认通行与安全风险。",
         ],
         "sources": sources,
     }
@@ -185,7 +181,10 @@ def build_report(country, dc, events_all, date_str, generated_at, win_start, win
         "country": country,
         "country_en": dc,
         "date": date_str,
-        "generated_at_bj": generated_at,
+        "run_id": run_id,
+        "pipeline_version": 2,
+        "generated_at_bj": generated_at,            # 显示用：YYYY-MM-DD HH:MM:SS（北京）
+        "generated_at_bj_iso": generated_at_iso,    # 机器校验用：带 +08:00
         "reporting_window_start": win_start.strftime("%Y-%m-%d %H:%M"),
         "reporting_window_end": win_end.strftime("%Y-%m-%d %H:%M"),
         "new_event_count": len(new_events),
@@ -200,52 +199,44 @@ def build_report(country, dc, events_all, date_str, generated_at, win_start, win
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--date", help="YYYY-MM-DD（北京时间），默认今天")
+    ap.add_argument("--date", help="YYYY-MM-DD（北京时间目标日期，默认自动计算）")
+    ap.add_argument("--run-id", help="指定 run_id 写入日报")
     ap.add_argument("--dry", action="store_true", help="仅预览")
     args = ap.parse_args()
 
     bj = bj_now()
-    date_str = args.date or beijing_date(bj)
-    # 窗口：日报日期（北京）22:00 为结束，前一日 22:00 为开始；--date 可补生成历史日报
+    if args.date:
+        date_str = args.date
+        print(f"[generate_reports] 使用 --date={date_str}（补生成模式）")
+    else:
+        target = get_latest_completed_report_date(bj)
+        date_str = beijing_date(target)
+        print(f"[generate_reports] 自动目标日期={date_str}（当前北京时间 {bj.strftime('%H:%M:%S')}）")
+
+    # 窗口：目标日期 22:00 结束，前一日 22:00 开始
     base = datetime.strptime(date_str, "%Y-%m-%d")
     win_end = base.replace(hour=22, minute=0, second=0, microsecond=0)
     win_start = win_end - timedelta(hours=24)
     generated_at = bj.strftime("%Y-%m-%d %H:%M:%S")
+    generated_at_iso = datetime.now(TZ_BEIJING).isoformat()
 
-    # ── Stage-1 日报时间窗口校验 ─────────────────────────
-    # 规则：generated_at 必须 >= win_end（日报生成时间不得早于统计窗口结束时间）
-    #       北京时间 22:00 之前不得生成当天正式日报。
-    if not args.date:
-        # 自动模式（不指定 --date）：校验时间
-        if bj < win_end:
-            print(f"⛔ 拒绝生成日报：当前北京时间 {bj.strftime('%H:%M:%S')} 早于窗口结束 22:00")
-            print(f"   窗口: {win_start.strftime('%Y-%m-%d %H:%M')} → {win_end.strftime('%Y-%m-%d %H:%M')}")
-            print(f"   规则: 北京时间 22:00 之后方可生成当天正式日报。请等待或在 22:00 后重新运行。")
-            print(f"   提示: 如需补生成历史日报，请使用 --date YYYY-MM-DD")
-            return 1  # 非零退出码，阻止构建流程
-    else:
-        # 手动补生成模式（--date）：不检查 22:00 限制，但需检查窗口不晚于生成时间
-        bj_naive = datetime(bj.year, bj.month, bj.day, bj.hour, bj.minute, bj.second)
-        if bj_naive < win_end:
-            print(f"⚠️  补生成模式：生成时间 ({bj.strftime('%Y-%m-%d %H:%M')}) 接近窗口结束 ({win_end.strftime('%Y-%m-%d %H:%M')})，允许补生成。")
-        print(f"   手动补生成日期: {date_str}")
-
-    # 确保 reporting_window_end <= generated_at（全模式通用校验）
-    bj_naive = datetime(bj.year, bj.month, bj.day, bj.hour, bj.minute, bj.second)
-    if bj_naive < win_end:
-        print(f"⛔ 严重错误：日报统计窗口结束时间 ({win_end.strftime('%Y-%m-%d %H:%M')}) 晚于生成时间 ({bj.strftime('%Y-%m-%d %H:%M')})")
-        print(f"   构建已阻止。不发布该日报。")
+    # ── 硬性窗口校验：reporting_window_end 必须 <= generated_at ──
+    # 以北京时间比较（两者均为北京墙钟）
+    if win_end > bj:
+        print(f"⛔ 严重错误：统计窗口结束 {win_end} 晚于当前生成时间 {bj}。构建已阻止。")
         return 1
 
+    run_id = args.run_id or ""
     countries = load_json(os.path.join(DATA, "countries.json"), {}).get("countries", [])
     events_all = load_json(os.path.join(DATA, "events.json"), {}).get("events", [])
     daily = [c for c in countries if c.get("has_daily")]
 
     print("日报日期（北京）：", date_str, "窗口：", win_start, "→", win_end)
+    any_written = False
     for c in daily:
         cn = c["cn"]
         dc = c.get("daily_country", cn)
-        rep = build_report(cn, dc, events_all, date_str, generated_at, win_start, win_end)
+        rep = build_report(cn, dc, events_all, date_str, generated_at, generated_at_iso, win_start, win_end, run_id)
         out_dir = os.path.join(REPORTS, dc)
         os.makedirs(out_dir, exist_ok=True)
         fname = os.path.join(out_dir, date_str + ".json")
@@ -258,24 +249,17 @@ def main():
         idx = load_json(idx_path, {"country": cn, "reports": []})
         idx["country"] = cn
         idx["reports"] = [r for r in idx.get("reports", []) if r["date"] != date_str]
-        idx["reports"].insert(0, {"date": date_str, "title": rep["title"]})
+        idx["reports"].insert(0, {"date": date_str, "title": rep["title"], "run_id": run_id})
         idx["reports"] = idx["reports"][:60]
         with open(idx_path, "w", encoding="utf-8") as f:
             json.dump(idx, f, ensure_ascii=False, indent=2)
         print("  [生成]", cn, "新增=", rep["new_event_count"], "持续跟踪=", rep["ongoing_event_count"])
+        any_written = True
 
-    if not args.dry:
-        st = load_json(os.path.join(DATA, "status.json"), {})
-        st["reports_today"] = len(daily)
-        st["last_update_bj"] = generated_at
-        st["generated_at_bj"] = generated_at
-        st["report_window_start"] = win_start.strftime("%Y-%m-%d %H:%M")
-        st["report_window_end"] = win_end.strftime("%Y-%m-%d %H:%M")
-        st["next_update_bj"] = "次日 22:00"
-        json.dump(st, open(os.path.join(DATA, "status.json"), "w", encoding="utf-8"),
-                  ensure_ascii=False, indent=2)
-        print("已更新 status.json")
+    if any_written:
+        print(f"✅ 日报已生成（目标日期 {date_str}，窗口 {win_start} → {win_end}）")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
