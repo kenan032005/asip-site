@@ -33,7 +33,7 @@ from data.normalizers import (
     derive_verification_level, derive_needs_translation,
 )
 from data.publication_policy import evaluate, VERIFICATION_LABEL_CN
-from data.repository import Repository
+from data.repository import Repository, RepositorySchemaError
 from data.schema_validator import validate_instance, load_schema
 
 PASS = 0
@@ -274,11 +274,17 @@ try:
     a1m = dict(a1); a1m["summary_original"] = "changed"
     log3 = repo.save_articles([a1m, a2])
     check("修改一条：modified=1", log3["modified"] == 1, str(log3))
-    # 非法条目计入 failed
+    # 非法条目 → 整个保存失败（规范第三节：不允许跳过错误记录后用剩余覆盖原文件）
     bad = {"article_id": "", "processing_status": "raw"}
-    log4 = repo.save_articles([a1m, a2, bad])
-    check("非法条目计入 failed", log4["failed"] >= 1, str(log4))
-    check("非法条目不被写入（数量仍为2）", len(repo.load_articles()) == 2)
+    before = apath.read_bytes()
+    raised = False
+    try:
+        repo.save_articles([a1m, a2, bad])
+    except RepositorySchemaError:
+        raised = True
+    check("非法条目导致整个保存失败（抛 RepositorySchemaError）", raised)
+    check("保存失败后原文件字节级不变（数量仍为2）",
+          apath.read_bytes() == before and len(repo.load_articles()) == 2)
     # 备份目录已生成且为复制（非删除）
     bakdir = apath.parent / ".backups"
     check("备份目录存在（自动备份生效）", bakdir.exists())

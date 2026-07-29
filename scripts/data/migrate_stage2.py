@@ -391,16 +391,23 @@ def upgrade_source(s):
         is_direct = stype in ("government", "military_or_police", "international_organization")
         is_republic = False
         tier = s.get("source_reliability_tier") or derive_tier(stype)
-    return {
+    g = (group or "").lower()
+    is_xinhua = g in ("xinhua", "xinhuanet") or "新华" in name
+    # 新华社默认 claim_origin_type=media_reporting；不得因国家通讯社身份自动视为政府直接声明
+    claim = "media_reporting" if is_xinhua else "unknown"
+    url = s.get("url") or s.get("source_url") or ""
+    out = {
         "source_id": sid, "source_group": group, "source_name": name,
         "source_type": stype, "source_reliability_tier": tier if tier in SOURCE_RELIABILITY_TIER_ENUMS else "tier_3",
         "country_scope": [s.get("country", "")] if s.get("country") else [],
         "language": [normalize_language(s.get("language", ""))],
         "is_direct_origin": bool(is_direct), "is_republication_platform": bool(is_republic),
         "enabled": bool(s.get("enabled", False)), "tested": bool(s.get("tested", False)),
-        "claim_origin_type": "unknown", "url": s.get("url", "") or s.get("source_url", ""),
-        "notes": s.get("notes", ""), "legacy_payload": dict(s),
+        "claim_origin_type": claim, "notes": s.get("notes", ""), "legacy_payload": dict(s),
     }
+    if url:
+        out["url"] = url
+    return out
 
 
 # ── 主迁移逻辑 ───────────────────────────────────────
