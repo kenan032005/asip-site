@@ -169,11 +169,11 @@ def deploy_gh_pages(dist_dir, token, source_commit):
         if rc != 0:
             return None, f"commit failed: {err}"
         url = REPO_PUSH_URL.format(token=token)
-        rc, out, err = git(["push", "-f", url, "HEAD:gh-pages"], cwd=tmp, timeout=180)
+        rc, out, err = git(["push", "-f", url, "HEAD:gh-pages"], cwd=tmp, timeout=420)
         if rc != 0:
             return None, f"push failed: {err}"
         # 获取真实 gh-pages commit
-        rc, out, _ = git(["ls-remote", url, "gh-pages"], timeout=60)
+        rc, out, _ = git(["ls-remote", url, "gh-pages"], timeout=180)
         gh = out.split()[0] if out else None
         return (gh or "unknown"), ""
     except Exception as e:
@@ -204,7 +204,7 @@ def run_mode(mode, trigger):
     try:
         # 1) git pull --rebase
         print("\n[1] git pull --rebase origin main ...")
-        rc, out, err = git(["pull", "--rebase", "origin", "main"], timeout=60)
+        rc, out, err = git(["pull", "--rebase", "origin", "main"], timeout=150)
         add_log_step(log, "git_pull", "success" if rc == 0 else "failed",
                      details={"output": out[-200:], "error": err[-200:]})
         if rc != 0:
@@ -308,7 +308,7 @@ def run_mode(mode, trigger):
 
         # 10) 推送 main
         print("\n[10] git push origin main ...")
-        rc, out, err = git(["push", "origin", "main"], timeout=120)
+        rc, out, err = git(["push", "origin", "main"], timeout=420)
         add_log_step(log, "git_push_main", "success" if rc == 0 else "failed", details={"output": out[-200:]})
         print(f"  push main: {'OK' if rc == 0 else 'ERR'}")
         if rc != 0:
@@ -361,7 +361,7 @@ def run_mode(mode, trigger):
         # 提交日志（force-add，因 logs/ 可能被 gitignore）
         git(["add", "-f", str(Path(log_path).relative_to(ROOT))])
         git(["commit", "-m", f"logs: pipeline run_id={run_id} final_status=success"], timeout=60)
-        git(["push", "origin", "main"], timeout=120)
+        git(["push", "origin", "main"], timeout=420)
         print(f"\n[done] log: {log_path}")
         print(f"  run_id={run_id} main={source_commit} gh-pages={gh_hash}")
         return 0
