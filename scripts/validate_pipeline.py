@@ -42,12 +42,13 @@ def _parse_bj(s):
     return None
 
 
-def validate_reports(dist_dir):
+def validate_reports(dist_dir, stage="dist"):
     """真实校验乍得/尼日尔日报窗口（V10）。
 
     返回 (passed, errors, warnings)：
       - errors    : 当前 pipeline 报告的真实窗口错误（致命）
       - warnings  : legacy 报告跳过等提示（不致命）
+    stage=source 时跳过 dist 报告 run_id 对比（dist 尚未构建/为旧产物）。
     """
     errors = []
     warnings = []
@@ -112,9 +113,9 @@ def validate_reports(dist_dir):
             if rdate == now.strftime("%Y-%m-%d") and ga < now.replace(hour=22, minute=0, second=0, microsecond=0):
                 errors.append(f"V10-{dc}/{fn}: 北京时间22:00前生成了当天({rdate})正式日报 (run_id={rid})")
                 continue
-            # 10 dist 中对应文件存在且 run_id 一致
+            # 10 dist 中对应文件存在且 run_id 一致（仅 stage=dist 时）
             drep = os.path.join(dist_dir, "reports", dc, fn)
-            if os.path.exists(drep):
+            if stage == "dist" and os.path.exists(drep):
                 drep_doc = load_json(drep)
                 if drep_doc.get("run_id") != rid:
                     errors.append(f"V10-{dc}/{fn}: dist run_id {drep_doc.get('run_id')} != 源 {rid}")
@@ -280,7 +281,7 @@ def main(run_id=None, dist_dir=None, stage="dist"):
         ok("V09-7d", f"7d 一致: {status_7d}")
 
     # ── 10. 日报窗口真实校验 ────────────────────────────────
-    rep_passed, rep_errors, rep_warns = validate_reports(dist_dir)
+    rep_passed, rep_errors, rep_warns = validate_reports(dist_dir, stage=stage)
     for w in rep_warns:
         print(f"⚠ [{w.split(':',1)[0] if ':' in w else 'V10'}] {w}")
     if rep_passed:
