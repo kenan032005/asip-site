@@ -64,8 +64,8 @@ def run_cmd(cmd, cwd=None, timeout=180):
         return -1, "", str(e)
 
 
-def git(args, timeout=120):
-    return run_cmd([GIT] + args, timeout=timeout)
+def git(args, timeout=120, cwd=None):
+    return run_cmd([GIT] + args, cwd=cwd, timeout=timeout)
 
 
 def git_rev_head():
@@ -178,7 +178,7 @@ def run_mode(mode, trigger):
         # 2) 单元测试
         print("\n[2] unit tests ...")
         rc, out, err = run_cmd([PYTHON, str(HERE / "tests" / "test_country.py")], timeout=120)
-        tests_ok = rc == 0 and "FAIL" not in (out + err)
+        tests_ok = rc == 0 and "FAIL=0" in out  # 以测试脚本的结果行为准（rc=0 且 FAIL=0）
         add_log_step(log, "unit_tests", "success" if tests_ok else "failed",
                      details={"output": (out + err)[-400:]})
         print(f"  tests: {'OK' if tests_ok else 'FAIL'}")
