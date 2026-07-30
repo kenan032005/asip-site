@@ -873,6 +873,15 @@
 - 站点地址：https://kenan032005.github.io/asip-site/
 - 备注：PAT 从 gitignored 的 deploy.token 读取，仅用于本次推送，未写入任何提交文件；合规要求满足。
 
+## 2026-07-31 01:35 (GMT+3) 执行
+- 采集：incremental/validate-only 模式，跳过 generate_reports；events_24h=0（线上验证）。
+- 单元测试/语义导出/摘要/构建/校验（42项+source+dist）均 OK。
+- main 提交：39b20ffa0644fef0aeaf73fbed88f040e3410b99（pipeline 内部 data commit a816e80d）。
+- gh-pages 强制推送成功：29f26c5bac34232b3b1401d85e644357086622ee。
+- 线上验证：✅ run_id 一致（20260731T013456+0800_lgslbc），http 200，events_24h 0。
+- 站点地址：https://kenan032005.github.io/asip-site/
+- 备注：仅运行 pipeline_runner.py 一条命令（退出码 0）；PAT 从 gitignored 的 deploy.token 读取仅用于推送，未写入任何提交文件；合规要求满足。
+
 ## 2026-07-28 08:39 (GMT+3) 执行
 - 采集：GDELT 返回 HTTP 429（Too Many Requests），本次采集未成功（网络问题）。data/events.json 无新增，本次新增事件：0。
 - 日报：generate_reports.py 生成 6 份日报（chad, niger, benin, south-sudan, sudan, ethiopia），reports_today=6（日期 2026-07-28 北京时间）。
