@@ -76,9 +76,9 @@ def _sanitize_public(obj):
     return obj
 
 
-def _copy_public_data():
+def _copy_public_data(dist_root):
     """按白名单复制公开数据到 dist/data（sources/events 复制时脱敏）。"""
-    dst_root = os.path.join(DIST_NEW, "data")
+    dst_root = os.path.join(dist_root, "data")
     os.makedirs(dst_root, exist_ok=True)
     for rel in PUBLIC_DATA_ALLOWLIST:
         src = os.path.join(DATA_DIR, rel)
@@ -229,7 +229,7 @@ def main(run_id=None, no_embed=False):
         shutil.copytree(ASSETS, os.path.join(DIST_NEW, "assets"))
     if os.path.isdir(DATA_DIR):
         # Stage-2 收尾：仅按白名单复制公开数据，绝不复制整个 data/ 目录
-        _copy_public_data()
+        _copy_public_data(DIST_NEW)
     if os.path.isdir(REPORTS):
         shutil.copytree(REPORTS, os.path.join(DIST_NEW, "reports"))
 
