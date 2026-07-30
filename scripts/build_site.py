@@ -191,6 +191,21 @@ def main(run_id=None, no_embed=False):
         os.rename(DIST_NEW, os.path.join(TRASH, f"new_{int(_time.time()*1000)}"))
     os.makedirs(DIST_NEW, exist_ok=True)
 
+    def _rename_retry(src, dst, attempts=6, delay=1.0):
+        """Windows 下新写入目录偶被杀毒/索引器短暂占用导致 rename 报 WinError 5，
+        这里用 os.replace（更原子）加重试，避免一次性失败。不做任何删除。"""
+        last = None
+        for _i in range(attempts):
+            try:
+                os.replace(src, dst)
+                return True
+            except (PermissionError, OSError) as _e:
+                last = _e
+                _time.sleep(delay)
+        if last:
+            raise last
+        return False
+
     def _finish_swap():
         """构建完成后：dist -> trash，.dist_new -> dist（纯 rename，绝不删除）。
 
@@ -199,8 +214,8 @@ def main(run_id=None, no_embed=False):
         """
         if os.path.isdir(DIST):
             os.makedirs(TRASH, exist_ok=True)
-            os.rename(DIST, os.path.join(TRASH, f"dist_{int(_time.time()*1000)}"))
-        os.rename(DIST_NEW, DIST)
+            _rename_retry(DIST, os.path.join(TRASH, f"dist_{int(_time.time()*1000)}"))
+        _rename_retry(DIST_NEW, DIST)
 
     # 构建 HTML
     built = 0
