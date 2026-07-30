@@ -247,3 +247,51 @@ python scripts/ai/workbuddy_worker.py recover-expired
 
 ### 11.7 损坏租约处理
 - `recover-expired` 发现无法解析的 lease → 标记 `corrupt_lease`（不删除 processing 任务、不自动重新入队），写入脱敏审计，由后续人工 `release` 处理。
+
+---
+
+## 12. Stage 2.5B-2A 单会话 Hy3 手工交接演示（2026-07-30）
+
+目标：在**当前 WorkBuddy 会话内**，用内置 **Hy3（免费）** 模型真实验证「创建任务 → 领取 →
+Hy3 处理 → 写标准结果 → 真实 CLI ingest → 完成 → 幂等重 ingest」整条链路，证明 Worker 协议闭环可用。
+跨会话接力验证留待 Stage 2.5B-2B。
+
+### 12.1 边界约束
+- 仅使用**合成任务**（`synthetic=true`），不处理真实新闻 / 真实 API / 真实数据。
+- 仅允许当前 WorkBuddy 内置 **Hy3（免费）**：`provider=workbuddy_queue`、`model=hy3`。
+- **禁止** DeepSeek V4 Pro 与 ChatGPT 5.6（付费/外部模型）。
+- 用量 `input_tokens / output_tokens / estimated_cost_usd` 一律记 `0`，不得伪造。
+- 演示状态全部落在 `.workbuddy_runtime/stage25b2a/`（已 gitignore，绝不入库）。
+
+### 12.2 新增文件
+- `scripts/ai/manual_handoff_demo.py`：`prepare`（入队 2 个合成任务 + claim 出批次）/
+  `verify`（校验批次清单与字段）/ `cleanup`（删除运行时目录）。
+  合成任务为乍得（法语, TCD）+ 尼日尔（英语, NER），均为虚构安全事件。
+- `scripts/tests/test_stage25b2a_manual_handoff.py`：**14 项**验收（D1–D14），已加入
+  `pipeline_runner.py` 的单元测试闸门。
+
+### 12.3 CLI 退出码语义（本次新增，2.5B-2A）
+`main()` 现在按语义返回退出码，便于定时脚本 / CI 判定：
+
+| 场景 | 退出码 |
+|---|---|
+| `status` | 0 |
+| 空队列 `claim`（返回 `batch_id=null`） | 0 |
+| `ingest` 部分接受（accepted>0，含合法 + 被拒混合） | 0 |
+| `ingest` 幂等重 ingest（accepted=0 但全部 `idempotent_success`，无错误） | 0 |
+| `ingest` **全部被拒**（accepted=0 且 rejected>0） | **≠0** |
+| `ingest` 结构性错误（manifest 缺失 / 结果文件不可读 / worker 不匹配） | **≠0** |
+| 参数 / 异常错误（如 `claim --batch-size 0`） | **≠0** |
+
+> 不修改任何函数返回结构，仅收敛 `main()` 的退出码；函数级返回（report dict）保持不变。
+
+### 12.4 非对象结果处理（本次新增，2.5B-2A）
+- `ingest_results` 在遍历 `results` 时，先判定 `isinstance(res, dict)`。
+- 非对象条目（字符串 / 数字 / `null` 等）→ 记为
+  `outcome=rejected_invalid_result_type`，计入 `rejected`，**不抛出 AttributeError**，
+  继续处理同批其余结果。
+- 审计写入脱敏事件 `outcome=invalid_result_type`。
+
+### 12.5 回滚基线
+- 本阶段回滚基线：**`pre-stage25b2a`**（指向 2.5B-2A 开工前 `main` HEAD `e10c045`）。
+- 与 2.5B-1H 基线 `pre-stage25b1-hardening`（`2b9eaa6`）独立。

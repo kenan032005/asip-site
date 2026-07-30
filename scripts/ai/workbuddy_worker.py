@@ -593,6 +593,20 @@ def ingest_results(ai_root, batch_id, result_file, allow_expired=False):
     now = _now()
     seen = set()
     for res in results:
+        # 2.5B-2A：非对象结果条目（字符串/数字/None 等）必须被优雅拒绝，
+        # 不得抛出 AttributeError 中断同批其他结果的处理。
+        if not isinstance(res, dict):
+            entry = {"task_id": None,
+                     "outcome": "rejected_invalid_result_type",
+                     "reasons": ["result entry is not an object: %s"
+                                 % type(res).__name__]}
+            report["tasks"].append(entry)
+            report["rejected"] += 1
+            report["rejected_task_ids"].append(None)
+            audit(ai_root, "result_ingested", batch_id=batch_id,
+                  outcome="invalid_result_type",
+                  reason=type(res).__name__)
+            continue
         tid = res.get("task_id")
         entry = {"task_id": tid}
         report["tasks"].append(entry)
@@ -863,26 +877,48 @@ def main(argv=None):
     h.add_argument("--worker-id", required=True)
     h.add_argument("--extend-minutes", type=int, default=DEFAULT_LEASE_MINUTES)
 
-    args = ap.parse_args(argv)
-    root = args.ai_root
+    try:
+        args = ap.parse_args(argv)
+        root = args.ai_root
 
-    if args.cmd == "status":
-        _print(status_summary(root))
-    elif args.cmd == "claim":
-        _print(claim_batch(root, worker_id=args.worker_id,
-                           batch_size=args.batch_size,
-                           lease_minutes=args.lease_minutes))
-    elif args.cmd == "ingest":
-        _print(ingest_results(root, args.batch_id, args.result_file,
-                              allow_expired=args.allow_expired))
-    elif args.cmd == "recover-expired":
-        _print(recover_expired(root, dry_run=args.dry_run))
-    elif args.cmd == "release":
-        _print(release_batch(root, args.batch_id))
-    elif args.cmd == "heartbeat":
-        _print(heartbeat_batch(root, args.batch_id, args.worker_id,
-                               extend_minutes=args.extend_minutes))
-    return 0
+        if args.cmd == "status":
+            _print(status_summary(root))
+            return 0
+        elif args.cmd == "claim":
+            _print(claim_batch(root, worker_id=args.worker_id,
+                               batch_size=args.batch_size,
+                               lease_minutes=args.lease_minutes))
+            return 0
+        elif args.cmd == "ingest":
+            rep = ingest_results(root, args.batch_id, args.result_file,
+                                allow_expired=args.allow_expired)
+            _print(rep)
+            # 2.5B-2A：CLI 退出码语义
+            #  - 结构性错误（manifest/结果文件缺失、worker 不匹配等）→ 非0
+            #  - 全部被拒（accepted=0 且 rejected>0）→ 非0
+            #  - 部分接受 / 全部幂等（accepted=0 但 rejected=0，无错误）→ 0
+            if rep.get("error"):
+                return 1
+            if rep.get("accepted", 0) == 0 and rep.get("rejected", 0) > 0:
+                return 1
+            return 0
+        elif args.cmd == "recover-expired":
+            _print(recover_expired(root, dry_run=args.dry_run))
+            return 0
+        elif args.cmd == "release":
+            _print(release_batch(root, args.batch_id))
+            return 0
+        elif args.cmd == "heartbeat":
+            _print(heartbeat_batch(root, args.batch_id, args.worker_id,
+                                   extend_minutes=args.extend_minutes))
+            return 0
+        return 0
+    except SystemExit:
+        # argparse 参数错误（如缺 --batch-id）已自带非零退出码，直接上抛
+        raise
+    except Exception as e:
+        sys.stderr.write("error: %s\n" % e)
+        return 2
 
 
 if __name__ == "__main__":
