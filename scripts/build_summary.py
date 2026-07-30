@@ -116,6 +116,35 @@ def build_status(events, pending_count, quarantine_count, sources, run_id, pipel
                 latest_report_dates.add(reps[0].get("date"))
     latest_report_date = max(latest_report_dates) if latest_report_dates else ""
 
+    # ── Stage 2.5A：非敏感 AI 运行状态（安全兜底，缺失配置也绝不中断 Stage 2 流水线）──
+    try:
+        from ai.config import load_runtime_config as _load_rt
+        from ai.workbuddy_queue_provider import count_queued as _count_queued, count_failed as _count_failed
+        _rc = _load_rt()
+        _ai_runtime_mode = _rc.get("runtime_mode", "workbuddy_local")
+        _ai_provider = _rc.get("ai_provider", "workbuddy_queue")
+        _ai_model = _rc.get("ai_model", "hy3")
+        _ai_processing_enabled = bool(_rc.get("ai_processing_enabled", False))
+        _allow_paid_fallback = bool(_rc.get("allow_paid_fallback", False))
+        _cloud_schedule_enabled = bool(_rc.get("cloud_schedule_enabled", False))
+        try:
+            _ai_queue_depth = _count_queued()
+        except Exception:
+            _ai_queue_depth = 0
+        try:
+            _ai_failed_task_count = _count_failed()
+        except Exception:
+            _ai_failed_task_count = 0
+    except Exception:
+        _ai_runtime_mode = "workbuddy_local"
+        _ai_provider = "workbuddy_queue"
+        _ai_model = "hy3"
+        _ai_processing_enabled = False
+        _allow_paid_fallback = False
+        _cloud_schedule_enabled = False
+        _ai_queue_depth = 0
+        _ai_failed_task_count = 0
+
     status = {
         "pipeline_version": PIPELINE_VERSION,
         "run_id": run_id,
@@ -160,6 +189,15 @@ def build_status(events, pending_count, quarantine_count, sources, run_id, pipel
         "deployment_commit": pipeline_meta.get("deployment_commit", ""),
         "warnings": [],
         "note": "Stage 2（收尾）：首页与统计仅含 current_policy_passed=true 的当前公开事件；历史迁移保留事件不进入首页当前态势，仅存于 public/legacy_archive_events.json 历史归档",
+        # Stage 2.5A：非敏感 AI 运行状态（绝不公开密钥 / 本机路径 / 内部 Prompt / 完整任务内容）
+        "runtime_mode": _ai_runtime_mode,
+        "ai_provider": _ai_provider,
+        "ai_model": _ai_model,
+        "ai_processing_enabled": _ai_processing_enabled,
+        "allow_paid_fallback": _allow_paid_fallback,
+        "cloud_schedule_enabled": _cloud_schedule_enabled,
+        "ai_queue_depth": _ai_queue_depth,
+        "ai_failed_task_count": _ai_failed_task_count,
     }
     return status
 

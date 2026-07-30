@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://asip-site.local/schemas/ai_task.schema.json",
+  "title": "ASIP AI Task",
+  "description": "Stage 2.5A AI 任务契约。任务仅被创建与排队，不在此阶段被真正处理。",
+  "type": "object",
+  "required": [
+    "task_id",
+    "schema_version",
+    "task_type",
+    "status",
+    "priority",
+    "input_ref",
+    "content_hash",
+    "prompt_version",
+    "output_schema_version",
+    "provider_requested",
+    "created_at",
+    "retry_count",
+    "max_retries"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "pattern": "^AIT_[0-9a-f]{24}$"
+    },
+    "schema_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+$" },
+    "task_type": {
+      "type": "string",
+      "enum": [
+        "article_analysis",
+        "source_comparison",
+        "event_synthesis",
+        "daily_security_brief",
+        "trend_forecast",
+        "disease_risk_analysis"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "queued",
+        "processing",
+        "completed",
+        "failed",
+        "waiting_retry",
+        "permanently_failed",
+        "cancelled"
+      ]
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["low", "normal", "high", "critical"]
+    },
+    "input_ref": { "type": "object" },
+    "content_hash": { "type": "string", "minLength": 8 },
+    "prompt_version": { "type": "string", "minLength": 1 },
+    "output_schema_version": { "type": "string", "minLength": 1 },
+    "provider_requested": {
+      "type": "string",
+      "enum": ["workbuddy_queue", "openai_api", "generic_api", "disabled"]
+    },
+    "created_at": { "type": "string", "format": "date-time" },
+    "retry_count": { "type": "integer", "minimum": 0 },
+    "max_retries": { "type": "integer", "minimum": 0, "maximum": 10 }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://asip-site.local/schemas/runtime_config.schema.json",
+  "title": "ASIP Runtime Configuration",
+  "description": "Stage 2.5A runtime + AI provider configuration. No API keys are stored here; secrets live only in environment variables / .env (git-ignored).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "runtime_mode",
+    "ai_provider",
+    "ai_model",
+    "allow_paid_fallback",
+    "cloud_schedule_enabled",
+    "ai_processing_enabled"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "runtime_mode": {
+      "type": "string",
+      "enum": ["workbuddy_local", "github_actions"]
+    },
+    "ai_provider": {
+      "type": "string",
+      "enum": ["workbuddy_queue", "openai_api", "generic_api", "disabled"]
+    },
+    "ai_model": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "allow_paid_fallback": {
+      "type": "boolean"
+    },
+    "cloud_schedule_enabled": {
+      "type": "boolean"
+    },
+    "ai_processing_enabled": {
+      "type": "boolean"
+    }
+  }
+}

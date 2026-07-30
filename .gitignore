@@ -20,6 +20,9 @@ Thumbs.db
 logs/
 logs_collect.txt
 
+# 临时探针文件（非仓库内容）
+.tool_probe.tmp
+
 # PAT 无 workflow scope，Actions 文件暂不入库（本地保留，需手动上传或换带 workflow scope 的 PAT）
 .github/workflows/
 
@@ -34,3 +37,14 @@ data/.backups/
 data/.trash_*/
 
 data/backup/
+
+# Stage 2.5A 内部 AI 目录：运行时内容绝不入库（保留 .gitkeep 占位空目录）
+data/ai/**/*.json
+data/ai/queue/*
+data/ai/processing/*
+data/ai/completed/*
+data/ai/failed/*
+data/ai/cache/*
+data/ai/usage/*
+!data/ai/**/.gitkeep
+
