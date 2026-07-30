@@ -23,6 +23,7 @@ sys.path.insert(0, HERE)
 
 from pipeline_core import (
     TZ_BEIJING, bj_now, parse_time, get_latest_completed_report_date,
+    is_current_public_event, is_ongoing_report_event,
 )
 
 ROOT = os.path.dirname(HERE)
@@ -98,18 +99,36 @@ def summarize(group_name, evs):
     return "记录 {n} 起相关事件：\n".format(n=len(evs)) + "\n".join(lines)
 
 
+def _minimal(e):
+    """日报结构化数组用：仅暴露必要公开字段，去除内部/敏感字段。"""
+    return {
+        "event_id": e.get("event_id", ""),
+        "country": e.get("country", ""),
+        "title_cn": e.get("title_cn") or e.get("title_original", ""),
+        "event_type": e.get("event_type", ""),
+        "event_time": e.get("event_time") or e.get("published_time", ""),
+        "event_status": e.get("event_status") or e.get("status", ""),
+        "summary_cn": (e.get("summary_cn") or "")[:300],
+        "source_name": e.get("source_name", ""),
+        "source_url": e.get("source_url", ""),
+    }
+
+
 def build_report(country, dc, events_all, date_str, generated_at, generated_at_iso, win_start, win_end, run_id):
     ev_c = [e for e in events_all if e.get("country") == country and not e.get("is_demo")]
     new_events, ongoing = [], []
     for e in ev_c:
+        # Stage-2 收尾：日报当前内容只纳入通过当前发布政策的公开事件
+        if not is_current_public_event(e):
+            continue  # 历史迁移保留/未过当前政策/隔离：不计入日报当前内容
         bj = to_bj(e.get("event_time") or e.get("published_time"))
         if bj is None:
-            ongoing.append(e)
-            continue
+            continue  # 无真实事件时间，无法分类，归入归档
         if win_start <= bj <= win_end:
             new_events.append(e)
-        else:
+        elif is_ongoing_report_event(e, win_end):
             ongoing.append(e)
+        # 其余（已结束/超期未更新等）归入归档，不进日报当前内容
     g = event_groups(new_events)
     has = len(new_events) > 0
 
@@ -154,10 +173,12 @@ def build_report(country, dc, events_all, date_str, generated_at, generated_at_i
         "stability": summarize("社会稳定和治安", g["stability"]) or NO_EVENT,
         "infrastructure": summarize("交通、边境和基础设施", g["infrastructure"]) or NO_EVENT,
         "china": (summarize("涉华", g["china"]) or NO_CHINA),
-        "followup": [
-            "持续跟踪过去72小时仍在发展的重大事件（见持续跟踪项）。",
-            "持续跟踪过去7天尚未结束的重要趋势。",
-        ],
+        "followup": (
+            ["当前无符合条件的持续跟踪事项。"] if len(ongoing) == 0 else [
+                "持续跟踪过去72小时仍在发展的重大事件（见持续跟踪项）。",
+                "持续跟踪过去7天尚未结束的重要趋势。",
+            ]
+        ),
         "outlook": {
             "most_likely": ["需关注武装冲突、恐怖主义及社会治安类风险的外溢。"] if has else ["近期未出现明显新增风险信号。"],
             "areas": ["首都及主要城市、边境地区为常规关注区域。"],
@@ -189,6 +210,9 @@ def build_report(country, dc, events_all, date_str, generated_at, generated_at_i
         "reporting_window_end": win_end.strftime("%Y-%m-%d %H:%M"),
         "new_event_count": len(new_events),
         "ongoing_event_count": len(ongoing),
+        "new_events": [_minimal(e) for e in new_events],
+        "ongoing_events": [_minimal(e) for e in ongoing],
+        "ongoing_note": "当前无符合条件的持续跟踪事项。" if len(ongoing) == 0 else "",
         "pending_event_count": pending_n,
         "verified_event_count": verified_n,
         "window_text": "北京时间前一日22:00至当日22:00（24小时）",

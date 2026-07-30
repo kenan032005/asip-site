@@ -22,6 +22,7 @@ import random
 import string
 import time
 import argparse
+import re
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -337,6 +338,82 @@ def passes_stage1_gate(event):
     if event.get("country") not in STAGE1_COUNTRIES:
         return False
     return _is_current_event(event)
+
+
+# ── Stage-2 收尾：当前公开事件 / 日报持续跟踪 统一过滤 ──────────
+_EVENT_ID_RE = re.compile(r"^EVT_[0-9a-f]{16}$")
+
+
+def is_current_public_event(event):
+    """当前公开事件判定（Stage-2 收尾，首页/日报当前模块唯一准入门槛）。
+
+    必须同时满足：
+      - current_policy_passed == true
+      - quality_gate_passed == true
+      - 非历史迁移保留记录（legacy_migration_preserved != true）
+      - 不在 quarantine / suppressed / withdrawn / archived
+      - event_id 合法（EVT_ 16hex）
+      - 国家有效
+      - 来源有效（source_links 或 source_name+source_url）
+    历史迁移保留事件（current_policy_passed=false）一律被拒。
+    """
+    if not isinstance(event, dict):
+        return False
+    if event.get("current_policy_passed") is not True:
+        return False
+    if event.get("quality_gate_passed") is not True:
+        return False
+    if event.get("legacy_migration_preserved") is True:
+        return False
+    st = (event.get("status") or event.get("event_status") or "")
+    if st in ("quarantined", "suppressed", "withdrawn", "archived"):
+        return False
+    if event.get("quarantined") is True:
+        return False
+    eid = event.get("event_id") or ""
+    if not _EVENT_ID_RE.match(eid):
+        return False
+    country = event.get("country") or event.get("country_cn") or ""
+    if not country:
+        return False
+    has_src = bool(event.get("source_links")) or bool(
+        event.get("source_name") and event.get("source_url")
+    )
+    if not has_src:
+        return False
+    return True
+
+
+def is_ongoing_report_event(event, report_window_end):
+    """日报「持续跟踪」事件判定（Stage-2 收尾）。
+
+    在 is_current_public_event 基础上额外要求：
+      - 状态属于 ongoing / developing / easing
+      - 不属于 ended / archived / unknown 且无近期更新
+      - last_seen_at / updated_at 位于最近 7 天（report_window_end 往前 7 天）
+      - 具备真实事件时间与来源
+    report_window_end 为北京时间 naive datetime（日报窗口结束时刻）。
+    """
+    if not is_current_public_event(event):
+        return False
+    status = (event.get("event_status") or event.get("status") or "")
+    if status in ("ended", "archived"):
+        return False
+    if status not in ("ongoing", "developing", "easing"):
+        # unknown 及其他状态：无明确持续进展，不纳入持续跟踪
+        return False
+    last = (event.get("last_seen_at") or event.get("updated_at")
+            or event.get("event_time") or event.get("published_time"))
+    lb = parse_time(last) if last else None
+    if lb is None:
+        return False
+    cutoff = report_window_end - timedelta(days=7)
+    if lb < cutoff:
+        return False
+    if not (event.get("event_time") or event.get("published_time")):
+        return False
+    return True
+
 
 
 def is_stage1_country(country_name):

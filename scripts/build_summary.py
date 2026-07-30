@@ -32,7 +32,7 @@ from pipeline_core import (
     calculate_public_statistics, compute_source_statistics,
     _is_current_event, load_json, save_json,
     event_type_cn, normalize_event_type,
-    FIXED_RISK_LEVELS, TZ_BEIJING,
+    FIXED_RISK_LEVELS, TZ_BEIJING, is_current_public_event,
 )
 # Stage-2 最终收尾：sources.json 2.0 展开工具（信源统计仍读信源配置）
 from data.migrate_stage2 import _unwrap_source
@@ -142,7 +142,7 @@ def build_status(events, pending_count, quarantine_count, sources, run_id, pipel
         "source_commit": pipeline_meta.get("source_commit", ""),
         "deployment_commit": pipeline_meta.get("deployment_commit", ""),
         "warnings": [],
-        "note": "Stage 2：仅统计 current_policy_passed=true 的当前政策通过事件；历史迁移保留事件不计入统计",
+        "note": "Stage 2（收尾）：首页与统计仅含 current_policy_passed=true 的当前公开事件；历史迁移保留事件不进入首页当前态势，仅存于 public/legacy_archive_events.json 历史归档",
     }
     return status
 
@@ -154,13 +154,14 @@ def build_summary(events, run_id, status, stats):
     cut24 = bj_24h_ago()
     cut7 = bj_7d_ago()
 
-    # 当前政策通过事件（仅 current_policy_passed=true 计入统计）
-    current = [e for e in events if e.get("current_policy_passed") is True and _is_current_event(e)]
+    # 当前公开事件（Stage-2 收尾：统一用 is_current_public_event，
+    # 仅 current_policy_passed=true 且 quality_gate_passed=true 且非历史迁移保留）
+    current = [e for e in events if is_current_public_event(e)]
     stage1 = [e for e in current if passes_stage1_gate(e)]
     stage1_24h = sum(1 for e in stage1 if cut24 <= (parse_time(e.get("published_time") or e.get("event_time") or "") or datetime.min) <= now)
 
-    # 可见事件（历史迁移保留事件 legacy_visibility=true 仍保留展示，但不计入统计）
-    visible = [e for e in events if e.get("legacy_visibility", True)]
+    # 首页当前模块只使用当前公开事件（历史迁移事件不得进入首页当前态势）
+    visible = current
 
     # 高风险事件（展示列表，含历史保留事件；不标注为通过质量闸门）
     high = sorted(
@@ -237,9 +238,43 @@ def build_summary(events, run_id, status, stats):
         "china_related": china,
         "risk_by_country": risk_by_country,
         "latest_reports": latest_reports,
-        "note": "Stage 2：数据来自 Canonical→Public 单向导出；统计仅计 current_policy_passed=true 事件，历史迁移保留事件仅展示不计入统计",
+        "note": "Stage 2（收尾）：数据来自 Canonical→Public 单向导出；首页当前模块仅含 current_policy_passed=true 事件；历史迁移保留事件仅存于历史归档，不进入当前态势",
     }
     return summary
+
+
+def write_legacy_archive(events, run_id):
+    """生成历史归档公开视图（Stage-2 收尾，Section 四）。
+
+    仅包含必要字段，绝不写入 legacy_payload / 内部错误 / 本机路径 /
+    processing_status / 内部核实备注 / 完整原始正文。
+    历史事件只进入历史归档，不进入首页当前态势与日报当前内容。
+    """
+    items = []
+    for e in events:
+        if e.get("legacy_migration_preserved") is True or e.get("current_policy_passed") is not True:
+            items.append({
+                "event_id": e.get("event_id", ""),
+                "country": e.get("country_cn") or e.get("country", ""),
+                "title_cn": e.get("title_cn") or e.get("title_original", ""),
+                "summary_cn": (e.get("summary_cn") or "")[:500],
+                "event_time": e.get("event_time") or e.get("published_time", ""),
+                "event_type": e.get("event_type", ""),
+                "source_links": e.get("source_links") or [],
+                "legacy_migration_preserved": bool(e.get("legacy_migration_preserved")),
+                "publication_reason": e.get("publication_reason") or "",
+            })
+    doc = {
+        "schema_version": "2.0",
+        "pipeline_version": PIPELINE_VERSION,
+        "run_id": run_id,
+        "generated_at_bj_iso": datetime.now(TZ_BEIJING).isoformat(),
+        "note": "历史迁移保留事件归档视图（仅展示，不计入当前统计与首页当前态势）",
+        "count": len(items),
+        "items": items,
+    }
+    save_json(os.path.join(PUBLIC_DIR, "legacy_archive_events.json"), doc)
+    return len(items)
 
 
 def main(run_id=None, dry_run=False):
@@ -259,8 +294,8 @@ def main(run_id=None, dry_run=False):
     print(f"  public events: {len(events)}, pending_articles: {pending_count}, "
           f"quarantine: {quarantine_count}, sources: {len(sources)}")
 
-    # 统一统计（status 与 summary 共用；仅当前政策通过事件计入）
-    current_events = [e for e in events if e.get("current_policy_passed") is True]
+    # 统一统计（status 与 summary 共用；仅当前公开事件计入，见 is_current_public_event）
+    current_events = [e for e in events if is_current_public_event(e)]
     stats = calculate_public_statistics(current_events)
     stats["published_event_count"] = len(events)
     src_stats = compute_source_statistics(sources)
@@ -270,6 +305,7 @@ def main(run_id=None, dry_run=False):
 
     status = build_status(events, pending_count, quarantine_count, sources, run_id, pipeline_meta, stats, src_stats)
     summary = build_summary(events, run_id, status, stats)
+    n_archive = write_legacy_archive(events, run_id)
 
     # 校验一致性
     s24 = int([m["value"] for m in summary["metrics"] if "24小时" in m["label"]][0])

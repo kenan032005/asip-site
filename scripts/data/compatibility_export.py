@@ -154,7 +154,9 @@ def export_all(repo, run_id: str = ""):
         "event_clusters": len(clusters),
         "published_events": len(published),
         "quarantine": len(quarantine),
-        "publishable_clusters": sum(1 for c in clusters if c.get("publication_status") in ("publishable", "published")),
+        # Stage-2 收尾：publishable_clusters 只统计真正通过当前发布政策的事件
+        # （current_policy_passed=true），不得把历史迁移可见事件计入
+        "publishable_clusters": sum(1 for c in clusters if c.get("current_policy_passed") is True),
         # Stage-2 最终收尾：供 build_summary 使用（不再读遗留事件池）
         "pending_articles": len(pending),
         "current_policy_passed_events": sum(1 for c in clusters if c.get("current_policy_passed") is True),
