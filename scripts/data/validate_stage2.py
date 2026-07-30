@@ -410,6 +410,10 @@ def main():
                 rep = load(os.path.join(rdir, fn))
                 if not isinstance(rep, dict) or rep.get("pipeline_version") != 2:
                     continue
+                # 仅校验收尾后新格式日报（含 new_events/ongoing_events 数组）；
+                # 旧格式历史日报为不可变归档，无这两个字段，不参与数量一致性校验
+                if "new_events" not in rep or "ongoing_events" not in rep:
+                    continue
                 ne = rep.get("new_events", []) or []
                 oe = rep.get("ongoing_events", []) or []
                 for e in ne + oe:
