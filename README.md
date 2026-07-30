@@ -495,11 +495,23 @@ data/events.json 遗留兼容视图（仅旧前端兼容，单向生成，不部
 - `dist` 本地隔离扫描（W20 / Stage-2 校验）持续确认不含 `data/ai` 任务内容。
 
 ### 18.5 流水线集成
-- `scripts/pipeline_runner.py` 的构建前单元测试闸门新增 `test_stage25b1_worker_protocol.py`；运行日志新增 4 个非敏感字段：`ai_worker_protocol_valid`、`ai_queue_depth`、`ai_processing_count`、`ai_expired_lease_count`（不含任何敏感信息）。
+- `scripts/pipeline_runner.py` 的构建前单元测试闸门新增 `test_stage25b1_worker_protocol.py` 与 `test_stage25b1_hardening.py`；运行日志新增 4 个非敏感字段：`ai_worker_protocol_valid`、`ai_queue_depth`、`ai_processing_count`、`ai_expired_lease_count`（不含任何敏感信息）。
 - 全部测试通过（含 Stage-1/2/2.5A 回归）后，本阶段方可声明完成。
 
 ### 18.6 边界声明
 - 本次**未**处理真实新闻、**未**调用任何付费 API、**未**启动定时守护进程。
 - **Stage 2.5B-2（真实队列执行器与定时消费）尚未开始。**
 - 本阶段回滚基线：**`pre-stage25b1`**（指向 Stage 2.5B-1 开工前 `main` HEAD）。
+
+### 18.7 Stage 2.5B-1H 协议加固（2026-07-30）
+
+> 独立审计发现 5 类协议边界问题，在不重写 Worker 的前提下逐项修复。
+
+- **统一租约校验**（`validate_active_lease`）：ingest 必须持有匹配的有效租约；租约缺失/损坏/batch_id 不匹配/worker_id 不匹配/过期均拒绝；`--allow-expired` 仅允许过期不超过 10 分钟的租约。
+- **批次事务性**：`claim_batch` 使用临时目录 + 原子 `os.rename` 创建批次目录；manifest/REQUEST/模板任一写入失败则完整回滚（任务回 queue、删 lease、不留半成品目录）。
+- **固定 Provider/Model**：`manifest` 新增 `expected_provider` / `expected_model`（当前为 `workbuddy_queue` / `hy3`）；`ingest` 强制校验结果中的 `provider` / `model` 必须与清单一致。
+- **批次完整性报告**：`ingest` 返回新增 `manifest_task_count` / `submitted_result_count` / `missing_task_ids` / `batch_complete`；支持分次 ingest，不静默忽略未提交结果。
+- **审计真正脱敏**：`audit()` 先通过 `pipeline_core.sanitize_log_value` 脱敏本机路径/用户名/密钥后再截断写入；`status_summary` 新增 `corrupt_leases` 计数。
+- **参数边界**：`claim.batch_size` 1-20、`lease_minutes` 1-30、`worker_id` 1-100 字符 `[a-zA-Z0-9._-]`；`heartbeat.extend_minutes` 1-30，非法值明确报错（不静默 clamp）。
+- **加固前标签**：**`pre-stage25b1-hardening`**（指向本次修改前的 `main` HEAD `2b9eaa6`）。
 

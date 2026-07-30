@@ -207,3 +207,43 @@ python scripts/ai/workbuddy_worker.py recover-expired
 
 本阶段回滚基线：**`pre-stage25b1`**（指向 Stage 2.5B-1 开工前 `main` HEAD）。
 如需回退，基于该标签重建即可。
+
+---
+
+## 11. Stage 2.5B-1H 协议加固（2026-07-30）
+
+独立审计发现的协议边界问题，已在不重写 Worker 的前提下逐项修复。加固后回滚基线：
+**`pre-stage25b1-hardening`**（指向加固前 `main` HEAD `2b9eaa6`）。
+
+### 11.1 租约必须有效且匹配
+- `ingest_results` 调用 `validate_active_lease()` 强制校验每条结果持有有效租约。
+- 租约缺失/损坏/JSON 不合法/batch_id 不匹配/worker_id 不匹配 → 拒绝并写入脱敏审计。
+- `--allow-expired` 仅允许过期不超过 10 分钟（`EXPIRED_GRACE_SECONDS=600`）的租约。
+- 已进入 `completed` 或 `failed` 的任务保持幂等返回，不要求租约仍存在。
+
+### 11.2 批次创建事务性
+- `claim_batch` 改为临时目录 + `os.rename` 原子创建批次目录。
+- `manifest.json` / `WORKBUDDY_REQUEST.md` / `results.template.json` 任一写入失败 → 全部回滚（任务回 `queue`、删 lease、不留半成品目录）。
+- 测试用 `_fail_steps={"manifest"|"request_md"|"template"}` 注入故障点验证三种回滚场景。
+
+### 11.3 固定 Provider/Model
+- `manifest.json` 新增 `expected_provider` / `expected_model`（当前 `workbuddy_queue` / `hy3`）。
+- `results.template.json` 从 manifest 读取这两个值，不再独立写死。
+- `ingest` 强制校验 `res.provider == manifest.expected_provider` 与 `res.model == manifest.expected_model`，不一致 → 拒绝。
+
+### 11.4 批次完整性报告
+- `ingest_results` 返回新增字段：`manifest_task_count` / `submitted_result_count` / `accepted_task_ids` / `rejected_task_ids` / `missing_task_ids` / `batch_complete`。
+- 支持分次 ingest，未提交结果明确记录在 `missing_task_ids`，`batch_complete` 为 `false`。
+- `results` 不是数组时整个结果文件被拒。
+
+### 11.5 审计真正脱敏
+- `audit()` 先调用 `pipeline_core.sanitize_log_value` 脱敏（Windows/Unix 路径、用户名、疑似密钥、Bearer Token、`sk-` 前缀），再截断为 200 字符。
+- `status_summary` 新增 `corrupt_leases` 计数。
+
+### 11.6 参数边界
+- `claim`：`batch_size` 1–20、`lease_minutes` 1–30、`worker_id` 1–100 字符 `[a-zA-Z0-9._-]`。
+- `heartbeat`：`extend_minutes` 1–30，非法值明确 `ValueError`，不静默 clamp。
+- 过期超过宽限期的租约不得续约。
+
+### 11.7 损坏租约处理
+- `recover-expired` 发现无法解析的 lease → 标记 `corrupt_lease`（不删除 processing 任务、不自动重新入队），写入脱敏审计，由后续人工 `release` 处理。
