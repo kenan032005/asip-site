@@ -287,32 +287,68 @@ def add_log_step(log, name, status, started_at="", completed_at="", details=None
     })
 
 
-def redact_local_paths(text):
-    """脱敏本地绝对路径（第九节：仓库任何文件不得包含用户名/机器路径）。
+def _redact_path_string(text):
+    """对「原始 Python 字符串」脱敏本地绝对路径（不处理 JSON 转义文本）。
 
-    将形如 C:\\Users\\<name>\\... 或 /Users/<name>/... 的本地路径统一替换为
-    <local-path-redacted>；仓库根路径替换为 <repo>。
+    Stage 2.5B-1 修复：脱敏必须发生在 json.dump 之前的原始字符串上，
+    这样双引号 / 反斜杠 / 换行由 json.dump 统一合法转义，
+    不会再出现「替换破坏 JSON 引号」的问题。
     """
     import re as _re
+    if not isinstance(text, str):
+        return text
     root_str = str(Path(__file__).resolve().parent.parent)
-    for variant in (json.dumps(root_str)[1:-1],       # JSON 转义（双反斜杠）
-                    root_str,                          # 原始反斜杠
+    for variant in (root_str,                          # 原始反斜杠
+                    root_str.replace("\\", "\\\\"),   # 双反斜杠（字符串内自带转义时）
                     root_str.replace("\\", "/")):     # 正斜杠
         if variant:
             text = text.replace(variant, "<repo>")
-    text = _re.sub(r"[A-Za-z]:(?:\\\\|\\|/)+Users(?:\\\\|\\|/)+[^\"\s]*",
+    # Windows 用户目录（含双反斜杠变体；路径遇空格/引号截断，用户名必被覆盖）
+    text = _re.sub(r"[A-Za-z]:(?:\\\\|\\|/)+Users(?:\\\\|\\|/)+[^\"\s\\/]+[^\"\s]*",
                    "<local-path-redacted>", text)
-    text = _re.sub(r"/(?:home|Users)/[A-Za-z0-9_.-]+/[^\"\s]*",
+    text = _re.sub(r"[A-Za-z]:(?:\\\\|\\|/)+Users\b",
                    "<local-path-redacted>", text)
+    # Unix 家目录
+    text = _re.sub(r"/(?:home|Users)/[A-Za-z0-9_.-]+(?:/[^\"\s]*)?",
+                   "<local-path-redacted>", text)
+    # 兜底：本机用户名不得出现
+    try:
+        import getpass as _gp
+        u = _gp.getuser()
+        if u and len(u) >= 3:
+            text = text.replace(u, "<user>")
+    except Exception:
+        pass
     return text
+
+
+def sanitize_log_value(value):
+    """递归脱敏 dict / list / tuple / str（Stage 2.5B-1）。
+
+    在对象层完成脱敏后再交给 json.dump 序列化，保证输出永远是合法 JSON：
+    - 不对已序列化的 JSON 文本做正则替换；
+    - 换行、反斜杠、双引号交由 json.dump 合法转义。
+    """
+    if isinstance(value, str):
+        return _redact_path_string(value)
+    if isinstance(value, dict):
+        return {sanitize_log_value(k): sanitize_log_value(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [sanitize_log_value(v) for v in value]
+    return value
+
+
+def redact_local_paths(text):
+    """（兼容保留）对纯文本脱敏。新代码请用 sanitize_log_value 处理对象后再 dump。"""
+    return _redact_path_string(text)
 
 
 def save_run_log(log, run_id):
     log["completed_at"] = bj_iso()
     LOGS_DIR.mkdir(parents=True, exist_ok=True)
     path = LOGS_DIR / f"pipeline_{run_id}.json"
-    # 第九节：写盘前统一脱敏本地绝对路径
-    payload = redact_local_paths(json.dumps(log, ensure_ascii=False, indent=2))
+    # Stage 2.5B-1：先对对象递归脱敏，再 json.dump —— 输出必为合法 JSON
+    payload = json.dumps(sanitize_log_value(log), ensure_ascii=False, indent=2)
     path.write_text(payload, encoding="utf-8")
     return str(path)
 

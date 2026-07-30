@@ -465,3 +465,41 @@ data/events.json 遗留兼容视图（仅旧前端兼容，单向生成，不部
 - 本次加固**未**调用 Hy3 处理真实内容、**未**调用任何付费 API、**未**启动 GitHub Actions、**未**开始 Stage 2.5B。
 - **Stage 2.5B 尚未开始。**
 
+## 十八、Stage 2.5B-1：WorkBuddy AI 任务领取与交接协议（2026-07-30）
+
+> 本阶段**只建立任务交接机制**，不处理任何真实新闻 / 真实 API / 真实数据。Worker 仅做文件与状态管理（claim / lease / heartbeat / ingest / recover / release / status），**绝不调用 Hy3、OpenAI 或任何外部网络**。AI 内容由 WorkBuddy 内置 Hy3 在本机会话内处理，结果按标准契约写回。
+
+### 18.1 设计原则
+- **程序创建 AI 任务 → WorkBuddy 领取批次 → 建立租约与批次清单 → 内置 Hy3 处理 → 写标准结果文件 → Python 校验 ingest → 完成/失败归档。**
+- 全程零外部网络依赖：Worker 控制器是纯文件系统状态机，不含 `run-hy3` / `call-model` / `call-openai` 之类的网络调用（已通过静态扫描 W21 校验）。
+- 与 Stage 2.5A 一致：仍以 `workbuddy_local` / `workbuddy_queue` 模式运行，`ai_processing_enabled=false` 仅指"不由守护进程自动消费"；本阶段由 WorkBuddy 会话内显式领取处理。
+- 结构化日志已重构为「先递归脱敏对象、再 `json.dump`」，彻底消除破坏 JSON 引号的风险（见 `pipeline_core.sanitize_log_value`）。
+
+### 18.2 新增文件
+| 文件 | 作用 |
+|---|---|
+| `scripts/ai/workbuddy_worker.py` | Worker 控制器：status / claim / ingest / recover-expired / release / heartbeat 六条命令 |
+| `scripts/tests/test_stage25b1_worker_protocol.py` | 协议验收测试（W1–W25，TDD 先写失败再实现，26 项全通过） |
+| `WORKBUDDY_AI_WORKER.md` | Worker 完整操作手册（命令、批次清单、结果格式、租约/恢复、审计） |
+
+### 18.3 关键机制
+- **全局 claim 锁**：`_acquire_claim_lock` 用 `O_CREAT|O_EXCL` 互斥，陈旧锁（>120s）自动清理，保证并发安全（W23）。
+- **租约（默认 30 分钟，单次续约 ≤30 分钟）**：`claim` 后每个任务写 `data/ai/leases/<task_id>.json`；`heartbeat` 仅原 worker 可续约，`completed` 任务不可续约。
+- **批次清单**：`claim` 生成 `data/ai/batches/<batch_id>/{manifest.json, WORKBUDDY_REQUEST.md, results.template.json}`，明确本批次任务与处理规则。
+- **幂等与部分成功**：`ingest` 对已完成/已失败任务返回 `idempotent_success/idempotent_failed`；非法结果保持 `processing` 并记录原因，不影响同批其他有效结果（W13/W14）。
+- **过期租约恢复**：`recover-expired`（支持 `--dry-run`）将过期任务 `retry_count+1` 后回队（未达上限）或标记 `permanently_failed`，**不生成新 `task_id`**。
+- **审计日志**：`data/ai/audit/audit_%Y%m%d.jsonl`，字段截断为 200 字符，**不含密钥/路径/正文**；可逐行解析、无本机路径（W18/W19）。
+
+### 18.4 静态与公网隔离
+- `data/ai/{batches,leases,audit,locks}` 及其中 `*.md` 均写入 `.gitignore`，**不入库**（保留 `.gitkeep`）。
+- `dist` 本地隔离扫描（W20 / Stage-2 校验）持续确认不含 `data/ai` 任务内容。
+
+### 18.5 流水线集成
+- `scripts/pipeline_runner.py` 的构建前单元测试闸门新增 `test_stage25b1_worker_protocol.py`；运行日志新增 4 个非敏感字段：`ai_worker_protocol_valid`、`ai_queue_depth`、`ai_processing_count`、`ai_expired_lease_count`（不含任何敏感信息）。
+- 全部测试通过（含 Stage-1/2/2.5A 回归）后，本阶段方可声明完成。
+
+### 18.6 边界声明
+- 本次**未**处理真实新闻、**未**调用任何付费 API、**未**启动定时守护进程。
+- **Stage 2.5B-2（真实队列执行器与定时消费）尚未开始。**
+- 本阶段回滚基线：**`pre-stage25b1`**（指向 Stage 2.5B-1 开工前 `main` HEAD）。
+
