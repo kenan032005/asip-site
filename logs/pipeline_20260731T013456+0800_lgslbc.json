@@ -1,0 +1,144 @@
+{
+  "pipeline_version": 2,
+  "run_id": "20260731T013456+0800_lgslbc",
+  "trigger": "scheduled",
+  "started_at": "2026-07-31T01:34:56.185771+08:00",
+  "steps": [
+    {
+      "name": "git_pull",
+      "status": "success",
+      "started_at": "2026-07-31T01:34:58.093247+08:00",
+      "completed_at": "2026-07-31T01:34:58.093259+08:00",
+      "details": {
+        "output": "Already up to date.",
+        "error": "From https://github.com/kenan032005/asip-site\n * branch            main       -> FETCH_HEAD"
+      }
+    },
+    {
+      "name": "unit_tests",
+      "status": "success",
+      "started_at": "2026-07-31T01:35:06.548287+08:00",
+      "completed_at": "2026-07-31T01:35:06.548303+08:00",
+      "details": {
+        "output": "on run_id 格式合法\n  PASS  status.json 不含自引用 gh_pages_commit\n\nPASS=36 FAIL=0\n[test_stage2_schema_repo.py] rc=0 量仍为2）\n  ✅ 备份目录存在（自动备份生效）\n  ✅ export_legacy_views 在兼容导出构建前抛出明确错误\n\n====================================================\nStage 2A 测试结果：PASS=57  FAIL=0\n====================================================\n[test_repository_integrity.py] rc=0  必须为 unknown（依据原始机构）\n  ✅ save_sources 拒绝违反业务规则的来源\n  ✅ 合规来源保存成功\n\n====================================================\nCommit 1 完整性测试：PASS=28  FAIL=0\n====================================================\n[test_no_local_paths.py] rc=0 === 第九节：本地路径扫描 ===\n  ✅ 仓库工作区无本地路径\n  ✅ dist/ 无本地路径\n  ✅ data/public/ 存在\n  ✅ data/public/ 无本地路径\n  ✅ migration_state.json 无本地路径\n  ✅ logs/ 无本地路径\n\nPASS=6 FAIL=0\n[test_stage2_closeout.py] rc=0  无 legacy_payload 与本机路径\n[PASS] T20 current_metrics.publishable_clusters 与 current_policy_passed 数一致\n[PASS] T21 README 无过时数字表述且含第十五节收尾声明\n[PASS] T22 legacy_archive_events.json 结构合法且已裁剪脱敏\n\nPASS=22 FAIL=0\n[test_stage2_frontend_final.py] rc=0 _metric 动态生成（今日/最新/暂无日报），不再写死在 metrics 列表\n============================================================\n前端隔离最终修复测试：PASS=28  FAIL=0  （共 28 项）\n============================================================\n"
+      }
+    },
+    {
+      "name": "publication_semantics",
+      "status": "success",
+      "started_at": "2026-07-31T01:35:10.885872+08:00",
+      "completed_at": "2026-07-31T01:35:10.885885+08:00",
+      "details": {
+        "output": "[semantics] clusters=143 历史保留=143 当前政策通过=0\n[semantics] 风险等级修正=0 语义字段变更=0\n[semantics] 导出：legacy_events=143 published=143",
+        "error": ""
+      }
+    },
+    {
+      "name": "build_summary",
+      "status": "success",
+      "started_at": "2026-07-31T01:35:11.181276+08:00",
+      "completed_at": "2026-07-31T01:35:11.181288+08:00",
+      "details": {
+        "output": "ary] run_id=20260731T013456+0800_lgslbc pipeline_version=2\n  public events: 143, pending_articles: 21, quarantine: 53, sources: 93\n  统计: 24h=0 7d=0 chad24h=0 niger24h=0 current=0 历史保留=143\n  信源: configured=93 enabled=91 success_last_run=0 rate_limited=0\n  status.json: 24h=0, 7d=0, src_success_last_run=0\n  latest-summary.json: 24h=0, 7d=0, risk_countries=15\n\nDone. run_id: 20260731T013456+0800_lgslbc"
+      }
+    },
+    {
+      "name": "build_site_pre",
+      "status": "success",
+      "started_at": "2026-07-31T01:35:11.761867+08:00",
+      "completed_at": "2026-07-31T01:35:11.761879+08:00",
+      "details": {
+        "output": "[build_site] run_id=20260731T013456+0800_lgslbc pipeline_version=2\n[build_site] build_time=2026-07-31 01:35:11\n构建完成 -> dist\n  HTML: 9 个页面\n  ASIP_BUILD_META: 已注入\n  内联数据快照: True\n  run_id: 20260731T013456+0800_lgslbc",
+        "error": ""
+      }
+    },
+    {
+      "name": "validate_stage2",
+      "status": "success",
+      "started_at": "2026-07-31T01:35:12.788358+08:00",
+      "completed_at": "2026-07-31T01:35:12.788370+08:00",
+      "details": {
+        "output": "跟踪时给出说明\n✅ [S46] 日报 new/ongoing 不含历史迁移保留事件\n✅ [S47] dist/data 不含 canonical/backup 及 legacy_payload\n✅ [S48] current_metrics.publishable_clusters(0) == current_policy_passed_events(0)\n✅ [S49] 首页/最新事件/国家页当前模块以 Public/published_events 为唯一数据源，不读取 Legacy events.json\n✅ [S50] status.json 区分 reports_today 与 latest_report_count/latest_report_date（当前生成数 vs 可访问最新日报数）\n✅ [S51] current_metrics(0) == published_events 经准入过滤数(0) == current_policy_passed(0)\n✅ [S52] 当前公开事件为 0 时 latest-summary 当前三数组为空（无 Legacy 回填路径）\n✅ [S53] README 文档化前端隔离（isCurrentPublicEvent / public/published_events），无旧主架构混淆表述\n✅ [S54] dist 构建产物三 HTML 同样不含 Legacy events 直接读取（如已构建）\n============================================================\nStage-2 校验：PASS=54  FAIL=0  WARN=0  （共 54 项）\n============================================================"
+      }
+    },
+    {
+      "name": "validate_source",
+      "status": "success",
+      "started_at": "2026-07-31T01:35:13.104074+08:00",
+      "completed_at": "2026-07-31T01:35:13.104088+08:00",
+      "details": {
+        "output": "京22:00、长度24h、结束不晚于生成时间、文件名一致；legacy 报告已跳过）\nℹ [V11~V13,V15] stage=source：dist 尚未构建，跳过 dist 相关校验\n✅ [V14-future] 无未来时间事件\n✅ [V16-summary-trace] latest-summary 的 0 个事件均为 current_policy_passed 且可追溯（历史迁移保留事件已隔离到历史归档）\n✅ [V18-report-policy] 日报 new/ongoing 均为 current_policy_passed 且不含历史迁移事件\n✅ [V18-report-count] 日报 new/ongoing 数量与数组长度一致\n✅ [V19-metrics] current_metrics.publishable_clusters == current_policy_passed_events\n✅ [V17-canonical] canonical clusters=143 与 legacy events=143 一致，且 events.json 为单向生成视图\n\n============================================================\n校验结果: 1 个问题, 0 个严重错误\n✅ 所有关键检查通过。可以继续部署。"
+      }
+    },
+    {
+      "name": "git_commit_data",
+      "status": "success",
+      "started_at": "2026-07-31T01:35:14.133322+08:00",
+      "completed_at": "2026-07-31T01:35:14.133338+08:00",
+      "details": {
+        "commit": "a816e80d9dfb475d71101113fd3b5f05a6aa47c9",
+        "error": ""
+      }
+    },
+    {
+      "name": "build_site",
+      "status": "success",
+      "started_at": "2026-07-31T01:35:15.277446+08:00",
+      "completed_at": "2026-07-31T01:35:15.277464+08:00",
+      "details": {
+        "output": "[build_site] run_id=20260731T013456+0800_lgslbc pipeline_version=2\n[build_site] build_time=2026-07-31 01:35:14\n构建完成 -> dist\n  HTML: 9 个页面\n  ASIP_BUILD_META: 已注入\n  内联数据快照: True\n  run_id: 20260731T013456+0800_lgslbc",
+        "error": ""
+      }
+    },
+    {
+      "name": "validate_dist",
+      "status": "success",
+      "started_at": "2026-07-31T01:35:15.802307+08:00",
+      "completed_at": "2026-07-31T01:35:15.802320+08:00",
+      "details": {
+        "output": "[V12-dist-rid] dist.run_id matches data: 20260731T013456+0800_lgslbc\n✅ [V13-count] 事件数量一致: 143\n✅ [V14-future] 无未来时间事件\n✅ [V16-summary-trace] latest-summary 的 0 个事件均为 current_policy_passed 且可追溯（历史迁移保留事件已隔离到历史归档）\n✅ [V18-report-policy] 日报 new/ongoing 均为 current_policy_passed 且不含历史迁移事件\n✅ [V18-report-count] 日报 new/ongoing 数量与数组长度一致\n✅ [V19-metrics] current_metrics.publishable_clusters == current_policy_passed_events\n✅ [V17-canonical] canonical clusters=143 与 legacy events=143 一致，且 events.json 为单向生成视图\n\n============================================================\n校验结果: 1 个问题, 0 个严重错误\n✅ 所有关键检查通过。可以继续部署。"
+      }
+    },
+    {
+      "name": "git_push_main",
+      "status": "success",
+      "started_at": "2026-07-31T01:35:18.371702+08:00",
+      "completed_at": "2026-07-31T01:35:18.371712+08:00",
+      "details": {
+        "output": ""
+      }
+    },
+    {
+      "name": "deploy_gh_pages",
+      "status": "success",
+      "started_at": "2026-07-31T01:35:24.435896+08:00",
+      "completed_at": "2026-07-31T01:35:24.435910+08:00",
+      "details": {
+        "commit": "29f26c5bac34232b3b1401d85e644357086622ee",
+        "error": ""
+      }
+    },
+    {
+      "name": "online_verify",
+      "status": "success",
+      "started_at": "2026-07-31T01:35:55.305618+08:00",
+      "completed_at": "2026-07-31T01:35:55.305620+08:00",
+      "details": {
+        "online_run_id": "20260731T013456+0800_lgslbc",
+        "pipeline_version": 2,
+        "last_updated_beijing": "2026-07-31 01:35:11",
+        "events_24h": 0,
+        "http": 200,
+        "verified_at": "2026-07-31T01:35:55.305599+08:00"
+      }
+    }
+  ],
+  "main_commit": "39b20ffa0644fef0aeaf73fbed88f040e3410b99",
+  "gh_pages_commit": "29f26c5bac34232b3b1401d85e644357086622ee",
+  "online_run_id": "20260731T013456+0800_lgslbc",
+  "online_verified_at": "2026-07-31T01:35:55.305599+08:00",
+  "final_status": "success",
+  "deploy_completed_at": "2026-07-31T01:35:24.435933+08:00",
+  "deployment_commit": "29f26c5bac34232b3b1401d85e644357086622ee",
+  "completed_at": "2026-07-31T01:35:55.305666+08:00"
+}
