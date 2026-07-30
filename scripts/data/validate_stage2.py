@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-validate_stage2.py —— ASIP Stage-2 规范数据层校验（48 项检查，零依赖）。
+validate_stage2.py —— ASIP Stage-2 规范数据层校验（54 项检查，零依赖）。
 
 范围：canonical 数据完整性、Schema 合规、ID 规则、发布政策一致性、
 来源分级与核实级别分离、遗留视图单向生成一致性、迁移状态与幂等证据；
@@ -52,7 +52,7 @@ def load(path):
 
 def main():
     print("=" * 60)
-    print("ASIP Stage-2 规范数据层校验（48 项）")
+    print("ASIP Stage-2 规范数据层校验（54 项）")
     print("=" * 60)
 
     # ── S01-S04 文件存在且 JSON 合法 ──
@@ -471,6 +471,105 @@ def main():
           f"current_metrics.publishable_clusters({pc}) == current_policy_passed_events({cp})"
           if pc == cp else
           f"publishable_clusters={pc} 与 current_policy_passed_events={cp} 不一致（不得统计历史迁移）")
+
+    # ════════ 第二阶段前端隔离最终修复新增检查 S49-S54（前端数据源 / 日报语义 / 文档）══
+    def _is_cur(e):
+        if not isinstance(e, dict):
+            return False
+        if e.get("current_policy_passed") is not True:
+            return False
+        if e.get("quality_gate_passed") is not True:
+            return False
+        if e.get("legacy_migration_preserved") is True:
+            return False
+        pub = e.get("publication_status")
+        if pub is not None and pub not in ("published", "publishable"):
+            return False
+        st = (e.get("status") or e.get("event_status") or "")
+        if st in ("quarantined", "suppressed", "archived"):
+            return False
+        if e.get("quarantined") is True:
+            return False
+        if not re.match(r"^EVT_[0-9a-f]{16}$", e.get("event_id") or ""):
+            return False
+        if not (e.get("country") or e.get("country_cn")):
+            return False
+        return True
+
+    def _read(path):
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                return f.read()
+        except Exception:
+            return ""
+
+    # ── S49 前端源码：当前模块以 Public/published_events 为唯一数据源，不读 Legacy events.json ──
+    idx_html = _read(os.path.join(ROOT, "index.html"))
+    ev_html = _read(os.path.join(ROOT, "events.html"))
+    co_html = _read(os.path.join(ROOT, "country.html"))
+    idx_legacy = ('loadModule("events"' in idx_html) or ('API.getCached("events")' in idx_html)
+    ev_legacy = 'API.getCached("events")' in ev_html
+    co_legacy = 'API.getCached("events")' in co_html
+    idx_pub = ("public/published_events" in idx_html) or ("loadCurrentPublishedEvents" in idx_html)
+    ev_pub = "loadCurrentPublishedEvents" in ev_html
+    co_pub = "loadCurrentPublishedEvents" in co_html
+    frontend_ok = (not idx_legacy) and (not ev_legacy) and (not co_legacy) and idx_pub and ev_pub and co_pub
+    check("S49", frontend_ok,
+          "首页/最新事件/国家页当前模块以 Public/published_events 为唯一数据源，不读取 Legacy events.json"
+          + ("" if frontend_ok else "；存在 Legacy events.json 直接读取或缺少 Public 数据源"))
+
+    # ── S50 status.json 日报数量语义分离 ──
+    st_doc = load(os.path.join(DATA, "status.json")) or {}
+    sep_ok = isinstance(st_doc.get("reports_today"), int) and isinstance(st_doc.get("latest_report_count"), int) \
+        and ("latest_report_date" in st_doc)
+    check("S50", sep_ok,
+          "status.json 区分 reports_today 与 latest_report_count/latest_report_date（当前生成数 vs 可访问最新日报数）")
+
+    # ── S51 current_metrics 与前端一致：publishable_clusters == 当前公开事件过滤数 == current_policy_passed ──
+    pe_doc = load(os.path.join(PUBLIC, "published_events.json")) or {}
+    pe_items = pe_doc.get("items", []) if isinstance(pe_doc, dict) else []
+    n_pe_cur = sum(1 for e in pe_items if _is_cur(e))
+    consist = (pc == cp == n_pe_cur)
+    check("S51", consist,
+          f"current_metrics({pc}) == published_events 经准入过滤数({n_pe_cur}) == current_policy_passed({cp})"
+          + ("" if consist else "；三者不一致"))
+
+    # ── S52 当前公开事件为 0 时 latest-summary 当前三数组必须为空（无 Legacy 回填）──
+    summary_doc = load(os.path.join(DATA, "latest-summary.json")) or {}
+    n_cur_g = sum(1 for e in pe_items if e.get("current_policy_passed") is True)
+    empty_ok = True
+    if n_cur_g == 0:
+        for grp in ("high_risk_events", "latest_events", "china_related"):
+            if summary_doc.get(grp):
+                empty_ok = False
+    check("S52", empty_ok,
+          "当前公开事件为 0 时 latest-summary 当前三数组为空（无 Legacy 回填路径）")
+
+    # ── S53 README 已文档化前端隔离，无旧主架构混淆表述 ──
+    rd = _read(os.path.join(ROOT, "README.md"))
+    doc_ok = ("isCurrentPublicEvent" in rd) and ("public/published_events" in rd) \
+        and ("events.json 是唯一真实数据源" not in rd) and ("演示占位数据" not in rd)
+    check("S53", doc_ok,
+          "README 文档化前端隔离（isCurrentPublicEvent / public/published_events），无旧主架构混淆表述")
+
+    # ── S54 构建产物 dist 三 HTML 同样不含 Legacy events 直接读取（若已构建）──
+    dist_data = os.path.join(ROOT, "dist")
+    dist_html_ok = True
+    dist_present = False
+    if os.path.isdir(dist_data):
+        for fn in ("index.html", "events.html", "country.html"):
+            p = os.path.join(dist_data, fn)
+            if not os.path.exists(p):
+                continue
+            dist_present = True
+            t = _read(p)
+            if 'API.getCached("events")' in t or 'loadModule("events"' in t:
+                dist_html_ok = False
+    if not dist_present:
+        dist_html_ok = True  # 未构建时不判失败（由 S49 覆盖源码）
+    check("S54", dist_html_ok,
+          "dist 构建产物三 HTML 同样不含 Legacy events 直接读取（如已构建）"
+          + ("" if dist_html_ok else "；dist 中存在 Legacy events.json 读取"))
 
     # ── 总结 ──
     n_fail = sum(1 for _, okf, _, crit in results if not okf and crit)

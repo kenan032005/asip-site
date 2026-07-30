@@ -25,7 +25,7 @@
       <span>监测国家：<b id="stCountries">--</b></span>
       <span>近24h新增事件：<b id="stEvents24">--</b></span>
       <span>极高风险国家：<b id="stExtreme">--</b></span>
-      <span>今日日报：<b id="stReports">--</b></span>
+      <span id="stReportsWrap">日报：<b id="stReports">--</b></span>
     </div>
   </section>
 
@@ -100,7 +100,20 @@ function renderStatus(st) {
   document.getElementById("stCountries").textContent = st.monitored_country_count != null ? st.monitored_country_count : "--";
   document.getElementById("stEvents24").textContent = st.events_24h != null ? st.events_24h : "--";
   document.getElementById("stExtreme").textContent = st.extreme_risk_country_count != null ? st.extreme_risk_country_count : "--";
-  document.getElementById("stReports").textContent = st.reports_today != null ? st.reports_today : "--";
+  // 日报数量语义分离：reports_today=当日已生成；latest_report_count=可访问最新日报数
+  const wrap = document.getElementById("stReportsWrap");
+  const rt = (st.reports_today != null) ? st.reports_today : 0;
+  const lrc = (st.latest_report_count != null) ? st.latest_report_count : 0;
+  const lrd = st.latest_report_date || "";
+  if (wrap) {
+    if (rt > 0) {
+      wrap.innerHTML = '今日日报：<b>' + rt + '</b> 份';
+    } else if (lrc > 0) {
+      wrap.innerHTML = '最新日报：<b>' + lrc + '</b> 份' + (lrd ? '（' + lrd + '）' : '');
+    } else {
+      wrap.innerHTML = '今日日报：<b>0</b> 份';
+    }
+  }
   setUpdated(st.last_update_bj || st.generated_at_bj);
 }
 
@@ -143,48 +156,57 @@ function renderHome() {
         return { ok: false, data: null };
       });
   }
+  // 当前模块只从 latest-summary 取数；events.json（Legacy）严格不作为当前事件源。
+  // 降级：仅当 latest-summary 加载失败时，才从 Public 公开层 published_events 派生（并强制 isCurrentPublicEvent）。
   Promise.allSettled([
     loadModule("latest-summary", "overview"),
     loadModule("countries", null),
     loadModule("risk-levels", null),
-    loadModule("events", "latest"),
+    loadModule("public/published_events", null),
     loadModule("status", null)
   ]).then(function (res) {
-    const sum = (res[0].value && res[0].value.ok && res[0].value.data) || {};
+    const sumOk = !!(res[0].value && res[0].value.ok && res[0].value.data);
+    const sum = sumOk ? res[0].value.data : null;
     const countries = ((res[1].value && res[1].value.ok && res[1].value.data) || {}).countries || [];
     const risk = (res[2].value && res[2].value.ok && res[2].value.data) || {};
-    const ev = ((res[3].value && res[3].value.ok && res[3].value.data) || {}).events || [];
+    const pub = ((res[3].value && res[3].value.ok && res[3].value.data) || {});
+    const pubItems = (pub && pub.items) ? pub.items : [];
     const st = (res[4].value && res[4].value.ok && res[4].value.data) || {};
     renderStatus(st);
 
+    // latest-summary 加载失败时的降级派生（已强制过滤，绝不回填 Legacy）
+    const cur = sumOk ? [] : pubItems.filter(isCurrentPublicEvent);
+    const der = sumOk ? null : deriveHomeModules(cur);
+
     // 概览
     const ov = document.getElementById("overview");
-    ov.innerHTML = (sum.overview && sum.overview.length) ? sum.overview.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") : "<li>暂无概览。</li>";
+    const ovSrc = sumOk ? sum.overview : null;
+    ov.innerHTML = (ovSrc && ovSrc.length) ? ovSrc.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") : "<li>暂无概览。</li>";
 
     // 极高高风险事件
     const hr = document.getElementById("highRisk");
-    const highList = (sum.high_risk_events && sum.high_risk_events.length) ? sum.high_risk_events
-      : ev.filter(function (e) { return (Number(e.country_risk_level) || 0) >= 3; }).slice(0, 12);
-    hr.innerHTML = highList.length ? highList.map(evItem).join("") : '<div class="empty-sm">近24小时暂无极高及高风险重要事件。</div>';
+    const highList = sumOk ? (sum.high_risk_events || []) : (der ? der.high : []);
+    hr.innerHTML = highList.length ? highList.map(evItem).join("")
+      : '<div class="empty-sm">当前暂无符合当前质量标准的极高及高风险重要事件。</div>';
 
     // 最新事件
     const lv = document.getElementById("latest");
-    const latest = (sum.latest_events && sum.latest_events.length) ? sum.latest_events
-      : ev.slice().sort(function (a, b) { return (b.published_time || "").localeCompare(a.published_time || ""); }).slice(0, 15);
-    lv.innerHTML = latest.length ? latest.map(evItem).join("") : '<div class="empty-sm">暂无事件数据。</div>';
+    const latest = sumOk ? (sum.latest_events || []) : (der ? der.latest : []);
+    lv.innerHTML = latest.length ? latest.map(evItem).join("")
+      : '<div class="empty-sm">当前暂无通过发布政策的有效动态。</div>';
 
     // 涉华
     const ch = document.getElementById("china");
-    const china = (sum.china_related && sum.china_related.length) ? sum.china_related
-      : ev.filter(function (e) { return e.china_related || e.involves_china; });
-    ch.innerHTML = china.length ? china.map(evItem).join("") : '<div class="empty-sm">近24小时未发现经可靠来源证实的涉中国企业或中国公民重大社会安全事件。</div>';
+    const china = sumOk ? (sum.china_related || []) : (der ? der.china : []);
+    ch.innerHTML = china.length ? china.map(evItem).join("")
+      : '<div class="empty-sm">当前未发现经可靠来源证实的涉中国企业或中国公民重大社会安全事件。</div>';
 
     // 风险矩阵
     if (countries.length && risk.tiers) renderRiskMatrix(countries, risk);
 
     // 最新日报
     const lr = document.getElementById("latestReports");
-    const reps = (sum.latest_reports && sum.latest_reports.length) ? sum.latest_reports : [];
+    const reps = sumOk ? (sum.latest_reports || []) : [];
     if (reps.length) {
       lr.innerHTML = '<div class="report-links">' + reps.map(function (r) {
         return `<a class="btn sm" href="report.html?country=${encodeURIComponent(r.country)}&date=${encodeURIComponent(r.date || "")}">${esc(r.title || r.country)}</a>`;

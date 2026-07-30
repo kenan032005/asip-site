@@ -101,6 +101,21 @@ def build_status(events, pending_count, quarantine_count, sources, run_id, pipel
         if any(r.get("date") == today_str for r in idx.get("reports", [])):
             reports_today += 1
 
+    # 最新日报：当前可访问的各国最新日报（区别于“今日生成数” reports_today）
+    latest_report_count = 0
+    latest_report_dates = set()
+    for c in countries:
+        if not c.get("has_daily"):
+            continue
+        dc = c.get("daily_country", c.get("cn", ""))
+        idx = load_json(os.path.join(REPORTS_DIR, dc, "index.json"), {"reports": []})
+        reps = idx.get("reports", [])
+        if reps:
+            latest_report_count += 1
+            if reps[0].get("date"):
+                latest_report_dates.add(reps[0].get("date"))
+    latest_report_date = max(latest_report_dates) if latest_report_dates else ""
+
     status = {
         "pipeline_version": PIPELINE_VERSION,
         "run_id": run_id,
@@ -137,6 +152,8 @@ def build_status(events, pending_count, quarantine_count, sources, run_id, pipel
         "source_requires_api_count": src_stats["source_requires_api_count"],
         "extreme_risk_country_count": extreme,
         "reports_today": reports_today,
+        "latest_report_count": latest_report_count,
+        "latest_report_date": latest_report_date,
         "timezone": "Asia/Shanghai",
         "timezone_label": "北京时间（UTC+8）",
         "source_commit": pipeline_meta.get("source_commit", ""),

@@ -365,6 +365,10 @@ def is_current_public_event(event):
         return False
     if event.get("legacy_migration_preserved") is True:
         return False
+    # publication_status 存在时必须为 published/publishable（与前端 isCurrentPublicEvent 保持一致）
+    pub = event.get("publication_status")
+    if pub is not None and pub not in ("published", "publishable"):
+        return False
     st = (event.get("status") or event.get("event_status") or "")
     if st in ("quarantined", "suppressed", "withdrawn", "archived"):
         return False

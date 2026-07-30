@@ -209,4 +209,57 @@ function showDbError() {
 }
 function getQS(name) { return new URLSearchParams(location.search).get(name); }
 
+// ── Stage-2 前端隔离：当前公开事件统一准入（所有当前页面共用，禁止各处分别实现） ──
+// 与后端 scripts/pipeline_core.py:is_current_public_event 保持语义一致。
+function isCurrentPublicEvent(e) {
+  if (!e || typeof e !== "object") return false;
+  if (e.current_policy_passed !== true) return false;
+  if (e.quality_gate_passed !== true) return false;
+  const pub = e.publication_status;
+  if (pub !== undefined && pub !== null && pub !== "published" && pub !== "publishable") return false;
+  if (e.legacy_migration_preserved === true) return false;
+  const eid = e.event_id || "";
+  if (!/^EVT_[0-9a-f]{16}$/.test(eid)) return false;
+  const country = e.country || e.country_cn || "";
+  if (!country) return false;
+  const st = e.status || e.event_status || "";
+  if (["quarantined", "suppressed", "archived"].indexOf(st) >= 0) return false;
+  if (e.quarantined === true) return false;
+  return true;
+}
+
+// 统一数据访问层：明确区分当前公开事件与历史归档，禁止普通页面直接读 Legacy events.json。
+// 所有“当前/最新/今日”模块必须经由下列函数，不得调用 API.get("events") 作为当前事件源。
+async function loadCurrentPublishedEvents() {
+  // 主数据源：Public 公开层；Legacy events.json 仅作最终保底（仍强制过滤）。
+  try {
+    const d = await API.get("public/published_events");
+    return (d && d.items ? d.items : []).filter(isCurrentPublicEvent);
+  } catch (e) {
+    try {
+      const d = await API.get("events");
+      return (d && d.events ? d.events : []).filter(isCurrentPublicEvent);
+    } catch (e2) { return []; }
+  }
+}
+async function loadLegacyArchiveEvents() {
+  // 仅供历史归档功能使用，不进入任何“当前”页面模块。
+  try {
+    const d = await API.get("public/legacy_archive_events");
+    return (d && d.items) ? d.items : [];
+  } catch (e) { return []; }
+}
+function loadLatestSummary() { return API.get("latest-summary"); }
+function loadCurrentMetrics() { return API.get("public/current_metrics"); }
+
+// 从当前公开事件列表派生首页三类当前模块（高/最新/涉华）。
+function deriveHomeModules(cur) {
+  const high = cur.filter(function (e) { return (Number(e.country_risk_level) || 0) >= 3; });
+  const latest = cur.slice().sort(function (a, b) {
+    return (b.published_time || "").localeCompare(a.published_time || "");
+  }).slice(0, 15);
+  const china = cur.filter(function (e) { return e.china_related || e.involves_china; });
+  return { high: high, latest: latest, china: china };
+}
+
 document.addEventListener("DOMContentLoaded", function () { renderFooter(); showDemoBanner(); });

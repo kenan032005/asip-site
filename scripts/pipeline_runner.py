@@ -245,7 +245,8 @@ def run_mode(mode, trigger):
                           "test_stage2_schema_repo.py",
                           "test_repository_integrity.py",
                           "test_no_local_paths.py",
-                          "test_stage2_closeout.py"):
+                          "test_stage2_closeout.py",
+                          "test_stage2_frontend_final.py"):
             rc, out, err = run_cmd([PYTHON, str(HERE / "tests" / test_file)], timeout=180)
             ok = rc == 0 and "FAIL=0" in out  # 以测试脚本的结果行为准（rc=0 且 FAIL=0）
             tests_ok = tests_ok and ok

@@ -38,21 +38,26 @@ function evItem(e) {
 }
 
 function init() {
-  const cn = getQS("country");
-  if (!cn) { document.getElementById("main").innerHTML = '<div class="empty">未指定国家。</div>'; return; }
+  const cnRaw = getQS("country");
+  if (!cnRaw) { document.getElementById("main").innerHTML = '<div class="empty">未指定国家。</div>'; return; }
 
+  // 当前统计/事件列表只使用当前公开事件（Public 公开层，已强制 isCurrentPublicEvent 过滤）；
+  // 绝不使用 Legacy events.json 全量按 country 过滤的方式。
   Promise.all([
     API.getCached("countries"), API.getCached("risk-levels"),
-    API.getCached("events"), API.getCached("sources"), API.getCached("status")
+    loadCurrentPublishedEvents(), API.getCached("sources"), API.getCached("status")
   ]).then(function (res) {
-    const countries = (res[0] && res[0].countries) || [], risk = res[1] || {}, ev = (res[2] && res[2].events) || [], sources = res[3] || {}, status = res[4] || {};
-    const c = countries.find(function (x) { return x.cn === cn; });
-    if (!c) { document.getElementById("main").innerHTML = '<div class="empty">未找到国家：' + esc(cn) + '</div>'; return; }
+    const countries = (res[0] && res[0].countries) || [], risk = res[1] || {}, cur = res[2] || [], sources = res[3] || {}, status = res[4] || {};
+    const c = countries.find(function (x) {
+      return x.cn === cnRaw || (x.en && x.en.toLowerCase() === String(cnRaw).toLowerCase()) || x.daily_country === cnRaw;
+    });
+    if (!c) { document.getElementById("main").innerHTML = '<div class="empty">未找到国家：' + esc(cnRaw) + '</div>'; return; }
+    const cn = c.cn;
     const lvl = c.risk_level;
     const levels = risk.levels || {};
     const col = (levels[String(lvl)] && levels[String(lvl)].color) || "#888";
 
-    const evC = ev.filter(function (e) { return e.country === cn; });
+    const evC = cur.filter(function (e) { return (e.country || e.country_cn) === cn || e.country === (c.daily_country || ""); });
     const ev24 = evC.filter(function (e) { const h = (Date.now() - new Date(fmtTimeBJ(e.published_time || e.event_time || "").replace(/-/g,"/")).getTime())/3600000; return h >= 0 && h <= 24; });
     const ev7 = evC.filter(function (e) { const h = (Date.now() - new Date(fmtTimeBJ(e.published_time || e.event_time || "").replace(/-/g,"/")).getTime())/3600000; return h >= 0 && h <= 168; });
     const china = evC.filter(function (e) { return e.china_related || e.involves_china; });
@@ -108,11 +113,11 @@ function init() {
       </div>
 
       <section class="hp-block"><h2>二、当前安全形势摘要</h2>
-        <div id="sitSummary">${ev24.length ? ev24.slice(0,3).map(function(e){return "<p style='margin:0 0 8px;'>"+esc(e.title_cn||e.title_original)+"</p>";}).join("") : '<div class="empty-sm">暂无以该国为对象的形势摘要。请查看下方最新事件。</div>'}</div>
+        <div id="sitSummary">${ev24.length ? ev24.slice(0,3).map(function(e){return "<p style='margin:0 0 8px;'>"+esc(e.title_cn||e.title_original)+"</p>";}).join("") : '<div class="empty-sm">当前暂无以该国为对象的形势摘要。请查看下方最新事件。</div>'}</div>
       </section>
 
       <section class="hp-block"><h2>三、最近24小时重要事件</h2>
-        <div class="hp-evlist">${ev24.length ? ev24.map(evItem).join("") : '<div class="empty-sm">最近24小时暂无事件。</div>'}</div>
+        <div class="hp-evlist">${ev24.length ? ev24.map(evItem).join("") : '<div class="empty-sm">近24小时暂无通过发布政策的有效动态。</div>'}</div>
       </section>
 
       <section class="hp-block"><h2>四、最近7天事件趋势</h2>

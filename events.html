@@ -94,14 +94,20 @@ function applyFilters() {
   });
   list.sort(function (a, b) { return (b.published_time || "").localeCompare(a.published_time || ""); });
   const host = document.getElementById("list");
+  if (!ALL.length) {
+    host.innerHTML = '<div class="empty">当前暂无通过发布政策的最新事件。</div>';
+    return;
+  }
   host.innerHTML = list.length ? list.map(function (e) { return eventCard(e); }).join("")
     : '<div class="empty">没有符合条件的事件。</div>';
 }
 
 function init() {
-  Promise.all([API.getCached("events"), API.getCached("countries")]).then(function (res) {
-    const ev = (res[0] && res[0].events) || [], countries = (res[1] && res[1].countries) || [];
-    ALL = ev.filter(function (e) { return !e.is_demo_disabled; });
+  // 主数据源：Public 公开层 published_events（已强制 isCurrentPublicEvent 过滤）；
+  // 绝不直接以 Legacy events.json 作为“最新事件”主数据源。
+  Promise.all([loadCurrentPublishedEvents(), API.getCached("countries")]).then(function (res) {
+    const ev = res[0] || [], countries = (res[1] && res[1].countries) || [];
+    ALL = ev; // 已经过 isCurrentPublicEvent 过滤，只含当前通过政策的事件
     fillFilters(countries);
     applyFilters();
   }).catch(function () { showDbError(); });
