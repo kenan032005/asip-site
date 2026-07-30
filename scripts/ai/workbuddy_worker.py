@@ -19,7 +19,9 @@
 
 import os
 import sys
+import re
 import json
+import shutil
 import time
 import argparse
 import tempfile
@@ -34,13 +36,19 @@ if _SCRIPTS not in sys.path:
 from ai.contracts import validate_ai_result  # noqa: E402
 from ai.exceptions import TaskStateError  # noqa: E402
 from ai.workbuddy_queue_provider import move_task, AI_ROOT  # noqa: E402
+from pipeline_core import sanitize_log_value  # noqa: E402   # 2.5B-1H: 审计脱敏
 
 DEFAULT_LEASE_MINUTES = 30
 MAX_EXTEND_MINUTES = 30
 DEFAULT_BATCH_SIZE = 3
+MIN_BATCH_SIZE = 1
+MAX_BATCH_SIZE = 20
+MIN_LEASE_MINUTES = 1
+EXPIRED_GRACE_SECONDS = 600  # 10 minutes
 _PRIORITY_ORDER = {"critical": 0, "high": 1, "normal": 2, "low": 3}
 _LOCK_STALE_SECONDS = 120
 _LOCK_WAIT_SECONDS = 10
+_WORKER_ID_RE = re.compile(r'^[a-zA-Z0-9._-]{1,100}$')
 
 
 def _now():
@@ -92,7 +100,12 @@ def audit(ai_root, event, **fields):
     for k, v in fields.items():
         if v is None:
             continue
-        rec[k] = str(v)[:200]  # 只保留短摘要，绝不写入正文/堆栈/路径
+        # 2.5B-1H：先脱敏（去除本机路径/用户名/密钥），再截断，最后写入
+        try:
+            clean = sanitize_log_value(v)
+            rec[k] = str(clean)[:200]
+        except Exception:
+            rec[k] = "<redacted>"
     path = os.path.join(ai_root, "audit",
                         "audit_%s.jsonl" % _now().strftime("%Y%m%d"))
     line = json.dumps(rec, ensure_ascii=False)
@@ -142,6 +155,7 @@ def status_summary(ai_root=AI_ROOT):
         d = os.path.join(ai_root, st)
         out[st] = sum(1 for f in os.listdir(d) if f.endswith(".json"))
     expired = 0
+    corrupt = 0
     now = _now()
     lease_dir = os.path.join(ai_root, "leases")
     for fn in os.listdir(lease_dir):
@@ -153,12 +167,90 @@ def status_summary(ai_root=AI_ROOT):
             if exp and exp < now:
                 expired += 1
         except Exception:
-            expired += 1  # 损坏 lease 视为异常
+            corrupt += 1  # 2.5B-1H：损坏 lease 标记为 corrupt 而非自动计为过期
     out["leases"] = sum(1 for f in os.listdir(lease_dir) if f.endswith(".json"))
     out["expired_leases"] = expired
+    out["corrupt_leases"] = corrupt
     out["batches"] = sum(1 for d in os.listdir(os.path.join(ai_root, "batches"))
                          if os.path.isdir(os.path.join(ai_root, "batches", d)))
     return out
+
+
+# ── 2.5B-1H: 统一租约校验 ──
+
+def validate_active_lease(ai_root, task_id, batch_id, worker_id,
+                          now=None, allow_expired=False,
+                          grace_seconds=EXPIRED_GRACE_SECONDS):
+    """验证 task_id 的属性/有效/未过期租约。
+
+    返回 (ok, rejection_outcome, reasons)：
+      - ok: bool — 是否通过所有检查
+      - rejection_outcome: str — 拒绝原因标签（ok 时为 ""）
+      - reasons: list — 拒绝原因短摘要（ok 时为 []）
+
+    规则（规范四）：
+      1. 租约文件必须存在；
+      2. 必须是合法 JSON；
+      3. lease.task_id == task_id；
+      4. lease.batch_id == batch_id；
+      5. lease.worker_id == worker_id；
+      6. 未过期才正常接收；
+      7. allow_expired 时仅允许过期不超过 grace_seconds；
+      8. 超过宽限期必须拒绝。
+
+    不检查 task 是否在 processing/completed/failed — 由调用方处理幂等。
+    """
+    if now is None:
+        now = _now()
+    lp = os.path.join(ai_root, "leases", "%s.json" % task_id)
+
+    # 1. 租约文件必须存在
+    if not os.path.exists(lp):
+        return (False, "rejected_lease_missing",
+                ["no lease file found for %s" % task_id])
+
+    # 2. 必须是合法 JSON
+    try:
+        lease = _read_json(lp)
+    except Exception as e:
+        return (False, "rejected_lease_corrupt",
+                ["lease file corrupt: %s" % type(e).__name__])
+
+    # 3. lease.task_id == task_id
+    ltid = lease.get("task_id")
+    if ltid != task_id:
+        return (False, "rejected_lease_task_mismatch",
+                ["lease task_id %s != result %s" % (ltid, task_id)])
+
+    # 4. lease.batch_id == batch_id
+    lbid = lease.get("batch_id")
+    if lbid != batch_id:
+        return (False, "rejected_lease_batch_mismatch",
+                ["lease batch %s != request %s" % (lbid, batch_id)])
+
+    # 5. lease.worker_id == worker_id
+    lwid = lease.get("worker_id")
+    if lwid != worker_id:
+        return (False, "rejected_lease_worker_mismatch",
+                ["lease worker %s != request %s" % (lwid, worker_id)])
+
+    # 6. 租约过期检查
+    exp = _parse_iso(lease.get("lease_expires_at"))
+    if exp is None:
+        return (False, "rejected_lease_invalid_expiry",
+                ["lease has no valid lease_expires_at"])
+
+    if exp < now:
+        if not allow_expired:
+            return (False, "rejected_lease_expired",
+                    ["lease expired at %s" % str(exp)])
+        # allow_expired: 仅允许宽限期内的
+        age = (now - exp).total_seconds()
+        if age > grace_seconds:
+            return (False, "rejected_lease_expired_beyond_grace",
+                    ["lease expired %d s ago (grace=%d s)" % (int(age), grace_seconds)])
+
+    return (True, "", [])
 
 
 # ── claim：领取批次 ──
@@ -222,6 +314,8 @@ def _request_md(manifest):
 
 
 def _results_template(manifest):
+    exp_prov = manifest.get("expected_provider", "workbuddy_queue")
+    exp_model = manifest.get("expected_model", "hy3")
     return {
         "batch_id": manifest["batch_id"],
         "worker_id": manifest["worker_id"],
@@ -231,8 +325,8 @@ def _results_template(manifest):
                 "task_id": t["task_id"],
                 "schema_version": "1.0",
                 "status": "",
-                "provider": "workbuddy_queue",
-                "model": "hy3",
+                "provider": exp_prov,
+                "model": exp_model,
                 "started_at": "",
                 "completed_at": "",
                 "result": {},
@@ -247,19 +341,32 @@ def _results_template(manifest):
 
 def claim_batch(ai_root=AI_ROOT, worker_id="workbuddy-local",
                 batch_size=DEFAULT_BATCH_SIZE,
-                lease_minutes=DEFAULT_LEASE_MINUTES, _fail_after=None):
+                lease_minutes=DEFAULT_LEASE_MINUTES,
+                expected_provider="workbuddy_queue",
+                expected_model="hy3",
+                _fail_after=None, _fail_steps=None):
     """领取一批任务：queue -> processing + lease + 批次清单。
 
     - 全局 claim 锁保证并发安全；
-    - 中途失败回滚：已迁移任务返回 queue，已建 lease 删除，不留半成品批次；
+    - 批次文件写入使用临时目录 + 原子 rename（事务性）；
+    - _fail_steps 仅测试用：注入指定步骤故障以验证回滚；
     - 空队列正常返回 {"batch_id": None, "task_count": 0, "tasks": []}。
     """
+    _fail_steps = _fail_steps or set()
     _ensure_dirs(ai_root)
-    if batch_size < 1:
-        raise ValueError("batch_size must be >= 1")
+
+    # 2.5B-1H 参数边界校验
+    if not isinstance(batch_size, int) or batch_size < MIN_BATCH_SIZE or batch_size > MAX_BATCH_SIZE:
+        raise ValueError("batch_size must be %d–%d, got %s" % (MIN_BATCH_SIZE, MAX_BATCH_SIZE, batch_size))
+    if not isinstance(lease_minutes, int) or lease_minutes < MIN_LEASE_MINUTES or lease_minutes > DEFAULT_LEASE_MINUTES:
+        raise ValueError("lease_minutes must be %d–%d, got %s" % (MIN_LEASE_MINUTES, DEFAULT_LEASE_MINUTES, lease_minutes))
+    if not worker_id or not isinstance(worker_id, str) or not _WORKER_ID_RE.match(worker_id):
+        raise ValueError("worker_id must be 1–100 chars [a-zA-Z0-9._-], got %r" % (worker_id[:120] if worker_id else worker_id))
+
     lock = _acquire_claim_lock(ai_root)
-    claimed = []       # [(task_dict_after_move)]
+    claimed = []
     lease_paths = []
+    temp_bdir = None
     try:
         candidates = _list_queue_sorted(ai_root)[:batch_size]
         if not candidates:
@@ -270,6 +377,7 @@ def claim_batch(ai_root=AI_ROOT, worker_id="workbuddy-local",
         batch_id = "BATCH_" + now.strftime("%Y%m%dT%H%M%S") + "_" + os.urandom(3).hex()
         expires = (now + timedelta(minutes=lease_minutes)).isoformat()
 
+        # Phase 1: 领取并迁移任务
         try:
             for i, task in enumerate(candidates):
                 if _fail_after is not None and i >= _fail_after:
@@ -290,35 +398,60 @@ def claim_batch(ai_root=AI_ROOT, worker_id="workbuddy-local",
                 _atomic_write_json(lp, lease)
                 lease_paths.append(lp)
         except Exception:
-            # 回滚：删 lease、任务返回 queue
-            for lp in lease_paths:
-                try:
-                    os.remove(lp)
-                except OSError:
-                    pass
-            for t in claimed:
-                try:
-                    move_task(t["task_id"], "processing", "queue", ai_root=ai_root)
-                except Exception:
-                    pass
+            _rollback_claim(claimed, lease_paths, ai_root)
             raise
 
+        # Phase 2: 构建 manifest
         manifest = {
             "batch_id": batch_id,
             "worker_id": worker_id,
             "created_at": now.isoformat(),
             "lease_expires_at": expires,
             "task_count": len(claimed),
+            "expected_provider": expected_provider,
+            "expected_model": expected_model,
             "tasks": claimed,
         }
+
+        # Phase 3: 写入批次文件（临时目录 → 原子 rename）
         bdir = os.path.join(ai_root, "batches", batch_id)
-        os.makedirs(bdir, exist_ok=True)
-        _atomic_write_json(os.path.join(bdir, "manifest.json"), manifest)
-        with open(os.path.join(bdir, "WORKBUDDY_REQUEST.md"), "w",
-                  encoding="utf-8") as f:
-            f.write(_request_md(manifest))
-        _atomic_write_json(os.path.join(bdir, "results.template.json"),
-                           _results_template(manifest))
+        temp_bdir = os.path.join(ai_root, "batches", ".tmp_" + batch_id)
+        os.makedirs(temp_bdir, exist_ok=True)
+        try:
+            if "manifest" in _fail_steps:
+                raise TaskStateError("injected failure: manifest write")
+
+            _atomic_write_json(os.path.join(temp_bdir, "manifest.json"), manifest)
+
+            if "request_md" in _fail_steps:
+                raise TaskStateError("injected failure: WORKBUDDY_REQUEST write")
+
+            with open(os.path.join(temp_bdir, "WORKBUDDY_REQUEST.md"), "w",
+                      encoding="utf-8") as f:
+                f.write(_request_md(manifest))
+
+            if "template" in _fail_steps:
+                raise TaskStateError("injected failure: results template write")
+
+            _atomic_write_json(os.path.join(temp_bdir, "results.template.json"),
+                               _results_template(manifest))
+
+            # 验证三个文件均存在
+            for fname in ("manifest.json", "WORKBUDDY_REQUEST.md", "results.template.json"):
+                if not os.path.exists(os.path.join(temp_bdir, fname)):
+                    raise TaskStateError("batch file missing after write: %s" % fname)
+
+            # 原子 rename
+            os.rename(temp_bdir, bdir)
+            temp_bdir = None  # rename 成功，不再执行 finally 清理
+        except Exception:
+            # 批次文件写入失败 → 回滚所有已建立状态
+            _rollback_claim(claimed, lease_paths, ai_root)
+            if temp_bdir and os.path.isdir(temp_bdir):
+                shutil.rmtree(temp_bdir, ignore_errors=True)
+            raise
+
+        # Phase 4: 审计
         for t in claimed:
             audit(ai_root, "task_claimed", task_id=t["task_id"],
                   batch_id=batch_id, worker_id=worker_id,
@@ -326,16 +459,40 @@ def claim_batch(ai_root=AI_ROOT, worker_id="workbuddy-local",
         return manifest
     finally:
         _release_claim_lock(lock)
+        if temp_bdir and os.path.isdir(temp_bdir):
+            shutil.rmtree(temp_bdir, ignore_errors=True)
+
+
+def _rollback_claim(claimed, lease_paths, ai_root):
+    """claim 中途失败时回滚：删 lease、任务返回 queue。"""
+    for lp in lease_paths:
+        try:
+            os.remove(lp)
+        except OSError:
+            pass
+    for t in claimed:
+        try:
+            move_task(t["task_id"], "processing", "queue", ai_root=ai_root)
+        except Exception:
+            pass
 
 
 # ── heartbeat：续约 ──
 
 def heartbeat_batch(ai_root, batch_id, worker_id,
                     extend_minutes=DEFAULT_LEASE_MINUTES):
-    """只允许原 worker 延长租约；单次延长不超过 30 分钟；
-    已完成 / 已失败任务不能续约。"""
+    """只允许原 worker 延长租约；单次延长 1–30 分钟；
+    已完成/已失败/过期超宽限期的任务不能续约；非法值明确报错。"""
     _ensure_dirs(ai_root)
-    extend_minutes = min(int(extend_minutes), MAX_EXTEND_MINUTES)
+
+    # 2.5B-1H：明确拒绝非法值，不得静默 clamp
+    try:
+        em = int(extend_minutes)
+    except (TypeError, ValueError):
+        raise ValueError("extend_minutes must be an integer, got %r" % extend_minutes)
+    if em < 1 or em > MAX_EXTEND_MINUTES:
+        raise ValueError("extend_minutes must be 1–%d, got %d" % (MAX_EXTEND_MINUTES, em))
+
     report = {"batch_id": batch_id, "worker_id": worker_id,
               "extended": 0, "rejected": []}
     lease_dir = os.path.join(ai_root, "leases")
@@ -354,11 +511,20 @@ def heartbeat_batch(ai_root, batch_id, worker_id,
         if lease.get("worker_id") != worker_id:
             report["rejected"].append({"task_id": tid, "reason": "worker_mismatch"})
             continue
+        # 2.5B-1H：检查任务是否仍在 processing
         if not os.path.exists(os.path.join(ai_root, "processing", "%s.json" % tid)):
             report["rejected"].append({"task_id": tid, "reason": "not_processing"})
             continue
+        # 2.5B-1H：过期超过宽限期的租约不得续约
+        exp = _parse_iso(lease.get("lease_expires_at"))
+        if exp is not None and exp < now:
+            age = (now - exp).total_seconds()
+            if age > EXPIRED_GRACE_SECONDS:
+                report["rejected"].append({"task_id": tid,
+                    "reason": "lease_expired_beyond_grace"})
+                continue
         lease["heartbeat_at"] = now.isoformat()
-        lease["lease_expires_at"] = (now + timedelta(minutes=extend_minutes)).isoformat()
+        lease["lease_expires_at"] = (now + timedelta(minutes=em)).isoformat()
         _atomic_write_json(lp, lease)
         report["extended"] += 1
         audit(ai_root, "lease_extended", task_id=tid, batch_id=batch_id,
@@ -369,16 +535,29 @@ def heartbeat_batch(ai_root, batch_id, worker_id,
 # ── ingest：接收并校验结果 ──
 
 def ingest_results(ai_root, batch_id, result_file, allow_expired=False):
-    """校验批次结果并归档。
+    """校验批次结果并归档（2.5B-1H 加固版）。
 
-    - batch_id / worker_id / 租约 / manifest 归属 / 唯一性 / 契约校验；
+    - 统一租约校验（validate_active_lease）；
+    - provider/model 与 manifest.expected_* 匹配检查；
+    - 批次完整性报告（missing_task_ids / batch_complete）；
     - success -> completed；failed/refused/invalid_output -> failed；
-    - 无效结果不影响其他有效结果（任务保持 processing 并记录原因）；
-    - 重复 ingest 幂等：已完成任务返回 idempotent_success，不重复写入。
+    - 无效结果不影响同批其他有效结果；
+    - 重复 ingest 幂等。
     """
     _ensure_dirs(ai_root)
-    report = {"batch_id": batch_id, "accepted": 0, "failed_tasks": 0,
-              "rejected": 0, "tasks": []}
+    report = {
+        "batch_id": batch_id,
+        "accepted": 0,
+        "failed_tasks": 0,
+        "rejected": 0,
+        "tasks": [],
+        "manifest_task_count": 0,
+        "submitted_result_count": 0,
+        "accepted_task_ids": [],
+        "rejected_task_ids": [],
+        "missing_task_ids": [],
+        "batch_complete": True,
+    }
 
     man_path = os.path.join(ai_root, "batches", batch_id, "manifest.json")
     if not os.path.exists(man_path):
@@ -386,6 +565,10 @@ def ingest_results(ai_root, batch_id, result_file, allow_expired=False):
         return report
     manifest = _read_json(man_path)
     manifest_ids = {t["task_id"] for t in manifest.get("tasks", [])}
+    manifest_worker = manifest.get("worker_id", "")
+    exp_provider = manifest.get("expected_provider", "workbuddy_queue")
+    exp_model = manifest.get("expected_model", "hy3")
+    report["manifest_task_count"] = len(manifest_ids)
 
     try:
         payload = _read_json(result_file)
@@ -396,15 +579,20 @@ def ingest_results(ai_root, batch_id, result_file, allow_expired=False):
     if payload.get("batch_id") != batch_id:
         report["error"] = "batch_id mismatch"
         return report
-    if payload.get("worker_id") != manifest.get("worker_id"):
+    if payload.get("worker_id") != manifest_worker:
         report["error"] = "worker_id mismatch"
         audit(ai_root, "result_ingested", batch_id=batch_id,
               outcome="rejected_worker_mismatch")
         return report
 
+    results = payload.get("results")
+    if not isinstance(results, list):
+        report["error"] = "results field must be an array"
+        return report
+
     now = _now()
     seen = set()
-    for res in payload.get("results", []):
+    for res in results:
         tid = res.get("task_id")
         entry = {"task_id": tid}
         report["tasks"].append(entry)
@@ -412,14 +600,18 @@ def ingest_results(ai_root, batch_id, result_file, allow_expired=False):
         if tid in seen:
             entry["outcome"] = "rejected_duplicate_in_file"
             report["rejected"] += 1
+            report["rejected_task_ids"].append(tid)
             continue
         seen.add(tid)
 
         if tid not in manifest_ids:
             entry["outcome"] = "rejected_not_in_manifest"
+            entry["reasons"] = ["task_id not found in manifest %s" % batch_id]
             report["rejected"] += 1
+            report["rejected_task_ids"].append(tid)
             continue
 
+        # 幂等检查
         comp_path = os.path.join(ai_root, "completed", "%s.json" % tid)
         fail_path = os.path.join(ai_root, "failed", "%s.json" % tid)
         if os.path.exists(comp_path):
@@ -429,15 +621,42 @@ def ingest_results(ai_root, batch_id, result_file, allow_expired=False):
             entry["outcome"] = "idempotent_failed"
             continue
 
-        # 租约检查
-        lp = os.path.join(ai_root, "leases", "%s.json" % tid)
-        if os.path.exists(lp):
-            lease = _read_json(lp)
-            exp = _parse_iso(lease.get("lease_expires_at"))
-            if exp and exp < now and not allow_expired:
-                entry["outcome"] = "rejected_lease_expired"
-                report["rejected"] += 1
-                continue
+        # 2.5B-1H：统一租约校验
+        v_ok, v_reject, v_reasons = validate_active_lease(
+            ai_root, tid, batch_id, manifest_worker,
+            now=now, allow_expired=allow_expired)
+        if not v_ok:
+            entry["outcome"] = v_reject
+            entry["reasons"] = v_reasons
+            report["rejected"] += 1
+            report["rejected_task_ids"].append(tid)
+            audit(ai_root, "result_ingested", task_id=tid, batch_id=batch_id,
+                  outcome=v_reject, reason=v_reasons[0] if v_reasons else "")
+            continue
+
+        # 2.5B-1H: provider 匹配检查
+        if res.get("provider") != exp_provider:
+            entry["outcome"] = "rejected_provider_mismatch"
+            entry["reasons"] = ["expected provider=%s, got %s" % (
+                exp_provider, res.get("provider"))]
+            report["rejected"] += 1
+            report["rejected_task_ids"].append(tid)
+            audit(ai_root, "result_ingested", task_id=tid, batch_id=batch_id,
+                  outcome="provider_mismatch",
+                  reason="expected %s got %s" % (exp_provider, res.get("provider")))
+            continue
+
+        # 2.5B-1H: model 匹配检查
+        if res.get("model") != exp_model:
+            entry["outcome"] = "rejected_model_mismatch"
+            entry["reasons"] = ["expected model=%s, got %s" % (
+                exp_model, res.get("model"))]
+            report["rejected"] += 1
+            report["rejected_task_ids"].append(tid)
+            audit(ai_root, "result_ingested", task_id=tid, batch_id=batch_id,
+                  outcome="model_mismatch",
+                  reason="expected %s got %s" % (exp_model, res.get("model")))
+            continue
 
         # 契约校验
         errors = validate_ai_result(res)
@@ -445,13 +664,16 @@ def ingest_results(ai_root, batch_id, result_file, allow_expired=False):
             entry["outcome"] = "rejected_invalid_result"
             entry["reasons"] = errors[:5]
             report["rejected"] += 1
+            report["rejected_task_ids"].append(tid)
             audit(ai_root, "result_ingested", task_id=tid, batch_id=batch_id,
                   outcome="invalid", reason="; ".join(errors[:2]))
             continue
 
         if not os.path.exists(os.path.join(ai_root, "processing", "%s.json" % tid)):
             entry["outcome"] = "rejected_not_processing"
+            entry["reasons"] = ["task not in processing"]
             report["rejected"] += 1
+            report["rejected_task_ids"].append(tid)
             continue
 
         if res["status"] == "success":
@@ -459,6 +681,7 @@ def ingest_results(ai_root, batch_id, result_file, allow_expired=False):
                       updates={"ai_result": res})
             entry["outcome"] = "completed"
             report["accepted"] += 1
+            report["accepted_task_ids"].append(tid)
             audit(ai_root, "result_ingested", task_id=tid, batch_id=batch_id,
                   outcome="success")
             audit(ai_root, "task_completed", task_id=tid, batch_id=batch_id)
@@ -467,15 +690,33 @@ def ingest_results(ai_root, batch_id, result_file, allow_expired=False):
                               updates={"ai_result": res})
             entry["outcome"] = "failed"
             report["failed_tasks"] += 1
+            report["accepted_task_ids"].append(tid)  # 也算处理完成
             audit(ai_root, "result_ingested", task_id=tid, batch_id=batch_id,
                   outcome=res["status"])
             audit(ai_root, "task_failed", task_id=tid, batch_id=batch_id,
                   code=(res.get("error") or {}).get("code"),
                   retry_count=moved.get("retry_count"))
+        # 清理租约
+        lp = os.path.join(ai_root, "leases", "%s.json" % tid)
         try:
             os.remove(lp)
         except OSError:
             pass
+
+    # 2.5B-1H：计算批次完整性
+    processed_ids = set(report["accepted_task_ids"]).union(
+        {t for t in manifest_ids
+         if os.path.exists(os.path.join(ai_root, "completed", "%s.json" % t))}
+    ).union(
+        {t for t in manifest_ids
+         if os.path.exists(os.path.join(ai_root, "failed", "%s.json" % t))}
+    )
+    report["missing_task_ids"] = sorted(list(manifest_ids - processed_ids - seen))
+    report["submitted_result_count"] = len(results)
+    report["batch_complete"] = (
+        len(report["missing_task_ids"]) == 0
+        and len(manifest_ids) == len(processed_ids)
+    )
     return report
 
 
@@ -486,7 +727,7 @@ def recover_expired(ai_root=AI_ROOT, dry_run=False):
     _ensure_dirs(ai_root)
     now = _now()
     report = {"scanned": 0, "requeued": [], "permanently_failed": [],
-              "skipped": [], "dry_run": bool(dry_run)}
+              "skipped": [], "corrupt_lease": [], "dry_run": bool(dry_run)}
     lease_dir = os.path.join(ai_root, "leases")
     for fn in sorted(os.listdir(lease_dir)):
         if not fn.endswith(".json"):
@@ -495,7 +736,10 @@ def recover_expired(ai_root=AI_ROOT, dry_run=False):
         try:
             lease = _read_json(lp)
         except Exception:
-            report["skipped"].append({"lease": fn, "reason": "unreadable"})
+            # 2.5B-1H：损坏租约 → 标记 corrupt_lease，不删任务，不自动入队
+            report["corrupt_lease"].append({"lease": fn, "reason": "unreadable"})
+            audit(ai_root, "corrupt_lease_detected", lease_file=fn,
+                  reason="unreadable")
             continue
         report["scanned"] += 1
         exp = _parse_iso(lease.get("lease_expires_at"))
