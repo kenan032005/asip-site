@@ -65,6 +65,28 @@ def read_text(path):
         return ""
 
 
+def extract_function(src, name):
+    """提取 common.js 中某个具名函数（含 async）的完整源码体（含嵌套花括号）。"""
+    pat = re.compile(r"((?:async\s+)?function\s+" + re.escape(name) + r"\s*\([^)]*\)\s*\{)")
+    m = pat.search(src)
+    if not m:
+        return None
+    i = src.index("{", m.start())
+    depth = 0
+    j = i
+    while j < len(src):
+        c = src[j]
+        if c == "{":
+            depth += 1
+        elif c == "}":
+            depth -= 1
+            if depth == 0:
+                return src[m.start():j + 1]
+        j += 1
+    return src[m.start():]
+
+
+
 # 与前端 assets/js/common.js:isCurrentPublicEvent 完全一致的 Python 复刻
 def is_current_public_event(e):
     if not isinstance(e, dict):
@@ -96,6 +118,7 @@ def main():
     co_html = read_text(os.path.join(ROOT, "country.html"))
     common_js = read_text(os.path.join(ROOT, "assets", "js", "common.js"))
     rd = read_text(os.path.join(ROOT, "README.md"))
+    build_summary_src = read_text(os.path.join(SCRIPTS, "build_summary.py"))
 
     # 载入数据
     pe = load(os.path.join(PUBLIC, "published_events.json")) or {}
@@ -235,6 +258,86 @@ def main():
         and ("function loadCurrentMetrics" in common_js)
     t20 = t20 and t4 and t7 and t2
     check("T20", t20, "common.js 提供统一过滤与数据访问层，且各当前页面均调用之")
+
+    # ─────────────────────────────────────────────────────────────
+    # 微修复回归：删除 Legacy 回退 + 日报语义 + README 描述（TDD 先写失败测试）
+    # ─────────────────────────────────────────────────────────────
+    lcp = extract_function(common_js, "loadCurrentPublishedEvents")
+
+    # ── T21 loadCurrentPublishedEvents() 不得调用 API.get("events")（删 Legacy 回退）──
+    t21 = (lcp is not None) and ('API.get("events")' not in lcp)
+    check("T21", t21,
+          "loadCurrentPublishedEvents() 不得调用 API.get(\"events\")（移除 Legacy events.json 回退）"
+          + ("" if t21 else "；当前实现在 catch 中仍回退读取 events.json"))
+
+    # ── T22 loadCurrentPublishedEvents() 不得引用裸 "events"（data/events.json）──
+    t22 = (lcp is not None) and ('"events"' not in lcp)
+    check("T22", t22,
+          "loadCurrentPublishedEvents() 不得引用 Legacy 数据源 \"events\"（data/events.json）"
+          + ("" if t22 else "；当前实现中仍出现 \"events\" 引用"))
+
+    # ── T23 三页面不得把 Legacy events.json 作为当前事件降级数据源 ──
+    def page_uses_legacy_events(html):
+        return ('API.getCached("events")' in html) or ('loadModule("events"' in html) \
+            or ('API.get("events")' in html) or ('"events"' in html)
+    t23 = (not page_uses_legacy_events(idx_html)) and (not page_uses_legacy_events(ev_html)) \
+        and (not page_uses_legacy_events(co_html))
+    check("T23", t23,
+          "index/events/country 三页均不把 Legacy events.json 当作当前事件降级数据源")
+
+    # ── T24 Public 加载失败时：返回空数组，且不得请求 Legacy；页面可显示空状态 ──
+    t24 = (lcp is not None) and ('return []' in lcp) and ('API.get("events")' not in lcp)
+    t24 = t24 and ("当前暂无通过发布政策的有效动态" in idx_html) \
+        and ("当前暂无通过发布政策的最新事件" in ev_html) \
+        and ("近24小时暂无通过发布政策的有效动态" in co_html)
+    check("T24", t24,
+          "Public 加载失败时 loadCurrentPublishedEvents 返回空数组（不请求 Legacy），三页均有空状态文案"
+          + ("" if t24 else "；当前失败分支仍回退 Legacy 或缺少空状态文案"))
+
+    # ── T25 latest-summary 日报指标须区分 reports_today/latest_report_count/latest_report_date ──
+    t25 = ("reports_today" in summary) and ("latest_report_count" in summary) \
+        and ("latest_report_date" in summary)
+    check("T25", t25,
+          "latest-summary.json 区分 reports_today / latest_report_count / latest_report_date"
+          + ("" if t25 else "；latest-summary.json 缺少上述日报语义字段"))
+
+    # ── T26 reports_today=0 且 latest_report_count>0 时标签必须为“最新日报”（非“今日日报”）──
+    rt = status_doc.get("reports_today", 0) if isinstance(status_doc, dict) else 0
+    lrc = status_doc.get("latest_report_count", 0) if isinstance(status_doc, dict) else 0
+    metrics = summary.get("metrics", []) if isinstance(summary, dict) else []
+    labels = [m.get("label") for m in metrics]
+    t26 = True
+    if rt == 0 and lrc > 0:
+        rm = next((m for m in metrics if m.get("label") == "最新日报"), None)
+        t26 = ("最新日报" in labels) and ("今日日报" not in labels) and (rm is not None and "date" in rm)
+    elif rt > 0:
+        t26 = "今日日报" in labels
+    else:
+        t26 = "暂无日报" in labels
+    check("T26", t26,
+          f"日报标签语义：reports_today={rt} / latest_report_count={lrc} → "
+          + ("标签为「最新日报」且带 date 字段，无「今日日报」" if (rt == 0 and lrc > 0)
+             else ("标签为「今日日报」" if rt > 0 else "标签为「暂无日报」"))
+          + ("" if t26 else "；当前 latest-summary 仍为写死的「今日日报」"))
+
+    # ── T27 README 不得包含“所有信息源/条目 tested 均为 false”等固定错误描述 ──
+    t27 = ("均为 `false`" not in rd) and ("均为`false`" not in rd) \
+        and ("所有条目 `tested`" not in rd) and ("所有信息源的tested均为" not in rd)
+    check("T27", t27,
+          "README 不再包含“所有信息源/条目 tested 均为 false”的固定错误描述"
+          + ("" if t27 else "；README 仍存在该错误表述"))
+
+    # ── T28 build_summary.py 日报标签不得写死在 metrics 列表中，须按语义动态生成 ──
+    # 旧实现：{"label": "今日日报", "value": str(len(latest_reports)), ...} 直接写死在 metrics 列表里。
+    # 新实现：通过 report_metric 变量按 reports_today/latest_report_count 动态选择
+    #         「今日日报」/「最新日报」(带 date)/「暂无日报」。
+    t28 = ('"今日日报", "value": str(len(latest_reports))' not in build_summary_src) \
+        and ('report_metric' in build_summary_src) \
+        and ('"最新日报"' in build_summary_src) \
+        and ('"暂无日报"' in build_summary_src)
+    check("T28", t28,
+          "build_summary.py 日报标签由 report_metric 动态生成（今日/最新/暂无日报），不再写死在 metrics 列表"
+          + ("" if t28 else "；build_summary.py 仍把「今日日报」写死在 metrics 列表"))
 
     # ── 总结 ──
     n_fail = sum(1 for _, ok, _ in results if not ok)

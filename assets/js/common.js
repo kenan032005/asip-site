@@ -231,15 +231,18 @@ function isCurrentPublicEvent(e) {
 // 统一数据访问层：明确区分当前公开事件与历史归档，禁止普通页面直接读 Legacy events.json。
 // 所有“当前/最新/今日”模块必须经由下列函数，不得调用 API.get("events") 作为当前事件源。
 async function loadCurrentPublishedEvents() {
-  // 主数据源：Public 公开层；Legacy events.json 仅作最终保底（仍强制过滤）。
+  // 唯一数据源：Public 公开层（data/public/published_events.json）。
+  // 硬性要求：Public 加载失败时宁可返回空数组（页面显示正常空状态），
+  // 也绝不回退到 Legacy events.json（data/events.json）。历史迁移内容不得进入当前页面。
   try {
-    const d = await API.get("public/published_events");
-    return (d && d.items ? d.items : []).filter(isCurrentPublicEvent);
-  } catch (e) {
-    try {
-      const d = await API.get("events");
-      return (d && d.events ? d.events : []).filter(isCurrentPublicEvent);
-    } catch (e2) { return []; }
+    const data = await API.get("public/published_events");
+    const items = Array.isArray(data)
+      ? data
+      : (Array.isArray(data?.items) ? data.items : []);
+    return items.filter(isCurrentPublicEvent);
+  } catch (error) {
+    console.error("Public 事件数据加载失败", error);
+    return [];
   }
 }
 async function loadLegacyArchiveEvents() {
