@@ -166,6 +166,10 @@ def build_status(events, pending_count, quarantine_count, sources, run_id, pipel
 
 def build_summary(events, run_id, status, stats):
     """生成 latest-summary.json。仅使用 pv2 + 闸门 的当前有效事件。"""
+    # 日报语义字段取自 status（与 build_status 共用同一统计），避免作用域重复计算。
+    reports_today = status.get("reports_today", 0)
+    latest_report_count = status.get("latest_report_count", 0)
+    latest_report_date = status.get("latest_report_date", "")
     now = bj_now()
     now_str = bj_format(now)
     cut24 = bj_24h_ago()
@@ -232,6 +236,16 @@ def build_summary(events, run_id, status, stats):
                 "stage1_recent": cnt,
             })
 
+    # 日报指标：按 reports_today / latest_report_count 语义动态生成标签与 date，
+    # 杜绝写死“今日日报”造成的语义错误（最新日报属于前一天时应显示“最新日报”+ 日期）。
+    if reports_today > 0:
+        report_metric = {"label": "今日日报", "value": str(reports_today), "link": "reports.html"}
+    elif latest_report_count > 0:
+        report_metric = {"label": "最新日报", "value": str(latest_report_count),
+                         "date": latest_report_date, "link": "reports.html"}
+    else:
+        report_metric = {"label": "暂无日报", "value": "0", "link": "reports.html"}
+
     summary = {
         "pipeline_version": PIPELINE_VERSION,
         "run_id": run_id,
@@ -248,7 +262,7 @@ def build_summary(events, run_id, status, stats):
             {"label": "近7日事件", "value": str(stats["events_7d"]), "link": "events.html"},
             {"label": "近24小时事件", "value": str(stats["events_24h"]), "link": "events.html"},
             {"label": "极高风险国", "value": str(status.get("extreme_risk_country_count", 8)), "link": "countries.html"},
-            {"label": "今日日报", "value": str(len(latest_reports)), "link": "reports.html"},
+            report_metric,
         ],
         "high_risk_events": high,
         "latest_events": latest,
@@ -256,6 +270,9 @@ def build_summary(events, run_id, status, stats):
         "risk_by_country": risk_by_country,
         "latest_reports": latest_reports,
         "note": "Stage 2（收尾）：数据来自 Canonical→Public 单向导出；首页当前模块仅含 current_policy_passed=true 事件；历史迁移保留事件仅存于历史归档，不进入当前态势",
+        "reports_today": reports_today,
+        "latest_report_count": latest_report_count,
+        "latest_report_date": latest_report_date,
     }
     return summary
 
