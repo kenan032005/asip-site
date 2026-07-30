@@ -267,8 +267,11 @@ Hy3 处理 → 写标准结果 → 真实 CLI ingest → 完成 → 幂等重 in
 - `scripts/ai/manual_handoff_demo.py`：`prepare`（入队 2 个合成任务 + claim 出批次）/
   `verify`（校验批次清单与字段）/ `cleanup`（删除运行时目录）。
   合成任务为乍得（法语, TCD）+ 尼日尔（英语, NER），均为虚构安全事件。
-- `scripts/tests/test_stage25b2a_manual_handoff.py`：**14 项**验收（D1–D14），已加入
-  `pipeline_runner.py` 的单元测试闸门。
+- `scripts/tests/test_stage25b2a_manual_handoff.py`：**18 项**验收（T1–T18，覆盖
+  非空 source_text / 法语·英语语言标记 / 禁用社保·养老金语义 / content_hash 由 source_text
+  计算且稳定 / 安全事件与交通中断分类 / 未确认伤亡不得写成已确认 / verify 检查最终状态 /
+  verify 失败 CLI 非零 / run 失败 CLI 非零 / 非对象结果 / 全部拒绝 / 部分接受 / 隔离生产等），
+  已加入 `pipeline_runner.py` 的单元测试闸门。
 
 ### 12.3 CLI 退出码语义（本次新增，2.5B-2A）
 `main()` 现在按语义返回退出码，便于定时脚本 / CI 判定：
@@ -295,3 +298,26 @@ Hy3 处理 → 写标准结果 → 真实 CLI ingest → 完成 → 幂等重 in
 ### 12.5 回滚基线
 - 本阶段回滚基线：**`pre-stage25b2a`**（指向 2.5B-2A 开工前 `main` HEAD `e10c045`）。
 - 与 2.5B-1H 基线 `pre-stage25b1-hardening`（`2b9eaa6`）独立。
+
+### 12.6 验收补正（2026-07-30）：真实社会安全场景 + Hy3 交接证据
+
+独立验收发现原演示将“社会安全”误当成 social security 福利保障、且结果与 source_text
+无关、verify 不检查最终状态。补正内容：
+
+- **场景改为真实 ASIP 安全语义**：两个任务均为 `article_analysis` + `synthetic=true`，
+  含明确标注虚构的 `source_text`（乍得法语安全事件 / 尼日尔英语交通中断），
+  `content_hash` 由 `source_text` 经 SHA-256 计算；`input_ref` 含
+  `country_iso3 / source_language / source_text / synthetic / scenario_id`。
+  不再出现 `social_security_forum` / `pension_workshop` / `养老金` / `社会保障论坛` 等语义。
+- **verify 增强**：`verify()` 现返回 `{ok, checks, errors}`，在 ingest 之后检查 16 项硬性条件
+  （manifest 存在、task_count=2、provider/model、queue=0、processing=0、completed=2、
+  leases=0、completed 与 manifest 一致、两结果过 Schema、country=TCD/NER、synthetic=true、
+  非空 summary_zh、乍得保留“伤亡未确认”、尼日尔不虚构伤亡、无重复 completed）。
+  任一失败 `ok=false`。
+- **演示 CLI 退出码收敛**：`prepare`/`verify.ok=true`/`cleanup`/`run.ok=true` → 0；
+  `verify.ok=false`/`run.ok=false`/参数或异常 → 非 0。不再固定返回 0。
+- **测试与真实 Hy3 证据分离**：自动测试用确定性模拟结果证明 Schema/CLI/ingest/幂等/verify
+  逻辑；当前会话内置 **Hy3（免费）** 实际读取 `source_text` 并生成中文摘要，经真实 CLI
+  ingest → 幂等重 ingest → verify 全绿，证据单独记入
+  `ASIP_STAGE25B2A_ACCEPTANCE.md`（仅含非敏感信息）。
+- 回滚基线新增：**`pre-stage25b2a-correction`**（指向补正开工前 `main` HEAD）。
