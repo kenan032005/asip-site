@@ -32,15 +32,16 @@ asip-site/
 │   ├── css/style.css       统一样式（风险配色：低=蓝/中=黄/高=橙/极高=深红）
 │   └── js/
 │       ├── api.js         数据层（优先内联快照，回退 fetch + localStorage）
-│       ├── common.js       表头/页脚/风险徽章/北京时间换算/筛选
-│       ├── home/events/... 各页逻辑（内联于对应 HTML 的 <script>）
-├── data/                   运行时数据（单一数据源）
-│   ├── canonical/          规范数据层（schema_version=2.0）：articles / event_clusters / quarantine / migration_state / idempotency_report
-│   ├── public/             发布视图（由 canonical 单向生成）：published_events.json / current_metrics.json
+│       ├── common.js       表头/页脚/风险徽章/北京时间换算/筛选 + 前端统一准入 `isCurrentPublicEvent` 与数据访问层
+│       ├── pipeline.js     流水线状态指示
+│       └── 各页逻辑（内联于对应 HTML 的 <script>）
+├── data/                   运行时数据（分层：canonical 内部规范层 → public 当前公开层 → events/旧池仅 Legacy 兼容视图）
+│   ├── canonical/          规范数据层（schema_version=2.0，内部唯一真实来源，不部署公网）：articles / event_clusters / quarantine / migration_state / idempotency_report
+│   ├── public/             发布视图（由 canonical 单向生成）：published_events.json / current_metrics.json / legacy_archive_events.json
 │   ├── risk-levels.json    22 国四类固定顺序 + 风险配色
 │   ├── countries.json      22 国基础信息（首都/区域/基准等级/是否日报）
-│   ├── events.json         事件数据（★ 单向生成视图：generated_from_canonical，业务脚本不得直接写）
-│   ├── sources.json        五层信息源（2.0 升级格式，legacy_payload 保留原字段；均 tested=false）
+│   ├── events.json         ★ 遗留兼容视图（Legacy）：由 canonical 单向生成，业务脚本不得直接写，前端当前模块（首页/最新事件/国家页）不读取它
+│   ├── sources.json        信息源配置（2.0 格式；当前未接入实时采集，tested 字段待后续阶段填充）
 │   ├── status.json         更新时间/下次更新/计数/演示模式开关
 │   └── latest-summary.json 首页概览/指标/各区块摘要
 ├── reports/<国家>/          六国日报（按日期归档的 JSON）
@@ -48,7 +49,7 @@ asip-site/
 │   ├── pipeline_runner.py   ★ 统一编排器（唯一运行入口，见第十二节）
 │   ├── pipeline_core.py     ★ 时区/run_id/锁/统计/闸门 公共库
 │   ├── validate_pipeline.py ★ 分阶段校验器（失败非零退出码）
-│   ├── tests/               单元与回归测试（test_country / test_stage1_pipeline / test_stage2_schema_repo / test_repository_integrity / test_no_local_paths）
+│   ├── tests/               单元与回归测试（test_country / test_stage1_pipeline / test_stage2_schema_repo / test_repository_integrity / test_no_local_paths / test_stage2_closeout / test_stage2_frontend_final）
 │   ├── data/                规范数据层模块：repository（唯一读写入口）/ identifiers（稳定 SHA-256 ID）/ normalizers / publication_policy（确定性发布闸门）/ schema_validator / migrate_stage2 / compatibility_export / validate_stage2 / verify_idempotency
 │   ├── collect.py           采集流水线（规范化→去重→核实→翻译，由编排器调用；写入 canonical，不直接写旧池）
 │   ├── normalize.py         字段规范化与校验
@@ -128,7 +129,7 @@ python scripts/build_site.py
 **唯一运行入口是统一编排器**（数据文件 `events.json` 等均为单向生成视图，禁止手工编辑）：
 
 ```bash
-# 完整链路：pull → 测试 → 语义/导出 → 汇总 → 日报 → 48 项校验 → 构建 → 部署 → 线上验证
+# 完整链路：pull → 测试 → 语义/导出 → 汇总 → 日报 → 54 项校验 → 构建 → 部署 → 线上验证
 python scripts/pipeline_runner.py --mode full --trigger manual
 
 # 仅校验（不提交、不部署）
@@ -237,6 +238,7 @@ python tools/setup_gh_pages.py
 - **遗留兼容视图（仅旧前端兼容，非主架构）**：`data/events.json`、旧池（pending/raw/quarantine_events）由 `compatibility_export` 单向生成，带 `generated_from_canonical + do_not_edit_manually` 信封，**业务脚本不得直接写**，且**不部署到公网**。
 - **风险分级 A/B/C 仅为采集相关性分级**，并非发布准入；当前发布准入统一走 `current_policy_passed`（且 `quality_gate_passed` 通过、`publication_status` 合规、非历史迁移保留）。C 级单源只进待核实池，不发布。
 - 历史数据清洗：`scripts/clean_events.py`（误判/无关移入 `data/quarantine_events.json` 隔离，不物理删除）。
+- **前端数据隔离（第二阶段前端收尾）**：首页、最新事件页、国家详情页的「当前/最新/今日」模块**只读取 Public 公开层** `data/public/published_events.json`，并经统一函数 `isCurrentPublicEvent()`（定义于 `assets/js/common.js`，与后端 `scripts/pipeline_core.py:is_current_public_event` 语义一致）过滤——仅 `current_policy_passed && quality_gate_passed && 非历史迁移保留 && publication_status 合规` 的事件才会展示。**绝不**用 Legacy `events.json` 全量回填当前模块。当前公开事件为 0 时（全部为历史迁移保留数据），相关模块显示「暂无」空状态，这是质量闸门的正常结果，不是故障。历史迁移事件只进入 `data/public/legacy_archive_events.json`，不混入任何当前页面。
 
 ### 11.4 信息源扩容（data/sources.json）
 - 信息源的**配置总数 / 启用数 / 分国家分布以 `data/sources.json` 与 `data/status.json` 的实时内容为准**，本文档不再硬编码数量；查询方式：`python -c "import json;d=json.load(open('data/sources.json',encoding='utf-8'));print(len(d.get('sources',d)))"`，或直接查看线上 `data/status.json` 的源统计字段。
@@ -304,7 +306,7 @@ python tools/setup_gh_pages.py
 ### 13.1 三个检查点（独立提交，任一失败不进入下一阶段）
 - **2A 数据结构与仓储（已提交）**：`scripts/data/` 规范层（repository / identifiers / normalizers / publication_policy / schema_validator）+ `schemas/*.schema.json` + 单元测试 57 项（`test_stage2_schema_repo`）。
 - **2B 迁移与兼容（已提交）**：`scripts/data/migrate_stage2.py` 旧池→canonical 无损迁移；`compatibility_export.py` canonical→旧池单向生成；幂等验证 8/8 文件 SHA-256 两次完全一致、计数稳定（articles=328 / clusters=143 / quarantine=53 / published=143）；可回滚。
-- **2C 流水线接入（本阶段）**：`collect.py` / `promote_events.py` / `build_summary.py` 改为经 `Repository` 读写 canonical，发布判定统一走 `publication_policy.evaluate()`；新增 `validate_stage2.py`（25 项，收尾阶段扩至 48 项）；本 README 同步更新。
+- **2C 流水线接入（本阶段）**：`collect.py` / `promote_events.py` / `build_summary.py` 改为经 `Repository` 读写 canonical，发布判定统一走 `publication_policy.evaluate()`；新增 `validate_stage2.py`（25 项，收尾阶段扩至 54 项）；本 README 同步更新。
 
 ### 13.2 三层数据架构（严格单向）
 ```
@@ -340,13 +342,14 @@ data/events.json 遗留兼容视图（仅旧前端兼容，单向生成，不部
 ### 13.6 校验与回归（全绿）
 | 套件 | 项 | 结果 |
 |---|---|---|
-| `validate_stage2.py` | 48 项（结构/ Schema / ID / 发布策略 / 来源分级 / 单向生成 / 1:1 / 幂等 + 收尾 S26-S48：仓储强制校验、双向关联、public 溯源、同批导出、统计口径、历史语义、风险一致、业务属性、legacy_payload 不外泄、路径卫生、链路静态检查、run_id 全链路一致、首页隔离 S43、日报持续跟踪 S44-S46、dist 无内部数据 S47、publishable_clusters 语义 S48） | ✅ 48/48 |
+| `validate_stage2.py` | 54 项（结构/ Schema / ID / 发布策略 / 来源分级 / 单向生成 / 1:1 / 幂等 + S26-S42 收尾 + S43-S48 首页隔离/日报持续跟踪/dist 无内部数据/统计语义 + S49-S54 前端数据源隔离/日报语义分离/文档一致性） | ✅ 54/54 |
 | `verify_idempotency.py` | 8 文件两次 apply SHA-256 一致 | ✅ PASS |
 | `test_stage2_schema_repo`（2A） | 仓储/ID/归一化/发布闸门/导出 | ✅ 57/57 |
 | `test_stage1_pipeline`（第一阶段） | run_id/时区/窗口/统计/锁/校验退出码 | ✅ 36/36 |
 | `test_repository_integrity` | 双向关联/事务/来源规则 | ✅ 28/28 |
 | `test_no_local_paths` | 全仓/ dist / public 无本机路径 | ✅ 6/6 |
-| `test_stage2_closeout`（本收尾新增） | 首页隔离/日报持续跟踪/build_site 白名单/README 一致性等 20 项 | ✅ 通过 |
+| `test_stage2_closeout`（收尾新增） | 首页隔离/日报持续跟踪/build_site 白名单/README 一致性等 20 项 | ✅ 通过 |
+| `test_stage2_frontend_final`（前端收尾新增） | 前端无 Legacy 回填/主源 published_events/统计用 Public/空状态/日报语义分离/README 一致/dist 一致 等 20 项 | ✅ 通过 |
 | `test_country` | 国家识别 | ✅ 24/24 |
 | `validate_pipeline.py` | V1–V19（含 V16 首页仅 current_policy_passed、V18 日报持续跟踪、V19 统计语义） | ✅ 0 严重错误 |
 
@@ -373,8 +376,8 @@ data/events.json 遗留兼容视图（仅旧前端兼容，单向生成，不部
   原因="历史迁移保留，未按当前政策重新核实"；仅进入 `data/public/legacy_archive_events.json` 历史归档，**不进入首页当前态势与日报当前内容**。
 - **22 国风险统一**：以 `countries.json` 为准（4=极高/3=高/2=中/1=低），cluster 顶层与 legacy_payload 同步修正。
 - **路径卫生**：日志/迁移状态中的本机绝对路径已清洗；`save_run_log` 自动脱敏；`test_no_local_paths.py` 持续扫描 main/dist/public。
-- **编排器升级**：`pipeline_runner.py` 为 Stage-2 编排器——pull 失败即中止（`PULL_FAILURE_BLOCKS`）、5 套测试全过才继续、语义与导出入链、`validate_stage2`（48 项）失败即中止、提交信息 `Stage-2 run_id=`。
-- **校验强化**：`validate_stage2.py` 从 25 项扩至 **48 项**（S26-S48：仓储强制校验、双向关联、public 溯源、同批导出、统计口径、历史语义、风险一致、业务属性、legacy_payload 不外泄、路径卫生、链路静态检查、run_id 全链路一致、首页隔离 S43、日报持续跟踪 S44-S46、dist 无内部数据 S47、publishable_clusters 语义 S48）。
+- **编排器升级**：`pipeline_runner.py` 为 Stage-2 编排器——pull 失败即中止（`PULL_FAILURE_BLOCKS`）、5 套测试全过才继续、语义与导出入链、`validate_stage2`（54 项）失败即中止、提交信息 `Stage-2 run_id=`。
+- **校验强化**：`validate_stage2.py` 从 25 项扩至 **54 项**（S26-S54：仓储强制校验、双向关联、public 溯源、同批导出、统计口径、历史语义、风险一致、业务属性、legacy_payload 不外泄、路径卫生、链路静态检查、run_id 全链路一致、首页隔离 S43、日报持续跟踪 S44-S46、dist 无内部数据 S47、publishable_clusters 语义 S48）。
 
 ---
 
@@ -388,7 +391,7 @@ data/events.json 遗留兼容视图（仅旧前端兼容，单向生成，不部
 3. **Canonical 内部数据被部署到公网** → `build_site.py` 改为**显式白名单复制**（不再整目录 copy），`__DB__` 内联快照同样只含白名单且脱敏；`data/canonical/**`、`data/backup/**`、`legacy_payload`、本机绝对路径**均不进入 dist / gh-pages**。
 4. **README 旧三级数据池与 Canonical 架构并存矛盾** → 11.3 / 13.2 / 13.4 / 14.2 已统一为「采集暂存（草稿，非发布源）→ Canonical（唯一真实来源，内部不部署）→ Public（唯一公开层）→ Legacy（单向生成的兼容视图，不部署）」；A/B/C 明确为**采集相关性分级**而非发布准入。
 5. **状态字段为空或语义不准** → `current_metrics.publishable_clusters` 改为统计真正 `current_policy_passed == true` 的事件；运行日志补齐 `deploy_completed_at` 与 `deployment_commit`。
-6. **验收规则不完整** → `validate_pipeline.py` 重写 V16（删除"历史可见即可进首页"的错误逻辑）并新增 V18 / V19；`validate_stage2.py` 由 42 项扩至 **48 项**（新增 S43–S48）；新增测试套件 `scripts/tests/test_stage2_closeout.py`。
+6. **验收规则不完整** → `validate_pipeline.py` 重写 V16（删除"历史可见即可进首页"的错误逻辑）并新增 V18 / V19；`validate_stage2.py` 由 42 项扩至 **54 项**（新增 S43–S54；其中 S49–S54 为第二阶段前端收尾新增）；新增测试套件 `scripts/tests/test_stage2_closeout.py` 与 `scripts/tests/test_stage2_frontend_final.py`。
 
 ### 15.2 当前数据事实（不掩饰）
 - Canonical 中保留的全部历史迁移事件 `current_policy_passed = false`，因此**当前公开事件数为 0**，首页当前态势三个模块显示"暂无"，日报持续跟踪显示"当前无符合条件的持续跟踪事项。"——这是**正确行为**，不是故障。
@@ -398,3 +401,24 @@ data/events.json 遗留兼容视图（仅旧前端兼容，单向生成，不部
 - Canonical 层**永不部署**到 gh-pages；公网仅可访问白名单内的 `data/*.json` 与 `data/public/*.json`。
 - 本次收尾**未**执行历史数据全量重新迁移、**未**删除任何 Canonical 历史、**未**新增信息源、**未**抓取外部新闻、**未**调用 Hy3、**未**开发自动核实与智能聚类、**未**修改网站整体样式、**未**扩展国家。
 - **Stage 2.5 与第三阶段均未开始。**
+
+## 十六、第二阶段前端收尾（2026-07-20 第二次收尾）
+
+> 在 15 节后端收尾之后，前端三页仍存在「历史迁移数据回填当前模块」问题。本次**只关闭前端与文档问题**，不重新迁移、不抓新闻、不调 Hy3、不进入 2.5/3 阶段。完整 27 项证据见 `ASIP_STAGE2_FRONTEND_FINAL_ACCEPTANCE.md`。
+
+### 16.1 本次关闭的 5 类前端/文档问题
+1. **首页 events.json 回退填补** → `index.html` 删除 `loadModule("events","latest")` 与全部 events.json 回填；当前模块改由 `latest-summary` + `public/published_events` 经 `isCurrentPublicEvent` 派生；空数组显示空状态，绝不回填 Legacy。
+2. **最新事件页展示 143 条历史迁移** → `events.html` 改读 `public/published_events` 并统一 `isCurrentPublicEvent` 过滤；当前公开为 0 时显示「当前暂无通过发布政策的最新事件。」
+3. **国家页用全量 events.json 统计** → `country.html` 改用 `loadCurrentPublishedEvents()`；支持 `country=chad/niger` 查找；24h 无有效动态显示空状态。
+4. **README 旧表述** → 11.3/13.2 主架构改为分层、events.json 标注 Legacy 兼容视图（当前模块不读）、sources 数量动态化、新增 11.3「前端数据隔离」段、13.6 测试表 48→54 项并加入 `test_stage2_frontend_final`、全文消除旧主架构/演示数据表述。
+5. **reports_today 与「今日日报」语义不一致** → `build_summary.py` 在 status 增加 `latest_report_count` / `latest_report_date`，与 `reports_today` 区分；首页状态栏按三者动态显示「今日日报：N 份」或「最新日报：N 份（日期）」，前一日日报显示「最新日报」而非伪造「今日日报」。
+
+### 16.2 统一前端准入
+- `assets/js/common.js` 新增 `isCurrentPublicEvent(e)`（与后端 `scripts/pipeline_core.py:is_current_public_event` 语义一致）：须 `current_policy_passed==true && quality_gate_passed==true && publication_status∈{published,publishable} && 非 legacy_migration_preserved && event_id 合规 && country 有效 && 非 quarantined/suppressed/archived && 非 quarantined 标记`。
+- 新增数据访问层 `loadCurrentPublishedEvents / loadLegacyArchiveEvents / loadLatestSummary / loadCurrentMetrics / deriveHomeModules`，所有当前模块共用同一闸门。
+
+### 16.3 验收与边界
+- 7 套测试 192 项全过（24+36+57+28+5+22+20），`validate_stage2` 54/54，`validate_pipeline` 0 严重错误，`build_site` 成功且 dist 三页无 Legacy events 读取。
+- 本次**未**重新迁移、**未**抓外部新闻、**未**调 Hy3、**未**进入 2.5/3 阶段；数据仅以统一 `run_id` 重新生成视图层。
+- **Stage 2.5 与第三阶段仍未开始。**
+
