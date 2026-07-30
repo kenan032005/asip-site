@@ -206,6 +206,29 @@ def deploy_gh_pages(dist_dir, token, source_commit):
         return None, str(e)
 
 
+def _check_ai_runtime_and_schema():
+    """结构性校验：runtime.json 处于安全默认且三份 AI Schema 存在。返回 (cfg_ok, schema_ok)。"""
+    try:
+        import json as _json
+        cfg_path = ROOT / "config" / "runtime.json"
+        if not cfg_path.exists():
+            return False, False
+        cfg = _json.loads(cfg_path.read_text(encoding="utf-8"))
+        cfg_ok = (
+            cfg.get("runtime_mode") == "workbuddy_local"
+            and cfg.get("ai_provider") == "workbuddy_queue"
+            and cfg.get("ai_processing_enabled") is False
+            and cfg.get("allow_paid_fallback") is False
+        )
+        schema_ok = True
+        for s in ("runtime_config.schema.json", "ai_task.schema.json", "ai_result.schema.json"):
+            if not (ROOT / "schemas" / s).exists():
+                schema_ok = False
+        return cfg_ok, schema_ok
+    except Exception:
+        return False, False
+
+
 def run_mode(mode, trigger):
     run_id = generate_run_id()
     log = create_run_log(run_id, trigger=trigger)
@@ -246,7 +269,9 @@ def run_mode(mode, trigger):
                           "test_repository_integrity.py",
                           "test_no_local_paths.py",
                           "test_stage2_closeout.py",
-                          "test_stage2_frontend_final.py"):
+                          "test_stage2_frontend_final.py",
+                          "test_stage25a_runtime_ai_contract.py",
+                          "test_stage25a_hardening.py"):
             rc, out, err = run_cmd([PYTHON, str(HERE / "tests" / test_file)], timeout=180)
             ok = rc == 0 and "FAIL=0" in out  # 以测试脚本的结果行为准（rc=0 且 FAIL=0）
             tests_ok = tests_ok and ok
@@ -254,6 +279,16 @@ def run_mode(mode, trigger):
         add_log_step(log, "unit_tests", "success" if tests_ok else "failed",
                      details={"output": tests_out[-1200:]})
         print(f"  tests: {'OK' if tests_ok else 'FAIL'}")
+
+        # 2.5A) 运行配置与 AI Schema 校验（结构性闸门，独立于单测脚本）
+        cfg_ok, schema_ok = _check_ai_runtime_and_schema()
+        add_log_step(log, "ai_runtime_config_valid", "success" if cfg_ok else "failed",
+                     details={"expected": "workbuddy_local / workbuddy_queue / ai_processing_enabled=false / allow_paid_fallback=false"})
+        add_log_step(log, "ai_schema_valid", "success" if schema_ok else "failed",
+                     details={"schemas": ["runtime_config", "ai_task", "ai_result"]})
+        if not cfg_ok or not schema_ok:
+            tests_ok = False
+
         if not tests_ok:
             print(tests_out[-600:])
             log["final_status"] = "failed"
