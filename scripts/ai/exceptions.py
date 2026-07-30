@@ -22,3 +22,16 @@ class TaskValidationError(AIContractError):
     def __init__(self, errors):
         self.errors = list(errors) if errors else ["task validation failed"]
         super().__init__("; ".join(self.errors))
+
+
+class SchemaNotFoundError(AIContractError):
+    """契约 Schema 文件缺失（required=True 时抛出的硬性失败）。"""
+
+    def __init__(self, name, path):
+        self.schema_name = name
+        self.schema_path = path
+        super().__init__(f"schema not found: {name} (path={path})")
+
+
+class TaskStateError(AIContractError):
+    """任务状态移动 / 查找失败（原子性违反、源丢失、锁冲突等）。"""

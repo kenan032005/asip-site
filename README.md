@@ -422,3 +422,46 @@ data/events.json 遗留兼容视图（仅旧前端兼容，单向生成，不部
 - 本次**未**重新迁移、**未**抓外部新闻、**未**调 Hy3、**未**进入 2.5/3 阶段；数据仅以统一 `run_id` 重新生成视图层。
 - **Stage 2.5 与第三阶段仍未开始。**
 
+---
+
+## 十七、Stage 2.5A：运行配置与 AI 接口契约基础（2026-07-30）
+
+> 本阶段**只建立运行配置与 AI 任务/结果契约**，不真正处理任何 AI 内容。下一阶段（2.5B）才会实现执行器与真实队列消费。
+
+### 17.1 当前默认运行配置（config/runtime.json）
+| 项 | 当前值 | 含义 |
+|---|---|---|
+| `runtime_mode` | `workbuddy_local` | 本地 WorkBuddy 驱动，非 GitHub Actions 自动执行 |
+| `ai_provider` | `workbuddy_queue` | 唯一启用 Provider：仅生成并保存标准任务文件 |
+| `ai_model` | `hy3` | 模型标识占位（2.5B 才真正消费） |
+| `ai_processing_enabled` | `false` | **不**启动任何 AI 处理 |
+| `allow_paid_fallback` | `false` | **绝不**自动切换到付费 Provider |
+| `cloud_schedule_enabled` | `false` | 不启用云端定时 |
+
+- **当前不会调用任何付费 API**（OpenAI / 通用 API 均未启用、未配置密钥）。
+- 所有密钥仅放 `.env`（已被 `.gitignore` 忽略），`.env.example` 只含空值占位，**不入库、不含真实密钥**。
+- `scripts/ai/config.py` 真实读取 `<repo_root>/config/runtime.json`；Schema 真实读取 `<repo_root>/schemas`。
+
+### 17.2 WorkBuddy Queue Provider 的安全边界
+- 只负责生成与保存标准 AI 任务（`data/ai/queue/*.json`），**不**调用 Hy3、**不**调用 OpenAI、**不**发起任何外部网络请求。
+- 全状态幂等：相同 `cache_key` 在 `completed / processing / queue / failed / cache` 任一目录已存在时，均不重复创建任务文件；`failed` 任务依据 `retry_count` 与 `max_retries` 决定复用或标记 `permanently_failed`，**绝不生成第二个相同 `task_id` 文件**。
+- 不声称队列任务已被 AI 处理——结果须由 2.5B 执行器产生。
+
+### 17.3 AI 契约（schemas/）
+- `runtime_config.schema.json` / `ai_task.schema.json` / `ai_result.schema.json` 均为 JSON Schema（draft-07，零依赖）。
+- `ai_result` 强制：`task_id`(AIT_<24hex>)、`schema_version`(精确 1.0)、`status`、`provider`、`model`、`started_at`、`completed_at`、`result`、`error`、`usage`；`usage` 含 `input_tokens`/`output_tokens`/`estimated_cost_usd` 且非负；未知顶层字段被拒绝；`completed_at` 不得早于 `started_at`。
+- `OpenAI` 与 `generic_api` **仅是预留名称**，当前为禁用占位（`DisabledProvider`），缺密钥即失败关闭；不安装 OpenAI SDK、不 import openai。
+
+### 17.4 公网隔离
+- `data/ai/`、`config/runtime.json`、`.env`、`.env.example`、`schemas/*` 均**不进入** `dist`（构建白名单不含这些路径），也**不部署**到 `gh-pages`。
+- `build_site.py` 的白名单与 `validate_pipeline.py` 持续校验 `dist` 不含内部 AI 目录与配置。
+
+### 17.5 阶段回滚标签说明（重要）
+- **`pre-stage25a`**：创建于 Stage 2.5A 初版提交完成时，**实际指向 Stage 2.5A 完成提交 `0db1d4b`**，并非严格意义上的"阶段前基线"。
+- **`pre-stage25a-hardening`**：创建于本次加固修改**之前**，指向加固前 `main` HEAD，是**真正的加固前回滚点**。
+- 如需回退本次加固，应基于 `pre-stage25a-hardening` 而非 `pre-stage25a`。
+
+### 17.6 边界声明
+- 本次加固**未**调用 Hy3 处理真实内容、**未**调用任何付费 API、**未**启动 GitHub Actions、**未**开始 Stage 2.5B。
+- **Stage 2.5B 尚未开始。**
+

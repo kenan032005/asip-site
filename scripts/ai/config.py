@@ -11,6 +11,7 @@
 
 import os
 import json
+from pathlib import Path
 
 # ── 安全默认值（缺失配置时的兜底）──
 DEFAULT_RUNTIME = {
@@ -33,6 +34,7 @@ _ENV_MAP = {
     "ASIP_RUNTIME": "runtime_mode",
     "ASIP_AI_PROVIDER": "ai_provider",
     "ASIP_AI_MODEL": "ai_model",
+    "ASIP_AI_PROCESSING_ENABLED": ("ai_processing_enabled", bool),
     "ASIP_ALLOW_PAID_FALLBACK": ("allow_paid_fallback", bool),
     "ASIP_CLOUD_SCHEDULE_ENABLED": ("cloud_schedule_enabled", bool),
 }
@@ -43,8 +45,10 @@ _KEY_ENV = {
     "generic_api": "GENERIC_AI_API_KEY",
 }
 
-CONFIG_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "config")
-DEFAULT_CONFIG_PATH = os.path.join(CONFIG_DIR, "runtime.json")
+# 仓库根目录：scripts/ai/config.py -> parents[0]=scripts/ai, [1]=scripts, [2]=repo_root
+REPO_ROOT = Path(__file__).resolve().parents[2]
+CONFIG_DIR = REPO_ROOT / "config"
+DEFAULT_CONFIG_PATH = CONFIG_DIR / "runtime.json"
 
 
 def _coerce_bool(value):
