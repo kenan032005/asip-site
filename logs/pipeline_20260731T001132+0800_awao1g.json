@@ -1,0 +1,153 @@
+{
+  "pipeline_version": 2,
+  "run_id": "20260731T001132+0800_awao1g",
+  "trigger": "manual",
+  "started_at": "2026-07-31T00:11:32.805628+08:00",
+  "steps": [
+    {
+      "name": "git_pull",
+      "status": "success",
+      "started_at": "2026-07-31T00:11:34.315770+08:00",
+      "completed_at": "2026-07-31T00:11:34.315784+08:00",
+      "details": {
+        "output": "Current branch main is up to date.",
+        "error": "From https://github.com/kenan032005/asip-site\n * branch            main       -> FETCH_HEAD"
+      }
+    },
+    {
+      "name": "unit_tests",
+      "status": "success",
+      "started_at": "2026-07-31T00:11:36.589861+08:00",
+      "completed_at": "2026-07-31T00:11:36.589880+08:00",
+      "details": {
+        "output": " run_id 格式合法\n  PASS  status.json 不含自引用 gh_pages_commit\n\nPASS=36 FAIL=0\n[test_stage2_schema_repo.py] rc=0 量仍为2）\n  ✅ 备份目录存在（自动备份生效）\n  ✅ export_legacy_views 在兼容导出构建前抛出明确错误\n\n====================================================\nStage 2A 测试结果：PASS=57  FAIL=0\n====================================================\n[test_repository_integrity.py] rc=0  必须为 unknown（依据原始机构）\n  ✅ save_sources 拒绝违反业务规则的来源\n  ✅ 合规来源保存成功\n\n====================================================\nCommit 1 完整性测试：PASS=28  FAIL=0\n====================================================\n[test_no_local_paths.py] rc=0 === 第九节：本地路径扫描 ===\n  ✅ 仓库工作区无本地路径\n  ⏭️ dist/ 不存在，跳过\n  ✅ data/public/ 存在\n  ✅ data/public/ 无本地路径\n  ✅ migration_state.json 无本地路径\n  ✅ logs/ 无本地路径\n\nPASS=5 FAIL=0\n[test_stage2_closeout.py] rc=0  无 legacy_payload 与本机路径\n[PASS] T20 current_metrics.publishable_clusters 与 current_policy_passed 数一致\n[PASS] T21 README 无过时数字表述且含第十五节收尾声明\n[PASS] T22 legacy_archive_events.json 结构合法且已裁剪脱敏\n\nPASS=22 FAIL=0\n[test_stage2_frontend_final.py] rc=0 ✅ [T20] common.js 提供统一过滤与数据访问层，且各当前页面均调用之\n============================================================\n前端隔离最终修复测试：PASS=20  FAIL=0  （共 20 项）\n============================================================\n"
+      }
+    },
+    {
+      "name": "publication_semantics",
+      "status": "success",
+      "started_at": "2026-07-31T00:11:40.082763+08:00",
+      "completed_at": "2026-07-31T00:11:40.082777+08:00",
+      "details": {
+        "output": "[semantics] clusters=143 历史保留=143 当前政策通过=0\n[semantics] 风险等级修正=0 语义字段变更=0\n[semantics] 导出：legacy_events=143 published=143",
+        "error": ""
+      }
+    },
+    {
+      "name": "build_summary",
+      "status": "success",
+      "started_at": "2026-07-31T00:11:40.373470+08:00",
+      "completed_at": "2026-07-31T00:11:40.373486+08:00",
+      "details": {
+        "output": "ary] run_id=20260731T001132+0800_awao1g pipeline_version=2\n  public events: 143, pending_articles: 21, quarantine: 53, sources: 93\n  统计: 24h=0 7d=0 chad24h=0 niger24h=0 current=0 历史保留=143\n  信源: configured=93 enabled=91 success_last_run=0 rate_limited=0\n  status.json: 24h=0, 7d=0, src_success_last_run=0\n  latest-summary.json: 24h=0, 7d=0, risk_countries=15\n\nDone. run_id: 20260731T001132+0800_awao1g"
+      }
+    },
+    {
+      "name": "generate_reports",
+      "status": "success",
+      "started_at": "2026-07-31T00:11:40.619934+08:00",
+      "completed_at": "2026-07-31T00:11:40.619948+08:00",
+      "details": {
+        "output": "[generate_reports] 自动目标日期=2026-07-30（当前北京时间 00:11:40）\n日报日期（北京）： 2026-07-30 窗口： 2026-07-29 22:00:00 → 2026-07-30 22:00:00\n  [生成] 乍得 新增= 0 持续跟踪= 0\n  [生成] 尼日尔 新增= 0 持续跟踪= 0\n  [生成] 贝宁 新增= 0 持续跟踪= 0\n  [生成] 南苏丹 新增= 0 持续跟踪= 0\n  [生成] 苏丹 新增= 0 持续跟踪= 0\n  [生成] 埃塞俄比亚 新增= 0 持续跟踪= 0\n✅ 日报已生成（目标日期 2026-07-30，窗口 2026-07-29 22:00:00 → 2026-07-30 22:00:00）"
+      }
+    },
+    {
+      "name": "build_site_pre",
+      "status": "success",
+      "started_at": "2026-07-31T00:11:41.189364+08:00",
+      "completed_at": "2026-07-31T00:11:41.189377+08:00",
+      "details": {
+        "output": "[build_site] run_id=20260731T001132+0800_awao1g pipeline_version=2\n[build_site] build_time=2026-07-31 00:11:40\n构建完成 -> dist\n  HTML: 9 个页面\n  ASIP_BUILD_META: 已注入\n  内联数据快照: True\n  run_id: 20260731T001132+0800_awao1g",
+        "error": ""
+      }
+    },
+    {
+      "name": "validate_stage2",
+      "status": "success",
+      "started_at": "2026-07-31T00:11:42.216706+08:00",
+      "completed_at": "2026-07-31T00:11:42.216721+08:00",
+      "details": {
+        "output": "跟踪时给出说明\n✅ [S46] 日报 new/ongoing 不含历史迁移保留事件\n✅ [S47] dist/data 不含 canonical/backup 及 legacy_payload\n✅ [S48] current_metrics.publishable_clusters(0) == current_policy_passed_events(0)\n✅ [S49] 首页/最新事件/国家页当前模块以 Public/published_events 为唯一数据源，不读取 Legacy events.json\n✅ [S50] status.json 区分 reports_today 与 latest_report_count/latest_report_date（当前生成数 vs 可访问最新日报数）\n✅ [S51] current_metrics(0) == published_events 经准入过滤数(0) == current_policy_passed(0)\n✅ [S52] 当前公开事件为 0 时 latest-summary 当前三数组为空（无 Legacy 回填路径）\n✅ [S53] README 文档化前端隔离（isCurrentPublicEvent / public/published_events），无旧主架构混淆表述\n✅ [S54] dist 构建产物三 HTML 同样不含 Legacy events 直接读取（如已构建）\n============================================================\nStage-2 校验：PASS=54  FAIL=0  WARN=0  （共 54 项）\n============================================================"
+      }
+    },
+    {
+      "name": "validate_source",
+      "status": "success",
+      "started_at": "2026-07-31T00:11:42.509785+08:00",
+      "completed_at": "2026-07-31T00:11:42.509797+08:00",
+      "details": {
+        "output": "京22:00、长度24h、结束不晚于生成时间、文件名一致；legacy 报告已跳过）\nℹ [V11~V13,V15] stage=source：dist 尚未构建，跳过 dist 相关校验\n✅ [V14-future] 无未来时间事件\n✅ [V16-summary-trace] latest-summary 的 0 个事件均为 current_policy_passed 且可追溯（历史迁移保留事件已隔离到历史归档）\n✅ [V18-report-policy] 日报 new/ongoing 均为 current_policy_passed 且不含历史迁移事件\n✅ [V18-report-count] 日报 new/ongoing 数量与数组长度一致\n✅ [V19-metrics] current_metrics.publishable_clusters == current_policy_passed_events\n✅ [V17-canonical] canonical clusters=143 与 legacy events=143 一致，且 events.json 为单向生成视图\n\n============================================================\n校验结果: 1 个问题, 0 个严重错误\n✅ 所有关键检查通过。可以继续部署。"
+      }
+    },
+    {
+      "name": "git_commit_data",
+      "status": "success",
+      "started_at": "2026-07-31T00:11:54.508163+08:00",
+      "completed_at": "2026-07-31T00:11:54.508178+08:00",
+      "details": {
+        "commit": "9660f3efe08c8019161bc74f48361ebf8bd47bb3",
+        "error": ""
+      }
+    },
+    {
+      "name": "build_site",
+      "status": "success",
+      "started_at": "2026-07-31T00:11:55.740709+08:00",
+      "completed_at": "2026-07-31T00:11:55.740723+08:00",
+      "details": {
+        "output": "[build_site] run_id=20260731T001132+0800_awao1g pipeline_version=2\n[build_site] build_time=2026-07-31 00:11:55\n构建完成 -> dist\n  HTML: 9 个页面\n  ASIP_BUILD_META: 已注入\n  内联数据快照: True\n  run_id: 20260731T001132+0800_awao1g",
+        "error": ""
+      }
+    },
+    {
+      "name": "validate_dist",
+      "status": "success",
+      "started_at": "2026-07-31T00:11:56.205853+08:00",
+      "completed_at": "2026-07-31T00:11:56.205869+08:00",
+      "details": {
+        "output": "[V12-dist-rid] dist.run_id matches data: 20260731T001132+0800_awao1g\n✅ [V13-count] 事件数量一致: 143\n✅ [V14-future] 无未来时间事件\n✅ [V16-summary-trace] latest-summary 的 0 个事件均为 current_policy_passed 且可追溯（历史迁移保留事件已隔离到历史归档）\n✅ [V18-report-policy] 日报 new/ongoing 均为 current_policy_passed 且不含历史迁移事件\n✅ [V18-report-count] 日报 new/ongoing 数量与数组长度一致\n✅ [V19-metrics] current_metrics.publishable_clusters == current_policy_passed_events\n✅ [V17-canonical] canonical clusters=143 与 legacy events=143 一致，且 events.json 为单向生成视图\n\n============================================================\n校验结果: 1 个问题, 0 个严重错误\n✅ 所有关键检查通过。可以继续部署。"
+      }
+    },
+    {
+      "name": "git_push_main",
+      "status": "success",
+      "started_at": "2026-07-31T00:11:58.629328+08:00",
+      "completed_at": "2026-07-31T00:11:58.629345+08:00",
+      "details": {
+        "output": ""
+      }
+    },
+    {
+      "name": "deploy_gh_pages",
+      "status": "success",
+      "started_at": "2026-07-31T00:12:03.845464+08:00",
+      "completed_at": "2026-07-31T00:12:03.845478+08:00",
+      "details": {
+        "commit": "d8440390dbcf4630ee46e141167f8d653fa82732",
+        "error": ""
+      }
+    },
+    {
+      "name": "online_verify",
+      "status": "success",
+      "started_at": "2026-07-31T00:12:34.867319+08:00",
+      "completed_at": "2026-07-31T00:12:34.867322+08:00",
+      "details": {
+        "online_run_id": "20260731T001132+0800_awao1g",
+        "pipeline_version": 2,
+        "last_updated_beijing": "2026-07-31 00:11:40",
+        "events_24h": 0,
+        "http": 200,
+        "verified_at": "2026-07-31T00:12:34.867291+08:00"
+      }
+    }
+  ],
+  "main_commit": "a212f0b7f82ce26c79bea96117b52d67b3d935f3",
+  "gh_pages_commit": "d8440390dbcf4630ee46e141167f8d653fa82732",
+  "online_run_id": "20260731T001132+0800_awao1g",
+  "online_verified_at": "2026-07-31T00:12:34.867291+08:00",
+  "final_status": "success",
+  "deploy_completed_at": "2026-07-31T00:12:03.845485+08:00",
+  "deployment_commit": "d8440390dbcf4630ee46e141167f8d653fa82732",
+  "completed_at": "2026-07-31T00:12:34.867360+08:00"
+}
