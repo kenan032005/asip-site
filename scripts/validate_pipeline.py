@@ -352,34 +352,84 @@ def main(run_id=None, dist_dir=None, stage="dist"):
                 else:
                     fail(f"V15-ref-{ref}", f"HTML 引用 {ref} 但 dist 中不存在")
 
-    # ── 16. summary 事件可追溯性（旧数据不得进首页）────────────
+    # ── 16. summary 当前事件必须仅来自 current_policy_passed 事件 ──
+    # Stage-2 收尾：删除"历史迁移保留可见即可进首页"的错误规则。
+    # 首页当前模块只允许 current_policy_passed 且 quality_gate_passed 的事件。
     summary_event_ids = set()
+    summary_policy_violation = []
     for grp in ("high_risk_events", "latest_events", "china_related"):
         for e in summary.get(grp, []):
             if isinstance(e, dict) and e.get("event_id"):
                 summary_event_ids.add(e["event_id"])
-    # Stage-2 第六节：summary 由 public/published_events.json 生成（EVT_ 新 ID），
-    # 追溯目标改为 public 层；public 缺失时回退 legacy events.json。
+                if e.get("current_policy_passed") is not True or e.get("quality_gate_passed") is not True:
+                    summary_policy_violation.append(e["event_id"])
     pub_doc = load_json(os.path.join(DATA_DIR, "public", "published_events.json"), {})
     pub_items = pub_doc.get("items", []) if isinstance(pub_doc, dict) else []
-    trace_pool = pub_items if pub_items else events_list
-    event_by_id = {e.get("event_id"): e for e in trace_pool}
-    untraceable = []
+    event_by_id = {e.get("event_id"): e for e in pub_items}
     for eid in summary_event_ids:
         ev = event_by_id.get(eid)
         if ev is None:
-            untraceable.append(eid)
+            summary_policy_violation.append(eid)
             continue
-        # Stage-2 第七节：历史迁移保留事件（legacy_migration_preserved 且
-        # legacy_visibility）允许展示（不计统计），视为可追溯
-        hist_visible = (ev.get("legacy_migration_preserved") is True
-                        and ev.get("legacy_visibility") is True)
-        if not _is_current_event(ev) and not hist_visible:
-            untraceable.append(eid)
-    if untraceable:
-        fail("V16-summary-trace", f"latest-summary 含 {len(untraceable)} 个无法在公开 events 中追溯或已隔离的 event_id: {untraceable[:5]}", is_critical=True)
+        if not (ev.get("current_policy_passed") is True and ev.get("quality_gate_passed") is True):
+            summary_policy_violation.append(eid)
+    if summary_policy_violation:
+        fail("V16-summary-trace",
+             f"latest-summary 含 {len(summary_policy_violation)} 个非当前政策事件（current_policy_passed/quality_gate 未通过或不可追溯）: {summary_policy_violation[:5]}",
+             is_critical=True)
     else:
-        ok("V16-summary-trace", f"latest-summary 的 {len(summary_event_ids)} 个事件均可追溯（当前政策通过或历史保留可见）")
+        ok("V16-summary-trace", f"latest-summary 的 {len(summary_event_ids)} 个事件均为 current_policy_passed 且可追溯（历史迁移保留事件已隔离到历史归档）")
+
+    # ── 18. 日报持续跟踪仅含当前政策通过事件且数量一致 ──
+    countries_doc_v = load_json(os.path.join(DATA_DIR, "countries.json"), {"countries": []})
+    daily_map_v = {c.get("cn"): c.get("daily_country", c.get("cn"))
+                   for c in countries_doc_v.get("countries", []) if c.get("has_daily")}
+    rep_policy, rep_count = [], []
+    for country_cn in STAGE1_COUNTRIES:
+        dc = daily_map_v.get(country_cn, country_cn.lower())
+        rdir = os.path.join(REPORTS_DIR, dc)
+        if not os.path.isdir(rdir):
+            continue
+        for fn in sorted(f for f in os.listdir(rdir) if f.endswith(".json") and f != "index.json"):
+            rep = load_json(os.path.join(rdir, fn))
+            if not isinstance(rep, dict) or rep.get("pipeline_version") != 2:
+                continue
+            ne = rep.get("new_events", []) or []
+            oe = rep.get("ongoing_events", []) or []
+            for e in ne + oe:
+                if e.get("current_policy_passed") is not True:
+                    rep_policy.append(f"{dc}/{fn}:{e.get('event_id','?')}")
+                if e.get("legacy_migration_preserved") is True:
+                    rep_policy.append(f"{dc}/{fn}:legacy")
+            for e in oe:
+                if e.get("event_status") not in ("ongoing", "developing", "easing"):
+                    rep_policy.append(f"{dc}/{fn}:status={e.get('event_status')}")
+            if rep.get("new_event_count") != len(ne):
+                rep_count.append(f"{dc}/{fn}:new")
+            if rep.get("ongoing_event_count") != len(oe):
+                rep_count.append(f"{dc}/{fn}:ongoing")
+            if (rep.get("ongoing_event_count") or 0) == 0 and not rep.get("ongoing_note"):
+                rep_count.append(f"{dc}/{fn}:no-note")
+    if rep_policy:
+        fail("V18-report-policy", f"日报含非当前政策/历史迁移事件: {rep_policy[:5]}", is_critical=True)
+    else:
+        ok("V18-report-policy", "日报 new/ongoing 均为 current_policy_passed 且不含历史迁移事件")
+    if rep_count:
+        fail("V18-report-count", f"日报数量与数组不一致: {rep_count[:5]}", is_critical=True)
+    else:
+        ok("V18-report-count", "日报 new/ongoing 数量与数组长度一致")
+
+    # ── 19. current_metrics.publishable_clusters 语义 ──
+    cm = load_json(os.path.join(DATA_DIR, "public", "current_metrics.json"), {})
+    if cm:
+        if cm.get("publishable_clusters") == cm.get("current_policy_passed_events"):
+            ok("V19-metrics", "current_metrics.publishable_clusters == current_policy_passed_events")
+        else:
+            fail("V19-metrics",
+                 f"publishable_clusters={cm.get('publishable_clusters')} != current_policy_passed_events={cm.get('current_policy_passed_events')}（不得统计历史迁移）",
+                 is_critical=True)
+    else:
+        ok("V19-metrics", "current_metrics.json 不存在（跳过）")
 
     # ── 17. Stage-2 canonical 与遗留视图一致性（canonical 存在时）────
     canon_dir = os.path.join(DATA_DIR, "canonical")

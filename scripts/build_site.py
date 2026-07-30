@@ -18,6 +18,7 @@ import os
 import sys
 import json
 import shutil
+import re
 import argparse
 from datetime import datetime, timedelta, timezone
 
@@ -37,6 +38,86 @@ HTML_FILES = [
     "index.html", "events.html", "event.html", "countries.html", "country.html",
     "reports.html", "report.html", "disease-risk.html", "404.html",
 ]
+
+# ── Stage-2 收尾：公开部署数据白名单（杜绝 Canonical 内部数据外泄）──
+# 仅下列文件进入 dist/ 与 gh-pages；其余（canonical/、quarantine_events.json、
+# raw_candidates.json、pending_events.json、backup/、logs/ 等）一律不发布。
+PUBLIC_DATA_ALLOWLIST = [
+    "status.json",
+    "latest-summary.json",
+    "events.json",                       # 复制时脱敏
+    "countries.json",
+    "risk-levels.json",
+    "sources.json",                      # 复制时脱敏（去 legacy_payload/notes/本机路径）
+    "public/published_events.json",
+    "public/current_metrics.json",
+    "public/legacy_archive_events.json",
+]
+
+WIN_PATH_RE = re.compile(r"[A-Za-z]:[\\/]+[^\s\"'<>|]*")
+POSIX_PATH_RE = re.compile(r"/(?:home|Users)/[^\s\"'<>|]*")
+
+# 脱敏时移除的内部字段
+_SANITIZE_KEYS = (
+    "legacy_payload", "notes", "processing_status", "internal_notes",
+    "internal_verification_note", "raw_body", "full_text", "raw_text",
+)
+
+
+def _sanitize_public(obj):
+    """递归去除内部字段与本机绝对路径，供公开副本/内联快照使用。"""
+    if isinstance(obj, dict):
+        return {k: _sanitize_public(v) for k, v in obj.items()
+                if k not in _SANITIZE_KEYS}
+    if isinstance(obj, list):
+        return [_sanitize_public(x) for x in obj]
+    if isinstance(obj, str):
+        return POSIX_PATH_RE.sub("<redacted-path>", WIN_PATH_RE.sub("<redacted-path>", obj))
+    return obj
+
+
+def _copy_public_data():
+    """按白名单复制公开数据到 dist/data（sources/events 复制时脱敏）。"""
+    dst_root = os.path.join(DIST_NEW, "data")
+    os.makedirs(dst_root, exist_ok=True)
+    for rel in PUBLIC_DATA_ALLOWLIST:
+        src = os.path.join(DATA_DIR, rel)
+        if not os.path.exists(src):
+            continue  # legacy_archive_events.json 等可能尚未生成
+        dst = os.path.join(dst_root, rel)
+        os.makedirs(os.path.dirname(dst), exist_ok=True)
+        if rel in ("sources.json", "events.json"):
+            try:
+                with open(src, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                data = _sanitize_public(data)
+                with open(dst, "w", encoding="utf-8") as f:
+                    json.dump(data, f, ensure_ascii=False, indent=2)
+            except Exception as e:
+                print(f"  ⚠ 脱敏复制 {rel} 失败: {e}")
+            continue
+        shutil.copy2(src, dst)
+
+
+def load_public_db(data_dir=None):
+    """仅加载白名单文件（脱敏后）作为内联快照，杜绝内部数据进入 __DB__。"""
+    if data_dir is None:
+        data_dir = DATA_DIR
+    db = {}
+    for rel in PUBLIC_DATA_ALLOWLIST:
+        src = os.path.join(data_dir, rel)
+        if not os.path.exists(src):
+            continue
+        try:
+            with open(src, "r", encoding="utf-8") as f:
+                data = json.load(f)
+        except Exception:
+            continue
+        if rel in ("sources.json", "events.json"):
+            data = _sanitize_public(data)
+        db[rel[:-5]] = data
+    return db
+
 
 
 def load_db(data_dir=None):
@@ -134,9 +215,9 @@ def main(run_id=None, no_embed=False):
         # 注入 ASIP_BUILD_META
         html = inject_meta(html, meta)
 
-        # 可选内联数据快照
+        # 可选内联数据快照（仅白名单公开数据，已脱敏）
         if not no_embed:
-            html = inject_db(html, load_db(DATA_DIR))
+            html = inject_db(html, load_public_db(DATA_DIR))
 
         outpath = os.path.join(DIST_NEW, fn)
         with open(outpath, "w", encoding="utf-8") as f:
@@ -147,15 +228,8 @@ def main(run_id=None, no_embed=False):
     if os.path.isdir(ASSETS):
         shutil.copytree(ASSETS, os.path.join(DIST_NEW, "assets"))
     if os.path.isdir(DATA_DIR):
-        # 排除内部文件：backup/（本地备份不发布）、.pipeline.lock（运行锁）、
-        # 隐藏目录/文件（.backups、.trash_* 等本地回滚产物一律不发布）
-        shutil.copytree(
-            DATA_DIR, os.path.join(DIST_NEW, "data"),
-            ignore=shutil.ignore_patterns(
-                "backup", ".pipeline.lock", "raw_candidates.json",
-                "pending_events.json", ".*",
-            ),
-        )
+        # Stage-2 收尾：仅按白名单复制公开数据，绝不复制整个 data/ 目录
+        _copy_public_data()
     if os.path.isdir(REPORTS):
         shutil.copytree(REPORTS, os.path.join(DIST_NEW, "reports"))
 

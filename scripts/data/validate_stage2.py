@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-validate_stage2.py —— ASIP Stage-2 规范数据层校验（42 项检查，零依赖）。
+validate_stage2.py —— ASIP Stage-2 规范数据层校验（48 项检查，零依赖）。
 
 范围：canonical 数据完整性、Schema 合规、ID 规则、发布政策一致性、
 来源分级与核实级别分离、遗留视图单向生成一致性、迁移状态与幂等证据；
@@ -52,7 +52,7 @@ def load(path):
 
 def main():
     print("=" * 60)
-    print("ASIP Stage-2 规范数据层校验（42 项）")
+    print("ASIP Stage-2 规范数据层校验（48 项）")
     print("=" * 60)
 
     # ── S01-S04 文件存在且 JSON 合法 ──
@@ -374,6 +374,99 @@ def main():
           f"main/dist/public run_id 一致（{main_rid}）" if rid_ok
           else f"run_id 不一致: main={main_rid} dist={dist_rid} "
                f"metrics={pub_rid2} published={pub_rid}")
+
+    # ════════ Stage-2 收尾新增检查 S43-S48（首页隔离 / 日报 / 部署边界）══
+
+    # ── S43 首页当前模块仅含 current_policy_passed 事件 ──
+    summary_doc = load(os.path.join(DATA, "latest-summary.json")) or {}
+    n_cur = sum(1 for p in pubs if p.get("current_policy_passed") is True)
+    homepage_violation = []
+    for grp in ("high_risk_events", "latest_events", "china_related"):
+        for e in summary_doc.get(grp, []) or []:
+            if not isinstance(e, dict):
+                continue
+            if e.get("current_policy_passed") is not True:
+                homepage_violation.append((grp, e.get("event_id", "?")))
+    # 当前政策通过事件为 0 时，首页当前模块必须为空
+    if n_cur == 0:
+        for grp in ("high_risk_events", "latest_events", "china_related"):
+            if summary_doc.get(grp):
+                homepage_violation.append((grp, "non-empty-while-zero-current"))
+    check("S43", not homepage_violation,
+          "首页当前模块（high_risk/latest/china）仅含 current_policy_passed 事件"
+          + ("" if not homepage_violation else f"；违规 {homepage_violation[:5]}"))
+
+    # ── S44/S45/S46 日报持续跟踪校验 ──
+    reports_dir = os.path.join(ROOT, "reports")
+    v_policy, v_count, v_legacy = [], [], []
+    if os.path.isdir(reports_dir):
+        for dc in sorted(os.listdir(reports_dir)):
+            rdir = os.path.join(reports_dir, dc)
+            if not os.path.isdir(rdir):
+                continue
+            for fn in sorted(os.listdir(rdir)):
+                if not fn.endswith(".json") or fn == "index.json":
+                    continue
+                rep = load(os.path.join(rdir, fn))
+                if not isinstance(rep, dict) or rep.get("pipeline_version") != 2:
+                    continue
+                ne = rep.get("new_events", []) or []
+                oe = rep.get("ongoing_events", []) or []
+                for e in ne + oe:
+                    if e.get("current_policy_passed") is not True:
+                        v_policy.append(f"{dc}/{fn}:{e.get('event_id','?')}")
+                    if e.get("legacy_migration_preserved") is True:
+                        v_legacy.append(f"{dc}/{fn}:{e.get('event_id','?')}")
+                for e in oe:
+                    if e.get("event_status") not in ("ongoing", "developing", "easing"):
+                        v_policy.append(f"{dc}/{fn}:status={e.get('event_status')}")
+                if rep.get("new_event_count") != len(ne):
+                    v_count.append(f"{dc}/{fn}:new {rep.get('new_event_count')}!={len(ne)}")
+                if rep.get("ongoing_event_count") != len(oe):
+                    v_count.append(f"{dc}/{fn}:ongoing {rep.get('ongoing_event_count')}!={len(oe)}")
+                if (rep.get("ongoing_event_count") or 0) == 0 and not rep.get("ongoing_note"):
+                    v_count.append(f"{dc}/{fn}:ongoing=0 无 note")
+    check("S44", not v_policy,
+          "日报 new/ongoing 均为 current_policy_passed 且 ongoing 状态合法"
+          + ("" if not v_policy else f"；{v_policy[:4]}"))
+    check("S45", not v_count,
+          "日报数量与数组一致，无持续跟踪时给出说明"
+          + ("" if not v_count else f"；{v_count[:4]}"))
+    check("S46", not v_legacy,
+          "日报 new/ongoing 不含历史迁移保留事件"
+          + ("" if not v_legacy else f"；{v_legacy[:4]}"))
+
+    # ── S47 dist 不含内部数据（canonical/backup/legacy_payload）──
+    dist_data = os.path.join(ROOT, "dist", "data")
+    dist_leak = []
+    if os.path.isdir(dist_data):
+        for bad in ("canonical", "backup", ".trash"):
+            if os.path.exists(os.path.join(dist_data, bad)):
+                dist_leak.append(bad)
+        for root, _, files in os.walk(dist_data):
+            for f in files:
+                if not f.endswith(".json"):
+                    continue
+                p = os.path.join(root, f)
+                try:
+                    txt = open(p, "r", encoding="utf-8").read()
+                except Exception:
+                    continue
+                if '"legacy_payload"' in txt:
+                    dist_leak.append("legacy_payload@" + os.path.relpath(p, dist_data))
+                    break
+    check("S47", not dist_leak,
+          "dist/data 不含 canonical/backup 及 legacy_payload"
+          + ("" if not dist_leak else f"；发现 {dist_leak[:4]}"))
+
+    # ── S48 current_metrics.publishable_clusters 语义 ──
+    m2 = load(os.path.join(PUBLIC, "current_metrics.json")) or {}
+    pc = m2.get("publishable_clusters")
+    cp = m2.get("current_policy_passed_events")
+    check("S48", pc == cp,
+          f"current_metrics.publishable_clusters({pc}) == current_policy_passed_events({cp})"
+          if pc == cp else
+          f"publishable_clusters={pc} 与 current_policy_passed_events={cp} 不一致（不得统计历史迁移）")
 
     # ── 总结 ──
     n_fail = sum(1 for _, okf, _, crit in results if not okf and crit)

@@ -244,7 +244,8 @@ def run_mode(mode, trigger):
         for test_file in ("test_country.py", "test_stage1_pipeline.py",
                           "test_stage2_schema_repo.py",
                           "test_repository_integrity.py",
-                          "test_no_local_paths.py"):
+                          "test_no_local_paths.py",
+                          "test_stage2_closeout.py"):
             rc, out, err = run_cmd([PYTHON, str(HERE / "tests" / test_file)], timeout=180)
             ok = rc == 0 and "FAIL=0" in out  # 以测试脚本的结果行为准（rc=0 且 FAIL=0）
             tests_ok = tests_ok and ok
@@ -407,6 +408,10 @@ def run_mode(mode, trigger):
         add_log_step(log, "deploy_gh_pages", "success" if not gh_err else "failed",
                      details={"commit": gh_hash, "error": gh_err})
         print(f"  gh-pages: {gh_hash} {'OK' if not gh_err else 'ERR: '+gh_err}")
+        if not gh_err:
+            # Section 九：记录部署完成时间与部署 commit（deployment_commit）
+            log["deploy_completed_at"] = bj_iso()
+            log["deployment_commit"] = gh_hash or ""
         if gh_err:
             log["final_status"] = "failed"
             save_run_log(log, run_id)
