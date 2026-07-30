@@ -264,6 +264,7 @@ def run_mode(mode, trigger):
         print("\n[2] unit tests (stage1 + stage2) ...")
         tests_ok = True
         tests_out = ""
+        worker_proto_ok = True
         for test_file in ("test_country.py", "test_stage1_pipeline.py",
                           "test_stage2_schema_repo.py",
                           "test_repository_integrity.py",
@@ -271,10 +272,13 @@ def run_mode(mode, trigger):
                           "test_stage2_closeout.py",
                           "test_stage2_frontend_final.py",
                           "test_stage25a_runtime_ai_contract.py",
-                          "test_stage25a_hardening.py"):
+                          "test_stage25a_hardening.py",
+                          "test_stage25b1_worker_protocol.py"):
             rc, out, err = run_cmd([PYTHON, str(HERE / "tests" / test_file)], timeout=180)
             ok = rc == 0 and "FAIL=0" in out  # 以测试脚本的结果行为准（rc=0 且 FAIL=0）
             tests_ok = tests_ok and ok
+            if test_file == "test_stage25b1_worker_protocol.py":
+                worker_proto_ok = ok
             tests_out += f"[{test_file}] rc={rc} " + (out + err)[-200:] + "\n"
         add_log_step(log, "unit_tests", "success" if tests_ok else "failed",
                      details={"output": tests_out[-1200:]})
@@ -288,6 +292,22 @@ def run_mode(mode, trigger):
                      details={"schemas": ["runtime_config", "ai_task", "ai_result"]})
         if not cfg_ok or not schema_ok:
             tests_ok = False
+
+        # 2.5B-1) 非敏感 AI Worker 协议指标（Stage 2.5B-1 新增）
+        # 仅记录队列深度/处理中/过期租约计数与协议测试通过与否，不含任何密钥/路径/正文。
+        try:
+            from ai.workbuddy_worker import status_summary, AI_ROOT as _AI_ROOT
+            _st = status_summary(_AI_ROOT)
+            log["ai_worker_protocol_valid"] = bool(worker_proto_ok)
+            log["ai_queue_depth"] = int(_st.get("queue", 0))
+            log["ai_processing_count"] = int(_st.get("processing", 0))
+            log["ai_expired_lease_count"] = int(_st.get("expired_leases", 0))
+        except Exception as _e:
+            log["ai_worker_protocol_valid"] = bool(worker_proto_ok)
+            log["ai_queue_depth"] = -1
+            log["ai_processing_count"] = -1
+            log["ai_expired_lease_count"] = -1
+            log["ai_worker_metrics_error"] = "<redacted:%s>" % type(_e).__name__
 
         if not tests_ok:
             print(tests_out[-600:])
