@@ -3,6 +3,7 @@
 
 Transactional write of validated AI results to Article/EventCluster records.
 Uses existing Repository as the single Canonical write path.
+Never persists internal task fields into canonical records.
 """
 
 import json
@@ -15,6 +16,25 @@ if _SCRIPTS not in sys.path:
     sys.path.insert(0, _SCRIPTS)
 
 from data.repository import Repository
+
+# 禁止写入 Canonical 的内部字段
+_INTERNAL_FIELDS = (
+    "_task",
+    "input_ref",
+    "prompt_variables",
+    "source_text",
+    "source_a",
+    "source_b",
+    "articles",
+    "events",
+    "historical_events",
+    "disease_reports",
+    "system_text",
+    "user_text",
+    "prompt_file",
+    "batch_manifest",
+    "prompt_checksum_raw",
+)
 
 
 class WritebackError(Exception):
@@ -57,10 +77,25 @@ def _validate_target(task, wb):
                              "%s cannot write to %s" % (wb_task_type, ttype))
 
 
+def _check_internal_fields(record):
+    """递归检查记录中不得包含内部字段。返回违规字段列表。"""
+    found = []
+    if isinstance(record, dict):
+        for k, v in record.items():
+            if k in _INTERNAL_FIELDS:
+                found.append(k)
+            else:
+                found.extend(_check_internal_fields(v))
+    elif isinstance(record, list):
+        for item in record:
+            found.extend(_check_internal_fields(item))
+    return found
+
+
 def _make_provenance(task, provenance, cache_hit):
     """构建非敏感 AI 溯源。"""
     return {
-        "task_id": task["task_id"],
+        "task_id": task.get("task_id", ""),
         "task_type": task.get("task_type", ""),
         "content_hash": task.get("content_hash", ""),
         "prompt_version": task.get("prompt_version", ""),
@@ -76,7 +111,7 @@ def _make_provenance(task, provenance, cache_hit):
     }
 
 
-def _write_article_analysis(repo, article, result, provenance):
+def _write_article_analysis(repo, task, article, result, provenance, cache_hit):
     """article_analysis → Article 写回。"""
     article["summary_cn"] = result.get("summary_zh", "")
     article["event_type"] = result.get("event_type", "")
@@ -90,11 +125,10 @@ def _write_article_analysis(repo, article, result, provenance):
     article.setdefault("ai_enrichment", {})
     article["ai_enrichment"]["article_analysis"] = {
         "result": result,
-        "provenance": _make_provenance(article.get("_task", {}),
-                                       provenance, False),
+        "provenance": _make_provenance(task, provenance, cache_hit),
     }
+    _assert_clean(article, "article")
 
-    # 写回
     articles = repo.load_articles()
     for i, a in enumerate(articles):
         if a.get("article_id") == article["article_id"]:
@@ -103,7 +137,7 @@ def _write_article_analysis(repo, article, result, provenance):
     repo.save_articles(articles)
 
 
-def _write_event_synthesis(repo, event, result, provenance):
+def _write_event_synthesis(repo, task, event, result, provenance, cache_hit):
     """event_synthesis → EventCluster 写回。"""
     event["summary_cn"] = result.get("event_summary_zh", "")
     event["event_type"] = result.get("event_type", "")
@@ -114,9 +148,9 @@ def _write_event_synthesis(repo, event, result, provenance):
     event.setdefault("ai_enrichment", {})
     event["ai_enrichment"]["event_synthesis"] = {
         "result": result,
-        "provenance": _make_provenance(event.get("_task", {}),
-                                       provenance, False),
+        "provenance": _make_provenance(task, provenance, cache_hit),
     }
+    _assert_clean(event, "event_cluster")
 
     events = repo.load_event_clusters()
     for i, e in enumerate(events):
@@ -126,14 +160,14 @@ def _write_event_synthesis(repo, event, result, provenance):
     repo.save_event_clusters(events)
 
 
-def _write_source_comparison(repo, event, result, provenance):
+def _write_source_comparison(repo, task, event, result, provenance, cache_hit):
     """source_comparison → EventCluster 写回（不自动改变发布状态）。"""
     event.setdefault("ai_enrichment", {})
     event["ai_enrichment"]["source_comparison"] = {
         "result": result,
-        "provenance": _make_provenance(event.get("_task", {}),
-                                       provenance, False),
+        "provenance": _make_provenance(task, provenance, cache_hit),
     }
+    _assert_clean(event, "event_cluster")
 
     events = repo.load_event_clusters()
     for i, e in enumerate(events):
@@ -141,6 +175,15 @@ def _write_source_comparison(repo, event, result, provenance):
             events[i] = event
             break
     repo.save_event_clusters(events)
+
+
+def _assert_clean(record, kind):
+    """保存前断言记录不含内部字段，否则抛错（不允许半写）。"""
+    found = _check_internal_fields(record)
+    if found:
+        raise WritebackError("canonical_internal_field_detected",
+                             "%s contains internal fields: %s" % (
+                                 kind, ",".join(sorted(set(found))[:5])))
 
 
 _WRITERS = {
@@ -150,8 +193,16 @@ _WRITERS = {
 }
 
 
-def execute_writeback(task, result_obj, provenance, repo=None):
-    """执行 Canocical 写回。
+def execute_writeback(task, result_obj, provenance, repo=None,
+                      cache_hit=False):
+    """执行 Canonical 写回。
+
+    参数:
+        task: 当前 AI Task
+        result_obj: 已验证业务结果
+        provenance: 非敏感 provenance dict
+        repo: 可选 Repository（默认生产）
+        cache_hit: 是否来自缓存命中
 
     返回 dict: {"written": True, "target_type": "...", "target_id": "..."}
     或忽略当无 writeback 目标时: {"written": False}
@@ -172,13 +223,12 @@ def execute_writeback(task, result_obj, provenance, repo=None):
         article = repo.get_article(tid)
         if not article:
             raise WritebackError("article_not_found", tid)
-        article["_task"] = task
+        target = article
     elif ttype == "event_cluster":
         event = repo.get_event(tid)
         if not event:
             raise WritebackError("event_not_found", tid)
-        event["_task"] = task
-        article = event
+        target = event
     else:
         raise WritebackError("unknown_target_type", ttype)
 
@@ -187,9 +237,6 @@ def execute_writeback(task, result_obj, provenance, repo=None):
     if not writer:
         raise WritebackError("no_writer", str(writer_key))
 
-    if ttype == "event_cluster":
-        writer(repo, event, result_obj, provenance)
-    else:
-        writer(repo, article, result_obj, provenance)
+    writer(repo, task, target, result_obj, provenance, cache_hit)
 
     return {"written": True, "target_type": ttype, "target_id": tid}

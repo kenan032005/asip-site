@@ -450,6 +450,7 @@ def claim_batch(ai_root=AI_ROOT, worker_id="workbuddy-local",
                 expected_provider="workbuddy_queue",
                 expected_model="hy3",
                 prompt_binding_enabled=False,
+                _writeback_repo=None,
                 _fail_after=None, _fail_steps=None):
     """领取一批任务：queue -> processing + lease + 批次清单。
 
@@ -483,32 +484,68 @@ def claim_batch(ai_root=AI_ROOT, worker_id="workbuddy-local",
         from ai.ai_result_cache import check_cache_hit
         cache_results = {}
         remaining = []
+        cache_hit_errors = []
         for task in candidates:
             hit, entry, reason = check_cache_hit(task)
             cache_results[task["task_id"]] = (hit, entry, reason)
             if hit:
-                # 直接完成（不创建 lease/batch/prompt）
                 tid = task["task_id"]
                 now = _now()
                 origin_task = _read_json(
                     os.path.join(ai_root, "queue", "%s.json" % tid))
+
+                # 2.5C-3 closeout: 缓存命中时若任务声明 writeback 必须执行
+                wb = (task.get("input_ref") or {}).get("writeback")
+                wb_result = {"written": False}
+                if wb and isinstance(wb, dict):
+                    try:
+                        from ai.ai_writeback import execute_writeback
+                        wb_result = execute_writeback(
+                            task, entry["result"], entry["provenance"],
+                            repo=_writeback_repo, cache_hit=True)
+                    except Exception as e:
+                        # 写回失败 → 不进入 completed，queue 保持原状
+                        cache_hit_errors.append({
+                            "code": "cache_hit_writeback_failed",
+                            "task_id": tid,
+                            "detail": str(e)[:200],
+                        })
+                        audit(ai_root, "cache_hit_writeback_failed",
+                              task_id=tid, reason=str(e)[:200])
+                        continue
+
                 comp_record = {
                     "ai_result": entry["result"],
-                    "provenance": entry["provenance"],
+                    "provenance": dict(entry["provenance"]),
                     "cache": {
                         "hit": True,
+                        "model_call_performed": False,
                         "cache_key_sha256": entry["cache_key_sha256"],
                         "source_task_id": entry["source_task_id"],
                         "cached_at": entry["created_at"],
                     },
                 }
+                if wb_result.get("written"):
+                    comp_record["writeback"] = wb_result
+                comp_record["provenance"]["cache_hit"] = True
                 move_task(tid, "queue", "completed", ai_root=ai_root,
                           updates=comp_record)
                 audit(ai_root, "cache_hit_completed", task_id=tid,
                       cache_key_sha256=entry["cache_key_sha256"],
-                      source_task_id=entry["source_task_id"])
+                      source_task_id=entry["source_task_id"],
+                      writeback=wb_result.get("written", False))
             else:
                 remaining.append(task)
+
+        if cache_hit_errors:
+            _release_claim_lock(lock)
+            return {
+                "batch_id": None,
+                "worker_id": worker_id,
+                "task_count": 0,
+                "tasks": [],
+                "cache_hit_errors": cache_hit_errors,
+            }
 
         if not remaining:
             _release_claim_lock(lock)
@@ -718,7 +755,8 @@ def heartbeat_batch(ai_root, batch_id, worker_id,
 
 # ── ingest：接收并校验结果 ──
 
-def ingest_results(ai_root, batch_id, result_file, allow_expired=False):
+def ingest_results(ai_root, batch_id, result_file, allow_expired=False,
+                   _writeback_repo=None):
     """校验批次结果并归档（2.5B-1H 加固版）。
 
     - 统一租约校验（validate_active_lease）；
@@ -1005,31 +1043,48 @@ def ingest_results(ai_root, batch_id, result_file, allow_expired=False):
                 continue
 
         if res["status"] == "success":
-            # 2.5C-3: 缓存写入 + Canonical 写回
+            # 2.5C-3 closeout: 先 writeback，成功后缓存写入，再 completed
             writeback_result = {"written": False}
-            try:
-                if provenance:
-                    from ai.ai_result_cache import write_cache_entry
-                    from ai.ai_writeback import execute_writeback, WritebackError
+            cache_write_failed = False
+
+            # 1. Canonical writeback（失败则拒绝，不创建缓存）
+            if provenance:
+                from ai.ai_writeback import execute_writeback, WritebackError
+                try:
+                    writeback_result = execute_writeback(
+                        task, res.get("result", {}), provenance,
+                        repo=_writeback_repo)
+                except (WritebackError, Exception) as e:
+                    entry["outcome"] = "rejected_writeback_failed"
+                    entry["reasons"] = [str(e)[:200]]
+                    report["rejected"] += 1
+                    report["rejected_task_ids"].append(tid)
+                    audit(ai_root, "writeback_failed", task_id=tid,
+                          batch_id=batch_id, reason=str(e)[:200])
+                    continue
+
+            # 2. 缓存写入（性能优化，失败不阻断已验证结果）
+            if provenance:
+                from ai.ai_result_cache import write_cache_entry
+                try:
                     ingest_ts = _now().isoformat()
                     write_cache_entry(task, res.get("result", {}),
                                       provenance, ingest_ts)
-                    writeback_result = execute_writeback(
-                        task, res.get("result", {}), provenance)
-            except (WritebackError, ValueError, Exception) as e:
-                entry["outcome"] = "rejected_writeback_failed"
-                entry["reasons"] = [str(e)[:200]]
-                report["rejected"] += 1
-                report["rejected_task_ids"].append(tid)
-                audit(ai_root, "writeback_failed", task_id=tid,
-                      batch_id=batch_id, reason=str(e)[:200])
-                continue
+                except Exception as e:
+                    cache_write_failed = True
+                    audit(ai_root, "cache_write_failed", task_id=tid,
+                          batch_id=batch_id, reason=str(e)[:200])
 
             result_record = {"ai_result": res}
             if provenance:
                 result_record["provenance"] = provenance
             if writeback_result.get("written"):
                 result_record["writeback"] = writeback_result
+            result_record["cache"] = {
+                "hit": False,
+                "cache_write_failed": cache_write_failed,
+                "model_call_performed": True,
+            }
             move_task(tid, "processing", "completed", ai_root=ai_root,
                       updates=result_record)
             entry["outcome"] = "completed"
@@ -1038,7 +1093,7 @@ def ingest_results(ai_root, batch_id, result_file, allow_expired=False):
             report["accepted"] += 1
             report["accepted_task_ids"].append(tid)
             audit(ai_root, "result_ingested", task_id=tid, batch_id=batch_id,
-                  outcome="success")
+                  outcome="success", cache_write_failed=cache_write_failed)
             audit(ai_root, "task_completed", task_id=tid, batch_id=batch_id)
         else:
             moved = move_task(tid, "processing", "failed", ai_root=ai_root,
