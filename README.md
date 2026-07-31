@@ -532,3 +532,9 @@ data/events.json 遗留兼容视图（仅旧前端兼容，单向生成，不部
 - **测试**：`scripts/tests/test_stage25b2b_cross_session.py`（C1–C17，含 2.5B-2A 回归），
   已加入流水线构建前闸门。
 - 详细协议见 `WORKBUDDY_AI_WORKER.md` 第 13 章。回滚基线：**`pre-stage25b2b`**。
+
+> **2.5B-2B-P Microfix（2026-07-31）**：worker `claim` CLI 新增
+> `--expected-provider` / `--expected-model` 并透传至 manifest；`WORKBUDDY_REQUEST.md`
+> 改为从 manifest 动态生成（DeepSeek V4 Flash 批次显示对应模型，不再硬编码 Hy3，
+> 计量说明通用化）；测试新增 M1–M6（CLI 路径，共 23 项全过）。
+> 详见 `WORKBUDDY_AI_WORKER.md` 13.7。

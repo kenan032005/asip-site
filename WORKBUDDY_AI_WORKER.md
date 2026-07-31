@@ -402,3 +402,35 @@ verify（传入自己的 consumer_session_id）；不修改生产 data/ai；不�
 - 接收端真实处理证据由新会话单独记录（如实注明 DeepSeek V4 Flash）。
 - 回滚基线：**`pre-stage25b2b`**（指向本阶段开工前 `main` HEAD）。
 
+### 13.7 Microfix（2026-07-31）：修复跨会话 Claim 模型传递
+
+独立审计发现：标准 worker CLI 的 `claim` 不支持传入 provider/model，导致接收端
+若用 CLI 领取，`manifest.expected_model` 会回落到默认 `hy3`，与
+`HANDOFF_READY.expected_model=deepseek-v4-flash` 冲突；同时
+`WORKBUDDY_REQUEST.md` 硬编码“使用 Hy3”。
+
+修复内容：
+
+- **claim CLI 新增参数**：
+  `--expected-provider`（默认 `workbuddy_queue`）与 `--expected-model`
+  （默认 `hy3`），并透传至 `claim_batch`。接收端标准 CLI 领取时显式传
+  `--expected-provider workbuddy_queue --expected-model deepseek-v4-flash`，
+  manifest / results.template / AI Result 的 model 即与交接契约一致。
+- **参数校验**（`_validate_model_ref`）：非空、≤100 字符、仅
+  `[A-Za-z0-9._-]`；非法值报错并返回非零，不静默回退；不根据当前模型猜测，
+  不伪装模型标识。
+- **`WORKBUDDY_REQUEST.md` 动态生成**：从 manifest 读取
+  `expected_provider` / `expected_model`，显示“model：`deepseek-v4-flash`
+  （DeepSeek V4 Flash）”，并注明“使用当前 WorkBuddy 任务中与上述模型标识
+  对应的内置模型；不得更换或伪装模型标识；不调用 ASIP 代码之外的外部 API”。
+  计量说明改为通用表述（“当前 WorkBuddy 内置模型未通过 ASIP 代码提供可验证
+  Token 计量……不得伪造用量”），不再写死“Hy3 无可靠 Token 接口”。
+  旧 `hy3` 批次仍正确显示 Hy3（`_MODEL_DISPLAY_NAMES` 映射）。
+- **测试强化**：`test_stage25b2b_cross_session.py` 新增 M1–M6（共 23 项全过）：
+  M1 CLI 接受新参数；M2 manifest 携带正确 provider/model；M3 results.template
+  与 manifest 一致；M4 REQUEST.md 显示 DeepSeek V4 Flash 且不含硬编码 Hy3；
+  M5 未传 `--expected-model` 时保持默认 `hy3`（不破坏旧测试）；M6 空/非法/
+  超长模型标识返回非零。M 系列全部通过真实 CLI 执行，不直接调用 `claim_batch`。
+- 本 Microfix 未处理任何任务、未生成 AI 结果、未进入接收端。
+
+

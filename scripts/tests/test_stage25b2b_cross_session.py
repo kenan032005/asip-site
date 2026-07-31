@@ -57,6 +57,7 @@ except Exception as _e:  # pragma: no cover
 
 PY = sys.executable
 DEMO = os.path.join(SCRIPTS, "ai", "cross_session_handoff_demo.py")
+WORKER = os.path.join(SCRIPTS, "ai", "workbuddy_worker.py")
 T25A = os.path.join(SCRIPTS, "tests", "test_stage25b2a_manual_handoff.py")
 
 # 安全语义分类（与 2.5B-2A 一致）
@@ -122,6 +123,16 @@ def _mk_result(task_id, country_iso3, lang, event_type, summary_zh,
 
 def _run_demo_cli(ai_root, *args):
     cmd = [PY, DEMO, "--ai-root", ai_root] + list(args)
+    try:
+        p = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+        return p.returncode, p.stdout, p.stderr
+    except subprocess.TimeoutExpired:
+        return -1, "", "TIMEOUT"
+
+
+def _run_worker_cli(ai_root, *args):
+    """通过标准 worker CLI 执行（M 系列测试专用，禁止绕过 CLI 直接调函数）。"""
+    cmd = [PY, WORKER, "--ai-root", ai_root] + list(args)
     try:
         p = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
         return p.returncode, p.stdout, p.stderr
@@ -443,6 +454,116 @@ def main():
     ok17 = rc17 == 0 and "FAIL=0" in out17
     check("C17", ok17, "rc=%s tail=%s" % (rc17, (out17 + err17)[-200:]))
 
+    # ══════════════════════════════════════════════════════════════════
+    # M 系列（Microfix）：跨会话 Claim 模型传递（2.5B-2B-P Microfix）
+    # 全部通过「标准 worker CLI」验证，禁止直接调用 claim_batch 代替。
+    # ══════════════════════════════════════════════════════════════════
+
+    def _claim_batch_dir(ai_root, claim_out):
+        """从 CLI claim 的 JSON 输出提取批次目录。"""
+        try:
+            obj = json.loads(claim_out)
+        except Exception:
+            return None
+        bid = (obj or {}).get("batch_id")
+        if not bid:
+            return None
+        return os.path.join(ai_root, "batches", bid)
+
+    # ═══ M1: claim CLI 接受 --expected-provider / --expected-model ═══
+    print("\n=== M1: claim CLI accepts provider/model flags ===")
+    m1 = _mk_root(); roots.append(m1)
+    CSH.prepare(m1)
+    rc_m1, out_m1, err_m1 = _run_worker_cli(
+        m1, "claim", "--batch-size", "2",
+        "--worker-id", "workbuddy-cross-session-test",
+        "--lease-minutes", "30",
+        "--expected-provider", "workbuddy_queue",
+        "--expected-model", "deepseek-v4-flash")
+    ok_m1 = (rc_m1 == 0 and "batch_id" in out_m1)
+    check("M1", ok_m1, "rc=%s err=%s" % (rc_m1, err_m1[-200:]))
+
+    # ═══ M2: CLI claim 的 manifest 携带正确 provider/model ═══
+    print("\n=== M2: manifest carries provider/model via CLI ===")
+    bdir_m2 = _claim_batch_dir(m1, out_m1)
+    ok_m2 = False
+    if bdir_m2 and os.path.exists(os.path.join(bdir_m2, "manifest.json")):
+        man_m2 = _read_json(os.path.join(bdir_m2, "manifest.json"))
+        ok_m2 = (man_m2.get("expected_provider") == "workbuddy_queue"
+                 and man_m2.get("expected_model") == "deepseek-v4-flash")
+    check("M2", ok_m2, "manifest=%s" % (
+        _read_json(os.path.join(bdir_m2, "manifest.json"))
+        if bdir_m2 and os.path.exists(os.path.join(bdir_m2, "manifest.json"))
+        else "missing"))
+
+    # ═══ M3: results.template 与 manifest 一致 ═══
+    print("\n=== M3: results.template matches manifest ===")
+    ok_m3 = False
+    if bdir_m2:
+        tpl = _read_json(os.path.join(bdir_m2, "results.template.json"))
+        man = _read_json(os.path.join(bdir_m2, "manifest.json"))
+        ok_m3 = (len(tpl.get("results", [])) == 2
+                 and all(r.get("provider") == man.get("expected_provider")
+                         and r.get("model") == man.get("expected_model")
+                         for r in tpl.get("results", [])))
+    check("M3", ok_m3, "template_provider/model=%s/%s" % (
+        tpl["results"][0].get("provider") if bdir_m2 and tpl.get("results") else "?",
+        tpl["results"][0].get("model") if bdir_m2 and tpl.get("results") else "?"))
+
+    # ═══ M4: WORKBUDDY_REQUEST.md 动态显示 DeepSeek V4 Flash ═══
+    print("\n=== M4: REQUEST.md shows DeepSeek V4 Flash, no Hy3 ===")
+    ok_m4 = False
+    if bdir_m2:
+        req = open(os.path.join(bdir_m2, "WORKBUDDY_REQUEST.md"),
+                   "r", encoding="utf-8").read()
+        ok_m4 = ("DeepSeek V4 Flash" in req
+                 and "deepseek-v4-flash" in req
+                 and "workbuddy_queue" in req
+                 and "使用当前 WorkBuddy 内置 Hy3" not in req)
+    check("M4", ok_m4, "req_ok=%s" % ok_m4)
+
+    # ═══ M5: 未传 --expected-model 时保持安全默认 hy3 ═══
+    print("\n=== M5: default expected_model stays hy3 ===")
+    m5 = _mk_root(); roots.append(m5)
+    CSH.prepare(m5)
+    rc_m5, out_m5, _ = _run_worker_cli(
+        m5, "claim", "--batch-size", "2",
+        "--worker-id", "workbuddy-cross-session-test",
+        "--lease-minutes", "30",
+        "--expected-provider", "workbuddy_queue")
+    bdir_m5 = _claim_batch_dir(m5, out_m5)
+    ok_m5 = False
+    if rc_m5 == 0 and bdir_m5:
+        man_m5 = _read_json(os.path.join(bdir_m5, "manifest.json"))
+        ok_m5 = (man_m5.get("expected_provider") == "workbuddy_queue"
+                 and man_m5.get("expected_model") == "hy3")
+    check("M5", ok_m5, "rc=%s model=%s" % (
+        rc_m5,
+        _read_json(os.path.join(bdir_m5, "manifest.json")).get("expected_model")
+        if bdir_m5 and os.path.exists(os.path.join(bdir_m5, "manifest.json"))
+        else "?"))
+
+    # ═══ M6: 非法 expected-model 必须失败并返回非零 ═══
+    print("\n=== M6: invalid expected-model rejected (nonzero) ===")
+    m6 = _mk_root(); roots.append(m6)
+    CSH.prepare(m6)
+    rc_m6, _, err_m6 = _run_worker_cli(
+        m6, "claim", "--batch-size", "2",
+        "--expected-provider", "workbuddy_queue",
+        "--expected-model", "")
+    bad_chars_rc, _, _ = _run_worker_cli(
+        m6, "claim", "--batch-size", "2",
+        "--expected-provider", "workbuddy_queue",
+        "--expected-model", "bad model!")
+    long_rc, _, _ = _run_worker_cli(
+        m6, "claim", "--batch-size", "2",
+        "--expected-provider", "workbuddy_queue",
+        "--expected-model", "x" * 101)
+    ok_m6 = (rc_m6 != 0 and "expected_model" in err_m6
+             and bad_chars_rc != 0 and long_rc != 0)
+    check("M6", ok_m6, "empty_rc=%s badchars_rc=%s long_rc=%s err=%s" % (
+        rc_m6, bad_chars_rc, long_rc, err_m6[-200:]))
+
     # 清理临时目录
     for r in roots:
         if os.path.isdir(r):
@@ -450,7 +571,7 @@ def main():
 
     # ── 汇总 ──
     print("\n" + "=" * 64)
-    print("RESULT: PASS=%d FAIL=%d" % (total, fails))
+    print("RESULT: PASS=%d FAIL=%d" % (total - fails, fails))
     print("=" * 64)
     if fails:
         sys.exit(1)

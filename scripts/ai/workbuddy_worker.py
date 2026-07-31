@@ -50,6 +50,29 @@ _LOCK_STALE_SECONDS = 120
 _LOCK_WAIT_SECONDS = 10
 _WORKER_ID_RE = re.compile(r'^[a-zA-Z0-9._-]{1,100}$')
 
+# 2.5B-2B Microfix：claim CLI 透传 provider/model。
+# 校验规则：非空、≤100 字符、仅 [A-Za-z0-9._-]（与 worker_id 同规则）。
+_MODEL_REF_RE = re.compile(r'^[A-Za-z0-9._-]{1,100}$')
+# 模型标识 → 显示名（仅用于 WORKBUDDY_REQUEST.md 的人类可读说明；
+# 机器可读字段一律以 manifest 中的 expected_model 为准，不在此处定义默认模型）。
+_MODEL_DISPLAY_NAMES = {
+    "hy3": "Hy3",
+    "deepseek-v4-flash": "DeepSeek V4 Flash",
+}
+
+
+def _validate_model_ref(name, label):
+    """校验 provider/model 标识：非空、≤100、仅 [A-Za-z0-9._-]。
+
+    非法时返回错误字符串；合法返回 None。不根据当前 WorkBuddy 模型猜测，
+    也不把任何模型标识伪装成其他值。
+    """
+    if name is None or not isinstance(name, str) or not name.strip():
+        return "%s must not be empty" % label
+    if not _MODEL_REF_RE.match(name):
+        return "%s must match ^[A-Za-z0-9._-]{1,100}$, got %r" % (label, name)
+    return None
+
 
 def _now():
     return datetime.now(timezone.utc)
@@ -275,6 +298,14 @@ def _list_queue_sorted(ai_root):
 
 
 def _request_md(manifest):
+    """从 manifest 读取 expected_provider / expected_model 动态生成说明。
+
+    不硬编码任何模型名：机器可读字段以 manifest 为准，显示名仅用于人类可读。
+    旧 hy3 批次仍正确显示 Hy3；DeepSeek V4 Flash 批次显示 DeepSeek V4 Flash。
+    """
+    exp_prov = manifest.get("expected_provider", "workbuddy_queue")
+    exp_model = manifest.get("expected_model", "hy3")
+    display = _MODEL_DISPLAY_NAMES.get(exp_model, exp_model)
     lines = [
         "# WORKBUDDY_REQUEST — AI 批次处理说明",
         "",
@@ -283,24 +314,30 @@ def _request_md(manifest):
         "lease_expires_at: `%s`" % manifest["lease_expires_at"],
         "task_count: %d" % manifest["task_count"],
         "",
+        "## 本批次模型与 Provider",
+        "",
+        "- provider：`%s`" % exp_prov,
+        "- model：`%s`（%s）" % (exp_model, display),
+        "- 使用当前 WorkBuddy 任务中与上述模型标识对应的内置模型处理；",
+        "- 不得更换或伪装模型标识（AI Result 的 provider/model 必须与 manifest 一致）；",
+        "- 不调用 ASIP 代码之外的外部 API（OpenAI / Anthropic / 任何付费或外部模型接口）。",
+        "",
         "## 必须遵守的规则",
         "",
         "1. 只能处理本批次 manifest.json 中列出的任务，不得处理其他任务；",
-        "2. 使用当前 WorkBuddy 内置 Hy3 模型处理，不调用外部 API；",
-        "3. 不调用 OpenAI、Anthropic 或任何付费/外部模型接口；",
-        "4. 不修改输入事实，不曲解原文含义；",
-        "5. 不编造原文中不存在的数据、数字、地名或人名；",
-        "6. 每个 task_id 必须且只能产生一个结果对象；",
-        "7. 输出必须符合 schemas/ai_result.schema.json（schema_version=1.0）；",
-        "8. 处理失败时返回标准 error（code + message），不得静默丢弃任务；",
-        "9. 不得直接修改 Canonical、Public 数据或网页文件；",
-        "10. 完成后将结果写入本批次目录的结果文件（可从 results.template.json 复制），",
+        "2. 不修改输入事实，不曲解原文含义；",
+        "3. 不编造原文中不存在的数据、数字、地名或人名；",
+        "4. 每个 task_id 必须且只能产生一个结果对象；",
+        "5. 输出必须符合 schemas/ai_result.schema.json（schema_version=1.0）；",
+        "6. 处理失败时返回标准 error（code + message），不得静默丢弃任务；",
+        "7. 不得直接修改 Canonical、Public 数据或网页文件；",
+        "8. 完成后将结果写入本批次目录的结果文件（可从 results.template.json 复制），",
         "    然后由控制器执行 ingest：",
         "    `python scripts/ai/workbuddy_worker.py ingest --batch-id %s --result-file <结果文件>`" % manifest["batch_id"],
         "",
         "## 计量说明",
         "",
-        "- 当前 WorkBuddy 内置 Hy3 无可靠 Token 计费接口：",
+        "- 当前 WorkBuddy 内置模型未通过 ASIP 代码提供可验证 Token 计量：",
         "  input_tokens=0 / output_tokens=0 / estimated_cost_usd=0，不得伪造用量。",
         "",
         "## 任务清单",
@@ -859,6 +896,14 @@ def main(argv=None):
     c.add_argument("--batch-size", type=int, default=DEFAULT_BATCH_SIZE)
     c.add_argument("--worker-id", default="workbuddy-local")
     c.add_argument("--lease-minutes", type=int, default=DEFAULT_LEASE_MINUTES)
+    # 2.5B-2B Microfix：允许跨会话接收端通过标准 CLI 显式声明 provider/model，
+    # 避免 manifest.expected_model 回落到默认 hy3 与交接契约冲突。
+    c.add_argument("--expected-provider", default="workbuddy_queue",
+                   help="expected provider written into manifest "
+                        "(default: workbuddy_queue)")
+    c.add_argument("--expected-model", default="hy3",
+                   help="expected model id written into manifest "
+                        "(default: hy3; e.g. deepseek-v4-flash)")
 
     i = sub.add_parser("ingest", parents=[pp])
     i.add_argument("--batch-id", required=True)
@@ -885,9 +930,19 @@ def main(argv=None):
             _print(status_summary(root))
             return 0
         elif args.cmd == "claim":
+            # 2.5B-2B Microfix：参数校验（非空/≤100/[A-Za-z0-9._-]），
+            # 非法值明确报错并返回非零，不静默回退默认值。
+            for _label, _val in (("expected_provider", args.expected_provider),
+                                 ("expected_model", args.expected_model)):
+                _err = _validate_model_ref(_val, _label)
+                if _err:
+                    sys.stderr.write("error: %s\n" % _err)
+                    return 2
             _print(claim_batch(root, worker_id=args.worker_id,
                                batch_size=args.batch_size,
-                               lease_minutes=args.lease_minutes))
+                               lease_minutes=args.lease_minutes,
+                               expected_provider=args.expected_provider,
+                               expected_model=args.expected_model))
             return 0
         elif args.cmd == "ingest":
             rep = ingest_results(root, args.batch_id, args.result_file,
