@@ -546,13 +546,7 @@ def claim_batch(ai_root=AI_ROOT, worker_id="workbuddy-local",
                       encoding="utf-8") as f:
                 f.write(_request_md(manifest))
 
-            if "template" in _fail_steps:
-                raise TaskStateError("injected failure: results template write")
-
-            _atomic_write_json(os.path.join(temp_bdir, "results.template.json"),
-                               _results_template(manifest))
-
-            # 2.5C-2A: 生成批次 Prompt 文件
+            # 2.5C-2A: 先分配 tasks（生成 prompt 或直接用 claimed）
             if prompt_binding_enabled:
                 if "prompt_gen" in _fail_steps:
                     raise TaskStateError("injected failure: prompt generation")
@@ -562,7 +556,13 @@ def claim_batch(ai_root=AI_ROOT, worker_id="workbuddy-local",
             else:
                 manifest["tasks"] = claimed
 
-            # 重写 manifest（含 prompt 元数据）
+            # 写 results.template（在 tasks 填充后）
+            if "template" in _fail_steps:
+                raise TaskStateError("injected failure: results template write")
+            _atomic_write_json(os.path.join(temp_bdir, "results.template.json"),
+                               _results_template(manifest))
+
+            # 重写 manifest（含 prompt 元数据或新 tasks）
             _atomic_write_json(os.path.join(temp_bdir, "manifest.json"), manifest)
 
             # 验证所有文件均存在
