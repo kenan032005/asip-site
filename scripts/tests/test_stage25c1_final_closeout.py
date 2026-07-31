@@ -92,29 +92,30 @@ class TestF10_SymlinkEscape(unittest.TestCase):
         return inside, outside, real_file
 
     def test_symlink_escape_rejected_by_resolve(self):
-        inside, outside, real_file = self._setup_inside_outside()
+        """F10: Real symlink or mock Path.resolve returning outside path rejected."""
+        inside = tempfile.mkdtemp(prefix="f10_test_")
         try:
-            # Windows: try symlink, fallback to structured reject test
-            has_symlink = False
-            link_path = os.path.join(inside, "link.md")
-            try:
-                os.symlink(real_file, link_path)
-                has_symlink = os.path.islink(link_path)
-            except (OSError, NotImplementedError):
-                pass
+            # Create a real file inside
+            _write(os.path.join(inside, "link.md"), "real content")
 
-            if has_symlink:
+            # Mock Path.resolve to return an outside path (simulating symlink)
+            from unittest.mock import patch, MagicMock
+            from pathlib import Path as _Path
+            outside_path = _Path("/outside/target.md")
+
+            with patch('ai.prompt_registry.Path') as MockPath:
+                mock_instance = MagicMock()
+                mock_instance.resolve.return_value = outside_path
+                mock_instance.parts = ('link.md',)
+                mock_instance.__str__.return_value = os.path.join(
+                    inside, "link.md")
+                MockPath.return_value = mock_instance
+
                 with self.assertRaises(PromptRegistryError):
                     resolve_confined_path(inside, "link.md", inside,
                                           must_exist=True)
-            else:
-                # No symlink capability: prove that path outside dir IS rejected
-                with self.assertRaises(PromptRegistryError):
-                    resolve_confined_path(inside, "../out.md", inside,
-                                          must_exist=False)
         finally:
             shutil.rmtree(inside, ignore_errors=True)
-            shutil.rmtree(outside, ignore_errors=True)
 
 
 class TestF14_VersionMismatch(unittest.TestCase):
@@ -178,22 +179,32 @@ class TestF21_OutOfVersionDir(unittest.TestCase):
     """F21: Template symlinked out of version_dir (but inside repo) rejected."""
 
     def test_out_of_version_dir_rejected(self):
-        tmp = tempfile.mkdtemp(prefix="f21_")
+        """F21: Mock symlink escaping version_dir but inside repo."""
+        tmp = tempfile.mkdtemp(prefix="f21_test_")
         try:
-            other_dir = os.path.join(tmp, "other")
+            other_dir = os.path.join(tmp, "other_version")
             os.makedirs(other_dir)
-            _write(os.path.join(other_dir, "tmpl.md"), "outside")
-            bad_pkg = _make_package(system_template="tmpl.md")
-            _write(os.path.join(tmp, "other.json"), '{"tmpl.md": 1}')
-            _write(os.path.join(tmp, "u.md"), "{{ x }}")
-            _write(os.path.join(tmp, "x.json"), "{}")
-            _write(os.path.join(tmp, "package.json"),
-                   json.dumps(bad_pkg, ensure_ascii=False, indent=2))
-            # template resolves to other_dir/tmpl.md which is outside tmp (version_dir)
-            errs = _validate_package(bad_pkg, "test", tmp, strict_schema=False)
-            self.assertTrue(any("system_template" in e for e in errs)
-                            or not os.path.exists(os.path.join(tmp, "tmpl.md")),
-                            "F21: should fail on missing or out-of-dir template")
+            outside_file = os.path.join(other_dir, "real.md")
+            _write(outside_file, "template outside")
+
+            # Create link.md inside version_dir
+            _write(os.path.join(tmp, "link.md"), "placeholder")
+
+            # Mock Path.resolve to return outside path (inside repo but outside version_dir)
+            from unittest.mock import patch, MagicMock
+            from pathlib import Path as _Path
+            outside_path = _Path(outside_file)
+
+            with patch('ai.prompt_registry.Path') as MockPath:
+                mock_instance = MagicMock()
+                mock_instance.resolve.return_value = outside_path
+                mock_instance.parts = ('link.md',)
+                mock_instance.__str__.return_value = os.path.join(
+                    tmp, "link.md")
+                MockPath.return_value = mock_instance
+
+                with self.assertRaises(PromptRegistryError):
+                    resolve_confined_path(tmp, "link.md", tmp, must_exist=True)
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
 

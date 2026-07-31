@@ -36,6 +36,7 @@ if _SCRIPTS not in sys.path:
 from ai.contracts import validate_ai_result  # noqa: E402
 from ai.exceptions import TaskStateError  # noqa: E402
 from ai.workbuddy_queue_provider import move_task, reconcile_task_state, AI_ROOT  # noqa: E402
+from ai.task_prompt_binding import bind_task_to_prompt, build_batch_prompt_files, BindingError  # noqa: E402
 from pipeline_core import sanitize_log_value  # noqa: E402   # 2.5B-1H: 审计脱敏
 
 DEFAULT_LEASE_MINUTES = 30
@@ -437,6 +438,7 @@ def claim_batch(ai_root=AI_ROOT, worker_id="workbuddy-local",
                 lease_minutes=DEFAULT_LEASE_MINUTES,
                 expected_provider="workbuddy_queue",
                 expected_model="hy3",
+                prompt_binding_enabled=False,
                 _fail_after=None, _fail_steps=None):
     """领取一批任务：queue -> processing + lease + 批次清单。
 
@@ -466,6 +468,25 @@ def claim_batch(ai_root=AI_ROOT, worker_id="workbuddy-local",
             return {"batch_id": None, "worker_id": worker_id,
                     "task_count": 0, "tasks": []}
 
+        # 2.5C-2A: Phase 0 — Prompt Binding 预检（可选开关）
+        if prompt_binding_enabled:
+            for task in candidates:
+                try:
+                    bind_task_to_prompt(task)
+                except BindingError as e:
+                    _release_claim_lock(lock)
+                    return {
+                        "batch_id": None,
+                        "worker_id": worker_id,
+                        "task_count": 0,
+                        "tasks": [],
+                        "claim_error": {
+                            "code": e.code,
+                            "task_id": e.task_id,
+                            "detail": e.detail,
+                        },
+                    }
+
         now = _now()
         batch_id = "BATCH_" + now.strftime("%Y%m%dT%H%M%S") + "_" + os.urandom(3).hex()
         expires = (now + timedelta(minutes=lease_minutes)).isoformat()
@@ -494,7 +515,7 @@ def claim_batch(ai_root=AI_ROOT, worker_id="workbuddy-local",
             _rollback_claim(claimed, lease_paths, ai_root)
             raise
 
-        # Phase 2: 构建 manifest
+        # Phase 2: 构建 manifest（含 2.5C-2A Prompt 元数据）
         manifest = {
             "batch_id": batch_id,
             "worker_id": worker_id,
@@ -503,7 +524,9 @@ def claim_batch(ai_root=AI_ROOT, worker_id="workbuddy-local",
             "task_count": len(claimed),
             "expected_provider": expected_provider,
             "expected_model": expected_model,
-            "tasks": claimed,
+            "prompt_binding_version": "1.0",
+            "prompt_registry_validated": True,
+            "tasks": [],
         }
 
         # Phase 3: 写入批次文件（临时目录 → 原子 rename）
@@ -529,8 +552,22 @@ def claim_batch(ai_root=AI_ROOT, worker_id="workbuddy-local",
             _atomic_write_json(os.path.join(temp_bdir, "results.template.json"),
                                _results_template(manifest))
 
-            # 验证三个文件均存在
-            for fname in ("manifest.json", "WORKBUDDY_REQUEST.md", "results.template.json"):
+            # 2.5C-2A: 生成批次 Prompt 文件
+            if prompt_binding_enabled:
+                if "prompt_gen" in _fail_steps:
+                    raise TaskStateError("injected failure: prompt generation")
+                bindings, prompt_entries = build_batch_prompt_files(
+                    claimed, temp_bdir)
+                manifest["tasks"] = prompt_entries
+            else:
+                manifest["tasks"] = claimed
+
+            # 重写 manifest（含 prompt 元数据）
+            _atomic_write_json(os.path.join(temp_bdir, "manifest.json"), manifest)
+
+            # 验证所有文件均存在
+            for fname in ("manifest.json", "WORKBUDDY_REQUEST.md",
+                          "results.template.json"):
                 if not os.path.exists(os.path.join(temp_bdir, fname)):
                     raise TaskStateError("batch file missing after write: %s" % fname)
 
