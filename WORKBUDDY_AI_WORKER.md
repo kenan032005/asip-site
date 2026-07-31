@@ -321,3 +321,84 @@ Hy3 处理 → 写标准结果 → 真实 CLI ingest → 完成 → 幂等重 in
   ingest → 幂等重 ingest → verify 全绿，证据单独记入
   `ASIP_STAGE25B2A_ACCEPTANCE.md`（仅含非敏感信息）。
 - 回滚基线新增：**`pre-stage25b2a-correction`**（指向补正开工前 `main` HEAD）。
+
+## 13. Stage 2.5B-2B-P 跨会话交接准备端（2026-07-31）
+
+> 目标：由当前 WorkBuddy 任务准备一个**隔离的合成 AI 批次**并生成交接文件，
+> **不领取、不处理、不生成结果**；随后由一个**全新的 WorkBuddy 任务**接手
+> 领取与处理。本阶段验证的是「跨 WorkBuddy 会话交接协议」，不是某一特定模型。
+
+### 13.1 模型与 provider（对应本阶段模型调整）
+
+- `provider` 固定为 **`workbuddy_queue`**。
+- `expected_model` 使用 WorkBuddy 内置 **DeepSeek V4 Flash** 的模型标识
+  （**`deepseek-v4-flash`**），**不得**将 DeepSeek V4 Flash 伪装成 `hy3`。
+- 模型标识只在 `scripts/ai/cross_session_handoff_demo.py` 顶部**单一参数**
+  `EXPECTED_MODEL` 定义一次；`HANDOFF_READY.json` / `manifest.expected_model` /
+  `results.template.json` / AI Result 的 `model` 字段均以其为唯一来源，
+  **不在多个文件中分别写死**。
+- 接收端处理时，AI Result 的 `model` 必须与 `manifest.expected_model` **完全一致**。
+- `external_api_calls=0`：ASIP Python 程序未直接调用任何外部 API；WorkBuddy 内置
+  模型的使用由接收端会话负责，不计入 ASIP 代码 API 调用。
+
+### 13.2 新增文件
+
+| 文件 | 作用 |
+|---|---|
+| `scripts/ai/cross_session_handoff_demo.py` | 准备端工具：`prepare` / `inspect` / `verify` / `cleanup` |
+| `scripts/tests/test_stage25b2b_cross_session.py` | 验收测试（C1–C17，TDD 先红后绿，全部通过） |
+
+### 13.3 命令与职责
+
+```bash
+python scripts/ai/cross_session_handoff_demo.py prepare
+python scripts/ai/cross_session_handoff_demo.py inspect
+python scripts/ai/cross_session_handoff_demo.py verify --consumer-session-id <id>
+python scripts/ai/cross_session_handoff_demo.py cleanup
+```
+
+- **prepare**：清理旧演示目录 → 建立独立模拟 AI Root
+  （`.workbuddy_runtime/stage25b2b/`，已 gitignore）→ 创建 2 个 `synthetic=true`
+  的虚构 `article_analysis` 任务写入 `queue` → 生成
+  `HANDOFF_READY.json` / `HANDOFF_READY.md`。**不 claim、不建 lease、
+  不生成 AI 结果、不 ingest**（`producer_processed_results=false`）。
+- **inspect**：检查交接文件存在、`queue=2 / processing=0 / completed=0 / leases=0`、
+  无任何 `results*.json`、任务哈希与交接文件一致、`producer_processed_results=false`。
+- **verify**（接收端完成后使用）：检查 `queue=0 / processing=0 / completed=2 / leases=0`、
+  两个 `task_id` 保持不变、两结果均过 AI Result Schema、`provider=workbuddy_queue`、
+  `model=deepseek-v4-flash`、`synthetic=true`、中文摘要非空、
+  乍得结果保留“伤亡未确认”、尼日尔结果不虚构伤亡、重复 ingest 无重复结果、
+  `consumer_session_id` 与 `producer_session_id` 不同。返回 `{ok, checks, errors}`。
+- **cleanup**：删除整个隔离运行时目录。
+
+### 13.4 交接场景（两个新虚构场景，不复用 2.5B-2A 原文）
+
+| country | language | scenario_id | 内容要点 |
+|---|---|---|---|
+| TCD | fr | `stage25b2b-tcd-curfew` | 虚构城镇短暂骚乱；地方政府临时实施夜间宵禁；主要道路设置检查点；官方未确认伤亡数字（`SCÉNARIO FICTIF` 标注） |
+| NER | en | `stage25b2b-ner-roadblock` | 虚构地区道路阻断；安全部门引导车辆绕行；恢复时间尚未公布；官方未报告伤亡（`SYNTHETIC SCENARIO` 标注） |
+
+`source_text` 进入 AI Task；`content_hash = SHA-256(source_text)`。
+不使用真实人物 / 真实新闻链接 / 真实事件编号。
+
+### 13.5 HANDOFF_READY 契约
+
+`HANDOFF_READY.json` 至少包含：`handoff_version` / `stage` / `producer_session_id`
+（`producer_<8位十六进制>`）/ `created_at` / `repo_commit` / `ai_root_relative`
+（`.workbuddy_runtime/stage25b2b`）/ `expected_task_count` / `task_ids` /
+`task_content_hashes` / `expected_provider` / `expected_model` /
+`consumer_must_claim` / `producer_processed_results`。
+
+`HANDOFF_READY.md` 明确告知新任务 10 条指引：先读本手册；不依赖旧对话；
+校验仓库 commit 与任务哈希；自行 claim（以交接文件中的 provider/model 为准）；
+用新任务内置 DeepSeek V4 Flash 处理；写标准 results.json；ingest 并幂等重 ingest；
+verify（传入自己的 consumer_session_id）；不修改生产 data/ai；不使用外部 API。
+交接文件中**不预置**中文摘要或 AI 结果。
+
+### 13.6 边界声明
+
+- 本阶段只做**准备**：不 claim、不调用模型生成结果、不自行完成接收端步骤。
+- 准备完成后输出 `READY_FOR_NEW_WORKBUDDY_SESSION` 并停止，等待新会话接手。
+- 接收端真实处理证据由新会话单独记录（如实注明 DeepSeek V4 Flash）。
+- 回滚基线：**`pre-stage25b2b`**（指向本阶段开工前 `main` HEAD）。
+

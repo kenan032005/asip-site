@@ -275,7 +275,8 @@ def run_mode(mode, trigger):
                           "test_stage25a_hardening.py",
                           "test_stage25b1_worker_protocol.py",
                           "test_stage25b1_hardening.py",
-                          "test_stage25b2a_manual_handoff.py"):
+                          "test_stage25b2a_manual_handoff.py",
+                          "test_stage25b2b_cross_session.py"):
             rc, out, err = run_cmd([PYTHON, str(HERE / "tests" / test_file)], timeout=180)
             ok = rc == 0 and "FAIL=0" in out  # 以测试脚本的结果行为准（rc=0 且 FAIL=0）
             tests_ok = tests_ok and ok

@@ -515,3 +515,20 @@ data/events.json 遗留兼容视图（仅旧前端兼容，单向生成，不部
 - **参数边界**：`claim.batch_size` 1-20、`lease_minutes` 1-30、`worker_id` 1-100 字符 `[a-zA-Z0-9._-]`；`heartbeat.extend_minutes` 1-30，非法值明确报错（不静默 clamp）。
 - **加固前标签**：**`pre-stage25b1-hardening`**（指向本次修改前的 `main` HEAD `2b9eaa6`）。
 
+
+## 十九、Stage 2.5B-2B-P：跨会话交接准备端（2026-07-31）
+
+> 由当前 WorkBuddy 任务准备一个**隔离的合成 AI 批次**（`.workbuddy_runtime/stage25b2b/`，
+> 已 gitignore），生成 `HANDOFF_READY.json` / `HANDOFF_READY.md` 交接文件，随后由
+> **全新的 WorkBuddy 任务**接手领取与处理。准备端**不领取、不处理、不生成结果**，
+> 完成后输出 `READY_FOR_NEW_WORKBUDDY_SESSION` 即停止。
+
+- **模型**：接收端使用 WorkBuddy 内置 **DeepSeek V4 Flash**（模型标识 `deepseek-v4-flash`），
+  `provider=workbuddy_queue`；模型标识仅在新工具 `scripts/ai/cross_session_handoff_demo.py`
+  顶部单一参数定义，manifest / results.template / AI Result 均以其为唯一来源。
+- **场景**：2 个 `synthetic=true` 虚构任务（TCD/fr 宵禁 + NER/en 路障，均明确标注
+  SCÉNARIO FICTIF / SYNTHETIC SCENARIO），`content_hash` 由 `source_text` 计算。
+- **命令**：`prepare` / `inspect` / `verify --consumer-session-id <id>` / `cleanup`。
+- **测试**：`scripts/tests/test_stage25b2b_cross_session.py`（C1–C17，含 2.5B-2A 回归），
+  已加入流水线构建前闸门。
+- 详细协议见 `WORKBUDDY_AI_WORKER.md` 第 13 章。回滚基线：**`pre-stage25b2b`**。
