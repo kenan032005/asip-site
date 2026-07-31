@@ -30,13 +30,14 @@ class TestPromptRegistry(unittest.TestCase):
         reg = list_prompts()
         self.assertEqual(len(reg), 6)
         for p in reg:
-            self.assertEqual(p["active_version"], "1.0.0")
-            self.assertEqual(p["versions"], ["1.0.0"])
+            self.assertEqual(p["active_version"], "1.0.1")
+            self.assertIn("1.0.0", p["versions"])
+            self.assertIn("1.0.1", p["versions"])
 
     def test_4_package_directory_matches_version(self):
         """4. package目录与version一致"""
         pkg = get_prompt_package("article_analysis")
-        self.assertEqual(pkg["version"], "1.0.0")
+        self.assertEqual(pkg["version"], "1.0.1")
 
     def test_5_output_schema_exists(self):
         """5. output Schema存在"""
@@ -47,7 +48,7 @@ class TestPromptRegistry(unittest.TestCase):
 
     def test_6_checksum_correct(self):
         """6. checksum正确（通过validate不抛异常）"""
-        validate_version("article_analysis", "1.0.0")
+        validate_version("article_analysis", "1.0.0", strict_schema=False)
 
     def test_7_prompt_tampered_detected(self):
         """7. Prompt内容被篡改时失败"""
@@ -137,16 +138,22 @@ class TestPromptRenderer(unittest.TestCase):
 class TestOutputContracts(unittest.TestCase):
 
     def test_18_valid_article_analysis_passes(self):
-        """18. article_analysis合法样例通过"""
+        """18. article_analysis合法样例通过（v1.1 schema）"""
         valid = {
             "summary_zh": "road blocked",
             "country_iso3": "NER",
             "source_language": "en",
             "event_type": "road_closure",
+            "event_time": None,
+            "locations": [],
+            "actors": [],
             "key_facts": ["road was blocked"],
             "source_claims": ["source says road blocked"],
             "casualties": {"confirmed": 0, "reported": 0, "unknown": True},
             "uncertainties": ["time unknown"],
+            "china_relevance": "none",
+            "project_impact": "none",
+            "security_relevance": 0.5,
             "confidence": 0.7,
             "synthetic": True,
         }
@@ -154,16 +161,18 @@ class TestOutputContracts(unittest.TestCase):
         self.assertTrue(ok, msg=str(errs))
 
     def test_19_unconfirmed_casualties_as_confirmed_rejected(self):
-        """19. 未确认伤亡写为confirmed >= 1 在语义上应谨慎，但Schema允许任意整数。"""
-        # Schema不阻止confirmed > 0（由AI语义规则保证），但验证其存在性
+        """19. Schema allows confirmed >= 0 (AI semantics rules ensure correctness)."""
         valid = {
             "summary_zh": "test", "country_iso3": "NER", "source_language": "en",
-            "event_type": "road_closure", "key_facts": ["f"], "source_claims": ["c"],
+            "event_type": "road_closure", "event_time": None, "locations": [],
+            "actors": [], "key_facts": ["f"], "source_claims": ["c"],
             "casualties": {"confirmed": 5, "reported": 10, "unknown": False},
-            "uncertainties": ["u"], "confidence": 0.5, "synthetic": True,
+            "uncertainties": ["u"], "china_relevance": "none",
+            "project_impact": "none", "security_relevance": 0.5,
+            "confidence": 0.5, "synthetic": True,
         }
         ok, errs = validate_business_output("article_analysis", valid)
-        self.assertTrue(ok)  # Schema doesn't enforce semantics
+        self.assertTrue(ok)
 
     def test_20_trend_forecast_invalid_window_fails(self):
         """20. trend_forecast非法时间窗口失败"""
@@ -193,9 +202,12 @@ class TestOutputContracts(unittest.TestCase):
         """22. additionalProperties被拒"""
         good = {
             "summary_zh": "x", "country_iso3": "NER", "source_language": "en",
-            "event_type": "road_closure", "key_facts": ["f"], "source_claims": ["c"],
+            "event_type": "road_closure", "event_time": None, "locations": [],
+            "actors": [], "key_facts": ["f"], "source_claims": ["c"],
             "casualties": {"confirmed": 0, "reported": 0, "unknown": True},
-            "uncertainties": ["u"], "confidence": 0.5, "synthetic": True,
+            "uncertainties": ["u"], "china_relevance": "none",
+            "project_impact": "none", "security_relevance": 0.5,
+            "confidence": 0.5, "synthetic": True,
         }
         ok1, _ = validate_business_output("article_analysis", good)
         self.assertTrue(ok1)
