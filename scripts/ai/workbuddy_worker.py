@@ -896,23 +896,31 @@ def ingest_results(ai_root, batch_id, result_file, allow_expired=False):
                 m_render = manifest_task.get("render_hash")
                 m_digest = manifest_task.get("prompt_variables_digest")
 
-                # 三方版本核对
-                checks = []
-                if task.get("prompt_version") != m_pv:
-                    checks.append("prompt_version mismatch: task=%s manifest=%s" % (
-                        task.get("prompt_version"), m_pv))
-                if task.get("output_schema_version") != m_osv:
-                    checks.append("output_schema_version mismatch")
-                if binding.get("prompt_checksum") != m_checksum:
-                    checks.append("prompt_checksum mismatch")
-                if binding.get("render_hash") != m_render:
-                    checks.append("render_hash mismatch")
-                if binding.get("prompt_variables_digest") != m_digest:
-                    checks.append("prompt_variables_digest mismatch")
+                # 2.5C-2B final: 重新绑定 task → expected_binding 检测篡改
+                from ai.task_prompt_binding import bind_task_to_prompt
+                expected = bind_task_to_prompt(task)
 
-                if checks:
+                tamper_checks = []
+                # 版本/哈希字段核对
+                if expected.get("prompt_checksum") != m_checksum:
+                    tamper_checks.append("prompt_checksum mismatch")
+                if expected.get("render_hash") != m_render:
+                    tamper_checks.append("render_hash mismatch")
+                if expected.get("prompt_variables_digest") != m_digest:
+                    tamper_checks.append("prompt_variables_digest mismatch")
+                if expected.get("prompt_version") != m_pv:
+                    tamper_checks.append("prompt_version mismatch")
+                if expected.get("output_schema_version") != m_osv:
+                    tamper_checks.append("output_schema_version mismatch")
+                # 正文篡改检测（即使哈希被保留亦拒绝）
+                if binding.get("system_text") != expected.get("system_text"):
+                    tamper_checks.append("system_text tampered")
+                if binding.get("user_text") != expected.get("user_text"):
+                    tamper_checks.append("user_text tampered")
+
+                if tamper_checks:
                     entry["outcome"] = "rejected_prompt_binding_mismatch"
-                    entry["reasons"] = checks[:3]
+                    entry["reasons"] = tamper_checks[:3]
                     report["rejected"] += 1
                     report["rejected_task_ids"].append(tid)
                     continue

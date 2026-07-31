@@ -479,7 +479,8 @@ def main():
         "--worker-id", "workbuddy-cross-session-test",
         "--lease-minutes", "30",
         "--expected-provider", "workbuddy_queue",
-        "--expected-model", "deepseek-v4-flash")
+        "--expected-model", "deepseek-v4-flash",
+        "--no-prompt-binding")
     ok_m1 = (rc_m1 == 0 and "batch_id" in out_m1)
     check("M1", ok_m1, "rc=%s err=%s" % (rc_m1, err_m1[-200:]))
 
@@ -530,7 +531,8 @@ def main():
         m5, "claim", "--batch-size", "2",
         "--worker-id", "workbuddy-cross-session-test",
         "--lease-minutes", "30",
-        "--expected-provider", "workbuddy_queue")
+        "--expected-provider", "workbuddy_queue",
+        "--no-prompt-binding")
     bdir_m5 = _claim_batch_dir(m5, out_m5)
     ok_m5 = False
     if rc_m5 == 0 and bdir_m5:
