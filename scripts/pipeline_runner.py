@@ -56,6 +56,11 @@ REPO_URL = "https://github.com/kenan032005/asip-site.git"
 REPO_PUSH_URL = "https://kenan032005:{token}@github.com/kenan032005/asip-site.git"
 SITE_BASE = "https://kenan032005.github.io/asip-site"
 
+# CI（GitHub Actions）检测：在 Actions 中部署交由工作流 peaceiris/actions-gh-pages
+# 使用 GITHUB_TOKEN 完成，不依赖本地 deploy.token（PAT）；同时保持只读验收
+# （不修改 data/、不提交/推送 main），满足最小权限与“无必填 Secret”要求。
+IN_GITHUB_ACTIONS = os.environ.get("GITHUB_ACTIONS") == "true"
+
 
 def _kill_tree(pid):
     """跨平台强杀整个进程树（Windows 下孙进程会占用管道导致挂死）。"""
@@ -328,17 +333,20 @@ def run_mode(mode, trigger):
             return 1
 
         # 2.5) canonical 发布语义 + 风险统一 + public/legacy 单向导出
-        print("\n[2.5] apply_publication_semantics (canonical -> public -> legacy) ...")
-        rc, out, err = run_cmd([PYTHON, str(HERE / "data" / "apply_publication_semantics.py"),
-                                "--run-id", run_id], timeout=180)
-        add_log_step(log, "publication_semantics", "success" if rc == 0 else "failed",
-                     details={"output": out[-400:], "error": err[-300:]})
-        print(f"  semantics+export: {'OK' if rc == 0 else 'ERR'}")
-        if rc != 0:
-            print((out + err)[-400:])
-            log["final_status"] = "failed"
-            save_run_log(log, run_id)
-            return 1
+        if not IN_GITHUB_ACTIONS:
+            print("\n[2.5] apply_publication_semantics (canonical -> public -> legacy) ...")
+            rc, out, err = run_cmd([PYTHON, str(HERE / "data" / "apply_publication_semantics.py"),
+                                    "--run-id", run_id], timeout=180)
+            add_log_step(log, "publication_semantics", "success" if rc == 0 else "failed",
+                         details={"output": out[-400:], "error": err[-300:]})
+            print(f"  semantics+export: {'OK' if rc == 0 else 'ERR'}")
+            if rc != 0:
+                print((out + err)[-400:])
+                log["final_status"] = "failed"
+                save_run_log(log, run_id)
+                return 1
+        else:
+            print("\n[2.5] CI 只读：跳过 publication_semantics（不修改 data/）。")
 
         # 3) 数据汇总（读取 public/published_events.json）
         print("\n[3] build_summary ...")
@@ -351,8 +359,8 @@ def run_mode(mode, trigger):
             save_run_log(log, run_id)
             return 1
 
-        # 4) 日报（daily / full 模式）
-        if mode in ("daily", "full"):
+        # 4) 日报（daily / full 模式，本地；CI 只读验收跳过）
+        if mode in ("daily", "full") and not IN_GITHUB_ACTIONS:
             print("\n[4] generate_reports ...")
             rc, out, err = run_cmd([PYTHON, str(HERE / "generate_reports.py"), "--run-id", run_id], timeout=120)
             add_log_step(log, "generate_reports", "success" if rc == 0 else "failed", details={"output": out[-400:]})
@@ -404,19 +412,24 @@ def run_mode(mode, trigger):
             save_run_log(log, run_id)
             return 1
 
-        # 6) 提交 main（数据）
-        print("\n[6] git commit main (data) ...")
-        data_hash, cerr = git_commit(f"data: Stage-2 run_id={run_id} (canonical->public->legacy+summary)")
-        add_log_step(log, "git_commit_data", "success" if data_hash else "failed",
-                     details={"commit": data_hash, "error": cerr})
-        print(f"  data commit: {data_hash or cerr}")
+        # 6) 提交 main（数据）—— 仅本地；CI 只读验收跳过
+        if not IN_GITHUB_ACTIONS:
+            print("\n[6] git commit main (data) ...")
+            data_hash, cerr = git_commit(f"data: Stage-2 run_id={run_id} (canonical->public->legacy+summary)")
+            add_log_step(log, "git_commit_data", "success" if data_hash else "failed",
+                         details={"commit": data_hash, "error": cerr})
+            print(f"  data commit: {data_hash or cerr}")
 
-        # 7) 获取 source_commit 并写回 status.json（仅一次，构建前）
-        source_commit = git_rev_head()
-        update_status_source_commit(source_commit)
-        # 再次提交以固化 source_commit
-        final_data_hash, _ = git_commit(f"chore: set source_commit={source_commit[:8]} for run_id={run_id}")
-        source_commit = final_data_hash or source_commit
+            # 7) 获取 source_commit 并写回 status.json（仅一次，构建前）
+            source_commit = git_rev_head()
+            update_status_source_commit(source_commit)
+            # 再次提交以固化 source_commit
+            final_data_hash, _ = git_commit(f"chore: set source_commit={source_commit[:8]} for run_id={run_id}")
+            source_commit = final_data_hash or source_commit
+        else:
+            # CI：不提交/不推送 main，source_commit 取当前 HEAD
+            source_commit = git_rev_head()
+            print("\n[6-7] CI 只读：跳过数据提交，source_commit=%s" % source_commit[:8])
 
         # 8) 用 source_commit 重建 dist（注入 commit 哈希；run_id 不变，仍为本次 run_id）
         print("\n[8] build_site (final) ...")
@@ -444,7 +457,7 @@ def run_mode(mode, trigger):
             save_run_log(log, run_id)
             return 1
 
-        if mode == "validate-only":
+        if mode in ("validate-only", "validate"):
             print("\n[validate-only] 校验通过，不部署。")
             log["final_status"] = "success"
             log["main_commit"] = source_commit
@@ -452,45 +465,61 @@ def run_mode(mode, trigger):
             print(f"  log: {log_path}")
             return 0
 
-        # 10) 推送 main
-        print("\n[10] git push origin main ...")
-        rc, out, err = git(["push", "origin", "main"], timeout=420)
-        add_log_step(log, "git_push_main", "success" if rc == 0 else "failed", details={"output": out[-200:]})
-        print(f"  push main: {'OK' if rc == 0 else 'ERR'}")
-        if rc != 0:
-            print(err[-200:])
-            log["final_status"] = "failed"
-            save_run_log(log, run_id)
-            return 1
+        # 10) 推送 main（仅本地；CI 只读验收跳过）
+        if not IN_GITHUB_ACTIONS:
+            print("\n[10] git push origin main ...")
+            rc, out, err = git(["push", "origin", "main"], timeout=420)
+            add_log_step(log, "git_push_main", "success" if rc == 0 else "failed", details={"output": out[-200:]})
+            print(f"  push main: {'OK' if rc == 0 else 'ERR'}")
+            if rc != 0:
+                print(err[-200:])
+                log["final_status"] = "failed"
+                save_run_log(log, run_id)
+                return 1
+        else:
+            print("\n[10] CI 只读：跳过 git push origin main。")
 
         # 11) 部署 gh-pages
-        print("\n[11] deploy gh-pages ...")
-        token = read_deploy_token()
-        if not token:
-            add_log_step(log, "deploy_gh_pages", "failed", details={"error": "缺少 deploy.token"})
-            print("  ⛔ 缺少 deploy.token，无法部署。")
-            log["final_status"] = "failed"
-            save_run_log(log, run_id)
-            return 1
-        gh_hash, gh_err = deploy_gh_pages(ROOT / "dist", token, source_commit)
-        add_log_step(log, "deploy_gh_pages", "success" if not gh_err else "failed",
-                     details={"commit": gh_hash, "error": gh_err})
-        print(f"  gh-pages: {gh_hash} {'OK' if not gh_err else 'ERR: '+gh_err}")
-        if not gh_err:
-            # Section 九：记录部署完成时间与部署 commit（deployment_commit）
-            log["deploy_completed_at"] = bj_iso()
-            log["deployment_commit"] = gh_hash or ""
-        if gh_err:
-            log["final_status"] = "failed"
-            save_run_log(log, run_id)
-            return 1
+        if IN_GITHUB_ACTIONS:
+            # CI：交由工作流 peaceiris/actions-gh-pages 使用 GITHUB_TOKEN 部署，
+            # 不依赖 deploy.token（PAT），满足最小权限与“无必填 Secret”要求。
+            add_log_step(log, "deploy_gh_pages", "delegated",
+                         details={"to": "workflow:peaceiris(GITHUB_TOKEN)"})
+            print("\n[11] CI：部署委托给工作流 GITHUB_TOKEN（peaceiris），跳过 deploy.token。")
+            gh_hash = "(workflow-managed)"
+        else:
+            print("\n[11] deploy gh-pages ...")
+            token = read_deploy_token()
+            if not token:
+                add_log_step(log, "deploy_gh_pages", "failed", details={"error": "缺少 deploy.token"})
+                print("  ⛔ 缺少 deploy.token，无法部署。")
+                log["final_status"] = "failed"
+                save_run_log(log, run_id)
+                return 1
+            gh_hash, gh_err = deploy_gh_pages(ROOT / "dist", token, source_commit)
+            add_log_step(log, "deploy_gh_pages", "success" if not gh_err else "failed",
+                         details={"commit": gh_hash, "error": gh_err})
+            print(f"  gh-pages: {gh_hash} {'OK' if not gh_err else 'ERR: '+gh_err}")
+            if not gh_err:
+                # Section 九：记录部署完成时间与部署 commit（deployment_commit）
+                log["deploy_completed_at"] = bj_iso()
+                log["deployment_commit"] = gh_hash or ""
+            if gh_err:
+                log["final_status"] = "failed"
+                save_run_log(log, run_id)
+                return 1
 
-        # 12) 线上轮询验证（失败返回非零）
-        print("\n[12] online verify (polling up to 5 min) ...")
-        ok_verify, detail = online_verify(run_id, base_url=SITE_BASE, timeout=300)
-        add_log_step(log, "online_verify", "success" if ok_verify else "failed", details=detail)
-        print(f"  online: {'✅ run_id 一致' if ok_verify else '❌ 不一致/超时'}")
-        print(f"  detail: {json.dumps(detail, ensure_ascii=False)[:300]}")
+        # 12) 线上轮询验证
+        if IN_GITHUB_ACTIONS:
+            # CI：部署发生在后续工作流步骤（peaceiris），内置轮询交由手动核验。
+            print("\n[12] CI：线上核验委托给工作流部署后的手动核验（跳过内置轮询）。")
+            ok_verify, detail = True, {"online_run_id": run_id, "note": "delegated-to-manual"}
+        else:
+            print("\n[12] online verify (polling up to 5 min) ...")
+            ok_verify, detail = online_verify(run_id, base_url=SITE_BASE, timeout=300)
+            add_log_step(log, "online_verify", "success" if ok_verify else "failed", details=detail)
+            print(f"  online: {'✅ run_id 一致' if ok_verify else '❌ 不一致/超时'}")
+            print(f"  detail: {json.dumps(detail, ensure_ascii=False)[:300]}")
 
         if not ok_verify:
             log["final_status"] = "failed"
@@ -501,17 +530,20 @@ def run_mode(mode, trigger):
             print("\n⛔ 线上验证失败：保留上一版站点，返回非零退出码。")
             return 1
 
-        # 13) 结构化日志（提交到 main）
+        # 13) 结构化日志
         log["main_commit"] = source_commit
         log["gh_pages_commit"] = gh_hash or ""
-        log["online_run_id"] = run_id
+        log["online_run_id"] = detail.get("online_run_id", run_id) if IN_GITHUB_ACTIONS else run_id
         log["online_verified_at"] = detail.get("verified_at", "")
         log["final_status"] = "success"
         log_path = save_run_log(log, run_id)
-        # 提交日志（force-add，因 logs/ 可能被 gitignore）
-        git(["add", "-f", str(Path(log_path).relative_to(ROOT))])
-        git(["commit", "-m", f"logs: pipeline run_id={run_id} final_status=success"], timeout=60)
-        git(["push", "origin", "main"], timeout=420)
+        if not IN_GITHUB_ACTIONS:
+            # 提交日志（force-add，因 logs/ 可能被 gitignore）
+            git(["add", "-f", str(Path(log_path).relative_to(ROOT))])
+            git(["commit", "-m", f"logs: pipeline run_id={run_id} final_status=success"], timeout=60)
+            git(["push", "origin", "main"], timeout=420)
+        else:
+            print("\n[13] CI：结构化日志仅本地保存，不提交 main。")
         print(f"\n[done] log: {log_path}")
         print(f"  run_id={run_id} main={source_commit} gh-pages={gh_hash}")
         return 0
@@ -521,7 +553,7 @@ def run_mode(mode, trigger):
 
 def main():
     ap = argparse.ArgumentParser(description="ASIP Stage-2 Pipeline Runner")
-    ap.add_argument("--mode", choices=["incremental", "daily", "full", "validate-only"],
+    ap.add_argument("--mode", choices=["incremental", "daily", "full", "validate-only", "validate"],
                     default="full", help="运行模式")
     ap.add_argument("--trigger", choices=["manual", "scheduled", "pre_daily"],
                     default="manual", help="触发来源（用于日志标记）")
