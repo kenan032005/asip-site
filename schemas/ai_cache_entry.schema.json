@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AI Cache Entry",
+  "description": "Validated AI result cache entry — Stage 2.5C-3",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "cache_key",
+    "cache_key_sha256",
+    "task_type",
+    "content_hash",
+    "prompt_version",
+    "output_schema_version",
+    "prompt_checksum",
+    "render_hash",
+    "prompt_variables_digest",
+    "result",
+    "provenance",
+    "source_task_id",
+    "created_at",
+    "synthetic"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "enum": ["1.0"] },
+    "cache_key": { "type": "string", "minLength": 1 },
+    "cache_key_sha256": { "type": "string", "minLength": 64 },
+    "task_type": { "type": "string", "minLength": 1 },
+    "content_hash": { "type": "string", "minLength": 1 },
+    "prompt_version": { "type": "string" },
+    "output_schema_version": { "type": "string" },
+    "prompt_checksum": { "type": "string" },
+    "render_hash": { "type": "string" },
+    "prompt_variables_digest": { "type": "string" },
+    "result": { "type": "object" },
+    "provenance": { "type": "object" },
+    "source_task_id": { "type": "string" },
+    "created_at": { "type": "string" },
+    "synthetic": { "type": "boolean" }
+  },
+  "additionalProperties": false
+}
