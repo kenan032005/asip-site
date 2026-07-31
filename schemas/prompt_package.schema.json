@@ -18,38 +18,78 @@
     "output_schema_version",
     "output_language",
     "checksum",
-    "description"
+    "description",
+    "untrusted_variables",
+    "untrusted_variables"
   ],
   "properties": {
-    "prompt_id": { "type": "string", "minLength": 1 },
-    "task_type": { "type": "string", "minLength": 1 },
+    "prompt_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "task_type": {
+      "type": "string",
+      "minLength": 1
+    },
     "version": {
       "type": "string",
       "pattern": "^\\d+\\.\\d+\\.\\d+$"
     },
     "status": {
       "type": "string",
-      "enum": ["draft", "active", "deprecated", "disabled"]
+      "enum": [
+        "draft",
+        "active",
+        "deprecated",
+        "disabled"
+      ]
     },
-    "system_template": { "type": "string", "minLength": 1 },
-    "user_template": { "type": "string", "minLength": 1 },
+    "system_template": {
+      "type": "string",
+      "minLength": 1
+    },
+    "user_template": {
+      "type": "string",
+      "minLength": 1
+    },
     "required_variables": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "uniqueItems": true
     },
     "optional_variables": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "uniqueItems": true
     },
-    "output_schema": { "type": "string", "minLength": 1 },
-    "output_schema_version": { "type": "string" },
-    "output_language": { "type": "string", "minLength": 1 },
+    "output_schema": {
+      "type": "string",
+      "minLength": 1
+    },
+    "output_schema_version": {
+      "type": "string"
+    },
+    "output_language": {
+      "type": "string",
+      "minLength": 1
+    },
     "checksum": {
       "type": "string",
       "pattern": "^sha256:[0-9a-f]{64}$"
     },
-    "description": { "type": "string" }
+    "description": {
+      "type": "string"
+    },
+    "untrusted_variables": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    }
   }
 }

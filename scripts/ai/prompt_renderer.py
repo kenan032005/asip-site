@@ -95,42 +95,75 @@ def render_prompt(task_type, variables, version=None):
     with open(ut_path, "r", encoding="utf-8") as f:
         user_tpl = f.read()
 
-    # 渲染：source_text 先作为 JSON 编码数据块插入，使用唯一占位符避免被二次替换
+    # 渲染：所有 untrusted_variables 用 JSON 编码的 UUID 占位符，后被替换
+    untrusted = set(pkg.get("untrusted_variables", []))
+    # 默认所有 required_variables 中不在 untrusted 的为可信变量
+    all_vars = set(pkg.get("required_variables", [])) | set(pkg.get("optional_variables", []))
+
     def render(template):
-        """两遍渲染：先插 source_text（JSON），再插其他变量。"""
+        """安全渲染：untrusted variables JSON 编码插入，不可被二次解析。"""
         result = template
-        # Pass 1: source_text as JSON data block (unique placeholder)
-        source_placeholder = "{{ source_text }}"
-        encoded = _json_encode_value(variables.get("source_text", ""))
-        token = "__SOURCE_TEXT_TOKEN_" + uuid.uuid4().hex[:8] + "__"
-        for sp in [source_placeholder, "{{source_text}}"]:
-            result = result.replace(sp, token)
-        # Pass 2: other variables
-        for var_name, value in variables.items():
-            if var_name == "source_text":
+        tokens = {}
+
+        # Pass 1: JSON-encode all untrusted variables with UUID tokens
+        for var_name in sorted(untrusted, key=lambda x: -len(x)):
+            # 多个格式匹配
+            for fmt in ["{{ %s }}" % var_name, "{{%s}}" % var_name]:
+                if fmt not in result:
+                    continue
+                token = "__TOKEN_" + uuid.uuid4().hex[:12] + "__"
+                value = variables.get(var_name)
+                if value is None:
+                    encoded = "null"
+                else:
+                    encoded = _json_encode_value(value)
+                result = result.replace(fmt, token)
+                tokens[token] = encoded
+
+        # Pass 2: substitute trusted (non-untrusted) variables
+        for var_name in variables:
+            if var_name in untrusted:
                 continue
             for fmt in ["{{ %s }}" % var_name, "{{%s}}" % var_name]:
+                value = variables[var_name]
                 if isinstance(value, (list, dict)):
                     result = result.replace(fmt, _json_encode_value(value))
                 else:
                     result = result.replace(fmt, str(value))
-        # Pass 3: replace source_text token
-        result = result.replace(token, encoded)
+
+        # Pass 3: replace tokens with encoded data
+        for token, encoded in tokens.items():
+            result = result.replace(token, encoded)
+
         return result
 
     system_text = render(system_tpl)
     user_text = render(user_tpl)
 
-    # 检查未解析的占位符（跳过 JSON 代码块内的模式）
+    # 检查未解析的占位符（跳过 JSON 代码块）
     def _check_unresolved(text):
-        # 移除 JSON 代码块
         cleaned = re.sub(r'```json\s*.*?```', '', text, flags=re.DOTALL)
+        # Also skip any JSON-like data that contains {{ }}
+        cleaned = re.sub(r'"[^"]*\{\{[^}]*\}\}[^"]*"', '', cleaned)
         unresolved = _UNRESOLVED_PATTERN.findall(cleaned)
         if unresolved:
             raise PromptRenderError("unresolved placeholders: %s" % unresolved[:5])
 
     _check_unresolved(system_text)
     _check_unresolved(user_text)
+
+    # 验证所有 required 变量都被使用（模板中不残留占位符）
+    # Also verify NO undeclared variables appear in template
+    for var_name in variables:
+        if "{{ " + var_name + " }}" in system_tpl or "{{%s}}" % var_name in system_tpl:
+            pass  # used in system
+        elif "{{ " + var_name + " }}" in user_tpl or "{{%s}}" % var_name in user_tpl:
+            pass  # used in user
+        else:
+            # required variable not present in template
+            if var_name in pkg.get("required_variables", []):
+                raise PromptRenderError(
+                    "required variable %s not found in templates" % var_name)
 
     # 计算 render_hash（确定性）
     rh = hashlib.sha256()

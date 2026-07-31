@@ -1,0 +1,24 @@
+{
+  "prompt_id": "event_synthesis",
+  "task_type": "event_synthesis",
+  "version": "1.0.1",
+  "status": "active",
+  "system_template": "system.md",
+  "user_template": "user.md",
+  "required_variables": [
+    "articles",
+    "country_iso3"
+  ],
+  "optional_variables": [
+    "time_window_hours",
+    "synthetic"
+  ],
+  "output_schema": "schemas/ai_outputs/event_synthesis.v1.1.schema.json",
+  "output_schema_version": "1.1",
+  "output_language": "zh-CN",
+  "description": "Event synthesis: combine multiple articles into one security event analysis",
+  "checksum": "sha256:aa418d4d57d3500e4c3894b9e12ed48b75def8cd201cb445f972d31a227fd3f5",
+  "untrusted_variables": [
+    "articles"
+  ]
+}

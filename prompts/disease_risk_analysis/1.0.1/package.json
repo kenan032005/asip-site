@@ -1,0 +1,25 @@
+{
+  "prompt_id": "disease_risk_analysis",
+  "task_type": "disease_risk_analysis",
+  "version": "1.0.1",
+  "status": "active",
+  "system_template": "system.md",
+  "user_template": "user.md",
+  "required_variables": [
+    "disease_reports",
+    "country_iso3"
+  ],
+  "optional_variables": [
+    "project_sites",
+    "date_range",
+    "synthetic"
+  ],
+  "output_schema": "schemas/ai_outputs/disease_risk_analysis.v1.1.schema.json",
+  "output_schema_version": "1.1",
+  "output_language": "zh-CN",
+  "description": "Disease risk analysis: analyze transmission risk and project impact of a specific disease in a region",
+  "checksum": "sha256:94b40ea7d0e3b2dfb342aa1407efad7cc892073710ebe633b70766560f301cff",
+  "untrusted_variables": [
+    "disease_reports"
+  ]
+}

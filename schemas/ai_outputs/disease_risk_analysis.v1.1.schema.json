@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "disease_name",
+    "affected_countries",
+    "official_source_ids",
+    "reporting_period",
+    "confirmed_case_data",
+    "transmission_assessment",
+    "cross_border_risk",
+    "travel_impact",
+    "project_site_impact",
+    "medical_resource_impact",
+    "recommended_precautions",
+    "information_gaps",
+    "confidence",
+    "synthetic"
+  ],
+  "properties": {
+    "disease_name": {
+      "type": "string"
+    },
+    "affected_countries": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "official_source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reporting_period": {
+      "type": "string"
+    },
+    "confirmed_case_data": {
+      "type": "object"
+    },
+    "transmission_assessment": {
+      "type": "string"
+    },
+    "cross_border_risk": {
+      "type": "string"
+    },
+    "travel_impact": {
+      "type": "string"
+    },
+    "project_site_impact": {
+      "type": "string"
+    },
+    "medical_resource_impact": {
+      "type": "string"
+    },
+    "recommended_precautions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "information_gaps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "synthetic": {
+      "type": "boolean"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "prompt_id": "trend_forecast",
+  "task_type": "trend_forecast",
+  "version": "1.0.1",
+  "status": "active",
+  "system_template": "system.md",
+  "user_template": "user.md",
+  "required_variables": [
+    "historical_events",
+    "geographic_scope"
+  ],
+  "optional_variables": [
+    "forecast_base_time",
+    "synthetic"
+  ],
+  "output_schema": "schemas/ai_outputs/trend_forecast.v1.1.schema.json",
+  "output_schema_version": "1.1",
+  "output_language": "zh-CN",
+  "description": "Trend forecast: predict future security trends based on historical events",
+  "checksum": "sha256:af4476c2e404c9f139ac2901584af9ba5b754de40ab828ee7c442adb713cac71",
+  "untrusted_variables": [
+    "historical_events"
+  ]
+}

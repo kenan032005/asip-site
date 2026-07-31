@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_summary_zh",
+    "country_iso3",
+    "event_type",
+    "timeline",
+    "confirmed_facts",
+    "reported_claims",
+    "contradictions",
+    "unresolved_questions",
+    "affected_locations",
+    "potential_impacts",
+    "confidence",
+    "synthetic"
+  ],
+  "properties": {
+    "event_summary_zh": {
+      "type": "string"
+    },
+    "country_iso3": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 3
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "security_incident",
+        "civil_unrest",
+        "terrorist_attack",
+        "military_activity",
+        "transport_disruption",
+        "road_closure",
+        "border_security",
+        "health_risk",
+        "disease_outbreak",
+        "natural_disaster",
+        "political_crisis",
+        "crime",
+        "kidnapping",
+        "other"
+      ]
+    },
+    "timeline": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "confirmed_facts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reported_claims": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "contradictions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "unresolved_questions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "affected_locations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "potential_impacts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "synthetic": {
+      "type": "boolean"
+    }
+  }
+}

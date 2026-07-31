@@ -1,0 +1,27 @@
+{
+  "prompt_id": "article_analysis",
+  "task_type": "article_analysis",
+  "version": "1.0.1",
+  "status": "active",
+  "system_template": "system.md",
+  "user_template": "user.md",
+  "required_variables": [
+    "source_text",
+    "country_iso3",
+    "source_language"
+  ],
+  "optional_variables": [
+    "source_date",
+    "source_url",
+    "source_name",
+    "synthetic"
+  ],
+  "output_schema": "schemas/ai_outputs/article_analysis.v1.1.schema.json",
+  "output_schema_version": "1.1",
+  "output_language": "zh-CN",
+  "description": "Security event article analysis: extract structured info from a safety-related article",
+  "checksum": "sha256:34b550e99ca829b7597c808e3c8ac16b8e1161a43691b26f292c691183f4ab2b",
+  "untrusted_variables": [
+    "source_text"
+  ]
+}

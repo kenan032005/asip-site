@@ -1,0 +1,25 @@
+{
+  "prompt_id": "daily_security_brief",
+  "task_type": "daily_security_brief",
+  "version": "1.0.1",
+  "status": "active",
+  "system_template": "system.md",
+  "user_template": "user.md",
+  "required_variables": [
+    "report_date",
+    "events",
+    "geographic_scope"
+  ],
+  "optional_variables": [
+    "previous_brief_id",
+    "synthetic"
+  ],
+  "output_schema": "schemas/ai_outputs/daily_security_brief.v1.1.schema.json",
+  "output_schema_version": "1.1",
+  "output_language": "zh-CN",
+  "description": "Daily security brief: summary and risk assessment of daily security events",
+  "checksum": "sha256:1d5db14e7f8808362cfe258f5ab28501d55294625ed9b095e28a9e43741e00b3",
+  "untrusted_variables": [
+    "events"
+  ]
+}
