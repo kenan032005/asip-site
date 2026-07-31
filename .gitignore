@@ -23,8 +23,8 @@ logs_collect.txt
 # 临时探针文件（非仓库内容）
 .tool_probe.tmp
 
-# PAT 无 workflow scope，Actions 文件暂不入库（本地保留，需手动上传或换带 workflow scope 的 PAT）
-.github/workflows/
+# 注意：.github/workflows/ 必须入库，GitHub Actions 才能运行。
+# 推送需带 workflow scope 的令牌（gh auth login 或具 workflow 权限的 PAT）。
 
 # 运行锁（本地运行时状态，绝不入库）
 data/.pipeline.lock
