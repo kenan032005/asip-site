@@ -10,6 +10,7 @@ REPO = os.path.dirname(SCRIPTS)
 
 from ai.workbuddy_worker import claim_batch, ingest_results, _ensure_dirs
 from ai.task_prompt_binding import bind_task_to_prompt
+from ai.ai_result_cache import set_ai_root
 
 def _write_json(p, o):
     os.makedirs(os.path.dirname(p), exist_ok=True)
@@ -20,6 +21,7 @@ def _read_json(p):
 def _setup():
     r = tempfile.mkdtemp(prefix="c2b_e2e_")
     _ensure_dirs(r)
+    set_ai_root(r)
     return r
 
 _VALID_AA = {"summary_zh":"x","country_iso3":"NER","source_language":"en",
