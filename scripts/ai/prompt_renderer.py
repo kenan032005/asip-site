@@ -175,17 +175,17 @@ def render_prompt(task_type, variables, version=None):
     _check_unresolved(user_text)
 
     # 验证所有 required 变量都被使用（模板中不残留占位符）
-    # Also verify NO undeclared variables appear in template
-    for var_name in variables:
-        if "{{ " + var_name + " }}" in system_tpl or "{{%s}}" % var_name in system_tpl:
-            pass  # used in system
-        elif "{{ " + var_name + " }}" in user_tpl or "{{%s}}" % var_name in user_tpl:
-            pass  # used in user
-        else:
-            # required variable not present in template
-            if var_name in pkg.get("required_variables", []):
-                raise PromptRenderError(
-                    "required variable %s not found in templates" % var_name)
+    # 2.5C-1F: skip for legacy mode (old templates use different variable names)
+    if not legacy_safe_mode:
+        for var_name in variables:
+            if "{{ " + var_name + " }}" in system_tpl or "{{%s}}" % var_name in system_tpl:
+                pass
+            elif "{{ " + var_name + " }}" in user_tpl or "{{%s}}" % var_name in user_tpl:
+                pass
+            else:
+                if var_name in pkg.get("required_variables", []):
+                    raise PromptRenderError(
+                        "required variable %s not found in templates" % var_name)
 
     # 计算 render_hash（确定性）
     rh = hashlib.sha256()
