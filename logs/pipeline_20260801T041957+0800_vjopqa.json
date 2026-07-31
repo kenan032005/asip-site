@@ -1,0 +1,179 @@
+{
+  "pipeline_version": 2,
+  "run_id": "20260801T041957+0800_vjopqa",
+  "trigger": "manual",
+  "started_at": "2026-08-01T04:19:57.129458+08:00",
+  "steps": [
+    {
+      "name": "git_pull",
+      "status": "success",
+      "started_at": "2026-08-01T04:20:00.775539+08:00",
+      "completed_at": "2026-08-01T04:20:00.775553+08:00",
+      "details": {
+        "output": "Current branch main is up to date.",
+        "error": "From https://github.com/<user>032005/asip-site\n * branch            main       -> FETCH_HEAD"
+      }
+    },
+    {
+      "name": "unit_tests",
+      "status": "success",
+      "started_at": "2026-08-01T04:24:21.917368+08:00",
+      "completed_at": "2026-08-01T04:24:21.917387+08:00",
+      "details": {
+        "output": "stage25c1_hardening.py] rc=0 ction_not_in_system (__main__.TestH7toH8.test_injection_not_in_system) ... ok\n\n----------------------------------------------------------------------\nRan 21 tests in 0.310s\n\nOK\n\nRESULT: PASS=21 FAIL=0\n[test_stage25c1_final_closeout.py] rc=0  (__main__.TestF9_RealOutputSchemaAbs.test_abs_output_schema_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 1.710s\n\nOK\n\nRESULT: PASS=13 FAIL=0\n[test_stage25c2a_prompt_binding.py] rc=0 prompts)\nB18: Valid claim generates prompt files and manifest entries. ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 3.822s\n\nOK\n\nRESULT: PASS=13 FAIL=0\n[test_stage25c2b_result_validation.py] rc=0 ovenance (__main__.TestE2E.test_valid_result_completes_with_provenance) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 18.194s\n\nOK\n\nRESULT: PASS=9 FAIL=0\n[test_stage25c3_cache_writeback.py] rc=0  (__main__.TestWriteback.test_writeback_validation_rejects_bad_target) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 3.245s\n\nOK\n\nRESULT: PASS=11 FAIL=0\n"
+      }
+    },
+    {
+      "name": "ai_runtime_config_valid",
+      "status": "success",
+      "started_at": "2026-08-01T04:24:21.919952+08:00",
+      "completed_at": "2026-08-01T04:24:21.919965+08:00",
+      "details": {
+        "expected": "workbuddy_local / workbuddy_queue / ai_processing_enabled=false / allow_paid_fallback=false"
+      }
+    },
+    {
+      "name": "ai_schema_valid",
+      "status": "success",
+      "started_at": "2026-08-01T04:24:21.919971+08:00",
+      "completed_at": "2026-08-01T04:24:21.919974+08:00",
+      "details": {
+        "schemas": [
+          "runtime_config",
+          "ai_task",
+          "ai_result"
+        ]
+      }
+    },
+    {
+      "name": "publication_semantics",
+      "status": "success",
+      "started_at": "2026-08-01T04:24:22.854276+08:00",
+      "completed_at": "2026-08-01T04:24:22.854296+08:00",
+      "details": {
+        "output": "[semantics] clusters=143 历史保留=143 当前政策通过=0\n[semantics] 风险等级修正=0 语义字段变更=0\n[semantics] 导出：legacy_events=143 published=143",
+        "error": "31T234548.bak\", \"reason\": \"windows-sandbox-recycle-bin-unavailable\"}\n[safe-delete][SAFE_DELETE_FAIL_CLOSED] {\"target\": \"<repo>\\\\data\\\\public\\\\.backups\\\\current_metrics.json.20260731T234548.bak\", \"reason\": \"windows-sandbox-recycle-bin-unavailable\"}"
+      }
+    },
+    {
+      "name": "build_summary",
+      "status": "success",
+      "started_at": "2026-08-01T04:24:23.400869+08:00",
+      "completed_at": "2026-08-01T04:24:23.400887+08:00",
+      "details": {
+        "output": "ary] run_id=20260801T041957+0800_vjopqa pipeline_version=2\n  public events: 143, pending_articles: 21, quarantine: 53, sources: 93\n  统计: 24h=0 7d=0 chad24h=0 niger24h=0 current=0 历史保留=143\n  信源: configured=93 enabled=91 success_last_run=0 rate_limited=0\n  status.json: 24h=0, 7d=0, src_success_last_run=0\n  latest-summary.json: 24h=0, 7d=0, risk_countries=15\n\nDone. run_id: 20260801T041957+0800_vjopqa"
+      }
+    },
+    {
+      "name": "generate_reports",
+      "status": "success",
+      "started_at": "2026-08-01T04:24:24.099525+08:00",
+      "completed_at": "2026-08-01T04:24:24.099541+08:00",
+      "details": {
+        "output": "[generate_reports] 自动目标日期=2026-07-31（当前北京时间 04:24:23）\n日报日期（北京）： 2026-07-31 窗口： 2026-07-30 22:00:00 → 2026-07-31 22:00:00\n  [生成] 乍得 新增= 0 持续跟踪= 0\n  [生成] 尼日尔 新增= 0 持续跟踪= 0\n  [生成] 贝宁 新增= 0 持续跟踪= 0\n  [生成] 南苏丹 新增= 0 持续跟踪= 0\n  [生成] 苏丹 新增= 0 持续跟踪= 0\n  [生成] 埃塞俄比亚 新增= 0 持续跟踪= 0\n✅ 日报已生成（目标日期 2026-07-31，窗口 2026-07-30 22:00:00 → 2026-07-31 22:00:00）"
+      }
+    },
+    {
+      "name": "build_site_pre",
+      "status": "success",
+      "started_at": "2026-08-01T04:24:24.988247+08:00",
+      "completed_at": "2026-08-01T04:24:24.988265+08:00",
+      "details": {
+        "output": "[build_site] run_id=20260801T041957+0800_vjopqa pipeline_version=2\n[build_site] build_time=2026-08-01 04:24:24\n构建完成 -> dist\n  HTML: 9 个页面\n  ASIP_BUILD_META: 已注入\n  内联数据快照: True\n  run_id: 20260801T041957+0800_vjopqa",
+        "error": ""
+      }
+    },
+    {
+      "name": "validate_stage2",
+      "status": "success",
+      "started_at": "2026-08-01T04:24:26.267354+08:00",
+      "completed_at": "2026-08-01T04:24:26.267370+08:00",
+      "details": {
+        "output": "跟踪时给出说明\n✅ [S46] 日报 new/ongoing 不含历史迁移保留事件\n✅ [S47] dist/data 不含 canonical/backup 及 legacy_payload\n✅ [S48] current_metrics.publishable_clusters(0) == current_policy_passed_events(0)\n✅ [S49] 首页/最新事件/国家页当前模块以 Public/published_events 为唯一数据源，不读取 Legacy events.json\n✅ [S50] status.json 区分 reports_today 与 latest_report_count/latest_report_date（当前生成数 vs 可访问最新日报数）\n✅ [S51] current_metrics(0) == published_events 经准入过滤数(0) == current_policy_passed(0)\n✅ [S52] 当前公开事件为 0 时 latest-summary 当前三数组为空（无 Legacy 回填路径）\n✅ [S53] README 文档化前端隔离（isCurrentPublicEvent / public/published_events），无旧主架构混淆表述\n✅ [S54] dist 构建产物三 HTML 同样不含 Legacy events 直接读取（如已构建）\n============================================================\nStage-2 校验：PASS=54  FAIL=0  WARN=0  （共 54 项）\n============================================================"
+      }
+    },
+    {
+      "name": "validate_source",
+      "status": "success",
+      "started_at": "2026-08-01T04:24:26.768634+08:00",
+      "completed_at": "2026-08-01T04:24:26.768653+08:00",
+      "details": {
+        "output": "京22:00、长度24h、结束不晚于生成时间、文件名一致；legacy 报告已跳过）\nℹ [V11~V13,V15] stage=source：dist 尚未构建，跳过 dist 相关校验\n✅ [V14-future] 无未来时间事件\n✅ [V16-summary-trace] latest-summary 的 0 个事件均为 current_policy_passed 且可追溯（历史迁移保留事件已隔离到历史归档）\n✅ [V18-report-policy] 日报 new/ongoing 均为 current_policy_passed 且不含历史迁移事件\n✅ [V18-report-count] 日报 new/ongoing 数量与数组长度一致\n✅ [V19-metrics] current_metrics.publishable_clusters == current_policy_passed_events\n✅ [V17-canonical] canonical clusters=143 与 legacy events=143 一致，且 events.json 为单向生成视图\n\n============================================================\n校验结果: 1 个问题, 0 个严重错误\n✅ 所有关键检查通过。可以继续部署。"
+      }
+    },
+    {
+      "name": "git_commit_data",
+      "status": "success",
+      "started_at": "2026-08-01T04:24:29.190143+08:00",
+      "completed_at": "2026-08-01T04:24:29.190155+08:00",
+      "details": {
+        "commit": "66cdb2e73a235f4a4bef4f748b0ef90ef2c83496",
+        "error": ""
+      }
+    },
+    {
+      "name": "build_site",
+      "status": "success",
+      "started_at": "2026-08-01T04:24:31.902935+08:00",
+      "completed_at": "2026-08-01T04:24:31.902953+08:00",
+      "details": {
+        "output": "[build_site] run_id=20260801T041957+0800_vjopqa pipeline_version=2\n[build_site] build_time=2026-08-01 04:24:31\n构建完成 -> dist\n  HTML: 9 个页面\n  ASIP_BUILD_META: 已注入\n  内联数据快照: True\n  run_id: 20260801T041957+0800_vjopqa",
+        "error": ""
+      }
+    },
+    {
+      "name": "validate_dist",
+      "status": "success",
+      "started_at": "2026-08-01T04:24:33.231152+08:00",
+      "completed_at": "2026-08-01T04:24:33.231171+08:00",
+      "details": {
+        "output": "[V12-dist-rid] dist.run_id matches data: 20260801T041957+0800_vjopqa\n✅ [V13-count] 事件数量一致: 143\n✅ [V14-future] 无未来时间事件\n✅ [V16-summary-trace] latest-summary 的 0 个事件均为 current_policy_passed 且可追溯（历史迁移保留事件已隔离到历史归档）\n✅ [V18-report-policy] 日报 new/ongoing 均为 current_policy_passed 且不含历史迁移事件\n✅ [V18-report-count] 日报 new/ongoing 数量与数组长度一致\n✅ [V19-metrics] current_metrics.publishable_clusters == current_policy_passed_events\n✅ [V17-canonical] canonical clusters=143 与 legacy events=143 一致，且 events.json 为单向生成视图\n\n============================================================\n校验结果: 1 个问题, 0 个严重错误\n✅ 所有关键检查通过。可以继续部署。"
+      }
+    },
+    {
+      "name": "git_push_main",
+      "status": "success",
+      "started_at": "2026-08-01T04:24:38.674119+08:00",
+      "completed_at": "2026-08-01T04:24:38.674134+08:00",
+      "details": {
+        "output": ""
+      }
+    },
+    {
+      "name": "deploy_gh_pages",
+      "status": "success",
+      "started_at": "2026-08-01T04:24:45.456447+08:00",
+      "completed_at": "2026-08-01T04:24:45.456460+08:00",
+      "details": {
+        "commit": "fd91f53ebe8497a36edd66b6182a0e25240cf74a",
+        "error": ""
+      }
+    },
+    {
+      "name": "online_verify",
+      "status": "success",
+      "started_at": "2026-08-01T04:27:03.733154+08:00",
+      "completed_at": "2026-08-01T04:27:03.733157+08:00",
+      "details": {
+        "online_run_id": "20260801T041957+0800_vjopqa",
+        "pipeline_version": 2,
+        "last_updated_beijing": "2026-08-01 04:24:23",
+        "events_24h": 0,
+        "http": 200,
+        "verified_at": "2026-08-01T04:27:03.733126+08:00"
+      }
+    }
+  ],
+  "main_commit": "ec3f5586df35a688b90e90b326fc2c0baaa362f9",
+  "gh_pages_commit": "fd91f53ebe8497a36edd66b6182a0e25240cf74a",
+  "online_run_id": "20260801T041957+0800_vjopqa",
+  "online_verified_at": "2026-08-01T04:27:03.733126+08:00",
+  "final_status": "success",
+  "ai_worker_protocol_valid": true,
+  "ai_queue_depth": 0,
+  "ai_processing_count": 0,
+  "ai_expired_lease_count": 0,
+  "deploy_completed_at": "2026-08-01T04:24:45.456468+08:00",
+  "deployment_commit": "fd91f53ebe8497a36edd66b6182a0e25240cf74a",
+  "completed_at": "2026-08-01T04:27:03.733197+08:00"
+}
