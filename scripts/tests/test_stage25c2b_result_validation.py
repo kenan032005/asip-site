@@ -91,12 +91,11 @@ class TestResultValidation(unittest.TestCase):
                 "started_at": "2026-08-01T00:01:00Z",
                 "completed_at": "2026-08-01T00:02:00Z",
                 "usage": {"input_tokens": 0, "output_tokens": 0, "estimated_cost_usd": 0},
+                "error": None if status == "success" else {"code": "e", "message": "x"},
             }]
         }
         if result is not None:
             res["results"][0]["result"] = result
-        if status == "failed":
-            res["results"][0]["error"] = {"code": "test_error", "message": "test"}
         return res
 
     def _valid_aa_output(self):
