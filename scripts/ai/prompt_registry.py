@@ -19,6 +19,7 @@ PROMPTS_DIR = os.path.join(REPO_ROOT, "prompts")
 REGISTRY_PATH = os.path.join(PROMPTS_DIR, "registry.json")
 PACKAGE_SCHEMA_PATH = os.path.join(REPO_ROOT, "schemas",
                                     "prompt_package.schema.json")
+SCHEMAS_OUTPUT_DIR = os.path.join(REPO_ROOT, "schemas", "ai_outputs")
 DEFAULT_SEMVER_PATTERN = r"^\d+\.\d+\.\d+$"
 
 
@@ -62,8 +63,11 @@ def resolve_confined_path(base_dir, relative_path, allowed_root,
     return full
 
 
-def _validate_package(pkg, task_type, version_dir, strict_schema=True):
-    """验证 package.json 符合契约（含 Schema 校验）。"""
+def _validate_package(pkg, task_type, version_dir, strict_schema=True,
+                      _output_schema_root=None):
+    """验证 package.json 符合契约（含 Schema 校验）。
+
+    _output_schema_root: override for testing (default: SCHEMAS_OUTPUT_DIR)."""
     errors = []
     # 使用 prompt_package.schema.json 校验（仅当 strict_schema）
     if strict_schema and os.path.exists(PACKAGE_SCHEMA_PATH):
@@ -101,24 +105,26 @@ def _validate_package(pkg, task_type, version_dir, strict_schema=True):
         elif v not in allowed_vars:
             errors.append(
                 "untrusted_variables[%d]: '%s' not in required/optional" % (i, v))
-    # templates exist (safe path check)
+    # templates exist (safe path check — allowed_root=version_dir)
     st = pkg.get("system_template")
     ut_tmpl = pkg.get("user_template")
     if st:
         try:
-            resolve_confined_path(version_dir, st, REPO_ROOT, must_exist=True)
+            resolve_confined_path(version_dir, st, version_dir, must_exist=True)
         except PromptRegistryError as e:
             errors.append("system_template: %s" % e)
     if ut_tmpl:
         try:
-            resolve_confined_path(version_dir, ut_tmpl, REPO_ROOT, must_exist=True)
+            resolve_confined_path(version_dir, ut_tmpl, version_dir, must_exist=True)
         except PromptRegistryError as e:
             errors.append("user_template: %s" % e)
-    # output schema exists (safe path)
+    # output schema exists (safe path — allowed_root=schemas/ai_outputs/)
     os_path = pkg.get("output_schema")
     if os_path:
+        schema_root = _output_schema_root or SCHEMAS_OUTPUT_DIR
         try:
-            resolve_confined_path(REPO_ROOT, os_path, REPO_ROOT, must_exist=True)
+            resolve_confined_path(REPO_ROOT, os_path,
+                                  schema_root, must_exist=True)
         except PromptRegistryError as e:
             errors.append("output_schema: %s" % e)
     # required_variables unique
@@ -148,21 +154,24 @@ def compute_checksum(pkg, task_type, version_dir):
         m.update(json.dumps(pkg_meta[k], ensure_ascii=False,
                             sort_keys=True).encode("utf-8"))
 
-    # system.md
+    # system.md (安全路径解析)
     st = pkg.get("system_template")
     if st:
-        with open(os.path.join(version_dir, st), "r", encoding="utf-8") as f:
+        st_path = resolve_confined_path(version_dir, st, version_dir, must_exist=True)
+        with open(str(st_path), "r", encoding="utf-8") as f:
             m.update(f.read().encode("utf-8"))
     # user.md
     ut = pkg.get("user_template")
     if ut:
-        with open(os.path.join(version_dir, ut), "r", encoding="utf-8") as f:
+        ut_path = resolve_confined_path(version_dir, ut, version_dir, must_exist=True)
+        with open(str(ut_path), "r", encoding="utf-8") as f:
             m.update(f.read().encode("utf-8"))
-    # output schema (normalized)
+    # output schema (normalized) — must be under schemas/ai_outputs/
     os_path = pkg.get("output_schema")
     if os_path:
-        schema_path = os.path.join(REPO_ROOT, os_path)
-        with open(schema_path, "r", encoding="utf-8") as f:
+        schema_path = resolve_confined_path(REPO_ROOT, os_path,
+                                            SCHEMAS_OUTPUT_DIR, must_exist=True)
+        with open(str(schema_path), "r", encoding="utf-8") as f:
             sc = json.load(f)
         m.update(json.dumps(sc, ensure_ascii=False,
                             sort_keys=True).encode("utf-8"))

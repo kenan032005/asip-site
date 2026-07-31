@@ -7,7 +7,10 @@ Distinguishes prompt_version from output_schema_version.
 
 import os
 import json
-from .prompt_registry import get_prompt_package, PromptRegistryError
+from .prompt_registry import (
+    get_prompt_package, resolve_confined_path,
+    SCHEMAS_OUTPUT_DIR, REPO_ROOT, PromptRegistryError,
+)
 from .schema_validation import validate_against_schema
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -43,11 +46,9 @@ def get_output_schema(task_type, prompt_version=None,
     if not schema_path:
         raise OutputContractError("no output_schema defined for %s" % task_type)
 
-    full_path = os.path.join(REPO_ROOT, schema_path)
-    if not os.path.exists(full_path):
-        raise OutputContractError("output schema not found: %s" % schema_path)
-
-    with open(full_path, "r", encoding="utf-8") as f:
+    full_path = resolve_confined_path(REPO_ROOT, schema_path,
+                                      SCHEMAS_OUTPUT_DIR, must_exist=True)
+    with open(str(full_path), "r", encoding="utf-8") as f:
         return json.load(f)
 
 

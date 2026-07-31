@@ -10,7 +10,9 @@ import json
 import uuid
 import hashlib
 import re
-from .prompt_registry import get_prompt_package, PromptRegistryError
+from .prompt_registry import (
+    get_prompt_package, resolve_confined_path, PromptRegistryError,
+)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.dirname(os.path.dirname(HERE))
@@ -88,15 +90,15 @@ def render_prompt(task_type, variables, version=None):
 
     ver_dir = os.path.join(PROMPTS_DIR, task_type, pkg["version"])
 
-    # 读取模板
-    st_path = os.path.join(ver_dir, pkg["system_template"])
-    ut_path = os.path.join(ver_dir, pkg["user_template"])
-    _check_no_traversal(ver_dir, pkg["system_template"])
-    _check_no_traversal(ver_dir, pkg["user_template"])
+    # 读取模板（安全路径解析 — allowed_root=ver_dir）
+    st_path = resolve_confined_path(ver_dir, pkg["system_template"],
+                                    ver_dir, must_exist=True)
+    ut_path = resolve_confined_path(ver_dir, pkg["user_template"],
+                                    ver_dir, must_exist=True)
 
-    with open(st_path, "r", encoding="utf-8") as f:
+    with open(str(st_path), "r", encoding="utf-8") as f:
         system_tpl = f.read()
-    with open(ut_path, "r", encoding="utf-8") as f:
+    with open(str(ut_path), "r", encoding="utf-8") as f:
         user_tpl = f.read()
 
     # 渲染：所有 untrusted_variables 用 JSON 编码的 UUID 占位符，后被替换
