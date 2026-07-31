@@ -25,6 +25,9 @@ logs_collect.txt
 
 # 注意：.github/workflows/ 必须入库，GitHub Actions 才能运行。
 # 推送需带 workflow scope 的令牌（gh auth login 或具 workflow 权限的 PAT）。
+# 本次收口仅纳入 asip-pipeline.yml；以下两个本地工作流非本阶段内容，暂不入库。
+.github/workflows/auto-update.yml
+.github/workflows/deploy.yml
 
 # 运行锁（本地运行时状态，绝不入库）
 data/.pipeline.lock
