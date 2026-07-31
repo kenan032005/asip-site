@@ -35,7 +35,7 @@ if _SCRIPTS not in sys.path:
 
 from ai.contracts import validate_ai_result  # noqa: E402
 from ai.exceptions import TaskStateError  # noqa: E402
-from ai.workbuddy_queue_provider import move_task, AI_ROOT  # noqa: E402
+from ai.workbuddy_queue_provider import move_task, reconcile_task_state, AI_ROOT  # noqa: E402
 from pipeline_core import sanitize_log_value  # noqa: E402   # 2.5B-1H: 审计脱敏
 
 DEFAULT_LEASE_MINUTES = 30
@@ -196,6 +196,62 @@ def status_summary(ai_root=AI_ROOT):
     out["corrupt_leases"] = corrupt
     out["batches"] = sum(1 for d in os.listdir(os.path.join(ai_root, "batches"))
                          if os.path.isdir(os.path.join(ai_root, "batches", d)))
+
+    # 2.5B-2B-R: 中断恢复状态字段
+    completed_ids = set()
+    for fn in os.listdir(os.path.join(ai_root, "completed")):
+        if fn.endswith(".json"):
+            completed_ids.add(fn[:-5])
+    failed_ids = set()
+    for fn in os.listdir(os.path.join(ai_root, "failed")):
+        if fn.endswith(".json"):
+            failed_ids.add(fn[:-5])
+
+    orphan_processing = 0
+    duplicate_state = 0
+    state_conflicts = 0
+
+    # 检查 completed 对应的 processing 残留
+    for tid in completed_ids:
+        if os.path.exists(os.path.join(ai_root, "processing", "%s.json" % tid)):
+            orphan_processing += 1
+    # 检查 failed 对应的 processing 残留
+    for tid in failed_ids:
+        if os.path.exists(os.path.join(ai_root, "processing", "%s.json" % tid)):
+            orphan_processing += 1
+
+    # completed + failed 并存 = state conflict
+    state_conflicts = len(completed_ids & failed_ids)
+
+    # 任一 task 在多个状态目录存在 → duplicate
+    all_ids = {}
+    for st_dir in ("queue", "processing", "completed", "failed"):
+        d = os.path.join(ai_root, st_dir)
+        if not os.path.isdir(d):
+            continue
+        for fn in os.listdir(d):
+            if fn.endswith(".json"):
+                tid = fn[:-5]
+                all_ids.setdefault(tid, []).append(st_dir)
+    for tid, states in all_ids.items():
+        if len(states) > 1:
+            duplicate_state += 1
+
+    # orphan lease：有 lease 但对应任务在 completed/failed
+    orphan_lease = 0
+    lease_tids = set()
+    for fn in os.listdir(lease_dir):
+        if fn.endswith(".json"):
+            lease_tids.add(fn[:-5])
+    for tid in lease_tids:
+        if tid in completed_ids or tid in failed_ids:
+            orphan_lease += 1
+
+    out["duplicate_state_task_count"] = duplicate_state
+    out["orphan_processing_count"] = orphan_processing
+    out["orphan_lease_count"] = orphan_lease
+    out["state_conflict_count"] = state_conflicts
+
     return out
 
 
@@ -662,14 +718,54 @@ def ingest_results(ai_root, batch_id, result_file, allow_expired=False):
             report["rejected_task_ids"].append(tid)
             continue
 
-        # 幂等检查
+        # 幂等检查 + 2.5B-2B-R: 中断状态对账
         comp_path = os.path.join(ai_root, "completed", "%s.json" % tid)
         fail_path = os.path.join(ai_root, "failed", "%s.json" % tid)
-        if os.path.exists(comp_path):
-            entry["outcome"] = "idempotent_success"
-            continue
-        if os.path.exists(fail_path):
-            entry["outcome"] = "idempotent_failed"
+
+        if os.path.exists(comp_path) or os.path.exists(fail_path):
+            rec = reconcile_task_state(
+                tid, ai_root=ai_root,
+                batch_id=batch_id, worker_id=manifest_worker,
+                dry_run=False)
+            if rec["conflicts"]:
+                entry["outcome"] = "rejected_state_conflict"
+                entry["reasons"] = rec["conflicts"]
+                report["rejected"] += 1
+                report["rejected_task_ids"].append(tid)
+                audit(ai_root, "task_state_conflict", task_id=tid,
+                      batch_id=batch_id,
+                      states_found=",".join(rec["states_found"]),
+                      authoritative_state=rec["authoritative_state"],
+                      conflict="; ".join(rec["conflicts"]))
+                continue
+            if rec["reconciled"]:
+                if os.path.exists(comp_path):
+                    entry["outcome"] = "idempotent_success_reconciled"
+                else:
+                    entry["outcome"] = "idempotent_failed_reconciled"
+                entry["actions"] = rec["actions"]
+                report.setdefault("reconciled", True)
+                report.setdefault("reconciled_actions", [])
+                report["reconciled_actions"].extend(
+                    {"task_id": tid, "action": a} for a in rec["actions"])
+                audit(ai_root, "task_state_reconciled", task_id=tid,
+                      batch_id=batch_id,
+                      states_found=",".join(rec["states_found"]),
+                      authoritative_state=rec["authoritative_state"],
+                      actions="; ".join(rec["actions"]))
+                for a in rec["actions"]:
+                    if a == "removed_processing":
+                        audit(ai_root, "orphan_processing_removed",
+                              task_id=tid, batch_id=batch_id)
+                    elif a == "removed_lease":
+                        audit(ai_root, "orphan_lease_removed",
+                              task_id=tid, batch_id=batch_id)
+                continue
+            # 无冲突也无自动清理（已完成/失败的正常幂等）
+            if os.path.exists(comp_path):
+                entry["outcome"] = "idempotent_success"
+            else:
+                entry["outcome"] = "idempotent_failed"
             continue
 
         # 2.5B-1H：统一租约校验
@@ -772,6 +868,75 @@ def ingest_results(ai_root, batch_id, result_file, allow_expired=False):
 
 
 # ── recover-expired：过期租约恢复 ──
+
+# ── Stage 2.5B-2B-R: reconcile — 中断恢复对账 ──
+
+def reconcile_batch(ai_root=AI_ROOT, dry_run=False, batch_id=None,
+                    worker_id=None):
+    """扫描所有状态目录中的任务，对账并安全清理冲突残留。
+
+    - dry_run: 仅报告不修改
+    - apply: 执行安全清理（仅匹配身份的 completed/failed 权威 + 清理残留）
+    - 硬冲突不自动处理
+    """
+    _ensure_dirs(ai_root)
+    report = {
+        "scanned": 0,
+        "clean": 0,
+        "reconciled": 0,
+        "conflicts": 0,
+        "actions": [],
+    }
+    # 收集所有 task_id
+    all_tids = set()
+    for st_dir in ("queue", "processing", "completed", "failed"):
+        d = os.path.join(ai_root, st_dir)
+        if not os.path.isdir(d):
+            continue
+        for fn in os.listdir(d):
+            if fn.endswith(".json"):
+                all_tids.add(fn[:-5])
+    lease_dir = os.path.join(ai_root, "leases")
+    if os.path.isdir(lease_dir):
+        for fn in os.listdir(lease_dir):
+            if fn.endswith(".json"):
+                all_tids.add(fn[:-5])
+
+    if not all_tids:
+        return report
+
+    for tid in sorted(all_tids):
+        report["scanned"] += 1
+        rec = reconcile_task_state(
+            tid, ai_root=ai_root,
+            batch_id=batch_id, worker_id=worker_id,
+            dry_run=dry_run)
+        if rec["conflicts"]:
+            report["conflicts"] += 1
+            report["actions"].append({
+                "task_id": tid,
+                "states": rec["states_found"],
+                "conflicts": rec["conflicts"],
+            })
+        elif rec["reconciled"]:
+            report["reconciled"] += 1
+            report["actions"].append({
+                "task_id": tid,
+                "states": rec["states_found"],
+                "authoritative": rec["authoritative_state"],
+                "actions": rec["actions"],
+            })
+            if not dry_run:
+                audit(ai_root, "task_state_reconciled",
+                      task_id=tid,
+                      states_found=",".join(rec["states_found"]),
+                      authoritative_state=rec["authoritative_state"],
+                      actions="; ".join(rec["actions"]))
+        elif len(rec["states_found"]) == 1:
+            report["clean"] += 1
+
+    return report
+
 
 def recover_expired(ai_root=AI_ROOT, dry_run=False):
     """扫描过期 lease：retry_count+1 后重新入队或永久失败；不产生新 task_id。"""
@@ -922,6 +1087,18 @@ def main(argv=None):
     h.add_argument("--worker-id", required=True)
     h.add_argument("--extend-minutes", type=int, default=DEFAULT_LEASE_MINUTES)
 
+    # 2.5B-2B-R: reconcile 对账命令
+    rec_cmd = sub.add_parser("reconcile", parents=[pp])
+    rec_mode = rec_cmd.add_mutually_exclusive_group(required=True)
+    rec_mode.add_argument("--dry-run", action="store_true",
+                          help="report only, no changes")
+    rec_mode.add_argument("--apply", action="store_true",
+                          help="execute safe cleanups")
+    rec_cmd.add_argument("--batch-id", default=None,
+                         help="batch_id for lease matching")
+    rec_cmd.add_argument("--worker-id", default=None,
+                         help="worker_id for lease matching")
+
     try:
         args = ap.parse_args(argv)
         root = args.ai_root
@@ -951,10 +1128,15 @@ def main(argv=None):
             # 2.5B-2A：CLI 退出码语义
             #  - 结构性错误（manifest/结果文件缺失、worker 不匹配等）→ 非0
             #  - 全部被拒（accepted=0 且 rejected>0）→ 非0
+            #  - 存在任务状态冲突 → 非0
             #  - 部分接受 / 全部幂等（accepted=0 但 rejected=0，无错误）→ 0
             if rep.get("error"):
                 return 1
-            if rep.get("accepted", 0) == 0 and rep.get("rejected", 0) > 0:
+            has_conflict = any(
+                t.get("outcome") == "rejected_state_conflict"
+                for t in rep.get("tasks", []))
+            if rep.get("accepted", 0) == 0 and (rep.get("rejected", 0) > 0
+                                                   or has_conflict):
                 return 1
             return 0
         elif args.cmd == "recover-expired":
@@ -966,6 +1148,16 @@ def main(argv=None):
         elif args.cmd == "heartbeat":
             _print(heartbeat_batch(root, args.batch_id, args.worker_id,
                                    extend_minutes=args.extend_minutes))
+            return 0
+        elif args.cmd == "reconcile":
+            dry_run = getattr(args, "dry_run", False)
+            rep = reconcile_batch(
+                root, dry_run=dry_run,
+                batch_id=args.batch_id, worker_id=args.worker_id)
+            _print(rep)
+            # 存在未解决冲突时 CLI 返回非零
+            if rep.get("conflicts", 0) > 0:
+                return 1
             return 0
         return 0
     except SystemExit:

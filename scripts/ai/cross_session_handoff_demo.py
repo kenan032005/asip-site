@@ -432,6 +432,16 @@ def verify(ai_root=DEFAULT_AI_ROOT, consumer_session_id=None):
     add(st.get("completed", 0) == 2, "completed", st.get("completed"))
     add(st.get("leases", 0) == 0, "leases", st.get("leases"))
 
+    # 2.5B-2B-R: 中断残留检查
+    add(st.get("duplicate_state_task_count", 0) == 0,
+        "duplicate_state_tasks", st.get("duplicate_state_task_count"))
+    add(st.get("orphan_processing_count", 0) == 0,
+        "orphan_processing", st.get("orphan_processing_count"))
+    add(st.get("orphan_lease_count", 0) == 0,
+        "orphan_leases", st.get("orphan_lease_count"))
+    add(st.get("state_conflict_count", 0) == 0,
+        "state_conflicts", st.get("state_conflict_count"))
+
     # task_id 不变 + 无重复
     comp_dir = os.path.join(ai_root, "completed")
     completed_ids = []

@@ -433,4 +433,91 @@ verify（传入自己的 consumer_session_id）；不修改生产 data/ai；不�
   超长模型标识返回非零。M 系列全部通过真实 CLI 执行，不直接调用 `claim_batch`。
 - 本 Microfix 未处理任何任务、未生成 AI 结果、未进入接收端。
 
+## 14. Stage 2.5B-2B-R 中断恢复与状态自动对账（2026-07-31）
 
+> 目标：跨 WorkBuddy 会话接力的真实验收中发现——进程在 `move_task` 写入 completed
+> 目标文件后删除 processing 源文件前中断，导致同一 task_id 同时存在于两个状态目录
+> 且有孤儿 lease 残留。本次修复该缺口，不再依赖人工清理孤儿文件。
+
+### 14.1 问题描述
+
+- 文件系统状态移动无法保证跨进程强制终止的绝对原子性。
+- 当 `move_task` 写 completed 成功但 `os.remove(processing)` 中断时，残留双份文件
+  及未清理的 lease 会阻碍后续 verify（要求 processing=0 / leases=0）。
+- 旧幂等分支仅检查 `os.path.exists(completed/xxx.json)` 即返回
+  `idempotent_success`，不做任何清理。
+
+### 14.2 新增核心函数
+
+`reconcile_task_state(task_id, ai_root, batch_id=None, worker_id=None, dry_run=False)`
+（位于 `scripts/ai/workbuddy_queue_provider.py`），返回统一报告含
+`authoritative_state / states_found / lease_found / actions / conflicts / reconciled`。
+
+#### 权威状态规则
+
+| 场景 | 行为 |
+|---|---|
+| 唯一状态文件 | 不修改 |
+| completed + processing（身份校验通过） | completed 权威，自动清理 processing + 匹配 lease |
+| failed + processing（身份校验通过） | failed 权威，自动清理 processing + 匹配 lease |
+| completed + failed 并存 | 硬冲突，失败关闭 |
+| task_id 或 cache_key 不一致 | state_identity_conflict，失败关闭 |
+| 权威文件损坏/不合法 | invalid_authoritative_file，失败关闭 |
+| 不匹配 batch/worker 的 lease | 保留并报告冲突 |
+
+身份校验内容：task_id 一致、cache_key 一致、status 与目录对应、
+completed 包含有效 `ai_result` 且 `ai_result.task_id` 一致。
+
+### 14.3 Ingest 幂等分支改造
+
+旧逻辑：`os.path.exists(completed)` → `idempotent_success` → `continue`
+
+新逻辑：
+- `reconcile_task_state()` → 无冲突 + 有自动清理 → `idempotent_success_reconciled`
+- 无冲突 + 无清理 → 原 `idempotent_success/failed`
+- 有冲突 → `rejected_state_conflict`（CLI 非零，不自动覆盖）
+
+### 14.4 新增 Reconcile 命令
+
+```bash
+# 报告不修改
+python scripts/ai/workbuddy_worker.py --ai-root <dir> reconcile --dry-run
+
+# 执行安全清理
+python scripts/ai/workbuddy_worker.py --ai-root <dir> reconcile --apply
+```
+
+可选 `--batch-id` / `--worker-id` 用于 lease 匹配。存在未解决冲突时 CLI 返回非零。
+
+### 14.5 Status 新字段
+
+`status_summary` 新增：
+- `duplicate_state_task_count`：同一 task_id 存在于多个状态目录的数量
+- `orphan_processing_count`：completed/failed 任务仍有 processing 残留的数量
+- `orphan_lease_count`：completed/failed 任务仍有 lease 的数量
+- `state_conflict_count`：completed 和 failed 同时存在的数量
+
+### 14.6 Verify 增强
+
+`cross_session_handoff_demo.py verify` 同时检查上述 4 项新字段均为 0。
+
+### 14.7 审计事件新增
+
+- `task_state_reconciled`
+- `orphan_processing_removed`
+- `orphan_lease_removed`
+- `task_state_conflict`
+
+审计不含本机路径、新闻正文、Prompt、密钥或完整异常堆栈。
+
+### 14.8 新增测试
+
+`scripts/tests/test_stage25b2b_recovery.py`（15 项，含中断注入 + reconcile 幂等 +
+不匹配 lease 保护等），已加入 `pipeline_runner.py` 固定闸门。
+
+### 14.9 边界说明
+
+- 硬冲突（completed + failed / 身份不一致）绝不自动处理，需人工审查；
+- 不扫描或修改 `ai_root` 以外的路径；
+- 所有测试使用临时目录，不操作生产 `data/ai`；
+- `external_api_calls=0`：本次修复仅限文件状态管理，不涉及 AI 模型或网络调用。

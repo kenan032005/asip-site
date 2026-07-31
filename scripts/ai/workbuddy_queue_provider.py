@@ -177,6 +177,178 @@ def move_task(task_id, from_state, to_state, ai_root=AI_ROOT, updates=None,
     return new_obj
 
 
+# ── Stage 2.5B-2B-R: 状��中断对账 ──
+
+_STATE_DIRS = ("queue", "processing", "completed", "failed", "cache")
+
+_AUTHORITATIVE_STATES = ("completed", "failed")
+
+_AI_RESULT_REQUIRED_KEYS = ("task_id", "schema_version", "status", "provider",
+                             "model", "started_at", "completed_at", "result",
+                             "error", "usage")
+
+
+def reconcile_task_state(task_id, ai_root=AI_ROOT, batch_id=None,
+                         worker_id=None, dry_run=False):
+    """中断后状态对账：检查同一 task_id 在多个状态目录中的残留并自动修复。
+
+    返回统一报告（详见 WORKBUDDY_AI_WORKER.md 第四节）。
+
+    规则摘要：
+      - 唯一状态文件：无需修改；
+      - completed + processing（满足身份校验）：completed 权威，清理 processing 和匹配 lease；
+      - failed + processing（满足身份校验）：failed 权威，清理 processing 和匹配 lease；
+      - completed + failed：硬冲突，失败关闭；
+      - task_id 或 cache_key 不一致：state_identity_conflict，失败关闭；
+      - 权威文件损坏：invalid_authoritative_file，失败关闭；
+      - lease 仅在 batch_id, worker_id 匹配时删除。
+    """
+    _ensure_ai_dirs(ai_root)
+    report = {
+        "task_id": task_id,
+        "authoritative_state": "",
+        "states_found": [],
+        "lease_found": False,
+        "actions": [],
+        "conflicts": [],
+        "reconciled": False,
+    }
+
+    # 1. 扫描所有状态目录
+    files_found = {}
+    for st_dir in _STATE_DIRS:
+        path = os.path.join(ai_root, st_dir, "%s.json" % task_id)
+        if os.path.exists(path):
+            try:
+                with open(path, "r", encoding="utf-8") as f:
+                    obj = json.load(f)
+                files_found[st_dir] = obj
+                report["states_found"].append(st_dir)
+            except (json.JSONDecodeError, OSError):
+                # 文件存在但损坏
+                files_found[st_dir] = None
+                report["states_found"].append(st_dir)
+
+    # 2. 检查 lease
+    lease_path = os.path.join(ai_root, "leases", "%s.json" % task_id)
+    lease_obj = None
+    if os.path.exists(lease_path):
+        report["lease_found"] = True
+        try:
+            with open(lease_path, "r", encoding="utf-8") as f:
+                lease_obj = json.load(f)
+        except Exception:
+            pass
+
+    # 3. 计算权威状态
+    auth_states = [s for s in _AUTHORITATIVE_STATES if s in files_found]
+    other_states = [s for s in files_found if s not in _AUTHORITATIVE_STATES
+                    and s != "queue" and s != "cache"]
+
+    if not auth_states:
+        # 无权威状态，按顺序确定
+        for st in ("processing", "queue", "failed", "completed"):
+            if st in files_found:
+                report["authoritative_state"] = st
+                break
+        return report
+
+    # 4. completed + failed 硬冲突
+    if "completed" in auth_states and "failed" in auth_states:
+        report["conflicts"].append("completed_and_failed_both_exist")
+        return report
+
+    auth_state = auth_states[0]
+    auth_obj = files_found.get(auth_state)
+
+    # 5. 权威文件损坏检查
+    if auth_obj is None:
+        report["conflicts"].append("invalid_authoritative_file")
+        return report
+
+    # 6. 权威状态身份校验
+    if auth_obj.get("task_id") != task_id:
+        report["conflicts"].append("task_id_mismatch_in_authoritative")
+        return report
+
+    if auth_state != "cache" and auth_obj.get("status") != _status_for_state(auth_state):
+        report["conflicts"].append("status_mismatch_in_authoritative")
+        return report
+
+    # 7. completed 额外校验：ai_result 存在且合法
+    if auth_state == "completed":
+        ai_result = auth_obj.get("ai_result")
+        if not isinstance(ai_result, dict):
+            report["conflicts"].append("ai_result_missing_in_completed")
+            return report
+        if ai_result.get("task_id") != task_id:
+            report["conflicts"].append("ai_result_task_id_mismatch")
+            return report
+        # 至少检查 ai_result 的关键字段存在
+        for key in _AI_RESULT_REQUIRED_KEYS:
+            if key not in ai_result:
+                report["conflicts"].append("ai_result_incomplete")
+                return report
+
+    # 8. 检查需要清理的其它状态文件
+    stale_states = [s for s in other_states if s in files_found
+                    and s not in _AUTHORITATIVE_STATES]
+
+    for st in stale_states:
+        obj = files_found[st]
+        if obj is None:
+            continue
+        # 身份一致性校验
+        if obj.get("task_id") != task_id:
+            report["conflicts"].append(
+                "task_id_mismatch_%s_vs_%s" % (st, auth_state))
+            continue
+        # cache_key 一致性
+        auth_ck = auth_obj.get("cache_key")
+        other_ck = obj.get("cache_key")
+        if auth_ck and other_ck and auth_ck != other_ck:
+            report["conflicts"].append(
+                "cache_key_mismatch_%s_vs_%s" % (st, auth_state))
+            continue
+
+    # 如果存在冲突，失败关闭
+    if report["conflicts"]:
+        return report
+
+    # 9. 执行清理（仅在没有冲突时）
+    if not dry_run and stale_states:
+        for st in stale_states:
+            path = os.path.join(ai_root, st, "%s.json" % task_id)
+            try:
+                os.remove(path)
+            except OSError:
+                continue
+            report["actions"].append("removed_%s" % st)
+
+    # 10. 清理匹配的 lease
+    if not dry_run and lease_obj is not None:
+        can_clean_lease = True
+        if batch_id and lease_obj.get("batch_id") != batch_id:
+            can_clean_lease = False
+            report["conflicts"].append("lease_batch_id_mismatch")
+        if worker_id and lease_obj.get("worker_id") != worker_id:
+            can_clean_lease = False
+            report["conflicts"].append("lease_worker_id_mismatch")
+        if can_clean_lease:
+            try:
+                os.remove(lease_path)
+            except OSError:
+                pass
+            report["actions"].append("removed_lease")
+
+    report["reconciled"] = bool(stale_states or (
+        lease_obj is not None and not report["conflicts"] and batch_id
+    )) and not report["conflicts"]
+    report["authoritative_state"] = auth_state
+
+    return report
+
+
 class WorkbuddyQueueProvider(BaseAIProvider):
     name = "workbuddy_queue"
 
