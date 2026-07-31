@@ -16,7 +16,11 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.dirname(os.path.dirname(HERE))
 PROMPTS_DIR = os.path.join(REPO_ROOT, "prompts")
 
+# 2.5C-1F: Resource limits
 _MAX_SOURCE_TEXT_LENGTH = 100000
+_MAX_SINGLE_UNTRUSTED_BYTES = 100000
+_MAX_TOTAL_UNTRUSTED_BYTES = 300000
+_MAX_TOTAL_OUTPUT_CHARS = 500000
 
 _VARIABLE_PATTERN = re.compile(r"\{\{\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*(?:\|[^}]*)?\}\}")
 _UNRESOLVED_PATTERN = _VARIABLE_PATTERN
@@ -97,8 +101,26 @@ def render_prompt(task_type, variables, version=None):
 
     # 渲染：所有 untrusted_variables 用 JSON 编码的 UUID 占位符，后被替换
     untrusted = set(pkg.get("untrusted_variables", []))
-    # 默认所有 required_variables 中不在 untrusted 的为可信变量
     all_vars = set(pkg.get("required_variables", [])) | set(pkg.get("optional_variables", []))
+
+    # 2.5C-1F: legacy_safe_mode when untrusted_variables missing
+    legacy_safe_mode = not bool(untrusted)
+    if legacy_safe_mode:
+        untrusted = all_vars  # treat all variables as untrusted
+
+    # 2.5C-1F: resource limits on untrusted data
+    total_untrusted_bytes = 0
+    for var_name in untrusted:
+        if var_name in variables:
+            encoded = _json_encode_value(variables[var_name])
+            byte_len = len(encoded.encode("utf-8"))
+            if byte_len > _MAX_SINGLE_UNTRUSTED_BYTES:
+                raise PromptRenderError(
+                    "variable %s exceeds max size: %d bytes" % (var_name, byte_len))
+            total_untrusted_bytes += byte_len
+    if total_untrusted_bytes > _MAX_TOTAL_UNTRUSTED_BYTES:
+        raise PromptRenderError(
+            "total untrusted data exceeds max: %d bytes" % total_untrusted_bytes)
 
     def render(template):
         """安全渲染：untrusted variables JSON 编码插入，不可被二次解析。"""
@@ -173,6 +195,12 @@ def render_prompt(task_type, variables, version=None):
     rh.update(user_text.encode("utf-8"))
     render_hash = "sha256:" + rh.hexdigest()
 
+    # 2.5C-1F: total output limit
+    total_chars = len(system_text) + len(user_text)
+    if total_chars > _MAX_TOTAL_OUTPUT_CHARS:
+        raise PromptRenderError(
+            "total output exceeds max: %d chars" % total_chars)
+
     return {
         "prompt_id": pkg["prompt_id"],
         "task_type": pkg["task_type"],
@@ -182,4 +210,5 @@ def render_prompt(task_type, variables, version=None):
         "render_hash": render_hash,
         "system_text": system_text,
         "user_text": user_text,
+        "legacy_safe_mode": legacy_safe_mode,
     }

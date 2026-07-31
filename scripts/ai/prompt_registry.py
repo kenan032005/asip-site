@@ -9,6 +9,9 @@ Resolves active/deprecated/disabled versions per registry.json.
 import os
 import json
 import hashlib
+from pathlib import Path
+
+from .schema_validation import validate_against_schema
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.dirname(os.path.dirname(HERE))
@@ -28,68 +31,35 @@ def _load_json(path):
         return json.load(f)
 
 
-def _validate_against_schema(instance, schema):
-    """最小 Schema 校验（type, required, additionalProperties, enum, pattern, minLength, uniqueItems, items）。"""
-    errors = []
-    if not isinstance(instance, dict) or not isinstance(schema, dict):
-        return ["invalid schema or instance"]
-    # type
-    typ = schema.get("type")
-    if typ and typ != "object":
-        return ["schema type must be object"]
-    # additionalProperties
-    if schema.get("additionalProperties") is False:
-        for key in instance:
-            if key not in schema.get("properties", {}):
-                errors.append("unknown field: %s" % key)
-    # required
-    for req in schema.get("required", []):
-        if req not in instance:
-            errors.append("missing required field: %s" % req)
-    # per-property checks
-    for prop_name, prop_schema in schema.get("properties", {}).items():
-        if prop_name not in instance:
-            continue
-        val = instance[prop_name]
-        # enum
-        if "enum" in prop_schema and val not in prop_schema["enum"]:
-            errors.append("%s: value %r not in enum" % (prop_name, val))
-        # pattern
-        if "pattern" in prop_schema and isinstance(val, str):
-            import re
-            if not re.match(prop_schema["pattern"], val):
-                errors.append("%s: value %r does not match pattern" % (prop_name, val))
-        # minLength
-        if "minLength" in prop_schema and isinstance(val, str):
-            if len(val) < prop_schema["minLength"]:
-                errors.append("%s: minLength %d required" % (prop_name, prop_schema["minLength"]))
-        # type check
-        ptype = prop_schema.get("type")
-        if ptype == "string" and not isinstance(val, str):
-            errors.append("%s: must be string" % prop_name)
-        elif ptype == "integer" and not isinstance(val, int):
-            errors.append("%s: must be integer" % prop_name)
-        elif ptype == "number" and not isinstance(val, (int, float)):
-            errors.append("%s: must be number" % prop_name)
-        elif ptype == "boolean" and not isinstance(val, bool):
-            errors.append("%s: must be boolean" % prop_name)
-        elif ptype == "array" and not isinstance(val, list):
-            errors.append("%s: must be array" % prop_name)
-        elif ptype == "object" and not isinstance(val, dict):
-            errors.append("%s: must be object" % prop_name)
-        # uniqueItems
-        if "uniqueItems" in prop_schema and isinstance(val, list):
-            if len(val) != len(set(str(x) for x in val)):
-                errors.append("%s: items must be unique" % prop_name)
-        # nested items
-        if isinstance(val, list) and "items" in prop_schema:
-            item_schema = prop_schema["items"]
-            for i, item in enumerate(val):
-                if isinstance(item, dict) and isinstance(item_schema, dict):
-                    nested = _validate_against_schema(item, item_schema)
-                    for e in nested:
-                        errors.append("%s[%d].%s" % (prop_name, i, e))
-    return errors
+def resolve_confined_path(base_dir, relative_path, allowed_root,
+                          must_exist=True):
+    """安全路径解析：拒绝绝对路径、盘符、UNC、..、符号链接逃逸。
+
+    Returns resolved absolute Path or raises PromptRegistryError.
+    """
+    if not relative_path or not isinstance(relative_path, str):
+        raise PromptRegistryError("empty or invalid path")
+    if os.path.isabs(relative_path):
+        raise PromptRegistryError("absolute path not allowed")
+    # Windows drive letter
+    if len(relative_path) >= 2 and relative_path[1] == ":":
+        raise PromptRegistryError("drive letter path not allowed")
+    # UNC
+    if relative_path.startswith("\\\\") or relative_path.startswith("//"):
+        raise PromptRegistryError("UNC path not allowed")
+    # ..
+    parts = Path(relative_path).parts
+    if ".." in parts:
+        raise PromptRegistryError("path traversal detected: ..")
+    # resolve
+    base = Path(base_dir).resolve()
+    full = (base / relative_path).resolve()
+    allowed = Path(allowed_root).resolve()
+    if not str(full).startswith(str(allowed) + os.sep) and str(full) != str(allowed):
+        raise PromptRegistryError("path outside allowed root")
+    if must_exist and not full.exists():
+        raise PromptRegistryError("file not found")
+    return full
 
 
 def _validate_package(pkg, task_type, version_dir, strict_schema=True):
@@ -98,7 +68,7 @@ def _validate_package(pkg, task_type, version_dir, strict_schema=True):
     # 使用 prompt_package.schema.json 校验（仅当 strict_schema）
     if strict_schema and os.path.exists(PACKAGE_SCHEMA_PATH):
         pkg_schema = _load_json(PACKAGE_SCHEMA_PATH)
-        schema_errs = _validate_against_schema(pkg, pkg_schema)
+        schema_errs = validate_against_schema(pkg, pkg_schema)
         errors.extend(schema_errs)
 
     # prompt_id == task_type
@@ -112,21 +82,45 @@ def _validate_package(pkg, task_type, version_dir, strict_schema=True):
     # status enum
     if pkg.get("status") not in ("draft", "active", "deprecated", "disabled"):
         errors.append("invalid status: %s" % pkg.get("status"))
-    # templates exist
+    # required_variables: all must be strings
+    rv = pkg.get("required_variables") or []
+    for i, v in enumerate(rv):
+        if not isinstance(v, str):
+            errors.append("required_variables[%d]: must be string, got %s" %
+                          (i, type(v).__name__))
+    ov = pkg.get("optional_variables") or []
+    for i, v in enumerate(ov):
+        if not isinstance(v, str):
+            errors.append("optional_variables[%d]: must be string" % i)
+    # untrusted_variables must be subset of required+optional
+    ut = pkg.get("untrusted_variables") or []
+    allowed_vars = set(rv) | set(ov)
+    for i, v in enumerate(ut):
+        if not isinstance(v, str):
+            errors.append("untrusted_variables[%d]: must be string" % i)
+        elif v not in allowed_vars:
+            errors.append(
+                "untrusted_variables[%d]: '%s' not in required/optional" % (i, v))
+    # templates exist (safe path check)
     st = pkg.get("system_template")
-    ut = pkg.get("user_template")
+    ut_tmpl = pkg.get("user_template")
     if st:
-        if not os.path.exists(os.path.join(version_dir, st)):
-            errors.append("system_template not found: %s" % st)
-    if ut:
-        if not os.path.exists(os.path.join(version_dir, ut)):
-            errors.append("user_template not found: %s" % ut)
-    # output schema exists
+        try:
+            resolve_confined_path(version_dir, st, REPO_ROOT, must_exist=True)
+        except PromptRegistryError as e:
+            errors.append("system_template: %s" % e)
+    if ut_tmpl:
+        try:
+            resolve_confined_path(version_dir, ut_tmpl, REPO_ROOT, must_exist=True)
+        except PromptRegistryError as e:
+            errors.append("user_template: %s" % e)
+    # output schema exists (safe path)
     os_path = pkg.get("output_schema")
     if os_path:
-        schema_path = os.path.join(REPO_ROOT, os_path)
-        if not os.path.exists(schema_path):
-            errors.append("output_schema not found: %s" % os_path)
+        try:
+            resolve_confined_path(REPO_ROOT, os_path, REPO_ROOT, must_exist=True)
+        except PromptRegistryError as e:
+            errors.append("output_schema: %s" % e)
     # required_variables unique
     rv = pkg.get("required_variables") or []
     if len(set(rv)) != len(rv):
