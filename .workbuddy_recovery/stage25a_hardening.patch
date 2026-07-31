@@ -1,0 +1,646 @@
+diff --git a/.env.example b/.env.example
+index 85f3550..a8f4ddd 100644
+--- a/.env.example
++++ b/.env.example
+@@ -7,6 +7,7 @@ ASIP_AI_PROVIDER=workbuddy_queue
+ ASIP_AI_MODEL=hy3
+ ASIP_ALLOW_PAID_FALLBACK=false
+ ASIP_CLOUD_SCHEDULE_ENABLED=false
++ASIP_AI_PROCESSING_ENABLED=false
+ 
+ # ── 付费 Provider 凭证（仅在未来显式启用 openai_api / generic_api 时填写）──
+ # 当前 Stage 2.5A 不启用、不检查、不调用这些密钥。
+diff --git a/.workbuddy/automations/automation-1784581088395/memory.md b/.workbuddy/automations/automation-1784581088395/memory.md
+index 8a6da6a..ab456f8 100644
+--- a/.workbuddy/automations/automation-1784581088395/memory.md
++++ b/.workbuddy/automations/automation-1784581088395/memory.md
+@@ -873,6 +873,15 @@
+ - 站点地址：https://kenan032005.github.io/asip-site/
+ - 备注：PAT 从 gitignored 的 deploy.token 读取，仅用于本次推送，未写入任何提交文件；合规要求满足。
+ 
++## 2026-07-31 01:35 (GMT+3) 执行
++- 采集：incremental/validate-only 模式，跳过 generate_reports；events_24h=0（线上验证）。
++- 单元测试/语义导出/摘要/构建/校验（42项+source+dist）均 OK。
++- main 提交：39b20ffa0644fef0aeaf73fbed88f040e3410b99（pipeline 内部 data commit a816e80d）。
++- gh-pages 强制推送成功：29f26c5bac34232b3b1401d85e644357086622ee。
++- 线上验证：✅ run_id 一致（20260731T013456+0800_lgslbc），http 200，events_24h 0。
++- 站点地址：https://kenan032005.github.io/asip-site/
++- 备注：仅运行 pipeline_runner.py 一条命令（退出码 0）；PAT 从 gitignored 的 deploy.token 读取仅用于推送，未写入任何提交文件；合规要求满足。
++
+ ## 2026-07-28 08:39 (GMT+3) 执行
+ - 采集：GDELT 返回 HTTP 429（Too Many Requests），本次采集未成功（网络问题）。data/events.json 无新增，本次新增事件：0。
+ - 日报：generate_reports.py 生成 6 份日报（chad, niger, benin, south-sudan, sudan, ethiopia），reports_today=6（日期 2026-07-28 北京时间）。
+diff --git a/README.md b/README.md
+index 11d2646..4b07a21 100644
+--- a/README.md
++++ b/README.md
+@@ -422,3 +422,46 @@ data/events.json 遗留兼容视图（仅旧前端兼容，单向生成，不部
+ - 本次**未**重新迁移、**未**抓外部新闻、**未**调 Hy3、**未**进入 2.5/3 阶段；数据仅以统一 `run_id` 重新生成视图层。
+ - **Stage 2.5 与第三阶段仍未开始。**
+ 
++---
++
++## 十七、Stage 2.5A：运行配置与 AI 接口契约基础（2026-07-30）
++
++> 本阶段**只建立运行配置与 AI 任务/结果契约**，不真正处理任何 AI 内容。下一阶段（2.5B）才会实现执行器与真实队列消费。
++
++### 17.1 当前默认运行配置（config/runtime.json）
++| 项 | 当前值 | 含义 |
++|---|---|---|
++| `runtime_mode` | `workbuddy_local` | 本地 WorkBuddy 驱动，非 GitHub Actions 自动执行 |
++| `ai_provider` | `workbuddy_queue` | 唯一启用 Provider：仅生成并保存标准任务文件 |
++| `ai_model` | `hy3` | 模型标识占位（2.5B 才真正消费） |
++| `ai_processing_enabled` | `false` | **不**启动任何 AI 处理 |
++| `allow_paid_fallback` | `false` | **绝不**自动切换到付费 Provider |
++| `cloud_schedule_enabled` | `false` | 不启用云端定时 |
++
++- **当前不会调用任何付费 API**（OpenAI / 通用 API 均未启用、未配置密钥）。
++- 所有密钥仅放 `.env`（已被 `.gitignore` 忽略），`.env.example` 只含空值占位，**不入库、不含真实密钥**。
++- `scripts/ai/config.py` 真实读取 `<repo_root>/config/runtime.json`；Schema 真实读取 `<repo_root>/schemas`。
++
++### 17.2 WorkBuddy Queue Provider 的安全边界
++- 只负责生成与保存标准 AI 任务（`data/ai/queue/*.json`），**不**调用 Hy3、**不**调用 OpenAI、**不**发起任何外部网络请求。
++- 全状态幂等：相同 `cache_key` 在 `completed / processing / queue / failed / cache` 任一目录已存在时，均不重复创建任务文件；`failed` 任务依据 `retry_count` 与 `max_retries` 决定复用或标记 `permanently_failed`，**绝不生成第二个相同 `task_id` 文件**。
++- 不声称队列任务已被 AI 处理——结果须由 2.5B 执行器产生。
++
++### 17.3 AI 契约（schemas/）
++- `runtime_config.schema.json` / `ai_task.schema.json` / `ai_result.schema.json` 均为 JSON Schema（draft-07，零依赖）。
++- `ai_result` 强制：`task_id`(AIT_<24hex>)、`schema_version`(精确 1.0)、`status`、`provider`、`model`、`started_at`、`completed_at`、`result`、`error`、`usage`；`usage` 含 `input_tokens`/`output_tokens`/`estimated_cost_usd` 且非负；未知顶层字段被拒绝；`completed_at` 不得早于 `started_at`。
++- `OpenAI` 与 `generic_api` **仅是预留名称**，当前为禁用占位（`DisabledProvider`），缺密钥即失败关闭；不安装 OpenAI SDK、不 import openai。
++
++### 17.4 公网隔离
++- `data/ai/`、`config/runtime.json`、`.env`、`.env.example`、`schemas/*` 均**不进入** `dist`（构建白名单不含这些路径），也**不部署**到 `gh-pages`。
++- `build_site.py` 的白名单与 `validate_pipeline.py` 持续校验 `dist` 不含内部 AI 目录与配置。
++
++### 17.5 阶段回滚标签说明（重要）
++- **`pre-stage25a`**：创建于 Stage 2.5A 初版提交完成时，**实际指向 Stage 2.5A 完成提交 `0db1d4b`**，并非严格意义上的"阶段前基线"。
++- **`pre-stage25a-hardening`**：创建于本次加固修改**之前**，指向加固前 `main` HEAD，是**真正的加固前回滚点**。
++- 如需回退本次加固，应基于 `pre-stage25a-hardening` 而非 `pre-stage25a`。
++
++### 17.6 边界声明
++- 本次加固**未**调用 Hy3 处理真实内容、**未**调用任何付费 API、**未**启动 GitHub Actions、**未**开始 Stage 2.5B。
++- **Stage 2.5B 尚未开始。**
++
+diff --git a/schemas/ai_result.schema.json b/schemas/ai_result.schema.json
+index ec4ff31..53d08bb 100644
+--- a/schemas/ai_result.schema.json
++++ b/schemas/ai_result.schema.json
+@@ -2,21 +2,27 @@
+   "$schema": "http://json-schema.org/draft-07/schema#",
+   "$id": "https://asip-site.local/schemas/ai_result.schema.json",
+   "title": "ASIP AI Result",
+-  "description": "Stage 2.5A AI 结果契约。本阶段结果不真正产生（Worker 在 2.5B 建设）。",
++  "description": "Stage 2.5A AI 结果契约（强化）。本阶段结果不真正产生（Worker 在 2.5B 建设）。",
+   "type": "object",
++  "additionalProperties": false,
+   "required": [
+     "task_id",
+     "schema_version",
+     "status",
+     "provider",
+-    "model"
++    "model",
++    "started_at",
++    "completed_at",
++    "result",
++    "error",
++    "usage"
+   ],
+   "properties": {
+     "task_id": {
+       "type": "string",
+       "pattern": "^AIT_[0-9a-f]{24}$"
+     },
+-    "schema_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+$" },
++    "schema_version": { "type": "string", "pattern": "^1\\.0$" },
+     "status": {
+       "type": "string",
+       "enum": ["success", "failed", "refused", "invalid_output"]
+@@ -31,13 +37,17 @@
+     "result": { "type": "object" },
+     "error": {
+       "type": ["object", "null"],
++      "additionalProperties": false,
++      "required": ["code", "message"],
+       "properties": {
+-        "code": { "type": "string" },
+-        "message": { "type": "string" }
++        "code": { "type": "string", "minLength": 1 },
++        "message": { "type": "string", "minLength": 1 }
+       }
+     },
+     "usage": {
+       "type": "object",
++      "additionalProperties": false,
++      "required": ["input_tokens", "output_tokens", "estimated_cost_usd"],
+       "properties": {
+         "input_tokens": { "type": "integer", "minimum": 0 },
+         "output_tokens": { "type": "integer", "minimum": 0 },
+diff --git a/scripts/ai/config.py b/scripts/ai/config.py
+index 486a697..3fdf5c9 100644
+--- a/scripts/ai/config.py
++++ b/scripts/ai/config.py
+@@ -11,6 +11,7 @@
+ 
+ import os
+ import json
++from pathlib import Path
+ 
+ # ── 安全默认值（缺失配置时的兜底）──
+ DEFAULT_RUNTIME = {
+@@ -33,6 +34,7 @@ _ENV_MAP = {
+     "ASIP_RUNTIME": "runtime_mode",
+     "ASIP_AI_PROVIDER": "ai_provider",
+     "ASIP_AI_MODEL": "ai_model",
++    "ASIP_AI_PROCESSING_ENABLED": ("ai_processing_enabled", bool),
+     "ASIP_ALLOW_PAID_FALLBACK": ("allow_paid_fallback", bool),
+     "ASIP_CLOUD_SCHEDULE_ENABLED": ("cloud_schedule_enabled", bool),
+ }
+@@ -43,8 +45,10 @@ _KEY_ENV = {
+     "generic_api": "GENERIC_AI_API_KEY",
+ }
+ 
+-CONFIG_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "config")
+-DEFAULT_CONFIG_PATH = os.path.join(CONFIG_DIR, "runtime.json")
++# 仓库根目录：scripts/ai/config.py -> parents[0]=scripts/ai, [1]=scripts, [2]=repo_root
++REPO_ROOT = Path(__file__).resolve().parents[2]
++CONFIG_DIR = REPO_ROOT / "config"
++DEFAULT_CONFIG_PATH = CONFIG_DIR / "runtime.json"
+ 
+ 
+ def _coerce_bool(value):
+diff --git a/scripts/ai/contracts.py b/scripts/ai/contracts.py
+index 2bd6a28..b89a90c 100644
+--- a/scripts/ai/contracts.py
++++ b/scripts/ai/contracts.py
+@@ -4,6 +4,10 @@
+ """
+ 
+ import os
++import re
++import json
++from datetime import datetime
++from pathlib import Path
+ 
+ # 契约版本
+ SCHEMA_VERSION = "1.0"
+@@ -43,16 +47,25 @@ PRIORITIES = ["low", "normal", "high", "critical"]
+ # Provider 名称
+ PROVIDER_NAMES = ["workbuddy_queue", "openai_api", "generic_api", "disabled"]
+ 
+-SCHEMA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "schemas")
++# 仓库根目录：scripts/ai/contracts.py -> parents[0]=scripts/ai, [1]=scripts, [2]=repo_root
++REPO_ROOT = Path(__file__).resolve().parents[2]
++SCHEMA_DIR = REPO_ROOT / "schemas"
+ 
+ 
+-def load_json_schema(name):
+-    """加载 schemas/<name> 返回 dict；缺失返回 None（不抛错）。"""
+-    path = os.path.join(SCHEMA_DIR, name)
+-    if not os.path.exists(path):
++def load_json_schema(name, required=False):
++    """加载 schemas/<name> 返回 dict。
++
++    required=True 且文件缺失时抛出 SchemaNotFoundError（指明缺失路径），
++    绝不静默返回 None 后继续运行；任务提交 / 结果写入必须传 required=True。
++    """
++    path = SCHEMA_DIR / name
++    if not path.exists():
++        if required:
++            from .exceptions import SchemaNotFoundError
++            raise SchemaNotFoundError(name, str(path))
+         return None
+     with open(path, "r", encoding="utf-8") as f:
+-        return __import__("json").load(f)
++        return json.load(f)
+ 
+ 
+ def validate_ai_task(task):
+@@ -101,33 +114,102 @@ def validate_ai_task(task):
+ 
+ 
+ def validate_ai_result(result):
+-    """校验 AI 结果 dict。返回错误字符串列表，空列表表示通过。"""
++    """校验 AI 结果 dict（Stage 2.5A 强化契约）。返回错误字符串列表，空列表表示通过。
++
++    强制字段：task_id / schema_version / status / provider / model /
++    started_at / completed_at / result / error / usage。
++    规则（对应规范六）：
++    - schema_version 必须精确为 "1.0"；
++    - task_id 必须符合 AIT_<24位十六进制>；
++    - started_at / completed_at 必须为 ISO 时间，且 completed_at 不得早于 started_at；
++    - status=success：result 必须为非空对象，error 必须为 null；
++    - status=failed/refused/invalid_output：error 必须含 code 与 message；
++    - usage 必须含 input_tokens / output_tokens / estimated_cost_usd，且均非负；
++    - 不允许未知顶层字段。
++    """
+     errors = []
+     if not isinstance(result, dict):
+         return ["result must be an object"]
+-    need = lambda k, allowed=None, typ=None: (
+-        errors.append(f"missing field: {k}") if result.get(k) is None
+-        else (errors.append(f"field {k} must be {typ.__name__}") if (typ and not isinstance(result.get(k), typ)) else
+-              (errors.append(f"field {k}={result.get(k)!r} not in {allowed}") if (allowed and result.get(k) not in allowed) else None))
+-    )
+-    need("task_id", typ=str)
+-    need("schema_version", typ=str)
+-    need("status", allowed=RESULT_STATUSES)
+-    need("provider", allowed=PROVIDER_NAMES + ["none"])
+-    need("model", typ=str)
++
++    ALLOWED = {
++        "task_id", "schema_version", "status", "provider", "model",
++        "started_at", "completed_at", "result", "error", "usage",
++    }
++    for k in result:
++        if k not in ALLOWED:
++            errors.append("unknown result field: %s" % k)
++
++    REQUIRED = [
++        "task_id", "schema_version", "status", "provider", "model",
++        "started_at", "completed_at", "result", "error", "usage",
++    ]
++    for f in REQUIRED:
++        # error 字段允许显式为 null（status=success 时必须为 null），
++        # 因此对 error 只检查「键是否存在」，其余字段不允许为 None。
++        if f == "error":
++            if f not in result:
++                errors.append("missing field: %s" % f)
++        elif result.get(f) is None:
++            errors.append("missing field: %s" % f)
++
++    # task_id 格式
++    tid = result.get("task_id")
++    if tid is not None and not (isinstance(tid, str) and re.match(r"^AIT_[0-9a-f]{24}$", tid)):
++        errors.append("task_id format must be AIT_<24 hex>")
++
++    # schema_version 精确 1.0
++    sv = result.get("schema_version")
++    if sv is not None and sv != "1.0":
++        errors.append("schema_version must be exactly 1.0")
++
++    # provider / status 枚举
++    if result.get("provider") not in PROVIDER_NAMES + ["none"]:
++        errors.append("invalid provider: %r" % result.get("provider"))
++    status = result.get("status")
++    if status is not None and status not in RESULT_STATUSES:
++        errors.append("invalid status: %r" % status)
++
++    # 时间 ISO + completed_at >= started_at
++    def _parse_iso(s):
++        try:
++            return datetime.fromisoformat(str(s).replace("Z", "+00:00"))
++        except Exception:
++            return None
++
++    sa = _parse_iso(result["started_at"]) if result.get("started_at") else None
++    ca = _parse_iso(result["completed_at"]) if result.get("completed_at") else None
++    if result.get("started_at") and sa is None:
++        errors.append("started_at is not a valid ISO datetime")
++    if result.get("completed_at") and ca is None:
++        errors.append("completed_at is not a valid ISO datetime")
++    if sa and ca and ca < sa:
++        errors.append("completed_at earlier than started_at")
++
++    # error 结构
+     err = result.get("error")
+-    if err is not None and not isinstance(err, dict):
+-        errors.append("error must be object or null")
++    if status in ("failed", "refused", "invalid_output"):
++        if not isinstance(err, dict) or not err.get("code") or not err.get("message"):
++            errors.append("error must contain code and message when status=%s" % status)
++    if status == "success":
++        if isinstance(err, dict):
++            errors.append("error must be null when status=success")
++        r = result.get("result")
++        if not isinstance(r, dict) or len(r) == 0:
++            errors.append("result must be a non-empty object when status=success")
++
++    # usage 结构
+     usage = result.get("usage")
+-    if usage is not None:
+-        if not isinstance(usage, dict):
+-            errors.append("usage must be object or null")
+-        else:
+-            for k in ("input_tokens", "output_tokens"):
+-                if k in usage and not isinstance(usage[k], int):
+-                    errors.append(f"usage.{k} must be int")
+-            if "estimated_cost_usd" in usage and not isinstance(usage["estimated_cost_usd"], (int, float)):
+-                errors.append("usage.estimated_cost_usd must be number")
++    if isinstance(usage, dict):
++        for k in ("input_tokens", "output_tokens"):
++            v = usage.get(k)
++            if not isinstance(v, int) or isinstance(v, bool) or v < 0:
++                errors.append("usage.%s must be a non-negative integer" % k)
++        c = usage.get("estimated_cost_usd")
++        if c is not None and (not isinstance(c, (int, float)) or isinstance(c, bool) or c < 0):
++            errors.append("usage.estimated_cost_usd must be a non-negative number")
++    elif usage is not None:
++        errors.append("usage must be an object")
++
+     return errors
+ 
+ 
+diff --git a/scripts/ai/exceptions.py b/scripts/ai/exceptions.py
+index 7df0e3a..7d692cf 100644
+--- a/scripts/ai/exceptions.py
++++ b/scripts/ai/exceptions.py
+@@ -22,3 +22,16 @@ class TaskValidationError(AIContractError):
+     def __init__(self, errors):
+         self.errors = list(errors) if errors else ["task validation failed"]
+         super().__init__("; ".join(self.errors))
++
++
++class SchemaNotFoundError(AIContractError):
++    """契约 Schema 文件缺失（required=True 时抛出的硬性失败）。"""
++
++    def __init__(self, name, path):
++        self.schema_name = name
++        self.schema_path = path
++        super().__init__(f"schema not found: {name} (path={path})")
++
++
++class TaskStateError(AIContractError):
++    """任务状态移动 / 查找失败（原子性违反、源丢失、锁冲突等）。"""
+diff --git a/scripts/ai/workbuddy_queue_provider.py b/scripts/ai/workbuddy_queue_provider.py
+index 4ffd8aa..d5bf481 100644
+--- a/scripts/ai/workbuddy_queue_provider.py
++++ b/scripts/ai/workbuddy_queue_provider.py
+@@ -14,11 +14,12 @@
+ 
+ import os
+ import json
++import time
+ import tempfile
+ 
+ from .contracts import validate_ai_task, SCHEMA_VERSION
+ from .identifiers import generate_ai_task_id, generate_ai_cache_key
+-from .exceptions import TaskValidationError
++from .exceptions import TaskValidationError, TaskStateError
+ from .provider import BaseAIProvider
+ 
+ # data/ai 位于仓库根目录（scripts/ai -> scripts -> repo_root）
+@@ -40,6 +41,12 @@ def _ensure_dirs():
+         os.makedirs(d, exist_ok=True)
+ 
+ 
++def _ensure_ai_dirs(ai_root):
++    """确保给定 ai_root 下的全部状态目录存在（用于模块级函数，不受实例 ai_root 限制）。"""
++    for st in ("queue", "processing", "completed", "failed", "cache", "usage"):
++        os.makedirs(os.path.join(ai_root, st), exist_ok=True)
++
++
+ def _path_for(task_id):
+     return os.path.join(QUEUE_DIR, f"{task_id}.json")
+ 
+@@ -56,6 +63,120 @@ def count_failed():
+     return sum(1 for f in os.listdir(FAILED_DIR) if f.endswith(".json"))
+ 
+ 
++def find_existing_task_by_cache_key(cache_key, ai_root=AI_ROOT):
++    """按 completed -> processing -> queue -> failed -> cache 顺序查找同一 cache_key 的任务。
++
++    这是「全状态幂等」的核心：任一状态目录中已存在同一 cache_key 的任务，
++    都视为同一权威任务，不再重复入队。返回 (state, task_dict) 或 None。
++    同一 task_id 在同一时刻只能有一个权威状态文件。
++    """
++    _ensure_ai_dirs(ai_root)
++    order = ("completed", "processing", "queue", "failed", "cache")
++    for state in order:
++        d = os.path.join(ai_root, state)
++        if not os.path.isdir(d):
++            continue
++        for fn in os.listdir(d):
++            if not fn.endswith(".json"):
++                continue
++            try:
++                with open(os.path.join(d, fn), "r", encoding="utf-8") as f:
++                    obj = json.load(f)
++            except Exception:
++                continue
++            if obj.get("cache_key") == cache_key:
++                return (state, obj)
++    return None
++
++
++# 状态目录名 -> 任务 status 的规范映射（目录叫 queue，任务 status 叫 queued）
++_STATE_STATUS = {
++    "queue": "queued",
++    "processing": "processing",
++    "completed": "completed",
++    "failed": "failed",
++    "cache": "cache",
++}
++
++
++def _status_for_state(state):
++    return _STATE_STATUS.get(state, state)
++
++
++def move_task(task_id, from_state, to_state, ai_root=AI_ROOT, updates=None,
++              max_retries=5, retry_delay=0.2):
++    """原子移动任务状态（为 2.5B 提前建立的最小公共工具，不实现 AI 执行器）。
++
++    流程：读源 -> 校验 -> 写临时 -> os.replace 目标 -> 确认目标成功 -> 删除源。
++    - Windows 文件锁时有限次数重试；
++    - 失败则源文件保持不变（一致性优先）；
++    - 移动后任务内 status 必须与 to_state 一致；
++    - 不允许同一任务同时存在于 from_state 与 to_state 两端。
++    返回移动后的任务 dict。
++    """
++    src = os.path.join(ai_root, from_state, "%s.json" % task_id)
++    dst = os.path.join(ai_root, to_state, "%s.json" % task_id)
++    if not os.path.exists(src):
++        raise TaskStateError("source task not found: %s/%s" % (from_state, task_id))
++    try:
++        with open(src, "r", encoding="utf-8") as f:
++            obj = json.load(f)
++    except Exception as e:
++        raise TaskStateError("failed to read source %s: %s" % (src, e))
++    # 一致性校验：源 status 须与 from_state 对应的规范 status 一致
++    # （目录名 queue 对应任务 status=queued；cache 为缓存态，不参与状态机）
++    if from_state != "cache" and obj.get("status") != _status_for_state(from_state):
++        raise TaskStateError(
++            "source status %r != from_state %r (task_id=%s)"
++            % (obj.get("status"), from_state, task_id)
++        )
++    new_obj = dict(obj)
++    if updates:
++        new_obj.update(updates)
++    new_obj["status"] = _status_for_state(to_state)
++
++    os.makedirs(os.path.dirname(dst), exist_ok=True)
++    last_err = None
++    for _ in range(max_retries):
++        try:
++            fd, tmp = tempfile.mkstemp(dir=os.path.dirname(dst), suffix=".tmp")
++            try:
++                with os.fdopen(fd, "w", encoding="utf-8") as f:
++                    json.dump(new_obj, f, ensure_ascii=False, indent=2)
++                os.replace(tmp, dst)
++            finally:
++                if os.path.exists(tmp):
++                    try:
++                        os.remove(tmp)
++                    except OSError:
++                        pass
++            break
++        except (OSError, PermissionError) as e:
++            last_err = e
++            time.sleep(retry_delay)
++    else:
++        raise TaskStateError("atomic write failed after %d attempts: %s" % (max_retries, last_err))
++
++    if not os.path.exists(dst):
++        raise TaskStateError("target not written; source left intact")
++
++    # 确认目标写入成功后再删源；删源失败则回滚目标，保证不出现双份
++    for _ in range(max_retries):
++        try:
++            os.remove(src)
++            break
++        except (OSError, PermissionError) as e:
++            last_err = e
++            time.sleep(retry_delay)
++    else:
++        try:
++            os.remove(dst)
++        except OSError:
++            pass
++        raise TaskStateError("failed to remove source after move: %s" % last_err)
++    return new_obj
++
++
+ class WorkbuddyQueueProvider(BaseAIProvider):
+     name = "workbuddy_queue"
+ 
+@@ -111,18 +232,28 @@ class WorkbuddyQueueProvider(BaseAIProvider):
+         prompt_version = task.get("prompt_version")
+         output_schema_version = task.get("output_schema_version")
+ 
+-        task_id = task.get("task_id") or generate_ai_task_id(
+-            task_type, input_ref, content_hash, prompt_version, output_schema_version
+-        )
+         cache_key = generate_ai_cache_key(
+             task_type, input_ref, content_hash, prompt_version, output_schema_version
+         )
+ 
+-        # 幂等：相同 cache_key 已存在 -> 不重复入队，返回既有任务
+-        existing = self._find_by_cache_key(cache_key)
+-        if existing is not None:
++        # 全状态幂等：任一状态目录已存在同一 cache_key -> 不重复创建
++        found = find_existing_task_by_cache_key(cache_key, self.ai_root)
++        if found is not None:
++            state, existing = found
++            if state == "failed":
++                rc = int(existing.get("retry_count", 0))
++                mr = int(existing.get("max_retries", 0))
++                if rc < mr:
++                    # 仍可重试：复用同一 task_id，状态改回 queued（重试计数 +1），不新建文件
++                    return self._requeue_failed(existing)
++                # 达到上限：返回既有档案，绝不创建第二个相同 task_id 文件
++                return existing
++            # completed / processing / queue / cache：直接返回既有任务，不重复入队
+             return existing
+ 
++        task_id = task.get("task_id") or generate_ai_task_id(
++            task_type, input_ref, content_hash, prompt_version, output_schema_version
++        )
+         enriched = dict(task)
+         enriched["task_id"] = task_id
+         enriched["cache_key"] = cache_key
+@@ -132,20 +263,18 @@ class WorkbuddyQueueProvider(BaseAIProvider):
+         self._atomic_write(self._queue_path(task_id), enriched)
+         return enriched
+ 
+-    def _find_by_cache_key(self, cache_key):
+-        if not os.path.isdir(self._dirs["queue"]):
+-            return None
+-        for fn in os.listdir(self._dirs["queue"]):
+-            if not fn.endswith(".json"):
+-                continue
+-            try:
+-                with open(os.path.join(self._dirs["queue"], fn), "r", encoding="utf-8") as f:
+-                    obj = json.load(f)
+-            except Exception:
+-                continue
+-            if obj.get("cache_key") == cache_key:
+-                return obj
+-        return None
++    def _requeue_failed(self, existing):
++        """复用同一 task_id，将 failed 任务改回 queued（retry_count +1）。"""
++        task_id = existing["task_id"]
++        new_retry = int(existing.get("retry_count", 0)) + 1
++        return move_task(
++            task_id, "failed", "queue", ai_root=self.ai_root,
++            updates={
++                "status": "queued",
++                "retry_count": new_retry,
++                "cache_key": existing.get("cache_key"),
++            },
++        )
+ 
+     def get_task_status(self, task_id):
+         for name, d in (
+diff --git a/scripts/pipeline_runner.py b/scripts/pipeline_runner.py
+index 7e9cbbd..12c7036 100644
+--- a/scripts/pipeline_runner.py
++++ b/scripts/pipeline_runner.py
+@@ -206,6 +206,29 @@ def deploy_gh_pages(dist_dir, token, source_commit):
+         return None, str(e)
+ 
+ 
++def _check_ai_runtime_and_schema():
++    """结构性校验：runtime.json 处于安全默认且三份 AI Schema 存在。返回 (cfg_ok, schema_ok)。"""
++    try:
++        import json as _json
++        cfg_path = ROOT / "config" / "runtime.json"
++        if not cfg_path.exists():
++            return False, False
++        cfg = _json.loads(cfg_path.read_text(encoding="utf-8"))
++        cfg_ok = (
++            cfg.get("runtime_mode") == "workbuddy_local"
++            and cfg.get("ai_provider") == "workbuddy_queue"
++            and cfg.get("ai_processing_enabled") is False
++            and cfg.get("allow_paid_fallback") is False
++        )
++        schema_ok = True
++        for s in ("runtime_config.schema.json", "ai_task.schema.json", "ai_result.schema.json"):
++            if not (ROOT / "schemas" / s).exists():
++                schema_ok = False
++        return cfg_ok, schema_ok
++    except Exception:
++        return False, False
++
++
+ def run_mode(mode, trigger):
+     run_id = generate_run_id()
+     log = create_run_log(run_id, trigger=trigger)
+@@ -246,7 +269,9 @@ def run_mode(mode, trigger):
+                           "test_repository_integrity.py",
+                           "test_no_local_paths.py",
+                           "test_stage2_closeout.py",
+-                          "test_stage2_frontend_final.py"):
++                          "test_stage2_frontend_final.py",
++                          "test_stage25a_runtime_ai_contract.py",
++                          "test_stage25a_hardening.py"):
+             rc, out, err = run_cmd([PYTHON, str(HERE / "tests" / test_file)], timeout=180)
+             ok = rc == 0 and "FAIL=0" in out  # 以测试脚本的结果行为准（rc=0 且 FAIL=0）
+             tests_ok = tests_ok and ok
+@@ -254,6 +279,16 @@ def run_mode(mode, trigger):
+         add_log_step(log, "unit_tests", "success" if tests_ok else "failed",
+                      details={"output": tests_out[-1200:]})
+         print(f"  tests: {'OK' if tests_ok else 'FAIL'}")
++
++        # 2.5A) 运行配置与 AI Schema 校验（结构性闸门，独立于单测脚本）
++        cfg_ok, schema_ok = _check_ai_runtime_and_schema()
++        add_log_step(log, "ai_runtime_config_valid", "success" if cfg_ok else "failed",
++                     details={"expected": "workbuddy_local / workbuddy_queue / ai_processing_enabled=false / allow_paid_fallback=false"})
++        add_log_step(log, "ai_schema_valid", "success" if schema_ok else "failed",
++                     details={"schemas": ["runtime_config", "ai_task", "ai_result"]})
++        if not cfg_ok or not schema_ok:
++            tests_ok = False
++
+         if not tests_ok:
+             print(tests_out[-600:])
+             log["final_status"] = "failed"
