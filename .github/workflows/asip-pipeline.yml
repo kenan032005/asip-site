@@ -1,0 +1,89 @@
+name: ASIP Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_mode:
+        description: Run mode
+        required: true
+        type: choice
+        default: validate
+        options:
+          - validate
+          - full
+      execute_ai:
+        description: Execute AI tasks via provider
+        required: true
+        type: boolean
+        default: false
+      provider:
+        description: AI provider
+        required: false
+        type: choice
+        default: workbuddy_queue
+        options:
+          - workbuddy_queue
+          - generic_api
+          - openai_api
+          - disabled
+      max_ai_tasks:
+        description: Max AI tasks per run
+        required: false
+        type: string
+        default: "0"
+      deploy:
+        description: Deploy to gh-pages
+        required: true
+        type: boolean
+        default: true
+
+concurrency:
+  group: asip-pipeline-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run pipeline
+        env:
+          ASIP_AI_PROVIDER: ${{ inputs.provider }}
+          ASIP_AI_PROCESSING_ENABLED: ${{ inputs.execute_ai }}
+          ASIP_AI_MAX_TASKS_PER_RUN: ${{ inputs.max_ai_tasks }}
+          ALLOW_PAID_FALLBACK: 'false'
+          # Secrets from GitHub Secrets
+          ASIP_AI_BASE_URL: ${{ secrets.ASIP_AI_BASE_URL || '' }}
+          ASIP_AI_API_KEY: ${{ secrets.ASIP_AI_API_KEY || '' }}
+          ASIP_AI_MODEL: ${{ secrets.ASIP_AI_MODEL || '' }}
+          ASIP_AI_TIMEOUT_SECONDS: '120'
+          ASIP_AI_MAX_OUTPUT_TOKENS: '2048'
+          ASIP_AI_MAX_TOTAL_TOKENS_PER_RUN: '0'
+          ASIP_AI_MAX_ESTIMATED_COST_USD: '0'
+          ASIP_AI_MAX_RETRIES_PER_TASK: '1'
+        run: |
+          python scripts/pipeline_runner.py --mode ${{ inputs.run_mode }} --trigger manual
+
+      - name: Deploy gh-pages
+        if: ${{ inputs.deploy && success() }}
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          force_orphan: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'deploy: ${{ github.sha }}'
