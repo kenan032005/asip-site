@@ -521,3 +521,44 @@ python scripts/ai/workbuddy_worker.py --ai-root <dir> reconcile --apply
 - 不扫描或修改 `ai_root` 以外的路径；
 - 所有测试使用临时目录，不操作生产 `data/ai`；
 - `external_api_calls=0`：本次修复仅限文件状态管理，不涉及 AI 模型或网络调用。
+
+## 15. Stage 2.5B-RH 状态对账最终失败关闭加固（2026-07-31）
+
+> 独立审计发现 4 类失败关闭缺口：权威文件未使用完整 Schema 校验、
+> cache_key 存在性检查不严格、删除操作不验证结果、lease 与 manifest
+> 身份未充分验证。本次仅修复这 4 类缺口并加固 CLI 语义。
+
+### 15.1 四类缺口
+
+| 缺口 | 旧行为 | 新行为 |
+|---|---|---|
+| AI Result Schema | 仅检查键存在 | 调用 `validate_ai_result()` 完整校验；completed 需 status=success；failed 需 status=failed/refused/invalid_output |
+| cache_key | `if auth_ck and other_ck and ...` 允许缺失通过 | 必须是非空 str，两边完全相同，否则失败关闭 |
+| 删除验证 | `os.remove` 失败静默忽略，仍追加 actions | `remove_with_retry_verified()` 重试 + 确认不存在；仅成功时记录 action |
+| Lease 身份 | 仅检查 batch_id/worker_id（若提供） | 十项验证：manifest 存在且合法，batch/worker 一致，task 在 manifest 中，lease 身份一致 |
+
+### 15.2 Terminal + Queue 处理
+
+`completed/failed` 与 `queue` 同时存在时：完成身份和 cache_key 校验后，
+terminal 为权威，安全删除残留 queue；不一致则失败关闭。
+
+### 15.3 Reconcile CLI 强身份验证
+
+- `reconcile --dry-run`：可不传 `--batch-id` / `--worker-id`
+- `reconcile --apply`：必须同时提供两者，否则参数错误（CLI 非零）
+
+`reconcile_batch` 在指定 `batch_id` 时仅扫描该 manifest 中的任务。
+
+### 15.4 报告语义增强
+
+`reconcile_task_state` 报告新增：
+- `cleanup_attempted` / `cleanup_succeeded` / `cleanup_failed`
+- `unresolved_paths`（因删除失败残留的文件路径）
+- `would_reconcile`（dry_run 使用，与 `reconciled` 区分）
+- `planned_actions`（dry_run 时计划执行的操作）
+- `actions` 仅记录已成功完成的操作
+
+### 15.5 新增测试
+
+`test_stage25b2b_recovery_hardening.py`（12 项）已加入 `pipeline_runner.py` 固定闸门。
+

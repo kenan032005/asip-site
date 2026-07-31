@@ -878,6 +878,7 @@ def reconcile_batch(ai_root=AI_ROOT, dry_run=False, batch_id=None,
     - dry_run: 仅报告不修改
     - apply: 执行安全清理（仅匹配身份的 completed/failed 权威 + 清理残留）
     - 硬冲突不自动处理
+    - 2.5B-RH: 当 batch_id 指定时，仅扫描该 manifest 中的任务
     """
     _ensure_dirs(ai_root)
     report = {
@@ -887,15 +888,35 @@ def reconcile_batch(ai_root=AI_ROOT, dry_run=False, batch_id=None,
         "conflicts": 0,
         "actions": [],
     }
-    # 收集所有 task_id
+    # 收集所有 task_id（或限定 manifest 内的任务）
     all_tids = set()
-    for st_dir in ("queue", "processing", "completed", "failed"):
-        d = os.path.join(ai_root, st_dir)
-        if not os.path.isdir(d):
-            continue
-        for fn in os.listdir(d):
-            if fn.endswith(".json"):
-                all_tids.add(fn[:-5])
+    if batch_id:
+        man_path = os.path.join(ai_root, "batches", batch_id, "manifest.json")
+        if not os.path.exists(man_path):
+            report["conflicts"] += 1
+            report["actions"].append({"error": "manifest_not_found",
+                                       "batch_id": batch_id})
+            return report
+        try:
+            with open(man_path, "r", encoding="utf-8") as f:
+                manifest = json.load(f)
+        except Exception:
+            report["conflicts"] += 1
+            report["actions"].append({"error": "manifest_invalid",
+                                       "batch_id": batch_id})
+            return report
+        for t in manifest.get("tasks", []):
+            tid = t.get("task_id")
+            if tid:
+                all_tids.add(tid)
+    else:
+        for st_dir in ("queue", "processing", "completed", "failed"):
+            d = os.path.join(ai_root, st_dir)
+            if not os.path.isdir(d):
+                continue
+            for fn in os.listdir(d):
+                if fn.endswith(".json"):
+                    all_tids.add(fn[:-5])
     lease_dir = os.path.join(ai_root, "leases")
     if os.path.isdir(lease_dir):
         for fn in os.listdir(lease_dir):
@@ -1093,11 +1114,14 @@ def main(argv=None):
     rec_mode.add_argument("--dry-run", action="store_true",
                           help="report only, no changes")
     rec_mode.add_argument("--apply", action="store_true",
-                          help="execute safe cleanups")
+                          help="execute safe cleanups "
+                               "(requires --batch-id and --worker-id)")
     rec_cmd.add_argument("--batch-id", default=None,
-                         help="batch_id for lease matching")
+                         help="batch_id for lease matching "
+                              "(required with --apply)")
     rec_cmd.add_argument("--worker-id", default=None,
-                         help="worker_id for lease matching")
+                         help="worker_id for lease matching "
+                              "(required with --apply)")
 
     try:
         args = ap.parse_args(argv)
@@ -1151,6 +1175,12 @@ def main(argv=None):
             return 0
         elif args.cmd == "reconcile":
             dry_run = getattr(args, "dry_run", False)
+            apply_mode = getattr(args, "apply", False)
+            # 2.5B-RH: --apply 必须提供 batch-id 和 worker-id
+            if apply_mode and (not args.batch_id or not args.worker_id):
+                sys.stderr.write(
+                    "error: --apply requires --batch-id and --worker-id\n")
+                return 2
             rep = reconcile_batch(
                 root, dry_run=dry_run,
                 batch_id=args.batch_id, worker_id=args.worker_id)

@@ -17,7 +17,7 @@ import json
 import time
 import tempfile
 
-from .contracts import validate_ai_task, SCHEMA_VERSION
+from .contracts import validate_ai_task, validate_ai_result, SCHEMA_VERSION
 from .identifiers import generate_ai_task_id, generate_ai_cache_key
 from .exceptions import TaskValidationError, TaskStateError
 from .provider import BaseAIProvider
@@ -177,31 +177,108 @@ def move_task(task_id, from_state, to_state, ai_root=AI_ROOT, updates=None,
     return new_obj
 
 
-# ── Stage 2.5B-2B-R: 状��中断对账 ──
+# ── Stage 2.5B-2B-R: 状态中断对账 ──
+# Stage 2.5B-RH 加固：完整 Schema 校验、严格 cache_key 一致、删除验证、lease 身份验证
 
 _STATE_DIRS = ("queue", "processing", "completed", "failed", "cache")
 
 _AUTHORITATIVE_STATES = ("completed", "failed")
 
-_AI_RESULT_REQUIRED_KEYS = ("task_id", "schema_version", "status", "provider",
-                             "model", "started_at", "completed_at", "result",
-                             "error", "usage")
+
+def remove_with_retry_verified(path, retries=5, delay=0.2):
+    """安全删除文件：重试后确认文件不存在才返回 True。
+
+    返回 (success: bool, error: str or None)。
+    - 文件原本不存在也视为成功；
+    - 删除后 os.path.exists 验证确认；
+    - 不忽略 OSError。
+    """
+    if not os.path.exists(path):
+        return (True, None)
+    last_err = None
+    for _ in range(retries):
+        try:
+            os.remove(path)
+        except (OSError, PermissionError) as e:
+            last_err = str(e)
+            time.sleep(delay)
+            continue
+        if not os.path.exists(path):
+            return (True, None)
+        last_err = "file persists after removal"
+        time.sleep(delay)
+    return (False, last_err)
+
+
+def _validate_authoritative_file(auth_obj, auth_state, task_id):
+    """验证权威状态文件的完整性和身份。
+
+    completed: 必须有有效 ai_result，通过 Schema，status=success，task_id 一致。
+    failed: 必须有有效 cache_key，ai_result 若存在则通过 Schema，status 为 failed/refused/invalid_output。
+    返回 (ok: bool, error_label: str or None)。
+    """
+    # cache_key 必须存在且为非空字符串
+    ck = auth_obj.get("cache_key")
+    if not isinstance(ck, str) or not ck:
+        return (False, "missing_or_invalid_cache_key_in_%s" % auth_state)
+
+    if auth_obj.get("status") != _status_for_state(auth_state):
+        return (False, "status_mismatch_in_%s" % auth_state)
+
+    if auth_obj.get("task_id") != task_id:
+        return (False, "task_id_mismatch_in_%s" % auth_state)
+
+    ai_result = auth_obj.get("ai_result")
+
+    if auth_state == "completed":
+        if not isinstance(ai_result, dict):
+            return (False, "ai_result_missing_in_completed")
+        if ai_result.get("task_id") != task_id:
+            return (False, "ai_result_task_id_mismatch")
+        if ai_result.get("status") != "success":
+            return (False, "ai_result_status_not_success")
+        # 完整 Schema 校验
+        schema_errs = validate_ai_result(ai_result)
+        if schema_errs:
+            return (False, "ai_result_schema_invalid")
+
+    if auth_state == "failed":
+        if not isinstance(auth_obj.get("status"), str) or \
+           auth_obj["status"] not in ("failed", "permanently_failed"):
+            return (False, "status_not_failed")
+        if ai_result is not None:
+            if not isinstance(ai_result, dict):
+                return (False, "ai_result_invalid_in_failed")
+            if ai_result.get("task_id") != task_id:
+                return (False, "ai_result_task_id_mismatch")
+            if ai_result.get("status") not in ("failed", "refused", "invalid_output"):
+                return (False, "ai_result_status_not_failed_style")
+            schema_errs = validate_ai_result(ai_result)
+            if schema_errs:
+                return (False, "ai_result_schema_invalid")
+
+    return (True, None)
+
+
+def _strict_cache_key_match(auth_obj, other_obj, auth_state, other_state):
+    """严格 cache_key 一致性检查。缺失、为空、类型非 str、不同均失败。"""
+    ack = auth_obj.get("cache_key")
+    ock = other_obj.get("cache_key")
+    if not isinstance(ack, str) or not ack:
+        return (False, "cache_key_missing_or_empty_%s" % auth_state)
+    if not isinstance(ock, str) or not ock:
+        return (False, "cache_key_missing_or_empty_%s" % other_state)
+    if ack != ock:
+        return (False, "cache_key_mismatch_%s_vs_%s" % (other_state, auth_state))
+    return (True, None)
 
 
 def reconcile_task_state(task_id, ai_root=AI_ROOT, batch_id=None,
                          worker_id=None, dry_run=False):
     """中断后状态对账：检查同一 task_id 在多个状态目录中的残留并自动修复。
 
-    返回统一报告（详见 WORKBUDDY_AI_WORKER.md 第四节）。
-
-    规则摘要：
-      - 唯一状态文件：无需修改；
-      - completed + processing（满足身份校验）：completed 权威，清理 processing 和匹配 lease；
-      - failed + processing（满足身份校验）：failed 权威，清理 processing 和匹配 lease；
-      - completed + failed：硬冲突，失败关闭；
-      - task_id 或 cache_key 不一致：state_identity_conflict，失败关闭；
-      - 权威文件损坏：invalid_authoritative_file，失败关闭；
-      - lease 仅在 batch_id, worker_id 匹配时删除。
+    返回统一报告含 cleanup_attempted/cleanup_succeeded/cleanup_failed/
+    unresolved_paths/would_reconcile（2.5B-RH 加固版）。
     """
     _ensure_ai_dirs(ai_root)
     report = {
@@ -210,7 +287,13 @@ def reconcile_task_state(task_id, ai_root=AI_ROOT, batch_id=None,
         "states_found": [],
         "lease_found": False,
         "actions": [],
+        "planned_actions": [],
         "conflicts": [],
+        "cleanup_attempted": 0,
+        "cleanup_succeeded": 0,
+        "cleanup_failed": 0,
+        "unresolved_paths": [],
+        "would_reconcile": False,
         "reconciled": False,
     }
 
@@ -225,7 +308,6 @@ def reconcile_task_state(task_id, ai_root=AI_ROOT, batch_id=None,
                 files_found[st_dir] = obj
                 report["states_found"].append(st_dir)
             except (json.JSONDecodeError, OSError):
-                # 文件存在但损坏
                 files_found[st_dir] = None
                 report["states_found"].append(st_dir)
 
@@ -242,11 +324,11 @@ def reconcile_task_state(task_id, ai_root=AI_ROOT, batch_id=None,
 
     # 3. 计算权威状态
     auth_states = [s for s in _AUTHORITATIVE_STATES if s in files_found]
-    other_states = [s for s in files_found if s not in _AUTHORITATIVE_STATES
-                    and s != "queue" and s != "cache"]
+    # queue 和 cache 也应在对账范围内
+    other_states = [s for s in files_found
+                    if s not in _AUTHORITATIVE_STATES and s != "cache"]
 
     if not auth_states:
-        # 无权威状态，按顺序确定
         for st in ("processing", "queue", "failed", "completed"):
             if st in files_found:
                 report["authoritative_state"] = st
@@ -261,89 +343,120 @@ def reconcile_task_state(task_id, ai_root=AI_ROOT, batch_id=None,
     auth_state = auth_states[0]
     auth_obj = files_found.get(auth_state)
 
-    # 5. 权威文件损坏检查
+    # 5. 权威文件损坏/校验
     if auth_obj is None:
         report["conflicts"].append("invalid_authoritative_file")
         return report
 
-    # 6. 权威状态身份校验
-    if auth_obj.get("task_id") != task_id:
-        report["conflicts"].append("task_id_mismatch_in_authoritative")
+    valid, err_label = _validate_authoritative_file(auth_obj, auth_state, task_id)
+    if not valid:
+        report["conflicts"].append(err_label)
         return report
 
-    if auth_state != "cache" and auth_obj.get("status") != _status_for_state(auth_state):
-        report["conflicts"].append("status_mismatch_in_authoritative")
-        return report
-
-    # 7. completed 额外校验：ai_result 存在且合法
-    if auth_state == "completed":
-        ai_result = auth_obj.get("ai_result")
-        if not isinstance(ai_result, dict):
-            report["conflicts"].append("ai_result_missing_in_completed")
-            return report
-        if ai_result.get("task_id") != task_id:
-            report["conflicts"].append("ai_result_task_id_mismatch")
-            return report
-        # 至少检查 ai_result 的关键字段存在
-        for key in _AI_RESULT_REQUIRED_KEYS:
-            if key not in ai_result:
-                report["conflicts"].append("ai_result_incomplete")
-                return report
-
-    # 8. 检查需要清理的其它状态文件
+    # 6. 校验需要清理的其它状态文件
     stale_states = [s for s in other_states if s in files_found
                     and s not in _AUTHORITATIVE_STATES]
 
     for st in stale_states:
         obj = files_found[st]
         if obj is None:
+            report["conflicts"].append("corrupt_file_in_%s" % st)
             continue
-        # 身份一致性校验
         if obj.get("task_id") != task_id:
-            report["conflicts"].append(
-                "task_id_mismatch_%s_vs_%s" % (st, auth_state))
+            report["conflicts"].append("task_id_mismatch_%s_vs_%s" % (st, auth_state))
             continue
-        # cache_key 一致性
-        auth_ck = auth_obj.get("cache_key")
-        other_ck = obj.get("cache_key")
-        if auth_ck and other_ck and auth_ck != other_ck:
-            report["conflicts"].append(
-                "cache_key_mismatch_%s_vs_%s" % (st, auth_state))
+        ok, err = _strict_cache_key_match(auth_obj, obj, auth_state, st)
+        if not ok:
+            report["conflicts"].append(err)
             continue
 
-    # 如果存在冲突，失败关闭
     if report["conflicts"]:
         return report
 
-    # 9. 执行清理（仅在没有冲突时）
-    if not dry_run and stale_states:
-        for st in stale_states:
-            path = os.path.join(ai_root, st, "%s.json" % task_id)
-            try:
-                os.remove(path)
-            except OSError:
-                continue
-            report["actions"].append("removed_%s" % st)
+    # 7. lease 严格身份验证
+    can_clean_lease = False
+    if lease_obj is not None:
+        if not batch_id or not worker_id:
+            report["conflicts"].append("lease_identity_requires_batch_and_worker")
+        else:
+            # manifest 必须存在且合法
+            man_path = os.path.join(ai_root, "batches", batch_id, "manifest.json")
+            if not os.path.exists(man_path):
+                report["conflicts"].append("lease_manifest_missing")
+            else:
+                try:
+                    with open(man_path, "r", encoding="utf-8") as f:
+                        manifest = json.load(f)
+                except Exception:
+                    manifest = None
+                if manifest is None:
+                    report["conflicts"].append("lease_manifest_invalid")
+                else:
+                    # 十项身份验证
+                    man_bid = manifest.get("batch_id", "")
+                    man_wid = manifest.get("worker_id", "")
+                    man_tasks = {t.get("task_id") for t in
+                                 manifest.get("tasks", [])}
+                    checks = [
+                        (lease_obj.get("task_id") == task_id, "lease_task_id_mismatch"),
+                        (isinstance(batch_id, str) and bool(batch_id), "batch_id_not_provided"),
+                        (isinstance(worker_id, str) and bool(worker_id), "worker_id_not_provided"),
+                        (man_bid == batch_id, "manifest_batch_id_mismatch"),
+                        (man_wid == worker_id, "manifest_worker_id_mismatch"),
+                        (task_id in man_tasks, "task_id_not_in_manifest_tasks"),
+                        (lease_obj.get("task_id") == task_id, "lease_task_id_mismatch"),
+                        (lease_obj.get("batch_id") == batch_id, "lease_batch_id_mismatch"),
+                        (lease_obj.get("worker_id") == worker_id, "lease_worker_id_mismatch"),
+                    ]
+                    passed = True
+                    for cond, label in checks:
+                        if not cond:
+                            report["conflicts"].append(label)
+                            passed = False
+                    can_clean_lease = passed
 
-    # 10. 清理匹配的 lease
-    if not dry_run and lease_obj is not None:
-        can_clean_lease = True
-        if batch_id and lease_obj.get("batch_id") != batch_id:
-            can_clean_lease = False
-            report["conflicts"].append("lease_batch_id_mismatch")
-        if worker_id and lease_obj.get("worker_id") != worker_id:
-            can_clean_lease = False
-            report["conflicts"].append("lease_worker_id_mismatch")
+    # 8. dry_run 或执行清理
+    if not stale_states and not can_clean_lease:
+        report["authoritative_state"] = auth_state
+        return report
+
+    if dry_run:
+        report["authoritative_state"] = auth_state
+        report["would_reconcile"] = True
+        report["planned_actions"] = ["would_remove_%s" % s for s in stale_states]
         if can_clean_lease:
-            try:
-                os.remove(lease_path)
-            except OSError:
-                pass
-            report["actions"].append("removed_lease")
+            report["planned_actions"].append("would_remove_lease")
+        return report
 
-    report["reconciled"] = bool(stale_states or (
-        lease_obj is not None and not report["conflicts"] and batch_id
-    )) and not report["conflicts"]
+    # 实际执行清理
+    for st in stale_states:
+        path = os.path.join(ai_root, st, "%s.json" % task_id)
+        report["cleanup_attempted"] += 1
+        ok, err = remove_with_retry_verified(path)
+        if ok:
+            report["cleanup_succeeded"] += 1
+            report["actions"].append("removed_%s" % st)
+        else:
+            report["cleanup_failed"] += 1
+            report["unresolved_paths"].append(path)
+            report["conflicts"].append("cleanup_failed_%s" % st)
+
+    if can_clean_lease:
+        report["cleanup_attempted"] += 1
+        ok, err = remove_with_retry_verified(lease_path)
+        if ok:
+            report["cleanup_succeeded"] += 1
+            report["actions"].append("removed_lease")
+        else:
+            report["cleanup_failed"] += 1
+            report["unresolved_paths"].append(lease_path)
+            report["conflicts"].append("cleanup_failed_lease")
+
+    report["reconciled"] = (
+        report["cleanup_succeeded"] > 0
+        and report["cleanup_failed"] == 0
+        and not report["conflicts"]
+    )
     report["authoritative_state"] = auth_state
 
     return report
