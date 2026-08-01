@@ -97,9 +97,9 @@ def load_runtime_config(path=None):
         # 损坏或缺失 -> 使用安全默认值
         cfg = dict(DEFAULT_RUNTIME)
 
-    # 环境变量覆盖（仅非敏感字段）
+    # 环境变量覆盖（仅非敏感字段；空值视为未设置，不覆盖文件配置）
     for env, spec in _ENV_MAP.items():
-        if env in os.environ:
+        if env in os.environ and os.environ[env].strip():
             raw = os.environ[env]
             if isinstance(spec, tuple):
                 key, typ = spec
