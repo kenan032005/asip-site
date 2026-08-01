@@ -69,7 +69,7 @@ SECURITY_POS = [
     "robbery", "frontière", "frontier", "couvre-feu", "curfew", "crise",
     "émeute", "riot", "violence", "violences", "armed", "armé", "milice",
     "militia", "rebel", "armée", "police", "drone", "séquestration",
-    "exécution", "execution", "massacre", "déplacement", "deplacement",
+    "exécution", "execution", "massacre",
     "réfugié", "refugie", "refugee", "inondation", "inondations", "crue",
     "flood", "drought", "sécheresse", "epidemic", "épidémie", "cholera",
     "choléra", "earthquake", "séisme", "grève", "greve", "strike",
@@ -107,6 +107,24 @@ SECURITY_POS = [
     "fds tombés", "fds tombes", "militaires tués", "militaires tues",
     "miné", "mine", "minée", "mined", "champ de mines", "champ de minage",
     "démineur", "demineur", "démineurs", "demineurs", "bonbonne",
+    # 武器/安全部队行动词汇（Stage 3B）
+    "armes", "armes de guerre", "désarmement", "desarmement", "weapons",
+    "restitution d'armes", "remise d'armes", "remise volontaire",
+    "opération de sécurisation", "operation de securisation", "bavure",
+    "bavures", "tuerie", "échanges de tirs", "echanges de tirs",
+    "tirs croisés", "tirs croises", "attaque de convoi", "attaque de véhicule",
+    "attaque de vehicule", "braquage à main armée", "braquage a main armee",
+    "coupeurs de route", "bande armée", "bande armee",
+    "état-major", "etat-major", "état major", "gendarmerie", "forces de l'ordre",
+    "forces de l ordre", "arrestations massives", "arrestation d'un",
+    "saisie d'armes", "saisie d armes", "cache d'armes", "cache d armes",
+    "explosion d'un", "explosion d un", "explosion de", "détonation", "detonation",
+    "barrage", "checkpoint", "poste de contrôle", "poste de controle",
+    "zone rouge", "zone interdite", "état d urgence",
+    # 流离失所（限定组合，避免位移/出差误判）
+    "déplacement de population", "deplacement de population",
+    "déplacement forcé", "deplacement force", "déplacés", "deplaces",
+    "déplacées", "deplacees", "déplacé", "deplace",
 ]
 
 # mine 的爆炸物/地雷语境（满足其一才计入安全相关）
@@ -143,6 +161,23 @@ EXCLUDE_CULTURE = [
     "film", "cinema", "cinéma", "concert", "festival culturel", "musique",
     "mode", "fashion", "célébrité", "celebrity", "spectacle", "exposition",
     "galerie", "chanteur", "chanteuse",
+    # Stage 3B：音乐/艺术/文学/节日
+    "chante", "chanson", "chansons", "album", "artiste", "musiciens",
+    "musicien", "musicienne", "titre musical", "clip", "concert",
+    "poème", "poeme", "poésie", "poesie", "roman", "livre", "écrivain",
+    "ecrivain", "exposition d'art", "peintre", "sculpteur", "théâtre",
+    "theatre", "danse", "ballet", "semaine culturelle", "festival de",
+    "fête de l'indépendance", "fete de l independance", "célébration de",
+    "celebration de", "anniversaire de", "99ème", "anniversaire du parti",
+    "journée internationale", "journee internationale", "commémoration de",
+    "commemoration de", "hommage à un artiste", "hommage a un artiste",
+    # 讣告/悼念（非安全事件）
+    "nécrologique", "necrologique", "nécrologie", "necrologie", "décès",
+    "deces", "décédé", "decede", "décédée", "decedee", "in memoriam",
+    "obsèques", "obseques", "enterrement", "sépulture", "sepulture",
+    "dernier hommage", "dernier adieu", "convoi funèbre", "convoy funebre",
+    "cérémonie funèbre", "ceremonie funebre", "deuil", "funérailles",
+    "funerailles", "obituaire", "condoléances", "condoleances",
 ]
 EXCLUDE_PROMO = [
     "livraison d'engrais", "engrais", "fertilizer", "semences", "seeds",

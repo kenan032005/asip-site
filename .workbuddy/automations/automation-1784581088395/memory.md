@@ -908,6 +908,15 @@
 - final_status: failed。日志：logs/pipeline_20260801T091912+0800_236o31.json。
 - 处理：按规则如实汇报失败，未自行重试、未手工部署；需由维护者清理本地未暂存改动后下次再跑。
 
+## 2026-08-01 13:48 (GMT+3) 执行 —— 本次运行失败
+- 运行命令：scripts/pipeline_runner.py --mode incremental --trigger scheduled（退出码 1）。
+- 步骤 git_pull：success（main 已最新，Already up to date）。
+- 步骤 unit_tests：FAILED。test_stage25de_cloud_provider.py 报错 "the environment variable is longer than 32767 characters"，Ran 29 tests, PASS=28 FAIL=1（rc=1）。其余测试文件均 PASS、FAIL=0。
+- 后续步骤（采集/汇总/构建/校验/推送/部署/线上验证）未执行。
+- main_commit / gh_pages_commit / online_run_id：均为空（未达成）。
+- final_status: failed。日志：logs/pipeline_20260801T184831+0800_bt8gg7.json。
+- 处理：按规则如实汇报失败，未自行重试、未手工部署；与 02:28 同因，疑似沙箱环境变量超限导致云厂商测试无法构造环境。
+
 ## 2026-08-01 08:07 (GMT+3) 执行 —— 本次运行失败
 - 运行命令：scripts/pipeline_runner.py --mode incremental --trigger scheduled（退出码 1）。
 - 步骤 git_pull：FAILED。错误 "cannot pull with rebase: You have unstaged changes"，本地存在未暂存改动，导致 pull --rebase 中止（与 04:19 同因）。
@@ -915,3 +924,19 @@
 - main_commit / gh_pages_commit / online_run_id：均为空（未达成）。
 - final_status: failed。日志：logs/pipeline_20260801T130746+0800_d0xqxn.json。
 - 处理：按规则如实汇报失败，未自行重试、未手工部署；需由维护者清理本地未暂存改动后下次再跑。
+
+## 2026-08-01 15:45 (GMT+3) 执行 —— 本次运行失败
+- 运行命令：scripts/pipeline_runner.py --mode incremental --trigger scheduled（退出码 1）。
+- 步骤 git_pull：FAILED。错误 "cannot pull with rebase: You have unstaged changes"，本地存在未暂存改动，导致 pull --rebase 中止（与 04:19、08:07 同因，反复出现）。
+- 后续步骤（采集/汇总/构建/校验/推送/部署/线上验证）未执行。
+- main_commit / gh_pages_commit / online_run_id：均为空（未达成）。
+- final_status: failed。日志：logs/pipeline_20260801T204541+0800_n77p2s.json。
+- 处理：按规则如实汇报失败，未自行重试、未手工部署；需由维护者清理本地未暂存改动（commit 或 stash）后下次再跑。
+
+## 2026-08-01 17:41 (GMT+3) 执行 —— 本次运行失败
+- 运行命令：scripts/pipeline_runner.py --mode incremental --trigger scheduled（退出码 1）。
+- 步骤 git_pull：FAILED。错误 "cannot pull with rebase: You have unstaged changes"，本地存在未暂存改动，导致 pull --rebase 中止（与 04:19、08:07、15:45 同因，反复出现）。
+- 后续步骤（采集/汇总/构建/校验/推送/部署/线上验证）未执行。
+- main_commit / gh_pages_commit / online_run_id：均为空（未达成）。
+- final_status: failed。日志：logs/pipeline_20260801T224148+0800_0qmzp9.json。
+- 处理：按规则如实汇报失败，未自行重试、未手工部署；需由维护者清理本地未暂存改动（commit 或 stash）后下次再跑。
