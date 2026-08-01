@@ -327,6 +327,16 @@ def run_mode(mode, trigger):
             log["ai_worker_metrics_error"] = "<redacted:%s>" % type(_e).__name__
 
         if not tests_ok:
+            # Print failing test filenames (not just truncated tail) for CI debuggability
+            failing = []
+            for line in tests_out.split("\n"):
+                if "rc=" in line:
+                    parts = line.strip().split(" rc=")
+                    if len(parts) >= 2:
+                        rc_val = parts[1].split()[0] if parts[1] else ""
+                        if rc_val != "0" or "FAIL=0" not in parts[1]:
+                            failing.append(parts[0])
+            print(f"  FAILING TESTS: {failing}")
             print(tests_out[-600:])
             log["final_status"] = "failed"
             save_run_log(log, run_id)
