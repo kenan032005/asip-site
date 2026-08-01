@@ -616,24 +616,128 @@ class ContentExtractor:
             reasons.append("looks_like_listing_or_home")
 
 
-# ── 缓存 ─────────────────────────────────────────────
+# ── 缓存（article_processing_state 状态机）────────────
+# 状态语义（终态可永久跳过；非终态允许重试）：
+#   discovered              – 仅发现链接，不得跳过（不应单独持久化）
+#   fetch_succeeded         – 详情页抓取成功（过渡态）
+#   fetch_failed_retryable  – 网络超时/429/503/404，允许重试
+#   extraction_succeeded    – 正文提取成功（过渡态）
+#   extraction_failed_retryable – 正文提取失败，允许重试
+#   published               – 已发布事件（终态，永久跳过）
+#   quarantined_terminal    – 已隔离且不可恢复（终态，永久跳过）
+TERMINAL_STATES = frozenset({"published", "quarantined_terminal"})
+RETRYABLE_STATES = frozenset({"fetch_failed_retryable", "extraction_failed_retryable"})
+
 def cache_path(source_id):
     return os.path.join(CACHE_DIR, f"{source_id}.json")
 
 
-def load_cache(source_id):
+def load_state_cache(source_id):
+    """加载来源的状态缓存。损坏或缺失时返回安全空结构。"""
     p = cache_path(source_id)
     try:
         with open(p, "r", encoding="utf-8") as f:
-            return json.load(f)
+            doc = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
-        return {"seen_urls": [], "seen_hashes": [], "etag": "", "last_modified": ""}
+        return {"articles": {}, "etag": "", "last_modified": "", "version": 2}
+    # 迁移旧格式：seen_urls → article_processing_state
+    if "seen_urls" in doc and "articles" not in doc:
+        doc = _migrate_old_cache(doc)
+    return doc
 
 
-def save_cache(source_id, cache):
+def save_state_cache(source_id, cache_doc):
+    """原子写入状态缓存（先写 temp 再 rename）。"""
     os.makedirs(CACHE_DIR, exist_ok=True)
-    with open(cache_path(source_id), "w", encoding="utf-8") as f:
-        json.dump(cache, f, ensure_ascii=False, indent=2)
+    p = cache_path(source_id)
+    tmp = p + ".tmp"
+    cache_doc.setdefault("version", 2)
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(cache_doc, f, ensure_ascii=False, indent=2)
+    os.replace(tmp, p)
+
+
+def _migrate_old_cache(doc):
+    """将旧 seen_urls 缓存迁移为 article_processing_state。
+    规则：published_events 中存在的 URL → published（终态）；
+          其余 → 不创建任何记录（允许重新处理）。"""
+    pub_urls = _load_published_urls()
+    articles = {}
+    for url in doc.get("seen_urls", []):
+        nu = norm_url(url)
+        if nu and nu in pub_urls:
+            articles[nu] = {
+                "state": "published", "body_hash": "",
+                "published_event_id": pub_urls[nu], "quarantine_id": "",
+                "error": "", "attempts": 1,
+                "last_attempt_at": doc.get("last_modified", ""),
+            }
+    return {"articles": articles, "etag": doc.get("etag", ""),
+            "last_modified": doc.get("last_modified", ""), "version": 2}
+
+
+def _load_published_urls():
+    """加载已发布事件的所有 source_links URL（规范化后）。用于迁移。"""
+    try:
+        path = os.path.join(ROOT, "data", "public", "published_events.json")
+        with open(path, "r", encoding="utf-8") as f:
+            pub = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+    urls = {}
+    for ev in pub.get("items", []):
+        eid = ev.get("event_id", "")
+        for sl in ev.get("source_links", []):
+            nu = norm_url(sl.get("url", ""))
+            if nu:
+                urls[nu] = eid
+    return urls
+
+
+def get_article_state(cache_doc, url):
+    """获取单篇文章的处理状态。返回 state 字符串或 None（未处理）。"""
+    return cache_doc.get("articles", {}).get(norm_url(url), {}).get("state")
+
+
+def should_skip(url, cache_doc):
+    """URL 是否为终态（已发布/已隔离终态），可安全跳过。"""
+    nu = norm_url(url)
+    art = cache_doc.get("articles", {}).get(nu)
+    if not art:
+        return False
+    return art.get("state", "") in TERMINAL_STATES
+
+
+def should_retry(url, cache_doc):
+    """URL 是否处于允许重试状态（非终态）。"""
+    nu = norm_url(url)
+    art = cache_doc.get("articles", {}).get(nu)
+    if not art:
+        return False  # never processed
+    st = art.get("state", "")
+    return st in RETRYABLE_STATES or st == ""
+
+
+def set_article_state(cache_doc, url, state, **extra):
+    """设置文章状态（只允许严格的状态转换）。向 extra 传入附加字段。"""
+    nu = norm_url(url)
+    if "articles" not in cache_doc:
+        cache_doc["articles"] = {}
+    now = bj_iso()
+    entry = {
+        "state": state,
+        "last_attempt_at": now,
+        "attempts": cache_doc.get("articles", {}).get(nu, {}).get("attempts", 0) + 1,
+    }
+    entry.update(extra)
+    cache_doc["articles"][nu] = entry
+
+
+def clear_completed_collection():
+    """清理已完成采集的缓存（仅非终态可删除）。"""
+    # 保留终态记录（published/quarantined_terminal），清理过渡态
+    # 不做批量删除，由 stage3_collect_v2 --fresh 控制
+    pass
 
 
 # ── 去重 ─────────────────────────────────────────────

@@ -27,7 +27,9 @@ sys.path.insert(0, os.path.join(ROOT, "scripts", "collectors"))
 
 from framework import (  # noqa: E402
     fetch_page, validate_url, norm_url, content_hash, bj_iso, bj_now,
-    parse_original_time, to_beijing, load_cache, save_cache, CACHE_DIR,
+    parse_original_time, to_beijing,
+    load_state_cache, save_state_cache, should_skip, should_retry,
+    set_article_state, TERMINAL_STATES, CACHE_DIR,
 )
 from registry import SourceRegistry, ArticleDiscoverer  # noqa: E402
 from country_runner import (load_country_cfg, identify_country,  # noqa: E402
@@ -116,50 +118,73 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
             continue
         stat["discovered"] = len(discovered)
 
-        # 缓存（已成功提取的 URL）——fresh 模式下清空重抓
-        cache = load_cache(sid)
+        # 状态缓存（article_processing_state 状态机）
+        state_cache = load_state_cache(sid)
         if fresh:
-            cache = {"seen_urls": [], "seen_hashes": [], "etag": "", "last_modified": ""}
-        seen_urls = set(cache.get("seen_urls", []))
+            state_cache = {"articles": {}, "etag": "", "last_modified": "", "version": 2}
 
         # 2) 抓取详情页 + 3) 正文提取
         extractor = ContentExtractor(src.get("extractor_profile") or {})
         for d in discovered:
             url = d.get("url", "")
-            if url in seen_urls:
+            nurl = norm_url(url)
+            if not nurl:
+                continue
+
+            # 终态（已发布/已隔离终态）→ 跳过
+            if should_skip(nurl, state_cache):
                 stat["duplicates"] += 1
                 continue
+
             stat["fetched"] += 1
 
+            # 抓取详情页
             text, err, http_status = fetch_page(url)
-            fetched = {"status": "ok" if not err else "failed",
-                       "http_status": http_status, "attempts": 1}
             if err:
+                # 重试类错误（网络/超时/限流）→ fetch_failed_retryable
+                set_article_state(state_cache, nurl,
+                                  "fetch_failed_retryable",
+                                  error=str(err)[:80], http_status=http_status,
+                                  body_hash="")
                 stat["extraction_failed"] += 1
                 stat["errors"] += 1
                 continue
 
+            # 标记抓取成功（暂存，写入前会被覆盖）
+            body_hash = content_hash("", text or "")
+            set_article_state(state_cache, nurl, "fetch_succeeded",
+                              http_status=http_status, body_hash=body_hash)
+
+            # 正文提取
             extracted = extractor.extract(text, url)
             quality = extracted.get("quality", "extraction_failed")
             if quality == "full_body":
                 stat["full_body"] += 1
             elif quality == "partial_body":
                 stat["partial_body"] += 1
-            elif quality == "rss_summary_only":
+            elif quality in ("rss_summary_only",):
                 stat["summary_only"] += 1
             else:
                 stat["extraction_failed"] += 1
 
-            # 正文不足时不降级为 RSS 摘要（摘要≠正文）：保留 body 为空，
-            # body_status=rss_summary_only，仅存 summary 字段，不进入发布
+            # 正文不足时不降级为 RSS 摘要（摘要≠正文）
             if not extracted.get("body") and d.get("summary"):
                 extracted["body_status"] = "rss_summary_only"
                 extracted["quality"] = "rss_summary_only"
                 extracted["word_count"] = len(d["summary"].split())
                 stat["summary_only"] += 1
-            elif extracted.get("quality") in ("full_body", "partial_body"):
-                # 成功提取到正文 → 缓存该 URL（避免下次重复抓取）
-                seen_urls.add(url)
+
+            # 记录提取状态：成功或可重试
+            if extracted.get("quality") in ("full_body", "partial_body"):
+                set_article_state(state_cache, nurl, "extraction_succeeded",
+                                  body_hash=content_hash(extracted.get("title", ""),
+                                                         extracted.get("body", "")),
+                                  http_status=http_status)
+            else:
+                set_article_state(state_cache, nurl, "extraction_failed_retryable",
+                                  body_hash="",
+                                  http_status=http_status,
+                                  error="; ".join(extracted.get("quality_reasons", [])[:3]))
 
             article = {
                 "source_id": sid,
@@ -186,7 +211,7 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
                 "extraction_quality": extracted.get("quality", "extraction_failed"),
                 "extraction_quality_score": extracted.get("quality_score", 0),
                 "extraction_quality_reasons": extracted.get("quality_reasons", []),
-                "fetch_status": fetched["status"],
+                "fetch_status": "ok",
                 "fetch_http_status": http_status,
                 "fetch_attempts": 1,
                 "body_status": extracted.get("body_status", ""),
@@ -230,10 +255,6 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
 
             all_articles.append(article)
 
-        # 保存缓存
-        cache["seen_urls"] = list(seen_urls)[-2000:]
-        save_cache(sid, cache)
-
         # 6) 去重 + 7) 准入
         pub_doc = load_json(PUBLISHED_PATH, {"items": []})
         existing = pub_doc.get("items", [])
@@ -274,10 +295,15 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
             elif norm_url(a.get("article_url", "")) in existing_urls:
                 reason = "duplicate_url"
             else:
-                # 通过 → 构建事件
+                # 通过 → 构建事件，标记终态（published）
                 ev = build_event(a, run_id, country_cn)
                 published.append(ev)
                 existing_urls.add(norm_url(a.get("article_url", "")))
+                set_article_state(state_cache, a.get("article_url", ""),
+                                  "published",
+                                  published_event_id=ev.get("event_id", ""),
+                                  body_hash=content_hash(a.get("original_title", ""),
+                                                         a.get("original_body", "")))
                 stat["published"] += 1
                 continue
 
@@ -285,17 +311,21 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
                 stat["duplicates"] += 1
             else:
                 stat["quarantined"] += 1
+                # 终态隔离原因 → quariantined_terminal（后续跳过）；
+                # 非终态原因（弱信号/需复核）→ 不标记终态（允许后续重新评估）
+                is_terminal = reason not in ("weak_signal_needs_review",)
                 rc_map = {"country_scope_mismatch": "wrong_country",
                           "weak_signal_needs_review": "not_security_relevant",
                           "country_invalid": "wrong_country",
-                          "extraction_failed": "other",
-                          "title_only_not_publishable": "missing_required_fields",
-                          "summary_only_not_publishable": "missing_required_fields",
-                          "insufficient_content": "missing_required_fields",
+                          "extraction_failed": "extraction_failed",
+                          "title_only_not_publishable": "insufficient_body",
+                          "summary_only_not_publishable": "insufficient_body",
+                          "insufficient_content": "insufficient_body",
                           "not_security_relevant": "not_security_relevant",
                           "url_invalid": "invalid_url",
-                          "title_too_short": "missing_required_fields"}
-                quarantined.append({
+                          "title_too_short": "insufficient_body"}
+                qr_code = rc_map.get(reason, "other")
+                qr = {
                     "quarantine_id": "Q_" + hashlib.sha256((a.get("article_url") or "").encode()).hexdigest()[:16],
                     "original_object_type": "event",
                     "original_id": a.get("article_url", ""),
@@ -303,15 +333,22 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
                     "url": a.get("article_url", ""),
                     "source": a.get("source_name", ""),
                     "country": country_cn,
-                    "reason_code": rc_map.get(reason, "other"),
-                    "reason_cn": rc_map.get(reason, "other"),
+                    "reason_code": qr_code,
+                    "reason_cn": qr_code,
                     "detected_at": bj_iso(),
                     "detected_by": "stage3_collect_v2",
                     "restorable": True,
                     "schema_version": "2.0",
                     "pipeline_version": 2,
                     "original_payload": a,
-                })
+                }
+                quarantined.append(qr)
+                if is_terminal:
+                    set_article_state(state_cache, a.get("article_url", ""),
+                                      "quarantined_terminal",
+                                      quarantine_id=qr["quarantine_id"],
+                                      body_hash=content_hash(a.get("original_title", ""),
+                                                             a.get("original_body", "")))
 
         # 写入
         if published:
@@ -327,6 +364,9 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
             q_doc["items"] = q_doc.get("items", []) + fresh_q
             save_json(QUARANTINE_PATH, q_doc)
             stat["quarantined"] = len(fresh_q)
+
+        # 数据持久化后保存状态缓存（终态 published/quarantined_terminal 已标记）
+        save_state_cache(sid, state_cache)
 
         stat["duration_s"] = round(time.time() - t0, 1)
         per_source.append(stat)
