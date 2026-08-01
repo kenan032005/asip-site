@@ -59,6 +59,9 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Build site (pre-test)
+        run: python scripts/build_site.py
+
       - name: Run pipeline
         env:
           ASIP_AI_PROVIDER: ${{ inputs.provider }}
