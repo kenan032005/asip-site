@@ -882,6 +882,15 @@
 - 站点地址：https://kenan032005.github.io/asip-site/
 - 备注：仅运行 pipeline_runner.py 一条命令（退出码 0）；PAT 从 gitignored 的 deploy.token 读取仅用于推送，未写入任何提交文件；合规要求满足。
 
+## 2026-08-01 02:28 (GMT+3) 执行 —— 本次运行失败
+- 运行命令：scripts/pipeline_runner.py --mode incremental --trigger scheduled（退出码 1）。
+- 步骤 git_pull：success（main 已最新）。
+- 步骤 unit_tests：FAILED。test_stage25de_cloud_provider.py 报错 "the environment variable is longer than 32767 characters"，Ran 29 tests, PASS=28 FAIL=1（rc=1）。其余测试文件均 PASS=0 FAIL。
+- 后续步骤（采集/汇总/构建/校验/推送/部署/线上验证）未执行。
+- main_commit / gh_pages_commit / online_run_id：均为空（未达成）。
+- final_status: failed。日志：logs/pipeline_20260801T072720+0800_ymvr4w.json。
+- 处理：按规则如实汇报失败，未自行重试、未手工部署。疑似沙箱环境变量超限导致云厂商测试无法构造环境。
+
 ## 2026-07-28 08:39 (GMT+3) 执行
 - 采集：GDELT 返回 HTTP 429（Too Many Requests），本次采集未成功（网络问题）。data/events.json 无新增，本次新增事件：0。
 - 日报：generate_reports.py 生成 6 份日报（chad, niger, benin, south-sudan, sudan, ethiopia），reports_today=6（日期 2026-07-28 北京时间）。
@@ -890,3 +899,19 @@
 - 部署：gh-pages 强制推送成功（de95743...189b843）。
 - 站点地址：https://kenan032005.github.io/asip-site/
 - 备注：PAT 从 gitignored 的 deploy.token 读取，仅用于本次推送，未写入任何提交文件；采集限流不影响其余步骤，合规要求满足。
+
+## 2026-08-01 04:19 (GMT+3) 执行 —— 本次运行失败
+- 运行命令：scripts/pipeline_runner.py --mode incremental --trigger scheduled（退出码 1）。
+- 步骤 git_pull：FAILED。错误 "cannot pull with rebase: You have unstaged changes"，本地存在未暂存改动，导致 pull --rebase 中止。
+- 后续步骤（采集/汇总/构建/校验/推送/部署/线上验证）未执行。
+- main_commit / gh_pages_commit / online_run_id：均为空（未达成）。
+- final_status: failed。日志：logs/pipeline_20260801T091912+0800_236o31.json。
+- 处理：按规则如实汇报失败，未自行重试、未手工部署；需由维护者清理本地未暂存改动后下次再跑。
+
+## 2026-08-01 08:07 (GMT+3) 执行 —— 本次运行失败
+- 运行命令：scripts/pipeline_runner.py --mode incremental --trigger scheduled（退出码 1）。
+- 步骤 git_pull：FAILED。错误 "cannot pull with rebase: You have unstaged changes"，本地存在未暂存改动，导致 pull --rebase 中止（与 04:19 同因）。
+- 后续步骤（采集/汇总/构建/校验/推送/部署/线上验证）未执行。
+- main_commit / gh_pages_commit / online_run_id：均为空（未达成）。
+- final_status: failed。日志：logs/pipeline_20260801T130746+0800_d0xqxn.json。
+- 处理：按规则如实汇报失败，未自行重试、未手工部署；需由维护者清理本地未暂存改动后下次再跑。
