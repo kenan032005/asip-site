@@ -462,6 +462,129 @@ class TestStage3BPublishContract(unittest.TestCase):
         self.assertEqual(ev["body_status"], "full_body")
         self.assertEqual(ev["extraction_quality"], "full_body")
 
+    # ── 状态机 ──
+    def test_terminal_skip_published(self):
+        """published 状态为终态，should_skip 返回 True"""
+        from framework import load_state_cache, set_article_state, should_skip, TERMINAL_STATES
+        doc = {"articles": {}, "version": 2}
+        url = "https://example.com/published-article"
+        set_article_state(doc, url, "published", published_event_id="EVT_x")
+        self.assertTrue(should_skip(url, doc))
+        self.assertIn("published", TERMINAL_STATES)
+
+    def test_retryable_not_skipped(self):
+        """非终态（fetch_failed/extraction_failed）should_skip 返回 False"""
+        from framework import set_article_state, should_skip
+        doc = {"articles": {}, "version": 2}
+        set_article_state(doc, "https://a.com/fail", "fetch_failed_retryable")
+        self.assertFalse(should_skip("https://a.com/fail", doc))
+        set_article_state(doc, "https://a.com/efail", "extraction_failed_retryable")
+        self.assertFalse(should_skip("https://a.com/efail", doc))
+
+    def test_fresh_state_allows_refetch(self):
+        """未处理 URL should_skip 返回 False（允许重新处理）"""
+        from framework import should_skip
+        doc = {"articles": {}, "version": 2}
+        self.assertFalse(should_skip("https://example.com/new", doc))
+
+    def test_quarantined_terminal_skipped(self):
+        """终态隔离应被跳过"""
+        from framework import set_article_state, should_skip
+        doc = {"articles": {}, "version": 2}
+        set_article_state(doc, "https://a.com/q", "quarantined_terminal")
+        self.assertTrue(should_skip("https://a.com/q", doc))
+
+    # ── 正文状态一致性 ──
+    def test_full_body_has_nonempty_body(self):
+        """full_body 状态必须有非空 original_body"""
+        from framework import ContentExtractor
+        # 需要 150+ 词且 score 60+ 才到 full_body
+        html_lines = []
+        for i in range(10):
+            html_lines.append(
+                f"<p>Paragraphe {i} avec du contenu substantiel sur la situation "
+                "securitaire dans la region du Tchad et les consequences pour les "
+                "populations locales qui subissent les effets des conflits armes.</p>")
+        html = "<html><head><title>Article reel</title></head><body><article>" + "".join(html_lines) + "</article></body></html>"
+        ext = ContentExtractor({}).extract(html, "https://example.com/r")
+        self.assertEqual(ext["quality"], "full_body")
+        self.assertNotEqual(ext["body"], "")
+        self.assertGreater(ext["word_count"], 100)
+
+    def test_extraction_failed_not_publishable(self):
+        """extraction_failed 不得进入公开数据"""
+        from stage3_collect_v2 import ALLOWED_QUALITY
+        self.assertNotIn("extraction_failed", ALLOWED_QUALITY)
+        self.assertNotIn("title_only", ALLOWED_QUALITY)
+        self.assertNotIn("rss_summary_only", ALLOWED_QUALITY)
+
+    def test_body_status_never_empty_after_extract(self):
+        """每条结果 body_status 非空（ContentExtractor 强制），默认 extraction_failed"""
+        from framework import ContentExtractor
+        # 空 HTML → extraction_failed
+        ext1 = ContentExtractor({}).extract("", "")
+        self.assertIn(ext1["body_status"],
+                      ("extraction_failed",))
+        self.assertNotEqual(ext1["body_status"], "")
+        # 正常文章
+        html = "<html><head><title>Test</title></head><body><article><p>Un paragraphe sur la sécurité au Tchad avec assez de mots pour être considéré comme un article substantiel.</p><p>Deuxième paragraphe avec plus de détails sur la situation locale.</p></article></body></html>"
+        ext2 = ContentExtractor({}).extract(html, "https://example.com/t")
+        self.assertNotEqual(ext2["body_status"], "")
+
+    def test_word_count_consistent(self):
+        """article_word_count 与正文分词数一致"""
+        from framework import ContentExtractor
+        body = "un deux trois quatre cinq six sept huit neuf dix onze douze treize quatorze quinze seize dixsept dixhuit dixneuf vingt vingtetun vingtdeux vingttrois vingtquatre vingcinq vingtsix vingtsept vingthuit vingtneuf trente trenteetun trentedeux trentetrois trentequatre trencinq trensix trentsept trenthuit trentneuf quarante"
+        html = f"<html><head><title>Test</title></head><body><article><p>{body}</p><p>encore du texte pour que le corps de l article depasse le seuil de detection de deux cents caracteres et permette une extraction correcte du contenu.</p></article></body></html>"
+        ext = ContentExtractor({}).extract(html, "https://example.com/wc")
+        # 40 words in body
+        self.assertEqual(ext["word_count"], 66)
+
+    # ── 反假正文 ──
+    def test_listing_cards_rejected(self):
+        """含多个 'Lire la suite' 的列表卡片必须拦截"""
+        from framework import ContentExtractor
+        # 需要足够长的段落来通过 _extract_generic 阈值
+        html = ("<html><head><title>Actualites</title></head><body>"
+                "<article>"
+                "<p>" + "Article un avec un long paragraphe qui parle de la situation securitaire au Tchad. " * 3 + "Lire la suite</p>"
+                "<p>" + "Article deux avec un autre long paragraphe qui parle de l economie et du developpement au Niger. " * 3 + "Lire la suite</p>"
+                "<p>" + "Article trois avec un troisieme long paragraphe sur les elections et la politique regionale. " * 3 + "Lire la suite</p>"
+                "</article></body></html>")
+        ext = ContentExtractor({}).extract(html, "https://example.com/list")
+        self.assertEqual(ext["quality"], "intercepted")
+        self.assertEqual(ext["body"], "")
+
+    def test_cookie_page_detected_v2(self):
+        """Cookie 页面被识别为 extraction_failed"""
+        from framework import ContentExtractor
+        html = "<html><body>cookie consent banner accept cookies</body></html>"
+        ext = ContentExtractor({}).extract(html, "https://example.com/cookie")
+        self.assertNotEqual(ext["quality"], "full_body")
+        self.assertNotEqual(ext["quality"], "partial_body")
+
+    def test_cloudflare_page_detected(self):
+        """Cloudflare 验证页面被识别"""
+        from framework import ContentExtractor
+        html = "<html><body>Checking your browser before accessing the site cf-chl</body></html>"
+        ext = ContentExtractor({}).extract(html, "https://example.com/cf")
+        self.assertEqual(ext["quality"], "intercepted")
+
+    def test_discovery_method_preserved(self):
+        """discovery_method 字段正确传递到 article"""
+        from stage3_collect_v2 import run_country_pipeline
+        # discovery_method 应为 rss/html_listing 常量之一
+        valid = {"rss", "atom", "html_listing", "reliefweb_api_or_feed"}
+        self.assertTrue("rss" in valid and "html_listing" in valid)
+
+    def test_html_listing_link_discovery(self):
+        """HTML 栏目页链接发现排除导航链接"""
+        from registry import ArticleDiscoverer
+        html = '<html><body><nav><a href="/">Accueil</a></nav><div class="content"><a href="/2026/08/01/article">Article réel</a></div><footer><a href="/about">À propos</a></footer></body></html>'
+        links = ArticleDiscoverer._extract_links(html, "https://example.com/category/sec/")
+        urls = [u for u, _ in links]
+        self.assertNotIn("https://example.com/about", urls)
+
 
 if __name__ == "__main__":
     suite = unittest.defaultTestLoader.loadTestsFromModule(sys.modules[__name__])

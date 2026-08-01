@@ -316,7 +316,7 @@ class ContentExtractor:
             "lead_image_url": "", "method": "none",
             "quality": "extraction_failed", "quality_score": 0,
             "quality_reasons": [], "word_count": 0, "canonical_url": "",
-            "body_status": "failed",
+            "body_status": "extraction_failed",
         }
         if not html_text:
             result["quality_reasons"].append("empty_html")
@@ -515,7 +515,7 @@ class ContentExtractor:
         # 最后收集全部 <p>（换行连接，保留段落结构供按行清洗）
         ps = re.findall(r"<p[^>]*>(.*?)</p>", html_text, re.I | re.S)
         body = strip_tags("\n".join(ps))
-        if len(body) > 100:
+        if len(body) > 30:
             return body
         return ""
 
