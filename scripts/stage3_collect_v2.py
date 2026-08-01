@@ -133,7 +133,11 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
         # 集中式状态缓存（一次运行加载一次）
         state_doc = get_state_doc()
         if fresh:
-            state_doc = {"articles": {}, "generated_at": bj_iso(), "version": 3}
+            # 仅清除非终态记录，保留已发布/已隔离终态
+            terminal = {k: v for k, v in state_doc.get("articles", {}).items()
+                        if v.get("state") in TERMINAL_STATES}
+            state_doc["articles"] = terminal
+            state_doc["version"] = 3
 
         # 2) 抓取详情页 + 3) 正文提取
         extractor = ContentExtractor(src.get("extractor_profile") or {})
