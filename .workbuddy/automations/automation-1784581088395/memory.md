@@ -949,3 +949,12 @@
 - main_commit / gh_pages_commit / online_run_id：均为空（未达成）。
 - final_status: failed。日志：logs/pipeline_20260802T023501+0800_0o3aaq.json。
 - 处理：按规则如实汇报失败，未自行重试、未手工部署；与 02:28、13:48 同因，疑似沙箱环境变量超限导致云厂商测试无法构造环境（test_stage25de_cloud_provider.py 注入超长 env var）。
+
+## 2026-08-02 01:29 (GMT+3) 执行 —— 本次运行失败
+- 运行命令：scripts/pipeline_runner.py --mode incremental --trigger scheduled（退出码 1）。
+- 步骤 git_pull：success（main 已最新，Current branch ... is up to date）。
+- 步骤 unit_tests：FAILED。test_stage25de_cloud_provider.py 报错 "the environment variable is longer than 32767 characters"，Ran 29 tests, PASS=28 FAIL=1（rc=1）。其余测试文件（test_stage3a_collect 33 PASS、test_stage3b_extraction 60 PASS、test_stage3b_final_repair 27 PASS、test_stage25c3_cache_writeback 9+11 PASS）均 FAIL=0。
+- 后续步骤（采集/汇总/构建/校验/推送/部署/线上验证）未执行。
+- main_commit / gh_pages_commit / online_run_id：均为空（未达成）。
+- final_status: failed。日志：logs/pipeline_20260802T062941+0800_fhshnc.json。
+- 处理：按规则如实汇报失败，未自行重试、未手工部署；与 08-01 各次（02:28/13:48/21:35）同因，疑似沙箱环境变量超限导致云厂商测试无法构造环境。
