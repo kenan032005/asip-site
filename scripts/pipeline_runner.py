@@ -236,6 +236,17 @@ def _check_ai_runtime_and_schema():
 
 def run_mode(mode, trigger):
     run_id = generate_run_id()
+    # CI: use committed run_id to avoid data/dist inconsistency
+    # (CI doesn't commit data, so a new run_id would mismatch committed files)
+    if IN_GITHUB_ACTIONS:
+        try:
+            status_path = ROOT / "data" / "status.json"
+            if status_path.exists():
+                committed = json.loads(status_path.read_text(encoding="utf-8"))
+                if committed.get("run_id"):
+                    run_id = committed["run_id"]
+        except Exception:
+            pass
     log = create_run_log(run_id, trigger=trigger)
     started = bj_iso()
 
