@@ -214,6 +214,134 @@ class TestContentExtraction(unittest.TestCase):
         dt, tz = parse_original_time("")
         self.assertIsNone(dt)
 
+    def test_body_status_full(self):
+        """full_body 级正文 → body_status=full_body"""
+        html = ('<html><head><title>Attaque au Tchad</title></head><body>'
+                '<article>' + "".join(
+                    f"<p>L'attaque a fait plusieurs victimes dans la région de l'Ennedi "
+                    f"ce matin lors d'un affrontement avec les forces de sécurité locales "
+                    f"qui ont répondu rapidement.</p>" for _ in range(6)) +
+                '</article></body></html>')
+        ext = ContentExtractor({}).extract(html, "https://example.com/a")
+        self.assertEqual(ext["quality"], "full_body")
+        self.assertEqual(ext["body_status"], "full_body")
+
+    def test_cleanup_button_markers(self):
+        """Lire la suite/Details 等按钮杂质应从正文剥离"""
+        html = ('<html><head><title>Attaque au Tchad</title></head><body>'
+                '<article><p>Une attaque a eu lieu à N\'Djamena ce matin, '
+                'plusieurs soldats ont été blessés lors de l\'affrontement.</p>'
+                '<p>Lire la suite</p><p>Details</p>'
+                '<p>Les autorités ont confirmé l\'incident sécuritaire grave '
+                'dans la capitale tchadienne.</p></article></body></html>')
+        ext = ContentExtractor({}).extract(html, "https://example.com/a")
+        low = ext["body"].lower()
+        self.assertNotIn("lire la suite", low)
+        self.assertNotIn("details", low)
+
+    def test_summary_not_body(self):
+        """RSS 摘要不得被当作正文：body 为空时 quality=rss_summary_only"""
+        # 模拟：详情页无正文，但发现阶段有 RSS summary
+        from stage3_collect_v2 import MIN_PUBLISH_WORDS, ALLOWED_QUALITY
+        self.assertNotIn("rss_summary_only", ALLOWED_QUALITY,
+                         "rss_summary_only 不得进入发布准入")
+        html = "<html><body><p>cookie banner only</p></body></html>"
+        ext = ContentExtractor({}).extract(html, "https://example.com")
+        if not ext["body"]:
+            # 正文为空 → 即使有 summary 也不能把 summary 当 body（由采集器处理）
+            self.assertEqual(ext["quality"], "extraction_failed")
+
+    def test_soft404_listing_detected(self):
+        """软404：站点对不存在 URL 返回首页/栏目页 → 必须拦截，不得当正文"""
+        # 栏目页文本含多个 "Lire la suite" 按钮（lendjampost 软404 实况）
+        listing_html = ('<html><head><title>Le N\'Djam Post - Actualité</title></head>'
+                        '<body><article>'
+                        '<p>Santé</p>'
+                        '<p>Ennedi Ouest : la multiplication des attaques de chacals '
+                        'fait craindre un risque de rage, un infectiologue appelle à '
+                        'une prise en charge urgente Lire la suite</p>'
+                        '<p>Transval prend feu à N\'Djaména : la sécurité de l\'argent '
+                        'public en question Lire la suite</p>'
+                        '<p>Hadjer-Lamis : la campagne de sensibilisation au recensement '
+                        'Lire la suite</p>'
+                        '<p>Details</p>'
+                        '</article></body></html>')
+        ext = ContentExtractor({}).extract(listing_html, "https://lendjampost.com/fake-404-page/")
+        self.assertEqual(ext["quality"], "intercepted",
+                         "含多个 Lire la suite 的栏目页应被识别为软404列表页")
+        self.assertEqual(ext["body"], "", "列表页文本不得作为文章正文保留")
+
+    def test_soft404_title_mismatch(self):
+        """软404（标题与正文无关）：站点返回首页但标题匹配请求 → 必须拦截"""
+        # 标题是请求的 slug，但正文区是首页第一篇文章（lendjampost 实况）
+        html = ('<html><head>'
+                '<meta property="og:title" content="Hadjer-Lamis : la campagne de '
+                'sensibilisation au recensement gagne Birbarka">'
+                '<title>Hadjer-Lamis : la campagne de sensibilisation au recensement</title>'
+                '</head><body><article>'
+                '<p>Santé</p>'
+                '<p>Ennedi Ouest : la multiplication des attaques de chacals fait '
+                'craindre un risque de rage, un infectiologue appelle à une prise en '
+                'charge urgente</p>'
+                '<p>Transval prend feu à N\'Djaména : la sécurité de l\'argent public '
+                'en question</p>'
+                '<p>ECONALOM 2026 : la citoyenneté s\'invite au cœur de la formation '
+                'de 100 jeunes</p>'
+                '</article></body></html>')
+        ext = ContentExtractor({}).extract(
+            html, "https://lendjampost.com/hadjer-lamis-la-campagne-de-sensibilisation-au-recensement/")
+        self.assertEqual(ext["quality"], "intercepted",
+                         "标题与正文无关键词重合应识别为软404")
+        self.assertEqual(ext["body"], "", "软404 页面正文不得保留")
+
+    def test_real_article_not_false_positive(self):
+        """真实文章：标题关键词出现在正文中 → 不得误杀"""
+        title = "Salamat : 302 armes de guerre saisies en trois mois d'opérations"
+        body = ("Au total, 302 armes de différents calibres, 119 chargeurs et plusieurs "
+                "munitions ont été saisis par les forces de sécurité dans la province du "
+                "Salamat au cours des trois derniers mois d'opérations. Les autorités "
+                "locales ont salué ces résultats obtenus grâce à la collaboration des "
+                "populations avec les forces de défense et de sécurité.")
+        r = {"title": title, "body": ""}
+        ext = ContentExtractor({})
+        self.assertFalse(ext._title_body_mismatch(r, body),
+                         "真实文章标题与正文相关，不应被误判为软404")
+
+    def test_jsonld_article_body_priority(self):
+        """JSON-LD articleBody 优先于密度提取（WordPress 站点完整正文）"""
+        html = ('<html><head><title>Attaque au Tchad</title>'
+                '<script type="application/ld+json">'
+                '{"@type":"NewsArticle","headline":"Attaque au Tchad",'
+                '"articleBody":"Une attaque terroriste a eu lieu à N\'Djamena ce matin. '
+                'Les forces de sécurité ont répondu rapidement. Plusieurs soldats ont '
+                'été blessés lors de l\'affrontement avec les assaillants armés. La '
+                'situation est désormais sous contrôle selon les autorités locales. '
+                'Cet incident survient dans un contexte de tensions sécuritaires '
+                'régionales persistantes."}'
+                '</script></head><body>'
+                '<article><p>Courte intro de la liste</p></article></body></html>')
+        ext = ContentExtractor({}).extract(html, "https://example.com/a")
+        self.assertEqual(ext["method"], "jsonld_article_body")
+        self.assertIn("N'Djamena", ext["body"])
+        self.assertGreater(ext["word_count"], 40)
+
+    def test_jsonld_body_cleaned(self):
+        """JSON-LD 正文中的 HTML 注释/标签应被清洗"""
+        html = ('<html><head><title>Attaque au Tchad</title>'
+                '<script type="application/ld+json">'
+                '{"@type":"Article","headline":"Attaque au Tchad",'
+                '"articleBody":"<!-- wp:paragraph -->\\n<p><strong>Attaque terroriste '
+                'à N\'Djamena</strong></p>\\n<p>Les forces de sécurité ont répondu '
+                'rapidement à l\'attaque dans la capitale tchadienne.</p>\\n<p>Plusieurs '
+                'soldats ont été blessés lors de l\'affrontement avec les assaillants '
+                'armés ce matin.</p>\\n<p>La situation est désormais sous contrôle '
+                'selon les autorités locales.</p>\\n<p>Cet incident survient dans un '
+                'contexte de tensions sécuritaires régionales persistantes.</p>"}'
+                '</script></head><body><article><p>x</p></article></body></html>')
+        ext = ContentExtractor({}).extract(html, "https://example.com/a")
+        self.assertNotIn("wp:paragraph", ext["body"])
+        self.assertNotIn("<p>", ext["body"])
+
 
 class TestDedup(unittest.TestCase):
     def test_url_norm(self):
@@ -297,6 +425,42 @@ class TestStability(unittest.TestCase):
                           f"事件缺少 run_id: {item.get('event_id')}")
         # 信封 run_id 非空
         self.assertTrue(pub.get("run_id"))
+
+
+class TestStage3BPublishContract(unittest.TestCase):
+    """Stage 3B 发布契约：run_id 合规 / body 截断 8000"""
+
+    def test_run_id_pattern_valid(self):
+        """published_event schema 要求 run_id 匹配 ^\d{8}T\d{6}\+0800_[a-z0-9]{6}$"""
+        import re
+        pat = re.compile(r"^\d{8}T\d{6}\+0800_[a-z0-9]{6}$")
+        self.assertTrue(pat.match("20260801T190935+0800_coin3y"))
+        self.assertFalse(pat.match("20260801T190935+0800_stage3b_v4"))
+
+    def test_body_extracted_truncate_8000(self):
+        """build_event 对 body_extracted 截断 8000 字符（非 2000）"""
+        from stage3_collect_v2 import build_event
+        art = {
+            "source_id": "s1", "source_name": "S", "source_country": "乍得",
+            "source_type": "local", "language": "fr",
+            "discovery_method": "rss", "feed_url": "", "listing_url": "",
+            "article_url": "https://example.com/a", "canonical_url": "",
+            "original_title": "Attaque a N'Djamena fait plusieurs morts",
+            "original_body": "x" * 9000,
+            "original_summary": "resume",
+            "author": "", "published_at_original": "", "published_at_beijing": "",
+            "lead_image_url": "", "article_word_count": 100,
+            "extraction_method": "generic_density", "extraction_quality": "full_body",
+            "extraction_quality_score": 80, "extraction_quality_reasons": [],
+            "fetch_status": "ok", "fetch_http_status": 200, "fetch_attempts": 1,
+            "body_status": "full_body", "collected_at_beijing": "",
+            "_country": {"decision": "chad", "event_location_country": "chad",
+                         "mentioned_countries": []}, "_relevant": True,
+        }
+        ev = build_event(art, "20260801T190935+0800_coin3y", "乍得")
+        self.assertEqual(len(ev["body_extracted"]), 8000)
+        self.assertEqual(ev["body_status"], "full_body")
+        self.assertEqual(ev["extraction_quality"], "full_body")
 
 
 if __name__ == "__main__":

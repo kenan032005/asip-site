@@ -208,6 +208,9 @@ def strip_tags(s):
     s = re.sub(r"<script.*?</script>", " ", s, flags=re.I | re.S)
     s = re.sub(r"<style.*?</style>", " ", s, flags=re.I | re.S)
     s = re.sub(r"<!--.*?-->", " ", s, flags=re.S)
+    # 块级结束标签 → 换行（保留段落结构，供按行清洗）
+    s = re.sub(r"</(p|div|article|section|h[1-6]|li|tr|blockquote|ul|ol)>", "\n", s, flags=re.I)
+    s = re.sub(r"<br[^>]*>", "\n", s, flags=re.I)
     s = re.sub(r"<[^>]+>", " ", s)
     return html.unescape(s).strip()
 
@@ -277,6 +280,27 @@ INTERCEPT_MARKERS = [
 ]
 TITLE_MARKERS = ["首页", "accueil", "home", "direct", "en direct", "live",
                  "facebook", "twitter", "youtube", "vidéos", "videos"]
+# 按钮/分页/分享类杂质（正文中出现即剥离或扣分；Stage 3B 清洗强化）
+CLEANUP_MARKERS = [
+    "lire la suite", "lire l'article", "lire l article", "lire plus",
+    "read more", "read the full", "continue reading", "continue lendo",
+    "voir plus", "voir la suite", "afficher plus", "afficher la suite",
+    "details", "détails", "plus d'infos", "plus d infos", "en savoir plus",
+    "learn more", "ouvrir", "open article", "cliquez ici", "click here",
+    "partager", "share this", "share on", "facebook", "twitter", "whatsapp",
+    "télégramme", "telegram", "linkedin", "pinterest", "print", "imprimer",
+    "newsletter", "abonnez-vous", "subscribe", "suivez-nous", "follow us",
+    "accueil", "homepage", "retour à l'accueil", "back to home",
+    "prochain article", "next article", "précédent", "previous", "related",
+    "à lire aussi", "a lire aussi", "articles similaires", "similar articles",
+    "voir aussi", "voir egalement", "voir également", "see also", "tags",
+    "mots-clés", "mots cles", "keywords", "catégorie", "categorie", "category",
+]
+# 按钮片段精确匹配（独立短文本）
+CLEANUP_EXACT = {
+    "lire la suite", "lire la suite details", "details", "détails", "0",
+    "read more", "lire plus", "voir la suite", "suite",
+}
 
 
 class ContentExtractor:
@@ -292,6 +316,7 @@ class ContentExtractor:
             "lead_image_url": "", "method": "none",
             "quality": "extraction_failed", "quality_score": 0,
             "quality_reasons": [], "word_count": 0, "canonical_url": "",
+            "body_status": "failed",
         }
         if not html_text:
             result["quality_reasons"].append("empty_html")
@@ -326,20 +351,133 @@ class ContentExtractor:
         if cm:
             result["canonical_url"] = cm.group(1)
 
-        # 1) 来源专用选择器
-        body = self._extract_with_selectors(html_text)
+        # 1) JSON-LD articleBody（最可靠：结构化正文，含完整段落）
+        body = self._extract_jsonld_body(html_text)
         if body:
             result["body"] = body
-            result["method"] = "source_selectors"
+            result["method"] = "jsonld_article_body"
         else:
-            # 2) 通用密度提取
-            body = self._extract_generic(html_text)
+            # 2) 来源专用选择器
+            body = self._extract_with_selectors(html_text)
             if body:
                 result["body"] = body
-                result["method"] = "generic_density"
+                result["method"] = "source_selectors"
+            else:
+                # 3) 通用密度提取
+                body = self._extract_generic(html_text)
+                if body:
+                    result["body"] = body
+                    result["method"] = "generic_density"
+
+        # 3a) 软404/列表页检测（清洗前，基于原始 body）：
+        #     ① 按钮词密集 → 栏目/首页文本；② 标题与正文无关键词重合 → 软404
+        if body:
+            low_body = body.lower()
+            btn_hits = sum(low_body.count(mk) for mk in (
+                "lire la suite", "lire plus", "voir la suite",
+                "read more", "voir plus", "afficher plus"))
+            title_body_mismatch = self._title_body_mismatch(result, body)
+            if btn_hits >= 2 or title_body_mismatch:
+                result["quality"] = "intercepted"
+                result["body_status"] = "extraction_failed"
+                result["quality_reasons"].append(
+                    f"soft_404_listing:btn{btn_hits}" if btn_hits >= 2
+                    else "soft_404_title_mismatch")
+                result["body"] = ""
+                result["word_count"] = 0
+                self._score(result, source_url)
+                return result
+
+        # 3b) 正文清洗（剥离按钮/分享/分页杂质行）
+        if result["body"]:
+            result["body"] = self._clean_body(result["body"])
 
         self._score(result, source_url)
         return result
+
+    @staticmethod
+    def _title_body_mismatch(result, body):
+        """标题与正文关键词重合度检测：标题显著词在正文中出现比例过低 → 软404。
+        对法语/英语：取 ≥5 字符的词，剔除常见停用词。"""
+        title = (result.get("title") or "").lower()
+        if len(title) < 10:
+            return False
+        # 标题词（去停用词/标点）
+        words = re.findall(r"[a-zà-ÿ0-9]{5,}", title)
+        stop = {"lire", "plus", "suite", "avec", "pour", "dans", "sont",
+                "leur", "être", "etre", "fait", "faire", "nous", "vous",
+                "this", "that", "with", "from", "have", "will", "after",
+                "un", "une", "des", "les", "the", "and", "but", "not",
+                "sont", "ainsi", "alors", "après", "apres", "avant",
+                "comme", "déjà", "deja", "encore", "entre", "quand",
+                "comment", "pourquoi", "député", "depute", "élection",
+                "election", "gouvernement", "gouvernements"}
+        kw = [w for w in words if w not in stop]
+        if len(kw) < 3:
+            return False
+        hits = sum(1 for w in kw if w in body.lower())
+        # 显著词 ≥3 且命中比例 < 20% → 标题与正文不相关（软404/列表页）
+        return hits / len(kw) < 0.2
+
+    def _clean_body(self, body):
+        """清洗正文：剥离 CLEANUP_MARKERS 杂质行/句、压缩空白。"""
+        # 先剥 HTML 注释（WordPress 区块标记等）与残余标签
+        body = re.sub(r"<!--.*?-->", " ", body, flags=re.S)
+        body = re.sub(r"<[^>]+>", " ", body)
+        lines = [ln for ln in body.split("\n")]
+        cleaned_lines = []
+        for ln in lines:
+            s = ln.strip()
+            if not s:
+                continue
+            low = s.lower()
+            # 整行是纯按钮/杂质（CLEANUP_EXACT 或长度过短且命中 CLEANUP_MARKERS）
+            if low in CLEANUP_EXACT:
+                continue
+            if len(s) < 3 and low in ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9"):
+                continue
+            # 行首行尾包裹杂质短语 → 截断
+            for mk in ("lire la suite", "lire la suite details", "read more",
+                       "voir la suite", "lire plus", "ouvrir"):
+                if low.startswith(mk) or low.endswith(mk):
+                    s = s[len(mk):].strip() if low.startswith(mk) else s[:-len(mk)].strip()
+                    break
+            if s:
+                cleaned_lines.append(s)
+        # 段落内嵌的短杂质（如 "Details" 独立词）
+        out_lines = []
+        for s in cleaned_lines:
+            low = s.lower()
+            if low in CLEANUP_EXACT:
+                continue
+            out_lines.append(s)
+        return "\n".join(out_lines)
+
+    def _extract_jsonld_body(self, html_text):
+        """从 JSON-LD NewsArticle/Article 提取 articleBody（结构化完整正文）。"""
+        if not html_text:
+            return ""
+        for m in re.finditer(r'<script[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',
+                             html_text, re.I | re.S):
+            raw = m.group(1).strip()
+            try:
+                data = json.loads(raw)
+            except json.JSONDecodeError:
+                continue
+            blocks = []
+            if isinstance(data, dict):
+                if data.get("@graph") and isinstance(data["@graph"], list):
+                    blocks.extend(g for g in data["@graph"] if isinstance(g, dict))
+                else:
+                    blocks.append(data)
+            elif isinstance(data, list):
+                blocks.extend(b for b in data if isinstance(b, dict))
+            for b in blocks:
+                if b.get("@type") in ("NewsArticle", "Article", "ReportageNewsArticle"):
+                    ab = b.get("articleBody")
+                    if isinstance(ab, str) and len(ab.strip()) > 100:
+                        return ab.strip()
+        return ""
 
     def _extract_with_selectors(self, html_text):
         """使用来源配置的 CSS-like 选择器（简化实现：按 id/class/标签）。"""
@@ -374,9 +512,9 @@ class ContentExtractor:
         body = strip_tags(best_div)
         if len(body) > 200:
             return body
-        # 最后收集全部 <p>
+        # 最后收集全部 <p>（换行连接，保留段落结构供按行清洗）
         ps = re.findall(r"<p[^>]*>(.*?)</p>", html_text, re.I | re.S)
-        body = strip_tags(" ".join(ps))
+        body = strip_tags("\n".join(ps))
         if len(body) > 100:
             return body
         return ""
@@ -456,10 +594,25 @@ class ContentExtractor:
         else:
             result["quality"] = "title_only"
 
+        # body_status：与质量等级一致的语义化状态
+        if result["quality"] == "full_body":
+            result["body_status"] = "full_body"
+        elif result["quality"] == "partial_body":
+            result["body_status"] = "partial_body"
+        elif result["quality"] == "rss_summary_only":
+            result["body_status"] = "rss_summary_only"
+        elif result["quality"] == "title_only":
+            result["body_status"] = "title_only"
+        elif result["quality"] == "intercepted":
+            result["body_status"] = "extraction_failed"
+        else:
+            result["body_status"] = "extraction_failed"
+
         # 页面类型识别（首页/列表被误抓）
         title_low = (result["title"] or "").lower()
         if any(tm in title_low for tm in TITLE_MARKERS) and wc < 50:
             result["quality"] = "intercepted"
+            result["body_status"] = "extraction_failed"
             reasons.append("looks_like_listing_or_home")
 
 

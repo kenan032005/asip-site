@@ -37,6 +37,7 @@ function init() {
       <div style="margin-bottom:12px;">${riskBadge(risk)} ${chinaBadge(e)} ${confidenceBadge(e.confidence)}</div>
       ${e.title_original && e.title_original !== e.title_cn ? kv("原文标题", esc(e.title_original)) : ""}
       ${e.summary_cn ? kv("中文摘要", esc(e.summary_cn)) : ""}
+      ${e.body_extracted ? `<div style="margin:14px 0;"><b style="display:block;margin-bottom:6px;">原文正文</b><div class="article-body">${esc(e.body_extracted).replace(/\n/g, '<br>')}</div>${e.body_status ? `<div class="muted small" style="margin-top:6px;">正文提取状态：${esc(e.body_status)}${e.article_word_count ? " · " + esc(String(e.article_word_count)) + " 词" : ""}</div>` : ""}</div>` : ""}
       <div class="cr-info" style="margin-top:12px;">
         ${kv("国家", esc(e.country || "—"))}
         ${kv("所属区域", esc(e.region || "—"))}

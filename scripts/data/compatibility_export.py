@@ -145,21 +145,43 @@ def export_all(repo, run_id: str = ""):
     repo.write_if_changed(repo._data("quarantine_events.json"), env_quar)
 
     # public published_events.json
-    published = [ _published_from_cluster(c, articles_by_id) for c in clusters if _is_published(c) ]
+    # ① canonical 中已隔离（quarantine original_id 命中）的 cluster 不导出；
+    # ② 合并保留现有 public 中 Stage 3A/3B 真实采集事件（不经 canonical 直接发布）。
+    real_reasons = ("Stage 3A 真实采集", "Stage 3B 真实采集")
+    quar_ids = {q.get("original_id") for q in quarantine if q.get("original_id")}
+    published = [_published_from_cluster(c, articles_by_id)
+                 for c in clusters if _is_published(c)
+                 and c.get("event_id") not in quar_ids
+                 and c.get("legacy_event_id") not in quar_ids]
+    try:
+        existing_items = repo.load_published_events()
+        real_events = [e for e in existing_items
+                       if e.get("publication_reason") in real_reasons]
+        if real_events:
+            # 按 event_id 去重合并（真实采集事件保留在 canonical 事件之后）
+            published_ids = {p.get("event_id") for p in published}
+            published = published + [e for e in real_events
+                                     if e.get("event_id") not in published_ids]
+    except Exception as _e:
+        print(f"  ⚠ 合并真实采集事件失败（继续）: {_e}")
     repo.save_published_events(published, run_id)
 
     # public current_metrics.json
+    # publishable_clusters/current_policy_passed_events 需与 published_events 口径一致：
+    # canonical 通过政策事件 + 真实采集事件（current_policy_passed=true 均计入）
+    n_real = sum(1 for e in published if e.get("publication_reason") in real_reasons)
+    n_canon_cur = sum(1 for c in clusters if c.get("current_policy_passed") is True)
     metrics = {
         "articles": len(articles),
         "event_clusters": len(clusters),
         "published_events": len(published),
         "quarantine": len(quarantine),
         # Stage-2 收尾：publishable_clusters 只统计真正通过当前发布政策的事件
-        # （current_policy_passed=true），不得把历史迁移可见事件计入
-        "publishable_clusters": sum(1 for c in clusters if c.get("current_policy_passed") is True),
+        # （current_policy_passed=true + Stage 3A/3B 真实采集），不得把历史迁移可见事件计入
+        "publishable_clusters": n_canon_cur + n_real,
         # Stage-2 最终收尾：供 build_summary 使用（不再读遗留事件池）
         "pending_articles": len(pending),
-        "current_policy_passed_events": sum(1 for c in clusters if c.get("current_policy_passed") is True),
+        "current_policy_passed_events": n_canon_cur + n_real,
         "legacy_migration_preserved_events": sum(1 for c in clusters if c.get("legacy_migration_preserved") is True),
     }
     repo.save_current_metrics(metrics, run_id)

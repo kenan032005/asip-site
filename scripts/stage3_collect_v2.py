@@ -40,8 +40,9 @@ QUARANTINE_PATH = os.path.join(DATA, "canonical", "quarantine.json")
 STATS_PATH = os.path.join(ROOT, "logs", "stage3_collection_stats.json")
 
 # 正文质量准入
-MIN_PUBLISH_WORDS = 20
-ALLOWED_QUALITY = ("full_body", "partial_body", "rss_summary_only")
+MIN_PUBLISH_WORDS = 50
+# 仅完整/部分正文可发布；RSS 摘要/title_only/失败 一律隔离（不把摘要当正文）
+ALLOWED_QUALITY = ("full_body", "partial_body")
 
 
 def load_json(path, default):
@@ -58,7 +59,7 @@ def save_json(path, doc):
         json.dump(doc, f, ensure_ascii=False, indent=2)
 
 
-def run_country_pipeline(country_cn, registry, discoverer, dry=False):
+def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=False):
     """对单个国家执行完整采集。"""
     cfg_key = "chad" if country_cn == "乍得" else "niger"
     country_cfg = load_country_cfg(cfg_key)
@@ -115,8 +116,10 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False):
             continue
         stat["discovered"] = len(discovered)
 
-        # 缓存（已处理 URL）
+        # 缓存（已成功提取的 URL）——fresh 模式下清空重抓
         cache = load_cache(sid)
+        if fresh:
+            cache = {"seen_urls": [], "seen_hashes": [], "etag": "", "last_modified": ""}
         seen_urls = set(cache.get("seen_urls", []))
 
         # 2) 抓取详情页 + 3) 正文提取
@@ -126,7 +129,6 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False):
             if url in seen_urls:
                 stat["duplicates"] += 1
                 continue
-            seen_urls.add(url)
             stat["fetched"] += 1
 
             text, err, http_status = fetch_page(url)
@@ -148,14 +150,16 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False):
             else:
                 stat["extraction_failed"] += 1
 
-            # 正文不足时降级为 RSS 摘要
+            # 正文不足时不降级为 RSS 摘要（摘要≠正文）：保留 body 为空，
+            # body_status=rss_summary_only，仅存 summary 字段，不进入发布
             if not extracted.get("body") and d.get("summary"):
-                extracted["body"] = d["summary"]
-                extracted["method"] = "rss_summary_fallback"
+                extracted["body_status"] = "rss_summary_only"
                 extracted["quality"] = "rss_summary_only"
-                extracted["body_status"] = "rss_summary_fallback"
                 extracted["word_count"] = len(d["summary"].split())
                 stat["summary_only"] += 1
+            elif extracted.get("quality") in ("full_body", "partial_body"):
+                # 成功提取到正文 → 缓存该 URL（避免下次重复抓取）
+                seen_urls.add(url)
 
             article = {
                 "source_id": sid,
@@ -263,7 +267,9 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False):
                 reason = "extraction_failed"
             elif quality == "title_only":
                 reason = "title_only_not_publishable"
-            elif body_words < MIN_PUBLISH_WORDS and not a.get("original_summary"):
+            elif quality == "rss_summary_only":
+                reason = "summary_only_not_publishable"
+            elif body_words < MIN_PUBLISH_WORDS:
                 reason = "insufficient_content"
             elif norm_url(a.get("article_url", "")) in existing_urls:
                 reason = "duplicate_url"
@@ -284,12 +290,13 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False):
                           "country_invalid": "wrong_country",
                           "extraction_failed": "other",
                           "title_only_not_publishable": "missing_required_fields",
+                          "summary_only_not_publishable": "missing_required_fields",
                           "insufficient_content": "missing_required_fields",
                           "not_security_relevant": "not_security_relevant",
                           "url_invalid": "invalid_url",
                           "title_too_short": "missing_required_fields"}
                 quarantined.append({
-                    "quarantine_id": "Q_" + hashlib.md5((a.get("article_url") or "").encode()).hexdigest()[:16],
+                    "quarantine_id": "Q_" + hashlib.sha256((a.get("article_url") or "").encode()).hexdigest()[:16],
                     "original_object_type": "event",
                     "original_id": a.get("article_url", ""),
                     "title": a.get("original_title", "")[:200],
@@ -314,8 +321,12 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False):
             save_json(PUBLISHED_PATH, pub_doc)
         if quarantined:
             q_doc = load_json(QUARANTINE_PATH, {"items": []})
-            q_doc["items"] = q_doc.get("items", []) + quarantined
+            # 按 original_id(URL) 去重：已隔离过的 URL 不再重复追加
+            seen_q = {q.get("original_id") for q in q_doc.get("items", []) if q.get("original_id")}
+            fresh_q = [qr for qr in quarantined if qr.get("original_id") not in seen_q]
+            q_doc["items"] = q_doc.get("items", []) + fresh_q
             save_json(QUARANTINE_PATH, q_doc)
+            stat["quarantined"] = len(fresh_q)
 
         stat["duration_s"] = round(time.time() - t0, 1)
         per_source.append(stat)
@@ -349,7 +360,7 @@ def build_event(article, run_id, country_cn):
         "summary_cn": "",
         "summary_original": article.get("original_summary", "")[:500],
         "original_language": article.get("language", "fr"),
-        "body_extracted": article.get("original_body", "")[:2000],
+        "body_extracted": article.get("original_body", "")[:8000],
         "body_status": article.get("body_status", ""),
         "extraction_quality": article.get("extraction_quality", ""),
         "extraction_method": article.get("extraction_method", ""),
@@ -418,6 +429,7 @@ def main():
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--country", choices=["乍得", "尼日尔"], default=None)
     ap.add_argument("--run-id", default="")
+    ap.add_argument("--fresh", action="store_true", help="清空 seen_urls 缓存，全量重抓详情页")
     args = ap.parse_args()
 
     run_id = args.run_id or os.environ.get("ASIP_RUN_ID", "")
@@ -436,7 +448,8 @@ def main():
     all_errors = []
 
     for cn in countries:
-        arts, ps, errs = run_country_pipeline(cn, registry, discoverer, dry=args.dry)
+        arts, ps, errs = run_country_pipeline(cn, registry, discoverer,
+                                              dry=args.dry, fresh=args.fresh)
         all_articles.extend(arts)
         per_source.extend(ps)
         all_errors.extend(errs)
