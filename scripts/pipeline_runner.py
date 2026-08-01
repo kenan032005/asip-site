@@ -309,7 +309,6 @@ def run_mode(mode, trigger):
                      details={"schemas": ["runtime_config", "ai_task", "ai_result"]})
         if not cfg_ok or not schema_ok:
             tests_ok = False
-            print(f"  config_runtime check: cfg_ok={cfg_ok} schema_ok={schema_ok}")
 
         # 2.5B-1) 非敏感 AI Worker 协议指标（Stage 2.5B-1 新增）
         # 仅记录队列深度/处理中/过期租约计数与协议测试通过与否，不含任何密钥/路径/正文。
@@ -328,24 +327,7 @@ def run_mode(mode, trigger):
             log["ai_worker_metrics_error"] = "<redacted:%s>" % type(_e).__name__
 
         if not tests_ok:
-            # Print failing test filenames (not just truncated tail) for CI debuggability
-            failing = []
-            for line in tests_out.split("\n"):
-                if line.startswith("[") and "rc=" in line:
-                    # Format: [filename.py] rc=N <truncated output>
-                    name_end = line.index("] ") + 2
-                    rc_start = line.index("rc=", name_end) + 3
-                    rc_end = line.index(" ", rc_start) if " " in line[rc_start:] else len(line)
-                    rc_val = line[rc_start:rc_end]
-                    if rc_val != "0":
-                        failing.append(line[:name_end-2] + "]")
-            if not failing:
-                failing.append("(tests_ok=False but all rcs=0; check cfg_ok/schema_ok)")
-            print(f"  FAILING TESTS: {failing}")
-            # Print ALL test output on failure (not truncated) for CI debuggability
-            print("--- FULL TEST OUTPUT ---")
-            print(tests_out[-8000:])
-            print("--- END FULL OUTPUT ---")
+            print(tests_out[-600:])
             log["final_status"] = "failed"
             save_run_log(log, run_id)
             return 1
