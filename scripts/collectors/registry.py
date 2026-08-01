@@ -69,7 +69,10 @@ class SourceRegistry:
         """将 legacy/新结构统一为 SourceRegistry 视图。"""
         lp = s.get("legacy_payload", {})
         method = lp.get("collection_method", "")
-        # 新结构字段优先
+        # 新结构字段优先，listing_urls 同时读顶层和 legacy_payload
+        top_listing = s.get("listing_urls", None)
+        legacy_listing = lp.get("category_urls", [])
+        listing_urls = top_listing if top_listing is not None else legacy_listing
         return {
             "source_id": s.get("source_id", lp.get("source_id", "")),
             "source_name": s.get("source_name", lp.get("name", "")),
@@ -78,7 +81,7 @@ class SourceRegistry:
             "language": s.get("language", [lp.get("language", "fr")]) if isinstance(s.get("language"), list) else s.get("language", lp.get("language", "fr")),
             "discovery_type": self._discovery_type(method, lp),
             "feed_url": lp.get("feed_url", ""),
-            "listing_urls": lp.get("category_urls", []),
+            "listing_urls": listing_urls,
             "base_url": lp.get("url", s.get("url", "")),
             "url": lp.get("url", s.get("url", "")),
             "enabled": lp.get("enabled", s.get("enabled", False)),
@@ -304,8 +307,15 @@ class ArticleDiscoverer:
             base_host = urllib.parse.urlparse(base_url).netloc.lower()
             if host != base_host:
                 continue
-            # 排除栏目/分类页（路径多段且无文章特征）
-            if path.count("/") >= 2 and not re.search(r"/\d{4}/\d{2}/", path):
+            # 排除栏目/分类/标签/作者/归档页（有明确路径段特征），不再误伤纯 slug 文章
+            path = urllib.parse.urlparse(abs_url).path.lower().rstrip("/")
+            path_seg = [seg for seg in path.split("/") if seg]
+            excluded_seg = {"category", "categories", "tag", "tags", "author",
+                            "rubrique", "page", "p", "archives", "date", "wp-json"}
+            if any(seg in excluded_seg for seg in path_seg[:2]):
+                continue
+            # 排除首页链接（无路径）
+            if not path_seg:
                 continue
             txt = strip_tags(inner)
             if len(txt) < 8:

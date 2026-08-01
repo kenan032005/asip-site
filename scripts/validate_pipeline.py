@@ -444,12 +444,15 @@ def main(run_id=None, dist_dir=None, stage="dist"):
             fail("V17-canonical", "canonical/event_clusters.json 存在但为空或不可读", is_critical=True)
         else:
             legacy_ids = {e.get("event_id") for e in events_list if e.get("event_id")}
-            cluster_leids = {c.get("legacy_event_id") for c in clusters if c.get("legacy_event_id")}
+            # Stage 3B Final Repair: legacy cluster 以 legacy_event_id 出现在 events.json，
+            # 新 cluster 以 event_id 出现；每个 cluster 只贡献一个 ID
+            cluster_all = {c.get("legacy_event_id") or c.get("event_id")
+                           for c in clusters if (c.get("legacy_event_id") or c.get("event_id"))}
             if not events_doc.get("generated_from_canonical"):
                 fail("V17-canonical", "events.json 缺少 generated_from_canonical 标记（旧池可能被直接写入）", is_critical=True)
-            elif legacy_ids != cluster_leids:
-                only_l = list(legacy_ids - cluster_leids)[:3]
-                only_c = list(cluster_leids - legacy_ids)[:3]
+            elif legacy_ids != cluster_all:
+                only_l = list(legacy_ids - cluster_all)[:3]
+                only_c = list(cluster_all - legacy_ids)[:3]
                 fail("V17-canonical",
                      f"legacy events 与 canonical clusters 的 event_id 集合不一致 (legacy_only={only_l} canonical_only={only_c})",
                      is_critical=True)

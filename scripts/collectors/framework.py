@@ -302,12 +302,80 @@ CLEANUP_EXACT = {
     "read more", "lire plus", "voir la suite", "suite",
 }
 
+# ── 来源专用正文清洗规则（Stage 3B Final Repair）─────────
+# 规则语义：
+#   cut_after_markers      行含此标记 → 该行及之后全部删除
+#   strip_blocks_containing 行含此标记 → 删除该整行（仅当行 <120 字符时删除，避免误删长正文）
+#   strip_prefix_lines      首行含此标记 → 从开头逐行删除直到首行不匹配
+# 设计原则：按区块边界清除，不靠单关键词删除保留模板剩余。
+SOURCE_CLEANUP_RULES = {
+    "chad_journaldutchad": {
+        "cut_after_markers": [
+            "LA SUITE APRÈS LA PUBLICITÉ",
+            "la suite après la publicité",
+            "la suite apres la publicite",
+        ],
+        "strip_blocks_containing": [
+            "Publicité", "Partager", "Facebook", "Twitter",
+            "WhatsApp", "LinkedIn", "Télégramme", "Telegram",
+        ],
+    },
+    "intl_rfi_afrique_chad": {
+        "cut_after_markers": [
+            "À lire aussi", "a lire aussi", "À écouter aussi",
+            "a ecouter aussi", "Newsletter", "Recevez toute l'actualité",
+            "recevez toute l actualite", "Partager :",
+        ],
+        "strip_blocks_containing": [
+            "Publicité", "Je m'abonne", "Je m abonne",
+            "Suivez toute l'actualité", "suivez toute l actualite",
+            "Télécharger l'application", "telecharger l application",
+            "— ",  # 署名前缀 "Par :" 在提取中常被拆为独立行 "— "
+            "Temps de lecture",
+        ],
+    },
+    "intl_rfi_afrique_niger": {
+        "cut_after_markers": [
+            "À lire aussi", "a lire aussi", "À écouter aussi",
+            "a ecouter aussi", "Newsletter", "Recevez toute l'actualité",
+            "recevez toute l actualite", "Partager :",
+        ],
+        "strip_blocks_containing": [
+            "Publicité", "Je m'abonne", "Je m abonne",
+            "Suivez toute l'actualité", "suivez toute l actualite",
+            "Télécharger l'application", "telecharger l application",
+            "— ",
+            "Temps de lecture",
+        ],
+    },
+    "chad_alwihda": {
+        "cut_after_markers": [
+            "À lire aussi", "a lire aussi", "Articles similaires",
+            "articles similaires", "Lire aussi", "lire aussi",
+        ],
+        "strip_blocks_containing": [
+            "min de lecture", "Partager", "Facebook", "Twitter",
+            "WhatsApp", "LinkedIn", "Télégramme", "Telegram",
+        ],
+        # Alwihda: 页面导航/页眉行位于正文开头，逐行清理
+        "strip_prefix_lines_containing": [
+            "min de lecture", "— ", "Partager", "Accueil",
+        ],
+    },
+    "chad_lendjampost": {
+        "cut_after_markers": ["LA SUITE APRÈS CETTE PUBLICITÉ"],
+        "strip_blocks_containing": ["Publicité", "Partager", "Facebook",
+                                      "Twitter", "WhatsApp", "LinkedIn"],
+    },
+}
+
 
 class ContentExtractor:
     """正文提取：来源专用选择器 → 通用密度 → 失败标记。"""
 
-    def __init__(self, profile=None):
+    def __init__(self, profile=None, source_id=None):
         self.profile = profile or {}
+        self.source_id = source_id
 
     def extract(self, html_text, source_url=""):
         """返回 dict: title/body/author/published/lead_image/quality/quality_reasons/method"""
@@ -420,10 +488,15 @@ class ContentExtractor:
         return hits / len(kw) < 0.2
 
     def _clean_body(self, body):
-        """清洗正文：剥离 CLEANUP_MARKERS 杂质行/句、压缩空白。"""
+        """清洗正文：来源专用规则 → 通用规则。按区块边界清除，不靠单关键词删除。"""
         # 先剥 HTML 注释（WordPress 区块标记等）与残余标签
         body = re.sub(r"<!--.*?-->", " ", body, flags=re.S)
         body = re.sub(r"<[^>]+>", " ", body)
+
+        # 步骤1：来源专用清洗（结构化规则，在通用清洗前执行）
+        body = self._clean_source_specific(body)
+
+        # 步骤2：通用行级清洗
         lines = [ln for ln in body.split("\n")]
         cleaned_lines = []
         for ln in lines:
@@ -452,6 +525,62 @@ class ContentExtractor:
                 continue
             out_lines.append(s)
         return "\n".join(out_lines)
+
+    def _clean_source_specific(self, body):
+        """来源专用清洗：cut_after / strip_blocks / strip_prefix 三段式。
+        按用户要求：按区块边界清除，不靠单关键词删除保留模板剩余。"""
+        if not self.source_id:
+            return body
+        rules = SOURCE_CLEANUP_RULES.get(self.source_id)
+        if not rules:
+            return body
+
+        lines = body.split("\n")
+
+        # A. strip_prefix_lines_containing：从开头逐行删除含标记的行
+        prefix_pats = rules.get("strip_prefix_lines_containing", [])
+        if prefix_pats:
+            while lines:
+                first_low = lines[0].strip().lower()
+                if not first_low:
+                    lines.pop(0)
+                    continue
+                matched = any(pat.lower() in first_low for pat in prefix_pats)
+                if matched:
+                    lines.pop(0)
+                else:
+                    break
+
+        # B. cut_after_markers：含此标记的行及之后全部删除
+        cut_pats = rules.get("cut_after_markers", [])
+        if cut_pats:
+            for i, ln in enumerate(lines):
+                low = ln.strip().lower()
+                for pat in cut_pats:
+                    if pat.lower() in low:
+                        lines = lines[:i]
+                        break
+                else:
+                    continue
+                break  # 外层：已切断
+
+        # C. strip_blocks_containing：删除含标记的短行（<120 字符，避免误删长正文）
+        strip_pats = rules.get("strip_blocks_containing", [])
+        if strip_pats:
+            new_lines = []
+            for ln in lines:
+                s = ln.strip()
+                if not s:
+                    continue
+                low = s.lower()
+                # 只删除短行（UI模板），长行通常是正文段落
+                if len(s) < 120:
+                    if any(pat.lower() in low for pat in strip_pats):
+                        continue
+                new_lines.append(ln)
+            lines = new_lines
+
+        return "\n".join(lines)
 
     def _extract_jsonld_body(self, html_text):
         """从 JSON-LD NewsArticle/Article 提取 articleBody（结构化完整正文）。"""

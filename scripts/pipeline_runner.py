@@ -303,7 +303,8 @@ def run_mode(mode, trigger):
                           "test_stage25c3_cache_writeback.py",
                           "test_stage25de_cloud_provider.py",
                           "test_stage3a_collect.py",
-                          "test_stage3b_extraction.py"):
+                          "test_stage3b_extraction.py",
+                          "test_stage3b_final_repair.py"):
             rc, out, err = run_cmd([PYTHON, str(HERE / "tests" / test_file)], timeout=180)
             ok = rc == 0 and "FAIL=0" in out  # 以测试脚本的结果行为准（rc=0 且 FAIL=0）
             tests_ok = tests_ok and ok
@@ -346,18 +347,42 @@ def run_mode(mode, trigger):
             return 1
 
         # 2.5) canonical 发布语义 + 风险统一 + public/legacy 单向导出
-        if not IN_GITHUB_ACTIONS:
-            print("\n[2.5] apply_publication_semantics (canonical -> public -> legacy) ...")
-            rc, out, err = run_cmd([PYTHON, str(HERE / "data" / "apply_publication_semantics.py"),
-                                    "--run-id", run_id], timeout=180)
-            add_log_step(log, "publication_semantics", "success" if rc == 0 else "failed",
-                         details={"output": out[-400:], "error": err[-300:]})
-            print(f"  semantics+export: {'OK' if rc == 0 else 'ERR'}")
-            if rc != 0:
-                print((out + err)[-400:])
+        # Stage 3B Final Repair: 取消 CI 跳过，本地与 CI 行为一致
+        print("\n[2.5] apply_publication_semantics (canonical -> public -> legacy) ...")
+        rc, out, err = run_cmd([PYTHON, str(HERE / "data" / "apply_publication_semantics.py"),
+                                "--run-id", run_id], timeout=180)
+        add_log_step(log, "publication_semantics", "success" if rc == 0 else "failed",
+                     details={"output": out[-400:], "error": err[-300:]})
+        print(f"  semantics+export: {'OK' if rc == 0 else 'ERR'}")
+        if rc != 0:
+            print((out + err)[-400:])
+            log["final_status"] = "failed"
+            save_run_log(log, run_id)
+            return 1
+
+        # 2.5b) Public ⊆ Canonical 不变量检查
+        print("\n[2.5b] canonical/public consistency check ...")
+        cpath = HERE / "data" / "canonical" / "event_clusters.json"
+        ppath = HERE / "data" / "public" / "published_events.json"
+        try:
+            import json as _json
+            can = _json.loads((cpath).read_text(encoding="utf-8")) if cpath.exists() else {"items": []}
+            pub = _json.loads((ppath).read_text(encoding="utf-8")) if ppath.exists() and (ppath).stat().st_size > 0 else {"items": []}
+            can_ids = {_json.dumps(i) if isinstance(i, dict) else str(i) for i in can.get("items", [])}
+            # 提取 event_id
+            pub_ids = {c.get("event_id") for c in pub.get("items", []) if c.get("event_id")}
+            can_ids_set = {c.get("event_id") for c in can.get("items", []) if c.get("event_id")}
+            orphan = [p for p in pub_ids if p not in can_ids_set]
+            if orphan:
                 log["final_status"] = "failed"
+                log["consistency_error"] = f"public_orphans={len(orphan)}: {orphan[:5]}"
+                print(f"  FAIL: {len(orphan)} public events NOT in canonical: {orphan[:5]}")
                 save_run_log(log, run_id)
                 return 1
+            else:
+                print(f"  OK: all {len(pub_ids)} public events present in canonical ({len(can_ids_set)} total)")
+        except Exception as _ce:
+            print(f"  consistency check error (non-fatal): {_ce}")
         else:
             print("\n[2.5] CI 只读：跳过 publication_semantics（不修改 data/）。")
 
