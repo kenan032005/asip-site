@@ -342,7 +342,10 @@ def run_mode(mode, trigger):
             if not failing:
                 failing.append("(tests_ok=False but all rcs=0; check cfg_ok/schema_ok)")
             print(f"  FAILING TESTS: {failing}")
-            print(tests_out[-600:])
+            # Print ALL test output on failure (not truncated) for CI debuggability
+            print("--- FULL TEST OUTPUT ---")
+            print(tests_out[-8000:])
+            print("--- END FULL OUTPUT ---")
             log["final_status"] = "failed"
             save_run_log(log, run_id)
             return 1
