@@ -28,8 +28,12 @@ sys.path.insert(0, os.path.join(ROOT, "scripts", "collectors"))
 from framework import (  # noqa: E402
     fetch_page, validate_url, norm_url, content_hash, bj_iso, bj_now,
     parse_original_time, to_beijing,
-    load_state_cache, save_state_cache, should_skip, should_retry,
-    set_article_state, TERMINAL_STATES, CACHE_DIR,
+    get_state_doc, save_processing_state, persist_and_clear_state,
+    reset_state_cache, migrate_legacy_cache_files,
+    should_skip_url, set_article_state_record,
+    STATE, TERMINAL_STATES, RETRYABLE_STATES,
+    MAX_FETCH_ATTEMPTS, MAX_EXTRACTION_ATTEMPTS,
+    _http_is_retryable, _http_is_terminal, CACHE_DIR,
 )
 from registry import SourceRegistry, ArticleDiscoverer  # noqa: E402
 from country_runner import (load_country_cfg, identify_country,  # noqa: E402
@@ -61,9 +65,10 @@ def save_json(path, doc):
         json.dump(doc, f, ensure_ascii=False, indent=2)
 
 
-def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=False, max_items=0):
+def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=False, max_items=0, run_id=""):
     """对单个国家执行完整采集。"""
     cfg_key = "chad" if country_cn == "乍得" else "niger"
+    run_id = run_id or os.environ.get("ASIP_RUN_ID", "local")
     country_cfg = load_country_cfg(cfg_key)
     sources = registry.by_country(country_cn)
 
@@ -125,10 +130,10 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
         else:
             stat.setdefault("skipped_by_limit", 0)
 
-        # 状态缓存（article_processing_state 状态机）
-        state_cache = load_state_cache(sid)
+        # 集中式状态缓存（一次运行加载一次）
+        state_doc = get_state_doc()
         if fresh:
-            state_cache = {"articles": {}, "etag": "", "last_modified": "", "version": 2}
+            state_doc = {"articles": {}, "generated_at": bj_iso(), "version": 3}
 
         # 2) 抓取详情页 + 3) 正文提取
         extractor = ContentExtractor(src.get("extractor_profile") or {})
@@ -138,29 +143,57 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
             if not nurl:
                 continue
 
-            # 终态（已发布/已隔离终态）→ 跳过
-            if should_skip(nurl, state_cache):
+            # 终态（已发布/已隔离/抓取失败终止/提取失败终止）→ 跳过
+            if should_skip_url(nurl, state_doc):
                 stat["duplicates"] += 1
                 continue
+
+            # 检查重试上限（基于 attempt_count）
+            rec = state_doc.get("articles", {}).get(nurl, {})
+            prev_attempts = rec.get("attempt_count", 0)
+            prev_state = rec.get("state", "")
+
+            # 抓取：过渡态/可重试态 → 设置 fetching
+            set_article_state_record(state_doc, nurl, STATE.FETCHING,
+                                     source_id=sid, discovery_method=d.get("method", ""),
+                                     canonical_url="", run_id=run_id)
 
             stat["fetched"] += 1
 
             # 抓取详情页
             text, err, http_status = fetch_page(url)
             if err:
-                # 重试类错误（网络/超时/限流）→ fetch_failed_retryable
-                set_article_state(state_cache, nurl,
-                                  "fetch_failed_retryable",
-                                  error=str(err)[:80], http_status=http_status,
-                                  body_hash="")
-                stat["extraction_failed"] += 1
-                stat["errors"] += 1
+                # HTTP 状态码驱动的重试策略
+                is_retryable = _http_is_retryable(http_status) if http_status else True
+                is_terminal = _http_is_terminal(http_status) if http_status else False
+                too_many = prev_attempts >= MAX_FETCH_ATTEMPTS
+
+                if too_many or is_terminal:
+                    set_article_state_record(state_doc, nurl, STATE.FETCH_FAILED_TERMINAL,
+                                             fetch_http_status=http_status,
+                                             last_error_code=str(http_status or ""),
+                                             last_error_message=str(err)[:200],
+                                             run_id=run_id)
+                    stat["extraction_failed"] += 1
+                    stat["errors"] += 1
+                else:
+                    set_article_state_record(state_doc, nurl, STATE.FETCH_FAILED_RETRYABLE,
+                                             fetch_http_status=http_status,
+                                             last_error_code=str(http_status or ""),
+                                             last_error_message=str(err)[:200],
+                                             run_id=run_id)
+                    stat["extraction_failed"] += 1
+                    stat["errors"] += 1
                 continue
 
-            # 标记抓取成功（暂存，写入前会被覆盖）
+            # 标记抓取成功
             body_hash = content_hash("", text or "")
-            set_article_state(state_cache, nurl, "fetch_succeeded",
-                              http_status=http_status, body_hash=body_hash)
+            set_article_state_record(state_doc, nurl, STATE.FETCH_SUCCEEDED,
+                                     fetch_http_status=http_status,
+                                     content_hash=body_hash, run_id=run_id)
+
+            # 标记提取中
+            set_article_state_record(state_doc, nurl, STATE.EXTRACTING, run_id=run_id)
 
             # 正文提取
             extracted = extractor.extract(text, url)
@@ -181,17 +214,33 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
                 extracted["word_count"] = len(d["summary"].split())
                 stat["summary_only"] += 1
 
-            # 记录提取状态：成功或可重试
+            # 记录提取状态：成功 / 可重试 / 终止
+            ext_attempts = prev_attempts  # 共用 attempt_count
+            body_status_val = extracted.get("body_status", "")
             if extracted.get("quality") in ("full_body", "partial_body"):
-                set_article_state(state_cache, nurl, "extraction_succeeded",
-                                  body_hash=content_hash(extracted.get("title", ""),
-                                                         extracted.get("body", "")),
-                                  http_status=http_status)
+                set_article_state_record(state_doc, nurl, STATE.EXTRACTION_SUCCEEDED,
+                                         body_status=body_status_val,
+                                         content_hash=content_hash(
+                                             extracted.get("title", ""),
+                                             extracted.get("body", "")),
+                                         fetch_http_status=http_status,
+                                         run_id=run_id)
+            elif ext_attempts >= MAX_EXTRACTION_ATTEMPTS:
+                set_article_state_record(state_doc, nurl, STATE.EXTRACTION_FAILED_TERMINAL,
+                                         body_status=body_status_val,
+                                         fetch_http_status=http_status,
+                                         last_error_code="extraction_limit",
+                                         last_error_message="; ".join(
+                                             extracted.get("quality_reasons", [])[:3]),
+                                         run_id=run_id)
             else:
-                set_article_state(state_cache, nurl, "extraction_failed_retryable",
-                                  body_hash="",
-                                  http_status=http_status,
-                                  error="; ".join(extracted.get("quality_reasons", [])[:3]))
+                set_article_state_record(state_doc, nurl, STATE.EXTRACTION_FAILED_RETRYABLE,
+                                         body_status=body_status_val,
+                                         fetch_http_status=http_status,
+                                         last_error_code="extraction_failed",
+                                         last_error_message="; ".join(
+                                             extracted.get("quality_reasons", [])[:3]),
+                                         run_id=run_id)
 
             article = {
                 "source_id": sid,
@@ -270,7 +319,7 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
             for link in item.get("source_links", []):
                 existing_urls.add(norm_url(link.get("url", "")))
 
-        run_id = os.environ.get("ASIP_RUN_ID", "local")
+        run_id = run_id  # 已在函数顶部定义
         quarantined = []
         published = []
         for a in all_articles:
@@ -306,8 +355,8 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
                 ev = build_event(a, run_id, country_cn)
                 published.append(ev)
                 existing_urls.add(norm_url(a.get("article_url", "")))
-                set_article_state(state_cache, a.get("article_url", ""),
-                                  "published",
+                set_article_state_record(state_doc, a.get("article_url", ""),
+                                      STATE.PUBLISHED,
                                   published_event_id=ev.get("event_id", ""),
                                   body_hash=content_hash(a.get("original_title", ""),
                                                          a.get("original_body", "")))
@@ -351,8 +400,8 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
                 }
                 quarantined.append(qr)
                 if is_terminal:
-                    set_article_state(state_cache, a.get("article_url", ""),
-                                      "quarantined_terminal",
+                    set_article_state_record(state_doc, a.get("article_url", ""),
+                                          STATE.QUARANTINED_TERMINAL,
                                       quarantine_id=qr["quarantine_id"],
                                       body_hash=content_hash(a.get("original_title", ""),
                                                              a.get("original_body", "")))
@@ -372,8 +421,8 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
             save_json(QUARANTINE_PATH, q_doc)
             stat["quarantined"] = len(fresh_q)
 
-        # 数据持久化后保存状态缓存（终态 published/quarantined_terminal 已标记）
-        save_state_cache(sid, state_cache)
+        # 数据持久化后保存集中式状态（终态已标记）
+        save_processing_state(state_doc)
 
         stat["duration_s"] = round(time.time() - t0, 1)
         per_source.append(stat)
@@ -478,7 +527,13 @@ def main():
     ap.add_argument("--run-id", default="")
     ap.add_argument("--fresh", action="store_true", help="清空状态缓存，全量重抓")
     ap.add_argument("--max-items", type=int, default=0, help="每来源最多处理 N 条（0=不限）")
+    ap.add_argument("--migrate", action="store_true", help="迁移旧 per-source 缓存到集中式状态")
     args = ap.parse_args()
+
+    # ── 旧缓存迁移（幂等，首次运行时执行）──
+    if args.migrate:
+        report = migrate_legacy_cache_files()
+        print("迁移报告:", json.dumps(report, ensure_ascii=False, indent=2))
 
     run_id = args.run_id or os.environ.get("ASIP_RUN_ID", "")
     if not run_id:
@@ -498,10 +553,14 @@ def main():
     for cn in countries:
         arts, ps, errs = run_country_pipeline(cn, registry, discoverer,
                                               dry=args.dry, fresh=args.fresh,
-                                              max_items=args.max_items)
+                                              max_items=args.max_items,
+                                              run_id=run_id)
         all_articles.extend(arts)
         per_source.extend(ps)
         all_errors.extend(errs)
+
+    # ── 持久化集中式状态 ──
+    persist_and_clear_state()
 
     print(f"\n{'='*60}")
     print(f"采集完成: {len(all_articles)} 篇文章, {len(per_source)} 来源, {len(all_errors)} 错误")

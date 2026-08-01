@@ -616,68 +616,174 @@ class ContentExtractor:
             reasons.append("looks_like_listing_or_home")
 
 
-# ── 缓存（article_processing_state 状态机）────────────
-# 状态语义（终态可永久跳过；非终态允许重试）：
-#   discovered              – 仅发现链接，不得跳过（不应单独持久化）
-#   fetch_succeeded         – 详情页抓取成功（过渡态）
-#   fetch_failed_retryable  – 网络超时/429/503/404，允许重试
-#   extraction_succeeded    – 正文提取成功（过渡态）
-#   extraction_failed_retryable – 正文提取失败，允许重试
-#   published               – 已发布事件（终态，永久跳过）
-#   quarantined_terminal    – 已隔离且不可恢复（终态，永久跳过）
-TERMINAL_STATES = frozenset({"published", "quarantined_terminal"})
-RETRYABLE_STATES = frozenset({"fetch_failed_retryable", "extraction_failed_retryable"})
+# ── 集中式文章处理状态管理 ──────────────────────────
+# 状态文件：data/runtime/article_processing_state.json
+# 所有决策以该文件为唯一真实来源；不再使用 per-source 零散缓存。
+# 内部使用不部署到 dist。
+_STATE_PATH = os.path.join(ROOT, "data", "runtime", "article_processing_state.json")
+_STATE_BACKUP = _STATE_PATH + ".bak"
 
-def cache_path(source_id):
-    return os.path.join(CACHE_DIR, f"{source_id}.json")
+# ── 允许的状态枚举 ──
+STATE = type("State", (), {
+    "DISCOVERED": "discovered",
+    "FETCHING": "fetching",
+    "FETCH_SUCCEEDED": "fetch_succeeded",
+    "FETCH_FAILED_RETRYABLE": "fetch_failed_retryable",
+    "FETCH_FAILED_TERMINAL": "fetch_failed_terminal",
+    "EXTRACTING": "extracting",
+    "EXTRACTION_SUCCEEDED": "extraction_succeeded",
+    "EXTRACTION_FAILED_RETRYABLE": "extraction_failed_retryable",
+    "EXTRACTION_FAILED_TERMINAL": "extraction_failed_terminal",
+    "PUBLISHED": "published",
+    "QUARANTINED_TERMINAL": "quarantined_terminal",
+})
+TERMINAL_STATES = frozenset({
+    STATE.PUBLISHED, STATE.QUARANTINED_TERMINAL,
+    STATE.FETCH_FAILED_TERMINAL, STATE.EXTRACTION_FAILED_TERMINAL,
+})
+# 过渡态：中断后可自动恢复
+TRANSIENT_STATES = frozenset({STATE.FETCHING, STATE.EXTRACTING})
+# 可重试态
+RETRYABLE_STATES = frozenset({
+    STATE.FETCH_FAILED_RETRYABLE, STATE.EXTRACTION_FAILED_RETRYABLE,
+})
+# 重试阈值
+MAX_FETCH_ATTEMPTS = 3
+MAX_EXTRACTION_ATTEMPTS = 2
+
+# ── HTTP 状态码驱动的重试策略 ──
+FETCH_RETRY_CODES = frozenset({408, 425, 429, 500, 502, 503, 504})
+FETCH_TERMINAL_CODES = frozenset({404, 410, 403, 451})
 
 
-def load_state_cache(source_id):
-    """加载来源的状态缓存。损坏或缺失时返回安全空结构。"""
-    p = cache_path(source_id)
+def _http_is_retryable(code):
+    if code in FETCH_RETRY_CODES:
+        return True
+    if isinstance(code, int) and 500 <= code <= 599:
+        return True
+    return False
+
+
+def _http_is_terminal(code):
+    return code in FETCH_TERMINAL_CODES
+
+
+def load_processing_state():
+    """加载集中式状态文件。损坏时恢复备份，均损坏返回安全空结构。"""
     try:
-        with open(p, "r", encoding="utf-8") as f:
+        with open(_STATE_PATH, "r", encoding="utf-8") as f:
             doc = json.load(f)
+        if "articles" not in doc or not isinstance(doc.get("articles"), dict):
+            raise json.JSONDecodeError("missing articles", "", 0)
+        return doc
     except (FileNotFoundError, json.JSONDecodeError):
-        return {"articles": {}, "etag": "", "last_modified": "", "version": 2}
-    # 迁移旧格式：seen_urls → article_processing_state
-    if "seen_urls" in doc and "articles" not in doc:
-        doc = _migrate_old_cache(doc)
-    return doc
+        # 尝试备份恢复
+        try:
+            with open(_STATE_BACKUP, "r", encoding="utf-8") as f:
+                backup = json.load(f)
+            if "articles" in backup and isinstance(backup["articles"], dict):
+                with open(_STATE_PATH, "w", encoding="utf-8") as out:
+                    json.dump(backup, out, ensure_ascii=False, indent=2)
+                return backup
+        except Exception:
+            pass
+        return {"articles": {}, "generated_at": bj_iso(), "version": 3}
 
 
-def save_state_cache(source_id, cache_doc):
-    """原子写入状态缓存（先写 temp 再 rename）。"""
-    os.makedirs(CACHE_DIR, exist_ok=True)
-    p = cache_path(source_id)
-    tmp = p + ".tmp"
-    cache_doc.setdefault("version", 2)
-    with open(tmp, "w", encoding="utf-8") as f:
-        json.dump(cache_doc, f, ensure_ascii=False, indent=2)
-    os.replace(tmp, p)
+def save_processing_state(doc):
+    """原子写入：temp → flush → rename；失败时保留旧文件，写入备份。"""
+    os.makedirs(os.path.dirname(_STATE_PATH), exist_ok=True)
+    doc["generated_at"] = bj_iso()
+    doc.setdefault("version", 3)
+    tmp = _STATE_PATH + ".tmp"
+    try:
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(doc, f, ensure_ascii=False, indent=2)
+            f.flush()
+            os.fsync(f.fileno())
+    except Exception:
+        if os.path.exists(tmp):
+            os.remove(tmp)
+        raise
+    # 保留备份
+    try:
+        if os.path.exists(_STATE_PATH):
+            import shutil
+            shutil.copy2(_STATE_PATH, _STATE_BACKUP)
+    except Exception:
+        pass
+    os.replace(tmp, _STATE_PATH)
 
 
-def _migrate_old_cache(doc):
-    """将旧 seen_urls 缓存迁移为 article_processing_state。
-    规则：published_events 中存在的 URL → published（终态）；
-          其余 → 不创建任何记录（允许重新处理）。"""
-    pub_urls = _load_published_urls()
-    articles = {}
-    for url in doc.get("seen_urls", []):
-        nu = norm_url(url)
-        if nu and nu in pub_urls:
-            articles[nu] = {
-                "state": "published", "body_hash": "",
-                "published_event_id": pub_urls[nu], "quarantine_id": "",
-                "error": "", "attempts": 1,
-                "last_attempt_at": doc.get("last_modified", ""),
-            }
-    return {"articles": articles, "etag": doc.get("etag", ""),
-            "last_modified": doc.get("last_modified", ""), "version": 2}
+def should_skip_url(norm_url_val, state_doc=None):
+    """终态 URL 应跳过后续处理。"""
+    if state_doc is None:
+        state_doc = _cached_state_doc
+    art = state_doc.get("articles", {}).get(norm_url_val)
+    if not art:
+        return False
+    return art.get("state", "") in TERMINAL_STATES
 
 
+def get_article_record(norm_url_val, state_doc=None):
+    """获取文章记录字典，不存在返回 None。"""
+    if state_doc is None:
+        state_doc = _cached_state_doc
+    return state_doc.get("articles", {}).get(norm_url_val)
+
+
+def set_article_state_record(state_doc, norm_url_val, state, **extra):
+    """设置文章状态记录（覆盖写入，无状态转换校验）。"""
+    now = bj_iso()
+    prev = state_doc.get("articles", {}).get(norm_url_val, {})
+    entry = {
+        "normalized_url": norm_url_val,
+        "canonical_url": extra.pop("canonical_url", prev.get("canonical_url", "")),
+        "source_id": extra.pop("source_id", prev.get("source_id", "")),
+        "discovery_method": extra.pop("discovery_method", prev.get("discovery_method", "")),
+        "state": state,
+        "first_discovered_at": prev.get("first_discovered_at", now),
+        "last_attempt_at": now,
+        "last_success_at": extra.pop("last_success_at", prev.get("last_success_at", now if "succeeded" in state else "")),
+        "attempt_count": prev.get("attempt_count", 0) + 1,
+        "fetch_http_status": extra.pop("fetch_http_status", prev.get("fetch_http_status")),
+        "content_hash": extra.pop("content_hash", prev.get("content_hash", "")),
+        "body_status": extra.pop("body_status", prev.get("body_status", "")),
+        "terminal": state in TERMINAL_STATES,
+        "retry_after": extra.pop("retry_after", None),
+        "last_error_code": extra.pop("last_error_code", prev.get("last_error_code", "")),
+        "last_error_message": extra.pop("last_error_message", prev.get("last_error_message", "")),
+        "run_id": extra.pop("run_id", prev.get("run_id", "")),
+    }
+    entry.update(extra)  # 剩余字段附加上去
+    state_doc.setdefault("articles", {})[norm_url_val] = entry
+
+
+# 模块级缓存（一次运行只加载一次）
+_cached_state_doc = None
+
+
+def get_state_doc():
+    global _cached_state_doc
+    if _cached_state_doc is None:
+        _cached_state_doc = load_processing_state()
+    return _cached_state_doc
+
+
+def reset_state_cache():
+    global _cached_state_doc
+    _cached_state_doc = None
+
+
+def persist_and_clear_state():
+    global _cached_state_doc
+    if _cached_state_doc is not None:
+        save_processing_state(_cached_state_doc)
+        _cached_state_doc = None
+
+
+# ── 已发布/已隔离 URL 的加载（迁移用）────────────
 def _load_published_urls():
-    """加载已发布事件的所有 source_links URL（规范化后）。用于迁移。"""
     try:
         path = os.path.join(ROOT, "data", "public", "published_events.json")
         with open(path, "r", encoding="utf-8") as f:
@@ -694,50 +800,130 @@ def _load_published_urls():
     return urls
 
 
-def get_article_state(cache_doc, url):
-    """获取单篇文章的处理状态。返回 state 字符串或 None（未处理）。"""
-    return cache_doc.get("articles", {}).get(norm_url(url), {}).get("state")
+# ── 旧 per-source 缓存的迁移入口 ──
+def migrate_legacy_cache_files():
+    """扫描 logs/collector_cache/*.json，将旧 seen_urls 迁移到集中式状态文件。
+    输出迁移报告到 logs/cache_migration_report.json。"""
+    report = {
+        "legacy_seen_url_count": 0,
+        "migrated_to_published": 0,
+        "migrated_to_terminal_quarantine": 0,
+        "migrated_to_discovered": 0,
+        "invalid_legacy_records": 0,
+        "duplicate_legacy_urls": 0,
+        "migration_errors": 0,
+    }
+    doc = load_processing_state()
+    existing = set(doc.get("articles", {}).keys())
+    pub_urls = _load_published_urls()
+    quar_urls = _load_quarantine_urls()
+
+    import glob
+    legacy_files = glob.glob(os.path.join(CACHE_DIR, "*.json"))
+    seen_all = set()
+
+    for lf in legacy_files:
+        try:
+            with open(lf, "r", encoding="utf-8") as f:
+                old = json.load(f)
+        except (json.JSONDecodeError, FileNotFoundError):
+            report["migration_errors"] += 1
+            continue
+        for url in old.get("seen_urls", []):
+            nu = norm_url(url)
+            if not nu:
+                report["invalid_legacy_records"] += 1
+                continue
+            if nu in seen_all:
+                report["duplicate_legacy_urls"] += 1
+                continue
+            seen_all.add(nu)
+            report["legacy_seen_url_count"] += 1
+
+            if nu in existing:
+                continue  # 已存在，幂等跳过
+
+            if nu in pub_urls:
+                doc.setdefault("articles", {})[nu] = _make_legacy_record(
+                    nu, STATE.PUBLISHED, published_event_id=pub_urls[nu])
+                report["migrated_to_published"] += 1
+            elif nu in quar_urls:
+                doc.setdefault("articles", {})[nu] = _make_legacy_record(
+                    nu, STATE.QUARANTINED_TERMINAL, quarantine_id=quar_urls[nu])
+                report["migrated_to_terminal_quarantine"] += 1
+            else:
+                # 无法证明已完成 → 标记为 discovered，允许重新处理
+                doc.setdefault("articles", {})[nu] = _make_legacy_record(
+                    nu, STATE.DISCOVERED)
+                report["migrated_to_discovered"] += 1
+
+    save_processing_state(doc)
+    log_dir = os.path.join(ROOT, "logs")
+    os.makedirs(log_dir, exist_ok=True)
+    with open(os.path.join(log_dir, "cache_migration_report.json"), "w", encoding="utf-8") as f:
+        json.dump(report, f, ensure_ascii=False, indent=2)
+    return report
 
 
-def should_skip(url, cache_doc):
-    """URL 是否为终态（已发布/已隔离终态），可安全跳过。"""
+def _make_legacy_record(nu, state, **extra):
+    now = bj_iso()
+    return {
+        "normalized_url": nu, "canonical_url": "", "source_id": "",
+        "discovery_method": "", "state": state,
+        "first_discovered_at": now, "last_attempt_at": now,
+        "last_success_at": now if "succeeded" in state or state == STATE.PUBLISHED else "",
+        "attempt_count": 1, "fetch_http_status": None,
+        "content_hash": "", "body_status": "",
+        "terminal": state in TERMINAL_STATES,
+        "retry_after": None, "last_error_code": "", "last_error_message": "",
+        "run_id": "", **extra,
+    }
+
+
+def _load_quarantine_urls():
+    try:
+        path = os.path.join(ROOT, "data", "canonical", "quarantine.json")
+        with open(path, "r", encoding="utf-8") as f:
+            q = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+    urls = {}
+    for item in q.get("items", []):
+        oid = norm_url(item.get("original_id", ""))
+        if oid and item.get("reason_code") not in ("", "not_security_relevant",
+                                                    "weak_signal_needs_review",
+                                                    "wrong_country"):
+            urls[oid] = item.get("quarantine_id", "")
+    return urls
+
+
+# ── 向后兼容：保留旧函数签名，内部委托到集中式状态 ──
+def load_state_cache(source_id):
+    return get_state_doc()
+
+
+def save_state_cache(source_id, cache_doc):
+    save_processing_state(cache_doc)
+
+
+def should_skip(url, cache_doc=None):
     nu = norm_url(url)
-    art = cache_doc.get("articles", {}).get(nu)
+    doc = cache_doc if cache_doc is not None else get_state_doc()
+    return should_skip_url(nu, doc)
+
+
+def should_retry(url, cache_doc=None):
+    nu = norm_url(url)
+    doc = cache_doc if cache_doc is not None else get_state_doc()
+    art = doc.get("articles", {}).get(nu)
     if not art:
         return False
-    return art.get("state", "") in TERMINAL_STATES
-
-
-def should_retry(url, cache_doc):
-    """URL 是否处于允许重试状态（非终态）。"""
-    nu = norm_url(url)
-    art = cache_doc.get("articles", {}).get(nu)
-    if not art:
-        return False  # never processed
     st = art.get("state", "")
-    return st in RETRYABLE_STATES or st == ""
+    return st in RETRYABLE_STATES or st == "" or st == STATE.DISCOVERED
 
 
 def set_article_state(cache_doc, url, state, **extra):
-    """设置文章状态（只允许严格的状态转换）。向 extra 传入附加字段。"""
-    nu = norm_url(url)
-    if "articles" not in cache_doc:
-        cache_doc["articles"] = {}
-    now = bj_iso()
-    entry = {
-        "state": state,
-        "last_attempt_at": now,
-        "attempts": cache_doc.get("articles", {}).get(nu, {}).get("attempts", 0) + 1,
-    }
-    entry.update(extra)
-    cache_doc["articles"][nu] = entry
-
-
-def clear_completed_collection():
-    """清理已完成采集的缓存（仅非终态可删除）。"""
-    # 保留终态记录（published/quarantined_terminal），清理过渡态
-    # 不做批量删除，由 stage3_collect_v2 --fresh 控制
-    pass
+    set_article_state_record(cache_doc, norm_url(url), state, **extra)
 
 
 # ── 去重 ─────────────────────────────────────────────
