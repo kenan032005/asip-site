@@ -499,9 +499,19 @@ class ContentExtractor:
 
     def _extract_generic(self, html_text):
         """通用密度提取：找最长的文本密集 <article> 或 <div> 或 <p> 序列。"""
-        # 优先 <article>
+        # 优先常见正文容器 class（列表页 article 过多的站点用此兜底）
+        for cls in ("entry-content", "post-content", "td-post-content",
+                    "article-content", "single-content", "post-body", "entry-text",
+                    "t-content__body", "article__main", "o-article__main"):
+            m = re.search(r'<div[^>]*class=["\'][^"\']*' + cls + r'[^"\']*["\'][^>]*>(.*?)</div>',
+                          html_text, re.I | re.S)
+            if m:
+                body = strip_tags(m.group(1))
+                if len(body) > 200:
+                    return body
+        # 优先 <article>（若 article 数量过多说明是列表页，跳过）
         arts = re.findall(r"<article[^>]*>(.*?)</article>", html_text, re.I | re.S)
-        if arts:
+        if arts and len(arts) <= 10:
             best = max(arts, key=lambda a: len(strip_tags(a)))
             body = strip_tags(best)
             if len(body) > 200:

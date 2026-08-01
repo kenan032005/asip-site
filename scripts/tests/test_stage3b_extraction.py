@@ -585,6 +585,64 @@ class TestStage3BPublishContract(unittest.TestCase):
         urls = [u for u, _ in links]
         self.assertNotIn("https://example.com/about", urls)
 
+    def test_rss_summary_fallback_preserved(self):
+        """详情页无正文时保留 RSS 摘要（rss_summary_only），不伪造 original_body"""
+        from stage3_collect_v2 import build_event
+        art = {
+            "source_id": "s1", "source_name": "S", "source_country": "乍得",
+            "source_type": "local", "language": "fr",
+            "discovery_method": "rss", "feed_url": "", "listing_url": "",
+            "article_url": "https://example.com/no-body", "canonical_url": "",
+            "original_title": "Situation sécuritaire au Tchad",
+            "original_body": "",  # 详情页提取失败 → body 为空
+            "original_summary": "Résumé du flux RSS : les autorités locales ont confirmé "
+                                "l'incident sécuritaire dans la région de l'Ennedi.",  # 摘要保留
+            "author": "", "published_at_original": "2026-08-01T10:00:00Z",
+            "published_at_beijing": "", "lead_image_url": "",
+            "article_word_count": 3, "extraction_method": "generic_density",
+            "extraction_quality": "rss_summary_only", "extraction_quality_score": 10,
+            "extraction_quality_reasons": ["no_body"],
+            "fetch_status": "ok", "fetch_http_status": 200, "fetch_attempts": 1,
+            "body_status": "rss_summary_only", "collected_at_beijing": "",
+            "_country": {"decision": "chad", "event_location_country": "chad",
+                         "mentioned_countries": []}, "_relevant": True,
+        }
+        ev = build_event(art, "20260801T200000+0800_tstabc", "乍得")
+        # 摘要降级 → 不得进入 published（由准入拒绝）；body_extracted 不得有正文冒充
+        self.assertEqual(ev["body_status"], "rss_summary_only")
+        # 摘要仅保存在 summary_original，不写入 body_extracted（body 为空）
+        self.assertNotIn("Résumé du flux RSS", ev.get("body_extracted", ""))
+        self.assertEqual(ev["body_extracted"], "")
+        self.assertIn("Résumé du flux RSS", ev.get("summary_original", ""))
+
+    def test_rss_summary_not_written_as_original_body(self):
+        """rss_summary_only 状态下 original_body 必须为空，不得把摘要当正文"""
+        from stage3_collect_v2 import build_event
+        art = {
+            "source_id": "s1", "source_name": "S", "source_country": "尼日尔",
+            "source_type": "local", "language": "fr",
+            "discovery_method": "rss", "feed_url": "", "listing_url": "",
+            "article_url": "https://example.com/n", "canonical_url": "",
+            "original_title": "Attaque au Niger", "original_body": "",
+            "original_summary": "Boko Haram a mené une attaque dans la région de Diffa.",
+            "author": "", "published_at_original": "", "published_at_beijing": "",
+            "lead_image_url": "", "article_word_count": 2,
+            "extraction_method": "generic_density",
+            "extraction_quality": "rss_summary_only",
+            "extraction_quality_score": 5,
+            "extraction_quality_reasons": ["no_body"],
+            "fetch_status": "ok", "fetch_http_status": 200, "fetch_attempts": 1,
+            "body_status": "rss_summary_only", "collected_at_beijing": "",
+            "_country": {"decision": "niger", "event_location_country": "niger",
+                         "mentioned_countries": []}, "_relevant": True,
+        }
+        ev = build_event(art, "20260801T200000+0800_tstabc", "尼日尔")
+        self.assertEqual(ev["body_status"], "rss_summary_only")
+        self.assertEqual(ev["body_extracted"], "")
+        self.assertEqual(ev["article_word_count"], 2)
+        from stage3_collect_v2 import ALLOWED_QUALITY
+        self.assertNotIn("rss_summary_only", ALLOWED_QUALITY)
+
 
 if __name__ == "__main__":
     suite = unittest.defaultTestLoader.loadTestsFromModule(sys.modules[__name__])
