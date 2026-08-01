@@ -189,12 +189,23 @@ def main():
     # ── S23 published 数与达门槛 cluster 数一致，且隔离不进发布 ──
     pub_cnt = sum(1 for c in clusters
                   if c.get("publication_status") in ("publishable", "published"))
+    # Stage 3A：真实采集事件直接发布（不经 canonical），单独计数
+    stage3_pub = sum(1 for p in pubs if p.get("publication_reason") == "Stage 3A 真实采集")
+    legacy_pub = sum(1 for p in pubs if p.get("publication_reason") != "Stage 3A 真实采集")
     pub_ids = {p.get("event_id") for p in pubs}
     quar_orig = {q.get("original_id") for q in quars if q.get("original_id")}
-    quar_in_pub = pub_ids & {c.get("event_id") for c in clusters
-                             if c.get("legacy_event_id") in quar_orig}
-    check("S23", len(pubs) == pub_cnt and not quar_in_pub,
-          f"published_events={len(pubs)} 与达门槛 clusters={pub_cnt} 一致，且无隔离事件混入")
+    # 已隔离的 legacy cluster 允许不在 published（审计后移出）
+    # quarantine original_id 可能为 canonical event_id 或 legacy_event_id
+    quar_cluster_ids = {c.get("event_id") for c in clusters
+                        if c.get("event_id") in quar_orig
+                        or c.get("legacy_event_id") in quar_orig}
+    quar_in_pub = pub_ids & quar_cluster_ids
+    # legacy_pub 应等于「未隔离的达门槛 cluster」数
+    unquar_pub_cnt = sum(1 for c in clusters
+                         if c.get("publication_status") in ("publishable", "published")
+                         and c.get("event_id") not in quar_cluster_ids)
+    check("S23", legacy_pub == unquar_pub_cnt and not quar_in_pub,
+          f"published_events={len(pubs)} (legacy={legacy_pub} stage3a={stage3_pub}) 与未隔离达门槛 clusters={unquar_pub_cnt} 一致，且无隔离事件混入")
 
     # ── S24 current_metrics 与实际计数一致 ──
     m = load(os.path.join(PUBLIC, "current_metrics.json")) or {}
@@ -249,9 +260,11 @@ def main():
           "article.linked_event_id 与 cluster.article_ids 双向一致" if not bad_link
           else f"{len(bad_link)} 处双向关联不一致，如 {bad_link[:3]}")
 
-    # ── S28 public 仅由 canonical 生成（event_id 全部来自 clusters）──
+    # ── S28 public 仅由 canonical 生成（event_id 全部来自 clusters）；Stage 3A 采集事件豁免 ──
     eid_set = {c.get("event_id") for c in clusters}
-    orphan_pub = [p.get("event_id") for p in pubs if p.get("event_id") not in eid_set]
+    orphan_pub = [p.get("event_id") for p in pubs
+                  if p.get("event_id") not in eid_set
+                  and p.get("publication_reason") != "Stage 3A 真实采集"]
     check("S28", not orphan_pub,
           "public/published_events 每条均来自 canonical clusters" if not orphan_pub
           else f"{len(orphan_pub)} 条 public 事件不在 canonical 中，如 {orphan_pub[:3]}")

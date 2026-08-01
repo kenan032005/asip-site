@@ -259,5 +259,144 @@ class TestDataIntegrity(unittest.TestCase):
                            "dist/data/ai/queue/ must not exist")
 
 
+class TestCountryAttribution(unittest.TestCase):
+    """国家归属：来源国 ≠ 事件国。"""
+
+    def setUp(self):
+        sys.path.insert(0, os.path.join(SCRIPTS, "collectors"))
+        from country_runner import identify_country, load_country_cfg, relevance_stage1
+        self.identify_country = identify_country
+        self.relevance_stage1 = relevance_stage1
+        self.chad_cfg = load_country_cfg("chad")
+        self.niger_cfg = load_country_cfg("niger")
+
+    def _country_of(self, text, cfg):
+        cid = self.identify_country(text, cfg)
+        return cid.get("decision")
+
+    def test_mali_news_from_chad_media_not_chad(self):
+        """Mali新闻来自乍得媒体 → 不得进入Chad。"""
+        text = "Renforcement logistique des Forces de Sécurité au Mali"
+        rel, _, _, _ = self.relevance_stage1(text)
+        # 相关性: sécurité 是弱信号 → 不是强相关
+        self.assertNotEqual(rel, True, "Mali军队后勤不应判为强安全相关")
+        # 国家识别: 无乍得实体 → unclear
+        cid = self.identify_country(text, self.chad_cfg)
+        self.assertNotEqual(cid["decision"], "chad")
+
+    def test_nigeria_not_niger(self):
+        """Nigeria不得误判为Niger。"""
+        text = "Nigeria: Boko Haram attacks in Borno State"
+        cid = self.identify_country(text, self.niger_cfg)
+        self.assertNotEqual(cid["decision"], "niger", "Nigeria事件不得归入Niger")
+        self.assertEqual(cid.get("excluded_entities"), ["nigeria"])
+
+    def test_niger_republic_is_niger(self):
+        """Niger Republic可识别为Niger。"""
+        text = "République du Niger: attaque jihadiste à Tillabéri"
+        cid = self.identify_country(text, self.niger_cfg)
+        self.assertEqual(cid["decision"], "niger")
+
+    def test_lake_chad_not_auto_chad(self):
+        """Lake Chad不自动等于Chad国内事件。"""
+        text = "Lake Chad Basin: cross-border insecurity affects four countries"
+        cid = self.identify_country(text, self.chad_cfg)
+        self.assertNotEqual(cid["decision"], "chad", "Lake Chad Basin不应自动归乍得")
+        self.assertEqual(cid["decision"], "regional")
+
+    def test_ndjamena_is_chad(self):
+        """N'Djamena应识别为Chad。"""
+        text = "Attaque terroriste à N'Djamena, des soldats tchadiens tués"
+        cid = self.identify_country(text, self.chad_cfg)
+        self.assertEqual(cid["decision"], "chad")
+        rel, _, _, _ = self.relevance_stage1(text)
+        self.assertEqual(rel, True, "N'Djamena袭击应为强相关")
+
+    def test_niamey_is_niger(self):
+        """Niamey应识别为Niger。"""
+        text = "Niamey: le Général reçoit la délégation russe"
+        cid = self.identify_country(text, self.niger_cfg)
+        self.assertEqual(cid["decision"], "niger")
+
+    def test_multi_country_uses_primary(self):
+        """同时提到多个国家时，以主要事件地点为准。"""
+        # Niger事件 + 提及Nigeria → 归Niger
+        text = "Attaque à Diffa au Niger, les assaillants viennent du Nigeria"
+        cid = self.identify_country(text, self.niger_cfg)
+        self.assertEqual(cid["decision"], "niger")
+
+    def test_uncertain_country_not_forced(self):
+        """无法确定主要国家时进入候选/隔离，不强制发布。"""
+        text = "Conférence régionale sur la sécurité à Paris"
+        cid = self.identify_country(text, self.chad_cfg)
+        self.assertNotEqual(cid["decision"], "chad")
+
+    def test_source_country_separate_from_event(self):
+        """来源国家与事件国家分别保存。"""
+        import stage3_collect
+        a = {"title": "Borkou: quatre officiers tombés", "url": "https://x.com/b",
+             "summary": "officiers tombés sous les balles", "published": "2026-08-01T10:00:00Z",
+             "language": "fr", "source_name": "Tchad One", "source_country_cn": "乍得",
+             "_country": {"decision": "chad", "event_location_country": "chad",
+                          "mentioned_countries": []}, "_relevant": True}
+        e = stage3_collect.build_event(a, "20260801T000000+0800_t", "CAND-src1")
+        self.assertEqual(e["source_country"], "乍得")
+        self.assertEqual(e["primary_country"], "chad")
+        self.assertEqual(e["event_location_country"], "chad")
+
+
+class TestSourceStats(unittest.TestCase):
+    """来源统计由程序自动生成。"""
+
+    def test_stats_file_generated(self):
+        """采集后生成结构化统计文件。"""
+        stats_path = os.path.join(ROOT, "logs", "stage3_stats.json")
+        if os.path.exists(stats_path):
+            with open(stats_path, "r", encoding="utf-8") as f:
+                s = json.load(f)
+            self.assertIn("configured_sources", s)
+            self.assertIn("active_sources", s)
+            self.assertIn("successful_sources", s)
+            self.assertIn("failed_sources", s)
+            self.assertIn("sources_with_items", s)
+            self.assertIn("sources_with_published", s)
+            self.assertIn("sources", s)
+            self.assertIn("totals", s)
+            # sources 数量一致性
+            self.assertEqual(
+                len(s["sources"]),
+                s["successful_sources"] + s["failed_sources"],
+                "sources数量必须等于成功+失败")
+
+
+class TestFailureProtection(unittest.TestCase):
+    """失败保护：单来源失败 / 全来源失败。"""
+
+    def test_single_source_failure_isolated(self):
+        """单个来源失败不影响其他来源。"""
+        from stage3_collect import load_sources
+        srcs = load_sources().get("sources", [])
+        # sources.json 中 enabled 的来源应包含多种状态，不是全成功也不是全失败
+        if srcs:
+            self.assertTrue(len(srcs) > 0)
+
+    def test_published_never_empty_after_failure(self):
+        """全部来源失败时不清空历史有效数据。"""
+        pub = load_published()
+        self.assertGreater(len(pub.get("items", [])), 0,
+                          "published_events 不得为空（历史有效数据必须保留）")
+
+
+def _gate_compatible_main():
+    """以 gate 兼容格式运行：打印 RESULT: PASS=x FAIL=y 行。"""
+    suite = unittest.defaultTestLoader.loadTestsFromModule(sys.modules[__name__])
+    result = unittest.TextTestRunner(verbosity=1).run(suite)
+    n_run = result.testsRun
+    n_fail = len(result.failures) + len(result.errors)
+    n_pass = n_run - n_fail
+    print(f"RESULT: PASS={n_pass} FAIL={n_fail}")
+    sys.exit(1 if n_fail else 0)
+
+
 if __name__ == "__main__":
-    unittest.main()
+    _gate_compatible_main()

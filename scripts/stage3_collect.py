@@ -20,6 +20,7 @@ stage3_collect.py — Stage 3A 真实采集闭环主控。
 import os
 import sys
 import json
+import time
 import hashlib
 import argparse
 from datetime import datetime, timezone, timedelta
@@ -35,6 +36,7 @@ from pipeline_core import generate_run_id, bj_iso
 
 DATA_DIR = os.path.join(ROOT, "data")
 PUBLIC_DIR = os.path.join(DATA_DIR, "public")
+LOGS_DIR = os.path.join(ROOT, "logs")
 PUBLISHED_PATH = os.path.join(PUBLIC_DIR, "published_events.json")
 QUARANTINE_PATH = os.path.join(DATA_DIR, "canonical", "quarantine.json")
 
@@ -128,13 +130,16 @@ def publish_check(article, existing_ids, existing_urls, existing_hashes):
     rel = article.get("_relevant")
     source_name = (article.get("source_name") or "").strip()
 
-    # 1. 国家检查
-    if country_cn not in ("乍得", "尼日尔"):
-        c_decision = cid.get("decision") if isinstance(cid, dict) else ""
-        if c_decision in ("chad", "niger"):
-            country_cn = "乍得" if c_decision == "chad" else "尼日尔"
-        else:
-            return False, "country_invalid"
+    # 1. 国家检查 — 必须基于事件发生国（_country.decision），非来源国
+    c_decision = cid.get("decision") if isinstance(cid, dict) else ""
+    event_country_cn = ""
+    if c_decision in ("chad", "niger"):
+        event_country_cn = "乍得" if c_decision == "chad" else "尼日尔"
+    if not event_country_cn:
+        return False, "country_invalid"
+    # 若调用方传入候选国家，须与事件国一致（防止来源国污染）
+    if country_cn and country_cn != event_country_cn:
+        return False, "country_scope_mismatch"
 
     # 2. 标题不为空
     if len(title) < MIN_TITLE_LEN:
@@ -148,9 +153,11 @@ def publish_check(article, existing_ids, existing_urls, existing_hashes):
     if not source_name:
         return False, "source_name_missing"
 
-    # 5. 相关性
-    if rel is False:
-        return False, "not_security_relevant"
+    # 5. 相关性（强相关才发布；弱信号/待复核一律隔离）
+    if rel is not True:
+        if rel is False:
+            return False, "not_security_relevant"
+        return False, "weak_signal_needs_review"
 
     # 6. 去重：URL
     normed = norm_url(url)
@@ -182,16 +189,19 @@ def build_event(article, run_id, candidate_id_val):
     published = article.get("published") or ""
     language = (article.get("language") or "法语")
     source_name = (article.get("source_name") or article.get("source_name_raw") or "").strip()
+    source_country_cn = article.get("source_country_cn") or article.get("_source_country") or ""
     cid = article.get("_country", {}) if isinstance(article.get("_country"), dict) else {}
-    country_cn = article.get("country_cn") or ""
+    # 事件国家必须来自识别结果
+    c_decision = cid.get("decision", "")
+    country_cn = "乍得" if c_decision == "chad" else ("尼日尔" if c_decision == "niger" else "")
     if not country_cn:
-        c_decision = cid.get("decision", "")
-        if c_decision == "chad":
-            country_cn = "乍得"
-        elif c_decision == "niger":
-            country_cn = "尼日尔"
+        country_cn = article.get("country_cn") or ""
     country_iso = VALID_COUNTRIES.get(country_cn, "TD")
     event_type, _ = classify_type(summary, title)
+
+    # 多国字段
+    mentioned = cid.get("mentioned_countries", []) if isinstance(cid, dict) else []
+    event_location = cid.get("event_location_country", c_decision) if isinstance(cid, dict) else c_decision
 
     # 北京时间转换
     bj_time = ""
@@ -207,6 +217,10 @@ def build_event(article, run_id, candidate_id_val):
         "event_id": "EVT_" + candidate_id_val[-16:].replace("-", "").ljust(16, "0")[:16],
         "country": country_iso,
         "country_cn": country_cn,
+        "primary_country": c_decision if c_decision in ("chad", "niger") else country_cn,
+        "event_location_country": event_location,
+        "source_country": source_country_cn or country_cn,
+        "mentioned_countries": mentioned,
         "country_risk_level": 4,
         "country_risk_label": "极高",
         "event_type": event_type,
@@ -288,6 +302,7 @@ def collect_stage3(rss_only=False, dry=False):
 
     all_articles = []
     all_errors = []
+    source_stats = []
 
     for country_cn, srcs in groups.items():
         cfg_key = "chad" if country_cn == "乍得" else "niger"
@@ -300,6 +315,13 @@ def collect_stage3(rss_only=False, dry=False):
             method = s["collection_method"]
             language = s["language"]
             print(f"  [{method}] {sname} ...", end=" ", flush=True)
+            t0 = time.time()
+            src_stat = {
+                "source_id": sid, "source_name": sname, "country": country_cn,
+                "method": method, "collected": 0, "normalized": 0,
+                "published": 0, "quarantined": 0, "duplicates": 0,
+                "status": "failed", "error": "", "duration_s": 0.0,
+            }
 
             try:
                 if method == "reliefweb_api":
@@ -309,17 +331,22 @@ def collect_stage3(rss_only=False, dry=False):
                     col = get_collector({"collection_method": "rss", "feed_url": s["feed_url"], "language": language}, country_cfg)
                 else:
                     print("SKIP(unsupported)")
+                    src_stat["status"] = "unsupported"
+                    source_stats.append(src_stat)
                     continue
 
                 arts = col.run()
                 errors = col.errors if hasattr(col, "errors") else []
+                src_stat["collected"] = len(arts)
+                src_stat["status"] = "success" if not errors else "partial"
+                src_stat["error"] = "; ".join(str(e)[:100] for e in errors[:2])
 
-                # 附加来源元数据
+                # 附加来源元数据 — 来源国与事件国分离
                 for a in arts:
                     a["source_id"] = sid
                     a["source_name"] = sname
                     a["source_type"] = s["source_type"]
-                    a["country_cn"] = country_cn
+                    a["source_country_cn"] = country_cn  # 来源所属国家
                     a["country_cfg_key"] = cfg_key
                     # 国家识别 + 相关性筛选
                     blob = (a.get("title") or "") + " " + (a.get("summary") or "")
@@ -334,7 +361,11 @@ def collect_stage3(rss_only=False, dry=False):
                 all_errors.extend([{"source": sid, "error": str(e)} for e in errors])
             except Exception as e:
                 print(f"FAIL: {e}")
+                src_stat["error"] = str(e)[:120]
                 all_errors.append({"source": sid, "error": str(e)})
+            finally:
+                src_stat["duration_s"] = round(time.time() - t0, 1)
+                source_stats.append(src_stat)
 
     print(f"\n=== 总计: {len(all_articles)} 条候选 ===")
 
@@ -370,6 +401,12 @@ def collect_stage3(rss_only=False, dry=False):
         passed, reason = publish_check(a, set(), existing_urls, existing_hashes)
         if not passed:
             stats[reason if reason in stats else "quarantined"] += 1
+            for ss in source_stats:
+                if ss["source_id"] == a.get("source_id"):
+                    if reason in ("duplicate_url", "duplicate_content"):
+                        ss["duplicates"] += 1
+                    else:
+                        ss["quarantined"] += 1
             if reason not in ("duplicate_url", "duplicate_content"):
                 quarantined.append({
                     "candidate_id": cid_val,
@@ -385,6 +422,9 @@ def collect_stage3(rss_only=False, dry=False):
         # 准入通过
         event = build_event(a, run_id, cid_val)
         new_events.append(event)
+        for ss in source_stats:
+            if ss["source_id"] == a.get("source_id"):
+                ss["published"] += 1
 
         # 更新去重集合
         existing_urls.add(norm_url(a.get("url", "")))
@@ -402,6 +442,16 @@ def collect_stage3(rss_only=False, dry=False):
 
     # 追加隔离数据
     if quarantined:
+        for qe in quarantined:
+            qid = hashlib.md5((qe.get("url") or qe.get("candidate_id") or "").encode()).hexdigest()[:16]
+            qe["quarantine_id"] = "Q_" + qid
+            qe["original_object_type"] = "raw_collected_item"
+            qe["original_id"] = qe.get("candidate_id", "")
+            qe["reason_code"] = qe.get("reason", "unknown")
+            qe["reason_cn"] = qe.get("reason", "unknown")
+            qe["detected_at"] = bj_iso()
+            qe["detected_by"] = "stage3_collect"
+            qe["restorable"] = True
         quarantine_items.extend(quarantined)
         quarantine_doc["items"] = quarantine_items
         save_quarantine(quarantine_doc)
@@ -410,15 +460,61 @@ def collect_stage3(rss_only=False, dry=False):
 
     # 统计
     print(f"\n=== 采集统计 ===")
-    print(f"  来源数: {len(active_sources)}")
-    print(f"  原始文章: {len(all_articles)}")
-    print(f"  错误数: {len(all_errors)}")
-    print(f"  新增发布: {stats['published']}")
-    print(f"  隔离: {stats['quarantined']}")
-    print(f"  URL重复: {stats['duplicate_url']}")
-    print(f"  内容重复: {stats['duplicate_content']}")
-    print(f"  非相关: {stats['not_relevant']}")
-    print(f"  国家无效: {stats['country_invalid']}")
+    configured = len(all_sources)
+    active = len(active_sources)
+    successful = sum(1 for ss in source_stats if ss["status"] in ("success", "partial"))
+    failed = sum(1 for ss in source_stats if ss["status"] == "failed")
+    with_items = sum(1 for ss in source_stats if ss["collected"] > 0)
+    with_published = sum(1 for ss in source_stats if ss["published"] > 0)
+    print(f"  configured_sources      : {configured}")
+    print(f"  active_sources          : {active}")
+    print(f"  successful_sources      : {successful}")
+    print(f"  failed_sources          : {failed}")
+    print(f"  sources_with_items      : {with_items}")
+    print(f"  sources_with_published  : {with_published}")
+    print(f"  原始文章               : {len(all_articles)}")
+    print(f"  错误数                 : {len(all_errors)}")
+    print(f"  新增发布               : {stats['published']}")
+    print(f"  隔离                   : {stats['quarantined']}")
+    print(f"  URL重复                : {stats['duplicate_url']}")
+    print(f"  内容重复               : {stats['duplicate_content']}")
+    print(f"  非相关                 : {stats['not_relevant']}")
+    print(f"  国家无效/错配           : {stats['country_invalid'] + stats.get('country_scope_mismatch', 0)}")
+    print(f"  弱信号待复核            : {stats.get('weak_signal_needs_review', 0)}")
+    print(f"  未来时间               : {stats['future']}")
+
+    # 每来源明细
+    print(f"\n=== 每来源明细 ===")
+    print(f"  {'source_id':28s} {'采集':>4s} {'发布':>4s} {'隔离':>4s} {'重复':>4s} {'耗时':>6s} 状态")
+    for ss in source_stats:
+        print(f"  {ss['source_id']:28s} {ss['collected']:4d} {ss['published']:4d} "
+              f"{ss['quarantined']:4d} {ss['duplicates']:4d} {ss['duration_s']:6.1f} {ss['status']}"
+              + (f" ({ss['error'][:40]})" if ss["error"] else ""))
+
+    # 保存统计
+    if not dry:
+        stats_path = os.path.join(LOGS_DIR, "stage3_stats.json")
+        os.makedirs(LOGS_DIR, exist_ok=True)
+        with open(stats_path, "w", encoding="utf-8") as f:
+            json.dump({
+                "run_id": run_id,
+                "generated_at": bj_iso(),
+                "configured_sources": configured,
+                "active_sources": active,
+                "successful_sources": successful,
+                "failed_sources": failed,
+                "sources_with_items": with_items,
+                "sources_with_published": with_published,
+                "sources": source_stats,
+                "totals": {
+                    "raw_articles": len(all_articles),
+                    "published": stats["published"],
+                    "quarantined": stats["quarantined"],
+                    "duplicates": stats["duplicate_url"] + stats["duplicate_content"],
+                    "errors": len(all_errors),
+                },
+            }, f, ensure_ascii=False, indent=2)
+        print(f"\n  统计已保存: {stats_path}")
 
     return 0
 

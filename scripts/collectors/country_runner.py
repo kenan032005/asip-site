@@ -82,6 +82,31 @@ SECURITY_POS = [
     "战乱", "叛乱", "伏击", "人质", "撤离", "遇袭", "中国公民", "中国企业",
     "使馆提醒", "领事提醒", "安全提醒", "engin explosif", "explosive",
     "landmine", "land mine",
+    # ── Stage 3A 补充：明确的暴力/伤亡/交火词汇（法/英）──
+    "tués", "tue", "tué", "tombés", "tombé", "balles", "balle", "fusillade",
+    "tirs", "tir", "meurtre", "meurtres", "assassinat", "assassinés",
+    "assassiné", "blessés", "blessé", "gunmen", "shooting", "shootout",
+    "shootings", "wounded", "killed", "kills", "dead", "deaths", "explosion",
+    "explosions", "bomb", "bombs", "bombing", "attack", "attacks", "attaque",
+    "attaques", "assault", "assaut", "kidnapped", "kidnapping", "enlèvements",
+    "enlevements", "otages", "hostages", "kidnappers", "beheaded",
+    "décapitations", "decapitations", "burned", "brûlés", "brûlé", "burnt",
+    "incendie", "fire", "clashes", "clash", "combat", "combats", "fighting",
+    "battle", "bataille", "offensive", "offensives", "insurgents",
+    "jihadists", "jihadistes", "terrorists", "terroristes", "extremists",
+    "extrémistes", "fighters", "combattants", "militants", "miliciens",
+    "ambush", "ambushes", "embuscades", "assassinations", "attentat",
+    "attentats", "suicide bombing", "kamikaze", "carnage", "bloodshed",
+    "massacres", "genocide", "ethnic cleansing", "nettoyage ethnique",
+    "被枪杀", "遇难", "死亡", "身亡", "阵亡", "开火", "枪击", "爆炸袭击",
+    "恐袭", "武装袭击", "屠杀", "斩首", "劫持", "绑架案", "交火",
+    "冲突升级", "武装分子", "圣战分子", "极端分子", "叛军", "袭击事件",
+    # FDS = Forces de Défense et de Sécurité (乍得/尼日尔安全部队)
+    "fds", "forces de défense et de sécurité", "forces de defense et de securite",
+    "tombés pour", "tombes pour", "morts pour", "mort pour", "hommage aux",
+    "fds tombés", "fds tombes", "militaires tués", "militaires tues",
+    "miné", "mine", "minée", "mined", "champ de mines", "champ de minage",
+    "démineur", "demineur", "démineurs", "demineurs", "bonbonne",
 ]
 
 # mine 的爆炸物/地雷语境（满足其一才计入安全相关）
@@ -126,6 +151,18 @@ EXCLUDE_PROMO = [
     "félicitations", "forum économique", "salon", "investissement",
     "inauguration", "téléthon", "化肥", "农业物资", "种子", "会见",
     "论坛", "研讨会", "推介", "经贸", "招商",
+    # Stage 3A: 农业/水利/能源报道（即使含 drought/sécheresse 也非安全事件）
+    "campagne agricole", "saison agricole", "récolte", "recolte", "rendement",
+    "production agricole", "production agricole", "moisson", "poches de",
+    "groupes électrogènes", "électrogène", "electrogene", "centrale électrique",
+    "centrale electrique", "énergie", "energie", "électricité", "electricite",
+    "forage", "puits", "adduction d'eau", "adduction d eau", "eau potable",
+    "forum africain de l'eau", "forum africain de l eau", "conférence de l'eau",
+    "cérémonie", "ceremonie", "commémoration", "commemoration", "anniversaire",
+    "fête", "fete", "lecture du saint coran", "saint coran",
+    "coopération", "cooperation", "diplomatie", "souveraineté", "souverainete",
+    "axe nig", "toujours au beau fixe", "réception", "reception", "audience",
+    "séance de travail", "seance de travail", "rencontre bilatérale",
 ]
 EXCLUDE_MEETING = [
     "colloque", "séminaire", "atelier de formation", "formation", "workshop",
@@ -226,7 +263,9 @@ def identify_country(text, country_cfg):
 
     if country == "尼日尔":
         niger_strong = (("république du niger" in t) or ("republic of niger" in t)
-                        or ("niamey" in t) or bool(matched_loc))
+                        or ("niamey" in t) or bool(matched_loc)
+                        or bool(re.search(r"frontière niger|frontiere niger|niger/", t))
+                        or bool(re.search(r"\bniger\b", t) and re.search(r"diffa|tillabéri|tillaberi|tahoua|dosso|zinder|agadez|maradi", t)))
         if excluded and not niger_strong:
             # Niger Delta / Niger State / Nigerian Army / Nigeria 等 → 排除
             out["decision"] = "exclude"
