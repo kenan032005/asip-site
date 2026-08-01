@@ -61,7 +61,7 @@ def save_json(path, doc):
         json.dump(doc, f, ensure_ascii=False, indent=2)
 
 
-def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=False):
+def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=False, max_items=0):
     """对单个国家执行完整采集。"""
     cfg_key = "chad" if country_cn == "乍得" else "niger"
     country_cfg = load_country_cfg(cfg_key)
@@ -117,6 +117,13 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
             per_source.append(stat)
             continue
         stat["discovered"] = len(discovered)
+
+        # --max-items 限制：每个来源最多处理 N 条（受控采集）
+        if max_items > 0 and len(discovered) > max_items:
+            stat["skipped_by_limit"] = len(discovered) - max_items
+            discovered = discovered[:max_items]
+        else:
+            stat.setdefault("skipped_by_limit", 0)
 
         # 状态缓存（article_processing_state 状态机）
         state_cache = load_state_cache(sid)
@@ -469,7 +476,8 @@ def main():
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--country", choices=["乍得", "尼日尔"], default=None)
     ap.add_argument("--run-id", default="")
-    ap.add_argument("--fresh", action="store_true", help="清空 seen_urls 缓存，全量重抓详情页")
+    ap.add_argument("--fresh", action="store_true", help="清空状态缓存，全量重抓")
+    ap.add_argument("--max-items", type=int, default=0, help="每来源最多处理 N 条（0=不限）")
     args = ap.parse_args()
 
     run_id = args.run_id or os.environ.get("ASIP_RUN_ID", "")
@@ -489,7 +497,8 @@ def main():
 
     for cn in countries:
         arts, ps, errs = run_country_pipeline(cn, registry, discoverer,
-                                              dry=args.dry, fresh=args.fresh)
+                                              dry=args.dry, fresh=args.fresh,
+                                              max_items=args.max_items)
         all_articles.extend(arts)
         per_source.extend(ps)
         all_errors.extend(errs)
