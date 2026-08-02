@@ -1,0 +1,29 @@
+{
+  "scenario": "partial_body",
+  "description": "partial_body 且词数达标（可进入）",
+  "event": {
+    "event_id": "EVT_aaaaaaaaaaaaaaaa",
+    "canonical_run_id": "20260802T084000+0800_084349",
+    "schema_version": "2.0",
+    "pipeline_version": 2,
+    "primary_country": "乍得",
+    "country_code": "TD",
+    "country_iso3": "TCD",
+    "original_title": "Kidnapping reported near Lake Chad",
+    "body_extracted": "A group of fishermen was reportedly kidnapped near Lake Chad on Friday. Authorities have launched a search. No group has claimed responsibility.",
+    "body_status": "partial_body",
+    "article_word_count": 31,
+    "event_time": "2026-08-01T09:00:00+08:00",
+    "canonical_url": "https://example.com/evt_aaaaaaaaaaaaaaaa-security-incident-report",
+    "source_language": "en",
+    "source_links": [
+      {
+        "url": "https://example.com/evt_aaaaaaaaaaaaaaaa-article"
+      }
+    ]
+  },
+  "expect": {
+    "event_type": "crime_kidnapping",
+    "eligible": true
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "scenario": "multiple_locations",
+  "description": "正文提及多个地点（N'Djamena 与 Faya-Largeau）",
+  "event": {
+    "event_id": "EVT_6666666666666666",
+    "canonical_run_id": "20260802T084000+0800_084349",
+    "schema_version": "2.0",
+    "pipeline_version": 2,
+    "primary_country": "乍得",
+    "country_code": "TD",
+    "country_iso3": "TCD",
+    "original_title": "Two security incidents in northern Chad",
+    "body_extracted": "Security forces responded to incidents in N'Djamena and later in Faya-Largeau during the same week. Details from the second site were still being gathered.",
+    "body_status": "full_body",
+    "article_word_count": 33,
+    "event_time": "2026-08-01T09:00:00+08:00",
+    "canonical_url": "https://example.com/evt_6666666666666666-security-incident-report",
+    "source_language": "en",
+    "source_links": [
+      {
+        "url": "https://example.com/evt_6666666666666666-article"
+      }
+    ]
+  },
+  "expect": {
+    "location_city": "N'Djamena"
+  }
+}

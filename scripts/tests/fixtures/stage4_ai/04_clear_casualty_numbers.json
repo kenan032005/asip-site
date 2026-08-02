@@ -1,0 +1,31 @@
+{
+  "scenario": "clear_casualty_numbers",
+  "description": "明确伤亡数字（4 个死者、7 个伤者）",
+  "event": {
+    "event_id": "EVT_4444444444444444",
+    "canonical_run_id": "20260802T084000+0800_084349",
+    "schema_version": "2.0",
+    "pipeline_version": 2,
+    "primary_country": "乍得",
+    "country_code": "TD",
+    "country_iso3": "TCD",
+    "original_title": "At least 4 killed in market explosion",
+    "body_extracted": "An explosion at a market in N'Djamena killed at least 4 people and wounded 7 others on Tuesday, hospital officials said. The cause of the blast remains under investigation.",
+    "body_status": "full_body",
+    "article_word_count": 38,
+    "event_time": "2026-08-01T09:00:00+08:00",
+    "canonical_url": "https://example.com/evt_4444444444444444-security-incident-report",
+    "source_language": "en",
+    "source_links": [
+      {
+        "url": "https://example.com/evt_4444444444444444-article"
+      }
+    ]
+  },
+  "expect": {
+    "key_facts_include": [
+      "4",
+      "7"
+    ]
+  }
+}

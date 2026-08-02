@@ -1,0 +1,29 @@
+{
+  "scenario": "non_security_news",
+  "description": "农业新闻，与社会安全无实质关系",
+  "event": {
+    "event_id": "EVT_cccccccccccccccc",
+    "canonical_run_id": "20260802T084000+0800_084349",
+    "schema_version": "2.0",
+    "pipeline_version": 2,
+    "primary_country": "乍得",
+    "country_code": "TD",
+    "country_iso3": "TCD",
+    "original_title": "Chad farmers celebrate millet harvest",
+    "body_extracted": "Farmers across southern Chad celebrated a record millet harvest this season. The agriculture ministry reported a 20 percent increase in yield compared to last year.",
+    "body_status": "full_body",
+    "article_word_count": 36,
+    "event_time": "2026-08-01T09:00:00+08:00",
+    "canonical_url": "https://example.com/evt_cccccccccccccccc-security-incident-report",
+    "source_language": "en",
+    "source_links": [
+      {
+        "url": "https://example.com/evt_cccccccccccccccc-article"
+      }
+    ]
+  },
+  "expect": {
+    "security_relevance": "none",
+    "event_type": "other_security"
+  }
+}

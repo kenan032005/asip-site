@@ -1,0 +1,28 @@
+{
+  "scenario": "uncertain_casualties",
+  "description": "伤亡数字未经确认（可能/据称）",
+  "event": {
+    "event_id": "EVT_5555555555555555",
+    "canonical_run_id": "20260802T084000+0800_084349",
+    "schema_version": "2.0",
+    "pipeline_version": 2,
+    "primary_country": "尼日尔",
+    "country_code": "NE",
+    "country_iso3": "NER",
+    "original_title": "Reported clashes near Diffa",
+    "body_extracted": "Clashes are reported to have occurred near Diffa on Monday. Some sources say dozens may have been killed, but the figures could not be independently confirmed. The situation remains unclear.",
+    "body_status": "full_body",
+    "article_word_count": 42,
+    "event_time": "2026-08-01T09:00:00+08:00",
+    "canonical_url": "https://example.com/evt_5555555555555555-security-incident-report",
+    "source_language": "en",
+    "source_links": [
+      {
+        "url": "https://example.com/evt_5555555555555555-article"
+      }
+    ]
+  },
+  "expect": {
+    "uncertainties_required": true
+  }
+}

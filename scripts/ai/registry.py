@@ -15,6 +15,7 @@ from . import config as _config
 from .provider import BaseAIProvider
 from .workbuddy_queue_provider import WorkbuddyQueueProvider
 from .disabled_provider import DisabledProvider
+from .mock_provider import MockProvider
 from .exceptions import ProviderNotConfigured
 
 _REGISTRY = {}
@@ -32,6 +33,10 @@ register_provider("workbuddy_queue", WorkbuddyQueueProvider)
 register_provider("openai_api", DisabledProvider)
 register_provider("generic_api", DisabledProvider)
 register_provider("disabled", DisabledProvider)
+# Stage 4：Mock Provider（离线确定性，不联网、免 Key，兼容 BaseAIProvider 接口）
+register_provider("mock", MockProvider)
+# Stage 4：Mock Provider（离线确定性，不联网、免 Key，兼容 BaseAIProvider 接口）
+register_provider("mock", MockProvider)
 
 
 def list_providers():
@@ -65,6 +70,10 @@ def get_provider(name=None, config=None):
 
     if name == "workbuddy_queue":
         return WorkbuddyQueueProvider(cfg, name)
+
+    if name == "mock":
+        # Stage 4：离线确定性 Provider（不联网、免 Key）
+        return MockProvider()
 
     if name in ("openai_api", "generic_api", "disabled"):
         provider = DisabledProvider(cfg, name)
