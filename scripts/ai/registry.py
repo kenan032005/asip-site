@@ -35,8 +35,6 @@ register_provider("generic_api", DisabledProvider)
 register_provider("disabled", DisabledProvider)
 # Stage 4：Mock Provider（离线确定性，不联网、免 Key，兼容 BaseAIProvider 接口）
 register_provider("mock", MockProvider)
-# Stage 4：Mock Provider（离线确定性，不联网、免 Key，兼容 BaseAIProvider 接口）
-register_provider("mock", MockProvider)
 
 
 def list_providers():

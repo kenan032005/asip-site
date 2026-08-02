@@ -83,6 +83,10 @@ def eligibility_status(event, quarantine_ids=None, min_word_count=None):
     wc = int(event.get("article_word_count") or 0)
     if wc < min_wc:
         return "skipped_ineligible", f"insufficient_body:{wc}<{min_wc}"
+    # country_iso3 必须为合法 ISO3
+    iso = event.get("country_iso3") or ""
+    if not iso or not isinstance(iso, str) or len(iso) != 3 or iso != iso.upper():
+        return "skipped_ineligible", f"invalid_country_iso3:{iso!r}"
     return "eligible", ""
 
 

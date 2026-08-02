@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://asip-site.local/schemas/ai_enrichment_payload.schema.json",
+  "title": "ASIP Stage 4 Model Output Payload",
+  "description": "只校验模型语义输出（MODEL_OUTPUT_FIELDS）。处理器注入可信元数据后组合为完整记录。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "source_language", "title_zh", "summary_zh", "event_type",
+    "country_iso3", "location", "key_facts", "uncertainties",
+    "security_relevance", "classification_confidence"
+  ],
+  "properties": {
+    "source_language": {"type": "string", "minLength": 2},
+    "title_zh": {"type": "string", "minLength": 5, "maxLength": 60},
+    "summary_zh": {"type": "string", "minLength": 20, "maxLength": 400},
+    "event_type": {
+      "type": "string",
+      "enum": ["armed_conflict","terrorism","civil_unrest","political_instability",
+               "crime_kidnapping","border_security","transport_disruption",
+               "infrastructure_incident","natural_disaster","other_security"]
+    },
+    "country_iso3": {"type": "string", "pattern": "^[A-Z]{3}$"},
+    "location": {
+      "type": "object", "additionalProperties": false,
+      "required": ["country_iso3","admin1","city","site","raw_text"],
+      "properties": {
+        "country_iso3": {"type": ["string","null"], "pattern": "^[A-Z]{3}$"},
+        "admin1": {"type": ["string","null"]},
+        "city": {"type": ["string","null"]},
+        "site": {"type": ["string","null"]},
+        "raw_text": {"type": "string"}
+      }
+    },
+    "key_facts": {
+      "type": "array", "minItems": 1, "maxItems": 8,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["fact","evidence_field","evidence_excerpt"],
+        "properties": {
+          "fact": {"type": "string", "minLength": 5},
+          "evidence_field": {"type": "string",
+            "enum": ["title_original","body_extracted","event_time","location","source_links"]},
+          "evidence_excerpt": {"type": "string", "maxLength": 300}
+        }
+      }
+    },
+    "uncertainties": {"type": "array", "items": {"type": "string", "minLength": 3}},
+    "security_relevance": {"type": "string", "enum": ["direct","indirect","none"]},
+    "classification_confidence": {"type": "integer", "minimum": 0, "maximum": 100}
+  }
+}

@@ -1,11 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://asip-site.local/schemas/ai_enrichment.schema.json",
-  "title": "ASIP Stage 4 AI Enrichment",
-  "description": "Stage 4 AI 增强数据合同。每条记录以 Canonical event_id 为唯一关联键，AI 输出经解析+Schema 校验+语义校验后写入，不改动 Canonical 原始数据。",
+  "title": "ASIP Stage 4 AI Enrichment (v2)",
+  "description": "Stage 4 AI 增强数据合同 v2。字段分为模型输出字段（MODEL_OUTPUT_FIELDS）和系统可信元数据（由 Processor 注入，不信任模型）。每条记录以 result_id 为唯一键，多模型/多版本结果并存。",
   "type": "object",
   "additionalProperties": false,
   "required": [
+    "result_id",
     "event_id",
     "canonical_run_id",
     "input_hash",
@@ -22,62 +23,52 @@
     "ai_provider",
     "ai_model",
     "prompt_version",
+    "prompt_content_hash",
     "processed_at",
     "processing_status",
     "error_code"
   ],
   "properties": {
+    "result_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "SHA-256(event_id|input_hash|prompt_version|prompt_content_hash|provider|model)"
+    },
+    "cache_key": {
+      "type": "string",
+      "description": "等效于 result_id"
+    },
     "event_id": {
       "type": "string",
-      "pattern": "^EVT_[0-9a-f]{16}$",
-      "description": "Canonical 事件唯一键"
+      "pattern": "^EVT_[0-9a-f]{16}$"
     },
     "canonical_run_id": {
       "type": "string",
-      "pattern": "^\\d{8}T\\d{6}\\+0800_[a-z0-9]{6}$",
-      "description": "产生该事件的 canonical 采集 run_id"
+      "pattern": "^\\d{8}T\\d{6}\\+0800_[a-z0-9]{6}$"
     },
     "input_hash": {
       "type": "string",
-      "pattern": "^[0-9a-f]{64}$",
-      "description": "影响 AI 输出的 Canonical 字段哈希（original_title+body_extracted+primary_country+event_time+canonical_url）"
+      "pattern": "^[0-9a-f]{64}$"
     },
     "source_language": {
       "type": "string",
-      "enum": ["fr", "en", "ar", "es", "de", "pt", "zh", "unknown"]
+      "minLength": 2,
+      "description": "BCP-47 兼容语言标签（fr/en/ar/es/zh/pt/de/ha/sw/so/am/unknown 等）"
     },
-    "title_zh": {
-      "type": "string",
-      "minLength": 5,
-      "maxLength": 60,
-      "description": "中文标题，建议 15-35 汉字，保留核心事件/地点/主体，无夸张，无'据报道'前缀"
-    },
-    "summary_zh": {
-      "type": "string",
-      "minLength": 20,
-      "maxLength": 400,
-      "description": "中文摘要，建议 80-160 汉字，说明发生了什么/在哪里/涉及谁/造成何种结果，严格基于输入"
-    },
+    "title_zh": {"type": "string", "minLength": 5, "maxLength": 60},
+    "summary_zh": {"type": "string", "minLength": 20, "maxLength": 400},
     "event_type": {
       "type": "string",
       "enum": [
-        "armed_conflict",
-        "terrorism",
-        "civil_unrest",
-        "political_instability",
-        "crime_kidnapping",
-        "border_security",
-        "transport_disruption",
-        "infrastructure_incident",
-        "natural_disaster",
-        "other_security"
-      ],
-      "description": "固定枚举，不允许模型自由创造类别。映射：canonical terrorist_attack→terrorism, military_operation→armed_conflict, public_health→other_security, strike→civil_unrest"
+        "armed_conflict", "terrorism", "civil_unrest", "political_instability",
+        "crime_kidnapping", "border_security", "transport_disruption",
+        "infrastructure_incident", "natural_disaster", "other_security"
+      ]
     },
     "country_iso3": {
-      "type": ["string", "null"],
+      "type": "string",
       "pattern": "^[A-Z]{3}$",
-      "description": "必须与 Canonical primary_country 一致，模型不得改变事件所属国家"
+      "description": "必须非 null，与 Canonical primary_country 的 ISO3 一致"
     },
     "location": {
       "type": "object",
@@ -92,62 +83,31 @@
       }
     },
     "key_facts": {
-      "type": "array",
-      "minItems": 1,
-      "maxItems": 8,
+      "type": "array", "minItems": 1, "maxItems": 8,
       "items": {
-        "type": "object",
-        "additionalProperties": false,
+        "type": "object", "additionalProperties": false,
         "required": ["fact", "evidence_field", "evidence_excerpt"],
         "properties": {
           "fact": {"type": "string", "minLength": 5},
-          "evidence_field": {
-            "type": "string",
-            "enum": ["title_original", "body_extracted", "event_time", "location", "source_links"]
-          },
+          "evidence_field": {"type": "string",
+            "enum": ["title_original","body_extracted","event_time","location","source_links"]},
           "evidence_excerpt": {"type": "string", "maxLength": 300}
         }
       }
     },
-    "uncertainties": {
-      "type": "array",
-      "items": {"type": "string", "minLength": 3},
-      "description": "始终存在，允许空数组；原文不确定处必须保留，模型不得自行消除"
-    },
-    "security_relevance": {
-      "type": "string",
-      "enum": ["direct", "indirect", "none"]
-    },
-    "classification_confidence": {
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 100,
-      "description": "仅表示分类置信度，不表示事件真实性或风险等级"
-    },
-    "ai_provider": {
-      "type": "string",
-      "enum": ["mock", "workbuddy_queue", "openai_api", "generic_api", "disabled", "hy3"]
-    },
+    "uncertainties": {"type": "array", "items": {"type": "string", "minLength": 3}},
+    "security_relevance": {"type": "string", "enum": ["direct", "indirect", "none"]},
+    "classification_confidence": {"type": "integer", "minimum": 0, "maximum": 100},
+    "ai_provider": {"type": "string", "minLength": 1},
     "ai_model": {"type": "string", "minLength": 1},
-    "prompt_version": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"},
+    "prompt_version": {"type": "string", "minLength": 1},
+    "prompt_content_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "processed_at": {"type": "string", "format": "date-time"},
     "processing_status": {
       "type": "string",
-      "enum": [
-        "pending",
-        "processing",
-        "succeeded",
-        "failed_retryable",
-        "failed_terminal",
-        "skipped_ineligible",
-        "invalid_model_output"
-      ]
+      "enum": ["pending","processing","succeeded","failed_retryable","failed_terminal","skipped_ineligible","invalid_model_output"]
     },
     "error_code": {"type": ["string", "null"]},
-    "raw_response_hash": {
-      "type": ["string", "null"],
-      "pattern": "^[0-9a-f]{64}$",
-      "description": "原始响应的 SHA-256 哈希（仅哈希入库，原文不外发）"
-    }
+    "raw_response_hash": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"}
   }
 }
