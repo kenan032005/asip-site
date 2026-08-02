@@ -1,0 +1,1007 @@
+{
+  "schema_version": "1.0",
+  "trial_name": "WorkBuddy 真实 AI 质量试跑",
+  "generated_at": "2026-08-03T01:36:49+08:00",
+  "execution_route": "workbuddy_queue",
+  "actual_model": "deepseek-v4-flash",
+  "direct_website_api_call": false,
+  "check_summary": {
+    "c1_country_top_level": {
+      "pass": 20,
+      "total": 20
+    },
+    "c2_location_country": {
+      "pass": 20,
+      "total": 20
+    },
+    "c3_body_country_signal": {
+      "pass": 17,
+      "total": 20
+    },
+    "n1_evidence_numbers_traceable": {
+      "pass": 20,
+      "total": 20
+    },
+    "n2_summary_numbers_soft": {
+      "pass": 2,
+      "total": 20
+    },
+    "e1_location_entities_found": {
+      "pass": 20,
+      "total": 20
+    },
+    "u1_uncertainty_preserved": {
+      "pass": 20,
+      "total": 20
+    },
+    "u2_uncertainty_struct": {
+      "pass": 20,
+      "total": 20
+    }
+  },
+  "events_total": 20,
+  "events_with_hard_fail": [],
+  "events_with_observation": [
+    "EVT_b3861ba5c8d78187",
+    "EVT_68ba0eb89452a250",
+    "EVT_5291228872082f78",
+    "EVT_8c9d4096815dd33c",
+    "EVT_9a551301360773c7",
+    "EVT_451cac52bc310619",
+    "EVT_1c75a026db7edada",
+    "EVT_2520e85f1185795d",
+    "EVT_2e8ce0003ca07a8b",
+    "EVT_15fee76f358f8d07",
+    "EVT_10c3ca125264c6c1",
+    "EVT_3ac33d557e02d42b",
+    "EVT_3e70963728359646",
+    "EVT_f873e54241d57b7a",
+    "EVT_6b7ce87900f1b656",
+    "EVT_2460633265046ffa",
+    "EVT_f43a44be98d924c4",
+    "EVT_5eeb84b95f768a30",
+    "EVT_081fa3a5ebcaee5e"
+  ],
+  "rows": [
+    {
+      "event_id": "EVT_b3861ba5c8d78187",
+      "task_id": "36189ea26fb41d69ba8942f74e8ab04aad80da1e1d7d4cb9b96b0ae7458e1f5b",
+      "country_iso3": "TCD",
+      "title_zh": "国际移民组织向乍得穆苏鲁市捐赠防汛设备",
+      "event_type": "natural_disaster",
+      "security_relevance": "indirect",
+      "confidence": 90,
+      "hard_fails": [],
+      "observations": [
+        "n2_summary_numbers_soft"
+      ],
+      "checks": {
+        "c1_country_top_level": {
+          "pass": true,
+          "detail": "record=TCD canonical=TCD"
+        },
+        "c2_location_country": {
+          "pass": true,
+          "detail": "location=TCD canonical=TCD"
+        },
+        "c3_body_country_signal": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n1_evidence_numbers_traceable": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n2_summary_numbers_soft": {
+          "pass": false,
+          "detail": "soft_missing=['8']"
+        },
+        "e1_location_entities_found": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "u1_uncertainty_preserved": {
+          "pass": true,
+          "detail": "no_marker"
+        },
+        "u2_uncertainty_struct": {
+          "pass": true,
+          "detail": "count=0"
+        }
+      }
+    },
+    {
+      "event_id": "EVT_68ba0eb89452a250",
+      "task_id": "f5a5319fda39448953ea7e310a0e080132f9dc21de47bff4b030f7ff5280c9f4",
+      "country_iso3": "TCD",
+      "title_zh": "乍得东恩内迪省胡狼袭击致15人以上被咬伤 引发狂犬病担忧",
+      "event_type": "other_security",
+      "security_relevance": "direct",
+      "confidence": 75,
+      "hard_fails": [],
+      "observations": [
+        "n2_summary_numbers_soft"
+      ],
+      "checks": {
+        "c1_country_top_level": {
+          "pass": true,
+          "detail": "record=TCD canonical=TCD"
+        },
+        "c2_location_country": {
+          "pass": true,
+          "detail": "location=TCD canonical=TCD"
+        },
+        "c3_body_country_signal": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n1_evidence_numbers_traceable": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n2_summary_numbers_soft": {
+          "pass": false,
+          "detail": "soft_missing=['15', '6', '5', '4', '7', '10']"
+        },
+        "e1_location_entities_found": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "u1_uncertainty_preserved": {
+          "pass": true,
+          "detail": "marker_in_body,uncertainties=2"
+        },
+        "u2_uncertainty_struct": {
+          "pass": true,
+          "detail": "count=2"
+        }
+      }
+    },
+    {
+      "event_id": "EVT_5291228872082f78",
+      "task_id": "32292087209882a342066259f3eb961df45f3b4b0fd98dc0b03eb89ab851b665",
+      "country_iso3": "TCD",
+      "title_zh": "乍得古罗市胡狼袭击引发狂犬病担忧 组织呼吁提供疫苗",
+      "event_type": "other_security",
+      "security_relevance": "direct",
+      "confidence": 75,
+      "hard_fails": [],
+      "observations": [
+        "n2_summary_numbers_soft"
+      ],
+      "checks": {
+        "c1_country_top_level": {
+          "pass": true,
+          "detail": "record=TCD canonical=TCD"
+        },
+        "c2_location_country": {
+          "pass": true,
+          "detail": "location=TCD canonical=TCD"
+        },
+        "c3_body_country_signal": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n1_evidence_numbers_traceable": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n2_summary_numbers_soft": {
+          "pass": false,
+          "detail": "soft_missing=['6', '5', '4']"
+        },
+        "e1_location_entities_found": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "u1_uncertainty_preserved": {
+          "pass": true,
+          "detail": "no_marker"
+        },
+        "u2_uncertainty_struct": {
+          "pass": true,
+          "detail": "count=2"
+        }
+      }
+    },
+    {
+      "event_id": "EVT_8c9d4096815dd33c",
+      "task_id": "ecabdd4c4c072243479cacfd0f8992530590e95da8ea55d55ad2cbfbaa3bd468",
+      "country_iso3": "TCD",
+      "title_zh": "乍得武装部队部长赴提贝斯提省奥维开展安全评估",
+      "event_type": "other_security",
+      "security_relevance": "indirect",
+      "confidence": 85,
+      "hard_fails": [],
+      "observations": [
+        "n2_summary_numbers_soft"
+      ],
+      "checks": {
+        "c1_country_top_level": {
+          "pass": true,
+          "detail": "record=TCD canonical=TCD"
+        },
+        "c2_location_country": {
+          "pass": true,
+          "detail": "location=TCD canonical=TCD"
+        },
+        "c3_body_country_signal": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n1_evidence_numbers_traceable": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n2_summary_numbers_soft": {
+          "pass": false,
+          "detail": "soft_missing=['7']"
+        },
+        "e1_location_entities_found": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "u1_uncertainty_preserved": {
+          "pass": true,
+          "detail": "no_marker"
+        },
+        "u2_uncertainty_struct": {
+          "pass": true,
+          "detail": "count=0"
+        }
+      }
+    },
+    {
+      "event_id": "EVT_9a551301360773c7",
+      "task_id": "4dc865656c7d1206090740a76345a179c3a00325ff7b036bdda5a7173df13815",
+      "country_iso3": "TCD",
+      "title_zh": "乍得政府切断数千名罢工教师2月工资",
+      "event_type": "civil_unrest",
+      "security_relevance": "direct",
+      "confidence": 70,
+      "hard_fails": [],
+      "observations": [
+        "n2_summary_numbers_soft"
+      ],
+      "checks": {
+        "c1_country_top_level": {
+          "pass": true,
+          "detail": "record=TCD canonical=TCD"
+        },
+        "c2_location_country": {
+          "pass": true,
+          "detail": "location=TCD canonical=TCD"
+        },
+        "c3_body_country_signal": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n1_evidence_numbers_traceable": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n2_summary_numbers_soft": {
+          "pass": false,
+          "detail": "soft_missing=['2']"
+        },
+        "e1_location_entities_found": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "u1_uncertainty_preserved": {
+          "pass": true,
+          "detail": "marker_in_body,uncertainties=2"
+        },
+        "u2_uncertainty_struct": {
+          "pass": true,
+          "detail": "count=2"
+        }
+      }
+    },
+    {
+      "event_id": "EVT_0f85e5f42626ce7d",
+      "task_id": "f8f31add57206fb0cdc561adcc037b09829060af57ccd0c96843267b4edc7386",
+      "country_iso3": "TCD",
+      "title_zh": "乍得萨拉马特省举行安全会议部署维稳措施",
+      "event_type": "other_security",
+      "security_relevance": "indirect",
+      "confidence": 80,
+      "hard_fails": [],
+      "observations": [],
+      "checks": {
+        "c1_country_top_level": {
+          "pass": true,
+          "detail": "record=TCD canonical=TCD"
+        },
+        "c2_location_country": {
+          "pass": true,
+          "detail": "location=TCD canonical=TCD"
+        },
+        "c3_body_country_signal": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n1_evidence_numbers_traceable": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n2_summary_numbers_soft": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "e1_location_entities_found": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "u1_uncertainty_preserved": {
+          "pass": true,
+          "detail": "no_marker"
+        },
+        "u2_uncertainty_struct": {
+          "pass": true,
+          "detail": "count=1"
+        }
+      }
+    },
+    {
+      "event_id": "EVT_451cac52bc310619",
+      "task_id": "5463deeba187411d5896ebadd85cad4e23ad541105e677e9e0014a919ea9dda3",
+      "country_iso3": "TCD",
+      "title_zh": "乍得萨拉马特省三个月缴获302件武器",
+      "event_type": "other_security",
+      "security_relevance": "direct",
+      "confidence": 85,
+      "hard_fails": [],
+      "observations": [
+        "n2_summary_numbers_soft"
+      ],
+      "checks": {
+        "c1_country_top_level": {
+          "pass": true,
+          "detail": "record=TCD canonical=TCD"
+        },
+        "c2_location_country": {
+          "pass": true,
+          "detail": "location=TCD canonical=TCD"
+        },
+        "c3_body_country_signal": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n1_evidence_numbers_traceable": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n2_summary_numbers_soft": {
+          "pass": false,
+          "detail": "soft_missing=['7']"
+        },
+        "e1_location_entities_found": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "u1_uncertainty_preserved": {
+          "pass": true,
+          "detail": "no_marker"
+        },
+        "u2_uncertainty_struct": {
+          "pass": true,
+          "detail": "count=1"
+        }
+      }
+    },
+    {
+      "event_id": "EVT_1c75a026db7edada",
+      "task_id": "6f9c9901f683e5464f6392f6cbec6020683cbbfc298c11d45a0bd39aa7beab10",
+      "country_iso3": "TCD",
+      "title_zh": "乍得启用沃乌新作战指挥所 加强G5萨赫勒防务",
+      "event_type": "other_security",
+      "security_relevance": "indirect",
+      "confidence": 88,
+      "hard_fails": [],
+      "observations": [
+        "c3_body_country_signal",
+        "n2_summary_numbers_soft"
+      ],
+      "checks": {
+        "c1_country_top_level": {
+          "pass": true,
+          "detail": "record=TCD canonical=TCD"
+        },
+        "c2_location_country": {
+          "pass": true,
+          "detail": "location=TCD canonical=TCD"
+        },
+        "c3_body_country_signal": {
+          "pass": false,
+          "detail": "signal=FRA"
+        },
+        "n1_evidence_numbers_traceable": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n2_summary_numbers_soft": {
+          "pass": false,
+          "detail": "soft_missing=['6', '1.2']"
+        },
+        "e1_location_entities_found": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "u1_uncertainty_preserved": {
+          "pass": true,
+          "detail": "no_marker"
+        },
+        "u2_uncertainty_struct": {
+          "pass": true,
+          "detail": "count=0"
+        }
+      }
+    },
+    {
+      "event_id": "EVT_2520e85f1185795d",
+      "task_id": "823b62052ec190c731f471d79e4500d9cad15859b8b3cf3a09f3ca52f6dbd46f",
+      "country_iso3": "TCD",
+      "title_zh": "利比亚宣布在苏尔特设立联合军事行动室",
+      "event_type": "other_security",
+      "security_relevance": "indirect",
+      "confidence": 55,
+      "hard_fails": [],
+      "observations": [
+        "c3_body_country_signal"
+      ],
+      "checks": {
+        "c1_country_top_level": {
+          "pass": true,
+          "detail": "record=TCD canonical=TCD"
+        },
+        "c2_location_country": {
+          "pass": true,
+          "detail": "location=TCD canonical=TCD"
+        },
+        "c3_body_country_signal": {
+          "pass": false,
+          "detail": "signal=LBY"
+        },
+        "n1_evidence_numbers_traceable": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n2_summary_numbers_soft": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "e1_location_entities_found": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "u1_uncertainty_preserved": {
+          "pass": true,
+          "detail": "marker_in_body,uncertainties=2"
+        },
+        "u2_uncertainty_struct": {
+          "pass": true,
+          "detail": "count=2"
+        }
+      }
+    },
+    {
+      "event_id": "EVT_2e8ce0003ca07a8b",
+      "task_id": "4b06de22952cfd52010e036c0f673faad4b88d9249e038d4526187770ca2819e",
+      "country_iso3": "TCD",
+      "title_zh": "乍得海关税收与出口规模不符引质疑",
+      "event_type": "other_security",
+      "security_relevance": "none",
+      "confidence": 60,
+      "hard_fails": [],
+      "observations": [
+        "n2_summary_numbers_soft"
+      ],
+      "checks": {
+        "c1_country_top_level": {
+          "pass": true,
+          "detail": "record=TCD canonical=TCD"
+        },
+        "c2_location_country": {
+          "pass": true,
+          "detail": "location=TCD canonical=TCD"
+        },
+        "c3_body_country_signal": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n1_evidence_numbers_traceable": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n2_summary_numbers_soft": {
+          "pass": false,
+          "detail": "soft_missing=['2390', '12530', '20', '1.5', '3']"
+        },
+        "e1_location_entities_found": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "u1_uncertainty_preserved": {
+          "pass": true,
+          "detail": "marker_in_body,uncertainties=3"
+        },
+        "u2_uncertainty_struct": {
+          "pass": true,
+          "detail": "count=3"
+        }
+      }
+    },
+    {
+      "event_id": "EVT_15fee76f358f8d07",
+      "task_id": "aeb050d4c397a4e8247dbcc60d2c6634b98d2e762f79f811be19cd3b792c2c6e",
+      "country_iso3": "NER",
+      "title_zh": "尼日尔迪法省省长慰问遇袭阵亡军人 承诺继续反恐",
+      "event_type": "terrorism",
+      "security_relevance": "direct",
+      "confidence": 80,
+      "hard_fails": [],
+      "observations": [
+        "n2_summary_numbers_soft"
+      ],
+      "checks": {
+        "c1_country_top_level": {
+          "pass": true,
+          "detail": "record=NER canonical=NER"
+        },
+        "c2_location_country": {
+          "pass": true,
+          "detail": "location=NER canonical=NER"
+        },
+        "c3_body_country_signal": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n1_evidence_numbers_traceable": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n2_summary_numbers_soft": {
+          "pass": false,
+          "detail": "soft_missing=['8']"
+        },
+        "e1_location_entities_found": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "u1_uncertainty_preserved": {
+          "pass": true,
+          "detail": "no_marker"
+        },
+        "u2_uncertainty_struct": {
+          "pass": true,
+          "detail": "count=1"
+        }
+      }
+    },
+    {
+      "event_id": "EVT_10c3ca125264c6c1",
+      "task_id": "b1e533e18aaff185946480cb8d45c8871496d6c68ac2d1512344ad77043ef639",
+      "country_iso3": "NER",
+      "title_zh": "尼日尔迪法省接收1500吨化肥支援2026农季",
+      "event_type": "other_security",
+      "security_relevance": "none",
+      "confidence": 85,
+      "hard_fails": [],
+      "observations": [
+        "n2_summary_numbers_soft"
+      ],
+      "checks": {
+        "c1_country_top_level": {
+          "pass": true,
+          "detail": "record=NER canonical=NER"
+        },
+        "c2_location_country": {
+          "pass": true,
+          "detail": "location=NER canonical=NER"
+        },
+        "c3_body_country_signal": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n1_evidence_numbers_traceable": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n2_summary_numbers_soft": {
+          "pass": false,
+          "detail": "soft_missing=['9', '7']"
+        },
+        "e1_location_entities_found": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "u1_uncertainty_preserved": {
+          "pass": true,
+          "detail": "no_marker"
+        },
+        "u2_uncertainty_struct": {
+          "pass": true,
+          "detail": "count=0"
+        }
+      }
+    },
+    {
+      "event_id": "EVT_3ac33d557e02d42b",
+      "task_id": "80ba7a7096291db2ff06ba0ddbc7b1ac2a5c9291860fd9e5e4b26d457cad06ea",
+      "country_iso3": "NER",
+      "title_zh": "尼日尔总统蒂亚尼会见西非开发银行行长",
+      "event_type": "other_security",
+      "security_relevance": "none",
+      "confidence": 85,
+      "hard_fails": [],
+      "observations": [
+        "n2_summary_numbers_soft"
+      ],
+      "checks": {
+        "c1_country_top_level": {
+          "pass": true,
+          "detail": "record=NER canonical=NER"
+        },
+        "c2_location_country": {
+          "pass": true,
+          "detail": "location=NER canonical=NER"
+        },
+        "c3_body_country_signal": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n1_evidence_numbers_traceable": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n2_summary_numbers_soft": {
+          "pass": false,
+          "detail": "soft_missing=['7']"
+        },
+        "e1_location_entities_found": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "u1_uncertainty_preserved": {
+          "pass": true,
+          "detail": "no_marker"
+        },
+        "u2_uncertainty_struct": {
+          "pass": true,
+          "detail": "count=0"
+        }
+      }
+    },
+    {
+      "event_id": "EVT_3e70963728359646",
+      "task_id": "de8d40c0c37826cef16a988ed2ba3e17101ba3a6a71797fdb9ae78692b7e506e",
+      "country_iso3": "NER",
+      "title_zh": "尼日尔第二届侨民论坛开幕 聚焦发展贡献",
+      "event_type": "other_security",
+      "security_relevance": "none",
+      "confidence": 88,
+      "hard_fails": [],
+      "observations": [
+        "n2_summary_numbers_soft"
+      ],
+      "checks": {
+        "c1_country_top_level": {
+          "pass": true,
+          "detail": "record=NER canonical=NER"
+        },
+        "c2_location_country": {
+          "pass": true,
+          "detail": "location=NER canonical=NER"
+        },
+        "c3_body_country_signal": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n1_evidence_numbers_traceable": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n2_summary_numbers_soft": {
+          "pass": false,
+          "detail": "soft_missing=['7', '7']"
+        },
+        "e1_location_entities_found": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "u1_uncertainty_preserved": {
+          "pass": true,
+          "detail": "no_marker"
+        },
+        "u2_uncertainty_struct": {
+          "pass": true,
+          "detail": "count=0"
+        }
+      }
+    },
+    {
+      "event_id": "EVT_f873e54241d57b7a",
+      "task_id": "bd2a89ee78226784c64a5e545b95479557dec4d01be84d0f5354101442b777d0",
+      "country_iso3": "NER",
+      "title_zh": "尼日尔总理会见西非开发银行代表团",
+      "event_type": "other_security",
+      "security_relevance": "none",
+      "confidence": 80,
+      "hard_fails": [],
+      "observations": [
+        "n2_summary_numbers_soft"
+      ],
+      "checks": {
+        "c1_country_top_level": {
+          "pass": true,
+          "detail": "record=NER canonical=NER"
+        },
+        "c2_location_country": {
+          "pass": true,
+          "detail": "location=NER canonical=NER"
+        },
+        "c3_body_country_signal": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n1_evidence_numbers_traceable": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n2_summary_numbers_soft": {
+          "pass": false,
+          "detail": "soft_missing=['7']"
+        },
+        "e1_location_entities_found": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "u1_uncertainty_preserved": {
+          "pass": true,
+          "detail": "no_marker"
+        },
+        "u2_uncertainty_struct": {
+          "pass": true,
+          "detail": "count=1"
+        }
+      }
+    },
+    {
+      "event_id": "EVT_6b7ce87900f1b656",
+      "task_id": "95eae67e34e006d7e496d72ebe6705b51eb5f70977c9bf0d98802b75ee4b01e6",
+      "country_iso3": "NER",
+      "title_zh": "尼日尔迪法省就业需求上半年增长21.9%",
+      "event_type": "other_security",
+      "security_relevance": "none",
+      "confidence": 85,
+      "hard_fails": [],
+      "observations": [
+        "n2_summary_numbers_soft"
+      ],
+      "checks": {
+        "c1_country_top_level": {
+          "pass": true,
+          "detail": "record=NER canonical=NER"
+        },
+        "c2_location_country": {
+          "pass": true,
+          "detail": "location=NER canonical=NER"
+        },
+        "c3_body_country_signal": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n1_evidence_numbers_traceable": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n2_summary_numbers_soft": {
+          "pass": false,
+          "detail": "soft_missing=['9']"
+        },
+        "e1_location_entities_found": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "u1_uncertainty_preserved": {
+          "pass": true,
+          "detail": "no_marker"
+        },
+        "u2_uncertainty_struct": {
+          "pass": true,
+          "detail": "count=0"
+        }
+      }
+    },
+    {
+      "event_id": "EVT_2460633265046ffa",
+      "task_id": "cdbde6f4ba324df54d03d163fab8419c10e3ece187356c7cb805ccf22a6f50da",
+      "country_iso3": "NER",
+      "title_zh": "尼日尔第八届军民活动大篷车在塔胡阿启动",
+      "event_type": "other_security",
+      "security_relevance": "indirect",
+      "confidence": 82,
+      "hard_fails": [],
+      "observations": [
+        "n2_summary_numbers_soft"
+      ],
+      "checks": {
+        "c1_country_top_level": {
+          "pass": true,
+          "detail": "record=NER canonical=NER"
+        },
+        "c2_location_country": {
+          "pass": true,
+          "detail": "location=NER canonical=NER"
+        },
+        "c3_body_country_signal": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n1_evidence_numbers_traceable": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n2_summary_numbers_soft": {
+          "pass": false,
+          "detail": "soft_missing=['7']"
+        },
+        "e1_location_entities_found": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "u1_uncertainty_preserved": {
+          "pass": true,
+          "detail": "no_marker"
+        },
+        "u2_uncertainty_struct": {
+          "pass": true,
+          "detail": "count=0"
+        }
+      }
+    },
+    {
+      "event_id": "EVT_f43a44be98d924c4",
+      "task_id": "5d33c986b96e9a3d9787e7d001a70e31e4453ed786c268d20b0ac861e0471a28",
+      "country_iso3": "NER",
+      "title_zh": "坎达吉大坝问题大会结论呈报尼日尔总理",
+      "event_type": "other_security",
+      "security_relevance": "none",
+      "confidence": 85,
+      "hard_fails": [],
+      "observations": [
+        "n2_summary_numbers_soft"
+      ],
+      "checks": {
+        "c1_country_top_level": {
+          "pass": true,
+          "detail": "record=NER canonical=NER"
+        },
+        "c2_location_country": {
+          "pass": true,
+          "detail": "location=NER canonical=NER"
+        },
+        "c3_body_country_signal": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n1_evidence_numbers_traceable": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n2_summary_numbers_soft": {
+          "pass": false,
+          "detail": "soft_missing=['7', '7', '8']"
+        },
+        "e1_location_entities_found": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "u1_uncertainty_preserved": {
+          "pass": true,
+          "detail": "no_marker"
+        },
+        "u2_uncertainty_struct": {
+          "pass": true,
+          "detail": "count=0"
+        }
+      }
+    },
+    {
+      "event_id": "EVT_5eeb84b95f768a30",
+      "task_id": "fdf966e59606465d6936e3300969c4b88111713615334d053a0597c73907a6ff",
+      "country_iso3": "NER",
+      "title_zh": "尼日尔道路交通安全机构培训宗教领袖",
+      "event_type": "other_security",
+      "security_relevance": "indirect",
+      "confidence": 82,
+      "hard_fails": [],
+      "observations": [
+        "n2_summary_numbers_soft"
+      ],
+      "checks": {
+        "c1_country_top_level": {
+          "pass": true,
+          "detail": "record=NER canonical=NER"
+        },
+        "c2_location_country": {
+          "pass": true,
+          "detail": "location=NER canonical=NER"
+        },
+        "c3_body_country_signal": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n1_evidence_numbers_traceable": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n2_summary_numbers_soft": {
+          "pass": false,
+          "detail": "soft_missing=['7']"
+        },
+        "e1_location_entities_found": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "u1_uncertainty_preserved": {
+          "pass": true,
+          "detail": "no_marker"
+        },
+        "u2_uncertainty_struct": {
+          "pass": true,
+          "detail": "count=0"
+        }
+      }
+    },
+    {
+      "event_id": "EVT_081fa3a5ebcaee5e",
+      "task_id": "181e71744c819100b2def074ac9bbde9a5d0937584ba0cf6b28e42b1df1362f3",
+      "country_iso3": "NER",
+      "title_zh": "尼日尔总统蒂亚尼指控法国策划尼亚美机场袭击",
+      "event_type": "terrorism",
+      "security_relevance": "direct",
+      "confidence": 60,
+      "hard_fails": [],
+      "observations": [
+        "c3_body_country_signal",
+        "n2_summary_numbers_soft"
+      ],
+      "checks": {
+        "c1_country_top_level": {
+          "pass": true,
+          "detail": "record=NER canonical=NER"
+        },
+        "c2_location_country": {
+          "pass": true,
+          "detail": "location=NER canonical=NER"
+        },
+        "c3_body_country_signal": {
+          "pass": false,
+          "detail": "signal=FRA"
+        },
+        "n1_evidence_numbers_traceable": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "n2_summary_numbers_soft": {
+          "pass": false,
+          "detail": "soft_missing=['1', '6']"
+        },
+        "e1_location_entities_found": {
+          "pass": true,
+          "detail": "ok"
+        },
+        "u1_uncertainty_preserved": {
+          "pass": true,
+          "detail": "marker_in_body,uncertainties=2"
+        },
+        "u2_uncertainty_struct": {
+          "pass": true,
+          "detail": "count=2"
+        }
+      }
+    }
+  ]
+}

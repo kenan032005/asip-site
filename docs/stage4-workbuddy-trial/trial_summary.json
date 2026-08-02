@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0",
+  "trial_name": "WorkBuddy 真实 AI 质量试跑",
+  "generated_at": "2026-08-03T01:36:49+08:00",
+  "execution_route": "workbuddy_queue",
+  "actual_model": "deepseek-v4-flash",
+  "direct_website_api_call": false,
+  "sample": {
+    "total": 20,
+    "by_country": {
+      "TCD": 10,
+      "NER": 10
+    }
+  },
+  "processing": {
+    "eligible": 20,
+    "skipped": 0,
+    "succeeded": 20,
+    "failed_retryable": 0,
+    "failed_terminal": 0,
+    "invalid_model_output": 0,
+    "cache_hit": 0,
+    "cache_miss": 20
+  },
+  "retry": {
+    "max_retries_per_item": 1,
+    "retries_used": 0
+  },
+  "model_identity": {
+    "provider": "workbuddy_queue",
+    "model": "deepseek-v4-flash",
+    "recorded_truthfully": true,
+    "hy3_placeholder_used": false
+  },
+  "quality": {
+    "check_summary": {
+      "c1_country_top_level": {
+        "pass": 20,
+        "total": 20
+      },
+      "c2_location_country": {
+        "pass": 20,
+        "total": 20
+      },
+      "c3_body_country_signal": {
+        "pass": 17,
+        "total": 20
+      },
+      "n1_evidence_numbers_traceable": {
+        "pass": 20,
+        "total": 20
+      },
+      "n2_summary_numbers_soft": {
+        "pass": 2,
+        "total": 20
+      },
+      "e1_location_entities_found": {
+        "pass": 20,
+        "total": 20
+      },
+      "u1_uncertainty_preserved": {
+        "pass": 20,
+        "total": 20
+      },
+      "u2_uncertainty_struct": {
+        "pass": 20,
+        "total": 20
+      }
+    },
+    "events_with_hard_fail": [],
+    "hard_fail_count": 0,
+    "events_with_observation": [
+      "EVT_b3861ba5c8d78187",
+      "EVT_68ba0eb89452a250",
+      "EVT_5291228872082f78",
+      "EVT_8c9d4096815dd33c",
+      "EVT_9a551301360773c7",
+      "EVT_451cac52bc310619",
+      "EVT_1c75a026db7edada",
+      "EVT_2520e85f1185795d",
+      "EVT_2e8ce0003ca07a8b",
+      "EVT_15fee76f358f8d07",
+      "EVT_10c3ca125264c6c1",
+      "EVT_3ac33d557e02d42b",
+      "EVT_3e70963728359646",
+      "EVT_f873e54241d57b7a",
+      "EVT_6b7ce87900f1b656",
+      "EVT_2460633265046ffa",
+      "EVT_f43a44be98d924c4",
+      "EVT_5eeb84b95f768a30",
+      "EVT_081fa3a5ebcaee5e"
+    ]
+  }
+}
