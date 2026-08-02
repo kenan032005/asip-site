@@ -362,8 +362,8 @@ def run_mode(mode, trigger):
 
         # 2.5b) Public ⊆ Canonical 不变量检查
         print("\n[2.5b] canonical/public consistency check ...")
-        cpath = HERE / "data" / "canonical" / "event_clusters.json"
-        ppath = HERE / "data" / "public" / "published_events.json"
+        cpath = ROOT / "data" / "canonical" / "event_clusters.json"
+        ppath = ROOT / "data" / "public" / "published_events.json"
         try:
             import json as _json
             can = _json.loads((cpath).read_text(encoding="utf-8")) if cpath.exists() else {"items": []}
