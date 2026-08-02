@@ -41,6 +41,9 @@ data/.trash_*/
 
 data/backup/
 
+# Stage 4 AI 运行时缓存（enrichment 结果/idempotency 等；绝不入库，不进 dist）
+data/ai/
+
 # Stage 2.5A 内部 AI 目录：运行时内容绝不入库（保留 .gitkeep 占位空目录）
 data/ai/**/*.json
 data/ai/queue/*
