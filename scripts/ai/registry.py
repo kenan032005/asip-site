@@ -16,6 +16,7 @@ from .provider import BaseAIProvider
 from .workbuddy_queue_provider import WorkbuddyQueueProvider
 from .disabled_provider import DisabledProvider
 from .mock_provider import MockProvider
+from .hy3_stage4_provider import Hy3Stage4Provider
 from .exceptions import ProviderNotConfigured
 
 _REGISTRY = {}
@@ -35,6 +36,8 @@ register_provider("generic_api", DisabledProvider)
 register_provider("disabled", DisabledProvider)
 # Stage 4：Mock Provider（离线确定性，不联网、免 Key，兼容 BaseAIProvider 接口）
 register_provider("mock", MockProvider)
+# C 包：Hy3 ↔ Stage 4 桥接 Provider（复用 2.5B 会话交接协议；本身不联网、不伪造）
+register_provider("hy3", Hy3Stage4Provider)
 
 
 def list_providers():
@@ -72,6 +75,10 @@ def get_provider(name=None, config=None):
     if name == "mock":
         # Stage 4：离线确定性 Provider（不联网、免 Key）
         return MockProvider()
+
+    if name == "hy3":
+        # C 包：桥接 Provider（produce 入队 / collect 取真实结果；不联网、不伪造）
+        return Hy3Stage4Provider(cfg, name)
 
     if name in ("openai_api", "generic_api", "disabled"):
         provider = DisabledProvider(cfg, name)

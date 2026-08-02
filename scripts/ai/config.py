@@ -26,7 +26,7 @@ DEFAULT_RUNTIME = {
 
 # 受支持的枚举集合
 VALID_RUNTIMES = {"workbuddy_local", "github_actions"}
-VALID_PROVIDERS = {"workbuddy_queue", "openai_api", "generic_api", "disabled", "mock"}
+VALID_PROVIDERS = {"workbuddy_queue", "openai_api", "generic_api", "disabled", "mock", "hy3"}
 PAID_PROVIDERS = {"openai_api", "generic_api"}
 
 # 环境变量 -> 配置键（仅「非敏感」字段可被覆盖）
