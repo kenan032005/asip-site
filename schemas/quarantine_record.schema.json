@@ -12,7 +12,7 @@
     "quarantine_id": {"type": "string", "pattern": "^Q_[0-9a-f]{16}$"},
     "original_object_type": {"type": "string", "enum": ["article", "event"]},
     "original_id": {"type": "string", "minLength": 1},
-    "reason_code": {"type": "string", "enum": ["wrong_country", "not_security_relevant", "duplicate", "invalid_url", "missing_required_fields", "unsupported_language", "conflicting_data", "low_quality_source", "legacy_invalid", "schema_validation_failed", "other"]},
+    "reason_code": {"type": "string", "enum": ["wrong_country", "not_security_relevant", "duplicate", "invalid_url", "missing_required_fields", "unsupported_language", "conflicting_data", "low_quality_source", "legacy_invalid", "schema_validation_failed", "homepage_or_listing_page", "article_page_mismatch", "other"]},
     "reason_cn": {"type": "string", "minLength": 1},
     "detected_at": {"type": ["string", "null"], "format": "date-time"},
     "detected_by": {"type": "string"},

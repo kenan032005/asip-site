@@ -213,6 +213,10 @@ class ArticleDiscoverer:
         dtype = source["discovery_type"]
         if dtype == "gdelt_search":
             return [], []
+        if dtype == "reliefweb_api_or_feed":
+            # Stage 3B Final Repair §4: ReliefWeb API 已失效（410 Gone），
+            # 其国家页/栏目页不得被当作文章正文抓取。不执行 HTML 兜底。
+            return [], []
         if dtype in ("rss", "atom"):
             return self._discover_rss(source)
         return self._discover_html(source)

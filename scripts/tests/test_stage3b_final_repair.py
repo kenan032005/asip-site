@@ -260,28 +260,30 @@ class FieldCompleteness(unittest.TestCase):
                                 f"{e.get('event_id')} canonical_url 非 HTTP: {cu[:50]}")
 
     def test_14_quality_score_is_numeric(self):
-        """extraction_quality_score 为 0-100 数值。"""
+        """extraction_quality_score 必须存在且为 0-100 数值（不得缺失）。"""
         can = _load(os.path.join(CANONICAL, "event_clusters.json"))
         self.assertIsNotNone(can)
         for c in can.get("items", []):
             if c.get("body_status") in ("full_body", "partial_body"):
                 qs = c.get("extraction_quality_score")
-                if qs is not None:
-                    self.assertIsInstance(qs, (int, float),
-                                          f"{c.get('event_id')} extraction_quality_score 非数值")
-                    self.assertGreaterEqual(qs, 0)
-                    self.assertLessEqual(qs, 100)
+                self.assertIsNotNone(qs,
+                    f"{c.get('event_id')} extraction_quality_score 缺失（带正文必须存在）")
+                self.assertIsInstance(qs, (int, float),
+                                      f"{c.get('event_id')} extraction_quality_score 非数值")
+                self.assertGreaterEqual(qs, 0)
+                self.assertLessEqual(qs, 100)
 
     def test_15_quality_reasons_is_array(self):
-        """extraction_quality_reasons 为数组。"""
+        """extraction_quality_reasons 必须存在且为数组（不得缺失）。"""
         can = _load(os.path.join(CANONICAL, "event_clusters.json"))
         self.assertIsNotNone(can)
         for c in can.get("items", []):
             if c.get("body_status") in ("full_body", "partial_body"):
                 qr = c.get("extraction_quality_reasons")
-                if qr is not None:
-                    self.assertIsInstance(qr, list,
-                                          f"{c.get('event_id')} extraction_quality_reasons 非数组")
+                self.assertIsNotNone(qr,
+                    f"{c.get('event_id')} extraction_quality_reasons 缺失（带正文必须存在）")
+                self.assertIsInstance(qr, list,
+                                      f"{c.get('event_id')} extraction_quality_reasons 非数组")
 
     def test_16_title_cn_empty_allowed(self):
         """title_cn/summary_cn 允许为空且不触发失败。"""
@@ -435,24 +437,97 @@ class AuditConsistency(unittest.TestCase):
         self.assertEqual(c.get("totals",{}).get("published_count"), real_pub)
         self.assertEqual(c.get("totals",{}).get("quarantined_count"), real_quar)
 
-    def test_27_country_acceptance_exists(self):
-        """country_source_acceptance.json 存在于最新审计快照。"""
+    def test_27_country_acceptance_from_source_stats(self):
+        """country_source_acceptance 必须与从 source_stats 重新计算的结果精确一致。"""
         import glob
         audit_dirs = sorted(glob.glob(os.path.join(DATA, "audit", "stage3_runs", "*")))
         self.assertGreater(len(audit_dirs), 0)
         rd = audit_dirs[-1]
         acc = _load(os.path.join(rd, "country_source_acceptance.json"))
+        s = _load(os.path.join(rd, "source_stats.json"))
         self.assertIsNotNone(acc, "country_source_acceptance.json 缺失")
+        self.assertIsNotNone(s, "source_stats.json 缺失")
+        ps = s.get("per_source", [])
+
+        def recompute(cn):
+            """按正式规则从 source_stats 重算（与 generate_country_source_acceptance 一致）。"""
+            stats = [x for x in ps if x.get("country") == cn]
+            not_impl = [x for x in stats if x.get("method") == "gdelt_search"]
+            implemented = [x for x in stats if x.get("method") != "gdelt_search"]
+
+            def _is_success(st):
+                return (st.get("status") == "success"
+                        and st.get("discovered", 0) > 0
+                        and st.get("fetched", 0) > 0)
+
+            stable_discovery = [x for x in implemented if _is_success(x)]
+            stable_body = [x for x in stable_discovery
+                           if x.get("full_body", 0) + x.get("partial_body", 0) > 0]
+            html_success = [x for x in implemented
+                            if x.get("html_listing_channel") is True
+                            and x.get("html_discovered", 0) > 0
+                            and x.get("html_fetched", 0) > 0
+                            and x.get("html_full_body", 0) + x.get("html_partial_body", 0) > 0]
+            rss_success = [x for x in implemented
+                           if x.get("method") in ("rss", "atom")
+                           and x.get("discovered", 0) > 0
+                           and x.get("fetched", 0) > 0]
+
+            def _ids(rows):
+                seen, out = set(), []
+                for r in rows:
+                    sid = r.get("source_id", "")
+                    if sid and sid not in seen:
+                        seen.add(sid)
+                        out.append(sid)
+                return out
+
+            return {
+                "stable_active_sources": len(_ids(stable_body)),
+                "stable_active_sources_list": _ids(stable_body),
+                "stable_discovery_sources": len(_ids(stable_discovery)),
+                "stable_discovery_sources_list": _ids(stable_discovery),
+                "successful_body_extraction_sources": len(_ids(stable_body)),
+                "successful_body_extraction_sources_list": _ids(stable_body),
+                "production_html_listing_success_sources": len(_ids(html_success)),
+                "production_html_listing_success_sources_list": _ids(html_success),
+                "rss_success_sources": len(_ids(rss_success)),
+                "rss_success_sources_list": _ids(rss_success),
+                "not_implemented_sources": len(_ids(not_impl)),
+            }
+
         for cn in ("乍得", "尼日尔"):
-            data = acc.get(cn)
+            data = acc.get("countries", {}).get(cn)
             self.assertIsNotNone(data, f"{cn} 不在 acceptance 中")
-            self.assertGreaterEqual(data.get("stable_active_sources",0), 12,
+            expect = recompute(cn)
+            for k in ("stable_active_sources", "stable_active_sources_list",
+                      "stable_discovery_sources", "stable_discovery_sources_list",
+                      "successful_body_extraction_sources",
+                      "successful_body_extraction_sources_list",
+                      "production_html_listing_success_sources",
+                      "production_html_listing_success_sources_list",
+                      "rss_success_sources", "rss_success_sources_list"):
+                self.assertEqual(data.get(k), expect[k],
+                    f"{cn}.{k} 与 source_stats 重算不一致: json={data.get(k)} recomputed={expect[k]}")
+            # 门槛
+            self.assertGreaterEqual(data.get("stable_active_sources", 0), 12,
                 f"{cn} stable_active={data.get('stable_active_sources')} < 12")
-            self.assertGreaterEqual(data.get("production_html_listing_success_sources",0), 2,
+            self.assertGreaterEqual(data.get("production_html_listing_success_sources", 0), 2,
                 f"{cn} html_listing={data.get('production_html_listing_success_sources')} < 2")
-            # 验证 source_id 列表非空
-            self.assertGreater(len(data.get("stable_active_sources_list",[])), 0)
-            self.assertGreater(len(data.get("production_html_listing_success_sources_list",[])), 0)
+            # count == list 长度、唯一性、存在性
+            for k in ("stable_active_sources", "production_html_listing_success_sources",
+                      "rss_success_sources", "not_implemented_sources"):
+                lst = data.get(k + "_list", [])
+                self.assertEqual(data.get(k), len(lst), f"{cn}.{k} count != list len")
+                self.assertEqual(len(lst), len(set(lst)), f"{cn}.{k} 有重复 source_id")
+            # 所有 source_id 存在于 source_stats 且属于该国家
+            stat_ids = {x.get("source_id") for x in ps}
+            cn_ids = {x.get("source_id") for x in ps if x.get("country") == cn}
+            for k in ("stable_active_sources_list", "production_html_listing_success_sources_list",
+                      "rss_success_sources_list"):
+                for sid in data.get(k, []):
+                    self.assertIn(sid, stat_ids, f"{cn}.{k} source_id 不在 source_stats")
+                    self.assertIn(sid, cn_ids, f"{cn}.{k} source_id 不属于该国家")
 
 
 class PublicationChannel(unittest.TestCase):
@@ -485,6 +560,169 @@ class PublicationChannel(unittest.TestCase):
         # 验证无 orphan（已通过 test_28）
         self.assertTrue(pub_ids.issubset(can_ids),
             "public 事件必须在 canonical 中（通道正常）")
+
+
+# 非文章页路径段（国家页/栏目页/标签页/搜索页/Feed 等）
+NON_ARTICLE_SEGMENTS = {"country", "category", "categories", "tag", "tags",
+                        "rubrique", "search", "feed", "rss", "author",
+                        "archives", "date", "wp-json", "page", "video",
+                        "newsfeed", "program", "podcast"}
+
+
+def _is_article_url(url):
+    """判断 URL 是否为具体文章详情页（非首页/国家页/栏目页/标签页/搜索页/Feed）。
+
+    允许 WordPress 日期结构（/2026/07/31/slug/），第一段年份不算列表页。
+    """
+    import urllib.parse
+    if not url:
+        return False
+    if not url.startswith(("http://", "https://")):
+        return False
+    p = urllib.parse.urlparse(url)
+    path_seg = [s for s in (p.path or "").strip("/").lower().split("/") if s]
+    if not path_seg:
+        return False  # 首页
+    if path_seg[0] in NON_ARTICLE_SEGMENTS:
+        return False  # 栏目/国家/标签/搜索/feed 等
+    return True
+
+
+class CanonicalUrlIntegrity(unittest.TestCase):
+    """§5 Canonical 带正文事件 URL 必须为具体文章详情页"""
+
+    def test_30_canonical_body_urls_are_articles(self):
+        """所有 canonical 带正文记录的 canonical_url 必须是文章页。"""
+        can = _load(os.path.join(CANONICAL, "event_clusters.json"))
+        self.assertIsNotNone(can)
+        bad = []
+        for c in can.get("items", []):
+            if c.get("body_status") not in ("full_body", "partial_body"):
+                continue
+            cu = c.get("canonical_url", "")
+            if not _is_article_url(cu):
+                bad.append((c.get("event_id"), cu))
+        self.assertEqual(len(bad), 0,
+            f"canonical 有 {len(bad)} 条带正文记录 canonical_url 非文章页: {bad[:5]}")
+
+    def test_31_canonical_no_country_listing_body(self):
+        """Canonical 不得存在国家页/栏目页/列表页判为正文（如 reliefweb.int/country/ner）。"""
+        can = _load(os.path.join(CANONICAL, "event_clusters.json"))
+        self.assertIsNotNone(can)
+        for c in can.get("items", []):
+            if c.get("body_status") not in ("full_body", "partial_body"):
+                continue
+            cu = (c.get("canonical_url") or "").lower()
+            # 明确拦截 reliefweb 国家页
+            if "reliefweb.int" in cu and "/country/" in cu:
+                self.fail(f"{c.get('event_id')} 国家页被判为正文: {cu}")
+            # 其他列表页
+            self.assertTrue(_is_article_url(c.get("canonical_url")),
+                            f"{c.get('event_id')} canonical_url 非文章页: {c.get('canonical_url')}")
+
+    def test_32_article_url_fixture(self):
+        """fixture: ReliefWeb 国家页拒绝；正常文章页允许；普通媒体文章不误杀。"""
+        self.assertFalse(_is_article_url("https://reliefweb.int/country/ner"),
+                         "ReliefWeb 国家页应被拒绝")
+        self.assertFalse(_is_article_url("https://reliefweb.int/country/tcd"),
+                         "ReliefWeb 国家页应被拒绝")
+        self.assertFalse(_is_article_url("https://reliefweb.int/"),
+                         "首页应被拒绝")
+        self.assertFalse(_is_article_url("https://example.com/category/securite/"),
+                         "栏目页应被拒绝")
+        self.assertFalse(_is_article_url("https://example.com/tag/security/"),
+                         "标签页应被拒绝")
+        self.assertFalse(_is_article_url("https://example.com/rss"),
+                         "Feed 应被拒绝")
+        self.assertTrue(_is_article_url(
+            "https://reliefweb.int/report/niger/niger-food-security-outlook-persistent-conflict"),
+            "ReliefWeb 正常文章详情页应允许")
+        self.assertTrue(_is_article_url(
+            "https://www.alwihdainfo.com/tchad-appui-de-loim-a-la-commune-de-moussoro-pour-lutter-contre-les-inondations/"),
+            "普通媒体文章页不应被误杀")
+        self.assertTrue(_is_article_url(
+            "https://journaldutchad.com/tchad-le-ministre-des-armees-effectue-une-mission-de-securite-a-owi/"),
+            "Journal du Tchad 文章页不应被误杀")
+
+
+class BodyFieldCompleteness(unittest.TestCase):
+    """§6 带正文事件全部追溯字段必须存在（不得缺失）"""
+
+    REQUIRED = ["canonical_url", "body_extracted", "extraction_method",
+                "extraction_quality_score", "extraction_quality_reasons",
+                "discovery_method", "fetch_http_status"]
+
+    def test_33_canonical_body_fields_complete(self):
+        """Canonical 带正文事件全部字段必须存在且类型正确。"""
+        can = _load(os.path.join(CANONICAL, "event_clusters.json"))
+        self.assertIsNotNone(can)
+        checked = 0
+        for c in can.get("items", []):
+            if c.get("body_status") not in ("full_body", "partial_body"):
+                continue
+            checked += 1
+            eid = c.get("event_id")
+            self.assertTrue(bool(c.get("canonical_url")),
+                            f"{eid} canonical_url 缺失")
+            self.assertTrue(bool(c.get("body_extracted")),
+                            f"{eid} body_extracted 缺失")
+            self.assertTrue(bool(c.get("extraction_method")),
+                            f"{eid} extraction_method 缺失")
+            qs = c.get("extraction_quality_score")
+            self.assertIsNotNone(qs, f"{eid} extraction_quality_score 缺失")
+            self.assertIsInstance(qs, (int, float), f"{eid} score 非数值")
+            self.assertGreaterEqual(qs, 0); self.assertLessEqual(qs, 100)
+            qr = c.get("extraction_quality_reasons")
+            self.assertIsNotNone(qr, f"{eid} extraction_quality_reasons 缺失")
+            self.assertIsInstance(qr, list, f"{eid} reasons 非数组")
+            dm = c.get("discovery_method")
+            self.assertTrue(bool(dm), f"{eid} discovery_method 缺失")
+            self.assertIn(dm, ("rss", "atom", "html_listing",
+                               "reliefweb_api_or_feed", "gdelt_search"),
+                          f"{eid} discovery_method 非法: {dm}")
+            fh = c.get("fetch_http_status")
+            self.assertIsNotNone(fh, f"{eid} fetch_http_status 缺失")
+            self.assertIsInstance(fh, int, f"{eid} fetch_http_status 非整数")
+            self.assertGreater(fh, 0, f"{eid} fetch_http_status 必须为正整数")
+            self.assertGreater(c.get("article_word_count", 0), 0,
+                               f"{eid} article_word_count 必须 > 0")
+        self.assertGreater(checked, 0, "Canonical 无带正文记录可检查")
+
+    def test_34_public_body_fields_complete(self):
+        """Public 带正文事件全部字段必须存在且类型正确。"""
+        pub = _load(os.path.join(PUBLIC, "published_events.json"))
+        self.assertIsNotNone(pub)
+        checked = 0
+        for e in pub.get("items", []):
+            if e.get("body_status") not in ("full_body", "partial_body"):
+                continue
+            checked += 1
+            eid = e.get("event_id")
+            self.assertTrue(bool(e.get("canonical_url")),
+                            f"{eid} canonical_url 缺失")
+            self.assertTrue(bool(e.get("body_extracted")),
+                            f"{eid} body_extracted 缺失")
+            self.assertTrue(bool(e.get("extraction_method")),
+                            f"{eid} extraction_method 缺失")
+            qs = e.get("extraction_quality_score")
+            self.assertIsNotNone(qs, f"{eid} extraction_quality_score 缺失")
+            self.assertIsInstance(qs, (int, float), f"{eid} score 非数值")
+            self.assertGreaterEqual(qs, 0); self.assertLessEqual(qs, 100)
+            qr = e.get("extraction_quality_reasons")
+            self.assertIsNotNone(qr, f"{eid} extraction_quality_reasons 缺失")
+            self.assertIsInstance(qr, list, f"{eid} reasons 非数组")
+            dm = e.get("discovery_method")
+            self.assertTrue(bool(dm), f"{eid} discovery_method 缺失")
+            self.assertIn(dm, ("rss", "atom", "html_listing",
+                               "reliefweb_api_or_feed", "gdelt_search"),
+                          f"{eid} discovery_method 非法: {dm}")
+            fh = e.get("fetch_http_status")
+            self.assertIsNotNone(fh, f"{eid} fetch_http_status 缺失")
+            self.assertIsInstance(fh, int, f"{eid} fetch_http_status 非整数")
+            self.assertGreater(fh, 0, f"{eid} fetch_http_status 必须为正整数")
+            self.assertGreater(e.get("article_word_count", 0), 0,
+                               f"{eid} article_word_count 必须 > 0")
+        self.assertGreater(checked, 0, "Public 无带正文记录可检查")
 
 
 if __name__ == "__main__":

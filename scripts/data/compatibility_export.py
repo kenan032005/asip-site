@@ -172,6 +172,9 @@ def export_all(repo, run_id: str = ""):
                  and c.get("legacy_event_id") not in quar_ids]
     try:
         existing_items = repo.load_published_events()
+        # 当前 canonical 全部 event_id（含 legacy_event_id），用于过滤已移除事件
+        canonical_ev_ids = {c.get("event_id") for c in clusters if c.get("event_id")}
+        canonical_legacy_ids = {c.get("legacy_event_id") for c in clusters if c.get("legacy_event_id")}
         real_events = []
         for e in existing_items:
             if e.get("publication_reason") not in real_reasons:
@@ -179,6 +182,10 @@ def export_all(repo, run_id: str = ""):
             eid = e.get("event_id")
             if eid in quar_event_ids:
                 continue  # 已隔离，不得保留在 public
+            # Stage 3B Final Repair §4: 事件已从 canonical 移除（如非文章页误判）
+            # 不得继续保留在 public（public 必须是 canonical 子集）
+            if eid not in canonical_ev_ids and eid not in canonical_legacy_ids:
+                continue
             sl = e.get("source_links") or []
             url = (sl[0].get("url", "") if sl else "").strip().rstrip("/")
             if url and url.lower() in {x.strip().rstrip("/").lower() for x in quar_ids}:

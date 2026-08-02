@@ -580,7 +580,115 @@ def write_stats(per_source, run_id, configured_sources=0):
     return totals
 
 
-def save_audit_snapshot(per_source, totals, run_id):
+def generate_country_source_acceptance(per_source, source_registry, run_id):
+    """§2/§3: 从 source_stats + SourceRegistry 程序化推导逐国验收指标。
+
+    完全从数据推导，不硬编码任何 source_id 或数字。
+    统计定义：
+      - stable_discovery_sources: 已实现 + status=success + discovered>0 + fetched>0
+      - stable_body_extraction_sources: discovered>0 + fetched>0 + full_body+partial_body>0
+      - stable_active_sources: = stable_body_extraction_sources（严格版，含正文提取）
+      - production_html_listing_success_sources:
+            html_listing_channel=True + html_discovered>0 + html_fetched>0
+            + html_full_body+html_partial_body>0
+      - rss_success_sources: method in (rss,atom) + discovered>0 + fetched>0
+      - not_implemented / permanently_broken / temporarily_failed 分列
+    """
+    by_country = {}
+    for stat in per_source:
+        cn = stat.get("country", "")
+        by_country.setdefault(cn, []).append(stat)
+
+    acceptance = {}
+    for cn in ("乍得", "尼日尔"):
+        stats = by_country.get(cn, [])
+        registry_srcs = source_registry.by_country(cn) if source_registry else []
+        registry_ids = {s["source_id"] for s in registry_srcs}
+
+        # 分类
+        not_impl = [s for s in stats if s.get("method") == "gdelt_search"]
+        implemented = [s for s in stats if s.get("method") != "gdelt_search"]
+        perm_broken = [s for s in stats if "permanently_broken" in (s.get("status") or "").lower()]
+        temp_failed = [s for s in implemented if s.get("discovered", 0) == 0
+                       and "permanently_broken" not in (s.get("status") or "").lower()]
+
+        # stable_discovery: 已实现 + success + discovered>0 + fetched>0
+        def _is_success(st):
+            return (st.get("status") == "success"
+                    and st.get("discovered", 0) > 0
+                    and st.get("fetched", 0) > 0)
+
+        stable_discovery = [s for s in implemented if _is_success(s)]
+        # stable_body_extraction: 需正文
+        stable_body = [s for s in stable_discovery
+                       if s.get("full_body", 0) + s.get("partial_body", 0) > 0]
+        # html listing 成功
+        html_success = [s for s in implemented
+                        if s.get("html_listing_channel") is True
+                        and s.get("html_discovered", 0) > 0
+                        and s.get("html_fetched", 0) > 0
+                        and s.get("html_full_body", 0) + s.get("html_partial_body", 0) > 0]
+        # rss 成功
+        rss_success = [s for s in implemented
+                       if s.get("method") in ("rss", "atom")
+                       and s.get("discovered", 0) > 0
+                       and s.get("fetched", 0) > 0]
+
+        def _ids(rows):
+            # 唯一 source_id 且必须存在于 source_stats 与 registry
+            seen, out = set(), []
+            for r in rows:
+                sid = r.get("source_id", "")
+                if sid and sid not in seen:
+                    seen.add(sid)
+                    out.append(sid)
+            return out
+
+        acc = {
+            "configured_sources": len(registry_ids) if registry_ids else len(stats),
+            "implemented_sources": len(_ids(implemented)),
+            "attempted_sources": len(_ids(stats)),
+            "stable_discovery_sources": len(_ids(stable_discovery)),
+            "stable_body_extraction_sources": len(_ids(stable_body)),
+            "stable_active_sources": len(_ids(stable_body)),
+            "successful_body_extraction_sources": len(_ids(stable_body)),
+            "production_html_listing_success_sources": len(_ids(html_success)),
+            "rss_success_sources": len(_ids(rss_success)),
+            "temporarily_failed_sources": len(_ids(temp_failed)),
+            "permanently_broken_sources": len(_ids(perm_broken)),
+            "not_implemented_sources": len(_ids(not_impl)),
+            # source_id 列表（唯一、去重）
+            "implemented_sources_list": _ids(implemented),
+            "attempted_sources_list": _ids(stats),
+            "stable_discovery_sources_list": _ids(stable_discovery),
+            "stable_active_sources_list": _ids(stable_body),
+            "stable_body_extraction_sources_list": _ids(stable_body),
+            "successful_body_extraction_sources_list": _ids(stable_body),
+            "production_html_listing_success_sources_list": _ids(html_success),
+            "rss_success_sources_list": _ids(rss_success),
+            "temporarily_failed_sources_list": _ids(temp_failed),
+            "permanently_broken_sources_list": _ids(perm_broken),
+            "not_implemented_sources_list": _ids(not_impl),
+        }
+        # 一致性自检：count == 列表长度
+        for k in ("implemented_sources", "attempted_sources",
+                  "stable_discovery_sources", "stable_active_sources",
+                  "successful_body_extraction_sources",
+                  "production_html_listing_success_sources",
+                  "rss_success_sources", "temporarily_failed_sources",
+                  "permanently_broken_sources", "not_implemented_sources"):
+            assert acc[k] == len(acc[k + "_list"]), f"{cn}.{k} count != list len"
+        acceptance[cn] = acc
+
+    return {
+        "run_id": run_id,
+        "generated_from": "source_stats + SourceRegistry",
+        "generated_at": bj_iso(),
+        "countries": acceptance,
+    }
+
+
+def save_audit_snapshot(per_source, totals, run_id, source_registry=None):
     """§7: 按 run_id 归档审计快照（不可覆盖）。"""
     import subprocess
     snapshot_dir = os.path.join(DATA, "audit", "stage3_runs", run_id)
@@ -627,6 +735,11 @@ def save_audit_snapshot(per_source, totals, run_id):
               {"run_id": run_id, "generated_at": bj_iso(), "per_source": per_source})
     save_json(os.path.join(snapshot_dir, "collection_summary.json"),
               {"run_id": run_id, "generated_at": bj_iso(), "totals": totals})
+
+    # §2: 程序化生成 country_source_acceptance.json（完全从 source_stats + registry 推导）
+    if source_registry is not None:
+        acceptance = generate_country_source_acceptance(per_source, source_registry, run_id)
+        save_json(os.path.join(snapshot_dir, "country_source_acceptance.json"), acceptance)
 
     print(f"审计快照已存档: {snapshot_dir}")
     return snapshot_dir
@@ -680,7 +793,7 @@ def main():
     print(f"\n{'='*60}")
     print(f"采集完成: {len(all_articles)} 篇文章, {len(per_source)} 来源, {len(all_errors)} 错误")
     totals = write_stats(per_source, run_id, configured_sources=configured_sources)
-    save_audit_snapshot(per_source, totals, run_id)
+    save_audit_snapshot(per_source, totals, run_id, source_registry=registry)
     print(json.dumps(totals, ensure_ascii=False, indent=2))
 
     if args.dry:
