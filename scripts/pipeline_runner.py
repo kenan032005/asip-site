@@ -304,7 +304,8 @@ def run_mode(mode, trigger):
                           "test_stage25de_cloud_provider.py",
                           "test_stage3a_collect.py",
                           "test_stage3b_extraction.py",
-                          "test_stage3b_final_repair.py"):
+                          "test_stage3b_final_repair.py",
+                          "test_stage4_ai_contract.py"):
             rc, out, err = run_cmd([PYTHON, str(HERE / "tests" / test_file)], timeout=180)
             ok = rc == 0 and "FAIL=0" in out  # 以测试脚本的结果行为准（rc=0 且 FAIL=0）
             tests_ok = tests_ok and ok
