@@ -139,17 +139,51 @@ class TestReviewMatrix(unittest.TestCase):
 
 
 class TestTokenUsage(unittest.TestCase):
-    def test_all_zero(self):
+    def test_token_unavailable_not_zero(self):
+        """Token 不可用必须记录为不可用，不得猜测/记为 0。"""
         t = _load("token_usage.json")
-        self.assertEqual(t["total"], {"input_tokens": 0, "output_tokens": 0, "estimated_cost_usd": 0.0})
-        for eid, item in t["per_item"].items():
-            self.assertEqual(item, {"input_tokens": 0, "output_tokens": 0, "estimated_cost_usd": 0.0}, eid)
+        self.assertFalse(t["token_usage_available"])
+        self.assertIsNone(t["total_input_tokens"])
+        self.assertIsNone(t["total_output_tokens"])
+        self.assertIsNone(t["cached_input_tokens"])
+        self.assertIsNone(t["estimated_cost"])
+        self.assertEqual(t["unavailable_reason"],
+                         "WorkBuddy queue did not expose model token usage")
+        self.assertIsNone(t.get("per_item"))
+        # 不得出现把无法获得的用量记为 0 的字段
+        self.assertNotIn("total", t)
+
+    def test_trial_summary_token_unavailable(self):
+        s = _load("trial_summary.json")
+        tu = s["token_usage"]
+        self.assertFalse(tu["token_usage_available"])
+        self.assertIsNone(tu["total_input_tokens"])
+        self.assertIsNone(tu["total_output_tokens"])
+        self.assertIsNone(tu["cached_input_tokens"])
+        self.assertIsNone(tu["estimated_cost"])
+        self.assertEqual(tu["unavailable_reason"],
+                         "WorkBuddy queue did not expose model token usage")
 
     def test_execution_flags(self):
         t = _load("token_usage.json")
         self.assertEqual(t["execution_route"], "workbuddy_queue")
         self.assertEqual(t["actual_model"], "deepseek-v4-flash")
         self.assertFalse(t["direct_website_api_call"])
+
+    def test_model_access_mode(self):
+        for name in ("trial_summary.json", "token_usage.json"):
+            o = _load(name)
+            self.assertEqual(o["model_access_mode"], "workbuddy_managed", name)
+            # underlying_model_source 无法确认时必须是 unknown，不得推测
+            self.assertIn("underlying_model_source", o, name)
+
+    def test_no_builtin_model_claim(self):
+        """不得保留未经证实的「内置模型」表述。"""
+        s = _load("trial_summary.json")
+        t = _load("token_usage.json")
+        blob = json.dumps(s, ensure_ascii=False) + json.dumps(t, ensure_ascii=False)
+        self.assertNotIn("内置", blob)
+        self.assertNotIn("内置模型", blob)
 
 
 class TestNoHy3Fake(unittest.TestCase):
