@@ -546,9 +546,9 @@ def build_event(article, run_id, country_cn):
     }
 
 
-def write_stats(per_source, run_id):
+def write_stats(per_source, run_id, configured_sources=0):
     totals = {
-        "configured_sources": 0,
+        "configured_sources": configured_sources,
         "enabled_sources": len(per_source),
         "attempted_sources": len(per_source),
         "successful_sources": sum(1 for s in per_source if s["status"] == "success" and s["discovered"] > 0),
@@ -600,7 +600,7 @@ def save_audit_snapshot(per_source, totals, run_id):
         "main_sha": main_sha,
         "generated_at": bj_iso(),
         "source_registry_version": "2.0",
-        "configured_sources": totals.get("enabled_sources", 0),
+        "configured_sources": totals.get("configured_sources", 0),
         "attempted_sources": totals.get("attempted_sources", 0),
         "successful_sources": totals.get("successful_sources", 0),
         "published_count": totals.get("published_count", 0),
@@ -658,6 +658,9 @@ def main():
     discoverer = ArticleDiscoverer(registry)
 
     countries = [args.country] if args.country else ["乍得", "尼日尔"]
+    # 统计两国配置总分（SourceRegistry 中所有来源，含 gdelt_search）
+    configured_sources = sum(len(registry.by_country(cn)) for cn in countries)
+
     all_articles = []
     per_source = []
     all_errors = []
@@ -676,7 +679,7 @@ def main():
 
     print(f"\n{'='*60}")
     print(f"采集完成: {len(all_articles)} 篇文章, {len(per_source)} 来源, {len(all_errors)} 错误")
-    totals = write_stats(per_source, run_id)
+    totals = write_stats(per_source, run_id, configured_sources=configured_sources)
     save_audit_snapshot(per_source, totals, run_id)
     print(json.dumps(totals, ensure_ascii=False, indent=2))
 
