@@ -1,4 +1,4 @@
-/* ASIP intelligence demo shared data and rendering helpers. */
+/* ASIP intelligence demo shared data, profiles and rendering helpers. */
 (function () {
   "use strict";
 
@@ -9,150 +9,44 @@
   const DATA_ROOT = DEMO_ROOT + "data/";
   const TYPE_LABELS = { organization: "组织", person: "人物", country: "国家", region: "地区" };
   const STATUS_LABELS = {
-    active_and_time_sensitive: "活跃（时间敏感）",
-    active_network: "活跃网络",
-    active_or_historically_associated: "活跃或历史关联",
-    historical_predecessor_with_jnim: "JNIM历史前身/关联",
-    historical_predecessor_with_splinter_history: "历史前身（存在分裂史）",
-    constituent_unit_of_jnim: "JNIM组成单元",
-    reported_leader_of_jnim: "公开资料所载领导人",
-    reported_senior_figure: "公开资料所载重要人物",
-    monitored_country: "监测国家"
+    active_and_time_sensitive: "活跃（时间敏感）", active_network: "活跃网络", active_or_historically_associated: "活跃或历史关联",
+    historical_predecessor_with_jnim: "JNIM历史前身/关联", historical_predecessor_with_splinter_history: "历史前身（存在分裂史）",
+    constituent_unit_of_jnim: "JNIM组成单元", reported_leader_of_jnim: "公开资料所载领导人", reported_senior_figure: "公开资料所载重要人物", monitored_country: "监测国家"
   };
-  const REL_LABELS = {
-    affiliated_with: "关联/效忠",
-    constituent_of: "组成关系",
-    led_by: "领导",
-    founded_by: "创始人",
-    operates_in: "活动/存在于",
-    hostile_to: "敌对",
-    historically_associated_with: "历史关联",
-    part_of_network: "网络重要人物"
-  };
+  const PROFILE_LABELS = { L1: "L1 基础档案", L2: "L2 标准档案", L3: "L3 深度档案", full: "L3 深度档案", brief: "L1 基础档案" };
+  const REL_LABELS = { affiliated_with: "关联/效忠", constituent_of: "组成关系", led_by: "领导", founded_by: "创始人", operates_in: "活动/存在于", hostile_to: "敌对", historically_associated_with: "历史关联", part_of_network: "网络重要人物" };
+  const SECTION_LABELS = { core_assessment: "平台核心判断", overview: "简介", history: "形成背景与历史沿革", structure: "组织体系与组成", leadership: "主要领导层", geography: "活动国家与地区", objectives: "目标或思想倾向", tactics: "行动方式与战术", relationships: "主要关系", events: "代表性事件", current_assessment: "当前态势", regional_impact: "区域影响", biography: "生平与活动阶段", roles: "组织与职务", influence: "当前影响", security_overview: "国家安全概况", risks: "主要安全风险", actors: "活跃安全主体", security_forces: "安全力量概览", hotspots: "重点风险地区", cross_border: "跨境安全关系", trends: "当前趋势判断", gaps: "资料缺口" };
   const store = { entities: [], relationships: [], sources: [], profiles: {}, aliases: {}, byId: {}, bySlug: {}, currentFocus: null };
 
-  function esc(value) {
-    return String(value == null ? "" : value).replace(/[&<>"']/g, function (ch) {
-      return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch];
-    });
-  }
+  function esc(value) { return String(value == null ? "" : value).replace(/[&<>"']/g, function (ch) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]; }); }
   function dataUrl(name) { return DATA_ROOT + name; }
   function entityById(id) { return store.byId[id]; }
   function entityBySlug(slug) { return store.bySlug[slug]; }
   function typeLabel(type) { return TYPE_LABELS[type] || type; }
   function statusLabel(status) { return STATUS_LABELS[status] || status || "未说明"; }
+  function profileLevelLabel(level) { return PROFILE_LABELS[level] || level || "L1 基础档案"; }
   function relationLabel(type) { return REL_LABELS[type] || type; }
-  function entityHref(id) {
-    const entity = entityById(id);
-    return entity ? DEMO_ROOT + "entity/" + encodeURIComponent(entity.slug) + "/" : DEMO_ROOT;
-  }
+  function entityHref(id) { const entity = entityById(id); return entity ? DEMO_ROOT + "entity/" + encodeURIComponent(entity.slug) + "/" : DEMO_ROOT; }
   function networkHref(id) { return DEMO_ROOT + "network/?focus=" + encodeURIComponent(id || "actor-jnim"); }
-  function entityLink(id, label) {
-    const entity = entityById(id);
-    if (!entity) return esc(label || id);
-    return '<a class="intel-entity-link" data-entity-id="' + esc(id) + '" href="' + esc(entityHref(id)) + '">' + esc(label || entity.name_zh) + '</a>';
-  }
-  function period(rel) {
-    const start = rel.start_date || rel.start_year;
-    const end = rel.end_date || rel.end_year;
-    if (!start && !end) return "未说明";
-    if (start && end) return start + "—" + end;
-    return start ? start + "—至今/未说明" : "截至 " + end;
-  }
-  function confidenceLabel(value) {
-    return ({ high: "高", medium_high: "中高", medium: "中" })[value] || value || "未说明";
-  }
-  function relationEntities(rel) {
-    return [entityById(rel.source_entity_id), entityById(rel.target_entity_id)];
-  }
-  function directRelations(id) {
-    return store.relationships.filter(function (rel) { return rel.source_entity_id === id || rel.target_entity_id === id; });
-  }
-  function otherSide(rel, id) {
-    return rel.source_entity_id === id ? entityById(rel.target_entity_id) : entityById(rel.source_entity_id);
-  }
-  function statusBadge(entity) {
-    return '<span class="intel-badge status">' + esc(statusLabel(entity.current_status)) + '</span>';
-  }
-  function entityTypeBadge(entity) {
-    return '<span class="intel-badge type-' + esc(entity.entity_type) + '">' + esc(typeLabel(entity.entity_type)) + '</span>';
-  }
-  function sourceList(refs) {
-    return (refs || []).map(function (id) {
-      const source = store.sources.find(function (item) { return item.source_id === id; });
-      if (!source) return '<span class="intel-source-missing">来源缺失：' + esc(id) + '</span>';
-      return '<a href="' + esc(source.url) + '" target="_blank" rel="noopener">' + esc(source.publisher) + ' · ' + esc(source.title) + '</a>';
-    }).join("");
-  }
-  function entityCard(entity, options) {
-    options = options || {};
-    const relCount = directRelations(entity.entity_id).length;
-    return '<a class="intel-card ' + (options.featured ? "featured" : "") + '" href="' + esc(entityHref(entity.entity_id)) + '">' +
-      '<div class="intel-card-top"><span class="intel-code">' + esc(entity.entity_id) + '</span>' + entityTypeBadge(entity) + '</div>' +
-      '<h3>' + esc(entity.name_zh) + '</h3><p class="intel-en">' + esc(entity.name_en) + '</p>' +
-      '<p>' + esc(entity.short_description) + '</p><div class="intel-card-foot">' + statusBadge(entity) + '<span>' + relCount + ' 条直接关系</span></div></a>';
-  }
-  function renderTopbar() {
-    const topbar = document.querySelector("#topbar");
-    if (!topbar) return;
-    topbar.innerHTML = '<div class="intel-topbar"><div><a class="intel-back" href="' + esc(DEMO_ROOT) + '">← ASIP安全情报知识库</a><span class="intel-kicker">微型样板 V0.1 · 非正式导航入口</span></div><div class="intel-topmeta">共享数据层 · 核验至 ' + esc("2026-08-05") + '</div></div>';
-  }
-  function renderFooter() {
-    const footer = document.querySelector("footer.site");
-    if (footer) footer.innerHTML = 'ASIP安全情报知识库微型样板 V0.1 · 仅用于产品形态验证 · 事实摘要不替代原始来源 · <a href="' + esc(DEMO_ROOT) + '">返回样板入口</a>';
-  }
-  function loadJson(name) {
-    return fetch(dataUrl(name)).then(function (res) {
-      if (!res.ok) throw new Error("load failed: " + name);
-      return res.json();
-    });
-  }
-  function loadData() {
-    return Promise.all([loadJson("entities.json"), loadJson("relationships.json"), loadJson("sources.json"), loadJson("profile_content.json"), loadJson("alias_index.json")]).then(function (items) {
-      store.entities = items[0].entities; store.relationships = items[1].relationships; store.sources = items[2].sources;
-      store.profiles = items[3].profiles || {}; store.aliases = items[4].aliases || {};
-      store.entities.forEach(function (entity) { store.byId[entity.entity_id] = entity; store.bySlug[entity.slug] = entity; });
-      return store;
-    });
-  }
-  function relationRow(rel, centerId) {
-    const other = otherSide(rel, centerId);
-    const arrow = rel.direction === "bidirectional" ? "↔" : (rel.source_entity_id === centerId ? "→" : "←");
-    return '<div class="intel-rel-row"><div class="intel-rel-main"><span class="intel-rel-kind">' + esc(relationLabel(rel.relationship_type)) + '</span> ' + arrow + ' ' + entityLink(other.entity_id, other.name_zh) + '</div><div class="intel-rel-desc">' + esc(rel.description) + '</div><div class="intel-rel-meta">时间：' + esc(period(rel)) + ' · 状态：' + esc(rel.current_status) + ' · 可信度：' + esc(confidenceLabel(rel.confidence)) + '</div></div>';
-  }
-  function initIndex() {
-    const cards = document.querySelector("#entityCards");
-    if (!cards) return;
-    const core = entityById("actor-jnim");
-    document.querySelector("#coreCard").innerHTML = entityCard(core, { featured: true });
-    cards.innerHTML = store.entities.filter(function (e) { return e.entity_id !== "actor-jnim"; }).map(entityCard).join("");
-    document.querySelector("#entityCount").textContent = store.entities.length;
-    document.querySelector("#relationshipCount").textContent = store.relationships.length;
-    document.querySelector("#sourceCount").textContent = store.sources.length;
-    document.querySelector("#networkPreview").innerHTML = '<div class="intel-preview-core">JNIM</div>' + store.entities.filter(function (e) { return e.entity_id !== "actor-jnim"; }).slice(0, 8).map(function (e, i) { return '<a class="intel-preview-node node-' + (i % 4) + '" href="' + esc(networkHref(e.entity_id)) + '">' + esc(e.name_zh) + '</a>'; }).join("");
-    document.querySelector("#sourceNotes").innerHTML = '<p>本样板优先使用联合国安理会制裁委员会、澳大利亚国家安全网站和美国国务院公开资料。组织关系、领导状态和活动范围均标注核验时间；“活动/存在于”不表示“控制地区”。</p><div class="intel-source-grid">' + store.sources.map(function (s) { return '<a target="_blank" rel="noopener" href="' + esc(s.url) + '"><b>' + esc(s.publisher) + '</b><span>' + esc(s.title) + '</span></a>'; }).join("") + '</div>';
-  }
-  function initEntity() {
-    const slug = document.body.getAttribute("data-entity-slug");
-    const entity = entityBySlug(slug) || entityById("actor-jnim");
-    const full = entity.entity_id === "actor-jnim";
-    const profile = store.profiles[entity.entity_id] || {};
-    document.title = entity.name_zh + " · ASIP安全情报知识库微型样板";
-    document.querySelector("#entityHeading").innerHTML = '<div class="intel-heading-code">' + esc(entity.entity_id) + '</div><h1>' + esc(entity.name_zh) + '</h1><p class="intel-title-en">' + esc(entity.name_en) + '</p><div class="intel-badges">' + entityTypeBadge(entity) + statusBadge(entity) + (entity.disputed ? '<span class="intel-badge disputed">存在争议/名称或状态时间敏感</span>' : '') + '</div>';
-    document.querySelector("#entityIdentity").innerHTML = '<div><b>原文名</b><span>' + esc(entity.original_name) + '</span></div><div><b>别名</b><span>' + esc(entity.aliases.join(" · ")) + '</span></div><div><b>唯一ID</b><span>' + esc(entity.entity_id) + '</span></div><div><b>最后核验</b><span>' + esc(entity.last_verified_at) + '</span></div><div><b>可信度</b><span>' + esc(confidenceLabel(entity.confidence)) + '</span></div>';
-    document.querySelector("#entityBody").innerHTML = '<p class="intel-lead">' + esc(entity.short_description) + '</p><p>' + esc(entity.full_description) + '</p>' + (full ? '<h2>平台核心概括</h2><p>' + esc(profile.overview || "") + '</p><h2>形成及历史沿革</h2><ul>' + (profile.history || []).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul><h2>判断边界</h2><div class="intel-note">' + esc(profile.assessment || "") + '</div>' : '<h2>样板摘要</h2><p>本实体当前提供简版档案。关系、来源、当前状态和核验时间均来自共享数据层。</p>');
-    const rels = directRelations(entity.entity_id);
-    document.querySelector("#relationshipList").innerHTML = rels.map(function (rel) { return relationRow(rel, entity.entity_id); }).join("") || '<p class="muted">暂无直接关系。</p>';
-    document.querySelector("#sources").innerHTML = '<div class="intel-source-list">' + sourceList(entity.source_refs) + '</div>';
-    document.querySelector("#relatedCards").innerHTML = rels.map(function (rel) { return entityCard(otherSide(rel, entity.entity_id)); }).join("");
-    document.querySelector("#graphLink").href = networkHref(entity.entity_id);
-  }
-  window.ASIP_INTEL = { DEMO_ROOT: DEMO_ROOT, store: store, entityHref: entityHref, networkHref: networkHref, entityLink: entityLink, loadData: loadData, renderTopbar: renderTopbar, renderFooter: renderFooter, initIndex: initIndex, initEntity: initEntity, typeLabel: typeLabel, statusLabel: statusLabel, relationLabel: relationLabel, confidenceLabel: confidenceLabel, period: period, directRelations: directRelations, otherSide: otherSide, esc: esc, entityById: entityById };
+  function entityLink(id, label) { const entity = entityById(id); if (!entity) return esc(label || id); return '<a class="intel-entity-link" data-entity-id="' + esc(id) + '" href="' + esc(entityHref(id)) + '">' + esc(label || entity.name_zh) + '</a>'; }
+  function period(rel) { const start = rel.start_date || rel.start_year; const end = rel.end_date || rel.end_year; if (!start && !end) return "未说明"; if (start && end) return start + "—" + end; return start ? start + "—至今/未说明" : "截至 " + end; }
+  function confidenceLabel(value) { return ({ high: "高", medium_high: "中高", medium: "中" })[value] || value || "未说明"; }
+  function directRelations(id) { return store.relationships.filter(function (rel) { return rel.source_entity_id === id || rel.target_entity_id === id; }); }
+  function otherSide(rel, id) { return rel.source_entity_id === id ? entityById(rel.target_entity_id) : entityById(rel.source_entity_id); }
+  function statusBadge(entity) { return '<span class="intel-badge status">' + esc(statusLabel(entity.current_status)) + '</span>'; }
+  function entityTypeBadge(entity) { return '<span class="intel-badge type-' + esc(entity.entity_type) + '">' + esc(typeLabel(entity.entity_type)) + '</span>'; }
+  function sourceList(refs) { return (refs || []).map(function (id) { const source = store.sources.find(function (item) { return item.source_id === id; }); if (!source) return '<span class="intel-source-missing">来源缺失：' + esc(id) + '</span>'; return '<a href="' + esc(source.url) + '" target="_blank" rel="noopener">' + esc(source.publisher) + ' · ' + esc(source.title) + '</a>'; }).join(""); }
+  function entityCard(entity, options) { options = options || {}; const relCount = directRelations(entity.entity_id).length; return '<a class="intel-card ' + (options.featured ? "featured" : "") + '" href="' + esc(entityHref(entity.entity_id)) + '"><div class="intel-card-top"><span class="intel-code">' + esc(entity.entity_id) + '</span>' + entityTypeBadge(entity) + '</div><div class="intel-card-title-row"><h3>' + esc(entity.name_zh) + '</h3><span class="intel-level-mini">' + esc(profileLevelLabel(entity.profile_level).split(" ")[0]) + '</span></div><p class="intel-en">' + esc(entity.name_en) + '</p><p>' + esc(entity.short_description) + '</p><div class="intel-card-foot">' + statusBadge(entity) + '<span>' + relCount + ' 条直接关系</span></div></a>'; }
+  function renderTopbar() { const topbar = document.querySelector("#topbar"); if (!topbar) return; topbar.innerHTML = '<div class="intel-topbar"><div><a class="intel-back" href="' + esc(DEMO_ROOT) + '">← ASIP安全情报知识库</a><span class="intel-kicker">微型样板 V0.2 · 非正式导航入口</span></div><div class="intel-topmeta">共享数据层 · 核验至 ' + esc("2026-08-05") + '</div></div>'; }
+  function renderFooter() { const footer = document.querySelector("footer.site"); if (footer) footer.innerHTML = 'ASIP安全情报知识库微型样板 V0.2 · 仅用于产品形态验证 · 事实摘要不替代原始来源 · <a href="' + esc(DEMO_ROOT) + '">返回样板入口</a>'; }
+  function loadJson(name) { return fetch(dataUrl(name)).then(function (res) { if (!res.ok) throw new Error("load failed: " + name); return res.json(); }); }
+  function loadData() { return Promise.all([loadJson("entities.json"), loadJson("relationships.json"), loadJson("sources.json"), loadJson("profile_content.json"), loadJson("alias_index.json")]).then(function (items) { store.entities = items[0].entities; store.relationships = items[1].relationships; store.sources = items[2].sources; store.profiles = items[3].profiles || {}; store.aliases = items[4].aliases || {}; store.entities.forEach(function (entity) { store.byId[entity.entity_id] = entity; store.bySlug[entity.slug] = entity; }); return store; }); }
+  function relationRow(rel, centerId) { const other = otherSide(rel, centerId); const arrow = rel.direction === "bidirectional" ? "↔" : (rel.source_entity_id === centerId ? "→" : "←"); return '<div class="intel-rel-row"><div class="intel-rel-main"><span class="intel-rel-kind">' + esc(relationLabel(rel.relationship_type)) + '</span> ' + arrow + ' ' + entityLink(other.entity_id, other.name_zh) + '</div><div class="intel-rel-desc">' + esc(rel.description) + '</div><div class="intel-rel-meta">时间：' + esc(period(rel)) + ' · 状态：' + esc(rel.current_status) + ' · 可信度：' + esc(confidenceLabel(rel.confidence)) + '</div></div>'; }
+  function renderSection(section, value) { if (value == null || (Array.isArray(value) && !value.length) || value === "") return ""; const label = SECTION_LABELS[section] || section; let body = Array.isArray(value) ? '<ul>' + value.map(function (item) { return '<li>' + esc(item) + '</li>'; }).join("") + '</ul>' : '<p>' + esc(value) + '</p>'; return '<section class="profile-section"><h2>' + esc(label) + '</h2>' + body + '</section>'; }
+  function renderProfile(entity, profile) { const sections = profile.sections || {}; const ordered = ["core_assessment", "overview", "history", "structure", "leadership", "geography", "objectives", "tactics", "relationships", "events", "current_assessment", "regional_impact", "biography", "roles", "influence", "security_overview", "risks", "actors", "security_forces", "hotspots", "cross_border", "trends", "gaps"]; return ordered.map(function (key) { return renderSection(key, sections[key]); }).join(""); }
+  function initIndex() { const cards = document.querySelector("#entityCards"); if (!cards) return; const core = entityById("actor-jnim"); document.querySelector("#coreCard").innerHTML = entityCard(core, { featured: true }); cards.innerHTML = store.entities.filter(function (e) { return e.entity_id !== "actor-jnim"; }).map(entityCard).join(""); document.querySelector("#entityCount").textContent = store.entities.length; document.querySelector("#relationshipCount").textContent = store.relationships.length; document.querySelector("#sourceCount").textContent = store.sources.length; document.querySelector("#networkPreview").innerHTML = '<div class="intel-preview-core">JNIM</div>' + store.entities.filter(function (e) { return e.entity_id !== "actor-jnim"; }).slice(0, 8).map(function (e, i) { return '<a class="intel-preview-node node-' + (i % 4) + '" href="' + esc(networkHref(e.entity_id)) + '">' + esc(e.name_zh) + '</a>'; }).join(""); document.querySelector("#sourceNotes").innerHTML = '<p>本样板优先使用联合国安理会制裁委员会、澳大利亚国家安全网站和美国国务院公开资料。组织关系、领导状态和活动范围均标注核验时间；“活动/存在于”不表示“控制地区”。</p><div class="intel-source-grid">' + store.sources.map(function (s) { return '<a target="_blank" rel="noopener" href="' + esc(s.url) + '"><b>' + esc(s.publisher) + '</b><span>' + esc(s.title) + '</span></a>'; }).join("") + '</div>'; }
+  function initEntity() { const slug = document.body.getAttribute("data-entity-slug"); const entity = entityBySlug(slug) || entityById("actor-jnim"); const profile = store.profiles[entity.entity_id] || { sections: {} }; document.title = entity.name_zh + " · ASIP安全情报知识库微型样板"; const disputed = entity.disputed ? '<span class="intel-badge disputed">存在争议/状态时间敏感</span>' : ''; document.querySelector("#entityHeading").innerHTML = '<div class="intel-heading-code">' + esc(entity.entity_id) + '</div><div class="profile-kicker">' + esc(profileLevelLabel(entity.profile_level)) + ' · ' + esc(typeLabel(entity.entity_type)) + '</div><h1>' + esc(entity.name_zh) + '</h1><p class="intel-title-en">' + esc(entity.name_en) + '</p><div class="intel-badges">' + entityTypeBadge(entity) + '<span class="intel-badge profile-level">' + esc(profileLevelLabel(entity.profile_level)) + '</span>' + statusBadge(entity) + disputed + '</div>'; document.querySelector("#entityIdentity").innerHTML = '<div><b>原文名</b><span>' + esc(entity.original_name) + '</span></div><div><b>别名</b><span>' + esc(entity.aliases.join(" · ")) + '</span></div><div><b>唯一ID</b><span>' + esc(entity.entity_id) + '</span></div><div><b>最后核验</b><span>' + esc(entity.last_verified_at) + '</span></div><div><b>可信度</b><span>' + esc(confidenceLabel(entity.confidence)) + '</span></div><div><b>资料状态</b><span>' + esc(profile.completeness || "公开资料有限，按等级展示") + '</span></div>'; document.querySelector("#entityBody").innerHTML = '<div class="intel-lead">' + esc(entity.short_description) + '</div>' + renderProfile(entity, profile); const rels = directRelations(entity.entity_id); document.querySelector("#relationshipList").innerHTML = '<div class="relationship-count">' + rels.length + ' 条直接关系</div>' + (rels.map(function (rel) { return relationRow(rel, entity.entity_id); }).join("") || '<p class="muted">暂无直接关系。</p>'); document.querySelector("#sources").innerHTML = '<div class="intel-source-list">' + sourceList(entity.source_refs) + '</div>'; document.querySelector("#relatedCards").innerHTML = rels.map(function (rel) { return entityCard(otherSide(rel, entity.entity_id)); }).join(""); document.querySelector("#graphLink").href = networkHref(entity.entity_id); }
+  window.ASIP_INTEL = { DEMO_ROOT: DEMO_ROOT, store: store, entityHref: entityHref, networkHref: networkHref, entityLink: entityLink, loadData: loadData, renderTopbar: renderTopbar, renderFooter: renderFooter, initIndex: initIndex, initEntity: initEntity, typeLabel: typeLabel, statusLabel: statusLabel, profileLevelLabel: profileLevelLabel, relationLabel: relationLabel, confidenceLabel: confidenceLabel, period: period, directRelations: directRelations, otherSide: otherSide, esc: esc, entityById: entityById };
   renderTopbar(); renderFooter();
-  loadData().then(function () {
-    const page = document.body.getAttribute("data-intel-page");
-    if (page === "index") initIndex();
-    if (page === "entity") initEntity();
-    if (page === "network") window.dispatchEvent(new Event("asip-intel-data-ready"));
-  }).catch(function (error) { const el = document.querySelector("#intelError"); if (el) { el.hidden = false; el.textContent = "样板数据加载失败：" + error.message; } });
+  loadData().then(function () { const page = document.body.getAttribute("data-intel-page"); if (page === "index") initIndex(); if (page === "entity") initEntity(); if (page === "network") window.dispatchEvent(new Event("asip-intel-data-ready")); }).catch(function (error) { const el = document.querySelector("#intelError"); if (el) { el.hidden = false; el.textContent = "样板数据加载失败：" + error.message; } });
 })();
