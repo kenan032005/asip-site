@@ -33,6 +33,7 @@ from pipeline_core import (
 DIST = os.path.join(ROOT, "dist")
 ASSETS = os.path.join(ROOT, "assets")
 REPORTS = os.path.join(ROOT, "reports")
+INTELLIGENCE_BUILD = os.path.join(HERE, "build_intelligence_demo.py")
 
 HTML_FILES = [
     "index.html", "events.html", "event.html", "countries.html", "country.html",
@@ -247,6 +248,10 @@ def main(run_id=None, no_embed=False):
         _copy_public_data(DIST_NEW)
     if os.path.isdir(REPORTS):
         shutil.copytree(REPORTS, os.path.join(DIST_NEW, "reports"))
+
+    # 独立微型样板：不进入正式导航，构建为 GitHub Pages 项目路径下的静态子树
+    from build_intelligence_demo import build_intelligence_demo
+    build_intelligence_demo(DIST_NEW)
 
     # .nojekyll
     with open(os.path.join(DIST_NEW, ".nojekyll"), "w", encoding="utf-8") as f:
