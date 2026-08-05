@@ -9,7 +9,7 @@
 
 ## 1. 最终结论
 
-**当前结论：V0.1 功能源码和浏览器 QA 已在远端 main 可靠基线上完成可追溯重建，功能提交与 QA 提交分离；本地标签和远端恢复分支/标签正在按本报告执行并验证。原始提交 843e9c9/a2164d9 无法恢复，重建提交不伪装为原哈希。**
+**当前结论：V0.1 功能源码和浏览器 QA 已在远端 main 可靠基线上完成可追溯重建，功能提交与 QA 提交分离；恢复分支和版本标签已成功推送并通过 `ls-remote` 验证。原始提交 843e9c9/a2164d9 无法恢复，重建提交不伪装为原哈希。**
 
 I0-C 的交付链为：
 
@@ -18,9 +18,10 @@ I0-C 的交付链为：
   └─ bf5b60f817380117fe53455785e4e2857a8c1e1a  V0.1 功能源码
       └─ 238f02baae6d2f8fff8d71762bcb2c5adfcea6a9  V0.1B 浏览器 QA
           └─ d5db2eaae7994fd92e1686e2f4d5a49bc8701c8c  日期说明 + I0-C 最小复验
+      └─ 320c6d6b2a1c4edbfbb40d62667d83c25ad5d057  I0-C 恢复报告 + WIP 保护证明
 ```
 
-最终交付提交：`d5db2eaae7994fd92e1686e2f4d5a49bc8701c8c`。
+最终交付提交：`320c6d6b2a1c4edbfbb40d62667d83c25ad5d057`。
 
 > 说明：WorkBuddy 当前 Git 环境存在分支引用间歇性清空现象。每次提交对象均先用 `git cat-file`/`git show` 验证，再用明确的本地 ref 保护；最终链已能连续读取，报告保留该环境问题。
 
@@ -284,11 +285,7 @@ feature/asip-intelligence-demo-v01-rebuilt
 asip-intelligence-demo-v0.1
 ```
 
-标签应指向最终交付提交：
-
-```text
-d5db2eaae7994fd92e1686e2f4d5a49bc8701c8c
-```
+标签指向最终交付提交：`320c6d6b2a1c4edbfbb40d62667d83c25ad5d057`。
 
 标签说明：
 
@@ -300,13 +297,24 @@ dynamic focus graph, browser QA passed.
 
 ### 7.3 远端验证
 
-本报告生成时执行推送后，必须记录：
+已成功执行：
 
-- `git push origin feature/asip-intelligence-demo-v01-rebuilt`
-- `git push origin asip-intelligence-demo-v0.1`
-- `git ls-remote origin refs/heads/feature/asip-intelligence-demo-v01-rebuilt refs/tags/asip-intelligence-demo-v0.1`
+```text
+git push origin feature/asip-intelligence-demo-v01-rebuilt
+To https://github.com/kenan032005/asip-site.git
+ * [new branch]      feature/asip-intelligence-demo-v01-rebuilt -> feature/asip-intelligence-demo-v01-rebuilt
 
-若远端权限/凭据不可用，则不得声称远端备份完成，应转为本地 bundle + patch 交付，并把准确命令记录在本报告附录。
+git push origin asip-intelligence-demo-v0.1
+To https://github.com/kenan032005/asip-site.git
+ * [new tag]         asip-intelligence-demo-v0.1 -> asip-intelligence-demo-v0.1
+
+git ls-remote origin refs/heads/feature/asip-intelligence-demo-v01-rebuilt refs/tags/asip-intelligence-demo-v0.1 refs/tags/asip-intelligence-demo-v0.1^{}
+320c6d6b2a1c4edbfbb40d62667d83c25ad5d057  refs/heads/feature/asip-intelligence-demo-v01-rebuilt
+b6702445fd01278c45a1a8254e1c2323d9158fb2  refs/tags/asip-intelligence-demo-v0.1
+320c6d6b2a1c4edbfbb40d62667d83c25ad5d057  refs/tags/asip-intelligence-demo-v0.1^{}
+```
+
+其中 `b6702445...` 是带注释标签对象哈希，`^{}` 解引用结果确认标签实际指向最终提交 `320c6d6...`。远端推送与读取验证均成功，因此不需要转入 bundle/patch 备用交付路径。
 
 ## 8. 原工作目录与无关 WIP 保护
 
