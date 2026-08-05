@@ -128,8 +128,30 @@ Ansar Eddine     L1 基础档案
 - 入口页和实体页的 `state()` 采集不包含图谱节点，这是页面类型差异，不是错误；图谱页的节点、边和交互均已单独验证。
 - 仍未扩展到萨赫勒首批 10—15 个核心实体，按阶段边界保留到后续任务。
 
-## 7. 关闭结论
+## 7. 远端交付与关闭结论
 
-V0.2 产品范围、自动化测试、主站回归、静态构建和真实 Chrome 交互验收均通过。除 Git refs 稳定性这一交付环境技术债务外，没有未解决的产品阻断问题。
+最终 QA 提交对象：
 
-下一步仅可在用户明确授权后进入 V0.2 远端分支/标签交付；本阶段不自动启动萨赫勒扩库。
+```text
+ae3280db28f2fb9cdbc73e2366ac166a2d2ec4c0
+父对象：0b9e7f5da3baed4a75e8a7a4bff8cdd7e6b31d05
+```
+
+已推送：
+
+```text
+refs/heads/feature/asip-intelligence-demo-v02 -> ae3280db28f2fb9cdbc73e2366ac166a2d2ec4c0
+refs/tags/asip-intelligence-demo-v0.2 -> 6897cc374832ee173cc4f80eda1e0bee214e662d
+标签解引用 -> ae3280db28f2fb9cdbc73e2366ac166a2d2ec4c0
+```
+
+远端保护条件核验通过：
+
+```text
+V0.1 标签保持 b6702445fd01278c45a1a8254e1c2323d9158fb2
+main 保持 8924416ff3f969c3996312b8ca97588ff268cf5e
+gh-pages 保持 cd18cd6a504fd00e12702dd9af3b77783101b811
+master 未返回远端引用，未被修改
+```
+
+V0.2 产品范围、自动化测试、主站回归、静态构建、真实 Chrome 交互验收和远端交付均通过。除 Git refs 稳定性这一交付环境技术债务外，没有未解决的产品阻断问题。I1/V0.2 正式关闭；不自动启动萨赫勒扩库。
