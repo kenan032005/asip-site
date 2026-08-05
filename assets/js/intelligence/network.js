@@ -236,5 +236,7 @@
     document.getElementById("entitySearch").addEventListener("input", function (event) { const term = event.target.value.trim().toLowerCase(); const result = api.store.entities.find(function (e) { return [e.entity_id, e.slug, e.name_zh, e.name_en].concat(e.aliases).join(" ").toLowerCase().indexOf(term) >= 0; }); if (term && result) setFocus(result.entity_id, true); });
     window.addEventListener("popstate", function () { const next = queryFocus(); focusId = next; selectedRelation = null; draw(focusId); });
   }
-  window.addEventListener("asip-intel-data-ready", function () { focusId = queryFocus(); bind(); draw(focusId); });
+  function initNetwork() { focusId = queryFocus(); bind(); draw(focusId); }
+  window.addEventListener("asip-intel-data-ready", initNetwork);
+  if (api.store.entities && api.store.entities.length) initNetwork();
 })();
