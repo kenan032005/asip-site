@@ -89,3 +89,38 @@
 .intel-disclaimer ul{margin:6px 0 0;padding-left:20px}
 .intel-stat-note{grid-column:1 / -1;background:#f6f8fa;border:1px dashed #c9d6e0;border-radius:8px;padding:10px 14px;color:#5d6f7e;font-size:12.5px;line-height:1.6}
 .intel-badges .intel-badge{margin-right:4px}
+
+
+/* I3-Prep-A: relation type visual encoding (colors + line styles) */
+.graph-edge.conflict{stroke:#b04848;stroke-width:2.4}
+.graph-edge.allegiance{stroke:#14507e;stroke-width:2}
+.graph-edge.presence{stroke:#37715c;stroke-dasharray:4 5;opacity:.72}
+.graph-edge.crossborder{stroke:#7d5a94;stroke-dasharray:2 4;opacity:.85}
+.graph-edge.cooperation{stroke:#2e6e8e;stroke-width:2}
+.graph-edge.support{stroke:#8a641c;stroke-dasharray:5 4;opacity:.82}
+.graph-edge.historical{stroke:#9aa4ad;stroke-dasharray:8 6;opacity:.6}
+.graph-edge.leadership{stroke:#0f3a5d;stroke-width:2.6}
+.graph-edge.temporal{stroke:#c9952b;stroke-dasharray:2 4;opacity:.82}
+.graph-edge.normal{stroke:#8ca0b1}
+.arrow-head.conflict{fill:#b04848}
+.arrow-head.allegiance{fill:#14507e}
+.arrow-head.leadership{fill:#0f3a5d}
+.arrow-head.presence,.arrow-head.crossborder,.arrow-head.cooperation,.arrow-head.support,.arrow-head.historical,.arrow-head.temporal{fill:#7d92a4}
+.graph-edge-label-wrap.conflict rect{fill:#fff5f5;stroke:#e9baba}
+.graph-edge-label-wrap.allegiance rect{fill:#eef5fb;stroke:#cfe0ed}
+.graph-edge-label-wrap.presence rect{fill:#edf7f2;stroke:#cce8d8}
+.graph-edge-label-wrap.crossborder rect{fill:#f6f1fa;stroke:#dfd3ea}
+.graph-edge-label-wrap.cooperation rect{fill:#eef6f9;stroke:#cfe0ec}
+.graph-edge-label-wrap.support rect{fill:#fff8e7;stroke:#f0dfb2}
+.graph-edge-label-wrap.historical rect,.graph-edge-label-wrap.temporal rect{fill:#f7fafc;stroke:#cad8e2}
+.legend-title{font-weight:700;color:#526779;margin-right:2px}
+.legend-line{display:inline-block;width:22px;height:0;border-top:2px solid #8ca0b1;margin-right:4px;vertical-align:3px}
+.legend-line.conflict{border-top:2.4px solid #b04848}
+.legend-line.allegiance{border-top:2px solid #14507e}
+.legend-line.presence{border-top:2px dashed #37715c}
+.legend-line.crossborder{border-top:2px dotted #7d5a94}
+.legend-line.cooperation{border-top:2px solid #2e6e8e}
+.legend-line.support{border-top:2px dashed #8a641c}
+.legend-line.historical{border-top:2px dashed #9aa4ad}
+.focus-archive{display:inline-block;margin-top:6px;font-size:12px;font-weight:700;color:#14507e;text-decoration:none}
+.focus-archive:hover{text-decoration:underline}
