@@ -30,17 +30,63 @@
   const RISK_LABELS = { extreme: "极高风险", high: "高风险", medium: "中风险", low: "低风险" };
   const CONFIDENCE_LABELS = { high: "高", medium_high: "中高", medium: "中", low: "低", disputed: "存在争议" };
   const SECTION_LABELS = {
-    overview: "概述", regional_belonging: "所属区域", risk_assessment: "风险等级与说明",
-    core_conflicts: "核心冲突体系", main_actors: "主要武装和政治实体", security_forces: "国家军队和安全力量",
+    lead: "导语",
+    overview: "安全形势概述", regional_belonging: "所属区域", risk_assessment: "风险等级与说明",
+    core_conflicts: "当前主要冲突体系", main_actors: "主要非国家武装和政治力量", security_forces: "核心国家安全力量",
     high_risk_areas: "主要高风险地区", cross_border_relations: "跨境安全关系", terrorism_risk: "恐怖主义风险",
-    insurgency_risk: "反政府武装风险", community_risk: "社区、部族或地方武装风险", crime_risk: "跨境犯罪风险",
-    security_events: "主要安全事件类型", current_trends: "当前趋势", impact: "与邻国安全形势的联系及影响",
-    relationships: "重要关系", events: "代表性事件", current_assessment: "当前状态",
+    insurgency_risk: "反政府武装或政治军事冲突", community_risk: "社区、族群、部族或地方武装风险", crime_risk: "跨境犯罪、走私或武器流动",
+    security_events: "主要安全事件类型", recent_changes: "最近三至五年的重要变化", current_trends: "当前趋势",
+    security_impact: "对人员、企业和项目安全的影响", impact: "与邻国安全形势的联系及影响",
+    relationships: "重要关系", related_entities: "相关实体", events: "代表性事件", current_assessment: "当前状态",
     formation_background: "成立背景", history: "历史沿革", structure: "组织结构", leadership: "领导层",
-    ideology_goals: "意识形态与目标", geography: "活动范围", force_estimates: "武装力量规模",
-    tactics: "主要行动方式", regional_impact: "区域影响", controversies_uncertainties: "争议与不确定性",
-    gaps: "资料缺口", biography: "生平", roles: "职务", influence: "影响", sources: "来源", notes: "备注"
+    components: "主要分支或组成力量", legal_status: "法律与政治地位", missions: "主要任务", operations: "参与的重要行动",
+    ideology_goals: "意识形态与政治目标", geography: "活动范围", force_estimates: "武装力量规模",
+    tactics: "主要行动方式", finance: "资金、补给与招募", adversaries: "主要敌对对象",
+    regional_impact: "对区域安全的影响", controversies_uncertainties: "争议与不确定性", challenges: "当前挑战",
+    core_assessment: "核心评估", name_and_translation: "名称与译名",
+    gaps: "资料缺口与不确定性", biography: "生平", roles: "职务", influence: "影响", sources: "来源与注释", notes: "备注"
   };
+  // explicit in-text links, e.g. [[entity:actor-jas|博科圣地/JAS]] / [[country:country-nigeria|尼日利亚]] / [[region:region-lake-chad-basin|乍得湖盆地]] / [[relation:rel-jas-iswap-conflict|JAS—ISWAP 关系]]
+  function inlineLinks(text) {
+    return String(text).replace(/\[\[(entity|country|region|relation):([^|\]]+)\|([^\]]+)\]\]/g, function (m, kind, id, label) {
+      if (kind === "entity") { const e = store.byEntityId[id] || store.byEntitySlug[id]; if (e) return '<a href="' + esc(entityHref(e.entity_id)) + '">' + esc(label) + '</a>'; }
+      if (kind === "country") { const c = store.byCountryId[id]; if (c) return '<a href="' + esc(countryHref(c.country_id)) + '">' + esc(label) + '</a>'; }
+      if (kind === "region") { const rg = store.byRegionId[id]; if (rg) return '<a href="' + esc(ROOT + "region/" + encodeURIComponent(rg.slug) + "/") + '">' + esc(label) + '</a>'; }
+      if (kind === "relation") { const r = store.byRelId[id]; if (r) return '<a href="' + esc(relationHref(r.relationship_id)) + '">' + esc(label) + '</a>'; }
+      return esc(label);
+    });
+  }
+  function renderBody(v) {
+    if (v == null || v === "") return "";
+    if (Array.isArray(v)) return '<ul class="intel-bullets">' + v.map(function (x) { return '<li>' + inlineLinks(esc(x)) + '</li>'; }).join("") + '</ul>';
+    if (typeof v === "string") return '<p>' + inlineLinks(esc(v)) + '</p>';
+    let html = "";
+    if (v.p) html += v.p.map(function (x) { return '<p>' + inlineLinks(esc(x)) + '</p>'; }).join("");
+    if (v.list) html += '<ul class="intel-bullets">' + v.list.map(function (x) { return '<li>' + inlineLinks(esc(x)) + '</li>'; }).join("") + '</ul>';
+    if (v.table) {
+      html += '<div class="intel-table-wrap"><table class="intel-table"><thead><tr>' + v.table.headers.map(function (x) { return '<th>' + esc(x) + '</th>'; }).join("") + '</tr></thead><tbody>' + v.table.rows.map(function (row) { return '<tr>' + row.map(function (x) { return '<td>' + inlineLinks(esc(x)) + '</td>'; }).join("") + '</tr>'; }).join("") + '</tbody></table></div>';
+      if (v.table_note) html += '<p class="intel-table-note">' + inlineLinks(esc(v.table_note)) + '</p>';
+    }
+    if (v.timeline) {
+      html += '<div class="intel-inline-timeline">' + v.timeline.map(function (x) { return '<div class="tl-item"><div class="tl-date">' + esc(x.date) + '</div><div class="tl-body"><h3>' + esc(x.event_title) + '</h3><p>' + esc(x.event_description || "") + '</p></div></div>'; }).join("") + '</div>';
+      if (v.timeline_note) html += '<p class="intel-table-note">' + inlineLinks(esc(v.timeline_note)) + '</p>';
+    }
+    return html;
+  }
+  function renderSections(container, sections) {
+    const keys = Object.keys(SECTION_LABELS);
+    const items = keys.filter(function (k) { return sections[k] != null && !(Array.isArray(sections[k]) && !sections[k].length) && sections[k] !== ""; });
+    let html = "";
+    const toc = [];
+    items.forEach(function (k) {
+      const v = sections[k];
+      if (k === "lead") { html += '<div class="profile-lead">' + (Array.isArray(v) ? v.map(function (x) { return '<p>' + inlineLinks(esc(x)) + '</p>'; }).join("") : '<p>' + inlineLinks(esc(v)) + '</p>') + '</div>'; return; }
+      toc.push('<a href="#sec-' + esc(k) + '">' + esc(SECTION_LABELS[k]) + '</a>');
+      html += '<section class="profile-section" id="sec-' + esc(k) + '"><h2>' + esc(SECTION_LABELS[k]) + '</h2>' + renderBody(v) + '</section>';
+    });
+    if (toc.length >= 4) html = '<nav class="intel-toc" aria-label="目录"><span class="intel-toc-title">本页目录</span>' + toc.join("") + '</nav>' + html;
+    const el = document.querySelector(container); if (el) el.innerHTML = html;
+  }
   const store = { regions: [], countries: [], entities: [], relationships: [], sources: [], evidence: [], relationProfiles: {}, relationTimelines: {}, forceEstimates: {}, externalLinks: {}, entityProfiles: {}, countryProfiles: {}, aliases: {}, byEntityId: {}, byEntitySlug: {}, byRelId: {}, byCountryId: {}, byRegionId: {}, metrics: null, audit: [] };
 
   function esc(v) { return String(v == null ? "" : v).replace(/[&<>"']/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]; }); }
@@ -139,15 +185,6 @@
     const g = document.querySelector("#relationList"); if (g) g.innerHTML = rows;
   }
   function initSources() { const g = document.querySelector("#sourceGrid"); if (g) g.innerHTML = store.sources.map(function (s) { return '<a target="_blank" rel="noopener noreferrer" class="intel-source-grid-item" href="' + esc(s.url) + '"><b>' + esc(s.publisher) + '</b><span>' + esc(s.title) + '</span><span class="intel-rel-meta">' + esc(s.reliability) + ' · 发布 ' + esc(s.published_at || "未标注") + ' · 访问 ' + esc(s.accessed_at || "—") + '</span></a>'; }).join(""); }
-  function renderSections(container, sections) {
-    const keys = Object.keys(SECTION_LABELS);
-    const html = keys.filter(function (k) { return sections[k] != null && !(Array.isArray(sections[k]) && !sections[k].length) && sections[k] !== ""; }).map(function (k) {
-      const v = sections[k];
-      const body = Array.isArray(v) ? '<ul>' + v.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '<p>' + esc(v) + '</p>';
-      return '<section class="profile-section" id="sec-' + esc(k) + '"><h2>' + esc(SECTION_LABELS[k]) + '</h2>' + body + '</section>';
-    }).join("");
-    const el = document.querySelector(container); if (el) el.innerHTML = html;
-  }
   function initRegion() {
     const slug = document.body.getAttribute("data-region-slug");
     const region = store.regions.find(function (r) { return r.slug === slug || r.region_id === slug; });
@@ -250,9 +287,11 @@
     let positions = {};
     let zoom = 1, drawToken = 0, lastFit = -1;
     const filters = { region: "", country: "", type: "", imp: { L1: true, L2: true, L3: true } };
-    const RINGS = { inner: 158, middle: 248, outer: 338 };
+    const RINGS = { inner: 175, middle: 265, outer: 345 };
     const RING_ORDER = ["inner", "middle", "outer"];
     const MIN = 96;
+    const RING_PHASE = { inner: 0, middle: Math.PI / 6, outer: Math.PI / 3 };
+    const MAX_RADIUS = 350;
     function ringFor(rel) { if (rel.display_ring && RINGS[rel.display_ring] != null) return rel.display_ring; if (["affiliated_with", "constituent_of", "operates_in", "member_of_force", "pledged_allegiance_to"].indexOf(rel.relationship_type) >= 0) return "inner"; if (["hostile_to", "historically_associated_with", "allied_with", "cooperates_with", "fought_against", "competes_with"].indexOf(rel.relationship_type) >= 0) return "middle"; return "outer"; }
     function typeName(e) { return e.primary_type || e.entity_type; }
     function visible(e) { return filters.imp[e.importance_level || "L3"] !== false && (!filters.type || typeName(e) === filters.type) && (!filters.region || (e.region_ids || []).indexOf(filters.region) >= 0 || (e.entity_id === "actor-jnim" && filters.region === "region-central-sahel")) && (!filters.country || (e.country_ids || []).indexOf(filters.country) >= 0); }
@@ -261,30 +300,66 @@
     function layout(center, visibleEntities, rels) {
       const cx = 450, cy = 315, narrow = document.getElementById("graphWrap") ? document.getElementById("graphWrap").clientWidth < 560 : false;
       const min = narrow ? 80 : MIN;
+      const yk = 0.9;
       const next = {}; next[center.entity_id] = { x: cx, y: cy };
       const byRing = {};
       rels.forEach(function (r) { const o = store.byEntityId[r.source_entity_id === center.entity_id ? r.target_entity_id : r.source_entity_id]; if (!o || !visible(o)) return; const ring = ringFor(r); (byRing[ring] = byRing[ring] || []); if (!byRing[ring].some(function (x) { return x.entity_id === o.entity_id; })) byRing[ring].push(o); });
-      RING_ORDER.forEach(function (ring) {
+      RING_ORDER.forEach(function (ring, ringIndex) {
         const items = (byRing[ring] || []).slice();
         let radius = RINGS[ring];
-        if (items.length > 1) { let need = radius; for (let i = 0; i < 6; i++) { if (need * Math.PI / (items.length - 1) >= min) break; need = min * (items.length - 1) / Math.PI; } radius = Math.max(radius, need + 10); }
-        const start = -Math.PI / 2 - Math.PI * 0.55;
-        const spread = Math.min(Math.PI * 1.15, Math.max(Math.PI * 0.42, items.length * 0.3));
+        // auto-expand radius so same-ring nodes keep the min spacing on a full circle
+        if (items.length > 1) {
+          for (let i = 0; i < 8; i++) {
+            if (items.length <= 2 || (2 * radius * Math.PI / items.length) >= min) break;
+            radius = Math.min(MAX_RADIUS, radius + 26);
+          }
+        }
+        // full-circle uniform spread with per-ring phase to avoid collinear rays
+        const start = -Math.PI / 2 + RING_PHASE[ring];
+        const spread = 2 * Math.PI;
         items.forEach(function (e, i) {
-          const off = { organization: 0, armed_group: 0, terrorist_group: 0, insurgent_group: 0, state_security_force: Math.PI * 0.08, regional_force: Math.PI * 0.16, person: Math.PI * 0.11, country: Math.PI * 0.22, international_network: Math.PI * 0.28 }[typeName(e)] || 0;
-          const angle = items.length === 1 ? start + Math.PI * 0.55 : start + off + spread * i / (items.length - 1);
+          const off = { organization: 0, armed_group: 0, terrorist_group: 0, insurgent_group: 0, state_security_force: Math.PI * 0.05, regional_force: Math.PI * 0.1, person: Math.PI * 0.07, country: Math.PI * 0.14, international_network: Math.PI * 0.18 }[typeName(e)] || 0;
+          const angle = items.length === 1 ? start + Math.PI : start + off + spread * i / items.length;
           const px = positions[e.entity_id];
-          const target = { x: cx + Math.cos(angle) * radius, y: cy + Math.sin(angle) * radius * 0.92 };
+          const target = { x: cx + Math.cos(angle) * radius, y: cy + Math.sin(angle) * radius * yk };
           next[e.entity_id] = (px && Math.hypot(px.x - target.x, px.y - target.y) < 200) ? { x: px.x * 0.3 + target.x * 0.7, y: px.y * 0.3 + target.y * 0.7 } : target;
         });
       });
       visibleEntities.forEach(function (e) { if (!next[e.entity_id]) next[e.entity_id] = { x: cx, y: cy }; });
       const ids = Object.keys(next);
-      for (let p = 0; p < 4; p++) ids.forEach(function (a) { if (a === center.entity_id) return; ids.forEach(function (b) { if (b === center.entity_id || b <= a) return; const pa = next[a], pb = next[b]; const dx = pa.x - pb.x, dy = pa.y - pb.y, d = Math.hypot(dx, dy); if (d < min && d > 0) { const push = (min - d) / 2, ux = dx / d, uy = dy / d; pa.x += ux * push; pa.y += uy * push; pb.x -= ux * push; pb.y -= uy * push; } }); });
+      function collide(passes) {
+        for (let p = 0; p < passes; p++) ids.forEach(function (a) { if (a === center.entity_id) return; ids.forEach(function (b) { if (b === center.entity_id || b <= a) return; const pa = next[a], pb = next[b]; const dx = pa.x - pb.x, dy = pa.y - pb.y, d = Math.hypot(dx, dy); if (d < min && d > 0) { const push = (min - d) / 2, ux = dx / d, uy = dy / d; pa.x += ux * push; pa.y += uy * push; pb.x -= ux * push; pb.y -= uy * push; } }); });
+      }
+      collide(3);
+      // balance: shift non-center nodes so the visual centroid returns near the center,
+      // preventing one-sided crowding even when min spacing is satisfied.
+      let sx = 0, sy = 0, n = 0;
+      ids.forEach(function (k) { if (k === center.entity_id) return; sx += next[k].x; sy += next[k].y; n++; });
+      if (n > 0) {
+        const mx2 = sx / n, my2 = sy / n;
+        const ddx = cx - mx2, ddy = cy - my2;
+        if (Math.hypot(ddx, ddy) > 14) {
+          ids.forEach(function (k) { if (k === center.entity_id) return; next[k].x += ddx * 0.6; next[k].y += ddy * 0.6; });
+          collide(2);
+        }
+      }
       positions = next;
     }
     function edgePoint(a, b, dist) { const dx = b.x - a.x, dy = b.y - a.y, l = Math.max(Math.hypot(dx, dy), 1); return { x: a.x + dx / l * dist, y: a.y + dy / l * dist }; }
-    function classFor(r) { if (r.relationship_type === "hostile_to" || r.relationship_type === "fought_against" || r.relationship_type === "competes_with") return "hostile"; if (r.temporal_sensitive || String(r.current_status || "").indexOf("historical") >= 0) return "historical"; if (["led_by", "founded_by", "member_of_force"].indexOf(r.relationship_type) >= 0) return "leadership"; if (r.relationship_type === "operates_in" || r.relationship_type === "cross_border_link") return "presence"; return "normal"; }
+    function relationGroup(r) {
+      const t = r.relationship_type;
+      if (t === "hostile_to" || t === "fought_against" || t === "competes_with") return "conflict";
+      if (t === "pledged_allegiance_to" || t === "affiliated_with" || t === "constituent_of" || t === "part_of_network") return "allegiance";
+      if (t === "operates_in" || t === "active_in_region") return "presence";
+      if (t === "cross_border_link") return "crossborder";
+      if (t === "cooperates_with" || t === "allied_with") return "cooperation";
+      if (t === "supported_by" || t === "supports" || t === "alleged_support") return "support";
+      if (t === "historically_associated_with") return "historical";
+      if (["led_by", "founded_by", "member_of_force", "deployed_in", "political_affiliation"].indexOf(t) >= 0) return "leadership";
+      if (r.temporal_sensitive || String(r.current_status || "").indexOf("historical") >= 0) return "temporal";
+      return "normal";
+    }
+    const EDGE_GROUPS = ["normal", "leadership", "presence", "historical", "temporal", "disputed", "conflict", "allegiance", "crossborder", "cooperation", "support"];
     function draw() {
       const center = store.byEntityId[focusId]; if (!center) return;
       const token = ++drawToken;
@@ -294,7 +369,7 @@
       layout(center, visibleEntities, rels);
       viewport.innerHTML = "";
       const defs = mk("defs");
-      ["normal", "leadership", "presence", "historical", "disputed", "hostile"].forEach(function (k) { const m = mk("marker", { id: "af-arrow-" + k, markerWidth: "9", markerHeight: "9", refX: "8", refY: "4.5", orient: "auto", markerUnits: "strokeWidth" }); m.appendChild(mk("path", { d: "M0,0 L9,4.5 L0,9 z", class: "arrow-head " + k })); defs.appendChild(m); });
+      EDGE_GROUPS.forEach(function (k) { const m = mk("marker", { id: "af-arrow-" + k, markerWidth: "9", markerHeight: "9", refX: "8", refY: "4.5", orient: "auto", markerUnits: "strokeWidth" }); m.appendChild(mk("path", { d: "M0,0 L9,4.5 L0,9 z", class: "arrow-head " + k })); defs.appendChild(m); });
       RING_ORDER.forEach(function (ring) { defs.appendChild(mk("circle", { cx: 450, cy: 315, r: RINGS[ring], class: "ring-guide ring-" + ring, "aria-hidden": "true" })); });
       viewport.appendChild(defs);
       const hitLayer = mk("g", { class: "graph-edge-hits" }); const edgeLayer = mk("g", { class: "graph-edges" }); const labelLayer = mk("g", { class: "graph-edge-labels" }); const nodeLayer = mk("g", { class: "graph-nodes" });
@@ -303,7 +378,7 @@
       rels.forEach(function (r) {
         const other = store.byEntityId[r.source_entity_id === focusId ? r.target_entity_id : r.source_entity_id];
         if (!other || !visible(other) || !positions[other.entity_id]) return;
-        const a = positions[focusId], b = positions[other.entity_id], kind = classFor(r);
+        const a = positions[focusId], b = positions[other.entity_id], kind = relationGroup(r);
         const d = center.primary_type === "country" || center.entity_type === "country" ? 44 : 52;
         const p1 = edgePoint(a, b, d), p2 = edgePoint(b, a, d);
         const g = mk("g", { class: "graph-edge-group " + kind });
@@ -313,11 +388,15 @@
         g.addEventListener("keydown", function (ev) { if (ev.key === "Enter" || ev.key === " ") g.dispatchEvent(new MouseEvent("click", { bubbles: true })); });
         hitLayer.appendChild(g);
         if (showLabels) {
-          const mx = (p1.x + p2.x) / 2, my = (p1.y + p2.y) / 2, dx = p2.x - p1.x, dy = p2.y - p1.y, l = Math.max(Math.hypot(dx, dy), 1);
-          const wrap = mk("g", { class: "graph-edge-label-wrap " + kind, transform: "translate(" + (mx - dy / l * 12) + "," + (my + dx / l * 12) + ")", "pointer-events": "none" });
-          const text = relLabel(r.relationship_type); const w = Math.max(42, text.length * 12 + 14);
+          // place the label at ~62% along the line (near the target node, away from the center
+          // ring) plus a perpendicular offset, so labels do not crowd around the center.
+          const t = 0.62;
+          const mx = p1.x + (p2.x - p1.x) * t, my = p1.y + (p2.y - p1.y) * t, dx = p2.x - p1.x, dy = p2.y - p1.y, l = Math.max(Math.hypot(dx, dy), 1);
+          const flip = dy > 0 ? 1 : -1;
+          const wrap = mk("g", { class: "graph-edge-label-wrap " + kind, transform: "translate(" + (mx - dy / l * 16 * flip) + "," + (my + dx / l * 16 * flip) + ")", "pointer-events": "none" });
+          const text = relLabel(r.relationship_type); const w = Math.max(44, text.length * 12 + 16);
           wrap.appendChild(mk("rect", { x: -w / 2, y: -12, width: w, height: 18, rx: 8 }));
-          const t = mk("text", { x: 0, y: 1, class: "graph-edge-label", "text-anchor": "middle" }); t.textContent = text; wrap.appendChild(t);
+          const t2 = mk("text", { x: 0, y: 1, class: "graph-edge-label", "text-anchor": "middle" }); t2.textContent = text; wrap.appendChild(t2);
           labelLayer.appendChild(wrap);
         }
       });
@@ -335,14 +414,25 @@
         const name = mk("text", { x: 0, y: isCenter ? 76 : 54, class: "node-label " + (isCenter ? "center-label" : ""), "text-anchor": "middle", "pointer-events": "none" }); const nt = title(e); name.textContent = nt.length > 16 ? nt.slice(0, 15) + "…" : nt; g.appendChild(name);
         if (isCenter) { const en = mk("text", { x: 0, y: 94, class: "node-sub-label", "text-anchor": "middle" }); en.textContent = e.name_en.length > 30 ? e.name_en.slice(0, 28) + "…" : e.name_en; g.appendChild(en); }
         const tag = mk("text", { x: 0, y: isCenter ? -48 : -38, class: "node-imp-tag", "text-anchor": "middle" }); tag.textContent = e.importance_level || "L3"; g.appendChild(tag);
-        g.addEventListener("click", function () { focusId = e.entity_id; const u = new URL(window.location.href); u.searchParams.set("focus", focusId); window.history.pushState({ focus: focusId }, "", u); draw(); if (relInfo) relInfo.innerHTML = '<h2>关系详情</h2><p class="muted">点击关系线查看双方、类型、时间与来源。</p>'; });
+        g.addEventListener("click", function (ev) {
+          // center focus node: go to its detail page (country page for countries,
+          // entity page otherwise); peripheral nodes still switch the focus.
+          if (isCenter) { window.location.href = entityHref(e.entity_id); return; }
+          focusId = e.entity_id; const u = new URL(window.location.href); u.searchParams.set("focus", focusId); window.history.pushState({ focus: focusId }, "", u); draw(); if (relInfo) relInfo.innerHTML = '<h2>关系详情</h2><p class="muted">点击关系线查看双方、类型、时间与来源。</p>';
+        });
         nodeLayer.appendChild(g);
       });
       viewport.appendChild(hitLayer); viewport.appendChild(edgeLayer); viewport.appendChild(labelLayer); viewport.appendChild(nodeLayer);
       const hint = document.getElementById("graphHint");
-      if (hint) hint.textContent = visibleEntities.length + " 个节点 · " + rels.length + " 条直接关系 · 内圈结构与地理 · 中圈组织与力量 · 外圈人物 · 宣誓效忠（pledged_allegiance_to）为独立关系语义";
+      if (hint) hint.textContent = visibleEntities.length + " 个节点 · " + rels.length + " 条直接关系 · 内圈结构与地理 · 中圈组织与力量 · 外圈人物 · 点击中心节点进入详细档案页";
       const stats = document.getElementById("importanceStats");
       if (stats) { const cnt = {}; visibleEntities.forEach(function (e) { const l = e.importance_level || "L3"; cnt[l] = (cnt[l] || 0) + 1; }); stats.textContent = "可见 " + visibleEntities.length + " · L1 " + (cnt.L1 || 0) + " · L2 " + (cnt.L2 || 0) + " · L3 " + (cnt.L3 || 0); }
+      // focus entry points: header link + right card + focus name/id refresh
+      const fn = document.getElementById("focusName"); if (fn) fn.textContent = title(center);
+      const fi = document.getElementById("focusId"); if (fi) fi.textContent = center.entity_id;
+      const fl = document.getElementById("focusLink"); if (fl) { fl.setAttribute("href", entityHref(center.entity_id)); fl.textContent = (center.entity_type === "country" || center.primary_type === "country") ? "进入国家页" : "查看档案"; }
+      const ni = document.getElementById("nodeInfo");
+      if (ni) ni.innerHTML = '<h2>当前焦点</h2><p class="intel-title-en">' + esc(center.name_en) + '</p><div class="intel-badges">' + typeBadge(center) + importanceBadge(center) + '</div><p class="intel-rel-meta">' + esc(center.entity_id) + (center.freshness_status ? ' · ' + freshnessBadge(center.freshness_status) : '') + '</p><p class="muted">' + esc(center.short_description || "") + '</p><a class="intel-button sm" href="' + esc(entityHref(center.entity_id)) + '">' + ((center.entity_type === "country" || center.primary_type === "country") ? "进入国家详细页 →" : "查看详细档案 →") + '</a><p class="ib-note">外围节点点击可切换中心。</p>';
       const wrap = document.getElementById("graphWrap");
       if (wrap && wrap.clientWidth < 560 && visibleEntities.length !== lastFit) { lastFit = visibleEntities.length; zoom = Math.max(0.62, Math.min(1, (wrap.clientWidth - 60) / 700)); const zv = document.getElementById("zoomValue"); if (zv) zv.textContent = Math.round(zoom * 100) + "%"; }
       viewport.setAttribute("transform", "translate(0 0) scale(" + zoom + ")");
