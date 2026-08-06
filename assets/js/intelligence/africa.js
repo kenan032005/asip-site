@@ -30,17 +30,63 @@
   const RISK_LABELS = { extreme: "极高风险", high: "高风险", medium: "中风险", low: "低风险" };
   const CONFIDENCE_LABELS = { high: "高", medium_high: "中高", medium: "中", low: "低", disputed: "存在争议" };
   const SECTION_LABELS = {
-    overview: "概述", regional_belonging: "所属区域", risk_assessment: "风险等级与说明",
-    core_conflicts: "核心冲突体系", main_actors: "主要武装和政治实体", security_forces: "国家军队和安全力量",
+    lead: "导语",
+    overview: "安全形势概述", regional_belonging: "所属区域", risk_assessment: "风险等级与说明",
+    core_conflicts: "当前主要冲突体系", main_actors: "主要非国家武装和政治力量", security_forces: "核心国家安全力量",
     high_risk_areas: "主要高风险地区", cross_border_relations: "跨境安全关系", terrorism_risk: "恐怖主义风险",
-    insurgency_risk: "反政府武装风险", community_risk: "社区、部族或地方武装风险", crime_risk: "跨境犯罪风险",
-    security_events: "主要安全事件类型", current_trends: "当前趋势", impact: "与邻国安全形势的联系及影响",
-    relationships: "重要关系", events: "代表性事件", current_assessment: "当前状态",
+    insurgency_risk: "反政府武装或政治军事冲突", community_risk: "社区、族群、部族或地方武装风险", crime_risk: "跨境犯罪、走私或武器流动",
+    security_events: "主要安全事件类型", recent_changes: "最近三至五年的重要变化", current_trends: "当前趋势",
+    security_impact: "对人员、企业和项目安全的影响", impact: "与邻国安全形势的联系及影响",
+    relationships: "重要关系", related_entities: "相关实体", events: "代表性事件", current_assessment: "当前状态",
     formation_background: "成立背景", history: "历史沿革", structure: "组织结构", leadership: "领导层",
-    ideology_goals: "意识形态与目标", geography: "活动范围", force_estimates: "武装力量规模",
-    tactics: "主要行动方式", regional_impact: "区域影响", controversies_uncertainties: "争议与不确定性",
-    gaps: "资料缺口", biography: "生平", roles: "职务", influence: "影响", sources: "来源", notes: "备注"
+    components: "主要分支或组成力量", legal_status: "法律与政治地位", missions: "主要任务", operations: "参与的重要行动",
+    ideology_goals: "意识形态与政治目标", geography: "活动范围", force_estimates: "武装力量规模",
+    tactics: "主要行动方式", finance: "资金、补给与招募", adversaries: "主要敌对对象",
+    regional_impact: "对区域安全的影响", controversies_uncertainties: "争议与不确定性", challenges: "当前挑战",
+    core_assessment: "核心评估", name_and_translation: "名称与译名",
+    gaps: "资料缺口与不确定性", biography: "生平", roles: "职务", influence: "影响", sources: "来源与注释", notes: "备注"
   };
+  // explicit in-text links, e.g. [[entity:actor-jas|博科圣地/JAS]] / [[country:country-nigeria|尼日利亚]] / [[region:region-lake-chad-basin|乍得湖盆地]] / [[relation:rel-jas-iswap-conflict|JAS—ISWAP 关系]]
+  function inlineLinks(text) {
+    return String(text).replace(/\[\[(entity|country|region|relation):([^|\]]+)\|([^\]]+)\]\]/g, function (m, kind, id, label) {
+      if (kind === "entity") { const e = store.byEntityId[id] || store.byEntitySlug[id]; if (e) return '<a href="' + esc(entityHref(e.entity_id)) + '">' + esc(label) + '</a>'; }
+      if (kind === "country") { const c = store.byCountryId[id]; if (c) return '<a href="' + esc(countryHref(c.country_id)) + '">' + esc(label) + '</a>'; }
+      if (kind === "region") { const rg = store.byRegionId[id]; if (rg) return '<a href="' + esc(ROOT + "region/" + encodeURIComponent(rg.slug) + "/") + '">' + esc(label) + '</a>'; }
+      if (kind === "relation") { const r = store.byRelId[id]; if (r) return '<a href="' + esc(relationHref(r.relationship_id)) + '">' + esc(label) + '</a>'; }
+      return esc(label);
+    });
+  }
+  function renderBody(v) {
+    if (v == null || v === "") return "";
+    if (Array.isArray(v)) return '<ul class="intel-bullets">' + v.map(function (x) { return '<li>' + inlineLinks(esc(x)) + '</li>'; }).join("") + '</ul>';
+    if (typeof v === "string") return '<p>' + inlineLinks(esc(v)) + '</p>';
+    let html = "";
+    if (v.p) html += v.p.map(function (x) { return '<p>' + inlineLinks(esc(x)) + '</p>'; }).join("");
+    if (v.list) html += '<ul class="intel-bullets">' + v.list.map(function (x) { return '<li>' + inlineLinks(esc(x)) + '</li>'; }).join("") + '</ul>';
+    if (v.table) {
+      html += '<div class="intel-table-wrap"><table class="intel-table"><thead><tr>' + v.table.headers.map(function (x) { return '<th>' + esc(x) + '</th>'; }).join("") + '</tr></thead><tbody>' + v.table.rows.map(function (row) { return '<tr>' + row.map(function (x) { return '<td>' + inlineLinks(esc(x)) + '</td>'; }).join("") + '</tr>'; }).join("") + '</tbody></table></div>';
+      if (v.table_note) html += '<p class="intel-table-note">' + inlineLinks(esc(v.table_note)) + '</p>';
+    }
+    if (v.timeline) {
+      html += '<div class="intel-inline-timeline">' + v.timeline.map(function (x) { return '<div class="tl-item"><div class="tl-date">' + esc(x.date) + '</div><div class="tl-body"><h3>' + esc(x.event_title) + '</h3><p>' + esc(x.event_description || "") + '</p></div></div>'; }).join("") + '</div>';
+      if (v.timeline_note) html += '<p class="intel-table-note">' + inlineLinks(esc(v.timeline_note)) + '</p>';
+    }
+    return html;
+  }
+  function renderSections(container, sections) {
+    const keys = Object.keys(SECTION_LABELS);
+    const items = keys.filter(function (k) { return sections[k] != null && !(Array.isArray(sections[k]) && !sections[k].length) && sections[k] !== ""; });
+    let html = "";
+    const toc = [];
+    items.forEach(function (k) {
+      const v = sections[k];
+      if (k === "lead") { html += '<div class="profile-lead">' + (Array.isArray(v) ? v.map(function (x) { return '<p>' + inlineLinks(esc(x)) + '</p>'; }).join("") : '<p>' + inlineLinks(esc(v)) + '</p>') + '</div>'; return; }
+      toc.push('<a href="#sec-' + esc(k) + '">' + esc(SECTION_LABELS[k]) + '</a>');
+      html += '<section class="profile-section" id="sec-' + esc(k) + '"><h2>' + esc(SECTION_LABELS[k]) + '</h2>' + renderBody(v) + '</section>';
+    });
+    if (toc.length >= 4) html = '<nav class="intel-toc" aria-label="目录"><span class="intel-toc-title">本页目录</span>' + toc.join("") + '</nav>' + html;
+    const el = document.querySelector(container); if (el) el.innerHTML = html;
+  }
   const store = { regions: [], countries: [], entities: [], relationships: [], sources: [], evidence: [], relationProfiles: {}, relationTimelines: {}, forceEstimates: {}, externalLinks: {}, entityProfiles: {}, countryProfiles: {}, aliases: {}, byEntityId: {}, byEntitySlug: {}, byRelId: {}, byCountryId: {}, byRegionId: {}, metrics: null, audit: [] };
 
   function esc(v) { return String(v == null ? "" : v).replace(/[&<>"']/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]; }); }
@@ -139,15 +185,6 @@
     const g = document.querySelector("#relationList"); if (g) g.innerHTML = rows;
   }
   function initSources() { const g = document.querySelector("#sourceGrid"); if (g) g.innerHTML = store.sources.map(function (s) { return '<a target="_blank" rel="noopener noreferrer" class="intel-source-grid-item" href="' + esc(s.url) + '"><b>' + esc(s.publisher) + '</b><span>' + esc(s.title) + '</span><span class="intel-rel-meta">' + esc(s.reliability) + ' · 发布 ' + esc(s.published_at || "未标注") + ' · 访问 ' + esc(s.accessed_at || "—") + '</span></a>'; }).join(""); }
-  function renderSections(container, sections) {
-    const keys = Object.keys(SECTION_LABELS);
-    const html = keys.filter(function (k) { return sections[k] != null && !(Array.isArray(sections[k]) && !sections[k].length) && sections[k] !== ""; }).map(function (k) {
-      const v = sections[k];
-      const body = Array.isArray(v) ? '<ul>' + v.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '<p>' + esc(v) + '</p>';
-      return '<section class="profile-section" id="sec-' + esc(k) + '"><h2>' + esc(SECTION_LABELS[k]) + '</h2>' + body + '</section>';
-    }).join("");
-    const el = document.querySelector(container); if (el) el.innerHTML = html;
-  }
   function initRegion() {
     const slug = document.body.getAttribute("data-region-slug");
     const region = store.regions.find(function (r) { return r.slug === slug || r.region_id === slug; });
