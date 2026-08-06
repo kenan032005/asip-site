@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>日报详情 · 非洲地区社会安全信息平台</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<script>window.ASIP_BUILD_META = {"run_id": "20260802T084000+0800_084349", "pipeline_version": 2, "build_time": "2026-08-07T00:33:02.020135+08:00", "build_time_bj": "2026-08-07 00:33:02", "source_commit": ""};</script>
+</head>
+<body>
+<div id="topbar" class="topbar"></div>
+<div id="dbError" class="db-error" style="display:none;">
+  ⚠️ 数据未能成功加载。请刷新页面（Ctrl/Cmd + Shift + R）后重试。已加载的上一版数据会优先展示。
+</div>
+
+<div class="container" id="main"><div class="empty">加载中…</div></div>
+
+<footer class="site"></footer>
+
+<script src="assets/js/pipeline.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+renderHeader("reports.html");
+
+function listHtml(arr) {
+  if (!arr || !arr.length) return '<div class="muted">暂无内容。</div>';
+  return '<ul>' + arr.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + '</ul>';
+}
+function para(s) {
+  if (!s) return '<div class="muted">本节暂无内容。</div>';
+  return "<p style='margin:0 0 8px;'>" + esc(s) + "</p>";
+}
+
+function renderReport(cn, dc, rep) {
+  const s = rep.sections || {};
+  const title = rep.title || ("《" + cn + "社会安全信息日报》");
+  let html = `<p style="margin:0 0 10px;"><a href="reports.html">&larr; 返回日报列表</a> · <a href="country.html?country=${encodeURIComponent(cn)}">${esc(cn)}</a></p>`;
+  html += `<h1 style="font-size:21px;color:var(--brand);margin:0 0 4px;">${esc(title)}</h1>`;
+  html += `<div class="muted small" style="margin-bottom:14px;">生成时间（北京时间）：${esc(rep.generated_at_bj || "—")}　|　统计窗口：${esc(rep.window_text || "截至北京时间22:00前最近24小时")}</div>`;
+
+  // 一、今日风险结论
+  html += `<section class="report-sec"><h2>一、今日风险结论</h2>${listHtml(s.conclusion)}</section>`;
+  // 二、总体安全形势
+  const ov = s.overall || {};
+  html += `<section class="report-sec"><h2>二、总体安全形势</h2>${para(ov.text)}<div class="muted">较前一日：${esc(ov.trend_vs_prev || ov.trend || "暂无法判断")}</div></section>`;
+  // 三、重大事件
+  html += `<section class="report-sec"><h2>三、重大事件</h2>`;
+  if (s.major_events && s.major_events.length) {
+    html += s.major_events.map(function (e) {
+      return `<div class="panel" style="margin-bottom:10px;">
+        <div><b>时间：</b>${esc(e.time || "—")}　<b>地点：</b>${esc(e.location || "—")}</div>
+        <div style="margin-top:6px;"><b>事件经过：</b>${esc(e.process || "—")}</div>
+        <div><b>人员伤亡或影响：</b>${esc(e.impact || "—")}</div>
+        <div><b>当前进展：</b>${esc(e.progress || "—")}</div>
+        <div><b>来源：</b>${e.source_url ? `<a href="${esc(e.source_url)}" target="_blank" rel="noopener">${esc(e.source || "—")}</a>` : esc(e.source || "—")}${e.confidence ? "（" + esc(e.confidence) + "）" : ""}</div>
+        <div><b>对人员和运营的潜在影响：</b>${esc(e.potential_impact || "—")}</div>
+      </div>`;
+    }).join("");
+  } else { html += '<div class="muted">本节暂无重大事件。</div>'; }
+  html += `</section>`;
+  // 四~八 文字节
+  html += `<section class="report-sec"><h2>四、政治和政府动态</h2>${para(ov.politics || s.politics)}</section>`;
+  html += `<section class="report-sec"><h2>五、武装冲突和恐怖主义动态</h2>${para(s.conflict_terror)}</section>`;
+  html += `<section class="report-sec"><h2>六、社会稳定和治安</h2>${para(s.stability)}</section>`;
+  html += `<section class="report-sec"><h2>七、交通、边境和基础设施</h2>${para(s.infrastructure)}</section>`;
+  html += `<section class="report-sec"><h2>八、涉及中国企业和中国公民的信息</h2>${para(s.china)}</section>`;
+  // 九、持续跟踪
+  html += `<section class="report-sec"><h2>九、持续跟踪事项</h2>${listHtml(s.followup)}</section>`;
+  // 十、未来趋势
+  const out = s.outlook || {};
+  html += `<section class="report-sec"><h2>十、未来24—72小时趋势判断</h2>
+    <div class="sub">最可能出现的风险</div>${listHtml(out.most_likely)}
+    <div class="sub">需重点关注的地区</div>${listHtml(out.areas)}
+    <div class="sub">可能影响人员出行或项目运营的事项</div>${listHtml(out.operations)}
+    <div class="sub">判断依据</div>${para(out.basis)}
+    <div class="sub">不确定性</div>${para(out.uncertainty)}
+  </section>`;
+  // 十一、建议
+  html += `<section class="report-sec"><h2>十一、风险防范建议</h2>${listHtml(s.advice)}</section>`;
+  // 十二、来源
+  html += `<section class="report-sec"><h2>十二、信息来源</h2>`;
+  if (s.sources && s.sources.length) {
+    html += '<ul>' + s.sources.map(function (x) {
+      return "<li>" + esc(x.name || "") + (x.title ? ("：《" + esc(x.title) + "》") : "") + (x.url ? ` <a href="${esc(x.url)}" target="_blank" rel="noopener">原文链接</a>` : "") + "</li>";
+    }).join("") + '</ul>';
+  } else { html += '<div class="muted">本节暂未列出具体来源。</div>'; }
+  html += `</section>`;
+
+  document.getElementById("main").innerHTML = html;
+}
+
+function init() {
+  const cn = getQS("country");
+  const date = getQS("date");
+  if (!cn) { document.getElementById("main").innerHTML = '<div class="empty">未指定国家。</div>'; return; }
+  API.getCached("countries").then(function (res) {
+    const countries = (res && res.countries) || [];
+    const c = countries.find(function (x) { return x.cn === cn; });
+    const dc = (c && c.daily_country) || cn;
+    if (!c) { document.getElementById("main").innerHTML = '<div class="empty">未找到国家：' + esc(cn) + '</div>'; return; }
+
+    function load(dateStr) {
+      API.get("reports/" + dc + "/" + dateStr).then(function (rep) {
+        renderReport(cn, dc, rep);
+      }).catch(function () {
+        document.getElementById("main").innerHTML = '<div class="empty">暂未生成《' + esc(cn) + '社会安全信息日报》。请于北京时间 22:00 后查看，或前往 <a href="reports.html">日报列表</a>。</div>';
+      });
+    }
+
+    if (date) { load(date); return; }
+    // 无日期：取最新一期
+    API.get("reports/" + dc + "/index").then(function (idx) {
+      if (idx && idx.reports && idx.reports.length) { load(idx.reports[0].date); }
+      else { document.getElementById("main").innerHTML = '<div class="empty">《' + esc(cn) + '社会安全信息日报》暂未生成。</div>'; }
+    }).catch(function () {
+      document.getElementById("main").innerHTML = '<div class="empty">《' + esc(cn) + '社会安全信息日报》暂未生成。</div>';
+    });
+  }).catch(function () { showDbError(); });
+}
+init();
+</script>
+</body>
+</html>

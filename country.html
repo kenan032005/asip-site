@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>国家详情 · 非洲地区社会安全信息平台</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<script>window.ASIP_BUILD_META = {"run_id": "20260802T084000+0800_084349", "pipeline_version": 2, "build_time": "2026-08-07T00:33:02.020135+08:00", "build_time_bj": "2026-08-07 00:33:02", "source_commit": ""};</script>
+</head>
+<body>
+<div id="topbar" class="topbar"></div>
+<div id="dbError" class="db-error" style="display:none;">
+  ⚠️ 数据未能成功加载。请刷新页面（Ctrl/Cmd + Shift + R）后重试。已加载的上一版数据会优先展示。
+</div>
+
+<div class="container" id="main">
+  <div class="empty">加载中…</div>
+</div>
+
+<footer class="site"></footer>
+
+<script src="assets/js/pipeline.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+renderHeader("countries.html");
+
+function evItem(e) {
+  const risk = Number(e.country_risk_level) || Number(e.risk_level) || 0;
+  const url = "event.html?id=" + encodeURIComponent(e.event_id || e.id || "");
+  return `<a class="hp-ev" href="${url}">
+    <div class="hp-ev-head">
+      <span class="hp-ev-risk risk-${risk}">${RISK_NAME[risk] || "低风险"}</span>
+      <span class="hp-ev-title">${esc(e.title_cn || e.title_original)}</span>
+    </div>
+    <div class="hp-ev-meta">${esc(e.location || "")} · ${cardTime(e.published_time || e.event_time)} · ${esc(e.source_name || "—")}</div>
+    ${e.summary_cn ? `<div class="hp-ev-sum">${esc(e.summary_cn).slice(0, 160)}</div>` : ""}
+  </a>`;
+}
+
+function init() {
+  const cnRaw = getQS("country");
+  if (!cnRaw) { document.getElementById("main").innerHTML = '<div class="empty">未指定国家。</div>'; return; }
+
+  // 当前统计/事件列表只使用当前公开事件（Public 公开层，已强制 isCurrentPublicEvent 过滤）；
+  // 绝不使用 Legacy events.json 全量按 country 过滤的方式。
+  Promise.all([
+    API.getCached("countries"), API.getCached("risk-levels"),
+    loadCurrentPublishedEvents(), API.getCached("sources"), API.getCached("status")
+  ]).then(function (res) {
+    const countries = (res[0] && res[0].countries) || [], risk = res[1] || {}, cur = res[2] || [], sources = res[3] || {}, status = res[4] || {};
+    const c = countries.find(function (x) {
+      return x.cn === cnRaw || (x.en && x.en.toLowerCase() === String(cnRaw).toLowerCase()) || x.daily_country === cnRaw;
+    });
+    if (!c) { document.getElementById("main").innerHTML = '<div class="empty">未找到国家：' + esc(cnRaw) + '</div>'; return; }
+    const cn = c.cn;
+    const lvl = c.risk_level;
+    const levels = risk.levels || {};
+    const col = (levels[String(lvl)] && levels[String(lvl)].color) || "#888";
+
+    const evC = cur.filter(function (e) { return (e.country || e.country_cn) === cn || e.country === (c.daily_country || ""); });
+    const ev24 = evC.filter(function (e) { const h = (Date.now() - new Date(fmtTimeBJ(e.published_time || e.event_time || "").replace(/-/g,"/")).getTime())/3600000; return h >= 0 && h <= 24; });
+    const ev7 = evC.filter(function (e) { const h = (Date.now() - new Date(fmtTimeBJ(e.published_time || e.event_time || "").replace(/-/g,"/")).getTime())/3600000; return h >= 0 && h <= 168; });
+    const china = evC.filter(function (e) { return e.china_related || e.involves_china; });
+    const locations = Array.from(new Set(evC.map(function (e) { return e.location; }).filter(Boolean)));
+
+    // 7天按类型统计
+    const byType = {};
+    ev7.forEach(function (e) { byType[e.event_type] = (byType[e.event_type] || 0) + 1; });
+    const trendRows = Object.keys(byType).map(function (k) { return `<tr><td>${esc(k)}</td><td>${byType[k]}</td></tr>`; }).join("")
+      || '<tr><td colspan="2" class="muted">近7天暂无事件。</td></tr>';
+
+    // 该国信息源
+    let srcHtml = "";
+    if (sources.local_by_country && sources.local_by_country[cn]) {
+      srcHtml = sources.local_by_country[cn].map(function (s) {
+        return `<li><a href="${esc(s.url || "#")}" target="_blank" rel="noopener">${esc(s.name)}</a> <span class="muted">（${esc(s.lang || "")}）</span></li>`;
+      }).join("");
+    } else { srcHtml = '<li class="muted">暂无专门配置，可参考国际通讯社、泛非媒体及官方渠道。</li>'; }
+
+    // 国别日报
+    let reportHtml = "";
+    if (c.has_daily) {
+      const dc = c.daily_country;
+      reportHtml = `<div id="countryReports" class="empty-sm">日报加载中…</div>`;
+      API.get("reports/" + dc + "/index").then(function (idx) {
+        const host = document.getElementById("countryReports");
+        if (idx && idx.reports && idx.reports.length) {
+          host.innerHTML = '<div class="report-links">' + idx.reports.slice(0, 8).map(function (r) {
+            return `<a class="btn sm" href="report.html?country=${encodeURIComponent(cn)}&date=${encodeURIComponent(r.date)}">${esc(r.date)}</a>`;
+          }).join(" ") + ` <a class="btn sm ghost" href="reports.html?country=${encodeURIComponent(cn)}">全部</a></div>`;
+        } else {
+          host.innerHTML = '<div class="empty-sm">该国暂未生成日报。可前往 <a href="reports.html">日报</a> 查看。</div>';
+        }
+      }).catch(function () {
+        document.getElementById("countryReports").innerHTML = '<div class="empty-sm">该国暂未设置独立日报，请查看最新事件。</div>';
+      });
+    } else {
+      reportHtml = '<div class="empty-sm">该国暂未设置独立日报，请查看最新事件。</div>';
+    }
+
+    document.getElementById("main").innerHTML = `
+      <h1 style="font-size:22px;color:var(--brand);margin:0 0 4px;">${esc(c.cn)} <span class="muted" style="font-size:14px;font-weight:400;">${esc(c.en || "")}</span></h1>
+      <div style="margin-bottom:14px;"><span class="badge risk-${lvl}" style="font-size:13px;">${RISK_NAME[lvl]}</span> <span class="muted">${esc(c.region || "")}</span></div>
+
+      <div class="cr-info">
+        <div class="kv"><b>中文名称</b><span>${esc(c.cn)}</span></div>
+        <div class="kv"><b>英文名称</b><span>${esc(c.en || "")}</span></div>
+        <div class="kv"><b>首都</b><span>${esc(c.capital || "—")}</span></div>
+        <div class="kv"><b>所属区域</b><span>${esc(c.region || "—")}</span></div>
+        <div class="kv"><b>当前基准风险等级</b><span>${riskBadge(lvl)}</span></div>
+        <div class="kv"><b>风险等级依据</b><span class="small">${esc(status.risk_basis || risk.basis || "—")}</span></div>
+        <div class="kv"><b>最后更新</b><span>${fmtDateTimeBJ(status.last_update_bj || status.generated_at_bj)}</span></div>
+      </div>
+
+      <section class="hp-block"><h2>二、当前安全形势摘要</h2>
+        <div id="sitSummary">${ev24.length ? ev24.slice(0,3).map(function(e){return "<p style='margin:0 0 8px;'>"+esc(e.title_cn||e.title_original)+"</p>";}).join("") : '<div class="empty-sm">当前暂无以该国为对象的形势摘要。请查看下方最新事件。</div>'}</div>
+      </section>
+
+      <section class="hp-block"><h2>三、最近24小时重要事件</h2>
+        <div class="hp-evlist">${ev24.length ? ev24.map(evItem).join("") : '<div class="empty-sm">近24小时暂无通过发布政策的有效动态。</div>'}</div>
+      </section>
+
+      <section class="hp-block"><h2>四、最近7天事件趋势</h2>
+        <div class="tbl-wrap"><table class="rep-tbl"><thead><tr><th>事件类型</th><th>数量</th></tr></thead><tbody>${trendRows}</tbody></table></div>
+      </section>
+
+      <section class="hp-block"><h2>五、重点风险地区</h2>
+        <div>${locations.length ? locations.map(function (l) { return `<span class="tag">${esc(l)}</span>`; }).join(" ") : '<span class="muted">暂无公开行政区级重点风险地区标注。</span>'}</div>
+        <p class="muted small" style="margin-top:8px;">仅使用公开的省/州/市或行政区名称，不展示敏感项目精确坐标。</p>
+      </section>
+
+      <section class="hp-block"><h2>六、涉中国企业和公民信息</h2>
+        <div class="hp-evlist">${china.length ? china.map(evItem).join("") : '<div class="empty-sm">过去24小时未发现经可靠来源证实的涉中国企业或中国公民重大社会安全事件。</div>'}</div>
+      </section>
+
+      <section class="hp-block"><h2>七、国别日报</h2>${reportHtml}</section>
+
+      <section class="hp-block"><h2>八、该国主要信息来源</h2>
+        <ul style="margin:0;padding-left:20px;line-height:1.9;">${srcHtml}</ul>
+      </section>
+    `;
+  }).catch(function () { showDbError(); });
+}
+init();
+</script>
+</body>
+</html>
