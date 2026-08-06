@@ -49,8 +49,17 @@ def validate():
     if len(sources) < 25: fail(f"sources < 25: {len(sources)}")
     if len(regions) < 7: fail(f"regions < 7: {len(regions)}")
     if len(countries) < 12: fail(f"countries < 12: {len(countries)}")
+    # I2-B: no country duplicates in entities.json (countries.json is canonical)
+    overlap = set(eids) & set(cids)
+    if overlap: fail(f"country objects duplicated in entities.json: {sorted(overlap)}")
+    # I2-B: relation type registry
+    rtypes = read("relation_types.json").get("relation_types", [])
+    type_ids = {t["relation_type"] for t in rtypes}
+    if len(type_ids) < 20: fail(f"relation_types.json incomplete: {len(type_ids)}")
     for e in entities:
         if e["importance_level"] not in ("L1", "L2", "L3"): fail(f"bad importance on {e['entity_id']}")
+        if e.get("freshness_status") not in ("current", "aging", "stale", "historical", "unknown"):
+            fail(f"bad freshness on {e['entity_id']}")
         for rid in e.get("region_ids", []):
             if rid not in rids: fail(f"bad region ref {rid} on {e['entity_id']}")
         for cid in e.get("country_ids", []):
@@ -62,10 +71,16 @@ def validate():
         valid_ends = set(eids) | set(cids)
         if r["source_entity_id"] not in valid_ends or r["target_entity_id"] not in valid_ends: fail(f"bad entity ref on {r['relationship_id']}")
         if r["display_ring"] not in ("inner", "middle", "outer"): fail(f"bad ring on {r['relationship_id']}")
+        if r["relationship_type"] not in type_ids:
+            fail(f"relationship_type not in registry: {r['relationship_type']} on {r['relationship_id']}")
+        if r.get("freshness_status") not in ("current", "aging", "stale", "historical", "unknown"):
+            fail(f"bad freshness on {r['relationship_id']}")
         for sid in r.get("source_refs", []):
             if sid not in sids: fail(f"bad source ref on {r['relationship_id']}")
     for c in countries:
         if c["risk_level"] not in ("extreme", "high", "medium", "low"): fail(f"bad risk on {c['country_id']}")
+        if c.get("freshness_status") not in ("current", "aging", "stale", "historical", "unknown"):
+            fail(f"bad freshness on {c['country_id']}")
         for rid in c.get("region_ids", []):
             if rid not in rids: fail(f"bad region ref {rid} on {c['country_id']}")
         for sid in c.get("source_ids", []):
@@ -91,7 +106,12 @@ def validate():
             if "wikipedia.org" not in w["url"]: fail(f"bad wikipedia url {w['url']}")
     for ev in evidence:
         if ev["source_id"] not in sids: fail(f"bad source ref in evidence {ev['evidence_id']}")
-    print(f"  africa data OK: entities={len(entities)} relations={len(rels)} regions={len(regions)} countries={len(countries)} sources={len(sources)} evidence={len(evidence)} profiles={len(profiles)}")
+        # I2-B: generated evidence must not be marked verified
+        if ev.get("evidence_origin", "").startswith("generated_") and ev.get("verification_status") == "verified":
+            fail(f"generated evidence marked verified: {ev['evidence_id']}")
+        if ev.get("verification_status") == "verified" and not ev.get("source_locator"):
+            fail(f"verified evidence missing locator: {ev['evidence_id']}")
+    print(f"  africa data OK: entities={len(entities)} relations={len(rels)} regions={len(regions)} countries={len(countries)} sources={len(sources)} evidence={len(evidence)} profiles={len(profiles)} relation_types={len(type_ids)}")
 
 def build(dist_root):
     validate()

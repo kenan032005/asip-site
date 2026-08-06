@@ -17,9 +17,9 @@
     international_network: "跨国组织体系/国际网络", organization: "组织"
   };
   const REL_LABELS = {
-    affiliated_with: "关联/效忠", pledged_allegiance_to: "公开效忠", constituent_of: "组成关系",
+    affiliated_with: "存在关联", pledged_allegiance_to: "宣誓效忠于", constituent_of: "组成关系",
     split_from: "分裂自", merged_from: "合并自", led_by: "领导", founded_by: "创始人",
-    operates_in: "活动/存在于", active_in_region: "活跃于区域", allied_with: "同盟",
+    operates_in: "活动于", active_in_region: "活跃于区域", allied_with: "同盟",
     cooperates_with: "合作", supported_by: "获得支持", supports: "支持", hostile_to: "敌对",
     competes_with: "竞争", fought_against: "交战", historically_associated_with: "历史关联",
     deployed_in: "部署于", member_of_force: "部队成员", political_affiliation: "政治归属",
@@ -41,11 +41,42 @@
     tactics: "主要行动方式", regional_impact: "区域影响", controversies_uncertainties: "争议与不确定性",
     gaps: "资料缺口", biography: "生平", roles: "职务", influence: "影响", sources: "来源", notes: "备注"
   };
-  const store = { regions: [], countries: [], entities: [], relationships: [], sources: [], evidence: [], relationProfiles: {}, relationTimelines: {}, forceEstimates: {}, externalLinks: {}, entityProfiles: {}, countryProfiles: {}, aliases: {}, byEntityId: {}, byEntitySlug: {}, byRelId: {}, byCountryId: {}, byRegionId: {} };
+  const store = { regions: [], countries: [], entities: [], relationships: [], sources: [], evidence: [], relationProfiles: {}, relationTimelines: {}, forceEstimates: {}, externalLinks: {}, entityProfiles: {}, countryProfiles: {}, aliases: {}, byEntityId: {}, byEntitySlug: {}, byRelId: {}, byCountryId: {}, byRegionId: {}, metrics: null, audit: [] };
 
   function esc(v) { return String(v == null ? "" : v).replace(/[&<>"']/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]; }); }
   function dataUrl(n) { return DATA + n; }
-  function loadJson(n) { return fetch(dataUrl(n)).then(function (r) { if (!r.ok) throw new Error("load failed: " + n); return r.json(); }); }
+  let loadController = null;
+  function beginLoad() {
+    if (loadController) loadController.abort();   // cancel the previous page's in-flight load
+    loadController = new AbortController();
+    return loadController.signal;
+  }
+  function loadJson(n, signal) {
+    return fetch(dataUrl(n), signal ? { signal: signal } : undefined).then(function (r) { if (!r.ok) throw new Error("load failed: " + n); return r.json(); });
+  }
+  const VERIFY_LABELS = { verified: "已核验", partially_verified: "部分核验", pending_review: "待复核", disputed: "存在争议", unsupported: "无来源支持" };
+  const FRESH_LABELS = { current: "当前", aging: "趋旧", stale: "过时", historical: "历史资料", unknown: "时效不明" };
+  function verifyBadge(s) { const l = VERIFY_LABELS[s] || s; return '<span class="intel-badge v-' + esc(s || "unknown") + '">' + esc(l) + '</span>'; }
+  function freshnessBadge(s) { const l = FRESH_LABELS[s] || s; return '<span class="intel-badge f-' + esc(s || "unknown") + '">' + esc(l) + '</span>'; }
+  function freshnessNote(obj) {
+    if (!obj) return "";
+    const f = obj.freshness_status;
+    if (f === "stale" || f === "aging") {
+      const asof = obj.claim_valid_as_of || obj.current_status_verified_at || "较早年份";
+      return '<p class="profile-standfirst"><span class="profile-standfirst-label">时效提示</span><span>当前状态尚未获得近期公开资料确认；以下内容依据截至 ' + esc(asof) + ' 年的公开资料，freshness=' + esc(f) + '。</span></p>';
+    }
+    if (f === "historical") return '<p class="profile-standfirst"><span class="profile-standfirst-label">历史资料</span><span>该记录为历史资料，不代表当前状态。</span></p>';
+    return "";
+  }
+  function dateRow(obj) {
+    if (!obj) return "";
+    let out = "";
+    if (obj.record_reviewed_at) out += '<div class="ib-row"><dt>数据记录检查</dt><dd>' + esc(obj.record_reviewed_at) + '</dd></div>';
+    if (obj.current_status_verified_at) out += '<div class="ib-row"><dt>当前状态核验</dt><dd>' + esc(obj.current_status_verified_at) + '</dd></div>';
+    if (obj.claim_valid_as_of) out += '<div class="ib-row"><dt>事实有效截至</dt><dd>' + esc(obj.claim_valid_as_of) + '</dd></div>';
+    if (obj.freshness_status) out += '<div class="ib-row"><dt>时效状态</dt><dd>' + freshnessBadge(obj.freshness_status) + '</dd></div>';
+    return out;
+  }
   function acronymOf(e) { return e.acronym && String(e.acronym).trim() ? String(e.acronym).trim() : ""; }
   function title(e) { const a = acronymOf(e); return a ? e.name_zh + "（" + a + "）" : e.name_zh; }
   function typeLabel(t) { return TYPE_LABELS[t] || t; }
@@ -55,7 +86,14 @@
   function confLabel(c) { return CONFIDENCE_LABELS[c] || c || "未说明"; }
   function ringLabel(r) { return RING_LABELS[r] || r; }
   function period(rel) { const s = rel.time_start || rel.start_year; const e = rel.time_end || rel.end_year; if (!s && !e) return "未说明"; if (s && e) return s + "—" + e; return s ? s + "—至今" : "截至 " + e; }
-  function entityHref(id) { const e = store.byEntityId[id]; return e ? ROOT + "entity/" + encodeURIComponent(e.slug) + "/" : ROOT; }
+  function entityHref(id) {
+    const e = store.byEntityId[id]; if (!e) return ROOT;
+    if (e.entity_type === "country" || e.primary_type === "country") {
+      const c = store.byCountryId[id] || store.byCountryId[e.country_ids && e.country_ids[0]];
+      if (c) return ROOT + "country/" + encodeURIComponent(c.slug) + "/";
+    }
+    return ROOT + "entity/" + encodeURIComponent(e.slug) + "/";
+  }
   function countryHref(id) { const c = store.byCountryId[id]; return c ? ROOT + "country/" + encodeURIComponent(c.slug) + "/" : ROOT; }
   function regionHref(id) { const r = store.byRegionId[id]; return r ? ROOT + "region/" + encodeURIComponent(r.slug) + "/" : ROOT; }
   function relationHref(id) { const r = store.byRelId[id]; return r ? ROOT + "relation/" + encodeURIComponent(r.slug || r.relationship_id) + "/" : ROOT; }
@@ -85,6 +123,10 @@
     const statRegion = document.querySelector("#statRegion"); if (statRegion) statRegion.textContent = store.regions.length;
     const statEvidence = document.querySelector("#statEvidence"); if (statEvidence) statEvidence.textContent = store.evidence.length;
     const statSource = document.querySelector("#statSource"); if (statSource) statSource.textContent = store.sources.length;
+    const statVerified = document.querySelector("#statVerified"); if (statVerified) statVerified.textContent = store.metrics ? store.metrics.evidence_by_status.verified : "—";
+    const statFull = document.querySelector("#statFull"); if (statFull) statFull.textContent = store.metrics ? store.metrics.encyclopedia_full_count : "—";
+    const statAudit = document.querySelector("#statAudit"); if (statAudit) statAudit.textContent = store.audit.length;
+    const metricNote = document.querySelector("#metricNote"); if (metricNote && store.metrics) metricNote.textContent = "统计口径：区域 " + store.metrics.region_count + " · 国家 " + store.metrics.country_count + " · 非国家实体 " + store.metrics.non_country_entity_count + " · 知识对象 " + store.metrics.unique_knowledge_object_count + " · 关系 " + store.metrics.relationship_count + " · 来源 " + store.metrics.source_count + " · 证据 " + store.metrics.evidence_record_count + "（已核验 " + store.metrics.evidence_by_status.verified + " / 部分核验 " + store.metrics.evidence_by_status.partially_verified + " / 待复核 " + store.metrics.evidence_by_status.pending_review + "）· 路由 " + store.metrics.route_count;
   }
   function initRegions() { const g = document.querySelector("#allRegions"); if (g) g.innerHTML = store.regions.map(regionCard).join(""); }
   function initCountries() { const g = document.querySelector("#allCountries"); if (g) g.innerHTML = store.countries.map(countryCard).join(""); const f = document.querySelector("#countryRiskNote"); if (f) f.innerHTML = '<p class="profile-standfirst"><span class="profile-standfirst-label">风险等级说明</span><span>国家风险等级（极高/高/中/低）为平台基于公开来源的安全分析视图，与实体重要程度（L1/L2/L3）及事实可信度相互独立。</span></p>'; }
@@ -96,7 +138,7 @@
     }).join("");
     const g = document.querySelector("#relationList"); if (g) g.innerHTML = rows;
   }
-  function initSources() { const g = document.querySelector("#sourceGrid"); if (g) g.innerHTML = store.sources.map(function (s) { return '<a target="_blank" rel="noopener noreferrer" class="intel-source-grid-item" href="' + esc(s.url) + '"><b>' + esc(s.publisher) + '</b><span>' + esc(s.title) + '</span><span class="intel-rel-meta">' + esc(s.reliability) + ' · ' + esc(s.published_at) + '</span></a>'; }).join(""); }
+  function initSources() { const g = document.querySelector("#sourceGrid"); if (g) g.innerHTML = store.sources.map(function (s) { return '<a target="_blank" rel="noopener noreferrer" class="intel-source-grid-item" href="' + esc(s.url) + '"><b>' + esc(s.publisher) + '</b><span>' + esc(s.title) + '</span><span class="intel-rel-meta">' + esc(s.reliability) + ' · 发布 ' + esc(s.published_at || "未标注") + ' · 访问 ' + esc(s.accessed_at || "—") + '</span></a>'; }).join(""); }
   function renderSections(container, sections) {
     const keys = Object.keys(SECTION_LABELS);
     const html = keys.filter(function (k) { return sections[k] != null && !(Array.isArray(sections[k]) && !sections[k].length) && sections[k] !== ""; }).map(function (k) {
@@ -128,12 +170,12 @@
     if (!country) { const el = document.querySelector("#intelError"); if (el) { el.hidden = false; el.textContent = "国家不存在：" + slug; } return; }
     const profile = store.countryProfiles[country.country_id] || { sections: {} };
     document.title = country.name_zh + " · ASIP非洲安全情报知识库";
-    const h = document.querySelector("#countryHeading"); if (h) h.innerHTML = '<div class="intel-heading-code">' + esc(country.iso_alpha3 || country.country_id) + '</div><h1>' + esc(country.name_zh) + '</h1><p class="intel-title-en">' + esc(country.name_en) + '</p><div class="intel-badges">' + riskBadge(country) + '<span class="intel-badge status">最后核验 ' + esc(country.last_verified_at) + '</span></div>';
+    const h = document.querySelector("#countryHeading"); if (h) h.innerHTML = '<div class="intel-heading-code">' + esc(country.iso_alpha3 || country.country_id) + '</div><h1>' + esc(country.name_zh) + '</h1><p class="intel-title-en">' + esc(country.name_en) + '</p><div class="intel-badges">' + riskBadge(country) + freshnessBadge(country.freshness_status) + '<span class="intel-badge status">数据检查 ' + esc(country.record_reviewed_at || country.last_verified_at) + '</span></div>' + freshnessNote(country);
     renderSections("#countryBody", profile.sections);
     const actors = document.querySelector("#countryActors"); if (actors) actors.innerHTML = country.main_actors.map(function (id) { const e = store.byEntityId[id]; return e ? entityCard(e) : ""; }).join("");
     const rels = store.relationships.filter(function (r) { return country.main_actors.indexOf(r.source_entity_id) >= 0 || country.main_actors.indexOf(r.target_entity_id) >= 0 || r.source_entity_id === country.country_id || r.target_entity_id === country.country_id; });
-    const rl = document.querySelector("#countryRelations"); if (rl) rl.innerHTML = rels.slice(0, 12).map(function (r) { return '<div class="intel-rel-row"><div class="intel-rel-main">' + entityLink(r.source_entity_id, title(store.byEntityId[r.source_entity_id])) + ' <b>↔</b> ' + entityLink(r.target_entity_id, title(store.byEntityId[r.target_entity_id])) + ' <span class="intel-rel-kind">' + esc(relLabel(r.relationship_type)) + '</span></div></div>'; }).join("");
-    const ev = document.querySelector("#countryEvidence"); if (ev) ev.innerHTML = '<div class="relationship-count">相关证据记录 ' + evidenceCountFor(country.main_actors.concat([country.country_id])) + ' 条</div><p class="muted">证据通过 source_id 关联来源，见各关系与实体档案。</p>';
+    const rl = document.querySelector("#countryRelations"); if (rl) rl.innerHTML = rels.slice(0, 12).map(function (r) { return '<div class="intel-rel-row"><div class="intel-rel-main">' + entityLink(r.source_entity_id, title(store.byEntityId[r.source_entity_id])) + ' <b>↔</b> ' + entityLink(r.target_entity_id, title(store.byEntityId[r.target_entity_id])) + ' <span class="intel-rel-kind">' + esc(relLabel(r.relationship_type)) + '</span>' + freshnessBadge(r.freshness_status) + '</div></div>'; }).join("");
+    const ev = document.querySelector("#countryEvidence"); if (ev) ev.innerHTML = '<div class="relationship-count">相关证据记录 ' + evidenceCountFor(country.main_actors.concat([country.country_id])) + ' 条</div>' + '<div class="ib-row"><dt>当前状态核验</dt><dd>' + esc(country.current_status_verified_at || "未单独核验") + '</dd></div><div class="ib-row"><dt>事实有效截至</dt><dd>' + esc(country.claim_valid_as_of || "未说明") + '</dd></div><p class="muted">证据通过 source_id 关联来源；' + esc(country.freshness_status === "stale" || country.freshness_status === "aging" ? "本页当前状态依赖较早来源，须谨慎解读。" : "关键事实见各关系与实体档案。") + '</p>';
   }
   function initEntity() {
     const slug = document.body.getAttribute("data-entity-slug");
@@ -141,12 +183,13 @@
     if (!entity) { const el = document.querySelector("#intelError"); if (el) { el.hidden = false; el.textContent = "实体不存在：" + slug; } return; }
     const profile = store.entityProfiles[entity.entity_id] || { sections: {} };
     document.title = title(entity) + " · ASIP非洲安全情报知识库";
-    const h = document.querySelector("#entityHeading"); if (h) h.innerHTML = '<div class="intel-heading-code">' + esc(entity.entity_id) + '</div><h1>' + esc(title(entity)) + '</h1><p class="intel-title-en">' + esc(entity.name_en) + '</p><div class="intel-badges">' + typeBadge(entity) + importanceBadge(entity) + '<span class="intel-badge status">' + esc(entity.current_status) + '</span></div>';
+    const h = document.querySelector("#entityHeading"); if (h) h.innerHTML = '<div class="intel-heading-code">' + esc(entity.entity_id) + '</div><h1>' + esc(title(entity)) + '</h1><p class="intel-title-en">' + esc(entity.name_en) + '</p><div class="intel-badges">' + typeBadge(entity) + importanceBadge(entity) + '<span class="intel-badge status">' + esc(entity.current_status) + '</span>' + freshnessBadge(entity.freshness_status) + '</div>' + freshnessNote(entity);
     renderSections("#entityBody", profile.sections);
     const ib = document.querySelector("#entityInfobox"); if (ib) {
       let rows = "";
       function row(l, v) { if (v != null && v !== "" && !(Array.isArray(v) && !v.length)) rows += '<div class="ib-row"><dt>' + esc(l) + '</dt><dd>' + v + '</dd></div>'; }
-      row("重要程度", '<b>' + esc(impLabel(entity.importance_level)) + '</b>');
+      row("重要程度", '<b>' + esc(impLabel(entity.importance_level)) + '</b><p class="ib-note">平台内部重要程度，非政府或联合国认定等级。</p>');
+      row("档案深度", esc(profile.profile_depth || "basic"));
       row("实体类型", typeLabel(entity.primary_type || entity.entity_type));
       row("别名", entity.aliases.map(esc).join(" · "));
       row("历史名称", (entity.historical_names || []).map(esc).join(" · "));
@@ -156,7 +199,7 @@
       if (est && est.length) row("估计武装规模", '<b>' + est.map(function (x) { return esc(x.estimate_text) + "（" + esc(x.estimate_date) + "）"; }).join("；") + '</b>');
       const links = store.externalLinks[entity.entity_id];
       if (links && links.wikipedia && links.wikipedia.length) row("Wikipedia", links.wikipedia.map(function (l) { return '<a class="ext-link" target="_blank" rel="noopener noreferrer" href="' + esc(l.url) + '">' + esc(l.language + " · " + l.label) + ' ↗</a>'; }).join(" · "));
-      row("最后核验", entity.last_verified_at);
+      rows += dateRow(entity);
       ib.innerHTML = '<h2>结构化信息框</h2><dl>' + rows + '</dl>';
     }
     const rels = store.relationships.filter(function (r) { return r.source_entity_id === entity.entity_id || r.target_entity_id === entity.entity_id; });
@@ -172,7 +215,7 @@
     const timeline = store.relationTimelines[rel.relationship_id] || store.relationTimelines[rel.slug] || [];
     const s = store.byEntityId[rel.source_entity_id], t = store.byEntityId[rel.target_entity_id];
     document.title = relLabel(rel.relationship_type) + "：" + title(s) + "—" + title(t);
-    const h = document.querySelector("#relationHeading"); if (h) h.innerHTML = '<div class="intel-heading-code">' + esc(rel.relationship_id) + '</div><h1>' + esc(title(s)) + ' <span class="rel-arrow">↔</span> ' + esc(title(t)) + '</h1><p class="intel-title-en">' + esc(relLabel(rel.relationship_type)) + ' · ' + esc(ringLabel(rel.display_ring)) + '圈层 · ' + esc(rel.current_status) + '</p><div class="intel-badges">' + importanceBadge(s) + importanceBadge(t) + '</div>';
+    const h = document.querySelector("#relationHeading"); if (h) h.innerHTML = '<div class="intel-heading-code">' + esc(rel.relationship_id) + '</div><h1>' + esc(title(s)) + ' <span class="rel-arrow">↔</span> ' + esc(title(t)) + '</h1><p class="intel-title-en">' + esc(relLabel(rel.relationship_type)) + ' · ' + esc(ringLabel(rel.display_ring)) + '圈层 · ' + esc(rel.current_status) + '</p><div class="intel-badges">' + importanceBadge(s) + importanceBadge(t) + freshnessBadge(rel.freshness_status) + '</div>' + freshnessNote(rel);
     const ov = document.querySelector("#relationOverview"); if (ov) ov.innerHTML = '<p class="intel-lead">' + esc(profile ? profile.overview : rel.relation_summary) + '</p>';
     const body = document.querySelector("#relationBody"); if (body) {
       let html = "";
@@ -194,7 +237,7 @@
       body.innerHTML = html;
     }
     const tl = document.querySelector("#relationTimeline"); if (tl) tl.innerHTML = '<h2>关系历史时间轴</h2>' + (timeline.length ? '<div class="relation-timeline">' + timeline.map(function (x) { return '<div class="tl-item"><div class="tl-date">' + esc(x.date) + '</div><div class="tl-body"><h3>' + esc(x.event_title) + '</h3><p>' + esc(x.event_description) + '</p><p class="tl-impact"><b>对关系的影响：</b>' + esc(x.impact_on_relationship) + '</p><p class="tl-meta">可信度：' + esc(confLabel(x.confidence)) + ' · 来源：' + sourceList(x.source_ids) + '</p></div></div>'; }).join("") + '</div>' : '<p class="muted">暂无已核验时间轴条目。</p>');
-    const src = document.querySelector("#relationSources"); if (src) src.innerHTML = '<h2>来源与证据</h2><div class="intel-source-list">' + sourceList(rel.source_refs) + '</div><p class="muted">证据 ' + evidenceCountFor([rel.relationship_id]) + ' 条，关键事实可追溯。</p>';
+    const src = document.querySelector("#relationSources"); if (src) src.innerHTML = '<h2>来源与证据</h2><div class="intel-source-list">' + sourceList(rel.source_refs) + '</div><p class="muted">证据 ' + evidenceCountFor([rel.relationship_id]) + ' 条，关键事实可追溯。</p>' + (rel.relationship_semantics_note ? '<p class="ib-note">' + esc(rel.relationship_semantics_note) + '</p>' : '');
     const gb = document.querySelector("#relationGraphBack"); if (gb) gb.setAttribute("href", networkHref(rel.source_entity_id));
   }
 
@@ -266,7 +309,7 @@
         const g = mk("g", { class: "graph-edge-group " + kind });
         g.appendChild(mk("line", { x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y, class: "graph-edge-hit " + kind }));
         g.appendChild(mk("line", { x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y, class: "graph-edge " + kind, "marker-end": "url(#af-arrow-" + kind + ")", "aria-label": relLabel(r.relationship_type) + "：" + title(other), tabindex: "0", role: "button" }));
-        g.addEventListener("click", function (ev) { ev.stopPropagation(); document.querySelectorAll(".graph-edge-group.selected").forEach(function (x) { x.classList.remove("selected"); }); g.classList.add("selected"); if (relInfo) relInfo.innerHTML = '<h2>关系详情</h2><div class="relation-pair">' + entityLink(r.source_entity_id, title(store.byEntityId[r.source_entity_id])) + ' <b>↔</b> ' + entityLink(r.target_entity_id, title(store.byEntityId[r.target_entity_id])) + '</div><p class="relation-label">' + esc(relLabel(r.relationship_type)) + ' · ' + esc(ringLabel(ringFor(r))) + '圈层</p><p>' + esc(r.relation_summary) + '</p><dl class="intel-detail-list"><dt>时间范围</dt><dd>' + esc(period(r)) + '</dd><dt>状态</dt><dd>' + esc(r.current_status) + '</dd><dt>可信度</dt><dd>' + esc(confLabel(r.confidence)) + '</dd><dt>来源</dt><dd>' + sourceList(r.source_refs) + '</dd></dl><a class="intel-button sm" href="' + esc(relationHref(r.relationship_id)) + '">查看完整关系沿革 →</a>'; });
+        g.addEventListener("click", function (ev) { ev.stopPropagation(); document.querySelectorAll(".graph-edge-group.selected").forEach(function (x) { x.classList.remove("selected"); }); g.classList.add("selected"); if (relInfo) relInfo.innerHTML = '<h2>关系详情</h2><div class="relation-pair">' + entityLink(r.source_entity_id, title(store.byEntityId[r.source_entity_id])) + ' <b>↔</b> ' + entityLink(r.target_entity_id, title(store.byEntityId[r.target_entity_id])) + '</div><p class="relation-label">' + esc(relLabel(r.relationship_type)) + ' · ' + esc(ringLabel(ringFor(r))) + '圈层</p>' + (r.relationship_type === "pledged_allegiance_to" ? '<p class="ib-note">宣誓效忠（bay\'ah）为独立关系语义，不同于一般网络关联（affiliated_with）。</p>' : '') + '<p>' + esc(r.relation_summary) + '</p><dl class="intel-detail-list"><dt>时间范围</dt><dd>' + esc(period(r)) + '</dd><dt>状态</dt><dd>' + esc(r.current_status) + '</dd><dt>可信度</dt><dd>' + esc(confLabel(r.confidence)) + '</dd><dt>时效</dt><dd>' + freshnessBadge(r.freshness_status) + '</dd><dt>来源</dt><dd>' + sourceList(r.source_refs) + '</dd></dl><a class="intel-button sm" href="' + esc(relationHref(r.relationship_id)) + '">查看完整关系沿革 →</a>'; });
         g.addEventListener("keydown", function (ev) { if (ev.key === "Enter" || ev.key === " ") g.dispatchEvent(new MouseEvent("click", { bubbles: true })); });
         hitLayer.appendChild(g);
         if (showLabels) {
@@ -297,7 +340,7 @@
       });
       viewport.appendChild(hitLayer); viewport.appendChild(edgeLayer); viewport.appendChild(labelLayer); viewport.appendChild(nodeLayer);
       const hint = document.getElementById("graphHint");
-      if (hint) hint.textContent = visibleEntities.length + " 个节点 · " + rels.length + " 条直接关系 · 内圈结构与地理 · 中圈组织与力量 · 外圈人物";
+      if (hint) hint.textContent = visibleEntities.length + " 个节点 · " + rels.length + " 条直接关系 · 内圈结构与地理 · 中圈组织与力量 · 外圈人物 · 宣誓效忠（pledged_allegiance_to）为独立关系语义";
       const stats = document.getElementById("importanceStats");
       if (stats) { const cnt = {}; visibleEntities.forEach(function (e) { const l = e.importance_level || "L3"; cnt[l] = (cnt[l] || 0) + 1; }); stats.textContent = "可见 " + visibleEntities.length + " · L1 " + (cnt.L1 || 0) + " · L2 " + (cnt.L2 || 0) + " · L3 " + (cnt.L3 || 0); }
       const wrap = document.getElementById("graphWrap");
@@ -323,16 +366,20 @@
 
   window.ASIP_AFRICA = { store: store, title: title, typeLabel: typeLabel, relLabel: relLabel, impLabel: impLabel, riskLabel: riskLabel, confLabel: confLabel, entityHref: entityHref, countryHref: countryHref, regionHref: regionHref, relationHref: relationHref, networkHref: networkHref, entityLink: entityLink, sourceLink: sourceLink, esc: esc };
   renderTopbar(); renderFooter();
-  loadJson("regions.json").then(function (r) { store.regions = r.regions; r.regions.forEach(function (x) { store.byRegionId[x.region_id] = x; }); return loadJson("countries.json"); }).then(function (c) { store.countries = c.countries; c.countries.forEach(function (x) { store.byCountryId[x.country_id] = x; }); return loadJson("entities.json"); }).then(function (e) { store.entities = e.entities; e.entities.forEach(function (x) { store.byEntityId[x.entity_id] = x; store.byEntitySlug[x.slug] = x; }); return loadJson("relationships.json"); }).then(function (r) { store.relationships = r.relationships; r.relationships.forEach(function (x) { store.byRelId[x.relationship_id] = x; if (x.slug) store.byRelId[x.slug] = x; }); return Promise.all([loadJson("sources.json"), loadJson("evidence_records.json"), loadJson("relation_profiles.json"), loadJson("relation_timelines.json"), loadJson("force_estimates.json"), loadJson("external_links.json"), loadJson("entity_profiles.json"), loadJson("country_profiles.json")]); }).then(function (items) {
-    store.sources = items[0].sources; store.evidence = items[1].evidence; store.relationProfiles = items[2].profiles || {}; store.relationTimelines = items[3].timelines || {}; store.forceEstimates = items[4].estimates || {}; store.externalLinks = items[5].links || {}; store.entityProfiles = items[6].profiles || {}; store.countryProfiles = items[7].profiles || {};
+  const loadSignal = beginLoad();
+  loadJson("regions.json", loadSignal).then(function (r) { store.regions = r.regions; r.regions.forEach(function (x) { store.byRegionId[x.region_id] = x; }); return loadJson("countries.json", loadSignal); }).then(function (c) { store.countries = c.countries; c.countries.forEach(function (x) { store.byCountryId[x.country_id] = x; }); return loadJson("entities.json", loadSignal); }).then(function (e) { store.entities = e.entities; e.entities.forEach(function (x) { store.byEntityId[x.entity_id] = x; store.byEntitySlug[x.slug] = x; }); return loadJson("relationships.json", loadSignal); }).then(function (r) { store.relationships = r.relationships; r.relationships.forEach(function (x) { store.byRelId[x.relationship_id] = x; if (x.slug) store.byRelId[x.slug] = x; });     return Promise.all([loadJson("sources.json", loadSignal), loadJson("evidence_records.json", loadSignal), loadJson("relation_profiles.json", loadSignal), loadJson("relation_timelines.json", loadSignal), loadJson("force_estimates.json", loadSignal), loadJson("external_links.json", loadSignal), loadJson("entity_profiles.json", loadSignal), loadJson("country_profiles.json", loadSignal), loadJson("catalog_metrics.json", loadSignal), loadJson("audit_records.json", loadSignal)]); }).then(function (items) {
+    store.sources = items[0].sources; store.evidence = items[1].evidence; store.relationProfiles = items[2].profiles || {}; store.relationTimelines = items[3].timelines || {}; store.forceEstimates = items[4].estimates || {}; store.externalLinks = items[5].links || {}; store.entityProfiles = items[6].profiles || {}; store.countryProfiles = items[7].profiles || {}; store.metrics = items[8] || null; store.audit = (items[9] && items[9].records) || [];
     // merge countries into the unified entity table (one ID per entity)
     store.countries.forEach(function (c) {
       if (!store.byEntityId[c.country_id]) {
-        var ce = { entity_id: c.country_id, entity_type: "country", primary_type: "country", slug: c.slug, name_zh: c.name_zh, name_en: c.name_en, acronym: "", native_name: c.name_en, aliases: [], historical_names: [], importance_level: "L1", short_description: c.risk_level_reason || c.name_zh + " 国家入口", current_status: "monitored", region_ids: c.region_ids || [], country_ids: [c.country_id], source_refs: [], confidence: "high", temporal_sensitive: false, disputed: false, last_verified_at: c.last_verified_at };
+        var ce = { entity_id: c.country_id, entity_type: "country", primary_type: "country", slug: c.slug, name_zh: c.name_zh, name_en: c.name_en, acronym: "", native_name: c.name_en, aliases: [], historical_names: [], importance_level: "L1", short_description: c.risk_level_reason || c.name_zh + " 国家入口", current_status: "monitored", region_ids: c.region_ids || [], country_ids: [c.country_id], source_refs: [], confidence: "high", temporal_sensitive: false, disputed: false, last_verified_at: c.last_verified_at, record_reviewed_at: c.record_reviewed_at, current_status_verified_at: c.current_status_verified_at, claim_valid_as_of: c.claim_valid_as_of, freshness_status: c.freshness_status };
         store.entities.push(ce); store.byEntityId[ce.entity_id] = ce; store.byEntitySlug[ce.slug] = ce;
       }
     });
     const page = document.body.getAttribute("data-africa-page");
     if (page === "home") initHome(); if (page === "regions") initRegions(); if (page === "countries") initCountries(); if (page === "entities") initEntities(); if (page === "relations") initRelations(); if (page === "sources") initSources(); if (page === "region") initRegion(); if (page === "country") initCountry(); if (page === "entity") initEntity(); if (page === "relation") initRelation(); if (page === "network") initNetwork();
-  }).catch(function (error) { const el = document.querySelector("#intelError"); if (el) { el.hidden = false; el.textContent = "非洲知识库数据加载失败：" + error.message; } });
+  }).catch(function (error) {
+    if (error && error.name === "AbortError") return; // navigation aborted a previous load; not a product error
+    const el = document.querySelector("#intelError"); if (el) { el.hidden = false; el.textContent = "非洲知识库数据加载失败：" + (error && error.message ? error.message : error); }
+  });
 })();
