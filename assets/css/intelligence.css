@@ -56,3 +56,18 @@
 .intel-rel-archive{color:#14507e;font-size:11px;font-weight:700;margin-left:6px}
 @media(max-width:850px){.relation-party-cards{grid-template-columns:1fr}.profile-toc ol{column-count:1}}
 @media(max-width:560px){.profile-toc ol{column-count:1}.importance-filter .filter-list{flex-direction:column;align-items:flex-start}}
+
+
+/* I1-B: wide transparent click targets, pointer layering and label avoidance. */
+.graph-edge-hit{stroke:rgba(20,80,126,0);stroke-width:16;cursor:pointer}
+.graph-edge{pointer-events:none}
+.graph-edge-group{cursor:pointer;outline:none}
+.graph-edge-group:focus .graph-edge{stroke:#c9952b;stroke-width:4}
+.graph-edge-group.selected .graph-edge{stroke:#c9952b;stroke-width:4;opacity:1}
+.graph-edge-group.selected .arrow-head{fill:#c9952b}
+.graph-edge-label-wrap{pointer-events:none}
+.node-label{pointer-events:none}
+.graph-edge-labels{pointer-events:none}
+.graph-nodes{pointer-events:none}
+.graph-nodes .graph-node{pointer-events:auto}
+@media(max-width:560px){.graph-edge-hit{stroke-width:14}}
