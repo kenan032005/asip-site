@@ -65,10 +65,14 @@ def main():
     # totals
     tot = sum(metrics["evidence_by_status"].values())
     check("evidence status sums to total", tot == len(evidence), f"{tot} vs {len(evidence)}")
-    check("evidence verified count honest (>=1, not inflated)",
-          0 < metrics["evidence_by_status"].get("verified", 0) <= 45)
-    check("generated evidence not all verified",
-          metrics["evidence_generated_count"] >= metrics["evidence_record_count"] * 0.5)
+    check("evidence verified count honest (>=1, <70% of total, not inflated)",
+          0 < metrics["evidence_by_status"].get("verified", 0) < metrics["evidence_record_count"] * 0.7)
+    # I3-B: manual-source-mapped evidence is now the majority; generated records
+    # must never be verified.
+    check("manual evidence is substantial (I3-B >=45)",
+          metrics["evidence_manual_count"] >= 45, str(metrics["evidence_manual_count"]))
+    check("no generated evidence verified",
+          metrics["evidence_by_status"].get("verified", 0) <= metrics["evidence_record_count"] - metrics["evidence_generated_count"])
     check("profile_depth counts sum to entities", sum(metrics["profile_depth_count"].values()) == len(entities))
     # I3-A: content deepening moves the distribution from "1 encyclopedia" to a
     # content-backed majority (>=12 full, <=10 basic). Honest = bounded by total.

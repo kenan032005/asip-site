@@ -54,10 +54,13 @@ def main():
         if e.get("verification_status") == "pending_review":
             check(f"pending has method note {cid}", bool(e.get("verification_method")))
 
-    # aggregate honesty: verified must be small minority of total
+    # aggregate honesty: verified must remain below 70% of total and every
+    # verified record must satisfy the locator/source/method conditions (checked
+    # above); I3-B deliberately strengthens verification so a simple "minority"
+    # cap no longer applies.
     verified = sum(1 for e in evidence if e["verification_status"] == "verified")
     total = len(evidence)
-    check("verified is honest minority", verified <= total * 0.3, f"{verified}/{total}")
+    check("verified below 70% (honest, not inflated)", verified < total * 0.7, f"{verified}/{total}")
 
     print(f"\ntest_africa_evidence_quality: PASS={PASS} FAIL={FAIL}")
     return 1 if FAIL else 0

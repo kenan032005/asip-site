@@ -62,8 +62,8 @@ def main():
     reviewed = [e for e in generated if e.get("record_reviewed_at") or e.get("review_note")]
     check(">=25 generated evidence explicitly reviewed (upgrade or keep pending)",
           len(reviewed) >= 25, str(len(reviewed)))
-    upgraded = [e for e in generated if e.get("verification_status") == "partially_verified" and e.get("verification_method") == "manual_review_2026_i3a"]
-    check("generated upgrades carry manual-review method", len(upgraded) >= 25, str(len(upgraded)))
+    upgraded = [e for e in generated if e.get("verification_status") == "partially_verified" and e.get("verification_method") in ("manual_review_2026_i3a", "manual_review_2026_i3b")]
+    check("generated upgrades carry manual-review method (i3a/i3b)", len(upgraded) >= 25, str(len(upgraded)))
 
     # deep countries & priority entities have at least one manual evidence
     deep_cids = ("country-nigeria", "country-libya", "country-south-sudan", "country-niger",
