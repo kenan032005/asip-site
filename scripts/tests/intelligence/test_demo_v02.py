@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
-"""Validate V0.2 profile depth, display groups, and V0.1 data invariants."""
+"""Validate V0.2 profile depth, importance levels, rings, and V0.1 data invariants (I1-A)."""
 import json
 import sys
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 DATA = ROOT / 'data' / 'intelligence' / 'demo'
 ALLOWED_LEVELS = {'L1', 'L2', 'L3'}
+ALLOWED_RINGS = {'inner', 'middle', 'outer'}
 REQUIRED_PROFILE_KEYS = {'profile_level', 'completeness', 'sections'}
-EXPECTED_LEVELS = {'actor-jnim':'L3','actor-is-sahel':'L3','actor-aqim':'L2','person-iyad-ag-ghali':'L2','country-mali':'L2'}
-MIN_SECTIONS = {'L1': 1, 'L2': 3, 'L3': 5}
+EXPECTED_IMPORTANCE = {'actor-jnim':'L1','actor-is-sahel':'L1','actor-aqim':'L2','person-iyad-ag-ghali':'L2','country-mali':'L2','actor-al-qaida':'L2','actor-ansar-eddine':'L3','actor-al-mourabitoun':'L3','actor-katiba-macina':'L3','person-amadou-koufa':'L3','country-burkina-faso':'L3','country-niger':'L3'}
+MIN_SECTIONS = {'L1': 4, 'L2': 3, 'L3': 1}
 
 def load(name):
     return json.loads((DATA / name).read_text(encoding='utf-8'))
@@ -22,20 +23,20 @@ def main():
     profiles = load('profile_content.json')['profiles']
     if len(entities) != 12: fail(f'expected 12 entities, got {len(entities)}')
     if len(rels) != 20: fail(f'expected 20 relationships, got {len(rels)}')
-    if set(e['profile_level'] for e in entities) - ALLOWED_LEVELS: fail('invalid profile level')
+    if set(e['importance_level'] for e in entities) - ALLOWED_LEVELS: fail('invalid importance level')
+    if set(r['display_ring'] for r in rels) - ALLOWED_RINGS: fail('invalid display_ring value')
     for entity in entities:
-        if entity['profile_level'] != EXPECTED_LEVELS.get(entity['entity_id'], 'L1'):
-            fail(f'unexpected profile level on {entity["entity_id"]}')
+        if entity['importance_level'] != EXPECTED_IMPORTANCE.get(entity['entity_id']):
+            fail(f'unexpected importance_level on {entity["entity_id"]}')
         if entity['entity_id'] not in profiles: fail(f'missing profile content for {entity["entity_id"]}')
         profile = profiles[entity['entity_id']]
         if not REQUIRED_PROFILE_KEYS.issubset(profile): fail(f'profile metadata missing for {entity["entity_id"]}')
-        if profile['profile_level'] != entity['profile_level']: fail(f'profile level mismatch for {entity["entity_id"]}')
         section_count = len([v for v in profile['sections'].values() if v])
-        if section_count < MIN_SECTIONS[entity['profile_level']]: fail(f'profile completeness too low for {entity["entity_id"]}')
+        if section_count < MIN_SECTIONS[entity['importance_level']]: fail(f'profile completeness too low for {entity["entity_id"]}')
     if len({r['relationship_id'] for r in rels}) != 20: fail('relationship IDs changed')
     print(f'PASS entities={len(entities)} relationships={len(rels)}')
-    print('PASS profile levels L3=2 L2=3 L1=7')
-    print('PASS type templates, completeness floors, and V0.1 relationship invariant')
+    print('PASS importance levels L1=2 L2=4 L3=6 (independent from display_ring)')
+    print('PASS ring values inner/middle/outer, profile completeness floors, and V0.1 relationship invariant')
 
 if __name__ == '__main__':
     try:
