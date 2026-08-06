@@ -67,7 +67,7 @@ def main():
         e["record_created_at"] = e.get("record_created_at") or "2026-08-06"
         e["record_updated_at"] = AUDIT_DATE
         e["record_reviewed_at"] = AUDIT_DATE
-        if e.get("freshness_reviewed_by") == "i3a":
+        if e.get("freshness_reviewed_by") in ("i3a", "i3b"):
             # I3-A reviewed current status with 2025-2026 sources; preserve its
             # claim_valid_as_of / freshness / current_status_verified_at values.
             pass
@@ -140,8 +140,11 @@ def main():
         c["record_updated_at"] = AUDIT_DATE
         c["record_reviewed_at"] = AUDIT_DATE
         c["claim_valid_as_of"] = sd or c.get("claim_valid_as_of")
-        # I3-A may have set freshness explicitly (deep countries); preserve it.
-        c["freshness_status"] = freshness_of(sd) if sd else c.get("freshness_status", "unknown")
+        # I3-A / I3-B may have set freshness explicitly (deep countries); preserve it.
+        if c.get("freshness_reviewed_by") in ("i3a", "i3b"):
+            pass
+        else:
+            c["freshness_status"] = freshness_of(sd) if sd else c.get("freshness_status", "unknown")
         if not c.get("current_status_verified_at"):
             c["current_status_verified_at"] = AUDIT_DATE if c["country_id"] in AUDITED_COUNTRY_IDS else None
     save("countries.json", countries)
@@ -302,13 +305,15 @@ def compute_metrics(entities, countries, regions, rels, sources, evidence,
     entity_sections = {}
     empty_sections = 0
     paras_all = []
+    ALLOWED_UNIFORM = {"sources", "notes", "regional_belonging"}
     for cid, prof in load("country_profiles.json")["profiles"].items():
         if prof.get("depth") == "deep":
             deep_countries += 1
         for k, v in prof.get("sections", {}).items():
             if not _text_len(v):
                 empty_sections += 1
-            paras_all.extend(_para_list(v))
+            if k not in ALLOWED_UNIFORM:
+                paras_all.extend(_para_list(v))
     for eid, prof in profiles.items():
         secs = prof.get("sections", {})
         entity_body_chars[eid] = sum(_text_len(v) for v in secs.values())
@@ -316,7 +321,8 @@ def compute_metrics(entities, countries, regions, rels, sources, evidence,
         for k, v in secs.items():
             if not _text_len(v):
                 empty_sections += 1
-            paras_all.extend(_para_list(v))
+            if k not in ALLOWED_UNIFORM:
+                paras_all.extend(_para_list(v))
     dup_count = Counter(paras_all)
     duplicated_paragraph_count = sum(1 for t, n in dup_count.items() if n > 1 and len(str(t)) >= 40)
     stale_claims = 0

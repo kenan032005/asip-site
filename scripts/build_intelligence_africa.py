@@ -150,7 +150,7 @@ def validate():
 
     # deep countries: >=2500 body chars, >=8 substantive sections, freshness fields
     deep = {cid: pr for cid, pr in cp.items() if pr.get("depth") == "deep"}
-    if len(deep) < 8: fail(f"deep countries < 8: {len(deep)}")
+    if len(deep) < 13: fail(f"deep countries < 13: {len(deep)}")
     for cid, pr in deep.items():
         secs = pr.get("sections", {})
         body = sum(_tl(v) for k, v in secs.items() if k != "lead")
@@ -176,6 +176,10 @@ def validate():
             e = next((x for x in entities if x["entity_id"] == eid), None)
             if e and not e.get("source_refs"):
                 fail(f"basic entry without sources: {eid}")
+    # I3-B: no basic entries remain (all content-bearing)
+    n_basic = sum(1 for pr in ep.values() if pr.get("profile_depth") == "basic")
+    if n_basic:
+        fail(f"basic entries must be eliminated (I3-B): {n_basic}")
     # no empty sections / placeholders / big duplicated paragraphs in profiles
     all_paras = []
     ALLOWED_UNIFORM = {"sources", "notes", "regional_belonging"}

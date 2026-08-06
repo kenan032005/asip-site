@@ -4,7 +4,7 @@
 import json
 from pathlib import Path
 
-ROOT = Path(r'C:/Users/kenan/WorkBuddy/recovery/asip-intelligence-v02-clean')
+ROOT = Path(__file__).resolve().parents[2]
 DEMO = ROOT / "data" / "intelligence" / "demo"
 OUT = ROOT / "data" / "intelligence" / "africa"
 
