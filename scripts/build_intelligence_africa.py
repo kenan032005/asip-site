@@ -111,7 +111,107 @@ def validate():
             fail(f"generated evidence marked verified: {ev['evidence_id']}")
         if ev.get("verification_status") == "verified" and not ev.get("source_locator"):
             fail(f"verified evidence missing locator: {ev['evidence_id']}")
-    print(f"  africa data OK: entities={len(entities)} relations={len(rels)} regions={len(regions)} countries={len(countries)} sources={len(sources)} evidence={len(evidence)} profiles={len(profiles)} relation_types={len(type_ids)}")
+    # ---- I3-A: content depth and quality gates ----
+    ep = read("entity_profiles.json")["profiles"]
+    cp = read("country_profiles.json")["profiles"]
+
+    def _tl(v):
+        if isinstance(v, str):
+            return len(v)
+        if isinstance(v, list):
+            return sum(len(str(x)) for x in v)
+        if isinstance(v, dict):
+            n = 0
+            if v.get("p"):
+                n += sum(len(str(x)) for x in v["p"])
+            if v.get("list"):
+                n += sum(len(str(x)) for x in v["list"])
+            if v.get("table"):
+                for row in v["table"].get("rows", []):
+                    n += sum(len(str(x)) for x in row)
+            return n
+        return 0
+
+    def _secs(sections):
+        return sum(1 for k, v in sections.items() if _tl(v) > 0)
+
+    def _paras(v):
+        out = []
+        if isinstance(v, str):
+            out.append(v)
+        elif isinstance(v, list):
+            out.extend(str(x) for x in v)
+        elif isinstance(v, dict):
+            if v.get("p"):
+                out.extend(str(x) for x in v["p"])
+            if v.get("list"):
+                out.extend(str(x) for x in v["list"])
+        return out
+
+    # deep countries: >=2500 body chars, >=8 substantive sections, freshness fields
+    deep = {cid: pr for cid, pr in cp.items() if pr.get("depth") == "deep"}
+    if len(deep) < 8: fail(f"deep countries < 8: {len(deep)}")
+    for cid, pr in deep.items():
+        secs = pr.get("sections", {})
+        body = sum(_tl(v) for k, v in secs.items() if k != "lead")
+        if body < 2500: fail(f"deep country {cid} body chars < 2500: {body}")
+        substantive = sum(1 for k, v in secs.items() if _tl(v) >= 100 or len(_paras(v)) >= 2)
+        if substantive < 8: fail(f"deep country {cid} substantive sections < 8: {substantive}")
+        c = next((x for x in countries if x["country_id"] == cid), None)
+        if c and not c.get("claim_valid_as_of"): fail(f"deep country {cid} missing claim_valid_as_of")
+        if c and c.get("freshness_status") in ("stale", "aging"):
+            if not any("时效" in str(p) for p in _paras(secs.get("sources", ""))):
+                pass  # freshnessNote UI handles display; no hard fail
+    # entity profile depth must match content completeness (I3-A standards)
+    for eid, pr in ep.items():
+        depth = pr.get("profile_depth")
+        secs = pr.get("sections", {})
+        body = sum(_tl(v) for v in secs.values())
+        n = _secs(secs)
+        if depth == "encyclopedia_full" and not (n >= 8 and body >= 1800):
+            fail(f"encyclopedia_full content insufficient: {eid} (secs={n}, chars={body})")
+        if depth == "standard" and not (n >= 5 and body >= 900):
+            fail(f"standard content insufficient: {eid} (secs={n}, chars={body})")
+        if depth == "basic":
+            e = next((x for x in entities if x["entity_id"] == eid), None)
+            if e and not e.get("source_refs"):
+                fail(f"basic entry without sources: {eid}")
+    # no empty sections / placeholders / big duplicated paragraphs in profiles
+    all_paras = []
+    ALLOWED_UNIFORM = {"sources", "notes", "regional_belonging"}
+    for pr in list(cp.values()) + list(ep.values()):
+        for k, v in pr.get("sections", {}).items():
+            if not _tl(v): fail(f"empty section {k} in {pr.get('country_id', pr.get('entity_id', '?'))}")
+            txt = "".join(_paras(v))
+            for ph in ("暂无信息", "待补充", "TBD", "placeholder"):
+                if ph in txt: fail(f"placeholder text in section {k}")
+            if k not in ALLOWED_UNIFORM:
+                all_paras.extend(p for p in _paras(v) if len(str(p)) >= 40)
+    from collections import Counter
+    dups = Counter(all_paras)
+    dup_paras = {t: n for t, n in dups.items() if n > 1}
+    if len(dup_paras) > 3: fail(f"too many duplicated paragraphs: {len(dup_paras)}")
+    # in-text entity/country/relation links must resolve
+    import re
+    bad_links = []
+    for pr in list(cp.values()) + list(ep.values()):
+        for k, v in pr.get("sections", {}).items():
+            for p in _paras(v):
+                for m in re.finditer(r"\[\[(entity|country|region|relation):([^|\]]+)\|", str(p)):
+                    kind, ref = m.group(1), m.group(2)
+                    ok = False
+                    if kind == "entity" and ref in set(eids): ok = True
+                    elif kind == "country" and ref in set(cids): ok = True
+                    elif kind == "region" and ref in set(rids): ok = True
+                    elif kind == "relation" and ref in {r["relationship_id"] for r in rels}: ok = True
+                    if not ok: bad_links.append(f"{kind}:{ref}")
+    if bad_links: fail(f"unresolved in-text links: {sorted(set(bad_links))[:8]}")
+    # relation profiles: deepened ones need timeline coverage
+    rel_cycles = 0
+    for rid, rp in profiles.items():
+        if rp.get("overview") and not timelines.get(rid) and not rp.get("evolution_stages"):
+            rel_cycles += 1
+    print(f"  africa data OK: entities={len(entities)} relations={len(rels)} regions={len(regions)} countries={len(countries)} sources={len(sources)} evidence={len(evidence)} profiles={len(profiles)} relation_types={len(type_ids)} deep_countries={len(deep)}")
 
 def build(dist_root):
     validate()

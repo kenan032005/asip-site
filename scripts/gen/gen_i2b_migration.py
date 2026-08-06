@@ -67,13 +67,18 @@ def main():
         e["record_created_at"] = e.get("record_created_at") or "2026-08-06"
         e["record_updated_at"] = AUDIT_DATE
         e["record_reviewed_at"] = AUDIT_DATE
-        e["claim_valid_as_of"] = sd or e.get("claim_valid_as_of")
-        e["freshness_status"] = freshness_of(sd)
-        e.setdefault("verification_status", "pending_review")
-        if e["entity_id"] in AUDITED_ENTITY_IDS:
-            e["current_status_verified_at"] = AUDIT_DATE
+        if e.get("freshness_reviewed_by") == "i3a":
+            # I3-A reviewed current status with 2025-2026 sources; preserve its
+            # claim_valid_as_of / freshness / current_status_verified_at values.
+            pass
         else:
-            e["current_status_verified_at"] = None
+            e["claim_valid_as_of"] = sd or e.get("claim_valid_as_of")
+            e["freshness_status"] = freshness_of(sd) if sd else e.get("freshness_status", "unknown")
+            e.setdefault("verification_status", "pending_review")
+            if e["entity_id"] in AUDITED_ENTITY_IDS:
+                e["current_status_verified_at"] = AUDIT_DATE
+            else:
+                e["current_status_verified_at"] = None
         kept.append(e)
     entities["entities"] = kept
     entities["note"] = ("I2-B: country-type objects removed; canonical country data "
@@ -90,23 +95,39 @@ def main():
             del profiles[eid]
             continue
         sections = p.get("sections", {})
+        n_sec, content = 0, 0
         if isinstance(sections, dict):
-            n_sec = len([k for k, v in sections.items() if str(v or "").strip()])
-            content = sum(len(str(v)) for v in sections.values())
-        else:
-            n_sec, content = 0, 0
-        if n_sec >= 12 and content >= 1200:
+            def _text_len(v):
+                if isinstance(v, str):
+                    return len(v)
+                if isinstance(v, list):
+                    return sum(len(str(x)) for x in v)
+                if isinstance(v, dict):
+                    n = 0
+                    if v.get("p"):
+                        n += sum(len(str(x)) for x in v["p"])
+                    if v.get("list"):
+                        n += sum(len(str(x)) for x in v["list"])
+                    if v.get("table"):
+                        for row in v["table"].get("rows", []):
+                            n += sum(len(str(x)) for x in row)
+                    return n
+                return 0
+            n_sec = sum(1 for k, v in sections.items() if _text_len(v) > 0)
+            content = sum(_text_len(v) for v in sections.values())
+        # I3-A standards: depth must follow actual content completeness.
+        if n_sec >= 8 and content >= 1800:
             depth = "encyclopedia_full"
-        elif n_sec >= 7 and content >= 250:
+        elif n_sec >= 5 and content >= 900:
             depth = "standard"
         else:
             depth = "basic"
         p["profile_depth"] = depth
         p["profile_level"] = depth  # repurpose polluted field (was importance value)
         grades[eid] = depth
-    eps["profile_depth_note"] = ("I2-B: profile_depth is graded from actual section "
-                                 "content (encyclopedia_full: >=12 sections & >=1200 chars; "
-                                 "standard: >=7 sections & >=250 chars; else basic).")
+    eps["profile_depth_note"] = ("I3-A: profile_depth is graded from actual section "
+                                 "content (encyclopedia_full: >=8 substantive sections & >=1800 chars; "
+                                 "standard: >=5 substantive sections & >=900 chars; else basic).")
     save("entity_profiles.json", eps)
     from collections import Counter
     print("profile_depth:", dict(Counter(grades.values())))
@@ -119,8 +140,10 @@ def main():
         c["record_updated_at"] = AUDIT_DATE
         c["record_reviewed_at"] = AUDIT_DATE
         c["claim_valid_as_of"] = sd or c.get("claim_valid_as_of")
-        c["freshness_status"] = freshness_of(sd)
-        c["current_status_verified_at"] = AUDIT_DATE if c["country_id"] in AUDITED_COUNTRY_IDS else None
+        # I3-A may have set freshness explicitly (deep countries); preserve it.
+        c["freshness_status"] = freshness_of(sd) if sd else c.get("freshness_status", "unknown")
+        if not c.get("current_status_verified_at"):
+            c["current_status_verified_at"] = AUDIT_DATE if c["country_id"] in AUDITED_COUNTRY_IDS else None
     save("countries.json", countries)
     print("countries:", len(countries["countries"]))
 
@@ -138,8 +161,9 @@ def main():
         r["record_updated_at"] = AUDIT_DATE
         r["record_reviewed_at"] = AUDIT_DATE
         r["claim_valid_as_of"] = sd or r.get("claim_valid_as_of")
-        r["freshness_status"] = freshness_of(sd)
-        r["current_status_verified_at"] = AUDIT_DATE if r["relationship_id"] in AUDITED_REL_IDS else None
+        r["freshness_status"] = freshness_of(sd) if sd else r.get("freshness_status", "unknown")
+        if not r.get("current_status_verified_at"):
+            r["current_status_verified_at"] = AUDIT_DATE if r["relationship_id"] in AUDITED_REL_IDS else None
         if r["relationship_id"] in pledge_map:
             r["relationship_type"] = "pledged_allegiance_to"
             r["relation_summary"] = pledge_map[r["relationship_id"]]
@@ -173,9 +197,14 @@ def main():
                "manual_source_mapping": 0}
     for ev in evidence["evidence"]:
         if ev.get("evidence_origin") == "manual_source_mapping":
-            # already upgraded by the I2-B audit; do not downgrade
+            # already upgraded by the I2-B/I3-A audit; do not downgrade
             counts[ev["verification_status"]] = counts.get(ev["verification_status"], 0) + 1
             origins["manual_source_mapping"] = origins.get("manual_source_mapping", 0) + 1
+            continue
+        if ev.get("review_note"):
+            # explicitly reviewed by I3-A (upgraded to partially_verified or kept pending); preserve.
+            counts[ev["verification_status"]] = counts.get(ev["verification_status"], 0) + 1
+            origins[ev["evidence_origin"]] = origins.get(ev["evidence_origin"], 0) + 1
             continue
         cid = ev["claim_id"]
         src = sources_by_id.get(ev["source_id"], {})
@@ -233,8 +262,73 @@ def compute_metrics(entities, countries, regions, rels, sources, evidence,
     depth = Counter(profile_grades.values())
     rel_profiles = load("relation_profiles.json")["profiles"]
     timelines = load("relation_timelines.json")["timelines"]
+
+    # ---- I3-A content statistics ----
+    def _text_len(v):
+        if isinstance(v, str):
+            return len(v)
+        if isinstance(v, list):
+            return sum(len(str(x)) for x in v)
+        if isinstance(v, dict):
+            n = 0
+            if v.get("p"):
+                n += sum(len(str(x)) for x in v["p"])
+            if v.get("list"):
+                n += sum(len(str(x)) for x in v["list"])
+            if v.get("table"):
+                for row in v["table"].get("rows", []):
+                    n += sum(len(str(x)) for x in row)
+            return n
+        return 0
+
+    def _sec_count(sections):
+        return sum(1 for k, v in sections.items() if _text_len(v) > 0)
+
+    def _para_list(v):
+        out = []
+        if isinstance(v, str):
+            out.append(v)
+        elif isinstance(v, list):
+            out.extend(str(x) for x in v)
+        elif isinstance(v, dict):
+            if v.get("p"):
+                out.extend(str(x) for x in v["p"])
+            if v.get("list"):
+                out.extend(str(x) for x in v["list"])
+        return out
+
+    deep_countries = 0
+    entity_body_chars = {}
+    entity_sections = {}
+    empty_sections = 0
+    paras_all = []
+    for cid, prof in load("country_profiles.json")["profiles"].items():
+        if prof.get("depth") == "deep":
+            deep_countries += 1
+        for k, v in prof.get("sections", {}).items():
+            if not _text_len(v):
+                empty_sections += 1
+            paras_all.extend(_para_list(v))
+    for eid, prof in profiles.items():
+        secs = prof.get("sections", {})
+        entity_body_chars[eid] = sum(_text_len(v) for v in secs.values())
+        entity_sections[eid] = _sec_count(secs)
+        for k, v in secs.items():
+            if not _text_len(v):
+                empty_sections += 1
+            paras_all.extend(_para_list(v))
+    dup_count = Counter(paras_all)
+    duplicated_paragraph_count = sum(1 for t, n in dup_count.items() if n > 1 and len(str(t)) >= 40)
+    stale_claims = 0
+    for e in entities:
+        if e.get("freshness_status") in ("stale", "aging"):
+            stale_claims += 1
+    for c in countries:
+        if c.get("freshness_status") in ("stale", "aging"):
+            stale_claims += 1
+
     return {
-        "schema_version": "asip-catalog-metrics-v1",
+        "schema_version": "asip-catalog-metrics-v2",
         "generated_at": AUDIT_DATE,
         "generated_by": "scripts/gen/gen_i2b_migration.py (machine computed)",
         "region_count": len(regions),
@@ -258,6 +352,12 @@ def compute_metrics(entities, countries, regions, rels, sources, evidence,
         "encyclopedia_full_count": depth.get("encyclopedia_full", 0),
         "standard_profile_count": depth.get("standard", 0),
         "basic_entry_count": depth.get("basic", 0),
+        "deep_country_count": deep_countries,
+        "substantive_section_count": sum(entity_sections.values()),
+        "entity_body_char_count": entity_body_chars,
+        "duplicated_paragraph_count": duplicated_paragraph_count,
+        "empty_section_count": empty_sections,
+        "stale_current_claim_count": stale_claims,
         "route_count": 1 + 6 + len(regions) + len(countries) + len(entities) + len(rels),
         "counting_note": ("countries counted once in countries.json; non-country entities in entities.json; "
                           "no double counting; unique_knowledge_object_count = regions + countries + entities"),
