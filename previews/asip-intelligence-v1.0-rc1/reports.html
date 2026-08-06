@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>日报 · 非洲地区社会安全信息平台</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<script>window.ASIP_BUILD_META = {"run_id": "20260802T084000+0800_084349", "pipeline_version": 2, "build_time": "2026-08-07T03:27:44.974068+08:00", "build_time_bj": "2026-08-07 03:27:44", "source_commit": ""};</script>
+</head>
+<body>
+<div id="topbar" class="topbar"></div>
+<div id="dbError" class="db-error" style="display:none;">
+  ⚠️ 数据未能成功加载。请刷新页面（Ctrl/Cmd + Shift + R）后重试。已加载的上一版数据会优先展示。
+</div>
+
+<div class="container">
+  <h1 style="font-size:20px;color:var(--brand);margin:0 0 6px;">国别社会安全日报</h1>
+  <p class="muted" style="margin:0 0 16px;font-size:13px;">
+    每天北京时间 22:00 为以下六个国家各生成一份独立日报：乍得、尼日尔、贝宁、南苏丹、苏丹、埃塞俄比亚。日报按日期和国家归档，不合并。
+  </p>
+  <div id="list"><div class="empty">加载中…</div></div>
+</div>
+
+<footer class="site"></footer>
+
+<script src="assets/js/pipeline.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+renderHeader("reports.html");
+
+function init() {
+  Promise.all([API.getCached("countries"), API.getCached("risk-levels")]).then(function (res) {
+    const countries = (res[0] && res[0].countries) || [], risk = res[1] || {};
+    const daily = countries.filter(function (c) { return c.has_daily; });
+    const levels = risk.levels || {};
+    const host = document.getElementById("list");
+    if (!daily.length) { host.innerHTML = '<div class="empty">暂无设置日报的国家。</div>'; return; }
+
+    host.innerHTML = '<div class="grid cards">' + daily.map(function (c) {
+      const lvl = c.risk_level;
+      const col = (levels[String(lvl)] && levels[String(lvl)].color) || "#888";
+      return `<div class="country-card" style="border-left-color:${col};">
+        <div class="cn">${esc(c.cn)}</div>
+        <div class="en">${esc(c.en || "")}</div>
+        <div class="meta-row"><span class="badge risk-${lvl}">${RISK_NAME[lvl]}</span></div>
+        <div class="meta-row"><a class="btn sm" href="report.html?country=${encodeURIComponent(c.cn)}">查看最新日报</a></div>
+        <div id="rep-${encodeURIComponent(c.daily_country)}" class="small muted" style="margin-top:6px;">加载中…</div>
+      </div>`;
+    }).join("") + '</div>';
+
+    daily.forEach(function (c) {
+      const dc = c.daily_country;
+      const box = document.getElementById("rep-" + encodeURIComponent(dc));
+      API.get("reports/" + dc + "/index").then(function (idx) {
+        if (idx && idx.reports && idx.reports.length) {
+          const r = idx.reports[0];
+          box.innerHTML = '最新：<a href="report.html?country=' + encodeURIComponent(c.cn) + '&date=' + encodeURIComponent(r.date) + '">' + esc(r.date) + '</a> · 共 ' + idx.reports.length + ' 期';
+        } else {
+          box.innerHTML = '暂无日报';
+        }
+      }).catch(function () { box.innerHTML = '暂无日报'; });
+    });
+  }).catch(function () { showDbError(); });
+}
+init();
+</script>
+</body>
+</html>
