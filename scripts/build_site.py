@@ -253,6 +253,10 @@ def main(run_id=None, no_embed=False):
     from build_intelligence_demo import build_intelligence_demo
     build_intelligence_demo(DIST_NEW)
 
+    # 正式非洲知识库：生产数据层，统一全非洲数据底座
+    from build_intelligence_africa import build as build_intelligence_africa
+    build_intelligence_africa(DIST_NEW)
+
     # .nojekyll
     with open(os.path.join(DIST_NEW, ".nojekyll"), "w", encoding="utf-8") as f:
         f.write("")
