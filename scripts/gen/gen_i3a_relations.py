@@ -121,12 +121,12 @@ REL["rel-jnim-niger-operates"] = rel_profile(
 
 REL["rel-is-niger-operates"] = rel_profile(
   "rel-is-niger-operates", "operates_in", "actor-is-sahel", "country-niger",
-  "伊斯兰国萨赫勒省（IS Sahel/ISSP）在尼日尔的活动（operates_in）2025—2026 年显著公开化与升级：从认领尼日尔—尼日利亚边境袭击（2025 年 12 月起），到 2026 年 1 月 29 日用无人机与迫击炮袭击尼亚美国际机场与空军基地 101、3 月袭击塔瓦军事设施。",
+  "伊斯兰国萨赫勒省（IS Sahel/ISSP）在尼日尔的活动（operates_in）2025—2026 年显著公开化与升级：从认领尼日尔—尼日利亚边境袭击（2025 年 12 月起），到 2026 年 1 月尼亚美国际机场及空军基地 101 遭袭、3 月袭击塔瓦军事设施。关于武器使用的公开报道并不一致，一些来源提到迫击炮或火箭推进榴弹，另有报道称可能使用装载爆炸物的无人机，因此无人机使用不应写成已完全独立确认的事实。",
   "ISSP（前身 ISGS）2015 年成立后长期在尼日尔西部—马里—布基纳法索三角活动，2020 年被 JNIM 逐出布基纳法索东部后转向尼日尔方向扩张；2022 年更名 ISSP 后加大在尼日尔的宣示性存在。",
   "2016—2020 年：在蒂拉贝里与马里边境活动；2021—2023 年：袭击升级（对军事巡逻、村镇）；2024 年：向尼日尔南部扩张、公开化趋势；2025 年：认领尼日尔—尼日利亚边境袭击；2026 年 1—3 月：袭击尼亚美机场与塔瓦，创对战略目标的打击纪录。",
   [("2022 年", "更名 ISSP", "组织更名并加强‘省’身份宣示。"),
    ("2025 年 12 月—2026 年 2 月", "南部认领", "公开认领尼日尔—尼日利亚边境地带袭击，宣示扩张。"),
-   ("2026 年 1 月 29 日", "尼亚美机场袭击", "30 名武装分子携无人机与迫击炮袭击机场与空军基地 101，为重大战略升级。"),
+   ("2026 年 1 月 29 日", "尼亚美机场袭击", "约 30 名武装分子袭击机场与空军基地 101；公开报道对武器使用说法不一致，可能涉及迫击炮、火箭推进榴弹或装载爆炸物的无人机，武器细节按部分核验处理。"),
    ("2026 年 3 月", "塔瓦袭击", "袭击塔瓦军事设施与机场，继续打击战略目标。")],
   ["与 JNIM 争夺边境地带的竞争驱动‘宣示性袭击’", "尼日尔军事与政治资源集中于首都的战略价值", "跨境通道（尼日利亚、贝宁方向）的渗透需求", "军政府反恐资源有限提供活动空间"],
   [("2026 年 1 月尼亚美机场袭击", "袭击显示 ISSP 具备打击首都高价值目标的能力，安全评估全面上调。"),
@@ -389,7 +389,7 @@ add("cl-i3a-chad-fitine-2026", "2026 年 3 月 MNJTF 第 2 区（乍得）部队
 # ---- Libya ----
 add("cl-i3a-libya-dualgov", "利比亚存在 GNU（德贝巴，的黎波里）与东部政府（哈马德）及 LNA（哈夫塔尔）的双政府格局，2021 年选举无限期推迟。",
     ["actor-lna", "actor-gnu-forces"], [], "unsc-libya-forecast-2026-08", "Monthly Forecast, 'Background and Key Recent Developments'", "2026-08-01", "2026-07-31")
-add("cl-i3a-libya-elections-2027", "2026 年 6 月利比亚政治机构提出 2027 年举行总统与议会选举的目标，但前提条件（选举机构重组、宪法修正）未落实。",
+add("cl-i3a-libya-elections-2027", "2026 年 6 月 UNSMIL 结构化对话完成最终建议，目标是创造举行全国性选举的条件、推动机构统一并处理长期冲突根源；现有公开材料没有形成可作为确定事实使用的“2027 年全国总统和议会选举”固定时间表。",
     ["actor-lna", "actor-gnu-forces"], [], "unsc-libya-forecast-2026-08", "Monthly Forecast, key developments", "2026-08-01", "2026-07-31")
 add("cl-i3a-libya-zawiya-2026", "2026 年 5 月西部港口扎维耶武装派系交火造成 12 人死亡、约 3000 人流离失所。",
     ["actor-gnu-forces"], [], "asa-libya-standstill-2026", "security environment section", "2026-03-01", "2026-07-31")
@@ -436,7 +436,7 @@ add("cl-i3a-moz-samim-end", "南共体驻莫桑比克特派团（SAMIM）2024 �
     ["actor-samim", "actor-rdf-mozambique"], [], "un-libya-reports", "SADC mission end (public reporting)", "2024-07-31", "2026-06-30", "verified", "high")
 add("cl-i3a-moz-rdf-2024", "2024 年卢旺达驻莫桑比克部队增兵约 2000 人，总兵力约 5000 人。",
     ["actor-rdf-mozambique"], [], "un-libya-reports", "RDF Mozambique deployment reporting", "2024-12-31", "2026-06-30", "partially_verified", "medium_high")
-add("cl-i3a-moz-total-2025", "2025 年 10 月 TotalEnergies 宣布解除德尔加杜角液化天然气项目（199 亿美元）不可抗力，项目重启推进。",
+add("cl-i3a-moz-total-2025", "2025 年 11 月 7 日 Mozambique LNG 联合体决定解除 2021 年宣布的不可抗力；TotalEnergies 于 2026 年 1 月 29 日与莫桑比克政府宣布项目陆上和海上活动全面重启。",
     [], [], "un-libya-reports", "TotalEnergies force majeure lift reporting", "2025-10-31", "2026-06-30", "partially_verified", "medium_high")
 add("cl-i3a-moz-rwanda-2026", "2026 年 3 月卢旺达外长提出撤军前景讨论，德尔加杜角安全格局进入不确定期。",
     ["actor-rdf-mozambique"], [], "un-libya-reports", "Rwanda withdrawal prospect reporting", "2026-03-31", "2026-06-30", "partially_verified", "medium_high")

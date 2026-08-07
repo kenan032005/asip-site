@@ -205,7 +205,7 @@ std["actor-mali-army"] = {
 
 std["actor-burkina-army"] = {
   "sections": {
-    "core_assessment": "布基纳法索武装部队是特拉奥雷军政府（2022 年 9 月政变上台）反叛乱的主力，与数万名国土防卫志愿军（VDP）协同；2025—2026 年在 JNIM 控制/争夺约六成领土的背景下，以“城镇防御+清剿”模式作战，效果有限。",
+    "core_assessment": "布基纳法索武装部队是特拉奥雷军政府（2022 年 9 月政变上台）反叛乱的主力，与数万名国土防卫志愿军（VDP）协同；2025—2026 年在JNIM与其他圣战组织扩大活动并围困部分城镇的背景下，以“城镇防御+清剿”模式作战，效果有限。",
     "name_and_translation": "规范中文名：布基纳法索武装部队；法文 Forces Armées Nationales du Burkina Faso。",
     "formation_background": "布基纳法索军队在 2015 年前被视为区域稳定典范（孔波雷长期执政后 2014 年人民起义），2015 年圣战袭击入境后转入反叛乱；2022 年两次政变（1 月达米巴、9 月特拉奥雷）反映军队内部对反恐失败的不满。",
     "history": "2015—2020 年：圣战扩张与军队被动；2022 年：两度政变、特拉奥雷上台；2023—2024 年：大规模动员 VDP、反恐战果有限；2025 年：吉博围困与袭击（5 月 100+ 死亡、约 90 名士兵苏姆省伏击）；2026 年：2 月 JNIM 持续一周协同进攻、政党解散、安全事件 +40%。",
@@ -300,8 +300,8 @@ std["actor-fano"] = {
     "leadership": "公开领导层信息有限（“阿姆哈拉 Fano 全国运动”2026 年 3 月发表政治声明）；各派系领导分散。",
     "geography": "活动范围：阿姆哈拉州农村（北/南沃洛、西/东戈贾姆、北谢瓦、中/南贡德尔），并沿奥罗米亚—阿姆哈拉边境活动。",
     "force_estimates": "人数缺乏可靠数据（数千至数万的估计不一）；以轻武器、伏击与地方动员为特征。",
-    "current_assessment": "当前状态（截至 2026 年年中）：活跃、持续抵抗。Fano 在 ENDF 反攻下保持高频活动（2026 年 5 月为最活跃月），抵制选举并建立农村治理结构；与厄立特里亚/TPLF 的武器输送关联为部分报告支持。",
-    "controversies_uncertainties": "主要争议：外部武器支持（厄立特里亚经 TPLF）缺乏独立核实；把 Fano 描述为“统一组织”是错误的（多派系）；伤亡数字口径差异大（ACLED vs 官方）。",
+    "current_assessment": "当前状态（截至 2026 年年中）：活跃、持续抵抗。Fano 在 ENDF 反攻下保持高频活动（2026 年 5 月为最活跃月），抵制选举并建立农村治理结构；关于厄立特里亚向埃塞俄比亚境内武装团体提供支持的说法，相关具体对象、方式和规模缺乏充分独立核实，应按据称支持或存在指控处理。",
+    "controversies_uncertainties": "主要争议：外部武器支持说法缺乏独立核实；把 Fano 描述为“统一组织”是错误的（多派系）；伤亡数字口径差异大（ACLED vs 官方）。",
     "sources": "来源以 CFR 冲突追踪、Critical Threats/ACLED、比利时 CGVS 国情报告、联合国机构及可靠媒体为主；具体见 sources.json 与 evidence_records.json。"
   },
   "depth": "standard"
@@ -309,16 +309,16 @@ std["actor-fano"] = {
 
 std["actor-ola"] = {
   "sections": {
-    "core_assessment": "奥罗莫解放阵线/解放军（OLA）是埃塞俄比亚奥罗米亚州的武装叛乱组织，源于 2018 年奥罗莫解放阵线（OLF）武装分支的分裂；2024 年 12 月其分裂派系与政府签署有限和平协议，但主流派指挥层拒绝协议并继续武装行动，与 TPLF 结盟。",
+    "core_assessment": "奥罗莫解放阵线/解放军（OLA）是埃塞俄比亚奥罗米亚州的武装叛乱组织，源于 2018 年奥罗莫解放阵线（OLF）武装分支的分裂；2024 年 12 月其分裂派系与政府签署有限和平协议，但主流派指挥层拒绝协议并继续武装行动。公开资料可见不同反政府力量之间存在接触、并行行动或被报道的战术协调，但现有公开证据不足以将 OLA 与 TPLF 描述为已形成稳定、正式的联盟关系。",
     "name_and_translation": "规范中文名：奥罗莫解放阵线/解放军（OLA）；英文 Oromo Liberation Army（曾称 OLF-Shene）。",
     "formation_background": "OLA 于 2018—2019 年从奥罗莫解放阵线（OLF，1991 年流亡、2018 年返埃后放弃武装）分裂，以武装斗争争取奥罗莫人权利；活动区为奥罗米亚西部与南部，长期与政府军冲突。",
-    "history": "2018—2020 年：武装化与扩张；2020—2022 年：提格雷战争期间与政府对抗（政府将其与 TPLF 并称“恐怖组织”）；2023—2024 年：冲突持续、与阿姆哈拉 Fano 存在局部协调；2024 年 12 月：分裂派签署有限和平协议（主流派拒绝）；2025—2026 年：主流派继续武装行动并与 TPLF 结盟。",
+    "history": "2018—2020 年：武装化与扩张；2020—2022 年：提格雷战争期间与政府对抗（政府将其与 TPLF 并称“恐怖组织”）；2023—2024 年：冲突持续、与阿姆哈拉 Fano 存在局部协调；2024 年 12 月：分裂派签署有限和平协议（主流派拒绝）；2025—2026 年：主流派继续武装行动，公开资料仅支持不同力量之间可能存在接触或战术协调，不足以确认正式联盟。",
     "structure": "政治—军事组织：设指挥层与区域作战单位；2024 年 12 月后分裂为主流派（拒绝协议）与协议派（放下武器参与政治进程）。",
     "leadership": "主流派领导公开信息有限（组织指挥层不透明）。",
     "geography": "活动范围：奥罗米亚州西部与南部（含与阿姆哈拉、南方州接壤地带）。",
     "force_estimates": "兵力缺乏可靠数据（数千人级别的估计不一）。",
-    "current_assessment": "当前状态（截至 2026 年年中）：主流派继续武装抵抗并与 TPLF 结盟；协议派参与政治进程。OLA 活动对奥罗米亚西部/南部的公路与项目安全构成威胁。",
-    "controversies_uncertainties": "主要争议：把 OLA 等同于“所有奥罗莫政治力量”是错误的；与 TPLF、Fano 的实际协调程度缺乏公开资料；人数与伤亡不透明。",
+    "current_assessment": "当前状态（截至 2026 年年中）：主流派继续武装抵抗、协议派参与政治进程。OLA 活动对奥罗米亚西部/南部的公路与项目安全构成威胁；公开资料不足以确认其与 TPLF 已形成稳定、正式联盟，统一降级为据报道存在接触或战术协调。",
+    "controversies_uncertainties": "主要争议：把 OLA 等同于“所有奥罗莫政治力量”是错误的；与 TPLF、Fano 的实际接触或战术协调程度缺乏公开资料，不能据此确认正式联盟；人数与伤亡不透明。",
     "sources": "来源以 CFR 冲突追踪、Critical Threats/ACLED、联合国机构及可靠媒体为主；具体见 sources.json 与 evidence_records.json。"
   },
   "depth": "standard"
@@ -345,10 +345,43 @@ std["actor-tanzania-tpdf"] = {
 # =====================================================================
 # merge + new entity records
 # =====================================================================
-profiles = load("entity_profiles.json")["profiles"]
+profiles_doc = load("entity_profiles.json")
+profiles = profiles_doc["profiles"]
+profile_metadata = {k: v for k, v in profiles_doc.items() if k != "profiles"}
 
 def merge(entries, depth):
+    # Fix-1C: preserve existing I3-A/I3-B profile structure and apply only
+    # the manifest-scoped entity corrections. Do not rewrite unrelated fields.
+    scoped_fields = {
+        "actor-burkina-army": {
+            "core_assessment",
+        },
+        "actor-fano": {
+            "current_assessment",
+            "controversies_uncertainties",
+        },
+        "actor-ola": {
+            "core_assessment",
+            "history",
+            "current_assessment",
+            "controversies_uncertainties",
+        },
+    }
+    for eid, fields in scoped_fields.items():
+        if eid not in entries or eid not in profiles:
+            continue
+        existing_sections = profiles[eid].setdefault("sections", {})
+        for field in fields:
+            existing_sections[field] = entries[eid]["sections"][field]
+        print("FIX1C scoped entity update", eid, ", ".join(sorted(fields)))
+
+    # Keep the original upgrade data available for future explicit I3-B work,
+    # but do not apply it during this Fix-1C regeneration.
     for eid, d in entries.items():
+        if eid in scoped_fields:
+            continue
+        if eid in profiles:
+            continue
         p = profiles.setdefault(eid, {})
         p["sections"] = d["sections"]
         p["profile_depth"] = d["depth"]
@@ -363,8 +396,7 @@ print("=== encyclopedia upgrades ===")
 merge(ency, "encyclopedia_full")
 print("=== standard ===")
 merge(std, "standard")
-save("entity_profiles.json", {"profiles": profiles,
-      "note": "I3-B: all basic entries upgraded; 10 core entities added; depth graded by content."})
+save("entity_profiles.json", {"profiles": profiles, **profile_metadata})
 
 # ---- add new entity records to entities.json ----
 entities = load("entities.json")
@@ -385,6 +417,6 @@ for eid, rec in NEW_RECORDS.items():
     if eid not in existing:
         entities["entities"].append(rec)
         added += 1
-entities["note"] = ("I2-B: country-type objects removed; I3-B: +10 core entities for remaining five countries.")
+entities["note"] = entities.get("note", "I2-B: country-type objects removed; canonical country data lives in countries.json (single source of truth).")
 save("entities.json", entities)
 print("new entity records added:", added, "| total entities:", len(entities["entities"]))
