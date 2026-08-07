@@ -1,0 +1,48 @@
+name: ASIP Pages Preview Republish
+
+on:
+  push:
+    branches:
+      - feature/asip-intelligence-v10-i3b-fix1a-pages
+  workflow_dispatch:
+
+concurrency:
+  group: asip-pages-preview-republish
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  publish-pages-artifact:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout current gh-pages tree
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          fetch-depth: 1
+
+      - name: Preserve production tree and preview tree
+        shell: bash
+        run: |
+          test -f .nojekyll
+          test -d previews/asip-intelligence-v1.0-rc1
+          test -f previews/asip-intelligence-v1.0-rc1/intelligence/africa/index.html
+          test -f previews/asip-intelligence-v1.0-rc1/intelligence/africa/data/catalog_metrics.json
+          printf 'gh-pages source commit: '
+          git rev-parse HEAD
+
+      - name: Upload complete static tree
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy Pages artifact
+        id: deployment
+        uses: actions/deploy-pages@v4
