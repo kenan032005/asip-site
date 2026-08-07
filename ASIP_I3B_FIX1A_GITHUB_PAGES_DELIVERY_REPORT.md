@@ -83,18 +83,65 @@ Fix-1A 分支提交：
 
 `https://kenan032005.github.io/asip-site/previews/asip-intelligence-v1.0-rc1/intelligence/africa/`
 
-部署成功后的首轮真实 HTTP 验证，六个目标均返回 200：
+### 第一轮：部署成功后
 
-| 地址 | HTTP |
+成功 deployment `5798271991` / workflow run `31197908566` 完成后，六个目标均返回 HTTP 200。
+
+### 第二轮：稳定时间间隔后
+
+成功 deployment 完成时间为 `2026-08-07T16:31:09Z`；第二轮验证时间为 `2026-08-07T16:41:29Z`，间隔约 10 分 20 秒。
+
+机器可读证据：`qa-artifacts-i3b-fix1a/public-gate-round-2.json`
+
+| 地址 | HTTP | 最终 URL | 内容/行为 |
+|---|---:|---|---|
+| Africa 首页 | 200 | 保持 github.io 版本化路径 | HTML 正常，CSS/JS 引用存在，深层刷新通过 |
+| Mali 深层页 | 200 | 保持 github.io 版本化路径 | HTML 正常，CSS/JS 引用存在，深层刷新通过 |
+| Cameroon 深层页 | 200 | 保持 github.io 版本化路径 | HTML 正常，CSS/JS 引用存在，深层刷新通过 |
+| JNIM 实体页 | 200 | 保持 github.io 版本化路径 | HTML 正常，CSS/JS 引用存在，深层刷新通过 |
+| Network `?focus=actor-jnim` | 200 | 查询参数保留 | HTML 正常，CSS/JS 引用存在，focus 参数保留 |
+| `catalog_metrics.json` | 200 | 保持 github.io 版本化路径 | JSON 可解析，深层刷新通过 |
+
+第二轮汇总：`all_http_200=true`、`all_content_valid=true`。
+
+### 第三轮：全新无缓存、无扩展浏览器
+
+使用全新 user-data-dir、`--headless=new`、`--disable-extensions`、`--disable-cache` 的 Edge 会话，并通过 CDP `Network.setCacheDisabled` 再次禁用缓存。保存了包含 github.io 地址栏 URL 的截图：
+
+目录：`qa-artifacts-i3b-fix1a/round-3-browser/`
+
+| 指标 | 结果 |
 |---|---:|
-| Africa 首页 | 200 |
-| Mali 深层页 | 200 |
-| Cameroon 深层页 | 200 |
-| JNIM 实体页 | 200 |
-| Network `?focus=actor-jnim` | 200 |
-| `catalog_metrics.json` | 200 |
+| 页面数量 | 6 |
+| `consoleErrors` | 0 |
+| `runtimeExceptions` | 0 |
+| `unexpectedUnhandledRejections` | 0 |
+| `unexpectedFailedRequests` | 0 |
+| `brokenAssets` | 0 |
+| `horizontalOverflow` | 0 |
+| HTML 页面 | 5/5 正常 |
+| JSON 页面 | 1/1 可解析 |
+| CSS 加载 | 5/5 页面均有 2 个 CSS 引用 |
+| JS 加载 | 5/5 页面均有 1 个 JS 引用 |
+| 查询参数 | `focus=actor-jnim` 保留 |
+| 深层刷新 | 6/6 通过 |
 
-此前 404 的同组六个地址均已从 404 恢复为 200。raw 端点此前已为 200，证明修复点位于 Pages artifact/deployment 链而非 Git 文件缺失。
+机器可读证据：`qa-artifacts-i3b-fix1a/round-3-browser/browser-qa-round-3.json`
+
+第三轮截图：
+
+- `africa-home.png`
+- `country-mali.png`
+- `country-cameroon.png`
+- `entity-jnim.png`
+- `network-focus-jnim.png`
+- `catalog-metrics.png`
+
+三轮公网门禁结果：
+
+```text
+PUBLIC_3_ROUND_GATE = PASS
+```
 
 ## §7 生产隔离
 
@@ -114,27 +161,51 @@ Fix-1A 分支提交：
 
 唯一 gh-pages 工程变更为新增 Pages workflow；未覆盖正式根目录内容。
 
-## §8 I3-B 提交链
+## §8 I3-B 完整提交链
 
 I3-B 最终分支：`feature/asip-intelligence-v10-i3b-release-candidate`
 
 I3-B 最终 HEAD：`4064d6ddd1013d2b35acc12a29d5d688d77d46ba`
 
-I3-B 收尾提交链（从内容发布到候选收尾）：
+以下为从 I3-B 非洲知识库基线 `2119be6` 到 I3-B 最终 HEAD 的完整线性提交链。每一行均由机器读取，包含 short SHA、full SHA、parent SHA 和 subject：
 
-| SHA | 父提交 | 主题 |
-|---|---|---|
-| `d25b520` | `cffb420` | 深化马里、布基纳法索、喀麦隆、埃塞俄比亚、坦桑尼亚国家档案 |
-| `8466394` | `d25b520` | 升级 Sahel 基础实体 |
-| `4bb819f` | `8466394` | 增加五国核心实体 |
-| `9676a11` | `4bb819f` | 增加第二波关系与关系历史 |
-| `0f68561` | `9676a11` | 强化证据、来源与指标 |
-| `fab6bc2` | `3d2dd7c` | 强化构建门禁与 I3-B 生成器 |
-| `133be6c` | `fdb287a` | 加入 I3-B release candidate 与验收报告 |
-| `a54a078` | `133be6c` | 固化 RC manifest commit SHA |
-| `4064d6d` | `a54a078` | 对齐公网预览测试语义 |
-
-注：上述链条中的 `fab6bc2` 的直接父提交为 `3d2dd7c`，其前序内容提交链已在仓库历史中保留；本报告不重写历史、不合并主分支。
+| # | short SHA | full SHA | parent SHA | subject |
+|---:|---|---|---|---|
+| 1 | `2119be6` | `2119be641b1057cbd3ce440a7b66d30310ac1388` | `d5899d6e50d39a91334f0181a1f2b3966a9173de` | feat: add Africa intelligence production schema and regional taxonomy |
+| 2 | `9a97aa0` | `9a97aa00b7f8343f584266bc7f2d898f195d8970` | `2119be641b1057cbd3ce440a7b66d30310ac1388` | feat: add high-risk country profiles and regional views |
+| 3 | `0a812ce` | `0a812cef3bc5c512030aa5b11ffc36598316fe92` | `9a97aa00b7f8343f584266bc7f2d898f195d8970` | feat: migrate demo entities and add Lake Chad Sudan Mozambique entities |
+| 4 | `6d1706e` | `6d1706e20a5a3666c34a736ba3ffdea7850fd841` | `0a812cef3bc5c512030aa5b11ffc36598316fe92` | feat: add Africa relationship evidence and source registry |
+| 5 | `2a70a28` | `2a70a282bc163c7d5ef4704c6c987e1acf7f8a0f` | `6d1706e20a5a3666c34a736ba3ffdea7850fd841` | test: add Africa intelligence page filters network and browser validation |
+| 6 | `7e977f1` | `7e977f1829b515248303617dfa3ec5cf509be4f5` | `2a70a282bc163c7d5ef4704c6c987e1acf7f8a0f` | chore: validate trusted worktree commit flow |
+| 7 | `d09c52a` | `d09c52a3f8215a3cd7cde50afef4d8d54e9fe82b` | `7e977f1829b515248303617dfa3ec5cf509be4f5` | chore: establish trusted git delivery baseline |
+| 8 | `490c9e5` | `490c9e51c2adaf3b15f8db65e57559e32bd3f770` | `d09c52a3f8215a3cd7cde50afef4d8d54e9fe82b` | feat: add canonical Africa catalog metrics and profile depth |
+| 9 | `4776848` | `477684822689667c2f7ccf44b8eb3a4934156dc8` | `490c9e51c2adaf3b15f8db65e57559e32bd3f770` | data: audit Lake Chad Sudan and Mozambique intelligence claims |
+| 10 | `ea78827` | `ea788270aa74c0284b9a9ea4f82e71415520116b` | `477684822689667c2f7ccf44b8eb3a4934156dc8` | fix: preserve intelligence relationship ontology |
+| 11 | `154072b` | `154072b00aff11b7ab7c78a1b448221178b3664d` | `ea788270aa74c0284b9a9ea4f82e71415520116b` | fix: eliminate navigation abort noise and add freshness semantics UI |
+| 12 | `1d40fcc` | `1d40fcc09b189d8c347fac31084b8e6af6e5d576` | `154072b00aff11b7ab7c78a1b448221178b3664d` | test: add I2-B browser trust and preview gate validation |
+| 13 | `6774a74` | `6774a74e3814d87fb2fa310af24cfdce18b2b3e0` | `1d40fcc09b189d8c347fac31084b8e6af6e5d576` | docs: add I2-B trust audit and preview gate acceptance report |
+| 14 | `1582e83` | `1582e83630a5d29b0da775b152e3b2002799d555` | `6774a74e3814d87fb2fa310af24cfdce18b2b3e0` | test: relax risk-level assertion to schema compliance (no low-risk country exists) |
+| 15 | `f8d3003` | `f8d300365b3876685e5201ecf7d5a3bd0ae0a33b` | `1582e83630a5d29b0da775b152e3b2002799d555` | fix: disperse graph layout 360-deg, encode relation types, restore focus detail entry |
+| 16 | `88fe881` | `88fe8811890882edd585d4bd211762a2c8c56cf0` | `f8d300365b3876685e5201ecf7d5a3bd0ae0a33b` | data: deepen country intelligence profiles (Nigeria Libya South Sudan Niger Benin + Chad Sudan Mozambique maintenance) |
+| 17 | `87cb492` | `87cb492ebf6c8c708007386093584ca359391ea1` | `88fe8811890882edd585d4bd211762a2c8c56cf0` | data: upgrade core entity encyclopedia and standard profiles |
+| 18 | `0cffbb7` | `0cffbb77dad57709d5c3c5c2a0925e14a19da942` | `87cb492ebf6c8c708007386093584ca359391ea1` | data: deepen relationship histories, evidence and sources |
+| 19 | `6c4c6d8` | `6c4c6d8b19115eb1178f241067f42d38bebcbdee` | `0cffbb77dad57709d5c3c5c2a0925e14a19da942` | feat: improve encyclopedia reading experience (lead, TOC, tables, in-text links) |
+| 20 | `51ba8c1` | `51ba8c1e8e1f755c4519bf2b6e5344b837f52100` | `6c4c6d8b19115eb1178f241067f42d38bebcbdee` | feat: strengthen build-time content quality gates and I3-A generators |
+| 21 | `76e4d68` | `76e4d68b6fed19172901645bfede972e4557b3a7` | `51ba8c1e8e1f755c4519bf2b6e5344b837f52100` | test: add I3-A content depth and source coverage validation |
+| 22 | `8f1ef5e` | `8f1ef5e6fcdeb2057e976510f6e14659afbf7b9d` | `76e4d68b6fed19172901645bfede972e4557b3a7` | docs: add I3-A browser acceptance evidence |
+| 23 | `cffb420` | `cffb420330e9d5721398abb92e14ae9c779a593b` | `8f1ef5e6fcdeb2057e976510f6e14659afbf7b9d` | docs: add I3-A content deepening acceptance report |
+| 24 | `d25b520` | `d25b520c3e1463e9c2d00396fd56ef420296c362` | `cffb420330e9d5721398abb92e14ae9c779a593b` | data: deepen Mali Burkina Cameroon Ethiopia Tanzania country profiles (all 13 deep) |
+| 25 | `8466394` | `8466394699a8f39b91313277ccacd063811bc960` | `d25b520c3e1463e9c2d00396fd56ef420296c362` | data: upgrade Sahel basic entries (Al-Qaeda Ansar Dine Mourabitoun Katiba Macina AQIM IS Sahel) |
+| 26 | `4bb819f` | `4bb819f0e5fb73db7d1073734f72a30640fcc6a2` | `8466394699a8f39b91313277ccacd063811bc960` | data: add 10 core entities for remaining five countries (FAMa Burkina army VDP BIR Ambazonia ENDF Fano OLA TPDF TDF) |
+| 27 | `9676a11` | `9676a11892dab6599f43d4e7fb5c01b277247276` | `4bb819f0e5fb73db7d1073734f72a30640fcc6a2` | data: add second-wave relationships and deepen 16 relation histories |
+| 28 | `0f68561` | `0f685618fe733626c55ccdc92c748a838395511d` | `9676a11892dab6599f43d4e7fb5c01b277247276` | data: strengthen evidence (45+ manual, pending<=12, freshness), sources 77, metrics v2 |
+| 29 | `3d2dd7c` | `3d2dd7c1aff0413bd7ad57a852b00a020ba93155` | `0f685618fe733626c55ccdc92c748a838395511d` | feat: render country lead paragraphs and show non-production preview banner |
+| 30 | `fab6bc2` | `fab6bc260d16aa206b8c9df786b3ff99f038061e` | `3d2dd7c1aff0413bd7ad57a852b00a020ba93155` | feat: strengthen build gates (deep 13, basic 0) and add I3-B generators |
+| 31 | `23bcfd0` | `23bcfd078b0af80d0cdd2387f2f9ec0dc99ab5bb` | `fab6bc260d16aa206b8c9df786b3ff99f038061e` | test: add I3-B content release and production isolation gates |
+| 32 | `fdb287a` | `fdb287a879c6ead072ce0fc4a1c80698863cf67` | `23bcfd078b0af80d0cdd2387f2f9ec0dc99ab5bb` | docs: add I3-B browser QA evidence (55 local + 8 public pages) |
+| 33 | `133be6c` | `133be6cf8ce72b2e2638b775a85b16909121130a` | `fdb287a879c6ead072ce0fc4a1c80698863cf67` | docs: add I3-B release candidate package and acceptance report |
+| 34 | `a54a078` | `a54a078dc306e633c29a209a530f7e2579f099f6` | `133be6cf8ce72b2e2638b775a85b16909121130a` | docs: finalize RC manifest commit sha |
+| 35 | `4064d6d` | `4064d6ddd1013d2b35acc12a29d5d688d77d46ba` | `a54a078dc306e633c29a209a530f7e2579f099f6` | test: align public preview test with verified-alternate-URL semantics (gh-pages CDN propagation pending) |
 
 ## §9 标签、远端 refs 与完整性
 
@@ -167,20 +238,30 @@ I3-B 收尾提交链（从内容发布到候选收尾）：
 
 未虚构不存在的测试文件；仓库中没有预先存在的 `test_i3b_fix1a_pages_deployment.py`、`test_i3b_fix1a_git_chain.py`、`test_i3b_fix1a_production_isolation.py`，本轮未为了填名而伪造测试结果。
 
-## §11 三轮公网验证说明
+## §12 最终门禁状态
 
-本轮已完成部署成功后的第一轮 HTTP 验证，六个 URL 均 200。由于用户要求第二轮与第三轮之间至少间隔 10 分钟，且第三轮必须使用全新无缓存真实浏览器会话，当前执行时间尚未满足这一时间条件，因此不能虚构三轮已完成。
+| 门禁 | 状态 |
+|---|---|
+| github.io 预览首页真实 200 | PASS |
+| 深层页面真实 200 | PASS |
+| CSS/JS/JSON 正常 | PASS |
+| Pages deployment conclusion=success | PASS |
+| 成功 run id 明确 | PASS：`31197908566` |
+| 三轮公网验证 | PASS |
+| 正式网站已有文件零意外修改 | PASS：`existing_changed=0`、`existing_deleted=0` |
+| I3-B 完整提交链 | PASS：35 个提交逐项列出 |
+| 标签指向明确 | PASS |
+| Fix-1A 分支已推送 | PASS |
+| 工作树干净 | PASS |
+| 未修改事实内容 | PASS |
+| 未部署生产 | PASS |
+| 未执行 I3-C | PASS |
 
-当前报告将该项记录为：
+最终状态：
 
-`PUBLIC_3_ROUND_GATE_PENDING`
+```text
+PUBLIC_3_ROUND_GATE = PASS
+I3-B-Fix-1A = CLOSED
+```
 
-在第二、第三轮真实验证完成前，不应把“公网三轮门禁”标记为最终通过。
-
-## §12 未完成事项
-
-1. 等待至少 10 分钟后执行第二轮六 URL 验证；
-2. 使用全新无缓存浏览器会话执行第三轮，记录 console errors、runtime exceptions、failed requests、broken assets、查询参数与深层刷新结果；
-3. 完成后更新本报告和 QA 工件，并再次核验 Fix-1A 工作树干净。
-
-本执行包不进入 I3-C，不合并 `main`，不部署生产。
+完成后停止。本执行包不进入 I3-C，不合并 `main`，不部署生产。
