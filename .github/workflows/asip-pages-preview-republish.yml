@@ -18,9 +18,6 @@ permissions:
 jobs:
   publish-pages-artifact:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout current gh-pages tree
         uses: actions/checkout@v4
