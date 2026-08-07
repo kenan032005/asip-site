@@ -5,6 +5,9 @@ const path = require("path");
 const fs = require("fs");
 
 const BASE = process.env.QA_BASE || "http://127.0.0.1:8786";
+const ROUTE_BASE = /\/intelligence\/africa\/?$/.test(BASE)
+  ? BASE.replace(/\/$/, "")
+  : `${BASE.replace(/\/$/, "")}/intelligence/africa`;
 const CDP_PORT = process.env.CDP_PORT || "9224";
 const OUT = path.join(__dirname, process.env.QA_OUT || "qa-artifacts-i3b");
 if (!fs.existsSync(OUT)) fs.mkdirSync(OUT, { recursive: true });
@@ -72,7 +75,7 @@ async function navigate(url, waitMs = 2200) {
 
 async function checkPage(type, slug, name) {
   clearCounts();
-  await navigate(`${BASE}/intelligence/africa/${type}/${slug}/`);
+  await navigate(`${ROUTE_BASE}/${type}/${slug}/`);
   const st = await evaluate(`(function(){
     const lead = document.querySelector('.profile-lead');
     const toc = document.querySelector('.intel-toc');
@@ -97,7 +100,7 @@ async function checkPage(type, slug, name) {
 
 async function checkGraph(focus, name) {
   clearCounts();
-  await navigate(`${BASE}/intelligence/africa/network/?focus=${focus}`);
+  await navigate(`${ROUTE_BASE}/network/?focus=${focus}`);
   const g = await evaluate(`(function(){
     const nodes = document.querySelectorAll('.graph-node').length;
     const edges = document.querySelectorAll('.graph-edge').length;
@@ -150,7 +153,7 @@ async function main() {
 
   // deep link refresh
   clearCounts();
-  await navigate(`${BASE}/intelligence/africa/country/ethiopia/`);
+  await navigate(`${ROUTE_BASE}/country/ethiopia/`);
   const deep = await evaluate(`(function(){ return { h1: document.querySelector('#countryHeading h1') ? document.querySelector('#countryHeading h1').textContent : null, sections: document.querySelectorAll('.profile-section').length }; })()`);
   flushCounts();
   report.deepReload = deep;
@@ -159,7 +162,7 @@ async function main() {
   for (const [w, h, label] of [[1920, 1080, "1920"], [1366, 768, "1366"], [768, 1024, "768"], [390, 844, "390"]]) {
     await call("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 1, mobile: w < 500 });
     clearCounts();
-    await navigate(`${BASE}/intelligence/africa/country/mali/`);
+    await navigate(`${ROUTE_BASE}/country/mali/`);
     const st = await evaluate(`(function(){ return { overflowX: document.documentElement.scrollWidth > ${w} + 2 }; })()`);
     flushCounts();
     if (st.overflowX) report.horizontalOverflow++;
@@ -168,7 +171,7 @@ async function main() {
   }
   await call("Emulation.clearDeviceMetricsOverride");
   clearCounts();
-  await navigate(`${BASE}/intelligence/africa/network/?focus=country-mali`);
+  await navigate(`${ROUTE_BASE}/network/?focus=country-mali`);
   await screenshot("graph-390-mali");
   flushCounts();
 
