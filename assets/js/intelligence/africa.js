@@ -44,8 +44,25 @@
     tactics: "主要行动方式", finance: "资金、补给与招募", adversaries: "主要敌对对象",
     regional_impact: "对区域安全的影响", controversies_uncertainties: "争议与不确定性", challenges: "当前挑战",
     core_assessment: "核心评估", name_and_translation: "名称与译名",
-    gaps: "资料缺口与不确定性", biography: "生平", roles: "职务", influence: "影响", sources: "来源与注释", notes: "备注"
+    gaps: "资料缺口与不确定性", biography: "生平", roles: "职务", influence: "影响", sources: "来源与注释", notes: "备注",
+    // DEPTH A: encyclopedic sections (entity upgrades)
+    name_identity: "名称与身份", genealogy: "组织谱系", leadership_structure: "领导与组织结构",
+    force_capacity: "力量规模与能力", recruitment_social_base: "招募与社会基础", finance_logistics: "资金与后勤",
+    governance: "治理实践", major_timeline: "重大时间线", external_relations: "外部关系",
+    current_situation: "当前态势", background: "背景", origin: "起源", katiba_macina: "与马西纳旅",
+    jnim_role: "在JNIM中的角色", false_death_history: "误报死亡历史", political_messaging: "政治信息与宣传",
+    ansar_dine: "安萨尔丁阶段", leadership_style: "领导风格", sanctions_legal: "制裁与法律状态",
+    organizational_relation: "组织关系", strength_capabilities: "力量与能力", jnim_rivalry: "与JNIM的竞争",
+    predecessors: "前身组成", political_character: "政治性质", jnim_relation: "与JNIM的关系",
+    mali_role: "在马里的角色", strength: "兵力估计", human_rights: "人权与争议", formation: "形成",
+    jnim_integration: "JNIM整合", social_dynamics: "社会动力", tactics_governance: "战术与治理",
+    ideology_objectives: "意识形态与目标"
   };
+  const MATURITY_LABELS = {
+    E0_STUB: "E0 存目", E1_BASIC: "E1 基础档案", E2_DEVELOPED: "E2 较完整档案", E3_FULL_ENCYCLOPEDIA: "E3 旗舰百科",
+    R0_EDGE_ONLY: "R0 仅边", R1_BASIC: "R1 基础关系", R2_DEVELOPED_RELATIONSHIP: "R2 重要关系档案", R3_FULL_RELATIONSHIP_INTELLIGENCE: "R3 完整情报专题"
+  };
+  function maturityBadge(m, label) { if (!m) return ""; const l = MATURITY_LABELS[m] || m; return '<span class="intel-badge m-' + esc(m.toLowerCase()) + '">' + esc(l) + '</span>'; }
   // explicit in-text links, e.g. [[entity:actor-jas|博科圣地/JAS]] / [[country:country-nigeria|尼日利亚]] / [[region:region-lake-chad-basin|乍得湖盆地]] / [[relation:rel-jas-iswap-conflict|JAS—ISWAP 关系]]
   function inlineLinks(text) {
     return String(text).replace(/\[\[(entity|country|region|relation):([^|\]]+)\|([^\]]+)\]\]/g, function (m, kind, id, label) {
@@ -78,12 +95,23 @@
     const items = keys.filter(function (k) { return sections[k] != null && !(Array.isArray(sections[k]) && !sections[k].length) && sections[k] !== ""; });
     let html = "";
     const toc = [];
-    items.forEach(function (k) {
+    // DEPTH A: facts (普通章节) rendered first; ASIP Analysis and Watch Indicators
+    // are rendered as visually distinct partitions after the facts.
+    const facts = items.filter(function (k) { return k !== "asip_analysis" && k !== "watch_indicators"; });
+    facts.forEach(function (k) {
       const v = sections[k];
       if (k === "lead") { html += '<div class="profile-lead">' + (Array.isArray(v) ? v.map(function (x) { return '<p>' + inlineLinks(esc(x)) + '</p>'; }).join("") : '<p>' + inlineLinks(esc(v)) + '</p>') + '</div>'; return; }
       toc.push('<a href="#sec-' + esc(k) + '">' + esc(SECTION_LABELS[k]) + '</a>');
       html += '<section class="profile-section" id="sec-' + esc(k) + '"><h2>' + esc(SECTION_LABELS[k]) + '</h2>' + renderBody(v) + '</section>';
     });
+    if (sections.asip_analysis) {
+      toc.push('<a href="#sec-asip_analysis">' + esc(SECTION_LABELS.asip_analysis) + '</a>');
+      html += '<section class="profile-section analysis-partition" id="sec-asip_analysis"><div class="intel-analysis-card"><h2>ASIP Analysis · 平台分析</h2>' + renderBody(sections.asip_analysis) + '</div></section>';
+    }
+    if (sections.watch_indicators && (!Array.isArray(sections.watch_indicators) || sections.watch_indicators.length)) {
+      toc.push('<a href="#sec-watch_indicators">' + esc(SECTION_LABELS.watch_indicators) + '</a>');
+      html += '<section class="profile-section watch-partition" id="sec-watch_indicators"><div class="intel-watch-card"><h2>Watch Indicators · 后续观察指标</h2>' + renderBody(sections.watch_indicators) + '</div></section>';
+    }
     if (toc.length >= 4) html = '<nav class="intel-toc" aria-label="目录"><span class="intel-toc-title">本页目录</span>' + toc.join("") + '</nav>' + html;
     const el = document.querySelector(container); if (el) el.innerHTML = html;
   }
@@ -232,7 +260,7 @@
     if (!entity) { const el = document.querySelector("#intelError"); if (el) { el.hidden = false; el.textContent = "实体不存在：" + slug; } return; }
     const profile = store.entityProfiles[entity.entity_id] || { sections: {} };
     document.title = title(entity) + " · ASIP非洲安全情报知识库";
-    const h = document.querySelector("#entityHeading"); if (h) h.innerHTML = '<div class="intel-heading-code">' + esc(entity.entity_id) + '</div><h1>' + esc(title(entity)) + '</h1><p class="intel-title-en">' + esc(entity.name_en) + '</p><div class="intel-badges">' + typeBadge(entity) + importanceBadge(entity) + '<span class="intel-badge status">' + esc(entity.current_status) + '</span>' + freshnessBadge(entity.freshness_status) + '</div>' + freshnessNote(entity);
+    const h = document.querySelector("#entityHeading"); if (h) h.innerHTML = '<div class="intel-heading-code">' + esc(entity.entity_id) + '</div><h1>' + esc(title(entity)) + '</h1><p class="intel-title-en">' + esc(entity.name_en) + '</p><div class="intel-badges">' + typeBadge(entity) + importanceBadge(entity) + maturityBadge(profile.content_maturity || entity.content_maturity) + '<span class="intel-badge status">' + esc(entity.current_status) + '</span>' + freshnessBadge(entity.freshness_status) + '</div>' + freshnessNote(entity);
     renderSections("#entityBody", profile.sections);
     const ib = document.querySelector("#entityInfobox"); if (ib) {
       let rows = "";
@@ -265,21 +293,38 @@
     const s = store.byEntityId[rel.source_entity_id], t = store.byEntityId[rel.target_entity_id];
     const st = titleFor(rel.source_entity_id), tt = titleFor(rel.target_entity_id);
     document.title = relLabel(rel.relationship_type) + "：" + st + "—" + tt;
-    const h = document.querySelector("#relationHeading"); if (h) h.innerHTML = '<div class="intel-heading-code">' + esc(rel.relationship_id) + '</div><h1>' + esc(st) + ' <span class="rel-arrow">↔</span> ' + esc(tt) + '</h1><p class="intel-title-en">' + esc(relLabel(rel.relationship_type)) + ' · ' + esc(ringLabel(rel.display_ring)) + '圈层 · ' + esc(rel.current_status) + '</p><div class="intel-badges">' + (s ? importanceBadge(s) : "") + (t ? importanceBadge(t) : "") + freshnessBadge(rel.freshness_status) + '</div>' + freshnessNote(rel);
-    const ov = document.querySelector("#relationOverview"); if (ov) ov.innerHTML = '<p class="intel-lead">' + esc(profile ? profile.overview : rel.relation_summary) + '</p>';
+    const h = document.querySelector("#relationHeading"); if (h) h.innerHTML = '<div class="intel-heading-code">' + esc(rel.relationship_id) + '</div><h1>' + esc(st) + ' <span class="rel-arrow">↔</span> ' + esc(tt) + '</h1><p class="intel-title-en">' + esc(relLabel(rel.relationship_type)) + ' · ' + esc(ringLabel(rel.display_ring)) + '圈层 · ' + esc(rel.current_status) + '</p><div class="intel-badges">' + (s ? importanceBadge(s) : "") + (t ? importanceBadge(t) : "") + maturityBadge(profile ? profile.relation_maturity : null) + freshnessBadge(rel.freshness_status) + '</div>' + freshnessNote(rel);
+    const ov = document.querySelector("#relationOverview"); if (ov) ov.innerHTML = '<p class="intel-lead">' + esc(profile ? (profile.overview || profile.relationship_summary || rel.relation_summary) : rel.relation_summary) + '</p>';
     const body = document.querySelector("#relationBody"); if (body) {
       let html = "";
       if (profile) {
-        html += '<section class="profile-section"><h2>关系形成背景</h2><p>' + esc(profile.formation_background) + '</p></section>';
-        html += '<section class="profile-section"><h2>双方最初的关系</h2><p>' + esc(profile.initial_relationship) + '</p></section>';
-        if (profile.evolution_stages && profile.evolution_stages.length) html += '<section class="profile-section"><h2>历史演变阶段</h2><ul>' + profile.evolution_stages.map(function (x) { return '<li><b>' + esc(x.period + " · " + x.title) + '</b><p>' + esc(x.description) + '</p></li>'; }).join("") + '</ul></section>';
+        // evolution stages support both {period,title,description} and {period,detail}
+        const stageHtml = function (x) { const t = x.title || x.detail || ""; const d = x.description || x.detail || ""; return '<li><b>' + esc(x.period + (t && t !== x.period ? " · " + t : "")) + '</b>' + (d ? '<p>' + esc(d) + '</p>' : '') + '</li>'; };
+        if (profile.formation_background) html += '<section class="profile-section"><h2>关系形成背景</h2><p>' + esc(profile.formation_background) + '</p></section>';
+        if (profile.initial_relationship) html += '<section class="profile-section"><h2>双方最初的关系</h2><p>' + esc(profile.initial_relationship) + '</p></section>';
+        if (profile.evolution_stages && profile.evolution_stages.length) html += '<section class="profile-section"><h2>历史演变阶段</h2><ul>' + profile.evolution_stages.map(stageHtml).join("") + '</ul></section>';
+        if (profile.nature && typeof profile.nature === "object") {
+          html += '<section class="profile-section"><h2>关系性质</h2><ul class="intel-bullets">' + Object.keys(profile.nature).filter(function (k) { return k !== "type"; }).map(function (k) { return '<li><b>' + esc(k) + '</b>：' + esc(Array.isArray(profile.nature[k]) ? profile.nature[k].join("、") : profile.nature[k]) + '</li>'; }).join("") + '</ul></section>';
+        }
+        if (profile.drivers && profile.drivers.length) html += '<section class="profile-section"><h2>驱动因素</h2><ul>' + profile.drivers.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
+        if (profile.constraints && profile.constraints.length) html += '<section class="profile-section"><h2>约束条件</h2><ul>' + profile.constraints.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
+        if (profile.third_party_effects && profile.third_party_effects.length) html += '<section class="profile-section"><h2>第三方影响</h2><ul>' + profile.third_party_effects.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
+        if (profile.personnel_flows) html += '<section class="profile-section"><h2>人员流动</h2><p>' + esc(profile.personnel_flows) + '</p></section>';
+        if (profile.cooperation_dimensions && profile.cooperation_dimensions.length) html += '<section class="profile-section"><h2>合作维度</h2><ul>' + profile.cooperation_dimensions.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
+        if (profile.continuities && profile.continuities.length) html += '<section class="profile-section"><h2>连续性</h2><ul>' + profile.continuities.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
+        if (profile.differences && profile.differences.length) html += '<section class="profile-section"><h2>差异</h2><ul>' + profile.differences.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
         if (profile.causes && profile.causes.length) html += '<section class="profile-section"><h2>形成原因</h2><ul>' + profile.causes.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
         if (profile.key_turning_points && profile.key_turning_points.length) html += '<section class="profile-section"><h2>关键转折</h2><ul>' + profile.key_turning_points.map(function (x) { return '<li><b>' + esc(x.event) + '</b><p>' + esc(x.impact) + '</p></li>'; }).join("") + '</ul></section>';
-        html += '<section class="profile-section"><h2>当前状态</h2><p>' + esc(profile.current_status) + '</p></section>';
+        if (profile.current_status) html += '<section class="profile-section"><h2>当前状态</h2><p>' + esc(profile.current_status) + '</p></section>';
+        if (profile.current_assessment && profile.current_assessment !== profile.current_status) html += '<section class="profile-section"><h2>当前评估</h2><p>' + esc(profile.current_assessment) + '</p></section>';
         if (profile.regional_differences) html += '<section class="profile-section"><h2>地区差异</h2><p>' + esc(profile.regional_differences) + '</p></section>';
         if (profile.impact_on_security) html += '<section class="profile-section"><h2>对区域安全的影响</h2><p>' + esc(profile.impact_on_security) + '</p></section>';
         if (profile.why_it_matters) html += '<section class="profile-section"><h2>为什么重要</h2><p>' + esc(profile.why_it_matters) + '</p></section>';
         if (profile.uncertainties) html += '<section class="profile-section"><h2>不确定性与争议</h2><p>' + esc(profile.uncertainties) + '</p></section>';
+        if (profile.organizational_balance) html += '<section class="profile-section"><h2>组织平衡</h2><p>' + esc(profile.organizational_balance) + '</p></section>';
+        if (profile.role) html += '<section class="profile-section"><h2>角色</h2><p>' + esc(profile.role) + '</p></section>';
+        if (profile.asip_analysis) html += '<section class="profile-section analysis-partition"><div class="intel-analysis-card"><h2>ASIP Analysis · 平台分析</h2><p>' + esc(profile.asip_analysis) + '</p></div></section>';
+        if (profile.watch_indicators && profile.watch_indicators.length) html += '<section class="profile-section watch-partition"><div class="intel-watch-card"><h2>Watch Indicators · 后续观察指标</h2><ul>' + profile.watch_indicators.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></div></section>';
       } else {
         html += '<section class="profile-section"><h2>关系概述</h2><p>' + esc(rel.relation_summary) + '</p></section>';
         html += '<section class="profile-section"><h2>当前状态</h2><p>' + esc(rel.current_status_detail || rel.current_status) + '</p></section>';
