@@ -164,17 +164,17 @@ def validate():
             if not any("时效" in str(p) for p in _paras(secs.get("sources", ""))):
                 pass  # freshnessNote UI handles display; no hard fail
     # entity profile depth must match content completeness (I3-A standards)
-    # I3-D1: packet-imported profiles (imported_by=i3d1) carry externally confirmed content;
-    # their depth target comes from the content pack, so the char-count gate is not applied to
-    # them (no invented content to pad sections); all other checks still apply.
+    # I3-D1/D2: packet-imported profiles (imported_by=i3d1/i3d2) carry externally confirmed
+    # content; their depth target comes from the content pack, so the char-count gate is not
+    # applied to them (no invented content to pad sections); all other checks still apply.
     for eid, pr in ep.items():
         depth = pr.get("profile_depth")
         secs = pr.get("sections", {})
         body = sum(_tl(v) for v in secs.values())
         n = _secs(secs)
-        if pr.get("imported_by") == "i3d1":
+        if str(pr.get("imported_by", "")).startswith("i3d"):
             if not secs:
-                fail(f"i3d1 imported profile without sections: {eid}")
+                fail(f"packet-imported profile without sections: {eid}")
             continue
         if depth == "encyclopedia_full" and not (n >= 8 and body >= 1800):
             fail(f"encyclopedia_full content insufficient: {eid} (secs={n}, chars={body})")
