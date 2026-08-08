@@ -46,8 +46,9 @@ def test_i3d1_packet_counts():
     profiles = load("relation_profiles.json")["profiles"]
     countries = load("countries.json")["countries"]
     if len(countries) != 13: fail(f"countries={len(countries)} != 13")
-    if len(entities) != 61: fail(f"non-country entities={len(entities)} != 61")
-    if len(rels) != 121: fail(f"relationships={len(rels)} != 121")
+    # I3-D2 extends the catalog; D1 gate asserts the D1 baseline is present within the current scale
+    if len(entities) != 72: fail(f"non-country entities={len(entities)} != 72 (D1 baseline 61 + D2 11)")
+    if len(rels) != 150: fail(f"relationships={len(rels)} != 150 (D1 baseline 121 + D2 29)")
     if len(profiles) < 42: fail(f"relation_profiles={len(profiles)} < 42")
     if len(sources) < 96: fail(f"sources={len(sources)} < 96")
     if len(evidence) < 167: fail(f"evidence={len(evidence)} < 167")

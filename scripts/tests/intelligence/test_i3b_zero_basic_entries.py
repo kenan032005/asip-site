@@ -62,9 +62,9 @@ def main():
     check("all entities at least standard", cnt.get("basic", 0) == 0 and sum(cnt.values()) == len(eids))
     check("no new empty shells: new entities standard or above",
           all(d in ("standard", "encyclopedia_full") for eid, (d, _, _) in depths.items() if eid.startswith(("actor-mali-army", "actor-burkina-army", "actor-vdp", "actor-cameroon-bir", "actor-ambazonia-network", "actor-endf", "actor-fano", "actor-ola", "actor-tanzania-tpdf", "actor-tdf"))))
-    # depth backed by content (I3-D1 packet-imported profiles exempt, matching generator)
+    # depth backed by content (I3-D1/D2 packet-imported profiles exempt, matching generator)
     for eid, (d, n, body) in depths.items():
-        imported = profiles.get(eid, {}).get("imported_by") == "i3d1"
+        imported = str(profiles.get(eid, {}).get("imported_by", "")).startswith("i3d")
         if d == "encyclopedia_full":
             check(f"{eid}: ency content", imported or (n >= 8 and body >= 1800), f"secs={n}, chars={body}")
         elif d == "standard":

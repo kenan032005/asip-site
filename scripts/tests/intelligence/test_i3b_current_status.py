@@ -35,7 +35,10 @@ def main():
     for e in entities + countries:
         if e.get("freshness_status") in ("stale", "aging"):
             stale.append(e.get("entity_id", e.get("country_id")))
-    check("stale/aging current-status <= 3", len(stale) <= 3, str(stale))
+    # I3-D2: packet mandates aging for Katiba Serma / Dana Atem / Dozos of Macina / Sidi Ongoiba /
+    # Amadou Nionson Diarra / Youssouf Toloba (2025-only strong evidence), so the aging population
+    # legitimately exceeds the I3-B-era bound of 3; cap raised to 10, aging must never be upgraded.
+    check("stale/aging current-status <= 10 (I3-D2 packet aging preserved)", len(stale) <= 10, str(stale))
 
     no_asof = []
     for e in entities + countries:
