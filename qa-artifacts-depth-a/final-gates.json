@@ -1,0 +1,53 @@
+{
+  "artifact": "DEPTHA_FINAL_GATES",
+  "package": "ASIP-DEPTH-A-SAHEL-FLAGSHIP-V1",
+  "baseline_source_sha": "05365d8a403174001c7f1b4c339e3a64d88780e4",
+  "baseline_gh_pages_sha": "13847debfa56c6558b016b3f3ebcdf0bc64dbe05",
+  "source_branch": "feature/asip-intelligence-depth-a-sahel-flagship",
+  "final_source_head": "1a07a5c",
+  "gh_pages_publish_commit": "54167edf69311f8380a3a322cdb0c4afcdbc6034",
+  "pages_deployment": {
+    "run_id": 31277958625,
+    "head_sha": "54167edf69311f8380a3a322cdb0c4afcdbc6034",
+    "conclusion": "success"
+  },
+  "public_url": "https://kenan032005.github.io/asip-site/intelligence/africa/",
+  "final_scale": {
+    "countries": 13,
+    "non_country_entities": 72,
+    "relationships": 150,
+    "sources": 127,
+    "evidence": 214,
+    "relation_profiles": 55,
+    "relation_timelines": 51,
+    "routes": 249
+  },
+  "gates": {
+    "DEPTHA_BASELINE_GATE": "PASS",
+    "DEPTHA_AUDIT_GATE": "PASS",
+    "DEPTHA_FACT_CLEANUP_GATE": "PASS",
+    "DEPTHA_ENTITY_DEPTH_GATE": "PASS",
+    "DEPTHA_RELATION_DEPTH_GATE": "PASS",
+    "DEPTHA_SOURCE_EVIDENCE_GATE": "PASS",
+    "DEPTHA_FACT_ANALYSIS_SEPARATION_GATE": "PASS",
+    "DEPTHA_GENERATOR_GATE": "PASS",
+    "DEPTHA_BUILD_GATE": "PASS",
+    "DEPTHA_PUBLIC_QA_GATE": "PASS",
+    "DEPTHA_PRODUCTION_ISOLATION_GATE": "PASS"
+  },
+  "gate_evidence": {
+    "DEPTHA_BASELINE_GATE": "baseline verified exactly 13/72/150/50/50/115/194/249 with routes=249; no knowledge drift (depth_a_audit.py BASELINE_GATE PASS)",
+    "DEPTHA_AUDIT_GATE": "full mechanical Depth Audit of 72 entities + 150 relations completed with MECHANICAL_SCORE_NOT_FACT_QUALITY_JUDGMENT (entity-depth-audit.json, relation-depth-audit.json, depth-audit-summary.md)",
+    "DEPTHA_FACT_CLEANUP_GATE": "3 blocking corrections applied to source-of-truth (entity profiles, relation records) + generator-safe; Koufa active (current_status=active_jnim_deputy_and_katiba_macina_emir, freshness=current, death phrasings removed incl. roles/uncertainties); IS Sahel Sahrawi death=2021-08 and JNIM-IS conflict start=2019 (Apr 2026 = first Niger spillover); Al-Mourabitoun genealogy MUJAO+Belmokhtar with no Iyad link; residual = 0 in source data and dist",
+    "DEPTHA_ENTITY_DEPTH_GATE": "11 entities upgraded to packet target maturity (8x E3, 3x E2) with full encyclopedic sections incl. asip_analysis + watch_indicators; content_maturity + depth_score metadata; entity_id/slug/importance_level preserved",
+    "DEPTHA_RELATION_DEPTH_GATE": "11 relations upgraded (6x R3, 5x R2) with evolution_stages/drivers/constraints/current_assessment/uncertainties/asip_analysis/watch_indicators; relation_maturity metadata; timelines generated from evolution_stages where absent; relationship_type unchanged (JNIM-FLA=cooperates_with, JNIM-IS=hostile_to start 2019)",
+    "DEPTHA_SOURCE_EVIDENCE_GATE": "22 source candidates deduped (12 new + 10 reused incl. URL-exact); null published_at preserved (no invented dates); 20 evidence claims imported (ev-deptha-001..020); analytical_uncertainty kept as partially_verified (not upgraded); verified_with_estimate kept verified with estimate qualifier in method; all refs resolve",
+    "DEPTHA_FACT_ANALYSIS_SEPARATION_GATE": "ASIP Analysis rendered as distinct partition (.intel-analysis-card) and Watch Indicators as compact card (.intel-watch-card) after facts; maturity badges (E0-E3/R0-R3); verified in local QA (33 analysis + 30 watch partitions, 22/22 badges) and public QA (same counts)",
+    "DEPTHA_GENERATOR_GATE": "regeneration diff PASS: unexpected_object_deletions=0, entity_count_change=0, relationship_count_change=0, importance_level_change=0, relation_type_change=0, profile_depth_regressions=0, timeline_regressions=0, evidence_regressions=0; generator does not write back Koufa-death or other corrected facts",
+    "DEPTHA_BUILD_GATE": "build PASS (249 routes); full regression 33/33 python + 4/4 node + build + metrics + local-path 0 + routes present; 11 DEPTH A tests PASS",
+    "DEPTHA_PUBLIC_QA_GATE": "public QA 50 pages PASS (11 upgraded entities all 200, 11 upgraded relations all 200, 1920/1366/768/390 viewports; consoleErrors=0, runtimeExceptions=0, failedRequests=0, brokenAssets=0, horizontalOverflow=0; 22/22 maturity badges, 33 analysis + 30 watch partitions); public Network focus QA PASS",
+    "DEPTHA_PRODUCTION_ISOLATION_GATE": "production diff PASS: only intelligence/africa/** + assets/js/intelligence/africa.js + assets/css/intelligence.css changed (10 files); main site only build-meta diffs; RC previews preserved; UNEXPECTED_MODIFIED=0, UNEXPECTED_DELETED=0, UNEXPECTED_ADDED=0"
+  },
+  "blocked_source_metadata": [],
+  "DEPTH_A_status": "CLOSED"
+}
