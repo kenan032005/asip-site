@@ -37,7 +37,9 @@ async function main() {
       const candidate=nodes.find(n=>n.getAttribute('data-entity-id')!==focus&&!n.classList.contains('is-center'));
       const before={focus_id:focus,focus_name:document.querySelector('#focusName')?.textContent.trim()||null,node_count:nodes.length,edge_count:document.querySelectorAll('.graph-edge').length,right_panel_entity_id:(document.querySelector('#nodeInfo')?.textContent.match(/(?:actor|country|person|entity)-[A-Za-z0-9_-]+/)||[null])[0],neighbor_ids:nodes.map(n=>n.getAttribute('data-entity-id')).filter(x=>x!==focus).sort(),url:location.href,ready_state:document.readyState,graph_ready_state:document.querySelector('#graphHint')?.textContent||null};
       if(!candidate) return {before,candidate:null,after:before,changed:false};
-      candidate.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,view:window}));
+      candidate.scrollIntoView({block:'center',inline:'center'});
+      const rect=candidate.getBoundingClientRect();
+      candidate.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,view:window,clientX:rect.left+rect.width/2,clientY:rect.top+rect.height/2}));
       const afterFocus=document.querySelector('#focusId')?.textContent.trim()||null;
       const afterNodes=[...document.querySelectorAll('g.graph-node[data-entity-id]')];
       const after={focus_id:afterFocus,focus_name:document.querySelector('#focusName')?.textContent.trim()||null,node_count:afterNodes.length,edge_count:document.querySelectorAll('.graph-edge').length,right_panel_entity_id:(document.querySelector('#nodeInfo')?.textContent.match(/(?:actor|country|person|entity)-[A-Za-z0-9_-]+/)||[null])[0],neighbor_ids:afterNodes.map(n=>n.getAttribute('data-entity-id')).filter(x=>x!==afterFocus).sort(),url:location.href,ready_state:document.readyState,graph_ready_state:document.querySelector('#graphHint')?.textContent||null};

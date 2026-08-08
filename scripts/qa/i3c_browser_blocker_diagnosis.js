@@ -163,6 +163,7 @@ async function run() {
     const focus = document.querySelector("#focusId")?.textContent.trim();
     const node = [...document.querySelectorAll("g.graph-node[data-entity-id]")].find((item) => item.getAttribute("data-entity-id") !== focus && !item.classList.contains("is-center"));
     if (!node) return null;
+    node.scrollIntoView({ block: "center", inline: "center" });
     const shape = node.querySelector(".node-shape") || node;
     const rect = shape.getBoundingClientRect();
     return { entity_id: node.getAttribute("data-entity-id"), x: rect.left + rect.width / 2, y: rect.top + rect.height / 2, aria_label: node.getAttribute("aria-label") || "" };
@@ -191,6 +192,7 @@ async function run() {
     ws.close();
     return;
   }
+  clickedNodeId = candidate.entity_id;
   await cdp("Input.dispatchMouseEvent", { type: "mouseMoved", x: candidate.x, y: candidate.y });
   await cdp("Input.dispatchMouseEvent", { type: "mousePressed", x: candidate.x, y: candidate.y, button: "left", clickCount: 1 });
   await cdp("Input.dispatchMouseEvent", { type: "mouseReleased", x: candidate.x, y: candidate.y, button: "left", clickCount: 1 });
