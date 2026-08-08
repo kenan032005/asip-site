@@ -1,0 +1,202 @@
+{
+ "artifact": "I3D1_SCHEMA_MAPPING",
+ "package": "ASIP-I3D1-SAHEL-CONTENT-PACK-V1",
+ "note": "Mechanical mapping only; transformation_type limited to DIRECT/MECHANICAL_FORMAT/EXISTING_DEFAULT/NOT_APPLICABLE. No FACTUAL_REINTERPRETATION.",
+ "entities": [
+  {
+   "packet_field": "entity_id/slug/entity_type/name_zh/name_en/acronym/aliases/importance_level",
+   "production_field": "same",
+   "mapping": "direct copy",
+   "transformation_type": "DIRECT"
+  },
+  {
+   "packet_field": "primary_category",
+   "production_field": "primary_category",
+   "mapping": "direct copy",
+   "transformation_type": "DIRECT"
+  },
+  {
+   "packet_field": "country_ids/region_ids/current_status/claim_valid_as_of/freshness_status/confidence/disputed",
+   "production_field": "same",
+   "mapping": "direct copy",
+   "transformation_type": "DIRECT"
+  },
+  {
+   "packet_field": "short_description",
+   "production_field": "short_description + profile.lead",
+   "mapping": "direct copy into both",
+   "transformation_type": "DIRECT"
+  },
+  {
+   "packet_field": "(absent) primary_type",
+   "production_field": "primary_type",
+   "mapping": "entity_type==person -> person, else organization (matches actor-jnim)",
+   "transformation_type": "EXISTING_DEFAULT"
+  },
+  {
+   "packet_field": "(absent) native_name/historical_names/tags/secondary_types",
+   "production_field": "same",
+   "mapping": "empty defaults",
+   "transformation_type": "EXISTING_DEFAULT"
+  },
+  {
+   "packet_field": "profile_depth_target",
+   "production_field": "entity_profiles.profile_depth + profile_level",
+   "mapping": "direct copy (content gate handled by generator targeted import)",
+   "transformation_type": "MECHANICAL_FORMAT"
+  },
+  {
+   "packet_field": "profile.core_assessment/formation_background/history/current_assessment/controversies_uncertainties/structure",
+   "production_field": "entity_profiles.sections",
+   "mapping": "direct copy; name_and_translation + sources sections generated from name fields and mapped sources",
+   "transformation_type": "DIRECT"
+  },
+  {
+   "packet_field": "(absent) verification_status",
+   "production_field": "verification_status",
+   "mapping": "pending_review default (matches existing records)",
+   "transformation_type": "EXISTING_DEFAULT"
+  }
+ ],
+ "relationships": [
+  {
+   "packet_field": "relationship_id/source_entity_id/target_entity_id/relationship_type/relation_summary/current_status/time_start/time_end/confidence/disputed/scope_note/display_ring/claim_valid_as_of/source_ids",
+   "production_field": "same",
+   "mapping": "direct copy; scope_note -> relationship_semantics_note; source_ids -> source_refs via mapping",
+   "transformation_type": "DIRECT"
+  },
+  {
+   "packet_field": "(absent) slug",
+   "production_field": "slug",
+   "mapping": "relationship_id minus 'rel-' prefix (matches existing)",
+   "transformation_type": "MECHANICAL_FORMAT"
+  },
+  {
+   "packet_field": "(absent) direction",
+   "production_field": "direction",
+   "mapping": "unidirectional (matches existing)",
+   "transformation_type": "EXISTING_DEFAULT"
+  },
+  {
+   "packet_field": "(absent) start_year",
+   "production_field": "start_year",
+   "mapping": "first 4 digits of time_start or null",
+   "transformation_type": "MECHANICAL_FORMAT"
+  },
+  {
+   "packet_field": "(absent) current_status_detail",
+   "production_field": "current_status_detail",
+   "mapping": "copy of relation_summary (matches existing pattern)",
+   "transformation_type": "MECHANICAL_FORMAT"
+  },
+  {
+   "packet_field": "(absent) freshness_status",
+   "production_field": "freshness_status",
+   "mapping": "derived from current_status/claim_valid_as_of",
+   "transformation_type": "MECHANICAL_FORMAT"
+  }
+ ],
+ "relation_profiles": [
+  {
+   "packet_field": "relationship_id",
+   "production_field": "relation_id/slug/source_entity_id/target_entity_id/relation_type/parties/source_ids",
+   "mapping": "copied from imported relationship record",
+   "transformation_type": "MECHANICAL_FORMAT"
+  },
+  {
+   "packet_field": "deep_relation_profiles.current_assessment",
+   "production_field": "overview",
+   "mapping": "direct copy",
+   "transformation_type": "DIRECT"
+  },
+  {
+   "packet_field": "deep_relation_profiles.uncertainties",
+   "production_field": "uncertainties",
+   "mapping": "direct copy",
+   "transformation_type": "DIRECT"
+  },
+  {
+   "packet_field": "deep_relation_profiles.timeline",
+   "production_field": "relation_timelines",
+   "mapping": "date preserved; text -> event_title full text; event_description/impact empty; confidence/disputed/source_ids from relationship",
+   "transformation_type": "MECHANICAL_FORMAT"
+  },
+  {
+   "packet_field": "(absent) formation_background/initial_relationship/evolution_stages/causes/key_turning_points/regional_differences/impact_on_security/why_it_matters",
+   "production_field": "same",
+   "mapping": "empty defaults",
+   "transformation_type": "EXISTING_DEFAULT"
+  }
+ ],
+ "sources": [
+  {
+   "packet_field": "source_id/title/publisher/source_type/url/reliability",
+   "production_field": "same",
+   "mapping": "direct copy",
+   "transformation_type": "DIRECT"
+  },
+  {
+   "packet_field": "published_at (may be null)",
+   "production_field": "published_at",
+   "mapping": "keep null (schema allows null, existing sources have null); no invented date",
+   "transformation_type": "DIRECT"
+  },
+  {
+   "packet_field": "date_precision",
+   "production_field": "notes",
+   "mapping": "recorded inside notes",
+   "transformation_type": "MECHANICAL_FORMAT"
+  },
+  {
+   "packet_field": "use_for",
+   "production_field": "notes",
+   "mapping": "recorded inside notes",
+   "transformation_type": "MECHANICAL_FORMAT"
+  },
+  {
+   "packet_field": "(absent) accessed_at",
+   "production_field": "accessed_at",
+   "mapping": "2026-08-08",
+   "transformation_type": "EXISTING_DEFAULT"
+  }
+ ],
+ "evidence": [
+  {
+   "packet_field": "claim_id/claim_text_zh/entity_ids/relation_ids/source_id/confidence/disputed/verification_status/claim_valid_as_of",
+   "production_field": "same",
+   "mapping": "direct copy; source_id mapped; verification_status preserved (no partial->verified upgrade)",
+   "transformation_type": "DIRECT"
+  },
+  {
+   "packet_field": "(absent) evidence_id",
+   "production_field": "evidence_id",
+   "mapping": "ev-d1-<n> prefix",
+   "transformation_type": "MECHANICAL_FORMAT"
+  },
+  {
+   "packet_field": "(absent) source_locator",
+   "production_field": "source_locator",
+   "mapping": "source record url (verified evidence requires locator)",
+   "transformation_type": "MECHANICAL_FORMAT"
+  },
+  {
+   "packet_field": "(absent) claim_type",
+   "production_field": "claim_type",
+   "mapping": "fact default",
+   "transformation_type": "EXISTING_DEFAULT"
+  },
+  {
+   "packet_field": "(absent) country_ids/region_ids",
+   "production_field": "same",
+   "mapping": "union of linked entities' country/region ids",
+   "transformation_type": "MECHANICAL_FORMAT"
+  },
+  {
+   "packet_field": "(absent) evidence_origin/verification_method",
+   "production_field": "same",
+   "mapping": "manual_source_mapping / I3-D1 external research channel import",
+   "transformation_type": "EXISTING_DEFAULT"
+  }
+ ],
+ "blocked_mappings": []
+}
