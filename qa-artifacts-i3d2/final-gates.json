@@ -1,0 +1,49 @@
+{
+  "artifact": "I3D2_FINAL_GATES",
+  "package": "ASIP-I3D2-JNIM-REGIONAL-NETWORK-V1",
+  "baseline_source_sha": "d6860f91c36bef00619a77437af1a5e4e455a9ac",
+  "baseline_gh_pages_sha": "efe71a8e82d566b1eb4b6f5b2b8b66dc51a932eb",
+  "source_branch": "feature/asip-intelligence-v10-i3d2-regional-network",
+  "final_source_head": "e35ca66",
+  "gh_pages_publish_commit": "13847debfa56c6558b016b3f3ebcdf0bc64dbe05",
+  "pages_deployment": {
+    "run_id": 31275609742,
+    "head_sha": "13847debfa56c6558b016b3f3ebcdf0bc64dbe05",
+    "conclusion": "success"
+  },
+  "public_url": "https://kenan032005.github.io/asip-site/intelligence/africa/",
+  "final_scale": {
+    "countries": 13,
+    "non_country_entities": 72,
+    "relationships": 150,
+    "sources": 115,
+    "evidence": 194,
+    "relation_profiles": 50,
+    "relation_timelines": 50,
+    "routes": 249
+  },
+  "gates": {
+    "I3D2_SOURCE_GATE": "PASS",
+    "I3D2_ENTITY_GATE": "PASS",
+    "I3D2_RELATION_GATE": "PASS",
+    "I3D2_REFRESH_GATE": "PASS",
+    "I3D2_EVIDENCE_GATE": "PASS",
+    "I3D2_GENERATOR_GATE": "PASS",
+    "I3D2_BUILD_GATE": "PASS",
+    "I3D2_PUBLIC_QA_GATE": "PASS",
+    "I3D2_PRODUCTION_ISOLATION_GATE": "PASS"
+  },
+  "gate_evidence": {
+    "I3D2_SOURCE_GATE": "7 candidates: 6 new + 1 URL-exact reused (d2-acled-dozo-2025-10-08 -> d1-acled-dozo-2026); 3 null published_at preserved (NCTC as_of_2026-05, Africa Center 2026, ACLED dan-na profile); no invented dates; SOURCE_DATE_SCHEMA_BLOCKER=0",
+    "I3D2_ENTITY_GATE": "11 entities imported (Jafar Dicko, Ousmane Dicko, Katiba Hanifa, Abou Ghosmane, Katiba Serma, Dana Atem, Ibrahim Malam Dicko, Dozos of Macina, Sidi Ongoiba, Amadou Nionson Diarra, Youssouf Toloba); ids/slugs unique; profiles present (72/72)",
+    "I3D2_RELATION_GATE": "29 relations imported; locked semantics verified: Jafar-JNIM=affiliated_with (not whole-JNIM led_by), Ansarul-Jafar=led_by, Ansarul-Ibrahim=founded_by, Katiba Hanifa-JNIM=constituent_of, Katiba Hanifa-Abu Hanifa=led_by, Katiba Hanifa-Benin Forces=fought_against, Dana Atem-Dan Na=split_from, Dana/Dozos-FAMa=cooperates_with (not member_of_force), JNIM-Nigeria=operates_in+emerging_limited_presence; all types within 24-type registry",
+    "I3D2_REFRESH_GATE": "3 entity refreshes (JNIM +Benin/Nigeria + active_and_expanding_across_west_africa; Abu Hanifa profile append + Burkina/Benin; Ansarul profile append) and 3 relationship refreshes (jnim-benin-spillover, jnim-benin-forces-fought, jnim-is-conflict) applied to base records; rel-jnim-is-conflict kept hostile_to with 2026 Tillabéri/Kebbi timeline appended and Kebbi identity qualifier preserved; no duplicate relations created",
+    "I3D2_EVIDENCE_GATE": "12 evidence imported (ev-d2-001..012); refs resolve; verification_status preserved (all verified per packet); freshness derived",
+    "I3D2_GENERATOR_GATE": "generator gate extended to i3d2 packet profiles; regeneration diff PASS (unexpected_object_deletions=0, profile_depth_regressions=0, evidence_regressions=0, relation_type_regressions=0, timeline_regressions=0)",
+    "I3D2_BUILD_GATE": "build PASS (249 routes: 72 entities + 150 relations + 13 countries + 7 regions + index/home); full regression 32/32 python + 4/4 node + build + metrics + local-path 0; 9 I3-D2 tests PASS",
+    "I3D2_PUBLIC_QA_GATE": "public QA 68 pages PASS (11 new entities all 200, 29 new relations all 200, 3 refreshed entities all 200; 1920/1366/390 viewports; consoleErrors=0, runtimeExceptions=0, failedRequests=0, brokenAssets=0, horizontalOverflow=0); public Network focus QA PASS (JNIM/Katiba Hanifa/Dana Atem/Abou Ghosmane/Jafar Dicko/Dozos of Macina)",
+    "I3D2_PRODUCTION_ISOLATION_GATE": "production diff PASS: only intelligence/africa/** changed (10 data files + 40 new pages); main site only build-meta diffs; RC previews preserved; UNEXPECTED_MODIFIED=0, UNEXPECTED_DELETED=0, UNEXPECTED_ADDED=0"
+  },
+  "blocked_source_metadata": [],
+  "I3D2_status": "CLOSED"
+}
