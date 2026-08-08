@@ -1,0 +1,53 @@
+{
+  "artifact": "I3D1_FINAL_GATES",
+  "package": "ASIP-I3D1-SAHEL-CONTENT-PACK-V1",
+  "baseline_source_sha": "979e2d6dbe9c899dde05b5fa6d89dcea928e577c",
+  "baseline_gh_pages_sha": "b666fefbd82e68e9d479020d74a4240e35fde199",
+  "source_branch": "feature/asip-intelligence-v10-i3d1-sahel-import",
+  "final_source_head": "ecf7402",
+  "gh_pages_publish_commit": "acfdb9df374c5d56c8a977180907fe918906954c",
+  "gh_pages_css_fix_commit": "efe71a8e82d566b1eb4b6f5b2b8b66dc51a932eb",
+  "pages_deployment": {
+    "run_id_content": 31273299657,
+    "head_sha": "acfdb9df374c5d56c8a977180907fe918906954c",
+    "conclusion": "success"
+  },
+  "pages_deployment_css_fix": {
+    "run_id": 31273619731,
+    "head_sha": "efe71a8e82d566b1eb4b6f5b2b8b66dc51a932eb",
+    "conclusion": "success"
+  },
+  "public_url": "https://kenan032005.github.io/asip-site/intelligence/africa/",
+  "final_scale": {
+    "countries": 13,
+    "non_country_entities": 61,
+    "relationships": 121,
+    "sources": 109,
+    "evidence": 182,
+    "relation_profiles": 42,
+    "relation_timelines": 42,
+    "routes": 209
+  },
+  "gates": {
+    "I3D1_PREP_GATE": "PASS",
+    "I3D1_ENTITY_GATE": "PASS",
+    "I3D1_RELATION_GATE": "PASS",
+    "I3D1_SOURCE_EVIDENCE_GATE": "PASS",
+    "I3D1_GENERATOR_GATE": "PASS",
+    "I3D1_BUILD_GATE": "PASS",
+    "I3D1_PUBLIC_QA_GATE": "PASS",
+    "I3D1_PRODUCTION_ISOLATION_GATE": "PASS"
+  },
+  "gate_evidence": {
+    "I3D1_PREP_GATE": "3 corrections applied to relationships base + generator; un-jnim-2018 cleared; 4 residual phrases = 0 in source data and dist (integrity-semantics-gate.json)",
+    "I3D1_ENTITY_GATE": "15 entities imported with packet fields; ids/slugs unique; profiles present (61/61); integrity gate PASS",
+    "I3D1_RELATION_GATE": "43 relationships imported; locked semantics verified (FLA-JNIM cooperates_with, Ansaru-AQIM pledged_allegiance_to, Ansarul-JNIM constituent_of, Lakurawa disputed=true, Dan Na-FAMa cooperates_with, Sadou historical/current split); all types within 24-type registry; endpoints resolve",
+    "I3D1_SOURCE_EVIDENCE_GATE": "13 new sources + 3 URL-exact reused; no invented dates (6 ACLED null published_at preserved); 15 evidence imported; Lakurawa claims keep disputed=true + partially_verified; 182 evidence refs resolve",
+    "I3D1_GENERATOR_GATE": "generator synced (relation cap 150, region endpoints, freshness enum, packet profile depth); regeneration diff 0/0/0/0/0 (generator-regen-diff.json)",
+    "I3D1_BUILD_GATE": "build PASS (209 routes, 61/121/42/182); full regression 31/31 python + 4/4 node + build + metrics + local path (full-regression.json)",
+    "I3D1_PUBLIC_QA_GATE": "public QA 80 pages PASS (15 new entities all 200, 43 new relations all 200, 1920/1366/390 viewports; consoleErrors=0, runtimeExceptions=0, failedRequests=0, brokenAssets=0, horizontalOverflow=0, unhandledRejections=0); public Network focus QA PASS (public-browser-qa.json, network-density-qa.json)",
+    "I3D1_PRODUCTION_ISOLATION_GATE": "production diff PASS: only intelligence/africa/** + africa.js changed; main site only build-meta diffs; RC previews preserved; UNEXPECTED=0 (production-diff.json)"
+  },
+  "blocked_source_metadata": [],
+  "I3D1_status": "CLOSED"
+}
