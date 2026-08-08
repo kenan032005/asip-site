@@ -4,7 +4,7 @@ const path = require("path");
 const WebSocket = require("ws");
 const PUBLIC = process.env.PUBLIC_BASE || "https://kenan032005.github.io/asip-site/intelligence/africa";
 const CDP_PORT = Number(process.env.CDP_PORT || 9225);
-const OUT = path.join(__dirname, "..", "..", "qa-artifacts-i3c", "production-browser-qa-postfix.json");
+const OUT = path.join(__dirname, "..", "..", "qa-artifacts-i3c", process.env.OUT_FILE || "production-browser-qa-v101.json");
 const routes = ["", "regions/", "countries/", "entities/", "relations/", "sources/", "network/", "country/benin/", "country/burkina-faso/", "country/cameroon/", "country/chad/", "country/ethiopia/", "country/libya/", "country/mali/", "country/mozambique/", "country/niger/", "country/nigeria/", "country/south-sudan/", "country/sudan/", "country/tanzania/", "entity/jnim/", "entity/al-qaida/", "entity/aqim/", "entity/ansar-eddine/", "entity/al-mourabitoun/", "entity/katiba-macina/", "entity/is-sahel/", "entity/amadou-koufa/", "entity/iyad-ag-ghali/", "entity/islamic-state/", "entity/boko-haram-jas/", "entity/iswap/", "entity/mnjtf/", "entity/chad-armed-forces/", "entity/nigerian-armed-forces/", "entity/cameroon-armed-forces/", "entity/benin-security-forces/", "entity/sudanese-armed-forces/", "entity/rapid-support-forces/", "entity/splm-n-al-hilu/", "relation/jnim-is-sahel-hostile/", "relation/burkina-army-is-sahel/", "relation/burkina-army-jnim/", "relation/cameroon-army-ambazonia/", "relation/cameroon-army-iswap/", "relation/cameroon-army-jas/", "relation/endf-fano-conflict/", "relation/endf-ola-conflict/", "relation/endf-tdf-conflict/", "relation/ethiopia-sudan-border/", "relation/jas-iswap-conflict/", "relation/lna-gnu-rivalry/", "relation/mali-army-is-sahel/", "relation/mali-army-jnim/", "relation/nigeria-mnjtf-member/", "relation/nigeria-cameroon-border/", "relation/splm-io-sspdf-conflict/", "relation/tanzania-mozambique-cooperate/", "relation/tanzania-samim-member/", "relation/tanzania-tpdf-is-moz/", "relation/vdp-burkina-support/"];
 const viewports = [1920, 1366, 768, 390];
 const viewportRoutes = ["", "country/ethiopia/", "country/niger/", "entity/jnim/", "network/", "relation/jnim-is-sahel-hostile/"];
@@ -12,7 +12,7 @@ function getJson(url) { return new Promise((resolve, reject) => { http.get(url, 
 function wait(ms) { return new Promise((resolve) => setTimeout(resolve, ms)); }
 async function main() {
   const targets = await getJson(`http://127.0.0.1:${CDP_PORT}/json/list`);
-  const target = targets.find((x) => x.type === "page" && x.url !== "about:blank");
+  const target = targets.find((x) => x.type === "page" && !x.url.startsWith("edge://") && !x.url.startsWith("chrome-extension://") && !x.url.startsWith("devtools://"));
   if (!target) throw new Error("CDP page target not found");
   const ws = new WebSocket(target.webSocketDebuggerUrl);
   await new Promise((resolve, reject) => { ws.once("open", resolve); ws.once("error", reject); });

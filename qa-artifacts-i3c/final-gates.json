@@ -1,20 +1,22 @@
 {
   "artifact": "I3C_FINAL_GATES",
+  "version": "v1.0.1-browser-fix-closed",
   "baseline_commit": "ef967889f64ae70e295935eb28a2aec7c46d96f7",
   "source_branch": "feature/asip-intelligence-v10-i3c-production",
-  "source_head": "f83c5a67e22cf1930e60439656d59888073179ba",
-  "gh_pages_publish_commit": "615a6e3a10818623134d607e3d49e632ca4f89eb",
+  "source_head": "db9ba76",
+  "browser_fix_commits": [
+    "1fcc55f fix: correct Africa intelligence asset paths",
+    "c46813d qa: add Network four-viewport focus regression",
+    "26b5311 qa: capture valid Network focus transitions",
+    "db9ba76 fix: reconcile Africa asset paths from template source of truth with QA evidence"
+  ],
+  "gh_pages_publish_commit": "b666fefbd82e68e9d479020d74a4240e35fde199",
+  "I3C_BROWSER_FIX_GH_PAGES_SHA": "b666fefbd82e68e9d479020d74a4240e35fde199",
   "workflow": {
     "name": "pages build and deployment",
-    "run_id": 31246682879,
-    "run_number": 161,
+    "run_id": 31265830778,
+    "head_sha": "b666fefbd82e68e9d479020d74a4240e35fde199",
     "conclusion": "success"
-  },
-  "deployment": {
-    "id": 5806748646,
-    "commit": "615a6e3a10818623134d607e3d49e632ca4f89eb",
-    "state": "success",
-    "environment_url": "https://kenan032005.github.io/asip-site/"
   },
   "public_url": "https://kenan032005.github.io/asip-site/intelligence/africa/",
   "rc_url": "https://kenan032005.github.io/asip-site/previews/asip-intelligence-v1.0-rc1/intelligence/africa/",
@@ -23,18 +25,30 @@
     "I3C_REGRESSION_GATE": "PASS",
     "I3C_PRODUCTION_DIFF_GATE": "PASS",
     "I3C_DEPLOYMENT_GATE": "PASS",
-    "I3C_PUBLIC_QA_GATE": "OPEN",
+    "I3C_PUBLIC_QA_GATE": "PASS",
     "I3C_MAIN_SITE_GATE": "PASS",
     "I3C_DATA_FREEZE_GATE": "PASS",
     "I3C_ROLLBACK_GATE": "PASS"
   },
-  "blocking_issue": "正式生产 79 页浏览器回归的 3 个 runtime exceptions 与 Network 交互检查仍未完全通过；Node/CDP 实际运行结果为 consoleErrors=0、failedRequests=0、horizontalOverflow=0，但 node_click_focus_switch=false，不能关闭公网 QA Gate。",
-  "overall_gate": "OPEN",
-  "tag": "asip-intelligence-v1.0",
-  "tag_object_sha": "45856a210b0327f56e9a40f82e5a85d2902c5ebd",
-  "tag_peeled_commit_sha": "7880cf9c9e16bdc567cee678dedcb81dfa1e1d2a",
-  "tag_remote": "origin/asip-intelligence-v1.0",
-  "post_tag_qa_commits": [
-    "f83c5a67e22cf1930e60439656d59888073179ba"
-  ]
+  "browser_fix_evidence": {
+    "asset_path_route_matrix": "PASS (11 route classes, 151 generated pages, prefixes match directory depth)",
+    "asset_resolution_scan": "PASS (151 HTML scanned, missing_local_assets=0, broken_script_src=0, broken_stylesheet_href=0)",
+    "representative_browser_qa": "PASS (11 pages @1366, public; runtimeExceptions=0, consoleErrors=0, failedRequests=0, brokenAssets=0, header loaded on all)",
+    "full_public_qa": "PASS (85 pages public; consoleErrors=0, runtimeExceptions=0, failedRequests=0, brokenAssets=0, horizontalOverflow=0, unhandledRejections=0)",
+    "network_single_diagnosis": "PASS (focus before=actor-jnim, clicked=actor-al-qaida, after=actor-al-qaida; URL+right-panel synced; neighbor set changed)",
+    "network_four_viewport": "PASS (1920/1366/768/390 x 10 runs, all focus switches true, 0 errors/4xx)",
+    "data_freeze": "KNOWLEDGE_DATA_CHANGED=0 (source==dist==gh-pages==v10 frozen baseline)",
+    "production_diff": "PASS (whitelist 170 files identical; main site only build-meta diffs; RC preview 313 files preserved; UNEXPECTED_MODIFIED=0, UNEXPECTED_DELETED=0)",
+    "network_failure_classification": "SECONDARY_FAILURE_CAUSED_BY_ASSET_PATH (no product JS change needed)"
+  },
+  "overall_gate": "PASS",
+  "I3C_status": "CLOSED",
+  "tag_v1_0": {
+    "name": "asip-intelligence-v1.0",
+    "status": "PRESERVED (not moved, not overwritten)"
+  },
+  "tag_v1_0_1": {
+    "name": "asip-intelligence-v1.0.1",
+    "status": "CREATED"
+  }
 }

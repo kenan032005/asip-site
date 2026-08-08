@@ -6,7 +6,7 @@ const WebSocket = require("ws");
 const CDP_PORT = Number(process.env.CDP_PORT || 9225);
 const TARGET_URL = process.env.PUBLIC_NETWORK || "https://kenan032005.github.io/asip-site/intelligence/africa/network/";
 const VIEWPORT = Number(process.env.VIEWPORT || 1366);
-const OUT = path.join(__dirname, "..", "..", "qa-artifacts-i3c", "browser-blocker-diagnosis.json");
+const OUT = path.join(__dirname, "..", "..", "qa-artifacts-i3c", process.env.OUT_FILE || "browser-blocker-diagnosis.json");
 
 function getJson(url) {
   return new Promise((resolve, reject) => {

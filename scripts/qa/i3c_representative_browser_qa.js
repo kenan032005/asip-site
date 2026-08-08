@@ -14,7 +14,7 @@ function getJson(url) { return new Promise((resolve, reject) => { http.get(url, 
 function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
 async function main() {
   const targets = await getJson(`http://127.0.0.1:${CDP_PORT}/json/list`);
-  const target = targets.find(x => x.type === "page" && x.url !== "about:blank");
+  const target = targets.find(x => x.type === "page" && !x.url.startsWith("edge://") && !x.url.startsWith("chrome-extension://") && !x.url.startsWith("devtools://"));
   if (!target) throw new Error("CDP page target not found");
   const ws = new WebSocket(target.webSocketDebuggerUrl);
   await new Promise((resolve, reject) => { ws.once("open", resolve); ws.once("error", reject); });
@@ -33,7 +33,7 @@ async function main() {
     pages.push({ label, route, url: currentUrl, state, events: { runtime_exceptions: events.exceptions.length - before.exceptions, console_errors: events.console.length - before.console, failed_requests: events.failed.length - before.failed, bad_responses: events.bad.length - before.bad, unhandled_rejections: rejection.length } });
   }
   const checks = pages.every(p => p.state.ready_state === "complete" && p.state.equivalent_public_header_loaded && p.state.error_hidden && !p.state.overflow && Object.values(p.events).every(v => v === 0));
-  const report = { artifact: "I3C_REPRESENTATIVE_BROWSER_QA", generated_at: new Date().toISOString(), public_base: PUBLIC, viewport: 1366, pages, summary: { pagesChecked: pages.length, consoleErrors: events.console.length, runtimeExceptions: events.exceptions.length, failedRequests: events.failed.length, brokenAssets: events.bad.length, horizontalOverflow: pages.filter(p => p.state.overflow).length, unexpectedUnhandledRejections: pages.reduce((n,p) => n + p.events.unhandled_rejections, 0), equivalent_public_header_all_pass: pages.every(p => p.state.equivalent_public_header_loaded), gate: checks ? "PASS" : "OPEN" } };
+  const report = { artifact: "I3C_REPRESENTATIVE_BROWSER_QA", generated_at: new Date().toISOString(), public_base: PUBLIC, viewport: 1366, pages, events: { exceptions: events.exceptions, console_errors: events.console, failed_requests: events.failed, bad_responses: events.bad }, summary: { pagesChecked: pages.length, consoleErrors: events.console.length, runtimeExceptions: events.exceptions.length, failedRequests: events.failed.length, brokenAssets: events.bad.length, horizontalOverflow: pages.filter(p => p.state.overflow).length, unexpectedUnhandledRejections: pages.reduce((n,p) => n + p.events.unhandled_rejections, 0), equivalent_public_header_all_pass: pages.every(p => p.state.equivalent_public_header_loaded), gate: checks ? "PASS" : "OPEN" } };
   fs.mkdirSync(path.dirname(OUT), { recursive: true }); fs.writeFileSync(OUT, JSON.stringify(report, null, 2)); console.log(JSON.stringify(report.summary)); ws.close();
 }
 main().catch(e => { console.error(e.stack || e); process.exit(1); });
