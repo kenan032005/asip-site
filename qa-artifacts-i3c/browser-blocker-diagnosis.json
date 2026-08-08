@@ -1,0 +1,142 @@
+{
+  "artifact": "I3C_BROWSER_BLOCKER_DIAGNOSIS",
+  "generated_at": "2026-08-08T13:13:16.845Z",
+  "page_url": "https://kenan032005.github.io/asip-site/intelligence/africa/network/",
+  "viewport": 1366,
+  "cdp_port": 9225,
+  "browser_target_url": "https://kenan032005.github.io/asip-site/intelligence/africa/network/",
+  "initial": {
+    "label": "initial-state",
+    "url": "https://kenan032005.github.io/asip-site/intelligence/africa/network/",
+    "ready_state": "complete",
+    "graph_ready_state": "加载统一非洲数据…",
+    "focus_id": "actor-jnim",
+    "focus_name": "JNIM",
+    "node_count": 0,
+    "edge_count": 0,
+    "right_panel_entity_id": null,
+    "right_panel_text": "当前焦点\n\n选择节点查看实体档案；点击关系线查看关系详情。",
+    "neighbor_ids": [],
+    "viewport_width": 500,
+    "scroll_width": 485
+  },
+  "candidate_node": null,
+  "after_click": null,
+  "focus_transition": {
+    "focus_before": "actor-jnim",
+    "clicked_node_id": null,
+    "focus_after": null,
+    "changed": false
+  },
+  "exceptions": [],
+  "console_errors": [
+    {
+      "page_url": "https://kenan032005.github.io/asip-site/intelligence/africa/network/",
+      "viewport": 1366,
+      "test_step": "attach",
+      "action": "attach to clean Edge session",
+      "source": "Log.entryAdded",
+      "text": "Failed to load resource: the server responded with a status of 404 ()",
+      "url": "https://kenan032005.github.io/assets/css/intelligence.css",
+      "line": null,
+      "column": null
+    },
+    {
+      "page_url": "https://kenan032005.github.io/asip-site/intelligence/africa/network/",
+      "viewport": 1366,
+      "test_step": "attach",
+      "action": "attach to clean Edge session",
+      "source": "Log.entryAdded",
+      "text": "Failed to load resource: the server responded with a status of 404 ()",
+      "url": "https://kenan032005.github.io/assets/css/style.css",
+      "line": null,
+      "column": null
+    },
+    {
+      "page_url": "https://kenan032005.github.io/asip-site/intelligence/africa/network/",
+      "viewport": 1366,
+      "test_step": "attach",
+      "action": "attach to clean Edge session",
+      "source": "Log.entryAdded",
+      "text": "Failed to load resource: the server responded with a status of 404 ()",
+      "url": "https://kenan032005.github.io/assets/js/intelligence/africa.js",
+      "line": null,
+      "column": null
+    },
+    {
+      "page_url": "https://kenan032005.github.io/asip-site/intelligence/africa/network/",
+      "viewport": 1366,
+      "test_step": "initial-load",
+      "action": "navigate to formal Network page",
+      "source": "Log.entryAdded",
+      "text": "Failed to load resource: the server responded with a status of 404 ()",
+      "url": "https://kenan032005.github.io/assets/js/intelligence/africa.js",
+      "line": null,
+      "column": null
+    },
+    {
+      "page_url": "https://kenan032005.github.io/asip-site/intelligence/africa/network/",
+      "viewport": 1366,
+      "test_step": "initial-load",
+      "action": "navigate to formal Network page",
+      "source": "Log.entryAdded",
+      "text": "Failed to load resource: the server responded with a status of 404 ()",
+      "url": "https://kenan032005.github.io/assets/css/style.css",
+      "line": null,
+      "column": null
+    },
+    {
+      "page_url": "https://kenan032005.github.io/asip-site/intelligence/africa/network/",
+      "viewport": 1366,
+      "test_step": "initial-load",
+      "action": "navigate to formal Network page",
+      "source": "Log.entryAdded",
+      "text": "Failed to load resource: the server responded with a status of 404 ()",
+      "url": "https://kenan032005.github.io/assets/css/intelligence.css",
+      "line": null,
+      "column": null
+    }
+  ],
+  "failed_requests": [],
+  "bad_responses": [
+    {
+      "page_url": "https://kenan032005.github.io/asip-site/intelligence/africa/network/",
+      "viewport": 1366,
+      "test_step": "initial-load",
+      "action": "navigate to formal Network page",
+      "request_id": "48772.1348",
+      "url": "https://kenan032005.github.io/assets/js/intelligence/africa.js",
+      "status": 404
+    },
+    {
+      "page_url": "https://kenan032005.github.io/asip-site/intelligence/africa/network/",
+      "viewport": 1366,
+      "test_step": "initial-load",
+      "action": "navigate to formal Network page",
+      "request_id": "48772.1346",
+      "url": "https://kenan032005.github.io/assets/css/style.css",
+      "status": 404
+    },
+    {
+      "page_url": "https://kenan032005.github.io/asip-site/intelligence/africa/network/",
+      "viewport": 1366,
+      "test_step": "initial-load",
+      "action": "navigate to formal Network page",
+      "request_id": "48772.1347",
+      "url": "https://kenan032005.github.io/assets/css/intelligence.css",
+      "status": 404
+    }
+  ],
+  "browser_captured_rejections": [],
+  "browser_captured_window_errors": [],
+  "diagnosis": "PRODUCT_PAGE_ASSET_PATH_BUG: page loaded the Africa frontend from a root-relative URL outside /asip-site, so the graph data renderer did not execute and no real graph node existed to click.",
+  "summary": {
+    "runtime_exceptions": 0,
+    "console_errors": 6,
+    "failed_requests": 0,
+    "bad_responses": 3,
+    "unhandled_rejections": 0,
+    "node_click_focus_switch": false,
+    "diagnosis_gate": "OPEN"
+  }
+}
