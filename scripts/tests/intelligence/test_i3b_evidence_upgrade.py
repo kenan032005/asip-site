@@ -44,13 +44,15 @@ def main():
     check("no generated evidence marked verified", not gen_verified)
 
     # verified evidence satisfies the 10 conditions
+    src_pub = {s["source_id"]: s.get("published_at") for s in sources}
     bad = []
     for e in evidence:
         if e.get("verification_status") != "verified":
             continue
         if not e.get("source_id") or e["source_id"] not in sids:
             bad.append(e["evidence_id"] + ":src")
-        if not e.get("source_published_at"):
+        # I3-D1 packet policy: source.published_at null -> no invented date on evidence
+        if not e.get("source_published_at") and src_pub.get(e.get("source_id")) is not None:
             bad.append(e["evidence_id"] + ":pub")
         if not e.get("source_locator"):
             bad.append(e["evidence_id"] + ":loc")

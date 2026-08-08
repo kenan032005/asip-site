@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[3]
 DATA = ROOT / "data" / "intelligence" / "africa"
 
 PASS = FAIL = 0
-VALID_FRESH = {"current", "aging", "stale", "historical", "unknown"}
+VALID_FRESH = {"current", "aging", "stale", "historical", "unknown", "current_as_structural_history"}
 
 
 def check(name, cond, detail=""):

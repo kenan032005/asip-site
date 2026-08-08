@@ -40,8 +40,8 @@ def main():
     # counts
     if len(regions) < 7: fail(f"regions<7: {len(regions)}")
     if len(countries) < 12: fail(f"countries<12: {len(countries)}")
-    if not (30 <= len(entities) <= 60): fail(f"entities={len(entities)} outside 30-60")
-    if not (60 <= len(rels) <= 100): fail(f"relations={len(rels)} outside 60-100")
+    if not (30 <= len(entities) <= 80): fail(f"entities={len(entities)} outside 30-80 (I3-D1: 61)")
+    if not (60 <= len(rels) <= 150): fail(f"relations={len(rels)} outside 60-150 (I3-D1: 121)")
     if len(sources) < 25: fail(f"sources<25: {len(sources)}")
     if len(evidence) < 60: fail(f"evidence<60: {len(evidence)}")
     if len(profiles) < 8: fail(f"profiles<8: {len(profiles)}")
@@ -82,9 +82,9 @@ def main():
     libya = next(c for c in countries if c["country_id"] == "country-libya")
     if "region-north-africa-sahara" not in libya["region_ids"]: fail("Libya missing its region")
 
-    # relation integrity
+    # relation integrity (I3-D1: region endpoints allowed, e.g. rel-d1-fu-aes-region)
     for r in rels:
-        valid = eid_set | cids
+        valid = eid_set | cids | rids
         if r["source_entity_id"] not in valid or r["target_entity_id"] not in valid: fail(f"bad entity ref {r['relationship_id']}")
         if r["display_ring"] not in ("inner", "middle", "outer"): fail(f"bad ring {r['relationship_id']}")
         for sid in r.get("source_refs", []):

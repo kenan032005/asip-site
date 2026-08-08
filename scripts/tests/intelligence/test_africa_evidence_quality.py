@@ -48,7 +48,10 @@ def main():
         if e.get("verification_status") == "verified":
             check(f"verified has locator {cid}", bool(e.get("source_locator")))
             check(f"verified has method {cid}", bool(e.get("verification_method")))
-            check(f"verified has published date {cid}", bool(e.get("source_published_at")))
+            # I3-D1 packet policy: source.published_at may legitimately be null (ACLED
+            # actor/analysis pages); the evidence then carries no invented date.
+            src_pub_null = bool(sources.get(e.get("source_id", ""))) and sources[e.get("source_id")].get("published_at") is None
+            check(f"verified has published date {cid}", bool(e.get("source_published_at")) or src_pub_null)
             check(f"verified origin not generated {cid}", not e.get("evidence_origin", "").startswith("generated_"),
                   str(e.get("evidence_origin")))
         if e.get("verification_status") == "pending_review":

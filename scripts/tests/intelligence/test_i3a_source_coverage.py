@@ -40,11 +40,13 @@ def main():
     check(">=30 new/upgraded manual evidence", len(manual) >= 30, str(len(manual)))
 
     verified = [e for e in evidence if e.get("verification_status") == "verified"]
+    src_pub = {s["source_id"]: s.get("published_at") for s in sources}
     bad_verified = []
     for e in verified:
         if not e.get("source_id") or e["source_id"] not in sids:
             bad_verified.append(e["evidence_id"] + ":src")
-        if not e.get("source_published_at"):
+        # I3-D1 packet policy: source.published_at may be null -> evidence carries no invented date
+        if not e.get("source_published_at") and src_pub.get(e.get("source_id")) is not None:
             bad_verified.append(e["evidence_id"] + ":pub")
         if not e.get("source_locator"):
             bad_verified.append(e["evidence_id"] + ":loc")
