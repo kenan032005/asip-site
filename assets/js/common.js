@@ -5,13 +5,14 @@
 const RISK_NAME = { 1: "低风险", 2: "中风险", 3: "高风险", 4: "极高风险" };
 const RISK_SHORT = { 1: "低", 2: "中", 3: "高", 4: "极高" };
 
-// 顶部导航严格五项，顺序不可改变
+// 顶部导航：保留既有五项顺序，仅追加正式安全情报库入口
 const NAV = [
   ["index.html", "首页"],
   ["events.html", "最新事件"],
   ["countries.html", "国家"],
   ["reports.html", "日报"],
   ["disease-risk.html", "非洲传染病风险"],
+  ["/asip-site/intelligence/africa/", "安全情报库"],
 ];
 
 // 事件类型 —— Stage-1: 英文枚举代码 → 中文显示（仅此唯一映射表）

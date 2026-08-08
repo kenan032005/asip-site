@@ -1,0 +1,14 @@
+{
+  "artifact": "I3C_ROLLBACK_PLAN",
+  "pre_i3c_gh_pages_sha": "c266e819c421d14358f1bf1d1b386964dae6eff5",
+  "normal_rollback": "git revert <I3-C production publish commit>; push gh-pages normally; never force-push",
+  "file_restore_fallback": "restore only the whitelist paths from PRE_I3C_GH_PAGES_SHA, create a new rollback commit, and push normally",
+  "rc_preservation": "do not modify or delete previews/asip-intelligence-v1.0-rc1/",
+  "dry_run_steps": [
+    "verify whitelist path set",
+    "verify production target is the only intelligence publish scope",
+    "verify RC remains unchanged",
+    "verify revert target commit is available"
+  ],
+  "rollback_ready": true
+}
