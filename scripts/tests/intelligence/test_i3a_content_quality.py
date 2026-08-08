@@ -112,10 +112,25 @@ def main():
     empty_rel_field = []
     for rid in deep_rels:
         pr = rp[rid]
-        for f in ("overview", "formation_background", "initial_relationship", "causes",
-                  "key_turning_points", "current_status", "uncertainties"):
-            if not pr.get(f):
-                empty_rel_field.append(f"{rid}:{f}")
+        if pr.get("relation_maturity"):
+            maturity = pr["relation_maturity"]
+            # DEPTH A R3 profiles carry full intelligence schema; R2 carry core + current
+            checks = [("overview", "overview"), ("current", None), ("uncertainties", "uncertainties")]
+            if maturity == "R3_FULL_RELATIONSHIP_INTELLIGENCE":
+                checks += [("asip_analysis", "asip_analysis"), ("watch_indicators", "watch_indicators")]
+            for label, f in checks:
+                if label == "current":
+                    if not (pr.get("current_status") or pr.get("current_assessment")):
+                        empty_rel_field.append(f"{rid}:current")
+                elif label == "uncertainties" and not pr.get(f) and not pr.get("current_assessment"):
+                    empty_rel_field.append(f"{rid}:uncertainties")
+                elif label not in ("uncertainties",) and not pr.get(f):
+                    empty_rel_field.append(f"{rid}:{f}")
+        else:
+            for f in ("overview", "formation_background", "initial_relationship", "causes",
+                      "key_turning_points", "current_status", "uncertainties"):
+                if not pr.get(f):
+                    empty_rel_field.append(f"{rid}:{f}")
     check("deepened relation profiles have all core fields", not empty_rel_field, str(empty_rel_field[:6]))
 
     if FAIL:
