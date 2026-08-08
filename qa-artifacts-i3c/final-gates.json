@@ -23,16 +23,18 @@
     "I3C_REGRESSION_GATE": "PASS",
     "I3C_PRODUCTION_DIFF_GATE": "PASS",
     "I3C_DEPLOYMENT_GATE": "PASS",
-    "I3C_PUBLIC_QA_GATE": "PASS",
+    "I3C_PUBLIC_QA_GATE": "OPEN",
     "I3C_MAIN_SITE_GATE": "PASS",
     "I3C_DATA_FREEZE_GATE": "PASS",
     "I3C_ROLLBACK_GATE": "PASS"
   },
-  "blocking_issue": null,
-  "overall_gate": "PASS",
+  "blocking_issue": "正式生产 79 页浏览器回归的 3 个 runtime exceptions 与 Network 交互检查仍未完全通过；Node/CDP 实际运行结果为 consoleErrors=0、failedRequests=0、horizontalOverflow=0，但 node_click_focus_switch=false，不能关闭公网 QA Gate。",
+  "overall_gate": "OPEN",
   "tag": "asip-intelligence-v1.0",
   "tag_object_sha": "45856a210b0327f56e9a40f82e5a85d2902c5ebd",
   "tag_peeled_commit_sha": "7880cf9c9e16bdc567cee678dedcb81dfa1e1d2a",
   "tag_remote": "origin/asip-intelligence-v1.0",
-  "post_tag_qa_commits": ["f83c5a67e22cf1930e60439656d59888073179ba"]
+  "post_tag_qa_commits": [
+    "f83c5a67e22cf1930e60439656d59888073179ba"
+  ]
 }
