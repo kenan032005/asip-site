@@ -101,7 +101,7 @@
     return fetch(dataUrl(n), signal ? { signal: signal } : undefined).then(function (r) { if (!r.ok) throw new Error("load failed: " + n); return r.json(); });
   }
   const VERIFY_LABELS = { verified: "已核验", partially_verified: "部分核验", pending_review: "待复核", disputed: "存在争议", unsupported: "无来源支持" };
-  const FRESH_LABELS = { current: "当前", aging: "趋旧", stale: "过时", historical: "历史资料", unknown: "时效不明" };
+  const FRESH_LABELS = { current: "当前", aging: "趋旧", stale: "过时", historical: "历史资料", unknown: "时效不明", current_as_structural_history: "结构性历史·当前" };
   function verifyBadge(s) { const l = VERIFY_LABELS[s] || s; return '<span class="intel-badge v-' + esc(s || "unknown") + '">' + esc(l) + '</span>'; }
   function freshnessBadge(s) { const l = FRESH_LABELS[s] || s; return '<span class="intel-badge f-' + esc(s || "unknown") + '">' + esc(l) + '</span>'; }
   function freshnessNote(obj) {
@@ -145,6 +145,9 @@
   function relationHref(id) { const r = store.byRelId[id]; return r ? ROOT + "relation/" + encodeURIComponent(r.slug || r.relationship_id) + "/" : ROOT; }
   function networkHref(id) { return ROOT + "network/?focus=" + encodeURIComponent(id || "actor-jnim"); }
   function entityLink(id, label) { const e = store.byEntityId[id]; if (!e) return esc(label || id); return '<a class="intel-entity-link" href="' + esc(entityHref(id)) + '">' + esc(label || title(e)) + '</a>'; }
+  // I3-D1: relation endpoints may reference a region (e.g. rel-d1-fu-aes-region -> region-central-sahel);
+  // titleFor() falls back to the region display name or the raw id instead of calling title(undefined).
+  function titleFor(id) { const e = store.byEntityId[id]; if (e) return title(e); const r = store.byRegionId[id]; if (r) return r.name_zh; return id; }
   function countryLink(id) { const c = store.byCountryId[id]; return c ? '<a class="intel-entity-link" href="' + esc(countryHref(id)) + '">' + esc(c.name_zh) + '</a>' : esc(id); }
   function regionLink(id) { const r = store.byRegionId[id]; return r ? '<a class="intel-entity-link" href="' + esc(regionHref(id)) + '">' + esc(r.name_zh) + '</a>' : esc(id); }
   function sourceLink(id) { const s = store.sources.find(function (x) { return x.source_id === id; }); return s ? '<a target="_blank" rel="noopener noreferrer" href="' + esc(s.url) + '">' + esc(s.publisher) + '</a>' : esc(id); }
@@ -194,7 +197,7 @@
     renderSections("#regionBody", {
       overview: region.definition, regional_belonging: region.geographic_scope,
       main_actors: "纳入国家：" + region.countries.map(countryLink).join("、"),
-      core_conflicts: region.core_topics, relationships: region.key_cross_border_relations.map(function (rid) { const r = store.byRelId[rid]; return r ? entityLink(r.source_entity_id, title(store.byEntityId[r.source_entity_id])) + " " + esc(relLabel(r.relationship_type)) + " " + entityLink(r.target_entity_id, title(store.byEntityId[r.target_entity_id])) : esc(rid); }),
+      core_conflicts: region.core_topics, relationships: region.key_cross_border_relations.map(function (rid) { const r = store.byRelId[rid]; return r ? entityLink(r.source_entity_id, titleFor(r.source_entity_id)) + " " + esc(relLabel(r.relationship_type)) + " " + entityLink(r.target_entity_id, titleFor(r.target_entity_id)) : esc(rid); }),
       current_trends: region.current_trends, impact: "与其他区域的联系：" + region.links_to_other_regions.map(regionLink).join("、"),
       gaps: region.notes, sources: sourceList(region.source_ids)
     });
@@ -220,7 +223,7 @@
     }
     const actors = document.querySelector("#countryActors"); if (actors) actors.innerHTML = country.main_actors.map(function (id) { const e = store.byEntityId[id]; return e ? entityCard(e) : ""; }).join("");
     const rels = store.relationships.filter(function (r) { return country.main_actors.indexOf(r.source_entity_id) >= 0 || country.main_actors.indexOf(r.target_entity_id) >= 0 || r.source_entity_id === country.country_id || r.target_entity_id === country.country_id; });
-    const rl = document.querySelector("#countryRelations"); if (rl) rl.innerHTML = rels.slice(0, 12).map(function (r) { return '<div class="intel-rel-row"><div class="intel-rel-main">' + entityLink(r.source_entity_id, title(store.byEntityId[r.source_entity_id])) + ' <b>↔</b> ' + entityLink(r.target_entity_id, title(store.byEntityId[r.target_entity_id])) + ' <span class="intel-rel-kind">' + esc(relLabel(r.relationship_type)) + '</span>' + freshnessBadge(r.freshness_status) + '</div></div>'; }).join("");
+    const rl = document.querySelector("#countryRelations"); if (rl) rl.innerHTML = rels.slice(0, 12).map(function (r) { return '<div class="intel-rel-row"><div class="intel-rel-main">' + entityLink(r.source_entity_id, titleFor(r.source_entity_id)) + ' <b>↔</b> ' + entityLink(r.target_entity_id, titleFor(r.target_entity_id)) + ' <span class="intel-rel-kind">' + esc(relLabel(r.relationship_type)) + '</span>' + freshnessBadge(r.freshness_status) + '</div></div>'; }).join("");
     const ev = document.querySelector("#countryEvidence"); if (ev) ev.innerHTML = '<div class="relationship-count">相关证据记录 ' + evidenceCountFor(country.main_actors.concat([country.country_id])) + ' 条</div>' + '<div class="ib-row"><dt>当前状态核验</dt><dd>' + esc(country.current_status_verified_at || "未单独核验") + '</dd></div><div class="ib-row"><dt>事实有效截至</dt><dd>' + esc(country.claim_valid_as_of || "未说明") + '</dd></div><p class="muted">证据通过 source_id 关联来源；' + esc(country.freshness_status === "stale" || country.freshness_status === "aging" ? "本页当前状态依赖较早来源，须谨慎解读。" : "关键事实见各关系与实体档案。") + '</p>';
   }
   function initEntity() {
@@ -249,7 +252,7 @@
       ib.innerHTML = '<h2>结构化信息框</h2><dl>' + rows + '</dl>';
     }
     const rels = store.relationships.filter(function (r) { return r.source_entity_id === entity.entity_id || r.target_entity_id === entity.entity_id; });
-    const rl = document.querySelector("#entityRelations"); if (rl) rl.innerHTML = rels.map(function (r) { const other = r.source_entity_id === entity.entity_id ? r.target_entity_id : r.source_entity_id; return '<div class="intel-rel-row"><div class="intel-rel-main"><span class="intel-rel-kind">' + esc(relLabel(r.relationship_type)) + '</span> ' + entityLink(other, title(store.byEntityId[other])) + ' <a class="intel-rel-archive" href="' + esc(relationHref(r.relationship_id)) + '">档案 →</a></div><div class="intel-rel-meta">' + esc(period(r)) + ' · ' + esc(r.current_status) + '</div></div>'; }).join("") || '<p class="muted">暂无直接关系。</p>';
+    const rl = document.querySelector("#entityRelations"); if (rl) rl.innerHTML = rels.map(function (r) { const other = r.source_entity_id === entity.entity_id ? r.target_entity_id : r.source_entity_id; return '<div class="intel-rel-row"><div class="intel-rel-main"><span class="intel-rel-kind">' + esc(relLabel(r.relationship_type)) + '</span> ' + entityLink(other, titleFor(other)) + ' <a class="intel-rel-archive" href="' + esc(relationHref(r.relationship_id)) + '">档案 →</a></div><div class="intel-rel-meta">' + esc(period(r)) + ' · ' + esc(r.current_status) + '</div></div>'; }).join("") || '<p class="muted">暂无直接关系。</p>';
     const gl = document.querySelector("#graphLink"); if (gl) gl.setAttribute("href", networkHref(entity.entity_id));
     const ev = document.querySelector("#entityEvidence"); if (ev) ev.innerHTML = '<div class="relationship-count">相关证据记录 ' + evidenceCountFor([entity.entity_id]) + ' 条</div><p class="muted">关键事实经 evidence_id 与 source_id 关联追溯。</p>';
   }
@@ -260,8 +263,9 @@
     const profile = store.relationProfiles[rel.relationship_id] || store.relationProfiles[rel.slug] || null;
     const timeline = store.relationTimelines[rel.relationship_id] || store.relationTimelines[rel.slug] || [];
     const s = store.byEntityId[rel.source_entity_id], t = store.byEntityId[rel.target_entity_id];
-    document.title = relLabel(rel.relationship_type) + "：" + title(s) + "—" + title(t);
-    const h = document.querySelector("#relationHeading"); if (h) h.innerHTML = '<div class="intel-heading-code">' + esc(rel.relationship_id) + '</div><h1>' + esc(title(s)) + ' <span class="rel-arrow">↔</span> ' + esc(title(t)) + '</h1><p class="intel-title-en">' + esc(relLabel(rel.relationship_type)) + ' · ' + esc(ringLabel(rel.display_ring)) + '圈层 · ' + esc(rel.current_status) + '</p><div class="intel-badges">' + importanceBadge(s) + importanceBadge(t) + freshnessBadge(rel.freshness_status) + '</div>' + freshnessNote(rel);
+    const st = titleFor(rel.source_entity_id), tt = titleFor(rel.target_entity_id);
+    document.title = relLabel(rel.relationship_type) + "：" + st + "—" + tt;
+    const h = document.querySelector("#relationHeading"); if (h) h.innerHTML = '<div class="intel-heading-code">' + esc(rel.relationship_id) + '</div><h1>' + esc(st) + ' <span class="rel-arrow">↔</span> ' + esc(tt) + '</h1><p class="intel-title-en">' + esc(relLabel(rel.relationship_type)) + ' · ' + esc(ringLabel(rel.display_ring)) + '圈层 · ' + esc(rel.current_status) + '</p><div class="intel-badges">' + (s ? importanceBadge(s) : "") + (t ? importanceBadge(t) : "") + freshnessBadge(rel.freshness_status) + '</div>' + freshnessNote(rel);
     const ov = document.querySelector("#relationOverview"); if (ov) ov.innerHTML = '<p class="intel-lead">' + esc(profile ? profile.overview : rel.relation_summary) + '</p>';
     const body = document.querySelector("#relationBody"); if (body) {
       let html = "";
@@ -373,7 +377,7 @@
       const center = store.byEntityId[focusId]; if (!center) return;
       const token = ++drawToken;
       const rels = store.relationships.filter(function (r) { return r.source_entity_id === focusId || r.target_entity_id === focusId; });
-      const neighbors = rels.map(function (r) { return store.byEntityId[r.source_entity_id === focusId ? r.target_entity_id : r.source_entity_id]; }).filter(function (e, i, all) { return e && visible(e) && all.findIndex(function (x) { return x.entity_id === e.entity_id; }) === i; });
+      const neighbors = rels.map(function (r) { return store.byEntityId[r.source_entity_id === focusId ? r.target_entity_id : r.source_entity_id]; }).filter(function (e, i, all) { return e && visible(e) && all.findIndex(function (x) { return x && x.entity_id === e.entity_id; }) === i; });
       const visibleEntities = [center].concat(neighbors);
       layout(center, visibleEntities, rels);
       viewport.innerHTML = "";
