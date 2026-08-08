@@ -1,7 +1,7 @@
 {
- "schema_version": "asip-intelligence-africa-v1",
+ "schema_version": "asip-intelligence-africa-v1.0",
  "default_focus": "actor-jnim",
- "max_nodes": 16,
+ "max_nodes": 24,
  "nodes": [
   "actor-jnim",
   "actor-al-qaida",
@@ -38,7 +38,41 @@
   "actor-samim",
   "actor-lna",
   "actor-gnu-forces",
-  "actor-isis-libya"
+  "actor-isis-libya",
+  "actor-mali-army",
+  "actor-burkina-army",
+  "actor-vdp",
+  "actor-cameroon-bir",
+  "actor-ambazonia-network",
+  "actor-endf",
+  "actor-fano",
+  "actor-ola",
+  "actor-tanzania-tpdf",
+  "actor-tdf"
+ ],
+ "regions": [
+  "region-central-sahel",
+  "region-lake-chad-basin",
+  "region-coastal-west-africa-spillover",
+  "region-sudan-red-sea-horn",
+  "region-nile-basin-east-africa",
+  "region-north-africa-sahara",
+  "region-southeast-africa-mozambique"
+ ],
+ "countries": [
+  "country-chad",
+  "country-niger",
+  "country-mali",
+  "country-burkina-faso",
+  "country-nigeria",
+  "country-cameroon",
+  "country-benin",
+  "country-sudan",
+  "country-south-sudan",
+  "country-ethiopia",
+  "country-mozambique",
+  "country-libya",
+  "country-tanzania"
  ],
  "relationship_ids": [
   "rel-jnim-alqaida-affiliate",
@@ -102,7 +136,23 @@
   "rel-ssudan-sudan-spillover",
   "rel-is-moz-tanzania-link",
   "rel-fadm-mozambique-operates",
-  "rel-is-moz-mozambique-operates"
+  "rel-is-moz-mozambique-operates",
+  "rel-cameroon-army-jas",
+  "rel-cameroon-army-iswap",
+  "rel-cameroon-army-ambazonia",
+  "rel-nigeria-cameroon-border",
+  "rel-endf-fano-conflict",
+  "rel-endf-ola-conflict",
+  "rel-endf-tdf-conflict",
+  "rel-ethiopia-sudan-border",
+  "rel-tanzania-tpdf-is-moz",
+  "rel-tanzania-mozambique-cooperate",
+  "rel-tanzania-samim-member",
+  "rel-vdp-burkina-support",
+  "rel-mali-army-jnim",
+  "rel-mali-army-is-sahel",
+  "rel-burkina-army-jnim",
+  "rel-burkina-army-is-sahel"
  ],
  "relation_slugs": [
   "jnim-alqaida-affiliate",
@@ -166,7 +216,23 @@
   "ssudan-sudan-spillover",
   "is-moz-tanzania-link",
   "fadm-mozambique-operates",
-  "is-moz-mozambique-operates"
+  "is-moz-mozambique-operates",
+  "cameroon-army-jas",
+  "cameroon-army-iswap",
+  "cameroon-army-ambazonia",
+  "nigeria-cameroon-border",
+  "endf-fano-conflict",
+  "endf-ola-conflict",
+  "endf-tdf-conflict",
+  "ethiopia-sudan-border",
+  "tanzania-tpdf-is-moz",
+  "tanzania-mozambique-cooperate",
+  "tanzania-samim-member",
+  "vdp-burkina-support",
+  "mali-army-jnim",
+  "mali-army-is-sahel",
+  "burkina-army-jnim",
+  "burkina-army-is-sahel"
  ],
  "relationship_types": [
   "affiliated_with",
@@ -197,8 +263,7 @@
  "risk_levels": [
   "extreme",
   "high",
-  "medium"
- ],
- "node_count": 36,
- "country_count": 13
+  "medium",
+  "low"
+ ]
 }

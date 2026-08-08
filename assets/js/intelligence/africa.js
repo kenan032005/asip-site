@@ -156,7 +156,7 @@
   function entityCard(e) { const rels = store.relationships.filter(function (r) { return r.source_entity_id === e.entity_id || r.target_entity_id === e.entity_id; }); return '<a class="intel-card" href="' + esc(entityHref(e.entity_id)) + '"><div class="intel-card-top"><span class="intel-code">' + esc(e.entity_id) + '</span>' + typeBadge(e) + '</div><div class="intel-card-title-row"><h3>' + esc(title(e)) + '</h3><span class="intel-level-mini">' + esc(e.importance_level || "L3") + '</span></div><p class="intel-en">' + esc(e.name_en) + '</p><p>' + esc(e.short_description) + '</p><div class="intel-card-foot"><span>' + rels.length + ' 条直接关系</span><span>证据 ' + evidenceCountFor([e.entity_id]) + '</span></div></a>'; }
   function countryCard(c) { const regionNames = (c.region_ids || []).map(regionLink).join(" · "); return '<a class="intel-card" href="' + esc(countryHref(c.country_id)) + '"><div class="intel-card-top"><span class="intel-code">' + esc(c.iso_alpha3 || c.country_id) + '</span>' + riskBadge(c) + '</div><h3>' + esc(c.name_zh) + '</h3><p class="intel-en">' + esc(c.name_en) + '</p><p>区域：' + (regionNames || "未说明") + '</p><p class="intel-card-foot">' + esc((c.risk_level_reason || "").slice(0, 60)) + '</p></a>'; }
   function regionCard(r) { return '<a class="intel-card" href="' + esc(regionHref(r.region_id)) + '"><div class="intel-card-top"><span class="intel-code">' + esc(r.region_id) + '</span></div><h3>' + esc(r.name_zh) + '</h3><p class="intel-en">' + esc(r.name_en) + '</p><p>' + esc((r.definition || "").slice(0, 90)) + '…</p></a>'; }
-  function renderTopbar() { const t = document.querySelector("#topbar"); if (t) t.innerHTML = '<div class="intel-topbar"><div><a class="intel-back" href="' + esc(ROOT) + '">← ASIP非洲安全情报知识库</a><span class="intel-kicker">正式知识库 V1.0 · 生产数据层</span></div><div class="intel-topmeta">统一数据底座 · 核验至 2026-08-06</div></div>'; }
+  function renderTopbar() { const t = document.querySelector("#topbar"); if (t) t.innerHTML = '<div class="intel-topbar"><div><a class="intel-back" href="' + esc(ROOT) + '">← ASIP非洲安全情报知识库</a><span class="intel-kicker">非生产预览版 · asip-intelligence-v1.0-rc1 · 数据截至 2026-08-06</span></div><div class="intel-topmeta">统一数据底座 · 未接入正式生产导航</div></div>'; }
   function renderFooter() { const f = document.querySelector("footer.site"); if (f) f.innerHTML = 'ASIP非洲安全情报知识库 V1.0 · 区域视图为数据库过滤而非独立数据副本 · <a href="' + esc(ROOT) + '">返回首页</a> · <a href="' + esc((ROOT.match(/\/intelligence\//) ? ROOT.slice(0, ROOT.indexOf("/intelligence/") + 14) : "../") + "demo/") + '">历史 Demo</a>'; }
 
   function initHome() {
@@ -209,6 +209,15 @@
     document.title = country.name_zh + " · ASIP非洲安全情报知识库";
     const h = document.querySelector("#countryHeading"); if (h) h.innerHTML = '<div class="intel-heading-code">' + esc(country.iso_alpha3 || country.country_id) + '</div><h1>' + esc(country.name_zh) + '</h1><p class="intel-title-en">' + esc(country.name_en) + '</p><div class="intel-badges">' + riskBadge(country) + freshnessBadge(country.freshness_status) + '<span class="intel-badge status">数据检查 ' + esc(country.record_reviewed_at || country.last_verified_at) + '</span></div>' + freshnessNote(country);
     renderSections("#countryBody", profile.sections);
+    // I3-A/B: country lead (导语) rendered above the section body
+    if (profile.lead) {
+      const cb = document.querySelector("#countryBody");
+      if (cb) {
+        const paras = Array.isArray(profile.lead) ? profile.lead : [profile.lead];
+        const leadHtml = '<div class="profile-lead">' + paras.map(function (x) { return '<p>' + inlineLinks(esc(x)) + '</p>'; }).join("") + '</div>';
+        cb.innerHTML = leadHtml + cb.innerHTML;
+      }
+    }
     const actors = document.querySelector("#countryActors"); if (actors) actors.innerHTML = country.main_actors.map(function (id) { const e = store.byEntityId[id]; return e ? entityCard(e) : ""; }).join("");
     const rels = store.relationships.filter(function (r) { return country.main_actors.indexOf(r.source_entity_id) >= 0 || country.main_actors.indexOf(r.target_entity_id) >= 0 || r.source_entity_id === country.country_id || r.target_entity_id === country.country_id; });
     const rl = document.querySelector("#countryRelations"); if (rl) rl.innerHTML = rels.slice(0, 12).map(function (r) { return '<div class="intel-rel-row"><div class="intel-rel-main">' + entityLink(r.source_entity_id, title(store.byEntityId[r.source_entity_id])) + ' <b>↔</b> ' + entityLink(r.target_entity_id, title(store.byEntityId[r.target_entity_id])) + ' <span class="intel-rel-kind">' + esc(relLabel(r.relationship_type)) + '</span>' + freshnessBadge(r.freshness_status) + '</div></div>'; }).join("");
