@@ -194,7 +194,14 @@
       "path": "scripts/tests/test_no_local_paths.py",
       "returncode": 0,
       "status": "PASS",
-      "stdout_tail": "{\"scanned_file_count\": 377, \"public_scanned_count\": 335, \"current_release_scanned_count\": 42, \"archival_ignored_count\": 56, \"forbidden_matches\": 0, \"gate\": \"PASS\"}",
+      "stdout_tail": "{\"scanned_file_count\": 383, \"public_scanned_count\": 335, \"current_release_scanned_count\": 48, \"archival_ignored_count\": 56, \"forbidden_matches\": 0, \"gate\": \"PASS\"}",
+      "stderr_tail": ""
+    },
+    {
+      "path": "scripts/tests/test_i3b_fix1c_postqa_manifest_state.py",
+      "returncode": 0,
+      "status": "PASS",
+      "stdout_tail": "{\"checks\": {\"correction_count_is_18\": true, \"all_manifest_ids_present\": true, \"all_rows_pass\": true, \"all_rows_have_source_match\": true, \"all_rows_have_old_claim_absent\": true, \"all_rows_have_generator_consistency\": true, \"blocking_failures_empty\": true, \"gate_pass\": true}, \"failed\": [], \"gate\": \"PASS\"}",
       "stderr_tail": ""
     },
     {
@@ -228,10 +235,10 @@
   "build": {
     "returncode": 0,
     "status": "PASS",
-    "stdout_tail": "[build_site] run_id=20260802T084000+0800_084349 pipeline_version=2\n[build_site] build_time=2026-08-08 04:21:40\n  intelligence demo: 12 entity routes + 20 relation routes + network + data\n  africa data OK: entities=46 relations=78 regions=7 countries=13 sources=96 evidence=167 profiles=33 relation_types=24 deep_countries=13\n  intelligence africa: 151 routes (home + 6 index + 7 regions + 13 countries + 46 entities + 78 relations) + data\n构建完成 -> dist\n  HTML: 9 个页面\n  ASIP_BUILD_META: 已注入\n  内联数据快照: False\n  run_id: 20260802T084000+0800_084349",
+    "stdout_tail": "[build_site] run_id=20260802T084000+0800_084349 pipeline_version=2\n[build_site] build_time=2026-08-08 14:47:16\n  intelligence demo: 12 entity routes + 20 relation routes + network + data\n  africa data OK: entities=46 relations=78 regions=7 countries=13 sources=96 evidence=167 profiles=33 relation_types=24 deep_countries=13\n  intelligence africa: 151 routes (home + 6 index + 7 regions + 13 countries + 46 entities + 78 relations) + data\n构建完成 -> dist\n  HTML: 9 个页面\n  ASIP_BUILD_META: 已注入\n  内联数据快照: False\n  run_id: 20260802T084000+0800_084349",
     "stderr_tail": ""
   },
-  "pass_total": 33,
+  "pass_total": 34,
   "fail_total": 0,
   "gate": "PASS"
 }

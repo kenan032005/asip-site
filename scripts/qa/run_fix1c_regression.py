@@ -19,6 +19,7 @@ TESTS = sorted((ROOT / "scripts/tests/intelligence").glob("test_*.py")) + [
     ROOT / "scripts/tests/test_country.py",
     ROOT / "scripts/tests/test_repository_integrity.py",
     ROOT / "scripts/tests/test_no_local_paths.py",
+    ROOT / "scripts/tests/test_i3b_fix1c_postqa_manifest_state.py",
     ROOT / "scripts/tests/test_stage2_frontend_final.py",
 ]
 results = []
