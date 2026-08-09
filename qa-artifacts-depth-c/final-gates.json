@@ -1,0 +1,32 @@
+{
+  "artifact": "DEPTHC_FINAL_GATES",
+  "package_id": "ASIP-DEPTH-C-CENTRAL-MALI-REGIONAL-COMMAND-V1",
+  "baseline": {"source_sha": "7604c68", "gh_pages_sha": "5aeccd9", "pages_run": "31298375711"},
+  "final": {"source_sha": "46abaed", "gh_pages_sha": "012b931", "pages_run": "31300822992"},
+  "count_invariants": {"countries": 13, "non_country_entities": 72, "relationships": 150, "routes": 249},
+  "gates": {
+    "DEPTHC_BASELINE_GATE": "PASS",
+    "DEPTHC_SOURCE_GATE": "PASS",
+    "DEPTHC_FACT_SEMANTIC_GATE": "PASS",
+    "DEPTHC_ENTITY_DEPTH_GATE": "PASS",
+    "DEPTHC_RELATION_DEPTH_GATE": "PASS",
+    "DEPTHC_EVIDENCE_GATE": "PASS",
+    "DEPTHC_GENERATOR_GATE": "PASS",
+    "DEPTHC_BUILD_GATE": "PASS",
+    "DEPTHC_PUBLIC_QA_GATE": "PASS",
+    "DEPTHC_PRODUCTION_ISOLATION_GATE": "PASS"
+  },
+  "summary": {
+    "sources": {"before": 137, "after": 137, "added": 0, "reused": ["d1-acled-dozo-2026", "d1-acled-africa-june-2026", "d2-hrw-burkina-2026-04-02", "d2-un-s2026-44"]},
+    "evidence": {"before": 231, "after": 245, "depthc_imported": 14},
+    "entity_upgrades": 10,
+    "relation_upgrades": 16,
+    "semantic_cleanup_groups": 5,
+    "freshness_locks": {"current": 5, "aging_preserved": 5},
+    "regression": {"python_tests": "30 files", "fail_total": 0, "depth_c_special": 11},
+    "candidate_browser_qa": {"pages": 108, "fails": 0},
+    "public_browser_qa": {"pages": 108, "fails": 0, "maturity_badge": 100, "analysis_partition": 56, "watch_partition": 44},
+    "network_qa": {"foci": 8, "gate": "PASS"},
+    "production_diff": {"unexpected": 0}
+  }
+}
