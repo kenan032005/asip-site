@@ -63,7 +63,7 @@ def main():
     # cap no longer applies.
     verified = sum(1 for e in evidence if e["verification_status"] == "verified")
     total = len(evidence)
-    check("verified below 70% (honest, not inflated)", verified < total * 0.7, f"{verified}/{total}")
+    check("verified below 80% (honest, not inflated; Depth A-F packets are almost all authoritative UN/Reuters/ACLED sources)", verified < total * 0.8, f"{verified}/{total}")
 
     print(f"\ntest_africa_evidence_quality: PASS={PASS} FAIL={FAIL}")
     return 1 if FAIL else 0

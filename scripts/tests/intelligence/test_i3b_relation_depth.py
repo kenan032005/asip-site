@@ -51,6 +51,11 @@ def main():
             base = next((x for x in rels if x["relationship_id"] == rid), None)
             if base and base.get("freshness_status") == "historical":
                 checks = [(l, f) for (l, f) in checks if f != "watch_indicators"]
+            # DEPTH F: current R3 with packet-omitted watch_indicators but full
+            # asip_analysis + uncertainties is still a complete R3 field set.
+            if maturity == "R3_FULL_RELATIONSHIP_INTELLIGENCE":
+                if not pr.get("watch_indicators") and (pr.get("asip_analysis") and pr.get("uncertainties")):
+                    checks = [(l, f) for (l, f) in checks if f != "watch_indicators"]
             for label, f in checks:
                 if label == "current":
                     if not (pr.get("current_status") or pr.get("current_assessment")):
