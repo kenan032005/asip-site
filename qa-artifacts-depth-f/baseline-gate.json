@@ -1,0 +1,375 @@
+{
+  "artifact": "DEPTHF_BASELINE_GATE",
+  "ok": [
+    "countries=13",
+    "non-country entities=72",
+    "relationships=150",
+    "routes=249",
+    "sources=158",
+    "evidence=273",
+    "entity maturity enum stable (PASS)",
+    "relation maturity enum stable (PASS)"
+  ],
+  "issues": [],
+  "gate": "PASS",
+  "probe": {
+    "entities": {
+      "actor-sspdf": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "current_status": "active",
+        "source_refs": [
+          "crisis-group-south-sudan"
+        ],
+        "sections": 20,
+        "imported_by": null
+      },
+      "actor-splm-io": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "current_status": "active",
+        "source_refs": [
+          "crisis-group-south-sudan"
+        ],
+        "sections": 19,
+        "imported_by": null
+      },
+      "actor-nas": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "current_status": "active",
+        "source_refs": [
+          "crisis-group-south-sudan"
+        ],
+        "sections": 19,
+        "imported_by": null
+      },
+      "person-salva-kiir": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "current_status": "active",
+        "source_refs": [
+          "crisis-group-south-sudan"
+        ],
+        "sections": 10,
+        "imported_by": null
+      },
+      "person-riek-machar": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "current_status": "active",
+        "source_refs": [
+          "crisis-group-south-sudan"
+        ],
+        "sections": 10,
+        "imported_by": null
+      },
+      "actor-is-mozambique": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "current_status": "active",
+        "source_refs": [
+          "crisis-group-mozambique",
+          "us-state-crt-2022"
+        ],
+        "sections": 11,
+        "imported_by": null
+      },
+      "actor-fadm": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "current_status": "active",
+        "source_refs": [
+          "crisis-group-mozambique"
+        ],
+        "sections": 11,
+        "imported_by": null
+      },
+      "actor-rdf-mozambique": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "current_status": "active",
+        "source_refs": [
+          "crisis-group-mozambique"
+        ],
+        "sections": 11,
+        "imported_by": null
+      },
+      "actor-samim": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "historical",
+        "current_status": "historical_deployment",
+        "source_refs": [
+          "crisis-group-mozambique"
+        ],
+        "sections": 11,
+        "imported_by": null
+      },
+      "actor-tanzania-tpdf": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "current_status": "active",
+        "source_refs": [
+          "un-jnim-2018"
+        ],
+        "sections": 11,
+        "imported_by": null
+      },
+      "actor-lna": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "current_status": "active",
+        "source_refs": [
+          "crisis-group-libya"
+        ],
+        "sections": 19,
+        "imported_by": null
+      },
+      "actor-gnu-forces": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "current_status": "active",
+        "source_refs": [
+          "crisis-group-libya"
+        ],
+        "sections": 19,
+        "imported_by": null
+      },
+      "actor-isis-libya": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "current_status": "active_reduced",
+        "source_refs": [
+          "un-libya-reports",
+          "crisis-group-libya"
+        ],
+        "sections": 19,
+        "imported_by": null
+      }
+    },
+    "relations": {
+      "rel-splm-io-sspdf-conflict": {
+        "exists": true,
+        "type": "hostile_to",
+        "maturity": null,
+        "src": "actor-splm-io",
+        "tgt": "actor-sspdf",
+        "source_refs": [
+          "crisis-group-south-sudan"
+        ],
+        "tl": 3
+      },
+      "rel-kiir-sspdf-leads": {
+        "exists": true,
+        "type": "led_by",
+        "maturity": null,
+        "src": "actor-sspdf",
+        "tgt": "person-salva-kiir",
+        "source_refs": [
+          "crisis-group-south-sudan"
+        ],
+        "tl": 1
+      },
+      "rel-machar-splm-io-leads": {
+        "exists": true,
+        "type": "led_by",
+        "maturity": null,
+        "src": "actor-splm-io",
+        "tgt": "person-riek-machar",
+        "source_refs": [
+          "crisis-group-south-sudan"
+        ],
+        "tl": 2
+      },
+      "rel-nas-splm-io-allied": {
+        "exists": true,
+        "type": "allied_with",
+        "maturity": null,
+        "src": "actor-nas",
+        "tgt": "actor-splm-io",
+        "source_refs": [
+          "crisis-group-south-sudan"
+        ],
+        "tl": 1
+      },
+      "rel-is-moz-islamic-state": {
+        "exists": true,
+        "type": "pledged_allegiance_to",
+        "maturity": null,
+        "src": "actor-is-mozambique",
+        "tgt": "actor-islamic-state",
+        "source_refs": [
+          "crisis-group-mozambique",
+          "us-state-crt-2022"
+        ],
+        "tl": 3
+      },
+      "rel-is-moz-islamic-state2": {
+        "exists": true,
+        "type": "historically_associated_with",
+        "maturity": null,
+        "src": "actor-is-mozambique",
+        "tgt": "actor-iswap",
+        "source_refs": [
+          "crisis-group-mozambique"
+        ],
+        "tl": 0
+      },
+      "rel-fadm-is-moz-hostile": {
+        "exists": true,
+        "type": "fought_against",
+        "maturity": null,
+        "src": "actor-fadm",
+        "tgt": "actor-is-mozambique",
+        "source_refs": [
+          "crisis-group-mozambique"
+        ],
+        "tl": 0
+      },
+      "rel-rdf-mozambique-fadm-cooperate": {
+        "exists": true,
+        "type": "cooperates_with",
+        "maturity": null,
+        "src": "actor-rdf-mozambique",
+        "tgt": "actor-fadm",
+        "source_refs": [
+          "crisis-group-mozambique"
+        ],
+        "tl": 2
+      },
+      "rel-samim-fadm-cooperate": {
+        "exists": true,
+        "type": "cooperates_with",
+        "maturity": null,
+        "src": "actor-samim",
+        "tgt": "actor-fadm",
+        "source_refs": [
+          "crisis-group-mozambique"
+        ],
+        "tl": 0
+      },
+      "rel-is-moz-tanzania-link": {
+        "exists": true,
+        "type": "cross_border_link",
+        "maturity": null,
+        "src": "actor-is-mozambique",
+        "tgt": "country-tanzania",
+        "source_refs": [
+          "crisis-group-mozambique"
+        ],
+        "tl": 0
+      },
+      "rel-fadm-mozambique-operates": {
+        "exists": true,
+        "type": "operates_in",
+        "maturity": null,
+        "src": "actor-fadm",
+        "tgt": "country-mozambique",
+        "source_refs": [
+          "crisis-group-mozambique"
+        ],
+        "tl": 0
+      },
+      "rel-is-moz-mozambique-operates": {
+        "exists": true,
+        "type": "operates_in",
+        "maturity": null,
+        "src": "actor-is-mozambique",
+        "tgt": "country-mozambique",
+        "source_refs": [
+          "crisis-group-mozambique"
+        ],
+        "tl": 0
+      },
+      "rel-tanzania-tpdf-is-moz": {
+        "exists": true,
+        "type": "fought_against",
+        "maturity": null,
+        "src": "actor-tanzania-tpdf",
+        "tgt": "actor-is-mozambique",
+        "source_refs": [
+          "un-jnim-2018"
+        ],
+        "tl": 1
+      },
+      "rel-tanzania-mozambique-cooperate": {
+        "exists": true,
+        "type": "cooperates_with",
+        "maturity": null,
+        "src": "actor-tanzania-tpdf",
+        "tgt": "actor-fadm",
+        "source_refs": [
+          "un-jnim-2018"
+        ],
+        "tl": 2
+      },
+      "rel-tanzania-samim-member": {
+        "exists": true,
+        "type": "member_of_force",
+        "maturity": null,
+        "src": "actor-tanzania-tpdf",
+        "tgt": "actor-samim",
+        "source_refs": [
+          "un-jnim-2018"
+        ],
+        "tl": 2
+      },
+      "rel-lna-gnu-rivalry": {
+        "exists": true,
+        "type": "hostile_to",
+        "maturity": null,
+        "src": "actor-lna",
+        "tgt": "actor-gnu-forces",
+        "source_refs": [
+          "crisis-group-libya"
+        ],
+        "tl": 2
+      },
+      "rel-isis-libya-affiliation": {
+        "exists": true,
+        "type": "pledged_allegiance_to",
+        "maturity": null,
+        "src": "actor-isis-libya",
+        "tgt": "actor-islamic-state",
+        "source_refs": [
+          "un-libya-reports",
+          "crisis-group-libya"
+        ],
+        "tl": 1
+      },
+      "rel-isis-libya-lna-conflict": {
+        "exists": true,
+        "type": "hostile_to",
+        "maturity": null,
+        "src": "actor-isis-libya",
+        "tgt": "actor-lna",
+        "source_refs": [
+          "crisis-group-libya"
+        ],
+        "tl": 0
+      }
+    }
+  },
+  "baseline": {
+    "source_sha": "14f6b33",
+    "countries": 13,
+    "entities": 72,
+    "relationships": 150,
+    "routes": 249,
+    "sources": 158,
+    "evidence": 273
+  }
+}
