@@ -389,7 +389,7 @@
    "direction": "bidirectional",
    "display_ring": "middle",
    "current_status": "全面冲突持续，各方控制区随战况变化。",
-   "overview": "2023 年 4 月，苏丹武装部队与快速支援部队在喀土穆等地爆发全面武装冲突，此后内战持续，造成大规模流离失所与人道危机。",
+   "overview": "SAF与RSF自2023年4月15日起处于全面内战。到2026年，战场已从首都争夺演变为事实上的东西/中西部空间分裂：SAF控制Khartoum和东部核心国家区，RSF控制Darfur大部，Kordofan成为最关键的连接与消耗战场。",
    "parties": [
     {
      "entity_id": "actor-saf",
@@ -400,28 +400,24 @@
      "role": "准军事力量（达加洛指挥）"
     }
    ],
-   "formation_background": "RSF 源自达尔富尔金戈威德武装，2013 年前后正式组建并逐步扩大；2021 年军事政变后与 SAF 联合执政，2023 年因权力与军队整合问题关系破裂。",
+   "formation_background": "双方曾共同参与2019后军政过渡和2021军事接管，但在RSF整编进正规军的时间表、统一指挥权、政治过渡及经济利益上决裂。",
    "initial_relationship": "2019 年后共同主导过渡期，后因安全部门改革与权力分配分歧决裂。",
    "evolution_stages": [
     {
-     "period": "2019 年",
-     "title": "联合掌权",
-     "description": "苏丹革命后军方与文职过渡安排建立，SAF 与 RSF 共同主导过渡主权委员会。"
+     "period": "2023",
+     "detail": "Khartoum和Darfur全面开战；RSF在首都与Darfur快速扩张。"
     },
     {
-     "period": "2021 年 10 月",
-     "title": "军事政变",
-     "description": "军方接管政权，布尔汉与达加洛共同行动但裂痕加深。"
+     "period": "2024",
+     "detail": "战争长期化，双方依靠外部供应、地方武装和远程火力维持多战线。"
     },
     {
-     "period": "2023 年 4 月",
-     "title": "内战爆发",
-     "description": "喀土穆等地爆发全面冲突，战火蔓延至达尔富尔与科尔多凡。"
+     "period": "2025",
+     "detail": "SAF重新控制Khartoum；RSF夺取al-Fashir并进一步巩固Darfur，Kordofan成为连接东西战区的关键。"
     },
     {
-     "period": "2023 年至今",
-     "title": "冲突持续",
-     "description": "大规模流离失所、饥荒风险与多线战线并存。"
+     "period": "2026",
+     "detail": "North Kordofan出现高强度无人机消耗战；El Obeid成为核心战略节点，North/West Darfur边境战线同时再度活跃。"
     }
    ],
    "causes": [
@@ -451,11 +447,39 @@
    "uncertainties": "停火与政治进程反复；各方控制范围需持续核验。",
    "disputed": false,
    "temporal_sensitive": true,
-   "last_verified_at": "2026-08-06",
+   "last_verified_at": "2026-08-09",
    "source_ids": [
     "crisis-group-sudan",
-    "un-sudan-reports"
-   ]
+    "un-sudan-reports",
+    "depthd-reuters-sudan-war-2026-04-15",
+    "depthd-reuters-sudan-peace-2026-07-09",
+    "deptha-acled-july-2026",
+    "depthd-acled-sudan-front-2026-07-23"
+   ],
+   "drivers": [
+    "国家军队统一与RSF整编争议。",
+    "最高政治权力竞争。",
+    "黄金、商业与武装经济网络。",
+    "地方武装和族群联盟。",
+    "外部军事、金融和外交支持。"
+   ],
+   "third_party_effects": [
+    "Darfur armed movements被迫选边。",
+    "Chad、South Sudan、Ethiopia边境承受外溢。",
+    "国家金融体系和行政体系出现双轨化。",
+    "人道危机和基础设施破坏持续扩大。"
+   ],
+   "current_assessment": "current nationwide civil war with no decisive victor; principal frontline centered on Kordofan and western approaches.",
+   "asip_analysis": "ASIP判断：战局已经从‘谁控制首都’转向‘谁能维持跨区域连接和国家功能’。El Obeid、Kordofan道路、Darfur边境补给和无人机供应链比单一城市占领更能决定中期胜负。",
+   "watch_indicators": [
+    "El Obeid控制与补给线。",
+    "RSF能否重新向中部推进。",
+    "SAF是否发动Darfur纵深反攻。",
+    "无人机/防空技术平衡。",
+    "美国/Quad和平方案是否形成可执行撤军机制。"
+   ],
+   "geographic_scope": "Khartoum/central Sudan, Darfur, Kordofan, Blue Nile and cross-border corridors.",
+   "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE"
   },
   "rel-is-moz-islamic-state": {
    "relation_id": "rel-is-moz-islamic-state",
@@ -3226,6 +3250,210 @@
    "relation_maturity": "R2_DEVELOPED_RELATIONSHIP",
    "last_verified_at": "2026-08-09",
    "source_ids": []
+  },
+  "rel-burhan-saf-leads": {
+   "relation_id": "rel-burhan-saf-leads",
+   "relation_type": "led_by",
+   "slug": "rel-burhan-saf-leads",
+   "source_entity_id": "actor-saf",
+   "target_entity_id": "person-abdel-fattah-al-burhan",
+   "parties": [
+    "actor-saf",
+    "person-abdel-fattah-al-burhan"
+   ],
+   "overview": "Abdel Fattah al-Burhan当前领导SAF，并以Transitional Sovereignty Council主席身份代表SAF控制的国家政府体系。",
+   "current_assessment": "current high-confidence leadership relationship.",
+   "why_it_matters": "SAF军事战略与官方政治谈判立场高度集中于Burhan。",
+   "uncertainties": "SAF内部派系对其决策的实际制约程度不透明。",
+   "relation_maturity": "R2_DEVELOPED_RELATIONSHIP",
+   "last_verified_at": "2026-08-09",
+   "source_ids": [
+    "depthd-qatar-burhan-2026-07-14",
+    "depthd-reuters-sudan-peace-2026-07-09"
+   ]
+  },
+  "rel-dagalo-rsf-leads": {
+   "relation_id": "rel-dagalo-rsf-leads",
+   "relation_type": "led_by",
+   "slug": "rel-dagalo-rsf-leads",
+   "source_entity_id": "actor-rsf",
+   "target_entity_id": "person-mohamed-hamdan-dagalo",
+   "parties": [
+    "actor-rsf",
+    "person-mohamed-hamdan-dagalo"
+   ],
+   "overview": "Mohamed Hamdan Dagalo（Hemedti）仍是RSF最高领导节点，并在RSF主导Tasis平行政治体系中拥有核心政治权力。",
+   "current_assessment": "current high-confidence leadership relationship.",
+   "why_it_matters": "RSF军政网络、外部谈判与平行政府均高度围绕Hemedti。",
+   "uncertainties": "RSF地方指挥官与Arab militia联盟具有相当自主性。",
+   "relation_maturity": "R2_DEVELOPED_RELATIONSHIP",
+   "last_verified_at": "2026-08-09",
+   "source_ids": [
+    "depthd-reuters-rsf-parallel-gov-2026-06-25",
+    "depthd-reuters-sudan-war-2026-04-15"
+   ]
+  },
+  "rel-splm-n-saf-conflict": {
+   "relation_id": "rel-splm-n-saf-conflict",
+   "relation_type": "hostile_to",
+   "slug": "rel-splm-n-saf-conflict",
+   "source_entity_id": "actor-splm-n-al-hilu",
+   "target_entity_id": "actor-saf",
+   "parties": [
+    "actor-splm-n-al-hilu",
+    "actor-saf"
+   ],
+   "overview": "SPLM-N al-Hilu与SAF具有自2011年以来的长期敌对关系。2025—2026该冲突被重新嵌入全国内战：SPLM-N加入RSF主导SFA/Tasis阵营，并在South Kordofan和Blue Nile与SAF直接作战。",
+   "evolution_stages": [
+    {
+     "period": "2011—2022",
+     "detail": "South Kordofan和Blue Nile长期反政府冲突，al-Hilu派维持Nuba Mountains根据地。"
+    },
+    {
+     "period": "2023—2024",
+     "detail": "全国内战重塑地方联盟，SPLM-N保持自身地盘和武装。"
+    },
+    {
+     "period": "2025",
+     "detail": "al-Hilu派加入RSF主导SFA联盟，扩大对SAF的战略合作。"
+    },
+    {
+     "period": "2026",
+     "detail": "RSF与SPLM-N在South Kordofan和Blue Nile对SAF实施联合/并行军事压力；SAF突破Dilling和Kadugli长期封锁。"
+    }
+   ],
+   "drivers": [
+    "Nuba/Blue Nile长期中心—边缘政治冲突。",
+    "自治与世俗国家诉求。",
+    "与SAF长期军事敌对。",
+    "与RSF形成反SAF战术联盟。"
+   ],
+   "constraints": [
+    "SPLM-N与RSF社会基础和地方利益并不一致。",
+    "双方在2026 South Kordofan出现内部摩擦。"
+   ],
+   "current_assessment": "current hostility toward SAF, with SPLM-N retaining organizational autonomy inside RSF-aligned coalition.",
+   "asip_analysis": "ASIP判断：这不是简单的‘SPLM-N成为RSF下属’。al-Hilu派利用全国内战扩大政治筹码，而RSF借其打开South Kordofan/Blue Nile战线；双方联盟更像战略交换而非组织融合。",
+   "watch_indicators": [
+    "Blue Nile战线是否扩大。",
+    "SPLM-N与RSF是否再度内部交火。",
+    "SAF是否进一步打通Kordofan城市和道路。"
+   ],
+   "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+   "last_verified_at": "2026-08-09",
+   "source_ids": [
+    "depthd-acled-rsf-infighting-2026-05-18",
+    "depthd-acled-blue-nile-2026",
+    "depthd-acled-sudan-feb-2026"
+   ]
+  },
+  "rel-jem-saf-conflict": {
+   "relation_id": "rel-jem-saf-conflict",
+   "relation_type": "cooperates_with",
+   "slug": "rel-jem-saf-conflict",
+   "source_entity_id": "actor-jem",
+   "target_entity_id": "actor-saf",
+   "parties": [
+    "actor-jem",
+    "actor-saf"
+   ],
+   "overview": "JEM与SAF的关系发生了根本阶段变化：2003起长期敌对；2020 Juba Peace Agreement后进入政治安全过渡体系；2023年11月JEM公开支持SAF，并作为Darfur Joint Forces重要组成与RSF作战。因此当前基础关系应从hostile_to修正为cooperates_with，同时保留历史敌对时间线。",
+   "evolution_stages": [
+    {
+     "period": "2003—2020",
+     "detail": "JEM是Darfur最重要反Khartoum武装之一，与SAF长期敌对。"
+    },
+    {
+     "period": "2020—2023",
+     "detail": "Juba Peace Agreement后关系转向制度化过渡和安全安排。"
+    },
+    {
+     "period": "2023-11以后",
+     "detail": "JEM与部分Darfur armed movements公开支持SAF，共同对抗RSF。"
+    },
+    {
+     "period": "2025—2026",
+     "detail": "UN和ACLED继续把JEM列入SAF-aligned Darfur forces，North Darfur战线仍有合作。"
+    }
+   ],
+   "current_assessment": "current operational cooperation; historical hostility remains essential context.",
+   "asip_analysis": "ASIP判断：这是Sudan战争中最重要的联盟反转之一。它说明2023战争不是旧‘政府 vs 达尔富尔反叛军’的简单延续，而重组了整个武装阵营。",
+   "watch_indicators": [
+    "JEM是否继续接受SAF统一指挥。",
+    "未来统一军队/DDR是否引发摩擦。",
+    "Darfur Joint Forces内部是否分裂。"
+   ],
+   "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+   "last_verified_at": "2026-08-09",
+   "source_ids": [
+    "acled-sudan-2025",
+    "depthd-un-darfur-panel-2025",
+    "depthd-acled-sudan-front-2026-07-23"
+   ]
+  },
+  "rel-rsf-darfur-origin": {
+   "relation_id": "rel-rsf-darfur-origin",
+   "relation_type": "fought_against",
+   "slug": "rel-rsf-darfur-origin",
+   "source_entity_id": "actor-rsf",
+   "target_entity_id": "actor-jem",
+   "parties": [
+    "actor-rsf",
+    "actor-jem"
+   ],
+   "overview": "该legacy关系实际连接RSF与JEM。两者在Darfur有复杂历史背景，但当前更准确的基础语义是fought_against：JEM自2023后与SAF结盟，在El Fasher和North Darfur直接对抗RSF。",
+   "current_assessment": "current armed hostility in Darfur.",
+   "why_it_matters": "JEM为SAF提供Darfur本地盟友和Zaghawa等网络，直接限制RSF完全垄断西部。",
+   "uncertainties": "具体前线的JEM、SLM/MM等Darfur Joint Forces attribution需逐事件区分。",
+   "historical_context": "两者都源于Darfur冲突生态，但不是同一组织谱系。旧historically_associated_with过于模糊，容易掩盖当前敌对。",
+   "relation_maturity": "R2_DEVELOPED_RELATIONSHIP",
+   "last_verified_at": "2026-08-09",
+   "source_ids": [
+    "acled-sudan-2025",
+    "depthd-un-darfur-panel-2025",
+    "depthd-acled-sudan-front-2026-07-23"
+   ]
+  },
+  "rel-saf-sudan-operates": {
+   "relation_id": "rel-saf-sudan-operates",
+   "relation_type": "operates_in",
+   "slug": "rel-saf-sudan-operates",
+   "source_entity_id": "actor-saf",
+   "target_entity_id": "country-sudan",
+   "parties": [
+    "actor-saf",
+    "country-sudan"
+   ],
+   "overview": "SAF在Sudan全国仍有军事存在，但实际控制高度不均。当前核心控制包括Khartoum、东部和多个中部/北部区域，并在Kordofan、Darfur边缘持续作战。",
+   "current_assessment": "national state-force presence with contested territorial control.",
+   "uncertainties": "operates_in不等于控制全国。",
+   "relation_maturity": "R2_DEVELOPED_RELATIONSHIP",
+   "last_verified_at": "2026-08-09",
+   "source_ids": [
+    "depthd-reuters-sudan-war-2026-04-15",
+    "depthd-reuters-khartoum-2026-07-10"
+   ]
+  },
+  "rel-rsf-sudan-operates": {
+   "relation_id": "rel-rsf-sudan-operates",
+   "relation_type": "operates_in",
+   "slug": "rel-rsf-sudan-operates",
+   "source_entity_id": "actor-rsf",
+   "target_entity_id": "country-sudan",
+   "parties": [
+    "actor-rsf",
+    "country-sudan"
+   ],
+   "overview": "RSF在Sudan西部和部分中部地区拥有大范围军事存在，Darfur是其最深控制区，Kordofan和Blue Nile方向存在持续军事活动。",
+   "current_assessment": "large active presence and territorial control in western Sudan, but not nationwide control.",
+   "uncertainties": "不同地区控制、影响和临时突入必须区分。",
+   "relation_maturity": "R2_DEVELOPED_RELATIONSHIP",
+   "last_verified_at": "2026-08-09",
+   "source_ids": [
+    "depthd-reuters-sudan-war-2026-04-15",
+    "deptha-acled-july-2026",
+    "depthd-acled-sudan-front-2026-07-23"
+   ]
   }
  },
  "note": "I3-B: second wave of deepened relationship histories (Mali/Burkina/Cameroon/Ethiopia/Tanzania networks)."
