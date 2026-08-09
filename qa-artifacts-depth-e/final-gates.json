@@ -1,0 +1,31 @@
+{
+  "artifact": "DEPTHE_FINAL_GATES",
+  "package_id": "ASIP-DEPTH-E-ETHIOPIA-MULTI-FRONT-CORE-V1",
+  "baseline": {"source_sha": "1d48d2c", "gh_pages_sha": "398aba3", "pages_run": "31302123532"},
+  "final": {"source_sha": "14f6b33", "gh_pages_sha": "f7feb36", "pages_run": "31310002635"},
+  "count_invariants": {"countries": 13, "non_country_entities": 72, "relationships": 150, "routes": 249},
+  "gates": {
+    "DEPTHE_BASELINE_GATE": "PASS",
+    "DEPTHE_SOURCE_GATE": "PASS",
+    "DEPTHE_FACT_SEMANTIC_GATE": "PASS",
+    "DEPTHE_ENTITY_DEPTH_GATE": "PASS",
+    "DEPTHE_RELATION_DEPTH_GATE": "PASS",
+    "DEPTHE_EVIDENCE_GATE": "PASS",
+    "DEPTHE_GENERATOR_GATE": "PASS",
+    "DEPTHE_BUILD_GATE": "PASS",
+    "DEPTHE_PUBLIC_QA_GATE": "PASS",
+    "DEPTHE_PRODUCTION_ISOLATION_GATE": "PASS"
+  },
+  "summary": {
+    "sources": {"before": 150, "after": 158, "added": 8, "reused": ["ETH_AU_2026_01_30", "ETH_REUTERS_2026_02_08"]},
+    "evidence": {"before": 260, "after": 273, "depthe_imported": 13, "verified": 12, "partially_verified": 1},
+    "entity_upgrades": 4,
+    "relation_upgrades": 4,
+    "fact_semantic_cleanup_groups": 7,
+    "regression": {"python_tests": "32 files", "fail_total": 0, "depth_e_special": 11},
+    "candidate_browser_qa": {"pages": 37, "fails": 0},
+    "public_browser_qa": {"pages": 37, "fails": 0, "maturity_badge": 32, "analysis_partition": 32, "watch_partition": 32},
+    "network_qa": {"foci": 4, "gate": "PASS"},
+    "production_diff": {"unexpected": 0}
+  }
+}
