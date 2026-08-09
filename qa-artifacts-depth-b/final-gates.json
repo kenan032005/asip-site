@@ -1,0 +1,32 @@
+{
+  "artifact": "DEPTHB_FINAL_GATES",
+  "package_id": "ASIP-DEPTH-B-LAKE-CHAD-V1",
+  "baseline": {"source_sha": "8f0f325", "gh_pages_sha": "54167ed", "pages_run": "31277958625"},
+  "final": {"source_sha": "7604c68", "gh_pages_sha": "5aeccd9", "pages_run": "31298375711"},
+  "count_invariants": {"countries": 13, "non_country_entities": 72, "relationships": 150, "routes": 249},
+  "gates": {
+    "DEPTHB_BASELINE_GATE": "PASS",
+    "DEPTHB_SOURCE_GATE": "PASS",
+    "DEPTHB_FACT_CLEANUP_GATE": "PASS",
+    "DEPTHB_ENTITY_DEPTH_GATE": "PASS",
+    "DEPTHB_RELATION_DEPTH_GATE": "PASS",
+    "DEPTHB_EVIDENCE_GATE": "PASS",
+    "DEPTHB_GENERATOR_GATE": "PASS",
+    "DEPTHB_BUILD_GATE": "PASS",
+    "DEPTHB_PUBLIC_QA_GATE": "PASS",
+    "DEPTHB_PRODUCTION_ISOLATION_GATE": "PASS"
+  },
+  "summary": {
+    "sources": {"before": 127, "after": 137, "added": 10, "reused": ["d1-acled-africa-june-2026", "d2-un-s2026-44", "iss-mnjtf-lakechad-2025"]},
+    "evidence": {"before": 214, "after": 231, "depthb_imported": 17},
+    "entity_upgrades": 8,
+    "relation_upgrades": 11,
+    "fact_cleanup_groups": 5,
+    "malformed_relation_repair": "rel-jas-islamic-state-hostile: actor-jas -> actor-islamic-state, pledged_allegiance_to, 2015-03-07..2016-08-03, legacy id kept, count preserved at 150",
+    "regression": {"python_tests": "29 files", "fail_total": 0, "depth_b_special": 11},
+    "candidate_browser_qa": {"pages": 80, "fails": 0},
+    "public_browser_qa": {"pages": 80, "fails": 0, "maturity_badge": 76, "analysis_partition": 44, "watch_partition": 60},
+    "network_qa": {"foci": 8, "gate": "PASS"},
+    "production_diff": {"unexpected": 0}
+  }
+}
