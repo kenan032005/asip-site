@@ -307,12 +307,16 @@
           html += '<section class="profile-section"><h2>关系性质</h2><ul class="intel-bullets">' + Object.keys(profile.nature).filter(function (k) { return k !== "type"; }).map(function (k) { return '<li><b>' + esc(k) + '</b>：' + esc(Array.isArray(profile.nature[k]) ? profile.nature[k].join("、") : profile.nature[k]) + '</li>'; }).join("") + '</ul></section>';
         }
         if (profile.drivers && profile.drivers.length) html += '<section class="profile-section"><h2>驱动因素</h2><ul>' + profile.drivers.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
-        if (profile.constraints && profile.constraints.length) html += '<section class="profile-section"><h2>约束条件</h2><ul>' + profile.constraints.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
+        if (profile.constraints) {
+          if (typeof profile.constraints === "string") html += '<section class="profile-section"><h2>约束条件</h2><p>' + esc(profile.constraints) + '</p></section>';
+          else if (profile.constraints.length) html += '<section class="profile-section"><h2>约束条件</h2><ul>' + profile.constraints.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
+        }
         if (profile.third_party_effects && profile.third_party_effects.length) html += '<section class="profile-section"><h2>第三方影响</h2><ul>' + profile.third_party_effects.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
         if (profile.personnel_flows) html += '<section class="profile-section"><h2>人员流动</h2><p>' + esc(profile.personnel_flows) + '</p></section>';
         if (profile.cooperation_dimensions && profile.cooperation_dimensions.length) html += '<section class="profile-section"><h2>合作维度</h2><ul>' + profile.cooperation_dimensions.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
         if (profile.continuities && profile.continuities.length) html += '<section class="profile-section"><h2>连续性</h2><ul>' + profile.continuities.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
         if (profile.differences && profile.differences.length) html += '<section class="profile-section"><h2>差异</h2><ul>' + profile.differences.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
+        if (profile.causes && profile.causes.length) html += '<section class="profile-section"><h2>形成原因</h2><ul>' + profile.causes.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
         if (profile.causes && profile.causes.length) html += '<section class="profile-section"><h2>形成原因</h2><ul>' + profile.causes.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
         if (profile.key_turning_points && profile.key_turning_points.length) html += '<section class="profile-section"><h2>关键转折</h2><ul>' + profile.key_turning_points.map(function (x) { return '<li><b>' + esc(x.event) + '</b><p>' + esc(x.impact) + '</p></li>'; }).join("") + '</ul></section>';
         if (profile.current_status) html += '<section class="profile-section"><h2>当前状态</h2><p>' + esc(profile.current_status) + '</p></section>';
