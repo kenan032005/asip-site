@@ -1,0 +1,107 @@
+{
+  "artifact": "DEPTHE_BASELINE_GATE",
+  "ok": [
+    "countries=13",
+    "non-country entities=72",
+    "relationships=150",
+    "routes=249",
+    "sources=150",
+    "evidence=260",
+    "entity maturity enum stable (PASS)",
+    "relation maturity enum stable (PASS)"
+  ],
+  "issues": [],
+  "gate": "PASS",
+  "probe": {
+    "entities": {
+      "actor-endf": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "primary_category": "state_security_force",
+        "sections": 11,
+        "imported_by": null
+      },
+      "actor-fano": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "primary_category": "state_security_force",
+        "sections": 11,
+        "imported_by": null
+      },
+      "actor-ola": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "primary_category": "state_security_force",
+        "sections": 11,
+        "imported_by": null
+      },
+      "actor-tdf": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "primary_category": "insurgent_group",
+        "sections": 11,
+        "imported_by": null
+      }
+    },
+    "relations": {
+      "rel-endf-fano-conflict": {
+        "exists": true,
+        "type": "hostile_to",
+        "maturity": null,
+        "src": "actor-endf",
+        "tgt": "actor-fano",
+        "source_refs": [
+          "un-jnim-2018"
+        ],
+        "tl": 3
+      },
+      "rel-endf-ola-conflict": {
+        "exists": true,
+        "type": "hostile_to",
+        "maturity": null,
+        "src": "actor-endf",
+        "tgt": "actor-ola",
+        "source_refs": [
+          "d1-acled-ethiopia-2026"
+        ],
+        "tl": 2
+      },
+      "rel-endf-tdf-conflict": {
+        "exists": true,
+        "type": "hostile_to",
+        "maturity": null,
+        "src": "actor-endf",
+        "tgt": "actor-tdf",
+        "source_refs": [
+          "ETH_AU_2026_01_30",
+          "d1-acled-ethiopia-2026"
+        ],
+        "tl": 4
+      },
+      "rel-ethiopia-sudan-border": {
+        "exists": true,
+        "type": "cross_border_link",
+        "maturity": null,
+        "src": "country-ethiopia",
+        "tgt": "country-sudan",
+        "source_refs": [
+          "un-jnim-2018"
+        ],
+        "tl": 2
+      }
+    }
+  },
+  "baseline": {
+    "source_sha": "1d48d2c",
+    "countries": 13,
+    "entities": 72,
+    "relationships": 150,
+    "routes": 249,
+    "sources": 150,
+    "evidence": 260
+  }
+}
