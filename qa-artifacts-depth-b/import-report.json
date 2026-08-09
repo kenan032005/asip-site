@@ -1,0 +1,333 @@
+{
+ "package_id": "ASIP-DEPTH-B-LAKE-CHAD-V1",
+ "imported_at": "2026-08-09",
+ "steps": {
+  "sources": {
+   "candidates": 13,
+   "added": [],
+   "mapping": {
+    "depthb-nctc-boko-haram-2025-06": {
+     "actual_source_id": "depthb-nctc-boko-haram-2025-06",
+     "matched_by": "url_exact"
+    },
+    "depthb-nctc-iswap-2025-04": {
+     "actual_source_id": "depthb-nctc-iswap-2025-04",
+     "matched_by": "url_exact"
+    },
+    "depthb-nctc-ansaru-2025-06": {
+     "actual_source_id": "depthb-nctc-ansaru-2025-06",
+     "matched_by": "url_exact"
+    },
+    "depthb-acled-bh-iswap-methodology-2025-08-05": {
+     "actual_source_id": "depthb-acled-bh-iswap-methodology-2025-08-05",
+     "matched_by": "url_exact"
+    },
+    "depthb-acled-lake-chad-q1-2026": {
+     "actual_source_id": "depthb-acled-lake-chad-q1-2026",
+     "matched_by": "url_exact"
+    },
+    "depthb-acled-lakurawa-2026-06": {
+     "actual_source_id": "d1-acled-africa-june-2026",
+     "matched_by": "url_exact"
+    },
+    "depthb-unidir-boko-haram-2024": {
+     "actual_source_id": "depthb-unidir-boko-haram-2024",
+     "matched_by": "url_exact"
+    },
+    "depthb-un-s2026-44": {
+     "actual_source_id": "d2-un-s2026-44",
+     "matched_by": "url_normalized_record"
+    },
+    "depthb-au-psc-mnjtf-2025-12-15": {
+     "actual_source_id": "depthb-au-psc-mnjtf-2025-12-15",
+     "matched_by": "url_exact"
+    },
+    "depthb-au-assembly-niger-mnjtf-2026": {
+     "actual_source_id": "depthb-au-assembly-niger-mnjtf-2026",
+     "matched_by": "url_exact"
+    },
+    "depthb-mnjtf-sectors-current": {
+     "actual_source_id": "depthb-mnjtf-sectors-current",
+     "matched_by": "url_exact"
+    },
+    "depthb-mnjtf-force-commander-2025-11-13": {
+     "actual_source_id": "depthb-mnjtf-force-commander-2025-11-13",
+     "matched_by": "url_exact"
+    },
+    "depthb-iss-mnjtf-2026-05-14": {
+     "actual_source_id": "iss-mnjtf-lakechad-2025",
+     "matched_by": "url_exact"
+    }
+   }
+  },
+  "malformed_relation_repair": {
+   "before": {
+    "target": "actor-islamic-state",
+    "type": "pledged_allegiance_to",
+    "direction": "unidirectional",
+    "time_start": "2015-03-07",
+    "time_end": "2016-08-03",
+    "current_status": "historical_pledge_recognition_shifted_to_iswap",
+    "freshness": "historical"
+   },
+   "after": {
+    "target": "actor-islamic-state",
+    "type": "pledged_allegiance_to",
+    "direction": "unidirectional",
+    "time_start": "2015-03-07",
+    "time_end": "2016-08-03",
+    "current_status": "historical_pledge_recognition_shifted_to_iswap",
+    "freshness": "historical"
+   }
+  },
+  "cameroon_source_cleanup": {
+   "rel-cameroon-army-jas": {
+    "before": [
+     "depthb-nctc-boko-haram-2025-06",
+     "depthb-acled-lake-chad-q1-2026"
+    ],
+    "after": [
+     "depthb-nctc-boko-haram-2025-06",
+     "depthb-acled-lake-chad-q1-2026"
+    ]
+   },
+   "rel-cameroon-army-iswap": {
+    "before": [
+     "depthb-nctc-iswap-2025-04",
+     "depthb-acled-lake-chad-q1-2026",
+     "iss-mnjtf-lakechad-2025"
+    ],
+    "after": [
+     "depthb-nctc-iswap-2025-04",
+     "depthb-acled-lake-chad-q1-2026",
+     "iss-mnjtf-lakechad-2025"
+    ]
+   }
+  },
+  "entity_upgrades": [
+   {
+    "entity_id": "actor-jas",
+    "status": "UPGRADED",
+    "target_maturity": "E3_FULL_ENCYCLOPEDIA",
+    "sections": 30,
+    "zh_chars": 2375,
+    "current_status": "active_fragmented_jas_constellation"
+   },
+   {
+    "entity_id": "actor-iswap",
+    "status": "UPGRADED",
+    "target_maturity": "E3_FULL_ENCYCLOPEDIA",
+    "sections": 28,
+    "zh_chars": 2065,
+    "current_status": "active_islamic_state_west_africa_branch"
+   },
+   {
+    "entity_id": "actor-mnjtf",
+    "status": "UPGRADED",
+    "target_maturity": "E3_FULL_ENCYCLOPEDIA",
+    "sections": 27,
+    "zh_chars": 1773,
+    "current_status": "active_regional_force_with_niger_withdrawal_constraint"
+   },
+   {
+    "entity_id": "actor-nigeria-army",
+    "status": "UPGRADED",
+    "target_maturity": "E2_DEVELOPED",
+    "sections": 25,
+    "zh_chars": 1647,
+    "current_status": "active"
+   },
+   {
+    "entity_id": "actor-chad-army",
+    "status": "UPGRADED",
+    "target_maturity": "E2_DEVELOPED",
+    "sections": 16,
+    "zh_chars": 677,
+    "current_status": "active"
+   },
+   {
+    "entity_id": "actor-cameroon-army",
+    "status": "UPGRADED",
+    "target_maturity": "E2_DEVELOPED",
+    "sections": 16,
+    "zh_chars": 675,
+    "current_status": "active"
+   },
+   {
+    "entity_id": "actor-lakurawa",
+    "status": "UPGRADED",
+    "target_maturity": "E2_DEVELOPED",
+    "sections": 13,
+    "zh_chars": 557,
+    "current_status": "contested_label_increasingly_linked_to_is_sahel"
+   },
+   {
+    "entity_id": "actor-ansaru",
+    "status": "UPGRADED",
+    "target_maturity": "E2_DEVELOPED",
+    "sections": 15,
+    "zh_chars": 441,
+    "current_status": "active_reemerging"
+   }
+  ],
+  "relation_upgrades": [
+   {
+    "relationship_id": "rel-jas-iswap-conflict",
+    "status": "UPGRADED",
+    "target_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+    "type_unchanged": "hostile_to",
+    "sources": 3
+   },
+   {
+    "relationship_id": "rel-jas-islamic-state-hostile",
+    "status": "UPGRADED",
+    "target_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+    "type_unchanged": "pledged_allegiance_to",
+    "sources": 2
+   },
+   {
+    "relationship_id": "rel-iswap-islamic-state-affiliation",
+    "status": "UPGRADED",
+    "target_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+    "type_unchanged": "pledged_allegiance_to",
+    "sources": 3
+   },
+   {
+    "relationship_id": "rel-nigeria-mnjtf-member",
+    "status": "UPGRADED",
+    "target_maturity": "R2_DEVELOPED_RELATIONSHIP",
+    "type_unchanged": "member_of_force",
+    "sources": 3
+   },
+   {
+    "relationship_id": "rel-chad-mnjtf-member",
+    "status": "UPGRADED",
+    "target_maturity": "R2_DEVELOPED_RELATIONSHIP",
+    "type_unchanged": "member_of_force",
+    "sources": 2
+   },
+   {
+    "relationship_id": "rel-cameroon-mnjtf-member",
+    "status": "UPGRADED",
+    "target_maturity": "R2_DEVELOPED_RELATIONSHIP",
+    "type_unchanged": "member_of_force",
+    "sources": 2
+   },
+   {
+    "relationship_id": "rel-cameroon-army-jas",
+    "status": "UPGRADED",
+    "target_maturity": "R2_DEVELOPED_RELATIONSHIP",
+    "type_unchanged": "fought_against",
+    "sources": 2
+   },
+   {
+    "relationship_id": "rel-cameroon-army-iswap",
+    "status": "UPGRADED",
+    "target_maturity": "R2_DEVELOPED_RELATIONSHIP",
+    "type_unchanged": "fought_against",
+    "sources": 3
+   },
+   {
+    "relationship_id": "rel-d1-ansaru-jas-split",
+    "status": "UPGRADED",
+    "target_maturity": "R2_DEVELOPED_RELATIONSHIP",
+    "type_unchanged": "split_from",
+    "sources": 1
+   },
+   {
+    "relationship_id": "rel-d1-ansaru-aqim-allegiance",
+    "status": "UPGRADED",
+    "target_maturity": "R2_DEVELOPED_RELATIONSHIP",
+    "type_unchanged": "pledged_allegiance_to",
+    "sources": 1
+   },
+   {
+    "relationship_id": "rel-d1-ansaru-jnim-affiliation",
+    "status": "UPGRADED",
+    "target_maturity": "R2_DEVELOPED_RELATIONSHIP",
+    "type_unchanged": "affiliated_with",
+    "sources": 1
+   }
+  ],
+  "evidence": [
+   {
+    "claim_id": "depthb-ev-001",
+    "status": "SKIPPED_CLAIM_EXISTS"
+   },
+   {
+    "claim_id": "depthb-ev-002",
+    "status": "SKIPPED_CLAIM_EXISTS"
+   },
+   {
+    "claim_id": "depthb-ev-003",
+    "status": "SKIPPED_CLAIM_EXISTS"
+   },
+   {
+    "claim_id": "depthb-ev-004",
+    "status": "SKIPPED_CLAIM_EXISTS"
+   },
+   {
+    "claim_id": "depthb-ev-005",
+    "status": "SKIPPED_CLAIM_EXISTS"
+   },
+   {
+    "claim_id": "depthb-ev-006",
+    "status": "SKIPPED_CLAIM_EXISTS"
+   },
+   {
+    "claim_id": "depthb-ev-007",
+    "status": "SKIPPED_CLAIM_EXISTS"
+   },
+   {
+    "claim_id": "depthb-ev-008",
+    "status": "SKIPPED_CLAIM_EXISTS"
+   },
+   {
+    "claim_id": "depthb-ev-009",
+    "status": "SKIPPED_CLAIM_EXISTS"
+   },
+   {
+    "claim_id": "depthb-ev-010",
+    "status": "SKIPPED_CLAIM_EXISTS"
+   },
+   {
+    "claim_id": "depthb-ev-011",
+    "status": "SKIPPED_CLAIM_EXISTS"
+   },
+   {
+    "claim_id": "depthb-ev-012",
+    "status": "SKIPPED_CLAIM_EXISTS"
+   },
+   {
+    "claim_id": "depthb-ev-013",
+    "status": "SKIPPED_CLAIM_EXISTS"
+   },
+   {
+    "claim_id": "depthb-ev-014",
+    "status": "SKIPPED_CLAIM_EXISTS"
+   },
+   {
+    "claim_id": "depthb-ev-015",
+    "status": "SKIPPED_CLAIM_EXISTS"
+   },
+   {
+    "claim_id": "depthb-ev-016",
+    "status": "SKIPPED_CLAIM_EXISTS"
+   },
+   {
+    "claim_id": "depthb-ev-017",
+    "status": "SKIPPED_CLAIM_EXISTS"
+   }
+  ]
+ },
+ "final_scale": {
+  "countries": 13,
+  "non_country_entities": 72,
+  "relationships": 150,
+  "sources": 137,
+  "evidence": 231,
+  "relation_profiles": 59,
+  "relation_timelines": 52,
+  "routes": 249
+ }
+}
