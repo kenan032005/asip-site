@@ -1,0 +1,228 @@
+{
+  "artifact": "DEPTHC_BASELINE_GATE",
+  "ok": [
+    "countries=13",
+    "non-country entities=72",
+    "relationships=150",
+    "routes=249",
+    "sources=137",
+    "evidence=231",
+    "entity maturity enum stable (PASS)",
+    "relation maturity enum stable (PASS)"
+  ],
+  "issues": [],
+  "gate": "PASS",
+  "probe": {
+    "entities": {
+      "actor-dan-na-ambassagou": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "sections": 7,
+        "imported_by": "i3d1"
+      },
+      "person-youssouf-toloba": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "aging",
+        "sections": 4,
+        "imported_by": "i3d2"
+      },
+      "actor-dozos-of-macina": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "aging",
+        "sections": 4,
+        "imported_by": "i3d2"
+      },
+      "person-amadou-nionson-diarra": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "aging",
+        "sections": 4,
+        "imported_by": "i3d2"
+      },
+      "actor-dana-atem": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "aging",
+        "sections": 4,
+        "imported_by": "i3d2"
+      },
+      "person-sidi-ongoiba": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "aging",
+        "sections": 4,
+        "imported_by": "i3d2"
+      },
+      "actor-katiba-serma": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "aging",
+        "sections": 4,
+        "imported_by": "i3d2"
+      },
+      "person-jafar-dicko": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "sections": 5,
+        "imported_by": "i3d2"
+      },
+      "person-ousmane-dicko": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "sections": 4,
+        "imported_by": "i3d2"
+      },
+      "person-abou-ghosmane": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "sections": 4,
+        "imported_by": "i3d2"
+      }
+    },
+    "relations": {
+      "rel-d1-dan-na-jnim-conflict": {
+        "exists": true,
+        "type": "fought_against",
+        "maturity": null,
+        "src": "actor-dan-na-ambassagou",
+        "tgt": "actor-jnim",
+        "tl": 0
+      },
+      "rel-d1-dan-na-fama-coop": {
+        "exists": true,
+        "type": "cooperates_with",
+        "maturity": null,
+        "src": "actor-dan-na-ambassagou",
+        "tgt": "actor-mali-army",
+        "tl": 2
+      },
+      "rel-d2-dan-na-toloba-led": {
+        "exists": true,
+        "type": "led_by",
+        "maturity": null,
+        "src": "actor-dan-na-ambassagou",
+        "tgt": "person-youssouf-toloba",
+        "tl": 0
+      },
+      "rel-d2-dana-dan-na-split": {
+        "exists": true,
+        "type": "split_from",
+        "maturity": null,
+        "src": "actor-dana-atem",
+        "tgt": "actor-dan-na-ambassagou",
+        "tl": 2
+      },
+      "rel-d2-dana-sidi-led": {
+        "exists": true,
+        "type": "led_by",
+        "maturity": null,
+        "src": "actor-dana-atem",
+        "tgt": "person-sidi-ongoiba",
+        "tl": 0
+      },
+      "rel-d2-dana-katiba-serma-conflict": {
+        "exists": true,
+        "type": "fought_against",
+        "maturity": null,
+        "src": "actor-dana-atem",
+        "tgt": "actor-katiba-serma",
+        "tl": 0
+      },
+      "rel-d2-dana-ansarul-conflict": {
+        "exists": true,
+        "type": "fought_against",
+        "maturity": null,
+        "src": "actor-dana-atem",
+        "tgt": "actor-ansarul-islam",
+        "tl": 0
+      },
+      "rel-d2-dana-fama-coop": {
+        "exists": true,
+        "type": "cooperates_with",
+        "maturity": null,
+        "src": "actor-dana-atem",
+        "tgt": "actor-mali-army",
+        "tl": 0
+      },
+      "rel-d2-dozos-macina-amadou-led": {
+        "exists": true,
+        "type": "led_by",
+        "maturity": null,
+        "src": "actor-dozos-of-macina",
+        "tgt": "person-amadou-nionson-diarra",
+        "tl": 0
+      },
+      "rel-d2-dozos-macina-jnim-conflict": {
+        "exists": true,
+        "type": "fought_against",
+        "maturity": null,
+        "src": "actor-dozos-of-macina",
+        "tgt": "actor-jnim",
+        "tl": 2
+      },
+      "rel-d2-dozos-macina-fama-coop": {
+        "exists": true,
+        "type": "cooperates_with",
+        "maturity": null,
+        "src": "actor-dozos-of-macina",
+        "tgt": "actor-mali-army",
+        "tl": 0
+      },
+      "rel-d2-katiba-serma-jnim": {
+        "exists": true,
+        "type": "constituent_of",
+        "maturity": null,
+        "src": "actor-katiba-serma",
+        "tgt": "actor-jnim",
+        "tl": 0
+      },
+      "rel-d2-jafar-jnim": {
+        "exists": true,
+        "type": "affiliated_with",
+        "maturity": null,
+        "src": "person-jafar-dicko",
+        "tgt": "actor-jnim",
+        "tl": 2
+      },
+      "rel-d2-ansarul-jafar-led": {
+        "exists": true,
+        "type": "led_by",
+        "maturity": null,
+        "src": "actor-ansarul-islam",
+        "tgt": "person-jafar-dicko",
+        "tl": 0
+      },
+      "rel-d2-ousmane-jnim": {
+        "exists": true,
+        "type": "affiliated_with",
+        "maturity": null,
+        "src": "person-ousmane-dicko",
+        "tgt": "actor-jnim",
+        "tl": 0
+      },
+      "rel-d2-ghosmane-jnim": {
+        "exists": true,
+        "type": "affiliated_with",
+        "maturity": null,
+        "src": "person-abou-ghosmane",
+        "tgt": "actor-jnim",
+        "tl": 1
+      }
+    }
+  },
+  "baseline": {
+    "source_sha": "7604c68",
+    "countries": 13,
+    "entities": 72,
+    "relationships": 150,
+    "routes": 249,
+    "sources": 137,
+    "evidence": 231
+  }
+}
