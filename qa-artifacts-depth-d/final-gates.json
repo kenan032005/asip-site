@@ -1,0 +1,32 @@
+{
+  "artifact": "DEPTHD_FINAL_GATES",
+  "package_id": "ASIP-DEPTH-D-SUDAN-CIVIL-WAR-CORE-V1",
+  "baseline": {"source_sha": "46abaed", "gh_pages_sha": "012b931", "pages_run": "31300822992"},
+  "final": {"source_sha": "1d48d2c", "gh_pages_sha": "398aba3", "pages_run": "31302123532"},
+  "count_invariants": {"countries": 13, "non_country_entities": 72, "relationships": 150, "routes": 249},
+  "gates": {
+    "DEPTHD_BASELINE_GATE": "PASS",
+    "DEPTHD_SOURCE_GATE": "PASS",
+    "DEPTHD_FACT_SEMANTIC_GATE": "PASS",
+    "DEPTHD_ENTITY_DEPTH_GATE": "PASS",
+    "DEPTHD_RELATION_DEPTH_GATE": "PASS",
+    "DEPTHD_EVIDENCE_GATE": "PASS",
+    "DEPTHD_GENERATOR_GATE": "PASS",
+    "DEPTHD_BUILD_GATE": "PASS",
+    "DEPTHD_PUBLIC_QA_GATE": "PASS",
+    "DEPTHD_PRODUCTION_ISOLATION_GATE": "PASS"
+  },
+  "summary": {
+    "sources": {"before": 137, "after": 150, "added": 13, "reused": ["deptha-acled-july-2026", "acled-sudan-2025"]},
+    "evidence": {"before": 245, "after": 260, "depthd_imported": 15, "verified": 14, "partially_verified": 1},
+    "entity_upgrades": 6,
+    "relation_upgrades": 8,
+    "fact_semantic_cleanup_groups": 6,
+    "count_preserving_repairs": 2,
+    "regression": {"python_tests": "31 files", "fail_total": 0, "depth_d_special": 10},
+    "candidate_browser_qa": {"pages": 60, "fails": 0},
+    "public_browser_qa": {"pages": 60, "fails": 0, "maturity_badge": 56, "analysis_partition": 36, "watch_partition": 36},
+    "network_qa": {"foci": 6, "gate": "PASS"},
+    "production_diff": {"unexpected": 0}
+  }
+}
