@@ -1,0 +1,104 @@
+{
+ "artifact": "DEPTHG_FINAL_CLOSURE_AUDIT",
+ "verdict": "CLOSED",
+ "gates_passed": 12,
+ "gates_total": 12,
+ "ten_metrics": {
+  "1_entity_inflated_labels": 0,
+  "2_relation_inflated_labels": 0,
+  "3_importance_floor_violations": 0,
+  "4_dangling_source_refs": 0,
+  "5_entities_without_maturity_badge": 0,
+  "6_relations_without_maturity_badge": 0,
+  "7_unexpected_maturity_moves": 0,
+  "8_duplicate_directed_edges": 0,
+  "9_evidence_pointing_at_missing_source": 0,
+  "10_declared_limitations_without_declaration": 0
+ },
+ "gates": {
+  "DEPTHG_G1_COUNT_FROZEN": true,
+  "DEPTHG_G2_SOURCE_DEDUPE": true,
+  "DEPTHG_G3_UN_JNIM_CLAIM_RELEVANCE": true,
+  "DEPTHG_G4_FACTUAL_CLEANUPS": true,
+  "DEPTHG_G5_KATIBA_HANIFA_E3": true,
+  "DEPTHG_G6_JNIM_IS_REPAIR": true,
+  "DEPTHG_G7_CORE_OVERRIDES_APPLIED": true,
+  "DEPTHG_G8_MATURITY_COVERAGE": true,
+  "DEPTHG_G9_ZERO_RESIDUAL_METRICS": true,
+  "DEPTHG_G10_REGEN_IDEMPOTENT": true,
+  "DEPTHG_G11_FULL_REGRESSION": true,
+  "DEPTHG_G12_BROWSER_NETWORK_QA": true
+ },
+ "notes": {
+  "entity_inflated_all": [],
+  "relation_inflated_all": [
+   "rel-d1-burkina-army-fu-aes-member",
+   "rel-d1-fama-fu-aes-member",
+   "rel-d1-fu-aes-region",
+   "rel-d1-niger-army-fu-aes-member",
+   "rel-d2-katiba-hanifa-benin-forces",
+   "rel-jnim-benin-forces-fought",
+   "rel-jnim-katiba-constituent"
+  ],
+  "locked_relations": [
+   "rel-d1-burkina-army-fu-aes-member",
+   "rel-d1-fama-fu-aes-member",
+   "rel-d1-fu-aes-region",
+   "rel-d1-niger-army-fu-aes-member",
+   "rel-d2-katiba-hanifa-benin-forces",
+   "rel-jnim-benin-forces-fought",
+   "rel-jnim-katiba-constituent"
+  ],
+  "intentional_downshifts": {
+   "entities": {
+    "person-salva-kiir": {
+     "from": "E3_FULL_ENCYCLOPEDIA",
+     "to": "E2_DEVELOPED",
+     "reason": "evidence=2<3"
+    },
+    "person-jafar-dicko": {
+     "from": "E3_FULL_ENCYCLOPEDIA",
+     "to": "E2_DEVELOPED",
+     "reason": "dimensions=5<6"
+    },
+    "actor-dozos-of-macina": {
+     "from": "E3_FULL_ENCYCLOPEDIA",
+     "to": "E2_DEVELOPED",
+     "reason": "dimensions=5<6"
+    }
+   },
+   "relations": {
+    "rel-is-moz-islamic-state2": {
+     "from": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+     "to": "R2_DEVELOPED_RELATIONSHIP",
+     "reason": "R3 gap: no evolution_stages / <2 timeline events"
+    },
+    "rel-d1-ansaru-jas-split": {
+     "from": "R2_DEVELOPED_RELATIONSHIP",
+     "to": "R1_SIMPLE_SOURCED_RELATION",
+     "reason": "R2 gap: no context/history field"
+    },
+    "rel-d1-ansaru-aqim-allegiance": {
+     "from": "R2_DEVELOPED_RELATIONSHIP",
+     "to": "R1_SIMPLE_SOURCED_RELATION",
+     "reason": "R2 gap: no context/history field"
+    },
+    "rel-d1-ansaru-jnim-affiliation": {
+     "from": "R2_DEVELOPED_RELATIONSHIP",
+     "to": "R1_SIMPLE_SOURCED_RELATION",
+     "reason": "R2 gap: no context/history field"
+    },
+    "rel-d2-dana-fama-coop": {
+     "from": "R2_DEVELOPED_RELATIONSHIP",
+     "to": "R1_SIMPLE_SOURCED_RELATION",
+     "reason": "R2 gap: no context/history field; R2 gap: no why-it-matters/uncertainty/watch"
+    },
+    "rel-d2-dozos-macina-amadou-led": {
+     "from": "R2_DEVELOPED_RELATIONSHIP",
+     "to": "R1_SIMPLE_SOURCED_RELATION",
+     "reason": "R2 gap: no context/history field; R2 gap: no why-it-matters/uncertainty/watch"
+    }
+   }
+  }
+ }
+}

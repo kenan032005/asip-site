@@ -58,7 +58,22 @@ def test_is_sahel_dates():
     if "2021年8月" not in iss_text and "2021 年 8 月" not in iss_text: fail("IS Sahel Sahrawi death not 2021")
     if "2023年萨赫拉维死后" in iss_text or "2023 年萨赫拉维死后" in iss_text: fail("2023 Sahrawi death residual")
     r = rel_of(rels, "actor-jnim", "actor-is-sahel")
-    if not r or r["relationship_type"] != "hostile_to": fail("jnim-is not hostile_to")
+    # DEPTH G change: the JNIM-IS edge was split into a two-phase model.
+    # rel-jnim-is-hostile is now the HISTORICAL pre-2019 phase
+    # (historically_associated_with, 2016-2019) and the CURRENT hostile edge
+    # lives on rel-jnim-is-conflict (hostile_to, 2019-present). rel_of() scans
+    # in file order, so it may return the historical edge first; resolve the
+    # current-hostility assertion against rel-jnim-is-conflict explicitly.
+    if not r: fail("jnim-is edge missing")
+    if r["relationship_type"] != "hostile_to":
+        c = rel_of(rels, "actor-jnim", "actor-is-sahel")
+        conflict = next((x for x in rels if x["relationship_id"] == "rel-jnim-is-conflict"), None)
+        if not conflict or conflict["relationship_type"] != "hostile_to":
+            fail("jnim-is conflict not hostile_to (current edge)")
+        if not r["relationship_type"] in ("historically_associated_with", "hostile_to"):
+            fail(f"jnim-is unexpected type {r['relationship_type']}")
+        if c and c.get("time_start") not in (None, "2016"):
+            fail("jnim-is historical phase start not 2016")
     if "2019" not in json.dumps(profs.get("rel-jnim-is-conflict", {}), ensure_ascii=False): fail("jnim-is conflict start 2019 missing")
     if "2026年4月首次与JNIM公开交火" in iss_text: fail("2026-04 'first clash' residual")
     print("PASS test_is_sahel_dates (Sahrawi 2021-08; conflict start 2019; Apr 2026 = first Niger spillover)")

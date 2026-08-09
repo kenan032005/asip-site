@@ -1,0 +1,149 @@
+{
+ "artifact": "DEPTHG_TRUTHFUL_DOWNGRADE_CLOSURE",
+ "applied": true,
+ "downgraded_entities": 0,
+ "downgraded_relations": 0,
+ "accepted_limitation_entities": 0,
+ "accepted_limitation_relations": 7,
+ "downgrades": {
+  "entities": [],
+  "relations": []
+ },
+ "accepted_limitations": {
+  "entities": [],
+  "relations": [
+   {
+    "relationship_id": "rel-jnim-katiba-constituent",
+    "declared_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+    "scored_maturity": "R2_DEVELOPED_RELATIONSHIP",
+    "basis": "CONTENT_PACK_LOCKED_TARGET",
+    "gaps": [
+     "R3 gap: no evolution_stages / <2 timeline events"
+    ],
+    "disposition": "ACCEPTED_EVIDENCE_LIMITATION"
+   },
+   {
+    "relationship_id": "rel-jnim-benin-forces-fought",
+    "declared_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+    "scored_maturity": "R2_DEVELOPED_RELATIONSHIP",
+    "basis": "CONTENT_PACK_LOCKED_TARGET",
+    "gaps": [
+     "R3 gap: no evolution_stages / <2 timeline events"
+    ],
+    "disposition": "ACCEPTED_EVIDENCE_LIMITATION"
+   },
+   {
+    "relationship_id": "rel-d1-fu-aes-region",
+    "declared_maturity": "R2_DEVELOPED_RELATIONSHIP",
+    "scored_maturity": "R1_SIMPLE_SOURCED_RELATION",
+    "basis": "CONTENT_PACK_LOCKED_TARGET",
+    "gaps": [
+     "R2 gap: no context/history field"
+    ],
+    "disposition": "ACCEPTED_EVIDENCE_LIMITATION"
+   },
+   {
+    "relationship_id": "rel-d1-fama-fu-aes-member",
+    "declared_maturity": "R2_DEVELOPED_RELATIONSHIP",
+    "scored_maturity": "R1_SIMPLE_SOURCED_RELATION",
+    "basis": "CONTENT_PACK_LOCKED_TARGET",
+    "gaps": [
+     "R2 gap: no context/history field",
+     "R2 gap: no why-it-matters/uncertainty/watch"
+    ],
+    "disposition": "ACCEPTED_EVIDENCE_LIMITATION"
+   },
+   {
+    "relationship_id": "rel-d1-burkina-army-fu-aes-member",
+    "declared_maturity": "R2_DEVELOPED_RELATIONSHIP",
+    "scored_maturity": "R1_SIMPLE_SOURCED_RELATION",
+    "basis": "CONTENT_PACK_LOCKED_TARGET",
+    "gaps": [
+     "R2 gap: no context/history field",
+     "R2 gap: no why-it-matters/uncertainty/watch"
+    ],
+    "disposition": "ACCEPTED_EVIDENCE_LIMITATION"
+   },
+   {
+    "relationship_id": "rel-d1-niger-army-fu-aes-member",
+    "declared_maturity": "R2_DEVELOPED_RELATIONSHIP",
+    "scored_maturity": "R1_SIMPLE_SOURCED_RELATION",
+    "basis": "CONTENT_PACK_LOCKED_TARGET",
+    "gaps": [
+     "R2 gap: no context/history field",
+     "R2 gap: no why-it-matters/uncertainty/watch"
+    ],
+    "disposition": "ACCEPTED_EVIDENCE_LIMITATION"
+   },
+   {
+    "relationship_id": "rel-d2-katiba-hanifa-benin-forces",
+    "declared_maturity": "R2_DEVELOPED_RELATIONSHIP",
+    "scored_maturity": "R1_SIMPLE_SOURCED_RELATION",
+    "basis": "CONTENT_PACK_LOCKED_TARGET",
+    "gaps": [
+     "R2 gap: no context/history field",
+     "R2 gap: no why-it-matters/uncertainty/watch"
+    ],
+    "disposition": "ACCEPTED_EVIDENCE_LIMITATION"
+   }
+  ]
+ },
+ "rule_compliance": {
+  "downgrade_allowed": true,
+  "facts_fabricated": false,
+  "locked_targets_preserved": true
+ },
+ "cumulative_downshift_ledger": {
+  "entities": {
+   "person-salva-kiir": {
+    "from": "E3_FULL_ENCYCLOPEDIA",
+    "to": "E2_DEVELOPED",
+    "reason": "evidence=2<3"
+   },
+   "person-jafar-dicko": {
+    "from": "E3_FULL_ENCYCLOPEDIA",
+    "to": "E2_DEVELOPED",
+    "reason": "dimensions=5<6"
+   },
+   "actor-dozos-of-macina": {
+    "from": "E3_FULL_ENCYCLOPEDIA",
+    "to": "E2_DEVELOPED",
+    "reason": "dimensions=5<6"
+   }
+  },
+  "relations": {
+   "rel-is-moz-islamic-state2": {
+    "from": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+    "to": "R2_DEVELOPED_RELATIONSHIP",
+    "reason": "R3 gap: no evolution_stages / <2 timeline events"
+   },
+   "rel-d1-ansaru-jas-split": {
+    "from": "R2_DEVELOPED_RELATIONSHIP",
+    "to": "R1_SIMPLE_SOURCED_RELATION",
+    "reason": "R2 gap: no context/history field"
+   },
+   "rel-d1-ansaru-aqim-allegiance": {
+    "from": "R2_DEVELOPED_RELATIONSHIP",
+    "to": "R1_SIMPLE_SOURCED_RELATION",
+    "reason": "R2 gap: no context/history field"
+   },
+   "rel-d1-ansaru-jnim-affiliation": {
+    "from": "R2_DEVELOPED_RELATIONSHIP",
+    "to": "R1_SIMPLE_SOURCED_RELATION",
+    "reason": "R2 gap: no context/history field"
+   },
+   "rel-d2-dana-fama-coop": {
+    "from": "R2_DEVELOPED_RELATIONSHIP",
+    "to": "R1_SIMPLE_SOURCED_RELATION",
+    "reason": "R2 gap: no context/history field; R2 gap: no why-it-matters/uncertainty/watch"
+   },
+   "rel-d2-dozos-macina-amadou-led": {
+    "from": "R2_DEVELOPED_RELATIONSHIP",
+    "to": "R1_SIMPLE_SOURCED_RELATION",
+    "reason": "R2 gap: no context/history field; R2 gap: no why-it-matters/uncertainty/watch"
+   }
+  }
+ },
+ "ledger_entities": 3,
+ "ledger_relations": 6
+}

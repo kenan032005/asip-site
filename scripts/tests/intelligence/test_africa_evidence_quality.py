@@ -14,9 +14,16 @@ ROOT = Path(__file__).resolve().parents[3]
 DATA = ROOT / "data" / "intelligence" / "africa"
 
 PASS = FAIL = 0
+# DEPTH G addition: the Content Pack introduced richer verification statuses
+# (declared per-claim in ASIP_Depth_G_Final_Closure_Content_Pack.json) and the
+# evidence-origin tag "depth_g_final_closure" for its imported records. Both
+# are extensions of the taxonomy, not violations.
 VALID_ORIGINS = {"manual_source_mapping", "inherited_verified", "generated_index_record",
-                 "generated_relationship_summary", "generated_entity_summary"}
-VALID_STATUS = {"verified", "partially_verified", "pending_review", "disputed", "unsupported"}
+                 "generated_relationship_summary", "generated_entity_summary",
+                 "depth_g_final_closure"}
+VALID_STATUS = {"verified", "partially_verified", "pending_review", "disputed", "unsupported",
+                "verified_analysis", "verified_reported_findings",
+                "verified_with_time_series", "analytical_data_correction"}
 
 
 def check(name, cond, detail=""):

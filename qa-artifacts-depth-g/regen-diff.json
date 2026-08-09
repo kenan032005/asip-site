@@ -1,0 +1,97 @@
+{
+ "artifact": "DEPTHG_REGEN_DIFF",
+ "checks": {
+  "byte_idempotent": {
+   "files_checked": 17,
+   "files_changed_on_rerun": [],
+   "pass": true
+  },
+  "counts": {
+   "expected": {
+    "countries": 13,
+    "entities": 72,
+    "relationships": 150
+   },
+   "actual": {
+    "countries": 13,
+    "entities": 72,
+    "relationships": 150
+   },
+   "pass": true
+  },
+  "id_sets": {
+   "entities_added": [],
+   "entities_removed": [],
+   "relations_added": [],
+   "relations_removed": [],
+   "pass": true
+  },
+  "maturity_movements": {
+   "entity_moves": 3,
+   "relation_moves": 19,
+   "entity_unexpected": [],
+   "relation_unexpected": [],
+   "intentional_downshifts_entities": {
+    "person-salva-kiir": [
+     "E3_FULL_ENCYCLOPEDIA",
+     "E2_DEVELOPED"
+    ],
+    "person-jafar-dicko": [
+     "E3_FULL_ENCYCLOPEDIA",
+     "E2_DEVELOPED"
+    ],
+    "actor-dozos-of-macina": [
+     "E3_FULL_ENCYCLOPEDIA",
+     "E2_DEVELOPED"
+    ]
+   },
+   "intentional_downshifts_relations": {
+    "rel-is-moz-islamic-state2": [
+     "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+     "R2_DEVELOPED_RELATIONSHIP"
+    ],
+    "rel-d1-ansaru-jas-split": [
+     "R2_DEVELOPED_RELATIONSHIP",
+     "R1_SIMPLE_SOURCED_RELATION"
+    ],
+    "rel-d1-ansaru-aqim-allegiance": [
+     "R2_DEVELOPED_RELATIONSHIP",
+     "R1_SIMPLE_SOURCED_RELATION"
+    ],
+    "rel-d1-ansaru-jnim-affiliation": [
+     "R2_DEVELOPED_RELATIONSHIP",
+     "R1_SIMPLE_SOURCED_RELATION"
+    ],
+    "rel-d2-dana-fama-coop": [
+     "R2_DEVELOPED_RELATIONSHIP",
+     "R1_SIMPLE_SOURCED_RELATION"
+    ],
+    "rel-d2-dozos-macina-amadou-led": [
+     "R2_DEVELOPED_RELATIONSHIP",
+     "R1_SIMPLE_SOURCED_RELATION"
+    ]
+   },
+   "pass": true
+  },
+  "jnim_is_repair": {
+   "rel-jnim-is-hostile": {
+    "type": "historically_associated_with",
+    "time_start": "2016",
+    "time_end": "2019",
+    "maturity": "R2_DEVELOPED_RELATIONSHIP",
+    "expect_type": "historically_associated_with",
+    "expect_maturity": "R2_DEVELOPED_RELATIONSHIP"
+   },
+   "rel-jnim-is-conflict": {
+    "type": "hostile_to",
+    "maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+    "expect_type": "hostile_to",
+    "expect_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE"
+   },
+   "relationship_total": 150,
+   "pass": true
+  }
+ },
+ "findings": [],
+ "pass": true
+}
