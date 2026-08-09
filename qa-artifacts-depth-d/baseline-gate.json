@@ -1,0 +1,136 @@
+{
+  "artifact": "DEPTHD_BASELINE_GATE",
+  "ok": [
+    "countries=13",
+    "non-country entities=72",
+    "relationships=150",
+    "routes=249",
+    "sources=137",
+    "evidence=245",
+    "entity maturity enum stable (PASS)",
+    "relation maturity enum stable (PASS)"
+  ],
+  "issues": [],
+  "gate": "PASS",
+  "probe": {
+    "entities": {
+      "actor-saf": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "sections": 11,
+        "imported_by": null
+      },
+      "actor-rsf": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "sections": 11,
+        "imported_by": null
+      },
+      "person-abdel-fattah-al-burhan": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "sections": 9,
+        "imported_by": null
+      },
+      "person-mohamed-hamdan-dagalo": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "sections": 9,
+        "imported_by": null
+      },
+      "actor-splm-n-al-hilu": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "sections": 11,
+        "imported_by": null
+      },
+      "actor-jem": {
+        "exists": true,
+        "maturity": null,
+        "freshness": "current",
+        "sections": 11,
+        "imported_by": null
+      }
+    },
+    "relations": {
+      "rel-saf-rsf-war": {
+        "exists": true,
+        "type": "hostile_to",
+        "maturity": null,
+        "src": "actor-saf",
+        "tgt": "actor-rsf",
+        "tl": 4
+      },
+      "rel-burhan-saf-leads": {
+        "exists": true,
+        "type": "led_by",
+        "maturity": null,
+        "src": "actor-saf",
+        "tgt": "person-abdel-fattah-al-burhan",
+        "tl": 0
+      },
+      "rel-dagalo-rsf-leads": {
+        "exists": true,
+        "type": "led_by",
+        "maturity": null,
+        "src": "actor-rsf",
+        "tgt": "person-mohamed-hamdan-dagalo",
+        "tl": 0
+      },
+      "rel-splm-n-saf-conflict": {
+        "exists": true,
+        "type": "hostile_to",
+        "maturity": null,
+        "src": "actor-splm-n-al-hilu",
+        "tgt": "actor-saf",
+        "tl": 0
+      },
+      "rel-jem-saf-conflict": {
+        "exists": true,
+        "type": "hostile_to",
+        "maturity": null,
+        "src": "actor-jem",
+        "tgt": "actor-saf",
+        "tl": 0
+      },
+      "rel-rsf-darfur-origin": {
+        "exists": true,
+        "type": "historically_associated_with",
+        "maturity": null,
+        "src": "actor-rsf",
+        "tgt": "actor-jem",
+        "tl": 0
+      },
+      "rel-saf-sudan-operates": {
+        "exists": true,
+        "type": "operates_in",
+        "maturity": null,
+        "src": "actor-saf",
+        "tgt": "country-sudan",
+        "tl": 0
+      },
+      "rel-rsf-sudan-operates": {
+        "exists": true,
+        "type": "operates_in",
+        "maturity": null,
+        "src": "actor-rsf",
+        "tgt": "country-sudan",
+        "tl": 0
+      }
+    }
+  },
+  "baseline": {
+    "source_sha": "46abaed",
+    "countries": 13,
+    "entities": 72,
+    "relationships": 150,
+    "routes": 249,
+    "sources": 137,
+    "evidence": 245
+  }
+}
