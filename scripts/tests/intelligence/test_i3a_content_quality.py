@@ -118,6 +118,12 @@ def main():
             checks = [("overview", "overview"), ("current", None), ("uncertainties", "uncertainties")]
             if maturity == "R3_FULL_RELATIONSHIP_INTELLIGENCE":
                 checks += [("asip_analysis", "asip_analysis"), ("watch_indicators", "watch_indicators")]
+            # DEPTH B: historical R3 relations (freshness=historical) carry full schema
+            # but no watch_indicators (nothing to watch on a closed historical pledge);
+            # the packet deliberately omits them, so they are not required.
+            base = next((x for x in rels if x["relationship_id"] == rid), None)
+            if base and base.get("freshness_status") == "historical":
+                checks = [(l, f) for (l, f) in checks if f != "watch_indicators"]
             for label, f in checks:
                 if label == "current":
                     if not (pr.get("current_status") or pr.get("current_assessment")):
