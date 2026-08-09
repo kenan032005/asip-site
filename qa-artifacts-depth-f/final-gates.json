@@ -1,0 +1,34 @@
+{
+  "artifact": "DEPTHF_FINAL_GATES",
+  "package_id": "ASIP-DEPTH-F-RESIDUAL-CORE-CLOSURE-V1",
+  "baseline": {"source_sha": "14f6b33", "gh_pages_sha": "f7feb36", "pages_run": "31310002635"},
+  "final": {"source_sha": "de6e227", "gh_pages_sha": "b341bfb", "pages_run": "31311354140"},
+  "count_invariants": {"countries": 13, "non_country_entities": 72, "relationships": 150, "routes": 249},
+  "gates": {
+    "DEPTHF_BASELINE_GATE": "PASS",
+    "DEPTHF_SOURCE_GATE": "PASS",
+    "DEPTHF_FACT_SEMANTIC_GATE": "PASS",
+    "DEPTHF_ENTITY_DEPTH_GATE": "PASS",
+    "DEPTHF_RELATION_DEPTH_GATE": "PASS",
+    "DEPTHF_EVIDENCE_GATE": "PASS",
+    "DEPTHF_GENERATOR_GATE": "PASS",
+    "DEPTHF_BUILD_GATE": "PASS",
+    "DEPTHF_PUBLIC_QA_GATE": "PASS",
+    "DEPTHF_PRODUCTION_ISOLATION_GATE": "PASS",
+    "DEPTHF_RESIDUAL_AUDIT_GATE": "PASS"
+  },
+  "summary": {
+    "sources": {"before": 158, "after": 182, "added": 24, "reused": ["LIBYA_UNSMIL_2026_06_07"]},
+    "evidence": {"before": 273, "after": 297, "depthf_imported": 24, "verified": 236, "partially_verified": 61},
+    "entity_upgrades": 13,
+    "relation_upgrades": 18,
+    "fact_semantic_cleanup_groups": 8,
+    "count_preserving_repairs": 1,
+    "regression": {"python_tests": "33 files", "fail_total": 0, "depth_f_special": 14},
+    "candidate_browser_qa": {"pages": 131, "fails": 0},
+    "public_browser_qa": {"pages": 131, "fails": 0, "maturity_badge": 124, "analysis_partition": 76, "watch_partition": 68},
+    "network_qa": {"foci": 10, "gate": "PASS"},
+    "production_diff": {"unexpected": 0},
+    "residual_audit": "depth-f-residual-audit-summary.md (11 dimensions; handoff to Depth G, no auto-fix)"
+  }
+}
