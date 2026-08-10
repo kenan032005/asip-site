@@ -1,0 +1,419 @@
+{
+  "artifact": "EXPANSION_A_FULL_REGRESSION",
+  "generated_at": "2026-08-10T21:12:22+08:00",
+  "python": "3.13.14",
+  "tests_run": 36,
+  "passed": 36,
+  "fail_total": 0,
+  "failed": [],
+  "results": [
+    {
+      "test": "scripts/tests/intelligence/test_africa_data.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "PASS africa: entities=83 relations=164 regions=7 countries=13",
+        "PASS sources=202 evidence=341 profiles=164 timelines=65",
+        "PASS uniqueness, importance/risk/confidence independence, multi-region mapping, refs, estimates, wikipedia, indexes"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_africa_evidence_quality.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "test_africa_evidence_quality: PASS=3115 FAIL=0"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_africa_freshness.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "test_africa_freshness: PASS=620 FAIL=0"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_africa_metrics.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] route_count positive",
+        "  [PASS] counting note present",
+        "",
+        "test_africa_metrics: PASS=23 FAIL=0"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_africa_pages.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "PASS africa routes: home + 6 index + 7 regions + 13 countries + 83 entities + 164 relations + network + sources",
+        "PASS base-path relative URLs, page markers, africa.js contracts"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_demo_data.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "PASS entities=12 relationships=20 sources=11",
+        "PASS importance levels L1=2 L2=4 L3=6",
+        "PASS unified names (acronym nullable, no empty bracket), rings inner/middle/outer, 4 full relation profiles, timelines, force estimates and wikipedia url format"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_demo_pages.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "PASS routes=34 (entry + network + 12 entity routes + 20 relation routes)",
+        "PASS shared-data links, base-path relative URLs, graph controls, importance filters, focus history, relation details and relation pages",
+        "PASS responsive breakpoints, ring guides, encyclopedia profile and non-color-only node shapes"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_demo_v02.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "PASS entities=12 relationships=20",
+        "PASS importance levels L1=2 L2=4 L3=6 (independent from display_ring)",
+        "PASS ring values inner/middle/outer, profile completeness floors, and V0.1 relationship invariant"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_depth_a_import.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "PASS test_force_estimate_temporality (6000/2500/2000 with date/scope/estimate qualifiers)",
+        "PASS test_generator_regression (8 regressions = 0)",
+        "PASS test_depth_audit (72/150 audited with MECHANICAL_SCORE)",
+        "ALL 11 DEPTH A TESTS PASS"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_depth_b_import.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] rel-jas-islamic-state-hostile type=pledged_allegiance_to",
+        "  [PASS] rel-iswap-islamic-state-affiliation=pledged_allegiance_to",
+        "",
+        "ALL DEPTH B TESTS PASS"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_depth_c_import.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] type lock rel-d2-jafar-jnim=affiliated_with | got affiliated_with",
+        "  [PASS] type lock rel-d2-katiba-serma-jnim=constituent_of | got constituent_of",
+        "",
+        "ALL DEPTH C TESTS PASS"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_depth_d_import.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] type lock rel-saf-sudan-operates=operates_in | got operates_in",
+        "  [PASS] type lock rel-rsf-sudan-operates=operates_in | got operates_in",
+        "",
+        "ALL DEPTH D TESTS PASS"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_depth_e_import.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] type lock rel-endf-tdf-conflict=hostile_to | got hostile_to",
+        "  [PASS] type lock rel-ethiopia-sudan-border=cross_border_link | got cross_border_link",
+        "",
+        "ALL DEPTH E TESTS PASS"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_depth_f_import.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] type lock rel-isis-libya-affiliation=pledged_allegiance_to | got pledged_allegiance_to",
+        "  [PASS] type lock rel-isis-libya-lna-conflict=hostile_to | got hostile_to",
+        "",
+        "ALL DEPTH F TESTS PASS"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_depth_g_closure.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] no relations removed | []",
+        "  [PASS] no unexpected maturity moves | E=[] R=[]",
+        "",
+        "ALL DEPTH G TESTS PASS"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_git_delivery_manifest.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "test_git_delivery_manifest: PASS=47 FAIL=0"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_i2b_audit.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "test_i2b_audit: PASS=1031 FAIL=0"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_i3a_content_quality.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] deepened relations all have timelines",
+        "  [PASS] deepened relation profiles have all core fields",
+        "",
+        "I3-A content quality: PASS=7 FAIL=0"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_i3a_country_depth.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] country-tanzania: record_reviewed_at != 事实有效截至 (semantic separation)",
+        "  [PASS] country-tanzania: entity links resolve",
+        "",
+        "I3-A country depth: PASS=113 FAIL=0"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_i3a_duplicate_text.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] near-duplicate long paragraphs within reasonable range (<=3)",
+        "  [PASS] no empty template boilerplate phrases in long paragraphs",
+        "",
+        "I3-A duplicate text: PASS=3 FAIL=0"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_i3a_entity_depth.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] person-ali-ahmed-karti: encyclopedia content (>=8 secs, >=1800 chars)",
+        "  [PASS] no empty sections in entity profiles",
+        "",
+        "I3-A entity depth: PASS=88 FAIL=0"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_i3a_preview.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] africa.js contains core_assessment",
+        "  [PASS] africa.js contains name_and_translation",
+        "",
+        "I3-A preview contract: PASS=13 FAIL=0"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_i3a_source_coverage.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] priority entity actor-benin-forces has manual evidence",
+        "  [PASS] evidence entity references valid",
+        "",
+        "I3-A source coverage: PASS=27 FAIL=0"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_i3b_all_country_depth.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] country-tanzania: freshness not unknown",
+        "  [PASS] country-tanzania: links resolve",
+        "",
+        "I3-B all-country depth: PASS=84 FAIL=0"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_i3b_current_status.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] priority current-status entities have manual evidence",
+        "  [PASS] relations have defined freshness",
+        "",
+        "I3-B current status: PASS=6 FAIL=0"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_i3b_evidence_upgrade.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] verified evidence satisfies locator/source/method",
+        "  [PASS] no unsupported evidence",
+        "",
+        "I3-B evidence upgrade: PASS=6 FAIL=0"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_i3b_production_isolation.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] feature branch commits not on main (not merged)",
+        "  [PASS] preview dir versioned",
+        "",
+        "I3-B production isolation: PASS=5 FAIL=0"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_i3b_public_preview.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] gh-pages preview files live on branch (raw 200)",
+        "  [PASS] preview is versioned under /previews/ or versioned dir",
+        "",
+        "I3-B public preview: PASS=8 FAIL=0"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_i3b_relation_depth.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] deepened profiles have all core fields",
+        "  [PASS] second-wave relations exist",
+        "",
+        "I3-B relation depth: PASS=6 FAIL=0"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_i3b_release_candidate.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] manifest release_status is candidate/preview (not production)",
+        "  [PASS] rollback plan covers git/static/nav/cache",
+        "",
+        "I3-B release candidate: PASS=6 FAIL=0"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_i3b_zero_basic_entries.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] person-seka-musa-baluku: ency content",
+        "  [PASS] person-ali-ahmed-karti: ency content",
+        "",
+        "I3-B zero-basic / depth: PASS=87 FAIL=0"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_i3d1_import.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "PASS test_i3d1_evidence_mapping (182 evidence, refs resolve, disputed preserved)",
+        "PASS test_i3d1_generator_regression (regen diff 0/0/0/0/0)",
+        "PASS test_i3d1_build_consistency (dist matches source, key routes present)",
+        "ALL 9 I3-D1 TESTS PASS"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_i3d2_import.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "PASS test_i3d2_evidence_mapping (194 evidence, refs resolve)",
+        "PASS test_i3d2_generator_regression",
+        "PASS test_i3d2_build_consistency (dist matches source, key routes present)",
+        "ALL 9 I3-D2 TESTS PASS"
+      ]
+    },
+    {
+      "test": "scripts/tests/intelligence/test_relation_ontology.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "test_relation_ontology: PASS=358 FAIL=0"
+      ]
+    },
+    {
+      "test": "scripts/tests/test_no_local_paths.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "{\"scanned_file_count\": 506, \"public_scanned_count\": 458, \"current_release_scanned_count\": 48, \"archival_ignored_count\": 56, \"forbidden_matches\": 0, \"gate\": \"PASS\"}"
+      ]
+    },
+    {
+      "test": "scripts/tests/test_repository_integrity.py",
+      "rc": 0,
+      "fail": 0,
+      "ok": true,
+      "tail": [
+        "",
+        "====================================================",
+        "Commit 1 完整性测试：PASS=28  FAIL=0",
+        "===================================================="
+      ]
+    }
+  ]
+}

@@ -1,0 +1,396 @@
+{
+ "package_id": "ASIP-PPT-ENTITY-EXPANSION-A",
+ "imported_at": "2026-08-09",
+ "steps": {
+  "sources": {
+   "candidates": 12,
+   "added": [
+    "expa-nctc-al-shabaab-2026-04",
+    "expa-treasury-tftc-shabaab-2025-04-14",
+    "expa-nctc-isis-somalia-2025-02",
+    "expa-treasury-isis-somalia-financier-2023-07-27",
+    "expa-treasury-isis-financing-factsheet-2024-02-27",
+    "expa-nctc-isis-ca-2025-04",
+    "expa-nctc-isis-drc-historical",
+    "expa-nigsac-lakurawa-2025-03",
+    "expa-treasury-sudan-islamist-2025-09-12",
+    "expa-ofac-bbmb-2025-09-12",
+    "expa-ofac-smb-bbmb-2026-03-09",
+    "expa-eu-karti-2024"
+   ],
+   "mapping": {
+    "expa-nctc-al-shabaab-2026-04": {
+     "actual_source_id": "expa-nctc-al-shabaab-2026-04",
+     "matched_by": "new"
+    },
+    "expa-treasury-tftc-shabaab-2025-04-14": {
+     "actual_source_id": "expa-treasury-tftc-shabaab-2025-04-14",
+     "matched_by": "new"
+    },
+    "expa-nctc-isis-somalia-2025-02": {
+     "actual_source_id": "expa-nctc-isis-somalia-2025-02",
+     "matched_by": "new"
+    },
+    "expa-treasury-isis-somalia-financier-2023-07-27": {
+     "actual_source_id": "expa-treasury-isis-somalia-financier-2023-07-27",
+     "matched_by": "new"
+    },
+    "expa-treasury-isis-financing-factsheet-2024-02-27": {
+     "actual_source_id": "expa-treasury-isis-financing-factsheet-2024-02-27",
+     "matched_by": "new"
+    },
+    "expa-nctc-isis-ca-2025-04": {
+     "actual_source_id": "expa-nctc-isis-ca-2025-04",
+     "matched_by": "new"
+    },
+    "expa-nctc-isis-drc-historical": {
+     "actual_source_id": "expa-nctc-isis-drc-historical",
+     "matched_by": "new"
+    },
+    "expa-nigsac-lakurawa-2025-03": {
+     "actual_source_id": "expa-nigsac-lakurawa-2025-03",
+     "matched_by": "new"
+    },
+    "expa-treasury-sudan-islamist-2025-09-12": {
+     "actual_source_id": "expa-treasury-sudan-islamist-2025-09-12",
+     "matched_by": "new"
+    },
+    "expa-ofac-bbmb-2025-09-12": {
+     "actual_source_id": "expa-ofac-bbmb-2025-09-12",
+     "matched_by": "new"
+    },
+    "expa-ofac-smb-bbmb-2026-03-09": {
+     "actual_source_id": "expa-ofac-smb-bbmb-2026-03-09",
+     "matched_by": "new"
+    },
+    "expa-eu-karti-2024": {
+     "actual_source_id": "expa-eu-karti-2024",
+     "matched_by": "new"
+    }
+   }
+  },
+  "new_entities": {
+   "added": [
+    "actor-al-shabaab",
+    "actor-isis-somalia",
+    "actor-al-karrar-office",
+    "actor-adf-isis-ca",
+    "actor-sim",
+    "actor-bbmb",
+    "person-ahmed-diriye",
+    "person-abd-al-qadir-mumin",
+    "person-abdirahman-fahiye",
+    "person-seka-musa-baluku",
+    "person-ali-ahmed-karti"
+   ],
+   "count": 11
+  },
+  "enrich_entities": {
+   "actor-ansaru": {
+    "status": "ENRICHED",
+    "aliases": [
+     "Ansaru",
+     "Ansarul Muslimina Fi Biladis Sudan",
+     "Jama'atu Ansarul Muslimina Fi Biladis Sudan",
+     "JAMBS",
+     "Vanguards for the Protection of Muslims in Black Africa",
+     "Jamaat Ansar al-Muslimeen fi Bilad al-Sudan"
+    ],
+    "sections": [
+     "aqim_link",
+     "asip_analysis",
+     "controversies_uncertainties",
+     "core_assessment",
+     "current_assessment",
+     "current_situation",
+     "events",
+     "external_relations",
+     "force_capacity",
+     "formation",
+     "formation_background",
+     "gaps",
+     "geography",
+     "history",
+     "ideology_objectives",
+     "jnim_link",
+     "lead",
+     "name_and_translation",
+     "risk_assessment",
+     "sources",
+     "tactics",
+     "uncertainties",
+     "watch_indicators"
+    ],
+    "sources": [
+     "d1-acled-border-triangle-2026",
+     "d1-africa-center-threat-2026-04-06",
+     "depthb-nctc-ansaru-2025-06"
+    ]
+   },
+   "actor-lakurawa": {
+    "status": "ENRICHED",
+    "aliases": [
+     "Lakurawa militants",
+     "Lakurawa Sect"
+    ],
+    "sections": [
+     "asip_analysis",
+     "controversies_uncertainties",
+     "core_assessment",
+     "current_assessment",
+     "current_situation",
+     "events",
+     "gaps",
+     "geography",
+     "history",
+     "identity_problem",
+     "lead",
+     "legal_status",
+     "name_and_translation",
+     "network_links",
+     "sources",
+     "tactics_governance",
+     "uncertainties",
+     "watch_indicators"
+    ],
+    "sources": [
+     "d1-africa-center-threat-2026-04-06",
+     "d1-acled-africa-june-2026",
+     "expa-nigsac-lakurawa-2025-03"
+    ]
+   }
+  },
+  "new_relationships": {
+   "added": [
+    "rel-expa-shabaab-alqaida-allegiance",
+    "rel-expa-shabaab-isis-somalia-rivalry",
+    "rel-expa-shabaab-diriye-leads",
+    "rel-expa-isis-somalia-isis-branch",
+    "rel-expa-isis-somalia-karrar-colocated",
+    "rel-expa-isis-somalia-mumin-founder",
+    "rel-expa-karrar-mumin-leads",
+    "rel-expa-isis-somalia-fahiye-leads",
+    "rel-expa-adf-isis-branch",
+    "rel-expa-adf-baluku-leads",
+    "rel-expa-sim-karti-leads",
+    "rel-expa-sim-bbmb-linked",
+    "rel-expa-bbmb-saf-aligned",
+    "rel-expa-bbmb-rsf-hostile"
+   ],
+   "count": 14
+  },
+  "enrich_relationships": [
+   {
+    "relationship_id": "rel-d1-ansaru-jas-split",
+    "status": "ENRICHED",
+    "maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+    "disputed": false,
+    "type": "split_from"
+   },
+   {
+    "relationship_id": "rel-d1-ansaru-aqim-allegiance",
+    "status": "ENRICHED",
+    "maturity": "R2_DEVELOPED_RELATIONSHIP",
+    "disputed": false,
+    "type": "pledged_allegiance_to"
+   },
+   {
+    "relationship_id": "rel-d1-ansaru-jnim-affiliation",
+    "status": "ENRICHED",
+    "maturity": "R2_DEVELOPED_RELATIONSHIP",
+    "disputed": false,
+    "type": "affiliated_with"
+   },
+   {
+    "relationship_id": "rel-d1-lakurawa-is-sahel-network",
+    "status": "ENRICHED",
+    "maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+    "disputed": true,
+    "type": "part_of_network"
+   },
+   {
+    "relationship_id": "rel-d1-lakurawa-jnim-cooperation",
+    "status": "ENRICHED",
+    "maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+    "disputed": true,
+    "type": "cooperates_with"
+   }
+  ],
+  "evidence": {
+   "imported": 26,
+   "skipped": 0,
+   "detail": [
+    {
+     "claim_id": "cl-expa-shabaab-aq-2012",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r001",
+     "verification_status": "verified"
+    },
+    {
+     "claim_id": "cl-expa-shabaab-icu-origin",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r002",
+     "verification_status": "verified"
+    },
+    {
+     "claim_id": "cl-expa-iss-from-shabaab-defectors",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r003",
+     "verification_status": "verified"
+    },
+    {
+     "claim_id": "cl-expa-iss-pledge-2015-branch-2018",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r004",
+     "verification_status": "verified"
+    },
+    {
+     "claim_id": "cl-expa-iss-finance-transfers",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r005",
+     "verification_status": "verified_reported_findings"
+    },
+    {
+     "claim_id": "cl-expa-karrar-regional-node",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r006",
+     "verification_status": "verified_reported_findings"
+    },
+    {
+     "claim_id": "cl-expa-mumin-roles",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r007",
+     "verification_status": "verified"
+    },
+    {
+     "claim_id": "cl-expa-fahiye-leads-iss",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r008",
+     "verification_status": "verified"
+    },
+    {
+     "claim_id": "cl-expa-diriye-leads-shabaab",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r009",
+     "verification_status": "verified"
+    },
+    {
+     "claim_id": "cl-expa-adf-isis-branch-2019",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r010",
+     "verification_status": "verified"
+    },
+    {
+     "claim_id": "cl-expa-adf-naming-transition",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r011",
+     "verification_status": "partially_verified"
+    },
+    {
+     "claim_id": "cl-expa-baluku-leads-adf",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r012",
+     "verification_status": "verified"
+    },
+    {
+     "claim_id": "cl-expa-karti-sim-sg",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r013",
+     "verification_status": "verified_reported_findings"
+    },
+    {
+     "claim_id": "cl-expa-ofac-smb-bbmb-linkage",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r014",
+     "verification_status": "verified"
+    },
+    {
+     "claim_id": "cl-expa-treasury-bbmb-20000",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r015",
+     "verification_status": "partially_verified"
+    },
+    {
+     "claim_id": "cl-expa-ofac-bbmb-established",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r016",
+     "verification_status": "verified"
+    },
+    {
+     "claim_id": "cl-expa-ansaru-split-2012",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r017",
+     "verification_status": "verified"
+    },
+    {
+     "claim_id": "cl-expa-ansaru-aqim-aligned",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r018",
+     "verification_status": "verified"
+    },
+    {
+     "claim_id": "cl-expa-ansaru-strength-unknown",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r019",
+     "verification_status": "verified"
+    },
+    {
+     "claim_id": "cl-expa-nigsac-lakurawa-jnim",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r020",
+     "verification_status": "verified_reported_findings"
+    },
+    {
+     "claim_id": "cl-expa-acled-lakurawa-issp",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r021",
+     "verification_status": "verified_analysis"
+    },
+    {
+     "claim_id": "cl-expa-asip-lakurawa-balance",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r022",
+     "verification_status": "verified_analysis"
+    },
+    {
+     "claim_id": "cl-expa-shabaab-strength-2026",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r023",
+     "verification_status": "verified"
+    },
+    {
+     "claim_id": "cl-expa-iss-strength-2025",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r024",
+     "verification_status": "verified"
+    },
+    {
+     "claim_id": "cl-expa-adf-strength-2025",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r025",
+     "verification_status": "verified"
+    },
+    {
+     "claim_id": "cl-expa-tftc-shabaab-2025",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expa-r026",
+     "verification_status": "verified"
+    }
+   ]
+  },
+  "deferred": {
+   "edges": 9,
+   "entities": 5
+  }
+ },
+ "final_scale": {
+  "countries": 13,
+  "non_country_entities": 83,
+  "relationships": 164,
+  "sources": 202,
+  "evidence": 341,
+  "relation_profiles": 164,
+  "relation_timelines": 65,
+  "routes": 274
+ }
+}

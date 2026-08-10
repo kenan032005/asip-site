@@ -1,0 +1,103 @@
+{
+ "schema_version": "asip-intelligence-africa-v1.0",
+ "package": "ASIP-PPT-ENTITY-EXPANSION-A",
+ "generated_at": "2026-08-09",
+ "note": "本清单记录 Expansion A 明确延后、不得在本阶段创建薄支撑实体或证据不足关系的条目，供 Content Pack 2 处理。",
+ "deferred_edges": [
+  {
+   "edge": "Ansaru ↔ Katiba Hanifa",
+   "pack_item": "§15 #14",
+   "reason": "内容包要求「仅在现有来源／证据包已支持时建立」。仓库现有证据中没有任何同时涉及 actor-ansaru 与 actor-katiba-hanifa 的记录，因此不建立该关系。",
+   "blocked_by": "evidence",
+   "missing_entity": null
+  },
+  {
+   "edge": "BBMB ↔ IRGC",
+   "pack_item": "§15 #21",
+   "reason": "内容包要求「若缺少 IRGC 支撑实体则不建立，改为记录依赖」。仓库中不存在伊朗革命卫队实体，且本阶段禁止为满足图谱边而新建单薄支撑实体。",
+   "blocked_by": "missing_entity",
+   "missing_entity": "IRGC (Islamic Revolutionary Guard Corps)"
+  },
+  {
+   "edge": "Abu Zaid Talha al-Misbah → BBMB",
+   "pack_item": "§15 #22",
+   "reason": "内容包 §14 将该人物标记为 DEFER_FOR_CONTENT_PACK_2（权威来源覆盖不足以支撑百科级页面），人物实体未创建，因此其领导关系一并延后。",
+   "blocked_by": "missing_entity",
+   "missing_entity": "person-abu-zaid-talha"
+  },
+  {
+   "edge": "Al-Shabaab ↔ AUSSOM",
+   "pack_item": "§15 supporting",
+   "reason": "支撑实体不存在；本阶段禁止为建立图谱边而新建单薄实体。",
+   "blocked_by": "missing_entity",
+   "missing_entity": "AUSSOM (AU Support and Stabilization Mission in Somalia)"
+  },
+  {
+   "edge": "Al-Shabaab ↔ Somali Security Forces",
+   "pack_item": "§15 supporting",
+   "reason": "支撑实体不存在；本阶段禁止为建立图谱边而新建单薄实体。",
+   "blocked_by": "missing_entity",
+   "missing_entity": "Somali Security Forces"
+  },
+  {
+   "edge": "ISIS-Somalia ↔ Puntland Security Forces",
+   "pack_item": "§15 supporting",
+   "reason": "支撑实体不存在；本阶段禁止为建立图谱边而新建单薄实体。",
+   "blocked_by": "missing_entity",
+   "missing_entity": "Puntland Security Forces"
+  },
+  {
+   "edge": "ADF/ISIS-CA ↔ FARDC",
+   "pack_item": "§15 supporting",
+   "reason": "支撑实体不存在；本阶段禁止为建立图谱边而新建单薄实体。",
+   "blocked_by": "missing_entity",
+   "missing_entity": "FARDC (Armed Forces of the DRC)"
+  },
+  {
+   "edge": "ADF/ISIS-CA ↔ UPDF",
+   "pack_item": "§15 supporting",
+   "reason": "支撑实体不存在；本阶段禁止为建立图谱边而新建单薄实体。",
+   "blocked_by": "missing_entity",
+   "missing_entity": "UPDF (Uganda People's Defence Force)"
+  },
+  {
+   "edge": "ADF/ISIS-CA ↔ MONUSCO",
+   "pack_item": "§15 supporting",
+   "reason": "支撑实体不存在；本阶段禁止为建立图谱边而新建单薄实体。",
+   "blocked_by": "missing_entity",
+   "missing_entity": "MONUSCO"
+  }
+ ],
+ "deferred_entities": [
+  {
+   "name": "Mahad Karate",
+   "role": "Al-Shabaab 高级领导人（财政与内部安全／情报职能）",
+   "pack_item": "§1 leadership",
+   "reason": "内容包指示：如缺失则记录为未来支撑人物依赖，不得建立单薄节点。"
+  },
+  {
+   "name": "Abdiweli Mohamed Yusuf",
+   "role": "ISIS-Somalia 高级财政人员",
+   "pack_item": "§2 leadership",
+   "reason": "内容包指示：如缺失则记录为支撑人物依赖，不得建立单薄节点。"
+  },
+  {
+   "name": "Meddie Nkalubo",
+   "role": "ADF/ISIS-CA 媒体与袭击指挥人员",
+   "pack_item": "§4 locked factual core",
+   "reason": "在 ADF 实体档案与关系档案中以文字记述，未建立独立人物节点。"
+  },
+  {
+   "name": "Abu Zaid Talha al-Misbah",
+   "role": "BBMB 指挥官",
+   "pack_item": "§14",
+   "reason": "内容包标记 DEFER_FOR_CONTENT_PACK_2：权威来源覆盖不足以支撑百科级页面。"
+  },
+  {
+   "name": "IRGC (Islamic Revolutionary Guard Corps)",
+   "role": "美方指控中与 BBMB 有关的外部行为体",
+   "pack_item": "§15 #21",
+   "reason": "非洲情报库范围外的支撑实体；不为建立单条边而创建。"
+  }
+ ]
+}

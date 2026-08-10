@@ -1,0 +1,957 @@
+{
+  "artifact": "pre-import-dedup-audit",
+  "task": "ASIP-PPT-ENTITY-EXPANSION-A",
+  "section": "§1 导入前全库精确去重",
+  "generated_at": "2026-08-10T03:07:45+08:00",
+  "scan_mode": "read_only",
+  "scanned_files": [
+    "countries.json",
+    "country_profiles.json",
+    "entities.json",
+    "entity_profiles.json",
+    "relationships.json",
+    "relation_profiles.json",
+    "relation_timelines.json",
+    "sources.json",
+    "evidence_records.json",
+    "alias_index.json",
+    "graph_index.json"
+  ],
+  "baseline_counts": {
+    "countries": 13,
+    "entities": 72,
+    "alias_index_entries": 286,
+    "relationships": 150,
+    "relation_profiles": 150,
+    "relation_timelines": 56,
+    "sources": 190,
+    "evidence_records": 315
+  },
+  "candidate_count": 14,
+  "decision_summary": {
+    "NEW": 12,
+    "ENRICH_EXISTING": 2,
+    "ALIAS_ONLY": 0
+  },
+  "country_node_check": {
+    "country-somalia": false,
+    "country-drc": false
+  },
+  "candidates": [
+    {
+      "candidate": "Al-Shabaab",
+      "kind": "organization",
+      "proposed_id": "actor-al-shabaab",
+      "proposed_name_zh": "索马里青年党",
+      "proposed_name_en": "Harakat al-Shabaab al-Mujahideen",
+      "probe_dimensions": [
+        "canonical_id",
+        "slug",
+        "name_zh",
+        "name_en",
+        "acronym",
+        "native_name",
+        "aliases",
+        "historical_names",
+        "alias_index",
+        "case_insensitive",
+        "hyphen_space_equivalence",
+        "isis_isil_is_daesh_variants",
+        "arabic_transliteration_noise"
+      ],
+      "probe_names": [
+        "Al-Shabaab",
+        "al Shabaab",
+        "Al Shabab",
+        "Harakat al-Shabaab al-Mujahideen",
+        "HSM",
+        "索马里青年党",
+        "青年党",
+        "沙巴布"
+      ],
+      "exact_match": [],
+      "alias_match": [],
+      "possible_match": [],
+      "existing_id": null,
+      "decision": "NEW",
+      "rationale": "canonical id、name_zh、name_en、acronym、native_name、aliases、historical_names 及 alias_index 全维度归一化后均无任何命中，全文提及扫描亦未发现等价对象，故新建。",
+      "manual_adjudications": [],
+      "alias_collision_check": [],
+      "free_text_mentions": {
+        "country_profiles.json": {
+          "Al-Shabaab": 1,
+          "al Shabaab": 1,
+          "索马里青年党": 1,
+          "青年党": 3
+        },
+        "entity_profiles.json": {
+          "Al-Shabaab": 2,
+          "al Shabaab": 2,
+          "索马里青年党": 1,
+          "青年党": 5
+        }
+      }
+    },
+    {
+      "candidate": "ISIS-Somalia",
+      "kind": "organization",
+      "proposed_id": "actor-isis-somalia",
+      "proposed_name_zh": "伊斯兰国索马里省",
+      "proposed_name_en": "Islamic State Somalia Province",
+      "probe_dimensions": [
+        "canonical_id",
+        "slug",
+        "name_zh",
+        "name_en",
+        "acronym",
+        "native_name",
+        "aliases",
+        "historical_names",
+        "alias_index",
+        "case_insensitive",
+        "hyphen_space_equivalence",
+        "isis_isil_is_daesh_variants",
+        "arabic_transliteration_noise"
+      ],
+      "probe_names": [
+        "ISIS-Somalia",
+        "IS-Somalia",
+        "ISS",
+        "Islamic State Somalia Province",
+        "Islamic State in Somalia",
+        "伊斯兰国索马里省",
+        "伊斯兰国索马里分支"
+      ],
+      "exact_match": [],
+      "alias_match": [],
+      "possible_match": [],
+      "existing_id": null,
+      "decision": "NEW",
+      "rationale": "canonical id、name_zh、name_en、acronym、native_name、aliases、historical_names 及 alias_index 全维度归一化后均无任何命中，全文提及扫描亦未发现等价对象，故新建。",
+      "manual_adjudications": [
+        {
+          "near_match_object": "free_text:ISS 子串",
+          "near_match_field": "normalized_substring_noise",
+          "near_match_value": "ISS",
+          "verdict": "SUBSTRING_NOISE_NOT_A_MATCH",
+          "reasoning": "'ISS' 的高计数来自 issue、mission、commission 等英文词内部子串，非名称字段命中。现有伊斯兰国相关节点为 actor-islamic-state、actor-is-sahel、actor-iswap、actor-is-mozambique、actor-isis-libya，均无索马里省主体。"
+        }
+      ],
+      "alias_collision_check": [],
+      "free_text_mentions": {
+        "country_profiles.json": {
+          "ISS": 50
+        },
+        "entities.json": {
+          "ISS": 16
+        },
+        "entity_profiles.json": {
+          "ISS": 76
+        },
+        "relationships.json": {
+          "ISS": 20
+        },
+        "relation_profiles.json": {
+          "ISS": 44
+        },
+        "relation_timelines.json": {
+          "ISS": 14
+        },
+        "sources.json": {
+          "ISS": 52
+        },
+        "evidence_records.json": {
+          "ISS": 36
+        },
+        "alias_index.json": {
+          "ISS": 1
+        }
+      }
+    },
+    {
+      "candidate": "al-Karrar Office",
+      "kind": "organization",
+      "proposed_id": "actor-al-karrar-office",
+      "proposed_name_zh": "卡拉尔办公室",
+      "proposed_name_en": "al-Karrar Office",
+      "probe_dimensions": [
+        "canonical_id",
+        "slug",
+        "name_zh",
+        "name_en",
+        "acronym",
+        "native_name",
+        "aliases",
+        "historical_names",
+        "alias_index",
+        "case_insensitive",
+        "hyphen_space_equivalence",
+        "isis_isil_is_daesh_variants",
+        "arabic_transliteration_noise"
+      ],
+      "probe_names": [
+        "al-Karrar Office",
+        "Al Karrar",
+        "al-Karrar",
+        "Karrar Office",
+        "卡拉尔办公室",
+        "卡拉尔"
+      ],
+      "exact_match": [],
+      "alias_match": [],
+      "possible_match": [],
+      "existing_id": null,
+      "decision": "NEW",
+      "rationale": "canonical id、name_zh、name_en、acronym、native_name、aliases、historical_names 及 alias_index 全维度归一化后均无任何命中，全文提及扫描亦未发现等价对象，故新建。",
+      "manual_adjudications": [],
+      "alias_collision_check": [],
+      "free_text_mentions": {}
+    },
+    {
+      "candidate": "ADF / ISIS-Central Africa",
+      "kind": "organization",
+      "proposed_id": "actor-adf-isis-ca",
+      "proposed_name_zh": "民主同盟军（伊斯兰国中非省）",
+      "proposed_name_en": "Allied Democratic Forces / Islamic State Central Africa Province",
+      "probe_dimensions": [
+        "canonical_id",
+        "slug",
+        "name_zh",
+        "name_en",
+        "acronym",
+        "native_name",
+        "aliases",
+        "historical_names",
+        "alias_index",
+        "case_insensitive",
+        "hyphen_space_equivalence",
+        "isis_isil_is_daesh_variants",
+        "arabic_transliteration_noise"
+      ],
+      "probe_names": [
+        "Allied Democratic Forces",
+        "ADF",
+        "ISIS-CA",
+        "IS-CA",
+        "ISCAP",
+        "Islamic State Central Africa Province",
+        "Madina at Tauheed Wau Mujahedeen",
+        "MTM",
+        "民主同盟军",
+        "伊斯兰国中非省"
+      ],
+      "exact_match": [],
+      "alias_match": [],
+      "possible_match": [
+        {
+          "object_id": "actor-iswap",
+          "matched_field": "name_en",
+          "matched_value": "Islamic State West Africa Province",
+          "probe": "is central africa province",
+          "jaccard": 0.6
+        },
+        {
+          "object_id": "actor-iswap",
+          "matched_field": "alias_index",
+          "matched_value": "islamic state west africa province",
+          "probe": "is central africa province",
+          "jaccard": 0.6
+        }
+      ],
+      "existing_id": null,
+      "decision": "NEW",
+      "rationale": "canonical id、name_zh、name_en、acronym、native_name、aliases、historical_names 及 alias_index 全维度归一化后均无精确命中；仅存在弱 token 重叠（actor-iswap），经人工判读属不同实际对象，故新建。",
+      "manual_adjudications": [
+        {
+          "near_match_object": "actor-is-mozambique",
+          "near_match_field": "historical_names",
+          "near_match_value": "伊斯兰国中非省关联（IS-CAP）",
+          "verdict": "NOT_THE_SAME_OBJECT",
+          "reasoning": "actor-is-mozambique 的历史名记录的是其 2019—2022 年曾被置于 ISCAP（伊斯兰国中非省）框架下的历史归属，且现有档案已明确其 2022 年成为独立的 Islamic State Mozambique Province。本轮 actor-adf-isis-ca 指的是以刚果（金）东部与乌干达为活动区的 ADF / ISIS–Central Africa 主体。两者是 ISCAP 历史框架下的不同地理分支，属不同实际对象，不构成重复；且不得因此把 IS-Mozambique 回溯改写为 ADF 的组成部分。"
+        }
+      ],
+      "alias_collision_check": [],
+      "free_text_mentions": {
+        "country_profiles.json": {
+          "ISIS-CA": 2,
+          "IS-CA": 2,
+          "伊斯兰国中非省": 1
+        },
+        "entities.json": {
+          "ISIS-CA": 1,
+          "IS-CA": 1,
+          "伊斯兰国中非省": 1
+        },
+        "entity_profiles.json": {
+          "ISIS-CA": 1,
+          "IS-CA": 1,
+          "ISCAP": 1,
+          "Islamic State Central Africa Province": 1,
+          "伊斯兰国中非省": 1
+        },
+        "relationships.json": {
+          "ISIS-CA": 1,
+          "IS-CA": 1
+        },
+        "relation_profiles.json": {
+          "ISIS-CA": 1,
+          "IS-CA": 1,
+          "伊斯兰国中非省": 1
+        },
+        "evidence_records.json": {
+          "ISCAP": 2,
+          "Islamic State Central Africa Province": 2
+        }
+      }
+    },
+    {
+      "candidate": "Ansaru",
+      "kind": "organization",
+      "proposed_id": "actor-ansaru",
+      "proposed_name_zh": "安萨鲁",
+      "proposed_name_en": "Jamaat Ansar al-Muslimeen fi Bilad al-Sudan",
+      "probe_dimensions": [
+        "canonical_id",
+        "slug",
+        "name_zh",
+        "name_en",
+        "acronym",
+        "native_name",
+        "aliases",
+        "historical_names",
+        "alias_index",
+        "case_insensitive",
+        "hyphen_space_equivalence",
+        "isis_isil_is_daesh_variants",
+        "arabic_transliteration_noise"
+      ],
+      "probe_names": [
+        "Ansaru",
+        "Jamaat Ansar al-Muslimeen fi Bilad al-Sudan",
+        "Jama'atu Ansaril Muslimina fi Biladis Sudan",
+        "安萨鲁"
+      ],
+      "exact_match": [
+        {
+          "object_id": "actor-ansaru",
+          "matched_field": "entity_id",
+          "matched_value": "actor-ansaru"
+        }
+      ],
+      "alias_match": [
+        {
+          "object_id": "actor-ansaru",
+          "matched_field": "slug",
+          "matched_value": "ansaru"
+        },
+        {
+          "object_id": "actor-ansaru",
+          "matched_field": "name_zh",
+          "matched_value": "安萨鲁"
+        },
+        {
+          "object_id": "actor-ansaru",
+          "matched_field": "name_en",
+          "matched_value": "Jamaat Ansar al-Muslimeen fi Bilad al-Sudan"
+        },
+        {
+          "object_id": "actor-ansaru",
+          "matched_field": "acronym",
+          "matched_value": "Ansaru"
+        },
+        {
+          "object_id": "actor-ansaru",
+          "matched_field": "aliases",
+          "matched_value": "Ansaru"
+        },
+        {
+          "object_id": "actor-ansaru",
+          "matched_field": "alias_index",
+          "matched_value": "ansaru"
+        },
+        {
+          "object_id": "actor-ansaru",
+          "matched_field": "alias_index",
+          "matched_value": "jamaat ansar al-muslimeen fi bilad al-sudan"
+        },
+        {
+          "object_id": "actor-ansaru",
+          "matched_field": "alias_index",
+          "matched_value": "安萨鲁"
+        }
+      ],
+      "possible_match": [],
+      "existing_id": "actor-ansaru",
+      "decision": "ENRICH_EXISTING",
+      "rationale": "已存在同一实际对象 actor-ansaru（命中字段：acronym、alias_index、aliases、entity_id、name_en、name_zh、slug）。按 §1 不得为同一实际对象建立第二个节点，本轮走 ENRICH_EXISTING：补齐双语字段、别名、E3 档案、关系与证据，不新建 canonical id。",
+      "manual_adjudications": [],
+      "alias_collision_check": [
+        {
+          "probe": "Ansaru",
+          "normalized": "ansaru",
+          "existing_targets": [
+            "actor-ansaru"
+          ]
+        },
+        {
+          "probe": "Jamaat Ansar al-Muslimeen fi Bilad al-Sudan",
+          "normalized": "jamaat ansar al muslimeen fi bilad al sudan",
+          "existing_targets": [
+            "actor-ansaru"
+          ]
+        },
+        {
+          "probe": "安萨鲁",
+          "normalized": "安萨鲁",
+          "existing_targets": [
+            "actor-ansaru"
+          ]
+        }
+      ],
+      "free_text_mentions": {
+        "entities.json": {
+          "Ansaru": 15,
+          "Jamaat Ansar al-Muslimeen fi Bilad al-Sudan": 1,
+          "安萨鲁": 2
+        },
+        "entity_profiles.json": {
+          "Ansaru": 32,
+          "Jamaat Ansar al-Muslimeen fi Bilad al-Sudan": 1,
+          "安萨鲁": 2
+        },
+        "relationships.json": {
+          "Ansaru": 50
+        },
+        "relation_profiles.json": {
+          "Ansaru": 63
+        },
+        "relation_timelines.json": {
+          "Ansaru": 6
+        },
+        "sources.json": {
+          "Ansaru": 7
+        },
+        "evidence_records.json": {
+          "Ansaru": 39
+        },
+        "alias_index.json": {
+          "Ansaru": 8,
+          "Jamaat Ansar al-Muslimeen fi Bilad al-Sudan": 1,
+          "安萨鲁": 2
+        },
+        "graph_index.json": {
+          "Ansaru": 20
+        }
+      }
+    },
+    {
+      "candidate": "Lakurawa",
+      "kind": "organization",
+      "proposed_id": "actor-lakurawa",
+      "proposed_name_zh": "拉库拉瓦武装网络",
+      "proposed_name_en": "Lakurawa",
+      "probe_dimensions": [
+        "canonical_id",
+        "slug",
+        "name_zh",
+        "name_en",
+        "acronym",
+        "native_name",
+        "aliases",
+        "historical_names",
+        "alias_index",
+        "case_insensitive",
+        "hyphen_space_equivalence",
+        "isis_isil_is_daesh_variants",
+        "arabic_transliteration_noise"
+      ],
+      "probe_names": [
+        "Lakurawa",
+        "Lakurawa militants",
+        "拉库拉瓦"
+      ],
+      "exact_match": [
+        {
+          "object_id": "actor-lakurawa",
+          "matched_field": "entity_id",
+          "matched_value": "actor-lakurawa"
+        }
+      ],
+      "alias_match": [
+        {
+          "object_id": "actor-lakurawa",
+          "matched_field": "slug",
+          "matched_value": "lakurawa"
+        },
+        {
+          "object_id": "actor-lakurawa",
+          "matched_field": "name_zh",
+          "matched_value": "拉库拉瓦武装网络"
+        },
+        {
+          "object_id": "actor-lakurawa",
+          "matched_field": "name_en",
+          "matched_value": "Lakurawa"
+        },
+        {
+          "object_id": "actor-lakurawa",
+          "matched_field": "aliases",
+          "matched_value": "Lakurawa militants"
+        },
+        {
+          "object_id": "actor-lakurawa",
+          "matched_field": "alias_index",
+          "matched_value": "lakurawa"
+        },
+        {
+          "object_id": "actor-lakurawa",
+          "matched_field": "alias_index",
+          "matched_value": "lakurawa militants"
+        },
+        {
+          "object_id": "actor-lakurawa",
+          "matched_field": "alias_index",
+          "matched_value": "拉库拉瓦武装网络"
+        }
+      ],
+      "possible_match": [],
+      "existing_id": "actor-lakurawa",
+      "decision": "ENRICH_EXISTING",
+      "rationale": "已存在同一实际对象 actor-lakurawa（命中字段：alias_index、aliases、entity_id、name_en、name_zh、slug）。按 §1 不得为同一实际对象建立第二个节点，本轮走 ENRICH_EXISTING：补齐双语字段、别名、E3 档案、关系与证据，不新建 canonical id。",
+      "manual_adjudications": [],
+      "alias_collision_check": [
+        {
+          "probe": "Lakurawa",
+          "normalized": "lakurawa",
+          "existing_targets": [
+            "actor-lakurawa"
+          ]
+        },
+        {
+          "probe": "Lakurawa militants",
+          "normalized": "lakurawa militants",
+          "existing_targets": [
+            "actor-lakurawa"
+          ]
+        },
+        {
+          "probe": "拉库拉瓦武装网络",
+          "normalized": "拉库拉瓦武装网络",
+          "existing_targets": [
+            "actor-lakurawa"
+          ]
+        }
+      ],
+      "free_text_mentions": {
+        "country_profiles.json": {
+          "Lakurawa": 3,
+          "拉库拉瓦": 26
+        },
+        "entities.json": {
+          "Lakurawa": 7,
+          "Lakurawa militants": 1,
+          "拉库拉瓦": 1
+        },
+        "entity_profiles.json": {
+          "Lakurawa": 21,
+          "Lakurawa militants": 1,
+          "拉库拉瓦": 5
+        },
+        "relationships.json": {
+          "Lakurawa": 29
+        },
+        "relation_profiles.json": {
+          "Lakurawa": 33,
+          "拉库拉瓦": 2
+        },
+        "relation_timelines.json": {
+          "Lakurawa": 4
+        },
+        "sources.json": {
+          "Lakurawa": 2
+        },
+        "evidence_records.json": {
+          "Lakurawa": 16,
+          "拉库拉瓦": 1
+        },
+        "alias_index.json": {
+          "Lakurawa": 5,
+          "Lakurawa militants": 1,
+          "拉库拉瓦": 1
+        },
+        "graph_index.json": {
+          "Lakurawa": 11
+        }
+      }
+    },
+    {
+      "candidate": "Sudanese Islamic Movement",
+      "kind": "organization",
+      "proposed_id": "actor-sudanese-islamic-movement",
+      "proposed_name_zh": "苏丹伊斯兰运动",
+      "proposed_name_en": "Sudanese Islamic Movement",
+      "probe_dimensions": [
+        "canonical_id",
+        "slug",
+        "name_zh",
+        "name_en",
+        "acronym",
+        "native_name",
+        "aliases",
+        "historical_names",
+        "alias_index",
+        "case_insensitive",
+        "hyphen_space_equivalence",
+        "isis_isil_is_daesh_variants",
+        "arabic_transliteration_noise"
+      ],
+      "probe_names": [
+        "Sudanese Islamic Movement",
+        "SIM",
+        "SMB",
+        "Sudanese Muslim Brotherhood",
+        "Islamic Movement of Sudan",
+        "National Islamic Front",
+        "NIF",
+        "苏丹伊斯兰运动",
+        "苏丹穆斯林兄弟会",
+        "全国伊斯兰阵线"
+      ],
+      "exact_match": [],
+      "alias_match": [],
+      "possible_match": [],
+      "existing_id": null,
+      "decision": "NEW",
+      "rationale": "canonical id、name_zh、name_en、acronym、native_name、aliases、historical_names 及 alias_index 全维度归一化后均无任何命中，全文提及扫描亦未发现等价对象，故新建。",
+      "manual_adjudications": [
+        {
+          "near_match_object": "free_text:SIM/NIF 子串",
+          "near_match_field": "normalized_substring_noise",
+          "near_match_value": "SIM / NIF",
+          "verdict": "SUBSTRING_NOISE_NOT_A_MATCH",
+          "reasoning": "全文提及扫描中 'SIM'、'NIF' 的高计数来自归一化后的子串噪声（如 similar、significant 等英文词内部片段），并非既有知识对象的名称字段命中。Depth D 苏丹深化已建 actor-saf / actor-rsf / actor-splm-n-al-hilu / actor-jem / actor-slm-aw，其中不存在与苏丹伊斯兰运动等价的政治—军事网络节点，故新建。"
+        }
+      ],
+      "alias_collision_check": [],
+      "free_text_mentions": {
+        "entities.json": {
+          "SIM": 1,
+          "NIF": 13
+        },
+        "entity_profiles.json": {
+          "SIM": 5,
+          "NIF": 36
+        },
+        "relationships.json": {
+          "NIF": 49
+        },
+        "relation_profiles.json": {
+          "SIM": 78,
+          "NIF": 67
+        },
+        "relation_timelines.json": {
+          "NIF": 5
+        },
+        "sources.json": {
+          "SIM": 1,
+          "NIF": 43
+        },
+        "evidence_records.json": {
+          "NIF": 28
+        },
+        "alias_index.json": {
+          "SIM": 1,
+          "NIF": 9
+        },
+        "graph_index.json": {
+          "NIF": 18
+        }
+      }
+    },
+    {
+      "candidate": "Al-Baraa Bin Malik Brigade",
+      "kind": "organization",
+      "proposed_id": "actor-bbmb",
+      "proposed_name_zh": "巴拉·本·马利克旅",
+      "proposed_name_en": "Al-Baraa Bin Malik Brigade",
+      "probe_dimensions": [
+        "canonical_id",
+        "slug",
+        "name_zh",
+        "name_en",
+        "acronym",
+        "native_name",
+        "aliases",
+        "historical_names",
+        "alias_index",
+        "case_insensitive",
+        "hyphen_space_equivalence",
+        "isis_isil_is_daesh_variants",
+        "arabic_transliteration_noise"
+      ],
+      "probe_names": [
+        "Al-Baraa Bin Malik Brigade",
+        "Al Baraa Ibn Malik Brigade",
+        "BBMB",
+        "Baraa Bin Malik",
+        "巴拉·本·马利克旅",
+        "巴拉本马利克旅"
+      ],
+      "exact_match": [],
+      "alias_match": [],
+      "possible_match": [],
+      "existing_id": null,
+      "decision": "NEW",
+      "rationale": "canonical id、name_zh、name_en、acronym、native_name、aliases、historical_names 及 alias_index 全维度归一化后均无任何命中，全文提及扫描亦未发现等价对象，故新建。",
+      "manual_adjudications": [],
+      "alias_collision_check": [],
+      "free_text_mentions": {}
+    },
+    {
+      "candidate": "Ahmed Diriye",
+      "kind": "person",
+      "proposed_id": "person-ahmed-diriye",
+      "proposed_name_zh": "艾哈迈德·迪里耶",
+      "proposed_name_en": "Ahmed Diriye",
+      "probe_dimensions": [
+        "canonical_id",
+        "slug",
+        "name_zh",
+        "name_en",
+        "acronym",
+        "native_name",
+        "aliases",
+        "historical_names",
+        "alias_index",
+        "case_insensitive",
+        "hyphen_space_equivalence",
+        "isis_isil_is_daesh_variants",
+        "arabic_transliteration_noise"
+      ],
+      "probe_names": [
+        "Ahmed Diriye",
+        "Ahmad Umar",
+        "Abu Ubaidah",
+        "Ahmed Umar Abu Ubaidah",
+        "艾哈迈德·迪里耶",
+        "阿布·乌拜达"
+      ],
+      "exact_match": [],
+      "alias_match": [],
+      "possible_match": [],
+      "existing_id": null,
+      "decision": "NEW",
+      "rationale": "canonical id、name_zh、name_en、acronym、native_name、aliases、historical_names 及 alias_index 全维度归一化后均无任何命中，全文提及扫描亦未发现等价对象，故新建。",
+      "manual_adjudications": [
+        {
+          "near_match_object": "actor-aqim",
+          "near_match_field": "entity_profiles.leadership",
+          "near_match_value": "阿布·乌拜达·优素福·阿纳比（Abu Ubaydah Yusuf al-Annabi）",
+          "verdict": "KUNYA_COLLISION_NOT_THE_SAME_PERSON",
+          "reasoning": "AQIM 现任埃米尔 Abu Ubaydah Yusuf al-Annabi 与 Al-Shabaab 领导人 Ahmed Diriye 的化名 Abu Ubaidah 属同名化名（kunya）碰撞，是两个不同的人。因此 person-ahmed-diriye 不得登记裸别名 'Abu Ubaidah'，必须使用带限定的完整化名形式，避免 alias_index 产生指向歧义。",
+          "import_constraint": "alias 必须写作 'Ahmed Diriye (Abu Ubaidah)' 等限定形式，禁止裸 'Abu Ubaidah'。"
+        }
+      ],
+      "alias_collision_check": [],
+      "free_text_mentions": {
+        "entity_profiles.json": {
+          "阿布·乌拜达": 1
+        }
+      }
+    },
+    {
+      "candidate": "Abd al-Qadir Mu'min",
+      "kind": "person",
+      "proposed_id": "person-abd-al-qadir-mumin",
+      "proposed_name_zh": "阿卜杜勒·卡迪尔·穆明",
+      "proposed_name_en": "Abd al-Qadir Mu'min",
+      "probe_dimensions": [
+        "canonical_id",
+        "slug",
+        "name_zh",
+        "name_en",
+        "acronym",
+        "native_name",
+        "aliases",
+        "historical_names",
+        "alias_index",
+        "case_insensitive",
+        "hyphen_space_equivalence",
+        "isis_isil_is_daesh_variants",
+        "arabic_transliteration_noise"
+      ],
+      "probe_names": [
+        "Abd al-Qadir Mu'min",
+        "Abdulqadir Mumin",
+        "Abdul Qadir Mumin",
+        "阿卜杜勒·卡迪尔·穆明",
+        "穆明"
+      ],
+      "exact_match": [],
+      "alias_match": [],
+      "possible_match": [],
+      "existing_id": null,
+      "decision": "NEW",
+      "rationale": "canonical id、name_zh、name_en、acronym、native_name、aliases、historical_names 及 alias_index 全维度归一化后均无任何命中，全文提及扫描亦未发现等价对象，故新建。",
+      "manual_adjudications": [],
+      "alias_collision_check": [],
+      "free_text_mentions": {}
+    },
+    {
+      "candidate": "Abdirahman Fahiye Isse",
+      "kind": "person",
+      "proposed_id": "person-abdirahman-fahiye",
+      "proposed_name_zh": "阿卜迪拉赫曼·法希耶·伊塞",
+      "proposed_name_en": "Abdirahman Fahiye Isse Mohamud",
+      "probe_dimensions": [
+        "canonical_id",
+        "slug",
+        "name_zh",
+        "name_en",
+        "acronym",
+        "native_name",
+        "aliases",
+        "historical_names",
+        "alias_index",
+        "case_insensitive",
+        "hyphen_space_equivalence",
+        "isis_isil_is_daesh_variants",
+        "arabic_transliteration_noise"
+      ],
+      "probe_names": [
+        "Abdirahman Fahiye Isse",
+        "Abdirahman Fahiye Isse Mohamud",
+        "Fahiye",
+        "阿卜迪拉赫曼·法希耶"
+      ],
+      "exact_match": [],
+      "alias_match": [],
+      "possible_match": [],
+      "existing_id": null,
+      "decision": "NEW",
+      "rationale": "canonical id、name_zh、name_en、acronym、native_name、aliases、historical_names 及 alias_index 全维度归一化后均无任何命中，全文提及扫描亦未发现等价对象，故新建。",
+      "manual_adjudications": [],
+      "alias_collision_check": [],
+      "free_text_mentions": {}
+    },
+    {
+      "candidate": "Seka Musa Baluku",
+      "kind": "person",
+      "proposed_id": "person-seka-musa-baluku",
+      "proposed_name_zh": "塞卡·穆萨·巴卢库",
+      "proposed_name_en": "Seka Musa Baluku",
+      "probe_dimensions": [
+        "canonical_id",
+        "slug",
+        "name_zh",
+        "name_en",
+        "acronym",
+        "native_name",
+        "aliases",
+        "historical_names",
+        "alias_index",
+        "case_insensitive",
+        "hyphen_space_equivalence",
+        "isis_isil_is_daesh_variants",
+        "arabic_transliteration_noise"
+      ],
+      "probe_names": [
+        "Seka Musa Baluku",
+        "Musa Baluku",
+        "Baluku",
+        "塞卡·穆萨·巴卢库",
+        "巴卢库"
+      ],
+      "exact_match": [],
+      "alias_match": [],
+      "possible_match": [],
+      "existing_id": null,
+      "decision": "NEW",
+      "rationale": "canonical id、name_zh、name_en、acronym、native_name、aliases、historical_names 及 alias_index 全维度归一化后均无任何命中，全文提及扫描亦未发现等价对象，故新建。",
+      "manual_adjudications": [],
+      "alias_collision_check": [],
+      "free_text_mentions": {}
+    },
+    {
+      "candidate": "Ali Ahmed Karti",
+      "kind": "person",
+      "proposed_id": "person-ali-ahmed-karti",
+      "proposed_name_zh": "阿里·艾哈迈德·卡尔提",
+      "proposed_name_en": "Ali Ahmed Karti",
+      "probe_dimensions": [
+        "canonical_id",
+        "slug",
+        "name_zh",
+        "name_en",
+        "acronym",
+        "native_name",
+        "aliases",
+        "historical_names",
+        "alias_index",
+        "case_insensitive",
+        "hyphen_space_equivalence",
+        "isis_isil_is_daesh_variants",
+        "arabic_transliteration_noise"
+      ],
+      "probe_names": [
+        "Ali Ahmed Karti",
+        "Ali Karti",
+        "Ali Ahmed Kurti",
+        "阿里·艾哈迈德·卡尔提",
+        "卡尔提"
+      ],
+      "exact_match": [],
+      "alias_match": [],
+      "possible_match": [],
+      "existing_id": null,
+      "decision": "NEW",
+      "rationale": "canonical id、name_zh、name_en、acronym、native_name、aliases、historical_names 及 alias_index 全维度归一化后均无任何命中，全文提及扫描亦未发现等价对象，故新建。",
+      "manual_adjudications": [],
+      "alias_collision_check": [],
+      "free_text_mentions": {}
+    },
+    {
+      "candidate": "Abu Zaid Talha al-Misbah",
+      "kind": "person",
+      "proposed_id": "person-abu-zaid-talha",
+      "proposed_name_zh": "阿布·扎伊德·塔勒哈·米斯巴赫",
+      "proposed_name_en": "Abu Zaid Talha al-Misbah",
+      "probe_dimensions": [
+        "canonical_id",
+        "slug",
+        "name_zh",
+        "name_en",
+        "acronym",
+        "native_name",
+        "aliases",
+        "historical_names",
+        "alias_index",
+        "case_insensitive",
+        "hyphen_space_equivalence",
+        "isis_isil_is_daesh_variants",
+        "arabic_transliteration_noise"
+      ],
+      "probe_names": [
+        "Abu Zaid Talha al-Misbah",
+        "Abu Zayd Talha",
+        "al-Misbah",
+        "阿布·扎伊德·塔勒哈"
+      ],
+      "exact_match": [],
+      "alias_match": [],
+      "possible_match": [],
+      "existing_id": null,
+      "decision": "NEW",
+      "rationale": "canonical id、name_zh、name_en、acronym、native_name、aliases、historical_names 及 alias_index 全维度归一化后均无任何命中，全文提及扫描亦未发现等价对象，故新建。",
+      "manual_adjudications": [],
+      "alias_collision_check": [],
+      "free_text_mentions": {}
+    }
+  ],
+  "notes": [
+    "本审计为只读扫描，未修改任何 source-of-truth 数据。",
+    "归一化覆盖大小写、连字符/空格等价、撇号与阿语转写噪声、ISIS/ISIL/IS/Daesh 变体。",
+    "free_text_mentions 仅为提示性上下文，不作为重复判定依据。",
+    "同一实际对象一律 ENRICH_EXISTING，禁止建立第二 canonical id。"
+  ]
+}
