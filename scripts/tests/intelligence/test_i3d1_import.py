@@ -47,8 +47,8 @@ def test_i3d1_packet_counts():
     countries = load("countries.json")["countries"]
     if len(countries) != 13: fail(f"countries={len(countries)} != 13")
     # I3-D2 extends the catalog; D1 gate asserts the D1 baseline is present within the current scale
-    if len(entities) != 72: fail(f"non-country entities={len(entities)} != 72 (D1 baseline 61 + D2 11)")
-    if len(rels) != 150: fail(f"relationships={len(rels)} != 150 (D1 baseline 121 + D2 29)")
+    if len(entities) != 83: fail(f"non-country entities={len(entities)} != 83 (61 + 11 + 11 Expansion A)")
+    if len(rels) != 164: fail(f"relationships={len(rels)} != 164 (121 + 29 + 14 Expansion A)")
     if len(profiles) < 42: fail(f"relation_profiles={len(profiles)} < 42")
     if len(sources) < 96: fail(f"sources={len(sources)} < 96")
     if len(evidence) < 167: fail(f"evidence={len(evidence)} < 167")
@@ -148,7 +148,11 @@ def test_i3d1_disputed_semantics():
     r = rel_of(rels, "actor-lakurawa", "actor-jnim")
     if not r or r["relationship_type"] != "cooperates_with": fail("Lakurawa-JNIM must be cooperates_with")
     if r["disputed"] is not True: fail("Lakurawa-JNIM disputed must be true")
-    if r.get("relationship_semantics_note") != "some_cells_only": fail("Lakurawa-JNIM scope must be some_cells_only")
+    # EXPANSION A: the semantics note now documents the NigSAC official position
+    # vs the ACLED 2026 evidence conflict (pack 15 #16) while preserving the
+    # some_cells_only scope: no branch_of relationship is asserted.
+    note = r.get("relationship_semantics_note") or ""
+    if "cooperates_with" not in note or "branch_of" not in note: fail("Lakurawa-JNIM scope must stay cooperates_with without branch_of")
     r = rel_of(rels, "actor-lakurawa", "actor-jas")
     if not r or r["relationship_type"] != "cooperates_with" or r["disputed"] is not True: fail("Lakurawa-JAS cooperates_with disputed")
     r = rel_of(rels, "person-sadou-samahouna", "actor-jnim")

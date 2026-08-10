@@ -57,9 +57,9 @@ def sections_text(eid):
 
 print("== TEST 1: count invariants (no breadth expansion) ==")
 check("countries=13", len(countries) == 13, f"got {len(countries)}")
-check("entities=72", len(non_country) == 72, f"got {len(non_country)}")
-check("relationships=150", len(rels) == 150, f"got {len(rels)}")
-check("routes=249", metrics.get("route_count") == 249, f"got {metrics.get('route_count')}")
+check("entities=83", len(non_country) == 83, f"got {len(non_country)} (72 baseline + 11 Expansion A)")
+check("relationships=164", len(rels) == 164, f"got {len(rels)} (150 baseline + 14 Expansion A)")
+check("routes=274", metrics.get("route_count") == 274, f"got {metrics.get('route_count')} (249 + 11 entities + 14 relations)")
 check("sources grew from 182", len(sources) >= 182, f"got {len(sources)}")
 check("evidence grew from 297", len(evidence) >= 297, f"got {len(evidence)}")
 
@@ -139,7 +139,7 @@ check("conflict edge hostile_to", conflict.get("relationship_type") == "hostile_
 check("conflict edge = R3", (rp.get("rel-jnim-is-conflict") or {}).get("relation_maturity")
       == "R3_FULL_RELATIONSHIP_INTELLIGENCE",
       str((rp.get("rel-jnim-is-conflict") or {}).get("relation_maturity")))
-check("relationship count unchanged at 150", len(rels) == 150)
+check("relationship count unchanged at 164", len(rels) == 164)
 
 print("== TEST 8: core relation overrides applied ==")
 imp = qa("depth-g-import-report.json")
@@ -166,7 +166,7 @@ for r in rels:
     t = (rp.get(r["relationship_id"]) or {}).get("relation_maturity")
     tiers[t] = tiers.get(t, 0) + 1
 check("all three tiers populated", len([k for k in tiers if k]) == 3, str(tiers))
-check("tier totals sum to 150", sum(v for k, v in tiers.items() if k) == 150, str(tiers))
+check("tier totals sum to 164", sum(v for k, v in tiers.items() if k) == 164, str(tiers))
 
 print("== TEST 10: summary-only re-audit + staleness handling ==")
 rc = qa("relation-closure-audit.json")
@@ -219,7 +219,21 @@ for eid, mv in (led.get("entities") or {}).items():
     check(f"entity downshift applied {eid}",
           (ep.get(eid) or {}).get("content_maturity") == mv["to"],
           f"want {mv['to']} got {(ep.get(eid) or {}).get('content_maturity')}")
+# EXPANSION A: the three ansaru relations were downshifted by Depth G because
+# they lacked context/history fields. The Expansion A content pack (section 16,
+# dossier C) authorizes full R3/R2 dossiers for them, which fills exactly those
+# gaps, so the depth-g downshift is superseded and they are exempted.
+_EXP_A_REL_DOWNSHIFT_EXEMPT = {
+    "rel-d1-ansaru-jas-split": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+    "rel-d1-ansaru-aqim-allegiance": "R2_DEVELOPED_RELATIONSHIP",
+    "rel-d1-ansaru-jnim-affiliation": "R2_DEVELOPED_RELATIONSHIP",
+}
 for rid, mv in (led.get("relations") or {}).items():
+    if rid in _EXP_A_REL_DOWNSHIFT_EXEMPT:
+        check(f"expansion-a supersedes downshift {rid}",
+              (rp.get(rid) or {}).get("relation_maturity") == _EXP_A_REL_DOWNSHIFT_EXEMPT[rid],
+              f"want {_EXP_A_REL_DOWNSHIFT_EXEMPT[rid]} got {(rp.get(rid) or {}).get('relation_maturity')}")
+        continue
     check(f"relation downshift applied {rid}",
           (rp.get(rid) or {}).get("relation_maturity") == mv["to"],
           f"want {mv['to']} got {(rp.get(rid) or {}).get('relation_maturity')}")
