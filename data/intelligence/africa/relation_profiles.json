@@ -2570,65 +2570,171 @@
   },
   "rel-d1-ansaru-aqim-allegiance": {
    "relation_id": "rel-d1-ansaru-aqim-allegiance",
-   "relation_type": "pledged_allegiance_to",
-   "slug": "rel-d1-ansaru-aqim-allegiance",
+   "slug": "d1-ansaru-aqim-allegiance",
+   "relation_title": "安萨鲁—AQIM：历史一致与 2020 年效忠",
    "source_entity_id": "actor-ansaru",
    "target_entity_id": "actor-aqim",
+   "relation_type": "pledged_allegiance_to",
+   "direction": "unidirectional",
+   "display_ring": "middle",
+   "current_status": "效忠关系当前有效。",
+   "overview": "美国国家反恐中心把安萨鲁描述为历史上与 AQIM 保持一致的组织；ACLED 记述其在 2020 年中向 AQIM 宣誓效忠。两条表述指向同一条阵营归属线，但强度层次不同。",
+   "parties": [
+    {
+     "entity_id": "actor-ansaru",
+     "role": "尼日利亚基地组织取向组织"
+    },
+    {
+     "entity_id": "actor-aqim",
+     "role": "基地组织马格里布分支"
+    }
+   ],
+   "formation_background": "安萨鲁自 2012 年从博科圣地分裂时即以向基地组织靠拢为取向之一，此后长期被描述为与 AQIM 保持一致。",
+   "initial_relationship": "历史层面的阵营一致，尚未见公开的正式效忠表述。",
+   "evolution_stages": [
+    {
+     "period": "2012 之后",
+     "detail": "被描述为历史上与 AQIM 保持一致。"
+    },
+    {
+     "period": "2020 年中",
+     "detail": "ACLED 记述其向 AQIM 宣誓效忠。"
+    }
+   ],
+   "causes": [
+    "分裂时的基地组织取向",
+    "萨赫勒基地组织体系的区域扩展"
+   ],
+   "key_turning_points": [
+    {
+     "event": "2020 年中宣誓效忠",
+     "impact": "把历史层面的一致转化为公开的阵营归属。",
+     "source_ids": [
+      "d1-acled-border-triangle-2026"
+     ]
+    }
+   ],
+   "regional_differences": "尼日利亚西北部与萨赫勒南缘。",
+   "impact_on_security": "把尼日利亚西北部纳入基地组织在萨赫勒的网络范围。",
+   "why_it_matters": "这是安萨鲁区别于博科圣地／JAS 与 ISWAP 的核心身份特征。",
+   "uncertainties": "「历史上保持一致」与「宣誓效忠」出自不同来源、指向不同层次的关系强度；公开材料未说明效忠之后双方在指挥或资源上的实际互动方式。",
+   "disputed": false,
+   "temporal_sensitive": true,
+   "last_verified_at": "2026-08-09",
    "source_ids": [
     "d1-acled-border-triangle-2026",
     "depthb-nctc-ansaru-2025-06"
    ],
-   "parties": [
-    "actor-ansaru",
-    "actor-aqim"
+   "drivers": [
+    "意识形态与阵营一致",
+    "区域网络的扩展需求"
    ],
-   "overview": "Ansaru具有明确Al-Qaida/AQIM取向。NCTC 2025直接把Ansaru描述为AQIM在Nigeria的arm，现有pledged_allegiance_to语义继续保留。",
-   "formation_background": "",
-   "initial_relationship": "",
-   "evolution_stages": [],
-   "causes": [],
-   "key_turning_points": [],
-   "current_status": "current",
-   "regional_differences": "",
-   "impact_on_security": "",
-   "why_it_matters": "连接Nigeria西北安全环境与Central Sahel Al-Qaida体系。",
-   "uncertainties": "AQIM日常命令和财务支持深度不透明。",
-   "temporal_sensitive": true,
-   "last_verified_at": "2026-08-09",
-   "imported_by": "i3d1",
-   "relation_maturity": "R1_SIMPLE_SOURCED_RELATION"
+   "constraints": [
+    "安萨鲁规模有限且处于地下状态",
+    "尼日利亚反恐行动削弱其领导层"
+   ],
+   "current_assessment": "效忠关系当前有效，但双方互动的实际形态缺乏公开细节。",
+   "asip_analysis": "效忠表述提高了安萨鲁在基地组织叙事中的可见度，但并不自动带来资源或指挥意义上的整合；两者应分开评估。",
+   "watch_indicators": [
+    "双方公开表述的变化",
+    "安萨鲁行动方式是否出现萨赫勒体系特征",
+    "领导层重建后的阵营取向"
+   ],
+   "relation_maturity": "R2_DEVELOPED_RELATIONSHIP",
+   "imported_by": "expansion-a"
   },
   "rel-d1-lakurawa-is-sahel-network": {
    "relation_id": "rel-d1-lakurawa-is-sahel-network",
-   "relation_type": "part_of_network",
-   "slug": "rel-d1-lakurawa-is-sahel-network",
+   "slug": "d1-lakurawa-is-sahel-network",
+   "relation_title": "Lakurawa—伊斯兰国萨赫勒省：证据倾向与身份边界争议",
    "source_entity_id": "actor-lakurawa",
    "target_entity_id": "actor-is-sahel",
+   "relation_type": "part_of_network",
+   "direction": "unidirectional",
+   "display_ring": "middle",
+   "current_status": "",
+   "overview": "ACLED 2026 年 6 月的非洲综述指出，伊斯兰国萨赫勒省官方认领了在尼日利亚境内、此前被地方归于 Lakurawa 的行动，并评估这越来越表明 Lakurawa 是该省边境存在的组成部分，而非一个独立的武装组织。这一判断与尼日利亚官方 2025 年 3 月的 JNIM 归属认定并存，冲突未被消除。",
+   "parties": [
+    {
+     "entity_id": "actor-lakurawa",
+     "role": "身份存在争议的武装网络"
+    },
+    {
+     "entity_id": "actor-is-sahel",
+     "role": "伊斯兰国萨赫勒省"
+    }
+   ],
+   "formation_background": "「Lakurawa」在 2025 年之前主要作为地方性称谓使用，用来指称尼日利亚西北部出现的一类跨境武装存在。2025 年 3 月尼日利亚官方制裁机构对 Lakurawa Sect 列名并把它描述为作为 JNIM 的一部分运作。2025—2026 年间，指向伊斯兰国萨赫勒省的证据逐渐增加。",
+   "initial_relationship": "最初是一个地方标签，而非有明确边界的组织实体；外部归属判断随证据变化而变化。",
+   "evolution_stages": [
+    {
+     "period": "2025 之前",
+     "detail": "「Lakurawa」主要作为地方性称谓使用，缺乏统一的组织定义。"
+    },
+    {
+     "period": "2025-03",
+     "detail": "尼日利亚官方制裁机构列名 Lakurawa Sect，描述其作为 JNIM 的一部分运作，并记述索科托州与凯比州的活动、跨境外国战斗人员存在、强制性征税、招募、绑架勒索、盗窃牲畜以及建立替代性治理的企图。"
+    },
+    {
+     "period": "2025—2026",
+     "detail": "指向伊斯兰国萨赫勒省关联的区域证据逐渐增加。"
+    },
+    {
+     "period": "2026-06",
+     "detail": "ACLED 非洲综述指出伊斯兰国萨赫勒省官方认领了在尼日利亚境内、此前被归于 Lakurawa 的行动，并评估 Lakurawa 更像是该省边境存在的组成部分。"
+    }
+   ],
+   "causes": [
+    "尼日利亚西北部与尼日尔边境地带的跨境武装流动",
+    "地方性称谓与正式组织名称之间的错配",
+    "伊斯兰国萨赫勒省在边境地带的扩展与认领策略"
+   ],
+   "key_turning_points": [
+    {
+     "event": "2025 年 3 月尼日利亚官方列名",
+     "impact": "首次给出官方归属判断，指向 JNIM。",
+     "source_ids": [
+      "expa-nigsac-lakurawa-2025-03"
+     ]
+    },
+    {
+     "event": "2026 年 6 月 ACLED 评估",
+     "impact": "把证据天平推向伊斯兰国萨赫勒省方向，但未解决身份边界问题。",
+     "source_ids": [
+      "d1-acled-africa-june-2026"
+     ]
+    }
+   ],
+   "regional_differences": "尼日利亚索科托州与凯比州，以及尼日尔—尼日利亚边境地带。",
+   "impact_on_security": "归属判断直接决定尼日利亚西北部跨境威胁应被纳入哪一条跨国网络的分析框架，进而影响预警指标与反恐资源投向。",
+   "why_it_matters": "这条关系是判断尼日利亚西北部威胁性质的关键，也是平台如何处理「证据冲突」的示范性案例。",
+   "uncertainties": "Lakurawa 是否为单一组织、哪些单元属于伊斯兰国萨赫勒省及其统一指挥程度仍不清楚；「Lakurawa」可能部分是地方标签而非规范组织名称。本关系必须与 rel-d1-lakurawa-jnim-cooperation 一并阅读：尼日利亚官方的 JNIM 归属认定与 ACLED 的伊斯兰国萨赫勒省解读同时在案，平台保留双方立场，不作单一结论，也不建立无条件的 branch_of 关系。",
+   "disputed": true,
+   "temporal_sensitive": true,
+   "last_verified_at": "2026-08-09",
    "source_ids": [
     "d1-acled-africa-june-2026",
-    "d1-africa-center-threat-2026-04-06"
+    "d1-africa-center-threat-2026-04-06",
+    "expa-nigsac-lakurawa-2025-03"
    ],
-   "parties": [
-    "actor-lakurawa",
-    "actor-is-sahel"
+   "drivers": [
+    "伊斯兰国萨赫勒省的认领行为",
+    "边境地带的组织流动性"
    ],
-   "overview": "使用part_of_network，但必须disputed=true并保留时间演变；不能写成简单等式‘Lakurawa=IS Sahel’。",
-   "formation_background": "",
-   "initial_relationship": "",
-   "evolution_stages": [],
-   "causes": [],
-   "key_turning_points": [],
-   "current_status": "current",
-   "regional_differences": "",
-   "impact_on_security": "",
-   "why_it_matters": "",
-   "uncertainties": "Lakurawa是否为单一组织、哪些单元属于ISSP及其统一指挥程度仍不清楚。",
-   "temporal_sensitive": true,
-   "last_verified_at": "2026-08-08",
-   "imported_by": "i3d1",
-   "relation_maturity": "R1_SIMPLE_SOURCED_RELATION",
-   "maturity_basis": "R2 default downshifted to R1 — no context/history field",
-   "maturity_assessed_at": "2026-08-09"
+   "constraints": [
+    "地方标签与组织实体之间缺乏清晰映射",
+    "官方与研究机构立场不一致"
+   ],
+   "current_assessment": "关系当前有效但存在争议。证据平衡越来越倾向伊斯兰国萨赫勒省方向，但不能据此断言无条件的分支关系。",
+   "asip_analysis": "现有证据越来越倾向其属于或嵌入伊斯兰国萨赫勒省跨境网络，但实体边界及「Lakurawa」名称使用存在明显不确定性。该判断属 ASIP 平台分析，不构成经核实的事实结论；尼日利亚官方 2025 年 3 月关于其作为 JNIM 组成部分运作的认定同时保留在案。",
+   "watch_indicators": [
+    "伊斯兰国萨赫勒省对尼日利亚境内行动认领频率的变化",
+    "尼日利亚官方是否调整其归属认定",
+    "出现能够界定 Lakurawa 组织边界的权威材料",
+    "索科托州与凯比州袭击模式与萨赫勒体系的一致性变化"
+   ],
+   "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+   "imported_by": "expansion-a"
   },
   "rel-d1-fu-aes-region": {
    "relation_id": "rel-d1-fu-aes-region",
@@ -3252,43 +3358,173 @@
   },
   "rel-d1-ansaru-jas-split": {
    "relation_id": "rel-d1-ansaru-jas-split",
-   "relation_type": "split_from",
-   "slug": "rel-d1-ansaru-jas-split",
+   "slug": "d1-ansaru-jas-split",
+   "relation_title": "安萨鲁—博科圣地／JAS：2012 年 1 月分裂",
    "source_entity_id": "actor-ansaru",
    "target_entity_id": "actor-jas",
+   "relation_type": "split_from",
+   "direction": "unidirectional",
+   "display_ring": "middle",
+   "current_status": "historical",
+   "overview": "安萨鲁于 2012 年 1 月从博科圣地／JAS 体系分裂。美国国家反恐中心指出，分裂的主要动因之一是反对博科圣地针对穆斯林平民的无差别袭击，以及安萨鲁向基地组织靠拢的取向。",
    "parties": [
-    "actor-ansaru",
-    "actor-jas"
+    {
+     "entity_id": "actor-ansaru",
+     "role": "分裂出来的基地组织取向派系"
+    },
+    {
+     "entity_id": "actor-jas",
+     "role": "母体组织"
+    }
    ],
-   "overview": "Ansaru约在2012年1月从Boko Haram/JAS体系分裂，主要原因之一是反对JAS针对穆斯林平民的无差别袭击，并选择更明确的Al-Qaida取向。",
-   "why_it_matters": "这是Nigeria圣战网络早期分裂之一，也解释后来Al-Qaida与Islamic State两种外部阵营的不同入口。",
-   "uncertainties": "早期地下组织成员和指挥过程并不完全公开。",
-   "relation_maturity": "R1_SIMPLE_SOURCED_RELATION",
+   "formation_background": "两个组织拥有共同的组织起源。博科圣地／JAS 在尼日利亚东北部发展出以无差别暴力为特征的作战方式，组织内部对针对穆斯林平民的袭击存在分歧，这一分歧最终在 2012 年 1 月导致分裂。",
+   "initial_relationship": "分裂之初，安萨鲁是从母体脱离的较小派系，以不同的暴力伦理主张与外部阵营取向作为区别标志。",
+   "evolution_stages": [
+    {
+     "period": "2012-01",
+     "detail": "安萨鲁从博科圣地／JAS 分裂，公开区别于母体的无差别袭击方式。"
+    },
+    {
+     "period": "2012 之后",
+     "detail": "两个组织走上不同轨迹：安萨鲁以绑架勒索（含针对西方人质的绑架）与轻武器袭击为主要手段，活动区集中在尼日利亚西北部及贝宁—尼日尔—尼日利亚三国交界地带；博科圣地／JAS 则继续在乍得湖盆地方向发展。"
+    },
+    {
+     "period": "2020 年中",
+     "detail": "ACLED 记述安萨鲁向 AQIM 宣誓效忠，此后与 JNIM 的联系有所加强，基地组织取向进一步明确。"
+    },
+    {
+     "period": "2025—2026",
+     "detail": "尼日利亚反恐行动打击了安萨鲁的高层领导；其当前状态应表述为活跃但领导层遭削弱。其成员规模在公开来源中未知。"
+    }
+   ],
+   "causes": [
+    "对针对穆斯林平民的无差别袭击的反对",
+    "向基地组织体系靠拢的取向差异",
+    "组织内部关于暴力边界与合法性的分歧"
+   ],
+   "key_turning_points": [
+    {
+     "event": "2012 年 1 月分裂",
+     "impact": "尼日利亚圣战网络出现两条不同的外部阵营入口。",
+     "source_ids": [
+      "depthb-nctc-ansaru-2025-06"
+     ]
+    },
+    {
+     "event": "2020 年中向 AQIM 效忠",
+     "impact": "把 2012 年的取向差异转化为明确的阵营归属。",
+     "source_ids": [
+      "d1-acled-border-triangle-2026"
+     ]
+    }
+   ],
+   "regional_differences": "安萨鲁主要活动于尼日利亚西北部及贝宁—尼日尔—尼日利亚三国交界地带；博科圣地／JAS 的重心在乍得湖盆地。两者在地理上基本分离。",
+   "impact_on_security": "分裂使尼日利亚同时存在基地组织取向与伊斯兰国取向两条网络线索，提高了威胁评估的复杂度，也使针对某一组织的反恐成效难以外推到另一组织。",
+   "why_it_matters": "这是尼日利亚圣战网络最早的重要分裂之一，也是理解此后基地组织与伊斯兰国两套外部关系为何能在同一国家并行存在的基础。",
+   "uncertainties": "早期地下组织的成员构成与指挥过程并不完全公开；分裂过程中的具体人员流向缺乏可核实的记录。安萨鲁当前成员规模未知，任何固定兵力数字（例如 2,000—3,000）均无来源支撑，不应使用。",
+   "disputed": false,
+   "temporal_sensitive": true,
    "last_verified_at": "2026-08-09",
    "source_ids": [
-    "depthb-nctc-ansaru-2025-06"
+    "depthb-nctc-ansaru-2025-06",
+    "d1-africa-center-threat-2026-04-06",
+    "d1-acled-border-triangle-2026"
    ],
-   "current_status": "historical"
+   "drivers": [
+    "暴力伦理分歧",
+    "外部阵营选择",
+    "领导层与地域基础的差异"
+   ],
+   "constraints": [
+    "两个组织的活动区分离，直接互动有限",
+    "安萨鲁规模较小且长期处于地下状态"
+   ],
+   "current_assessment": "分裂本身属历史事件，关系记录为 historical。两个组织此后各自独立发展，安萨鲁当前状态为活跃但领导层遭尼日利亚反恐行动削弱。",
+   "asip_analysis": "这条关系的价值在于解释「同一国家、两条网络」的结构性成因。评估尼日利亚圣战威胁时，不能用博科圣地／JAS 或 ISWAP 的态势推断安萨鲁的强弱，两者的外部依托与作战逻辑不同。",
+   "watch_indicators": [
+    "安萨鲁领导层重建或再度被打击的迹象",
+    "两个组织之间出现人员流动或合作的可核实证据",
+    "安萨鲁与萨赫勒基地组织体系联系强度的变化",
+    "出现有来源支撑的安萨鲁规模估计"
+   ],
+   "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+   "imported_by": "expansion-a"
   },
   "rel-d1-ansaru-jnim-affiliation": {
    "relation_id": "rel-d1-ansaru-jnim-affiliation",
-   "relation_type": "affiliated_with",
-   "slug": "rel-d1-ansaru-jnim-affiliation",
+   "slug": "d1-ansaru-jnim-affiliation",
+   "relation_title": "安萨鲁—JNIM：网络层面的关联",
    "source_entity_id": "actor-ansaru",
    "target_entity_id": "actor-jnim",
+   "relation_type": "affiliated_with",
+   "direction": "unidirectional",
+   "display_ring": "middle",
+   "current_status": "网络层面的关联关系当前有效。",
+   "overview": "ACLED 称安萨鲁在向 AQIM 效忠后加强了与 JNIM 的联系；Africa Center 2026 年材料亦把它描述为与 AQIM／JNIM 联盟有关联。关系强度仅限于现有来源支持的范围。",
    "parties": [
-    "actor-ansaru",
-    "actor-jnim"
+    {
+     "entity_id": "actor-ansaru",
+     "role": "尼日利亚基地组织取向组织"
+    },
+    {
+     "entity_id": "actor-jnim",
+     "role": "萨赫勒基地组织关联联盟"
+    }
    ],
-   "overview": "Ansaru与JNIM存在训练和网络联系，但公开证据不足以把Ansaru定义为JNIM正式组成单元，因此继续使用affiliated_with，不升级constituent_of。",
-   "why_it_matters": "这是观察JNIM/AQIM体系是否更深进入Nigeria的重要桥梁。",
-   "uncertainties": "正式命令关系和人员交换规模不透明。",
-   "relation_maturity": "R1_SIMPLE_SOURCED_RELATION",
+   "formation_background": "在向 AQIM 效忠之后，安萨鲁与同属基地组织体系的 JNIM 之间的联系被公开材料记述为有所加强。",
+   "initial_relationship": "网络层面的关联，未见指挥或建制关系的公开描述。",
+   "evolution_stages": [
+    {
+     "period": "2020 之后",
+     "detail": "ACLED 记述其与 JNIM 的联系加强。"
+    },
+    {
+     "period": "2026",
+     "detail": "Africa Center 材料把安萨鲁描述为与 AQIM／JNIM 联盟有关联。"
+    }
+   ],
+   "causes": [
+    "共同的基地组织阵营归属",
+    "贝宁—尼日尔—尼日利亚三国交界地带的地理连接"
+   ],
+   "key_turning_points": [
+    {
+     "event": "向 AQIM 效忠后联系加强",
+     "impact": "把尼日利亚西北部与萨赫勒 JNIM 体系连接起来。",
+     "source_ids": [
+      "d1-acled-border-triangle-2026"
+     ]
+    }
+   ],
+   "regional_differences": "尼日利亚西北部与萨赫勒南缘、贝宁—尼日尔—尼日利亚三国交界地带。",
+   "impact_on_security": "提高了跨境圣战网络向几内亚湾方向南下扩展的可能性，也使尼日利亚西北部的威胁与萨赫勒局势联动。",
+   "why_it_matters": "这条边是判断跨境圣战网络南向扩展的重要观察点。",
+   "uncertainties": "公开来源只支持「联系加强／有关联」这一层表述，不支持指挥隶属或联合作战的结论。安萨鲁与 JNIM 下属单位（如哈尼法旅）之间是否存在直接合作，现有证据包内没有支撑材料，因此未建立相应关系，已记入未解决依赖清单。",
+   "disputed": false,
+   "temporal_sensitive": true,
    "last_verified_at": "2026-08-09",
    "source_ids": [
+    "d1-acled-border-triangle-2026",
+    "d1-africa-center-threat-2026-04-06",
     "depthb-nctc-ansaru-2025-06"
    ],
-   "current_status": "current"
+   "drivers": [
+    "阵营一致性",
+    "跨境地理连通"
+   ],
+   "constraints": [
+    "缺乏联合行动的公开证据",
+    "安萨鲁领导层遭削弱限制了合作能力"
+   ],
+   "current_assessment": "关联关系当前有效，强度限于网络层面。",
+   "asip_analysis": "这条边应被当作「观察通道」而非「既成事实的联盟」。若未来出现联合行动或人员流动的可核实证据，关系强度与类型都需要重新评估。",
+   "watch_indicators": [
+    "出现联合行动或人员流动的可核实证据",
+    "三国交界地带袭击归属的变化",
+    "安萨鲁与哈尼法旅关系的证据出现"
+   ],
+   "relation_maturity": "R2_DEVELOPED_RELATIONSHIP",
+   "imported_by": "expansion-a"
   },
   "rel-d1-dan-na-jnim-conflict": {
    "relation_id": "rel-d1-dan-na-jnim-conflict",
@@ -4678,18 +4914,90 @@
   },
   "rel-d1-lakurawa-jnim-cooperation": {
    "relation_id": "rel-d1-lakurawa-jnim-cooperation",
-   "relation_type": "cooperates_with",
    "slug": "d1-lakurawa-jnim-cooperation",
+   "relation_title": "Lakurawa—JNIM：尼日利亚官方归属认定与争议",
    "source_entity_id": "actor-lakurawa",
    "target_entity_id": "actor-jnim",
-   "overview": "较早公开研究称部分被称为Lakurawa的单元与JNIM存在合作迹象；不能推广为整个Lakurawa统一组织与JNIM结盟。",
+   "relation_type": "cooperates_with",
+   "direction": "unidirectional",
+   "display_ring": "middle",
+   "current_status": "",
+   "overview": "尼日利亚官方制裁机构在 2025 年 3 月对 Lakurawa Sect 的列名中，把它描述为作为 JNIM 的一部分运作。这是官方立场，与 2026 年 ACLED 指向伊斯兰国萨赫勒省的区域证据冲突，平台保留双方立场。",
+   "parties": [
+    {
+     "entity_id": "actor-lakurawa",
+     "role": "身份存在争议的武装网络"
+    },
+    {
+     "entity_id": "actor-jnim",
+     "role": "萨赫勒基地组织关联联盟"
+    }
+   ],
+   "formation_background": "尼日利亚官方制裁机构 2025 年 3 月的列名同时描述了索科托州与凯比州的活动、跨境外国战斗人员存在、强制性征税、招募、绑架勒索、盗窃牲畜以及建立替代性治理的企图。较早的公开研究亦称部分被称为 Lakurawa 的单元与 JNIM 存在合作迹象。",
+   "initial_relationship": "外部机构对一个边界模糊的地方性武装标签作出的归属判断。",
+   "evolution_stages": [
+    {
+     "period": "2025 之前",
+     "detail": "较早的公开研究记述部分被称为 Lakurawa 的单元与 JNIM 存在合作迹象，但未推广为整体归属。"
+    },
+    {
+     "period": "2025-03",
+     "detail": "尼日利亚官方制裁机构列名并描述其作为 JNIM 的一部分运作。"
+    },
+    {
+     "period": "2026",
+     "detail": "ACLED 的区域证据指向伊斯兰国萨赫勒省方向，与官方归属判断形成冲突。"
+    }
+   ],
+   "causes": [
+    "萨赫勒圣战网络向尼日利亚西北部的南向渗透",
+    "地方标签与跨国网络之间归属判断的困难"
+   ],
+   "key_turning_points": [
+    {
+     "event": "2025 年 3 月尼日利亚官方列名",
+     "impact": "确立官方的 JNIM 归属立场。",
+     "source_ids": [
+      "expa-nigsac-lakurawa-2025-03"
+     ]
+    },
+    {
+     "event": "2026 年区域证据转向",
+     "impact": "官方立场与研究机构评估出现公开冲突，归属问题未决。",
+     "source_ids": [
+      "d1-acled-africa-june-2026",
+      "d1-africa-center-threat-2026-04-06"
+     ]
+    }
+   ],
+   "regional_differences": "尼日利亚索科托州与凯比州及跨境地带。",
+   "impact_on_security": "不同的归属判断会导致完全不同的威胁框架与应对优先级；官方立场也直接影响尼日利亚国内的法律与执法处理。",
+   "why_it_matters": "这是尼日利亚官方对 Lakurawa 归属的正式立场，构成与 ACLED 解读并列的另一条证据线，二者不能相互抵消。",
+   "uncertainties": "该归属为尼日利亚官方制裁机构的认定，属归属性立场，不等于经独立核实的组织隶属事实。2026 年 ACLED 的区域证据指向伊斯兰国萨赫勒省方向，与之冲突。本关系必须与 rel-d1-lakurawa-is-sahel-network 一并阅读；平台保留双方立场，不作单一结论。",
+   "disputed": true,
+   "temporal_sensitive": true,
+   "last_verified_at": "2026-08-09",
    "source_ids": [
+    "expa-nigsac-lakurawa-2025-03",
     "d1-africa-center-threat-2026-04-06"
    ],
-   "current_status": "较早公开研究称部分被称为Lakurawa的单元与JNIM存在合作迹象；不能推广为整个Lakurawa统一组织与JNIM结盟。",
-   "relation_maturity": "R1_SIMPLE_SOURCED_RELATION",
-   "maturity_basis": "R2 default downshifted to R1 — no context/history field; no why-it-matters / uncertainty field",
-   "maturity_assessed_at": "2026-08-09"
+   "drivers": [
+    "官方制裁程序的归属需要",
+    "早期研究中关于合作迹象的记述"
+   ],
+   "constraints": [
+    "与 2026 年区域证据冲突",
+    "Lakurawa 组织边界本身不清晰"
+   ],
+   "current_assessment": "关系记录保留且标记为存在争议。官方立场在案，但不作为唯一结论。",
+   "asip_analysis": "这条边的意义不在于确认 Lakurawa 属于 JNIM，而在于保留一条与主流证据方向相反的官方立场。若删除它，平台就会用后出现的证据抹去先前的官方认定，这在归属类判断上是不可接受的处理方式。",
+   "watch_indicators": [
+    "尼日利亚官方是否更新或撤销其 JNIM 归属描述",
+    "出现能够同时解释两种归属判断的新材料",
+    "JNIM 方面是否对尼日利亚西北部行动作出认领"
+   ],
+   "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+   "imported_by": "expansion-a"
   },
   "rel-d1-lakurawa-jas-cooperation": {
    "relation_id": "rel-d1-lakurawa-jas-cooperation",
@@ -4996,6 +5304,935 @@
    "relation_maturity": "R1_SIMPLE_SOURCED_RELATION",
    "maturity_basis": "R1 default type — straightforward sourced relation",
    "maturity_assessed_at": "2026-08-09"
+  },
+  "rel-expa-shabaab-isis-somalia-rivalry": {
+   "relation_id": "rel-expa-shabaab-isis-somalia-rivalry",
+   "slug": "expa-shabaab-isis-somalia-rivalry",
+   "relation_title": "索马里青年党—伊斯兰国索马里省：同源分裂与阵营对立",
+   "source_entity_id": "actor-al-shabaab",
+   "target_entity_id": "actor-isis-somalia",
+   "relation_type": "fought_against",
+   "direction": "bidirectional",
+   "display_ring": "inner",
+   "current_status": "敌对与阵营对立关系当前有效；双方规模与角色不对称。",
+   "overview": "伊斯兰国索马里省由索马里青年党的叛离人员组成。两个组织因此共享人员谱系，却分属基地组织与伊斯兰国两大全球阵营，形成同源而对立的关系：意识形态互斥、组织竞争招募与资源、地理上分处索马里的南北两端。",
+   "parties": [
+    {
+     "entity_id": "actor-al-shabaab",
+     "role": "基地组织在东非的主要关联组织"
+    },
+    {
+     "entity_id": "actor-isis-somalia",
+     "role": "由青年党叛离人员组成的伊斯兰国分支"
+    }
+   ],
+   "formation_background": "索马里青年党源自 2006 年伊斯兰法庭联盟的军事派系，法庭联盟被逐出权力后延续为自治的叛乱与恐怖组织，并于 2012 年公开效忠基地组织。2014 年后伊斯兰国与基地组织在全球层面分裂，索马里境内随之出现选择伊斯兰国路线的叛离群体。伊斯兰国索马里省正是由这批青年党叛离人员组成，2015 年宣誓效忠伊斯兰国，2018 年获正式承认为分支。",
+   "initial_relationship": "最初表现为青年党内部的路线分歧与人员叛离，而非两个对等组织之间的关系；叛离方在人数与控制区上都远小于母体。",
+   "evolution_stages": [
+    {
+     "period": "2006—2012",
+     "detail": "青年党由伊斯兰法庭联盟军事派系发展为自治叛乱组织，并于 2012 年公开效忠基地组织，确立单一阵营归属。"
+    },
+    {
+     "period": "2015",
+     "detail": "部分青年党成员叛离并宣誓效忠伊斯兰国，索马里境内首次出现分属两大阵营的圣战组织。"
+    },
+    {
+     "period": "2018",
+     "detail": "伊斯兰国正式承认索马里省为分支，叛离群体获得独立的组织身份与外部合法性。"
+    },
+    {
+     "period": "2019—2024",
+     "detail": "两者在索马里不同区域并存：青年党维持中南部主导地位，伊斯兰国索马里省固守邦特兰巴里州戈利斯山区，同时该省在伊斯兰国非洲网络中的财政与协调职能上升。"
+    },
+    {
+     "period": "2025—2026",
+     "detail": "美国国家反恐中心 2025 年 2 月对伊斯兰国索马里省的估计为 700—1,500 名战斗人员，其后邦特兰反恐行动造成显著损失；青年党方面 2026 年 4 月的估计为 7,000—12,000 人，规模差距持续存在。"
+    }
+   ],
+   "causes": [
+    "伊斯兰国与基地组织在全球层面的阵营分裂",
+    "青年党内部对效忠对象与路线的分歧",
+    "叛离群体需要外部承认以建立独立组织身份",
+    "同一国家内对招募人员、资金与地盘的竞争"
+   ],
+   "key_turning_points": [
+    {
+     "event": "2012 年青年党公开效忠基地组织",
+     "impact": "确立青年党的阵营归属，为日后拒绝伊斯兰国路线提供组织依据。",
+     "source_ids": [
+      "expa-nctc-al-shabaab-2026-04"
+     ]
+    },
+    {
+     "event": "2015 年叛离人员宣誓效忠伊斯兰国",
+     "impact": "索马里境内正式出现第二个跨国阵营的武装组织，双方关系由内部分歧转为组织对立。",
+     "source_ids": [
+      "expa-nctc-isis-somalia-2025-02"
+     ]
+    },
+    {
+     "event": "2018 年伊斯兰国承认索马里省为分支",
+     "impact": "叛离群体获得独立身份与外部资源通道，对立关系固化。",
+     "source_ids": [
+      "expa-nctc-isis-somalia-2025-02"
+     ]
+    }
+   ],
+   "regional_differences": "青年党的主要根据地在索马里中南部，并向肯尼亚与埃塞俄比亚延伸；伊斯兰国索马里省集中在邦特兰巴里州的戈利斯山区。两者的核心活动区在地理上基本分离，直接接触面有限。",
+   "impact_on_security": "两个组织的并存使索马里安全形势同时受到两条跨国网络的影响：青年党维持大规模叛乱与强制性地方治理能力，伊斯兰国索马里省则通过财政与协调职能把索马里与非洲其他伊斯兰国分支连接起来。对在索马里及周边活动的人员与项目而言，威胁来源不是单一组织，而是两套并行的武装与勒索体系。",
+   "why_it_matters": "这是索马里境内圣战阵营内部分裂的核心关系。忽略它会把索马里的威胁简化为单一组织，从而误判招募流向、资金通道与反恐行动的实际效果。",
+   "uncertainties": "公开来源确认双方敌对且伊斯兰国索马里省源自青年党叛离，但对两者武装冲突的规模、频率与具体交战记录披露有限。不应据此推断存在稳定战线、常态化交战或可量化的伤亡数据。两个组织的兵力估计分属不同时点，且伊斯兰国索马里省在 2025 年 2 月估计之后经历邦特兰反恐攻势，实际人数处于流动状态。",
+   "disputed": false,
+   "temporal_sensitive": true,
+   "last_verified_at": "2026-08-09",
+   "source_ids": [
+    "expa-nctc-al-shabaab-2026-04",
+    "expa-nctc-isis-somalia-2025-02",
+    "expa-treasury-isis-financing-factsheet-2024-02-27",
+    "expa-treasury-tftc-shabaab-2025-04-14"
+   ],
+   "drivers": [
+    "跨国阵营归属的排他性",
+    "对同一招募池与资金来源的竞争",
+    "外部承认带来的组织合法性收益"
+   ],
+   "constraints": [
+    "双方核心活动区在地理上分离，降低了直接交战频率",
+    "两者同时面对索马里联邦政府、邦特兰当局与外部反恐力量的压力"
+   ],
+   "current_assessment": "关系当前有效。两者规模不对等，青年党在人数与控制范围上占明显优势，伊斯兰国索马里省的重要性主要来自其在伊斯兰国非洲网络中的财政与协调职能，而非本地军事体量。",
+   "asip_analysis": "应把这条关系理解为「同源分裂」而非「两个陌生组织的偶发冲突」。人员谱系上的同源，使双方在招募、情报渗透与叛离风险上互为变量；阵营归属上的对立，则决定了两者难以出现实质性合作。评估索马里威胁时，需要同时跟踪两条线，而不能以青年党的强弱推断伊斯兰国索马里省的走向。",
+   "watch_indicators": [
+    "任一方出现规模性人员叛逃或再叛离",
+    "双方在戈利斯山区或邦特兰边缘地带发生可核实的直接交战",
+    "伊斯兰国索马里省财政职能被削弱或转移至其他非洲节点的迹象",
+    "青年党对伊斯兰国路线支持者的内部清洗行动",
+    "任一方兵力估计出现有明确日期与来源的更新"
+   ],
+   "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+   "imported_by": "expansion-a"
+  },
+  "rel-expa-isis-somalia-isis-branch": {
+   "relation_id": "rel-expa-isis-somalia-isis-branch",
+   "slug": "expa-isis-somalia-isis-branch",
+   "relation_title": "伊斯兰国索马里省—伊斯兰国：2015 年效忠与 2018 年分支承认",
+   "source_entity_id": "actor-isis-somalia",
+   "target_entity_id": "actor-islamic-state",
+   "relation_type": "pledged_allegiance_to",
+   "direction": "bidirectional",
+   "display_ring": "inner",
+   "current_status": "分支关系当前有效（2015 年效忠、2018 年正式承认）。",
+   "overview": "伊斯兰国索马里省 2015 年宣誓效忠伊斯兰国，2018 年获正式承认为分支。这两个日期代表两个不同的组织事件，必须同时保留：前者是叛离群体的单方面效忠，后者是伊斯兰国方面的正式接纳。",
+   "parties": [
+    {
+     "entity_id": "actor-isis-somalia",
+     "role": "伊斯兰国在索马里的分支"
+    },
+    {
+     "entity_id": "actor-islamic-state",
+     "role": "跨国圣战网络核心"
+    }
+   ],
+   "formation_background": "该组织由脱离索马里青年党的人员组成，其成立本身即以转投伊斯兰国为前提。2015 年的效忠宣誓是这一转向的公开表达。",
+   "initial_relationship": "单方面的效忠宣誓。此时伊斯兰国尚未给予正式的分支身份，该群体在伊斯兰国体系中的地位处于待定状态。",
+   "evolution_stages": [
+    {
+     "period": "2015",
+     "detail": "青年党叛离人员宣誓效忠伊斯兰国。"
+    },
+    {
+     "period": "2015—2018",
+     "detail": "效忠已作出但尚未获得正式分支承认的过渡期，公开来源对这一阶段的组织化过程记述有限。"
+    },
+    {
+     "period": "2018",
+     "detail": "伊斯兰国正式承认其为分支，组织身份确立。"
+    },
+    {
+     "period": "2019—2024",
+     "detail": "该分支在伊斯兰国非洲网络中的财政与便利化职能上升。美国财政部报告其 2021 年收入约 250 万美元，2022 年上半年接近 200 万美元，并在后续分析中将其描述为伊斯兰国最重要的财政分支之一。"
+    },
+    {
+     "period": "2025—2026",
+     "detail": "美国国家反恐中心 2025 年 2 月估计其有 700—1,500 名战斗人员；其后邦特兰反恐行动造成显著损失，该估计不应作为无时点的当前兵力使用。"
+    }
+   ],
+   "causes": [
+    "伊斯兰国与基地组织的全球阵营分裂",
+    "叛离群体需要外部承认以确立独立身份",
+    "伊斯兰国在非洲扩展分支网络的策略"
+   ],
+   "key_turning_points": [
+    {
+     "event": "2015 年宣誓效忠",
+     "impact": "确立组织的伊斯兰国阵营归属，与索马里青年党彻底切割。",
+     "source_ids": [
+      "expa-nctc-isis-somalia-2025-02"
+     ]
+    },
+    {
+     "event": "2018 年获正式承认为分支",
+     "impact": "取得伊斯兰国体系内的正式身份，为其后的资源与协调职能提供组织基础。",
+     "source_ids": [
+      "expa-nctc-isis-somalia-2025-02"
+     ]
+    },
+    {
+     "event": "美国财政部对其财政角色的认定",
+     "impact": "确认该分支通过勒索获取收入，并向非洲其他伊斯兰国分支与网络转移资金、指导、外国战斗人员、补给与弹药。",
+     "source_ids": [
+      "expa-treasury-isis-somalia-financier-2023-07-27",
+      "expa-treasury-isis-financing-factsheet-2024-02-27"
+     ]
+    }
+   ],
+   "regional_differences": "活动区集中在索马里邦特兰巴里州的戈利斯山区，但其财政与便利化职能覆盖非洲其他伊斯兰国分支。",
+   "impact_on_security": "使索马里成为伊斯兰国非洲网络的资金与人员中转节点，其影响超出索马里本土安全范畴，波及中部非洲等地的伊斯兰国分支活动能力。",
+   "why_it_matters": "这条关系是理解该分支「体量小、权重大」特征的关键：其在伊斯兰国体系中的地位来自财政与协调职能，而非领土控制或兵力规模。",
+   "uncertainties": "2015 年效忠与 2018 年承认之间的组织化过程在公开来源中缺乏细节。该分支与伊斯兰国核心之间的指挥关系深度亦无公开定论。财政数据来自美国财政部报告，属特定时段的估计，不能外推为持续性年度收入。",
+   "disputed": false,
+   "temporal_sensitive": true,
+   "last_verified_at": "2026-08-09",
+   "source_ids": [
+    "expa-nctc-isis-somalia-2025-02",
+    "expa-treasury-isis-financing-factsheet-2024-02-27",
+    "expa-treasury-isis-somalia-financier-2023-07-27"
+   ],
+   "drivers": [
+    "伊斯兰国的非洲扩展策略",
+    "该分支的财政创收与转移能力",
+    "与索马里青年党切割后的身份需求"
+   ],
+   "constraints": [
+    "邦特兰安全部队的反恐压力",
+    "活动区狭窄，领土扩展空间有限"
+   ],
+   "current_assessment": "分支关系当前有效。其战略价值主要体现在财政与区域协调职能上；兵力规模因 2025 年后的反恐行动处于流动状态，不应使用单一时点数字描述当前实力。",
+   "asip_analysis": "评估这条关系时应把「分支身份」与「实际权重」分开看：分支身份来自 2018 年的正式承认，实际权重来自其在资金、人员与补给流转中的枢纽作用。反恐行动削弱其兵力，未必同步削弱其财政职能，两者需要分别跟踪。",
+   "watch_indicators": [
+    "伊斯兰国方面对该分支地位的公开表述变化",
+    "美国财政部或其他机构对其收入与转移网络的新认定",
+    "邦特兰反恐行动后出现有明确日期的兵力重新估计",
+    "该分支向其他非洲伊斯兰国分支转移资源的通道被切断或改道的迹象"
+   ],
+   "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+   "imported_by": "expansion-a"
+  },
+  "rel-expa-adf-isis-branch": {
+   "relation_id": "rel-expa-adf-isis-branch",
+   "slug": "expa-adf-isis-branch",
+   "relation_title": "民主同盟军（伊斯兰国中非省）—伊斯兰国：从乌干达叛乱到伊斯兰国分支",
+   "source_entity_id": "actor-adf-isis-ca",
+   "target_entity_id": "actor-islamic-state",
+   "relation_type": "affiliated_with",
+   "direction": "bidirectional",
+   "display_ring": "inner",
+   "current_status": "分支关系当前有效；组织历史身份与伊斯兰国身份并存。",
+   "overview": "民主同盟军最初是乌干达的反政府叛乱运动，后长期盘踞刚果民主共和国东部。2019 年伊斯兰国公开承认其为分支，官方命名也从 ISIS-DRC 演变为 ISIS-Central Africa。平台把历史身份与当前伊斯兰国身份保留在同一个规范实体内，而不是拆成两个并列的当前组织。",
+   "parties": [
+    {
+     "entity_id": "actor-adf-isis-ca",
+     "role": "起源于乌干达、盘踞刚果东部的武装组织，现为伊斯兰国分支"
+    },
+    {
+     "entity_id": "actor-islamic-state",
+     "role": "跨国圣战网络核心"
+    }
+   ],
+   "formation_background": "民主同盟军作为反对乌干达政府的叛乱运动出现，此后重心转移到刚果民主共和国东部并在当地扎根。其与伊斯兰国的关系是在这一既有组织基础上逐步建立的，而非新建组织。",
+   "initial_relationship": "前伊斯兰国阶段的民主同盟军是一支本土叛乱力量，其目标、招募与生存方式主要由乌干达—刚果边境地区的政治与地方条件塑造，与跨国圣战网络没有正式组织关系。",
+   "evolution_stages": [
+    {
+     "period": "伊斯兰国之前",
+     "detail": "作为乌干达反政府叛乱运动出现，随后在刚果民主共和国东部扎根，形成长期存在的跨境武装网络。"
+    },
+    {
+     "period": "2019",
+     "detail": "伊斯兰国公开承认该组织为其分支，双方关系由此进入正式阶段。"
+    },
+    {
+     "period": "2019 之后的命名过渡",
+     "detail": "官方与情报机构的称谓从 ISIS-DRC 转向 ISIS-Central Africa，ISCAP 等称谓在不同材料中并行使用。"
+    },
+    {
+     "period": "当前",
+     "detail": "美国国家反恐中心使用「伊斯兰国中非省」名称，描述其为原本的乌干达反政府叛乱、2019 年成为伊斯兰国分支的组织；2025 年 4 月估计规模为 1,000—1,500 人，主要活动区为北基伍与伊图里，并具备在乌干达发动袭击的能力。"
+    }
+   ],
+   "causes": [
+    "伊斯兰国在非洲扩展分支网络的策略",
+    "该组织既有的跨境生存能力与地方根基",
+    "伊斯兰国品牌带来的宣传与外部资源效应"
+   ],
+   "key_turning_points": [
+    {
+     "event": "2019 年伊斯兰国公开承认其为分支",
+     "impact": "组织从本土叛乱力量转变为跨国网络的正式组成部分，宣传与身份认同随之改变。",
+     "source_ids": [
+      "expa-nctc-isis-ca-2025-04"
+     ]
+    },
+    {
+     "event": "官方称谓从 ISIS-DRC 转向 ISIS-Central Africa",
+     "impact": "反映外部机构对其活动范围与组织定位认识的调整，也造成了别名体系的复杂化。",
+     "source_ids": [
+      "expa-nctc-isis-drc-historical",
+      "expa-nctc-isis-ca-2025-04"
+     ]
+    }
+   ],
+   "regional_differences": "核心活动区为刚果民主共和国北基伍省与伊图里省，并具备跨境在乌干达发动袭击的能力。伊斯兰国身份主要体现在宣传与网络归属层面，地方作战方式仍带有原有叛乱组织的特征。",
+   "impact_on_security": "使刚果东部的武装冲突同时具有本地叛乱与跨国圣战网络两重属性，影响该地区平民安全、跨境风险与国际反恐资源的投向。常见战术包括轻武器、简易爆炸装置、迫击炮、火箭筒、屠杀、伏击、绑架与跨境袭击。",
+   "why_it_matters": "这条关系是平台只保留单一规范当前实体的直接依据。若把 ADF 与伊斯兰国中非省建成两个并列的当前组织并以普通关联边相连，会制造两个并不存在的独立组织，属内容包明确禁止的建模方式。",
+   "uncertainties": "从历史民主同盟军网络到伊斯兰国品牌分支的组织转变是渐进的，不同来源的描述并不一致；转变的程度与时点都没有统一结论。公开材料记述的是伊斯兰国方面的承认行为，未给出可核实的公开效忠仪式形式与日期，因此本关系使用 affiliated_with 而非 pledged_allegiance_to。",
+   "disputed": false,
+   "temporal_sensitive": true,
+   "last_verified_at": "2026-08-09",
+   "source_ids": [
+    "expa-nctc-isis-ca-2025-04",
+    "expa-nctc-isis-drc-historical"
+   ],
+   "drivers": [
+    "伊斯兰国的非洲扩展策略",
+    "组织自身的跨境生存能力",
+    "品牌归属带来的宣传收益"
+   ],
+   "constraints": [
+    "刚果与乌干达安全部队及国际部队的持续压力",
+    "地方性的招募与利益结构限制了完全的跨国化"
+   ],
+   "current_assessment": "分支关系当前有效。组织的历史身份与伊斯兰国身份并存，两者不应被拆分为两个实体，也不应用当前身份抹去历史脉络。",
+   "asip_analysis": "判断这个组织时应避免两种极端：一是把它当作纯粹的本地叛乱组织，从而低估其跨国网络属性；二是把它当作伊斯兰国的直属单位，从而高估外部指挥的作用。可确认的是承认关系与品牌归属，不可确认的是转变的深度与指挥链条的实际形态。",
+   "watch_indicators": [
+    "伊斯兰国方面对该分支地位或名称表述的变化",
+    "出现有明确日期与来源的规模重新估计",
+    "跨境袭击范围向乌干达以外扩展的迹象",
+    "外部机构对「ADF 与伊斯兰国中非省是否同一组织」给出更明确的判断"
+   ],
+   "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+   "imported_by": "expansion-a"
+  },
+  "rel-expa-sim-bbmb-linked": {
+   "relation_id": "rel-expa-sim-bbmb-linked",
+   "slug": "expa-sim-bbmb-linked",
+   "relation_title": "苏丹伊斯兰运动—巴拉·本·马利克旅：政治网络与武装力量的关联",
+   "source_entity_id": "actor-sim",
+   "target_entity_id": "actor-bbmb",
+   "relation_type": "part_of_network",
+   "direction": "bidirectional",
+   "display_ring": "inner",
+   "current_status": "关联关系当前有效，主要由美方法律认定与战时阵营一致性支撑。",
+   "overview": "苏丹伊斯兰运动是历史悠久的伊斯兰主义政治网络，巴拉·本·马利克旅是在苏丹战争中作战的武装团体。美国的制裁工具把两者绑定在一起，但两者的组织边界并不因此消失，平台保留为两个独立实体。",
+   "parties": [
+    {
+     "entity_id": "actor-sim",
+     "role": "苏丹伊斯兰主义政治网络"
+    },
+    {
+     "entity_id": "actor-bbmb",
+     "role": "苏丹战争中的伊斯兰主义武装团体"
+    }
+   ],
+   "formation_background": "苏丹伊斯兰运动的根源可上溯数十年，属长期存在的政治网络，不能被改写为 2026 年新设立的恐怖组织。巴拉·本·马利克旅则是 OFAC 记录成立日期为 2020 年 1 月 7 日的武装团体。2023 年苏丹战争爆发后，两者在同一政治—军事阵营中活动，美方随后通过制裁工具把两者的法律地位联系起来。",
+   "initial_relationship": "政治网络与武装团体分属不同性质的组织：前者是政治与社会动员结构，后者是作战单位。两者的关联最初体现在战时阵营的一致性上。",
+   "evolution_stages": [
+    {
+     "period": "2020-01-07",
+     "detail": "OFAC 记录巴拉·本·马利克旅的成立日期，并将其归类为武装团体。"
+    },
+    {
+     "period": "2024",
+     "detail": "欧盟制裁材料把苏丹伊斯兰运动描述为伊斯兰主义团体的广泛联盟，并将阿里·艾哈迈德·卡尔提认定为其秘书长；欧盟同时评估该运动对苏丹武装部队、警察与情报机构具有强影响力。以上均为欧盟判断。"
+    },
+    {
+     "period": "2025-09-12",
+     "detail": "美国财政部依据苏丹相关授权对巴拉·本·马利克旅实施制裁，指出其在苏丹战争中的作用及与伊朗的联系，并称其在对抗快速支援部队的冲突中投入了超过 2 万名战斗人员。"
+    },
+    {
+     "period": "2026-03-09",
+     "detail": "OFAC 把 SUDANESE MUSLIM BROTHERHOOD 列入 SDN 清单，别名包括 SUDANESE ISLAMIC MOVEMENT 与 MUSLIM BROTHERHOOD IN SUDAN，标记 [FTO][SDGT]；同日把巴拉·本·马利克旅条目更新为 [FTO][SDGT][SUDAN-EO14098] 并标注 Linked To: SUDANESE MUSLIM BROTHERHOOD。"
+    }
+   ],
+   "causes": [
+    "2023 年苏丹战争造成的政治—军事阵营重组",
+    "伊斯兰主义政治网络对武装动员的支持作用",
+    "美方以制裁工具处理苏丹伊斯兰主义行为体的政策取向"
+   ],
+   "key_turning_points": [
+    {
+     "event": "2025 年 9 月 12 日美国财政部制裁",
+     "impact": "首次以苏丹相关授权对该旅实施制裁，并公开其战时作用与对伊朗联系的指控。",
+     "source_ids": [
+      "expa-treasury-sudan-islamist-2025-09-12",
+      "expa-ofac-bbmb-2025-09-12"
+     ]
+    },
+    {
+     "event": "2026 年 3 月 9 日 OFAC 清单更新",
+     "impact": "在法律层面把该旅与苏丹穆斯林兄弟会绑定，同时把后者列入 SDN 清单。",
+     "source_ids": [
+      "expa-ofac-smb-bbmb-2026-03-09"
+     ]
+    }
+   ],
+   "regional_differences": "两者的活动均集中在苏丹境内，随战线变化分布于不同战区。公开来源未提供可核实的战区级分工描述。",
+   "impact_on_security": "伊斯兰主义政治网络与武装团体的结合，使苏丹战争中出现有组织的意识形态化动员力量，影响战争持续性与战后政治格局。美方的法律认定也改变了相关方在国际金融体系中的处境。",
+   "why_it_matters": "这条边是理解苏丹战时伊斯兰主义力量结构的核心，也是解释美方法律工具如何把政治网络与武装团体绑定的依据。",
+   "uncertainties": "苏丹伊斯兰运动、苏丹穆斯林兄弟会与历史苏丹穆斯林兄弟会网络之间的组织边界和同一性，在不同政府及研究来源中并不完全一致。美国法律文书中的别名与 Linked To 处理属制裁工具的技术安排，不等于两者为同一组织，也不等于存在指挥隶属关系。「超过 2 万名战斗人员」是美国财政部对该旅的表述，不得转记为苏丹伊斯兰运动／苏丹穆斯林兄弟会自身经核实的人力。关于伊朗革命卫队训练／支持、以及虐待、拘押、酷刑或处决的指控均为美国政府指控，须保持归属。",
+   "disputed": false,
+   "temporal_sensitive": true,
+   "last_verified_at": "2026-08-09",
+   "source_ids": [
+    "expa-ofac-smb-bbmb-2026-03-09",
+    "expa-treasury-sudan-islamist-2025-09-12",
+    "expa-ofac-bbmb-2025-09-12",
+    "expa-eu-karti-2024"
+   ],
+   "drivers": [
+    "战时阵营一致性",
+    "政治网络对武装动员的组织能力",
+    "美方制裁政策的推进"
+   ],
+   "constraints": [
+    "两者性质不同：政治网络与作战单位不能相互替代",
+    "公开来源对两者之间的实际指挥或资源关系披露有限"
+   ],
+   "current_assessment": "关联关系当前有效，主要由美方法律认定与战时阵营一致性支撑。平台保留两个独立实体，因为组织性质不同且身份边界存在公开争议。",
+   "asip_analysis": "这条关系最容易出现的误读，是把制裁文书中的别名与关联标注当成组织同一性的事实认定。正确处理方式是把「法律关联」「战时阵营一致」「组织同一性」三层分开：前两者有公开依据，第三者没有。数据库保留两个实体正是为了不让制裁工具的技术安排替代组织事实判断。",
+   "watch_indicators": [
+    "OFAC 或欧盟对两者关系表述的进一步调整",
+    "出现独立于美方认定的组织关系证据",
+    "苏丹战争阵营结构变化导致该旅地位改变",
+    "关于伊朗支持指控的新增归属性材料"
+   ],
+   "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+   "imported_by": "expansion-a"
+  },
+  "rel-expa-shabaab-alqaida-allegiance": {
+   "relation_id": "rel-expa-shabaab-alqaida-allegiance",
+   "slug": "expa-shabaab-alqaida-allegiance",
+   "relation_title": "索马里青年党—基地组织：2012 年效忠与持续关联",
+   "source_entity_id": "actor-al-shabaab",
+   "target_entity_id": "actor-al-qaida",
+   "relation_type": "pledged_allegiance_to",
+   "direction": "bidirectional",
+   "display_ring": "inner",
+   "current_status": "关联关系当前有效。",
+   "overview": "青年党 2012 年公开效忠基地组织，此后长期被认定为基地组织在东非的主要关联组织。",
+   "parties": [
+    {
+     "entity_id": "actor-al-shabaab",
+     "role": "基地组织东非关联组织"
+    },
+    {
+     "entity_id": "actor-al-qaida",
+     "role": "跨国圣战网络核心"
+    }
+   ],
+   "formation_background": "青年党自伊斯兰法庭联盟军事派系发展为自治叛乱组织后，于 2012 年公开宣誓效忠基地组织。",
+   "initial_relationship": "公开的效忠宣誓，确立阵营归属。",
+   "evolution_stages": [
+    {
+     "period": "2012",
+     "detail": "公开宣誓效忠基地组织。"
+    },
+    {
+     "period": "2026-04",
+     "detail": "美国国家反恐中心仍把青年党描述为基地组织关联组织，其目标为推翻索马里联邦政府、驱逐外国部队并建立原教旨主义伊斯兰国家。"
+    }
+   ],
+   "causes": [
+    "组织的意识形态取向",
+    "跨国网络归属带来的合法性与资源"
+   ],
+   "key_turning_points": [
+    {
+     "event": "2012 年公开效忠",
+     "impact": "确立青年党在基地组织网络中的定位。",
+     "source_ids": [
+      "expa-nctc-al-shabaab-2026-04"
+     ]
+    }
+   ],
+   "regional_differences": "索马里为核心，行动延伸至肯尼亚与埃塞俄比亚。",
+   "impact_on_security": "使东非成为基地组织叙事中的重要战场，并影响国际反恐资源投向。",
+   "why_it_matters": "这是青年党阵营归属的基础事实，也是其与伊斯兰国索马里省对立的意识形态起点。",
+   "uncertainties": "公开来源不足以说明基地组织核心对青年党日常行动的直接指挥程度。",
+   "disputed": false,
+   "temporal_sensitive": true,
+   "last_verified_at": "2026-08-09",
+   "source_ids": [
+    "expa-nctc-al-shabaab-2026-04",
+    "expa-treasury-tftc-shabaab-2025-04-14"
+   ],
+   "drivers": [
+    "意识形态一致性",
+    "跨国品牌的合法性收益"
+   ],
+   "constraints": [
+    "青年党的实际运作高度本地化，外部指挥空间有限"
+   ],
+   "current_assessment": "关联关系当前有效，但应理解为网络归属而非日常指挥关系。",
+   "asip_analysis": "青年党应被视为一个具备强制性地方治理与税收能力的叛乱—行政系统，其基地组织关联是身份与网络层面的，而非行动层面的从属。",
+   "watch_indicators": [
+    "双方公开表述的变化",
+    "青年党对基地组织叙事使用频率的变化"
+   ],
+   "relation_maturity": "R2_DEVELOPED_RELATIONSHIP",
+   "imported_by": "expansion-a"
+  },
+  "rel-expa-isis-somalia-karrar-colocated": {
+   "relation_id": "rel-expa-isis-somalia-karrar-colocated",
+   "slug": "expa-isis-somalia-karrar-colocated",
+   "relation_title": "伊斯兰国索马里省—卡拉尔办公室：同址共处的两个节点",
+   "source_entity_id": "actor-isis-somalia",
+   "target_entity_id": "actor-al-karrar-office",
+   "relation_type": "part_of_network",
+   "direction": "bidirectional",
+   "display_ring": "inner",
+   "current_status": "同址与组织关联关系当前有效。",
+   "overview": "卡拉尔办公室与伊斯兰国索马里省同处一地并在组织上关联，但属伊斯兰国区域管理节点，不是该省的别名。",
+   "parties": [
+    {
+     "entity_id": "actor-isis-somalia",
+     "role": "伊斯兰国在索马里的分支"
+    },
+    {
+     "entity_id": "actor-al-karrar-office",
+     "role": "伊斯兰国区域协调与财政节点"
+    }
+   ],
+   "formation_background": "美国国家反恐中心把卡拉尔办公室描述为由伊斯兰国资深成员组成、负责监督非洲中部、东部与南部伊斯兰国活动的机构；美国财政部把它描述为设在索马里的区域「省份总局」节点，并报告其通过包括涉及南非渠道在内的哈瓦拉网络，向中部非洲的伊斯兰国分支输送资金。",
+   "initial_relationship": "同址共处并共享领导人：阿卜杜勒·卡迪尔·穆明既是伊斯兰国索马里省创始人，也是卡拉尔办公室领导人。",
+   "evolution_stages": [
+    {
+     "period": "当前",
+     "detail": "两个节点同址并存，职能不同：一个是地方分支，一个是区域管理与财政协调机构。"
+    }
+   ],
+   "causes": [
+    "伊斯兰国对非洲分支的区域化管理需要",
+    "索马里既有的资金转移与便利化能力"
+   ],
+   "key_turning_points": [
+    {
+     "event": "美国财政部把卡拉尔认定为区域「省份总局」节点",
+     "impact": "确认其区域管理与资金输送职能，而非单纯的地方组织。",
+     "source_ids": [
+      "expa-treasury-isis-financing-factsheet-2024-02-27"
+     ]
+    }
+   ],
+   "regional_differences": "节点位于索马里，职能覆盖非洲中部、东部与南部。",
+   "impact_on_security": "解释了伊斯兰国索马里省与非洲其他分支之间资金与人员流动的组织通道。",
+   "why_it_matters": "若合并两个实体，会把一个地方分支误写成跨区域指挥机构；若忽略卡拉尔，则非洲各伊斯兰国分支之间的财政联系将无法解释。",
+   "uncertainties": "公开来源不足以确认卡拉尔办公室对各非洲伊斯兰国分支日常战术行动的实际指挥深度。不得据此向其他非洲伊斯兰国分支批量建立「指挥」关系。",
+   "disputed": false,
+   "temporal_sensitive": true,
+   "last_verified_at": "2026-08-09",
+   "source_ids": [
+    "expa-treasury-isis-financing-factsheet-2024-02-27",
+    "expa-nctc-isis-somalia-2025-02",
+    "expa-treasury-isis-somalia-financier-2023-07-27"
+   ],
+   "drivers": [
+    "区域协调需求",
+    "哈瓦拉等非正式资金渠道的可用性"
+   ],
+   "constraints": [
+    "公开信息稀少，职能边界难以精确划定"
+   ],
+   "current_assessment": "关系当前有效。两者共享地理位置与部分领导层，但职能定位不同，必须保持为两个实体。",
+   "asip_analysis": "卡拉尔办公室是解释非洲伊斯兰国分支之间「看似互不相关的资金与协调关系」的必要节点。把它建成独立实体是为了让这些关系有可解释的落点，而不是为了增加图谱密度。",
+   "watch_indicators": [
+    "美国财政部或联合国对卡拉尔职能的新认定",
+    "资金渠道被切断或改道的迹象",
+    "领导层变动导致两个节点关系改变"
+   ],
+   "relation_maturity": "R2_DEVELOPED_RELATIONSHIP",
+   "imported_by": "expansion-a"
+  },
+  "rel-expa-shabaab-diriye-leads": {
+   "relation_id": "rel-expa-shabaab-diriye-leads",
+   "slug": "expa-shabaab-diriye-leads",
+   "relation_title": "索马里青年党—艾哈迈德·迪里耶：埃米尔领导关系",
+   "source_entity_id": "actor-al-shabaab",
+   "target_entity_id": "person-ahmed-diriye",
+   "relation_type": "led_by",
+   "direction": "bidirectional",
+   "display_ring": "outer",
+   "current_status": "自 2014 年起担任最高领导人，关系当前有效。",
+   "overview": "艾哈迈德·迪里耶（化名阿布·乌拜达）自 2014 年起担任青年党埃米尔／最高领导人。",
+   "parties": [
+    {
+     "entity_id": "actor-al-shabaab",
+     "role": "关系一方"
+    },
+    {
+     "entity_id": "person-ahmed-diriye",
+     "role": "关系另一方"
+    }
+   ],
+   "formation_background": "",
+   "initial_relationship": "",
+   "evolution_stages": [],
+   "causes": [],
+   "key_turning_points": [],
+   "regional_differences": "",
+   "impact_on_security": "",
+   "why_it_matters": "领导层身份是判断青年党决策连续性与内部权力结构的基础。",
+   "uncertainties": "其行踪、日常指挥方式与内部权力制衡在公开来源中信息有限。",
+   "disputed": false,
+   "temporal_sensitive": true,
+   "last_verified_at": "2026-08-09",
+   "source_ids": [
+    "expa-nctc-al-shabaab-2026-04"
+   ],
+   "drivers": [],
+   "constraints": [],
+   "current_assessment": "自 2014 年起担任最高领导人，关系当前有效。",
+   "asip_analysis": "迪里耶的长期在位是青年党组织韧性的表现之一：领导层稳定使其在持续反恐压力下仍能维持统一的战略方向。",
+   "watch_indicators": [
+    "领导层更替或死亡传闻",
+    "内部权力斗争的公开迹象"
+   ],
+   "relation_maturity": "R2_DEVELOPED_RELATIONSHIP",
+   "imported_by": "expansion-a"
+  },
+  "rel-expa-isis-somalia-mumin-founder": {
+   "relation_id": "rel-expa-isis-somalia-mumin-founder",
+   "slug": "expa-isis-somalia-mumin-founder",
+   "relation_title": "伊斯兰国索马里省—阿卜杜勒·卡迪尔·穆明：创始人关系",
+   "source_entity_id": "actor-isis-somalia",
+   "target_entity_id": "person-abd-al-qadir-mumin",
+   "relation_type": "founded_by",
+   "direction": "bidirectional",
+   "display_ring": "outer",
+   "current_status": "创始人关系为历史事实；其当前职务重心在卡拉尔办公室。",
+   "overview": "穆明是伊斯兰国索马里省创始人，同时担任卡拉尔办公室领导人。",
+   "parties": [
+    {
+     "entity_id": "actor-isis-somalia",
+     "role": "关系一方"
+    },
+    {
+     "entity_id": "person-abd-al-qadir-mumin",
+     "role": "关系另一方"
+    }
+   ],
+   "formation_background": "",
+   "initial_relationship": "",
+   "evolution_stages": [],
+   "causes": [],
+   "key_turning_points": [],
+   "regional_differences": "",
+   "impact_on_security": "",
+   "why_it_matters": "创始人身份解释了该省与青年党之间的人员谱系，也解释了其区域协调职能的人事基础。",
+   "uncertainties": "其在该省当前日常事务中的具体角色，以及与法希耶的职责边界，在公开来源中并不清晰。",
+   "disputed": false,
+   "temporal_sensitive": true,
+   "last_verified_at": "2026-08-09",
+   "source_ids": [
+    "expa-nctc-isis-somalia-2025-02",
+    "expa-treasury-isis-financing-factsheet-2024-02-27"
+   ],
+   "drivers": [],
+   "constraints": [],
+   "current_assessment": "创始人关系为历史事实；其当前职务重心在卡拉尔办公室。",
+   "asip_analysis": "穆明同时具备「分支创始人」与「区域节点领导人」两重身份，这是伊斯兰国索马里省影响力超出本地体量的人事解释。",
+   "watch_indicators": [
+    "穆明的角色或生死状态出现权威更新",
+    "该省领导结构的公开调整"
+   ],
+   "relation_maturity": "R2_DEVELOPED_RELATIONSHIP",
+   "imported_by": "expansion-a"
+  },
+  "rel-expa-karrar-mumin-leads": {
+   "relation_id": "rel-expa-karrar-mumin-leads",
+   "slug": "expa-karrar-mumin-leads",
+   "relation_title": "卡拉尔办公室—阿卜杜勒·卡迪尔·穆明：领导关系",
+   "source_entity_id": "actor-al-karrar-office",
+   "target_entity_id": "person-abd-al-qadir-mumin",
+   "relation_type": "led_by",
+   "direction": "bidirectional",
+   "display_ring": "outer",
+   "current_status": "领导关系当前有效。",
+   "overview": "美国国家反恐中心与财政部材料将穆明认定为卡拉尔办公室领导人。",
+   "parties": [
+    {
+     "entity_id": "actor-al-karrar-office",
+     "role": "关系一方"
+    },
+    {
+     "entity_id": "person-abd-al-qadir-mumin",
+     "role": "关系另一方"
+    }
+   ],
+   "formation_background": "",
+   "initial_relationship": "",
+   "evolution_stages": [],
+   "causes": [],
+   "key_turning_points": [],
+   "regional_differences": "",
+   "impact_on_security": "",
+   "why_it_matters": "这是把伊斯兰国索马里省的影响力与非洲其他分支连接起来的关键人物节点。",
+   "uncertainties": "其对其他非洲分支的实际权限范围缺乏公开细节，不能推断为直接指挥权。",
+   "disputed": false,
+   "temporal_sensitive": true,
+   "last_verified_at": "2026-08-09",
+   "source_ids": [
+    "expa-treasury-isis-financing-factsheet-2024-02-27",
+    "expa-nctc-isis-somalia-2025-02"
+   ],
+   "drivers": [],
+   "constraints": [],
+   "current_assessment": "领导关系当前有效。",
+   "asip_analysis": "穆明的双重身份使「地方分支」与「区域节点」在人事上重叠，这既是该网络的效率来源，也是其脆弱点。",
+   "watch_indicators": [
+    "穆明地位变动对区域协调职能的影响",
+    "卡拉尔办公室领导层的公开更替"
+   ],
+   "relation_maturity": "R2_DEVELOPED_RELATIONSHIP",
+   "imported_by": "expansion-a"
+  },
+  "rel-expa-isis-somalia-fahiye-leads": {
+   "relation_id": "rel-expa-isis-somalia-fahiye-leads",
+   "slug": "expa-isis-somalia-fahiye-leads",
+   "relation_title": "伊斯兰国索马里省—阿卜迪拉赫曼·法希耶·伊塞：领导关系",
+   "source_entity_id": "actor-isis-somalia",
+   "target_entity_id": "person-abdirahman-fahiye",
+   "relation_type": "led_by",
+   "direction": "bidirectional",
+   "display_ring": "outer",
+   "current_status": "领导关系当前有效，与穆明的区域协调角色并行。",
+   "overview": "法希耶被认定为伊斯兰国索马里省领导人，承担行动层面的领导职责。",
+   "parties": [
+    {
+     "entity_id": "actor-isis-somalia",
+     "role": "关系一方"
+    },
+    {
+     "entity_id": "person-abdirahman-fahiye",
+     "role": "关系另一方"
+    }
+   ],
+   "formation_background": "",
+   "initial_relationship": "",
+   "evolution_stages": [],
+   "causes": [],
+   "key_turning_points": [],
+   "regional_differences": "",
+   "impact_on_security": "",
+   "why_it_matters": "区分法希耶与穆明的职责，才能正确理解「省级行动指挥」与「区域协调节点」两种角色。",
+   "uncertainties": "两人职责的划分方式与生效时间在公开来源中没有统一表述；不应把两人合并为同一人物或同一职位。",
+   "disputed": false,
+   "temporal_sensitive": true,
+   "last_verified_at": "2026-08-09",
+   "source_ids": [
+    "expa-nctc-isis-somalia-2025-02",
+    "expa-treasury-isis-somalia-financier-2023-07-27"
+   ],
+   "drivers": [],
+   "constraints": [],
+   "current_assessment": "领导关系当前有效，与穆明的区域协调角色并行。",
+   "asip_analysis": "法希耶与穆明的分工是该分支「本地作战」与「区域财政」双轨结构的人事体现。",
+   "watch_indicators": [
+    "两人职责表述出现权威更新",
+    "邦特兰反恐行动对该省领导层的影响"
+   ],
+   "relation_maturity": "R2_DEVELOPED_RELATIONSHIP",
+   "imported_by": "expansion-a"
+  },
+  "rel-expa-adf-baluku-leads": {
+   "relation_id": "rel-expa-adf-baluku-leads",
+   "slug": "expa-adf-baluku-leads",
+   "relation_title": "民主同盟军（伊斯兰国中非省）—塞卡·穆萨·巴卢库：领导关系",
+   "source_entity_id": "actor-adf-isis-ca",
+   "target_entity_id": "person-seka-musa-baluku",
+   "relation_type": "led_by",
+   "direction": "bidirectional",
+   "display_ring": "outer",
+   "current_status": "领导关系当前有效。",
+   "overview": "巴卢库是民主同盟军／伊斯兰国中非省的最高领导人；梅迪·恩卡卢博被美国国家反恐中心认定为媒体与袭击指挥人员。",
+   "parties": [
+    {
+     "entity_id": "actor-adf-isis-ca",
+     "role": "关系一方"
+    },
+    {
+     "entity_id": "person-seka-musa-baluku",
+     "role": "关系另一方"
+    }
+   ],
+   "formation_background": "",
+   "initial_relationship": "",
+   "evolution_stages": [],
+   "causes": [],
+   "key_turning_points": [],
+   "regional_differences": "",
+   "impact_on_security": "",
+   "why_it_matters": "领导层的连续性是判断「历史 ADF」与「当前伊斯兰国中非省」为同一组织的重要依据之一。",
+   "uncertainties": "其对各作战单元的实际控制程度，以及与伊斯兰国上级机构的互动方式，在公开来源中信息有限。",
+   "disputed": false,
+   "temporal_sensitive": true,
+   "last_verified_at": "2026-08-09",
+   "source_ids": [
+    "expa-nctc-isis-ca-2025-04"
+   ],
+   "drivers": [],
+   "constraints": [],
+   "current_assessment": "领导关系当前有效。",
+   "asip_analysis": "领导层在身份转换过程中的延续，是平台把该组织保留为单一规范实体的支撑证据之一。",
+   "watch_indicators": [
+    "巴卢库地位变动",
+    "组织内部出现与伊斯兰国身份相关的分裂迹象"
+   ],
+   "relation_maturity": "R2_DEVELOPED_RELATIONSHIP",
+   "imported_by": "expansion-a"
+  },
+  "rel-expa-sim-karti-leads": {
+   "relation_id": "rel-expa-sim-karti-leads",
+   "slug": "expa-sim-karti-leads",
+   "relation_title": "苏丹伊斯兰运动—阿里·艾哈迈德·卡尔提：秘书长关系",
+   "source_entity_id": "actor-sim",
+   "target_entity_id": "person-ali-ahmed-karti",
+   "relation_type": "led_by",
+   "direction": "bidirectional",
+   "display_ring": "outer",
+   "current_status": "领导关系当前有效，依据为欧盟 2024 年列名材料。",
+   "overview": "欧盟 2024 年制裁材料把卡尔提认定为苏丹伊斯兰运动秘书长；他曾任苏丹外交部长，是全国大会党时期要员。",
+   "parties": [
+    {
+     "entity_id": "actor-sim",
+     "role": "关系一方"
+    },
+    {
+     "entity_id": "person-ali-ahmed-karti",
+     "role": "关系另一方"
+    }
+   ],
+   "formation_background": "",
+   "initial_relationship": "",
+   "evolution_stages": [],
+   "causes": [],
+   "key_turning_points": [],
+   "regional_differences": "",
+   "impact_on_security": "",
+   "why_it_matters": "卡尔提是把历史伊斯兰主义政治网络与 2023 年后战时政治格局连接起来的核心人物。",
+   "uncertainties": "欧盟对其政治与安全影响力、以及对过渡进程作用的结论属欧盟判断，须保持归属，不能转写为普遍确立的事实。",
+   "disputed": false,
+   "temporal_sensitive": true,
+   "last_verified_at": "2026-08-09",
+   "source_ids": [
+    "expa-eu-karti-2024",
+    "expa-ofac-smb-bbmb-2026-03-09"
+   ],
+   "drivers": [],
+   "constraints": [],
+   "current_assessment": "领导关系当前有效，依据为欧盟 2024 年列名材料。",
+   "asip_analysis": "卡尔提的价值在于人事连续性：他把 1990 年代以来的伊斯兰主义网络与当前战时政治直接连接，是评估战后权力结构的重要观察对象。",
+   "watch_indicators": [
+    "欧盟或美方对其身份表述的更新",
+    "其在苏丹政治进程中公开角色的变化"
+   ],
+   "relation_maturity": "R2_DEVELOPED_RELATIONSHIP",
+   "imported_by": "expansion-a"
+  },
+  "rel-expa-bbmb-saf-aligned": {
+   "relation_id": "rel-expa-bbmb-saf-aligned",
+   "slug": "expa-bbmb-saf-aligned",
+   "relation_title": "巴拉·本·马利克旅—苏丹武装部队：战时同阵营",
+   "source_entity_id": "actor-bbmb",
+   "target_entity_id": "actor-saf",
+   "relation_type": "allied_with",
+   "direction": "bidirectional",
+   "display_ring": "middle",
+   "current_status": "战时同阵营关系当前有效。",
+   "overview": "美国财政部 2025 年 9 月称该旅在对抗快速支援部队的冲突中投入了超过 2 万名战斗人员，与苏丹武装部队处于同一阵营。",
+   "parties": [
+    {
+     "entity_id": "actor-bbmb",
+     "role": "关系一方"
+    },
+    {
+     "entity_id": "actor-saf",
+     "role": "关系另一方"
+    }
+   ],
+   "formation_background": "",
+   "initial_relationship": "",
+   "evolution_stages": [],
+   "causes": [],
+   "key_turning_points": [],
+   "regional_differences": "",
+   "impact_on_security": "",
+   "why_it_matters": "这条边解释了伊斯兰主义武装动员如何进入苏丹正规军的作战体系。",
+   "uncertainties": "「超过 2 万名战斗人员」是美国财政部的表述，属归属性陈述，不得转记为该旅经核实的常备兵力；双方在指挥关系上的实际整合程度亦缺乏公开细节。",
+   "disputed": false,
+   "temporal_sensitive": true,
+   "last_verified_at": "2026-08-09",
+   "source_ids": [
+    "expa-treasury-sudan-islamist-2025-09-12",
+    "expa-ofac-bbmb-2025-09-12"
+   ],
+   "drivers": [],
+   "constraints": [],
+   "current_assessment": "战时同阵营关系当前有效。",
+   "asip_analysis": "同阵营不等于被编入建制。评估苏丹战后军事结构时，需要把这类意识形态化动员力量与正规军序列分开处理。",
+   "watch_indicators": [
+    "该旅与苏丹武装部队关系的公开表述变化",
+    "关于其兵力的新增归属性表述"
+   ],
+   "relation_maturity": "R2_DEVELOPED_RELATIONSHIP",
+   "imported_by": "expansion-a"
+  },
+  "rel-expa-bbmb-rsf-hostile": {
+   "relation_id": "rel-expa-bbmb-rsf-hostile",
+   "slug": "expa-bbmb-rsf-hostile",
+   "relation_title": "巴拉·本·马利克旅—快速支援部队：战场对抗",
+   "source_entity_id": "actor-bbmb",
+   "target_entity_id": "actor-rsf",
+   "relation_type": "fought_against",
+   "direction": "bidirectional",
+   "display_ring": "middle",
+   "current_status": "战场对抗关系当前有效。",
+   "overview": "该旅在 2023 年爆发的苏丹战争中与快速支援部队作战。",
+   "parties": [
+    {
+     "entity_id": "actor-bbmb",
+     "role": "关系一方"
+    },
+    {
+     "entity_id": "actor-rsf",
+     "role": "关系另一方"
+    }
+   ],
+   "formation_background": "",
+   "initial_relationship": "",
+   "evolution_stages": [],
+   "causes": [],
+   "key_turning_points": [],
+   "regional_differences": "",
+   "impact_on_security": "",
+   "why_it_matters": "这是苏丹战争中伊斯兰主义武装参战的直接体现，影响冲突持续性与谈判可能性。",
+   "uncertainties": "其参战规模主要来自美国财政部的归属性表述；具体战区分布与战斗序列缺乏公开可核实的细节。",
+   "disputed": false,
+   "temporal_sensitive": true,
+   "last_verified_at": "2026-08-09",
+   "source_ids": [
+    "expa-treasury-sudan-islamist-2025-09-12"
+   ],
+   "drivers": [],
+   "constraints": [],
+   "current_assessment": "战场对抗关系当前有效。",
+   "asip_analysis": "意识形态化武装的加入通常会提高冲突的持续性并压缩妥协空间，这一变量在评估苏丹战争走向时不应被忽略。",
+   "watch_indicators": [
+    "双方交战强度变化",
+    "该旅参战规模出现新的权威表述"
+   ],
+   "relation_maturity": "R2_DEVELOPED_RELATIONSHIP",
+   "imported_by": "expansion-a"
   }
  },
  "note": "I3-B: second wave of deepened relationship histories (Mali/Burkina/Cameroon/Ethiopia/Tanzania networks)."

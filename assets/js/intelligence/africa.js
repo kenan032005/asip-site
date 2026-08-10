@@ -56,7 +56,12 @@
     predecessors: "前身组成", political_character: "政治性质", jnim_relation: "与JNIM的关系",
     mali_role: "在马里的角色", strength: "兵力估计", human_rights: "人权与争议", formation: "形成",
     jnim_integration: "JNIM整合", social_dynamics: "社会动力", tactics_governance: "战术与治理",
-    ideology_objectives: "意识形态与目标"
+    ideology_objectives: "意识形态与目标",
+    // EXPANSION A: previously unregistered keys. `uncertainties` carried authored
+    // content on 51 entities but was never rendered; `asip_analysis` and
+    // `watch_indicators` have dedicated partitions but produced empty TOC anchors.
+    uncertainties: "不确定性与信息缺口", asip_analysis: "ASIP 分析", watch_indicators: "后续观察指标",
+    network_links: "网络关联与外部联系"
   };
   const MATURITY_LABELS = {
     E0_STUB: "E0 存目", E1_BASIC: "E1 基础档案", E2_DEVELOPED: "E2 较完整档案", E3_FULL_ENCYCLOPEDIA: "E3 旗舰百科",
@@ -316,7 +321,7 @@
         if (profile.cooperation_dimensions && profile.cooperation_dimensions.length) html += '<section class="profile-section"><h2>合作维度</h2><ul>' + profile.cooperation_dimensions.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
         if (profile.continuities && profile.continuities.length) html += '<section class="profile-section"><h2>连续性</h2><ul>' + profile.continuities.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
         if (profile.differences && profile.differences.length) html += '<section class="profile-section"><h2>差异</h2><ul>' + profile.differences.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
-        if (profile.causes && profile.causes.length) html += '<section class="profile-section"><h2>形成原因</h2><ul>' + profile.causes.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
+        // EXPANSION A: this block was duplicated verbatim, rendering "形成原因" twice on every relation page that has causes.
         if (profile.causes && profile.causes.length) html += '<section class="profile-section"><h2>形成原因</h2><ul>' + profile.causes.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
         if (profile.key_turning_points && profile.key_turning_points.length) html += '<section class="profile-section"><h2>关键转折</h2><ul>' + profile.key_turning_points.map(function (x) { return '<li><b>' + esc(x.event) + '</b><p>' + esc(x.impact) + '</p></li>'; }).join("") + '</ul></section>';
         if (profile.current_status) html += '<section class="profile-section"><h2>当前状态</h2><p>' + esc(profile.current_status) + '</p></section>';
