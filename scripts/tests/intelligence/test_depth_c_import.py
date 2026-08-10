@@ -35,9 +35,9 @@ non_country = [e for e in entities if e["entity_type"] != "country"]
 
 print("== TEST 1: no count expansion ==")
 check("countries=13", len(countries) == 13, f"got {len(countries)}")
-check("entities=83", len(non_country) == 83, f"got {len(non_country)} (72 baseline + 11 Expansion A)")
-check("relationships=164", len(rels) == 164, f"got {len(rels)} (150 baseline + 14 Expansion A)")
-check("routes=274", metrics.get("route_count") == 274, f"got {metrics.get('route_count')} (249 + 11 entities + 14 relations)")
+check("entities=94", len(non_country) == 94, f"got {len(non_country)} (83 + 11 Expansion B)")
+check("relationships=181", len(rels) == 181, f"got {len(rels)} (164 + 17 Expansion B)")
+check("routes=302", metrics.get("route_count") == 302, f"got {metrics.get('route_count')} (274 + 11 entities + 17 relations)")
 
 print("== TEST 2: Dozo network separation ==")
 dan = json.dumps(ep.get("actor-dan-na-ambassagou", {}).get("sections", {}), ensure_ascii=False)

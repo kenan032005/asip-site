@@ -43,7 +43,7 @@ def validate():
     if len(rids) != len(set(rids)): fail("duplicate region id")
     if len({e["slug"] for e in entities}) != len(entities): fail("duplicate entity slug")
     if len(rels) < 60: fail(f"relations < 60: {len(rels)}")
-    if len(rels) > 220: fail(f"relations > 220: {len(rels)}")  # I3-D1: 78 -> 121 (Sahel); Expansion A: 164
+    if len(rels) > 260: fail(f"relations > 260: {len(rels)}")  # Expansion B: 181
     if len({r["relationship_id"] for r in rels}) != len(rels): fail("duplicate relation id")
     if len(evidence) < 60: fail(f"evidence < 60: {len(evidence)}")
     if len(sources) < 25: fail(f"sources < 25: {len(sources)}")
