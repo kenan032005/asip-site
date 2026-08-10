@@ -1,0 +1,406 @@
+{
+ "package_id": "ASIP-PPT-ENTITY-EXPANSION-B",
+ "imported_at": "2026-08-10",
+ "steps": {
+  "dedup_audit": {
+   "artifact": "EXPANSION_B_PRE_IMPORT_DEDUP_AUDIT",
+   "generated_at": "2026-08-10",
+   "candidates": [
+    {
+     "candidate": "AUSSOM",
+     "dedup_vs": [
+      "actor-aussom",
+      "AMISOM",
+      "ATMIS"
+     ],
+     "decision": "NEW",
+     "evidence": "no existing AUSSOM/AMISOM/ATMIS entity node; predecessor chain recorded in history text"
+    },
+    {
+     "candidate": "SNAF",
+     "dedup_vs": [
+      "actor-somali-national-armed-forces",
+      "Somali National Army",
+      "SNA"
+     ],
+     "decision": "NEW",
+     "evidence": "no existing Somali armed forces node; SNA kept as alias"
+    },
+    {
+     "candidate": "Puntland Security Forces",
+     "dedup_vs": [
+      "actor-puntland-security-forces",
+      "PSF"
+     ],
+     "decision": "NEW",
+     "evidence": "no existing node; umbrella-label modeling per pack section 4"
+    },
+    {
+     "candidate": "FARDC",
+     "dedup_vs": [
+      "actor-fardc",
+      "actor-fardc",
+      "Congolese armed forces"
+     ],
+     "decision": "NEW",
+     "evidence": "no existing DRC armed forces node"
+    },
+    {
+     "candidate": "UPDF",
+     "dedup_vs": [
+      "actor-updf",
+      "Uganda armed forces"
+     ],
+     "decision": "NEW",
+     "evidence": "no existing Uganda armed forces node"
+    },
+    {
+     "candidate": "MONUSCO",
+     "dedup_vs": [
+      "actor-monusco",
+      "MONUC"
+     ],
+     "decision": "NEW",
+     "evidence": "no existing node; MONUC kept as historical name"
+    },
+    {
+     "candidate": "IRGC",
+     "dedup_vs": [
+      "actor-irgc",
+      "actor-iran"
+     ],
+     "decision": "NEW",
+     "evidence": "no existing Iran/IRGC node in the Africa graph; Expansion A deferred it"
+    },
+    {
+     "candidate": "Mahad Karate",
+     "dedup_vs": [
+      "person-mahad-karate"
+     ],
+     "decision": "NEW",
+     "evidence": "no existing node; alias Abdirahman Mohammed Warsame also absent"
+    },
+    {
+     "candidate": "Abdiweli Mohamed Yusuf",
+     "dedup_vs": [
+      "person-abdiweli-mohamed-yusuf"
+     ],
+     "decision": "NEW",
+     "evidence": "no existing node"
+    },
+    {
+     "candidate": "Meddie/Mohamed Ali Nkalubo",
+     "dedup_vs": [
+      "person-meddie-nkalubo"
+     ],
+     "decision": "NEW",
+     "evidence": "no existing node; Expansion A recorded as deferred supporting person"
+    },
+    {
+     "candidate": "Abu Zaid Talha al-Misbah",
+     "dedup_vs": [
+      "person-abu-zaid-talha"
+     ],
+     "decision": "NEW",
+     "evidence": "no existing node; Expansion A recorded DEFER_FOR_CONTENT_PACK_2; pack B supplies EU source"
+    }
+   ],
+   "carryover": [
+    {
+     "entity": "person-abdirahman-fahiye",
+     "decision": "ENRICH_EXISTING_UPGRADE",
+     "from": "standard/E2",
+     "to": "encyclopedia_full/E3"
+    },
+    {
+     "entity": "actor-ansaru",
+     "decision": "ENRICH_EXISTING (already encyclopedia_full/E3, confirmed)"
+    },
+    {
+     "entity": "actor-lakurawa",
+     "decision": "ENRICH_EXISTING (already encyclopedia_full/E3, confirmed)"
+    }
+   ],
+   "note": "stable existing IDs preferred; no duplicates created for pack-suggested IDs"
+  },
+  "sources": {
+   "candidates": 19,
+   "added": [
+    "expb-unsc-2767-2024",
+    "expb-au-aussom-psc-2026-07",
+    "expb-aussom-snaf-recover-cities",
+    "expb-aussom-snaf-capture",
+    "expb-unsos-interop-2026-05",
+    "expb-un-panel-s2025-777",
+    "expb-updf-shujaa-review",
+    "expb-updf-shujaa-strike",
+    "expb-monusco-fardc-ituri",
+    "expb-un-monusco-factsheet",
+    "expb-unsc-2808-2025",
+    "expb-un-sg-adf-2025-11-22",
+    "expb-ofac-fahiye-2022-11-01",
+    "expb-treasury-jy1066-2022-11-01",
+    "expb-treasury-jy1028-karate-2022",
+    "expb-state-sdgt-karate-2015-04-10",
+    "expb-ofac-yusuf-2023-07-27",
+    "expb-un-nkalubo-listing",
+    "expb-eu-2026-251-talha"
+   ],
+   "reused": [
+    "d2-un-s2026-44",
+    "expa-treasury-isis-somalia-financier-2023-07-27",
+    "depthb-nctc-ansaru-2025-06",
+    "d1-acled-africa-june-2026",
+    "expa-nigsac-lakurawa-2025-03",
+    "expa-nctc-al-shabaab-2026-04",
+    "expa-nctc-isis-somalia-2025-02",
+    "expa-nctc-isis-ca-2025-04",
+    "expa-treasury-sudan-islamist-2025-09-12",
+    "expa-ofac-bbmb-2025-09-12",
+    "expa-eu-karti-2024"
+   ],
+   "mapping": {
+    "expb-unsc-2767-2024": {
+     "actual_source_id": "expb-unsc-2767-2024",
+     "matched_by": "new"
+    },
+    "expb-au-aussom-psc-2026-07": {
+     "actual_source_id": "expb-au-aussom-psc-2026-07",
+     "matched_by": "new"
+    },
+    "expb-aussom-snaf-recover-cities": {
+     "actual_source_id": "expb-aussom-snaf-recover-cities",
+     "matched_by": "new"
+    },
+    "expb-aussom-snaf-capture": {
+     "actual_source_id": "expb-aussom-snaf-capture",
+     "matched_by": "new"
+    },
+    "expb-unsos-interop-2026-05": {
+     "actual_source_id": "expb-unsos-interop-2026-05",
+     "matched_by": "new"
+    },
+    "expb-un-panel-s2025-777": {
+     "actual_source_id": "expb-un-panel-s2025-777",
+     "matched_by": "new"
+    },
+    "expb-updf-shujaa-review": {
+     "actual_source_id": "expb-updf-shujaa-review",
+     "matched_by": "new"
+    },
+    "expb-updf-shujaa-strike": {
+     "actual_source_id": "expb-updf-shujaa-strike",
+     "matched_by": "new"
+    },
+    "expb-monusco-fardc-ituri": {
+     "actual_source_id": "expb-monusco-fardc-ituri",
+     "matched_by": "new"
+    },
+    "expb-un-monusco-factsheet": {
+     "actual_source_id": "expb-un-monusco-factsheet",
+     "matched_by": "new"
+    },
+    "expb-unsc-2808-2025": {
+     "actual_source_id": "expb-unsc-2808-2025",
+     "matched_by": "new"
+    },
+    "expb-un-sg-adf-2025-11-22": {
+     "actual_source_id": "expb-un-sg-adf-2025-11-22",
+     "matched_by": "new"
+    },
+    "expb-ofac-fahiye-2022-11-01": {
+     "actual_source_id": "expb-ofac-fahiye-2022-11-01",
+     "matched_by": "new"
+    },
+    "expb-treasury-jy1066-2022-11-01": {
+     "actual_source_id": "expb-treasury-jy1066-2022-11-01",
+     "matched_by": "new"
+    },
+    "expb-treasury-jy1028-karate-2022": {
+     "actual_source_id": "expb-treasury-jy1028-karate-2022",
+     "matched_by": "new"
+    },
+    "expb-state-sdgt-karate-2015-04-10": {
+     "actual_source_id": "expb-state-sdgt-karate-2015-04-10",
+     "matched_by": "new"
+    },
+    "expb-ofac-yusuf-2023-07-27": {
+     "actual_source_id": "expb-ofac-yusuf-2023-07-27",
+     "matched_by": "new"
+    },
+    "expb-un-nkalubo-listing": {
+     "actual_source_id": "expb-un-nkalubo-listing",
+     "matched_by": "new"
+    },
+    "expb-eu-2026-251-talha": {
+     "actual_source_id": "expb-eu-2026-251-talha",
+     "matched_by": "new"
+    }
+   }
+  },
+  "new_entities": {
+   "added": [
+    "actor-aussom",
+    "actor-somali-national-armed-forces",
+    "actor-puntland-security-forces",
+    "actor-fardc",
+    "actor-updf",
+    "actor-monusco",
+    "actor-irgc",
+    "person-mahad-karate",
+    "person-abdiweli-mohamed-yusuf",
+    "person-meddie-nkalubo",
+    "person-abu-zaid-talha"
+   ],
+   "count": 11
+  },
+  "carryover_fahiye": {
+   "status": "UPGRADED",
+   "from": "standard/E2",
+   "to": "encyclopedia_full/E3",
+   "sections": 15,
+   "zh_chars": 1041
+  },
+  "new_relationships": {
+   "added": [
+    "rel-expb-shabaab-aussom-conflict",
+    "rel-expb-shabaab-snaf-conflict",
+    "rel-expb-aussom-snaf-cooperation",
+    "rel-expb-isis-somalia-puntland-conflict",
+    "rel-expb-shabaab-karate-led",
+    "rel-expb-isis-somalia-yusuf-led",
+    "rel-expb-mumin-yusuf-reporting",
+    "rel-expb-fahiye-yusuf-reporting",
+    "rel-expb-adf-fardc-conflict",
+    "rel-expb-adf-updf-conflict",
+    "rel-expb-fardc-updf-shujaa",
+    "rel-expb-monusco-adf-countering",
+    "rel-expb-monusco-fardc-cooperation",
+    "rel-expb-adf-nkalubo-led",
+    "rel-expb-bbmb-irgc-support",
+    "rel-expb-bbmb-talha-led",
+    "rel-expb-talha-saf-allied"
+   ],
+   "count": 17
+  },
+  "evidence": {
+   "imported": 17,
+   "detail": [
+    {
+     "claim_id": "cl-expb-shabaab-aussom-conflict",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expb-r001",
+     "verification_status": "verified_reported_findings"
+    },
+    {
+     "claim_id": "cl-expb-shabaab-snaf-conflict",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expb-r002",
+     "verification_status": "verified_reported_findings"
+    },
+    {
+     "claim_id": "cl-expb-aussom-snaf-cooperation",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expb-r003",
+     "verification_status": "verified_reported_findings"
+    },
+    {
+     "claim_id": "cl-expb-isis-somalia-puntland-conflict",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expb-r004",
+     "verification_status": "verified_reported_findings"
+    },
+    {
+     "claim_id": "cl-expb-shabaab-karate-led",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expb-r005",
+     "verification_status": "verified"
+    },
+    {
+     "claim_id": "cl-expb-isis-somalia-yusuf-led",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expb-r006",
+     "verification_status": "partially_verified"
+    },
+    {
+     "claim_id": "cl-expb-mumin-yusuf-reporting",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expb-r007",
+     "verification_status": "partially_verified"
+    },
+    {
+     "claim_id": "cl-expb-fahiye-yusuf-reporting",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expb-r008",
+     "verification_status": "partially_verified"
+    },
+    {
+     "claim_id": "cl-expb-adf-fardc-conflict",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expb-r009",
+     "verification_status": "partially_verified"
+    },
+    {
+     "claim_id": "cl-expb-adf-updf-conflict",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expb-r010",
+     "verification_status": "partially_verified"
+    },
+    {
+     "claim_id": "cl-expb-fardc-updf-shujaa",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expb-r011",
+     "verification_status": "partially_verified"
+    },
+    {
+     "claim_id": "cl-expb-monusco-adf-countering",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expb-r012",
+     "verification_status": "verified_reported_findings"
+    },
+    {
+     "claim_id": "cl-expb-monusco-fardc-cooperation",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expb-r013",
+     "verification_status": "verified_reported_findings"
+    },
+    {
+     "claim_id": "cl-expb-adf-nkalubo-led",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expb-r014",
+     "verification_status": "verified_reported_findings"
+    },
+    {
+     "claim_id": "cl-expb-bbmb-irgc-support",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expb-r015",
+     "verification_status": "partially_verified"
+    },
+    {
+     "claim_id": "cl-expb-bbmb-talha-led",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expb-r016",
+     "verification_status": "verified"
+    },
+    {
+     "claim_id": "cl-expb-talha-saf-allied",
+     "status": "IMPORTED",
+     "evidence_id": "ev-expb-r017",
+     "verification_status": "verified"
+    }
+   ]
+  },
+  "country_dependency": 3
+ },
+ "final_scale": {
+  "countries": 13,
+  "non_country_entities": 94,
+  "relationships": 181,
+  "sources": 221,
+  "evidence": 358,
+  "relation_profiles": 181,
+  "relation_timelines": 73,
+  "routes": 302,
+  "standard_depth_profiles": 43
+ }
+}

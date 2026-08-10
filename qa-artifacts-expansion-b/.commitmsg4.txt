@@ -1,0 +1,13 @@
+qa(expansion-b): regression runner, browser/link QA tooling, audits and acceptance artifacts
+
+- expansion_b_regression.py: runs all intelligence tests (incl. expansion_b_gate)
+  + local-path guard + repo integrity; restores the historical
+  qa-artifacts-i3b-fix1c/local-path-scan.json artifact post-run
+- expansion_b_browser_qa.js + exp_a_static_server.js: 31-page CDP browser QA
+  (14 entity pages incl. fahiye upgrade + 12 relation pages) - gate PASS
+- expansion_b_link_qa.js: 337-page/1956-link network QA - 0 dead links
+- expansion_b_scope_audit.py: OUT_OF_SCOPE_CHANGED_FILES = 0
+- expansion_b_final_acceptance.py: 162 PASS / 0 FAIL / FACT_SEMANTIC_ERRORS = 0
+- qa-artifacts-expansion-b/: pre-import dedup audit + backup, import plan/report,
+  entity/relationship/source-evidence summaries, semantic audit, final counts,
+  country-dependency summary, test-results, browser/link QA JSON, acceptance report

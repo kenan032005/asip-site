@@ -1,0 +1,121 @@
+{
+ "artifact": "EXPANSION_B_PRE_IMPORT_DEDUP_AUDIT",
+ "generated_at": "2026-08-10",
+ "candidates": [
+  {
+   "candidate": "AUSSOM",
+   "dedup_vs": [
+    "actor-aussom",
+    "AMISOM",
+    "ATMIS"
+   ],
+   "decision": "NEW",
+   "evidence": "no existing AUSSOM/AMISOM/ATMIS entity node; predecessor chain recorded in history text"
+  },
+  {
+   "candidate": "SNAF",
+   "dedup_vs": [
+    "actor-somali-national-armed-forces",
+    "Somali National Army",
+    "SNA"
+   ],
+   "decision": "NEW",
+   "evidence": "no existing Somali armed forces node; SNA kept as alias"
+  },
+  {
+   "candidate": "Puntland Security Forces",
+   "dedup_vs": [
+    "actor-puntland-security-forces",
+    "PSF"
+   ],
+   "decision": "NEW",
+   "evidence": "no existing node; umbrella-label modeling per pack section 4"
+  },
+  {
+   "candidate": "FARDC",
+   "dedup_vs": [
+    "actor-fardc",
+    "actor-fardc",
+    "Congolese armed forces"
+   ],
+   "decision": "NEW",
+   "evidence": "no existing DRC armed forces node"
+  },
+  {
+   "candidate": "UPDF",
+   "dedup_vs": [
+    "actor-updf",
+    "Uganda armed forces"
+   ],
+   "decision": "NEW",
+   "evidence": "no existing Uganda armed forces node"
+  },
+  {
+   "candidate": "MONUSCO",
+   "dedup_vs": [
+    "actor-monusco",
+    "MONUC"
+   ],
+   "decision": "NEW",
+   "evidence": "no existing node; MONUC kept as historical name"
+  },
+  {
+   "candidate": "IRGC",
+   "dedup_vs": [
+    "actor-irgc",
+    "actor-iran"
+   ],
+   "decision": "NEW",
+   "evidence": "no existing Iran/IRGC node in the Africa graph; Expansion A deferred it"
+  },
+  {
+   "candidate": "Mahad Karate",
+   "dedup_vs": [
+    "person-mahad-karate"
+   ],
+   "decision": "NEW",
+   "evidence": "no existing node; alias Abdirahman Mohammed Warsame also absent"
+  },
+  {
+   "candidate": "Abdiweli Mohamed Yusuf",
+   "dedup_vs": [
+    "person-abdiweli-mohamed-yusuf"
+   ],
+   "decision": "NEW",
+   "evidence": "no existing node"
+  },
+  {
+   "candidate": "Meddie/Mohamed Ali Nkalubo",
+   "dedup_vs": [
+    "person-meddie-nkalubo"
+   ],
+   "decision": "NEW",
+   "evidence": "no existing node; Expansion A recorded as deferred supporting person"
+  },
+  {
+   "candidate": "Abu Zaid Talha al-Misbah",
+   "dedup_vs": [
+    "person-abu-zaid-talha"
+   ],
+   "decision": "NEW",
+   "evidence": "no existing node; Expansion A recorded DEFER_FOR_CONTENT_PACK_2; pack B supplies EU source"
+  }
+ ],
+ "carryover": [
+  {
+   "entity": "person-abdirahman-fahiye",
+   "decision": "ENRICH_EXISTING_UPGRADE",
+   "from": "standard/E2",
+   "to": "encyclopedia_full/E3"
+  },
+  {
+   "entity": "actor-ansaru",
+   "decision": "ENRICH_EXISTING (already encyclopedia_full/E3, confirmed)"
+  },
+  {
+   "entity": "actor-lakurawa",
+   "decision": "ENRICH_EXISTING (already encyclopedia_full/E3, confirmed)"
+  }
+ ],
+ "note": "stable existing IDs preferred; no duplicates created for pack-suggested IDs"
+}

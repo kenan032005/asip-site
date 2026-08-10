@@ -1,0 +1,36 @@
+{
+ "schema_version": "asip-intelligence-africa-v1.0",
+ "package": "ASIP-PPT-ENTITY-EXPANSION-B",
+ "generated_at": "2026-08-10",
+ "note": "内容包 §15：不得创建薄国家页；Somalia/DRC/Uganda 等国家节点缺失时登记为 EXPANSION_B_COUNTRY_DEPENDENCY，由后续专门内容包处理。",
+ "dependencies": [
+  {
+   "country": "Somalia",
+   "needed_for": [
+    "actor-aussom",
+    "actor-somali-national-armed-forces",
+    "actor-puntland-security-forces",
+    "actor-al-shabaab",
+    "actor-isis-somalia"
+   ],
+   "status": "EXPANSION_B_COUNTRY_DEPENDENCY"
+  },
+  {
+   "country": "Democratic Republic of the Congo",
+   "needed_for": [
+    "actor-fardc",
+    "actor-monusco",
+    "actor-adf-isis-ca"
+   ],
+   "status": "EXPANSION_B_COUNTRY_DEPENDENCY"
+  },
+  {
+   "country": "Uganda",
+   "needed_for": [
+    "actor-updf",
+    "actor-adf-isis-ca"
+   ],
+   "status": "EXPANSION_B_COUNTRY_DEPENDENCY"
+  }
+ ]
+}
