@@ -243,6 +243,111 @@
   const SOURCE_CAT_LABELS = { authoritative_official: "官方权威来源", international_org: "国际组织来源", research_institutional: "研究机构来源", media_other: "媒体与其他", other: "其他来源" };
   function relIsDisputed(r) { return !!(r.disputed || r.confidence === "disputed" || (store.relationProfiles[r.relationship_id] || {}).disputed); }
   function relIsHistorical(r) { return String(r.current_status || "").indexOf("historical") >= 0 || r.freshness_status === "historical"; }
+
+  // ============================================================
+  // UI/UX V2 Fix-1: exact canonical/alias auto-linking.
+  // Presentation-only. Matches ONLY known canonical names /
+  // registered aliases from the existing entity index + alias_index;
+  // longest-name-first, boundary-checked, denylisted, ambiguity-safe.
+  // No fuzzy / substring / semantic guessing, no data modification.
+  // ============================================================
+  const AUTO_LINK_DENYLIST = {
+    "is": 1, "the": 1, "in": 1, "of": 1, "a": 1, "an": 1, "and": 1, "for": 1,
+    "on": 1, "at": 1, "to": 1, "da": 1, "de": 1, "di": 1, "al": 1, "el": 1,
+    "la": 1, "le": 1, "les": 1, "des": 1, "du": 1, "au": 1, "aux": 1, "ibn": 1,
+    "bin": 1, "bint": 1, "abu": 1, "abd": 1, "ben": 1, "the": 1, "state": 1,
+    "movement": 1, "force": 1, "forces": 1, "front": 1, "army": 1
+  };
+  let AUTO_LINK_NAMES = [];
+  function buildAutoLinkIndex() {
+    const seen = {};
+    const add = function (name, e) {
+      if (!name || typeof name !== "string") return;
+      name = name.trim();
+      if (name.length < 2) return;
+      const key = name.toLowerCase();
+      if (AUTO_LINK_DENYLIST[key]) return;
+      if (/^\d+$/.test(key)) return;
+      if (!seen[key]) seen[key] = { name: name, entity: e, ambiguous: false };
+      else if (seen[key].entity && seen[key].entity.entity_id !== e.entity_id) seen[key].ambiguous = true;
+    };
+    store.entities.forEach(function (e) {
+      add(e.name_zh, e);
+      add(e.name_en, e);
+      add(e.acronym, e);
+      add(e.native_name, e);
+      (e.aliases || []).forEach(function (a) { add(a, e); });
+    });
+    Object.keys(store.aliases || {}).forEach(function (a) {
+      const e = store.byEntityId[store.aliases[a]];
+      if (e) add(a, e);
+    });
+    const list = [];
+    Object.keys(seen).forEach(function (key) {
+      const v = seen[key];
+      if (v.ambiguous) return;                 // ambiguity protection: skip conflicted aliases
+      const isCJK = /[\u4e00-\u9fff]/.test(v.name);
+      if (v.name.length < (isCJK ? 2 : 3)) return;  // too-short guard (non-CJK >= 3 chars)
+      list.push({ key: key, name: v.name, entity: v.entity });
+    });
+    // longest-name-first so "ISIS-Somalia" wins over "ISIS"
+    list.sort(function (a, b) { return b.name.length - a.name.length; });
+    AUTO_LINK_NAMES = list;
+  }
+  function autoLinkExact(text) {
+    if (!text || !AUTO_LINK_NAMES.length) return text == null ? "" : String(text);
+    // protect URLs first (never link entity names inside URLs)
+    const urls = [];
+    let t = String(text).replace(/(?:https?:\/\/|www\.)[^\s<>"'()]+|\b(?:[a-z0-9-]+\.){2,}[a-z]{2,}(?:\/[^\s<>"'()]*)?/gi, function (m) { urls.push(m); return "\u0000U" + (urls.length - 1) + "\u0000"; });
+    // protect machine ids (actor-*/rel-*/country-* etc, hyphens included) from substring hits
+    const ids = [];
+    t = t.replace(/\b(?:actor|rel|country|region|person|claim|evidence|source|ev)-[a-z0-9_-]+/gi, function (m) { ids.push(m); return "\u0000I" + (ids.length - 1) + "\u0000"; });
+    const n = t.length;
+    const alpha = /[A-Za-z0-9]/;
+    const nameStart = /[A-Za-z0-9\u4e00-\u9fff]/;
+    let out = "";
+    let i = 0;
+    while (i < n) {
+      const ch = t[i];
+      if (ch === "\u0000") { out += ch; i++; continue; }
+      if (!nameStart.test(ch)) { out += ch; i++; continue; }
+      const rem = n - i;
+      let hit = null;
+      for (let k = 0; k < AUTO_LINK_NAMES.length; k++) {
+        const cand = AUTO_LINK_NAMES[k];
+        if (cand.name.length > rem) continue;
+        if (t.slice(i, i + cand.name.length).toLowerCase() !== cand.key) continue;
+        const isCJK = /[\u4e00-\u9fff]/.test(cand.name);
+        if (!isCJK) {
+          const before = i > 0 ? t[i - 1] : "";
+          const after = i + cand.name.length < n ? t[i + cand.name.length] : "";
+          if ((before && alpha.test(before)) || (after && alpha.test(after))) continue;
+        }
+        hit = cand;
+        break;
+      }
+      if (hit) {
+        out += '<a class="intel-entity-link auto" href="' + esc(entityHref(hit.entity.entity_id)) + '">' + esc(t.slice(i, i + hit.name.length)) + '</a>';
+        i += hit.name.length;
+      } else {
+        out += ch;
+        i++;
+      }
+    }
+    out = out.replace(/\u0000U(\d+)\u0000/g, function (m, d) { return urls[+d]; });
+    out = out.replace(/\u0000I(\d+)\u0000/g, function (m, d) { return ids[+d]; });
+    return out;
+  }
+  // relation-page text renderer: explicit [[...]] markers first (existing
+  // inlineLinks renderer, already-linked content is never re-linked), then
+  // exact auto-linking on the remaining plain segments.
+  function renderRelationText(text) {
+    if (text == null) return "";
+    return String(text).split(/(\[\[(?:entity|country|region|relation):[^|\]]+\|[^\]]*\]\])/g).map(function (seg) {
+      if (seg.indexOf("[[") === 0) return inlineLinks(seg);
+      return autoLinkExact(seg);
+    }).join("");
+  }
   function entityLink(id, label) { const e = store.byEntityId[id]; if (!e) return esc(label || id); return '<a class="intel-entity-link" href="' + esc(entityHref(id)) + '">' + esc(label || title(e)) + '</a>'; }
   // I3-D1: relation endpoints may reference a region (e.g. rel-d1-fu-aes-region -> region-central-sahel);
   // titleFor() falls back to the region display name or the raw id instead of calling title(undefined).
@@ -573,44 +678,44 @@
         rhRow("争议", relIsDisputed(rel) ? '<span class="intel-badge disputed">争议</span>' : "否") +
         '</div>' + partyCard(t);
     }
-    const ov = document.querySelector("#relationOverview"); if (ov) ov.innerHTML = '<p class="intel-lead">' + inlineLinks(esc(profile ? (profile.overview || profile.relationship_summary || rel.relation_summary) : rel.relation_summary)) + '</p>';
+    const ov = document.querySelector("#relationOverview"); if (ov) ov.innerHTML = '<p class="intel-lead">' + renderRelationText(esc(profile ? (profile.overview || profile.relationship_summary || rel.relation_summary) : rel.relation_summary)) + '</p>';
     const body = document.querySelector("#relationBody"); if (body) {
       let html = "";
       if (profile) {
         // evolution stages support both {period,title,description} and {period,detail}
-        const stageHtml = function (x) { const t = x.title || x.detail || ""; const d = x.description || x.detail || ""; return '<li><b>' + inlineLinks(esc(x.period + (t && t !== x.period ? " · " + t : ""))) + '</b>' + (d ? '<p>' + inlineLinks(esc(d)) + '</p>' : '') + '</li>'; };
-        if (profile.formation_background) html += '<section class="profile-section"><h2>关系形成背景</h2><p>' + inlineLinks(esc(profile.formation_background)) + '</p></section>';
-        if (profile.initial_relationship) html += '<section class="profile-section"><h2>双方最初的关系</h2><p>' + inlineLinks(esc(profile.initial_relationship)) + '</p></section>';
+        const stageHtml = function (x) { const t = x.title || x.detail || ""; const d = x.description || x.detail || ""; return '<li><b>' + renderRelationText(esc(x.period + (t && t !== x.period ? " · " + t : ""))) + '</b>' + (d ? '<p>' + renderRelationText(esc(d)) + '</p>' : '') + '</li>'; };
+        if (profile.formation_background) html += '<section class="profile-section"><h2>关系形成背景</h2><p>' + renderRelationText(esc(profile.formation_background)) + '</p></section>';
+        if (profile.initial_relationship) html += '<section class="profile-section"><h2>双方最初的关系</h2><p>' + renderRelationText(esc(profile.initial_relationship)) + '</p></section>';
         if (profile.evolution_stages && profile.evolution_stages.length) html += '<section class="profile-section"><h2>历史演变阶段</h2><ul>' + profile.evolution_stages.map(stageHtml).join("") + '</ul></section>';
         if (profile.nature && typeof profile.nature === "object") {
-          html += '<section class="profile-section"><h2>关系性质</h2><ul class="intel-bullets">' + Object.keys(profile.nature).filter(function (k) { return k !== "type"; }).map(function (k) { return '<li><b>' + esc(k) + '</b>：' + inlineLinks(esc(Array.isArray(profile.nature[k]) ? profile.nature[k].join("、") : profile.nature[k])) + '</li>'; }).join("") + '</ul></section>';
+          html += '<section class="profile-section"><h2>关系性质</h2><ul class="intel-bullets">' + Object.keys(profile.nature).filter(function (k) { return k !== "type"; }).map(function (k) { return '<li><b>' + esc(k) + '</b>：' + renderRelationText(esc(Array.isArray(profile.nature[k]) ? profile.nature[k].join("、") : profile.nature[k])) + '</li>'; }).join("") + '</ul></section>';
         }
-        if (profile.drivers && profile.drivers.length) html += '<section class="profile-section"><h2>驱动因素</h2><ul>' + profile.drivers.map(function (x) { return '<li>' + inlineLinks(esc(x)) + '</li>'; }).join("") + '</ul></section>';
+        if (profile.drivers && profile.drivers.length) html += '<section class="profile-section"><h2>驱动因素</h2><ul>' + profile.drivers.map(function (x) { return '<li>' + renderRelationText(esc(x)) + '</li>'; }).join("") + '</ul></section>';
         if (profile.constraints) {
-          if (typeof profile.constraints === "string") html += '<section class="profile-section"><h2>约束条件</h2><p>' + inlineLinks(esc(profile.constraints)) + '</p></section>';
-          else if (profile.constraints.length) html += '<section class="profile-section"><h2>约束条件</h2><ul>' + profile.constraints.map(function (x) { return '<li>' + inlineLinks(esc(x)) + '</li>'; }).join("") + '</ul></section>';
+          if (typeof profile.constraints === "string") html += '<section class="profile-section"><h2>约束条件</h2><p>' + renderRelationText(esc(profile.constraints)) + '</p></section>';
+          else if (profile.constraints.length) html += '<section class="profile-section"><h2>约束条件</h2><ul>' + profile.constraints.map(function (x) { return '<li>' + renderRelationText(esc(x)) + '</li>'; }).join("") + '</ul></section>';
         }
-        if (profile.third_party_effects && profile.third_party_effects.length) html += '<section class="profile-section"><h2>第三方影响</h2><ul>' + profile.third_party_effects.map(function (x) { return '<li>' + inlineLinks(esc(x)) + '</li>'; }).join("") + '</ul></section>';
-        if (profile.personnel_flows) html += '<section class="profile-section"><h2>人员流动</h2><p>' + inlineLinks(esc(profile.personnel_flows)) + '</p></section>';
-        if (profile.cooperation_dimensions && profile.cooperation_dimensions.length) html += '<section class="profile-section"><h2>合作维度</h2><ul>' + profile.cooperation_dimensions.map(function (x) { return '<li>' + inlineLinks(esc(x)) + '</li>'; }).join("") + '</ul></section>';
-        if (profile.continuities && profile.continuities.length) html += '<section class="profile-section"><h2>连续性</h2><ul>' + profile.continuities.map(function (x) { return '<li>' + inlineLinks(esc(x)) + '</li>'; }).join("") + '</ul></section>';
-        if (profile.differences && profile.differences.length) html += '<section class="profile-section"><h2>差异</h2><ul>' + profile.differences.map(function (x) { return '<li>' + inlineLinks(esc(x)) + '</li>'; }).join("") + '</ul></section>';
+        if (profile.third_party_effects && profile.third_party_effects.length) html += '<section class="profile-section"><h2>第三方影响</h2><ul>' + profile.third_party_effects.map(function (x) { return '<li>' + renderRelationText(esc(x)) + '</li>'; }).join("") + '</ul></section>';
+        if (profile.personnel_flows) html += '<section class="profile-section"><h2>人员流动</h2><p>' + renderRelationText(esc(profile.personnel_flows)) + '</p></section>';
+        if (profile.cooperation_dimensions && profile.cooperation_dimensions.length) html += '<section class="profile-section"><h2>合作维度</h2><ul>' + profile.cooperation_dimensions.map(function (x) { return '<li>' + renderRelationText(esc(x)) + '</li>'; }).join("") + '</ul></section>';
+        if (profile.continuities && profile.continuities.length) html += '<section class="profile-section"><h2>连续性</h2><ul>' + profile.continuities.map(function (x) { return '<li>' + renderRelationText(esc(x)) + '</li>'; }).join("") + '</ul></section>';
+        if (profile.differences && profile.differences.length) html += '<section class="profile-section"><h2>差异</h2><ul>' + profile.differences.map(function (x) { return '<li>' + renderRelationText(esc(x)) + '</li>'; }).join("") + '</ul></section>';
         // EXPANSION A: this block was duplicated verbatim, rendering "形成原因" twice on every relation page that has causes.
-        if (profile.causes && profile.causes.length) html += '<section class="profile-section"><h2>形成原因</h2><ul>' + profile.causes.map(function (x) { return '<li>' + inlineLinks(esc(x)) + '</li>'; }).join("") + '</ul></section>';
-        if (profile.key_turning_points && profile.key_turning_points.length) html += '<section class="profile-section"><h2>关键转折</h2><ul>' + profile.key_turning_points.map(function (x) { return '<li><b>' + inlineLinks(esc(x.event)) + '</b><p>' + inlineLinks(esc(x.impact)) + '</p></li>'; }).join("") + '</ul></section>';
-        if (profile.current_status) html += '<section class="profile-section"><h2>当前状态</h2><p>' + inlineLinks(esc(profile.current_status)) + '</p></section>';
-        if (profile.current_assessment && profile.current_assessment !== profile.current_status) html += '<section class="profile-section"><h2>当前评估</h2><p>' + inlineLinks(esc(profile.current_assessment)) + '</p></section>';
-        if (profile.regional_differences) html += '<section class="profile-section"><h2>地区差异</h2><p>' + inlineLinks(esc(profile.regional_differences)) + '</p></section>';
-        if (profile.impact_on_security) html += '<section class="profile-section"><h2>对区域安全的影响</h2><p>' + inlineLinks(esc(profile.impact_on_security)) + '</p></section>';
-        if (profile.why_it_matters) html += '<section class="profile-section"><h2>为什么重要</h2><p>' + inlineLinks(esc(profile.why_it_matters)) + '</p></section>';
-        if (profile.uncertainties) html += '<section class="profile-section uncertainty-partition"><div class="intel-uncertainty-card"><h2>不确定性与争议 <span class="intel-sem-chip uncertainty">UNCERTAINTY</span></h2><p>' + inlineLinks(esc(profile.uncertainties)) + '</p></div></section>';
-        if (profile.organizational_balance) html += '<section class="profile-section"><h2>组织平衡</h2><p>' + inlineLinks(esc(profile.organizational_balance)) + '</p></section>';
-        if (profile.role) html += '<section class="profile-section"><h2>角色</h2><p>' + inlineLinks(esc(profile.role)) + '</p></section>';
-        if (profile.asip_analysis) html += '<section class="profile-section analysis-partition"><div class="intel-analysis-card"><h2>ASIP Analysis · 平台分析 <span class="intel-sem-chip institutional">ASIP ANALYSIS</span></h2><p>' + inlineLinks(esc(profile.asip_analysis)) + '</p></div></section>';
-        if (profile.watch_indicators && profile.watch_indicators.length) html += '<section class="profile-section watch-partition"><div class="intel-watch-card"><h2>Watch Indicators · 后续观察指标 <span class="intel-sem-chip uncertainty">WATCH</span></h2><ul>' + profile.watch_indicators.map(function (x) { return '<li>' + inlineLinks(esc(x)) + '</li>'; }).join("") + '</ul></div></section>';
+        if (profile.causes && profile.causes.length) html += '<section class="profile-section"><h2>形成原因</h2><ul>' + profile.causes.map(function (x) { return '<li>' + renderRelationText(esc(x)) + '</li>'; }).join("") + '</ul></section>';
+        if (profile.key_turning_points && profile.key_turning_points.length) html += '<section class="profile-section"><h2>关键转折</h2><ul>' + profile.key_turning_points.map(function (x) { return '<li><b>' + renderRelationText(esc(x.event)) + '</b><p>' + renderRelationText(esc(x.impact)) + '</p></li>'; }).join("") + '</ul></section>';
+        if (profile.current_status) html += '<section class="profile-section"><h2>当前状态</h2><p>' + renderRelationText(esc(profile.current_status)) + '</p></section>';
+        if (profile.current_assessment && profile.current_assessment !== profile.current_status) html += '<section class="profile-section"><h2>当前评估</h2><p>' + renderRelationText(esc(profile.current_assessment)) + '</p></section>';
+        if (profile.regional_differences) html += '<section class="profile-section"><h2>地区差异</h2><p>' + renderRelationText(esc(profile.regional_differences)) + '</p></section>';
+        if (profile.impact_on_security) html += '<section class="profile-section"><h2>对区域安全的影响</h2><p>' + renderRelationText(esc(profile.impact_on_security)) + '</p></section>';
+        if (profile.why_it_matters) html += '<section class="profile-section"><h2>为什么重要</h2><p>' + renderRelationText(esc(profile.why_it_matters)) + '</p></section>';
+        if (profile.uncertainties) html += '<section class="profile-section uncertainty-partition"><div class="intel-uncertainty-card"><h2>不确定性与争议 <span class="intel-sem-chip uncertainty">UNCERTAINTY</span></h2><p>' + renderRelationText(esc(profile.uncertainties)) + '</p></div></section>';
+        if (profile.organizational_balance) html += '<section class="profile-section"><h2>组织平衡</h2><p>' + renderRelationText(esc(profile.organizational_balance)) + '</p></section>';
+        if (profile.role) html += '<section class="profile-section"><h2>角色</h2><p>' + renderRelationText(esc(profile.role)) + '</p></section>';
+        if (profile.asip_analysis) html += '<section class="profile-section analysis-partition"><div class="intel-analysis-card"><h2>ASIP Analysis · 平台分析 <span class="intel-sem-chip institutional">ASIP ANALYSIS</span></h2><p>' + renderRelationText(esc(profile.asip_analysis)) + '</p></div></section>';
+        if (profile.watch_indicators && profile.watch_indicators.length) html += '<section class="profile-section watch-partition"><div class="intel-watch-card"><h2>Watch Indicators · 后续观察指标 <span class="intel-sem-chip uncertainty">WATCH</span></h2><ul>' + profile.watch_indicators.map(function (x) { return '<li>' + renderRelationText(esc(x)) + '</li>'; }).join("") + '</ul></div></section>';
       } else {
-        html += '<section class="profile-section"><h2>关系概述</h2><p>' + inlineLinks(esc(rel.relation_summary)) + '</p></section>';
-        html += '<section class="profile-section"><h2>当前状态</h2><p>' + inlineLinks(esc(rel.current_status_detail || rel.current_status)) + '</p></section>';
+        html += '<section class="profile-section"><h2>关系概述</h2><p>' + renderRelationText(esc(rel.relation_summary)) + '</p></section>';
+        html += '<section class="profile-section"><h2>当前状态</h2><p>' + renderRelationText(esc(rel.current_status_detail || rel.current_status)) + '</p></section>';
       }
       body.innerHTML = html;
     }
@@ -619,12 +724,12 @@
       // UI/UX V2: current-phase banner uses existing profile fields only (no inference).
       if (profile && (profile.current_status || profile.current_assessment)) {
         const cur = (profile.current_assessment && profile.current_assessment !== profile.current_status) ? profile.current_assessment : profile.current_status;
-        tlHtml += '<div class="rtl-current-banner"><b>当前阶段</b>：' + inlineLinks(esc(cur)) + '</div>';
+        tlHtml += '<div class="rtl-current-banner"><b>当前阶段</b>：' + renderRelationText(esc(cur)) + '</div>';
       }
       tlHtml += (timeline.length ? '<div class="rtl-h">' + timeline.map(function (x) {
-        return '<div class="rtl-stage-card"><span class="rtl-phase">' + esc(x.date) + '</span><h3>' + inlineLinks(esc(x.event_title)) + '</h3>' +
-          (x.event_description ? '<p>' + inlineLinks(esc(x.event_description)) + '</p>' : '') +
-          (x.impact_on_relationship ? '<p class="rtl-impact"><b>对关系的影响：</b>' + inlineLinks(esc(x.impact_on_relationship)) + '</p>' : '') +
+        return '<div class="rtl-stage-card"><span class="rtl-phase">' + esc(x.date) + '</span><h3>' + renderRelationText(esc(x.event_title)) + '</h3>' +
+          (x.event_description ? '<p>' + renderRelationText(esc(x.event_description)) + '</p>' : '') +
+          (x.impact_on_relationship ? '<p class="rtl-impact"><b>对关系的影响：</b>' + renderRelationText(esc(x.impact_on_relationship)) + '</p>' : '') +
           '<p class="rtl-meta">可信度：' + esc(confLabel(x.confidence)) + ' · 来源：' + sourceList(x.source_ids) + '</p></div>';
       }).join("") + '</div>' : '<p class="muted">暂无已核验时间轴条目。</p>');
       tl.innerHTML = tlHtml;
@@ -879,11 +984,12 @@
     bind(); draw();
   }
 
-  window.ASIP_AFRICA = { store: store, title: title, typeLabel: typeLabel, relLabel: relLabel, impLabel: impLabel, riskLabel: riskLabel, confLabel: confLabel, entityHref: entityHref, countryHref: countryHref, regionHref: regionHref, relationHref: relationHref, networkHref: networkHref, entityLink: entityLink, sourceLink: sourceLink, esc: esc };
+  window.ASIP_AFRICA = { store: store, title: title, typeLabel: typeLabel, relLabel: relLabel, impLabel: impLabel, riskLabel: riskLabel, confLabel: confLabel, entityHref: entityHref, countryHref: countryHref, regionHref: regionHref, relationHref: relationHref, networkHref: networkHref, entityLink: entityLink, sourceLink: sourceLink, esc: esc, autoLinkExact: autoLinkExact, buildAutoLinkIndex: buildAutoLinkIndex };
   renderTopbar(); renderFooter();
   const loadSignal = beginLoad();
-  loadJson("regions.json", loadSignal).then(function (r) { store.regions = r.regions; r.regions.forEach(function (x) { store.byRegionId[x.region_id] = x; }); return loadJson("countries.json", loadSignal); }).then(function (c) { store.countries = c.countries; c.countries.forEach(function (x) { store.byCountryId[x.country_id] = x; }); return loadJson("entities.json", loadSignal); }).then(function (e) { store.entities = e.entities; e.entities.forEach(function (x) { store.byEntityId[x.entity_id] = x; store.byEntitySlug[x.slug] = x; }); return loadJson("relationships.json", loadSignal); }).then(function (r) { store.relationships = r.relationships; r.relationships.forEach(function (x) { store.byRelId[x.relationship_id] = x; if (x.slug) store.byRelId[x.slug] = x; });     return Promise.all([loadJson("sources.json", loadSignal), loadJson("evidence_records.json", loadSignal), loadJson("relation_profiles.json", loadSignal), loadJson("relation_timelines.json", loadSignal), loadJson("force_estimates.json", loadSignal), loadJson("external_links.json", loadSignal), loadJson("entity_profiles.json", loadSignal), loadJson("country_profiles.json", loadSignal), loadJson("catalog_metrics.json", loadSignal), loadJson("audit_records.json", loadSignal)]); }).then(function (items) {
-    store.sources = items[0].sources; store.evidence = items[1].evidence; store.relationProfiles = items[2].profiles || {}; store.relationTimelines = items[3].timelines || {}; store.forceEstimates = items[4].estimates || {}; store.externalLinks = items[5].links || {}; store.entityProfiles = items[6].profiles || {}; store.countryProfiles = items[7].profiles || {}; store.metrics = items[8] || null; store.audit = (items[9] && items[9].records) || [];
+  loadJson("regions.json", loadSignal).then(function (r) { store.regions = r.regions; r.regions.forEach(function (x) { store.byRegionId[x.region_id] = x; }); return loadJson("countries.json", loadSignal); }).then(function (c) { store.countries = c.countries; c.countries.forEach(function (x) { store.byCountryId[x.country_id] = x; }); return loadJson("entities.json", loadSignal); }).then(function (e) { store.entities = e.entities; e.entities.forEach(function (x) { store.byEntityId[x.entity_id] = x; store.byEntitySlug[x.slug] = x; }); return loadJson("relationships.json", loadSignal); }).then(function (r) { store.relationships = r.relationships; r.relationships.forEach(function (x) { store.byRelId[x.relationship_id] = x; if (x.slug) store.byRelId[x.slug] = x; });     return Promise.all([loadJson("sources.json", loadSignal), loadJson("evidence_records.json", loadSignal), loadJson("relation_profiles.json", loadSignal), loadJson("relation_timelines.json", loadSignal), loadJson("force_estimates.json", loadSignal), loadJson("external_links.json", loadSignal), loadJson("entity_profiles.json", loadSignal), loadJson("country_profiles.json", loadSignal), loadJson("catalog_metrics.json", loadSignal), loadJson("audit_records.json", loadSignal), loadJson("alias_index.json", loadSignal)]); }).then(function (items) {
+    store.sources = items[0].sources; store.evidence = items[1].evidence; store.relationProfiles = items[2].profiles || {}; store.relationTimelines = items[3].timelines || {}; store.forceEstimates = items[4].estimates || {}; store.externalLinks = items[5].links || {}; store.entityProfiles = items[6].profiles || {}; store.countryProfiles = items[7].profiles || {}; store.metrics = items[8] || null; store.audit = (items[9] && items[9].records) || []; store.aliases = (items[10] && items[10].aliases) || {};
+    buildAutoLinkIndex();
     // merge countries into the unified entity table (one ID per entity)
     store.countries.forEach(function (c) {
       if (!store.byEntityId[c.country_id]) {
