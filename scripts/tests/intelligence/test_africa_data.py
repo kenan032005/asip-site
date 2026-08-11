@@ -40,8 +40,8 @@ def main():
     # counts
     if len(regions) < 7: fail(f"regions<7: {len(regions)}")
     if len(countries) < 12: fail(f"countries<12: {len(countries)}")
-    if not (30 <= len(entities) <= 120): fail(f"entities={len(entities)} outside 30-120 (Expansion B: 94)")
-    if not (60 <= len(rels) <= 260): fail(f"relations={len(rels)} outside 60-260 (Expansion B: 181)")
+    if not (30 <= len(entities) <= 140): fail(f"entities={len(entities)} outside 30-140 (Expansion C: 102)")
+    if not (60 <= len(rels) <= 300): fail(f"relations={len(rels)} outside 60-300 (Expansion C: 192)")
     if len(sources) < 25: fail(f"sources<25: {len(sources)}")
     if len(evidence) < 60: fail(f"evidence<60: {len(evidence)}")
     if len(profiles) < 8: fail(f"profiles<8: {len(profiles)}")
