@@ -1,0 +1,87 @@
+{
+  "baseline": "feature/asip-intelligence-uiux-v2 @ f663949 (UIUX_V2_FIX1 = PASS)",
+  "generated_at": "2026-08-11T21:45:00+03:00",
+  "method": "canonical entity index + alias_index (393) + name_zh/name_en/acronym/aliases/historical_names + existing relationships checked before any write",
+  "decisions": [
+    {
+      "candidate": "Egyptian Islamic Jihad (EIJ)",
+      "proposed_id": "actor-egyptian-islamic-jihad",
+      "ruling": "NEW",
+      "basis": "not present in repository; content pack provides UN narrative + U.S. State historical reporting sufficient for encyclopedia_full"
+    },
+    {
+      "candidate": "Armed Islamic Group (GIA)",
+      "proposed_id": "actor-gia",
+      "ruling": "NEW",
+      "basis": "not present; UN GIA narrative + UN AQIM narrative support encyclopedia_full"
+    },
+    {
+      "candidate": "Salafist Group for Preaching and Combat (GSPC)",
+      "proposed_id": "actor-gspc",
+      "ruling": "HISTORICAL_PHASE / ALIAS_ONLY of AQIM",
+      "basis": "no independent node exists; alias_index already maps gspc -> actor-aqim; actor-aqim aliases already include 'GSPC' and historical_names include '萨拉菲宣教与战斗组织（GSPC，前身）'. AQIM is modeled as the same organizational continuity (1998 GSPC founding -> 2007 AQIM renaming). No duplicate node created. PPT GSPC entity covered via AQIM historical chapter + timeline + aliases."
+    },
+    {
+      "candidate": "Al-Itihaad al-Islamiya (AIAI)",
+      "proposed_id": "actor-aiai",
+      "ruling": "NEW",
+      "basis": "not present; UN AIAI narrative + UN Panel S/2016/919, S/2017/924 support encyclopedia_full"
+    },
+    {
+      "candidate": "Tunisian Combatant Group (TCG)",
+      "proposed_id": "actor-tunisian-combatant-group",
+      "ruling": "NEW",
+      "basis": "not present; UN TCG + UN al-Maaroufi + U.S. State historical support encyclopedia_full"
+    },
+    {
+      "candidate": "Moroccan Islamic Combatant Group (GICM)",
+      "proposed_id": "actor-gicm",
+      "ruling": "NEW",
+      "basis": "not present; UN GICM + UN LIFG + U.S. State 2002/2007 support encyclopedia_full"
+    },
+    {
+      "candidate": "Al-Battar / Battar Brigade",
+      "proposed_id": "actor-al-battar-brigade",
+      "ruling": "NEW",
+      "basis": "not present; UN Panel S/2015/891 + CTC Sentinel support encyclopedia_full"
+    },
+    {
+      "candidate": "Maitatsine movement",
+      "proposed_id": "actor-maitatsine-movement",
+      "ruling": "NEW",
+      "basis": "not present; academic literature (Adesoji, Isichei, Hiskett, Lubeck) supports encyclopedia_full as historical movement; NO lineage edge to Boko Haram"
+    },
+    {
+      "candidate": "MUJAO",
+      "proposed_id": "actor-mujao",
+      "ruling": "NEW",
+      "basis": "not present; UN consolidated references + NCTC historical (al-Murabitun 2013 merger account) support encyclopedia_full"
+    },
+    {
+      "candidate": "AQIM",
+      "canonical_id": "actor-aqim",
+      "ruling": "ENRICH_EXISTING",
+      "basis": "exists (encyclopedia_full, 21 sections); enrich with GIA->GSPC->AQIM continuity chapter, Sahara Emirate, MUJAO/al-Mulathamun/ISIS-aligned splits, 2012 northern Mali role, Droukdel succession, 2026 posture"
+    },
+    {
+      "candidate": "Ansar al-Dine",
+      "canonical_id": "actor-ansar-eddine",
+      "ruling": "ENRICH_EXISTING",
+      "basis": "exists (encyclopedia_full, 17 sections); enrich with 2011 formation detail, mid-2012 AQIM association, 2013 French intervention displacement, 2016 reemergence, March 2017 JNIM merger, Iyad->JNIM emir"
+    },
+    {
+      "candidate": "Al-Murabitun",
+      "canonical_id": "actor-al-mourabitoun",
+      "ruling": "ENRICH_EXISTING",
+      "basis": "exists (encyclopedia_full, 19 sections); enrich with 2013 merger mechanics (al-Mulathamun + MUJAO faction), 2015 faction-only ISIS defection, Belmokhtar faction retention, JNIM-internal operation"
+    },
+    {
+      "candidate": "Macina Liberation Front / Katiba Macina",
+      "canonical_id": "actor-katiba-macina",
+      "ruling": "ENRICH_EXISTING (light)",
+      "basis": "exists (encyclopedia_full, 23 sections, aliases include Macina Liberation Front/FLM); audit confirms coverage; add timeline nodes for the JNIM constituent relation and verify NCTC four-group merger facts"
+    }
+  ],
+  "duplicate_check": "No candidate produced a duplicate canonical entity. GSPC intentionally has NO standalone node (HISTORICAL_PHASE of AQIM).",
+  "DUPLICATE_CANONICAL_ENTITIES": 0
+}

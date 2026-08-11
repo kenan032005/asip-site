@@ -1,0 +1,160 @@
+{
+  "new_entities": [
+    {
+      "entity_id": "actor-egyptian-islamic-jihad",
+      "type": "terrorist_group",
+      "target": "encyclopedia_full"
+    },
+    {
+      "entity_id": "actor-gia",
+      "type": "terrorist_group",
+      "target": "encyclopedia_full"
+    },
+    {
+      "entity_id": "actor-aiai",
+      "type": "organization",
+      "target": "encyclopedia_full"
+    },
+    {
+      "entity_id": "actor-tunisian-combatant-group",
+      "type": "organization",
+      "target": "encyclopedia_full"
+    },
+    {
+      "entity_id": "actor-gicm",
+      "type": "organization",
+      "target": "encyclopedia_full"
+    },
+    {
+      "entity_id": "actor-al-battar-brigade",
+      "type": "organization",
+      "target": "encyclopedia_full"
+    },
+    {
+      "entity_id": "actor-maitatsine-movement",
+      "type": "organization",
+      "target": "encyclopedia_full"
+    },
+    {
+      "entity_id": "actor-mujao",
+      "type": "organization",
+      "target": "encyclopedia_full"
+    }
+  ],
+  "enrich_existing": [
+    "actor-aqim",
+    "actor-ansar-eddine",
+    "actor-al-mourabitoun",
+    "actor-katiba-macina"
+  ],
+  "historical_phases": [
+    {
+      "phase": "GSPC",
+      "canonical": "actor-aqim",
+      "mode": "aliases + historical_names + profile chapter + timeline + relations narrative",
+      "note": "GIA -> GSPC (1998) -> AQIM (2007) continuity written into AQIM dossier"
+    }
+  ],
+  "new_relations": [
+    {
+      "id": "rel-expc-gia-aqim-lineage",
+      "type": "split_from",
+      "source": "actor-aqim",
+      "target": "actor-gia",
+      "maturity": "R3"
+    },
+    {
+      "id": "rel-expc-aqim-alqaida-alignment",
+      "type": "pledged_allegiance_to",
+      "source": "actor-aqim",
+      "target": "actor-al-qaida",
+      "maturity": "R3"
+    },
+    {
+      "id": "rel-expc-eij-alqaida-integration",
+      "type": "constituent_of",
+      "source": "actor-egyptian-islamic-jihad",
+      "target": "actor-al-qaida",
+      "maturity": "R3"
+    },
+    {
+      "id": "rel-expc-aiai-shabaab-predecessor",
+      "type": "historically_associated_with",
+      "source": "actor-aiai",
+      "target": "actor-al-shabaab",
+      "maturity": "R3"
+    },
+    {
+      "id": "rel-expc-battar-isis-libya",
+      "type": "constituent_of",
+      "source": "actor-al-battar-brigade",
+      "target": "actor-isis-libya",
+      "maturity": "R3"
+    },
+    {
+      "id": "rel-expc-mujao-murabitun",
+      "type": "historically_associated_with",
+      "source": "actor-mujao",
+      "target": "actor-al-mourabitoun",
+      "maturity": "R3"
+    },
+    {
+      "id": "rel-expc-aqim-mujao-split",
+      "type": "split_from",
+      "source": "actor-mujao",
+      "target": "actor-aqim",
+      "maturity": "R3"
+    },
+    {
+      "id": "rel-expc-aqim-ansar-relation",
+      "type": "affiliated_with",
+      "source": "actor-aqim",
+      "target": "actor-ansar-eddine",
+      "maturity": "R3"
+    },
+    {
+      "id": "rel-expc-gicm-alqaida",
+      "type": "historically_associated_with",
+      "source": "actor-gicm",
+      "target": "actor-al-qaida",
+      "maturity": "R3"
+    },
+    {
+      "id": "rel-expc-tcg-alqaida",
+      "type": "historically_associated_with",
+      "source": "actor-tunisian-combatant-group",
+      "target": "actor-al-qaida",
+      "maturity": "R3"
+    },
+    {
+      "id": "rel-expc-maitatsine-nigeria",
+      "type": "operates_in",
+      "source": "actor-maitatsine-movement",
+      "target": "country-nigeria",
+      "maturity": "R1"
+    }
+  ],
+  "upgrade_to_r3": [
+    "rel-jnim-ansar-constituent",
+    "rel-jnim-mourabitoun-constituent",
+    "rel-is-mourabitoun-splinter"
+  ],
+  "add_timeline": [
+    "rel-jnim-katiba-constituent"
+  ],
+  "forbidden_edges": [
+    {
+      "edge": "Maitatsine -> Boko Haram (predecessor_of / split_from)",
+      "reason": "no proven organizational lineage (content pack 16.4)"
+    },
+    {
+      "edge": "whole Al-Murabitun -> ISIS-Sahel",
+      "reason": "only a 2015 faction defected (content pack 16.5); existing rel-is-mourabitoun-splinter stays faction-qualified"
+    },
+    {
+      "edge": "AIAI directly became Al-Shabaab",
+      "reason": "ideological/personnel predecessor only (content pack 16.3)"
+    }
+  ],
+  "no_new_persons": "persons not a primary target; leader/founder names carried in profiles as text (existing person nodes for Koufa/Iyad reused where needed)"
+}
