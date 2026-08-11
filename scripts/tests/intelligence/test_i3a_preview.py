@@ -77,7 +77,8 @@ def main():
 
     # JS bundles contain the new render features (lead/toc/table) and new labels
     js = (ROOT / "assets" / "js" / "intelligence" / "africa.js").read_text(encoding="utf-8")
-    for token in ("profile-lead", "intel-toc", "intel-table", "最近三至五年的重要变化", "对人员、企业和项目安全的影响",
+    # UI/UX V2: the long-page TOC reuses .profile-toc (per requirement, no second style system).
+    for token in ("profile-lead", "profile-toc", "intel-table", "最近三至五年的重要变化", "对人员、企业和项目安全的影响",
                   "pledged_allegiance_to", "core_assessment", "name_and_translation"):
         check(f"africa.js contains {token[:24]}", token in js)
 

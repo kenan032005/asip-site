@@ -95,30 +95,82 @@
     }
     return html;
   }
+  // UI/UX V2: sections whose statements are institutional/legal determinations by a
+  // named authority (sanctions bodies, courts, legislatures) get an explicit chip.
+  const INSTITUTIONAL_KEYS = { sanctions_legal: "机构认定", legal_status: "法律状态" };
+  // UI/UX V2: scroll-spy + deep-link for the entity long-page TOC.
+  function initScrollSpy(tocEl, bodyEl) {
+    if (!tocEl || !bodyEl || tocEl.getAttribute("data-spy")) return;
+    tocEl.setAttribute("data-spy", "1");
+    const links = tocEl.querySelectorAll(".profile-toc a");
+    const secs = bodyEl.querySelectorAll(".profile-section");
+    const map = [];
+    secs.forEach(function (sec) { if (sec.id) map.push(sec); });
+    if (!map.length) return;
+    function onScroll() {
+      const off = 96;
+      let current = "";
+      for (let i = 0; i < map.length; i++) {
+        if (map[i].getBoundingClientRect().top <= off) current = map[i].id;
+      }
+      if (!current && map.length) current = map[0].id;
+      links.forEach(function (a) { a.classList.toggle("active", a.getAttribute("href") === "#" + current); });
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    if (window.location.hash.indexOf("#sec-") === 0) {
+      const t = document.querySelector(window.location.hash);
+      if (t) setTimeout(function () { t.scrollIntoView({ behavior: "auto", block: "start" }); }, 60);
+    }
+  }
   function renderSections(container, sections) {
     const keys = Object.keys(SECTION_LABELS);
     const items = keys.filter(function (k) { return sections[k] != null && !(Array.isArray(sections[k]) && !sections[k].length) && sections[k] !== ""; });
     let html = "";
     const toc = [];
     // DEPTH A: facts (普通章节) rendered first; ASIP Analysis and Watch Indicators
-    // are rendered as visually distinct partitions after the facts.
-    const facts = items.filter(function (k) { return k !== "asip_analysis" && k !== "watch_indicators"; });
+    // are rendered as visually distinct partitions after the facts. UI/UX V2 also
+    // lifts uncertainties out of plain paragraphs into a dedicated uncertainty card.
+    const facts = items.filter(function (k) { return k !== "asip_analysis" && k !== "watch_indicators" && k !== "uncertainties"; });
     facts.forEach(function (k) {
       const v = sections[k];
       if (k === "lead") { html += '<div class="profile-lead">' + (Array.isArray(v) ? v.map(function (x) { return '<p>' + inlineLinks(esc(x)) + '</p>'; }).join("") : '<p>' + inlineLinks(esc(v)) + '</p>') + '</div>'; return; }
       toc.push('<a href="#sec-' + esc(k) + '">' + esc(SECTION_LABELS[k]) + '</a>');
-      html += '<section class="profile-section" id="sec-' + esc(k) + '"><h2>' + esc(SECTION_LABELS[k]) + '</h2>' + renderBody(v) + '</section>';
+      const chip = INSTITUTIONAL_KEYS[k] ? '<span class="intel-sem-chip institutional">' + esc(INSTITUTIONAL_KEYS[k]) + '</span>' : "";
+      html += '<section class="profile-section" id="sec-' + esc(k) + '"><h2>' + esc(SECTION_LABELS[k]) + chip + '</h2>' + renderBody(v) + '</section>';
     });
+    const hasUnc = sections.uncertainties != null && !(Array.isArray(sections.uncertainties) && !sections.uncertainties.length) && sections.uncertainties !== "";
+    if (hasUnc) {
+      toc.push('<a href="#sec-uncertainties">' + esc(SECTION_LABELS.uncertainties) + '</a>');
+      html += '<section class="profile-section uncertainty-partition" id="sec-uncertainties"><div class="intel-uncertainty-card"><h2>' + esc(SECTION_LABELS.uncertainties) + ' <span class="intel-sem-chip uncertainty">UNCERTAINTY</span></h2>' + renderBody(sections.uncertainties) + '</div></section>';
+    }
     if (sections.asip_analysis) {
       toc.push('<a href="#sec-asip_analysis">' + esc(SECTION_LABELS.asip_analysis) + '</a>');
-      html += '<section class="profile-section analysis-partition" id="sec-asip_analysis"><div class="intel-analysis-card"><h2>ASIP Analysis · 平台分析</h2>' + renderBody(sections.asip_analysis) + '</div></section>';
+      html += '<section class="profile-section analysis-partition" id="sec-asip_analysis"><div class="intel-analysis-card"><h2>ASIP Analysis · 平台分析 <span class="intel-sem-chip institutional">ASIP ANALYSIS</span></h2>' + renderBody(sections.asip_analysis) + '</div></section>';
     }
     if (sections.watch_indicators && (!Array.isArray(sections.watch_indicators) || sections.watch_indicators.length)) {
       toc.push('<a href="#sec-watch_indicators">' + esc(SECTION_LABELS.watch_indicators) + '</a>');
-      html += '<section class="profile-section watch-partition" id="sec-watch_indicators"><div class="intel-watch-card"><h2>Watch Indicators · 后续观察指标</h2>' + renderBody(sections.watch_indicators) + '</div></section>';
+      html += '<section class="profile-section watch-partition" id="sec-watch_indicators"><div class="intel-watch-card"><h2>Watch Indicators · 后续观察指标 <span class="intel-sem-chip uncertainty">WATCH</span></h2>' + renderBody(sections.watch_indicators) + '</div></section>';
     }
-    if (toc.length >= 4) html = '<nav class="intel-toc" aria-label="目录"><span class="intel-toc-title">本页目录</span>' + toc.join("") + '</nav>' + html;
     const el = document.querySelector(container); if (el) el.innerHTML = html;
+    // UI/UX V2: auto-generated TOC into a dedicated container. The entity page
+    // template carries #entityToc; other pages (region/country) would use #<id>Toc.
+    const bodyId = String(container).replace(/^#/, "");
+    const tocEl = document.getElementById(bodyId === "entityBody" ? "entityToc" : (bodyId + "Toc"));
+    if (tocEl) {
+      if (toc.length >= 3) {
+        tocEl.hidden = false;
+        const details = document.createElement("details");
+        details.className = "profile-toc-details";
+        if (window.innerWidth > 850) details.open = true;
+        details.innerHTML = '<summary>本页目录</summary><nav class="profile-toc" aria-label="本页目录"><ol>' + toc.map(function (x) { return '<li>' + x + '</li>'; }).join("") + '</ol></nav>';
+        tocEl.innerHTML = "";
+        tocEl.appendChild(details);
+        initScrollSpy(tocEl, el);
+      } else {
+        tocEl.hidden = true;
+      }
+    }
   }
   const store = { regions: [], countries: [], entities: [], relationships: [], sources: [], evidence: [], relationProfiles: {}, relationTimelines: {}, forceEstimates: {}, externalLinks: {}, entityProfiles: {}, countryProfiles: {}, aliases: {}, byEntityId: {}, byEntitySlug: {}, byRelId: {}, byCountryId: {}, byRegionId: {}, metrics: null, audit: [] };
 
@@ -177,6 +229,20 @@
   function regionHref(id) { const r = store.byRegionId[id]; return r ? ROOT + "region/" + encodeURIComponent(r.slug) + "/" : ROOT; }
   function relationHref(id) { const r = store.byRelId[id]; return r ? ROOT + "relation/" + encodeURIComponent(r.slug || r.relationship_id) + "/" : ROOT; }
   function networkHref(id) { return ROOT + "network/?focus=" + encodeURIComponent(id || "actor-jnim"); }
+  // UI/UX V2 shared helpers (presentation-only).
+  function uniq(arr) { return arr.filter(function (x, i) { return arr.indexOf(x) === i; }); }
+  function sourceCategory(s) {
+    const t = s.source_type || "";
+    const rl = s.reliability || "";
+    if (t.indexOf("official_") === 0 || ["government", "government_report", "government_profile", "government_factsheet", "sanctions_action", "sanctions_profile", "sanctions_list", "sanctions_listing", "official_counterterrorism_profile", "military_press_release", "primary_agreement_archive", "primary_document_archive", "primary_self_source", "actor_self_publication"].indexOf(t) >= 0) return "authoritative_official";
+    if (["un_report", "un_resolution", "un_panel_report", "un_mission_report", "un_monitoring_report", "un_secretary_general_report", "un_statement", "un_factsheet", "un_sanctions_listing", "un_experts_report", "official_un_statement", "official_un_mission_statement", "official_un_briefing", "official_un_mission_framework", "official_au_communique", "official_au_decision", "official_au_statement", "regional_org", "regional_organization", "international_organization_statement", "international_report", "mission_report", "official_mission_page", "official_mission_news"].indexOf(t) >= 0) return "international_org";
+    if (["research_analysis", "research_institute", "research_report", "conflict_analysis", "current_analysis", "security_brief", "security_council_analysis", "actor_analysis", "actor_profile", "methodology_and_actor_history", "country_current_profile", "ngo_analysis", "ngo_report", "human_rights_investigation", "human_rights_current_update", "expert_comment"].indexOf(t) >= 0 || rl === "research_institution" || rl === "research_dataset") return "research_institutional";
+    if (["newswire", "newswire_investigation", "newswire_explainer", "newswire_feature", "newswire_on_un_investigation", "media", "news_media"].indexOf(t) >= 0 || rl === "news_media") return "media_other";
+    return "other";
+  }
+  const SOURCE_CAT_LABELS = { authoritative_official: "官方权威来源", international_org: "国际组织来源", research_institutional: "研究机构来源", media_other: "媒体与其他", other: "其他来源" };
+  function relIsDisputed(r) { return !!(r.disputed || r.confidence === "disputed" || (store.relationProfiles[r.relationship_id] || {}).disputed); }
+  function relIsHistorical(r) { return String(r.current_status || "").indexOf("historical") >= 0 || r.freshness_status === "historical"; }
   function entityLink(id, label) { const e = store.byEntityId[id]; if (!e) return esc(label || id); return '<a class="intel-entity-link" href="' + esc(entityHref(id)) + '">' + esc(label || title(e)) + '</a>'; }
   // I3-D1: relation endpoints may reference a region (e.g. rel-d1-fu-aes-region -> region-central-sahel);
   // titleFor() falls back to the region display name or the raw id instead of calling title(undefined).
@@ -212,15 +278,178 @@
   }
   function initRegions() { const g = document.querySelector("#allRegions"); if (g) g.innerHTML = store.regions.map(regionCard).join(""); }
   function initCountries() { const g = document.querySelector("#allCountries"); if (g) g.innerHTML = store.countries.map(countryCard).join(""); const f = document.querySelector("#countryRiskNote"); if (f) f.innerHTML = '<p class="profile-standfirst"><span class="profile-standfirst-label">风险等级说明</span><span>国家风险等级（极高/高/中/低）为平台基于公开来源的安全分析视图，与实体重要程度（L1/L2/L3）及事实可信度相互独立。</span></p>'; }
-  function initEntities() { const g = document.querySelector("#allEntities"); if (g) g.innerHTML = store.entities.filter(function (e) { return !e.entity_id.startsWith("country-"); }).map(entityCard).join(""); }
-  function initRelations() {
-    const rows = store.relationships.map(function (r) {
-      const s = store.byEntityId[r.source_entity_id], t = store.byEntityId[r.target_entity_id];
-      return '<div class="intel-rel-row"><div class="intel-rel-main"><span class="intel-rel-kind">' + esc(relLabel(r.relationship_type)) + '</span> ' + entityLink(r.source_entity_id, s ? title(s) : r.source_entity_id) + ' <b>' + (r.direction === "bidirectional" ? "↔" : "→") + '</b> ' + entityLink(r.target_entity_id, t ? title(t) : r.target_entity_id) + ' <a class="intel-rel-archive" href="' + esc(relationHref(r.relationship_id)) + '">档案 →</a></div><div class="intel-rel-desc">' + esc(r.relation_summary || "") + '</div><div class="intel-rel-meta">时间：' + esc(period(r)) + ' · 状态：' + esc(r.current_status) + ' · 可信度：' + esc(confLabel(r.confidence)) + '</div></div>';
-    }).join("");
-    const g = document.querySelector("#relationList"); if (g) g.innerHTML = rows;
+  function initEntities() {
+    const g = document.getElementById("allEntities"); if (!g) return;
+    const ents = store.entities.filter(function (e) { return !e.entity_id.startsWith("country-"); });
+    const P_ = { q: "entityQ", type: "entityType", imp: "entityImp", status: "entityStatus", region: "entityRegion", maturity: "entityMaturity", sort: "entitySort" };
+    function readState() {
+      const p = new URLSearchParams(window.location.search);
+      return { q: (p.get(P_.q) || "").toLowerCase(), type: p.get(P_.type) || "", imp: p.get(P_.imp) || "", status: p.get(P_.status) || "", region: p.get(P_.region) || "", maturity: p.get(P_.maturity) || "", sort: p.get(P_.sort) || "importance" };
+    }
+    let st = readState();
+    function fillSel(id, opts, val) {
+      const el = document.getElementById(id); if (!el) return;
+      el.innerHTML = opts; el.value = val;
+    }
+    fillSel("entityTypeFilter", '<option value="">全部类型</option>' + Object.keys(TYPE_LABELS).map(function (t) { return '<option value="' + esc(t) + '">' + esc(TYPE_LABELS[t]) + '</option>'; }).join(""), st.type);
+    fillSel("entityImpFilter", '<option value="">全部重要程度</option>' + ["L1", "L2", "L3"].map(function (l) { return '<option value="' + l + '">' + esc(impLabel(l)) + '</option>'; }).join(""), st.imp);
+    fillSel("entityStatusFilter", '<option value="">全部状态</option>' + uniq(ents.map(function (e) { return e.current_status; }).filter(Boolean)).sort().map(function (x) { return '<option value="' + esc(x) + '">' + esc(x) + '</option>'; }).join(""), st.status);
+    fillSel("entityRegionFilter", '<option value="">全部区域</option>' + store.regions.map(function (r) { return '<option value="' + esc(r.region_id) + '">' + esc(r.name_zh) + '</option>'; }).join(""), st.region);
+    fillSel("entityMaturityFilter", '<option value="">全部档案深度</option>' + ["E0_STUB", "E1_BASIC", "E2_DEVELOPED", "E3_FULL_ENCYCLOPEDIA"].map(function (m) { return '<option value="' + m + '">' + esc(MATURITY_LABELS[m] || m) + '</option>'; }).join(""), st.maturity);
+    fillSel("entitySort", '<option value="importance">按重要程度</option><option value="name">按名称</option><option value="verified">按最后核验</option><option value="rels">按关系数</option>', st.sort);
+    function maturityOf(e) { const pr = store.entityProfiles[e.entity_id] || {}; return pr.content_maturity || pr.profile_depth || ""; }
+    function relCountOf(id) { let n = 0; store.relationships.forEach(function (r) { if (r.source_entity_id === id || r.target_entity_id === id) n++; }); return n; }
+    function matches(e) {
+      if (st.q) {
+        const hay = [e.entity_id, e.slug, e.name_zh, e.name_en, e.acronym || "", e.native_name || ""].concat(e.aliases || []).join(" ").toLowerCase();
+        if (hay.indexOf(st.q) < 0) return false;
+      }
+      if (st.type && (e.primary_type || e.entity_type) !== st.type) return false;
+      if (st.imp && (e.importance_level || "L3") !== st.imp) return false;
+      if (st.status && (e.current_status || "") !== st.status) return false;
+      if (st.region && (e.region_ids || []).indexOf(st.region) < 0) return false;
+      if (st.maturity && maturityOf(e) !== st.maturity) return false;
+      return true;
+    }
+    function sortFn(a, b) {
+      if (st.sort === "name") return (a.name_zh || "").localeCompare(b.name_zh || "", "zh");
+      if (st.sort === "verified") return String(b.last_verified_at || b.record_reviewed_at || "").localeCompare(String(a.last_verified_at || a.record_reviewed_at || ""));
+      if (st.sort === "rels") return relCountOf(b.entity_id) - relCountOf(a.entity_id);
+      const order = { L1: 0, L2: 1, L3: 2 };
+      return (order[a.importance_level || "L3"] - order[b.importance_level || "L3"]) || (a.name_zh || "").localeCompare(b.name_zh || "", "zh");
+    }
+    function render() {
+      const list = ents.filter(matches).sort(sortFn);
+      const cnt = document.getElementById("entityCount");
+      if (cnt) cnt.textContent = "当前结果 " + list.length + " / 总计 " + ents.length;
+      g.innerHTML = list.length ? list.map(entityCard).join("") : '<div class="list-empty">没有符合条件的实体。请调整搜索或筛选条件。</div>';
+    }
+    function push() {
+      const p = new URLSearchParams();
+      if (st.q) p.set(P_.q, st.q);
+      if (st.type) p.set(P_.type, st.type);
+      if (st.imp) p.set(P_.imp, st.imp);
+      if (st.status) p.set(P_.status, st.status);
+      if (st.region) p.set(P_.region, st.region);
+      if (st.maturity) p.set(P_.maturity, st.maturity);
+      if (st.sort && st.sort !== "importance") p.set(P_.sort, st.sort);
+      const u = new URL(window.location.href); u.search = p.toString();
+      window.history.pushState({}, "", u);
+    }
+    const searchEl = document.getElementById("entityListSearch");
+    let debounceT = null;
+    if (searchEl) searchEl.addEventListener("input", function () {
+      st.q = searchEl.value.trim().toLowerCase();
+      render();
+      if (debounceT) clearTimeout(debounceT);
+      debounceT = setTimeout(push, 350);
+    });
+    [
+      ["entityTypeFilter", function (v) { st.type = v; }],
+      ["entityImpFilter", function (v) { st.imp = v; }],
+      ["entityStatusFilter", function (v) { st.status = v; }],
+      ["entityRegionFilter", function (v) { st.region = v; }],
+      ["entityMaturityFilter", function (v) { st.maturity = v; }],
+      ["entitySort", function (v) { st.sort = v; }]
+    ].forEach(function (pair) {
+      const el = document.getElementById(pair[0]);
+      if (el) el.addEventListener("change", function () { pair[1](el.value); render(); push(); });
+    });
+    window.addEventListener("popstate", function () { st = readState(); render(); });
+    if (searchEl) searchEl.value = st.q;
+    render();
   }
-  function initSources() { const g = document.querySelector("#sourceGrid"); if (g) g.innerHTML = store.sources.map(function (s) { return '<a target="_blank" rel="noopener noreferrer" class="intel-source-grid-item" href="' + esc(s.url) + '"><b>' + esc(s.publisher) + '</b><span>' + esc(s.title) + '</span><span class="intel-rel-meta">' + esc(s.reliability) + ' · 发布 ' + esc(s.published_at || "未标注") + ' · 访问 ' + esc(s.accessed_at || "—") + '</span></a>'; }).join(""); }
+  function initRelations() {
+    const g = document.getElementById("relationList"); if (!g) return;
+    const P_ = { q: "relQ", type: "relType", status: "relStatus", maturity: "relMaturity", disputed: "relDisputed", ts: "relTimeSensitive" };
+    function readState() {
+      const p = new URLSearchParams(window.location.search);
+      return { q: (p.get(P_.q) || "").toLowerCase(), type: p.get(P_.type) || "", status: p.get(P_.status) || "", maturity: p.get(P_.maturity) || "", disputed: p.get(P_.disputed) === "1", ts: p.get(P_.ts) === "1" };
+    }
+    let st = readState();
+    const relTypes = uniq(store.relationships.map(function (r) { return r.relationship_type; })).sort();
+    const matOpts = ['<option value="">全部档案深度</option>'].concat(["R0_EDGE_ONLY", "R1_BASIC", "R2_DEVELOPED_RELATIONSHIP", "R3_FULL_RELATIONSHIP_INTELLIGENCE"].map(function (m) { return '<option value="' + m + '">' + esc(MATURITY_LABELS[m] || m) + '</option>'; })).join("");
+    function fillSel(id, opts, val) { const el = document.getElementById(id); if (!el) return; el.innerHTML = opts; el.value = val; }
+    fillSel("relTypeFilter", '<option value="">全部关系类型</option>' + relTypes.map(function (t) { return '<option value="' + esc(t) + '">' + esc(relLabel(t)) + '</option>'; }).join(""), st.type);
+    fillSel("relMaturityFilter", matOpts, st.maturity);
+    function maturityOf(r) { const pr = store.relationProfiles[r.relationship_id] || store.relationProfiles[r.slug] || null; return pr ? (pr.relation_maturity || "") : ""; }
+    function hay(r) {
+      const s2 = store.byEntityId[r.source_entity_id], t2 = store.byEntityId[r.target_entity_id];
+      const parts = [r.relationship_id, r.slug || ""];
+      [s2, t2].forEach(function (e) { if (e) parts.push(e.name_zh, e.name_en, e.acronym || "", e.entity_id, e.native_name || ""); if (e && e.aliases) parts.push.apply(parts, e.aliases); });
+      return parts.join(" ").toLowerCase();
+    }
+    function matches(r) {
+      if (st.q && hay(r).indexOf(st.q) < 0) return false;
+      if (st.type && r.relationship_type !== st.type) return false;
+      if (st.status === "historical" && !relIsHistorical(r)) return false;
+      if (st.status === "current" && relIsHistorical(r)) return false;
+      if (st.maturity && maturityOf(r) !== st.maturity) return false;
+      if (st.disputed && !relIsDisputed(r)) return false;
+      if (st.ts && !(r.temporal_sensitive || r.freshness_status === "aging" || r.freshness_status === "stale")) return false;
+      return true;
+    }
+    function row(r) {
+      const s2 = store.byEntityId[r.source_entity_id], t2 = store.byEntityId[r.target_entity_id];
+      const dis = relIsDisputed(r) ? ' <span class="intel-badge disputed">争议</span>' : "";
+      return '<div class="intel-rel-row"><div class="intel-rel-main"><span class="intel-rel-kind">' + esc(relLabel(r.relationship_type)) + '</span> ' + entityLink(r.source_entity_id, s2 ? title(s2) : r.source_entity_id) + ' <b>' + (r.direction === "bidirectional" ? "↔" : "→") + '</b> ' + entityLink(r.target_entity_id, t2 ? title(t2) : r.target_entity_id) + ' <a class="intel-rel-archive" href="' + esc(relationHref(r.relationship_id)) + '">档案 →</a>' + dis + '</div><div class="intel-rel-desc">' + esc(r.relation_summary || "") + '</div><div class="intel-rel-meta">时间：' + esc(period(r)) + ' · 状态：' + esc(r.current_status) + ' · 可信度：' + esc(confLabel(r.confidence)) + '</div></div>';
+    }
+    function render() {
+      const list = store.relationships.filter(matches);
+      const cnt = document.getElementById("relCount");
+      if (cnt) cnt.textContent = "当前结果 " + list.length + " / 总计 " + store.relationships.length;
+      g.innerHTML = list.length ? list.map(row).join("") : '<div class="list-empty">没有符合条件的关系。请调整搜索或筛选条件。</div>';
+    }
+    function push() {
+      const p = new URLSearchParams();
+      if (st.q) p.set(P_.q, st.q);
+      if (st.type) p.set(P_.type, st.type);
+      if (st.status) p.set(P_.status, st.status);
+      if (st.maturity) p.set(P_.maturity, st.maturity);
+      if (st.disputed) p.set(P_.disputed, "1");
+      if (st.ts) p.set(P_.ts, "1");
+      const u = new URL(window.location.href); u.search = p.toString();
+      window.history.pushState({}, "", u);
+    }
+    const searchEl = document.getElementById("relListSearch");
+    let debounceT = null;
+    if (searchEl) searchEl.addEventListener("input", function () {
+      st.q = searchEl.value.trim().toLowerCase();
+      render();
+      if (debounceT) clearTimeout(debounceT);
+      debounceT = setTimeout(push, 350);
+    });
+    [
+      ["relTypeFilter", function (v) { st.type = v; }],
+      ["relStatusFilter", function (v) { st.status = v; }],
+      ["relMaturityFilter", function (v) { st.maturity = v; }]
+    ].forEach(function (pair) {
+      const el = document.getElementById(pair[0]);
+      if (el) el.addEventListener("change", function () { pair[1](el.value); render(); push(); });
+    });
+    const dEl = document.getElementById("relDisputedOnly");
+    if (dEl) { dEl.checked = st.disputed; dEl.addEventListener("change", function () { st.disputed = dEl.checked; render(); push(); }); }
+    const tEl = document.getElementById("relTimeSensitive");
+    if (tEl) { tEl.checked = st.ts; tEl.addEventListener("change", function () { st.ts = tEl.checked; render(); push(); }); }
+    window.addEventListener("popstate", function () { st = readState(); render(); });
+    if (searchEl) searchEl.value = st.q;
+    render();
+  }
+  function initSources() {
+    const g = document.getElementById("sourceGrid"); if (!g) return;
+    const groups = {};
+    store.sources.forEach(function (src) { const c = sourceCategory(src); (groups[c] = groups[c] || []).push(src); });
+    const order = ["authoritative_official", "international_org", "research_institutional", "media_other", "other"];
+    const evCount = function (sid) { return store.evidence.filter(function (ev) { return ev.source_id === sid; }).length; };
+    g.innerHTML = order.map(function (c) {
+      const items = groups[c] || [];
+      if (!items.length) return "";
+      return '<details class="source-group" open><summary>' + esc(SOURCE_CAT_LABELS[c] || c) + '（' + items.length + '）</summary><div class="source-group-items">' +
+        items.map(function (src) {
+          return '<a target="_blank" rel="noopener noreferrer" href="' + esc(src.url) + '"><b>' + esc(src.title) + '</b><span>' + esc(src.publisher) + ' · ' + esc(src.published_at || "未标注") + '</span><span>' + esc(src.source_type || "") + (src.reliability ? ' · ' + esc(src.reliability) : '') + ' · 证据 ' + evCount(src.source_id) + ' 条</span></a>';
+        }).join("") + '</div></details>';
+    }).join("");
+  }
   function initRegion() {
     const slug = document.body.getAttribute("data-region-slug");
     const region = store.regions.find(function (r) { return r.slug === slug || r.region_id === slug; });
@@ -265,8 +494,33 @@
     if (!entity) { const el = document.querySelector("#intelError"); if (el) { el.hidden = false; el.textContent = "实体不存在：" + slug; } return; }
     const profile = store.entityProfiles[entity.entity_id] || { sections: {} };
     document.title = title(entity) + " · ASIP非洲安全情报知识库";
-    const h = document.querySelector("#entityHeading"); if (h) h.innerHTML = '<div class="intel-heading-code">' + esc(entity.entity_id) + '</div><h1>' + esc(title(entity)) + '</h1><p class="intel-title-en">' + esc(entity.name_en) + '</p><div class="intel-badges">' + typeBadge(entity) + importanceBadge(entity) + maturityBadge(profile.content_maturity || entity.content_maturity) + '<span class="intel-badge status">' + esc(entity.current_status) + '</span>' + freshnessBadge(entity.freshness_status) + '</div>' + freshnessNote(entity);
+    // UI/UX V2: h1 is the Chinese primary name (+acronym); the full English name
+    // renders as its own second line. disputed entities carry an explicit
+    // "身份/归属存在争议" badge generated from the existing disputed flag.
+    const disBadge = entity.disputed ? '<span class="intel-badge disputed">身份/归属存在争议</span>' : '';
+    const h = document.querySelector("#entityHeading"); if (h) h.innerHTML = '<div class="intel-heading-code">' + esc(entity.entity_id) + '</div><h1>' + esc(title(entity)) + '</h1><p class="intel-title-en">' + esc(entity.name_en) + '</p><div class="intel-badges">' + typeBadge(entity) + importanceBadge(entity) + maturityBadge(profile.content_maturity || entity.content_maturity) + '<span class="intel-badge status">' + esc(entity.current_status) + '</span>' + freshnessBadge(entity.freshness_status) + disBadge + '</div>' + freshnessNote(entity);
     renderSections("#entityBody", profile.sections);
+    // UI/UX V2: compact key-facts strip generated from existing data only.
+    // Missing fields are simply omitted; nothing is invented.
+    const kf = document.getElementById("entityKeyFacts");
+    if (kf) {
+      const relsE = store.relationships.filter(function (r) { return r.source_entity_id === entity.entity_id || r.target_entity_id === entity.entity_id; });
+      let cells = [];
+      const leadRels = relsE.filter(function (r) { return (r.relationship_type === "led_by" || r.relationship_type === "founded_by") && r.target_entity_id === entity.entity_id; });
+      if (leadRels.length) cells.push({ label: "领导/核心人物", html: uniq(leadRels.map(function (r) { return entityLink(r.source_entity_id, titleFor(r.source_entity_id)); })).join("、") });
+      const est = store.forceEstimates[entity.entity_id];
+      if (est && est.length) cells.push({ label: "估计武装规模", html: est.map(function (x) { return esc(x.estimate_text) + "（" + esc(x.estimate_date) + "）"; }).join("；") });
+      const ctry = (entity.country_ids || []).map(countryLink).join("、");
+      if (ctry) cells.push({ label: "活动国家/地区", html: ctry });
+      const regs = (entity.region_ids || []).map(regionLink).join("、");
+      if (regs) cells.push({ label: "所属区域", html: regs });
+      const affTypes = ["affiliated_with", "pledged_allegiance_to", "constituent_of", "part_of_network", "member_of_force"];
+      const aff = relsE.filter(function (r) { return affTypes.indexOf(r.relationship_type) >= 0 && r.target_entity_id === entity.entity_id; }).map(function (r) { return entityLink(r.source_entity_id, titleFor(r.source_entity_id)); });
+      if (aff.length) cells.push({ label: "归属/所属网络", html: uniq(aff).join("、") });
+      const lv = entity.last_verified_at || entity.record_reviewed_at || entity.current_status_verified_at;
+      if (lv) cells.push({ label: "最后核验", html: esc(lv) });
+      if (cells.length) kf.innerHTML = cells.map(function (c) { return '<div><b>' + esc(c.label) + '</b><span>' + c.html + '</span></div>'; }).join("");
+    }
     const ib = document.querySelector("#entityInfobox"); if (ib) {
       let rows = "";
       function row(l, v) { if (v != null && v !== "" && !(Array.isArray(v) && !v.length)) rows += '<div class="ib-row"><dt>' + esc(l) + '</dt><dd>' + v + '</dd></div>'; }
@@ -298,49 +552,83 @@
     const s = store.byEntityId[rel.source_entity_id], t = store.byEntityId[rel.target_entity_id];
     const st = titleFor(rel.source_entity_id), tt = titleFor(rel.target_entity_id);
     document.title = relLabel(rel.relationship_type) + "：" + st + "—" + tt;
-    const h = document.querySelector("#relationHeading"); if (h) h.innerHTML = '<div class="intel-heading-code">' + esc(rel.relationship_id) + '</div><h1>' + esc(st) + ' <span class="rel-arrow">↔</span> ' + esc(tt) + '</h1><p class="intel-title-en">' + esc(relLabel(rel.relationship_type)) + ' · ' + esc(ringLabel(rel.display_ring)) + '圈层 · ' + esc(rel.current_status) + '</p><div class="intel-badges">' + (s ? importanceBadge(s) : "") + (t ? importanceBadge(t) : "") + maturityBadge(profile ? profile.relation_maturity : null) + freshnessBadge(rel.freshness_status) + '</div>' + freshnessNote(rel);
-    const ov = document.querySelector("#relationOverview"); if (ov) ov.innerHTML = '<p class="intel-lead">' + esc(profile ? (profile.overview || profile.relationship_summary || rel.relation_summary) : rel.relation_summary) + '</p>';
+    const disRelBadge = relIsDisputed(rel) ? '<span class="intel-badge disputed">关系状态存在争议</span>' : '';
+    const h = document.querySelector("#relationHeading"); if (h) h.innerHTML = '<div class="intel-heading-code">' + esc(rel.relationship_id) + '</div><h1 class="rel-hero-title">' + esc(st) + ' <span class="rel-arrow">↔</span> ' + esc(tt) + '</h1><p class="intel-title-en">' + esc(relLabel(rel.relationship_type)) + ' · ' + esc(ringLabel(rel.display_ring)) + '圈层 · ' + esc(rel.current_status) + '</p><div class="intel-badges">' + (s ? importanceBadge(s) : "") + (t ? importanceBadge(t) : "") + maturityBadge(profile ? profile.relation_maturity : null) + freshnessBadge(rel.freshness_status) + disRelBadge + '</div>' + freshnessNote(rel);
+    // UI/UX V2: relation hero — Party A card → summary → Party B card.
+    // Desktop renders left—middle—right; CSS collapses to A ↓ relation ↓ B on mobile.
+    const pp = document.getElementById("relationParties");
+    if (pp) {
+      const partyCard = function (e) {
+        if (!e) return '<div class="relation-party-card"><b>未解析实体</b><span>' + esc(e) + '</span></div>';
+        return '<a class="relation-party-card" href="' + esc(entityHref(e.entity_id)) + '"><b>' + esc(title(e)) + '</b><span class="intel-title-en">' + esc(e.name_en) + '</span><span>' + typeBadge(e) + ' · ' + esc(impLabel(e.importance_level)) + (e.current_status ? ' · ' + esc(e.current_status) : '') + '</span></a>';
+      };
+      const rhRow = function (l, v) { if (v == null || v === "") return ""; return '<div class="rh-row"><dt>' + esc(l) + '</dt><dd>' + v + '</dd></div>'; };
+      pp.innerHTML = partyCard(s) +
+        '<div class="relation-hero-summary"><div class="relation-hero-arrow">↔</div><h2>关系摘要</h2>' +
+        rhRow("关系类型", '<b>' + esc(relLabel(rel.relationship_type)) + '</b>') +
+        rhRow("状态", esc(rel.current_status)) +
+        rhRow("时间", esc(period(rel))) +
+        rhRow("可信度", esc(confLabel(rel.confidence))) +
+        rhRow("时效", freshnessBadge(rel.freshness_status)) +
+        rhRow("争议", relIsDisputed(rel) ? '<span class="intel-badge disputed">争议</span>' : "否") +
+        '</div>' + partyCard(t);
+    }
+    const ov = document.querySelector("#relationOverview"); if (ov) ov.innerHTML = '<p class="intel-lead">' + inlineLinks(esc(profile ? (profile.overview || profile.relationship_summary || rel.relation_summary) : rel.relation_summary)) + '</p>';
     const body = document.querySelector("#relationBody"); if (body) {
       let html = "";
       if (profile) {
         // evolution stages support both {period,title,description} and {period,detail}
-        const stageHtml = function (x) { const t = x.title || x.detail || ""; const d = x.description || x.detail || ""; return '<li><b>' + esc(x.period + (t && t !== x.period ? " · " + t : "")) + '</b>' + (d ? '<p>' + esc(d) + '</p>' : '') + '</li>'; };
-        if (profile.formation_background) html += '<section class="profile-section"><h2>关系形成背景</h2><p>' + esc(profile.formation_background) + '</p></section>';
-        if (profile.initial_relationship) html += '<section class="profile-section"><h2>双方最初的关系</h2><p>' + esc(profile.initial_relationship) + '</p></section>';
+        const stageHtml = function (x) { const t = x.title || x.detail || ""; const d = x.description || x.detail || ""; return '<li><b>' + inlineLinks(esc(x.period + (t && t !== x.period ? " · " + t : ""))) + '</b>' + (d ? '<p>' + inlineLinks(esc(d)) + '</p>' : '') + '</li>'; };
+        if (profile.formation_background) html += '<section class="profile-section"><h2>关系形成背景</h2><p>' + inlineLinks(esc(profile.formation_background)) + '</p></section>';
+        if (profile.initial_relationship) html += '<section class="profile-section"><h2>双方最初的关系</h2><p>' + inlineLinks(esc(profile.initial_relationship)) + '</p></section>';
         if (profile.evolution_stages && profile.evolution_stages.length) html += '<section class="profile-section"><h2>历史演变阶段</h2><ul>' + profile.evolution_stages.map(stageHtml).join("") + '</ul></section>';
         if (profile.nature && typeof profile.nature === "object") {
-          html += '<section class="profile-section"><h2>关系性质</h2><ul class="intel-bullets">' + Object.keys(profile.nature).filter(function (k) { return k !== "type"; }).map(function (k) { return '<li><b>' + esc(k) + '</b>：' + esc(Array.isArray(profile.nature[k]) ? profile.nature[k].join("、") : profile.nature[k]) + '</li>'; }).join("") + '</ul></section>';
+          html += '<section class="profile-section"><h2>关系性质</h2><ul class="intel-bullets">' + Object.keys(profile.nature).filter(function (k) { return k !== "type"; }).map(function (k) { return '<li><b>' + esc(k) + '</b>：' + inlineLinks(esc(Array.isArray(profile.nature[k]) ? profile.nature[k].join("、") : profile.nature[k])) + '</li>'; }).join("") + '</ul></section>';
         }
-        if (profile.drivers && profile.drivers.length) html += '<section class="profile-section"><h2>驱动因素</h2><ul>' + profile.drivers.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
+        if (profile.drivers && profile.drivers.length) html += '<section class="profile-section"><h2>驱动因素</h2><ul>' + profile.drivers.map(function (x) { return '<li>' + inlineLinks(esc(x)) + '</li>'; }).join("") + '</ul></section>';
         if (profile.constraints) {
-          if (typeof profile.constraints === "string") html += '<section class="profile-section"><h2>约束条件</h2><p>' + esc(profile.constraints) + '</p></section>';
-          else if (profile.constraints.length) html += '<section class="profile-section"><h2>约束条件</h2><ul>' + profile.constraints.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
+          if (typeof profile.constraints === "string") html += '<section class="profile-section"><h2>约束条件</h2><p>' + inlineLinks(esc(profile.constraints)) + '</p></section>';
+          else if (profile.constraints.length) html += '<section class="profile-section"><h2>约束条件</h2><ul>' + profile.constraints.map(function (x) { return '<li>' + inlineLinks(esc(x)) + '</li>'; }).join("") + '</ul></section>';
         }
-        if (profile.third_party_effects && profile.third_party_effects.length) html += '<section class="profile-section"><h2>第三方影响</h2><ul>' + profile.third_party_effects.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
-        if (profile.personnel_flows) html += '<section class="profile-section"><h2>人员流动</h2><p>' + esc(profile.personnel_flows) + '</p></section>';
-        if (profile.cooperation_dimensions && profile.cooperation_dimensions.length) html += '<section class="profile-section"><h2>合作维度</h2><ul>' + profile.cooperation_dimensions.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
-        if (profile.continuities && profile.continuities.length) html += '<section class="profile-section"><h2>连续性</h2><ul>' + profile.continuities.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
-        if (profile.differences && profile.differences.length) html += '<section class="profile-section"><h2>差异</h2><ul>' + profile.differences.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
+        if (profile.third_party_effects && profile.third_party_effects.length) html += '<section class="profile-section"><h2>第三方影响</h2><ul>' + profile.third_party_effects.map(function (x) { return '<li>' + inlineLinks(esc(x)) + '</li>'; }).join("") + '</ul></section>';
+        if (profile.personnel_flows) html += '<section class="profile-section"><h2>人员流动</h2><p>' + inlineLinks(esc(profile.personnel_flows)) + '</p></section>';
+        if (profile.cooperation_dimensions && profile.cooperation_dimensions.length) html += '<section class="profile-section"><h2>合作维度</h2><ul>' + profile.cooperation_dimensions.map(function (x) { return '<li>' + inlineLinks(esc(x)) + '</li>'; }).join("") + '</ul></section>';
+        if (profile.continuities && profile.continuities.length) html += '<section class="profile-section"><h2>连续性</h2><ul>' + profile.continuities.map(function (x) { return '<li>' + inlineLinks(esc(x)) + '</li>'; }).join("") + '</ul></section>';
+        if (profile.differences && profile.differences.length) html += '<section class="profile-section"><h2>差异</h2><ul>' + profile.differences.map(function (x) { return '<li>' + inlineLinks(esc(x)) + '</li>'; }).join("") + '</ul></section>';
         // EXPANSION A: this block was duplicated verbatim, rendering "形成原因" twice on every relation page that has causes.
-        if (profile.causes && profile.causes.length) html += '<section class="profile-section"><h2>形成原因</h2><ul>' + profile.causes.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></section>';
-        if (profile.key_turning_points && profile.key_turning_points.length) html += '<section class="profile-section"><h2>关键转折</h2><ul>' + profile.key_turning_points.map(function (x) { return '<li><b>' + esc(x.event) + '</b><p>' + esc(x.impact) + '</p></li>'; }).join("") + '</ul></section>';
-        if (profile.current_status) html += '<section class="profile-section"><h2>当前状态</h2><p>' + esc(profile.current_status) + '</p></section>';
-        if (profile.current_assessment && profile.current_assessment !== profile.current_status) html += '<section class="profile-section"><h2>当前评估</h2><p>' + esc(profile.current_assessment) + '</p></section>';
-        if (profile.regional_differences) html += '<section class="profile-section"><h2>地区差异</h2><p>' + esc(profile.regional_differences) + '</p></section>';
-        if (profile.impact_on_security) html += '<section class="profile-section"><h2>对区域安全的影响</h2><p>' + esc(profile.impact_on_security) + '</p></section>';
-        if (profile.why_it_matters) html += '<section class="profile-section"><h2>为什么重要</h2><p>' + esc(profile.why_it_matters) + '</p></section>';
-        if (profile.uncertainties) html += '<section class="profile-section"><h2>不确定性与争议</h2><p>' + esc(profile.uncertainties) + '</p></section>';
-        if (profile.organizational_balance) html += '<section class="profile-section"><h2>组织平衡</h2><p>' + esc(profile.organizational_balance) + '</p></section>';
-        if (profile.role) html += '<section class="profile-section"><h2>角色</h2><p>' + esc(profile.role) + '</p></section>';
-        if (profile.asip_analysis) html += '<section class="profile-section analysis-partition"><div class="intel-analysis-card"><h2>ASIP Analysis · 平台分析</h2><p>' + esc(profile.asip_analysis) + '</p></div></section>';
-        if (profile.watch_indicators && profile.watch_indicators.length) html += '<section class="profile-section watch-partition"><div class="intel-watch-card"><h2>Watch Indicators · 后续观察指标</h2><ul>' + profile.watch_indicators.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></div></section>';
+        if (profile.causes && profile.causes.length) html += '<section class="profile-section"><h2>形成原因</h2><ul>' + profile.causes.map(function (x) { return '<li>' + inlineLinks(esc(x)) + '</li>'; }).join("") + '</ul></section>';
+        if (profile.key_turning_points && profile.key_turning_points.length) html += '<section class="profile-section"><h2>关键转折</h2><ul>' + profile.key_turning_points.map(function (x) { return '<li><b>' + inlineLinks(esc(x.event)) + '</b><p>' + inlineLinks(esc(x.impact)) + '</p></li>'; }).join("") + '</ul></section>';
+        if (profile.current_status) html += '<section class="profile-section"><h2>当前状态</h2><p>' + inlineLinks(esc(profile.current_status)) + '</p></section>';
+        if (profile.current_assessment && profile.current_assessment !== profile.current_status) html += '<section class="profile-section"><h2>当前评估</h2><p>' + inlineLinks(esc(profile.current_assessment)) + '</p></section>';
+        if (profile.regional_differences) html += '<section class="profile-section"><h2>地区差异</h2><p>' + inlineLinks(esc(profile.regional_differences)) + '</p></section>';
+        if (profile.impact_on_security) html += '<section class="profile-section"><h2>对区域安全的影响</h2><p>' + inlineLinks(esc(profile.impact_on_security)) + '</p></section>';
+        if (profile.why_it_matters) html += '<section class="profile-section"><h2>为什么重要</h2><p>' + inlineLinks(esc(profile.why_it_matters)) + '</p></section>';
+        if (profile.uncertainties) html += '<section class="profile-section uncertainty-partition"><div class="intel-uncertainty-card"><h2>不确定性与争议 <span class="intel-sem-chip uncertainty">UNCERTAINTY</span></h2><p>' + inlineLinks(esc(profile.uncertainties)) + '</p></div></section>';
+        if (profile.organizational_balance) html += '<section class="profile-section"><h2>组织平衡</h2><p>' + inlineLinks(esc(profile.organizational_balance)) + '</p></section>';
+        if (profile.role) html += '<section class="profile-section"><h2>角色</h2><p>' + inlineLinks(esc(profile.role)) + '</p></section>';
+        if (profile.asip_analysis) html += '<section class="profile-section analysis-partition"><div class="intel-analysis-card"><h2>ASIP Analysis · 平台分析 <span class="intel-sem-chip institutional">ASIP ANALYSIS</span></h2><p>' + inlineLinks(esc(profile.asip_analysis)) + '</p></div></section>';
+        if (profile.watch_indicators && profile.watch_indicators.length) html += '<section class="profile-section watch-partition"><div class="intel-watch-card"><h2>Watch Indicators · 后续观察指标 <span class="intel-sem-chip uncertainty">WATCH</span></h2><ul>' + profile.watch_indicators.map(function (x) { return '<li>' + inlineLinks(esc(x)) + '</li>'; }).join("") + '</ul></div></section>';
       } else {
-        html += '<section class="profile-section"><h2>关系概述</h2><p>' + esc(rel.relation_summary) + '</p></section>';
-        html += '<section class="profile-section"><h2>当前状态</h2><p>' + esc(rel.current_status_detail || rel.current_status) + '</p></section>';
+        html += '<section class="profile-section"><h2>关系概述</h2><p>' + inlineLinks(esc(rel.relation_summary)) + '</p></section>';
+        html += '<section class="profile-section"><h2>当前状态</h2><p>' + inlineLinks(esc(rel.current_status_detail || rel.current_status)) + '</p></section>';
       }
       body.innerHTML = html;
     }
-    const tl = document.querySelector("#relationTimeline"); if (tl) tl.innerHTML = '<h2>关系历史时间轴</h2>' + (timeline.length ? '<div class="relation-timeline">' + timeline.map(function (x) { return '<div class="tl-item"><div class="tl-date">' + esc(x.date) + '</div><div class="tl-body"><h3>' + esc(x.event_title) + '</h3><p>' + esc(x.event_description) + '</p><p class="tl-impact"><b>对关系的影响：</b>' + esc(x.impact_on_relationship) + '</p><p class="tl-meta">可信度：' + esc(confLabel(x.confidence)) + ' · 来源：' + sourceList(x.source_ids) + '</p></div></div>'; }).join("") + '</div>' : '<p class="muted">暂无已核验时间轴条目。</p>');
+    const tl = document.querySelector("#relationTimeline"); if (tl) {
+      let tlHtml = '<h2>关系历史时间轴</h2>';
+      // UI/UX V2: current-phase banner uses existing profile fields only (no inference).
+      if (profile && (profile.current_status || profile.current_assessment)) {
+        const cur = (profile.current_assessment && profile.current_assessment !== profile.current_status) ? profile.current_assessment : profile.current_status;
+        tlHtml += '<div class="rtl-current-banner"><b>当前阶段</b>：' + inlineLinks(esc(cur)) + '</div>';
+      }
+      tlHtml += (timeline.length ? '<div class="rtl-h">' + timeline.map(function (x) {
+        return '<div class="rtl-stage-card"><span class="rtl-phase">' + esc(x.date) + '</span><h3>' + inlineLinks(esc(x.event_title)) + '</h3>' +
+          (x.event_description ? '<p>' + inlineLinks(esc(x.event_description)) + '</p>' : '') +
+          (x.impact_on_relationship ? '<p class="rtl-impact"><b>对关系的影响：</b>' + inlineLinks(esc(x.impact_on_relationship)) + '</p>' : '') +
+          '<p class="rtl-meta">可信度：' + esc(confLabel(x.confidence)) + ' · 来源：' + sourceList(x.source_ids) + '</p></div>';
+      }).join("") + '</div>' : '<p class="muted">暂无已核验时间轴条目。</p>');
+      tl.innerHTML = tlHtml;
+    }
     const src = document.querySelector("#relationSources"); if (src) src.innerHTML = '<h2>来源与证据</h2><div class="intel-source-list">' + sourceList(rel.source_refs) + '</div><p class="muted">证据 ' + evidenceCountFor([rel.relationship_id]) + ' 条，关键事实可追溯。</p>' + (rel.relationship_semantics_note ? '<p class="ib-note">' + esc(rel.relationship_semantics_note) + '</p>' : '');
     const gb = document.querySelector("#relationGraphBack"); if (gb) gb.setAttribute("href", networkHref(rel.source_entity_id));
   }
@@ -354,6 +642,10 @@
     let positions = {};
     let zoom = 1, drawToken = 0, lastFit = -1;
     const filters = { region: "", country: "", type: "", imp: { L1: true, L2: true, L3: true } };
+    // UI/UX V2: relation-level filters + optional 2-hop expansion.
+    const relFilters = { type: "", status: "", disputed: false };
+    let twoHop = false;
+    const TWO_HOP_CAP = 20;
     const RINGS = { inner: 175, middle: 265, outer: 345 };
     const RING_ORDER = ["inner", "middle", "outer"];
     const MIN = 96;
@@ -370,7 +662,14 @@
       const yk = 0.9;
       const next = {}; next[center.entity_id] = { x: cx, y: cy };
       const byRing = {};
-      rels.forEach(function (r) { const o = store.byEntityId[r.source_entity_id === center.entity_id ? r.target_entity_id : r.source_entity_id]; if (!o || !visible(o)) return; const ring = ringFor(r); (byRing[ring] = byRing[ring] || []); if (!byRing[ring].some(function (x) { return x.entity_id === o.entity_id; })) byRing[ring].push(o); });
+      rels.forEach(function (r) {
+        [r.source_entity_id, r.target_entity_id].forEach(function (eid) {
+          if (eid === center.entity_id) return;
+          const o = store.byEntityId[eid]; if (!o || !visible(o)) return;
+          const ring = ringFor(r); (byRing[ring] = byRing[ring] || []);
+          if (!byRing[ring].some(function (x) { return x.entity_id === o.entity_id; })) byRing[ring].push(o);
+        });
+      });
       RING_ORDER.forEach(function (ring, ringIndex) {
         const items = (byRing[ring] || []).slice();
         let radius = RINGS[ring];
@@ -430,9 +729,47 @@
     function draw() {
       const center = store.byEntityId[focusId]; if (!center) return;
       const token = ++drawToken;
-      const rels = store.relationships.filter(function (r) { return r.source_entity_id === focusId || r.target_entity_id === focusId; });
+      function relVisible(r) {
+        if (relFilters.type && r.relationship_type !== relFilters.type) return false;
+        if (relFilters.status === "historical" && !relIsHistorical(r)) return false;
+        if (relFilters.status === "current" && relIsHistorical(r)) return false;
+        if (relFilters.disputed && !relIsDisputed(r)) return false;
+        return true;
+      }
+      let rels = store.relationships.filter(function (r) { return (r.source_entity_id === focusId || r.target_entity_id === focusId) && relVisible(r); });
       const neighbors = rels.map(function (r) { return store.byEntityId[r.source_entity_id === focusId ? r.target_entity_id : r.source_entity_id]; }).filter(function (e, i, all) { return e && visible(e) && all.findIndex(function (x) { return x && x.entity_id === e.entity_id; }) === i; });
-      const visibleEntities = [center].concat(neighbors);
+      let extraNodes = [];
+      const densityNote = document.getElementById("densityNote");
+      if (twoHop && neighbors.length) {
+        const seenRel = {};
+        rels.forEach(function (r) { seenRel[r.relationship_id] = 1; });
+        const hop2 = [];
+        neighbors.forEach(function (n) {
+          store.relationships.forEach(function (r) {
+            if (seenRel[r.relationship_id]) return;
+            if (r.source_entity_id !== n.entity_id && r.target_entity_id !== n.entity_id) return;
+            const other = store.byEntityId[r.source_entity_id === n.entity_id ? r.target_entity_id : r.source_entity_id];
+            if (!other || other.entity_id === focusId || !visible(other) || !relVisible(r)) return;
+            seenRel[r.relationship_id] = 1;
+            hop2.push({ rel: r, node: other });
+          });
+        });
+        // density protection: importance-first, then cap; never dump a spider web.
+        const order = { L1: 0, L2: 1, L3: 2 };
+        hop2.sort(function (a, b) { return (order[a.node.importance_level || "L3"] - order[b.node.importance_level || "L3"]); });
+        const capped = hop2.slice(0, TWO_HOP_CAP);
+        if (densityNote) {
+          if (hop2.length > TWO_HOP_CAP) {
+            densityNote.hidden = false;
+            densityNote.textContent = "第二层展开候选较大（" + hop2.length + " 个二度节点）：已按重要程度优先展示前 " + TWO_HOP_CAP + " 个，请使用筛选缩小范围。";
+          } else densityNote.hidden = true;
+        }
+        extraNodes = capped.map(function (x) { return x.node; });
+        rels = rels.concat(capped.map(function (x) { return x.rel; }));
+      } else if (densityNote) densityNote.hidden = true;
+      const seenNode = {};
+      const visibleEntities = [];
+      [center].concat(neighbors, extraNodes).forEach(function (e) { if (e && !seenNode[e.entity_id]) { seenNode[e.entity_id] = 1; visibleEntities.push(e); } });
       layout(center, visibleEntities, rels);
       viewport.innerHTML = "";
       const defs = mk("defs");
@@ -443,14 +780,17 @@
       const showLabels = rels.length <= 8;
       const relInfo = document.getElementById("relationInfo");
       rels.forEach(function (r) {
-        const other = store.byEntityId[r.source_entity_id === focusId ? r.target_entity_id : r.source_entity_id];
-        if (!other || !visible(other) || !positions[other.entity_id]) return;
-        const a = positions[focusId], b = positions[other.entity_id], kind = relationGroup(r);
-        const d = center.primary_type === "country" || center.entity_type === "country" ? 44 : 52;
-        const p1 = edgePoint(a, b, d), p2 = edgePoint(b, a, d);
+        const ea = store.byEntityId[r.source_entity_id], eb = store.byEntityId[r.target_entity_id];
+        if (!ea || !eb || !positions[ea.entity_id] || !positions[eb.entity_id]) return;
+        const a = positions[ea.entity_id], b = positions[eb.entity_id];
+        const kindBase = relationGroup(r);
+        const kind = kindBase + (relIsDisputed(r) ? " disputed" : "");
+        const da = (ea.primary_type === "country" || ea.entity_type === "country") ? 44 : 52;
+        const db = (eb.primary_type === "country" || eb.entity_type === "country") ? 44 : 52;
+        const p1 = edgePoint(a, b, da), p2 = edgePoint(b, a, db);
         const g = mk("g", { class: "graph-edge-group " + kind });
         g.appendChild(mk("line", { x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y, class: "graph-edge-hit " + kind }));
-        g.appendChild(mk("line", { x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y, class: "graph-edge " + kind, "marker-end": "url(#af-arrow-" + kind + ")", "aria-label": relLabel(r.relationship_type) + "：" + title(other), tabindex: "0", role: "button" }));
+        g.appendChild(mk("line", { x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y, class: "graph-edge " + kind, "marker-end": "url(#af-arrow-" + kindBase + ")", "aria-label": relLabel(r.relationship_type) + "：" + title(eb), tabindex: "0", role: "button" }));
         g.addEventListener("click", function (ev) { ev.stopPropagation(); document.querySelectorAll(".graph-edge-group.selected").forEach(function (x) { x.classList.remove("selected"); }); g.classList.add("selected"); if (relInfo) relInfo.innerHTML = '<h2>关系详情</h2><div class="relation-pair">' + entityLink(r.source_entity_id, title(store.byEntityId[r.source_entity_id])) + ' <b>↔</b> ' + entityLink(r.target_entity_id, title(store.byEntityId[r.target_entity_id])) + '</div><p class="relation-label">' + esc(relLabel(r.relationship_type)) + ' · ' + esc(ringLabel(ringFor(r))) + '圈层</p>' + (r.relationship_type === "pledged_allegiance_to" ? '<p class="ib-note">宣誓效忠（bay\'ah）为独立关系语义，不同于一般网络关联（affiliated_with）。</p>' : '') + '<p>' + esc(r.relation_summary) + '</p><dl class="intel-detail-list"><dt>时间范围</dt><dd>' + esc(period(r)) + '</dd><dt>状态</dt><dd>' + esc(r.current_status) + '</dd><dt>可信度</dt><dd>' + esc(confLabel(r.confidence)) + '</dd><dt>时效</dt><dd>' + freshnessBadge(r.freshness_status) + '</dd><dt>来源</dt><dd>' + sourceList(r.source_refs) + '</dd></dl><a class="intel-button sm" href="' + esc(relationHref(r.relationship_id)) + '">查看完整关系沿革 →</a>'; });
         g.addEventListener("keydown", function (ev) { if (ev.key === "Enter" || ev.key === " ") g.dispatchEvent(new MouseEvent("click", { bubbles: true })); });
         hitLayer.appendChild(g);
@@ -491,7 +831,7 @@
       });
       viewport.appendChild(hitLayer); viewport.appendChild(edgeLayer); viewport.appendChild(labelLayer); viewport.appendChild(nodeLayer);
       const hint = document.getElementById("graphHint");
-      if (hint) hint.textContent = visibleEntities.length + " 个节点 · " + rels.length + " 条直接关系 · 内圈结构与地理 · 中圈组织与力量 · 外圈人物 · 点击中心节点进入详细档案页";
+      if (hint) hint.textContent = visibleEntities.length + " 个节点 · " + rels.length + " 条关系 · " + (twoHop ? "已展开第二层（上限 " + TWO_HOP_CAP + "）" : "一度关系") + " · 内圈结构与地理 · 中圈组织与力量 · 外圈人物 · 点击中心节点进入详细档案页";
       const stats = document.getElementById("importanceStats");
       if (stats) { const cnt = {}; visibleEntities.forEach(function (e) { const l = e.importance_level || "L3"; cnt[l] = (cnt[l] || 0) + 1; }); stats.textContent = "可见 " + visibleEntities.length + " · L1 " + (cnt.L1 || 0) + " · L2 " + (cnt.L2 || 0) + " · L3 " + (cnt.L3 || 0); }
       // focus entry points: header link + right card + focus name/id refresh
@@ -510,12 +850,30 @@
       const regionSel = document.getElementById("regionFilter"); if (regionSel) { regionSel.innerHTML = '<option value="">全部区域</option>' + store.regions.map(function (r) { return '<option value="' + esc(r.region_id) + '">' + esc(r.name_zh) + '</option>'; }).join(""); regionSel.addEventListener("change", function () { filters.region = regionSel.value; lastFit = -1; draw(); }); }
       const countrySel = document.getElementById("countryFilter"); if (countrySel) { countrySel.innerHTML = '<option value="">全部国家</option>' + store.countries.map(function (c) { return '<option value="' + esc(c.country_id) + '">' + esc(c.name_zh) + '</option>'; }).join(""); countrySel.addEventListener("change", function () { filters.country = countrySel.value; lastFit = -1; draw(); }); }
       const typeSel = document.getElementById("typeFilter"); if (typeSel) { typeSel.innerHTML = '<option value="">全部类型</option>' + Object.keys(TYPE_LABELS).map(function (t) { return '<option value="' + esc(t) + '">' + esc(TYPE_LABELS[t]) + '</option>'; }).join(""); typeSel.addEventListener("change", function () { filters.type = typeSel.value; lastFit = -1; draw(); }); }
-      const search = document.getElementById("entitySearch"); if (search) search.addEventListener("input", function () { const term = search.value.trim().toLowerCase(); if (!term) return; const hit = store.entities.find(function (e) { return [e.entity_id, e.slug, e.name_zh, e.name_en, e.acronym || "", e.native_name || ""].concat(e.aliases).join(" ").toLowerCase().indexOf(term) >= 0; }); if (hit) { if (!visible(hit)) { filters.imp[hit.importance_level || "L3"] = true; document.querySelectorAll("[data-imp-filter]").forEach(function (x) { x.checked = filters.imp[x.getAttribute("data-imp-filter")]; }); } focusId = hit.entity_id; lastFit = -1; draw(); } });
+      const search = document.getElementById("entitySearch"); if (search) search.addEventListener("input", function () { const term = search.value.trim().toLowerCase(); if (!term) return; const hit = store.entities.find(function (e) { return [e.entity_id, e.slug, e.name_zh, e.name_en, e.acronym || "", e.native_name || ""].concat(e.aliases).join(" ").toLowerCase().indexOf(term) >= 0; }); if (hit) { if (!visible(hit)) { filters.imp[hit.importance_level || "L3"] = true; document.querySelectorAll("[data-imp-filter]").forEach(function (x) { x.checked = filters.imp[x.getAttribute("data-imp-filter")]; }); } focusId = hit.entity_id; lastFit = -1; draw(); const u = new URL(window.location.href); u.searchParams.set("focus", focusId); window.history.pushState({ focus: focusId }, "", u); } });
       document.getElementById("zoomIn").addEventListener("click", function () { zoom = Math.min(1.5, zoom + 0.12); draw(); });
       document.getElementById("zoomOut").addEventListener("click", function () { zoom = Math.max(0.55, zoom - 0.12); draw(); });
       document.getElementById("fitGraph").addEventListener("click", function () { zoom = 1; lastFit = -1; draw(); });
       document.getElementById("backFocus").addEventListener("click", function () { window.history.back(); });
       document.getElementById("resetFocus").addEventListener("click", function () { focusId = "actor-jnim"; lastFit = -1; draw(); });
+      // UI/UX V2: relation-type filter
+      const relTypeSel = document.getElementById("relTypeFilter");
+      if (relTypeSel) {
+        relTypeSel.innerHTML = '<option value="">全部关系类型</option>' + Object.keys(REL_LABELS).map(function (t) { return '<option value="' + esc(t) + '">' + esc(REL_LABELS[t]) + '</option>'; }).join("");
+        relTypeSel.addEventListener("change", function () { relFilters.type = relTypeSel.value; lastFit = -1; draw(); });
+      }
+      const relStatusSel = document.getElementById("relStatusFilter");
+      if (relStatusSel) relStatusSel.addEventListener("change", function () { relFilters.status = relStatusSel.value; lastFit = -1; draw(); });
+      const relDisSel = document.getElementById("relDisputedOnly");
+      if (relDisSel) relDisSel.addEventListener("change", function () { relFilters.disputed = relDisSel.checked; lastFit = -1; draw(); });
+      const th = document.getElementById("twoHopToggle");
+      if (th) th.addEventListener("click", function () {
+        twoHop = !twoHop;
+        th.classList.toggle("active", twoHop);
+        th.setAttribute("aria-pressed", twoHop ? "true" : "false");
+        th.textContent = twoHop ? "收起第二层" : "展开第二层";
+        lastFit = -1; draw();
+      });
       window.addEventListener("popstate", function () { const f = new URLSearchParams(window.location.search).get("focus"); if (f && store.byEntityId[f]) { focusId = f; draw(); } });
     }
     bind(); draw();
