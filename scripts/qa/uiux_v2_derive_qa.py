@@ -49,14 +49,14 @@ list_qa = {'scope': 'entities list (search/type/importance/status/region/maturit
                     'reload with ?entityQ= restores input + count.'}
 
 # ---------- relation-inline-link-qa ----------
-inline_checks = grab('Relation body wired through inlineLinks renderer')
+inline_checks = grab('Relation body wired through inlineLinks+autoLink renderer')
 # static check: every relation-body text field now passes through inlineLinks
 js = io.open('assets/js/intelligence/africa.js', encoding='utf-8').read()
 il_count = js.count('inlineLinks(esc(')
 inline_qa = {'scope': 'relation profile body reuses entity inlineLinks renderer (no new matcher)',
              'checks': inline_checks,
              'inlineLinks_usage_count_in_relation_renderer': il_count,
-             'data_markup': 'relation profiles currently contain 0 [[...]] markers, so authored links stay plain text (no fuzzy matching)',
+             'data_markup': 'relation profiles contain 0 [[...]] markers; Fix-1 auto-links exact canonical/alias names (longest-first, denylist, ambiguity-safe, URL/ID protected), no fuzzy matching',
              'pass': all(c['pass'] for c in inline_checks),
              'gate': 'PASS' if all(c['pass'] for c in inline_checks) else 'FAIL'}
 

@@ -13,7 +13,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="repla
 ROOT = "C:/Users/kenan/WorkBuddy/clean/asip-ppt-expansion-a"
 
 ALLOWED_TRACKED_MODIFIED = {
-    # presentation layer only (UI/UX V2)
+    # presentation layer only (UI/UX V2 + Fix-1)
     "assets/js/intelligence/africa.js",
     "assets/css/intelligence.css",
     "intelligence/africa/_templates/entity.html",
@@ -23,7 +23,17 @@ ALLOWED_TRACKED_MODIFIED = {
     "intelligence/africa/_templates/relations.html",
     # test contract updated for the reused .profile-toc class (V2 requirement)
     "scripts/tests/intelligence/test_i3a_preview.py",
+    # Fix-1: QA tooling updated to verify the auto-linking renderer
+    "scripts/qa/uiux_v2_derive_qa.py",
+    "scripts/qa/uiux_v2_interaction_qa.js",
+    # Fix-1: refreshed QA artifacts inside the V2 artifact tree
+    "scripts/qa/uiux_v2_scope_audit.py",
 }
+
+ALLOWED_TRACKED_PREFIX = [
+    # any refreshed artifact under the V2 QA tree is in-scope for Fix-1
+    "qa-artifacts-uiux-v2/",
+]
 
 ALLOWED_UNTRACKED = {
     # UI/UX V2 QA tooling + artifacts
@@ -32,6 +42,7 @@ ALLOWED_UNTRACKED = {
     "scripts/qa/uiux_v2_link_qa.js",
     "scripts/qa/uiux_v2_derive_qa.py",
     "scripts/qa/uiux_v2_scope_audit.py",
+    "scripts/qa/uiux_v2_fix1_qa.js",
     "qa-artifacts-uiux-v2/",
     # Phase 0 (read-only audit) tooling + artifacts, still untracked from the
     # previous accepted phase; not modified by this phase.
@@ -60,8 +71,11 @@ for l in lines:
         tracked_modified.append(path)
 
 for p in tracked_modified:
-    if p not in ALLOWED_TRACKED_MODIFIED:
-        problems.append("OUT_OF_SCOPE TRACKED MODIFIED: " + p)
+    if p in ALLOWED_TRACKED_MODIFIED:
+        continue
+    if any(p.startswith(pre) for pre in ALLOWED_TRACKED_PREFIX):
+        continue
+    problems.append("OUT_OF_SCOPE TRACKED MODIFIED: " + p)
 for p in untracked:
     if p == "qa-artifacts-uiux-v2/" or p.startswith("qa-artifacts-uiux-v2/"):
         continue

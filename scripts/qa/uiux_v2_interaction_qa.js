@@ -148,13 +148,13 @@ async function main() {
   const wired = await ev(send, `(function(){
     return new Promise(function (res) {
       fetch("http://127.0.0.1:4174/assets/js/intelligence/africa.js").then(function (r) { return r.text(); }).then(function (src) {
-        var usesInline = src.indexOf("inlineLinks(esc(profile.") >= 0 || src.indexOf("inlineLinks(esc(x.period") >= 0;
+        var usesInline = src.indexOf("renderRelationText(esc(profile.") >= 0 || src.indexOf("autoLinkExact") >= 0;
         var hasEntityHref = src.indexOf("function entityHref") >= 0;
         res({ usesInline: usesInline, hasEntityHref: hasEntityHref });
       }).catch(function (e) { res({ err: String(e) }); });
     });
   })()`);
-  check("Relation body wired through inlineLinks renderer", wired.usesInline === true, JSON.stringify(wired));
+  check("Relation body wired through inlineLinks+autoLink renderer", wired.usesInline === true, JSON.stringify(wired));
 
   // ---- 6. Entity list filters: search + URL sync ----
   await nav(send, BASE + "entities/", `document.querySelectorAll("#allEntities .intel-card").length > 0`);

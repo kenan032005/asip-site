@@ -148,3 +148,50 @@ UIUX_V2_LOCAL_CANDIDATE = PASS
 ```
 
 全部门禁满足；知识数据零变化；57 张真实截图与全部专项 QA 工件齐备；分支已按建议逻辑提交并普通推送（无 force push）；未部署生产；未启动 Expansion C。
+
+
+---
+
+## 8. UI/UX V2 Fix-1 — Relation Body Exact Auto-Linking（追加）
+
+**问题**：V2 已把关系正文接入 inlineLinks renderer，但现有 relation profiles 无 `[[...]]` 标记 → 正文实际无可点击实体。
+
+**方案（纯 presentation layer，零数据改动）**：新增 `autoLinkExact` + `renderRelationText`：
+- 复用现有 canonical entity index（byEntityId/byEntitySlug）、alias_index.json（393 条）、entity route mapping（entityHref）。
+- **exact 匹配**：仅已知 canonical name / 注册 alias；中文名、英文 canonical、acronym、aliases 均可。
+- **最长名称优先**（ISIS-Somalia 整体先于 ISIS）；英文/缩写带边界检查（前后非字母数字）。
+- **安全**：denylist（虚词/通用词）、歧义保护（同 key 多实体跳过）、过短守卫（英文 ≥3 字符）、URL/裸域名保护、机器 ID（actor-*/rel-* 含连字符）保护；已存在 `<a>`（[[...]] 标记段）不再嵌套。
+- 关系页全部 33 处文本渲染（body/overview/timeline）改用 `renderRelationText(esc(...))`。
+
+**Fix-1 专项 QA（uiux_v2_fix1_qa.js）**：
+
+| 关系页 | body_auto_links_count | 误链 | 断链 |
+|---|---|---|---|
+| Al-Shabaab ↔ ISIS-Somalia | 78（body 54 / overview 4 / timeline 20） | 0 | 0 |
+| Lakurawa ↔ ISIS-Sahel | 44 | 0 | 0 |
+| AUSSOM ↔ SNAF | 22 | 0 | 0 |
+| ADF/ISIS-CA ↔ UPDF | 40 | 0 | 0 |
+| SIM ↔ BBMB | 38 | 0 | 0 |
+| **合计** | **222** | **FALSE_POSITIVE=0** | **BROKEN=0** |
+
+每个链接逐项验证：canonical resolve（store 命中）、route exists（dist 文件存在）、no wrong target（链接文本 ∈ 目标实体名称集）、no nested anchor。
+7 项 unit 样例全部通过：最长优先、URL/裸域不链、机器 ID 全保护（含连字符）、denylist 不链、中文最长优先、别名/缩写可链、无实体名文本保持纯文本。
+
+**Fix-1 后全量回归**：
+- FAIL_TOTAL = **0**（37/37，全部既有测试 + Expansion B 专项）
+- BROWSER_QA = **PASS**（57 页，0 console / 0 req / 0 anchors / 0 overflow，截图已刷新）
+- INTERACTION_QA = **PASS**（29/29，renderer 接线检查更新为 autoLink）
+- LINK_QA = **PASS**（337 页 / 1956 链 / 0 死链 —— 新增 auto 链接全部路由有效）
+- KNOWLEDGE_DATA_CHANGED = **0**（17 文件 SHA 复核一致）
+- OUT_OF_SCOPE_CHANGED_FILES = **0**
+
+**Fix-1 结论**：
+
+```
+RELATION_BODY_REAL_LINKS = PASS
+FALSE_POSITIVE_AUTO_LINKS = 0
+BROKEN_AUTO_LINKS = 0
+KNOWLEDGE_DATA_CHANGED = 0
+FAIL_TOTAL = 0
+UIUX_V2_FIX1 = PASS
+```

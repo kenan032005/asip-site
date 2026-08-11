@@ -2,13 +2,13 @@
   "scope": "relation profile body reuses entity inlineLinks renderer (no new matcher)",
   "checks": [
     {
-      "check": "Relation body wired through inlineLinks renderer",
+      "check": "Relation body wired through inlineLinks+autoLink renderer",
       "pass": true,
       "detail": "{\"usesInline\":true,\"hasEntityHref\":true}"
     }
   ],
-  "inlineLinks_usage_count_in_relation_renderer": 43,
-  "data_markup": "relation profiles currently contain 0 [[...]] markers, so authored links stay plain text (no fuzzy matching)",
+  "inlineLinks_usage_count_in_relation_renderer": 10,
+  "data_markup": "relation profiles contain 0 [[...]] markers; Fix-1 auto-links exact canonical/alias names (longest-first, denylist, ambiguity-safe, URL/ID protected), no fuzzy matching",
   "pass": true,
   "gate": "PASS"
 }
