@@ -1,0 +1,28 @@
+{
+  "scope": "VERIFIED FACT / INSTITUTIONAL ASSESSMENT / ASIP ANALYSIS / UNCERTAINTY / WATCH INDICATORS presentation classes; disputed badges",
+  "checks": [
+    {
+      "check": "Lakurawa disputed badge in hero",
+      "pass": true,
+      "detail": "badges=1"
+    },
+    {
+      "check": "Lakurawa uncertainty card rendered",
+      "pass": true,
+      "detail": "cards=1 label=不确定性与信息缺口 UNCERTAINTY"
+    },
+    {
+      "check": "Disputed relation badge in hero",
+      "pass": true,
+      "detail": "badges=1"
+    },
+    {
+      "check": "Relation timeline V2 stages + current banner",
+      "pass": true,
+      "detail": "{\"cards\":2,\"summaryRows\":6,\"stages\":6,\"currentBanner\":1}"
+    }
+  ],
+  "pass": true,
+  "gate": "PASS",
+  "notes": "uncertainties rendered as .intel-uncertainty-card (text label + left border + bg); disputed entities/relations get .intel-badge.disputed in hero; sanctions_legal/legal_status sections carry .intel-sem-chip.institutional; ASIP analysis stays in .intel-analysis-card (platform analysis, not verified fact)."
+}

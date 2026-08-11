@@ -1,0 +1,33 @@
+{
+  "scope": "entities list (search/type/importance/status/region/maturity/sort, URL sync) + relations list (search/type/status/maturity/disputed/time-sensitive, URL sync)",
+  "checks": [
+    {
+      "check": "Entity search filters + count updates",
+      "pass": true,
+      "detail": "{\"cnt\":\"当前结果 1 / 总计 94\",\"cards\":1,\"q\":\"shabaab\"} beforeTotal=94"
+    },
+    {
+      "check": "Entity search syncs ?entityQ= URL",
+      "pass": true,
+      "detail": "q=shabaab"
+    },
+    {
+      "check": "Entity type filter narrows to persons",
+      "pass": true,
+      "detail": "{\"cards\":24,\"type\":\"person\",\"allPersons\":true}"
+    },
+    {
+      "check": "Entity filter state restores via URL (reload/forward)",
+      "pass": true,
+      "detail": "{\"search\":\"shabaab\",\"cards\":1,\"cnt\":\"当前结果 1 / 总计 94\"}"
+    },
+    {
+      "check": "Relation search filters + URL sync",
+      "pass": true,
+      "detail": "{\"cnt\":\"当前结果 2 / 总计 181\",\"rows\":2,\"q\":\"aussom\"}"
+    }
+  ],
+  "pass": true,
+  "gate": "PASS",
+  "notes": "search input uses 350ms debounce pushState; select changes pushState; popstate restores; reload with ?entityQ= restores input + count."
+}

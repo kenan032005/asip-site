@@ -1,0 +1,71 @@
+{
+  "baseline": "feature/asip-ppt-entity-expansion-b @ 525012d",
+  "summary": "Presentation-only changes. All knowledge data (data/intelligence/africa/**) untouched (hash-verified, KNOWLEDGE_DATA_CHANGED=0).",
+  "components": [
+    {
+      "feature": "Entity long-page TOC (auto, scroll-spy, deep-link, sticky desktop, collapsible mobile)",
+      "html_template": "intelligence/africa/_templates/entity.html (#entityToc container)",
+      "js": "assets/js/intelligence/africa.js (renderSections toc emission; initScrollSpy)",
+      "css": "assets/css/intelligence.css (.profile-toc-wrap/.intel-toc-sticky/.profile-toc-details/.profile-toc a.active)",
+      "generator": "none (template-driven)"
+    },
+    {
+      "feature": "Entity hero + key-facts",
+      "html_template": "intelligence/africa/_templates/entity.html (#entityHeading, #entityKeyFacts)",
+      "js": "assets/js/intelligence/africa.js (initEntity heading + key-facts builder)",
+      "css": "assets/css/intelligence.css (.intel-keyfacts, .intel-entity-head h1 clamp)"
+    },
+    {
+      "feature": "Semantic visual hierarchy (5 classes)",
+      "html_template": "none (rendered)",
+      "js": "assets/js/intelligence/africa.js (renderSections uncertainty/institutional/asip/watch partitions; initRelation uncertainties)",
+      "css": "assets/css/intelligence.css (.intel-sem-chip, .intel-uncertainty-card, .intel-institutional-card, .uncertainty-partition)",
+      "note": "disputed badge reuses .intel-badge.disputed"
+    },
+    {
+      "feature": "Relation page hero (Party A -> summary -> Party B)",
+      "html_template": "intelligence/africa/_templates/relation.html (#relationParties)",
+      "js": "assets/js/intelligence/africa.js (initRelation partyCard/hero)",
+      "css": "assets/css/intelligence.css (.relation-hero, .relation-hero-summary, .relation-hero-arrow)"
+    },
+    {
+      "feature": "Relation body inline entity links (reuse inlineLinks)",
+      "js": "assets/js/intelligence/africa.js (relation body fields now run inlineLinks(esc(...)))",
+      "note": "same renderer as entity pages; no new matching logic"
+    },
+    {
+      "feature": "Relation timeline V2 (stage cards + current-phase banner)",
+      "html_template": "intelligence/africa/_templates/relation.html (#relationTimeline)",
+      "js": "assets/js/intelligence/africa.js (initRelation timeline V2 renderer)",
+      "css": "assets/css/intelligence.css (.rtl-h/.rtl-stage-card/.rtl-current-banner; mobile column)"
+    },
+    {
+      "feature": "Entity list search/filter/sort + URL sync",
+      "html_template": "intelligence/africa/_templates/entities.html (.list-controls)",
+      "js": "assets/js/intelligence/africa.js (initEntities rewrite)",
+      "css": "assets/css/intelligence.css (.list-controls, .list-count, .list-empty)"
+    },
+    {
+      "feature": "Relation list search/filter + URL sync",
+      "html_template": "intelligence/africa/_templates/relations.html (.list-controls)",
+      "js": "assets/js/intelligence/africa.js (initRelations rewrite)",
+      "css": "assets/css/intelligence.css (.list-controls, .list-count, .list-empty)"
+    },
+    {
+      "feature": "Sources/evidence grouped + collapsible",
+      "html_template": "intelligence/africa/_templates/sources.html (#sourceGrid reused)",
+      "js": "assets/js/intelligence/africa.js (initSources rewrite; sourceCategory())",
+      "css": "assets/css/intelligence.css (.source-group, .source-group-items)"
+    },
+    {
+      "feature": "Network V2 (search URL sync, relation filters, 2-hop cap, disputed edges, legend)",
+      "html_template": "intelligence/africa/_templates/network.html (relTypeFilter/relStatusFilter/relDisputedOnly/twoHopToggle/densityNote/legend)",
+      "js": "assets/js/intelligence/africa.js (initNetwork: relFilters, twoHop, generic edge drawing, disputed class)",
+      "css": "assets/css/intelligence.css (.twohop-btn.active, .network-density-note, .graph-edge.disputed, .legend-line.disputed)"
+    },
+    {
+      "feature": "Responsive typography (h1 clamp, en second line)",
+      "css": "assets/css/intelligence.css (.intel-entity-head h1 clamp, .intel-title-en clamp, .rel-hero-title clamp)"
+    }
+  ]
+}

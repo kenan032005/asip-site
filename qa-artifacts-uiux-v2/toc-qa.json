@@ -1,0 +1,42 @@
+{
+  "scope": "entity pages (Al-Shabaab primary) + deep-link + scroll-spy + mobile collapse",
+  "checks": [
+    {
+      "check": "TOC visible on Al-Shabaab",
+      "pass": true,
+      "detail": "{\"hidden\":false,\"detailsOpen\":true,\"links\":23,\"labels\":[\"风险等级与说明\",\"代表性事件\",\"成立背景\",\"历史沿革\",\"组织结构\",\"领导层\",\"法律与政治地位\",\"活动范围\",\"武装力量规模\",\"主要行动方式\",\"资金、补给与招募\",\"主要敌对对象\",\"对区域安全的影响\",\"核心评估\"],\"hasSecLeadership\":true,\"hasSecUncertainty\":t"
+    },
+    {
+      "check": "TOC auto-generated >=8 links",
+      "pass": true,
+      "detail": "links=23"
+    },
+    {
+      "check": "TOC sections anchored (leadership/uncertainties/asip)",
+      "pass": true,
+      "detail": "{\"l\":true,\"u\":true,\"a\":true}"
+    },
+    {
+      "check": "TOC desktop details open",
+      "pass": true,
+      "detail": "open=true"
+    },
+    {
+      "check": "deep-link #sec-leadership lands near top",
+      "pass": true,
+      "detail": "{\"top\":74,\"hash\":\"#sec-leadership\"}"
+    },
+    {
+      "check": "scroll-spy highlights current section",
+      "pass": true,
+      "detail": "active=#sec-leadership"
+    },
+    {
+      "check": "Mobile TOC collapsed by default",
+      "pass": true,
+      "detail": "open=false"
+    }
+  ],
+  "pass": true,
+  "gate": "PASS"
+}

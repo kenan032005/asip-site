@@ -1,0 +1,33 @@
+{
+  "scope": "focused 1-hop default; search URL sync; relation-type/status/disputed filters; optional 2-hop with cap=20 + density note",
+  "checks": [
+    {
+      "check": "Network search syncs ?focus= URL",
+      "pass": true,
+      "detail": "{\"focus\":\"actor-puntland-security-forces\",\"nodes\":2}"
+    },
+    {
+      "check": "2-hop expands nodes (or density note shown)",
+      "pass": true,
+      "detail": "{\"nodes\":8,\"btnText\":\"收起第二层\",\"pressed\":\"true\",\"density\":false,\"densityText\":\"\"}"
+    },
+    {
+      "check": "2-hop toggle reflects state",
+      "pass": true,
+      "detail": "{\"p\":\"true\",\"t\":\"收起第二层\"}"
+    },
+    {
+      "check": "Relation-type filter narrows edges",
+      "pass": true,
+      "detail": "[]"
+    },
+    {
+      "check": "Disputed edges styled on Lakurawa network",
+      "pass": true,
+      "detail": "disputedEdges=5"
+    }
+  ],
+  "pass": true,
+  "gate": "PASS",
+  "notes": "2-hop is OFF by default (aria-pressed=false); importance-first ordering; node cap 20 with user-facing density prompt."
+}
