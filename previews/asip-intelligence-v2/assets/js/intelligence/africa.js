@@ -124,7 +124,8 @@
       if (t) setTimeout(function () { t.scrollIntoView({ behavior: "auto", block: "start" }); }, 60);
     }
   }
-  function renderSections(container, sections) {
+  function renderSections(container, sections, opts) {
+    opts = opts || {};
     const keys = Object.keys(SECTION_LABELS);
     const items = keys.filter(function (k) { return sections[k] != null && !(Array.isArray(sections[k]) && !sections[k].length) && sections[k] !== ""; });
     let html = "";
@@ -162,7 +163,9 @@
       tailKeys.forEach(function (k) {
         const v = sections[k];
         toc.push('<a href="#sec-' + esc(k) + '">' + esc(SECTION_LABELS[k]) + '</a>');
-        html += '<section class="profile-section intel-source-notes" id="sec-' + esc(k) + '"><h2>' + esc(SECTION_LABELS[k]) + '</h2>' + renderBody(v) + '</section>';
+        // UI HARD FIX A: entity pages detach sources/notes out of the prose flow;
+        // they render at the very end of the page (after relations & evidence).
+        if (!opts.detachTail) html += '<section class="profile-section intel-source-notes" id="sec-' + esc(k) + '"><h2>' + esc(SECTION_LABELS[k]) + '</h2>' + renderBody(v) + '</section>';
       });
     }
     const el = document.querySelector(container); if (el) el.innerHTML = html;
@@ -176,9 +179,18 @@
         const details = document.createElement("details");
         details.className = "profile-toc-details";
         if (window.innerWidth > 850) details.open = true;
-        details.innerHTML = '<summary>本页目录<span class="toc-close-btn" role="button" tabindex="0" aria-label="收起目录">收起</span></summary><nav class="profile-toc" aria-label="本页目录"><ol>' + toc.map(function (x) { return '<li>' + x + '</li>'; }).join("") + '</ol></nav>';
-        const closeBtn = details.querySelector(".toc-close-btn");
-        if (closeBtn) closeBtn.addEventListener("click", function (ev) { ev.preventDefault(); ev.stopPropagation(); details.removeAttribute("open"); });
+        details.innerHTML = '<summary><span class="toc-label">本页目录</span><button type="button" class="toc-btn" aria-label="展开或收起目录">收起</button></summary><nav class="profile-toc" aria-label="本页目录"><ol>' + toc.map(function (x) { return '<li>' + x + '</li>'; }).join("") + '</ol></nav>';
+        const tbtn = details.querySelector(".toc-btn");
+        const syncToc = function () { if (tbtn) tbtn.textContent = details.open ? "收起" : "展开"; };
+        details.addEventListener("toggle", syncToc);
+        syncToc();
+        let tocAutoCollapsed = false;
+        const onTocScroll = function () {
+          if (window.innerWidth <= 850) return;
+          if (window.scrollY > 200 && details.open) { tocAutoCollapsed = true; details.open = false; }
+          else if (window.scrollY < 80 && tocAutoCollapsed && !details.open) { details.open = true; }
+        };
+        window.addEventListener("scroll", onTocScroll, { passive: true });
         tocEl.innerHTML = "";
         tocEl.appendChild(details);
         initScrollSpy(tocEl, el);
@@ -230,6 +242,139 @@
   function impLabel(l) { return IMPORTANCE_LABELS[l] || l || "未分级"; }
   function riskLabel(r) { return RISK_LABELS[r] || r; }
   function confLabel(c) { return CONFIDENCE_LABELS[c] || c || "未说明"; }
+  // UI HARD FIX A: human-readable status labels. Raw enums (e.g.
+  // reported_activity_presence / freshness codes) must never surface verbatim.
+  const STATUS_LABELS = {
+    'current': '持续',
+    'active': '活跃',
+    'historical': '历史',
+    'active_conflict': '持续冲突',
+    'active_armed_conflict': '持续武装冲突',
+    'active_counterinsurgency_conflict': '持续反恐冲突',
+    'active_joint_operation': '持续联合行动',
+    'active_joint_operations_and_transition': '持续联合行动与过渡',
+    'active_intra_jihadist_rivalry': '持续圣战派系竞争',
+    'current_activity_presence': '活跃存在',
+    'reported_activity_presence': '据报存在活动',
+    'reported_leadership_status': '据报保持领导地位',
+    'reported_current_affiliation': '据报当前隶属',
+    'reported_current_hostility': '据报当前敌对',
+    'reported_current_branch_recognition': '据报当前分支地位',
+    'reported_wartime_alignment': '据报战时结盟',
+    'reported_reporting_relationship': '据报隶属汇报关系',
+    'reported_constituent_unit': '据报组成单位',
+    'reported_senior_figure': '据报高级人物',
+    'reported_pledge_with_current_status_sensitive': '据报宣誓效忠（时效敏感）',
+    'reported_network_relation': '据报网络关联',
+    'reported_finance_leadership': '据报财务领导角色',
+    'reported_senior_leader': '据报高级领导',
+    'reported_support_relationship': '据报支持关系',
+    'reported_commandership': '据报指挥关系',
+    'reduced_presence': '存在减弱',
+    'intermittent_or_reduced': '时断时续或减弱',
+    'emerging_limited_presence': '新兴有限存在',
+    'colocated_and_organizationally_linked': '同驻且有组织关联',
+    'civilian_protection_countering': '平民保护与反制',
+    'context_dependent_cooperation': '视情合作',
+    'political_military_rivalry_under_2020_ceasefire': '2020停火下政军竞争',
+    'residual_security_hostility_after_historical_combat': '历史交战后残余安全敌对',
+    'current_operational_cooperation_after_historical_conflict': '历史冲突后当前行动合作',
+    'current_hostility_after_historical_darfur_association': '历史关联后当前敌对',
+    'detained_leader_with_fragmented_acting_command': '领导人被拘·指挥碎片化',
+    'current_hostility': '当前敌对',
+    'current_hostility_expanding_geographically': '当前敌对且地域扩张',
+    'current_political_military_cooperation': '当前政军合作',
+    'historical_formation': '历史形成',
+    'historical_ended': '历史·已终结',
+    'historical_or_aging': '历史或趋旧',
+    'historical_constituent_relation': '历史组成关系',
+    'historical_founder_relation': '历史创始关系',
+    'historical_association': '历史关联',
+    'historical_to_recent': '历史至近期',
+    'historical_splinter_relation': '历史分裂关系',
+    'historical_lineage': '历史谱系',
+    'historical_alignment_then_current_affiliation': '历史结盟转当前隶属',
+    'historical_staged_integration': '历史分阶段整合',
+    'historical_predecessor_network': '历史前驱网络',
+    'historical_precursor_fusion': '历史前驱融合',
+    'historical_merger_lineage': '历史合并谱系',
+    'historical_splinter': '历史分裂',
+    'historical_activity': '历史活动',
+    'historical_transition': '历史过渡',
+    'historical_cooperation_2021_to_2024': '2021—2024历史合作',
+    'historical_member_2021_to_2024': '2021—2024历史成员关系',
+    'historical_pledge_recognition_shifted_to_iswap': '历史效忠认可转至ISWAP',
+    'historical_nonhostility_and_limited_cooperation_2016_2019': '2016—2019非敌对有限合作',
+    'structural_current': '结构性现状',
+    'historical_to_structural': '历史转结构性',
+    'active_network': '活跃网络',
+    'active_state_force': '活跃国家力量',
+    'active_reemerging': '活跃·重新抬头',
+    'active_but_under_pressure': '活跃但承压',
+    'active_jnim_constituent': 'JNIM组成力量',
+    'active_armed_group_us_designated': '武装组织（美方认定）',
+    'active_al_qaida_affiliate_in_east_africa': '基地组织东非活跃分支',
+    'active_al_qaida_affiliate_with_sahel_branch_link': '基地组织活跃分支·与萨赫勒分支关联',
+    'active_islamic_state_sahel_branch': '伊斯兰国萨赫勒活跃分支',
+    'active_islamic_state_west_africa_branch': '伊斯兰国西非活跃分支',
+    'active_islamic_state_central_africa_branch': '伊斯兰国中部非洲活跃分支',
+    'active_islamic_state_regional_coordination_node': '伊斯兰国区域协调节点',
+    'active_islamic_state_mozambique_province_with_cabo_delgado_enclave': '伊斯兰国莫桑比克省·占据德尔加杜角',
+    'active_reduced_but_resilient_islamic_state_branch': '伊斯兰国分支·减弱但坚韧',
+    'contested_label_increasingly_linked_to_is_sahel': '标签存争议·与伊斯兰国萨赫勒关联增强',
+    'integrated_jnim_constituent_retaining_local_identity': '已并入JNIM·保留本地身份',
+    'partly_absorbed_into_fla_formation_network': '部分并入FLA组建网络',
+    'fragmented_with_fla_linkage': '碎片化·与FLA关联',
+    'historical_absorbed_into_al_qaida': '历史·已并入基地组织',
+    'historical_largely_defunct': '历史·大体瓦解',
+    'historical_dissolved_or_absorbed_as_independent_network': '历史·已解散或被吸收',
+    'historical_severely_disrupted': '历史·严重瓦解',
+    'historical_disintegrated_as_coherent_organization': '历史·作为整体已解体',
+    'historical_defunct_as_coherent_movement': '历史·作为整体已消亡',
+    'historical_absorbed_into_isis_libya_precursor_ecosystem': '历史·并入伊斯兰国利比亚前驱体系',
+    'historical_absorbed_into_murabitun_and_jnim_network': '历史·并入穆拉比通与JNIM网络',
+    'historical_mission_ended_2024_07_15': '历史任务·2024年7月结束',
+    'historical_mali_deployment_ended_2025_06': '历史部署·2025年6月结束',
+    'historical_predecessor_with_jnim': '历史前驱·与JNIM有关',
+    'historical_predecessor_with_splinter_history': '历史前驱·含分裂史',
+    'deceased_2017': '已故·2017',
+    'merged_into_fla_formation_network': '已并入FLA组建网络',
+    'active_and_expanding_across_west_africa': '活跃·在西非扩张',
+    'active_jnim_constituent_and_core_central_mali_subgroup': 'JNIM组成力量·马里中部核心分支',
+    'active_jnim_amir_at_large': 'JNIM领导·在逃',
+    'active_jnim_deputy_and_katiba_macina_emir': 'JNIM副手兼马西纳旅埃米尔',
+    'active_fragmented_jas_constellation': '碎片化JAS集团',
+    'active_al_shabaab_emir': '青年党埃米尔·在位',
+    'active_isis_somalia_founder_and_al_karrar_leader': 'ISIS-Somalia创始人兼卡尔拉尔领导',
+    'active_isis_somalia_leader': 'ISIS-Somalia领导人',
+    'active_adf_isis_ca_overall_leader': 'ADF/IS-CA最高领导人',
+    'active_al_shabaab_finance_and_amniyat_chief': '青年党财务与情报主管',
+    'active_iss_finance_office_head': 'ISS财务主管',
+    'active_adf_senior_leader': 'ADF高级领导',
+    'reported_jnim_emir_for_niger': '据报为JNIM尼日尔埃米尔',
+    'reported_defector_to_is_sahel': '据报投奔伊斯兰国萨赫勒',
+    'reported_jnim_northwest_niger_operations_leader': '据报为JNIM尼日尔西北行动领导',
+    'reported_dana_atem_leader': '据报为达纳阿特姆领导',
+    'reported_dozos_of_macina_leader': '据报为马西纳多佐领导',
+    'reported_dan_na_ambassagou_leader': '据报为丹纳安巴萨古领导',
+    'jnim_burkina_leader_top_commander': 'JNIM布基纳法索领导',
+    'jnim_burkina_deputy_commander': 'JNIM布基纳法索副指挥',
+    'active_in_mali_burkina_borderlands': '活跃于马里—布基纳边境',
+    'reduced_and_partially_demobilized_self_defense_network': '削弱且部分复员的联防网络',
+    'listed_by_eu_sudanese_islamist_movement_secretary_general': '欧盟列名·苏丹伊斯兰运动总书记',
+    'listed_by_eu_bbmb_commander': '欧盟列名·BBMB指挥官'
+  };
+  const STATUS_PREFIX = { reported: "据报", historical: "历史", active: "活跃", current: "当前" };
+  const STATUS_LOW = { and: 1, or: 1, with: 1, in: 1, of: 1, under: 1, for: 1, to: 1, on: 1, the: 1 };
+  function statusLabel(s) {
+    if (s == null || s === "") return "未说明";
+    if (STATUS_LABELS[s]) return STATUS_LABELS[s];
+    const seg = String(s).split("_").filter(Boolean);
+    if (!seg.length) return String(s);
+    const pre = STATUS_PREFIX[seg[0]];
+    const rest = seg.slice(1).map(function (w) { return STATUS_LOW[w] ? w : w.charAt(0).toUpperCase() + w.slice(1); }).join(" ");
+    return (pre ? pre + " · " : "") + (rest || String(s));
+  }
   function ringLabel(r) { return RING_LABELS[r] || r; }
   function period(rel) { const s = rel.time_start || rel.start_year; const e = rel.time_end || rel.end_year; if (!s && !e) return "未说明"; if (s && e) return s + "—" + e; return s ? s + "—至今" : "截至 " + e; }
   function entityHref(id) {
@@ -517,7 +662,7 @@
     function row(r) {
       const s2 = store.byEntityId[r.source_entity_id], t2 = store.byEntityId[r.target_entity_id];
       const dis = relIsDisputed(r) ? ' <span class="intel-badge disputed">争议</span>' : "";
-      return '<div class="intel-rel-row"><div class="intel-rel-main"><span class="intel-rel-kind">' + esc(relLabel(r.relationship_type)) + '</span> ' + entityLink(r.source_entity_id, s2 ? title(s2) : r.source_entity_id) + ' <b>' + (r.direction === "bidirectional" ? "↔" : "→") + '</b> ' + entityLink(r.target_entity_id, t2 ? title(t2) : r.target_entity_id) + ' <a class="intel-rel-archive" href="' + esc(relationHref(r.relationship_id)) + '">档案 →</a>' + dis + '</div><div class="intel-rel-desc">' + esc(r.relation_summary || "") + '</div><div class="intel-rel-meta">时间：' + esc(period(r)) + ' · 状态：' + esc(r.current_status) + ' · 可信度：' + esc(confLabel(r.confidence)) + '</div></div>';
+      return '<div class="intel-rel-row"><div class="intel-rel-main"><span class="intel-rel-kind">' + esc(relLabel(r.relationship_type)) + '</span> ' + entityLink(r.source_entity_id, s2 ? title(s2) : r.source_entity_id) + ' <b>' + (r.direction === "bidirectional" ? "↔" : "→") + '</b> ' + entityLink(r.target_entity_id, t2 ? title(t2) : r.target_entity_id) + ' <a class="intel-rel-archive" href="' + esc(relationHref(r.relationship_id)) + '">档案 →</a>' + dis + '</div><div class="intel-rel-desc">' + esc(r.relation_summary || "") + '</div><div class="intel-rel-meta">时间：' + esc(period(r)) + ' · 状态：' + esc(statusLabel(r.current_status)) + ' · 可信度：' + esc(confLabel(r.confidence)) + '</div></div>';
     }
     function render() {
       const list = store.relationships.filter(matches);
@@ -623,8 +768,21 @@
     // renders as its own second line. disputed entities carry an explicit
     // "身份/归属存在争议" badge generated from the existing disputed flag.
     const disBadge = entity.disputed ? '<span class="intel-badge disputed">身份/归属存在争议</span>' : '';
-    const h = document.querySelector("#entityHeading"); if (h) h.innerHTML = '<div class="intel-heading-code">' + esc(entity.entity_id) + '</div><h1>' + esc(title(entity)) + '</h1><p class="intel-title-en">' + esc(entity.name_en) + '</p><div class="intel-badges">' + typeBadge(entity) + importanceBadge(entity) + maturityBadge(profile.content_maturity || entity.content_maturity) + '<span class="intel-badge status">' + esc(entity.current_status) + '</span>' + freshnessBadge(entity.freshness_status) + disBadge + '</div>' + freshnessNote(entity);
-    renderSections("#entityBody", profile.sections);
+    const h = document.querySelector("#entityHeading"); if (h) h.innerHTML = '<div class="intel-heading-code">' + esc(entity.entity_id) + '</div><h1>' + esc(title(entity)) + '</h1><p class="intel-title-en">' + esc(entity.name_en) + '</p><div class="intel-badges">' + typeBadge(entity) + importanceBadge(entity) + maturityBadge(profile.content_maturity || entity.content_maturity) + '<span class="intel-badge status">' + esc(statusLabel(entity.current_status)) + '</span>' + freshnessBadge(entity.freshness_status) + disBadge + '</div>' + freshnessNote(entity);
+    renderSections("#entityBody", profile.sections, { detachTail: true });
+    // UI HARD FIX A: sources & notes always render at the very end of the entity
+    // page (after body, direct relations and evidence) — never in the prose flow.
+    const srcBox = document.querySelector("#entitySources");
+    if (srcBox) {
+      const sv = profile.sections || {};
+      let sh = "";
+      ["sources", "notes"].forEach(function (k) {
+        const v = sv[k];
+        if (v == null || (Array.isArray(v) && !v.length) || v === "") return;
+        sh += '<section class="profile-section intel-source-notes" id="sec-' + esc(k) + '"><h2>' + esc(SECTION_LABELS[k]) + '</h2>' + renderBody(v) + '</section>';
+      });
+      if (sh) { srcBox.innerHTML = sh; } else { srcBox.remove(); }
+    }
     // UI/UX V2: compact key-facts strip generated from existing data only.
     // Missing fields are simply omitted; nothing is invented.
     const kf = document.getElementById("entityKeyFacts");
@@ -664,7 +822,7 @@
       ib.innerHTML = '<h2>结构化信息框</h2><dl>' + rows + '</dl>';
     }
     const rels = store.relationships.filter(function (r) { return r.source_entity_id === entity.entity_id || r.target_entity_id === entity.entity_id; });
-    const rl = document.querySelector("#entityRelations"); if (rl) rl.innerHTML = rels.map(function (r) { const other = r.source_entity_id === entity.entity_id ? r.target_entity_id : r.source_entity_id; return '<div class="intel-rel-row"><div class="intel-rel-main"><span class="intel-rel-kind">' + esc(relLabel(r.relationship_type)) + '</span> ' + entityLink(other, titleFor(other)) + ' <a class="intel-rel-archive" href="' + esc(relationHref(r.relationship_id)) + '">档案 →</a></div><div class="intel-rel-meta">' + esc(period(r)) + ' · ' + esc(r.current_status) + '</div></div>'; }).join("") || '<p class="muted">暂无直接关系。</p>';
+    const rl = document.querySelector("#entityRelations"); if (rl) rl.innerHTML = rels.map(function (r) { const other = r.source_entity_id === entity.entity_id ? r.target_entity_id : r.source_entity_id; return '<div class="intel-rel-row"><div class="intel-rel-main"><span class="intel-rel-kind">' + esc(relLabel(r.relationship_type)) + '</span> ' + entityLink(other, titleFor(other)) + ' <a class="intel-rel-archive" href="' + esc(relationHref(r.relationship_id)) + '">档案 →</a></div><div class="intel-rel-meta">' + esc(period(r)) + ' · ' + esc(statusLabel(r.current_status)) + '</div></div>'; }).join("") || '<p class="muted">暂无直接关系。</p>';
     const gl = document.querySelector("#graphLink"); if (gl) gl.setAttribute("href", networkHref(entity.entity_id));
     const ev = document.querySelector("#entityEvidence"); if (ev) ev.innerHTML = '<div class="relationship-count">相关证据记录 ' + evidenceCountFor([entity.entity_id]) + ' 条</div><p class="muted">关键事实经 evidence_id 与 source_id 关联追溯。</p>';
   }
@@ -686,20 +844,20 @@
     if (profile && profile.relation_maturity) techRows.push('<div class="tech-row">档案成熟度：<code>' + esc(profile.relation_maturity) + '</code></div>');
     const techDetails = techRows.length ? '<details class="rel-tech-details"><summary>技术元数据（展开）</summary><div class="rel-tech-body">' + techRows.join("") + '</div></details>' : '';
     const h = document.querySelector("#relationHeading");
-    if (h) h.innerHTML = '<h1 class="rel-hero-title">' + esc(st) + ' <span class="rel-arrow">↔</span> ' + esc(tt) + '</h1><p class="intel-title-en">' + esc(relLabel(rel.relationship_type)) + ' · ' + esc(rel.current_status) + '</p><div class="intel-badges">' + (s ? importanceBadge(s) : "") + (t ? importanceBadge(t) : "") + maturityBadge(profile ? profile.relation_maturity : null) + freshnessBadge(rel.freshness_status) + disRelBadge + '</div>' + freshnessNote(rel) + techDetails;
+    if (h) h.innerHTML = '<h1 class="rel-hero-title">' + esc(st) + ' <span class="rel-arrow">↔</span> ' + esc(tt) + '</h1><p class="intel-title-en">' + esc(relLabel(rel.relationship_type)) + ' · ' + esc(statusLabel(rel.current_status)) + '</p><div class="intel-badges">' + maturityBadge(profile ? profile.relation_maturity : null) + freshnessBadge(rel.freshness_status) + disRelBadge + '</div>' + freshnessNote(rel) + techDetails;
     // UI/UX V2: relation hero — Party A card → summary → Party B card.
     // Desktop renders left—middle—right; CSS collapses to A ↓ relation ↓ B on mobile.
     const pp = document.getElementById("relationParties");
     if (pp) {
       const partyCard = function (e) {
         if (!e) return '<div class="relation-party-card"><b>未解析实体</b><span>' + esc(e) + '</span></div>';
-        return '<a class="relation-party-card" href="' + esc(entityHref(e.entity_id)) + '"><b>' + esc(title(e)) + '</b><span class="intel-title-en">' + esc(e.name_en) + '</span><span>' + typeBadge(e) + ' · ' + esc(impLabel(e.importance_level)) + (e.current_status ? ' · ' + esc(e.current_status) : '') + '</span></a>';
+        return '<a class="relation-party-card" href="' + esc(entityHref(e.entity_id)) + '"><b>' + esc(title(e)) + '</b><span class="intel-title-en">' + esc(e.name_en) + '</span><span>' + typeBadge(e) + ' · ' + esc(impLabel(e.importance_level)) + (e.current_status ? ' · ' + esc(statusLabel(e.current_status)) : '') + '</span></a>';
       };
       const rhRow = function (l, v) { if (v == null || v === "") return ""; return '<div class="rh-row"><dt>' + esc(l) + '</dt><dd>' + v + '</dd></div>'; };
       pp.innerHTML = partyCard(s) +
         '<div class="relation-hero-summary"><div class="relation-hero-arrow">↔</div><h2>关系摘要</h2>' +
         rhRow("关系类型", '<b>' + esc(relLabel(rel.relationship_type)) + '</b>') +
-        rhRow("状态", esc(rel.current_status)) +
+        rhRow("状态", esc(statusLabel(rel.current_status))) +
         rhRow("时间", esc(period(rel))) +
         rhRow("可信度", esc(confLabel(rel.confidence))) +
         rhRow("时效", freshnessBadge(rel.freshness_status)) +
@@ -847,9 +1005,22 @@
         }
       }
       // UI FINAL POLISH 1: safe margins keep nodes + labels inside the 900x630 viewBox.
-      const XMIN = 74, XMAX = 900 - 74, YMIN = 58, YMAX = 630 - 78;
+      const XMIN = 96, XMAX = 900 - 96, YMIN = 66, YMAX = 630 - 96;
       ids.forEach(function (k) { const q = next[k]; q.x = Math.max(XMIN, Math.min(XMAX, q.x)); q.y = Math.max(YMIN, Math.min(YMAX, q.y)); });
       positions = next;
+    }
+    function maxSafeZoom() {
+      let minX = 1e9, maxX = -1e9, minY = 1e9, maxY = -1e9;
+      Object.keys(positions).forEach(function (k) {
+        const p = positions[k];
+        minX = Math.min(minX, p.x); maxX = Math.max(maxX, p.x);
+        minY = Math.min(minY, p.y); maxY = Math.max(maxY, p.y);
+      });
+      if (maxX < minX || maxY < minY) return 1;
+      const LM = 90, TM = 50, BM = 70;
+      const zx1 = 450 / (450 - minX + LM), zx2 = 450 / (maxX - 450 + LM);
+      const zy1 = 315 / (315 - minY + TM), zy2 = 315 / (maxY - 315 + BM);
+      return Math.max(0.55, Math.min(1.5, zx1, zx2, zy1, zy2));
     }
     function edgePoint(a, b, dist) { const dx = b.x - a.x, dy = b.y - a.y, l = Math.max(Math.hypot(dx, dy), 1); return { x: a.x + dx / l * dist, y: a.y + dy / l * dist }; }
     function relationGroup(r) {
@@ -875,7 +1046,7 @@
       if (!e) return "";
       const relsN = store.relationships.filter(function (r) { return r.source_entity_id === e.entity_id || r.target_entity_id === e.entity_id; });
       const isCountry = e.entity_type === "country" || e.primary_type === "country";
-      return '<div class="intel-node-detail"><h2>' + esc(title(e)) + '</h2><p class="intel-title-en">' + esc(e.name_en) + '</p><div class="intel-badges">' + typeBadge(e) + importanceBadge(e) + (e.current_status ? '<span class="intel-badge status">' + esc(e.current_status) + '</span>' : '') + (e.disputed ? '<span class="intel-badge disputed">争议</span>' : '') + '</div><p class="nd-meta">' + esc(e.entity_id) + (e.freshness_status ? ' · ' + freshnessBadge(e.freshness_status) : '') + '</p><p class="nd-meta">' + esc(e.short_description || "") + '</p><p class="nd-rels">' + relsN.length + ' 条关键关系：' + relsN.slice(0, 8).map(function (r) { const other = r.source_entity_id === e.entity_id ? r.target_entity_id : r.source_entity_id; return '<a href="' + esc(relationHref(r.relationship_id)) + '">' + esc(titleFor(other)) + '</a>'; }).join("") + '</p><a class="intel-button sm" href="' + esc(entityHref(e.entity_id)) + '">' + (isCountry ? '进入国家页 →' : '查看详细档案 →') + '</a></div>';
+      return '<div class="intel-node-detail"><h2>' + esc(title(e)) + '</h2><p class="intel-title-en">' + esc(e.name_en) + '</p><div class="intel-badges">' + typeBadge(e) + importanceBadge(e) + (e.current_status ? '<span class="intel-badge status">' + esc(statusLabel(e.current_status)) + '</span>' : '') + (e.disputed ? '<span class="intel-badge disputed">争议</span>' : '') + '</div><p class="nd-meta">' + esc(e.entity_id) + (e.freshness_status ? ' · ' + freshnessBadge(e.freshness_status) : '') + '</p><p class="nd-meta">' + esc(e.short_description || "") + '</p><p class="nd-rels">' + relsN.length + ' 条关键关系：' + relsN.slice(0, 8).map(function (r) { const other = r.source_entity_id === e.entity_id ? r.target_entity_id : r.source_entity_id; return '<a href="' + esc(relationHref(r.relationship_id)) + '">' + esc(titleFor(other)) + '</a>'; }).join("") + '</p><a class="intel-button sm" href="' + esc(entityHref(e.entity_id)) + '">' + (isCountry ? '进入国家页 →' : '查看详细档案 →') + '</a></div>';
     }
     function draw() {
       const center = store.byEntityId[focusId]; if (!center) return;
@@ -925,7 +1096,7 @@
       viewport.innerHTML = "";
       const defs = mk("defs");
       EDGE_GROUPS.forEach(function (k) { const m = mk("marker", { id: "af-arrow-" + k, markerWidth: "9", markerHeight: "9", refX: "8", refY: "4.5", orient: "auto", markerUnits: "strokeWidth" }); m.appendChild(mk("path", { d: "M0,0 L9,4.5 L0,9 z", class: "arrow-head " + k })); defs.appendChild(m); });
-      RING_ORDER.forEach(function (ring) { defs.appendChild(mk("circle", { cx: 450, cy: 315, r: RINGS[ring], class: "ring-guide ring-" + ring, "aria-hidden": "true" })); });
+      RING_ORDER.forEach(function (ring) { const rr = RINGS[ring]; defs.appendChild(mk("ellipse", { cx: 450, cy: 315, rx: rr, ry: Math.round(rr * 0.9), class: "ring-guide ring-" + ring, "aria-hidden": "true" })); });
       viewport.appendChild(defs);
       const hitLayer = mk("g", { class: "graph-edge-hits" }); const edgeLayer = mk("g", { class: "graph-edges" }); const labelLayer = mk("g", { class: "graph-edge-labels" }); const nodeLayer = mk("g", { class: "graph-nodes" });
       const showLabels = rels.length <= 8;
@@ -942,7 +1113,7 @@
         const g = mk("g", { class: "graph-edge-group " + kind });
         g.appendChild(mk("line", { x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y, class: "graph-edge-hit " + kind }));
         g.appendChild(mk("line", { x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y, class: "graph-edge " + kind, "marker-end": "url(#af-arrow-" + kindBase + ")", "aria-label": relLabel(r.relationship_type) + "：" + title(eb), tabindex: "0", role: "button" }));
-        g.addEventListener("click", function (ev) { ev.stopPropagation(); document.querySelectorAll(".graph-edge-group.selected").forEach(function (x) { x.classList.remove("selected"); }); g.classList.add("selected"); if (relInfo) relInfo.innerHTML = '<h2>关系详情</h2><div class="relation-pair">' + entityLink(r.source_entity_id, title(store.byEntityId[r.source_entity_id])) + ' <b>↔</b> ' + entityLink(r.target_entity_id, title(store.byEntityId[r.target_entity_id])) + '</div><p class="relation-label">' + esc(relLabel(r.relationship_type)) + ' · ' + esc(ringLabel(ringFor(r))) + '圈层</p>' + (r.relationship_type === "pledged_allegiance_to" ? '<p class="ib-note">宣誓效忠（bay\'ah）为独立关系语义，不同于一般网络关联（affiliated_with）。</p>' : '') + '<p>' + esc(r.relation_summary) + '</p><dl class="intel-detail-list"><dt>时间范围</dt><dd>' + esc(period(r)) + '</dd><dt>状态</dt><dd>' + esc(r.current_status) + '</dd><dt>可信度</dt><dd>' + esc(confLabel(r.confidence)) + '</dd><dt>时效</dt><dd>' + freshnessBadge(r.freshness_status) + '</dd><dt>来源</dt><dd>' + sourceList(r.source_refs) + '</dd></dl><a class="intel-button sm" href="' + esc(relationHref(r.relationship_id)) + '">查看完整关系沿革 →</a>'; });
+        g.addEventListener("click", function (ev) { ev.stopPropagation(); document.querySelectorAll(".graph-edge-group.selected").forEach(function (x) { x.classList.remove("selected"); }); g.classList.add("selected"); if (relInfo) relInfo.innerHTML = '<h2>关系详情</h2><div class="relation-pair">' + entityLink(r.source_entity_id, title(store.byEntityId[r.source_entity_id])) + ' <b>↔</b> ' + entityLink(r.target_entity_id, title(store.byEntityId[r.target_entity_id])) + '</div><p class="relation-label">' + esc(relLabel(r.relationship_type)) + ' · ' + esc(ringLabel(ringFor(r))) + '圈层</p>' + (r.relationship_type === "pledged_allegiance_to" ? '<p class="ib-note">宣誓效忠（bay\'ah）为独立关系语义，不同于一般网络关联（affiliated_with）。</p>' : '') + '<p>' + esc(r.relation_summary) + '</p><dl class="intel-detail-list"><dt>时间范围</dt><dd>' + esc(period(r)) + '</dd><dt>状态</dt><dd>' + esc(statusLabel(r.current_status)) + '</dd><dt>可信度</dt><dd>' + esc(confLabel(r.confidence)) + '</dd><dt>时效</dt><dd>' + freshnessBadge(r.freshness_status) + '</dd><dt>来源</dt><dd>' + sourceList(r.source_refs) + '</dd></dl><a class="intel-button sm" href="' + esc(relationHref(r.relationship_id)) + '">查看完整关系沿革 →</a>'; });
         g.addEventListener("keydown", function (ev) { if (ev.key === "Enter" || ev.key === " ") g.dispatchEvent(new MouseEvent("click", { bubbles: true })); });
         hitLayer.appendChild(g);
         if (showLabels) {
@@ -970,21 +1141,31 @@
         g.appendChild(shape);
         const icon = mk("text", { x: 0, y: 5, class: "node-icon", "text-anchor": "middle" }); icon.textContent = typeName(e) === "person" ? "人" : typeName(e) === "country" ? "国" : "组"; g.appendChild(icon);
         const nt = title(e);
-        let labelText;
+        // UI HARD FIX A: strict default label policy — only the focus node gets a
+        // full label; L1 key neighbors get a short/acronym label; everything else
+        // stays as a clean dot so the default graph reads as structure, not text.
+        const isKeyNeighbor = !isCenter && (e.importance_level === "L1");
+        let labelText = "";
         if (labelMode === "full") labelText = nt;
         else if (labelMode === "focus") labelText = isCenter ? nt : "";
         else if (isCenter) labelText = nt;
-        else if (extraNodes.indexOf(e) >= 0) labelText = tinyLabel(e);
-        else labelText = shortLabel(e);
+        else if (labelMode === "auto") labelText = isKeyNeighbor ? shortLabel(e) : "";
+        // adapt label placement so text never clips at the canvas edges
+        const nearBottom = pos.y > 448, nearTop = pos.y < 96;
+        const nearRight = pos.x > 760, nearLeft = pos.x < 140;
+        const ly = isCenter ? 76 : (nearBottom ? -44 : 54);
+        const anchor = nearLeft ? "start" : (nearRight ? "end" : "middle");
+        const lx = nearLeft ? 16 : (nearRight ? -16 : 0);
         let labelCls = "node-label";
         if (isCenter) labelCls += " center-label";
-        else if (labelMode === "auto") labelCls += (extraNodes.indexOf(e) >= 0 ? " tiny" : " short");
+        else if (labelMode === "auto") labelCls += (labelText ? " short" : " hidden-label");
         else if (labelMode === "focus") labelCls += " hidden-label";
-        const name = mk("text", { x: 0, y: isCenter ? 76 : 54, class: labelCls, "text-anchor": "middle", "pointer-events": "none" });
+        const name = mk("text", { x: lx, y: ly, class: labelCls, "text-anchor": anchor, "pointer-events": "none" });
         name.textContent = labelText; g.appendChild(name);
         if (!isCenter) { const tp = mk("title"); tp.textContent = nt + " " + (e.name_en || ""); g.appendChild(tp); }
         if (isCenter) { const en = mk("text", { x: 0, y: 94, class: "node-sub-label", "text-anchor": "middle" }); en.textContent = e.name_en.length > 30 ? e.name_en.slice(0, 28) + "…" : e.name_en; g.appendChild(en); }
-        const tag = mk("text", { x: 0, y: isCenter ? -48 : -38, class: "node-imp-tag", "text-anchor": "middle" }); tag.textContent = e.importance_level || "L3"; g.appendChild(tag);
+        const showImp = isCenter || (e.importance_level === "L1") || labelMode !== "auto";
+        if (showImp) { const tag = mk("text", { x: 0, y: isCenter ? -48 : -38, class: "node-imp-tag", "text-anchor": "middle" }); tag.textContent = e.importance_level || "L3"; g.appendChild(tag); }
         g.addEventListener("click", function (ev) {
           if (isCenter) { window.location.href = entityHref(e.entity_id); return; }
           const ni = document.getElementById("nodeInfo");
@@ -1014,7 +1195,7 @@
       if (ni) ni.innerHTML = nodeDetailHtml(center) + '<p class="ib-note">外围节点点击可切换中心并在此查看详情。</p>';
       const wrap = document.getElementById("graphWrap");
       if (wrap && wrap.clientWidth < 560 && visibleEntities.length !== lastFit) { lastFit = visibleEntities.length; zoom = Math.max(0.62, Math.min(1, (wrap.clientWidth - 60) / 700)); const zv = document.getElementById("zoomValue"); if (zv) zv.textContent = Math.round(zoom * 100) + "%"; }
-      viewport.setAttribute("transform", "translate(0 0) scale(" + zoom + ")");
+      viewport.setAttribute("transform", "translate(" + (450 - 450 * zoom) + " " + (315 - 315 * zoom) + ") scale(" + zoom + ")");
     }
     function bind() {
       document.querySelectorAll("[data-imp-filter]").forEach(function (el) { el.addEventListener("change", function () { filters.imp[el.getAttribute("data-imp-filter")] = el.checked; lastFit = -1; draw(); }); });
@@ -1023,7 +1204,7 @@
       const countrySel = document.getElementById("countryFilter"); if (countrySel) { countrySel.innerHTML = '<option value="">全部国家</option>' + store.countries.map(function (c) { return '<option value="' + esc(c.country_id) + '">' + esc(c.name_zh) + '</option>'; }).join(""); countrySel.addEventListener("change", function () { filters.country = countrySel.value; lastFit = -1; draw(); }); }
       const typeSel = document.getElementById("typeFilter"); if (typeSel) { typeSel.innerHTML = '<option value="">全部类型</option>' + Object.keys(TYPE_LABELS).map(function (t) { return '<option value="' + esc(t) + '">' + esc(TYPE_LABELS[t]) + '</option>'; }).join(""); typeSel.addEventListener("change", function () { filters.type = typeSel.value; lastFit = -1; draw(); }); }
       const search = document.getElementById("entitySearch"); if (search) search.addEventListener("input", function () { const term = search.value.trim().toLowerCase(); if (!term) return; const hit = store.entities.find(function (e) { return [e.entity_id, e.slug, e.name_zh, e.name_en, e.acronym || "", e.native_name || ""].concat(e.aliases).join(" ").toLowerCase().indexOf(term) >= 0; }); if (hit) { if (!visible(hit)) { filters.imp[hit.importance_level || "L3"] = true; document.querySelectorAll("[data-imp-filter]").forEach(function (x) { x.checked = filters.imp[x.getAttribute("data-imp-filter")]; }); } focusId = hit.entity_id; lastFit = -1; draw(); const u = new URL(window.location.href); u.searchParams.set("focus", focusId); window.history.pushState({ focus: focusId }, "", u); } });
-      document.getElementById("zoomIn").addEventListener("click", function () { zoom = Math.min(1.5, zoom + 0.12); draw(); });
+      document.getElementById("zoomIn").addEventListener("click", function () { zoom = Math.min(maxSafeZoom(), zoom + 0.12); draw(); });
       document.getElementById("zoomOut").addEventListener("click", function () { zoom = Math.max(0.55, zoom - 0.12); draw(); });
       document.getElementById("fitGraph").addEventListener("click", function () { zoom = 1; lastFit = -1; draw(); });
       document.getElementById("backFocus").addEventListener("click", function () { window.history.back(); });
