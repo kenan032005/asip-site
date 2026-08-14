@@ -17,7 +17,7 @@
 | DUPLICATE_CANONICAL_ENTITIES | **0** | ✅ |
 | STANDARD_FINAL_ENTITY_COUNT | **0**（8 新 + 4 ENRICH 全部 encyclopedia_full） | ✅ |
 | UIUX_V2_REGRESSION | **0** | ✅ |
-| FAIL_TOTAL | **0**（22 测试全绿，含 Expansion C 专项 41 检查） | ✅ |
+| FAIL_TOTAL | **0**（全库 38 个测试套件全绿 = 6827 用例；含 Expansion C 专项 41 检查） | ✅ |
 | BUILD | **PASS**（321 routes） | ✅ |
 | BROWSER_QA | **PASS**（12 页面 × desktop/mobile = 24 截图 + 5 网络 focus，0 console / 0 req / 0 anchors / 0 overflow） | ✅ |
 | NETWORK/LINK_QA | **PASS**（356 页 / 2070 链 / 0 死链） | ✅ |
@@ -51,8 +51,8 @@
 |---|---|---|
 | entities（非国家） | 94 | **102**（+8 全部 E3） |
 | relationships | 181 | **192**（+11；10 个 R3 + 1 个 R1） |
-| relation profiles | 189 | **192**（+10 新 R3 + 3 升级 R2→R3） |
-| relation timelines | 86 | **98**（+11 新 + katiba 补 4） |
+| relation profiles | 181 | **192**（+11 新，全部带 profile；+3 既有升级 R2→R3） |
+| relation timelines | 73 | **88**（+15：11 条新关系 + 4 条既有关系补 timeline） |
 | sources | 221 | **246**（+25） |
 | evidence | 358 | **380**（+22） |
 | aliases | 393 | **443**（+50） |
@@ -120,3 +120,69 @@ EXPANSION_C_LOCAL_CANDIDATE = PASS
 ```
 
 已停止。未启动 Expansion D。
+
+---
+---
+
+## 9. Acceptance Correction Audit（bookkeeping/regression only，追加）
+
+本审计为只读核对，未修改任何知识数据 / 事实语义（HEAD 仍为 facff39）。
+
+### 9.1 relation_profiles baseline 澄清
+
+从 f663949 与 facff39 分别机械统计（git show 读取，非人工）：
+
+| 指标 | f663949（baseline） | facff39（final） |
+|---|---|---|
+| BASELINE_RELATIONSHIPS / FINAL_RELATIONSHIPS | 181 | **192** |
+| BASELINE_RELATION_PROFILES / FINAL_RELATION_PROFILES | **181** | **192** |
+| BASELINE_RELATION_TIMELINES / FINAL_RELATION_TIMELINES | 73 | **88** |
+| ORPHAN_RELATION_PROFILES | 0 | **0** |
+| DUPLICATE_RELATION_PROFILES | 0 | **0** |
+| RELATION_IDS_WITHOUT_PROFILES | 0 | **0** |
+
+**结论**：baseline relation_profiles 真实值 = **181**（与 Expansion B acceptance 一致，也与 UI/UX V2 的 17 文件 hash 不变一致）。acceptance report 原写的「189 → 192」中的 **189 是报告笔误**，已修正为 **181 → 192**。数据本身无缺失、无重复、无孤儿：每一条新增关系（+11）均携带 profile，每一条既有关系均保持其 profile，未删除任何历史数据以凑数。
+
+关系增量构成（已核对）：+11 新关系（10 个 R3 + 1 个 R1）全部带 profile；+3 既有关系升级 R2→R3（rel-is-mourabitoun-splinter、rel-jnim-ansar-constituent、rel-jnim-mourabitoun-constituent）；relation_timelines +15 = 11 条新关系 timeline + 4 条既有关系新增 timeline（含 rel-jnim-katiba-constituent）。
+
+### 9.2 full regression test count 澄清
+
+Expansion C 阶段使用的运行器 `_exp_c_runall.py` 只枚举了 **22 个** intelligence 测试文件，**遗漏了 14 个既有测试文件**（demo×3、git_delivery_manifest、i2b_audit、i3a_country_depth、i3a_source_coverage、i3b_×6、relation_ontology）以及 scripts/tests/ 下的 2 个 EXTRA 套件。因此原报告「22 tests」不是口径差异，而是**运行覆盖不足**。
+
+本次 closure audit 改用全量入口（`scripts/qa/expansion_c_closure_audit.py`，枚举全部 test_*.py + 2 个 EXTRA）：
+
+```
+TEST_FILES_DISCOVERED = 38
+TEST_CASES_DISCOVERED = 6827
+TEST_CASES_RUN        = 6827
+TEST_CASES_PASSED     = 6827
+TEST_CASES_FAILED     = 0
+TEST_CASES_SKIPPED    = 0
+```
+
+38 个套件名称（全部 PASS）：test_africa_data / test_africa_evidence_quality / test_africa_freshness / test_africa_metrics / test_africa_pages / test_demo_data / test_demo_pages / test_demo_v02 / test_depth_a_import / test_depth_b_import / test_depth_c_import / test_depth_d_import / test_depth_e_import / test_depth_f_import / test_depth_g_closure / test_expansion_b_gate / **test_expansion_c_gate** / test_git_delivery_manifest / test_i2b_audit / test_i3a_content_quality / test_i3a_country_depth / test_i3a_duplicate_text / test_i3a_entity_depth / test_i3a_preview / test_i3a_source_coverage / test_i3b_all_country_depth / test_i3b_current_status / test_i3b_evidence_upgrade / test_i3b_production_isolation / test_i3b_public_preview / test_i3b_relation_depth / test_i3b_release_candidate / test_i3b_zero_basic_entries / test_i3d1_import / test_i3d2_import / test_relation_ontology / test_no_local_paths / test_repository_integrity。
+
+专项统计：**Expansion C 专项 41 检查**（test_expansion_c_gate.py，与全库回归分开统计）；既有历史套件（demo/i2b/i3b 等）均未删除、未过滤、未跳过——f663949→facff39 的 git diff 确认仅 12 个计数钉测试被修改 + test_expansion_c_gate 新增，**无任何测试文件被删除**。**TEST_CASES_FAILED = 0 未通过缩减测试覆盖获得**（本次运行的 38 个套件多于此前任何一轮）。
+
+### 9.3 重新确认不变项
+
+| 项 | 值 | 状态 |
+|---|---|---|
+| FACT_SEMANTIC_ERRORS | **0** | ✅（semantic-audit 重跑） |
+| DUPLICATE_CANONICAL_ENTITIES | **0**（实体 ID / slug 均无重复） | ✅ |
+| UIUX_V2_REGRESSION | **0** | ✅（semantic-audit 重跑） |
+| OUT_OF_SCOPE_CHANGED_FILES | **0** | ✅（scope-audit 重跑，local-path-scan diff = ZERO） |
+| BUILD | **PASS**（321 routes：102 实体 / 192 关系 / 7 区域 / 13 国家 / 246 来源 / 380 证据） | ✅ |
+
+未重拍 24 张截图（知识数据未变，UI/UX V2 渲染已由既有 BROWSER_QA/LINK_QA 工件覆盖）。
+
+### 9.4 更新文件
+
+- `qa-artifacts-expansion-c/final-counts.json`：补 baseline（f663949）与 closure_audit 字段，relation_profiles baseline = **181**
+- `qa-artifacts-expansion-c/test-results.json`：重写为全量 38 套件结果（TEST_CASES_FAILED = 0）
+- `qa-artifacts-expansion-c/expansion-c-acceptance-report.md`：修正 §1 门禁表 FAIL_TOTAL 表述、§3 表 relation profiles（181→192）与 relation timelines（73→88）数字
+- 新增审计工具 `scripts/qa/expansion_c_closure_audit.py`（全量回归入口，可复现）
+
+```
+EXPANSION_C_CLOSURE = PASS
+```

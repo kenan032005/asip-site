@@ -39,8 +39,11 @@ ALLOWED_TRACKED_MODIFIED = {
     "scripts/tests/intelligence/test_i3d1_import.py",
     "scripts/tests/intelligence/test_i3d2_import.py",
     "scripts/tests/intelligence/test_expansion_b_gate.py",
-    # QA tooling refreshed in-place
+    # QA tooling refreshed in-place (uiux_v2 + expansion_c)
     "scripts/qa/uiux_v2_derive_qa.py",
+    "scripts/qa/expansion_c_semantic_audit.py",
+    "scripts/qa/expansion_c_scope_audit.py",
+    "scripts/qa/expansion_c_closure_audit.py",
     "scripts/qa/uiux_v2_interaction_qa.js",
     "scripts/qa/uiux_v2_scope_audit.py",
     # gitignore addition for the expansion-c Edge QA profile
@@ -63,6 +66,7 @@ ALLOWED_UNTRACKED = {
     "scripts/qa/expansion_c_link_qa.js",
     "scripts/qa/expansion_c_semantic_audit.py",
     "scripts/qa/expansion_c_scope_audit.py",
+    "scripts/qa/expansion_c_closure_audit.py",
     "qa-artifacts-expansion-c/",
     # Phase 0 (read-only audit) tooling + artifacts, untouched
     "scripts/qa/uiux_v2_static_inventory.py",
