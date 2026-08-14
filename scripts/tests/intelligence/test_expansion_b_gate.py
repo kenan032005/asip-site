@@ -156,8 +156,8 @@ def main():
     check("verified ratio < 0.80", v / len(evidence) < 0.80, round(v / len(evidence), 4))
 
     # 8. counts
-    check("entities=102", len(entities) == 102, len(entities))
-    check("relationships=192", len(rels) == 192, len(rels))
+    check("entities=104", len(entities) == 104, len(entities))
+    check("relationships=195", len(rels) == 195, len(rels))
 
     if FAIL:
         sys.exit(1)

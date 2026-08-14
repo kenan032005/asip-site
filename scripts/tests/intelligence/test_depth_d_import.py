@@ -35,9 +35,9 @@ non_country = [e for e in entities if e["entity_type"] != "country"]
 
 print("== TEST 1: no count expansion ==")
 check("countries=13", len(countries) == 13, f"got {len(countries)}")
-check("entities=102", len(non_country) == 102, f"got {len(non_country)} (83 + 11 Expansion B)")
-check("relationships=192", len(rels) == 192, f"got {len(rels)} (164 + 17 Expansion B)")
-check("routes=321", metrics.get("route_count") == 321, f"got {metrics.get('route_count')} (274 + 19 entities + 28 relations)")
+check("entities=104", len(non_country) == 104, f"got {len(non_country)} (102 + 2 Expansion D)")
+check("relationships=195", len(rels) == 195, f"got {len(rels)} (192 + 3 Expansion D)")
+check("routes=326", metrics.get("route_count") == 326, f"got {metrics.get('route_count')} (321 + 5 Expansion D)")
 
 print("== TEST 2: SAF-RSF 2026 front ==")
 saf = json.dumps(ep.get("actor-saf", {}).get("sections", {}), ensure_ascii=False)
@@ -56,7 +56,7 @@ check("JEM-SAF historical timeline preserved", "2003—2020" in json.dumps(tl.ge
 check("JEM-SAF no residual hostile", not any(
     r["source_entity_id"] == "actor-jem" and r["target_entity_id"] == "actor-saf" and r["relationship_type"] == "hostile_to"
     for r in rels))
-check("JEM-SAF total still 181", len(rels) == 192)
+check("JEM-SAF total still 195", len(rels) == 195)
 
 print("== TEST 4: RSF-JEM repair ==")
 rsf_jem = rel_by_id.get("rel-rsf-darfur-origin")

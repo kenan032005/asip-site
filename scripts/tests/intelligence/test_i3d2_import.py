@@ -31,8 +31,8 @@ def test_i3d2_packet_counts():
     entities = load("entities.json")["entities"]
     rels = load("relationships.json")["relationships"]
     profiles = load("relation_profiles.json")["profiles"]
-    if len(entities) != 102: fail(f"entities={len(entities)} != 102 (83 + 11 Expansion B)")
-    if len(rels) != 192: fail(f"relationships={len(rels)} != 192 (164 + 17 Expansion B)")
+    if len(entities) != 104: fail(f"entities={len(entities)} != 104 (102 + 2 Expansion D)")
+    if len(rels) != 195: fail(f"relationships={len(rels)} != 195 (192 + 3 Expansion D)")
     if len(profiles) < 50: fail(f"profiles={len(profiles)} < 50")
     d2_ents = ["person-jafar-dicko", "person-ousmane-dicko", "actor-katiba-hanifa", "person-abou-ghosmane", "actor-katiba-serma", "actor-dana-atem", "person-ibrahim-malam-dicko", "actor-dozos-of-macina", "person-sidi-ongoiba", "person-amadou-nionson-diarra", "person-youssouf-toloba"]
     eids = {e["entity_id"] for e in entities}

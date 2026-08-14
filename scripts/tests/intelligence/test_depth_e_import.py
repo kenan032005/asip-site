@@ -36,9 +36,9 @@ ent_by_id = {e["entity_id"]: e for e in entities}
 
 print("== TEST 1: no count expansion ==")
 check("countries=13", len(countries) == 13, f"got {len(countries)}")
-check("entities=102", len(non_country) == 102, f"got {len(non_country)} (83 + 11 Expansion B)")
-check("relationships=192", len(rels) == 192, f"got {len(rels)} (164 + 17 Expansion B)")
-check("routes=321", metrics.get("route_count") == 321, f"got {metrics.get('route_count')} (274 + 19 entities + 28 relations)")
+check("entities=104", len(non_country) == 104, f"got {len(non_country)} (102 + 2 Expansion D)")
+check("relationships=195", len(rels) == 195, f"got {len(rels)} (192 + 3 Expansion D)")
+check("routes=326", metrics.get("route_count") == 326, f"got {metrics.get('route_count')} (321 + 5 Expansion D)")
 
 print("== TEST 2: source cleanup ==")
 for eid in ("actor-endf", "actor-fano", "actor-ola", "actor-tdf"):

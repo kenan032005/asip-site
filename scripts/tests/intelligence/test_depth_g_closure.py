@@ -57,9 +57,9 @@ def sections_text(eid):
 
 print("== TEST 1: count invariants (no breadth expansion) ==")
 check("countries=13", len(countries) == 13, f"got {len(countries)}")
-check("entities=102", len(non_country) == 102, f"got {len(non_country)} (83 + 11 Expansion B)")
-check("relationships=192", len(rels) == 192, f"got {len(rels)} (164 + 17 Expansion B)")
-check("routes=321", metrics.get("route_count") == 321, f"got {metrics.get('route_count')} (274 + 19 entities + 28 relations)")
+check("entities=104", len(non_country) == 104, f"got {len(non_country)} (102 + 2 Expansion D)")
+check("relationships=195", len(rels) == 195, f"got {len(rels)} (192 + 3 Expansion D)")
+check("routes=326", metrics.get("route_count") == 326, f"got {metrics.get('route_count')} (321 + 5 Expansion D)")
 check("sources grew from 182", len(sources) >= 182, f"got {len(sources)}")
 check("evidence grew from 297", len(evidence) >= 297, f"got {len(evidence)}")
 
@@ -139,7 +139,7 @@ check("conflict edge hostile_to", conflict.get("relationship_type") == "hostile_
 check("conflict edge = R3", (rp.get("rel-jnim-is-conflict") or {}).get("relation_maturity")
       == "R3_FULL_RELATIONSHIP_INTELLIGENCE",
       str((rp.get("rel-jnim-is-conflict") or {}).get("relation_maturity")))
-check("relationship count unchanged at 181", len(rels) == 192)
+check("relationship count unchanged at 195", len(rels) == 195)
 
 print("== TEST 8: core relation overrides applied ==")
 imp = qa("depth-g-import-report.json")
@@ -166,7 +166,7 @@ for r in rels:
     t = (rp.get(r["relationship_id"]) or {}).get("relation_maturity")
     tiers[t] = tiers.get(t, 0) + 1
 check("all three tiers populated", len([k for k in tiers if k]) == 3, str(tiers))
-check("tier totals sum to 181", sum(v for k, v in tiers.items() if k) == 192, str(tiers))
+check("tier totals sum to 195", sum(v for k, v in tiers.items() if k) == 195, str(tiers))
 
 print("== TEST 10: summary-only re-audit + staleness handling ==")
 rc = qa("relation-closure-audit.json")
