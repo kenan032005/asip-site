@@ -1092,6 +1092,11 @@
       const seenNode = {};
       const visibleEntities = [];
       [center].concat(neighbors, extraNodes).forEach(function (e) { if (e && !seenNode[e.entity_id]) { seenNode[e.entity_id] = 1; visibleEntities.push(e); } });
+      // UI HARD FIX A: never draw dangling edges — drop any relation whose
+      // endpoint was hidden by the legend / node visibility filter.
+      const visId = {};
+      visibleEntities.forEach(function (e) { visId[e.entity_id] = 1; });
+      rels = rels.filter(function (r) { return visId[r.source_entity_id] && visId[r.target_entity_id]; });
       layout(center, visibleEntities, rels);
       viewport.innerHTML = "";
       const defs = mk("defs");
