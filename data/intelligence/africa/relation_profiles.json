@@ -554,61 +554,73 @@
       "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE"
     },
     "rel-rdf-mozambique-fadm-cooperate": {
-      "relation_id": "rel-rdf-mozambique-fadm-cooperate",
-      "slug": "rdf-mozambique-fadm-cooperate",
-      "relation_title": "莫桑比克国防军—卢旺达部队：反叛乱协同",
+      "relationship_id": "rel-rdf-mozambique-fadm-cooperate",
+      "relation_title": "RDF/RSF ↔ FADM：卡波德尔加杜反恐合作",
       "source_entity_id": "actor-rdf-mozambique",
       "target_entity_id": "actor-fadm",
       "relation_type": "cooperates_with",
-      "direction": "bidirectional",
       "display_ring": "middle",
-      "current_status": "协同持续；莫桑比克安全力量逐步承担更多责任。",
-      "overview": "Rwanda deployment与FADM自2021年持续合作反ISM。2026年Mozambique总统访问Rwanda Security Force HQ并确认继续合作。",
+      "current_status": "当前合作（active）",
+      "overview": "卢旺达安全部队（RDF+RNP 联合）与莫桑比克国防军（FADM）在卡波德尔加杜开展持续反恐合作；2026 年官方报道确认持续的作战规划与合作。",
       "parties": [
-        "actor-rdf-mozambique",
-        "actor-fadm"
-      ],
-      "formation_background": "2021 年帕尔马遭袭后，莫桑比克请求卢旺达与南共体支持；卢旺达部队快速部署并协同作战。",
-      "initial_relationship": "应莫桑比克请求的军事合作。",
-      "evolution_stages": [
         {
-          "period": "2021 年 7 月",
-          "title": "卢旺达部署",
-          "description": "卢旺达部队进入德尔加杜角协同反叛乱。"
+          "entity_id": "actor-rdf-mozambique",
+          "role": "卢旺达安全部队（RDF+RNP）"
         },
         {
-          "period": "2021 年至今",
-          "title": "协同推进",
-          "description": "收复多处要地，残余袭击仍存在。"
+          "entity_id": "actor-fadm",
+          "role": "莫桑比克国防武装力量（FADM）"
+        }
+      ],
+      "formation_background": "2021-07 卢旺达应莫桑比克请求部署联合部队后，与 FADM 建立作战合作，承担战斗/安全、国家权威恢复与稳定化任务。",
+      "initial_relationship": "2021-07 联合部署即建立合作。",
+      "evolution_stages": [
+        {
+          "period": "2021-07",
+          "detail": "联合部署开始。"
+        },
+        {
+          "period": "2024",
+          "detail": "ACLED 估算约 4000 卢旺达人员。"
+        },
+        {
+          "period": "2025—2026",
+          "detail": "持续轮换与作战规划，官方确认合作。"
         }
       ],
       "causes": [
-        "德尔加杜角安全形势恶化",
-        "双边安全协议"
+        "卡波德尔加杜叛乱",
+        "莫桑比克请求",
+        "区域安全合作"
       ],
-      "key_turning_points": [
-        {
-          "event": "2021 年部署",
-          "impact": "显著改变当地安全态势。",
-          "source_ids": [
-            "crisis-group-mozambique"
-          ]
-        }
-      ],
-      "regional_differences": "SAMIM 撤出后，卢旺达部队角色更加突出。",
-      "impact_on_security": "德尔加杜角大部分地区安全恢复。",
-      "why_it_matters": "RDF是FADM当前最关键外部作战伙伴。",
-      "uncertainties": "战术指挥、资金与退出条件不公开。",
+      "key_turning_points": [],
+      "regional_differences": "莫桑比克卡波德尔加杜。",
+      "impact_on_security": "RDF/RSF 与 FADM 的合作是卡波德尔加杜反恐的骨干。",
+      "why_it_matters": "该合作是理解卡波德尔加杜反恐格局的核心。",
+      "uncertainties": "合作的指挥权边界与兵力规模缺乏官方 2026 精确数据（ACLED 4000 为分析性估计）。",
       "disputed": false,
       "temporal_sensitive": true,
-      "last_verified_at": "2026-08-09",
+      "last_verified_at": "2026-08-14",
       "source_ids": [
-        "crisis-group-mozambique",
-        "depthf-rwanda-mod-mozambique-2026-07-02",
-        "depthf-reuters-rwanda-mozambique-2026-05-19"
+        "expe-rwanda-joint-force",
+        "expe-acled-rwanda-moz",
+        "expe-fadm-official"
       ],
-      "current_assessment": "current formal bilateral security cooperation.",
-      "relation_maturity": "R2_DEVELOPED_RELATIONSHIP"
+      "drivers": [
+        "叛乱威胁",
+        "双边合作"
+      ],
+      "constraints": [
+        "指挥边界"
+      ],
+      "current_assessment": "当前合作（R3 cooperation）。",
+      "asip_analysis": "ASIP 判断：RDF/RSF↔FADM 是持续反恐合作。必须守住 RSF≠RDF 别名纪律——RSF 含 RNP 警察成分。",
+      "watch_indicators": [
+        "合作的持续与轮换",
+        "兵力规模官方披露"
+      ],
+      "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+      "imported_by": "expansion-e"
     },
     "rel-jnim-niger-operates": {
       "relation_id": "rel-jnim-niger-operates",
@@ -2060,72 +2072,65 @@
       "relation_maturity": "R2_DEVELOPED_RELATIONSHIP"
     },
     "rel-tanzania-tpdf-is-moz": {
-      "relation_id": "rel-tanzania-tpdf-is-moz",
-      "relation_type": "fought_against",
-      "slug": "rel-tanzania-tpdf-is-moz",
+      "relationship_id": "rel-tanzania-tpdf-is-moz",
+      "relation_title": "TPDF ↔ ISIS-Mozambique：反叛乱敌对",
       "source_entity_id": "actor-tanzania-tpdf",
       "target_entity_id": "actor-is-mozambique",
-      "source_ids": [
-        "depthf-acled-tpdf-profile",
-        "depthf-acled-moz-2026-05-06"
-      ],
+      "relation_type": "fought_against",
+      "display_ring": "middle",
+      "current_status": "当前敌对（active）",
+      "overview": "坦桑尼亚人民国防军（TPDF）在卡波德尔加杜（集中南加德）与伊斯兰国莫桑比克省交战，为当前反叛乱敌对关系。",
       "parties": [
-        "actor-tanzania-tpdf",
-        "actor-is-mozambique"
+        {
+          "entity_id": "actor-tanzania-tpdf",
+          "role": "坦桑尼亚人民国防军（TPDF）"
+        },
+        {
+          "entity_id": "actor-is-mozambique",
+          "role": "伊斯兰国莫桑比克省（ISIS-Mozambique）"
+        }
       ],
-      "overview": "TPDF通过SAMIM和自2022年起的双边部署参与反ISM行动，重点位于Nangade/Ruvuma边境方向。SAMIM结束后，双边部署继续。",
-      "formation_background": "2017 年德尔加杜角叛乱爆发后，武装袭击沿鲁伍马河扩散；坦桑尼亚 2021 年加入 SAMIM 并在边境维持独立部署。",
-      "initial_relationship": "跨境对抗：IS-Mozambique 的活动基地在莫桑比克侧，坦桑尼亚侧风险为‘渗透与流动’而非本土叛乱。",
+      "formation_background": "2022 年起坦桑尼亚在南加德保持独立双边部署，承担边境安全与叛乱外溢预防，并与 FADM 合作。",
+      "initial_relationship": "2022 年双边部署开始。",
       "evolution_stages": [
         {
-          "period": "2017 年起",
-          "title": "跨境袭击",
-          "description": "鲁伍马河方向处决式袭击（累计 100+ 死亡）。"
+          "period": "2022",
+          "detail": "双边部署开始（南加德）。"
         },
         {
-          "period": "2021—2024 年",
-          "title": "SAMIM 参与",
-          "description": "坦桑尼亚派兵支援莫桑比克。"
-        },
-        {
-          "period": "2024 年起",
-          "title": "双边部署",
-          "description": "SAMIM 结束后边境部署与双边合作继续。"
-        },
-        {
-          "period": "2025—2026 年",
-          "title": "持续警戒",
-          "description": "边境袭击偶发，TPDF 维持反渗透。"
+          "period": "2024 后",
+          "detail": "SAMIM 结束后双边部署延续。"
         }
       ],
       "causes": [
-        "IS-Mozambique 的跨境扩张",
-        "边境与河流地形的开放性",
-        "德尔加杜角叛乱的持续存在"
+        "ISIS-Mozambique 叛乱外溢",
+        "边境安全需求"
       ],
-      "key_turning_points": [
-        {
-          "event": "2017 年首次跨境袭击",
-          "impact": "坦桑尼亚进入警戒状态。"
-        },
-        {
-          "event": "2021 年 SAMIM",
-          "impact": "坦桑尼亚从防御转为主动参与。"
-        },
-        {
-          "event": "2024 年 SAMIM 结束",
-          "impact": "转向双边合作，坦桑尼亚独立承担边境防御。"
-        }
-      ],
-      "current_status": "当前状态（截至 2026 年年中）：跨境警戒持续、无本土叛乱。TPDF 维持边境部署与反渗透，与莫桑比克保持协同。",
-      "regional_differences": "地域差异：姆特瓦拉（鲁伍马河方向）为最高风险带；林迪南部次之；坦桑尼亚腹地与旅游区安全。",
-      "impact_on_security": "该对抗是‘风险外溢’而非‘境内叛乱’的典型：坦桑尼亚的稳定依赖边境防御与莫桑比克侧的控制。",
-      "why_it_matters": "压缩ISM跨Tanzania补给与人员通道。",
-      "uncertainties": "当前直接交火频率和部署规模不透明。",
+      "key_turning_points": [],
+      "regional_differences": "卡波德尔加杜南部（南加德）、坦桑尼亚—莫桑比克边境。",
+      "impact_on_security": "TPDF 的部署构成卡波德尔加杜南部反叛乱与边境安全的一环。",
+      "why_it_matters": "该敌对关系是理解卡波德尔加杜反叛乱格局的一部分。",
+      "uncertainties": "TPDF 双边部署的兵力规模缺乏官方 2026 精确数据。",
+      "disputed": false,
       "temporal_sensitive": true,
-      "last_verified_at": "2026-08-09",
-      "current_assessment": "current border-focused counterinsurgency hostility.",
-      "relation_maturity": "R2_DEVELOPED_RELATIONSHIP"
+      "last_verified_at": "2026-08-14",
+      "source_ids": [
+        "expe-acled-cabo-ligado-tpdf"
+      ],
+      "drivers": [
+        "叛乱外溢",
+        "边境安全"
+      ],
+      "constraints": [
+        "兵力规模"
+      ],
+      "current_assessment": "当前敌对关系。",
+      "asip_analysis": "ASIP 判断：TPDF↔ISIS-Mozambique 是反叛乱敌对。必须区分其 SAMIM 参加与独立双边部署两个层面。",
+      "watch_indicators": [
+        "TPDF 双边部署的持续与规模"
+      ],
+      "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+      "imported_by": "expansion-e"
     },
     "rel-tanzania-mozambique-cooperate": {
       "relation_id": "rel-tanzania-mozambique-cooperate",
@@ -4006,28 +4011,70 @@
       ]
     },
     "rel-is-moz-islamic-state2": {
-      "relation_id": "rel-is-moz-islamic-state2",
-      "relation_type": "fought_against",
-      "slug": "rel-is-moz-islamic-state2",
+      "relationship_id": "rel-is-moz-islamic-state2",
+      "relation_title": "RDF/RSF ↔ ISIS-Mozambique：反叛乱敌对",
       "source_entity_id": "actor-rdf-mozambique",
       "target_entity_id": "actor-is-mozambique",
+      "relation_type": "fought_against",
+      "display_ring": "middle",
+      "current_status": "当前反叛乱冲突（active）",
+      "overview": "卢旺达安全部队（RDF+RNP）在卡波德尔加杜与伊斯兰国莫桑比克省（ISIS-Mozambique）交战，为当前反叛乱敌对关系。",
       "parties": [
-        "actor-rdf-mozambique",
-        "actor-is-mozambique"
+        {
+          "entity_id": "actor-rdf-mozambique",
+          "role": "卢旺达安全部队（RDF+RNP）"
+        },
+        {
+          "entity_id": "actor-is-mozambique",
+          "role": "伊斯兰国莫桑比克省（ISIS-Mozambique）"
+        }
       ],
-      "overview": "此legacy记录原本错误地把IS-Mozambique连接到ISWAP并写historically_associated_with。ACLED明确指出Mozambique network历史属于ISCAP框架而非ISWAP；与此同时Rwanda forces自2021年持续直接与ISM作战。为保持150条关系不扩展，本轮原位修复为RDF Mozambique ↔ ISM fought_against。",
-      "formation_background": "Rwanda于2021年部署Cabo Delgado并直接参与反ISM作战。",
-      "current_assessment": "current active conflict between Rwandan deployment and ISM.",
-      "why_it_matters": "删除错误ISIS分支谱系，同时补回现有实体网络中最关键且事实明确的Cabo Delgado作战边。",
-      "uncertainties": "legacy ID/slug与新语义不一致，仅因route/reference stability保留；页面显示必须以正确实体名称和relation profile为准。",
-      "asip_analysis": "ASIP判断：这是数据清洗而不是广度扩展——一个错误边被正确现有实体关系替换，关系总数仍150。",
-      "relation_maturity": "R2_DEVELOPED_RELATIONSHIP",
-      "last_verified_at": "2026-08-09",
+      "formation_background": "2021-07 联合部署后，在莫辛博阿、帕尔马等地与叛乱分子交战，承担战斗与稳定化任务。",
+      "initial_relationship": "2021-07 部署即与叛乱交战。",
+      "evolution_stages": [
+        {
+          "period": "2021-07",
+          "detail": "部署并交战。"
+        },
+        {
+          "period": "2021—2024",
+          "detail": "与 SAMIM 时期共存作战。"
+        },
+        {
+          "period": "2025—2026",
+          "detail": "持续轮换作战。"
+        }
+      ],
+      "causes": [
+        "ISIS-Mozambique 叛乱",
+        "莫桑比克请求"
+      ],
+      "key_turning_points": [],
+      "regional_differences": "卡波德尔加杜（莫辛博阿、帕尔马）。",
+      "impact_on_security": "RDF/RSF 的作战是卡波德尔加杜反叛乱的关键外部力量。",
+      "why_it_matters": "该敌对关系是理解卡波德尔加杜反叛乱格局的核心。",
+      "uncertainties": "兵力规模（ACLED 4000 为分析性估计）与作战效果缺乏官方精确数据。",
+      "disputed": false,
+      "temporal_sensitive": true,
+      "last_verified_at": "2026-08-14",
       "source_ids": [
-        "depthf-acled-ism-profile",
-        "depthf-acled-moz-2026-05-06",
-        "depthf-rwanda-mod-mozambique-2026-07-02"
-      ]
+        "expe-rwanda-joint-force",
+        "expe-acled-rwanda-moz"
+      ],
+      "drivers": [
+        "叛乱威胁",
+        "双边部署"
+      ],
+      "constraints": [
+        "兵力规模"
+      ],
+      "current_assessment": "当前反叛乱敌对关系。",
+      "asip_analysis": "ASIP 判断：RDF/RSF↔ISIS-Mozambique 是持续反叛乱敌对。兵力规模以 ACLED 分析性估计标注，不写成官方 2026 现役兵力。",
+      "watch_indicators": [
+        "卢旺达兵力轮换与作战动态"
+      ],
+      "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+      "imported_by": "expansion-e"
     },
     "rel-fadm-is-moz-hostile": {
       "relation_id": "rel-fadm-is-moz-hostile",
@@ -4157,24 +4204,73 @@
       ]
     },
     "rel-isis-libya-lna-conflict": {
-      "relation_id": "rel-isis-libya-lna-conflict",
-      "relation_type": "hostile_to",
-      "slug": "rel-isis-libya-lna-conflict",
+      "relationship_id": "rel-isis-libya-lna-conflict",
+      "relation_title": "LAAF/LNA ↔ ISIS-Libya：反恐敌对",
       "source_entity_id": "actor-isis-libya",
       "target_entity_id": "actor-lna",
+      "relation_type": "hostile_to",
+      "display_ring": "middle",
+      "current_status": "残余安全敌对（active）",
+      "overview": "利比亚阿拉伯武装力量/国民军（LAAF/LNA）与伊斯兰国利比亚分支（ISIS-Libya）为敌对关系；NCTC 2026-06 称前 ISIS-Libya 领导 Abdul Qadr al-Najdi 被 LNA 击杀。",
       "parties": [
-        "actor-isis-libya",
-        "actor-lna"
+        {
+          "entity_id": "actor-isis-libya",
+          "role": "伊斯兰国利比亚分支（ISIS-Libya）"
+        },
+        {
+          "entity_id": "actor-lna",
+          "role": "利比亚阿拉伯武装力量/国民军（LAAF/LNA）"
+        }
       ],
-      "overview": "ISIS-Libya与LNA等Libyan forces历史上发生直接战斗，基础hostile_to可以保留；但UN S/2026/224强调当前ISIL-Libya活动更多转向facilitation/enabling，缺乏证据支持把关系继续写成高强度持续战争。",
-      "current_assessment": "residual security hostility after historical direct combat; current direct clash frequency not established.",
-      "why_it_matters": "避免把ISIS-Libya过时地呈现为LNA当前主要territorial battlefield opponent。",
-      "uncertainties": "残余cell与LNA直接交火的2026频率缺乏强公开资料。",
-      "relation_maturity": "R2_DEVELOPED_RELATIONSHIP",
-      "last_verified_at": "2026-08-09",
+      "formation_background": "ISIS-Libya 持续以利比亚军事/安全部队为目标；LNA 在东部与南部开展反 ISIS 行动。",
+      "initial_relationship": "ISIS-Libya 2015 年前后在苏尔特等地扩张后与 LNA 交战。",
+      "evolution_stages": [
+        {
+          "period": "2015—2016",
+          "detail": "ISIS-Libya 在苏尔特扩张，与利比亚各派交战。"
+        },
+        {
+          "period": "2026-06",
+          "detail": "前 ISIS-Libya 领导 al-Najdi 被 LNA 击杀。"
+        }
+      ],
+      "causes": [
+        "ISIS-Libya 威胁",
+        "利比亚反恐"
+      ],
+      "key_turning_points": [
+        {
+          "event": "al-Najdi 被击杀 (2026-06)",
+          "impact": "ISIS-Libya 领导层受挫。",
+          "source_ids": [
+            "expe-nctc-isis-libya-2026-06"
+          ]
+        }
+      ],
+      "regional_differences": "利比亚。",
+      "impact_on_security": "LAAF/LNA 的反 ISIS 行动构成利比亚反恐的一部分。",
+      "why_it_matters": "该敌对关系是理解利比亚 ISIS-Libya 残余威胁与 LNA 反恐角色的关键。",
+      "uncertainties": "LAAF/LNA 反 ISIS 行动的持续强度与整体性（不推断持续高强度战斗）。",
+      "disputed": false,
+      "temporal_sensitive": true,
+      "last_verified_at": "2026-08-14",
       "source_ids": [
-        "depthf-un-s2026-224-libya"
-      ]
+        "expe-nctc-isis-libya-2026-06"
+      ],
+      "drivers": [
+        "ISIS-Libya 残余威胁"
+      ],
+      "constraints": [
+        "利比亚分裂"
+      ],
+      "current_assessment": "残余安全敌对关系；不过度推断持续战斗强度。",
+      "asip_analysis": "ASIP 判断：LAAF/LNA↔ISIS-Libya 是敌对，但不过度推断持续高强度战斗；al-Najdi 被杀是标志性事件。",
+      "watch_indicators": [
+        "ISIS-Libya 残余活动",
+        "LNA 反恐动态"
+      ],
+      "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+      "imported_by": "expansion-e"
     },
     "rel-jnim-ansar-constituent": {
       "relationship_id": "rel-jnim-ansar-constituent",
@@ -4976,19 +5072,67 @@
       "maturity_assessed_at": "2026-08-09"
     },
     "rel-d1-africa-corps-jnim-conflict": {
-      "relation_id": "rel-d1-africa-corps-jnim-conflict",
-      "relation_type": "fought_against",
-      "slug": "d1-africa-corps-jnim-conflict",
+      "relationship_id": "rel-d1-africa-corps-jnim-conflict",
+      "relation_title": "非洲军团 ↔ JNIM：安全行动敌对",
       "source_entity_id": "actor-africa-corps",
       "target_entity_id": "actor-jnim",
-      "overview": "Africa Corps参与马里政府针对JNIM等武装的行动，并在JNIM活动区开展军事行动。",
-      "source_ids": [
-        "d1-reuters-africa-corps-2026-07-31"
+      "relation_type": "fought_against",
+      "display_ring": "middle",
+      "current_status": "当前敌对（active）",
+      "overview": "俄罗斯非洲军团在马里与马里武装力量联合作战环境中与 JNIM 交战，为当前安全行动敌对关系。",
+      "parties": [
+        {
+          "entity_id": "actor-africa-corps",
+          "role": "俄罗斯非洲军团"
+        },
+        {
+          "entity_id": "actor-jnim",
+          "role": "JNIM"
+        }
       ],
-      "current_status": "Africa Corps参与马里政府针对JNIM等武装的行动，并在JNIM活动区开展军事行动。",
-      "relation_maturity": "R1_SIMPLE_SOURCED_RELATION",
-      "maturity_basis": "R2 default downshifted to R1 — no context/history field; no why-it-matters / uncertainty field",
-      "maturity_assessed_at": "2026-08-09"
+      "formation_background": "非洲军团在马里与马里武装力量合作，处于 JNIM 冲突环境中；通过联合作战与 JNIM 交战。",
+      "initial_relationship": "瓦格纳时期即与 JNIM 交战（Tinzaouaten 2024），非洲军团延续该敌对。",
+      "evolution_stages": [
+        {
+          "period": "2024",
+          "detail": "Tinzaouaten 战斗瓦格纳人员受损。"
+        },
+        {
+          "period": "2025—2026",
+          "detail": "非洲军团延续与 JNIM 的敌对。"
+        }
+      ],
+      "causes": [
+        "JNIM 威胁",
+        "马里反恐合作"
+      ],
+      "key_turning_points": [],
+      "regional_differences": "马里。",
+      "impact_on_security": "非洲军团与 JNIM 的交战构成马里反恐格局的一部分。",
+      "why_it_matters": "该敌对关系是理解俄罗斯在萨赫勒安全角色的核心。",
+      "uncertainties": "非洲军团对 JNIM 的作战强度与效果缺乏系统公开统计。",
+      "disputed": false,
+      "temporal_sensitive": true,
+      "last_verified_at": "2026-08-14",
+      "source_ids": [
+        "expe-crs-africa-corps",
+        "expe-reuters-africa-corps-civilian"
+      ],
+      "drivers": [
+        "JNIM 威胁",
+        "俄马合作"
+      ],
+      "constraints": [
+        "平民伤害争议"
+      ],
+      "current_assessment": "当前敌对关系（通过联合作战）。",
+      "asip_analysis": "ASIP 判断：非洲军团↔JNIM 是当前敌对。平民伤害指控须归因于 HRW/路透，不呈现为已裁定事实。",
+      "watch_indicators": [
+        "非洲军团对 JNIM 的作战动态",
+        "平民伤害指控的后续核实"
+      ],
+      "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+      "imported_by": "expansion-e"
     },
     "rel-d1-wagner-mali-deployed": {
       "relation_id": "rel-d1-wagner-mali-deployed",
@@ -8838,6 +8982,651 @@
       ],
       "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
       "imported_by": "expansion-d"
+    },
+    "rel-expe-mnjtf-jas-hostile": {
+      "relationship_id": "rel-expe-mnjtf-jas-hostile",
+      "relation_title": "MNJTF ↔ 博科圣地/JAS：乍得湖反恐敌对",
+      "source_entity_id": "actor-mnjtf",
+      "target_entity_id": "actor-jas",
+      "relation_type": "fought_against",
+      "display_ring": "middle",
+      "current_status": "当前敌对（active）",
+      "overview": "MNJTF 是乍得湖盆地打击博科圣地/贾马阿图·阿斯-苏纳（JAS）的主要多国反恐机制，通过 Operation Lake Sanity 等行动持续削弱 JAS；二者为当前 hostile/counterterrorism 关系。",
+      "parties": [
+        {
+          "entity_id": "actor-mnjtf",
+          "role": "多国联合特遣部队（LCBC/非盟支持）"
+        },
+        {
+          "entity_id": "actor-jas",
+          "role": "博科圣地/贾马阿图·阿斯-苏纳（JAS）"
+        }
+      ],
+      "formation_background": "MNJTF 在乍得湖流域委员会（LCBC）框架与非盟支持下运作；2024 年 Operation Lake Sanity 2 被非盟引述为削弱博科圣地等恐怖组织。",
+      "initial_relationship": "MNJTF 自 2015 年前后以多国联合行动打击博科圣地，构成乍得湖反恐骨干。",
+      "evolution_stages": [
+        {
+          "period": "2015 前后",
+          "detail": "MNJTF 重组并强化对博科圣地的联合打击。"
+        },
+        {
+          "period": "2024",
+          "detail": "Operation Lake Sanity 2 被非盟引述为削弱博科圣地。"
+        },
+        {
+          "period": "2026-02 起",
+          "detail": "授权更新（2026-02-01 至 2027-01-31），JAS 仍为打击目标。"
+        }
+      ],
+      "causes": [
+        "乍得湖盆地博科圣地叛乱",
+        "LCBC 框架下的多国反恐协调",
+        "非盟支持"
+      ],
+      "key_turning_points": [
+        {
+          "event": "Operation Lake Sanity 2 (2024)",
+          "impact": "非盟引述为削弱博科圣地等恐怖组织。",
+          "source_ids": [
+            "expe-au-psc-mnjtf-2025-12"
+          ]
+        }
+      ],
+      "regional_differences": "乍得湖盆地（尼日利亚东北部、喀麦隆、乍得、尼日尔交界）。",
+      "impact_on_security": "MNJTF 对 JAS 的持续打击构成乍得湖反恐格局的核心，尽管 JAS 已碎片化。",
+      "why_it_matters": "该关系是乍得湖反恐的核心；MNJTF 当前打击目标含 JAS。",
+      "uncertainties": "JAS 碎片化后 MNJTF 打击对象的具体派别归属存在不确定性。",
+      "disputed": false,
+      "temporal_sensitive": true,
+      "last_verified_at": "2026-08-14",
+      "source_ids": [
+        "expe-au-psc-mnjtf-2025-12"
+      ],
+      "drivers": [
+        "JAS 叛乱持续",
+        "区域反恐协调"
+      ],
+      "constraints": [
+        "成员国政治分歧",
+        "尼日尔退出后凝聚力削弱"
+      ],
+      "current_assessment": "当前敌对关系；MNJTF 授权更新后继续将 JAS 作为打击目标。",
+      "asip_analysis": "ASIP 判断：MNJTF↔JAS 是当前 hostile/counterterrorism 关系。评估时须注意 MNJTF 自身凝聚力因尼日尔退出而削弱，其对 JAS 的打击能力存在不确定性。",
+      "watch_indicators": [
+        "MNJTF 对 JAS 的持续行动",
+        "尼日尔是否重返 MNJTF"
+      ],
+      "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+      "imported_by": "expansion-e"
+    },
+    "rel-expe-mnjtf-iswap-hostile": {
+      "relationship_id": "rel-expe-mnjtf-iswap-hostile",
+      "relation_title": "MNJTF ↔ ISWAP：乍得湖反恐敌对",
+      "source_entity_id": "actor-mnjtf",
+      "target_entity_id": "actor-iswap",
+      "relation_type": "fought_against",
+      "display_ring": "middle",
+      "current_status": "当前敌对（active）",
+      "overview": "MNJTF 的当前打击目标包括伊斯兰国西非省（ISWAP）；二者为当前 hostile/counterterrorism 关系。",
+      "parties": [
+        {
+          "entity_id": "actor-mnjtf",
+          "role": "多国联合特遣部队"
+        },
+        {
+          "entity_id": "actor-iswap",
+          "role": "伊斯兰国西非省（ISWAP）"
+        }
+      ],
+      "formation_background": "MNJTF 授权更新（2026-02-01 至 2027-01-31）明确当前打击目标含 ISWAP。",
+      "initial_relationship": "MNJTF 反恐重点自 JAS 碎片化后逐步向 ISWAP 转移。",
+      "evolution_stages": [
+        {
+          "period": "2016 前后",
+          "detail": "ISWAP 从 JAS 分裂后成为乍得湖主要威胁之一。"
+        },
+        {
+          "period": "2026-02 起",
+          "detail": "授权更新明确 ISWAP 为打击目标。"
+        }
+      ],
+      "causes": [
+        "ISWAP 崛起",
+        "MNJTF 反恐重点转移"
+      ],
+      "key_turning_points": [],
+      "regional_differences": "乍得湖盆地。",
+      "impact_on_security": "MNJTF 对 ISWAP 的打击构成乍得湖反恐格局的一部分。",
+      "why_it_matters": "该关系反映乍得湖反恐重点从 JAS 向 ISWAP 的转移。",
+      "uncertainties": "ISWAP 活动范围与 MNJTF 打击效果的量化缺乏系统公开统计。",
+      "disputed": false,
+      "temporal_sensitive": true,
+      "last_verified_at": "2026-08-14",
+      "source_ids": [
+        "expe-au-psc-mnjtf-2025-12"
+      ],
+      "drivers": [
+        "ISWAP 威胁",
+        "授权更新"
+      ],
+      "constraints": [
+        "成员国凝聚力"
+      ],
+      "current_assessment": "当前敌对关系；ISWAP 为授权更新后的明确打击目标。",
+      "asip_analysis": "ASIP 判断：MNJTF↔ISWAP 是当前 hostile 关系，反映乍得湖反恐重点转移。",
+      "watch_indicators": [
+        "MNJTF 对 ISWAP 的行动",
+        "ISWAP 在乍得湖的活动"
+      ],
+      "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+      "imported_by": "expansion-e"
+    },
+    "rel-expe-aes-jnim-hostile": {
+      "relationship_id": "rel-expe-aes-jnim-hostile",
+      "relation_title": "AES 统一部队 ↔ JNIM：萨赫勒敌对",
+      "source_entity_id": "actor-fu-aes",
+      "target_entity_id": "actor-jnim",
+      "relation_type": "hostile_to",
+      "display_ring": "middle",
+      "current_status": "敌对（active）",
+      "overview": "萨赫勒国家联盟统一部队以 JNIM 为主要威胁之一，二者为敌对关系；统一部队作为 AES 集体防御机制应对 JNIM 威胁。",
+      "parties": [
+        {
+          "entity_id": "actor-fu-aes",
+          "role": "AES 统一部队（组建中）"
+        },
+        {
+          "entity_id": "actor-jnim",
+          "role": "JNIM（萨赫勒圣战联盟）"
+        }
+      ],
+      "formation_background": "AES 于 2023 年建立，统一部队以应对萨赫勒圣战威胁（含 JNIM）为集体防御目标。",
+      "initial_relationship": "AES 三国退出 G5 Sahel 后，以统一部队重构对 JNIM 的集体反制。",
+      "evolution_stages": [
+        {
+          "period": "2023-09",
+          "detail": "AES 建立。"
+        },
+        {
+          "period": "2025-01",
+          "detail": "宣布约 5000 人统一部队接近就绪。"
+        },
+        {
+          "period": "2025-12",
+          "detail": "指挥架构就位。"
+        },
+        {
+          "period": "2026-03",
+          "detail": "ISS 称部队启动、约 6000 人。"
+        }
+      ],
+      "causes": [
+        "JNIM 萨赫勒威胁",
+        "AES 集体防御需求"
+      ],
+      "key_turning_points": [],
+      "regional_differences": "萨赫勒三国。",
+      "impact_on_security": "AES 统一部队与 JNIM 的敌对关系是萨赫勒安全格局重组的关键。",
+      "why_it_matters": "该关系定义 AES 统一部队的集体防御对象，是理解萨赫勒后 G5 格局的关键。",
+      "uncertainties": "统一部队与 JNIM 的实际交战规模尚未充分展开，敌对关系的实战强度不确定。",
+      "disputed": false,
+      "temporal_sensitive": true,
+      "last_verified_at": "2026-08-14",
+      "source_ids": [
+        "expe-print-aes-5000",
+        "expe-lesahel-aes-command",
+        "d1-iss-aes-2026-03-04"
+      ],
+      "drivers": [
+        "JNIM 威胁",
+        "集体防御"
+      ],
+      "constraints": [
+        "组建进度",
+        "俄罗斯支持边界"
+      ],
+      "current_assessment": "敌对关系（威胁态势）；统一部队仍在组建中。",
+      "asip_analysis": "ASIP 判断：AES 统一部队↔JNIM 是敌对关系，但统一部队尚未充分形成实战能力，敌对关系的强度需后续观察。",
+      "watch_indicators": [
+        "统一部队首次对 JNIM 的联合行动",
+        "兵力成军进度"
+      ],
+      "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+      "imported_by": "expansion-e"
+    },
+    "rel-expe-aes-is-sahel-hostile": {
+      "relationship_id": "rel-expe-aes-is-sahel-hostile",
+      "relation_title": "AES 统一部队 ↔ IS Sahel：萨赫勒敌对",
+      "source_entity_id": "actor-fu-aes",
+      "target_entity_id": "actor-is-sahel",
+      "relation_type": "hostile_to",
+      "display_ring": "middle",
+      "current_status": "敌对（active）",
+      "overview": "萨赫勒国家联盟统一部队以 IS Sahel 为主要威胁之一，二者为敌对关系。",
+      "parties": [
+        {
+          "entity_id": "actor-fu-aes",
+          "role": "AES 统一部队（组建中）"
+        },
+        {
+          "entity_id": "actor-is-sahel",
+          "role": "伊斯兰国萨赫勒省（IS Sahel）"
+        }
+      ],
+      "formation_background": "AES 统一部队的集体防御目标涵盖 IS Sahel 等萨赫勒圣战威胁。",
+      "initial_relationship": "AES 三国退出 G5 后，以统一部队重构对 IS Sahel 的集体反制。",
+      "evolution_stages": [
+        {
+          "period": "2023-09",
+          "detail": "AES 建立。"
+        },
+        {
+          "period": "2025—2026",
+          "detail": "统一部队组建与指挥架构就位。"
+        }
+      ],
+      "causes": [
+        "IS Sahel 威胁",
+        "AES 集体防御需求"
+      ],
+      "key_turning_points": [],
+      "regional_differences": "萨赫勒三国。",
+      "impact_on_security": "AES 统一部队与 IS Sahel 的敌对关系构成萨赫勒反恐格局的一部分。",
+      "why_it_matters": "该关系明确 AES 统一部队对 IS Sahel 的敌对态势。",
+      "uncertainties": "统一部队与 IS Sahel 的实际交战规模尚未充分展开。",
+      "disputed": false,
+      "temporal_sensitive": true,
+      "last_verified_at": "2026-08-14",
+      "source_ids": [
+        "expe-print-aes-5000",
+        "d1-iss-aes-2026-03-04"
+      ],
+      "drivers": [
+        "IS Sahel 威胁"
+      ],
+      "constraints": [
+        "组建进度"
+      ],
+      "current_assessment": "敌对关系（威胁态势）。",
+      "asip_analysis": "ASIP 判断：AES 统一部队↔IS Sahel 是敌对关系，实战强度待观察。",
+      "watch_indicators": [
+        "统一部队对 IS Sahel 的联合行动"
+      ],
+      "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+      "imported_by": "expansion-e"
+    },
+    "rel-expe-africa-corps-aes-support": {
+      "relationship_id": "rel-expe-africa-corps-aes-support",
+      "relation_title": "非洲军团 ↔ AES 统一部队：支持（非指挥）",
+      "source_entity_id": "actor-africa-corps",
+      "target_entity_id": "actor-fu-aes",
+      "relation_type": "supports",
+      "display_ring": "middle",
+      "current_status": "当前支持（current）",
+      "overview": "俄罗斯/非洲军团向萨赫勒国家联盟统一部队提供武器、训练与技术支持；该关系为 support/training/equipment，不构成指挥或隶属。",
+      "parties": [
+        {
+          "entity_id": "actor-africa-corps",
+          "role": "俄罗斯非洲军团（支持方）"
+        },
+        {
+          "entity_id": "actor-fu-aes",
+          "role": "AES 统一部队（受支持方）"
+        }
+      ],
+      "formation_background": "2025-04 俄罗斯公开承诺提供武器/训练/技术支持；非洲军团深化与 AES 国家的安全合作。",
+      "initial_relationship": "俄罗斯对 AES 三国的安全支持在 G5 解体后加强，统一部队成为支持重点。",
+      "evolution_stages": [
+        {
+          "period": "2024",
+          "detail": "非洲军团深化与 AES 国家的安全合作。"
+        },
+        {
+          "period": "2025-04",
+          "detail": "俄罗斯公开承诺武器/训练/技术支持。"
+        }
+      ],
+      "causes": [
+        "AES 三国对俄支持的依赖",
+        "俄罗斯对萨赫勒的影响力拓展"
+      ],
+      "key_turning_points": [],
+      "regional_differences": "萨赫勒三国。",
+      "impact_on_security": "该关系澄清俄罗斯/非洲军团在 AES 统一部队中的角色——支持而非指挥。",
+      "why_it_matters": "该关系是理解 AES 统一部队与俄罗斯关系的核心，必须守住“支持非指挥”纪律。",
+      "uncertainties": "支持的具体规模与指挥边界公开披露有限。",
+      "disputed": false,
+      "temporal_sensitive": true,
+      "last_verified_at": "2026-08-14",
+      "source_ids": [
+        "expe-print-aes-russia",
+        "expe-crs-africa-corps"
+      ],
+      "drivers": [
+        "俄非安全合作",
+        "AES 装备/训练需求"
+      ],
+      "constraints": [
+        "指挥边界"
+      ],
+      "current_assessment": "支持关系（support/training/equipment），非 command/subordination。",
+      "asip_analysis": "ASIP 判断：非洲军团↔AES 统一部队是支持关系。严禁写成指挥/隶属；俄罗斯的角色是装备、训练与技术援助。",
+      "watch_indicators": [
+        "支持的具体形态与规模",
+        "是否出现指挥权争议"
+      ],
+      "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+      "imported_by": "expansion-e"
+    },
+    "rel-expe-samim-is-moz-hostile": {
+      "relationship_id": "rel-expe-samim-is-moz-hostile",
+      "relation_title": "SAMIM ↔ ISIS-Mozambique：历史敌对",
+      "source_entity_id": "actor-samim",
+      "target_entity_id": "actor-is-mozambique",
+      "relation_type": "fought_against",
+      "display_ring": "middle",
+      "current_status": "历史敌对（2021—2024）",
+      "overview": "SAMIM 于 2021—2024 年与伊斯兰国莫桑比克省（ISIS-Mozambique）交战，为历史敌对关系；SAMIM 已于 2024-07-15 结束。",
+      "parties": [
+        {
+          "entity_id": "actor-samim",
+          "role": "南共体驻莫桑比克特派团（2021—2024）"
+        },
+        {
+          "entity_id": "actor-is-mozambique",
+          "role": "伊斯兰国莫桑比克省（ISIS-Mozambique）"
+        }
+      ],
+      "formation_background": "SAMIM 2021 年部署后，在卡波德尔加杜开展针对 ISIS-Mozambique 的进攻行动，取得实际安全收益但未根除叛乱。",
+      "initial_relationship": "2021-07 部署后与叛乱分子交战。",
+      "evolution_stages": [
+        {
+          "period": "2021-07",
+          "detail": "SAMIM 部署。"
+        },
+        {
+          "period": "2021—2024",
+          "detail": "进攻行动与稳定化。"
+        },
+        {
+          "period": "2024-07-15",
+          "detail": "SAMIM 正式结束。"
+        }
+      ],
+      "causes": [
+        "卡波德尔加杜叛乱",
+        "SADC 区域响应"
+      ],
+      "key_turning_points": [],
+      "regional_differences": "莫桑比克卡波德尔加杜。",
+      "impact_on_security": "SAMIM 的进攻取得实际安全收益但未根除叛乱。",
+      "why_it_matters": "该历史敌对关系是理解卡波德尔加杜反恐格局演变的关键。",
+      "uncertainties": "SAMIM 战果与叛乱未根除之间的量化差异。",
+      "disputed": false,
+      "temporal_sensitive": true,
+      "last_verified_at": "2026-08-14",
+      "source_ids": [
+        "expe-sadc-samim-closure"
+      ],
+      "drivers": [
+        "叛乱威胁",
+        "区域响应"
+      ],
+      "constraints": [
+        "撤出决策"
+      ],
+      "current_assessment": "历史敌对关系（2021—2024），SAMIM 已结束。",
+      "asip_analysis": "ASIP 判断：SAMIM↔ISIS-Mozambique 是历史敌对。其结束后的安全责任由 FADM 承担，卢旺达/坦桑尼亚双边部署延续。",
+      "watch_indicators": [
+        "卡波德尔加杜叛乱后续演变"
+      ],
+      "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+      "imported_by": "expansion-e"
+    },
+    "rel-expe-africom-shabaab-strikes": {
+      "relationship_id": "rel-expe-africom-shabaab-strikes",
+      "relation_title": "AFRICOM ↔ Al-Shabaab：直接打击",
+      "source_entity_id": "actor-africom",
+      "target_entity_id": "actor-al-shabaab",
+      "relation_type": "fought_against",
+      "display_ring": "middle",
+      "current_status": "当前敌对/直接打击（active）",
+      "overview": "AFRICOM 持续对索马里青年党（Al-Shabaab）实施直接空袭打击，与索马里联邦政府协调；2026 年继续。",
+      "parties": [
+        {
+          "entity_id": "actor-africom",
+          "role": "美国非洲司令部"
+        },
+        {
+          "entity_id": "actor-al-shabaab",
+          "role": "索马里青年党（Al-Shabaab）"
+        }
+      ],
+      "formation_background": "AFRICOM 自成立以来对青年党实施空袭，2026 年继续与索马里联邦政府协调实施打击。",
+      "initial_relationship": "美国对青年党的直接打击可追溯至 2007 年前后。",
+      "evolution_stages": [
+        {
+          "period": "2007 前后",
+          "detail": "美国开始对青年党相关目标实施打击。"
+        },
+        {
+          "period": "2026",
+          "detail": "AFRICOM 继续对青年党实施空袭。"
+        }
+      ],
+      "causes": [
+        "青年党威胁",
+        "美国反恐战略"
+      ],
+      "key_turning_points": [],
+      "regional_differences": "索马里。",
+      "impact_on_security": "AFRICOM 对青年党的直接打击构成美国在非洲之角反恐介入的核心。",
+      "why_it_matters": "该关系是美国在非洲之角反恐介入的核心；AFRICOM 不指挥 AUSSOM/SNAF/邦特兰。",
+      "uncertainties": "空袭频率、授权与平民伤亡争议的公开细节有限。",
+      "disputed": false,
+      "temporal_sensitive": true,
+      "last_verified_at": "2026-08-14",
+      "source_ids": [
+        "expe-africom-flintlock-26"
+      ],
+      "drivers": [
+        "青年党威胁",
+        "反恐战略"
+      ],
+      "constraints": [
+        "主权约束"
+      ],
+      "current_assessment": "当前敌对/直接打击关系。",
+      "asip_analysis": "ASIP 判断：AFRICOM↔Al-Shabaab 是直接打击关系。必须守住纪律——AFRICOM 不指挥 AUSSOM/SNAF/邦特兰，不得创建错误指挥边。",
+      "watch_indicators": [
+        "AFRICOM 对青年党打击的频率与授权"
+      ],
+      "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+      "imported_by": "expansion-e"
+    },
+    "rel-expe-africom-isis-somalia-strikes": {
+      "relationship_id": "rel-expe-africom-isis-somalia-strikes",
+      "relation_title": "AFRICOM ↔ ISIS-Somalia：直接打击",
+      "source_entity_id": "actor-africom",
+      "target_entity_id": "actor-isis-somalia",
+      "relation_type": "fought_against",
+      "display_ring": "middle",
+      "current_status": "当前敌对/直接打击（active）",
+      "overview": "AFRICOM 于 2026 年对伊斯兰国索马里省（ISIS-Somalia）实施直接空袭打击。",
+      "parties": [
+        {
+          "entity_id": "actor-africom",
+          "role": "美国非洲司令部"
+        },
+        {
+          "entity_id": "actor-isis-somalia",
+          "role": "伊斯兰国索马里省（ISIS-Somalia）"
+        }
+      ],
+      "formation_background": "AFRICOM 对 ISIS-Somalia 的直接打击构成美国在非洲之角反恐的一部分。",
+      "initial_relationship": "ISIS-Somalia 崛起后成为美国反恐打击的第二个索马里目标。",
+      "evolution_stages": [
+        {
+          "period": "2017 前后",
+          "detail": "ISIS-Somalia 成为打击目标。"
+        },
+        {
+          "period": "2026",
+          "detail": "AFRICOM 对 ISIS-Somalia 实施空袭。"
+        }
+      ],
+      "causes": [
+        "ISIS-Somalia 威胁",
+        "美国反恐战略"
+      ],
+      "key_turning_points": [],
+      "regional_differences": "索马里。",
+      "impact_on_security": "AFRICOM 对 ISIS-Somalia 的打击构成美国反恐打击的第二个索马里目标。",
+      "why_it_matters": "该关系反映美国反恐打击的第二个索马里目标。",
+      "uncertainties": "对 ISIS-Somalia 打击的持续强度与效果缺乏系统公开统计。",
+      "disputed": false,
+      "temporal_sensitive": true,
+      "last_verified_at": "2026-08-14",
+      "source_ids": [
+        "expe-africom-flintlock-26"
+      ],
+      "drivers": [
+        "ISIS-Somalia 威胁"
+      ],
+      "constraints": [
+        "主权约束"
+      ],
+      "current_assessment": "当前敌对/直接打击关系。",
+      "asip_analysis": "ASIP 判断：AFRICOM↔ISIS-Somalia 是直接打击关系，与对青年党的打击构成美国在索马里双目标反恐。",
+      "watch_indicators": [
+        "AFRICOM 对 ISIS-Somalia 打击的频率"
+      ],
+      "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+      "imported_by": "expansion-e"
+    },
+    "rel-expe-g5-jnim-hostile": {
+      "relationship_id": "rel-expe-g5-jnim-hostile",
+      "relation_title": "G5 Sahel 联合部队 ↔ JNIM：历史敌对",
+      "source_entity_id": "actor-g5-sahel-joint-force",
+      "target_entity_id": "actor-jnim",
+      "relation_type": "fought_against",
+      "display_ring": "middle",
+      "current_status": "历史敌对（2017—2023）",
+      "overview": "G5 Sahel 联合部队（2017—2023）与 JNIM 为历史敌对关系；联合部队 2024 年停止运作。",
+      "parties": [
+        {
+          "entity_id": "actor-g5-sahel-joint-force",
+          "role": "G5 Sahel 联合部队"
+        },
+        {
+          "entity_id": "actor-jnim",
+          "role": "JNIM"
+        }
+      ],
+      "formation_background": "FC-G5S 承担跨境反恐任务，JNIM 为其主要打击对象之一。",
+      "initial_relationship": "2017 年联合部队建立后与 JNIM 交战。",
+      "evolution_stages": [
+        {
+          "period": "2017",
+          "detail": "联合部队建立。"
+        },
+        {
+          "period": "2022—2023",
+          "detail": "成员国相继退出。"
+        },
+        {
+          "period": "2024",
+          "detail": "停止运作。"
+        }
+      ],
+      "causes": [
+        "JNIM 威胁",
+        "萨赫勒五国反恐协调"
+      ],
+      "key_turning_points": [],
+      "regional_differences": "萨赫勒五国交界。",
+      "impact_on_security": "FC-G5S 与 JNIM 的历史敌对是萨赫勒区域反恐机制兴衰的样本。",
+      "why_it_matters": "该历史敌对关系是理解萨赫勒区域反恐机制失败的关键。",
+      "uncertainties": "FC-G5S 对 JNIM 的打击效果缺乏系统公开统计。",
+      "disputed": false,
+      "temporal_sensitive": true,
+      "last_verified_at": "2026-08-14",
+      "source_ids": [
+        "expe-un-sc15950-g5"
+      ],
+      "drivers": [
+        "JNIM 威胁"
+      ],
+      "constraints": [
+        "成员国退出"
+      ],
+      "current_assessment": "历史敌对关系（2017—2023），FC-G5S 已停止运作。",
+      "asip_analysis": "ASIP 判断：FC-G5S↔JNIM 是历史敌对。评估萨赫勒格局时必须将 FC-G5S 作为历史机制处理。",
+      "watch_indicators": [
+        "AES 统一部队对 JNIM 的后续态势"
+      ],
+      "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+      "imported_by": "expansion-e"
+    },
+    "rel-expe-g5-is-sahel-hostile": {
+      "relationship_id": "rel-expe-g5-is-sahel-hostile",
+      "relation_title": "G5 Sahel 联合部队 ↔ IS Sahel：历史敌对",
+      "source_entity_id": "actor-g5-sahel-joint-force",
+      "target_entity_id": "actor-is-sahel",
+      "relation_type": "fought_against",
+      "display_ring": "middle",
+      "current_status": "历史敌对（2017—2023）",
+      "overview": "G5 Sahel 联合部队与 IS Sahel 为历史敌对关系；联合部队 2024 年停止运作。",
+      "parties": [
+        {
+          "entity_id": "actor-g5-sahel-joint-force",
+          "role": "G5 Sahel 联合部队"
+        },
+        {
+          "entity_id": "actor-is-sahel",
+          "role": "伊斯兰国萨赫勒省（IS Sahel）"
+        }
+      ],
+      "formation_background": "FC-G5S 的跨境反恐任务覆盖 IS Sahel 威胁。",
+      "initial_relationship": "2017 年后与 IS Sahel 交战。",
+      "evolution_stages": [
+        {
+          "period": "2017",
+          "detail": "联合部队建立。"
+        },
+        {
+          "period": "2024",
+          "detail": "停止运作。"
+        }
+      ],
+      "causes": [
+        "IS Sahel 威胁",
+        "跨境反恐"
+      ],
+      "key_turning_points": [],
+      "regional_differences": "萨赫勒五国交界。",
+      "impact_on_security": "FC-G5S 与 IS Sahel 的历史敌对构成萨赫勒反恐格局的一部分。",
+      "why_it_matters": "该历史敌对关系是萨赫勒反恐格局的组成部分。",
+      "uncertainties": "FC-G5S 对 IS Sahel 的打击效果缺乏统计。",
+      "disputed": false,
+      "temporal_sensitive": true,
+      "last_verified_at": "2026-08-14",
+      "source_ids": [
+        "expe-un-sc15950-g5"
+      ],
+      "drivers": [
+        "IS Sahel 威胁"
+      ],
+      "constraints": [
+        "成员国退出"
+      ],
+      "current_assessment": "历史敌对关系。",
+      "asip_analysis": "ASIP 判断：FC-G5S↔IS Sahel 是历史敌对，作为历史机制处理。",
+      "watch_indicators": [
+        "AES 统一部队对 IS Sahel 的后续态势"
+      ],
+      "relation_maturity": "R2_DEVELOPED_RELATIONSHIP",
+      "imported_by": "expansion-e"
     }
   },
   "note": "I3-B: second wave of deepened relationship histories (Mali/Burkina/Cameroon/Ethiopia/Tanzania networks)."
