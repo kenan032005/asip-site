@@ -1,0 +1,95 @@
+{
+  "run": "2026-08-14",
+  "new_entities": [
+    "actor-g5-sahel-joint-force",
+    "actor-ecowas-standby-force",
+    "actor-africom",
+    "actor-minusma"
+  ],
+  "enrich_entities": [
+    {
+      "entity_id": "actor-mnjtf",
+      "set_fields": [
+        "current_status"
+      ]
+    },
+    {
+      "entity_id": "actor-fu-aes",
+      "set_fields": [
+        "current_status"
+      ]
+    },
+    {
+      "entity_id": "actor-samim",
+      "set_fields": [
+        "current_status"
+      ]
+    },
+    {
+      "entity_id": "actor-fadm",
+      "set_fields": [
+        "current_status"
+      ]
+    },
+    {
+      "entity_id": "actor-rdf-mozambique",
+      "set_fields": [
+        "current_status"
+      ]
+    },
+    {
+      "entity_id": "actor-tanzania-tpdf",
+      "set_fields": [
+        "current_status"
+      ]
+    },
+    {
+      "entity_id": "actor-africa-corps",
+      "set_fields": [
+        "current_status"
+      ]
+    },
+    {
+      "entity_id": "actor-wagner-group",
+      "set_fields": [
+        "current_status"
+      ]
+    },
+    {
+      "entity_id": "actor-lna",
+      "set_fields": [
+        "current_status"
+      ]
+    },
+    {
+      "entity_id": "actor-gnu-forces",
+      "set_fields": [
+        "primary_type",
+        "current_status"
+      ]
+    },
+    {
+      "entity_id": "actor-aussom",
+      "set_fields": []
+    }
+  ],
+  "new_relationships": [
+    "rel-expe-mnjtf-jas-hostile",
+    "rel-expe-mnjtf-iswap-hostile",
+    "rel-expe-aes-jnim-hostile",
+    "rel-expe-aes-is-sahel-hostile",
+    "rel-expe-africa-corps-aes-support",
+    "rel-expe-samim-is-moz-hostile",
+    "rel-expe-africom-shabaab-strikes",
+    "rel-expe-africom-isis-somalia-strikes",
+    "rel-expe-g5-jnim-hostile",
+    "rel-expe-g5-is-sahel-hostile"
+  ],
+  "upgrade_to_r3": [
+    "rel-rdf-mozambique-fadm-cooperate",
+    "rel-is-moz-islamic-state2",
+    "rel-tanzania-tpdf-is-moz",
+    "rel-isis-libya-lna-conflict",
+    "rel-d1-africa-corps-jnim-conflict"
+  ]
+}

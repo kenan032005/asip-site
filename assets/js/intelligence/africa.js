@@ -253,6 +253,11 @@
     'active_anti_junta_rebellion': '活跃·反军政府叛乱',
     'active_and_expanding_cross_border': '活跃且跨境扩张',
     'tactical_coordination': '战术协同',
+    // Expansion E status vocabulary (regional security actors, data presentation)
+    'ceased_operations': '停止运作',
+    'closed_2023': '已结束（2023）',
+    'active_framework': '活跃框架·力量生成中',
+    'active_operationalizing': '活跃·组建中',
     'active_conflict': '持续冲突',
     'active_armed_conflict': '持续武装冲突',
     'active_counterinsurgency_conflict': '持续反恐冲突',
