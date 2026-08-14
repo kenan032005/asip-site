@@ -37,9 +37,9 @@ ent_by_id = {e["entity_id"]: e for e in entities}
 
 print("== TEST 1: no count expansion ==")
 check("countries=13", len(countries) == 13, f"got {len(countries)}")
-check("entities=108", len(non_country) == 108, f"got {len(non_country)} (104 + 4 Expansion E)")
-check("relationships=205", len(rels) == 205, f"got {len(rels)} (195 + 10 Expansion E)")
-check("routes=340", metrics.get("route_count") == 340, f"got {metrics.get('route_count')} (326 + 14 Expansion E)")
+check("entities=105", len(non_country) == 105, f"got {len(non_country)} (105 + 0 Consolidation A)")
+check("relationships=201", len(rels) == 201, f"got {len(rels)} (201 + 0 Consolidation A)")
+check("routes=333", metrics.get("route_count") == 333, f"got {metrics.get('route_count')} (333 + 0 Consolidation A)")
 
 print("== TEST 2: Machar current status ==")
 machar = json.dumps(ep.get("person-riek-machar", {}).get("sections", {}), ensure_ascii=False)
@@ -82,7 +82,7 @@ check("type=fought_against", ism2 and ism2["relationship_type"] == "fought_again
 check("time_start=2021", ism2 and ism2.get("time_start") == "2021", f"got {ism2.get('time_start') if ism2 else None}")
 check("no residual ISM->ISWAP edge", not any(
     r["source_entity_id"] == "actor-is-mozambique" and r["target_entity_id"] == "actor-iswap" for r in rels))
-check("total still 205", len(rels) == 205)
+check("total still 201", len(rels) == 201)
 
 print("== TEST 8: SAMIM end date ==")
 samim = json.dumps(ep.get("actor-samim", {}).get("sections", {}), ensure_ascii=False)

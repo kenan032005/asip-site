@@ -57,9 +57,9 @@ def sections_text(eid):
 
 print("== TEST 1: count invariants (no breadth expansion) ==")
 check("countries=13", len(countries) == 13, f"got {len(countries)}")
-check("entities=108", len(non_country) == 108, f"got {len(non_country)} (104 + 4 Expansion E)")
-check("relationships=205", len(rels) == 205, f"got {len(rels)} (195 + 10 Expansion E)")
-check("routes=340", metrics.get("route_count") == 340, f"got {metrics.get('route_count')} (326 + 14 Expansion E)")
+check("entities=105", len(non_country) == 105, f"got {len(non_country)} (105 + 0 Consolidation A)")
+check("relationships=201", len(rels) == 201, f"got {len(rels)} (201 + 0 Consolidation A)")
+check("routes=333", metrics.get("route_count") == 333, f"got {metrics.get('route_count')} (333 + 0 Consolidation A)")
 check("sources grew from 182", len(sources) >= 182, f"got {len(sources)}")
 check("evidence grew from 297", len(evidence) >= 297, f"got {len(evidence)}")
 
@@ -139,7 +139,7 @@ check("conflict edge hostile_to", conflict.get("relationship_type") == "hostile_
 check("conflict edge = R3", (rp.get("rel-jnim-is-conflict") or {}).get("relation_maturity")
       == "R3_FULL_RELATIONSHIP_INTELLIGENCE",
       str((rp.get("rel-jnim-is-conflict") or {}).get("relation_maturity")))
-check("relationship count unchanged at 205", len(rels) == 205)
+check("relationship count unchanged at 201", len(rels) == 201)
 
 print("== TEST 8: core relation overrides applied ==")
 imp = qa("depth-g-import-report.json")
@@ -166,7 +166,7 @@ for r in rels:
     t = (rp.get(r["relationship_id"]) or {}).get("relation_maturity")
     tiers[t] = tiers.get(t, 0) + 1
 check("all three tiers populated", len([k for k in tiers if k]) == 3, str(tiers))
-check("tier totals sum to 205", sum(v for k, v in tiers.items() if k) == 205, str(tiers))
+check("tier totals sum to 201", sum(v for k, v in tiers.items() if k) == 201, str(tiers))
 
 print("== TEST 10: summary-only re-audit + staleness handling ==")
 rc = qa("relation-closure-audit.json")
@@ -215,7 +215,17 @@ check("DANGLING SOURCE REFS = 0", not dangling, str(dangling[:5]))
 print("== TEST 13: truthful maturity downgrades applied ==")
 led = qa("truthful-downgrade-ledger.json") or {"entities": {}, "relations": {}}
 check("downgrade ledger exists", bool(led.get("entities") or led.get("relations")))
+_EXP_A_ENTITY_DOWNSHIFT_EXEMPT = {
+    # Consolidation A: Dozos of Macina was downshifted E3->E2 by Depth G for thin
+    # content; the Final Depth Consolidation Pack A (§13) enriches it back to
+    # encyclopedia_full, so the downshift is superseded.
+    "actor-dozos-of-macina": "E3_FULL_ENCYCLOPEDIA",
+}
 for eid, mv in (led.get("entities") or {}).items():
+    if eid in _EXP_A_ENTITY_DOWNSHIFT_EXEMPT:
+        check(f"consolidation-a supersedes entity downshift {eid}",
+              (ep.get(eid) or {}).get("content_maturity") == _EXP_A_ENTITY_DOWNSHIFT_EXEMPT[eid])
+        continue
     check(f"entity downshift applied {eid}",
           (ep.get(eid) or {}).get("content_maturity") == mv["to"],
           f"want {mv['to']} got {(ep.get(eid) or {}).get('content_maturity')}")
@@ -231,12 +241,19 @@ _EXP_A_REL_DOWNSHIFT_EXEMPT = {
     # evolution_stages / <2 timeline events; Expansion E (§7 mandatory R3) fills
     # exactly those gaps, so the downshift is superseded.
     "rel-is-moz-islamic-state2": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+    # Consolidation A: this person-only led_by edge was removed during
+    # de-formalization of person-amadou-nionson-diarra (leadership fact moved
+    # into actor-dozos-of-macina narrative), so the depth-g downshift no longer applies.
+    "rel-d2-dozos-macina-amadou-led": "__REMOVED__",
 }
 for rid, mv in (led.get("relations") or {}).items():
     if rid in _EXP_A_REL_DOWNSHIFT_EXEMPT:
-        check(f"expansion-a supersedes downshift {rid}",
-              (rp.get(rid) or {}).get("relation_maturity") == _EXP_A_REL_DOWNSHIFT_EXEMPT[rid],
-              f"want {_EXP_A_REL_DOWNSHIFT_EXEMPT[rid]} got {(rp.get(rid) or {}).get('relation_maturity')}")
+        if _EXP_A_REL_DOWNSHIFT_EXEMPT[rid] == "__REMOVED__":
+            check(f"consolidation-a removed relation {rid}", rid not in rp)
+        else:
+            check(f"expansion-a supersedes downshift {rid}",
+                  (rp.get(rid) or {}).get("relation_maturity") == _EXP_A_REL_DOWNSHIFT_EXEMPT[rid],
+                  f"want {_EXP_A_REL_DOWNSHIFT_EXEMPT[rid]} got {(rp.get(rid) or {}).get('relation_maturity')}")
         continue
     check(f"relation downshift applied {rid}",
           (rp.get(rid) or {}).get("relation_maturity") == mv["to"],

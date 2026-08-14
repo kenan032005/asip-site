@@ -31,15 +31,15 @@ def test_i3d2_packet_counts():
     entities = load("entities.json")["entities"]
     rels = load("relationships.json")["relationships"]
     profiles = load("relation_profiles.json")["profiles"]
-    if len(entities) != 108: fail(f"entities={len(entities)} != 104 (104 + 4 Expansion E)")
-    if len(rels) != 205: fail(f"relationships={len(rels)} != 195 (195 + 10 Expansion E)")
+    if len(entities) != 105: fail(f"entities={len(entities)} != 104 (105 + 0 Consolidation A)")
+    if len(rels) != 201: fail(f"relationships={len(rels)} != 195 (201 + 0 Consolidation A)")
     if len(profiles) < 50: fail(f"profiles={len(profiles)} < 50")
-    d2_ents = ["person-jafar-dicko", "person-ousmane-dicko", "actor-katiba-hanifa", "person-abou-ghosmane", "actor-katiba-serma", "actor-dana-atem", "person-ibrahim-malam-dicko", "actor-dozos-of-macina", "person-sidi-ongoiba", "person-amadou-nionson-diarra", "person-youssouf-toloba"]
+    d2_ents = ["person-jafar-dicko", "person-ousmane-dicko", "actor-katiba-hanifa", "actor-katiba-serma", "actor-dana-atem", "person-ibrahim-malam-dicko", "actor-dozos-of-macina", "person-youssouf-toloba"]
     eids = {e["entity_id"] for e in entities}
     missing = [x for x in d2_ents if x not in eids]
     if missing: fail(f"missing d2 entities: {missing}")
     d2_rels = [r for r in rels if r["relationship_id"].startswith("rel-d2-")]
-    if len(d2_rels) != 29: fail(f"d2 relationships={len(d2_rels)} != 29")
+    if len(d2_rels) != 25: fail(f"d2 relationships={len(d2_rels)} != 25")
     print("PASS test_i3d2_packet_counts (72/150/50+)")
 
 

@@ -35,9 +35,9 @@ non_country = [e for e in entities if e["entity_type"] != "country"]
 
 print("== TEST 1: no count expansion ==")
 check("countries=13", len(countries) == 13, f"got {len(countries)}")
-check("entities=108", len(non_country) == 108, f"got {len(non_country)} (104 + 4 Expansion E)")
-check("relationships=205", len(rels) == 205, f"got {len(rels)} (195 + 10 Expansion E)")
-check("routes=340", metrics.get("route_count") == 340, f"got {metrics.get('route_count')} (326 + 14 Expansion E)")
+check("entities=105", len(non_country) == 105, f"got {len(non_country)} (105 + 0 Consolidation A)")
+check("relationships=201", len(rels) == 201, f"got {len(rels)} (201 + 0 Consolidation A)")
+check("routes=333", metrics.get("route_count") == 333, f"got {metrics.get('route_count')} (333 + 0 Consolidation A)")
 
 print("== TEST 2: Dozo network separation ==")
 dan = json.dumps(ep.get("actor-dan-na-ambassagou", {}).get("sections", {}), ensure_ascii=False)
@@ -81,10 +81,11 @@ ousmane = json.dumps(ep.get("person-ousmane-dicko", {}).get("sections", {}), ens
 check("Ousmane Burkina deputy only", "Burkina" in ousmane and "不能写成整个JNIM副领导" in ousmane)
 check("Ousmane-JNIM affiliated_with", rel_by_id.get("rel-d2-ousmane-jnim", {}).get("relationship_type") == "affiliated_with")
 
-print("== TEST 8: Ghosmane/Hanifa separation ==")
-gho = json.dumps(ep.get("person-abou-ghosmane", {}).get("sections", {}), ensure_ascii=False)
-check("Ghosmane distinct from Hanifa", "Abu Hanifa" in gho and ("两个不同人物" in gho or "不同人物" in gho))
-check("Ghosmane role Niger northwest ops", "Niger" in gho and "西北" in gho and "供应" in gho)
+print("== TEST 8: Ghosmane de-formalized + leadership preserved in JNIM ==")
+check("person-abou-ghosmane de-formalized", "person-abou-ghosmane" not in {x["entity_id"] for x in entities})
+jnim_txt = json.dumps(ep.get("actor-jnim", {}).get("sections", {}), ensure_ascii=False)
+check("Ghosmane leadership preserved in JNIM", "Abou Ghosmane" in jnim_txt or "戈斯曼" in jnim_txt)
+check("Ghosmane role Niger northwest ops", "Niger" in jnim_txt and "西北" in jnim_txt)
 
 print("== TEST 9: Katiba Serma constituent lock ==")
 check("Katiba Serma-JNIM constituent_of", rel_by_id.get("rel-d2-katiba-serma-jnim", {}).get("relationship_type") == "constituent_of")
@@ -92,8 +93,8 @@ ks = json.dumps(ep.get("actor-katiba-serma", {}).get("sections", {}), ensure_asc
 check("Katiba Serma not national org", "constituent_of" in ks or "子单元" in ks)
 
 print("== TEST 10: freshness locks ==")
-cur = {"actor-dan-na-ambassagou", "person-youssouf-toloba", "person-jafar-dicko", "person-ousmane-dicko", "person-abou-ghosmane"}
-aging = {"actor-dozos-of-macina", "person-amadou-nionson-diarra", "actor-dana-atem", "person-sidi-ongoiba", "actor-katiba-serma"}
+cur = {"actor-dan-na-ambassagou", "person-youssouf-toloba", "person-jafar-dicko", "person-ousmane-dicko"}
+aging = {"actor-dozos-of-macina", "actor-dana-atem", "actor-katiba-serma"}
 for eid in cur:
     e = next((x for x in entities if x["entity_id"] == eid), None)
     check(f"freshness {eid}=current", e and e.get("freshness_status") == "current", f"got {e.get('freshness_status') if e else None}")
