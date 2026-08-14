@@ -404,3 +404,53 @@ a.intel-region-chip:hover{background:#e0ecf6;text-decoration:none;border-color:#
   .intel-toc-sticky{position:static;max-height:none}
   .graph-legend .legend-check{margin:0 6px 6px 0}
 }
+
+/* ============================================================
+   UI HARD FIX A — user-perceived clarity pack
+   (network clean view / relation hero de-technical / slim TOC)
+   ============================================================ */
+
+/* ---------- A.1 Entity TOC: lightweight nav tool ---------- */
+.profile-toc-wrap.intel-toc-sticky{max-height:36vh;overflow:hidden;padding:7px 8px}
+.intel-toc-sticky{top:52px;max-height:36vh;overflow:hidden}
+.profile-toc-details summary{display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer;list-style:none;padding:6px 10px;font-size:12.5px;font-weight:700;color:#14507e;background:#f3f8fb;border:1px solid #dce8f0;border-radius:8px;user-select:none}
+.profile-toc-details summary::-webkit-details-marker{display:none}
+.profile-toc-details summary:before{display:none}
+.profile-toc-details[open] summary:before{display:none}
+.profile-toc-details summary .toc-label{display:inline-flex;align-items:center;gap:6px}
+.profile-toc-details summary .toc-label:before{content:"\2630";font-size:11px;color:#c9952b}
+.toc-btn{background:#fff;border:1px solid #cfe0ed;color:#14507e;border-radius:999px;font-size:11px;font-weight:700;padding:2px 9px;cursor:pointer;line-height:1.5}
+.toc-btn:hover{background:#e0ecf6}
+.profile-toc-details .profile-toc{max-height:calc(36vh - 44px);overflow:auto;margin:6px 0 0;padding:0 2px 2px}
+.profile-toc ol{margin:0;padding:0;list-style:none;column-count:1}
+.profile-toc li{margin:0;font-size:12px;line-height:1.5}
+.profile-toc a{display:block;padding:4px 8px;border-radius:6px;font-size:12px;color:#42586a;text-decoration:none;border-left:2px solid transparent}
+.profile-toc a:hover{background:#eef5fb;color:#14507e;text-decoration:none}
+.profile-toc a.active{background:#e6f0f8;color:#0f3a5d;font-weight:700;border-left-color:#c9952b}
+@media(max-width:850px){
+  .profile-toc-wrap.intel-toc-sticky{max-height:none;padding:6px 8px}
+  .profile-toc-details .profile-toc{max-height:34vh}
+}
+@media(max-width:560px){
+  .intel-toc-sticky{position:static;max-height:none;overflow:visible}
+}
+
+/* ---------- A.2 Network: clean default graph ---------- */
+.graph-node .node-label.short{font-size:12px;font-weight:700}
+.node-label.hidden-label{display:none}
+.node-label{font-size:12.5px}
+.graph-wrap{background:radial-gradient(circle at 50% 50%,#f3f9fc 0,#fff 62%)}
+.graph-legend{background:#fbfdfe;border-top:1px solid #e7edf1}
+.legend-block-title{font-weight:800;color:#33485b}
+
+/* ---------- A.3 Relation hero: reads like a file, not a record ---------- */
+.rel-hero-title{font-size:26px;line-height:1.3;margin:6px 0 4px}
+.intel-entity-head .intel-badges{margin-top:6px}
+.relation-hero-summary h2{font-size:14px}
+.relation-hero-summary .rh-row{font-size:12.5px}
+.relation-hero-summary .rh-row dd b{color:#14507e}
+.rel-tech-details{margin-top:12px}
+
+/* ---------- A.4 Entity sources & notes always last ---------- */
+.intel-profile-main #entitySources .intel-source-notes{margin-top:18px}
+.intel-profile-main #entitySources h2{font-size:16px;color:#0f3a5d;border-left:3px solid #c9952b;padding-left:9px;margin:0 0 9px}
