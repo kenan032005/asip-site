@@ -1,0 +1,86 @@
+{
+  "run": "2026-08-14",
+  "candidates_checked": [
+    "ISIS-Sinai / Islamic State-Sinai Province",
+    "Ansar Bayt al-Maqdis / ABM",
+    "Ansaroul Islam / Ansarul Islam (Burkina Faso)",
+    "Katiba Hanifa",
+    "Niger Front Patriotique de Libération / FPL",
+    "Front de libération de l'Azawad / FLA",
+    "Lions of the Caliphate in the Maghreb Al Aqsa",
+    "Nasr Jihad Resistance Movement (Libya)",
+    "Yusuf Ghazi group (CAR)"
+  ],
+  "results": [
+    {
+      "candidate": "ISIS-Sinai / Islamic State-Sinai Province",
+      "existing_canonical": null,
+      "resolution": "NEW_CANONICAL_ENTITY",
+      "canonical_id": "actor-isis-sinai",
+      "note": "无现有 ISIS-Sinai 节点；actor-islamic-state 为核心 ISIS 网络。"
+    },
+    {
+      "candidate": "Ansar Bayt al-Maqdis / ABM",
+      "existing_canonical": null,
+      "resolution": "HISTORICAL_PHASE",
+      "canonical_id": "actor-isis-sinai",
+      "note": "ABM = ISIS-Sinai 2014-11 宣誓效忠前历史名称（historical_names），不建当前 ABM 节点。"
+    },
+    {
+      "candidate": "Ansaroul Islam / Ansarul Islam (Burkina Faso)",
+      "existing_canonical": "actor-ansarul-islam",
+      "resolution": "ENRICH_EXISTING",
+      "canonical_id": "actor-ansarul-islam",
+      "note": "已存在 actor-ansarul-islam（E2_DEVELOPED/standard），本轮升 E3 encyclopedia_full。"
+    },
+    {
+      "candidate": "Katiba Hanifa",
+      "existing_canonical": "actor-katiba-hanifa",
+      "resolution": "ENRICH_EXISTING",
+      "canonical_id": "actor-katiba-hanifa",
+      "note": "已存在 actor-katiba-hanifa（E3），本轮对齐状态 active_and_expanding_cross_border 并补事实/章节。"
+    },
+    {
+      "candidate": "Niger Front Patriotique de Libération / FPL",
+      "existing_canonical": null,
+      "resolution": "NON_TERRORIST_ARMED_ACTOR",
+      "canonical_id": "actor-niger-fpl",
+      "note": "新建 actor-niger-fpl；强制分类反军政府叛军（insurgent_group），非恐怖组织。"
+    },
+    {
+      "candidate": "Front de libération de l'Azawad / FLA",
+      "existing_canonical": "actor-fla",
+      "resolution": "ENRICH_EXISTING",
+      "canonical_id": "actor-fla",
+      "note": "已存在 actor-fla（E3），本轮对齐分类 political_movement + 2026 战术协调框架。"
+    },
+    {
+      "candidate": "Lions of the Caliphate in the Maghreb Al Aqsa",
+      "existing_canonical": null,
+      "resolution": "DEFERRED",
+      "canonical_id": null,
+      "note": "DEFERRED_CELL_EVENT：仓库无正式 cell 类型，且 12 人小组被破获的单一事件不足以支撑 encyclopedia_full cell dossier；PPT_NAME_RESOLVED=YES（不计入未解决）。"
+    },
+    {
+      "candidate": "Nasr Jihad Resistance Movement (Libya)",
+      "existing_canonical": null,
+      "resolution": "INSUFFICIENT_EVIDENCE_DO_NOT_CREATE",
+      "canonical_id": null,
+      "note": "无可信来源确立该利比亚组织；排除。"
+    },
+    {
+      "candidate": "Yusuf Ghazi group (CAR)",
+      "existing_canonical": null,
+      "resolution": "INSUFFICIENT_EVIDENCE_DO_NOT_CREATE",
+      "canonical_id": null,
+      "note": "低可信媒体指控，UN/中国使馆未确认该 canonical actor；排除，不建 actor/person/edge。"
+    }
+  ],
+  "repo_state_before": {
+    "entities": 102,
+    "relationships": 192,
+    "sources": 246,
+    "evidence": 380,
+    "aliases": 443
+  }
+}

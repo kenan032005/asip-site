@@ -1,0 +1,42 @@
+{
+  "run": "2026-08-14",
+  "new_entities": [
+    "actor-isis-sinai",
+    "actor-niger-fpl"
+  ],
+  "enrich_entities": [
+    {
+      "entity_id": "actor-ansarul-islam",
+      "set_fields": [
+        "current_status"
+      ]
+    },
+    {
+      "entity_id": "actor-katiba-hanifa",
+      "set_fields": [
+        "current_status"
+      ]
+    },
+    {
+      "entity_id": "actor-fla",
+      "set_fields": [
+        "primary_type",
+        "current_status"
+      ]
+    }
+  ],
+  "new_relationships": [
+    "rel-expd-isis-sinai-isis",
+    "rel-expd-ansaroul-katiba-macina",
+    "rel-expd-fpl-niger-operates"
+  ],
+  "upgrade_to_r3": [
+    "rel-d1-ansarul-jnim-constituent"
+  ],
+  "fla_jnim_update": "rel-d1-fla-jnim-cooperation",
+  "deferred_or_excluded": [
+    "Nasr Jihad Resistance Movement (Libya)",
+    "Yusuf Ghazi group (CAR)",
+    "Lions of the Caliphate in the Maghreb Al Aqsa"
+  ]
+}

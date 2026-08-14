@@ -1,0 +1,588 @@
+{
+  "artifact": "EXPANSION_D_FULL_REGRESSION",
+  "generated_at": "2026-08-15T00:52:44+08:00",
+  "python": "3.13.14",
+  "TEST_FILES_DISCOVERED": 39,
+  "TEST_CASES_DISCOVERED": 6928,
+  "TEST_CASES_RUN": 6928,
+  "TEST_CASES_PASSED": 6928,
+  "TEST_CASES_FAILED": 0,
+  "TEST_CASES_SKIPPED": 0,
+  "failed_files": [],
+  "suites": [
+    "scripts/tests/intelligence/test_africa_data.py",
+    "scripts/tests/intelligence/test_africa_evidence_quality.py",
+    "scripts/tests/intelligence/test_africa_freshness.py",
+    "scripts/tests/intelligence/test_africa_metrics.py",
+    "scripts/tests/intelligence/test_africa_pages.py",
+    "scripts/tests/intelligence/test_demo_data.py",
+    "scripts/tests/intelligence/test_demo_pages.py",
+    "scripts/tests/intelligence/test_demo_v02.py",
+    "scripts/tests/intelligence/test_depth_a_import.py",
+    "scripts/tests/intelligence/test_depth_b_import.py",
+    "scripts/tests/intelligence/test_depth_c_import.py",
+    "scripts/tests/intelligence/test_depth_d_import.py",
+    "scripts/tests/intelligence/test_depth_e_import.py",
+    "scripts/tests/intelligence/test_depth_f_import.py",
+    "scripts/tests/intelligence/test_depth_g_closure.py",
+    "scripts/tests/intelligence/test_expansion_b_gate.py",
+    "scripts/tests/intelligence/test_expansion_c_gate.py",
+    "scripts/tests/intelligence/test_expansion_d_gate.py",
+    "scripts/tests/intelligence/test_git_delivery_manifest.py",
+    "scripts/tests/intelligence/test_i2b_audit.py",
+    "scripts/tests/intelligence/test_i3a_content_quality.py",
+    "scripts/tests/intelligence/test_i3a_country_depth.py",
+    "scripts/tests/intelligence/test_i3a_duplicate_text.py",
+    "scripts/tests/intelligence/test_i3a_entity_depth.py",
+    "scripts/tests/intelligence/test_i3a_preview.py",
+    "scripts/tests/intelligence/test_i3a_source_coverage.py",
+    "scripts/tests/intelligence/test_i3b_all_country_depth.py",
+    "scripts/tests/intelligence/test_i3b_current_status.py",
+    "scripts/tests/intelligence/test_i3b_evidence_upgrade.py",
+    "scripts/tests/intelligence/test_i3b_production_isolation.py",
+    "scripts/tests/intelligence/test_i3b_public_preview.py",
+    "scripts/tests/intelligence/test_i3b_relation_depth.py",
+    "scripts/tests/intelligence/test_i3b_release_candidate.py",
+    "scripts/tests/intelligence/test_i3b_zero_basic_entries.py",
+    "scripts/tests/intelligence/test_i3d1_import.py",
+    "scripts/tests/intelligence/test_i3d2_import.py",
+    "scripts/tests/intelligence/test_relation_ontology.py",
+    "scripts/tests/test_no_local_paths.py",
+    "scripts/tests/test_repository_integrity.py"
+  ],
+  "results": [
+    {
+      "suite": "scripts/tests/intelligence/test_africa_data.py",
+      "rc": 0,
+      "cases": 43,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "PASS africa: entities=104 relations=195 regions=7 countries=13",
+        "PASS sources=267 evidence=386 profiles=195 timelines=91",
+        "PASS uniqueness, importance/risk/confidence independence, multi-region mapping, refs, estimates, wikipedia, indexes"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_africa_evidence_quality.py",
+      "rc": 0,
+      "cases": 3509,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "test_africa_evidence_quality: PASS=3509 FAIL=0"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_africa_freshness.py",
+      "rc": 0,
+      "cases": 745,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "test_africa_freshness: PASS=745 FAIL=0"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_africa_metrics.py",
+      "rc": 0,
+      "cases": 23,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] encyclopedia_full backed by content (I3-A >=12)",
+        "  [PASS] basic entries remain a minority (I3-A <=10)",
+        "  [PASS] route_count positive",
+        "  [PASS] counting note present",
+        "",
+        "test_africa_metrics: PASS=23 FAIL=0"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_africa_pages.py",
+      "rc": 0,
+      "cases": 12,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "PASS africa routes: home + 6 index + 7 regions + 13 countries + 104 entities + 195 relations + network + sources",
+        "PASS base-path relative URLs, page markers, africa.js contracts"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_demo_data.py",
+      "rc": 0,
+      "cases": 33,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "PASS entities=12 relationships=20 sources=11",
+        "PASS importance levels L1=2 L2=4 L3=6",
+        "PASS unified names (acronym nullable, no empty bracket), rings inner/middle/outer, 4 full relation profiles, timelines, force estimates and wikipedia url format"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_demo_pages.py",
+      "rc": 0,
+      "cases": 13,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "PASS routes=34 (entry + network + 12 entity routes + 20 relation routes)",
+        "PASS shared-data links, base-path relative URLs, graph controls, importance filters, focus history, relation details and relation pages",
+        "PASS responsive breakpoints, ring guides, encyclopedia profile and non-color-only node shapes"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_demo_v02.py",
+      "rc": 0,
+      "cases": 11,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "PASS entities=12 relationships=20",
+        "PASS importance levels L1=2 L2=4 L3=6 (independent from display_ring)",
+        "PASS ring values inner/middle/outer, profile completeness floors, and V0.1 relationship invariant"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_depth_a_import.py",
+      "rc": 0,
+      "cases": 35,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "PASS test_watch_indicators (>=3 indicators on flagship entities/relations)",
+        "PASS test_relation_r3_completeness (5 R3 relations carry full intelligence sections)",
+        "PASS test_force_estimate_temporality (6000/2500/2000 with date/scope/estimate qualifiers)",
+        "PASS test_generator_regression (8 regressions = 0)",
+        "PASS test_depth_audit (72/150 audited with MECHANICAL_SCORE)",
+        "ALL 11 DEPTH A TESTS PASS"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_depth_b_import.py",
+      "rc": 0,
+      "cases": 36,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] rel-jas-iswap-conflict=hostile_to",
+        "  [PASS] rel-jas-islamic-state-hostile target=actor-islamic-state",
+        "  [PASS] rel-jas-islamic-state-hostile type=pledged_allegiance_to",
+        "  [PASS] rel-iswap-islamic-state-affiliation=pledged_allegiance_to",
+        "",
+        "ALL DEPTH B TESTS PASS"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_depth_c_import.py",
+      "rc": 0,
+      "cases": 31,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] type lock rel-d1-dan-na-fama-coop=cooperates_with | got cooperates_with",
+        "  [PASS] type lock rel-d2-dozos-macina-jnim-conflict=fought_against | got fought_against",
+        "  [PASS] type lock rel-d2-jafar-jnim=affiliated_with | got affiliated_with",
+        "  [PASS] type lock rel-d2-katiba-serma-jnim=constituent_of | got constituent_of",
+        "",
+        "ALL DEPTH C TESTS PASS"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_depth_d_import.py",
+      "rc": 0,
+      "cases": 38,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] type lock rel-jem-saf-conflict=cooperates_with | got cooperates_with",
+        "  [PASS] type lock rel-rsf-darfur-origin=fought_against | got fought_against",
+        "  [PASS] type lock rel-saf-sudan-operates=operates_in | got operates_in",
+        "  [PASS] type lock rel-rsf-sudan-operates=operates_in | got operates_in",
+        "",
+        "ALL DEPTH D TESTS PASS"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_depth_e_import.py",
+      "rc": 0,
+      "cases": 29,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] type lock rel-endf-fano-conflict=hostile_to | got hostile_to",
+        "  [PASS] type lock rel-endf-ola-conflict=hostile_to | got hostile_to",
+        "  [PASS] type lock rel-endf-tdf-conflict=hostile_to | got hostile_to",
+        "  [PASS] type lock rel-ethiopia-sudan-border=cross_border_link | got cross_border_link",
+        "",
+        "ALL DEPTH E TESTS PASS"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_depth_f_import.py",
+      "rc": 0,
+      "cases": 57,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] type lock rel-fadm-is-moz-hostile=fought_against | got fought_against",
+        "  [PASS] type lock rel-lna-gnu-rivalry=hostile_to | got hostile_to",
+        "  [PASS] type lock rel-isis-libya-affiliation=pledged_allegiance_to | got pledged_allegiance_to",
+        "  [PASS] type lock rel-isis-libya-lna-conflict=hostile_to | got hostile_to",
+        "",
+        "ALL DEPTH F TESTS PASS"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_depth_g_closure.py",
+      "rc": 0,
+      "cases": 66,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] no relations added | []",
+        "  [PASS] no entities removed | []",
+        "  [PASS] no relations removed | []",
+        "  [PASS] no unexpected maturity moves | E=[] R=[]",
+        "",
+        "ALL DEPTH G TESTS PASS"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_expansion_b_gate.py",
+      "rc": 0,
+      "cases": 113,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "EXPANSION_B_GATE: PASS=113 FAIL=0"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_expansion_c_gate.py",
+      "rc": 0,
+      "cases": 41,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] alias 'al-battar brigade' resolves",
+        "  [PASS] alias 'aiai' resolves",
+        "  [PASS] alias 'tunisian combatant group' resolves",
+        "  [PASS] alias 'gicm' resolves",
+        "",
+        "EXPANSION_C_GATE: PASS=41 FAIL=0"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_expansion_d_gate.py",
+      "rc": 0,
+      "cases": 24,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] every relationship has a profile",
+        "== 4. new relations present & typed correctly ==",
+        "  [PASS] rel-expd-isis-sinai-isis present & typed",
+        "  [PASS] rel-expd-ansaroul-katiba-macina present & typed",
+        "  [PASS] rel-expd-fpl-niger-operates present & typed",
+        "PASS=24 FAIL=0"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_git_delivery_manifest.py",
+      "rc": 0,
+      "cases": 47,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "test_git_delivery_manifest: PASS=47 FAIL=0"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_i2b_audit.py",
+      "rc": 0,
+      "cases": 1031,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "test_i2b_audit: PASS=1031 FAIL=0"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_i3a_content_quality.py",
+      "rc": 0,
+      "cases": 7,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] deep countries: no single-sentence-only sections",
+        "  [PASS] >=10 deepened relation profiles",
+        "  [PASS] deepened relations all have timelines",
+        "  [PASS] deepened relation profiles have all core fields",
+        "",
+        "I3-A content quality: PASS=7 FAIL=0"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_i3a_country_depth.py",
+      "rc": 0,
+      "cases": 113,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] country-tanzania: current_status_verified_at present",
+        "  [PASS] country-tanzania: freshness valid",
+        "  [PASS] country-tanzania: record_reviewed_at != 事实有效截至 (semantic separation)",
+        "  [PASS] country-tanzania: entity links resolve",
+        "",
+        "I3-A country depth: PASS=113 FAIL=0"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_i3a_duplicate_text.py",
+      "rc": 0,
+      "cases": 3,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "[PASS] no fully duplicated long paragraphs (>40 chars)",
+        "  [PASS] near-duplicate long paragraphs within reasonable range (<=3)",
+        "  [PASS] no empty template boilerplate phrases in long paragraphs",
+        "",
+        "I3-A duplicate text: PASS=3 FAIL=0"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_i3a_entity_depth.py",
+      "rc": 0,
+      "cases": 109,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] actor-mujao: encyclopedia content (>=8 secs, >=1800 chars)",
+        "  [PASS] actor-isis-sinai: encyclopedia content (>=8 secs, >=1800 chars)",
+        "  [PASS] actor-niger-fpl: encyclopedia content (>=8 secs, >=1800 chars)",
+        "  [PASS] no empty sections in entity profiles",
+        "",
+        "I3-A entity depth: PASS=109 FAIL=0"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_i3a_preview.py",
+      "rc": 0,
+      "cases": 13,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] africa.js contains 对人员、企业和项目安全的影响",
+        "  [PASS] africa.js contains pledged_allegiance_to",
+        "  [PASS] africa.js contains core_assessment",
+        "  [PASS] africa.js contains name_and_translation",
+        "",
+        "I3-A preview contract: PASS=13 FAIL=0"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_i3a_source_coverage.py",
+      "rc": 0,
+      "cases": 27,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] priority entity person-salva-kiir has manual evidence",
+        "  [PASS] priority entity person-riek-machar has manual evidence",
+        "  [PASS] priority entity actor-benin-forces has manual evidence",
+        "  [PASS] evidence entity references valid",
+        "",
+        "I3-A source coverage: PASS=27 FAIL=0"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_i3b_all_country_depth.py",
+      "rc": 0,
+      "cases": 84,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] country-tanzania: lead 2-4 paras",
+        "  [PASS] country-tanzania: claim_valid_as_of",
+        "  [PASS] country-tanzania: freshness not unknown",
+        "  [PASS] country-tanzania: links resolve",
+        "",
+        "I3-B all-country depth: PASS=84 FAIL=0"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_i3b_current_status.py",
+      "rc": 0,
+      "cases": 6,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] current items have current_status_verified_at",
+        "  [PASS] no unsupported public claims",
+        "  [PASS] priority current-status entities have manual evidence",
+        "  [PASS] relations have defined freshness",
+        "",
+        "I3-B current status: PASS=6 FAIL=0"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_i3b_evidence_upgrade.py",
+      "rc": 0,
+      "cases": 6,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] manual evidence >= 45",
+        "  [PASS] no generated evidence marked verified",
+        "  [PASS] verified evidence satisfies locator/source/method",
+        "  [PASS] no unsupported evidence",
+        "",
+        "I3-B evidence upgrade: PASS=6 FAIL=0"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_i3b_production_isolation.py",
+      "rc": 0,
+      "cases": 5,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] production paths unchanged (only preview dir added)",
+        "  [PASS] no production files deleted",
+        "  [PASS] feature branch commits not on main (not merged)",
+        "  [PASS] preview dir versioned",
+        "",
+        "I3-B production isolation: PASS=5 FAIL=0"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_i3b_public_preview.py",
+      "rc": 0,
+      "cases": 8,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] verified preview URL reachable (HTTP 200)",
+        "  [PASS] verified preview serves HTML",
+        "  [PASS] gh-pages preview files live on branch (raw 200)",
+        "  [PASS] preview is versioned under /previews/ or versioned dir",
+        "",
+        "I3-B public preview: PASS=8 FAIL=0"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_i3b_relation_depth.py",
+      "rc": 0,
+      "cases": 6,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] deepened profiles >= 32",
+        "  [PASS] deepened profiles all have timelines",
+        "  [PASS] deepened profiles have all core fields",
+        "  [PASS] second-wave relations exist",
+        "",
+        "I3-B relation depth: PASS=6 FAIL=0"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_i3b_release_candidate.py",
+      "rc": 0,
+      "cases": 6,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] manifest has required fields",
+        "  [PASS] manifest counts self-consistent (I3-D1 snapshot)",
+        "  [PASS] manifest release_status is candidate/preview (not production)",
+        "  [PASS] rollback plan covers git/static/nav/cache",
+        "",
+        "I3-B release candidate: PASS=6 FAIL=0"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_i3b_zero_basic_entries.py",
+      "rc": 0,
+      "cases": 108,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "  [PASS] actor-maitatsine-movement: ency content",
+        "  [PASS] actor-mujao: ency content",
+        "  [PASS] actor-isis-sinai: ency content",
+        "  [PASS] actor-niger-fpl: ency content",
+        "",
+        "I3-B zero-basic / depth: PASS=108 FAIL=0"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_i3d1_import.py",
+      "rc": 0,
+      "cases": 54,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "PASS test_i3d1_disputed_semantics (disputed/scope/historical-current preserved)",
+        "PASS test_i3d1_source_mapping (dedupe mapping valid, no invented dates)",
+        "PASS test_i3d1_evidence_mapping (182 evidence, refs resolve, disputed preserved)",
+        "PASS test_i3d1_generator_regression (regen diff 0/0/0/0/0)",
+        "PASS test_i3d1_build_consistency (dist matches source, key routes present)",
+        "ALL 9 I3-D1 TESTS PASS"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_i3d2_import.py",
+      "rc": 0,
+      "cases": 44,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "PASS test_i3d2_entity_ids (72 unique entities, profiles present)",
+        "PASS test_i3d2_source_mapping (7 candidates mapped, no invented dates)",
+        "PASS test_i3d2_evidence_mapping (194 evidence, refs resolve)",
+        "PASS test_i3d2_generator_regression",
+        "PASS test_i3d2_build_consistency (dist matches source, key routes present)",
+        "ALL 9 I3-D2 TESTS PASS"
+      ]
+    },
+    {
+      "suite": "scripts/tests/intelligence/test_relation_ontology.py",
+      "rc": 0,
+      "cases": 364,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "test_relation_ontology: PASS=364 FAIL=0"
+      ]
+    },
+    {
+      "suite": "scripts/tests/test_no_local_paths.py",
+      "rc": 0,
+      "cases": 0,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "{\"scanned_file_count\": 558, \"public_scanned_count\": 510, \"current_release_scanned_count\": 48, \"archival_ignored_count\": 56, \"forbidden_matches\": 0, \"gate\": \"PASS\"}"
+      ]
+    },
+    {
+      "suite": "scripts/tests/test_repository_integrity.py",
+      "rc": 0,
+      "cases": 28,
+      "failed_cases": 0,
+      "ok": true,
+      "tail": [
+        "  ✅ save_sources 拒绝违反业务规则的来源",
+        "  ✅ 合规来源保存成功",
+        "",
+        "====================================================",
+        "Commit 1 完整性测试：PASS=28  FAIL=0",
+        "===================================================="
+      ]
+    }
+  ]
+}

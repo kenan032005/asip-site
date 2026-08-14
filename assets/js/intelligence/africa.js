@@ -248,6 +248,11 @@
     'current': '持续',
     'active': '活跃',
     'historical': '历史',
+    // Expansion D status vocabulary (data presentation, not a UI redesign)
+    'active_but_severely_degraded': '活跃但严重削弱',
+    'active_anti_junta_rebellion': '活跃·反军政府叛乱',
+    'active_and_expanding_cross_border': '活跃且跨境扩张',
+    'tactical_coordination': '战术协同',
     'active_conflict': '持续冲突',
     'active_armed_conflict': '持续武装冲突',
     'active_counterinsurgency_conflict': '持续反恐冲突',
