@@ -104,7 +104,9 @@
     "actor-gicm",
     "actor-al-battar-brigade",
     "actor-maitatsine-movement",
-    "actor-mujao"
+    "actor-mujao",
+    "actor-isis-sinai",
+    "actor-niger-fpl"
   ],
   "regions": [
     "region-central-sahel",
@@ -322,7 +324,10 @@
     "rel-expc-aqim-ansar-relation",
     "rel-expc-gicm-alqaida",
     "rel-expc-tcg-alqaida",
-    "rel-expc-maitatsine-nigeria"
+    "rel-expc-maitatsine-nigeria",
+    "rel-expd-isis-sinai-isis",
+    "rel-expd-ansaroul-katiba-macina",
+    "rel-expd-fpl-niger-operates"
   ],
   "relation_slugs": [
     "jnim-alqaida-affiliate",
@@ -516,7 +521,10 @@
     "expc-aqim-ansar-relation",
     "expc-gicm-alqaida",
     "expc-tcg-alqaida",
-    "expc-maitatsine-nigeria"
+    "expc-maitatsine-nigeria",
+    "expd-isis-sinai-isis",
+    "expd-ansaroul-katiba-macina",
+    "expd-fpl-niger-operates"
   ],
   "relationship_types": [
     "active_in_region",
@@ -588,9 +596,50 @@
       "rel-d2-ghosmane-jnim",
       "rel-d2-katiba-serma-jnim",
       "rel-d2-dozos-macina-jnim-conflict",
+      "rel-d2-jnim-nigeria-emerging",
+      "rel-jnim-alqaida-affiliate",
+      "rel-jnim-aqim-constituent",
+      "rel-jnim-ansar-constituent",
+      "rel-jnim-mourabitoun-constituent",
+      "rel-jnim-katiba-constituent",
+      "rel-jnim-iyad-led",
+      "rel-koufa-jnim-senior",
+      "rel-jnim-mali-operates",
+      "rel-jnim-burkina-operates",
+      "rel-jnim-niger-operates",
+      "rel-jnim-is-hostile",
+      "rel-jnim-is-conflict",
+      "rel-koufa-iyad-network",
+      "rel-jnim-benin-spillover",
+      "rel-jnim-benin-forces-fought",
+      "rel-mali-army-jnim",
+      "rel-burkina-army-jnim",
+      "rel-d1-fla-jnim-cooperation",
+      "rel-d1-africa-corps-jnim-conflict",
+      "rel-d1-wagner-jnim-conflict",
+      "rel-d1-ansarul-jnim-constituent",
+      "rel-d1-abu-hanifa-jnim-affiliation",
+      "rel-d1-sadou-jnim-history",
+      "rel-d1-ansaru-jnim-affiliation",
+      "rel-d1-lakurawa-jnim-cooperation",
+      "rel-d1-dan-na-jnim-conflict",
+      "rel-d2-jafar-jnim",
+      "rel-d2-ousmane-jnim",
+      "rel-d2-katiba-hanifa-jnim",
+      "rel-d2-ghosmane-jnim",
+      "rel-d2-katiba-serma-jnim",
+      "rel-d2-dozos-macina-jnim-conflict",
       "rel-d2-jnim-nigeria-emerging"
     ],
     "actor-al-qaida": [
+      "rel-jnim-alqaida-affiliate",
+      "rel-iyad-alqaida-pledge",
+      "rel-iswap-alqaida-hostile",
+      "rel-expa-shabaab-alqaida-allegiance",
+      "rel-expc-aqim-alqaida-alignment",
+      "rel-expc-eij-alqaida-integration",
+      "rel-expc-gicm-alqaida",
+      "rel-expc-tcg-alqaida",
       "rel-jnim-alqaida-affiliate",
       "rel-iyad-alqaida-pledge",
       "rel-iswap-alqaida-hostile",
@@ -606,9 +655,18 @@
       "rel-expc-gia-aqim-lineage",
       "rel-expc-aqim-alqaida-alignment",
       "rel-expc-aqim-mujao-split",
+      "rel-expc-aqim-ansar-relation",
+      "rel-jnim-aqim-constituent",
+      "rel-d1-ansaru-aqim-allegiance",
+      "rel-expc-gia-aqim-lineage",
+      "rel-expc-aqim-alqaida-alignment",
+      "rel-expc-aqim-mujao-split",
       "rel-expc-aqim-ansar-relation"
     ],
     "actor-ansar-eddine": [
+      "rel-jnim-ansar-constituent",
+      "rel-iyad-ansar-founder",
+      "rel-expc-aqim-ansar-relation",
       "rel-jnim-ansar-constituent",
       "rel-iyad-ansar-founder",
       "rel-expc-aqim-ansar-relation"
@@ -616,13 +674,23 @@
     "actor-al-mourabitoun": [
       "rel-jnim-mourabitoun-constituent",
       "rel-is-mourabitoun-splinter",
+      "rel-expc-mujao-murabitun",
+      "rel-jnim-mourabitoun-constituent",
+      "rel-is-mourabitoun-splinter",
       "rel-expc-mujao-murabitun"
     ],
     "actor-katiba-macina": [
       "rel-jnim-katiba-constituent",
-      "rel-koufa-katiba-founder"
+      "rel-koufa-katiba-founder",
+      "rel-jnim-katiba-constituent",
+      "rel-koufa-katiba-founder",
+      "rel-expd-ansaroul-katiba-macina"
     ],
     "person-iyad-ag-ghali": [
+      "rel-jnim-iyad-led",
+      "rel-iyad-ansar-founder",
+      "rel-iyad-alqaida-pledge",
+      "rel-koufa-iyad-network",
       "rel-jnim-iyad-led",
       "rel-iyad-ansar-founder",
       "rel-iyad-alqaida-pledge",
@@ -630,9 +698,24 @@
     ],
     "person-amadou-koufa": [
       "rel-koufa-katiba-founder",
+      "rel-koufa-jnim-senior",
+      "rel-koufa-katiba-founder",
       "rel-koufa-jnim-senior"
     ],
     "country-mali": [
+      "rel-jnim-mali-operates",
+      "rel-is-mali-operates",
+      "rel-d1-fla-mali-operates",
+      "rel-d1-africa-corps-mali-deployed",
+      "rel-d1-wagner-mali-deployed",
+      "rel-d1-dan-na-mali-operates",
+      "rel-d1-hcua-mali",
+      "rel-d1-mnla-mali",
+      "rel-d1-maa-mali",
+      "rel-d1-gatia-mali",
+      "rel-d2-katiba-serma-mali",
+      "rel-d2-dana-mali",
+      "rel-d2-dozos-macina-mali",
       "rel-jnim-mali-operates",
       "rel-is-mali-operates",
       "rel-d1-fla-mali-operates",
@@ -655,6 +738,14 @@
       "rel-d2-jafar-burkina",
       "rel-d2-ousmane-burkina",
       "rel-d2-katiba-hanifa-burkina",
+      "rel-d2-katiba-serma-burkina",
+      "rel-jnim-burkina-operates",
+      "rel-is-burkina-operates",
+      "rel-d1-ansarul-burkina-operates",
+      "rel-d1-sadou-burkina-history",
+      "rel-d2-jafar-burkina",
+      "rel-d2-ousmane-burkina",
+      "rel-d2-katiba-hanifa-burkina",
       "rel-d2-katiba-serma-burkina"
     ],
     "country-niger": [
@@ -664,9 +755,28 @@
       "rel-d1-niger-army-niger",
       "rel-d1-lakurawa-niger-operates",
       "rel-d2-katiba-hanifa-niger",
-      "rel-d2-ghosmane-niger"
+      "rel-d2-ghosmane-niger",
+      "rel-jnim-niger-operates",
+      "rel-is-niger-operates",
+      "rel-d1-abu-hanifa-niger",
+      "rel-d1-niger-army-niger",
+      "rel-d1-lakurawa-niger-operates",
+      "rel-d2-katiba-hanifa-niger",
+      "rel-d2-ghosmane-niger",
+      "rel-expd-fpl-niger-operates"
     ],
     "actor-is-sahel": [
+      "rel-is-mourabitoun-splinter",
+      "rel-is-mali-operates",
+      "rel-is-burkina-operates",
+      "rel-is-niger-operates",
+      "rel-jnim-is-hostile",
+      "rel-jnim-is-conflict",
+      "rel-is-benin-spillover",
+      "rel-mali-army-is-sahel",
+      "rel-burkina-army-is-sahel",
+      "rel-d1-sadou-is-sahel",
+      "rel-d1-lakurawa-is-sahel-network",
       "rel-is-mourabitoun-splinter",
       "rel-is-mali-operates",
       "rel-is-burkina-operates",
@@ -687,9 +797,24 @@
       "rel-jas-cameroon-spillover",
       "rel-cameroon-army-jas",
       "rel-d1-ansaru-jas-split",
+      "rel-d1-lakurawa-jas-cooperation",
+      "rel-jas-iswap-conflict",
+      "rel-jas-islamic-state-hostile",
+      "rel-jas-chad-spillover",
+      "rel-jas-nigeria-operates",
+      "rel-jas-cameroon-spillover",
+      "rel-cameroon-army-jas",
+      "rel-d1-ansaru-jas-split",
       "rel-d1-lakurawa-jas-cooperation"
     ],
     "actor-iswap": [
+      "rel-jas-iswap-conflict",
+      "rel-iswap-islamic-state-affiliation",
+      "rel-iswap-alqaida-hostile",
+      "rel-iswap-nigeria-operates",
+      "rel-iswap-chad-spillover",
+      "rel-iswap-cameroon-spillover",
+      "rel-cameroon-army-iswap",
       "rel-jas-iswap-conflict",
       "rel-iswap-islamic-state-affiliation",
       "rel-iswap-alqaida-hostile",
@@ -704,27 +829,48 @@
       "rel-is-moz-islamic-state",
       "rel-isis-libya-affiliation",
       "rel-expa-isis-somalia-isis-branch",
-      "rel-expa-adf-isis-branch"
+      "rel-expa-adf-isis-branch",
+      "rel-jas-islamic-state-hostile",
+      "rel-iswap-islamic-state-affiliation",
+      "rel-is-moz-islamic-state",
+      "rel-isis-libya-affiliation",
+      "rel-expa-isis-somalia-isis-branch",
+      "rel-expa-adf-isis-branch",
+      "rel-expd-isis-sinai-isis"
     ],
     "actor-chad-army": [
+      "rel-chad-mnjtf-member",
       "rel-chad-mnjtf-member"
     ],
     "actor-mnjtf": [
       "rel-chad-mnjtf-member",
       "rel-nigeria-mnjtf-member",
       "rel-cameroon-mnjtf-member",
+      "rel-mnjtf-lakechad-operates",
+      "rel-chad-mnjtf-member",
+      "rel-nigeria-mnjtf-member",
+      "rel-cameroon-mnjtf-member",
       "rel-mnjtf-lakechad-operates"
     ],
     "actor-nigeria-army": [
+      "rel-nigeria-mnjtf-member",
       "rel-nigeria-mnjtf-member"
     ],
     "actor-cameroon-army": [
       "rel-cameroon-mnjtf-member",
       "rel-cameroon-army-jas",
       "rel-cameroon-army-iswap",
+      "rel-cameroon-army-ambazonia",
+      "rel-cameroon-mnjtf-member",
+      "rel-cameroon-army-jas",
+      "rel-cameroon-army-iswap",
       "rel-cameroon-army-ambazonia"
     ],
     "country-chad": [
+      "rel-jas-chad-spillover",
+      "rel-mnjtf-lakechad-operates",
+      "rel-iswap-chad-spillover",
+      "rel-sudan-chad-spillover",
       "rel-jas-chad-spillover",
       "rel-mnjtf-lakechad-operates",
       "rel-iswap-chad-spillover",
@@ -737,14 +883,32 @@
       "rel-d1-ansaru-nigeria-operates",
       "rel-d1-lakurawa-nigeria-operates",
       "rel-d2-jnim-nigeria-emerging",
+      "rel-expc-maitatsine-nigeria",
+      "rel-jas-nigeria-operates",
+      "rel-iswap-nigeria-operates",
+      "rel-nigeria-cameroon-border",
+      "rel-d1-ansaru-nigeria-operates",
+      "rel-d1-lakurawa-nigeria-operates",
+      "rel-d2-jnim-nigeria-emerging",
       "rel-expc-maitatsine-nigeria"
     ],
     "country-cameroon": [
       "rel-jas-cameroon-spillover",
       "rel-iswap-cameroon-spillover",
+      "rel-nigeria-cameroon-border",
+      "rel-jas-cameroon-spillover",
+      "rel-iswap-cameroon-spillover",
       "rel-nigeria-cameroon-border"
     ],
     "actor-saf": [
+      "rel-saf-rsf-war",
+      "rel-burhan-saf-leads",
+      "rel-splm-n-saf-conflict",
+      "rel-jem-saf-conflict",
+      "rel-saf-sudan-operates",
+      "rel-ssudan-sudan-spillover",
+      "rel-expa-bbmb-saf-aligned",
+      "rel-expb-talha-saf-allied",
       "rel-saf-rsf-war",
       "rel-burhan-saf-leads",
       "rel-splm-n-saf-conflict",
@@ -760,40 +924,65 @@
       "rel-rsf-darfur-origin",
       "rel-rsf-sudan-operates",
       "rel-sudan-chad-spillover",
+      "rel-expa-bbmb-rsf-hostile",
+      "rel-saf-rsf-war",
+      "rel-dagalo-rsf-leads",
+      "rel-rsf-darfur-origin",
+      "rel-rsf-sudan-operates",
+      "rel-sudan-chad-spillover",
       "rel-expa-bbmb-rsf-hostile"
     ],
     "person-abdel-fattah-al-burhan": [
+      "rel-burhan-saf-leads",
       "rel-burhan-saf-leads"
     ],
     "person-mohamed-hamdan-dagalo": [
+      "rel-dagalo-rsf-leads",
       "rel-dagalo-rsf-leads"
     ],
     "actor-splm-n-al-hilu": [
+      "rel-splm-n-saf-conflict",
       "rel-splm-n-saf-conflict"
     ],
     "actor-jem": [
+      "rel-jem-saf-conflict",
+      "rel-rsf-darfur-origin",
       "rel-jem-saf-conflict",
       "rel-rsf-darfur-origin"
     ],
     "actor-splm-io": [
       "rel-splm-io-sspdf-conflict",
       "rel-machar-splm-io-leads",
+      "rel-nas-splm-io-allied",
+      "rel-splm-io-sspdf-conflict",
+      "rel-machar-splm-io-leads",
       "rel-nas-splm-io-allied"
     ],
     "actor-sspdf": [
       "rel-splm-io-sspdf-conflict",
+      "rel-kiir-sspdf-leads",
+      "rel-splm-io-sspdf-conflict",
       "rel-kiir-sspdf-leads"
     ],
     "person-salva-kiir": [
+      "rel-kiir-sspdf-leads",
       "rel-kiir-sspdf-leads"
     ],
     "person-riek-machar": [
+      "rel-machar-splm-io-leads",
       "rel-machar-splm-io-leads"
     ],
     "actor-nas": [
+      "rel-nas-splm-io-allied",
       "rel-nas-splm-io-allied"
     ],
     "actor-is-mozambique": [
+      "rel-is-moz-islamic-state",
+      "rel-is-moz-islamic-state2",
+      "rel-fadm-is-moz-hostile",
+      "rel-is-moz-tanzania-link",
+      "rel-is-moz-mozambique-operates",
+      "rel-tanzania-tpdf-is-moz",
       "rel-is-moz-islamic-state",
       "rel-is-moz-islamic-state2",
       "rel-fadm-is-moz-hostile",
@@ -803,9 +992,16 @@
     ],
     "actor-rdf-mozambique": [
       "rel-is-moz-islamic-state2",
+      "rel-rdf-mozambique-fadm-cooperate",
+      "rel-is-moz-islamic-state2",
       "rel-rdf-mozambique-fadm-cooperate"
     ],
     "actor-fadm": [
+      "rel-fadm-is-moz-hostile",
+      "rel-rdf-mozambique-fadm-cooperate",
+      "rel-samim-fadm-cooperate",
+      "rel-fadm-mozambique-operates",
+      "rel-tanzania-mozambique-cooperate",
       "rel-fadm-is-moz-hostile",
       "rel-rdf-mozambique-fadm-cooperate",
       "rel-samim-fadm-cooperate",
@@ -814,16 +1010,24 @@
     ],
     "actor-samim": [
       "rel-samim-fadm-cooperate",
+      "rel-tanzania-samim-member",
+      "rel-samim-fadm-cooperate",
       "rel-tanzania-samim-member"
     ],
     "actor-lna": [
       "rel-lna-gnu-rivalry",
+      "rel-isis-libya-lna-conflict",
+      "rel-lna-gnu-rivalry",
       "rel-isis-libya-lna-conflict"
     ],
     "actor-gnu-forces": [
+      "rel-lna-gnu-rivalry",
       "rel-lna-gnu-rivalry"
     ],
     "actor-isis-libya": [
+      "rel-isis-libya-affiliation",
+      "rel-isis-libya-lna-conflict",
+      "rel-expc-battar-isis-libya",
       "rel-isis-libya-affiliation",
       "rel-isis-libya-lna-conflict",
       "rel-expc-battar-isis-libya"
@@ -831,62 +1035,99 @@
     "country-benin": [
       "rel-jnim-benin-spillover",
       "rel-is-benin-spillover",
+      "rel-d2-katiba-hanifa-benin",
+      "rel-jnim-benin-spillover",
+      "rel-is-benin-spillover",
       "rel-d2-katiba-hanifa-benin"
     ],
     "actor-benin-forces": [
+      "rel-jnim-benin-forces-fought",
+      "rel-d2-katiba-hanifa-benin-forces",
       "rel-jnim-benin-forces-fought",
       "rel-d2-katiba-hanifa-benin-forces"
     ],
     "country-sudan": [
       "rel-rsf-sudan-operates",
       "rel-saf-sudan-operates",
+      "rel-ethiopia-sudan-border",
+      "rel-rsf-sudan-operates",
+      "rel-saf-sudan-operates",
       "rel-ethiopia-sudan-border"
     ],
     "country-south-sudan": [
+      "rel-ssudan-sudan-spillover",
       "rel-ssudan-sudan-spillover"
     ],
     "country-tanzania": [
+      "rel-is-moz-tanzania-link",
       "rel-is-moz-tanzania-link"
     ],
     "country-mozambique": [
       "rel-fadm-mozambique-operates",
+      "rel-is-moz-mozambique-operates",
+      "rel-fadm-mozambique-operates",
       "rel-is-moz-mozambique-operates"
     ],
     "actor-ambazonia-network": [
+      "rel-cameroon-army-ambazonia",
       "rel-cameroon-army-ambazonia"
     ],
     "actor-endf": [
       "rel-endf-fano-conflict",
       "rel-endf-ola-conflict",
+      "rel-endf-tdf-conflict",
+      "rel-endf-fano-conflict",
+      "rel-endf-ola-conflict",
       "rel-endf-tdf-conflict"
     ],
     "actor-fano": [
+      "rel-endf-fano-conflict",
       "rel-endf-fano-conflict"
     ],
     "actor-ola": [
+      "rel-endf-ola-conflict",
       "rel-endf-ola-conflict"
     ],
     "actor-tdf": [
+      "rel-endf-tdf-conflict",
       "rel-endf-tdf-conflict"
     ],
     "country-ethiopia": [
+      "rel-ethiopia-sudan-border",
       "rel-ethiopia-sudan-border"
     ],
     "actor-tanzania-tpdf": [
       "rel-tanzania-tpdf-is-moz",
       "rel-tanzania-mozambique-cooperate",
+      "rel-tanzania-samim-member",
+      "rel-tanzania-tpdf-is-moz",
+      "rel-tanzania-mozambique-cooperate",
       "rel-tanzania-samim-member"
     ],
     "actor-vdp": [
+      "rel-vdp-burkina-support",
       "rel-vdp-burkina-support"
     ],
     "actor-burkina-army": [
       "rel-vdp-burkina-support",
       "rel-burkina-army-jnim",
       "rel-burkina-army-is-sahel",
+      "rel-d1-burkina-army-fu-aes-member",
+      "rel-vdp-burkina-support",
+      "rel-burkina-army-jnim",
+      "rel-burkina-army-is-sahel",
       "rel-d1-burkina-army-fu-aes-member"
     ],
     "actor-mali-army": [
+      "rel-mali-army-jnim",
+      "rel-mali-army-is-sahel",
+      "rel-d1-fla-fama-conflict",
+      "rel-d1-africa-corps-fama-coop",
+      "rel-d1-wagner-fama-coop",
+      "rel-d1-fama-fu-aes-member",
+      "rel-d1-dan-na-fama-coop",
+      "rel-d2-dana-fama-coop",
+      "rel-d2-dozos-macina-fama-coop",
       "rel-mali-army-jnim",
       "rel-mali-army-is-sahel",
       "rel-d1-fla-fama-conflict",
@@ -905,9 +1146,22 @@
       "rel-d1-fla-mnla-merged",
       "rel-d1-fla-hcua-merged",
       "rel-d1-fla-maa-merged",
+      "rel-d1-fla-gatia-merged",
+      "rel-d1-fla-mali-operates",
+      "rel-d1-fla-jnim-cooperation",
+      "rel-d1-fla-fama-conflict",
+      "rel-d1-fla-africa-corps-conflict",
+      "rel-d1-fla-mnla-merged",
+      "rel-d1-fla-hcua-merged",
+      "rel-d1-fla-maa-merged",
       "rel-d1-fla-gatia-merged"
     ],
     "actor-africa-corps": [
+      "rel-d1-fla-africa-corps-conflict",
+      "rel-d1-africa-corps-mali-deployed",
+      "rel-d1-africa-corps-fama-coop",
+      "rel-d1-africa-corps-jnim-conflict",
+      "rel-d1-africa-corps-wagner-history",
       "rel-d1-fla-africa-corps-conflict",
       "rel-d1-africa-corps-mali-deployed",
       "rel-d1-africa-corps-fama-coop",
@@ -916,21 +1170,33 @@
     ],
     "actor-mnla": [
       "rel-d1-fla-mnla-merged",
+      "rel-d1-mnla-mali",
+      "rel-d1-fla-mnla-merged",
       "rel-d1-mnla-mali"
     ],
     "actor-hcua": [
+      "rel-d1-fla-hcua-merged",
+      "rel-d1-hcua-mali",
       "rel-d1-fla-hcua-merged",
       "rel-d1-hcua-mali"
     ],
     "actor-maa-cma": [
       "rel-d1-fla-maa-merged",
+      "rel-d1-maa-mali",
+      "rel-d1-fla-maa-merged",
       "rel-d1-maa-mali"
     ],
     "actor-gatia": [
       "rel-d1-fla-gatia-merged",
+      "rel-d1-gatia-mali",
+      "rel-d1-fla-gatia-merged",
       "rel-d1-gatia-mali"
     ],
     "actor-wagner-group": [
+      "rel-d1-africa-corps-wagner-history",
+      "rel-d1-wagner-mali-deployed",
+      "rel-d1-wagner-fama-coop",
+      "rel-d1-wagner-jnim-conflict",
       "rel-d1-africa-corps-wagner-history",
       "rel-d1-wagner-mali-deployed",
       "rel-d1-wagner-fama-coop",
@@ -941,14 +1207,26 @@
       "rel-d1-ansarul-burkina-operates",
       "rel-d2-ansarul-jafar-led",
       "rel-d2-ansarul-ibrahim-founded",
-      "rel-d2-dana-ansarul-conflict"
+      "rel-d2-dana-ansarul-conflict",
+      "rel-d1-ansarul-jnim-constituent",
+      "rel-d1-ansarul-burkina-operates",
+      "rel-d2-ansarul-jafar-led",
+      "rel-d2-ansarul-ibrahim-founded",
+      "rel-d2-dana-ansarul-conflict",
+      "rel-expd-ansaroul-katiba-macina"
     ],
     "person-abu-hanifa": [
+      "rel-d1-abu-hanifa-jnim-affiliation",
+      "rel-d1-abu-hanifa-niger",
+      "rel-d2-katiba-hanifa-abu-led",
       "rel-d1-abu-hanifa-jnim-affiliation",
       "rel-d1-abu-hanifa-niger",
       "rel-d2-katiba-hanifa-abu-led"
     ],
     "person-sadou-samahouna": [
+      "rel-d1-sadou-jnim-history",
+      "rel-d1-sadou-is-sahel",
+      "rel-d1-sadou-burkina-history",
       "rel-d1-sadou-jnim-history",
       "rel-d1-sadou-is-sahel",
       "rel-d1-sadou-burkina-history"
@@ -957,12 +1235,19 @@
       "rel-d1-fu-aes-region",
       "rel-d1-fama-fu-aes-member",
       "rel-d1-burkina-army-fu-aes-member",
+      "rel-d1-niger-army-fu-aes-member",
+      "rel-d1-fu-aes-region",
+      "rel-d1-fama-fu-aes-member",
+      "rel-d1-burkina-army-fu-aes-member",
       "rel-d1-niger-army-fu-aes-member"
     ],
     "region-central-sahel": [
+      "rel-d1-fu-aes-region",
       "rel-d1-fu-aes-region"
     ],
     "actor-niger-armed-forces": [
+      "rel-d1-niger-army-fu-aes-member",
+      "rel-d1-niger-army-niger",
       "rel-d1-niger-army-fu-aes-member",
       "rel-d1-niger-army-niger"
     ],
@@ -970,9 +1255,18 @@
       "rel-d1-ansaru-jas-split",
       "rel-d1-ansaru-aqim-allegiance",
       "rel-d1-ansaru-jnim-affiliation",
+      "rel-d1-ansaru-nigeria-operates",
+      "rel-d1-ansaru-jas-split",
+      "rel-d1-ansaru-aqim-allegiance",
+      "rel-d1-ansaru-jnim-affiliation",
       "rel-d1-ansaru-nigeria-operates"
     ],
     "actor-lakurawa": [
+      "rel-d1-lakurawa-is-sahel-network",
+      "rel-d1-lakurawa-jnim-cooperation",
+      "rel-d1-lakurawa-jas-cooperation",
+      "rel-d1-lakurawa-nigeria-operates",
+      "rel-d1-lakurawa-niger-operates",
       "rel-d1-lakurawa-is-sahel-network",
       "rel-d1-lakurawa-jnim-cooperation",
       "rel-d1-lakurawa-jas-cooperation",
@@ -984,21 +1278,38 @@
       "rel-d1-dan-na-jnim-conflict",
       "rel-d1-dan-na-fama-coop",
       "rel-d2-dana-dan-na-split",
+      "rel-d2-dan-na-toloba-led",
+      "rel-d1-dan-na-mali-operates",
+      "rel-d1-dan-na-jnim-conflict",
+      "rel-d1-dan-na-fama-coop",
+      "rel-d2-dana-dan-na-split",
       "rel-d2-dan-na-toloba-led"
     ],
     "person-jafar-dicko": [
+      "rel-d2-jafar-jnim",
+      "rel-d2-ansarul-jafar-led",
+      "rel-d2-jafar-burkina",
       "rel-d2-jafar-jnim",
       "rel-d2-ansarul-jafar-led",
       "rel-d2-jafar-burkina"
     ],
     "person-ousmane-dicko": [
       "rel-d2-ousmane-jnim",
+      "rel-d2-ousmane-burkina",
+      "rel-d2-ousmane-jnim",
       "rel-d2-ousmane-burkina"
     ],
     "person-ibrahim-malam-dicko": [
+      "rel-d2-ansarul-ibrahim-founded",
       "rel-d2-ansarul-ibrahim-founded"
     ],
     "actor-katiba-hanifa": [
+      "rel-d2-katiba-hanifa-jnim",
+      "rel-d2-katiba-hanifa-abu-led",
+      "rel-d2-katiba-hanifa-benin",
+      "rel-d2-katiba-hanifa-niger",
+      "rel-d2-katiba-hanifa-burkina",
+      "rel-d2-katiba-hanifa-benin-forces",
       "rel-d2-katiba-hanifa-jnim",
       "rel-d2-katiba-hanifa-abu-led",
       "rel-d2-katiba-hanifa-benin",
@@ -1008,9 +1319,15 @@
     ],
     "person-abou-ghosmane": [
       "rel-d2-ghosmane-jnim",
+      "rel-d2-ghosmane-niger",
+      "rel-d2-ghosmane-jnim",
       "rel-d2-ghosmane-niger"
     ],
     "actor-katiba-serma": [
+      "rel-d2-katiba-serma-jnim",
+      "rel-d2-katiba-serma-mali",
+      "rel-d2-katiba-serma-burkina",
+      "rel-d2-dana-katiba-serma-conflict",
       "rel-d2-katiba-serma-jnim",
       "rel-d2-katiba-serma-mali",
       "rel-d2-katiba-serma-burkina",
@@ -1022,24 +1339,44 @@
       "rel-d2-dana-mali",
       "rel-d2-dana-katiba-serma-conflict",
       "rel-d2-dana-ansarul-conflict",
+      "rel-d2-dana-fama-coop",
+      "rel-d2-dana-dan-na-split",
+      "rel-d2-dana-sidi-led",
+      "rel-d2-dana-mali",
+      "rel-d2-dana-katiba-serma-conflict",
+      "rel-d2-dana-ansarul-conflict",
       "rel-d2-dana-fama-coop"
     ],
     "person-sidi-ongoiba": [
+      "rel-d2-dana-sidi-led",
       "rel-d2-dana-sidi-led"
     ],
     "actor-dozos-of-macina": [
       "rel-d2-dozos-macina-amadou-led",
       "rel-d2-dozos-macina-mali",
       "rel-d2-dozos-macina-jnim-conflict",
+      "rel-d2-dozos-macina-fama-coop",
+      "rel-d2-dozos-macina-amadou-led",
+      "rel-d2-dozos-macina-mali",
+      "rel-d2-dozos-macina-jnim-conflict",
       "rel-d2-dozos-macina-fama-coop"
     ],
     "person-amadou-nionson-diarra": [
+      "rel-d2-dozos-macina-amadou-led",
       "rel-d2-dozos-macina-amadou-led"
     ],
     "person-youssouf-toloba": [
+      "rel-d2-dan-na-toloba-led",
       "rel-d2-dan-na-toloba-led"
     ],
     "actor-al-shabaab": [
+      "rel-expa-shabaab-alqaida-allegiance",
+      "rel-expa-shabaab-isis-somalia-rivalry",
+      "rel-expa-shabaab-diriye-leads",
+      "rel-expb-shabaab-aussom-conflict",
+      "rel-expb-shabaab-snaf-conflict",
+      "rel-expb-shabaab-karate-led",
+      "rel-expc-aiai-shabaab-predecessor",
       "rel-expa-shabaab-alqaida-allegiance",
       "rel-expa-shabaab-isis-somalia-rivalry",
       "rel-expa-shabaab-diriye-leads",
@@ -1055,21 +1392,36 @@
       "rel-expa-isis-somalia-mumin-founder",
       "rel-expa-isis-somalia-fahiye-leads",
       "rel-expb-isis-somalia-puntland-conflict",
+      "rel-expb-isis-somalia-yusuf-led",
+      "rel-expa-shabaab-isis-somalia-rivalry",
+      "rel-expa-isis-somalia-isis-branch",
+      "rel-expa-isis-somalia-karrar-colocated",
+      "rel-expa-isis-somalia-mumin-founder",
+      "rel-expa-isis-somalia-fahiye-leads",
+      "rel-expb-isis-somalia-puntland-conflict",
       "rel-expb-isis-somalia-yusuf-led"
     ],
     "person-ahmed-diriye": [
+      "rel-expa-shabaab-diriye-leads",
       "rel-expa-shabaab-diriye-leads"
     ],
     "actor-al-karrar-office": [
+      "rel-expa-isis-somalia-karrar-colocated",
+      "rel-expa-karrar-mumin-leads",
       "rel-expa-isis-somalia-karrar-colocated",
       "rel-expa-karrar-mumin-leads"
     ],
     "person-abd-al-qadir-mumin": [
       "rel-expa-isis-somalia-mumin-founder",
       "rel-expa-karrar-mumin-leads",
+      "rel-expb-mumin-yusuf-reporting",
+      "rel-expa-isis-somalia-mumin-founder",
+      "rel-expa-karrar-mumin-leads",
       "rel-expb-mumin-yusuf-reporting"
     ],
     "person-abdirahman-fahiye": [
+      "rel-expa-isis-somalia-fahiye-leads",
+      "rel-expb-fahiye-yusuf-reporting",
       "rel-expa-isis-somalia-fahiye-leads",
       "rel-expb-fahiye-yusuf-reporting"
     ],
@@ -1079,19 +1431,34 @@
       "rel-expb-adf-fardc-conflict",
       "rel-expb-adf-updf-conflict",
       "rel-expb-monusco-adf-countering",
+      "rel-expb-adf-nkalubo-led",
+      "rel-expa-adf-isis-branch",
+      "rel-expa-adf-baluku-leads",
+      "rel-expb-adf-fardc-conflict",
+      "rel-expb-adf-updf-conflict",
+      "rel-expb-monusco-adf-countering",
       "rel-expb-adf-nkalubo-led"
     ],
     "person-seka-musa-baluku": [
+      "rel-expa-adf-baluku-leads",
       "rel-expa-adf-baluku-leads"
     ],
     "actor-sim": [
       "rel-expa-sim-karti-leads",
+      "rel-expa-sim-bbmb-linked",
+      "rel-expa-sim-karti-leads",
       "rel-expa-sim-bbmb-linked"
     ],
     "person-ali-ahmed-karti": [
+      "rel-expa-sim-karti-leads",
       "rel-expa-sim-karti-leads"
     ],
     "actor-bbmb": [
+      "rel-expa-sim-bbmb-linked",
+      "rel-expa-bbmb-saf-aligned",
+      "rel-expa-bbmb-rsf-hostile",
+      "rel-expb-bbmb-irgc-support",
+      "rel-expb-bbmb-talha-led",
       "rel-expa-sim-bbmb-linked",
       "rel-expa-bbmb-saf-aligned",
       "rel-expa-bbmb-rsf-hostile",
@@ -1100,19 +1467,28 @@
     ],
     "actor-aussom": [
       "rel-expb-shabaab-aussom-conflict",
+      "rel-expb-aussom-snaf-cooperation",
+      "rel-expb-shabaab-aussom-conflict",
       "rel-expb-aussom-snaf-cooperation"
     ],
     "actor-somali-national-armed-forces": [
       "rel-expb-shabaab-snaf-conflict",
+      "rel-expb-aussom-snaf-cooperation",
+      "rel-expb-shabaab-snaf-conflict",
       "rel-expb-aussom-snaf-cooperation"
     ],
     "actor-puntland-security-forces": [
+      "rel-expb-isis-somalia-puntland-conflict",
       "rel-expb-isis-somalia-puntland-conflict"
     ],
     "person-mahad-karate": [
+      "rel-expb-shabaab-karate-led",
       "rel-expb-shabaab-karate-led"
     ],
     "person-abdiweli-mohamed-yusuf": [
+      "rel-expb-isis-somalia-yusuf-led",
+      "rel-expb-mumin-yusuf-reporting",
+      "rel-expb-fahiye-yusuf-reporting",
       "rel-expb-isis-somalia-yusuf-led",
       "rel-expb-mumin-yusuf-reporting",
       "rel-expb-fahiye-yusuf-reporting"
@@ -1120,51 +1496,77 @@
     "actor-fardc": [
       "rel-expb-adf-fardc-conflict",
       "rel-expb-fardc-updf-shujaa",
+      "rel-expb-monusco-fardc-cooperation",
+      "rel-expb-adf-fardc-conflict",
+      "rel-expb-fardc-updf-shujaa",
       "rel-expb-monusco-fardc-cooperation"
     ],
     "actor-updf": [
+      "rel-expb-adf-updf-conflict",
+      "rel-expb-fardc-updf-shujaa",
       "rel-expb-adf-updf-conflict",
       "rel-expb-fardc-updf-shujaa"
     ],
     "actor-monusco": [
       "rel-expb-monusco-adf-countering",
+      "rel-expb-monusco-fardc-cooperation",
+      "rel-expb-monusco-adf-countering",
       "rel-expb-monusco-fardc-cooperation"
     ],
     "person-meddie-nkalubo": [
+      "rel-expb-adf-nkalubo-led",
       "rel-expb-adf-nkalubo-led"
     ],
     "actor-irgc": [
+      "rel-expb-bbmb-irgc-support",
       "rel-expb-bbmb-irgc-support"
     ],
     "person-abu-zaid-talha": [
       "rel-expb-bbmb-talha-led",
+      "rel-expb-talha-saf-allied",
+      "rel-expb-bbmb-talha-led",
       "rel-expb-talha-saf-allied"
     ],
     "actor-gia": [
+      "rel-expc-gia-aqim-lineage",
       "rel-expc-gia-aqim-lineage"
     ],
     "actor-egyptian-islamic-jihad": [
+      "rel-expc-eij-alqaida-integration",
       "rel-expc-eij-alqaida-integration"
     ],
     "actor-aiai": [
+      "rel-expc-aiai-shabaab-predecessor",
       "rel-expc-aiai-shabaab-predecessor"
     ],
     "actor-al-battar-brigade": [
+      "rel-expc-battar-isis-libya",
       "rel-expc-battar-isis-libya"
     ],
     "actor-mujao": [
       "rel-expc-mujao-murabitun",
+      "rel-expc-aqim-mujao-split",
+      "rel-expc-mujao-murabitun",
       "rel-expc-aqim-mujao-split"
     ],
     "actor-gicm": [
+      "rel-expc-gicm-alqaida",
       "rel-expc-gicm-alqaida"
     ],
     "actor-tunisian-combatant-group": [
+      "rel-expc-tcg-alqaida",
       "rel-expc-tcg-alqaida"
     ],
     "actor-maitatsine-movement": [
+      "rel-expc-maitatsine-nigeria",
       "rel-expc-maitatsine-nigeria"
+    ],
+    "actor-isis-sinai": [
+      "rel-expd-isis-sinai-isis"
+    ],
+    "actor-niger-fpl": [
+      "rel-expd-fpl-niger-operates"
     ]
   },
-  "generated_at": "2026-08-11"
+  "generated_at": "2026-08-14"
 }

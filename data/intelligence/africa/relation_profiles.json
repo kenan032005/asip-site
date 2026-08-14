@@ -1,6 +1,6 @@
 {
   "schema_version": "asip-intelligence-africa-v1.0",
-  "generated_at": "2026-08-11",
+  "generated_at": "2026-08-14",
   "profiles": {
     "rel-jnim-is-hostile": {
       "relation_id": "rel-jnim-is-hostile",
@@ -2348,9 +2348,9 @@
       "regional_differences": "",
       "impact_on_security": "",
       "why_it_matters": "",
-      "uncertainties": "协调机制、联合指挥程度、后勤共享和长期政治协议均缺乏公开可靠细节。",
+      "uncertainties": "协调机制、联合指挥程度、后勤共享与长期政治协议均缺乏公开可靠细节；FLA 是否会在政治对话开启后与 JNIM 脱钩存在高度不确定性。",
       "temporal_sensitive": true,
-      "last_verified_at": "2026-08-08",
+      "last_verified_at": "2026-08-14",
       "imported_by": "i3d1",
       "drivers": [
         "共同敌对FAMa/俄罗斯力量",
@@ -2365,12 +2365,12 @@
         "增加FAMa/Africa Corps多线压力",
         "改变北Mali谈判结构"
       ],
-      "asip_analysis": "高价值但高不确定性的机会型/战场型合作，只有出现共同政治机构/联合指挥才考虑升级。",
+      "asip_analysis": "ASIP 判断：FLA↔JNIM 是 2026 年的战术性战场协调——针对共同敌人（马里军事政府）的临时合作，二者政治/意识形态目标截然不同（FLA 求阿扎瓦德自决/独立，JNIM 求基地组织关联的伊斯兰治理）。绝不能建模为 affiliation、constituent_of 或 pledged_allegiance_to；协调的持久性高度不确定。",
       "watch_indicators": [
-        "联合声明",
-        "共同指挥",
+        "联合声明或共同指挥出现",
         "是否继续同步行动",
-        "是否发生利益冲突"
+        "是否发生利益冲突或脱钩",
+        "FLA 与马里政府的政治对话进展"
       ],
       "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE"
     },
@@ -2495,47 +2495,99 @@
       "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE"
     },
     "rel-d1-ansarul-jnim-constituent": {
-      "relation_id": "rel-d1-ansarul-jnim-constituent",
-      "relation_type": "constituent_of",
-      "slug": "rel-d1-ansarul-jnim-constituent",
+      "relationship_id": "rel-d1-ansarul-jnim-constituent",
+      "relation_title": "安萨鲁伊斯兰 → JNIM：布基纳法索圣战力量的渐进整合",
       "source_entity_id": "actor-ansarul-islam",
       "target_entity_id": "actor-jnim",
-      "source_ids": [
-        "d1-acled-jnim-profile-2026",
-        "d2-hrw-burkina-2026-04-02"
-      ],
+      "relation_type": "constituent_of",
+      "display_ring": "inner",
+      "current_status": "结构性并入（渐进式，保留地方身份）",
+      "overview": "安萨鲁伊斯兰于 2020—2021 前后被 JNIM 渐进吸收，成为 JNIM 在布基纳法索扩张所依托的组成单元之一；至 2026 年其已高度整合进 JNIM，但仍在某种程度上保留自身身份。整合是渐进式的，而非单一日期的一次性合并。",
       "parties": [
-        "actor-ansarul-islam",
-        "actor-jnim"
-      ],
-      "overview": "Ansarul Islam从2016起与JNIM前身合作，随后逐步被吸收；2026已高度整合但保留部分地方身份。",
-      "formation_background": "",
-      "initial_relationship": "",
-      "evolution_stages": [
         {
-          "period": "2016—2017",
-          "detail": "独立品牌+合作"
+          "entity_id": "actor-ansarul-islam",
+          "role": "安萨鲁伊斯兰（2016 年成立，JNIM 组成单元）"
         },
         {
-          "period": "2020—2021前后",
-          "detail": "逐步准吸收"
+          "entity_id": "actor-jnim",
+          "role": "JNIM（2017 年合并成立的萨赫勒圣战联盟）"
+        }
+      ],
+      "formation_background": "安萨鲁伊斯兰 2016 年末成立后，从早期即与 Katiba Macina / JNIM 前身存在合作；2020—2021 前后被 JNIM 逐步吸收，2025 年公开视频使用 JNIM 媒体品牌，标志整合进入品牌化阶段。",
+      "initial_relationship": "安萨鲁伊斯兰以本地圣战武装身份运作（2016—2020），与 JNIM 前身存在历史关联；2019—2020 年少数成员据报转向 ISGS/IS Sahel（派别级流动，非整组转化）。",
+      "evolution_stages": [
+        {
+          "period": "2016-12",
+          "detail": "安萨鲁伊斯兰成立并公开武装化。"
+        },
+        {
+          "period": "2017",
+          "detail": "Ibrahim Dicko 去世，Jafar Dicko 继任。"
+        },
+        {
+          "period": "2019—2020",
+          "detail": "少数成员转向 ISGS/IS Sahel（faction-level）。"
+        },
+        {
+          "period": "2020—2021 前后",
+          "detail": "逐步被 JNIM 吸收。"
         },
         {
           "period": "2025—2026",
-          "detail": "公开视频使用JNIM媒体品牌，HRW称已整合"
+          "detail": "使用 JNIM 媒体品牌，HRW 确认高度整合但保留身份。"
         }
       ],
-      "causes": [],
-      "key_turning_points": [],
-      "current_status": "integrated constituent retaining local identity",
-      "regional_differences": "",
-      "impact_on_security": "",
-      "why_it_matters": "展示JNIM吸收地方组织的模式。",
-      "uncertainties": "独立名称在并入后继续使用的具体时间和程度不透明。",
+      "causes": [
+        "JNIM 在布基纳法索的扩张战略",
+        "安萨鲁伊斯兰与 JNIM 前身的历史关联",
+        "本地武装在安全压力下的整合需求"
+      ],
+      "key_turning_points": [
+        {
+          "event": "2020—2021 前后并入",
+          "impact": "安萨鲁伊斯兰成为 JNIM 组成单元。",
+          "source_ids": [
+            "d2-hrw-burkina-2026-04-02"
+          ]
+        },
+        {
+          "event": "2025 使用 JNIM 品牌",
+          "impact": "整合进入品牌化阶段。",
+          "source_ids": [
+            "d2-hrw-burkina-2026-04-02"
+          ]
+        }
+      ],
+      "regional_differences": "布基纳法索北部 → JNIM 萨赫勒全域。",
+      "impact_on_security": "安萨鲁伊斯兰是 JNIM 在布基纳法索扩张的重要组成单元，其并入标志 JNIM 在布基纳法索从渗透走向体系化控制。",
+      "why_it_matters": "安萨鲁伊斯兰→JNIM 是理解 JNIM 吸收地方叛乱品牌、而非简单取消其身份的扩张模式的关键关系。",
+      "uncertainties": "并入后其名称作为独立组织标签的持续使用程度缺乏统一公开口径。",
+      "disputed": false,
       "temporal_sensitive": true,
-      "last_verified_at": "2026-08-08",
-      "imported_by": "i3d1",
-      "relation_maturity": "R2_DEVELOPED_RELATIONSHIP"
+      "last_verified_at": "2026-08-14",
+      "source_ids": [
+        "d2-hrw-burkina-2026-04-02",
+        "expd-mapping-ansaroul-islam",
+        "expd-ctc-ansaroul-islam"
+      ],
+      "drivers": [
+        "JNIM 扩张战略",
+        "历史关联的路径依赖",
+        "整合的生存理性"
+      ],
+      "constraints": [
+        "ISIS 阵营的竞争分流",
+        "布基纳法索反恐行动"
+      ],
+      "current_assessment": "结构性并入关系（渐进式）；安萨鲁伊斯兰作为 JNIM 布基纳法索组成单元运作并保留地方身份。",
+      "asip_analysis": "ASIP 判断：安萨鲁伊斯兰→JNIM 是渐进式结构性并入，必须守住纪律——整组是 JNIM 组成单元（非 ISIS/IS Sahel）；与 IS Sahel 仅有少数成员的派别级流动。其“保留本地身份”是 JNIM 扩张的治理手段。",
+      "watch_indicators": [
+        "JNIM 对安萨鲁伊斯兰品牌的公开使用与人事变动",
+        "是否出现向 IS Sahel 的新的成员流动",
+        "HRW/学术来源对布基纳法索武装格局的新表述"
+      ],
+      "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+      "imported_by": "expansion-d"
     },
     "rel-d1-sadou-is-sahel": {
       "relation_id": "rel-d1-sadou-is-sahel",
@@ -8476,6 +8528,316 @@
       ],
       "relation_maturity": "R1_SIMPLE_SOURCED_RELATION",
       "imported_by": "expansion-c"
+    },
+    "rel-expd-isis-sinai-isis": {
+      "relationship_id": "rel-expd-isis-sinai-isis",
+      "relation_title": "ISIS-Sinai → 伊斯兰国：2014 年宣誓效忠的西奈分支",
+      "source_entity_id": "actor-isis-sinai",
+      "target_entity_id": "actor-islamic-state",
+      "relation_type": "pledged_allegiance_to",
+      "display_ring": "inner",
+      "current_status": "ISIS 分支（当前但严重退化）",
+      "overview": "ISIS-Sinai 是伊斯兰国的西奈半岛分支。其前身“耶路撒冷支持者”（Ansar Bayt al-Maqdis，ABM）于 2014 年 11 月正式宣誓效忠 ISIS，成为伊斯兰国西奈省。自 2022 年起分支明显削弱，至 2025 年 NCTC 仍将其列为 ISIS 分支但判定为严重退化，最近一次公开宣称袭击为 2023 年 2 月。",
+      "parties": [
+        {
+          "entity_id": "actor-isis-sinai",
+          "role": "伊斯兰国西奈省（前身 ABM，2014-11 效忠）"
+        },
+        {
+          "entity_id": "actor-islamic-state",
+          "role": "伊斯兰国（ISIS 核心网络）"
+        }
+      ],
+      "formation_background": "ABM 于 2011 年埃及动荡后出现；2014 年 11 月正式宣誓效忠 ISIS，采用西奈省身份；2015 年美国指定修正纳入 ISIL/西奈省别名。效忠构成 ISIS 全球分支体系在北非西奈方向的落地。",
+      "initial_relationship": "ABM 早期（2011—2014）以反以色列与反埃及当局的双重目标运作，2012—2014 年声称对以色列与埃及目标发动袭击；2014-11 效忠 ISIS 是组织连续体中的身份转折。",
+      "evolution_stages": [
+        {
+          "period": "2011",
+          "detail": "ABM 在埃及动荡后出现。"
+        },
+        {
+          "period": "2012—2014",
+          "detail": "声称对以色列与埃及目标发动袭击。"
+        },
+        {
+          "period": "2014-11",
+          "detail": "正式宣誓效忠 ISIS，成为西奈省。"
+        },
+        {
+          "period": "2015",
+          "detail": "美国指定修正，纳入 ISIL/西奈省别名。"
+        },
+        {
+          "period": "2014—2022",
+          "detail": "据 NCTC 统计实施超过 500 次西奈袭击。"
+        },
+        {
+          "period": "2022 起",
+          "detail": "进入明显衰退期。"
+        },
+        {
+          "period": "2023-02",
+          "detail": "截至 2025-05 的最后一次公开宣称袭击。"
+        },
+        {
+          "period": "2025",
+          "detail": "NCTC 仍列为 ISIS 分支但判定严重退化。"
+        }
+      ],
+      "causes": [
+        "ABM 的地方暴力能力与 ISIS 全球品牌扩张的相互吸引",
+        "2014 年 ISIS 全球扩张浪潮下的宣誓效忠潮流",
+        "西奈半岛治理真空与埃及中央权威的边境退缩"
+      ],
+      "key_turning_points": [
+        {
+          "event": "2014-11 宣誓效忠",
+          "impact": "ABM 成为 ISIS 西奈省，组织连续体完成身份切换。",
+          "source_ids": [
+            "expd-nctc-isis-sinai",
+            "us-state-crt-2022"
+          ]
+        },
+        {
+          "event": "2015 美国指定修正",
+          "impact": "美国正式将西奈省别名纳入 ISIS 相关指定。",
+          "source_ids": [
+            "expd-ofac-2015-09-29"
+          ]
+        },
+        {
+          "event": "2022 起衰退",
+          "impact": "埃及反恐行动持续削弱分支行动能力。",
+          "source_ids": [
+            "expd-nctc-isis-sinai"
+          ]
+        },
+        {
+          "event": "2023-02 最后一次宣称袭击",
+          "impact": "公开袭击节奏大幅下降，标志严重退化。",
+          "source_ids": [
+            "expd-nctc-isis-sinai"
+          ]
+        }
+      ],
+      "regional_differences": "埃及西奈半岛（北西奈省为主）。",
+      "impact_on_security": "该分支历史上对埃及安全形势构成显著威胁（2014—2022 年 500+ 次袭击）；其衰退标志着埃及反恐行动的重要成效，也反映了 ISIS 分支体系在后哈里发时期的整体收缩。",
+      "why_it_matters": "ABM→ISIS-Sinai 的连续性是“本地组织通过宣誓效忠并入 ISIS 品牌”的典型样本，是理解 ISIS 全球分支形成机制的关键案例。",
+      "uncertainties": "效忠 ISIS 时是否伴随派别分裂、衰退期后现役规模与指挥结构，缺乏可靠公开统计。",
+      "disputed": false,
+      "temporal_sensitive": true,
+      "last_verified_at": "2026-08-14",
+      "source_ids": [
+        "expd-nctc-isis-sinai",
+        "us-state-crt-2022",
+        "expd-ofac-2015-09-29"
+      ],
+      "drivers": [
+        "ISIS 全球品牌扩张",
+        "西奈地方武装的生存与升级需求",
+        "埃及反恐压力下的抱团与效忠"
+      ],
+      "constraints": [
+        "埃及的军事清剿与边境封锁",
+        "部落亲政府力量的抵抗",
+        "ISIS 核心网络的衰落"
+      ],
+      "current_assessment": "宣誓效忠关系（2014-11 至今）；当前为严重退化的 ISIS 分支，组织/法律存在保留但行动节奏与威胁均大幅下降。",
+      "asip_analysis": "ASIP 判断：ISIS-Sinai→ISIS 是宣誓效忠（pledged_allegiance_to）关系，且是“严重退化但身份延续”的当前分支。评估必须把组织/法律存在、行动节奏、当前威胁三层分开，避免把严重退化简单写成 defunct，也避免夸大其当前威胁。",
+      "watch_indicators": [
+        "是否出现新的公开宣称袭击或 ISIS 宣传重新启用西奈省名号",
+        "埃及反恐与部落亲政府力量的公开动态",
+        "NCTC/美国/联合国对 ISIS-Sinai 表述的更新"
+      ],
+      "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+      "imported_by": "expansion-d"
+    },
+    "rel-expd-ansaroul-katiba-macina": {
+      "relationship_id": "rel-expd-ansaroul-katiba-macina",
+      "relation_title": "安萨鲁伊斯兰 ↔ 马西纳旅：早期历史行动/网络关联",
+      "source_entity_id": "actor-ansarul-islam",
+      "target_entity_id": "actor-katiba-macina",
+      "relation_type": "historically_associated_with",
+      "display_ring": "middle",
+      "current_status": "历史关联（2016—2020 前后）",
+      "overview": "安萨鲁伊斯兰的创始人 Ibrahim Dicko 与阿马杜·库法（Amadou Koufa）/马西纳旅网络存在联系；安萨鲁伊斯兰从早期即与 Katiba Macina / JNIM 前身存在行动、训练与网络层面的历史关联。这一历史关联解释了安萨鲁伊斯兰最终并入 JNIM 体系的路径。",
+      "parties": [
+        {
+          "entity_id": "actor-ansarul-islam",
+          "role": "安萨鲁伊斯兰（2016 年成立）"
+        },
+        {
+          "entity_id": "actor-katiba-macina",
+          "role": "马西纳旅（马里中部，JNIM 前身组成）"
+        }
+      ],
+      "formation_background": "安萨鲁伊斯兰根植于苏姆省 Al-Irchad 网络，并与马里北部的马西纳旅/阿马杜·库法网络存在人员与网络联系；2016 年 12 月纳苏姆布袭击后公开武装化。",
+      "initial_relationship": "Ibrahim Dicko 与阿马杜·库法/马西纳网络的联系构成安萨鲁伊斯兰的早期外联基础。",
+      "evolution_stages": [
+        {
+          "period": "2016 前",
+          "detail": "Ibrahim Dicko 与马西纳/库法网络存在联系。"
+        },
+        {
+          "period": "2016-12",
+          "detail": "安萨鲁伊斯兰袭击纳苏姆布军警营地，公开武装化。"
+        },
+        {
+          "period": "2017 后",
+          "detail": "Ibrahim 去世、Jafar Dicko 继任，与 JNIM 前身联系延续。"
+        },
+        {
+          "period": "2020—2021 前后",
+          "detail": "安萨鲁伊斯兰逐步并入 JNIM 体系。"
+        }
+      ],
+      "causes": [
+        "萨赫勒圣战网络的跨边境联系",
+        "库法/马西纳网络的扩张",
+        "布基纳法索北部地方武装的崛起"
+      ],
+      "key_turning_points": [
+        {
+          "event": "2016-12 纳苏姆布袭击",
+          "impact": "安萨鲁伊斯兰公开武装化，外联网络转入行动化。",
+          "source_ids": [
+            "expd-mapping-ansaroul-islam",
+            "expd-ctc-ansaroul-islam"
+          ]
+        }
+      ],
+      "regional_differences": "布基纳法索北部 ↔ 马里中部（马西纳）。",
+      "impact_on_security": "该历史关联构成 JNIM 在布基纳法索扩张的路径基础，是理解萨赫勒圣战网络横向整合的关键。",
+      "why_it_matters": "解释安萨鲁伊斯兰最终并入 JNIM 的路径；以“历史关联”而非“从属/合并”建模，避免过度断言。",
+      "uncertainties": "历史关联的具体机制（训练、人员输送、后勤）缺乏逐项公开披露。",
+      "disputed": false,
+      "temporal_sensitive": true,
+      "last_verified_at": "2026-08-14",
+      "source_ids": [
+        "expd-ctc-ansaroul-islam",
+        "expd-mapping-ansaroul-islam",
+        "d2-hrw-burkina-2026-04-02"
+      ],
+      "drivers": [
+        "萨赫勒网络横向整合",
+        "库法网络的扩张",
+        "跨边境人员流动"
+      ],
+      "constraints": [
+        "两国反恐行动",
+        "ISIS 阵营的竞争分流"
+      ],
+      "current_assessment": "历史关联关系；安萨鲁伊斯兰通过该关联最终并入 JNIM，但二者从未是正式的从属/合并关系。",
+      "asip_analysis": "ASIP 判断：安萨鲁伊斯兰↔马西纳旅是历史行动/训练/网络关联，是“网络联系→最终并入 JNIM”路径的早期环节。以 historically_associated_with 建模，不升级为 constituent_of/合并。",
+      "watch_indicators": [
+        "学术/HRW 对安萨鲁伊斯兰与马西纳网络历史联系的补充披露"
+      ],
+      "relation_maturity": "R2_DEVELOPED_RELATIONSHIP",
+      "imported_by": "expansion-d"
+    },
+    "rel-expd-fpl-niger-operates": {
+      "relationship_id": "rel-expd-fpl-niger-operates",
+      "relation_title": "FPL ↔ 尼日尔：反军政府武装对立（operates_in + 富档案）",
+      "source_entity_id": "actor-niger-fpl",
+      "target_entity_id": "country-niger",
+      "relation_type": "operates_in",
+      "display_ring": "middle",
+      "current_status": "反军政府武装叛乱（活跃）",
+      "overview": "尼日尔爱国解放阵线（FPL）于 2023 年 8 月成立后在尼日尔境内活动，作为反军政府武装对军警与关键基础设施（尤其中资支持的尼日尔—贝宁输油管道）发动袭击，核心诉求是释放被推翻总统巴祖姆并恢复宪政秩序。",
+      "parties": [
+        {
+          "entity_id": "actor-niger-fpl",
+          "role": "FPL（2023-08 成立的反军政府武装）"
+        },
+        {
+          "entity_id": "country-niger",
+          "role": "尼日尔（军政府控制的国家）"
+        }
+      ],
+      "formation_background": "FPL 形成于 2023 年 7 月尼日尔政变推翻巴祖姆之后，2023 年 8 月成立，公开要求释放巴祖姆、恢复宪政秩序，随后以武装袭击对军政府施压。",
+      "initial_relationship": "2023 年 8 月成立即以反军政府、恢复宪政秩序为公开诉求，形成与尼日尔军政府的武装对立。",
+      "evolution_stages": [
+        {
+          "period": "2023-07",
+          "detail": "尼日尔政变推翻总统巴祖姆。"
+        },
+        {
+          "period": "2023-08",
+          "detail": "FPL 成立，要求释放巴祖姆、恢复宪政秩序。"
+        },
+        {
+          "period": "2024-06",
+          "detail": "FPL 宣称袭击中资支持的尼日尔—贝宁输油管道并威胁继续袭击。"
+        },
+        {
+          "period": "2024—2026",
+          "detail": "对军警与基础设施目标持续施压。"
+        },
+        {
+          "period": "2026-06",
+          "detail": "领导人 Mahamoud Sallah 在利比亚被拘押后获释。"
+        }
+      ],
+      "causes": [
+        "2023 年政变引发的政治裂痕武装化",
+        "对政变非法性与宪政秩序诉求的强硬表达",
+        "图布族社群与尼日尔东部的长期边缘化传统"
+      ],
+      "key_turning_points": [
+        {
+          "event": "2023-08 成立",
+          "impact": "反军政府武装阵营在尼日尔形成。",
+          "source_ids": [
+            "expd-worldbank-niger-2026",
+            "expd-hrw-niger-2025"
+          ]
+        },
+        {
+          "event": "2024-06 管道袭击",
+          "impact": "以高可见度基础设施袭击提升对军政府的经济与安全压力。",
+          "source_ids": [
+            "expd-reuters-niger-pipeline"
+          ]
+        },
+        {
+          "event": "2026-06 领导人获释",
+          "impact": "领导人拘押事件结束，组织动向待观察。",
+          "source_ids": [
+            "expd-ahram-fpl"
+          ]
+        }
+      ],
+      "regional_differences": "尼日尔（东部/东北部与输油管道走廊）。",
+      "impact_on_security": "FPL 的袭击对尼日尔—贝宁输油管道这一能源走廊构成实际威胁，并加剧了政变后尼日尔的安全与经济不稳定。",
+      "why_it_matters": "该关系是 FPL 反军政府叛乱的地缘落点；以 operates_in + 富档案承载“武装对立”语义，避免新增 ontology。",
+      "uncertainties": "FPL 的规模、指挥结构、资金与外部支持关系缺乏系统公开披露；其与图布族其他叛乱力量及利比亚各方的关系边界不确定。",
+      "disputed": false,
+      "temporal_sensitive": true,
+      "last_verified_at": "2026-08-14",
+      "source_ids": [
+        "expd-reuters-niger-pipeline",
+        "expd-hrw-niger-2025",
+        "expd-worldbank-niger-2026",
+        "expd-ahram-fpl"
+      ],
+      "drivers": [
+        "反军政府政治诉求",
+        "对政变非法性的强硬回应",
+        "能源走廊的战略脆弱性"
+      ],
+      "constraints": [
+        "尼日尔军政府的镇压",
+        "外部支持的不确定性"
+      ],
+      "current_assessment": "FPL 与尼日尔为反军政府武装对立关系；FPL 属政治-武装叛乱（anti-junta rebel group），非圣战/恐怖组织。",
+      "asip_analysis": "ASIP 判断：FPL↔尼日尔是反军政府武装对立，以 operates_in + 富档案承载冲突语义。对中资管道等基础设施的袭击是“高可见度、高经济成本”的施压战术，不得据此将 FPL 归类为恐怖或圣战组织。",
+      "watch_indicators": [
+        "FPL 是否继续袭击管道或军警目标",
+        "巴祖姆释放与宪政秩序谈判进展",
+        "Mahamoud Sallah 获释后的组织动向"
+      ],
+      "relation_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+      "imported_by": "expansion-d"
     }
   },
   "note": "I3-B: second wave of deepened relationship histories (Mali/Burkina/Cameroon/Ethiopia/Tanzania networks)."
