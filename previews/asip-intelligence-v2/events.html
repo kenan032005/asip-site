@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>最新事件 · 非洲地区社会安全信息平台</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<script>window.ASIP_BUILD_META = {"run_id": "20260802T084000+0800_084349", "pipeline_version": 2, "build_time": "2026-08-14T14:41:25.811370+08:00", "build_time_bj": "2026-08-14 14:41:25", "source_commit": ""};</script>
+</head>
+<body>
+<div id="topbar" class="topbar"></div>
+<div id="dbError" class="db-error" style="display:none;">
+  ⚠️ 数据未能成功加载。请刷新页面（Ctrl/Cmd + Shift + R）后重试。已加载的上一版数据会优先展示。
+</div>
+
+<div class="container">
+  <h1 style="font-size:20px;color:var(--brand);margin:0 0 14px;">最新事件</h1>
+
+  <div class="filters">
+    <div class="fitem"><label>国家</label><select id="fCountry"><option value="">全部</option></select></div>
+    <div class="fitem"><label>风险等级</label><select id="fRisk">
+      <option value="">全部</option><option value="4">极高</option><option value="3">高</option><option value="2">中</option><option value="1">低</option>
+    </select></div>
+    <div class="fitem"><label>事件类型</label><select id="fType"><option value="">全部</option></select></div>
+    <div class="fitem"><label>时间范围</label><select id="fRange">
+      <option value="">全部</option><option value="24">近24小时</option><option value="72">近72小时</option><option value="168">近7天</option>
+    </select></div>
+    <div class="fitem"><label>涉华</label><select id="fChina">
+      <option value="">全部</option><option value="1">仅涉中国企业/公民</option>
+    </select></div>
+    <div class="fitem"><label>来源语言</label><select id="fLang">
+      <option value="">全部</option><option value="中文">中文</option><option value="英语">英语</option><option value="法语">法语</option><option value="德语">德语</option><option value="西班牙语">西班牙语</option><option value="意大利语">意大利语</option><option value="土耳其语">土耳其语</option><option value="阿拉伯文">阿拉伯文</option><option value="葡萄牙文">葡萄牙文</option>
+    </select></div>
+    <div class="fitem"><label>可信度</label><select id="fConf">
+      <option value="">全部</option><option value="已核实">已核实</option><option value="较高可信">较高可信</option><option value="待进一步核实">待进一步核实</option>
+    </select></div>
+    <div class="fitem"><button id="fReset" class="ghost">重置</button></div>
+  </div>
+
+  <div class="grid cards" id="list"><div class="empty">加载中…</div></div>
+</div>
+
+<footer class="site"></footer>
+
+<script src="assets/js/pipeline.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+renderHeader("events.html");
+
+let ALL = [];
+
+function fillFilters(countries) {
+  const csel = document.getElementById("fCountry");
+  countries.forEach(function (c) {
+    const o = document.createElement("option");
+    o.value = c.cn; o.textContent = c.cn;
+    csel.appendChild(o);
+  });
+  const tsel = document.getElementById("fType");
+  EVENT_TYPES.forEach(function (t) {
+    const o = document.createElement("option");
+    o.value = t; o.textContent = t;
+    tsel.appendChild(o);
+  });
+}
+
+function hoursAgo(s) {
+  const bj = fmtTimeBJ(s);
+  const m = bj.match(/(\d{4})-(\d{2})-(\d{2})[ T](\d{1,2}):(\d{2})(?::(\d{2}))?/);
+  if (!m) return Infinity;
+  const d = new Date(+m[1], +m[2]-1, +m[3], +m[4], +m[5], +(m[6]||0));
+  return (Date.now() - d.getTime()) / 3600000;
+}
+
+function applyFilters() {
+  const f = {
+    country: document.getElementById("fCountry").value,
+    risk: document.getElementById("fRisk").value,
+    type: document.getElementById("fType").value,
+    range: document.getElementById("fRange").value,
+    china: document.getElementById("fChina").value,
+    lang: document.getElementById("fLang").value,
+    conf: document.getElementById("fConf").value,
+  };
+  let list = ALL.filter(function (e) {
+    if (f.country && e.country !== f.country) return false;
+    if (f.risk && String(e.country_risk_level || e.risk_level) !== f.risk) return false;
+    if (f.type && e.event_type !== f.type) return false;
+    if (f.china && !(e.china_related || e.involves_china)) return false;
+    if (f.lang && e.source_language !== f.lang) return false;
+    if (f.conf && e.confidence !== f.conf) return false;
+    if (f.range) { const h = hoursAgo(e.published_time || e.event_time); if (h > Number(f.range)) return false; }
+    return true;
+  });
+  list.sort(function (a, b) { return (b.published_time || "").localeCompare(a.published_time || ""); });
+  const host = document.getElementById("list");
+  if (!ALL.length) {
+    host.innerHTML = '<div class="empty">当前暂无通过发布政策的最新事件。</div>';
+    return;
+  }
+  host.innerHTML = list.length ? list.map(function (e) { return eventCard(e); }).join("")
+    : '<div class="empty">没有符合条件的事件。</div>';
+}
+
+function init() {
+  // 主数据源：Public 公开层 published_events（已强制 isCurrentPublicEvent 过滤）；
+  // 绝不直接以 Legacy events.json 作为“最新事件”主数据源。
+  Promise.all([loadCurrentPublishedEvents(), API.getCached("countries")]).then(function (res) {
+    const ev = res[0] || [], countries = (res[1] && res[1].countries) || [];
+    ALL = ev; // 已经过 isCurrentPublicEvent 过滤，只含当前通过政策的事件
+    fillFilters(countries);
+    applyFilters();
+  }).catch(function () { showDbError(); });
+}
+
+["fCountry","fRisk","fType","fRange","fChina","fLang","fConf"].forEach(function (id) {
+  document.getElementById(id).addEventListener("change", applyFilters);
+});
+document.getElementById("fReset").addEventListener("click", function () {
+  ["fCountry","fRisk","fType","fRange","fChina","fLang","fConf"].forEach(function (id) {
+    document.getElementById(id).value = "";
+  });
+  applyFilters();
+});
+
+init();
+</script>
+</body>
+</html>

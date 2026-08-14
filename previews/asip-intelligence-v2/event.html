@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>事件详情 · 非洲地区社会安全信息平台</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<script>window.ASIP_BUILD_META = {"run_id": "20260802T084000+0800_084349", "pipeline_version": 2, "build_time": "2026-08-14T14:41:25.811370+08:00", "build_time_bj": "2026-08-14 14:41:25", "source_commit": ""};</script>
+</head>
+<body>
+<div id="topbar" class="topbar"></div>
+<div id="dbError" class="db-error" style="display:none;">
+  ⚠️ 数据未能成功加载。请刷新页面（Ctrl/Cmd + Shift + R）后重试。已加载的上一版数据会优先展示。
+</div>
+
+<div class="container" id="main"><div class="empty">加载中…</div></div>
+
+<footer class="site"></footer>
+
+<script src="assets/js/pipeline.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+renderHeader("events.html");
+
+function init() {
+  const id = getQS("id");
+  if (!id) { document.getElementById("main").innerHTML = '<div class="empty">未指定事件。</div>'; return; }
+  API.getCached("events").then(function (res) {
+    const ev = (res && res.events) || [];
+    const e = ev.find(function (x) { return (x.event_id || x.id) === id; });
+    if (!e) { document.getElementById("main").innerHTML = '<div class="empty">未找到该事件（可能为演示数据已清除）。</div>'; return; }
+    const risk = Number(e.country_risk_level) || Number(e.risk_level) || 0;
+    const kv = function (k, v) { return `<div class="kv"><b>${k}</b><span>${v}</span></div>`; };
+    document.getElementById("main").innerHTML = `
+      <p style="margin:0 0 10px;"><a href="events.html">&larr; 返回最新事件</a> · <a href="country.html?country=${encodeURIComponent(e.country || "")}">${esc(e.country || "—")}</a></p>
+      <h1 style="font-size:20px;color:var(--brand);margin:0 0 8px;">${esc(e.title_cn || e.title_original)}</h1>
+      <div style="margin-bottom:12px;">${riskBadge(risk)} ${chinaBadge(e)} ${confidenceBadge(e.confidence)}</div>
+      ${e.title_original && e.title_original !== e.title_cn ? kv("原文标题", esc(e.title_original)) : ""}
+      ${e.summary_cn ? kv("中文摘要", esc(e.summary_cn)) : ""}
+      ${e.body_extracted ? `<div style="margin:14px 0;"><b style="display:block;margin-bottom:6px;">原文正文</b><div class="article-body">${esc(e.body_extracted).replace(/\n/g, '<br>')}</div>${e.body_status ? `<div class="muted small" style="margin-top:6px;">正文提取状态：${esc(e.body_status)}${e.article_word_count ? " · " + esc(String(e.article_word_count)) + " 词" : ""}</div>` : ""}</div>` : ""}
+      <div class="cr-info" style="margin-top:12px;">
+        ${kv("国家", esc(e.country || "—"))}
+        ${kv("所属区域", esc(e.region || "—"))}
+        ${kv("具体地点", esc(e.location || "—"))}
+        ${kv("事件类型", esc(e.event_type || "—"))}
+        ${kv("事件严重程度", esc(e.event_severity || "—"))}
+        ${kv("发生时间", fmtDateTimeBJ(e.event_time))}
+        ${kv("信息发布时间", fmtDateTimeBJ(e.published_time))}
+        ${kv("来源名称", esc(e.source_name || "—"))}
+        ${kv("原文链接", e.source_url && e.source_url !== "#" ? `<a href="${esc(e.source_url)}" target="_blank" rel="noopener">${esc(e.source_url)}</a>` : "—")}
+        ${kv("原文语言", esc(langCn(e.source_language) || "—"))}
+        ${kv("涉华", (e.china_related || e.involves_china) ? "是" : "否")}
+        ${kv("可信度", esc(e.confidence || "—"))}
+        ${kv("核实状态", esc(VERIFY_STATUS[e.verification_status] || e.verification_status || "—"))}
+      </div>
+      <p class="muted small" style="margin-top:14px;">所有时间均为北京时间（UTC+8）。公开信息仅供参考，不构成行动依据。</p>
+    `;
+  }).catch(function () { showDbError(); });
+}
+init();
+</script>
+</body>
+</html>
