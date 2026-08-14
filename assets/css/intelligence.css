@@ -170,7 +170,14 @@
 }
 .intel-prose .profile-section h2:first-child { margin-top: 6px; }
 .intel-bullets { margin: 10px 0; padding-left: 22px; }
-.intel-bullets li { margin: 6px 0; line-height: 1.8; color: #2c3a52; }
+.intel-bullets li { margin: 6px 0; line-height: 1.8; color: #2c3a52; overflow-wrap: anywhere; word-break: break-word; }
+/* Final Depth Consolidation A: prevent long English names/URLs from causing
+   mobile horizontal overflow in source-notes and bullet lists. */
+.intel-source-notes, .intel-source-notes p, .intel-source-notes a,
+.intel-source-grid a, .intel-prose, .intel-prose p, .intel-prose li {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
 .intel-table-wrap { margin: 12px 0; overflow-x: auto; }
 .intel-table { width: 100%; border-collapse: collapse; font-size: 0.92em; }
 .intel-table th { background: #eef3fa; color: #1f3a63; text-align: left; padding: 8px 10px; border: 1px solid #d8e1ee; font-weight: 700; }
