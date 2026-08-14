@@ -1,0 +1,71 @@
+{
+  "summary": {
+    "base": "https://kenan032005.github.io/asip-site/previews/asip-intelligence-v2",
+    "checks_run": 12,
+    "checks_passed": 12,
+    "checks_failed": 0,
+    "gate": "PASS"
+  },
+  "checks": [
+    {
+      "name": "entity TOC links resolve to real sections",
+      "pass": true,
+      "detail": "{\"total\":23,\"ok\":23,\"first\":\"#sec-risk_assessment\"}"
+    },
+    {
+      "name": "entity TOC anchors exist as DOM ids",
+      "pass": true,
+      "detail": "anchor=#sec-risk_assessment"
+    },
+    {
+      "name": "entity deep-link #sec- anchors work",
+      "pass": true,
+      "detail": "{\"hash\":\"#sec-risk_assessment\",\"found\":true}"
+    },
+    {
+      "name": "relation body exact auto-links present",
+      "pass": true,
+      "detail": "{\"count\":21}"
+    },
+    {
+      "name": "entity search filters list + count updates",
+      "pass": true,
+      "detail": "{\"before\":\"当前结果 102 / 总计 102\",\"after\":{\"cnt\":\"当前结果 1 / 总计 102\",\"cards\":1,\"q\":\"shabaab\"}}"
+    },
+    {
+      "name": "entity type filter applies",
+      "pass": true,
+      "detail": "{\"cards\":24,\"type\":\"person\"}"
+    },
+    {
+      "name": "relation search filters list",
+      "pass": true,
+      "detail": "{\"relBefore\":\"当前结果 192 / 总计 192\",\"relAfter\":{\"cards\":7,\"q\":\"al-shabaab\"}}"
+    },
+    {
+      "name": "network 1-hop focus renders nodes",
+      "pass": true,
+      "detail": "nodes=7"
+    },
+    {
+      "name": "network 2-hop toggle present",
+      "pass": true,
+      "detail": "btn=true"
+    },
+    {
+      "name": "network 2-hop expands node set",
+      "pass": true,
+      "detail": "before=7 after=7"
+    },
+    {
+      "name": "mobile relation hero stacks (single column)",
+      "pass": true,
+      "detail": "{\"grid\":\"358px\",\"party\":2,\"overflow\":false}"
+    },
+    {
+      "name": "mobile entity TOC uses collapsible details",
+      "pass": true,
+      "detail": "{\"hasDetails\":true,\"display\":\"block\",\"open\":false}"
+    }
+  ]
+}
