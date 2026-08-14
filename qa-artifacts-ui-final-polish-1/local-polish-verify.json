@@ -1,0 +1,81 @@
+{
+  "summary": {
+    "base": "http://127.0.0.1:4174/intelligence/africa",
+    "checks_run": 14,
+    "checks_passed": 14,
+    "checks_failed": 0,
+    "gate": "PASS"
+  },
+  "checks": [
+    {
+      "name": "homepage section markers enlarged (01/02 >= 18px + gradient bg)",
+      "pass": true,
+      "detail": "fs=[23,23] bg=linear-gradient(135deg, rgb(201, 149, 43), rgb(176, 127, 30)"
+    },
+    {
+      "name": "country card is integrated (chips present + no bare region text)",
+      "pass": true,
+      "detail": "chips=23 links=23"
+    },
+    {
+      "name": "country card has code+risk+summary",
+      "pass": true,
+      "detail": "summary=同时面临乍得湖盆地武装威胁、东部苏丹冲突外溢与内部政治压力"
+    },
+    {
+      "name": "relation hero hides machine id by default",
+      "pass": true,
+      "detail": "{\"hasMachineIdInHeading\":true,\"techDetails\":true,\"techOpen\":false,\"h1\":\"支持伊斯兰与穆斯林组织（JNIM） ↔ 尼日尔\",\"heroSummary\":1,\"partyCards\":2,\"techBodyText\":\"技术元数据（展开）关系 ID：rel-jnim-niger-operates圈层：middlefreshness_status：stale档案成熟度：R"
+    },
+    {
+      "name": "relation hero tech metadata collapsed (holds machine id inside)",
+      "pass": true,
+      "detail": "{\"hasMachineIdInHeading\":true,\"techDetails\":true,\"techOpen\":false,\"h1\":\"支持伊斯兰与穆斯林组织（JNIM） ↔ 尼日尔\",\"heroSummary\":1,\"partyCards\":2,\"techBodyText\":\"技术元数据（展开）关系 ID：rel-jnim-niger-operates圈层：middlefreshness_status：stale档案成熟度：R"
+    },
+    {
+      "name": "relation hero keeps party cards + summary",
+      "pass": true,
+      "detail": "{\"hasMachineIdInHeading\":true,\"techDetails\":true,\"techOpen\":false,\"h1\":\"支持伊斯兰与穆斯林组织（JNIM） ↔ 尼日尔\",\"heroSummary\":1,\"partyCards\":2,\"techBodyText\":\"技术元数据（展开）关系 ID：rel-jnim-niger-operates圈层：middlefreshness_status：stale档案成熟度：R"
+    },
+    {
+      "name": "entity TOC has close button + bounded height",
+      "pass": true,
+      "detail": "{\"tocHeight\":48,\"closeBtn\":true,\"sections\":23,\"sourceIdx\":22,\"last\":\"sec-sources\",\"lastIsSource\":true}"
+    },
+    {
+      "name": "entity sources moved to end",
+      "pass": true,
+      "detail": "{\"tocHeight\":48,\"closeBtn\":true,\"sections\":23,\"sourceIdx\":22,\"last\":\"sec-sources\",\"lastIsSource\":true}"
+    },
+    {
+      "name": "network short labels + center full label + tooltips",
+      "pass": true,
+      "detail": "{\"shortLabels\":7,\"centerLabels\":1,\"tooltips\":7,\"legendChecks\":8,\"visStats\":\"当前可见 8 个节点 · 7 条关系\",\"labelModeBtns\":3}"
+    },
+    {
+      "name": "interactive legend checkboxes (8) + visible stats + label modes",
+      "pass": true,
+      "detail": "{\"shortLabels\":7,\"centerLabels\":1,\"tooltips\":7,\"legendChecks\":8,\"visStats\":\"当前可见 8 个节点 · 7 条关系\",\"labelModeBtns\":3}"
+    },
+    {
+      "name": "node click opens detail panel",
+      "pass": true,
+      "detail": "{\"has\":true,\"text\":\"基地组织（AQ）Al-Qaida组织L2 重要实体active_networkactor-al-qaida · 当前全球性基地组织网络；JNIM将自身描述为其在马里的正式分支。8 条关键关系：支持伊斯兰与穆斯林组织（JNIM）伊亚德·阿格·加利伊斯兰国西非省（ISWAP）索马里青\"}"
+    },
+    {
+      "name": "legend uncheck hides org nodes + stats update",
+      "pass": true,
+      "detail": "{\"orgs\":0,\"stats\":\"当前可见 2 个节点 · 8 条关系\"}"
+    },
+    {
+      "name": "legend select-all restores nodes",
+      "pass": true,
+      "detail": "{\"orgs\":7}"
+    },
+    {
+      "name": "legend all-off shows empty state",
+      "pass": true,
+      "detail": "{\"hasEmpty\":true,\"text\":\"当前筛选条件下无可见节点，请重新勾选图例项。\"}"
+    }
+  ]
+}

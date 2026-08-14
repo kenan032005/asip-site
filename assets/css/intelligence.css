@@ -322,3 +322,85 @@
   .intel-entity-head h1{font-size:23px}
   .intel-title-en{font-size:13px}
 }
+
+
+/* ============================================================
+   UI FINAL POLISH PACK 1 — presentation-layer polish
+   ============================================================ */
+
+/* ---------- 1. Homepage section markers enlarged ---------- */
+.intel-section-title>span{font:800 23px ui-monospace,monospace;color:#fff;background:linear-gradient(135deg,#c9952b,#b07f1e);border-radius:9px;padding:6px 12px;min-width:54px;text-align:center;line-height:1;box-shadow:0 1px 3px rgba(176,127,30,.25);margin-top:1px}
+.intel-section-title>span{letter-spacing:.02em}
+
+/* ---------- 2. Country card redesign (integrated card) ---------- */
+.intel-card .intel-country-summary{font-size:13px;line-height:1.6;color:#526274;margin:8px 0 0}
+.intel-region-chips{display:flex;flex-wrap:wrap;gap:5px;margin:9px 0 0}
+.intel-region-chip{display:inline-flex;align-items:center;font-size:11px;color:#14507e;background:#eef5fb;border:1px solid #cfe0ed;border-radius:999px;padding:2px 9px;text-decoration:none;line-height:1.6}
+a.intel-region-chip:hover{background:#e0ecf6;text-decoration:none;border-color:#b3cfe2}
+.intel-card .intel-code-sm{font:10px ui-monospace,monospace;color:#8a99a6;display:block;margin-top:3px}
+
+/* ---------- 3. Network V3 ---------- */
+/* 3.1 label tiers: center full / 1-hop short / 2-hop tiny */
+.graph-node .node-label.short{font-size:10.5px;font-weight:600;fill:#3c5a72}
+.graph-node .node-label.tiny{font-size:9.5px;fill:#5b7285}
+/* label halo for readability on short labels */
+.graph-node .node-label.short{text-shadow:0 0 4px #fff,0 0 4px #fff}
+/* 3.4 node detail panel */
+.network-info .intel-node-detail h2{margin-top:0;border-left:3px solid #c9952b;padding-left:8px;font-size:16px;color:#0f3a5d}
+.intel-node-detail .nd-meta{font-size:12px;color:#6b7c8a;line-height:1.7;margin:6px 0}
+.intel-node-detail .nd-rels{font-size:12.5px;color:#3f637f;margin:8px 0}
+.intel-node-detail .nd-rels a{display:inline-block;margin:2px 4px 2px 0;padding:2px 8px;background:#f2f6fa;border:1px solid #d8e4f0;border-radius:999px;font-size:11px;color:#14507e;text-decoration:none}
+.intel-node-detail .nd-rels a:hover{background:#e0ecf6;text-decoration:none}
+/* 3.5 legend -> interactive visibility controls */
+.graph-legend{display:block;border-top:1px solid #e7edf1;padding:11px 13px 13px}
+.graph-legend .legend-block{margin:7px 0 0}
+.graph-legend .legend-block:first-child{margin-top:0}
+.graph-legend .legend-block-title{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:800;color:#14507e;letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px}
+.graph-legend .legend-block-title .legend-reset{margin-left:auto;font-weight:700;font-size:11px;color:#52708a;background:#f2f6fa;border:1px solid #d8e4f0;border-radius:999px;padding:2px 9px;cursor:pointer;text-transform:none;letter-spacing:0}
+.graph-legend .legend-block-title .legend-reset:hover{background:#e0ecf6}
+.graph-legend .legend-actions{display:flex;gap:7px;margin:4px 0 2px}
+.legend-check{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:#42586a;background:#f8fafc;border:1px solid #e3eaf0;border-radius:7px;padding:4px 9px;cursor:pointer;user-select:none;margin:0 6px 6px 0}
+.legend-check:hover{border-color:#b9cfdd}
+.legend-check input{width:14px;height:14px;accent-color:#14507e;margin:0;cursor:pointer}
+.legend-check input:checked+.legend-swatch{border-color:#14507e}
+.legend-swatch{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;flex:0 0 auto}
+.legend-swatch.shape-hex{width:13px;height:13px;background:#14507e;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+.legend-swatch.shape-person{width:12px;height:12px;border-radius:3px;background:#9a6b17}
+.legend-swatch.shape-country{width:12px;height:12px;background:#37715c;transform:rotate(45deg);border-radius:1px}
+.legend-line-check{display:inline-block;width:22px;height:0;border-top:2.4px solid #8ca0b1;vertical-align:2px;flex:0 0 auto}
+.legend-line-check.conflict{border-top:2.4px solid #b04848}
+.legend-line-check.allegiance{border-top:2px solid #14507e}
+.legend-line-check.presence{border-top:2px dashed #37715c}
+.legend-line-check.cooperation{border-top:2px solid #2e6e8e}
+/* visible stats + empty state */
+.graph-vis-stats{font-size:11.5px;color:#6b7c8a;margin:7px 0 0;padding-top:7px;border-top:1px dashed #e4eaf0}
+.graph-vis-stats b{color:#14507e}
+.graph-empty{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#fffdf6;border:1px solid #f0dfb2;border-radius:10px;padding:18px 22px;font-size:13.5px;color:#7c6a33;text-align:center;max-width:300px;line-height:1.7}
+/* 3.6 label mode control */
+.label-mode-group{display:flex;align-items:center;gap:6px;font-size:11px;color:#718294}
+.label-mode-group button{font:inherit;font-size:11.5px;padding:4px 9px;border:1px solid #dbe4eb;border-radius:6px;background:#fff;color:#3f637f;cursor:pointer}
+.label-mode-group button.active{background:#0f3a5d;color:#fff;border-color:#0f3a5d}
+
+/* ---------- 4. Relation hero simplification ---------- */
+.relation-hero{margin-top:14px}
+.rel-tech-details{margin:14px 0 0;font-size:12px;color:#6b7c8a}
+.rel-tech-details summary{cursor:pointer;font-weight:600;color:#52708a;padding:8px 12px;background:#f7fafc;border:1px solid #e3eaf0;border-radius:8px;list-style:none;display:flex;align-items:center;gap:6px;user-select:none}
+.rel-tech-details summary::-webkit-details-marker{display:none}
+.rel-tech-details summary:before{content:"\25B8";font-size:10px;transition:transform .15s}
+.rel-tech-details[open] summary:before{transform:rotate(90deg)}
+.rel-tech-details .rel-tech-body{margin-top:8px;padding:10px 13px;background:#fbfcfd;border:1px solid #e8eef3;border-radius:8px;line-height:1.8;overflow-wrap:anywhere}
+.rel-tech-details code{font:11px ui-monospace,monospace;color:#5a7185;background:#f0f4f7;padding:1px 5px;border-radius:4px}
+.rel-tech-details .tech-row{font-size:12px;color:#5f7180;margin:2px 0}
+.rel-tech-details .tech-row b{color:#42586a}
+
+/* ---------- 6. Entity TOC less intrusive ---------- */
+.intel-toc-sticky{top:58px;max-height:44vh;overflow:auto}
+.profile-toc-details .profile-toc{margin:10px 2px 2px}
+.profile-toc-details summary{font-size:13.5px}
+.toc-close-btn{float:right;font:700 11px ui-monospace,monospace;color:#52708a;background:#f2f6fa;border:1px solid #d8e4f0;border-radius:6px;padding:2px 7px;cursor:pointer}
+.toc-close-btn:hover{background:#e0ecf6}
+
+@media(max-width:850px){
+  .intel-toc-sticky{position:static;max-height:none}
+  .graph-legend .legend-check{margin:0 6px 6px 0}
+}

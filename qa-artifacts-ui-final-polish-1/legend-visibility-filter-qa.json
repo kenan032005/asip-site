@@ -1,0 +1,36 @@
+{
+  "gate": "PASS",
+  "passed": true,
+  "detail": {
+    "legend_checkboxes": 8,
+    "visible_stats": "当前可见 8 个节点 · 7 条关系",
+    "label_modes": 3,
+    "interaction": [
+      {
+        "name": "network 2-hop expands",
+        "pass": true,
+        "detail": "before=7 after=23"
+      },
+      {
+        "name": "legend uncheck hides org nodes + stats",
+        "pass": true,
+        "detail": "{\"orgs\":0,\"stats\":\"当前可见 2 个节点 · 8 条关系\"}"
+      },
+      {
+        "name": "legend select-all restores nodes",
+        "pass": true,
+        "detail": "{\"orgs\":7}"
+      },
+      {
+        "name": "legend all-off shows empty state",
+        "pass": true,
+        "detail": "{\"has\":true,\"text\":\"当前筛选条件下无可见节点，请重新勾选图例项。\"}"
+      },
+      {
+        "name": "label mode full shows full labels",
+        "pass": true,
+        "detail": "{\"shorts\":0,\"fulls\":32,\"active\":\"full\"}"
+      }
+    ]
+  }
+}

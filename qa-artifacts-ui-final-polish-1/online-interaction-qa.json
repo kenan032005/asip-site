@@ -1,0 +1,66 @@
+{
+  "summary": {
+    "base": "https://kenan032005.github.io/asip-site/previews/asip-intelligence-v2/intelligence/africa",
+    "checks_run": 11,
+    "checks_passed": 11,
+    "checks_failed": 0,
+    "gate": "PASS"
+  },
+  "checks": [
+    {
+      "name": "region auto-links work (exact canonical)",
+      "pass": true,
+      "detail": "{\"total\":56,\"region\":2,\"niger\":21}"
+    },
+    {
+      "name": "entity body auto-links present",
+      "pass": true,
+      "detail": "auto=124 all=124"
+    },
+    {
+      "name": "relation tech metadata expands on click",
+      "pass": true,
+      "detail": "{\"open\":true,\"body\":\"关系 ID：rel-jnim-niger-operates圈层：middlefreshness_status：stale\"}"
+    },
+    {
+      "name": "network 2-hop expands",
+      "pass": true,
+      "detail": "before=7 after=23"
+    },
+    {
+      "name": "node click opens detail panel (name+rels+button)",
+      "pass": true,
+      "detail": "{\"has\":true,\"h2\":\"基地组织（AQ）\",\"rels\":8,\"btn\":true}"
+    },
+    {
+      "name": "legend uncheck hides org nodes + stats",
+      "pass": true,
+      "detail": "{\"orgs\":0,\"stats\":\"当前可见 2 个节点 · 8 条关系\"}"
+    },
+    {
+      "name": "legend select-all restores nodes",
+      "pass": true,
+      "detail": "{\"orgs\":7}"
+    },
+    {
+      "name": "legend all-off shows empty state",
+      "pass": true,
+      "detail": "{\"has\":true,\"text\":\"当前筛选条件下无可见节点，请重新勾选图例项。\"}"
+    },
+    {
+      "name": "label mode full shows full labels",
+      "pass": true,
+      "detail": "{\"shorts\":0,\"fulls\":32,\"active\":\"full\"}"
+    },
+    {
+      "name": "entity TOC close button collapses",
+      "pass": true,
+      "detail": "true"
+    },
+    {
+      "name": "entity sources last (online)",
+      "pass": true,
+      "detail": "{\"last\":\"sec-sources\",\"count\":23}"
+    }
+  ]
+}
