@@ -23,7 +23,7 @@
     cooperates_with: "合作", supported_by: "获得支持", supports: "支持", hostile_to: "敌对",
     competes_with: "竞争", fought_against: "交战", historically_associated_with: "历史关联",
     deployed_in: "部署于", member_of_force: "部队成员", political_affiliation: "政治归属",
-    alleged_support: "涉嫌支持", cross_border_link: "跨境关联", criminal_link: "犯罪关联"
+    alleged_support: "涉嫌支持", cross_border_link: "跨境关联", criminal_link: "犯罪关联", part_of_network: "网络组成关系"
   };
   const IMPORTANCE_LABELS = { L1: "L1 核心实体", L2: "L2 重要实体", L3: "L3 扩展实体" };
   const RING_LABELS = { inner: "结构与地理", middle: "组织与力量", outer: "人物" };
