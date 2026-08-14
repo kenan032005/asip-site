@@ -1086,7 +1086,6 @@
   const loadSignal = beginLoad();
   loadJson("regions.json", loadSignal).then(function (r) { store.regions = r.regions; r.regions.forEach(function (x) { store.byRegionId[x.region_id] = x; }); return loadJson("countries.json", loadSignal); }).then(function (c) { store.countries = c.countries; c.countries.forEach(function (x) { store.byCountryId[x.country_id] = x; }); return loadJson("entities.json", loadSignal); }).then(function (e) { store.entities = e.entities; e.entities.forEach(function (x) { store.byEntityId[x.entity_id] = x; store.byEntitySlug[x.slug] = x; }); return loadJson("relationships.json", loadSignal); }).then(function (r) { store.relationships = r.relationships; r.relationships.forEach(function (x) { store.byRelId[x.relationship_id] = x; if (x.slug) store.byRelId[x.slug] = x; });     return Promise.all([loadJson("sources.json", loadSignal), loadJson("evidence_records.json", loadSignal), loadJson("relation_profiles.json", loadSignal), loadJson("relation_timelines.json", loadSignal), loadJson("force_estimates.json", loadSignal), loadJson("external_links.json", loadSignal), loadJson("entity_profiles.json", loadSignal), loadJson("country_profiles.json", loadSignal), loadJson("catalog_metrics.json", loadSignal), loadJson("audit_records.json", loadSignal), loadJson("alias_index.json", loadSignal)]); }).then(function (items) {
     store.sources = items[0].sources; store.evidence = items[1].evidence; store.relationProfiles = items[2].profiles || {}; store.relationTimelines = items[3].timelines || {}; store.forceEstimates = items[4].estimates || {}; store.externalLinks = items[5].links || {}; store.entityProfiles = items[6].profiles || {}; store.countryProfiles = items[7].profiles || {}; store.metrics = items[8] || null; store.audit = (items[9] && items[9].records) || []; store.aliases = (items[10] && items[10].aliases) || {};
-    buildAutoLinkIndex();
     // merge countries into the unified entity table (one ID per entity)
     store.countries.forEach(function (c) {
       if (!store.byEntityId[c.country_id]) {
@@ -1094,6 +1093,9 @@
         store.entities.push(ce); store.byEntityId[ce.entity_id] = ce; store.byEntitySlug[ce.slug] = ce;
       }
     });
+    // UI FINAL POLISH 1: build the exact auto-link index AFTER countries are merged so
+    // country names (e.g. 尼日尔) are linkable from prose.
+    buildAutoLinkIndex();
     const page = document.body.getAttribute("data-africa-page");
     if (page === "home") initHome(); if (page === "regions") initRegions(); if (page === "countries") initCountries(); if (page === "entities") initEntities(); if (page === "relations") initRelations(); if (page === "sources") initSources(); if (page === "region") initRegion(); if (page === "country") initCountry(); if (page === "entity") initEntity(); if (page === "relation") initRelation(); if (page === "network") initNetwork();
   }).catch(function (error) {
