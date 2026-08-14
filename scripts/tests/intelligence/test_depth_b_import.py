@@ -33,8 +33,8 @@ non_country = [e for e in entities if e["entity_type"] != "country"]
 
 print("== TEST 1: no count expansion ==")
 check("countries=13", len(countries) == 13, f"got {len(countries)}")
-check("entities=104", len(non_country) == 104, f"got {len(non_country)} (102 + 2 Expansion D)")
-check("relationships=195", len(rels) == 195, f"got {len(rels)} (192 + 3 Expansion D)")
+check("entities=108", len(non_country) == 108, f"got {len(non_country)} (104 + 4 Expansion E)")
+check("relationships=205", len(rels) == 205, f"got {len(rels)} (195 + 10 Expansion E)")
 
 print("== TEST 2: JAS-ISIS pledge history ==")
 jas_text = json.dumps(ep.get("actor-jas", {}).get("sections", {}), ensure_ascii=False)
@@ -52,7 +52,7 @@ if mal:
     check("type=pledged_allegiance_to", mal["relationship_type"] == "pledged_allegiance_to", mal["relationship_type"])
     check("time=2015-03-07..2016-08-03", mal.get("time_start") == "2015-03-07" and mal.get("time_end") == "2016-08-03")
     check("current_status=historical_pledge...", mal.get("current_status") == "historical_pledge_recognition_shifted_to_iswap")
-check("total relationships still 195", len(rels) == 195)
+check("total relationships still 205", len(rels) == 205)
 
 print("== TEST 4: ISWAP leadership uncertainty ==")
 check("no uncontested 2021 death", "没有支持" in iswap_text and "2021年确认死亡" in iswap_text or "2021年确认死亡" not in iswap_text)
