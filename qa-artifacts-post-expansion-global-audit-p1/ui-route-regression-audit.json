@@ -1,0 +1,47 @@
+{
+  "artifact": "ui-route-regression-audit",
+  "BUILD": "PASS",
+  "routes": 340,
+  "browser_pages_checked": 36,
+  "render_integrity": "PASS",
+  "render_failures": [],
+  "console_errors_total": 0,
+  "exceptions_total": 0,
+  "failed_requests_total": 0,
+  "BROWSER_QA": "PASS",
+  "horizontal_overflow_findings": [
+    {
+      "page": "entity_mnjtf",
+      "viewport": "mobile",
+      "overflow_px": 31
+    },
+    {
+      "page": "entity_rdf",
+      "viewport": "mobile",
+      "overflow_px": 6
+    },
+    {
+      "page": "entity_africa_corps",
+      "viewport": "mobile",
+      "overflow_px": 6
+    },
+    {
+      "page": "entity_lna",
+      "viewport": "mobile",
+      "overflow_px": 35
+    },
+    {
+      "page": "entity_minusma",
+      "viewport": "mobile",
+      "overflow_px": 165
+    },
+    {
+      "page": "entity_jnim",
+      "viewport": "mobile",
+      "overflow_px": 100
+    }
+  ],
+  "overflow_root_cause": "mobile entity pages: intel-bullets / intel-source-notes long content (long English names / URLs) not wrapping; body width expands beyond viewport",
+  "overflow_count": 6,
+  "UI_REGRESSION": "FINDINGS_RECORDED (6 mobile overflow; no data change; NOT fixed this phase)"
+}
