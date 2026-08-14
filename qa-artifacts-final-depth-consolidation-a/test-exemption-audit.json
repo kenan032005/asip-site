@@ -1,0 +1,114 @@
+{
+  "artifact": "test-exemption-audit",
+  "depth_g_downshift_exemptions": [
+    {
+      "file": "scripts/tests/intelligence/test_depth_g_closure.py",
+      "scope": "_EXP_A_REL_DOWNSHIFT_EXEMPT",
+      "relation": "rel-d1-ansaru-jas-split",
+      "expected_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+      "reason": "Expansion A truthful downshift superseded by later R3 upgrade",
+      "category": "LEGITIMATE_HISTORICAL_EXCEPTION",
+      "currently_needed": true,
+      "risk": "low"
+    },
+    {
+      "file": "scripts/tests/intelligence/test_depth_g_closure.py",
+      "scope": "_EXP_A_REL_DOWNSHIFT_EXEMPT",
+      "relation": "rel-d1-ansaru-aqim-allegiance",
+      "expected_maturity": "R2_DEVELOPED_RELATIONSHIP",
+      "reason": "Expansion A truthful downshift superseded by later R3 upgrade",
+      "category": "LEGITIMATE_HISTORICAL_EXCEPTION",
+      "currently_needed": true,
+      "risk": "low"
+    },
+    {
+      "file": "scripts/tests/intelligence/test_depth_g_closure.py",
+      "scope": "_EXP_A_REL_DOWNSHIFT_EXEMPT",
+      "relation": "rel-d1-ansaru-jnim-affiliation",
+      "expected_maturity": "R2_DEVELOPED_RELATIONSHIP",
+      "reason": "Expansion A truthful downshift superseded by later R3 upgrade",
+      "category": "LEGITIMATE_HISTORICAL_EXCEPTION",
+      "currently_needed": true,
+      "risk": "low"
+    },
+    {
+      "file": "scripts/tests/intelligence/test_depth_g_closure.py",
+      "scope": "_EXP_A_REL_DOWNSHIFT_EXEMPT",
+      "relation": "rel-is-moz-islamic-state2",
+      "expected_maturity": "R3_FULL_RELATIONSHIP_INTELLIGENCE",
+      "reason": "Expansion A truthful downshift superseded by later R3 upgrade",
+      "category": "LEGITIMATE_HISTORICAL_EXCEPTION",
+      "currently_needed": true,
+      "risk": "low"
+    },
+    {
+      "file": "scripts/tests/intelligence/test_depth_g_closure.py",
+      "scope": "_EXP_A_REL_DOWNSHIFT_EXEMPT",
+      "relation": "rel-d2-dozos-macina-amadou-led",
+      "expected_maturity": "__REMOVED__",
+      "reason": "Expansion A truthful downshift superseded by later R3 upgrade",
+      "category": "LEGITIMATE_HISTORICAL_EXCEPTION",
+      "currently_needed": true,
+      "risk": "low"
+    }
+  ],
+  "skip_xfail_markers": [
+    {
+      "file": "scripts/tests\\test_stage3b_final_repair.py",
+      "line": 57,
+      "text": "self.skipTest(\"数据缺失\")"
+    },
+    {
+      "file": "scripts/tests\\test_stage3b_final_repair.py",
+      "line": 69,
+      "text": "self.skipTest(\"数据缺失\")"
+    },
+    {
+      "file": "scripts/tests\\test_stage3b_final_repair.py",
+      "line": 92,
+      "text": "self.skipTest(\"数据缺失\")"
+    },
+    {
+      "file": "scripts/tests\\test_stage3b_final_repair.py",
+      "line": 105,
+      "text": "self.skipTest(\"数据缺失\")"
+    },
+    {
+      "file": "scripts/tests\\test_stage3b_final_repair.py",
+      "line": 146,
+      "text": "self.skipTest(f\"fetch失败: {err[:60]}\")"
+    },
+    {
+      "file": "scripts/tests\\test_stage3b_final_repair.py",
+      "line": 159,
+      "text": "self.skipTest(f\"fetch失败: {err[:60]}\")"
+    },
+    {
+      "file": "scripts/tests\\test_stage3b_final_repair.py",
+      "line": 172,
+      "text": "self.skipTest(f\"fetch失败: {err[:60]}\")"
+    },
+    {
+      "file": "scripts/tests\\test_stage3b_final_repair.py",
+      "line": 188,
+      "text": "self.skipTest(f\"fetch失败: {err[:60]}\")"
+    },
+    {
+      "file": "scripts/tests\\test_stage3b_final_repair.py",
+      "line": 355,
+      "text": "self.skipTest(f\"fetch 暂时不可用: {errs[0][:80]}\")"
+    },
+    {
+      "file": "scripts/tests\\test_stage3b_final_repair.py",
+      "line": 398,
+      "text": "self.skipTest(\"无审计快照\")"
+    },
+    {
+      "file": "scripts/tests\\test_stage3b_final_repair.py",
+      "line": 402,
+      "text": "self.skipTest(\"无审计快照\")"
+    }
+  ],
+  "QUALITY_BYPASS_SUSPECT_COUNT": 0,
+  "note": "No R3/E3 gate-lowering waivers detected; only the Depth A truthful-downshift exemption (superseded by later R3 upgrade)."
+}
