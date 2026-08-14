@@ -80,14 +80,15 @@
   }
   function renderBody(v) {
     if (v == null || v === "") return "";
-    if (Array.isArray(v)) return '<ul class="intel-bullets">' + v.map(function (x) { return '<li>' + inlineLinks(esc(x)) + '</li>'; }).join("") + '</ul>';
-    if (typeof v === "string") return '<p>' + inlineLinks(esc(v)) + '</p>';
+    // UI FINAL POLISH 1: entity/region/country/relation prose also gets exact-safe auto-linking.
+    if (Array.isArray(v)) return '<ul class="intel-bullets">' + v.map(function (x) { return '<li>' + renderRelationText(esc(x)) + '</li>'; }).join("") + '</ul>';
+    if (typeof v === "string") return '<p>' + renderRelationText(esc(v)) + '</p>';
     let html = "";
-    if (v.p) html += v.p.map(function (x) { return '<p>' + inlineLinks(esc(x)) + '</p>'; }).join("");
-    if (v.list) html += '<ul class="intel-bullets">' + v.list.map(function (x) { return '<li>' + inlineLinks(esc(x)) + '</li>'; }).join("") + '</ul>';
+    if (v.p) html += v.p.map(function (x) { return '<p>' + renderRelationText(esc(x)) + '</p>'; }).join("");
+    if (v.list) html += '<ul class="intel-bullets">' + v.list.map(function (x) { return '<li>' + renderRelationText(esc(x)) + '</li>'; }).join("") + '</ul>';
     if (v.table) {
-      html += '<div class="intel-table-wrap"><table class="intel-table"><thead><tr>' + v.table.headers.map(function (x) { return '<th>' + esc(x) + '</th>'; }).join("") + '</tr></thead><tbody>' + v.table.rows.map(function (row) { return '<tr>' + row.map(function (x) { return '<td>' + inlineLinks(esc(x)) + '</td>'; }).join("") + '</tr>'; }).join("") + '</tbody></table></div>';
-      if (v.table_note) html += '<p class="intel-table-note">' + inlineLinks(esc(v.table_note)) + '</p>';
+      html += '<div class="intel-table-wrap"><table class="intel-table"><thead><tr>' + v.table.headers.map(function (x) { return '<th>' + esc(x) + '</th>'; }).join("") + '</tr></thead><tbody>' + v.table.rows.map(function (row) { return '<tr>' + row.map(function (x) { return '<td>' + renderRelationText(esc(x)) + '</td>'; }).join("") + '</tr>'; }).join("") + '</tbody></table></div>';
+      if (v.table_note) html += '<p class="intel-table-note">' + renderRelationText(esc(v.table_note)) + '</p>';
     }
     if (v.timeline) {
       html += '<div class="intel-inline-timeline">' + v.timeline.map(function (x) { return '<div class="tl-item"><div class="tl-date">' + esc(x.date) + '</div><div class="tl-body"><h3>' + esc(x.event_title) + '</h3><p>' + esc(x.event_description || "") + '</p></div></div>'; }).join("") + '</div>';
@@ -975,7 +976,11 @@
         else if (isCenter) labelText = nt;
         else if (extraNodes.indexOf(e) >= 0) labelText = tinyLabel(e);
         else labelText = shortLabel(e);
-        const name = mk("text", { x: 0, y: isCenter ? 76 : 54, class: "node-label " + (isCenter ? "center-label" : (labelMode === "auto" && extraNodes.indexOf(e) >= 0 ? "tiny" : "short")), "text-anchor": "middle", "pointer-events": "none" });
+        let labelCls = "node-label";
+        if (isCenter) labelCls += " center-label";
+        else if (labelMode === "auto") labelCls += (extraNodes.indexOf(e) >= 0 ? " tiny" : " short");
+        else if (labelMode === "focus") labelCls += " hidden-label";
+        const name = mk("text", { x: 0, y: isCenter ? 76 : 54, class: labelCls, "text-anchor": "middle", "pointer-events": "none" });
         name.textContent = labelText; g.appendChild(name);
         if (!isCenter) { const tp = mk("title"); tp.textContent = nt + " " + (e.name_en || ""); g.appendChild(tp); }
         if (isCenter) { const en = mk("text", { x: 0, y: 94, class: "node-sub-label", "text-anchor": "middle" }); en.textContent = e.name_en.length > 30 ? e.name_en.slice(0, 28) + "…" : e.name_en; g.appendChild(en); }
