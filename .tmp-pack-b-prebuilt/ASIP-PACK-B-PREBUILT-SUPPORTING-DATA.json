@@ -1,0 +1,1045 @@
+{
+  "package_id": "asip-final-depth-consolidation-pack-b-prebuilt",
+  "version": "2026-08-15",
+  "baseline": {
+    "audit_branch": "feature/asip-post-consolidation-global-audit-p2",
+    "audit_head": "cca534d",
+    "knowledge_baseline": "feature/asip-final-depth-consolidation-a@7daf6a6",
+    "target_entity_count": 11
+  },
+  "import_mode": "MECHANICAL_ONLY_NO_CONTENT_AUTHORING",
+  "entity_record_patches": {
+    "actor-ambazonia-network": {
+      "primary_category": "separatist_armed_network",
+      "short_description": "喀麦隆英语区多个分离主义政治—武装派系的分析性统称，组织高度碎片化，非统一指挥实体。",
+      "full_description": "安巴佐尼亚武装网络覆盖喀麦隆西北/西南英语区多个分离主义政治与武装派系。各派在海外领导、地方武装、资金和停火立场上并不统一；本库明确将其作为umbrella/network建模。",
+      "source_refs_add": [
+        "packb-acled-ambazonia-network",
+        "packb-reuters-cameroon-ceasefire-2026-04-13"
+      ],
+      "record_updated_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "last_verified_at": "2026-08-15"
+    },
+    "actor-burkina-army": {
+      "acronym": "FAN",
+      "native_name": "Forces armées nationales",
+      "full_description": "布基纳法索国家武装力量，1960年建立。当前承担对JNIM、IS Sahel的高强度反叛乱任务，并通过VDP、预备役和AES区域机制扩大安全动员。",
+      "source_refs_add": [
+        "packb-bf-defense-organization",
+        "packb-bf-reserve-law-2026-05-26"
+      ],
+      "record_updated_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "last_verified_at": "2026-08-15"
+    },
+    "actor-cameroon-bir": {
+      "acronym": "BIR",
+      "native_name": "Bataillon d'Intervention Rapide",
+      "full_description": "喀麦隆精锐快速反应军事单位，参与英语区反叛乱和远北反Boko Haram/JAS任务。与BRIR等名称相近的常规军编制必须区分。",
+      "source_refs_add": [
+        "packb-cameroon-bir-recruit-2025-10-14",
+        "packb-reuters-cameroon-reshuffle-2025-07-16",
+        "packb-hrw-bir-northwest-2022"
+      ],
+      "record_updated_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "last_verified_at": "2026-08-15"
+    },
+    "actor-gatia": {
+      "native_name": "Groupe d’autodéfense touareg Imghad et alliés",
+      "full_description": "GATIA是马里北部重要图阿雷格武装，历史上属于亲政府Platform体系。2023—2024出现明显派系分裂；只有相关分裂/签署力量进入FLA重组，不能将整个GATIA视为已合并。",
+      "source_refs_add": [
+        "packb-un-mali-armed-groups-2020"
+      ],
+      "record_updated_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "last_verified_at": "2026-08-15"
+    },
+    "actor-maa-cma": {
+      "native_name": "Mouvement arabe de l’Azawad",
+      "full_description": "本实体仅指MAA中加入CMA的派系。联合国资料明确区分MAA-CMA与MAA-Platform；2024 FLA重组关系也只适用于相关派系，不可泛化至所有MAA力量。",
+      "source_refs_add": [
+        "packb-un-maa-factions-2018",
+        "packb-un-mali-ceasefire-2014"
+      ],
+      "record_updated_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "last_verified_at": "2026-08-15"
+    },
+    "actor-mali-army": {
+      "acronym": "FAMa",
+      "native_name": "Forces armées maliennes",
+      "full_description": "马里国家武装力量，当前同时面对JNIM、IS Sahel和FLA等多线威胁，并与俄罗斯Africa Corps合作。2026年5月8日Elysée Jean Dao接替Oumar Diarra出任武装部队总参谋长。",
+      "source_refs_add": [
+        "packb-fama-about",
+        "packb-fama-cgs-handover-2026-05-08",
+        "packb-mali-defense-law-2026-07-10"
+      ],
+      "claim_valid_as_of": "2026-07-10",
+      "record_updated_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "last_verified_at": "2026-08-15"
+    },
+    "actor-mnla": {
+      "native_name": "Mouvement national de libération de l’Azawad",
+      "current_status": "historical_merged_into_fla_2024",
+      "full_description": "MNLA是2012阿扎瓦德叛乱的核心民族主义/分离主义组织，后成为CMA主力。2024年11月30日参与统一协议并进入FLA形成网络，现作为历史谱系实体保留。",
+      "source_refs_add": [
+        "packb-un-mali-ceasefire-2014",
+        "packb-un-cma-action-plan-2017",
+        "packb-hrw-mali-peace-deal-2024"
+      ],
+      "freshness_status": "historical",
+      "claim_valid_as_of": "2024-11-30",
+      "record_updated_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "last_verified_at": "2026-08-15"
+    },
+    "actor-slm-aw": {
+      "aliases_add": [
+        "SLA-AW",
+        "SLM-AW"
+      ],
+      "full_description": "Abdel Wahid al-Nur领导的达尔富尔武装派系。2026年权威公开资料仍将其列为既不与SAF也不与RSF结盟、并控制Jebel Marra部分地区的独立武装力量。",
+      "source_refs_add": [
+        "packb-govuk-sudan-darfuris-2024"
+      ],
+      "claim_valid_as_of": "2026-07-01",
+      "record_updated_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "last_verified_at": "2026-08-15"
+    },
+    "actor-vdp": {
+      "acronym": "VDP",
+      "native_name": "Volontaires pour la défense de la patrie",
+      "secondary_types_add": [
+        "civilian_auxiliary",
+        "pro_government_auxiliary"
+      ],
+      "short_description": "布基纳法索依法建立、由军方训练武装和监督的平民辅助反叛乱力量，不是正规军军种。",
+      "full_description": "VDP是布基纳反叛乱体系中的大规模平民辅助力量。2020年制度化，2022年后大幅扩招，由军方训练、武装并纳入指挥监督体系；必须与正规武装部队和2026预备役制度区分。",
+      "source_refs_add": [
+        "crs-burkina-2026",
+        "packb-bf-reserve-law-2026-05-26"
+      ],
+      "record_updated_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "last_verified_at": "2026-08-15"
+    },
+    "person-abu-hanifa": {
+      "aliases_add": [
+        "Oumarou"
+      ],
+      "full_description": "Abu Hanifa（又称Oumarou）是Katiba Hanifa领导人及JNIM尼日尔方向的重要区域指挥人物，同时在布基纳法索东南部活动；其角色不等于整个JNIM最高领导。",
+      "record_updated_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "last_verified_at": "2026-08-15"
+    },
+    "person-jafar-dicko": {
+      "full_description": "Jafar Dicko在2017年接替其兄Ibrahim Malam Dicko领导Ansaroul Islam，并被2026高质量资料描述为JNIM在布基纳法索的最高区域领导人物；他不是整个JNIM总埃米尔。",
+      "source_refs_add": [
+        "packb-mapping-militants-ansaroul"
+      ],
+      "record_updated_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "last_verified_at": "2026-08-15"
+    }
+  },
+  "source_additions": [
+    {
+      "source_id": "packb-acled-ambazonia-network",
+      "title": "Q&A: The evolution of Ambazonian separatist groups in Anglophone Cameroon",
+      "publisher": "ACLED",
+      "source_type": "research_analysis",
+      "reliability": "research_dataset",
+      "url": "https://acleddata.com/qa/qa-evolution-ambazonian-separatist-groups-anglophone-cameroon",
+      "published_at": null,
+      "accessed_at": "2026-08-15",
+      "notes": "Ambazonia fragmentation, faction structure and conflict evolution."
+    },
+    {
+      "source_id": "packb-reuters-cameroon-ceasefire-2026-04-13",
+      "title": "Cameroon separatists declare three-day ceasefire for papal visit",
+      "publisher": "Reuters",
+      "source_type": "newswire",
+      "reliability": "high",
+      "url": "https://www.reuters.com/world/africa/cameroon-separatists-declare-three-day-ceasefire-papal-visit-2026-04-13/",
+      "published_at": "2026-04-13",
+      "accessed_at": "2026-08-15",
+      "notes": "Temporary ceasefire by separatist alliance; does not establish unified command."
+    },
+    {
+      "source_id": "packb-bf-defense-organization",
+      "title": "L'Organisation — Forces armées nationales",
+      "publisher": "Ministère de la Guerre et de la Défense Patriotique, Burkina Faso",
+      "source_type": "official_defence_profile",
+      "reliability": "authoritative",
+      "url": "https://www.defense.gov.bf/le-ministere/lorganisation",
+      "published_at": null,
+      "accessed_at": "2026-08-15",
+      "notes": "FAN history, official missions and institutional structure."
+    },
+    {
+      "source_id": "packb-bf-reserve-law-2026-05-26",
+      "title": "Défense nationale : le projet de loi portant statut de la réserve militaire adopté",
+      "publisher": "Assemblée législative du peuple, Burkina Faso",
+      "source_type": "official_legislative_update",
+      "reliability": "authoritative",
+      "url": "https://www.assembleenationale.bf/720",
+      "published_at": "2026-05-26",
+      "accessed_at": "2026-08-15",
+      "notes": "Two-tier military reserve framework adopted in May 2026."
+    },
+    {
+      "source_id": "packb-cameroon-bir-recruit-2025-10-14",
+      "title": "Rapid Intervention Battalion welcome recruits",
+      "publisher": "Cameroon Ministry of Defence",
+      "source_type": "official_defence_update",
+      "reliability": "authoritative",
+      "url": "https://mindef.gov.cm/en/blog/rapid-intervention-batallion-welcome-recruits-2/",
+      "published_at": "2025-10-14",
+      "accessed_at": "2026-08-15",
+      "notes": "1,800 BIR recruits, training split between Limbe and Salak."
+    },
+    {
+      "source_id": "packb-reuters-cameroon-reshuffle-2025-07-16",
+      "title": "Cameroon's Biya, 92, reshuffles military top brass ahead of vote",
+      "publisher": "Reuters",
+      "source_type": "newswire",
+      "reliability": "high",
+      "url": "https://www.reuters.com/world/africa/cameroons-biya-92-reshuffles-military-top-brass-ahead-vote-2025-07-16/",
+      "published_at": "2025-07-16",
+      "accessed_at": "2026-08-15",
+      "notes": "BIR coordinator promotion and continued institutional importance."
+    },
+    {
+      "source_id": "packb-hrw-bir-northwest-2022",
+      "title": "Cameroon: Army Killings, Disappearances in North-West Region",
+      "publisher": "Human Rights Watch",
+      "source_type": "human_rights_investigation",
+      "reliability": "high",
+      "url": "https://www.hrw.org/news/2022/08/11/cameroon-army-killings-disappearances-north-west-region",
+      "published_at": "2022-08-11",
+      "accessed_at": "2026-08-15",
+      "notes": "BIR/security-force operations and abuse allegations; preserve attribution."
+    },
+    {
+      "source_id": "packb-un-mali-armed-groups-2020",
+      "title": "United Nations report on Mali armed groups (S/2020/1332)",
+      "publisher": "United Nations Security Council",
+      "source_type": "un_report",
+      "reliability": "authoritative",
+      "url": "https://digitallibrary.un.org/record/3925661/files/S_2020_1332-EN.pdf",
+      "published_at": "2021-02-05",
+      "accessed_at": "2026-08-15",
+      "notes": "GATIA/MAA faction histories and armed-group structures."
+    },
+    {
+      "source_id": "packb-un-maa-factions-2018",
+      "title": "United Nations report describing CMA and MAA factions (S/2018/136)",
+      "publisher": "United Nations Security Council",
+      "source_type": "un_report",
+      "reliability": "authoritative",
+      "url": "https://digitallibrary.un.org/record/1477495/files/S_2018_136-EN.pdf",
+      "published_at": "2018-02-08",
+      "accessed_at": "2026-08-15",
+      "notes": "MAA split into MAA-CMA and MAA-Platform; CMA composition."
+    },
+    {
+      "source_id": "packb-un-mali-ceasefire-2014",
+      "title": "Ceasefire Agreement following the events of 17 May 2014 in Mali (S/2014/469)",
+      "publisher": "United Nations",
+      "source_type": "primary_agreement_archive",
+      "reliability": "authoritative",
+      "url": "https://digitallibrary.un.org/record/774506",
+      "published_at": "2014-07-03",
+      "accessed_at": "2026-08-15",
+      "notes": "MNLA/HCUA/MAA participation in 2014 ceasefire framework."
+    },
+    {
+      "source_id": "packb-un-cma-action-plan-2017",
+      "title": "Mali: CMA Coalition Signs Action Plan to End and Prevent Recruitment and Use and Sexual Violence Against Children in Conflict",
+      "publisher": "United Nations Office of the SRSG for Children and Armed Conflict",
+      "source_type": "un_official_update",
+      "reliability": "authoritative",
+      "url": "https://childrenandarmedconflict.un.org/en/mali-cma-coalition-signs-action-plan",
+      "published_at": "2017-03-17",
+      "accessed_at": "2026-08-15",
+      "notes": "CMA coalition identity including MNLA."
+    },
+    {
+      "source_id": "packb-hrw-mali-peace-deal-2024",
+      "title": "Mali’s Peace Deal Ends",
+      "publisher": "Human Rights Watch",
+      "source_type": "human_rights_current_update",
+      "reliability": "high",
+      "url": "https://www.hrw.org/news/2024/01/26/malis-peace-deal-ends",
+      "published_at": "2024-01-26",
+      "accessed_at": "2026-08-15",
+      "notes": "End of the 2015 peace framework and renewed conflict context."
+    },
+    {
+      "source_id": "packb-fama-about",
+      "title": "About Us — Forces Armées Maliennes",
+      "publisher": "Forces Armées Maliennes (FAMa)",
+      "source_type": "official_defence_profile",
+      "reliability": "authoritative",
+      "url": "https://www.fama.ml/en/about-us",
+      "published_at": null,
+      "accessed_at": "2026-08-15",
+      "notes": "Institutional structure. Any stale leadership text is superseded by the 8 May 2026 handover notice."
+    },
+    {
+      "source_id": "packb-fama-cgs-handover-2026-05-08",
+      "title": "ETAT-MAJOR GENERAL DES ARMEES : le Général de Division Elysée Jean DAO prend le commandement",
+      "publisher": "Forces Armées Maliennes (FAMa)",
+      "source_type": "official_defence_update",
+      "reliability": "authoritative",
+      "url": "https://www.fama.ml/index.php/etat-major-general-des-armees-le-general-de-division-elysee-jean-dao-prend-le-commandement",
+      "published_at": "2026-05-08",
+      "accessed_at": "2026-08-15",
+      "notes": "Elysée Jean Dao succeeded Oumar Diarra as Chief of the General Staff on 8 May 2026."
+    },
+    {
+      "source_id": "packb-mali-defense-law-2026-07-10",
+      "title": "Conseil National de Transition : Le Projet de loi portant organisation générale de la Défense et de la Sécurité adopté",
+      "publisher": "Government of Mali",
+      "source_type": "official_government_update",
+      "reliability": "authoritative",
+      "url": "https://gouvernement.ml/conseil-national-de-transition-le-projet-de-loi-portant-organisation-generale-de-la-defense-et-de-la-securite-adopte/",
+      "published_at": "2026-07-10",
+      "accessed_at": "2026-08-15",
+      "notes": "Adoption of revised general defence and security organization law."
+    },
+    {
+      "source_id": "packb-govuk-sudan-darfuris-2024",
+      "title": "Country policy and information note: non-Arab Darfuris, Sudan",
+      "publisher": "UK Home Office",
+      "source_type": "government_country_report",
+      "reliability": "high",
+      "url": "https://www.gov.uk/government/publications/sudan-country-policy-and-information-notes/country-policy-and-information-note-non-arab-darfuri-august-2024-accessible",
+      "published_at": "2024-08-01",
+      "accessed_at": "2026-08-15",
+      "notes": "SLM/A faction background and Darfur context."
+    },
+    {
+      "source_id": "packb-mapping-militants-ansaroul",
+      "title": "Ansaroul Islam",
+      "publisher": "Mapping Militants Project, Stanford University",
+      "source_type": "research_profile",
+      "reliability": "research_institution",
+      "url": "https://mappingmilitants.org/profiles/ansaroul-islam",
+      "published_at": null,
+      "accessed_at": "2026-08-15",
+      "notes": "Jafar Dicko succession and Ansaroul Islam–JNIM relationship."
+    }
+  ],
+  "evidence_additions": [
+    {
+      "evidence_id": "ev-packb-ambazonia-fragmentation",
+      "claim_id": "cl-packb-ambazonia-fragmentation",
+      "claim_text_zh": "公开研究将安巴佐尼亚分离主义武装描述为多个政治机构、武装翼和地方力量组成的碎片化网络，不能视为单一统一指挥组织。",
+      "claim_type": "fact",
+      "entity_ids": [
+        "actor-ambazonia-network"
+      ],
+      "relation_ids": [],
+      "country_ids": [
+        "country-cameroon"
+      ],
+      "region_ids": [],
+      "source_id": "packb-acled-ambazonia-network",
+      "source_locator": "ACLED analysis of fragmentation",
+      "source_published_at": null,
+      "source_accessed_at": "2026-08-15",
+      "claim_valid_as_of": "2026-08-15",
+      "as_of_date": "2026-08-15",
+      "confidence": "high",
+      "disputed": false,
+      "verification_status": "partially_verified",
+      "evidence_origin": "authoritative_content_pack",
+      "verification_method": "chatgpt_public_source_research_pack_b",
+      "verified_at": null,
+      "record_created_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "record_updated_at": "2026-08-15",
+      "freshness_status": "current",
+      "time_sensitive": true,
+      "notes": "Final Depth Consolidation Pack B. Preserve wording/source attribution mechanically."
+    },
+    {
+      "evidence_id": "ev-packb-ambazonia-ceasefire",
+      "claim_id": "cl-packb-ambazonia-ceasefire",
+      "claim_text_zh": "2026年4月，一个由AGovC及其他分离主义力量组成的联盟为教皇访问宣布三天停火；该协调不证明所有分离主义派别受统一指挥。",
+      "claim_type": "fact",
+      "entity_ids": [
+        "actor-ambazonia-network"
+      ],
+      "relation_ids": [],
+      "country_ids": [
+        "country-cameroon"
+      ],
+      "region_ids": [],
+      "source_id": "packb-reuters-cameroon-ceasefire-2026-04-13",
+      "source_locator": "Reuters, 13 Apr 2026",
+      "source_published_at": "2026-04-13",
+      "source_accessed_at": "2026-08-15",
+      "claim_valid_as_of": "2026-04-13",
+      "as_of_date": "2026-04-13",
+      "confidence": "high",
+      "disputed": false,
+      "verification_status": "partially_verified",
+      "evidence_origin": "authoritative_content_pack",
+      "verification_method": "chatgpt_public_source_research_pack_b",
+      "verified_at": null,
+      "record_created_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "record_updated_at": "2026-08-15",
+      "freshness_status": "current",
+      "time_sensitive": true,
+      "notes": "Final Depth Consolidation Pack B. Preserve wording/source attribution mechanically."
+    },
+    {
+      "evidence_id": "ev-packb-bf-army-history",
+      "claim_id": "cl-packb-bf-army-history",
+      "claim_text_zh": "布基纳官方国防资料记载国家军队于1960年8月3日建立，并列出保障主权领土完整、支援国内安全、国家发展和民防等任务。",
+      "claim_type": "fact",
+      "entity_ids": [
+        "actor-burkina-army"
+      ],
+      "relation_ids": [],
+      "country_ids": [
+        "country-burkina-faso"
+      ],
+      "region_ids": [],
+      "source_id": "packb-bf-defense-organization",
+      "source_locator": "Official history/missions",
+      "source_published_at": null,
+      "source_accessed_at": "2026-08-15",
+      "claim_valid_as_of": "2026-08-15",
+      "as_of_date": "2026-08-15",
+      "confidence": "high",
+      "disputed": false,
+      "verification_status": "partially_verified",
+      "evidence_origin": "authoritative_content_pack",
+      "verification_method": "chatgpt_public_source_research_pack_b",
+      "verified_at": null,
+      "record_created_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "record_updated_at": "2026-08-15",
+      "freshness_status": "historical",
+      "time_sensitive": false,
+      "notes": "Final Depth Consolidation Pack B. Preserve wording/source attribution mechanically."
+    },
+    {
+      "evidence_id": "ev-packb-bf-reserve",
+      "claim_id": "cl-packb-bf-reserve",
+      "claim_text_zh": "2026年5月布基纳通过军事预备役地位法，设置具有军事经验的第一类预备役和逐步训练的第二类公民预备役。",
+      "claim_type": "fact",
+      "entity_ids": [
+        "actor-burkina-army"
+      ],
+      "relation_ids": [],
+      "country_ids": [
+        "country-burkina-faso"
+      ],
+      "region_ids": [],
+      "source_id": "packb-bf-reserve-law-2026-05-26",
+      "source_locator": "Official legislative update",
+      "source_published_at": "2026-05-26",
+      "source_accessed_at": "2026-08-15",
+      "claim_valid_as_of": "2026-05-26",
+      "as_of_date": "2026-05-26",
+      "confidence": "high",
+      "disputed": false,
+      "verification_status": "partially_verified",
+      "evidence_origin": "authoritative_content_pack",
+      "verification_method": "chatgpt_public_source_research_pack_b",
+      "verified_at": null,
+      "record_created_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "record_updated_at": "2026-08-15",
+      "freshness_status": "current",
+      "time_sensitive": true,
+      "notes": "Final Depth Consolidation Pack B. Preserve wording/source attribution mechanically."
+    },
+    {
+      "evidence_id": "ev-packb-bir-recruit",
+      "claim_id": "cl-packb-bir-recruit",
+      "claim_text_zh": "喀麦隆国防部2025年报道1800名BIR新招人员进入训练，其中900人在林贝Man O’ War Bay、900人在马鲁阿Salak训练中心。",
+      "claim_type": "fact",
+      "entity_ids": [
+        "actor-cameroon-bir"
+      ],
+      "relation_ids": [],
+      "country_ids": [
+        "country-cameroon"
+      ],
+      "region_ids": [],
+      "source_id": "packb-cameroon-bir-recruit-2025-10-14",
+      "source_locator": "Cameroon MINDEF recruitment update",
+      "source_published_at": "2025-10-14",
+      "source_accessed_at": "2026-08-15",
+      "claim_valid_as_of": "2025-10-14",
+      "as_of_date": "2025-10-14",
+      "confidence": "high",
+      "disputed": false,
+      "verification_status": "partially_verified",
+      "evidence_origin": "authoritative_content_pack",
+      "verification_method": "chatgpt_public_source_research_pack_b",
+      "verified_at": null,
+      "record_created_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "record_updated_at": "2026-08-15",
+      "freshness_status": "current",
+      "time_sensitive": true,
+      "notes": "Final Depth Consolidation Pack B. Preserve wording/source attribution mechanically."
+    },
+    {
+      "evidence_id": "ev-packb-bir-importance",
+      "claim_id": "cl-packb-bir-importance",
+      "claim_text_zh": "Reuters 2025年7月报道喀麦隆军方高层调整时特别提及BIR协调员获晋升，反映该单位持续具有较高制度重要性。",
+      "claim_type": "fact",
+      "entity_ids": [
+        "actor-cameroon-bir"
+      ],
+      "relation_ids": [],
+      "country_ids": [
+        "country-cameroon"
+      ],
+      "region_ids": [],
+      "source_id": "packb-reuters-cameroon-reshuffle-2025-07-16",
+      "source_locator": "Reuters military reshuffle",
+      "source_published_at": "2025-07-16",
+      "source_accessed_at": "2026-08-15",
+      "claim_valid_as_of": "2025-07-16",
+      "as_of_date": "2025-07-16",
+      "confidence": "high",
+      "disputed": false,
+      "verification_status": "partially_verified",
+      "evidence_origin": "authoritative_content_pack",
+      "verification_method": "chatgpt_public_source_research_pack_b",
+      "verified_at": null,
+      "record_created_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "record_updated_at": "2026-08-15",
+      "freshness_status": "current",
+      "time_sensitive": true,
+      "notes": "Final Depth Consolidation Pack B. Preserve wording/source attribution mechanically."
+    },
+    {
+      "evidence_id": "ev-packb-gatia-fragment",
+      "claim_id": "cl-packb-gatia-fragment",
+      "claim_text_zh": "GATIA历史上属于亲政府Platform体系；2024年FLA统一协议中的GATIA关联应限定为相关分裂/签署力量，不能推断整个GATIA整体并入FLA。",
+      "claim_type": "fact",
+      "entity_ids": [
+        "actor-gatia",
+        "actor-fla"
+      ],
+      "relation_ids": [],
+      "country_ids": [
+        "country-mali"
+      ],
+      "region_ids": [],
+      "source_id": "d1-pax-fla-2024-11-30",
+      "source_locator": "FLA unity pact interpreted with existing fragmentation record",
+      "source_published_at": "2024-11-30",
+      "source_accessed_at": "2026-08-15",
+      "claim_valid_as_of": "2024-11-30",
+      "as_of_date": "2024-11-30",
+      "confidence": "high",
+      "disputed": false,
+      "verification_status": "partially_verified",
+      "evidence_origin": "authoritative_content_pack",
+      "verification_method": "chatgpt_public_source_research_pack_b",
+      "verified_at": null,
+      "record_created_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "record_updated_at": "2026-08-15",
+      "freshness_status": "historical",
+      "time_sensitive": false,
+      "notes": "Final Depth Consolidation Pack B. Preserve wording/source attribution mechanically."
+    },
+    {
+      "evidence_id": "ev-packb-maa-split",
+      "claim_id": "cl-packb-maa-split",
+      "claim_text_zh": "联合国资料记载MAA在2013年分裂：Sidi Brahim Ould Sidati领导的派系进入CMA，另一派进入Platform，因此MAA-CMA与MAA-Platform必须分开建模。",
+      "claim_type": "fact",
+      "entity_ids": [
+        "actor-maa-cma"
+      ],
+      "relation_ids": [],
+      "country_ids": [
+        "country-mali"
+      ],
+      "region_ids": [],
+      "source_id": "packb-un-maa-factions-2018",
+      "source_locator": "UN S/2018/136",
+      "source_published_at": "2018-02-08",
+      "source_accessed_at": "2026-08-15",
+      "claim_valid_as_of": "2018-02-08",
+      "as_of_date": "2018-02-08",
+      "confidence": "high",
+      "disputed": false,
+      "verification_status": "partially_verified",
+      "evidence_origin": "authoritative_content_pack",
+      "verification_method": "chatgpt_public_source_research_pack_b",
+      "verified_at": null,
+      "record_created_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "record_updated_at": "2026-08-15",
+      "freshness_status": "historical",
+      "time_sensitive": false,
+      "notes": "Final Depth Consolidation Pack B. Preserve wording/source attribution mechanically."
+    },
+    {
+      "evidence_id": "ev-packb-fama-chief",
+      "claim_id": "cl-packb-fama-chief",
+      "claim_text_zh": "FAMa官方2026年5月8日宣布Elysée Jean Dao少将接替Oumar Diarra出任武装部队总参谋长。",
+      "claim_type": "fact",
+      "entity_ids": [
+        "actor-mali-army"
+      ],
+      "relation_ids": [],
+      "country_ids": [
+        "country-mali"
+      ],
+      "region_ids": [],
+      "source_id": "packb-fama-cgs-handover-2026-05-08",
+      "source_locator": "Official command handover",
+      "source_published_at": "2026-05-08",
+      "source_accessed_at": "2026-08-15",
+      "claim_valid_as_of": "2026-05-08",
+      "as_of_date": "2026-05-08",
+      "confidence": "high",
+      "disputed": false,
+      "verification_status": "partially_verified",
+      "evidence_origin": "authoritative_content_pack",
+      "verification_method": "chatgpt_public_source_research_pack_b",
+      "verified_at": null,
+      "record_created_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "record_updated_at": "2026-08-15",
+      "freshness_status": "current",
+      "time_sensitive": true,
+      "notes": "Final Depth Consolidation Pack B. Preserve wording/source attribution mechanically."
+    },
+    {
+      "evidence_id": "ev-packb-fama-law",
+      "claim_id": "cl-packb-fama-law",
+      "claim_text_zh": "2026年7月马里通过新的国防与安全总体组织法案，政府称其用于适应新的地缘政治与安全环境并重构防务工具。",
+      "claim_type": "fact",
+      "entity_ids": [
+        "actor-mali-army"
+      ],
+      "relation_ids": [],
+      "country_ids": [
+        "country-mali"
+      ],
+      "region_ids": [],
+      "source_id": "packb-mali-defense-law-2026-07-10",
+      "source_locator": "Government legislative update",
+      "source_published_at": "2026-07-10",
+      "source_accessed_at": "2026-08-15",
+      "claim_valid_as_of": "2026-07-10",
+      "as_of_date": "2026-07-10",
+      "confidence": "high",
+      "disputed": false,
+      "verification_status": "partially_verified",
+      "evidence_origin": "authoritative_content_pack",
+      "verification_method": "chatgpt_public_source_research_pack_b",
+      "verified_at": null,
+      "record_created_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "record_updated_at": "2026-08-15",
+      "freshness_status": "current",
+      "time_sensitive": true,
+      "notes": "Final Depth Consolidation Pack B. Preserve wording/source attribution mechanically."
+    },
+    {
+      "evidence_id": "ev-packb-mnla-ceasefire",
+      "claim_id": "cl-packb-mnla-ceasefire",
+      "claim_text_zh": "联合国文件确认MNLA与HCUA、MAA等北部武装参与2014年5月停火安排，成为后续北部和平进程的正式武装谈判方。",
+      "claim_type": "fact",
+      "entity_ids": [
+        "actor-mnla"
+      ],
+      "relation_ids": [],
+      "country_ids": [
+        "country-mali"
+      ],
+      "region_ids": [],
+      "source_id": "packb-un-mali-ceasefire-2014",
+      "source_locator": "UN S/2014/469",
+      "source_published_at": "2014-07-03",
+      "source_accessed_at": "2026-08-15",
+      "claim_valid_as_of": "2014-07-03",
+      "as_of_date": "2014-07-03",
+      "confidence": "high",
+      "disputed": false,
+      "verification_status": "partially_verified",
+      "evidence_origin": "authoritative_content_pack",
+      "verification_method": "chatgpt_public_source_research_pack_b",
+      "verified_at": null,
+      "record_created_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "record_updated_at": "2026-08-15",
+      "freshness_status": "historical",
+      "time_sensitive": false,
+      "notes": "Final Depth Consolidation Pack B. Preserve wording/source attribution mechanically."
+    },
+    {
+      "evidence_id": "ev-packb-mnla-fla",
+      "claim_id": "cl-packb-mnla-fla",
+      "claim_text_zh": "2024年11月30日阿扎瓦德武装统一协议将MNLA相关组织结构纳入FLA形成网络，因此MNLA当前应作为已并入FLA的历史谱系实体呈现。",
+      "claim_type": "fact",
+      "entity_ids": [
+        "actor-mnla",
+        "actor-fla"
+      ],
+      "relation_ids": [],
+      "country_ids": [
+        "country-mali"
+      ],
+      "region_ids": [],
+      "source_id": "d1-pax-fla-2024-11-30",
+      "source_locator": "PA-X unity pact",
+      "source_published_at": "2024-11-30",
+      "source_accessed_at": "2026-08-15",
+      "claim_valid_as_of": "2024-11-30",
+      "as_of_date": "2024-11-30",
+      "confidence": "high",
+      "disputed": false,
+      "verification_status": "partially_verified",
+      "evidence_origin": "authoritative_content_pack",
+      "verification_method": "chatgpt_public_source_research_pack_b",
+      "verified_at": null,
+      "record_created_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "record_updated_at": "2026-08-15",
+      "freshness_status": "historical",
+      "time_sensitive": false,
+      "notes": "Final Depth Consolidation Pack B. Preserve wording/source attribution mechanically."
+    },
+    {
+      "evidence_id": "ev-packb-slmaw-status",
+      "claim_id": "cl-packb-slmaw-status",
+      "claim_text_zh": "英国政府2026年7月资料称SLA/SLM-AW不与SAF或RSF结盟，并控制中达尔富尔Jebel Marra山地部分地区。",
+      "claim_type": "fact",
+      "entity_ids": [
+        "actor-slm-aw"
+      ],
+      "relation_ids": [],
+      "country_ids": [
+        "country-sudan"
+      ],
+      "region_ids": [],
+      "source_id": "govuk-sudan-cpin-2026-07",
+      "source_locator": "Section 4.1.9 territorial control",
+      "source_published_at": "2026-07-01",
+      "source_accessed_at": "2026-08-15",
+      "claim_valid_as_of": "2026-07-01",
+      "as_of_date": "2026-07-01",
+      "confidence": "high",
+      "disputed": false,
+      "verification_status": "partially_verified",
+      "evidence_origin": "authoritative_content_pack",
+      "verification_method": "chatgpt_public_source_research_pack_b",
+      "verified_at": null,
+      "record_created_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "record_updated_at": "2026-08-15",
+      "freshness_status": "current",
+      "time_sensitive": true,
+      "notes": "Final Depth Consolidation Pack B. Preserve wording/source attribution mechanically."
+    },
+    {
+      "evidence_id": "ev-packb-vdp-scale",
+      "claim_id": "cl-packb-vdp-scale",
+      "claim_text_zh": "HRW 2026记载VDP由2020年制度建立，2022年10月当局启动额外5万人招募；政府曾向HRW表示累计招募约9万人，但实际活跃人数难以准确确认。",
+      "claim_type": "fact",
+      "entity_ids": [
+        "actor-vdp"
+      ],
+      "relation_ids": [],
+      "country_ids": [
+        "country-burkina-faso"
+      ],
+      "region_ids": [],
+      "source_id": "d2-hrw-burkina-2026-04-02",
+      "source_locator": "HRW VDP structure/history section",
+      "source_published_at": "2026-04-02",
+      "source_accessed_at": "2026-08-15",
+      "claim_valid_as_of": "2026-04-02",
+      "as_of_date": "2026-04-02",
+      "confidence": "high",
+      "disputed": false,
+      "verification_status": "partially_verified",
+      "evidence_origin": "authoritative_content_pack",
+      "verification_method": "chatgpt_public_source_research_pack_b",
+      "verified_at": null,
+      "record_created_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "record_updated_at": "2026-08-15",
+      "freshness_status": "current",
+      "time_sensitive": true,
+      "notes": "Final Depth Consolidation Pack B. Preserve wording/source attribution mechanically."
+    },
+    {
+      "evidence_id": "ev-packb-vdp-command",
+      "claim_id": "cl-packb-vdp-command",
+      "claim_text_zh": "HRW引用法规和政府资料称VDP由军方训练武装，并处于武装部队总参谋长及所支援地区安全力量的指挥监督之下；VDP并非正规军军种。",
+      "claim_type": "fact",
+      "entity_ids": [
+        "actor-vdp",
+        "actor-burkina-army"
+      ],
+      "relation_ids": [],
+      "country_ids": [
+        "country-burkina-faso"
+      ],
+      "region_ids": [],
+      "source_id": "d2-hrw-burkina-2026-04-02",
+      "source_locator": "HRW chain-of-command section",
+      "source_published_at": "2026-04-02",
+      "source_accessed_at": "2026-08-15",
+      "claim_valid_as_of": "2026-04-02",
+      "as_of_date": "2026-04-02",
+      "confidence": "high",
+      "disputed": false,
+      "verification_status": "partially_verified",
+      "evidence_origin": "authoritative_content_pack",
+      "verification_method": "chatgpt_public_source_research_pack_b",
+      "verified_at": null,
+      "record_created_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "record_updated_at": "2026-08-15",
+      "freshness_status": "current",
+      "time_sensitive": true,
+      "notes": "Final Depth Consolidation Pack B. Preserve wording/source attribution mechanically."
+    },
+    {
+      "evidence_id": "ev-packb-abu-hanifa-role",
+      "claim_id": "cl-packb-abu-hanifa-role",
+      "claim_text_zh": "HRW 2026明确称Abu Hanifa（Oumarou）为Katiba Hanifa负责人、JNIM尼日尔地区领导人物，并指出其亦在布基纳法索东南部活动。",
+      "claim_type": "fact",
+      "entity_ids": [
+        "person-abu-hanifa",
+        "actor-katiba-hanifa",
+        "actor-jnim"
+      ],
+      "relation_ids": [],
+      "country_ids": [
+        "country-niger",
+        "country-burkina-faso"
+      ],
+      "region_ids": [],
+      "source_id": "d2-hrw-burkina-2026-04-02",
+      "source_locator": "HRW JNIM command structure",
+      "source_published_at": "2026-04-02",
+      "source_accessed_at": "2026-08-15",
+      "claim_valid_as_of": "2026-04-02",
+      "as_of_date": "2026-04-02",
+      "confidence": "high",
+      "disputed": false,
+      "verification_status": "partially_verified",
+      "evidence_origin": "authoritative_content_pack",
+      "verification_method": "chatgpt_public_source_research_pack_b",
+      "verified_at": null,
+      "record_created_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "record_updated_at": "2026-08-15",
+      "freshness_status": "current",
+      "time_sensitive": true,
+      "notes": "Final Depth Consolidation Pack B. Preserve wording/source attribution mechanically."
+    },
+    {
+      "evidence_id": "ev-packb-jafar-role",
+      "claim_id": "cl-packb-jafar-role",
+      "claim_text_zh": "HRW 2026将Jafar Dicko描述为Ansaroul Islam领导人和JNIM在布基纳法索的最高区域领导/指挥人物，同时明确Ousmane Dicko为其副手。",
+      "claim_type": "fact",
+      "entity_ids": [
+        "person-jafar-dicko",
+        "actor-ansarul-islam",
+        "actor-jnim",
+        "person-ousmane-dicko"
+      ],
+      "relation_ids": [],
+      "country_ids": [
+        "country-burkina-faso"
+      ],
+      "region_ids": [],
+      "source_id": "d2-hrw-burkina-2026-04-02",
+      "source_locator": "HRW JNIM leadership section",
+      "source_published_at": "2026-04-02",
+      "source_accessed_at": "2026-08-15",
+      "claim_valid_as_of": "2026-04-02",
+      "as_of_date": "2026-04-02",
+      "confidence": "high",
+      "disputed": false,
+      "verification_status": "partially_verified",
+      "evidence_origin": "authoritative_content_pack",
+      "verification_method": "chatgpt_public_source_research_pack_b",
+      "verified_at": null,
+      "record_created_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "record_updated_at": "2026-08-15",
+      "freshness_status": "current",
+      "time_sensitive": true,
+      "notes": "Final Depth Consolidation Pack B. Preserve wording/source attribution mechanically."
+    }
+  ],
+  "relationship_additions": [
+    {
+      "relationship_id": "rel-packb-bir-jas-conflict",
+      "slug": "bir-jas-conflict",
+      "relationship_type": "hostile_to",
+      "source_entity_id": "actor-cameroon-bir",
+      "target_entity_id": "actor-jas",
+      "relation_summary": "喀麦隆BIR在远北地区直接参与反Boko Haram/JAS作战；2026年7月已有BIR哨所遭大规模武装袭击的现有证据。",
+      "display_ring": "middle",
+      "direction": "unidirectional",
+      "current_status": "active",
+      "current_status_detail": "BIR作为喀麦隆国家精锐力量在远北继续面对Boko Haram/JAS威胁；该关系不代表BIR承担喀麦隆全部远北反恐行动。",
+      "confidence": "high",
+      "temporal_sensitive": true,
+      "disputed": false,
+      "geographic_scope": [
+        "Cameroon Far North"
+      ],
+      "source_refs": [
+        "cameroon-concord-2026"
+      ],
+      "record_created_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "record_updated_at": "2026-08-15",
+      "freshness_status": "current",
+      "claim_valid_as_of": "2026-07-15",
+      "current_status_verified_at": "2026-08-15",
+      "last_verified_at": "2026-08-15",
+      "why_it_matters": "为BIR实体提供现有证据直接支持的远北反恐关系。",
+      "uncertainties": "单次事件袭击单元与JAS内部具体派系需逐案核实。"
+    },
+    {
+      "relationship_id": "rel-packb-slmaw-sudan-operates",
+      "slug": "slmaw-sudan-operates",
+      "relationship_type": "operates_in",
+      "source_entity_id": "actor-slm-aw",
+      "target_entity_id": "country-sudan",
+      "relation_summary": "SLM/A-AW长期在苏丹达尔富尔活动；2026年权威资料仍确认其在Jebel Marra保持独立武装存在和部分领土控制。",
+      "display_ring": "middle",
+      "direction": "unidirectional",
+      "current_status": "active",
+      "current_status_detail": "截至2026年6—7月，SLM/A-AW仍是苏丹境内独立武装行为体，并不整体隶属于SAF或RSF。",
+      "confidence": "high",
+      "temporal_sensitive": true,
+      "disputed": false,
+      "geographic_scope": [
+        "Jebel Marra",
+        "Central Darfur"
+      ],
+      "source_refs": [
+        "govuk-sudan-cpin-2026-07"
+      ],
+      "record_created_at": "2026-08-15",
+      "record_reviewed_at": "2026-08-15",
+      "record_updated_at": "2026-08-15",
+      "freshness_status": "current",
+      "claim_valid_as_of": "2026-07-01",
+      "current_status_verified_at": "2026-08-15",
+      "last_verified_at": "2026-08-15",
+      "why_it_matters": "以保守的地理存在关系表达其2026实际地位，不制造SAF/RSF联盟。",
+      "uncertainties": "Jebel Marra实时控制边界随战事变化。"
+    }
+  ],
+  "relation_profile_additions": {
+    "rel-packb-bir-jas-conflict": {
+      "relationship_id": "rel-packb-bir-jas-conflict",
+      "relation_id": "rel-packb-bir-jas-conflict",
+      "slug": "bir-jas-conflict",
+      "relation_title": "BIR ↔ Boko Haram/JAS：喀麦隆远北反恐冲突",
+      "relation_type": "hostile_to",
+      "source_entity_id": "actor-cameroon-bir",
+      "target_entity_id": "actor-jas",
+      "direction": "unidirectional",
+      "display_ring": "middle",
+      "relation_maturity": "R2_DEVELOPED_RELATIONSHIP",
+      "overview": "BIR是喀麦隆远北反Boko Haram/JAS行动中的重要精锐单位之一；现有2026事件证据证明双方仍有现实战场接触。",
+      "nature": "国家精锐军事单位与圣战主义武装之间的持续敌对/反恐关系。",
+      "geographic_scope": "Cameroon Far North / Lake Chad Basin",
+      "current_status": "active",
+      "why_it_matters": "解释BIR的Lake Chad Basin角色，但不把BIR等同喀麦隆全部反恐体系。",
+      "uncertainties": "具体袭击单元和Boko Haram内部派系需逐事件核实。",
+      "asip_analysis": "ASIP判断：BIR的远北角色应作为喀麦隆国家反恐能力的一部分观察。",
+      "watch_indicators": [
+        "BIR远北据点袭击频率",
+        "JAS/ISWAP在喀麦隆境内活动变化",
+        "新招BIR人员部署方向"
+      ],
+      "source_ids": [
+        "cameroon-concord-2026"
+      ],
+      "temporal_sensitive": true,
+      "disputed": false,
+      "last_verified_at": "2026-08-15",
+      "imported_by": "final-depth-consolidation-pack-b",
+      "maturity_basis": "simple operational R2 relation; no R3 expansion required",
+      "maturity_assessed_at": "2026-08-15"
+    },
+    "rel-packb-slmaw-sudan-operates": {
+      "relationship_id": "rel-packb-slmaw-sudan-operates",
+      "relation_id": "rel-packb-slmaw-sudan-operates",
+      "slug": "slmaw-sudan-operates",
+      "relation_title": "SLM/A-AW → Sudan：Jebel Marra武装存在",
+      "relation_type": "operates_in",
+      "source_entity_id": "actor-slm-aw",
+      "target_entity_id": "country-sudan",
+      "direction": "unidirectional",
+      "display_ring": "middle",
+      "relation_maturity": "R1_SIMPLE_SOURCED_RELATION",
+      "overview": "SLM/A-AW是苏丹达尔富尔长期武装行为体；2026年权威资料仍确认其在Jebel Marra控制部分地区。",
+      "nature": "地理存在/领土影响关系，不表示与SAF或RSF结盟。",
+      "geographic_scope": "Jebel Marra, Central Darfur, Sudan",
+      "current_status": "active",
+      "why_it_matters": "准确表达SLM/A-AW作为独立达尔富尔武装的存在，不制造错误联盟。",
+      "uncertainties": "控制线随战事变化，不能视为固定行政边界。",
+      "asip_analysis": "ASIP判断：苏丹战区不能只用SAF—RSF二元图解释。",
+      "watch_indicators": [
+        "Jebel Marra控制变化",
+        "SLM/A-AW是否维持双重非结盟",
+        "是否加入新达尔富尔联合框架"
+      ],
+      "source_ids": [
+        "govuk-sudan-cpin-2026-07"
+      ],
+      "temporal_sensitive": true,
+      "disputed": false,
+      "last_verified_at": "2026-08-15",
+      "imported_by": "final-depth-consolidation-pack-b",
+      "maturity_basis": "simple geographic R1 relation",
+      "maturity_assessed_at": "2026-08-15"
+    }
+  },
+  "evidence_updates": {
+    "ev-i3b-016": {
+      "relation_ids_add": [
+        "rel-packb-bir-jas-conflict"
+      ]
+    }
+  },
+  "semantic_gates": [
+    "AMBAZONIA_FALSE_UNIFIED_COMMAND=0",
+    "BIR_BRIR_IDENTITY_COLLAPSE=0",
+    "GATIA_WHOLE_GROUP_FLA_MERGER_FALSE_CLAIM=0",
+    "MAA_CMA_PLATFORM_COLLAPSE=0",
+    "MNLA_FALSE_JIHADIST_CLASSIFICATION=0",
+    "MNLA_MERGED_INTO_FLA_2024=PASS",
+    "SLM_AW_SAF_ALLIANCE_FALSE_CLAIM=0",
+    "SLM_AW_RSF_ALLIANCE_FALSE_CLAIM=0",
+    "VDP_REGULAR_ARMY_COLLAPSE=0",
+    "ABU_HANIFA_OVERALL_JNIM_EMIR_FALSE_CLAIM=0",
+    "JAFAR_OVERALL_JNIM_EMIR_FALSE_CLAIM=0",
+    "AFRICA_CORPS_OUT_OF_SCOPE_CHANGE=0"
+  ]
+}
