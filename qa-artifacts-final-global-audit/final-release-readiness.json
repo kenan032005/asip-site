@@ -1,0 +1,54 @@
+{
+  "artifact": "FINAL_AUDIT_RELEASE_READINESS",
+  "generated_at": "2026-08-16T00:02:41+08:00",
+  "dimensions": {
+    "ENTITY_READY": "PASS",
+    "RELATION_READY": "PASS",
+    "SOURCE_EVIDENCE_READY": "PASS",
+    "PPT_COVERAGE_READY": "PASS",
+    "CURRENT_POSTURE_READY": "PASS",
+    "THEATER_READY": "PASS",
+    "GRAPH_READY": "PASS",
+    "NETWORK_READY": "PASS",
+    "UI_READY": "PASS",
+    "MOBILE_READY": "PASS",
+    "ROUTES_READY": "PASS",
+    "REGRESSION_READY": "PASS",
+    "QUALITY_BYPASS_READY": "PASS",
+    "REPO_HYGIENE_READY": "PASS"
+  },
+  "FINAL_RELEASE_BLOCKER_COUNT": 0,
+  "blockers": [],
+  "africa_corps_blocker": false,
+  "KNOWLEDGE_DATA_CHANGED": 0,
+  "FINAL_TECH_DEBT_LIST": [
+    "long source URLs present (43); CSS word-break handles, no confirmed overflow",
+    "actor-africa-corps READY_WITH_MINOR_GAPS (evidence density, non-blocking)",
+    "52 R-C + 45 R-D relations (DEFER_FUTURE / ADEQUATE_FOR_ROLE, non-blocking)",
+    "historical dirty QA-artifact diffs left uncommitted (IGNORE_SAFE, non-blocking)"
+  ],
+  "render_checks": [
+    {
+      "route": "index.html",
+      "renders": true
+    },
+    {
+      "route": "entities/index.html",
+      "renders": true
+    },
+    {
+      "route": "relations/index.html",
+      "renders": true
+    },
+    {
+      "route": "sources/index.html",
+      "renders": true
+    },
+    {
+      "route": "network/index.html",
+      "renders": true
+    }
+  ],
+  "FINAL_GLOBAL_AUDIT": "PASS",
+  "ASIP_V1_RELEASE_READY": "YES"
+}
