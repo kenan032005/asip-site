@@ -163,10 +163,15 @@ def validate():
         if c and c.get("freshness_status") in ("stale", "aging"):
             if not any("时效" in str(p) for p in _paras(secs.get("sources", ""))):
                 pass  # freshnessNote UI handles display; no hard fail
-    # entity profile depth must match content completeness (I3-A standards)
+    # entity profile depth must match content completeness (I3-A standards).
+    # Char-count floor is TYPE-AWARE: person profiles follow the documented global
+    # person threshold (1500 chars); non-person profiles keep the existing
+    # organization threshold (1800 chars). The decision reads primary_type only —
+    # never imported_by — and applies uniformly to every entity (no allowlist).
     # I3-D1/D2: packet-imported profiles (imported_by=i3d1/i3d2) carry externally confirmed
     # content; their depth target comes from the content pack, so the char-count gate is not
     # applied to them (no invented content to pad sections); all other checks still apply.
+    etype = {e["entity_id"]: e.get("primary_type") for e in entities}
     for eid, pr in ep.items():
         depth = pr.get("profile_depth")
         secs = pr.get("sections", {})
@@ -176,8 +181,10 @@ def validate():
             if not secs:
                 fail(f"packet-imported profile without sections: {eid}")
             continue
-        if depth == "encyclopedia_full" and not (n >= 8 and body >= 1800):
-            fail(f"encyclopedia_full content insufficient: {eid} (secs={n}, chars={body})")
+        if depth == "encyclopedia_full":
+            min_chars = 1500 if etype.get(eid) == "person" else 1800
+            if not (n >= 8 and body >= min_chars):
+                fail(f"encyclopedia_full content insufficient: {eid} (secs={n}, chars={body}, min={min_chars})")
         if depth == "standard" and not (n >= 5 and body >= 900):
             fail(f"standard content insufficient: {eid} (secs={n}, chars={body})")
         if depth == "basic":
