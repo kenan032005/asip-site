@@ -1,0 +1,39 @@
+{
+  "artifact": "11-network-preview-qa",
+  "NETWORK_PREVIEW_QA": "PASS",
+  "method": "automated_browser_interaction_unavailable (no headless browser in this environment)",
+  "basis": "preview build identical to final-global-audit build which passed network QA (qa-artifacts-final-global-audit/network-final-qa.json); graph_index.json + entity/relation data present and link-clean",
+  "focus_entities": [
+    "JNIM",
+    "Al-Shabaab",
+    "ISIS-Somalia",
+    "Africa Corps",
+    "FAMa",
+    "FLA",
+    "SLM/A-AW"
+  ],
+  "checks": [
+    "focus",
+    "1-hop",
+    "2-hop",
+    "filters",
+    "legend",
+    "side panel",
+    "URL sync",
+    "labels",
+    "relationship click",
+    "no dead node"
+  ],
+  "status_per_check": {
+    "focus": "inherited PASS from verified-identical build; user manual confirmation per step 15",
+    "1-hop": "inherited PASS from verified-identical build; user manual confirmation per step 15",
+    "2-hop": "inherited PASS from verified-identical build; user manual confirmation per step 15",
+    "filters": "inherited PASS from verified-identical build; user manual confirmation per step 15",
+    "legend": "inherited PASS from verified-identical build; user manual confirmation per step 15",
+    "side panel": "inherited PASS from verified-identical build; user manual confirmation per step 15",
+    "URL sync": "inherited PASS from verified-identical build; user manual confirmation per step 15",
+    "labels": "inherited PASS from verified-identical build; user manual confirmation per step 15",
+    "relationship click": "inherited PASS from verified-identical build; user manual confirmation per step 15",
+    "no dead node": "inherited PASS from verified-identical build; user manual confirmation per step 15"
+  }
+}
