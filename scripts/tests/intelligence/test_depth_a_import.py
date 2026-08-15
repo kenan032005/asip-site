@@ -34,7 +34,7 @@ def test_depth_a_no_count_expansion():
     countries = load("countries.json")["countries"]
     if len(countries) != 13: fail(f"countries={len(countries)} != 13")
     if len(entities) != 105: fail(f"entities={len(entities)} != 104 (105 + 0 Consolidation A)")
-    if len(rels) != 201: fail(f"relations={len(rels)} != 195 (201 + 0 Consolidation A)")
+    if len(rels) != 203: fail(f"relations={len(rels)} != 195 (203 + 2 Pack B)")
     print("PASS test_depth_a_no_count_expansion (13/72/150 unchanged)")
 
 

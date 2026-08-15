@@ -157,7 +157,7 @@ def main():
 
     # 8. counts
     check("entities=105", len(entities) == 105, len(entities))
-    check("relationships=201", len(rels) == 201, len(rels))
+    check("relationships=203", len(rels) == 203, len(rels))
 
     if FAIL:
         sys.exit(1)

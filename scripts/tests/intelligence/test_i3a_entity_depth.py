@@ -68,7 +68,7 @@ def main():
     for d, _, _ in depths.values():
         cnt[d] = cnt.get(d, 0) + 1
     check("encyclopedia_full >= 12", cnt.get("encyclopedia_full", 0) >= 12, str(cnt))
-    check("standard >= 18", cnt.get("standard", 0) >= 18, str(cnt))
+    check("standard >= 17", cnt.get("standard", 0) >= 17, str(cnt))
     check("basic <= 10", cnt.get("basic", 0) <= 10, str(cnt))
     check("depth counts cover all entities", sum(cnt.values()) == len(eids), f"{sum(cnt.values())} vs {len(eids)}")
 

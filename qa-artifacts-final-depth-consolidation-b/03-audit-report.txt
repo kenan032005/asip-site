@@ -1,0 +1,47 @@
+C:\Users\kenan\WorkBuddy\clean\asip-pack-b-wt\scripts\qa\final_a_reaudit.py:718: SyntaxWarning: "is" with 'tuple' literal. Did you mean "=="?
+  unresolved = [p for p in final if p["canonical_resolution"] in (
+== AUDIT A: canonical/alias/identity ==
+   dup_ids=0 dup_slugs=0 alias_collisions=0 broken_alias=0
+== AUDIT B: entity depth ==
+   grades: {'A': 90, 'B': 15} | total 105
+== AUDIT C: freshness ==
+   classification: {'CURRENT_OK': 88, 'HISTORICAL_OK': 17}
+== AUDIT D: relationship depth ==
+   grades: {'R-A': 50, 'R-B': 56, 'R-C': 52, 'R-D': 45} | total 203
+== AUDIT E: test exemptions ==
+   downshift_exemptions=5 skip_xfail_markers=11 suspect=0
+== AUDIT F: sources/evidence ==
+   broken_src=0 orphan_evidence=0 unused_sources=51 dup_urls=0
+   low_evidence_entity=23 single_source=11 low_evidence_r3=0
+== AUDIT G: PPT coverage ==
+   total=62 resolved=62 unresolved=0 conflicts=0
+== AUDIT H: country/region ==
+   countries=13 regions=7 broken_country_ids=0
+== AUDIT I: graph/network ==
+   orphan_nodes=2 orphan_edges=0 self_loops=0 dup_edges=0
+== AUDIT K: metrics + top20 ==
+   entities=105 relations=203 sources=307 evidence=422
+== AUDIT L: consolidation candidates ==
+   P0=0 P1=97 P2=23
+
+== FINAL GATES ==
+   KNOWLEDGE_DATA_CHANGED = PENDING (post-audit hash comparison)
+   DUPLICATE_CANONICAL_ENTITIES = 0
+   BROKEN_ALIAS_TARGETS = 0
+   ORPHAN_RELATIONSHIPS = 0
+   ORPHAN_EVIDENCE = 0
+   PPT_NAMES_UNRESOLVED = 0
+   QUALITY_BYPASS_SUSPECT_COUNT = 0
+   ENTITY_GRADE_A_COUNT = 90
+   ENTITY_GRADE_B_COUNT = 15
+   ENTITY_GRADE_C_COUNT = 0
+   ENTITY_GRADE_D_COUNT = 0
+   RELATION_GRADE_A_COUNT = 50
+   RELATION_GRADE_B_COUNT = 56
+   RELATION_GRADE_C_COUNT = 52
+   RELATION_GRADE_D_COUNT = 45
+   P0_CONSOLIDATION_COUNT = 0
+   P1_CONSOLIDATION_COUNT = 97
+   P2_CONSOLIDATION_COUNT = 23
+
+AUDIT SCRIPTS COMPLETE (read-only; no knowledge data modified)

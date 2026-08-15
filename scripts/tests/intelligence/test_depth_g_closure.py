@@ -58,8 +58,8 @@ def sections_text(eid):
 print("== TEST 1: count invariants (no breadth expansion) ==")
 check("countries=13", len(countries) == 13, f"got {len(countries)}")
 check("entities=105", len(non_country) == 105, f"got {len(non_country)} (105 + 0 Consolidation A)")
-check("relationships=201", len(rels) == 201, f"got {len(rels)} (201 + 0 Consolidation A)")
-check("routes=333", metrics.get("route_count") == 333, f"got {metrics.get('route_count')} (333 + 0 Consolidation A)")
+check("relationships=203", len(rels) == 203, f"got {len(rels)} (201 + 0 Consolidation A)")
+check("routes=335", metrics.get("route_count") == 335, f"got {metrics.get('route_count')} (333 + 0 Consolidation A)")
 check("sources grew from 182", len(sources) >= 182, f"got {len(sources)}")
 check("evidence grew from 297", len(evidence) >= 297, f"got {len(evidence)}")
 
@@ -139,7 +139,7 @@ check("conflict edge hostile_to", conflict.get("relationship_type") == "hostile_
 check("conflict edge = R3", (rp.get("rel-jnim-is-conflict") or {}).get("relation_maturity")
       == "R3_FULL_RELATIONSHIP_INTELLIGENCE",
       str((rp.get("rel-jnim-is-conflict") or {}).get("relation_maturity")))
-check("relationship count unchanged at 201", len(rels) == 201)
+check("relationship count unchanged at 203", len(rels) == 203)
 
 print("== TEST 8: core relation overrides applied ==")
 imp = qa("depth-g-import-report.json")
@@ -166,7 +166,7 @@ for r in rels:
     t = (rp.get(r["relationship_id"]) or {}).get("relation_maturity")
     tiers[t] = tiers.get(t, 0) + 1
 check("all three tiers populated", len([k for k in tiers if k]) == 3, str(tiers))
-check("tier totals sum to 201", sum(v for k, v in tiers.items() if k) == 201, str(tiers))
+check("tier totals sum to 203", sum(v for k, v in tiers.items() if k) == 203, str(tiers))
 
 print("== TEST 10: summary-only re-audit + staleness handling ==")
 rc = qa("relation-closure-audit.json")
@@ -220,6 +220,10 @@ _EXP_A_ENTITY_DOWNSHIFT_EXEMPT = {
     # content; the Final Depth Consolidation Pack A (§13) enriches it back to
     # encyclopedia_full, so the downshift is superseded.
     "actor-dozos-of-macina": "E3_FULL_ENCYCLOPEDIA",
+    # Final Depth Consolidation Pack B: person-jafar-dicko was downshifted by
+    # Depth G for thin content; Pack B supplies an externally-confirmed
+    # encyclopedia_full dossier, superseding the downshift.
+    "person-jafar-dicko": "E3_FULL_ENCYCLOPEDIA",
 }
 for eid, mv in (led.get("entities") or {}).items():
     if eid in _EXP_A_ENTITY_DOWNSHIFT_EXEMPT:

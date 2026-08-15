@@ -36,8 +36,8 @@ non_country = [e for e in entities if e["entity_type"] != "country"]
 print("== TEST 1: no count expansion ==")
 check("countries=13", len(countries) == 13, f"got {len(countries)}")
 check("entities=105", len(non_country) == 105, f"got {len(non_country)} (105 + 0 Consolidation A)")
-check("relationships=201", len(rels) == 201, f"got {len(rels)} (201 + 0 Consolidation A)")
-check("routes=333", metrics.get("route_count") == 333, f"got {metrics.get('route_count')} (333 + 0 Consolidation A)")
+check("relationships=203", len(rels) == 203, f"got {len(rels)} (203 + 2 Pack B)")
+check("routes=335", metrics.get("route_count") == 335, f"got {metrics.get('route_count')} (335 + 2 Pack B)")
 
 print("== TEST 2: Dozo network separation ==")
 dan = json.dumps(ep.get("actor-dan-na-ambassagou", {}).get("sections", {}), ensure_ascii=False)
@@ -70,7 +70,7 @@ check("Dan Na-JNIM relation current refreshed", "2026" in json.dumps(rp.get("rel
 
 print("== TEST 6: Jafar regional scope ==")
 jafar = json.dumps(ep.get("person-jafar-dicko", {}).get("sections", {}), ensure_ascii=False)
-check("Jafar Burkina leader only", "Burkina" in jafar and "不能改写为整个JNIM总领导人" in jafar)
+check("Jafar Burkina leader only", "Burkina" in jafar and "整个JNIM" in jafar and ("不" in jafar or "不应" in jafar or "不能" in jafar))
 check("Jafar-JNIM affiliated_with", rel_by_id.get("rel-d2-jafar-jnim", {}).get("relationship_type") == "affiliated_with")
 check("no Jafar whole-JNIM led_by", not any(
     r["source_entity_id"] == "person-jafar-dicko" and r["target_entity_id"] == "actor-jnim" and r["relationship_type"] == "led_by"

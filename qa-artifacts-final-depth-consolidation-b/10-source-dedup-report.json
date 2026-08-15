@@ -1,0 +1,12 @@
+{
+  "source_addition_requests": 17,
+  "sources_added": 16,
+  "sources_deduplicated": 1,
+  "dedup_detail": {
+    "requested_source_id": "packb-mapping-militants-ansaroul",
+    "normalized_url_matched_existing": "expd-mapping-ansaroul-islam",
+    "action": "reuse existing source_id; remap all supplied references mechanically (no duplicate URL created)"
+  },
+  "mechanism": "apply_pack_b_prebuilt.py merges source_additions; before insert it compares normalized exact URL with existing sources and reuses the existing source_id, remapping _add-list references via source_map.",
+  "verification": "test_africa_evidence_quality dup_urls=0; no duplicate URLs in sources.json (307 sources)."
+}
