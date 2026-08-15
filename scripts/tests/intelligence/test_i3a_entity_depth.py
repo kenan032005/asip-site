@@ -72,13 +72,17 @@ def main():
     check("basic <= 10", cnt.get("basic", 0) <= 10, str(cnt))
     check("depth counts cover all entities", sum(cnt.values()) == len(eids), f"{sum(cnt.values())} vs {len(eids)}")
 
-    # depth must be backed by content (I3-D1/D2 packet-imported profiles carry externally
-    # confirmed content; their depth target comes from the pack, so the char-count gate
-    # is not applied to imported_by=i3d*, matching the build generator)
+    # depth must be backed by content. Char floor is TYPE-AWARE (person 1500 /
+    # non-person 1800), reading primary_type only — matching the build gate.
+    # I3-D1/D2 packet-imported profiles (imported_by=i3d*) carry externally confirmed
+    # content; their depth target comes from the pack, so the char-count gate is
+    # not applied to them.
+    etype = {e["entity_id"]: e.get("primary_type") for e in entities}
     for eid, (d, n, body) in depths.items():
         imported = str(profiles.get(eid, {}).get("imported_by", "")).startswith("i3d")
+        min_chars = 1500 if etype.get(eid) == "person" else 1800
         if d == "encyclopedia_full":
-            check(f"{eid}: encyclopedia content (>=8 secs, >=1800 chars)", imported or (n >= 8 and body >= 1800), f"secs={n}, chars={body}")
+            check(f"{eid}: encyclopedia content (>=8 secs, >={min_chars} chars)", imported or (n >= 8 and body >= min_chars), f"secs={n}, chars={body}")
         elif d == "standard":
             check(f"{eid}: standard content (>=5 secs, >=900 chars)", imported or (n >= 5 and body >= 900), f"secs={n}, chars={body}")
         elif d == "basic":

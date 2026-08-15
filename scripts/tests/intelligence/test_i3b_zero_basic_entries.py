@@ -62,11 +62,15 @@ def main():
     check("all entities at least standard", cnt.get("basic", 0) == 0 and sum(cnt.values()) == len(eids))
     check("no new empty shells: new entities standard or above",
           all(d in ("standard", "encyclopedia_full") for eid, (d, _, _) in depths.items() if eid.startswith(("actor-mali-army", "actor-burkina-army", "actor-vdp", "actor-cameroon-bir", "actor-ambazonia-network", "actor-endf", "actor-fano", "actor-ola", "actor-tanzania-tpdf", "actor-tdf"))))
-    # depth backed by content (I3-D1/D2 packet-imported profiles exempt, matching generator)
+    # depth backed by content. Char floor is TYPE-AWARE (person 1500 / non-person 1800),
+    # reading primary_type only — matching the build gate. I3-D1/D2 packet-imported
+    # profiles (imported_by=i3d*) are exempt, matching the generator.
+    etype = {e["entity_id"]: e.get("primary_type") for e in entities}
     for eid, (d, n, body) in depths.items():
         imported = str(profiles.get(eid, {}).get("imported_by", "")).startswith("i3d")
+        min_chars = 1500 if etype.get(eid) == "person" else 1800
         if d == "encyclopedia_full":
-            check(f"{eid}: ency content", imported or (n >= 8 and body >= 1800), f"secs={n}, chars={body}")
+            check(f"{eid}: ency content", imported or (n >= 8 and body >= min_chars), f"secs={n}, chars={body}")
         elif d == "standard":
             check(f"{eid}: std content", imported or (n >= 5 and body >= 900), f"secs={n}, chars={body}")
     if FAIL:
