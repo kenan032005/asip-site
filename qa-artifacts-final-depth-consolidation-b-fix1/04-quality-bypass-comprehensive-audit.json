@@ -1,0 +1,44 @@
+{
+  "artifact": "PACK_B_FIX1_QUALITY_BYPASS_COMPREHENSIVE_AUDIT",
+  "scope": "Any mechanism that lets an entity skip the normal depth rule via imported_by / stage name / specific ID / allowlist / waiver / exception branch.",
+  "PACK_B_TARGET_BYPASS": 0,
+  "QUALITY_BYPASS_SUSPECT_COUNT": 0,
+  "historical_legitimate_exceptions": [
+    {
+      "kind": "packet-import content exemption",
+      "location": "scripts/build_intelligence_africa.py:175",
+      "rule": "imported_by startswith i3d skips char gate",
+      "population": "i3d1 (depth_a_import) + i3d2 (depth_b/c/d/e/f_import) profiles",
+      "pack_b_target_included": false,
+      "status": "PRESERVED_AS_HISTORICAL (documented, not deleted this round)"
+    },
+    {
+      "kind": "entity truthful-downshift supersession",
+      "location": "scripts/tests/intelligence/test_depth_g_closure.py:218 _EXP_A_ENTITY_DOWNSHIFT_EXEMPT",
+      "rule": "entity downshift superseded by later encyclopedia_full enrichment",
+      "population": [
+        "actor-dozos-of-macina",
+        "person-jafar-dicko"
+      ],
+      "pack_b_target_included": true,
+      "note": "person-jafar-dicko downshift superseded by Pack B encyclopedia_full dossier",
+      "status": "LEGITIMATE_HISTORICAL_EXCEPTION"
+    },
+    {
+      "kind": "relation truthful-downshift supersession",
+      "location": "scripts/tests/intelligence/test_depth_g_closure.py:240 _EXP_A_REL_DOWNSHIFT_EXEMPT",
+      "rule": "relation downshift superseded by later R2/R3 dossier or relation removed",
+      "population": [
+        "rel-d1-ansaru-jas-split",
+        "rel-d1-ansaru-aqim-allegiance",
+        "rel-d1-ansaru-jnim-affiliation",
+        "rel-is-moz-islamic-state2",
+        "rel-d2-dozos-macina-amadou-led"
+      ],
+      "pack_b_target_included": false,
+      "status": "LEGITIMATE_HISTORICAL_EXCEPTION"
+    }
+  ],
+  "new_quality_bypass_introduced_by_pack_b": [],
+  "note": "Fix-1 removed the ONLY Pack-B-introduced bypass (imported_by=i3d-pack-b). No allowlist / waiver / target-specific threshold bypass remains. The person-vs-organization char floor is a GENERIC type-aware rule, not a bypass."
+}

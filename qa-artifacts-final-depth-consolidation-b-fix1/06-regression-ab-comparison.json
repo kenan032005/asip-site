@@ -1,0 +1,23 @@
+{
+  "artifact": "PACK_B_FIX1_REGRESSION_AB_COMPARISON",
+  "runner": "run_pack_b_fix1_regression.py (identical to post_consolidation_audit_p2_regression.py: discover intelligence/test_*.py + 2 EXTRA, subprocess, pass iff rc==0)",
+  "BASELINE": {
+    "ref": "cca534d",
+    "BASELINE_SUITES": 41,
+    "BASELINE_PASS": 7204,
+    "BASELINE_FAIL": 0,
+    "BASELINE_CASES": 7204,
+    "FULL_REGRESSION": "PASS"
+  },
+  "CANDIDATE": {
+    "ref": "HEAD (fix1 candidate)",
+    "CANDIDATE_SUITES": 41,
+    "CANDIDATE_PASS": 7310,
+    "CANDIDATE_FAIL": 0,
+    "CANDIDATE_CASES": 7310,
+    "FULL_REGRESSION": "PASS"
+  },
+  "NEW_FAILURES": 0,
+  "case_delta": 106,
+  "case_delta_reason": "Pack B added 2 relations + 16 sources + 17 evidence records + 11 encyclopedia_full profiles, which increased assertion counts; 0 new failures."
+}

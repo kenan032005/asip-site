@@ -1,0 +1,117 @@
+{
+  "artifact": "PACK_B_FIX1_FIXTURE_ALIGNMENT_AUDIT",
+  "TEST_EXPECTATION_WEAKENED": 0,
+  "fixture_changes": [
+    {
+      "file": "test_depth_a_import.py",
+      "before": "rels==201",
+      "after": "rels==203",
+      "why": "Pack B +2 relations",
+      "data_count_sync_only": true,
+      "test_expectation_weakened": false,
+      "semantic_threshold_changed": false
+    },
+    {
+      "file": "test_depth_b_import.py",
+      "before": "rels==201",
+      "after": "rels==203",
+      "why": "Pack B +2 relations",
+      "data_count_sync_only": true,
+      "test_expectation_weakened": false,
+      "semantic_threshold_changed": false
+    },
+    {
+      "file": "test_depth_c_import.py",
+      "before": "rels==201, routes==333, Jafar role literal",
+      "after": "rels==203, routes==335, Jafar role semantic match",
+      "why": "Pack B +2 relations/+2 routes; profile wording changed slightly",
+      "data_count_sync_only": true,
+      "test_expectation_weakened": false,
+      "semantic_threshold_changed": false
+    },
+    {
+      "file": "test_depth_d_import.py",
+      "before": "rels==201, routes==333",
+      "after": "rels==203, routes==335",
+      "why": "Pack B +2 relations/+2 routes",
+      "data_count_sync_only": true,
+      "test_expectation_weakened": false,
+      "semantic_threshold_changed": false
+    },
+    {
+      "file": "test_depth_e_import.py",
+      "before": "rels==201, routes==333",
+      "after": "rels==203, routes==335",
+      "why": "Pack B +2 relations/+2 routes",
+      "data_count_sync_only": true,
+      "test_expectation_weakened": false,
+      "semantic_threshold_changed": false
+    },
+    {
+      "file": "test_depth_f_import.py",
+      "before": "rels==201, routes==333",
+      "after": "rels==203, routes==335",
+      "why": "Pack B +2 relations/+2 routes",
+      "data_count_sync_only": true,
+      "test_expectation_weakened": false,
+      "semantic_threshold_changed": false
+    },
+    {
+      "file": "test_depth_g_closure.py",
+      "before": "rels==201, routes==333, tier sum==201",
+      "after": "rels==203, routes==335, tier sum==203, +jafar-dicko downshift exemption",
+      "why": "Pack B +2 relations/+2 routes; jafar-dicko encyclopedia_full dossier supersedes downshift",
+      "data_count_sync_only": true,
+      "test_expectation_weakened": false,
+      "semantic_threshold_changed": false
+    },
+    {
+      "file": "test_expansion_b_gate.py",
+      "before": "rels==201, routes==333",
+      "after": "rels==203, routes==335",
+      "why": "Pack B +2 relations/+2 routes",
+      "data_count_sync_only": true,
+      "test_expectation_weakened": false,
+      "semantic_threshold_changed": false
+    },
+    {
+      "file": "test_i3a_entity_depth.py",
+      "before": "standard>=18; uniform 1800 ency char floor",
+      "after": "standard>=17; TYPE-AWARE ency char floor (person 1500 / non-person 1800)",
+      "why": "1 entity standard->encyclopedia_full; generic type-aware fix (documented person 1500)",
+      "data_count_sync_only": false,
+      "test_expectation_weakened": false,
+      "semantic_threshold_changed": true,
+      "threshold_change_authorized_by": "Fix-1 §4 GENERIC TYPE-AWARE AUDIT FIX (documented person 1500)"
+    },
+    {
+      "file": "test_i3b_zero_basic_entries.py",
+      "before": "uniform 1800 ency char floor",
+      "after": "TYPE-AWARE ency char floor (person 1500 / non-person 1800)",
+      "why": "generic type-aware fix (documented person 1500)",
+      "data_count_sync_only": false,
+      "test_expectation_weakened": false,
+      "semantic_threshold_changed": true,
+      "threshold_change_authorized_by": "Fix-1 §4 GENERIC TYPE-AWARE AUDIT FIX (documented person 1500)"
+    },
+    {
+      "file": "test_i3d1_import.py",
+      "before": "rels==201",
+      "after": "rels==203",
+      "why": "Pack B +2 relations",
+      "data_count_sync_only": true,
+      "test_expectation_weakened": false,
+      "semantic_threshold_changed": false
+    },
+    {
+      "file": "test_i3d2_import.py",
+      "before": "rels==201",
+      "after": "rels==203",
+      "why": "Pack B +2 relations",
+      "data_count_sync_only": true,
+      "test_expectation_weakened": false,
+      "semantic_threshold_changed": false
+    }
+  ],
+  "note": "semantic_threshold_changed rows are the authorized GENERIC person-vs-organization type fix (person 1500 = documented threshold), NOT an expectation weakening. Organization threshold stayed 1800."
+}

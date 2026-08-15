@@ -1,0 +1,39 @@
+{
+  "artifact": "PACK_B_FIX1_REGRESSION_FAILURE_INVENTORY",
+  "prior_runner": "ad-hoc 66-item runner (all scripts/tests/**/*.py incl. Stage pipeline tests)",
+  "prior_totals": {
+    "total": 66,
+    "passed": 62,
+    "failed": 4
+  },
+  "failures": [
+    {
+      "suite": "intelligence/test_i3d1_import.py",
+      "failure": "AssertionError: relationships=203 != 201 (count pin stale after Pack B +2 relations)",
+      "classification": "NEW_PACK_B_FAILURE",
+      "affected_file": "scripts/tests/intelligence/test_i3d1_import.py",
+      "fix": "count pin 201 -> 203 (data_count_sync)"
+    },
+    {
+      "suite": "intelligence/test_i3d2_import.py",
+      "failure": "AssertionError: relationships=203 != 201 (count pin stale after Pack B +2 relations)",
+      "classification": "NEW_PACK_B_FAILURE",
+      "affected_file": "scripts/tests/intelligence/test_i3d2_import.py",
+      "fix": "count pin 201 -> 203 (data_count_sync)"
+    },
+    {
+      "suite": "tests/test_stage1_pipeline.py",
+      "failure": "local absolute-path scan finds hardcoded local paths in scripts/*.py (env/worktree artifact)",
+      "classification": "OUT_OF_SCOPE_PRE_EXISTING",
+      "affected_file": "scripts/tests/test_stage1_pipeline.py",
+      "fix": "none (Stage-1 pipeline test, outside intelligence regression; fails identically on baseline)"
+    },
+    {
+      "suite": "tests/test_stage25de_cloud_provider.py",
+      "failure": "(false positive) suite actually exits rc=0 with PASS=29 FAIL=0; prior runner mis-classified",
+      "classification": "FALSE_FAILURE_OUT_OF_SCOPE",
+      "affected_file": "scripts/tests/test_stage25de_cloud_provider.py",
+      "fix": "none (not a real failure; outside intelligence regression)"
+    }
+  ]
+}

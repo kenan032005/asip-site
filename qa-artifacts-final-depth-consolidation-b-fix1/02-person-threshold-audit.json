@@ -1,0 +1,274 @@
+{
+  "artifact": "PACK_B_FIX1_PERSON_THRESHOLD_AUDIT",
+  "person_count": 21,
+  "old_logic": "build gate: uniform 1800 chars for encyclopedia_full (person & org alike); audit grading already type-aware (person 1500/12, org 1800/14)",
+  "new_logic": "build gate: TYPE-AWARE char floor (person 1500, non-person 1800), reading primary_type only — identical to documented audit rule",
+  "documented_person_threshold": {
+    "chars": 1500,
+    "sections": 12,
+    "source": "final_a_reaudit.py audit_b; expansion_b_content_persons.py:6"
+  },
+  "documented_organization_threshold": {
+    "chars": 1800,
+    "sections": 14,
+    "source": "final_a_reaudit.py audit_b; expansion_b_content_orgs.py:6"
+  },
+  "all_person_pre_grades": [
+    {
+      "entity_id": "person-iyad-ag-ghali",
+      "grade": "A",
+      "body_chars": 2030,
+      "section_count": 18
+    },
+    {
+      "entity_id": "person-amadou-koufa",
+      "grade": "A",
+      "body_chars": 2240,
+      "section_count": 18
+    },
+    {
+      "entity_id": "person-abdel-fattah-al-burhan",
+      "grade": "A",
+      "body_chars": 2122,
+      "section_count": 17
+    },
+    {
+      "entity_id": "person-mohamed-hamdan-dagalo",
+      "grade": "A",
+      "body_chars": 2119,
+      "section_count": 18
+    },
+    {
+      "entity_id": "person-salva-kiir",
+      "grade": "A",
+      "body_chars": 3233,
+      "section_count": 20
+    },
+    {
+      "entity_id": "person-riek-machar",
+      "grade": "A",
+      "body_chars": 3662,
+      "section_count": 22
+    },
+    {
+      "entity_id": "person-abu-hanifa",
+      "grade": "A",
+      "body_chars": 1767,
+      "section_count": 16
+    },
+    {
+      "entity_id": "person-sadou-samahouna",
+      "grade": "A",
+      "body_chars": 1802,
+      "section_count": 29
+    },
+    {
+      "entity_id": "person-jafar-dicko",
+      "grade": "A",
+      "body_chars": 2111,
+      "section_count": 19
+    },
+    {
+      "entity_id": "person-ousmane-dicko",
+      "grade": "A",
+      "body_chars": 1807,
+      "section_count": 26
+    },
+    {
+      "entity_id": "person-ibrahim-malam-dicko",
+      "grade": "A",
+      "body_chars": 1818,
+      "section_count": 23
+    },
+    {
+      "entity_id": "person-youssouf-toloba",
+      "grade": "A",
+      "body_chars": 1831,
+      "section_count": 24
+    },
+    {
+      "entity_id": "person-ahmed-diriye",
+      "grade": "B",
+      "body_chars": 1909,
+      "section_count": 15
+    },
+    {
+      "entity_id": "person-abd-al-qadir-mumin",
+      "grade": "B",
+      "body_chars": 2045,
+      "section_count": 15
+    },
+    {
+      "entity_id": "person-abdirahman-fahiye",
+      "grade": "B",
+      "body_chars": 2233,
+      "section_count": 15
+    },
+    {
+      "entity_id": "person-seka-musa-baluku",
+      "grade": "B",
+      "body_chars": 2077,
+      "section_count": 13
+    },
+    {
+      "entity_id": "person-ali-ahmed-karti",
+      "grade": "B",
+      "body_chars": 2101,
+      "section_count": 13
+    },
+    {
+      "entity_id": "person-mahad-karate",
+      "grade": "B",
+      "body_chars": 1804,
+      "section_count": 15
+    },
+    {
+      "entity_id": "person-abdiweli-mohamed-yusuf",
+      "grade": "B",
+      "body_chars": 1837,
+      "section_count": 15
+    },
+    {
+      "entity_id": "person-meddie-nkalubo",
+      "grade": "B",
+      "body_chars": 1837,
+      "section_count": 15
+    },
+    {
+      "entity_id": "person-abu-zaid-talha",
+      "grade": "B",
+      "body_chars": 1838,
+      "section_count": 15
+    }
+  ],
+  "all_person_post_grades": [
+    {
+      "entity_id": "person-iyad-ag-ghali",
+      "grade": "A",
+      "body_chars": 2030,
+      "section_count": 18
+    },
+    {
+      "entity_id": "person-amadou-koufa",
+      "grade": "A",
+      "body_chars": 2240,
+      "section_count": 18
+    },
+    {
+      "entity_id": "person-abdel-fattah-al-burhan",
+      "grade": "A",
+      "body_chars": 2122,
+      "section_count": 17
+    },
+    {
+      "entity_id": "person-mohamed-hamdan-dagalo",
+      "grade": "A",
+      "body_chars": 2119,
+      "section_count": 18
+    },
+    {
+      "entity_id": "person-salva-kiir",
+      "grade": "A",
+      "body_chars": 3233,
+      "section_count": 20
+    },
+    {
+      "entity_id": "person-riek-machar",
+      "grade": "A",
+      "body_chars": 3662,
+      "section_count": 22
+    },
+    {
+      "entity_id": "person-abu-hanifa",
+      "grade": "A",
+      "body_chars": 1767,
+      "section_count": 16
+    },
+    {
+      "entity_id": "person-sadou-samahouna",
+      "grade": "A",
+      "body_chars": 1802,
+      "section_count": 29
+    },
+    {
+      "entity_id": "person-jafar-dicko",
+      "grade": "A",
+      "body_chars": 2111,
+      "section_count": 19
+    },
+    {
+      "entity_id": "person-ousmane-dicko",
+      "grade": "A",
+      "body_chars": 1807,
+      "section_count": 26
+    },
+    {
+      "entity_id": "person-ibrahim-malam-dicko",
+      "grade": "A",
+      "body_chars": 1818,
+      "section_count": 23
+    },
+    {
+      "entity_id": "person-youssouf-toloba",
+      "grade": "A",
+      "body_chars": 1831,
+      "section_count": 24
+    },
+    {
+      "entity_id": "person-ahmed-diriye",
+      "grade": "B",
+      "body_chars": 1909,
+      "section_count": 15
+    },
+    {
+      "entity_id": "person-abd-al-qadir-mumin",
+      "grade": "B",
+      "body_chars": 2045,
+      "section_count": 15
+    },
+    {
+      "entity_id": "person-abdirahman-fahiye",
+      "grade": "B",
+      "body_chars": 2233,
+      "section_count": 15
+    },
+    {
+      "entity_id": "person-seka-musa-baluku",
+      "grade": "B",
+      "body_chars": 2077,
+      "section_count": 13
+    },
+    {
+      "entity_id": "person-ali-ahmed-karti",
+      "grade": "B",
+      "body_chars": 2101,
+      "section_count": 13
+    },
+    {
+      "entity_id": "person-mahad-karate",
+      "grade": "B",
+      "body_chars": 1804,
+      "section_count": 15
+    },
+    {
+      "entity_id": "person-abdiweli-mohamed-yusuf",
+      "grade": "B",
+      "body_chars": 1837,
+      "section_count": 15
+    },
+    {
+      "entity_id": "person-meddie-nkalubo",
+      "grade": "B",
+      "body_chars": 1837,
+      "section_count": 15
+    },
+    {
+      "entity_id": "person-abu-zaid-talha",
+      "grade": "B",
+      "body_chars": 1838,
+      "section_count": 15
+    }
+  ],
+  "unexpected_grade_changes": [],
+  "note": "Audit grades are already type-aware and therefore UNCHANGED by Fix-1. The only behavior change is the BUILD gate, which now lets person-abu-hanifa (1767 chars, person) pass the documented 1500-char person floor instead of requiring the 1800-char organization floor. No organization standard was lowered."
+}

@@ -1,0 +1,35 @@
+{
+  "artifact": "PACK_B_FIX1_EXEMPTION_PATH_AUDIT",
+  "exemption_paths": [
+    {
+      "file": "scripts/build_intelligence_africa.py",
+      "line": "175 (validate())",
+      "function": "validate -> entity profile depth loop",
+      "condition": "str(pr.get('imported_by', '')).startswith('i3d') -> continue",
+      "affected_entities": "profiles with imported_by=i3d1 (depth_a_import.py), i3d2 (depth_b/c/d/e/f_import.py), and formerly i3d-pack-b (Pack B misuse)",
+      "reason_history": "Introduced for I3-D1/D2 packet-imported profiles whose content is externally confirmed; char-count gate skipped to avoid inventing padding content.",
+      "whether_pack_b_used_it": true,
+      "pack_b_usage": "11 Pack B targets were set imported_by=i3d-pack-b, which matched the i3d prefix and skipped the char gate (esp. person-abu-hanifa 1767 chars).",
+      "fix1_disposition": "11 targets restored to imported_by=final-depth-consolidation-pack-b; build gate made TYPE-AWARE (person 1500 / non-person 1800). i3d1/i3d2 historical exemption preserved (documented, not deleted)."
+    },
+    {
+      "file": "scripts/tests/intelligence/test_i3a_entity_depth.py",
+      "line": "79 (content-depth loop)",
+      "condition": "imported_by.startswith('i3d') -> skip char gate; uniform 1800 for encyclopedia_full",
+      "affected_entities": "person-abu-hanifa (1767) flagged as FAIL under uniform 1800",
+      "reason_history": "mirrors build gate; same i3d exemption + same type bug",
+      "whether_pack_b_used_it": true,
+      "fix1_disposition": "type-aware char floor (person 1500 / non-person 1800); i3d exemption preserved"
+    },
+    {
+      "file": "scripts/tests/intelligence/test_i3b_zero_basic_entries.py",
+      "line": "68 (content-depth loop)",
+      "condition": "imported_by.startswith('i3d') -> skip char gate; uniform 1800 for encyclopedia_full",
+      "affected_entities": "person-abu-hanifa (1767) flagged as FAIL under uniform 1800",
+      "reason_history": "mirrors build gate; same i3d exemption + same type bug",
+      "whether_pack_b_used_it": true,
+      "fix1_disposition": "type-aware char floor (person 1500 / non-person 1800); i3d exemption preserved"
+    }
+  ],
+  "PACK_B_TARGET_SPECIAL_EXEMPTION_COUNT": 0
+}
