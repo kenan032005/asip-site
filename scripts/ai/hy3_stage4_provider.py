@@ -168,6 +168,7 @@ class Hy3Stage4Provider(Stage4Provider, BaseAIProvider):
         # 更新索引
         self._index[event_id] = {
             "task_id": task_id,
+            "event_id": event_id,
             "content_hash": content_hash,
             "prompt_version": pv,
             "output_schema_version": self.output_schema_version,
@@ -197,7 +198,7 @@ class Hy3Stage4Provider(Stage4Provider, BaseAIProvider):
             "- producer_session_id: `%s`" % producer_session_id,
             "- created_at: %s" % datetime.now(timezone.utc).isoformat(),
             "- ai_root: `%s`" % str(self.ai_root),
-            "- expected_model: `%s`（WorkBuddy 内置模型标识，须与 ai_result.model 一致）"
+            "- expected_model: `%s`（WorkBuddy 队列消费者会话模型标识，须与 ai_result.model 一致）"
             % self.expected_model,
             "- handoff_provider: `%s`" % HANDOFF_PROVIDER,
             "- task_count: %d" % len(entries),
@@ -307,15 +308,29 @@ class Hy3Stage4Provider(Stage4Provider, BaseAIProvider):
 
 # ── CLI（生产端入队 + 状态）────────────────────────────────────
 def _load_canonical_eligible(min_word_count=30):
+    """加载 canonical 中满足资格的事件（供 CLI produce 使用）。
+
+    隔离判定：读取 data/canonical/quarantine.json 中 original_object_type=='event'
+    的条目，按其 original_id（EVT_ 或 legacy 格式）排除对应 canonical 事件。
+    """
     from .enrichment_eligibility import eligibility_status
     here = Path(__file__).resolve().parents[2]
     d = json.loads((here / "data" / "canonical" / "event_clusters.json").read_text(encoding="utf-8"))
     items = d.get("items", [])
     qids = set()
-    qp = here / "data" / "quarantine" / "quarantine.json"
+    qp = here / "data" / "canonical" / "quarantine.json"
     if qp.exists():
         q = json.loads(qp.read_text(encoding="utf-8"))
-        qids = set(q.get("quarantine_ids", []) or [])
+        for it in q.get("items", []):
+            if it.get("original_object_type") == "event":
+                oid = it.get("original_id")
+                if oid:
+                    qids.add(oid)
+    # legacy 格式隔离 id（如 EVT-2026-0720-007）映射到当前 event_id：
+    # eligibility_status 按 event.get("event_id") 判定，须一并纳入
+    for ev in items:
+        if ev.get("legacy_event_id") in qids:
+            qids.add(ev.get("event_id"))
     out = []
     for ev in items:
         st, _ = eligibility_status(ev, qids, min_word_count)

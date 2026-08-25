@@ -141,8 +141,8 @@ function eventCard(ev, opts) {
   const timeStr = cardTime(ev.published_time || ev.event_time);
   const timeEl = timeStr ? `<span class="ec-time">${timeStr}</span>` : "";
   return `<a class="panel ecard" href="${url}">
-    <div class="ec-title">${esc(ev.title_cn || ev.title_original)}</div>
-    ${ev.summary_cn ? `<div class="ec-summary">${esc(ev.summary_cn).slice(0, 180)}</div>` : ""}
+    <div class="ec-title">${esc(ev.title_zh || ev.title_cn || ev.title_original)}</div>
+    ${(ev.summary_zh || ev.summary_cn) ? `<div class="ec-summary">${esc(ev.summary_zh || ev.summary_cn).slice(0, 180)}</div>` : ""}
     <div class="ec-tags">${riskLabel}${tags.join("")}${china}${timeEl}</div>
   </a>`;
 }
