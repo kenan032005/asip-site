@@ -6,6 +6,16 @@ name: GLM Qualification (manual only)
 
 on:
   workflow_dispatch:
+    inputs:
+      mode:
+        description: 'qualification stage: smoke | golden8 | golden20'
+        required: true
+        default: golden8
+        type: choice
+        options:
+          - smoke
+          - golden8
+          - golden20
 
 concurrency:
   group: glm-qualification
@@ -51,33 +61,41 @@ jobs:
           assert d.get('result') == 'PASS', 'smoke test failed: %s' % d
           EOF
 
-      - name: Golden Set（20 条 Production Qualification）
+      - name: Golden Set（8 条第一 Gate / 20 条最终，按 mode）
         shell: bash
+        if: ${{ inputs.mode != 'smoke' }}
         run: |
-          python scripts/ai/glm_golden_set.py --provider glm47_flash --out docs/glm-golden-set.json
+          if [ "${{ inputs.mode }}" = "golden8" ]; then
+            python scripts/ai/glm_golden_set.py --provider glm47_flash --limit 8 --out docs/glm-golden-set.json
+          else
+            python scripts/ai/glm_golden_set.py --provider glm47_flash --out docs/glm-golden-set.json
+          fi
 
       - name: Quality Gate（§十九 硬性标准）
         shell: bash
+        if: ${{ inputs.mode != 'smoke' }}
         run: |
           python - <<'EOF'
           import json
           d = json.load(open('docs/glm-golden-set.json'))
           s = d['stats']
-          assert s['major_fabrication'] == 0, '重大事实编造 != 0'
+          assert s['major_fabrication'] == 0, '重大事实编造 != 0（含启发占位，语义由 artifact 人工复核）'
           assert s['country_error'] == 0, '国家错误 != 0'
-          assert s['magnitude_error'] == 0, '数字数量级错误 != 0'
+          assert s['magnitude_error'] == 0, '数字数量级错误 != 0（含启发占位，语义由 artifact 人工复核）'
           assert s['disease_name_error'] == 0, '疾病名称错误 != 0'
           assert s['attribution_loss'] == 0, '指控归因丢失 != 0'
+          assert s['disease_numeric_gate_failures'] == 0, '疾病数字 Evidence Gate 失败 != 0'
           rate = s['strict_json_pass'] / max(s['total'], 1)
           assert rate >= 0.95, 'strict JSON 成功率 < 95%%: %s' % rate
-          print('quality_gate=PASS strict_json_rate=%.2f' % rate)
+          print('quality_gate=PASS strict_json_rate=%.2f total=%d' % (rate, s['total']))
           EOF
 
       - name: Upload audit artifact（不部署）
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: glm-qualification-audit
           path: |
             docs/glm-smoke-test.json
             docs/glm-golden-set.json
-          if-no-files-found: error
+          if-no-files-found: warn
