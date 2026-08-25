@@ -85,6 +85,8 @@ def _provider(client, key="test-key"):
     prov.api_key = key  # 显式注入（不依赖真实 env）
     prov.credential_status = "present" if key else "missing"
     prov.provider_status = "ok" if key else "unavailable"
+    prov.inter_request_delay = 0  # 测试默认不节流
+    prov._inter_request_delay = 0
     return prov
 
 
@@ -211,6 +213,34 @@ class TestCircuitBreaker(unittest.TestCase):
         self.assertEqual(len(calls), n_before, "熔断后不得发送新请求")
         self.assertEqual(r["status"], GLM_STATUS_RETRYABLE)
         self.assertEqual(r["result"]["error"]["code"], "circuit_open")
+
+    def test_429_does_not_trip_circuit_breaker(self):
+        # 429 是限流（可恢复），连续多次也不应触发熔断
+        calls = []
+        client = lambda *a: (calls.append(1) or _http_error(429))
+        prov = _provider(client, key="k")
+        prov.max_retries = 0
+        prov.circuit_threshold = 3
+        for i in range(6):  # 超过阈值 3 的连续 429
+            r = prov.submit_task(_mk_task("t%d" % i))
+            self.assertEqual(r["status"], GLM_STATUS_RETRYABLE, "429 应为 retryable")
+            self.assertFalse(prov._breaker.is_open(), "429 不得触发熔断（第 %d 次）" % i)
+        self.assertEqual(len(calls), 6, "熔断未打开，6 次请求都应发送")
+
+    def test_inter_request_delay_throttles(self):
+        # 请求间节流：第二次提交距首次不足 delay 时应等待补足
+        ok_client = lambda *a: _http_ok()
+        prov = _provider(ok_client, key="k")
+        prov.max_retries = 0
+        prov.inter_request_delay = 10
+        prov._inter_request_delay = 10
+        with mock.patch("scripts.ai.providers.glm47_flash.time.sleep") as m_sleep:
+            prov.submit_task(_mk_task("a"))   # 首次：无等待
+            m_sleep.reset_mock()
+            prov.submit_task(_mk_task("b"))   # 第二次：需补足 ~10s
+        self.assertTrue(m_sleep.called, "请求间节流应触发 sleep")
+        sleeps = [c[0][0] for c in m_sleep.call_args_list if c[0][0] > 0]
+        self.assertTrue(any(s >= 9 for s in sleeps), "应等待接近 inter_request_delay（10s），实际 %s" % sleeps)
 
 
 class TestCacheIdempotency(unittest.TestCase):

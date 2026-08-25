@@ -72,9 +72,14 @@ class CircuitBreaker:
         self.open = False
 
     def record_failure(self):
+        # 仅 provider 级持续故障（5xx/timeout/connection）计数；429 限流不计数
         self.consecutive_failures += 1
         if self.consecutive_failures >= self.threshold:
             self.open = True
+
+    def record_soft_failure(self):
+        # 429 限流：可恢复，不计入连续故障（不触发熔断）
+        pass
 
     def is_open(self):
         return self.open
@@ -173,6 +178,8 @@ class Glm47FlashProvider(BaseAIProvider):
         self._last_usage = None
         self._last_returned_model = None
         self._run_started_at = None
+        self._last_request_at = None   # 上次真实 HTTP 请求时刻（请求间节流）
+        self._inter_request_delay = self.inter_request_delay
 
     # ── 配置 ──
     def _load_env(self, env=None):
@@ -185,6 +192,9 @@ class Glm47FlashProvider(BaseAIProvider):
         self.timeout = int(e.get("ASIP_GLM_TIMEOUT_SECONDS", "60"))
         self.circuit_threshold = int(
             e.get("ASIP_GLM_CIRCUIT_THRESHOLD", str(DEFAULT_CIRCUIT_THRESHOLD)))
+        # 请求间最小间隔（秒）：GLM-4.7-Flash 限流严格（实测 429），保守节流
+        self.inter_request_delay = float(
+            e.get("ASIP_GLM_INTER_REQUEST_DELAY_SECONDS", "60"))
 
     def validate_config(self):
         errors = []
@@ -232,6 +242,9 @@ class Glm47FlashProvider(BaseAIProvider):
         if result.get("status") == GLM_STATUS_SUCCEEDED:
             self._breaker.record_success()
             self._cache[cache_key] = result
+        elif (result.get("error") or {}).get("code") == "rate_limited_429":
+            # 429 限流：可恢复，不计入熔断计数
+            self._breaker.record_soft_failure()
         else:
             self._breaker.record_failure()
         return self._tasks[tid]
@@ -274,6 +287,11 @@ class Glm47FlashProvider(BaseAIProvider):
         attempt = 0
 
         while attempt <= self.max_retries:
+            # 请求间节流：距上次真实 HTTP 请求不足 inter_request_delay 则等待
+            if self._last_request_at is not None and self._inter_request_delay > 0:
+                elapsed = time.time() - self._last_request_at
+                if elapsed < self._inter_request_delay:
+                    time.sleep(self._inter_request_delay - elapsed)
             attempt += 1
             outcome, err_code = self._http_attempt(task)
             if outcome == "ok":
@@ -323,12 +341,14 @@ class Glm47FlashProvider(BaseAIProvider):
         }
         try:
             resp = self._do_post(url, payload, headers, self.timeout)
+            self._last_request_at = time.time()
         except urllib.error.HTTPError as e:
             self._last_status = e.code
             self._last_retry_after = _retry_after_of(e)
             self._last_parsed = None
             self._last_usage = None
             self._last_returned_model = None
+            self._last_request_at = time.time()
             outcome, code = classify_http_status(e.code)
             return outcome, code
         except (urllib.error.URLError, TimeoutError, ConnectionError, ssl.SSLError) as e:
@@ -336,6 +356,7 @@ class Glm47FlashProvider(BaseAIProvider):
             self._last_retry_after = None
             self._last_parsed = None
             self._last_usage = None
+            self._last_request_at = time.time()
             self._last_returned_model = None
             return "retryable", "connection_or_timeout"
         except Exception as e:  # 其他网络/解析异常
@@ -344,6 +365,7 @@ class Glm47FlashProvider(BaseAIProvider):
             self._last_parsed = None
             self._last_usage = None
             self._last_returned_model = None
+            self._last_request_at = time.time()
             return "retryable", "network_%s" % type(e).__name__
 
         body = resp.read().decode("utf-8") if hasattr(resp, "read") else resp
