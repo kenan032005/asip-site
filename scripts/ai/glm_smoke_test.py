@@ -60,24 +60,49 @@ def main():
     }, method="POST")
 
     import ssl
+    import time
     ctx = ssl.create_default_context()
-    try:
-        with urllib.request.urlopen(req, timeout=180, context=ctx) as resp:
-            body = resp.read().decode("utf-8")
-            status = resp.status
-    except urllib.error.HTTPError as e:
+    # 429 瞬时限流重试（最多 3 次，尊重 Retry-After；与 provider 行为一致）
+    max_attempts = 3
+    body = status = None
+    for attempt in range(1, max_attempts + 1):
+        try:
+            with urllib.request.urlopen(req, timeout=180, context=ctx) as resp:
+                body = resp.read().decode("utf-8")
+                status = resp.status
+            break
+        except urllib.error.HTTPError as e:
+            if e.code == 429 and attempt < max_attempts:
+                try:
+                    ra = int(float(e.headers.get("Retry-After", "0")))
+                except (TypeError, ValueError):
+                    ra = 0
+                time.sleep(ra or 30 * attempt)
+                continue
+            print(json.dumps({
+                "credential_status": "present",
+                "provider_status": "http_error",
+                "http_status": e.code,
+                "attempt_count": attempt,
+                "result": "FAIL",
+            }, ensure_ascii=False, indent=2))
+            return 1
+        except Exception as e:
+            if attempt < max_attempts:
+                time.sleep(20)
+                continue
+            print(json.dumps({
+                "credential_status": "present",
+                "provider_status": "connection_error",
+                "error": type(e).__name__,
+                "attempt_count": attempt,
+                "result": "FAIL",
+            }, ensure_ascii=False, indent=2))
+            return 1
+    if body is None:
         print(json.dumps({
             "credential_status": "present",
-            "provider_status": "http_error",
-            "http_status": e.code,
-            "result": "FAIL",
-        }, ensure_ascii=False, indent=2))
-        return 1
-    except Exception as e:
-        print(json.dumps({
-            "credential_status": "present",
-            "provider_status": "connection_error",
-            "error": type(e).__name__,
+            "provider_status": "retries_exhausted",
             "result": "FAIL",
         }, ensure_ascii=False, indent=2))
         return 1
