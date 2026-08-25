@@ -191,6 +191,8 @@ class Glm47FlashProvider(BaseAIProvider):
         self._last_usage = None
         self._last_returned_model = None
         self._run_started_at = None
+        self._last_malformed_preview = None   # 诊断：200 但 body 非 JSON 前 300 字符（安全截断）
+        self._last_content_preview = None     # 诊断：content 无法提取 JSON 前 300 字符（安全截断）
         self._last_request_at = None      # 上次请求「开始」时刻（start-to-start 节流）
         self._request_start_gap = None    # 遥测：上次请求开始→本次请求开始间隔（秒）
         self._rate_limit_until = None     # 全局限流冷却截止（绝对 epoch 秒）；之前不发请求
@@ -437,6 +439,8 @@ class Glm47FlashProvider(BaseAIProvider):
             self._last_parsed = None
             self._last_usage = None
             self._last_returned_model = None
+            self._last_malformed_preview = (
+                body[:300] if isinstance(body, str) else repr(body)[:300])
             return "retryable", "malformed_json"
 
         # OpenAI 兼容响应
@@ -451,6 +455,7 @@ class Glm47FlashProvider(BaseAIProvider):
                 self._last_parsed = None
                 self._last_usage = None
                 self._last_returned_model = data.get("model")
+                self._last_content_preview = content[:300]
                 return "retryable", "invalid_output_json"
             self._last_parsed = parsed
             self._last_returned_model = data.get("model")
@@ -517,9 +522,16 @@ class Glm47FlashProvider(BaseAIProvider):
             "estimated_cost": None,   # 无法从 provider 实际计费可靠计算 → null
             "usage_purpose": task.get("usage_purpose") or "production_qualification",
             "status": status,
-            "error": {"code": err_code, "message": err_msg} if err_code else None,
+            "error": None,
             "result": parsed or {},
         }
+        if err_code:
+            err = {"code": err_code, "message": err_msg}
+            if err_code == "malformed_json" and getattr(self, "_last_malformed_preview", None):
+                err["preview"] = self._last_malformed_preview
+            if err_code == "invalid_output_json" and getattr(self, "_last_content_preview", None):
+                err["preview"] = self._last_content_preview
+            r["error"] = err
         return r
 
 
