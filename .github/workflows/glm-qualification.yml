@@ -1,0 +1,101 @@
+name: GLM Qualification (manual only)
+
+# ASIP AI Provider Migration — GLM-4.7-Flash Production Qualification。
+# 仅 workflow_dispatch 手动触发；不 schedule、不 deploy、不修改 gh-pages。
+# 执行顺序：secret presence check → smoke test → golden set → quality gate → audit artifact。
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'qualification stage: smoke | golden8 | golden20'
+        required: true
+        default: golden8
+        type: choice
+        options:
+          - smoke
+          - golden8
+          - golden20
+
+concurrency:
+  group: glm-qualification
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    env:
+      ASIP_GLM_API_KEY: ${{ secrets.ASIP_GLM_API_KEY }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Secret presence check（绝不 echo / printenv / set -x）
+        shell: bash
+        env:
+          ASIP_GLM_API_KEY: ${{ secrets.ASIP_GLM_API_KEY }}
+        run: |
+          if [ -z "$ASIP_GLM_API_KEY" ]; then
+            echo "::error::ASIP_GLM_API_KEY not configured in GitHub Secrets"
+            exit 1
+          fi
+          echo "credential_status=present (value not printed)"
+
+      - name: Python setup
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Smoke test
+        shell: bash
+        run: |
+          python scripts/ai/glm_smoke_test.py | tee docs/glm-smoke-test.json
+          python - <<'EOF'
+          import json
+          d = json.load(open('docs/glm-smoke-test.json'))
+          assert d.get('result') == 'PASS', 'smoke test failed: %s' % d
+          EOF
+
+      - name: Golden Set（8 条第一 Gate / 20 条最终，按 mode）
+        shell: bash
+        if: ${{ inputs.mode != 'smoke' }}
+        run: |
+          if [ "${{ inputs.mode }}" = "golden8" ]; then
+            python scripts/ai/glm_golden_set.py --provider glm47_flash --limit 8 --out docs/glm-golden-set.json
+          else
+            python scripts/ai/glm_golden_set.py --provider glm47_flash --out docs/glm-golden-set.json
+          fi
+
+      - name: Quality Gate（§十九 硬性标准）
+        shell: bash
+        if: ${{ inputs.mode != 'smoke' }}
+        run: |
+          python - <<'EOF'
+          import json
+          d = json.load(open('docs/glm-golden-set.json'))
+          s = d['stats']
+          assert s['major_fabrication'] == 0, '重大事实编造 != 0（含启发占位，语义由 artifact 人工复核）'
+          assert s['country_error'] == 0, '国家错误 != 0'
+          assert s['magnitude_error'] == 0, '数字数量级错误 != 0（含启发占位，语义由 artifact 人工复核）'
+          assert s['disease_name_error'] == 0, '疾病名称错误 != 0'
+          assert s['attribution_loss'] == 0, '指控归因丢失 != 0'
+          assert s['disease_numeric_gate_failures'] == 0, '疾病数字 Evidence Gate 失败 != 0'
+          rate = s['strict_json_pass'] / max(s['total'], 1)
+          assert rate >= 0.95, 'strict JSON 成功率 < 95%%: %s' % rate
+          print('quality_gate=PASS strict_json_rate=%.2f total=%d' % (rate, s['total']))
+          EOF
+
+      - name: Upload audit artifact（不部署）
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: glm-qualification-audit
+          path: |
+            docs/glm-smoke-test.json
+            docs/glm-golden-set.json
+          if-no-files-found: warn
