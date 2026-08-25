@@ -72,12 +72,16 @@ def main():
                 status = resp.status
             break
         except urllib.error.HTTPError as e:
-            if e.code == 429 and attempt < max_attempts:
-                try:
-                    ra = int(float(e.headers.get("Retry-After", "0")))
-                except (TypeError, ValueError):
-                    ra = 0
-                time.sleep(ra or 30 * attempt)
+            # 429（限流）与 5xx（服务端瞬态）都可重试；401/403 直接失败
+            if e.code in (429, 500, 502, 503, 504) and attempt < max_attempts:
+                if e.code == 429:
+                    try:
+                        ra = int(float(e.headers.get("Retry-After", "0")))
+                    except (TypeError, ValueError):
+                        ra = 0
+                    time.sleep(ra or 30 * attempt)
+                else:
+                    time.sleep(20 * attempt)
                 continue
             print(json.dumps({
                 "credential_status": "present",
