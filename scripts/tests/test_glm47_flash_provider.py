@@ -13,6 +13,7 @@ import os
 import re
 import sys
 import tempfile
+import time
 import unittest
 from unittest import mock
 
@@ -85,8 +86,8 @@ def _provider(client, key="test-key"):
     prov.api_key = key  # 显式注入（不依赖真实 env）
     prov.credential_status = "present" if key else "missing"
     prov.provider_status = "ok" if key else "unavailable"
-    prov.inter_request_delay = 0  # 测试默认不节流
-    prov._inter_request_delay = 0
+    prov.min_request_interval = 0   # 测试默认不节流
+    prov.rate_limit_cooldown = 0
     return prov
 
 
@@ -180,6 +181,70 @@ class TestRetryAndRateLimit(unittest.TestCase):
         self.assertEqual(len(calls), 2, "应重试一次后成功")
         self.assertEqual(r["result"]["attempt_count"], 2)
 
+    def test_429_backoff_uses_longer_sequence(self):
+        # 429 专用退避 60/120/240（无 Retry-After 时）
+        self.assertGreaterEqual(backoff_seconds(1, jitter=False, kind="429"), 60)
+        self.assertGreaterEqual(backoff_seconds(2, jitter=False, kind="429"), 120)
+        self.assertGreaterEqual(backoff_seconds(3, jitter=False, kind="429"), 240)
+        self.assertLess(backoff_seconds(3, jitter=False, kind="429"), 241)
+
+    def test_429_sets_global_cooldown_with_retry_after(self):
+        # 429 + Retry-After=120 → provider 全局冷却截止 ≈ now+120
+        prov = _provider(lambda *a: _http_error(429, retry_after=120), key="k")
+        prov.max_retries = 0
+        before = time.time()
+        with mock.patch("scripts.ai.providers.glm47_flash.time.sleep"):
+            r = prov.submit_task(_mk_task())
+        self.assertEqual(r["status"], GLM_STATUS_RETRYABLE)
+        self.assertIsNotNone(prov._rate_limit_until)
+        wait = prov._rate_limit_until - before
+        self.assertTrue(115 <= wait <= 130, "Retry-After=120 应被尊重，实际 wait=%s" % wait)
+        self.assertEqual(prov.telemetry["retry_after_seen"], 1)
+        self.assertEqual(prov._last_retry_after_seconds, 120)
+
+    def test_429_without_retry_after_uses_fallback_cooldown(self):
+        # 无 Retry-After → fallback cooldown（默认 60）
+        prov = _provider(lambda *a: _http_error(429), key="k")
+        prov.max_retries = 0
+        prov.rate_limit_cooldown = 60
+        before = time.time()
+        with mock.patch("scripts.ai.providers.glm47_flash.time.sleep"):
+            r = prov.submit_task(_mk_task())
+        self.assertEqual(r["status"], GLM_STATUS_RETRYABLE)
+        wait = prov._rate_limit_until - before
+        self.assertTrue(55 <= wait <= 65, "fallback cooldown 应为 ~60，实际 %s" % wait)
+
+    def test_global_cooldown_blocks_followup_tasks(self):
+        # 429 后 rate_limit_until 在未来：后续任务提交前必须等待（sleep 补足）
+        calls = []
+        seq = [lambda: _http_error(429, retry_after=120), _http_ok]
+        def client(*a):
+            calls.append(1)
+            return seq[len(calls) - 1]()
+        prov = _provider(client, key="k")
+        prov.max_retries = 0
+        prov.min_request_interval = 0
+        with mock.patch("scripts.ai.providers.glm47_flash.time.sleep") as m_sleep:
+            r1 = prov.submit_task(_mk_task("a"))   # 429 → cooldown 到 now+120
+            m_sleep.reset_mock()
+            r2 = prov.submit_task(_mk_task("b"))   # 全局冷却中 → 先等，再发 → 成功
+        self.assertEqual(r1["status"], GLM_STATUS_RETRYABLE)
+        self.assertEqual(r2["status"], GLM_STATUS_SUCCEEDED, "冷却结束后应成功")
+        sleeps = [c[0][0] for c in m_sleep.call_args_list if c[0][0] > 0]
+        self.assertTrue(any(s >= 110 for s in sleeps),
+                        "后续任务应等待全局冷却（~120s），实际 %s" % sleeps)
+
+    def test_429_not_counted_as_hard_failure(self):
+        # 429 不进入 failure circuit counter
+        prov = _provider(lambda *a: _http_error(429), key="k")
+        prov.max_retries = 0
+        with mock.patch("scripts.ai.providers.glm47_flash.time.sleep"):
+            for i in range(6):
+                prov.submit_task(_mk_task("t%d" % i))
+        self.assertEqual(prov._breaker.consecutive_failures, 0,
+                         "429 不得增加 failure circuit counter")
+        self.assertFalse(prov._breaker.is_open())
+
 
 class TestCircuitBreaker(unittest.TestCase):
     def test_open_after_threshold(self):
@@ -214,6 +279,30 @@ class TestCircuitBreaker(unittest.TestCase):
         self.assertEqual(r["status"], GLM_STATUS_RETRYABLE)
         self.assertEqual(r["result"]["error"]["code"], "circuit_open")
 
+    def test_5xx_trips_failure_circuit(self):
+        # 5xx 计入 provider failure circuit
+        with mock.patch.dict(os.environ, {"ASIP_GLM_CIRCUIT_THRESHOLD": "3"}):
+            prov = _provider(lambda *a: _http_error(503), key="k")
+            prov.max_retries = 0
+            with mock.patch("scripts.ai.providers.glm47_flash.time.sleep"):
+                for _ in range(3):
+                    prov.submit_task(_mk_task())
+        self.assertTrue(prov._breaker.is_open(), "连续 5xx 应触发熔断")
+        self.assertEqual(prov.telemetry["http5xx_count"], 3)
+
+    def test_genuine_timeout_trips_failure_circuit(self):
+        # genuine timeout（connection_or_timeout）计入 failure circuit
+        def timeout_client(*a):
+            raise TimeoutError("read timed out")
+        with mock.patch.dict(os.environ, {"ASIP_GLM_CIRCUIT_THRESHOLD": "2"}):
+            prov = _provider(timeout_client, key="k")
+            prov.max_retries = 0
+            with mock.patch("scripts.ai.providers.glm47_flash.time.sleep"):
+                prov.submit_task(_mk_task("a"))
+                prov.submit_task(_mk_task("b"))
+        self.assertTrue(prov._breaker.is_open(), "连续 genuine timeout 应触发熔断")
+        self.assertEqual(prov.telemetry["timeout_count"], 2)
+
     def test_429_does_not_trip_circuit_breaker(self):
         # 429 是限流（可恢复），连续多次也不应触发熔断
         calls = []
@@ -228,19 +317,19 @@ class TestCircuitBreaker(unittest.TestCase):
         self.assertEqual(len(calls), 6, "熔断未打开，6 次请求都应发送")
 
     def test_inter_request_delay_throttles(self):
-        # 请求间节流：第二次提交距首次不足 delay 时应等待补足
+        # 请求间最小间隔（start-to-start）：第二次提交距首次不足 interval 时应等待补足
         ok_client = lambda *a: _http_ok()
         prov = _provider(ok_client, key="k")
         prov.max_retries = 0
-        prov.inter_request_delay = 10
-        prov._inter_request_delay = 10
+        prov.min_request_interval = 90
         with mock.patch("scripts.ai.providers.glm47_flash.time.sleep") as m_sleep:
             prov.submit_task(_mk_task("a"))   # 首次：无等待
             m_sleep.reset_mock()
-            prov.submit_task(_mk_task("b"))   # 第二次：需补足 ~10s
-        self.assertTrue(m_sleep.called, "请求间节流应触发 sleep")
+            prov.submit_task(_mk_task("b"))   # 第二次：需补足 ~90s
+        self.assertTrue(m_sleep.called, "请求间最小间隔应触发 sleep")
         sleeps = [c[0][0] for c in m_sleep.call_args_list if c[0][0] > 0]
-        self.assertTrue(any(s >= 9 for s in sleeps), "应等待接近 inter_request_delay（10s），实际 %s" % sleeps)
+        self.assertTrue(any(s >= 89 for s in sleeps),
+                        "应等待接近 min_request_interval（90s），实际 %s" % sleeps)
 
 
 class TestCacheIdempotency(unittest.TestCase):

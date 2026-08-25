@@ -29,6 +29,7 @@ import argparse
 import json
 import os
 import sys
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -153,6 +154,39 @@ def _int(v):
         return int(float(v))
     except (TypeError, ValueError):
         return None
+
+
+def _summary_of(sample):
+    """构造可审计的源摘要（不含敏感信息）。"""
+    src_ev = sample["event"]
+    summary = {
+        "event_id": src_ev.get("event_id") or src_ev.get("disease_event_id"),
+        "category": sample["category"],
+        "country_code": src_ev.get("country_code"),
+        "country_iso3": src_ev.get("country_iso3"),
+        "title": (src_ev.get("title_original") or src_ev.get("disease_name_en") or "")[:120],
+    }
+    if sample["is_disease"]:
+        summary["disease_id"] = src_ev.get("disease_id")
+        summary["disease_name_en"] = src_ev.get("disease_name_en")
+        summary["disease_name_zh"] = src_ev.get("disease_name_zh")
+        summary["disease_aliases"] = src_ev.get("aliases") or []
+        for f in NUMERIC_FIELDS:
+            summary[f] = src_ev.get(f)
+        summary["has_uncertainties"] = bool(src_ev.get("uncertainties"))
+        summary["report_date"] = src_ev.get("report_date")
+    else:
+        summary["has_uncertainties"] = bool(src_ev.get("uncertainties"))
+    return summary
+
+
+def _meta_of(result):
+    """提取 result 的安全审计字段（不含 credential/header）。"""
+    return {k: result.get(k) for k in (
+        "http_status", "attempt_count", "latency_ms",
+        "requested_model", "returned_model",
+        "token_usage_available", "input_tokens", "output_tokens",
+        "total_tokens", "error") if k in result}
 
 
 def _attribution_in_text(text):
@@ -286,46 +320,54 @@ def main(argv=None):
             return 2
 
     rows = []
+    run_started = time.time()
+    max_runtime = float(
+        os.environ.get("ASIP_GLM_QUALIFICATION_MAX_RUNTIME_MINUTES", "45")) * 60
+    stopped_early = None
     for s in samples:
+        # §七 wall-clock 保护：超过上限安全停止，剩余任务保持 retryable
+        if time.time() - run_started > max_runtime:
+            stopped_early = "max_runtime_%ds" % int(max_runtime)
+            break
         task = make_task(s, getattr(provider, "model", "glm-4.7-flash"))
         out = provider.submit_task(task)
         result = out.get("result") or {}
         parsed = result.get("result") or {}
-        src_ev = s["event"]
-        summary = {
-            "event_id": src_ev.get("event_id") or src_ev.get("disease_event_id"),
-            "category": s["category"],
-            "country_code": src_ev.get("country_code"),
-            "country_iso3": src_ev.get("country_iso3"),
-            "title": (src_ev.get("title_original") or src_ev.get("disease_name_en") or "")[:120],
-        }
-        if s["is_disease"]:
-            summary["disease_id"] = src_ev.get("disease_id")
-            summary["disease_name_en"] = src_ev.get("disease_name_en")
-            summary["disease_name_zh"] = src_ev.get("disease_name_zh")
-            summary["disease_aliases"] = src_ev.get("aliases") or []
-            for f in NUMERIC_FIELDS:
-                summary[f] = src_ev.get(f)
-            summary["has_uncertainties"] = bool(src_ev.get("uncertainties"))
-            summary["report_date"] = src_ev.get("report_date")
-        else:
-            summary["has_uncertainties"] = bool(src_ev.get("uncertainties"))
+        # §一 401/403 credential blocked → 直接停止当前 run（不掩盖、不继续）
+        if out.get("status") == "blocked":
+            rows.append({
+                "category": s["category"],
+                "is_disease": s["is_disease"],
+                "task_id": task["task_id"],
+                "provider_status": "blocked",
+                "raw_status": result.get("status"),
+                "source_summary": _summary_of(s),
+                "parsed": None,
+                "meta": _meta_of(result),
+            })
+            stopped_early = "credential_blocked"
+            break
         rows.append({
             "category": s["category"],
             "is_disease": s["is_disease"],
             "task_id": task["task_id"],
             "provider_status": out.get("status"),
             "raw_status": result.get("status"),
-            "source_summary": summary,
+            "source_summary": _summary_of(s),
             "parsed": parsed,
-            "meta": {k: result.get(k) for k in (
-                "http_status", "attempt_count", "latency_ms",
-                "requested_model", "returned_model",
-                "token_usage_available", "input_tokens", "output_tokens",
-                "total_tokens", "error") if k in result},
+            "meta": _meta_of(result),
         })
 
     stats = run_quality_checks(rows)
+    telemetry = None
+    if not args.mock and hasattr(provider, "telemetry"):
+        tel = dict(provider.telemetry)
+        tel["retry_after_seconds"] = getattr(provider, "_last_retry_after_seconds", None)
+        tel["request_start_gap_seconds"] = getattr(provider, "_request_start_gap", None)
+        tel["rate_limit_until_remaining"] = (
+            max(0.0, (provider._rate_limit_until or 0) - time.time())
+            if getattr(provider, "_rate_limit_until", None) else 0.0)
+        telemetry = tel
     doc = {
         "provider": args.provider,
         "mock": args.mock,
@@ -333,6 +375,9 @@ def main(argv=None):
         "usage_purpose": "production_qualification",
         "rows": rows,
         "stats": stats,
+        "telemetry": telemetry,
+        "stopped_early": stopped_early,
+        "total_elapsed_s": round(time.time() - run_started, 1),
         "strict_json_rate": round(stats["strict_json_pass"] / max(len(rows), 1), 4),
         "note": "major_fabrication / magnitude_error 由人工语义复核补充；其余为确定性/保守启发计数。",
     }

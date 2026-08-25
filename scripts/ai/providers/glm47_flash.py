@@ -29,12 +29,15 @@ attempt_count、token_usage_available、billing_mode=free_currently、
 estimated_cost=null（不得硬编码 0 成本）。
 """
 
+import http.client
 import json
 import os
 import random
+import socket
 import ssl
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 
 from ..provider import BaseAIProvider
@@ -52,8 +55,14 @@ GLM_TASK_STATUSES = {
 }
 
 # §十 退避（秒）
-BACKOFF_SECONDS = (5, 15, 45)
+BACKOFF_SECONDS = (5, 15, 45)        # 5xx / connection / timeout
+BACKOFF_429_SECONDS = (60, 120, 240) # 429 限流专用退避（无 Retry-After 时）
 DEFAULT_CIRCUIT_THRESHOLD = 5
+# 限流友好默认值（env 可覆盖）
+DEFAULT_MIN_REQUEST_INTERVAL = 90    # 请求开始→请求开始 最小间隔（秒）
+DEFAULT_CONNECT_TIMEOUT = 20         # connect 阶段超时（秒）
+DEFAULT_READ_TIMEOUT = 180           # read/request 阶段超时（秒）
+DEFAULT_RATE_LIMIT_COOLDOWN = 60     # 429 无 Retry-After 时的全局冷却（秒）
 
 # 唯一 Secret 名（只写名称，不写值）
 SECRET_NAME = "ASIP_GLM_API_KEY"
@@ -88,16 +97,20 @@ class CircuitBreaker:
         return "degraded" if self.open else "ok"
 
 
-def backoff_seconds(attempt, retry_after=None, jitter=True):
+def backoff_seconds(attempt, retry_after=None, jitter=True, kind="default"):
     """第 attempt 次重试前的退避秒数（1-based attempt）。
 
-    优先尊重服务端 Retry-After；否则用 5/15/45；允许 ±20% jitter。
+    优先级：服务端 Retry-After > 类型专用退避序列。
+    - kind="429"：60/120/240（限流需更长冷却）；
+    - kind="default"：5/15/45（5xx/connection/timeout）。
+    允许 ±20% jitter。
     """
     if retry_after and retry_after > 0:
         base = float(retry_after)
     else:
-        idx = min(max(attempt - 1, 0), len(BACKOFF_SECONDS) - 1)
-        base = float(BACKOFF_SECONDS[idx])
+        seq = BACKOFF_429_SECONDS if kind == "429" else BACKOFF_SECONDS
+        idx = min(max(attempt - 1, 0), len(seq) - 1)
+        base = float(seq[idx])
     if jitter:
         return round(base * random.uniform(0.8, 1.2), 2)
     return round(base, 2)
@@ -178,8 +191,18 @@ class Glm47FlashProvider(BaseAIProvider):
         self._last_usage = None
         self._last_returned_model = None
         self._run_started_at = None
-        self._last_request_at = None   # 上次真实 HTTP 请求时刻（请求间节流）
-        self._inter_request_delay = self.inter_request_delay
+        self._last_request_at = None      # 上次请求「开始」时刻（start-to-start 节流）
+        self._request_start_gap = None    # 遥测：上次请求开始→本次请求开始间隔（秒）
+        self._rate_limit_until = None     # 全局限流冷却截止（绝对 epoch 秒）；之前不发请求
+        self._last_retry_after_seconds = None  # 遥测：最近一次 Retry-After（秒）
+        # 遥测计数（安全字段，不记录 credential/header）
+        self.telemetry = {
+            "rate_limited_count": 0,
+            "retry_after_seen": 0,
+            "cooldown_seconds": 0.0,
+            "timeout_count": 0,
+            "http5xx_count": 0,
+        }
 
     # ── 配置 ──
     def _load_env(self, env=None):
@@ -189,12 +212,21 @@ class Glm47FlashProvider(BaseAIProvider):
         self.base_url = e.get(
             "ASIP_GLM_BASE_URL", "https://open.bigmodel.cn/api/paas/v4").rstrip("/")
         self.max_retries = int(e.get("ASIP_GLM_MAX_RETRIES", "3"))
-        self.timeout = int(e.get("ASIP_GLM_TIMEOUT_SECONDS", "60"))
         self.circuit_threshold = int(
             e.get("ASIP_GLM_CIRCUIT_THRESHOLD", str(DEFAULT_CIRCUIT_THRESHOLD)))
-        # 请求间最小间隔（秒）：GLM-4.7-Flash 限流严格（实测 429），保守节流
-        self.inter_request_delay = float(
-            e.get("ASIP_GLM_INTER_REQUEST_DELAY_SECONDS", "60"))
+        # 请求间最小间隔（秒）：按「上一次请求开始 → 下一次请求开始」计算
+        self.min_request_interval = float(
+            e.get("ASIP_GLM_MIN_REQUEST_INTERVAL_SECONDS",
+                  str(DEFAULT_MIN_REQUEST_INTERVAL)))
+        # 429 无 Retry-After 时的全局冷却（秒）
+        self.rate_limit_cooldown = float(
+            e.get("ASIP_GLM_RATE_LIMIT_COOLDOWN_SECONDS",
+                  str(DEFAULT_RATE_LIMIT_COOLDOWN)))
+        # connect / read 超时分离（长响应场景）
+        self.connect_timeout = float(
+            e.get("ASIP_GLM_CONNECT_TIMEOUT_SECONDS", str(DEFAULT_CONNECT_TIMEOUT)))
+        self.read_timeout = float(
+            e.get("ASIP_GLM_READ_TIMEOUT_SECONDS", str(DEFAULT_READ_TIMEOUT)))
 
     def validate_config(self):
         errors = []
@@ -287,12 +319,20 @@ class Glm47FlashProvider(BaseAIProvider):
         attempt = 0
 
         while attempt <= self.max_retries:
-            # 请求间节流：距上次真实 HTTP 请求不足 inter_request_delay 则等待
-            if self._last_request_at is not None and self._inter_request_delay > 0:
+            # 全局 Rate Limit Cooldown：限流截止前不再发任何请求（§三）
+            if self._rate_limit_until is not None:
+                wait = self._rate_limit_until - time.time()
+                if wait > 0:
+                    time.sleep(wait)
+                self._rate_limit_until = None
+            # 请求间最小间隔（start-to-start，§二）：不足则补足
+            if self._last_request_at is not None and self.min_request_interval > 0:
                 elapsed = time.time() - self._last_request_at
-                if elapsed < self._inter_request_delay:
-                    time.sleep(self._inter_request_delay - elapsed)
+                if elapsed < self.min_request_interval:
+                    time.sleep(self.min_request_interval - elapsed)
+                self._request_start_gap = max(elapsed, self.min_request_interval)
             attempt += 1
+            self._last_request_at = time.time()  # 记录本次请求「开始」时刻
             outcome, err_code = self._http_attempt(task)
             if outcome == "ok":
                 finished = time.time()
@@ -305,6 +345,7 @@ class Glm47FlashProvider(BaseAIProvider):
                     parsed=self._last_parsed,
                     finished_at=finished)
             if outcome == "blocked":
+                # 401/403：credential/config blocked，直接停止（不掩盖、不重试）
                 return self._mk_result(task, GLM_STATUS_BLOCKED, err_code,
                                        "credential or permission error",
                                        http_status=self._last_status,
@@ -315,7 +356,12 @@ class Glm47FlashProvider(BaseAIProvider):
                                        "retries exhausted",
                                        http_status=self._last_status,
                                        attempt_count=attempt)
-            time.sleep(backoff_seconds(attempt, retry_after=self._last_retry_after))
+            # 429 走全局冷却 + 专用退避；5xx/timeout 用短退避
+            if err_code == "rate_limited_429":
+                time.sleep(backoff_seconds(attempt, retry_after=self._last_retry_after,
+                                           kind="429"))
+            else:
+                time.sleep(backoff_seconds(attempt, retry_after=self._last_retry_after))
         # 不可达（理论不会到）
         return self._mk_result(task, GLM_STATUS_RETRYABLE, "retry_exhausted",
                                "unreachable", http_status=None, attempt_count=attempt)
@@ -340,24 +386,39 @@ class Glm47FlashProvider(BaseAIProvider):
             "Authorization": "Bearer " + self.api_key,
         }
         try:
-            resp = self._do_post(url, payload, headers, self.timeout)
-            self._last_request_at = time.time()
+            resp = self._do_post(url, payload, headers, self.read_timeout)
+            # _last_request_at 已在 _call_api 请求开始时记录（start-to-start 语义）
         except urllib.error.HTTPError as e:
             self._last_status = e.code
             self._last_retry_after = _retry_after_of(e)
             self._last_parsed = None
             self._last_usage = None
             self._last_returned_model = None
-            self._last_request_at = time.time()
             outcome, code = classify_http_status(e.code)
+            if e.code == 429:
+                # 全局 Rate Limit Cooldown：设置截止时间，后续任务不得立即请求
+                self.telemetry["rate_limited_count"] += 1
+                ra = self._last_retry_after
+                if ra and ra > 0:
+                    self._rate_limit_until = time.time() + ra
+                    self.telemetry["retry_after_seen"] += 1
+                    self._last_retry_after_seconds = ra
+                else:
+                    self._rate_limit_until = time.time() + self.rate_limit_cooldown
+                self.telemetry["cooldown_seconds"] = (
+                    self._rate_limit_until - time.time())
+            elif e.code >= 500:
+                self.telemetry["http5xx_count"] += 1
             return outcome, code
         except (urllib.error.URLError, TimeoutError, ConnectionError, ssl.SSLError) as e:
             self._last_status = None
             self._last_retry_after = None
             self._last_parsed = None
             self._last_usage = None
-            self._last_request_at = time.time()
             self._last_returned_model = None
+            if isinstance(e, (TimeoutError, ssl.SSLError)) or (
+                    isinstance(e, urllib.error.URLError) and isinstance(e.reason, (TimeoutError, socket.timeout))):
+                self.telemetry["timeout_count"] += 1
             return "retryable", "connection_or_timeout"
         except Exception as e:  # 其他网络/解析异常
             self._last_status = None
@@ -365,7 +426,6 @@ class Glm47FlashProvider(BaseAIProvider):
             self._last_parsed = None
             self._last_usage = None
             self._last_returned_model = None
-            self._last_request_at = time.time()
             return "retryable", "network_%s" % type(e).__name__
 
         body = resp.read().decode("utf-8") if hasattr(resp, "read") else resp
@@ -407,13 +467,30 @@ class Glm47FlashProvider(BaseAIProvider):
             return "retryable", "invalid_response_shape"
 
     def _do_post(self, url, payload, headers, timeout):
-        """默认 urllib POST；测试可注入 http_client。"""
+        """POST；timeout 参数 = read 超时；connect 用 self.connect_timeout 分离。
+
+        测试可注入 http_client(url, payload, headers, timeout)。
+        """
         if self._http is not None:
             return self._http(url, payload, headers, timeout)
-        req = urllib.request.Request(url, data=payload, headers=headers, method="POST")
+        parsed = urllib.parse.urlparse(url)
+        host = parsed.hostname or ""
+        port = parsed.port or (443 if parsed.scheme == "https" else 80)
         ctx = ssl.create_default_context()
-        with urllib.request.urlopen(req, timeout=timeout, context=ctx) as resp:
-            return resp
+        conn = http.client.HTTPSConnection(
+            host, port, timeout=self.connect_timeout, context=ctx)
+        try:
+            conn.connect()
+            if conn.sock is not None:
+                conn.sock.settimeout(timeout)  # read 阶段超时
+            path = parsed.path or "/"
+            if parsed.query:
+                path += "?" + parsed.query
+            conn.request("POST", path, body=payload, headers=headers)
+            return conn.getresponse()
+        except Exception:
+            conn.close()
+            raise
 
     # ── 结果构造（§十四 审计字段）──
     def _mk_result(self, task, status, err_code, err_msg, http_status,
