@@ -15,15 +15,24 @@ user 消息中的 JSON 是原始事件数据（含标题、正文、国家、时
 必须严格输出以下结构的 JSON 对象，字段名与类型完全一致：
 
 {
+  "source_language": "原文语言代码（如 fr / en）；无法确定则为 null",
   "title_zh": "中文标题（字符串）",
   "summary_zh": "中文摘要（字符串，2-4 句）",
-  "event_type": "事件类型字符串，如 terrorism / civil_unrest / other_security / public_health / economic / natural_disaster",
+  "event_type": "必须是以下枚举之一：armed_conflict / terrorism / civil_unrest / political_instability / crime_kidnapping / border_security / transport_disruption / infrastructure_incident / natural_disaster / other_security；公共卫生事件（如疫情）用 other_security",
   "country_iso3": "ISO3 国家代码（如 TCD）；无法确定则为 null",
-  "location": {"name": "地点名", "admin1": "一级行政区或 null", "admin2": "二级行政区或 null"},
-  "key_facts": ["关键事实数组，每项一句话，保留可追溯原文证据"],
-  "uncertainties": ["未证实信息数组；无则 []"],
-  "security_relevance": "none 或 indirect 或 direct",
-  "classification_confidence": 0.0 到 1.0 之间的数字
+  "location": {
+    "country_iso3": "ISO3 国家代码",
+    "admin1": "一级行政区或 null",
+    "city": "城市或 null",
+    "site": "具体地点/场所或 null",
+    "raw_text": "原文地点描述（字符串）"
+  },
+  "key_facts": [
+    {"fact": "关键事实一句话（≥5 字符）", "evidence_field": "证据来源字段，必须是 title_original / body_extracted / event_time / location / source_links 之一", "evidence_excerpt": "原文对应片段（≤300 字符）"}
+  ],
+  "uncertainties": ["未证实信息字符串数组；无则 []"],
+  "security_relevance": "必须是 none 或 indirect 或 direct 之一",
+  "classification_confidence": 0 到 100 之间的整数（不是小数）
 }
 
 ## RULES
@@ -45,4 +54,4 @@ INPUT:
 {"country_code":"AAA","event_time":"2026-08-01T00:00:00+08:00","title_original":"Protest in Capital Y","body_extracted":"Residents of Capital Y held a demonstration in the city center. No casualties were confirmed."}
 
 OUTPUT:
-{"title_zh":"首都Y发生抗议活动","summary_zh":"AAA国首都Y市中心发生抗议活动，当地居民举行示威。暂无伤亡确认。","event_type":"civil_unrest","country_iso3":"AAA","location":{"name":"首都Y","admin1":null,"admin2":null},"key_facts":["AAA国首都Y发生抗议活动","地点为市中心"],"uncertainties":["伤亡情况尚未确认"],"security_relevance":"direct","classification_confidence":0.8}
+{"source_language":"en","title_zh":"首都Y发生抗议活动","summary_zh":"AAA国首都Y市中心发生抗议活动，当地居民举行示威。暂无伤亡确认。","event_type":"civil_unrest","country_iso3":"AAA","location":{"country_iso3":"AAA","admin1":null,"city":"首都Y","site":"市中心","raw_text":"Capital Y city center"},"key_facts":[{"fact":"AAA国首都Y发生抗议活动","evidence_field":"body_extracted","evidence_excerpt":"Residents of Capital Y held a demonstration in the city center"},{"fact":"暂无伤亡确认","evidence_field":"body_extracted","evidence_excerpt":"No casualties were confirmed"}],"uncertainties":["伤亡情况尚未确认"],"security_relevance":"direct","classification_confidence":80}
