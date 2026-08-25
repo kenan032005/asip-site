@@ -89,15 +89,29 @@ def main():
         if parsed is None:
             raise ValueError("content not strict json")
     except (json.JSONDecodeError, KeyError, IndexError, TypeError, ValueError) as e:
-        print(json.dumps({
+        diag = {
             "credential_status": "present",
             "provider_status": "invalid_json",
             "http_status": status,
             "error": type(e).__name__,
-            "returned_model": data.get("model") if "data" in dir() and isinstance(data, dict) else None,
-            "content_preview": (content[:200] if "content" in dir() else body[:200]),
             "result": "FAIL",
-        }, ensure_ascii=False, indent=2))
+        }
+        if isinstance(data, dict):
+            diag["returned_model"] = data.get("model")
+            diag["response_keys"] = sorted(data.keys())
+            try:
+                msg = data["choices"][0]["message"]
+                diag["message_keys"] = sorted(msg.keys())
+                diag["content_len"] = len(msg.get("content") or "")
+                rc = msg.get("reasoning_content")
+                diag["reasoning_content_len"] = len(rc) if rc else 0
+                diag["reasoning_preview"] = (rc[:150] if rc else None)
+                diag["choices_len"] = len(data.get("choices") or [])
+            except Exception as ex:
+                diag["shape_error"] = type(ex).__name__
+            if "usage" in data:
+                diag["usage_available"] = True
+        print(json.dumps(diag, ensure_ascii=False, indent=2))
         return 1
 
     ok = parsed.get("status") == "ok" and parsed.get("provider_test") == "glm47_flash"
