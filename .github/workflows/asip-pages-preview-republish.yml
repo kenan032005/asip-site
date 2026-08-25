@@ -1,9 +1,11 @@
 name: ASIP Pages Preview Republish
 
 on:
-  push:
-    branches:
-      - feature/asip-intelligence-v10-i3b-fix1a-pages
+  # 开发冻结（2026-08-25）：暂停自动 preview republish；手动 workflow_dispatch 保留。
+  # 如需恢复自动触发，取消注释 push 块即可（不删代码、不改逻辑）。
+  # push:
+  #   branches:
+  #     - feature/asip-intelligence-v10-i3b-fix1a-pages
   workflow_dispatch:
 
 concurrency:
