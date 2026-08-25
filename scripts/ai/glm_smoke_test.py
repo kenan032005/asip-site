@@ -62,7 +62,7 @@ def main():
     import ssl
     ctx = ssl.create_default_context()
     try:
-        with urllib.request.urlopen(req, timeout=30, context=ctx) as resp:
+        with urllib.request.urlopen(req, timeout=90, context=ctx) as resp:
             body = resp.read().decode("utf-8")
             status = resp.status
     except urllib.error.HTTPError as e:
@@ -84,7 +84,11 @@ def main():
 
     try:
         data = json.loads(body)
-        content = data["choices"][0]["message"]["content"]
+        msg = data["choices"][0]["message"]
+        content = msg.get("content") or ""
+        if not content.strip():
+            # GLM 思考模型可能把输出放在 reasoning_content
+            content = msg.get("reasoning_content") or ""
         parsed = _extract_json(content)
         if parsed is None:
             raise ValueError("content not strict json")

@@ -359,7 +359,11 @@ class Glm47FlashProvider(BaseAIProvider):
 
         # OpenAI 兼容响应
         try:
-            content = data["choices"][0]["message"]["content"]
+            _msg = data["choices"][0]["message"]
+            content = _msg.get("content") or ""
+            if not content.strip():
+                # GLM 思考模型可能把输出放在 reasoning_content
+                content = _msg.get("reasoning_content") or ""
             parsed = _extract_json(content)
             if parsed is None:
                 self._last_parsed = None
