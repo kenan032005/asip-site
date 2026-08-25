@@ -25,18 +25,40 @@ renderHeader("events.html");
 function init() {
   const id = getQS("id");
   if (!id) { document.getElementById("main").innerHTML = '<div class="empty">未指定事件。</div>'; return; }
-  API.getCached("events").then(function (res) {
-    const ev = (res && res.events) || [];
-    const e = ev.find(function (x) { return (x.event_id || x.id) === id; });
-    if (!e) { document.getElementById("main").innerHTML = '<div class="empty">未找到该事件（可能为演示数据已清除）。</div>'; return; }
+  // 优先从 Public 公开层查找（含 AI 中文字段）；找不到再回退 legacy events.json
+  loadCurrentPublishedEvents().then(function (pub) {
+    const e = pub.find(function (x) { return (x.event_id || x.id) === id; });
+    if (e) { renderEvent(e); return; }
+    API.getCached("events").then(function (res) {
+      const ev = (res && res.events) || [];
+      const e2 = ev.find(function (x) { return (x.event_id || x.id) === id; });
+      if (!e2) { document.getElementById("main").innerHTML = '<div class="empty">未找到该事件（可能为演示数据已清除）。</div>'; return; }
+      renderEvent(e2);
+    }).catch(function () { showDbError(); });
+  }).catch(function () {
+    API.getCached("events").then(function (res) {
+      const ev = (res && res.events) || [];
+      const e2 = ev.find(function (x) { return (x.event_id || x.id) === id; });
+      if (!e2) { document.getElementById("main").innerHTML = '<div class="empty">未找到该事件（可能为演示数据已清除）。</div>'; return; }
+      renderEvent(e2);
+    }).catch(function () { showDbError(); });
+  });
+}
+function renderEvent(e) {
     const risk = Number(e.country_risk_level) || Number(e.risk_level) || 0;
     const kv = function (k, v) { return `<div class="kv"><b>${k}</b><span>${v}</span></div>`; };
+    const titleZh = e.title_zh || e.title_cn || e.title_original;
+    const sumZh = e.summary_zh || e.summary_cn;
+    const origTitle = (e.title_original && e.title_original !== titleZh)
+      ? kv("原文标题", esc(e.title_original)) : "";
+    const aiLine = e.ai_model ? `<div class="muted small" style="margin:8px 0;">AI 增强：模型 ${esc(e.ai_model)}${e.ai_prompt_version ? " · Prompt " + esc(e.ai_prompt_version) : ""}${e.ai_processed_at ? " · " + esc(String(e.ai_processed_at).slice(0, 16)) : ""}</div>` : "";
     document.getElementById("main").innerHTML = `
       <p style="margin:0 0 10px;"><a href="events.html">&larr; 返回最新事件</a> · <a href="country.html?country=${encodeURIComponent(e.country || "")}">${esc(e.country || "—")}</a></p>
-      <h1 style="font-size:20px;color:var(--brand);margin:0 0 8px;">${esc(e.title_cn || e.title_original)}</h1>
+      <h1 style="font-size:20px;color:var(--brand);margin:0 0 8px;">${esc(titleZh)}</h1>
       <div style="margin-bottom:12px;">${riskBadge(risk)} ${chinaBadge(e)} ${confidenceBadge(e.confidence)}</div>
-      ${e.title_original && e.title_original !== e.title_cn ? kv("原文标题", esc(e.title_original)) : ""}
-      ${e.summary_cn ? kv("中文摘要", esc(e.summary_cn)) : ""}
+      ${origTitle}
+      ${sumZh ? kv("中文摘要", esc(sumZh)) : ""}
+      ${aiLine}
       ${e.body_extracted ? `<div style="margin:14px 0;"><b style="display:block;margin-bottom:6px;">原文正文</b><div class="article-body">${esc(e.body_extracted).replace(/\n/g, '<br>')}</div>${e.body_status ? `<div class="muted small" style="margin-top:6px;">正文提取状态：${esc(e.body_status)}${e.article_word_count ? " · " + esc(String(e.article_word_count)) + " 词" : ""}</div>` : ""}</div>` : ""}
       <div class="cr-info" style="margin-top:12px;">
         ${kv("国家", esc(e.country || "—"))}
@@ -55,7 +77,6 @@ function init() {
       </div>
       <p class="muted small" style="margin-top:14px;">所有时间均为北京时间（UTC+8）。公开信息仅供参考，不构成行动依据。</p>
     `;
-  }).catch(function () { showDbError(); });
 }
 init();
 </script>

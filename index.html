@@ -84,10 +84,10 @@ function evItem(e) {
   return `<a class="hp-ev" href="${url}">
     <div class="hp-ev-head">
       <span class="hp-ev-risk risk-${risk}">${RISK_NAME[risk] || "低风险"}</span>
-      <span class="hp-ev-title">${esc(e.title_cn || e.title_original)}</span>
+      <span class="hp-ev-title">${esc(e.title_zh || e.title_cn || e.title_original)}</span>
     </div>
     <div class="hp-ev-meta">${esc(e.country || "")}${e.location ? (" · " + esc(e.location)) : ""} · ${cardTime(e.published_time || e.event_time)}</div>
-    ${e.summary_cn ? `<div class="hp-ev-sum">${esc(e.summary_cn).slice(0, 160)}</div>` : ""}
+    ${(e.summary_zh || e.summary_cn) ? `<div class="hp-ev-sum">${esc(e.summary_zh || e.summary_cn).slice(0, 160)}</div>` : ""}
     <div class="hp-ev-meta">来源：${esc(e.source_name || "—")} · 可信度：${esc(e.confidence || "—")}</div>
   </a>`;
 }

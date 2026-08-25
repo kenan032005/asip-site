@@ -30,10 +30,10 @@ function evItem(e) {
   return `<a class="hp-ev" href="${url}">
     <div class="hp-ev-head">
       <span class="hp-ev-risk risk-${risk}">${RISK_NAME[risk] || "低风险"}</span>
-      <span class="hp-ev-title">${esc(e.title_cn || e.title_original)}</span>
+      <span class="hp-ev-title">${esc(e.title_zh || e.title_cn || e.title_original)}</span>
     </div>
     <div class="hp-ev-meta">${esc(e.location || "")} · ${cardTime(e.published_time || e.event_time)} · ${esc(e.source_name || "—")}</div>
-    ${e.summary_cn ? `<div class="hp-ev-sum">${esc(e.summary_cn).slice(0, 160)}</div>` : ""}
+    ${(e.summary_zh || e.summary_cn) ? `<div class="hp-ev-sum">${esc(e.summary_zh || e.summary_cn).slice(0, 160)}</div>` : ""}
   </a>`;
 }
 
@@ -113,7 +113,7 @@ function init() {
       </div>
 
       <section class="hp-block"><h2>二、当前安全形势摘要</h2>
-        <div id="sitSummary">${ev24.length ? ev24.slice(0,3).map(function(e){return "<p style='margin:0 0 8px;'>"+esc(e.title_cn||e.title_original)+"</p>";}).join("") : '<div class="empty-sm">当前暂无以该国为对象的形势摘要。请查看下方最新事件。</div>'}</div>
+        <div id="sitSummary">${ev24.length ? ev24.slice(0,3).map(function(e){return "<p style='margin:0 0 8px;'>"+esc(e.title_zh||e.title_cn||e.title_original)+"</p>";}).join("") : '<div class="empty-sm">当前暂无以该国为对象的形势摘要。请查看下方最新事件。</div>'}</div>
       </section>
 
       <section class="hp-block"><h2>三、最近24小时重要事件</h2>

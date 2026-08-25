@@ -22,7 +22,10 @@ from ai.schema_validation import validate_against_schema
 from ai.stage4_provider import ProviderTimeout, ProviderAPIError, ProviderTerminalError
 from ai.mock_provider import MockProvider
 from ai.prompt_contract import PromptContract, PromptContractError, load_prompt_contract
-from ai.enrichment_eligibility import eligibility_status, compute_input_hash, is_article_url
+from ai.enrichment_eligibility import (
+    eligibility_status, compute_input_hash, is_article_url,
+    effective_country_iso3,
+)
 from ai.enrichment_validator import (
     parse_json_response_strict, validate_enrichment,
     MODEL_OUTPUT_FIELDS, SYSTEM_METADATA_FIELDS,
@@ -419,17 +422,32 @@ class TestRegistryNoDuplicates(unittest.TestCase):
 class TestCountryAndEligibility(unittest.TestCase):
     """country_iso3 必填 + 输入资格。"""
 
-    def test_34_country_iso3_missing_fails_eligibility(self):
+    def test_34_country_iso3_missing_derives_from_country_code(self):
+        # 整合兼容（第三执行包）：最新 main 的 Canonical 仅含 ISO2 country_code，
+        # country_iso3 缺失时由权威映射（data/reference/iso2_to_iso3.json）派生。
         ev = mk_event(country_iso3="")
+        self.assertEqual(effective_country_iso3(ev), "TCD")
         st, r = eligibility_status(ev)
-        self.assertEqual(st, SKIPPED_INELIGIBLE)
-        self.assertIn("invalid_country_iso3", r)
+        self.assertEqual(st, "eligible")
+        # country_code 也无法映射时仍失败
+        ev2 = mk_event(country_iso3="", country_code="ZZ")
+        st2, r2 = eligibility_status(ev2)
+        self.assertEqual(st2, SKIPPED_INELIGIBLE)
+        self.assertIn("invalid_country_iso3", r2)
 
     def test_35_country_iso3_invalid_fails(self):
-        for bad in ("TC", "TCDD", "tcd", "  "):
+        for bad in ("TC", "TCDD", "TCD1"):
             ev = mk_event(country_iso3=bad)
             st, r = eligibility_status(ev)
             self.assertEqual(st, SKIPPED_INELIGIBLE, f"bad iso3={bad!r}")
+        # 小写 iso3 经归一化视为合法（与 effective_country_iso3 清洗语义一致）
+        ev = mk_event(country_iso3="tcd")
+        self.assertEqual(effective_country_iso3(ev), "TCD")
+        self.assertEqual(eligibility_status(ev)[0], "eligible")
+        # 纯空白视为缺失 → 由 country_code 权威派生（清洗语义）
+        ev = mk_event(country_iso3="  ")
+        self.assertEqual(effective_country_iso3(ev), "TCD")
+        self.assertEqual(eligibility_status(ev)[0], "eligible")
 
     def test_36_full_eligibility_passes(self):
         st, r = eligibility_status(mk_event())
