@@ -17,6 +17,10 @@ import sys
 import urllib.error
 import urllib.request
 
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, ROOT)
+from scripts.ai.providers.glm47_flash import _extract_json  # noqa: E402
+
 SECRET_NAME = "ASIP_GLM_API_KEY"
 BASE_URL = os.environ.get("ASIP_GLM_BASE_URL",
                           "https://open.bigmodel.cn/api/paas/v4").rstrip("/")
@@ -81,12 +85,17 @@ def main():
     try:
         data = json.loads(body)
         content = data["choices"][0]["message"]["content"]
-        parsed = json.loads(content)
-    except (json.JSONDecodeError, KeyError, IndexError, TypeError):
+        parsed = _extract_json(content)
+        if parsed is None:
+            raise ValueError("content not strict json")
+    except (json.JSONDecodeError, KeyError, IndexError, TypeError, ValueError) as e:
         print(json.dumps({
             "credential_status": "present",
             "provider_status": "invalid_json",
             "http_status": status,
+            "error": type(e).__name__,
+            "returned_model": data.get("model") if "data" in dir() and isinstance(data, dict) else None,
+            "content_preview": (content[:200] if "content" in dir() else body[:200]),
             "result": "FAIL",
         }, ensure_ascii=False, indent=2))
         return 1
