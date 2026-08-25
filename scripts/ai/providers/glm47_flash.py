@@ -381,6 +381,10 @@ class Glm47FlashProvider(BaseAIProvider):
             ],
             "temperature": 0.1,
             "max_tokens": int(task.get("max_output_tokens") or 2048),
+            # 官方支持的结构化输出：强制 JSON（智谱 docs：response_format json_object）
+            "response_format": {"type": "json_object"},
+            # 官方 thinking 参数：显式关闭思考链，避免推理文本混入 content
+            "thinking": {"type": "disabled"},
         }, ensure_ascii=False).encode("utf-8")
 
         headers = {

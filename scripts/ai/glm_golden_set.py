@@ -40,6 +40,14 @@ from scripts.ai.mock_provider import MockProvider
 from scripts.ai.schema_validation import validate_against_schema
 
 PAYLOAD_SCHEMA = ROOT / "schemas" / "ai_enrichment_payload.schema.json"
+GLM_PROMPT_PATH = ROOT / "config" / "prompts" / "stage4_event_enrichment_glm_v1.md"
+
+
+def _glm_system_prompt():
+    """加载 GLM 专用 Prompt（含 OUTPUT SCHEMA + one-shot），失败即抛。"""
+    if not GLM_PROMPT_PATH.exists():
+        raise FileNotFoundError("GLM prompt missing: %s" % GLM_PROMPT_PATH)
+    return GLM_PROMPT_PATH.read_text(encoding="utf-8")
 
 # ── 社安样本：显式选择现有 Canonical 真实事件（非隔离优先，TCD/NER 为主）──
 SECURITY_IDS = [
@@ -137,15 +145,18 @@ def make_task(sample, provider_model):
         task_type = "disease_summary"
     else:
         task_type = "stage4_event_enrichment"
+    import hashlib
+    sys_text = _glm_system_prompt()
     return {
         "task_id": "GLMG_%s" % (ev.get("event_id") or ev.get("disease_event_id") or "x")[-16:],
         "task_type": task_type,
-        "prompt_version": "1.1.0",
+        "prompt_version": "glm-v1.0.0",
+        "prompt_contract_hash": hashlib.sha256(sys_text.encode("utf-8")).hexdigest()[:16],
         "input_hash": "gh_" + (ev.get("event_id") or ev.get("disease_event_id") or "x")[-8:],
-        "system_text": "你是 ASIP 事件增强引擎。只输出 JSON。",
-        "user_text": json.dumps(ev, ensure_ascii=False)[:2000],
+        "system_text": sys_text,
+        "user_text": "INPUT:\n" + json.dumps(ev, ensure_ascii=False)[:2000],
         "usage_purpose": "production_qualification",
-        "max_output_tokens": 1500,
+        "max_output_tokens": 2048,
     }
 
 
@@ -205,6 +216,7 @@ def run_quality_checks(rows):
         "total": len(rows),
         "strict_json_pass": 0,
         "schema_pass": 0,
+        "contract_failures": 0,        # §七：succeeded 但 schema 不过 → failed_contract
         "major_fabrication": 0,        # 由人工语义复核补充（artifact 含 source+parsed）
         "country_error": 0,            # 保守启发：parsed.country_iso3 vs 源 ISO3
         "magnitude_error": 0,          # 由人工语义复核补充（数字数量级）
@@ -220,7 +232,14 @@ def run_quality_checks(rows):
     for row in rows:
         res = row.get("parsed") or {}
         src = row.get("source_summary") or {}
-        ok_json = bool(res)
+        # §七 最终裁决：succeeded 必须 strict_json + schema 全通过
+        if row.get("provider_status") == "succeeded" and res:
+            sch_errs = validate_against_schema(res, schema)
+            if sch_errs:
+                row["provider_status"] = "failed_contract"
+                row["contract_errors"] = sch_errs
+                stats["contract_failures"] += 1
+        ok_json = bool(res) and row.get("provider_status") == "succeeded"
         if ok_json:
             stats["strict_json_pass"] += 1
             if not validate_against_schema(res, schema):
@@ -293,7 +312,10 @@ def main(argv=None):
     missing = [s for s in samples if s.get("missing")]
     if missing:
         print("WARN missing samples: %s" % [s["category"] for s in missing], file=sys.stderr)
-    if args.limit == 8:
+    if args.limit == 3:
+        # §八 3 条组合：disputed allegation + 普通经济/发展 + 疾病带病例/死亡数字
+        samples = [sec[0], sec[3], dis[2]]
+    elif args.limit == 8:
         # §三 第一 Gate 组合：社安前 5（disputed allegation / casualty uncertainty /
         # direct security / ordinary economic / partial_body）+ 疾病前 3（cholera / mpox /
         # 带数字其他疾病）

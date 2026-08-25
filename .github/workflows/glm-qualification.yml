@@ -2,18 +2,21 @@ name: GLM Qualification (manual only)
 
 # ASIP AI Provider Migration — GLM-4.7-Flash Production Qualification。
 # 仅 workflow_dispatch 手动触发；不 schedule、不 deploy、不修改 gh-pages。
-# 执行顺序：secret presence check → smoke test → golden set → quality gate → audit artifact。
+# 执行顺序：secret presence check → smoke → probe（contract）→ golden（3/8/20）
+# → quality gate → audit artifact。
 
 on:
   workflow_dispatch:
     inputs:
       mode:
-        description: 'qualification stage: smoke | golden8 | golden20'
+        description: 'qualification stage: smoke | probe | golden3 | golden8 | golden20'
         required: true
-        default: golden8
+        default: probe
         type: choice
         options:
           - smoke
+          - probe
+          - golden3
           - golden8
           - golden20
 
@@ -61,24 +64,39 @@ jobs:
           assert d.get('result') == 'PASS', 'smoke test failed: %s' % d
           EOF
 
-      - name: Golden Set（8 条第一 Gate / 20 条最终，按 mode）
+      - name: Contract Probe（固定 shape，§三）
         shell: bash
-        if: ${{ inputs.mode != 'smoke' }}
+        if: ${{ inputs.mode == 'probe' }}
         run: |
-          if [ "${{ inputs.mode }}" = "golden8" ]; then
+          python scripts/ai/glm_contract_probe.py | tee docs/glm-contract-probe.json
+          python - <<'EOF'
+          import json
+          d = json.load(open('docs/glm-contract-probe.json'))
+          assert d.get('result') == 'PASS', 'contract probe failed: %s' % d
+          print('contract_probe=PASS shape_ok=%s' % d.get('shape_ok'))
+          EOF
+
+      - name: Golden Set（3/8/20 条，按 mode）
+        shell: bash
+        if: ${{ inputs.mode == 'golden3' || inputs.mode == 'golden8' || inputs.mode == 'golden20' }}
+        run: |
+          if [ "${{ inputs.mode }}" = "golden3" ]; then
+            python scripts/ai/glm_golden_set.py --provider glm47_flash --limit 3 --out docs/glm-golden-set.json
+          elif [ "${{ inputs.mode }}" = "golden8" ]; then
             python scripts/ai/glm_golden_set.py --provider glm47_flash --limit 8 --out docs/glm-golden-set.json
           else
             python scripts/ai/glm_golden_set.py --provider glm47_flash --out docs/glm-golden-set.json
           fi
 
-      - name: Quality Gate（§十九 硬性标准）
+      - name: Quality Gate（§九/§十九 硬性标准）
         shell: bash
-        if: ${{ inputs.mode != 'smoke' }}
+        if: ${{ inputs.mode == 'golden3' || inputs.mode == 'golden8' || inputs.mode == 'golden20' }}
         run: |
           python - <<'EOF'
           import json
           d = json.load(open('docs/glm-golden-set.json'))
           s = d['stats']
+          assert s['contract_failures'] == 0, 'contract failures != 0（succeeded 必须 schema 全过）'
           assert s['major_fabrication'] == 0, '重大事实编造 != 0（含启发占位，语义由 artifact 人工复核）'
           assert s['country_error'] == 0, '国家错误 != 0'
           assert s['magnitude_error'] == 0, '数字数量级错误 != 0（含启发占位，语义由 artifact 人工复核）'
@@ -97,5 +115,6 @@ jobs:
           name: glm-qualification-audit
           path: |
             docs/glm-smoke-test.json
+            docs/glm-contract-probe.json
             docs/glm-golden-set.json
           if-no-files-found: warn
