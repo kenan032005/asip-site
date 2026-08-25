@@ -62,7 +62,7 @@ def main():
     import ssl
     ctx = ssl.create_default_context()
     try:
-        with urllib.request.urlopen(req, timeout=90, context=ctx) as resp:
+        with urllib.request.urlopen(req, timeout=180, context=ctx) as resp:
             body = resp.read().decode("utf-8")
             status = resp.status
     except urllib.error.HTTPError as e:
