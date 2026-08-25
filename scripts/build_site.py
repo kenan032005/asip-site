@@ -53,6 +53,7 @@ PUBLIC_DATA_ALLOWLIST = [
     "public/published_events.json",
     "public/current_metrics.json",
     "public/legacy_archive_events.json",
+    "public/disease_events.json",        # Stage 5 疾病公开快照（Public ⊆ Disease Canonical）
 ]
 
 WIN_PATH_RE = re.compile(r"[A-Za-z]:[\\/]+[^\s\"'<>|]*")

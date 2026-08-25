@@ -106,10 +106,34 @@ class TestTrustTier(unittest.TestCase):
         self.assertEqual(t, "D")
 
     def test_reliefweb_official_domain_wins_over_type(self):
-        # ReliefWeb 域名（OCHA 官方）优先于 aggregation_platform 标记
+        # 历史用例：ReliefWeb 不再因域名自动 Tier A（见下）；此测试改为验证
+        # 不再走 aggregation_platform 聚合分支（即不能是 D）。
         t, r = classify_tier("ReliefWeb（乍得）", "https://reliefweb.int/report/x",
                              "aggregation_platform")
+        self.assertNotEqual(t, "D")
+
+    # ── Stage 5 第二包修正：ReliefWeb publisher 继承（§三）──
+    def test_reliefweb_no_publisher_distribution_platform(self):
+        # 无法识别原始发布者 → distribution_platform，不高于 Tier C
+        t, r = classify_tier("ReliefWeb", "https://reliefweb.int/report/x", "other")
+        self.assertEqual(t, "C")
+        self.assertIn("distribution_platform", r)
+
+    def test_reliefweb_publisher_who_inherits_a(self):
+        t, r = classify_tier("ReliefWeb", "https://reliefweb.int/report/x", "other",
+                             publisher="World Health Organization")
         self.assertEqual(t, "A")
+
+    def test_reliefweb_publisher_africa_cdc_inherits_a(self):
+        t, r = classify_tier("ReliefWeb", "https://reliefweb.int/report/x", "other",
+                             publisher="Africa CDC")
+        self.assertEqual(t, "A")
+
+    def test_reliefweb_publisher_local_ngo_not_auto_a(self):
+        # 本地 NGO 不自动 Tier A
+        t, r = classify_tier("ReliefWeb", "https://reliefweb.int/report/x", "other",
+                             publisher="Local Community NGO")
+        self.assertNotEqual(t, "A")
 
 
 class TestIndependence(unittest.TestCase):

@@ -90,7 +90,8 @@ def build_evidence_sources(event, articles, quarantine_ids=None):
     for a in arts:
         tier, reason = classify_tier(a.get("source_name"),
                                      a.get("article_url") or a.get("url"),
-                                     a.get("source_type"))
+                                     a.get("source_type"),
+                                     publisher=a.get("publisher") or a.get("organization"))
         a["_tier"] = tier
         a["_tier_reason"] = reason
 

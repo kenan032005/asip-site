@@ -14,9 +14,10 @@
 from .constants import TIER_A, TIER_B, TIER_C, TIER_D, AGGREGATOR_KEYWORDS
 
 # 高可信国际通讯社 / 权威国际机构（Tier A）
+# 注：reliefweb.int 已移至 DISTRIBUTION_PLATFORM_DOMAINS（按 publisher 继承评级）
 TIER_A_DOMAINS = {
     "reuters.com", "apnews.com", "afp.com",
-    "who.int", "un.org", "unicef.org", "africacdc.org", "reliefweb.int",
+    "who.int", "un.org", "unicef.org", "africacdc.org",
     "imf.org", "worldbank.org", "fao.org",
 }
 # 国际主流媒体 / 稳定区域媒体（Tier B）
@@ -75,18 +76,34 @@ def _registered_domain(host):
     return ".".join(parts[-2:])
 
 
-def classify_tier(source_name="", url="", source_type=""):
+# 分发平台（distribution platform）：本身不是原始事实来源，须按 publisher 继承评级
+DISTRIBUTION_PLATFORM_DOMAINS = {"reliefweb.int", "reliefweb.unocha.org"}
+
+
+def classify_tier(source_name="", url="", source_type="", publisher=""):
     """返回 (tier, reason)。tier ∈ {A,B,C,D}。
 
-    优先级：域名精确映射（A/B/C/D 表）> 聚合名称关键词 > 官方/媒体名称关键词
-    > source_type 启发 > 兜底。
-    域名精确映射优先于 source_type：ReliefWeb（reliefweb.int，OCHA 官方平台）
-    虽被采集器标记为 aggregation_platform，仍按权威域名归 Tier A。
+    优先级：分发平台（ReliefWeb 等）publisher 继承 > 域名精确映射（A/B/C/D）
+    > 聚合名称关键词 > 官方/媒体名称关键词 > source_type 启发 > 兜底。
+
+    ReliefWeb 规则（Stage 5 第二包修正）：
+    - 页面明确提供原始发布机构（WHO/Africa CDC/UN 机构/国家卫生部/政府）→
+      source trust 继承原始发布机构等级（publisher 递归评级）；
+    - publisher 为 local NGO → 按 NGO 本身评级，不自动 Tier A；
+    - 无法识别原始发布者 → 作为 distribution_platform，不高于 Tier C
+      （稳定规则：Tier C，不作为 lead-only 排除）。
     """
     name = (source_name or "").strip().lower()
     host = _host_of(url)
     dom = _registered_domain(host)
     stype = (source_type or "").strip().lower()
+
+    # 0) 分发平台（ReliefWeb 类）：publisher 继承评级
+    if dom in DISTRIBUTION_PLATFORM_DOMAINS:
+        if publisher and str(publisher).strip():
+            pt, _ = classify_tier(str(publisher), "", "unknown")
+            return pt, "reliefweb_publisher:%s" % publisher
+        return TIER_C, "distribution_platform"
 
     # 1) 域名精确映射（最高优先，A/B/C/D 互斥）
     if dom in TIER_A_DOMAINS:
