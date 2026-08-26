@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow"><title>ASIP非洲安全情报知识库 · V1.0</title><link rel="stylesheet" href="../../assets/css/style.css"><link rel="stylesheet" href="../../assets/css/intelligence.css"><style>
+    .asip-preview-banner{position:relative;background:#1e293b;color:#e2e8f0;
+      padding:8px 14px;font-size:13px;line-height:1.5;border-bottom:3px solid #f59e0b;
+      font-family:"Microsoft YaHei",sans-serif;z-index:999}
+    .asip-preview-banner strong{color:#fbbf24}
+    .asip-preview-banner .badge{display:inline-block;background:#b91c1c;color:#fff;
+      border-radius:4px;padding:1px 8px;margin:0 6px;font-weight:700}
+    .asip-preview-banner a{color:#93c5fd;text-decoration:none;margin-left:10px}
+    .asip-preview-banner a:hover{text-decoration:underline}
+  </style>
+</head>
+<body data-africa-page="home">
+<div class="asip-preview-banner"><strong>ASIP Development Preview</strong> · Stage 7B Snapshot<span class="badge">Not Production</span><a href="https://kenan032005.github.io/asip-site/" target="_blank" rel="noopener">← 返回正式站</a><a href="../../status/">开发状态</a><a href="../../report-mock/">报告样例 (MOCK)</a></div>
+<div id="topbar"></div><main class="intel-shell"><div id="intelError" class="intel-error" hidden></div>
+  <section class="intel-hero"><div><span class="intel-overline">ASIP · AFRICA SECURITY INTELLIGENCE · V1.0</span><h1>非洲安全情报知识库<br><strong>统一数据底座 · 区域视图 · 国家入口</strong></h1><p>一套全非洲统一数据底座，多个区域视图与多个国家入口。区域页面只是数据库视图，不是独立数据副本；实体与关系在全库唯一。</p></div><div class="intel-hero-actions"><a class="intel-button" href="network/">进入正式关系图 →</a><a class="intel-button ghost" href="entities/">浏览实体索引</a></div></section>
+  <section class="intel-stat-grid"><div><b id="statEntity">—</b><span>个非国家实体</span></div><div><b id="statRelation">—</b><span>条关系</span></div><div><b id="statCountry">—</b><span>个国家入口</span></div><div><b id="statRegion">—</b><span>个区域视图</span></div><div><b id="statEvidence">—</b><span>条证据记录</span></div><div><b id="statSource">—</b><span>个来源</span></div></section>
+  <section class="intel-stat-grid"><div><b id="statVerified">—</b><span>条已核验证据</span></div><div><b id="statFull">—</b><span>个完整百科档案</span></div><div><b id="statAudit">—</b><span>条审计记录</span></div><div class="intel-stat-note" id="metricNote">统计口径由 catalog_metrics.json 自动生成。</div></section>
+  <section class="intel-section"><div class="intel-section-title"><span>01</span><div><h2>区域视图</h2><p>七个区域安全分析视图；区域允许重叠，国家可同时属于多个区域。区域划分用于 ASIP 安全分析，不等同于唯一的正式地理分类。</p></div></div><div id="regionGrid" class="intel-card-grid"></div></section>
+  <section class="intel-section"><div class="intel-section-title"><span>02</span><div><h2>高风险国家入口</h2><p>国家风险等级（极高/高/中/低）为平台安全分析视图，与实体重要程度相互独立。</p></div></div><div id="countryGrid" class="intel-card-grid"></div></section>
+  <section class="intel-section"><div class="intel-section-title"><span>03</span><div><h2>核心实体</h2><p>L1 核心 / L2 重要 / L3 扩展（平台维护与展示优先级，不代表官方认定）。</p></div></div><div id="entityGrid" class="intel-card-grid"></div></section>
+  <section class="intel-section"><div class="intel-section-title"><span>04</span><div><h2>重要程度与等级体系说明</h2><p>三个独立概念：实体重要程度（L1/L2/L3）、国家风险等级（extreme/high/medium/low）、事实可信度（high/medium/low/disputed），不得混用。</p></div></div><div class="intel-panel intel-prose"><p>本知识库以统一实体 ID 与统一数据模型管理全非洲实体、关系、国家、地区、来源和证据。多区域实体只存在一个 ID 与一个档案页，通过 region_ids / country_ids 与关系数据体现其跨境活动范围。</p><p>当前事实均记录数据检查日期（record_reviewed_at）、来源发布日期（source_published_at）与事实有效截至（claim_valid_as_of）；当前状态另行记录核验日期（current_status_verified_at）。无近期公开来源的内容标注为「趋旧/过时」并提示。证据记录区分「已核验 / 部分核验 / 待复核」，自动生成记录不默认为已核验。武装规模估计带时间、口径、来源与可信度并并列展示，不取平均；Wikipedia 仅作辅助导航。正式页面构建后兼容 GitHub Pages 静态路由。</p><div class="intel-disclaimer"><b>公开预览声明</b><ul><li>本知识库为公开来源安全信息整理，供分析参考，不构成官方认定或风险评估结论。</li><li>L1/L2/L3 为平台内部重要程度（维护与展示优先级）。</li><li>国家风险等级为平台分析标签，非政府或国际组织评级。</li><li>当前状态受公开信息时效限制；页面显示事实有效截至日期，过时内容会明确标注。</li><li>存在争议或来源不足的内容会明确标注，不会以确定性口吻呈现。</li><li>区域划分用于安全分析，不等于唯一正式地理分类。</li></ul></div><a class="intel-button" href="../demo/">查看 V0.2 历史 Demo（冻结快照）</a></div></section>
+</main><footer class="site"></footer>
+<script src="../../assets/js/intelligence/africa.js"></script>
+</body></html>

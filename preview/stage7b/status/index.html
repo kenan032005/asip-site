@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+<title>ASIP Development Status · Stage 7B Preview</title>
+<style>
+body{max-width:920px;margin:0 auto;padding:0 20px 60px;
+  font-family:"Microsoft YaHei",sans-serif;color:#1f2937;background:#f8fafc}
+h1{color:#1e3a8a;border-bottom:2px solid #2563eb;padding-bottom:8px}
+.cap{display:inline-block;color:#fff;border-radius:4px;padding:2px 8px;
+  font-size:12px;font-weight:700}
+table{width:100%;border-collapse:collapse;margin-top:12px}
+td,th{border:1px solid #cbd5e1;padding:8px 10px;vertical-align:top;text-align:left}
+th{background:#e2e8f0}
+.legend{margin:10px 0;font-size:13px}
+code{background:#eef2ff;padding:1px 5px;border-radius:3px}
+</style></head>
+<body>
+<div class="asip-preview-banner"><strong>ASIP Development Preview</strong> ·
+Stage 7B Snapshot<span class="badge">Not Production</span>
+<a href="https://kenan032005.github.io/asip-site/" target="_blank" rel="noopener">← 返回正式站</a>
+<a href="../status/">开发状态</a><a href="../report-mock/">报告样例 (MOCK)</a></div>
+<h1>ASIP 开发状态清单（Stage 7B Preview）</h1>
+<p class="legend">能力状态图例：<span class='cap' style='background:#15803d'>VISIBLE_NOW</span> 前端已可见 &nbsp; <span class='cap' style='background:#b45309'>BACKEND_READY_NOT_EXPOSED</span> 后端就绪 · 前端未暴露 &nbsp; <span class='cap' style='background:#7c3aed'>STAGE8_PENDING</span> Stage8 待办 &nbsp; </p>
+<p>本页仅说明当前后台能力与前端暴露情况，供 Frontend Gap Audit 参考。
+不暴露任何 internal runtime 数据。</p>
+<table><tr><th>能力</th><th>状态</th><th>说明</th></tr>
+<tr><td><code>Existing Frontend</code></td><td><span class='cap' style='background:#15803d'>VISIBLE_NOW</span></td><td>首页 / 事件 / 国家 / 日报 / 疾病风险 页面均已上线（本次预览原样镜像）。</td></tr>
+<tr><td><code>Country Pages</code></td><td><span class='cap' style='background:#15803d'>VISIBLE_NOW</span></td><td>countries.html + country.html（国家风险等级 / 事件过滤）。</td></tr>
+<tr><td><code>Entity Database</code></td><td><span class='cap' style='background:#15803d'>VISIBLE_NOW</span></td><td>intelligence/africa/entities + entity 档案页（公开知识库）。</td></tr>
+<tr><td><code>Relationship Database</code></td><td><span class='cap' style='background:#15803d'>VISIBLE_NOW</span></td><td>intelligence/africa/relations + relation 档案页。</td></tr>
+<tr><td><code>Source Expansion</code></td><td><span class='cap' style='background:#b45309'>BACKEND_READY_NOT_EXPOSED</span></td><td>信源注册 / 扩展引擎已建设（Stage Expansion A/B），前端仅基础 sources 列表。</td></tr>
+<tr><td><code>Verification</code></td><td><span class='cap' style='background:#15803d'>VISIBLE_NOW</span></td><td>事件页展示 verification_status（verified / probable / single_source / conflicting）。</td></tr>
+<tr><td><code>Disease Risk</code></td><td><span class='cap' style='background:#15803d'>VISIBLE_NOW</span></td><td>disease-risk.html 与 data/public/disease_events.json 已公开展示。</td></tr>
+<tr><td><code>Master Event Clustering</code></td><td><span class='cap' style='background:#b45309'>BACKEND_READY_NOT_EXPOSED</span></td><td>Stage6 主事件聚类引擎已就绪，前端事件页尚未显式聚合 master event 时间线。</td></tr>
+<tr><td><code>Event Timeline</code></td><td><span class='cap' style='background:#b45309'>BACKEND_READY_NOT_EXPOSED</span></td><td>Stage6B social timeline 已生成，前端未接入时间线视图。</td></tr>
+<tr><td><code>Disease Timeline</code></td><td><span class='cap' style='background:#b45309'>BACKEND_READY_NOT_EXPOSED</span></td><td>Stage6B disease outbreak timeline 已生成，前端未接入。</td></tr>
+<tr><td><code>Africa Daily Engine</code></td><td><span class='cap' style='background:#b45309'>BACKEND_READY_NOT_EXPOSED</span></td><td>Stage7A 选材 + Stage7B 生成 / 质量门已就绪；本预览 report-mock 为 MOCK 样例。</td></tr>
+<tr><td><code>Country Weekly Engine</code></td><td><span class='cap' style='background:#b45309'>BACKEND_READY_NOT_EXPOSED</span></td><td>Stage7A 周报引擎已就绪；report-mock 含 TCD/SSD 样例，前端未接入。</td></tr>
+<tr><td><code>Major Event Brief Engine</code></td><td><span class='cap' style='background:#b45309'>BACKEND_READY_NOT_EXPOSED</span></td><td>Stage7A brief 触发引擎已就绪，前端未接入。</td></tr>
+<tr><td><code>Production AI</code></td><td><span class='cap' style='background:#7c3aed'>STAGE8_PENDING</span></td><td>AI 调用冻结（browser_direct_api_call=false、AI calls=0）。</td></tr>
+<tr><td><code>Cloud Scheduling</code></td><td><span class='cap' style='background:#7c3aed'>STAGE8_PENDING</span></td><td>schedule / 6h 采集 / 日报 cron 全部冻结（production_auto_update=false）。</td></tr>
+<tr><td><code>Monitoring</code></td><td><span class='cap' style='background:#7c3aed'>STAGE8_PENDING</span></td><td>Stage8 监控能力待规划，当前未启用。</td></tr>
+<tr><td><code>Production Cutover</code></td><td><span class='cap' style='background:#7c3aed'>STAGE8_PENDING</span></td><td>production root 保持线上版本，未做任何 cutover。</td></tr></table>
+</body></html>
