@@ -96,7 +96,7 @@ DISEASE_IDS = [
 ATTR_SRC_KW = ("accuse", "claim", "allege", "denounce", "reportedly",
                "according to", "指控", "声称", "据称", "aurait", "selon",
                "pourrait", "pourraient", "non confirm", "unconfirmed")
-ATTR_OUT_KW = ("指控", "声称", "据称", "被指", "指称", "报道", "尚未证实")
+ATTR_OUT_KW = ("指控", "声称", "据称", "被指", "指称", "报道", "尚未证实", "疑似")
 
 NUMERIC_FIELDS = ("confirmed_cases", "probable_cases", "suspected_cases",
                   "total_cases", "deaths", "recoveries")
