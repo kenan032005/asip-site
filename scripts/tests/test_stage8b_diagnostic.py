@@ -294,3 +294,111 @@ class TestFlashOnlyRegression(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestRootCauseClassification(unittest.TestCase):
+    """§七：RD1 probe 根因分类（真实 telemetry 驱动）。"""
+
+    def test_reasoning_budget_exhaustion(self):
+        rc = q.classify_root_cause(
+            {"finish_reason": "length", "output_tokens": 8192,
+             "reasoning_tokens": 7200, "content_present": False,
+             "stripped_content_length_chars": 0, "whitespace_only": False})
+        self.assertEqual(rc, "REASONING_BUDGET_EXHAUSTION")
+
+    def test_whitespace_exhaustion(self):
+        rc = q.classify_root_cause(
+            {"finish_reason": "length", "output_tokens": 8192,
+             "reasoning_tokens": 500, "content_present": False,
+             "stripped_content_length_chars": 0, "whitespace_only": True})
+        self.assertEqual(rc, "JSON_WHITESPACE_EXHAUSTION")
+
+    def test_final_json_truncation(self):
+        rc = q.classify_root_cause(
+            {"finish_reason": "length", "output_tokens": 8192,
+             "reasoning_tokens": 2000, "content_present": True,
+             "stripped_content_length_chars": 300, "whitespace_only": False},
+            strict_json_ok=False)
+        self.assertEqual(rc, "FINAL_JSON_TOKEN_TRUNCATION")
+
+    def test_content_filter(self):
+        rc = q.classify_root_cause(
+            {"finish_reason": "content_filter", "content_present": False})
+        self.assertEqual(rc, "CONTENT_FILTER_RESPONSE")
+
+    def test_empty_anomaly(self):
+        rc = q.classify_root_cause(
+            {"finish_reason": "stop", "content_present": False})
+        self.assertEqual(rc, "EMPTY_CONTENT_ANOMALY")
+
+    def test_contract_pass(self):
+        rc = q.classify_root_cause(
+            {"finish_reason": "stop", "content_present": True},
+            strict_json_ok=True, ai_content_ok=True, assembler_ok=True,
+            final_ok=True)
+        self.assertEqual(rc, "RD1_CONTRACT_PASS")
+
+    def test_unknown(self):
+        rc = q.classify_root_cause({"finish_reason": "tool_calls"})
+        self.assertEqual(rc, "UNKNOWN")
+
+    def test_budget_fallback(self):
+        rc = q.classify_root_cause(
+            {"finish_reason": "length", "output_tokens": 8192,
+             "reasoning_tokens": None, "content_present": False})
+        self.assertEqual(rc, "OUTPUT_TOKEN_BUDGET_INSUFFICIENT")
+
+
+class TestWorkflowMode(unittest.TestCase):
+    """§二-§四：workflow_dispatch mode（probe_only 默认 / full_qualification）。"""
+
+    WF = ROOT / ".github" / "workflows" / "asip-stage8b-qualification.yml"
+
+    @classmethod
+    def setUpClass(cls):
+        cls.txt = cls.WF.read_text(encoding="utf-8")
+
+    def test_no_schedule_no_push(self):
+        t = self.txt
+        self.assertNotIn("schedule:", t)
+        self.assertNotIn("cron:", t)
+        self.assertNotIn("pull_request", t)
+        # 允许 workflow_dispatch: 自身出现的 push 字眼；检查无独立 push 触发
+        self.assertNotRegex(t, r"(?m)^\s*push:")
+        self.assertNotRegex(t, r"(?m)^\s*\-\s*push:")
+
+    def test_mode_input_exists(self):
+        t = self.txt
+        self.assertIn("workflow_dispatch:", t)
+        self.assertIn("inputs:", t)
+        self.assertIn("mode:", t)
+        self.assertIn("default: probe_only", t)
+        self.assertIn("probe_only", t)
+        self.assertIn("full_qualification", t)
+
+    def test_20case_step_gated_by_full_mode(self):
+        # 20-case 步骤前必须出现 mode==full_qualification 条件
+        idx20 = self.txt.find("20-case qualification")
+        self.assertGreater(idx20, 0)
+        seg = self.txt[:idx20]
+        self.assertIn("github.event.inputs.mode == 'full_qualification'", seg)
+
+    def test_trial_step_gated_by_full_mode(self):
+        idxt = self.txt.find("Real report trial")
+        self.assertGreater(idxt, 0)
+        seg = self.txt[:idxt]
+        self.assertIn("github.event.inputs.mode == 'full_qualification'", seg)
+
+    def test_probe_runs_in_both_modes(self):
+        # probe 步骤名出现且其 run 行不带 mode if 条件
+        self.assertIn("Report API probe", self.txt)
+
+    def test_verdict_handles_probe_only(self):
+        self.assertIn("MODE", self.txt)
+        self.assertIn("probe_only", self.txt[self.txt.find("Qualification verdict"):])
+
+    def test_artifact_and_secret_always(self):
+        for m in ("Secret scan", "Upload qualification artifacts"):
+            idx = self.txt.find(m)
+            seg = self.txt[:idx]
+            self.assertIn("if: always()", seg[seg.rfind("\n\n"):] if "\n\n" in seg else seg)

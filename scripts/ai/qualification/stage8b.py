@@ -479,6 +479,47 @@ def classify_budget_failure(rr):
     return (None, None)
 
 
+def classify_root_cause(rr, strict_json_ok=False, ai_content_ok=False,
+                        assembler_ok=False, final_ok=False):
+    """§七（Diagnostic）：RD1 probe 根因分类（基于真实 telemetry）。
+
+    - length + reasoning_tokens 占 completion 绝大多数 + content 空
+        → REASONING_BUDGET_EXHAUSTION
+    - length + reasoning_tokens 明显较低 + whitespace_only
+        → JSON_WHITESPACE_EXHAUSTION
+    - length + stripped content > 0 且 JSON 不完整
+        → FINAL_JSON_TOKEN_TRUNCATION
+    - content_filter → CONTENT_FILTER_RESPONSE
+    - stop + content 空 → EMPTY_CONTENT_ANOMALY
+    - stop + 全 PASS → RD1_CONTRACT_PASS
+    - 其余 → UNKNOWN
+    """
+    rr = rr or {}
+    fr = rr.get("finish_reason")
+    comp = rr.get("output_tokens") or 0
+    rt = rr.get("reasoning_tokens")
+    stripped_len = rr.get("stripped_content_length_chars", 0)
+    ws = bool(rr.get("whitespace_only", False))
+    content_present = bool(rr.get("content_present", False))
+    if fr == "content_filter":
+        return "CONTENT_FILTER_RESPONSE"
+    if fr == "length":
+        if rt is not None and comp and rt / comp >= 0.8 and not content_present:
+            return "REASONING_BUDGET_EXHAUSTION"
+        if rt is not None and comp and rt / comp < 0.5 and ws:
+            return "JSON_WHITESPACE_EXHAUSTION"
+        if stripped_len > 0 and not strict_json_ok:
+            return "FINAL_JSON_TOKEN_TRUNCATION"
+        return "OUTPUT_TOKEN_BUDGET_INSUFFICIENT"
+    if fr == "stop":
+        if content_present and strict_json_ok and ai_content_ok \
+                and assembler_ok and final_ok:
+            return "RD1_CONTRACT_PASS"
+        if not content_present:
+            return "EMPTY_CONTENT_ANOMALY"
+    return "UNKNOWN"
+
+
 def check_exact_copy(parsed, input_payload, task_type):
     """§八：output 确定性元数据必须与 input 逐字一致 → REPORT_METADATA_MISMATCH。"""
     fields = EXACT_COPY_FIELDS.get(task_type)
@@ -514,25 +555,36 @@ def _evaluate_case(case, parsed, result):
         ai_schema = load_schema(AI_CONTENT_SCHEMA[case["task_type"]])
         if ai_schema:
             errs = validate_against_schema(parsed, ai_schema)
+            result["ai_content_schema_pass"] = not errs
             if errs:
                 result["schema_pass"] = False
                 result["contract_failure"] = "ai_content_schema_failure"
                 result["errors"] = errs[:8]
                 return result
         # 2) assembler：envelope（input 确定性值）+ AI content → final report
-        final = assemble_report(case["task_type"], payload, parsed,
-                                meta={"provider_name": "deepseek",
-                                      "model_name": "deepseek-v4-flash",
-                                      "prompt_version": case.get("prompt_version")})
+        try:
+            final = assemble_report(case["task_type"], payload, parsed,
+                                    meta={"provider_name": "deepseek",
+                                          "model_name": "deepseek-v4-flash",
+                                          "prompt_version": case.get("prompt_version")})
+            result["assembler_pass"] = True
+        except Exception as e:   # §三：assembler 异常与模型问题分离
+            result["assembler_pass"] = False
+            result["schema_pass"] = False
+            result["contract_failure"] = "assembler_failure"
+            result["errors"] = ["assembler: %s" % str(e)[:120]]
+            return result
         result["assembled_report"] = final
         if schema:
             errs = validate_against_schema(final, schema)
+            result["final_schema_pass"] = not errs
             if errs:
                 result["schema_pass"] = False
                 result["contract_failure"] = "schema_failure"
                 result["errors"] = errs[:8]
                 return result
         result["schema_pass"] = True
+        result["final_schema_pass"] = True
         parsed = final   # 后续 gate（数字/归因/来源/exact-copy）针对 final
     else:
         if schema:
@@ -1013,8 +1065,21 @@ def run_report_probe(provider_name="deepseek"):
         "whitespace_only": r.get("whitespace_only"),
         "thinking_requested": r.get("thinking_requested"),
         "reasoning_effort_requested": r.get("reasoning_effort_requested"),
+        "max_tokens": MAX_TOKEN_POLICY.get("africa_daily", 8192),
+        # §六（Diagnostic）：AI content / assembler / final / metadata 独立判定
+        "ai_content_schema_valid": r.get("ai_content_schema_pass"),
+        "assembler_pass": r.get("assembler_pass"),
+        "final_schema_valid": r.get("final_schema_pass"),
+        "metadata_gate": per_ok,     # null / true / false
+        "root_cause_classification": None,   # 下方按真实 telemetry 计算
         "errors": (r.get("errors") or [])[:5],
     }
+    # §六/§七：根因分类（基于真实 telemetry，不猜测）
+    out["root_cause_classification"] = classify_root_cause(
+        r, strict_json_ok=bool(r.get("strict_json_pass")),
+        ai_content_ok=bool(r.get("ai_content_schema_pass")),
+        assembler_ok=bool(r.get("assembler_pass")),
+        final_ok=bool(r.get("final_schema_pass")))
     # §十二：同时保存 raw AI content 与 assembled report（区分模型/assembler 问题）
     raw = r.get("raw_text_excerpt")
     if raw:
@@ -1030,6 +1095,7 @@ def run_report_probe(provider_name="deepseek"):
     (ARTIFACT_DIR / "report_probe_result.json").write_text(
         json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
     print("REPORT_API_PROBE =", out["report_probe"])
+    print("ROOT_CAUSE_CLASSIFICATION =", out["root_cause_classification"])
     return 0 if ok else 1
 
 
