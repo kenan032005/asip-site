@@ -201,6 +201,12 @@ def collect_source(source, max_items=25):
             elif "who.int" in host:
                 prefix = None
             items = _extract_hub_links(txt, host, prefix, max_items)
+            if not items:
+                # 200 但无 href 链接 → 疑似 JS 渲染
+                if "<a " in txt.lower() and "href" not in txt.lower():
+                    health["failure_type"] = "requires_js"
+                elif re.search(r'src="[^"]*\.js"', txt) and len(txt) < 60000:
+                    health["failure_type"] = "requires_js"
             health["listing_status"] = "success" if items else "empty"
             health["http_status"] = 200
         else:

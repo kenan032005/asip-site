@@ -26,7 +26,8 @@ def load_health(path=None):
     return {"schema_version": "1.0.0", "entries": []}
 
 
-def record_health(healths, path=None, latest_items=None):
+def record_health(healths, path=None, latest_items=None, scope="global",
+                  country_iso3=None, stable=None, last_detail=None):
     """写入/合并健康记录。healths: 本次 run 的 health dict 列表。"""
     p = Path(path) if path else HEALTH_PATH
     doc = load_health(p)
@@ -35,6 +36,13 @@ def record_health(healths, path=None, latest_items=None):
     for h in healths:
         sid = h.get("source_id")
         h["latest_item_at"] = latest_items.get(sid)
+        h.setdefault("scope", scope)
+        if country_iso3:
+            h["country_iso3"] = country_iso3
+        if stable is not None:
+            h["stable_source"] = stable.get(sid) if isinstance(stable, dict) else stable
+        if last_detail:
+            h["last_detail_success_at"] = last_detail.get(sid)
         by_id[sid] = h
     doc["entries"] = sorted(by_id.values(), key=lambda e: e["source_id"])
     p.parent.mkdir(parents=True, exist_ok=True)

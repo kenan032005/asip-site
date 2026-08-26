@@ -13,6 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 
 REGISTRY_PATH = ROOT / "data" / "global_sources.json"
+COUNTRY_REGISTRY_PATH = ROOT / "data" / "country_sources.json"
 
 VALID_TRUST_TIERS = {"A", "B", "C", "D", "NONE"}
 VALID_ROLES = {
@@ -27,6 +28,12 @@ VALID_ACQUISITION = {
 REQUIRED_FIELDS = [
     "source_id", "name", "source_group", "scope", "country_scope",
     "language", "role", "trust_tier", "evidence_eligible",
+    "acquisition_method", "listing_host", "listing_path",
+    "detail_strategy", "enabled", "priority",
+]
+COUNTRY_REQUIRED_FIELDS = [
+    "source_id", "name", "source_group", "country_iso3", "language",
+    "role", "trust_tier", "evidence_eligible",
     "acquisition_method", "listing_host", "listing_path",
     "detail_strategy", "enabled", "priority",
 ]
@@ -45,11 +52,24 @@ def load_registry(path=None):
     sources = doc.get("sources", [])
     if not isinstance(sources, list) or not sources:
         raise RegistryError("registry sources empty: %s" % p)
-    errors = _validate(sources)
+    errors = _validate(sources, REQUIRED_FIELDS)
     return sources, errors
 
 
-def _validate(sources):
+def load_country_registry(path=None):
+    """加载 Country Source Registry（Source Expansion B）。返回 (sources, errors)。"""
+    p = Path(path) if path else COUNTRY_REGISTRY_PATH
+    if not p.exists():
+        raise RegistryError("country registry missing: %s" % p)
+    doc = json.loads(p.read_text(encoding="utf-8"))
+    sources = doc.get("sources", [])
+    if not isinstance(sources, list) or not sources:
+        raise RegistryError("country registry sources empty: %s" % p)
+    errors = _validate(sources, COUNTRY_REQUIRED_FIELDS, country=True)
+    return sources, errors
+
+
+def _validate(sources, required_fields, country=False):
     errors = []
     seen = set()
     for i, s in enumerate(sources):
@@ -60,7 +80,7 @@ def _validate(sources):
         if sid in seen:
             errors.append("duplicate source_id: %s" % sid)
         seen.add(sid)
-        for f in REQUIRED_FIELDS:
+        for f in required_fields:
             if f not in s:
                 errors.append("%s: missing field %s" % (sid, f))
         if s.get("trust_tier") not in VALID_TRUST_TIERS:
@@ -74,6 +94,12 @@ def _validate(sources):
             errors.append("%s: aggregator role must have evidence_eligible=false" % sid)
         if s.get("acquisition_method") not in VALID_ACQUISITION:
             errors.append("%s: invalid acquisition_method %r" % (sid, s.get("acquisition_method")))
+        if country:
+            if not isinstance(s.get("country_iso3"), str) or len(s.get("country_iso3") or "") != 3:
+                errors.append("%s: invalid country_iso3 %r" % (sid, s.get("country_iso3")))
+            en = s.get("enabled")
+            if not (en is True or en is False or en == "trial"):
+                errors.append("%s: enabled must be bool or 'trial'" % sid)
     return errors
 
 
