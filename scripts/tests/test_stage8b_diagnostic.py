@@ -358,47 +358,53 @@ class TestWorkflowMode(unittest.TestCase):
     def setUpClass(cls):
         cls.txt = cls.WF.read_text(encoding="utf-8")
 
+    @classmethod
+    def _step_block(cls, name):
+        """返回从步骤名到下一个 '      - name:' 之间的文本。"""
+        idx = cls.txt.find(name)
+        assert idx > 0, name
+        nxt = cls.txt.find("      - name:", idx + len(name))
+        return cls.txt[idx:(nxt if nxt > 0 else len(cls.txt))]
+
     def test_no_schedule_no_push(self):
         t = self.txt
         self.assertNotIn("schedule:", t)
         self.assertNotIn("cron:", t)
-        self.assertNotIn("pull_request", t)
-        # 允许 workflow_dispatch: 自身出现的 push 字眼；检查无独立 push 触发
-        self.assertNotRegex(t, r"(?m)^\s*push:")
-        self.assertNotRegex(t, r"(?m)^\s*\-\s*push:")
+        # 只禁止真实触发器；注释中的字眼不判定
+        import re
+        self.assertNotRegex(t, r"(?m)^\s*push://s*$")
+        self.assertNotRegex(t, r"(?m)^\s*-\s*push:")
+        self.assertNotRegex(t, r"(?m)^\s*pull_request:")
 
     def test_mode_input_exists(self):
         t = self.txt
-        self.assertIn("workflow_dispatch:", t)
         self.assertIn("inputs:", t)
         self.assertIn("mode:", t)
         self.assertIn("default: probe_only", t)
-        self.assertIn("probe_only", t)
-        self.assertIn("full_qualification", t)
+        self.assertIn("options:", t)
+        self.assertIn("- probe_only", t)
+        self.assertIn("- full_qualification", t)
 
     def test_20case_step_gated_by_full_mode(self):
-        # 20-case 步骤前必须出现 mode==full_qualification 条件
-        idx20 = self.txt.find("20-case qualification")
-        self.assertGreater(idx20, 0)
-        seg = self.txt[:idx20]
-        self.assertIn("github.event.inputs.mode == 'full_qualification'", seg)
+        block = self._step_block("20-case qualification")
+        self.assertIn("if: github.event.inputs.mode == 'full_qualification'", block)
 
     def test_trial_step_gated_by_full_mode(self):
-        idxt = self.txt.find("Real report trial")
-        self.assertGreater(idxt, 0)
-        seg = self.txt[:idxt]
-        self.assertIn("github.event.inputs.mode == 'full_qualification'", seg)
+        block = self._step_block("Real report trial")
+        self.assertIn("if: github.event.inputs.mode == 'full_qualification'", block)
 
-    def test_probe_runs_in_both_modes(self):
-        # probe 步骤名出现且其 run 行不带 mode if 条件
-        self.assertIn("Report API probe", self.txt)
+    def test_probe_step_has_no_mode_gate(self):
+        block = self._step_block("Report API probe")
+        self.assertNotIn("if:", block.split("\n")[1])   # run 行前无 if
 
     def test_verdict_handles_probe_only(self):
-        self.assertIn("MODE", self.txt)
-        self.assertIn("probe_only", self.txt[self.txt.find("Qualification verdict"):])
+        block = self._step_block("Qualification verdict")
+        self.assertIn("MODE:", block)
+        self.assertIn("report_probe_result.json", block)
+        self.assertIn("RD1_DIAGNOSTIC_PROBE_FAILED", block)
+        self.assertIn("RD1_CONTRACT_PASS", block)
 
     def test_artifact_and_secret_always(self):
-        for m in ("Secret scan", "Upload qualification artifacts"):
-            idx = self.txt.find(m)
-            seg = self.txt[:idx]
-            self.assertIn("if: always()", seg[seg.rfind("\n\n"):] if "\n\n" in seg else seg)
+        for name in ("Secret scan", "Upload qualification artifacts"):
+            block = self._step_block(name)
+            self.assertIn("if: always()", block, name)

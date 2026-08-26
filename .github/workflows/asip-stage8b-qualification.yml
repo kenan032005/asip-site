@@ -10,6 +10,15 @@ name: ASIP Stage8B DeepSeek V4 Flash Qualification
 
 on:
   workflow_dispatch:
+    inputs:
+      mode:
+        description: "执行模式：probe_only（默认，单发 RD1 诊断）或 full_qualification（probe 通过后完整 20-case + trial）"
+        required: false
+        type: choice
+        default: probe_only
+        options:
+          - probe_only
+          - full_qualification
 
 concurrency:
   group: asip-stage8b-qualification
@@ -34,10 +43,10 @@ jobs:
   qualify-deepseek-v4-flash:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout frozen qualification code (52a433e)
+      - name: Checkout frozen qualification code (65b2298)
         uses: actions/checkout@v4
         with:
-          ref: 52a433efaecef5a157f4bb9fbbfec0b332bdda03
+          ref: 65b229808f00c33b051941762131a0e73bd9178b
           fetch-depth: 1
 
       - name: Setup Python
@@ -53,7 +62,7 @@ jobs:
           print("credential_available = " + str(ok).lower())
           print("requested_model = deepseek-v4-flash")
           print("qualification_version = stage8b-v1")
-          print("qualification_code_ref = 52a433e")
+          print("qualification_code_ref = 65b2298")
           if not ok:
               print("CREDENTIAL_INJECTION_FAILED")
               raise SystemExit(1)
@@ -84,11 +93,16 @@ jobs:
           print("SMOKE_OK requested_model=deepseek-v4-flash returned_model=%s" % r.get("returned_model"))
           PY
 
+      - name: Report fixture gate（§七修复：8/8 committed fixtures 校验，失败即停）
+        run: |
+          python scripts/ai/qualification/stage8b.py --fixture-gate --provider deepseek
+
       - name: Report API probe（§七修复：单发 RD1，验证报告通道，失败即停）
         run: |
           python scripts/ai/qualification/stage8b.py --report-probe --provider deepseek
 
       - name: 20-case qualification（stage8b-v1，固定 dataset；exit 延后判定）
+        if: github.event.inputs.mode == 'full_qualification'
         run: |
           python - <<'PY'
           import json, subprocess, sys
@@ -104,7 +118,8 @@ jobs:
               str(p.returncode), encoding="utf-8")
           PY
 
-      - name: Real report trial（§十：仅 Primary Gate PASS 后；model 固定 flash）
+      - name: Real report trial（§十：仅 full + Primary Gate PASS 后；model 固定 flash）
+        if: github.event.inputs.mode == 'full_qualification'
         run: |
           python - <<'PY'
           import json, subprocess, sys, pathlib
@@ -160,11 +175,32 @@ jobs:
             docs/stage8b-real-ai-review.md
           if-no-files-found: warn
 
-      - name: Qualification verdict（§十二：最后按结果决定 run 成败）
+      - name: Qualification verdict（§十二：probe_only→diagnostic verdict；full→qualification verdict）
         if: always()
+        env:
+          MODE: ${{ github.event.inputs.mode }}
         run: |
           python - <<'PY'
-          import json, pathlib, sys
+          import json, os, pathlib, sys
+          mode = os.environ.get("MODE", "probe_only")
+          if mode == 'probe_only':
+              # §三：diagnostic verdict——只判定 RD1 probe
+              pf = pathlib.Path("data/runtime/ai_qualification/stage8b/report_probe_result.json")
+              if not pf.exists():
+                  print("VERDICT_NO_PROBE_RESULT")
+                  sys.exit(1)
+              pr = json.loads(pf.read_text(encoding="utf-8"))
+              print("mode=probe_only")
+              print("report_probe=" + str(pr.get("report_probe")))
+              print("root_cause_classification=" + str(pr.get("root_cause_classification")))
+              print("finish_reason=" + str(pr.get("finish_reason")))
+              print("reasoning_tokens=" + str(pr.get("reasoning_tokens")))
+              print("content_present=" + str(pr.get("content_present")))
+              if pr.get("report_probe") == "PASS":
+                  print("RD1_CONTRACT_PASS")
+                  sys.exit(0)
+              print("RD1_DIAGNOSTIC_PROBE_FAILED")
+              sys.exit(1)
           f = pathlib.Path("data/runtime/ai_qualification/stage8b/qualification_summary.json")
           if not f.exists():
               print("VERDICT_NO_SUMMARY")
