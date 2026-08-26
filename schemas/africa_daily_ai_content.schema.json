@@ -1,0 +1,285 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "title": "ASIP Africa Daily Report (Output) (AI CONTENT PAYLOAD — envelope 由 report engine 装配)",
+ "description": "Stage 7B §四 — 非洲社会安全与综合形势日报 OUTPUT contract（与 INPUT 分离）。AI 只返回本结构 JSON；fact_summary / assessment / outlook 三字段独立（§五/§六）。数字必须来自 report input（§八 numeric evidence gate）。 AI 仅返回内容负载；envelope 字段（report_id/report_type/period 等）由报告引擎提供。",
+ "type": "object",
+ "required": [
+  "title",
+  "executive_summary",
+  "overall_assessment",
+  "source_notes"
+ ],
+ "properties": {
+  "title": {
+   "type": "string"
+  },
+  "executive_summary": {
+   "type": "array",
+   "description": "5-8 条核心判断（§十）",
+   "minItems": 1,
+   "maxItems": 8,
+   "items": {
+    "$ref": "#/definitions/report_item"
+   }
+  },
+  "major_security_developments": {
+   "type": "array",
+   "maxItems": 8,
+   "items": {
+    "$ref": "#/definitions/report_item"
+   }
+  },
+  "political_social_stability": {
+   "type": "array",
+   "maxItems": 5,
+   "items": {
+    "$ref": "#/definitions/report_item"
+   }
+  },
+  "terrorism_armed_violence": {
+   "type": "array",
+   "maxItems": 5,
+   "items": {
+    "$ref": "#/definitions/report_item"
+   }
+  },
+  "cross_border_regional_risks": {
+   "type": "array",
+   "maxItems": 5,
+   "items": {
+    "$ref": "#/definitions/report_item"
+   }
+  },
+  "public_health_disease_risks": {
+   "type": "array",
+   "maxItems": 5,
+   "items": {
+    "$ref": "#/definitions/disease_item"
+   }
+  },
+  "key_changes": {
+   "type": "array",
+   "maxItems": 8,
+   "items": {
+    "$ref": "#/definitions/change_item"
+   }
+  },
+  "watch_items": {
+   "type": "array",
+   "maxItems": 8,
+   "items": {
+    "$ref": "#/definitions/report_item"
+   }
+  },
+  "overall_assessment": {
+   "type": "string",
+   "description": "整体评估（§六：必须 input evidence 支撑，无百分比预测）"
+  },
+  "source_notes": {
+   "type": "array",
+   "items": {
+    "$ref": "#/definitions/source_ref"
+   }
+  }
+ },
+ "definitions": {
+  "report_item": {
+   "type": "object",
+   "required": [
+    "item_id",
+    "country_iso3",
+    "headline_zh",
+    "fact_summary",
+    "assessment",
+    "outlook",
+    "verification_status",
+    "uncertainties",
+    "source_refs",
+    "importance_score",
+    "selection_reasons"
+   ],
+   "properties": {
+    "item_id": {
+     "type": "string"
+    },
+    "master_event_id": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "country_iso3": {
+     "type": "string"
+    },
+    "headline_zh": {
+     "type": "string"
+    },
+    "fact_summary": {
+     "type": "string",
+     "description": "仅 input 确定性事实（§六）"
+    },
+    "assessment": {
+     "type": "string",
+     "description": "有 evidence 支撑的判断，非预测（§六）"
+    },
+    "outlook": {
+     "type": "string",
+     "description": "中性关注性表述，禁无依据概率（§六）"
+    },
+    "verification_status": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "uncertainties": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "source_refs": {
+     "type": "array",
+     "items": {
+      "$ref": "#/definitions/source_ref"
+     }
+    },
+    "latest_update_at": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "importance_score": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 100
+    },
+    "selection_reasons": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "single_source_warning": {
+     "type": "boolean",
+     "default": false
+    },
+    "conflicting": {
+     "type": "boolean",
+     "default": false
+    }
+   }
+  },
+  "disease_item": {
+   "type": "object",
+   "required": [
+    "item_id",
+    "disease_id",
+    "country_iso3",
+    "fact_summary",
+    "assessment",
+    "outlook",
+    "uncertainties",
+    "source_refs"
+   ],
+   "properties": {
+    "item_id": {
+     "type": "string"
+    },
+    "disease_id": {
+     "type": "string"
+    },
+    "country_iso3": {
+     "type": "string"
+    },
+    "headline_zh": {
+     "type": "string"
+    },
+    "fact_summary": {
+     "type": "string",
+     "description": "数字仅来自 input（§九）"
+    },
+    "assessment": {
+     "type": "string"
+    },
+    "outlook": {
+     "type": "string"
+    },
+    "verification_status": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "uncertainties": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "source_refs": {
+     "type": "array",
+     "items": {
+      "$ref": "#/definitions/source_ref"
+     }
+    },
+    "latest_counts": {
+     "type": "object",
+     "description": "回显 input 数字（gate 校验）"
+    },
+    "as_of_date": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   }
+  },
+  "change_item": {
+   "type": "object",
+   "required": [
+    "item_id",
+    "change_type",
+    "fact_summary"
+   ],
+   "properties": {
+    "item_id": {
+     "type": "string"
+    },
+    "change_type": {
+     "type": "string"
+    },
+    "fact_summary": {
+     "type": "string"
+    },
+    "assessment": {
+     "type": "string"
+    }
+   }
+  },
+  "source_ref": {
+   "type": "object",
+   "required": [
+    "source_id"
+   ],
+   "properties": {
+    "source_id": {
+     "type": "string"
+    },
+    "source_name": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "url": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   }
+  }
+ }
+}

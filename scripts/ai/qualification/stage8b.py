@@ -301,7 +301,7 @@ def _glm_task_builder(case):
         "system_text": sys_text,
         "user_text": "INPUT:\n" + json.dumps(payload, ensure_ascii=False)[:6000],
         "usage_purpose": "production_qualification",
-        "max_output_tokens": 2048,
+        "max_output_tokens": MAX_TOKEN_POLICY.get(case["task_type"], 2048),
     }
 
 
@@ -428,6 +428,22 @@ EXACT_COPY_FIELDS = {
     "major_event_brief": ("brief_id", "report_type", "event_time", "country"),
 }
 
+# ── §二：AI content schema（envelope 迁回程序责任）──
+AI_CONTENT_SCHEMA = {
+    "africa_daily": "schemas/africa_daily_ai_content.schema.json",
+    "country_weekly": "schemas/country_weekly_ai_content.schema.json",
+    "major_event_brief": "schemas/major_event_brief_ai_content.schema.json",
+}
+
+# ── §八：max_tokens 策略（按 task type，含 buffer，避免截断合法 JSON）──
+MAX_TOKEN_POLICY = {
+    "stage4_event_enrichment": 2048,
+    "disease_summary": 2048,
+    "africa_daily": 4096,
+    "country_weekly": 3072,
+    "major_event_brief": 2048,
+}
+
 
 def check_exact_copy(parsed, input_payload, task_type):
     """§八：output 确定性元数据必须与 input 逐字一致 → REPORT_METADATA_MISMATCH。"""
@@ -449,20 +465,52 @@ def check_exact_copy(parsed, input_payload, task_type):
 
 
 def _evaluate_case(case, parsed, result):
-    """确定性 Gate：schema / 数字 / 归因 / 国家 / 疾病 / 来源 / FACT 分离 / exact-copy。"""
-    from scripts.ai.schema_validation import validate_against_schema
-    schema = case.get("schema")
-    if schema:
-        errs = validate_against_schema(parsed, schema)
-        if errs:
-            result["schema_pass"] = False
-            result["contract_failure"] = "schema_failure"
-            result["errors"] = errs[:8]
-            return result
-    result["schema_pass"] = True
-    result["parsed"] = parsed
+    """确定性 Gate：schema / 数字 / 归因 / 国家 / 疾病 / 来源 / FACT 分离 / exact-copy。
 
+    §二/§三：报告类——AI raw 先过 AI content schema；再 assemble（envelope 由程序
+    注入）；final report 过完整 output schema；exact-copy 针对 assembled final。
+    """
+    from scripts.ai.schema_validation import validate_against_schema
+    from scripts.report.gen.assembler import assemble_report
+    schema = case.get("schema")
     payload = case["input_payload"]
+
+    if case["task_type"] in AI_CONTENT_SCHEMA:
+        # 1) AI content payload schema（不含 envelope）
+        ai_schema = load_schema(AI_CONTENT_SCHEMA[case["task_type"]])
+        if ai_schema:
+            errs = validate_against_schema(parsed, ai_schema)
+            if errs:
+                result["schema_pass"] = False
+                result["contract_failure"] = "ai_content_schema_failure"
+                result["errors"] = errs[:8]
+                return result
+        # 2) assembler：envelope（input 确定性值）+ AI content → final report
+        final = assemble_report(case["task_type"], payload, parsed,
+                                meta={"provider_name": "deepseek",
+                                      "model_name": "deepseek-v4-flash",
+                                      "prompt_version": case.get("prompt_version")})
+        result["assembled_report"] = final
+        if schema:
+            errs = validate_against_schema(final, schema)
+            if errs:
+                result["schema_pass"] = False
+                result["contract_failure"] = "schema_failure"
+                result["errors"] = errs[:8]
+                return result
+        result["schema_pass"] = True
+        parsed = final   # 后续 gate（数字/归因/来源/exact-copy）针对 final
+    else:
+        if schema:
+            errs = validate_against_schema(parsed, schema)
+            if errs:
+                result["schema_pass"] = False
+                result["contract_failure"] = "schema_failure"
+                result["errors"] = errs[:8]
+                return result
+        result["schema_pass"] = True
+
+    result["parsed"] = parsed
     errors = []
     # 数字 evidence（§十七）
     fact_fields = ("key_facts", "summary_zh", "fact_summary", "what_happened",
@@ -537,8 +585,9 @@ def load_fixture_cases():
             "semantic": "committed fixture (%s)" % fc["fixture_path"],
             "is_disease": False, "input_payload": payload,
             "schema": load_schema(fc["output_schema"]),
+            "ai_content_schema": load_schema(AI_CONTENT_SCHEMA[fc["task_type"]]),
             "system_prompt": prompt_path.read_text(encoding="utf-8"),
-            "prompt_version": fc.get("prompt_version") or "v1.0.0",
+            "prompt_version": fc.get("prompt_version") or "v1.0.1",
             "fixture_hash": fc.get("fixture_hash"),
         })
     return cases
@@ -883,23 +932,22 @@ def run_smoke(provider_name="deepseek"):
 
 
 def run_report_probe(provider_name="deepseek"):
-    """§七：单个 Report API Probe（RD1 固定输入，deepseek-v4-flash）。
+    """§六：Report API Probe（RD1）——input → envelope → AI content → assembler → final。
 
-    只验证连接与契约通道：HTTP success / requested·returned model / strict_json
-    / schema / period exact-copy。不评价报告内容。失败 → exit 1。
+    §七：exact_match 默认 null；只有真实比较后才 true/false（修复假阳性）。
     """
     cases = build_cases()
     rd1 = next(c for c in cases if c["case_id"] == "RD1")
     r = run_case(rd1, provider_name)
-    # §八：period exact-copy（模型输出必须与输入逐字一致）
-    per_ok = True
-    per_details = {}
-    if r.get("parsed"):
-        ok, errs = check_exact_copy(r["parsed"], rd1["input_payload"], "africa_daily")
+    per_ok = None   # §七：未真实比较 → null（不再默认 true）
+    per_details = None
+    if r.get("provider_status") == "succeeded" and r.get("assembled_report"):
+        ok, errs = check_exact_copy(r["assembled_report"], rd1["input_payload"],
+                                    "africa_daily")
         per_ok = ok
-        per_details = {e.split(":")[1].split(" ")[0]: "PASS" if ok else e
-                       for e in (errs or [])}
+        per_details = errs or []
     tokens = r.get("tokens") or {}
+    assembled = r.get("assembled_report")
     out = {
         "case_id": "RD1", "task_type": "africa_daily",
         "provider": provider_name,
@@ -913,7 +961,7 @@ def run_report_probe(provider_name="deepseek"):
         "latency_ms": r.get("latency_ms"),
         "strict_json_pass": r.get("strict_json_pass"),
         "schema_pass": r.get("schema_pass"),
-        "period_start_exact_match": per_ok,
+        "period_start_exact_match": per_ok,   # null / true / false
         "period_end_exact_match": per_ok,
         "metadata_check": per_details,
         "input_tokens": tokens.get("input_tokens"),
@@ -921,9 +969,15 @@ def run_report_probe(provider_name="deepseek"):
         "total_tokens": tokens.get("total_tokens"),
         "errors": (r.get("errors") or [])[:5],
     }
+    # §十二：同时保存 raw AI content 与 assembled report（区分模型/assembler 问题）
+    raw = r.get("raw_text_excerpt")
+    if raw:
+        out["raw_ai_content_excerpt"] = raw[:600]
+    if assembled:
+        out["assembled_report"] = assembled
     print(json.dumps(out, ensure_ascii=False, indent=2))
     ok = (r.get("provider_status") == "succeeded" and r.get("strict_json_pass")
-          and r.get("schema_pass") and per_ok
+          and r.get("schema_pass") and per_ok is True
           and (r.get("returned_model") in (None, "deepseek-v4-flash")))
     out["report_probe"] = "PASS" if ok else "FAIL"
     ARTIFACT_DIR.mkdir(parents=True, exist_ok=True)

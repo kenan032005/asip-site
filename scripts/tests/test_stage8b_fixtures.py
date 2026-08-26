@@ -101,9 +101,9 @@ class TestRealPromptRouting(unittest.TestCase):
     def test_report_prompt_mapping(self):
         cases = {c["case_id"]: c for c in q.build_cases()}
         expect = {
-            "RD1": ("config/prompts/africa_daily_report_v1.md", "africa_daily_report.schema.json", "v1.0.1"),
-            "RW1": ("config/prompts/country_weekly_report_v1.md", "country_weekly_report.schema.json", "v1.0.1"),
-            "RB1": ("config/prompts/major_event_brief_v1.md", "major_event_brief.schema.json", "v1.0.1"),
+            "RD1": ("config/prompts/africa_daily_report_v1.md", "africa_daily_report.schema.json", "v1.0.2"),
+            "RW1": ("config/prompts/country_weekly_report_v1.md", "country_weekly_report.schema.json", "v1.0.2"),
+            "RB1": ("config/prompts/major_event_brief_v1.md", "major_event_brief.schema.json", "v1.0.2"),
         }
         for cid, (pf, oschema, pv) in expect.items():
             c = cases[cid]
@@ -293,12 +293,12 @@ class TestDeterministicMetadata(unittest.TestCase):
         man = load_manifest()
         for fc in man["cases"]:
             if fc["task_type"] in ("africa_daily", "country_weekly", "major_event_brief"):
-                self.assertEqual(fc["prompt_version"], "v1.0.1", fc["case_id"])
+                self.assertEqual(fc["prompt_version"], "v1.0.2", fc["case_id"])
         # prompt 文件含 exact-copy 段与 v1.0.1 头
         daily_prompt = (ROOT / "config" / "prompts" /
                         "africa_daily_report_v1.md").read_text(encoding="utf-8")
-        self.assertIn("DETERMINISTIC METADATA", daily_prompt)
-        self.assertIn("v1.0.1", daily_prompt)
+        self.assertIn("REPORT ENVELOPE", daily_prompt)
+        self.assertIn("v1.0.2", daily_prompt)
 
     def test_probe_result_schema(self):
         # 结构：report_probe_result.json 含 tokens + period exact match 字段

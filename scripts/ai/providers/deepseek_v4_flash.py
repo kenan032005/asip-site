@@ -129,7 +129,7 @@ class DeepSeekV4FlashProvider(BaseAIProvider):
         while attempt < self.max_retries:
             attempt += 1
             try:
-                return self._call_api(system, user, tid, attempt)
+                return self._call_api(system, user, tid, attempt, task.get("max_output_tokens"))
             except urllib.error.HTTPError as e:
                 info = self._http_error_info(e)
                 last_info = info
@@ -174,13 +174,14 @@ class DeepSeekV4FlashProvider(BaseAIProvider):
         base = self.retry_backoff[min(attempt - 1, len(self.retry_backoff) - 1)]
         return base + random.uniform(0, 1.5)
 
-    def _call_api(self, system, user, tid, attempt):
+    def _call_api(self, system, user, tid, attempt, max_tokens=None):
         payload = json.dumps({
             "model": FLASH_MODEL,          # §二：固定 flash，绝不 fallback
             "messages": [{"role": "system", "content": system},
                          {"role": "user", "content": user}],
             "temperature": 0.2,
             "response_format": {"type": "json_object"},   # §十
+            "max_tokens": max_tokens,      # §八：按 task 预算，防无限输出/截断
         }, ensure_ascii=False).encode("utf-8")
         req = urllib.request.Request(
             self.base_url + "/chat/completions", data=payload,

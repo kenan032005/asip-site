@@ -1,0 +1,107 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "title": "ASIP Major Event Brief (Output) (AI CONTENT PAYLOAD — envelope 由 report engine 装配)",
+ "description": "Stage 7B §十五 — 重大事件简报 OUTPUT contract。只处理公开事件事实与风险影响；不得包含组织战术/武器能力/攻击方法/敏感行动细节扩写。 AI 仅返回内容负载；envelope 字段（report_id/report_type/period 等）由报告引擎提供。",
+ "type": "object",
+ "required": [
+  "title",
+  "what_happened",
+  "confirmed_facts",
+  "uncertainties",
+  "immediate_implications",
+  "watch_items",
+  "source_notes"
+ ],
+ "properties": {
+  "title": {
+   "type": "string"
+  },
+  "location": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "what_happened": {
+   "type": "string",
+   "description": "公开事件事实描述"
+  },
+  "confirmed_facts": {
+   "type": "array",
+   "description": "仅 input 事实（§八：数字必须可追溯）",
+   "items": {
+    "type": "object",
+    "required": [
+     "fact",
+     "source_refs"
+    ],
+    "properties": {
+     "fact": {
+      "type": "string"
+     },
+     "source_refs": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     }
+    }
+   }
+  },
+  "uncertainties": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "verification_confidence": {
+   "type": [
+    "integer",
+    "null"
+   ]
+  },
+  "immediate_implications": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "watch_items": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "source_notes": {
+   "type": "array",
+   "items": {
+    "$ref": "#/definitions/source_ref"
+   }
+  }
+ },
+ "definitions": {
+  "source_ref": {
+   "type": "object",
+   "required": [
+    "source_id"
+   ],
+   "properties": {
+    "source_id": {
+     "type": "string"
+    },
+    "source_name": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "url": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   }
+  }
+ }
+}

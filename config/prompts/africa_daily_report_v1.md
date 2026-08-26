@@ -1,4 +1,4 @@
-# ASIP Africa Daily Report — 生成合同 v1.0.1
+# ASIP Africa Daily Report — 生成合同 v1.0.2
 
 ## TASK
 
@@ -16,10 +16,11 @@
 - 不得加入模型自身记忆中的外部事实。
 - 归因与不确定性必须保留（§七）：INPUT 含 alleged/claimed/reportedly/unconfirmed/single_source/conflicting 时，中文必须写「据称 / 声称 / 被指 / 尚未证实 / 单一来源 / 不同来源说法不一」。single_source_warning=true 的事件必须标注单一来源；conflicting=true 的事件不得写成已证实。
 
-## DETERMINISTIC METADATA（EXACT COPY）
+## REPORT ENVELOPE（程序责任）
 
-以下字段属于确定性报告元数据，MUST be copied exactly from the corresponding INPUT fields.
-Do not infer, calculate, translate, modify, or return null for these fields:/n- report_id, report_type, report_date, period_start, period_end
+Do not generate report envelope metadata (report_id, report_type, report_date, period_start, period_end).
+These fields are supplied by the report engine and MUST NOT be included in your output.
+Return ONLY the content payload described in OUTPUT SCHEMA.
 
 ## OUTPUT SCHEMA（必须严格输出此结构，仅一个 JSON 对象，无其他文字、无 markdown 围栏）
 

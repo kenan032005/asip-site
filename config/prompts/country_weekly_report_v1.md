@@ -1,4 +1,4 @@
-# ASIP Priority Country Weekly Report — 生成合同 v1.0.1
+# ASIP Priority Country Weekly Report — 生成合同 v1.0.2
 
 ## TASK
 
@@ -16,10 +16,11 @@
 - 疾病数字只来自 INPUT latest_counts。
 - 归因与不确定性保留（同日报规则）：single_source/conflicting 显式标注。
 
-## DETERMINISTIC METADATA（EXACT COPY）
+## REPORT ENVELOPE（程序责任）
 
-以下字段属于确定性报告元数据，MUST be copied exactly from the corresponding INPUT fields.
-Do not infer, calculate, translate, modify, or return null for these fields:/n- report_id, report_type, country_iso3, week_start, week_end
+Do not generate report envelope metadata (report_id, report_type, country_iso3, week_start, week_end).
+These fields are supplied by the report engine and MUST NOT be included in your output.
+Return ONLY the content payload described in OUTPUT SCHEMA.
 
 ## OUTPUT SCHEMA（严格输出此结构，仅一个 JSON 对象）
 
