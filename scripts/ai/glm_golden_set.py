@@ -40,7 +40,9 @@ from scripts.ai.mock_provider import MockProvider
 from scripts.ai.schema_validation import validate_against_schema
 
 PAYLOAD_SCHEMA = ROOT / "schemas" / "ai_enrichment_payload.schema.json"
+DISEASE_AI_SCHEMA = ROOT / "schemas" / "disease_ai_summary.schema.json"
 GLM_PROMPT_PATH = ROOT / "config" / "prompts" / "stage4_event_enrichment_glm_v1.md"
+DISEASE_GLM_PROMPT_PATH = ROOT / "config" / "prompts" / "disease_summary_glm_v1.md"
 
 
 def _glm_system_prompt():
@@ -48,6 +50,19 @@ def _glm_system_prompt():
     if not GLM_PROMPT_PATH.exists():
         raise FileNotFoundError("GLM prompt missing: %s" % GLM_PROMPT_PATH)
     return GLM_PROMPT_PATH.read_text(encoding="utf-8")
+
+
+def _disease_glm_system_prompt():
+    """加载 Disease AI Summary Prompt（task-specific），失败即抛。"""
+    if not DISEASE_GLM_PROMPT_PATH.exists():
+        raise FileNotFoundError("Disease GLM prompt missing: %s" % DISEASE_GLM_PROMPT_PATH)
+    return DISEASE_GLM_PROMPT_PATH.read_text(encoding="utf-8")
+
+
+def _schema_for(is_disease):
+    """§七 Task Contract Router：按 task_type 选输出 schema。"""
+    p = DISEASE_AI_SCHEMA if is_disease else PAYLOAD_SCHEMA
+    return json.loads(p.read_text(encoding="utf-8"))
 
 # ── 社安样本：显式选择现有 Canonical 真实事件（非隔离优先，TCD/NER 为主）──
 SECURITY_IDS = [
@@ -141,16 +156,20 @@ def build_disease_samples():
 
 def make_task(sample, provider_model):
     ev = sample["event"]
+    import hashlib
     if sample["is_disease"]:
+        # §七 task-specific contract：Disease 用独立 prompt/schema
         task_type = "disease_summary"
+        sys_text = _disease_glm_system_prompt()
+        prompt_version = "disease-glm-v1.0.0"
     else:
         task_type = "stage4_event_enrichment"
-    import hashlib
-    sys_text = _glm_system_prompt()
+        sys_text = _glm_system_prompt()
+        prompt_version = "glm-v1.0.0"
     return {
         "task_id": "GLMG_%s" % (ev.get("event_id") or ev.get("disease_event_id") or "x")[-16:],
         "task_type": task_type,
-        "prompt_version": "glm-v1.0.0",
+        "prompt_version": prompt_version,
         "prompt_contract_hash": hashlib.sha256(sys_text.encode("utf-8")).hexdigest()[:16],
         "input_hash": "gh_" + (ev.get("event_id") or ev.get("disease_event_id") or "x")[-8:],
         "system_text": sys_text,
@@ -232,9 +251,12 @@ def run_quality_checks(rows):
     for row in rows:
         res = row.get("parsed") or {}
         src = row.get("source_summary") or {}
-        # §七 最终裁决：succeeded 必须 strict_json + schema 全通过
+        # §七 Task Contract Router：按样本类型选输出 schema
+        is_disease = row.get("is_disease", False)
+        row_schema = _schema_for(is_disease)
+        # §七 最终裁决：succeeded 必须 strict_json + task-specific schema 全通过
         if row.get("provider_status") == "succeeded" and res:
-            sch_errs = validate_against_schema(res, schema)
+            sch_errs = validate_against_schema(res, row_schema)
             if sch_errs:
                 row["provider_status"] = "failed_contract"
                 row["contract_errors"] = sch_errs
@@ -242,10 +264,9 @@ def run_quality_checks(rows):
         ok_json = bool(res) and row.get("provider_status") == "succeeded"
         if ok_json:
             stats["strict_json_pass"] += 1
-            if not validate_against_schema(res, schema):
+            if not validate_against_schema(res, row_schema):
                 stats["schema_pass"] += 1
         cat = row.get("category", "")
-        is_disease = row.get("is_disease", False)
 
         # 普通经济/发展：security_relevance 应为 none
         if cat == "economic_news":
@@ -280,6 +301,7 @@ def run_quality_checks(rows):
 
         # 疾病数字确定性 Evidence Gate：parsed 数字必须在源可找到或为 null
         if is_disease and res:
+            import re as _re
             for f in NUMERIC_FIELDS:
                 pv = res.get(f)
                 if pv is None:
@@ -290,6 +312,12 @@ def run_quality_checks(rows):
                     stats["disease_numeric_gate_failures"] += 1  # 源无此数字而模型给出
                 elif pv_int is not None and pv_int != sv:
                     stats["disease_numeric_gate_failures"] += 1  # 数字不符
+            # §五 AI 不得覆盖 canonical 数字：key_changes 引用数字字段时源必须存在
+            for kc in res.get("key_changes") or []:
+                ef = (kc or {}).get("evidence_field") or ""
+                desc = (kc or {}).get("description") or ""
+                if ef in NUMERIC_FIELDS and src.get(ef) is None and _re.search(r"\d", desc):
+                    stats["disease_numeric_gate_failures"] += 1  # AI 引用源中不存在数字
 
         # uncertainty 保留
         if src.get("has_uncertainties") and res and not res.get("uncertainties"):
