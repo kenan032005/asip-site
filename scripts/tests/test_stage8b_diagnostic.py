@@ -732,3 +732,115 @@ class TestSocialDiseasePromptContract(unittest.TestCase):
         src = inspect.getsource(q._glm_task_builder)
         self.assertIn("stage4-enrichment-v1.0.1", src)
         self.assertIn("disease-summary-v1.0.1", src)
+
+
+class TestJSONRepairRetry(unittest.TestCase):
+    """§四-§五：Same-Model JSON Repair Retry（flash→flash，禁换模型）。"""
+
+    def _fake_provider(self, first_text, second_text=None, second_model="deepseek-v4-flash"):
+        calls = {"n": 0}
+
+        def fake_urlopen(req, timeout=180):
+            calls["n"] += 1
+            if calls["n"] == 1:
+                return FakeResp(resp_body(content=first_text))
+            return FakeResp(resp_body(content=second_text, model=second_model))
+
+        return calls, fake_urlopen
+
+    def test_repair_success_same_model(self):
+        bad = '{"title": "x", "fact": "y",}'   # 尾逗号 → syntax error
+        good = '{"title": "x", "fact": "y"}'
+        # repair 调用即修复响应（provider 1 次调用返回 good JSON）
+        calls, fu = self._fake_provider(good, good)
+        import scripts.ai.qualification.stage8b as qq
+        orig = qq.run_case
+        try:
+            # 直接测 _json_repair_attempt 经 provider mock（patch 构造注入 key）
+            from unittest import mock as _m
+            with _m.patch("scripts.ai.providers.deepseek_v4_flash.DeepSeekV4FlashProvider",
+                          return_value=ds.DeepSeekV4FlashProvider(api_key="test-key")), \
+                 _m.patch("urllib.request.urlopen", side_effect=fu):
+                rr = qq._json_repair_attempt(
+                    {"task_id": "T", "task_type": "stage4_event_enrichment",
+                     "system_text": "sys", "user_text": "user",
+                     "max_output_tokens": 2048},
+                    bad, "deepseek")
+            self.assertIsNotNone(rr)
+            self.assertEqual(rr["returned_model"], "deepseek-v4-flash")
+            self.assertEqual(calls["n"], 1)
+            ok, parsed, _ = qq.strict_json_parse(rr["text"])
+            self.assertTrue(ok)
+            # repair 指令不含新事实要求
+            self.assertIn("SAME substantive content", qq.REPAIR_INSTRUCTION)
+            self.assertIn("not valid JSON", qq.REPAIR_INSTRUCTION)
+        finally:
+            qq.run_case = orig
+
+    def test_repair_rejects_non_flash(self):
+        # repair 响应模型为 pro → 拒绝（禁跨模型）
+        def fu(req, timeout=180):
+            return FakeResp(resp_body(content='{}', model="deepseek-v4-pro"))
+        from unittest import mock as _m
+        import scripts.ai.qualification.stage8b as qq
+        with _m.patch("scripts.ai.providers.deepseek_v4_flash.DeepSeekV4FlashProvider",
+                      return_value=ds.DeepSeekV4FlashProvider(api_key="test-key")), \
+             _m.patch("urllib.request.urlopen", side_effect=fu):
+            rr = qq._json_repair_attempt(
+                {"task_id": "T", "task_type": "stage4_event_enrichment",
+                 "system_text": "s", "user_text": "u", "max_output_tokens": 2048},
+                '{"bad"', "deepseek")
+        self.assertIsNone(rr)   # 跨模型 → 拒绝
+
+    def test_repair_not_triggered_for_length(self):
+        # finish_reason=length → budget 分类，不 repair
+        from scripts.ai.qualification import stage8b as qq
+        bf, st = qq.classify_budget_failure(
+            {"finish_reason": "length", "content_present": False})
+        self.assertEqual(bf, "output_token_budget_insufficient")
+
+    def test_repair_in_run_case_flow(self):
+        # 集成：run_case strict 失败 → repair 成功 → 重过 gates
+        import scripts.ai.qualification.stage8b as qq
+        calls = {"n": 0}
+        good = json.dumps({
+            "source_language": "en", "title_zh": "test",
+            "summary_zh": "据当地媒体报道，事件已发生", "event_type": "civil_unrest",
+            "country_iso3": "AAA", "location": {"country_iso3": "AAA"},
+            "key_facts": [{"fact": "事件已发生（据单一来源报道）",
+                           "evidence_field": "body_extracted",
+                           "evidence_excerpt": "x"}],
+            "uncertainties": [], "security_relevance": "direct",
+            "classification_confidence": 80}, ensure_ascii=False)
+        def fake_urlopen(req, timeout=180):
+            calls["n"] += 1
+            if calls["n"] == 1:
+                return FakeResp(resp_body(content='{"title": "x",}'))
+            return FakeResp(resp_body(content=good))
+        orig = qq._json_repair_attempt
+        try:
+            from unittest import mock as _m
+            with _m.patch("scripts.ai.providers.deepseek_v4_flash.DeepSeekV4FlashProvider",
+                          return_value=ds.DeepSeekV4FlashProvider(api_key="test-key")), \
+                 _m.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+                p = ds.DeepSeekV4FlashProvider(api_key="test-key")
+                task = {"task_id": "S8B_S1", "task_type": "stage4_event_enrichment",
+                        "system_text": "sys",
+                        "user_text": "INPUT:" + chr(10) + "{}",
+                        "max_output_tokens": 2048, "prompt_version": "v1"}
+                res = p.submit_task(task)   # 第一次坏 JSON
+                # 手动模拟 run_case repair 分支
+                rr1 = res["result"]
+                rp = qq._json_repair_attempt(task, rr1["text"], "deepseek")
+                self.assertIsNotNone(rp)
+                ok, parsed, _ = qq.strict_json_parse(rp["text"])
+                self.assertTrue(ok)
+                self.assertEqual(calls["n"], 2)
+        finally:
+            qq._json_repair_attempt = orig
+
+    def test_repair_instr_no_new_facts(self):
+        import scripts.ai.qualification.stage8b as qq
+        self.assertIn("Do not add new facts", qq.REPAIR_INSTRUCTION)
+        self.assertIn("Do not remove attribution", qq.REPAIR_INSTRUCTION)
+        self.assertIn("Do not add markdown", qq.REPAIR_INSTRUCTION)

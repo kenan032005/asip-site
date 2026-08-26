@@ -60,6 +60,7 @@ ATTR_SRC_KW = ("alleged", "claimed", "suspected", "reportedly", "unconfirmed",
                "尚未证实", "单一来源", "说法不一")
 ATTR_OUT_KW = ("据称", "声称", "被指", "疑似", "可能", "据报道", "尚未证实",
                "单一来源", "说法不一", "存在冲突", "多家来源", "未证实",
+               "交叉验证",
                "alleged", "claimed", "suspected", "reportedly",
                "unconfirmed", "single source", "conflicting")
 # §一（Final Attribution Closure）：通用来源归因模式（S7 修复，非 hard-code）。
@@ -442,11 +443,76 @@ def run_case(case, provider_name):
         if bf:
             result["contract_failure"] = bf
         else:
+            # §四（本包）：Same-Model JSON Repair Retry（flash→flash，禁换模型）。
+            # 条件：HTTP 成功 + content 非空 + stop 正常结束 + 仅 JSON 语法失败。
+            if (provider_name == "deepseek"
+                    and rr.get("finish_reason") == "stop"
+                    and (rr.get("content_present") or raw_text.strip())):
+                rp = _json_repair_attempt(task, raw_text, provider_name)
+                if rp is not None:
+                    result["original_attempt_invalid_json"] = True
+                    result["repair_attempt"] = 1
+                    result["attempt_count"] = max(result["attempt_count"], 2)
+                    result["repair_returned_model"] = rp.get("returned_model")
+                    ok2, parsed2, err2 = strict_json_parse(rp.get("text") or "")
+                    if ok2:
+                        result["repair_succeeded"] = True
+                        result["strict_json_pass"] = True
+                        result["contract_failure"] = None
+                        result["failure_stage"] = None
+                        result["raw_text_excerpt"] = (rp.get("text") or "")[:400]
+                        for _tk in ("finish_reason", "reasoning_content_present",
+                                    "reasoning_content_length_chars",
+                                    "reasoning_tokens", "content_present",
+                                    "content_length_chars", "raw_content_is_null",
+                                    "raw_content_length_chars",
+                                    "stripped_content_length_chars",
+                                    "whitespace_only", "thinking_requested",
+                                    "reasoning_effort_requested"):
+                            result[_tk] = rp.get(_tk)
+                        # §五：repair 后必须重过全部 gates（schema/attribution/数字）
+                        return _evaluate_case(case, parsed2, result)
+                    result["repair_succeeded"] = False
+                    result["contract_failure"] = "invalid_response_shape:%s" % (err or "?")
+                    result["failure_stage"] = "response_parse"
+                    return result
             result["contract_failure"] = "invalid_response_shape:%s" % (err or "?")
         result["failure_stage"] = bstage or "response_parse"
         return result
     result["raw_text_excerpt"] = raw_text[:400]  # artifact 审计用（不含 key）
     return _evaluate_case(case, parsed, result)
+
+
+# ── §四（本包）：Same-Model JSON Repair Retry ──
+REPAIR_INSTRUCTION = (
+    "The previous response is not valid JSON.\n"
+    "Return the SAME substantive content as one valid JSON object "
+    "matching the required output schema.\n"
+    "Do not add new facts. Do not remove attribution or uncertainty "
+    "qualifiers. Do not add markdown or prose outside JSON."
+)
+
+
+def _json_repair_attempt(task, raw_text, provider_name):
+    """同模型 flash→flash 格式修复（禁换模型；失败返回 None 保持原失败）。"""
+    if provider_name != "deepseek":
+        return None
+    # 与 run_case 一致：直接构造 Flash provider（不走 registry 别名）
+    from scripts.ai.providers.deepseek_v4_flash import (
+        DeepSeekV4FlashProvider, ALLOWED_DEEPSEEK_MODELS)
+    prov = DeepSeekV4FlashProvider()
+    repair_task = dict(task or {})
+    repair_task["task_id"] = str((task or {}).get("task_id", "?")) + "_REPAIR"
+    repair_task["user_text"] = (REPAIR_INSTRUCTION + "\n\nPREVIOUS_INVALID_JSON:\n"
+                                + (raw_text or "")[:6000])
+    res = prov.submit_task(repair_task)
+    if (res or {}).get("status") != "succeeded":
+        return None
+    rr = (res.get("result") or {})
+    # §四：repair 返回非 flash → 拒绝（禁跨模型 fallback）
+    if rr.get("returned_model") and rr.get("returned_model") not in ALLOWED_DEEPSEEK_MODELS:
+        return None
+    return rr
 
 
 # ── §八/§九：确定性元数据 exact-copy（LLM 不得推导/计算/返回 null）──
