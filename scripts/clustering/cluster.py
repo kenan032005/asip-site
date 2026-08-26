@@ -70,32 +70,113 @@ def compare_to_anchor(anchor, candidate):
             "verdict": verdict}
 
 
-def cluster_candidates(candidates, blocking_fn=None):
-    """主流程：blocking 生成候选对 → 与 anchor 比较（非传递）→ 构建 clusters。
+def cluster_candidates(candidates, blocking_fn=None, blocks=None):
+    """主流程：block 内 anchor 聚类（非传递合并）。
 
-    candidates: list of dict（含 primary_country_iso3/event_time 或 published_at/
-                 location/event_type/title/source_group/trust_tier/body 等）。
+    candidates: list of dict。
+    blocks: 可选——由 blocking.build_blocks 预生成（block 内才生成 pair 并比较）。
+            若提供，跨 block 不比较（真 pre-pair blocking）；否则退回全量（仅测试用）。
     返回 (clusters, stats, decisions)。
     """
+    if blocks is None:
+        # 兼容旧路径：单 block 全量（仅用于小规模测试）
+        blocks = [list(candidates)]
+
+    all_clusters = []
+    all_decisions = []
+    stats = {"candidate_pairs_evaluated": 0, "hard_rejected_pairs": 0,
+             "auto_clustered_pairs": 0, "needs_review_pairs": 0,
+             "separate_pairs": 0, "cross_country_reject_count": 0,
+             "conflict_flag_count": 0, "blocks": len(blocks)}
+
+    for block in blocks:
+        if len(block) < 2:
+            continue
+        local_clusters, local_meta, local_decisions = _cluster_block(block)
+        stats["candidate_pairs_evaluated"] += local_meta["candidate_pairs_evaluated"]
+        stats["hard_rejected_pairs"] += local_meta["hard_rejected_pairs"]
+        stats["auto_clustered_pairs"] += local_meta["auto_clustered_pairs"]
+        stats["needs_review_pairs"] += local_meta["needs_review_pairs"]
+        stats["separate_pairs"] += local_meta["separate_pairs"]
+        stats["cross_country_reject_count"] += local_meta["cross_country_reject_count"]
+        stats["conflict_flag_count"] += local_meta["conflict_flag_count"]
+        all_clusters.extend(local_clusters)
+        all_decisions.extend(local_decisions)
+
+    # 未进入任何 block 的 singleton（len<2 的 block）
+    seen_members = set()
+    for cl in all_clusters:
+        for m in cl:
+            seen_members.add(m.get("candidate_id") or m.get("article_id") or id(m))
+    for blk in blocks:
+        if len(blk) == 1:
+            m = blk[0]
+            mid = m.get("candidate_id") or m.get("article_id") or id(m)
+            if mid not in seen_members:
+                all_clusters.append([m])
+
+    # master event 构造
+    cluster_meta = []
+    for members in all_clusters:
+        anchor = choose_anchor(members)
+        n_indep, groups = _indep_stats(members)
+        status = "singleton" if len(members) == 1 else (
+            "auto_clustered" if _cluster_verdict(members) == "auto" else "needs_review")
+        conf = _cluster_confidence(members)
+        meta = {
+            "master_event_id": "ME_%s" % _hash_id(members),
+            "cluster_version": "6a-completion-v1",
+            "member_ids": [m.get("candidate_id") or m.get("article_id") for m in members],
+            "article_ids": [m.get("article_id") for m in members if m.get("article_id")],
+            "candidate_ids": [m.get("candidate_id") for m in members if m.get("candidate_id")],
+            "primary_country_iso3": anchor.get("primary_country_iso3"),
+            "affected_countries": anchor.get("affected_countries") or [],
+            "event_type": anchor.get("event_type") or anchor.get("event_type_hint"),
+            "event_time_start": min([m.get("event_time") or m.get("published_at") or "9999"
+                                     for m in members]),
+            "event_time_end": max([m.get("event_time") or m.get("published_at") or ""
+                                   for m in members]),
+            "locations": sorted({m.get("location") for m in members if m.get("location")}),
+            "actors": sorted({m.get("actor") for m in members if m.get("actor")}),
+            "source_count": len(members),
+            "source_groups": sorted({source_group_of(m) for m in members}),
+            "independent_source_count": n_indep,
+            "primary_source_id": anchor.get("source_id"),
+            "cluster_status": status,
+            "cluster_confidence": conf,
+            "merge_reasons": [],
+            "conflict_flags": _union_conflicts(members),
+            "created_at": time.strftime("%Y-%m-%dT%H:%M:%S+08:00"),
+            "updated_at": None,
+        }
+        cluster_meta.append(meta)
+    stats["master_event_count"] = len(cluster_meta)
+    stats["singleton_count"] = sum(1 for m in cluster_meta if m["cluster_status"] == "singleton")
+    stats["multi_source_cluster_count"] = sum(1 for m in cluster_meta if len(m["member_ids"]) >= 2)
+    stats["independent_source_groups_distribution"] = _distrib(cluster_meta)
+    return cluster_meta, stats, all_decisions
+
+
+def _cluster_block(members):
+    """单个 block 内的 anchor 聚类（非传递；候选与 cluster anchor 比较）。"""
     from .sources import same_block
 
-    clusters = []          # list of member dicts（每 cluster 至少 1 条）
-    cluster_meta = []      # master event 元数据
-    decisions = []         # 每对判定（审计）
+    clusters = []
+    decisions = []
     stats = {"candidate_pairs_evaluated": 0, "hard_rejected_pairs": 0,
              "auto_clustered_pairs": 0, "needs_review_pairs": 0,
              "separate_pairs": 0, "cross_country_reject_count": 0,
              "conflict_flag_count": 0}
 
-    remaining = list(candidates)
+    remaining = list(members)
     while remaining:
         first = remaining.pop(0)
         cluster = [first]
-        # 依次尝试将 remaining 中 candidate 并入该 cluster（始终与 anchor 比较）
         i = 0
         while i < len(remaining):
             cand = remaining[i]
-            if not (blocking_fn or same_block)(cluster[0], cand):
+            # 同 block 内仍做 country/time 快速检查（cross-border 已入块，这里防误差）
+            if not same_block(cluster[0], cand):
                 stats["candidate_pairs_evaluated"] += 1
                 if (cluster[0].get("primary_country_iso3") and cand.get("primary_country_iso3")
                         and cluster[0]["primary_country_iso3"] != cand["primary_country_iso3"]):
@@ -121,46 +202,7 @@ def cluster_candidates(candidates, blocking_fn=None):
                 stats["hard_rejected_pairs"] += 1
             i += 1
         clusters.append(cluster)
-
-    # master event 构造
-    for members in clusters:
-        anchor = choose_anchor(members)
-        n_indep, groups = _indep_stats(members)
-        status = "singleton" if len(members) == 1 else (
-            "auto_clustered" if _cluster_verdict(members) == "auto" else "needs_review")
-        conf = _cluster_confidence(members)
-        meta = {
-            "master_event_id": "ME_%s" % _hash_id(members),
-            "cluster_version": "6a-v1",
-            "member_ids": [m.get("candidate_id") or m.get("article_id") for m in members],
-            "article_ids": [m.get("article_id") for m in members if m.get("article_id")],
-            "candidate_ids": [m.get("candidate_id") for m in members if m.get("candidate_id")],
-            "primary_country_iso3": anchor.get("primary_country_iso3"),
-            "affected_countries": anchor.get("affected_countries") or [],
-            "event_type": anchor.get("event_type"),
-            "event_time_start": min([m.get("event_time") or m.get("published_at") or "9999"
-                                     for m in members]),
-            "event_time_end": max([m.get("event_time") or m.get("published_at") or ""
-                                   for m in members]),
-            "locations": sorted({m.get("location") for m in members if m.get("location")}),
-            "actors": sorted({m.get("actor") for m in members if m.get("actor")}),
-            "source_count": len(members),
-            "source_groups": sorted({source_group_of(m) for m in members}),
-            "independent_source_count": n_indep,
-            "primary_source_id": anchor.get("source_id"),
-            "cluster_status": status,
-            "cluster_confidence": conf,
-            "merge_reasons": [],
-            "conflict_flags": _union_conflicts(members),
-            "created_at": time.strftime("%Y-%m-%dT%H:%M:%S+08:00"),
-            "updated_at": None,
-        }
-        cluster_meta.append(meta)
-    stats["master_event_count"] = len(cluster_meta)
-    stats["singleton_count"] = sum(1 for m in cluster_meta if m["cluster_status"] == "singleton")
-    stats["multi_source_cluster_count"] = sum(1 for m in cluster_meta if len(m["member_ids"]) >= 2)
-    stats["independent_source_groups_distribution"] = _distrib(cluster_meta)
-    return cluster_meta, stats, decisions
+    return clusters, stats, decisions
 
 
 def _indep_stats(members):
