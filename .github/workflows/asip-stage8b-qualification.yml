@@ -34,10 +34,10 @@ jobs:
   qualify-deepseek-v4-flash:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout frozen qualification code (52a433e)
+      - name: Checkout frozen qualification code (ddd3d86)
         uses: actions/checkout@v4
         with:
-          ref: 52a433efaecef5a157f4bb9fbbfec0b332bdda03
+          ref: ddd3d8603b875bbb7176805b51add24a68c3f38b
           fetch-depth: 1
 
       - name: Setup Python
@@ -53,7 +53,7 @@ jobs:
           print("credential_available = " + str(ok).lower())
           print("requested_model = deepseek-v4-flash")
           print("qualification_version = stage8b-v1")
-          print("qualification_code_ref = 52a433e")
+          print("qualification_code_ref = ddd3d86")
           if not ok:
               print("CREDENTIAL_INJECTION_FAILED")
               raise SystemExit(1)
@@ -83,6 +83,10 @@ jobs:
               sys.exit(1)
           print("SMOKE_OK requested_model=deepseek-v4-flash returned_model=%s" % r.get("returned_model"))
           PY
+
+      - name: Report fixture gate（§七修复：8/8 committed fixtures 校验，失败即停）
+        run: |
+          python scripts/ai/qualification/stage8b.py --fixture-gate --provider deepseek
 
       - name: Report API probe（§七修复：单发 RD1，验证报告通道，失败即停）
         run: |
