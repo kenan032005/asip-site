@@ -118,10 +118,11 @@ def main():
     disease_items = [_disease_timeline_item(t) for t in dis_tls]
     priority = [c for c, on in PRIORITY_REPORT_COUNTRIES.items() if on]
 
-    # ── §二十三 Africa Daily input ──
+    # ── §二十三 Africa Daily input（§二 temporal window：数据窗 cutoff=2026-07-28）──
     daily = build_daily_input(social_events, disease_items,
                               quarantine_ids=qids,
-                              priority_countries=priority)
+                              priority_countries=priority,
+                              cutoff="2026-07-28")
     (REPORT_RUNTIME / "daily_input").mkdir(parents=True, exist_ok=True)
     (REPORT_RUNTIME / "daily_input" / "latest.json").write_text(
         json.dumps(daily, ensure_ascii=False, indent=2), encoding="utf-8")

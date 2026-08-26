@@ -9,7 +9,11 @@
 - 数量控制（§九）：security 8-15 / disease 2-5，少则短，不填充。
 - 可解释（§二十七）：每个入选 item 带 selection_reasons；抑制高分边界项记录
   suppression_reason。
+- Temporal Window（Stage7B §二）：≤24h 新事件 eligible；24-72h 仅 developing/
+  ongoing/有变化 eligible；72h-7d 重大持续仅 watch；>7d 不进正文。
 """
+
+from datetime import datetime
 
 from scripts.report.config import (
     IMPORTANCE_WEIGHTS, LOW_VALUE_KEYWORDS, LOW_VALUE_EXEMPT_SIGNALS,
@@ -202,27 +206,70 @@ def _in_prev(ev, prev):
     return (ev.get("event_id") in prev) or (ev.get("master_event_id") in prev)
 
 
+def _age_days(published_at, cutoff_dt):
+    """相对 cutoff 的年龄天数；无时间 → None。"""
+    if not published_at:
+        return None
+    try:
+        d = datetime.strptime(str(published_at)[:10], "%Y-%m-%d")
+    except ValueError:
+        return None
+    return (cutoff_dt - d).days
+
+
+def temporal_bucket(ev, cutoff_dt):
+    """Stage7B §二 时间窗语义。
+
+    返回 (bucket, note)：
+      new_24h | ongoing_72h | trend_7d | outside_7d | no_time
+    对 disease item 用 latest_report_at 作为时间。
+    """
+    if not cutoff_dt:
+        return None, "no_window"
+    t = ev.get("latest_report_at") or ev.get("published_at") or ev.get("event_time")
+    age = _age_days(t, cutoff_dt)
+    if age is None:
+        return "no_time", None
+    if age <= 1:
+        return "new_24h", None
+    if age <= 3:
+        return "ongoing_72h", None
+    if age <= 7:
+        return "trend_7d", None
+    return "outside_7d", "超过7天，不得进入日报正文（极少数长期危机仅可 watch context）"
+
+
 def select_daily(events, quarantine_ids=None, priority_countries=None,
                  prev_event_ids=None, iso2to3=None, security_range=None,
-                 disease_range=None):
-    """§六-§九 Africa Daily selection。
+                 disease_range=None, cutoff=None, temporal=True):
+    """§六-§九 + §二 Temporal Window Africa Daily selection。
 
-    events: list of dict（Social events + Disease timeline 条目按 category 区分）。
-    prev_event_ids: 上一日报已报告且无实质更新的 master/event id 集合（§十一）。
-
+    cutoff: 报告期截止（ISO 日期/时间）；开启 temporal 后按 §二 规则过滤。
+    events: list of dict（Social events + Disease items 按 is_disease 区分）。
     返回 (selected, stats, suppressed_log)。
     """
     security_range = security_range or (DAILY_SECURITY_MIN, DAILY_SECURITY_MAX)
     disease_range = disease_range or (DAILY_DISEASE_MIN, DAILY_DISEASE_MAX)
     q = set(quarantine_ids or [])
     prev = set(prev_event_ids or [])
+    cutoff_dt = None
+    if cutoff:
+        try:
+            cutoff_dt = datetime.strptime(str(cutoff)[:10], "%Y-%m-%d")
+        except ValueError:
+            cutoff_dt = None
     stats = {"eligible_events": 0, "selected_security_events": 0,
              "selected_disease_events": 0, "suppressed_low_value": 0,
              "conflicting_events": 0, "single_source_events": 0,
-             "change_items": 0, "watch_items": 0}
+             "change_items": 0, "watch_items": 0,
+             "social_new_24h": 0, "social_ongoing_72h": 0,
+             "social_trend_watch_7d": 0, "social_outside_7d": 0,
+             "disease_new_24h": 0, "disease_significant_7d": 0,
+             "disease_active_watch": 0, "no_time": 0}
     suppressed_log = []
 
     eligible, security, disease = [], [], []
+    watch_7d = []   # 72h-7d 重大持续（仅 watch，§二 C）
     for ev in events:
         ok, reason = _eligibility(ev, q, iso2to3)
         if not ok:
@@ -235,9 +282,50 @@ def select_daily(events, quarantine_ids=None, priority_countries=None,
         if vs == "single_source":
             stats["single_source_events"] += 1
             ev = dict(ev, single_source_warning=True)
+        is_dis = ev.get("is_disease")
+        # ── §二 Temporal Window ──
+        if temporal and cutoff_dt:
+            bucket, note = temporal_bucket(ev, cutoff_dt)
+            ev = dict(ev, temporal_bucket=bucket, temporal_note=note)
+            if is_dis:
+                if bucket == "new_24h":
+                    stats["disease_new_24h"] += 1
+                elif bucket in ("ongoing_72h", "trend_7d"):
+                    stats["disease_significant_7d"] += 1
+                    if bucket == "trend_7d" and not ev.get("change_type"):
+                        stats["disease_active_watch"] += 1
+                        if _in_prev(ev, prev):
+                            continue   # 已报告且仅 watch → 不重复
+                        watch_7d.append(dict(ev, importance_score=0))
+                        continue
+                else:
+                    stats["disease_active_watch"] += 1
+                    continue   # >7d 或 no_time → 不进正文
+            else:
+                if bucket == "new_24h":
+                    stats["social_new_24h"] += 1
+                elif bucket == "ongoing_72h":
+                    stats["social_ongoing_72h"] += 1
+                    # §二 B：24-72h 仅 developing/ongoing/显著变化 eligible
+                    if ev.get("timeline_status") not in ("developing", "ongoing") \
+                            and not ev.get("change_type"):
+                        continue
+                elif bucket == "trend_7d":
+                    stats["social_trend_watch_7d"] += 1
+                    # §二 C：72h-7d 仅重大持续 → watch 候选（不进正文）
+                    watch_7d.append(dict(ev, importance_score=0,
+                                         watch_context=True))
+                    continue
+                else:
+                    stats["social_outside_7d"] += 1
+                    continue   # §二 D：>7d 不进正文
+        else:
+            if ev.get("published_at") is None and not is_dis:
+                stats["no_time"] += 1
+
         cat = ev.get("category") or CATEGORY_BY_TYPE.get(
             (ev.get("event_type") or "").lower(), "security")
-        if ev.get("is_disease"):
+        if is_dis:
             # §十五 普通无变化疫情不每天重复（已报告且无 change → 抑制）
             if _in_prev(ev, prev) and not ev.get("change_type"):
                 continue
@@ -304,4 +392,5 @@ def select_daily(events, quarantine_ids=None, priority_countries=None,
     stats["watch_items"] = len(watch)
 
     return {"executive_summary": exec_summary, "security": sec_selected,
-            "disease": dis_selected, "changes": changes, "watch": watch}, stats, suppressed_log
+            "disease": dis_selected, "changes": changes, "watch": watch,
+            "watch_7d": watch_7d}, stats, suppressed_log

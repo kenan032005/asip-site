@@ -74,16 +74,17 @@ def _disease_importance(d):
 
 def build_daily_input(events, disease_items, prev_report=None,
                       quarantine_ids=None, priority_countries=None,
-                      report_date=None, iso2to3=None):
+                      report_date=None, iso2to3=None, cutoff=None):
     """§二十三 Africa Daily report input。events: social events（含 category/
-    verification/timeline 信息）；disease_items: disease timeline 条目。"""
+    verification/timeline 信息）；disease_items: disease timeline 条目。
+    cutoff: 报告期截止（§二 temporal window 基准）。"""
     rid = "DAILY_%s" % (report_date or time.strftime("%Y%m%d"))
     prev_ids = prev_report_event_ids(prev_report)
     selected, stats, suppressed_log = select_daily(
         list(events) + list(disease_items),   # disease items 一并进入选材（§十五）
         quarantine_ids=quarantine_ids,
         priority_countries=priority_countries,
-        prev_event_ids=prev_ids, iso2to3=iso2to3)
+        prev_event_ids=prev_ids, iso2to3=iso2to3, cutoff=cutoff)
 
     sec = {
         "executive_summary": [],
@@ -187,7 +188,24 @@ def build_daily_input(events, disease_items, prev_report=None,
                 "analysis_inputs": it.get("analysis_inputs") or [],
             })
     stats["change_items"] = len(sec["key_changes"])
-    sec["watch_items"] = watch[:10]
+    # Watch Items（§十一 已报告持续关注 + §二 72h-7d 重大持续趋势）
+    watch7 = [{
+        "event_id": w.get("event_id"),
+        "master_event_id": w.get("master_event_id"),
+        "country": w.get("country"),
+        "country_iso3": w.get("country_iso3"),
+        "category": w.get("category") or "security",
+        "importance_score": 0,
+        "watch_context": True,
+        "temporal_bucket": w.get("temporal_bucket"),
+        "temporal_note": w.get("temporal_note"),
+        "selection_reasons": ["watch_context_7d"],
+        "facts": _facts_from_ev(w),
+        "analysis_inputs": _analysis_inputs(w),
+        "uncertainties": w.get("uncertainties") or [],
+        "source_evidence": [{"source_id": w.get("source_id")}] if w.get("source_id") else [],
+    } for w in selected.get("watch_7d", [])]
+    sec["watch_items"] = (watch[:10] + watch7[:10])
     stats["watch_items"] = len(sec["watch_items"])
 
     doc = {
