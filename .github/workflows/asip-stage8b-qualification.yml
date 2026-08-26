@@ -1,8 +1,12 @@
 name: ASIP Stage8B DeepSeek V4 Flash Qualification
 
-# Stage 8B continuation（§十二）：只允许 workflow_dispatch 手动执行；
-# 不得 push / schedule / cron 自动触发。模型固定 deepseek-v4-flash，
-# 不暴露 model input（避免人为误选 Pro）。
+# Stage 8B — GitHub Actions Qualification Launch Bridge（§十二/§四）
+# 只允许 workflow_dispatch 手动执行；禁止 push / pull_request 自动运行 /
+# schedule / cron。
+# 资格代码冻结于 52a433e（stage8b-deepseek-flash-qualification；含 Run#3 修复：
+# disease evaluator bug、attribution 词典、failure_stage telemetry、report probe）。
+# 本 workflow 固定 checkout 完整 40 位 SHA，绝不 checkout main 执行资格代码。
+# 唯一允许模型：deepseek-v4-flash（严禁 pro / chat / reasoner / 任何 fallback）。
 
 on:
   workflow_dispatch:
@@ -30,9 +34,10 @@ jobs:
   qualify-deepseek-v4-flash:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout frozen qualification code (52a433e)
         uses: actions/checkout@v4
         with:
+          ref: 52a433efaecef5a157f4bb9fbbfec0b332bdda03
           fetch-depth: 1
 
       - name: Setup Python
@@ -40,42 +45,99 @@ jobs:
         with:
           python-version: "3.13"
 
-      - name: Credential presence check (§六，只报 bool，绝不回显 key)
+      - name: Runtime confirmation (§六，只打印非敏感信息)
         run: |
           python - <<'PY'
           import os
           ok = bool(os.environ.get("ASIP_DEEPSEEK_API_KEY", "").strip())
-          print("ASIP_DEEPSEEK_API_KEY_available=" + str(ok).lower())
+          print("credential_available = " + str(ok).lower())
+          print("requested_model = deepseek-v4-flash")
+          print("qualification_version = stage8b-v1")
+          print("qualification_code_ref = 52a433e")
           if not ok:
-              raise SystemExit("credential_injection_failed: ASIP_DEEPSEEK_API_KEY not injected")
+              print("CREDENTIAL_INJECTION_FAILED")
+              raise SystemExit(1)
           PY
 
-      - name: Smoke test (§七：1 个最小请求，model=deepseek-v4-flash)
+      - name: Smoke test (§七，Flash-only，失败即停)
         run: |
-          python scripts/ai/qualification/stage8b.py --smoke --provider deepseek
           python - <<'PY'
-          import json
-          s = json.load(open("data/runtime/ai_qualification/stage8b/smoke.json")) \
-              if __import__("os").path.exists("data/runtime/ai_qualification/stage8b/smoke.json") else None
+          import json, subprocess, sys
+          p = subprocess.run(
+              [sys.executable, "scripts/ai/qualification/stage8b.py",
+               "--smoke", "--provider", "deepseek"],
+              capture_output=True, text=True)
+          print(p.stdout)
+          if p.returncode != 0:
+              print("SMOKE_FAILED exit=" + str(p.returncode))
+              sys.exit(1)
+          r = json.loads(p.stdout)
+          if not r.get("credential_available"):
+              print("SMOKE_FAILED credential_injection_failed")
+              sys.exit(1)
+          if not r.get("strict_json") or r.get("result") != "ok":
+              print("SMOKE_FAILED strict_json=%s result=%s" % (r.get("strict_json"), r.get("result")))
+              sys.exit(1)
+          if r.get("returned_model") and r.get("returned_model") != "deepseek-v4-flash":
+              print("SMOKE_FAILED returned_model=" + str(r.get("returned_model")))
+              sys.exit(1)
+          print("SMOKE_OK requested_model=deepseek-v4-flash returned_model=%s" % r.get("returned_model"))
           PY
 
-      - name: 20-case qualification (stage8b-v1)
+      - name: Report API probe（§七修复：单发 RD1，验证报告通道，失败即停）
         run: |
-          python scripts/ai/qualification/stage8b.py --provider deepseek
+          python scripts/ai/qualification/stage8b.py --report-probe --provider deepseek
 
-      - name: Real report trial (Primary Gate 通过后；model 固定 flash)
-        run: |
-          python scripts/ai/qualification/report_trial.py --provider deepseek \
-            || echo "REPORT_TRIAL_SKIPPED (provider 未达 Primary Gate 或数据不足)"
-
-      - name: Secret scan（§二十三：repo/artifacts/logs 零泄漏）
+      - name: 20-case qualification（stage8b-v1，固定 dataset；exit 延后判定）
         run: |
           python - <<'PY'
-          import os, re, pathlib
-          pats = re.compile(r"ASIP_DEEPSEEK_API_KEY\s*=\s*\S|sk-[A-Za-z0-9]{16,}|Bearer\s+[A-Za-z0-9._-]{16,}", re.I)
+          import json, subprocess, sys
+          p = subprocess.run(
+              [sys.executable, "scripts/ai/qualification/stage8b.py",
+               "--provider", "deepseek"],
+              capture_output=True, text=True)
+          print(p.stdout)
+          print("qualification_exit=" + str(p.returncode))
+          # 保存 exit 供最终判定步骤（§十二：失败也留下完整诊断证据）
+          import pathlib
+          pathlib.Path("data/runtime/ai_qualification/stage8b/.run_exit").write_text(
+              str(p.returncode), encoding="utf-8")
+          PY
+
+      - name: Real report trial（§十：仅 Primary Gate PASS 后；model 固定 flash）
+        run: |
+          python - <<'PY'
+          import json, subprocess, sys, pathlib
+          exit_f = pathlib.Path("data/runtime/ai_qualification/stage8b/.run_exit")
+          rc = int(exit_f.read_text().strip()) if exit_f.exists() else 2
+          if rc != 0:
+              print("REPORT_TRIAL_SKIPPED qualification_exit=" + str(rc))
+              sys.exit(0)
+          s = json.load(open("data/runtime/ai_qualification/stage8b/qualification_summary.json", encoding="utf-8"))
+          role = s["provider_results"]["deepseek"]["role"]
+          if role != "primary_candidate":
+              print("REPORT_TRIAL_SKIPPED provider_role=" + role)
+              sys.exit(0)
+          p = subprocess.run(
+              [sys.executable, "scripts/ai/qualification/report_trial.py",
+               "--provider", "deepseek"],
+              capture_output=True, text=True)
+          print(p.stdout)
+          if p.returncode != 0:
+              print("REPORT_TRIAL_FAILED exit=" + str(p.returncode))
+              sys.exit(1)
+          PY
+
+      - name: Secret scan（§二十三：repo/artifacts/logs 零泄漏；失败也执行）
+        if: always()
+        run: |
+          python - <<'PY'
+          import pathlib, re
+          pats = re.compile(
+              r"ASIP_DEEPSEEK_API_KEY\s*=\s*[A-Za-z0-9]|sk-[A-Za-z0-9]{16,}|"
+              r"Bearer\s+[A-Za-z0-9._-]{16,}", re.I)
           hits = []
-          root = pathlib.Path(".")
-          for p in root.rglob("*"):
+          for p in pathlib.Path(".").rglob("*"):
               if p.is_file() and p.suffix in (".json", ".md", ".txt", ".yml", ".yaml", ".py", ".log", ".env"):
                   try:
                       txt = p.read_text(encoding="utf-8", errors="ignore")
@@ -88,7 +150,8 @@ jobs:
               raise SystemExit("secret leak detected: %s" % hits[:5])
           PY
 
-      - name: Upload qualification artifacts
+      - name: Upload qualification artifacts（失败也上传，§十一）
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: stage8b-qualification
@@ -96,3 +159,26 @@ jobs:
             data/runtime/ai_qualification/stage8b/
             docs/stage8b-real-ai-review.md
           if-no-files-found: warn
+
+      - name: Qualification verdict（§十二：最后按结果决定 run 成败）
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, pathlib, sys
+          f = pathlib.Path("data/runtime/ai_qualification/stage8b/qualification_summary.json")
+          if not f.exists():
+              print("VERDICT_NO_SUMMARY")
+              sys.exit(1)
+          s = json.loads(f.read_text(encoding="utf-8"))
+          r = s["provider_results"]["deepseek"]
+          role = r["role"]
+          print("role=" + role)
+          print("schema_pass=%s strict_json_pass=%s" % (
+              r["reason"]["contract_reliability"].get("schema_pass"),
+              r["reason"]["contract_reliability"].get("strict_json_pass")))
+          if role == "primary_candidate":
+              print("PRIMARY_PRODUCTION_CANDIDATE=deepseek-v4-flash")
+              sys.exit(0)
+          print("DEEPSEEK_V4_FLASH_NOT_QUALIFIED role=" + role)
+          sys.exit(1)
+          PY

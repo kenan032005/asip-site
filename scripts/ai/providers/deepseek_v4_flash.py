@@ -125,23 +125,50 @@ class DeepSeekV4FlashProvider(BaseAIProvider):
             thinking = "disabled"   # §九：thinking 非阻断条件，优先 JSON/schema/facts
         attempt = 0
         last_err = None
+        last_info = None
         while attempt < self.max_retries:
             attempt += 1
             try:
                 return self._call_api(system, user, tid, attempt)
             except urllib.error.HTTPError as e:
+                info = self._http_error_info(e)
+                last_info = info
                 last_err = "http_%s" % e.code
                 if e.code in (429, 500, 502, 503, 504):
                     time.sleep(self._backoff(attempt))
                     continue
-                return self._fail(tid, last_err, attempt)
+                return self._fail(tid, last_err, attempt, info)
             except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
                 last_err = "transport_error:%s" % type(e).__name__
                 time.sleep(self._backoff(attempt))
                 continue
             except Exception as e:
                 return self._fail(tid, "provider_error:%s" % str(e)[:80], attempt)
-        return self._fail(tid, "retry_exhausted:%s" % last_err, attempt)
+        return self._fail(tid, "retry_exhausted:%s" % last_err, attempt, last_info)
+
+    def _http_error_info(self, e):
+        """§十一：捕获 HTTPError body，仅提取安全字段（不记录 Authorization/完整 payload）。"""
+        body = ""
+        try:
+            body = e.read().decode("utf-8", "replace")[:600]
+        except Exception:
+            body = ""
+        info = {"http_status": e.code,
+                "provider_error_type": None, "provider_error_code": None,
+                "sanitized_error_message": None}
+        try:
+            d = json.loads(body) if body else {}
+            err = d.get("error") if isinstance(d, dict) else None
+            if isinstance(err, dict):
+                info["provider_error_type"] = err.get("type")
+                info["provider_error_code"] = err.get("code")
+                info["sanitized_error_message"] = str(err.get("message") or "")[:300]
+        except Exception:
+            import re as _re
+            cleaned = _re.sub(r"sk-[A-Za-z0-9]{16,}|Bearer\s+[A-Za-z0-9._-]{16,}",
+                              "[redacted]", body)
+            info["sanitized_error_message"] = cleaned[:300] or None
+        return info
 
     def _backoff(self, attempt):
         base = self.retry_backoff[min(attempt - 1, len(self.retry_backoff) - 1)]
@@ -201,13 +228,18 @@ class DeepSeekV4FlashProvider(BaseAIProvider):
             "estimated_cost": None,     # §十七：无可靠 billing 字段 → null
         }}
 
-    def _fail(self, tid, err, attempt):
+    def _fail(self, tid, err, attempt, info=None):
+        info = info or {}
         return {"task_id": tid, "status": "failed",
                 "result": {"error": {"code": err, "message": err},
                            "credential_status": self.credential_status,
                            "provider_status": self.provider_status,
                            "requested_model": FLASH_MODEL, "returned_model": None,
-                           "http_status": None, "attempt_count": attempt,
+                           "http_status": info.get("http_status"),
+                           "provider_error_type": info.get("provider_error_type"),
+                           "provider_error_code": info.get("provider_error_code"),
+                           "sanitized_error_message": info.get("sanitized_error_message"),
+                           "attempt_count": attempt,
                            "token_usage_available": False,
                            "input_tokens": None, "output_tokens": None,
                            "total_tokens": None,

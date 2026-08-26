@@ -109,36 +109,22 @@ def main(argv=None):
 
     from scripts.ai.qualification import stage8b as q
 
-    # 输入：真实报告契约（与 20-case 同一来源）
-    daily = q.load_json("data/runtime/reports/daily_input/latest.json") or {}
-    weekly = {c: q.load_json("data/runtime/reports/weekly_input/%s.json" % c)
-              for c in ("TCD", "SSD")}
-    brief = q._brief_input(security=True)
-
-    prompts = {
-        "africa_daily": (ROOT / "config" / "prompts" / "africa_daily_report_v1.md"),
-        "country_weekly": (ROOT / "config" / "prompts" / "country_weekly_report_v1.md"),
-        "major_event_brief": (ROOT / "config" / "prompts" / "major_event_brief_v1.md"),
-    }
-
-    def sys_text(tt):
-        p = prompts.get(tt)
-        if p and p.exists():
-            return p.read_text(encoding="utf-8")
-        return "Generate the structured %s per contract. JSON only." % tt
-
+    # 输入（§二十一）：来自 committed fixtures（data/qualification/stage8b/），
+    # 与 20-case 同一冻结契约；不依赖 gitignored data/runtime。
+    fc = {c["case_id"]: c for c in q.load_fixture_cases()}
     jobs = [
-        ("africa_daily", daily, "africa-daily-v1.0.0", "schemas/africa_daily_report.schema.json", "daily"),
-        ("country_weekly", weekly.get("TCD"), "country-weekly-v1.0.0", "schemas/country_weekly_report.schema.json", "weekly-tcd"),
-        ("country_weekly", weekly.get("SSD"), "country-weekly-v1.0.0", "schemas/country_weekly_report.schema.json", "weekly-ssd"),
-        ("major_event_brief", brief, "major-event-brief-v1.0.0", "schemas/major_event_brief.schema.json", "brief"),
+        ("africa_daily", fc["RD1"]["input_payload"], fc["RD1"]["system_prompt"],
+         fc["RD1"]["prompt_version"], "daily"),
+        ("country_weekly", fc["RW1"]["input_payload"], fc["RW1"]["system_prompt"],
+         fc["RW1"]["prompt_version"], "weekly-tcd"),
+        ("country_weekly", fc["RW2"]["input_payload"], fc["RW2"]["system_prompt"],
+         fc["RW2"]["prompt_version"], "weekly-ssd"),
+        ("major_event_brief", fc["RB1"]["input_payload"], fc["RB1"]["system_prompt"],
+         fc["RB1"]["prompt_version"], "brief"),
     ]
     results = []
-    for tt, payload, pv, schema_rel, label in jobs:
-        if not payload:
-            print("REPORT_TRIAL_SKIPPED missing input for %s" % label)
-            continue
-        r = run_one(args.provider, tt, payload, sys_text(tt), pv, schema_rel, label)
+    for tt, payload, sys_text, pv, label in jobs:
+        r = run_one(args.provider, tt, payload, sys_text, pv, None, label)
         results.append(r)
         print("  [trial] %-12s %s quality=%s returned_model=%s" % (
             label, r.get("status"), r.get("quality_status"), r.get("returned_model")))

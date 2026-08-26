@@ -284,8 +284,12 @@ def _glm_task_builder(case):
         sys_text = _disease_glm_system_prompt()
         prompt_version = "disease-summary-v1.0.0"
     else:
-        sys_text = case["system_prompt"] or "Generate the structured report per contract."
-        prompt_version = case["prompt_version"]
+        # §八/§九：报告类必须使用真实 Stage7B prompt（禁止 placeholder）
+        if not case.get("system_prompt"):
+            raise SystemExit(
+                "QUALIFICATION_PROMPT_MISSING: %s 未配置真实 report prompt" % case["case_id"])
+        sys_text = case["system_prompt"]
+        prompt_version = case.get("prompt_version") or "v1.0.0"
     payload = case["input_payload"]
     return {
         "task_id": "S8B_%s" % case["case_id"],
@@ -470,6 +474,100 @@ def _evaluate_case(case, parsed, result):
 
 
 # ── 20 个固定 case（§八-§十二）──
+FIXTURE_DIR = ROOT / "data" / "qualification" / "stage8b"
+
+
+def load_fixture_cases():
+    """§六：报告 case 从 committed fixtures 构建（缺失/空 → 硬失败，禁止 {} 兜底）。"""
+    man = load_json("data/qualification/stage8b/manifest.json")
+    if not man or not man.get("cases"):
+        raise SystemExit("QUALIFICATION_FIXTURE_MISSING: manifest.json 缺失或为空")
+    cases = []
+    for fc in man["cases"]:
+        cid = fc["case_id"]
+        path = FIXTURE_DIR / fc["fixture_path"]
+        if not path.exists():
+            raise SystemExit("QUALIFICATION_FIXTURE_MISSING: %s 缺失" % fc["fixture_path"])
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except Exception as e:
+            raise SystemExit("QUALIFICATION_FIXTURE_INVALID_JSON: %s (%s)" % (cid, e))
+        if not payload:
+            raise SystemExit("QUALIFICATION_FIXTURE_EMPTY: %s" % cid)
+        prompt_path = ROOT / fc["prompt_file"]
+        if not prompt_path.exists():
+            raise SystemExit("QUALIFICATION_PROMPT_MISSING: %s" % fc["prompt_file"])
+        cases.append({
+            "case_id": cid, "task_type": fc["task_type"],
+            "semantic": "committed fixture (%s)" % fc["fixture_path"],
+            "is_disease": False, "input_payload": payload,
+            "schema": load_schema(fc["output_schema"]),
+            "system_prompt": prompt_path.read_text(encoding="utf-8"),
+            "prompt_version": fc.get("prompt_version") or "v1.0.0",
+            "fixture_hash": fc.get("fixture_hash"),
+        })
+    return cases
+
+
+def fixture_gate():
+    """§七：REPORT_FIXTURE_GATE——8/8 存在/合法/非空/schema 有效/hash 匹配。"""
+    from scripts.ai.schema_validation import validate_against_schema
+    man = load_json("data/qualification/stage8b/manifest.json") or {}
+    result = {"qualification_version": QUALIFICATION_VERSION,
+              "report_fixtures_ready": False,
+              "cases": []}
+    if not man.get("cases"):
+        result["error"] = "manifest missing"
+        return result
+    all_ok = True
+    for fc in man["cases"]:
+        cid = fc["case_id"]
+        path = FIXTURE_DIR / fc["fixture_path"]
+        entry = {"case_id": cid, "task_type": fc["task_type"],
+                 "fixture_path": fc["fixture_path"],
+                 "exists": path.exists(),
+                 "json_valid": False, "nonempty": False,
+                 "schema_valid": False, "hash_match": False,
+                 "prompt_version": fc.get("prompt_version"),
+                 "prompt_hash": fc.get("prompt_hash"),
+                 "input_schema": fc.get("input_schema"),
+                 "output_schema": fc.get("output_schema"),
+                 "fixture_hash": fc.get("fixture_hash")}
+        if path.exists():
+            try:
+                payload = json.loads(path.read_text(encoding="utf-8"))
+                entry["json_valid"] = True
+                entry["nonempty"] = bool(payload)
+                schema = load_schema(fc["input_schema"])
+                if schema:
+                    errs = validate_against_schema(payload, schema)
+                    entry["schema_valid"] = not errs
+                    if errs:
+                        entry["schema_errors"] = errs[:5]
+                import hashlib as _h
+                cur = _h.sha256(
+                    path.read_text(encoding="utf-8").encode("utf-8")).hexdigest()
+                entry["hash_match"] = (cur == fc.get("fixture_hash"))
+            except Exception as e:
+                entry["json_valid"] = False
+                entry["error"] = str(e)[:100]
+        entry["ok"] = all((entry["exists"], entry["json_valid"], entry["nonempty"],
+                           entry["schema_valid"], entry["hash_match"]))
+        all_ok = all_ok and entry["ok"]
+        result["cases"].append(entry)
+    result["report_fixtures_ready"] = all_ok
+    result["summary"] = {
+        "report_fixture_count": len(result["cases"]),
+        "fixture_schema_pass": sum(1 for c in result["cases"] if c["schema_valid"]),
+        "fixture_nonempty": sum(1 for c in result["cases"] if c["nonempty"]),
+        "fixture_hash_pass": sum(1 for c in result["cases"] if c["hash_match"]),
+    }
+    ARTIFACT_DIR.mkdir(parents=True, exist_ok=True)
+    (ARTIFACT_DIR / "fixture_gate_result.json").write_text(
+        json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")
+    return result
+
+
 def build_cases():
     from scripts.ai.glm_golden_set import build_security_samples, build_disease_samples
     sec = build_security_samples()
@@ -506,42 +604,9 @@ def build_cases():
         disease_task("D3", "disease_other_numbers", "marburg confirmed/deaths ETH"),
         disease_task("D4", "disease_cholera_tcd", "unknown/null values TCD"),
     ]
-    # 报告类（真实 Stage7 输入契约，§十-§十二）
-    daily = load_json("data/runtime/reports/daily_input/latest.json") or {}
-    weekly = {c: load_json("data/runtime/reports/weekly_input/%s.json" % c)
-              for c in ("TCD", "SSD", "NER")}
-    cases += [
-        report_case("RD1", "africa_daily", "D1 normal daily（真实输入）",
-                    daily, "schemas/africa_daily_report.schema.json",
-                    "africa-daily-v1.0.0"),
-        report_case("RD2", "africa_daily", "D2 single-source+conflicting mix",
-                    _daily_variant(daily, "single_conflict"),
-                    "schemas/africa_daily_report.schema.json",
-                    "africa-daily-v1.0.0"),
-        report_case("RD3", "africa_daily", "D3 disease+major security mix",
-                    _daily_variant(daily, "disease_security"),
-                    "schemas/africa_daily_report.schema.json",
-                    "africa-daily-v1.0.0"),
-        report_case("RW1", "country_weekly", "W1 TCD weekly（真实输入）",
-                    weekly["TCD"], "schemas/country_weekly_report.schema.json",
-                    "country-weekly-v1.0.0"),
-        report_case("RW2", "country_weekly", "W2 SSD weekly（真实输入）",
-                    weekly["SSD"], "schemas/country_weekly_report.schema.json",
-                    "country-weekly-v1.0.0"),
-        report_case("RW3", "country_weekly", "W3 NER low-data country（真实输入）",
-                    weekly["NER"], "schemas/country_weekly_report.schema.json",
-                    "country-weekly-v1.0.0"),
-        report_case("RB1", "major_event_brief",
-                    "B1 major security event（qualification_sample 结构化输入）",
-                    _brief_input(security=True),
-                    "schemas/major_event_brief.schema.json",
-                    "major-event-brief-v1.0.0"),
-        report_case("RB2", "major_event_brief",
-                    "B2 major disease/cross-border（qualification_sample 结构化输入）",
-                    _brief_input(security=False),
-                    "schemas/major_event_brief.schema.json",
-                    "major-event-brief-v1.0.0"),
-    ]
+    # 报告类（§二-§九：committed fixtures + 真实 Stage7B prompt；缺失硬失败）
+    for fc in load_fixture_cases():
+        cases.append(fc)
     assert [c["case_id"] for c in cases] == CASE_IDS, "case set must be fixed"
     return cases
 
@@ -788,7 +853,11 @@ def run_report_probe(provider_name="deepseek"):
     ok = (r.get("provider_status") == "succeeded" and r.get("strict_json_pass")
           and r.get("schema_pass")
           and (r.get("returned_model") in (None, "deepseek-v4-flash")))
-    print("REPORT_API_PROBE =", "PASS" if ok else "FAIL")
+    out["report_probe"] = "PASS" if ok else "FAIL"
+    ARTIFACT_DIR.mkdir(parents=True, exist_ok=True)
+    (ARTIFACT_DIR / "report_probe_result.json").write_text(
+        json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
+    print("REPORT_API_PROBE =", out["report_probe"])
     return 0 if ok else 1
 
 
@@ -800,11 +869,17 @@ def main(argv=None):
     ap.add_argument("--smoke", action="store_true", help="只做 1 次最小连接 smoke")
     ap.add_argument("--report-probe", action="store_true",
                     help="只做 1 次 Report API Probe（RD1，deepseek-v4-flash）")
+    ap.add_argument("--fixture-gate", action="store_true",
+                    help="REPORT_FIXTURE_GATE：校验 8/8 committed fixtures")
     args = ap.parse_args(argv)
     if args.smoke:
         print(json.dumps(run_smoke(args.provider if args.provider != "all"
                                    else "deepseek"), ensure_ascii=False, indent=2))
         return 0
+    if args.fixture_gate:
+        g = fixture_gate()
+        print(json.dumps(g, ensure_ascii=False, indent=1))
+        return 0 if g.get("report_fixtures_ready") else 1
     if args.report_probe:
         return run_report_probe(args.provider if args.provider != "all"
                                 else "deepseek")
