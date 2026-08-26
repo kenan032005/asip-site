@@ -147,9 +147,10 @@ class TestCredentialAndSecrets(unittest.TestCase):
         self.assertIsInstance(ds.credential_available(), bool)
 
     def test_smoke_credential_missing(self):
-        with mock.patch.dict(os.environ, {}, clear=False):
-            p = ds.DeepSeekV4FlashProvider(api_key="")
-            r = p.smoke()
+        # 显式传空 key（不依赖 os.environ mock——本机 env 存在超长变量会触发
+        # Windows 32767 restore 限制；api_key="" 语义等价于无 credential）
+        p = ds.DeepSeekV4FlashProvider(api_key="")
+        r = p.smoke()
         self.assertFalse(r["credential_available"])
         self.assertEqual(r["result"], "credential_injection_failed")
 

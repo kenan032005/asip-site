@@ -18,6 +18,19 @@
 - Retry：仅 flash→flash，禁止跨模型 retry；429/5xx/timeout/connection 退避重试
 - Telemetry：usage.input_tokens/output_tokens/total_tokens（缺失 → null）；
   billing_mode=paid（可变外部配置，不硬编码价格）；estimated_cost=null
+- Thinking policy（显式，不依赖 DeepSeek 默认值——默认 thinking=enabled、
+  reasoning_effort=high）：
+    stage4_event_enrichment / disease_summary → thinking=disabled
+    africa_daily / country_weekly / major_event_brief → thinking=enabled,
+    reasoning_effort=low
+  传参方式（裸 HTTP，等价 OpenAI SDK extra_body）：顶层
+  "thinking":{"type":"enabled|disabled"} + "reasoning_effort":"low"
+- Thinking enabled 时 temperature/top_p 等不产生实际效果（temperature_effective
+  = false_when_thinking），保留兼容传参但不得宣称有效
+- Response telemetry：finish_reason（stop/length/content_filter/...）、
+  reasoning_content_present/length_chars（不落完整 CoT）、
+  content_present/content_length_chars、reasoning_tokens
+  （usage.completion_tokens_details.reasoning_tokens，缺失 → null）
 - credential 缺失 → credential_status=missing / provider_status=unavailable，
   快速安全停止，不调用 API
 """
@@ -29,12 +42,23 @@ import time
 import urllib.error
 import urllib.request
 
-from scripts.ai.provider import BaseAIProvider
+from ..provider import BaseAIProvider   # 相对导入，与 glm47/registry 一致（避免 ai. 别名双重基类）
 
 ALLOWED_DEEPSEEK_MODELS = frozenset({"deepseek-v4-flash"})
 FLASH_MODEL = "deepseek-v4-flash"
 DEFAULT_BASE_URL = "https://api.deepseek.com"
 SECRET_NAME = "ASIP_DEEPSEEK_API_KEY"
+
+# §二：显式 Thinking Policy（不依赖 DeepSeek 默认值）
+THINKING_POLICY = {
+    # task_type -> (thinking, reasoning_effort)
+    "stage4_event_enrichment": ("disabled", None),
+    "disease_summary": ("disabled", None),
+    "africa_daily": ("enabled", "low"),
+    "country_weekly": ("enabled", "low"),
+    "major_event_brief": ("enabled", "low"),
+}
+DEFAULT_THINKING = "disabled"   # 未知 task_type 安全兜底（非思考）
 
 
 class UnsupportedDeepSeekModelError(ValueError):
@@ -119,17 +143,18 @@ class DeepSeekV4FlashProvider(BaseAIProvider):
                 "billing_mode": "paid", "estimated_cost": None}}
         system = task.get("system_text") or ""
         user = task.get("user_text") or ""
-        if task.get("task_type") in ("stage4_event_enrichment", "disease_summary"):
-            thinking = "disabled"
-        else:
-            thinking = "disabled"   # §九：thinking 非阻断条件，优先 JSON/schema/facts
+        # §二：显式 Thinking Policy（不再依赖 DeepSeek 默认 enabled/high）
+        thinking, reasoning_effort = THINKING_POLICY.get(
+            task.get("task_type"), (DEFAULT_THINKING, None))
         attempt = 0
         last_err = None
         last_info = None
         while attempt < self.max_retries:
             attempt += 1
             try:
-                return self._call_api(system, user, tid, attempt, task.get("max_output_tokens"))
+                return self._call_api(system, user, tid, attempt,
+                                      task.get("max_output_tokens"),
+                                      thinking, reasoning_effort)
             except urllib.error.HTTPError as e:
                 info = self._http_error_info(e)
                 last_info = info
@@ -174,15 +199,22 @@ class DeepSeekV4FlashProvider(BaseAIProvider):
         base = self.retry_backoff[min(attempt - 1, len(self.retry_backoff) - 1)]
         return base + random.uniform(0, 1.5)
 
-    def _call_api(self, system, user, tid, attempt, max_tokens=None):
-        payload = json.dumps({
+    def _call_api(self, system, user, tid, attempt, max_tokens=None,
+                  thinking=None, reasoning_effort=None):
+        thinking = thinking or DEFAULT_THINKING
+        # §三/§四：裸 HTTP 等价 OpenAI SDK extra_body——顶层 thinking + reasoning_effort
+        payload_dict = {
             "model": FLASH_MODEL,          # §二：固定 flash，绝不 fallback
             "messages": [{"role": "system", "content": system},
                          {"role": "user", "content": user}],
-            "temperature": 0.2,
+            "temperature": 0.2,            # §四：thinking 时无效，兼容传参（见下）
             "response_format": {"type": "json_object"},   # §十
             "max_tokens": max_tokens,      # §八：按 task 预算，防无限输出/截断
-        }, ensure_ascii=False).encode("utf-8")
+            "thinking": {"type": thinking},  # 显式，不依赖默认值
+        }
+        if reasoning_effort:
+            payload_dict["reasoning_effort"] = reasoning_effort
+        payload = json.dumps(payload_dict, ensure_ascii=False).encode("utf-8")
         req = urllib.request.Request(
             self.base_url + "/chat/completions", data=payload,
             headers={"Authorization": "Bearer %s" % self.api_key,
@@ -211,7 +243,14 @@ class DeepSeekV4FlashProvider(BaseAIProvider):
                                "total_tokens": None,
                                "billing_mode": "paid", "estimated_cost": None}}
         usage = data.get("usage") or {}
-        content = (data.get("choices") or [{}])[0].get("message", {}).get("content", "")
+        usage_details = usage.get("completion_tokens_details") or {}
+        choice = (data.get("choices") or [{}])[0]
+        message = choice.get("message") or {}
+        content = message.get("content") or ""
+        reasoning_content = message.get("reasoning_content") or ""
+        finish_reason = choice.get("finish_reason")
+        # §六/§七：telemetry——不落完整 CoT，仅存在性/长度/token 数
+        reasoning_tokens = usage_details.get("reasoning_tokens")
         return {"task_id": tid, "status": "succeeded", "result": {
             "text": content,
             "credential_status": self.credential_status,
@@ -225,6 +264,15 @@ class DeepSeekV4FlashProvider(BaseAIProvider):
             "input_tokens": usage.get("prompt_tokens"),
             "output_tokens": usage.get("completion_tokens"),
             "total_tokens": usage.get("total_tokens"),
+            "finish_reason": finish_reason,
+            "reasoning_content_present": bool(reasoning_content),
+            "reasoning_content_length_chars": len(reasoning_content) if reasoning_content else 0,
+            "reasoning_tokens": reasoning_tokens,
+            "content_present": bool(content),
+            "content_length_chars": len(content),
+            "thinking_requested": thinking,
+            "reasoning_effort_requested": reasoning_effort,
+            "temperature_effective": "false_when_thinking" if thinking == "enabled" else "true",
             "billing_mode": "paid",
             "estimated_cost": None,     # §十七：无可靠 billing 字段 → null
         }}

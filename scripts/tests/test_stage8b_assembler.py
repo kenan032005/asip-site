@@ -144,15 +144,15 @@ class TestMaxTokensPolicy(unittest.TestCase):
     """§八：per-task max_tokens + provider 请求携带。"""
 
     def test_policy_values(self):
-        self.assertEqual(q.MAX_TOKEN_POLICY["africa_daily"], 4096)
-        self.assertEqual(q.MAX_TOKEN_POLICY["country_weekly"], 3072)
-        self.assertEqual(q.MAX_TOKEN_POLICY["major_event_brief"], 2048)
+        self.assertEqual(q.MAX_TOKEN_POLICY["africa_daily"], 8192)
+        self.assertEqual(q.MAX_TOKEN_POLICY["country_weekly"], 6144)
+        self.assertEqual(q.MAX_TOKEN_POLICY["major_event_brief"], 4096)
         self.assertEqual(q.MAX_TOKEN_POLICY["stage4_event_enrichment"], 2048)
 
     def test_task_builder_uses_policy(self):
         cases = {c["case_id"]: c for c in q.build_cases()}
         task = q._glm_task_builder(cases["RD1"])
-        self.assertEqual(task["max_output_tokens"], 4096)
+        self.assertEqual(task["max_output_tokens"], 8192)
         task2 = q._glm_task_builder(cases["S1"])
         self.assertEqual(task2["max_output_tokens"], 2048)
 
@@ -183,13 +183,13 @@ class TestMaxTokensPolicy(unittest.TestCase):
         p = ds.DeepSeekV4FlashProvider(api_key="test-key")
         with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
             p.submit_task({"task_id": "T", "system_text": "s", "user_text": "u",
-                           "task_type": "africa_daily", "max_output_tokens": 4096})
-        self.assertEqual(captured["body"].get("max_tokens"), 4096)
+                           "task_type": "africa_daily", "max_output_tokens": 8192})
+        self.assertEqual(captured["body"].get("max_tokens"), 8192)
 
     def test_truncation_guard_budget(self):
         # §九：budget 必须足够容纳典型完整 report（不低于合理下限）
-        self.assertGreaterEqual(q.MAX_TOKEN_POLICY["africa_daily"], 4096)
-        self.assertGreaterEqual(q.MAX_TOKEN_POLICY["country_weekly"], 3072)
+        self.assertGreaterEqual(q.MAX_TOKEN_POLICY["africa_daily"], 8192)
+        self.assertGreaterEqual(q.MAX_TOKEN_POLICY["country_weekly"], 6144)
 
 
 if __name__ == "__main__":

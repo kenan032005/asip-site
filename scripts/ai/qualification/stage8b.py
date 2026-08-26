@@ -409,11 +409,22 @@ def run_case(case, provider_name):
 
     result["provider_status"] = "succeeded"
     result["attempt_count"] = max(result["attempt_count"], 1)
+    # §五-§七：provider response telemetry 透传（finish_reason/reasoning/content）
+    for _tk in ("finish_reason", "reasoning_content_present",
+                "reasoning_content_length_chars", "reasoning_tokens",
+                "content_present", "content_length_chars"):
+        result[_tk] = rr.get(_tk)
     ok_json, parsed, err = strict_json_parse(raw_text)
     result["strict_json_pass"] = ok_json
     if not ok_json:
-        result["contract_failure"] = "invalid_response_shape:%s" % (err or "?")
-        result["failure_stage"] = "response_parse"
+        # §十：finish_reason 驱动分类（length→budget 不足 / content_filter /
+        # stop+empty→anomaly），不得归为模型内容能力失败
+        bf, bstage = classify_budget_failure(rr)
+        if bf:
+            result["contract_failure"] = bf
+        else:
+            result["contract_failure"] = "invalid_response_shape:%s" % (err or "?")
+        result["failure_stage"] = bstage or "response_parse"
         return result
     result["raw_text_excerpt"] = raw_text[:400]  # artifact 审计用（不含 key）
     return _evaluate_case(case, parsed, result)
@@ -435,14 +446,37 @@ AI_CONTENT_SCHEMA = {
     "major_event_brief": "schemas/major_event_brief_ai_content.schema.json",
 }
 
-# ── §八：max_tokens 策略（按 task type，含 buffer，避免截断合法 JSON）──
+# ── §九：max_tokens 策略（按 task type；Report 需同时容纳 low reasoning + 内容）──
+# social/disease 无 thinking → 2048；daily/weekly/brief 显式 low thinking →
+# 预算上调（上限，非目标消耗）。§五 禁止恢复无限制输出。
 MAX_TOKEN_POLICY = {
     "stage4_event_enrichment": 2048,
     "disease_summary": 2048,
-    "africa_daily": 4096,
-    "country_weekly": 3072,
-    "major_event_brief": 2048,
+    "africa_daily": 8192,
+    "country_weekly": 6144,
+    "major_event_brief": 4096,
 }
+
+
+def classify_budget_failure(rr):
+    """§十：finish_reason 驱动的失败分类（不含调 API）。
+
+    返回 (contract_failure, failure_stage)：
+    - finish_reason=length 且 content 空/截断 → OUTPUT_TOKEN_BUDGET_INSUFFICIENT
+    - finish_reason=content_filter → CONTENT_FILTER_RESPONSE
+    - finish_reason=stop 且 content 空 → EMPTY_CONTENT_ANOMALY
+    - 其它 → (None, None)（保持既有 invalid_response_shape 分类）
+    """
+    rr = rr or {}
+    fr = rr.get("finish_reason")
+    content_present = rr.get("content_present", bool((rr.get("text") or "").strip()))
+    if fr == "length" and not content_present:
+        return ("output_token_budget_insufficient", "response_parse")
+    if fr == "content_filter":
+        return ("content_filter_response", "response_parse")
+    if fr == "stop" and not content_present:
+        return ("empty_content_anomaly", "response_parse")
+    return (None, None)
 
 
 def check_exact_copy(parsed, input_payload, task_type):
