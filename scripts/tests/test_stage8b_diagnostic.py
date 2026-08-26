@@ -625,3 +625,110 @@ class TestAttributionDiagnosticDetail(unittest.TestCase):
         self.assertIn("input_markers", err)
         self.assertIn("output_markers", err)
         self.assertIn("alleged", err)
+
+
+class TestAttributionGoldenRegression(unittest.TestCase):
+    """§七：Run#12 八条 Golden Regression（S3-S8/D1/D4 语义）。"""
+
+    def test_s7_source_report_pattern_preserved(self):
+        # S7 修复：据<来源>报道 → preserved
+        ok, err = q.check_attribution(
+            "single_source report on teacher strike",
+            "据TchadOne报道，政府决定对罢工教师实施扣薪")
+        self.assertTrue(ok, err)
+
+    def test_reuters_pattern(self):
+        ok, err = q.check_attribution(
+            "single_source", "据路透社报道，冲突造成伤亡")
+        self.assertTrue(ok, err)
+
+    def test_local_police_pattern(self):
+        ok, err = q.check_attribution(
+            "single_source", "据当地警方消息，事件已得到控制")
+        self.assertTrue(ok, err)
+
+    def test_source_says_pattern(self):
+        ok, err = q.check_attribution(
+            "single_source", "据卫生部称，疑似病例正在核查")
+        self.assertTrue(ok, err)
+
+    def test_no_attribution_not_preserved(self):
+        # 无任何归因 → 不得误判 preserved
+        ok, err = q.check_attribution(
+            "single_source", "事件已发生，造成3人死亡")
+        self.assertFalse(ok)
+
+    def test_suspected_deterministic_fail(self):
+        # D1/D4 类：suspected input + 确定性输出 → FAIL
+        ok, err = q.check_attribution(
+            "suspected outbreak in Nigeria",
+            "尼日利亚霍乱疫情累计5万例")
+        self.assertFalse(ok)
+        self.assertIn("suspected", err)
+
+    def test_suspected_preserved_pass(self):
+        ok, err = q.check_attribution(
+            "suspected outbreak", "疑似霍乱疫情，累计病例尚未证实")
+        self.assertTrue(ok, err)
+
+    def test_single_source_no_corroboration_fail(self):
+        ok, err = q.check_attribution(
+            "single_source", "省长前往灾区开展慰问")
+        self.assertFalse(ok)
+
+    def test_single_source_reported_pass(self):
+        ok, err = q.check_attribution(
+            "single_source", "据当地媒体报道，省长前往灾区慰问")
+        self.assertTrue(ok, err)
+
+    def test_single_source_explicit_pass(self):
+        ok, err = q.check_attribution(
+            "single_source", "目前仅获单一来源支持，尚缺乏交叉验证")
+        self.assertTrue(ok, err)
+
+    def test_conflicting_preserved_pass(self):
+        ok, err = q.check_attribution(
+            "conflicting reports on casualties", "伤亡数字各方说法不一")
+        self.assertTrue(ok, err)
+
+    def test_conflicting_deterministic_fail(self):
+        ok, err = q.check_attribution(
+            "conflicting reports on casualties", "袭击造成3人死亡")
+        self.assertFalse(ok)
+
+    def test_claim_preserved(self):
+        ok, err = q.check_attribution(
+            "claimed attack", "被指发动袭击")
+        self.assertTrue(ok, err)
+
+
+class TestSocialDiseasePromptContract(unittest.TestCase):
+    """§三-§四：Social/Disease prompt 含 Attribution Preservation Contract。"""
+
+    def test_social_prompt_has_attr_contract(self):
+        t = (ROOT / "config" / "prompts" /
+             "stage4_event_enrichment_glm_v1.md").read_text(encoding="utf-8")
+        self.assertIn("ATTRIBUTION PRESERVATION CONTRACT", t)
+        self.assertIn("single_source", t)
+        self.assertIn("conflicting", t)
+        self.assertIn("suspected", t)
+
+    def test_disease_prompt_has_attr_contract(self):
+        t = (ROOT / "config" / "prompts" /
+             "disease_summary_glm_v1.md").read_text(encoding="utf-8")
+        self.assertIn("ATTRIBUTION PRESERVATION CONTRACT", t)
+        self.assertIn("suspected", t)
+        self.assertIn("unconfirmed", t)
+
+    def test_report_prompts_unchanged(self):
+        # §九：Report prompts 无 ATTRIBUTION PRESERVATION CONTRACT 段
+        for fn in ("africa_daily_report_v1.md", "country_weekly_report_v1.md",
+                   "major_event_brief_v1.md"):
+            t = (ROOT / "config" / "prompts" / fn).read_text(encoding="utf-8")
+            self.assertNotIn("ATTRIBUTION PRESERVATION CONTRACT", t, fn)
+
+    def test_social_disease_versions_bumped(self):
+        import inspect
+        src = inspect.getsource(q._glm_task_builder)
+        self.assertIn("stage4-enrichment-v1.0.1", src)
+        self.assertIn("disease-summary-v1.0.1", src)

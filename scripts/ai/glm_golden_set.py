@@ -161,11 +161,11 @@ def make_task(sample, provider_model):
         # §七 task-specific contract：Disease 用独立 prompt/schema
         task_type = "disease_summary"
         sys_text = _disease_glm_system_prompt()
-        prompt_version = "disease-glm-v1.0.0"
+        prompt_version = "disease-glm-v1.0.1"
     else:
         task_type = "stage4_event_enrichment"
         sys_text = _glm_system_prompt()
-        prompt_version = "glm-v1.0.0"
+        prompt_version = "glm-v1.0.1"
     return {
         "task_id": "GLMG_%s" % (ev.get("event_id") or ev.get("disease_event_id") or "x")[-16:],
         "task_type": task_type,

@@ -62,6 +62,14 @@ ATTR_OUT_KW = ("据称", "声称", "被指", "疑似", "可能", "据报道", "�
                "单一来源", "说法不一", "存在冲突", "多家来源", "未证实",
                "alleged", "claimed", "suspected", "reportedly",
                "unconfirmed", "single source", "conflicting")
+# §一（Final Attribution Closure）：通用来源归因模式（S7 修复，非 hard-code）。
+# 覆盖 据<来源>报道/据<机构>消息/据<来源>称/根据<来源>信息 等语义等价中文。
+ATTR_OUT_RE = (
+    r"据[\u4e00-\u9fffA-Za-z0-9·]{1,24}(?:报道|消息|信息|称|表示)",
+    r"根据[\u4e00-\u9fffA-Za-z0-9·]{1,24}(?:报道|消息|信息)",
+    r"[\u4e00-\u9fffA-Za-z0-9·]{1,24}(?:通讯社|新闻社|新闻机构)[\u4e00-\u9fff]{0,6}(?:报道|消息|称)",
+)
+_ATTR_OUT_RES = tuple(re.compile(p) for p in ATTR_OUT_RE)
 
 _NUM_RE = re.compile(r"(?<![\w.])(\d{1,3}(?:,\d{3})*|\d+)(?![\w.])")
 
@@ -113,7 +121,8 @@ def check_attribution(input_text, output_text):
     ot = (output_text or "").lower()
     if not any(k in it for k in ATTR_SRC_KW):
         return True, None
-    if any(k in ot for k in ATTR_OUT_KW):
+    if any(k in ot for k in ATTR_OUT_KW) or any(
+            rx.search(ot) for rx in _ATTR_OUT_RES):
         return True, None
     in_markers = [k for k in ATTR_SRC_KW if k in it]
     out_markers = [k for k in ATTR_OUT_KW if k in ot]
@@ -284,11 +293,11 @@ def _glm_task_builder(case):
     if case["task_type"] == "stage4_event_enrichment":
         from scripts.ai.glm_golden_set import _glm_system_prompt, _schema_for
         sys_text = _glm_system_prompt()
-        prompt_version = "stage4-enrichment-v1.0.0"
+        prompt_version = "stage4-enrichment-v1.0.1"
     elif case["task_type"] == "disease_summary":
         from scripts.ai.glm_golden_set import _disease_glm_system_prompt
         sys_text = _disease_glm_system_prompt()
-        prompt_version = "disease-summary-v1.0.0"
+        prompt_version = "disease-summary-v1.0.1"
     else:
         # §八/§九：报告类必须使用真实 Stage7B prompt（禁止 placeholder）
         if not case.get("system_prompt"):

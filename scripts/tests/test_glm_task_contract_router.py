@@ -62,7 +62,7 @@ class TestTaskRouter(unittest.TestCase):
         s = build_security_samples()[0]
         t = make_task(s, "glm-4.7-flash")
         self.assertEqual(t["task_type"], "stage4_event_enrichment")
-        self.assertEqual(t["prompt_version"], "glm-v1.0.0")
+        self.assertEqual(t["prompt_version"], "glm-v1.0.1")
         self.assertIn("OUTPUT SCHEMA", t["system_text"])
         self.assertNotIn("disease_event_id", t["system_text"])
 
@@ -70,7 +70,7 @@ class TestTaskRouter(unittest.TestCase):
         s = build_disease_samples()[0]
         t = make_task(s, "glm-4.7-flash")
         self.assertEqual(t["task_type"], "disease_summary")
-        self.assertEqual(t["prompt_version"], "disease-glm-v1.0.0")
+        self.assertEqual(t["prompt_version"], "disease-glm-v1.0.1")
         self.assertIn("OUTPUT SCHEMA", t["system_text"])
         self.assertIn("disease_event_id", t["system_text"])
         self.assertIn("key_changes", t["system_text"])
