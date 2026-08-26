@@ -1,0 +1,113 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ASIP Priority Country Weekly Report Input",
+  "description": "Stage 7A §二十一 — 重点国家周报 INPUT contract（内部）。Weekly 不是 7 份日报拼接（§十七）：基于 master events / timeline changes / trend metrics 做一周聚合。确定性指标（§十八），不用 AI 生成数字。",
+  "type": "object",
+  "required": [
+    "report_id", "report_type", "country_iso3", "week_start", "week_end",
+    "generated_at", "trend_metrics", "sections"
+  ],
+  "properties": {
+    "report_id": {"type": "string"},
+    "report_type": {"const": "country_weekly"},
+    "country_iso3": {"type": "string"},
+    "week_start": {"type": "string"},
+    "week_end": {"type": "string"},
+    "previous_report_id": {"type": ["string", "null"]},
+    "generated_at": {"type": "string"},
+    "trend_metrics": {"$ref": "#/definitions/trend_metrics"},
+    "sections": {
+      "type": "object",
+      "required": [
+        "weekly_executive_assessment", "major_events", "security_trend",
+        "political_social_stability", "terrorism_armed_violence",
+        "disease_public_health", "changes_from_previous_week",
+        "next_week_watch_items", "sources"
+      ],
+      "properties": {
+        "weekly_executive_assessment": {
+          "type": "array",
+          "description": "基于聚合指标的中性评估输入（非 AI 成稿）",
+          "items": {"type": "string"}
+        },
+        "major_events": {"type": "array", "items": {"$ref": "#/definitions/event_item"}},
+        "security_trend": {"type": "object"},
+        "political_social_stability": {"type": "array", "items": {"$ref": "#/definitions/event_item"}},
+        "terrorism_armed_violence": {"type": "array", "items": {"$ref": "#/definitions/event_item"}},
+        "disease_public_health": {"type": "array", "items": {"$ref": "#/definitions/disease_item"}},
+        "changes_from_previous_week": {"type": "array", "items": {"$ref": "#/definitions/weekly_change"}},
+        "next_week_watch_items": {"type": "array", "items": {"type": "string"}},
+        "sources": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  },
+  "definitions": {
+    "trend_metrics": {
+      "type": "object",
+      "required": [
+        "event_count", "verified_event_count", "armed_attack_count",
+        "civil_unrest_count", "major_crime_count", "natural_disaster_count",
+        "fatalities_known", "injuries_known", "multi_source_event_count",
+        "new_outbreak_count", "active_outbreak_count", "comparison"
+      ],
+      "properties": {
+        "event_count": {"type": "integer", "minimum": 0},
+        "verified_event_count": {"type": "integer", "minimum": 0},
+        "armed_attack_count": {"type": "integer", "minimum": 0},
+        "civil_unrest_count": {"type": "integer", "minimum": 0},
+        "major_crime_count": {"type": "integer", "minimum": 0},
+        "natural_disaster_count": {"type": "integer", "minimum": 0},
+        "fatalities_known": {"type": ["integer", "null"], "description": "unknown 保持 null，不写 0"},
+        "injuries_known": {"type": ["integer", "null"]},
+        "multi_source_event_count": {"type": "integer", "minimum": 0},
+        "new_outbreak_count": {"type": "integer", "minimum": 0},
+        "active_outbreak_count": {"type": "integer", "minimum": 0},
+        "comparison": {
+          "type": "object",
+          "description": "与上周比较（确定性）：up/down/stable 或无上周数据 → null",
+          "additionalProperties": {"type": ["string", "null"], "enum": ["up", "down", "stable", null]}
+        }
+      }
+    },
+    "event_item": {
+      "type": "object",
+      "required": ["event_id", "importance_score", "facts"],
+      "properties": {
+        "event_id": {"type": "string"},
+        "master_event_id": {"type": ["string", "null"]},
+        "event_type": {"type": ["string", "null"]},
+        "location": {"type": ["string", "null"]},
+        "importance_score": {"type": "integer", "minimum": 0, "maximum": 100},
+        "verification": {"type": ["string", "null"]},
+        "source_count": {"type": "integer", "minimum": 0},
+        "change_items_count": {"type": "integer", "minimum": 0},
+        "facts": {"type": "array", "items": {"type": "object"}},
+        "analysis_inputs": {"type": "array", "items": {"type": "string"}},
+        "uncertainties": {"type": "array", "items": {"type": "string"}},
+        "source_evidence": {"type": "array", "items": {"type": "object"}}
+      }
+    },
+    "disease_item": {
+      "type": "object",
+      "required": ["disease_id", "country_iso3", "latest_counts"],
+      "properties": {
+        "disease_id": {"type": "string"},
+        "country_iso3": {"type": "string"},
+        "latest_counts": {"type": "object"},
+        "as_of_date": {"type": ["string", "null"]},
+        "outbreak_status": {"type": ["string", "null"]},
+        "change_types": {"type": "array", "items": {"type": "string"}},
+        "source": {"type": ["string", "null"]}
+      }
+    },
+    "weekly_change": {
+      "type": "object",
+      "required": ["field", "direction"],
+      "properties": {
+        "field": {"type": "string"},
+        "direction": {"type": ["string", "null"], "enum": ["up", "down", "stable", null]},
+        "detail": {"type": "string"}
+      }
+    }
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ASIP Africa Daily Report Input",
+  "description": "Stage 7A §二十一 — 非洲社会安全与综合形势日报 INPUT contract（内部，不写 Public）。确定性选材引擎产出；facts / analysis_inputs / uncertainties / source_evidence 严格分层（§十二）。最终中文成稿属 Stage7B。",
+  "type": "object",
+  "required": [
+    "report_id", "report_type", "report_name", "generated_at",
+    "report_date", "cutoff", "sections"
+  ],
+  "properties": {
+    "report_id": {"type": "string"},
+    "report_type": {"const": "africa_daily"},
+    "report_name": {"const": "非洲地区社会安全与综合形势日报"},
+    "generated_at": {"type": "string"},
+    "report_date": {"type": "string", "description": "统计周期（北京时间，调度由 Stage8 配置）"},
+    "cutoff": {"type": "string"},
+    "previous_report_id": {"type": ["string", "null"]},
+    "previous_cutoff": {"type": ["string", "null"]},
+    "stats": {
+      "type": "object",
+      "properties": {
+        "eligible_events": {"type": "integer"},
+        "selected_security_events": {"type": "integer"},
+        "selected_disease_events": {"type": "integer"},
+        "suppressed_low_value": {"type": "integer"},
+        "conflicting_events": {"type": "integer"},
+        "single_source_events": {"type": "integer"},
+        "change_items": {"type": "integer"},
+        "watch_items": {"type": "integer"}
+      }
+    },
+    "sections": {
+      "type": "object",
+      "required": [
+        "executive_summary", "major_security_developments",
+        "political_social_stability", "terrorism_armed_violence",
+        "cross_border_regional", "public_health_disease",
+        "key_changes", "watch_items", "source_notes"
+      ],
+      "properties": {
+        "executive_summary": {
+          "type": "array",
+          "description": "最高价值 5–8 项（§五）",
+          "items": {"$ref": "#/definitions/selection_item"},
+          "maxItems": 8
+        },
+        "major_security_developments": {"type": "array", "items": {"$ref": "#/definitions/selection_item"}},
+        "political_social_stability": {"type": "array", "items": {"$ref": "#/definitions/selection_item"}},
+        "terrorism_armed_violence": {"type": "array", "items": {"$ref": "#/definitions/selection_item"}},
+        "cross_border_regional": {"type": "array", "items": {"$ref": "#/definitions/selection_item"}},
+        "public_health_disease": {"type": "array", "items": {"$ref": "#/definitions/disease_item"}},
+        "key_changes": {"type": "array", "items": {"$ref": "#/definitions/change_item"}},
+        "watch_items": {"type": "array", "items": {"$ref": "#/definitions/selection_item"}},
+        "source_notes": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  },
+  "definitions": {
+    "selection_item": {
+      "type": "object",
+      "required": ["event_id", "category", "importance_score", "selection_reasons"],
+      "properties": {
+        "event_id": {"type": "string"},
+        "master_event_id": {"type": ["string", "null"]},
+        "country": {"type": ["string", "null"]},
+        "country_iso3": {"type": ["string", "null"]},
+        "category": {"type": "string", "enum": [
+          "security", "political", "terrorism", "cross_border", "public_health"]},
+        "importance_score": {"type": "integer", "minimum": 0, "maximum": 100},
+        "change_type": {"type": ["string", "null"], "enum": [
+          "new_event", "casualty_increase", "injury_increase", "official_confirmation",
+          "actor_attribution_change", "location_expansion", "status_change",
+          "correction", "conflict_detected", "closed", null]},
+        "verification": {"type": ["string", "null"]},
+        "verification_confidence": {"type": ["integer", "null"]},
+        "source_count": {"type": "integer", "minimum": 0},
+        "single_source_warning": {"type": "boolean", "default": false},
+        "conflicting": {"type": "boolean", "default": false},
+        "latest_update_at": {"type": ["string", "null"]},
+        "selection_reasons": {"type": "array", "items": {"type": "string"}},
+        "suppression_reason": {"type": ["string", "null"]},
+        "facts": {"type": "array", "items": {"type": "object"}},
+        "analysis_inputs": {"type": "array", "items": {"type": "string"}},
+        "uncertainties": {"type": "array", "items": {"type": "string"}},
+        "source_evidence": {"type": "array", "items": {"type": "object"}}
+      }
+    },
+    "disease_item": {
+      "type": "object",
+      "required": ["disease_id", "country_iso3", "latest_counts", "selection_reasons"],
+      "properties": {
+        "disease_id": {"type": "string"},
+        "country_iso3": {"type": "string"},
+        "outbreak_id": {"type": ["string", "null"]},
+        "latest_counts": {"type": "object"},
+        "previous_counts": {"type": "object"},
+        "delta": {"type": "object"},
+        "as_of_date": {"type": ["string", "null"]},
+        "outbreak_status": {"type": ["string", "null"]},
+        "change_type": {"type": ["string", "null"], "enum": [
+          "new_outbreak", "case_increase", "mortality_increase", "geographic_spread",
+          "status_change", "final_update", null]},
+        "source": {"type": ["string", "null"]},
+        "verification": {"type": ["string", "null"]},
+        "uncertainties": {"type": "array", "items": {"type": "string"}},
+        "selection_reasons": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "change_item": {
+      "type": "object",
+      "required": ["event_id", "change_type"],
+      "properties": {
+        "event_id": {"type": "string"},
+        "master_event_id": {"type": ["string", "null"]},
+        "change_type": {"type": "string"},
+        "description": {"type": "string"},
+        "importance_score": {"type": "integer"},
+        "facts": {"type": "array", "items": {"type": "object"}},
+        "analysis_inputs": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}
