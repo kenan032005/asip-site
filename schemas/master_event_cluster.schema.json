@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ASIP Master Event Cluster",
+  "description": "Stage 6A 跨来源事件聚类 Master Event（内部层）。cluster_confidence 是「同一事件聚类置信度」，非事实可信度/风险等级。本 schema 仅内部 cluster 使用，不写 Public、不改变 Canonical。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "master_event_id",
+    "cluster_version",
+    "member_ids",
+    "primary_country_iso3",
+    "event_type",
+    "cluster_status",
+    "cluster_confidence",
+    "created_at"
+  ],
+  "properties": {
+    "master_event_id": {"type": "string", "minLength": 4},
+    "cluster_version": {"type": "string"},
+    "member_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string"}
+    },
+    "article_ids": {"type": "array", "items": {"type": "string"}},
+    "candidate_ids": {"type": "array", "items": {"type": "string"}},
+    "primary_country_iso3": {"type": ["string", "null"]},
+    "affected_countries": {"type": "array", "items": {"type": "string"}},
+    "event_type": {"type": ["string", "null"]},
+    "event_time_start": {"type": ["string", "null"]},
+    "event_time_end": {"type": ["string", "null"]},
+    "locations": {"type": "array", "items": {"type": "string"}},
+    "actors": {"type": "array", "items": {"type": "string"}},
+    "source_count": {"type": "integer", "minimum": 0},
+    "source_groups": {"type": "array", "items": {"type": "string"}},
+    "independent_source_count": {"type": "integer", "minimum": 0},
+    "primary_source_id": {"type": ["string", "null"]},
+    "cluster_status": {
+      "type": "string",
+      "enum": ["singleton", "auto_clustered", "needs_review", "rejected_merge"]
+    },
+    "cluster_confidence": {"type": "integer", "minimum": 0, "maximum": 100},
+    "merge_reasons": {"type": "array", "items": {"type": "string"}},
+    "conflict_flags": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "casualty_difference / actor_attribution_difference / location_precision_difference / time_difference 等；不静默覆盖"
+    },
+    "created_at": {"type": "string"},
+    "updated_at": {"type": ["string", "null"]}
+  }
+}
