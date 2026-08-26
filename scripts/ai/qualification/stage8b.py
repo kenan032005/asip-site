@@ -480,11 +480,12 @@ def classify_budget_failure(rr):
 
 
 def classify_root_cause(rr, strict_json_ok=False, ai_content_ok=False,
-                        assembler_ok=False, final_ok=False):
+                        assembler_ok=False, final_ok=False, max_tokens=None):
     """§七（Diagnostic）：RD1 probe 根因分类（基于真实 telemetry）。
 
-    - length + reasoning_tokens 占 completion 绝大多数 + content 空
-        → REASONING_BUDGET_EXHAUSTION
+    优先级（§本包修正）：
+    - length + reasoning_tokens >= 0.90*max_tokens + content 空
+        → REASONING_BUDGET_EXHAUSTION（先于泛化 OUTPUT_TOKEN_BUDGET_INSUFFICIENT）
     - length + reasoning_tokens 明显较低 + whitespace_only
         → JSON_WHITESPACE_EXHAUSTION
     - length + stripped content > 0 且 JSON 不完整
@@ -504,6 +505,10 @@ def classify_root_cause(rr, strict_json_ok=False, ai_content_ok=False,
     if fr == "content_filter":
         return "CONTENT_FILTER_RESPONSE"
     if fr == "length":
+        # §一：reasoning 占满预算（>=90% max_tokens）优先判定，不落入泛化
+        if rt is not None and max_tokens and rt >= 0.90 * max_tokens \
+                and not content_present:
+            return "REASONING_BUDGET_EXHAUSTION"
         if rt is not None and comp and rt / comp >= 0.8 and not content_present:
             return "REASONING_BUDGET_EXHAUSTION"
         if rt is not None and comp and rt / comp < 0.5 and ws:
@@ -1075,11 +1080,15 @@ def run_report_probe(provider_name="deepseek"):
         "errors": (r.get("errors") or [])[:5],
     }
     # §六/§七：根因分类（基于真实 telemetry，不猜测）
+    mt = MAX_TOKEN_POLICY.get("africa_daily", 8192)
     out["root_cause_classification"] = classify_root_cause(
         r, strict_json_ok=bool(r.get("strict_json_pass")),
         ai_content_ok=bool(r.get("ai_content_schema_pass")),
         assembler_ok=bool(r.get("assembler_pass")),
-        final_ok=bool(r.get("final_schema_pass")))
+        final_ok=bool(r.get("final_schema_pass")),
+        max_tokens=mt)
+    # §五（本包）：probe_only 实验标识——本 probe 为 thinking-disabled 隔离实验
+    out["experiment"] = "rd1_thinking_disabled_isolation"
     # §十二：同时保存 raw AI content 与 assembled report（区分模型/assembler 问题）
     raw = r.get("raw_text_excerpt")
     if raw:

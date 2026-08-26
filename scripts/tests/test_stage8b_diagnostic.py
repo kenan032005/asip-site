@@ -408,3 +408,50 @@ class TestWorkflowMode(unittest.TestCase):
         for name in ("Secret scan", "Upload qualification artifacts"):
             block = self._step_block(name)
             self.assertIn("if: always()", block, name)
+
+
+class TestReasoningPriorityRegression(unittest.TestCase):
+    """§一：reasoning_tokens >= 0.90*max_tokens 优先于泛化 OUTPUT_TOKEN_BUDGET_INSUFFICIENT。"""
+
+    def test_reasoning_ge_90pct_max_tokens(self):
+        # 决定性证据：reasoning=8192, max=8192, length, content 空
+        rc = q.classify_root_cause(
+            {"finish_reason": "length", "output_tokens": 8192,
+             "reasoning_tokens": 8192, "content_present": False,
+             "stripped_content_length_chars": 0, "whitespace_only": False},
+            max_tokens=8192)
+        self.assertEqual(rc, "REASONING_BUDGET_EXHAUSTION")
+
+    def test_reasoning_90pct_exact_boundary(self):
+        rc = q.classify_root_cause(
+            {"finish_reason": "length", "output_tokens": 8192,
+             "reasoning_tokens": 7373, "content_present": False},
+            max_tokens=8192)   # 7373/8192 = 0.9000
+        self.assertEqual(rc, "REASONING_BUDGET_EXHAUSTION")
+
+    def test_reasoning_below_90pct_but_high_ratio(self):
+        # 0.9*max 不满足但 completion 占比 >=0.8 → 仍 REASONING（保持旧规则）
+        rc = q.classify_root_cause(
+            {"finish_reason": "length", "output_tokens": 8192,
+             "reasoning_tokens": 7000, "content_present": False},
+            max_tokens=8192)   # 7000/8192=0.854 <0.9；但 7000/8192=0.854>=0.8
+        self.assertEqual(rc, "REASONING_BUDGET_EXHAUSTION")
+
+    def test_no_max_tokens_falls_back_to_ratio(self):
+        rc = q.classify_root_cause(
+            {"finish_reason": "length", "output_tokens": 8192,
+             "reasoning_tokens": 7000, "content_present": False})
+        self.assertEqual(rc, "REASONING_BUDGET_EXHAUSTION")
+
+    def test_reasoning_low_whitespace_still_whitespace(self):
+        rc = q.classify_root_cause(
+            {"finish_reason": "length", "output_tokens": 8192,
+             "reasoning_tokens": 500, "content_present": False,
+             "whitespace_only": True},
+            max_tokens=8192)
+        self.assertEqual(rc, "JSON_WHITESPACE_EXHAUSTION")
+
+    def test_probe_experiment_marker(self):
+        import inspect
+        src = inspect.getsource(q.run_report_probe)
+        self.assertIn("rd1_thinking_disabled_isolation", src)

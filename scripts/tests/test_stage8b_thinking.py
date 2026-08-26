@@ -78,10 +78,11 @@ class TestThinkingPolicy(unittest.TestCase):
         self.assertEqual(body["thinking"], {"type": "disabled"})
         self.assertNotIn("reasoning_effort", body)
 
-    def test_daily_thinking_enabled_low(self):
+    def test_daily_thinking_disabled(self):
+        # §本包（RD1 Non-Thinking Isolation Probe）：africa_daily 仅本次改 disabled
         body = self._capture("africa_daily")
-        self.assertEqual(body["thinking"], {"type": "enabled"})
-        self.assertEqual(body["reasoning_effort"], "low")
+        self.assertEqual(body["thinking"], {"type": "disabled"})
+        self.assertNotIn("reasoning_effort", body)   # disabled 不发送 low
 
     def test_weekly_thinking_enabled_low(self):
         body = self._capture("country_weekly")
@@ -100,7 +101,9 @@ class TestThinkingPolicy(unittest.TestCase):
     def test_policy_values(self):
         self.assertEqual(ds.THINKING_POLICY["stage4_event_enrichment"], ("disabled", None))
         self.assertEqual(ds.THINKING_POLICY["disease_summary"], ("disabled", None))
-        for tt in ("africa_daily", "country_weekly", "major_event_brief"):
+        # §三：仅 Daily 本次隔离改为 disabled；Weekly/Brief 保持 enabled+low
+        self.assertEqual(ds.THINKING_POLICY["africa_daily"], ("disabled", None))
+        for tt in ("country_weekly", "major_event_brief"):
             self.assertEqual(ds.THINKING_POLICY[tt], ("enabled", "low"))
 
 
@@ -149,9 +152,7 @@ class TestResponseTelemetry(unittest.TestCase):
         self.assertEqual(r["result"]["content_length_chars"], len('{"a":1}'))
 
     def test_temperature_effective_flag(self):
-        r = self._call(resp_body())
-        self.assertEqual(r["result"]["temperature_effective"], "false_when_thinking")
-        # disabled 路径
+        # enabled 路径（weekly 仍 enabled+low）
         captured = {}
 
         def fake_urlopen(req, timeout=180):
@@ -160,8 +161,19 @@ class TestResponseTelemetry(unittest.TestCase):
 
         p = ds.DeepSeekV4FlashProvider(api_key="test-key")
         with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            r = p.submit_task({"task_id": "T", "system_text": "s", "user_text": "u",
+                               "task_type": "country_weekly"})
+        self.assertEqual(r["result"]["temperature_effective"], "false_when_thinking")
+        # disabled 路径（daily 现为 isolation disabled）
+        captured2 = {}
+
+        def fake_urlopen2(req, timeout=180):
+            captured2["body"] = json.loads(req.data.decode("utf-8"))
+            return FakeResp(resp_body())
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen2):
             r2 = p.submit_task({"task_id": "T", "system_text": "s", "user_text": "u",
-                                "task_type": "stage4_event_enrichment"})
+                                "task_type": "africa_daily"})
         self.assertEqual(r2["result"]["temperature_effective"], "true")
 
     def test_no_full_cot_in_result(self):
