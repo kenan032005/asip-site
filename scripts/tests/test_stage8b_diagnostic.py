@@ -228,19 +228,24 @@ class TestPromptJSONContract(unittest.TestCase):
             self.assertEqual(stray, set(),
                              "%s example 顶层含 schema 外字段 %s" % (pfn, stray))
 
-    def test_prompt_version_103(self):
-        for fn in ("africa_daily_report_v1.md",
-                   "country_weekly_report_v1.md",
-                   "major_event_brief_v1.md"):
-            head = (ROOT / "config" / "prompts" / fn).read_text(
-                encoding="utf-8").splitlines()[0]
-            self.assertIn("v1.0.3", head, fn)
+    def test_prompt_version_103_104(self):
+        # §三：仅 Major Brief 升 v1.0.4（contract 变化）；Daily/Weekly 保持 v1.0.3
+        self.assertIn("v1.0.3", (ROOT / "config" / "prompts" /
+                                 "africa_daily_report_v1.md").read_text(
+            encoding="utf-8").splitlines()[0])
+        self.assertIn("v1.0.3", (ROOT / "config" / "prompts" /
+                                 "country_weekly_report_v1.md").read_text(
+            encoding="utf-8").splitlines()[0])
+        self.assertIn("v1.0.4", (ROOT / "config" / "prompts" /
+                                 "major_event_brief_v1.md").read_text(
+            encoding="utf-8").splitlines()[0])
         man = json.loads((ROOT / "data" / "qualification" / "stage8b" /
                           "manifest.json").read_text(encoding="utf-8"))
         for fc in man["cases"]:
-            if fc["task_type"] in ("africa_daily", "country_weekly",
-                                   "major_event_brief"):
+            if fc["task_type"] in ("africa_daily", "country_weekly"):
                 self.assertEqual(fc["prompt_version"], "v1.0.3", fc["case_id"])
+            elif fc["task_type"] == "major_event_brief":
+                self.assertEqual(fc["prompt_version"], "v1.0.4", fc["case_id"])
 
 
 class TestClassification(unittest.TestCase):
@@ -518,3 +523,105 @@ class TestTelemetryPropagationClosure(unittest.TestCase):
                   "raw_content_is_null", "raw_content_length_chars",
                   "stripped_content_length_chars", "whitespace_only"):
             self.assertIn('"%s"' % f, src)
+
+
+class TestBriefContractAlignment(unittest.TestCase):
+    """§一-§二：Major Brief prompt example 与 AI content schema 对齐（防漂移）。"""
+
+    def test_brief_example_validates_against_schema(self):
+        import re as _re
+        from scripts.ai.schema_validation import validate_against_schema
+        t = (ROOT / "config" / "prompts" /
+             "major_event_brief_v1.md").read_text(encoding="utf-8")
+        m = _re.search(r"## OUTPUT SCHEMA.*?(?=\n## |\Z)", t, _re.S)
+        ex = json.loads(_re.search(r"(\{[\s\S]*\})", m.group(0)).group(1))
+        schema = json.loads((ROOT / "schemas" /
+                             "major_event_brief_ai_content.schema.json")
+                            .read_text(encoding="utf-8"))
+        errs = validate_against_schema(ex, schema)
+        self.assertEqual(errs, [], "brief example 与 schema 漂移: %s" % errs[:4])
+
+    def test_confirmed_facts_require_source_refs(self):
+        import re as _re
+        t = (ROOT / "config" / "prompts" /
+             "major_event_brief_v1.md").read_text(encoding="utf-8")
+        m = _re.search(r"## OUTPUT SCHEMA.*?(?=\n## |\Z)", t, _re.S)
+        ex = json.loads(_re.search(r"(\{[\s\S]*\})", m.group(0)).group(1))
+        for item in ex["confirmed_facts"]:
+            self.assertIn("source_refs", item)
+
+    def test_uncertainties_are_strings(self):
+        import re as _re
+        t = (ROOT / "config" / "prompts" /
+             "major_event_brief_v1.md").read_text(encoding="utf-8")
+        m = _re.search(r"## OUTPUT SCHEMA.*?(?=\n## |\Z)", t, _re.S)
+        ex = json.loads(_re.search(r"(\{[\s\S]*\})", m.group(0)).group(1))
+        for u in ex["uncertainties"]:
+            self.assertIsInstance(u, str)
+
+    def test_brief_version_104_only(self):
+        man = json.loads((ROOT / "data" / "qualification" / "stage8b" /
+                          "manifest.json").read_text(encoding="utf-8"))
+        for fc in man["cases"]:
+            if fc["task_type"] == "major_event_brief":
+                self.assertEqual(fc["prompt_version"], "v1.0.4", fc["case_id"])
+            elif fc["task_type"] in ("africa_daily", "country_weekly"):
+                self.assertEqual(fc["prompt_version"], "v1.0.3", fc["case_id"])
+
+
+class TestAttributionSemantics(unittest.TestCase):
+    """§六：归因保留语义（允许中文等价；禁止把未证实写成已证实）。"""
+
+    def test_alleged_preserved_cn(self):
+        ok, err = q.check_attribution(
+            "alleged attack killed 3", "据称发生袭击，3人死亡")
+        self.assertTrue(ok, err)
+
+    def test_alleged_lost_is_failure(self):
+        ok, err = q.check_attribution(
+            "alleged attack killed 3", "袭击已发生，3人死亡")
+        self.assertFalse(ok)
+
+    def test_single_source_preserved(self):
+        ok, err = q.check_attribution(
+            "single source reported", "据单一来源报道")
+        self.assertTrue(ok, err)
+
+    def test_conflicting_preserved(self):
+        ok, err = q.check_attribution(
+            "conflicting reports", "各方说法不一")
+        self.assertTrue(ok, err)
+
+    def test_suspected_preserved(self):
+        ok, err = q.check_attribution(
+            "suspected outbreak", "疑似疫情暴发")
+        self.assertTrue(ok, err)
+
+    def test_unconfirmed_preserved(self):
+        ok, err = q.check_attribution(
+            "unconfirmed casualty figure", "伤亡数字尚未证实")
+        self.assertTrue(ok, err)
+
+    def test_reported_preserved(self):
+        ok, err = q.check_attribution(
+            "reportedly attacked", "据报道遭袭")
+        self.assertTrue(ok, err)
+
+    def test_no_marker_input_passes(self):
+        # input 无归因词 → 不判 attribution_lost（§六：不得笼统判定）
+        ok, err = q.check_attribution(
+            "official visit by governor", "省长开展正式访问")
+        self.assertTrue(ok, err)
+
+
+class TestAttributionDiagnosticDetail(unittest.TestCase):
+    """§九：attribution 失败时记录 marker 对（供下次 recompute）。"""
+
+    def test_failure_detail_includes_markers(self):
+        ok, err = q.check_attribution(
+            "alleged attack killed 3", "袭击已发生，3人死亡")
+        self.assertFalse(ok)
+        self.assertIn("attribution_lost", err)
+        self.assertIn("input_markers", err)
+        self.assertIn("output_markers", err)
+        self.assertIn("alleged", err)

@@ -105,14 +105,20 @@ def strict_json_parse(text):
 
 
 def check_attribution(input_text, output_text):
-    """输入含归因词而输出完全丢失 → 归因失败（§十八）。"""
+    """输入含归因词而输出完全丢失 → 归因失败（§十八）。
+
+    §六/§九：失败时记录 input/output marker 对（供 recompute/人工复核）。
+    """
     it = (input_text or "").lower()
     ot = (output_text or "").lower()
     if not any(k in it for k in ATTR_SRC_KW):
         return True, None
     if any(k in ot for k in ATTR_OUT_KW):
         return True, None
-    return False, "attribution_lost"
+    in_markers = [k for k in ATTR_SRC_KW if k in it]
+    out_markers = [k for k in ATTR_OUT_KW if k in ot]
+    return False, ("attribution_lost: input_markers=%s output_markers=%s"
+                   % (in_markers, out_markers))
 
 
 def check_numeric_evidence(parsed, input_payload, fact_fields):

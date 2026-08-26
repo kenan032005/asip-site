@@ -1,4 +1,4 @@
-# ASIP Major Event Brief — 生成合同 v1.0.3
+# ASIP Major Event Brief — 生成合同 v1.0.4
 
 ## TASK
 
@@ -30,15 +30,15 @@ No prose before or after JSON. No markdown fences. No comments.
   "title": "重大事件简报（占位）",
   "what_happened": "……（占位，仅复述输入事实）",
   "confirmed_facts": [
-    {"fact": "……（占位）"}
+    {"fact": "……（占位）", "source_refs": ["SRC_PLACEHOLDER"]}
   ],
   "uncertainties": [
-    {"uncertainty": "……（占位，保留归因/单一来源语义）"}
+    "……（占位，保留归因/单一来源语义）"
   ],
   "immediate_implications": [],
   "watch_items": [],
   "location": "……（占位）",
-  "verification_confidence": "……（占位）",
+  "verification_confidence": null,
   "source_notes": [
     {"source_id": "SRC_PLACEHOLDER", "source_name": "示例来源（占位）",
      "url": "https://example.invalid/placeholder"}
