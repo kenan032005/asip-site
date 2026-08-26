@@ -119,6 +119,54 @@ class TestGates(unittest.TestCase):
         ok2, errs2 = q.check_disease_identity({"disease_id": "cholera"}, inp)
         self.assertFalse(ok2)
 
+    # ── Repair Package（2026-08-26）──
+    def test_disease_identity_uses_disease_event_id(self):
+        """evaluator bug 修复：输出含匹配 disease_event_id → 不得误判。"""
+        inp = {"disease_event_id": "DSEV_abc123", "disease_id": "cholera",
+               "event": {"disease_event_id": "DSEV_abc123",
+                         "disease_name_zh": "霍乱"}}
+        ok, errs = q.check_disease_identity(
+            {"disease_event_id": "DSEV_abc123", "title_zh": "霍乱疫情"}, inp)
+        self.assertTrue(ok, "disease_event_id 一致仍误判: %s" % errs)
+
+    def test_disease_identity_wrong_event_id(self):
+        inp = {"disease_event_id": "DSEV_abc123", "event": {}}
+        ok, errs = q.check_disease_identity(
+            {"disease_event_id": "DSEV_other99"}, inp)
+        self.assertFalse(ok)
+
+    def test_disease_identity_by_chinese_name(self):
+        """输出用中文名也可通过（不强制英文 disease_id 出现在输出）。"""
+        inp = {"disease_id": "marburg", "event": {"disease_name_zh": "马尔堡出血热"}}
+        ok, _ = q.check_disease_identity({"title_zh": "马尔堡出血热疫情"}, inp)
+        self.assertTrue(ok)
+
+    def test_attribution_chinese_lexicon(self):
+        """词典修复：可能/据报道/存在冲突 视为保留词。"""
+        self.assertTrue(q.check_attribution("据报道，袭击造成5人死亡",
+                                            "袭击造成5人死亡，可能为武装组织所为")[0])
+        self.assertTrue(q.check_attribution("据悉，多名疑犯已被捕",
+                                            "据报道，多名疑犯已被捕")[0])
+        self.assertFalse(q.check_attribution("alleged by local officials",
+                                             "当地确认袭击造成5人死亡")[0])
+
+    def test_failure_stage_classification(self):
+        self.assertEqual(q.classify_failure_stage("http_429"), "http_request")
+        self.assertEqual(q.classify_failure_stage("model_mismatch"), "provider_response")
+        self.assertEqual(q.classify_failure_stage("retry_exhausted:http_500"), "http_request")
+        self.assertEqual(q.classify_failure_stage("credential_unavailable"),
+                         "client_request_construction")
+        self.assertEqual(q.classify_failure_stage("invalid_response_shape:not_json"),
+                         "response_parse")
+        self.assertEqual(q.classify_failure_stage("weird_thing"), "unknown")
+
+    def test_report_probe_credential_missing_fails(self):
+        """§七：credential 缺失时 probe 必须 FAIL（不调 API）。"""
+        import scripts.ai.qualification.stage8b as qq
+        qq.credential_available = lambda n: False
+        rc = qq.run_report_probe("deepseek")
+        self.assertEqual(rc, 1)
+
     def test_source_refs_no_fabrication(self):
         inp = {"source_refs": [{"source_id": "s1", "url": "https://a.example/1"}]}
         ok, errs = q.check_source_refs(

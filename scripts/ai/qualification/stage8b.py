@@ -54,12 +54,13 @@ PROVIDER_CANDIDATES = ["glm47_flash", "deepseek"]
 GLM_SECRET = "ASIP_GLM_API_KEY"
 DS_SECRET = "ASIP_DEEPSEEK_API_KEY"
 
-# ── 归因保留词（§十八）──
+# ── 归因保留词（§十八；2026-08-26 扩展词典修复漏词）──
 ATTR_SRC_KW = ("alleged", "claimed", "suspected", "reportedly", "unconfirmed",
                "single_source", "conflicting", "据称", "声称", "疑似", "被指",
                "尚未证实", "单一来源", "说法不一")
-ATTR_OUT_KW = ("据称", "声称", "被指", "疑似", "尚未证实", "单一来源",
-               "说法不一", "alleged", "claimed", "suspected", "reportedly",
+ATTR_OUT_KW = ("据称", "声称", "被指", "疑似", "可能", "据报道", "尚未证实",
+               "单一来源", "说法不一", "存在冲突", "多家来源", "未证实",
+               "alleged", "claimed", "suspected", "reportedly",
                "unconfirmed", "single source", "conflicting")
 
 _NUM_RE = re.compile(r"(?<![\w.])(\d{1,3}(?:,\d{3})*|\d+)(?![\w.])")
@@ -153,16 +154,36 @@ def check_country(parsed, input_payload):
 
 
 def check_disease_identity(parsed, input_payload):
-    """§九：disease identity 保留；病例类别不合并；unknown(null) 不得写 0。"""
+    """§九：disease identity 保留。
+
+    修复（evaluator bug，2026-08-26）：Disease output contract 的身份字段是
+    disease_event_id（非 disease_id）。不得要求模型输出 schema 不存在的字段。
+    正确规则：
+      1) 输入含 disease_event_id 且输出含 disease_event_id → 必须一致；
+      2) 否则若输入含 disease_id，允许输出中出现 disease_id 或对应中文/英文名
+         （disease_name_zh/name_en 任一命中即通过）；
+      3) 输入无任何身份字段 → 不判。
+    """
     if not isinstance(parsed, dict):
         return True, None
     problems = []
-    src_did = None
-    if isinstance(input_payload, dict):
-        src_did = input_payload.get("disease_id") or (input_payload.get("event") or {}).get("disease_id")
+    src = input_payload if isinstance(input_payload, dict) else {}
+    src_ev = src.get("event") or {}
+    src_evid = src.get("disease_event_id") or src_ev.get("disease_event_id")
+    out_evid = parsed.get("disease_event_id")
+    if src_evid and out_evid:
+        if str(src_evid) != str(out_evid):
+            problems.append("disease_identity_error: %s != %s" % (out_evid, src_evid))
+        return (len(problems) == 0), problems
+    src_did = src.get("disease_id") or src_ev.get("disease_id")
     if src_did:
-        blob = json.dumps(parsed, ensure_ascii=False)
-        if src_did.lower() not in blob.lower():
+        blob = json.dumps(parsed, ensure_ascii=False).lower()
+        names = [str(src_did).lower()]
+        for k in ("disease_name_zh", "disease_name_en", "name_zh", "name_en"):
+            v = src_ev.get(k) or src.get(k)
+            if v:
+                names.append(str(v).lower())
+        if not any(n in blob for n in names if n):
             problems.append("disease_identity_error")
     return (len(problems) == 0), problems
 
@@ -280,6 +301,27 @@ def _glm_task_builder(case):
     }
 
 
+def classify_failure_stage(code):
+    """§十三：失败阶段枚举（client_request_construction/http_request/
+    provider_response/response_parse/schema_validation/quality_gate/unknown）。"""
+    code = str(code or "")
+    if code.startswith("http_") or code.startswith("transport_error"):
+        return "http_request"
+    if "model_mismatch" in code:
+        return "provider_response"
+    if code.startswith("retry_exhausted"):
+        return "http_request"
+    if code.startswith("provider_error"):
+        return "provider_response"
+    if code.startswith("invalid_response_shape") or code.startswith("not_json"):
+        return "response_parse"
+    if code.startswith("schema"):
+        return "schema_validation"
+    if code == "credential_unavailable" or code == "credential_missing":
+        return "client_request_construction"
+    return "unknown"
+
+
 def run_case(case, provider_name):
     """执行单个 case。credential 缺失 → provider_unavailable（不调 API）。"""
     result = {
@@ -294,6 +336,7 @@ def run_case(case, provider_name):
         "returned_model": None,
         "provider_status": "unavailable",
         "attempt_count": 0,
+        "failure_stage": None,
         "strict_json_pass": False,
         "schema_pass": False,
         "contract_failure": None,
@@ -323,6 +366,7 @@ def run_case(case, provider_name):
             err = (res.get("result") or {}).get("error") or {}
             result["provider_status"] = status
             result["contract_failure"] = (err.get("code") if isinstance(err, dict) else None) or status
+            result["failure_stage"] = classify_failure_stage(result["contract_failure"])
             return result
     else:
         # Stage 8B continuation：DeepSeek V4 Flash-only（§二-§四）
@@ -344,6 +388,7 @@ def run_case(case, provider_name):
             code = err.get("code") if isinstance(err, dict) else None
             result["provider_status"] = status
             result["contract_failure"] = code or status
+            result["failure_stage"] = classify_failure_stage(code or status)
             if code == "model_mismatch":
                 result["errors"].append(
                     "model_mismatch: returned=%s" % result["returned_model"])
@@ -352,6 +397,7 @@ def run_case(case, provider_name):
         if result["returned_model"] and result["returned_model"] not in ALLOWED_DEEPSEEK_MODELS:
             result["provider_status"] = "failed"
             result["contract_failure"] = "model_mismatch"
+            result["failure_stage"] = "provider_response"
             result["errors"].append(
                 "model_mismatch: returned=%s" % result["returned_model"])
             return result
@@ -363,6 +409,7 @@ def run_case(case, provider_name):
     result["strict_json_pass"] = ok_json
     if not ok_json:
         result["contract_failure"] = "invalid_response_shape:%s" % (err or "?")
+        result["failure_stage"] = "response_parse"
         return result
     result["raw_text_excerpt"] = raw_text[:400]  # artifact 审计用（不含 key）
     return _evaluate_case(case, parsed, result)
@@ -714,17 +761,53 @@ def run_smoke(provider_name="deepseek"):
             "result": "not_supported", "strict_json": False}
 
 
+def run_report_probe(provider_name="deepseek"):
+    """§七：单个 Report API Probe（RD1 固定输入，deepseek-v4-flash）。
+
+    只验证连接与契约通道：HTTP success / requested·returned model / strict_json
+    / schema。不评价报告内容。失败 → exit 1（REPORT_API_PROBE_FAILED）。
+    """
+    cases = build_cases()
+    rd1 = next(c for c in cases if c["case_id"] == "RD1")
+    r = run_case(rd1, provider_name)
+    out = {
+        "case_id": "RD1", "task_type": "africa_daily",
+        "provider": provider_name,
+        "credential_available": r.get("credential_available"),
+        "requested_model": r.get("requested_model"),
+        "returned_model": r.get("returned_model"),
+        "provider_status": r.get("provider_status"),
+        "contract_failure": r.get("contract_failure"),
+        "failure_stage": r.get("failure_stage"),
+        "attempt_count": r.get("attempt_count"),
+        "strict_json_pass": r.get("strict_json_pass"),
+        "schema_pass": r.get("schema_pass"),
+        "errors": (r.get("errors") or [])[:5],
+    }
+    print(json.dumps(out, ensure_ascii=False, indent=2))
+    ok = (r.get("provider_status") == "succeeded" and r.get("strict_json_pass")
+          and r.get("schema_pass")
+          and (r.get("returned_model") in (None, "deepseek-v4-flash")))
+    print("REPORT_API_PROBE =", "PASS" if ok else "FAIL")
+    return 0 if ok else 1
+
+
 def main(argv=None):
     import argparse
     ap = argparse.ArgumentParser()
     ap.add_argument("--provider", default="all")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--smoke", action="store_true", help="只做 1 次最小连接 smoke")
+    ap.add_argument("--report-probe", action="store_true",
+                    help="只做 1 次 Report API Probe（RD1，deepseek-v4-flash）")
     args = ap.parse_args(argv)
     if args.smoke:
         print(json.dumps(run_smoke(args.provider if args.provider != "all"
                                    else "deepseek"), ensure_ascii=False, indent=2))
         return 0
+    if args.report_probe:
+        return run_report_probe(args.provider if args.provider != "all"
+                                else "deepseek")
     summary, results = run(args.provider, args.limit)
     print(json.dumps(summary, ensure_ascii=False, indent=2))
     for r in results:
