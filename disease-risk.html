@@ -3,181 +3,46 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>非洲传染病风险 · 非洲地区社会安全信息平台</title>
+<title>疾病风险 · ASIP</title>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body data-page="disease">
 <div id="topbar" class="topbar"></div>
+
 <div id="dbError" class="db-error" style="display:none;">
   ⚠️ 数据未能成功加载。请刷新页面（Ctrl/Cmd + Shift + R）后重试。
 </div>
 
 <div class="container">
-  <div class="hp-block disease-hero">
-    <div class="icon">🦠</div>
+  <section class="hero">
     <h1>非洲传染病风险</h1>
-    <p>本页汇总 WHO、非洲疾控中心、UNICEF 及各国卫生部门公开通报的非洲疫情事件。数据仅用于情况了解，不作医学建议、不给个人诊断或用药指导。</p>
-  </div>
+    <p class="fe-sub">以疫情（Outbreak）为中心；确诊 / 疑似 / 死亡分类展示，未知值显示 —，绝不错误相加。</p>
+    <p class="fe-note">疫情状态：活跃 · 发展 · 上升 · 扩散 · 监测 · 下降 · 已控制 · 已结束</p>
+  </section>
 
-  <div class="stats-row" id="stats">
-    <div class="stat-box"><b id="stOutbreaks">--</b><span>当前疫情通报</span></div>
-    <div class="stat-box"><b id="stDiseases">--</b><span>覆盖疾病</span></div>
-    <div class="stat-box"><b id="stCountries">--</b><span>覆盖国家/区域</span></div>
-    <div class="stat-box"><b id="stUpdated">--</b><span>最近通报（北京时间）</span></div>
-  </div>
+  <section class="hp-block">
+    <h2>活跃疫情</h2>
+    <div id="feDisActive"><div class="empty-sm">加载中…</div></div>
+  </section>
 
-  <div class="filters">
-    <div class="fitem"><label>疾病</label><select id="fDisease"><option value="">全部</option></select></div>
-    <div class="fitem"><label>国家/区域</label><select id="fCountry"><option value="">全部</option></select></div>
-    <div class="fitem"><label>状态</label><select id="fStatus">
-      <option value="">全部</option>
-      <option value="active">持续暴发</option>
-      <option value="monitoring">监测中</option>
-      <option value="declining">下降</option>
-      <option value="contained">已控制</option>
-      <option value="ended">已结束</option>
-      <option value="unknown">未知</option>
-    </select></div>
-    <div class="fitem"><button id="fReset" class="ghost">重置</button></div>
-  </div>
+  <section class="hp-block">
+    <h2>疫情筛选</h2>
+    <div class="fe-evs-filter" id="feDisFilter"></div>
+  </section>
 
-  <h2 style="font-size:16px;color:var(--brand);margin:18px 0 10px;">疫情事件</h2>
-  <div id="list"><div class="empty">加载中…</div></div>
+  <section class="hp-block">
+    <h2>全部疫情</h2>
+    <div id="feDiseaseList"><div class="empty-sm">加载中…</div></div>
+  </section>
 
-  <h2 style="font-size:16px;color:var(--brand);margin:18px 0 10px;">最近更新</h2>
-  <div id="recent" class="grid cards"><div class="empty">加载中…</div></div>
-
-  <p class="muted small" style="margin-top:16px;">状态说明：持续暴发（active）／监测中（monitoring）／下降（declining）／已控制（contained）／已结束（ended）。所有状态均基于官方通报。所有时间均为北京时间（UTC+8）。</p>
+  <section class="hp-block" id="feOutbreakDetail" hidden></section>
 </div>
 
-<footer class="site"></footer>
+<footer class="site"><div id="asip-build-meta" style="margin-top:4px;font-size:12px;color:#8899aa;"></div></footer>
 
 <script src="assets/js/pipeline.js"></script>
 <script src="assets/js/api.js"></script>
 <script src="assets/js/common.js"></script>
-<script>
-renderHeader("disease-risk.html");
-
-const STATUS_CN = {
-  "active": "持续暴发", "monitoring": "监测中", "declining": "下降",
-  "contained": "已控制", "ended": "已结束", "unknown": "未知"
-};
-const STATUS_COLOR = {
-  "active": "#c62828", "monitoring": "#ef6c00", "declining": "#2e7d32",
-  "contained": "#2e7d32", "ended": "#546e7a", "unknown": "#78909c"
-};
-function statusBadge(s) {
-  const cn = STATUS_CN[s] || s || "未知";
-  const c = STATUS_COLOR[s] || "#78909c";
-  return `<span class="ec-tag" style="background:${c}1a;color:${c};border:1px solid ${c}55;">${esc(cn)}</span>`;
-}
-function numOrUnknown(v) {
-  return (v === null || v === undefined) ? "未知" : esc(String(v));
-}
-function countryName(iso3) {
-  if (!iso3) return "—";
-  if (iso3 === "regional") return "非洲区域";
-  return esc(iso3);
-}
-
-let ALL = [];
-
-function fillFilters() {
-  const dis = new Set(), ctr = new Set();
-  ALL.forEach(function (e) {
-    if (e.disease_name_zh) dis.add(e.disease_name_zh);
-    if (e.disease_name_en) dis.add(e.disease_name_en);
-    ctr.add(e.country_iso3 === "regional" ? "非洲区域" : e.country_iso3);
-  });
-  const ds = document.getElementById("fDisease");
-  [...dis].sort().forEach(function (d) {
-    const o = document.createElement("option"); o.value = d; o.textContent = d; ds.appendChild(o);
-  });
-  const cs = document.getElementById("fCountry");
-  [...ctr].sort().forEach(function (c) {
-    const o = document.createElement("option"); o.value = c; o.textContent = c; cs.appendChild(o);
-  });
-}
-
-function cardHTML(e) {
-  const numLine = `确诊：${numOrUnknown(e.confirmed_cases)} ｜ 疑似：${numOrUnknown(e.suspected_cases)} ｜ 死亡：${numOrUnknown(e.deaths)}`;
-  const src = (e.source_links && e.source_links[0]) || {};
-  const srcLine = src.url
-    ? `来源：${esc(src.source_name || "—")} · <a href="${esc(src.url)}" target="_blank" rel="noopener">原始报告 ↗</a>`
-    : `来源：${esc(e.primary_source || "—")}`;
-  return `<div class="panel ecard">
-    <div class="ec-title">${esc(e.disease_name_zh || e.disease_name_en || e.disease_id)} · ${countryName(e.country_iso3)}${e.admin1 ? " · " + esc(e.admin1) : ""}</div>
-    <div class="ec-tags">${statusBadge(e.outbreak_status)}<span class="ec-tag">${esc(e.update_type || "")}</span><span class="ec-time">通报 ${esc(String(e.report_date || ""))}</span></div>
-    <div class="ec-summary">${numLine}</div>
-    <div class="muted small">${srcLine}${e.cross_border ? " · 跨境：" + esc((e.affected_countries || []).join("/")) : ""}</div>
-  </div>`;
-}
-
-function applyFilters() {
-  const fD = document.getElementById("fDisease").value;
-  const fC = document.getElementById("fCountry").value;
-  const fS = document.getElementById("fStatus").value;
-  let list = ALL.filter(function (e) {
-    if (fD) {
-      const name = e.disease_name_zh || e.disease_name_en || e.disease_id;
-      if (name !== fD) return false;
-    }
-    if (fC) {
-      const c = e.country_iso3 === "regional" ? "非洲区域" : e.country_iso3;
-      if (c !== fC) return false;
-    }
-    if (fS && e.outbreak_status !== fS) return false;
-    return true;
-  });
-  list.sort(function (a, b) { return (b.report_date || "").localeCompare(a.report_date || ""); });
-  const host = document.getElementById("list");
-  if (!list.length) { host.innerHTML = '<div class="empty">暂无符合条件的疫情通报。</div>'; return; }
-  host.innerHTML = list.map(cardHTML).join("");
-}
-
-function renderStats() {
-  const diseases = new Set(ALL.map(function (e) { return e.disease_id; }));
-  const countries = new Set(ALL.map(function (e) { return e.country_iso3; }));
-  const latest = ALL.slice().sort(function (a, b) {
-    return (b.report_date || "").localeCompare(a.report_date || "");
-  })[0];
-  document.getElementById("stOutbreaks").textContent = ALL.length;
-  document.getElementById("stDiseases").textContent = diseases.size;
-  document.getElementById("stCountries").textContent = countries.size;
-  document.getElementById("stUpdated").textContent = latest ? latest.report_date : "--";
-}
-
-function renderRecent() {
-  const list = ALL.slice().sort(function (a, b) {
-    return (b.updated_at || b.report_date || "").localeCompare(a.updated_at || a.report_date || "");
-  }).slice(0, 5);
-  const host = document.getElementById("recent");
-  host.innerHTML = list.length ? list.map(cardHTML).join("")
-    : '<div class="empty">暂无更新。</div>';
-}
-
-function init() {
-  API.getCached("public/disease_events").then(function (res) {
-    const items = (res && res.items) || [];
-    ALL = items;
-    renderStats();
-    fillFilters();
-    applyFilters();
-    renderRecent();
-  }).catch(function () { showDbError(); });
-}
-
-["fDisease", "fCountry", "fStatus"].forEach(function (id) {
-  document.getElementById(id).addEventListener("change", applyFilters);
-});
-document.getElementById("fReset").addEventListener("click", function () {
-  ["fDisease", "fCountry", "fStatus"].forEach(function (id) {
-    document.getElementById(id).value = "";
-  });
-  applyFilters();
-});
-
-init();
-</script>
+<script src="assets/js/frontend.js"></script>
 </body>
 </html>

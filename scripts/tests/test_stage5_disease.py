@@ -241,10 +241,22 @@ class TestDataIntegrity(unittest.TestCase):
             self.assertNotIn(bad, m.group(1))
 
     def test_page_status_mapping(self):
+        # Stage 8A：疾病页由「占位 + 硬编码状态词」升级为 view 驱动 Dashboard。
+        # 页面展示状态图例；中文状态词由 disease_outbreaks view 的 status_cn 提供。
         html = open(os.path.join(ROOT, "disease-risk.html"), encoding="utf-8").read()
-        for cn in ("持续暴发", "监测中", "下降", "已控制", "已结束"):
+        for cn in ("活跃", "下降", "已控制", "已结束"):
             self.assertIn(cn, html)
-        self.assertIn("public/disease_events", html)
+        # view 契约：每个 outbreak 必须有 status_cn 中文状态
+        view = json.load(open(os.path.join(
+            ROOT, "data", "runtime", "frontend_preview_public",
+            "disease_outbreaks.json"), encoding="utf-8"))
+        self.assertGreaterEqual(len(view["outbreaks"]), 1)
+        for o in view["outbreaks"]:
+            self.assertTrue(o.get("status_cn"))
+        # 公开数据路径：disease_outbreaks 进入 __DB__（前端消费公开视图）
+        dist_html = open(os.path.join(ROOT, "dist", "index.html"),
+                         encoding="utf-8").read()
+        self.assertIn("disease_outbreaks", dist_html)
 
     def test_development_mode_and_api_closed(self):
         cfg = json.load(open(os.path.join(ROOT, "config", "runtime.json"),

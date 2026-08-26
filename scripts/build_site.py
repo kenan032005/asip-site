@@ -56,6 +56,45 @@ PUBLIC_DATA_ALLOWLIST = [
     "public/disease_events.json",        # Stage 5 疾病公开快照（Public ⊆ Disease Canonical）
 ]
 
+# Stage 8A：公开安全前端视图（由 scripts/frontend/build_frontend_views.py 生成）。
+# 只允许进入 dist 白名单的 7 个视图契约；绝不带内部 runtime 字段。
+FRONTEND_VIEWS = [
+    "site_overview",
+    "master_events",
+    "event_timelines",
+    "country_snapshots",
+    "disease_outbreaks",
+    "report_index",
+    "knowledge_summary",
+]
+FRONTEND_VIEWS_DIR = os.path.join(DATA_DIR, "runtime", "frontend_preview_public")
+
+
+def _copy_frontend_views(dist_root):
+    """§二十四：前端视图 → dist/data/*.json（public-safe，供页面 API.get 消费）。
+
+    先刷新视图（确定性构建器，无 AI），再把 7 个契约复制进公开构建。
+    生成失败时静默跳过（页面留空态，不影响站点构建）。
+    """
+    try:
+        sys.path.insert(0, os.path.join(HERE, "frontend"))
+        import build_frontend_views as _bfv
+        _bfv.main()
+    except Exception as e:
+        print(f"  ⚠ 前端视图刷新失败（跳过）: {e}")
+    if not os.path.isdir(FRONTEND_VIEWS_DIR):
+        return 0
+    dst_root = os.path.join(dist_root, "data")
+    os.makedirs(dst_root, exist_ok=True)
+    n = 0
+    for name in FRONTEND_VIEWS:
+        src = os.path.join(FRONTEND_VIEWS_DIR, name + ".json")
+        if not os.path.exists(src):
+            continue
+        shutil.copy2(src, os.path.join(dst_root, name + ".json"))
+        n += 1
+    return n
+
 WIN_PATH_RE = re.compile(r"[A-Za-z]:[\\/]+[^\s\"'<>|]*")
 POSIX_PATH_RE = re.compile(r"/(?:home|Users)/[^\s\"'<>|]*")
 
@@ -102,7 +141,11 @@ def _copy_public_data(dist_root):
 
 
 def load_public_db(data_dir=None):
-    """仅加载白名单文件（脱敏后）作为内联快照，杜绝内部数据进入 __DB__。"""
+    """仅加载白名单文件（脱敏后）作为内联快照，杜绝内部数据进入 __DB__。
+
+    Stage 8A：额外内联 7 个公开安全前端视图（site_overview 等），
+    键与 dist/data/<name>.json 一致，页面直接 API.get("site_overview")。
+    """
     if data_dir is None:
         data_dir = DATA_DIR
     db = {}
@@ -118,6 +161,16 @@ def load_public_db(data_dir=None):
         if rel in ("sources.json", "events.json"):
             data = _sanitize_public(data)
         db[rel[:-5]] = data
+    # Stage 8A 前端视图（public-safe）
+    for name in FRONTEND_VIEWS:
+        src = os.path.join(FRONTEND_VIEWS_DIR, name + ".json")
+        if not os.path.exists(src):
+            continue
+        try:
+            with open(src, "r", encoding="utf-8") as f:
+                db[name] = json.load(f)
+        except Exception:
+            continue
     return db
 
 
@@ -247,6 +300,9 @@ def main(run_id=None, no_embed=False):
     if os.path.isdir(DATA_DIR):
         # Stage-2 收尾：仅按白名单复制公开数据，绝不复制整个 data/ 目录
         _copy_public_data(DIST_NEW)
+    # Stage 8A：公开安全前端视图（site_overview/master_events/...）
+    n_views = _copy_frontend_views(DIST_NEW)
+    print(f"  前端视图: {n_views} 个契约")
     if os.path.isdir(REPORTS):
         shutil.copytree(REPORTS, os.path.join(DIST_NEW, "reports"))
 
