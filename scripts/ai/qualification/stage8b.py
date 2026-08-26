@@ -1001,6 +1001,18 @@ def run_report_probe(provider_name="deepseek"):
         "input_tokens": tokens.get("input_tokens"),
         "output_tokens": tokens.get("output_tokens"),
         "total_tokens": tokens.get("total_tokens"),
+        # §三（本包）：finish_reason / reasoning / raw content telemetry 全持久化
+        "finish_reason": r.get("finish_reason"),
+        "reasoning_content_present": r.get("reasoning_content_present"),
+        "reasoning_content_length_chars": r.get("reasoning_content_length_chars"),
+        "reasoning_tokens": r.get("reasoning_tokens"),
+        "content_present": r.get("content_present"),
+        "raw_content_is_null": r.get("raw_content_is_null"),
+        "raw_content_length_chars": r.get("raw_content_length_chars"),
+        "stripped_content_length_chars": r.get("stripped_content_length_chars"),
+        "whitespace_only": r.get("whitespace_only"),
+        "thinking_requested": r.get("thinking_requested"),
+        "reasoning_effort_requested": r.get("reasoning_effort_requested"),
         "errors": (r.get("errors") or [])[:5],
     }
     # §十二：同时保存 raw AI content 与 assembled report（区分模型/assembler 问题）

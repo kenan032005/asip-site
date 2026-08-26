@@ -1,4 +1,4 @@
-# ASIP Priority Country Weekly Report — 生成合同 v1.0.2
+# ASIP Priority Country Weekly Report — 生成合同 v1.0.3
 
 ## TASK
 
@@ -22,28 +22,28 @@ Do not generate report envelope metadata (report_id, report_type, country_iso3, 
 These fields are supplied by the report engine and MUST NOT be included in your output.
 Return ONLY the content payload described in OUTPUT SCHEMA.
 
-## OUTPUT SCHEMA（严格输出此结构，仅一个 JSON 对象）
+## OUTPUT SCHEMA（AI CONTENT PAYLOAD——仅内容，envelope 由报告引擎装配）
+
+Return ONLY one valid JSON object matching the structure below.
+No prose before or after JSON. No markdown fences. No comments.
 
 {
-  "report_id": "WEEKLY_TCD_YYYY-WW",
-  "report_type": "country_weekly",
-  "title": "国名 周报（YYYY年MM月DD日-YYYY年MM月DD日）",
-  "country_iso3": "from input",
-  "week_start": "from input",
-  "week_end": "from input",
-  "generated_at": "from input",
-  "report_timezone": "Asia/Shanghai",
-  "executive_assessment": "一周整体判断（input evidence 支撑）",
-  "major_events": [ {"item_id": "...", "master_event_id": "...", "country_iso3": "...", "headline_zh": "...", "fact_summary": "...", "assessment": "...", "outlook": "...", "verification_status": "...", "uncertainties": [...], "source_refs": [...], "importance_score": 0} ],
-  "security_trend": "基于 metrics 的中性描述（comparison 有值才写上升/下降/稳定）",
-  "political_social_stability": [...],
-  "terrorism_armed_violence": [...],
-  "disease_public_health": [ {"item_id": "...", "disease_id": "...", "country_iso3": "...", "fact_summary": "...", "assessment": "...", "outlook": "...", "latest_counts": {...}, "source_refs": [...]} ],
-  "week_over_week_changes": [ {"field": "...", "direction": "up|down|stable|null", "detail": "..."} ],
-  "next_week_watch_items": ["..."],
-  "metrics": {"event_count": 0, "armed_attack_count": 0, "fatalities_known": null, "...": "回显 input 全部指标"},
-  "source_notes": [ {"source_id": "...", "source_name": "...", "url": "..."} ],
-  "generation_metadata": {"provider_name": "...", "model_name": "...", "prompt_version": "1.0.0", "usage_purpose": "development_test", "report_status": "draft", "input_report_id": "from input"}
+  "title": "重点国家周报（占位）",
+  "executive_assessment": "……（占位，须有 input metrics 支撑）",
+  "security_trend": "……（占位，须有 input 证据支撑）",
+  "political_social_stability": [],
+  "terrorism_armed_violence": [],
+  "disease_public_health": [],
+  "major_events": [
+    {"item_id": "E1", "country_iso3": "TCD", "headline_zh": "示例标题（占位）",
+     "fact_summary": "据示例来源报道……（占位）", "assessment": "……（占位）"}
+  ],
+  "week_over_week_changes": [],
+  "next_week_watch_items": [],
+  "source_notes": [
+    {"source_id": "SRC_PLACEHOLDER", "source_name": "示例来源（占位）",
+     "url": "https://example.invalid/placeholder"}
+  ]
 }
 
 ## FACT / ASSESSMENT / OUTLOOK 边界

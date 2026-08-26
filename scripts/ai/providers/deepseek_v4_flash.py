@@ -246,11 +246,14 @@ class DeepSeekV4FlashProvider(BaseAIProvider):
         usage_details = usage.get("completion_tokens_details") or {}
         choice = (data.get("choices") or [{}])[0]
         message = choice.get("message") or {}
-        content = message.get("content") or ""
+        content = message.get("content")
+        content = content if isinstance(content, str) else ""
         reasoning_content = message.get("reasoning_content") or ""
         finish_reason = choice.get("finish_reason")
         # §六/§七：telemetry——不落完整 CoT，仅存在性/长度/token 数
         reasoning_tokens = usage_details.get("reasoning_tokens")
+        # §二（本包）：raw content 状态（null / 空串 / whitespace-only / nonempty）
+        stripped = content.strip()
         return {"task_id": tid, "status": "succeeded", "result": {
             "text": content,
             "credential_status": self.credential_status,
@@ -268,8 +271,12 @@ class DeepSeekV4FlashProvider(BaseAIProvider):
             "reasoning_content_present": bool(reasoning_content),
             "reasoning_content_length_chars": len(reasoning_content) if reasoning_content else 0,
             "reasoning_tokens": reasoning_tokens,
-            "content_present": bool(content),
+            "content_present": bool(stripped),   # whitespace-only 视为无内容
             "content_length_chars": len(content),
+            "raw_content_is_null": content == "",
+            "raw_content_length_chars": len(content),
+            "stripped_content_length_chars": len(stripped),
+            "whitespace_only": bool(content) and not stripped,
             "thinking_requested": thinking,
             "reasoning_effort_requested": reasoning_effort,
             "temperature_effective": "false_when_thinking" if thinking == "enabled" else "true",

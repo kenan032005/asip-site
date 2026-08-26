@@ -1,4 +1,4 @@
-# ASIP Africa Daily Report — 生成合同 v1.0.2
+# ASIP Africa Daily Report — 生成合同 v1.0.3
 
 ## TASK
 
@@ -22,28 +22,30 @@ Do not generate report envelope metadata (report_id, report_type, report_date, p
 These fields are supplied by the report engine and MUST NOT be included in your output.
 Return ONLY the content payload described in OUTPUT SCHEMA.
 
-## OUTPUT SCHEMA（必须严格输出此结构，仅一个 JSON 对象，无其他文字、无 markdown 围栏）
+## OUTPUT SCHEMA（AI CONTENT PAYLOAD——仅内容，envelope 由报告引擎装配）
+
+Return ONLY one valid JSON object matching the structure below.
+No prose before or after JSON. No markdown fences. No comments.
 
 {
-  "report_id": "DAILY_YYYYMMDD",
-  "report_type": "africa_daily",
   "title": "非洲地区社会安全与综合形势日报（YYYY年MM月DD日）",
-  "report_date": "YYYY-MM-DD",
-  "period_start": "from input",
-  "period_end": "from input",
-  "generated_at": "from input",
-  "report_timezone": "Asia/Shanghai",
-  "executive_summary": [ {"item_id": "...", "master_event_id": "...", "country_iso3": "...", "headline_zh": "...", "fact_summary": "...", "assessment": "...", "outlook": "...", "verification_status": "...", "uncertainties": [...], "source_refs": [{"source_id": "...", "source_name": "...", "url": "..."}], "latest_update_at": "...", "importance_score": 0, "selection_reasons": [...]} ],
-  "major_security_developments": [...],
-  "political_social_stability": [...],
-  "terrorism_armed_violence": [...],
-  "cross_border_regional_risks": [...],
-  "public_health_disease_risks": [ {"item_id": "...", "disease_id": "...", "country_iso3": "...", "headline_zh": "...", "fact_summary": "...", "assessment": "...", "outlook": "...", "verification_status": "...", "uncertainties": [...], "source_refs": [...], "latest_counts": {"confirmed_cases": 0, "deaths": 0, "as_of_date": "..."}, "as_of_date": "..."} ],
-  "key_changes": [ {"item_id": "...", "change_type": "...", "fact_summary": "...", "assessment": "..."} ],
-  "watch_items": [...],
-  "overall_assessment": "整体评估，须有 input evidence 支撑",
-  "source_notes": [ {"source_id": "...", "source_name": "...", "url": "..."} ],
-  "generation_metadata": {"provider_name": "...", "model_name": "...", "prompt_version": "1.0.0", "usage_purpose": "development_test", "report_status": "draft", "input_report_id": "from input"}
+  "executive_summary": [
+    {"item_id": "EX1", "master_event_id": null, "country_iso3": "TCD",
+     "headline_zh": "示例标题（占位）", "fact_summary": "据示例来源报道……（占位）",
+     "assessment": "局势需继续关注（占位，须有 input evidence 支撑）"}
+  ],
+  "major_security_developments": [],
+  "political_social_stability": [],
+  "terrorism_armed_violence": [],
+  "cross_border_regional_risks": [],
+  "public_health_disease_risks": [],
+  "key_changes": [],
+  "watch_items": [],
+  "overall_assessment": "整体评估（须有 input evidence 支撑）",
+  "source_notes": [
+    {"source_id": "SRC_PLACEHOLDER", "source_name": "示例来源（占位）",
+     "url": "https://example.invalid/placeholder"}
+  ]
 }
 
 ## FACT / ASSESSMENT / OUTLOOK 边界（§六）

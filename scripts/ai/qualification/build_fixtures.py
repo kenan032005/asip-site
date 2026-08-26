@@ -45,21 +45,21 @@ SNAPSHOT_DATE = "2026-08-26"
 PROMPT_ROUTE = {
     "africa_daily": {
         "prompt_file": "config/prompts/africa_daily_report_v1.md",
-        "prompt_version": "v1.0.2",
+        "prompt_version": "v1.0.3",
         "input_schema": "schemas/africa_daily_report_input.schema.json",
         "output_schema": "schemas/africa_daily_report.schema.json",
         "input_schema_version": "stage7a-v1",
     },
     "country_weekly": {
         "prompt_file": "config/prompts/country_weekly_report_v1.md",
-        "prompt_version": "v1.0.2",
+        "prompt_version": "v1.0.3",
         "input_schema": "schemas/country_weekly_report_input.schema.json",
         "output_schema": "schemas/country_weekly_report.schema.json",
         "input_schema_version": "stage7a-v1",
     },
     "major_event_brief": {
         "prompt_file": "config/prompts/major_event_brief_v1.md",
-        "prompt_version": "v1.0.2",
+        "prompt_version": "v1.0.3",
         "input_schema": "schemas/major_event_brief_input.schema.json",
         "output_schema": "schemas/major_event_brief.schema.json",
         "input_schema_version": "stage7b-v1",

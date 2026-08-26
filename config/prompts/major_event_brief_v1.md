@@ -1,4 +1,4 @@
-# ASIP Major Event Brief — 生成合同 v1.0.2
+# ASIP Major Event Brief — 生成合同 v1.0.3
 
 ## TASK
 
@@ -21,25 +21,28 @@ Do not generate report envelope metadata (brief_id, report_type, event_time, cou
 These fields are supplied by the report engine and MUST NOT be included in your output.
 Return ONLY the content payload described in OUTPUT SCHEMA.
 
-## OUTPUT SCHEMA（严格输出此结构，仅一个 JSON 对象）
+## OUTPUT SCHEMA（AI CONTENT PAYLOAD——仅内容，envelope 由报告引擎装配）
+
+Return ONLY one valid JSON object matching the structure below.
+No prose before or after JSON. No markdown fences. No comments.
 
 {
-  "brief_id": "from input",
-  "report_type": "major_event_brief",
-  "title": "中文标题",
-  "event_time": "from input",
-  "country": "from input",
-  "country_iso3": "from input",
-  "location": "from input",
-  "what_happened": "公开事件事实描述",
-  "confirmed_facts": [ {"fact": "...", "source_refs": ["source_id..."]} ],
-  "uncertainties": ["..."],
-  "verification_status": "from input",
-  "verification_confidence": 0,
-  "immediate_implications": ["风险影响，evidence 支撑"],
-  "watch_items": ["后续关注点（中性）"],
-  "source_notes": [ {"source_id": "...", "source_name": "...", "url": "..."} ],
-  "generation_metadata": {"provider_name": "...", "model_name": "...", "prompt_version": "1.0.0", "usage_purpose": "development_test", "report_status": "draft", "input_report_id": "from input"}
+  "title": "重大事件简报（占位）",
+  "what_happened": "……（占位，仅复述输入事实）",
+  "confirmed_facts": [
+    {"fact": "……（占位）"}
+  ],
+  "uncertainties": [
+    {"uncertainty": "……（占位，保留归因/单一来源语义）"}
+  ],
+  "immediate_implications": [],
+  "watch_items": [],
+  "location": "……（占位）",
+  "verification_confidence": "……（占位）",
+  "source_notes": [
+    {"source_id": "SRC_PLACEHOLDER", "source_name": "示例来源（占位）",
+     "url": "https://example.invalid/placeholder"}
+  ]
 }
 
 ## UNCERTAINTY / STYLE
