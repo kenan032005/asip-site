@@ -43,10 +43,10 @@ jobs:
   qualify-deepseek-v4-flash:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout frozen qualification code (d4c9129)
+      - name: Checkout frozen qualification code (dfb600e)
         uses: actions/checkout@v4
         with:
-          ref: d4c91296492597ae3d6acd317f0d7cc70194e491
+          ref: dfb600e3f943a4afc474ba00ce7dfcca1ecfa535
           fetch-depth: 1
 
       - name: Setup Python
@@ -62,7 +62,7 @@ jobs:
           print("credential_available = " + str(ok).lower())
           print("requested_model = deepseek-v4-flash")
           print("qualification_version = stage8b-v1")
-          print("qualification_code_ref = d4c9129")
+          print("qualification_code_ref = dfb600e")
           if not ok:
               print("CREDENTIAL_INJECTION_FAILED")
               raise SystemExit(1)
