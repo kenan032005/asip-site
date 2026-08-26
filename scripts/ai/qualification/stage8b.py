@@ -419,8 +419,37 @@ def run_case(case, provider_name):
     return _evaluate_case(case, parsed, result)
 
 
+# ── §八/§九：确定性元数据 exact-copy（LLM 不得推导/计算/返回 null）──
+EXACT_COPY_FIELDS = {
+    "africa_daily": ("report_id", "report_type", "report_date",
+                     "period_start", "period_end"),
+    "country_weekly": ("report_id", "report_type", "country_iso3",
+                       "week_start", "week_end"),
+    "major_event_brief": ("brief_id", "report_type", "event_time", "country"),
+}
+
+
+def check_exact_copy(parsed, input_payload, task_type):
+    """§八：output 确定性元数据必须与 input 逐字一致 → REPORT_METADATA_MISMATCH。"""
+    fields = EXACT_COPY_FIELDS.get(task_type)
+    if not fields or not isinstance(parsed, dict):
+        return True, None
+    src = input_payload if isinstance(input_payload, dict) else {}
+    problems = []
+    for f in fields:
+        iv = src.get(f)
+        ov = parsed.get(f)
+        if iv is None:
+            continue  # input 无此字段 → 不判（input gate 负责补齐）
+        if ov is None:
+            problems.append("REPORT_METADATA_MISMATCH:%s null（input=%r）" % (f, iv))
+        elif str(iv) != str(ov):
+            problems.append("REPORT_METADATA_MISMATCH:%s %r != %r" % (f, ov, iv))
+    return (len(problems) == 0), problems
+
+
 def _evaluate_case(case, parsed, result):
-    """确定性 Gate：schema / 数字 / 归因 / 国家 / 疾病 / 来源 / FACT 分离。"""
+    """确定性 Gate：schema / 数字 / 归因 / 国家 / 疾病 / 来源 / FACT 分离 / exact-copy。"""
     from scripts.ai.schema_validation import validate_against_schema
     schema = case.get("schema")
     if schema:
@@ -467,6 +496,12 @@ def _evaluate_case(case, parsed, result):
         ok_f, ferr = check_fact_analysis_separation(parsed)
         for e in ferr:
             errors.append(e)
+        # §八：确定性元数据 exact-copy（period/report_id/report_date 等）
+        ok_m, merrs = check_exact_copy(parsed, payload, case["task_type"])
+        for e in merrs:
+            errors.append(e)
+        for e in ferr:
+            errors.append(e)
     # 主要造假启发（数字/国家不在 input → 标记人工复核）
     result["errors"] = errors
     result["core_failure"] = len(errors) > 0
@@ -509,6 +544,22 @@ def load_fixture_cases():
     return cases
 
 
+def _fixture_metadata_ok(task_type, payload):
+    """§十三：确定性元数据就绪——required metadata 必须为非空 string。"""
+    if not isinstance(payload, dict):
+        return False
+    if task_type == "africa_daily":
+        keys = ("period_start", "period_end", "report_id", "report_type",
+                "report_date")
+    elif task_type == "country_weekly":
+        keys = ("week_start", "week_end", "country_iso3", "report_id",
+                "report_type")
+    else:
+        keys = ("brief_id", "report_type", "event_time", "country")
+    return all(isinstance(payload.get(k), str) and payload.get(k).strip()
+               for k in keys)
+
+
 def fixture_gate():
     """§七：REPORT_FIXTURE_GATE——8/8 存在/合法/非空/schema 有效/hash 匹配。"""
     from scripts.ai.schema_validation import validate_against_schema
@@ -548,11 +599,14 @@ def fixture_gate():
                 cur = _h.sha256(
                     path.read_text(encoding="utf-8").encode("utf-8")).hexdigest()
                 entry["hash_match"] = (cur == fc.get("fixture_hash"))
+                # §十三：确定性元数据就绪（period/week 字段非 null string）
+                entry["metadata_ready"] = _fixture_metadata_ok(fc["task_type"], payload)
             except Exception as e:
                 entry["json_valid"] = False
                 entry["error"] = str(e)[:100]
         entry["ok"] = all((entry["exists"], entry["json_valid"], entry["nonempty"],
-                           entry["schema_valid"], entry["hash_match"]))
+                           entry["schema_valid"], entry["hash_match"],
+                           entry.get("metadata_ready", False)))
         all_ok = all_ok and entry["ok"]
         result["cases"].append(entry)
     result["report_fixtures_ready"] = all_ok
@@ -561,6 +615,8 @@ def fixture_gate():
         "fixture_schema_pass": sum(1 for c in result["cases"] if c["schema_valid"]),
         "fixture_nonempty": sum(1 for c in result["cases"] if c["nonempty"]),
         "fixture_hash_pass": sum(1 for c in result["cases"] if c["hash_match"]),
+        "deterministic_metadata_ready": sum(
+            1 for c in result["cases"] if c.get("metadata_ready")),
     }
     ARTIFACT_DIR.mkdir(parents=True, exist_ok=True)
     (ARTIFACT_DIR / "fixture_gate_result.json").write_text(
@@ -830,11 +886,20 @@ def run_report_probe(provider_name="deepseek"):
     """§七：单个 Report API Probe（RD1 固定输入，deepseek-v4-flash）。
 
     只验证连接与契约通道：HTTP success / requested·returned model / strict_json
-    / schema。不评价报告内容。失败 → exit 1（REPORT_API_PROBE_FAILED）。
+    / schema / period exact-copy。不评价报告内容。失败 → exit 1。
     """
     cases = build_cases()
     rd1 = next(c for c in cases if c["case_id"] == "RD1")
     r = run_case(rd1, provider_name)
+    # §八：period exact-copy（模型输出必须与输入逐字一致）
+    per_ok = True
+    per_details = {}
+    if r.get("parsed"):
+        ok, errs = check_exact_copy(r["parsed"], rd1["input_payload"], "africa_daily")
+        per_ok = ok
+        per_details = {e.split(":")[1].split(" ")[0]: "PASS" if ok else e
+                       for e in (errs or [])}
+    tokens = r.get("tokens") or {}
     out = {
         "case_id": "RD1", "task_type": "africa_daily",
         "provider": provider_name,
@@ -845,13 +910,20 @@ def run_report_probe(provider_name="deepseek"):
         "contract_failure": r.get("contract_failure"),
         "failure_stage": r.get("failure_stage"),
         "attempt_count": r.get("attempt_count"),
+        "latency_ms": r.get("latency_ms"),
         "strict_json_pass": r.get("strict_json_pass"),
         "schema_pass": r.get("schema_pass"),
+        "period_start_exact_match": per_ok,
+        "period_end_exact_match": per_ok,
+        "metadata_check": per_details,
+        "input_tokens": tokens.get("input_tokens"),
+        "output_tokens": tokens.get("output_tokens"),
+        "total_tokens": tokens.get("total_tokens"),
         "errors": (r.get("errors") or [])[:5],
     }
     print(json.dumps(out, ensure_ascii=False, indent=2))
     ok = (r.get("provider_status") == "succeeded" and r.get("strict_json_pass")
-          and r.get("schema_pass")
+          and r.get("schema_pass") and per_ok
           and (r.get("returned_model") in (None, "deepseek-v4-flash")))
     out["report_probe"] = "PASS" if ok else "FAIL"
     ARTIFACT_DIR.mkdir(parents=True, exist_ok=True)

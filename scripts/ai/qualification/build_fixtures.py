@@ -45,21 +45,21 @@ SNAPSHOT_DATE = "2026-08-26"
 PROMPT_ROUTE = {
     "africa_daily": {
         "prompt_file": "config/prompts/africa_daily_report_v1.md",
-        "prompt_version": "v1.0.0",
+        "prompt_version": "v1.0.1",
         "input_schema": "schemas/africa_daily_report_input.schema.json",
         "output_schema": "schemas/africa_daily_report.schema.json",
         "input_schema_version": "stage7a-v1",
     },
     "country_weekly": {
         "prompt_file": "config/prompts/country_weekly_report_v1.md",
-        "prompt_version": "v1.0.0",
+        "prompt_version": "v1.0.1",
         "input_schema": "schemas/country_weekly_report_input.schema.json",
         "output_schema": "schemas/country_weekly_report.schema.json",
         "input_schema_version": "stage7a-v1",
     },
     "major_event_brief": {
         "prompt_file": "config/prompts/major_event_brief_v1.md",
-        "prompt_version": "v1.0.0",
+        "prompt_version": "v1.0.1",
         "input_schema": "schemas/major_event_brief_input.schema.json",
         "output_schema": "schemas/major_event_brief.schema.json",
         "input_schema_version": "stage7b-v1",
@@ -168,7 +168,8 @@ def brief_input(security):
         "event_id": o.get("outbreak_id"),
         "outbreak_id": o.get("outbreak_id"),
         "disease_id": o.get("disease_id"),
-        "country_iso3": o.get("country_iso3"), "country": o.get("country_cn"),
+        "country_iso3": o.get("country_iso3"),
+        "country": o.get("country_cn") or (o.get("country_iso3") or "regional"),
         "event_type": "public_health",
         "event_time": o.get("latest_report_at"),
         "verification_status": o.get("verification_status"),
@@ -179,15 +180,34 @@ def brief_input(security):
         "note": "真实 disease outbreak 结构化输入（资质样本）"}
 
 
+def daily_period(daily):
+    """§四：Daily period 确定性生成（北京时间 ISO8601，LLM 不推导）。
+
+    period_start = report_date T00:00:00+08:00（报告日北京日历日始）
+    period_end   = input.cutoff（统计结束时刻）
+    """
+    rd = (daily.get("report_date") or "").strip()
+    cutoff = (daily.get("cutoff") or "").strip()
+    ps = rd + "T00:00:00+08:00" if rd else None
+    return ps, cutoff or None
+
+
 def main():
     daily = load_json("data/runtime/reports/daily_input/latest.json")
     weekly = {c: load_json("data/runtime/reports/weekly_input/%s.json" % c)
               for c in ("TCD", "SSD", "NER")}
 
+    def rd_daily(kind):
+        d = daily_variant(daily, kind)
+        ps, pe = daily_period(d)
+        d["period_start"] = ps
+        d["period_end"] = pe
+        return d
+
     cases = [
-        ("RD1", "africa_daily", daily, "daily/RD1.json"),
-        ("RD2", "africa_daily", daily_variant(daily, "single_conflict"), "daily/RD2.json"),
-        ("RD3", "africa_daily", daily_variant(daily, "disease_security"), "daily/RD3.json"),
+        ("RD1", "africa_daily", rd_daily("normal"), "daily/RD1.json"),
+        ("RD2", "africa_daily", rd_daily("single_conflict"), "daily/RD2.json"),
+        ("RD3", "africa_daily", rd_daily("disease_security"), "daily/RD3.json"),
         ("RW1", "country_weekly", weekly["TCD"], "weekly/RW1.json"),
         ("RW2", "country_weekly", weekly["SSD"], "weekly/RW2.json"),
         ("RW3", "country_weekly", weekly["NER"], "weekly/RW3.json"),

@@ -1,4 +1,4 @@
-# ASIP Major Event Brief — 生成合同 v1.0.0
+# ASIP Major Event Brief — 生成合同 v1.0.1
 
 ## TASK
 
@@ -14,6 +14,11 @@
 - 数字必须来自 INPUT，不得新增。
 - 归因保留：alleged/claimed/reportedly → 据称/声称；unconfirmed/single_source → 尚未证实/单一来源；conflicting → 不同来源说法不一。
 - **不得自动包含**（§十五）：组织战术分析、武器能力推演、攻击方法建议、敏感行动细节扩写。只写公开事件事实与风险影响。
+
+## DETERMINISTIC METADATA（EXACT COPY）
+
+以下字段属于确定性报告元数据，MUST be copied exactly from the corresponding INPUT fields.
+Do not infer, calculate, translate, modify, or return null for these fields:/n- brief_id, report_type, event_time, country
 
 ## OUTPUT SCHEMA（严格输出此结构，仅一个 JSON 对象）
 
