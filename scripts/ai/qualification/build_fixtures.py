@@ -183,13 +183,27 @@ def brief_input(security):
 def daily_period(daily):
     """§四：Daily period 确定性生成（北京时间 ISO8601，LLM 不推导）。
 
-    period_start = report_date T00:00:00+08:00（报告日北京日历日始）
-    period_end   = input.cutoff（统计结束时刻）
+    Stage7B §二 temporal 语义证据（cutoff 相对滚动窗）：
+      - cutoff = 报告生成时刻（builder.py: cutoff 默认 now +08:00）
+      - new_24h（≤~1 天）为主报告窗；ongoing_72h 仅 developing 条件；
+        trend_7d 仅 watch。
+    → 主日报时间窗 = cutoff - 24h → cutoff（选项 B）。
+    72h/7d 属 watch context，不得混入 period_start/period_end。
+
+    实现：
+      period_start = cutoff - 24 hours（保持 +08:00 时区）
+      period_end   = cutoff
     """
-    rd = (daily.get("report_date") or "").strip()
+    from datetime import datetime, timedelta
     cutoff = (daily.get("cutoff") or "").strip()
-    ps = rd + "T00:00:00+08:00" if rd else None
-    return ps, cutoff or None
+    if not cutoff:
+        return None, None
+    try:
+        dt = datetime.fromisoformat(cutoff)
+        ps = (dt - timedelta(hours=24)).isoformat(timespec="seconds")
+        return ps, cutoff
+    except Exception:
+        return None, None
 
 
 def main():

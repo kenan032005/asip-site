@@ -309,3 +309,33 @@ class TestDeterministicMetadata(unittest.TestCase):
         for f in ("period_start_exact_match", "period_end_exact_match",
                   "input_tokens", "output_tokens", "total_tokens"):
             self.assertIn(f, src)
+
+
+class TestDailyPeriodRule(unittest.TestCase):
+    """§四：DAILY_PRIMARY_WINDOW = B（cutoff-24h → cutoff）。"""
+
+    def test_daily_period_rule_b(self):
+        from scripts.ai.qualification.build_fixtures import daily_period
+        daily = {"report_date": "2026-08-26",
+                 "cutoff": "2026-08-26T15:00:08+08:00"}
+        ps, pe = daily_period(daily)
+        self.assertEqual(pe, "2026-08-26T15:00:08+08:00")
+        self.assertEqual(ps, "2026-08-25T15:00:08+08:00")
+
+    def test_daily_period_not_calendar_day_start(self):
+        # 若用日历日始（report_date 00:00）在 cutoff 接近午夜时会严重失真 → 禁止
+        from scripts.ai.qualification.build_fixtures import daily_period
+        daily = {"report_date": "2026-08-26",
+                 "cutoff": "2026-08-26T00:30:00+08:00"}
+        ps, pe = daily_period(daily)
+        self.assertEqual(ps, "2026-08-25T00:30:00+08:00")
+        self.assertNotEqual(ps, "2026-08-26T00:00:00+08:00")
+
+    def test_rd_fixtures_period_is_cutoff_minus_24h(self):
+        from datetime import datetime, timedelta
+        for cid in ("RD1", "RD2", "RD3"):
+            fc = next(f for f in load_manifest()["cases"] if f["case_id"] == cid)
+            p = json.loads((FIX / fc["fixture_path"]).read_text(encoding="utf-8"))
+            exp = (datetime.fromisoformat(p["cutoff"]) - timedelta(hours=24)).isoformat(timespec="seconds")
+            self.assertEqual(p["period_start"], exp)
+            self.assertEqual(p["period_end"], p["cutoff"])
