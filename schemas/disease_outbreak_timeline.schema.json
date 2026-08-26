@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ASIP Disease Outbreak Timeline",
+  "description": "Stage 6B §十四 — 疾病暴发时间线。数字为 Observation（§十六），latest_counts 为派生结果；temporal update ≠ conflict（§十七）；病例类别分离（§十八）；地理扩散历史保留（§十九）。internal only，不写 Public。",
+  "type": "object",
+  "required": [
+    "outbreak_id", "disease_id", "country_iso3",
+    "first_reported_at", "latest_report_at", "outbreak_status",
+    "latest_counts", "updates", "source_count", "created_at"
+  ],
+  "properties": {
+    "outbreak_id": {"type": "string"},
+    "disease_id": {"type": "string"},
+    "country_iso3": {"type": ["string", "null"]},
+    "affected_countries": {"type": "array", "items": {"type": "string"}},
+    "first_reported_at": {"type": ["string", "null"]},
+    "latest_report_at": {"type": ["string", "null"]},
+    "outbreak_status": {
+      "type": "string",
+      "enum": ["active", "declining", "monitoring", "contained", "ended", "unknown"]
+    },
+    "latest_counts": {
+      "type": "object",
+      "description": "派生结果（§十六），仅从 observations 推出。",
+      "properties": {
+        "confirmed_cases": {"type": ["integer", "null"]},
+        "probable_cases": {"type": ["integer", "null"]},
+        "suspected_cases": {"type": ["integer", "null"]},
+        "total_cases": {"type": ["integer", "null"]},
+        "deaths": {"type": ["integer", "null"]},
+        "as_of_date": {"type": ["string", "null"]}
+      }
+    },
+    "affected_admin1": {"type": "array", "items": {"type": "string"}},
+    "updates": {
+      "type": "array",
+      "items": {"$ref": "#/definitions/observation"}
+    },
+    "source_count": {"type": "integer", "minimum": 0},
+    "independent_source_count": {"type": "integer", "minimum": 0},
+    "verification_status": {"type": ["string", "null"]},
+    "numeric_conflicts": {"type": "array", "items": {"type": "string"}},
+    "uncertainties": {"type": "array", "items": {"type": "string"}},
+    "created_at": {"type": "string"},
+    "updated_at": {"type": ["string", "null"]}
+  },
+  "definitions": {
+    "observation": {
+      "type": "object",
+      "description": "数字 Observation（§十六）：as_of_date 保留，不得覆盖。",
+      "required": ["update_id", "update_type", "report_date", "evidence"],
+      "properties": {
+        "update_id": {"type": "string"},
+        "disease_event_id": {"type": ["string", "null"]},
+        "update_type": {
+          "type": "string",
+          "enum": [
+            "new_outbreak", "case_update", "mortality_update",
+            "geographic_spread", "response_update", "status_change",
+            "final_update"
+          ]
+        },
+        "report_date": {"type": ["string", "null"]},
+        "case_period_start": {"type": ["string", "null"]},
+        "case_period_end": {"type": ["string", "null"]},
+        "as_of_date": {"type": ["string", "null"]},
+        "confirmed_cases": {"type": ["integer", "null"]},
+        "probable_cases": {"type": ["integer", "null"]},
+        "suspected_cases": {"type": ["integer", "null"]},
+        "total_cases": {"type": ["integer", "null"]},
+        "deaths": {"type": ["integer", "null"]},
+        "recoveries": {"type": ["integer", "null"]},
+        "affected_admin1": {"type": "array", "items": {"type": "string"}},
+        "affected_countries": {"type": "array", "items": {"type": "string"}},
+        "outbreak_status": {"type": ["string", "null"]},
+        "evidence": {
+          "type": "object",
+          "properties": {
+            "primary_source": {"type": ["string", "null"]},
+            "source_links": {"type": "array", "items": {"type": "string"}},
+            "source_tier": {"type": ["string", "null"]}
+          }
+        },
+        "uncertainties": {"type": "array", "items": {"type": "string"}},
+        "created_at": {"type": "string"}
+      }
+    }
+  }
+}

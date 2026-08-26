@@ -25,6 +25,7 @@ from scripts.global_source.africa_filter import country_hints
 from scripts.global_source.topic_filter import classify_candidate
 from scripts.global_source.detail import detail_extract
 from scripts.global_source.health import record_health
+from scripts.timeline.country_attr import attribute_event_country
 
 AUDIT_PATH = ROOT / "data" / "runtime" / "country_discovery_audit.json"
 DETAIL_PER_SOURCE = 3
@@ -84,7 +85,15 @@ def run_country_dryrun(max_items=25, detail_per_source=DETAIL_PER_SOURCE):
             c = new_candidate(src, it)
             if not c:
                 continue
-            c["country_iso3"] = iso3
+            # §二 source country ≠ event country：source registry 的 country_iso3
+            # 只表示 coverage；event country 必须来自文本证据（跨国源绝不 fallback）。
+            attr = attribute_event_country(it, src)
+            c["event_primary_country"] = attr["event_primary_country"]
+            c["mentioned_countries"] = attr["mentioned_countries"]
+            c["country_attr_basis"] = attr["attribution_basis"]
+            c["country_attr_confidence"] = attr["confidence"]
+            c["source_country_scope"] = iso3
+            c["country_iso3"] = attr["event_primary_country"]  # 不再硬填 source country
             c["role"] = src.get("role")
             c["topic_scope"] = src.get("topic_scope")
             # 栏目过滤（ActuNiger：排除 Sport/Culture 低价值栏目）

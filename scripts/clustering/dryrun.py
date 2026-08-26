@@ -60,7 +60,8 @@ def _to_listing_article(c, tier_map):
                "ZM": "ZMB", "ZW": "ZWE", "MZ": "MOZ", "AO": "AGO", "NA": "NAM",
                "BW": "BWA", "MW": "MWI", "GA": "GAB", "GN": "GIN", "SL": "SLE",
                "LR": "LBR", "TG": "TGO", "BJ": "BEN"}
-    raw_country = (c.get("country_iso3")
+    raw_country = (c.get("event_primary_country")        # §二 attribution 结果优先
+                   or c.get("country_iso3")
                    or (c.get("country_hints") or [None])[0])
     country = iso2to3.get(str(raw_country).upper(), raw_country) if raw_country else None
     return {
@@ -75,6 +76,7 @@ def _to_listing_article(c, tier_map):
         "event_time": pub,
         "primary_country_iso3": country,
         "country_hints": c.get("country_hints") or [],
+        "mentioned_countries": c.get("mentioned_countries") or [],
         "original_url": c.get("original_url"),
         "original_publisher": c.get("original_publisher"),
         "discovery_run_id": c.get("discovery_run_id"),
