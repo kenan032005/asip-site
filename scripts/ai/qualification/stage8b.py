@@ -412,7 +412,11 @@ def run_case(case, provider_name):
     # §五-§七：provider response telemetry 透传（finish_reason/reasoning/content）
     for _tk in ("finish_reason", "reasoning_content_present",
                 "reasoning_content_length_chars", "reasoning_tokens",
-                "content_present", "content_length_chars"):
+                "content_present", "content_length_chars",
+                # §四（本包）：补齐 Run#10 透传缺口
+                "raw_content_is_null", "raw_content_length_chars",
+                "stripped_content_length_chars", "whitespace_only",
+                "thinking_requested", "reasoning_effort_requested"):
         result[_tk] = rr.get(_tk)
     ok_json, parsed, err = strict_json_parse(raw_text)
     result["strict_json_pass"] = ok_json

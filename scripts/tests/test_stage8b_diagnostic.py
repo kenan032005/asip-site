@@ -455,3 +455,66 @@ class TestReasoningPriorityRegression(unittest.TestCase):
         import inspect
         src = inspect.getsource(q.run_report_probe)
         self.assertIn("rd1_thinking_disabled_isolation", src)
+
+
+class TestTelemetryPropagationClosure(unittest.TestCase):
+    """§四（Final）：Run#10 透传缺口补齐——thinking/raw content 字段全持久化。"""
+
+    def test_run_case_propagates_all_fields(self):
+        rr = {
+            "text": '{"title":"x"}', "returned_model": "deepseek-v4-flash",
+            "input_tokens": 1, "output_tokens": 2, "total_tokens": 3,
+            "finish_reason": "stop",
+            "reasoning_content_present": False,
+            "reasoning_content_length_chars": 0,
+            "reasoning_tokens": None,
+            "content_present": True,
+            "content_length_chars": 13,
+            "raw_content_is_null": False,
+            "raw_content_length_chars": 13,
+            "stripped_content_length_chars": 13,
+            "whitespace_only": False,
+            "thinking_requested": "disabled",
+            "reasoning_effort_requested": None,
+        }
+        fields = ("finish_reason", "reasoning_content_present",
+                  "reasoning_content_length_chars", "reasoning_tokens",
+                  "content_present", "content_length_chars",
+                  "raw_content_is_null", "raw_content_length_chars",
+                  "stripped_content_length_chars", "whitespace_only",
+                  "thinking_requested", "reasoning_effort_requested")
+        orig = q.run_case
+        try:
+            def fake_run(case, provider_name):
+                res = {
+                    "case_id": case["case_id"], "task_type": case["task_type"],
+                    "provider": provider_name, "credential_available": True,
+                    "provider_status": "succeeded", "attempt_count": 1,
+                    "strict_json_pass": False, "schema_pass": False,
+                    "contract_failure": None, "errors": [], "cached": False,
+                    "latency_ms": 1, "tokens": {"input_tokens": 1,
+                                                "output_tokens": 2,
+                                                "total_tokens": 3},
+                    "returned_model": "deepseek-v4-flash",
+                }
+                for _tk in fields:
+                    res[_tk] = rr.get(_tk)
+                return res
+            q.run_case = fake_run
+            cases = q.build_cases()
+            rd1 = next(c for c in cases if c["case_id"] == "RD1")
+            r = q.run_case(rd1, "deepseek")
+            for f in fields:
+                self.assertEqual(r.get(f), rr.get(f), f)
+            self.assertEqual(r["thinking_requested"], "disabled")
+            self.assertFalse(r["whitespace_only"])
+        finally:
+            q.run_case = orig
+
+    def test_probe_artifact_includes_closure_fields(self):
+        import inspect
+        src = inspect.getsource(q.run_report_probe)
+        for f in ("thinking_requested", "reasoning_effort_requested",
+                  "raw_content_is_null", "raw_content_length_chars",
+                  "stripped_content_length_chars", "whitespace_only"):
+            self.assertIn('"%s"' % f, src)

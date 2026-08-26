@@ -52,14 +52,16 @@ SECRET_NAME = "ASIP_DEEPSEEK_API_KEY"
 # §二：显式 Thinking Policy（不依赖 DeepSeek 默认值）
 THINKING_POLICY = {
     # task_type -> (thinking, reasoning_effort)
+    # §一（Final Policy Closure）：五类 task 全部 non-thinking。
+    # Run#10（33010793755）决定性证据：thinking 造成 reasoning budget exhaustion
+    # （reasoning=8192=max_tokens、length、content 空）；thinking disabled 后
+    # RD1 完整 contract PASS（stop、content 有、全 schema PASS、output 4040）。
+    # 对受约束结构化报告 contract，关闭 thinking；不再发送 reasoning_effort。
     "stage4_event_enrichment": ("disabled", None),
     "disease_summary": ("disabled", None),
-    # §本包（RD1 Non-Thinking Isolation Probe）：仅 africa_daily 改 disabled
-    # （reasoning_tokens=8192=max_tokens 决定性证据：预算全被 reasoning 消耗）。
-    # Weekly/Brief 保持 enabled+low 不动——避免失去因果隔离。
     "africa_daily": ("disabled", None),
-    "country_weekly": ("enabled", "low"),
-    "major_event_brief": ("enabled", "low"),
+    "country_weekly": ("disabled", None),
+    "major_event_brief": ("disabled", None),
 }
 DEFAULT_THINKING = "disabled"   # 未知 task_type 安全兜底（非思考）
 

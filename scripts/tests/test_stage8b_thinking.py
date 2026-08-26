@@ -84,27 +84,26 @@ class TestThinkingPolicy(unittest.TestCase):
         self.assertEqual(body["thinking"], {"type": "disabled"})
         self.assertNotIn("reasoning_effort", body)   # disabled 不发送 low
 
-    def test_weekly_thinking_enabled_low(self):
+    def test_weekly_thinking_disabled(self):
+        # §一（Final Policy）：weekly 统一 non-thinking
         body = self._capture("country_weekly")
-        self.assertEqual(body["thinking"], {"type": "enabled"})
-        self.assertEqual(body["reasoning_effort"], "low")
+        self.assertEqual(body["thinking"], {"type": "disabled"})
+        self.assertNotIn("reasoning_effort", body)
 
-    def test_brief_thinking_enabled_low(self):
+    def test_brief_thinking_disabled(self):
         body = self._capture("major_event_brief")
-        self.assertEqual(body["thinking"], {"type": "enabled"})
-        self.assertEqual(body["reasoning_effort"], "low")
+        self.assertEqual(body["thinking"], {"type": "disabled"})
+        self.assertNotIn("reasoning_effort", body)
 
     def test_unknown_task_safe_disabled(self):
         body = self._capture("unknown_task_x")
         self.assertEqual(body["thinking"], {"type": "disabled"})
 
     def test_policy_values(self):
-        self.assertEqual(ds.THINKING_POLICY["stage4_event_enrichment"], ("disabled", None))
-        self.assertEqual(ds.THINKING_POLICY["disease_summary"], ("disabled", None))
-        # §三：仅 Daily 本次隔离改为 disabled；Weekly/Brief 保持 enabled+low
-        self.assertEqual(ds.THINKING_POLICY["africa_daily"], ("disabled", None))
-        for tt in ("country_weekly", "major_event_brief"):
-            self.assertEqual(ds.THINKING_POLICY[tt], ("enabled", "low"))
+        # §一（Final Policy）：五类 task 全部 disabled，无 reasoning_effort
+        for tt in ("stage4_event_enrichment", "disease_summary", "africa_daily",
+                   "country_weekly", "major_event_brief"):
+            self.assertEqual(ds.THINKING_POLICY[tt], ("disabled", None), tt)
 
 
 class TestResponseTelemetry(unittest.TestCase):
@@ -152,29 +151,20 @@ class TestResponseTelemetry(unittest.TestCase):
         self.assertEqual(r["result"]["content_length_chars"], len('{"a":1}'))
 
     def test_temperature_effective_flag(self):
-        # enabled 路径（weekly 仍 enabled+low）
-        captured = {}
-
-        def fake_urlopen(req, timeout=180):
-            captured["body"] = json.loads(req.data.decode("utf-8"))
-            return FakeResp(resp_body())
-
+        # §一（Final Policy）：五类全 disabled → temperature_effective=true
         p = ds.DeepSeekV4FlashProvider(api_key="test-key")
-        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
-            r = p.submit_task({"task_id": "T", "system_text": "s", "user_text": "u",
-                               "task_type": "country_weekly"})
-        self.assertEqual(r["result"]["temperature_effective"], "false_when_thinking")
-        # disabled 路径（daily 现为 isolation disabled）
-        captured2 = {}
+        for tt in ("stage4_event_enrichment", "disease_summary", "africa_daily",
+                   "country_weekly", "major_event_brief"):
+            captured = {}
 
-        def fake_urlopen2(req, timeout=180):
-            captured2["body"] = json.loads(req.data.decode("utf-8"))
-            return FakeResp(resp_body())
+            def fake_urlopen(req, timeout=180):
+                captured["body"] = json.loads(req.data.decode("utf-8"))
+                return FakeResp(resp_body())
 
-        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen2):
-            r2 = p.submit_task({"task_id": "T", "system_text": "s", "user_text": "u",
-                                "task_type": "africa_daily"})
-        self.assertEqual(r2["result"]["temperature_effective"], "true")
+            with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+                r = p.submit_task({"task_id": "T", "system_text": "s",
+                                   "user_text": "u", "task_type": tt})
+            self.assertEqual(r["result"]["temperature_effective"], "true", tt)
 
     def test_no_full_cot_in_result(self):
         r = self._call(resp_body(reasoning_content="secret chain of thought here"))
