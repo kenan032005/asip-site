@@ -18,6 +18,7 @@ from .disabled_provider import DisabledProvider
 from .mock_provider import MockProvider
 from .hy3_stage4_provider import Hy3Stage4Provider
 from .providers.glm47_flash import Glm47FlashProvider
+from .providers.deepseek_v4_flash import DeepSeekV4FlashProvider
 from .exceptions import ProviderNotConfigured
 
 _REGISTRY = {}
@@ -41,6 +42,8 @@ register_provider("mock", MockProvider)
 register_provider("hy3", Hy3Stage4Provider)
 # AI Provider Migration：GLM-4.7-Flash 云端 API（生产 AI 目标；Key 缺失安全停止）
 register_provider("glm47_flash", Glm47FlashProvider)
+# Stage 8B：DeepSeek V4 Flash 云端 API（Flash-only 硬门禁；Key 缺失安全停止）
+register_provider("deepseek_v4_flash", DeepSeekV4FlashProvider)
 
 
 def list_providers():

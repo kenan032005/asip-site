@@ -219,9 +219,14 @@ class DeepSeekReportProvider:
         self.base_url = base_url or os.environ.get(
             "ASIP_DEEPSEEK_BASE_URL", "https://api.deepseek.com/v1")
         self.api_key = api_key or os.environ.get(
-            "ASIP_DEEPSEEK_API_KEY") or os.environ.get("DEEPSEEK_API_KEY") or ""
-        self.model = model or os.environ.get(
-            "ASIP_DEEPSEEK_MODEL", "deepseek-chat")
+            "ASIP_DEEPSEEK_API_KEY") or ""
+        # Stage 8B：Flash-only 硬门禁。默认/任何未批准模型 → 配置错误。
+        from scripts.ai.providers.deepseek_v4_flash import (
+            ALLOWED_DEEPSEEK_MODELS, UnsupportedDeepSeekModelError)
+        self.model = model or os.environ.get("ASIP_DEEPSEEK_MODEL", "deepseek-v4-flash")
+        if self.model not in ALLOWED_DEEPSEEK_MODELS:
+            raise UnsupportedDeepSeekModelError(
+                "unsupported_deepseek_model: %r（仅允许 deepseek-v4-flash）" % self.model)
         self.timeout = int(os.environ.get("ASIP_DEEPSEEK_TIMEOUT_SECONDS", "180"))
 
     def generate(self, system, user):

@@ -1,0 +1,98 @@
+name: ASIP Stage8B DeepSeek V4 Flash Qualification
+
+# Stage 8B continuation（§十二）：只允许 workflow_dispatch 手动执行；
+# 不得 push / schedule / cron 自动触发。模型固定 deepseek-v4-flash，
+# 不暴露 model input（避免人为误选 Pro）。
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: asip-stage8b-qualification
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  ASIP_MODE: development
+  production_auto_update: "false"
+  scheduled_collection: "false"
+  scheduled_ai_processing: "false"
+  scheduled_publication: "false"
+  scheduled_reports: "false"
+  automatic_deploy: "false"
+  browser_direct_api_call: "false"
+  # §五：Secret 只经 Actions env 注入；Python Provider 仅读 os.environ
+  ASIP_DEEPSEEK_API_KEY: ${{ secrets.ASIP_DEEPSEEK_API_KEY }}
+
+jobs:
+  qualify-deepseek-v4-flash:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Credential presence check (§六，只报 bool，绝不回显 key)
+        run: |
+          python - <<'PY'
+          import os
+          ok = bool(os.environ.get("ASIP_DEEPSEEK_API_KEY", "").strip())
+          print("ASIP_DEEPSEEK_API_KEY_available=" + str(ok).lower())
+          if not ok:
+              raise SystemExit("credential_injection_failed: ASIP_DEEPSEEK_API_KEY not injected")
+          PY
+
+      - name: Smoke test (§七：1 个最小请求，model=deepseek-v4-flash)
+        run: |
+          python scripts/ai/qualification/stage8b.py --smoke --provider deepseek
+          python - <<'PY'
+          import json
+          s = json.load(open("data/runtime/ai_qualification/stage8b/smoke.json")) \
+              if __import__("os").path.exists("data/runtime/ai_qualification/stage8b/smoke.json") else None
+          PY
+
+      - name: 20-case qualification (stage8b-v1)
+        run: |
+          python scripts/ai/qualification/stage8b.py --provider deepseek
+
+      - name: Real report trial (Primary Gate 通过后；model 固定 flash)
+        run: |
+          python scripts/ai/qualification/report_trial.py --provider deepseek \
+            || echo "REPORT_TRIAL_SKIPPED (provider 未达 Primary Gate 或数据不足)"
+
+      - name: Secret scan（§二十三：repo/artifacts/logs 零泄漏）
+        run: |
+          python - <<'PY'
+          import os, re, pathlib
+          pats = re.compile(r"ASIP_DEEPSEEK_API_KEY\s*=\s*\S|sk-[A-Za-z0-9]{16,}|Bearer\s+[A-Za-z0-9._-]{16,}", re.I)
+          hits = []
+          root = pathlib.Path(".")
+          for p in root.rglob("*"):
+              if p.is_file() and p.suffix in (".json", ".md", ".txt", ".yml", ".yaml", ".py", ".log", ".env"):
+                  try:
+                      txt = p.read_text(encoding="utf-8", errors="ignore")
+                  except Exception:
+                      continue
+                  for m in pats.finditer(txt):
+                      hits.append(str(p))
+          print("secret_leak_count=" + str(len(hits)))
+          if hits:
+              raise SystemExit("secret leak detected: %s" % hits[:5])
+          PY
+
+      - name: Upload qualification artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage8b-qualification
+          path: |
+            data/runtime/ai_qualification/stage8b/
+            docs/stage8b-real-ai-review.md
+          if-no-files-found: warn

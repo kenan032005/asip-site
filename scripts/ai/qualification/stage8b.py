@@ -288,6 +288,10 @@ def run_case(case, provider_name):
         "semantic": case.get("semantic"),
         "provider": provider_name,
         "credential_available": credential_available(provider_name),
+        "requested_model": "deepseek-v4-flash" if provider_name == "deepseek"
+                           else ("glm-4.7-flash" if provider_name == "glm47_flash"
+                                 else None),
+        "returned_model": None,
         "provider_status": "unavailable",
         "attempt_count": 0,
         "strict_json_pass": False,
@@ -321,23 +325,40 @@ def run_case(case, provider_name):
             result["contract_failure"] = (err.get("code") if isinstance(err, dict) else None) or status
             return result
     else:
-        from scripts.report.gen.providers import DeepSeekReportProvider
-        prov = DeepSeekReportProvider()
-        try:
-            raw_text, meta = prov.generate(task["system_text"], task["user_text"])
-        except Exception as e:
-            result["provider_status"] = "failed"
-            result["contract_failure"] = "provider_error"
-            result["errors"].append(str(e)[:120])
+        # Stage 8B continuation：DeepSeek V4 Flash-only（§二-§四）
+        from scripts.ai.providers.deepseek_v4_flash import (
+            DeepSeekV4FlashProvider, ALLOWED_DEEPSEEK_MODELS)
+        prov = DeepSeekV4FlashProvider()
+        res = prov.submit_task(task)
+        status = (res or {}).get("status", "")
+        rr = (res.get("result") or {})
+        result["returned_model"] = rr.get("returned_model")
+        result["attempt_count"] = rr.get("attempt_count") or 0
+        result["tokens"] = {
+            "input_tokens": rr.get("input_tokens"),
+            "output_tokens": rr.get("output_tokens"),
+            "total_tokens": rr.get("total_tokens"),
+        }
+        if status != "succeeded":
+            err = rr.get("error") or {}
+            code = err.get("code") if isinstance(err, dict) else None
+            result["provider_status"] = status
+            result["contract_failure"] = code or status
+            if code == "model_mismatch":
+                result["errors"].append(
+                    "model_mismatch: returned=%s" % result["returned_model"])
             return result
+        # §四：returned_model 明确返回非 flash → case FAIL
+        if result["returned_model"] and result["returned_model"] not in ALLOWED_DEEPSEEK_MODELS:
+            result["provider_status"] = "failed"
+            result["contract_failure"] = "model_mismatch"
+            result["errors"].append(
+                "model_mismatch: returned=%s" % result["returned_model"])
+            return result
+        raw_text = rr.get("text") or ""
 
     result["provider_status"] = "succeeded"
-    result["attempt_count"] = 1
-    result["tokens"] = {
-        "input_tokens": meta.get("input_tokens") if meta else None,
-        "output_tokens": meta.get("output_tokens") if meta else None,
-        "total_tokens": meta.get("total_tokens") if meta else None,
-    }
+    result["attempt_count"] = max(result["attempt_count"], 1)
     ok_json, parsed, err = strict_json_parse(raw_text)
     result["strict_json_pass"] = ok_json
     if not ok_json:
@@ -676,18 +697,41 @@ def run(provider_name="all", limit=0):
     return summary, all_results
 
 
+def run_smoke(provider_name="deepseek"):
+    """§七：最小连接 smoke（仅 deepseek-v4-flash）。"""
+    if provider_name == "deepseek":
+        from scripts.ai.providers.deepseek_v4_flash import (
+            DeepSeekV4FlashProvider, credential_available as ds_cred)
+        if not ds_cred():
+            return {"credential_available": False,
+                    "result": "credential_injection_failed",
+                    "requested_model": "deepseek-v4-flash",
+                    "returned_model": None, "strict_json": False,
+                    "http_status": None}
+        prov = DeepSeekV4FlashProvider()
+        return prov.smoke()
+    return {"credential_available": credential_available(provider_name),
+            "result": "not_supported", "strict_json": False}
+
+
 def main(argv=None):
     import argparse
     ap = argparse.ArgumentParser()
     ap.add_argument("--provider", default="all")
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--smoke", action="store_true", help="只做 1 次最小连接 smoke")
     args = ap.parse_args(argv)
+    if args.smoke:
+        print(json.dumps(run_smoke(args.provider if args.provider != "all"
+                                   else "deepseek"), ensure_ascii=False, indent=2))
+        return 0
     summary, results = run(args.provider, args.limit)
     print(json.dumps(summary, ensure_ascii=False, indent=2))
     for r in results:
-        print("  %s %s status=%s schema=%s strict_json=%s" % (
+        print("  %s %s status=%s schema=%s strict_json=%s returned_model=%s" % (
             r["case_id"], r.get("semantic", "")[:30], r["provider_status"],
-            r.get("schema_pass"), r.get("strict_json_pass")))
+            r.get("schema_pass"), r.get("strict_json_pass"),
+            r.get("returned_model")))
     return 0 if all(not s["credential_available"]
                     or s["role"] != "not_qualified" for s in
                     summary["provider_results"].values()) else 2
