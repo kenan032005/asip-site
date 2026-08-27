@@ -413,6 +413,16 @@ _IDENTIFIER_FIELDS = ("event_id", "master_event_id", "disease_event_id",
                       "report_id", "item_id", "brief_id", "source_id",
                       "legacy_event_id", "legacy_report_id", "previous_report_id",
                       "source_refs", "url")
+# Machine envelope is validated by metadata/schema gates, not factual numeric
+# provenance. Keep semantic report dates in scope for METADATA_DATE_NUMBER.
+_MACHINE_METADATA_FIELDS = frozenset((
+    "report_id", "brief_id", "model_name", "prompt_version", "prompt_hash",
+    "generated_at", "usage_purpose", "provider_name", "provider_metadata",
+    "execution_mode", "execution_metadata", "schema_version", "version",
+))
+_MACHINE_METADATA_SEGMENTS = frozenset((
+    "generation_metadata", "provider_metadata", "execution_metadata",
+))
 _DISEASE_COUNT_FIELDS = ("confirmed_cases", "probable_cases", "suspected_cases",
                          "total_cases", "deaths", "recoveries")
 _EVENT_COUNT_FIELDS = ("event_count", "verified_event_count", "armed_attack_count",
@@ -506,7 +516,11 @@ def _numeric_provenance_check(report, report_input):
     entries, unsupported = [], []
 
     def classify(n, path):
-        leaf = path.split(".")[-1]
+        parts = [p.split("[", 1)[0] for p in path.split(".") if p]
+        leaf = parts[-1] if parts else ""
+        if leaf in _MACHINE_METADATA_FIELDS or any(
+                segment in _MACHINE_METADATA_SEGMENTS for segment in parts):
+            return
         if any(f in leaf for f in ("item_id", "report_id", "brief_id",
                                    "master_event_id", "source_id",
                                    "event_id", "disease_event_id")):
@@ -552,7 +566,8 @@ def _numeric_provenance_check(report, report_input):
 # §八 Report Engine（contract 冻结）+ §十 机器 Gate
 # ────────────────────────────────────────────────────────────────────────────
 
-def generate_report(prov, task_type, report_input, prompt_file, label, telemetry):
+def generate_report(prov, task_type, report_input, prompt_file, label, telemetry,
+                    raw_path=None):
     """单份报告：Flash → AI content → assembler → final schema → quality gate。
 
     §一（Repair）：usage_purpose 以 final schema const 为 source of truth
@@ -605,9 +620,26 @@ def generate_report(prov, task_type, report_input, prompt_file, label, telemetry
         out["status"] = "model_mismatch"
         return out
     raw = rr.get("text") or ""
+    # Preserve provider evidence before any parse/schema gate can reject it.
+    out["raw_content"] = raw
+    out["raw_content_length"] = len(raw)
+    out["raw_response"] = {
+        "raw_content": raw,
+        "raw_content_length": len(raw),
+        "finish_reason": rr.get("finish_reason"),
+        "requested_model": out["requested_model"],
+        "returned_model": rr.get("returned_model"),
+        "token_usage": out["tokens"],
+    }
+    if raw_path is not None:
+        Path(raw_path).write_text(json.dumps(out["raw_response"],
+                                             ensure_ascii=False, indent=1) + "\n",
+                                  encoding="utf-8")
     ok, parsed, jerr = _strict_json_parse(raw)
     out["strict_json"] = ok
     out["machine_gate"]["strict_json"] = ok
+    if ok:
+        out["parsed_ai_content"] = parsed
     if not ok:
         out["status"] = "invalid_response_shape"
         out["error"] = jerr
@@ -622,6 +654,11 @@ def generate_report(prov, task_type, report_input, prompt_file, label, telemetry
     if aerr:
         out["status"] = "ai_content_schema_failure"
         out["schema_errors"] = aerr[:5]
+        out["schema_failure_evidence"] = {
+            "field_errors": aerr[:20],
+            "raw_excerpt": raw[:1200],
+            "raw_content_length": len(raw),
+        }
         out["machine_gate_status"] = "FAIL"
         return out
 
@@ -735,10 +772,43 @@ def _metadata_gate(final, report_input, task_type):
 # §十一 Human Review Pack
 # ────────────────────────────────────────────────────────────────────────────
 
+def _report_input_unique_count(report_input):
+    """Count canonical facts once across repeated report sections."""
+    seen = set()
+    anonymous = 0
+    sections = (report_input or {}).get("sections") or {}
+    for items in sections.values():
+        if not isinstance(items, list):
+            continue
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            fid = (item.get("event_id") or item.get("disease_event_id")
+                   or item.get("master_event_id") or item.get("item_id"))
+            if fid:
+                seen.add(str(fid))
+            else:
+                anonymous += 1
+    return len(seen) + anonymous
+
+
+def _eligible_record_count(enrichment):
+    """Count distinct Safety-passed records without cross-type double counting."""
+    seen = set()
+    for rec in enrichment or []:
+        safe = rec.get("safety") or {}
+        if rec.get("status") != "ok" or safe.get("gate") != "PASS":
+            continue
+        fid = rec.get("event_id") or rec.get("disease_event_id") or rec.get("label")
+        seen.add((rec.get("task_type"), str(fid)))
+    return len(seen)
+
+
 def build_human_review_pack(inputs, enrichment, reports, stats, out_dir,
                             safety_stats=None, schema_held=None):
     safety_stats = safety_stats or {}
     schema_held = schema_held or []
+    report_input_accepted = _eligible_record_count(enrichment)
     md = ["# ASIP Stage 8C Package 2 — Manual Human Review Pack",
           "",
           "> 由 ChatGPT + 用户人工裁定内容质量。WorkBuddy 不判定 HUMAN_CONTENT_PASS。",
@@ -766,9 +836,7 @@ def build_human_review_pack(inputs, enrichment, reports, stats, out_dir,
           json.dumps({
               "input_records_total": (stats.get("social_eligible_total", 0) +
                                       stats.get("disease_eligible_total", 0)),
-              "input_records_accepted": (
-                  (safety_stats.get("social") or {}).get("attribution_post_pass", 0) +
-                  (safety_stats.get("disease") or {}).get("attribution_post_pass", 0)),
+              "input_records_accepted": report_input_accepted,
               "enrichment_schema_held": len(schema_held),
               "attribution_held": (
                   (safety_stats.get("social") or {}).get("attribution_hold", 0) +
@@ -790,9 +858,10 @@ def build_human_review_pack(inputs, enrichment, reports, stats, out_dir,
                "### SAFETY_LAYER_SUMMARY",
                "```json\n%s\n```" % json.dumps(
                    r.get("safety_summary") or {}, ensure_ascii=False, indent=1),
-               "### ORIGINAL_AI_CONTENT",
-               "```json\n%s\n```" % json.dumps(
-                   r.get("raw_ai_content") or {}, ensure_ascii=False, indent=1)[:20000],
+          "### ORIGINAL_AI_CONTENT",
+          "```json\n%s\n```" % json.dumps(
+                   r.get("raw_response") or r.get("raw_ai_content") or {},
+                   ensure_ascii=False, indent=1)[:20000],
                "### FINAL_ASSEMBLED_REPORT",
                "```json\n%s\n```" % json.dumps(
                    r.get("assembled") or {}, ensure_ascii=False, indent=1)[:20000],
@@ -952,9 +1021,13 @@ def main(argv=None):
 
     # §六 3) Report Input eligibility：仅 safety gate=PASS 的 fact 进入
     eligible_social = [r for r in enrichment_records
-                       if r.get("status") == "ok" and r["safety"]["gate"] == "PASS"]
+                       if r.get("task_type") == "stage4_event_enrichment"
+                       and r.get("status") == "ok"
+                       and r["safety"]["gate"] == "PASS"]
     eligible_disease = [r for r in enrichment_records
-                        if r.get("status") == "ok" and r["safety"]["gate"] == "PASS"]
+                        if r.get("task_type") == "disease_summary"
+                        and r.get("status") == "ok"
+                        and r["safety"]["gate"] == "PASS"]
 
     # §八 Report Engine：三份真实报告（输入 = safety-gated 真实事实）
     reports = {}
@@ -986,7 +1059,8 @@ def main(argv=None):
             rinput["sections"]["disease_public_health"] = [
                 it for it in rinput["sections"].get("disease_public_health", [])
                 if _fact_is_gated(it, eligible_social, eligible_disease)]
-        r = generate_report(prov, tt, rinput, prompt_file, label, telemetry)
+        r = generate_report(prov, tt, rinput, prompt_file, label, telemetry,
+                             raw_path=out_dir / ("%s_raw_response.json" % key))
         r["report_input"] = rinput
         r["safety_summary"] = {"eligible_social": len(eligible_social),
                                "eligible_disease": len(eligible_disease),
@@ -994,7 +1068,15 @@ def main(argv=None):
                                                     safety_stats["disease"]["attribution_hold"]),
                                "enrichment_schema_held": (safety_stats["social"]["enrichment_schema_failure"] +
                                                           safety_stats["disease"]["enrichment_schema_failure"])}
-        r["raw_ai_content"] = r.get("parsed") or r.get("raw_ai_content")
+        r["raw_ai_content"] = r.get("parsed_ai_content") or r.get("raw_ai_content")
+        r["raw_response"] = r.get("raw_response") or {
+            "raw_content": r.get("raw_content") or "",
+            "raw_content_length": r.get("raw_content_length", 0),
+            "finish_reason": r.get("finish_reason"),
+            "requested_model": r.get("requested_model"),
+            "returned_model": r.get("returned_model"),
+            "token_usage": r.get("tokens") or {},
+        }
         reports[key] = r
         print("  [report] %-12s status=%s machine_gate=%s" % (
             label, r.get("status"), r.get("machine_gate_status")))
@@ -1038,23 +1120,25 @@ def main(argv=None):
             "input_records_total": (stats.get("social_eligible_total", 0) +
                                     stats.get("disease_eligible_total", 0)),
             "input_records_accepted": len(eligible_social) + len(eligible_disease),
+            "social_schema_accepted": sum(1 for r in enrichment_records
+                                           if r.get("task_type") == "stage4_event_enrichment"
+                                           and r.get("status") == "ok"),
+            "disease_schema_accepted": sum(1 for r in enrichment_records
+                                            if r.get("task_type") == "disease_summary"
+                                            and r.get("status") == "ok"),
             "enrichment_schema_held": len(schema_held),
             "attribution_held": (safety_stats["social"]["attribution_hold"] +
                                   safety_stats["disease"]["attribution_hold"]),
             "report_input_final_count": {
-                "africa_daily": sum(len(v) for v in
-                                     (reports.get("africa_daily", {}).get("report_input") or {})
-                                     .get("sections", {}).values()
-                                     if isinstance(v, list)),
-                "tcd_weekly": sum(len(v) for v in
-                                  (reports.get("tcd_weekly", {}).get("report_input") or {})
-                                  .get("sections", {}).values()
-                                  if isinstance(v, list)),
-                "ssd_weekly": sum(len(v) for v in
-                                  (reports.get("ssd_weekly", {}).get("report_input") or {})
-                                  .get("sections", {}).values()
-                                  if isinstance(v, list)),
+                "africa_daily": _report_input_unique_count(
+                    reports.get("africa_daily", {}).get("report_input")),
+                "tcd_weekly": _report_input_unique_count(
+                    reports.get("tcd_weekly", {}).get("report_input")),
+                "ssd_weekly": _report_input_unique_count(
+                    reports.get("ssd_weekly", {}).get("report_input")),
             },
+            "report_input_final_unique": _report_input_unique_count(
+                reports.get("africa_daily", {}).get("report_input")),
             "held_records": schema_held,
         },
         "reports": {k: {"status": v.get("status"),

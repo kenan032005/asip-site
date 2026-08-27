@@ -161,6 +161,86 @@ class TestArtifactWriteRegression(unittest.TestCase):
             shutil.rmtree(out, ignore_errors=True)
 
 
+class RawProvider:
+    """返回指定原文的 fake provider；用于验证先持久化、后校验。"""
+
+    def __init__(self, text):
+        self.text = text
+
+    def submit_task(self, task):
+        return {"status": "succeeded", "result": {
+            "returned_model": "deepseek-v4-flash", "text": self.text,
+            "input_tokens": 10, "output_tokens": 20, "total_tokens": 30,
+            "finish_reason": "stop", "thinking_requested": "disabled",
+            "reasoning_tokens": None,
+        }}
+
+
+class TestReportEvidenceRecovery(unittest.TestCase):
+    """Final Evidence Recovery Preparation 的离线回归（不调用 AI）。"""
+
+    def test_machine_metadata_numbers_excluded(self):
+        report_input = {
+            "report_id": "W1", "report_type": "country_weekly",
+            "country_iso3": "SSD", "week_start": "2026-07-25",
+            "week_end": "2026-08-01", "sections": {}, "trend_metrics": {},
+        }
+        report = {
+            "report_id": "W1", "generation_metadata": {
+                "model_name": "deepseek-v4-flash",
+                "prompt_version": "v1.0.3",
+                "usage_purpose": "development_test",
+            },
+            "executive_assessment": "2026年7月25日至8月1日数据有限。",
+        }
+        ok, entries, unsupported = mt._numeric_provenance_check(report, report_input)
+        self.assertTrue(ok, unsupported)
+        self.assertEqual([e["output_value"] for e in entries], [2026, 7, 25, 8, 1])
+        self.assertTrue(all(e["semantic_type"] == "metadata_date" for e in entries))
+
+    def test_raw_persisted_before_schema_failure(self):
+        bad = json.dumps({"title": "bad", "unexpected": []}, ensure_ascii=False)
+        r = mt.generate_report(RawProvider(bad), "africa_daily", {
+            "report_id": "D", "report_type": "africa_daily",
+            "report_date": "2026-08-27", "period_start": "2026-08-26",
+            "period_end": "2026-08-27", "sections": {}, "stats": {},
+        }, ROOT / "config/prompts/africa_daily_report_v1.md", "raw-schema", {})
+        self.assertEqual(r["status"], "ai_content_schema_failure")
+        self.assertEqual(r["raw_content"], bad)
+        self.assertEqual(r["raw_content_length"], len(bad))
+        self.assertIn("raw_excerpt", r["schema_failure_evidence"])
+        self.assertTrue(r["schema_failure_evidence"]["field_errors"])
+
+    def test_raw_file_written_before_schema_failure(self):
+        bad = json.dumps({"title": "bad", "unexpected": []}, ensure_ascii=False)
+        with tempfile.TemporaryDirectory(prefix="asip_raw_" ) as td:
+            raw_path = Path(td) / "raw.json"
+            r = mt.generate_report(RawProvider(bad), "africa_daily", {
+                "report_id": "D", "report_type": "africa_daily",
+                "report_date": "2026-08-27", "period_start": "2026-08-26",
+                "period_end": "2026-08-27", "sections": {}, "stats": {},
+            }, ROOT / "config/prompts/africa_daily_report_v1.md", "raw-file", {},
+            raw_path=raw_path)
+            self.assertEqual(r["status"], "ai_content_schema_failure")
+            saved = json.loads(raw_path.read_text(encoding="utf-8"))
+            self.assertEqual(saved["raw_content"], bad)
+            self.assertEqual(saved["token_usage"]["total_tokens"], 30)
+
+    def test_accepted_counts_are_type_isolated(self):
+        records = [
+            {"task_type": "stage4_event_enrichment", "status": "ok",
+             "safety": {"gate": "PASS"}},
+            {"task_type": "disease_summary", "status": "ok",
+             "safety": {"gate": "PASS"}},
+            {"task_type": "disease_summary", "status": "schema_failure"},
+        ]
+        social = [r for r in records if r.get("task_type") == "stage4_event_enrichment"
+                  and r.get("status") == "ok" and r["safety"]["gate"] == "PASS"]
+        disease = [r for r in records if r.get("task_type") == "disease_summary"
+                   and r.get("status") == "ok" and r["safety"]["gate"] == "PASS"]
+        self.assertEqual((len(social), len(disease), len(social) + len(disease)), (1, 1, 2))
+
+
 class TestApiCallReconciliation(unittest.TestCase):
     """§五：telemetry 拆分结构（social/disease/report 分类计数存在且可求和）。"""
 
