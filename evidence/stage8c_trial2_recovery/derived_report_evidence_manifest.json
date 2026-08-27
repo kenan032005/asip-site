@@ -1,0 +1,76 @@
+{
+ "snapshot_type": "derived_report_evidence_snapshot",
+ "source_run": "33066148566",
+ "historical_report_input_equivalence": false,
+ "reconstruction_claim": "none",
+ "historical_reconstruction_attempt_hash": "5b03bfcc3bf9287934b550eba98177c69ae2cb1d8805eecf45b940cfe18148d8",
+ "report_input_snapshot_reconstructable": false,
+ "input_cutoff": "2026-08-01T18:02:40.000Z",
+ "derivation_rules": {
+  "builder": "scripts/ai/safety/derive_frozen_report_evidence.py",
+  "category_mapping": {
+   "terrorism": "terrorism",
+   "civil_unrest": "political",
+   "natural_disaster": "security",
+   "other_security": "security",
+   "public_health": "public_health"
+  },
+  "importance_score_default": 50,
+  "time_window": "per_record_timestamp_not_preserved; frozen in_window default (missing ts -> retained); run4 live aggregates recorded as reference",
+  "weekly_disease_event_id_mapping": "weekly major_events disease items: event_id=disease_event_id",
+  "user_text_truncation": "frozen generate_report :9000 (unchanged)"
+ },
+ "run4_reference_window_counts": {
+  "daily_social": 4,
+  "daily_disease": 5,
+  "weekly_tcd_social": 5,
+  "weekly_tcd_disease": 1,
+  "weekly_ssd_social": 0,
+  "weekly_ssd_disease": 0
+ },
+ "hashes": {
+  "africa_daily_report_input_sha256": "f51fe2f548eca356f37f35450360fbe0a15faf6b886c857d2107972557afcc49",
+  "tcd_weekly_report_input_sha256": "89d1c42a79a174f775f4c3b80bc1c4264feea7b7629d4b83782c5ec8d429d948",
+  "ssd_weekly_report_input_sha256": "1ff941f38e9fb0393dc683b1c82bb4bcc04b5bbc305d80de0d276cd08806f3e8",
+  "aggregate_snapshot_sha256": "efad13db07fb3a29015669bba17c49f38d5d5636fa40fc2f77f2f39e503a7caa"
+ },
+ "counts": {
+  "input_total": 28,
+  "social_total": 9,
+  "disease_total": 19,
+  "social_enrichment_accepted": 8,
+  "disease_enrichment_accepted": 18,
+  "social_enrichment_held": 1,
+  "disease_enrichment_held": 1,
+  "social_safety_pass": 8,
+  "disease_safety_pass": 18,
+  "social_attribution_hold": 0,
+  "disease_attribution_hold": 0,
+  "social_report_eligible": 8,
+  "disease_report_eligible": 18,
+  "social_report_excluded": 0,
+  "disease_report_excluded": 9,
+  "social_report_included": 8,
+  "disease_report_included": 9,
+  "excluded_insufficient_provenance": 9,
+  "excluded_missing_required_field": 0,
+  "africa_daily_input_count": 17,
+  "tcd_weekly_input_count": 7,
+  "ssd_weekly_input_count": 0,
+  "closure_ok": true
+ },
+ "outputs": {
+  "africa_daily_report_input.json": "C:\\Users\\kenan\\WorkBuddy\\2026-07-31-09-46-56\\fc-stage4\\data\\runtime\\stage8c_trial2_recovery\\derived\\africa_daily_report_input.json",
+  "tcd_weekly_report_input.json": "C:\\Users\\kenan\\WorkBuddy\\2026-07-31-09-46-56\\fc-stage4\\data\\runtime\\stage8c_trial2_recovery\\derived\\tcd_weekly_report_input.json",
+  "ssd_weekly_report_input.json": "C:\\Users\\kenan\\WorkBuddy\\2026-07-31-09-46-56\\fc-stage4\\data\\runtime\\stage8c_trial2_recovery\\derived\\ssd_weekly_report_input.json"
+ },
+ "evidence_sources": [
+  "input_summary.json",
+  "safety_layer_trial.json",
+  "manual_trial_summary.json",
+  "human_review_pack.md"
+ ],
+ "fixtures_used": false,
+ "golden_set_used": false,
+ "mock_used": false
+}
