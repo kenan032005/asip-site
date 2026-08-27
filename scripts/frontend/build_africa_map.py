@@ -23,10 +23,10 @@ AFRICA_ISO3 = {
 }
 
 # 等距圆柱投影参数（中心经度 20E；非洲纬度 -40..40；scale 视觉适度）
-CENTER_LON = 20.0
+CENTER_LON = 17.5
 SCALE = 7.2
-X0 = 60.0   # viewBox 偏移（经度 -20E => x=60）
-Y0 = 300.0  # 纬度 40N 对应 y 顶部
+X0 = 290.0
+Y0 = 20.0
 
 # 小岛国简化可见 marker（真实首都/主岛坐标；110m 数据无独立边界）
 ISLAND_MARKERS = {
@@ -43,7 +43,7 @@ LABELS = ["DZA", "LBY", "EGY", "SDN", "TCD", "NER", "NGA", "COD", "ETH", "KEN", 
 
 def proj(lon, lat):
     x = (lon - CENTER_LON) * SCALE + X0
-    y = (40.0 - lat) * SCALE * 0.98 + (Y0 - 40.0 * SCALE * 0.98)
+    y = (40.0 - lat) * SCALE * 0.98 + Y0
     return round(x, 1), round(y, 1)
 
 

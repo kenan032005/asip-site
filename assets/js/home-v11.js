@@ -228,7 +228,7 @@
 
     host.querySelector(".v11-loading").outerHTML =
       '<div class="v11-map-wrap" id="v11MapSvg">' +
-      '<svg viewBox="0 0 560 620" role="img" aria-label="Africa Risk Map">' +
+      '<svg viewBox="0 0 600 620" role="img" aria-label="Africa Risk Map">' +
       paths + markerSvg + labelSvg + "</svg>" +
       '<div class="v11-map-tip" id="v11MapTip"></div></div>' +
       (geoKeys.length ? "" : '<div class="v11-empty">风险数据暂不可用</div>');
