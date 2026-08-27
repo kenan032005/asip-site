@@ -402,14 +402,168 @@ def enrich_and_safe(prov, task_type, payload, label, telemetry):
 
 
 # ────────────────────────────────────────────────────────────────────────────
+# §四/§五（Repair）：Provenance-Aware Numeric Gate
+# ────────────────────────────────────────────────────────────────────────────
+
+_METADATA_DATE_FIELDS = ("week_start", "week_end", "report_date", "period_start",
+                         "period_end", "cutoff", "previous_cutoff", "generated_at",
+                         "event_time", "latest_update_at", "first_seen_at",
+                         "created_at", "updated_at", "report_timezone")
+_IDENTIFIER_FIELDS = ("event_id", "master_event_id", "disease_event_id",
+                      "report_id", "item_id", "brief_id", "source_id",
+                      "legacy_event_id", "legacy_report_id", "previous_report_id",
+                      "source_refs", "url")
+_DISEASE_COUNT_FIELDS = ("confirmed_cases", "probable_cases", "suspected_cases",
+                         "total_cases", "deaths", "recoveries")
+_EVENT_COUNT_FIELDS = ("event_count", "verified_event_count", "armed_attack_count",
+                       "civil_unrest_count", "major_crime_count",
+                       "natural_disaster_count", "multi_source_event_count",
+                       "new_outbreak_count", "active_outbreak_count",
+                       "importance_score")
+_NUM_RE = re.compile(r"\d[\d,]*")
+
+
+def _infer_semantic(sec, field):
+    """字符串字段数字的语义类型推断（§四）。"""
+    if field in _DISEASE_COUNT_FIELDS:
+        return "death_count" if field == "deaths" else "case_count"
+    if field in _EVENT_COUNT_FIELDS:
+        return "event_magnitude"
+    if "date" in field or "time" in field or "week" in field or "period" in field:
+        return "metadata_date"
+    return "event_magnitude"
+
+
+def _collect_input_provenance(report_input):
+    """收集 input 数字 provenance：{value: [ {input_field_path, semantic_type,
+    fact_id} ]}。identifier 内数字记 identifier（不作事实证据）。"""
+    prov = {}
+
+    def add(val, path, sem, fid=None):
+        try:
+            n = int(str(val).replace(",", ""))
+        except (TypeError, ValueError):
+            return
+        if not isinstance(n, int):
+            return
+        prov.setdefault(n, []).append(
+            {"input_field_path": path, "semantic_type": sem, "fact_id": fid})
+
+    # top-level metadata 日期字段（§五：metadata/date provenance）
+    for f in _METADATA_DATE_FIELDS:
+        v = report_input.get(f)
+        if isinstance(v, str):
+            for m in _NUM_RE.findall(v):
+                add(m, f, "metadata_date")
+        elif isinstance(v, (int, float)):
+            add(v, f, "metadata_date")
+
+    # sections items（事件/疾病事实）
+    sections = report_input.get("sections") or {}
+    for sec, items in sections.items():
+        if not isinstance(items, list):
+            continue
+        for i, it in enumerate(items):
+            if not isinstance(it, dict):
+                continue
+            fid = (it.get("event_id") or it.get("disease_event_id")
+                   or it.get("master_event_id") or it.get("item_id"))
+            for k, v in it.items():
+                path = "sections.%s[%d].%s" % (sec, i, k)
+                if k in _IDENTIFIER_FIELDS:
+                    for m in _NUM_RE.findall(str(v)):
+                        add(m, path, "identifier", fid)
+                elif k in _DISEASE_COUNT_FIELDS:
+                    add(v, path, _infer_semantic(sec, k), fid)
+                elif k in _EVENT_COUNT_FIELDS:
+                    add(v, path, "event_magnitude", fid)
+                elif isinstance(v, str):
+                    sem = _infer_semantic(sec, k)
+                    for m in _NUM_RE.findall(v):
+                        add(m, path, sem, fid)
+
+    # trend_metrics / stats
+    for f in ("trend_metrics", "stats"):
+        v = report_input.get(f) or {}
+        if isinstance(v, dict):
+            for k, vv in v.items():
+                if isinstance(vv, (int, float)) and not isinstance(vv, bool):
+                    add(vv, "%s.%s" % (f, k), "event_magnitude")
+    return prov
+
+
+def _numeric_provenance_check(report, report_input):
+    """provenance-aware numeric gate（§四/§五）。
+
+    对报告中每个数字判定 provenance：
+      - identifier 字段数字（item_id/report_id 等）→ 不检查
+      - 匹配 input metadata 日期 → METADATA_DATE_NUMBER
+      - 匹配 input 事实数字 → SUPPORTED_INPUT_NUMBER
+      - 无匹配 → TRUE_UNSUPPORTED_AI_NUMBER（numeric_evidence=FAIL）
+    返回 (ok, entries[], unsupported[])。
+    """
+    in_prov = _collect_input_provenance(report_input)
+    entries, unsupported = [], []
+
+    def classify(n, path):
+        leaf = path.split(".")[-1]
+        if any(f in leaf for f in ("item_id", "report_id", "brief_id",
+                                   "master_event_id", "source_id",
+                                   "event_id", "disease_event_id")):
+            return
+        matches = in_prov.get(n, [])
+        best = None
+        for m in matches:
+            if m["semantic_type"] in ("identifier",):
+                continue
+            best = m
+            if m["semantic_type"] not in ("metadata_date",):
+                break
+        if best is None:
+            unsupported.append({"output_value": n, "output_field": path})
+            entries.append({"output_value": n, "output_field": path,
+                            "matched_input_value": None,
+                            "matched_input_path": None,
+                            "semantic_type": "unsupported"})
+        else:
+            entries.append({"output_value": n, "output_field": path,
+                            "matched_input_value": n,
+                            "matched_input_path": best["input_field_path"],
+                            "semantic_type": best["semantic_type"]})
+
+    def walk(node, path):
+        if isinstance(node, dict):
+            for k, v in node.items():
+                walk(v, "%s.%s" % (path, k) if path else k)
+        elif isinstance(node, list):
+            for i, v in enumerate(node):
+                walk(v, "%s[%d]" % (path, i) if path else "[%d]" % i)
+        elif isinstance(node, str):
+            for m in _NUM_RE.findall(node):
+                classify(int(m.replace(",", "")), path or "text")
+        elif isinstance(node, (int, float)) and not isinstance(node, bool):
+            classify(int(node), path or "value")
+
+    walk(report, "")
+    return (not unsupported, entries, unsupported)
+
+
+# ────────────────────────────────────────────────────────────────────────────
 # §八 Report Engine（contract 冻结）+ §十 机器 Gate
 # ────────────────────────────────────────────────────────────────────────────
 
 def generate_report(prov, task_type, report_input, prompt_file, label, telemetry):
-    """单份报告：Flash → AI content → assembler → final schema → quality gate。"""
+    """单份报告：Flash → AI content → assembler → final schema → quality gate。
+
+    §一（Repair）：usage_purpose 以 final schema const 为 source of truth
+    （development_test）；Manual Trial 身份存 execution_mode（不污染 schema）。
+    §二（Repair）：Quality Gate 内部异常 → machine_gate=FAIL /
+    quality_status=gate_exception，绝不 false PASS。
+    §四（Repair）：numeric gate 用 provenance-aware 检查（替代粗粒度比较）。
+    """
     from scripts.report.gen.quality import run_quality_gate
     sys_text = Path(prompt_file).read_text(encoding="utf-8")
-    pv = "v1.0.3" if task_type == "africa_daily" else "v1.0.3"
+    pv = "v1.0.3"
     task = {
         "task_id": "TRIAL_REPORT_%s" % label,
         "task_type": task_type,
@@ -462,7 +616,7 @@ def generate_report(prov, task_type, report_input, prompt_file, label, telemetry
 
     # AI content schema（report-specific ai_content schema）
     ai_schema = load_json(ROOT / "schemas" / ("%s_ai_content.schema.json" % task_type))
-    aerr = validate_against_schema(parsed, ai_schema) if ai_schema else []
+    aerr = validate_against_schema(parsed, ai_schema, resolve_refs=True) if ai_schema else []
     out["ai_content_schema_pass"] = not aerr
     out["machine_gate"]["ai_content_schema"] = not aerr
     if aerr:
@@ -471,9 +625,10 @@ def generate_report(prov, task_type, report_input, prompt_file, label, telemetry
         out["machine_gate_status"] = "FAIL"
         return out
 
-    # Assembler（envelope 确定性合并）
+    # Assembler（envelope 确定性合并；usage_purpose=development_test 满足 final
+    # schema const；Manual Trial 身份存 execution_mode，不污染正式 schema）
     meta = {"provider_name": "deepseek", "model_name": "deepseek-v4-flash",
-            "prompt_version": pv, "usage_purpose": "development_report_trial",
+            "prompt_version": pv, "usage_purpose": "development_test",
             "report_status": "draft"}
     try:
         final = assemble_report(task_type, report_input, parsed, meta)
@@ -487,10 +642,11 @@ def generate_report(prov, task_type, report_input, prompt_file, label, telemetry
         out["machine_gate_status"] = "FAIL"
         return out
     out["assembled_report"] = final
+    out["execution_mode"] = "manual_human_review_trial"
 
     # Final schema（report output schema）
     ferr = validate_against_schema(final, load_json(
-        ROOT / "schemas" / ("%s_report.schema.json" % task_type)))
+        ROOT / "schemas" / ("%s_report.schema.json" % task_type)), resolve_refs=True)
     out["final_schema_pass"] = not ferr
     out["machine_gate"]["final_schema"] = not ferr
     if ferr:
@@ -503,17 +659,40 @@ def generate_report(prov, task_type, report_input, prompt_file, label, telemetry
     if md_errs:
         out["metadata_errors"] = md_errs[:5]
 
-    # 机器 Gate 完整（quality gate + 归因 + 分离）
+    # §四（Repair）：provenance-aware numeric gate（替代粗粒度数字比较）
+    num_ok, num_entries, num_unsupported = _numeric_provenance_check(final, report_input)
+    out["numeric_provenance"] = num_entries
+    out["numeric_unsupported"] = num_unsupported
+    out["machine_gate"]["numeric_evidence"] = num_ok
+    if num_unsupported:
+        out["numeric_issues"] = ["unsupported_ai_number: %d (%s)" % (
+            e["output_value"], e["output_field"]) for e in num_unsupported[:10]]
+
+    # §二（Repair）：Quality Gate fail-closed——异常 → FAIL + gate_exception
+    gate_exc = None
     try:
         qpassed, qstatus, qissues, qwarns = run_quality_gate(final, report_input, task_type)
     except Exception as e:
-        qpassed, qstatus, qissues = False, "gate_error", [str(e)[:120]]
+        qpassed, qstatus, qissues = False, "gate_exception", []
+        gate_exc = {"gate_name": "run_quality_gate",
+                    "exception_type": type(e).__name__,
+                    "exception_message": str(e)[:160]}
     out["quality_status"] = qstatus if qpassed else "failed_quality_gate"
-    out["quality_issues"] = (qissues or [])[:12]
-    out["machine_gate"]["numeric_evidence"] = not any("numeric" in str(i) for i in (qissues or []))
-    out["machine_gate"]["source_references"] = not any("source" in str(i) for i in (qissues or []))
-    out["machine_gate"]["fact_assessment_outlook_separation"] = not any(
-        "separat" in str(i) or "fact" in str(i).lower() for i in (qissues or []))
+    if gate_exc:
+        out["quality_status"] = "gate_exception"
+        out["gate_exception"] = gate_exc
+        out["quality_issues"] = ["quality gate exception: %s: %s" % (
+            gate_exc["exception_type"], gate_exc["exception_message"])]
+    else:
+        out["quality_issues"] = (qissues or [])[:12]
+    if gate_exc:
+        out["machine_gate"]["source_references"] = False
+        out["machine_gate"]["fact_assessment_outlook_separation"] = False
+    else:
+        out["machine_gate"]["source_references"] = not any(
+            "source" in str(i) for i in (qissues or []))
+        out["machine_gate"]["fact_assessment_outlook_separation"] = not any(
+            "separat" in str(i) or "malformed" in str(i) for i in (qissues or []))
     # 归因（报告级）：input 含 marker 而报告丢失 → attribution gate 失败
     from scripts.ai.qualification.stage8b import check_attribution
     aok, aerr2 = check_attribution(json.dumps(report_input, ensure_ascii=False),
@@ -556,7 +735,10 @@ def _metadata_gate(final, report_input, task_type):
 # §十一 Human Review Pack
 # ────────────────────────────────────────────────────────────────────────────
 
-def build_human_review_pack(inputs, enrichment, reports, stats, out_dir):
+def build_human_review_pack(inputs, enrichment, reports, stats, out_dir,
+                            safety_stats=None, schema_held=None):
+    safety_stats = safety_stats or {}
+    schema_held = schema_held or []
     md = ["# ASIP Stage 8C Package 2 — Manual Human Review Pack",
           "",
           "> 由 ChatGPT + 用户人工裁定内容质量。WorkBuddy 不判定 HUMAN_CONTENT_PASS。",
@@ -577,6 +759,23 @@ def build_human_review_pack(inputs, enrichment, reports, stats, out_dir):
           "| source coverage | %s |" % ",".join(
               list((stats.get("source_coverage_social") or {}).keys())[:6]),
           "| fixtures/golden/mock | 否 |",
+          "",
+          "## HUMAN_REVIEW_COMPLETENESS（§十二：区分「模型没写」与「上游被 Gate 拦住」）",
+          "",
+          "```json",
+          json.dumps({
+              "input_records_total": (stats.get("social_eligible_total", 0) +
+                                      stats.get("disease_eligible_total", 0)),
+              "input_records_accepted": (
+                  (safety_stats.get("social") or {}).get("attribution_post_pass", 0) +
+                  (safety_stats.get("disease") or {}).get("attribution_post_pass", 0)),
+              "enrichment_schema_held": len(schema_held),
+              "attribution_held": (
+                  (safety_stats.get("social") or {}).get("attribution_hold", 0) +
+                  (safety_stats.get("disease") or {}).get("attribution_hold", 0)),
+              "held_records": schema_held,
+          }, ensure_ascii=False, indent=1),
+          "```",
           ""]
     for label, r in (("africa_daily", reports.get("africa_daily")),
                      ("tcd_weekly", reports.get("tcd_weekly")),
@@ -662,6 +861,27 @@ def build_human_review_pack(inputs, enrichment, reports, stats, out_dir):
 # main
 # ────────────────────────────────────────────────────────────────────────────
 
+# §十（Repair）：三类结果分离——enrichment schema failure / safety correction /
+# safety hold 互不混淆（模块级，可测试）。
+def _tally(rec, group_key, s, eid, schema_held):
+    """统计单条 enrichment 结果。schema_held 为 list（就地追加 held 记录）。"""
+    s["checked"] += 1
+    if rec.get("status") == "ok":
+        safe = rec["safety"]
+        s["attribution_pre_pass"] += 1 if safe["pre_status"] == "PASS" else 0
+        s["attribution_pre_fail"] += 1 if safe["pre_status"] == "FAIL" else 0
+        s["attribution_post_pass"] += 1 if safe["post_status"] == "PASS" else 0
+        s["attribution_auto_corrected"] += 1 if safe["corrections"] else 0
+    elif rec.get("status") == "safety_hold":
+        s["attribution_hold"] += 1
+        s["manual_review_required"] += 1
+    elif rec.get("status") == "schema_failure":
+        s["enrichment_schema_failure"] += 1
+        schema_held.append({"event_id": eid, "country": rec.get("country_code"),
+                            "reason": "enrichment_schema_failure: %s"
+                                      % (rec.get("schema_errors") or [])[:1]})
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--out-dir", default="data/runtime/ai_safety/stage8c_trial")
@@ -686,31 +906,26 @@ def main(argv=None):
 
     prov = _flash_provider()
     telemetry = {}
-    safety_stats = {"social": {"checked": 0, "pre_pass": 0, "pre_fail": 0,
-                               "auto_corrected": 0, "post_pass": 0, "hold": 0,
+    safety_stats = {"social": {"checked": 0, "enrichment_schema_failure": 0,
+                               "attribution_pre_pass": 0, "attribution_pre_fail": 0,
+                               "attribution_auto_corrected": 0,
+                               "attribution_post_pass": 0, "attribution_hold": 0,
                                "manual_review_required": 0},
-                    "disease": {"checked": 0, "pre_pass": 0, "pre_fail": 0,
-                                "auto_corrected": 0, "post_pass": 0, "hold": 0,
+                    "disease": {"checked": 0, "enrichment_schema_failure": 0,
+                                "attribution_pre_pass": 0, "attribution_pre_fail": 0,
+                                "attribution_auto_corrected": 0,
+                                "attribution_post_pass": 0, "attribution_hold": 0,
                                 "manual_review_required": 0}}
     enrichment_records = []
+    schema_held = []  # §十一：enrichment schema failure 记录（不调 Prompt，fail-closed）
 
     # §六 1) Social enrichment + safety
     for i, e in enumerate(inputs["social_candidates"]):
         label = "S%02d_%s" % (i + 1, (e.get("event_id") or "x")[-8:])
         rec = enrich_and_safe(prov, "stage4_event_enrichment", e, label, telemetry)
         rec["event_id"] = e.get("event_id")
-        g = "social"
-        s = safety_stats[g]
-        s["checked"] += 1
-        if rec.get("status") == "ok":
-            safe = rec["safety"]
-            s["pre_pass"] += 1 if safe["pre_status"] == "PASS" else 0
-            s["pre_fail"] += 1 if safe["pre_status"] == "FAIL" else 0
-            s["post_pass"] += 1 if safe["post_status"] == "PASS" else 0
-            s["auto_corrected"] += 1 if safe["corrections"] else 0
-        else:
-            s["hold"] += 1
-            s["manual_review_required"] += 1
+        rec["country_code"] = e.get("country_code")
+        _tally(rec, "social", safety_stats["social"], e.get("event_id"), schema_held)
         enrichment_records.append(rec)
         print("  [enrich] %-16s status=%s gate=%s" % (
             label, rec.get("status"),
@@ -721,18 +936,8 @@ def main(argv=None):
         label = "D%02d_%s" % (i + 1, (d.get("disease_event_id") or "x")[-8:])
         rec = enrich_and_safe(prov, "disease_summary", d, label, telemetry)
         rec["disease_event_id"] = d.get("disease_event_id")
-        g = "disease"
-        s = safety_stats[g]
-        s["checked"] += 1
-        if rec.get("status") == "ok":
-            safe = rec["safety"]
-            s["pre_pass"] += 1 if safe["pre_status"] == "PASS" else 0
-            s["pre_fail"] += 1 if safe["pre_status"] == "FAIL" else 0
-            s["post_pass"] += 1 if safe["post_status"] == "PASS" else 0
-            s["auto_corrected"] += 1 if safe["corrections"] else 0
-        else:
-            s["hold"] += 1
-            s["manual_review_required"] += 1
+        rec["country_code"] = d.get("country_iso3")
+        _tally(rec, "disease", safety_stats["disease"], d.get("disease_event_id"), schema_held)
         enrichment_records.append(rec)
         print("  [enrich] %-16s status=%s gate=%s" % (
             label, rec.get("status"),
@@ -740,6 +945,7 @@ def main(argv=None):
 
     (out_dir / "safety_layer_trial.json").write_text(
         json.dumps({"safety_stats": safety_stats,
+                    "enrichment_schema_held": schema_held,
                     "enrichment_records": [{k: v for k, v in r.items()
                                             if k != "safety" or True} for r in enrichment_records]},
                    ensure_ascii=False, indent=1), encoding="utf-8")
@@ -812,7 +1018,8 @@ def main(argv=None):
                     }, ensure_ascii=False, indent=1), encoding="utf-8")
 
     # Human review pack
-    build_human_review_pack(inputs, enrichment_records, reports, stats, out_dir)
+    build_human_review_pack(inputs, enrichment_records, reports, stats, out_dir,
+                            safety_stats, schema_held)
 
     # manual_trial_summary.json
     summary = {
@@ -823,10 +1030,37 @@ def main(argv=None):
         "ai_calls": sum(v.get("calls", 0) for v in telemetry.values()),
         "input_stats": stats,
         "safety_stats": safety_stats,
+        "enrichment_schema_held": schema_held,
+        # §十二（Repair）：Human Review completeness——区分"模型没写"与"上游被 Gate 拦住"
+        "review_completeness": {
+            "input_records_total": (stats.get("social_eligible_total", 0) +
+                                    stats.get("disease_eligible_total", 0)),
+            "input_records_accepted": len(eligible_social) + len(eligible_disease),
+            "enrichment_schema_held": len(schema_held),
+            "attribution_held": (safety_stats["social"]["attribution_hold"] +
+                                  safety_stats["disease"]["attribution_hold"]),
+            "report_input_final_count": {
+                "africa_daily": sum(len(v) for v in
+                                     (reports.get("africa_daily", {}).get("report_input") or {})
+                                     .get("sections", {}).values()
+                                     if isinstance(v, list)),
+                "tcd_weekly": sum(len(v) for v in
+                                  (reports.get("tcd_weekly", {}).get("report_input") or {})
+                                  .get("sections", {}).values()
+                                  if isinstance(v, list)),
+                "ssd_weekly": sum(len(v) for v in
+                                  (reports.get("ssd_weekly", {}).get("report_input") or {})
+                                  .get("sections", {}).values()
+                                  if isinstance(v, list)),
+            },
+            "held_records": schema_held,
+        },
         "reports": {k: {"status": v.get("status"),
                         "machine_gate_status": v.get("machine_gate_status"),
                         "machine_gate": v.get("machine_gate"),
                         "quality_status": v.get("quality_status"),
+                        "gate_exception": v.get("gate_exception"),
+                        "numeric_unsupported": (v.get("numeric_unsupported") or [])[:5],
                         "reason": v.get("error") or None}
                     for k, v in reports.items()},
         "ready_for_human_review": all(

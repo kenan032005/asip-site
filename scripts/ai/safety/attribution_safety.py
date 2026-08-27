@@ -325,6 +325,9 @@ def _find_numeric_assertions(output, input_payload):
     """数字级检查：输出中陈述 input 数字的句子若无不确定性限定 → 返回失败列表。
 
     返回 list[ {field, sentence, number_desc, failure_reason} ]。
+
+    §七（Repair）：仅扫描 user-facing natural language 字段
+    （id/url/日期/enum/数字 raw 字段不参与数字句判定）。
     """
     nums = _numeric_fields_of(input_payload)
     if not nums:
@@ -341,6 +344,9 @@ def _find_numeric_assertions(output, input_payload):
             for i, v in enumerate(node):
                 walk(v, "%s[%d]" % (path, i) if path else "[%d]" % i)
         elif isinstance(node, str):
+            # §七：非 user-facing 字段（id/url/日期/enum/数字 raw）跳过
+            if not _leaf_is_user_facing(path):
+                return
             for sent in _split_sentences(node):
                 for f, n in nums:
                     if str(n) in sent:
@@ -421,6 +427,53 @@ def validate_attribution(input_payload, output, markers=None):
 # Deterministic Correction（§五-§八）
 # ────────────────────────────────────────────────────────────────────────────
 
+# §七（Repair）：Safety correction 只允许作用于 USER-FACING NATURAL LANGUAGE
+# 字段。以真实 schema 字段为准：
+#   enrichment: title_zh / summary_zh / key_facts[].fact / uncertainties[]
+#   disease   : title_zh / summary_zh / key_changes[].description / uncertainties[]
+#   report    : headline_zh / fact_summary / assessment / outlook
+# 禁止修改：*_id / event_id / disease_event_id / source_id / source_refs / url /
+#   timestamps / 日期 metadata / country_iso3 / enum 字段 / 数字 raw 字段。
+_USER_FACING_LEAF_FIELDS = (
+    "title_zh", "summary_zh", "summary", "summary_cn", "fact_summary",
+    "headline_zh", "assessment", "outlook", "what_happened",
+    "fact", "description", "text", "body_extracted", "uncertainties")
+_FORBIDDEN_LEAF_HINTS = (
+    "_id", "url", "iso3", "code", "timestamp", "time", "date", "week_start",
+    "week_end", "period", "count", "cases", "deaths", "recoveries", "status",
+    "type", "location", "lat", "long", "score", "confidence")
+
+
+def _leaf_is_user_facing(field_path):
+    """字段路径叶子是否属于 user-facing 自然语言 allowlist（§七 Repair）。"""
+    leaf = (field_path or "").split(".")[-1]
+    leaf = re.sub(r"\[\d+\]", "", leaf)
+    if leaf in _USER_FACING_LEAF_FIELDS:
+        return True
+    if any(h in leaf for h in _FORBIDDEN_LEAF_HINTS):
+        return False
+    return False
+
+
+def _fact_mapping_confirmed(input_payload, n):
+    """§八（Repair）Fact-Aware：数字 n 必须可映射到 input 的
+    unconfirmed/suspected 数字事实字段（或 uncertainties 提及），才允许 B2 修正。
+    返回 (ok, field)。"""
+    if not isinstance(input_payload, dict):
+        return False, None
+    for f in ("suspected_cases", "probable_cases", "total_cases",
+              "confirmed_cases", "deaths", "recoveries"):
+        v = input_payload.get(f)
+        if isinstance(v, (int, float)) and int(v) == n:
+            return True, f
+    unc = input_payload.get("uncertainties")
+    if isinstance(unc, list):
+        for u in unc:
+            if str(n) in str(u):
+                return True, "uncertainties"
+    return False, None
+
+
 def _numeric_anchor_ok(input_payload, output):
     """数字级锚定：unconfirmed 数字 marker 的数字是否在输出出现。
     支持中文单位（50000 ↔ 5万）。返回 (ok, number_desc)。"""
@@ -468,9 +521,25 @@ def _deterministic_correction(input_payload, output, markers, failed_checks,
         return [], out, False
 
     # ── 数字句就地修正（SAFETY-CORR-B2）：数字被确定化 → 句尾插入限定 ──
+    # §七（Repair）：仅 user-facing 自然语言字段可修；id/url/日期/enum/数字
+    # raw 字段不可变。§八（Repair）：数字必须能映射 input unconfirmed 事实。
     for nf in numeric_failures:
         field_path = nf["field"]
         sent = nf["sentence"]
+        # §七：allowlist 边界
+        if not _leaf_is_user_facing(field_path):
+            continue  # 非 user-facing 字段（如 *_id）→ 不修正（由 validator 另行判定）
+        # §八：fact-aware——数字必须映射 input unconfirmed 数字事实
+        num_val = None
+        nd = nf.get("number_desc") or ""
+        mnum = re.search(r"(\d+)", nd)
+        if mnum:
+            num_val = int(mnum.group(1))
+        if num_val is not None:
+            fm_ok, _fm_field = _fact_mapping_confirmed(input_payload, num_val)
+            if not fm_ok:
+                # 无法确认自然语言句 ↔ unconfirmed 事实映射 → 不自动修（HOLD 交由上层）
+                continue
         parts = [p for p in field_path.split(".") if p] if field_path else []
         if not parts:
             return [], out, False

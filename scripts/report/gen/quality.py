@@ -211,6 +211,18 @@ def _source_ids_from_input(report_input):
     return ids
 
 
+def _iter_report_items(report, sec):
+    """迭代 section items（fail-closed：非 dict item 报 malformed，不崩溃不宽松）。"""
+    items, malformed = [], []
+    for it in report.get(sec, []) or []:
+        if not isinstance(it, dict):
+            malformed.append("malformed_section: %s item 非对象: %r"
+                             % (sec, str(it)[:40]))
+            continue
+        items.append(it)
+    return items, malformed
+
+
 def run_quality_gate(report, report_input, task_type, schema=None):
     """确定性 Quality Gate。返回 (passed, status, issues[])。
 
@@ -236,7 +248,9 @@ def run_quality_gate(report, report_input, task_type, schema=None):
     for sec in ("executive_summary", "major_security_developments",
                 "political_social_stability", "terrorism_armed_violence",
                 "cross_border_regional_risks"):
-        for it in report.get(sec, []) or []:
+        items, mal = _iter_report_items(report, sec)
+        issues.extend(mal)
+        for it in items:
             c = it.get("country_iso3")
             if c and c not in _AFRICA_ISO3:
                 issues.append("country: %s 非有效 ISO3" % c)
@@ -246,7 +260,9 @@ def run_quality_gate(report, report_input, task_type, schema=None):
     for sec_name in ("executive_summary", "major_security_developments",
                      "political_social_stability", "terrorism_armed_violence",
                      "cross_border_regional_risks", "public_health_disease_risks"):
-        for it in report.get(sec_name, []) or []:
+        items, mal = _iter_report_items(report, sec_name)
+        issues.extend(mal)
+        for it in items:
             for sr in it.get("source_refs", []) or []:
                 sid = sr.get("source_id")
                 if sid and sid not in in_src:
@@ -254,7 +270,7 @@ def run_quality_gate(report, report_input, task_type, schema=None):
                 if sr.get("url") and "http" not in str(sr.get("url")):
                     issues.append("source_ref: 非法 url %r" % sr.get("url"))
     for sn in report.get("source_notes", []) or []:
-        if sn.get("source_id") and sn["source_id"] not in in_src:
+        if isinstance(sn, dict) and sn.get("source_id") and sn["source_id"] not in in_src:
             issues.append("source_notes: %s 不在 input 来源中" % sn["source_id"])
 
     # 6. rejected 不得出现（input 侧保证；此处防御）
@@ -265,7 +281,9 @@ def run_quality_gate(report, report_input, task_type, schema=None):
     for sec in ("executive_summary", "major_security_developments",
                 "political_social_stability", "terrorism_armed_violence",
                 "cross_border_regional_risks"):
-        for it in report.get(sec, []) or []:
+        items, mal = _iter_report_items(report, sec)
+        issues.extend(mal)
+        for it in items:
             if it.get("single_source_warning") and \
                     not _has_uncertainty_marker(it, ("单一来源", "single-source", "尚待进一步核实")):
                 warnings.append("single_source: %s 需显式标注单一来源" % it.get("item_id"))
@@ -274,12 +292,17 @@ def run_quality_gate(report, report_input, task_type, schema=None):
     for sec in ("executive_summary", "major_security_developments",
                 "political_social_stability", "terrorism_armed_violence",
                 "cross_border_regional_risks"):
-        for it in report.get(sec, []) or []:
+        items, mal = _iter_report_items(report, sec)
+        issues.extend(mal)
+        for it in items:
             if it.get("conflicting") and _has_uncertainty_marker(it, ("已证实", "confirmed", "确认属实")):
                 issues.append("conflict: %s 不得将冲突信息写成已证实" % it.get("item_id"))
 
     # 9. Disease 数字不得改变（§九）：latest_counts 回显一致
     for it in report.get("public_health_disease_risks", []) or []:
+        if not isinstance(it, dict):
+            issues.append("malformed_section: public_health_disease_risks item 非对象")
+            continue
         lc = it.get("latest_counts") or {}
         for k, v in lc.items():
             if v is None:
@@ -312,7 +335,9 @@ def run_quality_gate(report, report_input, task_type, schema=None):
     for sec in ("executive_summary", "major_security_developments",
                 "political_social_stability", "terrorism_armed_violence",
                 "cross_border_regional_risks", "public_health_disease_risks"):
-        for it in report.get(sec, []) or []:
+        items, mal = _iter_report_items(report, sec)
+        issues.extend(mal)
+        for it in items:
             for key in _PREDICT_SCAN_KEYS:
                 text = it.get(key)
                 if isinstance(text, list):
@@ -341,7 +366,9 @@ def run_quality_gate(report, report_input, task_type, schema=None):
     for sec in ("executive_summary", "major_security_developments",
                 "political_social_stability", "terrorism_armed_violence",
                 "cross_border_regional_risks"):
-        for it in report.get(sec, []) or []:
+        items, mal = _iter_report_items(report, sec)
+        issues.extend(mal)
+        for it in items:
             me = it.get("master_event_id")
             if me:
                 if me in seen_me:

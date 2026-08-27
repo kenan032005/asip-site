@@ -9,24 +9,50 @@ import re
 import json
 
 
-def validate_against_schema(instance, schema, path="$"):
+def validate_against_schema(instance, schema, path="$", resolve_refs=False):
     """Validate instance against JSON Schema Draft-07 subset.
 
     Returns list of error strings. Empty list = valid.
 
     Supports: type, required, properties, additionalProperties, items,
-    enum, pattern, minLength, maxLength, minimum, maximum, uniqueItems.
+    enum, pattern, minLength, maxLength, minimum, maximum, uniqueItems,
+    $ref（#/definitions/<name> 内部引用）。
+
+    resolve_refs=False（默认）：$ref 不解析（历史宽松行为，Stage8B/8A 既有
+    路径不变，避免暴露 fixture/视图数据的历史不合规）。
+    resolve_refs=True：解析 $ref，items 类型/required 检查真正生效
+    （Stage8C Package2 Repair：report final schema 验证缺口关闭，str[]
+    等违规结构被正确拦截）。
     """
     errors = []
-    _validate(instance, schema, path, errors)
+    _validate(instance, schema, path, errors, schema, resolve_refs)
     return errors
 
 
-def _validate(instance, schema, path, errors):
+def _resolve_ref(schema, root):
+    """解析 $ref（仅支持 #/definitions/<name> 内部引用）。循环安全。"""
+    seen = 0
+    while isinstance(schema, dict) and "$ref" in schema and seen < 8:
+        ref = schema["$ref"]
+        if not isinstance(ref, str) or not ref.startswith("#/definitions/"):
+            break
+        name = ref[len("#/definitions/"):]
+        target = (root or {}).get("definitions", {}).get(name)
+        if not isinstance(target, dict):
+            break  # ref 目标缺失 → 保持原样（避免误伤）
+        schema = target
+        seen += 1
+    return schema
+
+
+def _validate(instance, schema, path, errors, root=None, resolve_refs=False):
     """Recursive validation."""
     if not isinstance(schema, dict):
         errors.append("%s: schema must be an object" % path)
         return
+    # §：$ref 解析（resolve_refs=True 时；Stage8C Package2 Repair）
+    if resolve_refs:
+        schema = _resolve_ref(schema, root)
 
     # type check
     ptype = schema.get("type")
@@ -63,14 +89,14 @@ def _validate(instance, schema, path, errors):
 
     # object constraints
     if isinstance(instance, dict) and schema.get("type") == "object":
-        _validate_object(instance, schema, path, errors)
+        _validate_object(instance, schema, path, errors, root, resolve_refs)
 
     # array constraints
     if isinstance(instance, list) and schema.get("type") == "array":
-        _validate_array(instance, schema, path, errors)
+        _validate_array(instance, schema, path, errors, root, resolve_refs)
 
 
-def _validate_object(instance, schema, path, errors):
+def _validate_object(instance, schema, path, errors, root=None, resolve_refs=False):
     props = schema.get("properties", {})
     # additionalProperties
     ap = schema.get("additionalProperties")
@@ -89,10 +115,10 @@ def _validate_object(instance, schema, path, errors):
         if prop_name not in instance:
             continue
         _validate(instance[prop_name], prop_schema,
-                  "%s.%s" % (path, prop_name), errors)
+                  "%s.%s" % (path, prop_name), errors, root, resolve_refs)
 
 
-def _validate_array(instance, schema, path, errors):
+def _validate_array(instance, schema, path, errors, root=None, resolve_refs=False):
     items_schema = schema.get("items")
     if items_schema is None:
         return
@@ -104,12 +130,14 @@ def _validate_array(instance, schema, path, errors):
             errors.append("%s: items must be unique" % path)
 
     if isinstance(items_schema, dict):
+        if resolve_refs:
+            items_schema = _resolve_ref(items_schema, root)
         for i, item in enumerate(instance):
-            _validate(item, items_schema, "%s[%d]" % (path, i), errors)
+            _validate(item, items_schema, "%s[%d]" % (path, i), errors, root, resolve_refs)
     elif isinstance(items_schema, list):
         for i, item in enumerate(instance):
             if i < len(items_schema):
-                _validate(item, items_schema[i], "%s[%d]" % (path, i), errors)
+                _validate(item, items_schema[i], "%s[%d]" % (path, i), errors, root, resolve_refs)
 
 
 def _type_match(instance, expected):
