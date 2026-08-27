@@ -1,0 +1,81 @@
+{
+ "case_id": "D1",
+ "category": "disease_cholera",
+ "task_type": "disease_summary",
+ "semantic": "cholera 高数字 NGA deaths=338",
+ "run15_errors": [
+  "attribution_lost: input_markers=['suspected'] output_markers=[]"
+ ],
+ "run15_attribution_loss": true,
+ "input_payload": {
+  "disease_event_id": "DSEV_df9984f4005978cb",
+  "disease_id": "cholera",
+  "disease_name_en": "Cholera",
+  "disease_name_zh": "霍乱",
+  "pathogen": null,
+  "country_iso3": "NGA",
+  "admin1": null,
+  "admin2": null,
+  "location_raw": "national（博尔诺州为主）",
+  "cross_border": false,
+  "affected_countries": [],
+  "report_date": "2026-07-31",
+  "event_start_date": null,
+  "event_end_date": null,
+  "case_period_start": "2026-01-01",
+  "case_period_end": "2026-07-31",
+  "confirmed_cases": null,
+  "probable_cases": null,
+  "suspected_cases": null,
+  "total_cases": 50000,
+  "deaths": 338,
+  "recoveries": null,
+  "case_count_type": "source_total",
+  "outbreak_status": "active",
+  "update_type": "case_update",
+  "source_links": [
+   {
+    "url": "https://www.unicef.org.uk/press-releases/621006/",
+    "source_id": "unicef",
+    "source_name": "UNICEF UK",
+    "source_tier": "B"
+   }
+  ],
+  "primary_source": "UNICEF UK press release（引 NCDC）",
+  "source_tier": "B",
+  "verification_status": "official",
+  "verification_confidence": 90,
+  "previous_event_id": null,
+  "supersedes_event_id": null,
+  "data_quality_flags": [],
+  "uncertainties": [
+   "total_cases 为媒体转述 NCDC 累计值，未见 NCDC 原始通报全文"
+  ],
+  "created_at": "2026-08-26T03:23:44+08:00",
+  "updated_at": "2026-08-26T03:23:44+08:00"
+ },
+ "original_ai_output": {
+  "disease_event_id": "DSEV_df9984f4005978cb",
+  "title_zh": "尼日利亚霍乱疫情持续，累计病例达5万例",
+  "summary_zh": "尼日利亚霍乱疫情仍在活跃期，截至2026年7月31日累计报告5万例病例、338例死亡。据UNICEF UK新闻稿转述NCDC数据，疫情以博尔诺州为主，但具体分布细节尚未完全确认。",
+  "key_changes": [
+   {
+    "type": "case_update",
+    "description": "累计病例数达50000例",
+    "evidence_field": "total_cases"
+   },
+   {
+    "type": "mortality_update",
+    "description": "报告死亡338例",
+    "evidence_field": "deaths"
+   }
+  ],
+  "uncertainties": [
+   "total_cases 为媒体转述 NCDC 累计值，未见 NCDC 原始通报全文"
+  ],
+  "public_health_relevance": "direct",
+  "classification_confidence": 90
+ },
+ "expected_validator": "FAIL",
+ "source": "Run#15 ACTIONS_RUN_ID=33018481998"
+}
