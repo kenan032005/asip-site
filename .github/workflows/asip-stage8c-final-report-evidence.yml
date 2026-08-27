@@ -1,0 +1,345 @@
+name: ASIP Stage8C Final Report Evidence Run
+
+# Stage 8C Package 2 — FINAL 3-Call Report Evidence Run（§二/§十三）
+# 只验证 REPORT LAYER：Africa Daily=1 / TCD Weekly=1 / SSD Weekly=1。
+# 输入 ONLY = 3 份 hash 锁定的 Derived Report Input（derived_report_evidence_snapshot）。
+# 绝不执行：Social/Disease enrichment / Attribution Safety / Canonical refresh /
+# Source collection / Stage8B Qualification / End-to-End Trial。
+# 只允许 workflow_dispatch；不得 cron / push trigger / 自动 deploy。
+# 代码冻结：a724389972260765a5c1ddb44926e7dfbe86558d（完整 40 位 SHA，绝不 checkout main）。
+# Evidence 输入冻结：eee683bbb770f5f075b8273752808863e76c1a96（final-evidence 分支，字节与
+# 冻结 hash 逐字节一致；workflow 内执行前再次重算 hash，任何不一致立即 fail-closed）。
+# 唯一模型：deepseek-v4-flash，thinking=disabled（严禁 pro/chat/reasoner/fallback）。
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: asip-stage8c-final-report-evidence
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  ASIP_MODE: development
+  production_ai_provider_active: "false"
+  scheduled_collection: "false"
+  scheduled_ai_processing: "false"
+  scheduled_reports: "false"
+  automatic_deploy: "false"
+  browser_direct_api_call: "false"
+  # §四/§十五：Secret 只经 Actions env 注入；Python Provider 仅读 os.environ
+  ASIP_DEEPSEEK_API_KEY: ${{ secrets.ASIP_DEEPSEEK_API_KEY }}
+
+jobs:
+  report-evidence-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout frozen Package2 code (a724389)
+        uses: actions/checkout@v4
+        with:
+          ref: a724389972260765a5c1ddb44926e7dfbe86558d
+          fetch-depth: 1
+
+      - name: Checkout hash-locked evidence inputs (eee683b)
+        uses: actions/checkout@v4
+        with:
+          ref: eee683bbb770f5f075b8273752808863e76c1a96
+          path: evidence_src
+          fetch-depth: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Prepare derived inputs
+        run: |
+          python - <<'PY'
+          import pathlib, shutil
+          src = pathlib.Path("evidence_src/evidence/stage8c_trial2_recovery")
+          dst = pathlib.Path("data/runtime/stage8c_trial2_recovery")
+          (dst / "derived").mkdir(parents=True, exist_ok=True)
+          for f in ("derived/africa_daily_report_input.json",
+                    "derived/tcd_weekly_report_input.json",
+                    "derived/ssd_weekly_report_input.json",
+                    "derived/report_input_provenance.json",
+                    "derived/report_input_exclusions.json",
+                    "derived/counts_closure.json",
+                    "derived_report_evidence_manifest.json"):
+              shutil.copyfile(src / f, dst / f)
+          print("DERIVED_INPUTS_PREPARED = True")
+          PY
+
+      - name: Hash verification + runtime confirmation（失败即停，AI_CALLS=0）
+        run: |
+          python - <<'PY'
+          import hashlib, os, pathlib
+          d = pathlib.Path("data/runtime/stage8c_trial2_recovery/derived")
+          exp = {
+              "africa_daily_report_input.json":
+                  "f51fe2f548eca356f37f35450360fbe0a15faf6b886c857d2107972557afcc49",
+              "tcd_weekly_report_input.json":
+                  "89d1c42a79a174f775f4c3b80bc1c4264feea7b7629d4b83782c5ec8d429d948",
+              "ssd_weekly_report_input.json":
+                  "1ff941f38e9fb0393dc683b1c82bb4bcc04b5bbc305d80de0d276cd08806f3e8",
+          }
+          exp_agg = "efad13db07fb3a29015669bba17c49f38d5d5636fa40fc2f77f2f39e503a7caa"
+          blob = b""
+          for f, want in exp.items():
+              data = (d / f).read_bytes().replace(b"\r\n", b"\n")
+              blob += data
+              sha = hashlib.sha256(data).hexdigest()
+              ok = sha == want
+              print("HASH %-40s %s %s" % (f, sha[:16], "OK" if ok else "MISMATCH"))
+              if not ok:
+                  raise SystemExit("HASH_MISMATCH " + f)
+          agg = hashlib.sha256(blob).hexdigest()
+          print("AGGREGATE %s %s" % (agg[:16], "OK" if agg == exp_agg else "MISMATCH"))
+          if agg != exp_agg:
+              raise SystemExit("AGG_HASH_MISMATCH")
+          cred = bool(os.environ.get("ASIP_DEEPSEEK_API_KEY", "").strip())
+          print("credential_available = " + str(cred).lower())
+          print("requested_model = deepseek-v4-flash")
+          print("thinking = disabled")
+          print("browser_direct_api_call = false")
+          if not cred:
+              raise SystemExit("CREDENTIAL_INJECTION_FAILED")
+          print("HASH_VERIFIED_AND_CREDENTIAL_OK")
+          PY
+
+      - name: 3-call report evidence run + full evidence persistence + human review pack
+        run: |
+          python - <<'PY'
+          import hashlib, json, pathlib, sys
+          ROOT = pathlib.Path(".").resolve()
+          sys.path.insert(0, str(ROOT))
+          from scripts.ai.safety import manual_trial as mt
+          from scripts.ai.safety import report_evidence_recovery as rer
+
+          DERIVED = ROOT / "data/runtime/stage8c_trial2_recovery/derived"
+          OUT = ROOT / "data/runtime/stage8c_trial2_recovery/evidence_run"
+          OUT.mkdir(parents=True, exist_ok=True)
+          RUN_ID = "33066148566"
+
+          def _collect(assembled, keys):
+              out = []
+              if isinstance(assembled, dict):
+                  for k, v in assembled.items():
+                      if k in keys and isinstance(v, (str, int, float)) and v not in ("", None):
+                          out.append(v)
+                      else:
+                          out.extend(_collect(v, keys))
+              elif isinstance(assembled, list):
+                  for x in assembled:
+                      out.extend(_collect(x, keys))
+              return list(dict.fromkeys(str(x) for x in out))
+
+          def _num_class(entry):
+              st = entry.get("semantic_type")
+              if st == "unsupported":
+                  return "TRUE_UNSUPPORTED_AI_NUMBER"
+              if st == "metadata_date":
+                  return "METADATA_DATE_NUMBER"
+              if st == "identifier":
+                  return "EXCLUDED_IDENTIFIER"
+              return "SUPPORTED_INPUT_NUMBER"
+
+          prov = mt._flash_provider()
+          telemetry = {}
+          results = {}
+          for tt, label, fname, prompt_rel, key in rer.JOBS:
+              ri = json.loads((DERIVED / fname).read_text(encoding="utf-8"))
+              r = mt.generate_report(prov, tt, ri, ROOT / prompt_rel, label, telemetry,
+                                     raw_path=OUT / ("%s_raw_response.json" % key))
+              r["report_input"] = ri
+              results[key] = r
+              (OUT / ("%s_report_result.json" % key)).write_text(
+                  json.dumps(r, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+              print("[report] %-12s status=%s machine_gate=%s" % (
+                  label, r.get("status"), r.get("machine_gate_status")))
+
+          total = sum(v.get("calls", 0) for v in telemetry.values())
+          task_types = sorted(telemetry.keys())
+          print("REPORT_CASE_CALLS =", total)
+          print("TOTAL_PROVIDER_ATTEMPTS =", total)
+          print("TASK_TYPES =", task_types)
+          if total != 3 or any(t in task_types for t in
+                               ("stage4_event_enrichment", "disease_summary")):
+              raise SystemExit("REPORT_CALL_VIOLATION calls=%d types=%s" % (total, task_types))
+          if any(v.get("reasoning_tokens") is not None for v in results.values()):
+              raise SystemExit("REASONING_TOKENS_VIOLATION")
+
+          (OUT / "provider_telemetry.json").write_text(json.dumps(
+              {"source_run": RUN_ID, "total_api_calls": total, "telemetry": telemetry},
+              ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+
+          # ── Human Review Pack（§十二；不得润色模型文本）──
+          md = ["# ASIP Stage 8C Package 2 — Final Report Evidence Run (Human Review Pack)",
+                "",
+                "> THIS IS A DERIVED EVIDENCE SNAPSHOT.",
+                "> NOT HISTORICAL RUN#4 REPORT INPUT.",
+                "> 人工验收可裁定：report-generation fidelity / factual consistency / "
+                "numeric fidelity / attribution / assessment quality / outlook discipline / "
+                "readability / low-data behavior。",
+                "> 不得裁定：historical coverage completeness / live-source freshness / "
+                "real-time operational coverage（进入 Package3 live/shadow validation）。",
+                ""]
+          for key in ("africa_daily", "tcd_weekly", "ssd_weekly"):
+              r = results[key]
+              ri = r.get("report_input") or {}
+              assembled = r.get("assembled_report") or {}
+              sha = hashlib.sha256(json.dumps(ri, ensure_ascii=False).encode()).hexdigest()
+              md += [
+                  "## %s" % key.upper(),
+                  "### SNAPSHOT_METADATA",
+                  "```json\n%s\n```" % json.dumps({
+                      "snapshot_type": "derived_report_evidence_snapshot",
+                      "source_run": RUN_ID,
+                      "historical_report_input_equivalence": False,
+                      "reconstruction_claim": "none"}, ensure_ascii=False, indent=1),
+                  "### INPUT_SHA256", "```\n%s\n```" % sha,
+                  "### FULL_REPORT_INPUT",
+                  "```json\n%s\n```" % json.dumps(ri, ensure_ascii=False, indent=1)[:60000],
+                  "### RAW_AI_RESPONSE",
+                  "```json\n%s\n```" % json.dumps(
+                      r.get("raw_response") or {"raw_content": r.get("raw_content") or "",
+                                                "raw_content_length": r.get("raw_content_length", 0)},
+                      ensure_ascii=False, indent=1)[:40000],
+                  "### PARSED_AI_CONTENT",
+                  "```json\n%s\n```" % json.dumps(
+                      r.get("parsed_ai_content") or r.get("schema_failure_evidence")
+                      or r.get("final_schema_errors") or {}, ensure_ascii=False, indent=1)[:40000],
+                  "### FINAL_ASSEMBLED_REPORT",
+                  "```json\n%s\n```" % json.dumps(assembled, ensure_ascii=False, indent=1)[:60000],
+                  "### FACT_SUMMARY",
+                  "```json\n%s\n```" % json.dumps(
+                      _collect(assembled, ("fact_summary", "headline_zh", "title")),
+                      ensure_ascii=False, indent=1)[:20000],
+                  "### ASSESSMENT",
+                  "```json\n%s\n```" % json.dumps(
+                      _collect(assembled, ("assessment", "executive_assessment",
+                                           "overall_assessment")),
+                      ensure_ascii=False, indent=1)[:20000],
+                  "### OUTLOOK",
+                  "```json\n%s\n```" % json.dumps(
+                      _collect(assembled, ("outlook", "next_week_watch_items")),
+                      ensure_ascii=False, indent=1)[:20000],
+                  "### VERIFICATION",
+                  "```json\n%s\n```" % json.dumps(
+                      _collect(assembled, ("verification", "verification_status")),
+                      ensure_ascii=False, indent=1)[:20000],
+                  "### UNCERTAINTIES",
+                  "```json\n%s\n```" % json.dumps(
+                      _collect(assembled, "uncertainties"), ensure_ascii=False, indent=1)[:20000],
+                  "### SOURCE_REFS",
+                  "```json\n%s\n```" % json.dumps(
+                      _collect(assembled, ("source_refs", "source_name")),
+                      ensure_ascii=False, indent=1)[:20000],
+                  "### SCHEMA_DIAGNOSTICS",
+                  "```json\n%s\n```" % json.dumps({
+                      "strict_json": r.get("strict_json"),
+                      "ai_content_schema_pass": r.get("ai_content_schema_pass"),
+                      "schema_errors": r.get("schema_errors") or r.get("final_schema_errors") or [],
+                      "assembler_pass": r.get("assembler_pass"),
+                      "final_schema_pass": r.get("final_schema_pass"),
+                      "metadata_gate": r.get("metadata_gate"),
+                      "quality_status": r.get("quality_status"),
+                      "quality_issues": r.get("quality_issues") or [],
+                      "gate_exception": r.get("gate_exception")}, ensure_ascii=False, indent=1),
+                  "### NUMERIC_PROVENANCE",
+                  "```json\n%s\n```" % json.dumps([
+                      {"output_value": e.get("output_value"),
+                       "output_field": e.get("output_field"),
+                       "classification": _num_class(e),
+                       "matched_input_path": e.get("matched_input_path"),
+                       "semantic_type": e.get("semantic_type")}
+                      for e in (r.get("numeric_provenance") or [])], ensure_ascii=False, indent=1),
+                  "### NUMERIC_UNSUPPORTED",
+                  "```json\n%s\n```" % json.dumps(
+                      r.get("numeric_unsupported") or [], ensure_ascii=False, indent=1),
+                  "### MACHINE_GATE",
+                  "```json\n%s\n```" % json.dumps({
+                      "machine_gate": r.get("machine_gate"),
+                      "machine_gate_status": r.get("machine_gate_status"),
+                      "status": r.get("status"),
+                      "attribution_pass": r.get("attribution_pass")}, ensure_ascii=False, indent=1),
+                  ""]
+          md += ["## TELEMETRY",
+                 "```json\n%s\n```" % json.dumps(telemetry, ensure_ascii=False, indent=1), ""]
+          (OUT / "human_review_pack.md").write_text("\n".join(md), encoding="utf-8")
+
+          gates = {k: ("PASS" if v.get("machine_gate_status") == "PASS" else "FAIL")
+                   for k, v in results.items()}
+          summary = {
+              "report_case_calls": total,
+              "total_provider_attempts": total,
+              "task_types": task_types,
+              "machine_gates": gates,
+              "statuses": {k: v.get("status") for k, v in results.items()},
+              "quality_statuses": {k: v.get("quality_status") for k, v in results.items()},
+              "unsupported_numbers": {k: len(v.get("numeric_unsupported") or [])
+                                      for k, v in results.items()},
+              "reasoning_tokens_all_null": True,
+              "human_review_pack": "data/runtime/stage8c_trial2_recovery/evidence_run/human_review_pack.md",
+          }
+          (OUT / "evidence_run_summary.json").write_text(
+              json.dumps(summary, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+          print("MACHINE_GATES =", json.dumps(gates, ensure_ascii=False))
+          print("QUALITY_STATUSES =", json.dumps(summary["quality_statuses"], ensure_ascii=False))
+          print("UNSUPPORTED_NUMBERS =", json.dumps(summary["unsupported_numbers"], ensure_ascii=False))
+          PY
+
+      - name: Secret scan（§十六：repo/artifacts/logs 零泄漏；失败也执行）
+        if: always()
+        run: |
+          python - <<'PY'
+          import pathlib, re
+          pats = re.compile(
+              r"ASIP_DEEPSEEK_API_KEY\s*=\s*[A-Za-z0-9]|sk-[A-Za-z0-9]{16,}|"
+              r"Bearer\s+[A-Za-z0-9._-]{16,}", re.I)
+          hits = []
+          for p in pathlib.Path(".").rglob("*"):
+              if p.is_file() and p.suffix in (".json", ".md", ".txt", ".yml", ".yaml", ".py", ".log", ".env"):
+                  try:
+                      txt = p.read_text(encoding="utf-8", errors="ignore")
+                  except Exception:
+                      continue
+                  for m in pats.finditer(txt):
+                      hits.append(str(p))
+          print("secret_leak_count = " + str(len(hits)))
+          if hits:
+              raise SystemExit("secret leak detected: %s" % hits[:5])
+          PY
+
+      - name: Upload evidence artifacts（失败也上传，§十二）
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage8c-final-report-evidence
+          path: data/runtime/stage8c_trial2_recovery/evidence_run/
+          if-no-files-found: warn
+
+      - name: Package2 verdict（§十四/§十七）
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, pathlib, sys
+          f = pathlib.Path("data/runtime/stage8c_trial2_recovery/evidence_run/evidence_run_summary.json")
+          if not f.exists():
+              print("VERDICT_NO_SUMMARY")
+              sys.exit(1)
+          s = json.loads(f.read_text(encoding="utf-8"))
+          g = s["machine_gates"]
+          print("AFRICA_DAILY_MACHINE_GATE = " + g.get("africa_daily", "FAIL"))
+          print("TCD_WEEKLY_MACHINE_GATE = " + g.get("tcd_weekly", "FAIL"))
+          print("SSD_WEEKLY_MACHINE_GATE = " + g.get("ssd_weekly", "FAIL"))
+          print("REPORT_CASE_CALLS = " + str(s["report_case_calls"]))
+          print("TOTAL_PROVIDER_ATTEMPTS = " + str(s["total_provider_attempts"]))
+          allpass = all(v == "PASS" for v in g.values())
+          print("REPORT_LAYER_MACHINE_QUALIFICATION = " + ("PASS" if allpass else "FAIL"))
+          print("READY_FOR_HUMAN_REVIEW = " + str(allpass).lower())
+          print("READY_FOR_CHATGPT_USER_REVIEW = " + str(allpass).lower())
+          sys.exit(0 if allpass else 1)
+          PY
