@@ -95,8 +95,8 @@ jobs:
       - name: Commit state → production-state branch
         run: |
           cp -r data/runtime/ops/* state_src/data/runtime/ops/ 2>/dev/null || true
-          cp -r data/canonical state_src/data/canonical 2>/dev/null || true
-          cp -r data/disease state_src/data/disease 2>/dev/null || true
+          cp -rf data/canonical/. state_src/data/canonical/ 2>/dev/null || true
+          cp -rf data/disease/. state_src/data/disease/ 2>/dev/null || true
           cd state_src
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
