@@ -990,8 +990,10 @@ def main(argv=None):
         r["report_input"] = rinput
         r["safety_summary"] = {"eligible_social": len(eligible_social),
                                "eligible_disease": len(eligible_disease),
-                               "hold": safety_stats["social"]["hold"] +
-                                      safety_stats["disease"]["hold"]}
+                               "attribution_hold": (safety_stats["social"]["attribution_hold"] +
+                                                    safety_stats["disease"]["attribution_hold"]),
+                               "enrichment_schema_held": (safety_stats["social"]["enrichment_schema_failure"] +
+                                                          safety_stats["disease"]["enrichment_schema_failure"])}
         r["raw_ai_content"] = r.get("parsed") or r.get("raw_ai_content")
         reports[key] = r
         print("  [report] %-12s status=%s machine_gate=%s" % (
