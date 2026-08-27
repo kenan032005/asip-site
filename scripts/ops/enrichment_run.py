@@ -42,9 +42,46 @@ def _eligible_items(kind):
     return items
 
 
+def _write_back_canonical(kind, fid, summary, data_dir=None):
+    """§十八 Public Admission：safety gate PASS 记录回写 canonical。
+
+    social → data/canonical/event_clusters.json；
+    disease → data/disease/canonical/outbreak_events.json。
+    只添加字段（public_eligible/master_event_id/enrichment_*/safety），
+    不删除/覆盖既有字段。data_dir 可注入（测试隔离用临时副本）。
+    """
+    root = Path(data_dir) if data_dir else DATA
+    if kind == "social":
+        p = root / "canonical" / "event_clusters.json"
+        fid_field = "event_id"
+    else:
+        p = root / "disease" / "canonical" / "outbreak_events.json"
+        fid_field = "disease_event_id"
+    if not p.exists():
+        return False
+    doc = json.loads(p.read_text(encoding="utf-8"))
+    items = doc.get("items", [])
+    changed = 0
+    for it in items:
+        if it.get(fid_field) == fid:
+            it["public_eligible"] = True
+            it["master_event_id"] = it.get("master_event_id") or fid
+            it["enrichment_status"] = "safety_gate_pass"
+            it["enriched_at"] = ps._utcnow_iso()
+            it["safety"] = summary
+            changed += 1
+    if changed:
+        p.write_text(json.dumps(doc, ensure_ascii=False, indent=1) + "\n",
+                     encoding="utf-8")
+    return bool(changed)
+
+
 def run_enrichment(kind, provider=None, state=None, ops_run=None, emit=lambda s: print(s),
-                   max_items=0):
-    """kind: social | disease。增量处理（content hash 幂等）。"""
+                   max_items=0, write_back=True, data_dir=None):
+    """kind: social | disease。增量处理（content hash 幂等）。
+
+    write_back：safety PASS 记录回写 canonical（§十八；测试可关闭或注入 data_dir）。
+    """
     state = state or ps.load_state()
     kind_key = "social_enrichment" if kind == "social" else "disease_enrichment"
     task_type = "stage4_event_enrichment" if kind == "social" else "disease_summary"
@@ -82,6 +119,12 @@ def run_enrichment(kind, provider=None, state=None, ops_run=None, emit=lambda s:
         ps.mark_processed(state, kind_key, fid, {
             "status": rec.get("status"), "public_eligible": eligible_public,
             "content_hash": ch})
+        if eligible_public and write_back:
+            _write_back_canonical(kind, fid, {
+                "gate": safe.get("gate"),
+                "corrections": safe.get("corrections_count") or 0,
+                "status": rec.get("status")},
+                data_dir=data_dir)
         if not eligible_public:
             held += 1
             state["failed_held_records"].append({
