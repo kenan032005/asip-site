@@ -342,10 +342,121 @@ body[data-page="home"] {
 .v11-explore-t { font-size: 14px; font-weight: 700; }
 .v11-explore-d { font-size: 11px; color: var(--v11-muted); margin-top: 4px; }
 
+/* ---------- Today's Executive Brief ---------- */
+.v11-exec-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(200px, 1fr);
+  gap: 16px;
+  align-items: stretch;
+}
+.v11-exec-trend { font-size: 12px; color: var(--v11-muted); font-weight: 400; }
+.v11-exec-kj { margin: 10px 0 8px; }
+.v11-exec-kj-title {
+  font-size: 12px; font-weight: 700; color: var(--v11-muted);
+  margin-bottom: 6px; letter-spacing: .3px;
+}
+.v11-exec-kj-item {
+  display: flex; align-items: baseline; gap: 10px;
+  padding: 6px 0; border-bottom: 1px dashed var(--v11-border);
+  font-size: 13px; color: var(--v11-text);
+}
+.v11-exec-kj-item:last-child { border-bottom: none; }
+.v11-exec-kj-num {
+  font-weight: 800; color: var(--v11-blue); font-size: 13px; flex: 0 0 24px;
+}
+.v11-exec-overall { display: flex; align-items: center; justify-content: center; }
+
+/* ---------- What Changed Today ---------- */
+.v11-changed { list-style: none; margin: 0; padding: 0; }
+.v11-changed-item {
+  display: flex; align-items: baseline; gap: 10px;
+  padding: 8px 4px; border-bottom: 1px solid var(--v11-border);
+  font-size: 13px; color: var(--v11-text);
+}
+.v11-changed-item:last-child { border-bottom: none; }
+.v11-changed-dir { font-weight: 800; font-size: 14px; flex: 0 0 18px; }
+.v11-changed-dir.up { color: #c62828; }
+.v11-changed-dir.flat { color: var(--v11-muted); }
+
+/* ---------- Category Intelligence Brief ---------- */
+.v11-cat-wrap { padding-bottom: 8px; }
+.v11-cat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.v11-cat {
+  border: 1px solid var(--v11-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.v11-cat-head {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  background: #f4f7fb;
+  border-bottom: 1px solid var(--v11-border);
+  padding: 10px 12px;
+}
+.v11-cat-name { font-size: 14px; font-weight: 700; color: var(--v11-text); }
+.v11-cat-body { padding: 12px; }
+.v11-cat-section {
+  font-size: 11px; font-weight: 700; color: var(--v11-muted);
+  letter-spacing: .4px; margin: 4px 0 8px;
+}
+.v11-news { padding: 8px 0; border-bottom: 1px solid var(--v11-border); }
+.v11-news:last-child { border-bottom: none; }
+.v11-news-head {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  font-size: 11px; color: var(--v11-muted); margin-bottom: 3px;
+}
+.v11-news-num { font-weight: 800; color: var(--v11-blue); font-size: 12px; }
+.v11-news-title { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+.v11-news-title a { color: var(--v11-text); text-decoration: none; }
+.v11-news-title a:hover { color: var(--v11-blue); }
+.v11-news-fact { font-size: 12px; color: var(--v11-muted); line-height: 1.5; margin-top: 3px; }
+.v11-news-verify {
+  margin-left: auto; font-size: 10.5px; font-weight: 600;
+  padding: 1px 7px; border-radius: 4px;
+}
+.vs-ok { color: #15803d; background: #f0fdf4; }
+.vs-single { color: #b45309; background: #fffbeb; }
+
+/* ---------- AI Assessment 区（事实区与 AI 区视觉分离） ---------- */
+.v11-ai {
+  background: #f2f6fc;
+  border-left: 3px solid var(--v11-blue);
+  border-radius: 0 6px 6px 0;
+  padding: 10px 12px;
+  margin-top: 10px;
+}
+.v11-ai-title {
+  font-size: 11px; font-weight: 700; color: var(--v11-blue);
+  letter-spacing: .4px; margin-bottom: 4px;
+}
+.v11-ai-text { font-size: 12.5px; color: var(--v11-text); line-height: 1.6; }
+.v11-ai-watch { margin-top: 6px; font-size: 12px; color: var(--v11-muted); font-weight: 600; }
+.v11-ai-fallback { font-size: 12px; color: var(--v11-muted); font-style: italic; }
+.v11-ai-note { margin-top: 4px; font-size: 10.5px; color: #94a3b8; }
+
+/* ---------- China 间接区域风险 ---------- */
+.v11-china-indirect {
+  font-size: 12.5px; color: var(--v11-text); line-height: 1.6;
+  padding: 8px 4px;
+}
+.v11-china-indirect b { color: var(--v11-text); }
+
+/* ---------- Public Health Signals ---------- */
+.v11-hs-top {
+  font-size: 13px; font-weight: 600; color: var(--v11-text);
+  padding: 2px 4px 8px;
+}
+.v11-hs-top b { color: var(--v11-blue); }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1100px) {
   .v11-kpis { grid-template-columns: repeat(3, 1fr); }
   .v11-grid-2, .v11-grid-map { grid-template-columns: 1fr; }
+  .v11-cat-grid { grid-template-columns: 1fr; }
+  .v11-exec-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
   .v11 { padding: 0 12px 24px; }
