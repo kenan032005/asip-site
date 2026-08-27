@@ -103,6 +103,15 @@ def run_enrichment(kind, provider=None, state=None, ops_run=None, emit=lambda s:
                                "report_date", "source_links") if it.get(k)})
         if ps.is_processed(state, kind_key, fid):
             skipped += 1
+            # 补偿回写（§十八）：已处理且 public_eligible=True 的记录，
+            # 若 canonical 未回写（旧版运行产物），幂等补写，不重新 AI。
+            if write_back:
+                meta = (state.get("processed_hashes") or {}).get(kind_key, {}).get(fid) or {}
+                if meta.get("public_eligible"):
+                    _write_back_canonical(kind, fid, {
+                        "gate": "PASS", "corrections": 0,
+                        "status": "ok", "recovered": True},
+                        data_dir=data_dir)
             continue
         if max_items and processed >= max_items:
             break
