@@ -78,8 +78,8 @@ def run_health(emit=lambda s: print(s)):
         "ai_used": False,
     }
     OPS_DIR.mkdir(parents=True, exist_ok=True)
-    HEALTH_FILE.write_text(json.dumps(health, ensure_ascii=False, indent=1) + "\n",
-                           encoding="utf-8")
+    (OPS_DIR / "source_health.json").write_text(
+        json.dumps(health, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     emit("SOURCE_HEALTH sources=%d stale=%d empty=%d bad=%d" % (
         len(sources), len(stale), len(empty), len(bad)))
     return health

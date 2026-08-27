@@ -63,7 +63,7 @@ def save_ops(run, previous=None):
             "",
         ]
     (OPS_DIR / "operations_summary.md").write_text("\n".join(lines), encoding="utf-8")
-    return OPS_STATUS_FILE
+    return OPS_DIR / "operations_status.json"
 
 
 def finish_run(run, status="completed"):

@@ -68,9 +68,10 @@ def record_run(state, field, ok=True):
 
 
 def load_state():
-    if STATE_FILE.exists():
+    state_file = OPS_DIR / "production_state.json"
+    if state_file.exists():
         try:
-            s = json.loads(STATE_FILE.read_text(encoding="utf-8"))
+            s = json.loads(state_file.read_text(encoding="utf-8"))
             base = dict(EMPTY_STATE)
             base.update(s)
             return base
@@ -81,9 +82,10 @@ def load_state():
 
 def save_state(state):
     OPS_DIR.mkdir(parents=True, exist_ok=True)
-    STATE_FILE.write_text(json.dumps(state, ensure_ascii=False, indent=1) + "\n",
+    state_file = OPS_DIR / "production_state.json"
+    state_file.write_text(json.dumps(state, ensure_ascii=False, indent=1) + "\n",
                           encoding="utf-8")
-    return STATE_FILE
+    return state_file
 
 
 def content_hash(obj):

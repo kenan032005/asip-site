@@ -26,13 +26,17 @@ from scripts.report.gen import analysis_runner as ar  # noqa: E402
 from scripts.ai.schema_validation import validate_against_schema  # noqa: E402
 
 DERIVED = ROOT / "data" / "runtime" / "stage8c_trial2_recovery" / "derived"
+DERIVED_EVIDENCE = ROOT / "evidence" / "stage8c_trial2_recovery" / "derived"
 
 
 def load_input(key):
     fname = {"africa_daily": "africa_daily_report_input.json",
              "tcd_weekly": "tcd_weekly_report_input.json",
              "ssd_weekly": "ssd_weekly_report_input.json"}[key]
-    return json.loads((DERIVED / fname).read_text(encoding="utf-8"))
+    # cold start（与 scripts/ops/reports_run 同语义）：data/runtime 为 gitignored，
+    # 缺失时用 git tracked 的 evidence/ 副本（字节一致，冻结 hash 不变）。
+    src = DERIVED if (DERIVED / fname).exists() else DERIVED_EVIDENCE
+    return json.loads((src / fname).read_text(encoding="utf-8"))
 
 
 class AnalysisProvider:

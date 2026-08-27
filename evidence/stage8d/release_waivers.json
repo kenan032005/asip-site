@@ -1,0 +1,41 @@
+{
+  "schema": "stage8d-release-waivers-v1",
+  "release_code_sha": "23e9dbf703978b0f9a810dfb6e3c64e5f6f607df",
+  "classified_at": "2026-08-27T18:00:00Z",
+  "waivers": [
+    {
+      "id": "WAIVER-001",
+      "test": "Stage8B test_artifacts_no_secrets",
+      "category": "ACCEPTED_TECHNICAL_DEBT",
+      "reason": "该测试要求 qualification_summary.json 已存在（既有 run 产物，artifacts 目录被 gitignore）。fresh clone 首跑缺失即失败；套件内 run 调用顺带生成后自愈。独立 secret scan（test_stage8b_deepseek 18/18 + validate_pipeline + build_site dist scan）已提供同等的密钥隔离保障，不构成生产阻断。",
+      "independent_control": "secret scan = PASS (18/18)"
+    },
+    {
+      "id": "WAIVER-002",
+      "test": "Stage8A test_master_events_unique",
+      "category": "ACCEPTED_TECHNICAL_DEBT",
+      "reason": "master_events 视图由 build_frontend_views.build_master_events 遍历带 master_event_id 的 time lines 生成；当前 canonical event_clusters.json 152 条全部为 pre-enrichment 状态（master_event_id/public_eligible 均为 False/None，未经过 Stage8C production enrichment）。视图为空是生产链尚未在 canonical 上运行的数据状态，非视图生成 bug。canary（manual production chain）首次 enrichment 后将填充 eligible master events；若 canary 后 canonical 含 eligible 记录而视图仍为空，则升级为 PRODUCTION_BLOCKER 复核。",
+      "independent_control": "canary 后复查（§4.2）"
+    },
+    {
+      "id": "WAIVER-003",
+      "test": "Stage8A test_disease_unknown_not_zero",
+      "category": "ACCEPTED_TECHNICAL_DEBT",
+      "reason": "disease_outbreaks 视图当前为空：disease canonical 20 条全部 public_eligible=False（未 enrichment），fatalities 全为 null 但视图因 eligibility 过滤无任何条目，故测试找不到 null/unknown 样本。属 pre-production 数据状态；enrichment 后视图将含 eligible 记录，null 语义由视图保留逻辑（不写 0）保障。",
+      "independent_control": "canary 后复查（§4.3）"
+    },
+    {
+      "id": "WAIVER-004",
+      "test": "Stage8C test_stage8c_derived_evidence (ART 依赖)",
+      "category": "ACCEPTED_TECHNICAL_DEBT",
+      "reason": "该套件构建 Derived Snapshot 需读取 Run#4 原始审计产物（input_summary.json / safety_layer_trial.json），其路径 derive_frozen_report_evidence.ART 指向 WorkBuddy 本地 .workbuddy/tmp/recovery4_art（审计环境产物，未纳入 git）。fresh clone 无法构建属预期。生产等价路径已由 reports_run/analysis_runner 的 evidence/ 冷启动回退 + test_stage8c_architecture（22/22）+ test_stage8c_package3（19/19，含 cold-start）覆盖；本套件保留为审计专用。",
+      "independent_control": "architecture 22/22 + package3 19/19（含 cold-start）"
+    }
+  ],
+  "summary": {
+    "total": 4,
+    "production_blockers": 0,
+    "accepted_technical_debt": 4,
+    "note": "无 PRODUCTION_BLOCKER；全部红项均有明确根因与独立控制。canary 后需复查 WAIVER-002/003 的数据状态。"
+  }
+}

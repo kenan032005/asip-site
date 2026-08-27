@@ -32,6 +32,9 @@ from scripts.report.gen import deterministic_assembler as da  # noqa: E402
 from scripts.report.gen.fact_pack import build_fact_pack, pack_hash  # noqa: E402
 
 DERIVED = ROOT / "data" / "runtime" / "stage8c_trial2_recovery" / "derived"
+# cold start（与 scripts/ops/reports_run 同语义）：data/runtime 为 gitignored，
+# 缺失时用 git tracked 的 evidence/ 副本（字节一致，冻结 hash 不变）。
+DERIVED_EVIDENCE = ROOT / "evidence" / "stage8c_trial2_recovery" / "derived"
 OUT = ROOT / "data" / "runtime" / "stage8c_trial2_recovery" / "architecture_run"
 RUN_ID = "33066148566"
 EXPECTED_HASHES = {
@@ -54,8 +57,15 @@ JOBS = [
 LOW_DATA_NO_AI = True
 
 
+def _derived_dir():
+    """data/runtime 存在则用之，否则回退 evidence/（git tracked，字节一致）。"""
+    if (DERIVED / "africa_daily_report_input.json").exists():
+        return DERIVED
+    return DERIVED_EVIDENCE
+
+
 def verify_hashes(derived_dir=None):
-    d = Path(derived_dir) if derived_dir else DERIVED
+    d = Path(derived_dir) if derived_dir else _derived_dir()
     blob = b""
     for f, want in EXPECTED_HASHES.items():
         data = (d / f).read_bytes().replace(b"\r\n", b"\n")
@@ -211,7 +221,7 @@ def build_pack_v2(records, telemetry, out):
 
 def run_validation(provider=None, derived_dir=None, out_dir=None,
                    emit=lambda s: print(s)):
-    d = Path(derived_dir) if derived_dir else DERIVED
+    d = Path(derived_dir) if derived_dir else _derived_dir()
     out = Path(out_dir) if out_dir else OUT
     out.mkdir(parents=True, exist_ok=True)
     verify_hashes(d)
