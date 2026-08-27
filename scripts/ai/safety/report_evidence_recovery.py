@@ -78,7 +78,7 @@ def check_ready(derived_dir=None, manifest_path=None):
             gates["hash_lock"] = False
             issues.append("%s missing" % fname)
             continue
-        data = p.read_bytes()
+        data = p.read_bytes().replace(b"\r\n", b"\n")  # LF 归一化（冻结 hash 基于 LF）
         payload_bytes[key] = data
         sha = dfe.sha256_bytes(data)
         want = manifest["hashes"].get(
