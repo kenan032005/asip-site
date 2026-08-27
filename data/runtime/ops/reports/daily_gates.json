@@ -5,8 +5,16 @@
  "ATTRIBUTION_GATE": "PASS",
  "ANALYSIS_SCHEMA_GATE": "NOT_APPLICABLE_FALLBACK",
  "ANALYSIS_FACT_BOUNDARY_GATE": "NOT_APPLICABLE_FALLBACK",
- "FINAL_SCHEMA_GATE": "PASS",
- "final_schema_issues": [],
+ "FINAL_SCHEMA_GATE": "FAIL",
+ "final_schema_issues": [
+  "$.period_start: expected type string, got null",
+  "$.period_end: expected type string, got null",
+  "$.public_health_disease_risks[0].item_id: expected type string, got null",
+  "$.public_health_disease_risks[0].disease_id: expected type string, got null",
+  "$.public_health_disease_risks[1].item_id: expected type string, got null"
+ ],
  "METADATA_GATE": "PASS",
- "issues": []
+ "issues": [
+  "FINAL_SCHEMA_GATE"
+ ]
 }
