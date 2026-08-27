@@ -50,8 +50,7 @@ def run_collection(execute=False, emit=lambda s: print(s), state=None, ops_run=N
     ok = True
     if execute:
         try:
-            r = subprocess.run([sys.executable, str(ROOT / "scripts/stage3_collect_v2.py"),
-                                "--dry" if False else ""],  # 生产执行默认写 pending
+            r = subprocess.run([sys.executable, str(ROOT / "scripts/stage3_collect_v2.py")],
                                capture_output=True, text=True, timeout=900)
             if r.returncode != 0:
                 emit("collection_exit=%d" % r.returncode)
