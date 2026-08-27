@@ -10,9 +10,9 @@
   // ── 顶部导航（§三：全站统一 6 项；Mobile 折叠）──
   var NAV = [
     ["index.html", "首页", "home"],
-    ["events.html", "态势事件", "events"],
+    ["events.html", "事件", "events"],
     ["countries.html", "国家", "countries"],
-    ["disease-risk.html", "疾病风险", "disease"],
+    ["disease-risk.html", "传染病风险", "disease"],
     ["intelligence/africa/", "情报知识库", "intelligence"],
     ["reports.html", "报告", "reports"]
   ];
@@ -782,7 +782,9 @@
   function init() {
     var page = document.body.getAttribute("data-page") || "";
     renderNav(page);
-    if (page === "home") renderHome();
+    // V1.1 Dashboard 首页由 home-v11.js 渲染（标志防重复）
+    if (page === "home" && !window.__V11_HOME__) renderHome();
+    else if (page === "home") { /* V1.1 dashboard */ }
     else if (page === "events") renderEvents();
     else if (page === "event") renderEventDetail();
     else if (page === "countries") renderCountries();

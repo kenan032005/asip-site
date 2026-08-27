@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>非洲地区社会安全信息平台 · ASIP</title>
+<title>非洲地区社会安全态势决策驾驶舱 · ASIP</title>
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/home-v11.css">
 </head>
 <body data-page="home">
 <div id="topbar" class="topbar"></div>
@@ -13,53 +14,105 @@
   ⚠️ 数据未能成功加载。请刷新页面（Ctrl/Cmd + Shift + R）后重试；若持续失败，可能是网络问题，请稍后再试。
 </div>
 
-<div class="container">
+<!-- ============ V1.1 Dashboard ============ -->
+<main class="v11" id="v11Home">
 
-  <section class="hero" id="feSituationHeader">
-    <p class="fe-note">正在加载态势…</p>
+  <!-- 1. KPI Strip -->
+  <section class="v11-kpis" id="v11Kpis" aria-label="关键态势指标">
+    <div class="v11-kpi-card"><div class="v11-kpi-v" id="v11KpiCountries">—</div><div class="v11-kpi-l">监测国家</div></div>
+    <div class="v11-kpi-card"><div class="v11-kpi-v" id="v11KpiEvents24h">—</div><div class="v11-kpi-l">24h 事件</div></div>
+    <div class="v11-kpi-card"><div class="v11-kpi-v" id="v11KpiHighRisk">—</div><div class="v11-kpi-l">高风险国家</div></div>
+    <div class="v11-kpi-card"><div class="v11-kpi-v" id="v11KpiChina">—</div><div class="v11-kpi-l">涉中关注</div></div>
+    <div class="v11-kpi-card"><div class="v11-kpi-v" id="v11KpiDisease">—</div><div class="v11-kpi-l">疾病信号</div></div>
+    <div class="v11-kpi-card"><div class="v11-kpi-v v11-kpi-time" id="v11KpiUpdated">—</div><div class="v11-kpi-l">最后更新</div></div>
   </section>
 
-  <section class="hp-block">
-    <h2>关键态势指标</h2>
-    <div id="feKpis"><div class="empty-sm">加载中…</div></div>
+  <!-- 2. 今日30秒态势 + Overall Risk -->
+  <section class="v11-grid v11-grid-2">
+    <div class="v11-card" id="v11Outlook">
+      <div class="v11-card-h">
+        <h2>今日非洲安全态势</h2>
+        <span class="v11-card-en">Today's Security Outlook</span>
+      </div>
+      <div class="v11-loading">加载中…</div>
+    </div>
+    <div class="v11-card" id="v11OverallRisk">
+      <div class="v11-card-h">
+        <h2>Overall Security Outlook</h2>
+        <span class="v11-card-en">总体风险信号</span>
+      </div>
+      <div class="v11-loading">加载中…</div>
+    </div>
   </section>
 
-  <section class="hp-block">
-    <h2>主要动态</h2>
-    <div id="feMajor"><div class="empty-sm">加载中…</div></div>
+  <!-- 3. Africa Risk Map + Top Risk Countries -->
+  <section class="v11-grid v11-grid-map">
+    <div class="v11-card" id="v11Map">
+      <div class="v11-card-h">
+        <h2>Africa Risk Map</h2>
+        <span class="v11-card-en">国家风险地图</span>
+      </div>
+      <div class="v11-loading">加载中…</div>
+      <p class="v11-map-legend" id="v11MapLegend"></p>
+    </div>
+    <div class="v11-card" id="v11TopRisk">
+      <div class="v11-card-h">
+        <h2>Top Risk Countries</h2>
+        <span class="v11-card-en">高风险国家</span>
+      </div>
+      <div class="v11-loading">加载中…</div>
+    </div>
   </section>
 
-  <section class="hp-block">
-    <h2>重点关注国家</h2>
-    <div id="fePriority"><div class="empty-sm">加载中…</div></div>
+  <!-- 4. Key Developments -->
+  <section class="v11-card" id="v11KeyDev">
+    <div class="v11-card-h">
+      <h2>重点安全事件</h2>
+      <span class="v11-card-en">Key Developments</span>
+      <a class="v11-more" href="events.html">查看全部 →</a>
+    </div>
+    <div class="v11-loading">加载中…</div>
   </section>
 
-  <section class="hp-block">
-    <h2>疾病风险</h2>
-    <div id="feDisease"><div class="empty-sm">加载中…</div></div>
+  <!-- 5. China Interest -->
+  <section class="v11-card v11-china" id="v11China">
+    <div class="v11-card-h">
+      <h2>涉中安全关注</h2>
+      <span class="v11-card-en">China Interest</span>
+    </div>
+    <div class="v11-loading">加载中…</div>
   </section>
 
-  <section class="hp-block">
-    <h2>7 日持续关注</h2>
-    <div id="feWatch"><div class="empty-sm">加载中…</div></div>
+  <!-- 6. Latest Intelligence -->
+  <section class="v11-card" id="v11Intel">
+    <div class="v11-card-h">
+      <h2>最新情报报告</h2>
+      <span class="v11-card-en">Latest Intelligence</span>
+      <a class="v11-more" href="reports.html">报告中心 →</a>
+    </div>
+    <div class="v11-loading">加载中…</div>
   </section>
 
-  <section class="hp-block">
-    <h2>最新报告</h2>
-    <div id="feLatestReport"><div class="empty-sm">加载中…</div></div>
+  <!-- 7. Public Health Risk -->
+  <section class="v11-card" id="v11Health">
+    <div class="v11-card-h">
+      <h2>传染病风险</h2>
+      <span class="v11-card-en">Public Health Risk</span>
+      <a class="v11-more" href="disease-risk.html">查看全部 →</a>
+    </div>
+    <div class="v11-loading">加载中…</div>
   </section>
 
-  <section class="hp-block">
-    <h2>情报知识库</h2>
-    <div id="feIntelligence"><div class="empty-sm">加载中…</div></div>
+  <!-- 8. Explore ASIP -->
+  <section class="v11-card" id="v11Explore">
+    <div class="v11-card-h">
+      <h2>探索平台</h2>
+      <span class="v11-card-en">Explore ASIP</span>
+    </div>
+    <div class="v11-loading">加载中…</div>
   </section>
 
-  <section class="hp-block">
-    <h2>数据与核验状态</h2>
-    <div id="feDataStatus"><div class="empty-sm">加载中…</div></div>
-  </section>
-
-</div>
+</main>
 
 <footer class="site"><div id="asip-build-meta" style="margin-top:4px;font-size:12px;color:#8899aa;"></div></footer>
 
@@ -67,5 +120,6 @@
 <script src="assets/js/api.js"></script>
 <script src="assets/js/common.js"></script>
 <script src="assets/js/frontend.js"></script>
+<script src="assets/js/home-v11.js"></script>
 </body>
 </html>

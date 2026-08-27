@@ -1,0 +1,313 @@
+/* ============================================================
+   ASIP V1.1 — Homepage Dashboard Design System
+   Enterprise Risk Intelligence · Government/Energy Decision Dashboard
+   浅灰背景 / 深海军蓝 Header / 白色卡片 / 蓝主交互 / 红橙黄风险
+   ============================================================ */
+
+:root {
+  --v11-bg: #eef1f6;
+  --v11-nav: #0f2440;
+  --v11-card: #ffffff;
+  --v11-border: #e2e8f0;
+  --v11-text: #12233c;
+  --v11-muted: #64748b;
+  --v11-blue: #1d6fe0;
+  --v11-blue-soft: #eaf2fd;
+  --v11-radius: 10px;
+  --v11-shadow: 0 1px 3px rgba(15, 36, 64, .08);
+  --v11-risk-5: #8b0000;
+  --v11-risk-4: #c62828;
+  --v11-risk-3: #e65100;
+  --v11-risk-2: #b8860b;
+  --v11-risk-1: #1565c0;
+  --v11-risk-0: #94a3b8;
+  --v11-ok: #15803d;
+}
+
+body[data-page="home"] {
+  background: var(--v11-bg);
+}
+
+/* ---------- KPI Strip ---------- */
+.v11-kpis {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin: 18px auto 4px;
+  max-width: 1280px;
+  padding: 0 20px;
+}
+.v11-kpi-card {
+  background: var(--v11-card);
+  border: 1px solid var(--v11-border);
+  border-radius: var(--v11-radius);
+  box-shadow: var(--v11-shadow);
+  padding: 14px 16px 12px;
+  text-align: center;
+}
+.v11-kpi-v {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--v11-text);
+  line-height: 1.2;
+}
+.v11-kpi-v.v11-kpi-time { font-size: 15px; padding-top: 7px; }
+.v11-kpi-l {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--v11-muted);
+}
+
+/* ---------- Layout ---------- */
+.v11 {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px 30px;
+}
+.v11-grid {
+  display: grid;
+  gap: 14px;
+  margin-top: 14px;
+}
+.v11-grid-2 { grid-template-columns: 3fr 2fr; }
+.v11-grid-map { grid-template-columns: 3fr 2fr; }
+
+/* ---------- Card ---------- */
+.v11-card {
+  background: var(--v11-card);
+  border: 1px solid var(--v11-border);
+  border-radius: var(--v11-radius);
+  box-shadow: var(--v11-shadow);
+  padding: 16px 18px;
+}
+.v11-card-h {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  border-bottom: 1px solid var(--v11-border);
+  padding-bottom: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.v11-card-h h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--v11-text);
+}
+.v11-card-en {
+  font-size: 12px;
+  color: var(--v11-muted);
+  letter-spacing: .2px;
+}
+.v11-more {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--v11-blue);
+  text-decoration: none;
+}
+.v11-more:hover { text-decoration: underline; }
+.v11-loading { color: var(--v11-muted); font-size: 13px; padding: 8px 0; }
+.v11-empty {
+  padding: 18px 12px;
+  color: var(--v11-muted);
+  font-size: 13px;
+  text-align: center;
+  border: 1px dashed var(--v11-border);
+  border-radius: 8px;
+}
+
+/* ---------- Risk levels ---------- */
+.v11-risk { display: inline-block; padding: 2px 8px; border-radius: 5px; font-size: 11px; font-weight: 600; color: #fff; }
+.r5 { background: var(--v11-risk-5); }
+.r4 { background: var(--v11-risk-4); }
+.r3 { background: var(--v11-risk-3); }
+.r2 { background: var(--v11-risk-2); }
+.r1 { background: var(--v11-risk-1); }
+.r0 { background: var(--v11-risk-0); }
+
+/* ---------- Outlook ---------- */
+.v11-outlook-total { font-size: 15px; font-weight: 700; color: var(--v11-text); margin-bottom: 6px; }
+.v11-outlook-brief { font-size: 13px; color: var(--v11-text); line-height: 1.6; margin: 0 0 10px; }
+.v11-outlook-list { margin: 0 0 10px; padding-left: 18px; }
+.v11-outlook-list li { font-size: 13px; color: var(--v11-text); margin: 3px 0; }
+.v11-outlook-focus { font-size: 12px; color: var(--v11-muted); }
+.v11-outlook-focus b { color: var(--v11-text); }
+
+/* Overall Risk signal */
+.v11-overall {
+  text-align: center;
+  padding: 14px 8px 8px;
+}
+.v11-overall-level {
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  line-height: 1.1;
+}
+.v11-overall-trend { margin-top: 8px; font-size: 14px; color: var(--v11-muted); }
+.v11-overall-basis { margin-top: 10px; font-size: 11px; color: var(--v11-muted); }
+
+/* ---------- Map ---------- */
+.v11-map-wrap { position: relative; }
+.v11-map-wrap svg { width: 100%; height: auto; display: block; }
+.v11-map-tip {
+  position: absolute;
+  pointer-events: none;
+  background: #0f2440;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 6px;
+  padding: 8px 10px;
+  min-width: 160px;
+  opacity: 0;
+  transition: opacity .15s;
+  z-index: 5;
+}
+.v11-map-tip b { display: block; font-size: 13px; margin-bottom: 3px; }
+.v11-map-tip .tip-row { display: flex; justify-content: space-between; gap: 14px; margin: 2px 0; }
+.v11-map-legend {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 11px;
+  color: var(--v11-muted);
+  margin: 10px 0 0;
+  padding-top: 8px;
+  border-top: 1px solid var(--v11-border);
+}
+.v11-map-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 3px; vertical-align: -1px; }
+
+/* ---------- Top Risk ---------- */
+.v11-tr-list { list-style: none; margin: 0; padding: 0; }
+.v11-tr-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 6px;
+  border-bottom: 1px solid var(--v11-border);
+  font-size: 13px;
+  color: var(--v11-text);
+  text-decoration: none;
+}
+.v11-tr-item:last-child { border-bottom: none; }
+.v11-tr-item:hover { background: var(--v11-blue-soft); }
+.v11-tr-rank { width: 26px; font-weight: 700; color: var(--v11-muted); font-size: 12px; }
+.v11-tr-name { flex: 1; font-weight: 600; }
+.v11-tr-trend { width: 20px; text-align: center; color: var(--v11-muted); font-weight: 700; }
+.v11-tr-meta { text-align: right; font-size: 11px; color: var(--v11-muted); }
+
+/* ---------- Key Developments ---------- */
+.v11-kd-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+}
+.v11-kd-card {
+  display: block;
+  border: 1px solid var(--v11-border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  text-decoration: none;
+  color: var(--v11-text);
+  transition: border-color .15s, box-shadow .15s;
+}
+.v11-kd-card:hover { border-color: var(--v11-blue); box-shadow: 0 2px 8px rgba(29,111,224,.12); }
+.v11-kd-head { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--v11-muted); margin-bottom: 6px; flex-wrap: wrap; }
+.v11-kd-title { font-size: 14px; font-weight: 600; line-height: 1.4; margin-bottom: 4px; }
+.v11-kd-fact { font-size: 12px; color: var(--v11-muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.v11-kd-meta { margin-top: 8px; font-size: 11px; color: var(--v11-muted); display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+/* ---------- China Interest ---------- */
+.v11-china-ok {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 12px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  color: var(--v11-ok);
+  font-size: 13px;
+  font-weight: 600;
+}
+.v11-china-ok .v11-check { font-size: 18px; }
+.v11-china-checked { margin-left: auto; font-size: 11px; font-weight: 400; color: var(--v11-muted); }
+
+/* ---------- Latest Intelligence ---------- */
+.v11-rep-list { list-style: none; margin: 0; padding: 0; }
+.v11-rep-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 6px;
+  border-bottom: 1px solid var(--v11-border);
+}
+.v11-rep-item:last-child { border-bottom: none; }
+.v11-rep-badge {
+  flex: 0 0 auto;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 5px;
+  color: #fff;
+  background: var(--v11-blue);
+}
+.v11-rep-badge.rb-fallback { background: #6b7280; }
+.v11-rep-badge.rb-low { background: #b8860b; }
+.v11-rep-badge.rb-mock { background: #94a3b8; }
+.v11-rep-main { flex: 1; }
+.v11-rep-title { font-size: 13px; font-weight: 600; color: var(--v11-text); }
+.v11-rep-sub { font-size: 11px; color: var(--v11-muted); margin-top: 2px; }
+.v11-rep-link { font-size: 12px; color: var(--v11-blue); text-decoration: none; }
+.v11-rep-link:hover { text-decoration: underline; }
+
+/* ---------- Public Health ---------- */
+.v11-ob-list { list-style: none; margin: 0; padding: 0; }
+.v11-ob-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 6px;
+  border-bottom: 1px solid var(--v11-border);
+  text-decoration: none;
+  color: var(--v11-text);
+}
+.v11-ob-item:last-child { border-bottom: none; }
+.v11-ob-item:hover { background: var(--v11-blue-soft); }
+.v11-ob-name { flex: 1; font-size: 13px; font-weight: 600; }
+.v11-ob-name small { display: block; font-weight: 400; color: var(--v11-muted); font-size: 11px; }
+.v11-ob-status { font-size: 11px; color: var(--v11-muted); }
+
+/* ---------- Explore ---------- */
+.v11-explore {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+.v11-explore-card {
+  display: block;
+  border: 1px solid var(--v11-border);
+  border-radius: 8px;
+  padding: 16px 14px;
+  text-decoration: none;
+  color: var(--v11-text);
+  transition: border-color .15s, box-shadow .15s;
+}
+.v11-explore-card:hover { border-color: var(--v11-blue); box-shadow: 0 2px 8px rgba(29,111,224,.12); }
+.v11-explore-icon { font-size: 22px; margin-bottom: 8px; }
+.v11-explore-t { font-size: 14px; font-weight: 700; }
+.v11-explore-d { font-size: 11px; color: var(--v11-muted); margin-top: 4px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+  .v11-kpis { grid-template-columns: repeat(3, 1fr); }
+  .v11-grid-2, .v11-grid-map { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .v11 { padding: 0 12px 24px; }
+  .v11-kpis { grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 0 12px; }
+  .v11-kpi-v { font-size: 20px; }
+  .v11-kd-grid { grid-template-columns: 1fr; }
+  .v11-card { padding: 12px 12px; }
+}
