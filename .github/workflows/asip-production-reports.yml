@@ -2,7 +2,7 @@ name: ASIP Production Reports
 
 # Stage 8C Package3 — Production Reports（§八/§九/§十七/§二十六）
 # Africa Daily 调度（北京 20:00，每天最多 1 份）：cron '0 12 * * *'
-# Country Weekly 调度（北京 周日 06:45）：cron '45 22 * * 0'
+# Country Weekly 调度（北京 周日 06:45 = UTC 周六 22:45）：cron '45 22 * * 6'
 # 报告状态：FULL / FALLBACK / LOW_DATA（Fact Gate PASS 为前提）；Fact Gate FAIL → HOLD。
 # 输入：canonical eligible facts（生产）；dispatch 默认 shadow（derived + no AI）。
 # 调度门禁：production_schedule_enabled=false 时 schedule 不执行。
@@ -25,7 +25,7 @@ on:
         default: false
   schedule:
     - cron: '0 12 * * *'
-    - cron: '45 22 * * 0'
+    - cron: '45 22 * * 6'
 
 concurrency:
   group: asip-prod-reports
@@ -80,7 +80,7 @@ jobs:
           python scripts/ops/reports_run.py --mode daily --source $SRC $AI_FLAG
 
       - name: Country Weekly（§九，北京 周日 06:45；dispatch 默认 shadow）
-        if: github.event.schedule == '45 22 * * 0' || github.event_name == 'workflow_dispatch'
+        if: github.event.schedule == '45 22 * * 6' || github.event_name == 'workflow_dispatch'
         env:
           SOURCE: ${{ github.event.inputs.source }}
           RUN_AI: ${{ github.event.inputs.run_ai }}
