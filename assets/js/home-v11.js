@@ -37,20 +37,9 @@
   }
 
   // 风险等级名称（与 risk-levels.json 对齐）
-  var RISK_NAME = { 5: "极高", 4: "极高", 3: "高", 2: "中", 1: "低", 0: "无数据" };
+  var RISK_NAME = { 5: "极高", 4: "极高", 3: "高", 2: "较高", 1: "中等", 0: "暂无数据" };
   var RISK_EN = { 5: "VERY HIGH", 4: "VERY HIGH", 3: "HIGH", 2: "ELEVATED", 1: "MODERATE", 0: "NO DATA" };
-  function rl(level) { return { cls: "r" + (level || 0), cn: RISK_NAME[level] || "无数据", en: RISK_EN[level] || "NO DATA" }; }
-
-  // 非洲 22 监测国近似坐标（SVG viewBox 0 0 560 620，示意地图，非 GIS）
-  var MAP_XY = {
-    "摩洛哥": [215, 70], "阿尔及利亚": [190, 125], "突尼斯": [285, 105], "利比亚": [335, 120],
-    "埃及": [395, 140], "塞内加尔": [85, 200], "科特迪瓦": [120, 245], "加纳": [105, 265],
-    "贝宁": [160, 265], "尼日利亚": [205, 245], "尼日尔": [265, 195], "马里": [165, 190],
-    "布基纳法索": [150, 225], "乍得": [330, 205], "苏丹": [410, 215], "南苏丹": [400, 285],
-    "埃塞俄比亚": [455, 265], "肯尼亚": [435, 340], "乌干达": [400, 315], "坦桑尼亚": [410, 380],
-    "安哥拉": [245, 395], "刚果共和国（刚果布）": [280, 330], "加蓬": [255, 325],
-    "莫桑比克": [390, 455], "南非": [330, 515], "马达加斯加": [480, 470]
-  };
+  function rl(level) { return { cls: "r" + (level || 0), cn: RISK_NAME[level] || "暂无数据", en: RISK_EN[level] || "NO DATA" }; }
 
   function renderAll() {
     Promise.all([
@@ -159,78 +148,149 @@
       "</div>";
   }
 
-  // ── 4. Africa Risk Map ──
+  // ── 4. Africa Risk Map（真实国家边界 choropleth）──
   function renderMap(countries, snapshots, kpis, updated) {
     var host = document.getElementById("v11Map");
     if (!host) return;
-    var snapByCn = {};
-    (snapshots || []).forEach(function (s) { snapByCn[s.country_cn] = s; });
-    var riskByCn = {};
-    countries.forEach(function (c) { riskByCn[c.cn] = c.risk_level || 0; });
+    var geo = window.AFRICA_GEO || {};
+    var labels = window.AFRICA_LABELS || {};
+    var markers = window.AFRICA_MARKERS || {};
+    var geoKeys = Object.keys(geo);
+    // 风险与名称索引（ISO3 为 ASIP country schema 契约）
+    var riskByIso = {};
+    var cnByIso = {};
+    var enByIso = {};
+    (snapshots || []).forEach(function (s) {
+      if (s.iso3) {
+        riskByIso[s.iso3] = s.baseline_risk_level || 0;
+        cnByIso[s.iso3] = s.country_cn;
+        enByIso[s.iso3] = s.country_en;
+      }
+    });
+    // COG（刚果布）iso3 在 snapshot 缺失 → 用 countries.json cn 补
+    countries.forEach(function (c) {
+      if (c.cn === "刚果共和国（刚果布）" && !cnByIso["COG"]) {
+        cnByIso["COG"] = c.cn;
+        riskByIso["COG"] = c.risk_level || 0;
+      }
+    });
+    var snapByIso = {};
+    (snapshots || []).forEach(function (s) { if (s.iso3) snapByIso[s.iso3] = s; });
 
-    var dots = countries.map(function (c) {
-      var xy = MAP_XY[c.cn];
-      if (!xy) return null;
-      var snap = snapByCn[c.cn] || {};
-      var lv = riskByCn[c.cn] || 0;
+    function tipFor(iso, name, en, cn, lv) {
+      var snap = snapByIso[iso] || {};
       var r = rl(lv);
-      var tip =
-        "<b>" + esc(c.cn) + " (" + esc(c.en || "") + ")</b>" +
+      var nm = cn || name;
+      return "<b>" + esc(nm) + (en ? " / " + esc(en) : " / " + esc(name)) + "</b>" +
         '<div class="tip-row"><span>Risk 风险等级</span><span>' + esc(r.en) + "</span></div>" +
         '<div class="tip-row"><span>24h Events</span><span>' + dash(snap.events_24h) + "</span></div>" +
         '<div class="tip-row"><span>7d Events</span><span>' + dash(snap.events_7d) + "</span></div>" +
-        '<div class="tip-row"><span>Latest Update</span><span>' + (snap.last_updated ? bjShort(snap.last_updated) : "—") + "</span></div>" +
-        '<div style="margin-top:6px;color:#bfdbfe">[查看国家] → ' + esc(c.cn) + "</div>";
-      return { x: xy[0], y: xy[1], cn: c.cn, en: c.en, lv: lv, cls: r.cls, tip: tip };
-    }).filter(Boolean);
+        '<div class="tip-row"><span>Trend</span><span>—</span></div>' +
+        '<div class="tip-row"><span>Last Updated</span><span>' +
+        (snap.last_updated ? bjShort(snap.last_updated) : "—") + "</span></div>" +
+        (cn ? '<div style="margin-top:6px;color:#bfdbfe">[查看国家] → ' + esc(cn) + "</div>" : "");
+    }
 
-    var land =
-      '<path d="M210 55 L300 45 L350 70 L430 110 L470 165 L445 200 L470 235 L500 260 L520 330 L505 400 L455 470 L420 510 L380 545 L320 560 L255 545 L205 510 L175 470 L140 440 L95 380 L60 320 L70 255 L95 210 L140 170 L175 120 Z" fill="#e8edf4" stroke="#b8c4d4" stroke-width="1.5"/>';
-    var dotsSvg = dots.map(function (d) {
-      return '<a href="country.html?country=' + encodeURIComponent(d.cn) +
-        '" aria-label="' + esc(d.cn) + '">' +
-        '<circle cx="' + d.x + '" cy="' + d.y + '" r="11" class="v11-map-dot ' + d.cls + '" data-tip="' +
-        esc(d.tip).replace(/"/g, "&quot;") + '" stroke="#fff" stroke-width="2"/></a>';
+    // 国家 path（真实边界，fill 来自 country risk view）
+    var paths = geoKeys.map(function (iso) {
+      var g = geo[iso];
+      var lv = riskByIso[iso];
+      var hasRisk = (lv !== undefined && lv !== null);
+      var cls = "am-country " + (hasRisk ? "r" + lv : "r0");
+      var cn = cnByIso[iso];
+      var href = cn ? ' href="country.html?country=' + encodeURIComponent(cn) + '"' : "";
+      return '<a' + href + ' class="am-link" tabindex="0" role="link" aria-label="' +
+        esc(cn || g.name) + '" data-iso3="' + esc(iso) + '">' +
+        '<path class="' + cls + '" d="' + g.d + '" fill-rule="evenodd" data-iso3="' +
+        esc(iso) + '" data-tip="' + esc(tipFor(iso, g.name, enByIso[iso], cn, lv)).replace(/"/g, "&quot;") +
+        '"/></a>';
+    }).join("");
+
+    // 大国/重点国家常驻标签（少量）
+    var labelSvg = Object.keys(labels).map(function (iso) {
+      var xy = labels[iso];
+      return '<text class="am-label" x="' + xy[0] + '" y="' + (xy[1] + 3) +
+        '" text-anchor="middle">' + esc(geo[iso].name) + "</text>";
+    }).join("");
+
+    // 小岛国 marker（真实坐标，简化可见标记）
+    var markerSvg = Object.keys(markers).map(function (iso) {
+      var m = markers[iso];
+      var lv = riskByIso[iso];
+      var cls = "am-country am-marker " + (lv !== undefined ? "r" + lv : "r0");
+      var cn = cnByIso[iso];
+      var href = cn ? ' href="country.html?country=' + encodeURIComponent(cn) + '"' : "";
+      return '<a' + href + ' class="am-link" tabindex="0" aria-label="' + esc(cn || m.name) +
+        '" data-iso3="' + esc(iso) + '">' +
+        '<circle class="' + cls + '" cx="' + m.x + '" cy="' + m.y + '" r="4" data-tip="' +
+        esc(tipFor(iso, m.name, null, cn, lv)).replace(/"/g, "&quot;") + '"/></a>';
     }).join("");
 
     host.querySelector(".v11-loading").outerHTML =
       '<div class="v11-map-wrap" id="v11MapSvg">' +
       '<svg viewBox="0 0 560 620" role="img" aria-label="Africa Risk Map">' +
-      land + dotsSvg + "</svg>" +
-      '<div class="v11-map-tip" id="v11MapTip"></div></div>';
+      paths + markerSvg + labelSvg + "</svg>" +
+      '<div class="v11-map-tip" id="v11MapTip"></div></div>' +
+      (geoKeys.length ? "" : '<div class="v11-empty">风险数据暂不可用</div>');
+
     var legend = document.getElementById("v11MapLegend");
     if (legend) {
       legend.innerHTML = [
-        ["#8b0000", "Very High"], ["#c62828", "High"], ["#e65100", "Elevated"],
-        ["#b8860b", "Moderate"], ["#1565c0", "Low"], ["#94a3b8", "No Data"]
+        ["--v11-risk-5", "极高 Very High"], ["--v11-risk-4", "高 High"],
+        ["--v11-risk-3", "较高 Elevated"], ["--v11-risk-2", "中等 Moderate"],
+        ["--v11-risk-1", "低 Low"], ["--v11-risk-0", "暂无数据 No Data"]
       ].map(function (x) {
-        return '<span><i style="background:' + x[0] + '"></i>' + x[1] + "</span>";
+        return '<span><i style="background:var(' + x[0] + ')"></i>' + x[1] + "</span>";
       }).join("");
     }
-    bindMapTip();
+    bindMapInteractions();
   }
 
-  function bindMapTip() {
+  function bindMapInteractions() {
     var tip = document.getElementById("v11MapTip");
-    if (!tip) return;
-    document.querySelectorAll(".v11-map-dot").forEach(function (dot) {
-      dot.addEventListener("mousemove", function (ev) {
-        tip.innerHTML = dot.getAttribute("data-tip");
-        tip.style.opacity = 1;
-        var wrap = document.getElementById("v11MapSvg");
-        var rect = wrap.getBoundingClientRect();
-        var x = ev.clientX - rect.left + 14;
-        var y = ev.clientY - rect.top - 10;
-        if (x + 180 > rect.width) x = ev.clientX - rect.left - 190;
-        if (y + 120 > rect.height) y = ev.clientY - rect.top - 120;
-        tip.style.left = x + "px";
-        tip.style.top = y + "px";
+    var wrap = document.getElementById("v11MapSvg");
+    function showTip(el, ev) {
+      if (!tip || !wrap) return;
+      tip.innerHTML = el.getAttribute("data-tip");
+      tip.style.opacity = 1;
+      var rect = wrap.getBoundingClientRect();
+      var x = ev.clientX - rect.left + 14;
+      var y = ev.clientY - rect.top - 10;
+      if (x + 190 > rect.width) x = ev.clientX - rect.left - 200;
+      if (y + 130 > rect.height) y = ev.clientY - rect.top - 130;
+      tip.style.left = x + "px";
+      tip.style.top = y + "px";
+    }
+    document.querySelectorAll(".am-link").forEach(function (a) {
+      var iso = a.getAttribute("data-iso3");
+      var el = a.querySelector("path, circle");
+      a.addEventListener("mousemove", function (ev) { showTip(el, ev); });
+      a.addEventListener("mouseleave", function () {
+        if (tip) tip.style.opacity = 0;
+        a.classList.remove("am-hover");
       });
-      dot.addEventListener("mouseleave", function () { tip.style.opacity = 0; });
+      a.addEventListener("mouseenter", function () { a.classList.add("am-hover"); });
+      a.addEventListener("focus", function () { a.classList.add("am-hover"); });
+      a.addEventListener("blur", function () { a.classList.remove("am-hover"); });
+      a.addEventListener("keydown", function (ev) {
+        if (ev.key === "Enter" && a.getAttribute("href")) window.location.href = a.getAttribute("href");
+      });
+      a.addEventListener("click", function (ev) {
+        if (!a.getAttribute("href")) ev.preventDefault();
+      });
+      // Top Risk 榜单联动：hover 地图 → 高亮榜单项
+      a.addEventListener("mouseenter", function () {
+        var item = document.querySelector('.v11-tr-item[data-iso3="' + iso + '"]');
+        if (item) item.classList.add("v11-tr-active");
+      });
+      a.addEventListener("mouseleave", function () {
+        var item = document.querySelector('.v11-tr-item[data-iso3="' + iso + '"]');
+        if (item) item.classList.remove("v11-tr-active");
+      });
     });
   }
 
-  // ── 5. Top Risk Countries ──
+  // ── 5. Top Risk Countries（与地图同一 risk dataset + 联动 + Risk Summary）──
   function renderTopRisk(snapshots) {
     var host = document.getElementById("v11TopRisk");
     if (!host) return;
@@ -238,18 +298,45 @@
       return (b.baseline_risk_level || 0) - (a.baseline_risk_level || 0) ||
         (b.events_7d || 0) - (a.events_7d || 0);
     }).slice(0, 7);
+    // Risk Summary：各等级计数（与地图同源）
+    var cnt = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0, 0: 0 };
+    snapshots.forEach(function (s) {
+      var lv = s.baseline_risk_level || 0;
+      cnt[lv] = (cnt[lv] || 0) + 1;
+    });
+    var summary = '<div class="v11-risk-summary">' +
+      '<div class="v11-risk-summary-title">RISK SUMMARY</div>' +
+      '<div class="v11-risk-summary-row">' +
+      '<span class="v11-risk r4">极高 ' + dash(cnt[4] + cnt[5]) + "</span>" +
+      '<span class="v11-risk r3">高 ' + dash(cnt[3]) + "</span>" +
+      '<span class="v11-risk r2">较高 ' + dash(cnt[2]) + "</span>" +
+      '<span class="v11-risk r1">中等 ' + dash(cnt[1]) + "</span>" +
+      "</div>" +
+      '<a class="v11-more" href="countries.html">查看全部国家 →</a></div>';
     host.querySelector(".v11-loading").outerHTML = list.length
       ? '<ol class="v11-tr-list">' + list.map(function (s, i) {
           var r = rl(s.baseline_risk_level || 0);
-          return '<li><a class="v11-tr-item" href="country.html?country=' +
-            encodeURIComponent(s.country_cn) + '">' +
+          return '<li><a class="v11-tr-item" data-iso3="' + esc(s.iso3 || "") +
+            '" href="country.html?country=' + encodeURIComponent(s.country_cn) + '">' +
             '<span class="v11-tr-rank">' + String(i + 1).padStart(2, "0") + "</span>" +
             '<span class="v11-tr-name">' + esc(s.country_cn) + "</span>" +
             '<span class="v11-risk ' + r.cls + '">' + esc(r.cn) + "</span>" +
             '<span class="v11-tr-meta">24h:' + dash(s.events_24h) + " · 7d:" + dash(s.events_7d) +
             "</span></a></li>";
-        }).join("") + "</ol>"
-      : empty("暂无国家风险数据。");
+        }).join("") + "</ol>" + summary
+      : empty("暂无国家风险数据。") + summary;
+    // 榜单 hover → 地图高亮
+    host.querySelectorAll(".v11-tr-item").forEach(function (item) {
+      var iso = item.getAttribute("data-iso3");
+      item.addEventListener("mouseenter", function () {
+        var el = document.querySelector('.am-link[data-iso3="' + iso + '"]');
+        if (el) el.classList.add("am-hover");
+      });
+      item.addEventListener("mouseleave", function () {
+        var el = document.querySelector('.am-link[data-iso3="' + iso + '"]');
+        if (el) el.classList.remove("am-hover");
+      });
+    });
   }
 
   // ── 6. Key Developments ──

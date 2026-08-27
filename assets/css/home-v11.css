@@ -70,7 +70,7 @@ body[data-page="home"] {
   margin-top: 14px;
 }
 .v11-grid-2 { grid-template-columns: 3fr 2fr; }
-.v11-grid-map { grid-template-columns: 3fr 2fr; }
+.v11-grid-map { grid-template-columns: minmax(0, 2.1fr) minmax(280px, 1fr); align-items: start; }
 
 /* ---------- Card ---------- */
 .v11-card {
@@ -148,9 +148,36 @@ body[data-page="home"] {
 .v11-overall-trend { margin-top: 8px; font-size: 14px; color: var(--v11-muted); }
 .v11-overall-basis { margin-top: 10px; font-size: 11px; color: var(--v11-muted); }
 
-/* ---------- Map ---------- */
+/* ---------- Map (real boundaries choropleth) ---------- */
 .v11-map-wrap { position: relative; }
 .v11-map-wrap svg { width: 100%; height: auto; display: block; }
+.am-link { cursor: pointer; }
+.am-country {
+  stroke: #c3cedd;
+  stroke-width: .6;
+  transition: fill-opacity .15s, stroke .15s, stroke-width .15s;
+}
+.am-country.r0 { fill: var(--v11-risk-0); }
+.am-country.r1 { fill: var(--v11-risk-1); }
+.am-country.r2 { fill: var(--v11-risk-2); }
+.am-country.r3 { fill: var(--v11-risk-3); }
+.am-country.r4 { fill: var(--v11-risk-4); }
+.am-country.r5 { fill: var(--v11-risk-5); }
+.am-link:hover .am-country,
+.am-link.am-hover .am-country,
+.am-link:focus .am-country {
+  stroke: #0f2440;
+  stroke-width: 1.6;
+  fill-opacity: .88;
+}
+.am-marker { stroke: #fff; stroke-width: 1; }
+.am-label {
+  font-size: 9.5px;
+  fill: #334155;
+  font-weight: 600;
+  pointer-events: none;
+  text-shadow: 0 0 2px #fff, 0 0 2px #fff;
+}
 .v11-map-tip {
   position: absolute;
   pointer-events: none;
@@ -159,7 +186,7 @@ body[data-page="home"] {
   font-size: 12px;
   border-radius: 6px;
   padding: 8px 10px;
-  min-width: 160px;
+  min-width: 180px;
   opacity: 0;
   transition: opacity .15s;
   z-index: 5;
@@ -196,6 +223,22 @@ body[data-page="home"] {
 .v11-tr-name { flex: 1; font-weight: 600; }
 .v11-tr-trend { width: 20px; text-align: center; color: var(--v11-muted); font-weight: 700; }
 .v11-tr-meta { text-align: right; font-size: 11px; color: var(--v11-muted); }
+.v11-tr-item.v11-tr-active,
+.v11-tr-item:hover { background: var(--v11-blue-soft); }
+.v11-risk-summary {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--v11-border);
+}
+.v11-risk-summary-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--v11-muted);
+  letter-spacing: .5px;
+  margin-bottom: 8px;
+}
+.v11-risk-summary-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+.v11-risk-summary-row .v11-risk { font-size: 11px; padding: 3px 8px; }
 
 /* ---------- Key Developments ---------- */
 .v11-kd-grid {
