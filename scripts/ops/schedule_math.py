@@ -34,7 +34,7 @@ SCHEDULES = {
     "social_ai": ["00:30", "06:30", "12:30", "18:30"],
     "disease_ai": ["01:30"],
     "africa_daily": ["20:00"],
-    "country_weekly": ["06:45"],  # 仅周日（cron 的 DOW=0）
+    "country_weekly": ["06:45"],  # 北京周日 06:45 → UTC 周六 22:45（cron DOW=6）
 }
 
 
@@ -55,6 +55,40 @@ def verify_schedule(bj_hm, expected_utc_hm):
     """验证北京时间→UTC 转换与预期一致（§三十 schedule math 测试）。"""
     h, m, off = bj_to_utc(bj_hm)
     return "%02d:%02d" % (h, m) == expected_utc_hm, (h, m, off)
+
+
+# GitHub Actions cron DOW：0=Sunday, 1=Monday ... 6=Saturday（与 cron 标准一致）。
+# Python weekday()：0=Monday ... 6=Sunday。转换：cron_dow = (py_dow + 1) % 7。
+_CRON_DOW_NAME = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+
+
+def verify_weekly_dow(bj_dow_py, bj_hm, cron_dow):
+    """验证"北京 星期X HH:MM"换算为 UTC cron 的 DOW 是否一致（跨日语义）。
+
+    bj_dow_py : Python weekday() 语义（0=Monday ... 6=Sunday）。
+    cron_dow  : GitHub Actions cron 的 DOW（0=Sunday ... 6=Saturday）。
+    内部用真实日期（2026-08-30 为周日）计算 UTC 日历日并换算 cron DOW。
+    """
+    base = datetime(2026, 8, 30)  # 周日（Python weekday=6），仅作锚点
+    # 找到最近的、满足 bj_dow_py 的日期
+    shift = (bj_dow_py - base.weekday()) % 7
+    bj_day = base + timedelta(days=shift)
+    hh, mm = int(bj_hm.split(":")[0]), int(bj_hm.split(":")[1])
+    bj_dt = bj_day.replace(hour=hh, minute=mm)
+    utc_dt = bj_dt - timedelta(hours=8)
+    utc_cron_dow = (utc_dt.weekday() + 1) % 7
+    expected_bj = utc_dt + timedelta(hours=8)
+    ok = utc_cron_dow == cron_dow
+    return ok, {
+        "bj_dow": _CRON_DOW_NAME[(bj_dow_py + 1) % 7],
+        "bj_time": bj_hm,
+        "utc_datetime": utc_dt.strftime("%Y-%m-%d %H:%M UTC"),
+        "utc_cron_dow": utc_cron_dow,
+        "cron_dow": cron_dow,
+        "cron_dow_name": _CRON_DOW_NAME[cron_dow],
+        "roundtrip_bj": expected_bj.strftime("%Y-%m-%d %H:%M BJT"),
+        "ok": ok,
+    }
 
 
 if __name__ == "__main__":

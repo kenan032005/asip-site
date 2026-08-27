@@ -51,6 +51,47 @@ class TestScheduleMath(unittest.TestCase):
         ok, _ = sm.verify_schedule("06:45", "22:45")
         self.assertTrue(ok)
 
+    def test_weekly_dow_cross_day(self):
+        # 北京周日 06:45 → UTC 周六 22:45 → cron DOW=6（热修：原 0 为周一 06:45 BJT，错）
+        ok, info = sm.verify_weekly_dow(6, "06:45", 6)  # py_dow 6=Sunday, cron_dow 6=Saturday
+        self.assertTrue(ok)
+        self.assertEqual(info["utc_datetime"], "2026-08-29 22:45 UTC")
+        self.assertEqual(info["roundtrip_bj"], "2026-08-30 06:45 BJT")
+
+    def test_weekly_dow_old_cron_rejected(self):
+        # 旧 cron '45 22 * * 0' 匹配"周日 22:45 UTC"，换算回北京是周一 06:45。
+        # 即：目标（北京周日 06:45 → DOW=6）不匹配 DOW=0；而北京周一 06:45 → DOW=0 才成立。
+        ok, info = sm.verify_weekly_dow(6, "06:45", 0)   # 周日 06:45 → DOW=0？否
+        self.assertFalse(ok)
+        self.assertEqual(info["roundtrip_bj"], "2026-08-30 06:45 BJT")
+        ok2, info2 = sm.verify_weekly_dow(0, "06:45", 0)  # 周一 06:45 → DOW=0？是（旧 cron 实配周一）
+        self.assertTrue(ok2)
+        self.assertEqual(info2["utc_datetime"], "2026-08-30 22:45 UTC")
+        self.assertEqual(info2["roundtrip_bj"], "2026-08-31 06:45 BJT")
+
+    def test_all_schedules_full_validation(self):
+        # §二 全量：5 组 schedule 的 hour + DOW 均须 PASS
+        checks = [
+            # (bj_hm, expected_utc_hm, py_dow_or_None, cron_dow_or_None)
+            ("00:20", "16:20", None, None),
+            ("06:20", "22:20", None, None),
+            ("12:20", "04:20", None, None),
+            ("18:20", "10:20", None, None),
+            ("00:30", "16:30", None, None),
+            ("06:30", "22:30", None, None),
+            ("12:30", "04:30", None, None),
+            ("18:30", "10:30", None, None),
+            ("01:30", "17:30", None, None),
+            ("20:00", "12:00", None, None),
+            ("06:45", "22:45", 6, 6),  # 北京周日 06:45 → UTC 周六 22:45 → DOW=6
+        ]
+        for bj, utc, py_dow, cron_dow in checks:
+            ok, _ = sm.verify_schedule(bj, utc)
+            self.assertTrue(ok, "hour check FAIL: %s -> %s" % (bj, utc))
+            if py_dow is not None:
+                ok, info = sm.verify_weekly_dow(py_dow, bj, cron_dow)
+                self.assertTrue(ok, "dow check FAIL: %s" % info)
+
 
 class FakeProvider:
     def __init__(self, text="not-json"):
