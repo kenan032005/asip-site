@@ -1,0 +1,109 @@
+name: ASIP Production Deploy
+
+# Stage 8C Package3 — Production Deploy（§二十/§二十六）
+# 仅 workflow_dispatch（无 schedule / push trigger）。
+# 自动部署门禁：vars.AUTO_DEPLOY_ENABLED == 'true' 才部署 gh-pages；
+# 否则执行 manual shadow build（build_site + dist validation），不部署。
+# gh-pages 不改 production root；正式 automatic deployment 保持 false 直到 Stage8D。
+
+on:
+  workflow_dispatch:
+    inputs:
+      shadow_only:
+        description: "仅 shadow build（默认 true；false 且 AUTO_DEPLOY_ENABLED=true 才部署）"
+        required: false
+        type: boolean
+        default: true
+
+concurrency:
+  group: asip-prod-deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+env:
+  ASIP_MODE: development
+  browser_direct_api_call: "false"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout production code
+        uses: actions/checkout@v4
+        with:
+          ref: stage8c-package3-cloud-automation
+          fetch-depth: 1
+
+      - name: Checkout production state branch（数据快照）
+        uses: actions/checkout@v4
+        with:
+          ref: production-state
+          path: state_src
+          fetch-depth: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Load state data
+        run: |
+          mkdir -p data/runtime/ops
+          cp -r state_src/data/runtime/ops/* data/runtime/ops/ 2>/dev/null || true
+
+      - name: Build site（§十九）
+        run: python scripts/build_site.py
+
+      - name: Validate dist（§十九）
+        run: python scripts/validate_pipeline.py --stage dist
+
+      - name: Dist secret scan（§二十七）
+        run: |
+          python - <<'PY'
+          import pathlib, re
+          pats = re.compile(r"ASIP_DEEPSEEK_API_KEY\s*=\s*[A-Za-z0-9]|sk-[A-Za-z0-9]{16,}|Bearer\s+[A-Za-z0-9._-]{16,}", re.I)
+          hits = []
+          for p in pathlib.Path("dist").rglob("*"):
+              if p.is_file():
+                  try: txt = p.read_text(encoding="utf-8", errors="ignore")
+                  except Exception: continue
+                  for m in pats.finditer(txt):
+                      hits.append(str(p))
+          print("secret_leak_count = " + str(len(hits)))
+          if hits:
+              raise SystemExit("secret leak in dist")
+          PY
+
+      - name: Deploy gh-pages（§二十：AUTO_DEPLOY_ENABLED=true 且非 shadow 才部署）
+        if: github.event.inputs.shadow_only != 'true' && vars.AUTO_DEPLOY_ENABLED == 'true'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          force_orphan: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'deploy: ${{ github.sha }}'
+
+      - name: Deploy status note（shadow / gated）
+        if: always()
+        run: |
+          echo "AUTO_DEPLOY_ENABLED = ${{ vars.AUTO_DEPLOY_ENABLED }}"
+          echo "SHADOW_ONLY = ${{ github.event.inputs.shadow_only }}"
+          if [ "${{ github.event.inputs.shadow_only }}" = "true" ] || [ "${{ vars.AUTO_DEPLOY_ENABLED }}" != "true" ]; then
+            echo "DEPLOY_SKIPPED (shadow build only)"
+          else
+            echo "DEPLOY_EXECUTED"
+          fi
+
+      - name: Upload build artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-build
+          path: dist/
+          if-no-files-found: warn
