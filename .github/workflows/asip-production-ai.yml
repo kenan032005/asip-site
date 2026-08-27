@@ -40,7 +40,7 @@ jobs:
       - name: Checkout production code
         uses: actions/checkout@v4
         with:
-          ref: 5ff4294a8ff8e07f577c820c37fdae672eb5b43c
+          ref: fd0117939fe5a46ccc240765ac8ab2a3c56a7489
           fetch-depth: 1
 
       - name: Checkout production state branch
@@ -95,10 +95,12 @@ jobs:
       - name: Commit state → production-state branch
         run: |
           cp -r data/runtime/ops/* state_src/data/runtime/ops/ 2>/dev/null || true
+          cp -r data/canonical state_src/data/canonical 2>/dev/null || true
+          cp -r data/disease state_src/data/disease 2>/dev/null || true
           cd state_src
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -f data/runtime/ops
+          git add -f data/runtime/ops data/canonical data/disease
           git commit -m "ops: ai run ${{ github.run_id }}" --allow-empty || echo "no state change"
           git push origin production-state
           cd ..
