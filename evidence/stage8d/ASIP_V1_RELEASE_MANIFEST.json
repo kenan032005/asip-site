@@ -1,56 +1,87 @@
 {
-  "schema": "asip-v1-release-manifest",
-  "release": {
-    "name": "ASIP V1.0 Production",
-    "release_code_sha": "ae582a221f546ff99bb00842e3071d1820b5940d",
-    "main_sha": "9c4bea0004edeab7387858b2040809f724aaa391",
-    "production_state_sha": "9e882b63ef324f3f121848fb476356044814376f",
-    "gh_pages_sha": "dad448b628ed67f2d7361f6726b6c7b950a6434a",
-    "release_tag": "PENDING_24H_OBSERVATION",
-    "provider": "deepseek-v4-flash",
-    "report_architecture": "DETERMINISTIC_FACTS_PLUS_AI_ANALYSIS",
-    "report_statuses": ["FULL", "FALLBACK", "LOW_DATA"],
-    "provider_secret": "ASIP_DEEPSEEK_API_KEY",
-    "browser_direct_api_call": false
-  },
-  "operations": {
-    "schedule": {
-      "PRODUCTION_SCHEDULE_ENABLED": true,
-      "social_collection": "20 16,22,4,10 * * * (BJT 00:20/06:20/12:20/18:20)",
-      "social_ai": "30 16,22,4,10 * * * (BJT 00:30/06:30/12:30/18:30)",
-      "disease": "30 17 * * * (BJT 01:30 daily)",
-      "africa_daily": "0 12 * * * (BJT 20:00 daily)",
-      "priority_weekly": "45 22 * * 6 (BJT Sun 06:45 = UTC Sat 22:45)"
-    },
-    "auto_deploy": {
-      "AUTO_DEPLOY_ENABLED": true,
-      "trigger_path": "reports workflow -> workflow_dispatch deploy (AUTO_DEPLOY_ENABLED gate) -> build -> validate -> dist secret scan -> gh-pages"
-    },
-    "canary": {
-      "collection_run": "33102951216 (success, real sources)",
-      "ai_run": "33104093748 (success, social=9 disease=19 calls)",
-      "reports_run": "33104903952 (success, daily/tcd FALLBACK, ssd LOW_DATA, FINAL_SCHEMA all PASS)",
-      "deploy_run": "33107614720 + 33108232846 (success; data-load fix)",
-      "post_canary_state": "9e882b6",
-      "online": "master_events=9, disease_outbreaks=17, all pages 200"
-    }
-  },
-  "observation": {
-    "window_start": "2026-08-28T01:50:00+08:00",
-    "window_hours": 24,
-    "required": {"collection_cycles": 4, "ai_cycles": 4, "disease_cycles": 1, "daily_cycles": 1},
-    "result": "PENDING"
-  },
-  "known_technical_debt": [
-    "Analysis boundary guard false positives（短语拼接/表述差异误报；已全部复核为误报，无真实越界）",
-    "Stage8B test_artifacts_no_secrets artifact prerequisite（独立 secret scan 18/18 提供保障）",
-    "test_stage8c_derived_evidence ART 依赖本地审计产物（审计专用，生产等价路径由 evidence fallback 覆盖）",
-    "Major Brief automatic publication = false（V1 候选生成不自动公开）",
-    "Stage6 clustering→timeline 完整链未纳入生产（V1 用确定性 timeline bridge 从 canonical 构建）"
+ "schema": "asip-v1-release-manifest",
+ "release": {
+  "name": "ASIP V1.0 Production",
+  "release_code_sha": "ae582a221f546ff99bb00842e3071d1820b5940d",
+  "main_sha": "9c4bea0004edeab7387858b2040809f724aaa391",
+  "production_state_sha": "9e882b63ef324f3f121848fb476356044814376f",
+  "gh_pages_sha": "dad448b628ed67f2d7361f6726b6c7b950a6434a",
+  "release_tag": "PENDING_24H_OBSERVATION",
+  "provider": "deepseek-v4-flash",
+  "report_architecture": "DETERMINISTIC_FACTS_PLUS_AI_ANALYSIS",
+  "report_statuses": [
+   "FULL",
+   "FALLBACK",
+   "LOW_DATA"
   ],
-  "rollback": {
-    "pre_cutover_state": "pre-cutover-state tag -> f8784f3",
-    "pre_cutover_gh_pages": "pre-cutover-gh-pages tag -> 46c9654",
-    "ready": true
+  "provider_secret": "ASIP_DEEPSEEK_API_KEY",
+  "browser_direct_api_call": false
+ },
+ "operations": {
+  "schedule": {
+   "PRODUCTION_SCHEDULE_ENABLED": true,
+   "social_collection": "20 16,22,4,10 * * * (BJT 00:20/06:20/12:20/18:20)",
+   "social_ai": "30 16,22,4,10 * * * (BJT 00:30/06:30/12:30/18:30)",
+   "disease": "30 17 * * * (BJT 01:30 daily)",
+   "africa_daily": "0 12 * * * (BJT 20:00 daily)",
+   "priority_weekly": "45 22 * * 6 (BJT Sun 06:45 = UTC Sat 22:45)"
+  },
+  "auto_deploy": {
+   "AUTO_DEPLOY_ENABLED": true,
+   "trigger_path": "reports workflow -> workflow_dispatch deploy (AUTO_DEPLOY_ENABLED gate) -> build -> validate -> dist secret scan -> gh-pages"
+  },
+  "canary": {
+   "collection_run": "33102951216 (success, real sources)",
+   "ai_run": "33104093748 (success, social=9 disease=19 calls)",
+   "reports_run": "33104903952 (success, daily/tcd FALLBACK, ssd LOW_DATA, FINAL_SCHEMA all PASS)",
+   "deploy_run": "33107614720 + 33108232846 (success; data-load fix)",
+   "post_canary_state": "9e882b6",
+   "online": "master_events=9, disease_outbreaks=17, all pages 200"
   }
+ },
+ "observation": {
+  "window_start": "2026-08-28T01:50:00+08:00",
+  "window_hours": 24,
+  "required": {
+   "collection_cycles": 4,
+   "ai_cycles": 4,
+   "disease_cycles": 1,
+   "daily_cycles": 1
+  },
+  "result": "PENDING",
+  "baseline_at_check": {
+   "production_state_sha": "9e882b63ef324f3f121848fb476356044814376f",
+   "gh_pages_sha": "dad448b628ed67f2d7361f6726b6c7b950a6434a",
+   "scheduled_runs_so_far": 0,
+   "note": "first natural scheduled cycle (collection 06:20 BJT) not yet occurred; no artificial dispatch"
+  }
+ },
+ "known_technical_debt": [
+  "Analysis boundary guard false positives（短语拼接/表述差异误报；已全部复核为误报，无真实越界）",
+  "Stage8B test_artifacts_no_secrets artifact prerequisite（独立 secret scan 18/18 提供保障）",
+  "test_stage8c_derived_evidence ART 依赖本地审计产物（审计专用，生产等价路径由 evidence fallback 覆盖）",
+  "Major Brief automatic publication = false（V1 候选生成不自动公开）",
+  "Stage6 clustering→timeline 完整链未纳入生产（V1 用确定性 timeline bridge 从 canonical 构建）"
+ ],
+ "rollback": {
+  "pre_cutover_state": "pre-cutover-state tag -> f8784f3",
+  "pre_cutover_gh_pages": "pre-cutover-gh-pages tag -> 46c9654",
+  "ready": true
+ },
+ "final_release_audit": {
+  "fresh_clone_path": "C:/Users/kenan/WorkBuddy/clean/asip-8d-final",
+  "fresh_clone_head": "ae582a221f546ff99bb00842e3071d1820b5940d",
+  "worktree_clean": true,
+  "stage8c": "96/96 PASS",
+  "stage7": "67/67 PASS",
+  "stage8b_secret_core": "18/18 OK (1 skipped)",
+  "stage8a": "25 tests, 2 failures in fresh-clone (no state data; WAIVER-002/003 semantics; 25/25 with state data)",
+  "validate_pipeline": "0 severe errors (source+dist)",
+  "build_site": "success",
+  "schedule_math": "5/5 PASS",
+  "workflow_syntax": "4/4 OK (main YAML locks ae582a2)",
+  "code_state_separation_final": "PASS",
+  "secret_scan": "PASS (0 leaks)",
+  "new_blocking_regressions": 0
+ }
 }
