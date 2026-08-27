@@ -5,15 +5,15 @@
  "week_start": "2026-07-25",
  "week_end": "2026-08-01",
  "cutoff": null,
- "generated_at": "2026-08-28T02:37:01.228416+00:00",
+ "generated_at": "2026-08-28T02:44:18.705594+00:00",
  "period": {
   "start": "2026-07-25",
   "end": "2026-08-01"
  },
  "country_iso3": "TCD",
  "fact_count": 7,
- "social_fact_count": 6,
- "disease_fact_count": 1,
+ "social_fact_count": 5,
+ "disease_fact_count": 2,
  "social_facts": [
   {
    "fact_id": "EVT_b3861ba5c8d78187",
@@ -276,19 +276,16 @@
      "sections.social.facts[0].evidence"
     ]
    }
-  },
+  }
+ ],
+ "disease_facts": [
   {
    "fact_id": "DSEV_ac0ee92b04bc87c6",
+   "disease_id": "cholera",
    "headline_zh": "Cholera",
    "verified_summary": "",
-   "country": null,
    "country_iso3": "TCD",
-   "category": "Cholera",
-   "event_type": null,
-   "importance_score": 50,
    "verification_status": "official",
-   "single_source_warning": false,
-   "conflicting": false,
    "uncertainties": [
     "乍得儿童占感染近三分之二（UNICEF 口径），具体病例数未单独给出"
    ],
@@ -301,21 +298,19 @@
    "selection_reasons": [],
    "numeric_facts": {
     "2026": [
-     "sections.social.latest_update_at"
+     "sections.disease.latest_update_at"
     ],
     "8": [
-     "sections.social.latest_update_at"
+     "sections.disease.latest_update_at"
     ],
     "12": [
-     "sections.social.latest_update_at"
+     "sections.disease.latest_update_at"
     ]
    }
-  }
- ],
- "disease_facts": [
+  },
   {
-   "fact_id": null,
-   "disease_id": null,
+   "fact_id": "DSEV_ac0ee92b04bc87c6",
+   "disease_id": "cholera",
    "headline_zh": "Cholera",
    "verified_summary": "",
    "country_iso3": "TCD",
@@ -352,8 +347,8 @@
   "UNICEF UK"
  ],
  "verification": {
-  "social_gate_pass": 6,
-  "disease_gate_pass": 1,
+  "social_gate_pass": 5,
+  "disease_gate_pass": 2,
   "single_source_count": 5,
   "conflicting_count": 0
  },
@@ -371,16 +366,14 @@
   "EVT_68ba0eb89452a250": 50,
   "EVT_5291228872082f78": 50,
   "EVT_0f85e5f42626ce7d": 50,
-  "EVT_451cac52bc310619": 50,
-  "DSEV_ac0ee92b04bc87c6": 50
+  "EVT_451cac52bc310619": 50
  },
  "selection_reasons": {
   "EVT_b3861ba5c8d78187": [],
   "EVT_68ba0eb89452a250": [],
   "EVT_5291228872082f78": [],
   "EVT_0f85e5f42626ce7d": [],
-  "EVT_451cac52bc310619": [],
-  "DSEV_ac0ee92b04bc87c6": []
+  "EVT_451cac52bc310619": []
  },
  "numeric_provenance": {
   "0": [
@@ -395,6 +388,7 @@
    "sections.social.facts[0].evidence",
    "sections.social.body_extracted",
    "sections.social.latest_update_at",
+   "period_end",
    "week_end"
   ],
   "2": [
@@ -407,6 +401,7 @@
   "7": [
    "sections.social.latest_update_at",
    "sections.social.latest_update_at",
+   "period_start",
    "week_start"
   ],
   "8": [
@@ -414,14 +409,15 @@
    "sections.social.latest_update_at",
    "sections.social.latest_update_at",
    "sections.social.body_extracted",
-   "sections.social.latest_update_at",
    "sections.disease.latest_update_at",
+   "sections.disease.latest_update_at",
+   "period_end",
    "week_end",
    "generated_at"
   ],
   "12": [
    "sections.social.body_extracted",
-   "sections.social.latest_update_at",
+   "sections.disease.latest_update_at",
    "sections.disease.latest_update_at"
   ],
   "14": [
@@ -438,6 +434,7 @@
    "sections.social.body_extracted",
    "sections.social.body_extracted",
    "sections.social.facts[0].evidence",
+   "period_start",
    "week_start"
   ],
   "29": [
@@ -455,12 +452,12 @@
   "34": [
    "sections.social.latest_update_at"
   ],
-  "37": [
-   "generated_at"
-  ],
   "40": [
    "sections.social.latest_update_at",
    "sections.social.body_extracted"
+  ],
+  "44": [
+   "generated_at"
   ],
   "50": [
    "sections.social.body_extracted",
@@ -498,16 +495,17 @@
    "sections.social.latest_update_at",
    "sections.social.body_extracted",
    "sections.social.facts[0].evidence",
-   "sections.social.latest_update_at",
    "sections.disease.latest_update_at",
+   "sections.disease.latest_update_at",
+   "period_start",
+   "period_end",
    "week_start",
    "week_end",
    "generated_at"
   ]
  },
  "country_distribution": {
-  "TD?": 5,
-  "TCD": 1
+  "TD?": 5
  },
  "trend_metrics": {},
  "stats": {},
