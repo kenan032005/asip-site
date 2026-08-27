@@ -47,9 +47,9 @@ jobs:
       - name: Checkout frozen Package2 SHA
         uses: actions/checkout@v4
         with:
-          # Stage8C Package2 commit（父 = de8ac2b Safety Layer；含完整
-          # Safety Layer 代码树 + manual trial 脚本）。锁定 SHA，不浮动。
-          ref: f8b3444c70ef7153a3bfd8e48d5bdf933da4728e
+          # Stage8C Package2 Repair commit（父 = f8b3444；含完整
+          # Safety Layer 代码树 + manual trial 脚本 + 全部 gate 修复）。锁定 SHA，不浮动。
+          ref: f5b74d1997e28dd68a9c6732d23429bbbddf5924
 
       - name: Setup Python
         uses: actions/setup-python@v5
