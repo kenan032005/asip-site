@@ -1,0 +1,103 @@
+{
+ "label": "S360773c7",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "tokens": {
+  "input_tokens": 2341,
+  "output_tokens": 423,
+  "total_tokens": 2764
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得教师罢工：政权扣减工资并越过令人担忧的门槛",
+   "summary_zh": "据TchadOne报道，乍得政权决定扣减数千名罢工教师的工资，并已向银行发出信函，要求取消并退回2026年2月工资转账至中非国家银行（BEAC）的国库账户。政府以“计算错误”为由，但实际是集体制裁。教师工会要求执行政权自己签署的法令，而国家拒绝履行承诺并惩罚要求者，被视为对罢工权的直接侵犯。",
+   "event_type": "civil_unrest",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N’Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得政权扣减数千名罢工教师的工资",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le régime va bel et bien couper le salaire de milliers d’enseignants grévistes"
+    },
+    {
+     "fact": "政府已向银行发出信函，要求取消并退回2026年2月工资转账至国库账户",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La correspondance adressée aux banques, ordonnant l’annulation et l’extourne des virements des salaires de février 2026 vers le compte du Trésor à la BEAC"
+    },
+    {
+     "fact": "教师工会要求执行政权自己签署的法令",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les syndicats enseignants ne réclament pas une faveur, mais l’application d’un décret signé par le régime lui-même"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚未得到其他来源证实",
+    "政府称扣薪是“计算错误”，但报道认为实际是集体制裁，此说法未获官方确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得教师罢工：政权扣减工资并越过令人担忧的门槛",
+   "summary_zh": "据TchadOne报道，乍得政权决定扣减数千名罢工教师的工资，并已向银行发出信函，要求取消并退回2026年2月工资转账至中非国家银行（BEAC）的国库账户。政府以“计算错误”为由，但实际是集体制裁。教师工会要求执行政权自己签署的法令，而国家拒绝履行承诺并惩罚要求者，被视为对罢工权的直接侵犯。",
+   "event_type": "civil_unrest",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N’Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得政权扣减数千名罢工教师的工资",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le régime va bel et bien couper le salaire de milliers d’enseignants grévistes"
+    },
+    {
+     "fact": "政府已向银行发出信函，要求取消并退回2026年2月工资转账至国库账户",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La correspondance adressée aux banques, ordonnant l’annulation et l’extourne des virements des salaires de février 2026 vers le compte du Trésor à la BEAC"
+    },
+    {
+     "fact": "教师工会要求执行政权自己签署的法令",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les syndicats enseignants ne réclament pas une faveur, mais l’application d’un décret signé par le régime lui-même"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚未得到其他来源证实",
+    "政府称扣薪是“计算错误”，但报道认为实际是集体制裁，此说法未获官方确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_9a551301360773c7",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

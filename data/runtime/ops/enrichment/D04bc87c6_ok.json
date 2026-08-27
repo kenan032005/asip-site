@@ -1,0 +1,85 @@
+{
+ "label": "D04bc87c6",
+ "task_type": "disease_summary",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "tokens": {
+  "input_tokens": 1482,
+  "output_tokens": 207,
+  "total_tokens": 1689
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "case_count_type",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"具体病例数未单独给出\", \"乍得儿童占感染近三分之二（UNICEF口径）\"]",
+    "after": "[\"具体病例数未单独给出\", \"乍得儿童占感染近三分之二（UNICEF口径）\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "uncertainties",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"具体病例数未单独给出\", \"乍得儿童占感染近三分之二（UNICEF口径）\", \"相关情况尚未证实。\"]",
+    "after": "[\"具体病例数未单独给出\", \"乍得儿童占感染近三分之二（UNICEF口径）\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "disease_event_id": "DSEV_ac0ee92b04bc87c6",
+   "title_zh": "乍得湖流域霍乱疫情跨境扩散",
+   "summary_zh": "据UNICEF通报，霍乱疫情在乍得湖流域跨境扩散，影响乍得、尼日利亚和喀麦隆。疫情处于活跃状态，具体病例数未明确，但据称乍得儿童占感染近三分之二。",
+   "key_changes": [
+    {
+     "type": "geographic_spread",
+     "description": "疫情扩散至乍得、尼日利亚和喀麦隆三国",
+     "evidence_field": "affected_countries"
+    }
+   ],
+   "uncertainties": [
+    "具体病例数未单独给出",
+    "乍得儿童占感染近三分之二（UNICEF口径）"
+   ],
+   "public_health_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "disease_event_id": "DSEV_ac0ee92b04bc87c6",
+   "title_zh": "乍得湖流域霍乱疫情跨境扩散",
+   "summary_zh": "据UNICEF通报，霍乱疫情在乍得湖流域跨境扩散，影响乍得、尼日利亚和喀麦隆。疫情处于活跃状态，具体病例数未明确，但据称乍得儿童占感染近三分之二。",
+   "key_changes": [
+    {
+     "type": "geographic_spread",
+     "description": "疫情扩散至乍得、尼日利亚和喀麦隆三国",
+     "evidence_field": "affected_countries"
+    }
+   ],
+   "uncertainties": [
+    "具体病例数未单独给出",
+    "乍得儿童占感染近三分之二（UNICEF口径）",
+    "相关情况尚未证实。"
+   ],
+   "public_health_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": null,
+ "disease_event_id": "DSEV_ac0ee92b04bc87c6",
+ "country_code": "TCD"
+}

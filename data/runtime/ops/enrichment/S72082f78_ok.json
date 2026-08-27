@@ -1,0 +1,114 @@
+{
+ "label": "S72082f78",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "tokens": {
+  "input_tokens": 2694,
+  "output_tokens": 394,
+  "total_tokens": 3088
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"豺狼是否携带狂犬病病毒尚未经医学检测确认\", \"袭击事件的具体原因尚不明确\"]",
+    "after": "[\"豺狼是否携带狂犬病病毒尚未经医学检测确认\", \"袭击事件的具体原因尚不明确\", \"据RFI Afrique (Chad)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得古罗市发生疑似感染狂犬病的豺狼袭击事件",
+   "summary_zh": "乍得北部西恩内迪省古罗市近期发生多起豺狼袭击事件，造成至少五人被咬伤，其中包括四名儿童。当地非政府组织Nimè Tomba担忧这些动物可能感染狂犬病，呼吁当局提供狂犬病疫苗并识别潜在患病动物。目前尚未进行医学检测以确认豺狼是否携带狂犬病病毒。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "西恩内迪省",
+    "city": "古罗市",
+    "site": null,
+    "raw_text": "la province de l'Ennedi-Ouest, dans le nord du pays, notamment dans la commune de Gouro"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得西恩内迪省古罗市发生多起豺狼袭击事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plusieurs attaques de chacals ont été enregistrées au cours des dernières semaines, notamment dans la commune de Gouro"
+    },
+    {
+     "fact": "至少五人被咬伤，包括四名儿童",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cinq personnes, dont quatre enfants, avaient été mordues"
+    },
+    {
+     "fact": "非政府组织Nimè Tomba担忧豺狼可能感染狂犬病",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'ONG Nimè Tomba, qui craint que ces animaux soient infectés par la rage, tire la sonnette d'alarme"
+    }
+   ],
+   "uncertainties": [
+    "豺狼是否携带狂犬病病毒尚未经医学检测确认",
+    "袭击事件的具体原因尚不明确"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得古罗市发生疑似感染狂犬病的豺狼袭击事件",
+   "summary_zh": "乍得北部西恩内迪省古罗市近期发生多起豺狼袭击事件，造成至少五人被咬伤，其中包括四名儿童。当地非政府组织Nimè Tomba担忧这些动物可能感染狂犬病，呼吁当局提供狂犬病疫苗并识别潜在患病动物。目前尚未进行医学检测以确认豺狼是否携带狂犬病病毒。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "西恩内迪省",
+    "city": "古罗市",
+    "site": null,
+    "raw_text": "la province de l'Ennedi-Ouest, dans le nord du pays, notamment dans la commune de Gouro"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得西恩内迪省古罗市发生多起豺狼袭击事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plusieurs attaques de chacals ont été enregistrées au cours des dernières semaines, notamment dans la commune de Gouro"
+    },
+    {
+     "fact": "至少五人被咬伤，包括四名儿童",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cinq personnes, dont quatre enfants, avaient été mordues"
+    },
+    {
+     "fact": "非政府组织Nimè Tomba担忧豺狼可能感染狂犬病",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'ONG Nimè Tomba, qui craint que ces animaux soient infectés par la rage, tire la sonnette d'alarme"
+    }
+   ],
+   "uncertainties": [
+    "豺狼是否携带狂犬病病毒尚未经医学检测确认",
+    "袭击事件的具体原因尚不明确",
+    "据RFI Afrique (Chad)报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_5291228872082f78",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

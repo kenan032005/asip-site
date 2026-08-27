@@ -1,0 +1,83 @@
+{
+ "label": "D187fa066",
+ "task_type": "disease_summary",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "tokens": {
+  "input_tokens": 1469,
+  "output_tokens": 189,
+  "total_tokens": 1658
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "case_count_type",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"疫情按发病率阈值判定，无具体病例数\"]",
+    "after": "[\"疫情按发病率阈值判定，无具体病例数\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "uncertainties",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"疫情按发病率阈值判定，无具体病例数\", \"相关情况尚未证实。\"]",
+    "after": "[\"疫情按发病率阈值判定，无具体病例数\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "disease_event_id": "DSEV_82ca18a2187fa066",
+   "title_zh": "埃塞俄比亚奥罗米亚等地脑膜炎疫情活跃",
+   "summary_zh": "据WHO脑膜炎监测网络第23周通报，埃塞俄比亚奥罗米亚、西达马及南方民族州等地脑膜炎疫情处于活跃状态。该疫情按发病率阈值判定，目前无具体病例数。",
+   "key_changes": [
+    {
+     "type": "status_change",
+     "description": "报告新发脑膜炎疫情，状态为活跃",
+     "evidence_field": "outbreak_status"
+    }
+   ],
+   "uncertainties": [
+    "疫情按发病率阈值判定，无具体病例数"
+   ],
+   "public_health_relevance": "direct",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "disease_event_id": "DSEV_82ca18a2187fa066",
+   "title_zh": "埃塞俄比亚奥罗米亚等地脑膜炎疫情活跃",
+   "summary_zh": "据WHO脑膜炎监测网络第23周通报，埃塞俄比亚奥罗米亚、西达马及南方民族州等地脑膜炎疫情处于活跃状态。该疫情按发病率阈值判定，目前无具体病例数。",
+   "key_changes": [
+    {
+     "type": "status_change",
+     "description": "报告新发脑膜炎疫情，状态为活跃",
+     "evidence_field": "outbreak_status"
+    }
+   ],
+   "uncertainties": [
+    "疫情按发病率阈值判定，无具体病例数",
+    "相关情况尚未证实。"
+   ],
+   "public_health_relevance": "direct",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": null,
+ "disease_event_id": "DSEV_82ca18a2187fa066",
+ "country_code": "ETH"
+}

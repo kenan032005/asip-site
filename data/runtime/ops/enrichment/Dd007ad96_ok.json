@@ -1,0 +1,93 @@
+{
+ "label": "Dd007ad96",
+ "task_type": "disease_summary",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "tokens": {
+  "input_tokens": 1508,
+  "output_tokens": 264,
+  "total_tokens": 1772
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "deaths=122",
+    "marker": "unconfirmed",
+    "field": "key_changes[1].description",
+    "before": "累计报告死亡122例",
+    "after": "累计报告死亡122例，相关数字尚未证实。",
+    "rule_id": "SAFETY-CORR-B2",
+    "numeric_anchor": "suspected_cases=10741"
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "disease_event_id": "DSEV_e1ff7d33d007ad96",
+   "title_zh": "刚果（金）猴痘疫情呈下降趋势",
+   "summary_zh": "截至2026年3月22日，刚果（金）全国26省262个卫生区累计报告疑似猴痘病例10741例，死亡122例。据WHO报道，疫情呈下降趋势，第12周环比下降20.5%。",
+   "key_changes": [
+    {
+     "type": "case_update",
+     "description": "累计报告疑似病例10741例",
+     "evidence_field": "suspected_cases"
+    },
+    {
+     "type": "mortality_update",
+     "description": "累计报告死亡122例",
+     "evidence_field": "deaths"
+    },
+    {
+     "type": "status_change",
+     "description": "疫情状态为下降中",
+     "evidence_field": "outbreak_status"
+    }
+   ],
+   "uncertainties": [
+    "第12周环比下降20.5%，判定declining依据周度趋势"
+   ],
+   "public_health_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "disease_event_id": "DSEV_e1ff7d33d007ad96",
+   "title_zh": "刚果（金）猴痘疫情呈下降趋势",
+   "summary_zh": "截至2026年3月22日，刚果（金）全国26省262个卫生区累计报告疑似猴痘病例10741例，死亡122例。据WHO报道，疫情呈下降趋势，第12周环比下降20.5%。",
+   "key_changes": [
+    {
+     "type": "case_update",
+     "description": "累计报告疑似病例10741例",
+     "evidence_field": "suspected_cases"
+    },
+    {
+     "type": "mortality_update",
+     "description": "累计报告死亡122例，相关数字尚未证实。",
+     "evidence_field": "deaths"
+    },
+    {
+     "type": "status_change",
+     "description": "疫情状态为下降中",
+     "evidence_field": "outbreak_status"
+    }
+   ],
+   "uncertainties": [
+    "第12周环比下降20.5%，判定declining依据周度趋势"
+   ],
+   "public_health_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": null,
+ "disease_event_id": "DSEV_e1ff7d33d007ad96",
+ "country_code": "COD"
+}

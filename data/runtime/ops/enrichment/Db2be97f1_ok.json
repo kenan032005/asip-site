@@ -1,0 +1,85 @@
+{
+ "label": "Db2be97f1",
+ "task_type": "disease_summary",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "tokens": {
+  "input_tokens": 1542,
+  "output_tokens": 251,
+  "total_tokens": 1793
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "deaths=85",
+    "marker": "unconfirmed",
+    "field": "key_changes[1].description",
+    "before": "报告死亡85例",
+    "after": "报告死亡85例，相关数字尚未证实。",
+    "rule_id": "SAFETY-CORR-B2",
+    "numeric_anchor": "suspected_cases=8457"
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "disease_event_id": "DSEV_9a208920b2be97f1",
+   "title_zh": "尼日利亚博尔诺州霍乱疫情持续，报告逾八千疑似病例",
+   "summary_zh": "尼日利亚博尔诺州霍乱疫情仍在活跃期，截至6月7日累计报告8457例疑似病例、85例死亡。死亡数字为博尔诺州政府口径，尚未与联邦NCDC交叉核实。",
+   "key_changes": [
+    {
+     "type": "case_update",
+     "description": "累计疑似病例增至8457例",
+     "evidence_field": "suspected_cases"
+    },
+    {
+     "type": "mortality_update",
+     "description": "报告死亡85例",
+     "evidence_field": "deaths"
+    }
+   ],
+   "uncertainties": [
+    "死亡数字为博尔诺州政府口径，尚未与联邦NCDC交叉核实",
+    "目前仅单一来源（CGTN）报道，缺乏交叉验证"
+   ],
+   "public_health_relevance": "direct",
+   "classification_confidence": 60
+  },
+  "corrected_output": {
+   "disease_event_id": "DSEV_9a208920b2be97f1",
+   "title_zh": "尼日利亚博尔诺州霍乱疫情持续，报告逾八千疑似病例",
+   "summary_zh": "尼日利亚博尔诺州霍乱疫情仍在活跃期，截至6月7日累计报告8457例疑似病例、85例死亡。死亡数字为博尔诺州政府口径，尚未与联邦NCDC交叉核实。",
+   "key_changes": [
+    {
+     "type": "case_update",
+     "description": "累计疑似病例增至8457例",
+     "evidence_field": "suspected_cases"
+    },
+    {
+     "type": "mortality_update",
+     "description": "报告死亡85例，相关数字尚未证实。",
+     "evidence_field": "deaths"
+    }
+   ],
+   "uncertainties": [
+    "死亡数字为博尔诺州政府口径，尚未与联邦NCDC交叉核实",
+    "目前仅单一来源（CGTN）报道，缺乏交叉验证"
+   ],
+   "public_health_relevance": "direct",
+   "classification_confidence": 60
+  }
+ },
+ "event_id": null,
+ "disease_event_id": "DSEV_9a208920b2be97f1",
+ "country_code": "NGA"
+}

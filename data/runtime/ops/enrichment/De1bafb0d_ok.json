@@ -1,0 +1,93 @@
+{
+ "label": "De1bafb0d",
+ "task_type": "disease_summary",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "tokens": {
+  "input_tokens": 1483,
+  "output_tokens": 233,
+  "total_tokens": 1716
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "case_count_type",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"DON 未分国给出确诊数，仅列国名\"]",
+    "after": "[\"DON 未分国给出确诊数，仅列国名\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "uncertainties",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"DON 未分国给出确诊数，仅列国名\", \"相关情况尚未证实。\"]",
+    "after": "[\"DON 未分国给出确诊数，仅列国名\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "disease_event_id": "DSEV_4044139de1bafb0d",
+   "title_zh": "布基纳法索黄热病疫情监测中",
+   "summary_zh": "布基纳法索黄热病疫情处于监测状态，截至2026年5月26日，全国范围内报告相关病例。世界卫生组织疾病暴发新闻（DON）将其列为非洲三国确诊之一，但未分国给出具体确诊数。",
+   "key_changes": [
+    {
+     "type": "status_change",
+     "description": "疫情状态为监测中",
+     "evidence_field": "outbreak_status"
+    },
+    {
+     "type": "case_update",
+     "description": "报告日期更新至2026年5月26日",
+     "evidence_field": "report_date"
+    }
+   ],
+   "uncertainties": [
+    "DON 未分国给出确诊数，仅列国名"
+   ],
+   "public_health_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "disease_event_id": "DSEV_4044139de1bafb0d",
+   "title_zh": "布基纳法索黄热病疫情监测中",
+   "summary_zh": "布基纳法索黄热病疫情处于监测状态，截至2026年5月26日，全国范围内报告相关病例。世界卫生组织疾病暴发新闻（DON）将其列为非洲三国确诊之一，但未分国给出具体确诊数。",
+   "key_changes": [
+    {
+     "type": "status_change",
+     "description": "疫情状态为监测中",
+     "evidence_field": "outbreak_status"
+    },
+    {
+     "type": "case_update",
+     "description": "报告日期更新至2026年5月26日",
+     "evidence_field": "report_date"
+    }
+   ],
+   "uncertainties": [
+    "DON 未分国给出确诊数，仅列国名",
+    "相关情况尚未证实。"
+   ],
+   "public_health_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": null,
+ "disease_event_id": "DSEV_4044139de1bafb0d",
+ "country_code": "BFA"
+}

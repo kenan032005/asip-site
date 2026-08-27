@@ -1,0 +1,83 @@
+{
+ "label": "D2d0b7d82",
+ "task_type": "disease_summary",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "tokens": {
+  "input_tokens": 1485,
+  "output_tokens": 176,
+  "total_tokens": 1661
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "case_count_type",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"形势报告未在摘要给出非洲汇总数字，仅记录状态\"]",
+    "after": "[\"形势报告未在摘要给出非洲汇总数字，仅记录状态\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "uncertainties",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"形势报告未在摘要给出非洲汇总数字，仅记录状态\", \"相关情况尚未证实。\"]",
+    "after": "[\"形势报告未在摘要给出非洲汇总数字，仅记录状态\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "disease_event_id": "DSEV_835e43bd2d0b7d82",
+   "title_zh": "全球多国猴痘疫情进入监测阶段",
+   "summary_zh": "根据WHO外部形势报告第65期，全球多国猴痘疫情状态更新为监测中。报告未提供非洲地区的汇总病例和死亡数字，仅记录当前状态。",
+   "key_changes": [
+    {
+     "type": "status_change",
+     "description": "疫情状态更新为监测中",
+     "evidence_field": "outbreak_status"
+    }
+   ],
+   "uncertainties": [
+    "形势报告未在摘要给出非洲汇总数字，仅记录状态"
+   ],
+   "public_health_relevance": "direct",
+   "classification_confidence": 88
+  },
+  "corrected_output": {
+   "disease_event_id": "DSEV_835e43bd2d0b7d82",
+   "title_zh": "全球多国猴痘疫情进入监测阶段",
+   "summary_zh": "根据WHO外部形势报告第65期，全球多国猴痘疫情状态更新为监测中。报告未提供非洲地区的汇总病例和死亡数字，仅记录当前状态。",
+   "key_changes": [
+    {
+     "type": "status_change",
+     "description": "疫情状态更新为监测中",
+     "evidence_field": "outbreak_status"
+    }
+   ],
+   "uncertainties": [
+    "形势报告未在摘要给出非洲汇总数字，仅记录状态",
+    "相关情况尚未证实。"
+   ],
+   "public_health_relevance": "direct",
+   "classification_confidence": 88
+  }
+ },
+ "event_id": null,
+ "disease_event_id": "DSEV_835e43bd2d0b7d82",
+ "country_code": "regional"
+}

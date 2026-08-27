@@ -1,0 +1,112 @@
+{
+ "label": "D3017b71c",
+ "task_type": "disease_summary",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "tokens": {
+  "input_tokens": 1490,
+  "output_tokens": 282,
+  "total_tokens": 1772
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "confirmed_cases=6",
+    "marker": "unconfirmed",
+    "field": "key_changes[2].description",
+    "before": "报告6例确诊病例",
+    "after": "报告6例确诊病例，相关数字尚未证实。",
+    "rule_id": "SAFETY-CORR-B2",
+    "numeric_anchor": "suspected_cases=398"
+   },
+   {
+    "fact_id": "confirmed_cases=6",
+    "marker": "unconfirmed",
+    "field": "key_changes[3].description",
+    "before": "报告16例死亡",
+    "after": "报告16例死亡，相关数字尚未证实。",
+    "rule_id": "SAFETY-CORR-B2",
+    "numeric_anchor": "suspected_cases=398"
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "disease_event_id": "DSEV_923093263017b71c",
+   "title_zh": "尼日利亚Bauchi州霍乱疫情爆发",
+   "summary_zh": "尼日利亚Bauchi州报告一起新的霍乱疫情，截至7月31日共报告398例疑似病例、6例确诊病例和16例死亡。疫情处于活跃状态，官方通报经allAfrica转载。",
+   "key_changes": [
+    {
+     "type": "status_change",
+     "description": "Bauchi州报告新的霍乱疫情爆发",
+     "evidence_field": "update_type"
+    },
+    {
+     "type": "case_update",
+     "description": "报告398例疑似病例",
+     "evidence_field": "suspected_cases"
+    },
+    {
+     "type": "case_update",
+     "description": "报告6例确诊病例",
+     "evidence_field": "confirmed_cases"
+    },
+    {
+     "type": "mortality_update",
+     "description": "报告16例死亡",
+     "evidence_field": "deaths"
+    }
+   ],
+   "uncertainties": [
+    "经allAfrica聚合转载，原始通报为州卫生部memo"
+   ],
+   "public_health_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "disease_event_id": "DSEV_923093263017b71c",
+   "title_zh": "尼日利亚Bauchi州霍乱疫情爆发",
+   "summary_zh": "尼日利亚Bauchi州报告一起新的霍乱疫情，截至7月31日共报告398例疑似病例、6例确诊病例和16例死亡。疫情处于活跃状态，官方通报经allAfrica转载。",
+   "key_changes": [
+    {
+     "type": "status_change",
+     "description": "Bauchi州报告新的霍乱疫情爆发",
+     "evidence_field": "update_type"
+    },
+    {
+     "type": "case_update",
+     "description": "报告398例疑似病例",
+     "evidence_field": "suspected_cases"
+    },
+    {
+     "type": "case_update",
+     "description": "报告6例确诊病例，相关数字尚未证实。",
+     "evidence_field": "confirmed_cases"
+    },
+    {
+     "type": "mortality_update",
+     "description": "报告16例死亡，相关数字尚未证实。",
+     "evidence_field": "deaths"
+    }
+   ],
+   "uncertainties": [
+    "经allAfrica聚合转载，原始通报为州卫生部memo"
+   ],
+   "public_health_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": null,
+ "disease_event_id": "DSEV_923093263017b71c",
+ "country_code": "NGA"
+}

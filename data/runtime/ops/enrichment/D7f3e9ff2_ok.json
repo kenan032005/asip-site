@@ -1,0 +1,83 @@
+{
+ "label": "D7f3e9ff2",
+ "task_type": "disease_summary",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "tokens": {
+  "input_tokens": 1505,
+  "output_tokens": 224,
+  "total_tokens": 1729
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "case_count_type",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"跨境传播为 UNICEF 通报，未逐国给出病例数\"]",
+    "after": "[\"跨境传播为 UNICEF 通报，未逐国给出病例数\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "uncertainties",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"跨境传播为 UNICEF 通报，未逐国给出病例数\", \"相关情况尚未证实。\"]",
+    "after": "[\"跨境传播为 UNICEF 通报，未逐国给出病例数\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "disease_event_id": "DSEV_3cef35cb7f3e9ff2",
+   "title_zh": "西非与中非霍乱疫情跨境扩散",
+   "summary_zh": "据 UNICEF 通报，西非与中非的霍乱疫情正在跨境扩散，影响乍得湖流域和刚果河流域，涉及刚果（金）、刚果（布）、尼日利亚、乍得、喀麦隆和中非共和国。目前疫情处于活跃状态，但未逐国提供病例数。",
+   "key_changes": [
+    {
+     "type": "geographic_spread",
+     "description": "疫情扩散至西非与中非多个国家，涉及乍得湖流域和刚果河流域",
+     "evidence_field": "affected_countries"
+    }
+   ],
+   "uncertainties": [
+    "跨境传播为 UNICEF 通报，未逐国给出病例数"
+   ],
+   "public_health_relevance": "direct",
+   "classification_confidence": 80
+  },
+  "corrected_output": {
+   "disease_event_id": "DSEV_3cef35cb7f3e9ff2",
+   "title_zh": "西非与中非霍乱疫情跨境扩散",
+   "summary_zh": "据 UNICEF 通报，西非与中非的霍乱疫情正在跨境扩散，影响乍得湖流域和刚果河流域，涉及刚果（金）、刚果（布）、尼日利亚、乍得、喀麦隆和中非共和国。目前疫情处于活跃状态，但未逐国提供病例数。",
+   "key_changes": [
+    {
+     "type": "geographic_spread",
+     "description": "疫情扩散至西非与中非多个国家，涉及乍得湖流域和刚果河流域",
+     "evidence_field": "affected_countries"
+    }
+   ],
+   "uncertainties": [
+    "跨境传播为 UNICEF 通报，未逐国给出病例数",
+    "相关情况尚未证实。"
+   ],
+   "public_health_relevance": "direct",
+   "classification_confidence": 80
+  }
+ },
+ "event_id": null,
+ "disease_event_id": "DSEV_3cef35cb7f3e9ff2",
+ "country_code": "regional"
+}

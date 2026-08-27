@@ -1,0 +1,120 @@
+{
+ "label": "D005978cb",
+ "task_type": "disease_summary",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "tokens": {
+  "input_tokens": 1488,
+  "output_tokens": 190,
+  "total_tokens": 1678
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "total_cases=50000(5万)",
+    "marker": "unconfirmed",
+    "field": "title_zh",
+    "before": "尼日利亚霍乱疫情持续，累计病例达5万",
+    "after": "尼日利亚霍乱疫情持续，累计病例达5万，相关数字尚未证实。",
+    "rule_id": "SAFETY-CORR-B2",
+    "numeric_anchor": "total_cases=50000"
+   },
+   {
+    "fact_id": "total_cases=50000(5万)",
+    "marker": "unconfirmed",
+    "field": "summary_zh",
+    "before": "尼日利亚霍乱疫情仍处于活跃状态，截至2026年7月31日累计报告5万例病例、338例死亡。疫情主要集中在博尔诺州，但全国范围内均有报告。",
+    "after": "尼日利亚霍乱疫情仍处于活跃状态，截至2026年7月31日累计报告5万例病例、338例死亡，相关数字尚未证实。疫情主要集中在博尔诺州，但全国范围内均有报告。",
+    "rule_id": "SAFETY-CORR-B2",
+    "numeric_anchor": "total_cases=50000"
+   },
+   {
+    "fact_id": "total_cases=50000",
+    "marker": "unconfirmed",
+    "field": "key_changes[0].description",
+    "before": "累计病例数达50000例",
+    "after": "累计病例数达50000例，相关数字尚未证实。",
+    "rule_id": "SAFETY-CORR-B2",
+    "numeric_anchor": "total_cases=50000"
+   },
+   {
+    "fact_id": "deaths=338",
+    "marker": "unconfirmed",
+    "field": "key_changes[1].description",
+    "before": "报告死亡338例",
+    "after": "报告死亡338例，相关数字尚未证实。",
+    "rule_id": "SAFETY-CORR-B2",
+    "numeric_anchor": "total_cases=50000"
+   },
+   {
+    "fact_id": "uncertainties",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"累计病例数为媒体转述NCDC数据，未见NCDC原始通报全文\"]",
+    "after": "[\"累计病例数为媒体转述NCDC数据，未见NCDC原始通报全文\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": "total_cases=50000"
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "disease_event_id": "DSEV_df9984f4005978cb",
+   "title_zh": "尼日利亚霍乱疫情持续，累计病例达5万",
+   "summary_zh": "尼日利亚霍乱疫情仍处于活跃状态，截至2026年7月31日累计报告5万例病例、338例死亡。疫情主要集中在博尔诺州，但全国范围内均有报告。",
+   "key_changes": [
+    {
+     "type": "case_update",
+     "description": "累计病例数达50000例",
+     "evidence_field": "total_cases"
+    },
+    {
+     "type": "mortality_update",
+     "description": "报告死亡338例",
+     "evidence_field": "deaths"
+    }
+   ],
+   "uncertainties": [
+    "累计病例数为媒体转述NCDC数据，未见NCDC原始通报全文"
+   ],
+   "public_health_relevance": "direct",
+   "classification_confidence": 90
+  },
+  "corrected_output": {
+   "disease_event_id": "DSEV_df9984f4005978cb",
+   "title_zh": "尼日利亚霍乱疫情持续，累计病例达5万，相关数字尚未证实。",
+   "summary_zh": "尼日利亚霍乱疫情仍处于活跃状态，截至2026年7月31日累计报告5万例病例、338例死亡，相关数字尚未证实。疫情主要集中在博尔诺州，但全国范围内均有报告。",
+   "key_changes": [
+    {
+     "type": "case_update",
+     "description": "累计病例数达50000例，相关数字尚未证实。",
+     "evidence_field": "total_cases"
+    },
+    {
+     "type": "mortality_update",
+     "description": "报告死亡338例，相关数字尚未证实。",
+     "evidence_field": "deaths"
+    }
+   ],
+   "uncertainties": [
+    "累计病例数为媒体转述NCDC数据，未见NCDC原始通报全文",
+    "相关情况尚未证实。"
+   ],
+   "public_health_relevance": "direct",
+   "classification_confidence": 90
+  }
+ },
+ "event_id": null,
+ "disease_event_id": "DSEV_df9984f4005978cb",
+ "country_code": "NGA"
+}
