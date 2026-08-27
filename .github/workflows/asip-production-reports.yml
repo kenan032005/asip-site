@@ -1,0 +1,111 @@
+name: ASIP Production Reports
+
+# Stage 8C Package3 — Production Reports（§八/§九/§十七/§二十六）
+# Africa Daily 调度（北京 20:00，每天最多 1 份）：cron '0 12 * * *'
+# Country Weekly 调度（北京 周日 06:45）：cron '45 22 * * 0'
+# 报告状态：FULL / FALLBACK / LOW_DATA（Fact Gate PASS 为前提）；Fact Gate FAIL → HOLD。
+# 输入：canonical eligible facts（生产）；dispatch 默认 shadow（derived + no AI）。
+# 调度门禁：production_schedule_enabled=false 时 schedule 不执行。
+
+on:
+  workflow_dispatch:
+    inputs:
+      source:
+        description: "报告输入源（shadow=derived 冻结数据 / production=canonical）"
+        required: false
+        type: choice
+        default: shadow
+        options:
+          - shadow
+          - production
+      run_ai:
+        description: "真实 AI Analysis（默认 false = FALLBACK/LOW_DATA）"
+        required: false
+        type: boolean
+        default: false
+  schedule:
+    - cron: '0 12 * * *'
+    - cron: '45 22 * * 0'
+
+concurrency:
+  group: asip-prod-reports
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+env:
+  ASIP_MODE: development
+  browser_direct_api_call: "false"
+  ASIP_DEEPSEEK_API_KEY: ${{ secrets.ASIP_DEEPSEEK_API_KEY }}
+
+jobs:
+  reports:
+    if: github.event_name != 'schedule' || vars.PRODUCTION_SCHEDULE_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout production code
+        uses: actions/checkout@v4
+        with:
+          ref: stage8c-package3-cloud-automation
+          fetch-depth: 1
+
+      - name: Checkout production state branch
+        uses: actions/checkout@v4
+        with:
+          ref: production-state
+          path: state_src
+          fetch-depth: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Load state（cold start）
+        run: |
+          mkdir -p data/runtime/ops
+          cp -r state_src/data/runtime/ops/* data/runtime/ops/ 2>/dev/null || true
+
+      - name: Africa Daily（§八，北京 20:00；dispatch 默认 shadow）
+        if: github.event.schedule == '0 12 * * *' || github.event_name == 'workflow_dispatch'
+        env:
+          SOURCE: ${{ github.event.inputs.source }}
+          RUN_AI: ${{ github.event.inputs.run_ai }}
+        run: |
+          SRC="derived"; AI_FLAG="--no-ai"
+          [ "$SOURCE" = "production" ] && SRC="canonical"
+          [ "$RUN_AI" = "true" ] && AI_FLAG=""
+          python scripts/ops/reports_run.py --mode daily --source $SRC $AI_FLAG
+
+      - name: Country Weekly（§九，北京 周日 06:45；dispatch 默认 shadow）
+        if: github.event.schedule == '45 22 * * 0' || github.event_name == 'workflow_dispatch'
+        env:
+          SOURCE: ${{ github.event.inputs.source }}
+          RUN_AI: ${{ github.event.inputs.run_ai }}
+        run: |
+          SRC="derived"; AI_FLAG="--no-ai"
+          [ "$SOURCE" = "production" ] && SRC="canonical"
+          [ "$RUN_AI" = "true" ] && AI_FLAG=""
+          python scripts/ops/reports_run.py --mode tcd_weekly --source $SRC $AI_FLAG
+          python scripts/ops/reports_run.py --mode ssd_weekly --source $SRC $AI_FLAG
+
+      - name: Commit state → production-state branch
+        run: |
+          cp -r data/runtime/ops/* state_src/data/runtime/ops/ 2>/dev/null || true
+          cd state_src
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f data/runtime/ops
+          git commit -m "ops: reports run ${{ github.run_id }}" --allow-empty || echo "no state change"
+          git push origin production-state
+          cd ..
+
+      - name: Upload report artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ops-reports
+          path: data/runtime/ops/reports/
+          if-no-files-found: warn

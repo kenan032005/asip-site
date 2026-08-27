@@ -1,0 +1,105 @@
+name: ASIP Production Collection
+
+# Stage 8C Package3 — Production Collection（§五/§十一/§二十六）
+# 调度（北京时间 00:20/06:20/12:20/18:20，每 6h；UTC cron 含跨日语义）：
+#   cron: '20 16,22,4,10 * * *'
+#   （16:20 UTC=次日00:20 BJ；22:20 UTC=次日06:20 BJ；04:20=12:20 BJ；10:20=18:20 BJ）
+# Collection 本身不调用 AI（§五）。
+# 调度门禁：production_schedule_enabled（repo variable）= false 时 schedule 触发不执行
+# （§二十六 scheduled_execution=false，直到 Stage8D）。dispatch 可用于 shadow/manual。
+
+on:
+  workflow_dispatch:
+    inputs:
+      execute:
+        description: "调用真实采集（默认 false = shadow 记账 + source health）"
+        required: false
+        type: boolean
+        default: false
+  schedule:
+    - cron: '20 16,22,4,10 * * *'
+
+concurrency:
+  group: asip-prod-collection
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+env:
+  ASIP_MODE: development
+  browser_direct_api_call: "false"
+
+jobs:
+  collect:
+    if: github.event_name != 'schedule' || vars.PRODUCTION_SCHEDULE_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout production code
+        uses: actions/checkout@v4
+        with:
+          ref: stage8c-package3-cloud-automation
+          fetch-depth: 1
+
+      - name: Checkout production state branch
+        uses: actions/checkout@v4
+        with:
+          ref: production-state
+          path: state_src
+          fetch-depth: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Load state（cold start：state 来自 state branch，不依赖本地）
+        run: |
+          mkdir -p data/runtime/ops
+          cp -r state_src/data/runtime/ops/* data/runtime/ops/ 2>/dev/null || true
+          ls data/runtime/ops/ 2>/dev/null || echo "(fresh state)"
+
+      - name: Collection run（§五，无 AI）
+        env:
+          EXECUTE: ${{ github.event.inputs.execute }}
+        run: |
+          python scripts/ops/collection_run.py $([ "$EXECUTE" = "true" ] && echo "--execute" || true)
+
+      - name: Source health（§十一，非 AI）
+        run: python scripts/ops/source_health.py
+
+      - name: Operations telemetry（§二十二）
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          import sys; sys.path.insert(0, ".")
+          from scripts.ops import operations as ops
+          from scripts.ops import production_state as ps
+          state = ps.load_state()
+          run = ops.new_run("asip-production-collection", "${{ github.run_id }}")
+          run["status"] = "completed"
+          run["build_status"] = "not_executed"
+          run["deploy_status"] = "not_executed"
+          prev = json.loads((pathlib.Path("data/runtime/ops/operations_status.json")).read_text(encoding="utf-8"))["runs"] if pathlib.Path("data/runtime/ops/operations_status.json").exists() else []
+          ops.save_ops(run, previous=prev[-20:])
+          PY
+
+      - name: Commit state → production-state branch
+        run: |
+          cp -r data/runtime/ops/* state_src/data/runtime/ops/ 2>/dev/null || true
+          cd state_src
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f data/runtime/ops
+          git commit -m "ops: collection run ${{ github.run_id }}" --allow-empty || echo "no state change"
+          git push origin production-state
+          cd ..
+
+      - name: Upload ops artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ops-collection
+          path: data/runtime/ops/
+          if-no-files-found: warn
