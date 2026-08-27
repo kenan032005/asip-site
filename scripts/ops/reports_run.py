@@ -30,6 +30,9 @@ from scripts.report.gen import analysis_runner as ar  # noqa: E402
 from scripts.ops import production_state as ps  # noqa: E402
 
 DERIVED = ROOT / "data" / "runtime" / "stage8c_trial2_recovery" / "derived"
+# cold start（§二十八）：data/runtime 为 gitignored；缺失时用 git tracked 的
+# evidence/ 副本（字节一致，冻结 hash 不变）
+DERIVED_EVIDENCE = ROOT / "evidence" / "stage8c_trial2_recovery" / "derived"
 REPORTS_OUT = ps.OPS_DIR / "reports"
 SCHEMAS = {
     "africa_daily": "africa_daily_report.schema.json",
@@ -38,13 +41,19 @@ SCHEMAS = {
 LOW_DATA_NO_AI = True
 
 
+def _derived_dir():
+    if (DERIVED / "africa_daily_report_input.json").exists():
+        return DERIVED
+    return DERIVED_EVIDENCE
+
+
 def load_input(mode, source, country=None):
     """加载 report input。derived→冻结 snapshot；canonical→当前 eligible facts。"""
     if source == "derived":
         fname = {"daily": "africa_daily_report_input.json",
                  "tcd_weekly": "tcd_weekly_report_input.json",
                  "ssd_weekly": "ssd_weekly_report_input.json"}[mode]
-        return json.loads((DERIVED / fname).read_text(encoding="utf-8"))
+        return json.loads((_derived_dir() / fname).read_text(encoding="utf-8"))
     # canonical：复用冻结的 trial input builder（committed canonical → report input）
     inputs = mt.build_inputs()
     if mode == "daily":
