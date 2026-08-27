@@ -1,0 +1,138 @@
+name: ASIP Stage8C Manual Human Review Trial
+
+# Stage 8C Package 2 — Manual Human-Review Report Trial（workflow_dispatch only）
+#
+# 一次非发布的生产候选链执行：
+#   真实 canonical 输入 → DeepSeek V4 Flash（thinking=disabled）→
+#   Deterministic Attribution Safety Layer → attribution_safety_gate →
+#   Report Input eligibility → Report Engine（Africa Daily / TCD Weekly /
+#   SSD Weekly）→ Human Review Pack + Artifacts + Telemetry
+#
+# 硬约束：
+#   - 仅 manual_trial；无 schedule / push / cron / automatic deployment
+#   - checkout 锁定完整 40 位 SHA（不得浮动 branch）
+#   - provider 仅 deepseek-v4-flash；thinking 全 disabled
+#   - 不发布 Public；不改 Canonical；不开 schedule
+#   - 失败保留证据（不自动重跑整个 trial）
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Trial mode (manual_trial only)"
+        required: true
+        default: manual_trial
+        type: choice
+        options:
+          - manual_trial
+
+permissions:
+  contents: read
+
+jobs:
+  manual-trial:
+    runs-on: ubuntu-latest
+    env:
+      ASIP_MODE: development
+      ASIP_DEEPSEEK_API_KEY: ${{ secrets.ASIP_DEEPSEEK_API_KEY }}
+      browser_direct_api_call: "false"
+      production_ai_provider_active: "false"
+      production_auto_update: "false"
+      scheduled_collection: "false"
+      scheduled_ai_processing: "false"
+      scheduled_publication: "false"
+      scheduled_reports: "false"
+      automatic_deploy: "false"
+    steps:
+      - name: Checkout frozen Package2 SHA
+        uses: actions/checkout@v4
+        with:
+          # Stage8C Package2 commit（父 = de8ac2b Safety Layer；含完整
+          # Safety Layer 代码树 + manual trial 脚本）。锁定 SHA，不浮动。
+          ref: f8b3444c70ef7153a3bfd8e48d5bdf933da4728e
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Runtime confirmation（只打印非敏感信息）
+        run: |
+          python -c "
+          import sys
+          print('MODE=manual_trial')
+          print('python=' + sys.version.split()[0])
+          print('ASIP_MODE=' + ('development' if 'development' == 'development' else '?'))
+          print('credential_present=' + str(bool(__import__('os').environ.get('ASIP_DEEPSEEK_API_KEY','').strip())))
+          print('browser_direct_api_call=false')
+          print('production_ai_provider_active=false')
+          print('schedule=false deploy=false')
+          "
+
+      - name: Safety Layer smoke（§十八：Package1 tests，AI_CALLS=0）
+        run: |
+          python -m unittest scripts.tests.test_stage8c_attribution_safety \
+                 scripts.tests.test_stage8c_manual_trial -v
+
+      - name: Manual Human Review Trial（失败保留证据，不自动重跑）
+        run: |
+          python scripts/ai/safety/manual_trial.py \
+            --out-dir data/runtime/ai_safety/stage8c_trial
+        continue-on-error: true
+
+      - name: Secret scan（repo/artifacts/logs 零泄漏；失败也执行）
+        run: |
+          python - <<'PY'
+          import pathlib, re
+          pats = re.compile(
+              r"ASIP_DEEPSEEK_API_KEY\s*=\s*[A-Za-z0-9]|sk-[A-Za-z0-9]{16,}|"
+              r"Bearer\s+[A-Za-z0-9._-]{16,}", re.I)
+          hits = []
+          for p in pathlib.Path(".").rglob("*"):
+              if p.is_file() and p.suffix in (".json", ".md", ".txt", ".yml",
+                                              ".yaml", ".py", ".log", ".env"):
+                  try:
+                      txt = p.read_text(encoding="utf-8", errors="ignore")
+                  except Exception:
+                      continue
+                  for m in pats.finditer(txt):
+                      hits.append(str(p))
+          print("secret_leak_count=" + str(len(hits)))
+          if hits:
+              raise SystemExit("secret leak detected: %s" % hits[:5])
+          PY
+
+      - name: Upload trial artifacts（失败也上传）
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage8c-manual-trial
+          path: |
+            data/runtime/ai_safety/stage8c_trial/
+          if-no-files-found: warn
+        continue-on-error: true
+
+      - name: Trial verdict（只报告状态，不重跑；exit 0 保留证据）
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          f = pathlib.Path("data/runtime/ai_safety/stage8c_trial/manual_trial_summary.json")
+          if not f.exists():
+              print("TRIAL_SUMMARY_MISSING")
+              raise SystemExit(0)
+          s = json.loads(f.read_text(encoding="utf-8"))
+          print("MODEL=" + s.get("model", "?"))
+          print("TOTAL_API_CALLS=" + str(s.get("ai_calls", "?")))
+          print("READY_FOR_HUMAN_REVIEW=" + str(s.get("ready_for_human_review")))
+          print("PUBLIC_CHANGED=" + str(s.get("public_changed")))
+          print("SCHEDULE_CHANGED=" + str(s.get("schedule_changed")))
+          print("DEPLOYED=" + str(s.get("deployed")))
+          for k, v in (s.get("reports") or {}).items():
+              print("REPORT %s machine_gate=%s quality=%s reason=%s" % (
+                  k, v.get("machine_gate_status"), v.get("quality_status"),
+                  v.get("reason") or "-"))
+          ss = s.get("safety_stats") or {}
+          print("SAFETY social=%s" % json.dumps(ss.get("social")))
+          print("SAFETY disease=%s" % json.dumps(ss.get("disease")))
+          print("VERDICT=READY_FOR_HUMAN_REVIEW" if s.get("ready_for_human_review")
+                else "VERDICT=HOLD_FOR_REVIEW")
+          PY
