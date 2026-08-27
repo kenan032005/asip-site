@@ -53,6 +53,10 @@ jobs:
         run: |
           mkdir -p data/runtime/ops
           cp -r state_src/data/runtime/ops/* data/runtime/ops/ 2>/dev/null || true
+          cp -rf state_src/data/canonical/. data/canonical/ 2>/dev/null || true
+          cp -rf state_src/data/disease/. data/disease/ 2>/dev/null || true
+          cp -rf state_src/data/runtime/timeline/. data/runtime/timeline/ 2>/dev/null || true
+          cp -rf state_src/data/runtime/ops/reports/. data/runtime/ops/reports/ 2>/dev/null || true
 
       - name: Build site（§十九）
         run: python scripts/build_site.py
