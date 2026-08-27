@@ -48,7 +48,7 @@ jobs:
       - name: Checkout production code
         uses: actions/checkout@v4
         with:
-          ref: 0d5e2e6110e8c883c116f4a7a928447011e62356
+          ref: ae582a221f546ff99bb00842e3071d1820b5940d
           fetch-depth: 1
 
       - name: Checkout production state branch
@@ -109,3 +109,14 @@ jobs:
           name: ops-reports
           path: data/runtime/ops/reports/
           if-no-files-found: warn
+
+      - name: Trigger auto deploy（§十八：state 合法变化 → build → validate → deploy）
+        if: vars.AUTO_DEPLOY_ENABLED == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl -s -X POST -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/kenan032005/asip-site/actions/workflows/asip-production-deploy.yml/dispatches \
+            -d '{"ref":"main","inputs":{"shadow_only":"false"}}' \
+            -o /dev/null -w "AUTO_DEPLOY_TRIGGER_HTTP=%{http_code}\n"
