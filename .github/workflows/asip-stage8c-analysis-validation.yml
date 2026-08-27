@@ -1,0 +1,197 @@
+name: ASIP Stage8C Package2 Analysis Validation
+
+# Stage 8C Package 2 — Deterministic Facts + AI Analysis 一次验证（§十三/§十四/§二十一）
+# 只验证 ANALYSIS LAYER：Africa=1 call / TCD=1 call / SSD fact_count=0 →
+# LOW_DATA_NO_AI（不调用 AI）。
+# 输入 ONLY = 3 份 hash 锁定的 Derived Report Input（derived_report_evidence_snapshot）。
+# 绝不执行：Social/Disease enrichment / Attribution Safety / Canonical refresh /
+# 旧 Full Report Prompt / Stage8B Qualification。
+# 只允许 workflow_dispatch；不得 cron / push trigger / 自动 deploy。
+# 代码冻结：a05be4168b217eb377aadfd6b7e29b386175ba7f（完整 40 位 SHA）。
+# 唯一模型：deepseek-v4-flash，thinking=disabled（严禁 pro/chat/reasoner/fallback）。
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: asip-stage8c-analysis-validation
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  ASIP_MODE: development
+  production_ai_provider_active: "false"
+  scheduled_collection: "false"
+  scheduled_ai_processing: "false"
+  scheduled_reports: "false"
+  automatic_deploy: "false"
+  browser_direct_api_call: "false"
+  ASIP_DEEPSEEK_API_KEY: ${{ secrets.ASIP_DEEPSEEK_API_KEY }}
+
+jobs:
+  analysis-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout frozen architecture code (a05be41)
+        uses: actions/checkout@v4
+        with:
+          ref: a05be4168b217eb377aadfd6b7e29b386175ba7f
+          fetch-depth: 1
+
+      - name: Checkout hash-locked evidence inputs (eee683b)
+        uses: actions/checkout@v4
+        with:
+          ref: eee683bbb770f5f075b8273752808863e76c1a96
+          path: evidence_src
+          fetch-depth: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Prepare derived inputs + hash verification + credential（fail-closed）
+        run: |
+          python - <<'PY'
+          import hashlib, os, pathlib, shutil
+          src = pathlib.Path("evidence_src/evidence/stage8c_trial2_recovery")
+          dst = pathlib.Path("data/runtime/stage8c_trial2_recovery")
+          (dst / "derived").mkdir(parents=True, exist_ok=True)
+          for f in ("derived/africa_daily_report_input.json",
+                    "derived/tcd_weekly_report_input.json",
+                    "derived/ssd_weekly_report_input.json",
+                    "derived/report_input_provenance.json",
+                    "derived/report_input_exclusions.json",
+                    "derived/counts_closure.json",
+                    "derived_report_evidence_manifest.json"):
+              shutil.copyfile(src / f, dst / f)
+          d = dst / "derived"
+          exp = {
+              "africa_daily_report_input.json":
+                  "f51fe2f548eca356f37f35450360fbe0a15faf6b886c857d2107972557afcc49",
+              "tcd_weekly_report_input.json":
+                  "89d1c42a79a174f775f4c3b80bc1c4264feea7b7629d4b83782c5ec8d429d948",
+              "ssd_weekly_report_input.json":
+                  "1ff941f38e9fb0393dc683b1c82bb4bcc04b5bbc305d80de0d276cd08806f3e8",
+          }
+          exp_agg = "efad13db07fb3a29015669bba17c49f38d5d5636fa40fc2f77f2f39e503a7caa"
+          blob = b""
+          for f, want in exp.items():
+              data = (d / f).read_bytes().replace(b"\r\n", b"\n")
+              blob += data
+              sha = hashlib.sha256(data).hexdigest()
+              print("HASH %s %s" % (f, "OK" if sha == want else "MISMATCH"))
+              if sha != want:
+                  raise SystemExit("HASH_MISMATCH " + f)
+          agg = hashlib.sha256(blob).hexdigest()
+          print("AGGREGATE %s" % ("OK" if agg == exp_agg else "MISMATCH"))
+          if agg != exp_agg:
+              raise SystemExit("AGG_HASH_MISMATCH")
+          cred = bool(os.environ.get("ASIP_DEEPSEEK_API_KEY", "").strip())
+          print("credential_available = " + str(cred).lower())
+          print("requested_model = deepseek-v4-flash / thinking = disabled")
+          if not cred:
+              raise SystemExit("CREDENTIAL_INJECTION_FAILED")
+          print("HASH_VERIFIED_AND_CREDENTIAL_OK")
+          PY
+
+      - name: Offline deterministic build + schema precheck（AI_CALLS=0 阶段）
+        run: |
+          python - <<'PY'
+          import sys, pathlib
+          sys.path.insert(0, ".")
+          from scripts.report.gen import analysis_runner as ar
+          # 离线只跑 fake（fallback 路径验证），不调用真实 AI
+          # 用 fake provider 快速确认全链路 gates
+          class FakeProv:
+              def submit_task(self, task):
+                  return {"status": "succeeded", "result": {
+                      "returned_model": "deepseek-v4-flash", "text": "not-json",
+                      "input_tokens": 1, "output_tokens": 1, "total_tokens": 2,
+                      "finish_reason": "stop", "thinking_requested": "disabled",
+                      "reasoning_tokens": None}}
+          s = ar.run_validation(provider=FakeProv(),
+                                out_dir=pathlib.Path("data/runtime/stage8c_trial2_recovery/architecture_precheck"))
+          ok = all(v["gates"].get("FINAL_SCHEMA_GATE") == "PASS"
+                   for v in s["reports"].values())
+          print("OFFLINE_PREcheck FINAL_SCHEMA all PASS =", ok)
+          print("ANALYSIS_API_CALLS(fake) =", s["analysis_api_calls"])
+          if not ok:
+              raise SystemExit("OFFLINE_PRECHECK_FAILED")
+          PY
+
+      - name: Real Analysis Validation（Africa=1 / TCD=1 / SSD=0，LOW_DATA_NO_AI）
+        run: |
+          python - <<'PY'
+          import sys, pathlib, json
+          sys.path.insert(0, ".")
+          from scripts.report.gen import analysis_runner as ar
+          s = ar.run_validation(
+              out_dir=pathlib.Path("data/runtime/stage8c_trial2_recovery/architecture_run"))
+          print("ANALYSIS_API_CALLS =", s["analysis_api_calls"])
+          for k, v in s["reports"].items():
+              g = v["gates"]
+              print("[%s] analysis_status=%s fact_count=%d FACT=%s FINAL=%s issues=%s" % (
+                  k, v["analysis_status"], v["fact_count"], g.get("FACT_GATE"),
+                  g.get("FINAL_SCHEMA_GATE"), g.get("issues")))
+          PY
+
+      - name: Secret scan（失败也执行）
+        if: always()
+        run: |
+          python - <<'PY'
+          import pathlib, re
+          pats = re.compile(
+              r"ASIP_DEEPSEEK_API_KEY\s*=\s*[A-Za-z0-9]|sk-[A-Za-z0-9]{16,}|"
+              r"Bearer\s+[A-Za-z0-9._-]{16,}", re.I)
+          hits = []
+          for p in pathlib.Path(".").rglob("*"):
+              if p.is_file() and p.suffix in (".json", ".md", ".txt", ".yml", ".yaml", ".py", ".log", ".env"):
+                  try:
+                      txt = p.read_text(encoding="utf-8", errors="ignore")
+                  except Exception:
+                      continue
+                  for m in pats.finditer(txt):
+                      hits.append(str(p))
+          print("secret_leak_count = " + str(len(hits)))
+          if hits:
+              raise SystemExit("secret leak detected: %s" % hits[:5])
+          PY
+
+      - name: Upload architecture evidence（失败也上传）
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage8c-package2-architecture
+          path: |
+            data/runtime/stage8c_trial2_recovery/architecture_run/
+            data/runtime/stage8c_trial2_recovery/architecture_precheck/
+          if-no-files-found: warn
+
+      - name: Package2 engineering verdict（§二十二）
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, pathlib, sys
+          f = pathlib.Path("data/runtime/stage8c_trial2_recovery/architecture_run/architecture_run_summary.json")
+          if not f.exists():
+              print("VERDICT_NO_SUMMARY")
+              sys.exit(1)
+          s = json.loads(f.read_text(encoding="utf-8"))
+          all_pass = True
+          for k, v in s["reports"].items():
+              g = v["gates"]
+              line = "%s FACT_GATE=%s NUMERIC_GATE=%s SOURCE_GATE=%s ATTRIBUTION_GATE=%s FINAL_SCHEMA_GATE=%s METADATA_GATE=%s" % (
+                  k, g.get("FACT_GATE"), g.get("NUMERIC_GATE"), g.get("SOURCE_GATE"),
+                  g.get("ATTRIBUTION_GATE"), g.get("FINAL_SCHEMA_GATE"), g.get("METADATA_GATE"))
+              print(line)
+              if any(g.get(x) != "PASS" for x in ("FACT_GATE", "NUMERIC_GATE",
+                                                  "SOURCE_GATE", "ATTRIBUTION_GATE",
+                                                  "FINAL_SCHEMA_GATE", "METADATA_GATE")):
+                  all_pass = False
+          print("ANALYSIS_API_CALLS = " + str(s["analysis_api_calls"]))
+          print("PACKAGE2_ENGINEERING = " + ("PASS" if all_pass else "FAIL"))
+          sys.exit(0 if all_pass else 1)
+          PY
