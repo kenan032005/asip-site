@@ -200,6 +200,10 @@ def _fact_item(e, kind):
                                "url": s.get("url") or ""})
     return {
         "event_id": e.get("event_id") or e.get("disease_event_id"),
+        # disease 项需保留 disease_event_id / disease_id（report-input 契约，
+        # fact_pack._disease_fact 依赖之；缺失会导致 item_id/disease_id=null）
+        "disease_event_id": e.get("disease_event_id"),
+        "disease_id": e.get("disease_id"),
         "master_event_id": e.get("legacy_event_id"),
         "country": e.get("country_cn") or e.get("country_code"),
         "country_iso3": e.get("country_iso3") or (e.get("country_code") or "") + "?",
@@ -231,6 +235,13 @@ def _fact_item(e, kind):
 
 def _build_daily_input(social, disease, cutoff):
     """Africa Daily report input（§五：真实事件，sections 契约冻结）。"""
+    from datetime import datetime, timedelta
+    try:
+        c = datetime.fromisoformat(str(cutoff).replace("Z", "+00:00"))
+    except Exception:
+        c = datetime.utcnow()
+    ps = (c - timedelta(hours=24)).isoformat()
+    pe = c.isoformat()
     major = [_fact_item(e, "social") for e in social]
     dis_items = [_fact_item(d, "disease") for d in disease]
     return {
@@ -242,6 +253,8 @@ def _build_daily_input(social, disease, cutoff):
         "previous_cutoff": None,
         "previous_report_id": None,
         "generated_at": _bj_now(),
+        "period_start": ps,
+        "period_end": pe,
         "sections": {
             "executive_summary": major,
             "major_security_developments": major,
@@ -276,6 +289,8 @@ def _build_weekly_input(country, social, disease, cutoff):
         "country_iso3": country,
         "week_start": ws,
         "week_end": we,
+        "period_start": ws,
+        "period_end": we,
         "generated_at": _bj_now(),
         "sections": {
             "weekly_executive_assessment": items,

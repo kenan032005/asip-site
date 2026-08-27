@@ -91,9 +91,15 @@ def generate_report(mode, input_obj, provider, telemetry, emit):
 
 
 def classify(report_res):
-    """FULL / FALLBACK / LOW_DATA / HOLD（§ 正式三种状态 + HOLD）。"""
+    """FULL / FALLBACK / LOW_DATA / HOLD（§ 正式三种状态 + HOLD）。
+
+    HOLD 条件（fail-closed）：FACT_GATE 非 PASS，或 FINAL_SCHEMA_GATE 非 PASS
+    （schema 不合规产物不得作为正常报告进入 Public）。
+    """
     g = report_res["gates"]
     if g.get("FACT_GATE") != "PASS":
+        return "HOLD"
+    if g.get("FINAL_SCHEMA_GATE") != "PASS":
         return "HOLD"
     ares = report_res["analysis_result"]
     if ares and ares.get("status") == "LOW_DATA_NO_AI":
