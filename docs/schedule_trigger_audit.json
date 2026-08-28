@@ -1,0 +1,46 @@
+{
+  "audit": "schedule_trigger_audit",
+  "window": {"start_utc": "2026-08-27T17:50:00Z", "end_utc": "2026-08-28T17:50:00Z", "start_bjt": "2026-08-28T01:50:00+08:00", "end_bjt": "2026-08-29T01:50:00+08:00"},
+  "default_branch": "main",
+  "workflow_states": {
+    "asip-production-collection": "active",
+    "asip-production-ai": "active",
+    "asip-production-reports": "active",
+    "asip-production-deploy": "active"
+  },
+  "crons_remote": {
+    "collection": "20 16,22,4,10 * * *",
+    "ai_social": "30 16,22,4,10 * * *",
+    "ai_disease": "30 17 * * *",
+    "daily": "0 12 * * *",
+    "weekly": "45 22 * * 6"
+  },
+  "schedule_math": "PASS",
+  "observed_runs": [
+    {"workflow": "ASIP Production AI", "run_id": "33133288194", "created_at": "2026-08-28T01:34:48Z", "status": "completed", "conclusion": "success", "head_sha": "9c4bea00", "match": "SEVERELY_DELAYED"},
+    {"workflow": "ASIP Production Collection", "run_id": "33147053309", "created_at": "2026-08-28T06:10:30Z", "status": "completed", "conclusion": "success", "head_sha": "9c4bea00", "match": "SEVERELY_DELAYED"},
+    {"workflow": "ASIP Production AI", "run_id": "33147290526", "created_at": "2026-08-28T06:14:54Z", "status": "completed", "conclusion": "success", "head_sha": "9c4bea00", "match": "SEVERELY_DELAYED"}
+  ],
+  "slot_matching": {
+    "on_time": 0,
+    "delayed_15_60m": 0,
+    "severely_delayed_gt60m": 3,
+    "missed_no_run": 7
+  },
+  "expected_slots": [
+    {"workflow": "collection", "tick_utc": "2026-08-27T22:20:00Z", "observed": false},
+    {"workflow": "ai_social", "tick_utc": "2026-08-27T22:30:00Z", "observed": false},
+    {"workflow": "collection", "tick_utc": "2026-08-28T04:20:00Z", "observed": false},
+    {"workflow": "ai_social", "tick_utc": "2026-08-28T04:30:00Z", "observed": false},
+    {"workflow": "collection", "tick_utc": "2026-08-28T10:20:00Z", "observed": false},
+    {"workflow": "ai_social", "tick_utc": "2026-08-28T10:30:00Z", "observed": false},
+    {"workflow": "daily", "tick_utc": "2026-08-28T12:00:00Z", "observed": false},
+    {"workflow": "collection", "tick_utc": "2026-08-28T16:20:00Z", "observed": false},
+    {"workflow": "ai_social", "tick_utc": "2026-08-28T16:30:00Z", "observed": false},
+    {"workflow": "ai_disease", "tick_utc": "2026-08-28T17:30:00Z", "observed": false}
+  ],
+  "manual_dispatch_excluded": ["33108232846", "33107614720", "33107424936", "33106912074", "33106114241", "33104903952", "33104310180", "33104093748", "33102951216", "33102421682", "33095798253", "33095658316"],
+  "root_cause": "GITHUB_SCHEDULE_DELAY_OR_DROP",
+  "github_schedule_reliability_risk": true,
+  "fix": "hourly orchestrator (0 * * * *) + state-based due-task execution, production mode"
+}

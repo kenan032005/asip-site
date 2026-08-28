@@ -1,0 +1,62 @@
+{
+  "report": "stage8d_schedule_root_cause",
+  "generated_at": "2026-08-29T06:30:00+08:00",
+  "old_observation": {
+    "window": {"start": "2026-08-28T01:50:00+08:00", "end": "2026-08-29T01:50:00+08:00"},
+    "valid": false,
+    "reason": "insufficient natural schedule coverage + scheduled runs remained shadow",
+    "retained": true
+  },
+  "answers": {
+    "1_schedule_slots_missing": {
+      "expected_ticks": 10,
+      "observed_schedule_runs": 3,
+      "missed_ticks": 7,
+      "root_cause": "GITHUB_SCHEDULE_DELAY_OR_DROP",
+      "evidence": "runs 33133288194@01:34Z / 33147053309@06:10Z / 33147290526@06:14Z; 72h 无更早 schedule 运行"
+    },
+    "2_trigger_time_misalignment": {
+      "observed": ["01:34:48Z", "06:10:30Z", "06:14:54Z"],
+      "nearest_ticks": ["22:30Z(前一日,+3h04m)", "04:20Z(+1h50m)", "04:30Z(+1h45m)"],
+      "verdict": "SEVERELY_DELAYED(3) / MISSED(7); 06:14Z 后调度停止"
+    },
+    "3_shadow_root_cause": {
+      "file_collection": ".github/workflows/asip-production-collection.yml",
+      "line_condition": "L63-67: EXECUTE=${{ github.event.inputs.execute }}；schedule 下为空 → 无 --execute",
+      "file_ai": ".github/workflows/asip-production-ai.yml",
+      "line_condition": "L75-93: RUN_AI 为空 → --fake --max-items 0",
+      "file_reports": ".github/workflows/asip-production-reports.yml",
+      "line_condition": "L71-92: SOURCE 为空 → derived --no-ai",
+      "env": "ASIP_MODE=development 硬编码（4 workflow）",
+      "actual": "schedule 事件下 github.event.inputs.* 未定义 → 全部缺省 shadow",
+      "expected": "schedule → production（§9 契约）",
+      "fix": "hourly orchestrator 显式 production mode（resolve_mode(schedule)=production）"
+    },
+    "4_disease_dedicated_tick": {
+      "issue": "disease step 嵌在 AI workflow；30 17 * * * tick 窗口内 0 次",
+      "fix": "orchestrator 依 last_disease_run + BJT 01:30 独立判定/执行"
+    },
+    "5_daily_not_run": {
+      "issue": "0 12 * * * tick 0 次；即便触发也默认 derived --no-ai",
+      "fix": "orchestrator 依 last_daily_report + BJT 20:00 判定，--source canonical"
+    },
+    "6_auto_deploy_no_evidence": {
+      "issue": "reports workflow 从未 schedule 运行 → 无自动 deploy",
+      "fix": "orchestrator 生成合法 daily 报告 → 先提交 state 再 dispatch deploy（AUTO_DEPLOY_ENABLED）"
+    },
+    "7_final_fix": {
+      "new_files": ["scripts/ops/schedule_orchestrator.py", ".github/workflows/asip-production-orchestrator.yml"],
+      "modified": ["asip-production-collection/ai/reports.yml(移除schedule)", "4 workflow checkout ref → release 2952769", "deploy load state 视图拷贝"],
+      "tests": "18/18 PASS",
+      "canary": "collection 真实 / AI 真实 / views_export ok / shadow deploy V17 PASS secret=0",
+      "automation_fix_sha": "cc1ac13806314e29f0dc8ce3ef15e3652a5ea4ec"
+    },
+    "8_hourly_orchestrator": {
+      "adopted": true,
+      "reason": "GITHUB_SCHEDULE_RELIABILITY_RISK=true（cron 正确但 7/10 丢 tick、3 延迟 1h45m-3h）",
+      "design": "单一 0 * * * * + state 判定 due；幂等；可延迟补执行；trigger=scheduled_orchestrator"
+    }
+  },
+  "schedule_math": "PASS",
+  "v1_1_changed": false
+}
