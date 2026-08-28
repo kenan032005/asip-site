@@ -4,7 +4,6 @@
 使用合成测试数据（非真实包，不进入任何 preview 数据）。"""
 import json
 import sys
-import tempfile
 import unittest
 from pathlib import Path
 
@@ -13,101 +12,106 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from scripts.ops import backfill_import as bi  # noqa: E402
 
 
-def _pkg_dir(rows):
-    td = tempfile.mkdtemp(prefix="wb_bkf_")
-    d = Path(td)
-    (d / "manifest.json").write_text(json.dumps({
-        "batch_id": bi.BATCH_ID, "social_records": len(rows[0]),
-        "disease_records": len(rows[1]), "total_structured_records": len(rows[0]) + len(rows[1]),
-        "china_interest_records": len(rows[2])}), encoding="utf-8")
-    for name, arr in zip(["social_events.jsonl", "disease_events.jsonl", "china_interest.jsonl"], rows):
-        (d / name).write_text("\n".join(json.dumps(r, ensure_ascii=False) for r in arr) + "\n", encoding="utf-8")
-    (d / "sources.jsonl").write_text("", encoding="utf-8")
-    return d
+def _bundle(social=None, disease=None, china=None):
+    return {
+        "manifest": {"batch_id": bi.BATCH_ID},
+        "social": social or [],
+        "disease": disease or [],
+        "china": china or [],
+        "sources": [],
+        "package_qa": {},
+        "review_notes": "",
+    }
+
+
+def _social(**kw):
+    base = {"record_type": "event", "headline_en": "H", "fact_summary_en": "S",
+            "country_iso3": "ZMB", "category": "political_social_stability",
+            "event_date": "2026-08-20", "verification_status": "multi_source",
+            "country_name_zh": "赞比亚", "importance_score_editorial": 70,
+            "sources": [{"url": "https://e.com/a", "source_name": "X"}]}
+    base.update(kw)
+    return base
 
 
 class TestBackfillImport(unittest.TestCase):
 
     def test_input_missing(self):
-        report, code = bi.run_import(Path("C:/nonexistent/pkg"))
-        self.assertEqual(code, 2)
-        self.assertEqual(report["status"], "INPUT_MISSING")
+        # 缺 --pkg-file/--pkg-dir 由 main 处理；这里验证空包契约失败路径
+        report = bi.run_bundle(_bundle())
+        self.assertEqual(report["results"]["social"]["input"], 0)
 
     def test_social_new_update_duplicate(self):
         rows = [
-            # 2 条相同 content → 1 new + 1 duplicate
-            [{"record_type": "event", "cluster_key": None, "headline": "Protest in ZMB",
-              "fact_summary": "Post-election protest in Lusaka.", "country": "ZMB",
-              "category": "political_social_stability", "date": "2026-08-25",
-              "verification_status": "multi_source", "source_url": "https://example.com/a",
-              "source_name": "X", "published_date": "2026-08-25"},
-             {"record_type": "event", "headline": "Protest in ZMB",
-              "fact_summary": "Post-election protest in Lusaka.", "country": "ZMB",
-              "category": "political_social_stability", "date": "2026-08-25",
-              "verification_status": "multi_source", "source_url": "https://example.com/a"},
-             # event_update → cluster 内更新
-             {"record_type": "event_update", "cluster_key": "ZMB_2026_ELECTION_POSTELECTION",
-              "headline": "ZMB post-election update", "fact_summary": "Follow-up violence in Kitwe.",
-              "country": "ZMB", "category": "political_social_stability", "date": "2026-08-26",
-              "verification_status": "single_source", "source_url": "https://example.com/b"},
-             # disputed → HOLD 不升级
-             {"record_type": "event", "headline": "Disputed claim", "fact_summary": "Alleged strike.",
-              "country": "TCD", "category": "armed_conflict_terrorism", "date": "2026-08-20",
-              "verification_status": "disputed_claim", "source_url": "https://example.com/c"},
-             # 缺 source → HOLD
-             {"record_type": "event", "headline": "No source", "fact_summary": "Missing url.",
-              "country": "MLI", "category": "armed_conflict_terrorism", "date": "2026-08-21",
-              "verification_status": "multi_source"}],
-            [],
-            [{"direct": True, "event_key": "ZMB"}],
+            _social(record_id="S1", cluster_key="ZMB_2026_ELECTION_POSTELECTION",
+                    headline_en="Protest in ZMB",
+                    fact_summary_en="Post-election protest in Lusaka."),
+            # 同 content → 包内重复（title/country/date/ver 归一化相同）
+            _social(record_id="S2", headline_en="Protest in ZMB",
+                    fact_summary_en="Post-election protest in Lusaka.",
+                    sources=[{"url": "https://e.com/b", "source_name": "Y"}]),
+            # cluster event_update → 并入既有 master
+            _social(record_id="S3", record_type="event_update",
+                    cluster_key="ZMB_2026_ELECTION_POSTELECTION",
+                    headline_en="ZMB post-election update",
+                    fact_summary_en="Follow-up violence in Kitwe.",
+                    event_date="2026-08-21"),
+            # disputed → HOLD 不升级
+            _social(record_id="S4", verification_status="disputed_claim",
+                    country_iso3="TCD", headline_en="Disputed claim",
+                    fact_summary_en="Alleged strike.",
+                    category="armed_conflict_terrorism"),
+            # 缺 source → HOLD
+            _social(record_id="S5", country_iso3="MLI", headline_en="No source",
+                    fact_summary_en="Missing url.", sources=[]),
         ]
-        report, code = bi.run_import(_pkg_dir(rows))
-        self.assertEqual(code, 0)
+        report = bi.run_bundle(_bundle(social=rows, china=[
+            {"record_id": "S1", "china_interest": "indirect"}]))
         s = report["results"]["social"]
         self.assertEqual(s["input"], 5)
-        self.assertEqual(s["new"], 1)       # 行A 独立事件
-        self.assertEqual(s["update"], 1)    # 行C cluster event_update
-        self.assertEqual(s["duplicate"], 1)  # 行B content hash 重复
-        self.assertEqual(s["held"], 2)       # 行D disputed + 行E 缺 source
-        self.assertEqual(report["results"]["china_interest"]["direct"], 1)
+        self.assertEqual(s["new"], 1)       # S1 独立事件
+        self.assertEqual(s["update"], 1)    # S3 cluster event_update
+        self.assertEqual(s["duplicate"], 1)  # S2 content hash 重复
+        self.assertEqual(s["held"], 2)       # S4 disputed + S5 缺 source
+        self.assertEqual(report["results"]["china_interest"]["indirect"], 1)
 
     def test_disease_ebola_cluster_single_entity(self):
-        rows = [[],
-                [
-                 {"record_type": "event", "cluster_key": "COD_EBOLA_BUNDIBUGYO_2026",
-                  "disease_name": "Ebola", "country": "COD", "report_date": "2026-08-20",
-                  "cumulative_confirmed": 10, "outbreak_status": "active",
-                  "verification_status": "official_confirmed"},
-                 {"record_type": "event_update", "cluster_key": "COD_EBOLA_BUNDIBUGYO_2026",
-                  "disease_name": "Ebola", "country": "COD", "report_date": "2026-08-24",
-                  "cumulative_confirmed": 14, "outbreak_status": "active",
-                  "verification_status": "official_confirmed"},
-                ],
-                []]
-        report, code = bi.run_import(_pkg_dir(rows))
-        self.assertEqual(code, 0)
+        rows = [
+            {"record_id": "D1", "record_type": "event", "cluster_key": "COD_EBOLA_BUNDIBUGYO_2026",
+             "disease": "Ebola", "disease_zh": "埃博拉", "country_iso3": "COD",
+             "country_name_zh": "刚果（金）", "event_date": "2026-08-20",
+             "verification_status": "official_confirmed",
+             "sources": [{"url": "https://e.com/w", "source_name": "WHO"}]},
+            {"record_id": "D2", "record_type": "disease_update", "cluster_key": "COD_EBOLA_BUNDIBUGYO_2026",
+             "disease": "Ebola", "country_iso3": "COD", "event_date": "2026-08-24",
+             "verification_status": "official_confirmed",
+             "sources": [{"url": "https://e.com/w2", "source_name": "WHO"}]},
+        ]
+        report = bi.run_bundle(_bundle(disease=rows))
         d = report["results"]["disease"]
         self.assertEqual(d["input"], 2)
-        self.assertEqual(d["new"], 1)   # 1 个 outbreak 实体
-        self.assertEqual(d["update"], 1)  # 第 2 条 update 并入 timeline
+        self.assertEqual(d["new"], 1)    # 1 个 outbreak 实体
+        self.assertEqual(d["update"], 1)  # D2 并入 timeline
         self.assertEqual(d["held"], 0)
+        self.assertEqual(report["results"]["disease_entities"], 1)
+
+    def test_multi_country_regional_mapping(self):
+        row = {"record_id": "D3", "record_type": "event", "cluster_key": "AFR_POLIO_20260819",
+               "disease": "Poliovirus type 2", "country_iso3": "MULTI",
+               "country_name_en": "Burundi, Ghana, Uganda", "event_date": "2026-08-19",
+               "verification_status": "official_confirmed",
+               "sources": [{"url": "https://e.com/p", "source_name": "WHO"}]}
+        report = bi.run_bundle(_bundle(disease=[row]))
+        self.assertEqual(report["results"]["disease"]["held"], 0)
+        ent = report["preview"]["disease_entities"][0]
+        self.assertEqual(ent["country_iso3"], "AFR")
+        self.assertEqual(ent["regional"], True)
+        self.assertEqual(len(ent["affected_countries"]), 3)
 
     def test_missing_required_field_hold(self):
-        rows = [[{"record_type": "event", "headline": "x", "fact_summary": "y",
-                  "country": "NGA", "category": "public_safety_major_incidents",
-                  "date": "2026-08-22",
-                  "verification_status": "multi_source",
-                  "source_url": "https://e.com/x"}], [], []]
-        report, code = bi.run_import(_pkg_dir(rows))
-        self.assertEqual(code, 0)
-        self.assertEqual(report["results"]["social"]["held"], 0)  # 字段齐全 → new
-        self.assertEqual(report["results"]["social"]["new"], 1)
-        rows2 = [[{"record_type": "event", "headline": "x", "fact_summary": "y",
-                   "country": "NGA", "category": "public_safety_major_incidents",
-                   "date": "2026-08-22",
-                   "verification_status": "multi_source"}], [], []]
-        report2, _ = bi.run_import(_pkg_dir(rows2))
-        self.assertEqual(report2["results"]["social"]["held"], 1)  # 缺 source_url → HOLD
+        report = bi.run_bundle(_bundle(social=[_social(record_id="S6", sources=[])]))
+        self.assertEqual(report["results"]["social"]["held"], 1)
+        self.assertEqual(report["results"]["social"]["new"], 0)
 
 
 if __name__ == "__main__":
