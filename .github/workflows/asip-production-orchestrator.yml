@@ -95,20 +95,6 @@ jobs:
           cat /tmp/orch.json
           echo "deploy_required=$(python -c "import json;print(str(json.load(open('/tmp/orch.json'))['deploy_required']).lower())")" >> "$GITHUB_OUTPUT"
 
-      - name: Auto deploy（daily report 生成后；canary 仅 shadow build/validate）
-        if: vars.AUTO_DEPLOY_ENABLED == 'true' && steps.orch.outputs.deploy_required == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CANARY: ${{ github.event.inputs.canary }}
-        run: |
-          SHADOW="true"
-          [ "$CANARY" != "true" ] && SHADOW="false"
-          curl -s -X POST -H "Authorization: Bearer $GH_TOKEN" \
-            -H "Accept: application/vnd.github+json" \
-            https://api.github.com/repos/kenan032005/asip-site/actions/workflows/asip-production-deploy.yml/dispatches \
-            -d "{\"ref\":\"main\",\"inputs\":{\"shadow_only\":\"$SHADOW\"}}" \
-            -o /dev/null -w "AUTO_DEPLOY_TRIGGER_HTTP=%{http_code}\n"
-
       - name: Commit state → production-state branch
         run: |
           cp -r data/runtime/ops/* state_src/data/runtime/ops/ 2>/dev/null || true
@@ -128,6 +114,20 @@ jobs:
           git commit -m "ops: orchestrator run ${{ github.run_id }}" --allow-empty || echo "no state change"
           git push origin production-state
           cd ..
+
+      - name: Auto deploy（daily report 生成后；canary 仅 shadow build/validate）
+        if: vars.AUTO_DEPLOY_ENABLED == 'true' && steps.orch.outputs.deploy_required == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CANARY: ${{ github.event.inputs.canary }}
+        run: |
+          SHADOW="true"
+          [ "$CANARY" != "true" ] && SHADOW="false"
+          curl -s -X POST -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/kenan032005/asip-site/actions/workflows/asip-production-deploy.yml/dispatches \
+            -d "{\"ref\":\"main\",\"inputs\":{\"shadow_only\":\"$SHADOW\"}}" \
+            -o /dev/null -w "AUTO_DEPLOY_TRIGGER_HTTP=%{http_code}\n"
 
       - name: Upload ops artifacts
         if: always()
