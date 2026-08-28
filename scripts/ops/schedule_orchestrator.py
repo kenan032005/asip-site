@@ -244,7 +244,8 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False):
             _do(t["task"], t["task"])
         elif t["task"] in ("daily_report", "weekly_report"):
             _do(t["task"], t["task"])
-    _do("timeline", "timeline")
+    results.setdefault("timeline", {"ok": _run_script(["scripts/ops/timeline_run.py"], emit),
+                                    "detail": "timeline_run"})
 
     ops.finish_run(run, status="completed")
     prev = []
@@ -308,7 +309,11 @@ def main(argv=None):
                 print("  DUE %s (%s)" % (t["task"], t["reason"]))
         return 0
 
-    res = execute(plan, state, emit=print, canary=args.canary)
+    # --run + --json：进度 emit 走 stderr，最终 JSON 只写 stdout（workflow 读取的必须是纯 JSON）
+    def _emit(s):
+        print(s, file=sys.stderr)
+
+    res = execute(plan, state, emit=_emit, canary=args.canary)
     if args.json:
         print(json.dumps({"deploy_required": res["deploy_required"],
                           "executed": res["executed"], "results": res["results"]},
