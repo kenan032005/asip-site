@@ -246,6 +246,9 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False):
             _do(t["task"], t["task"])
     results.setdefault("timeline", {"ok": _run_script(["scripts/ops/timeline_run.py"], emit),
                                     "detail": "timeline_run"})
+    # canonical 变更后必须再生成遗留/公开视图（events.json / pending / raw / quarantine /
+    # public/published_events / current_metrics），否则 deploy 的 V17 canonical↔legacy 校验失败
+    results["views_export"] = {"ok": _export_views(emit), "detail": "compatibility_export"}
 
     ops.finish_run(run, status="completed")
     prev = []
@@ -259,6 +262,20 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False):
     emit("DEPLOY_REQUIRED = %s" % str(deploy_required).lower())
     return {"deploy_required": deploy_required, "executed": [k for k in results],
             "results": results}
+
+
+def _export_views(emit):
+    """canonical → 遗留/公开视图单向再生成（V17 一致性 + 站点数据更新）。"""
+    try:
+        from scripts.data.repository import Repository
+        from scripts.data.compatibility_export import export_all
+        repo = Repository(root=ROOT / "data")
+        stats = export_all(repo, run_id=os.environ.get("GITHUB_RUN_ID", ""))
+        emit("VIEWS_EXPORT=%s" % json.dumps(stats, ensure_ascii=False))
+        return True
+    except Exception as e:  # noqa: BLE001
+        emit("VIEWS_EXPORT_ERROR=%s" % e)
+        return False
 
 
 def _latest_report_class(root):
