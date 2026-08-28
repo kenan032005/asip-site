@@ -1,0 +1,134 @@
+name: ASIP Production Orchestrator
+
+# Stage8D schedule fix — Hourly Due-Task Orchestrator（§十五/§十六/§十七）。
+#
+# 背景（Root Cause，见 docs/stage8d_schedule_root_cause.md）：
+#   - 原 multi-cron（collection/AI/reports）实测 10 tick 中 7 MISSED、3 延迟 1h45m–3h
+#     → GITHUB_SCHEDULE_DELAY_OR_DROP，GITHUB_SCHEDULE_RELIABILITY_RISK=true。
+#   - 原 schedule 路径依赖 github.event.inputs.*（schedule 下为空）→ 全部进入 Shadow。
+#
+# 本 workflow 是唯一 schedule 执行入口：
+#   - 单一每小时 cron（0 * * * *）；
+#   - schedule_orchestrator.py 依据 production-state 判断 due 任务并**以 production
+#     mode 真实执行**（collection --execute / AI 真实 provider / reports --source
+#     canonical / timeline）；
+#   - 幂等：processed_hashes + last_successful_* + 报告日期；
+#   - trigger=scheduled_orchestrator（自然 Automation）。
+#
+# workflow_dispatch 仅用于显式 Canary（canary=true → 同 production-equivalent 路径，
+# 但 trigger=manual_canary；deploy 以 shadow_only=true 仅做 build/validate/secret scan，
+# 不发布 gh-pages）。
+
+on:
+  workflow_dispatch:
+    inputs:
+      canary:
+        description: "显式 production-equivalent Canary（true=执行 due 任务并标记 manual_canary）"
+        required: false
+        type: boolean
+        default: false
+  schedule:
+    - cron: '0 * * * *'
+
+concurrency:
+  group: asip-prod-orchestrator
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+env:
+  ASIP_MODE: production
+  browser_direct_api_call: "false"
+  ASIP_DEEPSEEK_API_KEY: ${{ secrets.ASIP_DEEPSEEK_API_KEY }}
+  PRODUCTION_SCHEDULE_ENABLED: ${{ vars.PRODUCTION_SCHEDULE_ENABLED }}
+
+jobs:
+  orchestrate:
+    if: github.event_name != 'schedule' || vars.PRODUCTION_SCHEDULE_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout release code
+        uses: actions/checkout@v4
+        with:
+          ref: a0be0487b6fc4323e1b7972bc09f236b10b9933b
+          fetch-depth: 1
+
+      - name: Checkout production state branch
+        uses: actions/checkout@v4
+        with:
+          ref: production-state
+          path: state_src
+          fetch-depth: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Load state（cold start）
+        run: |
+          mkdir -p data/runtime/ops
+          cp -r state_src/data/runtime/ops/* data/runtime/ops/ 2>/dev/null || true
+
+      - name: Runtime confirmation（§二：非敏感信息）
+        run: |
+          python - <<'PY'
+          import os
+          ok = bool(os.environ.get("ASIP_DEEPSEEK_API_KEY", "").strip())
+          print("credential_available = " + str(ok).lower())
+          print("requested_model = deepseek-v4-flash")
+          print("browser_direct_api_call = false")
+          print("schedule_enabled = " + os.environ.get("PRODUCTION_SCHEDULE_ENABLED", "true"))
+          PY
+
+      - name: Run due-task orchestrator（production mode）
+        id: orch
+        env:
+          CANARY: ${{ github.event.inputs.canary }}
+        run: |
+          FLAGS="--run --json"
+          [ "$CANARY" = "true" ] && FLAGS="$FLAGS --canary"
+          python scripts/ops/schedule_orchestrator.py $FLAGS > /tmp/orch.json 2> /tmp/orch.err || {
+            echo "ORCHESTRATOR_EXIT=$?"; tail -50 /tmp/orch.err; exit 1; }
+          cat /tmp/orch.json
+          echo "deploy_required=$(python -c "import json;print(str(json.load(open('/tmp/orch.json'))['deploy_required']).lower())")" >> "$GITHUB_OUTPUT"
+
+      - name: Auto deploy（daily report 生成后；canary 仅 shadow build/validate）
+        if: vars.AUTO_DEPLOY_ENABLED == 'true' && steps.orch.outputs.deploy_required == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CANARY: ${{ github.event.inputs.canary }}
+        run: |
+          SHADOW="true"
+          [ "$CANARY" != "true" ] && SHADOW="false"
+          curl -s -X POST -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/kenan032005/asip-site/actions/workflows/asip-production-deploy.yml/dispatches \
+            -d "{\"ref\":\"main\",\"inputs\":{\"shadow_only\":\"$SHADOW\"}}" \
+            -o /dev/null -w "AUTO_DEPLOY_TRIGGER_HTTP=%{http_code}\n"
+
+      - name: Commit state → production-state branch
+        run: |
+          cp -r data/runtime/ops/* state_src/data/runtime/ops/ 2>/dev/null || true
+          cp -rf data/canonical/. state_src/data/canonical/ 2>/dev/null || true
+          cp -rf data/disease/. state_src/data/disease/ 2>/dev/null || true
+          cp -rf data/runtime/timeline/. state_src/data/runtime/timeline/ 2>/dev/null || true
+          cd state_src
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f data/runtime/ops data/canonical data/disease data/runtime/timeline
+          git commit -m "ops: orchestrator run ${{ github.run_id }}" --allow-empty || echo "no state change"
+          git push origin production-state
+          cd ..
+
+      - name: Upload ops artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ops-orchestrator
+          path: |
+            data/runtime/ops/
+            data/runtime/ops/enrichment/
+          if-no-files-found: warn

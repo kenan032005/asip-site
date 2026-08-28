@@ -1,11 +1,11 @@
 name: ASIP Production Reports
 
 # Stage 8C Package3 — Production Reports（§八/§九/§十七/§二十六）
-# Africa Daily 调度（北京 20:00，每天最多 1 份）：cron '0 12 * * *'
-# Country Weekly 调度（北京 周日 06:45 = UTC 周六 22:45）：cron '45 22 * * 6'
+# Stage8D fix：schedule 已迁移到 ASIP Production Orchestrator（每日 20:00 BJT 由
+# orchestrator 依据 production-state 判定 due 并以 --source canonical 真实生成）。
+# 本 workflow 仅保留 workflow_dispatch 供显式 manual/shadow 使用：
+#   source=production → canonical；source=shadow（默认）→ derived；run_ai 开关。
 # 报告状态：FULL / FALLBACK / LOW_DATA（Fact Gate PASS 为前提）；Fact Gate FAIL → HOLD。
-# 输入：canonical eligible facts（生产）；dispatch 默认 shadow（derived + no AI）。
-# 调度门禁：production_schedule_enabled=false 时 schedule 不执行。
 
 on:
   workflow_dispatch:
@@ -23,9 +23,6 @@ on:
         required: false
         type: boolean
         default: false
-  schedule:
-    - cron: '0 12 * * *'
-    - cron: '45 22 * * 6'
 
 concurrency:
   group: asip-prod-reports
@@ -41,14 +38,13 @@ env:
 
 jobs:
   reports:
-    if: github.event_name != 'schedule' || vars.PRODUCTION_SCHEDULE_ENABLED == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
       - name: Checkout production code
         uses: actions/checkout@v4
         with:
-          ref: ae582a221f546ff99bb00842e3071d1820b5940d
+          ref: a0be0487b6fc4323e1b7972bc09f236b10b9933b
           fetch-depth: 1
 
       - name: Checkout production state branch

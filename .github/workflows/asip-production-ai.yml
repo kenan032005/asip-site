@@ -1,11 +1,13 @@
 name: ASIP Production AI
 
 # Stage 8C Package3 — Production AI Enrichment（§六/§七/§十六/§十七）
-# Social AI 调度（北京 00:30/06:30/12:30/18:30）：cron '30 16,22,4,10 * * *'
-# Disease AI 调度（北京 01:30，每天一次）：cron '30 17 * * *'
+# Stage8D fix：schedule 已迁移到 ASIP Production Orchestrator（每小时 due-task 检查；
+# disease 专用 01:30 BJT tick 由 orchestrator 依据 production-state 判定并独立执行）。
+# 本 workflow 仅保留 workflow_dispatch 供显式 manual/shadow 使用：
+#   run_ai=true  → 真实 AI（production-equivalent）
+#   run_ai=false → shadow（--fake --max-items 0）
 # 只处理 NEW + eligible + not already enriched（content hash 幂等，§十三）。
 # Provider 冻结：deepseek-v4-flash（唯一）；secret 仅 GitHub server-side。
-# 调度门禁：production_schedule_enabled=false 时 schedule 不执行。dispatch 默认 shadow。
 
 on:
   workflow_dispatch:
@@ -15,9 +17,6 @@ on:
         required: false
         type: boolean
         default: false
-  schedule:
-    - cron: '30 16,22,4,10 * * *'
-    - cron: '30 17 * * *'
 
 concurrency:
   group: asip-prod-ai
@@ -33,14 +32,13 @@ env:
 
 jobs:
   enrich:
-    if: github.event_name != 'schedule' || vars.PRODUCTION_SCHEDULE_ENABLED == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
       - name: Checkout production code
         uses: actions/checkout@v4
         with:
-          ref: ae582a221f546ff99bb00842e3071d1820b5940d
+          ref: a0be0487b6fc4323e1b7972bc09f236b10b9933b
           fetch-depth: 1
 
       - name: Checkout production state branch

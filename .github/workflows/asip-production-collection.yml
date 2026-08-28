@@ -1,12 +1,11 @@
 name: ASIP Production Collection
 
 # Stage 8C Package3 — Production Collection（§五/§十一/§二十六）
-# 调度（北京时间 00:20/06:20/12:20/18:20，每 6h；UTC cron 含跨日语义）：
-#   cron: '20 16,22,4,10 * * *'
-#   （16:20 UTC=次日00:20 BJ；22:20 UTC=次日06:20 BJ；04:20=12:20 BJ；10:20=18:20 BJ）
-# Collection 本身不调用 AI（§五）。
-# 调度门禁：production_schedule_enabled（repo variable）= false 时 schedule 触发不执行
-# （§二十六 scheduled_execution=false，直到 Stage8D）。dispatch 可用于 shadow/manual。
+# Stage8D fix：schedule 已迁移到 ASIP Production Orchestrator（每小时 due-task 检查，
+# production mode 执行）。本 workflow 仅保留 workflow_dispatch 供显式 manual/shadow 使用：
+#   execute=true  → 真实采集（production-equivalent）
+#   execute=false → shadow 记账 + source health（默认）
+# 不再有原生 schedule；不再可能因 schedule 缺省参数进入 shadow。
 
 on:
   workflow_dispatch:
@@ -16,8 +15,6 @@ on:
         required: false
         type: boolean
         default: false
-  schedule:
-    - cron: '20 16,22,4,10 * * *'
 
 concurrency:
   group: asip-prod-collection
@@ -32,14 +29,13 @@ env:
 
 jobs:
   collect:
-    if: github.event_name != 'schedule' || vars.PRODUCTION_SCHEDULE_ENABLED == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
       - name: Checkout production code
         uses: actions/checkout@v4
         with:
-          ref: ae582a221f546ff99bb00842e3071d1820b5940d
+          ref: a0be0487b6fc4323e1b7972bc09f236b10b9933b
           fetch-depth: 1
 
       - name: Checkout production state branch
