@@ -13,6 +13,7 @@ from pathlib import Path
 SCHEMA_VERSION = "1.0"
 
 # 预留任务类型（仅为契约，本阶段不真正处理）
+# §二十一：AI Provider Router 未来可承载的正式任务类型
 TASK_TYPES = [
     "article_analysis",
     "source_comparison",
@@ -20,6 +21,12 @@ TASK_TYPES = [
     "daily_security_brief",
     "trend_forecast",
     "disease_risk_analysis",
+    "stage4_event_enrichment",
+    "verification_assist",
+    "disease_summary",
+    "daily_report",
+    "country_weekly_report",
+    "major_event_brief",
 ]
 
 # 任务状态枚举

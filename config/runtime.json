@@ -1,9 +1,26 @@
 {
   "schema_version": "1.0",
   "runtime_mode": "workbuddy_local",
+  "asip_mode": "development",
   "ai_provider": "workbuddy_queue",
   "ai_model": "hy3",
   "allow_paid_fallback": false,
   "cloud_schedule_enabled": false,
-  "ai_processing_enabled": false
+  "ai_processing_enabled": false,
+  "development_mode": {
+    "production_auto_update": false,
+    "scheduled_collection": false,
+    "scheduled_ai_processing": false,
+    "scheduled_publication": false,
+    "scheduled_reports": false,
+    "automatic_deploy": false,
+    "direct_website_api_call": false,
+    "browser_direct_api_call": false,
+    "cloud_ai_api_call": true,
+    "manual_collection": true,
+    "manual_ai_trial": true,
+    "manual_build": true,
+    "manual_ci": true,
+    "manual_deploy": true
+  }
 }

@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://asip.local/schemas/event_verification.schema.json",
+  "title": "ASIP Stage 5 — 事件核实记录",
+  "description": "事件自动核实核心 V1 输出：确定性规则 + 来源证据 → verification record。核实结果不覆盖 Canonical。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id", "verification_id", "verification_status", "verification_confidence",
+    "source_count", "independent_source_count", "official_source_count",
+    "supporting_sources", "conflicting_sources",
+    "country_consistency", "time_consistency", "location_consistency",
+    "source_trust_summary", "evidence", "uncertainties", "verification_reasons",
+    "verified_at", "verification_method", "rules_version"
+  ],
+  "properties": {
+    "event_id": { "type": "string", "pattern": "^EVT_[0-9a-f]{16}$" },
+    "verification_id": { "type": "string", "pattern": "^VER_[0-9a-f]{16}$" },
+    "verification_status": {
+      "type": "string",
+      "enum": ["verified", "probable", "single_source", "conflicting", "unverified", "rejected"]
+    },
+    "verification_confidence": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "source_count": { "type": "integer", "minimum": 0 },
+    "independent_source_count": { "type": "integer", "minimum": 0 },
+    "official_source_count": { "type": "integer", "minimum": 0 },
+    "supporting_sources": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/evidence_source" }
+    },
+    "conflicting_sources": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/evidence_source" }
+    },
+    "country_consistency": { "type": "string", "enum": ["consistent", "conflict", "unknown"] },
+    "time_consistency": { "type": "string", "enum": ["consistent", "conflict", "unknown"] },
+    "location_consistency": { "type": "string", "enum": ["consistent", "conflict", "unknown"] },
+    "source_trust_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tier_counts", "best_tier", "has_official"],
+      "properties": {
+        "tier_counts": {
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": 0 }
+        },
+        "best_tier": { "type": ["string", "null"], "enum": ["A", "B", "C", "D", null] },
+        "has_official": { "type": "boolean" }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["field", "value", "source_id"],
+        "properties": {
+          "field": { "type": "string" },
+          "value": { "type": ["string", "number", "null"] },
+          "source_id": { "type": "string" }
+        }
+      }
+    },
+    "uncertainties": { "type": "array", "items": { "type": "string" } },
+    "verification_reasons": { "type": "array", "items": { "type": "string" } },
+    "verified_at": { "type": "string" },
+    "verification_method": { "type": "string", "enum": ["deterministic_rules_v1", "hybrid_ai_development_test"] },
+    "rules_version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" }
+  },
+  "definitions": {
+    "evidence_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id", "source_name", "source_tier", "url", "published_at",
+        "country", "support_type"
+      ],
+      "properties": {
+        "source_id": { "type": "string" },
+        "source_name": { "type": "string" },
+        "source_tier": { "type": "string", "enum": ["A", "B", "C", "D"] },
+        "url": { "type": "string" },
+        "published_at": { "type": ["string", "null"] },
+        "country": { "type": ["string", "null"] },
+        "support_type": {
+          "type": "string",
+          "enum": ["primary", "supporting", "official_confirmation", "secondary_report", "lead_only"]
+        }
+      }
+    }
+  }
+}

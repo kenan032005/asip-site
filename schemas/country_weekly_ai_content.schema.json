@@ -1,0 +1,217 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "title": "ASIP Priority Country Weekly Report (Output) (AI CONTENT PAYLOAD — envelope 由 report engine 装配)",
+ "description": "Stage 7B §十三 — 重点国家周报 OUTPUT contract。基于 Stage7A deterministic metrics（§十四：AI 不得自行数新闻；comparison 仅在 input 提供时输出）。 AI 仅返回内容负载；envelope 字段（report_id/report_type/period 等）由报告引擎提供。",
+ "type": "object",
+ "required": [
+  "executive_assessment",
+  "security_trend",
+  "week_over_week_changes",
+  "next_week_watch_items",
+  "source_notes"
+ ],
+ "properties": {
+  "title": {
+   "type": "string"
+  },
+  "executive_assessment": {
+   "type": "string"
+  },
+  "major_events": {
+   "type": "array",
+   "items": {
+    "$ref": "#/definitions/report_item"
+   }
+  },
+  "security_trend": {
+   "type": "string",
+   "description": "基于 input metrics 的中性描述，comparison 有值才写 up/down/stable"
+  },
+  "political_social_stability": {
+   "type": "array",
+   "items": {
+    "$ref": "#/definitions/report_item"
+   }
+  },
+  "terrorism_armed_violence": {
+   "type": "array",
+   "items": {
+    "$ref": "#/definitions/report_item"
+   }
+  },
+  "disease_public_health": {
+   "type": "array",
+   "items": {
+    "$ref": "#/definitions/disease_item"
+   }
+  },
+  "week_over_week_changes": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "field",
+     "direction"
+    ],
+    "properties": {
+     "field": {
+      "type": "string"
+     },
+     "direction": {
+      "type": [
+       "string",
+       "null"
+      ],
+      "enum": [
+       "up",
+       "down",
+       "stable",
+       null
+      ]
+     },
+     "detail": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "next_week_watch_items": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "source_notes": {
+   "type": "array",
+   "items": {
+    "$ref": "#/definitions/source_ref"
+   }
+  }
+ },
+ "definitions": {
+  "report_item": {
+   "type": "object",
+   "required": [
+    "item_id",
+    "country_iso3",
+    "headline_zh",
+    "fact_summary",
+    "assessment",
+    "outlook",
+    "verification_status",
+    "uncertainties",
+    "source_refs"
+   ],
+   "properties": {
+    "item_id": {
+     "type": "string"
+    },
+    "master_event_id": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "country_iso3": {
+     "type": "string"
+    },
+    "headline_zh": {
+     "type": "string"
+    },
+    "fact_summary": {
+     "type": "string"
+    },
+    "assessment": {
+     "type": "string"
+    },
+    "outlook": {
+     "type": "string"
+    },
+    "verification_status": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "uncertainties": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "source_refs": {
+     "type": "array",
+     "items": {
+      "$ref": "#/definitions/source_ref"
+     }
+    },
+    "importance_score": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 100
+    }
+   }
+  },
+  "disease_item": {
+   "type": "object",
+   "required": [
+    "item_id",
+    "disease_id",
+    "country_iso3",
+    "fact_summary"
+   ],
+   "properties": {
+    "item_id": {
+     "type": "string"
+    },
+    "disease_id": {
+     "type": "string"
+    },
+    "country_iso3": {
+     "type": "string"
+    },
+    "fact_summary": {
+     "type": "string"
+    },
+    "assessment": {
+     "type": "string"
+    },
+    "outlook": {
+     "type": "string"
+    },
+    "latest_counts": {
+     "type": "object"
+    },
+    "source_refs": {
+     "type": "array",
+     "items": {
+      "$ref": "#/definitions/source_ref"
+     }
+    }
+   }
+  },
+  "source_ref": {
+   "type": "object",
+   "required": [
+    "source_id"
+   ],
+   "properties": {
+    "source_id": {
+     "type": "string"
+    },
+    "source_name": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "url": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   }
+  }
+ }
+}

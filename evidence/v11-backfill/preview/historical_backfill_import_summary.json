@@ -1,0 +1,277 @@
+{
+ "batch_id": "asip-backfill-20260818-20260827",
+ "ingestion_mode": "historical_backfill",
+ "historical_reconstruction": true,
+ "window": [
+  "2026-08-18T00:00:00+08:00",
+  "2026-08-27T23:59:59+08:00"
+ ],
+ "contract_issues": [],
+ "package_qa": {
+  "duplicate_record_ids": 0,
+  "duplicate_source_urls_after_index": 0,
+  "records_missing_sources": 0,
+  "records_missing_uncertainties_field": 0,
+  "records_wrong_batch_id": 0,
+  "records_wrong_ingestion_mode": 0
+ },
+ "results": {
+  "social": {
+   "input": 29,
+   "new": 25,
+   "update": 3,
+   "duplicate": 0,
+   "existing_canonical": 0,
+   "held": 1,
+   "rejected": 0
+  },
+  "disease": {
+   "input": 9,
+   "new": 5,
+   "update": 4,
+   "duplicate": 0,
+   "held": 0
+  },
+  "china_interest": {
+   "direct": 2,
+   "indirect": 5,
+   "held": 1
+  },
+  "master_events_total": 25,
+  "disease_entities": 5,
+  "held_records": [
+   {
+    "record_id": "BF-SOC-0019",
+    "disposition": "HOLD_DISPUTED_NOT_UPGRADED",
+    "cluster_key": "TCD_SDN_CROSS_BORDER_STRIKE_20260820",
+    "event_id": "BFE_e54d51ee6c675507",
+    "date": "2026-08-22",
+    "detail": {
+     "country_iso3": "TCD",
+     "event_date": "2026-08-22"
+    }
+   }
+  ]
+ },
+ "generated_at": "2026-08-28T05:49:45+00:00",
+ "status": "OK",
+ "china_input": [
+  {
+   "record_id": "BF-SOC-0001",
+   "cluster_key": "ZMB_2026_ELECTION_POSTELECTION",
+   "event_date": "2026-08-18",
+   "country_iso3": "ZMB",
+   "country_name_zh": "赞比亚",
+   "headline_zh": "希奇莱马连任赞比亚总统，反对派拟挑战选举结果",
+   "china_interest": "indirect",
+   "china_interest_note": "",
+   "verification_status": "multi_source",
+   "importance_score_editorial": 82
+  },
+  {
+   "record_id": "BF-SOC-0004",
+   "cluster_key": "NGA_2027_ELECTION_CAMPAIGN_START_20260819",
+   "event_date": "2026-08-19",
+   "country_iso3": "NGA",
+   "country_name_zh": "尼日利亚",
+   "headline_zh": "尼日利亚总统选举竞选启动，经济与安全议题成为焦点",
+   "china_interest": "indirect",
+   "china_interest_note": "",
+   "verification_status": "single_source",
+   "importance_score_editorial": 68
+  },
+  {
+   "record_id": "BF-SOC-0008",
+   "cluster_key": "ETH_ZIJIN_KURMUK_GOLD_20260820",
+   "event_date": "2026-08-20",
+   "country_iso3": "ETH",
+   "country_name_zh": "埃塞俄比亚",
+   "headline_zh": "紫金黄金收购股权，间接取得靠近苏丹战区的埃塞俄比亚金矿项目权益",
+   "china_interest": "direct",
+   "china_interest_note": "Chinese corporate investment located near the Sudan conflict environment.",
+   "verification_status": "multi_source",
+   "importance_score_editorial": 78
+  },
+  {
+   "record_id": "BF-SOC-0016",
+   "cluster_key": "CHN_AU_DEMINING_ASSISTANCE_20260821",
+   "event_date": "2026-08-21",
+   "country_iso3": "ETH",
+   "country_name_zh": "埃塞俄比亚",
+   "headline_zh": "中国与非盟签署援助非洲扫雷物资交接证书",
+   "china_interest": "direct",
+   "china_interest_note": "Direct China-AU peace and security cooperation.",
+   "verification_status": "official_confirmed",
+   "importance_score_editorial": 58
+  },
+  {
+   "record_id": "BF-SOC-0017",
+   "cluster_key": "COD_M23_PEACE_ROADMAP_20260822",
+   "event_date": "2026-08-22",
+   "country_iso3": "COD",
+   "country_name_zh": "刚果（金）",
+   "headline_zh": "刚果（金）政府与AFC/M23就和平谈判路线图达成一致",
+   "china_interest": "indirect",
+   "china_interest_note": "",
+   "verification_status": "multi_source",
+   "importance_score_editorial": 88
+  },
+  {
+   "record_id": "BF-SOC-0019",
+   "cluster_key": "TCD_SDN_CROSS_BORDER_STRIKE_20260820",
+   "event_date": "2026-08-22",
+   "country_iso3": "TCD",
+   "country_name_zh": "乍得",
+   "headline_zh": "乍得指责苏丹军方在乍得境内打击车队",
+   "china_interest": "indirect",
+   "china_interest_note": "",
+   "verification_status": "disputed_claim",
+   "importance_score_editorial": 94
+  },
+  {
+   "record_id": "BF-SOC-0022",
+   "cluster_key": "SDN_UNSC_ARMS_EMBARGO_PROPOSAL_20260824",
+   "event_date": "2026-08-24",
+   "country_iso3": "SDN",
+   "country_name_zh": "苏丹",
+   "headline_zh": "美国推动将联合国武器禁运扩大至苏丹全国",
+   "china_interest": "indirect",
+   "china_interest_note": "",
+   "verification_status": "multi_source",
+   "importance_score_editorial": 83
+  },
+  {
+   "record_id": "BF-SOC-0029",
+   "cluster_key": "TCD_SDN_CROSS_BORDER_STRIKE_20260820",
+   "event_date": "2026-08-27",
+   "country_iso3": "TCD",
+   "country_name_zh": "乍得",
+   "headline_zh": "乍得将相关地区戒备提升至最高级别，苏丹跨境打击争议引发外溢担忧",
+   "china_interest": "indirect",
+   "china_interest_note": "",
+   "verification_status": "multi_source",
+   "importance_score_editorial": 96
+  }
+ ],
+ "sources_input": 51,
+ "daily_reports": [
+  {
+   "date": "2026-08-18",
+   "status": "FALLBACK",
+   "facts": 3
+  },
+  {
+   "date": "2026-08-19",
+   "status": "FALLBACK",
+   "facts": 2
+  },
+  {
+   "date": "2026-08-20",
+   "status": "FALLBACK",
+   "facts": 5
+  },
+  {
+   "date": "2026-08-21",
+   "status": "FALLBACK",
+   "facts": 5
+  },
+  {
+   "date": "2026-08-22",
+   "status": "FALLBACK",
+   "facts": 1
+  },
+  {
+   "date": "2026-08-23",
+   "status": "FALLBACK",
+   "facts": 1
+  },
+  {
+   "date": "2026-08-24",
+   "status": "FALLBACK",
+   "facts": 3
+  },
+  {
+   "date": "2026-08-25",
+   "status": "FALLBACK",
+   "facts": 1
+  },
+  {
+   "date": "2026-08-26",
+   "status": "FALLBACK",
+   "facts": 3
+  },
+  {
+   "date": "2026-08-27",
+   "status": "FALLBACK",
+   "facts": 1
+  }
+ ],
+ "weekly_reports": [],
+ "major_brief_candidates": [
+  {
+   "event_id": "BFE_8ae259e231950a6c",
+   "title_cn": "尼日利亚高原州村庄遭袭，至少25人死亡",
+   "importance_score": 91,
+   "country_cn": "尼日利亚",
+   "event_date": "2026-08-18"
+  },
+  {
+   "event_id": "BFE_0b33899ac4067b4a",
+   "title_cn": "中非共和国非法金矿坍塌，至少100人死亡",
+   "importance_score": 92,
+   "country_cn": "中非共和国",
+   "event_date": "2026-08-18"
+  },
+  {
+   "event_id": "BFE_902d5a1b94fcdda6",
+   "title_cn": "尼日利亚索科托州船只倾覆，至少50人死亡，多数为儿童",
+   "importance_score": 86,
+   "country_cn": "尼日利亚",
+   "event_date": "2026-08-20"
+  },
+  {
+   "event_id": "BFE_c8355cafdf53c25c",
+   "title_cn": "尼日尔州Borgu地区清真寺及村庄遭袭，多名民众被绑架",
+   "importance_score": 93,
+   "country_cn": "尼日利亚",
+   "event_date": "2026-08-21"
+  },
+  {
+   "event_id": "BFE_f6915ec2eee85858",
+   "title_cn": "刚果（金）政府与AFC/M23就和平谈判路线图达成一致",
+   "importance_score": 88,
+   "country_cn": "刚果（金）",
+   "event_date": "2026-08-22"
+  },
+  {
+   "event_id": "BFE_7fb4785dd2efc6cd",
+   "title_cn": "南苏丹琼莱州联合国巡逻队遭伏击，两名维和人员死亡",
+   "importance_score": 95,
+   "country_cn": "南苏丹",
+   "event_date": "2026-08-24"
+  },
+  {
+   "event_id": "BFE_7d2e275b526e785c",
+   "title_cn": "苏丹医疗组织指称SPLM-N在南科尔多凡杀害27名平民",
+   "importance_score": 89,
+   "country_cn": "苏丹",
+   "event_date": "2026-08-26"
+  },
+  {
+   "event_id": "BFE_23aa1fef9bf6f67c",
+   "title_cn": "乍得将相关地区戒备提升至最高级别，苏丹跨境打击争议引发外溢担忧",
+   "importance_score": 96,
+   "country_cn": "乍得",
+   "event_date": "2026-08-27"
+  }
+ ],
+ "ai_usage": {
+  "social_ai_calls": 0,
+  "disease_ai_calls": 0,
+  "daily_analysis_calls": 0,
+  "weekly_analysis_calls": 0,
+  "total_ai_calls": 0,
+  "total_tokens": 0,
+  "note": "数据包已含 headline/fact/verification/uncertainty，无缺失 AI enrichment 字段；本地无 DeepSeek key，未调用 AI。"
+ }
+}

@@ -1,0 +1,124 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ASIP Event Timeline (Social)",
+  "description": "Stage 6B §三 — 社会安全事件时间线。Stage6A master_event 为父对象；历史不可覆盖；current_state 为派生层。internal only，不写 Public。",
+  "type": "object",
+  "required": [
+    "timeline_id", "master_event_id", "timeline_status",
+    "first_reported_at", "latest_update_at", "current_state",
+    "updates", "source_count", "independent_source_count",
+    "conflict_flags", "created_at"
+  ],
+  "properties": {
+    "timeline_id": {"type": "string"},
+    "master_event_id": {"type": "string"},
+    "timeline_status": {
+      "type": "string",
+      "enum": ["developing", "ongoing", "stable", "closed", "unknown"]
+    },
+    "first_reported_at": {"type": ["string", "null"]},
+    "latest_update_at": {"type": ["string", "null"]},
+    "current_state": {"$ref": "#/definitions/current_state"},
+    "updates": {
+      "type": "array",
+      "items": {"$ref": "#/definitions/update"}
+    },
+    "source_count": {"type": "integer", "minimum": 0},
+    "independent_source_count": {"type": "integer", "minimum": 0},
+    "verification_status": {"type": ["string", "null"]},
+    "confidence": {"type": ["integer", "null"]},
+    "conflict_flags": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "uncertainties": {"type": "array", "items": {"type": "string"}},
+    "created_at": {"type": "string"},
+    "updated_at": {"type": ["string", "null"]}
+  },
+  "definitions": {
+    "current_state": {
+      "type": "object",
+      "description": "派生层（§六）：不是新事实源，必须可追溯 provenance。",
+      "properties": {
+        "country": {"type": ["string", "null"]},
+        "location": {"type": ["string", "null"]},
+        "event_type": {"type": ["string", "null"]},
+        "deaths": {"type": ["integer", "null"]},
+        "injured": {"type": ["integer", "null"]},
+        "responsible_party": {"type": ["string", "null"]},
+        "event_status": {"type": ["string", "null"]},
+        "official_confirmed": {"type": "boolean"},
+        "last_updated": {"type": ["string", "null"]},
+        "conflicting_values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "value": {"type": ["integer", "null"]},
+              "source": {"type": ["string", "null"]},
+              "published_at": {"type": ["string", "null"]}
+            }
+          }
+        },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "value": {},
+              "source": {"type": ["string", "null"]},
+              "update_id": {"type": ["string", "null"]},
+              "effective_at": {"type": ["string", "null"]}
+            }
+          }
+        }
+      }
+    },
+    "update": {
+      "type": "object",
+      "required": [
+        "update_id", "master_event_id", "update_type",
+        "previous_update_id", "changed_fields", "evidence", "created_at"
+      ],
+      "properties": {
+        "update_id": {"type": "string"},
+        "master_event_id": {"type": "string"},
+        "article_id": {"type": ["string", "null"]},
+        "source_id": {"type": ["string", "null"]},
+        "source_group": {"type": ["string", "null"]},
+        "published_at": {"type": ["string", "null"]},
+        "event_time": {"type": ["string", "null"]},
+        "effective_at": {"type": ["string", "null"]},
+        "time_basis": {
+          "type": "string",
+          "enum": ["event_time", "published_at_fallback", "none"]
+        },
+        "update_type": {
+          "type": "string",
+          "enum": [
+            "initial_report", "casualty_update", "injury_update",
+            "location_update", "actor_attribution_update",
+            "official_confirmation", "status_update", "correction",
+            "context_update", "closure_update"
+          ]
+        },
+        "previous_update_id": {"type": ["string", "null"]},
+        "changed_fields": {"type": "array", "items": {"type": "string"}},
+        "evidence": {
+          "type": "object",
+          "properties": {
+            "title": {"type": ["string", "null"]},
+            "url": {"type": ["string", "null"]}
+          }
+        },
+        "attribution_type": {
+          "type": ["string", "null"],
+          "enum": ["claimed", "officially_attributed", "reported", "alleged", "confirmed"]
+        },
+        "verification_status": {"type": ["string", "null"]},
+        "verification_confidence": {"type": ["integer", "null"]},
+        "created_at": {"type": "string"}
+      }
+    }
+  }
+}

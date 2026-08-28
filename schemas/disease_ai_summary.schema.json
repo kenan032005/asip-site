@@ -1,0 +1,105 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ASIP Disease AI Summary Payload",
+  "description": "Disease AI 输出合同（presentation/summary/interpretation layer）。AI 只负责中文标题、摘要、变化说明与不确定性；病例/死亡数字、国家、日期、疾病身份等核心事实由确定性 Disease Canonical 负责，AI 不得覆盖（顶层 additionalProperties=false 机械拒绝额外字段）。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "disease_event_id",
+    "title_zh",
+    "summary_zh",
+    "key_changes",
+    "uncertainties",
+    "public_health_relevance",
+    "classification_confidence"
+  ],
+  "properties": {
+    "disease_event_id": {
+      "type": "string",
+      "description": "对应 Disease Canonical 的 disease_event_id（引用，不裁决）"
+    },
+    "title_zh": {
+      "type": "string",
+      "minLength": 4,
+      "description": "中文标题"
+    },
+    "summary_zh": {
+      "type": "string",
+      "minLength": 10,
+      "description": "中文摘要（2-4 句）"
+    },
+    "key_changes": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "description", "evidence_field"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "case_update",
+              "geographic_spread",
+              "mortality_update",
+              "response_update",
+              "status_change",
+              "other"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "minLength": 5,
+            "description": "变化说明一句话（可引用数字，但必须与 Canonical 一致）"
+          },
+          "evidence_field": {
+            "type": "string",
+            "enum": [
+              "disease_id",
+              "disease_name_en",
+              "country_iso3",
+              "admin1",
+              "admin2",
+              "report_date",
+              "event_start_date",
+              "event_end_date",
+              "confirmed_cases",
+              "probable_cases",
+              "suspected_cases",
+              "total_cases",
+              "deaths",
+              "recoveries",
+              "case_period_start",
+              "case_period_end",
+              "outbreak_status",
+              "update_type",
+              "affected_countries",
+              "primary_source"
+            ],
+            "description": "必须引用 Disease Canonical 真实字段名"
+          }
+        }
+      }
+    },
+    "uncertainties": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 3
+      },
+      "description": "未证实信息；无则 []"
+    },
+    "public_health_relevance": {
+      "type": "string",
+      "enum": ["direct", "indirect", "none"],
+      "description": "公共卫生关联度（direct=直接暴发/传播；indirect=潜在影响；none=普通信息）"
+    },
+    "classification_confidence": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "0-100 整数置信度（仅代表 AI 摘要置信度，不代表病例数字）"
+    }
+  }
+}

@@ -53,7 +53,50 @@ PUBLIC_DATA_ALLOWLIST = [
     "public/published_events.json",
     "public/current_metrics.json",
     "public/legacy_archive_events.json",
+    "public/disease_events.json",        # Stage 5 疾病公开快照（Public ⊆ Disease Canonical）
 ]
+
+# Stage 8A：公开安全前端视图（由 scripts/frontend/build_frontend_views.py 生成）。
+# 只允许进入 dist 白名单的 8 个视图契约；绝不带内部 runtime 字段。
+FRONTEND_VIEWS = [
+    "site_overview",
+    "master_events",
+    "event_timelines",
+    "country_snapshots",
+    "disease_outbreaks",
+    "report_index",
+    "knowledge_summary",
+    "china_interest",
+]
+FRONTEND_VIEWS_DIR = os.path.join(DATA_DIR, "runtime", "frontend_preview_public")
+
+
+def _copy_frontend_views(dist_root, frontend_views_dir=None):
+    """§二十四：前端视图 → dist/data/*.json（public-safe，供页面 API.get 消费）。
+
+    默认构建时刷新生产 Preview view；历史回填预览传入独立目录时只读该目录，
+    不调用生产 view builder，避免把 Preview 数据混入生产 runtime。
+    """
+    source_dir = frontend_views_dir or FRONTEND_VIEWS_DIR
+    if frontend_views_dir is None:
+        try:
+            sys.path.insert(0, os.path.join(HERE, "frontend"))
+            import build_frontend_views as _bfv
+            _bfv.main()
+        except Exception as e:
+            print(f"  ⚠ 前端视图刷新失败（跳过）: {e}")
+    if not os.path.isdir(source_dir):
+        return 0
+    dst_root = os.path.join(dist_root, "data")
+    os.makedirs(dst_root, exist_ok=True)
+    n = 0
+    for name in FRONTEND_VIEWS:
+        src = os.path.join(source_dir, name + ".json")
+        if not os.path.exists(src):
+            continue
+        shutil.copy2(src, os.path.join(dst_root, name + ".json"))
+        n += 1
+    return n
 
 WIN_PATH_RE = re.compile(r"[A-Za-z]:[\\/]+[^\s\"'<>|]*")
 POSIX_PATH_RE = re.compile(r"/(?:home|Users)/[^\s\"'<>|]*")
@@ -100,10 +143,16 @@ def _copy_public_data(dist_root):
         shutil.copy2(src, dst)
 
 
-def load_public_db(data_dir=None):
-    """仅加载白名单文件（脱敏后）作为内联快照，杜绝内部数据进入 __DB__。"""
+def load_public_db(data_dir=None, frontend_views_dir=None):
+    """仅加载白名单文件（脱敏后）作为内联快照，杜绝内部数据进入 __DB__。
+
+    Stage 8A：额外内联公开安全前端视图（site_overview 等），
+    键与 dist/data/<name>.json 一致，页面直接 API.get("site_overview")。
+    """
     if data_dir is None:
         data_dir = DATA_DIR
+    if frontend_views_dir is None:
+        frontend_views_dir = FRONTEND_VIEWS_DIR
     db = {}
     for rel in PUBLIC_DATA_ALLOWLIST:
         src = os.path.join(data_dir, rel)
@@ -117,6 +166,16 @@ def load_public_db(data_dir=None):
         if rel in ("sources.json", "events.json"):
             data = _sanitize_public(data)
         db[rel[:-5]] = data
+    # Stage 8A 前端视图（public-safe）
+    for name in FRONTEND_VIEWS:
+        src = os.path.join(frontend_views_dir, name + ".json")
+        if not os.path.exists(src):
+            continue
+        try:
+            with open(src, "r", encoding="utf-8") as f:
+                db[name] = json.load(f)
+        except Exception:
+            continue
     return db
 
 
@@ -177,16 +236,26 @@ def inject_db(html, db):
     return script + html
 
 
-def main(run_id=None, no_embed=False):
+def main(run_id=None, no_embed=False, data_dir=None, frontend_views_dir=None, dist_dir=None, reports_dir=None):
+    """构建站点；可选数据/视图/输出目录仅供本地 Preview 隔离使用。"""
+    global DATA_DIR, FRONTEND_VIEWS_DIR, DIST, REPORTS
+    if data_dir is not None:
+        DATA_DIR = os.path.abspath(str(data_dir))
+    if frontend_views_dir is not None:
+        FRONTEND_VIEWS_DIR = os.path.abspath(str(frontend_views_dir))
+    if dist_dir is not None:
+        DIST = os.path.abspath(str(dist_dir))
+    if reports_dir is not None:
+        REPORTS = os.path.abspath(str(reports_dir))
     meta = get_build_meta(run_id)
     print(f"[build_site] run_id={meta['run_id']} pipeline_version={meta['pipeline_version']}")
     print(f"[build_site] build_time={meta['build_time_bj']}")
 
-    # 零删除构建：先构建到 .dist_new，最后用纯改名交换（rename 不受
-    # 环境批量删除保护限制）。旧 dist 改名入 .dist_trash，尽力清理。
+    # 零删除构建：先构建到目标目录旁的临时目录，最后用纯改名交换。
+    # Preview 可指定独立 dist_dir，因此绝不把临时构建写入生产 dist。
     import time as _time
-    DIST_NEW = os.path.join(ROOT, ".dist_new")
-    TRASH = os.path.join(ROOT, ".dist_trash")
+    DIST_NEW = DIST + ".new"
+    TRASH = DIST + ".trash"
     if os.path.isdir(DIST_NEW):  # 上次异常残留
         os.makedirs(TRASH, exist_ok=True)
         os.rename(DIST_NEW, os.path.join(TRASH, f"new_{int(_time.time()*1000)}"))
@@ -233,7 +302,7 @@ def main(run_id=None, no_embed=False):
 
         # 可选内联数据快照（仅白名单公开数据，已脱敏）
         if not no_embed:
-            html = inject_db(html, load_public_db(DATA_DIR))
+            html = inject_db(html, load_public_db(DATA_DIR, FRONTEND_VIEWS_DIR))
 
         outpath = os.path.join(DIST_NEW, fn)
         with open(outpath, "w", encoding="utf-8") as f:
@@ -246,6 +315,9 @@ def main(run_id=None, no_embed=False):
     if os.path.isdir(DATA_DIR):
         # Stage-2 收尾：仅按白名单复制公开数据，绝不复制整个 data/ 目录
         _copy_public_data(DIST_NEW)
+    # Stage 8A：公开安全前端视图（site_overview/master_events/...）
+    n_views = _copy_frontend_views(DIST_NEW, FRONTEND_VIEWS_DIR if frontend_views_dir is not None else None)
+    print(f"  前端视图: {n_views} 个契约")
     if os.path.isdir(REPORTS):
         shutil.copytree(REPORTS, os.path.join(DIST_NEW, "reports"))
 
@@ -284,5 +356,11 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser(description="Stage-1 构建静态站点")
     ap.add_argument("--run-id", type=str, default=None, help="指定 run_id")
     ap.add_argument("--no-embed", action="store_true", help="不内联数据快照")
+    ap.add_argument("--data-dir", type=str, default=None, help="本地 Preview 数据目录")
+    ap.add_argument("--frontend-views-dir", type=str, default=None, help="本地 Preview 前端视图目录")
+    ap.add_argument("--dist-dir", type=str, default=None, help="本地 Preview 输出目录")
+    ap.add_argument("--reports-dir", type=str, default=None, help="本地 Preview 报告页面目录")
     args = ap.parse_args()
-    main(run_id=args.run_id, no_embed=args.no_embed)
+    main(run_id=args.run_id, no_embed=args.no_embed, data_dir=args.data_dir,
+         frontend_views_dir=args.frontend_views_dir, dist_dir=args.dist_dir,
+         reports_dir=args.reports_dir)

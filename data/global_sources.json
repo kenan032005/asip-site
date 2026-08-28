@@ -1,0 +1,298 @@
+{
+  "_comment": "ASIP Global Cross-Country Source Layer V1（Source Expansion A）。跨国/泛非洲层来源注册表，可被所有非洲国家复用。trust role 由外部来源研究裁定，本层不自行改变。静态 registry 不含 runtime health（见 data/runtime/source_health.json）。",
+  "schema_version": "1.0.0",
+  "pipeline_version": "source-expansion-global-v1",
+  "updated_at": "2026-08-26",
+  "sources": [
+    {
+      "source_id": "global_reuters_africa",
+      "name": "Reuters Africa",
+      "source_group": "reuters",
+      "scope": "africa",
+      "country_scope": [
+        "africa"
+      ],
+      "language": [
+        "en"
+      ],
+      "role": "evidence",
+      "trust_tier": "A",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "reuters.com",
+      "listing_path": "/world/africa/",
+      "detail_strategy": "public_article_html",
+      "enabled": true,
+      "priority": 1,
+      "publisher_inheritance": null,
+      "expected_update_frequency": "continuous",
+      "notes": "仅免费公开页面；不使用付费 News Agency API、不绕过 paywall、不用第三方 mirror。listing 若反爬/JS 限制记 adapter 状态不阻断。文章可作 primary/supporting。"
+    },
+    {
+      "source_id": "global_ap_africa",
+      "name": "Associated Press Africa",
+      "source_group": "ap",
+      "scope": "africa",
+      "country_scope": [
+        "africa"
+      ],
+      "language": [
+        "en"
+      ],
+      "role": "evidence",
+      "trust_tier": "A",
+      "evidence_eligible": true,
+      "acquisition_method": "public_hub_html",
+      "listing_host": "apnews.com",
+      "listing_path": "/hub/africa",
+      "detail_strategy": "public_article_html",
+      "enabled": true,
+      "priority": 1,
+      "publisher_inheritance": null,
+      "expected_update_frequency": "continuous",
+      "notes": "公开 Africa Hub 发现；article 作原始证据；不使用需授权的商业 feed。"
+    },
+    {
+      "source_id": "global_bbc_africa",
+      "name": "BBC News Africa",
+      "source_group": "bbc",
+      "scope": "africa",
+      "country_scope": [
+        "africa"
+      ],
+      "language": [
+        "en"
+      ],
+      "role": "evidence",
+      "trust_tier": "B",
+      "evidence_eligible": true,
+      "acquisition_method": "rss",
+      "listing_host": "feeds.bbci.co.uk",
+      "listing_path": "/news/world/africa/rss.xml",
+      "detail_strategy": "public_article_html",
+      "enabled": true,
+      "priority": 2,
+      "publisher_inheritance": null,
+      "expected_update_frequency": "continuous",
+      "notes": "不使用 BBC Information Syndication API（需授权/Key）。公开 RSS 仅 discovery/title/published_at/article_url；正文按公开 article URL 尝试提取。"
+    },
+    {
+      "source_id": "global_rfi_afrique",
+      "name": "RFI Afrique",
+      "source_group": "rfi",
+      "scope": "africa",
+      "country_scope": [
+        "africa"
+      ],
+      "language": [
+        "fr"
+      ],
+      "role": "evidence",
+      "trust_tier": "B",
+      "evidence_eligible": true,
+      "acquisition_method": "rss",
+      "listing_host": "rfi.fr",
+      "listing_path": "/fr/afrique/rss",
+      "detail_strategy": "public_article_html",
+      "enabled": true,
+      "priority": 2,
+      "publisher_inheritance": null,
+      "expected_update_frequency": "continuous",
+      "notes": "法语非洲/Sahel 重要跨国源；优先 RSS 发现 + detail 正文提取；保留法语原文，本层不翻译。"
+    },
+    {
+      "source_id": "global_france24_afrique_fr",
+      "name": "France 24 Afrique FR",
+      "source_group": "france24",
+      "scope": "africa",
+      "country_scope": [
+        "africa"
+      ],
+      "language": [
+        "fr"
+      ],
+      "role": "evidence",
+      "trust_tier": "B",
+      "evidence_eligible": true,
+      "acquisition_method": "rss",
+      "listing_host": "france24.com",
+      "listing_path": "/fr/afrique/rss",
+      "detail_strategy": "public_article_html",
+      "enabled": true,
+      "priority": 2,
+      "publisher_inheritance": null,
+      "expected_update_frequency": "continuous",
+      "notes": "与 EN 版同属 france24 组：不得因双语算两个 independent sources。"
+    },
+    {
+      "source_id": "global_france24_africa_en",
+      "name": "France 24 Africa EN",
+      "source_group": "france24",
+      "scope": "africa",
+      "country_scope": [
+        "africa"
+      ],
+      "language": [
+        "en"
+      ],
+      "role": "evidence",
+      "trust_tier": "B",
+      "evidence_eligible": true,
+      "acquisition_method": "rss",
+      "listing_host": "france24.com",
+      "listing_path": "/en/africa/rss",
+      "detail_strategy": "public_article_html",
+      "enabled": true,
+      "priority": 2,
+      "publisher_inheritance": null,
+      "expected_update_frequency": "continuous",
+      "notes": "与 FR 版同属 france24 组：不得因双语算两个 independent sources。"
+    },
+    {
+      "source_id": "global_aljazeera",
+      "name": "Al Jazeera",
+      "source_group": "aljazeera",
+      "scope": "global",
+      "country_scope": [
+        "global"
+      ],
+      "language": [
+        "en"
+      ],
+      "role": "evidence",
+      "trust_tier": "B",
+      "evidence_eligible": true,
+      "acquisition_method": "rss_global_filter",
+      "listing_host": "aljazeera.com",
+      "listing_path": "/xml/rss/all.xml",
+      "detail_strategy": "public_article_html",
+      "enabled": true,
+      "priority": 3,
+      "publisher_inheritance": null,
+      "expected_update_frequency": "continuous",
+      "notes": "全球 feed 非 Africa 专属：discovery 后必须经 Africa 确定性 filter 才入 candidate pool。过滤用 country dictionary/区域关键词，不用 AI。"
+    },
+    {
+      "source_id": "global_allafrica",
+      "name": "AllAfrica Discovery Layer",
+      "source_group": "allafrica",
+      "scope": "africa",
+      "country_scope": [
+        "africa"
+      ],
+      "language": [
+        "en",
+        "fr"
+      ],
+      "role": "discovery",
+      "trust_tier": "D",
+      "evidence_eligible": false,
+      "acquisition_method": "rss_rdf",
+      "listing_host": "allafrica.com",
+      "listing_path": "/tools/headlines/rdf/latest/headlines.rdf",
+      "detail_strategy": "none",
+      "enabled": true,
+      "priority": 4,
+      "publisher_inheritance": true,
+      "expected_update_frequency": "hourly",
+      "notes": "DISCOVERY PLATFORM：item 通常含原始 publisher。必须保存 aggregator=allafrica + original_publisher + original_url(如可解析) + aggregation_url。验证前优先追溯 original source；publisher 明确（WHO/RFI/DW/国家媒体/政府）则 trust 继承原始 publisher，不得 allafrica+原始媒体 计两个 independent。"
+    },
+    {
+      "source_id": "global_reliefweb",
+      "name": "ReliefWeb Distribution Platform",
+      "source_group": "reliefweb",
+      "scope": "global",
+      "country_scope": [
+        "global"
+      ],
+      "language": [
+        "en",
+        "fr"
+      ],
+      "role": "distribution_platform",
+      "trust_tier": "NONE",
+      "evidence_eligible": false,
+      "acquisition_method": "api",
+      "listing_host": "reliefweb.int",
+      "listing_path": "/v1/reports",
+      "detail_strategy": "api_detail",
+      "enabled": true,
+      "priority": 4,
+      "publisher_inheritance": true,
+      "expected_update_frequency": "continuous",
+      "notes": "公开 API reports 资源优先，不 HTML 硬抓。解析 original publisher/source organization。trust 沿用 Stage5 修复：ReliefWeb+WHO→A、+Africa CDC→A、+local NGO→NGO 自身、publisher unknown→≤C/lead-only；domain 不得自动 A。"
+    },
+    {
+      "source_id": "disease_who_don",
+      "name": "WHO Disease Outbreak News",
+      "source_group": "who",
+      "scope": "africa",
+      "country_scope": [
+        "africa"
+      ],
+      "language": [
+        "en"
+      ],
+      "role": "authoritative_disease_evidence",
+      "trust_tier": "A",
+      "evidence_eligible": true,
+      "acquisition_method": "official_listing",
+      "listing_host": "who.int",
+      "listing_path": "/emergencies/disease-outbreak-news",
+      "detail_strategy": "public_article_html",
+      "enabled": true,
+      "priority": 1,
+      "publisher_inheritance": null,
+      "expected_update_frequency": "event_driven",
+      "notes": "权威源但非疫情完整清单：WHO DON 未报道不得推导为无疫情。"
+    },
+    {
+      "source_id": "disease_who_afro",
+      "name": "WHO African Region (AFRO) Outbreaks/Emergencies Weekly Bulletin",
+      "source_group": "who",
+      "scope": "africa",
+      "country_scope": [
+        "africa"
+      ],
+      "language": [
+        "en"
+      ],
+      "role": "authoritative_disease_evidence",
+      "trust_tier": "A",
+      "evidence_eligible": true,
+      "acquisition_method": "listing_publication_discovery",
+      "listing_host": "who.int",
+      "listing_path": "/health-topics/health-emergencies/africa",
+      "detail_strategy": "pdf_or_html_detail",
+      "enabled": true,
+      "priority": 1,
+      "publisher_inheritance": null,
+      "expected_update_frequency": "weekly",
+      "notes": "重点产品 Weekly Bulletin；PDF 提取复用既有 document extraction 能力，不重写 PDF 框架。"
+    },
+    {
+      "source_id": "disease_africa_cdc",
+      "name": "Africa CDC",
+      "source_group": "africacdc",
+      "scope": "africa",
+      "country_scope": [
+        "africa"
+      ],
+      "language": [
+        "en"
+      ],
+      "role": "authoritative_disease_evidence",
+      "trust_tier": "A",
+      "evidence_eligible": true,
+      "acquisition_method": "publication_discovery",
+      "listing_host": "africacdc.org",
+      "listing_path": "/",
+      "detail_strategy": "public_pdf_or_reports",
+      "enabled": true,
+      "priority": 1,
+      "publisher_inheritance": null,
+      "expected_update_frequency": "weekly",
+      "notes": "优先 Epidemic Intelligence Weekly Report / public dashboard / publication；如 dashboard 无稳定公开 API 不逆向 private endpoint；记录 dashboard_available / stable_public_endpoint。"
+    }
+  ]
+}

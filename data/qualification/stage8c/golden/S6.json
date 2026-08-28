@@ -1,0 +1,104 @@
+{
+ "case_id": "S6",
+ "category": "ordinary_security",
+ "task_type": "stage4_event_enrichment",
+ "semantic": "official confirmation guard（不得虚构官方确认）",
+ "run15_errors": [],
+ "run15_attribution_loss": false,
+ "input_payload": {
+  "event_id": "EVT_451cac52bc310619",
+  "country": "TD",
+  "country_code": "TD",
+  "country_cn": "乍得",
+  "primary_country": "chad",
+  "event_location_country": "chad",
+  "source_country": "乍得",
+  "mentioned_countries": [],
+  "country_risk_level": 4,
+  "country_risk_label": "极高",
+  "event_type": "other_security",
+  "event_severity": "medium",
+  "event_status": "new",
+  "title_cn": "",
+  "title_original": "Salamat : 302 armes de guerre saisies en trois mois d'opération - Tchadinfos",
+  "summary_cn": "",
+  "summary_original": "",
+  "original_language": "fr",
+  "body_extracted": "Au total, 302 armes de différents calibres, 119 chargeurs et 25 munitions, saisis auprès de civils par les forces de défense et de sécurité, ont été présentés ce vendredi 31 juillet 2026 dans la cour du gouvernorat de la province du Salamat, à Amtiman.\nCette présentation est intervenue à l’issue de la réunion hebdomadaire de sécurité présidée par le Délégué général du gouvernement auprès de la province du Salamat, le général Ismat Issakha Acheick.\nÀ cette occasion, le Délégué général a félicité les forces de défense et de sécurité pour leur professionnalisme, qui a permis la saisie de cet important arsenal. Il a également lancé un appel à la population afin qu’elle remette volontairement les armes encore détenues illégalement.\n« Libérez-vous de ces armes qui vous poussent à commettre des crimes et vivez en toute tranquillité. Le port des armes relève exclusivement des forces de défense et de sécurité », a-t-il déclaré.\nLire aussi  :  Salamat : réunion sécuritaire suivie de la présentation d’armes et de suspects à la presse\nSelon les responsables des forces de défense et de sécurité, ce résultat est le fruit de trois mois d’opérations menées dans la province.\nEn clôture, le général Ismat Issakha Acheick a salué la collaboration entre les forces de défense et de sécurité, les autorités administratives, les autorités locales et les populations, estimant que cette synergie a largement contribué au succès de cette opération de désarmement.",
+  "body_status": "full_body",
+  "extraction_quality": "full_body",
+  "extraction_method": "generic_density",
+  "extraction_quality_score": 75,
+  "extraction_quality_reasons": [],
+  "canonical_url": "https://tchadinfos.com/2026/07/31/salamat-302-armes-de-guerre-saisies-en-trois-mois-doperation/",
+  "discovery_method": "html_listing",
+  "fetch_http_status": 200,
+  "article_word_count": 235,
+  "author": "https://www.facebook.com/tchadinfos",
+  "event_time": "2026-07-31T15:14:34+00:00",
+  "published_time": "2026-07-31T15:14:34+00:00",
+  "published_at_beijing": "2026-07-31 23:14:34",
+  "collected_at_beijing": "2026-08-02T05:28:22+08:00",
+  "location_name": "",
+  "china_related": false,
+  "verification_level": "single_source",
+  "verification_label_cn": "单一来源",
+  "independent_source_count": 1,
+  "source_links": [
+   {
+    "url": "https://tchadinfos.com/2026/07/31/salamat-302-armes-de-guerre-saisies-en-trois-mois-doperation/",
+    "source_name": "Tchadinfos",
+    "source_group": "chad",
+    "language": "fr"
+   }
+  ],
+  "current_policy_passed": true,
+  "quality_gate_passed": true,
+  "publication_reason": "Stage 3B 真实采集",
+  "publication_status": "publishable",
+  "pipeline_version": 2,
+  "schema_version": "2.0",
+  "run_id": "20260802T014500+0800_005110",
+  "legacy_migration_preserved": false,
+  "legacy_visibility": true
+ },
+ "original_ai_output": {
+  "source_language": "fr",
+  "title_zh": "萨拉马特省：三个月行动缴获302件战争武器",
+  "summary_zh": "乍得萨拉马特省首府安提曼，国防与安全部队向民众展示了三个月行动中缴获的302件不同口径武器、119个弹匣和25发弹药。省政府代表将军伊斯特·伊萨克·阿谢克主持了每周安全会议，并在会上赞扬了部队的专业性，呼吁民众主动上交非法持有的武器。",
+  "event_type": "other_security",
+  "country_iso3": "TCD",
+  "location": {
+   "country_iso3": "TCD",
+   "admin1": "萨拉马特省",
+   "city": "安提曼",
+   "site": "省政府大院",
+   "raw_text": "Salamat, Amtiman, cour du gouvernorat"
+  },
+  "key_facts": [
+   {
+    "fact": "国防与安全部队在萨拉马特省三个月行动中缴获302件武器",
+    "evidence_field": "body_extracted",
+    "evidence_excerpt": "302 armes de différents calibres, 119 chargeurs et 25 munitions, saisis auprès de civils par les forces de défense et de sécurité"
+   },
+   {
+    "fact": "缴获武器于2026年7月31日在安提曼省政府大院展示",
+    "evidence_field": "event_time",
+    "evidence_excerpt": "2026-07-31T15:14:34+00:00"
+   },
+   {
+    "fact": "省政府代表将军呼吁民众主动上交非法持有的武器",
+    "evidence_field": "body_extracted",
+    "evidence_excerpt": "Il a également lancé un appel à la population afin qu’elle remette volontairement les armes encore détenues illégalement"
+   }
+  ],
+  "uncertainties": [
+   "该事件目前仅有一个来源（Tchadinfos）报道，缺乏交叉验证。",
+   "武器缴获的具体行动细节和背景尚未完全披露。"
+  ],
+  "security_relevance": "direct",
+  "classification_confidence": 75
+ },
+ "expected_validator": "PASS",
+ "source": "Run#15 ACTIONS_RUN_ID=33018481998"
+}

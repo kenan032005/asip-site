@@ -1,0 +1,104 @@
+{
+ "case_id": "S7",
+ "category": "civil_unrest",
+ "task_type": "stage4_event_enrichment",
+ "semantic": "correction/update guard（不得虚构更新/更正）",
+ "run15_errors": [],
+ "run15_attribution_loss": false,
+ "input_payload": {
+  "event_id": "EVT_9a551301360773c7",
+  "country": "TD",
+  "country_code": "TD",
+  "country_cn": "乍得",
+  "primary_country": "chad",
+  "event_location_country": "chad",
+  "source_country": "乍得",
+  "mentioned_countries": [],
+  "country_risk_level": 4,
+  "country_risk_label": "极高",
+  "event_type": "strike",
+  "event_severity": "medium",
+  "event_status": "new",
+  "title_cn": "",
+  "title_original": "Tchad | Grève des enseignants : le régime ampute les salaires et franchit un seuil inquiétant",
+  "summary_cn": "",
+  "summary_original": "Comme annoncé par TchadOne dès la diffusion de la note signée par le Trésorier Payeur Général, le régime va bel et bien couper le salaire de milliers d’enseignants grévistes. La correspondance adressée aux banques, ordonnant l’annulation et l’extourne des virements des salaires de février 2026 vers le compte du Trésor à la BEAC, a été […]",
+  "original_language": "fr",
+  "body_extracted": "Comme annoncé par TchadOne dès la diffusion de la note signée par le Trésorier Payeur Général, le régime va bel et bien couper le salaire de milliers d’enseignants grévistes. La correspondance adressée aux banques, ordonnant l’annulation et l’extourne des virements des salaires de février 2026 vers le compte du Trésor à la BEAC, a été suivie d’une officialisation politique : les jours non prestés ne seront pas rémunérés. Derrière l’argument administratif d’une « erreur de calcul », se profile en réalité une décision assumée de sanction collective. Des milliers de familles se retrouvent ainsi prises en otage d’un bras de fer que le pouvoir a lui-même provoqué.\nLe plus grave reste ailleurs : les syndicats enseignants ne réclament pas une faveur, mais l’application d’un décret signé par le régime lui-même. Autrement dit, l’État refuse aujourd’hui d’exécuter ses propres engagements, puis punit ceux qui en exigent le respect. Amputer les salaires pour briser un mouvement social constitue une atteinte directe au droit fondamental de grève, pourtant reconnu par les textes. Nous entrons dans une phase totalitaire. Même le défunt Idriss Deby n’avait pas osé aller jusqu’à cette extrémité.\nEn choisissant la voie de la punition financière plutôt que celle du dialogue, le pouvoir envoie un message glaçant à l’ensemble des fonctionnaires : toute revendication sera désormais traitée par la menace et l’asphyxie économique. Cette stratégie de la peur pourrait cependant produire l’effet inverse. Car quand un régime commence à sanctionner ceux qui demandent simplement le respect de la loi, il révèle sa fragilité politique. Et face à une école déjà en crise, ce sont les élèves et l’avenir du pays qui paieront le prix fort.\nCorrespondance particulière TchadOne à N’Djamena",
+  "body_status": "full_body",
+  "extraction_quality": "full_body",
+  "extraction_method": "generic_density",
+  "extraction_quality_score": 75,
+  "extraction_quality_reasons": [],
+  "canonical_url": "https://tchadone.com/post/8799/",
+  "discovery_method": "rss",
+  "fetch_http_status": 200,
+  "article_word_count": 279,
+  "author": "",
+  "event_time": "2026-02-21T06:18:52+00:00",
+  "published_time": "2026-02-21T06:18:52+00:00",
+  "published_at_beijing": "2026-02-21 14:18:52",
+  "collected_at_beijing": "2026-08-02T05:24:27+08:00",
+  "location_name": "",
+  "china_related": false,
+  "verification_level": "single_source",
+  "verification_label_cn": "单一来源",
+  "independent_source_count": 1,
+  "source_links": [
+   {
+    "url": "https://tchadone.com/post/8799/",
+    "source_name": "Tchad One",
+    "source_group": "chad",
+    "language": "fr"
+   }
+  ],
+  "current_policy_passed": true,
+  "quality_gate_passed": true,
+  "publication_reason": "Stage 3B 真实采集",
+  "publication_status": "publishable",
+  "pipeline_version": 2,
+  "schema_version": "2.0",
+  "run_id": "20260802T014500+0800_005110",
+  "legacy_migration_preserved": false,
+  "legacy_visibility": true
+ },
+ "original_ai_output": {
+  "source_language": "fr",
+  "title_zh": "乍得教师罢工：政权克扣工资并越过令人担忧的门槛",
+  "summary_zh": "据TchadOne报道，乍得政权将切断数千名罢工教师的工资。发给银行的信函命令取消并冲正2026年2月向中非国家银行（BEAC）国库账户的工资转账，随后政治层面正式确认：未工作的天数将不予支付。工会要求执行政权自己签署的法令，而国家拒绝履行自身承诺并惩罚要求者，被视为对罢工权的直接侵犯。",
+  "event_type": "civil_unrest",
+  "country_iso3": "TCD",
+  "location": {
+   "country_iso3": "TCD",
+   "admin1": null,
+   "city": "恩贾梅纳",
+   "site": null,
+   "raw_text": "N’Djamena"
+  },
+  "key_facts": [
+   {
+    "fact": "乍得政权将切断数千名罢工教师的工资",
+    "evidence_field": "body_extracted",
+    "evidence_excerpt": "le régime va bel et bien couper le salaire de milliers d’enseignants grévistes"
+   },
+   {
+    "fact": "发给银行的信函命令取消并冲正2026年2月工资转账至BEAC国库账户",
+    "evidence_field": "body_extracted",
+    "evidence_excerpt": "La correspondance adressée aux banques, ordonnant l’annulation et l’extourne des virements des salaires de février 2026 vers le compte du Trésor à la BEAC"
+   },
+   {
+    "fact": "未工作的天数将不予支付",
+    "evidence_field": "body_extracted",
+    "evidence_excerpt": "les jours non prestés ne seront pas rémunérés"
+   }
+  ],
+  "uncertainties": [
+   "该报道为单一来源，尚未得到其他来源证实",
+   "具体受影响的教师人数未明确，仅称数千名"
+  ],
+  "security_relevance": "direct",
+  "classification_confidence": 75
+ },
+ "expected_validator": "PASS",
+ "source": "Run#15 ACTIONS_RUN_ID=33018481998"
+}

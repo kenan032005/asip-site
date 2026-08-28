@@ -42,6 +42,7 @@ data/.trash_*/
 data/backup/
 
 # Stage 2.5A 内部 AI 目录：运行时内容绝不入库（保留 .gitkeep 占位空目录）
+data/ai/
 data/ai/**/*.json
 data/ai/queue/*
 data/ai/processing/*
@@ -61,6 +62,9 @@ data/ai/**/*.md
 .workbuddy_runtime/
 
 data/runtime/
+
+# Stage 5 核实运行时（dry-run 结果等；绝不入库，可审计摘要另存 docs/）
+data/verification/
 
 # QA headless browser profile (never committed)
 .qa-edge-profile/
@@ -93,3 +97,13 @@ qa-artifacts-post-expansion-global-audit-p1/edge-profile/
 qa-artifacts-final-depth-consolidation-a/edge-profile/
 # Post-Consolidation Global Audit P2 Edge headless QA profile
 qa-artifacts-post-consolidation-global-audit-p2/edge-profile/
+
+# V2 Preview 隔离构建产物与本地 QA 证据（绝不入库；数据 runtime 已由 data/runtime/ 忽略）
+preview_dist*/
+preview_dist_v2.new/
+preview_dist_v2.trash/
+.workbuddy_tmp/
+outputs/
+
+# 本地构建垃圾目录（不入库）
+dist.trash/

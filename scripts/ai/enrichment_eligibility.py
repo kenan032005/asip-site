@@ -15,6 +15,36 @@ Stage 4 只处理满足以下条件的 Canonical 事件：
 """
 
 from urllib.parse import urlparse
+from pathlib import Path
+
+# 权威 ISO 3166-1 alpha-2 → alpha-3 映射（A 包交付，data/reference/iso2_to_iso3.json）。
+# 最新 main 的 Canonical 仅含 ISO2 country_code（country_iso3 缺省），
+# Stage 4 输入契约要求 country_iso3 —— 此处做只读运行时派生，不改 Canonical 数据。
+_ISO2_ISO3_MAP = None
+
+
+def _iso2_to_iso3_map():
+    """惰性加载权威映射表（只读，缓存）。失败时返回空映射（回退严格判定）。"""
+    global _ISO2_ISO3_MAP
+    if _ISO2_ISO3_MAP is None:
+        import json
+        try:
+            p = Path(__file__).resolve().parents[2] / "data" / "reference" / "iso2_to_iso3.json"
+            _ISO2_ISO3_MAP = json.loads(p.read_text(encoding="utf-8")).get("map", {}) or {}
+        except Exception:
+            _ISO2_ISO3_MAP = {}
+    return _ISO2_ISO3_MAP
+
+
+def effective_country_iso3(event):
+    """返回事件的有效 country_iso3：优先使用字段值，缺失时用 country_code 权威派生。"""
+    iso = (event.get("country_iso3") or "").strip().upper()
+    if iso:
+        return iso
+    cc = (event.get("country_code") or "").strip().upper()
+    if cc:
+        return _iso2_to_iso3_map().get(cc, "")
+    return ""
 
 # 列表页/非文章页路径段（与 Stage 3B CanonicalUrlIntegrity 一致）
 NON_ARTICLE_SEGMENTS = {
@@ -83,8 +113,8 @@ def eligibility_status(event, quarantine_ids=None, min_word_count=None):
     wc = int(event.get("article_word_count") or 0)
     if wc < min_wc:
         return "skipped_ineligible", f"insufficient_body:{wc}<{min_wc}"
-    # country_iso3 必须为合法 ISO3
-    iso = event.get("country_iso3") or ""
+    # country_iso3 必须为合法 ISO3（缺失时由 country_code 权威派生）
+    iso = effective_country_iso3(event)
     if not iso or not isinstance(iso, str) or len(iso) != 3 or iso != iso.upper():
         return "skipped_ineligible", f"invalid_country_iso3:{iso!r}"
     return "eligible", ""

@@ -3,25 +3,46 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>非洲传染病风险 · 非洲地区社会安全信息平台</title>
+<title>疾病风险 · ASIP</title>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body data-page="disease">
 <div id="topbar" class="topbar"></div>
-<div class="container">
-  <div class="hp-block disease-hero">
-    <div class="icon">🦠</div>
-    <h1>非洲传染病风险</h1>
-    <p>本模块正在建设中，后续将接入非洲疾控中心、世界卫生组织及各国卫生部门公开信息。</p>
-  </div>
-  <div class="disease-note">
-    <b>说明：</b>现阶段本页仅保留模块位置，不生成、不抓取、不展示任何模拟或虚构的疫情数据。可预留区域包括：非洲传染病风险概览、重点疫情、国家风险分布、疫情时间线、官方通报、旅行和人员健康建议。上述区域在本阶段均不启用。
-  </div>
+
+<div id="dbError" class="db-error" style="display:none;">
+  ⚠️ 数据未能成功加载。请刷新页面（Ctrl/Cmd + Shift + R）后重试。
 </div>
-<footer class="site"></footer>
+
+<div class="container">
+  <section class="hero">
+    <h1>非洲传染病风险</h1>
+    <p class="fe-sub">以疫情（Outbreak）为中心；确诊 / 疑似 / 死亡分类展示，未知值显示 —，绝不错误相加。</p>
+    <p class="fe-note">疫情状态：活跃 · 发展 · 上升 · 扩散 · 监测 · 下降 · 已控制 · 已结束</p>
+  </section>
+
+  <section class="hp-block">
+    <h2>活跃疫情</h2>
+    <div id="feDisActive"><div class="empty-sm">加载中…</div></div>
+  </section>
+
+  <section class="hp-block">
+    <h2>疫情筛选</h2>
+    <div class="fe-evs-filter" id="feDisFilter"></div>
+  </section>
+
+  <section class="hp-block">
+    <h2>全部疫情</h2>
+    <div id="feDiseaseList"><div class="empty-sm">加载中…</div></div>
+  </section>
+
+  <section class="hp-block" id="feOutbreakDetail" hidden></section>
+</div>
+
+<footer class="site"><div id="asip-build-meta" style="margin-top:4px;font-size:12px;color:#8899aa;"></div></footer>
+
 <script src="assets/js/pipeline.js"></script>
 <script src="assets/js/api.js"></script>
 <script src="assets/js/common.js"></script>
-<script>renderHeader("disease-risk.html");</script>
+<script src="assets/js/frontend.js"></script>
 </body>
 </html>

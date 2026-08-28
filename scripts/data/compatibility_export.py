@@ -30,6 +30,8 @@ def _legacy_event_from_cluster(cluster: dict) -> dict:
     """
     ev = dict(cluster.get("legacy_payload", {}))
     ev["event_id"] = cluster.get("legacy_event_id") or ev.get("event_id") or cluster.get("event_id")
+    # A 包：透传规范层 country_iso3，保证 legacy 视图与 canonical 一致
+    ev["country_iso3"] = cluster.get("country_iso3", "")
     return ev
 
 

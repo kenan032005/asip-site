@@ -1,0 +1,668 @@
+{
+  "_comment": "ASIP Priority Country / Local Source Layer V1（Source Expansion B）。仅 TCD/NER/SSD/BEN/ETH 五国；trust role 由外部来源研究裁定。静态 registry 不含 runtime health（见 data/runtime/source_health.json）。",
+  "schema_version": "1.0.0",
+  "pipeline_version": "source-expansion-country-v1",
+  "updated_at": "2026-08-26",
+  "sources": [
+    {
+      "source_id": "tcd_atpe",
+      "name": "ATPE (Agence Tchadienne de Presse et d'Edition)",
+      "source_group": "atpe",
+      "country_iso3": "TCD",
+      "language": [
+        "fr"
+      ],
+      "role": "evidence",
+      "trust_tier": "A",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "atpe.td",
+      "listing_path": "/",
+      "detail_strategy": "public_article_html",
+      "topic_scope": [
+        "security",
+        "society",
+        "health"
+      ],
+      "enabled": true,
+      "priority": "high",
+      "publisher_inheritance": null,
+      "notes": "官方/国家新闻；security/society/health。",
+      "topic_scope_lookup": [
+        "atpe",
+        "actualite",
+        "tchad"
+      ]
+    },
+    {
+      "source_id": "tcd_tchadinfos",
+      "name": "Tchadinfos",
+      "source_group": "tchadinfos",
+      "country_iso3": "TCD",
+      "language": [
+        "fr"
+      ],
+      "role": "evidence",
+      "trust_tier": "B",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "tchadinfos.com",
+      "listing_path": "/category/securite/",
+      "detail_strategy": "public_article_html",
+      "topic_scope": [
+        "security",
+        "general"
+      ],
+      "enabled": true,
+      "priority": "high",
+      "publisher_inheritance": null,
+      "notes": "优先 securite/tchad/sante 栏目。",
+      "topic_scope_lookup": [
+        "securite",
+        "tchad",
+        "sante"
+      ]
+    },
+    {
+      "source_id": "tcd_alwihda",
+      "name": "Alwihda Info",
+      "source_group": "alwihda",
+      "country_iso3": "TCD",
+      "language": [
+        "fr"
+      ],
+      "role": "evidence",
+      "trust_tier": "C",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "alwihdainfo.com",
+      "listing_path": "/",
+      "detail_strategy": "public_article_html",
+      "topic_scope": [
+        "security",
+        "general"
+      ],
+      "enabled": true,
+      "priority": "medium",
+      "publisher_inheritance": null,
+      "notes": "必须做 Tchad country filter，不能把泛非洲全部文章作为 TCD 候选。",
+      "topic_scope_lookup": [
+        "tchad"
+      ],
+      "country_filter_required": true
+    },
+    {
+      "source_id": "tcd_lepays",
+      "name": "Le Pays Tchad",
+      "source_group": "lepays",
+      "country_iso3": "TCD",
+      "language": [
+        "fr"
+      ],
+      "role": "evidence",
+      "trust_tier": "C",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "lepaystchad.com",
+      "listing_path": "/",
+      "detail_strategy": "public_article_html",
+      "topic_scope": [
+        "security",
+        "general"
+      ],
+      "enabled": true,
+      "priority": "medium",
+      "publisher_inheritance": null,
+      "notes": null,
+      "topic_scope_lookup": [
+        "tchad"
+      ]
+    },
+    {
+      "source_id": "ner_presidence",
+      "name": "Présidence de la République du Niger",
+      "source_group": "presidence_ne",
+      "country_iso3": "NER",
+      "language": [
+        "fr"
+      ],
+      "role": "evidence",
+      "trust_tier": "A",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "presidence.ne",
+      "listing_path": "/pages/actualites",
+      "detail_strategy": "public_article_html",
+      "topic_scope": [
+        "security",
+        "general"
+      ],
+      "enabled": true,
+      "priority": "high",
+      "publisher_inheritance": null,
+      "notes": "官方公告。",
+      "topic_scope_lookup": [
+        "niger"
+      ]
+    },
+    {
+      "source_id": "ner_anp",
+      "name": "Agence Nigérienne de Presse",
+      "source_group": "anp",
+      "country_iso3": "NER",
+      "language": [
+        "fr"
+      ],
+      "role": "evidence",
+      "trust_tier": "A",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "anp.ne",
+      "listing_path": "/",
+      "detail_strategy": "public_article_html",
+      "topic_scope": [
+        "security",
+        "general"
+      ],
+      "enabled": true,
+      "priority": "high",
+      "publisher_inheritance": null,
+      "notes": "国家通讯社。",
+      "topic_scope_lookup": [
+        "niger"
+      ]
+    },
+    {
+      "source_id": "ner_studio_kalangou",
+      "name": "Studio Kalangou",
+      "source_group": "studiokalangou",
+      "country_iso3": "NER",
+      "language": [
+        "fr"
+      ],
+      "role": "evidence",
+      "trust_tier": "B",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "studiokalangou.org",
+      "listing_path": "/",
+      "detail_strategy": "public_article_html",
+      "topic_scope": [
+        "security",
+        "society",
+        "justice"
+      ],
+      "enabled": true,
+      "priority": "high",
+      "publisher_inheritance": null,
+      "notes": "优先文字稿（Niger/Santé/Justice/Brèves）；不依赖 audio 解析。",
+      "topic_scope_lookup": [
+        "niger",
+        "sante",
+        "justice",
+        "breves"
+      ]
+    },
+    {
+      "source_id": "ner_lesahel",
+      "name": "Le Sahel",
+      "source_group": "lesahel",
+      "country_iso3": "NER",
+      "language": [
+        "fr"
+      ],
+      "role": "evidence",
+      "trust_tier": "B",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "lesahel.org",
+      "listing_path": "/",
+      "detail_strategy": "public_article_html",
+      "topic_scope": [
+        "security",
+        "general"
+      ],
+      "enabled": true,
+      "priority": "medium",
+      "publisher_inheritance": null,
+      "notes": "页面 JS 提示时先检查静态 HTML，不直接判 requires_js。",
+      "topic_scope_lookup": [
+        "niger"
+      ]
+    },
+    {
+      "source_id": "ner_actuniger",
+      "name": "ActuNiger",
+      "source_group": "actuniger",
+      "country_iso3": "NER",
+      "language": [
+        "fr"
+      ],
+      "role": "evidence",
+      "trust_tier": "C",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "actuniger.com",
+      "listing_path": "/",
+      "detail_strategy": "public_article_html",
+      "topic_scope": [
+        "security",
+        "society"
+      ],
+      "enabled": true,
+      "priority": "high",
+      "publisher_inheritance": null,
+      "notes": "公开 RSS 不可用（feedburner 占位 404），改首页 listing + 栏目过滤；过滤 Sport/Culture 低价值栏目。",
+      "topic_scope_lookup": [
+        "politique",
+        "societe",
+        "faits",
+        "sante",
+        "education"
+      ]
+    },
+    {
+      "source_id": "ssd_presidency",
+      "name": "Office of the President - South Sudan",
+      "source_group": "presidency_ssd",
+      "country_iso3": "SSD",
+      "language": [
+        "en"
+      ],
+      "role": "evidence",
+      "trust_tier": "A",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "op.gov.ss",
+      "listing_path": "/",
+      "detail_strategy": "public_article_html",
+      "topic_scope": [
+        "security",
+        "general"
+      ],
+      "enabled": true,
+      "priority": "high",
+      "publisher_inheritance": null,
+      "notes": "官方公告；与 SSBC 复制同一 statement 时保留 provenance，不重复计独立证据。",
+      "topic_scope_lookup": [
+        "south sudan"
+      ]
+    },
+    {
+      "source_id": "ssd_ssbc",
+      "name": "South Sudan Broadcasting Corporation",
+      "source_group": "ssbc",
+      "country_iso3": "SSD",
+      "language": [
+        "en"
+      ],
+      "role": "evidence",
+      "trust_tier": "A",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "ssbc.gov.ss",
+      "listing_path": "/",
+      "detail_strategy": "public_article_html",
+      "topic_scope": [
+        "security",
+        "general"
+      ],
+      "enabled": true,
+      "priority": "high",
+      "publisher_inheritance": null,
+      "notes": "与总统府复制同一 statement 保留 provenance，不得算两个独立证据。",
+      "topic_scope_lookup": [
+        "south sudan"
+      ]
+    },
+    {
+      "source_id": "ssd_eyeradio",
+      "name": "Eye Radio",
+      "source_group": "eyeradio",
+      "country_iso3": "SSD",
+      "language": [
+        "en"
+      ],
+      "role": "evidence",
+      "trust_tier": "B",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "eyeradio.org",
+      "listing_path": "/",
+      "detail_strategy": "public_article_html",
+      "topic_scope": [
+        "security",
+        "general"
+      ],
+      "enabled": true,
+      "priority": "high",
+      "publisher_inheritance": null,
+      "notes": null,
+      "topic_scope_lookup": [
+        "south sudan"
+      ]
+    },
+    {
+      "source_id": "ssd_radio_tamazuj",
+      "name": "Radio Tamazuj",
+      "source_group": "radiotamazuj",
+      "country_iso3": "SSD",
+      "language": [
+        "en"
+      ],
+      "role": "evidence",
+      "trust_tier": "B",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "radiotamazuj.org",
+      "listing_path": "/en/news",
+      "detail_strategy": "public_article_html",
+      "topic_scope": [
+        "security",
+        "general"
+      ],
+      "enabled": true,
+      "priority": "high",
+      "publisher_inheritance": null,
+      "notes": "Opinion 栏目必须标 content_type=opinion，不得当普通事实新闻。",
+      "topic_scope_lookup": [
+        "south sudan"
+      ]
+    },
+    {
+      "source_id": "ssd_sudantribune",
+      "name": "Sudan Tribune",
+      "source_group": "sudantribune",
+      "country_iso3": "SSD",
+      "language": [
+        "en"
+      ],
+      "role": "evidence",
+      "trust_tier": "B",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "sudantribune.com",
+      "listing_path": "/south-sudan/",
+      "detail_strategy": "public_article_html",
+      "topic_scope": [
+        "security",
+        "general"
+      ],
+      "enabled": true,
+      "priority": "high",
+      "publisher_inheritance": null,
+      "notes": "优先 South Sudan 分类页；不能把整个 Sudan 内容池映射到 SSD。",
+      "topic_scope_lookup": [
+        "south sudan"
+      ],
+      "country_filter_required": false
+    },
+    {
+      "source_id": "ssd_moh",
+      "name": "South Sudan Ministry of Health",
+      "source_group": "ssd_moh",
+      "country_iso3": "SSD",
+      "language": [
+        "en"
+      ],
+      "role": "authoritative_disease_evidence",
+      "trust_tier": "A",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "moh.gov.ss",
+      "listing_path": "/",
+      "detail_strategy": "public_article_html",
+      "topic_scope": [
+        "disease"
+      ],
+      "enabled": true,
+      "priority": "high",
+      "publisher_inheritance": null,
+      "notes": "只进入 Disease candidate chain。",
+      "topic_scope_lookup": [
+        "disease"
+      ]
+    },
+    {
+      "source_id": "ben_government_security",
+      "name": "Gouvernement du Bénin (Sécurité et défense)",
+      "source_group": "gouv_bj",
+      "country_iso3": "BEN",
+      "language": [
+        "fr"
+      ],
+      "role": "evidence",
+      "trust_tier": "A",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "gouv.bj",
+      "listing_path": "/",
+      "detail_strategy": "public_article_html",
+      "topic_scope": [
+        "security"
+      ],
+      "enabled": true,
+      "priority": "high",
+      "publisher_inheritance": null,
+      "notes": "只抓 Sécurité et défense 相关 communiqués。",
+      "topic_scope_lookup": [
+        "securite",
+        "defense"
+      ]
+    },
+    {
+      "source_id": "ben_moh",
+      "name": "Ministère de la Santé du Bénin",
+      "source_group": "ben_moh",
+      "country_iso3": "BEN",
+      "language": [
+        "fr"
+      ],
+      "role": "authoritative_disease_evidence",
+      "trust_tier": "A",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "sante.gouv.bj",
+      "listing_path": "/",
+      "detail_strategy": "public_article_html",
+      "topic_scope": [
+        "disease"
+      ],
+      "enabled": true,
+      "priority": "high",
+      "publisher_inheritance": null,
+      "notes": "只进入 Disease chain。",
+      "topic_scope_lookup": [
+        "disease"
+      ]
+    },
+    {
+      "source_id": "ben_banouto",
+      "name": "Banouto",
+      "source_group": "banouto",
+      "country_iso3": "BEN",
+      "language": [
+        "fr"
+      ],
+      "role": "evidence",
+      "trust_tier": "B",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "banouto.bj",
+      "listing_path": "/",
+      "detail_strategy": "public_article_html",
+      "topic_scope": [
+        "security",
+        "general"
+      ],
+      "enabled": true,
+      "priority": "high",
+      "publisher_inheritance": null,
+      "notes": null,
+      "topic_scope_lookup": [
+        "benin"
+      ]
+    },
+    {
+      "source_id": "ben_lanation",
+      "name": "La Nation",
+      "source_group": "lanation",
+      "country_iso3": "BEN",
+      "language": [
+        "fr"
+      ],
+      "role": "evidence",
+      "trust_tier": "B",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "lanation.bj",
+      "listing_path": "/",
+      "detail_strategy": "public_article_html",
+      "topic_scope": [
+        "security",
+        "general"
+      ],
+      "enabled": true,
+      "priority": "medium",
+      "publisher_inheritance": null,
+      "notes": null,
+      "topic_scope_lookup": [
+        "benin"
+      ]
+    },
+    {
+      "source_id": "ben_24heures",
+      "name": "24 Heures au Bénin",
+      "source_group": "24haubenin",
+      "country_iso3": "BEN",
+      "language": [
+        "fr"
+      ],
+      "role": "evidence",
+      "trust_tier": "C",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "24haubenin.info",
+      "listing_path": "/",
+      "detail_strategy": "public_article_html",
+      "topic_scope": [
+        "security",
+        "general"
+      ],
+      "enabled": true,
+      "priority": "medium",
+      "publisher_inheritance": null,
+      "notes": null,
+      "topic_scope_lookup": [
+        "benin"
+      ]
+    },
+    {
+      "source_id": "eth_ena",
+      "name": "Ethiopian News Agency",
+      "source_group": "ena",
+      "country_iso3": "ETH",
+      "language": [
+        "en"
+      ],
+      "role": "evidence",
+      "trust_tier": "A",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "ena.et",
+      "listing_path": "/",
+      "detail_strategy": "public_article_html",
+      "topic_scope": [
+        "security",
+        "general"
+      ],
+      "enabled": true,
+      "priority": "high",
+      "publisher_inheritance": null,
+      "notes": "只使用 English 入口。",
+      "topic_scope_lookup": [
+        "ethiopia"
+      ]
+    },
+    {
+      "source_id": "eth_fana",
+      "name": "Fana Media Corporation",
+      "source_group": "fana",
+      "country_iso3": "ETH",
+      "language": [
+        "en"
+      ],
+      "role": "evidence",
+      "trust_tier": "B",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "fanamc.com",
+      "listing_path": "/",
+      "detail_strategy": "public_article_html",
+      "topic_scope": [
+        "security",
+        "general"
+      ],
+      "enabled": true,
+      "priority": "high",
+      "publisher_inheritance": null,
+      "notes": null,
+      "topic_scope_lookup": [
+        "ethiopia"
+      ]
+    },
+    {
+      "source_id": "eth_addis_standard",
+      "name": "Addis Standard",
+      "source_group": "addisstandard",
+      "country_iso3": "ETH",
+      "language": [
+        "en"
+      ],
+      "role": "evidence",
+      "trust_tier": "B",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "addisstandard.com",
+      "listing_path": "/",
+      "detail_strategy": "public_article_html",
+      "topic_scope": [
+        "security",
+        "general"
+      ],
+      "enabled": "trial",
+      "priority": "medium",
+      "publisher_inheritance": null,
+      "notes": "trial；若不可访问记录 access_restricted/unavailable；不得用第三方转载冒充原始源。",
+      "topic_scope_lookup": [
+        "ethiopia"
+      ]
+    },
+    {
+      "source_id": "eth_moh",
+      "name": "Ethiopia Ministry of Health",
+      "source_group": "eth_moh",
+      "country_iso3": "ETH",
+      "language": [
+        "en"
+      ],
+      "role": "authoritative_disease_evidence",
+      "trust_tier": "A",
+      "evidence_eligible": true,
+      "acquisition_method": "public_listing_html",
+      "listing_host": "moh.gov.et",
+      "listing_path": "/",
+      "detail_strategy": "public_article_html",
+      "topic_scope": [
+        "disease"
+      ],
+      "enabled": true,
+      "priority": "high",
+      "publisher_inheritance": null,
+      "notes": "只进入 Disease chain。",
+      "topic_scope_lookup": [
+        "disease"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ASIP Major Event Brief (Output)",
+  "description": "Stage 7B §十五 — 重大事件简报 OUTPUT contract。只处理公开事件事实与风险影响；不得包含组织战术/武器能力/攻击方法/敏感行动细节扩写。",
+  "type": "object",
+  "required": [
+    "brief_id", "report_type", "title", "event_time", "country",
+    "what_happened", "confirmed_facts", "uncertainties", "verification_status",
+    "immediate_implications", "watch_items", "source_notes", "generation_metadata"
+  ],
+  "properties": {
+    "brief_id": {"type": "string"},
+    "report_type": {"const": "major_event_brief"},
+    "title": {"type": "string"},
+    "event_time": {"type": ["string", "null"]},
+    "country": {"type": ["string", "null"]},
+    "country_iso3": {"type": ["string", "null"]},
+    "location": {"type": ["string", "null"]},
+    "what_happened": {"type": "string", "description": "公开事件事实描述"},
+    "confirmed_facts": {
+      "type": "array",
+      "description": "仅 input 事实（§八：数字必须可追溯）",
+      "items": {
+        "type": "object",
+        "required": ["fact", "source_refs"],
+        "properties": {
+          "fact": {"type": "string"},
+          "source_refs": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "uncertainties": {"type": "array", "items": {"type": "string"}},
+    "verification_status": {"type": ["string", "null"]},
+    "verification_confidence": {"type": ["integer", "null"]},
+    "immediate_implications": {"type": "array", "items": {"type": "string"}},
+    "watch_items": {"type": "array", "items": {"type": "string"}},
+    "source_notes": {"type": "array", "items": {"$ref": "#/definitions/source_ref"}},
+    "generation_metadata": {
+      "type": "object",
+      "required": ["provider_name", "model_name", "prompt_version", "usage_purpose"],
+      "properties": {
+        "provider_name": {"type": "string"},
+        "model_name": {"type": "string"},
+        "prompt_version": {"type": "string"},
+        "usage_purpose": {"const": "development_test"},
+        "report_status": {"type": "string", "enum": [
+          "draft", "passed_quality_gate", "failed_quality_gate",
+          "approved_for_publication"]},
+        "input_report_id": {"type": "string"}
+      }
+    }
+  },
+  "definitions": {
+    "source_ref": {
+      "type": "object",
+      "required": ["source_id"],
+      "properties": {
+        "source_id": {"type": "string"},
+        "source_name": {"type": ["string", "null"]},
+        "url": {"type": ["string", "null"]}
+      }
+    }
+  }
+}
