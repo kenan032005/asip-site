@@ -1,0 +1,93 @@
+{
+ "label": "Sa34c8d2f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "tokens": {
+  "input_tokens": 2413,
+  "output_tokens": 299,
+  "total_tokens": 2712
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "萨赫勒国家联盟宣布组建5000人联合部队打击恐怖主义",
+   "summary_zh": "萨赫勒国家联盟（AES）宣布将组建一支5000人的联合部队，以打击三国境内的恐怖主义和各类不安全因素。该部队将借鉴此前G5萨赫勒联合部队的经验，但需避免重蹈其覆辙，尤其是减少对外部支持的依赖。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "萨赫勒国家联盟宣布组建5000人联合部队",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les pays de l’Alliance des Etats du Sahel ont annoncé la mise en place prochaine d’une force unifiée de cinq mille (5000) hommes"
+    },
+    {
+     "fact": "该部队旨在打击三国境内的恐怖主义和不安全因素",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette force qui aura la mission de combattre le terrorisme et l’insécurité sous toutes ses formes dans les 3 pays"
+    }
+   ],
+   "uncertainties": [
+    "该部队的具体组建时间、指挥结构和资金来源尚未明确",
+    "文章为单一来源报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "萨赫勒国家联盟宣布组建5000人联合部队打击恐怖主义",
+   "summary_zh": "萨赫勒国家联盟（AES）宣布将组建一支5000人的联合部队，以打击三国境内的恐怖主义和各类不安全因素。该部队将借鉴此前G5萨赫勒联合部队的经验，但需避免重蹈其覆辙，尤其是减少对外部支持的依赖。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "萨赫勒国家联盟宣布组建5000人联合部队",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les pays de l’Alliance des Etats du Sahel ont annoncé la mise en place prochaine d’une force unifiée de cinq mille (5000) hommes"
+    },
+    {
+     "fact": "该部队旨在打击三国境内的恐怖主义和不安全因素",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette force qui aura la mission de combattre le terrorisme et l’insécurité sous toutes ses formes dans les 3 pays"
+    }
+   ],
+   "uncertainties": [
+    "该部队的具体组建时间、指挥结构和资金来源尚未明确",
+    "文章为单一来源报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_c94a1faca34c8d2f",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

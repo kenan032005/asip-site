@@ -1,0 +1,102 @@
+{
+ "label": "S9f25a715",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "tokens": {
+  "input_tokens": 1948,
+  "output_tokens": 257,
+  "total_tokens": 2205
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"罢工对面包供应的实际影响尚未证实\"]",
+    "after": "[\"罢工对面包供应的实际影响尚未证实\", \"据Journal du Niger报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔面包师罢工抗议新规",
+   "summary_zh": "尼日尔尼亚美，面包师工会（SPBPN）宣布举行48小时罢工，抗议一项被认为无法实施的新部级法规。该决定获得一致通过，反映出从业者在经济紧张背景下的强烈不满。罢工可能导致面包供应中断。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": null,
+    "raw_text": "Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔面包师工会宣布48小时罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Syndicat patronal des boulangers et pâtissiers du Niger (SPBPN) lance une grève de 48 heures"
+    },
+    {
+     "fact": "罢工起因是抗议新部级法规",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "pour protester contre une nouvelle réglementation ministérielle qu’il juge inapplicable"
+    }
+   ],
+   "uncertainties": [
+    "罢工对面包供应的实际影响尚未证实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔面包师罢工抗议新规",
+   "summary_zh": "尼日尔尼亚美，面包师工会（SPBPN）宣布举行48小时罢工，抗议一项被认为无法实施的新部级法规。该决定获得一致通过，反映出从业者在经济紧张背景下的强烈不满。罢工可能导致面包供应中断。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": null,
+    "raw_text": "Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔面包师工会宣布48小时罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Syndicat patronal des boulangers et pâtissiers du Niger (SPBPN) lance une grève de 48 heures"
+    },
+    {
+     "fact": "罢工起因是抗议新部级法规",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "pour protester contre une nouvelle réglementation ministérielle qu’il juge inapplicable"
+    }
+   ],
+   "uncertainties": [
+    "罢工对面包供应的实际影响尚未证实",
+    "据Journal du Niger报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_d63d4b669f25a715",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
