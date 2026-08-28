@@ -267,6 +267,9 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False):
 def _export_views(emit):
     """canonical → 遗留/公开视图单向再生成（V17 一致性 + 站点数据更新）。"""
     try:
+        # scripts/data 模块按 scripts/ 与 scripts/data 双路径导入（pipeline_core / data.*）
+        sys.path.insert(0, str(ROOT / "scripts"))
+        sys.path.insert(0, str(ROOT / "scripts" / "data"))
         from scripts.data.repository import Repository
         from scripts.data.compatibility_export import export_all
         repo = Repository(root=ROOT / "data")

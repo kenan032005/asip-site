@@ -154,6 +154,22 @@ class TestNewEligible(unittest.TestCase):
         self.assertTrue(so.new_eligible_exists(st, "disease", tmp))
 
 
+class TestViewsExportImport(unittest.TestCase):
+    def test_export_import_path_resolves(self):
+        """compatibility_export 的 scripts/ + scripts/data 双路径导入必须可解析。"""
+        import sys
+        from pathlib import Path
+        root = Path(__file__).resolve().parents[2]
+        sys.path.insert(0, str(root / "scripts"))
+        sys.path.insert(0, str(root / "scripts" / "data"))
+        from scripts.data.repository import Repository  # noqa: F401
+        from scripts.data.compatibility_export import export_all  # noqa: F401
+        import inspect
+        sig = inspect.signature(export_all)
+        self.assertIn("repo", sig.parameters)
+        self.assertIn("run_id", sig.parameters)
+
+
 class TestScheduleMath(unittest.TestCase):
     def test_bj_to_utc_conversions(self):
         cases = {"00:20": "16:20", "06:20": "22:20", "12:20": "04:20",
