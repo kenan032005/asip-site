@@ -57,6 +57,10 @@ jobs:
           cp -rf state_src/data/disease/. data/disease/ 2>/dev/null || true
           cp -rf state_src/data/runtime/timeline/. data/runtime/timeline/ 2>/dev/null || true
           cp -rf state_src/data/runtime/ops/reports/. data/runtime/ops/reports/ 2>/dev/null || true
+          # canonical 变更后再生成的遗留/公开视图（V17 一致性 + 站点数据）
+          cp -f state_src/data/events.json state_src/data/pending_events.json \
+            state_src/data/raw_candidates.json state_src/data/quarantine_events.json data/ 2>/dev/null || true
+          cp -rf state_src/data/public/. data/public/ 2>/dev/null || true
 
       - name: Build site（§十九）
         run: python scripts/build_site.py

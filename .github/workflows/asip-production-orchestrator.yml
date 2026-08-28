@@ -115,10 +115,16 @@ jobs:
           cp -rf data/canonical/. state_src/data/canonical/ 2>/dev/null || true
           cp -rf data/disease/. state_src/data/disease/ 2>/dev/null || true
           cp -rf data/runtime/timeline/. state_src/data/runtime/timeline/ 2>/dev/null || true
+          # canonical 变更后再生成的遗留/公开视图一并随 state 提交（V17 一致性 + 站点数据）
+          cp -f data/events.json data/pending_events.json data/raw_candidates.json \
+            data/quarantine_events.json state_src/data/ 2>/dev/null || true
+          cp -rf data/public/. state_src/data/public/ 2>/dev/null || true
           cd state_src
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -f data/runtime/ops data/canonical data/disease data/runtime/timeline
+          git add -f data/runtime/ops data/canonical data/disease data/runtime/timeline \
+            data/events.json data/pending_events.json data/raw_candidates.json \
+            data/quarantine_events.json data/public
           git commit -m "ops: orchestrator run ${{ github.run_id }}" --allow-empty || echo "no state change"
           git push origin production-state
           cd ..
