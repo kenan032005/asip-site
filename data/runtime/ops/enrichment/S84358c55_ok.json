@@ -1,0 +1,126 @@
+{
+ "label": "S84358c55",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "tokens": {
+  "input_tokens": 2501,
+  "output_tokens": 463,
+  "total_tokens": 2964
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"苏丹武装部队及其支持者实施空袭的说法系乍得军方单方面声明，尚未得到独立证实\", \"追击深入乍得境内逾100公里的说法系乍得军方声明，有待核实\", \"卫星图像显示乍得境内约78公里处有打击痕迹，但未明确说明执行方\"]",
+    "after": "[\"苏丹武装部队及其支持者实施空袭的说法系乍得军方单方面声明，尚未得到独立证实\", \"追击深入乍得境内逾100公里的说法系乍得军方声明，有待核实\", \"卫星图像显示乍得境内约78公里处有打击痕迹，但未明确说明执行方\", \"据Tchadinfos报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"苏丹武装部队及其支持者实施空袭的说法系乍得军方单方面声明，尚未得到独立证实\", \"追击深入乍得境内逾100公里的说法系乍得军方声明，有待核实\", \"卫星图像显示乍得境内约78公里处有打击痕迹，但未明确说明执行方\", \"据Tchadinfos报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "after": "[\"苏丹武装部队及其支持者实施空袭的说法系乍得军方单方面声明，尚未得到独立证实\", \"追击深入乍得境内逾100公里的说法系乍得军方声明，有待核实\", \"卫星图像显示乍得境内约78公里处有打击痕迹，但未明确说明执行方\", \"据Tchadinfos报道，目前仅获单一来源支持，尚缺乏交叉验证。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得军方称苏丹武装力量越境追击逾100公里",
+   "summary_zh": "乍得军方周六谴责苏丹冲突方再次侵犯其领土，称周四晚在靠近苏丹边境的东恩内迪省穆尔迪地区发生空袭。军方表示，经空中和地面核查，确认苏丹武装部队及其支持者的飞机和无人机从苏丹境内追击并轰炸了一支车队，追击深入乍得境内逾100公里。军方称暂无乍得人员伤亡，并强烈谴责这一侵犯领土完整的行为，同时警告苏丹冲突各方不要将战火蔓延至乍得。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "东恩内迪省",
+    "city": null,
+    "site": "穆尔迪地区",
+    "raw_text": "province de l’Ennedi Est, département de Mourdi"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得军方称苏丹武装力量越境追击逾100公里",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cette poursuite se serait prolongée « jusqu’à plus d’une centaine de kilomètres » à l’intérieur du territoire tchadien"
+    },
+    {
+     "fact": "空袭发生在东恩内迪省穆尔迪地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des bombardements ont été signalés jeudi 20 août vers 20H00 aux confins de la frontière tchado-soudanaise, notamment dans le département de Mourdi"
+    },
+    {
+     "fact": "暂无乍得人员伤亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucune victime tchadienne n’a été enregistrée, selon l’État-major"
+    }
+   ],
+   "uncertainties": [
+    "苏丹武装部队及其支持者实施空袭的说法系乍得军方单方面声明，尚未得到独立证实",
+    "追击深入乍得境内逾100公里的说法系乍得军方声明，有待核实",
+    "卫星图像显示乍得境内约78公里处有打击痕迹，但未明确说明执行方"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得军方称苏丹武装力量越境追击逾100公里",
+   "summary_zh": "乍得军方周六谴责苏丹冲突方再次侵犯其领土，称周四晚在靠近苏丹边境的东恩内迪省穆尔迪地区发生空袭。军方表示，经空中和地面核查，确认苏丹武装部队及其支持者的飞机和无人机从苏丹境内追击并轰炸了一支车队，追击深入乍得境内逾100公里。军方称暂无乍得人员伤亡，并强烈谴责这一侵犯领土完整的行为，同时警告苏丹冲突各方不要将战火蔓延至乍得。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "东恩内迪省",
+    "city": null,
+    "site": "穆尔迪地区",
+    "raw_text": "province de l’Ennedi Est, département de Mourdi"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得军方称苏丹武装力量越境追击逾100公里",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cette poursuite se serait prolongée « jusqu’à plus d’une centaine de kilomètres » à l’intérieur du territoire tchadien"
+    },
+    {
+     "fact": "空袭发生在东恩内迪省穆尔迪地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des bombardements ont été signalés jeudi 20 août vers 20H00 aux confins de la frontière tchado-soudanaise, notamment dans le département de Mourdi"
+    },
+    {
+     "fact": "暂无乍得人员伤亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucune victime tchadienne n’a été enregistrée, selon l’État-major"
+    }
+   ],
+   "uncertainties": [
+    "苏丹武装部队及其支持者实施空袭的说法系乍得军方单方面声明，尚未得到独立证实",
+    "追击深入乍得境内逾100公里的说法系乍得军方声明，有待核实",
+    "卫星图像显示乍得境内约78公里处有打击痕迹，但未明确说明执行方",
+    "据Tchadinfos报道，目前仅获单一来源支持，尚缺乏交叉验证。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_bdb107e584358c55",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

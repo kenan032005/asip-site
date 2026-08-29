@@ -1,0 +1,123 @@
+{
+ "label": "Se37d4c4c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "tokens": {
+  "input_tokens": 2795,
+  "output_tokens": 659,
+  "total_tokens": 3454
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乌姆哈杰尔：四名部长动员解决多个村庄间的土地冲突",
+   "summary_zh": "乍得领土整治、城市化和住房部长马哈马特·阿西莱克·哈拉塔在访问乌姆哈杰尔时，因多个村庄间围绕领土划界的土地冲突而改变行程，与安全部长等四名政府成员共同参与调解。当局动员了地籍和地形测量团队进行地形测量，以获取客观数据，并希望通过对话和技术手段解决争端，防止冲突升级，维护社会凝聚力。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "巴塔省",
+    "city": "乌姆哈杰尔",
+    "site": null,
+    "raw_text": "Oum-Hadjer, département du Batha-Est, province du Batha"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得四名部长在乌姆哈杰尔动员解决村庄间土地冲突",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Oum-Hadjer : quatre ministres mobilisés pour résoudre un conflit foncier entre plusieurs villages"
+    },
+    {
+     "fact": "冲突涉及多个村庄社区围绕领土划界的争端",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un conflit foncier opposant plusieurs communautés villageoises autour de la délimitation des limites territoriales"
+    },
+    {
+     "fact": "部长因冲突严重性改变行程，前往现场了解情况",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’ampleur de la situation signalée dans la zone d’Oum-Hadjer a conduit le ministre Mahamat Assileck Halata à modifier son itinéraire"
+    },
+    {
+     "fact": "地籍和地形测量团队被动员进行地形测量",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’équipe du Cadastre et de la Topographie a été mobilisée pour effectuer un levé topographique de la zone concernée"
+    },
+    {
+     "fact": "冲突区域位于乌姆哈杰尔约30公里处，涉及多个村庄",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le secteur concerné se trouve à environ 30 kilomètres d’Oum-Hadjer et englobe notamment les villages de Djoullot, Read, Oumalkhoura, Tayba, Moutrar, Wadi-Bir et Amkharoubay"
+    }
+   ],
+   "uncertainties": [
+    "冲突的具体伤亡或暴力程度未在报道中提及",
+    "报道为单一来源，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乌姆哈杰尔：四名部长动员解决多个村庄间的土地冲突",
+   "summary_zh": "乍得领土整治、城市化和住房部长马哈马特·阿西莱克·哈拉塔在访问乌姆哈杰尔时，因多个村庄间围绕领土划界的土地冲突而改变行程，与安全部长等四名政府成员共同参与调解。当局动员了地籍和地形测量团队进行地形测量，以获取客观数据，并希望通过对话和技术手段解决争端，防止冲突升级，维护社会凝聚力。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "巴塔省",
+    "city": "乌姆哈杰尔",
+    "site": null,
+    "raw_text": "Oum-Hadjer, département du Batha-Est, province du Batha"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得四名部长在乌姆哈杰尔动员解决村庄间土地冲突",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Oum-Hadjer : quatre ministres mobilisés pour résoudre un conflit foncier entre plusieurs villages"
+    },
+    {
+     "fact": "冲突涉及多个村庄社区围绕领土划界的争端",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un conflit foncier opposant plusieurs communautés villageoises autour de la délimitation des limites territoriales"
+    },
+    {
+     "fact": "部长因冲突严重性改变行程，前往现场了解情况",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’ampleur de la situation signalée dans la zone d’Oum-Hadjer a conduit le ministre Mahamat Assileck Halata à modifier son itinéraire"
+    },
+    {
+     "fact": "地籍和地形测量团队被动员进行地形测量",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’équipe du Cadastre et de la Topographie a été mobilisée pour effectuer un levé topographique de la zone concernée"
+    },
+    {
+     "fact": "冲突区域位于乌姆哈杰尔约30公里处，涉及多个村庄",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le secteur concerné se trouve à environ 30 kilomètres d’Oum-Hadjer et englobe notamment les villages de Djoullot, Read, Oumalkhoura, Tayba, Moutrar, Wadi-Bir et Amkharoubay"
+    }
+   ],
+   "uncertainties": [
+    "冲突的具体伤亡或暴力程度未在报道中提及",
+    "报道为单一来源，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_9d21c240e37d4c4c",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

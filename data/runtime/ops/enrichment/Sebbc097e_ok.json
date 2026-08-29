@@ -1,0 +1,116 @@
+{
+ "label": "Sebbc097e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "tokens": {
+  "input_tokens": 2873,
+  "output_tokens": 352,
+  "total_tokens": 3225
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"枪声来源尚不明确\", \"事件具体情况未获官方证实\", \"信息主要来自居民证词和社交媒体，单一来源\"]",
+    "after": "[\"枪声来源尚不明确\", \"事件具体情况未获官方证实\", \"信息主要来自居民证词和社交媒体，单一来源\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔尼亚美一夜枪声后国家电视台信号短暂中断",
+   "summary_zh": "8月29日凌晨，尼日尔首都尼亚美多个街区传出枪声和爆炸声，涉及国际机场附近的军事基地及总统府所在区域。国家电视台Télé Sahel信号在枪声后短暂中断，恢复后未提及相关事件。枪声来源尚不明确，军方呼吁民众保持冷静，称安全部队已动员。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "国际机场、总统府、国家电视台",
+    "raw_text": "Niamey, la capitale du Niger"
+   },
+   "key_facts": [
+    {
+     "fact": "尼亚美多个街区传出枪声和爆炸声",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des tirs et des détonations d’origine inconnue ont été signalés samedi dans plusieurs quartiers de Niamey"
+    },
+    {
+     "fact": "国家电视台信号短暂中断",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le signal de la télévision nationale a également été brièvement coupé"
+    },
+    {
+     "fact": "军方呼吁保持冷静并称安全部队已动员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Face aux évènements en cours, gardons notre calme et évitons de relayer des informations non vérifiées"
+    }
+   ],
+   "uncertainties": [
+    "枪声来源尚不明确",
+    "事件具体情况未获官方证实",
+    "信息主要来自居民证词和社交媒体，单一来源"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔尼亚美一夜枪声后国家电视台信号短暂中断",
+   "summary_zh": "8月29日凌晨，尼日尔首都尼亚美多个街区传出枪声和爆炸声，涉及国际机场附近的军事基地及总统府所在区域。国家电视台Télé Sahel信号在枪声后短暂中断，恢复后未提及相关事件。枪声来源尚不明确，军方呼吁民众保持冷静，称安全部队已动员。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "国际机场、总统府、国家电视台",
+    "raw_text": "Niamey, la capitale du Niger"
+   },
+   "key_facts": [
+    {
+     "fact": "尼亚美多个街区传出枪声和爆炸声",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des tirs et des détonations d’origine inconnue ont été signalés samedi dans plusieurs quartiers de Niamey"
+    },
+    {
+     "fact": "国家电视台信号短暂中断",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le signal de la télévision nationale a également été brièvement coupé"
+    },
+    {
+     "fact": "军方呼吁保持冷静并称安全部队已动员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Face aux évènements en cours, gardons notre calme et évitons de relayer des informations non vérifiées"
+    }
+   ],
+   "uncertainties": [
+    "枪声来源尚不明确",
+    "事件具体情况未获官方证实",
+    "信息主要来自居民证词和社交媒体，单一来源",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_84415a30ebbc097e",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
