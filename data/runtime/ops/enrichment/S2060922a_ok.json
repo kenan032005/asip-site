@@ -9,8 +9,8 @@
  "reasoning_tokens": null,
  "tokens": {
   "input_tokens": 2919,
-  "output_tokens": 557,
-  "total_tokens": 3476
+  "output_tokens": 548,
+  "total_tokens": 3467
  },
  "schema_pass": true,
  "status": "ok",
@@ -22,8 +22,8 @@
     "fact_id": "independent_source_count",
     "marker": "single_source",
     "field": "uncertainties",
-    "before": "[\"阿里关于军政府内部叛逃和辞职的说法为单方面指控，尚未得到独立证实\", \"军政府领导人寻求法国保护的说法为阿里个人观点，未获证实\"]",
-    "after": "[\"阿里关于军政府内部叛逃和辞职的说法为单方面指控，尚未得到独立证实\", \"军政府领导人寻求法国保护的说法为阿里个人观点，未获证实\", \"据Tchad One报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "before": "[\"采访内容为反对派领导人的单方面指控，未经独立证实\", \"关于军政府内部危机和军队分裂的说法尚未得到官方确认\"]",
+    "after": "[\"采访内容为反对派领导人的单方面指控，未经独立证实\", \"关于军政府内部危机和军队分裂的说法尚未得到官方确认\", \"据Tchad One报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
     "rule_id": "SAFETY-CORR-D1",
     "numeric_anchor": null
    }
@@ -35,7 +35,7 @@
   "original_ai_output": {
    "source_language": "fr",
    "title_zh": "FACT主席马哈马特·马哈迪·阿里接受达喀尔时报专访：2026年将是关键之年",
-   "summary_zh": "在乍得总统马哈马特·伊德里斯·代比访问巴黎数周后，乍得变革与协和阵线（FACT）主席马哈马特·马哈迪·阿里接受达喀尔时报专访，批评军政府治理，并呼吁法国当局。他指责军政府以驱逐法军为转移视线，掩盖其缺乏民众合法性，并称军政府领导人孤立无援、缺乏民众基础。他还提到军政府卷入苏丹冲突导致军队内部出现叛逃和辞职，但相关说法均来自该反对派领导人的单方面指控。",
+   "summary_zh": "在乍得总统马哈马特·伊德里斯·代比访问巴黎数周后，乍得变革与协和阵线（FACT）主席马哈马特·马哈迪·阿里接受达喀尔时报专访，批评军政府治理，并呼吁法国当局。他指责军政府以驱逐法军为转移注意力的手段，掩盖其缺乏民众合法性的问题，并称军政府领导人孤立无援、缺乏民众基础。",
    "event_type": "political_instability",
    "country_iso3": "TCD",
    "location": {
@@ -43,7 +43,7 @@
     "admin1": null,
     "city": null,
     "site": null,
-    "raw_text": "乍得（采访发布在达喀尔时报，但内容涉及乍得）"
+    "raw_text": "乍得（采访发布地点为达喀尔，但事件涉及乍得）"
    },
    "key_facts": [
     {
@@ -52,19 +52,19 @@
      "evidence_excerpt": "Mahamat Mahadi Ali, président du FACT, accorde une grande interview à Dakar Times"
     },
     {
-     "fact": "阿里指责军政府以驱逐法军为转移视线，掩盖缺乏民众合法性",
+     "fact": "阿里指责军政府以驱逐法军为转移注意力的手段，掩盖缺乏民众合法性",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Le véritable objectif était de masquer l'absence totale de légitimité populaire derrière un nationalisme de façade."
+     "evidence_excerpt": "Qu’on ne s’y trompe pas : ce n’était rien d’autre qu’une diversion. Le véritable objectif était de masquer l’absence totale de légitimité populaire derrière un nationalisme de façade."
     },
     {
-     "fact": "阿里称军政府卷入苏丹冲突导致军队内部出现叛逃和辞职",
+     "fact": "阿里称军政府领导人孤立无援、缺乏民众基础，并面临军队内部危机",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "L'implication directe de la junte dans les conflits soudanais ... a accéléré les défections, provoqué les démissions massives"
+     "evidence_excerpt": "un colosse aux pieds d’argile, isolé, contesté, sans ancrage populaire, condamné à la fuite en avant"
     }
    ],
    "uncertainties": [
-    "阿里关于军政府内部叛逃和辞职的说法为单方面指控，尚未得到独立证实",
-    "军政府领导人寻求法国保护的说法为阿里个人观点，未获证实"
+    "采访内容为反对派领导人的单方面指控，未经独立证实",
+    "关于军政府内部危机和军队分裂的说法尚未得到官方确认"
    ],
    "security_relevance": "indirect",
    "classification_confidence": 70
@@ -72,7 +72,7 @@
   "corrected_output": {
    "source_language": "fr",
    "title_zh": "FACT主席马哈马特·马哈迪·阿里接受达喀尔时报专访：2026年将是关键之年",
-   "summary_zh": "在乍得总统马哈马特·伊德里斯·代比访问巴黎数周后，乍得变革与协和阵线（FACT）主席马哈马特·马哈迪·阿里接受达喀尔时报专访，批评军政府治理，并呼吁法国当局。他指责军政府以驱逐法军为转移视线，掩盖其缺乏民众合法性，并称军政府领导人孤立无援、缺乏民众基础。他还提到军政府卷入苏丹冲突导致军队内部出现叛逃和辞职，但相关说法均来自该反对派领导人的单方面指控。",
+   "summary_zh": "在乍得总统马哈马特·伊德里斯·代比访问巴黎数周后，乍得变革与协和阵线（FACT）主席马哈马特·马哈迪·阿里接受达喀尔时报专访，批评军政府治理，并呼吁法国当局。他指责军政府以驱逐法军为转移注意力的手段，掩盖其缺乏民众合法性的问题，并称军政府领导人孤立无援、缺乏民众基础。",
    "event_type": "political_instability",
    "country_iso3": "TCD",
    "location": {
@@ -80,7 +80,7 @@
     "admin1": null,
     "city": null,
     "site": null,
-    "raw_text": "乍得（采访发布在达喀尔时报，但内容涉及乍得）"
+    "raw_text": "乍得（采访发布地点为达喀尔，但事件涉及乍得）"
    },
    "key_facts": [
     {
@@ -89,19 +89,19 @@
      "evidence_excerpt": "Mahamat Mahadi Ali, président du FACT, accorde une grande interview à Dakar Times"
     },
     {
-     "fact": "阿里指责军政府以驱逐法军为转移视线，掩盖缺乏民众合法性",
+     "fact": "阿里指责军政府以驱逐法军为转移注意力的手段，掩盖缺乏民众合法性",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Le véritable objectif était de masquer l'absence totale de légitimité populaire derrière un nationalisme de façade."
+     "evidence_excerpt": "Qu’on ne s’y trompe pas : ce n’était rien d’autre qu’une diversion. Le véritable objectif était de masquer l’absence totale de légitimité populaire derrière un nationalisme de façade."
     },
     {
-     "fact": "阿里称军政府卷入苏丹冲突导致军队内部出现叛逃和辞职",
+     "fact": "阿里称军政府领导人孤立无援、缺乏民众基础，并面临军队内部危机",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "L'implication directe de la junte dans les conflits soudanais ... a accéléré les défections, provoqué les démissions massives"
+     "evidence_excerpt": "un colosse aux pieds d’argile, isolé, contesté, sans ancrage populaire, condamné à la fuite en avant"
     }
    ],
    "uncertainties": [
-    "阿里关于军政府内部叛逃和辞职的说法为单方面指控，尚未得到独立证实",
-    "军政府领导人寻求法国保护的说法为阿里个人观点，未获证实",
+    "采访内容为反对派领导人的单方面指控，未经独立证实",
+    "关于军政府内部危机和军队分裂的说法尚未得到官方确认",
     "据Tchad One报道，目前仅获单一来源支持，尚缺乏交叉验证。"
    ],
    "security_relevance": "indirect",

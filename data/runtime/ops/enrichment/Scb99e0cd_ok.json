@@ -9,33 +9,23 @@
  "reasoning_tokens": null,
  "tokens": {
   "input_tokens": 2086,
-  "output_tokens": 427,
-  "total_tokens": 2513
+  "output_tokens": 428,
+  "total_tokens": 2514
  },
  "schema_pass": true,
  "status": "ok",
  "safety": {
   "gate": "PASS",
-  "pre_status": "FAIL",
-  "corrections": [
-   {
-    "fact_id": "independent_source_count",
-    "marker": "single_source",
-    "field": "uncertainties",
-    "before": "[\"具体伤亡数字未在报道中明确\", \"暴力事件的具体细节和影响范围尚未完全披露\"]",
-    "after": "[\"具体伤亡数字未在报道中明确\", \"暴力事件的具体细节和影响范围尚未完全披露\", \"据Journal du Tchad报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
-    "rule_id": "SAFETY-CORR-D1",
-    "numeric_anchor": null
-   }
-  ],
-  "post_status": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
   "publication_eligible": true,
   "report_input_eligible": true,
   "manual_review_required": false,
   "original_ai_output": {
    "source_language": "fr",
    "title_zh": "乍得参议院就持续暴力与不安全局势质询安全部长",
-   "summary_zh": "2026年6月1日，乍得公共安全与移民部长阿里·阿赫马特·阿加巴什将军在参议院就持续暴力与不安全局势接受质询。参议员们关注各省社区暴力频发、白天袭击事件、社区冲突伤亡情况以及恢复受影响地区安全的措施。部长回应了相关问题，并阐述了应对局势的行动方向。",
+   "summary_zh": "2026年6月1日，乍得公共安全与移民部长阿里·阿赫马特·阿加巴什将军在参议院接受质询，议题涉及各省社区暴力频发、白天袭击事件、社区冲突伤亡情况以及恢复受影响地区安全的措施。提出质询的参议员姆巴伊戈尔门·塞巴斯蒂安表示，全国范围内接连出现投诉和愤慨情绪，农村地区经常发生据称由武装团体实施的暴力行为。部长在回应中详细说明了应对当前局势的指导方针和行动计划。",
    "event_type": "civil_unrest",
    "country_iso3": "TCD",
    "location": {
@@ -47,24 +37,25 @@
    },
    "key_facts": [
     {
-     "fact": "乍得参议院质询安全部长关于持续暴力与不安全局势",
+     "fact": "乍得参议院就持续暴力与不安全局势质询安全部长",
      "evidence_field": "title_original",
      "evidence_excerpt": "Tchad : le SENAT interpelle le ministre de la Sécurité sur la persistance des violences et de l’insécurité"
     },
     {
-     "fact": "部长于2026年6月1日出席参议院会议",
+     "fact": "质询涉及社区暴力、白天袭击及冲突伤亡等问题",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Le ministre de la Sécurité publique et de l’Immigration, le général Ali Ahmat Aghabache était face aux sénateurs le 1er juin 202 dans le cadre de la question relative à la persistance des violences et l’insécurité."
+     "evidence_excerpt": "Les questions étaient relatives à la multiplication des violences communautaires dans les provinces, les agressions en plein jour, le bilan des conflits communautaires et les mesures pour restaurer la sécurité dans les zones affectées"
     },
     {
-     "fact": "参议员关注社区暴力、白天袭击及冲突伤亡",
+     "fact": "农村地区经常发生据称由武装团体实施的暴力行为",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Les questions étaient relatives à la multiplication des violences communautaires dans les provinces, les agressions en plein jour, le bilan des conflits communautaires et les mesures pour restaurer la sécurité dans les zones affectées et le mesure d’accompagnement des populations sinistrés."
+     "evidence_excerpt": "Les zones rurales principalement sont régulièrement le théâtre des actes attribué à des groupes armés"
     }
    ],
    "uncertainties": [
-    "具体伤亡数字未在报道中明确",
-    "暴力事件的具体细节和影响范围尚未完全披露"
+    "暴力事件的具体伤亡数字未在报道中明确",
+    "武装团体实施暴力行为仅为据称，尚未得到独立证实",
+    "报道为单一来源，缺乏交叉验证"
    ],
    "security_relevance": "direct",
    "classification_confidence": 75
@@ -72,7 +63,7 @@
   "corrected_output": {
    "source_language": "fr",
    "title_zh": "乍得参议院就持续暴力与不安全局势质询安全部长",
-   "summary_zh": "2026年6月1日，乍得公共安全与移民部长阿里·阿赫马特·阿加巴什将军在参议院就持续暴力与不安全局势接受质询。参议员们关注各省社区暴力频发、白天袭击事件、社区冲突伤亡情况以及恢复受影响地区安全的措施。部长回应了相关问题，并阐述了应对局势的行动方向。",
+   "summary_zh": "2026年6月1日，乍得公共安全与移民部长阿里·阿赫马特·阿加巴什将军在参议院接受质询，议题涉及各省社区暴力频发、白天袭击事件、社区冲突伤亡情况以及恢复受影响地区安全的措施。提出质询的参议员姆巴伊戈尔门·塞巴斯蒂安表示，全国范围内接连出现投诉和愤慨情绪，农村地区经常发生据称由武装团体实施的暴力行为。部长在回应中详细说明了应对当前局势的指导方针和行动计划。",
    "event_type": "civil_unrest",
    "country_iso3": "TCD",
    "location": {
@@ -84,25 +75,25 @@
    },
    "key_facts": [
     {
-     "fact": "乍得参议院质询安全部长关于持续暴力与不安全局势",
+     "fact": "乍得参议院就持续暴力与不安全局势质询安全部长",
      "evidence_field": "title_original",
      "evidence_excerpt": "Tchad : le SENAT interpelle le ministre de la Sécurité sur la persistance des violences et de l’insécurité"
     },
     {
-     "fact": "部长于2026年6月1日出席参议院会议",
+     "fact": "质询涉及社区暴力、白天袭击及冲突伤亡等问题",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Le ministre de la Sécurité publique et de l’Immigration, le général Ali Ahmat Aghabache était face aux sénateurs le 1er juin 202 dans le cadre de la question relative à la persistance des violences et l’insécurité."
+     "evidence_excerpt": "Les questions étaient relatives à la multiplication des violences communautaires dans les provinces, les agressions en plein jour, le bilan des conflits communautaires et les mesures pour restaurer la sécurité dans les zones affectées"
     },
     {
-     "fact": "参议员关注社区暴力、白天袭击及冲突伤亡",
+     "fact": "农村地区经常发生据称由武装团体实施的暴力行为",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Les questions étaient relatives à la multiplication des violences communautaires dans les provinces, les agressions en plein jour, le bilan des conflits communautaires et les mesures pour restaurer la sécurité dans les zones affectées et le mesure d’accompagnement des populations sinistrés."
+     "evidence_excerpt": "Les zones rurales principalement sont régulièrement le théâtre des actes attribué à des groupes armés"
     }
    ],
    "uncertainties": [
-    "具体伤亡数字未在报道中明确",
-    "暴力事件的具体细节和影响范围尚未完全披露",
-    "据Journal du Tchad报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+    "暴力事件的具体伤亡数字未在报道中明确",
+    "武装团体实施暴力行为仅为据称，尚未得到独立证实",
+    "报道为单一来源，缺乏交叉验证"
    ],
    "security_relevance": "direct",
    "classification_confidence": 75

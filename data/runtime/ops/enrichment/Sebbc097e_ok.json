@@ -8,106 +8,95 @@
  "thinking_requested": "disabled",
  "reasoning_tokens": null,
  "tokens": {
-  "input_tokens": 2873,
-  "output_tokens": 352,
-  "total_tokens": 3225
+  "input_tokens": 2970,
+  "output_tokens": 565,
+  "total_tokens": 3535
  },
  "schema_pass": true,
  "status": "ok",
  "safety": {
   "gate": "PASS",
-  "pre_status": "FAIL",
-  "corrections": [
-   {
-    "fact_id": "<text>",
-    "marker": "alleged_claimed",
-    "field": "uncertainties",
-    "before": "[\"枪声来源尚不明确\", \"事件具体情况未获官方证实\", \"信息主要来自居民证词和社交媒体，单一来源\"]",
-    "after": "[\"枪声来源尚不明确\", \"事件具体情况未获官方证实\", \"信息主要来自居民证词和社交媒体，单一来源\", \"据称，尚未获得独立证实。\"]",
-    "rule_id": "SAFETY-CORR-A1",
-    "numeric_anchor": null
-   }
-  ],
-  "post_status": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
   "publication_eligible": true,
   "report_input_eligible": true,
   "manual_review_required": false,
   "original_ai_output": {
    "source_language": "fr",
-   "title_zh": "尼日尔尼亚美一夜枪声后国家电视台信号短暂中断",
-   "summary_zh": "8月29日凌晨，尼日尔首都尼亚美多个街区传出枪声和爆炸声，涉及国际机场附近的军事基地及总统府所在区域。国家电视台Télé Sahel信号在枪声后短暂中断，恢复后未提及相关事件。枪声来源尚不明确，军方呼吁民众保持冷静，称安全部队已动员。",
+   "title_zh": "尼日尔军政府称面对哗变士兵“逐步恢复控制”",
+   "summary_zh": "尼日尔首都尼亚美发生士兵哗变事件，据称有士兵在机场附近的军事基地内扣押士兵并开枪。军政府声称已逐步恢复控制，但据安全消息人士称，哗变士兵仍控制两处军营。事件细节和哗变者诉求尚不明确。",
    "event_type": "other_security",
    "country_iso3": "NER",
    "location": {
     "country_iso3": "NER",
     "admin1": null,
     "city": "尼亚美",
-    "site": "国际机场、总统府、国家电视台",
-    "raw_text": "Niamey, la capitale du Niger"
+    "site": "101号军事基地、总统府",
+    "raw_text": "Niamey, base militaire 101, palais présidentiel"
    },
    "key_facts": [
     {
-     "fact": "尼亚美多个街区传出枪声和爆炸声",
+     "fact": "尼日尔首都尼亚美发生枪击和爆炸声，涉及军事基地和总统府区域",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Des tirs et des détonations d’origine inconnue ont été signalés samedi dans plusieurs quartiers de Niamey"
+     "evidence_excerpt": "Des tirs et des détonations ont été entendus, samedi 29 août au matin, à Niamey, la capitale du Niger, notamment autour de la base militaire 101, attenante à l’aéroport international, et dans la zone administrative où se trouve le palais présidentiel."
     },
     {
-     "fact": "国家电视台信号短暂中断",
+     "fact": "军政府声称面对哗变士兵逐步恢复控制",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Le signal de la télévision nationale a également été brièvement coupé"
+     "evidence_excerpt": "le régime militaire au pouvoir au Niger a affirmé \"reprendre progressivement le contrôle\" face à des mutins."
     },
     {
-     "fact": "军方呼吁保持冷静并称安全部队已动员",
+     "fact": "据安全消息人士称，哗变士兵仍控制两处军营",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Face aux évènements en cours, gardons notre calme et évitons de relayer des informations non vérifiées"
+     "evidence_excerpt": "Selon une source sécuritaire régionale jointe en début d'après-midi, les mutins contrôlent toujours deux casernes, l'une au sein de la base 101 où ils sont retranchés et une autre à l'extérieur, ce qu'a confirmé une source diplomatique africaine."
     }
    ],
    "uncertainties": [
-    "枪声来源尚不明确",
-    "事件具体情况未获官方证实",
-    "信息主要来自居民证词和社交媒体，单一来源"
+    "哗变士兵的诉求和支持规模尚不清楚",
+    "军政府声称已恢复控制，但安全消息人士称仍有两处军营被控制，信息存在冲突",
+    "事件细节基于单一来源（France24）报道，尚缺乏交叉验证"
    ],
    "security_relevance": "direct",
-   "classification_confidence": 75
+   "classification_confidence": 85
   },
   "corrected_output": {
    "source_language": "fr",
-   "title_zh": "尼日尔尼亚美一夜枪声后国家电视台信号短暂中断",
-   "summary_zh": "8月29日凌晨，尼日尔首都尼亚美多个街区传出枪声和爆炸声，涉及国际机场附近的军事基地及总统府所在区域。国家电视台Télé Sahel信号在枪声后短暂中断，恢复后未提及相关事件。枪声来源尚不明确，军方呼吁民众保持冷静，称安全部队已动员。",
+   "title_zh": "尼日尔军政府称面对哗变士兵“逐步恢复控制”",
+   "summary_zh": "尼日尔首都尼亚美发生士兵哗变事件，据称有士兵在机场附近的军事基地内扣押士兵并开枪。军政府声称已逐步恢复控制，但据安全消息人士称，哗变士兵仍控制两处军营。事件细节和哗变者诉求尚不明确。",
    "event_type": "other_security",
    "country_iso3": "NER",
    "location": {
     "country_iso3": "NER",
     "admin1": null,
     "city": "尼亚美",
-    "site": "国际机场、总统府、国家电视台",
-    "raw_text": "Niamey, la capitale du Niger"
+    "site": "101号军事基地、总统府",
+    "raw_text": "Niamey, base militaire 101, palais présidentiel"
    },
    "key_facts": [
     {
-     "fact": "尼亚美多个街区传出枪声和爆炸声",
+     "fact": "尼日尔首都尼亚美发生枪击和爆炸声，涉及军事基地和总统府区域",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Des tirs et des détonations d’origine inconnue ont été signalés samedi dans plusieurs quartiers de Niamey"
+     "evidence_excerpt": "Des tirs et des détonations ont été entendus, samedi 29 août au matin, à Niamey, la capitale du Niger, notamment autour de la base militaire 101, attenante à l’aéroport international, et dans la zone administrative où se trouve le palais présidentiel."
     },
     {
-     "fact": "国家电视台信号短暂中断",
+     "fact": "军政府声称面对哗变士兵逐步恢复控制",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Le signal de la télévision nationale a également été brièvement coupé"
+     "evidence_excerpt": "le régime militaire au pouvoir au Niger a affirmé \"reprendre progressivement le contrôle\" face à des mutins."
     },
     {
-     "fact": "军方呼吁保持冷静并称安全部队已动员",
+     "fact": "据安全消息人士称，哗变士兵仍控制两处军营",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Face aux évènements en cours, gardons notre calme et évitons de relayer des informations non vérifiées"
+     "evidence_excerpt": "Selon une source sécuritaire régionale jointe en début d'après-midi, les mutins contrôlent toujours deux casernes, l'une au sein de la base 101 où ils sont retranchés et une autre à l'extérieur, ce qu'a confirmé une source diplomatique africaine."
     }
    ],
    "uncertainties": [
-    "枪声来源尚不明确",
-    "事件具体情况未获官方证实",
-    "信息主要来自居民证词和社交媒体，单一来源",
-    "据称，尚未获得独立证实。"
+    "哗变士兵的诉求和支持规模尚不清楚",
+    "军政府声称已恢复控制，但安全消息人士称仍有两处军营被控制，信息存在冲突",
+    "事件细节基于单一来源（France24）报道，尚缺乏交叉验证"
    ],
    "security_relevance": "direct",
-   "classification_confidence": 75
+   "classification_confidence": 85
   }
  },
  "event_id": "EVT_84415a30ebbc097e",
