@@ -198,6 +198,18 @@ def _run_script(args, emit, timeout=1800):
         return False
 
 
+def _env_json(name):
+    """从环境变量读取 JSON（workflow 以 toJSON() 注入；'null'/空视为 {}）。"""
+    raw = os.environ.get(name)
+    if not raw or raw in ("null", "None"):
+        return {}
+    try:
+        v = json.loads(raw)
+        return v if isinstance(v, dict) else {}
+    except Exception:  # noqa: BLE001
+        return {}
+
+
 def _read_json_file(path):
     try:
         return json.loads(Path(path).read_text(encoding="utf-8"))
@@ -508,14 +520,11 @@ def main(argv=None):
     # §三/§十七：触发来源解析（schedule / repository_dispatch+external_scheduler /
     # workflow_dispatch），用于区分 automation 与 human
     event_name = os.environ.get("GITHUB_EVENT_NAME", "schedule")
-    client_payload = {}
-    raw_payload = os.environ.get("ASIP_CLIENT_PAYLOAD")
-    if raw_payload:
-        try:
-            client_payload = json.loads(raw_payload)
-        except Exception:  # noqa: BLE001
-            client_payload = {}
-    trigger_meta = resolve_trigger(event_name, {}, client_payload)
+    client_payload = _env_json("ASIP_CLIENT_PAYLOAD")
+    # workflow_dispatch 的 inputs（canary / source / execute …）由 workflow 以
+    # ASIP_WORKFLOW_INPUTS 注入；缺失会导致 canary 被误判成 shadow。
+    inputs = _env_json("ASIP_WORKFLOW_INPUTS")
+    trigger_meta = resolve_trigger(event_name, inputs, client_payload)
     plan = plan_due_tasks(state, now_bjt=now, schedule_enabled=enabled)
 
     if args.plan or not args.run:

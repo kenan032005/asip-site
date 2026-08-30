@@ -444,6 +444,19 @@ class TestExternalSchedulerRouting(unittest.TestCase):
         self.assertTrue(t["human"])
         self.assertEqual(t["trigger_source"], "manual_canary")
 
+    def test_env_json_handles_workflow_null(self):
+        """workflow 的 toJSON() 对空 client_payload 会传字符串 'null'。"""
+        import os
+        for raw, expect in (("null", {}), ("", {}), (None, {}),
+                            ('{"trigger_source":"external_scheduler"}',
+                             {"trigger_source": "external_scheduler"}),
+                            ("not-json", {})):
+            os.environ["ASIP_TEST_ENV_JSON"] = raw if raw is not None else ""
+            if raw is None:
+                os.environ.pop("ASIP_TEST_ENV_JSON", None)
+            self.assertEqual(so._env_json("ASIP_TEST_ENV_JSON"), expect)
+        os.environ.pop("ASIP_TEST_ENV_JSON", None)
+
     def test_double_wake_up_idempotency(self):
         """§二十：外部调度先跑完本小时 due，GitHub 延迟 schedule 再唤醒 → 不重复执行。"""
         # 注意：state 时间戳为 UTC；daily/disease/weekly 的"今天"按 BJT 日期判定，
