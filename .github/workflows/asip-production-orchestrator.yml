@@ -31,6 +31,11 @@ on:
         required: false
         type: boolean
         default: false
+      force_deploy_dispatch:
+        description: "Canary 专用：对最近 publishable 报告执行一次 shadow deploy dispatch（验证 actions:write 与 provenance 链，绝不发布 gh-pages）"
+        required: false
+        type: boolean
+        default: false
   repository_dispatch:
     types: [external_scheduler_wakeup]
   schedule:
@@ -200,6 +205,50 @@ jobs:
           # §M fail-closed：非 2xx 不得静默吞掉，本轮 run 置为失败
           if [ "$HTTP" -lt 200 ] || [ "$HTTP" -ge 300 ]; then
             echo "::error::auto deploy dispatch 失败 HTTP=$HTTP body=$(head -c 300 /tmp/deploy_resp.json)"
+            exit 1
+          fi
+
+      - name: Canary deploy-dispatch verification（§R：canary 专用，shadow only）
+        if: github.event.inputs.canary == 'true' && github.event.inputs.force_deploy_dispatch == 'true' && vars.AUTO_DEPLOY_ENABLED == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # 读取已提交 state 中最近一次 daily 报告的真实元数据（不得伪造）；
+          # dispatch 以 manual_canary（human）provenance 标记，仅验证
+          # GITHUB_TOKEN actions:write → HTTP 2xx → deploy run 产生 → inputs 收到。
+          export REPORT_ID REPORT_DATE REPORT_CLASS
+          python - <<'PY'
+          import json, glob, os
+          base = 'data/runtime/ops/reports'
+          rid = rd = cls = ''
+          try:
+              s = json.load(open(base + '/reports_run_summary.json', encoding='utf-8'))
+              cls = ((s.get('results') or {}).get('daily') or {}).get('classification') or ''
+          except Exception:
+              pass
+          for p in sorted(glob.glob(base + '/daily_*.json')):
+              try:
+                  doc = json.load(open(p, encoding='utf-8'))
+              except Exception:
+                  continue
+              if doc.get('report_date'):
+                  rid = doc.get('report_id') or ''
+                  rd = doc.get('report_date') or ''
+                  break
+          with open(os.environ['GITHUB_ENV'], 'a') as f:
+              f.write('REPORT_ID=%s\nREPORT_DATE=%s\nREPORT_CLASS=%s\n' % (rid, rd, cls))
+          print('CANARY_DEPLOY_META report_id=%s report_date=%s classification=%s' % (rid, rd, cls))
+          PY
+          if [ -z "$REPORT_ID" ]; then echo "::error::无可用 daily 报告元数据，拒绝伪造 dispatch"; exit 1; fi
+          HTTP=$(curl -s -X POST -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/kenan032005/asip-site/actions/workflows/asip-production-deploy.yml/dispatches \
+            -d "{\"ref\":\"main\",\"inputs\":{\"shadow_only\":\"true\",\"automation\":\"false\",\"root_orchestrator_run_id\":\"${{ github.run_id }}\",\"root_orchestrator_run_url\":\"${{ github.server_url }}/kenan032005/asip-site/actions/runs/${{ github.run_id }}\",\"trigger_source\":\"manual_canary\",\"trigger_type\":\"human\",\"report_date\":\"$REPORT_DATE\",\"report_classification\":\"$REPORT_CLASS\",\"report_id\":\"$REPORT_ID\"}}" \
+            -o /tmp/deploy_resp.json -w "%{http_code}")
+          echo "AUTO_DEPLOY_DISPATCH_HTTP=$HTTP"
+          echo "AUTO_DEPLOY_CANARY_PROVENANCE = trigger_source=manual_canary report_id=$REPORT_ID report_date=$REPORT_DATE classification=$REPORT_CLASS"
+          if [ "$HTTP" -lt 200 ] || [ "$HTTP" -ge 300 ]; then
+            echo "::error::canary deploy dispatch 失败 HTTP=$HTTP body=$(head -c 300 /tmp/deploy_resp.json)"
             exit 1
           fi
 
