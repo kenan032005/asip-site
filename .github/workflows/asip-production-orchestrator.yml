@@ -216,8 +216,7 @@ jobs:
           # 读取已提交 state 中最近一次 daily 报告的真实元数据（不得伪造）；
           # dispatch 以 manual_canary（human）provenance 标记，仅验证
           # GITHUB_TOKEN actions:write → HTTP 2xx → deploy run 产生 → inputs 收到。
-          export REPORT_ID REPORT_DATE REPORT_CLASS
-          python - <<'PY'
+          python - <<'PY' > /tmp/dep_meta.sh
           import json, glob, os
           base = 'data/runtime/ops/reports'
           rid = rd = cls = ''
@@ -235,10 +234,13 @@ jobs:
                   rid = doc.get('report_id') or ''
                   rd = doc.get('report_date') or ''
                   break
-          with open(os.environ['GITHUB_ENV'], 'a') as f:
-              f.write('REPORT_ID=%s\nREPORT_DATE=%s\nREPORT_CLASS=%s\n' % (rid, rd, cls))
+          print('REPORT_ID=%s' % rid)
+          print('REPORT_DATE=%s' % rd)
+          print('REPORT_CLASS=%s' % cls)
           print('CANARY_DEPLOY_META report_id=%s report_date=%s classification=%s' % (rid, rd, cls))
           PY
+          grep '^CANARY_DEPLOY_META' /tmp/dep_meta.sh || true
+          source <(grep -E '^(REPORT_ID|REPORT_DATE|REPORT_CLASS)=' /tmp/dep_meta.sh)
           if [ -z "$REPORT_ID" ]; then echo "::error::无可用 daily 报告元数据，拒绝伪造 dispatch"; exit 1; fi
           HTTP=$(curl -s -X POST -H "Authorization: Bearer $GH_TOKEN" \
             -H "Accept: application/vnd.github+json" \
