@@ -40,6 +40,24 @@ SCHEMAS = {
 }
 LOW_DATA_NO_AI = True
 
+#: §D TRIAL_FIXTURE_LEAK_GATE：Production 报告不得携带的 trial/fixture identity
+TRIAL_IDENTITY_MARKERS = ("MANUAL_TRIAL", "20260827", "人工验收试运行")
+
+
+def trial_fixture_leak_gate(report_obj, mode):
+    """§D：Production 报告若含 trial identity（MANUAL_TRIAL / 20260827 /
+    人工验收试运行 等）→ FAIL，报告不得发布。"""
+    if mode != "daily":
+        return "NOT_APPLICABLE"
+    try:
+        blob = json.dumps(report_obj, ensure_ascii=False)
+    except Exception:  # noqa: BLE001
+        return "FAIL"
+    for marker in TRIAL_IDENTITY_MARKERS:
+        if marker in blob:
+            return "FAIL"
+    return "PASS"
+
 
 def _derived_dir():
     if (DERIVED / "africa_daily_report_input.json").exists():
@@ -138,6 +156,8 @@ def generate_report(mode, input_obj, provider, telemetry, emit, run_at=None,
     # §十二：新鲜度门控（仅 canonical 生产路径强制；derived 为冻结 trial 验证）
     gates.update(freshness_gates(report, mode, run_at=run_at,
                                  enforce=(source == "canonical")))
+    # §D：trial identity 泄漏门控（所有 daily 报告均检查）
+    gates["TRIAL_FIXTURE_LEAK_GATE"] = trial_fixture_leak_gate(report, mode)
     return {"mode": mode, "fact_pack": fp, "fact_pack_hash": fh,
             "analysis": analysis, "analysis_result": ares,
             "report": report, "gates": gates}
@@ -155,7 +175,8 @@ def classify(report_res):
     if g.get("FINAL_SCHEMA_GATE") != "PASS":
         return "HOLD"
     # §十二：业务日期 / 周期新鲜度任一 FAIL → HOLD（fixture 报告不得进入 Production）
-    for gate in ("REPORT_BUSINESS_DATE_GATE", "DAILY_PERIOD_FRESHNESS_GATE"):
+    for gate in ("REPORT_BUSINESS_DATE_GATE", "DAILY_PERIOD_FRESHNESS_GATE",
+                 "TRIAL_FIXTURE_LEAK_GATE"):
         if g.get(gate) == "FAIL":
             return "HOLD"
     ares = report_res["analysis_result"]

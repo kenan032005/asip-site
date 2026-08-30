@@ -306,6 +306,9 @@ def _build_daily_input(social, disease, cutoff):
         "generated_at": _bj_now(),
         "period_start": ps,
         "period_end": pe,
+        # §C：动态追踪窗口（与 24h 事实窗口同一 window_end，不由 latest event 决定）
+        "tracking_72h_start": (c - timedelta(hours=72)).isoformat(),
+        "trend_7d_start": (c - timedelta(days=7)).isoformat(),
         "sections": {
             "executive_summary": major,
             "major_security_developments": major,

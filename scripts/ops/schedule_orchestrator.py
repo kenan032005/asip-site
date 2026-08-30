@@ -233,21 +233,22 @@ def _reload_state(state):
 
 
 def _daily_report_meta(root):
-    """读取本次 daily 报告的业务日期与分类（用于 deploy provenance / 新鲜度）。"""
+    """读取本次 daily 报告的业务日期 / 分类 / report_id（deploy provenance 用）。"""
     base = Path(root) / "runtime" / "ops" / "reports"
     if not base.exists():
         base = ps.OPS_DIR / "reports"
     summary = _read_json_file(base / "reports_run_summary.json") or {}
     daily = (summary.get("results") or {}).get("daily") or {}
     cls = daily.get("classification")
-    report_date = None
+    report_date, report_id = None, None
     for p in sorted(base.glob("daily_*.json")):
         doc = _read_json_file(p) or {}
         if doc.get("report_date"):
             report_date = doc.get("report_date")
+            report_id = doc.get("report_id")
             break
     return {"report_date": report_date, "classification": cls,
-            "fact_count": daily.get("fact_count")}
+            "report_id": report_id, "fact_count": daily.get("fact_count")}
 
 
 def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
@@ -406,6 +407,7 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
                 ps.record_run(state, "last_daily_report", ok=True)
                 deploy_required = deploy_required_for(cls)
                 deploy_ctx["report_date"] = meta.get("report_date")
+                deploy_ctx["report_id"] = meta.get("report_id")
                 deploy_ctx["report_classification"] = cls
                 deploy_ctx["deploy_requested_at"] = ps._utcnow_iso()
             run["reports_%s" % {"FULL": "full", "FALLBACK": "fallback",
@@ -454,6 +456,10 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
     results["views_export"] = {"ok": _export_views(emit), "detail": "compatibility_export"}
 
     ops.finish_run(run, status="completed")
+    # §K：deploy 请求与 provenance 持久化到 ops run（随 production-state 提交）。
+    # dispatch 的 HTTP 结果由 workflow 步骤判定（非 2xx → 该轮 run 失败，不静默）。
+    run["deploy_requested"] = bool(deploy_required)
+    run["deploy_provenance"] = deploy_ctx
     prev = []
     if ps.OPS_STATUS_FILE.exists():
         try:
