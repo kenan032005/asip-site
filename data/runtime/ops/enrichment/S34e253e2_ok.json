@@ -7,10 +7,12 @@
  "finish_reason": "stop",
  "thinking_requested": "disabled",
  "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "2b280bd163b9e79387deedd4283bb1f5542aae273131fbe49b1652e9e140a2ec",
  "tokens": {
   "input_tokens": 2275,
-  "output_tokens": 558,
-  "total_tokens": 2833
+  "output_tokens": 634,
+  "total_tokens": 2909
  },
  "schema_pass": true,
  "status": "ok",
@@ -24,8 +26,8 @@
   "manual_review_required": false,
   "original_ai_output": {
    "source_language": "fr",
-   "title_zh": "尼亚美发生枪击和爆炸：国防部长称已控制士兵的“情绪波动”",
-   "summary_zh": "据尼日尔官方通讯社报道，尼亚美在8月28日至29日夜间发生枪击和爆炸，涉及空军基地和首都敏感地点。国防部长萨利富·莫迪将军在国家电视台宣读声明，称已“逐步控制”部分士兵的“情绪波动”，这些士兵扣押了战友并对首都敏感地点开枪。目前城市已恢复平静，但仍有零星枪声。",
+   "title_zh": "尼亚美发生枪击和爆炸：国防部长称已控制士兵不满情绪",
+   "summary_zh": "据尼日尔官方通讯社报道，尼亚美发生枪击和爆炸事件，国防部长萨利富·莫迪将军宣称已逐步控制部分士兵的不满情绪。这些士兵据称针对首都敏感地点开枪，并扣押了部分战友。事件发生在8月28日至29日夜间，一度导致广播电视信号中断，目前城市恢复平静，但仍有零星枪声。",
    "event_type": "other_security",
    "country_iso3": "NER",
    "location": {
@@ -33,36 +35,42 @@
     "admin1": null,
     "city": "尼亚美",
     "site": "空军基地及首都敏感地点",
-    "raw_text": "Niamey, base aérienne et certains centres stratégiques"
+    "raw_text": "Niamey, base aérienne, sites sensibles de la capitale"
    },
    "key_facts": [
     {
-     "fact": "尼亚美在8月28日至29日夜间发生枪击和爆炸，涉及空军基地和战略中心。",
+     "fact": "尼日尔首都尼亚美发生枪击和爆炸事件",
      "evidence_field": "body_extracted",
      "evidence_excerpt": "Dans la nuit du 28 au 29 août, la capitale a été secouée par des tirs et des détonations au niveau de la base aérienne et de certains centres stratégiques."
     },
     {
-     "fact": "国防部长宣布已逐步控制部分士兵的情绪波动，这些士兵扣押战友并对敏感地点开枪。",
+     "fact": "国防部长宣称已逐步控制士兵不满情绪",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Le Ministre d’Etat de la défense Nationale, le Général d’armée Salifou Modi a annoncé avoir «progressivement pris le contrôle d’un mouvement d’humeur de certains soldats qui ont ciblé des «sites sensibles» de la capitale»."
+     "evidence_excerpt": "Le Ministre d’Etat de la défense Nationale, le Général d’armée Salifou Modi a annoncé avoir «progressivement pris le contrôle d’un mouvement d’humeur de certains soldats»"
     },
     {
-     "fact": "事件期间广播和电视信号一度中断，约10点恢复。",
+     "fact": "部分士兵据称扣押战友并针对首都敏感地点开枪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des éléments en rupture avec le règlement de la base aérienne de Niamey ont «entrepris de séquestrer certains de leurs camarades au sein de la caserne de la base 101 de Niamey et d’effectuer des tirs sur certains sites sensibles de la capitale»"
+    },
+    {
+     "fact": "事件导致广播电视信号一度中断，后恢复",
      "evidence_field": "body_extracted",
      "evidence_excerpt": "Un moment, les signaux de la radio et de la télévision étaient interrompus, mais le programme a repris vers 10H."
     }
    ],
    "uncertainties": [
-    "事件的具体细节和伤亡情况尚未得到独立证实。",
-    "目前仅有一个来源（尼日尔官方通讯社）报道，缺乏交叉验证。"
+    "事件具体细节和伤亡情况尚未得到独立证实",
+    "国防部长的声明为官方说法，士兵不满情绪的具体原因和规模尚不清楚",
+    "目前仅有一个来源（尼日尔官方通讯社）报道此事，缺乏交叉验证"
    ],
    "security_relevance": "direct",
    "classification_confidence": 75
   },
   "corrected_output": {
    "source_language": "fr",
-   "title_zh": "尼亚美发生枪击和爆炸：国防部长称已控制士兵的“情绪波动”",
-   "summary_zh": "据尼日尔官方通讯社报道，尼亚美在8月28日至29日夜间发生枪击和爆炸，涉及空军基地和首都敏感地点。国防部长萨利富·莫迪将军在国家电视台宣读声明，称已“逐步控制”部分士兵的“情绪波动”，这些士兵扣押了战友并对首都敏感地点开枪。目前城市已恢复平静，但仍有零星枪声。",
+   "title_zh": "尼亚美发生枪击和爆炸：国防部长称已控制士兵不满情绪",
+   "summary_zh": "据尼日尔官方通讯社报道，尼亚美发生枪击和爆炸事件，国防部长萨利富·莫迪将军宣称已逐步控制部分士兵的不满情绪。这些士兵据称针对首都敏感地点开枪，并扣押了部分战友。事件发生在8月28日至29日夜间，一度导致广播电视信号中断，目前城市恢复平静，但仍有零星枪声。",
    "event_type": "other_security",
    "country_iso3": "NER",
    "location": {
@@ -70,28 +78,34 @@
     "admin1": null,
     "city": "尼亚美",
     "site": "空军基地及首都敏感地点",
-    "raw_text": "Niamey, base aérienne et certains centres stratégiques"
+    "raw_text": "Niamey, base aérienne, sites sensibles de la capitale"
    },
    "key_facts": [
     {
-     "fact": "尼亚美在8月28日至29日夜间发生枪击和爆炸，涉及空军基地和战略中心。",
+     "fact": "尼日尔首都尼亚美发生枪击和爆炸事件",
      "evidence_field": "body_extracted",
      "evidence_excerpt": "Dans la nuit du 28 au 29 août, la capitale a été secouée par des tirs et des détonations au niveau de la base aérienne et de certains centres stratégiques."
     },
     {
-     "fact": "国防部长宣布已逐步控制部分士兵的情绪波动，这些士兵扣押战友并对敏感地点开枪。",
+     "fact": "国防部长宣称已逐步控制士兵不满情绪",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Le Ministre d’Etat de la défense Nationale, le Général d’armée Salifou Modi a annoncé avoir «progressivement pris le contrôle d’un mouvement d’humeur de certains soldats qui ont ciblé des «sites sensibles» de la capitale»."
+     "evidence_excerpt": "Le Ministre d’Etat de la défense Nationale, le Général d’armée Salifou Modi a annoncé avoir «progressivement pris le contrôle d’un mouvement d’humeur de certains soldats»"
     },
     {
-     "fact": "事件期间广播和电视信号一度中断，约10点恢复。",
+     "fact": "部分士兵据称扣押战友并针对首都敏感地点开枪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des éléments en rupture avec le règlement de la base aérienne de Niamey ont «entrepris de séquestrer certains de leurs camarades au sein de la caserne de la base 101 de Niamey et d’effectuer des tirs sur certains sites sensibles de la capitale»"
+    },
+    {
+     "fact": "事件导致广播电视信号一度中断，后恢复",
      "evidence_field": "body_extracted",
      "evidence_excerpt": "Un moment, les signaux de la radio et de la télévision étaient interrompus, mais le programme a repris vers 10H."
     }
    ],
    "uncertainties": [
-    "事件的具体细节和伤亡情况尚未得到独立证实。",
-    "目前仅有一个来源（尼日尔官方通讯社）报道，缺乏交叉验证。"
+    "事件具体细节和伤亡情况尚未得到独立证实",
+    "国防部长的声明为官方说法，士兵不满情绪的具体原因和规模尚不清楚",
+    "目前仅有一个来源（尼日尔官方通讯社）报道此事，缺乏交叉验证"
    ],
    "security_relevance": "direct",
    "classification_confidence": 75

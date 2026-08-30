@@ -1,0 +1,111 @@
+{
+ "label": "S9f0f00f9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4f94ead718549b05d0bbcbddbc95f8d281fb26277e4873d984a9581b74111fe0",
+ "tokens": {
+  "input_tokens": 2618,
+  "output_tokens": 410,
+  "total_tokens": 3028
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔蒂拉贝里举行2026年圣纪活动，当局与学者祈祷和平与稳定",
+   "summary_zh": "2026年8月25日晚，尼日尔蒂拉贝里大区区长迈纳·布卡尔上校走访了该市多座清真寺，参加圣纪（Mouloud）庆祝活动。活动期间进行了古兰经诵读、布道和祈祷，重点祈求尼日尔的和平、安全与稳定，并为安全部队及遇难者祈祷。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "蒂拉贝里大区",
+    "city": "蒂拉贝里",
+    "site": "甘达-切区和卡比亚区的清真寺",
+    "raw_text": "Tillabéri, mosquée du quartier Ganda-Tché, Grande Mosquée du quartier Kabia"
+   },
+   "key_facts": [
+    {
+     "fact": "蒂拉贝里大区区长走访多座清真寺参加圣纪活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Gouverneur de la Région de Tillabéri, le Colonel Maïna Boukar a effectué, dans la nuit du mardi 25 août 2026, une tournée dans plusieurs mosquées de la ville de Tillabéri"
+    },
+    {
+     "fact": "活动包括古兰经诵读、布道和祈祷",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette visite a été marquée par des séances de lecture et de récitation du Saint Coran, des prêches et des invocations"
+    },
+    {
+     "fact": "祈祷内容涉及和平、安全与稳定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des invocations en faveur de la paix, de la sécurité et de la stabilité du Niger"
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔蒂拉贝里举行2026年圣纪活动，当局与学者祈祷和平与稳定",
+   "summary_zh": "2026年8月25日晚，尼日尔蒂拉贝里大区区长迈纳·布卡尔上校走访了该市多座清真寺，参加圣纪（Mouloud）庆祝活动。活动期间进行了古兰经诵读、布道和祈祷，重点祈求尼日尔的和平、安全与稳定，并为安全部队及遇难者祈祷。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "蒂拉贝里大区",
+    "city": "蒂拉贝里",
+    "site": "甘达-切区和卡比亚区的清真寺",
+    "raw_text": "Tillabéri, mosquée du quartier Ganda-Tché, Grande Mosquée du quartier Kabia"
+   },
+   "key_facts": [
+    {
+     "fact": "蒂拉贝里大区区长走访多座清真寺参加圣纪活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Gouverneur de la Région de Tillabéri, le Colonel Maïna Boukar a effectué, dans la nuit du mardi 25 août 2026, une tournée dans plusieurs mosquées de la ville de Tillabéri"
+    },
+    {
+     "fact": "活动包括古兰经诵读、布道和祈祷",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette visite a été marquée par des séances de lecture et de récitation du Saint Coran, des prêches et des invocations"
+    },
+    {
+     "fact": "祈祷内容涉及和平、安全与稳定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des invocations en faveur de la paix, de la sécurité et de la stabilité du Niger"
+    }
+   ],
+   "uncertainties": [
+    "据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_987940bb9f0f00f9",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

@@ -7,10 +7,12 @@
  "finish_reason": "stop",
  "thinking_requested": "disabled",
  "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "48a65ab4e874b78e97169dcc9628ccda7d3b44642d09feddfcd9cd971ce882df",
  "tokens": {
   "input_tokens": 2904,
-  "output_tokens": 420,
-  "total_tokens": 3324
+  "output_tokens": 449,
+  "total_tokens": 3353
  },
  "schema_pass": true,
  "status": "ok",
@@ -25,7 +27,7 @@
   "original_ai_output": {
    "source_language": "fr",
    "title_zh": "尼日尔军政府借助俄罗斯帮助夺回叛军控制的空军基地",
-   "summary_zh": "尼日尔首都尼亚美发生枪战和爆炸，军政府声称在俄罗斯的帮助下逐步夺回叛军控制的军事基地。据外交和安全消息人士称，军政府已重新控制空军基地，但具体伤亡和叛军诉求尚不清楚。",
+   "summary_zh": "尼日尔首都尼亚美发生军事叛乱，叛军一度控制包括101号基地在内的多处军营，并试图闯入总统府。军政府声称在俄罗斯伙伴的帮助下逐步夺回控制权，并最终重新控制空军基地。据外交和安全消息人士称，叛军中有多人死亡，但具体伤亡数字和叛军诉求尚不清楚。",
    "event_type": "other_security",
    "country_iso3": "NER",
    "location": {
@@ -37,25 +39,30 @@
    },
    "key_facts": [
     {
-     "fact": "尼日尔军政府声称在俄罗斯帮助下夺回叛军控制的空军基地",
+     "fact": "尼日尔军政府声称在俄罗斯帮助下夺回空军基地",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "le régime militaire au pouvoir au Niger a affirmé \"reprendre progressivement le contrôle\" face à des mutins"
+     "evidence_excerpt": "Des sources diplomatiques et sécuritaires ont déclaré à l'AFP que le régime militaire avait repris dans la soirée la base militaire aérienne avec l'aide de son partenaire russe."
     },
     {
-     "fact": "据外交和安全消息人士称，军政府已重新控制空军基地",
+     "fact": "叛军曾控制101号基地等两处军营",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Des sources diplomatiques et sécuritaires ont déclaré à l'AFP que le régime militaire avait repris dans la soirée la base militaire aérienne avec l'aide de son partenaire russe"
+     "evidence_excerpt": "en début d'après-midi, les mutins contrôlaient deux casernes, l'une au sein de la base 101 où ils se sont retranchés et une autre à l'extérieur"
     },
     {
-     "fact": "尼亚美多个地区发生枪击和爆炸，包括总统府附近",
+     "fact": "有试图进入总统府的企图",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Des tirs et des détonations ont été entendus, samedi 29 août au matin, à Niamey, la capitale du Niger, notamment autour de la base militaire 101, attenante à l’aéroport international, et dans la zone administrative où se trouve le palais présidentiel"
+     "evidence_excerpt": "Il y a eu une tentative de pénétrer dans le palais présidentiel par des insurgés issus des forces armées nigériennes."
+    },
+    {
+     "fact": "叛军中有多人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il y a plusieurs morts dans les rangs des mutins"
     }
    ],
    "uncertainties": [
-    "叛军的具体诉求和支援规模尚不清楚",
-    "伤亡人数未确认",
-    "部分消息来源为单一来源或未经独立证实"
+    "具体伤亡数字未明确",
+    "叛军的诉求和支持规模未知",
+    "军政府夺回基地的说法来自外交和安全消息来源，尚未独立证实"
    ],
    "security_relevance": "direct",
    "classification_confidence": 85
@@ -63,7 +70,7 @@
   "corrected_output": {
    "source_language": "fr",
    "title_zh": "尼日尔军政府借助俄罗斯帮助夺回叛军控制的空军基地",
-   "summary_zh": "尼日尔首都尼亚美发生枪战和爆炸，军政府声称在俄罗斯的帮助下逐步夺回叛军控制的军事基地。据外交和安全消息人士称，军政府已重新控制空军基地，但具体伤亡和叛军诉求尚不清楚。",
+   "summary_zh": "尼日尔首都尼亚美发生军事叛乱，叛军一度控制包括101号基地在内的多处军营，并试图闯入总统府。军政府声称在俄罗斯伙伴的帮助下逐步夺回控制权，并最终重新控制空军基地。据外交和安全消息人士称，叛军中有多人死亡，但具体伤亡数字和叛军诉求尚不清楚。",
    "event_type": "other_security",
    "country_iso3": "NER",
    "location": {
@@ -75,25 +82,30 @@
    },
    "key_facts": [
     {
-     "fact": "尼日尔军政府声称在俄罗斯帮助下夺回叛军控制的空军基地",
+     "fact": "尼日尔军政府声称在俄罗斯帮助下夺回空军基地",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "le régime militaire au pouvoir au Niger a affirmé \"reprendre progressivement le contrôle\" face à des mutins"
+     "evidence_excerpt": "Des sources diplomatiques et sécuritaires ont déclaré à l'AFP que le régime militaire avait repris dans la soirée la base militaire aérienne avec l'aide de son partenaire russe."
     },
     {
-     "fact": "据外交和安全消息人士称，军政府已重新控制空军基地",
+     "fact": "叛军曾控制101号基地等两处军营",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Des sources diplomatiques et sécuritaires ont déclaré à l'AFP que le régime militaire avait repris dans la soirée la base militaire aérienne avec l'aide de son partenaire russe"
+     "evidence_excerpt": "en début d'après-midi, les mutins contrôlaient deux casernes, l'une au sein de la base 101 où ils se sont retranchés et une autre à l'extérieur"
     },
     {
-     "fact": "尼亚美多个地区发生枪击和爆炸，包括总统府附近",
+     "fact": "有试图进入总统府的企图",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Des tirs et des détonations ont été entendus, samedi 29 août au matin, à Niamey, la capitale du Niger, notamment autour de la base militaire 101, attenante à l’aéroport international, et dans la zone administrative où se trouve le palais présidentiel"
+     "evidence_excerpt": "Il y a eu une tentative de pénétrer dans le palais présidentiel par des insurgés issus des forces armées nigériennes."
+    },
+    {
+     "fact": "叛军中有多人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il y a plusieurs morts dans les rangs des mutins"
     }
    ],
    "uncertainties": [
-    "叛军的具体诉求和支援规模尚不清楚",
-    "伤亡人数未确认",
-    "部分消息来源为单一来源或未经独立证实"
+    "具体伤亡数字未明确",
+    "叛军的诉求和支持规模未知",
+    "军政府夺回基地的说法来自外交和安全消息来源，尚未独立证实"
    ],
    "security_relevance": "direct",
    "classification_confidence": 85

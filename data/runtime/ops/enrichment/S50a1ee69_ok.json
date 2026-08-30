@@ -7,35 +7,27 @@
  "finish_reason": "stop",
  "thinking_requested": "disabled",
  "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1eb3ee9020889644953e175658f9e60ba8f0f3f95bd9712e303ea2abefec0323",
  "tokens": {
   "input_tokens": 2235,
-  "output_tokens": 378,
-  "total_tokens": 2613
+  "output_tokens": 523,
+  "total_tokens": 2758
  },
  "schema_pass": true,
  "status": "ok",
  "safety": {
   "gate": "PASS",
-  "pre_status": "FAIL",
-  "corrections": [
-   {
-    "fact_id": "independent_source_count",
-    "marker": "single_source",
-    "field": "uncertainties",
-    "before": "[\"火灾原因尚未确定\", \"损失金额为估计值，具体数字未确认\"]",
-    "after": "[\"火灾原因尚未确定\", \"损失金额为估计值，具体数字未确认\", \"据Alwihda Info报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
-    "rule_id": "SAFETY-CORR-D1",
-    "numeric_anchor": null
-   }
-  ],
-  "post_status": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
   "publication_eligible": true,
   "report_input_eligible": true,
   "manual_review_required": false,
   "original_ai_output": {
    "source_language": "fr",
    "title_zh": "恩贾梅纳：迪盖尔市场发生火灾，多家店铺被毁",
-   "summary_zh": "2026年8月29日至30日夜间，乍得首都恩贾梅纳的迪盖尔市场发生一起猛烈火灾，烧毁多家出售服装、鞋类和化妆品的店铺。火灾原因目前尚未确定，未造成人员伤亡，但财产损失严重，损失估计达数百万非洲法郎。",
+   "summary_zh": "2026年8月29日至30日夜间，乍得首都恩贾梅纳的迪盖尔市场发生一起猛烈火灾，烧毁多家售卖服装、鞋类和化妆品的店铺，造成重大物质损失，但未造成人员伤亡。火灾原因目前尚未确定。市长及消防、警察部门已到场处置，损失估计达数百万非洲法郎。",
    "event_type": "infrastructure_incident",
    "country_iso3": "TCD",
    "location": {
@@ -47,37 +39,38 @@
    },
    "key_facts": [
     {
-     "fact": "恩贾梅纳迪盖尔市场发生火灾，烧毁多家店铺",
-     "evidence_field": "title_original",
-     "evidence_excerpt": "N'Djamena : un incendie ravage plusieurs boutiques au marché de Diguel"
+     "fact": "2026年8月29日至30日夜间，恩贾梅纳迪盖尔市场发生火灾，烧毁多家店铺",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un violent incendie a ravagé plusieurs boutiques au marché de Diguel, dans la nuit du samedi 29 au dimanche 30 août 2026."
     },
     {
-     "fact": "火灾发生在2026年8月29日至30日夜间",
+     "fact": "火灾未造成人员伤亡，但物质损失严重",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "dans la nuit du 29 au 30 août 2026"
+     "evidence_excerpt": "Aucune perte en vie humaine n'a été signalée, mais les dégâts matériels sont considérables."
     },
     {
-     "fact": "火灾原因尚未确定",
+     "fact": "火灾原因目前尚未确定",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "L'origine du sinistre reste pour l'instant indéterminée"
+     "evidence_excerpt": "L'origine du sinistre reste pour l'instant indéterminée."
     },
     {
-     "fact": "未报告人员伤亡，但财产损失严重",
+     "fact": "损失估计达数百万非洲法郎",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Aucune perte en vie humaine n'a été signalée, mais les dégâts matériels sont considérables"
+     "evidence_excerpt": "représentant des pertes évaluées à plusieurs millions de francs CFA."
     }
    ],
    "uncertainties": [
     "火灾原因尚未确定",
-    "损失金额为估计值，具体数字未确认"
+    "损失金额为估计值，具体数额未确认",
+    "单一来源报道，缺乏交叉验证"
    ],
    "security_relevance": "indirect",
-   "classification_confidence": 75
+   "classification_confidence": 85
   },
   "corrected_output": {
    "source_language": "fr",
    "title_zh": "恩贾梅纳：迪盖尔市场发生火灾，多家店铺被毁",
-   "summary_zh": "2026年8月29日至30日夜间，乍得首都恩贾梅纳的迪盖尔市场发生一起猛烈火灾，烧毁多家出售服装、鞋类和化妆品的店铺。火灾原因目前尚未确定，未造成人员伤亡，但财产损失严重，损失估计达数百万非洲法郎。",
+   "summary_zh": "2026年8月29日至30日夜间，乍得首都恩贾梅纳的迪盖尔市场发生一起猛烈火灾，烧毁多家售卖服装、鞋类和化妆品的店铺，造成重大物质损失，但未造成人员伤亡。火灾原因目前尚未确定。市长及消防、警察部门已到场处置，损失估计达数百万非洲法郎。",
    "event_type": "infrastructure_incident",
    "country_iso3": "TCD",
    "location": {
@@ -89,33 +82,33 @@
    },
    "key_facts": [
     {
-     "fact": "恩贾梅纳迪盖尔市场发生火灾，烧毁多家店铺",
-     "evidence_field": "title_original",
-     "evidence_excerpt": "N'Djamena : un incendie ravage plusieurs boutiques au marché de Diguel"
+     "fact": "2026年8月29日至30日夜间，恩贾梅纳迪盖尔市场发生火灾，烧毁多家店铺",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un violent incendie a ravagé plusieurs boutiques au marché de Diguel, dans la nuit du samedi 29 au dimanche 30 août 2026."
     },
     {
-     "fact": "火灾发生在2026年8月29日至30日夜间",
+     "fact": "火灾未造成人员伤亡，但物质损失严重",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "dans la nuit du 29 au 30 août 2026"
+     "evidence_excerpt": "Aucune perte en vie humaine n'a été signalée, mais les dégâts matériels sont considérables."
     },
     {
-     "fact": "火灾原因尚未确定",
+     "fact": "火灾原因目前尚未确定",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "L'origine du sinistre reste pour l'instant indéterminée"
+     "evidence_excerpt": "L'origine du sinistre reste pour l'instant indéterminée."
     },
     {
-     "fact": "未报告人员伤亡，但财产损失严重",
+     "fact": "损失估计达数百万非洲法郎",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Aucune perte en vie humaine n'a été signalée, mais les dégâts matériels sont considérables"
+     "evidence_excerpt": "représentant des pertes évaluées à plusieurs millions de francs CFA."
     }
    ],
    "uncertainties": [
     "火灾原因尚未确定",
-    "损失金额为估计值，具体数字未确认",
-    "据Alwihda Info报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+    "损失金额为估计值，具体数额未确认",
+    "单一来源报道，缺乏交叉验证"
    ],
    "security_relevance": "indirect",
-   "classification_confidence": 75
+   "classification_confidence": 85
   }
  },
  "event_id": "EVT_bb43122c50a1ee69",

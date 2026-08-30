@@ -1,0 +1,116 @@
+{
+ "label": "S58ef260e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "15ef09354a6f5e934ee4aff0aed4f545fe2cc06d8a51d43a785267e952b64ea2",
+ "tokens": {
+  "input_tokens": 2636,
+  "output_tokens": 387,
+  "total_tokens": 3023
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"兵变具体伤亡人数未明确，仅称数十名士兵被杀或被捕\", \"兵变事件细节主要依据国家电视台报道和分析人士说法，属单一来源\"]",
+    "after": "[\"兵变具体伤亡人数未明确，仅称数十名士兵被杀或被捕\", \"兵变事件细节主要依据国家电视台报道和分析人士说法，属单一来源\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔挫败兵变后尼亚美生活恢复",
+   "summary_zh": "尼日尔首都尼亚美在军方及俄罗斯盟友Africa Corps准军事部队重新控制局势后，周日恢复平静。此前一群年轻军人试图发动兵变，甚至企图进入总统府，数十名士兵被杀或被捕。目前安全措施仍严密，总统府和机场入口有士兵把守。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "总统府、机场空军基地",
+    "raw_text": "Niamey, Niger"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔军方在俄罗斯盟友支持下挫败兵变",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une mutinerie a été déjouée la veille par le régime militaire avec l'appui de son partenaire russe"
+    },
+    {
+     "fact": "数十名士兵在兵变中被杀或被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des dizaines de soldats ont été tués ou arrêtés après qu'un groupe de jeunes militaires a tenté de se mutiner"
+    },
+    {
+     "fact": "尼亚美周日恢复平静，市场重新开放",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dimanche matin, à Niamey, les accès à la base aérienne de l'aéroport - où s'étaient retranchés les mutins samedi - et à la présidence étaient de nouveau rouverts"
+    }
+   ],
+   "uncertainties": [
+    "兵变具体伤亡人数未明确，仅称数十名士兵被杀或被捕",
+    "兵变事件细节主要依据国家电视台报道和分析人士说法，属单一来源"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔挫败兵变后尼亚美生活恢复",
+   "summary_zh": "尼日尔首都尼亚美在军方及俄罗斯盟友Africa Corps准军事部队重新控制局势后，周日恢复平静。此前一群年轻军人试图发动兵变，甚至企图进入总统府，数十名士兵被杀或被捕。目前安全措施仍严密，总统府和机场入口有士兵把守。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "总统府、机场空军基地",
+    "raw_text": "Niamey, Niger"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔军方在俄罗斯盟友支持下挫败兵变",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une mutinerie a été déjouée la veille par le régime militaire avec l'appui de son partenaire russe"
+    },
+    {
+     "fact": "数十名士兵在兵变中被杀或被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des dizaines de soldats ont été tués ou arrêtés après qu'un groupe de jeunes militaires a tenté de se mutiner"
+    },
+    {
+     "fact": "尼亚美周日恢复平静，市场重新开放",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dimanche matin, à Niamey, les accès à la base aérienne de l'aéroport - où s'étaient retranchés les mutins samedi - et à la présidence étaient de nouveau rouverts"
+    }
+   ],
+   "uncertainties": [
+    "兵变具体伤亡人数未明确，仅称数十名士兵被杀或被捕",
+    "兵变事件细节主要依据国家电视台报道和分析人士说法，属单一来源",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_ef2824d158ef260e",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
