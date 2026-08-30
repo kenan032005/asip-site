@@ -9,33 +9,23 @@
  "reasoning_tokens": null,
  "tokens": {
   "input_tokens": 2412,
-  "output_tokens": 464,
-  "total_tokens": 2876
+  "output_tokens": 490,
+  "total_tokens": 2902
  },
  "schema_pass": true,
  "status": "ok",
  "safety": {
   "gate": "PASS",
-  "pre_status": "FAIL",
-  "corrections": [
-   {
-    "fact_id": "independent_source_count",
-    "marker": "single_source",
-    "field": "uncertainties",
-    "before": "[\"部队组建的具体时间表尚未公布\", \"部队的指挥结构和资金来源细节尚未明确\"]",
-    "after": "[\"部队组建的具体时间表尚未公布\", \"部队的指挥结构和资金来源细节尚未明确\", \"据Niger Inter报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
-    "rule_id": "SAFETY-CORR-D1",
-    "numeric_anchor": null
-   }
-  ],
-  "post_status": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
   "publication_eligible": true,
   "report_input_eligible": true,
   "manual_review_required": false,
   "original_ai_output": {
    "source_language": "fr",
-   "title_zh": "萨赫勒国家联盟宣布组建5000人统一部队",
-   "summary_zh": "萨赫勒国家联盟（AES）宣布将组建一支5000人的统一部队，以打击恐怖主义和各类不安全因素。该部队的组建模式与已解散的G5萨赫勒联合部队相似，但外部支持将由法国转为俄罗斯。文章回顾了G5部队失败的原因，包括外部依赖和部分国家参与度不足，并呼吁新部队避免重蹈覆辙。",
+   "title_zh": "萨赫勒国家联盟宣布组建5000人联合部队以打击恐怖主义",
+   "summary_zh": "萨赫勒国家联盟（AES）宣布即将组建一支5000人的联合部队，以打击三国境内的恐怖主义和各种不安全因素。该部队的组建模式与已解散的G5萨赫勒联合部队相似，但外部支持将由法国转为俄罗斯。文章回顾了G5萨赫勒联合部队失败的原因，包括外部依赖、部分国家参与度低等，并呼吁新部队避免重蹈覆辙。",
    "event_type": "other_security",
    "country_iso3": "NER",
    "location": {
@@ -43,36 +33,37 @@
     "admin1": null,
     "city": null,
     "site": null,
-    "raw_text": "尼日尔（Niger）"
+    "raw_text": "尼日尔"
    },
    "key_facts": [
     {
-     "fact": "萨赫勒国家联盟宣布组建5000人统一部队",
+     "fact": "萨赫勒国家联盟宣布组建5000人联合部队打击恐怖主义",
      "evidence_field": "body_extracted",
      "evidence_excerpt": "les pays de l’Alliance des Etats du Sahel ont annoncé la mise en place prochaine d’une force unifiée de cinq mille (5000) hommes"
     },
     {
-     "fact": "新部队将获得俄罗斯的外部支持",
+     "fact": "新部队的外部支持将由法国转为俄罗斯",
      "evidence_field": "body_extracted",
      "evidence_excerpt": "Cet appui était français avec le G5-Sahel. Sous la force unifiée, il sera russe."
     },
     {
-     "fact": "文章指出G5部队失败原因包括外部依赖和部分国家参与不足",
+     "fact": "文章指出G5萨赫勒联合部队失败原因包括外部依赖和部分国家参与度低",
      "evidence_field": "body_extracted",
      "evidence_excerpt": "La première tare de cette force était sa dépendance extérieure... le faible niveau d’engagement de certains pays a précipité la force dans une mort cérébrale."
     }
    ],
    "uncertainties": [
-    "部队组建的具体时间表尚未公布",
-    "部队的指挥结构和资金来源细节尚未明确"
+    "部队组建的具体时间尚未明确",
+    "俄罗斯支持的具体形式和程度尚未详细说明",
+    "该报道为单一来源，缺乏交叉验证"
    ],
-   "security_relevance": "indirect",
-   "classification_confidence": 70
+   "security_relevance": "direct",
+   "classification_confidence": 75
   },
   "corrected_output": {
    "source_language": "fr",
-   "title_zh": "萨赫勒国家联盟宣布组建5000人统一部队",
-   "summary_zh": "萨赫勒国家联盟（AES）宣布将组建一支5000人的统一部队，以打击恐怖主义和各类不安全因素。该部队的组建模式与已解散的G5萨赫勒联合部队相似，但外部支持将由法国转为俄罗斯。文章回顾了G5部队失败的原因，包括外部依赖和部分国家参与度不足，并呼吁新部队避免重蹈覆辙。",
+   "title_zh": "萨赫勒国家联盟宣布组建5000人联合部队以打击恐怖主义",
+   "summary_zh": "萨赫勒国家联盟（AES）宣布即将组建一支5000人的联合部队，以打击三国境内的恐怖主义和各种不安全因素。该部队的组建模式与已解散的G5萨赫勒联合部队相似，但外部支持将由法国转为俄罗斯。文章回顾了G5萨赫勒联合部队失败的原因，包括外部依赖、部分国家参与度低等，并呼吁新部队避免重蹈覆辙。",
    "event_type": "other_security",
    "country_iso3": "NER",
    "location": {
@@ -80,32 +71,32 @@
     "admin1": null,
     "city": null,
     "site": null,
-    "raw_text": "尼日尔（Niger）"
+    "raw_text": "尼日尔"
    },
    "key_facts": [
     {
-     "fact": "萨赫勒国家联盟宣布组建5000人统一部队",
+     "fact": "萨赫勒国家联盟宣布组建5000人联合部队打击恐怖主义",
      "evidence_field": "body_extracted",
      "evidence_excerpt": "les pays de l’Alliance des Etats du Sahel ont annoncé la mise en place prochaine d’une force unifiée de cinq mille (5000) hommes"
     },
     {
-     "fact": "新部队将获得俄罗斯的外部支持",
+     "fact": "新部队的外部支持将由法国转为俄罗斯",
      "evidence_field": "body_extracted",
      "evidence_excerpt": "Cet appui était français avec le G5-Sahel. Sous la force unifiée, il sera russe."
     },
     {
-     "fact": "文章指出G5部队失败原因包括外部依赖和部分国家参与不足",
+     "fact": "文章指出G5萨赫勒联合部队失败原因包括外部依赖和部分国家参与度低",
      "evidence_field": "body_extracted",
      "evidence_excerpt": "La première tare de cette force était sa dépendance extérieure... le faible niveau d’engagement de certains pays a précipité la force dans une mort cérébrale."
     }
    ],
    "uncertainties": [
-    "部队组建的具体时间表尚未公布",
-    "部队的指挥结构和资金来源细节尚未明确",
-    "据Niger Inter报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+    "部队组建的具体时间尚未明确",
+    "俄罗斯支持的具体形式和程度尚未详细说明",
+    "该报道为单一来源，缺乏交叉验证"
    ],
-   "security_relevance": "indirect",
-   "classification_confidence": 70
+   "security_relevance": "direct",
+   "classification_confidence": 75
   }
  },
  "event_id": "EVT_c94a1faca34c8d2f",

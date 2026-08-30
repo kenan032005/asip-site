@@ -9,8 +9,8 @@
  "reasoning_tokens": null,
  "tokens": {
   "input_tokens": 2911,
-  "output_tokens": 551,
-  "total_tokens": 3462
+  "output_tokens": 622,
+  "total_tokens": 3533
  },
  "schema_pass": true,
  "status": "ok",
@@ -22,18 +22,9 @@
     "fact_id": "independent_source_count",
     "marker": "single_source",
     "field": "uncertainties",
-    "before": "[\"机场局势信息相互矛盾，有报道称机场被叛变士兵控制，但难以独立核实\", \"事件的具体性质和伤亡情况尚未明确\", \"政府声明与目击者报告存在差异\"]",
-    "after": "[\"机场局势信息相互矛盾，有报道称机场被叛变士兵控制，但难以独立核实\", \"事件的具体性质和伤亡情况尚未明确\", \"政府声明与目击者报告存在差异\", \"据Ouestaf报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "before": "[\"关于机场控制权的信息存在矛盾：有消息称机场仍被叛军控制，但难以独立核实\", \"政府未明确提及机场状况\", \"枪击是否完全停止尚不明确，有消息称下午仍可听到枪声\"]",
+    "after": "[\"关于机场控制权的信息存在矛盾：有消息称机场仍被叛军控制，但难以独立核实\", \"政府未明确提及机场状况\", \"枪击是否完全停止尚不明确，有消息称下午仍可听到枪声\", \"据Ouestaf报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
     "rule_id": "SAFETY-CORR-D1",
-    "numeric_anchor": null
-   },
-   {
-    "fact_id": "<text>",
-    "marker": "alleged_claimed",
-    "field": "uncertainties",
-    "before": "[\"机场局势信息相互矛盾，有报道称机场被叛变士兵控制，但难以独立核实\", \"事件的具体性质和伤亡情况尚未明确\", \"政府声明与目击者报告存在差异\", \"据Ouestaf报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
-    "after": "[\"机场局势信息相互矛盾，有报道称机场被叛变士兵控制，但难以独立核实\", \"事件的具体性质和伤亡情况尚未明确\", \"政府声明与目击者报告存在差异\", \"据Ouestaf报道，目前仅获单一来源支持，尚缺乏交叉验证。\", \"据称，尚未获得独立证实。\"]",
-    "rule_id": "SAFETY-CORR-A1",
     "numeric_anchor": null
    }
   ],
@@ -44,37 +35,42 @@
   "original_ai_output": {
    "source_language": "fr",
    "title_zh": "尼日尔首都发生枪击事件后引发疑问",
-   "summary_zh": "2026年8月29日，尼日尔首都尼亚美在夜间发生袭击和枪击，持续至清晨，引发不确定性。政府通过电视声明试图安抚民众，称其为军队内部的“情绪波动”。截至下午，局势仍混乱，机场和行政区的信息相互矛盾，有报道称机场被叛变士兵控制，但难以独立核实。",
+   "summary_zh": "2026年8月29日，尼日尔首都尼亚美在夜间遭遇袭击和枪击，持续至清晨，政府称其为军队内部的“情绪波动”并试图安抚民众。截至下午，局势仍混乱，机场和行政区域等战略要地仍被军方封锁，关于机场控制权的信息存在矛盾。政府承认已重新控制局势，但未明确提及机场状况。",
    "event_type": "other_security",
    "country_iso3": "NER",
    "location": {
     "country_iso3": "NER",
     "admin1": null,
     "city": "尼亚美",
-    "site": "首都尼亚美，包括机场、总统府、国家广播电视等战略地点",
+    "site": "首都尼亚美，包括机场、总统府、国家广播电视等",
     "raw_text": "Niamey, la capitale du Niger"
    },
    "key_facts": [
     {
      "fact": "尼日尔首都尼亚美在夜间发生袭击和枪击，持续至清晨",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "La capitale du Niger s’est réveillé ce samedi 29 août 2026 dans l’incertitude, suite à une attaque et des tirs, dans la nuit, qui ont continué jusqu’au petit matin."
+     "evidence_excerpt": "La capitale du Niger s’est réveillée ce samedi 29 août 2026 dans l’incertitude, suite à une attaque et des tirs, dans la nuit, qui ont continué jusqu’au petit matin."
     },
     {
-     "fact": "政府称事件为军队内部的“情绪波动”，并确认已控制局势",
+     "fact": "政府称事件为军队内部的“情绪波动”",
      "evidence_field": "body_extracted",
      "evidence_excerpt": "le gouvernement a tenté de rassurer la population en minimisant l’affaire, qu’il traite de « mouvement d’humeur » au sein de l’armée."
     },
     {
-     "fact": "机场和行政区等战略地点被军方封锁，信息相互矛盾",
+     "fact": "政府承认两个战略区域受到枪击影响：国际机场和行政住宅区高原",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Les points stratégiques de la capitale étaient encore barricadés par les militaires. C’était le cas à la Radio télévision nationale, aux alentours du palais présidentiel et dans le quartier administratif de Niamey."
+     "evidence_excerpt": "le gouvernement admet que deux zones stratégiques ont été particulièrement concernées par les tirs : l’aéroport international, qui abrite la Base aérienne 101, et le quartier administratif et résidentiel du Plateau"
+    },
+    {
+     "fact": "政府声称已重新控制局势并呼吁民众保持冷静",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement assure avoir repris le contrôle de la situation et appelle la population au calme."
     }
    ],
    "uncertainties": [
-    "机场局势信息相互矛盾，有报道称机场被叛变士兵控制，但难以独立核实",
-    "事件的具体性质和伤亡情况尚未明确",
-    "政府声明与目击者报告存在差异"
+    "关于机场控制权的信息存在矛盾：有消息称机场仍被叛军控制，但难以独立核实",
+    "政府未明确提及机场状况",
+    "枪击是否完全停止尚不明确，有消息称下午仍可听到枪声"
    ],
    "security_relevance": "direct",
    "classification_confidence": 85
@@ -82,39 +78,43 @@
   "corrected_output": {
    "source_language": "fr",
    "title_zh": "尼日尔首都发生枪击事件后引发疑问",
-   "summary_zh": "2026年8月29日，尼日尔首都尼亚美在夜间发生袭击和枪击，持续至清晨，引发不确定性。政府通过电视声明试图安抚民众，称其为军队内部的“情绪波动”。截至下午，局势仍混乱，机场和行政区的信息相互矛盾，有报道称机场被叛变士兵控制，但难以独立核实。",
+   "summary_zh": "2026年8月29日，尼日尔首都尼亚美在夜间遭遇袭击和枪击，持续至清晨，政府称其为军队内部的“情绪波动”并试图安抚民众。截至下午，局势仍混乱，机场和行政区域等战略要地仍被军方封锁，关于机场控制权的信息存在矛盾。政府承认已重新控制局势，但未明确提及机场状况。",
    "event_type": "other_security",
    "country_iso3": "NER",
    "location": {
     "country_iso3": "NER",
     "admin1": null,
     "city": "尼亚美",
-    "site": "首都尼亚美，包括机场、总统府、国家广播电视等战略地点",
+    "site": "首都尼亚美，包括机场、总统府、国家广播电视等",
     "raw_text": "Niamey, la capitale du Niger"
    },
    "key_facts": [
     {
      "fact": "尼日尔首都尼亚美在夜间发生袭击和枪击，持续至清晨",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "La capitale du Niger s’est réveillé ce samedi 29 août 2026 dans l’incertitude, suite à une attaque et des tirs, dans la nuit, qui ont continué jusqu’au petit matin."
+     "evidence_excerpt": "La capitale du Niger s’est réveillée ce samedi 29 août 2026 dans l’incertitude, suite à une attaque et des tirs, dans la nuit, qui ont continué jusqu’au petit matin."
     },
     {
-     "fact": "政府称事件为军队内部的“情绪波动”，并确认已控制局势",
+     "fact": "政府称事件为军队内部的“情绪波动”",
      "evidence_field": "body_extracted",
      "evidence_excerpt": "le gouvernement a tenté de rassurer la population en minimisant l’affaire, qu’il traite de « mouvement d’humeur » au sein de l’armée."
     },
     {
-     "fact": "机场和行政区等战略地点被军方封锁，信息相互矛盾",
+     "fact": "政府承认两个战略区域受到枪击影响：国际机场和行政住宅区高原",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Les points stratégiques de la capitale étaient encore barricadés par les militaires. C’était le cas à la Radio télévision nationale, aux alentours du palais présidentiel et dans le quartier administratif de Niamey."
+     "evidence_excerpt": "le gouvernement admet que deux zones stratégiques ont été particulièrement concernées par les tirs : l’aéroport international, qui abrite la Base aérienne 101, et le quartier administratif et résidentiel du Plateau"
+    },
+    {
+     "fact": "政府声称已重新控制局势并呼吁民众保持冷静",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement assure avoir repris le contrôle de la situation et appelle la population au calme."
     }
    ],
    "uncertainties": [
-    "机场局势信息相互矛盾，有报道称机场被叛变士兵控制，但难以独立核实",
-    "事件的具体性质和伤亡情况尚未明确",
-    "政府声明与目击者报告存在差异",
-    "据Ouestaf报道，目前仅获单一来源支持，尚缺乏交叉验证。",
-    "据称，尚未获得独立证实。"
+    "关于机场控制权的信息存在矛盾：有消息称机场仍被叛军控制，但难以独立核实",
+    "政府未明确提及机场状况",
+    "枪击是否完全停止尚不明确，有消息称下午仍可听到枪声",
+    "据Ouestaf报道，目前仅获单一来源支持，尚缺乏交叉验证。"
    ],
    "security_relevance": "direct",
    "classification_confidence": 85

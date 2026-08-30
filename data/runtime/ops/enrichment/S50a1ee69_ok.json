@@ -1,0 +1,124 @@
+{
+ "label": "S50a1ee69",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "tokens": {
+  "input_tokens": 2235,
+  "output_tokens": 378,
+  "total_tokens": 2613
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"火灾原因尚未确定\", \"损失金额为估计值，具体数字未确认\"]",
+    "after": "[\"火灾原因尚未确定\", \"损失金额为估计值，具体数字未确认\", \"据Alwihda Info报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "恩贾梅纳：迪盖尔市场发生火灾，多家店铺被毁",
+   "summary_zh": "2026年8月29日至30日夜间，乍得首都恩贾梅纳的迪盖尔市场发生一起猛烈火灾，烧毁多家出售服装、鞋类和化妆品的店铺。火灾原因目前尚未确定，未造成人员伤亡，但财产损失严重，损失估计达数百万非洲法郎。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": "迪盖尔市场",
+    "raw_text": "marché de Diguel, N'Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "恩贾梅纳迪盖尔市场发生火灾，烧毁多家店铺",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "N'Djamena : un incendie ravage plusieurs boutiques au marché de Diguel"
+    },
+    {
+     "fact": "火灾发生在2026年8月29日至30日夜间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "dans la nuit du 29 au 30 août 2026"
+    },
+    {
+     "fact": "火灾原因尚未确定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'origine du sinistre reste pour l'instant indéterminée"
+    },
+    {
+     "fact": "未报告人员伤亡，但财产损失严重",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucune perte en vie humaine n'a été signalée, mais les dégâts matériels sont considérables"
+    }
+   ],
+   "uncertainties": [
+    "火灾原因尚未确定",
+    "损失金额为估计值，具体数字未确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "恩贾梅纳：迪盖尔市场发生火灾，多家店铺被毁",
+   "summary_zh": "2026年8月29日至30日夜间，乍得首都恩贾梅纳的迪盖尔市场发生一起猛烈火灾，烧毁多家出售服装、鞋类和化妆品的店铺。火灾原因目前尚未确定，未造成人员伤亡，但财产损失严重，损失估计达数百万非洲法郎。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": "迪盖尔市场",
+    "raw_text": "marché de Diguel, N'Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "恩贾梅纳迪盖尔市场发生火灾，烧毁多家店铺",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "N'Djamena : un incendie ravage plusieurs boutiques au marché de Diguel"
+    },
+    {
+     "fact": "火灾发生在2026年8月29日至30日夜间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "dans la nuit du 29 au 30 août 2026"
+    },
+    {
+     "fact": "火灾原因尚未确定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'origine du sinistre reste pour l'instant indéterminée"
+    },
+    {
+     "fact": "未报告人员伤亡，但财产损失严重",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucune perte en vie humaine n'a été signalée, mais les dégâts matériels sont considérables"
+    }
+   ],
+   "uncertainties": [
+    "火灾原因尚未确定",
+    "损失金额为估计值，具体数字未确认",
+    "据Alwihda Info报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_bb43122c50a1ee69",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

@@ -9,8 +9,8 @@
  "reasoning_tokens": null,
  "tokens": {
   "input_tokens": 1947,
-  "output_tokens": 289,
-  "total_tokens": 2236
+  "output_tokens": 304,
+  "total_tokens": 2251
  },
  "schema_pass": true,
  "status": "ok",
@@ -22,8 +22,8 @@
     "fact_id": "independent_source_count",
     "marker": "single_source",
     "field": "uncertainties",
-    "before": "[\"罢工的具体影响范围尚未明确\"]",
-    "after": "[\"罢工的具体影响范围尚未明确\", \"据Journal du Niger报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "before": "[\"罢工影响范围尚未明确\", \"新法规具体内容未在原文中说明\"]",
+    "after": "[\"罢工影响范围尚未明确\", \"新法规具体内容未在原文中说明\", \"据Journal du Niger报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
     "rule_id": "SAFETY-CORR-D1",
     "numeric_anchor": null
    }
@@ -35,7 +35,7 @@
   "original_ai_output": {
    "source_language": "fr",
    "title_zh": "尼日尔面包师罢工抗议新规",
-   "summary_zh": "尼日尔尼亚美，面包师工会（SPBPN）宣布举行48小时罢工，抗议一项被认为无法实施的新部级法规。该决定获得一致通过，反映出行业在经济紧张背景下的强烈不满。罢工可能导致面包供应中断。",
+   "summary_zh": "尼日尔面包师工会（SPBPN）发起48小时罢工，抗议一项被认为无法实施的新部级法规。罢工于2025年8月4日午夜开始，尼亚美等地的面包店可能停业。此举反映该行业在经济紧张背景下的困境。",
    "event_type": "civil_unrest",
    "country_iso3": "NER",
    "location": {
@@ -47,7 +47,7 @@
    },
    "key_facts": [
     {
-     "fact": "尼日尔面包师工会宣布48小时罢工",
+     "fact": "尼日尔面包师工会发起48小时罢工",
      "evidence_field": "body_extracted",
      "evidence_excerpt": "Le Syndicat patronal des boulangers et pâtissiers du Niger (SPBPN) lance une grève de 48 heures"
     },
@@ -57,13 +57,14 @@
      "evidence_excerpt": "protester contre une nouvelle réglementation ministérielle qu’il juge inapplicable"
     },
     {
-     "fact": "罢工可能导致面包供应中断",
-     "evidence_field": "body_extracted",
-     "evidence_excerpt": "les fours des boulangeries nigériennes risquent de rester froids"
+     "fact": "罢工于2025年8月4日午夜开始",
+     "evidence_field": "event_time",
+     "evidence_excerpt": "2025-08-04 18:18:09"
     }
    ],
    "uncertainties": [
-    "罢工的具体影响范围尚未明确"
+    "罢工影响范围尚未明确",
+    "新法规具体内容未在原文中说明"
    ],
    "security_relevance": "indirect",
    "classification_confidence": 70
@@ -71,7 +72,7 @@
   "corrected_output": {
    "source_language": "fr",
    "title_zh": "尼日尔面包师罢工抗议新规",
-   "summary_zh": "尼日尔尼亚美，面包师工会（SPBPN）宣布举行48小时罢工，抗议一项被认为无法实施的新部级法规。该决定获得一致通过，反映出行业在经济紧张背景下的强烈不满。罢工可能导致面包供应中断。",
+   "summary_zh": "尼日尔面包师工会（SPBPN）发起48小时罢工，抗议一项被认为无法实施的新部级法规。罢工于2025年8月4日午夜开始，尼亚美等地的面包店可能停业。此举反映该行业在经济紧张背景下的困境。",
    "event_type": "civil_unrest",
    "country_iso3": "NER",
    "location": {
@@ -83,7 +84,7 @@
    },
    "key_facts": [
     {
-     "fact": "尼日尔面包师工会宣布48小时罢工",
+     "fact": "尼日尔面包师工会发起48小时罢工",
      "evidence_field": "body_extracted",
      "evidence_excerpt": "Le Syndicat patronal des boulangers et pâtissiers du Niger (SPBPN) lance une grève de 48 heures"
     },
@@ -93,13 +94,14 @@
      "evidence_excerpt": "protester contre une nouvelle réglementation ministérielle qu’il juge inapplicable"
     },
     {
-     "fact": "罢工可能导致面包供应中断",
-     "evidence_field": "body_extracted",
-     "evidence_excerpt": "les fours des boulangeries nigériennes risquent de rester froids"
+     "fact": "罢工于2025年8月4日午夜开始",
+     "evidence_field": "event_time",
+     "evidence_excerpt": "2025-08-04 18:18:09"
     }
    ],
    "uncertainties": [
-    "罢工的具体影响范围尚未明确",
+    "罢工影响范围尚未明确",
+    "新法规具体内容未在原文中说明",
     "据Journal du Niger报道，目前仅获单一来源支持，尚缺乏交叉验证。"
    ],
    "security_relevance": "indirect",
