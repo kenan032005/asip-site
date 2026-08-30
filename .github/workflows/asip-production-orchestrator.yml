@@ -61,7 +61,7 @@ jobs:
       - name: Checkout release code
         uses: actions/checkout@v4
         with:
-          ref: e3f24b36b77029664a49bb5791747b633f1d0231
+          ref: 646371702d7d0ef858cfc302848a5d13c278f244
           fetch-depth: 1
 
       - name: Checkout production state branch
@@ -122,6 +122,7 @@ jobs:
           print("deploy_human=" + str(bool(dr.get('human'))).lower())
           print("deploy_report_date=" + str(dr.get('report_date') or ''))
           print("deploy_report_classification=" + str(dr.get('report_classification') or ''))
+          print("deploy_report_id=" + str(dr.get('report_id') or ''))
           print("deploy_root_orchestrator_run_id=" + str(dr.get('root_orchestrator_run_id') or ''))
           PY
 
@@ -150,36 +151,57 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CANARY: ${{ github.event.inputs.canary }}
-          # §三 Deploy Provenance：证明该 deploy 源自 scheduled/external automation
+          # §三/§I Deploy Provenance：automation 派发必须携带完整 provenance
           DEPLOY_ROOT_RUN_ID: ${{ steps.orch.outputs.deploy_root_orchestrator_run_id }}
+          DEPLOY_ROOT_RUN_URL: ${{ github.server_url }}/kenan032005/asip-site/actions/runs/${{ steps.orch.outputs.deploy_root_orchestrator_run_id }}
           DEPLOY_TRIGGER_SOURCE: ${{ steps.orch.outputs.deploy_trigger_source }}
           DEPLOY_TRIGGER_TYPE: ${{ steps.orch.outputs.deploy_trigger_type }}
           DEPLOY_REPORT_DATE: ${{ steps.orch.outputs.deploy_report_date }}
           DEPLOY_REPORT_CLASS: ${{ steps.orch.outputs.deploy_report_classification }}
+          DEPLOY_REPORT_ID: ${{ steps.orch.outputs.deploy_report_id }}
         run: |
           SHADOW="true"
           [ "$CANARY" != "true" ] && SHADOW="false"
+          # §J/§I：正式（非 canary）automation 派发的 trigger_source 必须可判定
+          if [ "$SHADOW" = "false" ]; then
+            case "$DEPLOY_TRIGGER_SOURCE" in
+              github_native_schedule|external_scheduler) DEPLOY_AUTO="true";;
+              *) echo "::error::automation dispatch 缺少合法 trigger_source=$DEPLOY_TRIGGER_SOURCE"; exit 1;;
+            esac
+          else
+            DEPLOY_AUTO="false"
+          fi
+          export DEPLOY_AUTO
           python - <<'PY' > /tmp/deploy_payload.json
           import json, os
           payload = {
             "ref": "main",
             "inputs": {
               "shadow_only": os.environ.get("SHADOW", "true"),
+              "automation": os.environ.get("DEPLOY_AUTO", "false"),
               "root_orchestrator_run_id": os.environ.get("DEPLOY_ROOT_RUN_ID", ""),
+              "root_orchestrator_run_url": os.environ.get("DEPLOY_ROOT_RUN_URL", ""),
               "trigger_source": os.environ.get("DEPLOY_TRIGGER_SOURCE", ""),
               "trigger_type": os.environ.get("DEPLOY_TRIGGER_TYPE", ""),
               "report_date": os.environ.get("DEPLOY_REPORT_DATE", ""),
               "report_classification": os.environ.get("DEPLOY_REPORT_CLASS", ""),
+              "report_id": os.environ.get("DEPLOY_REPORT_ID", ""),
             },
           }
           print(json.dumps(payload))
           PY
           echo "DEPLOY_PROVENANCE = $(cat /tmp/deploy_payload.json)"
-          curl -s -X POST -H "Authorization: Bearer $GH_TOKEN" \
+          HTTP=$(curl -s -X POST -H "Authorization: Bearer $GH_TOKEN" \
             -H "Accept: application/vnd.github+json" \
             https://api.github.com/repos/kenan032005/asip-site/actions/workflows/asip-production-deploy.yml/dispatches \
             -d @/tmp/deploy_payload.json \
-            -o /dev/null -w "AUTO_DEPLOY_TRIGGER_HTTP=%{http_code}\n"
+            -o /tmp/deploy_resp.json -w "%{http_code}")
+          echo "AUTO_DEPLOY_TRIGGER_HTTP=$HTTP"
+          # §M fail-closed：非 2xx 不得静默吞掉，本轮 run 置为失败
+          if [ "$HTTP" -lt 200 ] || [ "$HTTP" -ge 300 ]; then
+            echo "::error::auto deploy dispatch 失败 HTTP=$HTTP body=$(head -c 300 /tmp/deploy_resp.json)"
+            exit 1
+          fi
 
       - name: Upload ops artifacts
         if: always()

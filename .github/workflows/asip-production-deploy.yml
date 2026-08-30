@@ -24,8 +24,13 @@ on:
         required: false
         type: string
         default: ""
+      root_orchestrator_run_url:
+        description: "来源 orchestrator run URL（自动派发填入）"
+        required: false
+        type: string
+        default: ""
       trigger_source:
-        description: "来源触发：github_native_schedule / external_scheduler（自动派发填入）"
+        description: "github_native_schedule / external_scheduler（自动派发填入；人工默认 human_manual）"
         required: false
         type: string
         default: ""
@@ -34,6 +39,11 @@ on:
         required: false
         type: string
         default: ""
+      automation:
+        description: "automation=true 仅在由 orchestrator/external scheduler 派发时传入"
+        required: false
+        type: boolean
+        default: false
       report_date:
         description: "触发本次部署的报告业务日期"
         required: false
@@ -41,6 +51,16 @@ on:
         default: ""
       report_classification:
         description: "触发本次部署的报告分类（FULL/FALLBACK/LOW_DATA）"
+        required: false
+        type: string
+        default: ""
+      report_id:
+        description: "触发本次部署的 report id"
+        required: false
+        type: string
+        default: ""
+      production_state_sha:
+        description: "部署所用 production-state SHA（可选，用于审计）"
         required: false
         type: string
         default: ""
@@ -64,7 +84,7 @@ jobs:
       - name: Checkout production code
         uses: actions/checkout@v4
         with:
-          ref: e3f24b36b77029664a49bb5791747b633f1d0231
+          ref: 646371702d7d0ef858cfc302848a5d13c278f244
           fetch-depth: 1
 
       - name: Checkout production state branch（数据快照）
@@ -92,13 +112,22 @@ jobs:
             state_src/data/raw_candidates.json state_src/data/quarantine_events.json data/ 2>/dev/null || true
           cp -rf state_src/data/public/. data/public/ 2>/dev/null || true
 
-      - name: Deploy provenance（§三/§十三）
+      - name: Deploy provenance（§三/§J/§K/§H）
         id: prov
         run: |
           SRC="${{ github.event.inputs.trigger_source }}"
           TYPE="${{ github.event.inputs.trigger_type }}"
           ROOT="${{ github.event.inputs.root_orchestrator_run_id }}"
-          if [ -n "$ROOT" ] && { [ "$SRC" = "github_native_schedule" ] || [ "$SRC" = "external_scheduler" ]; }; then
+          AUTO_IN="${{ github.event.inputs.automation }}"
+          # §J：人工 dispatch 默认 human_manual；普通 manual run 不得伪装 automation
+          [ -z "$SRC" ] && SRC="human_manual"
+          [ -z "$TYPE" ] && TYPE="human"
+          if [ "$AUTO_IN" = "true" ]; then
+            # §J 一致性校验：automation=true 必须有 root run id + 合法来源
+            if [ -z "$ROOT" ] || { [ "$SRC" != "github_native_schedule" ] && [ "$SRC" != "external_scheduler" ]; }; then
+              echo "::error::automation=true 但 root_orchestrator_run_id/trigger_source 不一致（SRC=$SRC ROOT=${ROOT:-empty}）"
+              exit 1
+            fi
             PROV="scheduled_orchestrator_auto_dispatch"
             AUTO="true"; HUMAN="false"
           else
@@ -107,9 +136,30 @@ jobs:
           fi
           echo "DEPLOY_TRIGGER_PROVENANCE = $PROV"
           echo "DEPLOY_ACTOR = ${{ github.actor }}"
+          echo "DEPLOY_TRIGGER_SOURCE = $SRC"
+          echo "DEPLOY_AUTOMATION = $AUTO"
           echo "DEPLOY_ROOT_ORCHESTRATOR_RUN_ID = ${ROOT:-none}"
+          echo "DEPLOY_ROOT_ORCHESTRATOR_RUN_URL = ${{ github.event.inputs.root_orchestrator_run_url }}"
+          echo "DEPLOY_REPORT_ID = ${{ github.event.inputs.report_id }}"
           echo "DEPLOY_REPORT_DATE = ${{ github.event.inputs.report_date }}"
           echo "DEPLOY_REPORT_CLASSIFICATION = ${{ github.event.inputs.report_classification }}"
+          echo "DEPLOY_PRODUCTION_STATE_SHA = ${{ github.event.inputs.production_state_sha }}"
+          # §K：provenance 持久化到 run summary（随 GitHub Actions 运行记录留存，供审计）
+          cat >> "$GITHUB_STEP_SUMMARY" <<EOF
+          ## Deploy Provenance
+          | field | value |
+          |---|---|
+          | deploy_run_id | ${{ github.run_id }} |
+          | trigger_source | $SRC |
+          | automation | $AUTO |
+          | root_orchestrator_run_id | ${ROOT:-none} |
+          | report_id | ${{ github.event.inputs.report_id }} |
+          | report_date | ${{ github.event.inputs.report_date }} |
+          | report_classification | ${{ github.event.inputs.report_classification }} |
+          | requested_at | ${{ github.event.inputs.report_date }} |
+          | deployed_at | $(date -u +%Y-%m-%dT%H:%M:%SZ) |
+          | gh_pages_sha | _filled after publish_ |
+          EOF
           echo "provenance=$PROV" >> "$GITHUB_OUTPUT"
           echo "automation=$AUTO" >> "$GITHUB_OUTPUT"
           echo "human=$HUMAN" >> "$GITHUB_OUTPUT"
