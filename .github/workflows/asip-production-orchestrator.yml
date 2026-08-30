@@ -42,6 +42,9 @@ concurrency:
 
 permissions:
   contents: write
+  # GITHUB_TOKEN 派发 asip-production-deploy（workflow_dispatch）需要 actions: write；
+  # 缺失时 dispatch 返回 403（Canary 实测发现，AUTO_DEPLOY_TRIGGER_HTTP=403）。
+  actions: write
 
 env:
   ASIP_MODE: production
@@ -58,7 +61,7 @@ jobs:
       - name: Checkout release code
         uses: actions/checkout@v4
         with:
-          ref: 84a80064348ae5993fbb214870b8fd60062f2801
+          ref: e3f24b36b77029664a49bb5791747b633f1d0231
           fetch-depth: 1
 
       - name: Checkout production state branch
@@ -101,6 +104,7 @@ jobs:
           CANARY: ${{ github.event.inputs.canary }}
           # §三/§十七：触发来源上下文（不含任何凭据）
           ASIP_CLIENT_PAYLOAD: ${{ toJSON(github.event.client_payload) }}
+          ASIP_WORKFLOW_INPUTS: ${{ toJSON(github.event.inputs) }}
         run: |
           FLAGS="--run --json"
           [ "$CANARY" = "true" ] && FLAGS="$FLAGS --canary"
