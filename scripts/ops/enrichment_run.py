@@ -77,10 +77,13 @@ def _write_back_canonical(kind, fid, summary, data_dir=None):
 
 
 def run_enrichment(kind, provider=None, state=None, ops_run=None, emit=lambda s: print(s),
-                   max_items=0, write_back=True, data_dir=None):
-    """kind: social | disease。增量处理（content hash 幂等）。
+                   max_items=0, write_back=True, data_dir=None, use_cache=False):
+    """kind: social | disease。增量处理（content hash 幂等 + AI 结果缓存）。
 
     write_back：safety PASS 记录回写 canonical（§十八；测试可关闭或注入 data_dir）。
+    use_cache：启用 scripts/ai/ai_result_cache（同 ai_input_hash 命中即跳过，不重复
+    计费）。生产 CLI（main）默认启用；单测如需隔离必须显式传 False，否则会污染
+    仓库内 data/ai/cache。
     """
     state = state or ps.load_state()
     kind_key = "social_enrichment" if kind == "social" else "disease_enrichment"
@@ -90,6 +93,7 @@ def run_enrichment(kind, provider=None, state=None, ops_run=None, emit=lambda s:
     telemetry = {}
     processed = 0
     skipped = 0
+    cached = 0
     held = 0
     out = ENRICH_OUT
     out.mkdir(parents=True, exist_ok=True)
@@ -116,10 +120,12 @@ def run_enrichment(kind, provider=None, state=None, ops_run=None, emit=lambda s:
         if max_items and processed >= max_items:
             break
         label = ("S" if kind == "social" else "D") + "%s" % fid[-8:]
-        rec = mt.enrich_and_safe(prov, task_type, it, label, telemetry)
+        rec = mt.enrich_and_safe(prov, task_type, it, label, telemetry,
+                                 use_cache=use_cache)
         rec["event_id"] = fid if kind == "social" else None
         rec["disease_event_id"] = fid if kind != "social" else None
         rec["country_code"] = it.get("country_code") or it.get("country_iso3")
+        cache_hit = bool(rec.get("cache_hit"))
         # §十八 Public Admission：attribution gate PASS 才可进 Public
         safe = rec.get("safety") or {}
         eligible_public = rec.get("status") == "ok" and safe.get("gate") == "PASS"
@@ -127,7 +133,8 @@ def run_enrichment(kind, provider=None, state=None, ops_run=None, emit=lambda s:
             json.dumps(rec, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
         ps.mark_processed(state, kind_key, fid, {
             "status": rec.get("status"), "public_eligible": eligible_public,
-            "content_hash": ch})
+            "content_hash": ch, "ai_input_hash": rec.get("ai_input_hash"),
+            "cache_hit": cache_hit})
         if eligible_public and write_back:
             _write_back_canonical(kind, fid, {
                 "gate": safe.get("gate"),
@@ -139,20 +146,32 @@ def run_enrichment(kind, provider=None, state=None, ops_run=None, emit=lambda s:
             state["failed_held_records"].append({
                 "kind": kind, "record_id": fid, "status": rec.get("status"),
                 "reason": safe.get("gate") or rec.get("status")})
-        processed += 1
-        emit("[%s] %s status=%s public=%s" % (label, fid[-12:], rec.get("status"),
-                                              eligible_public))
+        if cache_hit:
+            cached += 1
+        else:
+            processed += 1
+        emit("[%s] %s status=%s public=%s cache_hit=%s" % (
+            label, fid[-12:], rec.get("status"), eligible_public, cache_hit))
     # AI usage 记账（§十七/§二十二）
     ps.add_ai_usage(state, kind_key, telemetry.get(task_type) or {})
     if ops_run is not None:
         ops_run["ai_attempted"] += processed
         ops_run["ai_succeeded"] += max(processed - held, 0)
         ops_run["ai_failed"] += held
-        ops_run["safety_checked"] += processed
+        ops_run["safety_checked"] += processed + cached
         ops_run["safety_held"] += held
-    emit("ENRICHMENT %s: processed=%d skipped=%d held=%d" % (
-        kind, processed, skipped, held))
-    return {"kind": kind, "processed": processed, "skipped": skipped, "held": held}
+    t = telemetry.get(task_type) or {}
+    emit("ENRICHMENT %s: processed=%d skipped=%d cached_same_input=%d held=%d "
+         "calls=%d tokens=%d" % (
+             kind, processed, skipped, cached, held,
+             t.get("calls", 0), t.get("total_tokens", 0)))
+    return {"kind": kind, "processed": processed, "skipped": skipped,
+            "cached_same_input": cached, "held": held,
+            "ai_calls": t.get("calls", 0),
+            "input_tokens": t.get("input_tokens", 0),
+            "output_tokens": t.get("output_tokens", 0),
+            "total_tokens": t.get("total_tokens", 0),
+            "telemetry": {task_type: t}}
 
 
 def main(argv=None):
@@ -172,8 +191,17 @@ def main(argv=None):
                     "total_tokens": 2, "finish_reason": "stop",
                     "thinking_requested": "disabled", "reasoning_tokens": None}}
         prov = FakeProv()
-    r = run_enrichment(args.kind, provider=prov, state=state, max_items=args.max_items)
+    # 生产 CLI 显式启用 AI 结果缓存（同输入不重复计费，Stage8D P0-2）
+    r = run_enrichment(args.kind, provider=prov, state=state,
+                       max_items=args.max_items, use_cache=True)
     ps.save_state(state)
+    # Stage8D P1-2：真实 AI 遥测落盘，供 orchestrator 汇总（此前 ops 记为 0）
+    try:
+        ps.OPS_DIR.mkdir(parents=True, exist_ok=True)
+        (ps.OPS_DIR / ("enrichment_summary_%s.json" % args.kind)).write_text(
+            json.dumps(r, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    except Exception:  # noqa: BLE001
+        pass
     print(json.dumps(r, ensure_ascii=False))
     return 0
 

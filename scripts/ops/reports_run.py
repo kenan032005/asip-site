@@ -47,22 +47,72 @@ def _derived_dir():
     return DERIVED_EVIDENCE
 
 
-def load_input(mode, source, country=None):
-    """加载 report input。derived→冻结 snapshot；canonical→当前 eligible facts。"""
+def load_input(mode, source, country=None, run_at=None):
+    """加载 report input。derived→冻结 snapshot；canonical→当前 eligible facts。
+
+    run_at：本次报告运行时刻（BJT）。canonical 模式下决定 report_date 与
+    fact 时间窗口（§九/§十）。
+    """
     if source == "derived":
         fname = {"daily": "africa_daily_report_input.json",
                  "tcd_weekly": "tcd_weekly_report_input.json",
                  "ssd_weekly": "ssd_weekly_report_input.json"}[mode]
         return json.loads((_derived_dir() / fname).read_text(encoding="utf-8"))
     # canonical：复用冻结的 trial input builder（committed canonical → report input）
-    inputs = mt.build_inputs()
+    inputs = mt.build_inputs(run_at=run_at)
     if mode == "daily":
         return inputs["daily_input"]
     return {"tcd_weekly": inputs["weekly_tcd_input"],
             "ssd_weekly": inputs["weekly_ssd_input"]}[mode]
 
 
-def generate_report(mode, input_obj, provider, telemetry, emit):
+def freshness_gates(report_obj, mode, run_at=None, enforce=True):
+    """§十二 报告新鲜度门控（Stage8D P0-4）。
+
+    REPORT_BUSINESS_DATE_GATE：report_date 必须等于本次运行的 BJT 业务日期
+      —— 不得沿用历史 report date / fixture date / development date。
+    DAILY_PERIOD_FRESHNESS_GATE：period_end 必须对应本次 Daily 运行
+      —— fixture/development period（如 2026-07-31→2026-08-01）不得进入 Production。
+    任一 FAIL → 报告 HOLD，且不得 Auto Deploy。
+
+    enforce=False：derived（冻结 trial input，shadow 验证路径）不做该门控，
+    记为 NOT_APPLICABLE —— 门控目标是"fixture 不得进入 Production"。
+    """
+    if mode != "daily" or not enforce:
+        return {"REPORT_BUSINESS_DATE_GATE": "NOT_APPLICABLE",
+                "DAILY_PERIOD_FRESHNESS_GATE": "NOT_APPLICABLE"}
+    from datetime import datetime, timedelta, timezone
+    bj = timezone(timedelta(hours=8))
+    now = run_at or datetime.now(bj)
+    if isinstance(now, str):
+        try:
+            now = datetime.fromisoformat(str(now).replace("Z", "+00:00"))
+        except Exception:  # noqa: BLE001
+            now = datetime.now(bj)
+    if now.tzinfo is None:
+        now = now.replace(tzinfo=bj)
+    now = now.astimezone(bj)
+    expected = now.date().isoformat()
+    rd = (report_obj or {}).get("report_date")
+    date_gate = "PASS" if rd == expected else "FAIL"
+    fresh = "FAIL"
+    try:
+        pe = datetime.fromisoformat(
+            str((report_obj or {}).get("period_end")).replace("Z", "+00:00"))
+        if pe.tzinfo is None:
+            pe = pe.replace(tzinfo=bj)
+        fresh = "PASS" if abs((now - pe.astimezone(bj)).total_seconds()) <= 6 * 3600 \
+            else "FAIL"
+    except Exception:  # noqa: BLE001
+        fresh = "FAIL"
+    return {"REPORT_BUSINESS_DATE_GATE": date_gate,
+            "DAILY_PERIOD_FRESHNESS_GATE": fresh,
+            "expected_report_date": expected,
+            "actual_report_date": rd}
+
+
+def generate_report(mode, input_obj, provider, telemetry, emit, run_at=None,
+                    source="derived"):
     """生成一份报告：Fact Pack → optional AI Analysis → Assembler → Gates。"""
     fp = build_fact_pack(input_obj)
     fh = pack_hash(fp)
@@ -85,6 +135,9 @@ def generate_report(mode, input_obj, provider, telemetry, emit):
     gates = da.machine_gates(report, fp,
                              None if analysis is None else ares,
                              final_schema=schema)
+    # §十二：新鲜度门控（仅 canonical 生产路径强制；derived 为冻结 trial 验证）
+    gates.update(freshness_gates(report, mode, run_at=run_at,
+                                 enforce=(source == "canonical")))
     return {"mode": mode, "fact_pack": fp, "fact_pack_hash": fh,
             "analysis": analysis, "analysis_result": ares,
             "report": report, "gates": gates}
@@ -101,6 +154,10 @@ def classify(report_res):
         return "HOLD"
     if g.get("FINAL_SCHEMA_GATE") != "PASS":
         return "HOLD"
+    # §十二：业务日期 / 周期新鲜度任一 FAIL → HOLD（fixture 报告不得进入 Production）
+    for gate in ("REPORT_BUSINESS_DATE_GATE", "DAILY_PERIOD_FRESHNESS_GATE"):
+        if g.get(gate) == "FAIL":
+            return "HOLD"
     ares = report_res["analysis_result"]
     if ares and ares.get("status") == "LOW_DATA_NO_AI":
         return "LOW_DATA"
@@ -110,7 +167,7 @@ def classify(report_res):
 
 
 def run(mode, source, provider=None, state=None, ops_run=None, out_dir=None,
-        emit=lambda s: print(s), allow_ai=True):
+        emit=lambda s: print(s), allow_ai=True, run_at=None):
     state = state or ps.load_state()
     out = Path(out_dir) if out_dir else REPORTS_OUT
     out.mkdir(parents=True, exist_ok=True)
@@ -120,8 +177,9 @@ def run(mode, source, provider=None, state=None, ops_run=None, out_dir=None,
     results = {}
     modes = [mode] if mode != "all" else ["daily", "tcd_weekly", "ssd_weekly"]
     for m in modes:
-        ri = load_input(m, source)
-        rr = generate_report(m, ri, prov, telemetry, emit)
+        ri = load_input(m, source, run_at=run_at)
+        rr = generate_report(m, ri, prov, telemetry, emit, run_at=run_at,
+                             source=source)
         results[m] = rr
         cls = classify(rr)
         if ops_run is not None:

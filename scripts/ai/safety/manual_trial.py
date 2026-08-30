@@ -53,8 +53,14 @@ MACHINE_GATE_ITEMS = (
 
 
 def _bj_now():
+    """当前北京时间 ISO（正确标注 +08:00）。
+
+    旧实现为 `utcnow + 8h` 后仍带 +00:00 后缀，导致自然 Daily 报告的
+    generated_at 被误标为 UTC（实际值是 BJT）。
+    """
     from datetime import datetime, timezone, timedelta
-    return (datetime.now(timezone.utc) + timedelta(hours=8)).isoformat()
+    return datetime.now(timezone.utc).astimezone(
+        timezone(timedelta(hours=8))).isoformat()
 
 
 def load_json(path, default=None):
@@ -72,8 +78,42 @@ def credential_ok():
 # §五 真实输入构造（committed canonical；eligibility + 窗口 + 去重）
 # ────────────────────────────────────────────────────────────────────────────
 
-def build_inputs():
+def _bj_business_date(dt):
+    """运行时刻 → BJT 业务日期字符串（naive datetime 视为 BJT）。
+
+    Stage8D P0-4：Africa Daily 运行在 BJT 20:00，报告业务日期必须是
+    **当前 BJT business date**，不得读取历史 report date / fixture date /
+    development date。
+    """
+    from datetime import datetime, timezone, timedelta
+    if dt is None:
+        dt = datetime.now(timezone.utc) + timedelta(hours=8)
+    if dt.tzinfo is not None:
+        dt = dt.astimezone(timezone(timedelta(hours=8))).replace(tzinfo=None)
+    return dt.date().isoformat()
+
+
+def _resolve_run_at(run_at=None):
+    """解析报告运行时刻 → naive datetime（语义为北京时间）。"""
+    from datetime import datetime, timezone, timedelta
+    if run_at is None:
+        return (datetime.now(timezone.utc) + timedelta(hours=8)).replace(tzinfo=None)
+    if isinstance(run_at, datetime):
+        return run_at.replace(tzinfo=None) if run_at.tzinfo else run_at
+    try:
+        d = datetime.fromisoformat(str(run_at).replace("Z", "+00:00"))
+    except Exception:
+        return (datetime.now(timezone.utc) + timedelta(hours=8)).replace(tzinfo=None)
+    if d.tzinfo is not None:
+        d = d.astimezone(timezone(timedelta(hours=8))).replace(tzinfo=None)
+    return d
+
+
+def build_inputs(run_at=None):
     """从 committed canonical 真实数据构造 trial 输入。
+
+    run_at：本次报告运行时刻（BJT，naive 或带 tz）。用于确定 report_date 与
+    fact 时间窗口（§九/§十）。None → 取当前 BJT 时间。
 
     返回 dict：
       cutoff / social_candidates[] / disease_candidates[] /
@@ -104,7 +144,7 @@ def build_inputs():
             seen_d.add(did)
             disease.append(d)
 
-    # cutoff：social 最新 event_time（fallback 现在）
+    # cutoff（数据派生统计，仅用于 stats 展示）
     def _sort_key(e, fld):
         return str(e.get(fld) or "")
     social_sorted = sorted(social, key=lambda e: _sort_key(e, "event_time"), reverse=True)
@@ -113,14 +153,19 @@ def build_inputs():
     latest_disease_dt = disease_sorted[0]["report_date"] if disease_sorted else None
     cutoff = latest_social_ts
 
+    # §九/§十：报告业务时刻 = 本次运行时刻（BJT）。report_date / period / fact
+    # 窗口全部以此为准；cutoff 为数据派生值，不得再用于 report_date 或 period。
+    run_dt = _resolve_run_at(run_at)
+
     # 时间窗口过滤（按 event_time；无时间戳的事件保留为候选——真实数据现状）
-    def in_window(ts, win_hours):
+    def in_window(ts, win_hours, ref=None):
         if not ts:
             return True  # 无时间戳：如实保留（low-data 场景由 stats 说明）
         try:
             from datetime import datetime
             t = datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
-            c = datetime.fromisoformat(str(cutoff).replace("Z", "+00:00"))
+            t = t.replace(tzinfo=None)
+            c = ref or run_dt
             delta = (c - t).total_seconds()
             return 0 <= delta <= win_hours * 3600 or delta < 0
         except Exception:
@@ -131,7 +176,7 @@ def build_inputs():
     daily_disease = [d for d in disease if in_window(d.get("report_date") and
                                                      d.get("report_date") + "T00:00:00Z", 24 * 7)]
     # daily disease 窗口放宽到 7 天（通报周期），stats 如实标注
-    daily = _build_daily_input(daily_social, daily_disease, cutoff)
+    daily = _build_daily_input(daily_social, daily_disease, run_dt)
 
     # ── TCD Weekly：7 天窗口（country_iso3=TCD）──
     tcd = [e for e in social if e.get("country_code") == "TD" and
@@ -139,7 +184,7 @@ def build_inputs():
     tcd_dis = [d for d in disease if d.get("country_iso3") == "TCD" and
                in_window(d.get("report_date") and d.get("report_date") + "T00:00:00Z",
                          24 * 7)]
-    weekly_tcd = _build_weekly_input("TCD", tcd, tcd_dis, cutoff)
+    weekly_tcd = _build_weekly_input("TCD", tcd, tcd_dis, run_dt)
 
     # ── SSD Weekly：7 天窗口（country_iso3=SSD，canonical 无事件 → low-data）──
     ssd = [e for e in social if e.get("country_code") == "SS" and
@@ -147,7 +192,7 @@ def build_inputs():
     ssd_dis = [d for d in disease if d.get("country_iso3") == "SSD" and
                in_window(d.get("report_date") and d.get("report_date") + "T00:00:00Z",
                          24 * 7)]
-    weekly_ssd = _build_weekly_input("SSD", ssd, ssd_dis, cutoff)
+    weekly_ssd = _build_weekly_input("SSD", ssd, ssd_dis, run_dt)
 
     stats = {
         "cutoff": cutoff,
@@ -234,23 +279,29 @@ def _fact_item(e, kind):
 
 
 def _build_daily_input(social, disease, cutoff):
-    """Africa Daily report input（§五：真实事件，sections 契约冻结）。"""
+    """Africa Daily report input（§五：真实事件，sections 契约冻结）。
+
+    Stage8D P0-4：cutoff 为本次运行时刻（BJT，naive）。report_date 与 period
+    由此动态推导 —— 不再使用任何 fixture / development 日期或周期。
+    """
     from datetime import datetime, timedelta
     try:
         c = datetime.fromisoformat(str(cutoff).replace("Z", "+00:00"))
+        c = c.replace(tzinfo=None) if c.tzinfo else c
     except Exception:
-        c = datetime.utcnow()
+        c = _resolve_run_at(None)
     ps = (c - timedelta(hours=24)).isoformat()
     pe = c.isoformat()
+    bdate = _bj_business_date(c)
     major = [_fact_item(e, "social") for e in social]
     dis_items = [_fact_item(d, "disease") for d in disease]
     return {
-        "report_id": "DAILY_MANUAL_TRIAL_20260827",
+        "report_id": "DAILY_%s" % bdate.replace("-", ""),
         "report_type": "africa_daily",
-        "report_name": "非洲地区社会安全与综合形势日报（人工验收试运行）",
-        "report_date": "2026-08-27",
-        "cutoff": cutoff,
-        "previous_cutoff": None,
+        "report_name": "非洲地区社会安全与综合形势日报",
+        "report_date": bdate,
+        "cutoff": pe,
+        "previous_cutoff": ps,
         "previous_report_id": None,
         "generated_at": _bj_now(),
         "period_start": ps,
@@ -284,7 +335,7 @@ def _build_weekly_input(country, social, disease, cutoff):
     items = [_fact_item(e, "social") for e in social] + \
             [_fact_item(d, "disease") for d in disease]
     return {
-        "report_id": "WEEKLY_%s_MANUAL_TRIAL_2026-08-27" % country,
+        "report_id": "WEEKLY_%s_%s" % (country, we.replace("-", "")),
         "report_type": "country_weekly",
         "country_iso3": country,
         "week_start": ws,
@@ -343,13 +394,33 @@ def _strict_json_parse(text):
         return False, None, "not_json:%s" % str(e)[:60]
 
 
-def enrich_and_safe(prov, task_type, payload, label, telemetry):
-    """单条 fact：Flash enrichment → Safety Layer → gate。返回 record dict。"""
+def enrich_and_safe(prov, task_type, payload, label, telemetry, use_cache=True):
+    """单条 fact：Flash enrichment → Safety Layer → gate。返回 record dict。
+
+    Stage8D P0-2：接入 scripts/ai/ai_result_cache —— 同一 ai_input_hash
+    （fact payload + schema/prompt version + model，剔除 run_id/时间戳等易变字段）
+    命中已成功缓存时直接复用 provider 结果，**不调用 API、不计费**。
+    """
     sys_text, pv = _enrich_prompt(task_type)
+    model = "deepseek-v4-flash"
+    out_schema_version = "1.1"
+    ai_hash, cache_key = None, None
+    if use_cache:
+        try:
+            from scripts.ai import ai_input_identity as ident
+            ai_hash = ident.ai_input_hash(
+                payload, task_type=task_type, model=model, prompt_version=pv,
+                output_schema_version=out_schema_version)
+            cache_key = ident.build_cache_key(ai_hash, task_type, model)
+        except Exception:  # noqa: BLE001 — 身份计算失败退化为不缓存（安全侧：宁可重算）
+            ai_hash, cache_key = None, None
     task = {
         "task_id": "TRIAL_ENRICH_%s" % label,
         "task_type": task_type,
         "prompt_version": pv,
+        "output_schema_version": out_schema_version,
+        "content_hash": ai_hash or "",
+        "cache_key": cache_key or "",
         "system_text": sys_text,
         "user_text": "INPUT:\n" + json.dumps(payload, ensure_ascii=False)[:6000],
         "usage_purpose": "development_report_trial",
@@ -357,26 +428,82 @@ def enrich_and_safe(prov, task_type, payload, label, telemetry):
     }
     t = telemetry.setdefault(task_type, {"calls": 0, "input_tokens": 0,
                                          "output_tokens": 0, "total_tokens": 0,
-                                         "finish_reasons": [], "thinking": []})
-    res = prov.submit_task(task)
-    t["calls"] += 1
-    rr = res.get("result") or {}
-    t["input_tokens"] += rr.get("input_tokens") or 0
-    t["output_tokens"] += rr.get("output_tokens") or 0
-    t["total_tokens"] += rr.get("total_tokens") or 0
-    t["finish_reasons"].append(rr.get("finish_reason"))
-    t["thinking"].append(rr.get("thinking_requested"))
+                                         "finish_reasons": [], "thinking": [],
+                                         "cache_hits": 0, "cache_misses": 0,
+                                         "skipped_same_input": 0})
+    t.setdefault("cache_hits", 0)
+    t.setdefault("cache_misses", 0)
+    t.setdefault("skipped_same_input", 0)
 
+    res, cache_hit = None, False
+    if cache_key:
+        try:
+            from scripts.ai import ai_result_cache
+            entry = ai_result_cache.get_cache_entry(cache_key)
+            # 显式身份交叉校验（等价 check_cache_hit 的 identity 部分）：
+            # 注：check_cache_hit 额外做 business output 契约校验，而
+            # stage4_event_enrichment / disease_summary 未注册 prompt package，
+            # 该项恒失败；故此处逐项比对身份字段，任一项变化即失效重算。
+            if isinstance(entry, dict) and isinstance(entry.get("result"), dict):
+                same = (
+                    entry.get("task_type") == task.get("task_type")
+                    and entry.get("prompt_version") == task.get("prompt_version")
+                    and entry.get("output_schema_version") == task.get(
+                        "output_schema_version")
+                    and entry.get("content_hash") == task.get("content_hash")
+                    and (entry.get("result") or {}).get("status") is not None
+                )
+                if same:
+                    # 缓存条目中 result 存的是完整 provider 响应
+                    res = entry["result"]
+                    cache_hit = True
+                    t["cache_hits"] += 1
+                    t["skipped_same_input"] += 1
+        except Exception:  # noqa: BLE001 — 缓存不可用时退化为真实调用
+            res = None
+
+    if res is None:
+        res = prov.submit_task(task)
+        t["calls"] += 1
+        t["cache_misses"] += 1
+        rr0 = res.get("result") or {}
+        t["input_tokens"] += rr0.get("input_tokens") or 0
+        t["output_tokens"] += rr0.get("output_tokens") or 0
+        t["total_tokens"] += rr0.get("total_tokens") or 0
+        t["finish_reasons"].append(rr0.get("finish_reason"))
+        t["thinking"].append(rr0.get("thinking_requested"))
+        if cache_key and res.get("status") == "succeeded":
+            try:
+                import hashlib as _hl
+                from scripts.ai import ai_result_cache
+                ai_result_cache.write_cache_entry(task, res, {
+                    "prompt_checksum": _hl.sha256(
+                        sys_text.encode("utf-8")).hexdigest(),
+                    "render_hash": _hl.sha256(
+                        (task["user_text"] or "").encode("utf-8")).hexdigest(),
+                    "prompt_variables_digest": ai_hash or "",
+                    "source": "manual_trial.enrich_and_safe",
+                }, _bj_now())
+            except Exception:  # noqa: BLE001 — 写缓存失败不影响主流程
+                pass
+    elif cache_hit:
+        # 复用缓存：不重复计费，仅记录 finish_reason 用于审计
+        t["finish_reasons"].append((res.get("result") or {}).get("finish_reason"))
+        t["thinking"].append((res.get("result") or {}).get("thinking_requested"))
+
+    rr = res.get("result") or {}
     rec = {"label": label, "task_type": task_type,
-           "requested_model": "deepseek-v4-flash",
+           "requested_model": model,
            "returned_model": rr.get("returned_model"),
            "provider_status": res.get("status"),
            "finish_reason": rr.get("finish_reason"),
            "thinking_requested": rr.get("thinking_requested"),
            "reasoning_tokens": rr.get("reasoning_tokens"),
-           "tokens": {"input_tokens": rr.get("input_tokens"),
-                      "output_tokens": rr.get("output_tokens"),
-                      "total_tokens": rr.get("total_tokens")}}
+           "cache_hit": cache_hit,
+           "ai_input_hash": ai_hash,
+           "tokens": {"input_tokens": rr.get("input_tokens") if not cache_hit else 0,
+                      "output_tokens": rr.get("output_tokens") if not cache_hit else 0,
+                      "total_tokens": rr.get("total_tokens") if not cache_hit else 0}}
     if res.get("status") != "succeeded":
         rec["status"] = "provider_failed"
         rec["error"] = ((rr.get("error") or {}).get("code") or "unknown")
