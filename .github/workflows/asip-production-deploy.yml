@@ -6,6 +6,11 @@ name: ASIP Production Deploy
 # 否则执行 manual shadow build（build_site + dist validation），不部署。
 # gh-pages 不改 production root；正式 automatic deployment 保持 false 直到 Stage8D。
 
+# §三/§十三 Deploy Provenance：本 workflow 的触发事件恒为 workflow_dispatch，
+# 因此**不能**用 event 判断"是否人工"。真正判据是调用方传入的 provenance：
+#   trigger_source=github_native_schedule | external_scheduler  → automation
+#   root_orchestrator_run_id 非空                              → 由编排器自动派发
+# 人工发起时这些字段为空 → 记录为 human_manual_dispatch。
 on:
   workflow_dispatch:
     inputs:
@@ -14,6 +19,31 @@ on:
         required: false
         type: boolean
         default: true
+      root_orchestrator_run_id:
+        description: "来源 orchestrator run id（由自动派发填入，人工留空）"
+        required: false
+        type: string
+        default: ""
+      trigger_source:
+        description: "来源触发：github_native_schedule / external_scheduler（自动派发填入）"
+        required: false
+        type: string
+        default: ""
+      trigger_type:
+        description: "automation / human（自动派发填入）"
+        required: false
+        type: string
+        default: ""
+      report_date:
+        description: "触发本次部署的报告业务日期"
+        required: false
+        type: string
+        default: ""
+      report_classification:
+        description: "触发本次部署的报告分类（FULL/FALLBACK/LOW_DATA）"
+        required: false
+        type: string
+        default: ""
 
 concurrency:
   group: asip-prod-deploy
@@ -34,7 +64,7 @@ jobs:
       - name: Checkout production code
         uses: actions/checkout@v4
         with:
-          ref: 295276980e85831428b57923a7020b3c84ff2c91
+          ref: 84a80064348ae5993fbb214870b8fd60062f2801
           fetch-depth: 1
 
       - name: Checkout production state branch（数据快照）
@@ -61,6 +91,28 @@ jobs:
           cp -f state_src/data/events.json state_src/data/pending_events.json \
             state_src/data/raw_candidates.json state_src/data/quarantine_events.json data/ 2>/dev/null || true
           cp -rf state_src/data/public/. data/public/ 2>/dev/null || true
+
+      - name: Deploy provenance（§三/§十三）
+        id: prov
+        run: |
+          SRC="${{ github.event.inputs.trigger_source }}"
+          TYPE="${{ github.event.inputs.trigger_type }}"
+          ROOT="${{ github.event.inputs.root_orchestrator_run_id }}"
+          if [ -n "$ROOT" ] && { [ "$SRC" = "github_native_schedule" ] || [ "$SRC" = "external_scheduler" ]; }; then
+            PROV="scheduled_orchestrator_auto_dispatch"
+            AUTO="true"; HUMAN="false"
+          else
+            PROV="human_manual_dispatch"
+            AUTO="false"; HUMAN="true"
+          fi
+          echo "DEPLOY_TRIGGER_PROVENANCE = $PROV"
+          echo "DEPLOY_ACTOR = ${{ github.actor }}"
+          echo "DEPLOY_ROOT_ORCHESTRATOR_RUN_ID = ${ROOT:-none}"
+          echo "DEPLOY_REPORT_DATE = ${{ github.event.inputs.report_date }}"
+          echo "DEPLOY_REPORT_CLASSIFICATION = ${{ github.event.inputs.report_classification }}"
+          echo "provenance=$PROV" >> "$GITHUB_OUTPUT"
+          echo "automation=$AUTO" >> "$GITHUB_OUTPUT"
+          echo "human=$HUMAN" >> "$GITHUB_OUTPUT"
 
       - name: Build site（§十九）
         run: python scripts/build_site.py

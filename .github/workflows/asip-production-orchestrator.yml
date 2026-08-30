@@ -19,6 +19,10 @@ name: ASIP Production Orchestrator
 # 但 trigger=manual_canary；deploy 以 shadow_only=true 仅做 build/validate/secret scan，
 # 不发布 gh-pages）。
 
+# §十六/§十七：GITHUB_NATIVE_SCHEDULE_PRIMARY = REJECTED（实测 24 tick 仅 6 命中、
+# max_gap=361min）。保留每小时 cron 作为 **secondary wake-up**；主唤醒改为外部
+# 调度器经 repository_dispatch 调用（type=external_scheduler_wakeup），由 workflow
+# 校验 trigger_source=external_scheduler 后才认定为 automation。
 on:
   workflow_dispatch:
     inputs:
@@ -27,6 +31,8 @@ on:
         required: false
         type: boolean
         default: false
+  repository_dispatch:
+    types: [external_scheduler_wakeup]
   schedule:
     - cron: '0 * * * *'
 
@@ -52,7 +58,7 @@ jobs:
       - name: Checkout release code
         uses: actions/checkout@v4
         with:
-          ref: 295276980e85831428b57923a7020b3c84ff2c91
+          ref: 84a80064348ae5993fbb214870b8fd60062f2801
           fetch-depth: 1
 
       - name: Checkout production state branch
@@ -83,17 +89,37 @@ jobs:
           print("schedule_enabled = " + os.environ.get("PRODUCTION_SCHEDULE_ENABLED", "true"))
           PY
 
+      - name: Guard unverified external trigger（§十七 fail-closed）
+        if: github.event_name == 'repository_dispatch' && github.event.client_payload.trigger_source != 'external_scheduler'
+        run: |
+          echo "::error::repository_dispatch 未声明 trigger_source=external_scheduler；不得冒充 automation"
+          exit 1
+
       - name: Run due-task orchestrator（production mode）
         id: orch
         env:
           CANARY: ${{ github.event.inputs.canary }}
+          # §三/§十七：触发来源上下文（不含任何凭据）
+          ASIP_CLIENT_PAYLOAD: ${{ toJSON(github.event.client_payload) }}
         run: |
           FLAGS="--run --json"
           [ "$CANARY" = "true" ] && FLAGS="$FLAGS --canary"
           python scripts/ops/schedule_orchestrator.py $FLAGS > /tmp/orch.json 2> /tmp/orch.err || {
             echo "ORCHESTRATOR_EXIT=$?"; tail -50 /tmp/orch.err; exit 1; }
           cat /tmp/orch.json
-          echo "deploy_required=$(python -c "import json;print(str(json.load(open('/tmp/orch.json'))['deploy_required']).lower())")" >> "$GITHUB_OUTPUT"
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          d = json.load(open('/tmp/orch.json'))
+          dr = d.get('deploy_request') or {}
+          print("deploy_required=" + str(d.get('deploy_required', False)).lower())
+          print("deploy_trigger_source=" + str(dr.get('trigger_source') or ''))
+          print("deploy_trigger_type=" + str(dr.get('trigger_type') or ''))
+          print("deploy_automation=" + str(bool(dr.get('automation'))).lower())
+          print("deploy_human=" + str(bool(dr.get('human'))).lower())
+          print("deploy_report_date=" + str(dr.get('report_date') or ''))
+          print("deploy_report_classification=" + str(dr.get('report_classification') or ''))
+          print("deploy_root_orchestrator_run_id=" + str(dr.get('root_orchestrator_run_id') or ''))
+          PY
 
       - name: Commit state → production-state branch
         run: |
@@ -115,18 +141,40 @@ jobs:
           git push origin production-state
           cd ..
 
-      - name: Auto deploy（daily report 生成后；canary 仅 shadow build/validate）
+      - name: Auto deploy（publishable report 后自动派发；canary 仅 shadow build/validate）
         if: vars.AUTO_DEPLOY_ENABLED == 'true' && steps.orch.outputs.deploy_required == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CANARY: ${{ github.event.inputs.canary }}
+          # §三 Deploy Provenance：证明该 deploy 源自 scheduled/external automation
+          DEPLOY_ROOT_RUN_ID: ${{ steps.orch.outputs.deploy_root_orchestrator_run_id }}
+          DEPLOY_TRIGGER_SOURCE: ${{ steps.orch.outputs.deploy_trigger_source }}
+          DEPLOY_TRIGGER_TYPE: ${{ steps.orch.outputs.deploy_trigger_type }}
+          DEPLOY_REPORT_DATE: ${{ steps.orch.outputs.deploy_report_date }}
+          DEPLOY_REPORT_CLASS: ${{ steps.orch.outputs.deploy_report_classification }}
         run: |
           SHADOW="true"
           [ "$CANARY" != "true" ] && SHADOW="false"
+          python - <<'PY' > /tmp/deploy_payload.json
+          import json, os
+          payload = {
+            "ref": "main",
+            "inputs": {
+              "shadow_only": os.environ.get("SHADOW", "true"),
+              "root_orchestrator_run_id": os.environ.get("DEPLOY_ROOT_RUN_ID", ""),
+              "trigger_source": os.environ.get("DEPLOY_TRIGGER_SOURCE", ""),
+              "trigger_type": os.environ.get("DEPLOY_TRIGGER_TYPE", ""),
+              "report_date": os.environ.get("DEPLOY_REPORT_DATE", ""),
+              "report_classification": os.environ.get("DEPLOY_REPORT_CLASS", ""),
+            },
+          }
+          print(json.dumps(payload))
+          PY
+          echo "DEPLOY_PROVENANCE = $(cat /tmp/deploy_payload.json)"
           curl -s -X POST -H "Authorization: Bearer $GH_TOKEN" \
             -H "Accept: application/vnd.github+json" \
             https://api.github.com/repos/kenan032005/asip-site/actions/workflows/asip-production-deploy.yml/dispatches \
-            -d "{\"ref\":\"main\",\"inputs\":{\"shadow_only\":\"$SHADOW\"}}" \
+            -d @/tmp/deploy_payload.json \
             -o /dev/null -w "AUTO_DEPLOY_TRIGGER_HTTP=%{http_code}\n"
 
       - name: Upload ops artifacts
