@@ -9,34 +9,24 @@
  "reasoning_tokens": null,
  "tokens": {
   "input_tokens": 2316,
-  "output_tokens": 491,
-  "total_tokens": 2807
+  "output_tokens": 474,
+  "total_tokens": 2790
  },
  "schema_pass": true,
  "status": "ok",
  "safety": {
   "gate": "PASS",
-  "pre_status": "FAIL",
-  "corrections": [
-   {
-    "fact_id": "independent_source_count",
-    "marker": "single_source",
-    "field": "uncertainties",
-    "before": "[\"伤亡情况未公布\", \"兵变者身份及诉求未明确\", \"当地观察人士称此为“未遂政变”，但当局未正式确认\"]",
-    "after": "[\"伤亡情况未公布\", \"兵变者身份及诉求未明确\", \"当地观察人士称此为“未遂政变”，但当局未正式确认\", \"据Aïr Info报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
-    "rule_id": "SAFETY-CORR-D1",
-    "numeric_anchor": null
-   }
-  ],
-  "post_status": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
   "publication_eligible": true,
   "report_input_eligible": true,
   "manual_review_required": false,
   "original_ai_output": {
    "source_language": "fr",
    "title_zh": "尼亚美发生兵变：政府称已控制局势",
-   "summary_zh": "尼日尔政府周六表示，已控制住一起军人“情绪波动”事件。此前，首都尼亚美在周五至周六夜间数小时内响起轻重武器枪声。据国家电视台宣读的声明，一群“违反军纪”的士兵在101基地军营内扣押多名战友，随后对尼亚美敏感地点开枪。当局尚未公布伤亡数字，也未说明兵变者身份或诉求，并呼吁民众保持冷静。",
-   "event_type": "other_security",
+   "summary_zh": "尼日尔政府周六表示，已控制住一起军人“情绪波动”事件。此前，首都尼亚美在周五至周六夜间数小时内传出轻重武器枪声。据国家电视台宣读的声明，一群“违反军纪”的士兵在101基地军营内扣押了多名战友，随后向尼亚美敏感地点开枪。国防部长萨利富·莫迪将军称，国防与安全部队的“迅速反应”已逐步夺回目标阵地。当局尚未公布伤亡数字，也未说明兵变者身份及诉求，并呼吁民众保持冷静。",
+   "event_type": "political_instability",
    "country_iso3": "NER",
    "location": {
     "country_iso3": "NER",
@@ -47,30 +37,26 @@
    },
    "key_facts": [
     {
-     "fact": "尼日尔政府称已控制军人兵变事件",
-     "evidence_field": "body_extracted",
-     "evidence_excerpt": "Le gouvernement nigérien a affirmé samedi avoir circonscrit un « mouvement d’humeur » de militaires"
+     "fact": "尼日尔政府称已控制尼亚美兵变局势",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Mutinerie à Niamey : le gouvernement assure avoir circonscrit le mouvement"
     },
     {
-     "fact": "尼亚美夜间响起轻重武器枪声",
-     "evidence_field": "body_extracted",
-     "evidence_excerpt": "des tirs d’armes lourdes et légères qui ont secoué la capitale pendant plusieurs heures dans la nuit de vendredi à samedi"
-    },
-    {
-     "fact": "士兵在101基地扣押战友后对敏感地点开枪",
+     "fact": "兵变士兵在101基地军营扣押战友后向敏感地点开枪",
      "evidence_field": "body_extracted",
      "evidence_excerpt": "un groupe de soldats « en rupture avec le règlement militaire » a d’abord séquestré plusieurs de leurs camarades au sein de la caserne de la base 101, avant d’entreprendre des tirs sur des sites sensibles de Niamey"
     },
     {
-     "fact": "当局未公布伤亡数字及兵变者身份",
+     "fact": "当局未公布伤亡数字及兵变者身份和诉求",
      "evidence_field": "body_extracted",
      "evidence_excerpt": "Les autorités n’ont, dans l’immédiat, fourni aucun bilan humain ni précisé l’identité des mutins ou la nature de leurs éventuelles revendications"
     }
    ],
    "uncertainties": [
-    "伤亡情况未公布",
+    "伤亡情况尚未公布",
     "兵变者身份及诉求未明确",
-    "当地观察人士称此为“未遂政变”，但当局未正式确认"
+    "当地观察人士称此为“未遂政变”，但当局未正式采用此说法",
+    "事件为单一来源报道，尚缺乏交叉验证"
    ],
    "security_relevance": "direct",
    "classification_confidence": 85
@@ -78,8 +64,8 @@
   "corrected_output": {
    "source_language": "fr",
    "title_zh": "尼亚美发生兵变：政府称已控制局势",
-   "summary_zh": "尼日尔政府周六表示，已控制住一起军人“情绪波动”事件。此前，首都尼亚美在周五至周六夜间数小时内响起轻重武器枪声。据国家电视台宣读的声明，一群“违反军纪”的士兵在101基地军营内扣押多名战友，随后对尼亚美敏感地点开枪。当局尚未公布伤亡数字，也未说明兵变者身份或诉求，并呼吁民众保持冷静。",
-   "event_type": "other_security",
+   "summary_zh": "尼日尔政府周六表示，已控制住一起军人“情绪波动”事件。此前，首都尼亚美在周五至周六夜间数小时内传出轻重武器枪声。据国家电视台宣读的声明，一群“违反军纪”的士兵在101基地军营内扣押了多名战友，随后向尼亚美敏感地点开枪。国防部长萨利富·莫迪将军称，国防与安全部队的“迅速反应”已逐步夺回目标阵地。当局尚未公布伤亡数字，也未说明兵变者身份及诉求，并呼吁民众保持冷静。",
+   "event_type": "political_instability",
    "country_iso3": "NER",
    "location": {
     "country_iso3": "NER",
@@ -90,31 +76,26 @@
    },
    "key_facts": [
     {
-     "fact": "尼日尔政府称已控制军人兵变事件",
-     "evidence_field": "body_extracted",
-     "evidence_excerpt": "Le gouvernement nigérien a affirmé samedi avoir circonscrit un « mouvement d’humeur » de militaires"
+     "fact": "尼日尔政府称已控制尼亚美兵变局势",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Mutinerie à Niamey : le gouvernement assure avoir circonscrit le mouvement"
     },
     {
-     "fact": "尼亚美夜间响起轻重武器枪声",
-     "evidence_field": "body_extracted",
-     "evidence_excerpt": "des tirs d’armes lourdes et légères qui ont secoué la capitale pendant plusieurs heures dans la nuit de vendredi à samedi"
-    },
-    {
-     "fact": "士兵在101基地扣押战友后对敏感地点开枪",
+     "fact": "兵变士兵在101基地军营扣押战友后向敏感地点开枪",
      "evidence_field": "body_extracted",
      "evidence_excerpt": "un groupe de soldats « en rupture avec le règlement militaire » a d’abord séquestré plusieurs de leurs camarades au sein de la caserne de la base 101, avant d’entreprendre des tirs sur des sites sensibles de Niamey"
     },
     {
-     "fact": "当局未公布伤亡数字及兵变者身份",
+     "fact": "当局未公布伤亡数字及兵变者身份和诉求",
      "evidence_field": "body_extracted",
      "evidence_excerpt": "Les autorités n’ont, dans l’immédiat, fourni aucun bilan humain ni précisé l’identité des mutins ou la nature de leurs éventuelles revendications"
     }
    ],
    "uncertainties": [
-    "伤亡情况未公布",
+    "伤亡情况尚未公布",
     "兵变者身份及诉求未明确",
-    "当地观察人士称此为“未遂政变”，但当局未正式确认",
-    "据Aïr Info报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+    "当地观察人士称此为“未遂政变”，但当局未正式采用此说法",
+    "事件为单一来源报道，尚缺乏交叉验证"
    ],
    "security_relevance": "direct",
    "classification_confidence": 85

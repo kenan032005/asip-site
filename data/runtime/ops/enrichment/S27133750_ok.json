@@ -9,8 +9,8 @@
  "reasoning_tokens": null,
  "tokens": {
   "input_tokens": 2892,
-  "output_tokens": 526,
-  "total_tokens": 3418
+  "output_tokens": 439,
+  "total_tokens": 3331
  },
  "schema_pass": true,
  "status": "ok",
@@ -22,8 +22,8 @@
     "fact_id": "independent_source_count",
     "marker": "single_source",
     "field": "uncertainties",
-    "before": "[\"边境开放的具体时间尚未确定\", \"尼日尔对法国在贝宁边境存在的指控未获证实\", \"贝宁与法国军事协议对谈判的实际影响尚不明确\"]",
-    "after": "[\"边境开放的具体时间尚未确定\", \"尼日尔对法国在贝宁边境存在的指控未获证实\", \"贝宁与法国军事协议对谈判的实际影响尚不明确\", \"据Niger Inter报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "before": "[\"边境重开时间尚未确定\", \"尼日尔指控法国武装恐怖分子，但未获证实\"]",
+    "after": "[\"边境重开时间尚未确定\", \"尼日尔指控法国武装恐怖分子，但未获证实\", \"据Niger Inter报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
     "rule_id": "SAFETY-CORR-D1",
     "numeric_anchor": null
    }
@@ -35,7 +35,7 @@
   "original_ai_output": {
    "source_language": "fr",
    "title_zh": "尼日尔与贝宁边境：通道仍布满障碍",
-   "summary_zh": "贝宁新总统罗穆阿尔德·瓦达尼上任后，首要议题之一是重新开放与尼日尔的边境，该边境在2023年7月26日政变后关闭。尽管双方成立了评估委员会并进行了高层会谈，但尼日尔提出签署防务与安全协议及建立反恐情报融合小组等先决条件，且近期贝宁与法国签署军事装备协议，可能影响边境开放进程。目前边境开放前景仍不明朗。",
+   "summary_zh": "贝宁新总统罗穆阿尔德·瓦达尼上任后，首要事务之一是重开与尼日尔的边境，该边境在2023年7月26日政变后关闭。瓦达尼6月初访问尼亚美，双方成立评估委员会，但尼日尔提出先决条件，包括签署防务与安全协议及建立反恐情报融合小组。贝宁近期与法国签署军事装备协议，可能影响边境重开进程。",
    "event_type": "political_instability",
    "country_iso3": "NER",
    "location": {
@@ -47,25 +47,24 @@
    },
    "key_facts": [
     {
-     "fact": "尼日尔与贝宁边境自2023年政变后关闭，新总统瓦达尼寻求重新开放",
+     "fact": "尼日尔与贝宁边境自2023年政变后关闭，新总统瓦达尼推动重开",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Depuis son arrivée au pouvoir, l’un des tous premiers dossiers chauds du nouveau président béninois Romuald Wadagni est bien entendu celui de l’ouverture de la frontière avec le Niger, fermée au lendemain de la crise entre les deux pays, survenue après le coup d’État du 26 juillet 2023."
+     "evidence_excerpt": "l’ouverture de la frontière avec le Niger, fermée au lendemain de la crise entre les deux pays, survenue après le coup d’État du 26 juillet 2023"
     },
     {
-     "fact": "尼日尔提出签署防务与安全协议及建立反恐情报融合小组作为开放边境的先决条件",
+     "fact": "尼日尔提出先决条件，包括防务安全协议和反恐情报融合",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Il s’agit d’abord de la signature d’un accord de défense et un accord de sécurité entre le Niger et le Bénin et un deuxième préalable, la création d’une cellule bilatérale de fusion du renseignement contre le terrorisme."
+     "evidence_excerpt": "la signature d’un accord de défense et un accord de sécurité entre le Niger et le Bénin et un deuxième préalable, la création d’une cellule bilatérale de fusion du renseignement contre le terrorisme"
     },
     {
-     "fact": "贝宁与法国签署军事装备协议，可能影响边境谈判",
+     "fact": "贝宁与法国签署军事装备协议，可能影响谈判",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "les choses se sont vite précipitées il y a quelques jours seulement avec la signature par le Bénin, d’un important accord avec la France à travers la fourniture de matériels et équipements militaires."
+     "evidence_excerpt": "la signature par le Bénin, d’un important accord avec la France à travers la fourniture de matériels et équipements militaires"
     }
    ],
    "uncertainties": [
-    "边境开放的具体时间尚未确定",
-    "尼日尔对法国在贝宁边境存在的指控未获证实",
-    "贝宁与法国军事协议对谈判的实际影响尚不明确"
+    "边境重开时间尚未确定",
+    "尼日尔指控法国武装恐怖分子，但未获证实"
    ],
    "security_relevance": "direct",
    "classification_confidence": 75
@@ -73,7 +72,7 @@
   "corrected_output": {
    "source_language": "fr",
    "title_zh": "尼日尔与贝宁边境：通道仍布满障碍",
-   "summary_zh": "贝宁新总统罗穆阿尔德·瓦达尼上任后，首要议题之一是重新开放与尼日尔的边境，该边境在2023年7月26日政变后关闭。尽管双方成立了评估委员会并进行了高层会谈，但尼日尔提出签署防务与安全协议及建立反恐情报融合小组等先决条件，且近期贝宁与法国签署军事装备协议，可能影响边境开放进程。目前边境开放前景仍不明朗。",
+   "summary_zh": "贝宁新总统罗穆阿尔德·瓦达尼上任后，首要事务之一是重开与尼日尔的边境，该边境在2023年7月26日政变后关闭。瓦达尼6月初访问尼亚美，双方成立评估委员会，但尼日尔提出先决条件，包括签署防务与安全协议及建立反恐情报融合小组。贝宁近期与法国签署军事装备协议，可能影响边境重开进程。",
    "event_type": "political_instability",
    "country_iso3": "NER",
    "location": {
@@ -85,25 +84,24 @@
    },
    "key_facts": [
     {
-     "fact": "尼日尔与贝宁边境自2023年政变后关闭，新总统瓦达尼寻求重新开放",
+     "fact": "尼日尔与贝宁边境自2023年政变后关闭，新总统瓦达尼推动重开",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Depuis son arrivée au pouvoir, l’un des tous premiers dossiers chauds du nouveau président béninois Romuald Wadagni est bien entendu celui de l’ouverture de la frontière avec le Niger, fermée au lendemain de la crise entre les deux pays, survenue après le coup d’État du 26 juillet 2023."
+     "evidence_excerpt": "l’ouverture de la frontière avec le Niger, fermée au lendemain de la crise entre les deux pays, survenue après le coup d’État du 26 juillet 2023"
     },
     {
-     "fact": "尼日尔提出签署防务与安全协议及建立反恐情报融合小组作为开放边境的先决条件",
+     "fact": "尼日尔提出先决条件，包括防务安全协议和反恐情报融合",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Il s’agit d’abord de la signature d’un accord de défense et un accord de sécurité entre le Niger et le Bénin et un deuxième préalable, la création d’une cellule bilatérale de fusion du renseignement contre le terrorisme."
+     "evidence_excerpt": "la signature d’un accord de défense et un accord de sécurité entre le Niger et le Bénin et un deuxième préalable, la création d’une cellule bilatérale de fusion du renseignement contre le terrorisme"
     },
     {
-     "fact": "贝宁与法国签署军事装备协议，可能影响边境谈判",
+     "fact": "贝宁与法国签署军事装备协议，可能影响谈判",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "les choses se sont vite précipitées il y a quelques jours seulement avec la signature par le Bénin, d’un important accord avec la France à travers la fourniture de matériels et équipements militaires."
+     "evidence_excerpt": "la signature par le Bénin, d’un important accord avec la France à travers la fourniture de matériels et équipements militaires"
     }
    ],
    "uncertainties": [
-    "边境开放的具体时间尚未确定",
-    "尼日尔对法国在贝宁边境存在的指控未获证实",
-    "贝宁与法国军事协议对谈判的实际影响尚不明确",
+    "边境重开时间尚未确定",
+    "尼日尔指控法国武装恐怖分子，但未获证实",
     "据Niger Inter报道，目前仅获单一来源支持，尚缺乏交叉验证。"
    ],
    "security_relevance": "direct",

@@ -9,57 +9,62 @@
  "reasoning_tokens": null,
  "tokens": {
   "input_tokens": 2795,
-  "output_tokens": 514,
-  "total_tokens": 3309
+  "output_tokens": 403,
+  "total_tokens": 3198
  },
  "schema_pass": true,
  "status": "ok",
  "safety": {
   "gate": "PASS",
-  "pre_status": "PASS",
-  "corrections": [],
-  "post_status": null,
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"冲突的具体细节和伤亡情况尚未报道\", \"土地冲突的解决结果尚未确定\"]",
+    "after": "[\"冲突的具体细节和伤亡情况尚未报道\", \"土地冲突的解决结果尚未确定\", \"据乍得复兴门户报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
   "publication_eligible": true,
   "report_input_eligible": true,
   "manual_review_required": false,
   "original_ai_output": {
    "source_language": "fr",
    "title_zh": "乌姆哈杰尔：四名部长动员解决多个村庄间的土地冲突",
-   "summary_zh": "乍得领土整治、城市化和住房部长马哈马特·阿西莱克·哈拉塔在访问乌姆哈杰尔时，因当地多个村庄围绕领土划界发生土地冲突，临时改变行程前往处理。包括安全部长、行政部长代表和司法国务秘书在内的四名政府成员已在该地参与调解。当局已动员地籍和地形测量团队进行地形测量，以提供客观数据，旨在通过对话和技术手段解决争端，防止局势升级并维护社会凝聚力。",
-   "event_type": "armed_conflict",
+   "summary_zh": "乍得领土整治、城市化和住房部长马哈马特·阿西莱克·哈拉塔在访问乌姆哈杰尔时，因多个村庄围绕领土划界发生土地冲突而改变行程，与安全部长阿里·阿赫马特·阿克巴奇等四名政府成员共同参与调解。当局动员了地籍和地形测量团队进行地形测量，以获取客观数据，并希望通过对话和技术手段解决争端，防止冲突升级，维护社会凝聚力。",
+   "event_type": "civil_unrest",
    "country_iso3": "TCD",
    "location": {
     "country_iso3": "TCD",
     "admin1": "巴塔省",
     "city": "乌姆哈杰尔",
-    "site": "乌姆哈杰尔以东约30公里处，涉及Djoullot、Read、Oumalkhoura、Tayba、Moutrar、Wadi-Bir和Amkharoubay等村庄",
+    "site": null,
     "raw_text": "Oum-Hadjer, département du Batha-Est, province du Batha"
    },
    "key_facts": [
     {
-     "fact": "四名乍得政府部长在乌姆哈杰尔参与解决多个村庄间的土地冲突",
+     "fact": "四名部长在乌姆哈杰尔参与解决土地冲突",
      "evidence_field": "body_extracted",
      "evidence_excerpt": "La présence simultanée de quatre membres du gouvernement dans une même localité témoigne de l'importance accordée par les autorités à ce conflit foncier"
     },
     {
-     "fact": "冲突涉及多个村庄围绕领土划界的争端",
+     "fact": "冲突涉及多个村庄的领土划界",
      "evidence_field": "body_extracted",
      "evidence_excerpt": "un conflit foncier opposant plusieurs communautés villageoises autour de la délimitation des limites territoriales"
     },
     {
-     "fact": "当局动员地籍和地形测量团队进行地形测量",
+     "fact": "地形测量团队被动员进行技术勘测",
      "evidence_field": "body_extracted",
      "evidence_excerpt": "l'équipe du Cadastre et de la Topographie a été mobilisée pour effectuer un levé topographique de la zone concernée"
-    },
-    {
-     "fact": "冲突区域位于乌姆哈杰尔约30公里处",
-     "evidence_field": "body_extracted",
-     "evidence_excerpt": "Le secteur concerné se trouve à environ 30 kilomètres d'Oum-Hadjer"
     }
    ],
    "uncertainties": [
-    "冲突的具体伤亡或暴力程度未在报道中说明",
-    "报道为单一来源，缺乏其他来源的交叉验证"
+    "冲突的具体细节和伤亡情况尚未报道",
+    "土地冲突的解决结果尚未确定"
    ],
    "security_relevance": "direct",
    "classification_confidence": 75
@@ -67,41 +72,37 @@
   "corrected_output": {
    "source_language": "fr",
    "title_zh": "乌姆哈杰尔：四名部长动员解决多个村庄间的土地冲突",
-   "summary_zh": "乍得领土整治、城市化和住房部长马哈马特·阿西莱克·哈拉塔在访问乌姆哈杰尔时，因当地多个村庄围绕领土划界发生土地冲突，临时改变行程前往处理。包括安全部长、行政部长代表和司法国务秘书在内的四名政府成员已在该地参与调解。当局已动员地籍和地形测量团队进行地形测量，以提供客观数据，旨在通过对话和技术手段解决争端，防止局势升级并维护社会凝聚力。",
-   "event_type": "armed_conflict",
+   "summary_zh": "乍得领土整治、城市化和住房部长马哈马特·阿西莱克·哈拉塔在访问乌姆哈杰尔时，因多个村庄围绕领土划界发生土地冲突而改变行程，与安全部长阿里·阿赫马特·阿克巴奇等四名政府成员共同参与调解。当局动员了地籍和地形测量团队进行地形测量，以获取客观数据，并希望通过对话和技术手段解决争端，防止冲突升级，维护社会凝聚力。",
+   "event_type": "civil_unrest",
    "country_iso3": "TCD",
    "location": {
     "country_iso3": "TCD",
     "admin1": "巴塔省",
     "city": "乌姆哈杰尔",
-    "site": "乌姆哈杰尔以东约30公里处，涉及Djoullot、Read、Oumalkhoura、Tayba、Moutrar、Wadi-Bir和Amkharoubay等村庄",
+    "site": null,
     "raw_text": "Oum-Hadjer, département du Batha-Est, province du Batha"
    },
    "key_facts": [
     {
-     "fact": "四名乍得政府部长在乌姆哈杰尔参与解决多个村庄间的土地冲突",
+     "fact": "四名部长在乌姆哈杰尔参与解决土地冲突",
      "evidence_field": "body_extracted",
      "evidence_excerpt": "La présence simultanée de quatre membres du gouvernement dans une même localité témoigne de l'importance accordée par les autorités à ce conflit foncier"
     },
     {
-     "fact": "冲突涉及多个村庄围绕领土划界的争端",
+     "fact": "冲突涉及多个村庄的领土划界",
      "evidence_field": "body_extracted",
      "evidence_excerpt": "un conflit foncier opposant plusieurs communautés villageoises autour de la délimitation des limites territoriales"
     },
     {
-     "fact": "当局动员地籍和地形测量团队进行地形测量",
+     "fact": "地形测量团队被动员进行技术勘测",
      "evidence_field": "body_extracted",
      "evidence_excerpt": "l'équipe du Cadastre et de la Topographie a été mobilisée pour effectuer un levé topographique de la zone concernée"
-    },
-    {
-     "fact": "冲突区域位于乌姆哈杰尔约30公里处",
-     "evidence_field": "body_extracted",
-     "evidence_excerpt": "Le secteur concerné se trouve à environ 30 kilomètres d'Oum-Hadjer"
     }
    ],
    "uncertainties": [
-    "冲突的具体伤亡或暴力程度未在报道中说明",
-    "报道为单一来源，缺乏其他来源的交叉验证"
+    "冲突的具体细节和伤亡情况尚未报道",
+    "土地冲突的解决结果尚未确定",
+    "据乍得复兴门户报道，目前仅获单一来源支持，尚缺乏交叉验证。"
    ],
    "security_relevance": "direct",
    "classification_confidence": 75

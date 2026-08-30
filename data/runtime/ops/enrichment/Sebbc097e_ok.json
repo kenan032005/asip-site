@@ -8,92 +8,103 @@
  "thinking_requested": "disabled",
  "reasoning_tokens": null,
  "tokens": {
-  "input_tokens": 2970,
-  "output_tokens": 565,
-  "total_tokens": 3535
+  "input_tokens": 2900,
+  "output_tokens": 581,
+  "total_tokens": 3481
  },
  "schema_pass": true,
  "status": "ok",
  "safety": {
   "gate": "PASS",
-  "pre_status": "PASS",
-  "corrections": [],
-  "post_status": null,
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"叛军的具体诉求和支持规模尚不清楚\", \"伤亡人数未得到官方确认，有消息称叛军中有多人死亡\", \"关于叛军是否试图进入总统府，不同来源说法不一\"]",
+    "after": "[\"叛军的具体诉求和支持规模尚不清楚\", \"伤亡人数未得到官方确认，有消息称叛军中有多人死亡\", \"关于叛军是否试图进入总统府，不同来源说法不一\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
   "publication_eligible": true,
   "report_input_eligible": true,
   "manual_review_required": false,
   "original_ai_output": {
    "source_language": "fr",
-   "title_zh": "尼日尔军政府称面对哗变士兵“逐步恢复控制”",
-   "summary_zh": "尼日尔首都尼亚美发生士兵哗变事件，据称有士兵在机场附近的军事基地内扣押士兵并开枪。军政府声称已逐步恢复控制，但据安全消息人士称，哗变士兵仍控制两处军营。事件细节和哗变者诉求尚不明确。",
+   "title_zh": "尼日尔军政府借助俄罗斯力量夺回遭叛军占领的军事基地",
+   "summary_zh": "尼日尔军政府周六宣布，在俄罗斯伙伴的帮助下，已从叛军手中夺回首都尼亚美一座重要空军基地的控制权。此前首都多个街区传出枪声和爆炸声，包括总统府所在的行政区。据法新社从外交和安全消息人士处获悉，军政府已重新控制基地，但具体伤亡和叛军诉求尚不清楚。",
    "event_type": "other_security",
    "country_iso3": "NER",
    "location": {
     "country_iso3": "NER",
     "admin1": null,
     "city": "尼亚美",
-    "site": "101号军事基地、总统府",
-    "raw_text": "Niamey, base militaire 101, palais présidentiel"
+    "site": "101号军事基地",
+    "raw_text": "Niamey, base militaire 101"
    },
    "key_facts": [
     {
-     "fact": "尼日尔首都尼亚美发生枪击和爆炸声，涉及军事基地和总统府区域",
+     "fact": "尼日尔军政府宣布在俄罗斯帮助下夺回首都尼亚美空军基地控制权",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Des tirs et des détonations ont été entendus, samedi 29 août au matin, à Niamey, la capitale du Niger, notamment autour de la base militaire 101, attenante à l’aéroport international, et dans la zone administrative où se trouve le palais présidentiel."
+     "evidence_excerpt": "le régime militaire au pouvoir au Niger a affirmé \"reprendre progressivement le contrôle\" face à des mutins... avait repris dans la soirée la base militaire aérienne avec l'aide de son partenaire russe."
     },
     {
-     "fact": "军政府声称面对哗变士兵逐步恢复控制",
+     "fact": "首都尼亚美多个街区传出枪声和爆炸声，包括总统府附近",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "le régime militaire au pouvoir au Niger a affirmé \"reprendre progressivement le contrôle\" face à des mutins."
+     "evidence_excerpt": "Des tirs et des détonations ont été entendus, samedi 29 août au matin, à Niamey... notamment autour de la base militaire 101... et dans la zone administrative où se trouve le palais présidentiel."
     },
     {
-     "fact": "据安全消息人士称，哗变士兵仍控制两处军营",
+     "fact": "俄罗斯驻尼亚美大使称尼日尔请求俄罗斯非洲军团协助镇压叛乱",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Selon une source sécuritaire régionale jointe en début d'après-midi, les mutins contrôlent toujours deux casernes, l'une au sein de la base 101 où ils sont retranchés et une autre à l'extérieur, ce qu'a confirmé une source diplomatique africaine."
+     "evidence_excerpt": "L'ambassadeur de Russie à Niamey, Viktor Voropaïev cité par l'agence publique russe Sputnik Afrique avait affirmé un peu plus tôt que le Niger avait sollicité l'aide du groupe paramilitaire russe Africa Corps \"pour réprimer une mutinerie\"."
     }
    ],
    "uncertainties": [
-    "哗变士兵的诉求和支持规模尚不清楚",
-    "军政府声称已恢复控制，但安全消息人士称仍有两处军营被控制，信息存在冲突",
-    "事件细节基于单一来源（France24）报道，尚缺乏交叉验证"
+    "叛军的具体诉求和支持规模尚不清楚",
+    "伤亡人数未得到官方确认，有消息称叛军中有多人死亡",
+    "关于叛军是否试图进入总统府，不同来源说法不一"
    ],
    "security_relevance": "direct",
    "classification_confidence": 85
   },
   "corrected_output": {
    "source_language": "fr",
-   "title_zh": "尼日尔军政府称面对哗变士兵“逐步恢复控制”",
-   "summary_zh": "尼日尔首都尼亚美发生士兵哗变事件，据称有士兵在机场附近的军事基地内扣押士兵并开枪。军政府声称已逐步恢复控制，但据安全消息人士称，哗变士兵仍控制两处军营。事件细节和哗变者诉求尚不明确。",
+   "title_zh": "尼日尔军政府借助俄罗斯力量夺回遭叛军占领的军事基地",
+   "summary_zh": "尼日尔军政府周六宣布，在俄罗斯伙伴的帮助下，已从叛军手中夺回首都尼亚美一座重要空军基地的控制权。此前首都多个街区传出枪声和爆炸声，包括总统府所在的行政区。据法新社从外交和安全消息人士处获悉，军政府已重新控制基地，但具体伤亡和叛军诉求尚不清楚。",
    "event_type": "other_security",
    "country_iso3": "NER",
    "location": {
     "country_iso3": "NER",
     "admin1": null,
     "city": "尼亚美",
-    "site": "101号军事基地、总统府",
-    "raw_text": "Niamey, base militaire 101, palais présidentiel"
+    "site": "101号军事基地",
+    "raw_text": "Niamey, base militaire 101"
    },
    "key_facts": [
     {
-     "fact": "尼日尔首都尼亚美发生枪击和爆炸声，涉及军事基地和总统府区域",
+     "fact": "尼日尔军政府宣布在俄罗斯帮助下夺回首都尼亚美空军基地控制权",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Des tirs et des détonations ont été entendus, samedi 29 août au matin, à Niamey, la capitale du Niger, notamment autour de la base militaire 101, attenante à l’aéroport international, et dans la zone administrative où se trouve le palais présidentiel."
+     "evidence_excerpt": "le régime militaire au pouvoir au Niger a affirmé \"reprendre progressivement le contrôle\" face à des mutins... avait repris dans la soirée la base militaire aérienne avec l'aide de son partenaire russe."
     },
     {
-     "fact": "军政府声称面对哗变士兵逐步恢复控制",
+     "fact": "首都尼亚美多个街区传出枪声和爆炸声，包括总统府附近",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "le régime militaire au pouvoir au Niger a affirmé \"reprendre progressivement le contrôle\" face à des mutins."
+     "evidence_excerpt": "Des tirs et des détonations ont été entendus, samedi 29 août au matin, à Niamey... notamment autour de la base militaire 101... et dans la zone administrative où se trouve le palais présidentiel."
     },
     {
-     "fact": "据安全消息人士称，哗变士兵仍控制两处军营",
+     "fact": "俄罗斯驻尼亚美大使称尼日尔请求俄罗斯非洲军团协助镇压叛乱",
      "evidence_field": "body_extracted",
-     "evidence_excerpt": "Selon une source sécuritaire régionale jointe en début d'après-midi, les mutins contrôlent toujours deux casernes, l'une au sein de la base 101 où ils sont retranchés et une autre à l'extérieur, ce qu'a confirmé une source diplomatique africaine."
+     "evidence_excerpt": "L'ambassadeur de Russie à Niamey, Viktor Voropaïev cité par l'agence publique russe Sputnik Afrique avait affirmé un peu plus tôt que le Niger avait sollicité l'aide du groupe paramilitaire russe Africa Corps \"pour réprimer une mutinerie\"."
     }
    ],
    "uncertainties": [
-    "哗变士兵的诉求和支持规模尚不清楚",
-    "军政府声称已恢复控制，但安全消息人士称仍有两处军营被控制，信息存在冲突",
-    "事件细节基于单一来源（France24）报道，尚缺乏交叉验证"
+    "叛军的具体诉求和支持规模尚不清楚",
+    "伤亡人数未得到官方确认，有消息称叛军中有多人死亡",
+    "关于叛军是否试图进入总统府，不同来源说法不一",
+    "据称，尚未获得独立证实。"
    ],
    "security_relevance": "direct",
    "classification_confidence": 85
