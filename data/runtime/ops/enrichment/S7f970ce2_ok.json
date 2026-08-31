@@ -1,0 +1,126 @@
+{
+ "label": "S7f970ce2",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a990cbe114426ca39f48708c1f4c627c638f378977985d4b902ee64c8effa706",
+ "tokens": {
+  "input_tokens": 2569,
+  "output_tokens": 512,
+  "total_tokens": 3081
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"阿尔及利亚部署战斗机的具体目的尚不完全明确，专家分析称可能旨在预防外部袭击并支持尼日尔当局，但未获官方证实\", \"该部署是否标志着阿尔及利亚军事学说的转变尚不确定，专家认为可能并非根本性改变\"]",
+    "after": "[\"阿尔及利亚部署战斗机的具体目的尚不完全明确，专家分析称可能旨在预防外部袭击并支持尼日尔当局，但未获官方证实\", \"该部署是否标志着阿尔及利亚军事学说的转变尚不确定，专家认为可能并非根本性改变\", \"据France24 Afrique (Niger)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "阿尔及利亚向尼日尔部署战斗机，称旨在“预防潜在袭击”",
+   "summary_zh": "阿尔及利亚首次向尼日尔部署战斗机，包括四架苏-30及辅助飞机，于8月30日抵达尼亚美，此前尼日尔军方挫败一起兵变。阿尔及利亚国防部称此举应尼日尔当局请求，旨在支持其军队应对“破坏稳定企图”。专家分析认为，阿尔及利亚意在展示对尼日尔当局的支持并打击恐怖主义，但未必意味着其军事学说发生根本转变。",
+   "event_type": "armed_conflict",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": null,
+    "raw_text": "Niger, Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "阿尔及利亚首次向尼日尔部署战斗机",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pour la première fois de son histoire, l'Algérie a envoyé des avions de combat, avec leurs équipages, dans un pays étranger."
+    },
+    {
+     "fact": "四架苏-30战斗机及辅助飞机于8月30日抵达尼亚美",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quatre Sukhoï Su-30, accompagnés d'un avion ravitailleur et d'un appareil de transport militaire, ont atterri dimanche 30 août à Niamey"
+    },
+    {
+     "fact": "部署发生在尼日尔军方挫败兵变之后",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "au lendemain d'une mutinerie déjouée par le régime militaire avec l'appui de son partenaire russe"
+    },
+    {
+     "fact": "阿尔及利亚国防部称部署应尼日尔当局请求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ce déploiement intervient \"à la demande des autorités nigériennes\" et vise à soutenir l'armée du pays \"face à la tentative de déstabilisation\""
+    }
+   ],
+   "uncertainties": [
+    "阿尔及利亚部署战斗机的具体目的尚不完全明确，专家分析称可能旨在预防外部袭击并支持尼日尔当局，但未获官方证实",
+    "该部署是否标志着阿尔及利亚军事学说的转变尚不确定，专家认为可能并非根本性改变"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "阿尔及利亚向尼日尔部署战斗机，称旨在“预防潜在袭击”",
+   "summary_zh": "阿尔及利亚首次向尼日尔部署战斗机，包括四架苏-30及辅助飞机，于8月30日抵达尼亚美，此前尼日尔军方挫败一起兵变。阿尔及利亚国防部称此举应尼日尔当局请求，旨在支持其军队应对“破坏稳定企图”。专家分析认为，阿尔及利亚意在展示对尼日尔当局的支持并打击恐怖主义，但未必意味着其军事学说发生根本转变。",
+   "event_type": "armed_conflict",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": null,
+    "raw_text": "Niger, Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "阿尔及利亚首次向尼日尔部署战斗机",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pour la première fois de son histoire, l'Algérie a envoyé des avions de combat, avec leurs équipages, dans un pays étranger."
+    },
+    {
+     "fact": "四架苏-30战斗机及辅助飞机于8月30日抵达尼亚美",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quatre Sukhoï Su-30, accompagnés d'un avion ravitailleur et d'un appareil de transport militaire, ont atterri dimanche 30 août à Niamey"
+    },
+    {
+     "fact": "部署发生在尼日尔军方挫败兵变之后",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "au lendemain d'une mutinerie déjouée par le régime militaire avec l'appui de son partenaire russe"
+    },
+    {
+     "fact": "阿尔及利亚国防部称部署应尼日尔当局请求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ce déploiement intervient \"à la demande des autorités nigériennes\" et vise à soutenir l'armée du pays \"face à la tentative de déstabilisation\""
+    }
+   ],
+   "uncertainties": [
+    "阿尔及利亚部署战斗机的具体目的尚不完全明确，专家分析称可能旨在预防外部袭击并支持尼日尔当局，但未获官方证实",
+    "该部署是否标志着阿尔及利亚军事学说的转变尚不确定，专家认为可能并非根本性改变",
+    "据France24 Afrique (Niger)报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_206a077d7f970ce2",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
