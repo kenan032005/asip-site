@@ -1,0 +1,107 @@
+{
+ "label": "S3a00711b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d3019f99ed50c03f3ccdc5107c8ea99abe4f5473062690bc351c57e2813e1e9c",
+ "tokens": {
+  "input_tokens": 3000,
+  "output_tokens": 594,
+  "total_tokens": 3594
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔尼亚美101空军基地事件：全国各界力量发表声明谴责",
+   "summary_zh": "据尼日尔官方通讯社ONEP报道，2026年8月28日至29日夜间，尼亚美发生一起事件，被描述为“恶意分子”所为。8月30日下午，全国各界力量协调组织发表声明，强烈谴责这一事件，并赞扬忠诚的国防与安全部队的迅速反应。声明要求司法部门严惩肇事者，并宣布将于9月2日在尼亚美组织集会以示支持现政权。目前事件细节尚不明确，仅有一个来源。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "101空军基地",
+    "raw_text": "base aérienne 101 de Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年8月28日至29日夜间，尼亚美发生一起引发不安的事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aux environs de minuit, dans la nuit du 28 au 29 août 2026, Niamey a vécu une situation d’inquiétude."
+    },
+    {
+     "fact": "全国各界力量协调组织于8月30日发表声明，谴责事件并支持国防与安全部队",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la coordination des forces vives de la nation a rendu publique une déclaration à Niamey. Dans celle-ci, elle a condamné fermement cet acte et salué la prompte réaction des Forces de défense et de sécurité"
+    },
+    {
+     "fact": "声明要求司法部门严惩肇事者，并宣布9月2日在尼亚美举行集会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "demande aux services compétents et à la justice d’identifier et punir les auteurs... Les forces vives annoncent entreprendre l’organisation d’un meeting à Niamey, le mercredi 02 septembre 2026"
+    }
+   ],
+   "uncertainties": [
+    "事件具体性质（如是否发生交火、伤亡情况）尚未明确",
+    "事件被描述为“恶意分子”所为，但具体细节未披露",
+    "目前仅有单一来源（ONEP）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔尼亚美101空军基地事件：全国各界力量发表声明谴责",
+   "summary_zh": "据尼日尔官方通讯社ONEP报道，2026年8月28日至29日夜间，尼亚美发生一起事件，被描述为“恶意分子”所为。8月30日下午，全国各界力量协调组织发表声明，强烈谴责这一事件，并赞扬忠诚的国防与安全部队的迅速反应。声明要求司法部门严惩肇事者，并宣布将于9月2日在尼亚美组织集会以示支持现政权。目前事件细节尚不明确，仅有一个来源。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "101空军基地",
+    "raw_text": "base aérienne 101 de Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年8月28日至29日夜间，尼亚美发生一起引发不安的事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aux environs de minuit, dans la nuit du 28 au 29 août 2026, Niamey a vécu une situation d’inquiétude."
+    },
+    {
+     "fact": "全国各界力量协调组织于8月30日发表声明，谴责事件并支持国防与安全部队",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la coordination des forces vives de la nation a rendu publique une déclaration à Niamey. Dans celle-ci, elle a condamné fermement cet acte et salué la prompte réaction des Forces de défense et de sécurité"
+    },
+    {
+     "fact": "声明要求司法部门严惩肇事者，并宣布9月2日在尼亚美举行集会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "demande aux services compétents et à la justice d’identifier et punir les auteurs... Les forces vives annoncent entreprendre l’organisation d’un meeting à Niamey, le mercredi 02 septembre 2026"
+    }
+   ],
+   "uncertainties": [
+    "事件具体性质（如是否发生交火、伤亡情况）尚未明确",
+    "事件被描述为“恶意分子”所为，但具体细节未披露",
+    "目前仅有单一来源（ONEP）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_d18680623a00711b",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

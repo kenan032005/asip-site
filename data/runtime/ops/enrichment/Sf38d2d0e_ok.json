@@ -1,0 +1,126 @@
+{
+ "label": "Sf38d2d0e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "9f55a449a8b774657ab6094a2f9e65fb52d625ab89539ecd4716f6b684416cc8",
+ "tokens": {
+  "input_tokens": 2326,
+  "output_tokens": 412,
+  "total_tokens": 2738
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"事故具体原因尚未确定\", \"事故是否因蓄水池注水后承重过大所致尚属初步推测\"]",
+    "after": "[\"事故具体原因尚未确定\", \"事故是否因蓄水池注水后承重过大所致尚属初步推测\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "阿贝歇一水塔倒塌致两人死亡",
+   "summary_zh": "乍得阿贝歇市第三区Hilélé Icher发生水塔倒塌事故，造成一名约30岁男子和一名12岁男孩死亡。据现场初步信息，事故可能发生在蓄水池注水后，支撑结构因承重而坍塌。司法、行政和安全部门已到场调查，检察官已下令将遗体交还家属安葬。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "阿贝歇",
+    "site": "Hilélé Icher，第三区",
+    "raw_text": "Hilélé Icher, dans le 3ᵉ arrondissement d’Abéché"
+   },
+   "key_facts": [
+    {
+     "fact": "阿贝歇市一水塔倒塌造成两人死亡",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Abéché : l’effondrement d’un château d’eau fait deux morts"
+    },
+    {
+     "fact": "遇难者为一名约30岁男子和一名12岁男孩",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il s’agit d’un homme d’une trentaine d’années et d’un garçon de 12 ans."
+    },
+    {
+     "fact": "事故可能发生在蓄水池注水后",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’accident serait intervenu après le remplissage du réservoir"
+    },
+    {
+     "fact": "当局已展开调查以确定事故原因",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une enquête a été ouverte afin de déterminer les causes exactes de l’effondrement"
+    }
+   ],
+   "uncertainties": [
+    "事故具体原因尚未确定",
+    "事故是否因蓄水池注水后承重过大所致尚属初步推测"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "阿贝歇一水塔倒塌致两人死亡",
+   "summary_zh": "乍得阿贝歇市第三区Hilélé Icher发生水塔倒塌事故，造成一名约30岁男子和一名12岁男孩死亡。据现场初步信息，事故可能发生在蓄水池注水后，支撑结构因承重而坍塌。司法、行政和安全部门已到场调查，检察官已下令将遗体交还家属安葬。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "阿贝歇",
+    "site": "Hilélé Icher，第三区",
+    "raw_text": "Hilélé Icher, dans le 3ᵉ arrondissement d’Abéché"
+   },
+   "key_facts": [
+    {
+     "fact": "阿贝歇市一水塔倒塌造成两人死亡",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Abéché : l’effondrement d’un château d’eau fait deux morts"
+    },
+    {
+     "fact": "遇难者为一名约30岁男子和一名12岁男孩",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il s’agit d’un homme d’une trentaine d’années et d’un garçon de 12 ans."
+    },
+    {
+     "fact": "事故可能发生在蓄水池注水后",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’accident serait intervenu après le remplissage du réservoir"
+    },
+    {
+     "fact": "当局已展开调查以确定事故原因",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une enquête a été ouverte afin de déterminer les causes exactes de l’effondrement"
+    }
+   ],
+   "uncertainties": [
+    "事故具体原因尚未确定",
+    "事故是否因蓄水池注水后承重过大所致尚属初步推测",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_5af96585f38d2d0e",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
