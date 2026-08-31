@@ -1,0 +1,117 @@
+{
+ "label": "Seb1f5a90",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3a0bc1c70e92a13f8a6793ed12278b0a7d799ebf68a6b8048bc95041aa9fe322",
+ "tokens": {
+  "input_tokens": 2385,
+  "output_tokens": 575,
+  "total_tokens": 2960
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼亚美101空军基地发生骚动：俄罗斯联邦向尼日尔人民表达声援",
+   "summary_zh": "据尼日尔官方通讯社报道，俄罗斯外交部于2026年8月30日发表声明，对尼日尔人民表示声援，此前8月28日至29日夜间尼亚美101空军基地发生事件。俄方声明称，8月29日反政府力量袭击了尼亚美公共建筑，这些袭击已被尼日尔国家军队在俄罗斯国防部非洲军团军人支持下击退。俄方还表示，局势处于以阿卜杜拉哈马内·蒂亚尼将军为首的合法当局控制之下，并称将继续支持尼日尔打击极端分子。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "101空军基地",
+    "raw_text": "Niamey, base 101 de l’armée aérienne"
+   },
+   "key_facts": [
+    {
+     "fact": "俄罗斯外交部发表声明对尼日尔人民表示声援",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Fédération de Russie a exprimé, dans un communiqué publié ce dimanche 30 août 2026 sur les pages du Ministère russe des affaires étrangères, sa solidarité avec le peuple du Niger"
+    },
+    {
+     "fact": "据称8月29日反政府力量袭击了尼亚美公共建筑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "à la suite des attaques contre des bâtiments publics à Niamey, menées le 29 août par des forces antigouvernementales"
+    },
+    {
+     "fact": "俄方称袭击已被尼日尔国家军队在非洲军团支持下击退",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces attaques ont été repoussées par les forces nationales avec l’appui des militaires de l’Africa Corps du ministère russe de la Défense"
+    },
+    {
+     "fact": "俄方称局势处于蒂亚尼将军领导的合法当局控制之下",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La situation est sous le contrôle des autorités légitimes dirigées par le Général d’Armée Abdourahamane Tiani, Président de la République, Chef de l’Etat"
+    }
+   ],
+   "uncertainties": [
+    "事件具体细节（如袭击规模、伤亡情况）尚未独立证实",
+    "目前仅有一个来源（尼日尔官方通讯社）报道，缺乏交叉验证",
+    "俄方声明中的说法（如反政府力量袭击、被击退）尚未得到独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼亚美101空军基地发生骚动：俄罗斯联邦向尼日尔人民表达声援",
+   "summary_zh": "据尼日尔官方通讯社报道，俄罗斯外交部于2026年8月30日发表声明，对尼日尔人民表示声援，此前8月28日至29日夜间尼亚美101空军基地发生事件。俄方声明称，8月29日反政府力量袭击了尼亚美公共建筑，这些袭击已被尼日尔国家军队在俄罗斯国防部非洲军团军人支持下击退。俄方还表示，局势处于以阿卜杜拉哈马内·蒂亚尼将军为首的合法当局控制之下，并称将继续支持尼日尔打击极端分子。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "101空军基地",
+    "raw_text": "Niamey, base 101 de l’armée aérienne"
+   },
+   "key_facts": [
+    {
+     "fact": "俄罗斯外交部发表声明对尼日尔人民表示声援",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Fédération de Russie a exprimé, dans un communiqué publié ce dimanche 30 août 2026 sur les pages du Ministère russe des affaires étrangères, sa solidarité avec le peuple du Niger"
+    },
+    {
+     "fact": "据称8月29日反政府力量袭击了尼亚美公共建筑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "à la suite des attaques contre des bâtiments publics à Niamey, menées le 29 août par des forces antigouvernementales"
+    },
+    {
+     "fact": "俄方称袭击已被尼日尔国家军队在非洲军团支持下击退",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces attaques ont été repoussées par les forces nationales avec l’appui des militaires de l’Africa Corps du ministère russe de la Défense"
+    },
+    {
+     "fact": "俄方称局势处于蒂亚尼将军领导的合法当局控制之下",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La situation est sous le contrôle des autorités légitimes dirigées par le Général d’Armée Abdourahamane Tiani, Président de la République, Chef de l’Etat"
+    }
+   ],
+   "uncertainties": [
+    "事件具体细节（如袭击规模、伤亡情况）尚未独立证实",
+    "目前仅有一个来源（尼日尔官方通讯社）报道，缺乏交叉验证",
+    "俄方声明中的说法（如反政府力量袭击、被击退）尚未得到独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_f228fe13eb1f5a90",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
