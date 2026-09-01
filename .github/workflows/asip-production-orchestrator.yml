@@ -167,6 +167,7 @@ jobs:
         run: |
           SHADOW="true"
           [ "$CANARY" != "true" ] && SHADOW="false"
+          export SHADOW
           # §J/§I：正式（非 canary）automation 派发的 trigger_source 必须可判定
           if [ "$SHADOW" = "false" ]; then
             case "$DEPLOY_TRIGGER_SOURCE" in
