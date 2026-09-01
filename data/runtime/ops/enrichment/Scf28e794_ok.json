@@ -1,0 +1,138 @@
+{
+ "label": "Scf28e794",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4053deb8a520eb43a2ebb4af2ea66800fe7a4f6bb3b65f75683015f3f41b5335",
+ "tokens": {
+  "input_tokens": 2827,
+  "output_tokens": 486,
+  "total_tokens": 3313
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"法国国家部门是否参与信息攻击尚未正式证实，仅存在间接线索\", \"兵变具体细节和伤亡情况未提及\", \"信息攻击的幕后主使身份未明确确认\"]",
+    "after": "[\"法国国家部门是否参与信息攻击尚未正式证实，仅存在间接线索\", \"兵变具体细节和伤亡情况未提及\", \"信息攻击的幕后主使身份未明确确认\", \"据Tamtaminfo报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"法国国家部门是否参与信息攻击尚未正式证实，仅存在间接线索\", \"兵变具体细节和伤亡情况未提及\", \"信息攻击的幕后主使身份未明确确认\", \"据Tamtaminfo报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "after": "[\"法国国家部门是否参与信息攻击尚未正式证实，仅存在间接线索\", \"兵变具体细节和伤亡情况未提及\", \"信息攻击的幕后主使身份未明确确认\", \"据Tamtaminfo报道，目前仅获单一来源支持，尚缺乏交叉验证。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼亚美遭遇信息攻击：虚假谣言试图破坏尼日尔稳定",
+   "summary_zh": "2026年8月29日尼亚美发生的未遂兵变在地面上得到控制，但随后在信息空间展开了更危险的行动。虚假叙事、脱离背景的图像和选择性泄露试图制造恐慌、削弱尼日尔当局合法性。技术分析显示，许多内容被识别为旧事件或异地素材，且存在伪造官方公报的情况。目前公开证据尚未正式证明法国国家部门参与，但存在一系列间接线索。",
+   "event_type": "political_instability",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "迪奥里·哈马尼机场、101基地、总统府附近",
+    "raw_text": "Niamey, aéroport Diori Hamani, base 101, palais présidentiel"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年8月29日尼亚美发生未遂兵变，地面已控制",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La tentative de mutinerie du 29 août 2026 à Niamey a été contenue sur le terrain"
+    },
+    {
+     "fact": "信息攻击使用虚假叙事、脱离背景图像和选择性泄露",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des narratifs fabriqués des images sorties de leur contexte et des fuites sélectives ont cherché à infléchir l’opinion"
+    },
+    {
+     "fact": "部分视频被识别为2025年演习或他地事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une vidéo montrant un blindé près d’un palais a été retracée à un exercice de 2025 (TinEye Google Images)"
+    },
+    {
+     "fact": "伪造国防部公报，后被官方否认",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une image présentée comme communiqué du ministère de la Défense démentie peu après par le compte officiel du ministère"
+    }
+   ],
+   "uncertainties": [
+    "法国国家部门是否参与信息攻击尚未正式证实，仅存在间接线索",
+    "兵变具体细节和伤亡情况未提及",
+    "信息攻击的幕后主使身份未明确确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼亚美遭遇信息攻击：虚假谣言试图破坏尼日尔稳定",
+   "summary_zh": "2026年8月29日尼亚美发生的未遂兵变在地面上得到控制，但随后在信息空间展开了更危险的行动。虚假叙事、脱离背景的图像和选择性泄露试图制造恐慌、削弱尼日尔当局合法性。技术分析显示，许多内容被识别为旧事件或异地素材，且存在伪造官方公报的情况。目前公开证据尚未正式证明法国国家部门参与，但存在一系列间接线索。",
+   "event_type": "political_instability",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "迪奥里·哈马尼机场、101基地、总统府附近",
+    "raw_text": "Niamey, aéroport Diori Hamani, base 101, palais présidentiel"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年8月29日尼亚美发生未遂兵变，地面已控制",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La tentative de mutinerie du 29 août 2026 à Niamey a été contenue sur le terrain"
+    },
+    {
+     "fact": "信息攻击使用虚假叙事、脱离背景图像和选择性泄露",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des narratifs fabriqués des images sorties de leur contexte et des fuites sélectives ont cherché à infléchir l’opinion"
+    },
+    {
+     "fact": "部分视频被识别为2025年演习或他地事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une vidéo montrant un blindé près d’un palais a été retracée à un exercice de 2025 (TinEye Google Images)"
+    },
+    {
+     "fact": "伪造国防部公报，后被官方否认",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une image présentée comme communiqué du ministère de la Défense démentie peu après par le compte officiel du ministère"
+    }
+   ],
+   "uncertainties": [
+    "法国国家部门是否参与信息攻击尚未正式证实，仅存在间接线索",
+    "兵变具体细节和伤亡情况未提及",
+    "信息攻击的幕后主使身份未明确确认",
+    "据Tamtaminfo报道，目前仅获单一来源支持，尚缺乏交叉验证。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_b19c69e5cf28e794",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
