@@ -1,0 +1,116 @@
+{
+ "label": "Sf705fac6",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "876f76cb2f98698b5bd15015ee618c9c6e23c1df9984e0e11ed27e6846a14b26",
+ "tokens": {
+  "input_tokens": 2515,
+  "output_tokens": 474,
+  "total_tokens": 2989
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"事件细节多基于当地消息来源，尚未得到独立证实\", \"冲突起因及过程存在不确定性，原文使用条件式表述\"]",
+    "after": "[\"事件细节多基于当地消息来源，尚未得到独立证实\", \"冲突起因及过程存在不确定性，原文使用条件式表述\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "东洛贡省：因违反入会仪式场地引发冲突，迈恩博巴耶三人受伤",
+   "summary_zh": "2026年8月31日，乍得东洛贡省迈恩博巴耶发生一起因违反入会仪式场地引发的冲突，造成三人受伤。据当地消息，一名男子在仪式场地附近定居，居民要求其离开未果，随后双方发生争执并演变为冲突，期间有弓箭和枪械交火。当局介入后收缴两支枪支，并促成双方和解。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "东洛贡省",
+    "city": "迈恩博巴耶",
+    "site": null,
+    "raw_text": "Maïnbombaye, sous-préfecture de Doba rural, département de la Pendé, province du Logone oriental"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年8月31日，迈恩博巴耶发生因违反入会仪式场地引发的冲突，造成三人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une altercation liée à la violation d’un site d’initiation a fait trois blessés, le 31 août 2026. L’incident s’est produit à Maïnbombaye, dans la sous-préfecture de Doba rural, département de la Pendé, province du Logone oriental."
+    },
+    {
+     "fact": "冲突期间双方有弓箭和枪械交火",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La situation aurait alors dégénéré en une altercation au cours de laquelle des tirs à l’arc et à l’arme à feu auraient été échangés entre les deux camps."
+    },
+    {
+     "fact": "当局在调查中收缴两支枪支",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À l’issue des enquêtes et des fouilles menées dans les deux camps, deux armes à feu ont été récupérées."
+    }
+   ],
+   "uncertainties": [
+    "事件细节多基于当地消息来源，尚未得到独立证实",
+    "冲突起因及过程存在不确定性，原文使用条件式表述"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "东洛贡省：因违反入会仪式场地引发冲突，迈恩博巴耶三人受伤",
+   "summary_zh": "2026年8月31日，乍得东洛贡省迈恩博巴耶发生一起因违反入会仪式场地引发的冲突，造成三人受伤。据当地消息，一名男子在仪式场地附近定居，居民要求其离开未果，随后双方发生争执并演变为冲突，期间有弓箭和枪械交火。当局介入后收缴两支枪支，并促成双方和解。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "东洛贡省",
+    "city": "迈恩博巴耶",
+    "site": null,
+    "raw_text": "Maïnbombaye, sous-préfecture de Doba rural, département de la Pendé, province du Logone oriental"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年8月31日，迈恩博巴耶发生因违反入会仪式场地引发的冲突，造成三人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une altercation liée à la violation d’un site d’initiation a fait trois blessés, le 31 août 2026. L’incident s’est produit à Maïnbombaye, dans la sous-préfecture de Doba rural, département de la Pendé, province du Logone oriental."
+    },
+    {
+     "fact": "冲突期间双方有弓箭和枪械交火",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La situation aurait alors dégénéré en une altercation au cours de laquelle des tirs à l’arc et à l’arme à feu auraient été échangés entre les deux camps."
+    },
+    {
+     "fact": "当局在调查中收缴两支枪支",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À l’issue des enquêtes et des fouilles menées dans les deux camps, deux armes à feu ont été récupérées."
+    }
+   ],
+   "uncertainties": [
+    "事件细节多基于当地消息来源，尚未得到独立证实",
+    "冲突起因及过程存在不确定性，原文使用条件式表述",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_28e41790f705fac6",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
