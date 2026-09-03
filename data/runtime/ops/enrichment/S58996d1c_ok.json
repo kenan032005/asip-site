@@ -1,0 +1,116 @@
+{
+ "label": "S58996d1c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ec2cd06768db6a28d4810dd0409f0c4d8fdc98dd7ba5d3ab05093476e7d47da3",
+ "tokens": {
+  "input_tokens": 2871,
+  "output_tokens": 423,
+  "total_tokens": 3294
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"事件的具体细节（如伤亡情况）未提及\", \"8月28日至29日事件的详细情况未在本文中说明\"]",
+    "after": "[\"事件的具体细节（如伤亡情况）未提及\", \"8月28日至29日事件的详细情况未在本文中说明\", \"据Le Sahel报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"事件的具体细节（如伤亡情况）未提及\", \"8月28日至29日事件的详细情况未在本文中说明\", \"据Le Sahel报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "after": "[\"事件的具体细节（如伤亡情况）未提及\", \"8月28日至29日事件的详细情况未在本文中说明\", \"据Le Sahel报道，目前仅获单一来源支持，尚缺乏交叉验证。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "阿加德兹民众动员支持当局",
+   "summary_zh": "尼日尔阿加德兹市居民响应国家活力力量号召，于2026年9月2日举行游行，支持救国委员会、政府及国防安全部队，以回应8月28日至29日在尼亚美发生的事件。游行后举行了集会，州长谴责了破坏稳定的企图，并呼吁民众保持警惕。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "阿加德兹大区",
+    "city": "阿加德兹",
+    "site": "共和国广场",
+    "raw_text": "Agadez, Place de la République"
+   },
+   "key_facts": [
+    {
+     "fact": "阿加德兹市居民举行游行支持当局和国防安全部队",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la population de la commune urbaine d’Agadez s’est fortement mobilisée, hier mercredi 2 septembre 2026, pour une marche de soutien au Conseil National pour la Sauvegarde de la Patrie, au Gouvernement et aux Forces de défense et de sécurité"
+    },
+    {
+     "fact": "游行后举行了集会，州长谴责了破坏稳定的企图",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouverneur a condamné cette tentative de déstabilisation visant des symboles et institutions de l’Etat"
+    }
+   ],
+   "uncertainties": [
+    "事件的具体细节（如伤亡情况）未提及",
+    "8月28日至29日事件的详细情况未在本文中说明"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "阿加德兹民众动员支持当局",
+   "summary_zh": "尼日尔阿加德兹市居民响应国家活力力量号召，于2026年9月2日举行游行，支持救国委员会、政府及国防安全部队，以回应8月28日至29日在尼亚美发生的事件。游行后举行了集会，州长谴责了破坏稳定的企图，并呼吁民众保持警惕。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "阿加德兹大区",
+    "city": "阿加德兹",
+    "site": "共和国广场",
+    "raw_text": "Agadez, Place de la République"
+   },
+   "key_facts": [
+    {
+     "fact": "阿加德兹市居民举行游行支持当局和国防安全部队",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la population de la commune urbaine d’Agadez s’est fortement mobilisée, hier mercredi 2 septembre 2026, pour une marche de soutien au Conseil National pour la Sauvegarde de la Patrie, au Gouvernement et aux Forces de défense et de sécurité"
+    },
+    {
+     "fact": "游行后举行了集会，州长谴责了破坏稳定的企图",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouverneur a condamné cette tentative de déstabilisation visant des symboles et institutions de l’Etat"
+    }
+   ],
+   "uncertainties": [
+    "事件的具体细节（如伤亡情况）未提及",
+    "8月28日至29日事件的详细情况未在本文中说明",
+    "据Le Sahel报道，目前仅获单一来源支持，尚缺乏交叉验证。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_7d0a8f5158996d1c",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
