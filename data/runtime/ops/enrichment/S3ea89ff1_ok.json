@@ -1,0 +1,111 @@
+{
+ "label": "S3ea89ff1",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c01472c4578df2f11e04b831f2d03c75135da2cdc5f33f9ca69e64ab4aebea5c",
+ "tokens": {
+  "input_tokens": 2840,
+  "output_tokens": 392,
+  "total_tokens": 3232
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼亚美举办第二届战伤救治医学外科学术会议",
+   "summary_zh": "2026年9月3日，第二届医学外科学术会议在尼日尔尼亚美开幕，主题为“不安全局势下面临卫生紧急情况应采取何种战略？战伤救治”。会议由尼日尔武装部队卫生与社会行动中央局组织，来自阿尔及利亚、贝宁、布基纳法索、几内亚、意大利、马里、俄罗斯和多哥等八国代表团参加。尼日尔国防部长萨利富·莫迪将军在开幕致辞中表示，会议体现了萨赫勒国家联盟（AES）国家加强军事医学自主性的意愿。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": null,
+    "raw_text": "Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "第二届医学外科学术会议在尼亚美开幕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les travaux des 2es Journées médico-chirurgicales se sont ouverts, ce jeudi 03 septembre 2026 à Niamey"
+    },
+    {
+     "fact": "会议主题为战伤救治",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "« Quelles stratégies face aux urgences sanitaires en situation d’insécurité ? La prise en charge des blessés de guerre »"
+    },
+    {
+     "fact": "八国代表团参加会议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "réunissent des délégations de l’Algérie, du Bénin, du Burkina Faso, de la Guinée, de l’Italie, du Mali, de la Russie et du Togo"
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼亚美举办第二届战伤救治医学外科学术会议",
+   "summary_zh": "2026年9月3日，第二届医学外科学术会议在尼日尔尼亚美开幕，主题为“不安全局势下面临卫生紧急情况应采取何种战略？战伤救治”。会议由尼日尔武装部队卫生与社会行动中央局组织，来自阿尔及利亚、贝宁、布基纳法索、几内亚、意大利、马里、俄罗斯和多哥等八国代表团参加。尼日尔国防部长萨利富·莫迪将军在开幕致辞中表示，会议体现了萨赫勒国家联盟（AES）国家加强军事医学自主性的意愿。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": null,
+    "raw_text": "Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "第二届医学外科学术会议在尼亚美开幕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les travaux des 2es Journées médico-chirurgicales se sont ouverts, ce jeudi 03 septembre 2026 à Niamey"
+    },
+    {
+     "fact": "会议主题为战伤救治",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "« Quelles stratégies face aux urgences sanitaires en situation d’insécurité ? La prise en charge des blessés de guerre »"
+    },
+    {
+     "fact": "八国代表团参加会议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "réunissent des délégations de l’Algérie, du Bénin, du Burkina Faso, de la Guinée, de l’Italie, du Mali, de la Russie et du Togo"
+    }
+   ],
+   "uncertainties": [
+    "据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_a34e162a3ea89ff1",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

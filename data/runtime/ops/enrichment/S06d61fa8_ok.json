@@ -1,0 +1,116 @@
+{
+ "label": "S06d61fa8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "83adb692e12f4bf8537598d7de60cd64f7a0ce38c42e31c0320a33225d7e3678",
+ "tokens": {
+  "input_tokens": 2251,
+  "output_tokens": 376,
+  "total_tokens": 2627
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"查获的具体数量未在报道中说明\", \"被捕人数未在报道中说明\"]",
+    "after": "[\"查获的具体数量未在报道中说明\", \"被捕人数未在报道中说明\", \"据Le N'Djam Post报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "博尔库省：执法部门在法亚查获大量“恩格雷格”",
+   "summary_zh": "乍得博尔库省法亚市，执法部门在一次例行巡逻中查获大量俗称“恩格雷格”的劣质酒精饮料。该饮料在乍得被禁止销售，因其对健康有害。警方已将被捕人员移交检察院，他们将面临司法审判。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "博尔库省",
+    "city": "法亚",
+    "site": null,
+    "raw_text": "Faya, dans la province du Borkou"
+   },
+   "key_facts": [
+    {
+     "fact": "执法部门在法亚查获大量俗称“恩格雷格”的劣质酒精饮料",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les forces de l’ordre ont réalisé une importante saisie d’alcool frelaté, communément appelé « Nguereg », à Faya, dans la province du Borkou."
+    },
+    {
+     "fact": "该饮料在乍得被禁止，因其对健康有害",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il s'agit d’une boisson alcoolisée frelatée et bon marché, dont la consommation présente des risques pour la santé et interdite en République du Tchad."
+    },
+    {
+     "fact": "被捕人员已被移交检察院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les personnes interpellées lors de l’opération ont été transférées au parquet."
+    }
+   ],
+   "uncertainties": [
+    "查获的具体数量未在报道中说明",
+    "被捕人数未在报道中说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "博尔库省：执法部门在法亚查获大量“恩格雷格”",
+   "summary_zh": "乍得博尔库省法亚市，执法部门在一次例行巡逻中查获大量俗称“恩格雷格”的劣质酒精饮料。该饮料在乍得被禁止销售，因其对健康有害。警方已将被捕人员移交检察院，他们将面临司法审判。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "博尔库省",
+    "city": "法亚",
+    "site": null,
+    "raw_text": "Faya, dans la province du Borkou"
+   },
+   "key_facts": [
+    {
+     "fact": "执法部门在法亚查获大量俗称“恩格雷格”的劣质酒精饮料",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les forces de l’ordre ont réalisé une importante saisie d’alcool frelaté, communément appelé « Nguereg », à Faya, dans la province du Borkou."
+    },
+    {
+     "fact": "该饮料在乍得被禁止，因其对健康有害",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il s'agit d’une boisson alcoolisée frelatée et bon marché, dont la consommation présente des risques pour la santé et interdite en République du Tchad."
+    },
+    {
+     "fact": "被捕人员已被移交检察院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les personnes interpellées lors de l’opération ont été transférées au parquet."
+    }
+   ],
+   "uncertainties": [
+    "查获的具体数量未在报道中说明",
+    "被捕人数未在报道中说明",
+    "据Le N'Djam Post报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_f2c2faf806d61fa8",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
