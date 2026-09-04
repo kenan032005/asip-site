@@ -1,0 +1,114 @@
+{
+ "label": "Sa23b13f3",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "51989e2476b003f83150b01b60a54e990f25ce783f72fe51ba03ca9fd2455946",
+ "tokens": {
+  "input_tokens": 2293,
+  "output_tokens": 315,
+  "total_tokens": 2608
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该事件为单一来源报道，缺乏交叉验证\"]",
+    "after": "[\"该事件为单一来源报道，缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔：尼亚美打击水泥投机",
+   "summary_zh": "尼日尔政府加强对建筑材料投机的打击力度。在商业与工业部长Abdoulaye Seydou进行突击检查后，国家对尼亚美的水泥特别供应行动实施严格监管。当局于2026年9月3日至9日向市场投放超过2万吨水泥，旨在遏制非正规渠道并确保最终消费者直接获取。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": null,
+    "raw_text": "Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔政府加强对建筑材料投机的打击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement durcit son offensive contre la spéculation sur les matériaux de construction."
+    },
+    {
+     "fact": "国家在尼亚美实施严格监管措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’État impose un arsenal réglementaire strict sur l’opération spéciale d’approvisionnement en ciment à Niamey."
+    },
+    {
+     "fact": "当局向市场投放超过2万吨水泥",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En injectant plus de 20 000 tonnes sur le marché local du 3 au 9 septembre 2026"
+    }
+   ],
+   "uncertainties": [
+    "该事件为单一来源报道，缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔：尼亚美打击水泥投机",
+   "summary_zh": "尼日尔政府加强对建筑材料投机的打击力度。在商业与工业部长Abdoulaye Seydou进行突击检查后，国家对尼亚美的水泥特别供应行动实施严格监管。当局于2026年9月3日至9日向市场投放超过2万吨水泥，旨在遏制非正规渠道并确保最终消费者直接获取。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": null,
+    "raw_text": "Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔政府加强对建筑材料投机的打击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement durcit son offensive contre la spéculation sur les matériaux de construction."
+    },
+    {
+     "fact": "国家在尼亚美实施严格监管措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’État impose un arsenal réglementaire strict sur l’opération spéciale d’approvisionnement en ciment à Niamey."
+    },
+    {
+     "fact": "当局向市场投放超过2万吨水泥",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En injectant plus de 20 000 tonnes sur le marché local du 3 au 9 septembre 2026"
+    }
+   ],
+   "uncertainties": [
+    "该事件为单一来源报道，缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_a0dc6ea6a23b13f3",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
