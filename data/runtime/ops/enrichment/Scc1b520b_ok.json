@@ -1,0 +1,115 @@
+{
+ "label": "Scc1b520b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "8b01536c0876aa1d5e7a258d63961b0892c9c2c01b3506410a37b30bac270a38",
+ "tokens": {
+  "input_tokens": 2769,
+  "output_tokens": 513,
+  "total_tokens": 3282
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼亚美101基地事件：向三名阵亡总统卫队成员致敬",
+   "summary_zh": "2026年8月31日下午，尼日尔在尼亚美空军101基地为8月28日至29日夜间事件中阵亡的三名总统卫队成员举行葬礼仪式。总理、CNSP成员、政府官员及外交使团等出席。三名士兵被追授军衔并获得“Tarha-Nakal”国内行动勋章。此前，一群违反军纪的士兵曾扣押战友并对首都敏感地点开枪，安全部队迅速反应控制了局势。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "101空军基地",
+    "raw_text": "Niamey, base 101 de l’armée de l’air"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔为三名阵亡总统卫队成员举行葬礼",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Hommages rendus aux trois éléments de la Garde Présidentielle tombés lors de ces évènements"
+    },
+    {
+     "fact": "葬礼于2026年8月31日下午在尼亚美101空军基地举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La cérémonie funéraire ... s’est déroulée dans l’après midi de ce lundi 31 août 2026 à la base 101 de l’armée de l’air de Niamey"
+    },
+    {
+     "fact": "三名士兵被追授军衔和勋章",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la promotion aux grades supérieurs à titre posthume de ces trois soldats ... décerné à titre posthume la Médaille des Théâtres d’Opérations Intérieures « Tarha-Nakal »"
+    },
+    {
+     "fact": "事件起因是士兵违反军纪并扣押战友及开枪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un groupe de soldats en rupture avec le règlement militaire a entrepris de séquestrer certains de leurs camarades ... et d’effectuer des tirs sur certains sites sensibles de la capitale"
+    }
+   ],
+   "uncertainties": [
+    "事件具体细节（如伤亡人数、冲突过程）尚未完全披露",
+    "报道为单一来源，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼亚美101基地事件：向三名阵亡总统卫队成员致敬",
+   "summary_zh": "2026年8月31日下午，尼日尔在尼亚美空军101基地为8月28日至29日夜间事件中阵亡的三名总统卫队成员举行葬礼仪式。总理、CNSP成员、政府官员及外交使团等出席。三名士兵被追授军衔并获得“Tarha-Nakal”国内行动勋章。此前，一群违反军纪的士兵曾扣押战友并对首都敏感地点开枪，安全部队迅速反应控制了局势。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "101空军基地",
+    "raw_text": "Niamey, base 101 de l’armée de l’air"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔为三名阵亡总统卫队成员举行葬礼",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Hommages rendus aux trois éléments de la Garde Présidentielle tombés lors de ces évènements"
+    },
+    {
+     "fact": "葬礼于2026年8月31日下午在尼亚美101空军基地举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La cérémonie funéraire ... s’est déroulée dans l’après midi de ce lundi 31 août 2026 à la base 101 de l’armée de l’air de Niamey"
+    },
+    {
+     "fact": "三名士兵被追授军衔和勋章",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la promotion aux grades supérieurs à titre posthume de ces trois soldats ... décerné à titre posthume la Médaille des Théâtres d’Opérations Intérieures « Tarha-Nakal »"
+    },
+    {
+     "fact": "事件起因是士兵违反军纪并扣押战友及开枪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un groupe de soldats en rupture avec le règlement militaire a entrepris de séquestrer certains de leurs camarades ... et d’effectuer des tirs sur certains sites sensibles de la capitale"
+    }
+   ],
+   "uncertainties": [
+    "事件具体细节（如伤亡人数、冲突过程）尚未完全披露",
+    "报道为单一来源，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_3a725ed3cc1b520b",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

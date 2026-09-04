@@ -1,0 +1,128 @@
+{
+ "label": "S554f0680",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6010b79a8f38f61d413cbf18a20d9f12ee775da743f81712a85716b41db964b5",
+ "tokens": {
+  "input_tokens": 2553,
+  "output_tokens": 527,
+  "total_tokens": 3080
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"事件起因中手机盗窃为疑似，尚未证实\", \"开枪宪兵为涉嫌肇事者，具体责任有待调查\", \"事件细节主要依据现场证词和副省长陈述，单一来源报道\"]",
+    "after": "[\"事件起因中手机盗窃为疑似，尚未证实\", \"开枪宪兵为涉嫌肇事者，具体责任有待调查\", \"事件细节主要依据现场证词和副省长陈述，单一来源报道\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "东洛贡省：一名男子在博伊-贝绍被枪杀",
+   "summary_zh": "9月3日晚约20时，一名约三十岁的男子在东洛贡省蒙德朗省姆拜科罗副县博伊-贝绍地区被枪击身亡。据现场证词，事件起因于一起疑似手机盗窃，安全部队在追捕嫌疑人时鸣枪示警，不幸击中受害者。受害者被紧急送往当地卫生中心后不治身亡。涉事宪兵已被逮捕拘留，当局已展开调查以确定责任。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "东洛贡省",
+    "city": "博伊-贝绍",
+    "site": "博伊-贝绍卫生中心附近",
+    "raw_text": "canton de Boï-Bessao, sous-préfecture de Mbaïkoro, département des Monts de Lam, province du Logone Oriental"
+   },
+   "key_facts": [
+    {
+     "fact": "一名约三十岁男子在博伊-贝绍被枪击身亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un homme âgé d’environ trente ans, marié mais sans enfant, a été tué par balle et a succombé par la suite dans la nuit du 3 septembre 2026, aux environs de 20 heures."
+    },
+    {
+     "fact": "事件起因于一起疑似手机盗窃",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "tout est parti à la suite d’un vol présumé d’un téléphone portable."
+    },
+    {
+     "fact": "安全部队鸣枪示警时击中受害者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les forces de défense et de sécurité, qui poursuivaient ce dernier, ont effectué des tirs de sommation. Malheureusement, Madjiadoum Arsène a été atteint par balle."
+    },
+    {
+     "fact": "涉事宪兵已被逮捕拘留",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gendarme, auteur présumé du tir, a été arrêté et placé en détention à la brigade de Mbaïkoro"
+    }
+   ],
+   "uncertainties": [
+    "事件起因中手机盗窃为疑似，尚未证实",
+    "开枪宪兵为涉嫌肇事者，具体责任有待调查",
+    "事件细节主要依据现场证词和副省长陈述，单一来源报道"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "东洛贡省：一名男子在博伊-贝绍被枪杀",
+   "summary_zh": "9月3日晚约20时，一名约三十岁的男子在东洛贡省蒙德朗省姆拜科罗副县博伊-贝绍地区被枪击身亡。据现场证词，事件起因于一起疑似手机盗窃，安全部队在追捕嫌疑人时鸣枪示警，不幸击中受害者。受害者被紧急送往当地卫生中心后不治身亡。涉事宪兵已被逮捕拘留，当局已展开调查以确定责任。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "东洛贡省",
+    "city": "博伊-贝绍",
+    "site": "博伊-贝绍卫生中心附近",
+    "raw_text": "canton de Boï-Bessao, sous-préfecture de Mbaïkoro, département des Monts de Lam, province du Logone Oriental"
+   },
+   "key_facts": [
+    {
+     "fact": "一名约三十岁男子在博伊-贝绍被枪击身亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un homme âgé d’environ trente ans, marié mais sans enfant, a été tué par balle et a succombé par la suite dans la nuit du 3 septembre 2026, aux environs de 20 heures."
+    },
+    {
+     "fact": "事件起因于一起疑似手机盗窃",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "tout est parti à la suite d’un vol présumé d’un téléphone portable."
+    },
+    {
+     "fact": "安全部队鸣枪示警时击中受害者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les forces de défense et de sécurité, qui poursuivaient ce dernier, ont effectué des tirs de sommation. Malheureusement, Madjiadoum Arsène a été atteint par balle."
+    },
+    {
+     "fact": "涉事宪兵已被逮捕拘留",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gendarme, auteur présumé du tir, a été arrêté et placé en détention à la brigade de Mbaïkoro"
+    }
+   ],
+   "uncertainties": [
+    "事件起因中手机盗窃为疑似，尚未证实",
+    "开枪宪兵为涉嫌肇事者，具体责任有待调查",
+    "事件细节主要依据现场证词和副省长陈述，单一来源报道",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_aaabac11554f0680",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

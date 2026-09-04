@@ -1,11 +1,11 @@
 {
  "schema": "stage8c-package3-v1",
- "last_collection_run": "2026-09-04T06:16:55Z",
- "last_successful_collection": "2026-09-04T06:16:55Z",
+ "last_collection_run": "2026-09-04T12:18:21Z",
+ "last_successful_collection": "2026-09-04T12:18:21Z",
  "last_ai_run": null,
  "last_successful_ai": "2026-09-03T17:19:16Z",
  "last_disease_run": null,
- "last_daily_report": "2026-09-03T12:06:05Z",
+ "last_daily_report": "2026-09-04T12:18:48Z",
  "last_weekly_report": "2026-08-29T23:52:16Z",
  "last_deploy": null,
  "processed_hashes": {
@@ -53,6 +53,10 @@
    "daily:canonical:2026-09-03": {
     "classification": "LOW_DATA",
     "fact_pack_hash": "1ce80d1086cc0ded6433b7786c6ede24d45a7465820ecac66d25f305d5f8def1"
+   },
+   "daily:canonical:2026-09-04": {
+    "classification": "FALLBACK",
+    "fact_pack_hash": "0575cf837e9db766dd7b7ce647e0621aaec89c09c714597470c5734abdc018fb"
    }
   },
   "social_enrichment": {
@@ -597,6 +601,41 @@
     "content_hash": "b726906658616678a54753322051b698f7875dbee065ca53d45f637dcd164fc5",
     "ai_input_hash": "c01472c4578df2f11e04b831f2d03c75135da2cdc5f33f9ca69e64ab4aebea5c",
     "cache_hit": false
+   },
+   "EVT_4645f6fa575c5a55": {
+    "status": "ok",
+    "public_eligible": true,
+    "content_hash": "b8789934ab36ebd22e97a0194fe47909a82d6a9d5e32353b87d69144385690d6",
+    "ai_input_hash": "10d808bb5463bf151160cf55311a6a24da926e75dffda92d0b41eeb665e6981e",
+    "cache_hit": false
+   },
+   "EVT_aaabac11554f0680": {
+    "status": "ok",
+    "public_eligible": true,
+    "content_hash": "e3ecbaef3e6f316480383a27a425faf76f7b148d70c197c4cec0f43bb72f7ee7",
+    "ai_input_hash": "6010b79a8f38f61d413cbf18a20d9f12ee775da743f81712a85716b41db964b5",
+    "cache_hit": false
+   },
+   "EVT_3a725ed3cc1b520b": {
+    "status": "ok",
+    "public_eligible": true,
+    "content_hash": "14e5fa5efb38b222c4b5c175c1a7bedf12d4d7309b756599af4b9b8aa14e0ea1",
+    "ai_input_hash": "8b01536c0876aa1d5e7a258d63961b0892c9c2c01b3506410a37b30bac270a38",
+    "cache_hit": false
+   },
+   "EVT_f969319e39916c8d": {
+    "status": "schema_failure",
+    "public_eligible": false,
+    "content_hash": "6c0dcc32ab43c4fa3534dca0b2e36b9263baabc31ef8a026432d0e18d1958a77",
+    "ai_input_hash": "8ec05490532af7122df798dcbf7213bec75631ff26716c5f819a31ff9c91b233",
+    "cache_hit": false
+   },
+   "EVT_8963e4a930758d58": {
+    "status": "ok",
+    "public_eligible": true,
+    "content_hash": "3e739f51a83db9f680031c256e7a7aa4e078d39fde7a51868305769a5f49cc5b",
+    "ai_input_hash": "885ba0692b54d56a7cc748a1f416405e78134d00519234fc5397b82874fdd9f2",
+    "cache_hit": false
    }
   },
   "disease_enrichment": {
@@ -745,14 +784,20 @@
    "record_id": "EVT_5ea8eebfdd9a4bb5",
    "status": "schema_failure",
    "reason": "schema_failure"
+  },
+  {
+   "kind": "social",
+   "record_id": "EVT_f969319e39916c8d",
+   "status": "schema_failure",
+   "reason": "schema_failure"
   }
  ],
  "ai_usage_totals": {
   "social_enrichment": {
-   "input_tokens": 196797,
-   "output_tokens": 38673,
-   "total_tokens": 235470,
-   "calls": 80
+   "input_tokens": 210574,
+   "output_tokens": 41384,
+   "total_tokens": 251958,
+   "calls": 85
   },
   "disease_enrichment": {
    "input_tokens": 28433,
@@ -761,10 +806,10 @@
    "calls": 19
   },
   "daily_analysis": {
-   "input_tokens": 3908,
-   "output_tokens": 583,
-   "total_tokens": 4491,
-   "calls": 2
+   "input_tokens": 5919,
+   "output_tokens": 1066,
+   "total_tokens": 6985,
+   "calls": 3
   },
   "weekly_analysis": {
    "input_tokens": 3372,
@@ -775,6 +820,6 @@
   "brief_analysis": {}
  },
  "reports": {},
- "last_successful_daily_report": "2026-09-03T12:06:05Z",
+ "last_successful_daily_report": "2026-09-04T12:18:48Z",
  "last_successful_weekly_report": "2026-08-29T23:52:16Z"
 }
