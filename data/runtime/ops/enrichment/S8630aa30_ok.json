@@ -1,0 +1,118 @@
+{
+ "label": "S8630aa30",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ac96b0380bb22b1d5af32aae861d6a3d14543b3b1573f5a76371c3975dfbe9c7",
+ "tokens": {
+  "input_tokens": 2741,
+  "output_tokens": 457,
+  "total_tokens": 3198
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"战斗伤亡数字因来源不同而存在差异，尚未得到独立证实\", \"该事件为历史回顾，非当前事件\", \"目前仅有一个来源（Le N'Djam Post）报道此事\"]",
+    "after": "[\"战斗伤亡数字因来源不同而存在差异，尚未得到独立证实\", \"该事件为历史回顾，非当前事件\", \"目前仅有一个来源（Le N'Djam Post）报道此事\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "马腾萨尔：39年后，仍铭刻在军事史上的乍得突袭",
+   "summary_zh": "1987年9月5日，乍得军队袭击了位于利比亚费赞、距乍得边境约一百公里的马腾萨尔重要空军基地。此次行动由哈桑·贾穆斯指挥，并得到总统侯赛因·哈布雷的批准，是乍得-利比亚战争中最大胆的进攻之一。乍得方面宣布打死约1700名利比亚士兵并俘虏约300人，但该数字因来源不同而存在差异，需谨慎看待。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "马腾萨尔空军基地",
+    "raw_text": "Maaten al-Sarra, une importante base aérienne libyenne située dans le Fezzan"
+   },
+   "key_facts": [
+    {
+     "fact": "1987年9月5日乍得军队袭击了利比亚马腾萨尔空军基地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le 5 septembre 1987, les forces tchadiennes frappent Maaten al-Sarra, une importante base aérienne libyenne située dans le Fezzan"
+    },
+    {
+     "fact": "行动由哈桑·贾穆斯指挥并获总统哈布雷批准",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’opération, conduite sous le commandement de Hassan Djamous avec l’aval du président Hissène Habré"
+    },
+    {
+     "fact": "乍得宣布打死约1700名士兵并俘虏约300人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "N’Djaména annonce à l’époque près de 1 700 soldats libyens tués et environ 300 prisonniers"
+    }
+   ],
+   "uncertainties": [
+    "战斗伤亡数字因来源不同而存在差异，尚未得到独立证实",
+    "该事件为历史回顾，非当前事件",
+    "目前仅有一个来源（Le N'Djam Post）报道此事"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "马腾萨尔：39年后，仍铭刻在军事史上的乍得突袭",
+   "summary_zh": "1987年9月5日，乍得军队袭击了位于利比亚费赞、距乍得边境约一百公里的马腾萨尔重要空军基地。此次行动由哈桑·贾穆斯指挥，并得到总统侯赛因·哈布雷的批准，是乍得-利比亚战争中最大胆的进攻之一。乍得方面宣布打死约1700名利比亚士兵并俘虏约300人，但该数字因来源不同而存在差异，需谨慎看待。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "马腾萨尔空军基地",
+    "raw_text": "Maaten al-Sarra, une importante base aérienne libyenne située dans le Fezzan"
+   },
+   "key_facts": [
+    {
+     "fact": "1987年9月5日乍得军队袭击了利比亚马腾萨尔空军基地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le 5 septembre 1987, les forces tchadiennes frappent Maaten al-Sarra, une importante base aérienne libyenne située dans le Fezzan"
+    },
+    {
+     "fact": "行动由哈桑·贾穆斯指挥并获总统哈布雷批准",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’opération, conduite sous le commandement de Hassan Djamous avec l’aval du président Hissène Habré"
+    },
+    {
+     "fact": "乍得宣布打死约1700名士兵并俘虏约300人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "N’Djaména annonce à l’époque près de 1 700 soldats libyens tués et environ 300 prisonniers"
+    }
+   ],
+   "uncertainties": [
+    "战斗伤亡数字因来源不同而存在差异，尚未得到独立证实",
+    "该事件为历史回顾，非当前事件",
+    "目前仅有一个来源（Le N'Djam Post）报道此事",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_4352a30f8630aa30",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

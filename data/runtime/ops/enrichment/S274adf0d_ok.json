@@ -1,0 +1,127 @@
+{
+ "label": "S274adf0d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "7bc901b45a2414fc17c7b4ea6dbc1dd4452c1d65348a12e3a3f5b76e6da2867e",
+ "tokens": {
+  "input_tokens": 1964,
+  "output_tokens": 482,
+  "total_tokens": 2446
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔指责法国煽动未遂兵变，巴黎否认参与",
+   "summary_zh": "尼日尔政府通过电视声明指责法国煽动上周未遂的军事兵变，巴黎方面否认参与。8月29日，不满的士兵袭击了尼亚美一处战略军事基地，并在总统府附近开枪，但军队及其俄罗斯准军事盟友最终平息了兵变。据尼日尔外交部称，骚乱造成三名总统卫队成员死亡，而法新社报道总死亡人数为五人，包括平民。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "战略军事基地及总统府附近",
+    "raw_text": "Niamey, strategic army base, presidential palace"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔政府指责法国煽动上周未遂的军事兵变",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Niger has blamed France for inciting last week’s thwarted military mutiny"
+    },
+    {
+     "fact": "巴黎否认参与袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Paris has denied any involvement in the attack"
+    },
+    {
+     "fact": "8月29日不满士兵袭击尼亚美战略军事基地并在总统府附近开枪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "On August 29, disgruntled soldiers attacked a strategic army base in Niamey and fired shots near the presidential palace"
+    },
+    {
+     "fact": "军队及俄罗斯准军事盟友最终平息兵变",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the army and its Russian paramilitary allies eventually neutralised the mutiny"
+    },
+    {
+     "fact": "尼日尔外交部称三名总统卫队成员死亡，法新社报道总死亡人数为五人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The unrest killed three members of the presidential guard, according to Niger's Foreign Affairs Ministry. AFP reported a total number of five deaths, including civilians."
+    }
+   ],
+   "uncertainties": [
+    "尼日尔对法国的指控尚未得到证实",
+    "死亡人数存在差异：尼日尔外交部称三人，法新社报道五人",
+    "该事件目前仅有一个来源报道"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔指责法国煽动未遂兵变，巴黎否认参与",
+   "summary_zh": "尼日尔政府通过电视声明指责法国煽动上周未遂的军事兵变，巴黎方面否认参与。8月29日，不满的士兵袭击了尼亚美一处战略军事基地，并在总统府附近开枪，但军队及其俄罗斯准军事盟友最终平息了兵变。据尼日尔外交部称，骚乱造成三名总统卫队成员死亡，而法新社报道总死亡人数为五人，包括平民。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "战略军事基地及总统府附近",
+    "raw_text": "Niamey, strategic army base, presidential palace"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔政府指责法国煽动上周未遂的军事兵变",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Niger has blamed France for inciting last week’s thwarted military mutiny"
+    },
+    {
+     "fact": "巴黎否认参与袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Paris has denied any involvement in the attack"
+    },
+    {
+     "fact": "8月29日不满士兵袭击尼亚美战略军事基地并在总统府附近开枪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "On August 29, disgruntled soldiers attacked a strategic army base in Niamey and fired shots near the presidential palace"
+    },
+    {
+     "fact": "军队及俄罗斯准军事盟友最终平息兵变",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the army and its Russian paramilitary allies eventually neutralised the mutiny"
+    },
+    {
+     "fact": "尼日尔外交部称三名总统卫队成员死亡，法新社报道总死亡人数为五人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The unrest killed three members of the presidential guard, according to Niger's Foreign Affairs Ministry. AFP reported a total number of five deaths, including civilians."
+    }
+   ],
+   "uncertainties": [
+    "尼日尔对法国的指控尚未得到证实",
+    "死亡人数存在差异：尼日尔外交部称三人，法新社报道五人",
+    "该事件目前仅有一个来源报道"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_f6132a0f274adf0d",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
