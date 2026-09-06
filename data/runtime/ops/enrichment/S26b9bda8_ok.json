@@ -1,0 +1,113 @@
+{
+ "label": "S26b9bda8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c314e449ea6439e01a657d6e4835e628e80d019d0a2bdf7f642c599e29e7e599",
+ "tokens": {
+  "input_tokens": 2948,
+  "output_tokens": 551,
+  "total_tokens": 3499
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔国民警卫队与Yan Maza Na Tigre团体在马拉迪开展宣传与总动员活动",
+   "summary_zh": "9月5日，尼日尔国民警卫队合唱团与Yan Maza Na Tigre团体在马拉迪市举行宣传与总动员活动，主题为“平民与国防安全部队携手对抗尼日尔之敌”。活动旨在加强社会凝聚力、巩固民族团结，并呼吁青年远离仇恨言论。据称，该活动是总统宣布的总动员的一部分，旨在保障国家和平与安全。目前仅有一个来源（尼日尔官方通讯社ANP）报道此事。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "马拉迪大区",
+    "city": "马拉迪",
+    "site": "官方讲台",
+    "raw_text": "Maradi"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔国民警卫队与Yan Maza Na Tigre团体在马拉迪举行宣传与总动员活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La caravane de sensibilisation et de mobilisation générale du Cœur de la Garde Nationale du Niger (GNN) et du Groupe Yan Maza Na Tigre, a posé ses valises ce samedi 5 septembre 2026 à Maradi"
+    },
+    {
+     "fact": "活动主题为平民与国防安全部队携手对抗尼日尔之敌",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Civils et FDS : main dans la main contre les menaces des ennemis du Niger"
+    },
+    {
+     "fact": "活动旨在加强社会凝聚力、巩固民族团结并促进积极公民意识",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la sensibilisation et la mobilisation générale constituent des leviers essentiels pour renforcer la cohésion sociale, consolider l’unité nationale et promouvoir une citoyenneté active"
+    },
+    {
+     "fact": "据称总动员由尼日尔总统宣布，旨在号召全体尼日尔人保障和平与安全",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la Mobilisation générale a été décrétée par le Président de la République Chef de l'Etat, en vue d’appeler tous les nigériens à se mobiliser pour garantir la paix, la sécurité et la cohésion sociale dans notre pays"
+    }
+   ],
+   "uncertainties": [
+    "该活动为单一来源报道，目前仅尼日尔官方通讯社ANP提供信息，缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔国民警卫队与Yan Maza Na Tigre团体在马拉迪开展宣传与总动员活动",
+   "summary_zh": "9月5日，尼日尔国民警卫队合唱团与Yan Maza Na Tigre团体在马拉迪市举行宣传与总动员活动，主题为“平民与国防安全部队携手对抗尼日尔之敌”。活动旨在加强社会凝聚力、巩固民族团结，并呼吁青年远离仇恨言论。据称，该活动是总统宣布的总动员的一部分，旨在保障国家和平与安全。目前仅有一个来源（尼日尔官方通讯社ANP）报道此事。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "马拉迪大区",
+    "city": "马拉迪",
+    "site": "官方讲台",
+    "raw_text": "Maradi"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔国民警卫队与Yan Maza Na Tigre团体在马拉迪举行宣传与总动员活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La caravane de sensibilisation et de mobilisation générale du Cœur de la Garde Nationale du Niger (GNN) et du Groupe Yan Maza Na Tigre, a posé ses valises ce samedi 5 septembre 2026 à Maradi"
+    },
+    {
+     "fact": "活动主题为平民与国防安全部队携手对抗尼日尔之敌",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Civils et FDS : main dans la main contre les menaces des ennemis du Niger"
+    },
+    {
+     "fact": "活动旨在加强社会凝聚力、巩固民族团结并促进积极公民意识",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la sensibilisation et la mobilisation générale constituent des leviers essentiels pour renforcer la cohésion sociale, consolider l’unité nationale et promouvoir une citoyenneté active"
+    },
+    {
+     "fact": "据称总动员由尼日尔总统宣布，旨在号召全体尼日尔人保障和平与安全",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la Mobilisation générale a été décrétée par le Président de la République Chef de l'Etat, en vue d’appeler tous les nigériens à se mobiliser pour garantir la paix, la sécurité et la cohésion sociale dans notre pays"
+    }
+   ],
+   "uncertainties": [
+    "该活动为单一来源报道，目前仅尼日尔官方通讯社ANP提供信息，缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_b482285b26b9bda8",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

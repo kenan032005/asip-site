@@ -1,0 +1,119 @@
+{
+ "label": "S5ac006e4",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3ba092dc4aad82b0d412ce7f6c96761c350820f8f2701ac6fa06f4e611e2b541",
+ "tokens": {
+  "input_tokens": 2372,
+  "output_tokens": 541,
+  "total_tokens": 2913
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得凯洛：宪兵队展示十名涉嫌犯罪分子并缴获大量赃物",
+   "summary_zh": "乍得凯洛国家宪兵队于2026年9月5日向公众展示了十名涉嫌犯罪分子，并缴获了现金、黄金、武器及摩托车等物品。据称，一名女商人被抢走6000万非洲法郎及黄金，其中2000万非洲法郎和黄金已被找回，其余4000万非洲法郎仍在调查中。目前案件正在司法程序中，嫌疑人将被移送至凯洛拘留所。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "坦吉莱西省",
+    "city": "凯洛",
+    "site": null,
+    "raw_text": "Kélo, Tandjilé-Ouest"
+   },
+   "key_facts": [
+    {
+     "fact": "凯洛国家宪兵队展示了十名涉嫌犯罪分子",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dix présumés malfrats ont été présentés ce samedi 5 septembre 2026 au public à Kélo par la compagnie de la Gendarmerie nationale."
+    },
+    {
+     "fact": "缴获了现金、黄金、武器和摩托车等物品",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "De l’argent, de l’or, une arme, des engins à deux roues et divers autres objets ont été saisis ou retrouvés au cours des opérations."
+    },
+    {
+     "fact": "一名女商人被抢走6000万非洲法郎及黄金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une commerçante présentée comme dépouillée de 60 millions de francs CFA ainsi que de l’or."
+    },
+    {
+     "fact": "已找回2000万非洲法郎和黄金，其余4000万仍在调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon la brigade, 20 millions de francs CFA et l’or ont été retrouvés, tandis que les 40 millions de francs CFA restants font encore l’objet de recherches, l’enquête étant toujours en cours."
+    }
+   ],
+   "uncertainties": [
+    "嫌疑人身份尚未经司法确认，报道中称为“涉嫌”",
+    "被抢金额及找回金额为警方单方面说法，尚未经独立核实",
+    "其余4000万非洲法郎的下落仍在调查中",
+    "事件信息仅来自单一来源（Alwihda Info）"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得凯洛：宪兵队展示十名涉嫌犯罪分子并缴获大量赃物",
+   "summary_zh": "乍得凯洛国家宪兵队于2026年9月5日向公众展示了十名涉嫌犯罪分子，并缴获了现金、黄金、武器及摩托车等物品。据称，一名女商人被抢走6000万非洲法郎及黄金，其中2000万非洲法郎和黄金已被找回，其余4000万非洲法郎仍在调查中。目前案件正在司法程序中，嫌疑人将被移送至凯洛拘留所。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "坦吉莱西省",
+    "city": "凯洛",
+    "site": null,
+    "raw_text": "Kélo, Tandjilé-Ouest"
+   },
+   "key_facts": [
+    {
+     "fact": "凯洛国家宪兵队展示了十名涉嫌犯罪分子",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dix présumés malfrats ont été présentés ce samedi 5 septembre 2026 au public à Kélo par la compagnie de la Gendarmerie nationale."
+    },
+    {
+     "fact": "缴获了现金、黄金、武器和摩托车等物品",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "De l’argent, de l’or, une arme, des engins à deux roues et divers autres objets ont été saisis ou retrouvés au cours des opérations."
+    },
+    {
+     "fact": "一名女商人被抢走6000万非洲法郎及黄金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une commerçante présentée comme dépouillée de 60 millions de francs CFA ainsi que de l’or."
+    },
+    {
+     "fact": "已找回2000万非洲法郎和黄金，其余4000万仍在调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon la brigade, 20 millions de francs CFA et l’or ont été retrouvés, tandis que les 40 millions de francs CFA restants font encore l’objet de recherches, l’enquête étant toujours en cours."
+    }
+   ],
+   "uncertainties": [
+    "嫌疑人身份尚未经司法确认，报道中称为“涉嫌”",
+    "被抢金额及找回金额为警方单方面说法，尚未经独立核实",
+    "其余4000万非洲法郎的下落仍在调查中",
+    "事件信息仅来自单一来源（Alwihda Info）"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_4b6df1455ac006e4",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
