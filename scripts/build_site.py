@@ -361,6 +361,15 @@ def main(run_id=None, no_embed=False):
         # Stage-2 收尾：仅按白名单复制公开数据，绝不复制整个 data/ 目录
         _copy_public_data(DIST_NEW)
     # Stage 8A：公开安全前端视图（site_overview/master_events/...）
+    # 先从 canonical + 持久 admission 重建 timelines（确定性，无 AI），
+    # 保证 master_events/disease_outbreaks/event_timelines 反映生产真值。
+    try:
+        sys.path.insert(0, str(Path(HERE).parent))
+        from scripts.ops import timeline_run as _timeline_run
+        _tl = _timeline_run.build_timelines(data_dir=DATA_DIR)
+        print(f"  timelines rebuilt: social={_tl['social']} disease={_tl['disease']}")
+    except Exception as e:
+        print(f"  timeline rebuild failed (use state artifacts): {e}")
     n_views = _copy_frontend_views(DIST_NEW)
     print(f"  前端视图: {n_views} 个契约")
     if os.path.isdir(REPORTS):
