@@ -502,8 +502,113 @@ def build_disease_outbreaks(disease_tls, iso2cn):
     return {"generated_at": bj_iso(), "count": len(out), "outbreaks": out}
 
 
+def _prod_daily_identity(report_date, stored_rid=None):
+    """Report Identity 单一真值：report_date = YYYY-MM-DD
+    → report_id = DAILY_YYYYMMDD。返回 (rid, repaired, original_rid)。"""
+    expected = None
+    if report_date:
+        compact = str(report_date).replace("-", "").strip()
+        if compact.isdigit() and len(compact) == 8:
+            expected = "DAILY_%s" % compact
+    if expected is None:
+        return (stored_rid or None), False, stored_rid
+    if stored_rid and stored_rid != expected:
+        return expected, True, stored_rid      # deterministic identity repair
+    if not stored_rid:
+        return expected, False, None
+    return stored_rid, False, stored_rid
+
+
+def _load_prod_reports(ops_reports_dir):
+    """Production report outputs → public index entries（确定性装配）。
+
+    来源：data/runtime/ops/reports/（deploy 环境由 production-state 拷贝）。
+    不读取/不生成任何 AI 内容。
+    """
+    import os as _os
+    entries = []
+    if not ops_reports_dir or not _os.path.isdir(ops_reports_dir):
+        return entries
+    for fname, cls in (("daily_full.json", "FULL"),
+                       ("daily_fallback.json", "FALLBACK"),
+                       ("daily_low_data.json", "LOW_DATA"),
+                       ("daily_hold.json", "HOLD")):
+        d = load_json(_os.path.join(ops_reports_dir, fname), None)
+        if not isinstance(d, dict) or not d.get("report_date"):
+            continue
+        rid, repaired, orig = _prod_daily_identity(d.get("report_date"), d.get("report_id"))
+        ent = {
+            "report_id": rid,
+            "report_type": "africa_daily",
+            "type": "africa_daily",
+            "type_cn": "非洲日报",
+            "title": d.get("title") or "非洲地区社会安全与综合形势日报",
+            "country_iso3": None,
+            "report_date": d.get("report_date"),
+            "classification": cls,
+            "period_start": d.get("period_start"),
+            "period_end": d.get("period_end"),
+            "generated_at": d.get("generated_at"),
+            "published_at": d.get("generated_at"),
+            "status": "production",
+            "status_cn": "生产报告",
+            "path": "reports/daily/%s.json" % rid,
+            "is_mock": False,
+            "historical_reconstruction": False,
+            "production_provenance": {
+                "source": "production_state",
+                "trigger": "scheduled_orchestrator",
+                "artifact": fname,
+            },
+        }
+        if repaired:
+            ent["report_identity_repair"] = {
+                "repair_type": "deterministic_report_identity_repair",
+                "original_report_id": orig,
+                "corrected_report_id": rid,
+            }
+        entries.append(ent)
+        break  # 同一轮 daily 只取一个分类产物
+    for mode, ciso in (("tcd_weekly", "TCD"), ("ssd_weekly", "SSD")):
+        for fname, cls in (("%s_full.json" % mode, "FULL"),
+                           ("%s_fallback.json" % mode, "FALLBACK"),
+                           ("%s_low_data.json" % mode, "LOW_DATA")):
+            d = load_json(_os.path.join(ops_reports_dir, fname), None)
+            if not isinstance(d, dict):
+                continue
+            week_end = d.get("week_end") or d.get("report_date")
+            rid = d.get("report_id") or ("WEEKLY_%s_%s" % (
+                ciso, str(week_end or "").replace("-", "")))
+            entries.append({
+                "report_id": rid,
+                "report_type": "country_weekly",
+                "type": "country_weekly",
+                "type_cn": "国家周报",
+                "title": d.get("title") or ("重点国家周报（%s）" % ciso),
+                "country_iso3": ciso,
+                "report_date": week_end,
+                "classification": cls,
+                "period_start": d.get("week_start") or d.get("period_start"),
+                "period_end": week_end or d.get("period_end"),
+                "generated_at": d.get("generated_at"),
+                "published_at": d.get("generated_at"),
+                "status": "production",
+                "status_cn": "生产报告",
+                "path": "reports/weekly/%s.json" % rid,
+                "is_mock": False,
+                "historical_reconstruction": False,
+                "production_provenance": {
+                    "source": "production_state",
+                    "trigger": "scheduled_orchestrator",
+                    "artifact": fname,
+                },
+            })
+            break
+    return entries
+
+
 def build_report_index(daily_input, weekly_inputs, brief_candidates,
-                       preview_files):
+                       preview_files, ops_reports_dir=None):
     """§三十：report index。只标记 status；development 阶段全为 development_sample。
 
     path 一律为 preview-safe 相对路径（report-mock/sample-*.json），
@@ -523,7 +628,7 @@ def build_report_index(daily_input, weekly_inputs, brief_candidates,
             "title": title, "country_iso3": country, "period_start": ps,
             "period_end": pe, "status": "development_sample",
             "status_cn": "开发样例", "published_at": published, "path": path,
-            "is_mock": True,
+            "is_mock": True, "historical_reconstruction": True,
         })
 
     di = daily_input or {}
@@ -547,6 +652,14 @@ def build_report_index(daily_input, weekly_inputs, brief_candidates,
             continue
         seen.add(key)
         dedup.append(r)
+
+    def _sort_key(r):
+        # production 优先；其内按 report_date（或 period_end）倒序；mock 样例排最后
+        d = r.get("report_date") or r.get("period_end") or ""
+        return (0 if r.get("status") == "production" else 1, d,
+                r.get("published_at") or "")
+
+    dedup.sort(key=_sort_key, reverse=True)
     return {"generated_at": bj_iso(), "count": len(dedup), "reports": dedup}
 
 
@@ -591,6 +704,7 @@ def main():
     for ciso in ("TCD", "NER", "SSD"):
         weekly_inputs[ciso] = load_json(ROOT / "data" / "runtime" / "reports" / "weekly_input" / ("%s.json" % ciso), None)
     brief_candidates = load_json(ROOT / "data" / "runtime" / "reports" / "brief_candidates" / "latest.json", None)
+    ops_reports_dir = ROOT / "data" / "runtime" / "ops" / "reports"
     preview_files = sorted((ROOT / "data" / "runtime" / "report_preview").glob("*/DAILY_*.json"))
     preview_files += sorted((ROOT / "data" / "runtime" / "report_preview").glob("*/WEEKLY_*.json"))
     catalog = load_json(ROOT / "data" / "intelligence" / "africa" / "catalog_metrics.json", {})
@@ -612,7 +726,8 @@ def main():
                                                      iso2risk),
         "disease_outbreaks": build_disease_outbreaks(disease_tls, iso2cn),
         "report_index": build_report_index(daily_input, weekly_inputs,
-                                           brief_candidates, preview_files),
+                                           brief_candidates, preview_files,
+                                           ops_reports_dir=str(ops_reports_dir)),
         "knowledge_summary": build_knowledge_summary(catalog, entities),
     }
     for name, data in views.items():
