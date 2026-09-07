@@ -461,6 +461,99 @@ def main(run_id=None, dist_dir=None, stage="dist"):
     else:
         ok("V17-canonical", "canonical 未建立（迁移前），跳过一致性检查")
 
+    # ── Stage8D Public Build Gates（§十五/§十六/§十三）────────────
+    # 数据源真值：canonical + ops 持久 admission（与 timeline_run 同一口径）
+    def _pb_eligible_counts():
+        canon = load_json(os.path.join(DATA_DIR, "canonical", "event_clusters.json")) or {}
+        items = canon.get("items", [])
+        adm = {"social": set(), "disease": set()}
+        psdoc = load_json(os.path.join(DATA_DIR, "runtime", "ops", "production_state.json")) or {}
+        ph = psdoc.get("processed_hashes") or {}
+        for kind, key in (("social", "social_enrichment"), ("disease", "disease_enrichment")):
+            for fid, meta in (ph.get(key) or {}).items():
+                if isinstance(meta, dict) and meta.get("public_eligible"):
+                    adm[kind].add(fid)
+        master = sum(1 for c in items
+                     if c.get("public_eligible") or (c.get("event_id") in adm["social"]))
+        ddoc = load_json(os.path.join(DATA_DIR, "disease", "canonical", "outbreak_events.json")) or {}
+        ditems = ddoc.get("items", [])
+        disease = sum(1 for c in ditems
+                      if c.get("public_eligible") or (c.get("disease_event_id") in adm["disease"]))
+        return master, disease
+
+    def _pb_dist_count(rel, key):
+        doc = load_json(os.path.join(dist_dir, "data", rel)) or {}
+        if key == "timelines":
+            return len(doc.get("timelines") or {})
+        return doc.get("count") or 0
+
+    e_master, e_disease = _pb_eligible_counts()
+    b_master = _pb_dist_count("master_events.json", "count")
+    b_disease = _pb_dist_count("disease_outbreaks.json", "count")
+
+    # V-PB1 Public Build Nonempty Sanity：eligible>0 则 built 必须 >0 且与 eligible 一致
+    pb_issues = []
+    if e_master > 0 and b_master == 0:
+        pb_issues.append("master_events: eligible=%d built=0" % e_master)
+    elif e_master > 0 and b_master != e_master:
+        pb_issues.append("master_events: eligible=%d built=%d（应一致）" % (e_master, b_master))
+    if e_disease > 0 and b_disease == 0:
+        pb_issues.append("disease_outbreaks: eligible=%d built=0" % e_disease)
+    elif e_disease > 0 and b_disease != e_disease:
+        pb_issues.append("disease_outbreaks: eligible=%d built=%d（应一致）" % (e_disease, b_disease))
+    if pb_issues:
+        fail("V-PB1-nonempty-sanity", "；".join(pb_issues), is_critical=True)
+    else:
+        ok("V-PB1-nonempty-sanity",
+           "master eligible=%d built=%d；disease eligible=%d built=%d" % (
+               e_master, b_master, e_disease, b_disease))
+
+    # V-PB2 Public Catastrophic Drop：候选 build 相对当前公开站点不得 >0 → 0
+    prev_path = os.environ.get("ASIP_PREV_PUBLIC_COUNTS")
+    prev = load_json(prev_path) if prev_path and os.path.exists(prev_path) else None
+    if prev:
+        pm = prev.get("master_events_count") or 0
+        pd = prev.get("disease_outbreaks_count") or 0
+        pr = prev.get("report_index_count") or 0
+        bm = b_master
+        bd = b_disease
+        br = _pb_dist_count("report_index.json", "count")
+        drops = []
+        if pm > 0 and bm == 0:
+            drops.append("master %d→0" % pm)
+        if pd > 0 and bd == 0:
+            drops.append("disease %d→0" % pd)
+        if pr > 0 and br == 0:
+            drops.append("report_index %d→0" % pr)
+        drop_ratio = lambda a, b: round((a - b) / a, 4) if a else 0.0
+        print("PB drop ratios: master=%s disease=%s reports=%s" % (
+            drop_ratio(pm, bm), drop_ratio(pd, bd), drop_ratio(pr, br)))
+        if drops:
+            fail("V-PB2-catastrophic-drop", "；".join(drops), is_critical=True)
+        else:
+            ok("V-PB2-catastrophic-drop", "无 >0→0 回退")
+    else:
+        ok("V-PB2-catastrophic-drop", " prev counts 不可得（NOT_APPLICABLE）")
+
+    # V-PB3 Report Identity：daily 产物 report_id 必须等于 DAILY_<report_date compact>
+    _daily = None
+    for _fn in ("daily_full.json", "daily_fallback.json", "daily_low_data.json"):
+        _d = load_json(os.path.join(DATA_DIR, "runtime", "ops", "reports", _fn))
+        if isinstance(_d, dict) and _d.get("report_date"):
+            _daily = _d
+            break
+    if _daily:
+        _rd = str(_daily.get("report_date")).replace("-", "")
+        if _daily.get("report_id") == "DAILY_%s" % _rd:
+            ok("V-PB3-report-identity", "%s == DAILY_%s" % (_daily.get("report_id"), _rd))
+        else:
+            fail("V-PB3-report-identity",
+                 "report_id=%s 与 report_date=%s 不一致（须 DAILY_%s）" % (
+                     _daily.get("report_id"), _daily.get("report_date"), _rd),
+                 is_critical=True)
+    else:
+        ok("V-PB3-report-identity", "无 daily 产物（跳过）")
+
     # ── 总结 ────────────────────────────────────────────────
     print(f"\n{'='*60}")
     print(f"校验结果: {len(errors)} 个问题, {len(critical)} 个严重错误")
