@@ -1,0 +1,111 @@
+{
+ "label": "S228ed9ed",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "2f4bca77589ea2c323d29b3672719250a88a2631c82d2a3b617cb44232eee9e1",
+ "tokens": {
+  "input_tokens": 2201,
+  "output_tokens": 364,
+  "total_tokens": 2565
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据Studio Kalangou报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔Kalangou电台9月7日节目：性别暴力、司法与蔬菜种植",
+   "summary_zh": "尼日尔Kalangou电台9月7日播出的节目讨论了津德尔地区的性别暴力问题，包括其形式、幸存者救助机制及涉及的行动者。节目还涉及女性割礼的法律规定，以及阿加德兹地区农民在降雨稀少和河道干涸情况下开始种植洋葱的情况。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Niger"
+   },
+   "key_facts": [
+    {
+     "fact": "节目讨论了津德尔地区的性别暴力问题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’entretien du jour porte sur la situation des violences basées sur le genre dans la région de Zinder."
+    },
+    {
+     "fact": "节目涉及女性割礼的法律规定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La rubrique justice est consacrée à l’excision ou mutilation génitale féminine. Que dit la loi sur les dispositions du Code pénal relatives à cette pratique ?"
+    },
+    {
+     "fact": "阿加德兹农民开始种植洋葱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À Agadez, l’écho des régions s’intéresse aux semis d’oignons. Les maraîchers ont commencé leurs activités malgré la rareté des pluies et l’insuffisance d’écoulement des koris."
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "none",
+   "classification_confidence": 90
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔Kalangou电台9月7日节目：性别暴力、司法与蔬菜种植",
+   "summary_zh": "尼日尔Kalangou电台9月7日播出的节目讨论了津德尔地区的性别暴力问题，包括其形式、幸存者救助机制及涉及的行动者。节目还涉及女性割礼的法律规定，以及阿加德兹地区农民在降雨稀少和河道干涸情况下开始种植洋葱的情况。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Niger"
+   },
+   "key_facts": [
+    {
+     "fact": "节目讨论了津德尔地区的性别暴力问题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’entretien du jour porte sur la situation des violences basées sur le genre dans la région de Zinder."
+    },
+    {
+     "fact": "节目涉及女性割礼的法律规定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La rubrique justice est consacrée à l’excision ou mutilation génitale féminine. Que dit la loi sur les dispositions du Code pénal relatives à cette pratique ?"
+    },
+    {
+     "fact": "阿加德兹农民开始种植洋葱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À Agadez, l’écho des régions s’intéresse aux semis d’oignons. Les maraîchers ont commencé leurs activités malgré la rareté des pluies et l’insuffisance d’écoulement des koris."
+    }
+   ],
+   "uncertainties": [
+    "据Studio Kalangou报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 90
+  }
+ },
+ "event_id": "EVT_0684bc57228ed9ed",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
