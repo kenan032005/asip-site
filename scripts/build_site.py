@@ -18,6 +18,7 @@ import os
 import sys
 import json
 import shutil
+from pathlib import Path
 import re
 import argparse
 from datetime import datetime, timedelta, timezone
@@ -115,6 +116,63 @@ def _sanitize_public(obj):
     if isinstance(obj, str):
         return POSIX_PATH_RE.sub("<redacted-path>", WIN_PATH_RE.sub("<redacted-path>", obj))
     return obj
+
+
+def _sync_legacy_from_canonical():
+    """V17 Compatibility：canonical truth → legacy view（单向重建）。
+
+    deploy 环境中 data/events.json 是 repo 静态文件，而 data/canonical/ 被
+    production-state 覆盖；canonical 新增 cluster 时两者集合不一致，V17
+    fail-closed 阻断部署。本步骤在 build 前用 compatibility export 重建
+    legacy 视图（events/pending/quarantine/public published），保证
+    canonical → compatibility export → legacy view 恒同步。
+    不修改 canonical 本身；write_if_changed 保证幂等。
+    """
+    canon = os.path.join(DATA_DIR, "canonical", "event_clusters.json")
+    if not os.path.exists(canon):
+        return False
+    try:
+        sys.path.insert(0, HERE)
+        from scripts.data.repository import Repository
+        from scripts.data.compatibility_export import export_all
+        repo = Repository(root=Path(DATA_DIR))
+        run_id = os.environ.get("GITHUB_RUN_ID", "build_%s" %
+                                bj_format().replace(" ", "_").replace(":", ""))
+        export_all(repo, run_id=run_id)
+        print("  legacy views rebuilt from canonical (V17 sync)")
+        return True
+    except Exception as e:
+        print(f"  ⚠ canonical→legacy sync failed (keep as-is): {e}")
+        return False
+
+
+def _copy_production_reports(dist_root):
+    """Production report outputs → dist/reports/{daily,weekly}/。
+
+    source = data/runtime/ops/reports/（deploy 环境由 state 拷贝）；
+    report_index.json 的 path 字段与此处发布路径一一对应。
+    gates/fact_pack/run_summary 为运行内部产物，不进公开归档。
+    """
+    src_dir = os.path.join(DATA_DIR, "runtime", "ops", "reports")
+    if not os.path.isdir(src_dir):
+        return 0
+    n = 0
+    for sub, prefixes in (("daily", ("daily_",)),
+                          ("weekly", ("tcd_weekly_", "ssd_weekly_"))):
+        dst_dir = os.path.join(dist_root, "reports", sub)
+        os.makedirs(dst_dir, exist_ok=True)
+        for fn in os.listdir(src_dir):
+            if not fn.endswith(".json"):
+                continue
+            if not fn.startswith(prefixes):
+                continue
+            if fn.endswith(("_gates.json", "_fact_pack.json")):
+                continue
+            if fn == "reports_run_summary.json":
+                continue
+            shutil.copy2(os.path.join(src_dir, fn), os.path.join(dst_dir, fn))
+            n += 1
+    return n
 
 
 def _copy_public_data(dist_root):
@@ -297,6 +355,8 @@ def main(run_id=None, no_embed=False):
     # 复制静态资源
     if os.path.isdir(ASSETS):
         shutil.copytree(ASSETS, os.path.join(DIST_NEW, "assets"))
+    # V17 Compatibility：canonical → legacy 视图同步（必须在复制公开数据之前）
+    _sync_legacy_from_canonical()
     if os.path.isdir(DATA_DIR):
         # Stage-2 收尾：仅按白名单复制公开数据，绝不复制整个 data/ 目录
         _copy_public_data(DIST_NEW)
@@ -305,6 +365,9 @@ def main(run_id=None, no_embed=False):
     print(f"  前端视图: {n_views} 个契约")
     if os.path.isdir(REPORTS):
         shutil.copytree(REPORTS, os.path.join(DIST_NEW, "reports"))
+    # Production report outputs → 公开归档
+    n_prod_reports = _copy_production_reports(DIST_NEW)
+    print(f"  生产报告归档: {n_prod_reports} 个文件")
 
     # 独立微型样板：不进入正式导航，构建为 GitHub Pages 项目路径下的静态子树
     from build_intelligence_demo import build_intelligence_demo
