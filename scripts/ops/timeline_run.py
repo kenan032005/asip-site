@@ -32,14 +32,50 @@ def _bj_fmt(ts):
     return ts if ts else None
 
 
+def load_public_admission(data_dir=None):
+    """Public Admission 真值读取（Stage8D Public Build Repair）。
+
+    admission 判定由 enrichment safety gate 做出，持久化落点：
+      1) canonical item 字段 public_eligible（临时 checkout 回写，state 不持久）；
+      2) production_state.json -> processed_hashes.<kind>.<fid>.public_eligible
+         （ops ledger 持久真值）。
+    本函数读取 (2) 作为权威集合（(1) 仅作补充），不改变判定规则本身。
+    返回 {"social": set(fid), "disease": set(fid)}。
+    """
+    root = Path(data_dir) if data_dir else ROOT / "data"
+    out = {"social": set(), "disease": set()}
+    p = root / "runtime" / "ops" / "production_state.json"
+    if not p.exists():
+        return out
+    try:
+        doc = json.loads(p.read_text(encoding="utf-8"))
+    except Exception:
+        return out
+    ph = doc.get("processed_hashes") or {}
+    for kind, key in (("social", "social_enrichment"),
+                      ("disease", "disease_enrichment")):
+        for fid, meta in (ph.get(key) or {}).items():
+            if isinstance(meta, dict) and meta.get("public_eligible"):
+                out[kind].add(fid)
+    return out
+
+
+def _is_public_eligible(item, fid, admission):
+    """单条记录 admission 判定（只读既有判定，不新增/放宽规则）。"""
+    if item.get("public_eligible"):
+        return True
+    return fid in admission
+
+
 def _build_social_timelines(events):
     """canonical public_eligible 记录 → social timeline 结构。"""
+    admission = admission or set()
     timelines = []
     for e in events:
         mid = e.get("master_event_id") or e.get("event_id")
         if not mid:
             continue
-        if not e.get("public_eligible"):
+        if not _is_public_eligible(e, e.get("event_id"), admission):
             continue
         sl = e.get("source_links") or []
         srcs = [s.get("source_name") for s in sl if isinstance(s, dict) and s.get("source_name")]
@@ -71,14 +107,15 @@ def _build_social_timelines(events):
     return timelines
 
 
-def _build_disease_timelines(diseases):
+def _build_disease_timelines(diseases, admission=None):
     """canonical disease 记录 → disease timeline 结构（unknown = null 保留）。"""
+    admission = admission or set()
     timelines = []
     for d in diseases:
         oid = d.get("disease_event_id") or d.get("outbreak_id")
         if not oid:
             continue
-        if not d.get("public_eligible"):
+        if not _is_public_eligible(d, oid, admission):
             continue
         sl = d.get("source_links") or []
         srcs = [s.get("source_name") for s in sl if isinstance(s, dict) and s.get("source_name")]
@@ -114,8 +151,9 @@ def build_timelines(data_dir=None, emit=lambda s: print(s)):
     dc = json.loads((root / "disease" / "canonical" / "outbreak_events.json").read_text(
         encoding="utf-8"))
     diseases = dc.get("items", [])
-    social_tls = _build_social_timelines(events)
-    disease_tls = _build_disease_timelines(diseases)
+    admission = load_public_admission(data_dir=data_dir)
+    social_tls = _build_social_timelines(events, admission.get("social"))
+    disease_tls = _build_disease_timelines(diseases, admission.get("disease"))
     run_id = ps._utcnow_iso().replace(":", "").replace("-", "")[:15] + "_tl"
     TIMELINE_DIR.mkdir(parents=True, exist_ok=True)
     (TIMELINE_DIR / "social_timelines.json").write_text(
