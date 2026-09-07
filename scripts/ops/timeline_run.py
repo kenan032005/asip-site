@@ -67,7 +67,7 @@ def _is_public_eligible(item, fid, admission):
     return fid in admission
 
 
-def _build_social_timelines(events):
+def _build_social_timelines(events, admission=None):
     """canonical public_eligible 记录 → social timeline 结构。"""
     admission = admission or set()
     timelines = []
