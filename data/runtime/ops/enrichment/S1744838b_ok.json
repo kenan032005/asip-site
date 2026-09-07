@@ -1,0 +1,115 @@
+{
+ "label": "S1744838b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "840a9ff385fb431079955e536f35db26972bb1f768ff97ffc80cc10e0d2fd625",
+ "tokens": {
+  "input_tokens": 2535,
+  "output_tokens": 512,
+  "total_tokens": 3047
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得文化部传唤第九区选美比赛组织者",
+   "summary_zh": "乍得旅游发展、文化与手工业部表示，获悉恩贾梅纳市第九区将于9月5日举行一场未经其事先授权的“第九区选美比赛”活动。该部称，在活动中发现一段舞蹈表演“严重损害良好风尚、女性尊严以及乍得社会的形象和价值观”，并对此表示“强烈关切”。该部以“最坚决的态度”予以谴责，并传唤活动组织者在公报发布后72小时内前往该部相关部门作出解释，同时保留诉诸行政、安全及司法当局的权利。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": "第九区",
+    "raw_text": "9ème arrondissement de la ville de N’Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得文化部传唤第九区选美比赛组织者",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Le ministère de la Culture convoque les organisateurs de l’élection miss du 9ème arrondissement de N’Djaména"
+    },
+    {
+     "fact": "活动未经文化部事先授权",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "organisé sans son autorisation préalable"
+    },
+    {
+     "fact": "文化部谴责活动中舞蹈表演损害良好风尚和女性尊严",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une prestation dansée a été exécutée dans des conditions « gravement attentatoires aux bonnes mœurs, à la dignité de la femme ainsi qu’à l’image et aux valeurs de la société tchadienne »"
+    },
+    {
+     "fact": "组织者须在72小时内向文化部说明情况",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "convoque les organisateurs de l’événement incriminé, lesquels sont tenus de se présenter devant les services compétents du ministère dans un délai de soixante-douze (72) heures"
+    }
+   ],
+   "uncertainties": [
+    "该事件为单一来源报道，目前仅有一个来源（Tchadinfos），尚缺乏交叉验证。",
+    "文化部所称的舞蹈表演具体内容及细节尚未得到独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得文化部传唤第九区选美比赛组织者",
+   "summary_zh": "乍得旅游发展、文化与手工业部表示，获悉恩贾梅纳市第九区将于9月5日举行一场未经其事先授权的“第九区选美比赛”活动。该部称，在活动中发现一段舞蹈表演“严重损害良好风尚、女性尊严以及乍得社会的形象和价值观”，并对此表示“强烈关切”。该部以“最坚决的态度”予以谴责，并传唤活动组织者在公报发布后72小时内前往该部相关部门作出解释，同时保留诉诸行政、安全及司法当局的权利。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": "第九区",
+    "raw_text": "9ème arrondissement de la ville de N’Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得文化部传唤第九区选美比赛组织者",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Le ministère de la Culture convoque les organisateurs de l’élection miss du 9ème arrondissement de N’Djaména"
+    },
+    {
+     "fact": "活动未经文化部事先授权",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "organisé sans son autorisation préalable"
+    },
+    {
+     "fact": "文化部谴责活动中舞蹈表演损害良好风尚和女性尊严",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une prestation dansée a été exécutée dans des conditions « gravement attentatoires aux bonnes mœurs, à la dignité de la femme ainsi qu’à l’image et aux valeurs de la société tchadienne »"
+    },
+    {
+     "fact": "组织者须在72小时内向文化部说明情况",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "convoque les organisateurs de l’événement incriminé, lesquels sont tenus de se présenter devant les services compétents du ministère dans un délai de soixante-douze (72) heures"
+    }
+   ],
+   "uncertainties": [
+    "该事件为单一来源报道，目前仅有一个来源（Tchadinfos），尚缺乏交叉验证。",
+    "文化部所称的舞蹈表演具体内容及细节尚未得到独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_5e48c0ce1744838b",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

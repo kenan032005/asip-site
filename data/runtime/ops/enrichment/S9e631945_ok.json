@@ -1,0 +1,114 @@
+{
+ "label": "S9e631945",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "59f63f2e6865a8c9764157c6202664dd87865faa0e4c20a689bd3e0362047144",
+ "tokens": {
+  "input_tokens": 2756,
+  "output_tokens": 385,
+  "total_tokens": 3141
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅有一个来源报道此消息，缺乏交叉验证\"]",
+    "after": "[\"目前仅有一个来源报道此消息，缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得RENFORT项目招标聘请顾问制定性别与社会包容战略",
+   "summary_zh": "乍得RENFORT项目发布意向征询，拟聘请顾问制定性别、社会包容和定向战略。该项目由国际农业发展基金（FIDA）资助，任务期限为45天，投标截止日期为2026年9月21日12时。目前仅有一个来源报道此消息。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": "农业生产和工业化部",
+    "raw_text": "N’Djaména"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得RENFORT项目发布意向征询，聘请顾问制定性别与社会包容战略",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Tchad : le projet RENFORT recherche un cabinet pour élaborer sa stratégie genre et inclusion sociale"
+    },
+    {
+     "fact": "项目由FIDA资助，任务期限45天",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La mission, financée dans le cadre d’un appui du FIDA, est prévue pour une durée de 45 jours."
+    },
+    {
+     "fact": "投标截止日期为2026年9月21日12时",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les manifestations d’intérêt doivent être déposées auprès de la Coordination nationale du Projet RENFORT, au ministère de la Production et de l’Industrialisation agricole à N’Djaména, au plus tard le 21 septembre 2026 à 12 heures."
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源报道此消息，缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 90
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得RENFORT项目招标聘请顾问制定性别与社会包容战略",
+   "summary_zh": "乍得RENFORT项目发布意向征询，拟聘请顾问制定性别、社会包容和定向战略。该项目由国际农业发展基金（FIDA）资助，任务期限为45天，投标截止日期为2026年9月21日12时。目前仅有一个来源报道此消息。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": "农业生产和工业化部",
+    "raw_text": "N’Djaména"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得RENFORT项目发布意向征询，聘请顾问制定性别与社会包容战略",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Tchad : le projet RENFORT recherche un cabinet pour élaborer sa stratégie genre et inclusion sociale"
+    },
+    {
+     "fact": "项目由FIDA资助，任务期限45天",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La mission, financée dans le cadre d’un appui du FIDA, est prévue pour une durée de 45 jours."
+    },
+    {
+     "fact": "投标截止日期为2026年9月21日12时",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les manifestations d’intérêt doivent être déposées auprès de la Coordination nationale du Projet RENFORT, au ministère de la Production et de l’Industrialisation agricole à N’Djaména, au plus tard le 21 septembre 2026 à 12 heures."
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源报道此消息，缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 90
+  }
+ },
+ "event_id": "EVT_50c756f59e631945",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
