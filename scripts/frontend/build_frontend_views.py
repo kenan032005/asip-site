@@ -631,6 +631,9 @@ def build_report_index(daily_input, weekly_inputs, brief_candidates,
             "is_mock": True, "historical_reconstruction": True,
         })
 
+    # 一级来源：production report outputs（data/runtime/ops/reports/）
+    reports.extend(_load_prod_reports(ops_reports_dir))
+
     di = daily_input or {}
     push(di.get("report_id") or "DAILY_DEV", "africa_daily",
          di.get("title") or "非洲地区社会安全与综合形势日报（开发样例）",
