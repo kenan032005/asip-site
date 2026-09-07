@@ -129,6 +129,38 @@ def freshness_gates(report_obj, mode, run_at=None, enforce=True):
             "actual_report_date": rd}
 
 
+def normalize_report_identity(report, mode):
+    """Report Identity 单一真值（deterministic，Stage8D Public Build Repair）。
+
+    daily：report_date = YYYY-MM-DD → report_id 必须 = DAILY_YYYYMMDD；
+    weekly：report_id 缺失时以 WEEKLY_<ISO>_<week_end> 兜底。
+    返回 (gate, repair_info)。daily 的 report_date 缺失/非法 → FAIL
+    （classify → HOLD，不得发布）。不改写任何业务内容，只修 identity。
+    """
+    rd = report.get("report_date")
+    orig = report.get("report_id")
+    if mode == "daily":
+        if not rd:
+            return "FAIL", None
+        compact = str(rd).replace("-", "").strip()
+        if not (compact.isdigit() and len(compact) == 8):
+            return "FAIL", None
+        expected = "DAILY_%s" % compact
+        if orig != expected:
+            report["report_id"] = expected
+            repair = {"repair_type": "deterministic_report_identity_repair",
+                      "original_report_id": orig, "corrected_report_id": expected,
+                      "report_date": rd}
+            report["report_identity_repair"] = repair
+            return "PASS", repair
+        return "PASS", None
+    if not orig:
+        we = (report.get("period_end") or rd or "")
+        report["report_id"] = "WEEKLY_%s_%s" % (
+            (mode.split("_")[0] or "XX").upper(), str(we).replace("-", ""))
+    return "PASS", None
+
+
 def generate_report(mode, input_obj, provider, telemetry, emit, run_at=None,
                     source="derived"):
     """生成一份报告：Fact Pack → optional AI Analysis → Assembler → Gates。"""
@@ -158,6 +190,9 @@ def generate_report(mode, input_obj, provider, telemetry, emit, run_at=None,
                                  enforce=(source == "canonical")))
     # §D：trial identity 泄漏门控（所有 daily 报告均检查）
     gates["TRIAL_FIXTURE_LEAK_GATE"] = trial_fixture_leak_gate(report, mode)
+    # Report Identity 单一真值门控（report_id 必须与 business date 一致）
+    id_gate, _id_repair = normalize_report_identity(report, mode)
+    gates["REPORT_ID_DATE_CONSISTENCY_GATE"] = id_gate
     return {"mode": mode, "fact_pack": fp, "fact_pack_hash": fh,
             "analysis": analysis, "analysis_result": ares,
             "report": report, "gates": gates}
@@ -176,7 +211,7 @@ def classify(report_res):
         return "HOLD"
     # §十二：业务日期 / 周期新鲜度任一 FAIL → HOLD（fixture 报告不得进入 Production）
     for gate in ("REPORT_BUSINESS_DATE_GATE", "DAILY_PERIOD_FRESHNESS_GATE",
-                 "TRIAL_FIXTURE_LEAK_GATE"):
+                 "TRIAL_FIXTURE_LEAK_GATE", "REPORT_ID_DATE_CONSISTENCY_GATE"):
         if g.get(gate) == "FAIL":
             return "HOLD"
     ares = report_res["analysis_result"]
@@ -210,6 +245,14 @@ def run(mode, source, provider=None, state=None, ops_run=None, out_dir=None,
         (out / ("%s_%s.json" % (m, cls.lower()))).write_text(
             json.dumps(rr["report"], ensure_ascii=False, indent=1) + "\n",
             encoding="utf-8")
+        # 按 business date 落盘（production-state 累积保留，供 public index
+        # 装配多日历史；单文件覆盖版保留作兼容指针）
+        dated = (rr["report"].get("report_date")
+                 or rr["report"].get("period_end"))
+        if dated:
+            (out / ("%s_%s.json" % (m, str(dated).replace("-", "")))).write_text(
+                json.dumps(rr["report"], ensure_ascii=False, indent=1) + "\n",
+                encoding="utf-8")
         (out / ("%s_fact_pack.json" % m)).write_text(
             json.dumps(rr["fact_pack"], ensure_ascii=False, indent=1) + "\n",
             encoding="utf-8")
