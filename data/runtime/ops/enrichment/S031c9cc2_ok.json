@@ -1,0 +1,106 @@
+{
+ "label": "S031c9cc2",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ab160e3a6d71e50a6203e643acc1f9713d6bc1505fc0fdab42f347261ee46ed4",
+ "tokens": {
+  "input_tokens": 2368,
+  "output_tokens": 333,
+  "total_tokens": 2701
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"拘留原因尚未明确，官方未作说明\", \"信息来源单一，缺乏交叉验证\"]",
+    "after": "[\"拘留原因尚未明确，官方未作说明\", \"信息来源单一，缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔：前国防部长卡拉·穆塔里被拘留后疑问重重",
+   "summary_zh": "尼日尔前国防部长卡拉·穆塔里（62岁，2016至2019年间任职）在马拉迪地区被拘留一周后，目前被关押在首都尼亚美的宪兵队。官方尚未就其案件发表任何声明，拘留原因仍不明朗。此次拘留发生在尼亚美暴力兵变后的紧张局势背景下。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "宪兵队",
+    "raw_text": "Niamey, gendarmerie"
+   },
+   "key_facts": [
+    {
+     "fact": "前国防部长卡拉·穆塔里被拘留，目前关押在尼亚美宪兵队",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kalla Moutari est à la gendarmerie, dans la capitale Niamey"
+    },
+    {
+     "fact": "拘留发生在暴力兵变三天后，官方未作说明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une semaine après l'interpellation de l'ancien ministre de la Défense de 62 ans entre 2016 et 2019 dans la région de Maradi, aucune communication officielle n'a pour l'instant été faite sur son cas"
+    }
+   ],
+   "uncertainties": [
+    "拘留原因尚未明确，官方未作说明",
+    "信息来源单一，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔：前国防部长卡拉·穆塔里被拘留后疑问重重",
+   "summary_zh": "尼日尔前国防部长卡拉·穆塔里（62岁，2016至2019年间任职）在马拉迪地区被拘留一周后，目前被关押在首都尼亚美的宪兵队。官方尚未就其案件发表任何声明，拘留原因仍不明朗。此次拘留发生在尼亚美暴力兵变后的紧张局势背景下。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "宪兵队",
+    "raw_text": "Niamey, gendarmerie"
+   },
+   "key_facts": [
+    {
+     "fact": "前国防部长卡拉·穆塔里被拘留，目前关押在尼亚美宪兵队",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kalla Moutari est à la gendarmerie, dans la capitale Niamey"
+    },
+    {
+     "fact": "拘留发生在暴力兵变三天后，官方未作说明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une semaine après l'interpellation de l'ancien ministre de la Défense de 62 ans entre 2016 et 2019 dans la région de Maradi, aucune communication officielle n'a pour l'instant été faite sur son cas"
+    }
+   ],
+   "uncertainties": [
+    "拘留原因尚未明确，官方未作说明",
+    "信息来源单一，缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_8aaed814031c9cc2",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
