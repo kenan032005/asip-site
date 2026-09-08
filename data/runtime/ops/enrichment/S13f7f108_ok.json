@@ -1,0 +1,104 @@
+{
+ "label": "S13f7f108",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "992b59108ad6e2038b5a6cf51caee111fe04f008ee37eaa4424ee7b95f8a0383",
+ "tokens": {
+  "input_tokens": 2661,
+  "output_tokens": 287,
+  "total_tokens": 2948
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"活动具体参与人数未明确\"]",
+    "after": "[\"活动具体参与人数未明确\", \"据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "多索举行促进和平与社会凝聚力的特别动员活动",
+   "summary_zh": "尼日尔多索市于2026年9月8日在大清真寺举行集体祈祷和古努特仪式，众多信徒及行政、宗教和军方代表参加。省长呼吁加强警惕以应对恐怖主义，苏丹则强调和平的重要性。此次活动旨在促进国家和平与社会凝聚力。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "多索",
+    "city": "多索",
+    "site": "大清真寺",
+    "raw_text": "Dosso, la grande mosquée de Dosso"
+   },
+   "key_facts": [
+    {
+     "fact": "多索举行集体祈祷和古努特仪式",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une prière collective suivie de kounout s’est déroulée à la grande mosquée de Dosso"
+    },
+    {
+     "fact": "省长呼吁加强警惕以应对恐怖主义",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il a exhorté les chefs des villages et des quartiers à renforcer leur vigilance pour détecter tout comportement suspect et contribuer à la lutte contre le terrorisme"
+    }
+   ],
+   "uncertainties": [
+    "活动具体参与人数未明确"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "多索举行促进和平与社会凝聚力的特别动员活动",
+   "summary_zh": "尼日尔多索市于2026年9月8日在大清真寺举行集体祈祷和古努特仪式，众多信徒及行政、宗教和军方代表参加。省长呼吁加强警惕以应对恐怖主义，苏丹则强调和平的重要性。此次活动旨在促进国家和平与社会凝聚力。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "多索",
+    "city": "多索",
+    "site": "大清真寺",
+    "raw_text": "Dosso, la grande mosquée de Dosso"
+   },
+   "key_facts": [
+    {
+     "fact": "多索举行集体祈祷和古努特仪式",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une prière collective suivie de kounout s’est déroulée à la grande mosquée de Dosso"
+    },
+    {
+     "fact": "省长呼吁加强警惕以应对恐怖主义",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il a exhorté les chefs des villages et des quartiers à renforcer leur vigilance pour détecter tout comportement suspect et contribuer à la lutte contre le terrorisme"
+    }
+   ],
+   "uncertainties": [
+    "活动具体参与人数未明确",
+    "据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_d893802d13f7f108",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
