@@ -135,7 +135,8 @@ def _sync_legacy_from_canonical():
         sys.path.insert(0, HERE)
         from scripts.data.repository import Repository
         from scripts.data.compatibility_export import export_all
-        repo = Repository(root=Path(DATA_DIR))
+        # Repository 内部按 root/data/<name> 解析，root 必须是仓库根
+        repo = Repository(root=Path(ROOT))
         run_id = os.environ.get("GITHUB_RUN_ID", "build_%s" %
                                 bj_format().replace(" ", "_").replace(":", ""))
         export_all(repo, run_id=run_id)
