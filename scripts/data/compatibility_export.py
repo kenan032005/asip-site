@@ -15,6 +15,8 @@ compatibility_export.py —— ASIP Stage-2 兼容导出（规范数据 → 遗�
 """
 
 import json
+import re
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from pipeline_core import EVENT_TYPE_CN, normalize_event_type
@@ -45,6 +47,35 @@ def _legacy_quarantine_from_record(q: dict) -> dict:
     return dict(q.get("legacy_payload", {}))
 
 
+_BJT_SPACE_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2})(?::(\d{2}))?$")
+
+
+def _to_rfc3339_utc(ts):
+    """遗留时间字符串 → RFC3339 UTC（确定性归一，不改变事件语义）。
+
+    采集/兼容层写入的 legacy 时间是 "YYYY-MM-DD HH:MM[:SS]"（北京时间），
+    而 published_event schema 要求 format=date-time。此前未归一导致
+    published_events 保存整批中止（fail-fast），进而 compatibility export
+    半途退出、canonical 新 cluster 无法进入 legacy 视图（V17 阻断部署）。
+    已符合 RFC3339（含 Z / ±HH:MM）的输入原样返回；无法解析返回 ""。
+    """
+    if not ts or not isinstance(ts, str):
+        return ""
+    s = ts.strip()
+    if "T" in s and (s.endswith("Z") or re.search(r"[+-]\d{2}:?\d{2}$", s)):
+        return s
+    m = _BJT_SPACE_RE.match(s)
+    if not m:
+        return ""
+    d, hm, sec = m.group(1), m.group(2), m.group(3) or "00"
+    try:
+        dt = datetime.strptime("%s %s:%s" % (d, hm, sec), "%Y-%m-%d %H:%M:%S")
+    except ValueError:
+        return ""
+    dt = dt.replace(tzinfo=timezone(timedelta(hours=8)))   # BJT
+    return dt.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
 def _published_from_cluster(cluster: dict, articles_by_id: dict) -> dict:
     # Stage 3B Final Repair: 支持内联 source_links（采集器直写的集群格式）
     # 优先使用 cluster 内联的 source_links，回退到 article_ids 查找
@@ -72,8 +103,8 @@ def _published_from_cluster(cluster: dict, articles_by_id: dict) -> dict:
         "title_original": cluster.get("title_original", ""),
         "summary_cn": cluster.get("summary_cn", ""),
         "summary_original": cluster.get("summary_original", ""),
-        "event_time": cluster.get("event_time", ""),
-        "published_time": cluster.get("event_time", ""),
+        "event_time": _to_rfc3339_utc(cluster.get("event_time", "")),
+        "published_time": _to_rfc3339_utc(cluster.get("event_time", "")),
         "location": cluster.get("location_name", ""),
         "china_related": cluster.get("china_related", False),
         "verification_level": cluster.get("verification_level", ""),
