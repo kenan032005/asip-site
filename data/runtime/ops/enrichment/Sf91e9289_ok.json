@@ -1,0 +1,114 @@
+{
+ "label": "Sf91e9289",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b2a357150ef59403c1fa2ff6970238b867337112b44023660c8ca8142eed1c02",
+ "tokens": {
+  "input_tokens": 2599,
+  "output_tokens": 387,
+  "total_tokens": 2986
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该事件为单一来源报道，尚未获得其他来源交叉验证\"]",
+    "after": "[\"该事件为单一来源报道，尚未获得其他来源交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得湖省博尔：人道主义行动者重新划定流离失所者和难民汇聚区地图",
+   "summary_zh": "乍得湖省当局与人道主义伙伴在博尔召开为期两天的会议，更新流离失所者和难民的汇聚区地图。该省目前收容约29.48万名境内流离失所者和难民，其中包括自5月以来新增的逾7.5万人。会议旨在调整干预措施，并呼吁从紧急援助转向教育、健康与粮食安全等持久解决方案。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "Lac",
+    "city": "Bol",
+    "site": null,
+    "raw_text": "Lac : à Bol"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得湖省当局与人道主义伙伴在博尔召开会议更新汇聚区地图",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Réunis pendant deux jours à Bol, les autorités de la province du Lac et les partenaires humanitaires mettent à jour la cartographie des zones de convergence pour les personnes déplacées et les réfugiés."
+    },
+    {
+     "fact": "该省收容约29.48万名境内流离失所者和难民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la province abrite désormais 294 805 personnes déplacées internes et réfugiées"
+    },
+    {
+     "fact": "自5月以来新增逾7.5万名流离失所者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plus de 75 210 nouveaux déplacés arrivés depuis le mois de mai"
+    }
+   ],
+   "uncertainties": [
+    "该事件为单一来源报道，尚未获得其他来源交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得湖省博尔：人道主义行动者重新划定流离失所者和难民汇聚区地图",
+   "summary_zh": "乍得湖省当局与人道主义伙伴在博尔召开为期两天的会议，更新流离失所者和难民的汇聚区地图。该省目前收容约29.48万名境内流离失所者和难民，其中包括自5月以来新增的逾7.5万人。会议旨在调整干预措施，并呼吁从紧急援助转向教育、健康与粮食安全等持久解决方案。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "Lac",
+    "city": "Bol",
+    "site": null,
+    "raw_text": "Lac : à Bol"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得湖省当局与人道主义伙伴在博尔召开会议更新汇聚区地图",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Réunis pendant deux jours à Bol, les autorités de la province du Lac et les partenaires humanitaires mettent à jour la cartographie des zones de convergence pour les personnes déplacées et les réfugiés."
+    },
+    {
+     "fact": "该省收容约29.48万名境内流离失所者和难民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la province abrite désormais 294 805 personnes déplacées internes et réfugiées"
+    },
+    {
+     "fact": "自5月以来新增逾7.5万名流离失所者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plus de 75 210 nouveaux déplacés arrivés depuis le mois de mai"
+    }
+   ],
+   "uncertainties": [
+    "该事件为单一来源报道，尚未获得其他来源交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_bf9c1cd9f91e9289",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

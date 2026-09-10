@@ -1,0 +1,116 @@
+{
+ "label": "S6c76ee99",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-v4-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1e33e7dad854e20c83623445c1688f06b054629efa4913899fde2687ab3cf501",
+ "tokens": {
+  "input_tokens": 2784,
+  "output_tokens": 420,
+  "total_tokens": 3204
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"罢工是否如期举行尚未确认\", \"政府是否回应工会要求尚不清楚\"]",
+    "after": "[\"罢工是否如期举行尚未确认\", \"政府是否回应工会要求尚不清楚\", \"据Tchadinfos报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得恩贾梅纳教师工会宣布9月9日至26日罢工预告",
+   "summary_zh": "乍得恩贾梅纳教师工会（SET）省级分部于2026年9月4日召开会议，对政府关于粉笔和文件津贴的提案表示愤慨，并谴责政府未遵守45天时间表及6月6日签署协议的最后期限。工会指责政府无理扣发2月工资，并拒绝签署学习许可，侵犯教师权益。工会宣布从9月9日至26日举行罢工，并要求政府立即支付被扣的半薪、签署全面执行第2850号法令的协议并解除暂停令。",
+   "event_type": "civil_unrest",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N’Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "恩贾梅纳教师工会宣布9月9日至26日罢工",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Éducation : le SET de N’Djamena annonce un préavis de grève allant du 9 au 26 septembre"
+    },
+    {
+     "fact": "工会对政府关于粉笔和文件津贴的提案表示愤慨",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la section provinciale du Syndicat des enseignants du Tchad (SET) de la ville de N’Djamena se dit très indignée par les propositions du gouvernement relatives aux primes de craie et de documentation"
+    },
+    {
+     "fact": "工会要求立即支付2月被扣的半薪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le versement immédiat et sans condition du demi-salaire retenu au mois de février 2026"
+    }
+   ],
+   "uncertainties": [
+    "罢工是否如期举行尚未确认",
+    "政府是否回应工会要求尚不清楚"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得恩贾梅纳教师工会宣布9月9日至26日罢工预告",
+   "summary_zh": "乍得恩贾梅纳教师工会（SET）省级分部于2026年9月4日召开会议，对政府关于粉笔和文件津贴的提案表示愤慨，并谴责政府未遵守45天时间表及6月6日签署协议的最后期限。工会指责政府无理扣发2月工资，并拒绝签署学习许可，侵犯教师权益。工会宣布从9月9日至26日举行罢工，并要求政府立即支付被扣的半薪、签署全面执行第2850号法令的协议并解除暂停令。",
+   "event_type": "civil_unrest",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N’Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "恩贾梅纳教师工会宣布9月9日至26日罢工",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Éducation : le SET de N’Djamena annonce un préavis de grève allant du 9 au 26 septembre"
+    },
+    {
+     "fact": "工会对政府关于粉笔和文件津贴的提案表示愤慨",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la section provinciale du Syndicat des enseignants du Tchad (SET) de la ville de N’Djamena se dit très indignée par les propositions du gouvernement relatives aux primes de craie et de documentation"
+    },
+    {
+     "fact": "工会要求立即支付2月被扣的半薪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le versement immédiat et sans condition du demi-salaire retenu au mois de février 2026"
+    }
+   ],
+   "uncertainties": [
+    "罢工是否如期举行尚未确认",
+    "政府是否回应工会要求尚不清楚",
+    "据Tchadinfos报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_f49c8e986c76ee99",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
