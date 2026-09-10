@@ -118,6 +118,30 @@ def _sanitize_public(obj):
     return obj
 
 
+def _compliant_run_id():
+    """返回符合 schema 约束的 run_id（^\d{8}T\d{6}\+0800_[a-z0-9]{6}$）。
+
+    compatibility export 的信封 run_id 受 schema 约束；GitHub run_id 为纯数字、
+    不满足该 pattern，会让 published_events 等保存整批中止（fail-fast）,
+    进而 canonical 新 cluster 无法同步到 legacy 视图（V17 阻断）。
+    优先沿用 canonical 中已存在的生产 run_id（真实来源），否则按当前 BJT 生成。
+    """
+    pat = re.compile(r"^\d{8}T\d{6}\+0800_[a-z0-9]{6}$")
+    try:
+        canon = load_json(os.path.join(DATA_DIR, "canonical", "event_clusters.json"), {}) or {}
+        rid = canon.get("run_id")
+        if isinstance(rid, str) and pat.match(rid):
+            return rid
+    except Exception:
+        pass
+    import hashlib
+    from datetime import timezone
+    now_bj = datetime.now(timezone(timedelta(hours=8)))
+    stamp = now_bj.strftime("%Y%m%dT%H%M%S+0800")
+    suffix = hashlib.md5(stamp.encode("utf-8")).hexdigest()[:6]
+    return "%s_%s" % (stamp, suffix)
+
+
 def _sync_legacy_from_canonical():
     """V17 Compatibility：canonical truth → legacy view（单向重建）。
 
@@ -137,9 +161,7 @@ def _sync_legacy_from_canonical():
         from scripts.data.compatibility_export import export_all
         # Repository 内部按 root/data/<name> 解析，root 必须是仓库根
         repo = Repository(root=Path(ROOT))
-        run_id = os.environ.get("GITHUB_RUN_ID", "build_%s" %
-                                bj_format().replace(" ", "_").replace(":", ""))
-        export_all(repo, run_id=run_id)
+        export_all(repo, run_id=_compliant_run_id())
         print("  legacy views rebuilt from canonical (V17 sync)")
         return True
     except Exception as e:
