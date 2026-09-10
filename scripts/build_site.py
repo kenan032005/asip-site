@@ -156,7 +156,8 @@ def _sync_legacy_from_canonical():
     if not os.path.exists(canon):
         return False
     try:
-        sys.path.insert(0, HERE)
+        # scripts.* 包导入需要仓库根在 sys.path（脚本模式下 sys.path[0]=scripts/）
+        sys.path.insert(0, str(Path(HERE).parent))
         from scripts.data.repository import Repository
         from scripts.data.compatibility_export import export_all
         # Repository 内部按 root/data/<name> 解析，root 必须是仓库根
