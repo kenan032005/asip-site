@@ -559,9 +559,15 @@ def _load_prod_reports(ops_reports_dir):
         if _is_fixture_report_id(d.get("report_id")):
             continue
         cands.append((str(d.get("report_date")), str(d.get("generated_at") or ""), fname, cls, d))
-    if cands:
-        cands.sort(key=lambda t: (t[0], t[1]), reverse=True)   # newest first
-        _, _, fname, cls, d = cands[0]
+    # 同一 report_date 只保留一个产物（FULL > FALLBACK > LOW_DATA > HOLD）
+    _rank = {"FULL": 0, "FALLBACK": 1, "LOW_DATA": 2, "HOLD": 3}
+    cands.sort(key=lambda t: (t[0], -_rank.get(t[3], 9), t[1]), reverse=True)
+    _by_date = {}
+    for c in cands:
+        _by_date.setdefault(c[0], c)
+    daily_entries = []
+    for date_key in sorted(_by_date, reverse=True):
+        _, _, fname, cls, d = _by_date[date_key]
         rid, repaired, orig = _prod_daily_identity(d.get("report_date"), d.get("report_id"))
         gates = _load("daily_gates.json") or {}
         ent = {
@@ -595,7 +601,8 @@ def _load_prod_reports(ops_reports_dir):
                 "original_report_id": orig,
                 "corrected_report_id": rid,
             }
-        entries.append(ent)
+        daily_entries.append(ent)
+    entries.extend(daily_entries)
 
     # ---------- weekly（每国别取最新合法产物）----------
     for mode, ciso in (("tcd_weekly", "TCD"), ("ssd_weekly", "SSD")):
