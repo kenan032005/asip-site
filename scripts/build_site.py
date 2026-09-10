@@ -194,8 +194,20 @@ def _copy_production_reports(dist_root):
                 continue
             if fn == "reports_run_summary.json":
                 continue
-            shutil.copy2(os.path.join(src_dir, fn), os.path.join(dst_dir, fn))
+            src = os.path.join(src_dir, fn)
+            shutil.copy2(src, os.path.join(dst_dir, fn))
             n += 1
+            # report_index 的 path 以 report_id 命名（DAILY_YYYYMMDD / WEEKLY_<ISO>_<date>）；
+            # 生成确定性别名文件，保证 index path 与归档一一对应可解析。
+            try:
+                doc = json.loads(open(src, encoding="utf-8").read())
+                rid = doc.get("report_id")
+                if rid and not any(x in str(rid).upper()
+                                   for x in ("MANUAL_TRIAL", "_DEV", "TRIAL")):
+                    shutil.copy2(src, os.path.join(dst_dir, "%s.json" % rid))
+                    n += 1
+            except Exception:
+                pass
     return n
 
 
