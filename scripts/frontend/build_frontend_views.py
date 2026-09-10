@@ -519,24 +519,51 @@ def _prod_daily_identity(report_date, stored_rid=None):
     return stored_rid, False, stored_rid
 
 
+def _is_fixture_report_id(rid):
+    """夹具/开发样例识别：MANUAL_TRIAL / DEV / TRIAL 一律不得进入 Production 公开索引。"""
+    if not rid:
+        return True
+    up = str(rid).upper()
+    return ("MANUAL_TRIAL" in up) or ("_DEV" in up) or up.endswith("_TRIAL")         or up.startswith("TRIAL_")
+
+
 def _load_prod_reports(ops_reports_dir):
     """Production report outputs → public index entries（确定性装配）。
 
-    来源：data/runtime/ops/reports/（deploy 环境由 production-state 拷贝）。
+    来源：data/runtime/ops/reports/（production-state 持久化的正式报告产物）。
+    规则：
+      - daily：在 full/fallback/low_data/hold 中选取 **report_date 最新** 的合法产物；
+      - weekly：每国别在 full/fallback/low_data 中选取最新合法产物；
+      - 夹具（MANUAL_TRIAL / DEV / TRIAL）一律排除，不进入公开索引；
+      - report_id 由 report_date 归一（deterministic，记录 repair 元数据）。
     不读取/不生成任何 AI 内容。
     """
     import os as _os
     entries = []
     if not ops_reports_dir or not _os.path.isdir(ops_reports_dir):
         return entries
+
+    def _load(fname):
+        d = load_json(_os.path.join(ops_reports_dir, fname), None)
+        return d if isinstance(d, dict) else None
+
+    # ---------- daily ----------
+    cands = []
     for fname, cls in (("daily_full.json", "FULL"),
                        ("daily_fallback.json", "FALLBACK"),
                        ("daily_low_data.json", "LOW_DATA"),
                        ("daily_hold.json", "HOLD")):
-        d = load_json(_os.path.join(ops_reports_dir, fname), None)
-        if not isinstance(d, dict) or not d.get("report_date"):
+        d = _load(fname)
+        if not d or not d.get("report_date"):
             continue
+        if _is_fixture_report_id(d.get("report_id")):
+            continue
+        cands.append((str(d.get("report_date")), str(d.get("generated_at") or ""), fname, cls, d))
+    if cands:
+        cands.sort(key=lambda t: (t[0], t[1]), reverse=True)   # newest first
+        _, _, fname, cls, d = cands[0]
         rid, repaired, orig = _prod_daily_identity(d.get("report_date"), d.get("report_id"))
+        gates = _load("daily_gates.json") or {}
         ent = {
             "report_id": rid,
             "report_type": "africa_daily",
@@ -546,6 +573,7 @@ def _load_prod_reports(ops_reports_dir):
             "country_iso3": None,
             "report_date": d.get("report_date"),
             "classification": cls,
+            "fact_gate": gates.get("FACT_GATE"),
             "period_start": d.get("period_start"),
             "period_end": d.get("period_end"),
             "generated_at": d.get("generated_at"),
@@ -568,42 +596,52 @@ def _load_prod_reports(ops_reports_dir):
                 "corrected_report_id": rid,
             }
         entries.append(ent)
-        break  # 同一轮 daily 只取一个分类产物
+
+    # ---------- weekly（每国别取最新合法产物）----------
     for mode, ciso in (("tcd_weekly", "TCD"), ("ssd_weekly", "SSD")):
+        wcands = []
         for fname, cls in (("%s_full.json" % mode, "FULL"),
                            ("%s_fallback.json" % mode, "FALLBACK"),
                            ("%s_low_data.json" % mode, "LOW_DATA")):
-            d = load_json(_os.path.join(ops_reports_dir, fname), None)
-            if not isinstance(d, dict):
+            d = _load(fname)
+            if not d:
                 continue
-            week_end = d.get("week_end") or d.get("report_date")
-            rid = d.get("report_id") or ("WEEKLY_%s_%s" % (
-                ciso, str(week_end or "").replace("-", "")))
-            entries.append({
-                "report_id": rid,
-                "report_type": "country_weekly",
-                "type": "country_weekly",
-                "type_cn": "国家周报",
-                "title": d.get("title") or ("重点国家周报（%s）" % ciso),
-                "country_iso3": ciso,
-                "report_date": week_end,
-                "classification": cls,
-                "period_start": d.get("week_start") or d.get("period_start"),
-                "period_end": week_end or d.get("period_end"),
-                "generated_at": d.get("generated_at"),
-                "published_at": d.get("generated_at"),
-                "status": "production",
-                "status_cn": "生产报告",
-                "path": "reports/weekly/%s.json" % rid,
-                "is_mock": False,
-                "historical_reconstruction": False,
-                "production_provenance": {
-                    "source": "production_state",
-                    "trigger": "scheduled_orchestrator",
-                    "artifact": fname,
-                },
-            })
-            break
+            if _is_fixture_report_id(d.get("report_id")):
+                continue
+            we = str(d.get("week_end") or d.get("report_date") or "")
+            if not we:
+                continue
+            wcands.append((we, str(d.get("generated_at") or ""), fname, cls, d))
+        if not wcands:
+            continue
+        wcands.sort(key=lambda t: (t[0], t[1]), reverse=True)
+        _, _, fname, cls, d = wcands[0]
+        week_end = d.get("week_end") or d.get("report_date")
+        rid = d.get("report_id") or ("WEEKLY_%s_%s" % (ciso, str(week_end).replace("-", "")))
+        entries.append({
+            "report_id": rid,
+            "report_type": "country_weekly",
+            "type": "country_weekly",
+            "type_cn": "国家周报",
+            "title": d.get("title") or ("重点国家周报（%s）" % ciso),
+            "country_iso3": ciso,
+            "report_date": week_end,
+            "classification": cls,
+            "period_start": d.get("week_start") or d.get("period_start"),
+            "period_end": week_end or d.get("period_end"),
+            "generated_at": d.get("generated_at"),
+            "published_at": d.get("generated_at"),
+            "status": "production",
+            "status_cn": "生产报告",
+            "path": "reports/weekly/%s.json" % rid,
+            "is_mock": False,
+            "historical_reconstruction": False,
+            "production_provenance": {
+                "source": "production_state",
+                "trigger": "scheduled_orchestrator",
+                "artifact": fname,
+            },
+        })
     return entries
 
 
@@ -657,9 +695,9 @@ def build_report_index(daily_input, weekly_inputs, brief_candidates,
         dedup.append(r)
 
     def _sort_key(r):
-        # production 优先；其内按 report_date（或 period_end）倒序；mock 样例排最后
+        # reverse=True 排序：production(1) 在 mock(0) 之前；同组内 report_date 新在前
         d = r.get("report_date") or r.get("period_end") or ""
-        return (0 if r.get("status") == "production" else 1, d,
+        return (1 if r.get("status") == "production" else 0, d,
                 r.get("published_at") or "")
 
     dedup.sort(key=_sort_key, reverse=True)
