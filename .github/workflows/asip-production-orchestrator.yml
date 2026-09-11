@@ -66,7 +66,7 @@ jobs:
       - name: Checkout release code
         uses: actions/checkout@v4
         with:
-          ref: 7e653da88fb45bf67f4c53a7ce356441d4ab9607
+          ref: c42d13de76ecd97c8d660b3e04bd78213878e0cc
           fetch-depth: 1
 
       - name: Checkout production state branch
@@ -83,8 +83,32 @@ jobs:
 
       - name: Load state（cold start）
         run: |
+          # 必须与下方 "Commit state" 写回的路径集完全对称：
+          # 若只恢复 ops，则每个 run 都从 release 仓库自带的静态 data/ 起步，
+          # 未重新生成该路径的 run 会把仓库旧副本写回 production-state，
+          # 导致 canonical 每约 6 小时被回退一次（V1.0 hotfix: 2026-09-11 定位）。
           mkdir -p data/runtime/ops
           cp -r state_src/data/runtime/ops/* data/runtime/ops/ 2>/dev/null || true
+          cp -rf state_src/data/canonical/. data/canonical/ 2>/dev/null || true
+          cp -rf state_src/data/disease/. data/disease/ 2>/dev/null || true
+          cp -rf state_src/data/runtime/timeline/. data/runtime/timeline/ 2>/dev/null || true
+          cp -f state_src/data/events.json data/events.json 2>/dev/null || true
+          cp -f state_src/data/pending_events.json data/pending_events.json 2>/dev/null || true
+          cp -f state_src/data/raw_candidates.json data/raw_candidates.json 2>/dev/null || true
+          cp -f state_src/data/quarantine_events.json data/quarantine_events.json 2>/dev/null || true
+          cp -rf state_src/data/public/. data/public/ 2>/dev/null || true
+          # 载入后校验：state 快照必须胜出（防止再次出现"仓库静态副本覆盖 state"）
+          python - <<'PY'
+          import json, pathlib
+          p = pathlib.Path("data/canonical/event_clusters.json")
+          sp = pathlib.Path("state_src/data/canonical/event_clusters.json")
+          if sp.exists():
+              a = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+              b = json.loads(sp.read_text(encoding="utf-8"))
+              if a.get("run_id") != b.get("run_id") or len(a.get("items", [])) != len(b.get("items", [])):
+                  raise SystemExit("STATE_LOAD_MISMATCH: data/canonical 未采用 state 快照")
+              print("STATE_LOAD_OK run_id=%s items=%d" % (b.get("run_id"), len(b.get("items", []))))
+          PY
 
       - name: Runtime confirmation（§二：非敏感信息）
         run: |
