@@ -118,7 +118,7 @@
       '<div class="top-row">' +
       '<div class="brand"><b>非洲地区社会安全信息平台</b><span>Africa Security Information Platform</span></div>' +
       '<div class="meta" id="topmeta">🕐 北京时间 <b id="clBJ">--:--:--</b>' +
-      '<span class="muted" id="updLine">数据更新：<b id="hdrUpdated">--</b></span>' +
+      '<span class="muted" id="updLine">数据截至：<b id="hdrUpdated">--</b></span>' +
       '<button class="nav-toggle" id="navToggle" aria-label="菜单">☰</button></div>' +
       '</div>' +
       '<nav class="navbar" id="navbar">' + links + "</nav>";

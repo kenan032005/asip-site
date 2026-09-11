@@ -213,16 +213,26 @@ def norm_vstatus(v, source_count=0, independent=0):
 
 
 def build_site_overview(events, pub_events, countries, status, disease_tls,
-                        daily_input, iso2cn):
-    now = bj_iso()
+                        daily_input, iso2cn, data_as_of=None, generated_at=None,
+                        data_as_of_source=None):
+    """§四-§八 + V1.1-H1 §十/§十二/§十四。
+
+    cutoff（KPI 24h/7d 窗口基准）= **data_as_of**（Production processing window 截止），
+    不再使用 latest event time（否则无新事件时窗口会停住）。
+    同时输出三时间契约：data_as_of / latest_verified_event_time / generated_at。
+    """
+    now = generated_at or bj_iso()
     all_ev = list(events) + list(pub_events)
-    times = [e.get("published_time") or e.get("event_time") for e in all_ev if e.get("published_time") or e.get("event_time")]
-    cutoff = None
-    if times:
-        try:
-            cutoff = datetime.fromisoformat(max(times).replace("Z", "+00:00"))
-        except Exception:
-            cutoff = None
+    cutoff = _as_dt(data_as_of)
+    if cutoff is None:      # 兼容：未提供 processing cutoff 时退回最新事件时间
+        times = [e.get("published_time") or e.get("event_time") for e in all_ev
+                 if e.get("published_time") or e.get("event_time")]
+        if times:
+            try:
+                cutoff = datetime.fromisoformat(max(times).replace("Z", "+00:00"))
+            except Exception:
+                cutoff = None
+    latest_ev = latest_verified_event_time(events, pub_events)
 
     def age_days(ev):
         t = ev.get("published_time") or ev.get("event_time")
@@ -263,8 +273,13 @@ def build_site_overview(events, pub_events, countries, status, disease_tls,
             "status": "development_sample",
             "status_cn": "开发样例",
         }
+    _tc = _time_contract(cutoff, latest_ev, now, extra=(data_as_of_source or None))
+    if _tc["data_as_of"] is None:      # 有数据但无 processing cutoff 时，用窗口基准兜底
+        _tc["data_as_of"] = cutoff.isoformat() if cutoff else None
+        _tc["data_as_of_bj"] = bj_fmt(cutoff.isoformat()) if cutoff else None
     return {
         "generated_at": now,
+        **_tc,
         "data_status": data_status,
         "data_status_text": {"current": "数据正常", "delayed": "数据更新存在延迟",
                              "degraded": "数据质量降级"}[data_status],
@@ -287,7 +302,179 @@ def build_site_overview(events, pub_events, countries, status, disease_tls,
     }
 
 
-def build_master_events(social_tls, clusters, cn2iso, iso2cn, iso2en):
+# ══════════════════════════════════════════════════════════════════════
+# V1.1-H1 §三/§四：统一国家联结键（ISO3）单一实现
+# 允许来源：approved country reference（含 iso_alpha2/iso_alpha3/name_zh/name_en）
+# 禁止：字符串猜测、模糊匹配、LLM 判断；无法确认 → resolved=False，不强归类
+# ══════════════════════════════════════════════════════════════════════
+COUNTRY_REF_REL = "intelligence/africa/countries.json"
+
+
+# ── 标准确定性 ISO2 → ISO3（V1.1-H1 §三 允许来源之一；非模糊匹配、非猜测）──
+ISO2_TO_ISO3_STD = {
+    "TD": "TCD", "SD": "SDN", "SS": "SSD", "NE": "NER", "BJ": "BEN", "ET": "ETH",
+    "NG": "NGA", "ML": "MLI", "BF": "BFA", "CM": "CMR", "CF": "CAF", "TG": "TGO",
+    "CI": "CIV", "GH": "GHA", "SN": "SEN", "MR": "MRT", "GN": "GIN", "SL": "SLE",
+    "LR": "LBR", "GM": "GMB", "GW": "GNB", "CV": "CPV", "CD": "COD", "CG": "COG",
+    "GA": "GAB", "ER": "ERI", "DJ": "DJI", "SO": "SOM", "KE": "KEN", "UG": "UGA",
+    "RW": "RWA", "BI": "BDI", "TZ": "TZA", "MW": "MWI", "MZ": "MOZ", "ZM": "ZMB",
+    "ZW": "ZWE", "AO": "AGO", "NA": "NAM", "BW": "BWA", "ZA": "ZAF", "LS": "LSO",
+    "SZ": "SWZ", "MG": "MDG", "EG": "EGY", "LY": "LBY", "TN": "TUN", "DZ": "DZA",
+    "MA": "MAR",
+}
+
+
+#: 已批准的监控国家名称别名（来自 data/countries.json 与情报参考的既有差异，非猜测）
+APPROVED_NAME_ALIASES = {
+    "刚果共和国（刚果布）": "COG", "Congo Republic": "COG", "刚果（布）": "COG",
+    "刚果民主共和国": "COD", "刚果（金）": "COD", "DR Congo": "COD",
+    "科特迪瓦": "CIV", "Côte d'Ivoire": "CIV", "Cote d'Ivoire": "CIV",
+}
+
+
+def load_country_ref(data_dir=None):
+    """加载已批准国家参考，返回 {iso3:..., } 反查表（确定性，无猜测）。"""
+    base = Path(data_dir) if data_dir else (ROOT / "data")
+    p = base / COUNTRY_REF_REL
+    ref = {"iso2": {}, "iso3": {}, "zh": {}, "en": {}, "by_iso3": {}}
+    # 1) 标准确定性 ISO2→ISO3（§三 允许来源）
+    ref["iso2"].update(ISO2_TO_ISO3_STD)
+    for a3 in ISO2_TO_ISO3_STD.values():
+        ref["iso3"][a3] = a3
+    # 2) 显示表（既有单一映射）补充名称
+    for a3, cn in ISO3_CN.items():
+        ref["zh"].setdefault(cn, a3)
+        ref["iso3"].setdefault(a3, a3)
+    for a3, en in ISO3_EN.items():
+        ref["en"].setdefault((en or "").lower(), a3)
+    for name, a3 in APPROVED_NAME_ALIASES.items():
+        ref["zh"].setdefault(name, a3)
+        ref["en"].setdefault(name.lower(), a3)
+        ref["iso3"].setdefault(a3, a3)
+    try:
+        doc = json.loads(p.read_text(encoding="utf-8"))
+    except Exception:
+        return ref
+    for c in (doc.get("items") or doc.get("countries") or []):
+        a2 = (c.get("iso_alpha2") or "").strip().upper()
+        a3 = (c.get("iso_alpha3") or "").strip().upper()
+        zh = (c.get("name_zh") or "").strip()
+        en = (c.get("name_en") or "").strip()
+        if not a3:
+            continue
+        ref["by_iso3"][a3] = c
+        ref["iso3"][a3] = a3
+        if a2:
+            ref["iso2"][a2] = a3
+        if zh:
+            ref["zh"][zh] = a3
+        if en:
+            ref["en"][en.lower()] = a3
+    return ref
+
+
+def normalize_country_iso3(value, ref=None):
+    """ISO3 / ISO2 / 已批准国家名 → ISO3。
+
+    返回 {"iso3": str|None, "normalization_basis": str, "resolved": bool}。
+    仅使用已批准映射；无法确认时 resolved=False（不得猜测、不得强归类）。
+    """
+    ref = ref or load_country_ref()
+    v = (value or "").strip() if isinstance(value, str) else ""
+    if not v:
+        return {"iso3": None, "normalization_basis": "empty_input", "resolved": False}
+    up = v.upper()
+    if up in ref["iso3"]:
+        return {"iso3": up, "normalization_basis": "iso3_passthrough", "resolved": True}
+    if up in ref["iso2"]:
+        return {"iso3": ref["iso2"][up], "normalization_basis": "iso2_to_iso3_approved_map",
+                "resolved": True}
+    if v in ref["zh"]:
+        return {"iso3": ref["zh"][v], "normalization_basis": "approved_name_zh_map", "resolved": True}
+    if v.lower() in ref["en"]:
+        return {"iso3": ref["en"][v.lower()], "normalization_basis": "approved_name_en_map",
+                "resolved": True}
+    return {"iso3": None, "normalization_basis": "unresolved_not_in_approved_reference",
+            "resolved": False}
+
+
+# ══════════════════════════════════════════════════════════════════════
+# V1.1-H1 §十/§十一：三时间契约
+#   data_as_of                 系统已完整处理到的 Production data window 截止时间
+#                              （来自 processing state，绝不用 view build time）
+#   latest_verified_event_time 当前 public/canonical truth 中最新已核实事件的 event time
+#   generated_at               本视图文件本次构建时间（不得冒充数据时间）
+# ══════════════════════════════════════════════════════════════════════
+DATA_AS_OF_FIELDS = ("last_successful_collection", "last_daily_report",
+                     "last_weekly_report", "last_disease_run", "last_successful_ai")
+
+
+def resolve_data_as_of(data_dir=None):
+    """Production processing cutoff（确定性，来自 state；缺失则 fallback canonical.updated_at）。"""
+    base = Path(data_dir) if data_dir else (ROOT / "data")
+    cutoff, src = None, None
+    try:
+        st = json.loads((base / "runtime" / "ops" / "production_state.json").read_text(encoding="utf-8"))
+        for f in DATA_AS_OF_FIELDS:
+            v = st.get(f)
+            if not v:
+                continue
+            try:
+                dt = datetime.fromisoformat(str(v).replace("Z", "+00:00"))
+            except Exception:
+                continue
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            if cutoff is None or dt > cutoff:
+                cutoff, src = dt, "production_state.%s" % f
+    except Exception:
+        pass
+    if cutoff is None:
+        try:
+            can = json.loads((base / "canonical" / "event_clusters.json").read_text(encoding="utf-8"))
+            dt = datetime.fromisoformat(str(can.get("updated_at")).replace("Z", "+00:00"))
+            cutoff, src = dt, "canonical.updated_at"
+        except Exception:
+            pass
+    return cutoff, src
+
+
+def latest_verified_event_time(*event_lists):
+    """public/canonical truth 中最新已核实事件的 event time（ISO 字符串，无则 None）。"""
+    best = None
+    for evs in event_lists:
+        for e in (evs or []):
+            t = e.get("published_time") or e.get("event_time")
+            if not t:
+                continue
+            s = str(t)
+            if best is None or s > best:
+                best = s
+    return best
+
+
+def _as_dt(value):
+    if not value:
+        return None
+    try:
+        dt = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+    except Exception:
+        return None
+    return dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
+
+
+def _time_contract(data_as_of_dt, latest_event, generated_at, extra=None):
+    out = {
+        "data_as_of": data_as_of_dt.isoformat() if data_as_of_dt else None,
+        "data_as_of_bj": bj_fmt(data_as_of_dt.isoformat()) if data_as_of_dt else None,
+        "data_as_of_source": extra,
+        "latest_verified_event_time": latest_event,
+        "generated_at": generated_at,
+    }
+    return out
+
+
+def build_master_events(social_tls, clusters, cn2iso, iso2cn, iso2en, country_ref=None):
     """§二十七：master event 视图（同一现实事件只出现一次）。"""
     cluster_meta = {}
     for cl in clusters:
@@ -296,7 +483,11 @@ def build_master_events(social_tls, clusters, cn2iso, iso2cn, iso2en):
     for tl in social_tls:
         mid = tl.get("master_event_id")
         cs = tl.get("current_state") or {}
-        iso = cs.get("country") or (cluster_meta.get(mid) or {}).get("primary_country_iso3")
+        # V1.1-H1 §三：统一 ISO3 联结键（timeline 未带国家时回退 cluster 元数据，
+        # 可能为 ISO2 → 经已批准映射确定性归一；无法确认则不强行归类）
+        raw_iso = cs.get("country") or (cluster_meta.get(mid) or {}).get("primary_country_iso3")             or (cluster_meta.get(mid) or {}).get("country_code")
+        _nrm = normalize_country_iso3(raw_iso, country_ref)
+        iso = _nrm["iso3"]
         loc = cs.get("location")
         etype = cs.get("event_type") or (cluster_meta.get(mid) or {}).get("event_type")
         updates = tl.get("updates") or []
@@ -347,7 +538,8 @@ def build_master_events(social_tls, clusters, cn2iso, iso2cn, iso2en):
             "conflict_flags": (tl.get("conflict_flags") or [])[:5],
         })
     out.sort(key=lambda x: (x["latest_update_at"] or ""), reverse=True)
-    return {"generated_at": bj_iso(), "count": len(out), "events": out}
+    return {"generated_at": bj_iso(), "count": len(out), "events": out,
+            "country_join_key": "iso3"}
 
 
 def build_event_timelines(social_tls):
@@ -376,54 +568,60 @@ def build_event_timelines(social_tls):
 
 
 def build_country_snapshots(countries, events, pub_events, disease_tls,
-                            cn2iso, iso2cn, iso2en, iso2risk):
-    """§十二：国家卡片（24h/7d 事件数、最新重大事件、活跃疫情；未知 → null）。"""
-    cutoff = None
-    times = [e.get("published_time") or e.get("event_time")
-             for e in list(events) + list(pub_events)
-             if e.get("published_time") or e.get("event_time")]
-    if times:
-        try:
-            cutoff = datetime.fromisoformat(max(times).replace("Z", "+00:00"))
-        except Exception:
-            cutoff = None
+                            cn2iso, iso2cn, iso2en, iso2risk,
+                            country_ref=None, data_as_of=None, generated_at=None):
+    """§十二 + V1.1-H1 §六/§十四/§十五：国家卡片。
 
-    def age_days(ev):
-        t = ev.get("published_time") or ev.get("event_time")
-        if not t or not cutoff:
-            return None
-        try:
-            dt = datetime.fromisoformat(str(t).replace("Z", "+00:00"))
-            if dt.tzinfo is None:
-                dt = dt.replace(tzinfo=timezone.utc)
-            return (cutoff - dt).total_seconds() / 86400.0
-        except Exception:
-            return None
+    - 统一以 **ISO3** 为联结键（事件与 snapshots 同键）；
+    - 24h/7d 窗口相对 **data_as_of**（processing window 截止），而非 latest event time；
+    - 每个快照输出 data_as_of / latest_event_time / generated_at 三个语义不同的时间。
+    无近期事件的国家 events_24h/7d = 0，但仍跟随当前 data_as_of（合法 CURRENT）。
+    """
+    ref = country_ref or load_country_ref()
+    gen = generated_at or bj_iso()
+    dtx = _as_dt(data_as_of)
+    all_ev = list(events) + list(pub_events)
 
-    by_cn = {}
-    for e in list(events) + list(pub_events):
-        cn = e.get("country") or e.get("country_cn")
-        if cn:
-            by_cn.setdefault(cn, []).append(e)
+    by_iso, unresolved = {}, 0
+    for e in all_ev:
+        raw = e.get("country_iso3") or e.get("country") or e.get("country_cn")
+        n = normalize_country_iso3(raw, ref)
+        if n["resolved"]:
+            by_iso.setdefault(n["iso3"], []).append(e)
+        elif raw:
+            unresolved += 1
+
     dis_by_iso = {}
     for t in disease_tls:
-        iso = t.get("country_iso3")
-        dis_by_iso.setdefault(iso, []).append(t)
+        dis_by_iso.setdefault(t.get("country_iso3"), []).append(t)
+
+    def in_window(ev, days):
+        if not dtx:
+            return None
+        t = _as_dt(ev.get("published_time") or ev.get("event_time"))
+        if not t:
+            return None
+        age = (dtx - t).total_seconds() / 86400.0
+        return 0 <= age <= days
 
     snapshots = []
     for c in countries:
         cn, en = c.get("cn"), c.get("en")
-        iso = cn2iso.get(cn)
-        evs = by_cn.get(cn) or []
-        e24 = [e for e in evs if (age_days(e) is not None and age_days(e) <= 1)]
-        e7 = [e for e in evs if (age_days(e) is not None and age_days(e) <= 7)]
+        iso = cn2iso.get(cn) or normalize_country_iso3(en, ref)["iso3"]
+        evs = by_iso.get(iso) or []
+        e24 = [e for e in evs if in_window(e, 1) is True]
+        e7 = [e for e in evs if in_window(e, 7) is True]
         latest = None
+        latest_time = None
         if evs:
-            l = max(evs, key=lambda x: x.get("published_time") or x.get("event_time") or "")
-            latest = {"event_id": l.get("event_id"), "title": l.get("title_cn")
-                      or l.get("title_original") or l.get("summary_cn") or "",
-                      "event_time": bj_fmt(l.get("published_time") or l.get("event_time"))}
-        active = [t for t in (dis_by_iso.get(iso) or []) if (t.get("outbreak_status") or "").lower()
+            l = max(evs, key=lambda x: str(x.get("published_time") or x.get("event_time") or ""))
+            latest_time = l.get("published_time") or l.get("event_time")
+            latest = {"event_id": l.get("event_id"),
+                      "title": l.get("title_cn") or l.get("title_original")
+                      or l.get("summary_cn") or "",
+                      "event_time": bj_fmt(latest_time)}
+        active = [t for t in (dis_by_iso.get(iso) or [])
+                  if (t.get("outbreak_status") or "").lower()
                   in ("active", "developing", "increasing", "geographic_spread", "monitoring")]
         snapshots.append({
             "country_cn": cn,
@@ -432,13 +630,20 @@ def build_country_snapshots(countries, events, pub_events, disease_tls,
             "region": c.get("region"),
             "baseline_risk": {1: "低", 2: "中", 3: "高", 4: "极高"}.get(c.get("risk_level")),
             "baseline_risk_level": c.get("risk_level"),
-            "events_24h": len(e24) if evs else None,
-            "events_7d": len(e7) if evs else None,
+            "events_24h": len(e24),
+            "events_7d": len(e7),
             "latest_major_event": latest,
             "active_outbreaks": len(active) if dis_by_iso.get(iso) else None,
-            "last_updated": bj_fmt(max((e.get("published_time") or e.get("event_time") or "" for e in evs), default=None)),
+            "last_updated": bj_fmt(latest_time),
+            # V1.1-H1 §十五：国家快照三时间契约
+            "data_as_of": dtx.isoformat() if dtx else None,
+            "data_as_of_bj": bj_fmt(dtx.isoformat()) if dtx else None,
+            "latest_event_time": latest_time,
+            "generated_at": gen,
         })
-    return {"generated_at": bj_iso(), "count": len(snapshots), "snapshots": snapshots}
+    return {"generated_at": gen, "count": len(snapshots), "snapshots": snapshots,
+            "unresolved_country_inputs": unresolved,
+            "country_join_key": "iso3"}
 
 
 def _latest_counts_from_updates(dt):
@@ -901,17 +1106,31 @@ def main():
     views_master_for_china = build_master_events(social_tls, clusters, cn2iso,
                                                  iso2cn, iso2en).get("events", [])
 
+    # V1.1-H1：统一国家参考 + Production processing cutoff（三时间契约的单一口径）
+    country_ref = load_country_ref(str(ROOT / "data"))
+    data_as_of_dt, data_as_of_src = resolve_data_as_of(str(ROOT / "data"))
+    data_as_of_iso = data_as_of_dt.isoformat() if data_as_of_dt else None
+    gen_at = bj_iso()
+    print("  [tz] data_as_of = %s (source=%s) | generated_at = %s" %
+          (data_as_of_iso, data_as_of_src, gen_at))
+
     views = {
         "site_overview": build_site_overview(events, pub_events, countries,
                                              status, disease_tls, daily_input,
-                                             iso2cn),
+                                             iso2cn, data_as_of=data_as_of_iso,
+                                             generated_at=gen_at,
+                                             data_as_of_source=data_as_of_src),
         "master_events": build_master_events(social_tls, clusters, cn2iso,
-                                             iso2cn, iso2en),
+                                             iso2cn, iso2en,
+                                             country_ref=country_ref),
         "event_timelines": build_event_timelines(social_tls),
         "country_snapshots": build_country_snapshots(countries, events,
                                                      pub_events, disease_tls,
                                                      cn2iso, iso2cn, iso2en,
-                                                     iso2risk),
+                                                     iso2risk,
+                                                     country_ref=country_ref,
+                                                     data_as_of=data_as_of_iso,
+                                                     generated_at=gen_at),
         "disease_outbreaks": build_disease_outbreaks(disease_tls, iso2cn),
         "china_interest": build_china_interest(
             views_master_for_china, entities, countries, data_dir=str(ROOT)),

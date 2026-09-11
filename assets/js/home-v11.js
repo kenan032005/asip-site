@@ -207,7 +207,11 @@
 
       var outbreaks = (dis && dis.outbreaks) || [];
       var reports = (ri && ri.reports) || [];
-      var updated = (ov && ov.latest_data_time_bj) || st.last_update_bj || st.generated_at_bj || null;
+      // V1.1-H1 §十二/§十四：窗口基准与表头统一使用 data_as_of（processing window 截止），
+      // 不再使用 latest event time（否则无新事件时窗口会停住）。
+      var dataAsOf = (ov && (ov.data_as_of_bj || ov.data_as_of)) || null;
+      var updated = dataAsOf || (ov && ov.latest_data_time_bj)
+        || st.last_update_bj || st.generated_at_bj || null;
       var AI = window.__HOME_AI__ || null;
       window.__ASIP_CUTOFF__ = updated || null;
       // 首页单一“数据更新时间”真值：表头与正文（KPI 条 / China Last checked）必须一致，
@@ -217,7 +221,13 @@
         // 与正文同源同格式：全站约定「底层 UTC → 显示 +8」，表头必须用同一格式化，
         // 否则表头与 KPI 条会差 8 小时。
         var hdr = document.getElementById("hdrUpdated");
-        if (hdr && updated) hdr.textContent = bjShort(updated) + "（北京时间）";
+        if (hdr && updated) {
+          hdr.textContent = bjShort(updated);
+          if (ov && ov.latest_verified_event_time) {
+            hdr.title = "最新已核实事件时间：" + ov.latest_verified_event_time
+              + "｜视图生成：" + (ov.generated_at || "—");
+          }
+        }
       })();
 
       var riskByCn = {};
