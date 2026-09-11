@@ -134,9 +134,10 @@
     API.getCached("status").then(function (st) {
       var t = (st && (st.last_update_bj || st.generated_at_bj || st.last_updated_beijing)) || null;
       if (t) {
-        window.__ASIP_CUTOFF__ = t;
+        if (!window.__ASIP_CUTOFF__) window.__ASIP_CUTOFF__ = t;
+        // 首页已由 site_overview 数据时间写过表头 → 不再覆盖（保持单页单值）
         var el = document.getElementById("hdrUpdated");
-        if (el) el.textContent = t;
+        if (el && !window.__ASIP_UPDATED__) el.textContent = t;
       }
     }).catch(function () {});
   }

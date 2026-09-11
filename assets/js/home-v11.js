@@ -210,6 +210,13 @@
       var updated = (ov && ov.latest_data_time_bj) || st.last_update_bj || st.generated_at_bj || null;
       var AI = window.__HOME_AI__ || null;
       window.__ASIP_CUTOFF__ = updated || null;
+      // 首页单一“数据更新时间”真值：表头与正文（KPI 条 / China Last checked）必须一致，
+      // 避免 status.json 与 site_overview 双源导致同页出现两个不同时间。
+      window.__ASIP_UPDATED__ = updated || null;
+      (function () {
+        var hdr = document.getElementById("hdrUpdated");
+        if (hdr && updated) hdr.textContent = updated;
+      })();
 
       var riskByCn = {};
       countries.forEach(function (c) { riskByCn[c.cn] = riskOf(c); });
