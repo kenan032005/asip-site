@@ -1,0 +1,128 @@
+{
+  "release_name": "ASIP V1.0 Production",
+  "release_status": "released",
+  "stage": "Stage8D Closed",
+  "release_date_bjt": "2026-09-11",
+  "repository": "kenan032005/asip-site",
+
+  "production_control_plane_sha": "0840c85b842bf6dd5839f1dcf1b83d6ed2ac13e7",
+  "production_release_sha": "7e653da88fb45bf67f4c53a7ce356441d4ab9607",
+  "production_release_branch": "fix/asip-stage8d-release-orchestrator",
+  "final_gh_pages_sha": "2fbed0247a8733333a4b99087110259b856184dd",
+
+  "final_natural_root_run_id": "34474779375",
+  "final_natural_root_run": {
+    "created_at": "2026-09-10T12:05:35Z",
+    "event": "repository_dispatch",
+    "event_type": "external_scheduler_wakeup",
+    "trigger_source": "external_scheduler",
+    "automation": true,
+    "human": false,
+    "mode": "production",
+    "conclusion": "success"
+  },
+  "final_deploy_run_id": "34476141418",
+  "final_auto_deploy": {
+    "created_at": "2026-09-10T12:20:07Z",
+    "provenance": "scheduled_orchestrator_auto_dispatch",
+    "trigger_source": "external_scheduler",
+    "automation": true,
+    "shadow_only": false,
+    "dispatch_http": 204,
+    "gh_pages_publish_step": "EXECUTED"
+  },
+
+  "final_daily_report_id": "DAILY_20260910",
+  "final_daily_report_date": "2026-09-10",
+  "final_daily_status": "FALLBACK",
+  "fact_gate": "PASS",
+  "report_persisted_path": "data/runtime/ops/reports/daily_20260910.json",
+  "latest_daily_online": "2026-09-10",
+
+  "final_online_counts": {
+    "master_events": 31,
+    "disease_outbreaks": 17,
+    "timelines": 31,
+    "report_index": 5
+  },
+
+  "verification_summary": {
+    "external_scheduler": "PASS",
+    "collection": "PASS",
+    "ai_idempotency": "PASS",
+    "ai_telemetry": "PASS",
+    "disease_automation": "PASS",
+    "daily_freshness": "PASS",
+    "report_persistence": "PASS",
+    "report_identity": "PASS",
+    "auto_deploy": "PASS",
+    "public_build": "PASS",
+    "v17": "PASS",
+    "safety": "PASS",
+    "state_integrity": "PASS",
+    "online_smoke": "PASS"
+  },
+
+  "verification_history": [
+    {"phase": "Final 24h Observation", "status": "completed"},
+    {"phase": "Post-fix Multi-day Observation", "status": "completed"},
+    {"phase": "Controlled Recovery Deploy", "status": "completed", "outcome": "PASS",
+     "note": "人工授权的受控恢复，不计入最终 automation evidence"},
+    {"phase": "Final Natural Daily Closure", "status": "PASS"}
+  ],
+  "final_automation_evidence": {
+    "natural_root_run": "34474779375",
+    "natural_auto_deploy": "34476141418",
+    "explicit_note": "最终自动化证据来自上述自然运行；Controlled Recovery Deploy（run 34449629776）不计入。"
+  },
+
+  "public_build_repair": {
+    "fix_head": "7e653da88fb45bf67f4c53a7ce356441d4ab9607",
+    "root_causes": [
+      "timeline 构建只读 canonical.public_eligible，而该字段在生产 state 中未持久化（admission 真值在 production_state.processed_hashes）",
+      "compatibility export 因 legacy 时间格式非 RFC3339 与信封 run_id pattern 不符而整批中止，导致 canonical 新 cluster 无法同步 legacy 视图（V17 阻断部署）",
+      "deploy/state 报告路径与 frontend builder 期望路径错配，report_index 恒为 DAILY_DEV",
+      "report_id 与 business date 脱钩，无一致性门禁"
+    ],
+    "gates_added": [
+      "REPORT_ID_DATE_CONSISTENCY_GATE",
+      "PUBLIC_BUILD_NONEMPTY_SANITY_GATE",
+      "PUBLIC_CATASTROPHIC_DROP_GATE"
+    ]
+  },
+
+  "technical_debt": [
+    {"id": "TD-01", "item": "stage3_collect_v2.py 900s timeout 偶发",
+     "impact": "自动恢复、无 state 损坏、未突破 Daily business SLA",
+     "classification": "RECOVERED_WARNING",
+     "last_known_run": "34568487832",
+     "remediation_phase": "V1.1"},
+    {"id": "TD-02", "item": "gh-pages 使用 force_orphan，发布历史链不适合长期审计",
+     "impact": "审计追溯受限（发布内容本身正确）",
+     "remediation_phase": "V1.1：history-preserving / atomic publication"},
+    {"id": "TD-03", "item": "既存非回归测试失败（state-persistence 相关 4 项 + deploy 静态断言 2 项）",
+     "impact": "与基线一致，非 V1.0 引入",
+     "classification": "PRESERVED_AS_BASELINE",
+     "remediation_phase": "V1.1"},
+    {"id": "TD-04", "item": "Weekly 部分产物 provenance 的 report_id/report_date 不完整",
+     "impact": "不阻断 Daily V1.0 发布",
+     "remediation_phase": "V1.1"},
+    {"id": "TD-05", "item": "DAILY_DEV/mock 条目仍存在于兼容 index",
+     "impact": "已显式标记 is_mock 且排序末位，不会成为 latest",
+     "classification": "CLEANUP_DEBT",
+     "remediation_phase": "V1.1"}
+  ],
+
+  "freeze_policy": {
+    "v1_0_mode": "PRODUCTION_MAINTENANCE_MODE",
+    "allowed_changes": ["P0/P1 production hotfix", "security fix", "data integrity fix", "critical availability fix"],
+    "not_allowed_under_stage8d": ["new feature", "architecture refactor", "new business capability"],
+    "general_improvements_go_to": "V1.1"
+  },
+
+  "v1_1": {
+    "changed_by_this_closeout": false,
+    "status": "READY_TO_RESUME",
+    "branch": "v11-backfill-v2-full"
+  }
+}
