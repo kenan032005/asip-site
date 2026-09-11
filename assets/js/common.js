@@ -157,7 +157,7 @@ function renderHeader(active) {
       <div class="brand"><b>非洲地区社会安全信息平台</b><span>Africa Security Information Platform</span></div>
       <div class="meta" id="topmeta">
         🕐 北京时间 <b id="clBJ">--:--:--</b>
-        <span class="muted" id="updLine">更新（北京时间）：<b id="hdrUpdated">--</b></span>
+        <span class="muted" id="updLine">数据更新：<b id="hdrUpdated">--</b></span>
       </div>
     </div>
     <nav class="navbar">${links}</nav>`;

@@ -652,6 +652,143 @@ def _load_prod_reports(ops_reports_dir):
     return entries
 
 
+# ── China Interest（V1.1-H1 §六/§七）：确定性涉华关注视图 ──────────────
+# 只使用已批准的结构化依据，禁止 LLM 判断、禁止关键词猜测中资关系：
+#   1) 事件上的结构化涉华标记（china_related / event_type=china_related）
+#   2) 已批准实体元数据中被显式标注为中国关联的实体 id（data/intelligence/africa/entities.json）
+#   3) 已批准的中国利益暴露上下文（data/reference/china_exposure_context.json，可选；
+#      未批准/不存在时 INDIRECT 恒为 0，并在 uncertainty 中如实标注）
+CHINA_CONTEXT_PATH = "data/reference/china_exposure_context.json"
+
+
+def _approved_china_entity_ids(entities):
+    """已批准实体中被显式标注为中国关联的 entity_id（结构化字段，非名称猜测）。"""
+    out = set()
+    for e in (entities or []):
+        if not isinstance(e, dict):
+            continue
+        if e.get("china_linked") is True or e.get("china_related") is True \
+                or (e.get("china_linkage") in ("direct", "indirect")):
+            eid = e.get("entity_id")
+            if eid:
+                out.add(eid)
+    return out
+
+
+def _event_entity_ids(ev):
+    vals = ev.get("entity_ids") or ev.get("entity_refs") or []
+    out = set()
+    for v in vals:
+        if isinstance(v, str):
+            out.add(v)
+        elif isinstance(v, dict) and v.get("entity_id"):
+            out.add(v["entity_id"])
+    return out
+
+
+def build_china_interest(master_events, entities, countries, data_dir=None):
+    """确定性涉华关注视图（Production-compatible，无 AI、无猜测）。
+
+    DIRECT：存在明确结构化涉华依据（事件标记 / 已批准中国关联实体命中）。
+    INDIRECT：事件本身不直接涉华，但命中已批准的中国利益暴露上下文（国家级）。
+    每条保留 event_id / country / event_date / exposure_type / exposure_basis /
+    matched_entities / source_refs / confidence / uncertainty。
+    """
+    import os as _os
+    ent_ids = _approved_china_entity_ids(entities)
+    ctx = {}
+    try:
+        base = data_dir or str(ROOT)
+        cp = _os.path.join(base, CHINA_CONTEXT_PATH)
+        if _os.path.exists(cp):
+            ctx = json.loads(open(cp, encoding="utf-8").read()) or {}
+    except Exception:
+        ctx = {}
+    approved_ctx_countries = set(ctx.get("countries") or [])
+    approved_ctx_basis = ctx.get("basis") or ""
+
+    direct, indirect = [], []
+    for ev in (master_events or []):
+        eid = ev.get("master_event_id") or ev.get("event_id")
+        etype = (ev.get("event_type") or "").lower()
+        flagged = bool(ev.get("china_related")) or etype == "china_related"
+        hits = sorted(_event_entity_ids(ev) & ent_ids)
+        iso = ev.get("country_iso3")
+        row = {
+            "event_id": eid,
+            "country": iso,
+            "event_date": ev.get("event_time") or ev.get("latest_update_at"),
+            "exposure_type": "DIRECT",
+            "exposure_basis": [],
+            "matched_entities": hits,
+            "source_refs": ((ev.get("source_ref") or {}) if isinstance(ev.get("source_ref"), dict) else {}),
+            "confidence": "high" if flagged else "medium",
+            "uncertainty": [],
+        }
+        if flagged:
+            row["exposure_basis"].append("event_structured_flag")
+        if hits:
+            row["exposure_basis"].append("approved_china_entity_match")
+        if row["exposure_basis"]:
+            direct.append(row)
+        elif iso and iso in approved_ctx_countries:
+            indirect.append({
+                "event_id": eid, "country": iso,
+                "event_date": row["event_date"],
+                "exposure_type": "INDIRECT",
+                "exposure_basis": ["approved_country_exposure_context"],
+                "matched_entities": [],
+                "source_refs": row["source_refs"],
+                "confidence": "low",
+                "uncertainty": [approved_ctx_basis or "上下文依据需人工复核"],
+            })
+
+    notes = []
+    if not direct:
+        notes.append("当前公开可采信事件中无结构化涉华依据（china_related 标记 / 已批准中国关联实体命中）")
+    if not indirect and not approved_ctx_countries:
+        notes.append("未批准中国利益暴露上下文元数据（%s 不存在）→ INDIRECT 恒为 0，不进行任何推测" % CHINA_CONTEXT_PATH)
+    # 兼容行数组（home-v11.js 既有契约）：direct/indirect 的扁平投影
+    rows = []
+    for kind, arr in (("direct", direct), ("indirect", indirect)):
+        for r in arr:
+            rows.append({
+                "record_id": r["event_id"],
+                "event_id": r["event_id"],
+                "country": r["country"],
+                "country_cn": None,
+                "event_time": r["event_date"],
+                "china_interest": kind,
+                "china_related": kind == "direct",
+                "exposure_type": r["exposure_type"],
+                "exposure_basis": r["exposure_basis"],
+                "matched_entities": r["matched_entities"],
+                "source_refs": r["source_refs"],
+                "confidence": r["confidence"],
+                "uncertainty": r["uncertainty"],
+            })
+    return {
+        "generated_at": bj_iso(),
+        "method": "deterministic_china_interest_v1",
+        "rows": rows,
+        "inputs": {
+            "master_events": len(master_events or []),
+            "approved_entities": len(entities or []),
+            "approved_china_entity_ids": len(ent_ids),
+            "approved_context_countries": len(approved_ctx_countries),
+            "countries_meta": len(countries or []),
+        },
+        "summary": {
+            "direct_count": len(direct),
+            "indirect_count": len(indirect),
+            "limited_data": not (direct or indirect),
+            "notes": notes,
+        },
+        "direct": direct,
+        "indirect": indirect,
+    }
+
+
 def build_report_index(daily_input, weekly_inputs, brief_candidates,
                        preview_files, ops_reports_dir=None):
     """§三十：report index。只标记 status；development 阶段全为 development_sample。
@@ -761,6 +898,9 @@ def main():
 
     cn2iso, iso2cn, iso2en, iso2risk = build_country_indexes(countries)
 
+    views_master_for_china = build_master_events(social_tls, clusters, cn2iso,
+                                                 iso2cn, iso2en).get("events", [])
+
     views = {
         "site_overview": build_site_overview(events, pub_events, countries,
                                              status, disease_tls, daily_input,
@@ -773,6 +913,8 @@ def main():
                                                      cn2iso, iso2cn, iso2en,
                                                      iso2risk),
         "disease_outbreaks": build_disease_outbreaks(disease_tls, iso2cn),
+        "china_interest": build_china_interest(
+            views_master_for_china, entities, countries, data_dir=str(ROOT)),
         "report_index": build_report_index(daily_input, weekly_inputs,
                                            brief_candidates, preview_files,
                                            ops_reports_dir=str(ops_reports_dir)),

@@ -692,7 +692,14 @@
   function renderChina(evs, updated, countries, AI) {
     var host = document.getElementById("v11China");
     if (!host) return;
-    var china = (evs || []).filter(function (e) { return e.china_related; }).slice(0, 3);
+    // V1.1-H1：改读正式 china_interest 视图（deterministic，仅结构化依据）；
+    // evs 为视图 rows 的投影，direct/indirect 由视图标注，不在前端做任何猜测。
+    var china = (evs || []).filter(function (e) {
+      return e.china_related || e.china_interest === "direct";
+    }).slice(0, 3);
+    var indirectView = (evs || []).filter(function (e) {
+      return e.china_interest === "indirect";
+    }).slice(0, 5);
     var ai = (AI && AI.china) || null;
     var highCn = countries.filter(function (c) { return (c.risk_level || 0) >= 3; })
       .map(function (c) { return c.cn; }).slice(0, 5);
@@ -711,8 +718,15 @@
         "当前未发现已核实的重大直接涉中安全事件" +
         '<span class="v11-china-checked">Last checked: ' + esc(updated ? bjShort(updated) : "—") + " BJT</span></div>";
     }
-    // 间接区域风险（确定性）
-    if (highCn.length) {
+    // 间接区域风险（确定性）：优先使用视图的 INDIRECT 条目，其次回退高风险国家列表
+    if (indirectView.length) {
+      html += '<div class="v11-cat-section">间接区域风险（已批准暴露上下文）</div>' +
+        '<div class="v11-china-indirect">' + indirectView.map(function (e) {
+          return '<span class="v11-cn-ind">' + esc(e.country_cn || e.country || "—") +
+            (e.exposure_basis && e.exposure_basis.length ? "（" + esc(e.exposure_basis.join("/")) + "）" : "") +
+            "</span>";
+        }).join(" ") + "</div>";
+    } else if (highCn.length) {
       html += '<div class="v11-cat-section">间接区域风险</div>' +
         '<div class="v11-china-indirect">高/极高风险国家：<b>' + esc(highCn.join(" · ")) +
         "</b>，相关区域安全环境变化可能影响当地企业与人员安排，建议关注官方安全提示。</div>";
