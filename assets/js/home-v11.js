@@ -214,8 +214,10 @@
       // 避免 status.json 与 site_overview 双源导致同页出现两个不同时间。
       window.__ASIP_UPDATED__ = updated || null;
       (function () {
+        // 与正文同源同格式：全站约定「底层 UTC → 显示 +8」，表头必须用同一格式化，
+        // 否则表头与 KPI 条会差 8 小时。
         var hdr = document.getElementById("hdrUpdated");
-        if (hdr && updated) hdr.textContent = updated;
+        if (hdr && updated) hdr.textContent = bjShort(updated) + "（北京时间）";
       })();
 
       var riskByCn = {};
