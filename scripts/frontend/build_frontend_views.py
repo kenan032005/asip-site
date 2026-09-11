@@ -753,11 +753,20 @@ def _load_prod_reports(ops_reports_dir):
         return d if isinstance(d, dict) else None
 
     # ---------- daily ----------
+    # 类文件（full/fallback/low_data/hold） + 按业务日期归档的 daily_YYYYMMDD.json
+    import re as _re, glob as _glob
+    daily_files = [("daily_full.json", "FULL"), ("daily_fallback.json", "FALLBACK"),
+                   ("daily_low_data.json", "LOW_DATA"), ("daily_hold.json", "HOLD")]
+    for fp in sorted(_glob.glob(_os.path.join(ops_reports_dir, "daily_*.json"))):
+        bn = _os.path.basename(fp)
+        if _re.match(r"daily_\d{8}\.json$", bn):
+            daily_files.append((bn, "DATED"))
+    seen_files = set()
     cands = []
-    for fname, cls in (("daily_full.json", "FULL"),
-                       ("daily_fallback.json", "FALLBACK"),
-                       ("daily_low_data.json", "LOW_DATA"),
-                       ("daily_hold.json", "HOLD")):
+    for fname, cls in daily_files:
+        if fname in seen_files:
+            continue
+        seen_files.add(fname)
         d = _load(fname)
         if not d or not d.get("report_date"):
             continue
