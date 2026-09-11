@@ -10,9 +10,9 @@
   // ── 顶部导航（§三：全站统一 6 项；Mobile 折叠）──
   var NAV = [
     ["index.html", "首页", "home"],
-    ["events.html", "态势事件", "events"],
+    ["events.html", "事件", "events"],
     ["countries.html", "国家", "countries"],
-    ["disease-risk.html", "疾病风险", "disease"],
+    ["disease-risk.html", "传染病风险", "disease"],
     ["intelligence/africa/", "情报知识库", "intelligence"],
     ["reports.html", "报告", "reports"]
   ];
@@ -25,6 +25,24 @@
   }
 
   function dash(v) { return (v === null || v === undefined || v === "") ? "—" : v; }
+  function diseaseCount(counts, key) {
+    counts = counts || {};
+    return counts[key] !== undefined && counts[key] !== null ? counts[key] : counts[key + "_cases"];
+  }
+  function riskLevel(snapshot) {
+    return snapshot && snapshot.risk_level != null ? Number(snapshot.risk_level) : Number(snapshot && snapshot.baseline_risk_level || 0);
+  }
+  function recencyBadge(time) {
+    var cutoff = window.__ASIP_CUTOFF__;
+    if (!time || !cutoff) return "";
+    var t = Date.parse(String(time).replace(" ", "T"));
+    var c = Date.parse(String(cutoff).replace(" ", "T"));
+    if (isNaN(t) || isNaN(c)) return "";
+    var age = (c - t) / 86400000;
+    if (age >= 0 && age < 1) return '<span class="fe-badge fe-change">NEW</span>';
+    if (age >= 1 && age <= 3) return '<span class="fe-badge fe-change">RECENT</span>';
+    return "";
+  }
 
   // 北京时间（§三十四）：统一 "YYYY-MM-DD HH:mm（北京时间）"
   function bj(s) {
@@ -114,8 +132,9 @@
     tickClock();
     if (!window.__clockTimer__) window.__clockTimer__ = setInterval(tickClock, 1000);
     API.getCached("status").then(function (st) {
-      var t = (st && (st.last_update_bj || st.generated_at_bj)) || null;
+      var t = (st && (st.last_update_bj || st.generated_at_bj || st.last_updated_beijing)) || null;
       if (t) {
+        window.__ASIP_CUTOFF__ = t;
         var el = document.getElementById("hdrUpdated");
         if (el) el.textContent = t;
       }
@@ -136,7 +155,9 @@
       .then(function (R) {
         var ov = R[0], me = R[1], dis = R[2], cs = R[3], ri = R[4], ks = R[5];
         var countries = ((R[6].ok ? R[6].data : {}) || {}).countries || [];
-        var risk = (R[7].ok ? R[7].data : {}) || {};
+        window.__ASIP_CUTOFF__ = (ov.ok && ov.data && ov.data.latest_data_time_bj) ||
+          (R[8].ok && R[8].data && (R[8].data.last_update_bj || R[8].data.generated_at_bj)) ||
+          window.__ASIP_CUTOFF__ || null;
         var st = (R[8].ok ? R[8].data : {}) || {};
 
         // A. Situation Header
@@ -189,12 +210,12 @@
         var pc = document.getElementById("fePriority");
         if (pc) {
           var snaps = (cs.ok && cs.data && cs.data.snapshots) || [];
-          var prio = snaps.filter(function (s) { return (s.baseline_risk_level || 0) >= 3; }).slice(0, 6);
+          var prio = snaps.filter(function (s) { return riskLevel(s) >= 3; }).slice(0, 6);
           pc.innerHTML = prio.length ? prio.map(function (s) {
             return '<a class="fe-country-chip" href="country.html?country=' +
               encodeURIComponent(s.country_cn) + '">' +
-              '<span class="risk-' + (s.baseline_risk_level || 1) + '">' +
-              esc(s.baseline_risk || "低") + "</span> " + esc(s.country_cn) +
+              '<span class="risk-' + riskLevel(s) + '">' +
+              esc(s.baseline_risk || s.risk_label || "低") + "</span> " + esc(s.country_cn) +
               '<small>24h:' + dash(s.events_24h) + " · 7d:" + dash(s.events_7d) + "</small></a>";
           }).join("") : emptyState("暂无优先国家。");
         }
@@ -228,18 +249,22 @@
             : emptyState("暂无持续发展中的事件。");
         }
 
-        // G. Latest Report（§十八：明确开发样例）
+        // G. Latest Report（§十八：正式/历史回溯状态显式展示）
         var lr = document.getElementById("feLatestReport");
         if (lr) {
           var reps = (ri.ok && ri.data && ri.data.reports) || [];
           var daily = reps.filter(function (r) { return r.type === "africa_daily"; })[0];
-          lr.innerHTML = daily
-            ? '<p class="fe-report-line">' + esc(daily.title) +
-              '　<span class="fe-badge fe-mock">MOCK / 开发样例 · 非正式情报报告</span>' +
-              ' <a class="btn sm ghost" href="' + daily.path + '" target="_blank">查看样例</a>' +
-              ' <a class="btn sm ghost" href="reports.html">报告中心</a></p>'
-            : '<p class="fe-report-line">正式日报生成能力待 Production AI 启用。' +
+          if (daily) {
+            var historical = daily.generation_mode === "historical_backfill" || daily.historical_reconstruction === true;
+            var label = historical ? "事实版 · 历史回溯" : (daily.status_cn || daily.status || "报告");
+            lr.innerHTML = '<p class="fe-report-line">' + esc(daily.title) +
+              '　<span class="fe-badge ' + (historical ? "fe-mock" : "") + '">' + esc(label) + '</span>' +
+              ' <a class="btn sm ghost" href="' + daily.path + '" target="_blank">查看 →</a>' +
               ' <a class="btn sm ghost" href="reports.html">报告中心</a></p>';
+          } else {
+            lr.innerHTML = '<p class="fe-report-line">正式日报生成能力待 Production AI 启用。' +
+              ' <a class="btn sm ghost" href="reports.html">报告中心</a></p>';
+          }
         }
 
         // H. Intelligence 入口（§二十三）
@@ -288,7 +313,7 @@
     return '<a class="fe-me-card" href="event.html?id=' + encodeURIComponent(e.master_event_id) + '">' +
       '<div class="fe-me-head">' +
       '<span class="fe-me-country">' + esc(e.country_cn || e.country_iso3 || "非洲") + "</span>" +
-      cBadge(e.change_type) + vBadge(e.verification_status) + "</div>" +
+      recencyBadge(e.latest_update_at || e.event_time) + cBadge(e.change_type) + vBadge(e.verification_status) + "</div>" +
       '<div class="fe-me-title">' + esc(e.headline_zh) + "</div>" +
       (e.headline_en ? '<div class="fe-me-en">' + esc(String(e.headline_en).slice(0, 110)) + "</div>" : "") +
       '<div class="fe-me-meta">' +
@@ -306,8 +331,8 @@
       '<div class="fe-ob-name">' + esc(o.disease_name_cn || o.disease_id) +
       " <small>" + esc(o.country_cn || o.country_iso3 || "") + "</small></div>" +
       '<div class="fe-ob-status">' + esc(o.status_cn || o.status || "—") + "</div>" +
-      '<div class="fe-ob-num">确诊 ' + dash(lc.confirmed_cases) + " · 死亡 " +
-      dash(lc.deaths) + " · " + esc(bjShort(o.latest_report_at)) + "</div>" +
+      '<div class="fe-ob-num">确诊 ' + dash(diseaseCount(lc, "confirmed")) + " · 死亡 " +
+      dash(diseaseCount(lc, "deaths")) + " · " + esc(bjShort(o.latest_report_at)) + "</div>" +
       "</a>";
   }
 
@@ -458,13 +483,13 @@
         // Priority Quick View（§十二）
         var pq = document.getElementById("fePriorityQuick");
         if (pq) {
-          var prio = snaps.filter(function (s) { return (s.baseline_risk_level || 0) >= 3; });
+          var prio = snaps.filter(function (s) { return riskLevel(s) >= 3; });
           pq.innerHTML = prio.length ? prio.map(function (s) {
             return '<a class="fe-pq" href="country.html?country=' +
               encodeURIComponent(s.country_cn) + '">' +
               '<b>' + esc(s.country_cn) + "</b> " +
-              '<span class="risk-' + (s.baseline_risk_level || 1) + '">' +
-              esc(s.baseline_risk || "—") + "</span>" +
+              '<span class="risk-' + riskLevel(s) + '">' +
+              esc(s.baseline_risk || s.risk_label || "—") + "</span>" +
               "<small>24h " + dash(s.events_24h) + " · 7d " + dash(s.events_7d) +
               " · 疫情 " + dash(s.active_outbreaks) + "</small></a>";
           }).join("") : emptyState("暂无优先国家。");
@@ -479,8 +504,8 @@
       '<div class="cn">' + esc(s.country_cn) + "</div>" +
       '<div class="en">' + esc(s.country_en || "") + "</div>" +
       '<div class="region">' + esc(s.region || "") + "</div>" +
-      '<div class="meta-row"><span class="badge risk-' + (s.baseline_risk_level || 1) + '">' +
-      esc(s.baseline_risk || "—") + '</span></div>' +
+      '<div class="meta-row"><span class="badge risk-' + riskLevel(s) + '">' +
+      esc(s.baseline_risk || s.risk_label || "—") + '</span></div>' +
       '<div class="fe-cc-meta">24h ' + dash(s.events_24h) + " · 7d " + dash(s.events_7d) +
       " · 疫情 " + dash(s.active_outbreaks) + "</div>" +
       (l.title ? '<div class="fe-cc-last">最新：' + esc(String(l.title).slice(0, 40)) + "</div>" : "") +
@@ -502,7 +527,7 @@
           "该国家暂无公开快照数据。");
         return;
       }
-      var iso = s.iso3 || "";
+      var iso = s.country_iso3 || s.iso3 || "";
       // 该国 master 事件（按 iso 或 cn 匹配）
       var evs = ((me.ok && me.data && me.data.events) || []).filter(function (e) {
         return e.country_iso3 === iso || e.country_cn === cn;
@@ -516,8 +541,8 @@
       var l = s.latest_major_event || {};
       var html = '<div class="fe-cy-head"><h1>' + esc(s.country_cn) + "</h1>" +
         '<p>' + esc(s.country_en || "") + (s.region ? " · " + esc(s.region) : "") +
-        " · 基准风险 " + '<span class="badge risk-' + (s.baseline_risk_level || 1) + '">' +
-        esc(s.baseline_risk || "—") + "</span>" + "</p></div>";
+        " · 基准风险 " + '<span class="badge risk-' + riskLevel(s) + '">' +
+        esc(s.baseline_risk || s.risk_label || "—") + "</span>" + "</p></div>";
       // B. Current Situation（§十三 B：无正式周报 → 确定性/空态）
       html += '<div class="fe-ev-sec"><h2>当前态势</h2>' +
         (wks.length
@@ -539,7 +564,7 @@
         (evs.filter(function (e) { return (e.update_count || 0) > 1; }).length
           ? evs.filter(function (e) { return (e.update_count || 0) > 1; }).slice(0, 5).map(function (e) {
               return "<p><a href='event.html?id=" + encodeURIComponent(e.master_event_id) + "'>" +
-                esc(e.headline_zh) + "</a> " + cBadge(e.change_type) +
+                esc(e.headline_zh) + "</a> " + recencyBadge(e.latest_update_at || e.event_time) + cBadge(e.change_type) +
                 " <small>更新 " + (e.update_count || 0) + " 次</small></p>";
             }).join("")
           : '<p class="muted">暂无多更新事件时间线。</p>') + "</div>";
@@ -550,7 +575,7 @@
           return "<p><a href='disease-risk.html#outbreak=" + encodeURIComponent(o.outbreak_id) + "'>" +
             esc(o.disease_name_cn || o.disease_id) + "</a> " +
             '<span class="fe-ob-status">' + esc(o.status_cn || "—") + "</span>" +
-            " 确诊 " + dash(lc.confirmed_cases) + " · 死亡 " + dash(lc.deaths) +
+            " 确诊 " + dash(diseaseCount(lc, "confirmed")) + " · 死亡 " + dash(diseaseCount(lc, "deaths")) +
             " · " + esc(bjShort(o.latest_report_at)) + "</p>";
         }).join("")
           : '<p class="muted">当前无符合发布条件的活跃疫情。</p>') + "</div>";
@@ -616,8 +641,8 @@
       var active = document.getElementById("feDisActive");
       if (active) {
         var act = os.filter(function (o) {
-          return ["active", "developing", "increasing", "geographic_spread", "monitoring"]
-            .indexOf(String(o.status || "").toLowerCase()) >= 0;
+          return ["ACTIVE", "MONITORING", "DECLINING", "CONTROLLED"]
+            .indexOf(String(o.status || "").toUpperCase()) >= 0;
         });
         active.innerHTML = act.length
           ? '<div class="fe-outbreak-row">' + act.map(outbreakMini).join("") + "</div>"
@@ -637,9 +662,9 @@
       '<div class="fe-ob-card-h"><b>' + esc(o.disease_name_cn || o.disease_id) + "</b> " +
       '<span class="fe-ob-status">' + esc(o.status_cn || "—") + "</span></div>" +
       "<div>" + esc(o.country_cn || o.country_iso3 || "—") + "</div>" +
-      '<div class="fe-ob-nums">确诊 <b>' + dash(lc.confirmed_cases) + "</b>" +
-      (dl.confirmed_cases ? ' <small>(+' + dl.confirmed_cases + ")</small>" : "") +
-      " · 疑似 <b>" + dash(lc.suspected_cases) + "</b> · 死亡 <b>" + dash(lc.deaths) + "</b>" +
+      '<div class="fe-ob-nums">确诊 <b>' + dash(diseaseCount(lc, "confirmed")) + "</b>" +
+      (dl.confirmed ? ' <small>(+' + dl.confirmed + ")</small>" : (dl.confirmed_cases ? ' <small>(+' + dl.confirmed_cases + ")</small>" : "")) +
+      " · 疑似 <b>" + dash(diseaseCount(lc, "suspected")) + "</b> · 死亡 <b>" + dash(diseaseCount(lc, "deaths")) + "</b>" +
       (dl.deaths ? ' <small>(+' + dl.deaths + ")</small>" : "") + "</div>" +
       '<div class="fe-ob-meta">统计截至 ' + esc(lc.as_of_date || "—") +
       " · " + esc(bjShort(o.latest_report_at)) + " · 来源 " + dash(o.source_count) + " 个" +
@@ -662,9 +687,9 @@
       '<p>' + vBadge(o.verification_status) + " " +
       '<span class="fe-ob-status">' + esc(o.status_cn || "—") + "</span></p>" +
       '<table class="fe-tbl">' +
-      row("确诊 Confirmed", dash(lc.confirmed_cases)) +
-      row("疑似 Probable", dash(lc.probable_cases)) +
-      row("可疑 Suspected", dash(lc.suspected_cases)) +
+      row("确诊 Confirmed", dash(diseaseCount(lc, "confirmed"))) +
+      row("疑似 Probable", dash(lc.probable != null ? lc.probable : lc.probable_cases)) +
+      row("可疑 Suspected", dash(diseaseCount(lc, "suspected"))) +
       row("死亡 Deaths", dash(lc.deaths)) +
       row("统计截至", esc(lc.as_of_date || "—")) +
       row("最新报告", esc(bj(o.latest_report_at))) +
@@ -692,9 +717,9 @@
       var html = '<div class="fe-ev-sec"><h2>最新非洲日报</h2>' +
         (daily.length
           ? '<div class="fe-report-card"><b>' + esc(daily[0].title) + "</b>" +
-            '<div class="fe-badge fe-mock">MOCK / 开发样例 · 非正式情报报告</div>' +
+            '<div class="fe-badge fe-mock">' + esc(daily[0].status_cn || daily[0].status || "历史回溯") + '</div>' +
             "<div>" + esc(bj(daily[0].published_at)) + "</div>" +
-            '<a class="btn sm" href="' + daily[0].path + '" target="_blank">查看样例 →</a>' +
+            '<a class="btn sm" href="' + daily[0].path + '" target="_blank">查看 →</a>' +
             "</div>"
           : '<p class="muted">正式日报生成能力待 Production AI 启用。</p>') + "</div>";
       html += '<div class="fe-ev-sec"><h2>日报归档</h2>' +
@@ -782,7 +807,9 @@
   function init() {
     var page = document.body.getAttribute("data-page") || "";
     renderNav(page);
-    if (page === "home") renderHome();
+    // V1.1 Dashboard 首页由 home-v11.js 渲染（标志防重复）
+    if (page === "home" && !window.__V11_HOME__) renderHome();
+    else if (page === "home") { /* V1.1 dashboard */ }
     else if (page === "events") renderEvents();
     else if (page === "event") renderEventDetail();
     else if (page === "countries") renderCountries();

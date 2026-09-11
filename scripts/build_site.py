@@ -61,6 +61,7 @@ PUBLIC_DATA_ALLOWLIST = [
 # 只允许进入 dist 白名单的 7 个视图契约；绝不带内部 runtime 字段。
 FRONTEND_VIEWS = [
     "site_overview",
+    "china_interest",          # V1.1 homepage China Exposure view
     "master_events",
     "event_timelines",
     "country_snapshots",
