@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>关系索引 · ASIP非洲安全情报知识库</title><link rel="stylesheet" href="../../../assets/css/style.css"><link rel="stylesheet" href="../../../assets/css/intelligence.css"></head>
+<body data-africa-page="relations">
+<div id="topbar"></div><main class="intel-shell"><div id="intelError" class="intel-error" hidden></div>
+  <div class="intel-breadcrumb"><a href="../">非洲知识库</a><span>/</span><span>关系索引</span></div>
+  <section class="intel-entity-head"><div><span class="intel-overline">RELATION INDEX</span><h1>关系索引</h1><p>每条关系带时间、状态、可信度与来源；完整关系沿革见关系档案页。搜索与筛选同步到地址栏，刷新或前进后退后状态保留。</p></div></section>
+  <div class="list-controls">
+    <input id="relListSearch" type="search" placeholder="搜索关系双方名称或别名">
+    <select id="relTypeFilter" aria-label="关系类型筛选"></select>
+    <select id="relStatusFilter" aria-label="当前/历史筛选"><option value="">全部状态</option><option value="current">当前</option><option value="historical">历史</option></select>
+    <select id="relMaturityFilter" aria-label="关系档案深度筛选"></select>
+    <label><input type="checkbox" id="relDisputedOnly"> 仅争议/不确定</label>
+    <label><input type="checkbox" id="relTimeSensitive"> 时间敏感</label>
+    <span id="relCount" class="list-count"></span>
+  </div>
+  <div id="relationList" class="intel-panel" style="margin-top:4px"></div>
+</main><footer class="site"></footer>
+<script src="../../../assets/js/intelligence/africa.js"></script>
+</body></html>
