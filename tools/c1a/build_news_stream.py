@@ -57,9 +57,23 @@ ISO2 = {
     "塞内加尔": "SN", "毛里塔尼亚": "MR", "多哥": "TG", "科特迪瓦": "CI",
 }
 ISO2_REV = {v: k for k, v in ISO2.items()}
+
+# C1C：同一国家在不同层使用了不同中文名（国家配置 / 数据层），此处提供确定性别名，
+# 避免因命名不一致把整国内容判为 REJ_OUT_OF_SCOPE（DRC 与 Somalia 曾全部被丢弃）。
+ISO2_ALIASES = {
+    "刚果（金）": "CD", "刚果金": "CD", "刚果民主共和国": "CD", "DRC": "CD",
+    "索马里": "SO", "索马里兰": "SO",
+    "刚果布": "CG", "刚果共和国（刚果布）": "CG",
+    "坦桑尼亚": "TZ", "加蓬": "GA", "摩洛哥": "MA", "突尼斯": "TN",
+}
+for _k, _v in ISO2_ALIASES.items():
+    ISO2.setdefault(_k, _v)
 ISO3 = {"TD": "TCD", "NE": "NER", "NG": "NGA", "SD": "SDN", "SS": "SSD",
         "KE": "KEN", "ET": "ETH", "LY": "LBY", "BJ": "BEN", "MZ": "MOZ",
-        "EG": "EGY", "DZ": "DZA", "UG": "UGA", "AO": "AGO", "GH": "GHA"}
+        "EG": "EGY", "DZ": "DZA", "UG": "UGA", "AO": "AGO", "GH": "GHA",
+        # C1C：补齐新增国别，避免 iso3 为空导致下游视图缺字段
+        "CD": "COD", "SO": "SOM", "CG": "COG", "TZ": "TZA", "GA": "GAB",
+        "MA": "MAR", "TN": "TUN"}
 
 ETYPE_CN = {
     "armed_conflict": "武装冲突", "other_security": "其他安全",
