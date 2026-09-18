@@ -108,6 +108,22 @@ class ArticlePersistenceTest(unittest.TestCase):
         self.assertEqual(len(self._store()), 1)
         self.assertEqual(st2["excludes"].get(EX_DUPLICATE_URL, 0), 1)
 
+    def test_03b_collector_local_time_is_normalized_to_rfc3339(self):
+        """采集器的 "%Y-%m-%d %H:%M:%S"（无时区）必须归一为 RFC3339 后入库"""
+        from data.article_persistence import _rfc3339
+        self.assertEqual(_rfc3339("2026-09-11 16:11:47"), "2026-09-11T16:11:47+08:00")
+        self.assertEqual(_rfc3339("2026-09-18T20:07:05+08:00"), "2026-09-18T20:07:05+08:00")
+        self.assertEqual(_rfc3339("Wed, 18 Sep 2026 09:00:00 EST"),
+                         "2026-09-18T14:00:00+00:00")
+        self.assertIsNone(_rfc3339("garbage"))
+        # 真实采集形状（空格分隔、无时区）必须能成功入库
+        st = persist_collected_articles(
+            self.tmp,
+            [art("https://tchadinfos.com/a/ts", published="2026-09-11 16:11:47")],
+            "20260918T200009+0800_c1btst", verbose=False)
+        self.assertEqual(st["new_articles_persisted"], 1)
+        self.assertEqual(st["excludes"], {})
+
     def test_04_exclusions_are_explicit_not_silent(self):
         """out-of-scope / safety hold / malformed 必须显式计数，不得静默丢弃"""
         arts = [

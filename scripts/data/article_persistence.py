@@ -30,10 +30,12 @@
 import os
 import re
 import sys
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 _HERE = os.path.dirname(os.path.abspath(__file__))          # scripts/data
 _SCRIPTS = os.path.dirname(_HERE)                           # scripts
+CN = timezone(timedelta(hours=8))
 if _SCRIPTS not in sys.path:
     sys.path.insert(0, _SCRIPTS)
 
@@ -74,6 +76,48 @@ def _src_url_of(article):
     return ""
 
 
+def _rfc3339(s):
+    """把采集器的时间串归一为 RFC3339（article.schema 的 format=date-time 要求）。
+
+    采集器内部用的是 `to_beijing()` 的 "%Y-%m-%d %H:%M:%S"（空格分隔、无时区），
+    直接写入会被 schema 判为非法（format: date-time）——这会让整批 Article 入库失败。
+    这里只做**格式归一**（补 T / 补 +08:00 时区），不改变时刻语义。
+    无法解析时返回 None（schema 允许 null），绝不臆造时间。
+    """
+    if not s:
+        return None
+    t = str(s).strip()
+    if not t:
+        return None
+    # 已带时区的 RFC3339/ISO8601
+    try:
+        dt = datetime.fromisoformat(t.replace("Z", "+00:00"))
+        if dt.tzinfo:
+            return dt.isoformat()
+    except ValueError:
+        pass
+    # 采集器的北京时间本地串："YYYY-MM-DD HH:MM:SS"
+    for fmt in ("%Y-%m-%d %H:%M:%S", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d"):
+        try:
+            dt = datetime.strptime(t[:len(fmt) + 2], fmt)
+            return dt.replace(tzinfo=CN).isoformat()
+        except ValueError:
+            continue
+    # 交给健壮日期解析器（RFC822 / 命名时区 / dc:date）
+    try:
+        import sys as _sys
+        _cp = os.path.join(_SCRIPTS, "collectors")
+        if _cp not in _sys.path:
+            _sys.path.insert(0, _cp)
+        from feed_parser import parse_feed_date
+        dt, _tz = parse_feed_date(t)
+        if dt:
+            return dt.isoformat()
+    except Exception:
+        pass
+    return None
+
+
 def article_to_candidate(a):
     """采集器 article dict → Stage-2 candidate dict（candidate_to_article 的输入契约）。
 
@@ -90,8 +134,8 @@ def article_to_candidate(a):
         "url": url,
         "title_original": (a.get("original_title") or "").strip(),
         "summary_original": (a.get("original_summary") or "")[:2000],
-        "published_time": published,
-        "fetched_at": a.get("collected_at_beijing") or "",
+        "published_time": _rfc3339(published),
+        "fetched_at": _rfc3339(a.get("collected_at_beijing")) or "",
         "source_id": a.get("source_id") or "",
         "source_name": a.get("source_name") or "",
         "source_url": _src_url_of(a),

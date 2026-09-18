@@ -26,10 +26,18 @@ import unicodedata
 from datetime import datetime, timezone
 
 #: 合并判定阈值（事件级；与 canonical 的 independent_source_count 阈值无关）
-MERGE_AUTO_TITLE_JACCARD = 0.50
+#: 阈值经 production-state 真实同事件/异事件标题对校准（见 C1B 审计）：
+#:   真实同事件对：jac 0.17–0.44 / shared_tok 2–4 / shared_ent 1–2
+#:   明确异事件对：jac 0.00 / shared_tok 0 / shared_ent 0
+#: 早期设定的 0.50/3 对法语标题过于严格（会漏合并真同事件），故按实测下沿设阈，
+#: 同时保留「必须有共享判别词 + 共享实体」这类强证据要求，避免过度合并。
+MERGE_AUTO_TITLE_JACCARD = 0.28      # E1 主路径
 MERGE_AUTO_MIN_SHARED_TOKENS = 3
-MERGE_AUTO_MIN_SHARED_ENTITIES = 2
+MERGE_STRONG_ENTITY_TOKENS = 2       # E1b 实体+词面双证据
+MERGE_STRONG_ENTITY_JACCARD = 0.15
+MERGE_AUTO_MIN_SHARED_ENTITIES = 2   # E2 实体路径
 MERGE_ENTITY_TIME_WINDOW_H = 24.0
+MERGE_SCORE_FLOOR = 40
 MAX_TIME_DELTA_H = 72.0
 
 #: category 兼容矩阵（宽口径；不兼容 → 不合并）
@@ -185,8 +193,14 @@ def pair_evidence(anchor, cand):
     if jac >= MERGE_AUTO_TITLE_JACCARD and len(shared_tok) >= MERGE_AUTO_MIN_SHARED_TOKENS:
         score += 45
         ev.append("E1_title_jaccard=%.2f shared_tokens=%d" % (jac, len(shared_tok)))
-    if len(shared_ent) >= MERGE_AUTO_MIN_SHARED_ENTITIES and dh is not None \
-            and dh <= MERGE_ENTITY_TIME_WINDOW_H:
+    if shared_ent and len(shared_tok) >= MERGE_STRONG_ENTITY_TOKENS \
+            and jac >= MERGE_STRONG_ENTITY_JACCARD:
+        score += 35
+        ev.append("E1b_entity_plus_lexical entities=%d tokens=%d jac=%.2f"
+                  % (len(shared_ent), len(shared_tok), jac))
+    if len(shared_ent) >= MERGE_AUTO_MIN_SHARED_ENTITIES \
+            and len(shared_tok) >= MERGE_STRONG_ENTITY_TOKENS \
+            and dh is not None and dh <= MERGE_ENTITY_TIME_WINDOW_H:
         score += 40
         ev.append("E2_shared_entities=%d dh=%.1f" % (len(shared_ent), dh))
     if dh is not None and dh <= 24:
@@ -204,7 +218,8 @@ def pair_evidence(anchor, cand):
     if anchor.get("event_time") != cand.get("event_time"):
         conflicts.append("time_difference")
 
-    mergeable = score >= 45 and any(e.startswith(("E1_", "E2_")) for e in ev)
+    mergeable = score >= MERGE_SCORE_FLOOR and any(
+        e.startswith(("E1_", "E1b_", "E2_")) for e in ev)
     return mergeable, score, ev, conflicts
 
 
@@ -285,17 +300,17 @@ def cluster_events(events, identity_of=None):
             from data.source_identity import source_identity
             return source_identity(e)
 
-    # block：(country_code, 日期)，相邻日期允许落入同一 block（±1 天）
+    # block：仅按 country_code 分块；时间邻近性由 pair_evidence 的 ≤72h 硬门槛负责。
+    # 早期实现按「自然日」分块，会把跨日但确实同属一个事件的报道（如 09-10 与 09-11
+    # 的同一坍塌事故）分到不同 block 而永不比较 —— 这是实测到的漏合并原因。
     blocks = {}
     for e in events:
         cc = e.get("country_code") or ""
-        dt = _parse_ts(e.get("event_time") or e.get("published_at_beijing"))
-        day = dt.date().isoformat() if dt else "unknown"
-        blocks.setdefault((cc, day), []).append(e)
+        blocks.setdefault(cc, []).append(e)
 
     clusters, merged_pairs, hard_rejects = [], 0, 0
-    for (cc, _day), members in sorted(blocks.items()):
-        # 同 block 内（同日）非传递 anchor 聚类
+    for cc, members in sorted(blocks.items()):
+        # 同国非传递 anchor 聚类（时间邻近性在 pair_evidence 内强制）
         local = []          # list of {anchor: ev, members: [ev]}
         for e in members:
             placed = False
