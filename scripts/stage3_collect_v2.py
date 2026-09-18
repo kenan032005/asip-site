@@ -405,6 +405,8 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
                 # 通过 → 构建事件，标记终态（published）
                 ev = build_event(a, run_id, country_cn)
                 published.append(ev)
+                # C1B §五：把确定性事件类型回填到 article，供 Article Corpus 持久化
+                a["_event_type"] = ev.get("event_type", "")
                 existing_urls.add(norm_url(a.get("article_url", "")))
                 set_article_state_record(state_doc, a.get("article_url", ""),
                                       STATE.PUBLISHED,
@@ -452,6 +454,10 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
                     "original_payload": a,
                 }
                 quarantined.append(qr)
+                # C1B §五：标记隔离原因，供 Article Persistence 判定 safety hold
+                # （不得把安全隔离的文章写进 Article Corpus）
+                a["_quarantine_reason"] = reason
+                a["_quarantine_code"] = qr_code
                 if is_terminal:
                     set_article_state_record(state_doc, a.get("article_url", ""),
                                           STATE.QUARANTINED_TERMINAL,
@@ -546,7 +552,7 @@ def build_event(article, run_id, country_cn):
     }
 
 
-def write_stats(per_source, run_id, configured_sources=0):
+def write_stats(per_source, run_id, configured_sources=0, article_stats=None):
     totals = {
         "configured_sources": configured_sources,
         "enabled_sources": len(per_source),
@@ -569,6 +575,16 @@ def write_stats(per_source, run_id, configured_sources=0):
         "duplicate_count": sum(s["duplicates"] for s in per_source),
         "average_fetch_time": round(sum(s["duration_s"] for s in per_source) / max(1, len(per_source)), 1),
     }
+    # C1B §五：Article Corpus 持久化指标（真实计数，读取不到则显式标记）
+    if article_stats:
+        totals["article_store_path"] = article_stats.get("authoritative_store")
+        totals["articles_persisted_total"] = article_stats.get("store_after")
+        totals["articles_persisted_new"] = article_stats.get("new_articles_persisted")
+        totals["articles_excluded_total"] = article_stats.get("excluded_total")
+        totals["articles_excluded_by_code"] = article_stats.get("excludes") or {}
+        totals["article_persistence_ok"] = True
+    else:
+        totals["article_persistence_ok"] = False
     doc = {
         "generated_at": bj_iso(),
         "run_id": run_id,
@@ -787,12 +803,30 @@ def main():
         per_source.extend(ps)
         all_errors.extend(errs)
 
+    # ── C1B §五：Article Corpus 持久化 ──
+    # 采集器过去只写 event_clusters/quarantine，内存中的 all_articles 从不落盘，
+    # 导致 Article Layer 自 2026-07-30 冻结（C1B §四 G1 审计）。此处补上唯一
+    # 持久化入口：通过 Repository 写入 data/canonical/articles.json（schema 校验 +
+    # 去重 + 原子写入）。文章入库不代表事实已核实，不触碰 canonical 事件阈值。
+    article_stats = None
+    try:
+        from data.article_persistence import persist_collected_articles
+        article_stats = persist_collected_articles(ROOT, all_articles, run_id)
+    except Exception as e:  # noqa: BLE001
+        print("  [article-persist] FAILED: %s: %s" % (type(e).__name__, e))
+        traceback.print_exc()
+
     # ── 持久化集中式状态 ──
     persist_and_clear_state()
 
     print(f"\n{'='*60}")
     print(f"采集完成: {len(all_articles)} 篇文章, {len(per_source)} 来源, {len(all_errors)} 错误")
-    totals = write_stats(per_source, run_id, configured_sources=configured_sources)
+    if article_stats:
+        print("Article Corpus: %d -> %d (新增 %d)"
+              % (article_stats["store_before"], article_stats["store_after"],
+                 article_stats["new_articles_persisted"]))
+    totals = write_stats(per_source, run_id, configured_sources=configured_sources,
+                         article_stats=article_stats)
     save_audit_snapshot(per_source, totals, run_id, source_registry=registry)
     print(json.dumps(totals, ensure_ascii=False, indent=2))
 

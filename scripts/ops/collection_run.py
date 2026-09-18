@@ -39,6 +39,11 @@ _STAT_FIELDS = {
     "duplicates": "duplicate_count",
     "published": "published_count",
     "quarantined": "quarantined_count",
+    # C1B §五：Article Corpus 持久化指标（写入端修复后的可观测性）
+    "articles_persisted_total": "articles_persisted_total",
+    "articles_persisted_new": "articles_persisted_new",
+    "articles_excluded_total": "articles_excluded_total",
+    "article_persistence_ok": "article_persistence_ok",
 }
 
 
@@ -128,7 +133,9 @@ def run_collection(execute=False, emit=lambda s: print(s), state=None, ops_run=N
     if ops_run is not None:
         for k in ("sources_configured", "sources_attempted", "sources_succeeded",
                   "sources_failed", "articles_discovered", "duplicates",
-                  "published", "quarantined"):
+                  "published", "quarantined",
+                  "articles_persisted_total", "articles_persisted_new",
+                  "articles_excluded_total", "article_persistence_ok"):
             ops_run[k] = metrics.get(k)
         ops_run["candidates_new"] = max(n_pending, 0)
         if not stats:
