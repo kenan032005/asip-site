@@ -271,6 +271,168 @@ class FailureReasonTest(unittest.TestCase):
 
 
 
+class SourceIdentityTest(unittest.TestCase):
+    """B. Source Identity / Corroboration（§十三–§十七）"""
+
+    def test_08_same_publisher_country_variants_are_one_identity(self):
+        """同一媒体按国家重复登记必须收敛为 1 个独立来源"""
+        from data.source_identity import source_identity, independent_source_count
+        recs = [
+            {"source_id": "intl_reuters_chad", "source_name": "Reuters (Chad)",
+             "url": "https://www.reuters.com/"},
+            {"source_id": "intl_reuters_niger", "source_name": "Reuters (Niger)",
+             "url": "https://www.reuters.com/"},
+            {"source_id": "intl_rfi_chad", "source_name": "RFI (Chad)",
+             "url": "https://www.rfi.fr/"},
+            {"source_id": "intl_rfi_niger", "source_name": "RFI (Niger)",
+             "url": "https://www.rfi.fr/"},
+        ]
+        ids = [source_identity(r)["source_identity_id"] for r in recs]
+        self.assertEqual(len(set(ids)), 2)              # Reuters=1, RFI=1
+        self.assertEqual(independent_source_count(recs)["independent_source_count"], 2)
+
+    def test_09_two_real_publishers_count_as_two_sources(self):
+        """两家真正独立的媒体必须算 2 个来源"""
+        from data.source_identity import independent_source_count
+        recs = [
+            {"source_id": "chad_tchadinfos", "source_name": "Tchadinfos",
+             "article_url": "https://tchadinfos.com/a"},
+            {"source_id": "chad_alwihda", "source_name": "Alwihda Info",
+             "article_url": "https://www.alwihdainfo.com/a"},
+        ]
+        self.assertEqual(independent_source_count(recs)["independent_source_count"], 2)
+
+    def test_10_same_syndicated_story_is_one_independent_source(self):
+        """同一篇通讯社稿被多站转载：不得算成多个独立来源"""
+        from data.source_identity import independent_source_count, source_identity
+        recs = [
+            {"source_id": "intl_allafrica_chad", "source_name": "AllAfrica",
+             "article_url": "https://allafrica.com/stories/202609180001.html",
+             "origin_publisher": "Reuters"},
+            {"source_id": "chad_journaldutchad", "source_name": "Journal du Tchad",
+             "article_url": "https://journaldutchad.com/reuters-story"},
+            {"source_id": "un_reliefweb_chad", "source_name": "ReliefWeb",
+             "article_url": "https://reliefweb.int/report/chad/x",
+             "origin_publisher": "Reuters"},
+        ]
+        ic = independent_source_count(recs)
+        # syndicated_copy 归并到 origin:reuters；聚合器单独归类；独立发布方 1 家
+        self.assertEqual(ic["independent_source_count"], 1)
+        self.assertIn("origin:reuters", ic["syndicated_identities"])
+        self.assertEqual(source_identity(recs[0])["independence_class"], "syndicated_copy")
+
+    def test_11_multisource_cluster_can_be_canonical_eligible(self):
+        """同一事件由两家独立媒体分别报道 → 可产生 isc>=2 的 cluster"""
+        from clustering.event_clusterer import cluster_events
+        def ev(uid, title, src, url, tt):
+            return {"event_id": uid, "title_original": title, "country_code": "TD",
+                    "event_type": "public_health", "event_time": tt,
+                    "canonical_url": url, "source_id": src, "source_name": src,
+                    "article_id": "ART_" + uid, "quality_gate_passed": True}
+        e1 = ev("E1", "Tchad : Point sur la riposte contre le cholera dans quatre provinces",
+                "chad_journaldutchad", "https://journaldutchad.com/x", "2026-09-18 18:57:39")
+        e2 = ev("E2", "Point sur la riposte contre le cholera dans quatre provinces au Tchad",
+                "chad_tchadinfos", "https://tchadinfos.com/y", "2026-09-18 19:10:00")
+        e3 = ev("E3", "Greve seche des greffiers au Tchad",
+                "chad_alwihda", "https://alwihdainfo.com/z", "2026-09-18 10:00:00")
+        clusters, st = cluster_events([e1, e2, e3])
+        self.assertEqual(st["multi_source_clusters"], 1)
+        multi = [c for c in clusters if (c.get("independent_source_count") or 0) >= 2]
+        self.assertEqual(len(multi), 1)
+        self.assertEqual(len(multi[0]["article_ids"]), 2)
+        self.assertTrue(multi[0]["source_groups"])
+
+    def test_12_event_clusterer_does_not_overmerge(self):
+        """不同事件不得被过度合并（§十七 明令）"""
+        from clustering.event_clusterer import cluster_events
+        def ev(uid, title, src, url, tt):
+            return {"event_id": uid, "title_original": title, "country_code": "TD",
+                    "event_type": "armed_conflict", "event_time": tt,
+                    "canonical_url": url, "source_id": src, "article_url": url}
+        a = ev("E1", "Attaque armee a Doba : trois morts", "s1", "https://a/1", "2026-09-18 08:00:00")
+        b = ev("E2", "Greve des enseignants a N'Djamena", "s2", "https://a/2", "2026-09-18 09:00:00")
+        c = ev("E3", "Riposte contre le cholera au Lac", "s3", "https://a/3", "2026-09-18 10:00:00")
+        clusters, st = cluster_events([a, b, c])
+        self.assertEqual(st["output_clusters"], 3)
+        self.assertEqual(st["merged_pairs"], 0)
+
+
+class FeedParserTest(unittest.TestCase):
+    """D2. RSS/Atom 兼容性（§十）"""
+
+    def test_13_rss_atom_namespace_supported(self):
+        """Atom 0.3 / 带前缀命名空间 / RSS 1.0 RDF / BOM / HTML 实体 必须可解析"""
+        from feed_parser import parse_feed_robust
+        atom03 = ('<?xml version="1.0"?><feed xmlns="http://purl.org/atom/ns#" version="0.3">'
+                  '<entry><title>Atom 0.3 title</title>'
+                  '<link rel="alternate" href="https://y.com/1"/>'
+                  '<issued>2026-09-18T07:30:00Z</issued><id>tag:y,1</id></entry></feed>')
+        rdf = ('<?xml version="1.0"?><rdf:RDF '
+               'xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" '
+               'xmlns="http://purl.org/rss/1.0/"><item rdf:about="https://z.com/1">'
+               '<title>RDF item</title><link>https://z.com/1</link></item></rdf:RDF>')
+        rss = ('<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel>'
+               '<item><title>Attaque &agrave; N&#8217;Djamena &nbsp; &mdash; 3 morts</title>'
+               '<link>https://x.com/a</link>'
+               '<pubDate>Wed, 18 Sep 2026 10:00:00 EST</pubDate></item>'
+               '</channel></rss>')
+        self.assertEqual(len(parse_feed_robust(atom03, "https://y.com")), 1)
+        self.assertEqual(len(parse_feed_robust(rdf, "https://z.com")), 1)
+        items = parse_feed_robust("\ufeff\n  " + rss, "https://x.com")
+        self.assertEqual(len(items), 1)
+        self.assertIn("N\u2019Djamena", items[0]["title"])
+        self.assertEqual(items[0]["published"], "2026-09-18T15:00:00Z")  # EST = UTC-5
+
+    def test_14_named_timezone_dates_parsed(self):
+        from feed_parser import parse_feed_date
+        for raw, want_h in (("Wed, 18 Sep 2026 09:00:00 GMT", 9),
+                            ("Wed, 18 Sep 2026 09:00:00 EST", 14),
+                            ("Wed, 18 Sep 2026 09:00:00 +0800", 1),
+                            ("Wed, 18 Sep 2026 09:00:00 WAT", 8)):
+            dt, tz = parse_feed_date(raw)
+            self.assertIsNotNone(dt, raw)
+            self.assertEqual(dt.hour, want_h, raw)
+
+
+class InvariantTest(unittest.TestCase):
+    """E. 阈值与 AI 成本不变量（§十五/§二十一）"""
+
+    def test_15_canonical_threshold_unchanged(self):
+        """canonical 阈值必须仍为 independent_source_count>=2 + quality_gate_passed"""
+        from data.normalizers import derive_verification_level
+        one = derive_verification_level({}, source_type="local_media",
+                                         independent_source_count=1)
+        two = derive_verification_level({}, source_type="local_media",
+                                         independent_source_count=2)
+        self.assertNotEqual(one, "cross_verified")
+        self.assertEqual(two, "cross_verified")
+        # 单一高可靠媒体（Reuters）仍不得升级
+        r = derive_verification_level({}, source_type="international_media",
+                                      source_group="reuters", independent_source_count=1)
+        self.assertNotEqual(r, "cross_verified")
+
+    def test_16_news_volume_does_not_trigger_ai_per_article(self):
+        """news 数量增长不得导致 AI 调用按文章线性增长"""
+        import io as _io
+        import os as _os
+        # 1) 新闻流构建本身不调用 AI（源码中不得出现 AI provider 调用）
+        p = _os.path.join(str(ROOT), "tools", "c1a", "build_news_stream.py")
+        src = _io.open(p, encoding="utf-8").read().lower()
+        for banned in ("deepseek", "openai", "requests.post", "api_key", "llm"):
+            self.assertNotIn(banned, src, "news stream builder must stay AI-free")
+        # 2) 采集器同样不得调用 AI
+        p2 = _os.path.join(str(ROOT), "scripts", "stage3_collect_v2.py")
+        src2 = _io.open(p2, encoding="utf-8").read().lower()
+        for banned in ("deepseek", "openai", "api_key"):
+            self.assertNotIn(banned, src2, "collector must stay AI-free")
+        # 3) 入库的 article 不得携带 AI 结果字段（enrichment 是独立选择性步骤）
+        from data.article_persistence import article_to_candidate
+        cand = article_to_candidate({"canonical_url": "https://x/y", "original_title": "t",
+                                     "original_summary": "s", "_country": {"decision": "chad"}})
+        for k in ("ai_result", "enrichment", "summary_cn"):
+            if k in cand:
+                self.assertEqual(cand[k], "", "AI fields must not be produced at ingest")
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

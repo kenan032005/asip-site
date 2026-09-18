@@ -228,7 +228,17 @@ class ArticleDiscoverer:
         text, err, status = fetch_page(feed_url)
         if err:
             return [], [f"{source['source_id']}: fetch {err}"]
-        items = parse_rss_atom(text, base_url=source["base_url"])
+        # C1B §十：改用健壮解析器（BOM/垃圾前缀/非法控制字符/未声明实体、
+        # Atom 0.3 + 带前缀命名空间、RSS 1.0 RDF、rdf:about、命名时区日期）。
+        # 解析不出条目时回退旧解析器，保证行为只增不减。
+        items = []
+        try:
+            from feed_parser import parse_feed_robust
+            items = parse_feed_robust(text, base_url=source["base_url"])
+        except Exception:
+            items = []
+        if not items:
+            items = parse_rss_atom(text, base_url=source["base_url"])
         # 过滤无效链接
         valid = []
         for it in items:

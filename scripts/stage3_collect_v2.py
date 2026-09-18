@@ -572,7 +572,8 @@ def _classify_failure(stat, dis_errors):
         return "UNKNOWN", ["failure_reasons module unavailable"]
 
 
-def write_stats(per_source, run_id, configured_sources=0, article_stats=None):
+def write_stats(per_source, run_id, configured_sources=0, article_stats=None,
+                cluster_stats=None):
     totals = {
         "configured_sources": configured_sources,
         "enabled_sources": len(per_source),
@@ -624,6 +625,8 @@ def write_stats(per_source, run_id, configured_sources=0, article_stats=None):
         totals["article_persistence_ok"] = True
     else:
         totals["article_persistence_ok"] = False
+    # C1B §十七：事件级聚类指标（一稿一事件 → 同一事件可多来源印证）
+    totals["event_clustering"] = cluster_stats or {"applied": False}
     doc = {
         "generated_at": bj_iso(),
         "run_id": run_id,
@@ -842,6 +845,18 @@ def main():
         per_source.extend(ps)
         all_errors.extend(errs)
 
+    # ── C1B §十七：事件级聚类（修复 G3：一稿一事件 → 同一事件可多来源印证）──
+    # 只处理本次 run_id 的事件；canonical 阈值（independent_source_count>=2 AND
+    # quality_gate_passed）保持不变，本步骤只负责「正确合并同一事件」与
+    # 「按 source identity 正确数独立来源」。
+    cluster_stats = None
+    try:
+        sys.path.insert(0, os.path.join(ROOT, "scripts"))
+        from clustering.event_clusterer import apply_event_clustering
+        cluster_stats = apply_event_clustering(PUBLISHED_PATH, run_id)
+    except Exception as e:  # noqa: BLE001
+        print("  [event-cluster] FAILED: %s: %s" % (type(e).__name__, e))
+
     # ── C1B §五：Article Corpus 持久化 ──
     # 采集器过去只写 event_clusters/quarantine，内存中的 all_articles 从不落盘，
     # 导致 Article Layer 自 2026-07-30 冻结（C1B §四 G1 审计）。此处补上唯一
@@ -864,8 +879,13 @@ def main():
         print("Article Corpus: %d -> %d (新增 %d)"
               % (article_stats["store_before"], article_stats["store_after"],
                  article_stats["new_articles_persisted"]))
+    if cluster_stats:
+        print("Event clusters: events %s -> clusters %s (multi_source=%s, max_indep=%s)"
+              % (cluster_stats.get("input_events"), cluster_stats.get("output_clusters"),
+                 cluster_stats.get("multi_source_clusters"),
+                 cluster_stats.get("max_independent_sources")))
     totals = write_stats(per_source, run_id, configured_sources=configured_sources,
-                         article_stats=article_stats)
+                         article_stats=article_stats, cluster_stats=cluster_stats)
     # C1B §八/§九：GDELT 限流器遥测落盘（随 data/runtime/ops 一并持久化），
     # 使「最近窗口的请求数/429/成功率/唯一产出」成为可长期统计的事实，而非临时日志。
     try:
