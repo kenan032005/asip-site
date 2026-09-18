@@ -81,6 +81,10 @@ class SourceRegistry:
             "language": s.get("language", [lp.get("language", "fr")]) if isinstance(s.get("language"), list) else s.get("language", lp.get("language", "fr")),
             "discovery_type": self._discovery_type(method, lp),
             "feed_url": lp.get("feed_url", ""),
+            # C1B §八：gdelt_search 源需要 query / timespan，旧统一视图漏掉了这两个字段，
+            # 使 GdeltSearchCollector 直接报「缺少 query 字段」而零产出。
+            "query": s.get("query") or lp.get("query", ""),
+            "timespan": s.get("timespan") or lp.get("timespan", "") or "72h",
             "listing_urls": listing_urls,
             "base_url": lp.get("url", s.get("url", "")),
             "url": lp.get("url", s.get("url", "")),
@@ -212,7 +216,10 @@ class ArticleDiscoverer:
         """返回 (articles, errors)。articles 为统一 discovered dict。"""
         dtype = source["discovery_type"]
         if dtype == "gdelt_search":
-            return [], []
+            # C1B §八 修复：旧实现直接 `return [], []`，导致生产采集路径下
+            # 68 个 gdelt_search 源**结构性零产出**（不是被限流，而是根本没发起查询）。
+            # 现改为调用真实 GDELT 采集器（经 GDELT_SHARED_RATE_LIMITER 统一节流）。
+            return self._discover_gdelt(source)
         if dtype == "reliefweb_api_or_feed":
             # Stage 3B Final Repair §4: ReliefWeb API 已失效（410 Gone），
             # 其国家页/栏目页不得被当作文章正文抓取。不执行 HTML 兜底。
@@ -220,6 +227,39 @@ class ArticleDiscoverer:
         if dtype in ("rss", "atom"):
             return self._discover_rss(source)
         return self._discover_html(source)
+
+    def _discover_gdelt(self, source):
+        """GDELT 发现：走 GdeltSearchCollector（同国同关键词合并为一次 OR 查询）。"""
+        try:
+            from gdelt_search_collector import GdeltSearchCollector
+        except Exception as e:  # noqa: BLE001
+            return [], [f"{source['source_id']}: gdelt collector import failed: {e}"]
+        try:
+            col = GdeltSearchCollector(source)
+            arts = col.run()
+        except Exception as e:  # noqa: BLE001
+            return [], [f"{source['source_id']}: gdelt run failed: {e}"]
+        out = []
+        for a in arts:
+            url = (a.get("url") or "").strip()
+            if not url:
+                continue
+            ok, _reason = validate_url(url)
+            if not ok:
+                continue
+            out.append({
+                "title": (a.get("title") or "").strip(),
+                "url": url,
+                "guid": url,
+                "summary": (a.get("summary") or "")[:500],
+                "published": a.get("published") or "",
+                "method": "gdelt_search",
+                "feed_url": "",
+                "listing_url": "",
+                "language": source.get("language") or a.get("language") or "fr",
+            })
+        capped = out[:source.get("max_items") or 20]
+        return capped, list(col.errors)
 
     def _discover_rss(self, source):
         feed_url = source["feed_url"]
