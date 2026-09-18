@@ -36,6 +36,8 @@ from framework import (  # noqa: E402
     _http_is_retryable, _http_is_terminal, CACHE_DIR,
 )
 from registry import SourceRegistry, ArticleDiscoverer  # noqa: E402
+from countries import (key_for as _cfg_key_for, cn_for_decision as _cn_for_decision,
+                       iso2_for as _iso2_for, configured_countries as _configured_countries)  # noqa: E402
 from country_runner import (load_country_cfg, identify_country,  # noqa: E402
                             relevance_stage1, classify_type)
 
@@ -70,7 +72,9 @@ def save_json(path, doc):
 
 def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=False, max_items=0, run_id=""):
     """对单个国家执行完整采集。"""
-    cfg_key = "chad" if country_cn == "乍得" else "niger"
+    # C1C：国家 → 配置键改为由 config/countries 派生（原先硬编码 chad/niger）
+    from countries import key_for as _cfg_key_for
+    cfg_key = _cfg_key_for(country_cn) or ("chad" if country_cn == "乍得" else "niger")
     run_id = run_id or os.environ.get("ASIP_RUN_ID", "local")
     country_cfg = load_country_cfg(cfg_key)
     sources = registry.by_country(country_cn)
@@ -379,7 +383,8 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
             if a["source_id"] != sid:
                 continue
             c_decision = a["_country"].get("decision", "") if isinstance(a["_country"], dict) else ""
-            event_country_cn = "乍得" if c_decision == "chad" else ("尼日尔" if c_decision == "niger" else "")
+            # C1C：decision → 中文国名改为通用映射（原先硬编码 chad/niger）
+            event_country_cn = _cn_for_decision(c_decision) or ""
             quality = a.get("extraction_quality", "")
             body_words = a.get("article_word_count", 0)
 
@@ -500,7 +505,8 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
 
 def build_event(article, run_id, country_cn):
     cid = article.get("_country", {}) if isinstance(article.get("_country"), dict) else {}
-    country_iso = "TD" if country_cn == "乍得" else "NE"
+    # C1C：ISO2 由国家配置派生（原先硬编码 TD/NE）
+    country_iso = _iso2_for(country_cn) or ("TD" if country_cn == "乍得" else "NE")
     event_type, _ = classify_type(article["original_title"] + " " + article["original_body"][:300],
                                   article["original_title"])
     return {
@@ -658,7 +664,7 @@ def generate_country_source_acceptance(per_source, source_registry, run_id):
         by_country.setdefault(cn, []).append(stat)
 
     acceptance = {}
-    for cn in ("乍得", "尼日尔"):
+    for cn in _configured_countries() or ("乍得", "尼日尔"):
         stats = by_country.get(cn, [])
         registry_srcs = source_registry.by_country(cn) if source_registry else []
         registry_ids = {s["source_id"] for s in registry_srcs}
@@ -806,7 +812,8 @@ def save_audit_snapshot(per_source, totals, run_id, source_registry=None):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry", action="store_true")
-    ap.add_argument("--country", choices=["乍得", "尼日尔"], default=None)
+    ap.add_argument("--country", default=None,
+                    help="仅采集指定国家（默认=registry 中全部已配置国家）")
     ap.add_argument("--run-id", default="")
     ap.add_argument("--fresh", action="store_true", help="清空状态缓存，全量重抓")
     ap.add_argument("--max-items", type=int, default=0, help="每来源最多处理 N 条（0=不限）")
@@ -828,7 +835,15 @@ def main():
     registry = SourceRegistry()
     discoverer = ArticleDiscoverer(registry)
 
-    countries = [args.country] if args.country else ["乍得", "尼日尔"]
+    # C1C：默认国家清单由 registry 的启用来源派生（原先硬编码两国）
+    if args.country:
+        countries = [args.country]
+    else:
+        _cfg_countries = set(_configured_countries())
+        countries = sorted({s["source_country"] for s in registry.enabled()
+                            if s["source_country"] in _cfg_countries})
+        if not countries:
+            countries = ["乍得", "尼日尔"]
     # 统计两国配置总分（SourceRegistry 中所有来源，含 gdelt_search）
     configured_sources = sum(len(registry.by_country(cn)) for cn in countries)
 

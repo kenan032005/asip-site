@@ -49,7 +49,25 @@ from data.schema_validator import validate_instance, load_schema      # noqa: E4
 AUTHORITATIVE_ARTICLE_STORE = "data/canonical/articles.json"
 
 #: 在范围内的国家判定（采集器 identify_country 的 decision 取值）
-IN_SCOPE_DECISIONS = ("chad", "niger", "regional")
+#: C1C：由 config/countries 派生，而不是硬编码 chad/niger —— 否则新增国别的文章
+#: 会被整体判为 EXCLUDED_OUT_OF_SCOPE，扩源在持久化层静默失效。
+def _in_scope_decisions():
+    base = {"regional"}
+    try:
+        _cp = os.path.join(_SCRIPTS, "collectors")
+        if _cp not in sys.path:
+            sys.path.insert(0, _cp)
+        from countries import load_all
+        for cfg in load_all().values():
+            en = str(cfg.get("country_en", "")).strip().lower()
+            if en:
+                base.add(en)
+    except Exception:
+        base.update({"chad", "niger"})
+    return base
+
+
+IN_SCOPE_DECISIONS = _in_scope_decisions()
 
 #: 排除码（顺序即优先级，先命中先计）
 EX_EMPTY_URL = "EXCLUDED_INVALID_NO_URL"

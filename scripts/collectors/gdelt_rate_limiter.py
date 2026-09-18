@@ -273,7 +273,16 @@ class GdeltSharedRateLimiter:
 
 
 #: 进程内唯一实例 —— 所有采集器共用（68 个 gdelt 源共享一个闸门）
-GLOBAL = GdeltSharedRateLimiter()
+#: C1C：参数支持环境变量覆盖。理由（生产可用性）：CI job 有 30 分钟上限，而
+#: 20s pacing × 3 次尝试 × （国别数）组查询在 GDELT 持续 429 时可能超时。
+#: 默认值与 C1B 完全一致（20s / 300s / 3 次 / 120 预算），仅在显式设置时才改变。
+GLOBAL = GdeltSharedRateLimiter(
+    min_interval=float(os.environ.get("ASIP_GDELT_MIN_INTERVAL", "20")),
+    max_interval=float(os.environ.get("ASIP_GDELT_MAX_INTERVAL", "300")),
+    max_attempts=int(os.environ.get("ASIP_GDELT_MAX_ATTEMPTS", "3")),
+    budget=int(os.environ.get("ASIP_GDELT_BUDGET", "120")),
+    timeout=int(os.environ.get("ASIP_GDELT_TIMEOUT", "40")),
+)
 
 
 def fetch_gdelt(url, label=None, timeout=None, limiter=None):

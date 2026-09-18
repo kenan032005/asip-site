@@ -127,7 +127,8 @@ class ArticlePersistenceTest(unittest.TestCase):
     def test_04_exclusions_are_explicit_not_silent(self):
         """out-of-scope / safety hold / malformed 必须显式计数，不得静默丢弃"""
         arts = [
-            art("https://x.com/out", decision="nigeria"),          # out of scope
+            # C1C 起尼日利亚已成为在范围内国家，故用「非任何已配置国别」作 out-of-scope 样例
+            art("https://x.com/out", decision="not_a_configured_country"),  # out of scope
             art("https://x.com/hold", quarantine_reason="extraction_failed"),
             art("https://x.com/nodetitle", title=""),
             art("https://x.com/ok"),
