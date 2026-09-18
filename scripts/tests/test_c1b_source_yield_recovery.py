@@ -124,5 +124,153 @@ class ArticlePersistenceTest(unittest.TestCase):
         self.assertEqual(len(self._store()), 1)
 
 
+class GdeltSharedRateLimiterTest(unittest.TestCase):
+    """C. GDELT 共享限流（§八/§九）"""
+
+    def setUp(self):
+        import urllib.request as _ur
+        from gdelt_rate_limiter import GdeltSharedRateLimiter
+        self._ur = _ur
+        self._orig = _ur.urlopen
+        self.calls = []
+        self.sleeps = []
+
+    def tearDown(self):
+        self._ur.urlopen = self._orig
+
+    def _limiter(self, **kw):
+        from gdelt_rate_limiter import GdeltSharedRateLimiter
+        ticks = [1000.0]
+
+        def clock():
+            return ticks[0]
+
+        def sleeper(s):
+            self.sleeps.append(s)
+            ticks[0] += s
+
+        return GdeltSharedRateLimiter(min_interval=20.0, max_interval=80.0,
+                                      max_attempts=3, budget=50,
+                                      clock=clock, sleeper=sleeper, **kw)
+
+    def test_05_gdelt_shared_rate_limiter_single_flight_and_pacing(self):
+        """68 个源查同一服务：同签名只请求一次；不同签名按全局节流铺开"""
+        from gdelt_rate_limiter import build_gdelt_url
+        lim = self._limiter()
+
+        class R:
+            status = 200
+
+            class h:
+                @staticmethod
+                def get_content_charset():
+                    return "utf-8"
+
+            headers = h()
+
+            def read(self):
+                return b'{"articles":[{"url":"https://x/a","title":"t"}]}'
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *a):
+                return False
+
+        def fake_open(req, timeout=None):
+            self.calls.append(req.full_url)
+            return R()
+
+        self._ur.urlopen = fake_open
+        u1 = build_gdelt_url("domain:reuters.com Chad", timespan="72h", maxrecords=250)
+        # 同一签名（仅参数顺序/等价）→ 命中共享缓存，不再发起 HTTP
+        t1, e1, m1 = lim.fetch(u1, label="chad|k1")
+        t2, e2, m2 = lim.fetch(u1, label="chad|k2")
+        self.assertEqual(len(self.calls), 1)
+        self.assertFalse(m1["cache"])
+        self.assertTrue(m2["cache"])
+        # 跨标签共享：第二个源零额外请求（这正是 68 源共用一个闸门的含义）
+        self.assertEqual(lim.stats()["cache_hits"], 1)
+
+        # 不同签名 → 必须经过全局节流（至少睡满一个 min_interval）
+        u2 = build_gdelt_url("domain:reuters.com Niger", timespan="72h", maxrecords=250)
+        lim.fetch(u2, label="niger|k2")
+        self.assertEqual(len(self.calls), 2)
+        self.assertTrue(any(s >= 19.9 for s in self.sleeps),
+                        "global pacing not enforced: sleeps=%s" % self.sleeps)
+
+        # 请求预算：不得无限放大
+        st = lim.stats()
+        self.assertEqual(st["requests"], 2)
+        self.assertEqual(st["success_rate"], 1.0)
+
+    def test_06_gdelt_retry_after_respected(self):
+        """429 + Retry-After 必须被遵循，且间隔指数退避、有上限"""
+        import urllib.error
+        import email.message
+        from gdelt_rate_limiter import GdeltSharedRateLimiter, build_gdelt_url
+        lim = self._limiter()
+        state = {"n": 0}
+
+        def fake_open(req, timeout=None):
+            state["n"] += 1
+            if state["n"] == 1:
+                h = email.message.Message()
+                h["Retry-After"] = "45"
+                raise urllib.error.HTTPError(req.full_url, 429, "Too Many Requests", h, None)
+            raise urllib.error.HTTPError(req.full_url, 429, "Too Many Requests", None, None)
+
+        self._ur.urlopen = fake_open
+        u = build_gdelt_url("domain:x.com Chad")
+        text, err, meta = lim.fetch(u, label="chad|rl")
+        self.assertIsNone(text)
+        self.assertTrue(meta["rate_limited"])
+        self.assertEqual(meta["retry_after"], 45)
+        st = lim.stats()
+        self.assertGreaterEqual(st["retry_after_honored"], 1)
+        self.assertGreaterEqual(st["backoff_events"], 1)
+        # 间隔必须从 min 翻倍，且不超过 max
+        self.assertEqual(st["current_interval_s"], 80.0)
+        self.assertTrue(any(s >= 45.0 for s in self.sleeps),
+                        "Retry-After not honored: sleeps=%s" % self.sleeps)
+        # 重试次数受 max_attempts 限制（不得暴力重试）
+        self.assertEqual(state["n"], 3)
+
+
+class FailureReasonTest(unittest.TestCase):
+    """D. 逐源失败原因必须具体（§七）"""
+
+    def test_07_source_failure_reason_specific(self):
+        from failure_reasons import (classify_source_failure, HTTP_429, HTTP_403,
+                                     TIMEOUT, DNS, RSS_EMPTY, QUERY_NO_RESULT,
+                                     SOURCE_MAPPING_ERROR, DUPLICATE_ONLY, UNKNOWN,
+                                     OK_PRODUCTIVE)
+        cases = [
+            ({"discovered": 0, "fetched": 0, "method": "rss"},
+             ["fetch https://x 429"], HTTP_429),
+            ({"discovered": 0, "fetched": 0, "method": "rss"},
+             ["fetch https://x 403 Forbidden"], HTTP_403),
+            ({"discovered": 0, "fetched": 0, "method": "rss"},
+             ["ReadTimeout: timed out"], TIMEOUT),
+            ({"discovered": 0, "fetched": 0, "method": "rss"},
+             ["gaierror: Name or service not known"], DNS),
+            ({"discovered": 0, "fetched": 0, "method": "rss"}, [], RSS_EMPTY),
+            ({"discovered": 0, "fetched": 0, "method": "gdelt_search"}, [], QUERY_NO_RESULT),
+            ({"discovered": 0, "fetched": 0, "method": "rss"},
+             ["source: no feed_url configured"], SOURCE_MAPPING_ERROR),
+            ({"discovered": 5, "fetched": 0, "duplicates": 5, "method": "rss"}, [], DUPLICATE_ONLY),
+            ({"discovered": 3, "fetched": 3, "method": "rss"}, [], OK_PRODUCTIVE),
+            ({"discovered": 0, "fetched": 0, "method": "unknown_method", "status": "x"}, [], UNKNOWN),
+        ]
+        for stat, errs, want in cases:
+            got, _ = classify_source_failure(stat, errs)
+            self.assertEqual(got, want, "stat=%s errs=%s got=%s want=%s"
+                             % (stat, errs, got, want))
+        # BLOCKED 不得作为兜底词
+        self.assertNotIn("BLOCKED", [c[2] for c in cases])
+
+
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

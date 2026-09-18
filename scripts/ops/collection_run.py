@@ -111,6 +111,20 @@ def run_collection(execute=False, emit=lambda s: print(s), state=None, ops_run=N
         metrics["metrics_source"] = "logs/stage3_collection_stats.json"
         metrics["collector_run_id"] = stats.get("run_id")
         metrics["collector_generated_at"] = stats.get("generated_at")
+        # C1B §七/§八/§九：把逐源失败原因与 GDELT 限流器遥测一并写进 ops 状态，
+        # 使其随 data/runtime/ops 长期持久化（logs/ 本身不回写 state 分支）。
+        metrics["failure_reasons"] = totals.get("failure_reasons")
+        metrics["sources_blocked_by_external"] = totals.get("sources_blocked_by_external")
+        metrics["sources_no_output_not_blocked"] = totals.get("sources_no_output_not_blocked")
+        metrics["gdelt_rate_limiter"] = totals.get("gdelt_rate_limiter")
+        try:
+            src = ROOT / "logs" / "stage3_collection_stats.json"
+            if src.exists():
+                dst = ps.OPS_DIR / "collection_source_stats.json"
+                dst.write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
+                metrics["per_source_stats_persisted"] = "data/runtime/ops/collection_source_stats.json"
+        except Exception as e:  # noqa: BLE001
+            emit("per_source_stats_persist_error=%s" % e)
     else:
         # 不得猜值：标记为 unavailable（execute=False 属预期 shadow 记账）
         metrics = {k: None for k in _STAT_FIELDS}

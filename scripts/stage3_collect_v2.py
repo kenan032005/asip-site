@@ -127,6 +127,8 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
         if not discovered:
             stat["status"] = "no_items"
             stat["error"] = "; ".join(dis_errors[:2])
+            # C1B §七：逐源具体失败原因（禁止一律标 BLOCKED）
+            stat["failure_reason"], stat["failure_evidence"] = _classify_failure(stat, dis_errors)
             per_source.append(stat)
             continue
         stat["discovered"] = len(discovered)
@@ -484,6 +486,10 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
         save_processing_state(state_doc)
 
         stat["duration_s"] = round(time.time() - t0, 1)
+        # C1B §七：逐源具体失败原因（禁止一律标 BLOCKED）。
+        # 只新增可观测字段，不改动既有 status 语义（success/no_items），
+        # 以免改变 write_stats / 验收脚本既有口径。
+        stat["failure_reason"], stat["failure_evidence"] = _classify_failure(stat, dis_errors)
         per_source.append(stat)
         print(f"    → 发现{stat['discovered']} 详情{stat['fetched']} "
               f"正文{stat['full_body']+stat['partial_body']} 发布{stat['published']} "
@@ -552,6 +558,20 @@ def build_event(article, run_id, country_cn):
     }
 
 
+def _classify_failure(stat, dis_errors):
+    """C1B §七：调用确定性失败原因分类器；导入失败时如实退回 UNKNOWN。"""
+    try:
+        from failure_reasons import classify_source_failure
+        mapping_error = False
+        try:
+            mapping_error = bool(stat.get("_mapping_error"))
+        except Exception:
+            mapping_error = False
+        return classify_source_failure(stat, dis_errors, mapping_error=mapping_error)
+    except Exception:
+        return "UNKNOWN", ["failure_reasons module unavailable"]
+
+
 def write_stats(per_source, run_id, configured_sources=0, article_stats=None):
     totals = {
         "configured_sources": configured_sources,
@@ -575,6 +595,25 @@ def write_stats(per_source, run_id, configured_sources=0, article_stats=None):
         "duplicate_count": sum(s["duplicates"] for s in per_source),
         "average_fetch_time": round(sum(s["duration_s"] for s in per_source) / max(1, len(per_source)), 1),
     }
+    # C1B §七：逐源失败原因汇总（区分 blocked 与 no-output，供 Source Yield V2）
+    try:
+        from failure_reasons import summarize as _sum_reasons, is_blocked as _is_blocked
+        reason_rows = [{"failure_reason": s.get("failure_reason")} for s in per_source]
+        totals["failure_reasons"] = _sum_reasons(reason_rows)
+        totals["sources_blocked_by_external"] = sum(
+            1 for s in per_source if _is_blocked(s.get("failure_reason")))
+        totals["sources_no_output_not_blocked"] = sum(
+            1 for s in per_source
+            if s.get("failure_reason") not in ("OK_PRODUCTIVE",)
+            and not _is_blocked(s.get("failure_reason")))
+    except Exception:
+        totals["failure_reasons"] = {}
+    # C1B §九：GDELT 共享限流器遥测（真实请求/429/成功计数）
+    try:
+        from gdelt_rate_limiter import GLOBAL as _GDELT_LIMITER
+        totals["gdelt_rate_limiter"] = _GDELT_LIMITER.stats()
+    except Exception:
+        totals["gdelt_rate_limiter"] = None
     # C1B §五：Article Corpus 持久化指标（真实计数，读取不到则显式标记）
     if article_stats:
         totals["article_store_path"] = article_stats.get("authoritative_store")
@@ -827,6 +866,15 @@ def main():
                  article_stats["new_articles_persisted"]))
     totals = write_stats(per_source, run_id, configured_sources=configured_sources,
                          article_stats=article_stats)
+    # C1B §八/§九：GDELT 限流器遥测落盘（随 data/runtime/ops 一并持久化），
+    # 使「最近窗口的请求数/429/成功率/唯一产出」成为可长期统计的事实，而非临时日志。
+    try:
+        from gdelt_rate_limiter import GLOBAL as _GDELT_LIMITER
+        _p = os.path.join(DATA, "runtime", "ops", "gdelt_rate_limiter.json")
+        _GDELT_LIMITER.save_telemetry(_p)
+        print("GDELT 限流器遥测已保存: %s" % _p)
+    except Exception as e:  # noqa: BLE001
+        print("GDELT 限流器遥测保存失败: %s" % e)
     save_audit_snapshot(per_source, totals, run_id, source_registry=registry)
     print(json.dumps(totals, ensure_ascii=False, indent=2))
 
