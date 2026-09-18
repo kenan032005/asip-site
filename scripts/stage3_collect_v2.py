@@ -70,6 +70,51 @@ def save_json(path, doc):
         json.dump(doc, f, ensure_ascii=False, indent=2)
 
 
+# ── C1C-V：全局墙钟预算（优雅降级）────────────────────────────────────────
+# 目的：避免受控验证/CI 因个别源慢或远程限流而无限期挂住。达到预算后**只停止发起
+# 新的来源抓取**，已完成的采集数据全部保留，并继续执行 event clustering →
+# Article Corpus 持久化 → 统计落盘，绝不整轮作废。
+_DEADLINE = None          # time.monotonic() 截止点；None = 不限
+_wall_clock_limit_seconds = None
+
+
+def set_wall_clock_limit(seconds):
+    global _DEADLINE, _wall_clock_limit_seconds
+    _wall_clock_limit_seconds = float(seconds) if seconds else None
+    if seconds and float(seconds) > 0:
+        _DEADLINE = time.monotonic() + float(seconds)
+    else:
+        _DEADLINE = None
+    return _DEADLINE
+
+
+def wall_clock_remaining():
+    if _DEADLINE is None:
+        return None
+    return max(0.0, _DEADLINE - time.monotonic())
+
+
+def wall_clock_exhausted():
+    return _DEADLINE is not None and time.monotonic() >= _DEADLINE
+
+
+def _skipped_stat(src, country_cn):
+    """因墙钟预算耗尽而未尝试的来源：显式记录，绝不静默丢弃。"""
+    return {
+        "source_id": src["source_id"], "source_name": src["source_name"],
+        "country": country_cn, "method": src["discovery_type"],
+        "discovered": 0, "fetched": 0, "full_body": 0, "partial_body": 0,
+        "summary_only": 0, "extraction_failed": 0, "published": 0,
+        "quarantined": 0, "duplicates": 0, "errors": 0,
+        "status": "skipped_wall_clock",
+        "error": "WALL_CLOCK_LIMIT_REACHED: 未在本轮尝试（预算耗尽，优雅降级）",
+        "failure_reason": "WALL_CLOCK_LIMIT_REACHED", "failure_evidence": [],
+        "duration_s": 0.0, "html_discovered": 0, "html_fetched": 0,
+        "html_full_body": 0, "html_partial_body": 0, "html_published": 0,
+        "html_listing_channel": bool(src.get("listing_urls")),
+    }
+
+
 def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=False, max_items=0, run_id=""):
     """对单个国家执行完整采集。"""
     # C1C：国家 → 配置键改为由 config/countries 派生（原先硬编码 chad/niger）
@@ -91,6 +136,13 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
     errors = []
 
     for src in sources:
+        if wall_clock_exhausted():
+            # C1C-V：达到全局墙钟预算 → 停止发起新抓取，但不影响后续 persistence/聚类/统计
+            print("  [wall-clock] 预算耗尽，跳过剩余来源（已完成的采集结果保留）")
+            idx = sources.index(src)
+            for rest in sources[idx:]:
+                per_source.append(_skipped_stat(rest, country_cn))
+            break
         sid = src["source_id"]
         t0 = time.time()
         stat = {
@@ -633,6 +685,15 @@ def write_stats(per_source, run_id, configured_sources=0, article_stats=None,
         totals["article_persistence_ok"] = False
     # C1B §十七：事件级聚类指标（一稿一事件 → 同一事件可多来源印证）
     totals["event_clustering"] = cluster_stats or {"applied": False}
+    # C1C-V：墙钟预算使用情况（受控验证可复核）
+    totals["wall_clock"] = {
+        "limit_seconds": _wall_clock_limit_seconds,
+        "remaining_seconds": (round(wall_clock_remaining(), 1)
+                              if wall_clock_remaining() is not None else None),
+        "exhausted": wall_clock_exhausted(),
+        "sources_skipped": sum(1 for s in per_source
+                               if s.get("status") == "skipped_wall_clock"),
+    }
     doc = {
         "generated_at": bj_iso(),
         "run_id": run_id,
@@ -814,6 +875,9 @@ def main():
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--country", default=None,
                     help="仅采集指定国家（默认=registry 中全部已配置国家）")
+    ap.add_argument("--wall-clock-limit", type=float, default=0.0,
+                    help="全局墙钟预算（秒）。达到后仅停止发起新来源抓取，"
+                         "已完成数据保留并继续完成聚类/持久化/统计。0=不限")
     ap.add_argument("--run-id", default="")
     ap.add_argument("--fresh", action="store_true", help="清空状态缓存，全量重抓")
     ap.add_argument("--max-items", type=int, default=0, help="每来源最多处理 N 条（0=不限）")
@@ -846,6 +910,11 @@ def main():
             countries = ["乍得", "尼日尔"]
     # 统计两国配置总分（SourceRegistry 中所有来源，含 gdelt_search）
     configured_sources = sum(len(registry.by_country(cn)) for cn in countries)
+
+    if args.wall_clock_limit:
+        set_wall_clock_limit(args.wall_clock_limit)
+        print("全局墙钟预算: %.0f 秒（达到后优雅降级：不再发起新来源，保留已完成数据）"
+              % args.wall_clock_limit)
 
     all_articles = []
     per_source = []

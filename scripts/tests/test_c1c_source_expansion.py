@@ -262,5 +262,31 @@ class IdentityAndGdeltTest(unittest.TestCase):
         self.assertIn("if independent_source_count >= 2:", src)
 
 
+class WallClockBudgetTest(unittest.TestCase):
+    """E. C1C-V 全局墙钟预算：达到后必须优雅降级而不是整轮作废"""
+
+    def test_12_wall_clock_budget_degrades_gracefully(self):
+        import time as _t
+        import stage3_collect_v2 as S
+        try:
+            S.set_wall_clock_limit(0)
+            self.assertIsNone(S.wall_clock_remaining())
+            self.assertFalse(S.wall_clock_exhausted())
+            self.assertEqual(S._wall_clock_limit_seconds, None)
+            S.set_wall_clock_limit(0.01)
+            self.assertEqual(S._wall_clock_limit_seconds, 0.01)
+            _t.sleep(0.02)
+            self.assertTrue(S.wall_clock_exhausted())
+            # 未尝试的来源必须显式记录（不得静默丢弃）
+            st = S._skipped_stat({"source_id": "sd_dabangasudan",
+                                  "source_name": "Dabanga Sudan",
+                                  "discovery_type": "rss"}, "苏丹")
+            self.assertEqual(st["status"], "skipped_wall_clock")
+            self.assertEqual(st["failure_reason"], "WALL_CLOCK_LIMIT_REACHED")
+            self.assertEqual(st["discovered"], 0)
+        finally:
+            S.set_wall_clock_limit(0)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
