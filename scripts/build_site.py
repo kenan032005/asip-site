@@ -97,6 +97,34 @@ def _copy_frontend_views(dist_root):
         n += 1
     return n
 
+def _build_and_copy_c1a_views(dist_root):
+    """C1A build integration（§二/§七）：生成 news-stream-v1 视图并发布公开视图。
+
+    步骤：
+      1. tools/c1a/build_views.build_c1a_views(...) 用仓库数据生成
+         data/views/{news_stream,source_yield_report,c1a_gate_audit}.json；
+      2. 把公开安全的 news_stream.json 复制进 dist/data/views/（页面按
+         data/views/news_stream.json 直接 fetch，不进 __DB__ 内联快照，
+         避免 ~1MB 视图膨胀每个页面）。
+
+    失败不阻断站点构建（视图属展示层），但显式打印 C1A_VIEWS_OK=False。
+    返回发布到 dist 的视图数。
+    """
+    try:
+        sys.path.insert(0, os.path.join(ROOT, "tools", "c1a"))
+        import build_views as _c1av
+        ok, st = _c1av.build_c1a_views(root=ROOT, internal_dir=DATA_DIR,
+                                       out_root=ROOT, verbose=True)
+        print(f"  C1A_VIEWS_OK = {'TRUE' if ok else 'FALSE'}")
+        if not ok:
+            return 0
+        return _c1av.copy_public_c1a_views(dist_root, root=ROOT)
+    except Exception as e:
+        print(f"  ⚠ C1A 视图集成失败（站点构建继续）: {e}")
+        print("  C1A_VIEWS_OK = FALSE")
+        return 0
+
+
 WIN_PATH_RE = re.compile(r"[A-Za-z]:[\\/]+[^\s\"'<>|]*")
 POSIX_PATH_RE = re.compile(r"/(?:home|Users)/[^\s\"'<>|]*")
 
@@ -409,6 +437,11 @@ def main(run_id=None, no_embed=False):
         print(f"  timeline rebuild failed (use state artifacts): {e}")
     n_views = _copy_frontend_views(DIST_NEW)
     print(f"  前端视图: {n_views} 个契约")
+    # C1A build integration（§二）：用仓库自身数据重新生成 news-stream-v1 视图，
+    # 不依赖手工复制 / preview 目录。必须在 _copy_frontend_views 之后（
+    # master_events / site_overview 需要是本次构建的新鲜产物）。
+    n_c1a = _build_and_copy_c1a_views(DIST_NEW)
+    print(f"  C1A 视图: {n_c1a} 个公开视图")
     if os.path.isdir(REPORTS):
         shutil.copytree(REPORTS, os.path.join(DIST_NEW, "reports"))
     # Production report outputs → 公开归档
