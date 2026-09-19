@@ -58,6 +58,26 @@ def content_hash(item):
     return h.hexdigest()[:32]
 
 
+def display_identity(item):
+    """统一的展示内容身份（§六）。
+
+    优先级：Article id（src_id，形如 ART_<16hex>）→ news_id → 源观测 id。
+    用于把中文化结果**稳定关联**到同一个内容上，无论它是 canonical article
+    还是 live_published_event（后者没有 Article Store 行）。
+    """
+    sid = str(item.get("src_id") or "")
+    if sid.startswith("ART_"):
+        return sid
+    nid = str(item.get("news_id") or "")
+    if nid:
+        return nid
+    return str(item.get("event_id") or item.get("source_url") or "") or None
+
+
+def is_article_identity(ident):
+    return str(ident or "").startswith("ART_")
+
+
 def cache_key(item, model=DEFAULT_MODEL, prompt_version=PROMPT_VERSION):
     return "loc_%s_%s_%s_%s" % (item.get("news_id") or item.get("src_id"),
                                 content_hash(item), prompt_version, model)

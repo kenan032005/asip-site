@@ -113,38 +113,78 @@ def event_is_analyzable(cluster):
 
 def build_country_fact_pack(country, news_items, windows=("24h", "72h", "7d"),
                             data_as_of=None):
-    """按 24h/72h/7d 汇总确定事实。全部由 Python 计算。"""
-    def bucket(hours):
-        if not hours:
-            return list(news_items)
-        cut = None
-        return [n for n in news_items]
+    """按 24h / 72h / 7d 分别过滤后汇总确定事实（§五）。
+
+    * 过滤基准 = data_as_of（处理窗口截止），缺失时退化为 items 中最新的 observed_at；
+    * 三窗口必须**嵌套**：news_24h ⊆ news_72h ⊆ news_7d；
+    * 每个窗口输出 count / fact_refs / latest / earliest / sources / categories。
+    全部由 Python 计算，AI 不得参与。
+    """
+    spans = {"24h": 24, "72h": 72, "7d": 24 * 7}
+    ref = _parse_ts(data_as_of)
+    if ref is None:
+        _ts = [t for t in (_parse_ts(n.get("observed_at")) for n in news_items) if t]
+        ref = max(_ts) if _ts else None
+
+    def within(hours, n):
+        t = _parse_ts(n.get("observed_at"))
+        if t is None or ref is None:
+            return False
+        return (ref - t) <= timedelta(hours=hours)
+
+    def summarize(rows):
+        ts = [t for t in (_parse_ts(r.get("observed_at")) for r in rows) if t]
+        return {
+            "news_count": len(rows),
+            "fact_refs": [r.get("news_id") or r.get("src_id") for r in rows][:200],
+            "latest": max(ts).isoformat() if ts else None,
+            "earliest": min(ts).isoformat() if ts else None,
+            "sources": sorted({r.get("source_group") or r.get("source_name")
+                               for r in rows if (r.get("source_group")
+                                                 or r.get("source_name"))})[:20],
+            "categories": sorted({r.get("event_type_cn") or r.get("event_type")
+                                  for r in rows
+                                  if (r.get("event_type_cn") or r.get("event_type"))}),
+            "multi_source_events": sum(1 for r in rows
+                                       if (r.get("independent_source_count") or 1) >= 2),
+        }
+
     packs = {}
     for w in windows:
-        packs[w] = {
-            "news_count": len(news_items),
-            "sources": sorted({n.get("source_group") or n.get("source_name")
-                               for n in news_items if (n.get("source_group")
-                                                       or n.get("source_name"))})[:20],
-            "categories": sorted({n.get("event_type_cn") or n.get("event_type")
-                                  for n in news_items
-                                  if (n.get("event_type_cn") or n.get("event_type"))}),
-            "earliest": min([n.get("observed_at") for n in news_items if n.get("observed_at")],
-                            default=None),
-            "latest": max([n.get("observed_at") for n in news_items if n.get("observed_at")],
-                          default=None),
-        }
+        hours = spans.get(w)
+        if hours is None:
+            packs[w] = summarize(list(news_items))
+        else:
+            packs[w] = summarize([n for n in news_items if within(hours, n)])
     return {
         "country": country,
         "window": list(windows),
         "windows": packs,
+        "reference_time": ref.isoformat() if ref else None,
         "distinct_publishers": len({n.get("source_group") or n.get("source_name")
                                     for n in news_items}),
-        "multi_source_events": sum(1 for n in news_items
-                                   if (n.get("independent_source_count") or 1) >= 2),
+        "multi_source_events": packs.get("7d", {}).get("multi_source_events", 0),
         "data_as_of": data_as_of,
         "health_data_as_of": None,     # §二十：由调用方注入真实值，缺失即 None
     }
+
+
+def _parse_ts(v):
+    if not v:
+        return None
+    try:
+        d = datetime.fromisoformat(str(v).replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    return d if d.tzinfo else d.replace(tzinfo=timezone.utc)
+
+
+def windows_are_nested(packs):
+    """§五 不变量：24h ⊆ 72h ⊆ 7d（按 fact_refs 判定）。"""
+    a = set((packs.get("24h") or {}).get("fact_refs") or [])
+    b = set((packs.get("72h") or {}).get("fact_refs") or [])
+    c = set((packs.get("7d") or {}).get("fact_refs") or [])
+    return a <= b <= c
 
 
 def country_is_low_data(fact_pack):

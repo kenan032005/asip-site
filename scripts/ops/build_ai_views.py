@@ -34,6 +34,74 @@ def _public(rec):
     return out
 
 
+def localization_index(root, require_full=True):
+    """从 localization artifacts 建索引：display identity / src_id / news_id → {title_cn, summary_cn}。
+
+    §六：live_published_events 没有 Article Store 行，其中文结果只存在于 artifact 层，
+    这里按稳定身份把结果取出来供 News view 使用（Article localization 优先）。
+    """
+    idx = {}
+    for _k, rec in ART.load_section(root, "localization").items():
+        if require_full and rec.get("status") != "FULL":
+            continue
+        tc = (rec.get("title_cn") or "").strip()
+        sc = (rec.get("summary_cn") or "").strip()
+        if not tc and not sc:
+            continue
+        val = {"title_cn": tc, "summary_cn": sc}
+        for f in ("src_id", "display_identity", "news_id"):
+            v = rec.get(f)
+            if v:
+                idx[str(v)] = val
+    return idx
+
+
+def merge_into_news_stream(root, stream_path=None, dist_path=None):
+    """把中文化结果并入 News Stream（Article 优先 → artifact → 原文 fallback）。
+
+    **必须在 build_site 之后运行**：站点的 C1A view 构建会从 canonical articles
+    重新生成 news_stream.json，之后再用 artifact 补齐 live_published_events 等
+    没有 Article 行的条目。
+    """
+    root = str(root)
+    stream_path = stream_path or os.path.join(root, "data", "views", "news_stream.json")
+    if not os.path.exists(stream_path):
+        return {"merged": 0, "reason": "no_stream"}
+    with io.open(stream_path, encoding="utf-8") as f:
+        doc = json.load(f)
+    idx = localization_index(root)
+    merged = 0
+    for it in (doc.get("items") or []):
+        if (it.get("title_cn") or "").strip():
+            continue                      # Article localization 优先
+        for key in (str(it.get("src_id") or ""), str(it.get("news_id") or "")):
+            if key and key in idx:
+                v = idx[key]
+                if v.get("title_cn"):
+                    it["title_cn"] = v["title_cn"]
+                    merged += 1
+                if v.get("summary_cn"):
+                    it["summary_cn"] = v["summary_cn"]
+                break
+    with io.open(stream_path, "w", encoding="utf-8") as f:
+        json.dump(doc, f, ensure_ascii=False, indent=1)
+    copied = None
+    if dist_path is None:
+        dist_path = os.path.join(root, "dist", "data", "views", "news_stream.json")
+    if os.path.isdir(os.path.dirname(dist_path)):
+        import shutil
+        shutil.copy2(stream_path, dist_path)
+        copied = dist_path
+        # AI 视图也必须进 dist，否则前端 fetch 会 404
+        ai_src = os.path.join(root, "data", "views", "ai_intelligence.json")
+        if os.path.exists(ai_src):
+            shutil.copy2(ai_src, os.path.join(os.path.dirname(dist_path),
+                                              "ai_intelligence.json"))
+    titled = sum(1 for i in (doc.get("items") or []) if (i.get("title_cn") or "").strip())
+    return {"merged": merged, "titled_total": titled,
+            "items": len(doc.get("items") or []), "dist": copied}
+
+
 def build(root, out_path=None):
     root = str(root)
     doc = {"schema": "ai-intelligence-view-v1",
@@ -59,8 +127,13 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", required=True)
     ap.add_argument("--out", default=None)
+    ap.add_argument("--merge-news-stream", action="store_true",
+                    help="把 artifact 中文化并入 News Stream 并同步到 dist（须在 build_site 之后）")
     a = ap.parse_args()
     doc, p = build(a.root, a.out)
+    if a.merge_news_stream:
+        m = merge_into_news_stream(a.root)
+        print("merge_news_stream: %s" % json.dumps(m, ensure_ascii=False))
     print("ai_intelligence: homepage=%s countries=%d events=%d -> %s"
           % ((doc.get("homepage") or {}).get("status"),
              len(doc["country_analysis"]), len(doc["event_analysis"]), p))

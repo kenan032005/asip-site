@@ -209,7 +209,8 @@ class AnalysisBoundaryTest(unittest.TestCase):
         many = []
         for i in range(9):
             row = news("m%d" % i, country="乍得")
-            row["observed_at"] = "2026-09-%02dT10:00:00+08:00" % (8 + i % 5)
+            # C3R §五：窗口按 data_as_of 过滤，故"数据充足"样例必须落在最近 7 天内
+            row["observed_at"] = "2026-09-%02dT10:00:00+08:00" % (13 + i % 5)
             many.append(row)
         pack2 = A.build_country_fact_pack("乍得", many, data_as_of="2026-09-19T00:00:00Z")
         low2, _ = A.country_is_low_data(pack2)

@@ -1,0 +1,133 @@
+name: ASIP V1.1 C3 — AI Intelligence Runtime (manual, non-production)
+
+# §三：V1.1-only / manual / isolated / non-production AI runtime entry point。
+#   * 只允许手动触发（workflow_dispatch），不挂 schedule，不被 Production orchestrator 调用；
+#   * 只读写 v11-resume-after-v1.0 分支与 runner 内的隔离目录；
+#   * **不写 production-state、不部署 gh-pages、不 dispatch Production workflow、不动 V1.0 tag**；
+#   * 产出以 artifact 形式上传，供人工审核。
+
+on:
+  workflow_dispatch:
+    inputs:
+      window_start:
+        description: "回填窗口开始（YYYY-MM-DD，北京时间自然日）"
+        required: true
+        default: "2026-09-05"
+      window_end:
+        description: "回填窗口结束（YYYY-MM-DD，北京时间自然日）"
+        required: true
+        default: "2026-09-18"
+      batch_size:
+        description: "每次调用处理的新闻条数（8-12）"
+        required: true
+        default: "10"
+      force_home:
+        description: "强制刷新 Homepage analysis（忽略 cooldown）"
+        required: true
+        default: "false"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: asip-v11-c3-ai
+  cancel-in-progress: false
+
+jobs:
+  c3-ai-runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout V1.1 branch
+        uses: actions/checkout@v4
+        with:
+          ref: v11-resume-after-v1.0
+          fetch-depth: 1
+
+      - name: Verify secret presence (name only, never the value)
+        env:
+          ASIP_DEEPSEEK_API_KEY: ${{ secrets.ASIP_DEEPSEEK_API_KEY }}
+        run: |
+          if [ -z "${ASIP_DEEPSEEK_API_KEY:-}" ]; then
+            echo "ASIP_DEEPSEEK_API_KEY = MISSING"
+            echo "USER_ACTION_REQUIRED = ADD_REPOSITORY_SECRET_ASIP_DEEPSEEK_API_KEY"
+            exit 1
+          fi
+          echo "ASIP_DEEPSEEK_API_KEY = PRESENT"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: DeepSeek qualification (minimal, no secret output)
+        env:
+          ASIP_DEEPSEEK_API_KEY: ${{ secrets.ASIP_DEEPSEEK_API_KEY }}
+        run: python scripts/ai/qualification/c3_qualify.py
+
+      - name: Build isolated root (production-state data is read-only input)
+        run: |
+          python - <<'PY'
+          import subprocess, os, shutil, sys
+          sys.path.insert(0, "scripts")
+          # 只读取出 production-state 的公开数据作为隔离根的输入；不回写
+          os.makedirs("c3_iso/data", exist_ok=True)
+          subprocess.run(["git", "fetch", "origin", "production-state", "--depth", "1"], check=False)
+          subprocess.run(["git", "--work-tree", "c3_iso", "checkout", "origin/production-state", "--", "data"],
+                         check=False)
+          print("isolated root ready:", os.path.isdir("c3_iso/data"))
+          PY
+
+      - name: Run C3 AI runtime (localization + intelligence)
+        env:
+          ASIP_DEEPSEEK_API_KEY: ${{ secrets.ASIP_DEEPSEEK_API_KEY }}
+          ASIP_DEEPSEEK_BASE_URL: https://api.deepseek.com
+        run: |
+          python scripts/ai/qualification/c3_qualify.py --require-pass
+          python scripts/ops/c3_run.py \
+            --root c3_iso \
+            --provider auto \
+            --window-start "${{ inputs.window_start }}" \
+            --window-end "${{ inputs.window_end }}" \
+            --batch-size "${{ inputs.batch_size }}" \
+            $( [ "${{ inputs.force_home }}" = "true" ] && echo --force-home ) \
+            --out c3_run_report_ci.json
+          python scripts/ops/build_ai_views.py --root c3_iso
+
+      - name: Summarize
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, os
+          if os.path.exists("c3_run_report_ci.json"):
+              d = json.load(open("c3_run_report_ci.json", encoding="utf-8"))
+              for k in ("status", "model", "data_as_of", "ai_calls_total",
+                        "ai_calls_localization", "ai_calls_event", "ai_calls_country",
+                        "ai_calls_homepage", "cache_hits", "cache_misses",
+                        "news_per_localization_call"):
+                  print("%-28s = %s" % (k, d.get(k)))
+              print("localization =", json.dumps(d.get("localization"), ensure_ascii=False))
+              print("event        =", json.dumps(d.get("event"), ensure_ascii=False))
+              print("country      =", json.dumps(d.get("country"), ensure_ascii=False))
+              print("homepage     =", json.dumps(d.get("homepage"), ensure_ascii=False))
+          else:
+              print("no run report")
+          PY
+
+      - name: Upload AI artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: asip-v11-c3-ai-artifacts
+          path: |
+            c3_iso/data/intelligence/ai/**
+            c3_iso/data/views/ai_intelligence.json
+            c3_run_report_ci.json
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Explicit non-production guarantee
+        if: always()
+        run: |
+          echo "PRODUCTION_CHANGED = false"
+          echo "  no gh-pages deploy, no production-state write, no orchestrator dispatch, no V1.0 tag move"

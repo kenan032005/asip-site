@@ -155,15 +155,16 @@ def main():
         stats["cache_misses"] += len(to_call)
         for k, rec in cached.items():
             _out = {"title_cn": rec.get("title_cn"), "summary_cn": rec.get("summary_cn")}
-            if rec.get("src_id"):
-                applied[rec["src_id"]] = _out
-            applied[rec.get("news_id")] = _out
+            for _idk in ("src_id", "news_id", "display_identity"):
+                if rec.get(_idk):
+                    applied[rec[_idk]] = _out
         if not ready:
             for it in to_call:
                 k = L.cache_key(it, model)
                 nid = it.get("news_id") or it.get("src_id")
                 ART.write_artifact(root, "localization", k,
                                    {"news_id": nid, "src_id": it.get("src_id") or "",
+                                    "display_identity": L.display_identity(it) or "",
                                     "title_cn": "", "summary_cn": "",
                                     "fallback_reason": why},
                                    schema_version=L.SCHEMA_VERSION, model=model,
@@ -194,6 +195,7 @@ def main():
                     localized_fallback += 1
                 ART.write_artifact(root, "localization", k,
                                    {"news_id": nid, "src_id": it.get("src_id") or "",
+                                    "display_identity": L.display_identity(it) or "",
                                     "title_cn": "", "summary_cn": "",
                                     "fallback_reason": meta.get("error") or "no_output"},
                                    schema_version=L.SCHEMA_VERSION, model=model,
@@ -210,6 +212,7 @@ def main():
                 localized_fallback += 1
                 ART.write_artifact(root, "localization", k,
                                    {"news_id": nid, "src_id": it.get("src_id") or "",
+                                    "display_identity": L.display_identity(it) or "",
                                     "title_cn": "", "summary_cn": "",
                                     "fallback_reason": "PRESERVATION_GATE_FAIL",
                                     "gate_reasons": reasons},
@@ -223,10 +226,12 @@ def main():
             localized_full += 1
             _o = {"title_cn": got["title_cn"], "summary_cn": got["summary_cn"]}
             applied[nid] = _o
-            if it.get("src_id"):
-                applied[str(it["src_id"])] = _o
+            for _idk in ("src_id", "display_identity"):
+                if it.get(_idk):
+                    applied[str(it[_idk])] = _o
             ART.write_artifact(root, "localization", k,
                                {"news_id": nid, "src_id": it.get("src_id") or "",
+                                "display_identity": L.display_identity(it) or "",
                                 "title_cn": got["title_cn"],
                                 "summary_cn": got["summary_cn"]},
                                schema_version=L.SCHEMA_VERSION, model=model,
