@@ -225,37 +225,38 @@ jobs:
           for p in "${WHITELIST[@]}"; do
             if [ -e "$p" ]; then git add -A -- "$p"; fi
           done
-          # 守卫：任何白名单外路径一律拒绝提交
-          git diff --cached --name-only > staged.txt || true
-          BAD=0
-          while IFS= read -r f; do
-            [ -z "$f" ] && continue
-            ok=0
-            for w in "${WHITELIST[@]}"; do
-              case "$f" in "$w"*|"$w") ok=1;; esac
-            done
-            if [ "$ok" -eq 0 ]; then echo "OUT-OF-WHITELIST: $f"; BAD=1; fi
-          done < staged.txt
-          # 绝不允许出现的类别（logs / debug / stub / secret / 本机模拟产物）
-          if grep -E '(^|/)(c2_work|logs?|\.env|run[12]\.json|staged\.txt|.*\.bak)$' staged.txt; then
-            echo "FORBIDDEN PATH STAGED"; BAD=1
-          fi
-          if [ "$BAD" -ne 0 ]; then
+          # 守卫：Unicode-safe 白名单判定。
+          # C3R2 教训：`git diff --cached --name-only` 会对非 ASCII 路径做 quoted/octal 转义
+          # （如 country_analysis/\344\270\255\346\226\207.json），导致合法中文路径被判越界。
+          # 因此改为**NUL 分隔的原始路径**判定（见 scripts/ops/c3_commit_guard.py）。
+          # core.quotePath=false 仅作辅助（便于日志可读），不参与判定。
+          git config core.quotePath false || true
+          if ! python -m scripts.ops.c3_commit_guard --root . ; then
             git reset -q
             echo "COMMIT_BACK = REFUSED"
             exit 1
           fi
-          echo "STAGED_FILES = $(wc -l < staged.txt)"
-          # PRODUCTION 写入路径必须为 0
-          PROD=$(grep -cE '^(data/runtime/ops|data/audit|data/public)/' staged.txt || true)
-          echo "PRODUCTION_WRITE_PATHS = ${PROD}"
-          if [ "${PROD}" != "0" ]; then echo "PRODUCTION_WRITE_DETECTED"; exit 1; fi
-          if [ -s staged.txt ]; then
+          git diff --cached --name-only -z > staged_paths.txt
+          python - <<'PYEOF'
+          import subprocess, sys
+          r = subprocess.run(["git", "diff", "--cached", "--name-only", "-z", "--no-renames"],
+                               capture_output=True)
+          paths = [p for p in r.stdout.decode("utf-8", "surrogateescape").split("\0") if p]
+          prod = [p for p in paths
+                  if p.startswith(("data/runtime/ops/", "data/audit/", "data/public/"))]
+          print("STAGED_FILES = %d" % len(paths))
+          print("PRODUCTION_WRITE_PATHS = %d" % len(prod))
+          if prod:
+              print("PRODUCTION_WRITE_DETECTED")
+              sys.exit(1)
+          PYEOF
+          if [ -s staged_paths.txt ]; then
             git commit -q -m "data(v1.1): materialize DeepSeek localization and intelligence"
             echo "AI_DATA_COMMIT = $(git rev-parse --short HEAD)"
             echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           else
             echo "AI_DATA_COMMIT = NONE (no changes)"
+            rm -f staged_paths.txt
             echo "commit_sha=" >> "$GITHUB_OUTPUT"
           fi
 
