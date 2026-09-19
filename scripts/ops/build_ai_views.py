@@ -33,6 +33,72 @@ PUBLIC_FIELDS = ("status", "executive_assessment", "trend_analysis", "outlook",
                  "watch_points", "summary_cn", "significance", "trend_signal")
 
 
+#: C3F §八/§九：monitored 国家的中文显示名 → ISO3 稳定身份。
+#: 仅作**静态参考数据**；country_snapshots 里已有的映射优先（见 _iso3_name_map）。
+#: 注意：刚果（金）= COD（Kinshasa），刚果共和国（刚果布）= COG（Brazzaville），两者不得混淆。
+ISO3_BY_NAME = {
+    "乍得": "TCD", "尼日尔": "NER", "尼日利亚": "NGA", "贝宁": "BEN",
+    "南苏丹": "SSD", "苏丹": "SDN", "莫桑比克": "MOZ", "利比亚": "LBY",
+    "埃塞俄比亚": "ETH", "肯尼亚": "KEN", "索马里": "SOM", "刚果（金）": "COD",
+    "刚果民主共和国": "COD", "刚果共和国（刚果布）": "COG", "刚果（布）": "COG",
+    "乌干达": "UGA", "加纳": "GHA", "加蓬": "GAB", "坦桑尼亚": "TZA",
+    "埃及": "EGY", "塞内加尔": "SEN", "安哥拉": "AGO", "摩洛哥": "MAR",
+    "科特迪瓦": "CIV", "突尼斯": "TUN", "阿尔及利亚": "DZA", "中非共和国": "CAF",
+    "喀麦隆": "CMR", "马里": "MLI", "布基纳法索": "BFA", "毛里塔尼亚": "MRT",
+}
+
+
+def _iso3_name_map(root):
+    """C3F §八：稳定国家身份映射 ISO3 → 中文显示名（禁止用文件名当显示名）。"""
+    os_ = os.path.join(str(root), "data", "views", "country_snapshots.json")
+    rows = []
+    try:
+        with io.open(os_, encoding="utf-8") as f:
+            rows = (json.load(f).get("snapshots") or [])
+    except Exception:  # noqa: BLE001
+        rows = []
+    iso2name, name2iso, iso2en = {}, {}, {}
+    for name, iso in ISO3_BY_NAME.items():      # 静态参考先行
+        name2iso[name] = iso
+        iso2name.setdefault(iso, name)
+    for r in rows:                              # 视图数据优先（更权威）
+        iso = (r.get("iso3") or "").upper()
+        cn = r.get("country_cn") or ""
+        en = r.get("country_en") or ""
+        if iso and cn:
+            iso2name[iso] = cn
+            name2iso[cn] = iso
+            iso2en[iso] = en
+    return iso2name, name2iso, iso2en
+
+
+def country_index_by_iso3(root):
+    """把 country_analysis artifacts 按 ISO3 建索引（文件名只用于定位，不用于关联）。
+
+    C3F §八：artifact 文件名经过消毒（刚果（金）→ 刚果_金_），
+    因此必须用 artifact 内记录的 country 显示名反查 ISO3，绝不用文件名猜国家。
+    """
+    iso2name, name2iso, _ = _iso3_name_map(root)
+    out = {}
+    for _k, rec in ART.load_section(root, "country_analysis").items():
+        pub = _public(rec)
+        if pub is None:
+            continue
+        cn = rec.get("country") or rec.get("country_cn") or ""
+        if cn not in name2iso:
+            # 兼容旧 artifact：用文件名去掉消毒字符后尝试匹配显示名
+            cand = cn or _k.replace("_", "")
+            for name, iso in name2iso.items():
+                if name.replace("（", "").replace("）", "") == cand.replace("_", "") or name == _k:
+                    cn = name
+                    break
+        iso = name2iso.get(cn)
+        if iso:
+            pub["name_cn"] = cn
+            out[iso] = pub
+    return out
+
+
 def _public(rec):
     if not rec:
         return None
@@ -86,10 +152,18 @@ def merge_into_news_stream(root, stream_path=None, dist_path=None):
                 v = idx[key]
                 if v.get("title_cn"):
                     it["title_cn"] = v["title_cn"]
+                    # C3F §十四：展示状态必须与实际渲染字段一致
+                    it["title_cn_missing"] = False
                     merged += 1
                 if v.get("summary_cn"):
                     it["summary_cn"] = v["summary_cn"]
+                    it["summary_cn_missing"] = False
                 break
+    # 统一补 summary 状态字段（与 title 状态相互独立）
+    for it in (doc.get("items") or []):
+        it["summary_cn_missing"] = not bool((it.get("summary_cn") or "").strip())
+        if (it.get("title_cn") or "").strip():
+            it["title_cn_missing"] = False
     with io.open(stream_path, "w", encoding="utf-8") as f:
         json.dump(doc, f, ensure_ascii=False, indent=1)
     copied = None
@@ -111,11 +185,31 @@ def merge_into_news_stream(root, stream_path=None, dist_path=None):
 
 def build(root, out_path=None):
     root = str(root)
+    hp = ART.read_artifact(root, "homepage_analysis", "current")
+    hp_pub = _public(hp)
+    # C3F §五/§六：fact pack 一致性契约。
+    # 前端只有在 AI.status=FULL 且 fact_pack_hash 与当前确定性 fact pack 一致时才展示 AI。
+    try:
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                        "..", "ai"))
+        import c3_analysis as _A
+        cur_hash = _A.pack_hash(_A.build_homepage_fact_pack_from_views(root))
+    except Exception:  # noqa: BLE001
+        cur_hash = None
+    if hp_pub is not None:
+        hp_pub["fact_pack_hash"] = hp.get("fact_pack_hash")
+        hp_pub["fact_pack_version"] = hp.get("fact_pack_version")
+        hp_pub["ai_matches_current_fact_pack"] = bool(
+            cur_hash and hp.get("fact_pack_hash") == cur_hash)
+
+    _, name2iso, _ = _iso3_name_map(root)
     doc = {"schema": "ai-intelligence-view-v1",
            "generated_at": None, "data_as_of": None,
-           "homepage": _public(ART.read_artifact(root, "homepage_analysis", "current")),
+           "homepage_fact_pack_hash": cur_hash,
+           "homepage": hp_pub,
+           "country_index": country_index_by_iso3(root),
+           "country_name_to_iso3": name2iso,
            "country_analysis": {}, "event_analysis": {}}
-    hp = ART.read_artifact(root, "homepage_analysis", "current")
     if hp:
         doc["generated_at"] = hp.get("generated_at")
         doc["data_as_of"] = hp.get("data_as_of")

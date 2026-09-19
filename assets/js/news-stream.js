@@ -147,7 +147,8 @@
     if (n.link_count = n.seen_count > 1) meta.push('<span class="ns-chip ns-chip-upd">关联 ' + n.seen_count + " 次</span>");
 
     var flags = [];
-    if (n.title_cn_missing) flags.push('<span class="ns-flag">未翻译 · 显示原文</span>');
+    // C3F §十四：只有**实际渲染使用原文标题**时才标注未翻译（状态字段与渲染字段必须一致）
+    if (!n.title_cn && n.title_cn_missing) flags.push('<span class="ns-flag">未翻译 · 显示原文</span>');
     if (n.has_body) flags.push('<span class="ns-flag ns-flag-ok">正文已抓取</span>');
     if (n.fetch_http_status === 200) flags.push('<span class="ns-flag ns-flag-ok">HTTP 200</span>');
     if (n.china_related) flags.push('<span class="ns-flag ns-flag-cn">涉中</span>');

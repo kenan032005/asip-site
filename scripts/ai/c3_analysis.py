@@ -24,6 +24,8 @@ from datetime import datetime, timedelta, timezone
 BJ = timezone(timedelta(hours=8))
 
 SCHEMA_VERSION = "c3-analysis-v1"
+#: C3F §五：Homepage Fact Pack 版本（参与 hash，任何结构变更都要升版本）
+HOMEPAGE_FACT_PACK_VERSION = "homepage-fact-pack-v1"
 PROMPT_VERSION = "event-intelligence-v1"
 COUNTRY_PROMPT_VERSION = "country-intelligence-v1"
 HOMEPAGE_PROMPT_VERSION = "homepage-analysis-v1"
@@ -204,6 +206,73 @@ def country_is_low_data(fact_pack):
     if days < COUNTRY_MIN_DAYS:
         return True, "active_days_below_%d" % COUNTRY_MIN_DAYS
     return False, None
+
+
+def build_homepage_fact_pack_from_views(root):
+    """C3F §五：从**已提交的确定性视图**装配 Homepage Fact Pack（单一装配点）。
+
+    c3_run（写 AI artifact）与 build_ai_views（算当前 hash）必须调用**同一个函数**，
+    否则 hash 永远对不上，前端就会永远把 AI 判为 STALE。
+    """
+    import io as _io
+    import json as _json
+    import os as _os
+
+    def rd(rel, d=None):
+        try:
+            with _io.open(_os.path.join(str(root), rel), encoding="utf-8") as f:
+                return _json.load(f)
+        except Exception:  # noqa: BLE001
+            return d
+
+    news = rd("data/views/news_stream.json", {}) or {}
+    items = news.get("items") or []
+    ov = rd("data/views/site_overview.json", {}) or {}
+    cs = rd("data/views/country_snapshots.json", {}) or {}
+    countries = cs.get("snapshots") or cs.get("countries") or ov.get("countries") or []
+    status = rd("data/status.json", {}) or {}
+    data_as_of = status.get("data_as_of")
+
+    # C3F §四：口径必须与首页 KPI 完全一致。
+    # 首页 v11KpiHighRisk = priority_country_count = risk >= 3（高 + 极高）。
+    # 之前 fact pack 用的是 >= 4（仅极高）→ AI 说 8、页面说 15，同一个数据源两个阈值。
+    def _lvl(c):
+        return int(c.get("baseline_risk_level") or c.get("risk_level")
+                   or c.get("country_risk_level") or 0)
+
+    kpis = {"news_24h": (news.get("counts") or {}).get("fresh_24h"),
+            "news_7d": (news.get("counts") or {}).get("fresh_7d"),
+            "news_total": (news.get("counts") or {}).get("admitted"),
+            "high_risk_countries": len([c for c in countries if _lvl(c) >= 3]),
+            "extreme_risk_countries": len([c for c in countries if _lvl(c) >= 4]),
+            "high_risk_definition": "risk_level>=3 (high+extreme) — matches homepage priority_country_count"}
+    clusters = rd("data/canonical/event_clusters.json", {}) or {}
+    top_events = [{"event_id": c.get("event_id"), "country": c.get("country_cn"),
+                   "independent_source_count": c.get("independent_source_count")}
+                  for c in (clusters.get("items") or [])
+                  if (c.get("independent_source_count") or 1) >= EVENT_MIN_SOURCES
+                  and c.get("quality_gate_passed")][:10]
+    rr = rd("data/views/report_index.json", {}) or {}
+    rows = rr.get("reports") or rr.get("items") or []
+    reports = []
+    for r in rows:
+        if not isinstance(r, dict):
+            continue
+        if r.get("status") and r.get("status") != "production":
+            continue
+        reports.append({"title": r.get("title") or r.get("title_original") or "",
+                        "date": r.get("report_date") or r.get("date") or ""})
+    reports.sort(key=lambda x: x.get("date") or "", reverse=True)
+
+    pack = build_homepage_fact_pack(kpis, countries, top_events, reports[:8], data_as_of)
+    pack["fact_pack_version"] = HOMEPAGE_FACT_PACK_VERSION
+    china = rd("data/views/china_interest.json", {}) or {}
+    china_facts = china.get("items") or china.get("exposures") or []
+    if china_facts:
+        pack["china_exposure"] = china_facts
+    else:
+        pack["china_exposure_state"] = "LIMITED_DATA"
+    return pack
 
 
 def build_homepage_fact_pack(kpis, countries, top_events, reports, data_as_of):

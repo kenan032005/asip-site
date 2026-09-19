@@ -243,6 +243,14 @@
       var updated = dataAsOf || (ov && ov.latest_data_time_bj)
         || st.last_update_bj || st.generated_at_bj || null;
       var AI = window.__HOME_AI__ || null;
+      // C3F §三/§五：AI 由 data/views/ai_intelligence.json 异步注入（含 fact pack hash 校验）。
+      // 注入到达后重跑 Executive 区块，使真实 AI 取代"暂不可用"提示；hash 不一致则视为 STALE，
+      // 保持确定性摘要（不显示旧 AI，也不暴露 hash/pipeline 细节）。
+      window.__HOME_AI_SET__ = function (ai, ok) {
+        if (!ok) return;
+        AI = ai;
+        try { renderExec(kpis, events, snapshots, countries, riskCfg, updated, AI); } catch (e) {}
+      };
       window.__ASIP_CUTOFF__ = updated || null;
       // 首页单一“数据更新时间”真值：表头与正文（KPI 条 / China Last checked）必须一致，
       // 避免 status.json 与 site_overview 双源导致同页出现两个不同时间。

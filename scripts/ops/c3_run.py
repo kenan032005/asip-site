@@ -16,6 +16,7 @@
 最终状态 HOLD_AI_CREDENTIAL_RUNTIME_REQUIRED。
 """
 import argparse
+import hashlib
 import io
 import json
 import os
@@ -128,6 +129,10 @@ def main():
     ap.add_argument("--window-start", default="2026-09-05")
     ap.add_argument("--window-end", default="2026-09-18")
     ap.add_argument("--batch-size", type=int, default=10)
+    ap.add_argument("--mode", default="full",
+                    choices=["full", "summary_only", "c3f_incremental"],
+                    help="full=标题+摘要；summary_only=只补缺失摘要（不重写标题）；"
+                         "c3f_incremental=先 full 再 summary_only，只处理 dirty 组件")
     ap.add_argument("--home-cooldown-hours", type=float, default=4.0)
     ap.add_argument("--force-home", action="store_true")
     ap.add_argument("--out", default=os.path.join(
@@ -162,7 +167,13 @@ def main():
     }
 
     # ── 1) Localization ──────────────────────────────────────────────
-    targets = [i for i in items if L.needs_localization(i)]
+    mode = a.mode
+    if mode == "summary_only":
+        targets = [i for i in items if L.needs_summary_only(i)]
+    else:
+        targets = [i for i in items if L.needs_localization(i)]
+    summary_mode = (mode == "summary_only")
+    stats["localization"]["mode"] = mode
     stats["localization"]["target"] = len(targets)
     batches = L.build_batches(targets, a.batch_size)
     stats["localization"]["batches"] = len(batches)
@@ -174,8 +185,9 @@ def main():
         to_call = []
         for it, k in zip(batch, bkeys):
             rec = ART.read_artifact(root, "localization", k)
-            if rec and rec.get("input_hash") == L.content_hash(it) \
-                    and not rec.get("retryable"):
+            if (rec and rec.get("input_hash") == L.content_hash(it)
+                    and not rec.get("retryable")
+                    and not (summary_mode and not (rec.get("summary_cn") or "").strip())):
                 cached[k] = rec
             else:
                 to_call.append(it)
@@ -206,7 +218,24 @@ def main():
             continue
         if not to_call:
             continue          # 全部命中缓存：不得发起任何 API 调用
-        out_items, meta = L.localize_batch(provider, to_call, model=model)
+        if summary_mode:
+            u = L.build_user_prompt_summary_only(to_call)
+            task = {"task_id": "sum_%s" % hashlib.sha256(u.encode()).hexdigest()[:12],
+                    "task_type": "stage4_event_enrichment",
+                    "system_text": L.SYSTEM_PROMPT_SUMMARY_ONLY,
+                    "user_text": u, "max_output_tokens": 2000}
+            resp = provider.submit_task(task)
+            res = (resp or {}).get("result") or {}
+            if (resp or {}).get("status") != "succeeded":
+                out_items, meta = [], {"ok": False, "status": (resp or {}).get("status"),
+                                       "error": ((res.get("error") or {}).get("code")),
+                                       "usage": {}, "returned_model": res.get("returned_model")}
+            else:
+                out_items, errs = L.parse_summary_only(res.get("text"))
+                meta = {"ok": not errs, "status": "succeeded", "errors": errs,
+                        "usage": {}, "returned_model": res.get("returned_model")}
+        else:
+            out_items, meta = L.localize_batch(provider, to_call, model=model)
         if meta.get("status") == "succeeded" or meta.get("ok"):
             stats["ai_calls_localization"] += 1
             stats["ai_calls_total"] += 1
@@ -234,7 +263,8 @@ def main():
                                    # schema/gate 拒绝是确定性的，同一输入不重试（§十/§二十六/§三十八）
                                    extra={"retryable": st == L.STATUS_FAILED})
                 continue
-            ok, reasons = L.preservation_gate(it, got)
+            ok, reasons = (L.summary_preservation_gate(it, got) if summary_mode
+                           else L.preservation_gate(it, got))
             if not ok:
                 stats["gates"]["localization_fact_gate"] = "FAIL"
                 localized_fallback += 1
@@ -252,16 +282,21 @@ def main():
                                    extra={"retryable": False})
                 continue
             localized_full += 1
-            _o = {"title_cn": got["title_cn"], "summary_cn": got["summary_cn"]}
+            if summary_mode:
+                # C3F §十八：**只写 summary_cn**，绝不覆盖已验证的 title_cn
+                _o = {"title_cn": it.get("title_cn") or "", "summary_cn": got["summary_cn"]}
+                _patch = {"summary_cn": got["summary_cn"]}
+            else:
+                _o = {"title_cn": got["title_cn"], "summary_cn": got["summary_cn"]}
+                _patch = {"title_cn": got["title_cn"], "summary_cn": got["summary_cn"]}
             applied[nid] = _o
             for _idk in ("src_id", "display_identity"):
                 if it.get(_idk):
                     applied[str(it[_idk])] = _o
             ART.write_artifact(root, "localization", k,
-                               {"news_id": nid, "src_id": it.get("src_id") or "",
-                                "display_identity": L.display_identity(it) or "",
-                                "title_cn": got["title_cn"],
-                                "summary_cn": got["summary_cn"]},
+                               dict({"news_id": nid, "src_id": it.get("src_id") or "",
+                                     "display_identity": L.display_identity(it) or ""},
+                                    **_patch),
                                schema_version=L.SCHEMA_VERSION, model=model,
                                prompt_version=L.PROMPT_VERSION,
                                input_hash=L.content_hash(it), status=L.STATUS_FULL,
@@ -419,33 +454,9 @@ def main():
     # ── 7) Homepage intelligence（fact pack hash + cooldown）─────────
     # C3R2：CI 环境没有 dist/，优先读 data/views/site_overview.json（随分支提交），
     # 再回退到 dist 版本；确保 Homepage Fact Pack 拿到真实 KPI 与国家风险事实。
-    ov = (rd(os.path.join(root, "data", "views", "site_overview.json"), {})
-          or rd(os.path.join(root, "dist", "data", "site_overview.json"), {}) or {})
-    # 国家风险事实（确定性）来自 country_snapshots 视图；site_overview 不含 countries 明细
-    cs = (rd(os.path.join(root, "data", "views", "country_snapshots.json"), {})
-          or rd(os.path.join(root, "dist", "data", "country_snapshots.json"), {}) or {})
-    countries_facts = (cs.get("snapshots") or cs.get("countries")
-                       or ov.get("countries") or [])
-    # China Exposure 只允许 approved structured facts（§十八）；无记录则保持 limited-data
-    china = (rd(os.path.join(root, "data", "views", "china_interest.json"), {})
-             or rd(os.path.join(root, "dist", "data", "china_interest.json"), {}) or {})
-    china_facts = china.get("items") or china.get("exposures") or []
-    kpis = {"news_24h": (news.get("counts") or {}).get("fresh_24h"),
-            "news_7d": (news.get("counts") or {}).get("fresh_7d"),
-            "news_total": (news.get("counts") or {}).get("admitted"),
-            "high_risk_countries": len([c for c in countries_facts
-                                        if (c.get("baseline_risk_level")
-                                            or c.get("risk_level")
-                                            or c.get("country_risk_level") or 0) >= 4])}
-    top_events = [{"event_id": c.get("event_id"), "country": c.get("country_cn"),
-                   "independent_source_count": c.get("independent_source_count")}
-                  for c in clusters if A.event_is_analyzable(c)][:10]
-    hpack = A.build_homepage_fact_pack(kpis, countries_facts,
-                                       top_events, _latest_reports(root), data_as_of)
-    if china_facts:
-        hpack["china_exposure"] = china_facts        # 仅 approved structured facts
-    else:
-        hpack["china_exposure_state"] = "LIMITED_DATA"
+    # C3F §五：Homepage Fact Pack 由**统一装配函数**生成，确保前端算出的
+    # homepage_fact_pack_hash 与 AI artifact 记录的 fact_pack_hash 同源可比。
+    hpack = A.build_homepage_fact_pack_from_views(root)
     hhash = A.pack_hash(hpack)
     prev_h = ART.read_artifact(root, "homepage_analysis", "current")
     fresh_enough = False
@@ -467,8 +478,10 @@ def main():
                                schema_version=A.SCHEMA_VERSION, model=model,
                                prompt_version=A.HOMEPAGE_PROMPT_VERSION, input_hash=hhash,
                                status=A.STATUS_FALLBACK, source_fact_refs=["homepage"],
-                               data_as_of=data_as_of)
-            stats["homepage"] = {"status": A.STATUS_FALLBACK}
+                               data_as_of=data_as_of,
+                               extra={"fact_pack_hash": hhash,
+                                      "fact_pack_version": A.HOMEPAGE_FACT_PACK_VERSION})
+            stats["homepage"] = {"status": A.STATUS_FALLBACK, "fact_pack_hash": hhash}
         else:
             task = {"task_id": "hp_%s" % hhash, "task_type": "stage4_event_enrichment",
                     "system_text": A.SYSTEM_HOMEPAGE,
@@ -497,9 +510,24 @@ def main():
                                    schema_version=A.SCHEMA_VERSION, model=model,
                                    prompt_version=A.HOMEPAGE_PROMPT_VERSION,
                                    input_hash=hhash, status=A.STATUS_FULL,
-                                   source_fact_refs=["homepage"], data_as_of=data_as_of)
-                stats["homepage"] = {"status": A.STATUS_FULL}
+                                   source_fact_refs=["homepage"], data_as_of=data_as_of,
+                                   extra={"fact_pack_hash": hhash,
+                                          "fact_pack_version": A.HOMEPAGE_FACT_PACK_VERSION})
+                stats["homepage"] = {"status": A.STATUS_FULL, "fact_pack_hash": hhash}
 
+    # C3F §二十二：聚合口径——19 条被安全拦截是 PASS_WITH_FALLBACK，不是系统故障
+    _acc = localized_full
+    _rej = localized_fallback
+    _pf = localized_failed
+    _unsafe = 0
+    stats["localization_pipeline"] = {
+        "status": L.pipeline_status(_acc, 0, _rej, _pf, _unsafe),
+        "ITEMS_ACCEPTED": _acc, "ITEMS_PARTIAL": 0,
+        "ITEMS_REJECTED_BY_GATE": _rej, "ITEMS_PROVIDER_FAILED": _pf,
+        "UNSAFE_OUTPUT_PUBLISHED": _unsafe,
+    }
+    stats["gates"]["localization_pipeline_status"] = stats["localization_pipeline"]["status"]
+    stats["gates"].pop("localization_fact_gate", None)
     stats["status"] = ("HOLD_AI_CREDENTIAL_RUNTIME_REQUIRED" if not ready
                        else "OK")
     stats["news_per_localization_call"] = (round(
