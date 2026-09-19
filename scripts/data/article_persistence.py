@@ -167,6 +167,13 @@ def article_to_candidate(a):
         "event_type": a.get("_event_type") or "",
         "title_cn": "",
         "summary_cn": "",
+        # C2：历史回填标记（§三）—— 仅回填文章携带，实时文章形状不变
+        **({"historical_backfill": True,
+            "backfill_collected_at": _rfc3339(a.get("backfill_collected_at")
+                                              or a.get("collected_at_beijing")),
+            "backfill_method": a.get("backfill_method") or "",
+            "publisher_identity_id": a.get("publisher_identity_id") or ""}
+           if a.get("historical_backfill") else {}),
     }
 
 

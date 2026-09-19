@@ -194,6 +194,16 @@ def candidate_to_article(c, from_pending=False, idx=None):
     etype = c.get("event_type", "") or ""
     if not etype and c.get("rel_matched"):
         etype = ""
+    # C2：历史回填标记与 publisher identity（仅回填文章写入，实时文章不变）
+    backfill_extra = {}
+    if c.get("historical_backfill"):
+        backfill_extra = {
+            "historical_backfill": True,
+            "backfill_collected_at": c.get("backfill_collected_at") or None,
+            "backfill_method": c.get("backfill_method") or "",
+            "publisher_identity_id": (c.get("publisher_identity_id")
+                                      or src.get("publisher_identity_id") or ""),
+        }
     return {
         "article_id": aid,
         "schema_version": "2.0", "pipeline_version": 2, "run_id": "",
@@ -224,6 +234,7 @@ def candidate_to_article(c, from_pending=False, idx=None):
         "warnings": [], "errors": [],
         "needs_translation": derive_needs_translation(c),
         "legacy_payload": dict(c),
+        **backfill_extra,
     }
 
 
