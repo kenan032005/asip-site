@@ -1,50 +1,79 @@
-name: ASIP V1.1 C3 — AI Intelligence Runtime (manual, non-production)
+name: ASIP V1.1 C3 — Real AI Materialization (server-side, non-production)
 
-# §三：V1.1-only / manual / isolated / non-production AI runtime entry point。
-#   * 只允许手动触发（workflow_dispatch），不挂 schedule，不被 Production orchestrator 调用；
-#   * 只读写 v11-resume-after-v1.0 分支与 runner 内的隔离目录；
-#   * **不写 production-state、不部署 gh-pages、不 dispatch Production workflow、不动 V1.0 tag**；
-#   * 产出以 artifact 形式上传，供人工审核。
+# C3R2 §二/§三/§四：真实 DeepSeek 只在 GitHub Actions runner 内运行，
+# 并通过**受限 commit-back** 把结果物化回 v11-resume-after-v1.0。
+#
+# 触发方式：
+#   * workflow_dispatch        —— 人工手动触发（推荐）
+#   * push tag c3r2-real-ai-*  —— 一次性可审计触发（不需要 API token）
+#
+# 硬性边界：
+#   * 只作用于 v11-resume-after-v1.0；不 push main / gh-pages / production-state，
+#     不 dispatch Production orchestrator，不移动 V1.0 tag / release；
+#   * permissions 仅 contents: write（仅用于受限 commit-back）；
+#   * commit-back 走**白名单 + staged 路径守卫**，任何白名单外路径立即失败。
 
 on:
   workflow_dispatch:
     inputs:
       window_start:
-        description: "回填窗口开始（YYYY-MM-DD，北京时间自然日）"
-        required: true
+        description: "14 日窗口开始（YYYY-MM-DD，北京时间自然日）"
+        required: false
         default: "2026-09-05"
       window_end:
-        description: "回填窗口结束（YYYY-MM-DD，北京时间自然日）"
-        required: true
+        description: "14 日窗口结束（YYYY-MM-DD）"
+        required: false
         default: "2026-09-18"
       batch_size:
         description: "每次调用处理的新闻条数（8-12）"
-        required: true
+        required: false
         default: "10"
       force_home:
-        description: "强制刷新 Homepage analysis（忽略 cooldown）"
-        required: true
+        description: "强制刷新 Homepage analysis"
+        required: false
         default: "false"
+  push:
+    tags:
+      - "c3r2-real-ai-*"
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: asip-v11-c3-ai
   cancel-in-progress: false
 
+env:
+  TARGET_BRANCH: v11-resume-after-v1.0
+  ASIP_DEEPSEEK_BASE_URL: https://api.deepseek.com
+
 jobs:
-  c3-ai-runtime:
+  materialize:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
     steps:
-      - name: Checkout V1.1 branch
+      - name: Guard — this workflow may only ever touch v11-resume-after-v1.0
+        run: |
+          set -euo pipefail
+          echo "trigger ref = ${GITHUB_REF}"
+          if [[ "${GITHUB_REF}" == refs/heads/* && "${GITHUB_REF}" != "refs/heads/${TARGET_BRANCH}" ]]; then
+            echo "REFUSED: branch ${GITHUB_REF} is not ${TARGET_BRANCH}"
+            exit 1
+          fi
+          if [[ "${GITHUB_REF}" == refs/tags/* && "${GITHUB_REF}" != refs/tags/c3r2-real-ai-* ]]; then
+            echo "REFUSED: tag ${GITHUB_REF} is not a c3r2-real-ai-* one-shot trigger"
+            exit 1
+          fi
+          echo "GUARD = PASS"
+
+      - name: Checkout v11-resume-after-v1.0
         uses: actions/checkout@v4
         with:
           ref: v11-resume-after-v1.0
           fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Verify secret presence (name only, never the value)
+      - name: Secret presence check (name only)
         env:
           ASIP_DEEPSEEK_API_KEY: ${{ secrets.ASIP_DEEPSEEK_API_KEY }}
         run: |
@@ -60,74 +89,196 @@ jobs:
         with:
           python-version: "3.13"
 
+      - name: Input audit — no stub / simulation / debug input may reach real AI
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, sys
+          bad = []
+          # 本机 stub 产物只存在于 c2_work/isolated，绝不允许出现在 CI 检出中
+          for p in ("c2_work", "c2_work/isolated"):
+              if os.path.exists(p):
+                  bad.append(p)
+          ai = "data/intelligence/ai"
+          n_art = 0
+          if os.path.isdir(ai):
+              for s in os.listdir(ai):
+                  d = os.path.join(ai, s)
+                  if os.path.isdir(d):
+                      n_art += len([f for f in os.listdir(d) if f.endswith(".json")])
+          hp = os.path.join(ai, "homepage_analysis", "current.json")
+          if os.path.exists(hp):
+              rec = json.load(open(hp, encoding="utf-8"))
+              # 首轮真实运行前，仓库里不应存在任何 status=FULL 的陈旧 artifact
+              if rec.get("status") == "FULL":
+                  bad.append("stale FULL artifact: %s" % hp)
+          arts = json.load(open("data/canonical/articles.json", encoding="utf-8"))
+          items = arts.get("items") or []
+          in_win = sum(1 for x in items
+                       if "2026-09-05" <= (x.get("published_at") or "")[:10] <= "2026-09-18")
+          print("articles            =", len(items))
+          print("articles in window  =", in_win)
+          print("pre-existing AI artifacts =", n_art)
+          if not items:
+              bad.append("empty authoritative article store")
+          if in_win == 0:
+              bad.append("no in-window articles: wrong corpus for the leadership window")
+          if bad:
+              print("STUB_AI_INPUT_CONTAMINATION > 0")
+              for b in bad:
+                  print("  -", b)
+              sys.exit(1)
+          print("STUB_AI_INPUT_CONTAMINATION = 0")
+          print("AUTHORITATIVE_INPUT = OK")
+          PY
+
       - name: DeepSeek qualification (minimal, no secret output)
         env:
           ASIP_DEEPSEEK_API_KEY: ${{ secrets.ASIP_DEEPSEEK_API_KEY }}
-        run: python scripts/ai/qualification/c3_qualify.py
-
-      - name: Build isolated root (production-state data is read-only input)
         run: |
-          python - <<'PY'
-          import subprocess, os, shutil, sys
-          sys.path.insert(0, "scripts")
-          # 只读取出 production-state 的公开数据作为隔离根的输入；不回写
-          os.makedirs("c3_iso/data", exist_ok=True)
-          subprocess.run(["git", "fetch", "origin", "production-state", "--depth", "1"], check=False)
-          subprocess.run(["git", "--work-tree", "c3_iso", "checkout", "origin/production-state", "--", "data"],
-                         check=False)
-          print("isolated root ready:", os.path.isdir("c3_iso/data"))
-          PY
+          set -euo pipefail
+          python scripts/ai/qualification/c3_qualify.py --require-pass
 
-      - name: Run C3 AI runtime (localization + intelligence)
+      - name: Real run 1 — localization + event/country/homepage intelligence
         env:
           ASIP_DEEPSEEK_API_KEY: ${{ secrets.ASIP_DEEPSEEK_API_KEY }}
-          ASIP_DEEPSEEK_BASE_URL: https://api.deepseek.com
         run: |
-          python scripts/ai/qualification/c3_qualify.py --require-pass
+          set -euo pipefail
           python scripts/ops/c3_run.py \
-            --root c3_iso \
+            --root . \
             --provider auto \
-            --window-start "${{ inputs.window_start }}" \
-            --window-end "${{ inputs.window_end }}" \
-            --batch-size "${{ inputs.batch_size }}" \
+            --window-start "${{ inputs.window_start || '2026-09-05' }}" \
+            --window-end "${{ inputs.window_end || '2026-09-18' }}" \
+            --batch-size "${{ inputs.batch_size || '10' }}" \
             $( [ "${{ inputs.force_home }}" = "true" ] && echo --force-home ) \
-            --out c3_run_report_ci.json
-          python scripts/ops/build_ai_views.py --root c3_iso
+            --out run1.json
+          cp run1.json c3_run_report_run1.json
 
-      - name: Summarize
+      - name: Real run 2 — identical input must make zero AI calls (§二十)
+        env:
+          ASIP_DEEPSEEK_API_KEY: ${{ secrets.ASIP_DEEPSEEK_API_KEY }}
+        run: |
+          set -euo pipefail
+          python scripts/ops/c3_run.py --root . --provider auto \
+            --window-start "${{ inputs.window_start || '2026-09-05' }}" \
+            --window-end "${{ inputs.window_end || '2026-09-18' }}" \
+            --batch-size "${{ inputs.batch_size || '10' }}" \
+            --out run2.json
+          cp run2.json c3_run_report_run2.json
+          python - <<'PY'
+          import json
+          r2 = json.load(open("run2.json", encoding="utf-8"))
+          print("SECOND_IDENTICAL_RUN_AI_CALLS =", r2.get("ai_calls_total"))
+          assert r2.get("ai_calls_total") == 0, "idempotency violated: run 2 made AI calls"
+          print("IDEMPOTENCY = PASS")
+          PY
+
+      - name: Build public AI view
+        run: |
+          set -euo pipefail
+          python scripts/ops/build_ai_views.py --root .
+
+      - name: Scoped commit-back (whitelist + guard)
+        id: commit
+        run: |
+          set -euo pipefail
+          git config user.name  "asip-c3-bot"
+          git config user.email "asip-c3-bot@users.noreply.github.com"
+          WHITELIST=(
+            "data/intelligence/ai/localization/"
+            "data/intelligence/ai/event_analysis/"
+            "data/intelligence/ai/country_analysis/"
+            "data/intelligence/ai/homepage_analysis/"
+            "data/intelligence/ai/runs/"
+            "data/views/ai_intelligence.json"
+            "data/canonical/articles.json"
+            "data/views/news_stream.json"
+          )
+          for p in "${WHITELIST[@]}"; do
+            if [ -e "$p" ]; then git add -A -- "$p"; fi
+          done
+          # 守卫：任何白名单外路径一律拒绝提交
+          git diff --cached --name-only > staged.txt || true
+          BAD=0
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            ok=0
+            for w in "${WHITELIST[@]}"; do
+              case "$f" in "$w"*|"$w") ok=1;; esac
+            done
+            if [ "$ok" -eq 0 ]; then echo "OUT-OF-WHITELIST: $f"; BAD=1; fi
+          done < staged.txt
+          # 绝不允许出现的类别（logs / debug / stub / secret / 本机模拟产物）
+          if grep -E '(^|/)(c2_work|logs?|\.env|run[12]\.json|staged\.txt|.*\.bak)$' staged.txt; then
+            echo "FORBIDDEN PATH STAGED"; BAD=1
+          fi
+          if [ "$BAD" -ne 0 ]; then
+            git reset -q
+            echo "COMMIT_BACK = REFUSED"
+            exit 1
+          fi
+          echo "STAGED_FILES = $(wc -l < staged.txt)"
+          # PRODUCTION 写入路径必须为 0
+          PROD=$(grep -cE '^(data/runtime/ops|data/audit|data/public)/' staged.txt || true)
+          echo "PRODUCTION_WRITE_PATHS = ${PROD}"
+          if [ "${PROD}" != "0" ]; then echo "PRODUCTION_WRITE_DETECTED"; exit 1; fi
+          if [ -s staged.txt ]; then
+            git commit -q -m "data(v1.1): materialize DeepSeek localization and intelligence"
+            echo "AI_DATA_COMMIT = $(git rev-parse --short HEAD)"
+            echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          else
+            echo "AI_DATA_COMMIT = NONE (no changes)"
+            echo "commit_sha=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Push commit-back to v11-resume-after-v1.0 only
+        if: steps.commit.outputs.commit_sha != ''
+        run: |
+          set -euo pipefail
+          git push origin "HEAD:refs/heads/${TARGET_BRANCH}"
+          echo "AI_DATA_PUSH_STATUS = PASS"
+          echo "REMOTE_HEAD = $(git ls-remote origin refs/heads/${TARGET_BRANCH} | cut -f1)"
+
+      - name: Report real metrics
         if: always()
         run: |
           python - <<'PY'
           import json, os
-          if os.path.exists("c3_run_report_ci.json"):
-              d = json.load(open("c3_run_report_ci.json", encoding="utf-8"))
+          def rd(p):
+              try: return json.load(open(p, encoding="utf-8"))
+              except Exception: return {}
+          r1, r2 = rd("c3_run_report_run1.json"), rd("c3_run_report_run2.json")
+          for tag, d in (("RUN1", r1), ("RUN2", r2)):
+              if not d:
+                  print(tag, "= missing"); continue
+              print("--- %s ---" % tag)
               for k in ("status", "model", "data_as_of", "ai_calls_total",
                         "ai_calls_localization", "ai_calls_event", "ai_calls_country",
                         "ai_calls_homepage", "cache_hits", "cache_misses",
                         "news_per_localization_call"):
-                  print("%-28s = %s" % (k, d.get(k)))
-              print("localization =", json.dumps(d.get("localization"), ensure_ascii=False))
-              print("event        =", json.dumps(d.get("event"), ensure_ascii=False))
-              print("country      =", json.dumps(d.get("country"), ensure_ascii=False))
-              print("homepage     =", json.dumps(d.get("homepage"), ensure_ascii=False))
-          else:
-              print("no run report")
+                  print("  %-28s = %s" % (k, d.get(k)))
+              print("  localization =", json.dumps(d.get("localization"), ensure_ascii=False))
+              print("  event        =", json.dumps(d.get("event"), ensure_ascii=False))
+              print("  country      =", json.dumps(d.get("country"), ensure_ascii=False))
+              print("  homepage     =", json.dumps(d.get("homepage"), ensure_ascii=False))
+              print("  gates        =", json.dumps(d.get("gates"), ensure_ascii=False))
           PY
 
-      - name: Upload AI artifacts
+      - name: Upload evidence artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: asip-v11-c3-ai-artifacts
+          name: asip-v11-c3r2-real-ai
           path: |
-            c3_iso/data/intelligence/ai/**
-            c3_iso/data/views/ai_intelligence.json
-            c3_run_report_ci.json
+            c3_run_report_run1.json
+            c3_run_report_run2.json
+            data/intelligence/ai/**
+            data/views/ai_intelligence.json
           if-no-files-found: warn
-          retention-days: 14
+          retention-days: 30
 
-      - name: Explicit non-production guarantee
+      - name: Non-production guarantee
         if: always()
         run: |
           echo "PRODUCTION_CHANGED = false"
-          echo "  no gh-pages deploy, no production-state write, no orchestrator dispatch, no V1.0 tag move"
+          echo "  no gh-pages deploy / no production-state write / no orchestrator dispatch / no V1.0 tag move"

@@ -59,6 +59,22 @@ def dt(v):
         return None
 
 
+def _latest_reports(root, limit=8):
+    """最近报告列表（确定性）：来自已提交的 report_index 视图；缺失则空。"""
+    doc = rd(os.path.join(str(root), "data", "views", "report_index.json"), {}) or {}
+    rows = doc.get("reports") or doc.get("items") or []
+    out = []
+    for r in rows:
+        if not isinstance(r, dict):
+            continue
+        if r.get("status") and r.get("status") != "production":
+            continue
+        out.append({"title": r.get("title") or r.get("title_original") or "",
+                    "date": r.get("report_date") or r.get("date") or ""})
+    out.sort(key=lambda x: x.get("date") or "", reverse=True)
+    return out[:limit]
+
+
 def get_provider(mode):
     """mode: auto | mock_ok | mock_timeout | mock_429 | mock_500 | mock_invalid_json |
              mock_schema_fail | mock_injection"""
@@ -389,17 +405,35 @@ def main():
                         "countries": len(by_country)}
 
     # ── 7) Homepage intelligence（fact pack hash + cooldown）─────────
-    ov = rd(os.path.join(root, "dist", "data", "site_overview.json"), {}) or {}
+    # C3R2：CI 环境没有 dist/，优先读 data/views/site_overview.json（随分支提交），
+    # 再回退到 dist 版本；确保 Homepage Fact Pack 拿到真实 KPI 与国家风险事实。
+    ov = (rd(os.path.join(root, "data", "views", "site_overview.json"), {})
+          or rd(os.path.join(root, "dist", "data", "site_overview.json"), {}) or {})
+    # 国家风险事实（确定性）来自 country_snapshots 视图；site_overview 不含 countries 明细
+    cs = (rd(os.path.join(root, "data", "views", "country_snapshots.json"), {})
+          or rd(os.path.join(root, "dist", "data", "country_snapshots.json"), {}) or {})
+    countries_facts = (cs.get("snapshots") or cs.get("countries")
+                       or ov.get("countries") or [])
+    # China Exposure 只允许 approved structured facts（§十八）；无记录则保持 limited-data
+    china = (rd(os.path.join(root, "data", "views", "china_interest.json"), {})
+             or rd(os.path.join(root, "dist", "data", "china_interest.json"), {}) or {})
+    china_facts = china.get("items") or china.get("exposures") or []
     kpis = {"news_24h": (news.get("counts") or {}).get("fresh_24h"),
             "news_7d": (news.get("counts") or {}).get("fresh_7d"),
             "news_total": (news.get("counts") or {}).get("admitted"),
-            "high_risk_countries": len([c for c in (ov.get("countries") or [])
-                                        if (c.get("risk_level") or 0) >= 4])}
+            "high_risk_countries": len([c for c in countries_facts
+                                        if (c.get("baseline_risk_level")
+                                            or c.get("risk_level")
+                                            or c.get("country_risk_level") or 0) >= 4])}
     top_events = [{"event_id": c.get("event_id"), "country": c.get("country_cn"),
                    "independent_source_count": c.get("independent_source_count")}
                   for c in clusters if A.event_is_analyzable(c)][:10]
-    hpack = A.build_homepage_fact_pack(kpis, ov.get("countries") or [] if False else [],
-                                       top_events, [], data_as_of)
+    hpack = A.build_homepage_fact_pack(kpis, countries_facts,
+                                       top_events, _latest_reports(root), data_as_of)
+    if china_facts:
+        hpack["china_exposure"] = china_facts        # 仅 approved structured facts
+    else:
+        hpack["china_exposure_state"] = "LIMITED_DATA"
     hhash = A.pack_hash(hpack)
     prev_h = ART.read_artifact(root, "homepage_analysis", "current")
     fresh_enough = False
