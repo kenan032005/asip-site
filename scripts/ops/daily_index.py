@@ -16,9 +16,18 @@ BJ = timezone(timedelta(hours=8))
 
 DENSITY_TARGET_PER_DAY = 20
 DENSITY_TARGET_TOTAL = 280
-CONDITIONAL_MEDIAN = 15
-CONDITIONAL_MIN_DAY = 10
-CONDITIONAL_TOTAL = 210
+#: C2B §三十二：务实 Gate（不再要求 14/14 天全部 >=20 —— 自然日新闻量本就会波动，
+#: Leadership Demo 需要的是「连续、丰富、可信」，而不是人为制造每天相同的信息量）
+GATE_PASS_TOTAL = 280
+GATE_PASS_MEDIAN = 18
+GATE_PASS_MIN_DAY = 10
+GATE_PASS_DAYS_20 = 7
+GATE_COND_TOTAL = 250
+GATE_COND_MEDIAN = 15
+GATE_COND_MIN_DAY = 10
+#: 兼容旧名（density_summary 使用）
+CONDITIONAL_MEDIAN = GATE_COND_MEDIAN
+CONDITIONAL_MIN_DAY = GATE_COND_MIN_DAY
 
 
 def bj_date(ts):
@@ -113,17 +122,28 @@ def density_summary(rows):
 
 
 def density_gate(rows):
-    """§二十 LEADERSHIP_14D_DENSITY_GATE。阈值写死在此，不随结果调整。"""
+    """§三十二 LEADERSHIP_14D_DENSITY_GATE（阈值固定在此，不随结果调整）。
+
+    PASS               : EMPTY_DAYS==0 AND TOTAL>=280 AND MEDIAN>=18 AND MIN>=10
+                         AND DAYS_WITH_20_PLUS>=7
+    CONDITIONAL_PASS   : EMPTY_DAYS==0 AND TOTAL>=250 AND MEDIAN>=15 AND MIN>=10
+    else               : FAIL
+
+    注意：这是**内容密度**门禁，与 News Admission 的事実准入门槛无关；
+    不得为了通过它修改任何准入标准。
+    """
     if not rows:
         return "FAIL"
     s = density_summary(rows)
-    counts = [r["NEWS_COUNT"] for r in rows]
-    n = len(counts)
-    if (s["DAYS_WITH_20_PLUS"] == n and s["NEWS_14D_TOTAL"] >= DENSITY_TARGET_TOTAL):
+    if (s["EMPTY_DAYS"] == 0
+            and s["NEWS_14D_TOTAL"] >= GATE_PASS_TOTAL
+            and s["DAILY_MEDIAN"] >= GATE_PASS_MEDIAN
+            and s["DAILY_MIN"] >= GATE_PASS_MIN_DAY
+            and s["DAYS_WITH_20_PLUS"] >= GATE_PASS_DAYS_20):
         return "PASS"
-    if (all(c > 0 for c in counts)
-            and s["DAILY_MEDIAN"] >= CONDITIONAL_MEDIAN
-            and all(c >= CONDITIONAL_MIN_DAY for c in counts)
-            and s["NEWS_14D_TOTAL"] >= CONDITIONAL_TOTAL):
+    if (s["EMPTY_DAYS"] == 0
+            and s["NEWS_14D_TOTAL"] >= GATE_COND_TOTAL
+            and s["DAILY_MEDIAN"] >= GATE_COND_MEDIAN
+            and s["DAILY_MIN"] >= GATE_COND_MIN_DAY):
         return "CONDITIONAL_PASS"
     return "FAIL"

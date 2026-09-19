@@ -18,6 +18,7 @@ import argparse
 import json
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -159,6 +160,21 @@ def run_collection(execute=False, emit=lambda s: print(s), state=None, ops_run=N
     emit("COLLECTION_OK = %s | raw=%s pending=%s | metrics_source=%s" % (
         ok, n_raw, n_pending, metrics["metrics_source"]))
     emit("COLLECTION_METRICS = %s" % json.dumps(metrics, ensure_ascii=False))
+
+    # C2B §三/§六：采集成功即写统一时间契约，并把遗留快照同步到同一事实源。
+    # data_as_of = 完整处理到的窗口截止（此处为本次采集收尾时刻），
+    # 与 generated_at（视图构建时间）语义严格区分。
+    if ok:
+        try:
+            from ops import time_contract as tc
+            _now = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+            tc.write_contract(run_id=(metrics.get("collector_run_id") or state.get("last_collection_run")),
+                              processed_through=_now,
+                              source="collection_run.processed_through")
+            _sync = tc.refresh_derived_snapshots(run_id=metrics.get("collector_run_id"))
+            emit("TIME_CONTRACT = %s" % json.dumps(_sync, ensure_ascii=False))
+        except Exception as e:  # noqa: BLE001
+            emit("time_contract_write_error=%s" % e)
     return ok
 
 

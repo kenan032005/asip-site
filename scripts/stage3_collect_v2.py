@@ -36,6 +36,13 @@ from framework import (  # noqa: E402
     _http_is_retryable, _http_is_terminal, CACHE_DIR,
 )
 from registry import SourceRegistry, ArticleDiscoverer  # noqa: E402
+from country_runner import CLASSIFIER_VERSION as _CLASSIFIER_VERSION
+
+
+def _classifier_version():
+    return _CLASSIFIER_VERSION
+
+
 from countries import (key_for as _cfg_key_for, cn_for_decision as _cn_for_decision,
                        iso2_for as _iso2_for, configured_countries as _configured_countries)  # noqa: E402
 from country_runner import (load_country_cfg, identify_country,  # noqa: E402
@@ -505,6 +512,8 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
                     "country": country_cn,
                     "reason_code": qr_code,
                     "reason_cn": qr_code,
+                    # C2B §十八：记录产生该判定的分类器版本，便于后续区分 v1/v2 hold
+                    "classifier_version": _classifier_version(),
                     "detected_at": bj_iso(),
                     "detected_by": "stage3_collect_v2",
                     "restorable": True,
@@ -685,6 +694,19 @@ def write_stats(per_source, run_id, configured_sources=0, article_stats=None,
         totals["article_persistence_ok"] = False
     # C1B §十七：事件级聚类指标（一稿一事件 → 同一事件可多来源印证）
     totals["event_clustering"] = cluster_stats or {"applied": False}
+    # C2B §三/§六：采集收尾写统一时间契约（data_as_of = processed_through）
+    try:
+        from ops.time_contract import write_contract as _tc_write, refresh_derived_snapshots as _tc_sync
+        _now_iso = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        _tc_write(root=ROOT, run_id=run_id, processed_through=_now_iso,
+                  source="stage3_collect_v2.processed_through")
+        _tc_state = _tc_sync(root=ROOT, run_id=run_id)
+        print("  TIME_CONTRACT: data_as_of=%s (%s) touched=%s"
+              % (_tc_state.get("data_as_of"), _tc_state.get("status"),
+                 ",".join(_tc_state.get("touched") or [])))
+    except Exception as _e:  # noqa: BLE001
+        print("  ! time_contract write failed: %s" % _e)
+
     # C1C-V：墙钟预算使用情况（受控验证可复核）
     totals["wall_clock"] = {
         "limit_seconds": _wall_clock_limit_seconds,

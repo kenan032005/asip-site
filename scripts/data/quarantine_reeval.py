@@ -103,20 +103,28 @@ def is_reprocessable(entry, *, rule_change_at, window_start, window_end,
 
 
 def relevance_reprocessable(entry, *, rule_change_at, window_start, window_end,
-                            approved_domains, hold_time=None):
-    """not_security_relevant：只有葡语内容（葡语词表在本轮之前发生实质变化）才允许重判。"""
+                            approved_domains, hold_time=None, current_version="v2"):
+    """not_security_relevant 的可重判条件。
+
+    C2B §十九：relevance 分类器发生**实质变化**（v1 → v2 多语言词表）后，
+    允许把 14 日窗口内、由**旧版本**分类器产生的 relevance hold 用当前分类器重判。
+    仍必须满足：窗口内 + 已批准域名 + 产生于规则变更时刻之前。
+
+    v1 兼容：早期 hold 记录没有 classifier_version 字段，视为 v1。
+    """
     if entry.get("reason_code") != "not_security_relevant":
         return False, "NOT_A_RELEVANCE_HOLD"
+    ver = str(entry.get("classifier_version") or "v1")
+    if ver == current_version:
+        return False, "PRODUCED_UNDER_CURRENT_CLASSIFIER"
     det = _dt(entry.get("detected_at"))
-    if det is None or det >= rule_change_at:
-        return False, "PRODUCED_UNDER_CURRENT_RULES"
-    blob = " ".join(str(entry.get(k) or "") for k in ("title", "url", "reason_cn"))
-    lp = entry.get("legacy_payload") or {}
-    blob += " " + " ".join(str(lp.get(k) or "") for k in ("title_original", "title_cn", "language"))
-    if not re.search(r"\b(pt|portugu[eê]s|portuguese)\b", blob, re.I):
-        return False, "NO_MATERIAL_RULE_CHANGE_FOR_THIS_LANGUAGE"
+    if det is not None and det >= rule_change_at:
+        # 规则变更之后由旧分类器产生的情况不应存在；保守拒绝
+        return False, "PRODUCED_AFTER_RULE_CHANGE"
     t = hold_time if hold_time is not None else hold_content_time(entry)
-    if t is None or not (window_start <= t <= window_end):
+    if t is None:
+        return False, "NO_CONTENT_TIME"
+    if not (window_start <= t <= window_end):
         return False, "OUTSIDE_BACKFILL_WINDOW"
     if hold_domain(entry) not in approved_domains:
         return False, "DOMAIN_NOT_APPROVED"

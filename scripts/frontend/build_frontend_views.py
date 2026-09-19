@@ -410,8 +410,27 @@ DATA_AS_OF_FIELDS = ("last_successful_collection", "last_daily_report",
 
 
 def resolve_data_as_of(data_dir=None):
-    """Production processing cutoff（确定性，来自 state；缺失则 fallback canonical.updated_at）。"""
+    """Production processing cutoff（确定性，来自 state；缺失则 fallback canonical.updated_at）。
+
+    C2B §三–§六：优先走统一时间契约（scripts/ops/time_contract.py），
+    并在 source 里显式带上状态（EXPLICIT / FALLBACK_CANONICAL /
+    UNAVAILABLE_EXPLICIT_FALLBACK）——**绝不静默用墙钟冒充 data_as_of**。
+    """
     base = Path(data_dir) if data_dir else (ROOT / "data")
+    try:
+        sys.path.insert(0, str(ROOT / "scripts"))
+        from ops.time_contract import resolve as _tc_resolve, STATUS_EXPLICIT
+        iso, tc_src, tc_status = _tc_resolve(ROOT if data_dir is None else Path(data_dir).parent.parent)
+        if tc_status == STATUS_EXPLICIT and iso:
+            dt = _as_dt(iso)
+            if dt:
+                return dt, "%s[%s]" % (tc_src, tc_status)
+        if tc_status != STATUS_EXPLICIT and iso:
+            dt = _as_dt(iso)
+            if dt:
+                return dt, "%s[%s]" % (tc_src, tc_status)
+    except Exception:
+        pass
     cutoff, src = None, None
     try:
         st = json.loads((base / "runtime" / "ops" / "production_state.json").read_text(encoding="utf-8"))
@@ -433,9 +452,12 @@ def resolve_data_as_of(data_dir=None):
         try:
             can = json.loads((base / "canonical" / "event_clusters.json").read_text(encoding="utf-8"))
             dt = datetime.fromisoformat(str(can.get("updated_at")).replace("Z", "+00:00"))
-            cutoff, src = dt, "canonical.updated_at"
+            cutoff, src = dt, "canonical.updated_at[FALLBACK_CANONICAL]"
         except Exception:
             pass
+    if cutoff is None:
+        # 显式不可用：不伪造、不用墙钟
+        src = "UNAVAILABLE_EXPLICIT_FALLBACK"
     return cutoff, src
 
 
@@ -464,7 +486,13 @@ def _as_dt(value):
 
 
 def _time_contract(data_as_of_dt, latest_event, generated_at, extra=None):
+    _st = "EXPLICIT"
+    if extra and "UNAVAILABLE" in str(extra):
+        _st = "UNAVAILABLE_EXPLICIT_FALLBACK"
+    elif extra and "FALLBACK" in str(extra):
+        _st = "FALLBACK_CANONICAL"
     out = {
+        "data_as_of_status": _st,
         "data_as_of": data_as_of_dt.isoformat() if data_as_of_dt else None,
         "data_as_of_bj": bj_fmt(data_as_of_dt.isoformat()) if data_as_of_dt else None,
         "data_as_of_source": extra,

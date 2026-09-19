@@ -197,29 +197,31 @@ class QuarantineReevalTest(unittest.TestCase):
             self.assertFalse(ok)
             self.assertEqual(why, "TRUE_SAFETY_HOLD_NEVER_RELEASED")
 
-    def test_09_relevance_hold_not_reprocessed_without_rule_change(self):
-        """not_security_relevant：无实质规则变化（非葡语）时保留原 hold"""
-        e = self._entry("not_security_relevant", "2026-07-28T18:24:22Z",
-                        published="2026-09-10T03:00:00Z", language="fr")
-        ok, why = relevance_reprocessable(e, rule_change_at=RULE_CHANGE, window_start=W0,
-                                          window_end=W1, approved_domains=self.APPR)
-        self.assertFalse(ok)
-        self.assertEqual(why, "NO_MATERIAL_RULE_CHANGE_FOR_THIS_LANGUAGE")
-        # 葡语内容（C1C 补了葡语词表）才允许重判
-        e2 = self._entry("not_security_relevant", "2026-07-28T18:24:22Z",
-                         url="https://cartamz.com/2026/09/10/a",
-                         published="2026-09-10T03:00:00Z", language="pt")
-        ok2, why2 = relevance_reprocessable(e2, rule_change_at=RULE_CHANGE, window_start=W0,
-                                            window_end=W1,
-                                            approved_domains=self.APPR | {"cartamz.com"})
-        self.assertTrue(ok2, why2)
-        # 由当前规则产生的 hold 不得翻案
-        e3 = self._entry("wrong_country", "2026-09-18T01:00:00Z",
+    def test_09_relevance_hold_reprocessed_only_after_classifier_change(self):
+        """not_security_relevant：只有在分类器发生**实质变化**（v1→v2）后才允许重判；
+        当前版本产生的 hold 不得翻案。"""
+        # v1 时代的 hold（无 classifier_version 字段）+ 窗口内 + 已批准域名 → 允许重判
+        e1 = self._entry("not_security_relevant", "2026-07-28T18:24:22Z",
+                         published="2026-09-10T03:00:00Z", language="fr")
+        ok1, why1 = relevance_reprocessable(e1, rule_change_at=RULE_CHANGE, window_start=W0,
+                                            window_end=W1, approved_domains=self.APPR)
+        self.assertTrue(ok1, why1)
+        # 当前版本（v2）产生的 hold → 拒绝
+        e2 = self._entry("not_security_relevant", "2026-09-18T01:00:00Z",
                          published="2026-09-10T03:00:00Z")
-        ok3, why3 = is_reprocessable(e3, rule_change_at=RULE_CHANGE, window_start=W0,
-                                     window_end=W1, approved_domains=self.APPR)
+        e2["classifier_version"] = "v2"
+        ok2, why2 = relevance_reprocessable(e2, rule_change_at=RULE_CHANGE, window_start=W0,
+                                            window_end=W1, approved_domains=self.APPR)
+        self.assertFalse(ok2)
+        self.assertEqual(why2, "PRODUCED_UNDER_CURRENT_CLASSIFIER")
+        # 域名未批准 → 拒绝（不扩到全部历史/非批准来源）
+        e3 = self._entry("not_security_relevant", "2026-07-28T18:24:22Z",
+                         url="https://not-approved.example/2026/09/10/a",
+                         published="2026-09-10T03:00:00Z")
+        ok3, why3 = relevance_reprocessable(e3, rule_change_at=RULE_CHANGE, window_start=W0,
+                                            window_end=W1, approved_domains=self.APPR)
         self.assertFalse(ok3)
-        self.assertEqual(why3, "PRODUCED_UNDER_CURRENT_RULES")
+        self.assertEqual(why3, "DOMAIN_NOT_APPROVED")
 
     def test_10_hold_content_time_from_url_path(self):
         """无显式时间时，可从 URL 的 /YYYY/MM/DD/ 路径取得内容真实日期"""
@@ -328,10 +330,13 @@ class MetricsInvariantTest(unittest.TestCase):
         s = density_summary(rows)
         self.assertEqual(s["DAYS_TOTAL"], 14)
         self.assertEqual(density_gate(rows), "FAIL")
-        good = [{"NEWS_COUNT": 25, "PUBLISHER_COUNT": 6, "COUNTRY_COUNT": 5}] * 14
+        # C2B §三十二 务实 Gate
+        good = [{"NEWS_COUNT": 21, "PUBLISHER_COUNT": 6, "COUNTRY_COUNT": 5}] * 14
         self.assertEqual(density_gate(good), "PASS")
-        ok = [{"NEWS_COUNT": 16, "PUBLISHER_COUNT": 5, "COUNTRY_COUNT": 4}] * 14
-        self.assertEqual(density_gate(ok), "CONDITIONAL_PASS")
+        cond = [{"NEWS_COUNT": 19, "PUBLISHER_COUNT": 5, "COUNTRY_COUNT": 4}] * 14
+        self.assertEqual(density_gate(cond), "CONDITIONAL_PASS")
+        thin = [{"NEWS_COUNT": 5, "PUBLISHER_COUNT": 2, "COUNTRY_COUNT": 2}] * 14
+        self.assertEqual(density_gate(thin), "FAIL")
 
     def test_16_timeline_news_counts_match_news_stream(self):
         """Timeline 的每日事件计数与 News Stream 逐日计数必须来自同一事实链
