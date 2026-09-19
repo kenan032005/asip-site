@@ -24,7 +24,9 @@ import time
 PROMPT_VERSION = "localization-batch-v1"
 SCHEMA_VERSION = "localization-v1"
 BATCH_MIN, BATCH_MAX = 8, 12
-DEFAULT_MODEL = "deepseek-v4-flash"
+#: C3R2 §二：canonical 模型标识（DeepSeek V4.1 Flash）。
+#: 遗留别名 deepseek-v4-flash 仍被 provider 接受并归一化到此值。
+DEFAULT_MODEL = "deepseek-flash"
 
 STATUS_NOT_REQUIRED = "NOT_REQUIRED"
 STATUS_PENDING = "PENDING"

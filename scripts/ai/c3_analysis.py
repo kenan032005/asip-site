@@ -27,7 +27,8 @@ SCHEMA_VERSION = "c3-analysis-v1"
 PROMPT_VERSION = "event-intelligence-v1"
 COUNTRY_PROMPT_VERSION = "country-intelligence-v1"
 HOMEPAGE_PROMPT_VERSION = "homepage-analysis-v1"
-DEFAULT_MODEL = "deepseek-v4-flash"
+#: C3R2 §二：canonical 模型标识（DeepSeek V4.1 Flash）；遗留别名仍被接受。
+DEFAULT_MODEL = "deepseek-flash"
 
 STATUS_FULL = "FULL"
 STATUS_FALLBACK = "FALLBACK"
