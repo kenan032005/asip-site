@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ASIP安全情报知识库 · 微型样板 V0.2</title>
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/css/intelligence.css">
+</head>
+<body data-intel-page="index">
+<div id="topbar"></div>
+<main class="intel-shell">
+  <div id="intelError" class="intel-error" hidden></div>
+  <section class="intel-hero">
+    <div><span class="intel-overline">ASIP · AFRICA SECURITY INTELLIGENCE</span><h1>非洲安全情报知识库<br><strong>微型样板 V0.2</strong></h1><p>在同一套可追溯实体与关系数据上，使用三层圈层关系图、重要程度筛选（L1/L2/L3）和百科式实体档案验证正式产品展示形态。</p></div>
+    <div class="intel-hero-actions"><a class="intel-button" href="network/">进入动态关系图 →</a><a class="intel-button ghost" href="entity/jnim/">查看 JNIM 完整档案</a></div>
+  </section>
+  <section class="intel-stat-grid"><div><b id="entityCount">—</b><span>个样板实体</span></div><div><b id="relationshipCount">—</b><span>条可追溯关系</span></div><div><b id="sourceCount">—</b><span>个公开来源</span></div><div><b>2026-08-06</b><span>数据最后核验</span></div></section>
+  <section class="intel-section"><div class="intel-section-title"><span>重要程度</span><div><h2>L1 核心 · L2 重要 · L3 扩展</h2><p>重要程度仅供平台内部排序，不代表官方认定；它与图谱的内圈/中圈/外圈视觉布局相互独立。</p></div></div><div id="importanceStats" class="intel-importance-stats">加载中…</div></section>
+  <section class="intel-section"><div class="intel-section-title"><span>01</span><div><h2>核心实体</h2><p>先从一个中心实体开始，再沿一度关系探索。</p></div></div><div id="coreCard"></div></section>
+  <section class="intel-section"><div class="intel-section-title"><span>02</span><div><h2>样板实体索引</h2><p>组织、人物和国家共享同一实体数据层，并以L1、L2、L3标记重要程度，内容深度按L1/L2/L3档案等级展开。</p></div></div><div id="entityCards" class="intel-card-grid"></div></section>
+  <section class="intel-section"><div class="intel-section-title"><span>03</span><div><h2>关系图预览</h2><p>点击任一实体即可将它移动到图中央，并刷新直接关系。</p></div></div><div class="intel-preview-wrap"><div id="networkPreview" class="intel-preview"></div><div class="intel-preview-copy"><h3>动态中心关系图</h3><p>初始焦点为 JNIM。图谱只加载当前实体的一度关系，避免把微型样板误解为完整数据库。节点按结构与地理、组织与力量、人物三层圈层布局，重要程度筛选与圈层完全独立。</p><a class="intel-button sm" href="network/">打开完整图谱</a></div></div></section>
+  <section class="intel-section"><div class="intel-section-title"><span>04</span><div><h2>来源与可信度</h2><p>只保留事实摘要和来源链接，不复制大段原文；权威来源确认的事实、多来源支持的分析、单一机构评估与平台判断分开呈现。</p></div></div><div id="sourceNotes" class="intel-source-notes"></div></section>
+</main><footer class="site"></footer>
+<script src="../../assets/js/intelligence/intelligence.js"></script>
+</body></html>
