@@ -24,6 +24,10 @@ on:
         description: "14 日窗口结束（YYYY-MM-DD）"
         required: false
         default: "2026-09-18"
+      mode:
+        description: "full | summary_only | c3f_incremental（C3F-R 用 c3f_incremental）"
+        required: false
+        default: "c3f_incremental"
       batch_size:
         description: "每次调用处理的新闻条数（8-12）"
         required: false
@@ -150,6 +154,7 @@ jobs:
             --window-start "${{ inputs.window_start || '2026-09-05' }}" \
             --window-end "${{ inputs.window_end || '2026-09-18' }}" \
             --batch-size "${{ inputs.batch_size || '10' }}" \
+            --mode "${{ inputs.mode || 'c3f_incremental' }}" \
             $( [ "${{ inputs.force_home }}" = "true" ] && echo --force-home ) \
             --out run1.json
           cp run1.json c3_run_report_run1.json
@@ -163,6 +168,7 @@ jobs:
             --window-start "${{ inputs.window_start || '2026-09-05' }}" \
             --window-end "${{ inputs.window_end || '2026-09-18' }}" \
             --batch-size "${{ inputs.batch_size || '10' }}" \
+            --mode "${{ inputs.mode || 'c3f_incremental' }}" \
             --out run2.json
           cp run2.json c3_run_report_run2.json
           python - <<'PY'

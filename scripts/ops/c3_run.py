@@ -168,11 +168,15 @@ def main():
 
     # ── 1) Localization ──────────────────────────────────────────────
     mode = a.mode
-    if mode == "summary_only":
+    # C3F-R §三：c3f_incremental = 只补缺失摘要 + 仅当 fact pack hash 变化才重跑 Homepage，
+    # 且**显式跳过** Event / Country 分析（它们的 fact pack 本轮未变，召回即违规）。
+    incremental = (mode == "c3f_incremental")
+    if mode in ("summary_only", "c3f_incremental"):
         targets = [i for i in items if L.needs_summary_only(i)]
     else:
         targets = [i for i in items if L.needs_localization(i)]
-    summary_mode = (mode == "summary_only")
+    summary_mode = mode in ("summary_only", "c3f_incremental")
+    skip_analysis = incremental
     stats["localization"]["mode"] = mode
     stats["localization"]["target"] = len(targets)
     batches = L.build_batches(targets, a.batch_size)
@@ -329,6 +333,10 @@ def main():
 
     # ── 5) Event intelligence（只 multi-source）──────────────────────
     ev_full = ev_fb = ev_low = 0
+    if skip_analysis:
+        stats["event"] = {"full": 0, "fallback": 0, "low_data": 0,
+                          "skipped": "c3f_incremental (fact pack unchanged)"}
+        clusters = []          # 不进入 Event 分析循环
     for c in clusters:
         if not A.event_is_analyzable(c):
             continue
@@ -385,11 +393,13 @@ def main():
     # ── 6) Country intelligence ─────────────────────────────────────
     c_full = c_fb = c_low = 0
     by_country = {}
+    if skip_analysis:
+        countries = []         # 不进入 Country 分析循环
     for i in items:
         cn = i.get("country_cn")
         if cn:
             by_country.setdefault(cn, []).append(i)
-    for cn, rows in sorted(by_country.items()):
+    for cn, rows in ([] if skip_analysis else sorted(by_country.items())):
         pack = A.build_country_fact_pack(cn, rows, data_as_of=data_as_of)
         low, why_low = A.country_is_low_data(pack)
         h = A.pack_hash(pack)
@@ -449,7 +459,9 @@ def main():
                                data_as_of=data_as_of)
             c_full += 1
     stats["country"] = {"full": c_full, "fallback": c_fb, "low_data": c_low,
-                        "countries": len(by_country)}
+                        "countries": len(by_country),
+                        **({"skipped": "c3f_incremental (fact pack unchanged)"}
+                           if skip_analysis else {})}
 
     # ── 7) Homepage intelligence（fact pack hash + cooldown）─────────
     # C3R2：CI 环境没有 dist/，优先读 data/views/site_overview.json（随分支提交），
@@ -520,6 +532,12 @@ def main():
     _rej = localized_fallback
     _pf = localized_failed
     _unsafe = 0
+    stats["summary_only"] = {
+        "target": len(targets) if summary_mode else 0,
+        "full": localized_full if summary_mode else 0,
+        "fallback": localized_fallback if summary_mode else 0,
+        "failed": localized_failed if summary_mode else 0,
+    }
     stats["localization_pipeline"] = {
         "status": L.pipeline_status(_acc, 0, _rej, _pf, _unsafe),
         "ITEMS_ACCEPTED": _acc, "ITEMS_PARTIAL": 0,
