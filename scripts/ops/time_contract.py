@@ -178,6 +178,22 @@ def refresh_derived_snapshots(root=None, run_id=None):
         d["updated_at"] = iso
         mp.write_text(json.dumps(d, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         touched.append("data/public/current_metrics.json")
+    # C3R2-PRE §二：public 派生快照必须与 canonical 真值的 run_id / data_as_of 一致。
+    # published_events.json 也是派生公开视图，同样从唯一契约刷新。
+    pp = root / "data" / "public" / "published_events.json"
+    if pp.exists():
+        try:
+            d = json.loads(pp.read_text(encoding="utf-8"))
+        except Exception:  # noqa: BLE001
+            d = {}
+        d["data_as_of"] = iso
+        d["data_as_of_status"] = status
+        d["data_as_of_source"] = src
+        if rid:
+            d["run_id"] = rid
+        d["generated_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        pp.write_text(json.dumps(d, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        touched.append("data/public/published_events.json")
     return {"data_as_of": iso, "source": src, "status": status, "touched": touched}
 
 

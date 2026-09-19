@@ -29,6 +29,7 @@
 """
 import os
 import re
+import time
 import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -76,6 +77,8 @@ EX_MALFORMED_TITLE = "EXCLUDED_MALFORMED_NO_TITLE"
 EX_MALFORMED_BODY = "EXCLUDED_MALFORMED_NO_CONTENT"
 EX_OUT_OF_SCOPE = "EXCLUDED_OUT_OF_SCOPE"
 EX_SAFETY_HOLD = "EXCLUDED_SAFETY_HOLD"
+# C3R2-PRE §三：非文章页（栏目/列表/搜索/Feed/作者…）不得作为 Article 正文进入
+EX_NON_ARTICLE = "EXCLUDED_NON_ARTICLE_PAGE"
 EX_DUPLICATE_URL = "EXCLUDED_DUPLICATE_URL"
 EX_DUPLICATE_CONTENT = "EXCLUDED_DUPLICATE_CONTENT"
 EX_SCHEMA_INVALID = "EXCLUDED_SCHEMA_INVALID"
@@ -83,6 +86,9 @@ EX_BAD_RUN_ID = "BLOCKED_NON_COMPLIANT_RUN_ID"
 
 #: article.schema.json 的 run_id 约束（ASIP 唯一合法格式）
 RUN_ID_RE = re.compile(r"^\d{8}T\d{6}\+0800_[a-z0-9]{6}$")
+
+
+from data.article_url_admission import admit_article_url  # noqa: E402
 
 
 def _src_url_of(article):
@@ -185,6 +191,10 @@ def _classify(a, seen_urls, seen_hashes, quarantined_urls):
     nurl = normalize_url(raw_url)
     if not nurl:
         return EX_BAD_URL, "", ""
+    # C3R2-PRE §三：确定性文章页准入（只按路径结构判定，不做语义猜测）
+    ok_url, url_reason = admit_article_url(raw_url)
+    if not ok_url:
+        return EX_NON_ARTICLE, nurl, ""
     title = (a.get("original_title") or "").strip()
     if not title:
         return EX_MALFORMED_TITLE, nurl, ""
@@ -265,6 +275,14 @@ def persist_collected_articles(root, articles, run_id, verbose=True):
                     quarantined_urls.add(n)
         except Exception:
             pass
+    non_article_rejects = []
+    for a in articles:
+        _u = (a.get("canonical_url") or a.get("article_url") or "")
+        _ok, _reason = admit_article_url(_u)
+        if not _ok:
+            non_article_rejects.append({"url": _u, "reason": _reason,
+                                        "source_id": a.get("source_id") or "",
+                                        "run_id": run_id})
     for a in articles:
         if a.get("_quarantine_reason"):
             n = normalize_url(a.get("canonical_url") or a.get("article_url") or "")
@@ -327,6 +345,10 @@ def persist_collected_articles(root, articles, run_id, verbose=True):
         "store_after": len(repo.load_articles()),
         "excludes": excludes,
         "excluded_total": sum(excludes.values()),
+        # C3R2-PRE §三：非文章页拒绝的审计账本（明确留证，不进正文集合）
+        "non_article_rejections": non_article_rejects,
+        "non_article_rejected_total": len(non_article_rejects),
+        "article_url_admission": "data/article_url_admission.admit_article_url",
         "repo_log": log,
     }
     if verbose:
@@ -335,6 +357,29 @@ def persist_collected_articles(root, articles, run_id, verbose=True):
                  log.get("modified", 0), log.get("skipped", 0), log.get("failed", 0)))
         if excludes:
             print("[article-persist] excludes: %s" % excludes)
+    if non_article_rejects:
+        try:
+            import json as _json
+            import os as _os
+            led = _os.path.join(root, "data", "audit", "article_url_rejections.json")
+            _os.makedirs(_os.path.dirname(led), exist_ok=True)
+            cur = {}
+            if _os.path.exists(led):
+                try:
+                    cur = _json.load(open(led, encoding="utf-8"))
+                except Exception:
+                    cur = {}
+            entries = cur.get("entries") or []
+            entries.extend(non_article_rejects)
+            cur = {"schema": "article-url-rejections-v1",
+                   "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                   "reason_codes": ["NON_ARTICLE_PAGE", "NON_ARTICLE_PAGE_HOMEPAGE",
+                                    "NON_ARTICLE_PAGE_SCHEME"],
+                   "entries": entries[-500:]}
+            with open(led, "w", encoding="utf-8") as f:
+                _json.dump(cur, f, ensure_ascii=False, indent=1)
+        except Exception:
+            pass
     return stats
 
 
