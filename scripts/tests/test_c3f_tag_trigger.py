@@ -110,8 +110,10 @@ class ModeResolutionTest(unittest.TestCase):
         self.assertNotIn("--mode \"${{ inputs.mode || 'full' }}\"", src)
         self.assertNotIn('--mode "${{ inputs.mode }}"', src)
         # 两处 c3_run 都必须用解析后的变量
-        self.assertEqual(src.count('--mode "$C3F_MODE"'), 2,
-                         "run1/run2 都必须使用解析后的 mode")
+        # 解析后的 mode 必须被真实调用方使用：两处 c3_run 调用 + 模式感知的输入审计
+        self.assertGreaterEqual(src.count('--mode "$C3F_MODE"'), 2)
+        self.assertIn("python -m scripts.ops.c3_input_audit --root . --mode \"$C3F_MODE\"", src)
+        self.assertIn("--mode \"$C3F_MODE\"", src)
 
     def test_06_tag_trigger_refuses_full_mode(self):
         src = text()

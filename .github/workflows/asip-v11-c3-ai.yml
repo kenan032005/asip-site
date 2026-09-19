@@ -117,48 +117,14 @@ jobs:
         with:
           python-version: "3.13"
 
-      - name: Input audit — no stub / simulation / debug input may reach real AI
+      - name: Input audit — mode-aware (prior real AI state is not contamination)
         run: |
           set -euo pipefail
-          python - <<'PY'
-          import json, os, sys
-          bad = []
-          # 本机 stub 产物只存在于 c2_work/isolated，绝不允许出现在 CI 检出中
-          for p in ("c2_work", "c2_work/isolated"):
-              if os.path.exists(p):
-                  bad.append(p)
-          ai = "data/intelligence/ai"
-          n_art = 0
-          if os.path.isdir(ai):
-              for s in os.listdir(ai):
-                  d = os.path.join(ai, s)
-                  if os.path.isdir(d):
-                      n_art += len([f for f in os.listdir(d) if f.endswith(".json")])
-          hp = os.path.join(ai, "homepage_analysis", "current.json")
-          if os.path.exists(hp):
-              rec = json.load(open(hp, encoding="utf-8"))
-              # 首轮真实运行前，仓库里不应存在任何 status=FULL 的陈旧 artifact
-              if rec.get("status") == "FULL":
-                  bad.append("stale FULL artifact: %s" % hp)
-          arts = json.load(open("data/canonical/articles.json", encoding="utf-8"))
-          items = arts.get("items") or []
-          in_win = sum(1 for x in items
-                       if "2026-09-05" <= (x.get("published_at") or "")[:10] <= "2026-09-18")
-          print("articles            =", len(items))
-          print("articles in window  =", in_win)
-          print("pre-existing AI artifacts =", n_art)
-          if not items:
-              bad.append("empty authoritative article store")
-          if in_win == 0:
-              bad.append("no in-window articles: wrong corpus for the leadership window")
-          if bad:
-              print("STUB_AI_INPUT_CONTAMINATION > 0")
-              for b in bad:
-                  print("  -", b)
-              sys.exit(1)
-          print("STUB_AI_INPUT_CONTAMINATION = 0")
-          print("AUTHORITATIVE_INPUT = OK")
-          PY
+          # C3F：审计语义随 C3F_MODE 变化。
+          #  - full            ：严格政策，不得带任何既有 AI 产物
+          #  - c3f_incremental ：允许经过验证的历史真实 AI 产物作为 prior state，
+          #                      但 stub / simulation / unknown provenance 依旧 fail closed
+          python -m scripts.ops.c3_input_audit --root . --mode "$C3F_MODE"
 
       - name: DeepSeek qualification (minimal, no secret output)
         env:

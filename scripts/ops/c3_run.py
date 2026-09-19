@@ -218,7 +218,8 @@ def main():
                                    source_fact_refs=[nid], data_as_of=data_as_of,
                                    # 凭据缺失不是内容问题：一旦补齐凭据应当自动重试
                                    extra={"retryable": True, "blocked_reason": why})
-                localized_fallback += 1
+                # 凭据缺失 = provider 不可用（不是 fact gate 拒绝），指标必须如实归类
+                localized_failed += 1
             continue
         if not to_call:
             continue          # 全部命中缓存：不得发起任何 API 调用
