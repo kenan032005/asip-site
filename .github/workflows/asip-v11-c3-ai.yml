@@ -38,7 +38,9 @@ on:
         default: "false"
   push:
     tags:
+      # 只有这两个具名前缀能触发真实 AI；**不得**放宽成 "*"
       - "c3r2-real-ai-*"
+      - "c3f-real-ai-*"
 
 permissions:
   contents: write
@@ -64,10 +66,13 @@ jobs:
             echo "REFUSED: branch ${GITHUB_REF} is not ${TARGET_BRANCH}"
             exit 1
           fi
-          if [[ "${GITHUB_REF}" == refs/tags/* && "${GITHUB_REF}" != refs/tags/c3r2-real-ai-* ]]; then
-            echo "REFUSED: tag ${GITHUB_REF} is not a c3r2-real-ai-* one-shot trigger"
-            exit 1
-          fi
+          # 具名一次性触发前缀（必须与 on.push.tags 的列表保持一致）
+          case "${GITHUB_REF}" in
+            refs/tags/c3r2-real-ai-*|refs/tags/c3f-real-ai-*) ;;
+            refs/tags/*)
+              echo "REFUSED: tag ${GITHUB_REF} is not a registered one-shot trigger"
+              exit 1 ;;
+          esac
           echo "GUARD = PASS"
 
       - name: Checkout v11-resume-after-v1.0
@@ -76,6 +81,25 @@ jobs:
           ref: v11-resume-after-v1.0
           fetch-depth: 1
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Resolve AI mode (tag trigger has no inputs)
+        id: mode
+        run: |
+          set -euo pipefail
+          # tag push 事件里 inputs 为空；必须显式落到 c3f_incremental，
+          # 绝不能因为 inputs.mode 缺失而回退成 full（那会重跑全部 localization/event/country）。
+          RAW="${{ github.event.inputs.mode }}"
+          MODE="${RAW:-c3f_incremental}"
+          echo "C3F_MODE=$MODE" >> "$GITHUB_ENV"
+          echo "RESOLVED_AI_MODE = $MODE"
+          case "$MODE" in
+            full|summary_only|c3f_incremental) ;;
+            *) echo "UNKNOWN_MODE=$MODE"; exit 1 ;;
+          esac
+          # tag 触发 = 增量场景：拒绝 full
+          if [ "${GITHUB_REF}" != "refs/heads/${TARGET_BRANCH}" ] && [ "$MODE" = "full" ]; then
+            echo "FULL_MODE_REFUSED_FOR_TAG_TRIGGER"; exit 1
+          fi
 
       - name: Secret presence check (name only)
         env:
@@ -154,7 +178,7 @@ jobs:
             --window-start "${{ inputs.window_start || '2026-09-05' }}" \
             --window-end "${{ inputs.window_end || '2026-09-18' }}" \
             --batch-size "${{ inputs.batch_size || '10' }}" \
-            --mode "${{ inputs.mode || 'c3f_incremental' }}" \
+            --mode "$C3F_MODE" \
             $( [ "${{ inputs.force_home }}" = "true" ] && echo --force-home ) \
             --out run1.json
           cp run1.json c3_run_report_run1.json
@@ -168,7 +192,7 @@ jobs:
             --window-start "${{ inputs.window_start || '2026-09-05' }}" \
             --window-end "${{ inputs.window_end || '2026-09-18' }}" \
             --batch-size "${{ inputs.batch_size || '10' }}" \
-            --mode "${{ inputs.mode || 'c3f_incremental' }}" \
+            --mode "$C3F_MODE" \
             --out run2.json
           cp run2.json c3_run_report_run2.json
           python - <<'PY'
