@@ -189,9 +189,15 @@ def main():
         to_call = []
         for it, k in zip(batch, bkeys):
             rec = ART.read_artifact(root, "localization", k)
+            # 缓存命中：input_hash 一致且不是「可重试的 provider 失败」。
+            # C3F §四：summary-only 下"缺摘要"不再无条件重试——若该条目是**终态负缓存**
+            # （gate 确定性拒绝），必须直接复用，否则 Run2 会对同一个 FALLBACK 再次调用 provider，
+            # 破坏 SECOND_IDENTICAL_RUN_AI_CALLS = 0。
+            _negative = rec and L.is_negative_cached(rec)
             if (rec and rec.get("input_hash") == L.content_hash(it)
                     and not rec.get("retryable")
-                    and not (summary_mode and not (rec.get("summary_cn") or "").strip())):
+                    and not (summary_mode and not (rec.get("summary_cn") or "").strip()
+                             and not _negative)):
                 cached[k] = rec
             else:
                 to_call.append(it)
@@ -470,7 +476,7 @@ def main():
     # C3F §五：Homepage Fact Pack 由**统一装配函数**生成，确保前端算出的
     # homepage_fact_pack_hash 与 AI artifact 记录的 fact_pack_hash 同源可比。
     hpack = A.build_homepage_fact_pack_from_views(root)
-    hhash = A.pack_hash(hpack)
+    hhash = A.pack_hash(A.stable_pack_projection(hpack))
     prev_h = ART.read_artifact(root, "homepage_analysis", "current")
     fresh_enough = False
     if prev_h and prev_h.get("generated_at"):

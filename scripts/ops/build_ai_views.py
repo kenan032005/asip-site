@@ -193,7 +193,9 @@ def build(root, out_path=None):
         sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                         "..", "ai"))
         import c3_analysis as _A
-        cur_hash = _A.pack_hash(_A.build_homepage_fact_pack_from_views(root))
+        _pack = _A.build_homepage_fact_pack_from_views(root)
+        # 一致性契约使用稳定投影（剔除滚动窗口等墙钟敏感字段）
+        cur_hash = _A.pack_hash(_A.stable_pack_projection(_pack))
     except Exception:  # noqa: BLE001
         cur_hash = None
     if hp_pub is not None:

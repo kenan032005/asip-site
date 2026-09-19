@@ -45,6 +45,28 @@ ALLOWED_KEYS_SUMMARY_ONLY = {"news_id", "summary_cn"}
 MODE_FULL = "full"
 MODE_SUMMARY_ONLY = "summary_only"
 
+#: C3F §四/§六：终态负缓存原因 —— 这些是**确定性的安全拒绝**，
+#: 完全相同的输入再次运行时必须直接复用，绝不重新调用 provider。
+TERMINAL_NEGATIVE_REASONS = (
+    "PRESERVATION_GATE_FAIL",
+    "FACT_GATE_REJECTED",
+    "PRESERVATION_GATE_REJECTED",
+    "SCHEMA_FAILURE",
+)
+
+
+def is_negative_cached(rec):
+    """该 artifact 是否为「完全同输入的终态负缓存」条目。
+
+    注意：不得把它与"provider 失败可重试"混淆——provider 失败写的是 retryable=True。
+    """
+    if not isinstance(rec, dict):
+        return False
+    reason = str(rec.get("fallback_reason") or "")
+    return (rec.get("status") == STATUS_FALLBACK
+            and reason in TERMINAL_NEGATIVE_REASONS
+            and not rec.get("retryable"))
+
 SYSTEM_PROMPT = """你是新闻本地化引擎，只做中文翻译与简明摘要。
 严格规则：
 1. 只输出 JSON，形如 {"items":[{"news_id":"...","title_cn":"...","summary_cn":"..."}]}

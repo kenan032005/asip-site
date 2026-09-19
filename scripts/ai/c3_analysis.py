@@ -26,6 +26,22 @@ BJ = timezone(timedelta(hours=8))
 SCHEMA_VERSION = "c3-analysis-v1"
 #: C3F §五：Homepage Fact Pack 版本（参与 hash，任何结构变更都要升版本）
 HOMEPAGE_FACT_PACK_VERSION = "homepage-fact-pack-v1"
+
+#: C3F：参与 fact pack hash 的**稳定投影**键。
+#: 滚动窗口计数（news_24h）会随墙钟推进而变化，把它计入 hash 会让任何 AI 分析在数小时内
+#: 变"过期"，从而被前端永久隐藏。因此 hash 只覆盖在**同一数据快照内**稳定的输入。
+STABLE_HASH_DROP_KEYS = ("news_24h",)
+
+
+def stable_pack_projection(pack):
+    """返回用于一致性契约的稳定投影（剔除墙钟敏感字段）。"""
+    import copy
+    p = copy.deepcopy(pack)
+    k = p.get("kpis")
+    if isinstance(k, dict):
+        for d in STABLE_HASH_DROP_KEYS:
+            k.pop(d, None)
+    return p
 PROMPT_VERSION = "event-intelligence-v1"
 COUNTRY_PROMPT_VERSION = "country-intelligence-v1"
 HOMEPAGE_PROMPT_VERSION = "homepage-analysis-v1"
@@ -266,6 +282,7 @@ def build_homepage_fact_pack_from_views(root):
 
     pack = build_homepage_fact_pack(kpis, countries, top_events, reports[:8], data_as_of)
     pack["fact_pack_version"] = HOMEPAGE_FACT_PACK_VERSION
+    pack["stable_hash_projection"] = list(STABLE_HASH_DROP_KEYS)
     china = rd("data/views/china_interest.json", {}) or {}
     china_facts = china.get("items") or china.get("exposures") or []
     if china_facts:
