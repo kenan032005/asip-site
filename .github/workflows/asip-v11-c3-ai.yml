@@ -144,7 +144,7 @@ jobs:
           ASIP_DEEPSEEK_API_KEY: ${{ secrets.ASIP_DEEPSEEK_API_KEY }}
         run: |
           set -euo pipefail
-          python scripts/ops/c3_run.py \
+          python -m scripts.ops.c3_run \
             --root . \
             --provider auto \
             --window-start "${{ inputs.window_start || '2026-09-05' }}" \
@@ -159,7 +159,7 @@ jobs:
           ASIP_DEEPSEEK_API_KEY: ${{ secrets.ASIP_DEEPSEEK_API_KEY }}
         run: |
           set -euo pipefail
-          python scripts/ops/c3_run.py --root . --provider auto \
+          python -m scripts.ops.c3_run --root . --provider auto \
             --window-start "${{ inputs.window_start || '2026-09-05' }}" \
             --window-end "${{ inputs.window_end || '2026-09-18' }}" \
             --batch-size "${{ inputs.batch_size || '10' }}" \
@@ -176,7 +176,7 @@ jobs:
       - name: Build public AI view
         run: |
           set -euo pipefail
-          python scripts/ops/build_ai_views.py --root .
+          python -m scripts.ops.build_ai_views --root .
 
       - name: Scoped commit-back (whitelist + guard)
         id: commit

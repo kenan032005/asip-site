@@ -24,22 +24,30 @@ import time
 from collections import Counter
 from datetime import datetime, timedelta, timezone
 
-W = r"C:\Users\kenan\WorkBuddy\2026-09-12-05-20-26"
-REPO = r"C:\Users\kenan\WorkBuddy\clean\asip-v11-resume"
-ISO = os.path.join(W, "c2_work", "isolated")
+# C3R2-IMPORT：仓库根目录**从本文件位置推导**，禁止硬编码开发机路径。
+# 旧版本把开发机绝对路径写死，在 GitHub Actions 里 sys.path 全部指向不存在的目录，
+# 于是 `import c3_localization` 直接 ModuleNotFoundError（CI Real run 1 的失败原因）。
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 BJ = timezone(timedelta(hours=8))
 
-sys.path.insert(0, os.path.join(REPO, "scripts"))
-sys.path.insert(0, os.path.join(REPO, "scripts", "data"))
-sys.path.insert(0, os.path.join(REPO, "scripts", "ops"))
-sys.path.insert(0, os.path.join(REPO, "scripts", "ai"))
-sys.path.insert(0, os.path.join(REPO, "scripts", "ai", "providers"))
-sys.path.insert(0, os.path.join(REPO, "scripts", "collectors"))
-sys.path.insert(0, os.path.join(REPO, "scripts", "clustering"))
+# 本仓库需要路径可见的模块目录（data / collectors / clustering / ai.providers 目前不是包）。
+# 全部由 ROOT 推导，跨机器一致；C3 自身模块改走下面的 package-qualified import。
+for _d in ("", "scripts", "scripts/data", "scripts/ops", "scripts/ai",
+           "scripts/ai/providers", "scripts/collectors", "scripts/clustering"):
+    _p = os.path.join(ROOT, _d)
+    if os.path.isdir(_p) and _p not in sys.path:
+        sys.path.insert(0, _p)
 
-import c3_localization as L          # noqa: E402
-import c3_analysis as A              # noqa: E402
-import c3_artifacts as ART           # noqa: E402
+# C3 模块：package-qualified 优先（repo root 与 python -m 都稳定），
+# 回退扁平导入以兼容既有的 `python scripts/ops/c3_run.py` 调用方式。
+try:                                                    # noqa: E402
+    from scripts.ai import c3_localization as L         # noqa: E402
+    from scripts.ai import c3_analysis as A             # noqa: E402
+    from scripts.ai import c3_artifacts as ART          # noqa: E402
+except ImportError:                                     # pragma: no cover
+    import c3_localization as L                         # noqa: E402
+    import c3_analysis as A                             # noqa: E402
+    import c3_artifacts as ART                          # noqa: E402
 
 
 def rd(p, d=None):
@@ -101,7 +109,10 @@ def provider_ready(provider):
     if getattr(provider, "name", "") == "stub":
         return True, "stub"
     try:
-        from ai.providers.deepseek_v4_flash import credential_available
+        try:
+            from scripts.ai.providers.deepseek_v4_flash import credential_available
+        except ImportError:
+            from ai.providers.deepseek_v4_flash import credential_available
         if not credential_available():
             return False, "credential_missing"
     except Exception:  # noqa: BLE001
@@ -112,14 +123,15 @@ def provider_ready(provider):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--root", default=ISO)
+    ap.add_argument("--root", default=os.environ.get("ASIP_C3_ROOT", ROOT))
     ap.add_argument("--provider", default="auto")
     ap.add_argument("--window-start", default="2026-09-05")
     ap.add_argument("--window-end", default="2026-09-18")
     ap.add_argument("--batch-size", type=int, default=10)
     ap.add_argument("--home-cooldown-hours", type=float, default=4.0)
     ap.add_argument("--force-home", action="store_true")
-    ap.add_argument("--out", default=os.path.join(W, "c3_run_report.json"))
+    ap.add_argument("--out", default=os.path.join(
+        os.environ.get("ASIP_C3_OUT_DIR", os.getcwd()), "c3_run_report.json"))
     a = ap.parse_args()
     root = a.root
 
