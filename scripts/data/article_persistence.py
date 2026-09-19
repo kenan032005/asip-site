@@ -255,6 +255,10 @@ def persist_collected_articles(root, articles, run_id, verbose=True):
             import json as _json
             qd = _json.load(open(q_path, encoding="utf-8"))
             for q in (qd.get("items") or []):
+                # C2 §七：已被正式释放（重判通过）的 hold 不再构成安全拦截，
+                # 否则「释放」会被自己的历史 hold 记录立即挡回，成为空操作。
+                if str(q.get("review_status") or "").lower() in ("released", "restored"):
+                    continue
                 u = q.get("original_id") or q.get("url")
                 n = normalize_url(u) if u else ""
                 if n:

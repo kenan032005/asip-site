@@ -316,6 +316,8 @@ def build(live_dir, internal_dir, out_root, now=None):
             "linked_event_id": a.get("linked_event_id") or art2ev.get(a.get("article_id")),
             "quarantined": a.get("article_id") in q_ids or norm_url(url) in q_urls,
             "news_status": "signal",
+            # C2：历史回填标记透传到 news stream（供 14 日密度矩阵区分 backfill / live）
+            "historical_backfill": bool(a.get("historical_backfill")),
         }
         cand["dedup_key"] = sha1("u", norm_url(url)) if norm_url(url) else sha1(
             "t", c2, norm_text(cand["title_original"] or cand["title_cn"]), str(t)[:10])
