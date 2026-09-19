@@ -180,8 +180,36 @@ jobs:
 
       - name: Scoped commit-back (whitelist + guard)
         id: commit
+        if: always()
         run: |
           set -euo pipefail
+          # 无论成功与否都写一条**最小**运行状态记录（属于 AI artifact 层，不含 secret /
+          # 不含 raw model response / 不含 prompt 正文），便于事后在分支上核对运行结果。
+          python - <<'PY'
+          import json, os, time
+          d = os.path.join("data", "intelligence", "ai", "runs")
+          os.makedirs(d, exist_ok=True)
+          def rd(p):
+              try: return json.load(open(p, encoding="utf-8"))
+              except Exception: return {}
+          r1, r2 = rd("c3_run_report_run1.json"), rd("c3_run_report_run2.json")
+          rec = {
+              "schema_version": "c3-ci-status-v1",
+              "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+              "job_status": os.environ.get("JOB_STATUS", "unknown"),
+              "run1_present": bool(r1), "run2_present": bool(r2),
+              "run1": {k: r1.get(k) for k in (
+                  "status", "model", "data_as_of", "ai_calls_total",
+                  "ai_calls_localization", "ai_calls_event", "ai_calls_country",
+                  "ai_calls_homepage", "cache_hits", "cache_misses",
+                  "news_per_localization_call", "localization", "event",
+                  "country", "homepage", "gates")},
+              "run2_ai_calls_total": r2.get("ai_calls_total"),
+          }
+          with open(os.path.join(d, "ci_status.json"), "w", encoding="utf-8") as f:
+              json.dump(rec, f, ensure_ascii=False, indent=1)
+          print("ci_status written")
+          PY
           git config user.name  "asip-c3-bot"
           git config user.email "asip-c3-bot@users.noreply.github.com"
           WHITELIST=(
