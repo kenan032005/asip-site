@@ -16,11 +16,18 @@ import json
 import os
 import sys
 
+# C3R2-IMPORT：仓库根从本文件推导（禁止硬编码开发机路径），
+# C3 模块走 package-qualified import，扁平导入仅作兼容回退。
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-sys.path.insert(0, os.path.join(REPO, "scripts"))
-sys.path.insert(0, os.path.join(REPO, "scripts", "ai"))
+for _d in ("", "scripts", "scripts/ai"):
+    _p = os.path.join(REPO, _d)
+    if os.path.isdir(_p) and _p not in sys.path:
+        sys.path.insert(0, _p)
 
-import c3_artifacts as ART  # noqa: E402
+try:                                              # noqa: E402
+    from scripts.ai import c3_artifacts as ART    # noqa: E402
+except ImportError:                               # pragma: no cover
+    import c3_artifacts as ART                    # noqa: E402
 
 PUBLIC_FIELDS = ("status", "executive_assessment", "trend_analysis", "outlook",
                  "watch_points", "summary_cn", "significance", "trend_signal")
