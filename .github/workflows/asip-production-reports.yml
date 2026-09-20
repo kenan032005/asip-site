@@ -23,6 +23,14 @@ on:
         required: false
         type: boolean
         default: false
+      report_mode:
+        description: "daily | weekly（weekly = Africa Weekly + enabled Country Weekly）"
+        required: false
+        type: choice
+        default: daily
+        options:
+          - daily
+          - weekly
   schedule:
     - cron: '0 12 * * *'
     - cron: '45 22 * * 6'
@@ -90,6 +98,24 @@ jobs:
           [ "$RUN_AI" = "true" ] && AI_FLAG=""
           python scripts/ops/reports_run.py --mode tcd_weekly --source $SRC $AI_FLAG
           python scripts/ops/reports_run.py --mode ssd_weekly --source $SRC $AI_FLAG
+
+      - name: Weekly mode — Africa Weekly + enabled Country Weekly
+        if: ${{ (github.event_name == 'schedule' && github.event.schedule == '45 22 * * 6') || inputs.report_mode == 'weekly' }}
+        run: |
+          # Africa Weekly 与 Country Weekly 共用同一 week identity（Sunday→Sunday，闭区间），
+          # 且只生成 config 里 enabled 的国家（不做动态 TOP5）。
+          python -m scripts.report.materialize --root . --days 14 || true
+          python - <<'PY'
+          import json, os, sys
+          sys.path.insert(0, ".")
+          from scripts.report import materialize as M
+          from scripts.report import factory as F
+          plan = F.plan_report_backfill(".", days=14)
+          print("WEEKLY_TARGET =", plan["WEEKLY_TARGET"])
+          print("ENABLED_PRIORITY_COUNTRIES =", plan["ENABLED_PRIORITY_COUNTRIES"])
+          print("COUNTRY_WEEKLY_TARGET =", plan["COUNTRY_WEEKLY_TARGET"])
+          print("MAJOR_BRIEF_AUTO_PUBLICATION =", F.MAJOR_BRIEF_AUTO_PUBLICATION)
+          PY
 
       - name: Commit state → production-state branch
         run: |

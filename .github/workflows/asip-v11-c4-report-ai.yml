@@ -1,0 +1,187 @@
+name: ASIP V1.1 C4-C — Report AI Enrichment (server-side, non-production)
+
+# C4-C §十九/§二十：报告 AI enrichment 在 GitHub runner 内运行，真实 key 仅 server-side。
+# 触发：
+#   * workflow_dispatch        人工（mode 默认 report_backfill）
+#   * push tag c4-report-backfill-*  一次性可审计触发（§十九 指定命名）
+#
+# 边界（§一/§十五/§二十七）：
+#   * 只作用于 v11-resume-after-v1.0；不碰 main / gh-pages / production-state / Cloudflare；
+#   * Major Brief auto-publication 恒为 false；
+#   * commit-back 走白名单 + staged 路径守卫（复用 Unicode-safe guard）。
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "report_backfill | daily | weekly"
+        required: false
+        default: "report_backfill"
+      limit:
+        description: "最多处理多少份（留空=按 target planner）"
+        required: false
+        default: ""
+  push:
+    tags:
+      - "c4-report-backfill-*"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: asip-v11-c4-report-ai
+  cancel-in-progress: false
+
+env:
+  TARGET_BRANCH: v11-resume-after-v1.0
+  ASIP_DEEPSEEK_BASE_URL: https://api.deepseek.com
+  ASIP_REPORT_PROVIDER: deepseek
+
+jobs:
+  report_ai:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Guard — only v11-resume-after-v1.0
+        run: |
+          set -euo pipefail
+          if [[ "${GITHUB_REF}" == refs/heads/* && "${GITHUB_REF}" != "refs/heads/${TARGET_BRANCH}" ]]; then
+            echo "REFUSED: ${GITHUB_REF}"; exit 1; fi
+          case "${GITHUB_REF}" in
+            refs/tags/c4-report-backfill-*) ;;
+            refs/tags/*) echo "REFUSED: tag ${GITHUB_REF}"; exit 1 ;;
+          esac
+          echo "GUARD = PASS"
+
+      - name: Resolve mode (tag events carry no inputs)
+        id: mode
+        run: |
+          set -euo pipefail
+          RAW="${{ github.event.inputs.mode }}"
+          MODE="${RAW:-report_backfill}"
+          echo "C4C_MODE=$MODE" >> "$GITHUB_ENV"
+          echo "RESOLVED_REPORT_MODE = $MODE"
+          case "$MODE" in
+            report_backfill|daily|weekly) ;;
+            *) echo "UNKNOWN_MODE=$MODE"; exit 1 ;;
+          esac
+          # tag 触发必须是增量回填，禁止意外落到全量/其它模式
+          if [ "${GITHUB_REF}" != "refs/heads/${TARGET_BRANCH}" ] && [ "$MODE" != "report_backfill" ]; then
+            echo "TAG_TRIGGER_REQUIRES_report_backfill"; exit 1
+          fi
+
+      - name: Checkout v11-resume-after-v1.0
+        uses: actions/checkout@v4
+        with:
+          ref: v11-resume-after-v1.0
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Secret presence check (name only)
+        env:
+          ASIP_DEEPSEEK_API_KEY: ${{ secrets.ASIP_DEEPSEEK_API_KEY }}
+        run: |
+          if [ -z "${ASIP_DEEPSEEK_API_KEY:-}" ]; then
+            echo "ASIP_DEEPSEEK_API_KEY = MISSING"; exit 1; fi
+          echo "ASIP_DEEPSEEK_API_KEY = PRESENT"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Target planner (read-only)
+        run: python -m scripts.report.report_ai --root . --plan-only
+
+      - name: Run 1 — report AI enrichment
+        env:
+          ASIP_DEEPSEEK_API_KEY: ${{ secrets.ASIP_DEEPSEEK_API_KEY }}
+        run: |
+          set -euo pipefail
+          ARGS=""
+          if [ -n "${{ github.event.inputs.limit }}" ]; then ARGS="--limit ${{ github.event.inputs.limit }}"; fi
+          python -m scripts.report.report_ai --root . $ARGS --out run1.json
+
+      - name: Run 2 — identical input must make zero AI calls (§十)
+        env:
+          ASIP_DEEPSEEK_API_KEY: ${{ secrets.ASIP_DEEPSEEK_API_KEY }}
+        run: |
+          set -euo pipefail
+          python -m scripts.report.report_ai --root . --out run2.json
+          python - <<'PY'
+          import json
+          r1 = json.load(open("run1.json", encoding="utf-8"))
+          r2 = json.load(open("run2.json", encoding="utf-8"))
+          print("RUN1_AI_CALLS =", r1.get("AI_CALLS_TOTAL"))
+          print("SECOND_IDENTICAL_RUN_AI_CALLS =", r2.get("AI_CALLS_TOTAL"))
+          assert r2.get("AI_CALLS_TOTAL") == 0, "idempotency violated"
+          print("IDEMPOTENCY = PASS")
+          PY
+
+      - name: Rebuild report artifacts / index / public views (§十一)
+        run: |
+          set -euo pipefail
+          python -m scripts.report.materialize --root . --days 14
+          python -m scripts.ops.build_ai_views --root . || true
+          python -m scripts.build_site --run-id "20260920T090000+0800_c4c" >/dev/null 2>&1 || true
+
+      - name: Scoped commit-back (whitelist + guard)
+        id: commit
+        if: always()
+        run: |
+          set -euo pipefail
+          git config user.name  "asip-c4c-bot"
+          git config user.email "asip-c4c-bot@users.noreply.github.com"
+          WHITELIST=(
+            "data/reports/"
+            "data/views/report_index.json"
+          )
+          for p in "${WHITELIST[@]}"; do
+            if [ -e "$p" ]; then git add -A -- "$p"; fi
+          done
+          git diff --cached --name-only -z > staged_paths.txt
+          python - <<'PY'
+          import subprocess, sys
+          r = subprocess.run(["git","diff","--cached","--name-only","-z","--no-renames"],
+                             capture_output=True)
+          paths = [p for p in r.stdout.decode("utf-8","surrogateescape").split("\0") if p]
+          WL = ("data/reports/", "data/views/report_index.json")
+          bad = [p for p in paths if not p.startswith(WL)]
+          prod = [p for p in paths if p.startswith(("data/runtime/ops/","data/audit/","data/public/"))]
+          print("STAGED_FILES = %d" % len(paths))
+          print("OUT_OF_WHITELIST_COUNT = %d" % len(bad))
+          print("PRODUCTION_WRITE_PATHS = %d" % len(prod))
+          if bad or prod:
+              for b in bad[:5]: print("  OUT-OF-WHITELIST:", b)
+              sys.exit(1)
+          PY
+          if [ -s staged_paths.txt ]; then
+            git commit -q -m "data(v1.1): materialize report intelligence"
+            echo "AI_DATA_COMMIT = $(git rev-parse --short HEAD)"
+            echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          else
+            echo "AI_DATA_COMMIT = NONE"
+            echo "commit_sha=" >> "$GITHUB_OUTPUT"
+          fi
+          rm -f staged_paths.txt
+
+      - name: Push commit-back to v11-resume-after-v1.0 only
+        if: steps.commit.outputs.commit_sha != ''
+        run: |
+          git push origin "HEAD:refs/heads/${TARGET_BRANCH}"
+          echo "REMOTE_HEAD = $(git ls-remote origin refs/heads/${TARGET_BRANCH} | cut -f1)"
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: asip-v11-c4c-report-ai
+          path: |
+            run1.json
+            run2.json
+            data/reports/**
+          if-no-files-found: warn
+
+      - name: Non-production guarantee
+        if: always()
+        run: echo "PRODUCTION_CHANGED = false (no gh-pages / no production-state / no orchestrator dispatch)"
