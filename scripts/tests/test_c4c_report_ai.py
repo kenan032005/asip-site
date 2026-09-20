@@ -244,6 +244,71 @@ class PolicyAndSafetyTest(unittest.TestCase):
             shutil.rmtree(t, ignore_errors=True)
 
 
+class ReportPackHashContractTest(unittest.TestCase):
+    """§三 长期 hash 契约：墙钟字段不得影响 hash；真实事实变化必须影响 hash。"""
+
+    def _base(self):
+        return {"report_id": "WEEKLY_TCD_20260913", "report_type": "country_weekly",
+                "report_date": "2026-09-13", "period": {"start": "2026-09-06",
+                                                        "end": "2026-09-13"},
+                "social_facts": [{"fact_id": "E1", "headline_zh": "事件一",
+                                  "source_refs": ["srcA"]}],
+                "numeric_provenance": {"2026": ["report_date"], "12": ["generated_at"]}}
+
+    def test_a_report_pack_hash_ignores_generated_at(self):
+        a = self._base(); a["generated_at"] = "2026-09-20T09:00:00+08:00"
+        b = self._base(); b["generated_at"] = "2026-09-20T23:59:59+08:00"
+        self.assertEqual(F.report_pack_hash(a), F.report_pack_hash(b))
+
+    def test_b_report_pack_hash_ignores_built_at(self):
+        a = self._base(); a["built_at"] = "2026-09-20T09:00:00+08:00"
+        b = self._base(); b["built_at"] = "2026-09-21T10:00:00+08:00"
+        self.assertEqual(F.report_pack_hash(a), F.report_pack_hash(b))
+
+    def test_c_report_pack_hash_ignores_now(self):
+        a = self._base(); a["now"] = "2026-09-20T09:00:00+08:00"
+        b = self._base(); b["now"] = "2027-01-01T00:00:00+08:00"
+        self.assertEqual(F.report_pack_hash(a), F.report_pack_hash(b))
+
+    def test_d_report_pack_hash_ignores_cutoff_runtime_metadata(self):
+        a = self._base(); a["cutoff"] = "2026-09-13T20:00:00+08:00"
+        a["runtime"] = {"cache_hit": True}
+        b = self._base(); b["cutoff"] = "2026-09-13T20:19:54+08:00"
+        b["runtime"] = {"cache_hit": False}
+        self.assertEqual(F.report_pack_hash(a), F.report_pack_hash(b))
+
+    def test_e_report_pack_hash_ignores_wallclock_numeric_provenance(self):
+        a = self._base()
+        a["numeric_provenance"] = {"2026": ["report_date"], "12": ["generated_at"],
+                                   "59": ["cutoff"]}
+        b = self._base()
+        b["numeric_provenance"] = {"2026": ["report_date"], "07": ["generated_at"],
+                                   "30": ["cutoff"]}
+        self.assertEqual(F.report_pack_hash(a), F.report_pack_hash(b))
+        # 事实相关的 provenance 必须保留
+        c = self._base()
+        c["numeric_provenance"] = {"2026": ["report_date"], "12": ["generated_at"],
+                                   "24": ["social_facts.0"]}
+        self.assertNotEqual(F.report_pack_hash(a), F.report_pack_hash(c))
+
+    def test_f_report_pack_hash_changes_when_factual_content_changes(self):
+        a = self._base()
+        b = self._base()
+        b["social_facts"] = [{"fact_id": "E1", "headline_zh": "事件一（改）",
+                              "source_refs": ["srcA"]}]
+        self.assertNotEqual(F.report_pack_hash(a), F.report_pack_hash(b),
+                            "真实事实变化必须改变 hash —— 稳定不等于忽略事实")
+        c = self._base()
+        c["social_facts"] = [{"fact_id": "E1", "headline_zh": "事件一",
+                              "source_refs": ["srcA", "srcB"]}]
+        self.assertNotEqual(F.report_pack_hash(a), F.report_pack_hash(c),
+                            "来源变化也必须改变 hash")
+        d = self._base()
+        d["period"] = {"start": "2026-09-07", "end": "2026-09-13"}
+        self.assertNotEqual(F.report_pack_hash(a), F.report_pack_hash(d),
+                            "报告期变化也必须改变 hash")
+
+
 # 简写别名（避免长名字重复）
 RAII_plan = RAI.plan_targets
 RAII_enrich = RAI.enrich_one

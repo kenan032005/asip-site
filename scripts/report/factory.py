@@ -185,7 +185,8 @@ def fact_pack_hash(fact_pack):
 
 
 #: 报告 fact pack 里对墙钟敏感、**不得进入 hash** 的字段
-REPORT_WALLCLOCK_KEYS = ("generated_at", "cutoff", "built_at", "now")
+REPORT_WALLCLOCK_KEYS = ("generated_at", "cutoff", "built_at", "now",
+                         "runtime", "cache_hit", "built_at_utc", "collected_at")
 
 
 def report_pack_projection(fact_pack):
