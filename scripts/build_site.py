@@ -240,6 +240,28 @@ def _copy_production_reports(dist_root):
     return n
 
 
+def _copy_report_artifacts(dist_root):
+    """C4-B：正式 report artifacts → dist/data/reports/{daily,weekly,country_weekly}/。
+
+    report_index 的 path 字段即 data/reports/... → 与公开路径一一对应可解析。
+    """
+    src_root = os.path.join(DATA_DIR, "reports")
+    if not os.path.isdir(src_root):
+        return 0
+    n = 0
+    for sub in ("daily", "weekly", "country_weekly"):
+        src_dir = os.path.join(src_root, sub)
+        if not os.path.isdir(src_dir):
+            continue
+        dst_dir = os.path.join(dist_root, "data", "reports", sub)
+        os.makedirs(dst_dir, exist_ok=True)
+        for fn in os.listdir(src_dir):
+            if fn.endswith(".json"):
+                shutil.copy2(os.path.join(src_dir, fn), os.path.join(dst_dir, fn))
+                n += 1
+    return n
+
+
 def _copy_public_data(dist_root):
     """按白名单复制公开数据到 dist/data（sources/events 复制时脱敏）。"""
     dst_root = os.path.join(dist_root, "data")
@@ -446,6 +468,7 @@ def main(run_id=None, no_embed=False):
         shutil.copytree(REPORTS, os.path.join(DIST_NEW, "reports"))
     # Production report outputs → 公开归档
     n_prod_reports = _copy_production_reports(DIST_NEW)
+    n_prod_reports = _copy_report_artifacts(DIST_NEW)
     print(f"  生产报告归档: {n_prod_reports} 个文件")
 
     # 独立微型样板：不进入正式导航，构建为 GitHub Pages 项目路径下的静态子树

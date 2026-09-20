@@ -1031,6 +1031,22 @@ def build_china_interest(master_events, entities, countries, data_dir=None):
     }
 
 
+def _c4b_report_index():
+    """读取 report factory 的 real-only 索引（data/views/report_index.json）。"""
+    try:
+        p = ROOT / "data" / "views" / "report_index.json"
+        doc = json.loads(p.read_text(encoding="utf-8"))
+        rows = doc.get("reports") or []
+        if rows and any(r.get("report_type") in ("africa_daily", "africa_weekly",
+                                                 "country_weekly") for r in rows):
+            return {"count": doc.get("count", len(rows)), "reports": rows,
+                    "real_only": True, "generated_at": doc.get("generated_at"),
+                    "source": "c4b_report_factory"}
+    except Exception:  # noqa: BLE001
+        return None
+    return None
+
+
 def build_report_index(daily_input, weekly_inputs, brief_candidates,
                        preview_files, ops_reports_dir=None):
     """§三十：report index。只标记 status；development 阶段全为 development_sample。
@@ -1171,7 +1187,10 @@ def main():
         "disease_outbreaks": build_disease_outbreaks(disease_tls, iso2cn),
         "china_interest": build_china_interest(
             views_master_for_china, entities, countries, data_dir=str(ROOT)),
-        "report_index": build_report_index(daily_input, weekly_inputs,
+        # C4-B：若已有 report factory 生成的 real-only 索引（含 title_cn/headline/
+        # data_as_of/fact_pack_hash + report artifacts 路径），以其为准；
+        # 否则回退到既有的 runtime reports 构建（保持向后兼容）。
+        "report_index": _c4b_report_index() or build_report_index(daily_input, weekly_inputs,
                                            brief_candidates, preview_files,
                                            ops_reports_dir=str(ops_reports_dir)),
         "knowledge_summary": build_knowledge_summary(catalog, entities),
