@@ -448,7 +448,7 @@ def materialize_daily(root, target, events, disease, iso, prev_report=None):
     report["period_end"] = e.isoformat()
     report["data_as_of"] = F.data_as_of(root)
     report["latest_verified_event_time"] = _latest_verified(di)
-    report["fact_pack_hash"] = F.fact_pack_hash(fp)
+    report["fact_pack_hash"] = F.report_pack_hash(fp)
     report["input_hash"] = F.input_hash(report["report_id"], report["fact_pack_hash"],
                                         "deepseek-flash", "africa_daily")
     report["fact_count"] = nfacts
@@ -529,7 +529,7 @@ def materialize_africa_weekly(root, week, events, disease, iso):
     report["period_end"] = week["week_end"]
     report["status"] = status
     report["data_as_of"] = F.data_as_of(root)
-    report["fact_pack_hash"] = F.fact_pack_hash(fp)
+    report["fact_pack_hash"] = F.report_pack_hash(fp)
     report["input_hash"] = F.input_hash(week["report_id"], report["fact_pack_hash"],
                                         "deepseek-flash", "africa_weekly")
     report["fact_count"] = nfacts
@@ -569,7 +569,7 @@ def materialize_country_weekly(root, target, events, disease, iso):
     report["period_start"] = target["week_start"]
     report["period_end"] = target["week_end"]
     report["data_as_of"] = F.data_as_of(root)
-    report["fact_pack_hash"] = F.fact_pack_hash(fp)
+    report["fact_pack_hash"] = F.report_pack_hash(fp)
     report["input_hash"] = F.input_hash(report["report_id"], report["fact_pack_hash"],
                                         "deepseek-flash", "country_weekly")
     report["fact_count"] = nfacts

@@ -93,18 +93,18 @@ def rebuild_fact_pack(root, report):
         tgt = {"report_date": report.get("report_date") or str(report.get("period_end"))[:10],
                "report_id": report.get("report_id")}
         _rep, fp = M.materialize_daily(root, tgt, events, disease, iso)
-        return fp, F.fact_pack_hash(fp)
+        return fp, F.report_pack_hash(fp)
     if rtype == "africa_weekly":
         wk = {"report_id": report.get("report_id"), "week_start": report.get("week_start"),
               "week_end": report.get("week_end")}
         _rep, fp = M.materialize_africa_weekly(root, wk, events, disease, iso)
-        return fp, F.fact_pack_hash(fp)
+        return fp, F.report_pack_hash(fp)
     if rtype == "country_weekly":
         tgt = {"report_id": report.get("report_id"), "country_iso3": report.get("country_iso3"),
                "week_start": report.get("week_start"), "week_end": report.get("week_end"),
                "selection_reason": report.get("selection_reason")}
         _rep, fp = M.materialize_country_weekly(root, tgt, events, disease, iso)
-        return fp, F.fact_pack_hash(fp)
+        return fp, F.report_pack_hash(fp)
     return None, None
 
 
@@ -131,7 +131,7 @@ def enrich_one(root, report, provider=None, write=True, fact_pack=None):
         return out
 
     if fact_pack is not None:
-        fp, fph = fact_pack, F.fact_pack_hash(fact_pack)
+        fp, fph = fact_pack, F.report_pack_hash(fact_pack)
     else:
         fp, fph = rebuild_fact_pack(root, report)
     if fp is None:

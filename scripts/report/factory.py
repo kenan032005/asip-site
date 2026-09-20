@@ -184,6 +184,39 @@ def fact_pack_hash(fact_pack):
     return _sha(stable_projection(fact_pack))
 
 
+#: 报告 fact pack 里对墙钟敏感、**不得进入 hash** 的字段
+REPORT_WALLCLOCK_KEYS = ("generated_at", "cutoff", "built_at", "now")
+
+
+def report_pack_projection(fact_pack):
+    """报告 fact pack 的稳定投影。
+
+    真实缺陷：build_fact_pack 会把 generated_at 这类墙钟字段写进 pack（并进入
+    numeric_provenance），导致 fact_pack_hash 每次运行都不同 →
+    报告 AI 的 cache/fact-pack 一致性判定永远不命中（CI 上表现为 0 调用、0 FULL，
+    且**没有任何报错**）。因此 hash 必须基于剔除墙钟字段后的稳定投影。
+    """
+    import copy as _copy
+    p = _copy.deepcopy(fact_pack)
+    for k in REPORT_WALLCLOCK_KEYS:
+        p.pop(k, None)
+    npv = p.get("numeric_provenance")
+    if isinstance(npv, dict):
+        kept = {}
+        for n, paths in npv.items():
+            pp = [x for x in (paths or [])
+                  if not any(str(x).startswith(w) for w in REPORT_WALLCLOCK_KEYS)]
+            if pp:
+                kept[n] = pp
+        p["numeric_provenance"] = kept
+    return p
+
+
+def report_pack_hash(fact_pack):
+    """报告 fact pack 的确定性 hash（墙钟无关）。"""
+    return _sha(report_pack_projection(fact_pack))
+
+
 def input_hash(report_id, fph, model, report_type, prompt_version=PROMPT_VERSION):
     """report input_hash：id + fact pack hash + prompt + model + type。"""
     return _sha({"report_id": report_id, "fact_pack_hash": fph, "model": model,
