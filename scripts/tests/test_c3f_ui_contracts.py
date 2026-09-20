@@ -55,10 +55,11 @@ class HomepageContractTest(unittest.TestCase):
         hp = view.get("homepage") or {}
         cur = view.get("homepage_fact_pack_hash")
         self.assertTrue(cur, "view 必须暴露当前 fact pack hash")
-        # 当前已物化的 homepage artifact 早于口径修复 → 必须被判 STALE
-        self.assertFalse(hp.get("ai_matches_current_fact_pack"),
-                         "旧 artifact 的 hash 与新 fact pack 不同，必须判 STALE")
-        self.assertNotEqual(hp.get("fact_pack_hash"), cur)
+        # C3F-R / C4-A 之后：hash 契约已修复、artifact hash 已按稳定投影重导，
+        # 因此当前应为**匹配**（stale 的withheld 行为由 js 的 fresh 判定单测覆盖）。
+        self.assertTrue(hp.get("ai_matches_current_fact_pack"),
+                        "hash 契约修复后，homepage artifact 必须与当前 fact pack 一致")
+        self.assertEqual(hp.get("fact_pack_hash"), cur)
         # 判定逻辑：hash 不一致 → 前端不注入
         js = read("assets/js/ai-intelligence.js")
         self.assertIn("var fresh = !!", js)
@@ -209,9 +210,12 @@ class LocalizationStateTest(unittest.TestCase):
         for f in os.listdir(str(d)):
             if f.endswith(".json"):
                 c[jload("data/intelligence/ai/localization/" + f, {}).get("status")] += 1
-        self.assertEqual(c[L.STATUS_PARTIAL], 100, "100 条空摘要必须记为 PARTIAL")
-        self.assertEqual(c[L.STATUS_FALLBACK], 19)
-        self.assertEqual(c[L.STATUS_FULL], 437)
+        # C3F-R 的 summary-only 增量运行补齐了 91 条摘要 → PARTIAL 由 100 降为 9
+        # （若将来又出现空摘要，PARTIAL 会回升——这里断言的是「当前真实计数」而非固定值）。
+        self.assertEqual(c[L.STATUS_PARTIAL], 9, "剩余空摘要条目数")
+        self.assertEqual(c[L.STATUS_FALLBACK], 19, "gate 拒绝条目保持不变")
+        self.assertGreaterEqual(c[L.STATUS_FULL], 437)
+        self.assertEqual(c[L.STATUS_PARTIAL] + c[L.STATUS_FULL] + c[L.STATUS_FALLBACK], 556)
 
     def test_16_summary_only_does_not_regenerate_title(self):
         self.assertEqual(L.ALLOWED_KEYS_SUMMARY_ONLY, {"news_id", "summary_cn"})
@@ -246,7 +250,7 @@ class LocalizationStateTest(unittest.TestCase):
                 if (rec.get("summary_cn") or "").strip():
                     leaked += 1
         self.assertEqual(n_fb, 19, "19 条 fact-gate FALLBACK 保持不动")
-        self.assertEqual(n_partial, 100)
+        self.assertEqual(n_partial, 9, "summary 补齐后剩余 PARTIAL")
         self.assertEqual(leaked, 0, "FALLBACK 不得带文本；PARTIAL 不得带摘要")
 
     def test_18_localization_pipeline_pass_with_fallback_semantics(self):
