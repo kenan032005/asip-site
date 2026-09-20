@@ -154,12 +154,26 @@ def enrich_one(root, report, provider=None, write=True, fact_pack=None):
         return out
 
     prov = provider or P.make_provider()
-    sys_text, user_text = AC.build_analysis_prompt(fp, max_facts=12)
+    try:
+        sys_text, user_text = AC.build_analysis_prompt(fp, max_facts=12)
+    except Exception as e:  # noqa: BLE001
+        out["outcome"] = "CALLED_FALLBACK"
+        out["gate_result"] = "PROMPT_BUILD_FAILED"
+        out["error"] = "%s: %s" % (type(e).__name__, e)
+        return out
     task = {"task_id": "REPORT_AI_%s" % rid, "task_type": "report_analysis",
             "prompt_version": PROMPT_VERSION, "system_text": sys_text,
             "user_text": user_text, "usage_purpose": "report_materialization",
             "max_output_tokens": 1024}
-    res = prov.submit_task(task)
+    try:
+        res = prov.submit_task(task)
+    except Exception as e:  # noqa: BLE001
+        out["ai_call"] = 1
+        out["outcome"] = "CALLED_FALLBACK"
+        out["gate_result"] = "PROVIDER_EXCEPTION"
+        out["error"] = "%s: %s" % (type(e).__name__, str(e)[:200])
+        _persist(root, report, write, extra={"ai_last_error": out["error"]})
+        return out
     out["ai_call"] = 1
     rr = (res or {}).get("result") or {}
     raw = rr.get("text") or ""
@@ -180,7 +194,10 @@ def enrich_one(root, report, provider=None, write=True, fact_pack=None):
                                              "ai_negative_reason": "SCHEMA_FAILURE"})
         return out
 
-    ok, errs = AC.validate_analysis(parsed, fp)          # Fact / Attribution gate
+    try:
+        ok, errs = AC.validate_analysis(parsed, fp)      # Fact / Attribution gate
+    except Exception as e:  # noqa: BLE001
+        ok, errs = False, ["GATE_EXCEPTION: %s" % type(e).__name__]
     if ok:
         out["gate_result"] = "PASS"
     else:
@@ -270,8 +287,15 @@ def enrich_all(root, provider=None, write=True, limit=None, fact_pack_map=None):
             fp, _ = rebuild_fact_pack(root, rep)
         if fp:
             stats["UNATTRIBUTED_FACTS_IN_AI_FACT_PACK"] += _unattributed_in_pack(fp)
-        o = enrich_one(root, rep, provider=prov, write=write,
-                       fact_pack=(fact_pack_map or {}).get(rid))
+        try:
+            o = enrich_one(root, rep, provider=prov, write=write,
+                           fact_pack=(fact_pack_map or {}).get(rid))
+        except Exception as e:  # noqa: BLE001
+            o = {"report_id": rid, "old_status": rep.get("status"), "ai_call": 0,
+                 "gate_result": "UNEXPECTED_EXCEPTION", "new_status": rep.get("status"),
+                 "outcome": "CALLED_FALLBACK",
+                 "error": "%s: %s" % (type(e).__name__, str(e)[:200]),
+                 "report_type": rtype}
         stats["outcomes"][o["outcome"]] = stats["outcomes"].get(o["outcome"], 0) + 1
         stats["AI_CALLS_TOTAL"] += o["ai_call"]
         if o["ai_call"]:
