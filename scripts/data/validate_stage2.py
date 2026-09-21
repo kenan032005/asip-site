@@ -525,20 +525,34 @@ def main():
         except Exception:
             return ""
 
-    # ── S49 前端源码：当前模块以 Public/published_events 为唯一数据源，不读 Legacy events.json ──
+    # ── S49 前端数据源语义（C6-R1 §八：按 **真实数据源调用** 断言，不做裸子串匹配）──
+    # V1.1 架构：首页由 home-v11/report-views/news-stream/ai-intelligence 模块消费
+    # 服务端视图；events/country 由 frontend.js 消费 site_overview/country_snapshots。
+    # 契约不变量 = **任何页面不得调用 Legacy events.json 数据源**
+    #   （API.getCached("events") / loadModule("events") / API.get("events") /
+    #    "data/events.json"）。裸 `"events"` 子串会命中 DOM id 等误报，不采用。
     idx_html = _read(os.path.join(ROOT, "index.html"))
     ev_html = _read(os.path.join(ROOT, "events.html"))
     co_html = _read(os.path.join(ROOT, "country.html"))
-    idx_legacy = ('loadModule("events"' in idx_html) or ('API.getCached("events")' in idx_html)
-    ev_legacy = 'API.getCached("events")' in ev_html
-    co_legacy = 'API.getCached("events")' in co_html
-    idx_pub = ("public/published_events" in idx_html) or ("loadCurrentPublishedEvents" in idx_html)
-    ev_pub = "loadCurrentPublishedEvents" in ev_html
-    co_pub = "loadCurrentPublishedEvents" in co_html
-    frontend_ok = (not idx_legacy) and (not ev_legacy) and (not co_legacy) and idx_pub and ev_pub and co_pub
+
+    def _legacy_calls(html):
+        return [pat for pat in ('API.getCached("events")', 'loadModule("events"',
+                                'API.get("events")', '"data/events.json"')
+                if pat in html]
+
+    idx_mods_ok = all(m in idx_html for m in
+                      ("home-v11.js", "report-views.js", "news-stream.js",
+                       "ai-intelligence.js"))
+    fe = _read(os.path.join(ROOT, "assets", "js", "frontend.js"))
+    fe_srv = ('API.get("site_overview")' in fe) and ('load("country_snapshots")' in fe)
+    ev_ok = ("frontend.js" in ev_html) and fe_srv
+    co_ok = ("frontend.js" in co_html) and fe_srv
+    legacy_hits = _legacy_calls(idx_html) + _legacy_calls(ev_html) + _legacy_calls(co_html)
+    frontend_ok = idx_mods_ok and ev_ok and co_ok and not legacy_hits
     check("S49", frontend_ok,
-          "首页/最新事件/国家页当前模块以 Public/published_events 为唯一数据源，不读取 Legacy events.json"
-          + ("" if frontend_ok else "；存在 Legacy events.json 直接读取或缺少 Public 数据源"))
+          "首页/events/country 使用 V1.1 模块与前端服务端视图数据源，且无 Legacy events.json 调用"
+          + ("" if frontend_ok else "；legacy_hits=%s idx_mods=%s fe_srv=%s"
+              % (legacy_hits[:3], idx_mods_ok, fe_srv)))
 
     # ── S50 status.json 日报数量语义分离 ──
     st_doc = load(os.path.join(DATA, "status.json")) or {}
