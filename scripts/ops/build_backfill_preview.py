@@ -15,7 +15,8 @@ from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-PY = Path(r"C:/Users/kenan/.workbuddy/binaries/python/versions/3.13.12/python.exe")
+# C6-R1：解释器路径不得硬编码本机用户目录 → 用当前解释器（可被 ASIP_PY 覆盖）
+PY = Path(os.environ.get("ASIP_PY") or sys.executable)
 PREVIEW_ROOT = ROOT / "data" / "runtime" / "backfill_preview_v2"
 WORK_ROOT = ROOT / ".workbuddy_tmp"
 WORK = WORK_ROOT / "backfill_v2_build_data"

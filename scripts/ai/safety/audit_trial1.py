@@ -11,6 +11,7 @@
 import json
 import re
 import sys
+import os
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -133,7 +134,7 @@ def audit_corrections(artifact_dir, out):
 
 def main():
     artifact_dir = Path(sys.argv[1]) if len(sys.argv) > 1 else \
-        Path(r"C:/Users/kenan/WorkBuddy/2026-07-31-09-46-56/.workbuddy/tmp/trial_art")
+        Path(os.environ.get("TRIAL_ART") or os.path.join("data", "runtime", "ai_qualification"))
     out = {"trial": "Run#1 33047316124", "ai_calls": 0}
     rows = recheck_numeric(artifact_dir, out)
     audit = audit_corrections(artifact_dir, out)

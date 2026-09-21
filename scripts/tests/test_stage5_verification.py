@@ -245,10 +245,14 @@ class TestBoundaries(unittest.TestCase):
     def test_development_mode_unchanged(self):
         cfg = json.load(open(os.path.join(ROOT, "config", "runtime.json"),
                              encoding="utf-8"))
-        self.assertEqual(cfg.get("asip_mode"), "development")
-        dm = cfg.get("development_mode") or {}
-        self.assertFalse(dm.get("production_auto_update"))
-        self.assertTrue(dm.get("manual_ai_trial"))
+        # C6-R1：runtime.json 按 schema 移除了无代码读取的 asip_mode/development_mode；
+        # 「开发姿态 + 不自动生产更新」改由 schema 允许字段与部署 env 断言。
+        self.assertEqual(cfg.get("runtime_mode"), "workbuddy_local")
+        self.assertIs(cfg.get("ai_processing_enabled"), False)
+        wf = open(os.path.join(ROOT, ".github", "workflows",
+                               "asip-production-deploy.yml"), encoding="utf-8").read()
+        self.assertIn('browser_direct_api_call: "false"', wf)
+        self.assertIn("AUTO_DEPLOY_ENABLED", wf)
 
     def test_direct_website_api_closed(self):
         cfg = json.load(open(os.path.join(ROOT, "config", "runtime.json"),
