@@ -46,7 +46,15 @@ class TestFlashOnlyGate(unittest.TestCase):
     """§三：Flash-only 硬门禁。"""
 
     def test_allowlist(self):
-        self.assertEqual(ds.ALLOWED_DEEPSEEK_MODELS, frozenset({"deepseek-v4-flash"}))
+# C6-R1 §五：canonical model 已是 deepseek-flash；deepseek-v4-flash 仅为
+        # 遗留别名（LEGACY_MODEL_ALIASES），不再是 canonical 期望值。
+        self.assertEqual(ds.CANONICAL_MODEL, "deepseek-flash")
+        # 别名仍被接受（兼容输入）并归一到 canonical；非 Flash 一律拒绝
+        self.assertEqual(ds.normalize_deepseek_model("deepseek-flash"), "deepseek-flash")
+        self.assertEqual(ds.normalize_deepseek_model("deepseek-v4-flash"),
+                         "deepseek-flash")
+        self.assertIsNone(ds.normalize_deepseek_model("deepseek-v4-pro"))
+        self.assertIn("deepseek-v4-flash", ds.ALLOWED_DEEPSEEK_MODELS)
 
     def test_pro_rejected(self):
         with self.assertRaises(ds.UnsupportedDeepSeekModelError) as ctx:
@@ -60,7 +68,10 @@ class TestFlashOnlyGate(unittest.TestCase):
 
     def test_no_alias_fallback(self):
         p = ds.DeepSeekV4FlashProvider()
-        self.assertEqual(p.model, "deepseek-v4-flash")
+        self.assertEqual(p.model, "deepseek-flash")
+        # 别名输入仍被归一（不是 fallback，而是显式 alias 归一）
+        self.assertEqual(ds.DeepSeekV4FlashProvider(
+            model="deepseek-v4-flash").model, "deepseek-flash")
 
     def test_base_url_displayable(self):
         p = ds.DeepSeekV4FlashProvider()
@@ -72,8 +83,8 @@ class TestRequestModel(unittest.TestCase):
 
     def test_requested_model(self):
         p = ds.DeepSeekV4FlashProvider()
-        self.assertEqual(p.requested_model, "deepseek-v4-flash")
-        self.assertEqual(p.model, "deepseek-v4-flash")
+        self.assertEqual(p.requested_model, "deepseek-flash")
+        self.assertEqual(p.model, "deepseek-flash")
 
     def test_payload_model_flash_only(self):
         captured = {}
@@ -86,7 +97,7 @@ class TestRequestModel(unittest.TestCase):
         with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
             p.submit_task({"task_id": "T", "system_text": "s", "user_text": "u",
                            "task_type": "stage4_event_enrichment"})
-        self.assertEqual(captured["body"]["model"], "deepseek-v4-flash")
+        self.assertEqual(captured["body"]["model"], "deepseek-flash")
         self.assertEqual(captured["body"]["response_format"], {"type": "json_object"})
 
 
@@ -113,7 +124,7 @@ class TestNoCrossModelRetry(unittest.TestCase):
         self.assertEqual(res["status"], "succeeded")
         self.assertGreaterEqual(len(captured), 3)
         for body in captured:
-            self.assertEqual(body["model"], "deepseek-v4-flash",
+            self.assertEqual(body["model"], "deepseek-flash",
                              "retry 跨模型（禁止）")
 
 
@@ -161,7 +172,7 @@ class TestCredentialAndSecrets(unittest.TestCase):
             r = p.smoke()
         self.assertTrue(r["strict_json"])
         self.assertEqual(r["status_body"], {"status": "ok"})
-        self.assertEqual(r["requested_model"], "deepseek-v4-flash")
+        self.assertEqual(r["requested_model"], "deepseek-flash")
 
     def test_secret_leak_scan_repo(self):
         pats = re.compile(

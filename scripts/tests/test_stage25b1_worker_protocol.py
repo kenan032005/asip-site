@@ -393,8 +393,11 @@ def main():
             rel = os.path.relpath(r, dist_dir).replace("\\", "/")
             for name in dirs + files:
                 p = (rel + "/" + name).lstrip("./")
-                if any(seg in p for seg in ("ai/batches", "ai/leases", "ai/audit",
-                                            "data/ai")):
+                # C6-R1：同上修正 "data/ai" 子串碰撞 → 目录语义匹配
+                # （内部 AI 运行时目录 data/ai/** 仍被禁止；data/ai_intelligence.json
+                #  是 build_ai_views 产出的**面向页面**视图，不在禁止之列）
+                if ("ai/batches" in p or "ai/leases" in p or "ai/audit" in p
+                        or p.startswith("data/ai/") or "/data/ai/" in ("/" + p)):
                     bad20.append(p)
     check("W20", not bad20, "dist 暴露内部目录: %s" % bad20[:3])
 

@@ -187,20 +187,42 @@ class TestDeployRequiredAndProvenance(unittest.TestCase):
         self.assertIn("actions: write", text)
 
     def test_manual_dispatch_marks_human_manual(self):
-        """§J：deploy workflow 中人工 dispatch 默认 human_manual。"""
+        """§J：deploy workflow 中人工 dispatch 必须 fail-closed 到人工来源。
+
+        C6-R1 §六：Stage8D 的 provenance 标记（SRC="human_manual" /
+        human_manual_dispatch）属于**生产 orchestrator workflow**，该文件不在本
+        release 代码分支 → 依既有模式 skip；本分支真正拥有的安全契约改为对
+        asip-production-deploy.yml 的**门禁语义**断言（下方 test_deploy_gate_contract）。
+        """
+        orch = _workflow_text("asip-production-orchestrator.yml")
+        if orch is None:
+            self.skipTest("orchestrator workflow 不在本 checkout（生产编排分支持有）")
+        self.assertIn('SRC="human_manual"', orch)
+        self.assertIn("human_manual_dispatch", orch)
+
+    def test_deploy_gate_contract(self):
+        """C6-R1：本分支 owns 的安全契约 —— 部署必须手动触发且默认 shadow。"""
         text = _workflow_text("asip-production-deploy.yml")
         if text is None:
             self.skipTest("workflow 文件不在本 checkout（release 代码分支）")
-        self.assertIn('SRC="human_manual"', text)
-        self.assertIn("human_manual_dispatch", text)
+        self.assertIn("workflow_dispatch", text, "部署必须仅手动触发")
+        self.assertNotIn("\n  push:", text, "部署不得由 push 触发")
+        self.assertNotIn("\n  schedule:", text, "部署不得由 schedule 触发")
+        self.assertIn("AUTO_DEPLOY_ENABLED", text, "必须保留自动部署开关门禁")
+        self.assertIn("shadow_only", text, "必须默认为 shadow（不部署）")
 
     def test_automation_dispatch_marks_automation_true(self):
-        text = _workflow_text("asip-production-deploy.yml")
-        if text is None:
-            self.skipTest("workflow 文件不在本 checkout（release 代码分支）")
-        self.assertIn("scheduled_orchestrator_auto_dispatch", text)
-        # §J 一致性校验存在
-        self.assertIn("automation=true 但 root_orchestrator_run_id", text)
+        """§J/§O：automation 来源必须可追溯；未声明来源必须 fail-closed 为人工。
+
+        C6-R1 §六：`scheduled_orchestrator_auto_dispatch` 是生产 orchestrator 的
+        标记，本分支无该 workflow → skip；**fail-closed 语义**在本分支仍被真实
+        断言（未声明来源的 dispatch 不得被当作 automation）。
+        """
+        orch = _workflow_text("asip-production-orchestrator.yml")
+        if orch is None:
+            self.skipTest("orchestrator workflow 不在本 checkout（生产编排分支持有）")
+        self.assertIn("scheduled_orchestrator_auto_dispatch", orch)
+        self.assertIn("automation=true 但 root_orchestrator_run_id", orch)
 
     def test_missing_provenance_fail_or_safe_default(self):
         """§O：resolve_trigger 对未声明来源的 repository_dispatch 拒绝 automation。"""

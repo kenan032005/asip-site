@@ -67,8 +67,9 @@ class TestTrialInputs(unittest.TestCase):
 
     def test_ssd_low_data_honest(self):
         inp = build_inputs()
-        # SSD canonical 无事件 → 如实 low-data（不编造）
-        self.assertEqual(inp["stats"]["weekly_ssd_social_count"], 0)
+        # C6-R1：C5-A 修复 TD→TCD 与内容投影后，SSD 周窗口出现 1 条真实事实；
+        # 仍为 low-data（不编造、不升级），期望值随**真实数据**更新。
+        self.assertEqual(inp["stats"]["weekly_ssd_social_count"], 1)
 
 
 if __name__ == "__main__":

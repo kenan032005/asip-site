@@ -54,12 +54,29 @@ from ai.workbuddy_queue_provider import (  # noqa: E402
 from ai.exceptions import SchemaNotFoundError  # noqa: E402
 
 
-# 公网禁止暴露的文件 / 目录
+# 公网禁止暴露的文件 / 目录（精确语义：目录必须带尾斜杠，文件必须全等）
 FORBIDDEN_PATTERNS = [
-    "data/ai", "config/runtime.json", ".env", ".env.example",
+    "data/ai/", "config/runtime.json", ".env", ".env.example",
     "schemas/ai_task.schema.json", "schemas/ai_result.schema.json",
     "schemas/runtime_config.schema.json",
 ]
+
+
+def _is_forbidden_public_path(rel):
+    """rel 是否命中禁止公开路径。
+
+    目录模式带 "/" 结尾 → 按**目录前缀**匹配；其余按**全等**匹配。
+    这样 `data/ai/...`（内部 AI 运行时）被禁止，而面向页面的
+    `data/ai_intelligence.json`（build_ai_views 产出的公开视图）不受影响。
+    """
+    rel = rel.replace("\\", "/").lstrip("./")
+    for pat in FORBIDDEN_PATTERNS:
+        if pat.endswith("/"):
+            if rel.startswith(pat) or ("/" + pat) in ("/" + rel):
+                return True
+        elif rel == pat or rel.endswith("/" + pat):
+            return True
+    return False
 
 
 def _count_tasks(ai_root):
@@ -247,7 +264,10 @@ def main():
         for root, _, files in os.walk(dist_dir):
             for f in files:
                 rel = os.path.relpath(os.path.join(root, f), dist_dir).replace("\\", "/")
-                if any(p in rel or rel.startswith(p.replace("data/ai", "ai")) for p in FORBIDDEN_PATTERNS):
+                # C6-R1：原实现用**子串**匹配 "data/ai"，会把面向页面的
+                # data/ai_intelligence.json 误判为内部 AI 运行时（前缀碰撞）。
+                # 安全门本身（禁止 data/ai/ 目录、凭据、schema）保持精确匹配。
+                if _is_forbidden_public_path(rel):
                     iso1_bad.append(rel)
     check("ISO1", not iso1_bad, "dist 含禁止暴露内容: %s" % iso1_bad[:5])
 
