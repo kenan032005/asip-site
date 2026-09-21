@@ -14,6 +14,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -24,6 +25,12 @@ from scripts.report import factory as F            # noqa: E402
 from scripts.report import materialize as M        # noqa: E402
 
 NODE = os.environ.get("ASIP_NODE") or "node"
+
+#: C4-B 22 份物化契约的**冻结参考时刻**。
+#: 不传 now 时 `last_complete_week_end(now)` 取墙钟 → 周次翻转后 weekly 目标会
+#: 从 2 变 3、country weekly 从 6 变 9（而 data_as_of 仍停在 2026-09-19），
+#: 于是同一份契约在跨周后会莫名其妙飘移。测试固定参考时刻以保持确定性。
+REFERENCE_NOW = datetime(2026, 9, 20, 12, 0, tzinfo=F.BJT)
 WF = ".github/workflows/asip-v11-c3-ai.yml"
 
 
@@ -91,12 +98,12 @@ class SourcePolicyTest(unittest.TestCase):
         self.assertEqual(loaded["status"], M.STATUS_LOW_DATA)
 
     def test_05_report_source_attribution_rate_is_100_percent(self):
-        st = M.materialize_reports(str(ROOT), days=14, write=False)
+        st = M.materialize_reports(str(ROOT), days=14, now=REFERENCE_NOW, write=False)
         self.assertEqual(st["REPORT_FACT_SOURCE_ATTRIBUTION_RATE"], 100.0)
         self.assertEqual(st["REPORT_FACTS_TOTAL"], st["REPORT_FACTS_WITH_SOURCE_REFS"])
 
     def test_06_canonical_source_gap_does_not_fail_report_factory(self):
-        st = M.materialize_reports(str(ROOT), days=14, write=False)
+        st = M.materialize_reports(str(ROOT), days=14, now=REFERENCE_NOW, write=False)
         self.assertGreater(st["CANONICAL_SOURCE_IDENTITY_COVERAGE"], 0)
         self.assertLess(st["CANONICAL_SOURCE_IDENTITY_COVERAGE"], 100)
         self.assertEqual(st["DAILY_FAIL"], 0)
@@ -174,7 +181,7 @@ class MaterializationContractTest(unittest.TestCase):
         self.assertIn("os.replace(tmp, path)", src)
 
     def test_13_existing_daily_not_duplicated(self):
-        st = M.materialize_reports(str(ROOT), days=14, write=False)
+        st = M.materialize_reports(str(ROOT), days=14, now=REFERENCE_NOW, write=False)
         self.assertEqual(st["DAILY_DUPLICATES"], 0)
         self.assertEqual(st["DAILY_EXISTING_REUSED"] + st["DAILY_NEWLY_MATERIALIZED"]
                          + st["DAILY_DIRTY_REBUILT"], 14)
@@ -201,23 +208,23 @@ class MaterializationContractTest(unittest.TestCase):
         self.assertEqual(pool, [], "cutoff 之后的事件必须被排除")
 
     def test_17_daily_windows_produce_distinct_fact_sets(self):
-        st = M.materialize_reports(str(ROOT), days=14, write=False)
+        st = M.materialize_reports(str(ROOT), days=14, now=REFERENCE_NOW, write=False)
         wins = {d["period_start"] for d in st["_plan"]["DAILY_TARGET_DATES"]}
         self.assertEqual(len(wins), 14)
 
     def test_18_14_daily_targets_unique(self):
-        st = M.materialize_reports(str(ROOT), days=14, write=False)
+        st = M.materialize_reports(str(ROOT), days=14, now=REFERENCE_NOW, write=False)
         ids = [d["report_id"] for d in st["_plan"]["DAILY_TARGET_DATES"]]
         self.assertEqual(len(ids), 14)
         self.assertEqual(len(set(ids)), 14)
 
     def test_19_two_africa_weeklies_materialized(self):
-        st = M.materialize_reports(str(ROOT), days=14, write=False)
+        st = M.materialize_reports(str(ROOT), days=14, now=REFERENCE_NOW, write=False)
         self.assertEqual(st["AFRICA_WEEKLY_TARGET"], 2)
         self.assertEqual(st["AFRICA_WEEKLY_MATERIALIZED"], 2)
 
     def test_20_six_configured_country_weeklies_materialized(self):
-        st = M.materialize_reports(str(ROOT), days=14, write=False)
+        st = M.materialize_reports(str(ROOT), days=14, now=REFERENCE_NOW, write=False)
         self.assertEqual(st["COUNTRY_WEEKLY_TARGET"], 6)
         self.assertEqual(st["COUNTRY_WEEKLY_MATERIALIZED"], 6)
         isos = {c["country_iso3"] for c in st["_plan"]["COUNTRY_WEEKLY_TARGETS"]}
@@ -249,7 +256,7 @@ class MaterializationContractTest(unittest.TestCase):
         self.assertIn("data/report_index.json", js)
 
     def test_24_no_real_ai_calls_in_c4b(self):
-        st = M.materialize_reports(str(ROOT), days=14, write=False)
+        st = M.materialize_reports(str(ROOT), days=14, now=REFERENCE_NOW, write=False)
         self.assertEqual(st["REAL_AI_CALLS"], 0)
         src = (ROOT / "scripts" / "report" / "materialize.py").read_text(encoding="utf-8")
         for bad in ("submit_task", "DeepSeekV4FlashProvider", "api_key", "ASIP_DEEPSEEK"):

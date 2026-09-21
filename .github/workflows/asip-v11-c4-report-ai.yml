@@ -34,7 +34,7 @@ concurrency:
 
 env:
   TARGET_BRANCH: v11-resume-after-v1.0
-  ASIP_DEEPSEEK_BASE_URL: https://api.deepseek.com
+  ASIP_DEEPSEEK_BASE_URL: https://api.deepseek.com/v1
   ASIP_REPORT_PROVIDER: deepseek
 
 jobs:
@@ -92,6 +92,30 @@ jobs:
 
       - name: Target planner (read-only)
         run: python -m scripts.report.report_ai --root . --plan-only
+
+      - name: AI fact pack audit (§十五, read-only)
+        run: python -m scripts.report.report_ai --root . --audit-packs > packs.json
+
+      # §二十二 预检：没有任何**合法**事实可送时，绝不消耗真实 AI 调用。
+      - name: Provider boundary pre-flight (§十七)
+        run: |
+          set -euo pipefail
+          python -m scripts.report.report_ai --root . --boundary-dry-run > boundary.json
+          cat boundary.json
+          python - <<'PY'
+          import json, sys
+          b = json.load(open("boundary.json", encoding="utf-8"))
+          tgt = b["AI_TARGET_REPORTS"]; reached = b["PROVIDER_BOUNDARY_REACHED"]
+          print("AI_TARGET_REPORTS =", tgt)
+          print("PROVIDER_BOUNDARY_REACHED = %d/%d" % (reached, tgt))
+          print("SUBMIT_TASK_CALLS =", b["SUBMIT_TASK_CALLS"])
+          print("SKIPPED_EMPTY_AI_PACK =", b["SKIPPED_EMPTY_AI_PACK"])
+          if reached == 0:
+              print("NO_ELIGIBLE_AI_FACTS: 无任何通过 eligibility 的事实，拒绝发起真实 AI 调用")
+              sys.exit(1)
+          if reached < tgt:
+              print("WARN: 部分 target 无可送事实（不阻塞，但需在报告中说明）")
+          PY
 
       - name: Run 1 — report AI enrichment
         env:
@@ -179,6 +203,8 @@ jobs:
           path: |
             run1.json
             run2.json
+            packs.json
+            boundary.json
             data/reports/**
           if-no-files-found: warn
 
