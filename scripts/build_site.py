@@ -69,6 +69,7 @@ FRONTEND_VIEWS = [
     "disease_outbreaks",
     "report_index",
     "knowledge_summary",
+    "ai_intelligence",        # C5-A：Homepage 会请求该视图，此前未发布 → 404
 ]
 FRONTEND_VIEWS_DIR = os.path.join(DATA_DIR, "runtime", "frontend_preview_public")
 
@@ -93,7 +94,14 @@ def _copy_frontend_views(dist_root):
     for name in FRONTEND_VIEWS:
         src = os.path.join(FRONTEND_VIEWS_DIR, name + ".json")
         if not os.path.exists(src):
-            continue
+            # C5-A：部分视图（如 ai_intelligence）由 ops 构建器直接写入
+            # data/views/，未进入 frontend_preview_public → Homepage 请求 404。
+            # 回退到 data/views/ 作为第二来源，保证发布完整。
+            alt = os.path.join(DATA_DIR, "views", name + ".json")
+            if os.path.exists(alt):
+                src = alt
+            else:
+                continue
         shutil.copy2(src, os.path.join(dst_root, name + ".json"))
         n += 1
     return n
@@ -399,7 +407,14 @@ def load_public_db(data_dir=None):
     for name in FRONTEND_VIEWS:
         src = os.path.join(FRONTEND_VIEWS_DIR, name + ".json")
         if not os.path.exists(src):
-            continue
+            # C5-A：部分视图（如 ai_intelligence）由 ops 构建器直接写入
+            # data/views/，未进入 frontend_preview_public → Homepage 请求 404。
+            # 回退到 data/views/ 作为第二来源，保证发布完整。
+            alt = os.path.join(DATA_DIR, "views", name + ".json")
+            if os.path.exists(alt):
+                src = alt
+            else:
+                continue
         try:
             with open(src, "r", encoding="utf-8") as f:
                 db[name] = json.load(f)

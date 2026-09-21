@@ -225,19 +225,57 @@ def load_disease_items(root):
 
 
 def iso2to3_map(root):
-    """ISO2 → ISO3（country_snapshots 提供；仅用于 country_iso3 归一）。"""
+    """ISO2 → ISO3（用于 country_iso3 归一化）。
+
+    C5-A 缺陷修复：旧实现用 `iso3[:2]` 反推 ISO2 —— 对**乍得**是错的
+    （TCD[:2] = "TC"，而真实 ISO2 是 "TD"），于是 canonical 里 91 条
+    `country_code="TD"` 的事件永远归一不到 TCD，被静默排除在乍得报告/国家包之外。
+    现在优先使用权威 `config/countries/*.json` 的 `iso2`，并保留 `iso3[:2]` 兜底。
+    """
+    m = {}
     try:
         with io.open(os.path.join(str(root), "data", "views", "country_snapshots.json"),
                      encoding="utf-8") as f:
             rows = json.load(f).get("snapshots") or []
     except Exception:  # noqa: BLE001
-        return {}
-    m = {}
+        rows = []
     for r in rows:
         iso3 = (r.get("iso3") or "").upper()
         if iso3:
-            m[iso3[:2]] = iso3
+            m.setdefault(iso3[:2], iso3)
             m[iso3] = iso3
+    # 权威来源：国家配置的 iso2（覆盖 iso3[:2] 的推断错误）。
+    # 配置通常没有 iso3 字段 → 用**中文国名**与 snapshots 对齐解析 iso3。
+    cn2iso3 = {}
+    alias = {}
+    for r in rows:
+        iso3 = (r.get("iso3") or "").upper()
+        for k in ("country_cn", "cn", "country"):
+            v = r.get(k)
+            if isinstance(v, str) and v and iso3:
+                cn2iso3[v.strip()] = iso3
+    alias = {"刚果（金）": "COD", "刚果民主共和国": "COD", "刚果(金)": "COD"}
+    cfg_dir = os.path.join(str(root), "config", "countries")
+    if os.path.isdir(cfg_dir):
+        for fn in sorted(os.listdir(cfg_dir)):
+            if not fn.endswith(".json"):
+                continue
+            try:
+                with io.open(os.path.join(cfg_dir, fn), encoding="utf-8") as f:
+                    d = json.load(f)
+            except Exception:  # noqa: BLE001
+                continue
+            iso2 = str(d.get("iso2") or "").upper()
+            iso3 = str(d.get("iso3") or "").upper()
+            names = [str(d.get(k) or "").strip() for k in ("country", "country_cn", "country_en")]
+            if iso2 and not iso3:
+                iso3 = next((cn2iso3[n] for n in names if n in cn2iso3), "") or \
+                       next((alias[n] for n in names if n in alias), "")
+            if not iso3:
+                # 最后兜底：iso2 → iso3 字母序映射（BJ→BEN 不可推；TD→TCD 需配置）
+                iso3 = ""
+            if iso2 and iso3:
+                m[iso2] = iso3
     return m
 
 

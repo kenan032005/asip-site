@@ -299,10 +299,17 @@ class BoundaryAndTargetingTest(unittest.TestCase):
         两种路径都要成立：① 事实数不足阈值本就 LOW_DATA；
         ② 阈值判定为 FALLBACK 但 eligibility 后无事实 → 被**主动降级**。
         """
-        for rid in ("WEEKLY_TCD_20260913", "WEEKLY_NER_20260906"):
+        # C5-A 之后：TCD 因 ISO2→ISO3 修复（TD→TCD）已获得合法事实，
+        # 不再属于「无合法事实」；此处改用确实无事实的报告验证同一契约。
+        for rid in ("WEEKLY_SSD_20260906",):
             rep = M.read_report_artifact(str(ROOT), "country_weekly", rid)
             self.assertEqual(rep.get("status"), M.STATUS_LOW_DATA)
             self.assertEqual(rep.get("ai_eligible_fact_count"), 0)
+        tcd = M.read_report_artifact(str(ROOT), "country_weekly", "WEEKLY_TCD_20260913")
+        self.assertEqual(tcd.get("status"), M.STATUS_LOW_DATA,
+                         "事实数仍低于阈值 → 依旧 LOW_DATA（阈值未动）")
+        self.assertGreater(tcd.get("ai_eligible_fact_count") or 0, 0,
+                           "C5-A 修复后乍得报告必须获得合法事实")
         # ② 主动降级路径（用合成 report 验证，不依赖当前语料恰好处于哪一侧）
         fake_rep = {"report_id": "W_T", "report_type": "country_weekly",
                     "country_iso3": "TCD", "status": M.STATUS_FALLBACK,

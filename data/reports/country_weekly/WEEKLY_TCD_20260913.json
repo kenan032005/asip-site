@@ -1,8 +1,10 @@
 {
- "ai_eligible_fact_count": 0,
+ "ai_eligible_fact_count": 2,
  "architecture_version": "deterministic-facts-ai-analysis-v1",
  "country_iso3": "TCD",
  "coverage_notes": [
+  "source-backed event coverage is limited",
+  "41 candidate events were excluded because source identity was unavailable",
   "本报告周期内可追溯且满足筛选条件的安全信息有限，当前证据不足以形成稳定趋势判断。"
  ],
  "data_as_of": "2026-09-19T11:13:16+00:00",
@@ -53,9 +55,9 @@
   }
  ],
  "executive_assessment": "本报告基于已核验事实与确定性统计生成，本期未包含模型研判内容。",
- "fact_count": 2,
- "fact_pack_hash": "5b9e62be4450d5cdc9cc3246f99b31ffa19fd709bc9320cf4451e5cd35199ac5",
- "generated_at": "2026-09-21T11:57:02.883810+08:00",
+ "fact_count": 4,
+ "fact_pack_hash": "206c5f277505e887e8b28444bddef3a229189372394ee00295ae052e504d481f",
+ "generated_at": "2026-09-21T12:34:23.464755+08:00",
  "generation_metadata": {
   "analysis_status": "unavailable",
   "legacy_full_llm_report_contract": false,
@@ -67,8 +69,60 @@
   "report_status": "passed_quality_gate",
   "usage_purpose": "development_test"
  },
- "input_hash": "9eb7d14f1c51b495d58df1e0db57570fce86ef2fec35a174004edf2cf3bd497a",
- "major_events": [],
+ "input_hash": "006f08b1e957ce8599f2ef4193f589308a72398f6657a00c85f63f44ea2502a0",
+ "major_events": [
+  {
+   "assessment": "该事实已通过确定性核验（来源/归因/不确定性见各字段）。",
+   "conflicting": false,
+   "country_iso3": "TCD",
+   "fact_summary": null,
+   "headline_zh": "Adré : une antenne de télécommunication s’effondre en pleine zone habitée - Portail de la Renaissance du Tchad",
+   "importance_score": 0,
+   "item_id": "EVT_04792152f6d35fc6",
+   "latest_update_at": null,
+   "master_event_id": null,
+   "outlook": "AI 研判见总体分析栏目；本条目不提供独立预测。",
+   "selection_reasons": [],
+   "single_source_warning": false,
+   "source_refs": [
+    {
+     "source_id": "portail",
+     "source_name": "portail",
+     "url": null
+    },
+    {
+     "source_id": "tachad",
+     "source_name": "tachad",
+     "url": null
+    }
+   ],
+   "uncertainties": [],
+   "verification_status": "verified"
+  },
+  {
+   "assessment": "该事实已通过确定性核验（来源/归因/不确定性见各字段）。",
+   "conflicting": false,
+   "country_iso3": "TCD",
+   "fact_summary": null,
+   "headline_zh": "1er arrondissement de N'Djamena : une opération d'assainissement et de remblayage lancée à Coq-Ville et Hiriba - Tchadinfos",
+   "importance_score": 0,
+   "item_id": "EVT_f6f17d8ae50294a0",
+   "latest_update_at": null,
+   "master_event_id": null,
+   "outlook": "AI 研判见总体分析栏目；本条目不提供独立预测。",
+   "selection_reasons": [],
+   "single_source_warning": false,
+   "source_refs": [
+    {
+     "source_id": "tchadinfos",
+     "source_name": "tchadinfos",
+     "url": null
+    }
+   ],
+   "uncertainties": [],
+   "verification_status": "single_source"
+  }
+ ],
  "metrics": {
   "active_outbreak_count": 2,
   "armed_attack_count": 0,
@@ -84,14 +138,14 @@
    "new_outbreak_count": null,
    "verified_event_count": null
   },
-  "event_count": 0,
+  "event_count": 2,
   "fatalities_known": null,
   "injuries_known": null,
   "major_crime_count": 0,
-  "multi_source_event_count": 0,
+  "multi_source_event_count": 1,
   "natural_disaster_count": 0,
   "new_outbreak_count": 0,
-  "verified_event_count": 0
+  "verified_event_count": 1
  },
  "next_week_watch_items": [],
  "overall_assessment": "本报告周期内可追溯且满足筛选条件的安全信息有限，当前证据不足以形成稳定趋势判断。",
@@ -99,7 +153,7 @@
  "period_start": "2026-09-06",
  "pipeline_version": "v2",
  "political_social_stability": [],
- "report_facts_with_source_refs": 2,
+ "report_facts_with_source_refs": 4,
  "report_id": "WEEKLY_TCD_20260913",
  "report_status_cn": "数据有限",
  "report_timezone": "Asia/Shanghai",
@@ -107,15 +161,45 @@
  "schema_version": "analysis-v1.0.0",
  "security_trend": "本期事件量不足以支撑趋势判断，详见下方事实依据。",
  "selection_reason": "CONFIGURED_PRIORITY_COUNTRY",
- "source_count": 1,
+ "source_count": 4,
  "source_notes": [
   {
    "source_id": "src_0",
+   "source_name": "portail",
+   "url": null
+  },
+  {
+   "source_id": "src_1",
+   "source_name": "tachad",
+   "url": null
+  },
+  {
+   "source_id": "src_2",
+   "source_name": "tchadinfos",
+   "url": null
+  },
+  {
+   "source_id": "src_3",
    "source_name": "UNICEF UK",
    "url": null
   }
  ],
  "source_refs": [
+  {
+   "source_name": "portail",
+   "url": "https://portail.td/adre-une-antenne-de-telecommunication-seffondre-en-pleine-zone-habitee",
+   "verification": "verified"
+  },
+  {
+   "source_name": "tachad",
+   "url": "https://portail.td/adre-une-antenne-de-telecommunication-seffondre-en-pleine-zone-habitee",
+   "verification": "verified"
+  },
+  {
+   "source_name": "tchadinfos",
+   "url": "https://tchadinfos.com/2026/09/07/1er-arrondissement-de-ndjamena-une-operation-dassainissement-et-de-remblayage-lancee-a-coq-ville-et-hiriba",
+   "verification": "single_source"
+  },
   {
    "source_name": "UNICEF UK",
    "url": "https://www.unicef.org.uk/press-releases/621006/",
@@ -125,7 +209,7 @@
  "status": "LOW_DATA",
  "terrorism_armed_violence": [],
  "title": "重点国家周报（TCD）",
- "unattributed_facts_excluded": 0,
+ "unattributed_facts_excluded": 41,
  "uncertainties": [
   "跨境传播为 UNICEF 通报，未逐国给出病例数",
   "乍得儿童占感染近三分之二（UNICEF 口径），具体病例数未单独给出"

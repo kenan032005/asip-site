@@ -79,6 +79,35 @@ def verify_hashes(derived_dir=None):
     return True
 
 
+def _invoke_report_provider(provider, task):
+    """薄适配：task → provider.generate(system, user) → 归一化 {status, result}。
+
+    与 scripts/report/report_ai.invoke_report_provider 同一契约（C5-A §二十五）：
+    只用 Stage 7B 的 generate()，不复刻 HTTP/鉴权/重试，不要求 submit_task。
+    """
+    gen = getattr(provider, "generate", None)
+    if not callable(gen):
+        raise TypeError("provider %s 未实现 generate(system, user)"
+                        % type(provider).__name__)
+    raw = gen(task.get("system_text") or "", task.get("user_text") or "")
+    if isinstance(raw, dict):
+        if "status" in raw:
+            return raw
+        text = raw.get("text") if raw.get("text") is not None else raw.get("content")
+        if isinstance(text, str):
+            return {"status": "succeeded",
+                    "result": {"text": text, "returned_model": raw.get("model")}}
+        raise ValueError("provider response without text/status")
+    if isinstance(raw, (tuple, list)) and len(raw) == 2 and isinstance(raw[0], str):
+        text, meta = raw
+        meta = meta if isinstance(meta, dict) else {}
+        return {"status": "succeeded",
+                "result": {"text": text, "returned_model": meta.get("model")}}
+    if isinstance(raw, str):
+        return {"status": "succeeded", "result": {"text": raw}}
+    raise ValueError("unsupported provider response type: %s" % type(raw).__name__)
+
+
 def call_analysis(prov, fact_pack, telemetry, label):
     """单次 Simple Analysis 调用（deepseek-v4-flash, thinking disabled）。"""
     sys_text, user_text = ac.build_analysis_prompt(fact_pack)
@@ -94,7 +123,15 @@ def call_analysis(prov, fact_pack, telemetry, label):
     t = telemetry.setdefault("report_analysis", {"calls": 0, "input_tokens": 0,
                                                  "output_tokens": 0, "total_tokens": 0,
                                                  "finish_reasons": [], "thinking": []})
-    res = prov.submit_task(task)
+    # C5-A §二十五：对齐 **Stage 7B 正式 provider 契约** generate(system, user)。
+    # 旧实现调用 submit_task(task)，而 providers.py 的 provider 只实现 generate →
+    # 真实 provider 会抛 AttributeError（C4-C 的同类缺陷）。这里统一走同一适配。
+    # provider 级失败以异常表达 → 归类为 provider_failed（不冒泡成调用方崩溃）。
+    try:
+        res = _invoke_report_provider(prov, task)
+    except Exception as e:  # noqa: BLE001
+        return None, {"stage": "provider_failed", "provider_error":
+                      "%s: %s" % (type(e).__name__, str(e)[:160])}
     t["calls"] += 1
     rr = res.get("result") or {}
     t["input_tokens"] += rr.get("input_tokens") or 0
@@ -310,18 +347,17 @@ def main(argv=None):
         return 0
     # local-fake（默认）：注入非 JSON fake → 验证 fallback 路径
     class FakeProvider:
+        """只实现 **真实契约** generate(system, user) —— 不再提供假的 submit_task。"""
+
         def __init__(self, text):
             self.text = text
             self.calls = 0
             self.task_types = []
-        def submit_task(self, task):
+
+        def generate(self, system, user):
             self.calls += 1
-            self.task_types.append(task.get("task_type"))
-            return {"status": "succeeded", "result": {
-                "returned_model": "deepseek-v4-flash", "text": self.text,
-                "input_tokens": 10, "output_tokens": 20, "total_tokens": 30,
-                "finish_reason": "stop", "thinking_requested": "disabled",
-                "reasoning_tokens": None}}
+            self.task_types.append("report_analysis")
+            return self.text, {"model": "deepseek-v4-flash"}
     s = run_validation(provider=FakeProvider("not-json"))
     print("ANALYSIS_API_CALLS =", s["analysis_api_calls"])
     print(json.dumps({k: v["analysis_status"] for k, v in s["reports"].items()},

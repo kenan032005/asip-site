@@ -1,0 +1,762 @@
+{
+ "generated_by": "scripts/data/disease_contract.py",
+ "DISEASE_RECORDS_TOTAL": 20,
+ "DISEASE_WITH_SOURCE_IDENTITY": 20,
+ "DISEASE_WITHOUT_SOURCE_IDENTITY": 0,
+ "FAKE_DISEASE_SOURCE_IDS": 0,
+ "schema_fields": [
+  "disease_event_id",
+  "disease_id",
+  "disease_name_en",
+  "disease_name_zh",
+  "pathogen",
+  "country_iso3",
+  "admin1",
+  "location_raw",
+  "report_date",
+  "event_start_date",
+  "case_period_start",
+  "case_period_end",
+  "confirmed_cases",
+  "probable_cases",
+  "suspected_cases",
+  "total_cases",
+  "deaths",
+  "recoveries",
+  "case_count_type",
+  "outbreak_status",
+  "update_type",
+  "primary_source",
+  "source_links",
+  "source_tier",
+  "verification_status",
+  "uncertainties",
+  "affected_countries",
+  "cross_border"
+ ],
+ "deprecated_fields": [
+  "latest_counts",
+  "updates"
+ ],
+ "freshness": {
+  "disease_data_as_of": "2026-09-19",
+  "latest_disease_report_date": "2026-08-12",
+  "disease_age_days": 38,
+  "disease_freshness_status": "STALE",
+  "records_total": 20,
+  "freshness_thresholds": {
+   "CURRENT_MAX_DAYS": 14,
+   "STALE_MAX_DAYS": 60
+  }
+ },
+ "records": [
+  {
+   "disease_event_id": "DSEV_e7f1465c1e685ec4",
+   "disease_id": "marburg",
+   "disease_name_cn": null,
+   "disease_name_en": "Marburg",
+   "country_iso3": "ETH",
+   "location": "Jinka 镇（南埃塞俄比亚）",
+   "report_date": "2025-11-24",
+   "counts": {
+    "confirmed_cases": 10,
+    "deaths": 5
+   },
+   "outbreak_status": "active",
+   "update_type": "new_outbreak",
+   "case_count_type": "source_total",
+   "primary_source": "WHO 通报（2025-11-24 更新）",
+   "verification_status": "official",
+   "uncertainties": [
+    "另有 3 例疑似死亡、200+ 接触者"
+   ],
+   "affected_countries": [],
+   "source_ids": [
+    "who_afro"
+   ],
+   "source_names": [
+    "WHO（埃塞俄比亚 MVD）"
+   ],
+   "urls": [
+    "https://www.healthytravel.ch/country-iframe/"
+   ],
+   "identity_methods": [
+    "SOURCE_LINK_ID"
+   ],
+   "has_source_identity": true,
+   "is_active": true
+  },
+  {
+   "disease_event_id": "DSEV_a2755bd33d02595d",
+   "disease_id": "marburg",
+   "disease_name_cn": "马尔堡",
+   "disease_name_en": "Marburg Virus Disease",
+   "country_iso3": "ETH",
+   "location": "Jinka/Malle/Arba Minch/Hawassa",
+   "report_date": "2026-01-26",
+   "counts": {
+    "confirmed_cases": 14,
+    "probable_cases": 5,
+    "deaths": 14
+   },
+   "outbreak_status": "ended",
+   "update_type": "final_update",
+   "case_count_type": "source_total",
+   "primary_source": "WHO（埃塞俄比亚宣布疫情结束）",
+   "verification_status": "official",
+   "uncertainties": [
+    "deaths=14 含 9 确诊死亡 + 5 疑似死亡"
+   ],
+   "affected_countries": [],
+   "source_ids": [
+    "who_afro"
+   ],
+   "source_names": [
+    "WHO（埃塞俄比亚 MVD）"
+   ],
+   "urls": [
+    "https://www.healthytravel.ch/country-iframe/"
+   ],
+   "identity_methods": [
+    "SOURCE_LINK_ID"
+   ],
+   "has_source_identity": true,
+   "is_active": false
+  },
+  {
+   "disease_event_id": "DSEV_483c91df6b4c353c",
+   "disease_id": "cholera",
+   "disease_name_cn": null,
+   "disease_name_en": "Cholera",
+   "country_iso3": "COD",
+   "location": "全国 20 省 174 卫生区",
+   "report_date": "2026-03-22",
+   "counts": {
+    "suspected_cases": 17332,
+    "deaths": 455
+   },
+   "outbreak_status": "active",
+   "update_type": "case_update",
+   "case_count_type": "source_total",
+   "primary_source": "WHO（via ReliefWeb 报道）",
+   "verification_status": "official",
+   "uncertainties": [
+    "报告来源为 WHO 通报的二手转载，建议核对 WHO 原始 DON"
+   ],
+   "affected_countries": [],
+   "source_ids": [
+    "reliefweb"
+   ],
+   "source_names": [
+    "WHO via ReliefWeb"
+   ],
+   "urls": [
+    "https://imnews.impulsradioafrica.online/world-health-organization-reports-dr-congo-health-crises-displacement"
+   ],
+   "identity_methods": [
+    "SOURCE_LINK_ID"
+   ],
+   "has_source_identity": true,
+   "is_active": true
+  },
+  {
+   "disease_event_id": "DSEV_e1ff7d33d007ad96",
+   "disease_id": "mpox",
+   "disease_name_cn": "猴痘",
+   "disease_name_en": "Mpox",
+   "country_iso3": "COD",
+   "location": "全国 26 省 262 卫生区",
+   "report_date": "2026-03-22",
+   "counts": {
+    "suspected_cases": 10741,
+    "deaths": 122
+   },
+   "outbreak_status": "declining",
+   "update_type": "case_update",
+   "case_count_type": "source_total",
+   "primary_source": "WHO（via ReliefWeb 报道）",
+   "verification_status": "official",
+   "uncertainties": [
+    "第 12 周环比下降 20.5%，判定 declining 依据周度趋势"
+   ],
+   "affected_countries": [],
+   "source_ids": [
+    "reliefweb"
+   ],
+   "source_names": [
+    "WHO via ReliefWeb"
+   ],
+   "urls": [
+    "https://imnews.impulsradioafrica.online/dr-congo-mpox-decline-amidst-cholera-measles-outbreaks-world-health-organization/"
+   ],
+   "identity_methods": [
+    "SOURCE_LINK_ID"
+   ],
+   "has_source_identity": true,
+   "is_active": false
+  },
+  {
+   "disease_event_id": "DSEV_32e4395421a0cfc2",
+   "disease_id": "measles",
+   "disease_name_cn": "麻疹",
+   "disease_name_en": "Measles",
+   "country_iso3": "COD",
+   "location": "全国 26 省 423 卫生区",
+   "report_date": "2026-03-22",
+   "counts": {
+    "suspected_cases": 39341,
+    "deaths": 370
+   },
+   "outbreak_status": "active",
+   "update_type": "case_update",
+   "case_count_type": "source_total",
+   "primary_source": "WHO（via ReliefWeb 报道）",
+   "verification_status": "official",
+   "uncertainties": [
+    "39341 为疑似病例累计，实验室确诊数未在报道中给出"
+   ],
+   "affected_countries": [],
+   "source_ids": [
+    "reliefweb"
+   ],
+   "source_names": [
+    "WHO via ReliefWeb"
+   ],
+   "urls": [
+    "https://imnews.impulsradioafrica.online/world-health-organization-reports-dr-congo-health-crises-displacement"
+   ],
+   "identity_methods": [
+    "SOURCE_LINK_ID"
+   ],
+   "has_source_identity": true,
+   "is_active": true
+  },
+  {
+   "disease_event_id": "DSEV_835e43bd2d0b7d82",
+   "disease_id": "mpox",
+   "disease_name_cn": null,
+   "disease_name_en": "Mpox",
+   "country_iso3": "regional",
+   "location": "全球多国疫情（非洲数据截至 2026-04-19）",
+   "report_date": "2026-04-30",
+   "counts": {},
+   "outbreak_status": "monitoring",
+   "update_type": "status_change",
+   "case_count_type": "unknown",
+   "primary_source": "WHO mpox 外部形势报告 #65",
+   "verification_status": "official",
+   "uncertainties": [
+    "形势报告未在摘要给出非洲汇总数字，仅记录状态"
+   ],
+   "affected_countries": [],
+   "source_ids": [
+    "who_don"
+   ],
+   "source_names": [
+    "WHO"
+   ],
+   "urls": [
+    "https://www.who.int/publications/m/item/multi-country-outbreak-of-mpox--external-situation-report--65---30-april-2026"
+   ],
+   "identity_methods": [
+    "SOURCE_LINK_ID"
+   ],
+   "has_source_identity": true,
+   "is_active": true
+  },
+  {
+   "disease_event_id": "DSEV_20f86b15264c6d16",
+   "disease_id": "yellow_fever",
+   "disease_name_cn": "黄热病",
+   "disease_name_en": "Yellow Fever",
+   "country_iso3": "regional",
+   "location": "非洲 13 个 EYE 高风险国",
+   "report_date": "2026-05-26",
+   "counts": {
+    "confirmed_cases": 16
+   },
+   "outbreak_status": "monitoring",
+   "update_type": "case_update",
+   "case_count_type": "confirmed_only",
+   "primary_source": "WHO DON 2026-DON610",
+   "verification_status": "official",
+   "uncertainties": [
+    "16 例为 3 国（BFA/CAF/CMR）确诊，另有 5 国 32 例疑似调查中"
+   ],
+   "affected_countries": [],
+   "source_ids": [
+    "who_don"
+   ],
+   "source_names": [
+    "WHO Disease Outbreak News"
+   ],
+   "urls": [
+    "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON610"
+   ],
+   "identity_methods": [
+    "SOURCE_LINK_ID"
+   ],
+   "has_source_identity": true,
+   "is_active": true
+  },
+  {
+   "disease_event_id": "DSEV_4044139de1bafb0d",
+   "disease_id": "yellow_fever",
+   "disease_name_cn": null,
+   "disease_name_en": "Yellow Fever",
+   "country_iso3": "BFA",
+   "location": "全国",
+   "report_date": "2026-05-26",
+   "counts": {},
+   "outbreak_status": "monitoring",
+   "update_type": "case_update",
+   "case_count_type": "unknown",
+   "primary_source": "WHO DON 2026-DON610（非洲三国确诊之一）",
+   "verification_status": "official",
+   "uncertainties": [
+    "DON 未分国给出确诊数，仅列国名"
+   ],
+   "affected_countries": [],
+   "source_ids": [
+    "who_don"
+   ],
+   "source_names": [
+    "WHO Disease Outbreak News"
+   ],
+   "urls": [
+    "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON610"
+   ],
+   "identity_methods": [
+    "SOURCE_LINK_ID"
+   ],
+   "has_source_identity": true,
+   "is_active": true
+  },
+  {
+   "disease_event_id": "DSEV_a5a53c44ecc41da0",
+   "disease_id": "yellow_fever",
+   "disease_name_cn": null,
+   "disease_name_en": "Yellow Fever",
+   "country_iso3": "CAF",
+   "location": "全国",
+   "report_date": "2026-05-26",
+   "counts": {},
+   "outbreak_status": "monitoring",
+   "update_type": "case_update",
+   "case_count_type": "unknown",
+   "primary_source": "WHO DON 2026-DON610（非洲三国确诊之一）",
+   "verification_status": "official",
+   "uncertainties": [
+    "DON 未分国给出确诊数"
+   ],
+   "affected_countries": [],
+   "source_ids": [
+    "who_don"
+   ],
+   "source_names": [
+    "WHO Disease Outbreak News"
+   ],
+   "urls": [
+    "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON610"
+   ],
+   "identity_methods": [
+    "SOURCE_LINK_ID"
+   ],
+   "has_source_identity": true,
+   "is_active": true
+  },
+  {
+   "disease_event_id": "DSEV_c1b689f7cfdfb900",
+   "disease_id": "cholera",
+   "disease_name_cn": null,
+   "disease_name_en": "Cholera",
+   "country_iso3": "regional",
+   "location": "WHO 非洲区（多国）",
+   "report_date": "2026-05-29",
+   "counts": {
+    "suspected_cases": 20100,
+    "deaths": 243
+   },
+   "outbreak_status": "active",
+   "update_type": "case_update",
+   "case_count_type": "source_total",
+   "primary_source": "WHO 多国霍乱流行病学更新 #37",
+   "verification_status": "official",
+   "uncertainties": [
+    "全球 15 国口径，非洲区为最高；此处记录全球通报数字"
+   ],
+   "affected_countries": [],
+   "source_ids": [
+    "who_don"
+   ],
+   "source_names": [
+    "WHO"
+   ],
+   "urls": [
+    "https://www.who.int/publications/m/item/multi-country-outbreak-of-cholera--epidemiological-update--37--29-may-2026"
+   ],
+   "identity_methods": [
+    "SOURCE_LINK_ID"
+   ],
+   "has_source_identity": true,
+   "is_active": true
+  },
+  {
+   "disease_event_id": "DSEV_5fe8870f42f814b6",
+   "disease_id": "meningitis",
+   "disease_name_cn": "脑膜炎",
+   "disease_name_en": "Meningitis",
+   "country_iso3": "NER",
+   "location": "Agadez 大区",
+   "report_date": "2026-06-07",
+   "counts": {},
+   "outbreak_status": "active",
+   "update_type": "new_outbreak",
+   "case_count_type": "unknown",
+   "primary_source": "WHO 脑膜炎监测网络第 23 周通报",
+   "verification_status": "official",
+   "uncertainties": [
+    "疫情判定标准为发病率≥10/10万，具体病例数未给出"
+   ],
+   "affected_countries": [],
+   "source_ids": [
+    "who_afro"
+   ],
+   "source_names": [
+    "WHO（脑膜炎监测网络）"
+   ],
+   "urls": [
+    "https://www.healthytravel.ch/country-iframe/"
+   ],
+   "identity_methods": [
+    "SOURCE_LINK_ID"
+   ],
+   "has_source_identity": true,
+   "is_active": true
+  },
+  {
+   "disease_event_id": "DSEV_82ca18a2187fa066",
+   "disease_id": "meningitis",
+   "disease_name_cn": null,
+   "disease_name_en": "Meningitis",
+   "country_iso3": "ETH",
+   "location": "Oromia/Sidama/SNNP",
+   "report_date": "2026-06-07",
+   "counts": {},
+   "outbreak_status": "active",
+   "update_type": "new_outbreak",
+   "case_count_type": "unknown",
+   "primary_source": "WHO 脑膜炎监测网络第 23 周通报",
+   "verification_status": "official",
+   "uncertainties": [
+    "疫情按发病率阈值判定，无具体病例数"
+   ],
+   "affected_countries": [],
+   "source_ids": [
+    "who_afro"
+   ],
+   "source_names": [
+    "WHO（脑膜炎监测网络）"
+   ],
+   "urls": [
+    "https://www.healthytravel.ch/country-iframe/"
+   ],
+   "identity_methods": [
+    "SOURCE_LINK_ID"
+   ],
+   "has_source_identity": true,
+   "is_active": true
+  },
+  {
+   "disease_event_id": "DSEV_1eef50e524a035a5",
+   "disease_id": "meningitis",
+   "disease_name_cn": null,
+   "disease_name_en": "Meningitis",
+   "country_iso3": "COD",
+   "location": "Tshopo/Equateur/Bas-Uele/Sud-Ubangi",
+   "report_date": "2026-06-07",
+   "counts": {},
+   "outbreak_status": "active",
+   "update_type": "new_outbreak",
+   "case_count_type": "unknown",
+   "primary_source": "WHO 脑膜炎监测网络第 23 周通报",
+   "verification_status": "official",
+   "uncertainties": [
+    "疫情按发病率阈值判定，无具体病例数"
+   ],
+   "affected_countries": [],
+   "source_ids": [
+    "who_afro"
+   ],
+   "source_names": [
+    "WHO（脑膜炎监测网络）"
+   ],
+   "urls": [
+    "https://www.healthytravel.ch/country-iframe/"
+   ],
+   "identity_methods": [
+    "SOURCE_LINK_ID"
+   ],
+   "has_source_identity": true,
+   "is_active": true
+  },
+  {
+   "disease_event_id": "DSEV_9a208920b2be97f1",
+   "disease_id": "cholera",
+   "disease_name_cn": null,
+   "disease_name_en": "Cholera",
+   "country_iso3": "NGA",
+   "location": "Borno 州（Maiduguri 为重灾区）",
+   "report_date": "2026-06-16",
+   "counts": {
+    "suspected_cases": 8457,
+    "deaths": 85
+   },
+   "outbreak_status": "active",
+   "update_type": "case_update",
+   "case_count_type": "source_total",
+   "primary_source": "CGTN（引 Borno 州政府）",
+   "verification_status": "single_source",
+   "uncertainties": [
+    "85+ 死亡为 Borno 州政府口径，州级数字未与联邦 NCDC 交叉核实"
+   ],
+   "affected_countries": [],
+   "source_ids": [
+    "cgtn"
+   ],
+   "source_names": [
+    "CGTN"
+   ],
+   "urls": [
+    "https://news.cgtn.com/news/2026-06-16/More-than-90-dead-as-cholera-spreads-in-Nigeria-1O0X72XB1Pq/p.html"
+   ],
+   "identity_methods": [
+    "SOURCE_LINK_ID"
+   ],
+   "has_source_identity": true,
+   "is_active": true
+  },
+  {
+   "disease_event_id": "DSEV_f37dbd7dae91309b",
+   "disease_id": "cholera",
+   "disease_name_cn": null,
+   "disease_name_en": "Cholera",
+   "country_iso3": "NGA",
+   "location": "博尔诺州 20/27 LGA",
+   "report_date": "2026-07-15",
+   "counts": {
+    "suspected_cases": 44129
+   },
+   "outbreak_status": "active",
+   "update_type": "response_update",
+   "case_count_type": "source_total",
+   "primary_source": "IFRC DREF 行动通报（via ReliefWeb）",
+   "verification_status": "official",
+   "uncertainties": [
+    "第 29 周全国累计疑似（NCDC 口径，经 IFRC 转述）"
+   ],
+   "affected_countries": [],
+   "source_ids": [
+    "reliefweb"
+   ],
+   "source_names": [
+    "ReliefWeb（IFRC）"
+   ],
+   "urls": [
+    "https://reliefweb.int/report/nigeria/nigeria-cholera-outbreak-dref-operation-mdrng046"
+   ],
+   "identity_methods": [
+    "SOURCE_LINK_ID"
+   ],
+   "has_source_identity": true,
+   "is_active": true
+  },
+  {
+   "disease_event_id": "DSEV_20ecfe08f30c1d3f",
+   "disease_id": "cholera",
+   "disease_name_cn": null,
+   "disease_name_en": "Cholera",
+   "country_iso3": "NGA",
+   "location": "Plateau 州（Mangu/Jos North 等 4 LGA）",
+   "report_date": "2026-07-26",
+   "counts": {
+    "confirmed_cases": 6,
+    "suspected_cases": 441,
+    "deaths": 14
+   },
+   "outbreak_status": "active",
+   "update_type": "case_update",
+   "case_count_type": "source_total",
+   "primary_source": "Voice of Nigeria（引 Plateau 州卫生部）",
+   "verification_status": "single_source",
+   "uncertainties": [
+    "441 为州累计疑似（含 RDT 阳性），confirmed=6 为实验室培养确诊"
+   ],
+   "affected_countries": [],
+   "source_ids": [
+    "von"
+   ],
+   "source_names": [
+    "Voice of Nigeria"
+   ],
+   "urls": [
+    "https://von.gov.ng/plateau-state-intensifies-cholera-outbreak-emergency-measures"
+   ],
+   "identity_methods": [
+    "SOURCE_LINK_ID"
+   ],
+   "has_source_identity": true,
+   "is_active": true
+  },
+  {
+   "disease_event_id": "DSEV_df9984f4005978cb",
+   "disease_id": "cholera",
+   "disease_name_cn": "霍乱",
+   "disease_name_en": "Cholera",
+   "country_iso3": "NGA",
+   "location": "national（博尔诺州为主）",
+   "report_date": "2026-07-31",
+   "counts": {
+    "total_cases": 50000,
+    "deaths": 338
+   },
+   "outbreak_status": "active",
+   "update_type": "case_update",
+   "case_count_type": "source_total",
+   "primary_source": "UNICEF UK press release（引 NCDC）",
+   "verification_status": "official",
+   "uncertainties": [
+    "total_cases 为媒体转述 NCDC 累计值，未见 NCDC 原始通报全文"
+   ],
+   "affected_countries": [],
+   "source_ids": [
+    "unicef"
+   ],
+   "source_names": [
+    "UNICEF UK"
+   ],
+   "urls": [
+    "https://www.unicef.org.uk/press-releases/621006/"
+   ],
+   "identity_methods": [
+    "SOURCE_LINK_ID"
+   ],
+   "has_source_identity": true,
+   "is_active": true
+  },
+  {
+   "disease_event_id": "DSEV_923093263017b71c",
+   "disease_id": "cholera",
+   "disease_name_cn": null,
+   "disease_name_en": "Cholera",
+   "country_iso3": "NGA",
+   "location": "Bauchi 州（Toro 等 13 LGA）",
+   "report_date": "2026-08-01",
+   "counts": {
+    "confirmed_cases": 6,
+    "suspected_cases": 398,
+    "deaths": 16
+   },
+   "outbreak_status": "active",
+   "update_type": "new_outbreak",
+   "case_count_type": "source_total",
+   "primary_source": "Bauchi 州卫生部（ThisDay 转述）",
+   "verification_status": "official",
+   "uncertainties": [
+    "经 allAfrica 聚合转载，原始通报为州卫生部 memo"
+   ],
+   "affected_countries": [],
+   "source_ids": [
+    "allafrica"
+   ],
+   "source_names": [
+    "allAfrica（原文 This Day）"
+   ],
+   "urls": [
+    "https://allafrica.com/stories/202608100055.html"
+   ],
+   "identity_methods": [
+    "SOURCE_LINK_ID"
+   ],
+   "has_source_identity": true,
+   "is_active": true
+  },
+  {
+   "disease_event_id": "DSEV_3cef35cb7f3e9ff2",
+   "disease_id": "cholera",
+   "disease_name_cn": null,
+   "disease_name_en": "Cholera",
+   "country_iso3": "regional",
+   "location": "西非与中非（乍得湖流域 + 刚果河流域）",
+   "report_date": "2026-08-12",
+   "counts": {},
+   "outbreak_status": "active",
+   "update_type": "geographic_spread",
+   "case_count_type": "unknown",
+   "primary_source": "UNICEF 新闻稿",
+   "verification_status": "official",
+   "uncertainties": [
+    "跨境传播为 UNICEF 通报，未逐国给出病例数"
+   ],
+   "affected_countries": [
+    "COD",
+    "COG",
+    "NGA",
+    "TCD",
+    "CMR",
+    "CAF"
+   ],
+   "source_ids": [
+    "unicef"
+   ],
+   "source_names": [
+    "UNICEF UK"
+   ],
+   "urls": [
+    "https://www.unicef.org.uk/press-releases/621006/"
+   ],
+   "identity_methods": [
+    "SOURCE_LINK_ID"
+   ],
+   "has_source_identity": true,
+   "is_active": true
+  },
+  {
+   "disease_event_id": "DSEV_ac0ee92b04bc87c6",
+   "disease_id": "cholera",
+   "disease_name_cn": null,
+   "disease_name_en": "Cholera",
+   "country_iso3": "TCD",
+   "location": "全国（乍得湖流域）",
+   "report_date": "2026-08-12",
+   "counts": {},
+   "outbreak_status": "active",
+   "update_type": "geographic_spread",
+   "case_count_type": "unknown",
+   "primary_source": "UNICEF（西中非跨境传播通报）",
+   "verification_status": "official",
+   "uncertainties": [
+    "乍得儿童占感染近三分之二（UNICEF 口径），具体病例数未单独给出"
+   ],
+   "affected_countries": [
+    "NGA",
+    "CMR",
+    "TCD"
+   ],
+   "source_ids": [
+    "unicef"
+   ],
+   "source_names": [
+    "UNICEF UK"
+   ],
+   "urls": [
+    "https://www.unicef.org.uk/press-releases/621006/"
+   ],
+   "identity_methods": [
+    "SOURCE_LINK_ID"
+   ],
+   "has_source_identity": true,
+   "is_active": true
+  }
+ ]
+}

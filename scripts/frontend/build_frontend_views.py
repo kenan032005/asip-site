@@ -669,6 +669,22 @@ def build_country_snapshots(countries, events, pub_events, disease_tls,
             "latest_event_time": latest_time,
             "generated_at": gen,
         })
+    # C5-A §十八/§十九：国家 fact pack 确定性做厚（结构完整；无 AI、无跨国污染）
+    try:
+        import sys as _sys, os as _os
+        _sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.dirname(
+            _os.path.abspath(__file__)))))
+        from scripts.report import country_fact_pack as _CFP
+        snapshots, _pack_stats = _CFP.enrich_snapshots(
+            _os.path.dirname(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__)))),
+            snapshots, data_as_of=(dtx.isoformat() if dtx else None))
+        print("  country fact packs: %d (structurally_thin=%d cross_country=%d)" % (
+            _pack_stats["COUNTRY_FACT_PACKS_TOTAL"],
+            _pack_stats["COUNTRY_FACT_PACKS_STRUCTURALLY_THIN"],
+            _pack_stats["CROSS_COUNTRY_FACTS_IN_COUNTRY_PACKS"]))
+    except Exception as _e:  # noqa: BLE001
+        print("  country fact pack enrichment skipped: %s" % _e)
+
     return {"generated_at": gen, "count": len(snapshots), "snapshots": snapshots,
             "unresolved_country_inputs": unresolved,
             "country_join_key": "iso3"}
