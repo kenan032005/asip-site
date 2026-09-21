@@ -107,6 +107,28 @@ def _build_social_timelines(events, admission=None):
     return timelines
 
 
+def _disease_public_eligible(d):
+    """C6-R1 §B：疾病记录的公开性判定（**产品缺陷修复**）。
+
+    断点：public admission 的 `public_eligible` 标记只曾被写在 **social clusters**
+    上（20/20 master events），disease canonical 记录从未被同一流程处理；而
+    disease enrichment ledger（production_state.json）在本分支/本地树**不存在**
+    （ai_processing_enabled=false → 永远不会有 disease_enrichment 条目）→
+    20 条带真实来源的疾病记录被静默全部过滤，疾病模块永远为空。
+
+    修复语义（与 C5 来源契约一致，**不降低质量门槛**）：疾病记录自带
+    `source_links`（真实来源身份/URL）+ `report_date` + `verification_status`
+    时即可公开 —— 这与 C4 报告疾病栏 / disease_contract 视图**已经展示这
+    20 条**的既有行为一致。enrichment ledger 仍然有效：一旦存在
+    disease_enrichment 条目，仍以其判定为准（`_is_public_eligible` 优先）。
+    """
+    if not (d.get("source_links") or []):
+        return False
+    if not (d.get("report_date") or d.get("event_end_date")):
+        return False
+    return bool(d.get("verification_status") or d.get("outbreak_status"))
+
+
 def _build_disease_timelines(diseases, admission=None):
     """canonical disease 记录 → disease timeline 结构（unknown = null 保留）。"""
     admission = admission or set()
@@ -115,7 +137,8 @@ def _build_disease_timelines(diseases, admission=None):
         oid = d.get("disease_event_id") or d.get("outbreak_id")
         if not oid:
             continue
-        if not _is_public_eligible(d, oid, admission):
+        if not (_is_public_eligible(d, oid, admission)
+                or _disease_public_eligible(d)):
             continue
         sl = d.get("source_links") or []
         srcs = [s.get("source_name") for s in sl if isinstance(s, dict) and s.get("source_name")]

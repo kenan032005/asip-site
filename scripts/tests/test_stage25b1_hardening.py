@@ -371,8 +371,10 @@ def main():
     h15_ok = True
     h15_detail = ""
     tf = "test_stage25b1_worker_protocol.py"
-    r = subprocess.run([PY, os.path.join(SCRIPTS, "tests", tf)],
-                       capture_output=True, text=True, timeout=300)
+    # C6-R1 PART A/D：统一**模块调用契约**（直接以文件路径执行缺 repo root，
+    # 子套件的 scripts.* 导入会失败 —— TEST_INVOCATION_DEFECT）
+    r = subprocess.run([PY, "-m", "scripts.tests." + tf[:-3]],
+                       cwd=ROOT, capture_output=True, text=True, timeout=600)
     if r.returncode != 0 or "FAIL=0" not in r.stdout:
         h15_ok = False
         h15_detail = "%s rc=%d stdout_tail=%s" % (

@@ -718,7 +718,7 @@ def _disease_freshness_meta(disease_tls, data_as_of=None):
         return {}
 
 
-def build_disease_outbreaks(disease_tls, iso2cn):
+def build_disease_outbreaks(disease_tls, iso2cn, data_as_of=None):
     """§十五/§十六/§二十九：outbreak-centric；unknown = null；类别分离。
 
     同一 outbreak_id 的多条观察（supersede 链/快照）按 outbreak_id 去重，
@@ -769,8 +769,7 @@ def build_disease_outbreaks(disease_tls, iso2cn):
     out.sort(key=lambda x: (x["latest_report_at"] or ""), reverse=True)
     # C5-B §十四/§二十三：疾病视图自带 freshness —— 页面据此显示"数据截止"，
     # 不得把陈旧疫情数据表现成今日最新（generated_at 不是 freshness）。
-    meta = _disease_freshness_meta(disease_tls,
-                                   data_as_of=(out[0]["latest_report_at"] if out else None))
+    meta = _disease_freshness_meta(disease_tls, data_as_of=data_as_of)
     res = {"generated_at": bj_iso(), "count": len(out), "outbreaks": out}
     res.update({k: v for k, v in meta.items() if v is not None})
     return res
@@ -1225,7 +1224,8 @@ def main():
                                                      country_ref=country_ref,
                                                      data_as_of=data_as_of_iso,
                                                      generated_at=gen_at),
-        "disease_outbreaks": build_disease_outbreaks(disease_tls, iso2cn),
+        "disease_outbreaks": build_disease_outbreaks(disease_tls, iso2cn,
+                                                     data_as_of=data_as_of_iso),
         "china_interest": build_china_interest(
             views_master_for_china, entities, countries, data_dir=str(ROOT)),
         # C4-B：若已有 report factory 生成的 real-only 索引（含 title_cn/headline/

@@ -412,8 +412,9 @@ def main():
     w22_ok = True
     w22_detail = ""
     for tf in ("test_stage25a_runtime_ai_contract.py", "test_stage25a_hardening.py"):
-        r = subprocess.run([PY, os.path.join(SCRIPTS, "tests", tf)],
-                           capture_output=True, text=True, timeout=300)
+        # C6-R1 PART A/D：统一**模块调用契约**（同 H15）
+        r = subprocess.run([PY, "-m", "scripts.tests.%s" % tf[:-3]],
+                           cwd=ROOT, capture_output=True, text=True, timeout=600)
         if r.returncode != 0 or "FAIL=0" not in r.stdout:
             w22_ok = False
             w22_detail += "%s rc=%d; " % (tf, r.returncode)
