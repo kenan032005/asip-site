@@ -14,7 +14,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -26,11 +26,9 @@ from scripts.report import materialize as M        # noqa: E402
 
 NODE = os.environ.get("ASIP_NODE") or "node"
 
-#: C4-B 22 份物化契约的**冻结参考时刻**。
-#: 不传 now 时 `last_complete_week_end(now)` 取墙钟 → 周次翻转后 weekly 目标会
-#: 从 2 变 3、country weekly 从 6 变 9（而 data_as_of 仍停在 2026-09-19），
-#: 于是同一份契约在跨周后会莫名其妙飘移。测试固定参考时刻以保持确定性。
-REFERENCE_NOW = datetime(2026, 9, 20, 12, 0, tzinfo=F.BJT)
+#: §二十三：backfill 规划已统一锚定 canonical data_as_of
+#: （factory.plan_report_backfill），墙钟前进不再改变目标集合，
+#: 因此这里**不再**需要冻结参考时刻来掩盖产品漂移。
 WF = ".github/workflows/asip-v11-c3-ai.yml"
 
 
@@ -98,12 +96,12 @@ class SourcePolicyTest(unittest.TestCase):
         self.assertEqual(loaded["status"], M.STATUS_LOW_DATA)
 
     def test_05_report_source_attribution_rate_is_100_percent(self):
-        st = M.materialize_reports(str(ROOT), days=14, now=REFERENCE_NOW, write=False)
+        st = M.materialize_reports(str(ROOT), days=14, write=False)
         self.assertEqual(st["REPORT_FACT_SOURCE_ATTRIBUTION_RATE"], 100.0)
         self.assertEqual(st["REPORT_FACTS_TOTAL"], st["REPORT_FACTS_WITH_SOURCE_REFS"])
 
     def test_06_canonical_source_gap_does_not_fail_report_factory(self):
-        st = M.materialize_reports(str(ROOT), days=14, now=REFERENCE_NOW, write=False)
+        st = M.materialize_reports(str(ROOT), days=14, write=False)
         self.assertGreater(st["CANONICAL_SOURCE_IDENTITY_COVERAGE"], 0)
         self.assertLess(st["CANONICAL_SOURCE_IDENTITY_COVERAGE"], 100)
         self.assertEqual(st["DAILY_FAIL"], 0)
@@ -181,7 +179,7 @@ class MaterializationContractTest(unittest.TestCase):
         self.assertIn("os.replace(tmp, path)", src)
 
     def test_13_existing_daily_not_duplicated(self):
-        st = M.materialize_reports(str(ROOT), days=14, now=REFERENCE_NOW, write=False)
+        st = M.materialize_reports(str(ROOT), days=14, write=False)
         self.assertEqual(st["DAILY_DUPLICATES"], 0)
         self.assertEqual(st["DAILY_EXISTING_REUSED"] + st["DAILY_NEWLY_MATERIALIZED"]
                          + st["DAILY_DIRTY_REBUILT"], 14)
@@ -208,23 +206,23 @@ class MaterializationContractTest(unittest.TestCase):
         self.assertEqual(pool, [], "cutoff 之后的事件必须被排除")
 
     def test_17_daily_windows_produce_distinct_fact_sets(self):
-        st = M.materialize_reports(str(ROOT), days=14, now=REFERENCE_NOW, write=False)
+        st = M.materialize_reports(str(ROOT), days=14, write=False)
         wins = {d["period_start"] for d in st["_plan"]["DAILY_TARGET_DATES"]}
         self.assertEqual(len(wins), 14)
 
     def test_18_14_daily_targets_unique(self):
-        st = M.materialize_reports(str(ROOT), days=14, now=REFERENCE_NOW, write=False)
+        st = M.materialize_reports(str(ROOT), days=14, write=False)
         ids = [d["report_id"] for d in st["_plan"]["DAILY_TARGET_DATES"]]
         self.assertEqual(len(ids), 14)
         self.assertEqual(len(set(ids)), 14)
 
     def test_19_two_africa_weeklies_materialized(self):
-        st = M.materialize_reports(str(ROOT), days=14, now=REFERENCE_NOW, write=False)
+        st = M.materialize_reports(str(ROOT), days=14, write=False)
         self.assertEqual(st["AFRICA_WEEKLY_TARGET"], 2)
         self.assertEqual(st["AFRICA_WEEKLY_MATERIALIZED"], 2)
 
     def test_20_six_configured_country_weeklies_materialized(self):
-        st = M.materialize_reports(str(ROOT), days=14, now=REFERENCE_NOW, write=False)
+        st = M.materialize_reports(str(ROOT), days=14, write=False)
         self.assertEqual(st["COUNTRY_WEEKLY_TARGET"], 6)
         self.assertEqual(st["COUNTRY_WEEKLY_MATERIALIZED"], 6)
         isos = {c["country_iso3"] for c in st["_plan"]["COUNTRY_WEEKLY_TARGETS"]}
@@ -256,7 +254,7 @@ class MaterializationContractTest(unittest.TestCase):
         self.assertIn("data/report_index.json", js)
 
     def test_24_no_real_ai_calls_in_c4b(self):
-        st = M.materialize_reports(str(ROOT), days=14, now=REFERENCE_NOW, write=False)
+        st = M.materialize_reports(str(ROOT), days=14, write=False)
         self.assertEqual(st["REAL_AI_CALLS"], 0)
         src = (ROOT / "scripts" / "report" / "materialize.py").read_text(encoding="utf-8")
         for bad in ("submit_task", "DeepSeekV4FlashProvider", "api_key", "ASIP_DEEPSEEK"):
@@ -304,6 +302,60 @@ class RendererContractTest(unittest.TestCase):
         for bad in ('replace("[object Object]"', 'replace("null"', 'replace("undefined"',
                     'replace(/null/', 'replace(/undefined/'):
             self.assertNotIn(bad, js)
+
+
+class BackfillAnchorTest(unittest.TestCase):
+    """§二十一/§二十三 backfill planner 共用 data_as_of 锚。"""
+
+    def test_24_daily_and_weekly_share_data_as_of_anchor(self):
+        p = F.plan_report_backfill(str(ROOT), days=14)
+        self.assertEqual(p["WEEKLY_TARGET"], 2)
+        self.assertEqual(p["COUNTRY_WEEKLY_TARGET"], 6)
+        self.assertEqual(p["DAILY_TARGET"], 14)
+        # 周目标必须落在 data_as_of 之前（数据未覆盖的周不得被规划）
+        end = str(p["data_as_of"])[:10]
+        for w in p["WEEKLY_TARGET_PERIODS"]:
+            self.assertLessEqual(str(w["week_end"]), end)
+
+    def test_25_frozen_data_does_not_gain_weeks_over_time(self):
+        ref = F.data_as_of(str(ROOT))
+        base = F.plan_report_backfill(str(ROOT), days=14,
+                                      reference_as_of=str(ref)[:10])
+        for days in (7, 30, 90, 400):
+            later = F.plan_report_backfill(
+                str(ROOT), days=14,
+                now=datetime.now(F.BJT) + timedelta(days=days),
+                reference_as_of=str(ref)[:10])
+            self.assertEqual(base["WEEKLY_TARGET"], later["WEEKLY_TARGET"])
+            self.assertEqual(base["COUNTRY_WEEKLY_TARGET"], later["COUNTRY_WEEKLY_TARGET"])
+
+    def test_26_backfill_plan_unchanged_when_wall_clock_advances(self):
+        a = F.plan_report_backfill(str(ROOT), days=14)
+        for days in (3, 10, 21, 60):
+            b = F.plan_report_backfill(str(ROOT), days=14,
+                                       now=datetime.now(F.BJT) + timedelta(days=days))
+            self.assertEqual(a["DAILY_TARGET"], b["DAILY_TARGET"])
+            self.assertEqual(a["WEEKLY_TARGET"], b["WEEKLY_TARGET"])
+            self.assertEqual(a["COUNTRY_WEEKLY_TARGET"], b["COUNTRY_WEEKLY_TARGET"])
+
+    def test_27_backfill_plan_changes_when_data_as_of_advances(self):
+        a = F.plan_report_backfill(str(ROOT), days=14, reference_as_of="2026-09-13")
+        b = F.plan_report_backfill(str(ROOT), days=14, reference_as_of="2026-09-20")
+        self.assertEqual(a["DAILY_TARGET"], b["DAILY_TARGET"])
+        self.assertNotEqual(
+            [w["week_end"] for w in a["WEEKLY_TARGET_PERIODS"]],
+            [w["week_end"] for w in b["WEEKLY_TARGET_PERIODS"]],
+            "数据边界前进时，周目标必须随之前进")
+
+    def test_28_live_schedule_semantics_untouched(self):
+        """§二十二：只改 backfill 锚；live 周判断仍基于传入时间。"""
+        early = F.plan_report_backfill(str(ROOT), days=14, now=datetime(2026, 9, 14, 12, 0,
+                                                                        tzinfo=F.BJT))
+        late = F.plan_report_backfill(str(ROOT), days=14, now=datetime(2026, 9, 21, 12, 0,
+                                                                       tzinfo=F.BJT))
+        self.assertEqual(early["WEEKLY_TARGET"], late["WEEKLY_TARGET"],
+                         "backfill 两个墙钟下都必须一致（锚在 data_as_of）")
+
 
 
 if __name__ == "__main__":

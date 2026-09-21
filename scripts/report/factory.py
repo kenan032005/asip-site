@@ -324,21 +324,37 @@ def enabled_priority_countries(config=None):
     return en, dis
 
 
-def plan_report_backfill(root, days=14, now=None):
+def plan_report_backfill(root, days=14, now=None, reference_as_of=None):
     """规划目标报告集合（**不物化、不调用 AI**）。
 
-    Daily：最近 14 个 20:00 BJT 滚动 24h 逻辑窗口
-    Weekly：所有完整 Sunday→Sunday 周（闭区间）
-    Country Weekly：完整周 × 当前 enabled priority countries（1 国 1 周最多 1 份）
+    Daily / Weekly / Country Weekly：最近 `days` 天的历史目标。
+
+    §二十一 时间锚（产品 bug 修复）：**历史/backfill 目标全部锚定 canonical
+    `data_as_of`**，不得让 weekly 跟着墙钟漂移。
+
+    历史缺陷：daily 用 `end_date`（= data_as_of），weekly 却从
+    `last_complete_week_end(now)`（**墙钟**）开始 → 同一份冻结数据在跨周后
+    从 14/2/6 漂成 14/3/9，甚至规划出数据尚未覆盖的周。
+
+    注意区分：**LIVE 调度**（生产 weekly cron）仍按真实运行时间判断当前周；
+    本参数只约束历史/backfill 规划的确定性。
+    `reference_as_of` 可显式覆盖数据边界（便于测试与重放）。
     """
     now = now or datetime.now(BJT)
+    anchored = False
     as_of = data_as_of(root)
-    end_date = now.date()
-    if as_of:
-        try:
-            end_date = datetime.fromisoformat(str(as_of).replace("Z", "+00:00")).astimezone(BJT).date()
-        except Exception:  # noqa: BLE001
-            pass
+    if reference_as_of is None:
+        end_date = now.date()
+        if as_of:
+            try:
+                end_date = datetime.fromisoformat(
+                    str(as_of).replace("Z", "+00:00")).astimezone(BJT).date()
+                anchored = True
+            except Exception:  # noqa: BLE001
+                pass
+    else:
+        end_date = datetime.fromisoformat(str(reference_as_of)).date()
+        anchored = True
     daily = []
     for i in range(days):
         d = end_date - timedelta(days=i)
@@ -350,7 +366,12 @@ def plan_report_backfill(root, days=14, now=None):
     daily = list(reversed(daily))
 
     weeks = []
-    wk = last_complete_week_end(now)
+    # §二十一：weekly 上界与 daily 同锚（data_as_of）。数据可用时不再看墙钟。
+    anchor = (datetime(end_date.year, end_date.month, end_date.day, 23, 59, tzinfo=BJT)
+              if anchored else now)
+    wk = last_complete_week_end(anchor)
+    while wk > end_date:
+        wk -= timedelta(days=7)
     while wk >= end_date - timedelta(days=days):
         s, e = week_window(wk)
         weeks.append({"week_start": str(s), "week_end": str(e),
