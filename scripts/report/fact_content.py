@@ -22,9 +22,15 @@
 from __future__ import annotations
 
 #: 社交事实标题回退顺序：(字段, 语言标记)
-SOCIAL_TITLE_FALLBACK = (("title_cn", "zh"), ("title_original", "original"))
+#: 社交事实标题回退顺序。
+#: 注意 `title` / `headline_zh` 必须保留：daily 构建路径与冻结证据输入使用的是
+#: 这两个键（C5-A 一开始只保留了 title_cn/title_original，导致这批输入的内容被丢弃 →
+#: report final schema 的 headline_zh 变 null）。
+SOCIAL_TITLE_FALLBACK = (("title_cn", "zh"), ("title", "zh"), ("headline_zh", "zh"),
+                         ("title_original", "original"))
 #: 社交事实摘要回退顺序
-SOCIAL_SUMMARY_FALLBACK = (("summary_cn", "zh"), ("summary_original", "original"))
+SOCIAL_SUMMARY_FALLBACK = (("summary_cn", "zh"), ("summary", "zh"),
+                           ("verified_summary", "zh"), ("summary_original", "original"))
 #: 疾病名称回退顺序
 DISEASE_NAME_FALLBACK = (("disease_name_zh", "zh"), ("disease_name_cn", "zh"),
                          ("disease_name_en", "en"), ("disease_id", "id"))

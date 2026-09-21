@@ -699,6 +699,25 @@ def _latest_counts_from_updates(dt):
     return None
 
 
+def _disease_freshness_meta(disease_tls, data_as_of=None):
+    """C5-B §十四：疾病视图自带 freshness 元数据（与 canonical 契约同一口径）。"""
+    import sys as _sys, os as _os
+    _sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.dirname(
+        _os.path.abspath(__file__)))))
+    try:
+        from scripts.data import disease_contract as _DC
+        items = _DC.load_items(_os.path.dirname(_os.path.dirname(_os.path.dirname(
+            _os.path.abspath(__file__)))))
+        f = _DC.freshness(items, data_as_of=str(data_as_of)[:10] if data_as_of else None)
+        return {"data_as_of": str(data_as_of)[:10] if data_as_of else None,
+                "disease_data_as_of": f["disease_data_as_of"],
+                "latest_disease_report_date": f["latest_disease_report_date"],
+                "disease_age_days": f["disease_age_days"],
+                "disease_freshness_status": f["disease_freshness_status"]}
+    except Exception:  # noqa: BLE001
+        return {}
+
+
 def build_disease_outbreaks(disease_tls, iso2cn):
     """§十五/§十六/§二十九：outbreak-centric；unknown = null；类别分离。
 
@@ -748,7 +767,13 @@ def build_disease_outbreaks(disease_tls, iso2cn):
             "affected_admin1": [a for a in (dt.get("affected_admin1") or [])][:10],
         })
     out.sort(key=lambda x: (x["latest_report_at"] or ""), reverse=True)
-    return {"generated_at": bj_iso(), "count": len(out), "outbreaks": out}
+    # C5-B §十四/§二十三：疾病视图自带 freshness —— 页面据此显示"数据截止"，
+    # 不得把陈旧疫情数据表现成今日最新（generated_at 不是 freshness）。
+    meta = _disease_freshness_meta(disease_tls,
+                                   data_as_of=(out[0]["latest_report_at"] if out else None))
+    res = {"generated_at": bj_iso(), "count": len(out), "outbreaks": out}
+    res.update({k: v for k, v in meta.items() if v is not None})
+    return res
 
 
 def _prod_daily_identity(report_date, stored_rid=None):

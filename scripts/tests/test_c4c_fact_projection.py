@@ -268,11 +268,16 @@ class EligibilityAndDerivedFieldsTest(unittest.TestCase):
                          "疾病字段映射修复后不应再有空壳疾病事实")
 
     def test_20_localization_debt_reported_separately(self):
+        """C5-B：内容 resolver 补回 `title`/`summary` 后，社交事实已能取到**中文**标题
+        （此前只 recognized title_cn/title_original → 退化到原文回退）。
+        债务标记仍按实际计算，不写死。"""
         a = RAI.audit_ai_packs(str(ROOT), all_reports=True)["totals"]
-        self.assertEqual(a["SOCIAL_FACTS_USING_TITLE_CN"], 0)
-        self.assertGreater(a["SOCIAL_FACTS_USING_TITLE_ORIGINAL"], 0)
-        self.assertTrue(a["C5_LOCALIZATION_COMPLETENESS_DEBT"],
-                        "仍有原文回退 → C5 本地化债务必须被标记")
+        self.assertGreater(a["SOCIAL_FACTS_USING_TITLE_CN"], 0,
+                           "应能取到中文标题（title/summary 回退链已补回）")
+        expected_debt = bool(a["SOCIAL_FACTS_USING_TITLE_ORIGINAL"]
+                             or a["DISEASE_FACTS_USING_EN_NAME"]
+                             or a["SOCIAL_FACTS_EXCLUDED_NO_CONTENT"])
+        self.assertEqual(bool(a["C5_LOCALIZATION_COMPLETENESS_DEBT"]), expected_debt)
 
 
 class BoundaryAndTargetingTest(unittest.TestCase):

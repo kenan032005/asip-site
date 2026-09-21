@@ -276,9 +276,13 @@ def build_ai_fact_pack(fp, report):
 
     # §二十 本地化缺口单独统计（不混成 C4 失败）
     s_zh = sum(1 for f in ai_fp["social_facts"]
-               if str(f.get("content_source_field") or "").endswith("_cn"))
+               if f.get("content_language") == "zh"
+               or str(f.get("content_source_field") or "").endswith(("_cn", "_zh"))
+               or f.get("content_source_field") in ("title", "summary", "headline_zh",
+                                                    "verified_summary"))
     s_or = sum(1 for f in ai_fp["social_facts"]
-               if str(f.get("content_source_field") or "").endswith("_original"))
+               if f.get("content_language") == "original"
+               or str(f.get("content_source_field") or "").endswith("_original"))
     d_zh = sum(1 for f in ai_fp["disease_facts"]
                if str(f.get("content_source_field") or "") in ("disease_name_zh", "disease_name_cn"))
     d_en = sum(1 for f in ai_fp["disease_facts"]
@@ -787,9 +791,10 @@ def audit_ai_packs(root, all_reports=False):
             "countries_represented": d["AI_PACK_COUNTRIES"],
             "content_language_mix": {
                 "social_zh": sum(1 for f in ai_fp["social_facts"]
-                                 if str(f.get("content_source_field") or "").endswith("_cn")),
+                                 if f.get("content_language") == "zh"
+                                 or f.get("content_source_field") in ("title", "summary")),
                 "social_original": sum(1 for f in ai_fp["social_facts"]
-                                       if str(f.get("content_source_field") or "").endswith("_original")),
+                                       if f.get("content_language") == "original"),
                 "disease_cn_name": sum(1 for f in ai_fp["disease_facts"]
                                        if str(f.get("content_source_field") or "") in
                                        ("disease_name_zh", "disease_name_cn")),
