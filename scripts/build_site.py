@@ -17,6 +17,7 @@ Stage-1 改进：
 import os
 import sys
 import json
+import hashlib
 import shutil
 from pathlib import Path
 import re
@@ -197,6 +198,94 @@ def _sync_legacy_from_canonical():
     except Exception as e:
         print(f"  ⚠ canonical→legacy sync failed (keep as-is): {e}")
         return False
+
+
+def _sha256(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(65536), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+#: dist 内报告索引的可能位置（前端 report-views.js 依次探测这两条路径）
+REPORT_INDEX_CANDIDATES = ("data/report_index.json", "data/views/report_index.json")
+
+
+def verify_report_publication(dist_root, data_dir=None, raise_on_fail=True):
+    """构建后硬校验：dist/data/reports 必须**精确反映本次构建结果**。
+
+    覆盖 §2（与构建产物一致、不依赖人工同步）、§4（新增/修改/删除都要同步）、
+    §5（report_index ↔ artifact 双向一致）。
+
+    返回统计字典；不一致时打印明细并（默认）抛错，让构建**明确失败**，
+    而不是把上一轮的 dist 当成新构建结果继续用。
+    """
+    data_dir = data_dir or DATA_DIR
+    src_root = os.path.join(data_dir, "reports")
+    dst_root = os.path.join(dist_root, "data", "reports")
+    res = {"SOURCE_REPORT_COUNT": 0, "DIST_REPORT_COUNT": 0, "REPORT_INDEX_COUNT": 0,
+           "MISSING_REPORT_ARTIFACTS": 0, "STALE_REPORT_ARTIFACTS": 0,
+           "MISMATCHED_REPORT_ARTIFACTS": 0, "MOCK_IN_DIST_REPORT_INDEX": 0,
+           "REPORT_INDEX_FILE": None}
+
+    def _rel(root):
+        out = {}
+        if not os.path.isdir(root):
+            return out
+        for dirpath, _dirnames, filenames in os.walk(root):
+            for fn in filenames:
+                p = os.path.join(dirpath, fn)
+                out[os.path.relpath(p, root).replace(os.sep, "/")] = p
+        return out
+
+    src, dst = _rel(src_root), _rel(dst_root)
+    # index 的 path 字段相对 dist 根（data/reports/xxx）；统一到同一基准再比较
+    dst_rel_root = {("data/reports/" + k): v for k, v in dst.items()}
+    res["SOURCE_REPORT_COUNT"] = len(src)
+    res["DIST_REPORT_COUNT"] = len(dst)
+    missing = sorted(set(src) - set(dst))
+    extra = sorted(set(dst) - set(src))
+    mismatched = [r for r in sorted(set(src) & set(dst)) if _sha256(src[r]) != _sha256(dst[r])]
+
+    index_file = None
+    for rel in REPORT_INDEX_CANDIDATES:
+        cand = os.path.join(dist_root, rel)
+        if os.path.exists(cand):
+            index_file = cand
+            break
+    idx = load_json(index_file, {}) if index_file else {}
+    res["REPORT_INDEX_FILE"] = os.path.relpath(index_file, dist_root).replace(os.sep, "/") \
+        if index_file else None
+    rows = idx.get("reports") or []
+    res["REPORT_INDEX_COUNT"] = idx.get("count") or len(rows)
+    res["MOCK_IN_DIST_REPORT_INDEX"] = sum(1 for r in rows if r.get("is_mock"))
+    indexed = {str(r.get("path") or "").replace(os.sep, "/") for r in rows}
+    not_in_dist = sorted(p for p in indexed if p not in dst_rel_root)
+    res["MISSING_REPORT_ARTIFACTS"] = len(not_in_dist) + len(missing)
+    res["STALE_REPORT_ARTIFACTS"] = len(extra)
+    res["MISMATCHED_REPORT_ARTIFACTS"] = len(mismatched)
+
+    ok = (not missing and not extra and not mismatched and not not_in_dist
+          and res["MOCK_IN_DIST_REPORT_INDEX"] == 0)
+    res["REPORT_ARTIFACT_PUBLICATION"] = "PASS" if ok else "FAIL"
+    print("  REPORT_ARTIFACT_PUBLICATION = %s" % res["REPORT_ARTIFACT_PUBLICATION"])
+    print("    SOURCE_REPORT_COUNT=%d DIST_REPORT_COUNT=%d INDEX_COUNT=%d INDEX_FILE=%s"
+          % (res["SOURCE_REPORT_COUNT"], res["DIST_REPORT_COUNT"],
+             res["REPORT_INDEX_COUNT"], res["REPORT_INDEX_FILE"]))
+    print("    MISSING=%d STALE=%d MISMATCHED=%d MOCK_IN_INDEX=%d"
+          % (res["MISSING_REPORT_ARTIFACTS"], res["STALE_REPORT_ARTIFACTS"],
+             res["MISMATCHED_REPORT_ARTIFACTS"], res["MOCK_IN_DIST_REPORT_INDEX"]))
+    if not ok:
+        for label, items in (("MISSING", missing + not_in_dist), ("STALE", extra),
+                             ("MISMATCHED", mismatched)):
+            for it in items[:5]:
+                print("      %s: %s" % (label, it))
+        if raise_on_fail:
+            raise RuntimeError(
+                "report artifact publication verification failed "
+                "(dist/data/reports 与本次构建不一致 —— 不要手工同步，先查构建日志)")
+    return res
 
 
 def _copy_production_reports(dist_root):
@@ -387,6 +476,8 @@ def main(run_id=None, no_embed=False):
     DIST_NEW = os.path.join(ROOT, ".dist_new")
     TRASH = os.path.join(ROOT, ".dist_trash")
     if os.path.isdir(DIST_NEW):  # 上次异常残留
+        print("  WARNING: PREVIOUS_BUILD_INCOMPLETE —— 发现 .dist_new 残留（上次构建未完成交换，"
+              "通常因为 dist 被占用，例如本地预览服务）。已移入 .dist_trash。")
         os.makedirs(TRASH, exist_ok=True)
         os.rename(DIST_NEW, os.path.join(TRASH, f"new_{int(_time.time()*1000)}"))
     os.makedirs(DIST_NEW, exist_ok=True)
@@ -492,7 +583,16 @@ def main(run_id=None, no_embed=False):
         save_json(dist_status_path, dist_status)
 
     # 纯改名交换：.dist_new -> dist
-    _finish_swap()
+    try:
+        _finish_swap()
+    except Exception as e:  # noqa: BLE001
+        print("  FATAL: DIST_SWAP_FAILED —— 无法把 .dist_new 交换为 dist：%s" % e)
+        print("         最常见原因：有进程以 dist 为工作目录（本地预览服务 / 编辑器索引）。")
+        print("         本次构建**未发布**，dist 保持原样；.dist_new 已保留供排查。")
+        raise
+
+    # 构建后硬校验：dist/data/reports 必须精确反映本次构建（§2/§4/§5）
+    verify_report_publication(DIST)
 
     print(f"构建完成 -> {os.path.relpath(DIST, ROOT)}")  # 相对路径（第九节：日志不得含本地绝对路径）
     print(f"  HTML: {built} 个页面")
