@@ -175,16 +175,20 @@ def with_pack(rep, fp):
 class TargetPlannerTest(unittest.TestCase):
 
     def test_01_planner_skips_low_data(self):
-        """C4-C 事实投影修复后：4 份无可分析事实的周报被重新分类为 LOW_DATA（§十七），
-        因此 LOW_DATA = 20、targets = 2（不再是空壳事实撑起来的 6）。"""
+        """C4-C 事实投影 + 国家 scope 修复后：不再有空壳事实抬高 fact_count，
+        也不再有他国事实充数 → 22 份报告全部 LOW_DATA，targets = 0。
+
+        §7 CASE B：这是**合法收口**（当前语料无合法 AI enrichment target），
+        不是 HOLD；阈值与 targeting 规则均未改动。
+        """
         p = RAII_plan(str(ROOT))
         self.assertEqual(p["TOTAL_REPORTS"], 22)
-        self.assertEqual(p["LOW_DATA_REPORTS"], 20)
-        self.assertEqual(p["AI_TARGET_REPORTS"], 2)
-        self.assertEqual(p["AI_TARGET_REPORTS_ACTUAL"], 2)
-        self.assertEqual(p["EXPECTED_REAL_AI_CALLS_MAX"], 2)
-        for rid in p["target_ids"]:
-            self.assertTrue(rid.startswith("WEEKLY_"))
+        self.assertEqual(p["AI_TARGETING_RULE"], "status")
+        self.assertEqual(p["LOW_DATA_REPORTS"], 22)
+        self.assertEqual(p["AI_TARGET_REPORTS"], 0)
+        self.assertEqual(p["AI_TARGET_REPORTS_ACTUAL"], 0)
+        self.assertEqual(p["EXPECTED_REAL_AI_CALLS_MAX"], 0)
+        self.assertEqual(p["target_ids"], [])
 
     def test_02_planner_is_read_only_and_zero_calls(self):
         p1 = RAII_plan(str(ROOT))

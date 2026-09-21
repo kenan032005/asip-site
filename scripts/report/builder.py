@@ -20,6 +20,7 @@ from scripts.report.changes import (
     changes_from_timeline, disease_changes_from_timeline,
     prev_report_event_ids, split_prev_reported,
 )
+from scripts.report import fact_content as FC                        # noqa: E402
 from scripts.report.fact_content import DISEASE_COUNT_FIELDS  # noqa: E402
 from scripts.report.weekly import weekly_metrics, enabled_weekly_countries
 from scripts.report.brief import evaluate_brief_candidates
@@ -285,10 +286,15 @@ def build_weekly_input(country_iso3, events, disease_events, week_start, week_en
                        prev_metrics=None, prev_report_id=None):
     """§二十四 Country Weekly report input。
 
-    注：§十一 的「Country Weekly Scope」按 §八–§十二 的语境作用在 **AI fact pack
-    边界**（report_ai.build_ai_fact_pack 会按国家/时间窗过滤并计数），
-    报告正文内容保持 C4-B 已验证的形态，不在 build 阶段删事实。
+    §1/§2 Country Scope（报告层与 AI 层**同一契约**）：
+    进入本国周报的每条事实（social / disease）都必须通过 `fact_content.country_scope_ok`，
+    即声明国别必须与报告国相交，或带有结构化 `TARGET_COUNTRY_RELEVANCE`。
+    **单纯 regional 不放行**。此处排除即报告层排除，AI 层不会看到，也不存在
+    「页面一套国家边界、AI 另一套」的情况。
     """
+    scope_ctx = {"report_type": "country_weekly", "country_iso3": country_iso3}
+    events, excluded_social = FC.filter_country_scope(events, scope_ctx)
+    disease_events, excluded_disease = FC.filter_country_scope(disease_events, scope_ctx)
     metrics = weekly_metrics(events, disease_events, week_start, week_end, prev_metrics)
     # §十七 Weekly 不是日报拼接：按 importance 排序的 major events
     evs = sorted(events, key=lambda e: -(e.get("importance_score") or 0))
@@ -380,6 +386,10 @@ def build_weekly_input(country_iso3, events, disease_events, week_start, week_en
         "week_end": week_end,
         "previous_report_id": prev_report_id,
         "generated_at": _bj_now(),
+        # §1 报告层 scope 审计：被国家边界排除的事实数（必须可追溯）
+        "country_scope_excluded_social": len(excluded_social),
+        "country_scope_excluded_disease": len(excluded_disease),
+        "country_scope_contract": "REPORT_FACT_SCOPE == AI_FACT_SCOPE",
         "trend_metrics": metrics,
         "sections": {
             "weekly_executive_assessment": _weekly_assessment_input(metrics, events),

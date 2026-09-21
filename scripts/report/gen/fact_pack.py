@@ -98,6 +98,8 @@ def _social_fact(item, section):
         "content_source_field": c["content_source_field"],
         "country": item.get("country"),
         "country_iso3": item.get("country_iso3"),
+        "affected_countries": item.get("affected_countries") or [],
+        "target_country_relevance": item.get("target_country_relevance"),
         "category": item.get("category"),
         "event_type": item.get("event_type"),
         "importance_score": item.get("importance_score"),
@@ -142,6 +144,9 @@ def _disease_fact(item, section):
         "content_language": c["content_language"],
         "content_source_field": c["content_source_field"],
         "country_iso3": item.get("country_iso3"),
+        # §1/§2 scope 证据必须随事实保留（可在报告层与 AI 层重放同一判定）
+        "affected_countries": item.get("affected_countries") or [],
+        "target_country_relevance": item.get("target_country_relevance"),
         "location": item.get("location"),
         "report_date": item.get("report_date"),
         "outbreak_status": item.get("outbreak_status"),

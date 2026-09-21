@@ -256,6 +256,18 @@ def build_ai_fact_pack(fp, report):
     diag["CROSS_COUNTRY_FACTS_IN_COUNTRY_WEEKLY"] = (
         sum(1 for f in included if FC.fact_countries(f) and not (FC.fact_countries(f) & rc))
         if rtype == "country_weekly" else 0)
+    # §2 报告层 / AI 层国家边界必须一致：报告 pack 里的跨国事实应为 0
+    # （报告层已在 build 阶段用同一 country_scope_ok 过滤）
+    _report_facts = (fp.get("social_facts") or []) + (fp.get("disease_facts") or [])
+    diag["CROSS_COUNTRY_FACTS_IN_REPORT_PACK"] = len(
+        FC.cross_country_facts(_report_facts, report))
+    diag["CROSS_COUNTRY_FACTS_IN_AI_FACT_PACK"] = len(
+        FC.cross_country_facts(included, report))
+    diag["REPORT_AI_SCOPE_PARITY"] = bool(
+        diag["CROSS_COUNTRY_FACTS_IN_REPORT_PACK"] == 0
+        and diag["CROSS_COUNTRY_FACTS_IN_AI_FACT_PACK"] == 0
+        and diag.get("SOCIAL_FACTS_EXCLUDED_SCOPE", 0) == 0
+        and diag.get("DISEASE_FACTS_EXCLUDED_SCOPE", 0) == 0)
     diag["FAKE_SOURCE_REFS"] = sum(
         1 for f in included for s in FC.fact_sources(f)
         if str(s).lower() in ("source_unknown", "unknown", "n/a", "na")
@@ -705,6 +717,9 @@ def audit_ai_packs(root, all_reports=False):
            "UNATTRIBUTED_FACTS_IN_AI_FACT_PACK": 0,
            "EMPTY_FACTS_IN_AI_FACT_PACK": 0,
            "CROSS_COUNTRY_FACTS_IN_COUNTRY_WEEKLY": 0,
+           "CROSS_COUNTRY_FACTS_IN_REPORT_PACK": 0,
+           "CROSS_COUNTRY_FACTS_IN_AI_FACT_PACK": 0,
+           "REPORT_AI_SCOPE_PARITY": True,
            "FAKE_SOURCE_REFS": 0,
            "SOCIAL_FACTS_USING_TITLE_CN": 0,
            "SOCIAL_FACTS_USING_TITLE_ORIGINAL": 0,
@@ -781,11 +796,14 @@ def audit_ai_packs(root, all_reports=False):
                 "disease_en_name": sum(1 for f in ai_fp["disease_facts"]
                                        if str(f.get("content_source_field") or "") == "disease_name_en"),
             },
+            "cross_country_in_report": d["CROSS_COUNTRY_FACTS_IN_REPORT_PACK"],
+            "cross_country_in_ai_pack": d["CROSS_COUNTRY_FACTS_IN_AI_FACT_PACK"],
+            "report_ai_scope_parity": d["REPORT_AI_SCOPE_PARITY"],
             "reaches_provider_boundary": d["AI_PACK_FACTS_TOTAL"] > 0,
         })
         for k in sums:
             if k in ("AI_TARGET_REPORTS_ACTUAL", "PROVIDER_BOUNDARY_REACHED",
-                     "REPORTS_WITH_ELIGIBLE_FACTS"):
+                     "REPORTS_WITH_ELIGIBLE_FACTS", "REPORT_AI_SCOPE_PARITY"):
                 continue
             v = d.get(k)
             if v is None:
@@ -798,6 +816,8 @@ def audit_ai_packs(root, all_reports=False):
             if rid in planner_targets:
                 tot["AI_TARGET_REPORTS_ACTUAL"] += 1
                 tot["PROVIDER_BOUNDARY_REACHED"] += 1
+    tot["REPORT_AI_SCOPE_PARITY"] = all(
+        r["report_ai_scope_parity"] for r in rows) if rows else True
     tot["REPORTS_WITH_ELIGIBLE_FACTS_BUT_LOW_DATA"] = sum(
         1 for r in rows if r["reaches_provider_boundary"]
         and r["report_id"] not in planner_targets)

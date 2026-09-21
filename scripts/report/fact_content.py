@@ -170,6 +170,12 @@ def fact_window_state(f, report):
 DISEASE_SCOPE_BY_TYPE = {"country_weekly": "country",
                          "africa_weekly": "region",
                          "africa_daily": "region"}
+#: 允许「非报告国事实」进入 Country Weekly 的**结构化、可追溯**标记字段。
+#: 单纯 regional 不算：必须有显式字段并指明目标国家，否则一律排除。
+TARGET_COUNTRY_RELEVANCE_FIELDS = ("target_country_relevance", "country_relevance")
+#: 代表「跨国/区域」的国家标记（不是真实国别，不得据此放行）
+REGIONAL_MARKERS = frozenset(("REGIONAL", "REGION", "MULTI", "MULTIPLE",
+                              "CROSS_BORDER", "GLOBAL", "UNKNOWN"))
 
 
 def report_countries(report):
@@ -179,6 +185,96 @@ def report_countries(report):
         if isinstance(v, str) and v.strip():
             out.add(v.strip().upper())
     return out
+
+
+def target_country_relevance(f, report):
+    """结构化、可追溯的「目标国相关性」标记 —— 唯一允许非报告国事实进入的通道。
+
+    返回宣告的目标国家集合；没有该字段或字段不可追溯 → 空集合（= 不放行）。
+    单纯 `country_iso3 = "regional"` **不算**：区域身份本身不构成目标国相关性。
+    """
+    rc = report_countries(report)
+    out = set()
+    for k in TARGET_COUNTRY_RELEVANCE_FIELDS:
+        v = (f or {}).get(k)
+        if isinstance(v, dict):
+            # 例如 {"TCD": "cross_border_spillover", ...} 或 {"country": "TCD", "reason": ...}
+            cand = v.get("country") or v.get("country_iso3")
+            if cand:
+                out.add(str(cand).strip().upper())
+            for key in v.keys():
+                if str(key).strip().upper() in rc:
+                    out.add(str(key).strip().upper())
+        elif isinstance(v, str) and v.strip():
+            out.add(v.strip().upper())
+        elif isinstance(v, (list, tuple)):
+            out.update(str(x).strip().upper() for x in v if str(x).strip())
+    return out & rc if rc else set()
+
+
+def own_countries(f):
+    """事实**自身**的国别（不含 affected_countries 这类影响范围字段）。"""
+    out = set()
+    for k in ("country_iso3", "country", "country_code"):
+        v = (f or {}).get(k)
+        if isinstance(v, str) and v.strip():
+            out.add(v.strip().upper())
+    return out
+
+
+def _affected_countries(f):
+    v = (f or {}).get("affected_countries")
+    if isinstance(v, str):
+        v = [v]
+    return {str(x).strip().upper() for x in (v or []) if str(x).strip()}
+
+
+def country_scope_decision(f, report):
+    """**报告层与 AI 层共用的**国家 scope 判定（§2 REPORT_FACT_SCOPE = AI_FACT_SCOPE）。
+
+    返回 (ok, reason)。reason 可审计：
+      NO_COUNTRY_DECLARED / TARGET_COUNTRY_MATCH / AFFECTED_COUNTRY_MATCH /
+      TARGET_COUNTRY_RELEVANCE / OTHER_COUNTRY / REGIONAL_WITHOUT_RELEVANCE
+      （非 country 报告类型 → NOT_COUNTRY_REPORT，恒放行）
+    """
+    if DISEASE_SCOPE_BY_TYPE.get((report or {}).get("report_type")) != "country":
+        return True, "NOT_COUNTRY_REPORT"
+    rc = report_countries(report)
+    if not rc:
+        return True, "NO_REPORT_COUNTRY"
+
+    own = own_countries(f)
+    real_own = own - REGIONAL_MARKERS
+    if real_own & rc:
+        return True, "TARGET_COUNTRY_MATCH"
+    if _affected_countries(f) & rc:
+        # 结构化、可追溯的影响范围（如 affected_countries 明确列出报告国）
+        return True, "AFFECTED_COUNTRY_MATCH"
+    if target_country_relevance(f, report):
+        return True, "TARGET_COUNTRY_RELEVANCE"
+    if own & REGIONAL_MARKERS:
+        # §1：单纯 regional 不够 —— 没有任何结构化目标国相关性 → 排除
+        return False, "REGIONAL_WITHOUT_RELEVANCE"
+    if real_own:
+        return False, "OTHER_COUNTRY"
+    return True, "NO_COUNTRY_DECLARED"
+
+
+def country_scope_ok(f, report):
+    return country_scope_decision(f, report)[0]
+
+
+def filter_country_scope(facts, report):
+    """按国家 scope 过滤（报告层用它构造 pack，AI 层用同一判定复核）。"""
+    kept, excluded = [], []
+    for f in (facts or []):
+        (kept if country_scope_ok(f, report) else excluded).append(f)
+    return kept, excluded
+
+
+def cross_country_facts(facts, report):
+    """统计**跨国事实**数量（报告层与 AI 层都用它自查，目标恒为 0）。"""
+    return [f for f in (facts or []) if not country_scope_ok(f, report)]
 
 
 def fact_eligibility(f, report, kind):
@@ -194,13 +290,9 @@ def fact_eligibility(f, report, kind):
         reasons.append("NO_CONTENT")
     if not fact_sources(f):
         reasons.append("NO_SOURCE")
-    if DISEASE_SCOPE_BY_TYPE.get((report or {}).get("report_type")) == "country":
-        # §十一 Country Weekly 国家隔离：声明了国别就必须是报告国；
-        # regional / 他国不因“区域”身份默认放行（无明确产品规则允许）。
-        declared = fact_countries(f)
-        rc = report_countries(report)
-        if declared and rc and not (declared & rc):
-            reasons.append("SCOPE")
+    # §2：国家边界与报告层**同一契约**（country_scope_ok），不另起一套判定
+    if not country_scope_ok(f, report):
+        reasons.append("SCOPE")
     w = fact_window_state(f, report)
     if w is False:
         reasons.append("OUT_OF_WINDOW")

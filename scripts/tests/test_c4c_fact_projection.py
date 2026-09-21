@@ -145,16 +145,27 @@ class DiseaseFieldAndSourceTest(unittest.TestCase):
         self.assertEqual(d["FAKE_SOURCE_REFS"], 0)
 
     def test_12_real_repo_disease_facts_have_content_and_source(self):
-        """真实仓库：疾病事实不再是空壳，且来源可解析（§六/§七/§九）。"""
+        """真实仓库：疾病事实不再是空壳，且来源可解析（§六/§七/§九）。
+
+        注：报告层已按国家 scope 过滤（§1），TCD 周报只剩本国 + 结构化相关的条目。
+        """
         rep = M.read_report_artifact(str(ROOT), "country_weekly", "WEEKLY_TCD_20260913")
         fp, _ = RAI.rebuild_fact_pack(str(ROOT), rep)
         df = fp.get("disease_facts") or []
-        self.assertTrue(df, "该周报的 pack 仍保留疾病事实（报告内容未删减）")
-        self.assertTrue(all(FC.has_displayable_content(f) for f in df),
-                        "疾病事实必须有真实内容")
-        self.assertTrue(all(FC.fact_sources(f) for f in df),
-                        "疾病事实必须有真实来源（来自 source_links）")
-        self.assertTrue(any(f.get("counts") for f in df), "至少一条带真实计数")
+        self.assertTrue(df, "该周报仍保留本国/结构化相关的疾病事实")
+        self.assertTrue(all(FC.has_displayable_content(f) for f in df))
+        self.assertTrue(all(FC.fact_sources(f) for f in df))
+        # 计数映射对**全量 canonical 疾病数据**生效（不依赖某一份报告恰好带计数）
+        items = M.load_disease_items(str(ROOT))
+        with_counts = [d for d in items if FC.resolve_disease_content(d)["counts"]]
+        self.assertGreater(len(with_counts), 0, "canonical 疾病数据里存在真实计数")
+        mapped = FP._disease_fact(
+            {"disease_event_id": "X", "disease_id": "cholera", "disease_name_en": "Cholera",
+             "country_iso3": "TCD", "confirmed_cases": 12, "deaths": 2,
+             "source_evidence": [{"source_id": "who_afro", "source_name": "WHO"}]},
+            "disease_public_health")
+        self.assertEqual(mapped["counts"], {"confirmed_cases": 12, "deaths": 2})
+        self.assertIn(12, mapped["numeric_facts"])
 
 
 class EligibilityAndDerivedFieldsTest(unittest.TestCase):
@@ -247,8 +258,11 @@ class EligibilityAndDerivedFieldsTest(unittest.TestCase):
         self.assertEqual(a["CROSS_COUNTRY_FACTS_IN_COUNTRY_WEEKLY"], 0)
         self.assertEqual(a["FAKE_SOURCE_REFS"], 0)
         self.assertEqual(a["PROVIDER_BOUNDARY_REACHED"], a["AI_TARGET_REPORTS_ACTUAL"])
-        self.assertGreater(a["AI_TARGET_REPORTS_ACTUAL"], 0,
-                           "§十七：ACTUAL 必须 > 0")
+        # §7 CASE A/B：ACTUAL 可以为 0（全部 LOW_DATA 时属合法收口），
+        # 但绝不允许「有 target 却到不了边界」或「边界大于 target」
+        self.assertGreaterEqual(a["AI_TARGET_REPORTS_ACTUAL"], 0)
+        self.assertEqual(a["REPORT_AI_SCOPE_PARITY"], True)
+        self.assertEqual(a["CROSS_COUNTRY_FACTS_IN_REPORT_PACK"], 0)
         self.assertGreater(a["DISEASE_FACTS_CANDIDATE"], 0)
         self.assertEqual(a["DISEASE_FACTS_EXCLUDED_NO_CONTENT"], 0,
                          "疾病字段映射修复后不应再有空壳疾病事实")
@@ -264,9 +278,9 @@ class EligibilityAndDerivedFieldsTest(unittest.TestCase):
 class BoundaryAndTargetingTest(unittest.TestCase):
 
     def test_21_boundary_dry_run_reaches_every_actual_target(self):
+        """边界 = ACTUAL（可以为 0：全部 LOW_DATA 时 §7 CASE B 合法）。"""
         b = RAI.boundary_dry_run(str(ROOT))
         self.assertEqual(b["SUBMIT_TASK_CALLS"], 0)
-        self.assertGreater(b["AI_TARGET_REPORTS_ACTUAL"], 0)
         self.assertEqual(b["PROVIDER_BOUNDARY_REACHED"], b["AI_TARGET_REPORTS_ACTUAL"])
         self.assertEqual(b["GENERATE_CALLS_SIMULATED"], b["AI_TARGET_REPORTS_ACTUAL"])
         self.assertFalse(b["SYSTEMIC_PROVIDER_FAILURE"])
@@ -280,13 +294,141 @@ class BoundaryAndTargetingTest(unittest.TestCase):
                 self.assertNotIn(rep_row["report_id"], plan["target_ids"])
 
     def test_23_fact_less_report_is_reclassified_low_data(self):
-        """§十七：严格过滤后没有合法事实的报告必须被重新分类为 LOW_DATA。"""
-        for rid, rtype in (("WEEKLY_TCD_20260913", "country_weekly"),
-                           ("WEEKLY_NER_20260906", "country_weekly")):
-            rep = M.read_report_artifact(str(ROOT), rtype, rid)
+        """§十七：严格过滤后没有合法事实的报告必须是 LOW_DATA。
+
+        两种路径都要成立：① 事实数不足阈值本就 LOW_DATA；
+        ② 阈值判定为 FALLBACK 但 eligibility 后无事实 → 被**主动降级**。
+        """
+        for rid in ("WEEKLY_TCD_20260913", "WEEKLY_NER_20260906"):
+            rep = M.read_report_artifact(str(ROOT), "country_weekly", rid)
             self.assertEqual(rep.get("status"), M.STATUS_LOW_DATA)
-            self.assertEqual(rep.get("status_reason"), "NO_AI_ELIGIBLE_FACTS")
             self.assertEqual(rep.get("ai_eligible_fact_count"), 0)
+        # ② 主动降级路径（用合成 report 验证，不依赖当前语料恰好处于哪一侧）
+        fake_rep = {"report_id": "W_T", "report_type": "country_weekly",
+                    "country_iso3": "TCD", "status": M.STATUS_FALLBACK,
+                    "week_start": "2026-09-06", "week_end": "2026-09-13"}
+        fake_pack = {"social_facts": [], "disease_facts": [
+            {"fact_id": "marburg", "disease_id": "marburg", "headline_zh": "Marburg",
+             "country_iso3": "ETH", "source_refs": ["WHO"], "outbreak_status": "active"}]}
+        M.reclassify_by_ai_eligibility(fake_rep, fake_pack)
+        self.assertEqual(fake_rep["status"], M.STATUS_LOW_DATA)
+        self.assertEqual(fake_rep["status_reason"], "NO_AI_ELIGIBLE_FACTS")
+        self.assertEqual(fake_rep["ai_eligible_fact_count"], 0)
+
+
+
+
+class CountryScopeReconciliationTest(unittest.TestCase):
+    """§1/§2/§8 Country Weekly 报告层 scope 与报告/AI 同一契约。"""
+
+    def _pack(self, iso3="TCD"):
+        return {
+            "fact_id": "D1", "disease_id": "cholera", "headline_zh": "Cholera",
+            "country_iso3": iso3, "report_date": "2026-09-10",
+            "outbreak_status": "active", "source_refs": ["WHO"], "source_ids": ["who_afro"],
+            "counts": {"confirmed_cases": 3}, "numeric_facts": {3: ["x"]},
+        }
+
+    def _ctx(self, iso3="TCD"):
+        return {"report_type": "country_weekly", "country_iso3": iso3,
+                "week_start": "2026-09-06", "week_end": "2026-09-13"}
+
+    def test_29_country_weekly_report_excludes_other_country_disease(self):
+        """§1：报告层的疾病事实必须遵循目标国家 scope。"""
+        ctx = self._ctx("TCD")
+        facts = [self._pack("TCD"), self._pack("ETH"), self._pack("NGA"), self._pack("COD")]
+        kept, excluded = FC.filter_country_scope(facts, ctx)
+        self.assertEqual([f["country_iso3"] for f in kept], ["TCD"])
+        self.assertEqual(len(excluded), 3)
+        # 真实仓库：6 份 country weekly 的报告 pack 跨国事实必须为 0
+        for rid in ("WEEKLY_TCD_20260913", "WEEKLY_NER_20260913", "WEEKLY_SSD_20260913",
+                    "WEEKLY_TCD_20260906", "WEEKLY_NER_20260906", "WEEKLY_SSD_20260906"):
+            rep = M.read_report_artifact(str(ROOT), "country_weekly", rid)
+            fp, _ = RAI.rebuild_fact_pack(str(ROOT), rep)
+            facts = (fp.get("social_facts") or []) + (fp.get("disease_facts") or [])
+            self.assertEqual(FC.cross_country_facts(facts, rep), [],
+                             "%s 的报告 pack 不得含他国事实" % rid)
+
+    def test_30_country_weekly_report_and_ai_share_scope_contract(self):
+        """§2：REPORT_FACT_SCOPE == AI_FACT_SCOPE（同一判定函数、同一结果）。"""
+        rep = M.read_report_artifact(str(ROOT), "country_weekly", "WEEKLY_TCD_20260913")
+        fp, _ = RAI.rebuild_fact_pack(str(ROOT), rep)
+        ai_fp, d = RAI.build_ai_fact_pack(fp, rep)
+        report_facts = (fp.get("social_facts") or []) + (fp.get("disease_facts") or [])
+        # 两层的国家判定必须逐条一致
+        for f in report_facts:
+            self.assertTrue(FC.country_scope_ok(f, rep),
+                            "报告层保留的事实必须也通过 AI 层的同一判定")
+        for f in (ai_fp.get("social_facts") or []) + (ai_fp.get("disease_facts") or []):
+            self.assertIn(f, report_facts, "AI pack 事实必须来自报告层事实集合")
+        self.assertEqual(d["CROSS_COUNTRY_FACTS_IN_REPORT_PACK"], 0)
+        self.assertEqual(d["CROSS_COUNTRY_FACTS_IN_AI_FACT_PACK"], 0)
+        self.assertTrue(d["REPORT_AI_SCOPE_PARITY"])
+        # 报告层已过滤 → AI 层不应再出现 SCOPE 排除
+        self.assertEqual(d.get("SOCIAL_FACTS_EXCLUDED_SCOPE", 0), 0)
+        self.assertEqual(d.get("DISEASE_FACTS_EXCLUDED_SCOPE", 0), 0)
+        a = RAI.audit_ai_packs(str(ROOT), all_reports=True)["totals"]
+        self.assertTrue(a["REPORT_AI_SCOPE_PARITY"])
+        self.assertEqual(a["CROSS_COUNTRY_FACTS_IN_REPORT_PACK"], 0)
+        self.assertEqual(a["CROSS_COUNTRY_FACTS_IN_AI_FACT_PACK"], 0)
+
+    def test_31_regional_fact_not_admitted_without_target_relevance(self):
+        """§1：单纯 regional 不放行；结构化可追溯的目标国相关性才放行。"""
+        ctx = self._ctx("TCD")
+        plain = self._pack("regional")
+        self.assertEqual(FC.country_scope_decision(plain, ctx),
+                         (False, "REGIONAL_WITHOUT_RELEVANCE"))
+        self.assertEqual(FC.filter_country_scope([plain], ctx)[0], [])
+        # 结构化 affected_countries 明确指出报告国 → 放行（可追溯）
+        affected = dict(self._pack("regional"), affected_countries=["COD", "TCD"])
+        self.assertEqual(FC.country_scope_decision(affected, ctx),
+                         (True, "AFFECTED_COUNTRY_MATCH"))
+        # 结构化 TARGET_COUNTRY_RELEVANCE 明确指向报告国 → 放行
+        rel = dict(self._pack("regional"), affected_countries=[],
+                   target_country_relevance={"country": "TCD", "reason": "cross_border_spillover"})
+        self.assertEqual(FC.country_scope_decision(rel, ctx),
+                         (True, "TARGET_COUNTRY_RELEVANCE"))
+        # regional 且 affected_countries 指向**别国** → 仍排除
+        other = dict(self._pack("regional"), affected_countries=["NGA"])
+        self.assertEqual(FC.country_scope_decision(other, ctx),
+                         (False, "REGIONAL_WITHOUT_RELEVANCE"))
+        # 区域报告不受国家隔离
+        self.assertTrue(FC.country_scope_ok(self._pack("ETH"),
+                                            {"report_type": "africa_weekly"}))
+
+    def test_32_country_scope_change_updates_report_hash(self):
+        """§3：scope 变化必须改变 fact_pack_hash（AI pack/input hash 随之变化）。"""
+        base = {"report_id": "W1", "report_type": "country_weekly", "country_iso3": "TCD",
+                "week_start": "2026-09-06", "week_end": "2026-09-13",
+                "social_facts": [], "disease_facts": [self._pack("TCD")],
+                "numeric_provenance": {}}
+        with_foreign = dict(base, disease_facts=[self._pack("TCD"), self._pack("ETH")])
+        self.assertNotEqual(F.report_pack_hash(base), F.report_pack_hash(with_foreign),
+                            "国家 scope 变化必须改变 hash")
+        # input hash 也必须随之变化（cache identity 含 fact_pack_hash）
+        h1 = RAI.ai_input_hash("W1", F.report_pack_hash(base))
+        h2 = RAI.ai_input_hash("W1", F.report_pack_hash(with_foreign))
+        self.assertNotEqual(h1, h2)
+        # 真实仓库：报告 pack 已按 scope 重建，hash 与重建结果一致
+        rep = M.read_report_artifact(str(ROOT), "country_weekly", "WEEKLY_TCD_20260913")
+        _fp, h = RAI.rebuild_fact_pack(str(ROOT), rep)
+        self.assertEqual(h, rep.get("fact_pack_hash"))
+
+    def test_33_zero_ai_targets_is_valid_when_all_reports_low_data(self):
+        """§5/§7 CASE B：全部 LOW_DATA 时 0 个 AI target 是**合法**结果。"""
+        plan = RAI.plan_targets(str(ROOT))
+        self.assertEqual(plan["AI_TARGETING_RULE"], "status")
+        statuses = {r.get("status") for r in M.list_report_artifacts(str(ROOT))}
+        if statuses == {M.STATUS_LOW_DATA}:
+            self.assertEqual(plan["AI_TARGET_REPORTS_ACTUAL"], 0)
+            self.assertEqual(plan["AI_TARGET_REPORTS"], 0)
+            self.assertEqual(plan["target_ids"], [])
+        b = RAI.boundary_dry_run(str(ROOT))
+        self.assertEqual(b["SUBMIT_TASK_CALLS"], 0)
+        self.assertEqual(b["PROVIDER_BOUNDARY_REACHED"], b["AI_TARGET_REPORTS_ACTUAL"])
+        self.assertTrue(b["boundary_equals_actual"])
+        # 阈值不得被下调来制造调用
+        self.assertEqual(M.DAILY_SECURITY_MIN, 8)
 
 
 if __name__ == "__main__":
