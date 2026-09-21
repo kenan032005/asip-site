@@ -20,9 +20,15 @@ Fact Pack 字段（§三）：
 """
 import json
 import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
+
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from scripts.report import fact_content as FC  # noqa: E402
 
 _NUM_RE = re.compile(r"(?<![\w.])(\d{1,3}(?:,\d{3})*|\d+)(?![\w.])")
 
@@ -70,11 +76,26 @@ def _fact_numeric_provenance(item, section):
     return prov
 
 
+def _numeric_field_provenance(item, section, keys):
+    """数值型字段 → {value: [path]}（旧实现只扫字符串，数字字段会漏）。"""
+    prov = {}
+    for k in keys:
+        v = item.get(k)
+        if isinstance(v, (int, float)) and not isinstance(v, bool):
+            prov.setdefault(int(v), []).append("sections.%s.%s" % (section, k))
+    return prov
+
+
 def _social_fact(item, section):
+    # §三 确定性 content resolver（title_cn → title_original；
+    # summary_cn → summary_original）：全部为空即无内容，由 eligibility 排除。
+    c = FC.resolve_social_content(item)
     return {
         "fact_id": item.get("event_id"),
-        "headline_zh": item.get("title"),
-        "verified_summary": item.get("summary"),
+        "headline_zh": c["headline"],
+        "verified_summary": c["summary"],
+        "content_language": c["content_language"],
+        "content_source_field": c["content_source_field"],
         "country": item.get("country"),
         "country_iso3": item.get("country_iso3"),
         "category": item.get("category"),
@@ -94,20 +115,46 @@ def _social_fact(item, section):
 
 
 def _disease_fact(item, section):
+    # §六/§七 真实字段映射 + §三 名称 resolver（zh → en → id）；
+    # §九 来源绑定：直接用 canonical disease 的 source_links（真实 registry 身份 + 真实 URL），
+    # 绝不构造伪 source（解析不到 → source_refs 为空 → eligibility 排除）。
+    c = FC.resolve_disease_content(item)
+    links = [l for l in (item.get("source_evidence") or []) if isinstance(l, dict)]
+    refs, ids, urls = [], [], []
+    for l in links:
+        nm = l.get("source_name") or l.get("source_id")
+        if nm and nm not in refs:
+            refs.append(nm)
+        if l.get("source_id") and l["source_id"] not in ids:
+            ids.append(l["source_id"])
+        if l.get("url") and l["url"] not in urls:
+            urls.append(l["url"])
+    nprov = _fact_numeric_provenance(item, section)
+    for n, paths in _numeric_field_provenance(item, section,
+                                              FC.DISEASE_COUNT_FIELDS).items():
+        nprov.setdefault(n, []).extend(paths)
     return {
         "fact_id": item.get("disease_event_id") or item.get("disease_id"),
         "disease_id": item.get("disease_id"),
-        "headline_zh": item.get("title"),
+        "disease_event_id": item.get("disease_event_id"),
+        "headline_zh": c["name"],
         "verified_summary": item.get("summary"),
+        "content_language": c["content_language"],
+        "content_source_field": c["content_source_field"],
         "country_iso3": item.get("country_iso3"),
+        "location": item.get("location"),
+        "report_date": item.get("report_date"),
+        "outbreak_status": item.get("outbreak_status"),
+        "update_type": item.get("update_type"),
+        "counts": c["counts"],
         "verification_status": item.get("verification"),
+        "primary_source": item.get("primary_source"),
         "uncertainties": [u for u in (item.get("uncertainties") or []) if u],
-        "source_refs": [s.get("source_name") for s in (item.get("source_evidence") or [])
-                        if s.get("source_name")],
-        "source_ids": [s.get("source_id") for s in (item.get("source_evidence") or [])
-                       if s.get("source_id")],
+        "source_refs": refs,
+        "source_ids": ids,
+        "source_links": urls,
         "selection_reasons": item.get("selection_reasons") or [],
-        "numeric_facts": _fact_numeric_provenance(item, section),
+        "numeric_facts": nprov,
     }
 
 

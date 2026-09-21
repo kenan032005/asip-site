@@ -175,11 +175,14 @@ def with_pack(rep, fp):
 class TargetPlannerTest(unittest.TestCase):
 
     def test_01_planner_skips_low_data(self):
+        """C4-C 事实投影修复后：4 份无可分析事实的周报被重新分类为 LOW_DATA（§十七），
+        因此 LOW_DATA = 20、targets = 2（不再是空壳事实撑起来的 6）。"""
         p = RAII_plan(str(ROOT))
         self.assertEqual(p["TOTAL_REPORTS"], 22)
-        self.assertEqual(p["LOW_DATA_REPORTS"], 16)
-        self.assertEqual(p["AI_TARGET_REPORTS"], 6)
-        self.assertEqual(p["EXPECTED_REAL_AI_CALLS_MAX"], 6)
+        self.assertEqual(p["LOW_DATA_REPORTS"], 20)
+        self.assertEqual(p["AI_TARGET_REPORTS"], 2)
+        self.assertEqual(p["AI_TARGET_REPORTS_ACTUAL"], 2)
+        self.assertEqual(p["EXPECTED_REAL_AI_CALLS_MAX"], 2)
         for rid in p["target_ids"]:
             self.assertTrue(rid.startswith("WEEKLY_"))
 
@@ -327,14 +330,22 @@ class PolicyAndSafetyTest(unittest.TestCase):
             shutil.rmtree(t, ignore_errors=True)
 
     def test_15_real_repo_targets_have_clean_ai_packs(self):
-        """§十四 硬门：真实 22 份报告的 AI pack 不得含空壳/无来源/跨国家事实。"""
-        a = RAI.audit_ai_packs(str(ROOT))
+        """§十四 硬门：真实报告的 AI pack 不得含空壳/无来源/跨国家事实。
+
+        C4-C 事实投影修复后：疾病字段映射与来源绑定已修好（NO_CONTENT/NO_SOURCE = 0），
+        疾病事实现在是因为**国家 scope / 时间窗**被排除，而不是因为空壳。
+        """
+        a = RAI.audit_ai_packs(str(ROOT), all_reports=True)
         t = a["totals"]
         self.assertEqual(t["UNATTRIBUTED_FACTS_IN_AI_FACT_PACK"], 0)
         self.assertEqual(t["EMPTY_FACTS_IN_AI_FACT_PACK"], 0)
         self.assertEqual(t["CROSS_COUNTRY_FACTS_IN_COUNTRY_WEEKLY"], 0)
+        self.assertEqual(t["FAKE_SOURCE_REFS"], 0)
         self.assertEqual(t["DISEASE_FACTS_INCLUDED_IN_AI_FACT_PACK"], 0)
-        self.assertEqual(t["DISEASE_FACTS_EXCLUDED_FROM_AI_FACT_PACK"], 120)
+        self.assertEqual(t["DISEASE_FACTS_EXCLUDED_FROM_AI_FACT_PACK"],
+                         t["DISEASE_FACTS_CANDIDATE"])
+        self.assertEqual(t["DISEASE_FACTS_EXCLUDED_NO_CONTENT"], 0)
+        self.assertEqual(t["DISEASE_FACTS_EXCLUDED_NO_SOURCE"], 0)
         self.assertEqual(t["SECRETS_IN_AUDIT_OUTPUT"], 0)
 
 
@@ -466,13 +477,23 @@ class AIFactPackEligibilityTest(unittest.TestCase):
         self.assertEqual(d2["DISEASE_FACTS_INCLUDED_IN_AI_FACT_PACK"], 0)
 
     def test_28_empty_ai_pack_never_calls_provider(self):
+        """eligibility 后没有任何合法事实 → 绝不调用 provider。
+
+        注：投影修复后，真实物化的 pack 已经不是空壳（社交事实有内容），
+        因此这里显式构造「全部被 scope/时间窗排除」的 pack 来验证跳过行为。
+        """
         t = mkroot()
         try:
-            rep, fp_real = seed_country_weekly(t)
+            rep, _ = seed_country_weekly(t)
+            fp = ai_pack(n_social=2, n_disease=2, disease_country="ETH",
+                         disease_date="2025-11-24")   # 他国 + 过期 → 全部不合格
+            for f in fp["social_facts"]:
+                f["country_iso3"] = "ETH"            # 社交事实也不属报告国
+            rep = with_pack(rep, fp)
             prov = FixtureProvider("ok")
-            o = RAI.enrich_one(t, rep, provider=prov, fact_pack=fp_real, write=False)
+            o = RAI.enrich_one(t, rep, provider=prov, fact_pack=fp, write=False)
             self.assertEqual(o["outcome"], "SKIPPED_EMPTY_AI_PACK")
-            self.assertEqual(len(prov.calls), 0, "空壳 fact pack 绝不送进模型")
+            self.assertEqual(len(prov.calls), 0, "空壳/不合格 fact pack 绝不送进模型")
         finally:
             shutil.rmtree(t, ignore_errors=True)
 

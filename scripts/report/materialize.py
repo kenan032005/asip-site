@@ -29,6 +29,8 @@ if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
 from scripts.report import factory as F                          # noqa: E402
+from scripts.report.fact_content import (is_displayable_fact,          # noqa: E402
+                                         report_ai_eligible_fact_count)
 from scripts.report import builder as B                          # noqa: E402
 from scripts.report.selection import temporal_bucket as _tb      # noqa: E402
 from scripts.report.gen import fact_pack as FP                   # noqa: E402
@@ -302,6 +304,15 @@ def attach_source_refs(root, fp, events, urls=None):
         e = by_id.get(f.get("fact_id")) or {}
         groups = [g for g in (e.get("source_groups") or []) if g]
         links = [urls[a] for a in (e.get("article_ids") or []) if urls.get(a)]
+        # 疾病事实的 fact_id 是疾病 id，永远匹配不到 canonical event_id：
+        # 其真实来源已在 fact_pack 层从 canonical disease 的 source_links 绑定，
+        # 这里**不得**用空结果覆盖（旧实现会把真实来源抹成 [] → 恒无来源）。
+        if not groups and not links and f.get("source_refs"):
+            for r in f["source_refs"]:
+                refs_all.append({"source_name": r,
+                                 "url": (f.get("source_links") or [None])[0],
+                                 "verification": f.get("verification_status") or "single_source"})
+            continue
         f["source_refs"] = sorted(set(groups)) or sorted(set(links))[:1]
         f["source_ids"] = sorted(set(groups))
         f["source_links"] = links[:3]
@@ -354,6 +365,22 @@ def sanitize_public_text(report, status):
                 report[k] = COVERAGE_NOTE_TEMPLATE
     return report
 
+def reclassify_by_ai_eligibility(report, fact_pack):
+    """§十七：严格 eligibility 后**没有任何合法事实**的报告 → 重新分类为 LOW_DATA。
+
+    这类报告（例如只有他国/过期/无来源事实的周报）不得为了凑 target 数而送去分析。
+    同时记录可供审计的 `ai_eligible_fact_count`。
+    """
+    n = report_ai_eligible_fact_count(fact_pack, report)
+    report["ai_eligible_fact_count"] = n
+    if n == 0 and report.get("status") != STATUS_LOW_DATA:
+        report["status"] = STATUS_LOW_DATA
+        report["status_reason"] = "NO_AI_ELIGIBLE_FACTS"
+        report["report_status_cn"] = _status_cn(STATUS_LOW_DATA)
+        sanitize_public_text(report, STATUS_LOW_DATA)
+    return report
+
+
 #: 日报正文的最小 source-backed 事实数（沿用既有 DAILY_SECURITY_MIN，不擅自调低）
 DAILY_SECURITY_MIN = 8
 
@@ -375,7 +402,14 @@ def source_backed_pool(events, urls=None):
 
 
 def _status_for(fact_pack, min_facts=None):
-    n = len(fact_pack.get("social_facts") or []) + len(fact_pack.get("disease_facts") or [])
+    """事实数**只统计「有可展示内容 + 有真实来源」的事实**。
+
+    历史缺陷：空壳事实（headline/summary 全空、也无真实来源）会被计入 fact_count，
+    把本该 LOW_DATA 的报告顶到 FALLBACK —— C4-C 的 6 个 AI target 正是这么来的。
+    计数口径与 AI fact pack eligibility 共用 `fact_content`，两者不再各算一套。
+    """
+    n = sum(1 for f in (fact_pack.get("social_facts") or []) +
+            (fact_pack.get("disease_facts") or []) if is_displayable_fact(f))
     thr = DAILY_SECURITY_MIN if min_facts is None else min_facts
     # 没有 AI → 永不 FULL；事实不足 → LOW_DATA（§六）
     return (STATUS_LOW_DATA if n < thr else STATUS_FALLBACK), n
@@ -462,6 +496,7 @@ def materialize_daily(root, target, events, disease, iso, prev_report=None):
     report["source_refs"] = report_sources
     _apply_coverage(report, _unattr, status)
     sanitize_public_text(report, status)
+    reclassify_by_ai_eligibility(report, fp)
     return report, fp
 
 
@@ -543,6 +578,7 @@ def materialize_africa_weekly(root, week, events, disease, iso):
     report["source_refs"] = report_sources
     _apply_coverage(report, _unattr, status)
     sanitize_public_text(report, status)
+    reclassify_by_ai_eligibility(report, fp)
     return report, fp
 
 
@@ -583,6 +619,7 @@ def materialize_country_weekly(root, target, events, disease, iso):
     report["source_refs"] = report_sources
     _apply_coverage(report, _unattr, status)
     sanitize_public_text(report, status)
+    reclassify_by_ai_eligibility(report, fp)
     return report, fp
 
 

@@ -42,6 +42,7 @@ from scripts.report import materialize as M                  # noqa: E402
 from scripts.report.gen import analysis_contract as AC       # noqa: E402
 from scripts.report.gen import deterministic_assembler as DA  # noqa: E402
 from scripts.report.gen import providers as P                # noqa: E402
+from scripts.report import fact_content as FC               # noqa: E402
 
 PROMPT_VERSION = "analysis-v1.0.0"
 MODEL = "deepseek-flash"
@@ -63,20 +64,29 @@ def ai_input_hash(report_id, fact_pack_hash, model=MODEL, prompt_version=PROMPT_
                         "%s+%s" % (prompt_version, AI_PACK_VERSION))
 
 
+#: AI 目标规则。
+#:   'eligibility' —— §十七：**有 ≥1 条通过 eligibility 的合法事实**即可分析，
+#:                    与 LOW_DATA 标签解耦（标签仍按事实数阈值给用户看）。
+#:   'status'      —— 旧规则：status != LOW_DATA 才分析（会因空壳事实膨胀而误判）。
+#: 采用 status 的理由：§四「LOW_DATA 不调用 AI」是产品语义（标签由事实数阈值决定），
+#: 而 §十七 的 `AI_TARGET_REPORTS_ACTUAL` 在此之上按 **eligibility** 再收敛：
+#: 标签为 FALLBACK 但严格过滤后没有任何合法事实的报告会被
+#: materialize 重新分类为 LOW_DATA（见 materialize.reclassify_by_ai_eligibility），
+#: 因此「标签」与「可分析」两者最终一致，不存在 LOW_DATA 却调用 AI 的情况。
+AI_TARGETING_RULE = "status"
+
+
 # ── §五 Target Planner（只读）─────────────────────────────────────────────
-def plan_targets(root):
-    """计算 AI 目标：只有「非 LOW_DATA + 有事实 + 无合法 cache」才需要调用。"""
+def plan_targets(root, with_eligibility=True):
+    """计算 AI 目标（只读）。
+
+    §十七：目标是**通过严格 eligibility 后仍有 ≥1 条合法事实**的报告。
+    没有合法事实的报告保持 LOW_DATA 标签，绝不为了凑数塞脏数据。
+    """
     reports = M.list_report_artifacts(root)
-    low, eligible, cached, negative = [], [], [], []
+    low, cached, negative, eligible = [], [], [], []
     for r in reports:
         st = r.get("status")
-        nfacts = r.get("fact_count") or 0
-        if st == STATUS_LOW_DATA:
-            low.append(r)
-            continue
-        if not nfacts:
-            low.append(r)
-            continue
         ih = ai_input_hash(r.get("report_id"), r.get("fact_pack_hash"))
         if st == STATUS_FULL and r.get("ai_input_hash") in (None, ih):
             cached.append(r)
@@ -84,18 +94,39 @@ def plan_targets(root):
         if r.get("ai_negative_input_hash") == ih:
             negative.append(r)
             continue
+        if AI_TARGETING_RULE == "status" and (st == STATUS_LOW_DATA
+                                              or not (r.get("fact_count") or 0)):
+            low.append(r)
+            continue
         eligible.append(r)
-    return {
+    plan = {
         "TOTAL_REPORTS": len(reports),
-        "LOW_DATA_REPORTS": len(low),
+        "LOW_DATA_REPORTS": len([r for r in reports if r.get("status") == STATUS_LOW_DATA]),
         "ALREADY_CACHED_REPORTS": len(cached),
         "NEGATIVE_CACHED_REPORTS": len(negative),
         "FULL_ELIGIBLE_REPORTS": len(eligible),
-        "AI_TARGET_REPORTS": len(eligible),
-        "EXPECTED_REAL_AI_CALLS_MAX": len(eligible),
+        "AI_TARGETING_RULE": AI_TARGETING_RULE,
         "target_ids": [r.get("report_id") for r in eligible],
         "low_data_ids": [r.get("report_id") for r in low],
     }
+    if with_eligibility:
+        actual, empty = [], []
+        for r in eligible:
+            fp, _ = rebuild_fact_pack(root, r)
+            n = 0
+            if fp:
+                _ai, d = build_ai_fact_pack(fp, r)
+                n = d["AI_PACK_FACTS_TOTAL"]
+            (actual if n else empty).append(r.get("report_id"))
+        plan["AI_TARGET_REPORTS"] = len(actual)
+        plan["AI_TARGET_REPORTS_ACTUAL"] = len(actual)
+        plan["AI_TARGET_IDS_ACTUAL"] = actual
+        plan["AI_TARGETS_WITHOUT_ELIGIBLE_FACTS"] = empty
+        plan["EXPECTED_REAL_AI_CALLS_MAX"] = len(actual)
+    else:
+        plan["AI_TARGET_REPORTS"] = len(eligible)
+        plan["EXPECTED_REAL_AI_CALLS_MAX"] = len(eligible)
+    return plan
 
 
 # ── fact pack 重建（确定性；hash 必须与 artifact 一致）──────────────────
@@ -125,86 +156,14 @@ def rebuild_fact_pack(root, report):
 
 
 # ── §八–§十二 AI Fact Pack Eligibility ──────────────────────────────────
-#: 判定「有实际可展示内容」的字段（任一非空即算有内容；只有 id/来源不算内容）
-_CONTENT_KEYS = ("headline_zh", "headline", "summary_zh", "summary",
-                 "verified_summary", "fact_summary", "title_zh", "title",
-                 "fact", "detail", "disease_name_zh", "location")
-#: 可用于时间窗口校验的日期字段（存在即必须落在报告期内）
-_TIME_KEYS = ("report_date", "event_date", "event_start_date", "as_of_date",
-              "latest_report_at", "reported_at", "created_at", "updated_at")
-#: 疾病事实在各 report type 下允许的国家范围（确定性的 scope 规则）
-DISEASE_SCOPE_BY_TYPE = {"country_weekly": "country",
-                         "africa_weekly": "region",
-                         "africa_daily": "region"}
-#: 代表「跨国/区域」的国家标记 —— country_weekly **不**默认接纳（§十一）
-REGIONAL_MARKERS = frozenset(("REGIONAL", "REGION", "MULTI", "MULTIPLE", "UNKNOWN", ""))
-
-
-def _fact_has_content(f):
-    """§九：是否有实际可展示的事实内容（空壳 JSON 结构不算）。"""
-    for k in _CONTENT_KEYS:
-        v = f.get(k)
-        if isinstance(v, str) and v.strip():
-            return True
-        if isinstance(v, (list, dict)) and v:
-            return True
-    return bool(f.get("numeric_facts"))
-
-
-def _fact_sources(f):
-    """§十：事实的**真实**来源引用（source_refs 优先，其次 source_ids）。"""
-    out = []
-    for key in ("source_refs", "source_ids"):
-        v = f.get(key)
-        if isinstance(v, str):
-            v = [v]
-        for x in (v or []):
-            s = str(x).strip()
-            if s and s not in out:
-                out.append(s)
-    return out
-
-
-def _fact_countries(f):
-    out = set()
-    for k in ("country_iso3", "country", "country_code", "affected_countries"):
-        v = f.get(k)
-        if isinstance(v, str):
-            v = [v]
-        for x in (v or []):
-            s = str(x).strip().upper()
-            if s:
-                out.add(s)
-    return out
-
-
-def _report_countries(report):
-    out = set()
-    for k in ("country_iso3", "country", "country_code"):
-        v = report.get(k)
-        if isinstance(v, str) and v.strip():
-            out.add(v.strip().upper())
-    return out
-
-
-def _fact_window_state(f, report):
-    """True=在窗口内 / False=在窗口外 / None=该事实未声明任何日期。
-
-    未声明日期时**不**作为排除理由：窗口筛选本就是上游 fact pack builder 的职责
-    （selection_reasons），这里只否决「自己声明了日期却落在报告期之外」的事实。
-    """
-    ws = report.get("week_start") or report.get("period_start")
-    we = report.get("week_end") or report.get("period_end")
-    if not (ws and we):
-        return None
-    declared = []
-    for k in _TIME_KEYS:
-        v = f.get(k)
-        if isinstance(v, str) and len(v) >= 10:
-            declared.append(v[:10])
-    if not declared:
-        return None
-    return any(str(ws)[:10] <= d <= str(we)[:10] for d in declared)
+# 判定口径全部委托给 scripts/report/fact_content.py（报告层与 AI 层共用一套，
+# 不允许再出现两套「什么算有内容/有来源/在 scope 内」的定义）。
+DISEASE_SCOPE_BY_TYPE = FC.DISEASE_SCOPE_BY_TYPE
+_fact_has_content = FC.has_displayable_content
+_fact_sources = FC.fact_sources
+_fact_countries = FC.fact_countries
+_fact_window_state = FC.fact_window_state
+_report_countries = FC.report_countries
 
 
 def build_ai_fact_pack(fp, report):
@@ -212,7 +171,11 @@ def build_ai_fact_pack(fp, report):
 
     每条事实必须同时通过：① 有可展示内容 ② 有真实 source_refs
     ③ 时间窗口匹配（若声明了日期）④ 国家 scope 匹配 ⑤ report type scope 匹配。
-    排除项一律计数；**空壳事实绝不会被送进 prompt**。
+    逐条评估**全部**判据（不短路）并分别计数；空壳事实绝不会被送进 prompt。
+
+    §十二：过滤后**重新计算**派生字段（source_refs / entity_vocab / country_vocab /
+    numeric_provenance / date provenance / 计数），不沿用过滤前集合 ——
+    这样 machine gates 只允许模型实际看见的事实。
 
     返回 (ai_pack, diagnostics)。
     """
@@ -226,73 +189,101 @@ def build_ai_fact_pack(fp, report):
 
     kept = {}
     for kind, key in (("SOCIAL", "social_facts"), ("DISEASE", "disease_facts")):
+        cand = list(fp.get(key) or [])
+        diag["%s_FACTS_CANDIDATE" % kind] = len(cand)
         keep = []
-        for f in (fp.get(key) or []):
-            # 逐条独立评估**全部**判据（不做短路口径），才能同时给出
-            # 「空壳 120」与「无来源 120」两个都成立的事实
-            reasons = []
-            if not isinstance(f, dict):
-                reasons.append("NO_CONTENT")
-            else:
-                if not _fact_has_content(f):
-                    reasons.append("NO_CONTENT")                 # §九
-                if not _fact_sources(f):
-                    reasons.append("NO_SOURCE")                   # §十
-                if kind == "DISEASE" and scope == "country":
-                    # §十一 Country Weekly 国家隔离：声明了国别就必须是报告国；
-                    # regional / 他国一律不默认灌入（无产品规则允许）。
-                    declared = _fact_countries(f)
-                    if declared and not (declared & rc):
-                        reasons.append("CROSS_COUNTRY")
-                w = _fact_window_state(f, report)
-                if w is False:
-                    reasons.append("OUT_OF_WINDOW")               # §八③
-                elif w is None:
-                    _bump("%s_FACTS_TIME_UNVERIFIED" % kind)
+        for f in cand:
+            reasons = FC.fact_eligibility(f, report, kind)   # 单一判定口径
+            if not reasons and FC.fact_window_state(f, report) is None:
+                _bump("%s_FACTS_TIME_UNVERIFIED" % kind)
             for r in reasons:
                 _bump("%s_FACTS_EXCLUDED_%s" % (kind, r))
             if reasons:
                 continue
             keep.append(f)
         diag["%s_FACTS_INCLUDED" % kind] = len(keep)
-        diag["%s_FACTS_EXCLUDED" % kind] = len(fp.get(key) or []) - len(keep)
+        diag["%s_FACTS_EXCLUDED" % kind] = len(cand) - len(keep)
         kept[key] = keep
 
     ai_fp = dict(fp)
     ai_fp["social_facts"] = [dict(f) for f in kept["social_facts"]]
     ai_fp["disease_facts"] = [dict(f) for f in kept["disease_facts"]]
-    # vocab 收敛到模型真正看得到的事实上（gate 既不放行被排除事实里的实体，
-    # 也不因 prompt 中确实出现的 fact_id / 国家名而误判 UNSUPPORTED_NAMED_REFERENCE）
-    vocab = set()
-    for f in ai_fp["social_facts"] + ai_fp["disease_facts"]:
-        vocab |= set(_fact_sources(f))
-        vocab |= _fact_countries(f)
+    included = ai_fp["social_facts"] + ai_fp["disease_facts"]
+
+    # §十二 派生字段重算（不沿用过滤前集合）
+    vocab, country_vocab, numeric_prov, dates = set(), set(), {}, []
+    for f in included:
+        vocab |= set(FC.fact_sources(f))
+        cs = FC.fact_countries(f)
+        vocab |= cs
+        country_vocab |= cs
+        for st in (f.get("headline_zh"), f.get("verified_summary"), f.get("location")):
+            if isinstance(st, str) and st.strip():
+                vocab.add(st.strip())
         if f.get("fact_id"):
             vocab.add(str(f["fact_id"]))
-        for k in ("location",):
-            if isinstance(f.get(k), str) and f.get(k):
-                vocab.add(f[k])
+        for n, paths in (f.get("numeric_facts") or {}).items():
+            try:
+                numeric_prov.setdefault(int(n), []).extend(paths or [])
+            except (TypeError, ValueError):
+                continue
+        for k in ("report_date", "event_time", "event_start_date"):
+            v = f.get(k)
+            if isinstance(v, str) and len(v) >= 10:
+                dates.append(v[:10])
+    ai_fp["entity_vocab"] = sorted(vocab)
+    ai_fp["country_vocab"] = sorted(country_vocab)
+    ai_fp["numeric_provenance"] = numeric_prov
+    ai_fp["date_provenance"] = sorted(set(dates + [
+        str(x)[:10] for x in (fp.get("week_start"), fp.get("week_end"),
+                              fp.get("period_start"), fp.get("period_end"),
+                              fp.get("report_date")) if x]))
     ai_fp["source_refs"] = [s for s in (fp.get("source_refs") or []) if s in vocab] \
         or sorted(vocab)
-    ai_fp["entity_vocab"] = sorted(vocab)
+    ai_fp["fact_count"] = len(included)
+    ai_fp["social_fact_count"] = len(ai_fp["social_facts"])
+    ai_fp["disease_fact_count"] = len(ai_fp["disease_facts"])
 
     # §十三/§十四 硬门指标 —— 一律在**输出 pack** 上真实统计，而不是靠过滤逻辑自证
-    included = ai_fp["social_facts"] + ai_fp["disease_facts"]
     diag["DISEASE_FACTS_INCLUDED_IN_AI_FACT_PACK"] = len(ai_fp["disease_facts"])
     diag["DISEASE_FACTS_EXCLUDED_FROM_AI_FACT_PACK"] = \
         len(fp.get("disease_facts") or []) - len(ai_fp["disease_facts"])
     diag["AI_PACK_FACTS_TOTAL"] = len(included)
     diag["UNATTRIBUTED_FACTS_IN_AI_FACT_PACK"] = sum(
-        1 for f in included if not _fact_sources(f))
+        1 for f in included if not FC.fact_sources(f))
     diag["EMPTY_FACTS_IN_AI_FACT_PACK"] = sum(
-        1 for f in included if not _fact_has_content(f))
+        1 for f in included if not FC.has_displayable_content(f))
     diag["CROSS_COUNTRY_FACTS_IN_COUNTRY_WEEKLY"] = (
-        sum(1 for f in included if _fact_countries(f) and not (_fact_countries(f) & rc))
+        sum(1 for f in included if FC.fact_countries(f) and not (FC.fact_countries(f) & rc))
         if rtype == "country_weekly" else 0)
-    countries = set()
-    for f in included:
-        countries |= _fact_countries(f)
-    diag["AI_PACK_COUNTRIES"] = sorted(countries)
+    diag["FAKE_SOURCE_REFS"] = sum(
+        1 for f in included for s in FC.fact_sources(f)
+        if str(s).lower() in ("source_unknown", "unknown", "n/a", "na")
+        or str(s).startswith("synthetic") or str(s).startswith("disease_source_0"))
+    diag["AI_PACK_COUNTRIES"] = sorted(country_vocab)
+
+    # §二十 本地化缺口单独统计（不混成 C4 失败）
+    s_zh = sum(1 for f in ai_fp["social_facts"]
+               if str(f.get("content_source_field") or "").endswith("_cn"))
+    s_or = sum(1 for f in ai_fp["social_facts"]
+               if str(f.get("content_source_field") or "").endswith("_original"))
+    d_zh = sum(1 for f in ai_fp["disease_facts"]
+               if str(f.get("content_source_field") or "") in ("disease_name_zh", "disease_name_cn"))
+    d_en = sum(1 for f in ai_fp["disease_facts"]
+               if str(f.get("content_source_field") or "") == "disease_name_en")
+    diag["SOCIAL_FACTS_USING_TITLE_CN"] = s_zh
+    diag["SOCIAL_FACTS_USING_TITLE_ORIGINAL"] = s_or
+    diag["SOCIAL_FACTS_EXCLUDED_NO_CONTENT"] = diag.get("SOCIAL_FACTS_EXCLUDED_NO_CONTENT", 0)
+    diag["DISEASE_FACTS_USING_CN_NAME"] = d_zh
+    diag["DISEASE_FACTS_USING_EN_NAME"] = d_en
+    diag["C5_LOCALIZATION_COMPLETENESS_DEBT"] = bool(
+        s_or or d_en or diag["SOCIAL_FACTS_EXCLUDED_NO_CONTENT"])
+
+    # 兼容既有命名（同一数字，避免下游/测试两套口径）
+    diag["DISEASE_FACTS_EXCLUDED_CROSS_COUNTRY"] = diag.get("DISEASE_FACTS_EXCLUDED_SCOPE", 0)
+    diag["SOCIAL_FACTS_EXCLUDED_NO_CONTENT"] = diag.get("SOCIAL_FACTS_EXCLUDED_NO_CONTENT", 0)
+    diag["DISEASE_FACTS_EXCLUDED_NO_CONTENT"] = diag.get("DISEASE_FACTS_EXCLUDED_NO_CONTENT", 0)
+    diag["DISEASE_FACTS_EXCLUDED_NO_SOURCE"] = diag.get("DISEASE_FACTS_EXCLUDED_NO_SOURCE", 0)
     return ai_fp, diag
 
 
@@ -556,17 +547,27 @@ def _persist(root, report, write, extra=None):
 # ── 批量 ────────────────────────────────────────────────────────────────
 def _empty_pack_stats():
     return {"UNATTRIBUTED_FACTS_IN_AI_FACT_PACK": 0, "EMPTY_FACTS_IN_AI_FACT_PACK": 0,
-            "CROSS_COUNTRY_FACTS_IN_COUNTRY_WEEKLY": 0, "AI_PACK_FACTS_TOTAL": 0,
+            "CROSS_COUNTRY_FACTS_IN_COUNTRY_WEEKLY": 0, "FAKE_SOURCE_REFS": 0,
+            "AI_PACK_FACTS_TOTAL": 0,
             "DISEASE_FACTS_INCLUDED_IN_AI_FACT_PACK": 0,
             "DISEASE_FACTS_EXCLUDED_FROM_AI_FACT_PACK": 0,
-            "SOCIAL_FACTS_INCLUDED": 0, "SOCIAL_FACTS_EXCLUDED": 0}
+            "SOCIAL_FACTS_CANDIDATE": 0, "DISEASE_FACTS_CANDIDATE": 0,
+            "SOCIAL_FACTS_INCLUDED": 0, "SOCIAL_FACTS_EXCLUDED": 0,
+            "SOCIAL_FACTS_EXCLUDED_NO_CONTENT": 0, "SOCIAL_FACTS_EXCLUDED_NO_SOURCE": 0,
+            "SOCIAL_FACTS_EXCLUDED_SCOPE": 0, "SOCIAL_FACTS_EXCLUDED_OUT_OF_WINDOW": 0,
+            "DISEASE_FACTS_EXCLUDED_NO_CONTENT": 0, "DISEASE_FACTS_EXCLUDED_NO_SOURCE": 0,
+            "DISEASE_FACTS_EXCLUDED_SCOPE": 0, "DISEASE_FACTS_EXCLUDED_OUT_OF_WINDOW": 0,
+            "SOCIAL_FACTS_USING_TITLE_CN": 0, "SOCIAL_FACTS_USING_TITLE_ORIGINAL": 0,
+            "DISEASE_FACTS_USING_CN_NAME": 0, "DISEASE_FACTS_USING_EN_NAME": 0,
+            "C5_LOCALIZATION_COMPLETENESS_DEBT": False}
 
 
 def enrich_all(root, provider=None, write=True, limit=None, fact_pack_map=None):
-    plan = plan_targets(root)
+    plan = plan_targets(root, with_eligibility=False)
     stats = {"TOTAL_REPORTS": plan["TOTAL_REPORTS"],
              "LOW_DATA_REPORTS": plan["LOW_DATA_REPORTS"],
              "AI_TARGET_REPORTS": plan["AI_TARGET_REPORTS"],
+             "AI_TARGET_REPORTS_ACTUAL": 0,
              "EXPECTED_REAL_AI_CALLS_MAX": plan["EXPECTED_REAL_AI_CALLS_MAX"],
              "AI_CALLS_TOTAL": 0, "AI_CALLS_DAILY": 0, "AI_CALLS_AFRICA_WEEKLY": 0,
              "AI_CALLS_COUNTRY_WEEKLY": 0, "FULL": 0, "FALLBACK": 0,
@@ -603,7 +604,7 @@ def enrich_all(root, provider=None, write=True, limit=None, fact_pack_map=None):
         else:
             fp, _ = rebuild_fact_pack(root, rep)
         if fp:
-            # §十四：硬门指标一律基于**真正进入 prompt 的** pack 统计
+            # §十四/§十六：硬门指标一律基于**真正进入 prompt 的** pack 统计
             ai_fp, pdiag = build_ai_fact_pack(fp, rep)
             stats["pack_audit"][rid] = {
                 "report_type": rtype,
@@ -613,14 +614,26 @@ def enrich_all(root, provider=None, write=True, limit=None, fact_pack_map=None):
                 "disease_facts_excluded": pdiag["DISEASE_FACTS_EXCLUDED_FROM_AI_FACT_PACK"],
                 "countries": pdiag["AI_PACK_COUNTRIES"],
             }
-            stats["UNATTRIBUTED_FACTS_IN_AI_FACT_PACK"] += pdiag["UNATTRIBUTED_FACTS_IN_AI_FACT_PACK"]
-            stats["EMPTY_FACTS_IN_AI_FACT_PACK"] += pdiag["EMPTY_FACTS_IN_AI_FACT_PACK"]
-            stats["CROSS_COUNTRY_FACTS_IN_COUNTRY_WEEKLY"] += pdiag["CROSS_COUNTRY_FACTS_IN_COUNTRY_WEEKLY"]
-            stats["AI_PACK_FACTS_TOTAL"] += pdiag["AI_PACK_FACTS_TOTAL"]
-            stats["DISEASE_FACTS_INCLUDED_IN_AI_FACT_PACK"] += pdiag["DISEASE_FACTS_INCLUDED_IN_AI_FACT_PACK"]
-            stats["DISEASE_FACTS_EXCLUDED_FROM_AI_FACT_PACK"] += pdiag["DISEASE_FACTS_EXCLUDED_FROM_AI_FACT_PACK"]
-            stats["SOCIAL_FACTS_INCLUDED"] += pdiag["SOCIAL_FACTS_INCLUDED"]
-            stats["SOCIAL_FACTS_EXCLUDED"] += pdiag["SOCIAL_FACTS_EXCLUDED"]
+            if pdiag["AI_PACK_FACTS_TOTAL"] > 0:
+                stats["AI_TARGET_REPORTS_ACTUAL"] += 1
+            for k in ("UNATTRIBUTED_FACTS_IN_AI_FACT_PACK", "EMPTY_FACTS_IN_AI_FACT_PACK",
+                      "CROSS_COUNTRY_FACTS_IN_COUNTRY_WEEKLY", "FAKE_SOURCE_REFS",
+                      "AI_PACK_FACTS_TOTAL", "DISEASE_FACTS_INCLUDED_IN_AI_FACT_PACK",
+                      "DISEASE_FACTS_EXCLUDED_FROM_AI_FACT_PACK", "SOCIAL_FACTS_CANDIDATE",
+                      "DISEASE_FACTS_CANDIDATE", "SOCIAL_FACTS_INCLUDED",
+                      "SOCIAL_FACTS_EXCLUDED", "SOCIAL_FACTS_EXCLUDED_NO_CONTENT",
+                      "SOCIAL_FACTS_EXCLUDED_NO_SOURCE", "SOCIAL_FACTS_EXCLUDED_SCOPE",
+                      "SOCIAL_FACTS_EXCLUDED_OUT_OF_WINDOW",
+                      "DISEASE_FACTS_EXCLUDED_NO_CONTENT",
+                      "DISEASE_FACTS_EXCLUDED_NO_SOURCE", "DISEASE_FACTS_EXCLUDED_SCOPE",
+                      "DISEASE_FACTS_EXCLUDED_OUT_OF_WINDOW", "SOCIAL_FACTS_USING_TITLE_CN",
+                      "SOCIAL_FACTS_USING_TITLE_ORIGINAL", "DISEASE_FACTS_USING_CN_NAME",
+                      "DISEASE_FACTS_USING_EN_NAME"):
+                if k in pdiag:
+                    stats[k] += pdiag[k]
+            stats["C5_LOCALIZATION_COMPLETENESS_DEBT"] = (
+                stats["C5_LOCALIZATION_COMPLETENESS_DEBT"]
+                or pdiag["C5_LOCALIZATION_COMPLETENESS_DEBT"])
         try:
             o = enrich_one(root, rep, provider=prov, write=write,
                            fact_pack=(fact_pack_map or {}).get(rid))
@@ -670,20 +683,47 @@ def enrich_all(root, provider=None, write=True, limit=None, fact_pack_map=None):
     return stats
 
 
-def audit_ai_packs(root):
-    """§十五 Prompt Preview / serialized input audit（**不调用 AI、不写盘**）。
+def audit_ai_packs(root, all_reports=False):
+    """§十五/§十六 Prompt Preview / serialized input audit（**不调用 AI、不写盘**）。
 
-    对每个 target 输出：fact_count / disease_fact_count / source-backed count /
-    countries represented，用于证明进入 prompt 的内容合法（无空壳、无跨国家）。
+    默认审计 planner targets；all_reports=True 时审计**全部**报告（用于
+    「targets 为 0 时仍需逐份证据」的场景）。逐份输出 §十六 指定的计数，
+    并给出 §二十 的本地化缺口统计。
     """
-    plan = plan_targets(root)
-    rows, tot = [], {"AI_TARGET_REPORTS": plan["AI_TARGET_REPORTS"],
-                     "AI_PACK_FACTS_TOTAL": 0, "DISEASE_FACTS_INCLUDED_IN_AI_FACT_PACK": 0,
-                     "DISEASE_FACTS_EXCLUDED_FROM_AI_FACT_PACK": 0,
-                     "UNATTRIBUTED_FACTS_IN_AI_FACT_PACK": 0,
-                     "EMPTY_FACTS_IN_AI_FACT_PACK": 0,
-                     "CROSS_COUNTRY_FACTS_IN_COUNTRY_WEEKLY": 0,
-                     "TARGETS_REACHING_PROVIDER_BOUNDARY": 0}
+    plan = plan_targets(root, with_eligibility=False)
+    planner_targets = set(plan["target_ids"])
+    if all_reports:
+        plan = dict(plan)
+        plan["target_ids"] = [r.get("report_id")
+                              for r in M.list_report_artifacts(root)]
+    rows = []
+    tot = {"AI_TARGET_REPORTS": plan["AI_TARGET_REPORTS"],
+           "AI_TARGET_REPORTS_ACTUAL": 0,
+           "REPORTS_WITH_ELIGIBLE_FACTS": 0,
+           "AI_PACK_FACTS_TOTAL": 0,
+           "PROVIDER_BOUNDARY_REACHED": 0,
+           "UNATTRIBUTED_FACTS_IN_AI_FACT_PACK": 0,
+           "EMPTY_FACTS_IN_AI_FACT_PACK": 0,
+           "CROSS_COUNTRY_FACTS_IN_COUNTRY_WEEKLY": 0,
+           "FAKE_SOURCE_REFS": 0,
+           "SOCIAL_FACTS_USING_TITLE_CN": 0,
+           "SOCIAL_FACTS_USING_TITLE_ORIGINAL": 0,
+           "SOCIAL_FACTS_EXCLUDED_NO_CONTENT": 0,
+           "SOCIAL_FACTS_CANDIDATE": 0, "SOCIAL_FACTS_INCLUDED": 0,
+           "SOCIAL_FACTS_EXCLUDED_NO_SOURCE": 0, "SOCIAL_FACTS_EXCLUDED_SCOPE": 0,
+           "SOCIAL_FACTS_EXCLUDED_OUT_OF_WINDOW": 0,
+           "DISEASE_FACTS_CANDIDATE": 0, "DISEASE_FACTS_INCLUDED": 0,
+           "DISEASE_FACTS_EXCLUDED_NO_CONTENT": 0,
+           "DISEASE_FACTS_EXCLUDED_NO_SOURCE": 0,
+           "DISEASE_FACTS_EXCLUDED_SCOPE": 0,
+           "DISEASE_FACTS_EXCLUDED_OUT_OF_WINDOW": 0,
+           "DISEASE_FACTS_INCLUDED_IN_AI_FACT_PACK": 0,
+           "DISEASE_FACTS_EXCLUDED_FROM_AI_FACT_PACK": 0,
+           "DISEASE_FACTS_USING_CN_NAME": 0,
+           "DISEASE_FACTS_USING_EN_NAME": 0,
+           "SECRETS_IN_AUDIT_OUTPUT": 0}
+    sums = [k for k in tot if k != "SECRETS_IN_AUDIT_OUTPUT"]
+    tot["REPORTS_WITH_ELIGIBLE_FACTS_BUT_LOW_DATA"] = 0
     for rid in plan["target_ids"]:
         rep, t = None, None
         for _t in ("africa_daily", "africa_weekly", "country_weekly"):
@@ -697,31 +737,73 @@ def audit_ai_packs(root):
         if not fp:
             continue
         ai_fp, d = build_ai_fact_pack(fp, rep)
+        row_aliases = {"SOCIAL_FACTS_CANDIDATE": "SOCIAL_FACTS_CANDIDATE",
+                       "SOCIAL_FACTS_INCLUDED": "SOCIAL_FACTS_INCLUDED",
+                       "SOCIAL_FACTS_EXCLUDED_NO_CONTENT": "SOCIAL_FACTS_EXCLUDED_NO_CONTENT",
+                       "SOCIAL_FACTS_EXCLUDED_NO_SOURCE": "SOCIAL_FACTS_EXCLUDED_NO_SOURCE",
+                       "SOCIAL_FACTS_EXCLUDED_SCOPE": "SOCIAL_FACTS_EXCLUDED_SCOPE",
+                       "SOCIAL_FACTS_EXCLUDED_OUT_OF_WINDOW": "SOCIAL_FACTS_EXCLUDED_OUT_OF_WINDOW",
+                       "DISEASE_FACTS_CANDIDATE": "DISEASE_FACTS_CANDIDATE",
+                       "DISEASE_FACTS_INCLUDED": "DISEASE_FACTS_INCLUDED",
+                       "DISEASE_FACTS_EXCLUDED_NO_CONTENT": "DISEASE_FACTS_EXCLUDED_NO_CONTENT",
+                       "DISEASE_FACTS_EXCLUDED_NO_SOURCE": "DISEASE_FACTS_EXCLUDED_NO_SOURCE",
+                       "DISEASE_FACTS_EXCLUDED_SCOPE": "DISEASE_FACTS_EXCLUDED_SCOPE",
+                       "DISEASE_FACTS_EXCLUDED_OUT_OF_WINDOW": "DISEASE_FACTS_EXCLUDED_OUT_OF_WINDOW",
+                       "DISEASE_FACTS_INCLUDED_IN_AI_FACT_PACK": "DISEASE_FACTS_INCLUDED",
+                       "DISEASE_FACTS_EXCLUDED_FROM_AI_FACT_PACK": "DISEASE_FACTS_EXCLUDED_FROM_PACK"}
         rows.append({
             "report_id": rid, "report_type": t,
             "fact_count": rep.get("fact_count"),
-            "social_facts_in_pack": len(fp.get("social_facts") or []),
-            "disease_fact_count": len(fp.get("disease_facts") or []),
-            "ai_pack_fact_count": d["AI_PACK_FACTS_TOTAL"],
+            "SOCIAL_FACTS_CANDIDATE": d["SOCIAL_FACTS_CANDIDATE"],
+            "SOCIAL_FACTS_INCLUDED": d["SOCIAL_FACTS_INCLUDED"],
+            "SOCIAL_FACTS_EXCLUDED_NO_CONTENT": d.get("SOCIAL_FACTS_EXCLUDED_NO_CONTENT", 0),
+            "SOCIAL_FACTS_EXCLUDED_NO_SOURCE": d.get("SOCIAL_FACTS_EXCLUDED_NO_SOURCE", 0),
+            "SOCIAL_FACTS_EXCLUDED_SCOPE": d.get("SOCIAL_FACTS_EXCLUDED_SCOPE", 0),
+            "SOCIAL_FACTS_EXCLUDED_OUT_OF_WINDOW": d.get("SOCIAL_FACTS_EXCLUDED_OUT_OF_WINDOW", 0),
+            "DISEASE_FACTS_CANDIDATE": d["DISEASE_FACTS_CANDIDATE"],
+            "DISEASE_FACTS_INCLUDED": d["DISEASE_FACTS_INCLUDED_IN_AI_FACT_PACK"],
+            "DISEASE_FACTS_EXCLUDED_NO_CONTENT": d.get("DISEASE_FACTS_EXCLUDED_NO_CONTENT", 0),
+            "DISEASE_FACTS_EXCLUDED_NO_SOURCE": d.get("DISEASE_FACTS_EXCLUDED_NO_SOURCE", 0),
+            "DISEASE_FACTS_EXCLUDED_SCOPE": d.get("DISEASE_FACTS_EXCLUDED_SCOPE", 0),
+            "DISEASE_FACTS_EXCLUDED_OUT_OF_WINDOW": d.get("DISEASE_FACTS_EXCLUDED_OUT_OF_WINDOW", 0),
+            "DISEASE_FACTS_EXCLUDED_FROM_PACK": d["DISEASE_FACTS_EXCLUDED_FROM_AI_FACT_PACK"],
+            "AI_PACK_FACTS_TOTAL": d["AI_PACK_FACTS_TOTAL"],
             "source_backed_count": len(ai_fp.get("source_refs") or []),
-            "disease_facts_included": d["DISEASE_FACTS_INCLUDED_IN_AI_FACT_PACK"],
-            "disease_facts_excluded": d["DISEASE_FACTS_EXCLUDED_FROM_AI_FACT_PACK"],
-            "excluded_no_content": d.get("SOCIAL_FACTS_EXCLUDED_NO_CONTENT", 0)
-                                   + d.get("DISEASE_FACTS_EXCLUDED_NO_CONTENT", 0),
-            "excluded_no_source": d.get("SOCIAL_FACTS_EXCLUDED_NO_SOURCE", 0)
-                                  + d.get("DISEASE_FACTS_EXCLUDED_NO_SOURCE", 0),
-            "excluded_cross_country": d.get("DISEASE_FACTS_EXCLUDED_CROSS_COUNTRY", 0),
             "countries_represented": d["AI_PACK_COUNTRIES"],
+            "content_language_mix": {
+                "social_zh": sum(1 for f in ai_fp["social_facts"]
+                                 if str(f.get("content_source_field") or "").endswith("_cn")),
+                "social_original": sum(1 for f in ai_fp["social_facts"]
+                                       if str(f.get("content_source_field") or "").endswith("_original")),
+                "disease_cn_name": sum(1 for f in ai_fp["disease_facts"]
+                                       if str(f.get("content_source_field") or "") in
+                                       ("disease_name_zh", "disease_name_cn")),
+                "disease_en_name": sum(1 for f in ai_fp["disease_facts"]
+                                       if str(f.get("content_source_field") or "") == "disease_name_en"),
+            },
             "reaches_provider_boundary": d["AI_PACK_FACTS_TOTAL"] > 0,
         })
-        for k in ("AI_PACK_FACTS_TOTAL", "DISEASE_FACTS_INCLUDED_IN_AI_FACT_PACK",
-                  "DISEASE_FACTS_EXCLUDED_FROM_AI_FACT_PACK",
-                  "UNATTRIBUTED_FACTS_IN_AI_FACT_PACK", "EMPTY_FACTS_IN_AI_FACT_PACK",
-                  "CROSS_COUNTRY_FACTS_IN_COUNTRY_WEEKLY"):
-            tot[k] += d[k]
+        for k in sums:
+            if k in ("AI_TARGET_REPORTS_ACTUAL", "PROVIDER_BOUNDARY_REACHED",
+                     "REPORTS_WITH_ELIGIBLE_FACTS"):
+                continue
+            v = d.get(k)
+            if v is None:
+                alias = row_aliases.get(k)
+                v = d.get(alias) if alias else None
+            if isinstance(v, int) and not isinstance(v, bool):
+                tot[k] += v
         if d["AI_PACK_FACTS_TOTAL"] > 0:
-            tot["TARGETS_REACHING_PROVIDER_BOUNDARY"] += 1
-    tot["SECRETS_IN_AUDIT_OUTPUT"] = 0     # 审计只输出 id/计数，不含任何凭据
+            tot["REPORTS_WITH_ELIGIBLE_FACTS"] += 1
+            if rid in planner_targets:
+                tot["AI_TARGET_REPORTS_ACTUAL"] += 1
+                tot["PROVIDER_BOUNDARY_REACHED"] += 1
+    tot["REPORTS_WITH_ELIGIBLE_FACTS_BUT_LOW_DATA"] = sum(
+        1 for r in rows if r["reaches_provider_boundary"]
+        and r["report_id"] not in planner_targets)
+    tot["C5_LOCALIZATION_COMPLETENESS_DEBT"] = bool(
+        tot["SOCIAL_FACTS_USING_TITLE_ORIGINAL"] or tot["DISEASE_FACTS_USING_EN_NAME"]
+        or tot["SOCIAL_FACTS_EXCLUDED_NO_CONTENT"])
     return {"totals": tot, "per_report": rows}
 
 class SpyProvider:
@@ -758,11 +840,15 @@ class SpyProvider:
 
 
 def boundary_dry_run(root):
-    """§十七：确认每个 target 是否真的到达 provider 边界（**只读、无网络、不落盘**）。"""
-    plan = plan_targets(root)
+    """§十七/§十八：确认每个 target 是否真的到达 provider 边界（**只读、无网络、不落盘**）。
+
+    spy provider 只实现 `generate(system, user)`（真实契约），不得实现 submit_task。
+    """
+    plan = plan_targets(root, with_eligibility=False)
     spy = SpyProvider()
     st = enrich_all(root, provider=spy, write=False)
     return {"AI_TARGET_REPORTS": plan["AI_TARGET_REPORTS"],
+            "AI_TARGET_REPORTS_ACTUAL": st["AI_TARGET_REPORTS_ACTUAL"],
             "PROVIDER_BOUNDARY_REACHED": st["PROVIDER_BOUNDARY_REACHED"],
             "GENERATE_CALLS_SIMULATED": len(spy.calls),
             "SUBMIT_TASK_CALLS": st["SUBMIT_TASK_CALLS"],
@@ -772,7 +858,8 @@ def boundary_dry_run(root):
             "SYSTEMIC_PROVIDER_FAILURE": st["SYSTEMIC_PROVIDER_FAILURE"],
             "PROVIDER_CONTRACT": "generate(system, user)",
             "outcomes": st["outcomes"],
-            "PROVIDER_CALLS_FAILED": st["PROVIDER_CALLS_FAILED"]}
+            "PROVIDER_CALLS_FAILED": st["PROVIDER_CALLS_FAILED"],
+            "boundary_equals_actual": st["PROVIDER_BOUNDARY_REACHED"] == st["AI_TARGET_REPORTS_ACTUAL"]}
 
 
 def _cli():
@@ -783,6 +870,8 @@ def _cli():
     ap.add_argument("--plan-only", action="store_true")
     ap.add_argument("--audit-packs", action="store_true",
                     help="§十五 只读审计 AI fact pack（不调用 AI）")
+    ap.add_argument("--audit-all-packs", action="store_true",
+                    help="审计**全部**报告（含非 target），用于 targets 为 0 时的逐份证据")
     ap.add_argument("--boundary-dry-run", action="store_true",
                     help="§十七 provider 边界演练（spy provider，无网络、不落盘）")
     ap.add_argument("--dry-run", action="store_true")
@@ -792,8 +881,9 @@ def _cli():
     if a.plan_only:
         print(json.dumps(plan_targets(a.root), ensure_ascii=False, indent=1))
         return 0
-    if a.audit_packs:
-        print(json.dumps(audit_ai_packs(a.root), ensure_ascii=False, indent=1))
+    if a.audit_packs or a.audit_all_packs:
+        print(json.dumps(audit_ai_packs(a.root, all_reports=bool(a.audit_all_packs)),
+                         ensure_ascii=False, indent=1))
         return 0
     if a.boundary_dry_run:
         print(json.dumps(boundary_dry_run(a.root), ensure_ascii=False, indent=1))

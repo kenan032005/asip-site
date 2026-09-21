@@ -20,6 +20,7 @@ from scripts.report.changes import (
     changes_from_timeline, disease_changes_from_timeline,
     prev_report_event_ids, split_prev_reported,
 )
+from scripts.report.fact_content import DISEASE_COUNT_FIELDS  # noqa: E402
 from scripts.report.weekly import weekly_metrics, enabled_weekly_countries
 from scripts.report.brief import evaluate_brief_candidates
 
@@ -63,13 +64,39 @@ def _analysis_inputs(ev):
 
 
 def _disease_importance(d):
-    """§十五/§七 disease 确定性分数：重大变化类型给较高分，无变化 0。"""
-    ct = d.get("change_type")
+    """§十五/§七 disease 确定性分数：重大变化类型给较高分，无变化 0。
+
+    真实 schema 用 `update_type`（旧实现读 `change_type` 恒为 None → 分数恒 0）。
+    """
+    ct = d.get("update_type") or d.get("change_type")
     if ct in ("new_outbreak", "geographic_spread", "cross_border"):
         return 55
     if ct in ("case_increase", "mortality_increase", "status_change", "final_update"):
         return 40
     return 0
+
+
+#: Country Weekly 允许的疾病国家标记：只有报告国（regional 不默认放行，§十一）
+def _clean_source_id(link):
+    return (link or {}).get("source_id") or (link or {}).get("source_name")
+
+
+def _disease_summary_text(d):
+    """疾病事实的确定性摘要（只用真实字段，不编造、不调 AI）。"""
+    bits = []
+    if d.get("location_raw"):
+        bits.append(str(d["location_raw"]))
+    if d.get("report_date"):
+        bits.append("截至 %s" % str(d["report_date"])[:10])
+    counts = [(k, d.get(k)) for k in DISEASE_COUNT_FIELDS
+              if isinstance(d.get(k), (int, float)) and not isinstance(d.get(k), bool)]
+    if counts:
+        bits.append("、".join("%s %s" % (k, int(v)) for k, v in counts[:4]))
+    if d.get("outbreak_status"):
+        bits.append("状态 %s" % d["outbreak_status"])
+    if d.get("primary_source"):
+        bits.append("来源 %s" % d["primary_source"])
+    return "；".join(bits) or None
 
 
 def build_daily_input(events, disease_items, prev_report=None,
@@ -107,6 +134,17 @@ def build_daily_input(events, disease_items, prev_report=None,
             "category": it.get("category"),
             "importance_score": it["importance_score"],
             "change_type": it.get("change_type"),
+            # §二 内容投影（与 weekly 同一口径）：fact_pack 读 title/summary；
+            # 只投影真实字段，不改事件身份、不重选事件。
+            "title_cn": it.get("title_cn"),
+            "summary_cn": it.get("summary_cn"),
+            "title_original": it.get("title_original"),
+            "summary_original": it.get("summary_original"),
+            "title": it.get("title_cn") or it.get("title_original"),
+            "summary": it.get("summary_cn") or it.get("summary_original"),
+            "location": it.get("location_name") or it.get("location"),
+            "location_name": it.get("location_name"),
+            "event_time": it.get("event_time") or it.get("first_seen_at"),
             "verification": _norm_vstatus(it.get("verification_status")),
             "verification_confidence": it.get("verification_confidence"),
             "source_count": it.get("source_count") or 1,
@@ -117,7 +155,9 @@ def build_daily_input(events, disease_items, prev_report=None,
             "facts": _facts_from_ev(it),
             "analysis_inputs": _analysis_inputs(it),
             "uncertainties": it.get("uncertainties") or [],
-            "source_evidence": [{"source_id": it.get("source_id")}] if it.get("source_id") else [],
+            "source_evidence": [{"source_id": it.get("source_id"),
+                                 "source_name": it.get("source_name")}]
+                                if it.get("source_id") else [],
         }
         cat = it.get("category") or "security"
         if cat == "terrorism":
@@ -137,7 +177,11 @@ def build_daily_input(events, disease_items, prev_report=None,
     for d in disease_items:
         if (d.get("outbreak_id") or d.get("disease_id")) not in sel_dis_keys:
             continue
-        lc = d.get("latest_counts") or {}
+        # §六：计数从**真实顶层字段**构建（旧实现只读不存在的 latest_counts）；
+        # 兼容仍以 latest_counts 嵌套形状提供的条目，两者取其一，绝不编造数字。
+        lc = {k: d.get(k) for k in DISEASE_COUNT_FIELDS if d.get(k) is not None}
+        if not lc:
+            lc = dict(d.get("latest_counts") or {})
         prev_counts = d.get("previous_counts") or {}
         delta = {}
         for k in ("confirmed_cases", "total_cases", "deaths"):
@@ -147,16 +191,30 @@ def build_daily_input(events, disease_items, prev_report=None,
                 delta[k] = cur - pre
         sec["public_health_disease"].append({
             "disease_id": d.get("disease_id"),
+            "disease_event_id": d.get("disease_event_id"),
+            # §六 真实 schema 对齐（旧实现读 latest_counts/updates → 恒空壳）
+            "disease_name_zh": d.get("disease_name_zh"),
+            "disease_name_en": d.get("disease_name_en"),
+            "title": d.get("disease_name_zh") or d.get("disease_name_en") or d.get("disease_id"),
+            "summary": _disease_summary_text(d),
             "country_iso3": d.get("country_iso3"),
-            "outbreak_id": d.get("outbreak_id"),
+            "outbreak_id": d.get("outbreak_id") or d.get("disease_event_id"),
+            "location": d.get("location_raw") or d.get("admin1"),
             "importance_score": _disease_importance(d),
             "latest_counts": lc,
             "previous_counts": prev_counts,
             "delta": delta,
-            "as_of_date": lc.get("as_of_date") or d.get("latest_report_at"),
+            "as_of_date": lc.get("as_of_date") or d.get("report_date"),
+            "report_date": d.get("report_date"),
             "outbreak_status": d.get("outbreak_status"),
-            "change_type": d.get("change_type"),
-            "source": (d.get("updates") or [{}])[-1].get("evidence", {}).get("primary_source"),
+            "update_type": d.get("update_type"),
+            "change_type": d.get("update_type") or d.get("change_type"),
+            "primary_source": d.get("primary_source"),
+            "source_evidence": [{"source_id": _clean_source_id(l),
+                                 "source_name": l.get("source_name"),
+                                 "url": l.get("url")}
+                                for l in (d.get("source_links") or [])
+                                if _clean_source_id(l) or l.get("source_name")],
             "verification": d.get("verification_status"),
             "uncertainties": d.get("uncertainties") or [],
             "selection_reasons": d.get("selection_reasons") or [],
@@ -225,7 +283,12 @@ def build_daily_input(events, disease_items, prev_report=None,
 
 def build_weekly_input(country_iso3, events, disease_events, week_start, week_end,
                        prev_metrics=None, prev_report_id=None):
-    """§二十四 Country Weekly report input。"""
+    """§二十四 Country Weekly report input。
+
+    注：§十一 的「Country Weekly Scope」按 §八–§十二 的语境作用在 **AI fact pack
+    边界**（report_ai.build_ai_fact_pack 会按国家/时间窗过滤并计数），
+    报告正文内容保持 C4-B 已验证的形态，不在 build 阶段删事实。
+    """
     metrics = weekly_metrics(events, disease_events, week_start, week_end, prev_metrics)
     # §十七 Weekly 不是日报拼接：按 importance 排序的 major events
     evs = sorted(events, key=lambda e: -(e.get("importance_score") or 0))
@@ -236,6 +299,19 @@ def build_weekly_input(country_iso3, events, disease_events, week_start, week_en
             "master_event_id": ev.get("master_event_id"),
             "event_type": ev.get("event_type"),
             "location": ev.get("location"),
+            # §二/§三 内容投影：把真实正文交给下游（fact_pack 读 title/summary）。
+            # 只做投影，**不改变被选中的事实身份**（event_id 不变、不重选事件）。
+            "title_cn": ev.get("title_cn"),
+            "summary_cn": ev.get("summary_cn"),
+            "title_original": ev.get("title_original"),
+            "summary_original": ev.get("summary_original"),
+            "title": ev.get("title_cn") or ev.get("title_original"),
+            "summary": ev.get("summary_cn") or ev.get("summary_original"),
+            "location_name": ev.get("location_name") or ev.get("location"),
+            "event_time": ev.get("event_time") or ev.get("first_seen_at"),
+            "country": ev.get("country"),
+            "country_iso3": ev.get("country_iso3"),
+            "category": ev.get("category") or ev.get("event_type"),
             "importance_score": ev.get("importance_score") or 0,
             "verification": _norm_vstatus(ev.get("verification_status")),
             "source_count": ev.get("source_count") or 1,
@@ -243,18 +319,52 @@ def build_weekly_input(country_iso3, events, disease_events, week_start, week_en
             "facts": _facts_from_ev(ev),
             "analysis_inputs": _analysis_inputs(ev),
             "uncertainties": ev.get("uncertainties") or [],
-            "source_evidence": [{"source_id": ev.get("source_id")}] if ev.get("source_id") else [],
+            "source_evidence": [{"source_id": ev.get("source_id"),
+                                 "source_name": ev.get("source_name")}]
+                                if ev.get("source_id") else [],
         })
     disease = []
     for de in disease_events:
+        # §六 真实 schema 对齐：读真实字段（confirmed_cases / primary_source /
+        # report_date / disease_name_* …）。旧实现读 latest_counts / updates ——
+        # 这两个字段在 canonical 疾病数据里**不存在**，导致疾病事实恒为空壳。
+        links = [l for l in (de.get("source_links") or []) if isinstance(l, dict)]
         disease.append({
+            "disease_event_id": de.get("disease_event_id"),
             "disease_id": de.get("disease_id"),
+            "disease_name_zh": de.get("disease_name_zh"),
+            "disease_name_en": de.get("disease_name_en"),
+            "pathogen": de.get("pathogen"),
             "country_iso3": de.get("country_iso3"),
-            "latest_counts": de.get("latest_counts") or {},
-            "as_of_date": (de.get("latest_counts") or {}).get("as_of_date"),
+            "location_raw": de.get("location_raw"),
+            "location": de.get("location_raw") or de.get("admin1"),
+            "report_date": de.get("report_date"),
+            "event_start_date": de.get("event_start_date"),
+            "case_period_start": de.get("case_period_start"),
+            "case_period_end": de.get("case_period_end"),
+            "confirmed_cases": de.get("confirmed_cases"),
+            "probable_cases": de.get("probable_cases"),
+            "suspected_cases": de.get("suspected_cases"),
+            "total_cases": de.get("total_cases"),
+            "deaths": de.get("deaths"),
+            "recoveries": de.get("recoveries"),
+            "case_count_type": de.get("case_count_type"),
             "outbreak_status": de.get("outbreak_status"),
-            "change_types": [u.get("update_type") for u in (de.get("updates") or [])],
-            "source": (de.get("updates") or [{}])[-1].get("evidence", {}).get("primary_source"),
+            "update_type": de.get("update_type"),
+            "cross_border": de.get("cross_border"),
+            "affected_countries": de.get("affected_countries") or [],
+            "primary_source": de.get("primary_source"),
+            "source_tier": de.get("source_tier"),
+            # 真实来源身份（来自 canonical disease 的 source_links），不伪造
+            "source_evidence": [{"source_id": l.get("source_id"),
+                                 "source_name": l.get("source_name"),
+                                 "url": l.get("url")} for l in links
+                                if l.get("source_id") or l.get("source_name")],
+            "verification": de.get("verification_status"),
+            "verification_confidence": de.get("verification_confidence"),
+            "uncertainties": de.get("uncertainties") or [],
+            "importance_score": _disease_importance(de),
+            "selection_reasons": [],
         })
     # §十八 changes_from_previous_week（确定性 comparison 摘要）
     comps = []
