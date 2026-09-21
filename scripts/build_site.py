@@ -103,6 +103,11 @@ def _copy_frontend_views(dist_root):
             else:
                 continue
         shutil.copy2(src, os.path.join(dst_root, name + ".json"))
+        # C5-B：页面 JS 探测的是 data/views/<name>.json（如 ai-intelligence.js），
+        # 因此同时镜像一份到 data/views/，避免每次请求都 404（控制台噪声 + 模块静默空态）。
+        vdir = os.path.join(dst_root, "views")
+        os.makedirs(vdir, exist_ok=True)
+        shutil.copy2(src, os.path.join(vdir, name + ".json"))
         n += 1
     return n
 
@@ -455,8 +460,12 @@ def get_build_meta(run_id=None):
 
 
 def inject_meta(html, meta):
-    """在 HTML 中注入 window.ASIP_BUILD_META。"""
+    """在 HTML 中注入 window.ASIP_BUILD_META（并抑制 favicon 404）。"""
     meta_js = f'<script>window.ASIP_BUILD_META = {json.dumps(meta, ensure_ascii=False)};</script>\n'
+    # C5-B：站点未提供 favicon，浏览器默认请求 /favicon.ico → 每次加载一条
+    # 控制台 404。用 data: 空图标显式声明，消除该噪声（不引入新资源）。
+    if 'rel="icon"' not in html:
+        meta_js = '<link rel="icon" href="data:,">' + chr(10) + meta_js
     # 插入在 <head> 末尾或 api.js 引用之前
     head_close = "</head>"
     if head_close in html:
