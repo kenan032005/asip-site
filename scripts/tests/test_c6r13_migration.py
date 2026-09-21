@@ -45,9 +45,8 @@ class CanonicalMigrationTest(unittest.TestCase):
             stats = MIG.migrate(tmp, write=True)
             self.assertEqual(stats["records_changed"], 0,
                              "迁移必须幂等：已迁移数据上不得再产生变更")
-            # unresolved = 323 是**设计内**的 fail-closed（event_severity 无 unknown，
-            # 323 条从未评估的记录等待契约决策）——不是迁移缺陷。
-            self.assertEqual(stats["unresolved"], 323)
+            # 迁移 003（裁决方案 1）后：severity 已写 unknown → 无 unresolved。
+            self.assertEqual(stats["unresolved"], 0)
 
     def test_02_migration_records_show_real_changes(self):
         """§九：第一/第二通过均有 changes > 0（审计记录为证）。"""
@@ -85,15 +84,46 @@ class CanonicalMigrationTest(unittest.TestCase):
                             for c in cl if c.get("verification_level") == "not_checked"))
 
     def test_05_validate_stage2_after_migration(self):
-        """§九：迁移后 validate_stage2 只剩 S06 的 event_severity fail-closed 项。"""
+        """§四：迁移 003（severity unknown）后 validate_stage2 必须 **54/54 PASS**。"""
         r = subprocess_run()
-        self.assertIn("PASS=53", r["out"], r["out"][-400:])
-        self.assertIn("FAIL=1", r["out"])
-        self.assertIn("🚫 [S06]", r["out"], "唯一失败必须是 S06 的 severity fail-closed")
-        self.assertIn("event_severity", r["out"])
-        for sid in ("S12", "S14", "S15", "S32", "S49"):
-            self.assertNotIn("🚫 [%s]" % sid, r["out"],
-                             "%s 不得再失败" % sid)
+        self.assertIn("PASS=54", r["out"], r["out"][-400:])
+        self.assertIn("FAIL=0", r["out"])
+        self.assertNotIn("🚫", r["out"], "不得残留任何失败项")
+        for sid in ("S06", "S12", "S14", "S15", "S32", "S49"):
+            self.assertNotIn("🚫 [%s]" % sid, r["out"], "%s 必须通过" % sid)
+
+    def test_07_unknown_severity_is_not_low(self):
+        """§三：unknown 与 low 必须区分，绝不用 low 冒充未知严重度。"""
+        cl = json.loads((ROOT / "data" / "canonical" / "event_clusters.json")
+                        .read_text(encoding="utf-8"))["items"]
+        unknown = [c for c in cl if c.get("event_severity") == "unknown"]
+        self.assertGreater(len(unknown), 0, "裁决方案 1：应存在 unknown 严重度记录")
+        # schema enum 必须同时包含 low 与 unknown（两者是不同的语义）
+        schema = json.loads((ROOT / "schemas" / "event_cluster.schema.json")
+                            .read_text(encoding="utf-8"))
+        enum = schema["properties"]["event_severity"]["enum"]
+        self.assertIn("unknown", enum)
+        self.assertIn("low", enum)
+        self.assertNotEqual("unknown", "low")
+        # 从未评估的记录不得被 default 成 low
+        for c in unknown:
+            self.assertNotEqual(c.get("event_severity"), "low")
+
+    def test_08_unassessed_cluster_not_promoted(self):
+        """§三：无证据的记录 = severity unknown + verification_level not_checked
+        （不得被升级到任何更高核实级别）。"""
+        cl = json.loads((ROOT / "data" / "canonical" / "event_clusters.json")
+                        .read_text(encoding="utf-8"))["items"]
+        unassessed = [c for c in cl if c.get("event_severity") == "unknown"]
+        self.assertGreater(len(unassessed), 0)
+        for c in unassessed:
+            self.assertEqual(c.get("verification_level"), "not_checked",
+                             "未评估记录不得被升级核实级别：%s" % c.get("event_id"))
+            self.assertEqual(c.get("publication_status"), "verification_pending",
+                             "未评估记录不得被标记为已发布/可发布")
+        # 注：severity 与 verification_level 是**独立**契约（§一），
+        # 因此不要求 not_checked ⇒ severity unknown（早期记录可能已评估严重度）；
+        # 只强制「无证据 ⇒ unknown，且不得被升级核实级别」。
 
     def test_06_time_fields_rfc3339_everywhere(self):
         cl = json.loads((ROOT / "data" / "canonical" / "event_clusters.json")

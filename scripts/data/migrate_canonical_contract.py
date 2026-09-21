@@ -38,7 +38,7 @@ import time
 from datetime import datetime, timezone
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-MIGRATION_ID = "c6r13-canonical-contract-002"
+MIGRATION_ID = "c6r13-canonical-contract-003"
 SCHEMA_VERSION = "2.0"
 PIPELINE_VERSION = 2
 
@@ -172,14 +172,17 @@ def migrate(root=ROOT, write=True):
                                        "field": "publication_status", "value": cur,
                                        "reason": "fail-closed: no deterministic mapping"})
 
-        # C6-R1.3：event_severity enum = [low,medium,high,critical] **没有 unknown**，
-        # 而这 323 条从未评估的记录没有任何 severity 证据 → **fail closed 不赋值**，
-        # 记 unresolved 交由契约决策（扩展 enum / 默认规则 / 记录迁移），绝不猜测。
+        # C6-R1.3 第三通过（裁决方案 1）：schema enum 已扩展 "unknown"。
+        # 仅对 **event_severity IS NULL 且无确定性证据** 的记录写入 unknown；
+        # 绝不 default low、绝不人工推断、绝不迁出 canonical。
+        # 若字段曾存在则保留 original_event_severity 供审计。
         if kind == "cluster" and not item.get("event_severity"):
-            unresolved.append({"kind": kind, "id": item.get("event_id"),
-                               "field": "event_severity", "value": None,
-                               "reason": "FAIL_CLOSED: enum has no unknown; "
-                                         "never-assessed record needs contract decision"})
+            if item.get("event_severity") is not None:
+                item.setdefault("original_event_severity", item.get("event_severity"))
+            item["event_severity"] = "unknown"
+            changed.append({"field": "event_severity",
+                            "reason": "SEVERITY_UNKNOWN_NO_EVIDENCE",
+                            "before": None, "after": "unknown"})
 
         # S15 verification_level
         if kind == "cluster":

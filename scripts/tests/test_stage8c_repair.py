@@ -250,9 +250,13 @@ class TestCorrectionAudit(unittest.TestCase):
         art = Path(r"C:/Users/kenan/WorkBuddy/2026-07-31-09-46-56/.workbuddy/tmp/trial_art")
         if not (art / "safety_layer_trial.json").exists():
             self.skipTest("Trial#1 artifacts 不在本地")
+        import os
         import subprocess
+        # C6-R1.3：audit_trial1.py 不再硬编码本机归档路径（改为 env 注入），
+        # 测试显式传入其历史归档位置。
+        env = dict(os.environ, TRIAL_ART=str(art))
         r = subprocess.run([sys.executable, str(ROOT / "scripts/ai/safety/audit_trial1.py")],
-                           capture_output=True, text=True, cwd=str(ROOT))
+                           capture_output=True, text=True, cwd=str(ROOT), env=env)
         self.assertEqual(r.returncode, 0, r.stderr[:300])
         out = json.loads((ROOT / "data/runtime/ai_safety/audit_trial1_report.json")
                          .read_text(encoding="utf-8"))

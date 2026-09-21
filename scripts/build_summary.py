@@ -395,7 +395,20 @@ def main(run_id=None, dry_run=False):
 
     # Stage-2 最终收尾：build_summary 只生成站点状态文件，
     # canonical/legacy 的修正统一由 apply_publication_semantics + compatibility_export 完成。
-    save_json(os.path.join(DATA_DIR, "status.json"), status)
+    # C6-R1.3：保留 canonical 数据边界字段（tz 块）。这些字段由 tz 阶段写入，
+    # 重建 status.json 时**必须携带**，否则 factory.data_as_of() 变 None →
+    # 报告 backfill 时间锚失效、报告 hash 语义漂移。
+    sp = os.path.join(DATA_DIR, "status.json")
+    try:
+        with io.open(sp, encoding="utf-8") as f:
+            prev = json.load(f)
+    except Exception:  # noqa: BLE001
+        prev = {}
+    for k in ("data_as_of", "data_as_of_bj", "data_as_of_source",
+              "data_as_of_status", "data_updated_at"):
+        if prev.get(k) is not None and status.get(k) is None:
+            status[k] = prev[k]
+    save_json(sp, status)
     save_json(os.path.join(DATA_DIR, "latest-summary.json"), summary)
     print(f"  status.json: 24h={status['events_24h']}, 7d={status['events_7d']}, src_success_last_run={status['source_request_success_count_last_run']}")
     print(f"  latest-summary.json: 24h={s24}, 7d={s7}, risk_countries={len(summary['risk_by_country'])}")
