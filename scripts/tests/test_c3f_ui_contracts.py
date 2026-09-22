@@ -7,7 +7,6 @@
 """
 import io
 import json
-import re
 import os
 import sys
 import unittest
@@ -56,30 +55,11 @@ class HomepageContractTest(unittest.TestCase):
         hp = view.get("homepage") or {}
         cur = view.get("homepage_fact_pack_hash")
         self.assertTrue(cur, "view 必须暴露当前 fact pack hash")
-        # C6-R2.6 B 类：不再钉死「必须匹配」（换谱系后 artifact 天然过期）→
-        # 验证 **hash 契约的计算关系**：matches == (artifact_hash == current_hash)，
-        # 且 stale 时状态必须显式（不得静默）；withheld 行为由 js 单测覆盖。
-        art = hp.get("fact_pack_hash")
-        self.assertTrue(art, "homepage artifact 必须暴露自身 fact_pack_hash")
-        self.assertIsInstance(hp.get("ai_matches_current_fact_pack"), bool,
-                              "必须显式给出匹配判定（C3F 按稳定投影比较）")
-        self.assertTrue(hp.get("status"), "artifact 必须带显式 status（stale 不得静默）")
-        # C6-R2.6 FINAL：不再用**裸 hash 等值**（artifact hash 会随谱系/稳定投影变化）→
-        # 断言稳定投影字段：schema / country index / entity identity / fact references /
-        # content integrity；忽略 generated_at / runtime / build metadata。
-        hexre = re.compile(r"^[0-9a-f]{32,64}$")
-        self.assertRegex(str(cur), hexre, "current fact pack hash 必须是 hex 摘要")
-        self.assertRegex(str(art), hexre, "artifact fact pack hash 必须是 hex 摘要")
-        self.assertTrue(hp.get("fact_pack_version"), "artifact 必须带 fact_pack_version")
-        idx = view.get("country_index") or {}
-        self.assertGreater(len(idx), 0, "country index 必须非空（稳定投影字段）")
-        for k, v in idx.items():
-            self.assertRegex(str(k), r"^[A-Z]{3}$", "country index 键必须是 ISO3")
-            self.assertIsInstance(v, dict, "country index 值必须是结构对象")
-        # content integrity：三块文本必须存在且为非空字符串（不比较 runtime 元数据）
-        for f in ("executive_assessment", "trend_analysis", "outlook"):
-            self.assertTrue(isinstance(hp.get(f), str) and hp.get(f).strip(),
-                            "artifact 稳定字段缺失：%s" % f)
+        # C3F-R / C4-A 之后：hash 契约已修复、artifact hash 已按稳定投影重导，
+        # 因此当前应为**匹配**（stale 的withheld 行为由 js 的 fresh 判定单测覆盖）。
+        self.assertTrue(hp.get("ai_matches_current_fact_pack"),
+                        "hash 契约修复后，homepage artifact 必须与当前 fact pack 一致")
+        self.assertEqual(hp.get("fact_pack_hash"), cur)
         # 判定逻辑：hash 不一致 → 前端不注入
         js = read("assets/js/ai-intelligence.js")
         self.assertIn("var fresh = !!", js)
@@ -119,21 +99,8 @@ class CountryContractTest(unittest.TestCase):
         import build_ai_views as BAV
         view = jload("data/views/ai_intelligence.json", {}) or {}
         idx = view.get("country_index") or {}
-        # C6-R2.6 B 类：不再钉死国家数（谱系可变）→ 验证**结构契约**
-        self.assertGreater(len(idx), 0, "enabled country packs 必须 > 0")
-        iso3_re = re.compile(r"^[A-Z]{3}$")
-        for k in idx:
-            self.assertRegex(str(k), iso3_re, "索引键必须是合法 ISO3：%s" % k)
-        self.assertEqual(len(list(idx)), len(set(idx)), "每个 enabled country 必须有唯一索引")
-        # enabled 国家集合（data/intelligence/africa/countries.json）必须全部被索引
-        afr = jload("data/intelligence/africa/countries.json", {}) or {}
-        rows = afr.get("items") or afr.get("countries") or []
-        registry = {(r.get("iso3") or r.get("country_iso3") or r.get("iso_alpha3") or "").upper()
-                    for r in rows if isinstance(r, dict)}
-        registry = {e for e in registry if iso3_re.match(e)}
-        # 结构契约（授权 B 范围）：非空 + ISO3 合法 + 唯一 + registry 非空即视为有效索引面。
-        # 不再与 africa registry 做双向包含（索引面可大于 registry，属正常配置差异）。
-        self.assertGreater(len(registry), 0, "africa country registry 不得为空")
+        self.assertEqual(len(idx), 12, "12 个国家都要按 ISO3 建索引")
+        self.assertIn("COD", idx)
         # 关联必须经 ISO3，而不是文件名
         self.assertEqual((view.get("country_name_to_iso3") or {}).get("刚果（金）"), "COD")
         self.assertEqual(idx["COD"].get("name_cn"), "刚果（金）")
@@ -154,12 +121,7 @@ class CountryContractTest(unittest.TestCase):
         view = jload("data/views/ai_intelligence.json", {}) or {}
         idx = view.get("country_index") or {}
         full = [k for k, v in idx.items() if v.get("status") == "FULL"]
-        # C6-R2.6 B 类：不再钉死 FULL 国家数（谱系可变）→ 验证结构契约
-        self.assertGreater(len(full), 0, "至少应有 1 个 FULL 国家包")
-        self.assertLessEqual(len(full), len(idx), "FULL 数不得超过索引国家数")
-        self.assertEqual(len(full), len(set(full)), "FULL 国家必须唯一")
-        for k in full:
-            self.assertRegex(str(k), r"^[A-Z]{3}$", "FULL 国家键必须是 ISO3")
+        self.assertEqual(len(full), 9, "9 个 FULL 国家")
         for k in full:
             v = idx[k]
             self.assertTrue(v.get("executive_assessment") or v.get("trend_analysis"),
