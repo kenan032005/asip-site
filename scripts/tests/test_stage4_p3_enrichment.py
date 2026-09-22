@@ -258,23 +258,40 @@ class TestFrontendFallback(unittest.TestCase):
 
     def test_index_fallback(self):
         t = self._check("index.html")
-        self.assertIn("title_zh || e.title_cn || e.title_original", t)
+        # C6-R1 §六：内容回退链已上移服务端（fact_content.resolve_social_content）。
+        # V1.1 首页由 home-v11.js 渲染（title_cn 解析在该模块内）。
+        self.assertIn("home-v11.js", t)
+        hv = open(os.path.join(ROOT, "assets", "js", "home-v11.js"),
+                  encoding="utf-8").read()
+        self.assertIn("title_cn", hv)
 
     def test_country_fallback(self):
+        """C6-R1：回退链在服务端/共享层实现，页面不再内联（原断言已退役）。"""
         t = self._check("country.html")
-        self.assertIn("title_zh || e.title_cn || e.title_original", t)
+        # 回退链在**服务端**（fact_content.resolve_social_content，由
+        # test_c5a_data_repair / test_c4c_fact_projection 覆盖）；前端只渲染
+        # 服务端已解析好的 title（country_snapshots.latest_major_event）。
+        fe = open(os.path.join(ROOT, "assets", "js", "frontend.js"), encoding="utf-8").read()
+        self.assertIn("latest_major_event", fe)
+        self.assertIn("title_cn", open(os.path.join(ROOT, "assets", "js", "home-v11.js"),
+                                       encoding="utf-8").read())
 
     def test_event_detail(self):
         t = self._check("event.html")
-        # 详情页：fallback 链 + 原文标题保留 + AI 标识低调显示
-        self.assertIn("title_zh || e.title_cn || e.title_original", t)
-        self.assertIn('kv("原文标题", esc(e.title_original))', t)
-        self.assertIn("ai_model", t)
-        self.assertIn("ai_processed_at", t)
+        # 详情页：V1.1 起 **UI 不得出现 AI 内部实现**（C4-C §二十三），
+        # 因此 ai_model / ai_processed_at 从页面移除是**契约本身**；
+        # 原文标题保留由服务端视图（title=resolve(title_cn→title_original)）承担。
+        self.assertNotIn("ai_model", t)
+        self.assertNotIn("ai_processed_at", t)
+        self.assertNotIn("DeepSeek", t)
 
     def test_events_page_uses_event_card(self):
         t = self._check("events.html")
-        self.assertIn("eventCard", t)
+        # C6-R1：V1.1 events 页由 frontend.js 渲染，卡片模板在 common.js
+        self.assertIn("frontend.js", t)
+        cm = open(os.path.join(ROOT, "assets", "js", "common.js"),
+                  encoding="utf-8").read()
+        self.assertIn("eventCard", cm)
 
 
 class TestAIRuntimeIsolation(unittest.TestCase):

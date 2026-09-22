@@ -215,7 +215,10 @@ def main():
         for root, _, files in os.walk(dist_dir):
             for f in files:
                 rel = os.path.relpath(os.path.join(root, f), dist_dir).replace("\\", "/")
-                if "data/ai" in rel or rel.startswith("ai/"):
+                # C6-R1 PART A：禁止**内部 AI 运行时**（data/ai/ 目录、ai/ 相对目录）；
+                # 面向页面的公开视图 data/views/ai_intelligence.json 不在禁止之列
+                # （原 `"data/ai" in rel` 子串会前缀碰撞误伤）。
+                if rel.startswith("data/ai/") or rel.startswith("ai/")                         or "/data/ai/" in "/" + rel:
                     found_in_dist.append(rel)
     check("T14b", not found_in_dist, "dist 含 data/ai: %s" % found_in_dist[:5])
 
@@ -235,26 +238,34 @@ def main():
     check("T14c", gh_status in (404, 403, 400, "SKIP", "ERR"), "线上 gh-pages 暴露了 data/ai (HTTP %s)" % gh_status)
 
     # ── T15 Stage 2 全部回归测试仍通过 ──
+    # C6-R1 PART A/D：统一**模块调用契约** —— 直接以文件路径执行会让
+    # `from scripts...` 导入失败（TEST_INVOCATION_DEFECT）。validate_stage2 /
+    # validate_pipeline 是脚本（无 scripts.tests 包路径），保持文件调用。
     regress = [
-        "scripts/tests/test_stage2_frontend_final.py",
-        "scripts/tests/test_stage2_closeout.py",
-        "scripts/tests/test_stage2_schema_repo.py",
-        "scripts/data/validate_stage2.py",
-        "scripts/validate_pipeline.py",
+        ("scripts.tests.test_stage2_frontend_final", None),
+        ("scripts.tests.test_stage2_closeout", None),
+        ("scripts.tests.test_stage2_schema_repo", None),
+        ("scripts.data.validate_stage2", "script"),
+        ("scripts.validate_pipeline", "script"),
     ]
     regress_ok = True
-    for rel in regress:
+    for mod, kind in regress:
         try:
-            out = subprocess.run(
-                [sys.executable, rel], cwd=ROOT, capture_output=True, text=True, timeout=240
-            )
+            if kind == "script":
+                out = subprocess.run(
+                    [sys.executable, mod.replace(".", "/") + ".py"],
+                    cwd=ROOT, capture_output=True, text=True, timeout=240)
+            else:
+                out = subprocess.run(
+                    [sys.executable, "-m", mod],
+                    cwd=ROOT, capture_output=True, text=True, timeout=600)
             ok = out.returncode == 0
         except Exception as e:
             ok = False
             out = type("O", (), {"stdout": str(e), "stderr": ""})()
         if not ok:
             regress_ok = False
-            print("    [regress FAIL] %s rc=%s" % (rel, getattr(out, "returncode", "?")))
+            print("    [regress FAIL] %s rc=%s" % (mod, getattr(out, "returncode", "?")))
             tail = (out.stdout or "")[-300:]
             print("    " + tail.replace("\n", "\n    "))
     check("T15", regress_ok, "Stage 2 回归套件未全部通过")

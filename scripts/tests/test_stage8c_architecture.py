@@ -26,26 +26,35 @@ from scripts.report.gen import analysis_runner as ar  # noqa: E402
 from scripts.ai.schema_validation import validate_against_schema  # noqa: E402
 
 DERIVED = ROOT / "data" / "runtime" / "stage8c_trial2_recovery" / "derived"
+DERIVED_EVIDENCE = ROOT / "evidence" / "stage8c_trial2_recovery" / "derived"
 
 
 def load_input(key):
     fname = {"africa_daily": "africa_daily_report_input.json",
              "tcd_weekly": "tcd_weekly_report_input.json",
              "ssd_weekly": "ssd_weekly_report_input.json"}[key]
-    return json.loads((DERIVED / fname).read_text(encoding="utf-8"))
+    # cold start（与 scripts/ops/reports_run 同语义）：data/runtime 为 gitignored，
+    # 缺失时用 git tracked 的 evidence/ 副本（字节一致，冻结 hash 不变）。
+    src = DERIVED if (DERIVED / fname).exists() else DERIVED_EVIDENCE
+    return json.loads((src / fname).read_text(encoding="utf-8"))
 
 
 class AnalysisProvider:
-    """返回指定文本的 fake provider（AI_CALLS=0）。"""
+    """返回指定文本的 fake provider（AI_CALLS=0）。
+
+    C5-A §二十五：只实现 **真实 Stage 7B 契约** generate(system, user)；
+    不再提供假的 submit_task（那会让错误接口在测试里长期"兼容"）。
+    """
 
     def __init__(self, text):
         self.text = text
         self.calls = 0
         self.task_types = []
 
-    def submit_task(self, task):
+    def generate(self, system, user):
         self.calls += 1
-        self.task_types.append(task.get("task_type"))
+        self.task_types.append("report_analysis")
+        return self.text, {"model": "deepseek-v4-flash"}
         return {"status": "succeeded", "result": {
             "returned_model": "deepseek-v4-flash", "text": self.text,
             "input_tokens": 10, "output_tokens": 20, "total_tokens": 30,
@@ -170,8 +179,11 @@ class TestFallback(unittest.TestCase):
 
     def test_provider_failure_fallback(self):
         class FailProv:
-            def submit_task(self, task):
-                return {"status": "failed", "result": {"error": {"code": "x"}}}
+            """provider 级失败：抛异常（真实契约下 provider 失败以异常表达）。"""
+
+            def generate(self, system, user):
+                from scripts.report.gen.providers import ProviderUnavailable
+                raise ProviderUnavailable("http_503")
         fp, analysis, ares = self._run(FailProv())
         self.assertIsNone(analysis)
         self.assertEqual(ares["stage"], "provider_failed")

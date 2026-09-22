@@ -1,0 +1,148 @@
+name: ASIP Production Reports
+
+# Stage 8C Package3 — Production Reports（§八/§九/§十七/§二十六）
+# Africa Daily 调度（北京 20:00，每天最多 1 份）：cron '0 12 * * *'
+# Country Weekly 调度（北京 周日 06:45 = UTC 周六 22:45）：cron '45 22 * * 6'
+# 报告状态：FULL / FALLBACK / LOW_DATA（Fact Gate PASS 为前提）；Fact Gate FAIL → HOLD。
+# 输入：canonical eligible facts（生产）；dispatch 默认 shadow（derived + no AI）。
+# 调度门禁：production_schedule_enabled=false 时 schedule 不执行。
+
+on:
+  workflow_dispatch:
+    inputs:
+      source:
+        description: "报告输入源（shadow=derived 冻结数据 / production=canonical）"
+        required: false
+        type: choice
+        default: shadow
+        options:
+          - shadow
+          - production
+      run_ai:
+        description: "真实 AI Analysis（默认 false = FALLBACK/LOW_DATA）"
+        required: false
+        type: boolean
+        default: false
+      report_mode:
+        description: "daily | weekly（weekly = Africa Weekly + enabled Country Weekly）"
+        required: false
+        type: choice
+        default: daily
+        options:
+          - daily
+          - weekly
+  schedule:
+    - cron: '0 12 * * *'
+    - cron: '45 22 * * 6'
+
+concurrency:
+  group: asip-prod-reports
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+env:
+  ASIP_MODE: development
+  browser_direct_api_call: "false"
+  ASIP_DEEPSEEK_API_KEY: ${{ secrets.ASIP_DEEPSEEK_API_KEY }}
+
+jobs:
+  reports:
+    if: github.event_name != 'schedule' || vars.PRODUCTION_SCHEDULE_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout production code
+        uses: actions/checkout@v4
+        with:
+          ref: 0d5e2e6110e8c883c116f4a7a928447011e62356
+          fetch-depth: 1
+
+      - name: Checkout production state branch
+        uses: actions/checkout@v4
+        with:
+          ref: production-state
+          path: state_src
+          fetch-depth: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Load state（cold start）
+        run: |
+          mkdir -p data/runtime/ops
+          cp -r state_src/data/runtime/ops/* data/runtime/ops/ 2>/dev/null || true
+
+      - name: Africa Daily（§八，北京 20:00；dispatch 默认 shadow）
+        if: github.event.schedule == '0 12 * * *' || github.event_name == 'workflow_dispatch'
+        env:
+          SOURCE: ${{ github.event.inputs.source }}
+          RUN_AI: ${{ github.event.inputs.run_ai }}
+        run: |
+          SRC="derived"; AI_FLAG="--no-ai"
+          [ "$SOURCE" = "production" ] && SRC="canonical"
+          [ "$RUN_AI" = "true" ] && AI_FLAG=""
+          python scripts/ops/reports_run.py --mode daily --source $SRC $AI_FLAG
+
+      - name: Country Weekly（§九，北京 周日 06:45；dispatch 默认 shadow）
+        if: github.event.schedule == '45 22 * * 6' || github.event_name == 'workflow_dispatch'
+        env:
+          SOURCE: ${{ github.event.inputs.source }}
+          RUN_AI: ${{ github.event.inputs.run_ai }}
+        run: |
+          SRC="derived"; AI_FLAG="--no-ai"
+          [ "$SOURCE" = "production" ] && SRC="canonical"
+          [ "$RUN_AI" = "true" ] && AI_FLAG=""
+          python scripts/ops/reports_run.py --mode tcd_weekly --source $SRC $AI_FLAG
+          python scripts/ops/reports_run.py --mode ssd_weekly --source $SRC $AI_FLAG
+
+      - name: Weekly mode — Africa Weekly + enabled Country Weekly
+        if: ${{ (github.event_name == 'schedule' && github.event.schedule == '45 22 * * 6') || inputs.report_mode == 'weekly' }}
+        run: |
+          # Africa Weekly 与 Country Weekly 共用同一 week identity（Sunday→Sunday，闭区间），
+          # 且只生成 config 里 enabled 的国家（不做动态 TOP5）。
+          python -m scripts.report.materialize --root . --days 14 || true
+          python - <<'PY'
+          import json, os, sys
+          sys.path.insert(0, ".")
+          from scripts.report import materialize as M
+          from scripts.report import factory as F
+          plan = F.plan_report_backfill(".", days=14)
+          print("WEEKLY_TARGET =", plan["WEEKLY_TARGET"])
+          print("ENABLED_PRIORITY_COUNTRIES =", plan["ENABLED_PRIORITY_COUNTRIES"])
+          print("COUNTRY_WEEKLY_TARGET =", plan["COUNTRY_WEEKLY_TARGET"])
+          print("MAJOR_BRIEF_AUTO_PUBLICATION =", F.MAJOR_BRIEF_AUTO_PUBLICATION)
+          PY
+
+      - name: Commit state → production-state branch
+        run: |
+          cp -r data/runtime/ops/* state_src/data/runtime/ops/ 2>/dev/null || true
+          cd state_src
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f data/runtime/ops
+          git commit -m "ops: reports run ${{ github.run_id }}" --allow-empty || echo "no state change"
+          git push origin production-state
+          cd ..
+
+      - name: Upload report artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ops-reports
+          path: data/runtime/ops/reports/
+          if-no-files-found: warn
+
+      - name: Trigger auto deploy（§十八：state 合法变化 → build → validate → deploy）
+        if: vars.AUTO_DEPLOY_ENABLED == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl -s -X POST -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/kenan032005/asip-site/actions/workflows/asip-production-deploy.yml/dispatches \
+            -d '{"ref":"main","inputs":{"shadow_only":"false"}}' \
+            -o /dev/null -w "AUTO_DEPLOY_TRIGGER_HTTP=%{http_code}\n"

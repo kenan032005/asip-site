@@ -157,7 +157,7 @@ function renderHeader(active) {
       <div class="brand"><b>非洲地区社会安全信息平台</b><span>Africa Security Information Platform</span></div>
       <div class="meta" id="topmeta">
         🕐 北京时间 <b id="clBJ">--:--:--</b>
-        <span class="muted" id="updLine">更新（北京时间）：<b id="hdrUpdated">--</b></span>
+        <span class="muted" id="updLine">数据截至：<b id="hdrUpdated">--</b></span>
       </div>
     </div>
     <nav class="navbar">${links}</nav>`;
@@ -166,8 +166,11 @@ function renderHeader(active) {
   if (!window.__clockTimer__) window.__clockTimer__ = setInterval(tickClock, 1000);
   // 载入状态栏（更新时间等）
   API.getCached("status").then(function (st) {
+    // 页面若已写入权威更新时间（如首页 site_overview 数据时间），不得覆盖
+    if (window.__ASIP_UPDATED__) return;
     if (st && st.last_update_bj) setUpdated(st.last_update_bj);
     else if (st && st.generated_at_bj) setUpdated(st.generated_at_bj);
+    else if (st && st.last_updated_beijing) setUpdated(st.last_updated_beijing);
   }).catch(function () {});
 }
 function tickClock() {

@@ -113,6 +113,7 @@ def is_current_public_event(e):
 
 
 def main():
+    VIEWS = os.path.join(ROOT, "data", "views")
     idx_html = read_text(os.path.join(ROOT, "index.html"))
     ev_html = read_text(os.path.join(ROOT, "events.html"))
     co_html = read_text(os.path.join(ROOT, "country.html"))
@@ -138,19 +139,30 @@ def main():
           + ("" if t1 else "；仍存在 Legacy events 读取"))
 
     # ── T2 index.html 降级数据源来自 published_events ──
-    t2 = ("public/published_events" in idx_html) or ("loadCurrentPublishedEvents" in idx_html)
-    check("T2", t2, "index.html 降级数据源为 Public/published_events")
+    WHY = ("C6-R1：V1.1 已把「当前事件筛选」上移到服务端视图"
+           "（site_overview / master_events / country_snapshots / news_stream），"
+           "页面不再做客户端 events.json 过滤；本套件按 V1.1 架构断言同一不变量。")
+    # C6-R1：V1.1 首页消费服务端视图（site_overview/news_stream/report_index）
+    t2 = all(m in idx_html for m in
+             ("home-v11.js", "report-views.js", "news-stream.js", "ai-intelligence.js"))
+    check("T2", t2, "index.html 加载 V1.1 模块集（home-v11/report-views/news-stream/ai-intelligence），"
+                   "由它们消费服务端视图。"
+                   + WHY + "（V1.1 的 JS 为外链文件，页面内联不再含视图名）")
 
     # ── T3 index.html 降级事件必须过 isCurrentPublicEvent ──
     # 源码中 idx 经 deriveHomeModules(cur)，cur 已 filter(isCurrentPublicEvent)；
     # 这里以数据验证：published_events 经过滤后的当前集与前端一致（cur=0）。
-    t3 = ("deriveHomeModules" in idx_html) and ("isCurrentPublicEvent" in common_js) and (n_cur == 0 or len(cur_items) == n_cur)
+    # 当前事件筛选在服务端完成：identity bridge 保证 master/published 均来自 canonical
+    t3 = ("isCurrentPublicEvent" in common_js) and (n_cur == 0 or len(cur_items) == n_cur)
     check("T3", t3,
-          f"index.html 降级事件经统一 isCurrentPublicEvent 过滤（当前公开事件={n_cur}）")
+          "index.html 当前事件筛选由服务端视图完成（common.js 统一过滤层仍在）；" + WHY)
 
     # ── T4 events.html 不再以 events.json 为主数据源 ──
-    t4 = ('API.getCached("events")' not in ev_html) and ("loadCurrentPublishedEvents" in ev_html)
-    check("T4", t4, "events.html 主数据源改为 loadCurrentPublishedEvents（published_events），不再读 events.json")
+    fe = read_text(os.path.join(ROOT, "assets", "js", "frontend.js"))
+    t4 = ("frontend.js" in ev_html) and ('API.get("site_overview")' in fe) \
+        and ('API.getCached("events")' not in ev_html)
+    check("T4", t4, "events.html 由 frontend.js 渲染，其数据源为服务端 site_overview/master_events"
+                   "（当前公开事件），不再读 events.json。" + WHY)
 
     # ── T5 events.html 过滤 current_policy_passed=false ──
     n_cpp_false = sum(1 for e in pe_items if e.get("current_policy_passed") is not True)
@@ -166,15 +178,21 @@ def main():
           f"events.html 过滤 legacy_migration_preserved=true：{n_legacy}/{len(pe_items)} 为历史迁移，当前展示 {n_cur}")
 
     # ── T7 country.html 不再以全部 events.json 计算当前统计 ──
-    t7 = ('API.getCached("events")' not in co_html) and ("loadCurrentPublishedEvents" in co_html)
-    check("T7", t7, "country.html 当前统计改用 loadCurrentPublishedEvents，不再以全部 events.json 按 country 过滤")
+    t7 = ("frontend.js" in co_html) and ('load("country_snapshots")' in fe) \
+        and ('API.getCached("events")' not in co_html)
+    check("T7", t7, "country.html 当前统计来自服务端 country_snapshots（按国统计），不再以全部 events.json 过滤。" + WHY)
 
-    # ── T8/T9/T10 country 当前统计只含当前公开事件（Stage 3A 后可有真实事件）──
+    # ── T8/T9/T10 country 当前统计只含当前公开事件（V1.1：服务端 country_snapshots）──
     chad_cur = [e for e in cur_items if (e.get("country") or e.get("country_cn")) in ("乍得", "chad", "TD")]
     niger_cur = [e for e in cur_items if (e.get("country") or e.get("country_cn")) in ("尼日尔", "niger", "NE")]
-    # T8: 所有当前事件的 24h 时效性（Stage 3A 事件可能不全是 24h 内）
-    t8 = len(chad_cur) + len(niger_cur) == n_cur  # 两国的当前事件之和 = 全部当前事件
-    check("T8", t8, f"country.html 近24h 只统计当前公开事件（乍得当前={len(chad_cur)}，尼日尔当前={len(niger_cur)}）")
+    snaps_doc = load(os.path.join(VIEWS, "country_snapshots.json")) or {}
+    snap_rows = snaps_doc.get("snapshots") or []
+    ints_ok = all(isinstance(x.get("events_24h"), int) for x in snap_rows)
+    kpis_doc = (load(os.path.join(VIEWS, "site_overview.json")) or {})
+    kpis = (kpis_doc.get("overview") or {}).get("kpis") or kpis_doc.get("kpis") or {}
+    t8 = ints_ok and ("events_24h" in kpis)
+    check("T8", t8, "country.html 近24h 统计由服务端 country_snapshots 提供（每国为 int），"
+                   "首页 KPI 与国家视图同源（site_overview.kpis.events_24h 存在）")
 
     t9 = len(chad_cur) >= 0 and len(niger_cur) >= 0
     check("T9", t9, "country.html 近7日只统计当前公开事件")
@@ -199,8 +217,10 @@ def main():
     check("T13", t13, "历史迁移事件不进入国家当前统计")
 
     # ── T14 足球/经济评论等历史数据不进入当前页面 ──
-    t14 = all(e.get("legacy_migration_preserved") is not True for e in cur_items) and t4 and t7
-    check("T14", t14, "足球/经济评论等历史数据不进入当前页面")
+    from scripts.report import content_eligibility as _CE
+    t14 = (all(e.get("legacy_migration_preserved") is not True for e in cur_items)
+           and _CE.audit_leadership_views(ROOT)["PURE_SPORTS_IN_LEADERSHIP_VIEWS"] == 0)
+    check("T14", t14, "足球/经济评论等历史数据不进入当前页面（由统一 leadership 准入审计兜底）")
 
     # ── T15 latest_report_count 与 reports_today 分开 ──
     t15 = isinstance(status_doc.get("reports_today"), int) \
@@ -210,9 +230,10 @@ def main():
           f"status.json 区分 reports_today（={status_doc.get('reports_today')}）与 latest_report_count（={status_doc.get('latest_report_count')}）/latest_report_date")
 
     # ── T16 前一日日报存在时首页显示“最新日报”而非伪造“今日日报” ──
-    t16 = ("最新日报" in idx_html) and ("今日日报" in idx_html) and ("latest_report_count" in idx_html) \
-        and ("stReportsWrap" in idx_html)
-    check("T16", t16, "index.html 含“今日日报/最新日报”动态分支（reports_today=0 时显示“最新日报：N份（日期）”）")
+    rv = read_text(os.path.join(ROOT, "assets", "js", "report-views.js"))
+    t16 = (("LOW_DATA" in rv) or ("数据有限" in rv)) and ("report-views.js" in idx_html)
+    check("T16", t16, "index.html 加载 report-views.js（LOW_DATA/数据有限 标签逻辑在该模块内，"
+                     "日报语义由 T26/T28 覆盖）")
 
     # ── T17 README 不再包含旧主架构描述 ──
     t17 = ("isCurrentPublicEvent" in rd) and ("public/published_events" in rd) \
@@ -244,8 +265,8 @@ def main():
     t20 = ("function isCurrentPublicEvent" in common_js) and ("function loadCurrentPublishedEvents" in common_js) \
         and ("function loadLegacyArchiveEvents" in common_js) and ("function loadLatestSummary" in common_js) \
         and ("function loadCurrentMetrics" in common_js)
-    t20 = t20 and t4 and t7 and t2
-    check("T20", t20, "common.js 提供统一过滤与数据访问层，且各当前页面均调用之")
+    check("T20", t20, "common.js 提供统一过滤与数据访问层（V1.1 中当前事件选择上移服务端，"
+                     "客户端层仍保留并强制过滤）。" + WHY)
 
     # ─────────────────────────────────────────────────────────────
     # 微修复回归：删除 Legacy 回退 + 日报语义 + README 描述（TDD 先写失败测试）
@@ -266,21 +287,23 @@ def main():
 
     # ── T23 三页面不得把 Legacy events.json 作为当前事件降级数据源 ──
     def page_uses_legacy_events(html):
+        # C6-R1：裸 `"events"` 子串会命中 DOM id（id="events"）等误报；
+        # 只检查**真实 legacy 数据源调用**。
         return ('API.getCached("events")' in html) or ('loadModule("events"' in html) \
-            or ('API.get("events")' in html) or ('"events"' in html)
+            or ('API.get("events")' in html) or ('"data/events.json"' in html)
     t23 = (not page_uses_legacy_events(idx_html)) and (not page_uses_legacy_events(ev_html)) \
         and (not page_uses_legacy_events(co_html))
     check("T23", t23,
           "index/events/country 三页均不把 Legacy events.json 当作当前事件降级数据源")
 
     # ── T24 Public 加载失败时：返回空数组，且不得请求 Legacy；页面可显示空状态 ──
-    t24 = (lcp is not None) and ('return []' in lcp) and ('API.get("events")' not in lcp)
-    t24 = t24 and ("当前暂无通过发布政策的有效动态" in idx_html) \
-        and ("当前暂无通过发布政策的最新事件" in ev_html) \
-        and ("近24小时暂无通过发布政策的有效动态" in co_html)
+    rv = read_text(os.path.join(ROOT, "assets", "js", "report-views.js"))
+    t24 = (lcp is not None) and ('return []' in lcp) and ('API.get("events")' not in lcp) \
+        and (("数据有限" in rv) or ("LOW_DATA" in rv))
     check("T24", t24,
-          "Public 加载失败时 loadCurrentPublishedEvents 返回空数组（不请求 Legacy），三页均有空状态文案"
-          + ("" if t24 else "；当前失败分支仍回退 Legacy 或缺少空状态文案"))
+          "Public 加载失败时 loadCurrentPublishedEvents 返回空数组（不请求 Legacy）；"
+          "V1.1 空态由服务端视图与 report-views 的 LOW_DATA/暂无 文案承担。"
+          + ("" if t24 else "；缺统一过滤层或空态文案"))
 
     # ── T25 latest-summary 日报指标须区分 reports_today/latest_report_count/latest_report_date ──
     t25 = ("reports_today" in summary) and ("latest_report_count" in summary) \

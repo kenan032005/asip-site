@@ -261,7 +261,11 @@ class TestDataIntegrity(unittest.TestCase):
     def test_development_mode_and_api_closed(self):
         cfg = json.load(open(os.path.join(ROOT, "config", "runtime.json"),
                              encoding="utf-8"))
-        self.assertEqual(cfg.get("asip_mode"), "development")
+        # C6-R1：runtime.json 已按 schema 移除无代码读取的 asip_mode/development_mode；
+        # 「开发态 + API 关闭」改由 schema 允许的字段与部署 env 断言。
+        self.assertEqual(cfg.get("runtime_mode"), "workbuddy_local")
+        self.assertIs(cfg.get("ai_processing_enabled"), False)
+        self.assertIs(cfg.get("allow_paid_fallback"), False)
         self.assertFalse(cfg.get("cloud_schedule_enabled"))
         dm = cfg.get("development_mode") or {}
         self.assertFalse(dm.get("direct_website_api_call"))

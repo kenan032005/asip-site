@@ -4,6 +4,7 @@
 import json
 import urllib.parse
 from base import BaseCollector, normalize_time
+from gdelt_rate_limiter import fetch_gdelt, build_gdelt_url
 
 LANG_MAP = {
     "English": "英语", "French": "法语", "German": "德语", "Spanish": "西班牙语",
@@ -26,17 +27,13 @@ class SearchDiscoveryCollector(BaseCollector):
             query = ('%s (attack OR killed OR clash OR conflict OR bombing OR '
                      'kidnapping OR protest OR insurgent OR "terror" OR sécurité '
                      'OR insécurité OR enlèvement)' % country_en)
-        params = {
-            "query": query,
-            "mode": "ArtList",
-            "format": "json",
-            "maxrecords": "25",
-            "sort": "DateDesc",
-            "timespan": "72h",
-        }
-        url = "https://api.gdeltproject.org/api/v2/doc/doc?" + urllib.parse.urlencode(params)
-        text = self.fetch(url)
+        # C1B §九：该查询同样走 GDELT_SHARED_RATE_LIMITER —— 与 gdelt_search
+        # 源共享同一份全局节流/缓存/配额，绝不各自并发访问同一公共服务。
+        url = build_gdelt_url(query, timespan="72h", maxrecords=25)
+        text, err, meta = fetch_gdelt(url, label="search_discovery|%s" % (country_en or ""))
         if not text:
+            self.errors.append("GDELT_RATE_LIMITED" if meta.get("rate_limited")
+                               else "gdelt fetch: %s" % err)
             return []
         try:
             d = json.loads(text)

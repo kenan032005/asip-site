@@ -198,7 +198,15 @@ class TestWorkflowAndIsolation(unittest.TestCase):
 
     def test_flash_only_regression(self):
         from scripts.ai.providers import deepseek_v4_flash as ds
-        self.assertEqual(ds.ALLOWED_DEEPSEEK_MODELS, frozenset({"deepseek-v4-flash"}))
+# C6-R1 §五：canonical model 已是 deepseek-flash；deepseek-v4-flash 仅为
+        # 遗留别名（LEGACY_MODEL_ALIASES），不再是 canonical 期望值。
+        self.assertEqual(ds.CANONICAL_MODEL, "deepseek-flash")
+        # 别名仍被接受（兼容输入）并归一到 canonical；非 Flash 一律拒绝
+        self.assertEqual(ds.normalize_deepseek_model("deepseek-flash"), "deepseek-flash")
+        self.assertEqual(ds.normalize_deepseek_model("deepseek-v4-flash"),
+                         "deepseek-flash")
+        self.assertIsNone(ds.normalize_deepseek_model("deepseek-v4-pro"))
+        self.assertIn("deepseek-v4-flash", ds.ALLOWED_DEEPSEEK_MODELS)
         for m in ("deepseek-v4-pro", "deepseek-chat", "deepseek-reasoner"):
             with self.assertRaises(ds.UnsupportedDeepSeekModelError):
                 ds.DeepSeekV4FlashProvider(model=m)

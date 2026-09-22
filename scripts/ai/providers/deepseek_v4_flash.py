@@ -44,8 +44,35 @@ import urllib.request
 
 from ..provider import BaseAIProvider   # 相对导入，与 glm47/registry 一致（避免 ai. 别名双重基类）
 
-ALLOWED_DEEPSEEK_MODELS = frozenset({"deepseek-v4-flash"})
-FLASH_MODEL = "deepseek-v4-flash"
+# ── C3R2 §二/§三：模型名契约 ─────────────────────────────────────────────
+# 官方当前 API 模型名 = deepseek-flash（DeepSeek V4.1 Flash）。
+# deepseek-v4-flash 是**遗留别名**，仍被官方暂时路由到 V4.1 Flash；ASIP 继续接受它，
+# 但内部一律归一到 canonical id，不再把它当新的 canonical 名。
+CANONICAL_MODEL = "deepseek-flash"
+DISPLAY_MODEL = "DeepSeek V4.1 Flash"
+LEGACY_MODEL_ALIASES = {"deepseek-v4-flash": CANONICAL_MODEL}
+
+#: 允许出现在**入参**里的模型标识（canonical + 已登记的遗留别名）。
+#: 注意：这里只做"名称白名单"，不做任何模型 fallback。
+ALLOWED_DEEPSEEK_MODELS = frozenset({CANONICAL_MODEL} | set(LEGACY_MODEL_ALIASES))
+#: 发往 API 的模型标识永远是 canonical。
+FLASH_MODEL = CANONICAL_MODEL
+
+
+def normalize_deepseek_model(model):
+    """把模型标识归一到 canonical；未知名称返回 None（绝不猜测、绝不 fallback）。"""
+    if model is None:
+        return None
+    m = str(model).strip()
+    if not m:
+        return None
+    if m == CANONICAL_MODEL:
+        return CANONICAL_MODEL
+    return LEGACY_MODEL_ALIASES.get(m)
+
+
+def is_known_deepseek_model(model):
+    return normalize_deepseek_model(model) is not None
 DEFAULT_BASE_URL = "https://api.deepseek.com"
 SECRET_NAME = "ASIP_DEEPSEEK_API_KEY"
 
@@ -71,10 +98,10 @@ class UnsupportedDeepSeekModelError(ValueError):
 
 
 def _require_flash_model(model):
-    if model not in ALLOWED_DEEPSEEK_MODELS:
+    if normalize_deepseek_model(model) is None:
         raise UnsupportedDeepSeekModelError(
-            "unsupported_deepseek_model: %r（仅允许 %s）" % (
-                model, sorted(ALLOWED_DEEPSEEK_MODELS)))
+            "unsupported_deepseek_model: %r（仅允许 canonical %s 或别名 %s）" % (
+                model, CANONICAL_MODEL, sorted(LEGACY_MODEL_ALIASES)))
 
 
 def credential_available():
@@ -100,9 +127,12 @@ class DeepSeekV4FlashProvider(BaseAIProvider):
             "ASIP_DEEPSEEK_BASE_URL", DEFAULT_BASE_URL)
         self.base_url = base_url.rstrip("/")
         self.api_key = api_key if api_key is not None else os.environ.get(SECRET_NAME, "")
-        self.model = model if model is not None else FLASH_MODEL
-        # §三：Flash-only 硬门禁（任何未批准模型 → 配置错误）
-        _require_flash_model(self.model)
+        requested = model if model is not None else FLASH_MODEL
+        # §三：Flash-only 硬门禁（任何未登记模型 → 配置错误）
+        _require_flash_model(requested)
+        # §二：内部一律用 canonical 标识（遗留别名在此归一，绝不透传到请求体）
+        self.model = normalize_deepseek_model(requested)
+        self.requested_model_input = requested
         self.timeout = int(os.environ.get("ASIP_DEEPSEEK_TIMEOUT_SECONDS", "180"))
         self.max_retries = max_retries
         self.retry_backoff = retry_backoff
@@ -113,7 +143,7 @@ class DeepSeekV4FlashProvider(BaseAIProvider):
 
     def validate_config(self):
         errors = []
-        if self.model not in ALLOWED_DEEPSEEK_MODELS:
+        if normalize_deepseek_model(self.model) is None:
             errors.append("unsupported_deepseek_model: %s" % self.model)
         return errors
 
@@ -231,8 +261,10 @@ class DeepSeekV4FlashProvider(BaseAIProvider):
         latency = int((time.time() - t0) * 1000)
         data = json.loads(body)
         returned = data.get("model")
-        # §四：returned_model 校验（明确返回其它模型 → model_mismatch）
-        if returned and returned not in ALLOWED_DEEPSEEK_MODELS:
+        # §四：returned_model 校验 —— 比较**归一化后**的模型身份，
+        # 因此官方返回 canonical（deepseek-flash）或遗留别名（deepseek-v4-flash）都算匹配；
+        # 只有未登记的模型身份才算 model_mismatch。
+        if returned and normalize_deepseek_model(returned) is None:
             return {"task_id": tid, "status": "failed",
                     "result": {"error": {"code": "model_mismatch",
                                          "message": "returned %s" % returned},

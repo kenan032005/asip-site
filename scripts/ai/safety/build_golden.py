@@ -8,12 +8,13 @@
 """
 import json
 import sys
+import os
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT))
 
-ART = Path(r"C:/Users/kenan/WorkBuddy/2026-07-31-09-46-56/.workbuddy/tmp/run15_art/data/runtime/ai_qualification/stage8b/case_results.json")
+ART = Path(os.environ.get("GOLDEN_CASE_RESULTS") or os.path.join("data", "runtime", "ai_qualification", "stage8b", "case_results.json"))
 OUT_DIR = ROOT / "data" / "qualification" / "stage8c" / "golden"
 
 # case_id -> (category, canonical source)

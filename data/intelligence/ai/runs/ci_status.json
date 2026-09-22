@@ -1,0 +1,51 @@
+{
+ "schema_version": "c3-ci-status-v1",
+ "generated_at": "2026-09-19T13:21:07Z",
+ "job_status": "unknown",
+ "run1_present": true,
+ "run2_present": true,
+ "run1": {
+  "status": "OK",
+  "model": "deepseek-flash",
+  "data_as_of": "2026-09-19T11:13:16+00:00",
+  "ai_calls_total": 11,
+  "ai_calls_localization": 10,
+  "ai_calls_event": 0,
+  "ai_calls_country": 0,
+  "ai_calls_homepage": 1,
+  "cache_hits": 0,
+  "cache_misses": 92,
+  "news_per_localization_call": 9.1,
+  "localization": {
+   "mode": "c3f_incremental",
+   "target": 91,
+   "batches": 10,
+   "full": 90,
+   "fallback": 1,
+   "failed": 0,
+   "applied": 180,
+   "articles_updated": 0
+  },
+  "event": {
+   "full": 0,
+   "fallback": 0,
+   "low_data": 0
+  },
+  "country": {
+   "full": 0,
+   "fallback": 0,
+   "low_data": 0,
+   "countries": 12,
+   "skipped": "c3f_incremental (fact pack unchanged)"
+  },
+  "homepage": {
+   "status": "FULL",
+   "fact_pack_hash": "7a735a1b9228a558a59b8061b3cd9ed4"
+  },
+  "gates": {
+   "analysis_fact_gate": "PASS",
+   "localization_pipeline_status": "PASS_WITH_FALLBACK"
+  }
+ },
+ "run2_ai_calls_total": 1
+}

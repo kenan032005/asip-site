@@ -243,11 +243,31 @@ class FieldCompleteness(unittest.TestCase):
                             f"{e.get('event_id')} canonical_url 非 HTTP: {cu[:50]}")
             parsed = urllib.parse.urlparse(cu)
             path = (parsed.path or "").rstrip("/").lower()
-            self.assertNotIn(path or "/", home_paths,
-                             f"{e.get('event_id')} canonical_url 是首页/栏目页: {cu[:60]}")
-            # 必须像文章页：path 长度 > 1（含文章 slug）
-            self.assertGreater(len(path), 1,
-                               f"{e.get('event_id')} canonical_url 无文章路径: {cu[:60]}")
+            qkeys = {k.lower() for k, _v in
+                     urllib.parse.parse_qsl(parsed.query or "", keep_blank_values=True)}
+            # C3R2-PRE：/?<slug>（SPIP 等）是文章永久链接——路径为空但查询串不是列表参数时
+            # 不得判成首页/栏目页。
+            slug_in_query = (not path) and bool(qkeys) and not (qkeys & LISTING_QUERY_KEYS)
+            if not slug_in_query:
+                self.assertNotIn(path or "/", home_paths,
+                                 f"{e.get('event_id')} canonical_url 是首页/栏目页: {cu[:60]}")
+                # 必须像文章页：path 长度 > 1（含文章 slug）
+                self.assertGreater(len(path), 1,
+                                   f"{e.get('event_id')} canonical_url 无文章路径: {cu[:60]}")
+
+    def test_12c_query_permalink_fixture(self):
+        """C3R2-PRE：锁定 ?<slug> 与首页/列表页的边界（放宽必须有界）。"""
+        # SPIP 风格文章永久链接 → 文章页
+        self.assertTrue(_is_article_url("https://24haubenin.info/?Une-moto-emportee-lors-d-une-attaque"))
+        # 裸域名 / 无查询串 → 首页
+        self.assertFalse(_is_article_url("https://24haubenin.info/"))
+        self.assertFalse(_is_article_url("https://24haubenin.info"))
+        # 列表/检索参数 → 非文章页
+        self.assertFalse(_is_article_url("https://24haubenin.info/?page=2"))
+        self.assertFalse(_is_article_url("https://24haubenin.info/?s=securite"))
+        self.assertFalse(_is_article_url("https://ethiopia-insight.com/category/viewpoint"))
+        # 正常路径文章 → 文章页
+        self.assertTrue(_is_article_url("https://premiumtimesng.com/news/top-news/910256-x"))
 
     def test_13_canonical_url_is_http(self):
         """canonical_url 为安全 HTTP/HTTPS 文章 URL。"""
@@ -563,6 +583,12 @@ class PublicationChannel(unittest.TestCase):
 
 
 # 非文章页路径段（国家页/栏目页/标签页/搜索页/Feed 等）
+#: 列表/检索类查询参数（路径为空时用于区分「首页/列表页」与「?<slug> 文章页」）
+LISTING_QUERY_KEYS = {"page", "paged", "paging", "s", "q", "search", "cat",
+                      "category", "tag", "tags", "author", "archive",
+                      "archives", "feed", "rss", "offset", "start", "index",
+                      "orderby", "filter", "k", "keyword"}
+
 NON_ARTICLE_SEGMENTS = {"country", "category", "categories", "tag", "tags",
                         "rubrique", "search", "feed", "rss", "author",
                         "archives", "date", "wp-json", "page", "video",
@@ -582,7 +608,15 @@ def _is_article_url(url):
     p = urllib.parse.urlparse(url)
     path_seg = [s for s in (p.path or "").strip("/").lower().split("/") if s]
     if not path_seg:
-        return False  # 首页
+        # C3R2-PRE：SPIP 等 CMS 的文章永久链接形如 /?<slug>（路径为空、查询串是标题 slug）。
+        # 只有"无查询串"（真首页）或"查询串是列表参数"（page=/s=/tag=…）才算非文章页。
+        q = urllib.parse.parse_qsl(p.query or "", keep_blank_values=True)
+        keys = {k.lower() for k, _v in q}
+        if not keys:
+            return False  # 首页
+        if keys & LISTING_QUERY_KEYS:
+            return False  # 列表/检索页
+        return True       # ?<slug> → 文章详情页
     if path_seg[0] in NON_ARTICLE_SEGMENTS:
         return False  # 栏目/国家/标签/搜索/feed 等
     return True

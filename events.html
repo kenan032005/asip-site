@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>态势事件 · ASIP</title>
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/news-stream.css">
 </head>
 <body data-page="events">
 <div id="topbar" class="topbar"></div>
@@ -16,20 +17,46 @@
 <div class="container">
   <section class="hero">
     <h1>态势事件</h1>
-    <p class="fe-sub">按现实事件（Master Event）聚合，同一事件只显示一次；多来源条目折叠展示。</p>
+    <p class="fe-sub">两个层级严格分开：<b>最新动态</b>为单一来源即可收录的情报信号（未核实）；<b>已核实事件</b>按现实事件（Master Event）聚合，需多来源交叉印证。</p>
   </section>
 
   <div id="feDelayedWarn"></div>
 
-  <section class="hp-block">
-    <h2>事件筛选</h2>
-    <div class="fe-evs-filter" id="feEvFilter"></div>
-  </section>
+  <nav class="c1a-tabs" id="c1aTabs" role="tablist" aria-label="事件层级">
+    <button class="c1a-tab is-on" data-tab="news" role="tab">最新动态<em id="c1aTabNewsCount"></em></button>
+    <button class="c1a-tab" data-tab="verified" role="tab">已核实事件</button>
+  </nav>
 
-  <section class="hp-block">
-    <h2>全部事件</h2>
-    <div id="feEventsList"><div class="empty-sm">加载中…</div></div>
-  </section>
+  <!-- ============ 最新动态（News / Signal Stream, 默认） ============ -->
+  <div class="c1a-pane" id="c1aPaneNews" role="tabpanel">
+    <section class="hp-block">
+      <h2>情报信号流</h2>
+      <div id="nsSummary"></div>
+    </section>
+
+    <section class="hp-block">
+      <h2>筛选与检索</h2>
+      <div id="nsFilters"></div>
+    </section>
+
+    <section class="hp-block">
+      <h2>动态列表</h2>
+      <div class="ns-list" id="nsList"><div class="ns-empty">加载中…</div></div>
+    </section>
+  </div>
+
+  <!-- ============ 已核实事件（Master Event, 需多来源） ============ -->
+  <div class="c1a-pane" id="c1aPaneVerified" role="tabpanel" style="display:none;">
+    <section class="hp-block">
+      <h2>事件筛选</h2>
+      <div class="fe-evs-filter" id="feEvFilter"></div>
+    </section>
+
+    <section class="hp-block">
+      <h2>全部事件</h2>
+      <div id="feEventsList"><div class="empty-sm">加载中…</div></div>
+    </section>
+  </div>
 </div>
 
 <footer class="site"><div id="asip-build-meta" style="margin-top:4px;font-size:12px;color:#8899aa;"></div></footer>
@@ -38,5 +65,6 @@
 <script src="assets/js/api.js"></script>
 <script src="assets/js/common.js"></script>
 <script src="assets/js/frontend.js"></script>
+<script src="assets/js/news-stream.js"></script>
 </body>
 </html>

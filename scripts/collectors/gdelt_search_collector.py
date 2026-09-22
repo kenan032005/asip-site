@@ -23,6 +23,7 @@ import os
 import re
 import urllib.parse
 from base import BaseCollector, normalize_time, fetch_text
+from gdelt_rate_limiter import (GLOBAL, fetch_gdelt, build_gdelt_url)  # noqa: F401
 
 LANG_MAP = {
     "English": "英语", "French": "法语", "German": "德语", "Spanish": "西班牙语",
@@ -73,6 +74,11 @@ def _all_group_domains(source, kw, timespan):
 
 
 def _fetch_group(source, kw, timespan):
+    """同组（同国+同关键词+同窗口）GDELT 源共享一次查询。
+
+    C1B §九：HTTP 出口统一走 GDELT_SHARED_RATE_LIMITER（全局节流 / 共享缓存 /
+    请求去重 / 指数退避 / Retry-After 遵循）；本函数只负责「查询合并」这一层。
+    """
     key = _group_key(source, kw, timespan)
     if key in _CACHE:
         return _CACHE[key]
@@ -81,26 +87,19 @@ def _fetch_group(source, kw, timespan):
     if len(domains) > 1:
         dom_expr = "(%s)" % dom_expr
     query = "%s %s" % (dom_expr, kw)
-    params = {
-        "query": query,
-        "mode": "ArtList",
-        "format": "json",
-        "maxrecords": "250",
-        "sort": "DateDesc",
-        "timespan": timespan,
-    }
-    url = "https://api.gdeltproject.org/api/v2/doc/doc?" + urllib.parse.urlencode(params)
-    text, err = fetch_text(url)
-    entry = {"articles": [], "error": None, "rate_limited": False}
+    url = build_gdelt_url(query, timespan=timespan, maxrecords=250)
+    label = "%s|%s" % (source.get("country", ""), kw[:40])
+    text, err, meta = fetch_gdelt(url, label=label)
+    entry = {"articles": [], "error": None, "rate_limited": False, "meta": meta,
+             "domains": domains, "consolidated_requests": 1}
     if not text:
         # 明确区分「GDELT 公共接口限流」与「其它抓取错误」，便于运行后自检与证据留存
-        rate = bool(err) and "429" in str(err)
+        rate = bool(meta.get("rate_limited")) or (bool(err) and "429" in str(err))
         entry["rate_limited"] = rate
         if rate:
-            entry["error"] = ("GDELT 公共接口限流(HTTP 429)：本机出口 IP 被节流，"
-                              "需等待冷却或改由 GitHub Actions 云端低频运行。"
-                              "强制接入的 Reuters/新华网查询通路正确，限流解除后即可返回数据。"
-                              "原始错误: %s" % err)
+            entry["error"] = ("GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；"
+                              "已遵循 Retry-After 并退避至 %.0fs，本窗口该组查询暂停。"
+                              "原始错误: %s" % (GLOBAL.interval, err))
         else:
             entry["error"] = "gdelt fetch: %s" % err
     else:

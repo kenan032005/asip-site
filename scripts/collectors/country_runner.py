@@ -125,6 +125,22 @@ SECURITY_POS = [
     "déplacement de population", "deplacement de population",
     "déplacement forcé", "deplacement force", "déplacés", "deplaces",
     "déplacées", "deplacees", "déplacé", "deplace",
+    # ── C1C：葡语（莫桑比克）语言覆盖补齐 —— 只补语言词表，不降低任何判定门槛 ──
+    "ataque", "ataques", "ataque armado", "ataques armados", "assalto",
+    "assaltos", "emboscada", "emboscadas", "conflito", "conflitos",
+    "enfrentamento", "enfrentamentos", "tiroteio", "tiroteios", "disparos",
+    "mortos", "morte", "mortes", "feridos", "ferido", "assassinato",
+    "assassinatos", "massacre", "massacres", "decapitação", "decapitações",
+    "rapto", "raptos", "sequestro", "sequestros", "refém", "reféns",
+    "explosão", "explosões", "bomba", "bombas", "minas", "engenho explosivo",
+    "forças de segurança", "polícia", "exército", "operação militar",
+    "operação de segurança", "militares", "insurgentes", "extremistas",
+    "terroristas", "rebeldes", "milícias", "grupo armado", "grupos armados",
+    "banditismo", "crime", "criminalidade", "manifestação", "manifestações",
+    "greve", "motim", "distúrbios", "toque de recolher", "estado de emergência",
+    "fronteira", "fecho de fronteira", "estrada cortada", "deslocados",
+    "deslocados internos", "refugiados", "cheia", "cheias", "inundação",
+    "inundações", "seca", "epidemia", "cólera", "surto",
 ]
 
 # mine 的爆炸物/地雷语境（满足其一才计入安全相关）
@@ -293,6 +309,29 @@ def identify_country(text, country_cfg):
 
     out["country_match_score"] = len(matched_kw) + 2 * len(matched_loc)
 
+    # ── C1C：通用国别判定分支（新增国别，无国家特例规则）──
+    # 语义：行政区/城市命中 → 明确归属；仅有国名且无排除词 → 归属；
+    #       命中排除词且无本国行政区 → 排除（避免尼日利亚/贝宁、苏丹/南苏丹、
+    #       刚果金/刚果布、索马里/埃塞 Somali Region 这类互相污染）。
+    if country not in ("乍得", "尼日尔"):
+        if excluded and not matched_loc:
+            out["decision"] = "exclude"
+            out["country_decision_reason"] = "命中他国排除词(%s)，且无本国行政区" % ", ".join(excluded)
+            return out
+        if matched_loc:
+            out["decision"] = str(country_cfg.get("country_en", "")).lower()
+            out["event_location_country"] = out["decision"]
+            out["country_decision_reason"] = "命中本国行政区/城市(%s)" % ", ".join(matched_loc)
+            return out
+        if matched_kw:
+            out["decision"] = str(country_cfg.get("country_en", "")).lower()
+            out["event_location_country"] = out["decision"]
+            out["country_decision_reason"] = "命中本国国名(%s)" % ", ".join(matched_kw)
+            return out
+        out["decision"] = "unclear"
+        out["country_decision_reason"] = "未命中本国实体"
+        return out
+
     # "in Chad / au Tchad" 明确地点
     in_country = bool(re.search(r"(?<![a-z])(in chad|au tchad)(?![a-z])", t)) if country == "乍得" else False
 
@@ -371,6 +410,59 @@ def identify_country(text, country_cfg):
 # ---------------------------------------------------------------------------
 # 相关性筛选（确定性阶段）
 # ---------------------------------------------------------------------------
+# ══════════════════════════════════════════════════════════════════════
+# C2B §九–§十四：多语言安全相关性词表 V2
+#   只**扩充词汇覆盖**，不改动任何判定阈值/逻辑：
+#     - V2 强信号并入 SECURITY_POS（可单独判定相关）
+#     - V2 弱信号并入 WEAK_POS（单独出现仍不足以判定）
+#     - V2 负例族并入确定性排除（体育/娱乐/生活方式/常规商业）
+#   CLASSIFIER_VERSION 用于区分历史 hold 是 v1 还是 v2 产生的（§十八）。
+# ══════════════════════════════════════════════════════════════════════
+CLASSIFIER_VERSION = "v2"
+#: 体育语境短语（C2B §十四）：'Nigeria attacks down the wing' 这类标题里
+#: 单看 "attack" 会得正分，但整体是体育语义 —— 必须由体育排除族拦下。
+FOOTBALL_PHRASES = [
+    "down the wing", "the wing", "wing-back", "wingback", "midfield", "midfielder",
+    "offside", "kick-off", "kickoff", "half-time", "halftime", "penalty area",
+    "group stage", "quarter-final", "quarterfinal", "semi-final", "semifinal",
+    "hat-trick", "hat trick", "goalless", "clean sheet", "own goal", "set-piece",
+    "spot kick", "final whistle", "man of the match", "matchwinner", "fixture",
+    "derby", "afcon", "can 202", "uefa", "fifa", "caf confederation",
+    "premier league", "la liga", "serie a", "bundesliga", "champions league",
+]
+try:
+    from relevance_lexicon_v2 import (flat_strong as _v2_strong, flat_weak as _v2_weak,
+                                      flat_negative as _v2_neg, NEGATIVE_TERMS as _V2_NEG,
+                                      LEXICON as _V2_LEX, VERSION as _V2_VERSION,
+                                      ARABIC_RELEVANCE_SUPPORT as _V2_AR)
+    SECURITY_POS = list(SECURITY_POS) + [t for t in _v2_strong() if t not in SECURITY_POS]
+    WEAK_POS = set(WEAK_POS) | set(_v2_weak())
+    EXCLUDE_SPORTS = list(EXCLUDE_SPORTS) + [
+        t for t in (_V2_NEG.get("sports", []) + FOOTBALL_PHRASES) if t not in EXCLUDE_SPORTS]
+    EXCLUDE_CULTURE = list(EXCLUDE_CULTURE) + [
+        t for t in (_V2_NEG.get("entertainment", []) + _V2_NEG.get("lifestyle", []))
+        if t not in EXCLUDE_CULTURE]
+    EXCLUDE_PROMO = list(EXCLUDE_PROMO) + [t for t in _V2_NEG.get("commercial", [])
+                                           if t not in EXCLUDE_PROMO]
+except Exception:  # 词表缺失时保持 v1 行为，不静默降级判定逻辑
+    CLASSIFIER_VERSION = "v1"
+
+
+def relevance_detail(text):
+    """可解释的相关性判定（C2B §十六/§十八 用）：返回版本、分数、命中词与所属分类。"""
+    rel, score, matched, reason = relevance_stage1(text)
+    cats = set()
+    if matched:
+        try:
+            from relevance_lexicon_v2 import categories_of as _cats
+            for m in matched:
+                cats.update(_cats(m))
+        except Exception:
+            pass
+    return {"classifier_version": CLASSIFIER_VERSION, "relevant": rel, "score": score,
+            "matched": matched, "reason": reason, "categories": sorted(cats)}
+
+
 def relevance_stage1(text):
     """返回 (is_relevant, score, matched, excluded_reason)。"""
     t = (text or "").lower().replace("\u2019", "'").replace("\u02bc", "'")

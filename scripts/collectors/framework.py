@@ -192,6 +192,14 @@ def parse_original_time(s):
         return dt.replace(tzinfo=timezone.utc), None
     except ValueError:
         pass
+    # C1B §十 回退：RFC822 命名时区（EST/CET/WAT/EAT/…）与 RSS 1.0 的 dc:date 变体。
+    # 旧实现只认 %z 数字偏移与 UTC/GMT，命名时区一律失败 → published_at 丢失 →
+    # 文章无法进入新鲜度分带。此处只做加法，不改变已成功的解析结果。
+    try:
+        from feed_parser import parse_feed_date
+        return parse_feed_date(s)
+    except Exception:
+        pass
     return None, None
 
 

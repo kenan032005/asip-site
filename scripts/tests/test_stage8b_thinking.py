@@ -266,7 +266,15 @@ class TestFlashOnlyRegression(unittest.TestCase):
     """Flash-only 回归。"""
 
     def test_allowlist_unchanged(self):
-        self.assertEqual(ds.ALLOWED_DEEPSEEK_MODELS, frozenset({"deepseek-v4-flash"}))
+# C6-R1 §五：canonical model 已是 deepseek-flash；deepseek-v4-flash 仅为
+        # 遗留别名（LEGACY_MODEL_ALIASES），不再是 canonical 期望值。
+        self.assertEqual(ds.CANONICAL_MODEL, "deepseek-flash")
+        # 别名仍被接受（兼容输入）并归一到 canonical；非 Flash 一律拒绝
+        self.assertEqual(ds.normalize_deepseek_model("deepseek-flash"), "deepseek-flash")
+        self.assertEqual(ds.normalize_deepseek_model("deepseek-v4-flash"),
+                         "deepseek-flash")
+        self.assertIsNone(ds.normalize_deepseek_model("deepseek-v4-pro"))
+        self.assertIn("deepseek-v4-flash", ds.ALLOWED_DEEPSEEK_MODELS)
 
     def test_pro_rejected(self):
         with self.assertRaises(ds.UnsupportedDeepSeekModelError):
@@ -289,7 +297,7 @@ class TestFlashOnlyRegression(unittest.TestCase):
             p.submit_task({"task_id": "T", "system_text": "s", "user_text": "u",
                            "task_type": "africa_daily", "max_output_tokens": 8192})
         for body in captured:
-            self.assertEqual(body["model"], "deepseek-v4-flash")
+            self.assertEqual(body["model"], "deepseek-flash")
 
 
 if __name__ == "__main__":

@@ -36,6 +36,15 @@ from framework import (  # noqa: E402
     _http_is_retryable, _http_is_terminal, CACHE_DIR,
 )
 from registry import SourceRegistry, ArticleDiscoverer  # noqa: E402
+from country_runner import CLASSIFIER_VERSION as _CLASSIFIER_VERSION
+
+
+def _classifier_version():
+    return _CLASSIFIER_VERSION
+
+
+from countries import (key_for as _cfg_key_for, cn_for_decision as _cn_for_decision,
+                       iso2_for as _iso2_for, configured_countries as _configured_countries)  # noqa: E402
 from country_runner import (load_country_cfg, identify_country,  # noqa: E402
                             relevance_stage1, classify_type)
 
@@ -68,9 +77,56 @@ def save_json(path, doc):
         json.dump(doc, f, ensure_ascii=False, indent=2)
 
 
+# ── C1C-V：全局墙钟预算（优雅降级）────────────────────────────────────────
+# 目的：避免受控验证/CI 因个别源慢或远程限流而无限期挂住。达到预算后**只停止发起
+# 新的来源抓取**，已完成的采集数据全部保留，并继续执行 event clustering →
+# Article Corpus 持久化 → 统计落盘，绝不整轮作废。
+_DEADLINE = None          # time.monotonic() 截止点；None = 不限
+_wall_clock_limit_seconds = None
+
+
+def set_wall_clock_limit(seconds):
+    global _DEADLINE, _wall_clock_limit_seconds
+    _wall_clock_limit_seconds = float(seconds) if seconds else None
+    if seconds and float(seconds) > 0:
+        _DEADLINE = time.monotonic() + float(seconds)
+    else:
+        _DEADLINE = None
+    return _DEADLINE
+
+
+def wall_clock_remaining():
+    if _DEADLINE is None:
+        return None
+    return max(0.0, _DEADLINE - time.monotonic())
+
+
+def wall_clock_exhausted():
+    return _DEADLINE is not None and time.monotonic() >= _DEADLINE
+
+
+def _skipped_stat(src, country_cn):
+    """因墙钟预算耗尽而未尝试的来源：显式记录，绝不静默丢弃。"""
+    return {
+        "source_id": src["source_id"], "source_name": src["source_name"],
+        "country": country_cn, "method": src["discovery_type"],
+        "discovered": 0, "fetched": 0, "full_body": 0, "partial_body": 0,
+        "summary_only": 0, "extraction_failed": 0, "published": 0,
+        "quarantined": 0, "duplicates": 0, "errors": 0,
+        "status": "skipped_wall_clock",
+        "error": "WALL_CLOCK_LIMIT_REACHED: 未在本轮尝试（预算耗尽，优雅降级）",
+        "failure_reason": "WALL_CLOCK_LIMIT_REACHED", "failure_evidence": [],
+        "duration_s": 0.0, "html_discovered": 0, "html_fetched": 0,
+        "html_full_body": 0, "html_partial_body": 0, "html_published": 0,
+        "html_listing_channel": bool(src.get("listing_urls")),
+    }
+
+
 def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=False, max_items=0, run_id=""):
     """对单个国家执行完整采集。"""
-    cfg_key = "chad" if country_cn == "乍得" else "niger"
+    # C1C：国家 → 配置键改为由 config/countries 派生（原先硬编码 chad/niger）
+    from countries import key_for as _cfg_key_for
+    cfg_key = _cfg_key_for(country_cn) or ("chad" if country_cn == "乍得" else "niger")
     run_id = run_id or os.environ.get("ASIP_RUN_ID", "local")
     country_cfg = load_country_cfg(cfg_key)
     sources = registry.by_country(country_cn)
@@ -87,6 +143,13 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
     errors = []
 
     for src in sources:
+        if wall_clock_exhausted():
+            # C1C-V：达到全局墙钟预算 → 停止发起新抓取，但不影响后续 persistence/聚类/统计
+            print("  [wall-clock] 预算耗尽，跳过剩余来源（已完成的采集结果保留）")
+            idx = sources.index(src)
+            for rest in sources[idx:]:
+                per_source.append(_skipped_stat(rest, country_cn))
+            break
         sid = src["source_id"]
         t0 = time.time()
         stat = {
@@ -127,6 +190,8 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
         if not discovered:
             stat["status"] = "no_items"
             stat["error"] = "; ".join(dis_errors[:2])
+            # C1B §七：逐源具体失败原因（禁止一律标 BLOCKED）
+            stat["failure_reason"], stat["failure_evidence"] = _classify_failure(stat, dis_errors)
             per_source.append(stat)
             continue
         stat["discovered"] = len(discovered)
@@ -377,7 +442,8 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
             if a["source_id"] != sid:
                 continue
             c_decision = a["_country"].get("decision", "") if isinstance(a["_country"], dict) else ""
-            event_country_cn = "乍得" if c_decision == "chad" else ("尼日尔" if c_decision == "niger" else "")
+            # C1C：decision → 中文国名改为通用映射（原先硬编码 chad/niger）
+            event_country_cn = _cn_for_decision(c_decision) or ""
             quality = a.get("extraction_quality", "")
             body_words = a.get("article_word_count", 0)
 
@@ -405,6 +471,8 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
                 # 通过 → 构建事件，标记终态（published）
                 ev = build_event(a, run_id, country_cn)
                 published.append(ev)
+                # C1B §五：把确定性事件类型回填到 article，供 Article Corpus 持久化
+                a["_event_type"] = ev.get("event_type", "")
                 existing_urls.add(norm_url(a.get("article_url", "")))
                 set_article_state_record(state_doc, a.get("article_url", ""),
                                       STATE.PUBLISHED,
@@ -444,6 +512,8 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
                     "country": country_cn,
                     "reason_code": qr_code,
                     "reason_cn": qr_code,
+                    # C2B §十八：记录产生该判定的分类器版本，便于后续区分 v1/v2 hold
+                    "classifier_version": _classifier_version(),
                     "detected_at": bj_iso(),
                     "detected_by": "stage3_collect_v2",
                     "restorable": True,
@@ -452,6 +522,10 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
                     "original_payload": a,
                 }
                 quarantined.append(qr)
+                # C1B §五：标记隔离原因，供 Article Persistence 判定 safety hold
+                # （不得把安全隔离的文章写进 Article Corpus）
+                a["_quarantine_reason"] = reason
+                a["_quarantine_code"] = qr_code
                 if is_terminal:
                     set_article_state_record(state_doc, a.get("article_url", ""),
                                           STATE.QUARANTINED_TERMINAL,
@@ -478,6 +552,10 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
         save_processing_state(state_doc)
 
         stat["duration_s"] = round(time.time() - t0, 1)
+        # C1B §七：逐源具体失败原因（禁止一律标 BLOCKED）。
+        # 只新增可观测字段，不改动既有 status 语义（success/no_items），
+        # 以免改变 write_stats / 验收脚本既有口径。
+        stat["failure_reason"], stat["failure_evidence"] = _classify_failure(stat, dis_errors)
         per_source.append(stat)
         print(f"    → 发现{stat['discovered']} 详情{stat['fetched']} "
               f"正文{stat['full_body']+stat['partial_body']} 发布{stat['published']} "
@@ -488,7 +566,8 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
 
 def build_event(article, run_id, country_cn):
     cid = article.get("_country", {}) if isinstance(article.get("_country"), dict) else {}
-    country_iso = "TD" if country_cn == "乍得" else "NE"
+    # C1C：ISO2 由国家配置派生（原先硬编码 TD/NE）
+    country_iso = _iso2_for(country_cn) or ("TD" if country_cn == "乍得" else "NE")
     event_type, _ = classify_type(article["original_title"] + " " + article["original_body"][:300],
                                   article["original_title"])
     return {
@@ -546,7 +625,22 @@ def build_event(article, run_id, country_cn):
     }
 
 
-def write_stats(per_source, run_id, configured_sources=0):
+def _classify_failure(stat, dis_errors):
+    """C1B §七：调用确定性失败原因分类器；导入失败时如实退回 UNKNOWN。"""
+    try:
+        from failure_reasons import classify_source_failure
+        mapping_error = False
+        try:
+            mapping_error = bool(stat.get("_mapping_error"))
+        except Exception:
+            mapping_error = False
+        return classify_source_failure(stat, dis_errors, mapping_error=mapping_error)
+    except Exception:
+        return "UNKNOWN", ["failure_reasons module unavailable"]
+
+
+def write_stats(per_source, run_id, configured_sources=0, article_stats=None,
+                cluster_stats=None):
     totals = {
         "configured_sources": configured_sources,
         "enabled_sources": len(per_source),
@@ -568,6 +662,59 @@ def write_stats(per_source, run_id, configured_sources=0):
         "quarantined_count": sum(s["quarantined"] for s in per_source),
         "duplicate_count": sum(s["duplicates"] for s in per_source),
         "average_fetch_time": round(sum(s["duration_s"] for s in per_source) / max(1, len(per_source)), 1),
+    }
+    # C1B §七：逐源失败原因汇总（区分 blocked 与 no-output，供 Source Yield V2）
+    try:
+        from failure_reasons import summarize as _sum_reasons, is_blocked as _is_blocked
+        reason_rows = [{"failure_reason": s.get("failure_reason")} for s in per_source]
+        totals["failure_reasons"] = _sum_reasons(reason_rows)
+        totals["sources_blocked_by_external"] = sum(
+            1 for s in per_source if _is_blocked(s.get("failure_reason")))
+        totals["sources_no_output_not_blocked"] = sum(
+            1 for s in per_source
+            if s.get("failure_reason") not in ("OK_PRODUCTIVE",)
+            and not _is_blocked(s.get("failure_reason")))
+    except Exception:
+        totals["failure_reasons"] = {}
+    # C1B §九：GDELT 共享限流器遥测（真实请求/429/成功计数）
+    try:
+        from gdelt_rate_limiter import GLOBAL as _GDELT_LIMITER
+        totals["gdelt_rate_limiter"] = _GDELT_LIMITER.stats()
+    except Exception:
+        totals["gdelt_rate_limiter"] = None
+    # C1B §五：Article Corpus 持久化指标（真实计数，读取不到则显式标记）
+    if article_stats:
+        totals["article_store_path"] = article_stats.get("authoritative_store")
+        totals["articles_persisted_total"] = article_stats.get("store_after")
+        totals["articles_persisted_new"] = article_stats.get("new_articles_persisted")
+        totals["articles_excluded_total"] = article_stats.get("excluded_total")
+        totals["articles_excluded_by_code"] = article_stats.get("excludes") or {}
+        totals["article_persistence_ok"] = True
+    else:
+        totals["article_persistence_ok"] = False
+    # C1B §十七：事件级聚类指标（一稿一事件 → 同一事件可多来源印证）
+    totals["event_clustering"] = cluster_stats or {"applied": False}
+    # C2B §三/§六：采集收尾写统一时间契约（data_as_of = processed_through）
+    try:
+        from ops.time_contract import write_contract as _tc_write, refresh_derived_snapshots as _tc_sync
+        _now_iso = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        _tc_write(root=ROOT, run_id=run_id, processed_through=_now_iso,
+                  source="stage3_collect_v2.processed_through")
+        _tc_state = _tc_sync(root=ROOT, run_id=run_id)
+        print("  TIME_CONTRACT: data_as_of=%s (%s) touched=%s"
+              % (_tc_state.get("data_as_of"), _tc_state.get("status"),
+                 ",".join(_tc_state.get("touched") or [])))
+    except Exception as _e:  # noqa: BLE001
+        print("  ! time_contract write failed: %s" % _e)
+
+    # C1C-V：墙钟预算使用情况（受控验证可复核）
+    totals["wall_clock"] = {
+        "limit_seconds": _wall_clock_limit_seconds,
+        "remaining_seconds": (round(wall_clock_remaining(), 1)
+                              if wall_clock_remaining() is not None else None),
+        "exhausted": wall_clock_exhausted(),
+        "sources_skipped": sum(1 for s in per_source
+                               if s.get("status") == "skipped_wall_clock"),
     }
     doc = {
         "generated_at": bj_iso(),
@@ -600,7 +747,7 @@ def generate_country_source_acceptance(per_source, source_registry, run_id):
         by_country.setdefault(cn, []).append(stat)
 
     acceptance = {}
-    for cn in ("乍得", "尼日尔"):
+    for cn in _configured_countries() or ("乍得", "尼日尔"):
         stats = by_country.get(cn, [])
         registry_srcs = source_registry.by_country(cn) if source_registry else []
         registry_ids = {s["source_id"] for s in registry_srcs}
@@ -748,7 +895,11 @@ def save_audit_snapshot(per_source, totals, run_id, source_registry=None):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry", action="store_true")
-    ap.add_argument("--country", choices=["乍得", "尼日尔"], default=None)
+    ap.add_argument("--country", default=None,
+                    help="仅采集指定国家（默认=registry 中全部已配置国家）")
+    ap.add_argument("--wall-clock-limit", type=float, default=0.0,
+                    help="全局墙钟预算（秒）。达到后仅停止发起新来源抓取，"
+                         "已完成数据保留并继续完成聚类/持久化/统计。0=不限")
     ap.add_argument("--run-id", default="")
     ap.add_argument("--fresh", action="store_true", help="清空状态缓存，全量重抓")
     ap.add_argument("--max-items", type=int, default=0, help="每来源最多处理 N 条（0=不限）")
@@ -770,9 +921,22 @@ def main():
     registry = SourceRegistry()
     discoverer = ArticleDiscoverer(registry)
 
-    countries = [args.country] if args.country else ["乍得", "尼日尔"]
+    # C1C：默认国家清单由 registry 的启用来源派生（原先硬编码两国）
+    if args.country:
+        countries = [args.country]
+    else:
+        _cfg_countries = set(_configured_countries())
+        countries = sorted({s["source_country"] for s in registry.enabled()
+                            if s["source_country"] in _cfg_countries})
+        if not countries:
+            countries = ["乍得", "尼日尔"]
     # 统计两国配置总分（SourceRegistry 中所有来源，含 gdelt_search）
     configured_sources = sum(len(registry.by_country(cn)) for cn in countries)
+
+    if args.wall_clock_limit:
+        set_wall_clock_limit(args.wall_clock_limit)
+        print("全局墙钟预算: %.0f 秒（达到后优雅降级：不再发起新来源，保留已完成数据）"
+              % args.wall_clock_limit)
 
     all_articles = []
     per_source = []
@@ -787,12 +951,56 @@ def main():
         per_source.extend(ps)
         all_errors.extend(errs)
 
+    # ── C1B §十七：事件级聚类（修复 G3：一稿一事件 → 同一事件可多来源印证）──
+    # 只处理本次 run_id 的事件；canonical 阈值（independent_source_count>=2 AND
+    # quality_gate_passed）保持不变，本步骤只负责「正确合并同一事件」与
+    # 「按 source identity 正确数独立来源」。
+    cluster_stats = None
+    try:
+        sys.path.insert(0, os.path.join(ROOT, "scripts"))
+        from clustering.event_clusterer import apply_event_clustering
+        cluster_stats = apply_event_clustering(PUBLISHED_PATH, run_id)
+    except Exception as e:  # noqa: BLE001
+        print("  [event-cluster] FAILED: %s: %s" % (type(e).__name__, e))
+
+    # ── C1B §五：Article Corpus 持久化 ──
+    # 采集器过去只写 event_clusters/quarantine，内存中的 all_articles 从不落盘，
+    # 导致 Article Layer 自 2026-07-30 冻结（C1B §四 G1 审计）。此处补上唯一
+    # 持久化入口：通过 Repository 写入 data/canonical/articles.json（schema 校验 +
+    # 去重 + 原子写入）。文章入库不代表事实已核实，不触碰 canonical 事件阈值。
+    article_stats = None
+    try:
+        from data.article_persistence import persist_collected_articles
+        article_stats = persist_collected_articles(ROOT, all_articles, run_id)
+    except Exception as e:  # noqa: BLE001
+        print("  [article-persist] FAILED: %s: %s" % (type(e).__name__, e))
+        traceback.print_exc()
+
     # ── 持久化集中式状态 ──
     persist_and_clear_state()
 
     print(f"\n{'='*60}")
     print(f"采集完成: {len(all_articles)} 篇文章, {len(per_source)} 来源, {len(all_errors)} 错误")
-    totals = write_stats(per_source, run_id, configured_sources=configured_sources)
+    if article_stats:
+        print("Article Corpus: %d -> %d (新增 %d)"
+              % (article_stats["store_before"], article_stats["store_after"],
+                 article_stats["new_articles_persisted"]))
+    if cluster_stats:
+        print("Event clusters: events %s -> clusters %s (multi_source=%s, max_indep=%s)"
+              % (cluster_stats.get("input_events"), cluster_stats.get("output_clusters"),
+                 cluster_stats.get("multi_source_clusters"),
+                 cluster_stats.get("max_independent_sources")))
+    totals = write_stats(per_source, run_id, configured_sources=configured_sources,
+                         article_stats=article_stats, cluster_stats=cluster_stats)
+    # C1B §八/§九：GDELT 限流器遥测落盘（随 data/runtime/ops 一并持久化），
+    # 使「最近窗口的请求数/429/成功率/唯一产出」成为可长期统计的事实，而非临时日志。
+    try:
+        from gdelt_rate_limiter import GLOBAL as _GDELT_LIMITER
+        _p = os.path.join(DATA, "runtime", "ops", "gdelt_rate_limiter.json")
+        _GDELT_LIMITER.save_telemetry(_p)
+        print("GDELT 限流器遥测已保存: %s" % _p)
+    except Exception as e:  # noqa: BLE001
+        print("GDELT 限流器遥测保存失败: %s" % e)
     save_audit_snapshot(per_source, totals, run_id, source_registry=registry)
     print(json.dumps(totals, ensure_ascii=False, indent=2))
 

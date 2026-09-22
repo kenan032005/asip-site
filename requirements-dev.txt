@@ -1,0 +1,9 @@
+# ASIP V1.1 — dev/test 依赖（C6-R1 §三：Fresh Clone 必须按正式依赖安装后才判定测试结果）
+#
+# 说明：生产运行时不依赖第三方包（Python 3.13 标准库），但 **测试/开发** 需要以下包。
+# 其中 tzdata 是 Windows / 最小化容器上的必需品：代码合法使用
+# zoneinfo.ZoneInfo("Asia/Shanghai")，而 Windows 不提供系统 tz 数据库。
+#
+# 安装：
+#   python -m pip install -r requirements-dev.txt
+tzdata>=2024.1

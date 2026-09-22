@@ -17,7 +17,9 @@ Stage-1 改进：
 import os
 import sys
 import json
+import hashlib
 import shutil
+from pathlib import Path
 import re
 import argparse
 from datetime import datetime, timedelta, timezone
@@ -60,12 +62,14 @@ PUBLIC_DATA_ALLOWLIST = [
 # 只允许进入 dist 白名单的 7 个视图契约；绝不带内部 runtime 字段。
 FRONTEND_VIEWS = [
     "site_overview",
+    "china_interest",          # V1.1 homepage China Exposure view
     "master_events",
     "event_timelines",
     "country_snapshots",
     "disease_outbreaks",
     "report_index",
     "knowledge_summary",
+    "ai_intelligence",        # C5-A：Homepage 会请求该视图，此前未发布 → 404
 ]
 FRONTEND_VIEWS_DIR = os.path.join(DATA_DIR, "runtime", "frontend_preview_public")
 
@@ -90,10 +94,50 @@ def _copy_frontend_views(dist_root):
     for name in FRONTEND_VIEWS:
         src = os.path.join(FRONTEND_VIEWS_DIR, name + ".json")
         if not os.path.exists(src):
-            continue
+            # C5-A：部分视图（如 ai_intelligence）由 ops 构建器直接写入
+            # data/views/，未进入 frontend_preview_public → Homepage 请求 404。
+            # 回退到 data/views/ 作为第二来源，保证发布完整。
+            alt = os.path.join(DATA_DIR, "views", name + ".json")
+            if os.path.exists(alt):
+                src = alt
+            else:
+                continue
         shutil.copy2(src, os.path.join(dst_root, name + ".json"))
+        # C5-B：页面 JS 探测的是 data/views/<name>.json（如 ai-intelligence.js），
+        # 因此同时镜像一份到 data/views/，避免每次请求都 404（控制台噪声 + 模块静默空态）。
+        vdir = os.path.join(dst_root, "views")
+        os.makedirs(vdir, exist_ok=True)
+        shutil.copy2(src, os.path.join(vdir, name + ".json"))
         n += 1
     return n
+
+def _build_and_copy_c1a_views(dist_root):
+    """C1A build integration（§二/§七）：生成 news-stream-v1 视图并发布公开视图。
+
+    步骤：
+      1. tools/c1a/build_views.build_c1a_views(...) 用仓库数据生成
+         data/views/{news_stream,source_yield_report,c1a_gate_audit}.json；
+      2. 把公开安全的 news_stream.json 复制进 dist/data/views/（页面按
+         data/views/news_stream.json 直接 fetch，不进 __DB__ 内联快照，
+         避免 ~1MB 视图膨胀每个页面）。
+
+    失败不阻断站点构建（视图属展示层），但显式打印 C1A_VIEWS_OK=False。
+    返回发布到 dist 的视图数。
+    """
+    try:
+        sys.path.insert(0, os.path.join(ROOT, "tools", "c1a"))
+        import build_views as _c1av
+        ok, st = _c1av.build_c1a_views(root=ROOT, internal_dir=DATA_DIR,
+                                       out_root=ROOT, verbose=True)
+        print(f"  C1A_VIEWS_OK = {'TRUE' if ok else 'FALSE'}")
+        if not ok:
+            return 0
+        return _c1av.copy_public_c1a_views(dist_root, root=ROOT)
+    except Exception as e:
+        print(f"  ⚠ C1A 视图集成失败（站点构建继续）: {e}")
+        print("  C1A_VIEWS_OK = FALSE")
+        return 0
+
 
 WIN_PATH_RE = re.compile(r"[A-Za-z]:[\\/]+[^\s\"'<>|]*")
 POSIX_PATH_RE = re.compile(r"/(?:home|Users)/[^\s\"'<>|]*")
@@ -115,6 +159,209 @@ def _sanitize_public(obj):
     if isinstance(obj, str):
         return POSIX_PATH_RE.sub("<redacted-path>", WIN_PATH_RE.sub("<redacted-path>", obj))
     return obj
+
+
+def _compliant_run_id():
+    """返回符合 schema 约束的 run_id（^\d{8}T\d{6}\+0800_[a-z0-9]{6}$）。
+
+    compatibility export 的信封 run_id 受 schema 约束；GitHub run_id 为纯数字、
+    不满足该 pattern，会让 published_events 等保存整批中止（fail-fast）,
+    进而 canonical 新 cluster 无法同步到 legacy 视图（V17 阻断）。
+    优先沿用 canonical 中已存在的生产 run_id（真实来源），否则按当前 BJT 生成。
+    """
+    pat = re.compile(r"^\d{8}T\d{6}\+0800_[a-z0-9]{6}$")
+    try:
+        canon = load_json(os.path.join(DATA_DIR, "canonical", "event_clusters.json"), {}) or {}
+        rid = canon.get("run_id")
+        if isinstance(rid, str) and pat.match(rid):
+            return rid
+    except Exception:
+        pass
+    import hashlib
+    from datetime import timezone
+    now_bj = datetime.now(timezone(timedelta(hours=8)))
+    stamp = now_bj.strftime("%Y%m%dT%H%M%S+0800")
+    suffix = hashlib.md5(stamp.encode("utf-8")).hexdigest()[:6]
+    return "%s_%s" % (stamp, suffix)
+
+
+def _sync_legacy_from_canonical():
+    """V17 Compatibility：canonical truth → legacy view（单向重建）。
+
+    deploy 环境中 data/events.json 是 repo 静态文件，而 data/canonical/ 被
+    production-state 覆盖；canonical 新增 cluster 时两者集合不一致，V17
+    fail-closed 阻断部署。本步骤在 build 前用 compatibility export 重建
+    legacy 视图（events/pending/quarantine/public published），保证
+    canonical → compatibility export → legacy view 恒同步。
+    不修改 canonical 本身；write_if_changed 保证幂等。
+    """
+    canon = os.path.join(DATA_DIR, "canonical", "event_clusters.json")
+    if not os.path.exists(canon):
+        return False
+    try:
+        # scripts.* 包导入需要仓库根在 sys.path（脚本模式下 sys.path[0]=scripts/）
+        sys.path.insert(0, str(Path(HERE).parent))
+        from scripts.data.repository import Repository
+        from scripts.data.compatibility_export import export_all
+        # Repository 内部按 root/data/<name> 解析，root 必须是仓库根
+        repo = Repository(root=Path(ROOT))
+        export_all(repo, run_id=_compliant_run_id())
+        print("  legacy views rebuilt from canonical (V17 sync)")
+        return True
+    except Exception as e:
+        print(f"  ⚠ canonical→legacy sync failed (keep as-is): {e}")
+        return False
+
+
+def _sha256(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(65536), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+#: dist 内报告索引的可能位置（前端 report-views.js 依次探测这两条路径）
+REPORT_INDEX_CANDIDATES = ("data/report_index.json", "data/views/report_index.json")
+
+
+def verify_report_publication(dist_root, data_dir=None, raise_on_fail=True):
+    """构建后硬校验：dist/data/reports 必须**精确反映本次构建结果**。
+
+    覆盖 §2（与构建产物一致、不依赖人工同步）、§4（新增/修改/删除都要同步）、
+    §5（report_index ↔ artifact 双向一致）。
+
+    返回统计字典；不一致时打印明细并（默认）抛错，让构建**明确失败**，
+    而不是把上一轮的 dist 当成新构建结果继续用。
+    """
+    data_dir = data_dir or DATA_DIR
+    src_root = os.path.join(data_dir, "reports")
+    dst_root = os.path.join(dist_root, "data", "reports")
+    res = {"SOURCE_REPORT_COUNT": 0, "DIST_REPORT_COUNT": 0, "REPORT_INDEX_COUNT": 0,
+           "MISSING_REPORT_ARTIFACTS": 0, "STALE_REPORT_ARTIFACTS": 0,
+           "MISMATCHED_REPORT_ARTIFACTS": 0, "MOCK_IN_DIST_REPORT_INDEX": 0,
+           "REPORT_INDEX_FILE": None}
+
+    def _rel(root):
+        out = {}
+        if not os.path.isdir(root):
+            return out
+        for dirpath, _dirnames, filenames in os.walk(root):
+            for fn in filenames:
+                p = os.path.join(dirpath, fn)
+                out[os.path.relpath(p, root).replace(os.sep, "/")] = p
+        return out
+
+    src, dst = _rel(src_root), _rel(dst_root)
+    # index 的 path 字段相对 dist 根（data/reports/xxx）；统一到同一基准再比较
+    dst_rel_root = {("data/reports/" + k): v for k, v in dst.items()}
+    res["SOURCE_REPORT_COUNT"] = len(src)
+    res["DIST_REPORT_COUNT"] = len(dst)
+    missing = sorted(set(src) - set(dst))
+    extra = sorted(set(dst) - set(src))
+    mismatched = [r for r in sorted(set(src) & set(dst)) if _sha256(src[r]) != _sha256(dst[r])]
+
+    index_file = None
+    for rel in REPORT_INDEX_CANDIDATES:
+        cand = os.path.join(dist_root, rel)
+        if os.path.exists(cand):
+            index_file = cand
+            break
+    idx = load_json(index_file, {}) if index_file else {}
+    res["REPORT_INDEX_FILE"] = os.path.relpath(index_file, dist_root).replace(os.sep, "/") \
+        if index_file else None
+    rows = idx.get("reports") or []
+    res["REPORT_INDEX_COUNT"] = idx.get("count") or len(rows)
+    res["MOCK_IN_DIST_REPORT_INDEX"] = sum(1 for r in rows if r.get("is_mock"))
+    indexed = {str(r.get("path") or "").replace(os.sep, "/") for r in rows}
+    not_in_dist = sorted(p for p in indexed if p not in dst_rel_root)
+    res["MISSING_REPORT_ARTIFACTS"] = len(not_in_dist) + len(missing)
+    res["STALE_REPORT_ARTIFACTS"] = len(extra)
+    res["MISMATCHED_REPORT_ARTIFACTS"] = len(mismatched)
+
+    ok = (not missing and not extra and not mismatched and not not_in_dist
+          and res["MOCK_IN_DIST_REPORT_INDEX"] == 0)
+    res["REPORT_ARTIFACT_PUBLICATION"] = "PASS" if ok else "FAIL"
+    print("  REPORT_ARTIFACT_PUBLICATION = %s" % res["REPORT_ARTIFACT_PUBLICATION"])
+    print("    SOURCE_REPORT_COUNT=%d DIST_REPORT_COUNT=%d INDEX_COUNT=%d INDEX_FILE=%s"
+          % (res["SOURCE_REPORT_COUNT"], res["DIST_REPORT_COUNT"],
+             res["REPORT_INDEX_COUNT"], res["REPORT_INDEX_FILE"]))
+    print("    MISSING=%d STALE=%d MISMATCHED=%d MOCK_IN_INDEX=%d"
+          % (res["MISSING_REPORT_ARTIFACTS"], res["STALE_REPORT_ARTIFACTS"],
+             res["MISMATCHED_REPORT_ARTIFACTS"], res["MOCK_IN_DIST_REPORT_INDEX"]))
+    if not ok:
+        for label, items in (("MISSING", missing + not_in_dist), ("STALE", extra),
+                             ("MISMATCHED", mismatched)):
+            for it in items[:5]:
+                print("      %s: %s" % (label, it))
+        if raise_on_fail:
+            raise RuntimeError(
+                "report artifact publication verification failed "
+                "(dist/data/reports 与本次构建不一致 —— 不要手工同步，先查构建日志)")
+    return res
+
+
+def _copy_production_reports(dist_root):
+    """Production report outputs → dist/reports/{daily,weekly}/。
+
+    source = data/runtime/ops/reports/（deploy 环境由 state 拷贝）；
+    report_index.json 的 path 字段与此处发布路径一一对应。
+    gates/fact_pack/run_summary 为运行内部产物，不进公开归档。
+    """
+    src_dir = os.path.join(DATA_DIR, "runtime", "ops", "reports")
+    if not os.path.isdir(src_dir):
+        return 0
+    n = 0
+    for sub, prefixes in (("daily", ("daily_",)),
+                          ("weekly", ("tcd_weekly_", "ssd_weekly_"))):
+        dst_dir = os.path.join(dist_root, "reports", sub)
+        os.makedirs(dst_dir, exist_ok=True)
+        for fn in os.listdir(src_dir):
+            if not fn.endswith(".json"):
+                continue
+            if not fn.startswith(prefixes):
+                continue
+            if fn.endswith(("_gates.json", "_fact_pack.json")):
+                continue
+            if fn == "reports_run_summary.json":
+                continue
+            src = os.path.join(src_dir, fn)
+            shutil.copy2(src, os.path.join(dst_dir, fn))
+            n += 1
+            # report_index 的 path 以 report_id 命名（DAILY_YYYYMMDD / WEEKLY_<ISO>_<date>）；
+            # 生成确定性别名文件，保证 index path 与归档一一对应可解析。
+            try:
+                doc = json.loads(open(src, encoding="utf-8").read())
+                rid = doc.get("report_id")
+                if rid and not any(x in str(rid).upper()
+                                   for x in ("MANUAL_TRIAL", "_DEV", "TRIAL")):
+                    shutil.copy2(src, os.path.join(dst_dir, "%s.json" % rid))
+                    n += 1
+            except Exception:
+                pass
+    return n
+
+
+def _copy_report_artifacts(dist_root):
+    """C4-B：正式 report artifacts → dist/data/reports/{daily,weekly,country_weekly}/。
+
+    report_index 的 path 字段即 data/reports/... → 与公开路径一一对应可解析。
+    """
+    src_root = os.path.join(DATA_DIR, "reports")
+    if not os.path.isdir(src_root):
+        return 0
+    n = 0
+    for sub in ("daily", "weekly", "country_weekly"):
+        src_dir = os.path.join(src_root, sub)
+        if not os.path.isdir(src_dir):
+            continue
+        dst_dir = os.path.join(dist_root, "data", "reports", sub)
+        os.makedirs(dst_dir, exist_ok=True)
+        for fn in os.listdir(src_dir):
+            if fn.endswith(".json"):
+                shutil.copy2(os.path.join(src_dir, fn), os.path.join(dst_dir, fn))
+                n += 1
+    return n
 
 
 def _copy_public_data(dist_root):
@@ -165,7 +412,14 @@ def load_public_db(data_dir=None):
     for name in FRONTEND_VIEWS:
         src = os.path.join(FRONTEND_VIEWS_DIR, name + ".json")
         if not os.path.exists(src):
-            continue
+            # C5-A：部分视图（如 ai_intelligence）由 ops 构建器直接写入
+            # data/views/，未进入 frontend_preview_public → Homepage 请求 404。
+            # 回退到 data/views/ 作为第二来源，保证发布完整。
+            alt = os.path.join(DATA_DIR, "views", name + ".json")
+            if os.path.exists(alt):
+                src = alt
+            else:
+                continue
         try:
             with open(src, "r", encoding="utf-8") as f:
                 db[name] = json.load(f)
@@ -206,8 +460,12 @@ def get_build_meta(run_id=None):
 
 
 def inject_meta(html, meta):
-    """在 HTML 中注入 window.ASIP_BUILD_META。"""
+    """在 HTML 中注入 window.ASIP_BUILD_META（并抑制 favicon 404）。"""
     meta_js = f'<script>window.ASIP_BUILD_META = {json.dumps(meta, ensure_ascii=False)};</script>\n'
+    # C5-B：站点未提供 favicon，浏览器默认请求 /favicon.ico → 每次加载一条
+    # 控制台 404。用 data: 空图标显式声明，消除该噪声（不引入新资源）。
+    if 'rel="icon"' not in html:
+        meta_js = '<link rel="icon" href="data:,">' + chr(10) + meta_js
     # 插入在 <head> 末尾或 api.js 引用之前
     head_close = "</head>"
     if head_close in html:
@@ -242,6 +500,8 @@ def main(run_id=None, no_embed=False):
     DIST_NEW = os.path.join(ROOT, ".dist_new")
     TRASH = os.path.join(ROOT, ".dist_trash")
     if os.path.isdir(DIST_NEW):  # 上次异常残留
+        print("  WARNING: PREVIOUS_BUILD_INCOMPLETE —— 发现 .dist_new 残留（上次构建未完成交换，"
+              "通常因为 dist 被占用，例如本地预览服务）。已移入 .dist_trash。")
         os.makedirs(TRASH, exist_ok=True)
         os.rename(DIST_NEW, os.path.join(TRASH, f"new_{int(_time.time()*1000)}"))
     os.makedirs(DIST_NEW, exist_ok=True)
@@ -297,14 +557,34 @@ def main(run_id=None, no_embed=False):
     # 复制静态资源
     if os.path.isdir(ASSETS):
         shutil.copytree(ASSETS, os.path.join(DIST_NEW, "assets"))
+    # V17 Compatibility：canonical → legacy 视图同步（必须在复制公开数据之前）
+    _sync_legacy_from_canonical()
     if os.path.isdir(DATA_DIR):
         # Stage-2 收尾：仅按白名单复制公开数据，绝不复制整个 data/ 目录
         _copy_public_data(DIST_NEW)
     # Stage 8A：公开安全前端视图（site_overview/master_events/...）
+    # 先从 canonical + 持久 admission 重建 timelines（确定性，无 AI），
+    # 保证 master_events/disease_outbreaks/event_timelines 反映生产真值。
+    try:
+        sys.path.insert(0, str(Path(HERE).parent))
+        from scripts.ops import timeline_run as _timeline_run
+        _tl = _timeline_run.build_timelines(data_dir=DATA_DIR)
+        print(f"  timelines rebuilt: social={_tl['social']} disease={_tl['disease']}")
+    except Exception as e:
+        print(f"  timeline rebuild failed (use state artifacts): {e}")
     n_views = _copy_frontend_views(DIST_NEW)
     print(f"  前端视图: {n_views} 个契约")
+    # C1A build integration（§二）：用仓库自身数据重新生成 news-stream-v1 视图，
+    # 不依赖手工复制 / preview 目录。必须在 _copy_frontend_views 之后（
+    # master_events / site_overview 需要是本次构建的新鲜产物）。
+    n_c1a = _build_and_copy_c1a_views(DIST_NEW)
+    print(f"  C1A 视图: {n_c1a} 个公开视图")
     if os.path.isdir(REPORTS):
         shutil.copytree(REPORTS, os.path.join(DIST_NEW, "reports"))
+    # Production report outputs → 公开归档
+    n_prod_reports = _copy_production_reports(DIST_NEW)
+    n_prod_reports = _copy_report_artifacts(DIST_NEW)
+    print(f"  生产报告归档: {n_prod_reports} 个文件")
 
     # 独立微型样板：不进入正式导航，构建为 GitHub Pages 项目路径下的静态子树
     from build_intelligence_demo import build_intelligence_demo
@@ -327,7 +607,16 @@ def main(run_id=None, no_embed=False):
         save_json(dist_status_path, dist_status)
 
     # 纯改名交换：.dist_new -> dist
-    _finish_swap()
+    try:
+        _finish_swap()
+    except Exception as e:  # noqa: BLE001
+        print("  FATAL: DIST_SWAP_FAILED —— 无法把 .dist_new 交换为 dist：%s" % e)
+        print("         最常见原因：有进程以 dist 为工作目录（本地预览服务 / 编辑器索引）。")
+        print("         本次构建**未发布**，dist 保持原样；.dist_new 已保留供排查。")
+        raise
+
+    # 构建后硬校验：dist/data/reports 必须精确反映本次构建（§2/§4/§5）
+    verify_report_publication(DIST)
 
     print(f"构建完成 -> {os.path.relpath(DIST, ROOT)}")  # 相对路径（第九节：日志不得含本地绝对路径）
     print(f"  HTML: {built} 个页面")

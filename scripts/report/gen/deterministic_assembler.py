@@ -47,14 +47,18 @@ _DIS_OUTLOOK = "AI 研判见总体分析栏目；本条目不提供独立预测�
 def _source_refs(fact):
     """source_refs（source_ref 结构：source_id 必需）。"""
     refs = []
-    for i, (sid, sname) in enumerate(zip(
-            fact.get("source_ids") or [], fact.get("source_refs") or [])):
-        refs.append({"source_id": sid or "src_%d" % i,
+    # C5-B：**不得伪造 source_id**。真实 id 缺失时用真实来源名作为身份标识
+    # （报告层历史用 "src_%d" 合成 id，属来源身份污染）。url 取事实的真实链接。
+    urls = fact.get("source_links") or []
+    for i, (sid, sname) in enumerate(zip(fact.get("source_ids") or [],
+                                         fact.get("source_refs") or [])):
+        refs.append({"source_id": sid or sname or None,
                      "source_name": sname or "",
-                     "url": None})
+                     "url": urls[i] if i < len(urls) else None})
     if not refs:
         for i, sname in enumerate(fact.get("source_refs") or []):
-            refs.append({"source_id": "src_%d" % i, "source_name": sname, "url": None})
+            refs.append({"source_id": sname or None, "source_name": sname,
+                         "url": urls[i] if i < len(urls) else None})
     return refs
 
 
