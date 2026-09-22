@@ -425,7 +425,13 @@ class ProviderContractTest(unittest.TestCase):
         """§四 静态审计：C4 report pipeline 不得出现 submit_task 调用。"""
         src = (ROOT / "scripts" / "report" / "report_ai.py").read_text(encoding="utf-8")
         self.assertIsNone(re.search(r"\.\s*submit_task\s*\(", src))
-        wf = (ROOT / ".github" / "workflows" / "asip-v11-c4-report-ai.yml").read_text(
+        # C6-R2.6：该 workflow 属**开发期专用**（WORKFLOW_PROMOTION_MATRIX 判定
+        # development-only，不进入 production-state）→ 本 checkout 缺少该文件时跳过
+        # 该段断言；文件存在时照常校验契约（不降低门槛）。
+        wf_path = ROOT / ".github" / "workflows" / "asip-v11-c4-report-ai.yml"
+        if not wf_path.exists():
+            self.skipTest("dev-only workflow asip-v11-c4-report-ai.yml 不在本 checkout")
+        wf = wf_path.read_text(
             encoding="utf-8")
         self.assertNotIn("submit_task", wf)
 

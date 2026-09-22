@@ -185,7 +185,7 @@ def _compliant_run_id():
     return "%s_%s" % (stamp, suffix)
 
 
-def _sync_legacy_from_canonical():
+def _sync_legacy_from_canonical(run_id=None):
     """V17 Compatibility：canonical truth → legacy view（单向重建）。
 
     deploy 环境中 data/events.json 是 repo 静态文件，而 data/canonical/ 被
@@ -205,7 +205,9 @@ def _sync_legacy_from_canonical():
         from scripts.data.compatibility_export import export_all
         # Repository 内部按 root/data/<name> 解析，root 必须是仓库根
         repo = Repository(root=Path(ROOT))
-        export_all(repo, run_id=_compliant_run_id())
+        # C6-R2.6 merge fix：沿用本次 build 的 run_id（此前自生成新 id → 四方 run_id 不一致，
+        # 触发 validate_stage2 S42）。无 run_id 时回退原行为。
+        export_all(repo, run_id=run_id or _compliant_run_id())
         print("  legacy views rebuilt from canonical (V17 sync)")
         return True
     except Exception as e:
@@ -558,7 +560,7 @@ def main(run_id=None, no_embed=False):
     if os.path.isdir(ASSETS):
         shutil.copytree(ASSETS, os.path.join(DIST_NEW, "assets"))
     # V17 Compatibility：canonical → legacy 视图同步（必须在复制公开数据之前）
-    _sync_legacy_from_canonical()
+    _sync_legacy_from_canonical(meta["run_id"])
     if os.path.isdir(DATA_DIR):
         # Stage-2 收尾：仅按白名单复制公开数据，绝不复制整个 data/ 目录
         _copy_public_data(DIST_NEW)

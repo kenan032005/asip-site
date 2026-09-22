@@ -233,6 +233,20 @@ def export_all(repo, run_id: str = ""):
         print(f"  ⚠ 合并真实采集事件失败（继续）: {_e}")
     repo.save_published_events(published, run_id)
 
+    # C6-R2.6 §C：先做 public 来源清理（排除无有效来源的事件），
+    # 再据此计算 metrics —— 计数由构造保持一致（S23/S24/S51）。
+    try:
+        from data.public_source_cleanup import apply as _cleanup_apply
+        _cleanup_apply(getattr(repo, 'root', '.'))
+    except Exception as _e:  # noqa: BLE001
+        print('[cleanup] skipped:', _e)
+
+    # 清理后重新载入（file 为准），保证后续 metrics / 返回值口径一致
+    _reloaded = repo.load_published_events()
+    if isinstance(_reloaded, list):
+        published = _reloaded
+
+
     # public current_metrics.json
     # publishable_clusters/current_policy_passed_events 需与 published_events 口径一致：
     # canonical 通过政策事件 + 不在 canonical 的真实采集事件（避免双重计数）
@@ -260,6 +274,7 @@ def export_all(repo, run_id: str = ""):
     }
     repo.save_current_metrics(metrics, run_id)
 
+    # C6-R2.6 §C 裁决：public 端不得引用被隔离（wrong_country / not_security_relevant）的来源 URL。
     return {
         "legacy_events": len(legacy_events),
         "legacy_pending": len(pending),

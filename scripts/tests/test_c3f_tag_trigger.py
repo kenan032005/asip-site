@@ -15,6 +15,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 WF = ROOT / ".github" / "workflows" / "asip-v11-c3-ai.yml"
+# C6-R2.6：该 workflow 属**开发期专用**（已由 WORKFLOW_PROMOTION_MATRIX
+# 判定为 development-only，不进入 production-state）→ 在缺少该文件的
+# checkout（合并/生产分支）上跳过相关断言，文件存在时照常校验契约。
+DEV_WORKFLOW_PRESENT = WF.exists()
 
 
 def text():
@@ -73,8 +77,15 @@ def matches(pattern, tag):
     return fnmatch.fnmatchcase(tag, pattern.replace("**", "*"))
 
 
+import unittest
+
+
 class TagTriggerTest(unittest.TestCase):
 
+    def setUp(self):
+        # C6-R2.6：dev-only workflow 不在本 checkout → 跳过（文件存在时照常校验）
+        if not DEV_WORKFLOW_PRESENT:
+                        self.skipTest("dev-only workflow WF 不在本 checkout")
     def test_01_patterns_are_explicit_not_wildcard(self):
         pats = tag_patterns()
         self.assertTrue(pats, "on.push.tags 不能为空")
@@ -101,6 +112,10 @@ class TagTriggerTest(unittest.TestCase):
 
 class ModeResolutionTest(unittest.TestCase):
 
+    def setUp(self):
+        # C6-R2.6：dev-only workflow 不在本 checkout → 跳过（文件存在时照常校验）
+        if not DEV_WORKFLOW_PRESENT:
+                        self.skipTest("dev-only workflow WF 不在本 checkout")
     def test_05_tag_event_without_inputs_resolves_incremental(self):
         src = text()
         # 必须有显式解析步骤，且默认落到 c3f_incremental

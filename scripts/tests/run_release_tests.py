@@ -89,6 +89,19 @@ def sha_file(p):
     return hashlib.sha256(io.open(p, "rb").read()).hexdigest()
 
 
+def _status_run_id():
+    """读取既有 status.json 的 run_id（缺失时回退一个固定测试 id）。"""
+    p = os.path.join(ROOT, "data", "status.json")
+    try:
+        with io.open(p, encoding="utf-8") as f:
+            rid = (json.load(f) or {}).get("run_id")
+        if rid:
+            return rid
+    except Exception:  # noqa: BLE001
+        pass
+    return "20260921T180000+0800_relts0"
+
+
 def _suites():
     d = os.path.join(ROOT, "scripts", "tests")
     out = []
@@ -124,8 +137,10 @@ def main(argv=None):
     print("=" * 78)
     if not a.no_build:
         print("  [1/3] build runtime artifacts（部分套件断言 build 产物）…")
-        b = subprocess.run([sys.executable, "-m", "scripts.build_site",
-                            "--run-id", "20260921T180000+0800_releasetests"],
+        # C6-R2.6：build 必须沿用既有 data/status.json 的 run_id（否则 dist 与 status
+        # 不一致 → validate_stage2 S42 失败 → 依赖它的测试连带失败）
+        rid = _status_run_id()
+        b = subprocess.run([sys.executable, "-m", "scripts.build_site", "--run-id", rid],
                            cwd=ROOT, capture_output=True, text=True, timeout=1800)
         print("        build exit =", b.returncode)
         if b.returncode != 0:

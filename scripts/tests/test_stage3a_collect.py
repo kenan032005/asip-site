@@ -221,9 +221,11 @@ class TestDataIntegrity(unittest.TestCase):
             self.assertIn("event_id", item)
             self.assertIn("country", item)
             self.assertIn("title_original", item, f"Missing title_original in {item.get('event_id')}")
+            # C6-R2.6 §C：来源被隔离清理后可为空（source_insufficient，见
+            # C6_R2_6_PUBLIC_SOURCE_CLEANUP.json）；非空时仍须逐条合法
             self.assertIn("source_links", item)
-            self.assertTrue(len(item.get("source_links", [])) > 0,
-                          f"No source_links in {item.get('event_id')}")
+            if not item.get("source_links"):
+                continue
             for link in item.get("source_links", []):
                 self.assertIn("url", link)
                 self.assertTrue(link.get("url", "").startswith("http"),

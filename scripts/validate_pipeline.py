@@ -477,8 +477,29 @@ def main(run_id=None, dist_dir=None, stage="dist"):
                      if c.get("public_eligible") or (c.get("event_id") in adm["social"]))
         ddoc = load_json(os.path.join(DATA_DIR, "disease", "canonical", "outbreak_events.json")) or {}
         ditems = ddoc.get("items", [])
-        disease = sum(1 for c in ditems
-                      if c.get("public_eligible") or (c.get("disease_event_id") in adm["disease"]))
+        # C6-R2.6：疾病公开性判定的**唯一权威**在 timeline producer
+        # （scripts/ops/timeline_run._disease_public_eligible，C6-R1 §B 产品修复）。
+        # 校验器若另立一套更窄的口径，会与生产构建不一致 → 误报 built>eligible
+        # （不降低门槛：仍要求 built == eligible，只是用同一判定函数）。
+        try:
+            if ROOT not in sys.path:
+                sys.path.insert(0, ROOT)
+            from scripts.ops.timeline_run import (
+                _is_public_eligible as _public_eligible,
+                _disease_public_eligible as _disease_public_eligible,
+            )
+        except Exception:  # noqa: BLE001
+            _public_eligible = None
+            _disease_public_eligible = None
+        if _public_eligible and _disease_public_eligible:
+            disease = sum(
+                1 for c in ditems
+                if _public_eligible(c, c.get("disease_event_id"), adm["disease"])
+                or _disease_public_eligible(c))
+        else:
+            disease = sum(1 for c in ditems
+                          if c.get("public_eligible")
+                          or (c.get("disease_event_id") in adm["disease"]))
         return master, disease
 
     def _pb_dist_count(rel, key):

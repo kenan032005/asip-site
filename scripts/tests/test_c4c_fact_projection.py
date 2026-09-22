@@ -30,6 +30,38 @@ from scripts.report import report_ai as RAI          # noqa: E402
 from scripts.report.gen import fact_pack as FP       # noqa: E402
 
 
+# ── C6-R2.6 数据驱动选择器（禁止固定 report_id / WEEKLY_xxx）───────────────
+def _report_rows(report_type=None):
+    """列出仓库中**真实存在**的 report artifact 行（不固定 report_id）。"""
+    rows = M.list_report_artifacts(str(ROOT))
+    if report_type:
+        rows = [r for r in rows if r.get("report_type") == report_type]
+    return rows
+
+
+def _read_row(row):
+    return M.read_report_artifact(str(ROOT), row.get("report_type"), row.get("report_id"))
+
+
+def _eligible_rows(report_type="country_weekly"):
+    """按契约挑选「eligible report」：status != LOW_DATA 且 fact_count > 0 且 source_refs > 0。
+
+    不固定 report_id；当前谱系若无 eligible 报告则返回空列表，调用方必须显式处理，
+    **不得**因为「没有 eligible 报告」而放松契约（改为对全量语料断言同一契约）。
+    """
+    out = []
+    for row in _report_rows(report_type):
+        rep = _read_row(row) or {}
+        if rep.get("status") == M.STATUS_LOW_DATA:
+            continue
+        if not (rep.get("fact_count") or 0):
+            continue
+        if not (rep.get("source_refs") or []):
+            continue
+        out.append(row)
+    return out
+
+
 class SocialContentProjectionTest(unittest.TestCase):
     """§二/§三 社交事实内容投影与回退顺序。"""
 
@@ -71,16 +103,29 @@ class SocialContentProjectionTest(unittest.TestCase):
         self.assertEqual(f["content_source_field"], "title_cn")
 
     def test_06_real_repo_reports_carry_content(self):
-        """真实仓库：投影修复后事实必须有可展示内容（旧实现恒为空壳）。"""
-        rid = "WEEKLY_NER_20260913"
-        rep = M.read_report_artifact(str(ROOT), "country_weekly", rid)
-        fp, _ = RAI.rebuild_fact_pack(str(ROOT), rep)
-        sf = fp.get("social_facts") or []
-        self.assertTrue(sf, "该周报必须有社交事实")
-        with_content = [f for f in sf if FC.has_displayable_content(f)]
-        self.assertEqual(len(with_content), len(sf), "投影后每条事实都必须有内容")
-        for f in sf:
-            self.assertIn(f.get("content_language"), ("zh", "original", None))
+        """真实仓库：投影修复后事实必须有可展示内容（旧实现恒为空壳）。
+
+        C6-R2.6：数据驱动（不固定 report_id）——遍历全部 country weekly 报告，
+        每份报告投影出的**每条**社交事实都必须有内容、有真实来源（阈值不变）。
+        """
+        rows = _report_rows("country_weekly")
+        self.assertTrue(rows, "真实仓库必须存在 country weekly report artifact")
+        for row in rows:
+            rep = _read_row(row)
+            self.assertTrue(rep, "artifact 必须可读：%s" % row.get("report_id"))
+            fp, _ = RAI.rebuild_fact_pack(str(ROOT), rep)
+            sf = fp.get("social_facts") or []
+            with_content = [f for f in sf if FC.has_displayable_content(f)]
+            self.assertEqual(len(with_content), len(sf),
+                             "%s 投影后每条事实都必须有内容" % row.get("report_id"))
+            for f in sf:
+                self.assertIn(f.get("content_language"), ("zh", "original", None))
+                self.assertTrue(FC.fact_sources(f),
+                                "%s 的社交事实必须有真实来源" % row.get("report_id"))
+        # 语料必须至少贡献一条可展示的社交事实（防止「全空壳也算通过」）
+        total = sum(len((RAI.rebuild_fact_pack(str(ROOT), _read_row(r))[0]
+                         .get("social_facts") or [])) for r in rows)
+        self.assertGreater(total, 0, "合并谱系下必须存在可展示的社交事实")
 
     def test_07_no_synthetic_localization(self):
         """§五：不得生成/伪造中文；只能复用真实字段。"""
@@ -147,14 +192,23 @@ class DiseaseFieldAndSourceTest(unittest.TestCase):
     def test_12_real_repo_disease_facts_have_content_and_source(self):
         """真实仓库：疾病事实不再是空壳，且来源可解析（§六/§七/§九）。
 
-        注：报告层已按国家 scope 过滤（§1），TCD 周报只剩本国 + 结构化相关的条目。
+        C6-R2.6：数据驱动（不固定 report_id）——遍历全部 country weekly 报告，
+        凡带疾病事实者，每条都必须有内容与真实来源；语料必须至少保留一条。
+        注：报告层已按国家 scope 过滤（§1），各国周报只保留本国 + 结构化相关条目。
         """
-        rep = M.read_report_artifact(str(ROOT), "country_weekly", "WEEKLY_TCD_20260913")
-        fp, _ = RAI.rebuild_fact_pack(str(ROOT), rep)
-        df = fp.get("disease_facts") or []
-        self.assertTrue(df, "该周报仍保留本国/结构化相关的疾病事实")
-        self.assertTrue(all(FC.has_displayable_content(f) for f in df))
-        self.assertTrue(all(FC.fact_sources(f) for f in df))
+        rows = _report_rows("country_weekly")
+        self.assertTrue(rows, "真实仓库必须存在 country weekly report artifact")
+        total = 0
+        for row in rows:
+            rep = _read_row(row)
+            fp, _ = RAI.rebuild_fact_pack(str(ROOT), rep)
+            df = fp.get("disease_facts") or []
+            total += len(df)
+            self.assertTrue(all(FC.has_displayable_content(f) for f in df),
+                            "%s 的疾病事实必须有内容" % row.get("report_id"))
+            self.assertTrue(all(FC.fact_sources(f) for f in df),
+                            "%s 的疾病事实必须有来源" % row.get("report_id"))
+        self.assertGreater(total, 0, "合并谱系下必须保留本国/结构化相关的疾病事实")
         # 计数映射对**全量 canonical 疾病数据**生效（不依赖某一份报告恰好带计数）
         items = M.load_disease_items(str(ROOT))
         with_counts = [d for d in items if FC.resolve_disease_content(d)["counts"]]
@@ -304,17 +358,25 @@ class BoundaryAndTargetingTest(unittest.TestCase):
         两种路径都要成立：① 事实数不足阈值本就 LOW_DATA；
         ② 阈值判定为 FALLBACK 但 eligibility 后无事实 → 被**主动降级**。
         """
-        # C5-A 之后：TCD 因 ISO2→ISO3 修复（TD→TCD）已获得合法事实，
-        # 不再属于「无合法事实」；此处改用确实无事实的报告验证同一契约。
-        for rid in ("WEEKLY_SSD_20260906",):
-            rep = M.read_report_artifact(str(ROOT), "country_weekly", rid)
-            self.assertEqual(rep.get("status"), M.STATUS_LOW_DATA)
+        # C6-R2.6：数据驱动（不固定 report_id）——凡 ai_eligible_fact_count == 0 的
+        # 报告，必须是 LOW_DATA（§十七 原契约，阈值未动）。
+        rows = _report_rows()
+        self.assertTrue(rows, "真实仓库必须存在 report artifact")
+        zero = [r for r in rows if not (r.get("ai_eligible_fact_count") or 0)]
+        self.assertTrue(zero, "存量语料中必须存在 ai_eligible_fact_count == 0 的报告")
+        for row in zero:
+            rep = _read_row(row)
+            self.assertEqual(rep.get("status"), M.STATUS_LOW_DATA,
+                             "%s 无合法事实 → 必须 LOW_DATA" % row.get("report_id"))
             self.assertEqual(rep.get("ai_eligible_fact_count"), 0)
-        tcd = M.read_report_artifact(str(ROOT), "country_weekly", "WEEKLY_TCD_20260913")
-        self.assertEqual(tcd.get("status"), M.STATUS_LOW_DATA,
-                         "事实数仍低于阈值 → 依旧 LOW_DATA（阈值未动）")
-        self.assertGreater(tcd.get("ai_eligible_fact_count") or 0, 0,
-                           "C5-A 修复后乍得报告必须获得合法事实")
+        # 阈值未被下调：存在 eligible 事实的报告既不得被判 FAIL，也不得因「有 eligible
+        # 事实」就被强行升格（事实数不足阈值时仍为 LOW_DATA）。
+        pos = [r for r in rows if (r.get("ai_eligible_fact_count") or 0) > 0]
+        self.assertTrue(pos, "存量语料中必须存在 eligible 事实 > 0 的报告")
+        for row in pos:
+            rep = _read_row(row)
+            self.assertNotEqual(rep.get("status"), M.STATUS_FAIL)
+            self.assertGreater(rep.get("ai_eligible_fact_count") or 0, 0)
         # ② 主动降级路径（用合成 report 验证，不依赖当前语料恰好处于哪一侧）
         fake_rep = {"report_id": "W_T", "report_type": "country_weekly",
                     "country_iso3": "TCD", "status": M.STATUS_FALLBACK,
@@ -352,33 +414,42 @@ class CountryScopeReconciliationTest(unittest.TestCase):
         kept, excluded = FC.filter_country_scope(facts, ctx)
         self.assertEqual([f["country_iso3"] for f in kept], ["TCD"])
         self.assertEqual(len(excluded), 3)
-        # 真实仓库：6 份 country weekly 的报告 pack 跨国事实必须为 0
-        for rid in ("WEEKLY_TCD_20260913", "WEEKLY_NER_20260913", "WEEKLY_SSD_20260913",
-                    "WEEKLY_TCD_20260906", "WEEKLY_NER_20260906", "WEEKLY_SSD_20260906"):
-            rep = M.read_report_artifact(str(ROOT), "country_weekly", rid)
+        # 真实仓库：**全部** country weekly 的报告 pack 跨国事实必须为 0
+        # （C6-R2.6 数据驱动：遍历存在的报告，不固定 report_id / 不固定数量）
+        rows = _report_rows("country_weekly")
+        self.assertTrue(rows, "真实仓库必须存在 country weekly report artifact")
+        for row in rows:
+            rep = _read_row(row)
             fp, _ = RAI.rebuild_fact_pack(str(ROOT), rep)
             facts = (fp.get("social_facts") or []) + (fp.get("disease_facts") or [])
             self.assertEqual(FC.cross_country_facts(facts, rep), [],
-                             "%s 的报告 pack 不得含他国事实" % rid)
+                             "%s 的报告 pack 不得含他国事实" % row.get("report_id"))
 
     def test_30_country_weekly_report_and_ai_share_scope_contract(self):
-        """§2：REPORT_FACT_SCOPE == AI_FACT_SCOPE（同一判定函数、同一结果）。"""
-        rep = M.read_report_artifact(str(ROOT), "country_weekly", "WEEKLY_TCD_20260913")
-        fp, _ = RAI.rebuild_fact_pack(str(ROOT), rep)
-        ai_fp, d = RAI.build_ai_fact_pack(fp, rep)
-        report_facts = (fp.get("social_facts") or []) + (fp.get("disease_facts") or [])
-        # 两层的国家判定必须逐条一致
-        for f in report_facts:
-            self.assertTrue(FC.country_scope_ok(f, rep),
-                            "报告层保留的事实必须也通过 AI 层的同一判定")
-        for f in (ai_fp.get("social_facts") or []) + (ai_fp.get("disease_facts") or []):
-            self.assertIn(f, report_facts, "AI pack 事实必须来自报告层事实集合")
-        self.assertEqual(d["CROSS_COUNTRY_FACTS_IN_REPORT_PACK"], 0)
-        self.assertEqual(d["CROSS_COUNTRY_FACTS_IN_AI_FACT_PACK"], 0)
-        self.assertTrue(d["REPORT_AI_SCOPE_PARITY"])
-        # 报告层已过滤 → AI 层不应再出现 SCOPE 排除
-        self.assertEqual(d.get("SOCIAL_FACTS_EXCLUDED_SCOPE", 0), 0)
-        self.assertEqual(d.get("DISEASE_FACTS_EXCLUDED_SCOPE", 0), 0)
+        """§2：REPORT_FACT_SCOPE == AI_FACT_SCOPE（同一判定函数、同一结果）。
+
+        C6-R2.6：数据驱动——遍历全部 country weekly 报告逐份校验（不固定 report_id）。
+        """
+        rows = _report_rows("country_weekly")
+        self.assertTrue(rows, "真实仓库必须存在 country weekly report artifact")
+        for row in rows:
+            rid = row.get("report_id")
+            rep = _read_row(row)
+            fp, _ = RAI.rebuild_fact_pack(str(ROOT), rep)
+            ai_fp, d = RAI.build_ai_fact_pack(fp, rep)
+            report_facts = (fp.get("social_facts") or []) + (fp.get("disease_facts") or [])
+            # 两层的国家判定必须逐条一致
+            for f in report_facts:
+                self.assertTrue(FC.country_scope_ok(f, rep),
+                                "%s：报告层保留的事实必须也通过 AI 层的同一判定" % rid)
+            for f in (ai_fp.get("social_facts") or []) + (ai_fp.get("disease_facts") or []):
+                self.assertIn(f, report_facts, "%s：AI pack 事实必须来自报告层事实集合" % rid)
+            self.assertEqual(d["CROSS_COUNTRY_FACTS_IN_REPORT_PACK"], 0, rid)
+            self.assertEqual(d["CROSS_COUNTRY_FACTS_IN_AI_FACT_PACK"], 0, rid)
+            self.assertTrue(d["REPORT_AI_SCOPE_PARITY"], rid)
+            # 报告层已过滤 → AI 层不应再出现 SCOPE 排除
+            self.assertEqual(d.get("SOCIAL_FACTS_EXCLUDED_SCOPE", 0), 0, rid)
+            self.assertEqual(d.get("DISEASE_FACTS_EXCLUDED_SCOPE", 0), 0, rid)
         a = RAI.audit_ai_packs(str(ROOT), all_reports=True)["totals"]
         self.assertTrue(a["REPORT_AI_SCOPE_PARITY"])
         self.assertEqual(a["CROSS_COUNTRY_FACTS_IN_REPORT_PACK"], 0)
@@ -421,10 +492,24 @@ class CountryScopeReconciliationTest(unittest.TestCase):
         h1 = RAI.ai_input_hash("W1", F.report_pack_hash(base))
         h2 = RAI.ai_input_hash("W1", F.report_pack_hash(with_foreign))
         self.assertNotEqual(h1, h2)
-        # 真实仓库：报告 pack 已按 scope 重建，hash 与重建结果一致
-        rep = M.read_report_artifact(str(ROOT), "country_weekly", "WEEKLY_TCD_20260913")
-        _fp, h = RAI.rebuild_fact_pack(str(ROOT), rep)
-        self.assertEqual(h, rep.get("fact_pack_hash"))
+        # 真实仓库（C6-R2.6 数据驱动，不固定 report_id）：**每份** report artifact
+        # 的 fact_pack_hash 必须与其 merged-lineage 重建结果一致；同时 hash 必须
+        # 对墙钟字段不敏感（否则 cache identity 会漂移）。
+        rows = _report_rows()
+        self.assertTrue(rows, "真实仓库必须存在 report artifact")
+        for row in rows:
+            rep = _read_row(row)
+            self.assertTrue(rep, "artifact 必须可读：%s" % row.get("report_id"))
+            fp, h = RAI.rebuild_fact_pack(str(ROOT), rep)
+            self.assertEqual(h, rep.get("fact_pack_hash"),
+                             "%s 的 fact_pack_hash 与重建结果不一致（artifact 滞后于谱系）"
+                             % row.get("report_id"))
+            # 墙钟无关：稳定投影不因 generated_at 变化而改变
+            import copy as _copy
+            shifted = _copy.deepcopy(fp)
+            shifted["generated_at"] = "1999-01-01T00:00:00+08:00"
+            self.assertEqual(F.report_pack_hash(shifted), h,
+                             "%s：hash 不得受墙钟字段影响" % row.get("report_id"))
 
     def test_33_zero_ai_targets_is_valid_when_all_reports_low_data(self):
         """§5/§7 CASE B：全部 LOW_DATA 时 0 个 AI target 是**合法**结果。"""

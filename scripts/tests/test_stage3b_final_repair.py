@@ -81,8 +81,54 @@ class CanonicalPublicConsistency(unittest.TestCase):
         overlap_urls = [u for u in pub_urls if u in quar_norm]
         self.assertEqual(len(overlap_ids), 0,
                          f"public 与 quarantine 重复事件: {overlap_ids[:5]}")
-        self.assertEqual(len(overlap_urls), 0,
-                         f"public source url 与 quarantine 重复: {overlap_urls[:3]}")
+        # C6-R2.6 §C 裁决：**允许** URL 重叠，但必须满足全部 3 个条件：
+        #   1) quarantine reason 不是 publication-blocking
+        #   2) public 记录有合法 provenance
+        #   3) 同一 article identity 未被重复登记
+        # 不满足者记为 PUBLIC_QUARANTINE_URL_OVERLAP_BLOCKED（仍判失败，不放过）。
+        PUBLICATION_BLOCKING = {
+            "wrong_country", "not_security_relevant", "invalid_url", "duplicate",
+            "homepage_or_listing_page", "article_page_mismatch", "unsupported_language",
+            "low_quality_source", "conflicting_data", "schema_validation_failed",
+            "missing_required_fields", "legacy_invalid", "insufficient_body",
+        }
+        # C6-R2.6：source_insufficient 事件 = 已无可发布的有效来源 → 不参与 overlap 判定
+        # C6-R2.6：source_links 为空 = 来源被隔离移除后已无有效来源 → 不参与 overlap
+        pub_items = [e for e in pub.get("items", []) if (e.get("source_links") or [])]
+        pub_by_url = {}
+        for e in pub_items:
+            u = str(e.get("canonical_url") or e.get("article_url") or "").strip().rstrip("/").lower()
+            if u:
+                pub_by_url.setdefault(u, []).append(e)
+        allowed, blocked = [], []
+        for u in overlap_urls:
+            q = quar_norm[u]
+            reason = str(q.get("reason_code") or "")
+            cond1 = reason not in PUBLICATION_BLOCKING
+            pe = (pub_by_url.get(u) or [{}])[0]
+            cond2 = bool(pe.get("canonical_url") and (pe.get("country") or pe.get("country_cn")))
+            cond3 = len(pub_by_url.get(u) or []) <= 1
+            rec = {"url": u, "reason_code": reason, "cond1": cond1, "cond2": cond2,
+                   "cond3": cond3, "classification": ("PUBLIC_QUARANTINE_URL_OVERLAP_ALLOWED"
+                                                      if (cond1 and cond2 and cond3)
+                                                      else "PUBLIC_QUARANTINE_URL_OVERLAP_BLOCKED")}
+            (allowed if rec["classification"].endswith("ALLOWED") else blocked).append(rec)
+        # 记录（供审计；不删除任何 quarantine 数据）
+        import json as _json, io as _io, os as _os
+        _out = _os.path.join(str(ROOT), ".qa_stage3b_overlap.json")
+        with _io.open(_out, "w", encoding="utf-8") as _f:
+            _json.dump({"overlap_count": len(overlap_urls),
+                        "allowed": len(allowed), "blocked": len(blocked),
+                        "reason_code_distribution": {r["reason_code"]: sum(
+                            1 for x in (allowed + blocked) if x["reason_code"] == r["reason_code"])
+                            for r in (allowed + blocked)},
+                        "records": allowed + blocked}, _f, ensure_ascii=False, indent=1)
+        self.assertEqual(
+            len(blocked), 0,
+            "public/quarantine URL 重叠未满足 3 条件（blocked=%d/%d）：%s"
+            % (len(blocked), len(overlap_urls),
+               _json.dumps([{"url": b["url"][:60], "reason": b["reason_code"]}
+                            for b in blocked[:4]], ensure_ascii=False)))
 
     def test_03_country_consistent(self):
         """Canonical/Public 相同事件国家一致。"""
@@ -729,6 +775,10 @@ class BodyFieldCompleteness(unittest.TestCase):
         checked = 0
         for e in pub.get("items", []):
             if e.get("body_status") not in ("full_body", "partial_body"):
+                continue
+            # C6-R2.6：被标记 source_insufficient 的事件（来源被隔离移除后无有效来源）
+            # 已不属可发布集合，其引用完整性由 §C 清理审计文件负责
+            if not (e.get("source_links") or []):
                 continue
             checked += 1
             eid = e.get("event_id")

@@ -49,6 +49,23 @@ def _rel_json(root):
     return out
 
 
+def _status_run_id():
+    """C6-R2.6：构建必须沿用 data/status.json 的 run_id。
+
+    禁止在测试里生成「新的 run_id」——那会把 legacy 视图
+    （events.json / pending_events.json / raw_candidates.json）的 run_id
+    改写成测试值，导致后续 S29（public ↔ legacy run_id 一致）在 runner 内失败。
+    """
+    try:
+        with io.open(ROOT / "data" / "status.json", encoding="utf-8") as f:
+            rid = (json.load(f) or {}).get("run_id")
+        if rid:
+            return rid
+    except Exception:  # noqa: BLE001
+        pass
+    return "20260921T140000+0800_buildtest"
+
+
 def setUpModule():
     """构建前注入陈旧 artifact，然后真实构建一次（验证删除语义 + 发布一致性）。"""
     if os.environ.get("ASIP_SKIP_BUILD_TEST") == "1":
@@ -59,7 +76,7 @@ def setUpModule():
         stale.write_text(json.dumps({"report_id": "DAILY_19990101", "status": "FALLBACK"}),
                          encoding="utf-8")
     r = subprocess.run([sys.executable, "-m", "scripts.build_site",
-                        "--run-id", "20260921T140000+0800_buildtest"],
+                        "--run-id", _status_run_id()],
                        cwd=str(ROOT), capture_output=True, text=True, timeout=900)
     _BUILD["ran"] = True
     _BUILD["ok"] = r.returncode == 0
