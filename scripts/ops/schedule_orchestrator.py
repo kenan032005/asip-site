@@ -451,6 +451,15 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
             _do(t["task"], t["task"])
     results.setdefault("timeline", {"ok": _run_script(["scripts/ops/timeline_run.py"], emit),
                                     "detail": "timeline_run"})
+    # C6-R5E：AI enrichment → 发布链桥接。
+    # 把**已存在**的 AI 产物（data/runtime/ops/enrichment/S<event_id 末8位>_ok.json）中
+    # safety.original_ai_output 的 title_zh/summary_zh 等回填进 canonical 事件行；
+    # 否则 compatibility_export._published_from_cluster 取到的 title_cn/summary_cn 恒为空，
+    # 译文与 AI 摘要永远到不了 public/published_events 与站点（实测 8/8 事件如此）。
+    # 幂等（只填空白字段）、不生成 AI、不调外部模型（REAL_AI_CALLS=0）；必须早于 views_export。
+    results["apply_enrichment"] = {
+        "ok": _run_script(["scripts/ops/enrichment_bridge.py", "--apply"], emit),
+        "detail": "enrichment_bridge"}
     # canonical 变更后必须再生成遗留/公开视图（events.json / pending / raw / quarantine /
     # public/published_events / current_metrics），否则 deploy 的 V17 canonical↔legacy 校验失败
     results["views_export"] = {"ok": _export_views(emit), "detail": "compatibility_export"}
