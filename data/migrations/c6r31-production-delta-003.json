@@ -1,0 +1,253 @@
+{
+ "schema": "c6-r31-production-delta-migration-v1",
+ "migration_id": "c6r31-production-delta-003",
+ "generated_for": "C6-R3.2-R4 Phase 5（FINAL V1.1 cutover delta）",
+ "rc_parent_commit": "81ae825849f1b4f4c22fb90251706c65c2e5323d",
+ "production_snapshot_sha": "60e6096862f0424b4fd5c75fd3fa4a56b34b5b39",
+ "production_snapshot_frozen_at": "2026-09-23T09:51:34+03:00",
+ "previous_reconciliation_migration": "c6r31-production-delta-002.json",
+ "hash_algorithm": "sha256",
+ "hash_canonicalization": "line_endings_lf_only",
+ "previous_snapshot": "7d41275b8c804e2bc05ff7d15e2695e6260430cc",
+ "parent_run_ids": [
+  "20260922T020000+0800_c6r2mg",
+  "20260802T084000+0800_084349",
+  "20260919T143000+0800_c3r2pr"
+ ],
+ "rc_run_id": "20260922T020000+0800_c6r2mg",
+ "prod_run_id": "20260802T084000+0800_084349",
+ "production_orchestrator_lineage": {
+  "commits_since_previous_snapshot": 7,
+  "orchestrator_run_subjects": [
+   "orchestrator run 35825159711",
+   "orchestrator run 35820964041",
+   "orchestrator run 35816898183",
+   "orchestrator run 35812950967",
+   "orchestrator run 35808951091",
+   "orchestrator run 35805401891",
+   "orchestrator run 35804835305"
+  ],
+  "last_collection_run": "2026-09-23T02:17:44Z",
+  "last_daily_report": "2026-09-22T12:05:33Z",
+  "last_weekly_report": "2026-09-19T23:05:29Z"
+ },
+ "files": [
+  {
+   "path": "data/canonical/event_clusters.json",
+   "before_sha256": "c0a496fc6964f445123de472b61241349ce5dc754413fbbedcbb9a6cf70b2496",
+   "after_sha256": "3cce12f928834be4d4e166a9cfb572f86c5206a6f5d53513870320605bcbf0da",
+   "before_items": 618,
+   "after_items": 619,
+   "records_changed": {
+    "records_appended": 1,
+    "conflicts_preserved_rc": 134,
+    "records_deleted": 0,
+    "master_ids_changed": 0,
+    "summaries_overwritten": 0,
+    "union_fields_added": 0,
+    "filled_from_production": 0,
+    "normalization_actions": {
+     "event_time_to_rfc3339": 1
+    },
+    "enum_changes": 0
+   },
+   "raw_bytes_before_sha256": "3e2ca06400e3c5ef5eca83ce1920e2e4cf7df63ed21a3412cb3526374f3478f4",
+   "raw_bytes_after_sha256": "3cce12f928834be4d4e166a9cfb572f86c5206a6f5d53513870320605bcbf0da",
+   "previous_migration_after_sha256": "c0a496fc6964f445123de472b61241349ce5dc754413fbbedcbb9a6cf70b2496",
+   "lineage_continuous": true
+  },
+  {
+   "path": "data/canonical/quarantine.json",
+   "before_sha256": "4a202525ef7b88119702e43c190c1eb06410984252a0284c61b8da6ff4604c3e",
+   "after_sha256": "905e24eefe516a73b52538e793dc7beb196853550f0dbb92050e835d9ebc2ef5",
+   "before_items": 3513,
+   "after_items": 3557,
+   "records_changed": {
+    "records_appended": 44,
+    "conflicts_preserved_rc": 340,
+    "records_deleted": 0,
+    "master_ids_changed": 0,
+    "summaries_overwritten": 0,
+    "reason_code_mapped": 0,
+    "shape_normalized": 88,
+    "normalization_actions": {
+     "naive_datetime": 0
+    },
+    "enum_changes": 0
+   },
+   "raw_bytes_before_sha256": "3f6621a9971117f69b33af3b150de70166dbc614dc00eac6cc6b0768abeb5b8d",
+   "raw_bytes_after_sha256": "905e24eefe516a73b52538e793dc7beb196853550f0dbb92050e835d9ebc2ef5",
+   "previous_migration_after_sha256": "4a202525ef7b88119702e43c190c1eb06410984252a0284c61b8da6ff4604c3e",
+   "lineage_continuous": true
+  }
+ ],
+ "guards": {
+  "records_deleted": 0,
+  "master_ids_changed": 0,
+  "summaries_overwritten": 0,
+  "enum_changes": 0,
+  "existing_modified": 0
+ },
+ "detail": {
+  "appended_clusters": [
+   "EVT_3901a3c4af213f25"
+  ],
+  "mapped_quarantine": [],
+  "event_time_normalized": [
+   {
+    "event_id": "EVT_3901a3c4af213f25",
+    "from": "2026-09-23 05:29:55",
+    "to": "2026-09-23T05:29:55Z"
+   }
+  ],
+  "conflict_field_stats": {
+   "event_time": 108,
+   "enriched_at": 26
+  },
+  "conflict_sample": [
+   {
+    "event_id": "EVT_01d508fb6af89675",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-09-19 00:26:05"
+   },
+   {
+    "event_id": "EVT_0415dca3cb99e0cd",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-06-02 18:40:57"
+   },
+   {
+    "event_id": "EVT_0415dca3cb99e0cd",
+    "field": "enriched_at",
+    "kept": "rc",
+    "ps_value": "2026-09-23T02:17:44Z"
+   },
+   {
+    "event_id": "EVT_0684bc57228ed9ed",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-09-08 01:00:00"
+   },
+   {
+    "event_id": "EVT_0684bc57228ed9ed",
+    "field": "enriched_at",
+    "kept": "rc",
+    "ps_value": "2026-09-23T02:17:45Z"
+   },
+   {
+    "event_id": "EVT_0aefda5a37636bb3",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-09-12 04:12:55"
+   },
+   {
+    "event_id": "EVT_0f85e5f42626ce7d",
+    "field": "enriched_at",
+    "kept": "rc",
+    "ps_value": "2026-09-23T02:17:44Z"
+   },
+   {
+    "event_id": "EVT_158844fe9d222194",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-09-17 17:34:13"
+   },
+   {
+    "event_id": "EVT_15fee76f358f8d07",
+    "field": "enriched_at",
+    "kept": "rc",
+    "ps_value": "2026-09-23T02:17:44Z"
+   },
+   {
+    "event_id": "EVT_16b434e7efd082d2",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-09-16 21:30:09"
+   },
+   {
+    "event_id": "EVT_1919d9fb24791b2f",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-09-20 17:10:12"
+   },
+   {
+    "event_id": "EVT_19b225708b2868d0",
+    "field": "enriched_at",
+    "kept": "rc",
+    "ps_value": "2026-09-23T02:17:45Z"
+   },
+   {
+    "event_id": "EVT_1bb4a657d758fb78",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-09-14 02:00:45"
+   },
+   {
+    "event_id": "EVT_1c75a026db7edada",
+    "field": "enriched_at",
+    "kept": "rc",
+    "ps_value": "2026-09-23T02:17:44Z"
+   },
+   {
+    "event_id": "EVT_2148d3fddc489422",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-09-19 04:23:45"
+   },
+   {
+    "event_id": "EVT_220f7be6cb4ec871",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-09-17 18:42:08"
+   },
+   {
+    "event_id": "EVT_28e41790f705fac6",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-09-02 00:33:24"
+   },
+   {
+    "event_id": "EVT_28e41790f705fac6",
+    "field": "enriched_at",
+    "kept": "rc",
+    "ps_value": "2026-09-23T02:17:45Z"
+   },
+   {
+    "event_id": "EVT_2a7a1795b8fb3b67",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-09-13 16:33:16"
+   },
+   {
+    "event_id": "EVT_2b41ab2c9fc5c39d",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-09-01 00:30:14"
+   }
+  ]
+ },
+ "hash_contract": "CANONICAL_LF_SHA256：对数据集文件字节仅做 CRLF→LF 归一后取 sha256；不做 JSON 重序列化/字段排序/其它空白改写",
+ "lineage_chain": {
+  "previous_migration": "c6r31-production-delta-002.json",
+  "previous_migration_after_hashes": [
+   "c0a496fc6964f445123de472b61241349ce5dc754413fbbedcbb9a6cf70b2496",
+   "4a202525ef7b88119702e43c190c1eb06410984252a0284c61b8da6ff4604c3e"
+  ],
+  "continuous": true
+ },
+ "records_changed_summary": {
+  "records_appended": 45,
+  "conflicts_preserved_rc": 474,
+  "records_deleted": 0,
+  "master_ids_changed": 0,
+  "summaries_overwritten": 0,
+  "union_fields_added": 0,
+  "filled_from_production": 0,
+  "normalization_actions.event_time_to_rfc3339": 1,
+  "enum_changes": 0,
+  "reason_code_mapped": 0,
+  "shape_normalized": 88,
+  "normalization_actions.naive_datetime": 0
+ }
+}
