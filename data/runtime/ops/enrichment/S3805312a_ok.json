@@ -1,0 +1,113 @@
+{
+ "label": "S3805312a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "dbb3cac7de163067298ed046cbdd78fc2ad15d2cd7cf117d5c98e0761c38c8d6",
+ "tokens": {
+  "input_tokens": 2753,
+  "output_tokens": 409,
+  "total_tokens": 3162
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "阿联酋向乍得捐赠3000吨粮食以应对干旱",
+   "summary_zh": "乍得加强干旱风险预警与应对机制，社会行动、团结与人道主义事务部长扎拉·马哈马特·伊萨接收了阿联酋捐赠的3000吨粮食，价值约840万美元。该援助包括小米、大米、糖和豆类，将优先运往受降雨不足影响最严重的地区。部长表示将确保物资管理严谨透明，并呼吁更多合作伙伴支持。",
+   "event_type": "natural_disaster",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "阿联酋向乍得捐赠3000吨粮食，价值约840万美元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cette assistance représente un volume total de 3 000 tonnes de vivres, pour une valeur estimée à 8,4 millions de dollars américains"
+    },
+    {
+     "fact": "捐赠物资包括小米、大米、糖和豆类",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Composée notamment de mil, de riz, de sucre et de haricots"
+    },
+    {
+     "fact": "援助因降雨不足和气候变化影响而提供",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette assistance intervient dans un contexte marqué par une faible pluviométrie et les effets croissants des changements climatiques"
+    },
+    {
+     "fact": "物资将优先运往最脆弱地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils devraient être acheminés en priorité vers les zones les plus exposées"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（乍得复兴门户）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "阿联酋向乍得捐赠3000吨粮食以应对干旱",
+   "summary_zh": "乍得加强干旱风险预警与应对机制，社会行动、团结与人道主义事务部长扎拉·马哈马特·伊萨接收了阿联酋捐赠的3000吨粮食，价值约840万美元。该援助包括小米、大米、糖和豆类，将优先运往受降雨不足影响最严重的地区。部长表示将确保物资管理严谨透明，并呼吁更多合作伙伴支持。",
+   "event_type": "natural_disaster",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "阿联酋向乍得捐赠3000吨粮食，价值约840万美元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cette assistance représente un volume total de 3 000 tonnes de vivres, pour une valeur estimée à 8,4 millions de dollars américains"
+    },
+    {
+     "fact": "捐赠物资包括小米、大米、糖和豆类",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Composée notamment de mil, de riz, de sucre et de haricots"
+    },
+    {
+     "fact": "援助因降雨不足和气候变化影响而提供",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette assistance intervient dans un contexte marqué par une faible pluviométrie et les effets croissants des changements climatiques"
+    },
+    {
+     "fact": "物资将优先运往最脆弱地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils devraient être acheminés en priorité vers les zones les plus exposées"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（乍得复兴门户）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_98df3b8e3805312a",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
