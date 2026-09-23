@@ -1,0 +1,314 @@
+{
+ "schema": "c6-r31-production-delta-migration-v1",
+ "migration_id": "c6r31-production-delta-002",
+ "generated_for": "C6-R3.1.7 Phase 5（rolling reconciliation）",
+ "rc_parent_commit": "f9904ff90023a249ab67bcbf19c3061ca763c3e6",
+ "production_snapshot_sha": "7d41275b8c804e2bc05ff7d15e2695e6260430cc",
+ "production_snapshot_frozen_at": "2026-09-23T03:57:30+03:00",
+ "previous_reconciliation_migration": "c6r31-production-delta-001.json",
+ "previous_snapshot": "1bbf81116579f649f21de3ffe4ce0f89c33d24e2",
+ "parent_run_ids": [
+  "20260922T020000+0800_c6r2mg",
+  "20260802T084000+0800_084349",
+  "20260919T143000+0800_c3r2pr"
+ ],
+ "rc_run_id": "20260922T020000+0800_c6r2mg",
+ "prod_run_id": "20260802T084000+0800_084349",
+ "production_orchestrator_lineage": {
+  "commits_since_previous_snapshot": 14,
+  "orchestrator_run_subjects": [
+   "orchestrator run 35800456294",
+   "orchestrator run 35795679560",
+   "orchestrator run 35793773756",
+   "orchestrator run 35790420366",
+   "orchestrator run 35784435775",
+   "orchestrator run 35777981029",
+   "orchestrator run 35774457774",
+   "orchestrator run 35771486953",
+   "orchestrator run 35764874396",
+   "orchestrator run 35758389886",
+   "orchestrator run 35751753705",
+   "orchestrator run 35747099853",
+   "orchestrator run 35744865308",
+   "orchestrator run 35737887702"
+  ],
+  "last_collection_run": "2026-09-22T20:17:50Z",
+  "last_daily_report": "2026-09-22T12:05:33Z",
+  "last_weekly_report": "2026-09-19T23:05:29Z"
+ },
+ "files": [
+  {
+   "path": "data/canonical/event_clusters.json",
+   "before_sha256": "24dacce6751195ed3eec772b5b0fd15f006f626733570ae2f0879f4305f387e1",
+   "after_sha256": "c0a496fc6964f445123de472b61241349ce5dc754413fbbedcbb9a6cf70b2496",
+   "before_items": 608,
+   "after_items": 618,
+   "records_changed": {
+    "records_appended": 10,
+    "conflicts_preserved_rc": 124,
+    "records_deleted": 0,
+    "master_ids_changed": 0,
+    "summaries_overwritten": 0,
+    "union_fields_added": 0,
+    "filled_from_production": 0,
+    "normalization_actions": {
+     "event_time_to_rfc3339": 10
+    },
+    "enum_changes": 0
+   },
+   "raw_bytes_before_sha256": "ddf7b88788a622e12ba9b788963aff5676ccc37e9d3c91febbdc4d2ec60ce846",
+   "raw_bytes_after_sha256": "c0a496fc6964f445123de472b61241349ce5dc754413fbbedcbb9a6cf70b2496",
+   "previous_migration_after_sha256": "24dacce6751195ed3eec772b5b0fd15f006f626733570ae2f0879f4305f387e1",
+   "lineage_continuous": true
+  },
+  {
+   "path": "data/canonical/quarantine.json",
+   "before_sha256": "abd5edd4768f4575267ce2f051136a9bf3511bf734a9550eb05002de54c0b2d9",
+   "after_sha256": "4a202525ef7b88119702e43c190c1eb06410984252a0284c61b8da6ff4604c3e",
+   "before_items": 3351,
+   "after_items": 3513,
+   "records_changed": {
+    "records_appended": 162,
+    "conflicts_preserved_rc": 178,
+    "records_deleted": 0,
+    "master_ids_changed": 0,
+    "summaries_overwritten": 0,
+    "reason_code_mapped": 0,
+    "shape_normalized": 324,
+    "normalization_actions": {
+     "naive_datetime": 0
+    },
+    "enum_changes": 0
+   },
+   "raw_bytes_before_sha256": "a501b6ac970fd55179738e9c71ad73943c8f79cf3c0fef9dece3642250f4484f",
+   "raw_bytes_after_sha256": "4a202525ef7b88119702e43c190c1eb06410984252a0284c61b8da6ff4604c3e",
+   "previous_migration_after_sha256": "abd5edd4768f4575267ce2f051136a9bf3511bf734a9550eb05002de54c0b2d9",
+   "lineage_continuous": true
+  }
+ ],
+ "guards": {
+  "records_deleted": 0,
+  "master_ids_changed": 0,
+  "summaries_overwritten": 0,
+  "enum_changes": 0,
+  "existing_modified": 0
+ },
+ "detail": {
+  "appended_clusters": [
+   "EVT_edfa3a29f2bf8b17",
+   "EVT_e03fe74b4f75221c",
+   "EVT_cc4931b5075a768c",
+   "EVT_6c21704770289b0a",
+   "EVT_9efafc575a33aa5a",
+   "EVT_86393b6698f68d54",
+   "EVT_bae35f275fb0872d",
+   "EVT_ee167c14fbd0020f",
+   "EVT_6701db5e68523e99",
+   "EVT_e4d2bf54b1b9bf4e"
+  ],
+  "mapped_quarantine": [],
+  "event_time_normalized": [
+   {
+    "event_id": "EVT_edfa3a29f2bf8b17",
+    "from": "2026-09-22 20:04:33",
+    "to": "2026-09-22T20:04:33Z"
+   },
+   {
+    "event_id": "EVT_e03fe74b4f75221c",
+    "from": "2026-09-22 16:11:09",
+    "to": "2026-09-22T16:11:09Z"
+   },
+   {
+    "event_id": "EVT_cc4931b5075a768c",
+    "from": "2026-09-22 23:51:01",
+    "to": "2026-09-22T23:51:01Z"
+   },
+   {
+    "event_id": "EVT_6c21704770289b0a",
+    "from": "2026-09-22 23:00:39",
+    "to": "2026-09-22T23:00:39Z"
+   },
+   {
+    "event_id": "EVT_9efafc575a33aa5a",
+    "from": "2026-09-22 22:22:06",
+    "to": "2026-09-22T22:22:06Z"
+   },
+   {
+    "event_id": "EVT_86393b6698f68d54",
+    "from": "2026-09-22 22:45:41",
+    "to": "2026-09-22T22:45:41Z"
+   },
+   {
+    "event_id": "EVT_bae35f275fb0872d",
+    "from": "2026-09-22 22:16:58",
+    "to": "2026-09-22T22:16:58Z"
+   },
+   {
+    "event_id": "EVT_ee167c14fbd0020f",
+    "from": "2026-09-22 22:52:32",
+    "to": "2026-09-22T22:52:32Z"
+   },
+   {
+    "event_id": "EVT_6701db5e68523e99",
+    "from": "2026-09-22 22:44:30",
+    "to": "2026-09-22T22:44:30Z"
+   },
+   {
+    "event_id": "EVT_e4d2bf54b1b9bf4e",
+    "from": "2026-09-23 03:35:51",
+    "to": "2026-09-23T03:35:51Z"
+   }
+  ],
+  "conflict_field_stats": {
+   "event_time": 98,
+   "enriched_at": 26
+  },
+  "conflict_sample": [
+   {
+    "event_id": "EVT_01d508fb6af89675",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-09-19 00:26:05"
+   },
+   {
+    "event_id": "EVT_0415dca3cb99e0cd",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-06-02 18:40:57"
+   },
+   {
+    "event_id": "EVT_0415dca3cb99e0cd",
+    "field": "enriched_at",
+    "kept": "rc",
+    "ps_value": "2026-09-22T20:17:51Z"
+   },
+   {
+    "event_id": "EVT_0684bc57228ed9ed",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-09-08 01:00:00"
+   },
+   {
+    "event_id": "EVT_0684bc57228ed9ed",
+    "field": "enriched_at",
+    "kept": "rc",
+    "ps_value": "2026-09-22T20:17:51Z"
+   },
+   {
+    "event_id": "EVT_0aefda5a37636bb3",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-09-12 04:12:55"
+   },
+   {
+    "event_id": "EVT_0f85e5f42626ce7d",
+    "field": "enriched_at",
+    "kept": "rc",
+    "ps_value": "2026-09-22T20:17:50Z"
+   },
+   {
+    "event_id": "EVT_158844fe9d222194",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-09-17 17:34:13"
+   },
+   {
+    "event_id": "EVT_15fee76f358f8d07",
+    "field": "enriched_at",
+    "kept": "rc",
+    "ps_value": "2026-09-22T20:17:50Z"
+   },
+   {
+    "event_id": "EVT_16b434e7efd082d2",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-09-16 21:30:09"
+   },
+   {
+    "event_id": "EVT_1919d9fb24791b2f",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-09-20 17:10:12"
+   },
+   {
+    "event_id": "EVT_19b225708b2868d0",
+    "field": "enriched_at",
+    "kept": "rc",
+    "ps_value": "2026-09-22T20:17:51Z"
+   },
+   {
+    "event_id": "EVT_1bb4a657d758fb78",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-09-14 02:00:45"
+   },
+   {
+    "event_id": "EVT_1c75a026db7edada",
+    "field": "enriched_at",
+    "kept": "rc",
+    "ps_value": "2026-09-22T20:17:50Z"
+   },
+   {
+    "event_id": "EVT_2148d3fddc489422",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-09-19 04:23:45"
+   },
+   {
+    "event_id": "EVT_220f7be6cb4ec871",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-09-17 18:42:08"
+   },
+   {
+    "event_id": "EVT_28e41790f705fac6",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-09-02 00:33:24"
+   },
+   {
+    "event_id": "EVT_28e41790f705fac6",
+    "field": "enriched_at",
+    "kept": "rc",
+    "ps_value": "2026-09-22T20:17:51Z"
+   },
+   {
+    "event_id": "EVT_2a7a1795b8fb3b67",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-09-13 16:33:16"
+   },
+   {
+    "event_id": "EVT_2b41ab2c9fc5c39d",
+    "field": "event_time",
+    "kept": "rc",
+    "ps_value": "2026-09-01 00:30:14"
+   }
+  ]
+ },
+ "hash_algorithm": "sha256",
+ "hash_canonicalization": "line_endings_lf_only",
+ "hash_contract": "CANONICAL_LF_SHA256：对数据集文件字节仅做 CRLF→LF 归一后取 sha256；不做 JSON 重序列化/字段排序/其它空白改写",
+ "lineage_chain": {
+  "previous_migration": "data/migrations/c6r31-production-delta-001.json",
+  "previous_migration_after_hashes": [
+   "24dacce6751195ed3eec772b5b0fd15f006f626733570ae2f0879f4305f387e1",
+   "abd5edd4768f4575267ce2f051136a9bf3511bf734a9550eb05002de54c0b2d9"
+  ],
+  "continuous": true
+ },
+ "records_changed_summary": {
+  "records_appended": 172,
+  "conflicts_preserved_rc": 302,
+  "records_deleted": 0,
+  "master_ids_changed": 0,
+  "summaries_overwritten": 0,
+  "union_fields_added": 0,
+  "filled_from_production": 0,
+  "normalization_actions.event_time_to_rfc3339": 10,
+  "enum_changes": 0,
+  "reason_code_mapped": 0,
+  "shape_normalized": 324,
+  "normalization_actions.naive_datetime": 0
+ }
+}
