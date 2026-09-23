@@ -1,0 +1,127 @@
+{
+ "label": "S4685db2e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "bda8b68b3b2126e0ac0cfdd3fbe5d2c3250f751fcbc68d81a94ee0d73f511d1c",
+ "tokens": {
+  "input_tokens": 2334,
+  "output_tokens": 506,
+  "total_tokens": 2840
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）贝尼两周内发生第三起火灾，一广播电台及多栋建筑受损",
+   "summary_zh": "刚果（金）北基伍省贝尼市中心停车场于9月17日凌晨发生火灾，一家当地广播电台及多栋建筑受损。据多名目击者称，火势可能源于一间电子设备维修间的短路，随后蔓延至邻近建筑。这是该市自9月初以来记录的第三起火灾，暂无人员伤亡报告。民防部门呼吁配备消防车。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "北基伍省",
+    "city": "贝尼",
+    "site": "市中心停车场",
+    "raw_text": "au parking central de Beni, dans le Nord-Kivu"
+   },
+   "key_facts": [
+    {
+     "fact": "贝尼市中心停车场发生火灾，一家当地广播电台及多栋建筑受损",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une station de radio locale et plusieurs bâtiments ont été touchés par un incendie survenu dans la nuit de mercredi à jeudi 17 septembre au parking central de Beni, dans le Nord-Kivu."
+    },
+    {
+     "fact": "这是贝尼自9月初以来的第三起火灾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il s’agit du troisième sinistre enregistré dans la ville depuis le début du mois de septembre."
+    },
+    {
+     "fact": "据多名目击者称，火灾可能源于一间电子设备维修间的短路",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon plusieurs témoins, il serait parti d’un court-circuit dans une cabine de réparation d’appareils électroniques, avant de se propager aux bâtiments voisins."
+    },
+    {
+     "fact": "暂无人员伤亡报告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucune victime n’est signalée dans les éléments disponibles."
+    },
+    {
+     "fact": "民防部门呼吁配备消防车",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Protection civile réclame un camion anti-incendie"
+    }
+   ],
+   "uncertainties": [
+    "火灾起因尚未证实，仅为目击者推测可能由短路引发",
+    "伤亡情况尚未确认",
+    "目前仅一个来源（Radio Okapi）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）贝尼两周内发生第三起火灾，一广播电台及多栋建筑受损",
+   "summary_zh": "刚果（金）北基伍省贝尼市中心停车场于9月17日凌晨发生火灾，一家当地广播电台及多栋建筑受损。据多名目击者称，火势可能源于一间电子设备维修间的短路，随后蔓延至邻近建筑。这是该市自9月初以来记录的第三起火灾，暂无人员伤亡报告。民防部门呼吁配备消防车。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "北基伍省",
+    "city": "贝尼",
+    "site": "市中心停车场",
+    "raw_text": "au parking central de Beni, dans le Nord-Kivu"
+   },
+   "key_facts": [
+    {
+     "fact": "贝尼市中心停车场发生火灾，一家当地广播电台及多栋建筑受损",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une station de radio locale et plusieurs bâtiments ont été touchés par un incendie survenu dans la nuit de mercredi à jeudi 17 septembre au parking central de Beni, dans le Nord-Kivu."
+    },
+    {
+     "fact": "这是贝尼自9月初以来的第三起火灾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il s’agit du troisième sinistre enregistré dans la ville depuis le début du mois de septembre."
+    },
+    {
+     "fact": "据多名目击者称，火灾可能源于一间电子设备维修间的短路",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon plusieurs témoins, il serait parti d’un court-circuit dans une cabine de réparation d’appareils électroniques, avant de se propager aux bâtiments voisins."
+    },
+    {
+     "fact": "暂无人员伤亡报告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucune victime n’est signalée dans les éléments disponibles."
+    },
+    {
+     "fact": "民防部门呼吁配备消防车",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Protection civile réclame un camion anti-incendie"
+    }
+   ],
+   "uncertainties": [
+    "火灾起因尚未证实，仅为目击者推测可能由短路引发",
+    "伤亡情况尚未确认",
+    "目前仅一个来源（Radio Okapi）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_3d3eb0c54685db2e",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

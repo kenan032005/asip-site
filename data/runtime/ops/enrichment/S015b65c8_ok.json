@@ -1,0 +1,115 @@
+{
+ "label": "S015b65c8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "992403513ec0b5b1ac6b7d355de8af00d4d7cfe043a660252f7eca01d3e3e04f",
+ "tokens": {
+  "input_tokens": 2447,
+  "output_tokens": 538,
+  "total_tokens": 2985
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）C64联盟约百名活动人士在卢本巴希获释",
+   "summary_zh": "刚果（金）反对派联盟C64约百名成员及活动人士于9月17日（周四）在卢本巴希获释，他们此前于9月15日的抗议游行中被捕。人权组织Justicia ASBL向媒体确认了这一消息，并对这一被视为有利于缓解省级政治紧张气氛的举措表示欢迎。获释者此前被关押在隶属于省内政部的CIO拘留中心。",
+   "event_type": "civil_unrest",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "Haut-Katanga",
+    "city": "Lubumbashi",
+    "site": "CIO拘留中心",
+    "raw_text": "Lubumbashi, dans la province du Haut-Katanga"
+   },
+   "key_facts": [
+    {
+     "fact": "反对派联盟C64约百名成员及活动人士于9月17日在卢本巴希获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les membres et militants des partis d'opposition affiliés à la coalition C64, interpellés le 15 septembre dernier lors de la marche de protestation, ont tous été remis en liberté ce jeudi 17 septembre à Lubumbashi"
+    },
+    {
+     "fact": "获释者此前被关押在隶属于省内政部的CIO拘留中心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une centaine de personnes qui étaient retenues dans les locaux de la Coordination d'inspection et d'orientation (CIO), un centre de détention relevant du ministère provincial de l'Intérieur"
+    },
+    {
+     "fact": "人权组织Justicia ASBL确认了此次获释消息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'information a été confirmée par l'organisation non gouvernementale de défense des droits humains Justicia ASBL"
+    },
+    {
+     "fact": "获释范围还涉及卢本巴希以外上韦莱省其他主要城镇的被捕示威者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les remises en liberté s'étendent aux manifestants appréhendés dans la chef-lieu provincial ainsi que dans d'autres agglomérations majeures du Haut-Katanga"
+    }
+   ],
+   "uncertainties": [
+    "消息目前仅由单一来源Radio Okapi报道，尚缺乏交叉验证",
+    "获释人数为“约百人”，具体数字未获独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）C64联盟约百名活动人士在卢本巴希获释",
+   "summary_zh": "刚果（金）反对派联盟C64约百名成员及活动人士于9月17日（周四）在卢本巴希获释，他们此前于9月15日的抗议游行中被捕。人权组织Justicia ASBL向媒体确认了这一消息，并对这一被视为有利于缓解省级政治紧张气氛的举措表示欢迎。获释者此前被关押在隶属于省内政部的CIO拘留中心。",
+   "event_type": "civil_unrest",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "Haut-Katanga",
+    "city": "Lubumbashi",
+    "site": "CIO拘留中心",
+    "raw_text": "Lubumbashi, dans la province du Haut-Katanga"
+   },
+   "key_facts": [
+    {
+     "fact": "反对派联盟C64约百名成员及活动人士于9月17日在卢本巴希获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les membres et militants des partis d'opposition affiliés à la coalition C64, interpellés le 15 septembre dernier lors de la marche de protestation, ont tous été remis en liberté ce jeudi 17 septembre à Lubumbashi"
+    },
+    {
+     "fact": "获释者此前被关押在隶属于省内政部的CIO拘留中心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une centaine de personnes qui étaient retenues dans les locaux de la Coordination d'inspection et d'orientation (CIO), un centre de détention relevant du ministère provincial de l'Intérieur"
+    },
+    {
+     "fact": "人权组织Justicia ASBL确认了此次获释消息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'information a été confirmée par l'organisation non gouvernementale de défense des droits humains Justicia ASBL"
+    },
+    {
+     "fact": "获释范围还涉及卢本巴希以外上韦莱省其他主要城镇的被捕示威者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les remises en liberté s'étendent aux manifestants appréhendés dans la chef-lieu provincial ainsi que dans d'autres agglomérations majeures du Haut-Katanga"
+    }
+   ],
+   "uncertainties": [
+    "消息目前仅由单一来源Radio Okapi报道，尚缺乏交叉验证",
+    "获释人数为“约百人”，具体数字未获独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_1bf78042015b65c8",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

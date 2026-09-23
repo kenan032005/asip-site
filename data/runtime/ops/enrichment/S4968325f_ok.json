@@ -1,0 +1,119 @@
+{
+ "label": "S4968325f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a7c55cc5a3ac6adebdb9bfc8b9f49e814192eda8e56395370d2c67412aba2065",
+ "tokens": {
+  "input_tokens": 2255,
+  "output_tokens": 472,
+  "total_tokens": 2727
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "莫桑比克赞巴拉地区交通事故死亡人数升至24人",
+   "summary_zh": "莫桑比克南部赞巴拉地区18日晚发生一起交通事故，造成至少24人死亡、2人受伤，其中1人伤势严重。伊尼扬巴内省政府表示，事故发生在1号国道上，涉及一辆客运车辆与一辆对向行驶的卡车。据初步报道，死者均为客运车辆乘客，事故具体原因尚未确定，警方尚未正式置评。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "伊尼扬巴内省",
+    "city": "赞巴拉",
+    "site": "1号国道",
+    "raw_text": "Zavala district, southern Mozambique, National Highway Number 1 (N1)"
+   },
+   "key_facts": [
+    {
+     "fact": "莫桑比克赞巴拉地区交通事故造成至少24人死亡、2人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least 24 people were killed and two others injured, one of them seriously, in a road accident on Thursday night in Zavala district, southern Mozambique"
+    },
+    {
+     "fact": "事故发生在1号国道，涉及一辆客运车辆与一辆对向行驶的卡车",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The accident occurred on National Highway Number 1 (N1). ... the crash involved a passenger transport vehicle [chapa] and a lorry travelling in the opposite direction"
+    },
+    {
+     "fact": "据初步报道，死者均为客运车辆乘客",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "These reports also indicated that all those killed were travelling in the passenger vehicle"
+    },
+    {
+     "fact": "事故具体原因尚未确定，警方尚未正式置评",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The exact circumstances that led to the collision have yet to be established, Carta reports, as the police authorities have not yet officially commented on the accident"
+    }
+   ],
+   "uncertainties": [
+    "事故具体原因尚未确定",
+    "警方尚未正式就事故置评",
+    "有报道称事故涉及一辆被指为护送车队的军用卡车，该说法尚未证实",
+    "目前仅一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "莫桑比克赞巴拉地区交通事故死亡人数升至24人",
+   "summary_zh": "莫桑比克南部赞巴拉地区18日晚发生一起交通事故，造成至少24人死亡、2人受伤，其中1人伤势严重。伊尼扬巴内省政府表示，事故发生在1号国道上，涉及一辆客运车辆与一辆对向行驶的卡车。据初步报道，死者均为客运车辆乘客，事故具体原因尚未确定，警方尚未正式置评。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "伊尼扬巴内省",
+    "city": "赞巴拉",
+    "site": "1号国道",
+    "raw_text": "Zavala district, southern Mozambique, National Highway Number 1 (N1)"
+   },
+   "key_facts": [
+    {
+     "fact": "莫桑比克赞巴拉地区交通事故造成至少24人死亡、2人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least 24 people were killed and two others injured, one of them seriously, in a road accident on Thursday night in Zavala district, southern Mozambique"
+    },
+    {
+     "fact": "事故发生在1号国道，涉及一辆客运车辆与一辆对向行驶的卡车",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The accident occurred on National Highway Number 1 (N1). ... the crash involved a passenger transport vehicle [chapa] and a lorry travelling in the opposite direction"
+    },
+    {
+     "fact": "据初步报道，死者均为客运车辆乘客",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "These reports also indicated that all those killed were travelling in the passenger vehicle"
+    },
+    {
+     "fact": "事故具体原因尚未确定，警方尚未正式置评",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The exact circumstances that led to the collision have yet to be established, Carta reports, as the police authorities have not yet officially commented on the accident"
+    }
+   ],
+   "uncertainties": [
+    "事故具体原因尚未确定",
+    "警方尚未正式就事故置评",
+    "有报道称事故涉及一辆被指为护送车队的军用卡车，该说法尚未证实",
+    "目前仅一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_b4f214144968325f",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

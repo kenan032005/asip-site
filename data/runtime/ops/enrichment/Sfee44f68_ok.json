@@ -1,0 +1,117 @@
+{
+ "label": "Sfee44f68",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1565131fe377603351de1abd51662fb1145ce297b77f9d4fae3142f696990618",
+ "tokens": {
+  "input_tokens": 2273,
+  "output_tokens": 599,
+  "total_tokens": 2872
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）南基伍省菲齐高地Natolonge据报发生AFC/M23与政府军交火",
+   "summary_zh": "据Actualite.cd报道，2026年9月18日上午，刚果（金）南基伍省菲齐地区高地的Natulonge和Kabindo等村庄爆发AFC/M23/Twirhaneho联盟与刚果（金）武装部队（FARDC）之间的战斗。当地消息称，重型和轻型武器射击声持续，居民恐慌并大多逃入丛林，日常活动陷入瘫痪。此前数日该地区曾一度恢复平静。相关消息目前为单一来源，尚待进一步核实。",
+   "event_type": "armed_conflict",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "南基伍省",
+    "city": null,
+    "site": "Natulonge和Kabindo村（Basimunyaka群体，Lulenge分区）",
+    "raw_text": "villages de Natulonge et Kabindo, dans les hauts plateaux du territoire de Fizi, au Sud-Kivu"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年9月18日上午，菲齐地区高地Natulonge和Kabindo村爆发武装冲突",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les affrontements ont éclaté dans la matinée de ce vendredi 18 septembre, dans les villages de Natulonge et Kabindo, dans les hauts plateaux du territoire de Fizi, au Sud-Kivu."
+    },
+    {
+     "fact": "交火双方为AFC/M23/Twirhaneho联盟与刚果（金）武装部队（FARDC）",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Fizi : combats entre AFC/M23/Twirhaneho et FARDC signalés à Natolonge, dans les hauts plateaux"
+    },
+    {
+     "fact": "据消息来源称，当地听到密集的重型和轻型武器射击声，居民恐慌",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon les sources d’ACTUALITE.CD, d’intenses détonations d’armes étaient entendues dans les villages précités"
+    },
+    {
+     "fact": "当地居民大多逃入丛林，日常活动受到瘫痪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ces affrontements entre la coalition rebelle et les FARDC appuyées par leurs alliées paralysent les activités quotidiennes des habitants qui se sont, pour la plupart réfugiés dans la brousse."
+    }
+   ],
+   "uncertainties": [
+    "战斗消息目前仅来自单一来源（Actualite.cd），尚缺乏交叉验证",
+    "伤亡人数及冲突具体规模尚未确认",
+    "冲突各方具体控制区域及后续态势有待核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）南基伍省菲齐高地Natolonge据报发生AFC/M23与政府军交火",
+   "summary_zh": "据Actualite.cd报道，2026年9月18日上午，刚果（金）南基伍省菲齐地区高地的Natulonge和Kabindo等村庄爆发AFC/M23/Twirhaneho联盟与刚果（金）武装部队（FARDC）之间的战斗。当地消息称，重型和轻型武器射击声持续，居民恐慌并大多逃入丛林，日常活动陷入瘫痪。此前数日该地区曾一度恢复平静。相关消息目前为单一来源，尚待进一步核实。",
+   "event_type": "armed_conflict",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "南基伍省",
+    "city": null,
+    "site": "Natulonge和Kabindo村（Basimunyaka群体，Lulenge分区）",
+    "raw_text": "villages de Natulonge et Kabindo, dans les hauts plateaux du territoire de Fizi, au Sud-Kivu"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年9月18日上午，菲齐地区高地Natulonge和Kabindo村爆发武装冲突",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les affrontements ont éclaté dans la matinée de ce vendredi 18 septembre, dans les villages de Natulonge et Kabindo, dans les hauts plateaux du territoire de Fizi, au Sud-Kivu."
+    },
+    {
+     "fact": "交火双方为AFC/M23/Twirhaneho联盟与刚果（金）武装部队（FARDC）",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Fizi : combats entre AFC/M23/Twirhaneho et FARDC signalés à Natolonge, dans les hauts plateaux"
+    },
+    {
+     "fact": "据消息来源称，当地听到密集的重型和轻型武器射击声，居民恐慌",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon les sources d’ACTUALITE.CD, d’intenses détonations d’armes étaient entendues dans les villages précités"
+    },
+    {
+     "fact": "当地居民大多逃入丛林，日常活动受到瘫痪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ces affrontements entre la coalition rebelle et les FARDC appuyées par leurs alliées paralysent les activités quotidiennes des habitants qui se sont, pour la plupart réfugiés dans la brousse."
+    }
+   ],
+   "uncertainties": [
+    "战斗消息目前仅来自单一来源（Actualite.cd），尚缺乏交叉验证",
+    "伤亡人数及冲突具体规模尚未确认",
+    "冲突各方具体控制区域及后续态势有待核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_6ef25048fee44f68",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

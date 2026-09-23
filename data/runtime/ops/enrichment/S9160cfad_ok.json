@@ -1,0 +1,137 @@
+{
+ "label": "S9160cfad",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6bbc5ec68b03aec1958784137a379d9e4061b7339d040df2f57232660b59108a",
+ "tokens": {
+  "input_tokens": 2230,
+  "output_tokens": 675,
+  "total_tokens": 2905
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得石油收入因油价上涨或增逾4000亿中非法郎预算外收入",
+   "summary_zh": "乍得2026年预算基于每桶65美元的保守油价假设，而当前布伦特原油价格约为每桶100美元，据称主要受中东战争及霍尔木兹海峡受阻紧张局势推动。按日产量约10万桶估算，这一每桶35美元的价差理论上可带来每年逾12.7亿美元的额外收入，按石油公共份额60%至70%计算，国家潜在额外收入约为4200亿至4800亿中非法郎。报道质疑该政权将如何使用这笔资金。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "Correspondance particulière TchadOne à N’Djamena."
+   },
+   "key_facts": [
+    {
+     "fact": "乍得2026年预算基于每桶65美元的保守油价假设",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le budget tchadien pour 2026 a été construit sur une hypothèse prudente d’un baril de pétrole à 65 dollars."
+    },
+    {
+     "fact": "当前布伦特原油价格约为每桶100美元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "sur les marchés internationaux, le Brent évolue actuellement autour de 100 dollars le baril"
+    },
+    {
+     "fact": "油价上涨据称主要由中东战争及霍尔木兹海峡受阻紧张局势推动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une flambée largement provoquée par la guerre en cours au Moyen-Orient et les tensions sur un détroit d’Ormouz bloqué"
+    },
+    {
+     "fact": "按日产量约10万桶估算，价差理论上可带来每年逾12.7亿美元额外收入",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Avec une production estimée autour de 100 000 barils par jour, cet écart représente théoriquement plus de 1,27 milliard de dollars supplémentaires par an."
+    },
+    {
+     "fact": "按石油公共份额60%至70%计算，国家潜在额外收入约为4200亿至4800亿中非法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cela correspond à environ 420 à 480 milliards de FCFA de recettes additionnelles potentielles pour l’État"
+    },
+    {
+     "fact": "报道质疑该政权将如何使用这笔石油收入",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Que va faire le régime de tout cet argent ? Acheter de nouvelles armes comme par le passé, ou lancer encore quelques grands projets fantaisistes devenus les canaux habituels de détournement des milliards publics ?"
+    }
+   ],
+   "uncertainties": [
+    "额外石油收入为理论估算，尚未获得官方确认",
+    "油价上涨归因于中东战争及霍尔木兹海峡受阻为报道说法，未获独立证实",
+    "该报道为单一来源（TchadOne），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得石油收入因油价上涨或增逾4000亿中非法郎预算外收入",
+   "summary_zh": "乍得2026年预算基于每桶65美元的保守油价假设，而当前布伦特原油价格约为每桶100美元，据称主要受中东战争及霍尔木兹海峡受阻紧张局势推动。按日产量约10万桶估算，这一每桶35美元的价差理论上可带来每年逾12.7亿美元的额外收入，按石油公共份额60%至70%计算，国家潜在额外收入约为4200亿至4800亿中非法郎。报道质疑该政权将如何使用这笔资金。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "Correspondance particulière TchadOne à N’Djamena."
+   },
+   "key_facts": [
+    {
+     "fact": "乍得2026年预算基于每桶65美元的保守油价假设",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le budget tchadien pour 2026 a été construit sur une hypothèse prudente d’un baril de pétrole à 65 dollars."
+    },
+    {
+     "fact": "当前布伦特原油价格约为每桶100美元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "sur les marchés internationaux, le Brent évolue actuellement autour de 100 dollars le baril"
+    },
+    {
+     "fact": "油价上涨据称主要由中东战争及霍尔木兹海峡受阻紧张局势推动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une flambée largement provoquée par la guerre en cours au Moyen-Orient et les tensions sur un détroit d’Ormouz bloqué"
+    },
+    {
+     "fact": "按日产量约10万桶估算，价差理论上可带来每年逾12.7亿美元额外收入",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Avec une production estimée autour de 100 000 barils par jour, cet écart représente théoriquement plus de 1,27 milliard de dollars supplémentaires par an."
+    },
+    {
+     "fact": "按石油公共份额60%至70%计算，国家潜在额外收入约为4200亿至4800亿中非法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cela correspond à environ 420 à 480 milliards de FCFA de recettes additionnelles potentielles pour l’État"
+    },
+    {
+     "fact": "报道质疑该政权将如何使用这笔石油收入",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Que va faire le régime de tout cet argent ? Acheter de nouvelles armes comme par le passé, ou lancer encore quelques grands projets fantaisistes devenus les canaux habituels de détournement des milliards publics ?"
+    }
+   ],
+   "uncertainties": [
+    "额外石油收入为理论估算，尚未获得官方确认",
+    "油价上涨归因于中东战争及霍尔木兹海峡受阻为报道说法，未获独立证实",
+    "该报道为单一来源（TchadOne），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_864367759160cfad",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

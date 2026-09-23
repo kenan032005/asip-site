@@ -1,0 +1,129 @@
+{
+ "label": "S03d0d1b7",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "813ce18bcd6dc78a4cfff3f956b5cc4b904844a3fa314798d0745f5d223597d1",
+ "tokens": {
+  "input_tokens": 2343,
+  "output_tokens": 618,
+  "total_tokens": 2961
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "索马里惩教部队前指挥官称其住所遭F-16战机空袭",
+   "summary_zh": "索马里惩教部队前指挥官马哈德·阿卜迪拉赫曼·阿丹（绰号“舒布指挥官”）就其位于盖多州多洛区的住所遭袭事件提供新说法，声称袭击由一架F-16战机实施。他否认哈桑·谢赫·马哈茂德政府关于爆炸系屋内制造爆炸装置所致的说法，并指控其前司机引导了此次空袭。关于袭击责任方，各方说法不一，哈桑·谢赫政府否认参与，而西南部当局等方坚称该住所被直接击中。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SOM",
+   "location": {
+    "country_iso3": "SOM",
+    "admin1": "盖多州",
+    "city": "多洛区",
+    "site": "舒布指挥官住所",
+    "raw_text": "Dolow district of the Gedo region"
+   },
+   "key_facts": [
+    {
+     "fact": "索马里惩教部队前指挥官舒布称其多洛区住所遭F-16战机空袭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Commander Shub stated that the attack on his residence was carried out by an F-16 fighter jet"
+    },
+    {
+     "fact": "舒布否认哈桑·谢赫政府关于爆炸系屋内制造爆炸装置所致的说法",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "he vehemently rejected claims made by the administration of Hassan Sheikh Mohamud—whose constitutional term has expired—alleging that the explosion was caused by explosive devices being manufactured inside the house"
+    },
+    {
+     "fact": "舒布指控其前司机引导了此次空袭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the driver who used to drive his vehicle was behind the airstrike on Dolow, alleging that the driver had guided the attack"
+    },
+    {
+     "fact": "哈桑·谢赫政府否认参与袭击，西南部当局等方坚称住所被直接击中",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Hassan Sheikh's government—whose mandate has expired—denied involvement in the attack, while the Southwest administration and other parties insist that the house was directly targeted"
+    },
+    {
+     "fact": "事件发生于2026年9月18日",
+     "evidence_field": "event_time",
+     "evidence_excerpt": "2026-09-18T22:39:13Z"
+    }
+   ],
+   "uncertainties": [
+    "袭击责任方说法不一，哈桑·谢赫政府否认参与，西南部当局等方坚称住所被直接击中",
+    "舒布关于F-16战机实施空袭及前司机引导袭击的说法尚未获独立证实",
+    "爆炸原因存在冲突说法：舒布称系空袭，哈桑·谢赫政府称系屋内制造爆炸装置",
+    "目前仅单一来源（Somaliland Standard）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "索马里惩教部队前指挥官称其住所遭F-16战机空袭",
+   "summary_zh": "索马里惩教部队前指挥官马哈德·阿卜迪拉赫曼·阿丹（绰号“舒布指挥官”）就其位于盖多州多洛区的住所遭袭事件提供新说法，声称袭击由一架F-16战机实施。他否认哈桑·谢赫·马哈茂德政府关于爆炸系屋内制造爆炸装置所致的说法，并指控其前司机引导了此次空袭。关于袭击责任方，各方说法不一，哈桑·谢赫政府否认参与，而西南部当局等方坚称该住所被直接击中。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SOM",
+   "location": {
+    "country_iso3": "SOM",
+    "admin1": "盖多州",
+    "city": "多洛区",
+    "site": "舒布指挥官住所",
+    "raw_text": "Dolow district of the Gedo region"
+   },
+   "key_facts": [
+    {
+     "fact": "索马里惩教部队前指挥官舒布称其多洛区住所遭F-16战机空袭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Commander Shub stated that the attack on his residence was carried out by an F-16 fighter jet"
+    },
+    {
+     "fact": "舒布否认哈桑·谢赫政府关于爆炸系屋内制造爆炸装置所致的说法",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "he vehemently rejected claims made by the administration of Hassan Sheikh Mohamud—whose constitutional term has expired—alleging that the explosion was caused by explosive devices being manufactured inside the house"
+    },
+    {
+     "fact": "舒布指控其前司机引导了此次空袭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the driver who used to drive his vehicle was behind the airstrike on Dolow, alleging that the driver had guided the attack"
+    },
+    {
+     "fact": "哈桑·谢赫政府否认参与袭击，西南部当局等方坚称住所被直接击中",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Hassan Sheikh's government—whose mandate has expired—denied involvement in the attack, while the Southwest administration and other parties insist that the house was directly targeted"
+    },
+    {
+     "fact": "事件发生于2026年9月18日",
+     "evidence_field": "event_time",
+     "evidence_excerpt": "2026-09-18T22:39:13Z"
+    }
+   ],
+   "uncertainties": [
+    "袭击责任方说法不一，哈桑·谢赫政府否认参与，西南部当局等方坚称住所被直接击中",
+    "舒布关于F-16战机实施空袭及前司机引导袭击的说法尚未获独立证实",
+    "爆炸原因存在冲突说法：舒布称系空袭，哈桑·谢赫政府称系屋内制造爆炸装置",
+    "目前仅单一来源（Somaliland Standard）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_79e9ff5b03d0d1b7",
+ "disease_event_id": null,
+ "country_code": "SO"
+}

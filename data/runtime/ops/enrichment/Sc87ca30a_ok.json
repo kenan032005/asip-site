@@ -1,0 +1,138 @@
+{
+ "label": "Sc87ca30a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "8014f4b83525fc0564b9d8c54447b5a3e1cee4aa7e515ba5a19891566c710f06",
+ "tokens": {
+  "input_tokens": 2847,
+  "output_tokens": 732,
+  "total_tokens": 3579
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"事故原因（超速与机械故障）为警方初步信息，尚未最终确认\", \"调查仍在进行，停职不等于对个人责任的最终结论\", \"超载车辆如何通过多个检查站的具体情况尚待调查澄清\"]",
+    "after": "[\"事故原因（超速与机械故障）为警方初步信息，尚未最终确认\", \"调查仍在进行，停职不等于对个人责任的最终结论\", \"超载车辆如何通过多个检查站的具体情况尚待调查澄清\", \"据O País报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克警方在扎瓦拉24人死亡事故后停职交通警员",
+   "summary_zh": "莫桑比克共和国警察（PRM）暂停了在EN1公路萨韦河至伊尼亚里梅称重站之间路段执勤的所有交通警察。此前一辆核定载客15人的小巴实际载有24人，在未被查出超载的情况下通过多个检查站，随后在扎瓦拉与一辆国防军卡车正面相撞，车上24人全部死亡。警方称已成立调查组，调查期间相关警员被停职，以查明超载车辆为何未被拦截。",
+   "event_type": "transport_disruption",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "Inhambane",
+    "city": "Zavala",
+    "site": "Estrada Nacional Número Um (EN1)",
+    "raw_text": "Estrada Nacional Número Um, entre o Rio Save e a Báscula de Inharrime, em Inhambane; Zavala"
+   },
+   "key_facts": [
+    {
+     "fact": "莫桑比克共和国警察暂停了EN1公路萨韦河至伊尼亚里梅称重站之间路段执勤的交通警察",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A Polícia da República de Moçambique suspendeu todos os agentes da Polícia de Trânsito que se encontravam de serviço nos postos de fiscalização rodoviária ao longo da Estrada Nacional Número Um, entre o Rio Save e a Báscula de Inharrime, em Inhambane."
+    },
+    {
+     "fact": "一辆核定载客15人的小巴实际载有24人，在未被查出超载的情况下通过多个检查站",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "um semi-colectivo, autorizado a transportar 15 passageiros, ter conseguido percorrer parte da província com 24 pessoas a bordo sem que o excesso de lotação fosse detectado"
+    },
+    {
+     "fact": "该车在扎瓦拉与一辆国防军卡车正面相撞，车上24人全部死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Todos os ocupantes morreram na colisão frontal com um camião das Forças Armadas, em Zavala."
+    },
+    {
+     "fact": "警方初步信息称超速和机械故障是事故原因，机械异常在军用卡车上被发现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "As informações preliminares divulgadas pela PRM apontam velocidade excessiva aliada a deficiências mecânicas entre as causas do acidente, tendo a Polícia indicado que as anomalias mecânicas foram detectadas no camião militar."
+    },
+    {
+     "fact": "警方发言人表示已成立调查组，调查期间相关警员被停职",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "foi constituída uma equipa de inquérito que vai trabalhar e, enquanto trabalha a equipa de inquérito, os membros que estavam nos postos de fiscalização foram todos suspensos"
+    }
+   ],
+   "uncertainties": [
+    "事故原因（超速与机械故障）为警方初步信息，尚未最终确认",
+    "调查仍在进行，停职不等于对个人责任的最终结论",
+    "超载车辆如何通过多个检查站的具体情况尚待调查澄清"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克警方在扎瓦拉24人死亡事故后停职交通警员",
+   "summary_zh": "莫桑比克共和国警察（PRM）暂停了在EN1公路萨韦河至伊尼亚里梅称重站之间路段执勤的所有交通警察。此前一辆核定载客15人的小巴实际载有24人，在未被查出超载的情况下通过多个检查站，随后在扎瓦拉与一辆国防军卡车正面相撞，车上24人全部死亡。警方称已成立调查组，调查期间相关警员被停职，以查明超载车辆为何未被拦截。",
+   "event_type": "transport_disruption",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "Inhambane",
+    "city": "Zavala",
+    "site": "Estrada Nacional Número Um (EN1)",
+    "raw_text": "Estrada Nacional Número Um, entre o Rio Save e a Báscula de Inharrime, em Inhambane; Zavala"
+   },
+   "key_facts": [
+    {
+     "fact": "莫桑比克共和国警察暂停了EN1公路萨韦河至伊尼亚里梅称重站之间路段执勤的交通警察",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A Polícia da República de Moçambique suspendeu todos os agentes da Polícia de Trânsito que se encontravam de serviço nos postos de fiscalização rodoviária ao longo da Estrada Nacional Número Um, entre o Rio Save e a Báscula de Inharrime, em Inhambane."
+    },
+    {
+     "fact": "一辆核定载客15人的小巴实际载有24人，在未被查出超载的情况下通过多个检查站",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "um semi-colectivo, autorizado a transportar 15 passageiros, ter conseguido percorrer parte da província com 24 pessoas a bordo sem que o excesso de lotação fosse detectado"
+    },
+    {
+     "fact": "该车在扎瓦拉与一辆国防军卡车正面相撞，车上24人全部死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Todos os ocupantes morreram na colisão frontal com um camião das Forças Armadas, em Zavala."
+    },
+    {
+     "fact": "警方初步信息称超速和机械故障是事故原因，机械异常在军用卡车上被发现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "As informações preliminares divulgadas pela PRM apontam velocidade excessiva aliada a deficiências mecânicas entre as causas do acidente, tendo a Polícia indicado que as anomalias mecânicas foram detectadas no camião militar."
+    },
+    {
+     "fact": "警方发言人表示已成立调查组，调查期间相关警员被停职",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "foi constituída uma equipa de inquérito que vai trabalhar e, enquanto trabalha a equipa de inquérito, os membros que estavam nos postos de fiscalização foram todos suspensos"
+    }
+   ],
+   "uncertainties": [
+    "事故原因（超速与机械故障）为警方初步信息，尚未最终确认",
+    "调查仍在进行，停职不等于对个人责任的最终结论",
+    "超载车辆如何通过多个检查站的具体情况尚待调查澄清",
+    "据O País报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_f130c93bc87ca30a",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

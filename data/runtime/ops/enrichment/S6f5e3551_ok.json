@@ -1,0 +1,105 @@
+{
+ "label": "S6f5e3551",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "141001dbce03ae06f32e20a6ccb6c0c70d8f0e11e0ef2ebbf02c342015c55596",
+ "tokens": {
+  "input_tokens": 1974,
+  "output_tokens": 333,
+  "total_tokens": 2307
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "肯尼亚鲁艾土地纠纷引发警民冲突 警方执行驱逐令",
+   "summary_zh": "肯尼亚内罗毕鲁艾地区因土地纠纷爆发警民冲突，警方试图执行驱逐令，将一名声称在该地块居住34年的寡妇迁出。当地居民聚集现场进行抵抗。该寡妇表示已在该争议土地上生活超过三十年，并对驱逐行动提出质疑。",
+   "event_type": "armed_conflict",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": "内罗毕",
+    "city": "鲁艾",
+    "site": null,
+    "raw_text": "Ruai, Nairobi, Kenya"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚鲁艾地区警方与居民因土地纠纷发生冲突",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Ruai Land Dispute Turns Chaotic as Police, Residents Clash Over Eviction"
+    },
+    {
+     "fact": "警方试图执行驱逐令，引发居民抵抗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The confrontation occurred as police attempted to enforce an eviction order involving the parcel, triggering resistance from residents who gathered at the scene."
+    },
+    {
+     "fact": "一名寡妇声称在该争议土地上居住超过34年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The widow, Wanjiru, said she has lived on the disputed land for more than three decades and questioned the move to remove her from the property."
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源报道，尚未获得交叉验证",
+    "伤亡情况尚未确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "肯尼亚鲁艾土地纠纷引发警民冲突 警方执行驱逐令",
+   "summary_zh": "肯尼亚内罗毕鲁艾地区因土地纠纷爆发警民冲突，警方试图执行驱逐令，将一名声称在该地块居住34年的寡妇迁出。当地居民聚集现场进行抵抗。该寡妇表示已在该争议土地上生活超过三十年，并对驱逐行动提出质疑。",
+   "event_type": "armed_conflict",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": "内罗毕",
+    "city": "鲁艾",
+    "site": null,
+    "raw_text": "Ruai, Nairobi, Kenya"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚鲁艾地区警方与居民因土地纠纷发生冲突",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Ruai Land Dispute Turns Chaotic as Police, Residents Clash Over Eviction"
+    },
+    {
+     "fact": "警方试图执行驱逐令，引发居民抵抗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The confrontation occurred as police attempted to enforce an eviction order involving the parcel, triggering resistance from residents who gathered at the scene."
+    },
+    {
+     "fact": "一名寡妇声称在该争议土地上居住超过34年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The widow, Wanjiru, said she has lived on the disputed land for more than three decades and questioned the move to remove her from the property."
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源报道，尚未获得交叉验证",
+    "伤亡情况尚未确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_246aa8e26f5e3551",
+ "disease_event_id": null,
+ "country_code": "KE"
+}

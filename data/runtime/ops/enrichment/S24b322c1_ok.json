@@ -1,0 +1,116 @@
+{
+ "label": "S24b322c1",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "804ad03d6ae1440bb34f5627520f719606457842cc1e05fa39aa84cd26aec77e",
+ "tokens": {
+  "input_tokens": 2466,
+  "output_tokens": 350,
+  "total_tokens": 2816
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"运动的具体组织者与资金来源尚未明确\", \"批评者所指的西方影响程度未获证实\"]",
+    "after": "[\"运动的具体组织者与资金来源尚未明确\", \"批评者所指的西方影响程度未获证实\", \"据Ethiopia Insight报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "#ትሰማ 运动揭示埃塞俄比亚文化权力之争",
+   "summary_zh": "埃塞俄比亚一场反对性别暴力的运动#ትሰማ（意为“让她被听见”）引发更广泛的文化辩论。该运动关注针对妇女和女童的暴力案件，呼吁政府将其视为国家危机并推动机构问责。批评者则担忧该运动与受西方社会规范影响的文化变革相关。",
+   "event_type": "civil_unrest",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Ethiopia"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚爆发反对性别暴力的#ትሰማ运动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The ongoing campaign #ትሰማ has emerged in Ethiopia at the intersection of two difficult questions"
+    },
+    {
+     "fact": "该运动呼吁政府将针对妇女和女童的暴力视为国家危机",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It urges the Ethiopian government to recognize violence against women and girls, including femicide and sexual violence, as a national crisis"
+    },
+    {
+     "fact": "批评者担忧该运动与受西方社会规范影响的文化变革相关",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Critics, however, hear gender-justice language alongside debates about feminism, sexuality, and gender identity"
+    }
+   ],
+   "uncertainties": [
+    "运动的具体组织者与资金来源尚未明确",
+    "批评者所指的西方影响程度未获证实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "#ትሰማ 运动揭示埃塞俄比亚文化权力之争",
+   "summary_zh": "埃塞俄比亚一场反对性别暴力的运动#ትሰማ（意为“让她被听见”）引发更广泛的文化辩论。该运动关注针对妇女和女童的暴力案件，呼吁政府将其视为国家危机并推动机构问责。批评者则担忧该运动与受西方社会规范影响的文化变革相关。",
+   "event_type": "civil_unrest",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Ethiopia"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚爆发反对性别暴力的#ትሰማ运动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The ongoing campaign #ትሰማ has emerged in Ethiopia at the intersection of two difficult questions"
+    },
+    {
+     "fact": "该运动呼吁政府将针对妇女和女童的暴力视为国家危机",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It urges the Ethiopian government to recognize violence against women and girls, including femicide and sexual violence, as a national crisis"
+    },
+    {
+     "fact": "批评者担忧该运动与受西方社会规范影响的文化变革相关",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Critics, however, hear gender-justice language alongside debates about feminism, sexuality, and gender identity"
+    }
+   ],
+   "uncertainties": [
+    "运动的具体组织者与资金来源尚未明确",
+    "批评者所指的西方影响程度未获证实",
+    "据Ethiopia Insight报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_b737919a24b322c1",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

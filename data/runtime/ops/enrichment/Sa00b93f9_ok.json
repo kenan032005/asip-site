@@ -1,0 +1,136 @@
+{
+ "label": "Sa00b93f9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "96d466501796a7a9fd3fab809c9114934d80bd2ab47c9ee444185591001d1096",
+ "tokens": {
+  "input_tokens": 2507,
+  "output_tokens": 557,
+  "total_tokens": 3064
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"幸存者对应急响应迟缓的指控尚未得到官方证实\", \"火灾具体原因尚未确认\"]",
+    "after": "[\"幸存者对应急响应迟缓的指控尚未得到官方证实\", \"火灾具体原因尚未确认\", \"据Daily Trust报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚拉各斯高楼火灾致10人死亡，幸存者指应急响应迟缓",
+   "summary_zh": "尼日利亚拉各斯岛布罗德街一栋六层建筑发生火灾，死亡人数已升至10人。多名幸存者向《每日信报》表示，应急响应迟缓且不足，首批救援人员为当地青年。安全专业人士呼吁加强高层建筑消防管理与人员培训。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "拉各斯州",
+    "city": "拉各斯",
+    "site": "布罗德街Afriland Towers",
+    "raw_text": "Afriland Towers, Broad Street, Lagos Island"
+   },
+   "key_facts": [
+    {
+     "fact": "拉各斯岛布罗德街一栋六层建筑发生火灾，死亡人数升至10人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Survivors of the Tuesday’s fire outbreak at Afriland Towers in Lagos have blamed the incident on slow emergency response. This is just as has the death toll has risen to ten. The six-storey building, located on Broad Street, Lagos Island, houses several corporate offices."
+    },
+    {
+     "fact": "United Capital Plc确认其6名员工在火灾中死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "United Capital Plc, which occupies the third and fourth floors of the building, confirmed on Thursday that six of its employees died in the incident."
+    },
+    {
+     "fact": "联邦税务局确认2名助理主任和2名经理在火灾中死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Federal Internal Revenue Service (FIRS) had confirmed that it lost two assistant directors and two managers to the incident."
+    },
+    {
+     "fact": "幸存者指称应急响应迟缓且不足",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Some of the survivors of the incident, who spoke to Daily Trust yesterday, described the emergency response as “slow and inadequate.” They alleged that the initial response to the fire was woefully “inadequate”, saying that emergency services took too long to arrive at the scene."
+    },
+    {
+     "fact": "安全专业人士呼吁加强高层建筑消防管理与人员培训",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the chairman of the Institute of Safety Professionals of Nigeria (ISPON), Olusola Ogunleye, stressed the need to prepare for emerging realities in high-rise building maintenance with the fast-paced adoption of alternative energy sources."
+    }
+   ],
+   "uncertainties": [
+    "幸存者对应急响应迟缓的指控尚未得到官方证实",
+    "火灾具体原因尚未确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚拉各斯高楼火灾致10人死亡，幸存者指应急响应迟缓",
+   "summary_zh": "尼日利亚拉各斯岛布罗德街一栋六层建筑发生火灾，死亡人数已升至10人。多名幸存者向《每日信报》表示，应急响应迟缓且不足，首批救援人员为当地青年。安全专业人士呼吁加强高层建筑消防管理与人员培训。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "拉各斯州",
+    "city": "拉各斯",
+    "site": "布罗德街Afriland Towers",
+    "raw_text": "Afriland Towers, Broad Street, Lagos Island"
+   },
+   "key_facts": [
+    {
+     "fact": "拉各斯岛布罗德街一栋六层建筑发生火灾，死亡人数升至10人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Survivors of the Tuesday’s fire outbreak at Afriland Towers in Lagos have blamed the incident on slow emergency response. This is just as has the death toll has risen to ten. The six-storey building, located on Broad Street, Lagos Island, houses several corporate offices."
+    },
+    {
+     "fact": "United Capital Plc确认其6名员工在火灾中死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "United Capital Plc, which occupies the third and fourth floors of the building, confirmed on Thursday that six of its employees died in the incident."
+    },
+    {
+     "fact": "联邦税务局确认2名助理主任和2名经理在火灾中死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Federal Internal Revenue Service (FIRS) had confirmed that it lost two assistant directors and two managers to the incident."
+    },
+    {
+     "fact": "幸存者指称应急响应迟缓且不足",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Some of the survivors of the incident, who spoke to Daily Trust yesterday, described the emergency response as “slow and inadequate.” They alleged that the initial response to the fire was woefully “inadequate”, saying that emergency services took too long to arrive at the scene."
+    },
+    {
+     "fact": "安全专业人士呼吁加强高层建筑消防管理与人员培训",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the chairman of the Institute of Safety Professionals of Nigeria (ISPON), Olusola Ogunleye, stressed the need to prepare for emerging realities in high-rise building maintenance with the fast-paced adoption of alternative energy sources."
+    }
+   ],
+   "uncertainties": [
+    "幸存者对应急响应迟缓的指控尚未得到官方证实",
+    "火灾具体原因尚未确认",
+    "据Daily Trust报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_fdf8a869a00b93f9",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

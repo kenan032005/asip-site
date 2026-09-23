@@ -1,0 +1,117 @@
+{
+ "label": "Sb4349063",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1c949e427666afb26573da77542d1a68227fc60cff4fa5fd3f2c4fc46c230abd",
+ "tokens": {
+  "input_tokens": 2295,
+  "output_tokens": 480,
+  "total_tokens": 2775
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹湖泊州政府与合作伙伴将开展作物歉收评估",
+   "summary_zh": "南苏丹湖泊州政府与救济与恢复委员会在伦拜克召开协调会议，讨论因长期干旱导致作物歉收而可能出现的饥荒问题。会议决定派遣技术团队前往受灾地区进行评估，并计划对全部八个县进行旱情影响评估。据称会议还通过了宣布湖泊州紧急饥荒警报的新闻稿。",
+   "event_type": "natural_disaster",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "湖泊州",
+    "city": "伦拜克",
+    "site": null,
+    "raw_text": "Lakes State, Rumbek"
+   },
+   "key_facts": [
+    {
+     "fact": "湖泊州政府与救济与恢复委员会在伦拜克召开协调会议，讨论干旱导致的作物歉收与饥荒问题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Government of Lakes State, in collaboration with the South Sudan Relief and Rehabilitation Commission (RRC) in Rumbek, on Thursday held a coordination meeting with humanitarian partners over looming hunger due to crop failure occasioned by prolonged drought across Lakes State."
+    },
+    {
+     "fact": "会议决定派遣技术团队前往受灾地区评估损失，以便人道主义伙伴介入",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "We need to take the step so that the partners and RRC will send the technical teams on the ground to assess and see the damage in the affected areas so that we can see how the NGOs and humanitarian partners will intervene"
+    },
+    {
+     "fact": "湖泊州全部八个县都将接受旱情影响评估",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "All eight counties will be assessed to see the impact of the dry spell."
+    },
+    {
+     "fact": "会议据称通过新闻稿宣布湖泊州进入紧急饥荒警报状态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "we resolved many things, including the press release declaring the emergency hunger alert in Lakes State"
+    }
+   ],
+   "uncertainties": [
+    "作物歉收与饥荒影响的具体数据尚未经评估确认",
+    "宣布紧急饥荒警报的新闻稿内容尚未获独立证实",
+    "目前仅有一个来源（Radio Tamazuj）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹湖泊州政府与合作伙伴将开展作物歉收评估",
+   "summary_zh": "南苏丹湖泊州政府与救济与恢复委员会在伦拜克召开协调会议，讨论因长期干旱导致作物歉收而可能出现的饥荒问题。会议决定派遣技术团队前往受灾地区进行评估，并计划对全部八个县进行旱情影响评估。据称会议还通过了宣布湖泊州紧急饥荒警报的新闻稿。",
+   "event_type": "natural_disaster",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "湖泊州",
+    "city": "伦拜克",
+    "site": null,
+    "raw_text": "Lakes State, Rumbek"
+   },
+   "key_facts": [
+    {
+     "fact": "湖泊州政府与救济与恢复委员会在伦拜克召开协调会议，讨论干旱导致的作物歉收与饥荒问题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Government of Lakes State, in collaboration with the South Sudan Relief and Rehabilitation Commission (RRC) in Rumbek, on Thursday held a coordination meeting with humanitarian partners over looming hunger due to crop failure occasioned by prolonged drought across Lakes State."
+    },
+    {
+     "fact": "会议决定派遣技术团队前往受灾地区评估损失，以便人道主义伙伴介入",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "We need to take the step so that the partners and RRC will send the technical teams on the ground to assess and see the damage in the affected areas so that we can see how the NGOs and humanitarian partners will intervene"
+    },
+    {
+     "fact": "湖泊州全部八个县都将接受旱情影响评估",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "All eight counties will be assessed to see the impact of the dry spell."
+    },
+    {
+     "fact": "会议据称通过新闻稿宣布湖泊州进入紧急饥荒警报状态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "we resolved many things, including the press release declaring the emergency hunger alert in Lakes State"
+    }
+   ],
+   "uncertainties": [
+    "作物歉收与饥荒影响的具体数据尚未经评估确认",
+    "宣布紧急饥荒警报的新闻稿内容尚未获独立证实",
+    "目前仅有一个来源（Radio Tamazuj）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_ad69b83eb4349063",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

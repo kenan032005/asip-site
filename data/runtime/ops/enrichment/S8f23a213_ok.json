@@ -1,0 +1,126 @@
+{
+ "label": "S8f23a213",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f657fad5fc184f2832a57daa615241cc34969a84d1b8a2d47a9055c04eabb13d",
+ "tokens": {
+  "input_tokens": 2354,
+  "output_tokens": 509,
+  "total_tokens": 2863
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"事件信息目前仅来自单一来源（Daily Trust），尚未获得独立交叉验证\", \"军方声明中关于行动细节的表述尚未经其他来源证实\"]",
+    "after": "[\"事件信息目前仅来自单一来源（Daily Trust），尚未获得独立交叉验证\", \"军方声明中关于行动细节的表述尚未经其他来源证实\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚军方在卡杜纳和卡齐纳解救被绑架人员",
+   "summary_zh": "尼日利亚西北联合特遣部队“Fansan Yamma”行动部队在卡杜纳州和卡齐纳州分别开展行动，解救六名被绑架人员。军方称行动依据情报线索并回应求救呼叫，于9月17日实施。相关行动还包括在卡杜纳-比尔宁瓜里公路查获一名涉嫌贩毒人员，以及在索科托州击退恐怖分子袭击并解救两名被绑架人员。",
+   "event_type": "terrorism",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "卡杜纳州、卡齐纳州",
+    "city": null,
+    "site": null,
+    "raw_text": "Kaduna and Katsina states"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚军方在卡杜纳州和卡齐纳州解救六名被绑架人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Troops of the Joint Task Force North-West, Operation Fansan Yamma, have rescued six kidnapped victims during separate operations in Kaduna and Katsina states."
+    },
+    {
+     "fact": "军方称行动依据情报线索并回应求救呼叫，于9月17日实施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The victims were rescued on Thursday, September 17, following intelligence-led operations and responses to distress calls in the two states."
+    },
+    {
+     "fact": "在卡杜纳-比尔宁瓜里公路查获一名涉嫌贩毒人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "troops of Sector 1, conducting a stop-and-search operation along the Kaduna-Birnin Gwari road, intercepted Yohana Musa in possession of a large quantity of illicit drugs and substances"
+    },
+    {
+     "fact": "在索科托州击退恐怖分子袭击并解救两名被绑架人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "troops of Sector 2 responded to a distress call following a terrorist attack at Unguwan Lalle in Sabon Birni Local Government Area of Sokoto State... rescuing two kidnapped victims in the process"
+    }
+   ],
+   "uncertainties": [
+    "事件信息目前仅来自单一来源（Daily Trust），尚未获得独立交叉验证",
+    "军方声明中关于行动细节的表述尚未经其他来源证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚军方在卡杜纳和卡齐纳解救被绑架人员",
+   "summary_zh": "尼日利亚西北联合特遣部队“Fansan Yamma”行动部队在卡杜纳州和卡齐纳州分别开展行动，解救六名被绑架人员。军方称行动依据情报线索并回应求救呼叫，于9月17日实施。相关行动还包括在卡杜纳-比尔宁瓜里公路查获一名涉嫌贩毒人员，以及在索科托州击退恐怖分子袭击并解救两名被绑架人员。",
+   "event_type": "terrorism",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "卡杜纳州、卡齐纳州",
+    "city": null,
+    "site": null,
+    "raw_text": "Kaduna and Katsina states"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚军方在卡杜纳州和卡齐纳州解救六名被绑架人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Troops of the Joint Task Force North-West, Operation Fansan Yamma, have rescued six kidnapped victims during separate operations in Kaduna and Katsina states."
+    },
+    {
+     "fact": "军方称行动依据情报线索并回应求救呼叫，于9月17日实施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The victims were rescued on Thursday, September 17, following intelligence-led operations and responses to distress calls in the two states."
+    },
+    {
+     "fact": "在卡杜纳-比尔宁瓜里公路查获一名涉嫌贩毒人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "troops of Sector 1, conducting a stop-and-search operation along the Kaduna-Birnin Gwari road, intercepted Yohana Musa in possession of a large quantity of illicit drugs and substances"
+    },
+    {
+     "fact": "在索科托州击退恐怖分子袭击并解救两名被绑架人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "troops of Sector 2 responded to a distress call following a terrorist attack at Unguwan Lalle in Sabon Birni Local Government Area of Sokoto State... rescuing two kidnapped victims in the process"
+    }
+   ],
+   "uncertainties": [
+    "事件信息目前仅来自单一来源（Daily Trust），尚未获得独立交叉验证",
+    "军方声明中关于行动细节的表述尚未经其他来源证实",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_3a8d3d138f23a213",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

@@ -1,0 +1,117 @@
+{
+ "label": "S22f18fa5",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ffea3e34dea5b9c040a2d05f25e43b8c0bad880684a15d970011daa77ce9212e",
+ "tokens": {
+  "input_tokens": 2417,
+  "output_tokens": 527,
+  "total_tokens": 2944
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克N1公路发生严重车祸致至少24人死亡，总统查波表示哀悼",
+   "summary_zh": "莫桑比克总统丹尼尔·查波对发生在伊尼扬巴内省扎瓦拉区N1国道上的严重交通事故表示深切哀悼。该事故发生于周四夜间，一辆客运车辆与一辆卡车正面相撞，造成至少24人死亡。查波呼吁司机遵守限速，并特别要求长途客运运营商避免夜间行驶。警方及有关部门正在现场调查事故确切原因并确定相关责任。",
+   "event_type": "transport_disruption",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "伊尼扬巴内省",
+    "city": "扎瓦拉区",
+    "site": "N1国道",
+    "raw_text": "Estrada Nacional Número 1 (N1), distrito de Zavala, província de Inhambane"
+   },
+   "key_facts": [
+    {
+     "fact": "莫桑比克N1国道发生客运车辆与卡车正面相撞事故，造成至少24人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "provocou a morte a pelo menos 24 pessoas na sequência de uma colisão frontal entre um veículo de transporte colectivo de passageiros e um camião"
+    },
+    {
+     "fact": "事故发生在周四夜间，地点位于伊尼扬巴内省扎瓦拉区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ocorrido na noite de quinta-feira, no distrito de Zavala, província de Inhambane"
+    },
+    {
+     "fact": "总统查波呼吁司机遵守限速，并要求长途客运运营商避免夜间行驶",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Queremos apelar para que evitemos o excesso de velocidade e a circulação nocturna, principalmente para viaturas de longo curso"
+    },
+    {
+     "fact": "警方及有关部门正在现场调查事故确切原因并确定责任",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "equipas da Polícia e demais autoridades competentes se encontram no terreno a realizar averiguações para apurar com exactidão as causas do aparatoso acidente e determinar as devidas responsabilidades"
+    }
+   ],
+   "uncertainties": [
+    "事故确切原因尚在调查中，尚未确定",
+    "相关责任尚未确定",
+    "目前仅一个来源（O País）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克N1公路发生严重车祸致至少24人死亡，总统查波表示哀悼",
+   "summary_zh": "莫桑比克总统丹尼尔·查波对发生在伊尼扬巴内省扎瓦拉区N1国道上的严重交通事故表示深切哀悼。该事故发生于周四夜间，一辆客运车辆与一辆卡车正面相撞，造成至少24人死亡。查波呼吁司机遵守限速，并特别要求长途客运运营商避免夜间行驶。警方及有关部门正在现场调查事故确切原因并确定相关责任。",
+   "event_type": "transport_disruption",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "伊尼扬巴内省",
+    "city": "扎瓦拉区",
+    "site": "N1国道",
+    "raw_text": "Estrada Nacional Número 1 (N1), distrito de Zavala, província de Inhambane"
+   },
+   "key_facts": [
+    {
+     "fact": "莫桑比克N1国道发生客运车辆与卡车正面相撞事故，造成至少24人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "provocou a morte a pelo menos 24 pessoas na sequência de uma colisão frontal entre um veículo de transporte colectivo de passageiros e um camião"
+    },
+    {
+     "fact": "事故发生在周四夜间，地点位于伊尼扬巴内省扎瓦拉区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ocorrido na noite de quinta-feira, no distrito de Zavala, província de Inhambane"
+    },
+    {
+     "fact": "总统查波呼吁司机遵守限速，并要求长途客运运营商避免夜间行驶",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Queremos apelar para que evitemos o excesso de velocidade e a circulação nocturna, principalmente para viaturas de longo curso"
+    },
+    {
+     "fact": "警方及有关部门正在现场调查事故确切原因并确定责任",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "equipas da Polícia e demais autoridades competentes se encontram no terreno a realizar averiguações para apurar com exactidão as causas do aparatoso acidente e determinar as devidas responsabilidades"
+    }
+   ],
+   "uncertainties": [
+    "事故确切原因尚在调查中，尚未确定",
+    "相关责任尚未确定",
+    "目前仅一个来源（O País）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_a151718222f18fa5",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

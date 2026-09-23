@@ -1,0 +1,115 @@
+{
+ "label": "S4e5027d7",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3ce7da25030a75f36f1f4bad544573e31cb6bc51f8bd4e98157371ebfc1c0664",
+ "tokens": {
+  "input_tokens": 2461,
+  "output_tokens": 523,
+  "total_tokens": 2984
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克政府宣布设立妇女基金并警告南部干旱影响",
+   "summary_zh": "莫桑比克政府宣布启动“Pro-Mulher”项目，为全国各区市的女企业家提供信贷和融资，并呼吁消除家庭暴力。政府同时就厄尔尼诺现象导致的干旱发出预警，计划在南部和中部地区采取打井、推广耐旱作物和养殖耐热山羊等预防措施。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "马普托省",
+    "city": null,
+    "site": null,
+    "raw_text": "província de Maputo"
+   },
+   "key_facts": [
+    {
+     "fact": "莫桑比克政府宣布启动面向女企业家的“Pro-Mulher”融资项目",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "O Governo moçambicano reafirmou o seu compromisso com o empoderamento económico da mulher através do lançamento do projecto “Pro-Mulher”, uma iniciativa financeira destinada a garantir crédito e financiamento a empreendedoras"
+    },
+    {
+     "fact": "政府就厄尔尼诺导致的南部和中部干旱发出预警并公布预防措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Foi lançado um alerta relativo às previsões meteorológicas para o próximo ciclo produtivo nas zonas Sul e Centro de Moçambique, marcadas pela escassez de precipitação decorrente do fenómeno El Niño"
+    },
+    {
+     "fact": "预防措施包括打井、推广耐旱作物、家庭菜园和养殖耐热山羊",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A abertura e reparação urgente de furos de água potável; A distribuição e incentivo ao cultivo de espécies agrícolas resistentes à aridez; A intensificação do programa “Hortas no Quintal”"
+    },
+    {
+     "fact": "马普托省社区会议上强调莫桑比克妇女的管理和储蓄能力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Durante o encontro comunitário na província de Maputo, foi destacada a capacidade natural de gestão e poupança da mulher moçambicana"
+    }
+   ],
+   "uncertainties": [
+    "干旱影响及预防措施效果尚未证实",
+    "目前仅一个来源（O País）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克政府宣布设立妇女基金并警告南部干旱影响",
+   "summary_zh": "莫桑比克政府宣布启动“Pro-Mulher”项目，为全国各区市的女企业家提供信贷和融资，并呼吁消除家庭暴力。政府同时就厄尔尼诺现象导致的干旱发出预警，计划在南部和中部地区采取打井、推广耐旱作物和养殖耐热山羊等预防措施。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "马普托省",
+    "city": null,
+    "site": null,
+    "raw_text": "província de Maputo"
+   },
+   "key_facts": [
+    {
+     "fact": "莫桑比克政府宣布启动面向女企业家的“Pro-Mulher”融资项目",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "O Governo moçambicano reafirmou o seu compromisso com o empoderamento económico da mulher através do lançamento do projecto “Pro-Mulher”, uma iniciativa financeira destinada a garantir crédito e financiamento a empreendedoras"
+    },
+    {
+     "fact": "政府就厄尔尼诺导致的南部和中部干旱发出预警并公布预防措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Foi lançado um alerta relativo às previsões meteorológicas para o próximo ciclo produtivo nas zonas Sul e Centro de Moçambique, marcadas pela escassez de precipitação decorrente do fenómeno El Niño"
+    },
+    {
+     "fact": "预防措施包括打井、推广耐旱作物、家庭菜园和养殖耐热山羊",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A abertura e reparação urgente de furos de água potável; A distribuição e incentivo ao cultivo de espécies agrícolas resistentes à aridez; A intensificação do programa “Hortas no Quintal”"
+    },
+    {
+     "fact": "马普托省社区会议上强调莫桑比克妇女的管理和储蓄能力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Durante o encontro comunitário na província de Maputo, foi destacada a capacidade natural de gestão e poupança da mulher moçambicana"
+    }
+   ],
+   "uncertainties": [
+    "干旱影响及预防措施效果尚未证实",
+    "目前仅一个来源（O País）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_3f2433304e5027d7",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

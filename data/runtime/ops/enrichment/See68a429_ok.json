@@ -1,0 +1,116 @@
+{
+ "label": "See68a429",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4b54f34e9ded60a732621fab6221aae98171d36bf4f0e492a9c357476e6852e5",
+ "tokens": {
+  "input_tokens": 2146,
+  "output_tokens": 429,
+  "total_tokens": 2575
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"事件细节目前仅来自单一来源（Tchadinfos），尚缺乏交叉验证\", \"安全部门提供的初步信息尚未获独立确认\"]",
+    "after": "[\"事件细节目前仅来自单一来源（Tchadinfos），尚缺乏交叉验证\", \"安全部门提供的初步信息尚未获独立确认\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "萨拉马特省安哈比莱副省发生偷猎者被击毙事件",
+   "summary_zh": "据初步安全消息，2026年9月22日傍晚18时左右，森林巡护人员在安哈比莱副省巡逻时发现三名偷猎者，双方发生交火，一名偷猎者死亡，另两名同伙逃脱。事件目前为单一来源报道，细节尚待核实。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "萨拉马特省",
+    "city": null,
+    "site": "安哈比莱副省",
+    "raw_text": "la sous-préfecture d’Amhabilé, Salamat"
+   },
+   "key_facts": [
+    {
+     "fact": "森林巡护人员在安哈比莱副省巡逻时发现三名偷猎者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Lors d’une patrouille effectuée ce mardi 22 septembre 2026 aux environs de 18 heures, des agents forestiers ont surpris un groupe de trois braconniers"
+    },
+    {
+     "fact": "双方交火导致一名偷猎者死亡，两名同伙逃脱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un échange de tirs a éclaté, coûtant la vie à l’un des braconniers, tandis que ses deux complices ont pris la fuite"
+    },
+    {
+     "fact": "事件地点为安哈比莱副省，消息来自安全部门初步信息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les faits se sont déroulés dans la sous-préfecture d’Amhabilé, selon les premières informations communiquées par des sources sécuritaires"
+    }
+   ],
+   "uncertainties": [
+    "事件细节目前仅来自单一来源（Tchadinfos），尚缺乏交叉验证",
+    "安全部门提供的初步信息尚未获独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "萨拉马特省安哈比莱副省发生偷猎者被击毙事件",
+   "summary_zh": "据初步安全消息，2026年9月22日傍晚18时左右，森林巡护人员在安哈比莱副省巡逻时发现三名偷猎者，双方发生交火，一名偷猎者死亡，另两名同伙逃脱。事件目前为单一来源报道，细节尚待核实。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "萨拉马特省",
+    "city": null,
+    "site": "安哈比莱副省",
+    "raw_text": "la sous-préfecture d’Amhabilé, Salamat"
+   },
+   "key_facts": [
+    {
+     "fact": "森林巡护人员在安哈比莱副省巡逻时发现三名偷猎者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Lors d’une patrouille effectuée ce mardi 22 septembre 2026 aux environs de 18 heures, des agents forestiers ont surpris un groupe de trois braconniers"
+    },
+    {
+     "fact": "双方交火导致一名偷猎者死亡，两名同伙逃脱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un échange de tirs a éclaté, coûtant la vie à l’un des braconniers, tandis que ses deux complices ont pris la fuite"
+    },
+    {
+     "fact": "事件地点为安哈比莱副省，消息来自安全部门初步信息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les faits se sont déroulés dans la sous-préfecture d’Amhabilé, selon les premières informations communiquées par des sources sécuritaires"
+    }
+   ],
+   "uncertainties": [
+    "事件细节目前仅来自单一来源（Tchadinfos），尚缺乏交叉验证",
+    "安全部门提供的初步信息尚未获独立确认",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_c1616285ee68a429",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
