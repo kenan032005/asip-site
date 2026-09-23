@@ -30,12 +30,15 @@ env:
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # C6-R5: collection_run.py 的采集墙钟预算为 2400s（兜底超时 2700s），
+    # job 级预算必须高于它，否则手动 `execute=true` 会被 job 超时截断，
+    # 拿不到采集器优雅降级后写出的统计。orchestrator job 为 60min，此处对齐为 45min。
+    timeout-minutes: 45
     steps:
       - name: Checkout production code
         uses: actions/checkout@v4
         with:
-          ref: 5691293098999e858019c534d6c756b27c033e72
+          ref: 8ce47e526cd3fc58343a193a4e1ee55670620038
           fetch-depth: 1
 
       - name: Checkout production state branch
