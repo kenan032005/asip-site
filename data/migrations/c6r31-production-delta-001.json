@@ -1,0 +1,240 @@
+{
+ "schema": "c6-r31-production-delta-migration-v1",
+ "migration_id": "c6r31-production-delta-001",
+ "generated_for": "C6-R3.1.6 Phase 3",
+ "inputs": {
+  "rc_commit": "ac365102b5105480a54129b427ac6696e070c758",
+  "production_snapshot_commit": "1bbf81116579f649f21de3ffe4ce0f89c33d24e2"
+ },
+ "parent_run_ids": [
+  "20260922T020000+0800_c6r2mg",
+  "20260802T084000+0800_084349",
+  "20260919T143000+0800_c3r2pr"
+ ],
+ "files": [
+  {
+   "path": "data/canonical/event_clusters.json",
+   "before_sha256": "853e7b4599d8ff56ca8f97f173b0b1aadeabbd16ae2fac53e7207c9d96de208b",
+   "after_sha256": "24dacce6751195ed3eec772b5b0fd15f006f626733570ae2f0879f4305f387e1",
+   "before_items": 603,
+   "after_items": 608,
+   "records_changed": {
+    "appended_new_clusters": 5,
+    "union_fields_added": 0,
+    "filled_from_production": 0,
+    "conflicting_fields_kept_rc": 119,
+    "deleted": 0,
+    "master_event_id_changed": 0,
+    "summary_overwritten": 0
+   }
+  },
+  {
+   "path": "data/canonical/quarantine.json",
+   "before_sha256": "1f03d3bc60fd1def2e87f583f7c800c37ecd503cc0bbc6ff91cc37a954631b7c",
+   "after_sha256": "abd5edd4768f4575267ce2f051136a9bf3511bf734a9550eb05002de54c0b2d9",
+   "before_items": 3175,
+   "after_items": 3351,
+   "records_changed": {
+    "appended": 176,
+    "existing_modified": 0,
+    "reason_code_mapped": 1,
+    "shape_normalized": 352,
+    "deleted": 0,
+    "new_enum_added": false
+   }
+  }
+ ],
+ "guards": {
+  "deleted": 0,
+  "master_event_id_changed": 0,
+  "summary_overwritten": 0,
+  "new_reason_enum_added": false,
+  "production_overwrite_of_rc_metadata": false
+ },
+ "detail": {
+  "appended_clusters": [
+   "EVT_c52154869b7d98ee",
+   "EVT_39a5ec419a6daab7",
+   "EVT_b79a74ea7c049738",
+   "EVT_669292e0b15609c7",
+   "EVT_8178124ac9f3d5ab"
+  ],
+  "mapped_quarantine": [
+   "Q_ba69d5d19aa4b109"
+  ],
+  "event_time_normalized": [
+   {
+    "event_id": "EVT_c52154869b7d98ee",
+    "from": "2026-09-21 20:11:14",
+    "to": "2026-09-21T20:11:14Z"
+   },
+   {
+    "event_id": "EVT_39a5ec419a6daab7",
+    "from": "2026-09-21 20:33:37",
+    "to": "2026-09-21T20:33:37Z"
+   },
+   {
+    "event_id": "EVT_b79a74ea7c049738",
+    "from": "2026-09-21 22:15:35",
+    "to": "2026-09-21T22:15:35Z"
+   },
+   {
+    "event_id": "EVT_669292e0b15609c7",
+    "from": "2026-09-22 01:09:24",
+    "to": "2026-09-22T01:09:24Z"
+   },
+   {
+    "event_id": "EVT_8178124ac9f3d5ab",
+    "from": "2026-09-22 06:13:36",
+    "to": "2026-09-22T06:13:36Z"
+   }
+  ],
+  "conflict_sample": [
+   {
+    "event_id": "EVT_01d508fb6af89675",
+    "field": "event_time",
+    "kept": "rc",
+    "rc_value": "2026-09-19T00:26:05Z",
+    "ps_value": "2026-09-19 00:26:05"
+   },
+   {
+    "event_id": "EVT_0415dca3cb99e0cd",
+    "field": "event_time",
+    "kept": "rc",
+    "rc_value": "2026-06-02T18:40:57Z",
+    "ps_value": "2026-06-02 18:40:57"
+   },
+   {
+    "event_id": "EVT_0415dca3cb99e0cd",
+    "field": "enriched_at",
+    "kept": "rc",
+    "rc_value": "2026-09-21T12:16:57Z",
+    "ps_value": "2026-09-22T02:18:27Z"
+   },
+   {
+    "event_id": "EVT_0684bc57228ed9ed",
+    "field": "event_time",
+    "kept": "rc",
+    "rc_value": "2026-09-08T01:00:00Z",
+    "ps_value": "2026-09-08 01:00:00"
+   },
+   {
+    "event_id": "EVT_0684bc57228ed9ed",
+    "field": "enriched_at",
+    "kept": "rc",
+    "rc_value": "2026-09-21T12:16:57Z",
+    "ps_value": "2026-09-22T02:18:27Z"
+   },
+   {
+    "event_id": "EVT_0aefda5a37636bb3",
+    "field": "event_time",
+    "kept": "rc",
+    "rc_value": "2026-09-12T04:12:55Z",
+    "ps_value": "2026-09-12 04:12:55"
+   },
+   {
+    "event_id": "EVT_0f85e5f42626ce7d",
+    "field": "enriched_at",
+    "kept": "rc",
+    "rc_value": "2026-09-21T12:16:57Z",
+    "ps_value": "2026-09-22T02:18:27Z"
+   },
+   {
+    "event_id": "EVT_158844fe9d222194",
+    "field": "event_time",
+    "kept": "rc",
+    "rc_value": "2026-09-17T17:34:13Z",
+    "ps_value": "2026-09-17 17:34:13"
+   },
+   {
+    "event_id": "EVT_15fee76f358f8d07",
+    "field": "enriched_at",
+    "kept": "rc",
+    "rc_value": "2026-09-21T12:16:57Z",
+    "ps_value": "2026-09-22T02:18:27Z"
+   },
+   {
+    "event_id": "EVT_16b434e7efd082d2",
+    "field": "event_time",
+    "kept": "rc",
+    "rc_value": "2026-09-16T21:30:09Z",
+    "ps_value": "2026-09-16 21:30:09"
+   },
+   {
+    "event_id": "EVT_1919d9fb24791b2f",
+    "field": "event_time",
+    "kept": "rc",
+    "rc_value": "2026-09-20T17:10:12Z",
+    "ps_value": "2026-09-20 17:10:12"
+   },
+   {
+    "event_id": "EVT_19b225708b2868d0",
+    "field": "enriched_at",
+    "kept": "rc",
+    "rc_value": "2026-09-21T12:16:58Z",
+    "ps_value": "2026-09-22T02:18:27Z"
+   },
+   {
+    "event_id": "EVT_1bb4a657d758fb78",
+    "field": "event_time",
+    "kept": "rc",
+    "rc_value": "2026-09-14T02:00:45Z",
+    "ps_value": "2026-09-14 02:00:45"
+   },
+   {
+    "event_id": "EVT_1c75a026db7edada",
+    "field": "enriched_at",
+    "kept": "rc",
+    "rc_value": "2026-09-21T12:16:57Z",
+    "ps_value": "2026-09-22T02:18:27Z"
+   },
+   {
+    "event_id": "EVT_2148d3fddc489422",
+    "field": "event_time",
+    "kept": "rc",
+    "rc_value": "2026-09-19T04:23:45Z",
+    "ps_value": "2026-09-19 04:23:45"
+   },
+   {
+    "event_id": "EVT_220f7be6cb4ec871",
+    "field": "event_time",
+    "kept": "rc",
+    "rc_value": "2026-09-17T18:42:08Z",
+    "ps_value": "2026-09-17 18:42:08"
+   },
+   {
+    "event_id": "EVT_28e41790f705fac6",
+    "field": "event_time",
+    "kept": "rc",
+    "rc_value": "2026-09-02T00:33:24Z",
+    "ps_value": "2026-09-02 00:33:24"
+   },
+   {
+    "event_id": "EVT_28e41790f705fac6",
+    "field": "enriched_at",
+    "kept": "rc",
+    "rc_value": "2026-09-21T12:16:58Z",
+    "ps_value": "2026-09-22T02:18:27Z"
+   },
+   {
+    "event_id": "EVT_2a7a1795b8fb3b67",
+    "field": "event_time",
+    "kept": "rc",
+    "rc_value": "2026-09-13T16:33:16Z",
+    "ps_value": "2026-09-13 16:33:16"
+   },
+   {
+    "event_id": "EVT_2b41ab2c9fc5c39d",
+    "field": "event_time",
+    "kept": "rc",
+    "rc_value": "2026-09-01T00:30:14Z",
+    "ps_value": "2026-09-01 00:30:14"
+   }
+  ],
+  "conflict_field_stats": {
+   "event_time": 93,
+   "enriched_at": 26
+  },
+  "filled_sample": []
+ }
+}
