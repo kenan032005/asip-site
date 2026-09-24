@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-24T22:24:09+08:00",
-  "run_id": "20260924T140541+0800_ucddq1",
+  "generated_at": "2026-09-25T04:38:57+08:00",
+  "run_id": "20260924T201547+0800_1wcifx",
   "totals": {
     "configured_sources": 101,
     "enabled_sources": 101,
@@ -10,50 +10,50 @@
     "transient_failed_then_recovered_sources": 0,
     "sources_with_items": 26,
     "sources_with_full_body": 23,
-    "sources_with_summary_only": 10,
-    "sources_with_published_events": 4,
-    "articles_discovered": 435,
-    "articles_fetched": 416,
-    "full_body_extracted": 221,
-    "partial_body_extracted": 104,
-    "rss_summary_fallback": 57,
-    "extraction_failed": 76,
-    "published_count": 4,
-    "quarantined_count": 85,
-    "duplicate_count": 46,
-    "average_fetch_time": 7.3,
+    "sources_with_summary_only": 9,
+    "sources_with_published_events": 3,
+    "articles_discovered": 433,
+    "articles_fetched": 414,
+    "full_body_extracted": 218,
+    "partial_body_extracted": 103,
+    "rss_summary_fallback": 55,
+    "extraction_failed": 81,
+    "published_count": 5,
+    "quarantined_count": 87,
+    "duplicate_count": 45,
+    "average_fetch_time": 7.6,
     "failure_reasons": {
-      "QUERY_NO_RESULT": 34,
+      "QUERY_NO_RESULT": 52,
       "OK_PRODUCTIVE": 26,
-      "HTTP_429": 26,
-      "UNKNOWN": 9,
+      "HTTP_429": 16,
       "HTTP_404": 3,
       "RSS_EMPTY": 2,
-      "HTTP_403": 1
+      "HTTP_403": 1,
+      "UNKNOWN": 1
     },
-    "sources_blocked_by_external": 30,
-    "sources_no_output_not_blocked": 45,
+    "sources_blocked_by_external": 20,
+    "sources_no_output_not_blocked": 55,
     "gdelt_rate_limiter": {
       "schema": "gdelt-rate-limiter-v1",
       "host": "api.gdeltproject.org",
       "requests": 4,
       "cache_hits": 0,
       "status_counts": {
-        "200": 3,
-        "429": 1
+        "200": 2,
+        "429": 2
       },
-      "current_interval_s": 40.0,
+      "current_interval_s": 160.0,
       "min_interval_s": 20.0,
       "max_interval_s": 300.0,
-      "backoff_events": 3,
+      "backoff_events": 5,
       "retry_after_honored": 0,
       "request_budget": 120,
       "budget_exhausted": false,
       "labeled_requests": 4,
-      "labeled_success": 3,
-      "labeled_rate_limited": 1,
-      "success_rate": 0.75,
-      "rate_limited_rate": 0.25,
+      "labeled_success": 2,
+      "labeled_rate_limited": 2,
+      "success_rate": 0.5,
+      "rate_limited_rate": 0.5,
       "by_label": {
         "|Chad": {
           "requests": 1,
@@ -65,24 +65,24 @@
         },
         "|乍得": {
           "requests": 1,
-          "success": 1,
-          "rate_limited": 0,
-          "errors": 0,
-          "cache_hits": 0,
-          "items": 0
-        },
-        "|Niger": {
-          "requests": 1,
           "success": 0,
           "rate_limited": 1,
           "errors": 0,
           "cache_hits": 0,
           "items": 0
         },
-        "|尼日尔": {
+        "|Niger": {
           "requests": 1,
           "success": 1,
           "rate_limited": 0,
+          "errors": 0,
+          "cache_hits": 0,
+          "items": 0
+        },
+        "|尼日尔": {
+          "requests": 1,
+          "success": 0,
+          "rate_limited": 1,
           "errors": 0,
           "cache_hits": 0,
           "items": 0
@@ -90,28 +90,28 @@
       }
     },
     "article_store_path": "data/canonical/articles.json",
-    "articles_persisted_total": 727,
-    "articles_persisted_new": 3,
-    "articles_excluded_total": 412,
+    "articles_persisted_total": 732,
+    "articles_persisted_new": 5,
+    "articles_excluded_total": 408,
     "articles_excluded_by_code": {
-      "EXCLUDED_SAFETY_HOLD": 380,
+      "EXCLUDED_SAFETY_HOLD": 376,
       "EXCLUDED_MALFORMED_NO_CONTENT": 2,
-      "EXCLUDED_DUPLICATE_URL": 23,
-      "EXCLUDED_NON_ARTICLE_PAGE": 7
+      "EXCLUDED_DUPLICATE_URL": 22,
+      "EXCLUDED_NON_ARTICLE_PAGE": 8
     },
     "article_persistence_ok": true,
     "event_clustering": {
-      "input_events": 4,
+      "input_events": 5,
       "output_clusters": 4,
-      "singletons": 4,
-      "multi_source_clusters": 0,
-      "merged_pairs": 0,
+      "singletons": 3,
+      "multi_source_clusters": 1,
+      "merged_pairs": 1,
       "hard_rejects": 0,
-      "max_independent_sources": 1
+      "max_independent_sources": 2
     },
     "wall_clock": {
       "limit_seconds": 2400.0,
-      "remaining_seconds": 1292.2,
+      "remaining_seconds": 1010.9,
       "exhausted": false,
       "sources_skipped": 0
     }
@@ -122,29 +122,29 @@
       "source_name": "Tchadinfos",
       "country": "乍得",
       "method": "rss",
-      "discovered": 13,
-      "fetched": 13,
-      "full_body": 10,
-      "partial_body": 2,
+      "discovered": 12,
+      "fetched": 12,
+      "full_body": 11,
+      "partial_body": 0,
       "summary_only": 0,
       "extraction_failed": 1,
       "published": 1,
       "quarantined": 9,
-      "duplicates": 1,
+      "duplicates": 0,
       "errors": 0,
       "status": "success",
       "error": "",
-      "duration_s": 27.5,
-      "html_discovered": 3,
-      "html_fetched": 3,
+      "duration_s": 18.0,
+      "html_discovered": 2,
+      "html_fetched": 2,
       "html_full_body": 1,
-      "html_partial_body": 1,
+      "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": true,
       "skipped_by_limit": 0,
       "failure_reason": "OK_PRODUCTIVE",
       "failure_evidence": [
-        "discovered=13 fetched=13"
+        "discovered=12 fetched=12"
       ]
     },
     {
@@ -158,13 +158,13 @@
       "partial_body": 0,
       "summary_only": 0,
       "extraction_failed": 0,
-      "published": 1,
-      "quarantined": 13,
+      "published": 3,
+      "quarantined": 12,
       "duplicates": 0,
       "errors": 1,
       "status": "success",
       "error": "",
-      "duration_s": 23.8,
+      "duration_s": 24.4,
       "html_discovered": 0,
       "html_fetched": 0,
       "html_full_body": 0,
@@ -184,17 +184,17 @@
       "method": "rss",
       "discovered": 10,
       "fetched": 10,
-      "full_body": 8,
-      "partial_body": 2,
+      "full_body": 9,
+      "partial_body": 1,
       "summary_only": 0,
       "extraction_failed": 0,
       "published": 0,
-      "quarantined": 3,
+      "quarantined": 4,
       "duplicates": 0,
       "errors": 0,
       "status": "success",
       "error": "",
-      "duration_s": 26.4,
+      "duration_s": 26.7,
       "html_discovered": 0,
       "html_fetched": 0,
       "html_full_body": 0,
@@ -219,12 +219,12 @@
       "summary_only": 5,
       "extraction_failed": 1,
       "published": 0,
-      "quarantined": 1,
+      "quarantined": 0,
       "duplicates": 7,
       "errors": 0,
       "status": "success",
       "error": "",
-      "duration_s": 58.8,
+      "duration_s": 103.9,
       "html_discovered": 15,
       "html_fetched": 15,
       "html_full_body": 2,
@@ -279,12 +279,12 @@
       "summary_only": 0,
       "extraction_failed": 0,
       "published": 0,
-      "quarantined": 0,
+      "quarantined": 2,
       "duplicates": 0,
       "errors": 0,
       "status": "success",
       "error": "",
-      "duration_s": 29.1,
+      "duration_s": 39.6,
       "html_discovered": 0,
       "html_fetched": 0,
       "html_full_body": 0,
@@ -314,7 +314,7 @@
       "errors": 0,
       "status": "success",
       "error": "",
-      "duration_s": 16.5,
+      "duration_s": 19.3,
       "html_discovered": 0,
       "html_fetched": 0,
       "html_full_body": 0,
@@ -368,12 +368,12 @@
       "summary_only": 0,
       "extraction_failed": 0,
       "published": 0,
-      "quarantined": 1,
+      "quarantined": 0,
       "duplicates": 2,
       "errors": 0,
       "status": "success",
       "error": "",
-      "duration_s": 12.6,
+      "duration_s": 13.2,
       "html_discovered": 0,
       "html_fetched": 0,
       "html_full_body": 0,
@@ -654,9 +654,9 @@
       "method": "rss",
       "discovered": 20,
       "fetched": 20,
-      "full_body": 7,
-      "partial_body": 6,
-      "summary_only": 7,
+      "full_body": 9,
+      "partial_body": 7,
+      "summary_only": 4,
       "extraction_failed": 2,
       "published": 0,
       "quarantined": 20,
@@ -664,7 +664,7 @@
       "errors": 0,
       "status": "success",
       "error": "",
-      "duration_s": 21.1,
+      "duration_s": 20.9,
       "html_discovered": 0,
       "html_fetched": 0,
       "html_full_body": 0,
@@ -1215,7 +1215,7 @@
       "duplicates": 0,
       "errors": 1,
       "status": "no_items",
-      "error": "gdelt json: Expecting value: line 1 column 1 (char 0) / body: Your search contained a keyword that was too short.\n",
+      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -1223,9 +1223,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "UNKNOWN",
+      "failure_reason": "HTTP_429",
       "failure_evidence": [
-        "insufficient evidence: status=no_items errors=1"
+        "error matched 'RATE_LIMIT'"
       ]
     },
     {
@@ -1244,7 +1244,7 @@
       "duplicates": 0,
       "errors": 1,
       "status": "no_items",
-      "error": "gdelt json: Expecting value: line 1 column 1 (char 0) / body: Your search contained a keyword that was too short.\n",
+      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -1252,9 +1252,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "UNKNOWN",
+      "failure_reason": "HTTP_429",
       "failure_evidence": [
-        "insufficient evidence: status=no_items errors=1"
+        "error matched 'RATE_LIMIT'"
       ]
     },
     {
@@ -1273,7 +1273,7 @@
       "duplicates": 0,
       "errors": 1,
       "status": "no_items",
-      "error": "gdelt json: Expecting value: line 1 column 1 (char 0) / body: Your search contained a keyword that was too short.\n",
+      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -1281,9 +1281,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "UNKNOWN",
+      "failure_reason": "HTTP_429",
       "failure_evidence": [
-        "insufficient evidence: status=no_items errors=1"
+        "error matched 'RATE_LIMIT'"
       ]
     },
     {
@@ -1302,7 +1302,7 @@
       "duplicates": 0,
       "errors": 1,
       "status": "no_items",
-      "error": "gdelt json: Expecting value: line 1 column 1 (char 0) / body: Your search contained a keyword that was too short.\n",
+      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -1310,9 +1310,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "UNKNOWN",
+      "failure_reason": "HTTP_429",
       "failure_evidence": [
-        "insufficient evidence: status=no_items errors=1"
+        "error matched 'RATE_LIMIT'"
       ]
     },
     {
@@ -1331,7 +1331,7 @@
       "duplicates": 0,
       "errors": 1,
       "status": "no_items",
-      "error": "gdelt json: Expecting value: line 1 column 1 (char 0) / body: Your search contained a keyword that was too short.\n",
+      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -1339,9 +1339,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "UNKNOWN",
+      "failure_reason": "HTTP_429",
       "failure_evidence": [
-        "insufficient evidence: status=no_items errors=1"
+        "error matched 'RATE_LIMIT'"
       ]
     },
     {
@@ -1360,7 +1360,7 @@
       "duplicates": 0,
       "errors": 1,
       "status": "no_items",
-      "error": "gdelt json: Expecting value: line 1 column 1 (char 0) / body: Your search contained a keyword that was too short.\n",
+      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -1368,9 +1368,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "UNKNOWN",
+      "failure_reason": "HTTP_429",
       "failure_evidence": [
-        "insufficient evidence: status=no_items errors=1"
+        "error matched 'RATE_LIMIT'"
       ]
     },
     {
@@ -1389,7 +1389,7 @@
       "duplicates": 0,
       "errors": 1,
       "status": "no_items",
-      "error": "gdelt json: Expecting value: line 1 column 1 (char 0) / body: Your search contained a keyword that was too short.\n",
+      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -1397,9 +1397,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "UNKNOWN",
+      "failure_reason": "HTTP_429",
       "failure_evidence": [
-        "insufficient evidence: status=no_items errors=1"
+        "error matched 'RATE_LIMIT'"
       ]
     },
     {
@@ -1418,7 +1418,7 @@
       "duplicates": 0,
       "errors": 1,
       "status": "no_items",
-      "error": "gdelt json: Expecting value: line 1 column 1 (char 0) / body: Your search contained a keyword that was too short.\n",
+      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -1426,9 +1426,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "UNKNOWN",
+      "failure_reason": "HTTP_429",
       "failure_evidence": [
-        "insufficient evidence: status=no_items errors=1"
+        "error matched 'RATE_LIMIT'"
       ]
     },
     {
@@ -1442,13 +1442,13 @@
       "partial_body": 3,
       "summary_only": 0,
       "extraction_failed": 0,
-      "published": 1,
-      "quarantined": 4,
-      "duplicates": 1,
+      "published": 0,
+      "quarantined": 2,
+      "duplicates": 2,
       "errors": 0,
       "status": "success",
       "error": "",
-      "duration_s": 12.4,
+      "duration_s": 12.2,
       "html_discovered": 0,
       "html_fetched": 0,
       "html_full_body": 0,
@@ -1468,17 +1468,17 @@
       "method": "rss",
       "discovered": 20,
       "fetched": 20,
-      "full_body": 20,
-      "partial_body": 0,
+      "full_body": 19,
+      "partial_body": 1,
       "summary_only": 0,
       "extraction_failed": 0,
       "published": 0,
-      "quarantined": 9,
+      "quarantined": 6,
       "duplicates": 0,
       "errors": 0,
       "status": "success",
       "error": "",
-      "duration_s": 23.7,
+      "duration_s": 20.7,
       "html_discovered": 0,
       "html_fetched": 0,
       "html_full_body": 0,
@@ -1499,16 +1499,16 @@
       "discovered": 20,
       "fetched": 20,
       "full_body": 0,
-      "partial_body": 3,
-      "summary_only": 17,
-      "extraction_failed": 17,
+      "partial_body": 2,
+      "summary_only": 18,
+      "extraction_failed": 18,
       "published": 0,
       "quarantined": 2,
       "duplicates": 0,
       "errors": 0,
       "status": "success",
       "error": "",
-      "duration_s": 21.2,
+      "duration_s": 21.0,
       "html_discovered": 0,
       "html_fetched": 0,
       "html_full_body": 0,
@@ -1528,17 +1528,17 @@
       "method": "rss",
       "discovered": 20,
       "fetched": 20,
-      "full_body": 3,
-      "partial_body": 1,
+      "full_body": 2,
+      "partial_body": 0,
       "summary_only": 1,
-      "extraction_failed": 16,
+      "extraction_failed": 18,
       "published": 0,
-      "quarantined": 7,
+      "quarantined": 9,
       "duplicates": 0,
       "errors": 0,
       "status": "success",
       "error": "",
-      "duration_s": 26.6,
+      "duration_s": 21.9,
       "html_discovered": 0,
       "html_fetched": 0,
       "html_full_body": 0,
@@ -1585,29 +1585,29 @@
       "source_name": "ANP(尼日尔官方通讯社)",
       "country": "尼日尔",
       "method": "rss",
-      "discovered": 27,
-      "fetched": 27,
-      "full_body": 25,
+      "discovered": 26,
+      "fetched": 26,
+      "full_body": 24,
       "partial_body": 2,
       "summary_only": 0,
       "extraction_failed": 0,
-      "published": 1,
+      "published": 0,
       "quarantined": 4,
       "duplicates": 2,
       "errors": 0,
       "status": "success",
       "error": "",
-      "duration_s": 30.4,
-      "html_discovered": 7,
-      "html_fetched": 7,
-      "html_full_body": 7,
+      "duration_s": 31.0,
+      "html_discovered": 6,
+      "html_fetched": 6,
+      "html_full_body": 6,
       "html_partial_body": 0,
-      "html_published": 1,
+      "html_published": 0,
       "html_listing_channel": true,
       "skipped_by_limit": 0,
       "failure_reason": "OK_PRODUCTIVE",
       "failure_evidence": [
-        "discovered=27 fetched=27"
+        "discovered=26 fetched=26"
       ]
     },
     {
@@ -1617,17 +1617,17 @@
       "method": "rss",
       "discovered": 15,
       "fetched": 15,
-      "full_body": 8,
-      "partial_body": 5,
+      "full_body": 7,
+      "partial_body": 6,
       "summary_only": 2,
       "extraction_failed": 0,
       "published": 0,
-      "quarantined": 0,
+      "quarantined": 1,
       "duplicates": 1,
       "errors": 0,
       "status": "success",
       "error": "",
-      "duration_s": 35.2,
+      "duration_s": 33.3,
       "html_discovered": 5,
       "html_fetched": 5,
       "html_full_body": 2,
@@ -1656,7 +1656,7 @@
       "duplicates": 0,
       "errors": 1,
       "status": "no_items",
-      "error": "niger_lesahel: fetch HTTP Error 500: Internal Server Error",
+      "error": "niger_lesahel: fetch HTTP Error 512: ",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -1686,7 +1686,7 @@
       "errors": 0,
       "status": "success",
       "error": "",
-      "duration_s": 45.5,
+      "duration_s": 46.3,
       "html_discovered": 0,
       "html_fetched": 0,
       "html_full_body": 0,
@@ -1706,20 +1706,20 @@
       "method": "rss",
       "discovered": 30,
       "fetched": 30,
-      "full_body": 27,
+      "full_body": 26,
       "partial_body": 2,
       "summary_only": 1,
-      "extraction_failed": 0,
+      "extraction_failed": 1,
       "published": 0,
       "quarantined": 0,
-      "duplicates": 4,
-      "errors": 0,
+      "duplicates": 3,
+      "errors": 1,
       "status": "success",
       "error": "",
-      "duration_s": 74.1,
+      "duration_s": 71.5,
       "html_discovered": 20,
       "html_fetched": 20,
-      "html_full_body": 20,
+      "html_full_body": 19,
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": true,
@@ -1741,12 +1741,12 @@
       "summary_only": 0,
       "extraction_failed": 0,
       "published": 0,
-      "quarantined": 0,
+      "quarantined": 1,
       "duplicates": 1,
       "errors": 0,
       "status": "success",
       "error": "",
-      "duration_s": 11.0,
+      "duration_s": 10.6,
       "html_discovered": 0,
       "html_fetched": 0,
       "html_full_body": 0,
@@ -1829,12 +1829,12 @@
       "summary_only": 5,
       "extraction_failed": 4,
       "published": 0,
-      "quarantined": 0,
+      "quarantined": 1,
       "duplicates": 3,
       "errors": 0,
       "status": "success",
       "error": "",
-      "duration_s": 77.9,
+      "duration_s": 91.5,
       "html_discovered": 20,
       "html_fetched": 20,
       "html_full_body": 5,
@@ -1861,9 +1861,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -1871,9 +1871,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -1890,9 +1890,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -1900,9 +1900,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -1919,9 +1919,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -1929,9 +1929,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -1948,9 +1948,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -1958,9 +1958,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -1977,9 +1977,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -1987,9 +1987,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -2006,9 +2006,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2016,9 +2016,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -2035,9 +2035,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2045,9 +2045,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -2064,9 +2064,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2074,9 +2074,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -2093,9 +2093,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2103,9 +2103,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -2125,7 +2125,7 @@
       "errors": 0,
       "status": "success",
       "error": "",
-      "duration_s": 1.9,
+      "duration_s": 1.7,
       "html_discovered": 0,
       "html_fetched": 0,
       "html_full_body": 0,
@@ -2152,9 +2152,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2162,9 +2162,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -2181,9 +2181,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2191,9 +2191,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -2210,9 +2210,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2220,9 +2220,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -2239,9 +2239,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2249,9 +2249,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -2268,9 +2268,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2278,9 +2278,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -2297,9 +2297,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2307,9 +2307,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -2355,9 +2355,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2365,9 +2365,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -2384,9 +2384,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2394,9 +2394,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -2413,9 +2413,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2423,9 +2423,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -2442,9 +2442,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2452,9 +2452,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -2471,9 +2471,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2481,9 +2481,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -2500,9 +2500,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2510,9 +2510,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -2529,9 +2529,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2539,9 +2539,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -2558,9 +2558,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2568,9 +2568,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -2587,9 +2587,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2597,9 +2597,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -2616,9 +2616,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2626,9 +2626,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -2645,9 +2645,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "no_items",
-      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 80s，本窗口该组查询暂停。原始错误: HTTP 429",
+      "error": "",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2655,9 +2655,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "HTTP_429",
+      "failure_reason": "QUERY_NO_RESULT",
       "failure_evidence": [
-        "error matched 'RATE_LIMIT'"
+        "method=gdelt_search discovered=0, no transport error"
       ]
     },
     {
@@ -2674,9 +2674,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 0,
+      "errors": 1,
       "status": "no_items",
-      "error": "",
+      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 160s，本窗口该组查询暂停。原始错误: HTTP 429",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2684,9 +2684,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "QUERY_NO_RESULT",
+      "failure_reason": "HTTP_429",
       "failure_evidence": [
-        "method=gdelt_search discovered=0, no transport error"
+        "error matched 'RATE_LIMIT'"
       ]
     },
     {
@@ -2703,9 +2703,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 0,
+      "errors": 1,
       "status": "no_items",
-      "error": "",
+      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 160s，本窗口该组查询暂停。原始错误: HTTP 429",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2713,9 +2713,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "QUERY_NO_RESULT",
+      "failure_reason": "HTTP_429",
       "failure_evidence": [
-        "method=gdelt_search discovered=0, no transport error"
+        "error matched 'RATE_LIMIT'"
       ]
     },
     {
@@ -2732,9 +2732,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 0,
+      "errors": 1,
       "status": "no_items",
-      "error": "",
+      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 160s，本窗口该组查询暂停。原始错误: HTTP 429",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2742,9 +2742,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "QUERY_NO_RESULT",
+      "failure_reason": "HTTP_429",
       "failure_evidence": [
-        "method=gdelt_search discovered=0, no transport error"
+        "error matched 'RATE_LIMIT'"
       ]
     },
     {
@@ -2761,9 +2761,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 0,
+      "errors": 1,
       "status": "no_items",
-      "error": "",
+      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 160s，本窗口该组查询暂停。原始错误: HTTP 429",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2771,9 +2771,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "QUERY_NO_RESULT",
+      "failure_reason": "HTTP_429",
       "failure_evidence": [
-        "method=gdelt_search discovered=0, no transport error"
+        "error matched 'RATE_LIMIT'"
       ]
     },
     {
@@ -2790,9 +2790,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 0,
+      "errors": 1,
       "status": "no_items",
-      "error": "",
+      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 160s，本窗口该组查询暂停。原始错误: HTTP 429",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2800,9 +2800,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "QUERY_NO_RESULT",
+      "failure_reason": "HTTP_429",
       "failure_evidence": [
-        "method=gdelt_search discovered=0, no transport error"
+        "error matched 'RATE_LIMIT'"
       ]
     },
     {
@@ -2819,9 +2819,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 0,
+      "errors": 1,
       "status": "no_items",
-      "error": "",
+      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 160s，本窗口该组查询暂停。原始错误: HTTP 429",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2829,9 +2829,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "QUERY_NO_RESULT",
+      "failure_reason": "HTTP_429",
       "failure_evidence": [
-        "method=gdelt_search discovered=0, no transport error"
+        "error matched 'RATE_LIMIT'"
       ]
     },
     {
@@ -2848,9 +2848,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 0,
+      "errors": 1,
       "status": "no_items",
-      "error": "",
+      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 160s，本窗口该组查询暂停。原始错误: HTTP 429",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2858,9 +2858,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "QUERY_NO_RESULT",
+      "failure_reason": "HTTP_429",
       "failure_evidence": [
-        "method=gdelt_search discovered=0, no transport error"
+        "error matched 'RATE_LIMIT'"
       ]
     },
     {
@@ -2877,9 +2877,9 @@
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
-      "errors": 0,
+      "errors": 1,
       "status": "no_items",
-      "error": "",
+      "error": "GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；已遵循 Retry-After 并退避至 160s，本窗口该组查询暂停。原始错误: HTTP 429",
       "duration_s": 0.0,
       "html_discovered": 0,
       "html_fetched": 0,
@@ -2887,9 +2887,9 @@
       "html_partial_body": 0,
       "html_published": 0,
       "html_listing_channel": false,
-      "failure_reason": "QUERY_NO_RESULT",
+      "failure_reason": "HTTP_429",
       "failure_evidence": [
-        "method=gdelt_search discovered=0, no transport error"
+        "error matched 'RATE_LIMIT'"
       ]
     },
     {
@@ -2904,7 +2904,7 @@
       "summary_only": 0,
       "extraction_failed": 0,
       "published": 0,
-      "quarantined": 0,
+      "quarantined": 2,
       "duplicates": 0,
       "errors": 0,
       "status": "success",
@@ -2929,8 +2929,8 @@
       "method": "rss",
       "discovered": 20,
       "fetched": 20,
-      "full_body": 20,
-      "partial_body": 0,
+      "full_body": 19,
+      "partial_body": 1,
       "summary_only": 0,
       "extraction_failed": 0,
       "published": 0,
@@ -2960,16 +2960,16 @@
       "discovered": 20,
       "fetched": 20,
       "full_body": 0,
-      "partial_body": 3,
-      "summary_only": 17,
-      "extraction_failed": 17,
+      "partial_body": 2,
+      "summary_only": 18,
+      "extraction_failed": 18,
       "published": 0,
       "quarantined": 0,
       "duplicates": 0,
       "errors": 0,
       "status": "success",
       "error": "",
-      "duration_s": 20.4,
+      "duration_s": 21.9,
       "html_discovered": 0,
       "html_fetched": 0,
       "html_full_body": 0,
@@ -2989,17 +2989,17 @@
       "method": "rss",
       "discovered": 20,
       "fetched": 20,
-      "full_body": 3,
+      "full_body": 2,
       "partial_body": 1,
       "summary_only": 1,
-      "extraction_failed": 16,
+      "extraction_failed": 17,
       "published": 0,
-      "quarantined": 0,
+      "quarantined": 1,
       "duplicates": 0,
       "errors": 0,
       "status": "success",
       "error": "",
-      "duration_s": 31.4,
+      "duration_s": 21.8,
       "html_discovered": 0,
       "html_fetched": 0,
       "html_full_body": 0,
@@ -3024,12 +3024,12 @@
       "summary_only": 0,
       "extraction_failed": 0,
       "published": 0,
-      "quarantined": 1,
+      "quarantined": 3,
       "duplicates": 0,
       "errors": 0,
       "status": "success",
       "error": "",
-      "duration_s": 19.7,
+      "duration_s": 10.3,
       "html_discovered": 0,
       "html_fetched": 0,
       "html_full_body": 0,
@@ -3050,16 +3050,16 @@
       "discovered": 20,
       "fetched": 20,
       "full_body": 0,
-      "partial_body": 18,
-      "summary_only": 1,
-      "extraction_failed": 2,
-      "published": 0,
-      "quarantined": 10,
+      "partial_body": 19,
+      "summary_only": 0,
+      "extraction_failed": 1,
+      "published": 1,
+      "quarantined": 7,
       "duplicates": 0,
-      "errors": 1,
+      "errors": 0,
       "status": "success",
       "error": "",
-      "duration_s": 26.3,
+      "duration_s": 20.7,
       "html_discovered": 0,
       "html_fetched": 0,
       "html_full_body": 0,

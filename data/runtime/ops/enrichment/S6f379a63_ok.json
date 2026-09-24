@@ -1,0 +1,115 @@
+{
+ "label": "S6f379a63",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ef3fffee3194ba831a9b1d82782a46bc53c8a46727744e359b2b86b90883fa62",
+ "tokens": {
+  "input_tokens": 2435,
+  "output_tokens": 472,
+  "total_tokens": 2907
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得国家警察展示43名涉嫌犯罪分子及缴获的大量武器",
+   "summary_zh": "乍得国家警察于2026年9月24日展示了在8月20日至9月24日期间多次行动中逮捕的43名涉嫌犯罪分子。警方缴获了包括三支自动手枪和一支AK-47突击步枪在内的四件火器、大量铜铝电缆、三辆摩托车、毒品及伪造行政文件。嫌疑人已承认被指控的事实，将很快被移送主管司法机关。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得国家警察展示了43名涉嫌犯罪分子",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Police nationale a présenté, le 24 septembre 2026, 43 présumés malfaiteurs interpellés au cours de diverses opérations menées entre le 20 août et le 24 septembre."
+    },
+    {
+     "fact": "警方缴获四件火器，包括三支自动手枪和一支AK-47突击步枪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "quatre armes à feu — trois pistolets automatiques et un fusil d'assaut AK-47"
+    },
+    {
+     "fact": "缴获物品还包括大量铜铝电缆、三辆摩托车、毒品及伪造行政文件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une importante quantité de câbles en cuivre et en aluminium, trois motos, de la drogue et divers documents administratifs falsifiés"
+    },
+    {
+     "fact": "嫌疑人已承认被指控的事实，将很快被移送主管司法机关",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les mis en cause ont reconnu les faits qui leur sont reprochés et doivent être traduits prochainement devant les juridictions compétentes"
+    }
+   ],
+   "uncertainties": [
+    "嫌疑人的犯罪事实为警方指控，尚未经法院判决确认",
+    "目前仅有一个来源（Alwihda Info）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得国家警察展示43名涉嫌犯罪分子及缴获的大量武器",
+   "summary_zh": "乍得国家警察于2026年9月24日展示了在8月20日至9月24日期间多次行动中逮捕的43名涉嫌犯罪分子。警方缴获了包括三支自动手枪和一支AK-47突击步枪在内的四件火器、大量铜铝电缆、三辆摩托车、毒品及伪造行政文件。嫌疑人已承认被指控的事实，将很快被移送主管司法机关。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得国家警察展示了43名涉嫌犯罪分子",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Police nationale a présenté, le 24 septembre 2026, 43 présumés malfaiteurs interpellés au cours de diverses opérations menées entre le 20 août et le 24 septembre."
+    },
+    {
+     "fact": "警方缴获四件火器，包括三支自动手枪和一支AK-47突击步枪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "quatre armes à feu — trois pistolets automatiques et un fusil d'assaut AK-47"
+    },
+    {
+     "fact": "缴获物品还包括大量铜铝电缆、三辆摩托车、毒品及伪造行政文件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une importante quantité de câbles en cuivre et en aluminium, trois motos, de la drogue et divers documents administratifs falsifiés"
+    },
+    {
+     "fact": "嫌疑人已承认被指控的事实，将很快被移送主管司法机关",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les mis en cause ont reconnu les faits qui leur sont reprochés et doivent être traduits prochainement devant les juridictions compétentes"
+    }
+   ],
+   "uncertainties": [
+    "嫌疑人的犯罪事实为警方指控，尚未经法院判决确认",
+    "目前仅有一个来源（Alwihda Info）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_3fc500376f379a63",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

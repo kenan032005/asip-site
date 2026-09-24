@@ -1,0 +1,137 @@
+{
+ "label": "S4eb30437",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4b6723dc3694d48b23b7f3ec52bd05aedbb166416fe3a4d9436101d0b551cb5b",
+ "tokens": {
+  "input_tokens": 2030,
+  "output_tokens": 583,
+  "total_tokens": 2613
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "埃塞俄比亚北部战斗升级，提格雷武装宣布全面开战",
+   "summary_zh": "埃塞俄比亚北部战斗持续升级，提格雷武装称该国已与联邦政府进入“全面战争”。提格雷人民解放阵线称已夺取提格雷地区三座机场，并向邻近的阿法尔和阿姆哈拉地区发动攻击，埃塞俄比亚航空已暂停飞往默克莱、希雷和阿克苏姆机场的航班。埃塞俄比亚军方称在阿姆哈拉的反攻中打死272名提格雷武装人员、打伤260人，媒体指出该数字无法独立核实。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷地区",
+    "city": null,
+    "site": null,
+    "raw_text": "Tigray Region, northern Ethiopia; Mekelle, Shire, Axum, Abala"
+   },
+   "key_facts": [
+    {
+     "fact": "提格雷武装称埃塞俄比亚已进入“全面战争”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Tigray rebels saying the country is now in a “full-blown war” with the federal government"
+    },
+    {
+     "fact": "提格雷人民解放阵线称夺取提格雷地区三座机场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Tigray People’s Liberation Front, or TPLF, seized control of three airports in Tigray on Wednesday"
+    },
+    {
+     "fact": "提格雷武装向阿法尔和阿姆哈拉地区发动攻击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "launched attacks into the neighbouring Afar and Amhara regions"
+    },
+    {
+     "fact": "埃塞俄比亚航空暂停飞往默克莱、希雷和阿克苏姆机场的航班",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ethiopian Airlines has suspended flights to airports in Mekelle, Shire and Axum"
+    },
+    {
+     "fact": "埃塞俄比亚军方称在阿姆哈拉反攻中打死272名提格雷武装人员、打伤260人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ethiopia’s army says its forces have killed 272 Tigrayan fighters and wounded 260 during a counter-offensive in Amhara"
+    },
+    {
+     "fact": "媒体称军方伤亡数字无法独立核实",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The press says the figures could not be independently verified"
+    }
+   ],
+   "uncertainties": [
+    "埃塞俄比亚军方公布的打死272人、打伤260人的数字无法独立核实",
+    "提格雷武装夺取三座机场及发动攻击的说法来自提格雷方面，尚未获得独立证实",
+    "事件目前仅有单一来源报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "埃塞俄比亚北部战斗升级，提格雷武装宣布全面开战",
+   "summary_zh": "埃塞俄比亚北部战斗持续升级，提格雷武装称该国已与联邦政府进入“全面战争”。提格雷人民解放阵线称已夺取提格雷地区三座机场，并向邻近的阿法尔和阿姆哈拉地区发动攻击，埃塞俄比亚航空已暂停飞往默克莱、希雷和阿克苏姆机场的航班。埃塞俄比亚军方称在阿姆哈拉的反攻中打死272名提格雷武装人员、打伤260人，媒体指出该数字无法独立核实。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷地区",
+    "city": null,
+    "site": null,
+    "raw_text": "Tigray Region, northern Ethiopia; Mekelle, Shire, Axum, Abala"
+   },
+   "key_facts": [
+    {
+     "fact": "提格雷武装称埃塞俄比亚已进入“全面战争”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Tigray rebels saying the country is now in a “full-blown war” with the federal government"
+    },
+    {
+     "fact": "提格雷人民解放阵线称夺取提格雷地区三座机场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Tigray People’s Liberation Front, or TPLF, seized control of three airports in Tigray on Wednesday"
+    },
+    {
+     "fact": "提格雷武装向阿法尔和阿姆哈拉地区发动攻击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "launched attacks into the neighbouring Afar and Amhara regions"
+    },
+    {
+     "fact": "埃塞俄比亚航空暂停飞往默克莱、希雷和阿克苏姆机场的航班",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ethiopian Airlines has suspended flights to airports in Mekelle, Shire and Axum"
+    },
+    {
+     "fact": "埃塞俄比亚军方称在阿姆哈拉反攻中打死272名提格雷武装人员、打伤260人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ethiopia’s army says its forces have killed 272 Tigrayan fighters and wounded 260 during a counter-offensive in Amhara"
+    },
+    {
+     "fact": "媒体称军方伤亡数字无法独立核实",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The press says the figures could not be independently verified"
+    }
+   ],
+   "uncertainties": [
+    "埃塞俄比亚军方公布的打死272人、打伤260人的数字无法独立核实",
+    "提格雷武装夺取三座机场及发动攻击的说法来自提格雷方面，尚未获得独立证实",
+    "事件目前仅有单一来源报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_7b7bcfff4eb30437",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
