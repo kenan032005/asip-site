@@ -558,9 +558,12 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
     # 这里在导出**之后**比对公开产物的"已本地化投影"，仅在译文/摘要集合真正变化时置位。
     try:
         pub = publication_change(root)
+        pub["ok"] = True
     except Exception as e:  # noqa: BLE001
-        pub = {"changed": False, "digest": "", "localized": 0,
+        # 不静默：检测失败即标记 ok=False（main 的退出码聚合会据此失败，fail-closed）
+        pub = {"ok": False, "changed": False, "digest": "", "localized": 0,
                "previous": None, "error": "%s: %s" % (type(e).__name__, e)}
+    pub["detail"] = "publication_digest"
     results["publication_digest"] = pub
     if pub.get("changed") and not deploy_required and not report_ran:
         deploy_required = True
@@ -596,7 +599,11 @@ def _export_views(emit):
         sys.path.insert(0, str(ROOT / "scripts" / "data"))
         from scripts.data.repository import Repository
         from scripts.data.compatibility_export import export_all
-        repo = Repository(root=ROOT / "data")
+        # C6-R5F：Repository 的 root 语义是**仓库根**（canonical_dir = root/"data"/"canonical"）。
+        # 原先传 ROOT/"data" 会解析成 data/data/... ⇒ 全部读取为空 ⇒ 导出静默 no-op
+        # （实测 VIEWS_EXPORT 五项全 0；这也是 production-state 的 data/public 长期滞后于
+        #  deploy 重建产物的原因）。与 build_site / collect / c3_run 等既有调用保持一致。
+        repo = Repository(root=ROOT)
         stats = export_all(repo, run_id=os.environ.get("GITHUB_RUN_ID", ""))
         emit("VIEWS_EXPORT=%s" % json.dumps(stats, ensure_ascii=False))
         return True

@@ -164,7 +164,8 @@ def validate_clusters(clusters):
             if _p not in sys.path:
                 sys.path.insert(0, _p)
         from scripts.data.repository import Repository  # noqa: E402
-        repo = Repository(root=ROOT / "data")
+        # Repository 的 root 语义是**仓库根**（canonical_dir = root/"data"/"canonical"）
+        repo = Repository(root=ROOT)
         return repo._validate_records(clusters, "event_cluster", "event_id")
     except Exception as e:  # noqa: BLE001
         return ["VALIDATOR_UNAVAILABLE: %s: %s" % (type(e).__name__, e)]
