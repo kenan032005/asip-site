@@ -24,6 +24,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import subprocess
@@ -53,6 +54,86 @@ def deploy_required_for(classification):
     FACT_GATE_FAIL（分类为 HOLD）或其它异常值 → 不可发布 → False
     """
     return classification in LEGAL_REPORT
+
+
+#: AI 发布内容投影的落点（随 data/runtime/ops 提交进 production-state，跨轮持久）
+AI_PUBLICATION_DIGEST = ps.OPS_DIR / "ai_publication_digest.json"
+
+
+def ai_publication_projection(data_root):
+    """公开产物中"AI 本地化/摘要"部分的稳定投影（C6-R5F）。
+
+    背景：`deploy_required` 原先只由 daily / weekly 报告分类驱动，
+    因此**仅有 AI 译文/摘要入库时不会触发部署**（实测 16:05 周期
+    `deploy_required=false`，canonical title_cn 143→215 却无任何 deploy run）。
+
+    本投影刻意只覆盖"已获得中文/摘要"的公开事件，且按 event_id 排序、剔除
+    updated_at/run_id 等易变信封字段：
+      - 新获得 title_cn/summary_cn（enrichment bridge 生效）→ 投影变化 → 触发部署；
+      - 仅新增"未翻译"事件或重新导出（时间戳变化）→ 投影不变 → 不触发，
+        维持原有"日报驱动"的部署节奏，避免每小时无意义部署。
+
+    返回 (digest, localized_count)。文件缺失时返回 ("", 0)。
+    """
+    p = Path(data_root) / "public" / "published_events.json"
+    if not p.exists():
+        return "", 0
+    try:
+        items = json.loads(p.read_text(encoding="utf-8")).get("items", [])
+    except Exception:  # noqa: BLE001
+        return "", 0
+    rows = sorted(
+        (str(e.get("event_id") or ""),
+         str(e.get("title_cn") or "").strip(),
+         str(e.get("summary_cn") or "").strip())
+        for e in items
+        if str(e.get("title_cn") or "").strip() or str(e.get("summary_cn") or "").strip())
+    blob = json.dumps(rows, ensure_ascii=False, sort_keys=True).encode("utf-8")
+    return hashlib.sha256(blob).hexdigest(), len(rows)
+
+
+def publication_change(data_root):
+    """比对公开产物投影与上一轮记录；纯读 + 返回决策所需字段。
+
+    返回 {"digest", "localized", "previous", "changed"}。
+
+    首次运行（无历史记录）且**存在已本地化事件**时视为"未发布过"→ changed=True
+    （这正是本修复落地的场景：站点上从未发布过这批译文，需要一次部署把它们上线）；
+    若无任何已本地化事件则 changed=False，避免空部署。
+    记录丢失最多导致一次幂等重复部署，不会造成循环。
+    """
+    digest, n = ai_publication_projection(data_root)
+    prev = None
+    try:
+        if AI_PUBLICATION_DIGEST.exists():
+            prev = json.loads(AI_PUBLICATION_DIGEST.read_text(encoding="utf-8")).get("digest")
+    except Exception:  # noqa: BLE001
+        prev = None
+    if prev:
+        changed = digest != prev
+    else:
+        changed = n > 0
+    return {"digest": digest, "localized": n, "previous": prev, "changed": changed}
+
+
+def record_publication_digest(info, recorded_at, emit=lambda s: print(s)):
+    """把本轮投影写入 ops（随 production-state 提交）。
+
+    时间戳由调用方注入（不在函数体内取墙钟）：digest 本身完全由公开内容决定，
+    与时间无关 —— 这也让 `scripts/data/hash_audit.py` 的哈希契约审计可静态确认
+    本函数产出的 digest 不受时间影响。
+    """
+    try:
+        ps.OPS_DIR.mkdir(parents=True, exist_ok=True)
+        AI_PUBLICATION_DIGEST.write_text(json.dumps({
+            "digest": info.get("digest"),
+            "localized_events": info.get("localized"),
+            "previous_digest": info.get("previous"),
+            "changed": bool(info.get("changed")),
+            "recorded_at": recorded_at,
+        }, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    except Exception as e:  # noqa: BLE001
+        emit("publication_digest_write_error=%s" % e)
 
 
 def _parse_iso(s):
@@ -272,6 +353,10 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
     run["notes"].append("human=%s" % str(bool(tm.get("human"))).lower())
     results = {}
     deploy_required = False
+    # C6-R5F：本轮是否运行过报告任务。报告分类是**权威可发布性闸门**，
+    # 因此发布内容变更检测只在"本轮没有任何报告任务"时兜底触发部署，
+    # 绝不覆盖 HOLD 等报告侧的拒绝判定。
+    report_ran = False
     deploy_ctx = {
         "trigger_type": tm.get("trigger_type"),
         "trigger_source": tm.get("trigger_source"),
@@ -289,6 +374,7 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
         # 导致 publishable 报告也永远 deploy_required=false，Auto Deploy 全链路失效。
         nonlocal deploy_required
         nonlocal state
+        nonlocal report_ran
         results[label] = {"task": task, "trigger": trigger, "ok": False, "detail": None}
         if task == "collection":
             ok = _run_script(["scripts/ops/collection_run.py", "--execute"], emit)
@@ -394,6 +480,7 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
         if task == "timeline":
             return _run_script(["scripts/ops/timeline_run.py"], emit)
         if task == "daily_report":
+            report_ran = True
             ok = _run_script(["scripts/ops/reports_run.py", "--mode", "daily",
                               "--source", "canonical"], emit)
             state = _reload_state(state)
@@ -415,6 +502,7 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
                 cls, "hold")] += 1
             return ok
         if task == "weekly_report":
+            report_ran = True
             ok = True
             for mode in ("tcd_weekly", "ssd_weekly"):
                 ok = _run_script(["scripts/ops/reports_run.py", "--mode", mode,
@@ -463,6 +551,23 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
     # canonical 变更后必须再生成遗留/公开视图（events.json / pending / raw / quarantine /
     # public/published_events / current_metrics），否则 deploy 的 V17 canonical↔legacy 校验失败
     results["views_export"] = {"ok": _export_views(emit), "detail": "compatibility_export"}
+
+    # C6-R5F：发布内容变更检测 → 让"仅 AI 译文/摘要入库"也能触发现有部署工作流。
+    # 原判定只在 daily/weekly 报告分支里设置 deploy_required，因此富集桥接把
+    # canonical title_cn 从 143 提到 215 也不会部署（实测 16:05 周期 deploy_required=false）。
+    # 这里在导出**之后**比对公开产物的"已本地化投影"，仅在译文/摘要集合真正变化时置位。
+    try:
+        pub = publication_change(root)
+    except Exception as e:  # noqa: BLE001
+        pub = {"changed": False, "digest": "", "localized": 0,
+               "previous": None, "error": "%s: %s" % (type(e).__name__, e)}
+    results["publication_digest"] = pub
+    if pub.get("changed") and not deploy_required and not report_ran:
+        deploy_required = True
+        deploy_ctx["reason"] = "ai_publication_changed"
+        deploy_ctx["publication_localized_events"] = pub.get("localized")
+        deploy_ctx["deploy_requested_at"] = ps._utcnow_iso()
+    record_publication_digest(pub, ps._utcnow_iso(), emit)
 
     ops.finish_run(run, status="completed")
     # §K：deploy 请求与 provenance 持久化到 ops run（随 production-state 提交）。
