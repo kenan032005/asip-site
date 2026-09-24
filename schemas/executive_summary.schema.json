@@ -1,0 +1,217 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ASIP Executive Summary View",
+  "description": "C7-1 领导 30 秒仪表盘的单一数据源（确定性事实汇总，无 AI 生成）。公开安全：不含内部 runtime 字段。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "generated_time",
+    "period",
+    "overall_assessment",
+    "risk_direction",
+    "confidence",
+    "key_regions",
+    "top_events",
+    "latest_intelligence",
+    "sources_used"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "executive-summary-v1"
+    },
+    "generated_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "period": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "data_as_of",
+        "events_24h",
+        "events_7d",
+        "active_countries_24h",
+        "active_countries_7d",
+        "total_countries"
+      ],
+      "properties": {
+        "data_as_of": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "处理窗口截止（来自 data_as_of 语义，缺失时为 null，禁止用墙钟冒充）"
+        },
+        "events_24h": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "events_7d": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "active_countries_24h": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "active_countries_7d": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total_countries": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "articles_7d": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "overall_assessment": {
+      "type": "string",
+      "description": "确定性事实汇总（中文，不含任何 AI 生成文字）"
+    },
+    "risk_direction": {
+      "type": "string",
+      "enum": [
+        "improving",
+        "stable",
+        "worsening"
+      ]
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "ai_assessment": {
+      "type": "string",
+      "description": "可选：来自既有 data/views/ai_intelligence.json 的评估文字（原样引用，注明来源）；C7-3 将替换为正式每日评估"
+    },
+    "key_regions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "country",
+          "events_24h",
+          "events_7d",
+          "direction",
+          "note"
+        ],
+        "properties": {
+          "country": {
+            "type": "string"
+          },
+          "events_24h": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "events_7d": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "up",
+              "flat",
+              "down"
+            ]
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "top_events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "country",
+          "title",
+          "summary",
+          "time",
+          "source_count"
+        ],
+        "properties": {
+          "country": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "time": {
+            "type": "string"
+          },
+          "source_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "event_id": {
+            "type": "string"
+          },
+          "severity": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "latest_intelligence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "country",
+          "source",
+          "time",
+          "security_category"
+        ],
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "time": {
+            "type": "string"
+          },
+          "security_category": {
+            "type": "string"
+          },
+          "article_id": {
+            "type": "string"
+          },
+          "translated": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "sources_used": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
