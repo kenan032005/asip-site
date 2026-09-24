@@ -604,7 +604,15 @@ def _export_views(emit):
         # （实测 VIEWS_EXPORT 五项全 0；这也是 production-state 的 data/public 长期滞后于
         #  deploy 重建产物的原因）。与 build_site / collect / c3_run 等既有调用保持一致。
         repo = Repository(root=ROOT)
-        stats = export_all(repo, run_id=os.environ.get("GITHUB_RUN_ID", ""))
+        # 信封 run_id 必须符合 ^\d{8}T\d{6}\+0800_[a-z0-9]{6}$：GITHUB_RUN_ID 是纯数字，
+        # 直接用它会让 published_events 的保存整批中止（导出修好后才暴露的既有缺陷）。
+        # 复用 build_site 的同一判据（canonical 既有 run_id > 按 BJT 生成），保持单一事实源。
+        try:
+            from scripts.build_site import _compliant_run_id
+            export_run_id = _compliant_run_id()
+        except Exception:  # noqa: BLE001
+            export_run_id = ""
+        stats = export_all(repo, run_id=export_run_id)
         emit("VIEWS_EXPORT=%s" % json.dumps(stats, ensure_ascii=False))
         return True
     except Exception as e:  # noqa: BLE001
