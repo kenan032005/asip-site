@@ -4,20 +4,21 @@
  "requests": 4,
  "cache_hits": 0,
  "status_counts": {
-  "200": 4
+  "200": 3,
+  "429": 1
  },
- "current_interval_s": 80.0,
+ "current_interval_s": 40.0,
  "min_interval_s": 20.0,
  "max_interval_s": 300.0,
- "backoff_events": 5,
+ "backoff_events": 3,
  "retry_after_honored": 0,
  "request_budget": 120,
  "budget_exhausted": false,
  "labeled_requests": 4,
- "labeled_success": 4,
- "labeled_rate_limited": 0,
- "success_rate": 1.0,
- "rate_limited_rate": 0.0,
+ "labeled_success": 3,
+ "labeled_rate_limited": 1,
+ "success_rate": 0.75,
+ "rate_limited_rate": 0.25,
  "by_label": {
   "|Chad": {
    "requests": 1,
@@ -37,8 +38,8 @@
   },
   "|Niger": {
    "requests": 1,
-   "success": 1,
-   "rate_limited": 0,
+   "success": 0,
+   "rate_limited": 1,
    "errors": 0,
    "cache_hits": 0,
    "items": 0

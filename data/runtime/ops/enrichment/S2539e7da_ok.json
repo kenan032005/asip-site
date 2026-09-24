@@ -1,0 +1,125 @@
+{
+ "label": "S2539e7da",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "af66b3a84da8d5d26356224c1b204c3e8559516f7f2a2a804a7a3fccf65a9779",
+ "tokens": {
+  "input_tokens": 2191,
+  "output_tokens": 527,
+  "total_tokens": 2718
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得SYNAPGREF工会暂停罢工一个月",
+   "summary_zh": "乍得全国移植专业人员工会（SYNAPGREF）于9月24日召开大会，决定暂停自9月17日开始的罢工一个月。工会表示此举是为给当局时间推进其诉求，此前司法部长已承诺推动相关法律文本工作。暂停期至10月23日，10月26日将再次召开大会评估进展。",
+   "event_type": "civil_unrest",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "SYNAPGREF工会决定暂停罢工一个月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Syndicat national des professionnels de greffe (SYNAPGREF) suspend sa grève pour un mois."
+    },
+    {
+     "fact": "决定在9月24日大会上作出，此前自9月17日起已动员一周",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La décision a été prise ce jeudi 24 septembre 2026 lors d’une assemblée générale, après une semaine de mobilisation entamée le 17 septembre."
+    },
+    {
+     "fact": "工会称暂停是为给当局时间推进其诉求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le syndicat entend ainsi donner du temps aux autorités pour avancer sur ses revendications."
+    },
+    {
+     "fact": "司法部长在9月17日会面中承诺推动相关法律文本工作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Lors d’une rencontre tenue le 17 septembre avec la ministre de la Justice, Ndolenodji Alixe Naimbaye... Le ministère s’est engagé à œuvrer à leur prise en compte, notamment à travers un travail sur les textes concernés."
+    },
+    {
+     "fact": "暂停期至10月23日，10月26日将召开新大会评估进展",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La suspension court jusqu’au 23 octobre. Une nouvelle assemblée générale est prévue le 26 octobre pour évaluer les avancées obtenues et décider de la suite à donner au mouvement."
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Le Pays Tchad）报道，尚缺乏交叉验证",
+    "当局承诺的诉求落实进展尚未证实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 80
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得SYNAPGREF工会暂停罢工一个月",
+   "summary_zh": "乍得全国移植专业人员工会（SYNAPGREF）于9月24日召开大会，决定暂停自9月17日开始的罢工一个月。工会表示此举是为给当局时间推进其诉求，此前司法部长已承诺推动相关法律文本工作。暂停期至10月23日，10月26日将再次召开大会评估进展。",
+   "event_type": "civil_unrest",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "SYNAPGREF工会决定暂停罢工一个月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Syndicat national des professionnels de greffe (SYNAPGREF) suspend sa grève pour un mois."
+    },
+    {
+     "fact": "决定在9月24日大会上作出，此前自9月17日起已动员一周",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La décision a été prise ce jeudi 24 septembre 2026 lors d’une assemblée générale, après une semaine de mobilisation entamée le 17 septembre."
+    },
+    {
+     "fact": "工会称暂停是为给当局时间推进其诉求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le syndicat entend ainsi donner du temps aux autorités pour avancer sur ses revendications."
+    },
+    {
+     "fact": "司法部长在9月17日会面中承诺推动相关法律文本工作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Lors d’une rencontre tenue le 17 septembre avec la ministre de la Justice, Ndolenodji Alixe Naimbaye... Le ministère s’est engagé à œuvrer à leur prise en compte, notamment à travers un travail sur les textes concernés."
+    },
+    {
+     "fact": "暂停期至10月23日，10月26日将召开新大会评估进展",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La suspension court jusqu’au 23 octobre. Une nouvelle assemblée générale est prévue le 26 octobre pour évaluer les avancées obtenues et décider de la suite à donner au mouvement."
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Le Pays Tchad）报道，尚缺乏交叉验证",
+    "当局承诺的诉求落实进展尚未证实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 80
+  }
+ },
+ "event_id": "EVT_4eb654412539e7da",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

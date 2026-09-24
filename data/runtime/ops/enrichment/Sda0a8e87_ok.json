@@ -1,0 +1,113 @@
+{
+ "label": "Sda0a8e87",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "fc8f99ee33cbb365c101670acc9de26fdd69ab121184218759685ff4304e3018",
+ "tokens": {
+  "input_tokens": 2849,
+  "output_tokens": 562,
+  "total_tokens": 3411
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔多索举办前战斗人员投降与重返社会区域研讨会",
+   "summary_zh": "尼日尔多索大区于2026年9月21日举办区域研讨会，旨在提高各方对前战斗人员及武装团体关联人员投降与重返社会进程的认识并加强相关能力。多索大区区长班纳·阿尔哈桑上校主持开幕式，强调自愿投降是减少暴力、帮助愿意脱离武装团体者重返社会的重要机会。国家稳定计划协调员戈尼·易卜拉欣表示，投降应被视为结构化进程的起点，而非孤立行为。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "多索大区",
+    "city": "多索",
+    "site": "多索大区政府会议室",
+    "raw_text": "Salle de réunion du Gouvernorat de Dosso"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔多索大区举办前战斗人员投降与重返社会区域研讨会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Salle de réunion du Gouvernorat de Dosso a abrité, ce lundi 21 septembre 2026, un atelier régional de sensibilisation et de renforcement des capacités des acteurs sur le processus de reddition et de réintégration des ex-combattants"
+    },
+    {
+     "fact": "多索大区区长班纳·阿尔哈桑上校主持开幕式",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La cérémonie d’ouverture a été présidée par le Gouverneur de la Région, le Colonel-Major Bana Alhassane"
+    },
+    {
+     "fact": "区长称自愿投降是减少暴力、帮助愿意脱离武装团体者重返社会的重要机会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la reddition volontaire constitue une opportunité importante pour réduire la violence et permettre à ceux qui souhaitent rompre avec les groupes armés de retrouver progressivement une place au sein de la société"
+    },
+    {
+     "fact": "国家稳定计划协调员称投降应被视为结构化进程的起点而非孤立行为",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la reddition doit être considérée non comme un acte isolé, mais comme le début d’un processus structuré comprenant l’identification, l’orientation, la prise en charge et la réintégration des personnes éligibles"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（尼日尔官方通讯社ANP）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔多索举办前战斗人员投降与重返社会区域研讨会",
+   "summary_zh": "尼日尔多索大区于2026年9月21日举办区域研讨会，旨在提高各方对前战斗人员及武装团体关联人员投降与重返社会进程的认识并加强相关能力。多索大区区长班纳·阿尔哈桑上校主持开幕式，强调自愿投降是减少暴力、帮助愿意脱离武装团体者重返社会的重要机会。国家稳定计划协调员戈尼·易卜拉欣表示，投降应被视为结构化进程的起点，而非孤立行为。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "多索大区",
+    "city": "多索",
+    "site": "多索大区政府会议室",
+    "raw_text": "Salle de réunion du Gouvernorat de Dosso"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔多索大区举办前战斗人员投降与重返社会区域研讨会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Salle de réunion du Gouvernorat de Dosso a abrité, ce lundi 21 septembre 2026, un atelier régional de sensibilisation et de renforcement des capacités des acteurs sur le processus de reddition et de réintégration des ex-combattants"
+    },
+    {
+     "fact": "多索大区区长班纳·阿尔哈桑上校主持开幕式",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La cérémonie d’ouverture a été présidée par le Gouverneur de la Région, le Colonel-Major Bana Alhassane"
+    },
+    {
+     "fact": "区长称自愿投降是减少暴力、帮助愿意脱离武装团体者重返社会的重要机会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la reddition volontaire constitue une opportunité importante pour réduire la violence et permettre à ceux qui souhaitent rompre avec les groupes armés de retrouver progressivement une place au sein de la société"
+    },
+    {
+     "fact": "国家稳定计划协调员称投降应被视为结构化进程的起点而非孤立行为",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la reddition doit être considérée non comme un acte isolé, mais comme le début d’un processus structuré comprenant l’identification, l’orientation, la prise en charge et la réintégration des personnes éligibles"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（尼日尔官方通讯社ANP）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_9a465c71da0a8e87",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
