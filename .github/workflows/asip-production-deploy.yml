@@ -84,7 +84,7 @@ jobs:
       - name: Checkout production code
         uses: actions/checkout@v4
         with:
-          ref: f6a07ad39f1acc627df6d73814b990b4e7e67877
+          ref: cf032f508d29b369835f774d925d1d2e13a5354d
           fetch-depth: 1
 
       - name: Checkout production state branch（数据快照）
@@ -111,6 +111,11 @@ jobs:
           cp -f state_src/data/events.json state_src/data/pending_events.json \
             state_src/data/raw_candidates.json state_src/data/quarantine_events.json data/ 2>/dev/null || true
           cp -rf state_src/data/public/. data/public/ 2>/dev/null || true
+          # C7-5：编排器产出的前端视图（首页情报视图等）也必须进入构建。
+          # 此前 deploy 只从仓库 data/views 快照回退取值，导致编排器新生成的
+          # homepage_intelligence.json 不在产物中（线上 404 → 首页各板块空态）。
+          mkdir -p data/views
+          cp -rf state_src/data/views/. data/views/ 2>/dev/null || true
 
       - name: Deploy provenance（§三/§J/§K/§H）
         id: prov
