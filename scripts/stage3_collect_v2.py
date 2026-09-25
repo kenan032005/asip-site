@@ -88,6 +88,8 @@ _wall_clock_limit_seconds = None
 SOURCE_BUDGET_SECONDS = float(os.environ.get("ASIP_SOURCE_BUDGET_SECONDS", "90"))
 WALL_CLOCK_RESERVE_SECONDS = float(os.environ.get("ASIP_WALL_CLOCK_RESERVE_SECONDS", "180"))
 ROTATION_FILE = os.path.join(ROOT, "data", "runtime", "ops", "collection_rotation.json")
+# 逐国管道 → write_stats 的跨函数事实（避免把管道局部变量泄漏到统计函数作用域）
+_LAST_RUN_FACTS = {"sources_attempted": 0, "rotation_offset_used": 0, "total_sources": 0}
 
 
 def set_wall_clock_limit(seconds):
@@ -126,6 +128,20 @@ def _skipped_stat(src, country_cn):
         "html_full_body": 0, "html_partial_body": 0, "html_published": 0,
         "html_listing_channel": bool(src.get("listing_urls")),
     }
+
+
+def _record_rotation(rot_off, attempted, total):
+    """C7-4R P6：持久化轮转偏移（失败不影响采集结果）。"""
+    try:
+        os.makedirs(os.path.dirname(ROTATION_FILE), exist_ok=True)
+        with open(ROTATION_FILE, "w", encoding="utf-8") as f:
+            json.dump({"offset": (rot_off + attempted) % max(1, total),
+                       "attempted_last_run": attempted,
+                       "total_sources": total,
+                       "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())},
+                      f, ensure_ascii=False, indent=1)
+    except Exception as e:  # noqa: BLE001
+        print("  ! rotation write failed: %s" % e)
 
 
 def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=False, max_items=0, run_id=""):
@@ -595,6 +611,11 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
               f"正文{stat['full_body']+stat['partial_body']} 发布{stat['published']} "
               f"隔离{stat['quarantined']}")
 
+    # C7-4R P6：在管道作用域内记录本轮事实并写轮转偏移（供统计函数读取）
+    _LAST_RUN_FACTS.update({"sources_attempted": attempted_sources,
+                            "rotation_offset_used": rot_off,
+                            "total_sources": total_sources})
+    _record_rotation(rot_off, attempted_sources, total_sources)
     return all_articles, per_source, errors
 
 
@@ -752,22 +773,13 @@ def write_stats(per_source, run_id, configured_sources=0, article_stats=None,
         # C7-4R P3/P6：单源预算与公平轮转的可复核指标
         "source_budget_seconds": SOURCE_BUDGET_SECONDS,
         "reserve_seconds": WALL_CLOCK_RESERVE_SECONDS,
-        "sources_attempted": attempted_sources,
+        "sources_attempted": _LAST_RUN_FACTS.get("sources_attempted", 0),
         "sources_timed_out": sum(1 for s in per_source if s.get("source_timeout")),
         "source_order_policy": "stalest_rotation_offset",
-        "rotation_offset_used": rot_off,
+        "rotation_offset_used": _LAST_RUN_FACTS.get("rotation_offset_used", 0),
     }
     # C7-4R P6：写入新偏移 —— 下次运行从本轮结束处继续，保证被跳过来源获得优先权
-    try:
-        os.makedirs(os.path.dirname(ROTATION_FILE), exist_ok=True)
-        with open(ROTATION_FILE, "w", encoding="utf-8") as _f:
-            json.dump({"offset": (rot_off + attempted_sources) % max(1, total_sources),
-                       "attempted_last_run": attempted_sources,
-                       "total_sources": total_sources,
-                       "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())},
-                      _f, ensure_ascii=False, indent=1)
-    except Exception as _re:  # noqa: BLE001
-        print("  ! rotation write failed: %s" % _re)
+    # （由 run_country_pipeline 在自身作用域内完成，见 _record_rotation）
     doc = {
         "generated_at": bj_iso(),
         "run_id": run_id,
