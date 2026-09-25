@@ -84,6 +84,11 @@ def save_json(path, doc):
 _DEADLINE = None          # time.monotonic() 截止点；None = 不限
 _wall_clock_limit_seconds = None
 
+# C7-4R 采集可靠性：单源预算 + 全局软停余量（防止单源/单请求吞掉整个墙钟预算）
+SOURCE_BUDGET_SECONDS = float(os.environ.get("ASIP_SOURCE_BUDGET_SECONDS", "90"))
+WALL_CLOCK_RESERVE_SECONDS = float(os.environ.get("ASIP_WALL_CLOCK_RESERVE_SECONDS", "180"))
+ROTATION_FILE = os.path.join(ROOT, "data", "runtime", "ops", "collection_rotation.json")
+
 
 def set_wall_clock_limit(seconds):
     global _DEADLINE, _wall_clock_limit_seconds
@@ -114,6 +119,7 @@ def _skipped_stat(src, country_cn):
         "summary_only": 0, "extraction_failed": 0, "published": 0,
         "quarantined": 0, "duplicates": 0, "errors": 0,
         "status": "skipped_wall_clock",
+        "wall_clock_exhausted": True,
         "error": "WALL_CLOCK_LIMIT_REACHED: 未在本轮尝试（预算耗尽，优雅降级）",
         "failure_reason": "WALL_CLOCK_LIMIT_REACHED", "failure_evidence": [],
         "duration_s": 0.0, "html_discovered": 0, "html_fetched": 0,
@@ -141,15 +147,29 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
     all_articles = []
     per_source = []
     errors = []
+    # C7-4R P6：公平轮转 —— 每次运行从上次结束处的下一条源开始，保证被墙钟跳过的源
+    # 在后续运行中获得优先权（不建复杂队列，仅持久化偏移量）。
+    rot_off = 0
+    try:
+        with open(ROTATION_FILE, "r", encoding="utf-8") as f:
+            rot_off = int((json.load(f) or {}).get("offset") or 0) % max(1, len(sources))
+    except Exception:
+        rot_off = 0
+    if rot_off:
+        sources = sources[rot_off:] + sources[:rot_off]
+    total_sources = len(sources)
+    attempted_sources = 0
 
     for src in sources:
-        if wall_clock_exhausted():
+        # C7-4R P4：全局软停 —— 预留 persistence/聚类/统计余量，提前停止发起新来源
+        if wall_clock_exhausted() or (wall_clock_remaining() or 0) <= WALL_CLOCK_RESERVE_SECONDS:
             # C1C-V：达到全局墙钟预算 → 停止发起新抓取，但不影响后续 persistence/聚类/统计
-            print("  [wall-clock] 预算耗尽，跳过剩余来源（已完成的采集结果保留）")
+            print("  [wall-clock] 预算耗尽/进入保留区，跳过剩余来源（已完成的采集结果保留）")
             idx = sources.index(src)
             for rest in sources[idx:]:
                 per_source.append(_skipped_stat(rest, country_cn))
             break
+        attempted_sources += 1
         sid = src["source_id"]
         t0 = time.time()
         stat = {
@@ -246,7 +266,21 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
 
         # 2) 抓取详情页 + 3) 正文提取
         extractor = ContentExtractor(src.get("extractor_profile") or {}, source_id=src.get("source_id", ""))
-        for d in discovered:
+        for _di, d in enumerate(discovered):
+            # C7-4R P3/P4：单源预算 + 全局软停（在抓取循环内强制检查，避免单源吞掉墙钟）
+            if wall_clock_remaining() is not None and wall_clock_remaining() <= WALL_CLOCK_RESERVE_SECONDS:
+                stat["wall_clock_exhausted"] = True
+                stat["skipped_items_budget"] = len(discovered) - _di
+                stat["failure_reason"] = stat.get("failure_reason") or "wall_clock_exhausted"
+                print("    [wall-clock] 进入保留区，停止本来源剩余条目抓取")
+                break
+            if (time.time() - t0) > SOURCE_BUDGET_SECONDS:
+                stat["source_timeout"] = True
+                stat["skipped_items_budget"] = len(discovered) - _di
+                stat["failure_reason"] = "source_timeout"
+                print("    [source-budget] 单源预算 %.0fs 用尽，跳过本来源剩余条目"
+                      % SOURCE_BUDGET_SECONDS)
+                break
             url = d.get("url", "")
             nurl = norm_url(url)
             if not nurl:
@@ -715,7 +749,25 @@ def write_stats(per_source, run_id, configured_sources=0, article_stats=None,
         "exhausted": wall_clock_exhausted(),
         "sources_skipped": sum(1 for s in per_source
                                if s.get("status") == "skipped_wall_clock"),
+        # C7-4R P3/P6：单源预算与公平轮转的可复核指标
+        "source_budget_seconds": SOURCE_BUDGET_SECONDS,
+        "reserve_seconds": WALL_CLOCK_RESERVE_SECONDS,
+        "sources_attempted": attempted_sources,
+        "sources_timed_out": sum(1 for s in per_source if s.get("source_timeout")),
+        "source_order_policy": "stalest_rotation_offset",
+        "rotation_offset_used": rot_off,
     }
+    # C7-4R P6：写入新偏移 —— 下次运行从本轮结束处继续，保证被跳过来源获得优先权
+    try:
+        os.makedirs(os.path.dirname(ROTATION_FILE), exist_ok=True)
+        with open(ROTATION_FILE, "w", encoding="utf-8") as _f:
+            json.dump({"offset": (rot_off + attempted_sources) % max(1, total_sources),
+                       "attempted_last_run": attempted_sources,
+                       "total_sources": total_sources,
+                       "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())},
+                      _f, ensure_ascii=False, indent=1)
+    except Exception as _re:  # noqa: BLE001
+        print("  ! rotation write failed: %s" % _re)
     doc = {
         "generated_at": bj_iso(),
         "run_id": run_id,
