@@ -28,6 +28,7 @@
   python scripts/ai/safety/manual_trial.py [--out-dir data/runtime/ai_safety/stage8c_trial]
 """
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -215,9 +216,37 @@ def build_inputs(run_at=None):
         "golden_set_used": False,
         "mock_used": False,
     }
+    # C7-3 P8：文章级情报信号（LEVEL A，news_signal ≠ verified_event）作为**加法输入**。
+    # 不注入 social/sections 冻结契约、不改事件准入语义；仅随报告输入工件留痕，
+    # 供报告 AI 作为上下文与后续 schema 扩展使用。
+    try:
+        ns = load_json(ROOT / "data/views/news_stream.json", {}) or {}
+        sig_items = []
+        for s in (ns.get("items") or []):
+            if s.get("quarantined") or not s.get("localized"):
+                continue
+            if not in_window(s.get("last_seen_at") or s.get("observed_at"), 24 * 7):
+                continue
+            sig_items.append({
+                "signal_id": "news:%s" % hashlib.sha256(
+                    str(s.get("dedup_key") or s.get("news_id") or "").encode()).hexdigest()[:16],
+                "level": "news_signal",
+                "country_cn": s.get("country_cn") or "",
+                "title_cn": (s.get("title_cn") or "")[:120],
+                "summary_cn": (s.get("summary_cn") or "")[:160],
+                "why_it_matters": (s.get("why_it_matters") or "")[:140],
+                "source_name": s.get("source_name") or "",
+                "time": s.get("last_seen_at") or s.get("observed_at") or "",
+                "verification_status": s.get("verification_status") or "news_signal",
+            })
+        sig_items = sig_items[:20]
+    except Exception:
+        sig_items = []
     return {"cutoff": cutoff, "social_candidates": social, "disease_candidates": disease,
             "daily_input": daily, "weekly_tcd_input": weekly_tcd,
-            "weekly_ssd_input": weekly_ssd, "stats": stats}
+            "weekly_ssd_input": weekly_ssd, "stats": stats,
+            "intelligence_signals": sig_items,
+            "intelligence_signal_count": len(sig_items)}
 
 
 def _source_coverage(items):

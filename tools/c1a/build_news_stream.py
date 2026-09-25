@@ -244,6 +244,33 @@ def build(live_dir, internal_dir, out_root, now=None):
     cluster_ids = {c.get("event_id") for c in clusters}
 
     src_meta = {s.get("source_id"): s for s in srcs}
+
+    # C7-3：区域映射（KB countries/regions，country 为 optional 字段）+
+    # 文章级本地化运行时缓存（runtime enrichment → view projection，唯一键 dedup_key）
+    global REGION_BY_ISO2, LOCALIZATION_INDEX
+    try:
+        kb_c = rd(os.path.join(internal_dir, os.path.join("intelligence", "africa", "countries.json")), {})
+        kb_r = rd(os.path.join(internal_dir, os.path.join("intelligence", "africa", "regions.json")), {})
+        cid2reg = {}
+        for c in (kb_c.get("countries") or []):
+            for rid in (c.get("region_ids") or [])[:1]:
+                cid2reg[c.get("country_id")] = rid
+        name_by_rid = {r.get("region_id"): (r.get("name_zh") or r.get("name_en"))
+                       for r in (kb_r.get("regions") or [])}
+        iso2cid = {c.get("iso_alpha2"): c.get("country_id") for c in (kb_c.get("countries") or [])}
+        REGION_BY_ISO2 = {iso2: name_by_rid.get(cid2reg.get(cid))
+                          for iso2, cid in iso2cid.items()}
+        REGION_BY_ISO2 = {k: v for k, v in REGION_BY_ISO2.items() if v}
+    except Exception:
+        REGION_BY_ISO2 = {}
+    try:
+        _loc_path = os.path.join(internal_dir, os.path.join("runtime", "ops", "localization", "index.json"))
+        LOCALIZATION_INDEX = rd(_loc_path, {})
+        if not isinstance(LOCALIZATION_INDEX, dict):
+            LOCALIZATION_INDEX = {}
+    except Exception:
+        LOCALIZATION_INDEX = {}
+
     candidates = []
 
     # ---- A. LIVING LAYER: live published observations (URL-bearing, fresh)
@@ -404,6 +431,23 @@ def build(live_dir, internal_dir, out_root, now=None):
         n["event_type_cn"] = ETYPE_CN.get(n["event_type"] or "", n["event_type"] or "其他")
         n["verification_label_cn"] = VERIF_CN.get(n["verification_level"], "尚未核实")
         n["is_verified_event"] = int(n["independent_source_count"] or 0) >= 2
+        # C7-3 P2：情报层级标注（news_signal ≠ verified_event）+ 重要度 + 区域 +
+        # 文章级本地化合并（runtime enrichment → public view projection，无第二存储）
+        n["verification_status"] = "verified_event" if n["is_verified_event"] else "news_signal"
+        _src_n = int(n["independent_source_count"] or 0)
+        n["importance"] = ("high" if (n["is_verified_event"] and _src_n >= 3)
+                           else ("medium" if (n["is_verified_event"] or _src_n >= 2) else "low"))
+        n["region"] = REGION_BY_ISO2.get(n["country_iso2"] or "")
+        _loc = LOCALIZATION_INDEX.get(n["dedup_key"]) or {}
+        if _loc.get("title_cn"):
+            n["title_cn"] = _loc["title_cn"]
+        if _loc.get("summary_cn"):
+            n["summary_cn"] = _loc["summary_cn"]
+        if _loc.get("why_it_matters"):
+            n["why_it_matters"] = _loc["why_it_matters"]
+        n["localized"] = bool(n["title_cn"])
+        n["title"] = n["title_cn"] or n["title_original"]
+        n["title_cn_missing"] = not bool(n["title_cn"])
         n["country_iso3"] = ISO3.get(n["country_iso2"] or "")
         n["lane"] = "news"
         n["disclaimer_cn"] = ("本条为单一来源信号，尚未完成多来源交叉核实，"

@@ -61,12 +61,24 @@
   function renderOverview(d) {
     var host = document.getElementById("execOverview");
     if (!host) return;
+    var wrap = document.getElementById("execOverviewWrap");
+    var a = d.assessment || {};
+    var isAI = a.status === "ai" && String(a.overall_assessment || "").trim() !== "";
+    var text = isAI ? a.overall_assessment
+                    : (d.overall_assessment || "暂无足够的公开信息形成稳定研判。");
+    var gen = shortTime(isAI ? (a.generated_time || d.generated_time) : d.generated_time);
+    var risk = RISK_CN[(isAI ? a.risk_direction : d.risk_direction)] || "—";
+    var conf = CONF_CN[(isAI ? a.confidence : d.confidence)] || "—";
+    if (wrap) {  // 标签随内容来源切换：确定性内容绝不标注为 AI
+      var h = wrap.querySelector(".exec-card-h h2");
+      var en = wrap.querySelector(".exec-card-en");
+      if (h) h.textContent = isAI ? "AI 安全态势研判" : "非洲安全态势概览";
+      if (en) en.textContent = isAI ? "AI SECURITY ASSESSMENT"
+                                    : "AFRICA SECURITY SITUATION OVERVIEW";
+    }
     var p = d.period || {};
-    var risk = RISK_CN[d.risk_direction] || "—";
-    var conf = CONF_CN[d.confidence] || "—";
-    var gen = shortTime(d.generated_time);
     host.innerHTML =
-      '<div class="exec-assess">' + esc(d.overall_assessment || "暂无足够的公开信息形成稳定研判。") + "</div>" +
+      '<div class="exec-assess">' + esc(text) + "</div>" +
       '<div class="exec-chips">' +
         '<span class="exec-chip"><b>' + Number(p.events_24h || 0) + "</b>24h 事件</span>" +
         '<span class="exec-chip"><b>' + Number(p.events_7d || 0) + "</b>7d 事件</span>" +
@@ -76,6 +88,7 @@
       '<div class="exec-meta">' +
         '<span class="exec-pill ' + (RISK_CLS[d.risk_direction] || "") + '">风险方向：' + esc(risk) + "</span>" +
         '<span class="exec-pill">数据置信度：' + esc(conf) + "</span>" +
+        (isAI ? '<span class="exec-pill is-ai">基于' + esc(a.based_on || "过去24小时/7日公开信息") + "</span>" : "") +
         '<span class="exec-update">更新于 ' + esc(gen) + '</span>' +
       "</div>";
   }

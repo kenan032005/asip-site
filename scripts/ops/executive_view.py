@@ -109,6 +109,27 @@ def country_cn(raw, mapping):
     return s
 
 
+def load_assessment(data_dir, now):
+    """C7-3：读取今日 AI 每日研判（仅当日 + 事实门通过才算有效）。
+
+    返回 {"status": "ai"|"deterministic", ...}；确定性回退永远可用，
+    站点绝不把确定性内容标注为 AI。
+    """
+    path = data_dir / "intelligence" / "ai" / "assessment" / "daily" / \
+        (now.strftime("%Y%m%d") + ".json")
+    a = load_json(path, {}) or {}
+    if a.get("status") == "ok" and str(a.get("overall_assessment") or "").strip():
+        return {"status": "ai",
+                "overall_assessment": str(a["overall_assessment"]).strip(),
+                "risk_direction": a.get("risk_direction") or "",
+                "confidence": a.get("confidence") or "",
+                "generated_time": a.get("generated_time") or "",
+                "based_on": "过去24小时/7日公开信息",
+                "model": a.get("model") or "",
+                "date": a.get("date") or ""}
+    return {"status": "deterministic", "based_on": "过去24小时/7日公开信息（确定性汇总）"}
+
+
 def build(root, now):
     root = Path(root)
     data = root / "data"
@@ -242,6 +263,7 @@ def build(root, now):
         "key_regions": key_regions,
         "top_events": top_events,
         "latest_intelligence": latest,
+        "assessment": load_assessment(data, now),   # C7-3：ai → 加 AI 标签；否则确定性回退
         "sources_used": list(SOURCES_USED),
     }
     if ai_text:

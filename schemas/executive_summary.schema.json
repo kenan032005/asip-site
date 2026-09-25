@@ -94,6 +94,22 @@
       "type": "string",
       "description": "可选：来自既有 data/views/ai_intelligence.json 的评估文字（原样引用，注明来源）；C7-3 将替换为正式每日评估"
     },
+    "assessment": {
+      "type": "object",
+      "description": "C7-3：研判来源标注。status=ai 时 overall_assessment 来自当日真实 AI 每日研判；status=deterministic 时必须以中性标题呈现，不得标注 AI。",
+      "additionalProperties": false,
+      "required": ["status", "based_on"],
+      "properties": {
+        "status": {"type": "string", "enum": ["ai", "deterministic"]},
+        "overall_assessment": {"type": "string"},
+        "risk_direction": {"type": "string"},
+        "confidence": {"type": "string"},
+        "generated_time": {"type": "string"},
+        "based_on": {"type": "string"},
+        "model": {"type": "string"},
+        "date": {"type": "string"}
+      }
+    },
     "key_regions": {
       "type": "array",
       "items": {

@@ -88,7 +88,29 @@ def ai_publication_projection(data_root):
          str(e.get("summary_cn") or "").strip())
         for e in items
         if str(e.get("title_cn") or "").strip() or str(e.get("summary_cn") or "").strip())
-    blob = json.dumps(rows, ensure_ascii=False, sort_keys=True).encode("utf-8")
+    # C7-3 P10：情报内容变更同样纳入发布触发投影 ——
+    #   exec  = executive_summary 的研判内容与计数（排除 generated_time 等易变字段，防部署风暴）
+    #   feed  = 情报流中已本地化条目数（新本地化 → 新可见内容）
+    exec_sig, feed_loc = None, None
+    try:
+        ex = json.loads((Path(data_root) / "views" / "executive_summary.json")
+                        .read_text(encoding="utf-8"))
+        a = ex.get("assessment") or {}
+        pt = ex.get("period") or {}
+        exec_sig = [a.get("status") or "", str(a.get("overall_assessment") or "")[:400],
+                    a.get("risk_direction") or "", pt.get("events_24h"),
+                    pt.get("events_7d"), pt.get("active_countries_24h"),
+                    pt.get("active_countries_7d")]
+    except Exception:  # noqa: BLE001
+        exec_sig = None
+    try:
+        ns = json.loads((Path(data_root) / "views" / "news_stream.json")
+                        .read_text(encoding="utf-8"))
+        feed_loc = sum(1 for x in (ns.get("items") or []) if x.get("localized"))
+    except Exception:  # noqa: BLE001
+        feed_loc = None
+    blob = json.dumps({"pub": rows, "exec": exec_sig, "feed_localized": feed_loc},
+                      ensure_ascii=False, sort_keys=True).encode("utf-8")
     return hashlib.sha256(blob).hexdigest(), len(rows)
 
 
@@ -377,7 +399,10 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
         nonlocal report_ran
         results[label] = {"task": task, "trigger": trigger, "ok": False, "detail": None}
         if task == "collection":
-            ok = _run_script(["scripts/ops/collection_run.py", "--execute"], emit)
+            # C7-3 P1：外层超时 2760s > 采集器内层预算（wall-clock 2400s / 兜底 2700s），
+            # 让兜底优雅停机先于外层硬杀生效（修复实测 1858/2631/1817s 三轮被 1800s 硬杀）。
+            ok = _run_script(["scripts/ops/collection_run.py", "--execute"], emit,
+                             timeout=2760)
             state = _reload_state(state)
             if ok:
                 ps.record_run(state, "last_successful_collection", ok=True)
@@ -548,9 +573,23 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
     results["apply_enrichment"] = {
         "ok": _run_script(["scripts/ops/enrichment_bridge.py", "--apply"], emit),
         "detail": "enrichment_bridge"}
+    # C7-3 P1：采集外层超时必须 > 采集器内层预算（wall-clock 2400s / 兜底 2700s），
+    # 否则长采集轮次被外层硬杀（实测 1858/2631/1817s 三轮失败）。2760s 给兜底留出
+    # 优雅停机窗口，且 46min + 下游 AI/报告/导出 ≈ 仍在编排 job 的 60min 之内。
+    results["news_localization"] = {
+        "ok": _run_script(["scripts/ops/news_localization_run.py"], emit,
+                          timeout=2760),
+        "detail": "news_localization"}
+    results["daily_assessment"] = {
+        "ok": _run_script(["scripts/ops/assessment_run.py"], emit, timeout=900),
+        "detail": "assessment_run"}
     # canonical 变更后必须再生成遗留/公开视图（events.json / pending / raw / quarantine /
     # public/published_events / current_metrics），否则 deploy 的 V17 canonical↔legacy 校验失败
     results["views_export"] = {"ok": _export_views(emit), "detail": "compatibility_export"}
+    # C7-3 P9：情报板视图刷新（消费 assessment + feed），必须在 views_export 之后发布
+    results["executive_view"] = {
+        "ok": _run_script(["scripts/ops/executive_view.py", "--apply"], emit),
+        "detail": "executive_view"}
 
     # C6-R5F：发布内容变更检测 → 让"仅 AI 译文/摘要入库"也能触发现有部署工作流。
     # 原判定只在 daily/weekly 报告分支里设置 deploy_required，因此富集桥接把
