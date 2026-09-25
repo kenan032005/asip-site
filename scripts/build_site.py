@@ -71,6 +71,7 @@ FRONTEND_VIEWS = [
     "knowledge_summary",
     "ai_intelligence",        # C5-A：Homepage 会请求该视图，此前未发布 → 404
     "executive_summary",      # C7-1：领导 30 秒仪表盘单一数据源（确定性，无 AI 生成）
+    "homepage_intelligence",  # C7-5：MESIP 风格首页情报视图（8 板块 + 地图 + 情报流）
 ]
 FRONTEND_VIEWS_DIR = os.path.join(DATA_DIR, "runtime", "frontend_preview_public")
 

@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="assets/css/home-v11.css">
 <link rel="stylesheet" href="assets/css/news-stream.css">
 <link rel="stylesheet" href="assets/css/executive.css">
+<link rel="stylesheet" href="assets/css/homepage-intelligence.css">
 </head>
 <body data-page="home">
 <div id="topbar" class="topbar"></div>
@@ -18,6 +19,51 @@
 
 <!-- ============ V1.1 Executive Dashboard ============ -->
 <main class="v11" id="v11Home">
+
+  <!-- ============ C7-5 首页情报（MESIP 风格；顺序：24h→领域→重点→中国→地图→健康→情报流→报告） ============ -->
+  <div class="hpi-wrap" id="hpiWrap">
+    <section class="hpi-card" aria-label="过去24小时非洲安全态势">
+      <div class="hpi-card-h"><h2>过去24小时非洲安全态势</h2><span class="hpi-en">AFRICA SECURITY SITUATION — LAST 24 HOURS</span></div>
+      <div id="hpiOverview"><div class="hpi-empty">加载中…</div></div>
+    </section>
+
+    <section class="hpi-card" aria-label="五大安全领域">
+      <div class="hpi-card-h"><h2>五大安全领域分析</h2><span class="hpi-en">SECURITY SECTOR ANALYSIS</span></div>
+      <div class="hpi-sectors" id="hpiSectors"><div class="hpi-empty">加载中…</div></div>
+    </section>
+
+    <section class="hpi-card" aria-label="今日重点信息与事件解读">
+      <div class="hpi-card-h"><h2>今日重点信息与事件解读</h2><span class="hpi-en">TOP DEVELOPMENTS &amp; AI INTERPRETATION</span></div>
+      <div id="hpiTop"><div class="hpi-empty">加载中…</div></div>
+    </section>
+
+    <section class="hpi-card" aria-label="对中国企业及人员影响">
+      <div class="hpi-card-h"><h2>对中国企业及人员影响</h2><span class="hpi-en">CHINA BUSINESS &amp; PERSONNEL IMPACT</span></div>
+      <div id="hpiChina"><div class="hpi-empty">加载中…</div></div>
+    </section>
+
+    <section class="hpi-card" aria-label="非洲安全风险与活动态势">
+      <div class="hpi-card-h"><h2>非洲安全风险与活动态势</h2><span class="hpi-en">AFRICA SECURITY RISK &amp; ACTIVITY</span></div>
+      <div id="hpiMap"><div class="hpi-empty">加载中…</div></div>
+    </section>
+
+    <section class="hpi-card" aria-label="公共卫生与传染病安全">
+      <div class="hpi-card-h"><h2>公共卫生与传染病安全</h2><span class="hpi-en">HEALTH SECURITY WATCH</span></div>
+      <div id="hpiHealth"><div class="hpi-empty">加载中…</div></div>
+    </section>
+
+    <section class="hpi-card" aria-label="最新情报流">
+      <div class="hpi-card-h"><h2>最新情报流</h2><span class="hpi-en">LATEST INTELLIGENCE FEED</span>
+        <a class="hpi-cc" href="events.html" style="margin-left:auto">全部事件 →</a></div>
+      <div id="hpiFeed"><div class="hpi-empty">加载中…</div></div>
+    </section>
+
+    <section class="hpi-card" aria-label="日报与周报">
+      <div class="hpi-card-h"><h2>日报与周报</h2><span class="hpi-en">DAILY &amp; WEEKLY BRIEFS</span></div>
+      <div class="hpi-meta"><a class="hpi-cc" href="reports.html">查看日报 / 周报 →</a>
+        <span class="hpi-note">日报含执行摘要、重点事件、情报信号与区域趋势；周报含每周评估与展望。</span></div>
+    </section>
+  </div>
 
   <!-- ============ C7-2 领导 30 秒视图（数据层：data/views/executive_summary.json） ============ -->
   <section class="exec-board" id="execBoard" aria-label="安全态势概览">
@@ -184,5 +230,6 @@
 <script src="assets/js/news-stream.js"></script>
 <script src="assets/js/ai-intelligence.js"></script>
 <script src="assets/js/executive.js"></script>
+<script src="assets/js/homepage-intelligence.js"></script>
 </body>
 </html>
