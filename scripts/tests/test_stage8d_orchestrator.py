@@ -60,13 +60,14 @@ class TestDuePlanner(unittest.TestCase):
         self.assertIn("collection", [t["task"] for t in p["due"]])
 
     def test_collection_not_due_within_gap(self):
-        # now = 03:00 BJT = 19:00Z；上次成功在 13:30Z（BJT 21:30 前一日）→ 间隔 5h30m < 5h45m
-        st = state(last_successful_collection="2026-08-28T13:30:00Z")
+        # C7-4 P6：cadence 5h45m → 2h45m。now = 03:00 BJT = 19:00Z；
+        # 上次成功在 17:00Z（BJT 01:00 前一日）→ 间隔 2h < 2h45m → 不 due
+        st = state(last_successful_collection="2026-08-28T17:00:00Z")
         p = so.plan_due_tasks(st, now_bjt=bjt(2026, 8, 29, 3, 0))
         self.assertNotIn("collection", [t["task"] for t in p["due"]])
 
     def test_collection_due_after_gap(self):
-        # 上次成功 12:10Z（BJT 20:10 前一日）→ 间隔 6h50m ≥ 5h45m
+        # 上次成功 12:10Z（BJT 20:10 前一日）→ 间隔 6h50m ≥ 2h45m → due
         st = state(last_successful_collection="2026-08-28T12:10:00Z")
         p = so.plan_due_tasks(st, now_bjt=bjt(2026, 8, 29, 3, 0))
         self.assertIn("collection", [t["task"] for t in p["due"]])

@@ -248,6 +248,27 @@ def build(live_dir, internal_dir, out_root, now=None):
     cluster_ids = {c.get("event_id") for c in clusters}
 
     src_meta = {s.get("source_id"): s for s in srcs}
+    # C7-4 P2：多国出口判定 —— 同一 source_group 的 country_scope 并集 > 1 国，
+    # 即视为泛非/多国出口（如 africanews 的 chad/niger 双条目、pan_* 单条目多国）。
+    # 多国出口的文章国别必须由文章内容解析，不得使用来源默认国。
+    GROUP2SCOPE = {}
+    for s in srcs:
+        g = str(s.get("source_group") or "").strip()
+        if g:
+            GROUP2SCOPE.setdefault(g, set()).update(
+                str(c) for c in (s.get("country_scope") or []))
+    MULTI_GROUPS = {g for g, sc in GROUP2SCOPE.items() if len(sc) > 1}
+    # 国家识别配置（config/countries/*.json）：关键词/行政区/排除词 → 文章级国家重解析
+    CCFG = {}
+    try:
+        _cfg_dir = os.path.join(out_root, "config", "countries")
+        for _fn in sorted(os.listdir(_cfg_dir)):
+            if _fn.endswith(".json"):
+                _c = rd(os.path.join(_cfg_dir, _fn), {})
+                if _c.get("country"):
+                    CCFG[_c["country"]] = _c
+    except Exception:
+        CCFG = {}
 
     # C7-3：区域映射（KB countries/regions，country 为 optional 字段）+
     # 文章级本地化运行时缓存（runtime enrichment → view projection，唯一键 dedup_key）
@@ -450,6 +471,36 @@ def build(live_dir, internal_dir, out_root, now=None):
         if _loc.get("why_it_matters"):
             n["why_it_matters"] = _loc["why_it_matters"]
         n["localized"] = bool(n["title_cn"])
+        # C7-4 P2：多国 scope 来源的文章级国家重解析。
+        # 规则：single-scope 来源保留来源国归属（语义可信）；多国 scope（泛非源）
+        # 必须由标题/摘要按 config/countries 关键词与行政区解析，解析不出 → 未识别，
+        # 绝不回落到来源默认国。已核实事件保持 canonical 国别不变。
+        if ((not n.get("is_verified_event"))
+                and any(str(n.get("source_group") or "") == g
+                        or str(n.get("source_group") or "").startswith(g + "_")
+                        for g in MULTI_GROUPS)):
+            _txt = " ".join(filter(None, [n.get("title_original"), n.get("summary_original"),
+                                          n.get("title_cn"), n.get("summary_cn")])).lower()
+            _best, _score = None, 0
+            for _cn, _c in CCFG.items():
+                _excl = [e.lower() for e in (_c.get("country_exclusions") or [])]
+                if _excl and any(e in _txt for e in _excl):
+                    continue
+                _kw = [k.lower() for k in (_c.get("keywords") or []) if k]
+                _lo = [l.lower() for l in (_c.get("locations") or []) if l]
+                _mk = sum(1 for k in _kw if k in _txt)
+                _ml = sum(1 for l in _lo if l in _txt)
+                _s = _mk + 2 * _ml
+                if _s > _score:
+                    _best, _score = _cn, _s
+            if _best:
+                n["country_cn"] = _best
+                n["country_resolved"] = True
+            else:
+                n["country_cn"] = "未识别"
+                n["country_resolved"] = False
+            n["country_iso2"] = iso2_of(n["country_cn"])
+            n["country_iso3"] = ISO3.get(n["country_iso2"] or "")
         n["title"] = n["title_cn"] or n["title_original"]
         n["title_cn_missing"] = not bool(n["title_cn"])
         n["country_iso3"] = ISO3.get(n["country_iso2"] or "")
