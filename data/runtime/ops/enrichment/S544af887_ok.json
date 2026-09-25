@@ -1,0 +1,140 @@
+{
+ "label": "S544af887",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "7bdee9ad50818eb9374c775498a3a7853ef071a96302224fddb76ea15c82aa00",
+ "tokens": {
+  "input_tokens": 2344,
+  "output_tokens": 641,
+  "total_tokens": 2985
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"事故确切原因尚未确定\", \"失踪人数尚未确认，搜救仍在进行\", \"死亡人数为当地政府初步统计，尚待进一步核实\", \"该事件目前为单一来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"事故确切原因尚未确定\", \"失踪人数尚未确认，搜救仍在进行\", \"死亡人数为当地政府初步统计，尚待进一步核实\", \"该事件目前为单一来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "坦桑尼亚与刚果（金）之间一船只倾覆，至少41人死亡",
+   "summary_zh": "一艘往返于坦桑尼亚基戈马与刚果（金）卡莱米的船只在坦噶尼喀湖倾覆，据当地政府称造成至少41人死亡。坦噶尼喀省交通部长Norris Mulongoyi向美联社证实，船上载有约一百名乘客及货物，在刚果（金）坦噶尼喀省马佩拉村附近沉没。49人获救，搜救仍在继续寻找可能的失踪者。事故确切原因尚未确定。",
+   "event_type": "transport_disruption",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "坦噶尼喀省",
+    "city": "卡莱米",
+    "site": "马佩拉村附近坦噶尼喀湖水域",
+    "raw_text": "lac Tanganyika, près du village congolais de Mapera, dans la province du Tanganyika"
+   },
+   "key_facts": [
+    {
+     "fact": "一艘往返于坦桑尼亚基戈马与刚果（金）卡莱米的船只在坦噶尼喀湖倾覆，据当地政府称造成至少41人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un bateau reliant Kigoma (Tanzanie) à Kalemie (République démocratique du Congo) a chaviré me 24 septembre sur le lac Tanganyika, faisant au moins 41 morts, selon les autorités locales."
+    },
+    {
+     "fact": "坦噶尼喀省交通部长Norris Mulongoyi向美联社证实，船上载有约一百名乘客及货物",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon le ministre provincial des Transports du Tanganyika, Norris Mulongoyi, qui a confirmé les faits à Associated Press (AP), l’embarcation, qui transportait environ une centaine de passagers ainsi que de la cargaison"
+    },
+    {
+     "fact": "船只沉没于刚果（金）坦噶尼喀省马佩拉村附近",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a sombré près du village congolais de Mapera, dans la province du Tanganyika"
+    },
+    {
+     "fact": "49人获救，搜救仍在继续寻找可能的失踪者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quarante-neuf personnes ont été secourues et les recherches se poursuivaient pour retrouver d’éventuels disparus"
+    },
+    {
+     "fact": "事故确切原因尚未确定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La cause exacte du naufrage n’est pas encore établie."
+    }
+   ],
+   "uncertainties": [
+    "事故确切原因尚未确定",
+    "失踪人数尚未确认，搜救仍在进行",
+    "死亡人数为当地政府初步统计，尚待进一步核实",
+    "该事件目前为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "坦桑尼亚与刚果（金）之间一船只倾覆，至少41人死亡",
+   "summary_zh": "一艘往返于坦桑尼亚基戈马与刚果（金）卡莱米的船只在坦噶尼喀湖倾覆，据当地政府称造成至少41人死亡。坦噶尼喀省交通部长Norris Mulongoyi向美联社证实，船上载有约一百名乘客及货物，在刚果（金）坦噶尼喀省马佩拉村附近沉没。49人获救，搜救仍在继续寻找可能的失踪者。事故确切原因尚未确定。",
+   "event_type": "transport_disruption",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "坦噶尼喀省",
+    "city": "卡莱米",
+    "site": "马佩拉村附近坦噶尼喀湖水域",
+    "raw_text": "lac Tanganyika, près du village congolais de Mapera, dans la province du Tanganyika"
+   },
+   "key_facts": [
+    {
+     "fact": "一艘往返于坦桑尼亚基戈马与刚果（金）卡莱米的船只在坦噶尼喀湖倾覆，据当地政府称造成至少41人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un bateau reliant Kigoma (Tanzanie) à Kalemie (République démocratique du Congo) a chaviré me 24 septembre sur le lac Tanganyika, faisant au moins 41 morts, selon les autorités locales."
+    },
+    {
+     "fact": "坦噶尼喀省交通部长Norris Mulongoyi向美联社证实，船上载有约一百名乘客及货物",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon le ministre provincial des Transports du Tanganyika, Norris Mulongoyi, qui a confirmé les faits à Associated Press (AP), l’embarcation, qui transportait environ une centaine de passagers ainsi que de la cargaison"
+    },
+    {
+     "fact": "船只沉没于刚果（金）坦噶尼喀省马佩拉村附近",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a sombré près du village congolais de Mapera, dans la province du Tanganyika"
+    },
+    {
+     "fact": "49人获救，搜救仍在继续寻找可能的失踪者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quarante-neuf personnes ont été secourues et les recherches se poursuivaient pour retrouver d’éventuels disparus"
+    },
+    {
+     "fact": "事故确切原因尚未确定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La cause exacte du naufrage n’est pas encore établie."
+    }
+   ],
+   "uncertainties": [
+    "事故确切原因尚未确定",
+    "失踪人数尚未确认，搜救仍在进行",
+    "死亡人数为当地政府初步统计，尚待进一步核实",
+    "该事件目前为单一来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_7a888c91544af887",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

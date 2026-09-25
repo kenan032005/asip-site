@@ -1,0 +1,139 @@
+{
+ "label": "Sc2ac01fc",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f2a3271c72e939aaff1ab1ad9ff934a02f2b920ff3cfba263dac52fe2700dcc8",
+ "tokens": {
+  "input_tokens": 2238,
+  "output_tokens": 671,
+  "total_tokens": 2909
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹琼莱州杜克县社区间武装冲突持续",
+   "summary_zh": "南苏丹琼莱州杜克县霍尔社区与来自特维克东县阿尤尔社区的武装青年发生冲突，战斗于周四上午11时左右开始，至下午5时在杜克帕尤尔镇郊外仍在继续。杜克县代理专员称，来自特维克东县的武装青年袭击了当地村庄，目前尚无伤亡细节，因为当地没有网络。民间社会人士指责政府不作为，呼吁开展基层对话。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "琼莱州",
+    "city": "杜克帕尤尔镇",
+    "site": "杜克帕尤尔镇郊外及琼莱运河沿岸村庄",
+    "raw_text": "Jonglei State’s Duk County, on the outskirts of Duk Payuel town, a village along the Jonglei Canal in Duk Payuel Payam"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹琼莱州杜克县霍尔社区与特维克东县阿尤尔社区之间爆发战斗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fighting has erupted in Jonglei State’s Duk County between members of the Hol community and their neighbours from the Ayual community in Twic East County."
+    },
+    {
+     "fact": "战斗于周四上午11时左右开始，至下午5时仍在杜克帕尤尔镇郊外继续",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The fighting began at about 11am on Thursday and was continuing by 5pm on the outskirts of Duk Payuel town."
+    },
+    {
+     "fact": "杜克县代理专员约翰·查蒂姆·鲁埃称，来自特维克东县的武装青年于周四上午袭击了该地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Duk County caretaker commissioner John Chatim Ruei told Radio Tamazuj that armed youth from Twic East had attacked the area on Thursday morning."
+    },
+    {
+     "fact": "鲁埃称战斗仍在继续，下午5时左右仍能听到枪声",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ruei said the fighting was continuing and that gunfire could still be heard at about 5pm."
+    },
+    {
+     "fact": "尚无伤亡细节，因为当地没有网络",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "However, no details of casualties have emerged because there is no network"
+    },
+    {
+     "fact": "民间社会活动人士博尔·登·博尔指责政府不作为导致暴力重燃，并呼吁开展基层对话",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Bol Deng Bol, a civil society activist and head of the National Civil Society Coalition, blamed what he described as government inaction for the renewed violence and called for grassroots dialogue."
+    }
+   ],
+   "uncertainties": [
+    "伤亡情况尚未确认，因当地没有网络",
+    "特维克东县警方和当局未能联系到以获取评论",
+    "事件为单一来源报道（Radio Tamazuj），尚缺乏交叉验证",
+    "近期签署的协议是否有效阻止暴力存在不同说法"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹琼莱州杜克县社区间武装冲突持续",
+   "summary_zh": "南苏丹琼莱州杜克县霍尔社区与来自特维克东县阿尤尔社区的武装青年发生冲突，战斗于周四上午11时左右开始，至下午5时在杜克帕尤尔镇郊外仍在继续。杜克县代理专员称，来自特维克东县的武装青年袭击了当地村庄，目前尚无伤亡细节，因为当地没有网络。民间社会人士指责政府不作为，呼吁开展基层对话。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "琼莱州",
+    "city": "杜克帕尤尔镇",
+    "site": "杜克帕尤尔镇郊外及琼莱运河沿岸村庄",
+    "raw_text": "Jonglei State’s Duk County, on the outskirts of Duk Payuel town, a village along the Jonglei Canal in Duk Payuel Payam"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹琼莱州杜克县霍尔社区与特维克东县阿尤尔社区之间爆发战斗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fighting has erupted in Jonglei State’s Duk County between members of the Hol community and their neighbours from the Ayual community in Twic East County."
+    },
+    {
+     "fact": "战斗于周四上午11时左右开始，至下午5时仍在杜克帕尤尔镇郊外继续",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The fighting began at about 11am on Thursday and was continuing by 5pm on the outskirts of Duk Payuel town."
+    },
+    {
+     "fact": "杜克县代理专员约翰·查蒂姆·鲁埃称，来自特维克东县的武装青年于周四上午袭击了该地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Duk County caretaker commissioner John Chatim Ruei told Radio Tamazuj that armed youth from Twic East had attacked the area on Thursday morning."
+    },
+    {
+     "fact": "鲁埃称战斗仍在继续，下午5时左右仍能听到枪声",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ruei said the fighting was continuing and that gunfire could still be heard at about 5pm."
+    },
+    {
+     "fact": "尚无伤亡细节，因为当地没有网络",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "However, no details of casualties have emerged because there is no network"
+    },
+    {
+     "fact": "民间社会活动人士博尔·登·博尔指责政府不作为导致暴力重燃，并呼吁开展基层对话",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Bol Deng Bol, a civil society activist and head of the National Civil Society Coalition, blamed what he described as government inaction for the renewed violence and called for grassroots dialogue."
+    }
+   ],
+   "uncertainties": [
+    "伤亡情况尚未确认，因当地没有网络",
+    "特维克东县警方和当局未能联系到以获取评论",
+    "事件为单一来源报道（Radio Tamazuj），尚缺乏交叉验证",
+    "近期签署的协议是否有效阻止暴力存在不同说法"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_f6912f1bc2ac01fc",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

@@ -1,0 +1,152 @@
+{
+ "label": "S17bfce71",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5ea3427f511a48a86e40f2f6eaa7e9c76ff660988269e9e15f96ca56510eb83f",
+ "tokens": {
+  "input_tokens": 2610,
+  "output_tokens": 726,
+  "total_tokens": 3336
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"枪击来源尚不明确\", \"此前索要税费及袭击淘金者的情节仅为家属转述，尚未证实\", \"OPS de Miski向图尔库部署的消息来自当地来源，未获官方确认\", \"袭击具体经过、作案者身份及是否立案调查均无官方通报\", \"事件目前为单一来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"枪击来源尚不明确\", \"此前索要税费及袭击淘金者的情节仅为家属转述，尚未证实\", \"OPS de Miski向图尔库部署的消息来自当地来源，未获官方确认\", \"袭击具体经过、作案者身份及是否立案调查均无官方通报\", \"事件目前为单一来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得提贝斯提省图尔库矿区遭枪击，一名矿业企业家身亡、两人受伤",
+   "summary_zh": "据Alwihda Info报道，乍得提贝斯提省图尔库一处采矿场周四下午遭枪击，一名矿业企业家身亡，另有两人受伤。据家属称，事发前两天曾有自称当地居民者到矿区索要所谓税费并袭击淘金者。目前枪击来源不明，当地官方尚未就袭击经过、作案者身份或是否立案调查作出通报。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "提贝斯提省",
+    "city": "图尔库",
+    "site": "采矿场",
+    "raw_text": "un site d’exploitation minière situé à Tourkou, dans la province du Tibesti"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得提贝斯提省图尔库一处采矿场遭枪击，一名男子身亡、两人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un homme a été tué et deux autres blessés jeudi après-midi à la suite de tirs ayant visé un site d’exploitation minière situé à Tourkou, dans la province du Tibesti."
+    },
+    {
+     "fact": "死者被家属确认为Tahir Souleyman Arim",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La victime a été identifiée comme Tahir Souleyman Arim, selon des informations communiquées par ses proches."
+    },
+    {
+     "fact": "据家属叙述，事发前两天曾有自称当地居民者到矿区索要其认为与土地使用相关的非法税费，并袭击现场淘金者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des individus présentés comme appartenant à la population locale se seraient rendus sur le site pour réclamer le paiement illégal de taxes qu’ils considéraient comme liées à l’exploitation des terres de la zone."
+    },
+    {
+     "fact": "枪击于周四约16时发生，来源不明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Jeudi, aux alentours de 16 heures, des coups de feu dont l’origine demeure inconnue auraient été dirigés vers le site minier."
+    },
+    {
+     "fact": "据当地来源消息，Miski的OPS人员正部署前往图尔库地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des éléments de l’OPS de Miski seraient en cours de déploiement vers la zone de Tourkou"
+    },
+    {
+     "fact": "目前尚无当地官方就袭击具体经过、作案者身份或是否立案调查的通报",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "aucune communication officielle des autorités locales sur les circonstances précises de cette attaque, l’identité de ses auteurs ou l’éventuelle ouverture d’une enquête n’a été rapportée"
+    }
+   ],
+   "uncertainties": [
+    "枪击来源尚不明确",
+    "此前索要税费及袭击淘金者的情节仅为家属转述，尚未证实",
+    "OPS de Miski向图尔库部署的消息来自当地来源，未获官方确认",
+    "袭击具体经过、作案者身份及是否立案调查均无官方通报",
+    "事件目前为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得提贝斯提省图尔库矿区遭枪击，一名矿业企业家身亡、两人受伤",
+   "summary_zh": "据Alwihda Info报道，乍得提贝斯提省图尔库一处采矿场周四下午遭枪击，一名矿业企业家身亡，另有两人受伤。据家属称，事发前两天曾有自称当地居民者到矿区索要所谓税费并袭击淘金者。目前枪击来源不明，当地官方尚未就袭击经过、作案者身份或是否立案调查作出通报。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "提贝斯提省",
+    "city": "图尔库",
+    "site": "采矿场",
+    "raw_text": "un site d’exploitation minière situé à Tourkou, dans la province du Tibesti"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得提贝斯提省图尔库一处采矿场遭枪击，一名男子身亡、两人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un homme a été tué et deux autres blessés jeudi après-midi à la suite de tirs ayant visé un site d’exploitation minière situé à Tourkou, dans la province du Tibesti."
+    },
+    {
+     "fact": "死者被家属确认为Tahir Souleyman Arim",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La victime a été identifiée comme Tahir Souleyman Arim, selon des informations communiquées par ses proches."
+    },
+    {
+     "fact": "据家属叙述，事发前两天曾有自称当地居民者到矿区索要其认为与土地使用相关的非法税费，并袭击现场淘金者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des individus présentés comme appartenant à la population locale se seraient rendus sur le site pour réclamer le paiement illégal de taxes qu’ils considéraient comme liées à l’exploitation des terres de la zone."
+    },
+    {
+     "fact": "枪击于周四约16时发生，来源不明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Jeudi, aux alentours de 16 heures, des coups de feu dont l’origine demeure inconnue auraient été dirigés vers le site minier."
+    },
+    {
+     "fact": "据当地来源消息，Miski的OPS人员正部署前往图尔库地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des éléments de l’OPS de Miski seraient en cours de déploiement vers la zone de Tourkou"
+    },
+    {
+     "fact": "目前尚无当地官方就袭击具体经过、作案者身份或是否立案调查的通报",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "aucune communication officielle des autorités locales sur les circonstances précises de cette attaque, l’identité de ses auteurs ou l’éventuelle ouverture d’une enquête n’a été rapportée"
+    }
+   ],
+   "uncertainties": [
+    "枪击来源尚不明确",
+    "此前索要税费及袭击淘金者的情节仅为家属转述，尚未证实",
+    "OPS de Miski向图尔库部署的消息来自当地来源，未获官方确认",
+    "袭击具体经过、作案者身份及是否立案调查均无官方通报",
+    "事件目前为单一来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_e59c3ff317bfce71",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

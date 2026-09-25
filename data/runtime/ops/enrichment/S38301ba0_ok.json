@@ -1,0 +1,124 @@
+{
+ "label": "S38301ba0",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6d4365c4c87ed2ba18535a8da2e553567256fd3abf0b9f13d1f1fb6e64637503",
+ "tokens": {
+  "input_tokens": 2221,
+  "output_tokens": 457,
+  "total_tokens": 2678
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"相关数据来自联合国难民署单一来源，尚未获得独立交叉验证\"]",
+    "after": "[\"相关数据来自联合国难民署单一来源，尚未获得独立交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "超过5.5万名苏丹难民涌入乍得，联合国呼吁提供资金",
+   "summary_zh": "联合国难民署表示，今年以来已有超过5.5万名苏丹难民逃往邻国乍得，仅过去一周经乍得阿德雷和蒂内边境地区入境的人数就升至每天400人，约为此前日均水平的20倍。联合国警告称，若资金不能大幅增加，这场人道主义危机将进一步恶化。苏丹自2023年4月爆发内战以来，已有超过1100万人流离失所。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "阿德雷和蒂内边境地区",
+    "raw_text": "Chad's border areas of Adre and Tine"
+   },
+   "key_facts": [
+    {
+     "fact": "今年以来超过5.5万名苏丹难民逃往乍得",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than 55,000 Sudanese refugees have fled to neighbouring Chad this year"
+    },
+    {
+     "fact": "经乍得阿德雷和蒂内边境入境人数升至每天400人，约为此前日均的20倍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The number of refugees entering via Chad's border areas of Adre and Tine has risen to 400 people a day, about 20 times the daily rate of previous months"
+    },
+    {
+     "fact": "联合国警告若资金不显著增加，人道主义危机将进一步恶化",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "compounding a humanitarian crisis that will only deteriorate further unless there is a significant increase in funding, the United Nations has warned"
+    },
+    {
+     "fact": "苏丹自2023年4月内战以来超过1100万人流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sudan has been engulfed in a civil war since April 2023 ... in excess of 11 million Sudanese people have been displaced"
+    }
+   ],
+   "uncertainties": [
+    "相关数据来自联合国难民署单一来源，尚未获得独立交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "超过5.5万名苏丹难民涌入乍得，联合国呼吁提供资金",
+   "summary_zh": "联合国难民署表示，今年以来已有超过5.5万名苏丹难民逃往邻国乍得，仅过去一周经乍得阿德雷和蒂内边境地区入境的人数就升至每天400人，约为此前日均水平的20倍。联合国警告称，若资金不能大幅增加，这场人道主义危机将进一步恶化。苏丹自2023年4月爆发内战以来，已有超过1100万人流离失所。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "阿德雷和蒂内边境地区",
+    "raw_text": "Chad's border areas of Adre and Tine"
+   },
+   "key_facts": [
+    {
+     "fact": "今年以来超过5.5万名苏丹难民逃往乍得",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than 55,000 Sudanese refugees have fled to neighbouring Chad this year"
+    },
+    {
+     "fact": "经乍得阿德雷和蒂内边境入境人数升至每天400人，约为此前日均的20倍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The number of refugees entering via Chad's border areas of Adre and Tine has risen to 400 people a day, about 20 times the daily rate of previous months"
+    },
+    {
+     "fact": "联合国警告若资金不显著增加，人道主义危机将进一步恶化",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "compounding a humanitarian crisis that will only deteriorate further unless there is a significant increase in funding, the United Nations has warned"
+    },
+    {
+     "fact": "苏丹自2023年4月内战以来超过1100万人流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sudan has been engulfed in a civil war since April 2023 ... in excess of 11 million Sudanese people have been displaced"
+    }
+   ],
+   "uncertainties": [
+    "相关数据来自联合国难民署单一来源，尚未获得独立交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_f1dda67c38301ba0",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

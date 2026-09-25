@@ -1,0 +1,134 @@
+{
+ "label": "S42004e8a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "873615d51a65d6e283347052d4755cf2b9d576447b5e305f56a2a3becb0113bd",
+ "tokens": {
+  "input_tokens": 2263,
+  "output_tokens": 502,
+  "total_tokens": 2765
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（Le Pays Tchad）报道，尚缺乏交叉验证\"]",
+    "after": "[\"目前仅一个来源（Le Pays Tchad）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "联合国难民署：自年初以来逾5.5万名苏丹难民抵达乍得",
+   "summary_zh": "联合国难民署9月25日表示，自今年年初以来，已有超过5.5万名苏丹难民越过边境进入乍得东部。过去一周，阿德雷和蒂内边境地区每天有超过400人抵达，约为近几个月日均速度的20倍。蒂内中转中心已收容逾4300人，面临水、住所、卫生和保护方面的紧急需求。",
+   "event_type": "border_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "阿德雷和蒂内边境地区",
+    "raw_text": "les zones frontalières d’Adré et de Tiné"
+   },
+   "key_facts": [
+    {
+     "fact": "自年初以来超过5.5万名苏丹难民进入乍得东部",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plus de 55 000 réfugiés soudanais ont franchi la frontière vers l’est du Tchad depuis le début de l’année"
+    },
+    {
+     "fact": "过去一周每天超过400人经阿德雷和蒂内边境地区抵达",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au cours de la dernière semaine, plus de 400 personnes par jour sont arrivées par les zones frontalières d’Adré et de Tiné"
+    },
+    {
+     "fact": "蒂内中转中心已收容超过4300人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le centre de transit de Tiné accueille déjà plus de 4 300 personnes"
+    },
+    {
+     "fact": "边境地区仍有超过19万难民生活在困难条件下",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plus de 190 000 réfugiés vivent encore dans des conditions difficiles dans les zones frontalières"
+    },
+    {
+     "fact": "区域难民应对计划所需16亿美元中仅收到20%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "seuls 20 % des 1,6 milliard de dollars requis pour le plan régional de réponse aux réfugiés ont été reçus"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Le Pays Tchad）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "联合国难民署：自年初以来逾5.5万名苏丹难民抵达乍得",
+   "summary_zh": "联合国难民署9月25日表示，自今年年初以来，已有超过5.5万名苏丹难民越过边境进入乍得东部。过去一周，阿德雷和蒂内边境地区每天有超过400人抵达，约为近几个月日均速度的20倍。蒂内中转中心已收容逾4300人，面临水、住所、卫生和保护方面的紧急需求。",
+   "event_type": "border_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "阿德雷和蒂内边境地区",
+    "raw_text": "les zones frontalières d’Adré et de Tiné"
+   },
+   "key_facts": [
+    {
+     "fact": "自年初以来超过5.5万名苏丹难民进入乍得东部",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plus de 55 000 réfugiés soudanais ont franchi la frontière vers l’est du Tchad depuis le début de l’année"
+    },
+    {
+     "fact": "过去一周每天超过400人经阿德雷和蒂内边境地区抵达",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au cours de la dernière semaine, plus de 400 personnes par jour sont arrivées par les zones frontalières d’Adré et de Tiné"
+    },
+    {
+     "fact": "蒂内中转中心已收容超过4300人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le centre de transit de Tiné accueille déjà plus de 4 300 personnes"
+    },
+    {
+     "fact": "边境地区仍有超过19万难民生活在困难条件下",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plus de 190 000 réfugiés vivent encore dans des conditions difficiles dans les zones frontalières"
+    },
+    {
+     "fact": "区域难民应对计划所需16亿美元中仅收到20%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "seuls 20 % des 1,6 milliard de dollars requis pour le plan régional de réponse aux réfugiés ont été reçus"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Le Pays Tchad）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_5ad0a27142004e8a",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

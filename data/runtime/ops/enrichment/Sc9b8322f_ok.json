@@ -1,0 +1,105 @@
+{
+ "label": "Sc9b8322f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d4e2279b0c840ce3cb4879a6d083b1e67215651bbf5eaac04ff8f7086479ab85",
+ "tokens": {
+  "input_tokens": 2140,
+  "output_tokens": 512,
+  "total_tokens": 2652
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得武装部队部长在乍得湖地区开展安全视察任务",
+   "summary_zh": "乍得武装部队、老战士及战争受害者部长伊萨卡·马卢阿·贾穆斯中将赴乍得湖省开展安全视察，行程包括博尔和巴加-索拉。部长一行于2026年9月24日抵达，会见驻守部队，了解其关切及安全形势与作战条件，并在多国混合部队总部举行闭门工作会议。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "乍得湖省",
+    "city": null,
+    "site": null,
+    "raw_text": "la province du Lac, avec des étapes à Bol et Baga-Sola"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得武装部队部长伊萨卡·马卢阿·贾穆斯中将在乍得湖省开展安全视察，行程包括博尔和巴加-索拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministre des Armées des anciens Combattants et Victimes de guerre, le général de corps d’armée Issaka Malloua Djamouss, mène une visite d’inspection sécuritaire, dans la province du Lac, avec des étapes à Bol et Baga-Sola."
+    },
+    {
+     "fact": "部长一行于2026年9月24日抵达乍得湖省，会见驻守部队以了解其关切及安全形势与作战条件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Arrivé dans la province du Lac le jeudi 24 septembre 2026, le ministre et la délégation qu’il conduit ont rencontré des forces déployées pour écouter leurs préoccupations et s’informer de la situation sécuritaire et de leurs conditions opérationnelles."
+    },
+    {
+     "fact": "在多国混合部队总部举行了部长与军方负责人的闭门工作会议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au quartier général de la Force multinationale mixte, où une séance de travail à huis clos a réuni le ministre et les responsables militaires."
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（Journal du Tchad），尚缺乏交叉验证",
+    "正文为部分提取，闭门会议内容未披露"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得武装部队部长在乍得湖地区开展安全视察任务",
+   "summary_zh": "乍得武装部队、老战士及战争受害者部长伊萨卡·马卢阿·贾穆斯中将赴乍得湖省开展安全视察，行程包括博尔和巴加-索拉。部长一行于2026年9月24日抵达，会见驻守部队，了解其关切及安全形势与作战条件，并在多国混合部队总部举行闭门工作会议。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "乍得湖省",
+    "city": null,
+    "site": null,
+    "raw_text": "la province du Lac, avec des étapes à Bol et Baga-Sola"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得武装部队部长伊萨卡·马卢阿·贾穆斯中将在乍得湖省开展安全视察，行程包括博尔和巴加-索拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministre des Armées des anciens Combattants et Victimes de guerre, le général de corps d’armée Issaka Malloua Djamouss, mène une visite d’inspection sécuritaire, dans la province du Lac, avec des étapes à Bol et Baga-Sola."
+    },
+    {
+     "fact": "部长一行于2026年9月24日抵达乍得湖省，会见驻守部队以了解其关切及安全形势与作战条件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Arrivé dans la province du Lac le jeudi 24 septembre 2026, le ministre et la délégation qu’il conduit ont rencontré des forces déployées pour écouter leurs préoccupations et s’informer de la situation sécuritaire et de leurs conditions opérationnelles."
+    },
+    {
+     "fact": "在多国混合部队总部举行了部长与军方负责人的闭门工作会议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au quartier général de la Force multinationale mixte, où une séance de travail à huis clos a réuni le ministre et les responsables militaires."
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（Journal du Tchad），尚缺乏交叉验证",
+    "正文为部分提取，闭门会议内容未披露"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_a3073d4fc9b8322f",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

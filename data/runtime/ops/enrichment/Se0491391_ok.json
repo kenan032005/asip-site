@@ -1,0 +1,127 @@
+{
+ "label": "Se0491391",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "efb65ccd4e6b48a917bea41113f4ef2ed3db5a116845a18e56daee5dbbcf9f36",
+ "tokens": {
+  "input_tokens": 2184,
+  "output_tokens": 624,
+  "total_tokens": 2808
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹琼莱州杜克县冲突致至少13人死亡",
+   "summary_zh": "南苏丹琼莱州杜克县与邻近特维克东县青年之间发生冲突，当地官员称至少13名杜克县青年死亡、26人受伤。冲突发生在杜克帕尤尔地区琼莱运河附近的Apiir Palaadhiim村，持续至周四大部分时间。官员表示搜寻仍在进行，死亡人数可能上升，特维克东县方面伤亡情况不明。",
+   "event_type": "civil_unrest",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Jonglei State",
+    "city": null,
+    "site": "Apiir Palaadhiim village, near the Jonglei Canal in Duk Payuel",
+    "raw_text": "Apiir Palaadhiim village, near the Jonglei Canal in Duk Payuel, Duk County, Jonglei State"
+   },
+   "key_facts": [
+    {
+     "fact": "杜克县与特维克东县青年之间发生冲突，至少13人死亡、26人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least 13 people have been killed and 26 others injured in fighting between young men from Duk County and neighbouring Twic East County in South Sudan’s Jonglei State, local officials said."
+    },
+    {
+     "fact": "冲突发生在杜克帕尤尔琼莱运河附近的Apiir Palaadhiim村，持续至周四大部分时间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The fighting continued for much of Thursday in Apiir Palaadhiim village, near the Jonglei Canal in Duk Payuel."
+    },
+    {
+     "fact": "前杜克县专员称13名杜克青年死亡、26人受伤，搜寻仍在进行，死亡人数可能上升",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "“Fighting has stopped and 13 Duk youths were killed and 26 others injured,” he said. “Searches are still ongoing and the death toll could increase."
+    },
+    {
+     "fact": "前特维克东县专员确认发生冲突，但称因政府解散离开该县而无更多细节",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "James Magol Mabiei, a former Twic East county commissioner, confirmed that fighting had taken place but said he did not have further details because he had left the county following the recent dissolution of the government."
+    },
+    {
+     "fact": "民间社会活动人士谴责暴力并呼吁政府干预，指控政府未能解决冲突根源",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Civil society activist Bol Deng Bol, chair of the National Civil Society Coalition, condemned the renewed violence and called for urgent government intervention."
+    }
+   ],
+   "uncertainties": [
+    "特维克东县方面的死亡和受伤人数尚不清楚",
+    "死亡人数可能上升，搜寻仍在进行",
+    "事件目前仅有一个来源（Radio Tamazuj）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹琼莱州杜克县冲突致至少13人死亡",
+   "summary_zh": "南苏丹琼莱州杜克县与邻近特维克东县青年之间发生冲突，当地官员称至少13名杜克县青年死亡、26人受伤。冲突发生在杜克帕尤尔地区琼莱运河附近的Apiir Palaadhiim村，持续至周四大部分时间。官员表示搜寻仍在进行，死亡人数可能上升，特维克东县方面伤亡情况不明。",
+   "event_type": "civil_unrest",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Jonglei State",
+    "city": null,
+    "site": "Apiir Palaadhiim village, near the Jonglei Canal in Duk Payuel",
+    "raw_text": "Apiir Palaadhiim village, near the Jonglei Canal in Duk Payuel, Duk County, Jonglei State"
+   },
+   "key_facts": [
+    {
+     "fact": "杜克县与特维克东县青年之间发生冲突，至少13人死亡、26人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least 13 people have been killed and 26 others injured in fighting between young men from Duk County and neighbouring Twic East County in South Sudan’s Jonglei State, local officials said."
+    },
+    {
+     "fact": "冲突发生在杜克帕尤尔琼莱运河附近的Apiir Palaadhiim村，持续至周四大部分时间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The fighting continued for much of Thursday in Apiir Palaadhiim village, near the Jonglei Canal in Duk Payuel."
+    },
+    {
+     "fact": "前杜克县专员称13名杜克青年死亡、26人受伤，搜寻仍在进行，死亡人数可能上升",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "“Fighting has stopped and 13 Duk youths were killed and 26 others injured,” he said. “Searches are still ongoing and the death toll could increase."
+    },
+    {
+     "fact": "前特维克东县专员确认发生冲突，但称因政府解散离开该县而无更多细节",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "James Magol Mabiei, a former Twic East county commissioner, confirmed that fighting had taken place but said he did not have further details because he had left the county following the recent dissolution of the government."
+    },
+    {
+     "fact": "民间社会活动人士谴责暴力并呼吁政府干预，指控政府未能解决冲突根源",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Civil society activist Bol Deng Bol, chair of the National Civil Society Coalition, condemned the renewed violence and called for urgent government intervention."
+    }
+   ],
+   "uncertainties": [
+    "特维克东县方面的死亡和受伤人数尚不清楚",
+    "死亡人数可能上升，搜寻仍在进行",
+    "事件目前仅有一个来源（Radio Tamazuj）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_922321b0e0491391",
+ "disease_event_id": null,
+ "country_code": "SS"
+}
