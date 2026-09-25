@@ -130,16 +130,28 @@ def _skipped_stat(src, country_cn):
     }
 
 
-def _record_rotation(rot_off, attempted, total):
-    """C7-4R P6：持久化轮转偏移（失败不影响采集结果）。"""
+def _record_rotation(country_cn, rot_off, attempted, total):
+    """C7-4R P6：按国持久化轮转偏移（失败不影响采集结果）。
+
+    每个国家有各自的来源集合，偏移必须按国记录，否则会被最后一个国家覆盖。
+    """
     try:
         os.makedirs(os.path.dirname(ROTATION_FILE), exist_ok=True)
+        doc = {}
+        if os.path.exists(ROTATION_FILE):
+            try:
+                with open(ROTATION_FILE, "r", encoding="utf-8") as f:
+                    doc = json.load(f) or {}
+            except Exception:
+                doc = {}
+        offs = doc.get("offsets") or {}
+        offs[str(country_cn)] = (rot_off + attempted) % max(1, total)
+        doc["offsets"] = offs
+        doc["attempted_last_run"] = attempted
+        doc["total_sources_last_run"] = total
+        doc["updated_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
         with open(ROTATION_FILE, "w", encoding="utf-8") as f:
-            json.dump({"offset": (rot_off + attempted) % max(1, total),
-                       "attempted_last_run": attempted,
-                       "total_sources": total,
-                       "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())},
-                      f, ensure_ascii=False, indent=1)
+            json.dump(doc, f, ensure_ascii=False, indent=1)
     except Exception as e:  # noqa: BLE001
         print("  ! rotation write failed: %s" % e)
 
@@ -168,7 +180,8 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
     rot_off = 0
     try:
         with open(ROTATION_FILE, "r", encoding="utf-8") as f:
-            rot_off = int((json.load(f) or {}).get("offset") or 0) % max(1, len(sources))
+            _rd = json.load(f) or {}
+        rot_off = int((_rd.get("offsets") or {}).get(str(country_cn)) or 0) % max(1, len(sources))
     except Exception:
         rot_off = 0
     if rot_off:
@@ -612,10 +625,10 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
               f"隔离{stat['quarantined']}")
 
     # C7-4R P6：在管道作用域内记录本轮事实并写轮转偏移（供统计函数读取）
-    _LAST_RUN_FACTS.update({"sources_attempted": attempted_sources,
-                            "rotation_offset_used": rot_off,
-                            "total_sources": total_sources})
-    _record_rotation(rot_off, attempted_sources, total_sources)
+    _LAST_RUN_FACTS["sources_attempted"] = _LAST_RUN_FACTS.get("sources_attempted", 0) + attempted_sources
+    _LAST_RUN_FACTS["rotation_offset_used"] = rot_off
+    _LAST_RUN_FACTS["total_sources"] = total_sources
+    _record_rotation(country_cn, rot_off, attempted_sources, total_sources)
     return all_articles, per_source, errors
 
 
