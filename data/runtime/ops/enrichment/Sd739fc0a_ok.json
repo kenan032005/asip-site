@@ -1,0 +1,123 @@
+{
+ "label": "Sd739fc0a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "78c9c8a35e4a44df9e967fee8caf51669f871c26f8bf513c7ece2a23b1880561",
+ "tokens": {
+  "input_tokens": 2381,
+  "output_tokens": 668,
+  "total_tokens": 3049
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得武装部队部长赴乍得湖战区传达国家元首讯息",
+   "summary_zh": "乍得武装部队、老战士及战争受害者部长伊萨卡·马卢阿·贾穆斯将军于2026年9月24日赴乍得湖作战区进行实地任务，先后前往博尔和巴加-索拉。此行的目的是向部署在该地区的国防与安全部队传达总统兼最高统帅穆罕默德·伊德里斯·代比·伊特诺元帅的讯息，表达表彰与鼓励。该地区被视为该国最敏感的地区之一，相关行动讨论仍在巴加-索拉继续进行。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "博尔",
+    "site": "乍得湖作战区",
+    "raw_text": "la zone opérationnelle du Lac Tchad, Bol, Baga-Sola"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得武装部队部长伊萨卡·马卢阿·贾穆斯将军于2026年9月24日赴乍得湖作战区执行实地任务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Général de corps d’armée Issaka Malloua Djamouss, ministre des Armées, des Anciens Combattants et Victimes de Guerre, a conduit ce jeudi 24 septembre 2026 une mission sur le terrain, avec un fort enjeu sécuritaire, dans la zone opérationnelle du Lac Tchad."
+    },
+    {
+     "fact": "部长先后前往博尔，随后继续前往巴加-索拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il s’est rendu à Bol avant de poursuivre sa mission à Baga-Sola."
+    },
+    {
+     "fact": "此行目的是向该地区国防与安全部队传达总统兼最高统帅穆罕默德·伊德里斯·代比·伊特诺元帅的讯息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’objectif est de transmettre le message du président de la République et chef suprême des Armées, le Maréchal Mahamat Idriss Déby Itno, aux forces de défense et de sécurité présentes dans cette région."
+    },
+    {
+     "fact": "部长代表最高统帅向乍得湖周边部队传达表彰与鼓励讯息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Devant les troupes engagées aux abords du Lac Tchad, le ministre a transmis un message de reconnaissance et d’encouragement au nom du chef suprême des Armées."
+    },
+    {
+     "fact": "巴加-索拉的相关工作仍在继续，讨论作战现实与部队投入条件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les travaux se poursuivent à Baga-Sola, avec des discussions sur les réalités opérationnelles et les conditions d’engagement des forces dans la zone du Lac Tchad."
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Tchadinfos），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得武装部队部长赴乍得湖战区传达国家元首讯息",
+   "summary_zh": "乍得武装部队、老战士及战争受害者部长伊萨卡·马卢阿·贾穆斯将军于2026年9月24日赴乍得湖作战区进行实地任务，先后前往博尔和巴加-索拉。此行的目的是向部署在该地区的国防与安全部队传达总统兼最高统帅穆罕默德·伊德里斯·代比·伊特诺元帅的讯息，表达表彰与鼓励。该地区被视为该国最敏感的地区之一，相关行动讨论仍在巴加-索拉继续进行。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "博尔",
+    "site": "乍得湖作战区",
+    "raw_text": "la zone opérationnelle du Lac Tchad, Bol, Baga-Sola"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得武装部队部长伊萨卡·马卢阿·贾穆斯将军于2026年9月24日赴乍得湖作战区执行实地任务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Général de corps d’armée Issaka Malloua Djamouss, ministre des Armées, des Anciens Combattants et Victimes de Guerre, a conduit ce jeudi 24 septembre 2026 une mission sur le terrain, avec un fort enjeu sécuritaire, dans la zone opérationnelle du Lac Tchad."
+    },
+    {
+     "fact": "部长先后前往博尔，随后继续前往巴加-索拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il s’est rendu à Bol avant de poursuivre sa mission à Baga-Sola."
+    },
+    {
+     "fact": "此行目的是向该地区国防与安全部队传达总统兼最高统帅穆罕默德·伊德里斯·代比·伊特诺元帅的讯息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’objectif est de transmettre le message du président de la République et chef suprême des Armées, le Maréchal Mahamat Idriss Déby Itno, aux forces de défense et de sécurité présentes dans cette région."
+    },
+    {
+     "fact": "部长代表最高统帅向乍得湖周边部队传达表彰与鼓励讯息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Devant les troupes engagées aux abords du Lac Tchad, le ministre a transmis un message de reconnaissance et d’encouragement au nom du chef suprême des Armées."
+    },
+    {
+     "fact": "巴加-索拉的相关工作仍在继续，讨论作战现实与部队投入条件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les travaux se poursuivent à Baga-Sola, avec des discussions sur les réalités opérationnelles et les conditions d’engagement des forces dans la zone du Lac Tchad."
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Tchadinfos），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_9742d43ad739fc0a",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
