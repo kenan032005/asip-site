@@ -40,11 +40,45 @@ UA = ("Mozilla/5.0 (compatible; ASIP-Collector/1.0; "
       "+https://github.com/kenan032005/asip-site)")
 
 
+_CN2EN = None
+
+
+def _cn2en():
+    """中文国名 → 英文国名（用于查询签名归一，消除 乍得/Chad 这类等价重复请求）。"""
+    global _CN2EN
+    if _CN2EN is None:
+        m = {}
+        try:
+            import os
+            root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+            d = os.path.join(root, "config", "countries")
+            for fn in sorted(os.listdir(d)):
+                if fn.endswith(".json"):
+                    with open(os.path.join(d, fn), "r", encoding="utf-8") as f:
+                        c = json.load(f)
+                    if c.get("country") and c.get("country_en"):
+                        m[c["country"]] = c["country_en"]
+        except Exception:  # noqa: BLE001
+            m = {}
+        _CN2EN = m
+    return _CN2EN or {}
+
+
+def normalize_query_country(query):
+    """把查询串里的中文国名替换为英文，使等价查询签名一致（C7-4S P1）。"""
+    q = str(query or "")
+    for cn, en in _cn2en().items():
+        if cn in q:
+            q = q.replace(cn, en)
+    return q
+
+
 def query_signature(url):
     """把 URL 归一成稳定签名：仅保留会影响结果的参数，排序后哈希。
 
     用于 request dedupe / shared cache —— 同一 (query, mode, timespan,
     maxrecords, sort) 组合只请求一次，与调用它的源无关。
+    C7-4S：query 先做国家名归一（Chad/乍得 视为同一查询）。
     """
     try:
         p = urllib.parse.urlsplit(url)
@@ -52,6 +86,7 @@ def query_signature(url):
         return hashlib.sha256(str(url).encode()).hexdigest()[:16]
     qp = dict(urllib.parse.parse_qsl(p.query, keep_blank_values=True))
     keep = {k: qp.get(k, "") for k in ("query", "mode", "timespan", "maxrecords", "sort")}
+    keep["query"] = normalize_query_country(keep.get("query", ""))
     raw = "|".join("%s=%s" % (k, keep[k]) for k in sorted(keep))
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()[:16]
 
