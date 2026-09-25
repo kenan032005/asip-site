@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/home-v11.css">
 <link rel="stylesheet" href="assets/css/news-stream.css">
+<link rel="stylesheet" href="assets/css/executive.css">
 </head>
 <body data-page="home">
 <div id="topbar" class="topbar"></div>
@@ -17,6 +18,38 @@
 
 <!-- ============ V1.1 Executive Dashboard ============ -->
 <main class="v11" id="v11Home">
+
+  <!-- ============ C7-2 领导 30 秒视图（数据层：data/views/executive_summary.json） ============ -->
+  <section class="exec-board" id="execBoard" aria-label="安全态势概览">
+    <div class="exec-card exec-card-overview" id="execOverviewWrap">
+      <div class="exec-card-h">
+        <h2>非洲安全态势概览</h2>
+        <span class="exec-card-en">AFRICA SECURITY SITUATION OVERVIEW</span>
+      </div>
+      <div id="execOverview"><div class="exec-busy">加载中…</div></div>
+    </div>
+    <div class="exec-card exec-card-regions" id="execRegionsWrap">
+      <div class="exec-card-h">
+        <h2>重点区域与热点</h2>
+        <span class="exec-card-en">KEY REGIONS &amp; HOTSPOTS</span>
+      </div>
+      <div id="execRegions"><div class="exec-busy">加载中…</div></div>
+    </div>
+    <div class="exec-card" id="execTopWrap">
+      <div class="exec-card-h">
+        <h2>近期重点动态</h2>
+        <span class="exec-card-en">TOP RECENT DEVELOPMENTS</span>
+      </div>
+      <div id="execTop"><div class="exec-busy">加载中…</div></div>
+    </div>
+    <div class="exec-card" id="execFeedWrap">
+      <div class="exec-card-h">
+        <h2>最新情报流</h2>
+        <span class="exec-card-en">LATEST INTELLIGENCE FEED</span>
+      </div>
+      <div id="execFeed"><div class="exec-busy">加载中…</div></div>
+    </div>
+  </section>
 
   <!-- 1. KPI Strip（6 项，桌面端恒定单行；更新时间仅保留在 Header「数据截至」） -->
   <section class="v11-kpis" id="v11Kpis" aria-label="关键态势指标">
@@ -150,5 +183,6 @@
 <script src="assets/js/report-views.js"></script>
 <script src="assets/js/news-stream.js"></script>
 <script src="assets/js/ai-intelligence.js"></script>
+<script src="assets/js/executive.js"></script>
 </body>
 </html>

@@ -1,0 +1,268 @@
+/* ============================================================
+   ASIP C7-2 — Executive Intelligence Dashboard 样式
+   复用 home-v11.css 的设计令牌（--v11-*），不另起设计系统。
+   移动端 ~390px 不横向溢出；摘要文本为视觉优先级最高元素。
+   ============================================================ */
+
+.exec-board {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+/* 卡片外壳与 v11 卡片一致 */
+.exec-card {
+  background: var(--v11-card);
+  border: 1px solid var(--v11-border);
+  border-radius: var(--v11-radius);
+  box-shadow: var(--v11-shadow);
+  padding: 14px 16px;
+  min-width: 0;
+}
+.exec-card-h {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  border-bottom: 1px solid var(--v11-border);
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+  min-width: 0;
+}
+.exec-card-h h2 {
+  margin: 0;
+  font-size: 16px;
+  color: var(--v11-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.exec-card-en {
+  font-size: 11px;
+  letter-spacing: .08em;
+  color: var(--v11-muted);
+  white-space: nowrap;
+}
+
+/* ── 模块 1：安全态势概览 ─────────────────────────────── */
+.exec-assess {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--v11-text);
+  overflow-wrap: anywhere;
+  margin-bottom: 12px;
+}
+.exec-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.exec-chip {
+  flex: 1 1 120px;
+  min-width: 0;
+  background: var(--v11-blue-soft);
+  border: 1px solid var(--v11-border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 12px;
+  color: var(--v11-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.exec-chip b {
+  font-size: 20px;
+  line-height: 1.1;
+  color: var(--v11-nav);
+  font-variant-numeric: tabular-nums;
+}
+.exec-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--v11-muted);
+}
+.exec-pill {
+  border: 1px solid var(--v11-border);
+  border-radius: 999px;
+  padding: 3px 10px;
+  background: #f8fafc;
+  white-space: nowrap;
+}
+.exec-pill.is-worse { color: #b91c1c; background: #fef2f2; border-color: #fecaca; }
+.exec-pill.is-better { color: #15803d; background: #f0fdf4; border-color: #bbf7d0; }
+.exec-update { margin-left: auto; white-space: nowrap; }
+
+/* ── 通用行 ─────────────────────────────────────────── */
+.exec-empty, .exec-busy {
+  color: var(--v11-muted);
+  font-size: 13px;
+  padding: 10px 2px;
+}
+.exec-region-row, .exec-top-row, .exec-feed-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 9px 2px;
+  border-bottom: 1px dashed var(--v11-border);
+  min-width: 0;
+}
+.exec-region-row:last-child, .exec-top-row:last-child, .exec-feed-row:last-child {
+  border-bottom: 0;
+}
+
+/* ── 模块 2：重点区域 ───────────────────────────────── */
+.exec-dir {
+  flex: 0 0 auto;
+  width: 22px;
+  text-align: center;
+  font-size: 13px;
+  border-radius: 6px;
+  padding: 2px 0;
+}
+.exec-dir.is-up { color: #b91c1c; background: #fef2f2; }
+.exec-dir.is-flat { color: #64748b; background: #f1f5f9; }
+.exec-dir.is-down { color: #15803d; background: #f0fdf4; }
+.exec-region-name {
+  flex: 0 0 auto;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--v11-text);
+  white-space: nowrap;
+}
+.exec-region-n {
+  flex: 0 0 auto;
+  font-size: 12px;
+  color: var(--v11-muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.exec-region-n b { color: var(--v11-nav); font-size: 14px; }
+.exec-region-note {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 12px;
+  color: var(--v11-muted);
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+/* ── 模块 3：近期重点动态 ───────────────────────────── */
+a.exec-top-row { text-decoration: none; }
+a.exec-top-row:hover { background: var(--v11-blue-soft); }
+.exec-top-country {
+  flex: 0 0 auto;
+  font-size: 12px;
+  color: var(--v11-blue);
+  background: var(--v11-blue-soft);
+  border-radius: 6px;
+  padding: 3px 8px;
+  white-space: nowrap;
+}
+.exec-top-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.exec-top-main b {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--v11-text);
+  overflow-wrap: anywhere;
+}
+.exec-top-main i {
+  font-style: normal;
+  font-size: 12px;
+  color: var(--v11-muted);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.exec-top-meta {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  font-size: 12px;
+  color: var(--v11-muted);
+  white-space: nowrap;
+}
+.exec-top-meta em { font-style: normal; }
+.exec-top-meta u {
+  text-decoration: none;
+  background: #f1f5f9;
+  border-radius: 6px;
+  padding: 2px 6px;
+}
+.exec-top-row.sev-high, .exec-top-row.sev-critical { border-left: 3px solid var(--v11-risk-4); padding-left: 8px; }
+
+/* ── 模块 4：最新情报流 ─────────────────────────────── */
+.exec-feed-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.exec-feed-main b {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--v11-text);
+  overflow-wrap: anywhere;
+}
+.exec-feed-main i {
+  font-style: normal;
+  font-size: 12px;
+  color: var(--v11-muted);
+  overflow-wrap: anywhere;
+}
+.exec-orig {
+  text-decoration: none;
+  font-size: 11px;
+  color: #92400e;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 6px;
+  padding: 1px 6px;
+  margin-left: 6px;
+  white-space: nowrap;
+}
+.exec-feed-side {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  font-size: 12px;
+  color: var(--v11-muted);
+  white-space: nowrap;
+}
+.exec-feed-side em { font-style: normal; }
+
+/* ── 响应式：桌面三栏 → 平板两栏 → 手机单栏 ─────────── */
+@media (min-width: 1024px) {
+  .exec-board { grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr) minmax(0, 1.35fr); }
+  .exec-card-overview { grid-column: 1 / -1; }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .exec-board { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .exec-card-overview { grid-column: 1 / -1; }
+  .exec-card-regions { grid-column: 1 / -1; }
+}
+@media (max-width: 639px) {
+  .exec-card { padding: 12px; }
+  .exec-assess { font-size: 15px; line-height: 1.75; }
+  .exec-chip { flex: 1 1 44%; }
+  .exec-update { margin-left: 0; width: 100%; }
+  .exec-region-note { display: none; }          /* 窄屏收起次要注记，避免换行挤压 */
+  .exec-top-meta, .exec-feed-side { align-items: flex-start; }
+}
