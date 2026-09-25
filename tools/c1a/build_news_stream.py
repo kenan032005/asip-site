@@ -73,7 +73,11 @@ ISO3 = {"TD": "TCD", "NE": "NER", "NG": "NGA", "SD": "SDN", "SS": "SSD",
         "EG": "EGY", "DZ": "DZA", "UG": "UGA", "AO": "AGO", "GH": "GHA",
         # C1C：补齐新增国别，避免 iso3 为空导致下游视图缺字段
         "CD": "COD", "SO": "SOM", "CG": "COG", "TZ": "TZA", "GA": "GAB",
-        "MA": "MAR", "TN": "TUN"}
+        "MA": "MAR", "TN": "TUN",
+        # C7-4：非洲监测范围扩展（12 → 32 国）补齐 ISO3
+        "ML": "MLI", "BF": "BFA", "CM": "CMR", "CF": "CAF", "RW": "RWA",
+        "BI": "BDI", "SN": "SEN", "CI": "CIV", "ZW": "ZWE", "GN": "GIN",
+        "MR": "MRT"}
 
 ETYPE_CN = {
     "armed_conflict": "武装冲突", "other_security": "其他安全",
