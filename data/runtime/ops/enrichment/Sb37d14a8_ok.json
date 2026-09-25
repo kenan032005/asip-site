@@ -1,0 +1,107 @@
+{
+ "label": "Sb37d14a8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d44d1f4153f7d9955c342ae9525980fd8cdbbe0c66e9374cf57541fa22cc6ea3",
+ "tokens": {
+  "input_tokens": 2239,
+  "output_tokens": 518,
+  "total_tokens": 2757
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得人权组织谴责针对工会领袖阿卜杜勒卡德尔·吉比亚的绑架威胁",
+   "summary_zh": "乍得人权公约组织（CTDDH）于2026年9月24日在社交媒体发表声明，称该组织成员、乍得教师工会恩贾梅纳市秘书长阿卜杜勒卡德尔·吉比亚受到绑架威胁。该组织就此警告乍得政府，不得侵犯其基本权利或人身安全。目前该消息为单一来源，威胁情况尚未获得独立证实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N'Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得人权公约组织（CTDDH）称工会领袖阿卜杜勒卡德尔·吉比亚受到绑架威胁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Membre du bureau de la CTDDH et secrétaire général du Syndicat des enseignants du Tchad (SET) pour la commune de N'Djamena, Abdelkadre Djibia fait l'objet de menaces d'enlèvement selon l'organisation."
+    },
+    {
+     "fact": "CTDDH秘书长马哈马特·努尔·艾哈迈德·伊贝杜于2026年9月24日发表声明发出警报",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans une déclaration publiée sur les réseaux sociaux le 24 septembre 2026, son secrétaire général, Mahamat Nour Ahmed Ibedou, a tiré la sonnette d'alarme concernant la sécurité d'Abdelkadre Djibia."
+    },
+    {
+     "fact": "CTDDH警告乍得政府不得侵犯该工会领袖的基本权利或人身安全",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'ONG met solennellement en garde les autorités contre toute tentative qui viserait à porter atteinte aux droits fondamentaux ou à l'intégrité physique du responsable syndical."
+    }
+   ],
+   "uncertainties": [
+    "绑架威胁目前仅为CTDDH单方面指控，尚未获得独立证实",
+    "威胁来源与具体细节未在报道中说明",
+    "该事件目前仅有一个来源（Alwihda Info）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得人权组织谴责针对工会领袖阿卜杜勒卡德尔·吉比亚的绑架威胁",
+   "summary_zh": "乍得人权公约组织（CTDDH）于2026年9月24日在社交媒体发表声明，称该组织成员、乍得教师工会恩贾梅纳市秘书长阿卜杜勒卡德尔·吉比亚受到绑架威胁。该组织就此警告乍得政府，不得侵犯其基本权利或人身安全。目前该消息为单一来源，威胁情况尚未获得独立证实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N'Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得人权公约组织（CTDDH）称工会领袖阿卜杜勒卡德尔·吉比亚受到绑架威胁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Membre du bureau de la CTDDH et secrétaire général du Syndicat des enseignants du Tchad (SET) pour la commune de N'Djamena, Abdelkadre Djibia fait l'objet de menaces d'enlèvement selon l'organisation."
+    },
+    {
+     "fact": "CTDDH秘书长马哈马特·努尔·艾哈迈德·伊贝杜于2026年9月24日发表声明发出警报",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans une déclaration publiée sur les réseaux sociaux le 24 septembre 2026, son secrétaire général, Mahamat Nour Ahmed Ibedou, a tiré la sonnette d'alarme concernant la sécurité d'Abdelkadre Djibia."
+    },
+    {
+     "fact": "CTDDH警告乍得政府不得侵犯该工会领袖的基本权利或人身安全",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'ONG met solennellement en garde les autorités contre toute tentative qui viserait à porter atteinte aux droits fondamentaux ou à l'intégrité physique du responsable syndical."
+    }
+   ],
+   "uncertainties": [
+    "绑架威胁目前仅为CTDDH单方面指控，尚未获得独立证实",
+    "威胁来源与具体细节未在报道中说明",
+    "该事件目前仅有一个来源（Alwihda Info）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_74a7379eb37d14a8",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
