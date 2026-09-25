@@ -269,6 +269,10 @@ def main(argv=None):
         return 0
 
     try:
+        # 与 enrichment_run 相同的双路径导入约定（scripts.ai 需要仓库根在路径上）
+        for _p in (str(root), str(root / "scripts"), str(root / "scripts" / "data")):
+            if _p not in sys.path:
+                sys.path.insert(0, _p)
         from scripts.ai.safety import manual_trial as mt  # noqa: E402
         prov = mt._flash_provider()
     except Exception as e:  # noqa: BLE001

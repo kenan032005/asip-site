@@ -191,6 +191,11 @@ def main(argv=None):
 
     prov = None
     try:
+        # 与 enrichment_run 相同的双路径导入约定（脚本以 python scripts/ops/xxx.py
+        # 运行时 sys.path[0] 是 scripts/ops，scripts.ai 需要仓库根在路径上）
+        for _p in (str(root), str(root / "scripts"), str(root / "scripts" / "data")):
+            if _p not in sys.path:
+                sys.path.insert(0, _p)
         from scripts.ai.safety import manual_trial as mt  # noqa: E402
         prov = mt._flash_provider()
     except Exception as e:  # noqa: BLE001
@@ -211,6 +216,7 @@ def main(argv=None):
         for key, val in out.items():
             index[key] = val
         localized += len(out)
+    (root / OUT_DIR).mkdir(parents=True, exist_ok=True)
     write_atomic(root / INDEX, index)
     print(json.dumps({"status": last_status, "eligible": len(rows), "localized": localized,
                       "ai_calls": calls, "cache_index_entries": len(index),
