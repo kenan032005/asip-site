@@ -33,12 +33,12 @@ jobs:
     # C6-R5: collection_run.py 的采集墙钟预算为 2400s（兜底超时 2700s），
     # job 级预算必须高于它，否则手动 `execute=true` 会被 job 超时截断，
     # 拿不到采集器优雅降级后写出的统计。orchestrator job 为 60min，此处对齐为 45min。
-    timeout-minutes: 45
+    timeout-minutes: 50
     steps:
       - name: Checkout production code
         uses: actions/checkout@v4
         with:
-          ref: 12819d9d91db0ae8d812d1f92a465b808b67c67e
+          ref: 1c615d2b6d41e71c2ae239013edb0577ac613930
           fetch-depth: 1
 
       - name: Checkout production state branch
