@@ -278,8 +278,12 @@ def fact_gate(brief, pack):
     for r in (brief.get("source_fact_refs") or [])[:50]:
         if str(r) not in ids:
             errs.append("source_fact_refs 未解析 %r" % r)
-    allowed = {str(pack["counts"][k]) for k in ("signals_24h", "signals_7d",
-                                                "verified_events_24h", "verified_events_7d")}
+    # 允许集合 = 事实包 counts 的**全部**计数 + 7 日国家数 + 事实总数。
+    # 说明：放宽的是"AI 可以引用的计数白名单"（数字仍必须等于事实包算出的值），
+    # 不是放宽反幻觉规则本身。此前该集合漏掉 countries_with_activity_24h /
+    # total_countries_monitored，导致真实简报因「1个国家」被误判越界
+    # （C7-5 生产实测 status=FACT_GATE_FAIL、gate_errors=["数字主张 1个国家 不在允许集合"]）。
+    allowed = {str(v) for v in (pack.get("counts") or {}).values()}
     allowed |= {str(len(pack.get("countries_7d") or [])), str(pack.get("fact_count"))}
     for m in NUM_UNITS.finditer(str(oa.get("summary_cn") or "")):
         if m.group(1) not in allowed:

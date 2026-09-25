@@ -594,6 +594,13 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
         "ok": _run_script(["scripts/ops/news_localization_run.py"], emit,
                           timeout=2760),
         "detail": "news_localization"}
+    # C7-5：先重建 C1A 情报流视图（news_stream）。
+    # 此前只有站点构建阶段才会重建它，编排器里的 data/views/news_stream.json 长期停在
+    # 陈旧快照（生产实测 generated=2026-09-23），导致每日研判与首页「24h 情报信号」恒为 0。
+    # 构建器为确定性、无 AI 调用、实测约 1s。
+    results["c1a_views"] = {
+        "ok": _run_script(["tools/c1a/build_views.py"], emit, timeout=600),
+        "detail": "c1a_views"}
     results["daily_assessment"] = {
         "ok": _run_script(["scripts/ops/assessment_run.py"], emit, timeout=900),
         "detail": "assessment_run"}
