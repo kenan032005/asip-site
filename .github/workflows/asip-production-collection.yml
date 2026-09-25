@@ -96,9 +96,14 @@ jobs:
           # 采集结果必须落盘，故 pull --rebase 后有限重试（3 次），仍失败才报错。
           ok=0
           for i in 1 2 3; do
+            git fetch origin production-state || true
+            # 冲突时保留本地（本轮采集）数据：-X ours。rebase 在双改大 JSON 时会中止，
+            # 因此改用 merge -X ours（C7-4S：实测 rebase 路径报 unmerged files 直接失败）。
+            git merge -X ours --no-edit origin/production-state >/dev/null 2>&1 || true
+            git add -A 2>/dev/null || true
+            git commit --no-edit >/dev/null 2>&1 || true
             if git push origin production-state; then ok=1; break; fi
-            echo "push rejected (attempt $i) -> pull --rebase and retry"
-            git pull --rebase origin production-state || true
+            echo "push rejected (attempt $i)"
             sleep 5
           done
           if [ "$ok" != "1" ]; then echo "::error::state push failed after 3 attempts"; exit 1; fi
