@@ -92,7 +92,16 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -f data/runtime/ops
           git commit -m "ops: collection run ${{ github.run_id }}" --allow-empty || echo "no state change"
-          git push origin production-state
+          # C7-4R：并发写入者（orchestrator/其他运行）会让首次 push 非快进 —— 本地
+          # 采集结果必须落盘，故 pull --rebase 后有限重试（3 次），仍失败才报错。
+          ok=0
+          for i in 1 2 3; do
+            if git push origin production-state; then ok=1; break; fi
+            echo "push rejected (attempt $i) -> pull --rebase and retry"
+            git pull --rebase origin production-state || true
+            sleep 5
+          done
+          if [ "$ok" != "1" ]; then echo "::error::state push failed after 3 attempts"; exit 1; fi
           cd ..
 
       - name: Upload ops artifacts

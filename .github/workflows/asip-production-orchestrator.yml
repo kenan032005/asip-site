@@ -180,7 +180,15 @@ jobs:
             data/events.json data/pending_events.json data/raw_candidates.json \
             data/quarantine_events.json data/public data/intelligence data/views
           git commit -m "ops: orchestrator run ${{ github.run_id }}" --allow-empty || echo "no state change"
-          git push origin production-state
+          # C7-4R：并发写入者会导致非快进 push —— rebase 后有限重试（3 次）
+          ok=0
+          for i in 1 2 3; do
+            if git push origin production-state; then ok=1; break; fi
+            echo "push rejected (attempt $i) -> pull --rebase and retry"
+            git pull --rebase origin production-state || true
+            sleep 5
+          done
+          if [ "$ok" != "1" ]; then echo "::error::state push failed after 3 attempts"; exit 1; fi
           cd ..
 
       - name: Auto deploy（publishable report 后自动派发；canary 仅 shadow build/validate）
