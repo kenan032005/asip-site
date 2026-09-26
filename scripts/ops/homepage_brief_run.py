@@ -39,6 +39,10 @@ ROOT = Path(__file__).resolve().parents[2]
 BJT = timezone(timedelta(hours=8))
 PACK = Path("data") / "runtime" / "ops" / "homepage_intelligence_fact_pack.json"
 OUT_DIR = Path("data") / "intelligence" / "ai" / "homepage"
+#: 首页简报事实门版本。任何改动事实门校验语义（可引用数值集合、结构约束）都必须递增：
+#: 节奏与缓存只以**同版本**的上一次尝试为准 —— 旧版本门产出的失败记录不会把新版本
+#: 锁在 6h 窗口之外（与项目既有 CLASSIFIER_VERSION 约定一致）。
+GATE_VERSION = 2
 CADENCE_HOURS = 6
 
 SECTORS = ["terrorism_conflict", "political_social", "crime_public_security",
@@ -354,14 +358,15 @@ def main(argv=None):
         latest = None
     if latest and not args.force:
         prev_t = parse_time(latest.get("generated_time"))
+        same_gate = latest.get("gate_version") == GATE_VERSION
         # 节奏（≤6h 一次）按"上一次**尝试**"计（不论成功/失败）：失败时若不计节奏，
         # 编排器每小时都会重试（生产实测 00–09 BJT 连续 10 次 AI 调用）。
-        if prev_t and (now - prev_t) < timedelta(hours=CADENCE_HOURS):
+        if same_gate and prev_t and (now - prev_t) < timedelta(hours=CADENCE_HOURS):
             print(json.dumps({"status": "skipped_cadence", "input_hash": ih[:12],
                               "prev_status": latest.get("status"),
                               "real_ai_calls": 0}, ensure_ascii=False))
             return 0
-        if latest.get("input_hash") == ih and latest.get("status") == "ok":
+        if same_gate and latest.get("input_hash") == ih and latest.get("status") == "ok":
             print(json.dumps({"status": "skipped_same_input", "input_hash": ih[:12],
                               "real_ai_calls": 0}, ensure_ascii=False))
             return 0
@@ -398,7 +403,8 @@ def main(argv=None):
     usage = rec.get("tokens") or {}
     tokens = usage.get("total_tokens") if isinstance(usage.get("total_tokens"), int) else None
     base = {"generated_time": now.isoformat(timespec="seconds"),
-            "input_hash": ih, "counts": pack["counts"], "ai_calls": calls,
+            "input_hash": ih, "gate_version": GATE_VERSION,
+            "counts": pack["counts"], "ai_calls": calls,
             "total_tokens": tokens, "input_tokens": usage.get("input_tokens"),
             "output_tokens": usage.get("output_tokens"),
             "runtime_s": round(time.time() - t0, 1),
