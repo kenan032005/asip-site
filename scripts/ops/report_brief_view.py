@@ -247,10 +247,28 @@ def build_weekly(hv, now):
     }
 
 
+def _indexable(root, row, keep_paths):
+    """发布契约过滤：索引只能引用"构建能发布到 dist 的产物"。
+
+    build_site._copy_report_artifacts 的 canonical SOURCE 集合是树 data/reports/**；
+    runtime-only 报告（只在 data/runtime/ops/reports/ 与 dist 里）不在该集合内，
+    一旦被索引 → MISSING → REPORT_ARTIFACT_PUBLICATION=FAIL → 生产 deploy 卡在 Build site
+    （生产实测：索引 29 行，其中 DAILY_20260908/23/24/25/26 缺失 → MISSING=5）。
+    """
+    path = str(row.get("path") or "")
+    if not path:
+        return False
+    if path in keep_paths:                     # 本轮要落盘并发布的当期简报
+        return True
+    return (root / path).exists()              # 已在 canonical SOURCE 树中的产物
+
+
 def upsert_index(root, d_doc, w_doc, d_name, w_name):
     idx = load_json(root / RI, {}) or {}
+    keep_paths = {"data/reports/daily/%s" % d_name, "data/reports/weekly/%s" % w_name}
     rows = [r for r in (idx.get("reports") or [])
             if str(r.get("report_id")) not in (d_doc["report_id"], w_doc["report_id"])]
+    rows = [r for r in rows if _indexable(root, r, keep_paths)]
     def row(doc, path):
         return {"report_id": doc["report_id"], "report_type": doc["report_type"],
                 "title": doc["title_cn"], "title_cn": doc["title_cn"],
