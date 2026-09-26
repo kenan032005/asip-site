@@ -118,11 +118,40 @@ jobs:
           cp -rf state_src/data/views/. data/views/ 2>/dev/null || true
           # C7-6：当期日报/周报简报必须落到 report_index 引用的树路径，
           # 否则 INDEX_REFERENCED_REPORTS != PUBLISHED_REPORT_FILES → 构建校验 FAIL、部署被卡。
-          # C7-6R4：先整树恢复 canonical 报告（含 materialize 的 legacy + 简报），
-          # 与 build_site._copy_report_artifacts 的 SOURCE 集合一致。
-          mkdir -p data/reports
-          cp -rf state_src/data/reports/. data/reports/ 2>/dev/null || true
+          # C7-6R4：canonical SOURCE 集合 = 树 data/reports/**（构建校验的比对基准）。
+          # 编排器运行期生成的报告只落在 data/runtime/ops/reports/，而 report_index 按
+          # data/reports/<report_id>.json 命名 → 必须在此**按索引路径物化**，否则
+          # REPORT_ARTIFACT_PUBLICATION=FAIL（MISSING=4）并卡死 Build site。
           mkdir -p data/reports/daily data/reports/weekly
+          python - <<'PY2'
+          import json, os, shutil, pathlib
+          src = pathlib.Path("state_src/data/runtime/ops/reports")
+          made = 0
+          if src.is_dir():
+              for fn in sorted(os.listdir(src)):
+                  if not fn.endswith(".json") or fn.endswith(("_gates.json", "_fact_pack.json")):
+                      continue
+                  if fn == "reports_run_summary.json":
+                      continue
+                  if fn.startswith("daily_"):
+                      sub = "daily"
+                  elif fn.startswith(("tcd_weekly_", "ssd_weekly_")):
+                      sub = "weekly"
+                  else:
+                      continue
+                  sp = src / fn
+                  d = pathlib.Path("data/reports") / sub
+                  d.mkdir(parents=True, exist_ok=True)
+                  shutil.copy2(sp, d / fn)                      # 源名（简报索引风格）
+                  try:
+                      rid = json.loads(sp.read_text(encoding="utf-8")).get("report_id")
+                  except Exception:
+                      rid = None
+                  if rid and not any(x in str(rid).upper() for x in ("MANUAL_TRIAL", "_DEV", "TRIAL")):
+                      shutil.copy2(sp, d / ("%s.json" % rid))   # report_id 名（legacy 索引风格）
+                  made += 1
+          print("report state materialized: %d" % made)
+          PY2
           cp -f state_src/data/runtime/ops/reports/daily_brief_*.json data/reports/daily/ 2>/dev/null || true
           cp -f state_src/data/runtime/ops/reports/tcd_weekly_brief_*.json data/reports/weekly/ 2>/dev/null || true
 
