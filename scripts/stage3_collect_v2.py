@@ -184,6 +184,25 @@ def _skipped_stat(src, country_cn):
     }
 
 
+#: C8-3：跨国家管线的**发现缓存**（key=source_id）。范围统一后，同一泛非源会出现
+#: 在数十个国家管线的源列表里；若不缓存，feed 会被重复抓取数十次（预算立即打爆）。
+#: 缓存只复用"发现结果"，国家判定与准入仍在**每个国家管线**内独立执行。
+_DISCOVER_CACHE = {}
+
+
+def _reset_discover_cache():
+    _DISCOVER_CACHE.clear()
+
+
+#: C8-3：同 URL 正文抓取缓存（跨国家管线复用）。范围统一后同一篇文章会在多个
+#: 国家管线的源结果里出现；正文抓取是最昂贵的环节，必须每轮只做一次。
+_EXTRACT_CACHE = {}
+
+
+def _reset_extract_cache():
+    _EXTRACT_CACHE.clear()
+
+
 def _record_rotation(country_cn, rot_off, attempted, total):
     """C7-4R P6：按国持久化轮转偏移（失败不影响采集结果）。
 
@@ -272,7 +291,16 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
         print(f"\n  [{src['discovery_type']}] {src['source_name']} ...", flush=True)
 
         # 1) 发现（RSS + HTML栏目页双通道）
-        discovered, dis_errors = discoverer.discover(src)
+        # C8-3：跨国家管线复用发现结果（同源每轮只真正抓一次 feed）。
+        # 复用时不重复计入 discovered（避免指标被国家数放大），但文章仍参与
+        # 本国管线的国家判定与准入 —— 这正是"文章应在正确国家被接受"的前提。
+        _cached = _DISCOVER_CACHE.get(sid)
+        if _cached is not None:
+            discovered = [dict(a) for a in _cached[0]]
+            dis_errors = list(_cached[1])
+            stat["discover_reused_from"] = _cached[2]
+        else:
+            discovered, dis_errors = discoverer.discover(src)
         # 若来源同时配置了 listing_urls，则追加 HTML 栏目页发现
         if src.get("listing_urls") and src["discovery_type"] in ("rss", "atom"):
             html_src = dict(src)
@@ -300,6 +328,9 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
             per_source.append(stat)
             continue
         stat["discovered"] = len(discovered)
+        # C8-3：写入发现缓存（供后续国家的同源管线复用）
+        if _cached is None:
+            _DISCOVER_CACHE[sid] = (discovered, list(dis_errors), country_cn)
 
         # --max-items 限制：每来源最多处理 N 条（受控采集）
         # Stage 3B Final Repair §5:
@@ -391,7 +422,12 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
                 stat["html_fetched"] += 1
 
             # 抓取详情页
-            text, err, http_status = fetch_page(url)
+            # C8-3：正文抓取按 URL 缓存（每轮每 URL 只抓一次）
+            if url in _EXTRACT_CACHE:
+                text, err, http_status = _EXTRACT_CACHE[url]
+            else:
+                text, err, http_status = fetch_page(url)
+                _EXTRACT_CACHE[url] = (text, err, http_status)
             if err:
                 # HTTP 状态码驱动的重试策略
                 is_retryable = _http_is_retryable(http_status) if http_status else True
@@ -1026,6 +1062,9 @@ def save_audit_snapshot(per_source, totals, run_id, source_registry=None):
 
 
 def main():
+    # C8-3：每轮清空跨国家管线的发现/抽取缓存
+    _reset_discover_cache()
+    _reset_extract_cache()
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--country", default=None,
@@ -1059,8 +1098,13 @@ def main():
         countries = [args.country]
     else:
         _cfg_countries = set(_configured_countries())
-        countries = sorted({s["source_country"] for s in registry.enabled()
-                            if s["source_country"] in _cfg_countries})
+        # C8-3 PHASE 2/3：管线国家清单 = **权威监控注册表**（config/countries 全量 54 国），
+        # 而不是"有启用源的国家"。后者在生产实测只有 5 国（乍得/尼日尔/贝宁/刚果金/南苏丹），
+        # 于是泛非源的尼日利亚/苏丹/马里等文章在别的国家管线里被判 wrong_country
+        # （C8-2 实测 24h 308 条，pan_bbc/france24/allafrica/dw/unnews 100% 被隔离）。
+        # 无本地源的国家管线开销为 0（源列表为空即快速跳过），但能让该国文章在其
+        # **正确国家**的管线里进入准入流程。
+        countries = sorted(_cfg_countries)
         # C8-1：含 Lane A 源的国家优先占用预算（其余国家保持原顺序）
         countries = _lane_a_countries_first(countries, {
             s2.get("source_country") for s2 in registry.enabled()
