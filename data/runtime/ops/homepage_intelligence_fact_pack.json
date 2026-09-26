@@ -1,15 +1,15 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-09-26T18:06:18+08:00",
+ "generated_at": "2026-09-26T19:49:08+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 8,
-  "signals_7d": 59,
-  "verified_events_24h": 8,
-  "verified_events_7d": 58,
+  "signals_24h": 9,
+  "signals_7d": 62,
+  "verified_events_24h": 9,
+  "verified_events_7d": 61,
   "multi_source_verified_events_7d": 1,
   "countries_with_activity_24h": 2,
   "total_countries_monitored": 22
@@ -26,7 +26,7 @@
  "country_distribution_7d": [
   {
    "value": "乍得",
-   "count": 45
+   "count": 48
   },
   {
    "value": "尼日尔",
@@ -40,11 +40,19 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 4
+   "count": 3
   },
   {
    "value": "军事行动",
    "count": 2
+  },
+  {
+   "value": "政治危机",
+   "count": 1
+  },
+  {
+   "value": "武装冲突",
+   "count": 1
   },
   {
    "value": "边境安全",
@@ -58,7 +66,7 @@
  "source_tier_distribution_7d": [
   {
    "value": "C",
-   "count": 113
+   "count": 119
   },
   {
    "value": "A",
@@ -171,6 +179,51 @@
    "source_role": "local_signal",
    "time": "2026-09-25 00:30",
    "importance": "medium",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:e24fc089afe5e080",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Sarh : une dispute entre deux jeunes fait un mort au marché moderne",
+   "category": "political_crisis",
+   "source": "Le Pays Tchad",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-26 17:18",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:5ef3932ede4e0750",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "ONU : le Tchad défend son retrait de la CPI et met en garde le Soudan",
+   "category": "military_operation",
+   "source": "Tchadinfos",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-26 16:32",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:288d9f92704bbfe6",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Chad Warns Against Border Incursions While Hosting Over Two Million Displaced Persons",
+   "category": "armed_conflict",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-26 15:47",
+   "importance": "low",
    "why_it_matters": ""
   },
   {
@@ -472,51 +525,6 @@
    "time": "2026-09-24 05:14",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:2e7bfde599494bd0",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得贝贝贾地区盗窃、不文明行为及酗酒问题加剧",
-   "category": "other_security",
-   "source": "Alwihda Info",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-24 02:21",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:9922726b2c878753",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日尔",
-   "title": "蒂拉贝里：青年参与和平与发展对话",
-   "category": "other_security",
-   "source": "Journal du Niger",
-   "source_tier": "A",
-   "source_role": "official",
-   "time": "2026-09-24 01:45",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:fdba9de058567e1f",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日尔",
-   "title": "尼日尔Kalangou电台节目：媒体监管、环境与Maradi难民议题",
-   "category": "other_security",
-   "source": "Studio Kalangou",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-24 01:00",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -595,16 +603,61 @@
  ],
  "existing_assessment": {
   "status": "ai",
-  "overall_assessment": "已核实事件层面，乍得湖地区安全形势突出：9月21日恩古布阿附近发生袭击，11名渔民死亡，军方称击毙9名袭击者；同期乍得在湖区连续开展安全视察，并在恩贾梅纳展示43名嫌疑人及缴获武器，同时设立混合解除武装协调机制。南苏丹琼莱州杜克县社区间武装冲突已核实致至少13人死亡。尼日尔方向以安全治理与重返社会议题为主。情报信号层面（均为单源消息，尚待核实）：提贝斯提省图尔库矿区枪击致一名矿业企业家死亡、两人受伤；联合国难民署称年初以来逾5.5万苏丹难民抵乍得；乍得在联合国重申对苏丹冲突保持中立；另有苏丹危机叠加干旱的人道与安全双重压力表述。整体风险方向趋于恶化，但多数新增条目仍为单源信号，需交叉核实。",
+  "overall_assessment": "已核实事件方面，乍得湖地区恩古布阿附近发生袭击致11名渔民死亡，军方称击毙9名袭击者（单源核实）；乍得在湖区持续开展安全视察，武装部队部长赴毛市及湖区传达国家元首讯息；国家警察展示43名嫌犯及缴获武器；政府设立混合解除武装协调机制，并逮捕涉中非阿姆达福克袭击的嫌犯之一；南苏丹琼莱州杜克县社区间冲突致至少13人死亡。情报信号方面（均为单源消息，尚待核实）：提贝斯提省图尔库矿区枪击致一名矿业企业家身亡、两人受伤；萨尔市场冲突致一人死亡；联合国难民署称年初以来逾5.5万苏丹难民抵乍；乍得在联合国重申对苏丹冲突中立并警告边境入侵；另有报道称乍得境内流离失所者超两百万。整体风险方向趋于恶化，乍得为压力核心。",
   "risk_direction": "worsening",
   "confidence": "medium",
-  "generated_time": "2026-09-26T17:02:28+08:00",
+  "generated_time": "2026-09-26T19:49:03+08:00",
   "based_on": "过去24小时/7日公开信息",
   "model": "",
   "date": "20260926"
  },
- "fact_count": 117,
+ "fact_count": 123,
  "facts": {
+  "news:e24fc089afe5e080": {
+   "fact_id": "news:e24fc089afe5e080",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Sarh : une dispute entre deux jeunes fait un mort au marché moderne",
+   "category": "political_crisis",
+   "source": "Le Pays Tchad",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-26 17:18",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:5ef3932ede4e0750": {
+   "fact_id": "news:5ef3932ede4e0750",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "ONU : le Tchad défend son retrait de la CPI et met en garde le Soudan",
+   "category": "military_operation",
+   "source": "Tchadinfos",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-26 16:32",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:288d9f92704bbfe6": {
+   "fact_id": "news:288d9f92704bbfe6",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Chad Warns Against Border Incursions While Hosting Over Two Million Displaced Persons",
+   "category": "armed_conflict",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-26 15:47",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:84fe6b04548c6f69": {
    "fact_id": "news:84fe6b04548c6f69",
    "level": "news_signal",
@@ -2357,6 +2410,51 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-09-26 00:29",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_fca98abf095ba245": {
+   "fact_id": "EVT_fca98abf095ba245",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "乍得在联合国为其退出国际刑事法院辩护并警告苏丹",
+   "category": "military_operation",
+   "source": "Tchadinfos",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-26 08:32",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_ffa0054de80a4e21": {
+   "fact_id": "EVT_ffa0054de80a4e21",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "乍得警告反对边境入侵，同时收容逾两百万流离失所者",
+   "category": "armed_conflict",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-26 07:47",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_02cd702655cd49df": {
+   "fact_id": "EVT_02cd702655cd49df",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "乍得萨尔市现代市场两名青年争执致一人死亡",
+   "category": "political_crisis",
+   "source": "Le Pays Tchad",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-26 09:18",
    "importance": "high",
    "severity": "medium"
   }

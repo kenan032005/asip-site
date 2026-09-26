@@ -1,0 +1,138 @@
+{
+ "label": "S095ba245",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b5392568f372036963f4e624ddc94ce13de971c1372bf549f0dd5b50e0daebce",
+ "tokens": {
+  "input_tokens": 2913,
+  "output_tokens": 536,
+  "total_tokens": 3449
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"空袭的具体来源与责任方尚未确认\", \"难民与流离失所者人数为乍得官方说法，未获独立核实\", \"事件信息目前仅来自单一来源（Tchadinfos）\"]",
+    "after": "[\"空袭的具体来源与责任方尚未确认\", \"难民与流离失所者人数为乍得官方说法，未获独立核实\", \"事件信息目前仅来自单一来源（Tchadinfos）\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得在联合国为其退出国际刑事法院辩护并警告苏丹",
+   "summary_zh": "乍得在联合国大会第81届会议一般性辩论中为其退出国际刑事法院的决定进行辩护，称该法院活动长期集中于发展中国家尤其是非洲。乍得同时重申在苏丹战争中保持“严格中立”，并谴责近期波及其领土的与苏丹冲突相关的空袭，称其为对其领土完整的“不可接受的侵犯”。",
+   "event_type": "border_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "联合国大会",
+    "raw_text": "à la tribune de l’ONU"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得在联合国为其退出国际刑事法院的决定辩护",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Tchad a défendu à la tribune de l’ONU sa décision de se retirer de la Cour pénale internationale (CPI)"
+    },
+    {
+     "fact": "乍得称自苏丹冲突爆发以来已有超过一百万苏丹难民越境进入乍得",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plus d’un million de réfugiés soudanais ont franchi la frontière tchadienne depuis le début des combats"
+    },
+    {
+     "fact": "乍得谴责近期波及其领土的与苏丹冲突相关的空袭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Tchad a parallèlement condamné des frappes aériennes liées au conflit soudanais ayant récemment touché son territoire"
+    },
+    {
+     "fact": "乍得重申在苏丹冲突中保持“严格、绝对且不变的中立”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "réaffirmant une position de « neutralité stricte, absolue et inchangée »"
+    },
+    {
+     "fact": "乍得表示将向海地打击帮派部队部署1500名军人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Tchad a également rappelé sa décision de déployer 1.500 militaires au sein de la force chargée de lutter contre les gangs en Haïti"
+    }
+   ],
+   "uncertainties": [
+    "空袭的具体来源与责任方尚未确认",
+    "难民与流离失所者人数为乍得官方说法，未获独立核实",
+    "事件信息目前仅来自单一来源（Tchadinfos）"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得在联合国为其退出国际刑事法院辩护并警告苏丹",
+   "summary_zh": "乍得在联合国大会第81届会议一般性辩论中为其退出国际刑事法院的决定进行辩护，称该法院活动长期集中于发展中国家尤其是非洲。乍得同时重申在苏丹战争中保持“严格中立”，并谴责近期波及其领土的与苏丹冲突相关的空袭，称其为对其领土完整的“不可接受的侵犯”。",
+   "event_type": "border_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "联合国大会",
+    "raw_text": "à la tribune de l’ONU"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得在联合国为其退出国际刑事法院的决定辩护",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Tchad a défendu à la tribune de l’ONU sa décision de se retirer de la Cour pénale internationale (CPI)"
+    },
+    {
+     "fact": "乍得称自苏丹冲突爆发以来已有超过一百万苏丹难民越境进入乍得",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plus d’un million de réfugiés soudanais ont franchi la frontière tchadienne depuis le début des combats"
+    },
+    {
+     "fact": "乍得谴责近期波及其领土的与苏丹冲突相关的空袭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Tchad a parallèlement condamné des frappes aériennes liées au conflit soudanais ayant récemment touché son territoire"
+    },
+    {
+     "fact": "乍得重申在苏丹冲突中保持“严格、绝对且不变的中立”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "réaffirmant une position de « neutralité stricte, absolue et inchangée »"
+    },
+    {
+     "fact": "乍得表示将向海地打击帮派部队部署1500名军人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Tchad a également rappelé sa décision de déployer 1.500 militaires au sein de la force chargée de lutter contre les gangs en Haïti"
+    }
+   ],
+   "uncertainties": [
+    "空袭的具体来源与责任方尚未确认",
+    "难民与流离失所者人数为乍得官方说法，未获独立核实",
+    "事件信息目前仅来自单一来源（Tchadinfos）",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_fca98abf095ba245",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

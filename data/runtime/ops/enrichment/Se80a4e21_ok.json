@@ -1,0 +1,125 @@
+{
+ "label": "Se80a4e21",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5112cecb747ff63a8aeeae63591b401cbfa54503d0803304b0f767b526fd0f3c",
+ "tokens": {
+  "input_tokens": 2436,
+  "output_tokens": 554,
+  "total_tokens": 2990
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得警告反对边境入侵，同时收容逾两百万流离失所者",
+   "summary_zh": "乍得在联合国大会第81届会议上重申对地区和平的承诺，并强调在苏丹冲突中保持严格中立，同时警告任何侵犯其国家主权的行为。自2023年4月以来，已有超过一百万苏丹人越境进入乍得东部，乍得目前收容逾两百万被迫流离失所者。乍得政府以最强烈措辞谴责与苏丹冲突有关的、发生在Ennedi Est省的近期空袭，称其为不可接受的侵犯，并警告若此类事件再次发生将保留采取一切必要措施的权利。",
+   "event_type": "border_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "Ennedi Est",
+    "city": null,
+    "site": null,
+    "raw_text": "Ennedi Est province; Chad's eastern borders"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得在联合国大会上警告反对任何侵犯其国家主权的行为",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Chad has reaffirmed its commitment to regional stability from the rostrum of the United Nations General Assembly at its 81st session... issuing a firm warning against any violations of its national sovereignty."
+    },
+    {
+     "fact": "自2023年4月以来超过一百万苏丹人越境进入乍得东部",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Since April 2023, more than one million Sudanese have crossed Chad's eastern borders fleeing conflict."
+    },
+    {
+     "fact": "乍得目前收容逾两百万被迫流离失所者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "N'Djamena now hosts over two million forcibly displaced individuals, translating to approximately one in every seventeen residents."
+    },
+    {
+     "fact": "乍得政府以最强烈措辞谴责与苏丹冲突有关的Ennedi Est省近期空袭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The government condemned \"in the strongest terms\" recent airstrikes in the Ennedi Est province directly linked to the Sudanese conflict."
+    },
+    {
+     "fact": "乍得警告若此类侵犯再次发生将保留采取一切必要措施的权利",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "N'Djamena warned that it reserves the right to take all necessary measures under international law should such incidents recur."
+    }
+   ],
+   "uncertainties": [
+    "事件为单一来源报道（Alwihda Info），尚缺乏交叉验证",
+    "空袭的具体实施方未在报道中明确说明"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得警告反对边境入侵，同时收容逾两百万流离失所者",
+   "summary_zh": "乍得在联合国大会第81届会议上重申对地区和平的承诺，并强调在苏丹冲突中保持严格中立，同时警告任何侵犯其国家主权的行为。自2023年4月以来，已有超过一百万苏丹人越境进入乍得东部，乍得目前收容逾两百万被迫流离失所者。乍得政府以最强烈措辞谴责与苏丹冲突有关的、发生在Ennedi Est省的近期空袭，称其为不可接受的侵犯，并警告若此类事件再次发生将保留采取一切必要措施的权利。",
+   "event_type": "border_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "Ennedi Est",
+    "city": null,
+    "site": null,
+    "raw_text": "Ennedi Est province; Chad's eastern borders"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得在联合国大会上警告反对任何侵犯其国家主权的行为",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Chad has reaffirmed its commitment to regional stability from the rostrum of the United Nations General Assembly at its 81st session... issuing a firm warning against any violations of its national sovereignty."
+    },
+    {
+     "fact": "自2023年4月以来超过一百万苏丹人越境进入乍得东部",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Since April 2023, more than one million Sudanese have crossed Chad's eastern borders fleeing conflict."
+    },
+    {
+     "fact": "乍得目前收容逾两百万被迫流离失所者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "N'Djamena now hosts over two million forcibly displaced individuals, translating to approximately one in every seventeen residents."
+    },
+    {
+     "fact": "乍得政府以最强烈措辞谴责与苏丹冲突有关的Ennedi Est省近期空袭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The government condemned \"in the strongest terms\" recent airstrikes in the Ennedi Est province directly linked to the Sudanese conflict."
+    },
+    {
+     "fact": "乍得警告若此类侵犯再次发生将保留采取一切必要措施的权利",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "N'Djamena warned that it reserves the right to take all necessary measures under international law should such incidents recur."
+    }
+   ],
+   "uncertainties": [
+    "事件为单一来源报道（Alwihda Info），尚缺乏交叉验证",
+    "空袭的具体实施方未在报道中明确说明"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_ffa0054de80a4e21",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
