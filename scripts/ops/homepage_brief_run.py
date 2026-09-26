@@ -310,6 +310,40 @@ def _numeric_allowlist(pack):
     return vals
 
 
+def sanitize_china_impact(brief, pack):
+    """C7-6R4 FIX C：涉华条目的证据稳定性（不放宽事实门）。
+
+    规则（确定性、AI 之后、门之前）：
+      1) 只保留 country 合法且 fact_refs 非空且**全部可在事实包中解析**的条目；
+      2) 无支撑的条目直接**丢弃**（绝不发布不支持条目）；
+      3）过滤后若已无任何受支撑条目 → items=[]，并把摘要改为诚实口径，
+         同时清掉任何"直接涉及"式断言（保守，避免虚假涉华声称）。
+    返回 (brief, dropped_count)。
+    """
+    ci = brief.get("china_impact") or {}
+    if not isinstance(ci, dict):
+        brief["china_impact"] = {"overall_level": "none", "summary_cn": "", "items": []}
+        return brief, 0
+    ids = set((pack.get("facts") or {}).keys())
+    cset = {str(x) for x in (pack.get("countries_7d") or [])}
+    cset |= {str(x) for x in (pack.get("countries_24h") or [])}
+    kept, dropped = [], 0
+    for it in (ci.get("items") or []):
+        refs = [str(r) for r in (it.get("fact_refs") or [])]
+        if str(it.get("country") or "") in cset and refs and all(r in ids for r in refs):
+            kept.append(it)
+        else:
+            dropped += 1
+    ci["items"] = kept
+    if not kept:
+        ci["overall_level"] = "none"
+        ci["summary_cn"] = ("过去24小时未发现有充分公开证据支持的直接涉华重大安全事件。")
+        if re.search(r"直接涉及|中资企业遭|中国公民遇袭|中企遭|中国企业遭", str(ci.get("analysis_cn") or "")):
+            ci["analysis_cn"] = ""
+    brief["china_impact"] = ci
+    return brief, dropped
+
+
 def fact_gate(brief, pack):
     errs = []
     oa = brief.get("overall_assessment") or {}
@@ -473,8 +507,11 @@ def main(argv=None):
         write_atomic(out_dir / ("%s.json" % now.strftime("%Y%m%d%H")), base)
         print(json.dumps({"status": base["status"], "real_ai_calls": calls}, ensure_ascii=False))
         return 0
+    # C7-6R4 FIX C：先做涉华证据稳定性后处理（丢弃无支撑条目），再跑事实门。
+    brief, dropped_cn = sanitize_china_impact(brief, pack)
     errs = fact_gate(brief, pack)
     base.update(brief)
+    base["dropped_china_items"] = dropped_cn
     base["status"] = "ok" if not errs else "FACT_GATE_FAIL"
     base["gate_errors"] = errs
     write_atomic(out_dir / ("%s.json" % now.strftime("%Y%m%d%H")), base)
