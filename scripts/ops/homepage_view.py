@@ -177,7 +177,10 @@ def main(argv=None):
         e24 = [x for x in ev24 if CAT2SECTOR.get(str(x.get("event_type") or "")) == key]
         s7 = [x for x in sig if CAT2SECTOR.get(str(x.get("event_type") or "")) == key
               and x["_t"] >= now - timedelta(days=3)]
-        reps = sorted(ev24 := e24, key=lambda x: (sev_rank.get(str(x.get("event_severity") or ""), 0),
+        # 注意：这里不能用海象赋值把 e24 绑定回外层变量 ev24 —— 该写法会在板块循环中
+        # 把全局 ev24 重绑为最后一个领域的 24h 事件表，导致指标条 verified_events_24h
+        # 与事实包不一致（生产实测 0 vs 9），并污染地图的每国已核实事件计数。
+        reps = sorted(e24, key=lambda x: (sev_rank.get(str(x.get("event_severity") or ""), 0),
                                                   x["_t"]), reverse=True)[:3]
         reps += sorted(s24, key=lambda x: x["_t"], reverse=True)[:max(0, 4 - len(reps))]
         b = (bs.get(key) or {}) if ai_ok else {}
