@@ -247,7 +247,7 @@ def build_weekly(hv, now):
     }
 
 
-def upsert_index(root, d_doc, w_doc):
+def upsert_index(root, d_doc, w_doc, d_name, w_name):
     idx = load_json(root / RI, {}) or {}
     rows = [r for r in (idx.get("reports") or [])
             if str(r.get("report_id")) not in (d_doc["report_id"], w_doc["report_id"])]
@@ -259,8 +259,11 @@ def upsert_index(root, d_doc, w_doc):
                 "generated_at": doc["generated_at"], "headline": doc["overall_assessment"][:150],
                 "path": path, "is_mock": False, "legacy_only": False,
                 "fact_count": doc.get("fact_count"), "source_count": doc.get("source_count")}
-    dpath = str((INDEX_DIR / ("%s.json" % d_doc["report_id"])).as_posix())
-    wpath = str((INDEX_DIR / ("%s.json" % w_doc["report_id"])).as_posix())
+    # 与 dist 实际发布文件名严格一致：构建按前缀（daily_ / tcd_weekly_）原样复制，
+    # report_id 别名并不保证生成 → 索引必须指向源名文件，才能满足
+    # INDEX_REFERENCED_REPORTS == PUBLISHED_REPORT_FILES。
+    dpath = "data/reports/daily/%s" % d_name
+    wpath = "data/reports/weekly/%s" % w_name
     rows = [row(d_doc, dpath), row(w_doc, wpath)] + rows
     rows.sort(key=lambda r: (str(r.get("period_end") or ""), str(r.get("report_id") or "")), reverse=True)
     idx = {"schema": "report-index-v2", "real_only": True, "count": len(rows),
@@ -299,12 +302,14 @@ def main(argv=None):
     if args.apply:
         # 文件名前缀必须落在构建发布白名单内（daily_ / tcd_weekly_ / ssd_weekly_）；
         # dist 内的文件名由 report_id 别名决定，用户可见路径不受此前缀影响。
-        write_atomic(root / BRIEF_DIR / ("daily_brief_%s.json" % now.strftime("%Y%m%d")), d_doc)
-        write_atomic(root / BRIEF_DIR / ("tcd_weekly_brief_%s.json" % w_doc["report_id"]), w_doc)
-        # 注意：只有当简报产物确实出现在构建发布集（dist/data/reports/**）时才能写入索引，
-        # 否则 SOURCE/DIST/INDEX 计数不一致会让 REPORT_ARTIFACT_PUBLICATION=FAIL 并卡住生产部署。
-        # 发布通路验证通过前，先只生成简报、不写索引（PHASE 10/22 记为未达成）。
-        idx = {"reports": []}
+        d_name = "daily_brief_%s.json" % now.strftime("%Y%m%d")
+        w_name = "tcd_weekly_brief_%s.json" % w_doc["report_id"]
+        write_atomic(root / BRIEF_DIR / d_name, d_doc)
+        write_atomic(root / BRIEF_DIR / w_name, w_doc)
+        # 发布契约：先落盘（daily_brief_* / tcd_weekly_brief_* → 构建白名单前缀）→ 再写索引，
+        # 索引路径与 dist 实际发布名（<report_id>.json）一一对应，保证
+        # INDEX_REFERENCED_REPORTS == PUBLISHED_REPORT_FILES。
+        idx = upsert_index(root, d_doc, w_doc, d_name, w_name)
         print("  index rows = %d | daily = %s | weekly = %s" % (len(idx["reports"]),
                                                               d_doc["report_id"], w_doc["report_id"]))
     print(json.dumps({
