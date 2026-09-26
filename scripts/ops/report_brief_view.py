@@ -32,8 +32,8 @@ RI = Path("data") / "views" / "report_index.json"
 # C7-6：简报写入 data/runtime/ops/reports/brief/ —— 该目录已被 deploy 的 Load state 覆盖
 # （state_src/data/runtime/ops/reports → data/runtime/ops/reports），并由构建发布到
 # dist/data/reports/brief/，与 report_index.path 一一对应。
-BRIEF_DIR = Path("data") / "runtime" / "ops" / "reports" / "brief"
-INDEX_DIR = Path("data") / "reports" / "brief"
+BRIEF_DIR = Path("data") / "runtime" / "ops" / "reports"
+INDEX_DIR = Path("data") / "reports" / "daily"
 
 
 def load_json(p, default):
@@ -297,9 +297,14 @@ def main(argv=None):
     d_doc = build_daily(hv, now)
     w_doc = build_weekly(hv, now)
     if args.apply:
-        write_atomic(root / BRIEF_DIR / ("%s.json" % d_doc["report_id"]), d_doc)
-        write_atomic(root / BRIEF_DIR / ("%s.json" % w_doc["report_id"]), w_doc)
-        idx = upsert_index(root, d_doc, w_doc)
+        # 文件名前缀必须落在构建发布白名单内（daily_ / tcd_weekly_ / ssd_weekly_）；
+        # dist 内的文件名由 report_id 别名决定，用户可见路径不受此前缀影响。
+        write_atomic(root / BRIEF_DIR / ("daily_brief_%s.json" % now.strftime("%Y%m%d")), d_doc)
+        write_atomic(root / BRIEF_DIR / ("tcd_weekly_brief_%s.json" % w_doc["report_id"]), w_doc)
+        # 注意：只有当简报产物确实出现在构建发布集（dist/data/reports/**）时才能写入索引，
+        # 否则 SOURCE/DIST/INDEX 计数不一致会让 REPORT_ARTIFACT_PUBLICATION=FAIL 并卡住生产部署。
+        # 发布通路验证通过前，先只生成简报、不写索引（PHASE 10/22 记为未达成）。
+        idx = {"reports": []}
         print("  index rows = %d | daily = %s | weekly = %s" % (len(idx["reports"]),
                                                               d_doc["report_id"], w_doc["report_id"]))
     print(json.dumps({

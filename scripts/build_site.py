@@ -305,25 +305,6 @@ def verify_report_publication(dist_root, data_dir=None, raise_on_fail=True):
     return res
 
 
-def _copy_report_briefs(dist_root):
-    """C7-6：当期日报/周报简报（data/runtime/ops/reports/brief/）→ dist/data/reports/brief/。
-
-    与 report_index.path（data/reports/brief/<report_id>.json）一一对应；
-    此前简报落在未发布的目录 → 生产报告页 404 / 校验报 MISSING。
-    """
-    src_dir = os.path.join(DATA_DIR, "runtime", "ops", "reports", "brief")
-    if not os.path.isdir(src_dir):
-        return 0
-    dst_dir = os.path.join(dist_root, "reports", "brief")
-    os.makedirs(dst_dir, exist_ok=True)
-    n = 0
-    for fn in os.listdir(src_dir):
-        if fn.endswith(".json") and not fn.endswith(".tmp"):
-            shutil.copy2(os.path.join(src_dir, fn), os.path.join(dst_dir, fn))
-            n += 1
-    return n
-
-
 def _copy_production_reports(dist_root):
     """Production report outputs → dist/reports/{daily,weekly}/。
 
@@ -606,8 +587,6 @@ def main(run_id=None, no_embed=False):
         shutil.copytree(REPORTS, os.path.join(DIST_NEW, "reports"))
     # Production report outputs → 公开归档
     n_prod_reports = _copy_production_reports(DIST_NEW)
-    n_briefs = _copy_report_briefs(DIST_NEW)
-    print("  当期报告简报: %d 个" % n_briefs)
     n_prod_reports = _copy_report_artifacts(DIST_NEW)
     print(f"  生产报告归档: {n_prod_reports} 个文件")
 
