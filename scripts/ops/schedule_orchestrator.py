@@ -114,12 +114,16 @@ def ai_publication_projection(data_root):
     try:
         hp = json.loads((Path(data_root) / "views" / "homepage_intelligence.json")
                         .read_text(encoding="utf-8"))
-        ov = hp.get("overview") or {}
-        mt_ = hp.get("metrics") or {}
-        hp_sig = [ov.get("summary_cn") or "", ov.get("risk_direction") or "",
-                  json.dumps(ov.get("key_judgments") or [], ensure_ascii=False),
-                  mt_.get("signals_24h"), mt_.get("verified_events_24h"),
-                  len(hp.get("latest_intelligence") or [])]
+        # 以**整份视图**的稳定投影做签名（排除 generated_time 等易变字段）：
+        # 原先只投影摘要/计数，地图国别、板块领域分析、重点动态、涉华条目、健康条目
+        # 的变化都不会触发部署（实测：地图从 3 国修到 22 国后 deploy_required 仍为 false）。
+        proj = {k: hp.get(k) for k in ("schema", "overview", "metrics", "sectors",
+                                       "top_developments", "china_impact", "map",
+                                       "health_security", "latest_intelligence", "reports")}
+        if isinstance(proj.get("overview"), dict):
+            proj["overview"] = {k: v for k, v in proj["overview"].items() if k != "generated_time"}
+        hp_sig = hashlib.sha256(json.dumps(proj, ensure_ascii=False, sort_keys=True)
+                                .encode("utf-8")).hexdigest()[:16]
     except Exception:  # noqa: BLE001
         hp_sig = None
     blob = json.dumps({"pub": rows, "exec": exec_sig, "feed_localized": feed_loc,
