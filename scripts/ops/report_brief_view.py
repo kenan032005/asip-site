@@ -309,9 +309,10 @@ def main(argv=None):
         # 发布契约：先落盘（daily_brief_* / tcd_weekly_brief_* → 构建白名单前缀）→ 再写索引，
         # 索引路径与 dist 实际发布名（<report_id>.json）一一对应，保证
         # INDEX_REFERENCED_REPORTS == PUBLISHED_REPORT_FILES。
-        # PHASE 16 未达成：生产端简报发布链仍未通过构建校验（deploy 被卡）。
-        # 为保证部署恢复，暂时只生成简报、不写入公开索引（索引回到 legacy 一致状态）。
-        idx = {"reports": []}
+        # 发布契约（PHASE 5）：先落盘 → 再写索引；索引路径 = canonical SOURCE 集合
+        # data/reports/{daily,weekly}/<同名文件>（build_site._copy_report_artifacts 的比对基准），
+        # 且 deploy 的 Load state 会把同一文件从 state 落到该树路径 → INDEX ⊆ SOURCE ∩ DIST。
+        idx = upsert_index(root, d_doc, w_doc, d_name, w_name)
         print("  index rows = %d | daily = %s | weekly = %s" % (len(idx["reports"]),
                                                               d_doc["report_id"], w_doc["report_id"]))
     print(json.dumps({
