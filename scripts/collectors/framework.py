@@ -130,6 +130,18 @@ def fetch_page(url, timeout=HTTP_TIMEOUT):
                 raw = r.read(MAX_BODY_BYTES + 1)
                 if len(raw) > MAX_BODY_BYTES:
                     return None, "response_too_large", r.status
+                # C8-2 PHASE 11：部分官方源（实测 news.un.org）即使未请求压缩也返回 gzip 体，
+                # 直接 decode 得到乱码 → RSS_EMPTY（源被误判为"无内容"）。按响应头/魔数解压。
+                _ce = (r.headers.get("Content-Encoding") or "").lower()
+                try:
+                    if "gzip" in _ce or raw[:2] == bytes((0x1f, 0x8b)):
+                        import gzip as _gz
+                        raw = _gz.decompress(raw)
+                    elif "deflate" in _ce:
+                        import zlib as _zl
+                        raw = _zl.decompress(raw)
+                except Exception:  # noqa: BLE001
+                    pass
                 enc = r.headers.get_content_charset() or "utf-8"
                 try:
                     return raw.decode(enc, "ignore"), None, r.status
