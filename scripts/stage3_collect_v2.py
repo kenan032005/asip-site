@@ -14,6 +14,7 @@ stage3_collect_v2.py — Stage 3 第二执行包采集主控。
   python scripts/stage3_collect_v2.py --country 乍得  # 仅一个国家
 """
 import os
+from pathlib import Path
 import sys
 import json
 import time
@@ -87,6 +88,59 @@ _wall_clock_limit_seconds = None
 # C7-4R 采集可靠性：单源预算 + 全局软停余量（防止单源/单请求吞掉整个墙钟预算）
 SOURCE_BUDGET_SECONDS = float(os.environ.get("ASIP_SOURCE_BUDGET_SECONDS", "90"))
 WALL_CLOCK_RESERVE_SECONDS = float(os.environ.get("ASIP_WALL_CLOCK_RESERVE_SECONDS", "180"))
+# ── C8-1 PHASE 4/5：两层采集调度（Lane A 常开 / Lane B 轮换）──
+# LANE A：实证高产 + 官方/区域/泛非高价值源。**每轮必跑且优先占用墙钟预算**，
+# 不再排在几十个低产本地源之后（生产实测：118 源中 33 源因预算被 skipped_wall_clock，
+# 而高价值源每轮只新增约 3 篇 → 24h 仅 9 条可见）。
+# 白名单依据：最近一轮逐源台账（discovered ≥ 7 且 status=success）与源分级/角色。
+LANE_A_IDS = {
+    # 泛非 / 国际（article 级国家解析，非源默认国）
+    "pan_rfi_afrique", "pan_dw_africa", "drc_radiookapi", "ssd_radiotamazuj",
+    "intl_aljazeera_chad", "intl_rfi_afrique_chad", "intl_bbc_afrique_chad",
+    "intl_france24_afrique_chad",
+    # 实证高产本地（de 首轮抓取即 ≥10 条）
+    "chad_journaldutchad", "chad_alwihda", "chad_tchadinfos", "chad_lepaystchad",
+    "chad_lendjampost", "chad_tchadone", "chad_toumaiweb", "chad_tachad", "chad_portail",
+}
+
+# 已知失败型（429/403/TIMEOUT/解析）：排到最后（等效"退避"），但**每轮仍会尝试**
+# —— 保留周期性 reprobe，且不引入跳过风险；预算耗尽时它们最先被截断。
+FAILURE_REASONS_DEPRIORITIZE = ("HTTP_429", "HTTP_403", "TIMEOUT", "PARSE_ERROR", "RSS_EMPTY")
+
+
+def _lane_a_first(sources, rot_off=0, recent_reason=None):
+    """稳定排序：Lane A 常开源置顶；已知失败源置底；其余保持既有轮换顺序（Lane B 公平性不变）。"""
+    recent_reason = recent_reason or {}
+
+    def key(pair):
+        idx, s = pair
+        sid = str(getattr(s, "source_id", None) or (s.get("source_id") if isinstance(s, dict) else ""))
+        r = str(recent_reason.get(sid) or "").upper()
+        broken = 1 if any(k in r for k in FAILURE_REASONS_DEPRIORITIZE) else 0
+        lane_a = 0 if sid in LANE_A_IDS else 1
+        return (broken, lane_a, idx)
+
+    return [s for _i, s in sorted(enumerate(sources), key=key)]
+
+
+def _recent_failure_reasons():
+    """读取最近一轮逐源台账的 failure_reason（仅用于排序降权，缺失即视为正常）。"""
+    try:
+        doc = json.loads((Path(ROOT) / "data" / "runtime" / "ops" /
+                          "collection_source_stats.json").read_text(encoding="utf-8"))
+        return {str(r.get("source_id")): str(r.get("failure_reason") or r.get("status") or "")
+                for r in (doc.get("per_source") or [])}
+    except Exception:  # noqa: BLE001
+        return {}
+
+
+def _lane_a_countries_first(countries, lane_a_countries):
+    """含 Lane A 源的国家优先，其余保持原有（stalest rotation）顺序。"""
+    first = [c for c in countries if str(c) in lane_a_countries]
+    rest = [c for c in countries if str(c) not in lane_a_countries]
+    return first + rest
+
+
 ROTATION_FILE = os.path.join(ROOT, "data", "runtime", "ops", "collection_rotation.json")
 # 逐国管道 → write_stats 的跨函数事实（避免把管道局部变量泄漏到统计函数作用域）
 _LAST_RUN_FACTS = {"sources_attempted": 0, "rotation_offset_used": 0, "total_sources": 0}
@@ -186,6 +240,8 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
         rot_off = 0
     if rot_off:
         sources = sources[rot_off:] + sources[:rot_off]
+        # C8-1：Lane A 常开高价值源置顶、已知失败源置底（Lane B 轮换顺序不变）
+        sources = _lane_a_first(sources, rot_off, recent_reason=_recent_failure_reasons())
     total_sources = len(sources)
     attempted_sources = 0
 
@@ -1005,6 +1061,10 @@ def main():
         _cfg_countries = set(_configured_countries())
         countries = sorted({s["source_country"] for s in registry.enabled()
                             if s["source_country"] in _cfg_countries})
+        # C8-1：含 Lane A 源的国家优先占用预算（其余国家保持原顺序）
+        countries = _lane_a_countries_first(countries, {
+            s2.get("source_country") for s2 in registry.enabled()
+            if str(s2.get("source_id")) in LANE_A_IDS})
         if not countries:
             countries = ["乍得", "尼日尔"]
     # 统计两国配置总分（SourceRegistry 中所有来源，含 gdelt_search）
