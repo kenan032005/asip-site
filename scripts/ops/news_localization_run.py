@@ -167,7 +167,10 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description="ASIP C7-3 文章级本地化（LEVEL A）")
     ap.add_argument("--root", default=str(ROOT))
     ap.add_argument("--window-days", type=int, default=7)
-    ap.add_argument("--max-items", type=int, default=12)
+    # C8-1B PHASE 9：0 = 按队列深度自适应（≤12→12 / 13–24→24 / >24→36），
+    # 避免采集量回升后本地化成为新瓶颈；显式传值仍可覆盖。
+    ap.add_argument("--max-items", type=int, default=0,
+                    help="0=自适应（≤12→12, 13-24→24, >24→36）")
     ap.add_argument("--batch-size", type=int, default=BATCH)
     ap.add_argument("--dry-run", action="store_true", help="只输出计划，不调用 AI")
     args = ap.parse_args(argv)
@@ -179,10 +182,23 @@ def main(argv=None):
         index = {}
 
     now = datetime.now(BJT)
-    rows = eligible(items, now, args.window_days, args.max_items, index)
+    _queue = eligible(items, now, args.window_days, 0, index)   # 全量待办（未翻译）
+    _depth = len(_queue)
+    if args.max_items:
+        _cap = args.max_items
+    else:
+        _cap = 12 if _depth <= 12 else (24 if _depth <= 24 else 36)
+    rows = _queue[:_cap]
+    _ages = sorted((now - t) for t, _k, _it in _queue) if _queue else []
     plan = {"mode": "dry-run" if args.dry_run else "apply",
             "feed_items": len(items), "eligible": len(rows),
-            "cache_index_entries": len(index), "real_ai_calls": 0}
+            "cache_index_entries": len(index), "real_ai_calls": 0,
+            "localization_queue_depth": _depth,
+            "localization_batch_applied": _cap,
+            "localization_pending": max(0, _depth - len(rows)),
+            "localization_oldest_pending_age_hours":
+                round(_ages[-1].total_seconds() / 3600.0, 1) if _ages else 0.0,
+            "public_eligible_waiting_for_cn": _depth}
     if args.dry_run:
         plan["sample"] = [{"key": k, "title": (it.get("title_original") or "")[:60]}
                           for _, k, it in rows[:5]]
