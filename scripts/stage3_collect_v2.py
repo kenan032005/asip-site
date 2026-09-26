@@ -203,6 +203,28 @@ def _reset_extract_cache():
     _EXTRACT_CACHE.clear()
 
 
+# ── C8-3 STEP 4/5：多国 / 区域情报 ──
+# 泛非与官方源大量产出的是"多国/区域"情报（Sahel、乍得湖流域、Niger-Soudan 等）。
+# 这类内容既非"解析失败"也不应被丢弃：按确定性地理范围分类接受，并保留展示标签。
+# 注意：REGIONAL_AFRICA **绝不是**单国解析失败的兜底（见 geo_scope.detect_geo_scope）。
+_GEO_INDEX = None
+REGION_CN = {"AFRICA_WIDE": "非洲（全域）", "SAHEL": "萨赫勒地区", "WEST_AFRICA": "西非",
+             "NORTH_AFRICA": "北非", "CENTRAL_AFRICA": "中部非洲", "GREAT_LAKES": "大湖区",
+             "EAST_AFRICA": "东非", "HORN_OF_AFRICA": "非洲之角",
+             "SOUTHERN_AFRICA": "南部非洲", "LAKE_CHAD_BASIN": "乍得湖流域"}
+
+
+def _geo_index():
+    global _GEO_INDEX
+    if _GEO_INDEX is None:
+        try:
+            from geo_scope import load_monitored_country_index
+            _GEO_INDEX = load_monitored_country_index()
+        except Exception:  # noqa: BLE001
+            _GEO_INDEX = {}
+    return _GEO_INDEX
+
+
 def _record_rotation(country_cn, rot_off, attempted, total):
     """C7-4R P6：按国持久化轮转偏移（失败不影响采集结果）。
 
@@ -604,8 +626,32 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
 
             # 准入检查
             reason = ""
-            if not event_country_cn or event_country_cn != country_cn:
+            _geo = None
+            if not event_country_cn:
+                try:
+                    from geo_scope import detect_geo_scope
+                    _geo = detect_geo_scope(
+                        (a.get("original_title") or "") + " " + (a.get("original_summary") or "")
+                        + " " + (a.get("original_body") or "")[:800], _geo_index())
+                except Exception:  # noqa: BLE001
+                    _geo = None
+            if event_country_cn and event_country_cn != country_cn:
+                # 属其他国家 → 由该国管线接收（C8-3 已把管线扩到 54 国）
                 reason = "country_scope_mismatch"
+            elif not event_country_cn and not (_geo and _geo["scope"] in ("MULTI_COUNTRY", "REGIONAL_AFRICA")):
+                # 单国未解析 → 保持未解析，绝不提升为区域（C8-3 STEP 5 铁律）
+                reason = "country_unresolved"
+            elif _geo and _geo["scope"] == "REGIONAL_AFRICA":
+                a["_geo_scope"] = _geo
+                a["country_cn"] = REGION_CN.get(_geo.get("region") or "", "非洲（区域）")
+                a["country_scope"] = "REGIONAL_AFRICA"
+                a["region"] = _geo.get("region")
+            elif _geo and _geo["scope"] == "MULTI_COUNTRY":
+                a["_geo_scope"] = _geo
+                _cs = _geo.get("countries") or []
+                a["country_cn"] = "、".join(_cs[:3]) or "非洲（多国）"
+                a["country_scope"] = "MULTI_COUNTRY"
+                a["countries"] = _cs
             elif a["_relevant"] is not True:
                 reason = "weak_signal_needs_review" if a["_relevant"] is None else "not_security_relevant"
             elif not a.get("original_title") or len(a["original_title"]) < 5:

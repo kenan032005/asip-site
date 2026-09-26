@@ -63,7 +63,20 @@ class SourceRegistry:
         return out
 
     def by_country(self, country_cn):
-        return [s for s in self.enabled() if s["source_country"] == country_cn]
+        """C8-3：按来源**完整的 country_scope 集合**归属到各国管线。
+
+        原实现比较 `s["source_country"]`，而该值在 `_unified()` 里被取成
+        `country_scope[0]` —— 于是泛非/多国来源只会出现在**第一个**国家管线里，
+        其在尼日利亚/苏丹/马里等国的文章永远进不了正确国家的管线，
+        全被判 wrong_country（C8-2 实测 24h 308 条；by_country("尼日利亚") 曾为 0）。
+        多国来源在每个 scope 国家管线的重复发现/抽取已由 stage3 的每轮缓存吸收。
+        """
+        out = []
+        for s in self.enabled():
+            scope = s.get("source_scope") or [s.get("source_country")]
+            if country_cn in scope:
+                out.append(s)
+        return out
 
     def _unified(self, s):
         """将 legacy/新结构统一为 SourceRegistry 视图。"""
@@ -77,6 +90,11 @@ class SourceRegistry:
             "source_id": s.get("source_id", lp.get("source_id", "")),
             "source_name": s.get("source_name", lp.get("name", "")),
             "source_country": s.get("country_scope", [""])[0] if s.get("country_scope") else lp.get("country", ""),
+            # C8-3：完整 scope 集合（by_country 用它归属；原实现只用 scope[0]）
+            "source_scope": ([str(x) for x in s["country_scope"]]
+                             if isinstance(s.get("country_scope"), list) and s.get("country_scope")
+                             else ([str(s.get("country_scope"))] if s.get("country_scope")
+                                   else [lp.get("country", "")])),
             "source_type": s.get("source_type", lp.get("source_type", "")),
             "language": s.get("language", [lp.get("language", "fr")]) if isinstance(s.get("language"), list) else s.get("language", lp.get("language", "fr")),
             "discovery_type": self._discovery_type(method, lp),
