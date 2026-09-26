@@ -159,6 +159,27 @@ jobs:
           print("report state materialized: %d" % len(made))
           for m in made:
               print("  + " + m)
+          # 契约要求：report index 绝不引用"不会出现在 dist 的产物"。物化后仍无法解析的
+          # 行（历史遗留、产物在树与 state 中均已不存在）属于**无效引用**，必须在构建前
+          # 从工作区索引剔除（不改 state、不放宽校验器、不硬编码计数）。
+          removed = []
+          if src.is_dir() and idx.exists():
+              doc = json.loads(idx.read_text(encoding="utf-8"))
+              rows = list(doc.get("reports") or [])
+              live = []
+              for r in rows:
+                  p = str(r.get("path") or "")
+                  if p.startswith("data/reports/") and not pathlib.Path(p).exists():
+                      removed.append(str(r.get("report_id")))
+                      continue
+                  live.append(r)
+              if removed:
+                  doc["reports"] = live
+                  doc["count"] = len(live)
+                  doc["deploy_pruned_invalid_rows"] = removed
+                  pathlib.Path("data/views/report_index.json").write_text(
+                      json.dumps(doc, ensure_ascii=False, indent=1), encoding="utf-8")
+              print("report index pruned invalid rows: %d %s" % (len(removed), removed))
           PY2
           cp -f state_src/data/runtime/ops/reports/daily_brief_*.json data/reports/daily/ 2>/dev/null || true
           cp -f state_src/data/runtime/ops/reports/tcd_weekly_brief_*.json data/reports/weekly/ 2>/dev/null || true
