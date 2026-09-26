@@ -42,7 +42,7 @@ OUT_DIR = Path("data") / "intelligence" / "ai" / "homepage"
 #: 首页简报事实门版本。任何改动事实门校验语义（可引用数值集合、结构约束）都必须递增：
 #: 节奏与缓存只以**同版本**的上一次尝试为准 —— 旧版本门产出的失败记录不会把新版本
 #: 锁在 6h 窗口之外（与项目既有 CLASSIFIER_VERSION 约定一致）。
-GATE_VERSION = 2
+GATE_VERSION = 3
 CADENCE_HOURS = 6
 
 SECTORS = ["terrorism_conflict", "political_social", "crime_public_security",
@@ -59,18 +59,25 @@ CATEGORY_TO_SECTOR = {
 }
 
 SYSTEM = (
-    "你是 ASIP 平台的首席非洲安全分析师，为机构领导撰写首页情报简报。"
-    "你只收到结构化事实包（fact pack），其中每条都标注层级：\n"
-    "  VERIFIED EVENT = 已多源核实的公开事件；NEWS SIGNAL = 文章级情报信号（可能单源，未核实）。\n"
-    "硬性规则：\n"
+    "你是 ASIP 平台的首席非洲安全分析师，为机构领导、安全负责人与企业决策者撰写首页情报简报。"
+    "输入是结构化事实包，每条都带证据层级：\n"
+    "  evidence_tier=multi_source_verified → 多源独立核实，可用『已核实』表述；\n"
+    "  evidence_tier=single_source_published → 公开报道/单一来源，必须写成『公开报道显示』『单一来源消息，尚待核实』；\n"
+    "  kind=news_signal → 文章级情报信号，同样不得写成已确立事实。\n"
+    "写作硬性规则：\n"
     "1) 只使用事实包中的信息；禁止引入包外国家、事件、数字、来源；\n"
-    "2) NEWS SIGNAL 必须以『情报信号/单源消息，尚待核实』口径表述，绝不可写成已确立事实；\n"
-    "3) China 影响：只有事实包中出现明确涉华证据时才可断言影响；否则必须说明未发现明确涉华重大事件"
-    "（可另行给出有事实支撑的区域性运营风险）；\n"
-    "4) 健康结论只能来自事实包的 health 数据，禁止医学预测；\n"
-    "5) 数字只能引用事实包 counts 中已有的计数，且必须以『N起 / N个国家 / N条 / N个信号』"
-    "的形式给出；不得对任何未计入 counts 的事物使用数字量词（否则视为不可核实主张）；\n"
-    "6) 输出单个严格 JSON 对象，无解释文字、无 Markdown。")
+    "2) 严禁任何系统/工程语言：不得出现 事实包、Tier、tier、信源分级、管道、pipeline、"
+    "input_hash、gate、run_id、采集器、窗口统计、条目计数式表述（如『N条情报信号』『N起已核实事件』）；"
+    "只写事件、分析、趋势、风险与运营影响；\n"
+    "3) 面向读者是执行层与业务决策者：先事实、再研判、最后前瞻；用谨慎情报语言，"
+    "不得把预测写成既成事实；\n"
+    "4) 中国影响：只有事实包中出现明确涉华证据时才可断言直接影响；否则必须说明未发现明确涉华重大事件，"
+    "并可另行给出有事实支撑的区域性运营风险；\n"
+    "5) 健康议题只能依据事实包 health 数据，禁止医学预测；起始时间不明时必须写"
+    "『起始时间尚未从现有公开数据中确认』；\n"
+    "6) 数字只能引用事实包 counts 中已有的计数，且必须以『N起 / N个国家 / N条 / N个信号』"
+    "形式给出；不得对未计入 counts 的事物使用数字量词；\n"
+    "7) 输出单个严格 JSON 对象，无解释文字、无 Markdown。")
 
 USER_TMPL = """事实包（唯一信息来源）：
 
@@ -79,23 +86,40 @@ USER_TMPL = """事实包（唯一信息来源）：
 请输出如下 JSON：
 {{
  "overall_assessment": {{
-   "summary_cn": "300–500 个汉字的执行层总结（先已核实事件，再情报信号并标注单源）",
+   "summary_cn": "450–700 个汉字的非洲安全态势报告正文：A 事实态势（24h 主要地区/国家与安全事态、"
+                 "升级或降级、有意义的运营动向）→ B 情报解读（含义、延续或转折、正在形成的模式、"
+                 "有证据支撑的关联）→ C 前瞻判断（短期方向、24–72 小时关注、可能恶化或改善的因素）。"
+                 "禁止系统语言与工程术语，禁止条目计数式表述",
    "risk_direction": "improving|stable|worsening",
    "confidence": "high|medium|low",
    "key_judgments": ["≤60字，3–5 条"],
-   "watch_24_72h": ["≤50字，2–4 条"]
+   "watch_24_72h": ["≤50字，3–5 条"]
  }},
  "sectors": {{
-   "terrorism_conflict": {{"assessment_cn": "≤120字", "trend": "up|flat|down", "confidence": "high|medium|low"}},
+   "terrorism_conflict": {{"assessment_cn": "300–500 字：近 7 日事实态势 + 解读 + 趋势判断 + 主要受影响国家/地区 + 显著变化 + 前瞻关注",
+                          "changes_cn": "≤80字", "watch_cn": "≤80字", "trend": "up|flat|down", "confidence": "high|medium|low"}},
    "political_social": {{...}}, "crime_public_security": {{...}},
    "military_border_maritime": {{...}}, "accident_disruption": {{...}}
  }},
- "top_developments": [{{"fact_id": "<事实包中的 fact_id>", "why_it_matters": "≤80字", "impact": "≤60字", "watch_points": "≤60字"}}],
- "china_impact": {{"overall_level": "none|low|medium|high", "summary_cn": "≤150字",
-                   "items": [{{"country": "国家中文名", "sector": "personnel|energy|mining|infrastructure|transport|project_ops|political",
-                              "impact_level": "low|medium|high", "development": "≤80字", "interpretation": "≤80字",
-                              "watch_point": "≤50字", "fact_refs": ["fact_id"]}}]}},
- "health_security": {{"summary_cn": "≤150字", "key_issues": ["≤50字"], "impact_cn": "≤80字", "confidence": "high|medium|low"}},
+ "top_developments": [{{"fact_id": "<事实包中的 fact_id>",
+                       "why_important_cn": "≤80字",
+                       "analysis_cn": "100–200 字：解读该事件的含义、背景与可能走向",
+                       "impact_cn": "≤80字：可能影响",
+                       "watch_cn": "≤60字：后续关注"}}],
+ "china_impact": {{"overall_level": "none|low|medium|high",
+                   "summary_cn": "≤150字：总体影响研判结论",
+                   "analysis_cn": "300–500 字（有证据支撑时）：按 人员安全 / 项目运营 / 交通物流 / 能源矿业基建暴露 / 政治社会扰动 展开",
+                   "items": [{{"fact_id": "fact_id", "country": "国家中文名",
+                              "sector": "personnel|energy|mining|infrastructure|transport|project_ops|political",
+                              "impact_level": "low|medium|high", "impact_note": "≤80字"}}]}},
+ "health_security": {{"summary_cn": "300–500 字（有数据支撑时），按 地区国别 / 疾病或卫生问题 / 起始时间 / "
+                     "当前严重程度 / 趋势（worsening|stable|improving|unclear）/ 人员与运营影响 叙述；"
+                     "起始时间不明时明确写『起始时间尚未从现有公开数据中确认』",
+                     "issues": [{{"where": "国家/地区", "what": "疾病或卫生问题", "when": "起始时间或『待确认』",
+                                 "severity_cn": "当前严重程度", "trend": "worsening|stable|improving|unclear",
+                                 "impact_cn": "≤60字：人员/运营影响"}}],
+                     "key_issues": ["≤50字"], "impact_cn": "≤80字", "trend": "worsening|stable|improving|unclear",
+                     "confidence": "high|medium|low"}},
  "source_fact_refs": ["≥5 条真实 fact_id"]
 }}
 要求：top_developments 5–8 条且 fact_id 必须真实存在；sectors 无数据时 assessment_cn 填
@@ -103,6 +127,12 @@ USER_TMPL = """事实包（唯一信息来源）：
 只输出 JSON。"""
 
 NUM_UNITS = re.compile(r"(\d+)\s*(?:起|个国家|个事件|条|个信号)")
+#: 正文（执行层报告）禁止出现的系统/工程语言（fail-closed）
+BANNED_IN_PROSE = ("事实包", "Tier ", "TierA", "tier ", "A级", "C级", "信源分级",
+                   "数据管道", "pipeline", "input_hash", "run_id", "采集器",
+                   "gate", "GATE", "多源核实率", "投影")
+#: 条目计数式表述（数字应留在指标条，不进正文）
+SYSTEM_COUNT_PHRASES = re.compile(r"\d+\s*(?:条|起|个)\s*(?:情报信号|已核实事件|信号|事件)")
 
 
 def load_json(p, default):
@@ -182,7 +212,9 @@ def build_fact_pack(root, now):
         fid = "news:%s" % hashlib.sha256(str(s.get("dedup_key") or s.get("news_id")
                                                or s.get("src_id") or "").encode()).hexdigest()[:16]
         tier, role = tier_of(srcs, str(s.get("source_name") or ""))
-        facts[fid] = {"fact_id": fid, "level": "news_signal", "country": s.get("country_cn") or "未识别",
+        facts[fid] = {"fact_id": fid, "level": "news_signal", "evidence_tier": "news_signal",
+                      "source_count": int(s.get("independent_source_count") or 1),
+                      "country": s.get("country_cn") or "未识别",
                       "title": (s.get("title_cn") or s.get("title_original") or "")[:140],
                       "category": s.get("event_type") or "other_security",
                       "source": s.get("source_name") or "", "source_tier": tier, "source_role": role,
@@ -193,7 +225,11 @@ def build_fact_pack(root, now):
         fid = str(e.get("event_id") or "")
         sf = ((e.get("source_links") or [{}])[0] or {})
         tier, role = tier_of(srcs, str(sf.get("source_name") or e.get("source_name") or ""))
-        facts[fid] = {"fact_id": fid, "level": "verified_event", "country": e.get("country_cn") or "未识别",
+        _isc = int(e.get("independent_source_count") or 0)
+        _vtier = ("multi_source_verified" if _isc >= 2 else "single_source_published")
+        facts[fid] = {"fact_id": fid, "level": "verified_event", "evidence_tier": _vtier,
+                      "source_count": _isc or len(e.get("source_links") or []),
+                      "country": e.get("country_cn") or "未识别",
                       "title": (e.get("title_cn") or e.get("title_original") or "")[:140],
                       "category": e.get("event_type") or "other_security",
                       "source": sf.get("source_name") or e.get("source_name") or "",
@@ -221,6 +257,8 @@ def build_fact_pack(root, now):
         "windows": {"primary_hours": 24, "context_days": 7},
         "counts": {"signals_24h": len(sig24), "signals_7d": len(sig7),
                    "verified_events_24h": len(ev24), "verified_events_7d": len(ev7),
+                   "multi_source_verified_events_7d": len([1 for e, _t in ev7
+                                                           if int(e.get("independent_source_count") or 0) >= 2]),
                    "countries_with_activity_24h": len(c24),
                    "total_countries_monitored": len(countries)},
         "countries_24h": c24,
@@ -283,8 +321,14 @@ def fact_gate(brief, pack):
     if oa.get("confidence") not in ("high", "medium", "low"):
         errs.append("confidence 非法")
     cjk = len(re.findall(r"[\u4e00-\u9fff]", str(oa.get("summary_cn") or "")))
-    if not (120 <= cjk <= 800):
-        errs.append("summary_cn 汉字数 %d 越界" % cjk)
+    if not (300 <= cjk <= 1100):
+        errs.append("summary_cn 汉字数 %d 越界（产品目标 450–700）" % cjk)
+    body_txt = json.dumps(brief, ensure_ascii=False)
+    for bad in BANNED_IN_PROSE:
+        if bad in body_txt:
+            errs.append("正文出现系统/工程语言：%s" % bad)
+    for m in SYSTEM_COUNT_PHRASES.finditer(body_txt):
+        errs.append("正文出现条目计数式表述：%s" % m.group(0))
     secs = brief.get("sectors") or {}
     for s in SECTORS:
         if s not in secs:

@@ -286,7 +286,14 @@
         ["health", function () { renderHealth(outbreaks, disAsOf, updated); }],
         ["explore", function () { renderExplore(ks); }]
       ];
+      // C7-6：首页已移除的 legacy 模块（DOM 里已无宿主）直接跳过 —— 既不做无谓渲染，
+      // 也不把 "宿主缺失" 记成渲染错误（QA 要求 __ASIP_RENDER_ERRORS__ 为零）。
+      var STEP_HOST = { kpis: "v11Kpis", exec: "v11Exec", changed: "v11Changed", map: "v11Map",
+                        topRisk: "v11TopRisk", categories: "v11IntelToday", china: "v11China",
+                        top3: "v11Top3", intel: "v11Intel", health: "v11Health", explore: "v11Explore" };
       steps.forEach(function (s) {
+        var _h = STEP_HOST[s[0]];
+        if (_h && !document.getElementById(_h)) return;
         try {
           s[1]();
         } catch (err) {

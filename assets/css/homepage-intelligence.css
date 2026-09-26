@@ -121,3 +121,28 @@
   .hpi-map-n { display: none; }
   .hpi-src { margin-left: 0; }
 }
+
+
+/* ===== C7-6 追加：产品级排版与新增元素 ===== */
+.hpi-prose{line-height:1.85;font-size:14.5px;color:#243447;text-align:justify}
+.hpi-assess{background:#f7fafc;border-left:3px solid #4a7ebb;padding:12px 14px;border-radius:6px}
+.hpi-part{margin:10px 0 14px}
+.hpi-part h4{margin:6px 0 6px;font-size:13.5px;color:#33475b}
+.hpi-more{margin-top:6px;background:#eef3f9;border:1px solid #d5e0ec;color:#2d5f9a;
+  border-radius:6px;padding:4px 10px;font-size:12.5px;cursor:pointer}
+.hpi-more:hover{background:#e3ecf7}
+.hpi-more-list li{margin-top:2px}
+.hpi-top-sum{color:#33475b;font-size:13.5px;line-height:1.7;margin:4px 0}
+.hpi-why{color:#1f3b57;font-size:13.5px;margin:4px 0}
+.hpi-top-f{display:flex;gap:14px;margin-top:4px}
+.hpi-reps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.hpi-rep{display:flex;flex-direction:column;gap:4px;border:1px solid #e2e8f0;border-radius:8px;
+  padding:12px 14px;text-decoration:none;color:#1f3a56;background:#fff}
+.hpi-rep:hover{border-color:#bcd0e6;background:#f8fbff}
+.hpi-rep b{font-size:14px}
+.hpi-rep em{font-style:normal;font-size:12px;color:#7188a0}
+.hpi-rep-k{font-size:12.5px;color:#54728f;display:flex;align-items:baseline;gap:8px}
+.hpi-rep.is-all{background:#f4f8fc}
+.hpi-map-legacy{padding:0;background:transparent;border:0;box-shadow:none}
+.hpi-map-legacy>.hpi-card-h{display:none}
+@media (max-width:900px){.hpi-reps{grid-template-columns:1fr}}

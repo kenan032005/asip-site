@@ -181,7 +181,10 @@
             var refs = displayValue(f.source_refs) || displayValue(ev);
             var title = displayValue(f.title_zh) || displayValue(f.headline_zh) ||
                         displayValue(f.fact) || displayValue(f.event_id);
-            return '<div class="fe-fact"><div>' + esc(title) + "</div>" +
+            var t2 = (String(title).indexOf("■ ") === 0)
+              ? "<b>" + esc(title) + "</b>"
+              : (f.detail_url ? '<a href="' + esc(f.detail_url) + '">' + esc(title) + "</a>" : esc(title));
+            return '<div class="fe-fact"><div>' + t2 + "</div>" +
               (refs ? '<div><small>来源：' + esc(refs) + "</small></div>" : "") + "</div>";
           }).join("") + "</div>";
         } else {

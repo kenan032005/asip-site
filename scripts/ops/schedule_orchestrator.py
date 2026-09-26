@@ -126,8 +126,21 @@ def ai_publication_projection(data_root):
                                 .encode("utf-8")).hexdigest()[:16]
     except Exception:  # noqa: BLE001
         hp_sig = None
+    # C7-6：当期报告简报的内容变更同样应触发发布
+    brief_sig = None
+    try:
+        _bd = Path(data_root) / "reports" / "brief"
+        if _bd.is_dir():
+            brief_sig = []
+            for _p in sorted(_bd.glob("*.json"))[-2:]:
+                _j = json.loads(_p.read_text(encoding="utf-8"))
+                brief_sig.append([_p.name, _j.get("generated_at"),
+                                  sum(len(v) for v in (_j.get("sections") or {}).values()),
+                                  len(_j.get("overall_assessment") or "")])
+    except Exception:  # noqa: BLE001
+        brief_sig = None
     blob = json.dumps({"pub": rows, "exec": exec_sig, "feed_localized": feed_loc,
-                       "homepage": hp_sig},
+                       "homepage": hp_sig, "brief": brief_sig},
                       ensure_ascii=False, sort_keys=True).encode("utf-8")
     return hashlib.sha256(blob).hexdigest(), len(rows)
 
@@ -623,6 +636,12 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
     results["homepage_view"] = {
         "ok": _run_script(["scripts/ops/homepage_view.py", "--apply"], emit),
         "detail": "homepage_view"}
+    # C7-6：当期日报/周报简报（确定性投影）+ 刷新报告索引。
+    # 修掉真实断点：编排器从不调用 materialize → data/views/report_index.json 永不刷新，
+    # 线上索引长期冻结；且报告页因此长期只有 LOW_DATA 空壳。
+    results["report_brief"] = {
+        "ok": _run_script(["scripts/ops/report_brief_view.py", "--apply"], emit, timeout=900),
+        "detail": "report_brief"}
 
     # C6-R5F：发布内容变更检测 → 让"仅 AI 译文/摘要入库"也能触发现有部署工作流。
     # 原判定只在 daily/weekly 报告分支里设置 deploy_required，因此富集桥接把

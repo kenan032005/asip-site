@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>情报详情 — ASIP</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/home-v11.css">
+<link rel="stylesheet" href="assets/css/homepage-intelligence.css">
+<style>
+  .idt-wrap{max-width:960px;margin:0 auto;padding:18px 16px 40px}
+  .idt-head{border-bottom:1px solid #e2e8f0;padding-bottom:12px;margin-bottom:14px}
+  .idt-head h1{font-size:22px;line-height:1.5;margin:6px 0;color:#16324f}
+  .idt-meta{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:12.5px;color:#5b7794}
+  .idt-tag{display:inline-block;border:1px solid #d5e0ec;background:#f2f7fc;border-radius:10px;padding:1px 8px;font-size:11.5px;color:#2d5f9a}
+  .idt-tag.is-v{background:#e8f6ec;border-color:#bfe3c9;color:#1d7a3a}
+  .idt-sec{margin:16px 0}
+  .idt-sec h2{font-size:15px;color:#33475b;border-left:3px solid #4a7ebb;padding-left:8px;margin-bottom:8px}
+  .idt-sum{line-height:1.85;font-size:14.5px;color:#243447;text-align:justify}
+  .idt-kv{display:grid;grid-template-columns:130px 1fr;gap:6px 12px;font-size:13.5px;color:#33475b}
+  .idt-kv dt{color:#7188a0}
+  .idt-src{font-size:13px;color:#33475b;line-height:1.8}
+  .idt-nav{display:flex;gap:16px;margin-top:22px;font-size:13.5px}
+  .idt-empty{color:#7188a0;padding:20px 0}
+  a{color:#2d5f9a}
+</style>
+</head>
+<body>
+<main class="idt-wrap" id="idtRoot">
+  <div class="idt-empty">加载中…</div>
+</main>
+<footer class="site"><div id="asip-build-meta" style="margin-top:4px;font-size:12px;color:#8899aa;"></div></footer>
+<script src="assets/js/pipeline.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+/* C7-6 情报详情页：消费 data/public/intelligence_items.json（公开安全投影）。
+   所有公开条目都有稳定唯一 URL；本页只呈现该条自身的公开字段，不复制正文。 */
+(function () {
+  "use strict";
+  var CN = { verified_event: "已核实事件", news_signal: "情报信号（尚未独立核实）" };
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function id() {
+    var m = String(location.search || "").match(/[?&]id=([^&]+)/);
+    return m ? decodeURIComponent(m[1]) : "";
+  }
+  function render(it, all) {
+    var root = document.getElementById("idtRoot");
+    var rel = (all || []).filter(function (x) {
+      return x.item_id !== it.item_id && x.country === it.country;
+    }).slice(0, 6);
+    root.innerHTML =
+      '<div class="idt-head"><div class="idt-meta">' +
+        '<span class="idt-tag' + (it.kind === "verified_event" ? " is-v" : "") + '">' +
+        esc(it.verification_label || CN[it.kind] || "") + "</span>" +
+        '<span>' + esc(it.country || "—") + "</span><span>" + esc(it.category_cn || "") + "</span>" +
+        '<span>' + esc(it.time || "") + "</span>" +
+        (it.source_count > 1 ? "<span>" + it.source_count + " 个来源</span>" : "") + "</div>" +
+        "<h1>" + esc(it.title_cn || it.title_original || it.item_id) + "</h1></div>" +
+      '<div class="idt-sec"><h2>中文摘要</h2><p class="idt-sum">' +
+        esc(it.summary_cn || "该条尚无中文摘要。") + "</p></div>" +
+      (it.title_original ? '<div class="idt-sec"><h2>原文标题</h2><p class="idt-sum">' +
+        esc(it.title_original) + "</p></div>" : "") +
+      '<div class="idt-sec"><h2>关键信息</h2><dl class="idt-kv">' +
+        "<dt>国家/地区</dt><dd>" + esc(it.country || "—") + "</dd>" +
+        "<dt>事件时间</dt><dd>" + esc(it.time || "—") + "</dd>" +
+        "<dt>类别</dt><dd>" + esc(it.category_cn || "—") + "</dd>" +
+        "<dt>核实状态</dt><dd>" + esc(it.verification_label || CN[it.kind] || "—") + "</dd>" +
+        "<dt>重要度</dt><dd>" + esc(it.importance || "—") + "</dd>" +
+        (it.item_id ? "<dt>条目编号</dt><dd>" + esc(it.item_id) + "</dd>" : "") +
+        "<dt>最后更新</dt><dd>" + esc(String(it.last_updated || "").replace("T", " ").slice(0, 16)) + "</dd>" +
+      "</dl></div>" +
+      '<div class="idt-sec"><h2>来源证据</h2><div class="idt-src">' +
+        ((it.sources && it.sources.length)
+          ? it.sources.map(function (s) {
+              return "· " + esc(s.name || "—") +
+                (s.url ? ' <a href="' + esc(s.url) + '" target="_blank" rel="noopener noreferrer">查看原文 ↗</a>' : "") +
+                (s.tier ? ' <span class="idt-tag">' + esc(s.tier) + "</span>" : ""); }).join("<br>")
+          : "· " + esc(it.source || "—") +
+            (it.original_url ? ' <a href="' + esc(it.original_url) + '" target="_blank" rel="noopener noreferrer">查看原文 ↗</a>' : "")) +
+        "</div></div>" +
+      (it.related_event_id && it.kind !== "verified_event"
+        ? '<div class="idt-sec"><h2>关联已核实事件</h2><p><a href="event.html?id=' +
+          encodeURIComponent(it.related_event_id) + '">查看事件详情 →</a></p></div>' : "") +
+      (rel.length ? '<div class="idt-sec"><h2>相关条目</h2><ul class="hpi-list">' +
+        rel.map(function (x) {
+          return '<li><a href="' + esc(x.detail_url) + '">' + esc(x.title_cn) +
+            '</a> <em class="hpi-t">' + esc(String(x.time || "").slice(5, 16)) + "</em></li>"; }).join("") +
+        "</ul></div>" : "") +
+      '<div class="idt-nav"><a href="index.html">← 返回首页</a><a href="events.html">← 返回事件与情报列表</a>' +
+      '<a href="reports.html">← 报告中心</a></div>';
+  }
+  function boot() {
+    var rid = id();
+    var root = document.getElementById("idtRoot");
+    if (!rid) { root.innerHTML = '<div class="idt-empty">缺少条目编号（id）。<a href="index.html">返回首页</a></div>'; return; }
+    var u = "data/public/intelligence_items.json";
+    var p = (window.API && window.API.get) ? window.API.get("public/intelligence_items") :
+      fetch(u, { credentials: "same-origin" }).then(function (r) { return r.json(); });
+    Promise.resolve(p).then(function (d) {
+      var items = (d && d.items) || [];
+      var it = items.filter(function (x) { return x.item_id === rid; })[0];
+      if (!it) {
+        root.innerHTML = '<div class="idt-empty">未找到条目 ' + esc(rid) +
+          '。<a href="index.html">返回首页</a></div>'; return;
+      }
+      if (it.kind === "verified_event" && it.detail_url && it.detail_url.indexOf("event.html") === 0) {
+        location.replace(it.detail_url); return;
+      }
+      render(it, items);
+    }).catch(function () {
+      root.innerHTML = '<div class="idt-empty">情报数据暂不可用。' +
+        '<a href="index.html">返回首页</a></div>';
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();
+})();
+</script>
+</body>
+</html>
