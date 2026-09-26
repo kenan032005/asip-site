@@ -1,0 +1,129 @@
+{
+ "label": "Sc8759108",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c8c12399075b19cfefe3066448292e9842b11b541bedec0fa8a83f5ae1aa514c",
+ "tokens": {
+  "input_tokens": 2584,
+  "output_tokens": 585,
+  "total_tokens": 3169
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚监狱33名囚犯在拥挤闷热牢房中死亡，幸存者讲述经历",
+   "summary_zh": "尼日利亚尼日尔州首府明纳一所拘留中心内，33名囚犯在拥挤闷热的牢房中死亡，另有4人送医后不治。联邦官员最初将死亡归因于白喉疫情，但确切原因仍在调查中。事件引发抗议，尼日利亚安全与民防部队已有24名人员被拘留，包括被停职的州指挥官。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "尼日尔州",
+    "city": "明纳",
+    "site": "尼日利亚安全与民防部队拘留中心",
+    "raw_text": "Minna, the capital of Nigeria's Niger state"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚明纳一所监狱牢房内33名囚犯死亡，另有4人送医后不治",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Thirty-three of his cellmates died in the cramped conditions in the prison in Minna, the capital of Nigeria's Niger state - and four died later in hospital."
+    },
+    {
+     "fact": "联邦官员最初将死亡归因于白喉疫情，确切原因仍在调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Federal officials had initially blamed the deaths on a diphtheria outbreak but exactly what happened is now the subject of an investigation."
+    },
+    {
+     "fact": "事件引发抗议，包括对公共建筑的袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The mass deaths caused an outcry and sparked protests , including attacks on public buildings"
+    },
+    {
+     "fact": "尼日利亚安全与民防部队24名人员被拘留，包括被停职的尼日尔州指挥官",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the NSCDC has not directly responded to the accusations of neglect and maltreatment but has said that 24 of its personnel are now in custody in connection with the deaths, including its suspended Niger state commandant Suberu Aniviye."
+    },
+    {
+     "fact": "已成立10人委员会调查死亡原因并确定责任人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A 10-member committee has now been set-up to determine exactly what happened. It has two weeks to establish the causes of the deaths and identify who was responsible"
+    }
+   ],
+   "uncertainties": [
+    "死亡确切原因尚未确定，有待调查",
+    "幸存者指控狱方忽视和虐待，尼日利亚安全与民防部队未直接回应",
+    "被拘留者姓名和人数未公布",
+    "部分信息来自单一来源（如幸存者Adamu Isah向路透社的陈述）"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚监狱33名囚犯在拥挤闷热牢房中死亡，幸存者讲述经历",
+   "summary_zh": "尼日利亚尼日尔州首府明纳一所拘留中心内，33名囚犯在拥挤闷热的牢房中死亡，另有4人送医后不治。联邦官员最初将死亡归因于白喉疫情，但确切原因仍在调查中。事件引发抗议，尼日利亚安全与民防部队已有24名人员被拘留，包括被停职的州指挥官。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "尼日尔州",
+    "city": "明纳",
+    "site": "尼日利亚安全与民防部队拘留中心",
+    "raw_text": "Minna, the capital of Nigeria's Niger state"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚明纳一所监狱牢房内33名囚犯死亡，另有4人送医后不治",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Thirty-three of his cellmates died in the cramped conditions in the prison in Minna, the capital of Nigeria's Niger state - and four died later in hospital."
+    },
+    {
+     "fact": "联邦官员最初将死亡归因于白喉疫情，确切原因仍在调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Federal officials had initially blamed the deaths on a diphtheria outbreak but exactly what happened is now the subject of an investigation."
+    },
+    {
+     "fact": "事件引发抗议，包括对公共建筑的袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The mass deaths caused an outcry and sparked protests , including attacks on public buildings"
+    },
+    {
+     "fact": "尼日利亚安全与民防部队24名人员被拘留，包括被停职的尼日尔州指挥官",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the NSCDC has not directly responded to the accusations of neglect and maltreatment but has said that 24 of its personnel are now in custody in connection with the deaths, including its suspended Niger state commandant Suberu Aniviye."
+    },
+    {
+     "fact": "已成立10人委员会调查死亡原因并确定责任人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A 10-member committee has now been set-up to determine exactly what happened. It has two weeks to establish the causes of the deaths and identify who was responsible"
+    }
+   ],
+   "uncertainties": [
+    "死亡确切原因尚未确定，有待调查",
+    "幸存者指控狱方忽视和虐待，尼日利亚安全与民防部队未直接回应",
+    "被拘留者姓名和人数未公布",
+    "部分信息来自单一来源（如幸存者Adamu Isah向路透社的陈述）"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_5b6f45d2c8759108",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

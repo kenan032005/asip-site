@@ -1,0 +1,136 @@
+{
+ "label": "S63b3ac52",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4575f958910d63375ae39fddfbd6e4426315de6452f0b0f5d7a0e3c2aee27106",
+ "tokens": {
+  "input_tokens": 2632,
+  "output_tokens": 448,
+  "total_tokens": 3080
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"警方尚不确定是否为连环杀手作案，案件之间可能并无关联\", \"目前仅有一人因相关谋杀被捕，其余案件无人被拘留\"]",
+    "after": "[\"警方尚不确定是否为连环杀手作案，案件之间可能并无关联\", \"目前仅有一人因相关谋杀被捕，其余案件无人被拘留\", \"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南非接连发现遇害女性遗体引发恐慌",
+   "summary_zh": "南非埃库鲁莱尼地区自7月以来发现9具遇害女性遗体，其中3具于本周被发现，引发全国对针对女性暴力问题的愤怒与恐慌。警方表示尚不确定是否为连环杀手作案，案件之间可能并无关联。南非人权委员会数据显示，今年4月至6月有569名女性被杀，另有1052人遭遇谋杀未遂。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": "豪登省",
+    "city": "埃库鲁莱尼",
+    "site": null,
+    "raw_text": "Ekurhuleni, east of Johannesburg, South Africa"
+   },
+   "key_facts": [
+    {
+     "fact": "自7月以来埃库鲁莱尼地区发现9具遇害女性遗体",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In total, nine bodies of murdered women have been found in similar circumstances in the region since July."
+    },
+    {
+     "fact": "本周在埃库鲁莱尼发现3具女性遗体",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "her body one of three discovered there this week"
+    },
+    {
+     "fact": "警方表示尚不确定是否在追捕连环杀手，案件可能并无关联",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Police have said they are not sure if they are hunting a serial killer. It is possible the cases are not linked."
+    },
+    {
+     "fact": "南非人权委员会数据显示4月至6月有569名女性被杀",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "569 women had been killed in that period (six a day on average), with another 1,052 who faced attempted murder"
+    },
+    {
+     "fact": "目前仅有一人因相关谋杀被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Only one arrest has been made in connection with the murders"
+    }
+   ],
+   "uncertainties": [
+    "警方尚不确定是否为连环杀手作案，案件之间可能并无关联",
+    "目前仅有一人因相关谋杀被捕，其余案件无人被拘留"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南非接连发现遇害女性遗体引发恐慌",
+   "summary_zh": "南非埃库鲁莱尼地区自7月以来发现9具遇害女性遗体，其中3具于本周被发现，引发全国对针对女性暴力问题的愤怒与恐慌。警方表示尚不确定是否为连环杀手作案，案件之间可能并无关联。南非人权委员会数据显示，今年4月至6月有569名女性被杀，另有1052人遭遇谋杀未遂。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": "豪登省",
+    "city": "埃库鲁莱尼",
+    "site": null,
+    "raw_text": "Ekurhuleni, east of Johannesburg, South Africa"
+   },
+   "key_facts": [
+    {
+     "fact": "自7月以来埃库鲁莱尼地区发现9具遇害女性遗体",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In total, nine bodies of murdered women have been found in similar circumstances in the region since July."
+    },
+    {
+     "fact": "本周在埃库鲁莱尼发现3具女性遗体",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "her body one of three discovered there this week"
+    },
+    {
+     "fact": "警方表示尚不确定是否在追捕连环杀手，案件可能并无关联",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Police have said they are not sure if they are hunting a serial killer. It is possible the cases are not linked."
+    },
+    {
+     "fact": "南非人权委员会数据显示4月至6月有569名女性被杀",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "569 women had been killed in that period (six a day on average), with another 1,052 who faced attempted murder"
+    },
+    {
+     "fact": "目前仅有一人因相关谋杀被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Only one arrest has been made in connection with the murders"
+    }
+   ],
+   "uncertainties": [
+    "警方尚不确定是否为连环杀手作案，案件之间可能并无关联",
+    "目前仅有一人因相关谋杀被捕，其余案件无人被拘留",
+    "据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_0cb166a263b3ac52",
+ "disease_event_id": null,
+ "country_code": "ZA"
+}

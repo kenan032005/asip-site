@@ -1,68 +1,69 @@
 {
  "schema": "c1a-gate-audit-v1",
- "generated_at_bj": "2026-09-27 04:06",
+ "generated_at_bj": "2026-09-27 05:44",
  "counts": {
-  "total": 804,
-  "candidates_seen": 964,
-  "admitted": 804,
-  "rejected": 160,
+  "total": 814,
+  "candidates_seen": 975,
+  "admitted": 814,
+  "rejected": 161,
   "rejects_by_code": {
    "REJ_DUPLICATE": 145,
    "REJ_QUARANTINED": 14,
-   "REJ_NO_TIME": 1
+   "REJ_NO_TIME": 1,
+   "REJ_OUT_OF_SCOPE": 1
   },
   "by_recency": {
    "recent": 415,
    "archive": 328,
-   "fresh": 61
+   "fresh": 71
   },
   "by_origin": {
-   "canonical_articles": 612,
+   "canonical_articles": 622,
    "live_published_events": 192
   },
   "by_country": {
-   "乍得": 268,
+   "乍得": 275,
    "尼日利亚": 175,
    "尼日尔": 117,
    "莫桑比克": 59,
    "苏丹": 41,
    "刚果（金）": 38,
    "南苏丹": 25,
+   "埃塞俄比亚": 18,
    "肯尼亚": 18,
    "利比亚": 17,
-   "埃塞俄比亚": 16,
+   "加纳": 10,
    "贝宁": 10,
    "索马里": 10,
-   "加纳": 9,
    "科特迪瓦": 1
   },
   "by_country_iso2": {
-   "TD": 268,
+   "TD": 275,
    "NG": 175,
    "NE": 117,
    "MZ": 59,
    "SD": 41,
    "CD": 38,
    "SS": 25,
+   "ET": 18,
    "KE": 18,
    "LY": 17,
-   "ET": 16,
+   "GH": 10,
    "BJ": 10,
    "SO": 10,
-   "GH": 9,
    "CI": 1
   },
   "by_event_type_cn": {
    "其他": 291,
-   "其他安全": 280,
-   "武装冲突": 131,
+   "其他安全": 283,
+   "武装冲突": 135,
    "恐怖袭击": 31,
    "民众骚乱": 16,
-   "军事行动": 9,
+   "军事行动": 10,
+   "公共卫生": 9,
    "罢工行动": 9,
-   "公共卫生": 8,
    "自然灾害": 7,
-   "政治危机": 5,
+   "政治危机": 6,
    "绑架": 4,
    "基础设施安全": 3,
    "严重犯罪": 3,
@@ -73,15 +74,15 @@
    "族群冲突": 1
   },
   "by_verification": {
-   "single_source": 802,
+   "single_source": 812,
    "not_checked": 2
   },
   "by_news_status": {
-   "signal": 804
+   "signal": 814
   },
   "by_source": {
-   "Alwihda Info": 81,
-   "Tchadinfos": 71,
+   "Alwihda Info": 85,
+   "Tchadinfos": 73,
    "Daily Trust": 46,
    "Channels TV": 43,
    "ANP(尼日尔官方通讯社)": 41,
@@ -92,8 +93,8 @@
    "Dépêche.cd": 20,
    "Carta de Moçambique": 20,
    "ReliefWeb（乍得）": 20,
+   "乍得复兴门户": 19,
    "Journal du Niger": 18,
-   "乍得复兴门户": 18,
    "Journal du Tchad": 17,
    "Radio Tamazuj": 15,
    "Radio Okapi": 12,
@@ -126,6 +127,7 @@
    "riotimesonline.com": 3,
    "punchng.com": 3,
    "capitalfm.africa": 3,
+   "BBC News (Africa)": 2,
    "AfricaNews (Niger)": 2,
    "Niger Infos": 2,
    "thenationonlineng.net": 2,
@@ -142,6 +144,7 @@
    "thetidenewsonline.com": 2,
    "阿姆哈拉美国人协会（AAA）": 2,
    "Al Jazeera（乍得）": 1,
+   "Africanews": 1,
    "Capital FM Kenya": 1,
    "ThisDay": 1,
    "24 Heures au Bénin": 1,
@@ -220,24 +223,25 @@
    "Voice of Amhara（转引 Addis Standard / EHRC）": 1,
    "IFRC 实地报告 / 中石油国际舆情": 1
   },
-  "fresh_24h": 4,
-  "fresh_72h": 24,
-  "fresh_7d": 61,
-  "fresh_30d": 476,
-  "title_cn_missing": 261,
+  "fresh_24h": 12,
+  "fresh_72h": 33,
+  "fresh_7d": 71,
+  "fresh_30d": 486,
+  "title_cn_missing": 271,
   "is_verified_event": 1,
   "linked_to_event": 381,
   "canonical_eligible": 1,
   "china_related": 0
  },
  "gate": {
-  "candidates_seen": 964,
-  "admitted": 804,
-  "rejected": 160,
+  "candidates_seen": 975,
+  "admitted": 814,
+  "rejected": 161,
   "by_code": {
    "REJ_DUPLICATE": 145,
    "REJ_QUARANTINED": 14,
-   "REJ_NO_TIME": 1
+   "REJ_NO_TIME": 1,
+   "REJ_OUT_OF_SCOPE": 1
   },
   "examples": {
    "REJ_DUPLICATE": [
@@ -272,6 +276,12 @@
     {
      "id": "ART_6f3d1f0a346c2a5e",
      "why": "no observed_at/published time"
+    }
+   ],
+   "REJ_OUT_OF_SCOPE": [
+    {
+     "id": "ART_e18d4d57413197c9",
+     "why": "country not resolvable / out of scope"
     }
    ]
   }

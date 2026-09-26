@@ -1,0 +1,137 @@
+{
+ "label": "S7a39e531",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d5e0724dc588a301db85a55d7abeaf693f10e5a8825d0187434c54351ca9fd72",
+ "tokens": {
+  "input_tokens": 2881,
+  "output_tokens": 625,
+  "total_tokens": 3506
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "苏丹难民涌入乍得激增，援助资金崩溃",
+   "summary_zh": "自今年年初以来，超过5.5万名苏丹人为躲避达尔富尔和科尔多凡地区加剧的战斗逃往乍得东部，而乍得已收容近百万难民。联合国难民署称，上周以来每天有400多人经阿德雷和蒂内过境点入境，是此前数月日均速度的20倍。援助计划资金仅到位18%，收容设施严重超负荷。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "阿德雷和蒂内过境点",
+    "raw_text": "les points d’Adré et de Tiné"
+   },
+   "key_facts": [
+    {
+     "fact": "自今年年初以来超过5.5万名苏丹人逃往乍得东部",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plus de 55 000 Soudanais ont gagné l’est du Tchad depuis le début de l’année"
+    },
+    {
+     "fact": "乍得已收容近百万难民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un pays qui accueille déjà près d’un million de réfugiés"
+    },
+    {
+     "fact": "上周以来每天有400多人经阿德雷和蒂内过境点入境，是此前日均速度的20倍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis la semaine dernière, plus de 400 personnes franchissent chaque jour les points d’Adré et de Tiné, soit vingt fois plus que le rythme quotidien observé ces derniers mois"
+    },
+    {
+     "fact": "地区援助计划需16亿美元，仅获18%资金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le plan d'aide régional, évalué à 1,6 milliard de dollars, n'est financé qu'à hauteur de 18 %"
+    },
+    {
+     "fact": "蒂内中转中心收容超过4300人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au centre de transit de Tiné, qui héberge plus de 4 300 personnes"
+    },
+    {
+     "fact": "苏丹霍乱疫情累计2955例、250例死亡，病死率8.4%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'épidémie aura totalisé 2 955 cas et 250 décès, soit un taux de létalité de 8,4 %"
+    }
+   ],
+   "uncertainties": [
+    "难民在逃亡途中遭遇的绑架和强奸等严重侵权指控来自幸存者证词，尚未独立核实",
+    "霍乱疫情数据来自世界卫生组织，但该组织呼吁在战乱导致卫生系统混乱的情况下保持谨慎",
+    "事件信息目前仅来自单一来源（Alwihda Info）"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "苏丹难民涌入乍得激增，援助资金崩溃",
+   "summary_zh": "自今年年初以来，超过5.5万名苏丹人为躲避达尔富尔和科尔多凡地区加剧的战斗逃往乍得东部，而乍得已收容近百万难民。联合国难民署称，上周以来每天有400多人经阿德雷和蒂内过境点入境，是此前数月日均速度的20倍。援助计划资金仅到位18%，收容设施严重超负荷。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "阿德雷和蒂内过境点",
+    "raw_text": "les points d’Adré et de Tiné"
+   },
+   "key_facts": [
+    {
+     "fact": "自今年年初以来超过5.5万名苏丹人逃往乍得东部",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plus de 55 000 Soudanais ont gagné l’est du Tchad depuis le début de l’année"
+    },
+    {
+     "fact": "乍得已收容近百万难民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un pays qui accueille déjà près d’un million de réfugiés"
+    },
+    {
+     "fact": "上周以来每天有400多人经阿德雷和蒂内过境点入境，是此前日均速度的20倍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis la semaine dernière, plus de 400 personnes franchissent chaque jour les points d’Adré et de Tiné, soit vingt fois plus que le rythme quotidien observé ces derniers mois"
+    },
+    {
+     "fact": "地区援助计划需16亿美元，仅获18%资金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le plan d'aide régional, évalué à 1,6 milliard de dollars, n'est financé qu'à hauteur de 18 %"
+    },
+    {
+     "fact": "蒂内中转中心收容超过4300人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au centre de transit de Tiné, qui héberge plus de 4 300 personnes"
+    },
+    {
+     "fact": "苏丹霍乱疫情累计2955例、250例死亡，病死率8.4%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'épidémie aura totalisé 2 955 cas et 250 décès, soit un taux de létalité de 8,4 %"
+    }
+   ],
+   "uncertainties": [
+    "难民在逃亡途中遭遇的绑架和强奸等严重侵权指控来自幸存者证词，尚未独立核实",
+    "霍乱疫情数据来自世界卫生组织，但该组织呼吁在战乱导致卫生系统混乱的情况下保持谨慎",
+    "事件信息目前仅来自单一来源（Alwihda Info）"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_7ed3b4c47a39e531",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

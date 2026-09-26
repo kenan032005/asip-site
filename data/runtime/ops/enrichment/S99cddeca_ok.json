@@ -1,0 +1,115 @@
+{
+ "label": "S99cddeca",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "276aeb4690326ad1e257109130f1ba7ce99a555fcdf3011cbb46148cf1e3aa7c",
+ "tokens": {
+  "input_tokens": 2021,
+  "output_tokens": 409,
+  "total_tokens": 2430
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "联合国：今年已有逾5.5万名苏丹难民逃往乍得东部",
+   "summary_zh": "联合国表示，自今年年初以来已有超过5.5万名苏丹难民越境进入乍得东部，并警告流离失所情况正在加速，而援助资金远远不足。苏丹正规军与快速支援部队自2023年4月爆发的战争据援助人员估计已造成逾20万人死亡。联合国数据显示，目前约有1130万人因冲突被迫流离失所。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "乍得东部",
+    "raw_text": "east Chad"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国称今年已有超过5.5万名苏丹难民越境进入乍得东部",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than 55,000 Sudanese refugees have crossed into eastern Chad since the start of the year, the United Nations said Friday"
+    },
+    {
+     "fact": "联合国警告流离失所正在加速，而援助资金远远不足",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "warning that the displacement was accelerating even as aid funding falls far short"
+    },
+    {
+     "fact": "据援助人员估计，苏丹战争已造成逾20万人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "has killed more than 200,000 people, aid workers estimate"
+    },
+    {
+     "fact": "联合国数据显示目前约有1130万人因冲突被迫流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "some 11.3 million people remain forcibly displaced due to the conflict"
+    }
+   ],
+   "uncertainties": [
+    "苏丹战争死亡人数为援助人员估计，尚未获独立证实",
+    "事件目前仅有一个来源（Africanews）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "联合国：今年已有逾5.5万名苏丹难民逃往乍得东部",
+   "summary_zh": "联合国表示，自今年年初以来已有超过5.5万名苏丹难民越境进入乍得东部，并警告流离失所情况正在加速，而援助资金远远不足。苏丹正规军与快速支援部队自2023年4月爆发的战争据援助人员估计已造成逾20万人死亡。联合国数据显示，目前约有1130万人因冲突被迫流离失所。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "乍得东部",
+    "raw_text": "east Chad"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国称今年已有超过5.5万名苏丹难民越境进入乍得东部",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than 55,000 Sudanese refugees have crossed into eastern Chad since the start of the year, the United Nations said Friday"
+    },
+    {
+     "fact": "联合国警告流离失所正在加速，而援助资金远远不足",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "warning that the displacement was accelerating even as aid funding falls far short"
+    },
+    {
+     "fact": "据援助人员估计，苏丹战争已造成逾20万人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "has killed more than 200,000 people, aid workers estimate"
+    },
+    {
+     "fact": "联合国数据显示目前约有1130万人因冲突被迫流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "some 11.3 million people remain forcibly displaced due to the conflict"
+    }
+   ],
+   "uncertainties": [
+    "苏丹战争死亡人数为援助人员估计，尚未获独立证实",
+    "事件目前仅有一个来源（Africanews）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_33d59bd699cddeca",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

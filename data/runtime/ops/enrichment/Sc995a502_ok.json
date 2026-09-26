@@ -1,0 +1,93 @@
+{
+ "label": "Sc995a502",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a240c7a811329187afee079d607eda2430394f656b0beeee668cef0ff9d78008",
+ "tokens": {
+  "input_tokens": 2204,
+  "output_tokens": 276,
+  "total_tokens": 2480
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳ECG宣布特马部分地区9月29日至10月1日计划停电",
+   "summary_zh": "加纳电力公司（ECG）宣布将于9月29日（周二）至10月1日（周四）在特马地区部分地区进行计划性维护，期间将造成临时停电。该消息目前为单一来源报道。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "Tema Region",
+    "city": "Tema",
+    "site": null,
+    "raw_text": "parts of the Tema Region"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳电力公司宣布在特马地区部分地区进行计划性维护",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Electricity Company of Ghana (ECG) has announced planned maintenance works that will cause temporary power outages in parts of the Tema Region"
+    },
+    {
+     "fact": "停电时间为9月29日周二至10月1日周四",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "from Tuesday, September 29 to Thursday, October 1"
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳ECG宣布特马部分地区9月29日至10月1日计划停电",
+   "summary_zh": "加纳电力公司（ECG）宣布将于9月29日（周二）至10月1日（周四）在特马地区部分地区进行计划性维护，期间将造成临时停电。该消息目前为单一来源报道。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "Tema Region",
+    "city": "Tema",
+    "site": null,
+    "raw_text": "parts of the Tema Region"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳电力公司宣布在特马地区部分地区进行计划性维护",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Electricity Company of Ghana (ECG) has announced planned maintenance works that will cause temporary power outages in parts of the Tema Region"
+    },
+    {
+     "fact": "停电时间为9月29日周二至10月1日周四",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "from Tuesday, September 29 to Thursday, October 1"
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_f223ccbfc995a502",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

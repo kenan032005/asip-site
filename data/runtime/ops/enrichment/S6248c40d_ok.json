@@ -1,0 +1,129 @@
+{
+ "label": "S6248c40d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "fe9714503120c2cb5a7350a9ffeee34d6ae7d9336c041a92d2b127c80588be86",
+ "tokens": {
+  "input_tokens": 3081,
+  "output_tokens": 655,
+  "total_tokens": 3736
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "埃塞俄比亚北部战事重启，比勒陀利亚协议面临失败？",
+   "summary_zh": "埃塞俄比亚军队与提格雷武装及其盟友在该国北部多个地区持续交战，冲突于9月22日爆发，距多个反亚的斯亚贝巴武装组织宣布结盟仅数日。新一轮战斗引发对大规模战争重演的担忧，签署四年的比勒陀利亚和平协议似乎已破裂。各方互相指责对方未遵守2022年和平协议，提格雷武装未按计划解除武装，逾76万因战争流离失所的提格雷人仍无法返乡。厄立特里亚被埃塞俄比亚指控支持提格雷叛军，但其角色尚不明确。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷州",
+    "city": null,
+    "site": "北部多个地区",
+    "raw_text": "dans plusieurs régions du nord du pays"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚军队与提格雷武装及其盟友在北部多个地区持续交战",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les combats se poursuivent entre l’armée éthiopienne et les forces tigréennes et leurs alliés dans plusieurs régions du nord du pays"
+    },
+    {
+     "fact": "冲突于9月22日爆发，距多个反政府武装组织宣布结盟仅数日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces affrontements ont éclaté mardi 22 septembre, quelques jours seulement après l’annonce d’une alliance entre les principaux groupes armés opposés au régime d’Addis-Abeba"
+    },
+    {
+     "fact": "各方互相指责对方未遵守2022年和平协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Chaque camp accuse l’autre de ne pas avoir respecté l’accord de paix de 2022"
+    },
+    {
+     "fact": "提格雷武装未按计划解除武装，逾76万流离失所的提格雷人无法返乡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les forces du TPLF n’ont pas désarmé comme prévu. Et la question des territoires contestés n’a pas été tranchée : plus de 760 000 Tigréens déplacés par la guerre n’ont pas pu rentrer chez eux"
+    },
+    {
+     "fact": "埃塞俄比亚指控厄立特里亚支持提格雷叛军，厄立特里亚正式否认",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le rôle de l’Érythrée, accusée par l’Éthiopie de soutenir les rebelles tigréens"
+    }
+   ],
+   "uncertainties": [
+    "厄立特里亚是否直接参与此次战斗尚未确认",
+    "厄立特里亚被指支持提格雷叛军，但厄方正式否认",
+    "反政府武装联盟能否在军事层面协调尚存疑问",
+    "目前仅一个来源（RFI）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "埃塞俄比亚北部战事重启，比勒陀利亚协议面临失败？",
+   "summary_zh": "埃塞俄比亚军队与提格雷武装及其盟友在该国北部多个地区持续交战，冲突于9月22日爆发，距多个反亚的斯亚贝巴武装组织宣布结盟仅数日。新一轮战斗引发对大规模战争重演的担忧，签署四年的比勒陀利亚和平协议似乎已破裂。各方互相指责对方未遵守2022年和平协议，提格雷武装未按计划解除武装，逾76万因战争流离失所的提格雷人仍无法返乡。厄立特里亚被埃塞俄比亚指控支持提格雷叛军，但其角色尚不明确。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷州",
+    "city": null,
+    "site": "北部多个地区",
+    "raw_text": "dans plusieurs régions du nord du pays"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚军队与提格雷武装及其盟友在北部多个地区持续交战",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les combats se poursuivent entre l’armée éthiopienne et les forces tigréennes et leurs alliés dans plusieurs régions du nord du pays"
+    },
+    {
+     "fact": "冲突于9月22日爆发，距多个反政府武装组织宣布结盟仅数日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces affrontements ont éclaté mardi 22 septembre, quelques jours seulement après l’annonce d’une alliance entre les principaux groupes armés opposés au régime d’Addis-Abeba"
+    },
+    {
+     "fact": "各方互相指责对方未遵守2022年和平协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Chaque camp accuse l’autre de ne pas avoir respecté l’accord de paix de 2022"
+    },
+    {
+     "fact": "提格雷武装未按计划解除武装，逾76万流离失所的提格雷人无法返乡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les forces du TPLF n’ont pas désarmé comme prévu. Et la question des territoires contestés n’a pas été tranchée : plus de 760 000 Tigréens déplacés par la guerre n’ont pas pu rentrer chez eux"
+    },
+    {
+     "fact": "埃塞俄比亚指控厄立特里亚支持提格雷叛军，厄立特里亚正式否认",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le rôle de l’Érythrée, accusée par l’Éthiopie de soutenir les rebelles tigréens"
+    }
+   ],
+   "uncertainties": [
+    "厄立特里亚是否直接参与此次战斗尚未确认",
+    "厄立特里亚被指支持提格雷叛军，但厄方正式否认",
+    "反政府武装联盟能否在军事层面协调尚存疑问",
+    "目前仅一个来源（RFI）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_f66650a86248c40d",
+ "disease_event_id": null,
+ "country_code": "ZA"
+}

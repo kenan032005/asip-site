@@ -1,0 +1,114 @@
+{
+ "label": "S586af6f6",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c71fccdb53abd09115a742ad03903f619da6d6cdac30f1f8cea030c96dfa7242",
+ "tokens": {
+  "input_tokens": 2583,
+  "output_tokens": 475,
+  "total_tokens": 3058
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（乍得复兴门户）报道，尚缺乏交叉验证\"]",
+    "after": "[\"目前仅一个来源（乍得复兴门户）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得基督教团体“Juste En Sa Présence”启动第三届公民参与活动",
+   "summary_zh": "乍得基督教团体“Juste En Sa Présence”于2026年9月26日启动第三届活动，主题为“乍得，我的事”。成员在恩贾梅纳FDAR Chagoua B学校进行除草和清洁，以迎接开学。活动还包括卫生行动、教学和赞美晚会，旨在推动公民责任与环境保护。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": "FDAR Chagoua B学校（又称Padano学校）",
+    "raw_text": "l’école FDAR Chagoua B, communément appelée école Padano"
+   },
+   "key_facts": [
+    {
+     "fact": "基督教团体“Juste En Sa Présence”于2026年9月26日启动第三届活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministère chrétien « Juste En Sa Présence » a officiellement lancé, ce samedi 26 septembre 2026, la troisième édition de ses activités."
+    },
+    {
+     "fact": "活动主题为“乍得，我的事”，旨在促进公民参与和环境保护",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Placée sous le thème « Le Tchad, c’est mon affaire », cette édition entend promouvoir l’engagement citoyen et la responsabilité collective en faveur de la protection de l’environnement."
+    },
+    {
+     "fact": "成员在恩贾梅纳FDAR Chagoua B学校进行除草和清洁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les membres de l’initiative chrétienne se sont rendus à l’école FDAR Chagoua B, communément appelée école Padano, où ils ont procédé au débroussaillage et au nettoyage de la cour de l’établissement."
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（乍得复兴门户）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 90
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得基督教团体“Juste En Sa Présence”启动第三届公民参与活动",
+   "summary_zh": "乍得基督教团体“Juste En Sa Présence”于2026年9月26日启动第三届活动，主题为“乍得，我的事”。成员在恩贾梅纳FDAR Chagoua B学校进行除草和清洁，以迎接开学。活动还包括卫生行动、教学和赞美晚会，旨在推动公民责任与环境保护。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": "FDAR Chagoua B学校（又称Padano学校）",
+    "raw_text": "l’école FDAR Chagoua B, communément appelée école Padano"
+   },
+   "key_facts": [
+    {
+     "fact": "基督教团体“Juste En Sa Présence”于2026年9月26日启动第三届活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministère chrétien « Juste En Sa Présence » a officiellement lancé, ce samedi 26 septembre 2026, la troisième édition de ses activités."
+    },
+    {
+     "fact": "活动主题为“乍得，我的事”，旨在促进公民参与和环境保护",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Placée sous le thème « Le Tchad, c’est mon affaire », cette édition entend promouvoir l’engagement citoyen et la responsabilité collective en faveur de la protection de l’environnement."
+    },
+    {
+     "fact": "成员在恩贾梅纳FDAR Chagoua B学校进行除草和清洁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les membres de l’initiative chrétienne se sont rendus à l’école FDAR Chagoua B, communément appelée école Padano, où ils ont procédé au débroussaillage et au nettoyage de la cour de l’établissement."
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（乍得复兴门户）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 90
+  }
+ },
+ "event_id": "EVT_d0629d12586af6f6",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

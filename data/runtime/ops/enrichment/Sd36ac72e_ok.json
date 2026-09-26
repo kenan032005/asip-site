@@ -1,0 +1,169 @@
+{
+ "label": "Sd36ac72e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "606f9b719959c75faeb974e0fa76ed875d8e9dab452411fd6e288964ffd2f886",
+ "tokens": {
+  "input_tokens": 2881,
+  "output_tokens": 1093,
+  "total_tokens": 3974
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "埃塞俄比亚北部冲突扩大，联合国人权高专呼吁“紧急缓和紧张局势”",
+   "summary_zh": "埃塞俄比亚北部多个军事战线同时活跃，周五在提格雷西部特泽克河（Tezeke）一带新开战线，提格雷国防军（TDF）与联邦部队交战。阿法尔、阿姆哈拉地区冲突持续，拉利贝拉机场连续第二日关闭，多地电话与互联网中断。联合国人权事务高级专员沃尔克·图尔克呼吁各方紧急缓和局势，并对空袭、无人机袭击及强制征兵等指控表示严重关切。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷",
+    "city": null,
+    "site": "特泽克河（Tezeke）一带",
+    "raw_text": "autour du fleuve Tezeke, au Tigré occidental, dans le nord de l'Éthiopie"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚北部多个军事战线同时活跃，周五在提格雷西部特泽克河一带新开战线",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plusieurs fronts militaires sont désormais actifs simultanément, dans plusieurs zones du nord du pays. Un nouveau front s’est notamment ouvert vendredi autour du fleuve Tezeke, au Tigré occidental."
+    },
+    {
+     "fact": "提格雷国防军（TDF）与联邦部队在特泽克河一带交战",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un nouveau front entre les Forces de défense tigréennes (TDF) et les forces fédérales s’est ouvert vendredi"
+    },
+    {
+     "fact": "阿法尔地区阿巴拉（Abala）及塞雷布提（Serebti）夜间发生交火",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "dans la nuit de jeudi à vendredi, des affrontements ont eu lieu entre l’armée fédérale et les TDF dans la ville d’Abala... des tirs nourris ont aussi été entendus à Serebti"
+    },
+    {
+     "fact": "阿姆哈拉地区拉利贝拉周边冲突持续，机场连续第二日关闭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En Amhara, région du nord du pays, des heurts sont toujours en cours autour de la ville de Lalibela. Jeudi, l’aéroport était fermé, pour le deuxième jour consécutif."
+    },
+    {
+     "fact": "据联邦军队称，近日反攻中超过700名叛军被打死、500人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D’après l’armée fédérale, plus de 700 rebelles ont été tués et 500 blessés, dans la contre-offensive de ces derniers jours."
+    },
+    {
+     "fact": "自周四晚起，当地电话与互联网网络被切断",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis jeudi soir, le réseau téléphonique et Internet sont coupés, comme durant la guerre en 2020."
+    },
+    {
+     "fact": "联合国人权高专沃尔克·图尔克呼吁各方紧急缓和紧张局势，避免大规模敌对行动重启",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Haut-Commissaire des Nations unies aux droits de l’homme Volker Türk a appelé toutes les parties à « désamorcer d’urgence les tensions » et « éviter une reprise des hostilités à grande échelle »."
+    },
+    {
+     "fact": "图尔克称空袭（含无人机）周二击中五所学校并造成伤亡，一枚迫击炮弹在阿姆哈拉科博（Kobo）造成平民死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des frappes aériennes, dont certaines menées par drones, ont touché mardi cinq écoles, faisant des morts et des blessés. Un tir de mortier attribué à l’armée éthiopienne a également tué des civils, dans la ville de Kobo, dans l’Amhara."
+    },
+    {
+     "fact": "图尔克指控提格雷人民解放阵线（TPLF）大规模强制征召平民（包括儿童），并称有关于政府军任意征兵的令人担忧的情报",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il dénonce également une campagne de « recrutement forcé massif de civils, y compris d'enfants, menée par le TPLF » et fait état de « renseignements inquiétants » sur une conscription arbitraire par les forces gouvernementales."
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字（700名叛军被打死、500人受伤）为联邦军队单方面说法，尚未获独立核实",
+    "强制征召平民（包括儿童）及政府军任意征兵为指控，尚未证实",
+    "空袭击中五所学校及迫击炮致平民死亡的说法来自联合国人权高专，尚待进一步核实",
+    "目前仅一个来源（RFI）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "埃塞俄比亚北部冲突扩大，联合国人权高专呼吁“紧急缓和紧张局势”",
+   "summary_zh": "埃塞俄比亚北部多个军事战线同时活跃，周五在提格雷西部特泽克河（Tezeke）一带新开战线，提格雷国防军（TDF）与联邦部队交战。阿法尔、阿姆哈拉地区冲突持续，拉利贝拉机场连续第二日关闭，多地电话与互联网中断。联合国人权事务高级专员沃尔克·图尔克呼吁各方紧急缓和局势，并对空袭、无人机袭击及强制征兵等指控表示严重关切。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷",
+    "city": null,
+    "site": "特泽克河（Tezeke）一带",
+    "raw_text": "autour du fleuve Tezeke, au Tigré occidental, dans le nord de l'Éthiopie"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚北部多个军事战线同时活跃，周五在提格雷西部特泽克河一带新开战线",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plusieurs fronts militaires sont désormais actifs simultanément, dans plusieurs zones du nord du pays. Un nouveau front s’est notamment ouvert vendredi autour du fleuve Tezeke, au Tigré occidental."
+    },
+    {
+     "fact": "提格雷国防军（TDF）与联邦部队在特泽克河一带交战",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un nouveau front entre les Forces de défense tigréennes (TDF) et les forces fédérales s’est ouvert vendredi"
+    },
+    {
+     "fact": "阿法尔地区阿巴拉（Abala）及塞雷布提（Serebti）夜间发生交火",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "dans la nuit de jeudi à vendredi, des affrontements ont eu lieu entre l’armée fédérale et les TDF dans la ville d’Abala... des tirs nourris ont aussi été entendus à Serebti"
+    },
+    {
+     "fact": "阿姆哈拉地区拉利贝拉周边冲突持续，机场连续第二日关闭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En Amhara, région du nord du pays, des heurts sont toujours en cours autour de la ville de Lalibela. Jeudi, l’aéroport était fermé, pour le deuxième jour consécutif."
+    },
+    {
+     "fact": "据联邦军队称，近日反攻中超过700名叛军被打死、500人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D’après l’armée fédérale, plus de 700 rebelles ont été tués et 500 blessés, dans la contre-offensive de ces derniers jours."
+    },
+    {
+     "fact": "自周四晚起，当地电话与互联网网络被切断",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis jeudi soir, le réseau téléphonique et Internet sont coupés, comme durant la guerre en 2020."
+    },
+    {
+     "fact": "联合国人权高专沃尔克·图尔克呼吁各方紧急缓和紧张局势，避免大规模敌对行动重启",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Haut-Commissaire des Nations unies aux droits de l’homme Volker Türk a appelé toutes les parties à « désamorcer d’urgence les tensions » et « éviter une reprise des hostilités à grande échelle »."
+    },
+    {
+     "fact": "图尔克称空袭（含无人机）周二击中五所学校并造成伤亡，一枚迫击炮弹在阿姆哈拉科博（Kobo）造成平民死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des frappes aériennes, dont certaines menées par drones, ont touché mardi cinq écoles, faisant des morts et des blessés. Un tir de mortier attribué à l’armée éthiopienne a également tué des civils, dans la ville de Kobo, dans l’Amhara."
+    },
+    {
+     "fact": "图尔克指控提格雷人民解放阵线（TPLF）大规模强制征召平民（包括儿童），并称有关于政府军任意征兵的令人担忧的情报",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il dénonce également une campagne de « recrutement forcé massif de civils, y compris d'enfants, menée par le TPLF » et fait état de « renseignements inquiétants » sur une conscription arbitraire par les forces gouvernementales."
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字（700名叛军被打死、500人受伤）为联邦军队单方面说法，尚未获独立核实",
+    "强制征召平民（包括儿童）及政府军任意征兵为指控，尚未证实",
+    "空袭击中五所学校及迫击炮致平民死亡的说法来自联合国人权高专，尚待进一步核实",
+    "目前仅一个来源（RFI）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_23d1406ad36ac72e",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

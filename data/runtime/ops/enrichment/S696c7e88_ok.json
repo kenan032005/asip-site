@@ -1,0 +1,115 @@
+{
+ "label": "S696c7e88",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "293c1c570bc86ee4695888924ecdd295c54ffb7d3726cd031e4e10b75a8db543",
+ "tokens": {
+  "input_tokens": 2693,
+  "output_tokens": 523,
+  "total_tokens": 3216
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "国际刑事法院裁定中非共和国前叛军指挥官犯有危害人类罪",
+   "summary_zh": "国际刑事法院周三裁定中非共和国前民兵指挥官马哈马特·赛义德·阿卜杜勒·卡尼犯有酷刑和非法拘禁等四项危害人类罪。赛义德被指在2013年中非内战期间掌管首都班吉一处以残酷条件闻名的拘留中心。法院将在稍后宣判刑期，同时裁定其三项战争罪指控不成立。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "CAF",
+   "location": {
+    "country_iso3": "CAF",
+    "admin1": null,
+    "city": "班吉",
+    "site": "打击盗匪中央办公室（OCRB）拘留中心",
+    "raw_text": "the Central Office for the Repression of Banditry (OCRB) detention centre in the capital Bangui"
+   },
+   "key_facts": [
+    {
+     "fact": "国际刑事法院裁定中非共和国前民兵指挥官马哈马特·赛义德·阿卜杜勒·卡尼犯有四项危害人类罪，包括酷刑和非法拘禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The International Criminal Court on Wednesday convicted former Central African Republic rebel commander Mahamat Said Abdel Kani on four counts of crimes against humanity including torture and unlawful imprisonment."
+    },
+    {
+     "fact": "赛义德被指掌管首都班吉的OCRB拘留中心，囚犯遭受酷刑和恶劣待遇",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Said ran the Central Office for the Repression of Banditry (OCRB) detention centre in the capital Bangui where horrific acts of torture and deprivation were inflicted on prisoners."
+    },
+    {
+     "fact": "法院将在稍后宣判刑期，赛义德三项战争罪指控被裁定不成立",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The ICC will deliver a sentence for the crimes at a later date. Said was also acquitted of three counts of war crimes."
+    },
+    {
+     "fact": "赛义德现年56岁，曾任主要穆斯林塞雷卡叛军组织高级指挥官",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Said was a top commander of the mainly Muslim Seleka rebel group that ousted president François Bozize"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源（France 24），尚缺乏交叉验证",
+    "赛义德的具体刑期尚未确定"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 88
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "国际刑事法院裁定中非共和国前叛军指挥官犯有危害人类罪",
+   "summary_zh": "国际刑事法院周三裁定中非共和国前民兵指挥官马哈马特·赛义德·阿卜杜勒·卡尼犯有酷刑和非法拘禁等四项危害人类罪。赛义德被指在2013年中非内战期间掌管首都班吉一处以残酷条件闻名的拘留中心。法院将在稍后宣判刑期，同时裁定其三项战争罪指控不成立。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "CAF",
+   "location": {
+    "country_iso3": "CAF",
+    "admin1": null,
+    "city": "班吉",
+    "site": "打击盗匪中央办公室（OCRB）拘留中心",
+    "raw_text": "the Central Office for the Repression of Banditry (OCRB) detention centre in the capital Bangui"
+   },
+   "key_facts": [
+    {
+     "fact": "国际刑事法院裁定中非共和国前民兵指挥官马哈马特·赛义德·阿卜杜勒·卡尼犯有四项危害人类罪，包括酷刑和非法拘禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The International Criminal Court on Wednesday convicted former Central African Republic rebel commander Mahamat Said Abdel Kani on four counts of crimes against humanity including torture and unlawful imprisonment."
+    },
+    {
+     "fact": "赛义德被指掌管首都班吉的OCRB拘留中心，囚犯遭受酷刑和恶劣待遇",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Said ran the Central Office for the Repression of Banditry (OCRB) detention centre in the capital Bangui where horrific acts of torture and deprivation were inflicted on prisoners."
+    },
+    {
+     "fact": "法院将在稍后宣判刑期，赛义德三项战争罪指控被裁定不成立",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The ICC will deliver a sentence for the crimes at a later date. Said was also acquitted of three counts of war crimes."
+    },
+    {
+     "fact": "赛义德现年56岁，曾任主要穆斯林塞雷卡叛军组织高级指挥官",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Said was a top commander of the mainly Muslim Seleka rebel group that ousted president François Bozize"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源（France 24），尚缺乏交叉验证",
+    "赛义德的具体刑期尚未确定"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 88
+  }
+ },
+ "event_id": "EVT_0a9db473696c7e88",
+ "disease_event_id": null,
+ "country_code": "CF"
+}

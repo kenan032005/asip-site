@@ -1,0 +1,136 @@
+{
+ "label": "S1b4cb2d1",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "275bf63fc23d43eb38e09ec4ef00c1b74e396475bff822554ac85dfbe10f71cc",
+ "tokens": {
+  "input_tokens": 2592,
+  "output_tokens": 542,
+  "total_tokens": 3134
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"特朗普政府关于阿非利卡人遭受暴力侵害的说法被广泛质疑，但相关指控的具体事实尚未获独立证实\", \"迈耶称暴力事实被歪曲，但未获明确答复信息来源\"]",
+    "after": "[\"特朗普政府关于阿非利卡人遭受暴力侵害的说法被广泛质疑，但相关指控的具体事实尚未获独立证实\", \"迈耶称暴力事实被歪曲，但未获明确答复信息来源\", \"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南非新任驻美大使向BBC表示：南非不存在白人种族灭绝",
+   "summary_zh": "南非新任驻华盛顿大使罗尔夫·迈耶向BBC表示，南非不存在针对白人阿非利卡人的种族灭绝，并称自己作为阿非利卡人后裔有资格反驳特朗普的相关说法。特朗普政府去年指控南非实施白人种族灭绝，并启动阿非利卡人难民通道，已有近1.3万名难民获准入境美国。南非各政党均驳斥种族灭绝说法。",
+   "event_type": "other_security",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "South Africa / Washington"
+   },
+   "key_facts": [
+    {
+     "fact": "南非新任驻美大使罗尔夫·迈耶向BBC表示南非不存在针对白人阿非利卡人的种族灭绝",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The notion of a mass attack on the white Afrikaner minority in South Africa does not exist, he told the BBC"
+    },
+    {
+     "fact": "特朗普去年指控南非实施白人种族灭绝并启动阿非利卡人难民通道",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Last year, Trump accused South Africa of white genocide in a meeting with President Cyril Ramaphosa at the White House and launched a US refugee pathway for Afrikaners"
+    },
+    {
+     "fact": "自去年以来近1.3万名难民获准入境美国，其中除三人外均为南非人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Since last year, nearly 13,000 refugees have been admitted to the US and all but three were South African"
+    },
+    {
+     "fact": "特朗普政府计划在未来12个月再接收最多1.75万名白人阿非利卡人难民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Trump administration is planning to admit up to 17,500 additional white Afrikaners as refugees over the next 12 months"
+    },
+    {
+     "fact": "南非所有政党均驳斥针对白人的种族灭绝说法",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Claims of genocide against white South Africans have been discredited by every political party in the country, including by those representing Afrikaners"
+    }
+   ],
+   "uncertainties": [
+    "特朗普政府关于阿非利卡人遭受暴力侵害的说法被广泛质疑，但相关指控的具体事实尚未获独立证实",
+    "迈耶称暴力事实被歪曲，但未获明确答复信息来源"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南非新任驻美大使向BBC表示：南非不存在白人种族灭绝",
+   "summary_zh": "南非新任驻华盛顿大使罗尔夫·迈耶向BBC表示，南非不存在针对白人阿非利卡人的种族灭绝，并称自己作为阿非利卡人后裔有资格反驳特朗普的相关说法。特朗普政府去年指控南非实施白人种族灭绝，并启动阿非利卡人难民通道，已有近1.3万名难民获准入境美国。南非各政党均驳斥种族灭绝说法。",
+   "event_type": "other_security",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "South Africa / Washington"
+   },
+   "key_facts": [
+    {
+     "fact": "南非新任驻美大使罗尔夫·迈耶向BBC表示南非不存在针对白人阿非利卡人的种族灭绝",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The notion of a mass attack on the white Afrikaner minority in South Africa does not exist, he told the BBC"
+    },
+    {
+     "fact": "特朗普去年指控南非实施白人种族灭绝并启动阿非利卡人难民通道",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Last year, Trump accused South Africa of white genocide in a meeting with President Cyril Ramaphosa at the White House and launched a US refugee pathway for Afrikaners"
+    },
+    {
+     "fact": "自去年以来近1.3万名难民获准入境美国，其中除三人外均为南非人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Since last year, nearly 13,000 refugees have been admitted to the US and all but three were South African"
+    },
+    {
+     "fact": "特朗普政府计划在未来12个月再接收最多1.75万名白人阿非利卡人难民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Trump administration is planning to admit up to 17,500 additional white Afrikaners as refugees over the next 12 months"
+    },
+    {
+     "fact": "南非所有政党均驳斥针对白人的种族灭绝说法",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Claims of genocide against white South Africans have been discredited by every political party in the country, including by those representing Afrikaners"
+    }
+   ],
+   "uncertainties": [
+    "特朗普政府关于阿非利卡人遭受暴力侵害的说法被广泛质疑，但相关指控的具体事实尚未获独立证实",
+    "迈耶称暴力事实被歪曲，但未获明确答复信息来源",
+    "据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_e330f0421b4cb2d1",
+ "disease_event_id": null,
+ "country_code": "ZA"
+}
