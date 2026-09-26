@@ -84,7 +84,7 @@ jobs:
       - name: Checkout production code
         uses: actions/checkout@v4
         with:
-          ref: b91f13320f8dc810f8609a60c7ab2fbe2bada568
+          ref: 4b3307c3bd1e2f389b744addfbaba533d94c6343
           fetch-depth: 1
 
       - name: Checkout production state branch（数据快照）
@@ -116,6 +116,11 @@ jobs:
           # homepage_intelligence.json 不在产物中（线上 404 → 首页各板块空态）。
           mkdir -p data/views
           cp -rf state_src/data/views/. data/views/ 2>/dev/null || true
+          # C7-6：当期日报/周报简报必须落到 report_index 引用的树路径，
+          # 否则 INDEX_REFERENCED_REPORTS != PUBLISHED_REPORT_FILES → 构建校验 FAIL、部署被卡。
+          mkdir -p data/reports/daily data/reports/weekly
+          cp -f state_src/data/runtime/ops/reports/daily_brief_*.json data/reports/daily/ 2>/dev/null || true
+          cp -f state_src/data/runtime/ops/reports/tcd_weekly_brief_*.json data/reports/weekly/ 2>/dev/null || true
 
       - name: Deploy provenance（§三/§J/§K/§H）
         id: prov
