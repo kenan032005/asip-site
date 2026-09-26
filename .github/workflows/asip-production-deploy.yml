@@ -84,7 +84,7 @@ jobs:
       - name: Checkout production code
         uses: actions/checkout@v4
         with:
-          ref: 8ed887ded8253858202b2542b34a991b293f030e
+          ref: acc47b868823316227b28e53b78e21a8a2919f81
           fetch-depth: 1
 
       - name: Checkout production state branch（数据快照）
@@ -118,6 +118,10 @@ jobs:
           cp -rf state_src/data/views/. data/views/ 2>/dev/null || true
           # C7-6：当期日报/周报简报必须落到 report_index 引用的树路径，
           # 否则 INDEX_REFERENCED_REPORTS != PUBLISHED_REPORT_FILES → 构建校验 FAIL、部署被卡。
+          # C7-6R4：先整树恢复 canonical 报告（含 materialize 的 legacy + 简报），
+          # 与 build_site._copy_report_artifacts 的 SOURCE 集合一致。
+          mkdir -p data/reports
+          cp -rf state_src/data/reports/. data/reports/ 2>/dev/null || true
           mkdir -p data/reports/daily data/reports/weekly
           cp -f state_src/data/runtime/ops/reports/daily_brief_*.json data/reports/daily/ 2>/dev/null || true
           cp -f state_src/data/runtime/ops/reports/tcd_weekly_brief_*.json data/reports/weekly/ 2>/dev/null || true
