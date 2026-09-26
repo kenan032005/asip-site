@@ -280,7 +280,12 @@ def main(argv=None):
                     cname2iso3[c["country"]] = (c.get("iso2") or "").upper()
     except Exception:  # noqa: BLE001
         cname2iso3 = {}
-    monitored = [str(c.get("country") or c.get("name") or "") for c in countries if (c.get("country") or c.get("name"))]
+    # data/countries.json 的字段是 cn/en（不是 country/name），原先的取值恒为 "" 并被过滤
+    # 掉，导致 monitored 为空 —— 地图里"数据不足"分级永远不出现，未覆盖的受监控国家
+    # 直接消失（生产实测只剩 3 个有活动国家）。这里按实际字段取，并保留旧形状兼容。
+    monitored = [str(c.get("cn") or c.get("country") or c.get("name") or c.get("en") or "")
+                 for c in countries
+                 if (c.get("cn") or c.get("country") or c.get("name") or c.get("en"))]
     levels = []
     for c, d in per_country.items():
         levels.append({"country": c, "iso2": cname2iso3.get(c, ""),
