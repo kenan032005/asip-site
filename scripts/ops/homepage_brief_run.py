@@ -237,6 +237,37 @@ def build_fact_pack(root, now):
     return pack
 
 
+def _numeric_allowlist(pack):
+    """事实包中**所有**可引用的数值（供数字主张校验）。
+
+    规则不变：AI 引用的数字必须等于事实包算出的某个值；这里只是把"可引用数值"
+    的集合补全为事实包里真正存在的全部计数 —— counts、三个分布的民族/类别/层级计数、
+    以及各列表长度与事实总数。此前集合只含顶层 counts，导致 AI 引用事实包自带的
+    分布计数（如「乍得 43 条」）时被误判为越界（生产实测连续 10 轮 FACT_GATE_FAIL：
+    43条 / 14起 / 48起 / 125条 …）。
+    """
+    vals = set()
+
+    def add(v):
+        if isinstance(v, bool) or v is None:
+            return
+        if isinstance(v, int):
+            vals.add(str(v))
+        elif isinstance(v, str) and v.strip().isdigit():
+            vals.add(v.strip())
+
+    for v in (pack.get("counts") or {}).values():
+        add(v)
+    for key in ("country_distribution_7d", "category_distribution_24h",
+                "source_tier_distribution_7d"):
+        for row in (pack.get(key) or []):
+            add((row or {}).get("count"))
+    for key in ("countries_24h", "countries_7d", "top_verified_events", "top_signals", "health"):
+        add(len(pack.get(key) or []))
+    add(pack.get("fact_count"))
+    return vals
+
+
 def fact_gate(brief, pack):
     errs = []
     oa = brief.get("overall_assessment") or {}
@@ -283,8 +314,7 @@ def fact_gate(brief, pack):
     # 不是放宽反幻觉规则本身。此前该集合漏掉 countries_with_activity_24h /
     # total_countries_monitored，导致真实简报因「1个国家」被误判越界
     # （C7-5 生产实测 status=FACT_GATE_FAIL、gate_errors=["数字主张 1个国家 不在允许集合"]）。
-    allowed = {str(v) for v in (pack.get("counts") or {}).values()}
-    allowed |= {str(len(pack.get("countries_7d") or [])), str(pack.get("fact_count"))}
+    allowed = _numeric_allowlist(pack)
     for m in NUM_UNITS.finditer(str(oa.get("summary_cn") or "")):
         if m.group(1) not in allowed:
             errs.append("数字主张 %s 不在允许集合" % m.group(0))
@@ -324,9 +354,11 @@ def main(argv=None):
         latest = None
     if latest and not args.force:
         prev_t = parse_time(latest.get("generated_time"))
-        fresh = prev_t and (now - prev_t) < timedelta(hours=CADENCE_HOURS)
-        if fresh and latest.get("input_hash") == ih and latest.get("status") == "ok":
-            print(json.dumps({"status": "skipped_cadence_and_hash", "input_hash": ih[:12],
+        # 节奏（≤6h 一次）按"上一次**尝试**"计（不论成功/失败）：失败时若不计节奏，
+        # 编排器每小时都会重试（生产实测 00–09 BJT 连续 10 次 AI 调用）。
+        if prev_t and (now - prev_t) < timedelta(hours=CADENCE_HOURS):
+            print(json.dumps({"status": "skipped_cadence", "input_hash": ih[:12],
+                              "prev_status": latest.get("status"),
                               "real_ai_calls": 0}, ensure_ascii=False))
             return 0
         if latest.get("input_hash") == ih and latest.get("status") == "ok":
@@ -361,10 +393,15 @@ def main(argv=None):
     t0 = time.time()
     rec = prov.submit_task(task)
     calls = 1
-    tokens = rec.get("total_tokens") if isinstance(rec.get("total_tokens"), int) else 0
+    # provider 的用量在 rec["tokens"]（见 manual_trial 记录形状）；取不到时记 null，
+    # 不写 0（0 会被误读成"零消耗"）。此前读顶层 total_tokens 恒为 0。
+    usage = rec.get("tokens") or {}
+    tokens = usage.get("total_tokens") if isinstance(usage.get("total_tokens"), int) else None
     base = {"generated_time": now.isoformat(timespec="seconds"),
             "input_hash": ih, "counts": pack["counts"], "ai_calls": calls,
-            "total_tokens": tokens, "runtime_s": round(time.time() - t0, 1),
+            "total_tokens": tokens, "input_tokens": usage.get("input_tokens"),
+            "output_tokens": usage.get("output_tokens"),
+            "runtime_s": round(time.time() - t0, 1),
             "provider": "deepseek", "model": rec.get("returned_model"),
             "provider_status": rec.get("provider_status"),
             "status": rec.get("status") or "failed"}
