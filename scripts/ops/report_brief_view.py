@@ -29,7 +29,11 @@ BJT = timezone(timedelta(hours=8))
 HV = Path("data") / "views" / "homepage_intelligence.json"
 EX = Path("data") / "views" / "executive_summary.json"
 RI = Path("data") / "views" / "report_index.json"
-BRIEF_DIR = Path("data") / "reports" / "brief"
+# C7-6：简报写入 data/runtime/ops/reports/brief/ —— 该目录已被 deploy 的 Load state 覆盖
+# （state_src/data/runtime/ops/reports → data/runtime/ops/reports），并由构建发布到
+# dist/data/reports/brief/，与 report_index.path 一一对应。
+BRIEF_DIR = Path("data") / "runtime" / "ops" / "reports" / "brief"
+INDEX_DIR = Path("data") / "reports" / "brief"
 
 
 def load_json(p, default):
@@ -255,8 +259,8 @@ def upsert_index(root, d_doc, w_doc):
                 "generated_at": doc["generated_at"], "headline": doc["overall_assessment"][:150],
                 "path": path, "is_mock": False, "legacy_only": False,
                 "fact_count": doc.get("fact_count"), "source_count": doc.get("source_count")}
-    dpath = str((BRIEF_DIR / ("%s.json" % d_doc["report_id"])).as_posix())
-    wpath = str((BRIEF_DIR / ("%s.json" % w_doc["report_id"])).as_posix())
+    dpath = str((INDEX_DIR / ("%s.json" % d_doc["report_id"])).as_posix())
+    wpath = str((INDEX_DIR / ("%s.json" % w_doc["report_id"])).as_posix())
     rows = [row(d_doc, dpath), row(w_doc, wpath)] + rows
     rows.sort(key=lambda r: (str(r.get("period_end") or ""), str(r.get("report_id") or "")), reverse=True)
     idx = {"schema": "report-index-v2", "real_only": True, "count": len(rows),

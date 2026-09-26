@@ -129,7 +129,7 @@ def ai_publication_projection(data_root):
     # C7-6：当期报告简报的内容变更同样应触发发布
     brief_sig = None
     try:
-        _bd = Path(data_root) / "reports" / "brief"
+        _bd = Path(data_root) / "runtime" / "ops" / "reports" / "brief"
         if _bd.is_dir():
             brief_sig = []
             for _p in sorted(_bd.glob("*.json"))[-2:]:
