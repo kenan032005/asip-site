@@ -1,0 +1,115 @@
+{
+ "label": "Sd31d8244",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f8a53fb6723201a56b7fb49568348defda61ba33aa493c061b99ec5d3839c99e",
+ "tokens": {
+  "input_tokens": 2250,
+  "output_tokens": 477,
+  "total_tokens": 2727
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得在联合国重申对苏丹冲突保持中立",
+   "summary_zh": "乍得公共卫生与预防部长阿卜杜勒马吉德·阿卜杜拉希姆·马哈马特在联合国大会上重申，乍得在苏丹冲突中保持严格中立，不支持任何交战方，也不允许任何一方使用其领土。他同时谴责近日发生在东恩内迪省的袭击，称其侵犯乍得领土，并警告若再次发生将保留采取一切必要措施的权利。",
+   "event_type": "border_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "东恩内迪省",
+    "city": null,
+    "site": null,
+    "raw_text": "province de l'Ennedi Est"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得在联合国重申对苏丹冲突保持严格中立",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a réaffirmé ce 26 septembre 2026 la neutralité stricte de son pays dans le conflit soudanais"
+    },
+    {
+     "fact": "乍得表示不支持任何交战方，也不允许其领土被任何一方使用",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il a assuré que N'Djamena ne soutient aucune partie belligérante et n'autorise l'utilisation de son territoire à aucune d'elles"
+    },
+    {
+     "fact": "乍得谴责东恩内迪省近日遭到的袭击，称袭击被归咎于苏丹军队",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les récents événements survenus dans la province de l'Ennedi Est, théâtre de frappes imputées à l'armée soudanaise"
+    },
+    {
+     "fact": "乍得警告若再次发生将保留采取一切必要措施的权利",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Tchad a averti qu'il se réserve le droit de prendre toutes les mesures nécessaires en cas de récidive"
+    }
+   ],
+   "uncertainties": [
+    "袭击被归咎于苏丹军队，但该归因尚未获得独立证实",
+    "事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得在联合国重申对苏丹冲突保持中立",
+   "summary_zh": "乍得公共卫生与预防部长阿卜杜勒马吉德·阿卜杜拉希姆·马哈马特在联合国大会上重申，乍得在苏丹冲突中保持严格中立，不支持任何交战方，也不允许任何一方使用其领土。他同时谴责近日发生在东恩内迪省的袭击，称其侵犯乍得领土，并警告若再次发生将保留采取一切必要措施的权利。",
+   "event_type": "border_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "东恩内迪省",
+    "city": null,
+    "site": null,
+    "raw_text": "province de l'Ennedi Est"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得在联合国重申对苏丹冲突保持严格中立",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a réaffirmé ce 26 septembre 2026 la neutralité stricte de son pays dans le conflit soudanais"
+    },
+    {
+     "fact": "乍得表示不支持任何交战方，也不允许其领土被任何一方使用",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il a assuré que N'Djamena ne soutient aucune partie belligérante et n'autorise l'utilisation de son territoire à aucune d'elles"
+    },
+    {
+     "fact": "乍得谴责东恩内迪省近日遭到的袭击，称袭击被归咎于苏丹军队",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les récents événements survenus dans la province de l'Ennedi Est, théâtre de frappes imputées à l'armée soudanaise"
+    },
+    {
+     "fact": "乍得警告若再次发生将保留采取一切必要措施的权利",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Tchad a averti qu'il se réserve le droit de prendre toutes les mesures nécessaires en cas de récidive"
+    }
+   ],
+   "uncertainties": [
+    "袭击被归咎于苏丹军队，但该归因尚未获得独立证实",
+    "事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_1e2d31e2d31d8244",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
