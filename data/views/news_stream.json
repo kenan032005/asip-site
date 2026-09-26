@@ -2,11 +2,11 @@
  "schema": "news-stream-v1",
  "schema_version": "1.0.0",
  "builder_version": "c1a-1.0.0",
- "generated_at": "2026-09-26T04:04:50.966869+00:00",
- "generated_at_bj": "2026-09-26 12:04",
- "generated_at_bj_iso": "2026-09-26T12:04:50.966869+08:00",
+ "generated_at": "2026-09-26T04:05:53.846801+00:00",
+ "generated_at_bj": "2026-09-26 12:05",
+ "generated_at_bj_iso": "2026-09-26T12:05:53.846801+08:00",
  "source_run_id": "20260926T032741+0800_kfwmky",
- "source_data_updated_at": "2026-09-26T04:04:44+00:00",
+ "source_data_updated_at": "2026-09-26T12:04:56.842894+08:00",
  "policy": {
   "news_eligible": [
    "has_url",
@@ -32,11 +32,11 @@
  },
  "counts": {
   "total": 801,
-  "candidates_seen": 957,
+  "candidates_seen": 958,
   "admitted": 801,
-  "rejected": 156,
+  "rejected": 157,
   "rejects_by_code": {
-   "REJ_DUPLICATE": 141,
+   "REJ_DUPLICATE": 142,
    "REJ_QUARANTINED": 14,
    "REJ_NO_TIME": 1
   },
@@ -46,8 +46,8 @@
    "fresh": 60
   },
   "by_origin": {
-   "canonical_articles": 613,
-   "live_published_events": 188
+   "canonical_articles": 612,
+   "live_published_events": 189
   },
   "by_country": {
    "乍得": 265,
@@ -253,18 +253,18 @@
   "fresh_72h": 33,
   "fresh_7d": 60,
   "fresh_30d": 473,
-  "title_cn_missing": 262,
+  "title_cn_missing": 261,
   "is_verified_event": 1,
-  "linked_to_event": 377,
+  "linked_to_event": 378,
   "canonical_eligible": 1,
   "china_related": 0
  },
  "gate": {
-  "candidates_seen": 957,
+  "candidates_seen": 958,
   "admitted": 801,
-  "rejected": 156,
+  "rejected": 157,
   "by_code": {
-   "REJ_DUPLICATE": 141,
+   "REJ_DUPLICATE": 142,
    "REJ_QUARANTINED": 14,
    "REJ_NO_TIME": 1
   },
@@ -307,33 +307,32 @@
  },
  "items": [
   {
-   "src_id": "ART_6b47773813f54228",
-   "origin": "canonical_articles",
-   "source_url": "https://alwihdainfo.com/onu-le-tchad-reaffirme-sa-neutralite-face-au-conflit-soudanais",
+   "src_id": "EVT_1e2d31e2d31d8244",
+   "origin": "live_published_events",
+   "source_url": "https://www.alwihdainfo.com/onu-le-tchad-reaffirme-sa-neutralite-face-au-conflit-soudanais/",
    "observed_at": "2026-09-26T08:29:08+08:00",
-   "title_cn": null,
+   "title_cn": "乍得在联合国重申对苏丹冲突保持中立",
    "title_original": "ONU : le Tchad réaffirme sa neutralité face au conflit soudanais",
-   "summary_cn": null,
+   "summary_cn": "乍得公共卫生与预防部长阿卜杜勒马吉德·阿卜杜拉希姆·马哈马特在联合国大会上重申，乍得在苏丹冲突中保持严格中立，不支持任何交战方，也不允许任何一方使用其领土。他同时谴责近日发生在东恩内迪省的袭击，称其侵犯乍得领土，并警告若再次发生将保留采取一切必要措施的权利。",
    "summary_original": "Représentant le Tchad à l'ONU, le ministre Abdelmadjid Abdelrahim Mahamat a réaffirmé la neutralité de son pays dans le conflit soudanais tout en condamnant de récentes frappes sur son territoire.",
    "country_cn": "乍得",
    "country_iso2": "TD",
    "event_type": "military_operation",
    "source_name": "Alwihda Info",
-   "source_group": "alwihda",
-   "source_language": "und",
+   "source_group": "chad",
+   "source_language": "fr",
    "verification_level": "single_source",
    "independent_source_count": 1,
-   "quality_gate_passed": null,
-   "current_policy_passed": null,
+   "quality_gate_passed": true,
+   "current_policy_passed": true,
    "china_related": false,
    "has_body": true,
-   "body_status": "excerpt",
-   "fetch_http_status": 0,
-   "discovery_method": "",
+   "body_status": "full_body",
+   "fetch_http_status": 200,
+   "discovery_method": "rss",
    "run_id": "20260926T032741+0800_kfwmky",
-   "linked_event_id": null,
+   "linked_event_id": "EVT_1e2d31e2d31d8244",
    "news_status": "signal",
-   "historical_backfill": false,
    "dedup_key": "2b266c3ec7dcaa758643e9a58bbd9d0559688b77",
    "first_seen_at": "2026-09-26T08:29:08+08:00",
    "last_seen_at": "2026-09-26T08:29:08+08:00",
@@ -349,16 +348,16 @@
    "observed_at_bj": "2026-09-26 08:29",
    "first_seen_bj": "2026-09-26 08:29",
    "last_seen_bj": "2026-09-26 08:29",
-   "title": "ONU : le Tchad réaffirme sa neutralité face au conflit soudanais",
-   "title_cn_missing": true,
-   "title_lang": "und",
+   "title": "乍得在联合国重申对苏丹冲突保持中立",
+   "title_cn_missing": false,
+   "title_lang": "fr",
    "event_type_cn": "军事行动",
    "verification_label_cn": "单一来源 · 待核实",
    "is_verified_event": false,
    "verification_status": "news_signal",
    "importance": "low",
    "region": "中萨赫勒",
-   "localized": false,
+   "localized": true,
    "country_iso3": "TCD",
    "lane": "news",
    "disclaimer_cn": "本条为单一来源信号，尚未完成多来源交叉核实，不得作为已核实事件引用。",
@@ -401,7 +400,7 @@
     "Le Pays Tchad"
    ],
    "news_id": "NEWS-6a10bfc54dba4e3c",
-   "age_hours": 9.5,
+   "age_hours": 9.6,
    "recency": "fresh",
    "observed_at_bj": "2026-09-26 02:32",
    "first_seen_bj": "2026-09-26 02:32",
@@ -1485,7 +1484,7 @@
     "Alwihda Info"
    ],
    "news_id": "NEWS-5d946f670c651274",
-   "age_hours": 54.8,
+   "age_hours": 54.9,
    "recency": "fresh",
    "observed_at_bj": "2026-09-24 05:14",
    "first_seen_bj": "2026-09-24 05:14",
@@ -2511,7 +2510,7 @@
     "Journal du Tchad"
    ],
    "news_id": "NEWS-4a6892d73c5195e9",
-   "age_hours": 77.3,
+   "age_hours": 77.4,
    "recency": "fresh",
    "observed_at_bj": "2026-09-23 06:44",
    "first_seen_bj": "2026-09-23 06:44",
@@ -2726,7 +2725,7 @@
    "body_status": "full_body",
    "fetch_http_status": 200,
    "discovery_method": "rss",
-   "run_id": "20260925T200531+0800_7qkbhh",
+   "run_id": "20260926T032741+0800_kfwmky",
    "linked_event_id": "EVT_e03fe74b4f75221c",
    "news_status": "signal",
    "dedup_key": "4185f8c6164e635350697e3046b4df9d49625d6e",
@@ -2781,7 +2780,7 @@
    "body_status": "full_body",
    "fetch_http_status": 200,
    "discovery_method": "rss",
-   "run_id": "20260925T200531+0800_7qkbhh",
+   "run_id": "20260926T032741+0800_kfwmky",
    "linked_event_id": "EVT_8178124ac9f3d5ab",
    "news_status": "signal",
    "dedup_key": "6c95fce9b2698797a82e81b5eddcaec32dd4e117",
@@ -3235,7 +3234,7 @@
    "body_status": "full_body",
    "fetch_http_status": 200,
    "discovery_method": "rss",
-   "run_id": "20260925T200531+0800_7qkbhh",
+   "run_id": "20260926T032741+0800_kfwmky",
    "linked_event_id": "EVT_a400ece634d19d96",
    "news_status": "signal",
    "dedup_key": "d3a719142f42b5e79bc1cfdbc0d350ca1499a8db",
@@ -3290,7 +3289,7 @@
    "body_status": "full_body",
    "fetch_http_status": 200,
    "discovery_method": "html_listing",
-   "run_id": "20260925T200531+0800_7qkbhh",
+   "run_id": "20260926T032741+0800_kfwmky",
    "linked_event_id": "EVT_9a465c71da0a8e87",
    "news_status": "signal",
    "dedup_key": "156f183cd2f1187127014dd49786e85c99bb08cd",
@@ -3459,7 +3458,7 @@
    "body_status": "partial_body",
    "fetch_http_status": 200,
    "discovery_method": "rss",
-   "run_id": "20260925T200531+0800_7qkbhh",
+   "run_id": "20260926T032741+0800_kfwmky",
    "linked_event_id": "EVT_d833b4b14d7add26",
    "news_status": "signal",
    "dedup_key": "59797b7605dffa324778dc072f58195ee4c82f5c",
@@ -3571,7 +3570,7 @@
    "body_status": "full_body",
    "fetch_http_status": 200,
    "discovery_method": "rss",
-   "run_id": "20260925T200531+0800_7qkbhh",
+   "run_id": "20260926T032741+0800_kfwmky",
    "linked_event_id": "EVT_ea87255027a2d95a",
    "news_status": "signal",
    "dedup_key": "79eb91aae9f9c710baef7022818dd1a2cc39a9ef",
@@ -3582,7 +3581,7 @@
    "update_count": 0,
    "corroborating_sources": [],
    "news_id": "NEWS-79eb91aae9f9c710",
-   "age_hours": 133.9,
+   "age_hours": 134.0,
    "recency": "fresh",
    "observed_at_bj": "2026-09-20 22:07",
    "first_seen_bj": "2026-09-20 22:07",
@@ -3867,7 +3866,7 @@
     "Punch"
    ],
    "news_id": "NEWS-73b122dfb67a393a",
-   "age_hours": 170.9,
+   "age_hours": 171.0,
    "recency": "recent",
    "observed_at_bj": "2026-09-19 09:08",
    "first_seen_bj": "2026-09-19 09:08",
@@ -4152,7 +4151,7 @@
     "Tchadinfos"
    ],
    "news_id": "NEWS-93842e186dd6574a",
-   "age_hours": 171.6,
+   "age_hours": 171.7,
    "recency": "recent",
    "observed_at_bj": "2026-09-19 08:26",
    "first_seen_bj": "2026-09-19 08:26",
@@ -4380,7 +4379,7 @@
     "Bénin Web TV"
    ],
    "news_id": "NEWS-6360f0c63b5f08b9",
-   "age_hours": 172.4,
+   "age_hours": 172.5,
    "recency": "recent",
    "observed_at_bj": "2026-09-19 07:38",
    "first_seen_bj": "2026-09-19 07:38",
@@ -4893,7 +4892,7 @@
     "Radio Okapi"
    ],
    "news_id": "NEWS-d8f814126ceacf82",
-   "age_hours": 174.4,
+   "age_hours": 174.5,
    "recency": "recent",
    "observed_at_bj": "2026-09-19 05:38",
    "first_seen_bj": "2026-09-19 05:38",
@@ -5007,7 +5006,7 @@
     "Daily Trust"
    ],
    "news_id": "NEWS-f8db2d9e0bb92c5b",
-   "age_hours": 174.7,
+   "age_hours": 174.8,
    "recency": "recent",
    "observed_at_bj": "2026-09-19 05:20",
    "first_seen_bj": "2026-09-19 05:20",
@@ -5064,7 +5063,7 @@
     "Daily Trust"
    ],
    "news_id": "NEWS-d8abbd6bb311993e",
-   "age_hours": 174.7,
+   "age_hours": 174.8,
    "recency": "recent",
    "observed_at_bj": "2026-09-19 05:20",
    "first_seen_bj": "2026-09-19 05:20",
@@ -5750,7 +5749,7 @@
     "Nigerian Tribune"
    ],
    "news_id": "NEWS-f7f0764aa818c65c",
-   "age_hours": 181.0,
+   "age_hours": 181.1,
    "recency": "recent",
    "observed_at_bj": "2026-09-18 23:02",
    "first_seen_bj": "2026-09-18 23:02",
@@ -6504,7 +6503,7 @@
     "Actualite.cd"
    ],
    "news_id": "NEWS-7318263ab7f0df4f",
-   "age_hours": 187.8,
+   "age_hours": 187.9,
    "recency": "recent",
    "observed_at_bj": "2026-09-18 16:14",
    "first_seen_bj": "2026-09-18 16:14",
@@ -6967,7 +6966,7 @@
     "Alwihda Info"
    ],
    "news_id": "NEWS-0b89750568381aa6",
-   "age_hours": 189.4,
+   "age_hours": 189.5,
    "recency": "recent",
    "observed_at_bj": "2026-09-18 14:37",
    "first_seen_bj": "2026-09-18 14:37",
@@ -7885,7 +7884,7 @@
     "Nigerian Tribune"
    ],
    "news_id": "NEWS-d7771f8ebe578fd9",
-   "age_hours": 204.6,
+   "age_hours": 204.7,
    "recency": "recent",
    "observed_at_bj": "2026-09-17 23:26",
    "first_seen_bj": "2026-09-17 23:26",
@@ -8233,7 +8232,7 @@
     "Club of Mozambique"
    ],
    "news_id": "NEWS-70fbaeeb34ec4c9a",
-   "age_hours": 205.7,
+   "age_hours": 205.8,
    "recency": "recent",
    "observed_at_bj": "2026-09-17 22:20",
    "first_seen_bj": "2026-09-17 22:20",
@@ -8291,7 +8290,7 @@
     "Channels TV"
    ],
    "news_id": "NEWS-1328709322e5ae56",
-   "age_hours": 205.8,
+   "age_hours": 205.9,
    "recency": "recent",
    "observed_at_bj": "2026-09-17 22:14",
    "first_seen_bj": "2026-09-17 22:14",
@@ -8407,7 +8406,7 @@
     "Nigerian Tribune"
    ],
    "news_id": "NEWS-8352365b6a1dde8e",
-   "age_hours": 206.4,
+   "age_hours": 206.5,
    "recency": "recent",
    "observed_at_bj": "2026-09-17 21:38",
    "first_seen_bj": "2026-09-17 21:38",
@@ -9161,7 +9160,7 @@
     "Radio Okapi"
    ],
    "news_id": "NEWS-e883cbcb4761856a",
-   "age_hours": 211.3,
+   "age_hours": 211.4,
    "recency": "recent",
    "observed_at_bj": "2026-09-17 16:44",
    "first_seen_bj": "2026-09-17 16:44",
@@ -9451,7 +9450,7 @@
     "Hiiraan Online"
    ],
    "news_id": "NEWS-281715fb25005ebb",
-   "age_hours": 214.4,
+   "age_hours": 214.5,
    "recency": "recent",
    "observed_at_bj": "2026-09-17 13:38",
    "first_seen_bj": "2026-09-17 13:38",
@@ -9566,7 +9565,7 @@
     "Tchadinfos"
    ],
    "news_id": "NEWS-a612f0f17b6adb67",
-   "age_hours": 215.4,
+   "age_hours": 215.5,
    "recency": "recent",
    "observed_at_bj": "2026-09-17 12:38",
    "first_seen_bj": "2026-09-17 12:38",
@@ -9739,7 +9738,7 @@
     "Nigerian Tribune"
    ],
    "news_id": "NEWS-6836f07cfa78a790",
-   "age_hours": 220.1,
+   "age_hours": 220.2,
    "recency": "recent",
    "observed_at_bj": "2026-09-17 07:56",
    "first_seen_bj": "2026-09-17 07:56",
@@ -10487,7 +10486,7 @@
     "Nigerian Tribune"
    ],
    "news_id": "NEWS-efea5bccc766dd38",
-   "age_hours": 228.4,
+   "age_hours": 228.5,
    "recency": "recent",
    "observed_at_bj": "2026-09-16 23:38",
    "first_seen_bj": "2026-09-16 23:38",
@@ -10545,7 +10544,7 @@
     "Niger Inter"
    ],
    "news_id": "NEWS-f60c1be71a72697d",
-   "age_hours": 228.4,
+   "age_hours": 228.5,
    "recency": "recent",
    "observed_at_bj": "2026-09-16 23:38",
    "first_seen_bj": "2026-09-16 23:38",
@@ -10776,7 +10775,7 @@
     "Niger Inter"
    ],
    "news_id": "NEWS-6bf61b798344bb33",
-   "age_hours": 229.1,
+   "age_hours": 229.2,
    "recency": "recent",
    "observed_at_bj": "2026-09-16 22:56",
    "first_seen_bj": "2026-09-16 22:56",
@@ -10820,7 +10819,7 @@
    "body_status": "full_body",
    "fetch_http_status": 200,
    "discovery_method": "rss",
-   "run_id": "20260925T200531+0800_7qkbhh",
+   "run_id": "20260926T032741+0800_kfwmky",
    "linked_event_id": "EVT_52ca2efef66b0eaa",
    "news_status": "signal",
    "dedup_key": "e4537fe4ac02cfb3c990af80188327d77a048217",
@@ -11469,7 +11468,7 @@
     "Dépêche.cd"
    ],
    "news_id": "NEWS-497e711573597a9d",
-   "age_hours": 234.2,
+   "age_hours": 234.3,
    "recency": "recent",
    "observed_at_bj": "2026-09-16 17:50",
    "first_seen_bj": "2026-09-16 17:50",
@@ -11931,7 +11930,7 @@
     "Tchadinfos"
    ],
    "news_id": "NEWS-75f638aec0eae126",
-   "age_hours": 243.7,
+   "age_hours": 243.8,
    "recency": "recent",
    "observed_at_bj": "2026-09-16 08:20",
    "first_seen_bj": "2026-09-16 08:20",
@@ -11988,7 +11987,7 @@
     "Alwihda Info"
    ],
    "news_id": "NEWS-d7707f339b0d9819",
-   "age_hours": 244.5,
+   "age_hours": 244.6,
    "recency": "recent",
    "observed_at_bj": "2026-09-16 07:32",
    "first_seen_bj": "2026-09-16 07:32",
@@ -12160,7 +12159,7 @@
     "Le N'Djam Post"
    ],
    "news_id": "NEWS-c79404f11dd356a9",
-   "age_hours": 247.7,
+   "age_hours": 247.8,
    "recency": "recent",
    "observed_at_bj": "2026-09-16 04:20",
    "first_seen_bj": "2026-09-16 04:20",
@@ -12679,7 +12678,7 @@
     "Nigerian Tribune"
    ],
    "news_id": "NEWS-63dc3bfdca2e0b5e",
-   "age_hours": 253.5,
+   "age_hours": 253.6,
    "recency": "recent",
    "observed_at_bj": "2026-09-15 22:32",
    "first_seen_bj": "2026-09-15 22:32",
@@ -13027,7 +13026,7 @@
     "Carta de Moçambique"
    ],
    "news_id": "NEWS-3a9c4db9d684ec8f",
-   "age_hours": 258.5,
+   "age_hours": 258.6,
    "recency": "recent",
    "observed_at_bj": "2026-09-15 17:32",
    "first_seen_bj": "2026-09-15 17:32",
@@ -13375,7 +13374,7 @@
     "Daily Trust"
    ],
    "news_id": "NEWS-ee33336f5dcd09f2",
-   "age_hours": 260.1,
+   "age_hours": 260.2,
    "recency": "recent",
    "observed_at_bj": "2026-09-15 15:56",
    "first_seen_bj": "2026-09-15 15:56",
@@ -13650,7 +13649,7 @@
    "body_status": "full_body",
    "fetch_http_status": 200,
    "discovery_method": "html_listing",
-   "run_id": "20260925T200531+0800_7qkbhh",
+   "run_id": "20260926T032741+0800_kfwmky",
    "linked_event_id": "EVT_e91d62a7f58cddac",
    "news_status": "signal",
    "dedup_key": "3d1fa0af5af7676fd0e8bff2de09e663a2896f22",
@@ -13661,7 +13660,7 @@
    "update_count": 0,
    "corroborating_sources": [],
    "news_id": "NEWS-3d1fa0af5af7676f",
-   "age_hours": 267.8,
+   "age_hours": 267.9,
    "recency": "recent",
    "observed_at_bj": "2026-09-15 08:14",
    "first_seen_bj": "2026-09-15 08:14",
@@ -14352,7 +14351,7 @@
     "Club of Mozambique"
    ],
    "news_id": "NEWS-17191236cfc325e7",
-   "age_hours": 280.2,
+   "age_hours": 280.3,
    "recency": "recent",
    "observed_at_bj": "2026-09-14 19:50",
    "first_seen_bj": "2026-09-14 19:50",
@@ -14526,7 +14525,7 @@
     "Daily Trust"
    ],
    "news_id": "NEWS-71637b3cb1e04a0e",
-   "age_hours": 281.4,
+   "age_hours": 281.5,
    "recency": "recent",
    "observed_at_bj": "2026-09-14 18:38",
    "first_seen_bj": "2026-09-14 18:38",
@@ -14642,7 +14641,7 @@
     "Daily Trust"
    ],
    "news_id": "NEWS-5d026aafb41879d3",
-   "age_hours": 283.2,
+   "age_hours": 283.3,
    "recency": "recent",
    "observed_at_bj": "2026-09-14 16:50",
    "first_seen_bj": "2026-09-14 16:50",
@@ -15046,7 +15045,7 @@
     "Daily Trust"
    ],
    "news_id": "NEWS-06b7b5e9921cea94",
-   "age_hours": 292.4,
+   "age_hours": 292.5,
    "recency": "recent",
    "observed_at_bj": "2026-09-14 07:38",
    "first_seen_bj": "2026-09-14 07:38",
@@ -15448,7 +15447,7 @@
     "Alwihda Info"
    ],
    "news_id": "NEWS-8e15e1539d40a7fa",
-   "age_hours": 299.5,
+   "age_hours": 299.6,
    "recency": "recent",
    "observed_at_bj": "2026-09-14 00:32",
    "first_seen_bj": "2026-09-14 00:32",
@@ -15563,7 +15562,7 @@
     "O País"
    ],
    "news_id": "NEWS-0e682bb063a6dc84",
-   "age_hours": 300.7,
+   "age_hours": 300.8,
    "recency": "recent",
    "observed_at_bj": "2026-09-13 23:20",
    "first_seen_bj": "2026-09-13 23:20",
@@ -15737,7 +15736,7 @@
     "Libya Herald"
    ],
    "news_id": "NEWS-7ef050ef72c3711f",
-   "age_hours": 305.6,
+   "age_hours": 305.7,
    "recency": "recent",
    "observed_at_bj": "2026-09-13 18:26",
    "first_seen_bj": "2026-09-13 18:26",
@@ -16012,7 +16011,7 @@
    "body_status": "full_body",
    "fetch_http_status": 200,
    "discovery_method": "rss",
-   "run_id": "20260925T200531+0800_7qkbhh",
+   "run_id": "20260926T032741+0800_kfwmky",
    "linked_event_id": "EVT_fafd2fb27f2a3980",
    "news_status": "signal",
    "dedup_key": "ed40f2e21ff93984698f0931949b9e941ed11588",
@@ -16197,7 +16196,7 @@
     "Channels TV"
    ],
    "news_id": "NEWS-81a083656e7b2c69",
-   "age_hours": 319.6,
+   "age_hours": 319.7,
    "recency": "recent",
    "observed_at_bj": "2026-09-13 04:26",
    "first_seen_bj": "2026-09-13 04:26",
@@ -16545,7 +16544,7 @@
     "Tchadinfos"
    ],
    "news_id": "NEWS-d6fa6a590cf82c86",
-   "age_hours": 328.0,
+   "age_hours": 328.1,
    "recency": "recent",
    "observed_at_bj": "2026-09-12 20:02",
    "first_seen_bj": "2026-09-12 20:02",
@@ -17007,7 +17006,7 @@
     "ANP(尼日尔官方通讯社)"
    ],
    "news_id": "NEWS-4bf008c21d18b780",
-   "age_hours": 333.4,
+   "age_hours": 333.5,
    "recency": "recent",
    "observed_at_bj": "2026-09-12 14:37",
    "first_seen_bj": "2026-09-12 14:37",
@@ -18041,7 +18040,7 @@
     "Channels TV"
    ],
    "news_id": "NEWS-92bbce575105cb12",
-   "age_hours": 349.1,
+   "age_hours": 349.2,
    "recency": "recent",
    "observed_at_bj": "2026-09-11 22:55",
    "first_seen_bj": "2026-09-11 22:55",
@@ -18157,7 +18156,7 @@
     "Tchadinfos"
    ],
    "news_id": "NEWS-d8336fc7b0f77670",
-   "age_hours": 349.8,
+   "age_hours": 349.9,
    "recency": "recent",
    "observed_at_bj": "2026-09-11 22:14",
    "first_seen_bj": "2026-09-11 22:14",
@@ -18215,7 +18214,7 @@
     "Dabanga Sudan"
    ],
    "news_id": "NEWS-b30643e90dbcfd37",
-   "age_hours": 350.4,
+   "age_hours": 350.5,
    "recency": "recent",
    "observed_at_bj": "2026-09-11 21:37",
    "first_seen_bj": "2026-09-11 21:37",
@@ -18389,7 +18388,7 @@
     "Daily Trust"
    ],
    "news_id": "NEWS-f91f33ec586eb2b0",
-   "age_hours": 352.4,
+   "age_hours": 352.5,
    "recency": "recent",
    "observed_at_bj": "2026-09-11 19:38",
    "first_seen_bj": "2026-09-11 19:38",
@@ -18505,7 +18504,7 @@
     "Club of Mozambique"
    ],
    "news_id": "NEWS-eb98a3b1b9f8cd08",
-   "age_hours": 352.5,
+   "age_hours": 352.6,
    "recency": "recent",
    "observed_at_bj": "2026-09-11 19:32",
    "first_seen_bj": "2026-09-11 19:32",
@@ -18679,7 +18678,7 @@
     "Channels TV"
    ],
    "news_id": "NEWS-b1e878e1bd80cdb1",
-   "age_hours": 353.1,
+   "age_hours": 353.2,
    "recency": "recent",
    "observed_at_bj": "2026-09-11 18:56",
    "first_seen_bj": "2026-09-11 18:56",
@@ -18911,7 +18910,7 @@
     "Channels TV"
    ],
    "news_id": "NEWS-b2bde2bd063bf11f",
-   "age_hours": 354.4,
+   "age_hours": 354.5,
    "recency": "recent",
    "observed_at_bj": "2026-09-11 17:37",
    "first_seen_bj": "2026-09-11 17:37",
@@ -19027,7 +19026,7 @@
     "Channels TV"
    ],
    "news_id": "NEWS-2c71097f2f5f06d6",
-   "age_hours": 356.8,
+   "age_hours": 356.9,
    "recency": "recent",
    "observed_at_bj": "2026-09-11 15:14",
    "first_seen_bj": "2026-09-11 15:14",
@@ -19200,7 +19199,7 @@
     "Aïr Info"
    ],
    "news_id": "NEWS-00f0e9c3c9a9d6e9",
-   "age_hours": 362.9,
+   "age_hours": 363.0,
    "recency": "recent",
    "observed_at_bj": "2026-09-11 09:08",
    "first_seen_bj": "2026-09-11 09:08",
@@ -19257,7 +19256,7 @@
     "Tachad.com"
    ],
    "news_id": "NEWS-db13331344a99cba",
-   "age_hours": 363.3,
+   "age_hours": 363.4,
    "recency": "recent",
    "observed_at_bj": "2026-09-11 08:44",
    "first_seen_bj": "2026-09-11 08:44",
@@ -19602,7 +19601,7 @@
     "Journal du Niger"
    ],
    "news_id": "NEWS-c506bb30e371e080",
-   "age_hours": 369.8,
+   "age_hours": 369.9,
    "recency": "recent",
    "observed_at_bj": "2026-09-11 02:14",
    "first_seen_bj": "2026-09-11 02:14",
@@ -20182,7 +20181,7 @@
     "Channels TV"
    ],
    "news_id": "NEWS-93223d600c8741c2",
-   "age_hours": 376.8,
+   "age_hours": 376.9,
    "recency": "recent",
    "observed_at_bj": "2026-09-10 19:14",
    "first_seen_bj": "2026-09-10 19:14",
@@ -20240,7 +20239,7 @@
     "Club of Mozambique"
    ],
    "news_id": "NEWS-a3ade89fe44b3169",
-   "age_hours": 377.0,
+   "age_hours": 377.1,
    "recency": "recent",
    "observed_at_bj": "2026-09-10 19:02",
    "first_seen_bj": "2026-09-10 19:02",
@@ -20530,7 +20529,7 @@
     "Radio Tamazuj"
    ],
    "news_id": "NEWS-6239a10506b89cf2",
-   "age_hours": 380.3,
+   "age_hours": 380.4,
    "recency": "recent",
    "observed_at_bj": "2026-09-10 15:44",
    "first_seen_bj": "2026-09-10 15:44",
@@ -20748,7 +20747,7 @@
    "body_status": "partial_body",
    "fetch_http_status": 200,
    "discovery_method": "rss",
-   "run_id": "20260925T200531+0800_7qkbhh",
+   "run_id": "20260926T032741+0800_kfwmky",
    "linked_event_id": "EVT_c8b86425eb2ab880",
    "news_status": "signal",
    "dedup_key": "23e83555044430a706307dbb2f74b30f7dc91b9d",
@@ -20816,7 +20815,7 @@
     "Journal du Niger"
    ],
    "news_id": "NEWS-7f36f0565c6e0f2b",
-   "age_hours": 387.5,
+   "age_hours": 387.6,
    "recency": "recent",
    "observed_at_bj": "2026-09-10 08:32",
    "first_seen_bj": "2026-09-10 08:32",
@@ -21221,7 +21220,7 @@
     "Dépêche.cd"
    ],
    "news_id": "NEWS-7ff561ec1c568859",
-   "age_hours": 391.4,
+   "age_hours": 391.5,
    "recency": "recent",
    "observed_at_bj": "2026-09-10 04:38",
    "first_seen_bj": "2026-09-10 04:38",
@@ -21511,7 +21510,7 @@
     "Club of Mozambique"
    ],
    "news_id": "NEWS-f598771ae69c5ffb",
-   "age_hours": 397.8,
+   "age_hours": 397.9,
    "recency": "recent",
    "observed_at_bj": "2026-09-09 22:14",
    "first_seen_bj": "2026-09-09 22:14",
@@ -21743,7 +21742,7 @@
     "Alwihda Info"
    ],
    "news_id": "NEWS-63cd3ddcc9652719",
-   "age_hours": 398.9,
+   "age_hours": 399.0,
    "recency": "recent",
    "observed_at_bj": "2026-09-09 21:07",
    "first_seen_bj": "2026-09-09 21:07",
@@ -22091,7 +22090,7 @@
     "Channels TV"
    ],
    "news_id": "NEWS-88eb4dd5e25f8727",
-   "age_hours": 401.4,
+   "age_hours": 401.5,
    "recency": "recent",
    "observed_at_bj": "2026-09-09 18:38",
    "first_seen_bj": "2026-09-09 18:38",
@@ -22207,7 +22206,7 @@
     "Le Sahel"
    ],
    "news_id": "NEWS-85196a354ca7daab",
-   "age_hours": 403.4,
+   "age_hours": 403.5,
    "recency": "recent",
    "observed_at_bj": "2026-09-09 16:38",
    "first_seen_bj": "2026-09-09 16:38",
@@ -22439,7 +22438,7 @@
     "Daily Trust"
    ],
    "news_id": "NEWS-911331e327d2610b",
-   "age_hours": 406.6,
+   "age_hours": 406.7,
    "recency": "recent",
    "observed_at_bj": "2026-09-09 13:26",
    "first_seen_bj": "2026-09-09 13:26",
@@ -22613,7 +22612,7 @@
     "Dépêche.cd"
    ],
    "news_id": "NEWS-2d20a4eb84db180b",
-   "age_hours": 415.9,
+   "age_hours": 416.0,
    "recency": "recent",
    "observed_at_bj": "2026-09-09 04:08",
    "first_seen_bj": "2026-09-09 04:08",
@@ -22671,7 +22670,7 @@
     "Le N'Djam Post"
    ],
    "news_id": "NEWS-9b2a582f423d14c5",
-   "age_hours": 416.0,
+   "age_hours": 416.1,
    "recency": "recent",
    "observed_at_bj": "2026-09-09 04:02",
    "first_seen_bj": "2026-09-09 04:02",
@@ -23134,7 +23133,7 @@
     "Daily Trust"
    ],
    "news_id": "NEWS-bedb723a6e36c7db",
-   "age_hours": 421.6,
+   "age_hours": 421.7,
    "recency": "recent",
    "observed_at_bj": "2026-09-08 22:26",
    "first_seen_bj": "2026-09-08 22:26",
@@ -23192,7 +23191,7 @@
     "Daily Trust"
    ],
    "news_id": "NEWS-423610f5ab417921",
-   "age_hours": 421.6,
+   "age_hours": 421.7,
    "recency": "recent",
    "observed_at_bj": "2026-09-08 22:26",
    "first_seen_bj": "2026-09-08 22:26",
@@ -23308,7 +23307,7 @@
     "Channels TV"
    ],
    "news_id": "NEWS-8e5c88799dbcd2b4",
-   "age_hours": 422.2,
+   "age_hours": 422.3,
    "recency": "recent",
    "observed_at_bj": "2026-09-08 21:50",
    "first_seen_bj": "2026-09-08 21:50",
@@ -23946,7 +23945,7 @@
     "Dépêche.cd"
    ],
    "news_id": "NEWS-b9883767298305ed",
-   "age_hours": 429.5,
+   "age_hours": 429.6,
    "recency": "recent",
    "observed_at_bj": "2026-09-08 14:32",
    "first_seen_bj": "2026-09-08 14:32",
@@ -24279,7 +24278,7 @@
    "body_status": "full_body",
    "fetch_http_status": 200,
    "discovery_method": "rss",
-   "run_id": "20260925T200531+0800_7qkbhh",
+   "run_id": "20260926T032741+0800_kfwmky",
    "linked_event_id": "EVT_6f8c3ef87818ab09",
    "news_status": "signal",
    "dedup_key": "90bd1487b54f45bb74445d46e220adfcf1f4be29",
@@ -24464,7 +24463,7 @@
     "Alwihda Info"
    ],
    "news_id": "NEWS-3891b485c7393990",
-   "age_hours": 441.4,
+   "age_hours": 441.5,
    "recency": "recent",
    "observed_at_bj": "2026-09-08 02:38",
    "first_seen_bj": "2026-09-08 02:38",
@@ -24522,7 +24521,7 @@
     "Journal du Niger"
    ],
    "news_id": "NEWS-74919c94009a22a1",
-   "age_hours": 442.9,
+   "age_hours": 443.0,
    "recency": "recent",
    "observed_at_bj": "2026-09-08 01:08",
    "first_seen_bj": "2026-09-08 01:08",
@@ -25334,7 +25333,7 @@
     "Le Sahel"
    ],
    "news_id": "NEWS-fb399d4d0010ae98",
-   "age_hours": 451.7,
+   "age_hours": 451.8,
    "recency": "recent",
    "observed_at_bj": "2026-09-07 16:20",
    "first_seen_bj": "2026-09-07 16:20",
@@ -25392,7 +25391,7 @@
     "Rádio Moçambique"
    ],
    "news_id": "NEWS-c0c5c54909f41c49",
-   "age_hours": 452.2,
+   "age_hours": 452.3,
    "recency": "recent",
    "observed_at_bj": "2026-09-07 15:49",
    "first_seen_bj": "2026-09-07 15:49",
@@ -25508,7 +25507,7 @@
     "Dépêche.cd"
    ],
    "news_id": "NEWS-c8fcd1e0be4ef065",
-   "age_hours": 453.9,
+   "age_hours": 454.0,
    "recency": "recent",
    "observed_at_bj": "2026-09-07 14:08",
    "first_seen_bj": "2026-09-07 14:08",
@@ -25740,7 +25739,7 @@
     "Alwihda Info"
    ],
    "news_id": "NEWS-b119c3b224324e17",
-   "age_hours": 469.1,
+   "age_hours": 469.2,
    "recency": "recent",
    "observed_at_bj": "2026-09-06 22:56",
    "first_seen_bj": "2026-09-06 22:56",
@@ -26842,7 +26841,7 @@
     "Channels TV"
    ],
    "news_id": "NEWS-7d67cf63857c26bf",
-   "age_hours": 501.7,
+   "age_hours": 501.8,
    "recency": "recent",
    "observed_at_bj": "2026-09-05 14:20",
    "first_seen_bj": "2026-09-05 14:20",
@@ -27016,7 +27015,7 @@
     "Alwihda Info"
    ],
    "news_id": "NEWS-204ad4f783b509d3",
-   "age_hours": 515.6,
+   "age_hours": 515.7,
    "recency": "recent",
    "observed_at_bj": "2026-09-05 00:26",
    "first_seen_bj": "2026-09-05 00:26",
@@ -27416,7 +27415,7 @@
     "Tamtaminfo"
    ],
    "news_id": "NEWS-330118403e618c6a",
-   "age_hours": 599.0,
+   "age_hours": 599.1,
    "recency": "recent",
    "observed_at_bj": "2026-09-01 13:02",
    "first_seen_bj": "2026-09-01 13:02",
@@ -27702,7 +27701,7 @@
     "Alwihda Info"
    ],
    "news_id": "NEWS-e890464e43c20c61",
-   "age_hours": 1330.0,
+   "age_hours": 1330.1,
    "recency": "archive",
    "observed_at_bj": "2026-08-02 02:02",
    "first_seen_bj": "2026-08-02 02:02",
@@ -27873,7 +27872,7 @@
     "ANP(尼日尔官方通讯社)"
    ],
    "news_id": "NEWS-f7a47c657ca77272",
-   "age_hours": 1335.0,
+   "age_hours": 1335.1,
    "recency": "archive",
    "observed_at_bj": "2026-08-01 21:02",
    "first_seen_bj": "2026-08-01 21:02",
@@ -27930,7 +27929,7 @@
     "Tchadinfos"
    ],
    "news_id": "NEWS-a37ef7fa0451fd0f",
-   "age_hours": 1356.8,
+   "age_hours": 1356.9,
    "recency": "archive",
    "observed_at_bj": "2026-07-31 23:14",
    "first_seen_bj": "2026-07-31 23:14",
@@ -28625,7 +28624,7 @@
     "Journal du Niger"
    ],
    "news_id": "NEWS-a0b0338753c52161",
-   "age_hours": 1409.2,
+   "age_hours": 1409.3,
    "recency": "archive",
    "observed_at_bj": "2026-07-29 18:50",
    "first_seen_bj": "2026-07-29 18:50",
@@ -29205,7 +29204,7 @@
     "Le N'Djam Post"
    ],
    "news_id": "NEWS-ad97f3a4d8b5664c",
-   "age_hours": 1411.0,
+   "age_hours": 1411.1,
    "recency": "archive",
    "observed_at_bj": "2026-07-29 17:01",
    "first_seen_bj": "2026-07-29 17:01",
@@ -29437,7 +29436,7 @@
     "Alwihda Info"
    ],
    "news_id": "NEWS-47938d5e37da36b8",
-   "age_hours": 1412.7,
+   "age_hours": 1412.8,
    "recency": "archive",
    "observed_at_bj": "2026-07-29 15:20",
    "first_seen_bj": "2026-07-29 15:20",
@@ -29669,7 +29668,7 @@
     "Alwihda Info"
    ],
    "news_id": "NEWS-796476b64375eb88",
-   "age_hours": 1422.1,
+   "age_hours": 1422.2,
    "recency": "archive",
    "observed_at_bj": "2026-07-29 05:56",
    "first_seen_bj": "2026-07-29 05:56",
@@ -29959,7 +29958,7 @@
     "ANP(尼日尔官方通讯社)"
    ],
    "news_id": "NEWS-7d06c10df95528e0",
-   "age_hours": 1423.4,
+   "age_hours": 1423.5,
    "recency": "archive",
    "observed_at_bj": "2026-07-29 04:38",
    "first_seen_bj": "2026-07-29 04:38",
@@ -30017,7 +30016,7 @@
     "Tchadinfos"
    ],
    "news_id": "NEWS-647bf0241db6c1b4",
-   "age_hours": 1423.6,
+   "age_hours": 1423.7,
    "recency": "archive",
    "observed_at_bj": "2026-07-29 04:26",
    "first_seen_bj": "2026-07-29 04:26",
@@ -30191,7 +30190,7 @@
     "ANP(尼日尔官方通讯社)"
    ],
    "news_id": "NEWS-ac929e4433d439ec",
-   "age_hours": 1424.3,
+   "age_hours": 1424.4,
    "recency": "archive",
    "observed_at_bj": "2026-07-29 03:44",
    "first_seen_bj": "2026-07-29 03:44",
@@ -31061,7 +31060,7 @@
     "Le N'Djam Post"
    ],
    "news_id": "NEWS-b44dc10fd77b2c2e",
-   "age_hours": 1427.9,
+   "age_hours": 1428.0,
    "recency": "archive",
    "observed_at_bj": "2026-07-29 00:07",
    "first_seen_bj": "2026-07-29 00:07",
@@ -31177,7 +31176,7 @@
     "Tchadinfos"
    ],
    "news_id": "NEWS-32d332ae2689bfd6",
-   "age_hours": 1428.5,
+   "age_hours": 1428.6,
    "recency": "archive",
    "observed_at_bj": "2026-07-28 23:32",
    "first_seen_bj": "2026-07-28 23:32",
@@ -32105,7 +32104,7 @@
     "Journal du Niger"
    ],
    "news_id": "NEWS-108c1bbb8a5f6103",
-   "age_hours": 1432.5,
+   "age_hours": 1432.6,
    "recency": "archive",
    "observed_at_bj": "2026-07-28 19:32",
    "first_seen_bj": "2026-07-28 19:32",
@@ -32395,7 +32394,7 @@
     "Le Sahel"
    ],
    "news_id": "NEWS-2b824c01f71f9689",
-   "age_hours": 1434.8,
+   "age_hours": 1434.9,
    "recency": "archive",
    "observed_at_bj": "2026-07-28 17:14",
    "first_seen_bj": "2026-07-28 17:14",
@@ -32511,7 +32510,7 @@
     "Alwihda Info"
    ],
    "news_id": "NEWS-4f25986034424cdf",
-   "age_hours": 1435.2,
+   "age_hours": 1435.3,
    "recency": "archive",
    "observed_at_bj": "2026-07-28 16:50",
    "first_seen_bj": "2026-07-28 16:50",
@@ -32627,7 +32626,7 @@
     "Alwihda Info"
    ],
    "news_id": "NEWS-e8a87fd16cafcd70",
-   "age_hours": 1436.2,
+   "age_hours": 1436.3,
    "recency": "archive",
    "observed_at_bj": "2026-07-28 15:49",
    "first_seen_bj": "2026-07-28 15:49",
@@ -33150,7 +33149,7 @@
     "ANP(尼日尔官方通讯社)"
    ],
    "news_id": "NEWS-73baa4d21595c3b8",
-   "age_hours": 1446.7,
+   "age_hours": 1446.8,
    "recency": "archive",
    "observed_at_bj": "2026-07-28 05:20",
    "first_seen_bj": "2026-07-28 05:20",
@@ -34490,7 +34489,7 @@
     "Journal du Tchad"
    ],
    "news_id": "NEWS-57f8aa94ec80f2fb",
-   "age_hours": 1457.3,
+   "age_hours": 1457.4,
    "recency": "archive",
    "observed_at_bj": "2026-07-27 18:44",
    "first_seen_bj": "2026-07-27 18:44",
@@ -34548,7 +34547,7 @@
     "乍得复兴门户"
    ],
    "news_id": "NEWS-37c162b377a2fa9d",
-   "age_hours": 1459.3,
+   "age_hours": 1459.4,
    "recency": "archive",
    "observed_at_bj": "2026-07-27 16:44",
    "first_seen_bj": "2026-07-27 16:44",
@@ -34606,7 +34605,7 @@
     "Toumaï Web Médias"
    ],
    "news_id": "NEWS-4b34c2e4b69b7c28",
-   "age_hours": 1472.1,
+   "age_hours": 1472.2,
    "recency": "archive",
    "observed_at_bj": "2026-07-27 03:56",
    "first_seen_bj": "2026-07-27 03:56",
@@ -34780,7 +34779,7 @@
     "乍得复兴门户"
    ],
    "news_id": "NEWS-63178ca6cacd549e",
-   "age_hours": 1475.0,
+   "age_hours": 1475.1,
    "recency": "archive",
    "observed_at_bj": "2026-07-27 01:02",
    "first_seen_bj": "2026-07-27 01:02",
@@ -36636,7 +36635,7 @@
     "Tachad.com"
    ],
    "news_id": "NEWS-cb7ccffa175eb11b",
-   "age_hours": 1505.3,
+   "age_hours": 1505.4,
    "recency": "archive",
    "observed_at_bj": "2026-07-25 18:43",
    "first_seen_bj": "2026-07-25 18:43",
@@ -38088,7 +38087,7 @@
     "乍得总统府"
    ],
    "news_id": "NEWS-f8d37c97fa385b42",
-   "age_hours": 1526.7,
+   "age_hours": 1526.8,
    "recency": "archive",
    "observed_at_bj": "2026-07-24 21:20",
    "first_seen_bj": "2026-07-24 21:20",
@@ -42288,7 +42287,7 @@
     "Journal du Tchad"
    ],
    "news_id": "NEWS-bc327ed6529575aa",
-   "age_hours": 1596.8,
+   "age_hours": 1596.9,
    "recency": "archive",
    "observed_at_bj": "2026-07-21 23:14",
    "first_seen_bj": "2026-07-21 23:14",
@@ -42871,7 +42870,7 @@
     "Journal du Tchad"
    ],
    "news_id": "NEWS-1393357bc9284eb3",
-   "age_hours": 1601.9,
+   "age_hours": 1602.0,
    "recency": "archive",
    "observed_at_bj": "2026-07-21 18:08",
    "first_seen_bj": "2026-07-21 18:08",
@@ -45552,7 +45551,7 @@
     "Niger Inter"
    ],
    "news_id": "NEWS-56b38133adfc17d4",
-   "age_hours": 2138.9,
+   "age_hours": 2139.0,
    "recency": "archive",
    "observed_at_bj": "2026-06-29 09:08",
    "first_seen_bj": "2026-06-29 09:08",
@@ -45782,7 +45781,7 @@
     "Niger Inter"
    ],
    "news_id": "NEWS-32bc64d4e9175296",
-   "age_hours": 2762.5,
+   "age_hours": 2762.6,
    "recency": "archive",
    "observed_at_bj": "2026-06-03 09:32",
    "first_seen_bj": "2026-06-03 09:32",
@@ -45999,7 +45998,7 @@
    "body_status": "partial_body",
    "fetch_http_status": 200,
    "discovery_method": "html_listing",
-   "run_id": "20260925T200531+0800_7qkbhh",
+   "run_id": "20260926T032741+0800_kfwmky",
    "linked_event_id": "EVT_c1ea82845d169dcf",
    "news_status": "signal",
    "dedup_key": "76135f08c1733627db2fc221a3769059f3e36592",
@@ -46054,7 +46053,7 @@
    "body_status": "full_body",
    "fetch_http_status": 200,
    "discovery_method": "rss",
-   "run_id": "20260925T200531+0800_7qkbhh",
+   "run_id": "20260926T032741+0800_kfwmky",
    "linked_event_id": "EVT_864367759160cfad",
    "news_status": "signal",
    "dedup_key": "a75092ab111883d93fff301c94ddaa5363d0a5d2",
@@ -46411,7 +46410,7 @@
     "Tchad One"
    ],
    "news_id": "NEWS-6dbeffd8fe7ad1b3",
-   "age_hours": 5272.2,
+   "age_hours": 5272.3,
    "recency": "archive",
    "observed_at_bj": "2026-02-18 19:50",
    "first_seen_bj": "2026-02-18 19:50",
@@ -46468,7 +46467,7 @@
     "Tchad One"
    ],
    "news_id": "NEWS-91325e9f80b9ff4f",
-   "age_hours": 5290.1,
+   "age_hours": 5290.2,
    "recency": "archive",
    "observed_at_bj": "2026-02-18 01:56",
    "first_seen_bj": "2026-02-18 01:56",
