@@ -1,0 +1,127 @@
+{
+ "label": "Saa208a1e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "9f73e5dba2ba760916b63712384a394341d22134ba618d71f438784355ac47e6",
+ "tokens": {
+  "input_tokens": 2709,
+  "output_tokens": 692,
+  "total_tokens": 3401
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）东南部：调查揭示铜钴矿周边二氧化硫污染",
+   "summary_zh": "刚果（金）东南部一项新调查再次引发对Tenke Fungurume Mining（TFM）矿区周边卫生问题的担忧，调查在Manomapia地区测得二氧化硫浓度峰值达每立方米1834微克，为世界卫生组织建议值的3.7倍。调查还追踪了209人，其中Manomapia的103名参与者中约四成报告眼部刺激、近两成报告鼻出血。涉事企业否认污染指控，称自身监测符合适用限值，两份报告均未最终认定TFM应对每一症状负责。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "Lualaba",
+    "city": "Manomapia",
+    "site": "usine 30K（30K工厂）周边",
+    "raw_text": "Sud-est de la RDC, Manomapia, quartier proche de l’usine 30K, dans le Lualaba"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）东南部一项新调查再次引发对Tenke Fungurume Mining矿区周边卫生问题的担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans le sud-est de la RDC, une nouvelle enquête relance les inquiétudes sanitaires autour de Tenke Fungurume Mining"
+    },
+    {
+     "fact": "调查在Manomapia地区测得二氧化硫浓度峰值达每立方米1834微克，为世卫组织建议值的3.7倍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À Manomapia, quartier proche de l’usine 30K, les enquêteurs rapportent un pic de dioxyde de soufre de 1 834 microgrammes par m3... Cela représente 3,7 fois la valeur recommandée par l’Organisation mondiale de la santé"
+    },
+    {
+     "fact": "调查追踪209人，Manomapia的103名参与者中约四成报告眼部刺激、近两成报告鼻出血",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’étude a aussi suivi 209 personnes pendant dix-huit semaines. Parmi 103 participants de Manomapia, quatre sur dix ont signalé des irritations oculaires et près de deux sur dix des saignements de nez"
+    },
+    {
+     "fact": "涉事企业否认污染指控，称自身监测符合适用限值",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'entreprise, elle, rejette les accusations de pollution... L’entreprise conteste les méthodes et affirme que ses propres relevés respectent les limites applicables"
+    },
+    {
+     "fact": "两份报告均未最终认定TFM应对每一症状负责",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucun des deux rapports n’établit définitivement que TFM est responsable de chaque symptôme"
+    }
+   ],
+   "uncertainties": [
+    "污染与具体健康症状之间的因果关系尚未最终确认",
+    "企业否认指控并质疑调查方法，其自身监测数据与调查结论存在冲突",
+    "目前仅一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）东南部：调查揭示铜钴矿周边二氧化硫污染",
+   "summary_zh": "刚果（金）东南部一项新调查再次引发对Tenke Fungurume Mining（TFM）矿区周边卫生问题的担忧，调查在Manomapia地区测得二氧化硫浓度峰值达每立方米1834微克，为世界卫生组织建议值的3.7倍。调查还追踪了209人，其中Manomapia的103名参与者中约四成报告眼部刺激、近两成报告鼻出血。涉事企业否认污染指控，称自身监测符合适用限值，两份报告均未最终认定TFM应对每一症状负责。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "Lualaba",
+    "city": "Manomapia",
+    "site": "usine 30K（30K工厂）周边",
+    "raw_text": "Sud-est de la RDC, Manomapia, quartier proche de l’usine 30K, dans le Lualaba"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）东南部一项新调查再次引发对Tenke Fungurume Mining矿区周边卫生问题的担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans le sud-est de la RDC, une nouvelle enquête relance les inquiétudes sanitaires autour de Tenke Fungurume Mining"
+    },
+    {
+     "fact": "调查在Manomapia地区测得二氧化硫浓度峰值达每立方米1834微克，为世卫组织建议值的3.7倍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À Manomapia, quartier proche de l’usine 30K, les enquêteurs rapportent un pic de dioxyde de soufre de 1 834 microgrammes par m3... Cela représente 3,7 fois la valeur recommandée par l’Organisation mondiale de la santé"
+    },
+    {
+     "fact": "调查追踪209人，Manomapia的103名参与者中约四成报告眼部刺激、近两成报告鼻出血",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’étude a aussi suivi 209 personnes pendant dix-huit semaines. Parmi 103 participants de Manomapia, quatre sur dix ont signalé des irritations oculaires et près de deux sur dix des saignements de nez"
+    },
+    {
+     "fact": "涉事企业否认污染指控，称自身监测符合适用限值",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'entreprise, elle, rejette les accusations de pollution... L’entreprise conteste les méthodes et affirme que ses propres relevés respectent les limites applicables"
+    },
+    {
+     "fact": "两份报告均未最终认定TFM应对每一症状负责",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucun des deux rapports n’établit définitivement que TFM est responsable de chaque symptôme"
+    }
+   ],
+   "uncertainties": [
+    "污染与具体健康症状之间的因果关系尚未最终确认",
+    "企业否认指控并质疑调查方法，其自身监测数据与调查结论存在冲突",
+    "目前仅一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_ebe6699eaa208a1e",
+ "disease_event_id": null,
+ "country_code": "CD"
+}
