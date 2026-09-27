@@ -119,6 +119,9 @@ jobs:
           # C8-3：采集处理状态必须恢复（否则跨轮去重 / 隔离恢复 PENDING_RECOVERY 丢失）
           mkdir -p logs/collector_cache
           cp -rf state_src/logs/collector_cache/. logs/collector_cache/ 2>/dev/null || true
+          # C8-3 FINAL：构建前同样恢复处理状态（与 orchestrator 对称）
+          mkdir -p data/runtime
+          cp -f state_src/data/runtime/article_processing_state.json                 data/runtime/article_processing_state.json 2>/dev/null || true
           # C7-6：当期日报/周报简报必须落到 report_index 引用的树路径，
           # 否则 INDEX_REFERENCED_REPORTS != PUBLISHED_REPORT_FILES → 构建校验 FAIL、部署被卡。
           # C7-6R4：canonical SOURCE 集合 = 树 data/reports/**（构建校验的比对基准）。
