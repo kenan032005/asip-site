@@ -617,6 +617,10 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
         published = []
         for a in all_articles:
             if a["source_id"] != sid:
+                # C8-3 STEP 4：共享 feed 时其他来源发现的条目会在本来源的循环里被跳过。
+                # 原实现**不计数**，使"抽取成功但 pub=0/quar=0"看起来像静默丢弃。
+                # 显式记 other_source_items，使每篇文章都有明确归属（非丢失）。
+                stat["other_source_items"] = stat.get("other_source_items", 0) + 1
                 continue
             c_decision = a["_country"].get("decision", "") if isinstance(a["_country"], dict) else ""
             # C1C：decision → 中文国名改为通用映射（原先硬编码 chad/niger）
@@ -847,6 +851,13 @@ def _classify_failure(stat, dis_errors):
 
 def write_stats(per_source, run_id, configured_sources=0, article_stats=None,
                 cluster_stats=None):
+    # C8-3 STEP 4：把"非丢弃"的跳过显式汇总，便于计算 TRUE_SILENT_DROP_COUNT
+    _osa = sum(int(r.get("other_source_items") or 0) for r in per_source)
+    _tot = sum(int(r.get("discovered") or 0) for r in per_source)
+    _acct = (sum(int(r.get("published") or 0) for r in per_source)
+             + sum(int(r.get("quarantined") or 0) for r in per_source)
+             + sum(int(r.get("duplicates") or 0) for r in per_source)
+             + sum(int(r.get("extraction_failed") or 0) for r in per_source))
     totals = {
         "configured_sources": configured_sources,
         "enabled_sources": len(per_source),
@@ -888,6 +899,10 @@ def write_stats(per_source, run_id, configured_sources=0, article_stats=None,
         totals["gdelt_rate_limiter"] = _GDELT_LIMITER.stats()
     except Exception:
         totals["gdelt_rate_limiter"] = None
+    # C8-3 STEP 4：显式核算"非丢弃"的跳过，并给出真未计入数（应恒为 0）
+    totals["OTHER_SOURCE_ITEMS_SKIPPED"] = _osa
+    totals["ACCOUNTED_ITEMS"] = _acct
+    totals["TRUE_UNACCOUNTED_DROP"] = max(0, _tot - _acct - _osa)
     # C1B §五：Article Corpus 持久化指标（真实计数，读取不到则显式标记）
     if article_stats:
         totals["article_store_path"] = article_stats.get("authoritative_store")
