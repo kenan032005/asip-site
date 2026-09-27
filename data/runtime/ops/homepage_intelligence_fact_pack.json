@@ -1,17 +1,17 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-09-27T21:28:35+08:00",
+ "generated_at": "2026-09-28T01:47:23+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 56,
-  "signals_7d": 129,
-  "verified_events_24h": 59,
-  "verified_events_7d": 134,
-  "multi_source_verified_events_7d": 3,
-  "countries_with_activity_24h": 7,
+  "signals_24h": 50,
+  "signals_7d": 132,
+  "verified_events_24h": 57,
+  "verified_events_7d": 141,
+  "multi_source_verified_events_7d": 4,
+  "countries_with_activity_24h": 8,
   "total_countries_monitored": 22
  },
  "countries_24h": [
@@ -21,6 +21,7 @@
   "南苏丹",
   "南非",
   "埃塞俄比亚",
+  "尼日利亚",
   "尼日尔"
  ],
  "countries_7d": [
@@ -39,7 +40,7 @@
  "country_distribution_7d": [
   {
    "value": "乍得",
-   "count": 56
+   "count": 60
   },
   {
    "value": "加纳",
@@ -51,7 +52,7 @@
   },
   {
    "value": "尼日尔",
-   "count": 13
+   "count": 12
   },
   {
    "value": "南苏丹",
@@ -81,11 +82,11 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 35
+   "count": 31
   },
   {
    "value": "武装冲突",
-   "count": 12
+   "count": 11
   },
   {
    "value": "基础设施安全",
@@ -96,30 +97,26 @@
    "count": 2
   },
   {
+   "value": "边境安全",
+   "count": 1
+  },
+  {
    "value": "election_security",
    "count": 1
   },
   {
    "value": "恐怖袭击",
    "count": 1
-  },
-  {
-   "value": "政治危机",
-   "count": 1
-  },
-  {
-   "value": "公共卫生",
-   "count": 1
   }
  ],
  "source_tier_distribution_7d": [
   {
    "value": "C",
-   "count": 161
+   "count": 167
   },
   {
    "value": "B",
-   "count": 94
+   "count": 98
   },
   {
    "value": "A",
@@ -127,21 +124,6 @@
   }
  ],
  "top_verified_events": [
-  {
-   "fact_id": "EVT_1919d9fb24791b2f",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "Le Tchad déploie un nouveau contingent de 350 soldats en Haïti",
-   "category": "other_security",
-   "source": "Tchadinfos",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-20 17:10",
-   "importance": "high",
-   "severity": "medium"
-  },
   {
    "fact_id": "EVT_683ef70f565d0155",
    "level": "verified_event",
@@ -216,6 +198,21 @@
    "time": "2026-09-21 15:10",
    "importance": "high",
    "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_d833b4b14d7add26",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Guerre des Toyota : comment le Tchad a défait l'armée de Khadafi avec des pick-up",
+   "category": "armed_conflict",
+   "source": "",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-20 19:58",
+   "importance": "high",
+   "severity": "medium"
   }
  ],
  "top_signals": [
@@ -247,6 +244,66 @@
    "source_role": "local_signal",
    "time": "2026-09-25 00:30",
    "importance": "medium",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:fe58763b4d7052cb",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Agriculture et élevage au Tchad : la raréfaction des ressources accentue les tensions dans les campagnes",
+   "category": "other_security",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-28 00:09",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:0825f3f53c35963a",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Tchad : à Bedjondo, des fora communautaires pour intensifier la lutte contre les VBG et promouvoir la santé reproductive",
+   "category": "other_security",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-27 23:24",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:77d977a4fd12f549",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Plus de 55 000 Soudanais ont fui vers le Tchad depuis le début de l’année",
+   "category": "border_security",
+   "source": "Tchadinfos",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-27 23:00",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:fa4d74a860a7ad58",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Tchad : Le parti « Nouveau Jour » alerte sur la vétusté du pont de la Pendé",
+   "category": "other_security",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-27 20:54",
+   "importance": "low",
    "why_it_matters": ""
   },
   {
@@ -445,6 +502,21 @@
    "why_it_matters": ""
   },
   {
+   "fact_id": "news:ea116dd1e691e24d",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Afrique du Sud : 27 morts dans deux fusillades à Johannesburg et au Cap",
+   "category": "other_security",
+   "source": "Tchadinfos",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-27 18:30",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
    "fact_id": "news:2fea39670c9b48e1",
    "level": "news_signal",
    "evidence_tier": "news_signal",
@@ -501,81 +573,6 @@
    "source_tier": "B",
    "source_role": "regional",
    "time": "2026-09-27 16:48",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:64bc3f8633374d7f",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "加纳",
-   "title": "伊朗外长称唯有谈判可结束冲突，此前特朗普拒绝霍尔木兹海峡方案",
-   "category": "armed_conflict",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 16:30",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:6d7d67a34ba10d22",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "加纳",
-   "title": "加纳律师批评以言论自由为名损害他人名誉",
-   "category": "armed_conflict",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 16:16",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:fdf76d9bb94f0047",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "加纳",
-   "title": "加纳Nungua举办Republic Bank-JoyNews Habitat Fair房产博览会最后一日",
-   "category": "armed_conflict",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 13:14",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:325ca90b56675790",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "加纳",
-   "title": "加纳阿克拉部委区约30个消防栓仅5个可用",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 13:00",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:32b4f934d3c959d4",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "加纳",
-   "title": "马哈马称加纳政府将在2026年底前签署1200兆瓦燃气发电协议",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 13:00",
    "importance": "low",
    "why_it_matters": ""
   }
@@ -656,16 +653,76 @@
  ],
  "existing_assessment": {
   "status": "ai",
-  "overall_assessment": "已核实事件方面，乍得湖地区安全形势突出：恩古布阿附近发生袭击致11名渔民死亡，军方称击毙9名袭击者；提贝斯提图尔库矿区遭枪击致1死2伤；国家警察展示43名嫌犯及缴获武器；政府设立混合解除武装协调机制，并逮捕涉中非阿姆达福克袭击的嫌疑人。人道压力持续，联合国称年初以来逾5.5万苏丹难民抵乍，累计收容逾200万流离失所者。南苏丹琼莱州杜克县社区冲突致至少13人死亡。埃塞俄比亚北部战事升级，联合国人权高专呼吁紧急缓和。加纳方面，禁毒委员会副主任否认领导层被腐蚀指控，律师警告毒品走私案或致出口商海外受更严检查。情报信号均为单源、尚待核实，包括委内瑞拉释放39名政治犯、欧盟释放逾7.1亿欧元人道援助、南非连环杀人案发现第十具遗体、埃塞俄比亚与吉布提6.6亿美元燃料管道项目等，需进一步交叉验证。",
+  "overall_assessment": "已核实事件方面，乍得湖地区安全形势突出：恩古布阿附近发生袭击致11名渔民死亡，军方称击毙9名袭击者；国防部长连续赴湖区视察，政府新设混合解除武装协调机制，并在联合国重申对苏丹冲突保持中立、警告边境入侵。乍得境内已收容逾5.5万名年内抵境的苏丹难民，同时面临干旱与粮食风险。埃塞俄比亚北部战事升级，联合国人权高专呼吁紧急缓和，分析人士警告可能外溢为地区冲突。南苏丹琼莱州杜克县社区冲突致至少13人死亡。加纳方面以治理与治安议题为主，包括北部光缆中断、非法采矿与选举暴力调查。情报信号层面，乍得农牧资源稀缺加剧农村紧张、苏丹难民持续流入、彭代桥老化等均为单源消息，尚待核实。",
   "risk_direction": "worsening",
   "confidence": "medium",
-  "generated_time": "2026-09-27T21:28:29+08:00",
+  "generated_time": "2026-09-28T01:47:18+08:00",
   "based_on": "过去24小时/7日公开信息",
   "model": "",
-  "date": "20260927"
+  "date": "20260928"
  },
- "fact_count": 263,
+ "fact_count": 273,
  "facts": {
+  "news:fe58763b4d7052cb": {
+   "fact_id": "news:fe58763b4d7052cb",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Agriculture et élevage au Tchad : la raréfaction des ressources accentue les tensions dans les campagnes",
+   "category": "other_security",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-28 00:09",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:0825f3f53c35963a": {
+   "fact_id": "news:0825f3f53c35963a",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Tchad : à Bedjondo, des fora communautaires pour intensifier la lutte contre les VBG et promouvoir la santé reproductive",
+   "category": "other_security",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-27 23:24",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:77d977a4fd12f549": {
+   "fact_id": "news:77d977a4fd12f549",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Plus de 55 000 Soudanais ont fui vers le Tchad depuis le début de l’année",
+   "category": "border_security",
+   "source": "Tchadinfos",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-27 23:00",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:fa4d74a860a7ad58": {
+   "fact_id": "news:fa4d74a860a7ad58",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Tchad : Le parti « Nouveau Jour » alerte sur la vétusté du pont de la Pendé",
+   "category": "other_security",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-27 20:54",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:e565a72924a4a948": {
    "fact_id": "news:e565a72924a4a948",
    "level": "news_signal",
@@ -858,6 +915,21 @@
    "source_tier": "B",
    "source_role": "regional",
    "time": "2026-09-27 18:48",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:ea116dd1e691e24d": {
+   "fact_id": "news:ea116dd1e691e24d",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Afrique du Sud : 27 morts dans deux fusillades à Johannesburg et au Cap",
+   "category": "other_security",
+   "source": "Tchadinfos",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-27 18:30",
    "importance": "low",
    "why_it_matters": ""
   },
@@ -2571,51 +2643,6 @@
    "importance": "low",
    "why_it_matters": ""
   },
-  "news:6bd11ef451a539c7": {
-   "fact_id": "news:6bd11ef451a539c7",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "Le Tchad déploie un nouveau contingent de 350 soldats en Haïti",
-   "category": "other_security",
-   "source": "Tchadinfos",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-21 01:10",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:cb5306157b84b120": {
-   "fact_id": "news:cb5306157b84b120",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日尔",
-   "title": "Niger: des fonds américains bientôt débloqués pour le projet de mine d'uranium de Dasa?",
-   "category": "infrastructure_security",
-   "source": "",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-20 22:07",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "EVT_1919d9fb24791b2f": {
-   "fact_id": "EVT_1919d9fb24791b2f",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "Le Tchad déploie un nouveau contingent de 350 soldats en Haïti",
-   "category": "other_security",
-   "source": "Tchadinfos",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-20 17:10",
-   "importance": "high",
-   "severity": "medium"
-  },
   "EVT_683ef70f565d0155": {
    "fact_id": "EVT_683ef70f565d0155",
    "level": "verified_event",
@@ -2718,21 +2745,6 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-09-21 09:54",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_ea87255027a2d95a": {
-   "fact_id": "EVT_ea87255027a2d95a",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "尼日尔",
-   "title": "Niger: des fonds américains bientôt débloqués pour le projet de mine d'uranium de Dasa?",
-   "category": "infrastructure_security",
-   "source": "",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-20 14:07",
    "importance": "high",
    "severity": "medium"
   },
@@ -4608,6 +4620,141 @@
    "source_tier": "A",
    "source_role": "major_media",
    "time": "2026-09-27 11:15",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_8c5365977da43006": {
+   "fact_id": "EVT_8c5365977da43006",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "埃塞俄比亚民众庆祝梅斯克尔节并呼吁和平，北部战火重燃",
+   "category": "armed_conflict",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-09-27 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_f9b7cf2224ac8cce": {
+   "fact_id": "EVT_f9b7cf2224ac8cce",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "一名加纳裔男子在美国遭枪击身亡，家人举行最后告别",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-09-27 14:29",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_f104bce02b5528fa": {
+   "fact_id": "EVT_f104bce02b5528fa",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "尼日利亚基金会呼吁加强儿童癌症早期筛查",
+   "category": "other_security",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-09-27 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_19cbce9ccaeb82f0": {
+   "fact_id": "EVT_19cbce9ccaeb82f0",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "今年以来逾5.5万苏丹人逃往乍得",
+   "category": "border_security",
+   "source": "Tchadinfos",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-27 15:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_c144c514cec31c64": {
+   "fact_id": "EVT_c144c514cec31c64",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "南非约翰内斯堡和开普敦发生两起枪击事件，共27人死亡",
+   "category": "other_security",
+   "source": "Tchadinfos",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-27 10:30",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_4b23dea207fb3cd9": {
+   "fact_id": "EVT_4b23dea207fb3cd9",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "乍得农牧业：资源稀缺加剧农村地区紧张局势",
+   "category": "other_security",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-27 16:09",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_a2c207f4d7cb296e": {
+   "fact_id": "EVT_a2c207f4d7cb296e",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "乍得Bedjondo举办社区论坛，加强打击性别暴力并促进生殖健康",
+   "category": "other_security",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-27 15:24",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_c0737fda19552d46": {
+   "fact_id": "EVT_c0737fda19552d46",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "乍得“新日”党警告彭代桥年久失修",
+   "category": "other_security",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-27 12:54",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_f6cf13890631ad05": {
+   "fact_id": "EVT_f6cf13890631ad05",
+   "level": "verified_event",
+   "evidence_tier": "multi_source_verified",
+   "source_count": 2,
+   "country": "南非",
+   "title": "南非约翰内斯堡以东地区又发现一名女性遗体，10周内遇害女性升至11人",
+   "category": "civil_unrest",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-09-27 00:00",
    "importance": "high",
    "severity": "medium"
   }

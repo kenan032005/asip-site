@@ -1,0 +1,126 @@
+{
+ "label": "S19552d46",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "052a3921d93e643311ebd5faead87f6b9863897b2b3d9cbd16f40391645a2855",
+ "tokens": {
+  "input_tokens": 2424,
+  "output_tokens": 565,
+  "total_tokens": 2989
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"桥梁坍塌风险为“新日”党全国书记的警告，尚未获独立证实\", \"目前仅一个来源（Alwihda Info）报道，缺乏交叉验证\"]",
+    "after": "[\"桥梁坍塌风险为“新日”党全国书记的警告，尚未获独立证实\", \"目前仅一个来源（Alwihda Info）报道，缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得“新日”党警告彭代桥年久失修",
+   "summary_zh": "乍得“新日”党全国书记纳斯哈·吉马斯恩加尔在洛贡东区多巴举行党员集会，随后前往该市入口处的彭代桥查看。他警告称，这座建于殖民时期的桥梁严重老化，若不采取紧急措施可能坍塌。他呼吁最高当局尽快在彭代河上修建一座双车道桥梁，并称多巴作为对国家经济贡献显著的省会却被中央政府遗忘。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "洛贡东区",
+    "city": "多巴",
+    "site": "彭代桥",
+    "raw_text": "le pont de la Pendé, situé à l'entrée de la ville de Doba, Logone Oriental"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得“新日”党全国书记纳斯哈·吉马斯恩加尔在多巴举行党员集会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le secrétaire national du parti « Nouveau Jour », Nasra Djimasngar, a animé une rencontre d'échanges avec les militantes et militants de sa formation politique, venus des six départements du Logone Oriental."
+    },
+    {
+     "fact": "该党警告多巴入口处的彭代桥严重老化，若不采取紧急措施可能坍塌",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cet ouvrage, datant de l'époque coloniale, se trouve dans un état de dégradation avancé et menace de s'effondrer si des mesures urgentes ne sont pas prises, a-t-il mis en garde."
+    },
+    {
+     "fact": "吉马斯恩加尔呼吁最高当局尽快在彭代河上修建双车道桥梁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nasra Djimasngar a appelé les plus hautes autorités à intervenir rapidement pour construire un pont à double voie sur le fleuve Pendé."
+    },
+    {
+     "fact": "他称多巴作为对国家经济贡献显著的省会却被中央政府遗忘",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il a jugé inadmissible que Doba, chef-lieu d'une province qui contribue significativement à l'économie nationale, reste, selon ses termes, oubliée par l'État central."
+    }
+   ],
+   "uncertainties": [
+    "桥梁坍塌风险为“新日”党全国书记的警告，尚未获独立证实",
+    "目前仅一个来源（Alwihda Info）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得“新日”党警告彭代桥年久失修",
+   "summary_zh": "乍得“新日”党全国书记纳斯哈·吉马斯恩加尔在洛贡东区多巴举行党员集会，随后前往该市入口处的彭代桥查看。他警告称，这座建于殖民时期的桥梁严重老化，若不采取紧急措施可能坍塌。他呼吁最高当局尽快在彭代河上修建一座双车道桥梁，并称多巴作为对国家经济贡献显著的省会却被中央政府遗忘。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "洛贡东区",
+    "city": "多巴",
+    "site": "彭代桥",
+    "raw_text": "le pont de la Pendé, situé à l'entrée de la ville de Doba, Logone Oriental"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得“新日”党全国书记纳斯哈·吉马斯恩加尔在多巴举行党员集会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le secrétaire national du parti « Nouveau Jour », Nasra Djimasngar, a animé une rencontre d'échanges avec les militantes et militants de sa formation politique, venus des six départements du Logone Oriental."
+    },
+    {
+     "fact": "该党警告多巴入口处的彭代桥严重老化，若不采取紧急措施可能坍塌",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cet ouvrage, datant de l'époque coloniale, se trouve dans un état de dégradation avancé et menace de s'effondrer si des mesures urgentes ne sont pas prises, a-t-il mis en garde."
+    },
+    {
+     "fact": "吉马斯恩加尔呼吁最高当局尽快在彭代河上修建双车道桥梁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nasra Djimasngar a appelé les plus hautes autorités à intervenir rapidement pour construire un pont à double voie sur le fleuve Pendé."
+    },
+    {
+     "fact": "他称多巴作为对国家经济贡献显著的省会却被中央政府遗忘",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il a jugé inadmissible que Doba, chef-lieu d'une province qui contribue significativement à l'économie nationale, reste, selon ses termes, oubliée par l'État central."
+    }
+   ],
+   "uncertainties": [
+    "桥梁坍塌风险为“新日”党全国书记的警告，尚未获独立证实",
+    "目前仅一个来源（Alwihda Info）报道，缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_c0737fda19552d46",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
