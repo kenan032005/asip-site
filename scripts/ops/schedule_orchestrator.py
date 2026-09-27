@@ -615,6 +615,11 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
     # 此前只有站点构建阶段才会重建它，编排器里的 data/views/news_stream.json 长期停在
     # 陈旧快照（生产实测 generated=2026-09-23），导致每日研判与首页「24h 情报信号」恒为 0。
     # 构建器为确定性、无 AI 调用、实测约 1s。
+    # C8-3 STEP 7：按新的 54 国 + 多国 + 区域规则重处理近期 wrong_country 隔离。
+    # 只重置**可恢复** URL 的处理状态（不写 canonical），由随后的采集按新规则重新入库。
+    results["quarantine_recovery"] = {
+        "ok": _run_script(["scripts/ops/quarantine_recovery.py", "--apply"], emit, timeout=600),
+        "detail": "quarantine_recovery"}
     results["c1a_views"] = {
         "ok": _run_script(["tools/c1a/build_views.py"], emit, timeout=600),
         "detail": "c1a_views"}
