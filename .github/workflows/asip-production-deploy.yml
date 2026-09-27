@@ -116,6 +116,9 @@ jobs:
           # homepage_intelligence.json 不在产物中（线上 404 → 首页各板块空态）。
           mkdir -p data/views
           cp -rf state_src/data/views/. data/views/ 2>/dev/null || true
+          # C8-3：采集处理状态必须恢复（否则跨轮去重 / 隔离恢复 PENDING_RECOVERY 丢失）
+          mkdir -p logs/collector_cache
+          cp -rf state_src/logs/collector_cache/. logs/collector_cache/ 2>/dev/null || true
           # C7-6：当期日报/周报简报必须落到 report_index 引用的树路径，
           # 否则 INDEX_REFERENCED_REPORTS != PUBLISHED_REPORT_FILES → 构建校验 FAIL、部署被卡。
           # C7-6R4：canonical SOURCE 集合 = 树 data/reports/**（构建校验的比对基准）。
