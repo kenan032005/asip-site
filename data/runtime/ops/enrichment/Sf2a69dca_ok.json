@@ -1,0 +1,138 @@
+{
+ "label": "Sf2a69dca",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "cdb7414103f32a418c4b51502df74db88ea921a6c66542385a6d5f0349400951",
+ "tokens": {
+  "input_tokens": 2586,
+  "output_tokens": 462,
+  "total_tokens": 3048
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"警方称约翰内斯堡枪击动机可能为抢劫，但未排除非法采矿团伙之间的地盘争夺\", \"警方表示开普敦袭击可能是对上月一起事件的报复，该说法尚未证实\", \"目前仅一个来源（BBC News）报道，尚缺乏交叉验证\"]",
+    "after": "[\"警方称约翰内斯堡枪击动机可能为抢劫，但未排除非法采矿团伙之间的地盘争夺\", \"警方表示开普敦袭击可能是对上月一起事件的报复，该说法尚未证实\", \"目前仅一个来源（BBC News）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南非两起大规模枪击事件致27人死亡",
+   "summary_zh": "南非在数小时内发生两起大规模枪击事件，共造成27人死亡、26人受伤。约翰内斯堡附近一酒吧遭八名枪手袭击，造成17人死亡；开普敦附近一乡镇娱乐场所外另有10人遇害。警方尚未给出明确作案动机，且两案均未有人被捕。",
+   "event_type": "other_security",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": null,
+    "city": "约翰内斯堡",
+    "site": "酒吧",
+    "raw_text": "a bar close to Johannesburg"
+   },
+   "key_facts": [
+    {
+     "fact": "南非两起大规模枪击事件共造成27人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Twenty-seven people have been killed in two mass shootings hours apart in South Africa"
+    },
+    {
+     "fact": "约翰内斯堡附近一酒吧遭八名枪手袭击，17人死亡、15人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Seventeen people were killed when eight gunmen stormed a bar close to Johannesburg on Saturday evening, with 15 more injured."
+    },
+    {
+     "fact": "开普敦附近一乡镇娱乐场所外发生枪击，10人死亡、11人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "10 people were killed outside an entertainment venue in a township near Cape Town and a further 11 were injured."
+    },
+    {
+     "fact": "警方尚未给出两起袭击的明确动机",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Police have not given a definitive motive for either of the latest attacks."
+    },
+    {
+     "fact": "截至周日上午两起案件均未有人被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "No arrests had been made in either case on Sunday morning."
+    }
+   ],
+   "uncertainties": [
+    "警方称约翰内斯堡枪击动机可能为抢劫，但未排除非法采矿团伙之间的地盘争夺",
+    "警方表示开普敦袭击可能是对上月一起事件的报复，该说法尚未证实",
+    "目前仅一个来源（BBC News）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南非两起大规模枪击事件致27人死亡",
+   "summary_zh": "南非在数小时内发生两起大规模枪击事件，共造成27人死亡、26人受伤。约翰内斯堡附近一酒吧遭八名枪手袭击，造成17人死亡；开普敦附近一乡镇娱乐场所外另有10人遇害。警方尚未给出明确作案动机，且两案均未有人被捕。",
+   "event_type": "other_security",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": null,
+    "city": "约翰内斯堡",
+    "site": "酒吧",
+    "raw_text": "a bar close to Johannesburg"
+   },
+   "key_facts": [
+    {
+     "fact": "南非两起大规模枪击事件共造成27人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Twenty-seven people have been killed in two mass shootings hours apart in South Africa"
+    },
+    {
+     "fact": "约翰内斯堡附近一酒吧遭八名枪手袭击，17人死亡、15人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Seventeen people were killed when eight gunmen stormed a bar close to Johannesburg on Saturday evening, with 15 more injured."
+    },
+    {
+     "fact": "开普敦附近一乡镇娱乐场所外发生枪击，10人死亡、11人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "10 people were killed outside an entertainment venue in a township near Cape Town and a further 11 were injured."
+    },
+    {
+     "fact": "警方尚未给出两起袭击的明确动机",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Police have not given a definitive motive for either of the latest attacks."
+    },
+    {
+     "fact": "截至周日上午两起案件均未有人被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "No arrests had been made in either case on Sunday morning."
+    }
+   ],
+   "uncertainties": [
+    "警方称约翰内斯堡枪击动机可能为抢劫，但未排除非法采矿团伙之间的地盘争夺",
+    "警方表示开普敦袭击可能是对上月一起事件的报复，该说法尚未证实",
+    "目前仅一个来源（BBC News）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_2bce2b27f2a69dca",
+ "disease_event_id": null,
+ "country_code": "ZA"
+}
