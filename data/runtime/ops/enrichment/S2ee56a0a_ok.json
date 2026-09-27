@@ -1,0 +1,121 @@
+{
+ "label": "S2ee56a0a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "aa0af15a06028655beed05f40b3e8441d929cda490f4e1fadc0e4ed054ba2b10",
+ "tokens": {
+  "input_tokens": 2585,
+  "output_tokens": 527,
+  "total_tokens": 3112
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔津德尔地区378名考生参加警察督察与警官职业资格考试",
+   "summary_zh": "2026年9月26日，尼日尔津德尔地区在津德尔阿斯基亚·穆罕默德师范学校正式启动警察督察与警官职业资格考试，共有378名考生在9个考场参加。津德尔地区秘书长伊德里萨·阿布出席启动仪式，并强调安全是发展的基础。此次考试中，警官考试涵盖津德尔、马拉迪和迪法三个地区，督察考试覆盖尼日尔所有地区。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "津德尔",
+    "city": "津德尔",
+    "site": "阿斯基亚·穆罕默德师范学校",
+    "raw_text": "Zinder, Ecole Normale Askia Mohamed de Zinder"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔津德尔地区启动警察督察与警官职业资格考试",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Secrétaire Général de la région de Zinder, M. Idrissa Abou a procédé ce Samedi 26 Septembre 2026 à l'Ecole Normale Askia Mohamed de Zinder, au lancement officiel des épreuves du Concours professionnels des inspecteurs et des officiers de police"
+    },
+    {
+     "fact": "津德尔地区共有378名考生在9个考场参加考试",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils sont au total 378 candidats au titre de la région de Zinder, répartis dans 9 salles à se présenter à ce concours pour l'année 2026"
+    },
+    {
+     "fact": "警官考试涵盖津德尔、马拉迪和迪法三个地区，督察考试覆盖尼日尔所有地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pour les officiers de police, ce concours a regroupé trois régions, notamment Zinder, Maradi et Diffa, et pour les inspecteurs de police c'est dans toutes les régions du Niger"
+    },
+    {
+     "fact": "津德尔地区秘书长强调安全是发展的基础",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Comme vous le savez, la sécurité est le socle de tout développement, sans sécurité, on ne peut avoir ni éducation, ni investissement et ni développement social"
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔津德尔地区378名考生参加警察督察与警官职业资格考试",
+   "summary_zh": "2026年9月26日，尼日尔津德尔地区在津德尔阿斯基亚·穆罕默德师范学校正式启动警察督察与警官职业资格考试，共有378名考生在9个考场参加。津德尔地区秘书长伊德里萨·阿布出席启动仪式，并强调安全是发展的基础。此次考试中，警官考试涵盖津德尔、马拉迪和迪法三个地区，督察考试覆盖尼日尔所有地区。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "津德尔",
+    "city": "津德尔",
+    "site": "阿斯基亚·穆罕默德师范学校",
+    "raw_text": "Zinder, Ecole Normale Askia Mohamed de Zinder"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔津德尔地区启动警察督察与警官职业资格考试",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Secrétaire Général de la région de Zinder, M. Idrissa Abou a procédé ce Samedi 26 Septembre 2026 à l'Ecole Normale Askia Mohamed de Zinder, au lancement officiel des épreuves du Concours professionnels des inspecteurs et des officiers de police"
+    },
+    {
+     "fact": "津德尔地区共有378名考生在9个考场参加考试",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils sont au total 378 candidats au titre de la région de Zinder, répartis dans 9 salles à se présenter à ce concours pour l'année 2026"
+    },
+    {
+     "fact": "警官考试涵盖津德尔、马拉迪和迪法三个地区，督察考试覆盖尼日尔所有地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pour les officiers de police, ce concours a regroupé trois régions, notamment Zinder, Maradi et Diffa, et pour les inspecteurs de police c'est dans toutes les régions du Niger"
+    },
+    {
+     "fact": "津德尔地区秘书长强调安全是发展的基础",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Comme vous le savez, la sécurité est le socle de tout développement, sans sécurité, on ne peut avoir ni éducation, ni investissement et ni développement social"
+    }
+   ],
+   "uncertainties": [
+    "据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_c4eeaec22ee56a0a",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
