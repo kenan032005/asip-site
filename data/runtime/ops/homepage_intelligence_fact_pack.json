@@ -1,24 +1,26 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-09-27T20:06:55+08:00",
+ "generated_at": "2026-09-27T21:27:18+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
   "signals_24h": 42,
-  "signals_7d": 113,
-  "verified_events_24h": 44,
-  "verified_events_7d": 117,
+  "signals_7d": 115,
+  "verified_events_24h": 59,
+  "verified_events_7d": 134,
   "multi_source_verified_events_7d": 3,
-  "countries_with_activity_24h": 5,
+  "countries_with_activity_24h": 7,
   "total_countries_monitored": 22
  },
  "countries_24h": [
   "乍得",
   "刚果（金）",
   "加纳",
+  "南苏丹",
   "南非",
+  "埃塞俄比亚",
   "尼日尔"
  ],
  "countries_7d": [
@@ -49,7 +51,7 @@
   },
   {
    "value": "南苏丹",
-   "count": 3
+   "count": 5
   },
   {
    "value": "埃塞俄比亚",
@@ -83,7 +85,7 @@
   },
   {
    "value": "武装冲突",
-   "count": 11
+   "count": 12
   },
   {
    "value": "基础设施安全",
@@ -108,24 +110,20 @@
   {
    "value": "公共卫生",
    "count": 1
-  },
-  {
-   "value": "军事行动",
-   "count": 1
   }
  ],
  "source_tier_distribution_7d": [
   {
    "value": "C",
-   "count": 157
+   "count": 161
   },
   {
    "value": "B",
-   "count": 66
+   "count": 80
   },
   {
    "value": "A",
-   "count": 7
+   "count": 8
   }
  ],
  "top_verified_events": [
@@ -249,6 +247,36 @@
    "source_role": "local_signal",
    "time": "2026-09-25 00:30",
    "importance": "medium",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:2fea39670c9b48e1",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "Rumbek North: Two brothers shoot each other dead in goat dispute",
+   "category": "other_security",
+   "source": "Radio Tamazuj",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-27 18:27",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:f777d524b68d1adc",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "Upper Nile University set to reopen college in Malakal",
+   "category": "armed_conflict",
+   "source": "Radio Tamazuj",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-27 17:58",
+   "importance": "low",
    "why_it_matters": ""
   },
   {
@@ -550,36 +578,6 @@
    "time": "2026-09-27 05:00",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:c1be93e872daa4e1",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "加纳",
-   "title": "律师警告：加纳毒品走私案或致合法出口商在海外面临更严格检查",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 05:00",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:218de655a79fdc9a",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "加纳",
-   "title": "加纳阿哈福地区利益相关方要求打击外国人主导的非法采矿",
-   "category": "infrastructure_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 03:24",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -658,16 +656,46 @@
  ],
  "existing_assessment": {
   "status": "ai",
-  "overall_assessment": "已核实事件方面，乍得湖地区安全形势突出：恩古布阿附近发生袭击致11名渔民死亡，军方称击毙9名袭击者；提贝斯提省图尔库矿区遭枪击致1死2伤；武装部队部长连续赴湖区视察，政府新设混合解除武装协调机制并逮捕涉中非阿姆达福克袭击嫌疑人。苏丹危机外溢持续，联合国称年初以来逾5.5万苏丹难民抵乍得，乍得在联合国重申中立并警告边境入侵。南苏丹琼莱州杜克县族群冲突致至少13人死亡。埃塞俄比亚北部提格雷战事重燃，联合国人权高专呼吁紧急缓和。加纳方面，南非连环杀害案发现第10名女性遗体，法国使馆为加纳警方反恐部门提供培训。情报信号均为单源、尚待核实：南非两处城镇枪击致至少27人死亡、伊朗外长称唯有谈判可结束冲突、加纳阿克拉部委区约30个消防栓仅5个可用等，需进一步交叉验证。",
+  "overall_assessment": "已核实事件层面，乍得为本周绝对焦点：乍得湖Ngouboua附近发生袭击致11名渔民死亡、军方称击毙9名袭击者；提贝斯提图尔库矿区枪击致1名矿业企业家身亡；政府设立混合解除武装协调机制并逮捕涉中非Am Dafok袭击嫌犯；联合国称年初以来逾5.5万苏丹难民抵乍，乍得在联合国重申对苏丹冲突中立并为其退出国际刑事法院辩护。南苏丹琼莱州杜克县社区冲突致至少13人死亡。埃塞俄比亚北部战事升级，联合国人权高专呼吁紧急缓和。加纳方面，南非连环杀害案发现第10名女性遗体、UPSA成绩篡改涉178名学生。情报信号层面（均为单源消息，尚待核实）：南苏丹Rumbek North因山羊纠纷兄弟互射身亡、加纳阿克拉部委区约30个消防栓仅5个可用、马哈马称2026年底前签署1200兆瓦燃气发电协议。",
   "risk_direction": "worsening",
   "confidence": "medium",
-  "generated_time": "2026-09-27T20:06:49+08:00",
+  "generated_time": "2026-09-27T21:27:12+08:00",
   "based_on": "过去24小时/7日公开信息",
   "model": "",
   "date": "20260927"
  },
- "fact_count": 230,
+ "fact_count": 249,
  "facts": {
+  "news:2fea39670c9b48e1": {
+   "fact_id": "news:2fea39670c9b48e1",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "Rumbek North: Two brothers shoot each other dead in goat dispute",
+   "category": "other_security",
+   "source": "Radio Tamazuj",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-27 18:27",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:f777d524b68d1adc": {
+   "fact_id": "news:f777d524b68d1adc",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "Upper Nile University set to reopen college in Malakal",
+   "category": "armed_conflict",
+   "source": "Radio Tamazuj",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-27 17:58",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:f6d8e89ebbd3ab36": {
    "fact_id": "news:f6d8e89ebbd3ab36",
    "level": "news_signal",
@@ -4115,6 +4143,261 @@
    "source_tier": "B",
    "source_role": "aggregator_discovery",
    "time": "2026-09-27 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_03eac7c113509968": {
+   "fact_id": "EVT_03eac7c113509968",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "委内瑞拉在后马杜罗会谈后释放39名政治犯",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-09-27 12:21",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_abfa18a3a1889cdf": {
+   "fact_id": "EVT_abfa18a3a1889cdf",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "欧盟释放逾7.1亿欧元全球人道主义援助",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-09-27 12:18",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_6b2c542d337c3fff": {
+   "fact_id": "EVT_6b2c542d337c3fff",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "南非警方调查连环杀人案，发现第十具女性遗体",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-09-27 12:09",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_6797d4a9f7b98f75": {
+   "fact_id": "EVT_6797d4a9f7b98f75",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "第三届Republic Bank-JoyNews住房博览会诊所活动进入最后一天",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-09-27 12:03",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_00311c004bf0c477": {
+   "fact_id": "EVT_00311c004bf0c477",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "美国东北部遭遇东北风暴，纽约和新泽西宣布进入紧急状态",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-09-27 11:52",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_b80710ea089bb0b8": {
+   "fact_id": "EVT_b80710ea089bb0b8",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "非洲首富出资参与埃塞俄比亚与吉布提之间6.6亿美元燃料管道项目",
+   "category": "infrastructure_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-09-27 11:19",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_2aeeaa6d3efa69f0": {
+   "fact_id": "EVT_2aeeaa6d3efa69f0",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "审查报告称查理·柯克遇害的犹他州校园存在安全漏洞",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-09-27 11:14",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_41e6fb76e25ec379": {
+   "fact_id": "EVT_41e6fb76e25ec379",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "白宫禁止CNN随特朗普乘坐空军一号出行",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-09-27 11:09",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_ce615c04ef78c74a": {
+   "fact_id": "EVT_ce615c04ef78c74a",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "教皇在巴黎大型露天弥撒上赞扬年轻人的“活力与奉献”",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-09-27 11:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_9e483333f6b7292b": {
+   "fact_id": "EVT_9e483333f6b7292b",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "加纳西部北部地区Nyankamam居民获免费医疗筛查服务",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-09-27 10:55",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_b1f5fe304049e000": {
+   "fact_id": "EVT_b1f5fe304049e000",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "曼谷道路被淹，泰国宣布洪水灾害",
+   "category": "natural_disaster",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-09-27 10:54",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_71c8be8594f1baa4": {
+   "fact_id": "EVT_71c8be8594f1baa4",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "蒙特利尔附近发生直升机坠毁事故，四人死亡",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-09-27 10:48",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_8c2f1eb8550c315b": {
+   "fact_id": "EVT_8c2f1eb8550c315b",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳与波音探讨建立区域飞机维修中心",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-09-27 10:54",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_f0990876ad8714d1": {
+   "fact_id": "EVT_f0990876ad8714d1",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "马哈马在纽约与加纳侨民座谈，讨论加纳经济复苏",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-09-27 10:08",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_304a9c83a6a6071f": {
+   "fact_id": "EVT_304a9c83a6a6071f",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "南苏丹伦拜克北部：两兄弟因山羊纠纷互相开枪身亡",
+   "category": "other_security",
+   "source": "Radio Tamazuj",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-27 10:27",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_e3d74b3f42787da2": {
+   "fact_id": "EVT_e3d74b3f42787da2",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "上尼罗河大学将在马拉卡勒恢复学院办学",
+   "category": "armed_conflict",
+   "source": "Radio Tamazuj",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-27 09:58",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_415cbf75463749f0": {
+   "fact_id": "EVT_415cbf75463749f0",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "南非",
+   "title": "南非约翰内斯堡与开普敦发生两起枪击事件 共致27人死亡",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-09-27 11:15",
    "importance": "high",
    "severity": "medium"
   }

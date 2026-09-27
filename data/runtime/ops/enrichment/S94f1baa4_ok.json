@@ -1,0 +1,95 @@
+{
+ "label": "S94f1baa4",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a9085799d663f51f5611f89aa0ad480a16ab00f8e99f98651137afac5b47aecd",
+ "tokens": {
+  "input_tokens": 2112,
+  "output_tokens": 272,
+  "total_tokens": 2384
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "蒙特利尔附近发生直升机坠毁事故，四人死亡",
+   "summary_zh": "加拿大魁北克省警方告诉BBC，一架直升机在距蒙特利尔50公里（31英里）的一座小镇坠毁，造成四人死亡。该事件目前为单一来源报道。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "CAN",
+   "location": {
+    "country_iso3": "CAN",
+    "admin1": "魁北克省",
+    "city": "蒙特利尔",
+    "site": null,
+    "raw_text": "a small town 50km (31 miles) from Montreal, Quebec"
+   },
+   "key_facts": [
+    {
+     "fact": "一架直升机在距蒙特利尔50公里的小镇坠毁，造成四人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Four people have died after a helicopter crashed in a small town 50km (31 miles) from Montreal, Quebec's provincial police have told the BBC."
+    },
+    {
+     "fact": "消息来源为魁北克省警方，通过BBC发布",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quebec's provincial police have told the BBC"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源报道，尚缺乏交叉验证",
+    "坠毁具体原因尚未公布"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "蒙特利尔附近发生直升机坠毁事故，四人死亡",
+   "summary_zh": "加拿大魁北克省警方告诉BBC，一架直升机在距蒙特利尔50公里（31英里）的一座小镇坠毁，造成四人死亡。该事件目前为单一来源报道。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "CAN",
+   "location": {
+    "country_iso3": "CAN",
+    "admin1": "魁北克省",
+    "city": "蒙特利尔",
+    "site": null,
+    "raw_text": "a small town 50km (31 miles) from Montreal, Quebec"
+   },
+   "key_facts": [
+    {
+     "fact": "一架直升机在距蒙特利尔50公里的小镇坠毁，造成四人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Four people have died after a helicopter crashed in a small town 50km (31 miles) from Montreal, Quebec's provincial police have told the BBC."
+    },
+    {
+     "fact": "消息来源为魁北克省警方，通过BBC发布",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quebec's provincial police have told the BBC"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源报道，尚缺乏交叉验证",
+    "坠毁具体原因尚未公布"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_71c8be8594f1baa4",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

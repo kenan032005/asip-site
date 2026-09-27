@@ -1,0 +1,103 @@
+{
+ "label": "S4bf0c477",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0906c1cf15282dfd3ba2218328dbfd934c7d1b42ccd12d90923d69dd550040e0",
+ "tokens": {
+  "input_tokens": 2130,
+  "output_tokens": 300,
+  "total_tokens": 2430
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "美国东北部遭遇东北风暴，纽约和新泽西宣布进入紧急状态",
+   "summary_zh": "一场强烈的东北风暴袭击美国东北部，带来沿海洪水、停电和交通混乱，并导致体育场活动取消。纽约州和新泽西州已宣布进入紧急状态。据单一来源报道，数千万人处于风暴影响范围内。",
+   "event_type": "natural_disaster",
+   "country_iso3": "USA",
+   "location": {
+    "country_iso3": "USA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "New York and New Jersey, north-eastern US"
+   },
+   "key_facts": [
+    {
+     "fact": "纽约和新泽西因东北风暴宣布进入紧急状态",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Nor’easter brings flooding as New York and New Jersey declare emergency"
+    },
+    {
+     "fact": "美国东北部数千万人处于强风暴影响范围内",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Tens of millions of people across the north-eastern US are in the path of a powerful storm"
+    },
+    {
+     "fact": "风暴带来沿海洪水、停电、交通混乱并导致体育场活动取消",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "bringing coastal flooding, power cuts, travel chaos and cancelled stadium events"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "美国东北部遭遇东北风暴，纽约和新泽西宣布进入紧急状态",
+   "summary_zh": "一场强烈的东北风暴袭击美国东北部，带来沿海洪水、停电和交通混乱，并导致体育场活动取消。纽约州和新泽西州已宣布进入紧急状态。据单一来源报道，数千万人处于风暴影响范围内。",
+   "event_type": "natural_disaster",
+   "country_iso3": "USA",
+   "location": {
+    "country_iso3": "USA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "New York and New Jersey, north-eastern US"
+   },
+   "key_facts": [
+    {
+     "fact": "纽约和新泽西因东北风暴宣布进入紧急状态",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Nor’easter brings flooding as New York and New Jersey declare emergency"
+    },
+    {
+     "fact": "美国东北部数千万人处于强风暴影响范围内",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Tens of millions of people across the north-eastern US are in the path of a powerful storm"
+    },
+    {
+     "fact": "风暴带来沿海洪水、停电、交通混乱并导致体育场活动取消",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "bringing coastal flooding, power cuts, travel chaos and cancelled stadium events"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_00311c004bf0c477",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

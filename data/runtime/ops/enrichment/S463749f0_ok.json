@@ -1,0 +1,137 @@
+{
+ "label": "S463749f0",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "97d6c93813932ee4bf5162862aa4224fb31b438053cf3dd8e1c74dd6847d5234",
+ "tokens": {
+  "input_tokens": 2866,
+  "output_tokens": 707,
+  "total_tokens": 3573
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "南非约翰内斯堡与开普敦发生两起枪击事件 共致27人死亡",
+   "summary_zh": "南非本周末发生两起枪击事件，共造成27人死亡，其中约翰内斯堡17人、开普敦10人。约翰内斯堡西区一处社区酒吧遭持AK-47和手枪的武装人员袭击，造成17死15伤，警方已展开大规模搜捕，追缉8名嫌疑人。开普敦一处乡镇夜店另有10人被枪杀、11人受伤，两起案件均尚无嫌疑人被捕。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": null,
+    "city": "约翰内斯堡、开普敦",
+    "site": "West Rand社区酒吧、开普敦乡镇夜店",
+    "raw_text": "région minière de West Rand, à l'ouest de Johannesburg; établissement de nuit d'un township du Cap"
+   },
+   "key_facts": [
+    {
+     "fact": "南非本周末两起枪击事件共造成27人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Deux fusillades ont endeuillé l'Afrique du Sud ce week-end, tuant 27 personnes – 17 à Johannesburg et 10 au Cap – au total."
+    },
+    {
+     "fact": "约翰内斯堡西区West Rand一处社区酒吧遭武装人员袭击，造成17人死亡、15人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Samedi soir vers 21h30, dans la région minière de West Rand, à l'ouest de Johannesburg, des hommes armés d'AK-47 et de pistolets s'approchent d'un petit bar de quartier et ouvrent le feu... Le bilan est très lourd : 17 morts et 15 blessés."
+    },
+    {
+     "fact": "警方称已展开大规模搜捕，追缉8名嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les autorités sud-africaines annoncent avoir lancé une vaste chasse à l'homme pour retrouver les huit suspects, qui ont pris la fuite immédiatement à bord de deux véhicules non identifiés."
+    },
+    {
+     "fact": "开普敦一处乡镇夜店发生枪击，10人死亡、11人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La seconde attaque a eu lieu dans la nuit de samedi à dimanche, au Cap, dans un établissement de nuit d'un township du Cap... Dix personnes ont été exécutées et 11 autres blessées"
+    },
+    {
+     "fact": "警方称两起案件均无嫌疑人被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucun suspect n'a été arrêté dans l'une ou l'autre affaire, a indiqué la police."
+    },
+    {
+     "fact": "警方称约翰内斯堡枪击案的动机目前仍不明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le motif de la fusillade reste inconnu"
+    }
+   ],
+   "uncertainties": [
+    "约翰内斯堡枪击案的作案动机尚未查明",
+    "两起案件均无嫌疑人被捕，作案者身份未获确认",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "南非约翰内斯堡与开普敦发生两起枪击事件 共致27人死亡",
+   "summary_zh": "南非本周末发生两起枪击事件，共造成27人死亡，其中约翰内斯堡17人、开普敦10人。约翰内斯堡西区一处社区酒吧遭持AK-47和手枪的武装人员袭击，造成17死15伤，警方已展开大规模搜捕，追缉8名嫌疑人。开普敦一处乡镇夜店另有10人被枪杀、11人受伤，两起案件均尚无嫌疑人被捕。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": null,
+    "city": "约翰内斯堡、开普敦",
+    "site": "West Rand社区酒吧、开普敦乡镇夜店",
+    "raw_text": "région minière de West Rand, à l'ouest de Johannesburg; établissement de nuit d'un township du Cap"
+   },
+   "key_facts": [
+    {
+     "fact": "南非本周末两起枪击事件共造成27人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Deux fusillades ont endeuillé l'Afrique du Sud ce week-end, tuant 27 personnes – 17 à Johannesburg et 10 au Cap – au total."
+    },
+    {
+     "fact": "约翰内斯堡西区West Rand一处社区酒吧遭武装人员袭击，造成17人死亡、15人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Samedi soir vers 21h30, dans la région minière de West Rand, à l'ouest de Johannesburg, des hommes armés d'AK-47 et de pistolets s'approchent d'un petit bar de quartier et ouvrent le feu... Le bilan est très lourd : 17 morts et 15 blessés."
+    },
+    {
+     "fact": "警方称已展开大规模搜捕，追缉8名嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les autorités sud-africaines annoncent avoir lancé une vaste chasse à l'homme pour retrouver les huit suspects, qui ont pris la fuite immédiatement à bord de deux véhicules non identifiés."
+    },
+    {
+     "fact": "开普敦一处乡镇夜店发生枪击，10人死亡、11人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La seconde attaque a eu lieu dans la nuit de samedi à dimanche, au Cap, dans un établissement de nuit d'un township du Cap... Dix personnes ont été exécutées et 11 autres blessées"
+    },
+    {
+     "fact": "警方称两起案件均无嫌疑人被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucun suspect n'a été arrêté dans l'une ou l'autre affaire, a indiqué la police."
+    },
+    {
+     "fact": "警方称约翰内斯堡枪击案的动机目前仍不明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le motif de la fusillade reste inconnu"
+    }
+   ],
+   "uncertainties": [
+    "约翰内斯堡枪击案的作案动机尚未查明",
+    "两起案件均无嫌疑人被捕，作案者身份未获确认",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_415cbf75463749f0",
+ "disease_event_id": null,
+ "country_code": "ZA"
+}

@@ -1,0 +1,103 @@
+{
+ "label": "S4049e000",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "bb41890201d4d4c2244d3e091bf44c4c0b7b023b758d87b9043b7589f87cbd71",
+ "tokens": {
+  "input_tokens": 2110,
+  "output_tokens": 253,
+  "total_tokens": 2363
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "曼谷道路被淹，泰国宣布洪水灾害",
+   "summary_zh": "泰国首都曼谷自周四以来降雨量超过300毫米（12英寸），导致道路被淹，当地已宣布洪水灾害紧急状态。该消息目前为单一来源报道。",
+   "event_type": "natural_disaster",
+   "country_iso3": "THA",
+   "location": {
+    "country_iso3": "THA",
+    "admin1": null,
+    "city": "曼谷",
+    "site": null,
+    "raw_text": "Bangkok"
+   },
+   "key_facts": [
+    {
+     "fact": "曼谷自周四以来降雨量超过300毫米（12英寸）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "more than 300mm (12in) of rain fell since Thursday"
+    },
+    {
+     "fact": "曼谷宣布洪水灾害紧急状态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A flood emergency disaster has been declared across Bangkok"
+    },
+    {
+     "fact": "曼谷道路被淹没",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "leavingroads in the Thai capital submerged"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "曼谷道路被淹，泰国宣布洪水灾害",
+   "summary_zh": "泰国首都曼谷自周四以来降雨量超过300毫米（12英寸），导致道路被淹，当地已宣布洪水灾害紧急状态。该消息目前为单一来源报道。",
+   "event_type": "natural_disaster",
+   "country_iso3": "THA",
+   "location": {
+    "country_iso3": "THA",
+    "admin1": null,
+    "city": "曼谷",
+    "site": null,
+    "raw_text": "Bangkok"
+   },
+   "key_facts": [
+    {
+     "fact": "曼谷自周四以来降雨量超过300毫米（12英寸）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "more than 300mm (12in) of rain fell since Thursday"
+    },
+    {
+     "fact": "曼谷宣布洪水灾害紧急状态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A flood emergency disaster has been declared across Bangkok"
+    },
+    {
+     "fact": "曼谷道路被淹没",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "leavingroads in the Thai capital submerged"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_b1f5fe304049e000",
+ "disease_event_id": null,
+ "country_code": "ET"
+}
