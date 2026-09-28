@@ -1,0 +1,140 @@
+{
+ "label": "Sf60be7eb",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d80eca73db728fd8152a0111fba10eee5485fc214edd2036adfc2870a66d4694",
+ "tokens": {
+  "input_tokens": 3066,
+  "output_tokens": 603,
+  "total_tokens": 3669
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"伤亡人数尚不明确\", \"军方控制科博和瓦贾的说法来自军方消息来源，尚未获得独立证实\", \"厄立特里亚被指控提供后勤支持一事，厄方予以否认，说法存在冲突\", \"9月22日无人机袭击造成的伤亡人数仍然未知\"]",
+    "after": "[\"伤亡人数尚不明确\", \"军方控制科博和瓦贾的说法来自军方消息来源，尚未获得独立证实\", \"厄立特里亚被指控提供后勤支持一事，厄方予以否认，说法存在冲突\", \"9月22日无人机袭击造成的伤亡人数仍然未知\", \"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "埃塞俄比亚：联邦军队加强北部反攻，提格雷州公共电视台遭无人机袭击",
+   "summary_zh": "埃塞俄比亚北部冲突重启近一周后，联邦军队在多个战线展开反攻。9月27日，一架无人机袭击了提格雷州首府默克莱的提格雷电视台大楼，暂无人员伤亡报告。联邦军队与提格雷武装在提格雷南部阿拉马塔地区持续激战，军方据称已控制科博和瓦贾等地。埃塞俄比亚军方指控厄立特里亚向提格雷武装提供后勤支持，厄方对此予以否认。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷州",
+    "city": "默克莱",
+    "site": "提格雷电视台大楼",
+    "raw_text": "Mekelle, capitale du Tigré, région du nord de l'Éthiopie"
+   },
+   "key_facts": [
+    {
+     "fact": "联邦军队在北部多个战线加强反攻",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Près d'une semaine après la reprise du conflit dans le nord de l'Éthiopie, l'armée mène une contre-offensive sur plusieurs fronts."
+    },
+    {
+     "fact": "无人机袭击了默克莱的提格雷电视台大楼，暂无人员伤亡报告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dimanche matin à 9h, un drone a frappé l'immeuble de Tigrai TV à Mekelle... Aucun blessé n'est pour l'instant recensé"
+    },
+    {
+     "fact": "联邦军队与提格雷武装在提格雷南部阿拉马塔地区持续激战",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis deux jours, les affrontements sont particulièrement intenses entre l'armée et les forces tigréennes dans le sud du Tigré."
+    },
+    {
+     "fact": "军方据称已控制科博和瓦贾等地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D'après des sources militaires, l'armée contrôle désormais les localités de Kobo et Waja"
+    },
+    {
+     "fact": "埃塞俄比亚军方指控厄立特里亚向提格雷武装提供后勤支持，厄方否认",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le maréchal accuse l'Érythrée de leur apporter un soutien logistique... Des accusations qu'Asmara a toujours réfutées."
+    }
+   ],
+   "uncertainties": [
+    "伤亡人数尚不明确",
+    "军方控制科博和瓦贾的说法来自军方消息来源，尚未获得独立证实",
+    "厄立特里亚被指控提供后勤支持一事，厄方予以否认，说法存在冲突",
+    "9月22日无人机袭击造成的伤亡人数仍然未知"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "埃塞俄比亚：联邦军队加强北部反攻，提格雷州公共电视台遭无人机袭击",
+   "summary_zh": "埃塞俄比亚北部冲突重启近一周后，联邦军队在多个战线展开反攻。9月27日，一架无人机袭击了提格雷州首府默克莱的提格雷电视台大楼，暂无人员伤亡报告。联邦军队与提格雷武装在提格雷南部阿拉马塔地区持续激战，军方据称已控制科博和瓦贾等地。埃塞俄比亚军方指控厄立特里亚向提格雷武装提供后勤支持，厄方对此予以否认。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷州",
+    "city": "默克莱",
+    "site": "提格雷电视台大楼",
+    "raw_text": "Mekelle, capitale du Tigré, région du nord de l'Éthiopie"
+   },
+   "key_facts": [
+    {
+     "fact": "联邦军队在北部多个战线加强反攻",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Près d'une semaine après la reprise du conflit dans le nord de l'Éthiopie, l'armée mène une contre-offensive sur plusieurs fronts."
+    },
+    {
+     "fact": "无人机袭击了默克莱的提格雷电视台大楼，暂无人员伤亡报告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dimanche matin à 9h, un drone a frappé l'immeuble de Tigrai TV à Mekelle... Aucun blessé n'est pour l'instant recensé"
+    },
+    {
+     "fact": "联邦军队与提格雷武装在提格雷南部阿拉马塔地区持续激战",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis deux jours, les affrontements sont particulièrement intenses entre l'armée et les forces tigréennes dans le sud du Tigré."
+    },
+    {
+     "fact": "军方据称已控制科博和瓦贾等地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D'après des sources militaires, l'armée contrôle désormais les localités de Kobo et Waja"
+    },
+    {
+     "fact": "埃塞俄比亚军方指控厄立特里亚向提格雷武装提供后勤支持，厄方否认",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le maréchal accuse l'Érythrée de leur apporter un soutien logistique... Des accusations qu'Asmara a toujours réfutées."
+    }
+   ],
+   "uncertainties": [
+    "伤亡人数尚不明确",
+    "军方控制科博和瓦贾的说法来自军方消息来源，尚未获得独立证实",
+    "厄立特里亚被指控提供后勤支持一事，厄方予以否认，说法存在冲突",
+    "9月22日无人机袭击造成的伤亡人数仍然未知",
+    "据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_38ea1c84f60be7eb",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

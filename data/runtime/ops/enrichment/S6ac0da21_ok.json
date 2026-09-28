@@ -1,0 +1,115 @@
+{
+ "label": "S6ac0da21",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "83aa4c59c2f6fcff7a79ddca6ef66af0622380313e79e3dfdb46966faf982c69",
+ "tokens": {
+  "input_tokens": 2302,
+  "output_tokens": 490,
+  "total_tokens": 2792
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得Baga-Sola：红十字会加强霍乱防控宣传",
+   "summary_zh": "面对Baga-Sola卫生区（湖省）的霍乱疫情及其向邻近地区扩散的趋势，Kaya红十字会地区委员会加强了对民众的防控宣传。2026年9月26日星期六，志愿者在Baga-Sola每周集市开展活动，提醒民众注意基本预防措施。此前报道称，截至8月16日乍得累计报告484例霍乱病例、21例死亡。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "湖省",
+    "city": "Baga-Sola",
+    "site": "每周集市",
+    "raw_text": "district sanitaire de Baga-Sola (province du Lac)"
+   },
+   "key_facts": [
+    {
+     "fact": "Baga-Sola卫生区（湖省）出现霍乱疫情，并向邻近地区扩散",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Face à la situation épidémiologique du choléra dans le district sanitaire de Baga-Sola (province du Lac) et à son évolution dans les districts voisins"
+    },
+    {
+     "fact": "Kaya红十字会地区委员会加强了对民众的霍乱防控宣传",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le comité départemental de la Croix-Rouge de Kaya renforce la sensibilisation auprès des populations"
+    },
+    {
+     "fact": "2026年9月26日志愿者在Baga-Sola每周集市开展宣传活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce samedi 26 septembre 2026, les volontaires se sont mobilisés au marché hebdomadaire de Baga-Sola"
+    },
+    {
+     "fact": "此前报道称截至8月16日乍得累计报告484例霍乱病例、21例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Choléra au Tchad : 484 cas et 21 décès enregistrés au 16 août"
+    }
+   ],
+   "uncertainties": [
+    "疫情数据（484例病例、21例死亡）为截至8月16日的既往报道数据，非当前最新统计",
+    "该事件目前仅有一个来源（Tchadinfos），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得Baga-Sola：红十字会加强霍乱防控宣传",
+   "summary_zh": "面对Baga-Sola卫生区（湖省）的霍乱疫情及其向邻近地区扩散的趋势，Kaya红十字会地区委员会加强了对民众的防控宣传。2026年9月26日星期六，志愿者在Baga-Sola每周集市开展活动，提醒民众注意基本预防措施。此前报道称，截至8月16日乍得累计报告484例霍乱病例、21例死亡。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "湖省",
+    "city": "Baga-Sola",
+    "site": "每周集市",
+    "raw_text": "district sanitaire de Baga-Sola (province du Lac)"
+   },
+   "key_facts": [
+    {
+     "fact": "Baga-Sola卫生区（湖省）出现霍乱疫情，并向邻近地区扩散",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Face à la situation épidémiologique du choléra dans le district sanitaire de Baga-Sola (province du Lac) et à son évolution dans les districts voisins"
+    },
+    {
+     "fact": "Kaya红十字会地区委员会加强了对民众的霍乱防控宣传",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le comité départemental de la Croix-Rouge de Kaya renforce la sensibilisation auprès des populations"
+    },
+    {
+     "fact": "2026年9月26日志愿者在Baga-Sola每周集市开展宣传活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce samedi 26 septembre 2026, les volontaires se sont mobilisés au marché hebdomadaire de Baga-Sola"
+    },
+    {
+     "fact": "此前报道称截至8月16日乍得累计报告484例霍乱病例、21例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Choléra au Tchad : 484 cas et 21 décès enregistrés au 16 août"
+    }
+   ],
+   "uncertainties": [
+    "疫情数据（484例病例、21例死亡）为截至8月16日的既往报道数据，非当前最新统计",
+    "该事件目前仅有一个来源（Tchadinfos），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_ea6f8b6c6ac0da21",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

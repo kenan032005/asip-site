@@ -1,0 +1,139 @@
+{
+ "label": "S57fe93a6",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "648b89a6891089cbca93963c3f93f517b2ef4d4c3ef8655de3301f12aa5801b3",
+ "tokens": {
+  "input_tokens": 2589,
+  "output_tokens": 704,
+  "total_tokens": 3293
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹朱巴-蒙德里公路沿线发生袭击，车辆被焚、平民遭绑架",
+   "summary_zh": "南苏丹西赤道州蒙德里东县朱巴-蒙德里公路沿线发生多起袭击，至少四辆民用车辆被焚毁，17人被绑架。当地官员称袭击发生在周日凌晨，袭击者身份不明，尚无组织宣称负责。警方已部署至该地区，但尚未逮捕任何嫌疑人，被绑架者的身份与下落仍不清楚。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Western Equatoria State",
+    "city": "Mundri East County",
+    "site": "Juba-Mundri road, between Merila and Lanyi Boma in Lozoh Payam",
+    "raw_text": "Juba-Mundri road in Mundri East County, Western Equatoria State, between Merila and Lanyi Boma in Lozoh Payam"
+   },
+   "key_facts": [
+    {
+     "fact": "朱巴-蒙德里公路沿线发生多起袭击，至少四辆民用车辆被焚毁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least four civilian vehicles were burned and 17 people abducted in separate attacks along the Juba-Mundri road in Mundri East County, Western Equatoria State, local officials said."
+    },
+    {
+     "fact": "17人被绑架，包括妇女、年轻人和老人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "“Fourteen people were taken from one vehicle, two from another vehicle, and one person from a motorcycle, making 17 people in total,” George said. He said women, young people and elderly people were among those reportedly abducted."
+    },
+    {
+     "fact": "袭击发生在周日凌晨，地点位于Lozoh Payam的Merila与Lanyi Boma之间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The incidents took place in the early hours of Sunday between Merila and Lanyi Boma in Lozoh Payam."
+    },
+    {
+     "fact": "一名骑摩托车的男子腿部中弹，后被送往Lanyi接受治疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "One of the men was shot in the leg and later taken to Lanyi for medical treatment, George said."
+    },
+    {
+     "fact": "警方证实车辆被袭被焚，乘客遭绑架、财物被抢，但未逮捕任何嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Felix Francis, a police inspector in the area, confirmed that vehicles, including a tipper truck and two Land Cruisers, had been attacked and burned. ... Police had been deployed to the area, but no suspects had been arrested, he said."
+    },
+    {
+     "fact": "被绑架者的身份与下落仍不清楚，尚无组织宣称负责",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The identities and whereabouts of those reportedly abducted remain unclear. Radio Tamazuj could not determine who was responsible for the attacks. No group has so far claimed responsibility for the incidents."
+    }
+   ],
+   "uncertainties": [
+    "袭击者身份不明，尚无组织宣称负责",
+    "被绑架者的身份与下落仍不清楚",
+    "被绑架人数为当地官员所述，警方表示无法给出确切数字",
+    "事件目前仅有一个来源（Radio Tamazuj）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹朱巴-蒙德里公路沿线发生袭击，车辆被焚、平民遭绑架",
+   "summary_zh": "南苏丹西赤道州蒙德里东县朱巴-蒙德里公路沿线发生多起袭击，至少四辆民用车辆被焚毁，17人被绑架。当地官员称袭击发生在周日凌晨，袭击者身份不明，尚无组织宣称负责。警方已部署至该地区，但尚未逮捕任何嫌疑人，被绑架者的身份与下落仍不清楚。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Western Equatoria State",
+    "city": "Mundri East County",
+    "site": "Juba-Mundri road, between Merila and Lanyi Boma in Lozoh Payam",
+    "raw_text": "Juba-Mundri road in Mundri East County, Western Equatoria State, between Merila and Lanyi Boma in Lozoh Payam"
+   },
+   "key_facts": [
+    {
+     "fact": "朱巴-蒙德里公路沿线发生多起袭击，至少四辆民用车辆被焚毁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least four civilian vehicles were burned and 17 people abducted in separate attacks along the Juba-Mundri road in Mundri East County, Western Equatoria State, local officials said."
+    },
+    {
+     "fact": "17人被绑架，包括妇女、年轻人和老人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "“Fourteen people were taken from one vehicle, two from another vehicle, and one person from a motorcycle, making 17 people in total,” George said. He said women, young people and elderly people were among those reportedly abducted."
+    },
+    {
+     "fact": "袭击发生在周日凌晨，地点位于Lozoh Payam的Merila与Lanyi Boma之间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The incidents took place in the early hours of Sunday between Merila and Lanyi Boma in Lozoh Payam."
+    },
+    {
+     "fact": "一名骑摩托车的男子腿部中弹，后被送往Lanyi接受治疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "One of the men was shot in the leg and later taken to Lanyi for medical treatment, George said."
+    },
+    {
+     "fact": "警方证实车辆被袭被焚，乘客遭绑架、财物被抢，但未逮捕任何嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Felix Francis, a police inspector in the area, confirmed that vehicles, including a tipper truck and two Land Cruisers, had been attacked and burned. ... Police had been deployed to the area, but no suspects had been arrested, he said."
+    },
+    {
+     "fact": "被绑架者的身份与下落仍不清楚，尚无组织宣称负责",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The identities and whereabouts of those reportedly abducted remain unclear. Radio Tamazuj could not determine who was responsible for the attacks. No group has so far claimed responsibility for the incidents."
+    }
+   ],
+   "uncertainties": [
+    "袭击者身份不明，尚无组织宣称负责",
+    "被绑架者的身份与下落仍不清楚",
+    "被绑架人数为当地官员所述，警方表示无法给出确切数字",
+    "事件目前仅有一个来源（Radio Tamazuj）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_bca85d3d57fe93a6",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

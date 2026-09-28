@@ -1,0 +1,130 @@
+{
+ "label": "Sac97ab84",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ddb5addbbb22ffe7117ff0f0328267e609cb3ca786bcac2157f965c6379c9a23",
+ "tokens": {
+  "input_tokens": 2469,
+  "output_tokens": 500,
+  "total_tokens": 2969
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"最终伤亡数字尚未确定\", \"失踪人数尚未确认\", \"事故原因仅为目击者说法，尚未证实\", \"目前仅一个来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"最终伤亡数字尚未确定\", \"失踪人数尚未确认\", \"事故原因仅为目击者说法，尚未证实\", \"目前仅一个来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）基伍湖船只倾覆，至少12人死亡、数十人失踪",
+   "summary_zh": "刚果民主共和国东部基伍湖发生机动船只倾覆事故，至少12人死亡，多人失踪。事发于9月26日夜间至27日凌晨，船只从布卡武出发前往南基伍省伊吉维岛北部。船上载有50余人，目前仅15人获救，最终伤亡数字尚未确定。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "南基伍省",
+    "city": "布卡武",
+    "site": "基伍湖伊吉维岛附近水域",
+    "raw_text": "lac Kivu, aux abords de l'île d'Idjwi, dans la province du Sud-Kivu"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）基伍湖发生船只倾覆事故，至少12人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En République démocratique du Congo (RDC), au moins 12 personnes sont mortes dans le naufrage d'une embarcation motorisée sur le lac Kivu."
+    },
+    {
+     "fact": "事故发生在9月26日夜间至27日凌晨，船只从布卡武驶往伊吉维岛北部",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le drame s'est produit dans la nuit de samedi 26 à dimanche 27 septembre, alors que la pirogue, partie de Bukavu, se dirigeait vers le nord de l'île d'Idjwi, dans la province du Sud-Kivu."
+    },
+    {
+     "fact": "船上载有50余人，目前仅15人获救，多人失踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ils étaient plus de 50 dans cette embarcation... On compte 15 rescapés"
+    },
+    {
+     "fact": "有目击者称海浪导致船只失稳",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon des témoins, une vague aurait déstabilisé la pirogue."
+    }
+   ],
+   "uncertainties": [
+    "最终伤亡数字尚未确定",
+    "失踪人数尚未确认",
+    "事故原因仅为目击者说法，尚未证实",
+    "目前仅一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）基伍湖船只倾覆，至少12人死亡、数十人失踪",
+   "summary_zh": "刚果民主共和国东部基伍湖发生机动船只倾覆事故，至少12人死亡，多人失踪。事发于9月26日夜间至27日凌晨，船只从布卡武出发前往南基伍省伊吉维岛北部。船上载有50余人，目前仅15人获救，最终伤亡数字尚未确定。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "南基伍省",
+    "city": "布卡武",
+    "site": "基伍湖伊吉维岛附近水域",
+    "raw_text": "lac Kivu, aux abords de l'île d'Idjwi, dans la province du Sud-Kivu"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）基伍湖发生船只倾覆事故，至少12人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En République démocratique du Congo (RDC), au moins 12 personnes sont mortes dans le naufrage d'une embarcation motorisée sur le lac Kivu."
+    },
+    {
+     "fact": "事故发生在9月26日夜间至27日凌晨，船只从布卡武驶往伊吉维岛北部",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le drame s'est produit dans la nuit de samedi 26 à dimanche 27 septembre, alors que la pirogue, partie de Bukavu, se dirigeait vers le nord de l'île d'Idjwi, dans la province du Sud-Kivu."
+    },
+    {
+     "fact": "船上载有50余人，目前仅15人获救，多人失踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ils étaient plus de 50 dans cette embarcation... On compte 15 rescapés"
+    },
+    {
+     "fact": "有目击者称海浪导致船只失稳",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon des témoins, une vague aurait déstabilisé la pirogue."
+    }
+   ],
+   "uncertainties": [
+    "最终伤亡数字尚未确定",
+    "失踪人数尚未确认",
+    "事故原因仅为目击者说法，尚未证实",
+    "目前仅一个来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_a0760507ac97ab84",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
