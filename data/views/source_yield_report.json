@@ -1,6 +1,6 @@
 {
  "schema": "source-yield-report-v1",
- "generated_at_bj": "2026-09-28 21:34",
+ "generated_at_bj": "2026-09-28 21:36",
  "grading_rule": {
   "A": "news_items>=30 or (news_items>=20 and fresh_items>=5)",
   "B": "news_items>=15",
@@ -13,10 +13,10 @@
   "sources": 120,
   "grades": {
    "E": 82,
-   "C": 12,
-   "D": 8,
+   "C": 14,
    "F": 8,
    "A": 6,
+   "D": 6,
    "B": 4
   }
  },
@@ -92,8 +92,8 @@
    ],
    "enabled": true,
    "tested": true,
-   "news_items": 68,
-   "fresh_items": 67,
+   "news_items": 72,
+   "fresh_items": 71,
    "title_cn_missing": 1,
    "grade": "A"
   },
@@ -139,7 +139,7 @@
    "tested": true,
    "news_items": 21,
    "fresh_items": 9,
-   "title_cn_missing": 1,
+   "title_cn_missing": 0,
    "grade": "A"
   },
   {
@@ -338,51 +338,6 @@
    "grade": "C"
   },
   {
-   "source_id": "un_reliefweb_niger",
-   "source_name": "ReliefWeb（尼日尔）",
-   "source_type": "aggregation_platform",
-   "reliability_tier": "tier_2",
-   "country_scope": [
-    "尼日尔"
-   ],
-   "enabled": true,
-   "tested": true,
-   "news_items": 6,
-   "fresh_items": 0,
-   "title_cn_missing": 6,
-   "grade": "C"
-  },
-  {
-   "source_id": "niger_tamtaminfo",
-   "source_name": "Tamtaminfo",
-   "source_type": "local_media",
-   "reliability_tier": "tier_2",
-   "country_scope": [
-    "尼日尔"
-   ],
-   "enabled": true,
-   "tested": true,
-   "news_items": 5,
-   "fresh_items": 1,
-   "title_cn_missing": 3,
-   "grade": "C"
-  },
-  {
-   "source_id": "chad_toumaiweb",
-   "source_name": "Toumaï Web Médias",
-   "source_type": "local_media",
-   "reliability_tier": "tier_2",
-   "country_scope": [
-    "乍得"
-   ],
-   "enabled": true,
-   "tested": true,
-   "news_items": 5,
-   "fresh_items": 0,
-   "title_cn_missing": 5,
-   "grade": "C"
-  },
-  {
    "source_id": "pan_rfi_afrique",
    "source_name": "RFI Afrique",
    "source_type": "international_media",
@@ -445,40 +400,25 @@
    ],
    "enabled": true,
    "tested": false,
-   "news_items": 3,
-   "fresh_items": 3,
+   "news_items": 6,
+   "fresh_items": 6,
    "title_cn_missing": 0,
-   "grade": "D"
+   "grade": "C"
   },
   {
-   "source_id": "intl_rfi_afrique_chad",
-   "source_name": "RFI Afrique (Chad)",
-   "source_type": "international",
-   "reliability_tier": "tier_1",
-   "country_scope": [
-    "乍得"
-   ],
-   "enabled": true,
-   "tested": true,
-   "news_items": 3,
-   "fresh_items": 2,
-   "title_cn_missing": 0,
-   "grade": "D"
-  },
-  {
-   "source_id": "niger_africanews",
-   "source_name": "AfricaNews (Niger)",
-   "source_type": "international",
-   "reliability_tier": "tier_1",
+   "source_id": "un_reliefweb_niger",
+   "source_name": "ReliefWeb（尼日尔）",
+   "source_type": "aggregation_platform",
+   "reliability_tier": "tier_2",
    "country_scope": [
     "尼日尔"
    ],
    "enabled": true,
    "tested": true,
-   "news_items": 2,
-   "fresh_items": 1,
-   "title_cn_missing": 1,
-   "grade": "D"
+   "news_items": 6,
+   "fresh_items": 0,
+   "title_cn_missing": 6,
+   "grade": "C"
   },
   {
    "source_id": "pan_africanews",
@@ -543,9 +483,69 @@
    ],
    "enabled": true,
    "tested": true,
-   "news_items": 2,
+   "news_items": 5,
+   "fresh_items": 5,
+   "title_cn_missing": 0,
+   "grade": "C"
+  },
+  {
+   "source_id": "niger_tamtaminfo",
+   "source_name": "Tamtaminfo",
+   "source_type": "local_media",
+   "reliability_tier": "tier_2",
+   "country_scope": [
+    "尼日尔"
+   ],
+   "enabled": true,
+   "tested": true,
+   "news_items": 5,
+   "fresh_items": 1,
+   "title_cn_missing": 3,
+   "grade": "C"
+  },
+  {
+   "source_id": "chad_toumaiweb",
+   "source_name": "Toumaï Web Médias",
+   "source_type": "local_media",
+   "reliability_tier": "tier_2",
+   "country_scope": [
+    "乍得"
+   ],
+   "enabled": true,
+   "tested": true,
+   "news_items": 5,
+   "fresh_items": 0,
+   "title_cn_missing": 5,
+   "grade": "C"
+  },
+  {
+   "source_id": "intl_rfi_afrique_chad",
+   "source_name": "RFI Afrique (Chad)",
+   "source_type": "international",
+   "reliability_tier": "tier_1",
+   "country_scope": [
+    "乍得"
+   ],
+   "enabled": true,
+   "tested": true,
+   "news_items": 3,
    "fresh_items": 2,
    "title_cn_missing": 0,
+   "grade": "D"
+  },
+  {
+   "source_id": "niger_africanews",
+   "source_name": "AfricaNews (Niger)",
+   "source_type": "international",
+   "reliability_tier": "tier_1",
+   "country_scope": [
+    "尼日尔"
+   ],
+   "enabled": true,
+   "tested": true,
+   "news_items": 2,
+   "fresh_items": 1,
+   "title_cn_missing": 1,
    "grade": "D"
   },
   {
