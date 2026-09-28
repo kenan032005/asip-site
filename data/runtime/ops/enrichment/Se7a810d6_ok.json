@@ -1,0 +1,104 @@
+{
+ "label": "Se7a810d6",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "af7e08cf339db324ae7d3537f25ad0b8b77dd773aebd712b3e7fa361661aad6c",
+ "tokens": {
+  "input_tokens": 2195,
+  "output_tokens": 282,
+  "total_tokens": 2477
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\"]",
+    "after": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳国家服务局发布2026/2027年度国民服务PIN码",
+   "summary_zh": "加纳国家服务局（NSA）宣布发布2026/2027年度国民服务PIN码，面向此前未履行或未能履行强制服务的合格加纳人、海外培养毕业生及私人考生。该消息为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳国家服务局发布2026/2027年度国民服务PIN码",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "NSA releases PIN Codes for 2026/2027 national service private candidates and foreign-trained graduates"
+    },
+    {
+     "fact": "PIN码面向此前未履行或未能履行强制服务的合格加纳人、海外培养毕业生及私人考生",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "covering eligible Ghanaians who previously defaulted or were unable to undertake their mandatory service, as well as foreign-trained graduates and private candidates"
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳国家服务局发布2026/2027年度国民服务PIN码",
+   "summary_zh": "加纳国家服务局（NSA）宣布发布2026/2027年度国民服务PIN码，面向此前未履行或未能履行强制服务的合格加纳人、海外培养毕业生及私人考生。该消息为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳国家服务局发布2026/2027年度国民服务PIN码",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "NSA releases PIN Codes for 2026/2027 national service private candidates and foreign-trained graduates"
+    },
+    {
+     "fact": "PIN码面向此前未履行或未能履行强制服务的合格加纳人、海外培养毕业生及私人考生",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "covering eligible Ghanaians who previously defaulted or were unable to undertake their mandatory service, as well as foreign-trained graduates and private candidates"
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_e7f0e69fe7a810d6",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

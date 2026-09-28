@@ -1,0 +1,104 @@
+{
+ "label": "S337e2f19",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c01b5e420d19d0a8a63a34700631a20f2063a85c8619a1c6d5c1ab2822c2fc13",
+ "tokens": {
+  "input_tokens": 2144,
+  "output_tokens": 275,
+  "total_tokens": 2419
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"该预警目前仅有一个来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"该预警目前仅有一个来源报道，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳气象局预测今晚部分地区有雷暴和降雨",
+   "summary_zh": "加纳气象局（GMet）警告称，加纳部分地区今天（9月28日周一）下午晚些时候至夜间将出现雷暴和降雨。该预警为单一来源报道，尚未获得其他来源交叉验证。",
+   "event_type": "natural_disaster",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "parts of Ghana"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳气象局预测加纳部分地区今晚将出现雷暴和降雨",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "GMet forecasts thunderstorms, rain across parts of Ghana this evening"
+    },
+    {
+     "fact": "加纳气象局警告居民防范今天下午晚些时候至夜间的雷暴和降雨",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Ghana Meteorological Agency (GMet) has warned residents in parts of the country to brace for thunderstorms and rain from late afternoon into the evening today, Monday, September 28."
+    }
+   ],
+   "uncertainties": [
+    "该预警目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳气象局预测今晚部分地区有雷暴和降雨",
+   "summary_zh": "加纳气象局（GMet）警告称，加纳部分地区今天（9月28日周一）下午晚些时候至夜间将出现雷暴和降雨。该预警为单一来源报道，尚未获得其他来源交叉验证。",
+   "event_type": "natural_disaster",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "parts of Ghana"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳气象局预测加纳部分地区今晚将出现雷暴和降雨",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "GMet forecasts thunderstorms, rain across parts of Ghana this evening"
+    },
+    {
+     "fact": "加纳气象局警告居民防范今天下午晚些时候至夜间的雷暴和降雨",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Ghana Meteorological Agency (GMet) has warned residents in parts of the country to brace for thunderstorms and rain from late afternoon into the evening today, Monday, September 28."
+    }
+   ],
+   "uncertainties": [
+    "该预警目前仅有一个来源报道，尚缺乏交叉验证",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_7c712254337e2f19",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

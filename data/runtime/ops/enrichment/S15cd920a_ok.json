@@ -1,0 +1,104 @@
+{
+ "label": "S15cd920a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "fa12b60613999dd753d966eec460e65d797ec79e1693126e2f3af19e3f1ca7bb",
+ "tokens": {
+  "input_tokens": 2170,
+  "output_tokens": 344,
+  "total_tokens": 2514
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\"]",
+    "after": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "联合国适足住房权特别报告员将访问加纳",
+   "summary_zh": "联合国适足住房权特别报告员Koldo Casla将于2026年9月28日至10月9日对加纳进行正式访问。访问期间，他将考察加纳国内法律与实践中对适足住房权的保护与实现情况，包括公共住房的获取与可负担性等议题。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Ghana"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国适足住房权特别报告员Koldo Casla将于2026年9月28日至10月9日对加纳进行正式访问",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The UN Special Rapporteur on the right to adequate housing, Koldo Casla, will undertake an official visit to Ghana from September 28 to October 9, 2026."
+    },
+    {
+     "fact": "访问期间将考察加纳国内法律与实践中适足住房权的保护与实现情况，包括公共住房获取与可负担性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "During the visit, Mr Casla will examine the protection and realisation of the right to adequate housing in national law and practice, including access to public housing, affordability in […]"
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "联合国适足住房权特别报告员将访问加纳",
+   "summary_zh": "联合国适足住房权特别报告员Koldo Casla将于2026年9月28日至10月9日对加纳进行正式访问。访问期间，他将考察加纳国内法律与实践中对适足住房权的保护与实现情况，包括公共住房的获取与可负担性等议题。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Ghana"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国适足住房权特别报告员Koldo Casla将于2026年9月28日至10月9日对加纳进行正式访问",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The UN Special Rapporteur on the right to adequate housing, Koldo Casla, will undertake an official visit to Ghana from September 28 to October 9, 2026."
+    },
+    {
+     "fact": "访问期间将考察加纳国内法律与实践中适足住房权的保护与实现情况，包括公共住房获取与可负担性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "During the visit, Mr Casla will examine the protection and realisation of the right to adequate housing in national law and practice, including access to public housing, affordability in […]"
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_bda8626215cd920a",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

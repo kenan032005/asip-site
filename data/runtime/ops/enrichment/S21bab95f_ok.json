@@ -1,0 +1,117 @@
+{
+ "label": "S21bab95f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a20c93a72b1d53eac4c88654c7f8d9defed32a256b510717268ff08132ff4695",
+ "tokens": {
+  "input_tokens": 2985,
+  "output_tokens": 587,
+  "total_tokens": 3572
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "埃塞俄比亚：战事重启伴随虚假信息蔓延",
+   "summary_zh": "埃塞俄比亚一个由七个武装团体组成的联盟，包括提格雷人民解放阵线（TPLF）和阿姆哈拉民族运动（Fano），对联邦军队发动多线攻势。提格雷战争结束四年后，新一轮暴力升级，社交媒体上虚假信息再度泛滥。法国国际广播电台（RFI）的Info Vérif核查团队发现多张误导性、脱离语境或由人工智能生成的图片。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": null,
+    "city": "默克莱",
+    "site": null,
+    "raw_text": "Éthiopie, notamment dans le nord du pays, Mekelle"
+   },
+   "key_facts": [
+    {
+     "fact": "由七个武装团体组成的联盟对埃塞俄比亚联邦军队发动多线攻势",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une coalition regroupant sept groupes armés, dont le Front de libération du peuple du Tigré (TPLF) et le Mouvement national amhara des Fano, a lancé une offensive sur plusieurs fronts contre l’armée fédérale"
+    },
+    {
+     "fact": "无人机袭击了默克莱的提格雷官方电视台大楼",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un drone a notamment frappé un immeuble hébergeant la télévision officielle du Tigré, à Mekelle"
+    },
+    {
+     "fact": "有说法称TPLF武装人员俘获了埃塞俄比亚军队一个营，但相关视频实为2021年旧素材",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "certains affirment que les combattants du Front de libération du peuple du Tigré (TPLF) auraient « capturé un bataillon de l’armée éthiopienne dans une débâcle militaire majeure »... cette vidéo est sortie de son contexte... diffusé sur YouTube par le média érythréen Asena TV, le 7 juillet 2021"
+    },
+    {
+     "fact": "一张声称埃塞俄比亚无人机被击落的图片经查为人工智能生成",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cette image a été entièrement générée par intelligence artificielle... générée avec Gemini 3, l’outil de Google"
+    }
+   ],
+   "uncertainties": [
+    "TPLF武装人员俘获埃塞俄比亚军队一个营的说法尚未证实，相关视频为2021年旧素材",
+    "埃塞俄比亚无人机被击落的图片经查为人工智能生成，并非真实事件",
+    "事件信息目前仅来自单一来源（RFI Afrique），尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "埃塞俄比亚：战事重启伴随虚假信息蔓延",
+   "summary_zh": "埃塞俄比亚一个由七个武装团体组成的联盟，包括提格雷人民解放阵线（TPLF）和阿姆哈拉民族运动（Fano），对联邦军队发动多线攻势。提格雷战争结束四年后，新一轮暴力升级，社交媒体上虚假信息再度泛滥。法国国际广播电台（RFI）的Info Vérif核查团队发现多张误导性、脱离语境或由人工智能生成的图片。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": null,
+    "city": "默克莱",
+    "site": null,
+    "raw_text": "Éthiopie, notamment dans le nord du pays, Mekelle"
+   },
+   "key_facts": [
+    {
+     "fact": "由七个武装团体组成的联盟对埃塞俄比亚联邦军队发动多线攻势",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une coalition regroupant sept groupes armés, dont le Front de libération du peuple du Tigré (TPLF) et le Mouvement national amhara des Fano, a lancé une offensive sur plusieurs fronts contre l’armée fédérale"
+    },
+    {
+     "fact": "无人机袭击了默克莱的提格雷官方电视台大楼",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un drone a notamment frappé un immeuble hébergeant la télévision officielle du Tigré, à Mekelle"
+    },
+    {
+     "fact": "有说法称TPLF武装人员俘获了埃塞俄比亚军队一个营，但相关视频实为2021年旧素材",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "certains affirment que les combattants du Front de libération du peuple du Tigré (TPLF) auraient « capturé un bataillon de l’armée éthiopienne dans une débâcle militaire majeure »... cette vidéo est sortie de son contexte... diffusé sur YouTube par le média érythréen Asena TV, le 7 juillet 2021"
+    },
+    {
+     "fact": "一张声称埃塞俄比亚无人机被击落的图片经查为人工智能生成",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cette image a été entièrement générée par intelligence artificielle... générée avec Gemini 3, l’outil de Google"
+    }
+   ],
+   "uncertainties": [
+    "TPLF武装人员俘获埃塞俄比亚军队一个营的说法尚未证实，相关视频为2021年旧素材",
+    "埃塞俄比亚无人机被击落的图片经查为人工智能生成，并非真实事件",
+    "事件信息目前仅来自单一来源（RFI Afrique），尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_ca9ddb1021bab95f",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

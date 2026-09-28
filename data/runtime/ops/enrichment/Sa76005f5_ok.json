@@ -1,0 +1,123 @@
+{
+ "label": "Sa76005f5",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b7d3aeed1abbc5f7e0715e2ebdfcf1574f2957099bb3cbb03c75978fd8d0f7eb",
+ "tokens": {
+  "input_tokens": 2212,
+  "output_tokens": 588,
+  "total_tokens": 2800
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "刚果（金）本迪布焦型埃博拉疫情扩散至第七个省，逼近中非共和国边境",
+   "summary_zh": "世界卫生组织非洲区域办事处通报，刚果（金）本迪布焦型埃博拉病毒病疫情已扩散至第七个省，苏德乌班吉省布卢卫生区报告首例确诊病例，该省与中非共和国和刚果（布）接壤。截至2026年9月13日，累计确诊病例7258例，其中死亡3510例，病死率48.4%。自上一期周报以来新增572例确诊病例和284例死亡病例。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "Sud-Ubangi",
+    "city": null,
+    "site": "Bulu Health Zone",
+    "raw_text": "Bulu Health Zone, Sud-Ubangi, a province bordering the Central African Republic and the Republic of the Congo"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）本迪布焦型埃博拉疫情扩散至第七个省，苏德乌班吉省布卢卫生区报告首例确诊病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Bundibugyo virus disease (BVD) outbreak in the Democratic Republic of the Congo has expanded to a seventh province, with the first confirmed case reported in Bulu Health Zone, Sud-Ubangi"
+    },
+    {
+     "fact": "截至2026年9月13日，累计确诊病例7258例，其中死亡3510例，病死率48.4%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "bringing the cumulative total to 7258 confirmed cases, including 3510 deaths [case fatality ratio (CFR) 48.4%], as of 13 September 2026"
+    },
+    {
+     "fact": "自上一期周报以来新增572例确诊病例和284例死亡病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Since External Situation Report #17, a further 572 confirmed cases and 284l confirmed deaths have been reported"
+    },
+    {
+     "fact": "疫情已波及七个省的62个卫生区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The outbreak now affects 62 health zones across seven provinces"
+    },
+    {
+     "fact": "布卢卫生区所在省份与中非共和国和刚果（布）接壤，引发对疫情跨境传播的担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a province bordering the Central African Republic and the Republic of the Congo. This latest geographic expansion heightens concern about further spread towards international borders"
+    }
+   ],
+   "uncertainties": [
+    "信息来自世界卫生组织非洲区域办事处单一来源，尚缺乏其他独立来源交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "刚果（金）本迪布焦型埃博拉疫情扩散至第七个省，逼近中非共和国边境",
+   "summary_zh": "世界卫生组织非洲区域办事处通报，刚果（金）本迪布焦型埃博拉病毒病疫情已扩散至第七个省，苏德乌班吉省布卢卫生区报告首例确诊病例，该省与中非共和国和刚果（布）接壤。截至2026年9月13日，累计确诊病例7258例，其中死亡3510例，病死率48.4%。自上一期周报以来新增572例确诊病例和284例死亡病例。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "Sud-Ubangi",
+    "city": null,
+    "site": "Bulu Health Zone",
+    "raw_text": "Bulu Health Zone, Sud-Ubangi, a province bordering the Central African Republic and the Republic of the Congo"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）本迪布焦型埃博拉疫情扩散至第七个省，苏德乌班吉省布卢卫生区报告首例确诊病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Bundibugyo virus disease (BVD) outbreak in the Democratic Republic of the Congo has expanded to a seventh province, with the first confirmed case reported in Bulu Health Zone, Sud-Ubangi"
+    },
+    {
+     "fact": "截至2026年9月13日，累计确诊病例7258例，其中死亡3510例，病死率48.4%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "bringing the cumulative total to 7258 confirmed cases, including 3510 deaths [case fatality ratio (CFR) 48.4%], as of 13 September 2026"
+    },
+    {
+     "fact": "自上一期周报以来新增572例确诊病例和284例死亡病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Since External Situation Report #17, a further 572 confirmed cases and 284l confirmed deaths have been reported"
+    },
+    {
+     "fact": "疫情已波及七个省的62个卫生区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The outbreak now affects 62 health zones across seven provinces"
+    },
+    {
+     "fact": "布卢卫生区所在省份与中非共和国和刚果（布）接壤，引发对疫情跨境传播的担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a province bordering the Central African Republic and the Republic of the Congo. This latest geographic expansion heightens concern about further spread towards international borders"
+    }
+   ],
+   "uncertainties": [
+    "信息来自世界卫生组织非洲区域办事处单一来源，尚缺乏其他独立来源交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_50d08359a76005f5",
+ "disease_event_id": null,
+ "country_code": "CF"
+}

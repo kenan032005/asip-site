@@ -1,0 +1,138 @@
+{
+ "label": "Sa0b667aa",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "92c6bc571042bf6abe5ac8b606170c274f0b6514735989ecd1cf480e048206bf",
+ "tokens": {
+  "input_tokens": 2722,
+  "output_tokens": 505,
+  "total_tokens": 3227
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"警方表示不能排除连环杀手作案的可能性，但尚未确认\", \"多起案件尚未逮捕任何人\", \"部分受害者身份尚未确认\"]",
+    "after": "[\"警方表示不能排除连环杀手作案的可能性，但尚未确认\", \"多起案件尚未逮捕任何人\", \"部分受害者身份尚未确认\", \"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"警方表示不能排除连环杀手作案的可能性，但尚未确认\", \"多起案件尚未逮捕任何人\", \"部分受害者身份尚未确认\", \"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "after": "[\"警方表示不能排除连环杀手作案的可能性，但尚未确认\", \"多起案件尚未逮捕任何人\", \"部分受害者身份尚未确认\", \"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南非约翰内斯堡以东地区两个月内发现12具女性遗体",
+   "summary_zh": "自2026年7月以来，南非约翰内斯堡以东的埃库鲁莱尼地区已发现12具女性遗体，引发当地广泛恐慌。警方已在其中三起案件中实施逮捕，但表示不能排除连环杀手作案的可能性。南非总统拉马福萨称这些谋杀是\"国家良知的污点\"。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": "豪登省",
+    "city": "约翰内斯堡",
+    "site": "埃库鲁莱尼地区",
+    "raw_text": "Ekurhuleni, east of Johannesburg, South Africa"
+   },
+   "key_facts": [
+    {
+     "fact": "自2026年7月以来，南非约翰内斯堡以东的埃库鲁莱尼地区已发现12具女性遗体",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Police in South Africa have confirmed the discovery of the bodies of three more women in an area east of Johannesburg, bringing the total number of bodies found there to 12 in just two months."
+    },
+    {
+     "fact": "警方已在三起案件中实施逮捕，但表示不能排除连环杀手作案的可能性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Police have made arrests in three of the cases, which do not appear to be related to the others. Nevertheless, police have said they cannot rule out the possibility of a serial killer."
+    },
+    {
+     "fact": "南非总统拉马福萨称这些谋杀是\"国家良知的污点\"",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South African President Cyril Ramaphosa says the murders are a \"stain on our national conscience\"."
+    },
+    {
+     "fact": "首名受害者Busisiwe Mahlangu的遗体于2026年7月15日在Kempton Park被发现，警方逮捕了一名据信为其伴侣的嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Busisiwe Mahlangu's body was found in Kempton Park on 15 July 2026... Police arrested a suspect, believed to be her partner, two days after her murder."
+    }
+   ],
+   "uncertainties": [
+    "警方表示不能排除连环杀手作案的可能性，但尚未确认",
+    "多起案件尚未逮捕任何人",
+    "部分受害者身份尚未确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南非约翰内斯堡以东地区两个月内发现12具女性遗体",
+   "summary_zh": "自2026年7月以来，南非约翰内斯堡以东的埃库鲁莱尼地区已发现12具女性遗体，引发当地广泛恐慌。警方已在其中三起案件中实施逮捕，但表示不能排除连环杀手作案的可能性。南非总统拉马福萨称这些谋杀是\"国家良知的污点\"。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": "豪登省",
+    "city": "约翰内斯堡",
+    "site": "埃库鲁莱尼地区",
+    "raw_text": "Ekurhuleni, east of Johannesburg, South Africa"
+   },
+   "key_facts": [
+    {
+     "fact": "自2026年7月以来，南非约翰内斯堡以东的埃库鲁莱尼地区已发现12具女性遗体",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Police in South Africa have confirmed the discovery of the bodies of three more women in an area east of Johannesburg, bringing the total number of bodies found there to 12 in just two months."
+    },
+    {
+     "fact": "警方已在三起案件中实施逮捕，但表示不能排除连环杀手作案的可能性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Police have made arrests in three of the cases, which do not appear to be related to the others. Nevertheless, police have said they cannot rule out the possibility of a serial killer."
+    },
+    {
+     "fact": "南非总统拉马福萨称这些谋杀是\"国家良知的污点\"",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South African President Cyril Ramaphosa says the murders are a \"stain on our national conscience\"."
+    },
+    {
+     "fact": "首名受害者Busisiwe Mahlangu的遗体于2026年7月15日在Kempton Park被发现，警方逮捕了一名据信为其伴侣的嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Busisiwe Mahlangu's body was found in Kempton Park on 15 July 2026... Police arrested a suspect, believed to be her partner, two days after her murder."
+    }
+   ],
+   "uncertainties": [
+    "警方表示不能排除连环杀手作案的可能性，但尚未确认",
+    "多起案件尚未逮捕任何人",
+    "部分受害者身份尚未确认",
+    "据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_2ff13b47a0b667aa",
+ "disease_event_id": null,
+ "country_code": "ZA"
+}

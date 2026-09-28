@@ -1,0 +1,114 @@
+{
+ "label": "S591df26c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "514cea3bbd57908fb74e9a668758df3324e202ab09b4dc645f430e8baecb8e12",
+ "tokens": {
+  "input_tokens": 2160,
+  "output_tokens": 322,
+  "total_tokens": 2482
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"该事件目前仅有一个来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"该事件目前仅有一个来源报道，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "AGN主席呼吁加纳农业气候适应工作采取行动导向的跟踪与报告",
+   "summary_zh": "气候专家、政府官员和农业利益相关方在阿克拉举行为期三天的利益相关方参与研讨会，聚焦加强加纳农业部门包容性气候适应的跟踪与报告。AGN主席在会上呼吁采取行动导向的跟踪与报告方式。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "阿克拉",
+    "site": null,
+    "raw_text": "Accra"
+   },
+   "key_facts": [
+    {
+     "fact": "气候专家、政府官员和农业利益相关方在阿克拉举行为期三天的研讨会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Climate experts, government officials, and agricultural stakeholders have gathered in Accra for a three-day stakeholder engagement workshop"
+    },
+    {
+     "fact": "研讨会聚焦加强加纳农业部门包容性气候适应的跟踪与报告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "focused on strengthening inclusive climate adaptation tracking and reporting within Ghana's agriculture sector"
+    },
+    {
+     "fact": "AGN主席呼吁采取行动导向的跟踪与报告",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "AGN Chair urges action-driven tracking and reporting on inclusive climate adaptation in Ghana’s agriculture"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "AGN主席呼吁加纳农业气候适应工作采取行动导向的跟踪与报告",
+   "summary_zh": "气候专家、政府官员和农业利益相关方在阿克拉举行为期三天的利益相关方参与研讨会，聚焦加强加纳农业部门包容性气候适应的跟踪与报告。AGN主席在会上呼吁采取行动导向的跟踪与报告方式。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "阿克拉",
+    "site": null,
+    "raw_text": "Accra"
+   },
+   "key_facts": [
+    {
+     "fact": "气候专家、政府官员和农业利益相关方在阿克拉举行为期三天的研讨会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Climate experts, government officials, and agricultural stakeholders have gathered in Accra for a three-day stakeholder engagement workshop"
+    },
+    {
+     "fact": "研讨会聚焦加强加纳农业部门包容性气候适应的跟踪与报告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "focused on strengthening inclusive climate adaptation tracking and reporting within Ghana's agriculture sector"
+    },
+    {
+     "fact": "AGN主席呼吁采取行动导向的跟踪与报告",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "AGN Chair urges action-driven tracking and reporting on inclusive climate adaptation in Ghana’s agriculture"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_8a300040591df26c",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

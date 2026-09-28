@@ -1,0 +1,106 @@
+{
+ "label": "S114b4a71",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "76ffe4e369f1d9af6b79e2dc6a3857448edb073855c269c502e5777e43a41c8f",
+ "tokens": {
+  "input_tokens": 2152,
+  "output_tokens": 241,
+  "total_tokens": 2393
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"该事件目前仅有一个来源报道，尚缺乏交叉验证\", \"罢工结束时间尚不明确\"]",
+    "after": "[\"该事件目前仅有一个来源报道，尚缺乏交叉验证\", \"罢工结束时间尚不明确\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚教育部再次呼吁教师返校，工会拒绝结束罢工",
+   "summary_zh": "尼日利亚教育部再次呼吁正在罢工的中小学教师重返课堂，但教师工会拒绝叫停无限期罢工行动。该事件目前为单一来源报道，罢工结束时间尚不明确。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚教育部再次呼吁罢工教师返校",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Ministry of Education has renewed its appeal to striking pre-tertiary teachers to return to the classroom"
+    },
+    {
+     "fact": "教师工会拒绝叫停无限期罢工行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "despite the unions’ refusal to call off their indefinite industrial action"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证",
+    "罢工结束时间尚不明确"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚教育部再次呼吁教师返校，工会拒绝结束罢工",
+   "summary_zh": "尼日利亚教育部再次呼吁正在罢工的中小学教师重返课堂，但教师工会拒绝叫停无限期罢工行动。该事件目前为单一来源报道，罢工结束时间尚不明确。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚教育部再次呼吁罢工教师返校",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Ministry of Education has renewed its appeal to striking pre-tertiary teachers to return to the classroom"
+    },
+    {
+     "fact": "教师工会拒绝叫停无限期罢工行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "despite the unions’ refusal to call off their indefinite industrial action"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证",
+    "罢工结束时间尚不明确",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_efecfd5a114b4a71",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
