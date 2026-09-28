@@ -73,11 +73,7 @@ ISO3 = {"TD": "TCD", "NE": "NER", "NG": "NGA", "SD": "SDN", "SS": "SSD",
         "EG": "EGY", "DZ": "DZA", "UG": "UGA", "AO": "AGO", "GH": "GHA",
         # C1C：补齐新增国别，避免 iso3 为空导致下游视图缺字段
         "CD": "COD", "SO": "SOM", "CG": "COG", "TZ": "TZA", "GA": "GAB",
-        "MA": "MAR", "TN": "TUN",
-        # C7-4：非洲监测范围扩展（12 → 32 国）补齐 ISO3
-        "ML": "MLI", "BF": "BFA", "CM": "CMR", "CF": "CAF", "RW": "RWA",
-        "BI": "BDI", "SN": "SEN", "CI": "CIV", "ZW": "ZWE", "GN": "GIN",
-        "MR": "MRT"}
+        "MA": "MAR", "TN": "TUN"}
 
 ETYPE_CN = {
     "armed_conflict": "武装冲突", "other_security": "其他安全",
@@ -248,54 +244,6 @@ def build(live_dir, internal_dir, out_root, now=None):
     cluster_ids = {c.get("event_id") for c in clusters}
 
     src_meta = {s.get("source_id"): s for s in srcs}
-    # C7-4 P2：多国出口判定 —— 同一 source_group 的 country_scope 并集 > 1 国，
-    # 即视为泛非/多国出口（如 africanews 的 chad/niger 双条目、pan_* 单条目多国）。
-    # 多国出口的文章国别必须由文章内容解析，不得使用来源默认国。
-    GROUP2SCOPE = {}
-    for s in srcs:
-        g = str(s.get("source_group") or "").strip()
-        if g:
-            GROUP2SCOPE.setdefault(g, set()).update(
-                str(c) for c in (s.get("country_scope") or []))
-    MULTI_GROUPS = {g for g, sc in GROUP2SCOPE.items() if len(sc) > 1}
-    # 国家识别配置（config/countries/*.json）：关键词/行政区/排除词 → 文章级国家重解析
-    CCFG = {}
-    try:
-        _cfg_dir = os.path.join(out_root, "config", "countries")
-        for _fn in sorted(os.listdir(_cfg_dir)):
-            if _fn.endswith(".json"):
-                _c = rd(os.path.join(_cfg_dir, _fn), {})
-                if _c.get("country"):
-                    CCFG[_c["country"]] = _c
-    except Exception:
-        CCFG = {}
-
-    # C7-3：区域映射（KB countries/regions，country 为 optional 字段）+
-    # 文章级本地化运行时缓存（runtime enrichment → view projection，唯一键 dedup_key）
-    global REGION_BY_ISO2, LOCALIZATION_INDEX
-    try:
-        kb_c = rd(os.path.join(internal_dir, os.path.join("intelligence", "africa", "countries.json")), {})
-        kb_r = rd(os.path.join(internal_dir, os.path.join("intelligence", "africa", "regions.json")), {})
-        cid2reg = {}
-        for c in (kb_c.get("countries") or []):
-            for rid in (c.get("region_ids") or [])[:1]:
-                cid2reg[c.get("country_id")] = rid
-        name_by_rid = {r.get("region_id"): (r.get("name_zh") or r.get("name_en"))
-                       for r in (kb_r.get("regions") or [])}
-        iso2cid = {c.get("iso_alpha2"): c.get("country_id") for c in (kb_c.get("countries") or [])}
-        REGION_BY_ISO2 = {iso2: name_by_rid.get(cid2reg.get(cid))
-                          for iso2, cid in iso2cid.items()}
-        REGION_BY_ISO2 = {k: v for k, v in REGION_BY_ISO2.items() if v}
-    except Exception:
-        REGION_BY_ISO2 = {}
-    try:
-        _loc_path = os.path.join(internal_dir, os.path.join("runtime", "ops", "localization", "index.json"))
-        LOCALIZATION_INDEX = rd(_loc_path, {})
-        if not isinstance(LOCALIZATION_INDEX, dict):
-            LOCALIZATION_INDEX = {}
-    except Exception:
-        LOCALIZATION_INDEX = {}
-
     candidates = []
 
     # ---- A. LIVING LAYER: live published observations (URL-bearing, fresh)
@@ -315,6 +263,10 @@ def build(live_dir, internal_dir, out_root, now=None):
             "summary_original": x.get("summary_original") or None,
             "country_cn": cn or ISO2_REV.get(c2),
             "country_iso2": c2,
+            # C8-3 PART B：直接透传 canonical/采集侧已确定的地理范围（不在投影层推断）
+            "country_scope": x.get("country_scope") or "SINGLE_COUNTRY",
+            "countries": list(x.get("countries") or []),
+            "region": x.get("region") or None,
             "event_type": x.get("event_type"),
             "source_name": sl0.get("source_name") or x.get("source_name"),
             "source_group": sl0.get("source_group"),
@@ -351,6 +303,9 @@ def build(live_dir, internal_dir, out_root, now=None):
             "summary_cn": a.get("summary_cn") or None,
             "summary_original": a.get("summary_original") or None,
             "country_cn": cn, "country_iso2": c2,
+            "country_scope": a.get("country_scope") or "SINGLE_COUNTRY",
+            "countries": list(a.get("countries") or []),
+            "region": a.get("region") or None,
             "event_type": a.get("event_type"),
             "source_name": a.get("source_name"),
             "source_group": a.get("source_group"),
@@ -389,6 +344,9 @@ def build(live_dir, internal_dir, out_root, now=None):
             "summary_cn": p.get("summary_cn") or None,
             "summary_original": p.get("summary_original") or None,
             "country_cn": cn, "country_iso2": c2,
+            "country_scope": p.get("country_scope") or "SINGLE_COUNTRY",
+            "countries": list(p.get("countries") or []),
+            "region": p.get("region") or None,
             "event_type": p.get("event_type"),
             "source_name": p.get("source_name"), "source_group": None,
             "source_language": None,
@@ -456,53 +414,6 @@ def build(live_dir, internal_dir, out_root, now=None):
         n["event_type_cn"] = ETYPE_CN.get(n["event_type"] or "", n["event_type"] or "其他")
         n["verification_label_cn"] = VERIF_CN.get(n["verification_level"], "尚未核实")
         n["is_verified_event"] = int(n["independent_source_count"] or 0) >= 2
-        # C7-3 P2：情报层级标注（news_signal ≠ verified_event）+ 重要度 + 区域 +
-        # 文章级本地化合并（runtime enrichment → public view projection，无第二存储）
-        n["verification_status"] = "verified_event" if n["is_verified_event"] else "news_signal"
-        _src_n = int(n["independent_source_count"] or 0)
-        n["importance"] = ("high" if (n["is_verified_event"] and _src_n >= 3)
-                           else ("medium" if (n["is_verified_event"] or _src_n >= 2) else "low"))
-        n["region"] = REGION_BY_ISO2.get(n["country_iso2"] or "")
-        _loc = LOCALIZATION_INDEX.get(n["dedup_key"]) or {}
-        if _loc.get("title_cn"):
-            n["title_cn"] = _loc["title_cn"]
-        if _loc.get("summary_cn"):
-            n["summary_cn"] = _loc["summary_cn"]
-        if _loc.get("why_it_matters"):
-            n["why_it_matters"] = _loc["why_it_matters"]
-        n["localized"] = bool(n["title_cn"])
-        # C7-4 P2：多国 scope 来源的文章级国家重解析。
-        # 规则：single-scope 来源保留来源国归属（语义可信）；多国 scope（泛非源）
-        # 必须由标题/摘要按 config/countries 关键词与行政区解析，解析不出 → 未识别，
-        # 绝不回落到来源默认国。已核实事件保持 canonical 国别不变。
-        if ((not n.get("is_verified_event"))
-                and any(str(n.get("source_group") or "") == g
-                        or str(n.get("source_group") or "").startswith(g + "_")
-                        for g in MULTI_GROUPS)):
-            _txt = " ".join(filter(None, [n.get("title_original"), n.get("summary_original"),
-                                          n.get("title_cn"), n.get("summary_cn")])).lower()
-            _best, _score = None, 0
-            for _cn, _c in CCFG.items():
-                _excl = [e.lower() for e in (_c.get("country_exclusions") or [])]
-                if _excl and any(e in _txt for e in _excl):
-                    continue
-                _kw = [k.lower() for k in (_c.get("keywords") or []) if k]
-                _lo = [l.lower() for l in (_c.get("locations") or []) if l]
-                _mk = sum(1 for k in _kw if k in _txt)
-                _ml = sum(1 for l in _lo if l in _txt)
-                _s = _mk + 2 * _ml
-                if _s > _score:
-                    _best, _score = _cn, _s
-            if _best:
-                n["country_cn"] = _best
-                n["country_resolved"] = True
-            else:
-                n["country_cn"] = "未识别"
-                n["country_resolved"] = False
-            n["country_iso2"] = iso2_of(n["country_cn"])
-            n["country_iso3"] = ISO3.get(n["country_iso2"] or "")
-        n["title"] = n["title_cn"] or n["title_original"]
-        n["title_cn_missing"] = not bool(n["title_cn"])
         n["country_iso3"] = ISO3.get(n["country_iso2"] or "")
         n["lane"] = "news"
         n["disclaimer_cn"] = ("本条为单一来源信号，尚未完成多来源交叉核实，"

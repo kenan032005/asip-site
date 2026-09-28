@@ -56,6 +56,59 @@ def is_terminal_state(status):
     return str(status or "").upper().endswith("TERMINAL")
 
 
+def _compliant_run_id():
+    """生成合规 run_id（契约 ^[0-9]{8}T[0-9]{6}[+]0800_[a-z0-9]{6}$；绝不伪造/复用）。"""
+    import random
+    import string
+    now = datetime.now(BJT)
+    return "%s_%s" % (now.strftime("%Y%m%dT%H%M%S+0800"),
+                      "".join(random.choices(string.ascii_lowercase + string.digits, k=6)))
+
+
+def build_recovery_articles(root, candidates):
+    """PART A2：用**既有工件**为候选组装 persist_collected_articles 的输入。
+
+    只从 news_stream / raw_candidates / canonical articles 里取**已存在的**载荷，
+    绝不发明标题/正文/时间。取不到最小必需载荷的候选一律归入 INSUFFICIENT。
+    """
+    def norm(u):
+        return str(u or "").split("?")[0].rstrip("/")
+
+    pool = {}
+    ns = load(root / "data" / "views" / "news_stream.json", {}) or {}
+    for x in (ns.get("items") or []):
+        u = norm(x.get("source_url") or x.get("url"))
+        if u:
+            pool.setdefault(u, x)
+    arts, insuff = [], []
+    for c in candidates:
+        u = norm(c.get("url"))
+        x = pool.get(u)
+        title = (x or {}).get("title_original") or (x or {}).get("title_cn") or ""
+        if not x or len(str(title).strip()) < 5:
+            insuff.append(c)
+            continue
+        arts.append({
+            "article_url": c.get("url") or u,
+            "canonical_url": u,
+            "original_title": str(title).strip(),
+            "original_summary": (x.get("summary_original") or x.get("summary_cn") or "")[:2000],
+            "published_at_original": x.get("observed_at") or "",
+            "collected_at_beijing": datetime.now(BJT).isoformat(timespec="seconds"),
+            "source_id": x.get("source_id") or "",
+            "source_name": x.get("source_name") or "",
+            "source_country": x.get("country_cn") or "",
+            "country_cn": x.get("country_cn") or "",
+            # PART B：原样透传既有 geo scope（不推断）
+            "country_scope": x.get("country_scope") or "SINGLE_COUNTRY",
+            "countries": list(x.get("countries") or []),
+            "region": x.get("region") or None,
+            "_relevant": True,
+            "_country": {"decision": "", "mentioned_countries": []},
+        })
+    return arts, insuff
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description="C8-3 STEP 7 隔离重处理（确定性）")
     ap.add_argument("--root", default=str(ROOT))
@@ -63,12 +116,17 @@ def main(argv=None):
     ap.add_argument("--apply", action="store_true")
     args = ap.parse_args(argv)
     root = Path(args.root)
+    # 代码模块（geo_scope / article_persistence）必须按**脚本自身位置**解析，
+    # 不能跟着 --root（--root 是数据根，测试时指向临时目录）。
+    _code_root = Path(__file__).resolve().parents[2]
+    sys.path.insert(0, str(_code_root / "scripts"))
+    sys.path.insert(0, str(_code_root / "scripts" / "collectors"))
     sys.path.insert(0, str(root / "scripts"))
     sys.path.insert(0, str(root / "scripts" / "collectors"))
     from geo_scope import detect_geo_scope, load_monitored_country_index  # noqa: E402
     from data import quarantine_reeval as R  # noqa: E402
 
-    idx = load_monitored_country_index(root)
+    idx = load_monitored_country_index(root) or load_monitored_country_index(_code_root)
     doc = load(root / QUAR, {}) or {}
     items = doc.get("items") if isinstance(doc, dict) else doc
     now = datetime.now(timezone.utc)
@@ -132,8 +190,9 @@ def main(argv=None):
     print(json.dumps({k: v for k, v in out.items() if k != "candidates"},
                      ensure_ascii=False, indent=1))
     if args.apply:
-        OUT.parent.mkdir(parents=True, exist_ok=True)
-        OUT.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
+        _out = (root / OUT) if str(root) != str(_code_root) else OUT
+        _out.parent.mkdir(parents=True, exist_ok=True)
+        _out.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
         # 重置可恢复 URL 的**处理状态**（不写 canonical；由下次采集重新发现并入库）
         try:
             sys.path.insert(0, str(root / "scripts" / "collectors"))
@@ -158,15 +217,46 @@ def main(argv=None):
             if reset:
                 save_processing_state(st)
             out["state_reset_count"] = reset
+            # ── PART A：经**唯一**持久化入口直接入库（不再依赖"重新发现"）──
+            arts_in, insuff = build_recovery_articles(root, recovered)
+            out["RECOVERY_CANDIDATES_TOTAL"] = len(recovered)
+            out["RECOVERY_ATTEMPTED"] = len(arts_in)
+            out["RECOVERY_INPUT_INSUFFICIENT"] = len(insuff)
+            try:
+                sys.path.insert(0, str(_code_root))
+                from scripts.data import article_persistence as AP  # noqa: E402
+                rid = _compliant_run_id()
+                st2 = AP.persist_collected_articles(root, arts_in, run_id=rid, verbose=False)
+                ex = st2.get("excludes") or {}
+                log = st2.get("repo_log") or {}
+                out["RECOVERY_RUN_ID"] = rid
+                out["RECOVERY_PERSISTED_NEW"] = int(st2.get("new_articles_persisted") or 0)
+                out["RECOVERY_ALREADY_CANONICAL"] = int(log.get("skipped") or 0)
+                out["RECOVERY_DUPLICATE_EXISTING"] = int(
+                    ex.get("EXCLUDED_DUPLICATE_URL", 0) + ex.get("EXCLUDED_DUPLICATE_CONTENT", 0))
+                out["RECOVERY_REJECTED_VALID_REASON"] = int(
+                    st2.get("excluded_total", 0)
+                    - int(ex.get("EXCLUDED_DUPLICATE_URL", 0)) - int(ex.get("EXCLUDED_DUPLICATE_CONTENT", 0)))
+                out["RECOVERY_ERROR"] = int(log.get("failed") or 0)
+                print("recovery persist:", {k: out[k] for k in (
+                    "RECOVERY_ATTEMPTED", "RECOVERY_PERSISTED_NEW", "RECOVERY_ALREADY_CANONICAL",
+                    "RECOVERY_DUPLICATE_EXISTING", "RECOVERY_REJECTED_VALID_REASON",
+                    "RECOVERY_INPUT_INSUFFICIENT", "RECOVERY_ERROR")})
+            except Exception as e:  # noqa: BLE001
+                out["RECOVERY_ERROR"] = len(arts_in)
+                print("recovery persist failed:", str(e)[:140])
+            out["RECOVERY_PENDING_AFTER"] = sum(
+                1 for v in arts.values() if str(v.get("state")) == "PENDING_RECOVERY")
             out["RECOVERY_CANDIDATES_TOTAL"] = len(recovered)
             out["RECOVERY_STATE_MATCHED"] = matched
             out["RECOVERY_STATE_RESET"] = reset
             out["RECOVERY_STATE_NOT_FOUND"] = not_found
-            OUT.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
+            _out.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
             print("state_reset_count =", reset, "| matched =", matched, "| not_found =", not_found)
         except Exception as e:  # noqa: BLE001
             print("state reset skipped:", str(e)[:120])
-        REPORT.parent.mkdir(parents=True, exist_ok=True)
+        _rep = (root / REPORT) if str(root) != str(_code_root) else REPORT
+        _rep.parent.mkdir(parents=True, exist_ok=True)
         lines = ["# C8-3 · 近期 wrong_country 重处理", "",
                  "生成：%s ｜ 窗口：%s 天" % (out["generated_at"], args.days), "",
                  "| 指标 | 数值 |", "|---|---|"]
@@ -177,7 +267,7 @@ def main(argv=None):
         for k, v in sorted(buckets.items(), key=lambda kv: -kv[1]):
             lines.append("| %s | %d |" % (k, v))
         REPORT.write_text("\n".join(lines) + "\n", encoding="utf-8")
-        print("written:", OUT, "/", REPORT)
+        print("written:", _out, "/", _rep)
     return 0
 
 

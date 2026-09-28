@@ -173,6 +173,11 @@ def article_to_candidate(a):
         "event_type": a.get("_event_type") or "",
         "title_cn": "",
         "summary_cn": "",
+        # C8-3 PART B：透传采集侧（stage3 + geo_scope）**已确定**的地理范围元数据。
+        # 本层只做透传，绝不重新推断/提升（"单国未解析"绝不在此变成 REGIONAL）。
+        "country_scope": a.get("country_scope") or "SINGLE_COUNTRY",
+        "countries": list(a.get("countries") or []),
+        "region": a.get("region") or None,
         # C2：历史回填标记（§三）—— 仅回填文章携带，实时文章形状不变
         **({"historical_backfill": True,
             "backfill_collected_at": _rfc3339(a.get("backfill_collected_at")
