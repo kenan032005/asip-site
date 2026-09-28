@@ -45,6 +45,17 @@ def parse_t(s):
         return None
 
 
+def is_terminal_state(status):
+    """C8-3 FIX 1：终态判据**大小写不敏感**。
+
+    生产 processing_state 实际使用小写（如 `quarantined_terminal`、
+    `extraction_failed_terminal`），而原实现比较 `.endswith("TERMINAL")`（大写）
+    → 永不匹配 → state_reset_count 恒为 0，355 条合法恢复候选全部无法重置。
+    语义未变：仍只认"以 TERMINAL 结尾"的状态，不放宽任何其他状态。
+    """
+    return str(status or "").upper().endswith("TERMINAL")
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description="C8-3 STEP 7 隔离重处理（确定性）")
     ap.add_argument("--root", default=str(ROOT))
@@ -129,20 +140,30 @@ def main(argv=None):
             from framework import load_processing_state, save_processing_state  # noqa: E402
             st = load_processing_state() or {}
             arts = st.get("articles") or {}
-            moved = 0
+            matched = reset = not_found = 0
             for c in recovered:
                 u = c.get("url")
                 if u and u in arts:
+                    matched += 1
                     rec = arts[u]
-                    if str(rec.get("state") or "").endswith("TERMINAL"):
+                    # FIX 1：大小写不敏感（生产为小写 quarantined_terminal）
+                    if is_terminal_state(rec.get("state")):
                         rec["state"] = "PENDING_RECOVERY"
                         rec["recovery_note"] = "C8-3 geo scope recovery"
-                        moved += 1
-            if moved:
+                        reset += 1
+                else:
+                    # FIX 2：不在 processing_state 中的候选**只报告、不伪造**
+                    # （下次正常采集会把它当新 URL 处理，届时观察是否自然重回处理链）
+                    not_found += 1
+            if reset:
                 save_processing_state(st)
-            out["state_reset_count"] = moved
+            out["state_reset_count"] = reset
+            out["RECOVERY_CANDIDATES_TOTAL"] = len(recovered)
+            out["RECOVERY_STATE_MATCHED"] = matched
+            out["RECOVERY_STATE_RESET"] = reset
+            out["RECOVERY_STATE_NOT_FOUND"] = not_found
             OUT.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
-            print("state_reset_count =", moved)
+            print("state_reset_count =", reset, "| matched =", matched, "| not_found =", not_found)
         except Exception as e:  # noqa: BLE001
             print("state reset skipped:", str(e)[:120])
         REPORT.parent.mkdir(parents=True, exist_ok=True)
