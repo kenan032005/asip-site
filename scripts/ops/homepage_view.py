@@ -542,6 +542,9 @@ def build(root, now, apply=False):
         if not d["localized"]:
             continue
         pub_items.append({
+            "country_scope": d.get("country_scope") or "SINGLE_COUNTRY",
+            "countries": list(d.get("countries") or []),
+            "region": d.get("region") or None,
             "item_id": str(d.get("event_id") or d.get("news_id") or d["development_id"]),
             "kind": d["kind"],
             "detail_url": d["detail_url"],
