@@ -1,0 +1,150 @@
+{
+ "label": "S7efb50e4",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b18d76b569e151fdf99896e7f9254b9a41a236521dd89499cfcaea3821163f31",
+ "tokens": {
+  "input_tokens": 2723,
+  "output_tokens": 762,
+  "total_tokens": 3485
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"事故具体原因尚未查明，调查仍在进行中\", \"飞机是否在降落时遇到困难、技术状况如何、跑道不合规是否起作用，均有待调查确认\", \"关于TRACEP历史事故的统计来自多个来源，尚缺乏交叉验证\", \"目前仅一个来源（RFI）报道，尚未获得独立来源证实\"]",
+    "after": "[\"事故具体原因尚未查明，调查仍在进行中\", \"飞机是否在降落时遇到困难、技术状况如何、跑道不合规是否起作用，均有待调查确认\", \"关于TRACEP历史事故的统计来自多个来源，尚缺乏交叉验证\", \"目前仅一个来源（RFI）报道，尚未获得独立来源证实\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）肯盖飞机坠毁致17人死亡，调查须查明事故原因",
+   "summary_zh": "9月25日，一架TRACEP公司的Let L-410飞机在刚果（金）肯盖附近坠毁，造成17人死亡，其中包括两名中将。副省长称飞机曾在肯盖上空盘旋寻找降落地点，RVA董事长则提到跑道狭窄且机场用地被侵占。安全调查机构BPEA与司法部门已分别展开调查，交通部长要求民航局和RVA提供飞机状况信息，并撤销了TRACEP的航空运输许可证。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": "肯盖",
+    "site": "肯盖机场附近",
+    "raw_text": "près de la ville de Kenge, à environ 262 km à l'ouest de Kinshasa"
+   },
+   "key_facts": [
+    {
+     "fact": "9月25日一架TRACEP公司的Let L-410飞机在肯盖坠毁，造成17人死亡，其中包括两名中将",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le 25 septembre, le crash d'un Let L-410 de TRACEP à Kenge a fait 17 morts, dont deux lieutenants-généraux."
+    },
+    {
+     "fact": "副省长称飞机曾在肯盖上空盘旋寻找降落地点",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le vice-gouverneur affirme que l'avion a effectué plusieurs tours au-dessus de Kenge, en RDC, à la recherche d'un endroit où se poser."
+    },
+    {
+     "fact": "RVA董事长称肯盖机场跑道约930米且狭窄，机场用地部分被民居占用",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'aérodrome de Kenge, dit-il, disposait d'une piste d'environ 930 mètres. Son emprise est aujourd'hui en partie occupée par des habitations."
+    },
+    {
+     "fact": "安全调查机构BPEA已抵达现场展开调查，司法部长下令进行初步司法调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le BPEA, chargé de l'enquête de sécurité, est arrivé sur place à minuit... le ministre de la Justice a ordonné l'ouverture d'une enquête judiciaire préliminaire."
+    },
+    {
+     "fact": "交通部长要求民航局和RVA提供飞机状况及最近适航检查信息，并撤销TRACEP的航空运输许可证",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le ministre des Transports a demandé à l'AAC... et à la RVA des informations sur l'état de l'avion et sur son dernier contrôle de navigabilité. Il a également ordonné le retrait du certificat de transporteur aérien de la compagnie TRACEP."
+    },
+    {
+     "fact": "多个来源统计自2006年以来至少10起事故和事件归因于TRACEP",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plusieurs sources consultées recensent au moins dix accidents et incidents attribués à TRACEP depuis 2006."
+    }
+   ],
+   "uncertainties": [
+    "事故具体原因尚未查明，调查仍在进行中",
+    "飞机是否在降落时遇到困难、技术状况如何、跑道不合规是否起作用，均有待调查确认",
+    "关于TRACEP历史事故的统计来自多个来源，尚缺乏交叉验证",
+    "目前仅一个来源（RFI）报道，尚未获得独立来源证实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）肯盖飞机坠毁致17人死亡，调查须查明事故原因",
+   "summary_zh": "9月25日，一架TRACEP公司的Let L-410飞机在刚果（金）肯盖附近坠毁，造成17人死亡，其中包括两名中将。副省长称飞机曾在肯盖上空盘旋寻找降落地点，RVA董事长则提到跑道狭窄且机场用地被侵占。安全调查机构BPEA与司法部门已分别展开调查，交通部长要求民航局和RVA提供飞机状况信息，并撤销了TRACEP的航空运输许可证。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": "肯盖",
+    "site": "肯盖机场附近",
+    "raw_text": "près de la ville de Kenge, à environ 262 km à l'ouest de Kinshasa"
+   },
+   "key_facts": [
+    {
+     "fact": "9月25日一架TRACEP公司的Let L-410飞机在肯盖坠毁，造成17人死亡，其中包括两名中将",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le 25 septembre, le crash d'un Let L-410 de TRACEP à Kenge a fait 17 morts, dont deux lieutenants-généraux."
+    },
+    {
+     "fact": "副省长称飞机曾在肯盖上空盘旋寻找降落地点",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le vice-gouverneur affirme que l'avion a effectué plusieurs tours au-dessus de Kenge, en RDC, à la recherche d'un endroit où se poser."
+    },
+    {
+     "fact": "RVA董事长称肯盖机场跑道约930米且狭窄，机场用地部分被民居占用",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'aérodrome de Kenge, dit-il, disposait d'une piste d'environ 930 mètres. Son emprise est aujourd'hui en partie occupée par des habitations."
+    },
+    {
+     "fact": "安全调查机构BPEA已抵达现场展开调查，司法部长下令进行初步司法调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le BPEA, chargé de l'enquête de sécurité, est arrivé sur place à minuit... le ministre de la Justice a ordonné l'ouverture d'une enquête judiciaire préliminaire."
+    },
+    {
+     "fact": "交通部长要求民航局和RVA提供飞机状况及最近适航检查信息，并撤销TRACEP的航空运输许可证",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le ministre des Transports a demandé à l'AAC... et à la RVA des informations sur l'état de l'avion et sur son dernier contrôle de navigabilité. Il a également ordonné le retrait du certificat de transporteur aérien de la compagnie TRACEP."
+    },
+    {
+     "fact": "多个来源统计自2006年以来至少10起事故和事件归因于TRACEP",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plusieurs sources consultées recensent au moins dix accidents et incidents attribués à TRACEP depuis 2006."
+    }
+   ],
+   "uncertainties": [
+    "事故具体原因尚未查明，调查仍在进行中",
+    "飞机是否在降落时遇到困难、技术状况如何、跑道不合规是否起作用，均有待调查确认",
+    "关于TRACEP历史事故的统计来自多个来源，尚缺乏交叉验证",
+    "目前仅一个来源（RFI）报道，尚未获得独立来源证实",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_7781ef387efb50e4",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

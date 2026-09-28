@@ -1,0 +1,136 @@
+{
+ "label": "S667c78b3",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a23c0f436854e111687a8537e4054b02d888604e3995a806843d5bc811962f5a",
+ "tokens": {
+  "input_tokens": 2838,
+  "output_tokens": 583,
+  "total_tokens": 3421
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"集会城市数量（约四十座）为组织方说法，尚未获独立核实\", \"目前仅RFI单一来源报道，缺乏交叉验证\"]",
+    "after": "[\"集会城市数量（约四十座）为组织方说法，尚未获独立核实\", \"目前仅RFI单一来源报道，缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "摩洛哥约四十座城市爆发示威，反对与以色列关系正常化",
+   "summary_zh": "据摩洛哥支持巴勒斯坦与反正常化阵线称，9月25日至27日期间在摩洛哥约四十座城市举行集会，抗议拉巴特与特拉维夫加速外交接近。示威者要求摩洛哥政府撤回与以色列关系正常化的决定。在卡萨布兰卡，约一千人聚集，挥舞巴勒斯坦旗帜并高呼反对开设大使馆的口号。该组织表示还将在10月7日前后举行更多集会。",
+   "event_type": "civil_unrest",
+   "country_iso3": "MAR",
+   "location": {
+    "country_iso3": "MAR",
+    "admin1": null,
+    "city": "卡萨布兰卡",
+    "site": "一个平民街区广场",
+    "raw_text": "À Casablanca au Maroc, environ un millier de personnes étaient réunies dimanche sur une place d’un quartier populaire"
+   },
+   "key_facts": [
+    {
+     "fact": "摩洛哥支持巴勒斯坦与反正常化阵线称在约四十座城市组织集会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des rassemblements ont eu lieu dans une quarantaine de villes, selon l’organisation"
+    },
+    {
+     "fact": "示威活动于2026年9月25日至27日举行，称为“三天愤怒”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "entre vendredi 25 et dimanche 27 septembre 2026 dans le royaume, « trois jours de colère »"
+    },
+    {
+     "fact": "在卡萨布兰卡约一千人聚集，挥舞巴勒斯坦旗帜并高呼反对开设大使馆",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À Casablanca au Maroc, environ un millier de personnes étaient réunies dimanche sur une place d’un quartier populaire"
+    },
+    {
+     "fact": "摩洛哥当局十天前确认将开设大使馆，加速与以色列的外交接近",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’accélération du rapprochement diplomatique entre Rabat et Tel-Aviv, confirmé il y a dix jours par les autorités avec l’ouverture prochaine d’ambassades"
+    },
+    {
+     "fact": "组织者表示还将在10月7日前后举行更多集会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D’autres rassemblements sont prévus, notamment à l’occasion du 7-Octobre"
+    }
+   ],
+   "uncertainties": [
+    "集会城市数量（约四十座）为组织方说法，尚未获独立核实",
+    "目前仅RFI单一来源报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "摩洛哥约四十座城市爆发示威，反对与以色列关系正常化",
+   "summary_zh": "据摩洛哥支持巴勒斯坦与反正常化阵线称，9月25日至27日期间在摩洛哥约四十座城市举行集会，抗议拉巴特与特拉维夫加速外交接近。示威者要求摩洛哥政府撤回与以色列关系正常化的决定。在卡萨布兰卡，约一千人聚集，挥舞巴勒斯坦旗帜并高呼反对开设大使馆的口号。该组织表示还将在10月7日前后举行更多集会。",
+   "event_type": "civil_unrest",
+   "country_iso3": "MAR",
+   "location": {
+    "country_iso3": "MAR",
+    "admin1": null,
+    "city": "卡萨布兰卡",
+    "site": "一个平民街区广场",
+    "raw_text": "À Casablanca au Maroc, environ un millier de personnes étaient réunies dimanche sur une place d’un quartier populaire"
+   },
+   "key_facts": [
+    {
+     "fact": "摩洛哥支持巴勒斯坦与反正常化阵线称在约四十座城市组织集会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des rassemblements ont eu lieu dans une quarantaine de villes, selon l’organisation"
+    },
+    {
+     "fact": "示威活动于2026年9月25日至27日举行，称为“三天愤怒”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "entre vendredi 25 et dimanche 27 septembre 2026 dans le royaume, « trois jours de colère »"
+    },
+    {
+     "fact": "在卡萨布兰卡约一千人聚集，挥舞巴勒斯坦旗帜并高呼反对开设大使馆",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À Casablanca au Maroc, environ un millier de personnes étaient réunies dimanche sur une place d’un quartier populaire"
+    },
+    {
+     "fact": "摩洛哥当局十天前确认将开设大使馆，加速与以色列的外交接近",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’accélération du rapprochement diplomatique entre Rabat et Tel-Aviv, confirmé il y a dix jours par les autorités avec l’ouverture prochaine d’ambassades"
+    },
+    {
+     "fact": "组织者表示还将在10月7日前后举行更多集会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D’autres rassemblements sont prévus, notamment à l’occasion du 7-Octobre"
+    }
+   ],
+   "uncertainties": [
+    "集会城市数量（约四十座）为组织方说法，尚未获独立核实",
+    "目前仅RFI单一来源报道，缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_34f3544f667c78b3",
+ "disease_event_id": null,
+ "country_code": "MA"
+}

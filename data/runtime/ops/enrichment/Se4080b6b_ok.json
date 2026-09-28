@@ -1,0 +1,94 @@
+{
+ "label": "Se4080b6b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "06c3432288a0fbd70a6b749c247ccc2a063ccd0250b2ab46a5afbb6102482cd0",
+ "tokens": {
+  "input_tokens": 2206,
+  "output_tokens": 217,
+  "total_tokens": 2423
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"目前仅一个来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳武装部队启动2026/27年度征兵文件审核与体能筛选",
+   "summary_zh": "加纳武装部队已开始为申请加入加纳军事学院2026/2027年度招募的申请人进行文件审核与体能筛选。该消息来自单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳武装部队启动2026/2027年度征兵的文件审核与体能筛选",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Ghana Armed Forces (GAF) has commenced its Documentation and Body Selection Exercise for applicants seeking enlistment into the Ghana Military Academy for the 2026/2027 intake."
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳武装部队启动2026/27年度征兵文件审核与体能筛选",
+   "summary_zh": "加纳武装部队已开始为申请加入加纳军事学院2026/2027年度招募的申请人进行文件审核与体能筛选。该消息来自单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳武装部队启动2026/2027年度征兵的文件审核与体能筛选",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Ghana Armed Forces (GAF) has commenced its Documentation and Body Selection Exercise for applicants seeking enlistment into the Ghana Military Academy for the 2026/2027 intake."
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_faf5ddfee4080b6b",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

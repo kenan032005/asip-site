@@ -1,0 +1,104 @@
+{
+ "label": "S2b1b8b2f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "2be45b7766cb4bf6ad836be99235a50bf3b14b6dbf283b149102e3c012e78255",
+ "tokens": {
+  "input_tokens": 2201,
+  "output_tokens": 297,
+  "total_tokens": 2498
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该表态目前仅有一个来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"该表态目前仅有一个来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳外长阿布拉夸：非洲不会被迫在全球大国竞争中选边站",
+   "summary_zh": "加纳外交部长塞缪尔·奥库泽托·阿布拉夸表示，加纳及其他非洲国家应追求符合自身利益的伙伴关系，而不应被卷入全球大国之间的竞争。他称非洲不会被迫在大国竞争中选边站。该表态由单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳外长阿布拉夸表示非洲不会被迫在全球大国竞争中选边站",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Africa will not be forced to choose sides in global power rivalry – Ablakwa"
+    },
+    {
+     "fact": "阿布拉夸称加纳及其他非洲国家应追求符合自身利益的伙伴关系，而非被卷入全球大国竞争",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Foreign Affairs Minister Samuel Okudzeto Ablakwa says Ghana and other African countries should pursue partnerships that serve their interests instead of being drawn into rivalries between global powers."
+    }
+   ],
+   "uncertainties": [
+    "该表态目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳外长阿布拉夸：非洲不会被迫在全球大国竞争中选边站",
+   "summary_zh": "加纳外交部长塞缪尔·奥库泽托·阿布拉夸表示，加纳及其他非洲国家应追求符合自身利益的伙伴关系，而不应被卷入全球大国之间的竞争。他称非洲不会被迫在大国竞争中选边站。该表态由单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳外长阿布拉夸表示非洲不会被迫在全球大国竞争中选边站",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Africa will not be forced to choose sides in global power rivalry – Ablakwa"
+    },
+    {
+     "fact": "阿布拉夸称加纳及其他非洲国家应追求符合自身利益的伙伴关系，而非被卷入全球大国竞争",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Foreign Affairs Minister Samuel Okudzeto Ablakwa says Ghana and other African countries should pursue partnerships that serve their interests instead of being drawn into rivalries between global powers."
+    }
+   ],
+   "uncertainties": [
+    "该表态目前仅有一个来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_8c589cb32b1b8b2f",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

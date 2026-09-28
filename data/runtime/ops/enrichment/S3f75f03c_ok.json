@@ -1,0 +1,125 @@
+{
+ "label": "S3f75f03c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "fe734ecce133668c078880f2fba14bbb4f850812fee7a693a80d76df5b235ec4",
+ "tokens": {
+  "input_tokens": 2086,
+  "output_tokens": 545,
+  "total_tokens": 2631
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南非外长称特朗普接收阿非利卡人为“基于种族的政策”",
+   "summary_zh": "南非外长罗纳德·拉莫拉在纽约联合国大会期间接受法国24电视台采访时表示，美国计划接收最多17500名南非白人（阿非利卡人）是“基于种族的政策”，并称所谓阿非利卡人遭“种族灭绝”的说法是“假新闻”。拉莫拉称南非不会干涉该美国项目。他还表示，尽管特朗普政府施压，南非仍坚持就加沙战争在国际法院对以色列提起的种族灭绝诉讼。",
+   "event_type": "other_security",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": null,
+    "city": "纽约",
+    "site": "联合国大会",
+    "raw_text": "on the sidelines of the UN General Assembly in New York"
+   },
+   "key_facts": [
+    {
+     "fact": "南非外长拉莫拉称美国接收阿非利卡人的计划是“基于种族的政策”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South African Foreign Minister Ronald Lamola said Washington's plan to take in up to 17,500 more White South Africans was \"a race-based policy\""
+    },
+    {
+     "fact": "拉莫拉称所谓阿非利卡人遭“种族灭绝”是“假新闻”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "dismissing the \"so-called genocide\" of Afrikaners as \"fake news\""
+    },
+    {
+     "fact": "南非不会干涉美国的该项目",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pretoria will \"not interfere\" with the US programme, Lamola said"
+    },
+    {
+     "fact": "南非坚持在国际法院对以色列的种族灭绝诉讼",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South Africa stands by its genocide case against Israel at the International Court of Justice over the war in Gaza"
+    },
+    {
+     "fact": "拉莫拉拒绝尼日利亚就南非排外暴力事件的指控，称袭击非国家支持而是治安团体所为",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Lamola rejected Nigeria's accusations over recent anti-foreigner violence in South Africa as \"a very unfortunate characterisation\", saying the attacks were \"not state sponsored\" but the \"activities of vigilante groups\""
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源（法国24电视台），尚无其他来源交叉验证",
+    "美国接收阿非利卡人计划的具体规模（最多17500人）为外长转述，未获独立确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南非外长称特朗普接收阿非利卡人为“基于种族的政策”",
+   "summary_zh": "南非外长罗纳德·拉莫拉在纽约联合国大会期间接受法国24电视台采访时表示，美国计划接收最多17500名南非白人（阿非利卡人）是“基于种族的政策”，并称所谓阿非利卡人遭“种族灭绝”的说法是“假新闻”。拉莫拉称南非不会干涉该美国项目。他还表示，尽管特朗普政府施压，南非仍坚持就加沙战争在国际法院对以色列提起的种族灭绝诉讼。",
+   "event_type": "other_security",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": null,
+    "city": "纽约",
+    "site": "联合国大会",
+    "raw_text": "on the sidelines of the UN General Assembly in New York"
+   },
+   "key_facts": [
+    {
+     "fact": "南非外长拉莫拉称美国接收阿非利卡人的计划是“基于种族的政策”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South African Foreign Minister Ronald Lamola said Washington's plan to take in up to 17,500 more White South Africans was \"a race-based policy\""
+    },
+    {
+     "fact": "拉莫拉称所谓阿非利卡人遭“种族灭绝”是“假新闻”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "dismissing the \"so-called genocide\" of Afrikaners as \"fake news\""
+    },
+    {
+     "fact": "南非不会干涉美国的该项目",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pretoria will \"not interfere\" with the US programme, Lamola said"
+    },
+    {
+     "fact": "南非坚持在国际法院对以色列的种族灭绝诉讼",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South Africa stands by its genocide case against Israel at the International Court of Justice over the war in Gaza"
+    },
+    {
+     "fact": "拉莫拉拒绝尼日利亚就南非排外暴力事件的指控，称袭击非国家支持而是治安团体所为",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Lamola rejected Nigeria's accusations over recent anti-foreigner violence in South Africa as \"a very unfortunate characterisation\", saying the attacks were \"not state sponsored\" but the \"activities of vigilante groups\""
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源（法国24电视台），尚无其他来源交叉验证",
+    "美国接收阿非利卡人计划的具体规模（最多17500人）为外长转述，未获独立确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_394a86703f75f03c",
+ "disease_event_id": null,
+ "country_code": "ZA"
+}

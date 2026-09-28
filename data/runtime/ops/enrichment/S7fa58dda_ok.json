@@ -1,0 +1,131 @@
+{
+ "label": "S7fa58dda",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c33bd9adfde0e7b0065effa17510d7f128b30281c373d9efabfb0daf1feced5f",
+ "tokens": {
+  "input_tokens": 2410,
+  "output_tokens": 450,
+  "total_tokens": 2860
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "after": "[\"据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹共产党称跨党派对话受政府控制",
+   "summary_zh": "南苏丹共产党将正在朱巴举行的跨党派政治对话描述为受政府控制的政治进程，称其无法为解决该国不断加深的政治危机提供有意义的空间。为期两周的跨党派政治对话于9月24日在朱巴开始，选举定于12月22日举行。南苏丹共产党总书记约瑟夫·沃尔·莫德斯特表示，针对前第一副总统里克·马沙尔的持续政治紧张和司法程序进一步压缩了有意义政治参与的空间。",
+   "event_type": "political_instability",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": null,
+    "city": "朱巴",
+    "site": null,
+    "raw_text": "Juba"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹共产党称朱巴举行的跨党派对话为受政府控制的政治进程",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South Sudan’s Communist Party has described the ongoing inter-party dialogue in Juba as a government-controlled political process"
+    },
+    {
+     "fact": "为期两周的跨党派政治对话于9月24日在朱巴开始，选举定于12月22日举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The two-week Inter-Party Political Dialogue began in Juba on 24 September, ahead of elections scheduled for 22 December"
+    },
+    {
+     "fact": "南苏丹共产党总书记称针对前第一副总统里克·马沙尔的司法程序压缩了政治参与空间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Joseph Wol Modest, Secretary-General of the Communist Party of South Sudan, said continued political tensions and judicial proceedings against former First Vice-President Riek Machar had further narrowed the space for meaningful political engagement"
+    },
+    {
+     "fact": "总统萨尔瓦·基尔警告各政党不要利用会谈推迟或改变选举路线图",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "President Salva Kiir has warned political parties against using the talks to delay or alter the electoral roadmap"
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹共产党称跨党派对话受政府控制",
+   "summary_zh": "南苏丹共产党将正在朱巴举行的跨党派政治对话描述为受政府控制的政治进程，称其无法为解决该国不断加深的政治危机提供有意义的空间。为期两周的跨党派政治对话于9月24日在朱巴开始，选举定于12月22日举行。南苏丹共产党总书记约瑟夫·沃尔·莫德斯特表示，针对前第一副总统里克·马沙尔的持续政治紧张和司法程序进一步压缩了有意义政治参与的空间。",
+   "event_type": "political_instability",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": null,
+    "city": "朱巴",
+    "site": null,
+    "raw_text": "Juba"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹共产党称朱巴举行的跨党派对话为受政府控制的政治进程",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South Sudan’s Communist Party has described the ongoing inter-party dialogue in Juba as a government-controlled political process"
+    },
+    {
+     "fact": "为期两周的跨党派政治对话于9月24日在朱巴开始，选举定于12月22日举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The two-week Inter-Party Political Dialogue began in Juba on 24 September, ahead of elections scheduled for 22 December"
+    },
+    {
+     "fact": "南苏丹共产党总书记称针对前第一副总统里克·马沙尔的司法程序压缩了政治参与空间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Joseph Wol Modest, Secretary-General of the Communist Party of South Sudan, said continued political tensions and judicial proceedings against former First Vice-President Riek Machar had further narrowed the space for meaningful political engagement"
+    },
+    {
+     "fact": "总统萨尔瓦·基尔警告各政党不要利用会谈推迟或改变选举路线图",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "President Salva Kiir has warned political parties against using the talks to delay or alter the electoral roadmap"
+    }
+   ],
+   "uncertainties": [
+    "据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_2a75c0427fa58dda",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

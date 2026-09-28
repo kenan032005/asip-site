@@ -1,0 +1,124 @@
+{
+ "label": "S74767315",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3653ba69648e5e626d71869839e37e5a8d4488f6fa78a4b41865bce76c1c05a3",
+ "tokens": {
+  "input_tokens": 1987,
+  "output_tokens": 405,
+  "total_tokens": 2392
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"数据为刚果（金）政府单方面公布，目前仅一个来源（据路透社报道），尚缺乏交叉验证\"]",
+    "after": "[\"数据为刚果（金）政府单方面公布，目前仅一个来源（据路透社报道），尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "刚果（金）埃博拉确诊病例突破8000例，欧盟与美国承诺追加资金支持",
+   "summary_zh": "据刚果（金）政府周一公布的数据，该国埃博拉确诊病例已超过8000例，本次疫情已导致3901人死亡。此次由本迪布焦型毒株引发的疫情已成为刚果（金）历史上规模最大、致死人数最多的埃博拉疫情。欧盟与美国承诺提供进一步资金支持。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Democratic Republic Of Congo"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）埃博拉确诊病例超过8000例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The number of confirmed Ebola cases in the Democratic Republic of Congo has surpassed 8,000"
+    },
+    {
+     "fact": "本次疫情已导致3901人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The country's public health institute also said 3,901 people had died in the outbreak."
+    },
+    {
+     "fact": "此次疫情由本迪布焦型毒株引发，为刚果（金）历史上规模最大、致死人数最多的埃博拉疫情",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Caused by the Bundibugyo strain, the current Ebola epidemic has become the largest and the deadliest in the history of the DRC."
+    },
+    {
+     "fact": "欧盟与美国承诺提供进一步资金支持",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Ebola cases in DR Congo cross 8,000 as EU, US pledge further financial support"
+    }
+   ],
+   "uncertainties": [
+    "数据为刚果（金）政府单方面公布，目前仅一个来源（据路透社报道），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "刚果（金）埃博拉确诊病例突破8000例，欧盟与美国承诺追加资金支持",
+   "summary_zh": "据刚果（金）政府周一公布的数据，该国埃博拉确诊病例已超过8000例，本次疫情已导致3901人死亡。此次由本迪布焦型毒株引发的疫情已成为刚果（金）历史上规模最大、致死人数最多的埃博拉疫情。欧盟与美国承诺提供进一步资金支持。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Democratic Republic Of Congo"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）埃博拉确诊病例超过8000例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The number of confirmed Ebola cases in the Democratic Republic of Congo has surpassed 8,000"
+    },
+    {
+     "fact": "本次疫情已导致3901人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The country's public health institute also said 3,901 people had died in the outbreak."
+    },
+    {
+     "fact": "此次疫情由本迪布焦型毒株引发，为刚果（金）历史上规模最大、致死人数最多的埃博拉疫情",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Caused by the Bundibugyo strain, the current Ebola epidemic has become the largest and the deadliest in the history of the DRC."
+    },
+    {
+     "fact": "欧盟与美国承诺提供进一步资金支持",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Ebola cases in DR Congo cross 8,000 as EU, US pledge further financial support"
+    }
+   ],
+   "uncertainties": [
+    "数据为刚果（金）政府单方面公布，目前仅一个来源（据路透社报道），尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_095e2a2e74767315",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

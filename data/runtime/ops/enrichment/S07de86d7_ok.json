@@ -1,0 +1,139 @@
+{
+ "label": "S07de86d7",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "26ae7f742bd8bd13b05c4e59277c6058da6d9371d48d7597ca35557126d1134e",
+ "tokens": {
+  "input_tokens": 2842,
+  "output_tokens": 768,
+  "total_tokens": 3610
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "埃塞俄比亚北部联邦军与提格雷叛军战斗加剧",
+   "summary_zh": "埃塞俄比亚北部，联邦军与提格雷人民解放阵线（TPLF）及其盟友的战斗持续并加剧，9月26日至27日周末在多个战线升级。联邦军称已控制从提格雷首府默克莱通往亚的斯亚贝巴公路上的阿拉马塔附近路段，提格雷武装则在阿法尔地区夺取包括埃雷布提在内的多个地点。埃塞俄比亚军方指控厄立特里亚、苏丹和埃及支持反政府武装，厄立特里亚一贯否认，苏丹军方发言人也予以否认。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷",
+    "city": "默克莱",
+    "site": null,
+    "raw_text": "nord du pays, sud du Tigré autour d'Alamata, région de l'Afar (Erebti), axe routier Mekele-Addis-Abeba"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚北部联邦军与提格雷叛军战斗持续并加剧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les combats se poursuivent dans le nord du pays entre l'armée fédérale et les rebelles du Tigré, les forces du TPLF et leurs alliés. Ces combats se sont même intensifiés ce week-end du 26-27 septembre sur plusieurs fronts."
+    },
+    {
+     "fact": "联邦军控制了阿拉马塔附近从默克莱通往亚的斯亚贝巴的公路路段",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'armée fédérale a pris le contrôle de cet axe, juste en dessous d'Alamata."
+    },
+    {
+     "fact": "提格雷武装及其盟友在阿法尔地区夺取包括埃雷布提在内的多个地点",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "dans l'Afar, une région située à l'est du Tigré, où les forces tigréennes et leurs alliés se sont emparés de plusieurs localités, dont Erebti"
+    },
+    {
+     "fact": "埃塞俄比亚军方指控厄立特里亚、苏丹和埃及支持反政府武装",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le chef de l'armée éthiopienne a accusé l'Érythrée, le Soudan voisin ainsi que l'Égypte de soutenir les groupes armés qui combattent l'armée fédérale"
+    },
+    {
+     "fact": "厄立特里亚一贯否认支持这些武装团体，苏丹军方发言人也否认相关指控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Asmara a toujours nié tout soutien à ces groupes armés. Ce matin, le porte-parole de l'armée soudanaise a à son tour rejeté ces accusations"
+    },
+    {
+     "fact": "北部电信大部分中断，战斗进展难以追踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'évolution des combats reste difficile à suivre, car les télécommunications sont en grande partie coupées dans le nord du pays."
+    }
+   ],
+   "uncertainties": [
+    "战斗进展因北部电信大部分中断而难以核实",
+    "埃塞俄比亚军方对厄立特里亚、苏丹和埃及支持反政府武装的指控未获证实，相关方均予否认",
+    "提格雷武装是否获得外部支持尚未证实",
+    "目前仅一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "埃塞俄比亚北部联邦军与提格雷叛军战斗加剧",
+   "summary_zh": "埃塞俄比亚北部，联邦军与提格雷人民解放阵线（TPLF）及其盟友的战斗持续并加剧，9月26日至27日周末在多个战线升级。联邦军称已控制从提格雷首府默克莱通往亚的斯亚贝巴公路上的阿拉马塔附近路段，提格雷武装则在阿法尔地区夺取包括埃雷布提在内的多个地点。埃塞俄比亚军方指控厄立特里亚、苏丹和埃及支持反政府武装，厄立特里亚一贯否认，苏丹军方发言人也予以否认。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷",
+    "city": "默克莱",
+    "site": null,
+    "raw_text": "nord du pays, sud du Tigré autour d'Alamata, région de l'Afar (Erebti), axe routier Mekele-Addis-Abeba"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚北部联邦军与提格雷叛军战斗持续并加剧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les combats se poursuivent dans le nord du pays entre l'armée fédérale et les rebelles du Tigré, les forces du TPLF et leurs alliés. Ces combats se sont même intensifiés ce week-end du 26-27 septembre sur plusieurs fronts."
+    },
+    {
+     "fact": "联邦军控制了阿拉马塔附近从默克莱通往亚的斯亚贝巴的公路路段",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'armée fédérale a pris le contrôle de cet axe, juste en dessous d'Alamata."
+    },
+    {
+     "fact": "提格雷武装及其盟友在阿法尔地区夺取包括埃雷布提在内的多个地点",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "dans l'Afar, une région située à l'est du Tigré, où les forces tigréennes et leurs alliés se sont emparés de plusieurs localités, dont Erebti"
+    },
+    {
+     "fact": "埃塞俄比亚军方指控厄立特里亚、苏丹和埃及支持反政府武装",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le chef de l'armée éthiopienne a accusé l'Érythrée, le Soudan voisin ainsi que l'Égypte de soutenir les groupes armés qui combattent l'armée fédérale"
+    },
+    {
+     "fact": "厄立特里亚一贯否认支持这些武装团体，苏丹军方发言人也否认相关指控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Asmara a toujours nié tout soutien à ces groupes armés. Ce matin, le porte-parole de l'armée soudanaise a à son tour rejeté ces accusations"
+    },
+    {
+     "fact": "北部电信大部分中断，战斗进展难以追踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'évolution des combats reste difficile à suivre, car les télécommunications sont en grande partie coupées dans le nord du pays."
+    }
+   ],
+   "uncertainties": [
+    "战斗进展因北部电信大部分中断而难以核实",
+    "埃塞俄比亚军方对厄立特里亚、苏丹和埃及支持反政府武装的指控未获证实，相关方均予否认",
+    "提格雷武装是否获得外部支持尚未证实",
+    "目前仅一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_5c9b0a9d07de86d7",
+ "disease_event_id": null,
+ "country_code": "ET"
+}
