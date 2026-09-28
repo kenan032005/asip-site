@@ -1,0 +1,125 @@
+{
+ "label": "S1df8c715",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "03e9b6e39d87fe1ca5b1f9b6c4f8ab023e6f66156373cb109ca451304fdd878e",
+ "tokens": {
+  "input_tokens": 2410,
+  "output_tokens": 574,
+  "total_tokens": 2984
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得西凯比省一农民遭五名牧民砍伤头部",
+   "summary_zh": "2026年9月27日，乍得西凯比省纳纳耶县Reb-Reb村一名农民在自家田地里遭五名牧民袭击，头部被砍刀砍伤。事发时该农民正试图驱赶闯入田地的牧群以保护庄稼，袭击者随后携牲畜逃离。伤者已被紧急送往当地卫生中心接受治疗。该事件再次凸显农民与牧民之间因庄稼破坏和放牧问题而长期存在的紧张关系。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "西凯比省（Mayo-Kebbi Ouest）",
+    "city": "Reb-Reb",
+    "site": "农田",
+    "raw_text": "À Reb-Reb, dans le département de Nanaye (province du Mayo-Kebbi Ouest)"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年9月27日，乍得西凯比省纳纳耶县Reb-Reb村一名农民遭五名牧民袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À Reb-Reb, dans le département de Nanaye (province du Mayo-Kebbi Ouest, cinq bouviers ont blessé un habitant ce dimanche 27 septembre 2026."
+    },
+    {
+     "fact": "受害者头部遭多处砍刀砍伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La victime a reçu plusieurs coups de machette à la tête alors qu’elle se trouvait dans son champ."
+    },
+    {
+     "fact": "事发时农民正试图驱赶闯入田地的牧群以保护庄稼",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En tentant de repousser les animaux pour protéger ses récoltes, l’agriculteur a été pris à partie par les cinq individus."
+    },
+    {
+     "fact": "伤者已被紧急送往Reb-Reb卫生中心接受治疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Grièvement touchée, la victime a été évacuée en urgence au centre de santé de Reb-Reb, où elle reçoit actuellement les soins nécessaires."
+    },
+    {
+     "fact": "袭击后五名牧民携牲畜逃离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Après l’agression, les cinq bouviers ont pris la fuite avec leur bétail."
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（Tchadinfos）报道，尚缺乏交叉验证",
+    "袭击者的身份和动机尚未得到独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得西凯比省一农民遭五名牧民砍伤头部",
+   "summary_zh": "2026年9月27日，乍得西凯比省纳纳耶县Reb-Reb村一名农民在自家田地里遭五名牧民袭击，头部被砍刀砍伤。事发时该农民正试图驱赶闯入田地的牧群以保护庄稼，袭击者随后携牲畜逃离。伤者已被紧急送往当地卫生中心接受治疗。该事件再次凸显农民与牧民之间因庄稼破坏和放牧问题而长期存在的紧张关系。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "西凯比省（Mayo-Kebbi Ouest）",
+    "city": "Reb-Reb",
+    "site": "农田",
+    "raw_text": "À Reb-Reb, dans le département de Nanaye (province du Mayo-Kebbi Ouest)"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年9月27日，乍得西凯比省纳纳耶县Reb-Reb村一名农民遭五名牧民袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À Reb-Reb, dans le département de Nanaye (province du Mayo-Kebbi Ouest, cinq bouviers ont blessé un habitant ce dimanche 27 septembre 2026."
+    },
+    {
+     "fact": "受害者头部遭多处砍刀砍伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La victime a reçu plusieurs coups de machette à la tête alors qu’elle se trouvait dans son champ."
+    },
+    {
+     "fact": "事发时农民正试图驱赶闯入田地的牧群以保护庄稼",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En tentant de repousser les animaux pour protéger ses récoltes, l’agriculteur a été pris à partie par les cinq individus."
+    },
+    {
+     "fact": "伤者已被紧急送往Reb-Reb卫生中心接受治疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Grièvement touchée, la victime a été évacuée en urgence au centre de santé de Reb-Reb, où elle reçoit actuellement les soins nécessaires."
+    },
+    {
+     "fact": "袭击后五名牧民携牲畜逃离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Après l’agression, les cinq bouviers ont pris la fuite avec leur bétail."
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（Tchadinfos）报道，尚缺乏交叉验证",
+    "袭击者的身份和动机尚未得到独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_9c3441dd1df8c715",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
