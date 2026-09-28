@@ -1,15 +1,15 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-09-28T09:44:32+08:00",
+ "generated_at": "2026-09-28T10:07:17+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 50,
-  "signals_7d": 151,
+  "signals_24h": 52,
+  "signals_7d": 152,
   "verified_events_24h": 54,
-  "verified_events_7d": 160,
+  "verified_events_7d": 159,
   "multi_source_verified_events_7d": 4,
   "countries_with_activity_24h": 7,
   "total_countries_monitored": 22
@@ -43,11 +43,11 @@
   },
   {
    "value": "加纳",
-   "count": 50
+   "count": 51
   },
   {
    "value": "埃塞俄比亚",
-   "count": 15
+   "count": 16
   },
   {
    "value": "尼日尔",
@@ -58,12 +58,12 @@
    "count": 6
   },
   {
-   "value": "刚果（金）",
+   "value": "尼日利亚",
    "count": 2
   },
   {
-   "value": "尼日利亚",
-   "count": 2
+   "value": "刚果（金）",
+   "count": 1
   },
   {
    "value": "塞内加尔",
@@ -81,7 +81,7 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 35
+   "count": 36
   },
   {
    "value": "武装冲突",
@@ -90,6 +90,10 @@
   {
    "value": "基础设施安全",
    "count": 2
+  },
+  {
+   "value": "军事行动",
+   "count": 1
   },
   {
    "value": "公共卫生",
@@ -111,33 +115,18 @@
  "source_tier_distribution_7d": [
   {
    "value": "C",
-   "count": 173
+   "count": 171
   },
   {
    "value": "B",
-   "count": 128
+   "count": 129
   },
   {
    "value": "A",
-   "count": 10
+   "count": 11
   }
  ],
  "top_verified_events": [
-  {
-   "fact_id": "EVT_683ef70f565d0155",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "Moundou : une journée d’orientation pour accompagner les nouveaux bacheliers",
-   "category": "civil_unrest",
-   "source": "Tchadinfos",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-21 02:00",
-   "importance": "high",
-   "severity": "medium"
-  },
   {
    "fact_id": "EVT_9122a917676cc340",
    "level": "verified_event",
@@ -212,6 +201,21 @@
    "time": "2026-09-21 09:54",
    "importance": "high",
    "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_c52154869b7d98ee",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Mines artisanales : trois drames, plus de 300 morts et un avertissement pour le Tchad",
+   "category": "other_security",
+   "source": "Le N'Djam Post",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-21 20:11",
+   "importance": "high",
+   "severity": "medium"
   }
  ],
  "top_signals": [
@@ -251,7 +255,7 @@
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "南苏丹",
-   "title": "Vehicles burned, civilians abducted in attacks along Juba-Mundri road",
+   "title": "南苏丹朱巴-蒙德里公路沿线发生袭击，车辆被焚、平民遭绑架",
    "category": "other_security",
    "source": "Radio Tamazuj",
    "source_tier": "C",
@@ -265,8 +269,8 @@
    "level": "news_signal",
    "evidence_tier": "news_signal",
    "source_count": 1,
-   "country": "刚果（金）",
-   "title": "RDC: des dizaines de disparus dans le naufrage d’une embarcation sur le lac Kivu",
+   "country": "乍得",
+   "title": "刚果（金）基伍湖船只倾覆，至少12人死亡、数十人失踪",
    "category": "other_security",
    "source": "RFI Afrique (Chad)",
    "source_tier": "C",
@@ -276,12 +280,42 @@
    "why_it_matters": ""
   },
   {
+   "fact_id": "news:dd8054bbf81230f0",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "评论文章：加纳DVLA不应将驾照过期者一律视为违规者",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-09-28 06:23",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:bf8cc5aa6683f916",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "埃塞俄比亚：联邦军队加强北部反攻，提格雷州公共电视台遭无人机袭击",
+   "category": "military_operation",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-09-28 06:02",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
    "fact_id": "news:da3a55e450996000",
    "level": "news_signal",
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "乍得",
-   "title": "Baga-Sola : la Croix-Rouge intensifie la sensibilisation sur le choléra",
+   "title": "乍得Baga-Sola：红十字会加强霍乱防控宣传",
    "category": "public_health",
    "source": "Tchadinfos",
    "source_tier": "C",
@@ -544,36 +578,6 @@
    "time": "2026-09-27 22:29",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:fa4d74a860a7ad58",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得“新日”党警告彭代桥年久失修",
-   "category": "other_security",
-   "source": "Alwihda Info",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-27 20:54",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:e565a72924a4a948",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "委内瑞拉在后马杜罗会谈后释放39名政治犯",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 20:21",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -652,10 +656,10 @@
  ],
  "existing_assessment": {
   "status": "ai",
-  "overall_assessment": "已核实事件方面，乍得湖地区安全形势突出：恩古布阿附近发生袭击致11名渔民死亡，军方称击毙9名袭击者；提贝斯提省图尔库矿区遭枪击致一名矿业企业家身亡；乍得政府设立混合解除武装协调机制并逮捕涉中非共和国阿姆达福克袭击的嫌疑人。苏丹危机外溢持续，联合国难民署称年初以来逾5.5万苏丹难民抵达乍得，乍得在联合国重申中立并警告边境入侵。南苏丹琼莱州杜克县社区冲突致至少13人死亡。埃塞俄比亚北部战事升级，联合国人权高专呼吁紧急缓和。加纳方面，北部光缆中断致大规模通信中断，教师罢工持续。情报信号（单源消息，尚待核实）：南苏丹朱巴-蒙德里公路沿线车辆被焚、平民被绑；刚果（金）基伍湖船只倾覆致数十人失踪；乍得巴加索拉霍乱防控。",
+  "overall_assessment": "已核实事件层面，乍得湖地区安全形势持续紧张：9月21日恩古布阿附近发生袭击致11名渔民死亡，军方称击毙9名袭击者；乍得政府于9月22日设立混合解除武装协调机制，并逮捕了据称与中非共和国阿姆达福克袭击有关的嫌疑人。乍得还面临苏丹难民持续涌入（逾5.5万人）与历史性干旱叠加的人道压力，武装部队部长多次赴湖区视察。南苏丹琼莱州杜克县社区冲突致至少13人死亡。埃塞俄比亚北部战事升级，联合国人权高专呼吁紧急缓和。加纳方面以治理类事件为主，包括毒品走私争议、非法采矿与选举暴力调查。情报信号层面（均为单源消息，尚待核实）：南苏丹朱巴-蒙德里公路袭击、埃塞俄比亚提格雷州电视台遭无人机袭击、乍得Baga-Sola霍乱防控宣传等，需进一步核实。",
   "risk_direction": "worsening",
   "confidence": "medium",
-  "generated_time": "2026-09-28T09:44:26+08:00",
+  "generated_time": "2026-09-28T10:07:10+08:00",
   "based_on": "过去24小时/7日公开信息",
   "model": "",
   "date": "20260928"
@@ -668,7 +672,7 @@
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "南苏丹",
-   "title": "Vehicles burned, civilians abducted in attacks along Juba-Mundri road",
+   "title": "南苏丹朱巴-蒙德里公路沿线发生袭击，车辆被焚、平民遭绑架",
    "category": "other_security",
    "source": "Radio Tamazuj",
    "source_tier": "C",
@@ -682,13 +686,43 @@
    "level": "news_signal",
    "evidence_tier": "news_signal",
    "source_count": 1,
-   "country": "刚果（金）",
-   "title": "RDC: des dizaines de disparus dans le naufrage d’une embarcation sur le lac Kivu",
+   "country": "乍得",
+   "title": "刚果（金）基伍湖船只倾覆，至少12人死亡、数十人失踪",
    "category": "other_security",
    "source": "RFI Afrique (Chad)",
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-09-28 08:28",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:dd8054bbf81230f0": {
+   "fact_id": "news:dd8054bbf81230f0",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "评论文章：加纳DVLA不应将驾照过期者一律视为违规者",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-09-28 06:23",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:bf8cc5aa6683f916": {
+   "fact_id": "news:bf8cc5aa6683f916",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "埃塞俄比亚：联邦军队加强北部反攻，提格雷州公共电视台遭无人机袭击",
+   "category": "military_operation",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-09-28 06:02",
    "importance": "low",
    "why_it_matters": ""
   },
@@ -698,7 +732,7 @@
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "乍得",
-   "title": "Baga-Sola : la Croix-Rouge intensifie la sensibilisation sur le choléra",
+   "title": "乍得Baga-Sola：红十字会加强霍乱防控宣传",
    "category": "public_health",
    "source": "Tchadinfos",
    "source_tier": "C",
@@ -2911,36 +2945,6 @@
    "time": "2026-09-21 17:54",
    "importance": "low",
    "why_it_matters": ""
-  },
-  "news:04edbb4793ffbce8": {
-   "fact_id": "news:04edbb4793ffbce8",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "Moundou : une journée d’orientation pour accompagner les nouveaux bacheliers",
-   "category": "civil_unrest",
-   "source": "Tchadinfos",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-21 10:00",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "EVT_683ef70f565d0155": {
-   "fact_id": "EVT_683ef70f565d0155",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "Moundou : une journée d’orientation pour accompagner les nouveaux bacheliers",
-   "category": "civil_unrest",
-   "source": "Tchadinfos",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-21 02:00",
-   "importance": "high",
-   "severity": "medium"
   },
   "EVT_9122a917676cc340": {
    "fact_id": "EVT_9122a917676cc340",
