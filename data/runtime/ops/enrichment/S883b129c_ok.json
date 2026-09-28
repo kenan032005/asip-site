@@ -1,0 +1,115 @@
+{
+ "label": "S883b129c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e4b8c48748b07d999c8d6ab078ff3923f3d673b26212615da72ef518ce1ea6b1",
+ "tokens": {
+  "input_tokens": 2286,
+  "output_tokens": 505,
+  "total_tokens": 2791
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔Kalangou电台节目：司法、文化产业与收入多元化",
+   "summary_zh": "尼日尔Kalangou电台9月28日播出的节目讨论了该国不同形式的剥削现象以及打击人口贩运的努力。在阿加德兹，国家打击人口贩运机构举办了一场关于该现象相关挑战的宣传论坛。节目还涉及塔瓦大区Birnin Konni地区的出生证明补办问题，以及9月14日至18日在尼亚美举行的第四届尼日尔文化产业博览会。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Agadez; Birnin Konni, région de Tahoua; Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔Kalangou电台节目讨论该国不同形式的剥削及打击人口贩运的努力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'entretien du jour parle des différentes formes d'exploitation au Niger et les efforts engagés dans la lutte contre la traite des personnes"
+    },
+    {
+     "fact": "国家打击人口贩运机构在阿加德兹举办关于人口贩运挑战的宣传论坛",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À Agadez, l'Agence nationale de lutte contre la traite des personnes a organisé un forum de sensibilisation sur les défis liés au phénomène"
+    },
+    {
+     "fact": "节目涉及塔瓦大区Birnin Konni地区的出生证明补办",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La rubrique justice s'intéresse à la récupération des extraits de naissance dans le département de Birnin Konni, région de Tahoua"
+    },
+    {
+     "fact": "第四届尼日尔文化产业博览会于2026年9月14日至18日在尼亚美举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "retour sur la 4e édition de la Foire des industries culturelles nigériennes, tenue du 14 au 18 septembre 2026 au Palais du 29 juillet à Niamey"
+    }
+   ],
+   "uncertainties": [
+    "该事件为单一来源报道（Studio Kalangou），尚缺乏交叉验证",
+    "论坛的具体成果与参与情况未在文中说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 60
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔Kalangou电台节目：司法、文化产业与收入多元化",
+   "summary_zh": "尼日尔Kalangou电台9月28日播出的节目讨论了该国不同形式的剥削现象以及打击人口贩运的努力。在阿加德兹，国家打击人口贩运机构举办了一场关于该现象相关挑战的宣传论坛。节目还涉及塔瓦大区Birnin Konni地区的出生证明补办问题，以及9月14日至18日在尼亚美举行的第四届尼日尔文化产业博览会。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Agadez; Birnin Konni, région de Tahoua; Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔Kalangou电台节目讨论该国不同形式的剥削及打击人口贩运的努力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'entretien du jour parle des différentes formes d'exploitation au Niger et les efforts engagés dans la lutte contre la traite des personnes"
+    },
+    {
+     "fact": "国家打击人口贩运机构在阿加德兹举办关于人口贩运挑战的宣传论坛",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À Agadez, l'Agence nationale de lutte contre la traite des personnes a organisé un forum de sensibilisation sur les défis liés au phénomène"
+    },
+    {
+     "fact": "节目涉及塔瓦大区Birnin Konni地区的出生证明补办",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La rubrique justice s'intéresse à la récupération des extraits de naissance dans le département de Birnin Konni, région de Tahoua"
+    },
+    {
+     "fact": "第四届尼日尔文化产业博览会于2026年9月14日至18日在尼亚美举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "retour sur la 4e édition de la Foire des industries culturelles nigériennes, tenue du 14 au 18 septembre 2026 au Palais du 29 juillet à Niamey"
+    }
+   ],
+   "uncertainties": [
+    "该事件为单一来源报道（Studio Kalangou），尚缺乏交叉验证",
+    "论坛的具体成果与参与情况未在文中说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 60
+  }
+ },
+ "event_id": "EVT_dc628de2883b129c",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

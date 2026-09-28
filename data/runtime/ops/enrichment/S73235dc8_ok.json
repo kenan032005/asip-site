@@ -1,0 +1,129 @@
+{
+ "label": "S73235dc8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "182bcee88c3169f59514ee1f1441d7199fc09ec9478347a16dfa9dab812864d6",
+ "tokens": {
+  "input_tokens": 2452,
+  "output_tokens": 524,
+  "total_tokens": 2976
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚森林中发现至少28名疑似绑架受害者遗骸",
+   "summary_zh": "尼日利亚阿比亚州警方在乌穆阿库和恩内阿托森林的疑似犯罪营地中发现至少28具人类头骨和骨骼，据称可能为绑架受害者。警方称嫌疑人已逃离，营地已被捣毁，法医调查仍在进行以确认身份和死因。同一周末，尼日利亚北部尼日尔州和扎姆法拉州还发生两起大规模绑架事件，共约90人被劫持。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "阿比亚州",
+    "city": null,
+    "site": "乌穆阿库和恩内阿托森林",
+    "raw_text": "Umuaku and Nneato forests, Abia State, south-eastern Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "阿比亚州警方在乌穆阿库和恩内阿托森林发现至少28具人类头骨和骨骼",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A total of twenty-eight human skulls and bones, suspected to be kidnap victims, were recovered"
+    },
+    {
+     "fact": "警方称嫌疑人逃离，犯罪营地已被捣毁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Upon arrival of the Command's tactical operatives at the camps, the suspects fled. The criminal camps were subsequently dismantled."
+    },
+    {
+     "fact": "警方怀疑遗骸属于绑架受害者，法医调查仍在进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Officers suspect the remains belong to kidnapping victims, although forensic and other investigations are ongoing to establish their identities"
+    },
+    {
+     "fact": "同一周末尼日尔州近50名农民被武装分子绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "nearly 50 farmers were abducted by gunmen in Niger State"
+    },
+    {
+     "fact": "扎姆法拉州约40名妇女被绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "about 40 other women were kidnapped in the neighbouring state of Zamfara"
+    }
+   ],
+   "uncertainties": [
+    "遗骸身份尚未确认，法医调查仍在进行",
+    "遗骸是否与未解决的绑架案件有关尚待确定",
+    "北部两起大规模绑架事件的具体人数来自安全报告和当地消息源，尚未获独立确认",
+    "事件目前仅有一个来源（BBC）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚森林中发现至少28名疑似绑架受害者遗骸",
+   "summary_zh": "尼日利亚阿比亚州警方在乌穆阿库和恩内阿托森林的疑似犯罪营地中发现至少28具人类头骨和骨骼，据称可能为绑架受害者。警方称嫌疑人已逃离，营地已被捣毁，法医调查仍在进行以确认身份和死因。同一周末，尼日利亚北部尼日尔州和扎姆法拉州还发生两起大规模绑架事件，共约90人被劫持。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "阿比亚州",
+    "city": null,
+    "site": "乌穆阿库和恩内阿托森林",
+    "raw_text": "Umuaku and Nneato forests, Abia State, south-eastern Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "阿比亚州警方在乌穆阿库和恩内阿托森林发现至少28具人类头骨和骨骼",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A total of twenty-eight human skulls and bones, suspected to be kidnap victims, were recovered"
+    },
+    {
+     "fact": "警方称嫌疑人逃离，犯罪营地已被捣毁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Upon arrival of the Command's tactical operatives at the camps, the suspects fled. The criminal camps were subsequently dismantled."
+    },
+    {
+     "fact": "警方怀疑遗骸属于绑架受害者，法医调查仍在进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Officers suspect the remains belong to kidnapping victims, although forensic and other investigations are ongoing to establish their identities"
+    },
+    {
+     "fact": "同一周末尼日尔州近50名农民被武装分子绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "nearly 50 farmers were abducted by gunmen in Niger State"
+    },
+    {
+     "fact": "扎姆法拉州约40名妇女被绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "about 40 other women were kidnapped in the neighbouring state of Zamfara"
+    }
+   ],
+   "uncertainties": [
+    "遗骸身份尚未确认，法医调查仍在进行",
+    "遗骸是否与未解决的绑架案件有关尚待确定",
+    "北部两起大规模绑架事件的具体人数来自安全报告和当地消息源，尚未获独立确认",
+    "事件目前仅有一个来源（BBC）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_e014638773235dc8",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
