@@ -1,0 +1,119 @@
+{
+ "label": "Se57f8c4e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d8331e558fb396430af7bd521c323980e1ef25372ffc958edc27deb7ef87536c",
+ "tokens": {
+  "input_tokens": 2942,
+  "output_tokens": 552,
+  "total_tokens": 3494
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "几内亚比绍前总统恩巴洛宣布参加下届总统选举",
+   "summary_zh": "几内亚比绍被罢黜的前总统乌马罗·西索科·恩巴洛于2026年9月28日晚宣布将参加下届总统选举。他于2025年11月26日军事政变中被推翻后一直流亡海外，据称将于近期返回几内亚比绍，此举已引发反对派批评。执政军政府已定于12月6日举行总统和立法选举。",
+   "event_type": "political_instability",
+   "country_iso3": "GNB",
+   "location": {
+    "country_iso3": "GNB",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Guinée-Bissau"
+   },
+   "key_facts": [
+    {
+     "fact": "几内亚比绍前总统恩巴洛宣布将参加下届总统选举",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le président déchu de Guinée-Bissau, Umaro Sissoco Embalo, sera candidat à la prochaine élection présidentielle, a-t-il annoncé lundi 28 septembre 2026 au soir."
+    },
+    {
+     "fact": "恩巴洛于2025年11月26日军事政变中被推翻并流亡海外",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Renversé lors du coup d’État militaire du 26 novembre 2025 et depuis en exil"
+    },
+    {
+     "fact": "据称恩巴洛将于近期返回几内亚比绍，引发反对派批评",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’ancien chef de l’État devrait prochainement rentrer en Guinée-Bissau. Un retour qui suscite déjà les critiques de l’opposition."
+    },
+    {
+     "fact": "执政军政府已定于12月6日举行总统和立法选举",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La junte au pouvoir a fixé au 6 décembre prochain la date de l’élection présidentielle et des législatives."
+    }
+   ],
+   "uncertainties": [
+    "恩巴洛返回几内亚比绍的具体日期尚未官方确认，据称可能为10月4日",
+    "部分观察人士曾怀疑恩巴洛策划政变以中断选举进程，此说法未获证实",
+    "反对派PAIGC指控当前局势被操控以利于恩巴洛重新掌权，属其单方说法",
+    "本报道为单一来源（RFI），尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "几内亚比绍前总统恩巴洛宣布参加下届总统选举",
+   "summary_zh": "几内亚比绍被罢黜的前总统乌马罗·西索科·恩巴洛于2026年9月28日晚宣布将参加下届总统选举。他于2025年11月26日军事政变中被推翻后一直流亡海外，据称将于近期返回几内亚比绍，此举已引发反对派批评。执政军政府已定于12月6日举行总统和立法选举。",
+   "event_type": "political_instability",
+   "country_iso3": "GNB",
+   "location": {
+    "country_iso3": "GNB",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Guinée-Bissau"
+   },
+   "key_facts": [
+    {
+     "fact": "几内亚比绍前总统恩巴洛宣布将参加下届总统选举",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le président déchu de Guinée-Bissau, Umaro Sissoco Embalo, sera candidat à la prochaine élection présidentielle, a-t-il annoncé lundi 28 septembre 2026 au soir."
+    },
+    {
+     "fact": "恩巴洛于2025年11月26日军事政变中被推翻并流亡海外",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Renversé lors du coup d’État militaire du 26 novembre 2025 et depuis en exil"
+    },
+    {
+     "fact": "据称恩巴洛将于近期返回几内亚比绍，引发反对派批评",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’ancien chef de l’État devrait prochainement rentrer en Guinée-Bissau. Un retour qui suscite déjà les critiques de l’opposition."
+    },
+    {
+     "fact": "执政军政府已定于12月6日举行总统和立法选举",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La junte au pouvoir a fixé au 6 décembre prochain la date de l’élection présidentielle et des législatives."
+    }
+   ],
+   "uncertainties": [
+    "恩巴洛返回几内亚比绍的具体日期尚未官方确认，据称可能为10月4日",
+    "部分观察人士曾怀疑恩巴洛策划政变以中断选举进程，此说法未获证实",
+    "反对派PAIGC指控当前局势被操控以利于恩巴洛重新掌权，属其单方说法",
+    "本报道为单一来源（RFI），尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_a1e96440e57f8c4e",
+ "disease_event_id": null,
+ "country_code": "GW"
+}

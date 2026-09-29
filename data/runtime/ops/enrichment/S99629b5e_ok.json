@@ -1,0 +1,116 @@
+{
+ "label": "S99629b5e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "9ac310b78f5d87fdd79475ad701d477cfc26f3d1278163827b64c87ac6222d6c",
+ "tokens": {
+  "input_tokens": 2122,
+  "output_tokens": 314,
+  "total_tokens": 2436
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该事件目前仅有一个来源报道，尚缺乏交叉验证\", \"火灾原因及损失情况未获确认\"]",
+    "after": "[\"该事件目前仅有一个来源报道，尚缺乏交叉验证\", \"火灾原因及损失情况未获确认\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳大阿克拉地区发生两起火灾，消防部门出动处置",
+   "summary_zh": "加纳国家消防局（GNFS）对大阿克拉地区DaySpring学校和Tseaddo Last Stop两处分别发生的火灾进行了处置。消防员阻止了人员伤亡的发生。该消息目前为单一来源报道。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "大阿克拉地区",
+    "city": null,
+    "site": "DaySpring学校与Tseaddo Last Stop",
+    "raw_text": "DaySpring School and Tseaddo Last Stop in the Greater Accra Region"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳国家消防局对大阿克拉地区两起火灾作出响应",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "GNFS responds to two separate fire incidents in Greater Accra"
+    },
+    {
+     "fact": "火灾分别发生在DaySpring学校和Tseaddo Last Stop",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "two separate fire incidents at DaySpring School and Tseaddo Last Stop in the Greater Accra Region"
+    },
+    {
+     "fact": "消防员阻止了人员伤亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "with firefighters preventing casualties"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证",
+    "火灾原因及损失情况未获确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳大阿克拉地区发生两起火灾，消防部门出动处置",
+   "summary_zh": "加纳国家消防局（GNFS）对大阿克拉地区DaySpring学校和Tseaddo Last Stop两处分别发生的火灾进行了处置。消防员阻止了人员伤亡的发生。该消息目前为单一来源报道。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "大阿克拉地区",
+    "city": null,
+    "site": "DaySpring学校与Tseaddo Last Stop",
+    "raw_text": "DaySpring School and Tseaddo Last Stop in the Greater Accra Region"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳国家消防局对大阿克拉地区两起火灾作出响应",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "GNFS responds to two separate fire incidents in Greater Accra"
+    },
+    {
+     "fact": "火灾分别发生在DaySpring学校和Tseaddo Last Stop",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "two separate fire incidents at DaySpring School and Tseaddo Last Stop in the Greater Accra Region"
+    },
+    {
+     "fact": "消防员阻止了人员伤亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "with firefighters preventing casualties"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证",
+    "火灾原因及损失情况未获确认",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_72dc9ec799629b5e",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

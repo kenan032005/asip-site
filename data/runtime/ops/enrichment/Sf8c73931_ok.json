@@ -1,0 +1,119 @@
+{
+ "label": "Sf8c73931",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0981fb3f01851b794e583adf9501c0a4f0bda0addf98c43b21c82614a1148f57",
+ "tokens": {
+  "input_tokens": 2726,
+  "output_tokens": 564,
+  "total_tokens": 3290
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "南非约翰内斯堡以东发现第11具女性遗体",
+   "summary_zh": "南非约翰内斯堡以东的埃库鲁莱尼市自7月中旬以来已发现11具女性遗体，最新一具于9月27日在一处荒地被发现。警方正因一系列女性被杀案面临破案压力，目前有4人被拘留，涉及3起不同谋杀案。警方尚未确认这些案件是否关联，也未认定存在连环杀手。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": "豪登省",
+    "city": "约翰内斯堡",
+    "site": "埃库鲁莱尼市荒地",
+    "raw_text": "municipalité d’Ekurhuleni, à l’est de Johannesburg"
+   },
+   "key_facts": [
+    {
+     "fact": "南非约翰内斯堡以东的埃库鲁莱尼市自7月中旬以来发现11具女性遗体",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une nouvelle femme a été retrouvée morte dimanche 27 septembre sur un terrain vague, portant à 11, depuis la mi-juillet, le nombre de victimes dans ce secteur dans des affaires non élucidées."
+    },
+    {
+     "fact": "目前有4人被拘留，涉及3起不同谋杀案",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quatre personnes sont pour l’heure en détention dans le cadre de ces enquêtes. Elles sont poursuivies pour trois meurtres distincts."
+    },
+    {
+     "fact": "警方尚未确认这些案件是否关联，也未认定存在连环杀手",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Mais aucun élément concluant ne permet encore d’établir la piste d’un tueur en série. La police se garde donc de faire un lien entre ces affaires ou de leur attribuer un même mobile"
+    },
+    {
+     "fact": "9月28日一名23岁女性在滕比萨镇被枪杀，警方怀疑其前伴侣所为",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une douzième femme a également été retrouvée morte lundi dans le township de Tembisa... la jeune femme de 23 ans a été abattue en pleine rue et les enquêteurs soupçonnent son ancien compagnon, retrouvé depuis mort dans sa voiture."
+    }
+   ],
+   "uncertainties": [
+    "案件之间是否存在关联尚未证实",
+    "是否存在连环杀手尚未确认",
+    "警方未将滕比萨案件与其他案件关联",
+    "目前仅一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "南非约翰内斯堡以东发现第11具女性遗体",
+   "summary_zh": "南非约翰内斯堡以东的埃库鲁莱尼市自7月中旬以来已发现11具女性遗体，最新一具于9月27日在一处荒地被发现。警方正因一系列女性被杀案面临破案压力，目前有4人被拘留，涉及3起不同谋杀案。警方尚未确认这些案件是否关联，也未认定存在连环杀手。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": "豪登省",
+    "city": "约翰内斯堡",
+    "site": "埃库鲁莱尼市荒地",
+    "raw_text": "municipalité d’Ekurhuleni, à l’est de Johannesburg"
+   },
+   "key_facts": [
+    {
+     "fact": "南非约翰内斯堡以东的埃库鲁莱尼市自7月中旬以来发现11具女性遗体",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une nouvelle femme a été retrouvée morte dimanche 27 septembre sur un terrain vague, portant à 11, depuis la mi-juillet, le nombre de victimes dans ce secteur dans des affaires non élucidées."
+    },
+    {
+     "fact": "目前有4人被拘留，涉及3起不同谋杀案",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quatre personnes sont pour l’heure en détention dans le cadre de ces enquêtes. Elles sont poursuivies pour trois meurtres distincts."
+    },
+    {
+     "fact": "警方尚未确认这些案件是否关联，也未认定存在连环杀手",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Mais aucun élément concluant ne permet encore d’établir la piste d’un tueur en série. La police se garde donc de faire un lien entre ces affaires ou de leur attribuer un même mobile"
+    },
+    {
+     "fact": "9月28日一名23岁女性在滕比萨镇被枪杀，警方怀疑其前伴侣所为",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une douzième femme a également été retrouvée morte lundi dans le township de Tembisa... la jeune femme de 23 ans a été abattue en pleine rue et les enquêteurs soupçonnent son ancien compagnon, retrouvé depuis mort dans sa voiture."
+    }
+   ],
+   "uncertainties": [
+    "案件之间是否存在关联尚未证实",
+    "是否存在连环杀手尚未确认",
+    "警方未将滕比萨案件与其他案件关联",
+    "目前仅一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_29aaebccf8c73931",
+ "disease_event_id": null,
+ "country_code": "ZA"
+}

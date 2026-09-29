@@ -1,0 +1,105 @@
+{
+ "label": "S38c55d36",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "9f5588b781b5932ce8092f3ddf61b0be110a599671bfd2f1de119bf6f2b0cd8e",
+ "tokens": {
+  "input_tokens": 2105,
+  "output_tokens": 269,
+  "total_tokens": 2374
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "纽约时报高管在加州遭枪击身亡，据称凶手为年迈岳父母",
+   "summary_zh": "一名纽约时报高管在加利福尼亚州遭枪击身亡，据称凶手为其妻子的年迈父母。嫌疑人已因涉嫌谋杀被捕。该消息目前为单一来源报道。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "USA",
+   "location": {
+    "country_iso3": "USA",
+    "admin1": "加利福尼亚州",
+    "city": null,
+    "site": null,
+    "raw_text": "California"
+   },
+   "key_facts": [
+    {
+     "fact": "一名纽约时报高管在加利福尼亚州遭枪击身亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "New York Times executive fatally shot allegedly by elderly in-laws"
+    },
+    {
+     "fact": "据称凶手为其妻子的年迈父母",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "allegedly by his wife's elderly parents"
+    },
+    {
+     "fact": "嫌疑人已因涉嫌谋杀被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "who have been arrested on suspicion of murder"
+    }
+   ],
+   "uncertainties": [
+    "凶手身份为据称，尚未经司法确认",
+    "目前仅单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "纽约时报高管在加州遭枪击身亡，据称凶手为年迈岳父母",
+   "summary_zh": "一名纽约时报高管在加利福尼亚州遭枪击身亡，据称凶手为其妻子的年迈父母。嫌疑人已因涉嫌谋杀被捕。该消息目前为单一来源报道。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "USA",
+   "location": {
+    "country_iso3": "USA",
+    "admin1": "加利福尼亚州",
+    "city": null,
+    "site": null,
+    "raw_text": "California"
+   },
+   "key_facts": [
+    {
+     "fact": "一名纽约时报高管在加利福尼亚州遭枪击身亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "New York Times executive fatally shot allegedly by elderly in-laws"
+    },
+    {
+     "fact": "据称凶手为其妻子的年迈父母",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "allegedly by his wife's elderly parents"
+    },
+    {
+     "fact": "嫌疑人已因涉嫌谋杀被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "who have been arrested on suspicion of murder"
+    }
+   ],
+   "uncertainties": [
+    "凶手身份为据称，尚未经司法确认",
+    "目前仅单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_bcedfe4e38c55d36",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

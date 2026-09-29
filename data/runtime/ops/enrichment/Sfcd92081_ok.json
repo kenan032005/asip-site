@@ -1,0 +1,131 @@
+{
+ "label": "Sfcd92081",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ab54b5472394ffad8141b7100e4762dcae3272824975cda3e23dcbc4e19921e2",
+ "tokens": {
+  "input_tokens": 3017,
+  "output_tokens": 586,
+  "total_tokens": 3603
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "达喀尔民众欢迎区域快线延伸至机场",
+   "summary_zh": "塞内加尔达喀尔区域快线（TER）自9月29日起延伸至布莱斯-迪亚涅国际机场，从市中心到机场约55分钟，每24分钟一班。乘客称此举带来便利，交通部长称其为服务民众的工具。该19公里延长段原定2023年底完工，因审计和超支融资困难延迟近两年，项目造价约3000亿西非法郎（约4.57亿欧元）。",
+   "event_type": "other_security",
+   "country_iso3": "SEN",
+   "location": {
+    "country_iso3": "SEN",
+    "admin1": null,
+    "city": "达喀尔",
+    "site": "布莱斯-迪亚涅国际机场",
+    "raw_text": "Dakar, aéroport international Blaise-Diagne"
+   },
+   "key_facts": [
+    {
+     "fact": "达喀尔区域快线自9月29日起延伸至布莱斯-迪亚涅国际机场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis lundi 29 septembre, toutes les 24 minutes, le train express régional (TER) quitte la gare de Dakar pour rejoindre l’aéroport en moins d’une heure."
+    },
+    {
+     "fact": "从市中心到机场的行程约55分钟，单程票价5000西非法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À l’unité, le billet coûte 5 000 FCFA (environ 7,60 euros) pour se rendre à l’aéroport depuis le centre-ville... Le trajet dure désormais 55 minutes."
+    },
+    {
+     "fact": "该19公里延长段原定2023年底完工，延迟近两年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Attendu depuis fin 2023, le dernier tronçon de 19 kilomètres, qui relie Diamniadio à l’aéroport, a été mis en circulation... L’arrivée du TER à l’aéroport intervient après près de deux ans de retard"
+    },
+    {
+     "fact": "项目造价约3000亿西非法郎（约4.57亿欧元）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ce chantier de 300 milliards de FCFA, soit environ 457 millions d’euros"
+    },
+    {
+     "fact": "TER目前每日运送9万名乘客，目标提升至13万",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le TER, qui transporte actuellement 90 000 voyageurs par jour, espère faire passer sa fréquentation à 130 000 voyageurs quotidiens."
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "none",
+   "classification_confidence": 90
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "达喀尔民众欢迎区域快线延伸至机场",
+   "summary_zh": "塞内加尔达喀尔区域快线（TER）自9月29日起延伸至布莱斯-迪亚涅国际机场，从市中心到机场约55分钟，每24分钟一班。乘客称此举带来便利，交通部长称其为服务民众的工具。该19公里延长段原定2023年底完工，因审计和超支融资困难延迟近两年，项目造价约3000亿西非法郎（约4.57亿欧元）。",
+   "event_type": "other_security",
+   "country_iso3": "SEN",
+   "location": {
+    "country_iso3": "SEN",
+    "admin1": null,
+    "city": "达喀尔",
+    "site": "布莱斯-迪亚涅国际机场",
+    "raw_text": "Dakar, aéroport international Blaise-Diagne"
+   },
+   "key_facts": [
+    {
+     "fact": "达喀尔区域快线自9月29日起延伸至布莱斯-迪亚涅国际机场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis lundi 29 septembre, toutes les 24 minutes, le train express régional (TER) quitte la gare de Dakar pour rejoindre l’aéroport en moins d’une heure."
+    },
+    {
+     "fact": "从市中心到机场的行程约55分钟，单程票价5000西非法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À l’unité, le billet coûte 5 000 FCFA (environ 7,60 euros) pour se rendre à l’aéroport depuis le centre-ville... Le trajet dure désormais 55 minutes."
+    },
+    {
+     "fact": "该19公里延长段原定2023年底完工，延迟近两年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Attendu depuis fin 2023, le dernier tronçon de 19 kilomètres, qui relie Diamniadio à l’aéroport, a été mis en circulation... L’arrivée du TER à l’aéroport intervient après près de deux ans de retard"
+    },
+    {
+     "fact": "项目造价约3000亿西非法郎（约4.57亿欧元）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ce chantier de 300 milliards de FCFA, soit environ 457 millions d’euros"
+    },
+    {
+     "fact": "TER目前每日运送9万名乘客，目标提升至13万",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le TER, qui transporte actuellement 90 000 voyageurs par jour, espère faire passer sa fréquentation à 130 000 voyageurs quotidiens."
+    }
+   ],
+   "uncertainties": [
+    "据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 90
+  }
+ },
+ "event_id": "EVT_bbca9165fcd92081",
+ "disease_event_id": null,
+ "country_code": "SN"
+}

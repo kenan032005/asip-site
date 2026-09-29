@@ -1,0 +1,104 @@
+{
+ "label": "S5ca236be",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c507e4f5342ab23969666ff331e6d14ea8b6cf1d771e957be8f4191a45d67bd7",
+ "tokens": {
+  "input_tokens": 2114,
+  "output_tokens": 294,
+  "total_tokens": 2408
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该事件目前仅有一个来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"该事件目前仅有一个来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "塞康第-塔科拉迪教师加入全国性罢工",
+   "summary_zh": "加纳塞康第-塔科拉迪地区教师加入全国性罢工，导致Diabene、Nkroful、Apowa及周边地区部分学校周一上午校门紧锁，学生无法上课。该事件目前为单一来源报道。",
+   "event_type": "civil_unrest",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "塞康第-塔科拉迪",
+    "site": null,
+    "raw_text": "Sekondi -Takoradi"
+   },
+   "key_facts": [
+    {
+     "fact": "塞康第-塔科拉迪教师加入全国性罢工",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Teachers in Sekondi -Takoradi join in nationwide strike"
+    },
+    {
+     "fact": "Diabene、Nkroful、Apowa及周边地区部分学校周一上午校门紧锁，学生感到失望",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Some school Children within Diabene, Nkroful, Apowa and its environs were disappointed to be greeted by locked doors on Monday morning."
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "塞康第-塔科拉迪教师加入全国性罢工",
+   "summary_zh": "加纳塞康第-塔科拉迪地区教师加入全国性罢工，导致Diabene、Nkroful、Apowa及周边地区部分学校周一上午校门紧锁，学生无法上课。该事件目前为单一来源报道。",
+   "event_type": "civil_unrest",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "塞康第-塔科拉迪",
+    "site": null,
+    "raw_text": "Sekondi -Takoradi"
+   },
+   "key_facts": [
+    {
+     "fact": "塞康第-塔科拉迪教师加入全国性罢工",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Teachers in Sekondi -Takoradi join in nationwide strike"
+    },
+    {
+     "fact": "Diabene、Nkroful、Apowa及周边地区部分学校周一上午校门紧锁，学生感到失望",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Some school Children within Diabene, Nkroful, Apowa and its environs were disappointed to be greeted by locked doors on Monday morning."
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_9b17de2b5ca236be",
+ "disease_event_id": null,
+ "country_code": "GH"
+}
