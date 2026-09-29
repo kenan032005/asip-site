@@ -1,0 +1,128 @@
+{
+ "label": "Sd83a271c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e890e7e46ff60c2acacd31a975d6c1f3e16c1b8d75ea6f50c9c9906b3fdd83a2",
+ "tokens": {
+  "input_tokens": 2473,
+  "output_tokens": 504,
+  "total_tokens": 2977
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"文章对“战术联盟”的描述援引“some describe”等未具名说法，尚未获独立证实\", \"文章关于美国政策动机与政治趋同的分析属评论观点，非已证实事实\", \"提格雷地区大规模暴行的问责与司法状态仍存在争议\"]",
+    "after": "[\"文章对“战术联盟”的描述援引“some describe”等未具名说法，尚未获独立证实\", \"文章关于美国政策动机与政治趋同的分析属评论观点，非已证实事实\", \"提格雷地区大规模暴行的问责与司法状态仍存在争议\", \"据Ethiopia Insight报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "美国签证制裁暴露外交务实主义的局限",
+   "summary_zh": "一篇评论文章批评美国国务院对提格雷人民解放阵线（TPLF）强硬派成员及其直系亲属实施签证限制，认为此举在提格雷发生大规模暴行后以政治权宜取代了正义与问责。文章称该决定将矛头指向TPLF人物，可能把大规模暴行的后果错误地重新定义为提格雷政治不妥协问题。文章还提到埃塞俄比亚政府与部分前TPLF领导人之间的政治趋同。",
+   "event_type": "political_instability",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Ethiopia / Tigray region"
+   },
+   "key_facts": [
+    {
+     "fact": "美国国务院决定对TPLF强硬派成员及其直系亲属实施签证限制",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the U.S. State Department’s decision “to impose visa restrictions on hardline members of the TPLF and their immediate family members”"
+    },
+    {
+     "fact": "文章称签证限制针对的是被指破坏提格雷地区危机解决的人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It “targets individuals who are responsible for, or complicit in, undermining resolution to the crisis in the Tigray region.”"
+    },
+    {
+     "fact": "文章称“强硬派”具体指Debretsion Gebremichael及拒绝当前比勒陀利亚政治安排的军方或政党高层人物",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a term that specifically refers to Debretsion Gebremichael and senior military or party figures who reject the post-Pretoria political arrangement as presently implemented"
+    },
+    {
+     "fact": "文章称部分前TPLF领导人与埃塞俄比亚政府结成被描述为战术联盟的关系",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "former TPLF leaders in Addis Ababa who have entered what some describe as a tactical alliance with the Ethiopian government"
+    }
+   ],
+   "uncertainties": [
+    "文章对“战术联盟”的描述援引“some describe”等未具名说法，尚未获独立证实",
+    "文章关于美国政策动机与政治趋同的分析属评论观点，非已证实事实",
+    "提格雷地区大规模暴行的问责与司法状态仍存在争议"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "美国签证制裁暴露外交务实主义的局限",
+   "summary_zh": "一篇评论文章批评美国国务院对提格雷人民解放阵线（TPLF）强硬派成员及其直系亲属实施签证限制，认为此举在提格雷发生大规模暴行后以政治权宜取代了正义与问责。文章称该决定将矛头指向TPLF人物，可能把大规模暴行的后果错误地重新定义为提格雷政治不妥协问题。文章还提到埃塞俄比亚政府与部分前TPLF领导人之间的政治趋同。",
+   "event_type": "political_instability",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Ethiopia / Tigray region"
+   },
+   "key_facts": [
+    {
+     "fact": "美国国务院决定对TPLF强硬派成员及其直系亲属实施签证限制",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the U.S. State Department’s decision “to impose visa restrictions on hardline members of the TPLF and their immediate family members”"
+    },
+    {
+     "fact": "文章称签证限制针对的是被指破坏提格雷地区危机解决的人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It “targets individuals who are responsible for, or complicit in, undermining resolution to the crisis in the Tigray region.”"
+    },
+    {
+     "fact": "文章称“强硬派”具体指Debretsion Gebremichael及拒绝当前比勒陀利亚政治安排的军方或政党高层人物",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a term that specifically refers to Debretsion Gebremichael and senior military or party figures who reject the post-Pretoria political arrangement as presently implemented"
+    },
+    {
+     "fact": "文章称部分前TPLF领导人与埃塞俄比亚政府结成被描述为战术联盟的关系",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "former TPLF leaders in Addis Ababa who have entered what some describe as a tactical alliance with the Ethiopian government"
+    }
+   ],
+   "uncertainties": [
+    "文章对“战术联盟”的描述援引“some describe”等未具名说法，尚未获独立证实",
+    "文章关于美国政策动机与政治趋同的分析属评论观点，非已证实事实",
+    "提格雷地区大规模暴行的问责与司法状态仍存在争议",
+    "据Ethiopia Insight报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_28902bc6d83a271c",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

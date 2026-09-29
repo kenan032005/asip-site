@@ -1,0 +1,94 @@
+{
+ "label": "S67688ba1",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e3262ca173fe1f2324ae45dd201dfb7b7624293fa809cab0b441b642234653aa",
+ "tokens": {
+  "input_tokens": 2191,
+  "output_tokens": 229,
+  "total_tokens": 2420
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该报道为单一来源，尚缺乏其他来源交叉验证\"]",
+    "after": "[\"该报道为单一来源，尚缺乏其他来源交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳审计署：公共资金账目合规不足以证明绩效",
+   "summary_zh": "加纳审计署审计主任汉娜·门萨呼吁记者在评估政府机构和项目绩效时，不要只看公共资金花了多少。该表态来自加纳审计署，相关报道为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳审计署审计主任汉娜·门萨呼吁记者评估政府机构与项目绩效时不应只看公共资金支出金额",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Director of Audit at the Ghana Audit Service, Hannah Mensah, has urged journalists to look beyond how much public money is spent when assessing the performance of government institutions and projects."
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚缺乏其他来源交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 60
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳审计署：公共资金账目合规不足以证明绩效",
+   "summary_zh": "加纳审计署审计主任汉娜·门萨呼吁记者在评估政府机构和项目绩效时，不要只看公共资金花了多少。该表态来自加纳审计署，相关报道为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳审计署审计主任汉娜·门萨呼吁记者评估政府机构与项目绩效时不应只看公共资金支出金额",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Director of Audit at the Ghana Audit Service, Hannah Mensah, has urged journalists to look beyond how much public money is spent when assessing the performance of government institutions and projects."
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚缺乏其他来源交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 60
+  }
+ },
+ "event_id": "EVT_4c8fb38d67688ba1",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

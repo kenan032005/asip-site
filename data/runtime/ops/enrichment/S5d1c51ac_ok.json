@@ -1,0 +1,136 @@
+{
+ "label": "S5d1c51ac",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1208125f579655f9a6c6774a9754cc2af36dde72a9d192f0ffe87f1ad3f4bac3",
+ "tokens": {
+  "input_tokens": 2989,
+  "output_tokens": 551,
+  "total_tokens": 3540
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"气旋Gezani的具体影响路径和强度尚未确认\", \"失踪人员下落尚未明确\"]",
+    "after": "[\"气旋Gezani的具体影响路径和强度尚未确认\", \"失踪人员下落尚未明确\", \"据Portal do Governo de Mocambique报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克政府宣布2025年PESOE执行率为77%",
+   "summary_zh": "莫桑比克部长理事会宣布，政府在2025年经济与社会计划及国家预算（PESOE）的执行率为77%，470项评估指标中有267项表现积极。会议还审议了2025/2026雨季和气旋季信息及热带气旋“Gezani”可能对索法拉、伊尼扬巴内和加扎省沿海地区造成的影响。政府称已有超过5.7万人仍留在安置中心，并确认洪灾造成27人死亡、9人失踪。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Moçambique; províncias de Sofala, Inhambane e Gaza; Chókwè; cidade de Xai-Xai; Gaza e Maputo"
+   },
+   "key_facts": [
+    {
+     "fact": "莫桑比克政府2025年PESOE执行率为77%，470项指标中267项表现积极",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "o desempenho global foi de 77%, sendo que, dos 470 indicadores avaliados, 267 tiveram um desempenho positivo"
+    },
+    {
+     "fact": "热带气旋Gezani可能影响索法拉、伊尼扬巴内和加扎省沿海地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a previsão do ciclone tropical “Gezani” que poderá afectar os distritos costeiros das províncias de Sofala, Inhambane e Gaza"
+    },
+    {
+     "fact": "超过5.7万人仍留在安置中心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pouco mais de 57 mil continuam em centros"
+    },
+    {
+     "fact": "洪灾造成27人死亡、9人失踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "mortos, infelizmente, temos 27... Hoje estamos a falar de nove desaparecidos"
+    },
+    {
+     "fact": "政府正在确定安置潜在气旋受害者的地点",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "O Conselho de Ministros garante que já estão a ser identificados os locais para albergar as prováveis vítimas do ciclone tropical Gezani"
+    }
+   ],
+   "uncertainties": [
+    "气旋Gezani的具体影响路径和强度尚未确认",
+    "失踪人员下落尚未明确"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克政府宣布2025年PESOE执行率为77%",
+   "summary_zh": "莫桑比克部长理事会宣布，政府在2025年经济与社会计划及国家预算（PESOE）的执行率为77%，470项评估指标中有267项表现积极。会议还审议了2025/2026雨季和气旋季信息及热带气旋“Gezani”可能对索法拉、伊尼扬巴内和加扎省沿海地区造成的影响。政府称已有超过5.7万人仍留在安置中心，并确认洪灾造成27人死亡、9人失踪。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Moçambique; províncias de Sofala, Inhambane e Gaza; Chókwè; cidade de Xai-Xai; Gaza e Maputo"
+   },
+   "key_facts": [
+    {
+     "fact": "莫桑比克政府2025年PESOE执行率为77%，470项指标中267项表现积极",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "o desempenho global foi de 77%, sendo que, dos 470 indicadores avaliados, 267 tiveram um desempenho positivo"
+    },
+    {
+     "fact": "热带气旋Gezani可能影响索法拉、伊尼扬巴内和加扎省沿海地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a previsão do ciclone tropical “Gezani” que poderá afectar os distritos costeiros das províncias de Sofala, Inhambane e Gaza"
+    },
+    {
+     "fact": "超过5.7万人仍留在安置中心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pouco mais de 57 mil continuam em centros"
+    },
+    {
+     "fact": "洪灾造成27人死亡、9人失踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "mortos, infelizmente, temos 27... Hoje estamos a falar de nove desaparecidos"
+    },
+    {
+     "fact": "政府正在确定安置潜在气旋受害者的地点",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "O Conselho de Ministros garante que já estão a ser identificados os locais para albergar as prováveis vítimas do ciclone tropical Gezani"
+    }
+   ],
+   "uncertainties": [
+    "气旋Gezani的具体影响路径和强度尚未确认",
+    "失踪人员下落尚未明确",
+    "据Portal do Governo de Mocambique报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_aae78d825d1c51ac",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

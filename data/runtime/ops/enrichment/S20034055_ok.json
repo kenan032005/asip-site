@@ -1,0 +1,104 @@
+{
+ "label": "S20034055",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "03a26d38a6e075b9d251a09d1924512ca40698fac179b87dbcd624bcd8c3678c",
+ "tokens": {
+  "input_tokens": 2186,
+  "output_tokens": 275,
+  "total_tokens": 2461
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\"]",
+    "after": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳警方将TRAFFITECH-GH自动交通执法全面实施推迟至11月1日",
+   "summary_zh": "加纳警察局已将自动交通执法项目TRAFFITECH-GH的全面实施时间从2026年10月1日推迟至11月1日。该消息目前仅来自单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳警察局将TRAFFITECH-GH自动交通执法项目的全面实施时间从10月1日推迟至11月1日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Ghana Police Service has rescheduled the full implementation of its automated traffic law enforcement programme, TRAFFITECH-GH, from October 1 to November 1, 2026."
+    },
+    {
+     "fact": "该报道目前为单一来源",
+     "evidence_field": "source_links",
+     "evidence_excerpt": "MyJoyOnline"
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳警方将TRAFFITECH-GH自动交通执法全面实施推迟至11月1日",
+   "summary_zh": "加纳警察局已将自动交通执法项目TRAFFITECH-GH的全面实施时间从2026年10月1日推迟至11月1日。该消息目前仅来自单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳警察局将TRAFFITECH-GH自动交通执法项目的全面实施时间从10月1日推迟至11月1日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Ghana Police Service has rescheduled the full implementation of its automated traffic law enforcement programme, TRAFFITECH-GH, from October 1 to November 1, 2026."
+    },
+    {
+     "fact": "该报道目前为单一来源",
+     "evidence_field": "source_links",
+     "evidence_excerpt": "MyJoyOnline"
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_f3b7fbea20034055",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

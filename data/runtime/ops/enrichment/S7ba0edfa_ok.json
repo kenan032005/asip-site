@@ -1,0 +1,114 @@
+{
+ "label": "S7ba0edfa",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "27daa4cf7abbd472efbbe9b9bb5594e785be75edaf05d6a8629d76e7b104efdc",
+ "tokens": {
+  "input_tokens": 2195,
+  "output_tokens": 373,
+  "total_tokens": 2568
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该事件目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\"]",
+    "after": "[\"该事件目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳议长巴格宾警告公共话语中的侮辱与仇恨言论",
+   "summary_zh": "加纳议会议长阿尔班·巴格宾对本国公共话语中日益加剧的“激烈化”倾向表示担忧，尤其针对辱骂、侮辱、威胁和仇恨言论的增多。他呼吁政治人物在公共讨论中保持克制，强调强烈批评是正当的，但侮辱不能取代论证。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳议会议长巴格宾对公共话语中辱骂、侮辱、威胁和仇恨言论增多表示担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Speaker of Parliament Alban Bagbin has expressed concern over what he described as the increasingly “intemperate character” of Ghana’s national discourse, particularly the growing use of abusive, insulting, threatening and hate speech."
+    },
+    {
+     "fact": "巴格宾强调强烈批评是正当的，但侮辱不能取代论证",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "‘Strong criticism is legitimate but insult is not argument’ – Speaker urges restraint in public discourse"
+    },
+    {
+     "fact": "巴格宾警告政治人物不要使用可能损害民主的言论",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "‘Insults must not replace arguments’ – Bagbin cautions political actors against language that could undermine democracy"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳议长巴格宾警告公共话语中的侮辱与仇恨言论",
+   "summary_zh": "加纳议会议长阿尔班·巴格宾对本国公共话语中日益加剧的“激烈化”倾向表示担忧，尤其针对辱骂、侮辱、威胁和仇恨言论的增多。他呼吁政治人物在公共讨论中保持克制，强调强烈批评是正当的，但侮辱不能取代论证。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳议会议长巴格宾对公共话语中辱骂、侮辱、威胁和仇恨言论增多表示担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Speaker of Parliament Alban Bagbin has expressed concern over what he described as the increasingly “intemperate character” of Ghana’s national discourse, particularly the growing use of abusive, insulting, threatening and hate speech."
+    },
+    {
+     "fact": "巴格宾强调强烈批评是正当的，但侮辱不能取代论证",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "‘Strong criticism is legitimate but insult is not argument’ – Speaker urges restraint in public discourse"
+    },
+    {
+     "fact": "巴格宾警告政治人物不要使用可能损害民主的言论",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "‘Insults must not replace arguments’ – Bagbin cautions political actors against language that could undermine democracy"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_6a37f1397ba0edfa",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

@@ -1,0 +1,126 @@
+{
+ "label": "S7a4abb33",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "eeb5154a28056cfd70d9946f8b338da6121d231e1cde255bd92585e0fb29a229",
+ "tokens": {
+  "input_tokens": 2256,
+  "output_tokens": 355,
+  "total_tokens": 2611
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该内容为评论性文章，非事件性报道\", \"目前仅一个来源（MyJoyOnline），尚缺乏交叉验证\"]",
+    "after": "[\"该内容为评论性文章，非事件性报道\", \"目前仅一个来源（MyJoyOnline），尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "从监督到影响：为何董事会委员会将决定非洲组织的成败",
+   "summary_zh": "加纳阿克拉一篇评论文章指出，董事会委员会在企业成败中扮演关键角色，审计委员会负责发现或漏过财务违规，风险委员会负责预判或忽视威胁，提名与薪酬委员会则决定领导者选拔与报酬是否得当。文章称委员会仍是董事会治理中受审视最少的部分，并预告相关活动将于周三举行。该内容为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "阿克拉",
+    "site": null,
+    "raw_text": "Accra, Ghana"
+   },
+   "key_facts": [
+    {
+     "fact": "文章称董事会委员会在企业成败中起关键作用",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Behind almost every corporate success, and almost every corporate failure, sits a board committee."
+    },
+    {
+     "fact": "文章称审计委员会负责发现或漏过财务违规",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It is in the audit committee that financial irregularities are either caught or missed."
+    },
+    {
+     "fact": "文章称委员会仍是董事会治理中受审视最少的部分",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Yet committees remain among the least examined parts of boardroom governance."
+    },
+    {
+     "fact": "文章预告相关活动将于周三举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "That changes on Wednesd"
+    }
+   ],
+   "uncertainties": [
+    "该内容为评论性文章，非事件性报道",
+    "目前仅一个来源（MyJoyOnline），尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 60
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "从监督到影响：为何董事会委员会将决定非洲组织的成败",
+   "summary_zh": "加纳阿克拉一篇评论文章指出，董事会委员会在企业成败中扮演关键角色，审计委员会负责发现或漏过财务违规，风险委员会负责预判或忽视威胁，提名与薪酬委员会则决定领导者选拔与报酬是否得当。文章称委员会仍是董事会治理中受审视最少的部分，并预告相关活动将于周三举行。该内容为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "阿克拉",
+    "site": null,
+    "raw_text": "Accra, Ghana"
+   },
+   "key_facts": [
+    {
+     "fact": "文章称董事会委员会在企业成败中起关键作用",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Behind almost every corporate success, and almost every corporate failure, sits a board committee."
+    },
+    {
+     "fact": "文章称审计委员会负责发现或漏过财务违规",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It is in the audit committee that financial irregularities are either caught or missed."
+    },
+    {
+     "fact": "文章称委员会仍是董事会治理中受审视最少的部分",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Yet committees remain among the least examined parts of boardroom governance."
+    },
+    {
+     "fact": "文章预告相关活动将于周三举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "That changes on Wednesd"
+    }
+   ],
+   "uncertainties": [
+    "该内容为评论性文章，非事件性报道",
+    "目前仅一个来源（MyJoyOnline），尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 60
+  }
+ },
+ "event_id": "EVT_51e185157a4abb33",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

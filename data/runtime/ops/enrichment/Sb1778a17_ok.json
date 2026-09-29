@@ -1,0 +1,116 @@
+{
+ "label": "Sb1778a17",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "38536ae5a782c7eab5ab4f056be16ad4ea8998d47cf74f5a2fd661a715198a52",
+ "tokens": {
+  "input_tokens": 2214,
+  "output_tokens": 338,
+  "total_tokens": 2552
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该事件目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"纠纷的具体诉求与法院审理进展尚未明确\"]",
+    "after": "[\"该事件目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"纠纷的具体诉求与法院审理进展尚未明确\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳建筑行业纠纷升级：ASG与ARC之争诉诸法院",
+   "summary_zh": "加纳建筑行业围绕加纳建筑学会（ASG）、建筑师注册委员会（ARC）与加纳建筑师协会（GIA）之间的机构纠纷持续发酵，相关争议已进入法院审理。争议核心在于ARC对近期成立的ASG的立场。目前该行业处于一种不安的平静状态。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳建筑学会、建筑师注册委员会与加纳建筑师协会之间的机构纠纷已诉诸法院",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Legal tussle as ASG-ARC dispute moves to court"
+    },
+    {
+     "fact": "争议核心是建筑师注册委员会对近期成立的加纳建筑学会的立场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At the centre of the dispute is the position of the ARC regarding the recently established ASG and the subsequent […]"
+    },
+    {
+     "fact": "加纳建筑行业在纠纷中出现一种不安的平静",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "An uneasy calm appears to be settling over Ghana’s architectural profession following a growing institutional dispute"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "纠纷的具体诉求与法院审理进展尚未明确"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 60
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳建筑行业纠纷升级：ASG与ARC之争诉诸法院",
+   "summary_zh": "加纳建筑行业围绕加纳建筑学会（ASG）、建筑师注册委员会（ARC）与加纳建筑师协会（GIA）之间的机构纠纷持续发酵，相关争议已进入法院审理。争议核心在于ARC对近期成立的ASG的立场。目前该行业处于一种不安的平静状态。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳建筑学会、建筑师注册委员会与加纳建筑师协会之间的机构纠纷已诉诸法院",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Legal tussle as ASG-ARC dispute moves to court"
+    },
+    {
+     "fact": "争议核心是建筑师注册委员会对近期成立的加纳建筑学会的立场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At the centre of the dispute is the position of the ARC regarding the recently established ASG and the subsequent […]"
+    },
+    {
+     "fact": "加纳建筑行业在纠纷中出现一种不安的平静",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "An uneasy calm appears to be settling over Ghana’s architectural profession following a growing institutional dispute"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "纠纷的具体诉求与法院审理进展尚未明确",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 60
+  }
+ },
+ "event_id": "EVT_3b1fee98b1778a17",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

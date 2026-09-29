@@ -1,0 +1,114 @@
+{
+ "label": "S44ce1b40",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "24e521a579058954571475c18e8f5a89352d304a8fd343af28e2570f6c4b96ea",
+ "tokens": {
+  "input_tokens": 2217,
+  "output_tokens": 339,
+  "total_tokens": 2556
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"目前仅一个来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "Jeffrey Nortey再度荣获加纳娱乐奖美国站年度银幕偶像",
+   "summary_zh": "Jeffrey Nortey在加纳娱乐奖美国站再次获得年度银幕偶像称号。此次获奖延续了他在2025年第7届加纳娱乐奖美国站同一奖项的胜利，反映了他在戏剧、电影、喜剧和数字内容领域的持续表现。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "Jeffrey Nortey再次获得加纳娱乐奖美国站年度银幕偶像奖",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Jeffrey Nortey wins Screen Icon of the Year again at Ghana Entertainment Awards USA"
+    },
+    {
+     "fact": "此次获奖延续了他在2025年第7届加纳娱乐奖美国站同一奖项的胜利",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Jeffrey Nortey's latest win follows his victory in the same category at the 7th Ghana Entertainment Awards USA in 2025."
+    },
+    {
+     "fact": "该奖项反映其在戏剧、电影、喜剧和数字内容领域的表现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "That recognition reflected his work across theatre, film, comedy and digital content, areas that have continued to define his career."
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 90
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "Jeffrey Nortey再度荣获加纳娱乐奖美国站年度银幕偶像",
+   "summary_zh": "Jeffrey Nortey在加纳娱乐奖美国站再次获得年度银幕偶像称号。此次获奖延续了他在2025年第7届加纳娱乐奖美国站同一奖项的胜利，反映了他在戏剧、电影、喜剧和数字内容领域的持续表现。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "Jeffrey Nortey再次获得加纳娱乐奖美国站年度银幕偶像奖",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Jeffrey Nortey wins Screen Icon of the Year again at Ghana Entertainment Awards USA"
+    },
+    {
+     "fact": "此次获奖延续了他在2025年第7届加纳娱乐奖美国站同一奖项的胜利",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Jeffrey Nortey's latest win follows his victory in the same category at the 7th Ghana Entertainment Awards USA in 2025."
+    },
+    {
+     "fact": "该奖项反映其在戏剧、电影、喜剧和数字内容领域的表现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "That recognition reflected his work across theatre, film, comedy and digital content, areas that have continued to define his career."
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 90
+  }
+ },
+ "event_id": "EVT_234fb23544ce1b40",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

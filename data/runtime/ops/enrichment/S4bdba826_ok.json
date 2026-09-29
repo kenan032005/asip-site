@@ -1,0 +1,105 @@
+{
+ "label": "S4bdba826",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4ae67d98ca71e67ff103c596c5cf7d14d09364d61db72333472e6a3491494804",
+ "tokens": {
+  "input_tokens": 1978,
+  "output_tokens": 375,
+  "total_tokens": 2353
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "刚果（金）政客因宣传埃博拉防疫遭殴打致死",
+   "summary_zh": "刚果（金）执政党UDPS成员玛丽-塞莱斯坦·卡龙德瓦在电台采访中宣传埃博拉防疫知识后，于周日在该国北基伍省布滕博遭当地居民袭击，被殴打致死。UDPS称其财物被抢、房屋被纵火。该事件目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "北基伍省",
+    "city": "布滕博",
+    "site": null,
+    "raw_text": "Butembo, in DR Congo's North Kivu province"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）政客卡龙德瓦在宣传埃博拉防疫后遭殴打致死",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A Congolese politician has been beaten to death after promoting Ebola awareness during a radio interview."
+    },
+    {
+     "fact": "袭击发生在北基伍省布滕博，袭击者为当地居民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Marie-Celestin Karondwa from the ruling UDPS party was attacked on Sunday by residents of Butembo, in DR Congo's North Kivu province."
+    },
+    {
+     "fact": "UDPS称其财物被抢、房屋被纵火",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The UDPS said Karondwa was beaten, his belongings were stolen and his house set on fire."
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源报道，尚缺乏交叉验证",
+    "袭击动机尚未获独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "刚果（金）政客因宣传埃博拉防疫遭殴打致死",
+   "summary_zh": "刚果（金）执政党UDPS成员玛丽-塞莱斯坦·卡龙德瓦在电台采访中宣传埃博拉防疫知识后，于周日在该国北基伍省布滕博遭当地居民袭击，被殴打致死。UDPS称其财物被抢、房屋被纵火。该事件目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "北基伍省",
+    "city": "布滕博",
+    "site": null,
+    "raw_text": "Butembo, in DR Congo's North Kivu province"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）政客卡龙德瓦在宣传埃博拉防疫后遭殴打致死",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A Congolese politician has been beaten to death after promoting Ebola awareness during a radio interview."
+    },
+    {
+     "fact": "袭击发生在北基伍省布滕博，袭击者为当地居民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Marie-Celestin Karondwa from the ruling UDPS party was attacked on Sunday by residents of Butembo, in DR Congo's North Kivu province."
+    },
+    {
+     "fact": "UDPS称其财物被抢、房屋被纵火",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The UDPS said Karondwa was beaten, his belongings were stolen and his house set on fire."
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源报道，尚缺乏交叉验证",
+    "袭击动机尚未获独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_0c7386ac4bdba826",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

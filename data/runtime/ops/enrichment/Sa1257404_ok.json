@@ -1,0 +1,138 @@
+{
+ "label": "Sa1257404",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d43cada362039478ee2c799a48574e45a4e36e845fd6cfa6db3207d755722a16",
+ "tokens": {
+  "input_tokens": 2366,
+  "output_tokens": 569,
+  "total_tokens": 2935
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"相关力量组合及接触情况为媒体报道，尚未获独立证实\", \"厄立特里亚支持埃塞武装团体的说法为据称，未获确认\", \"各方是否已达成具体合作安排尚不明确\"]",
+    "after": "[\"相关力量组合及接触情况为媒体报道，尚未获独立证实\", \"厄立特里亚支持埃塞武装团体的说法为据称，未获确认\", \"各方是否已达成具体合作安排尚不明确\", \"据Ethiopia Insight报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "埃塞俄比亚反阿比阵营的“试错”逻辑与风险",
+   "summary_zh": "埃塞俄比亚出现以“Tsmido”为名的反阿比·艾哈迈德政府力量组合，据报涉及提格雷人民解放阵线、法诺、奥罗莫解放军等政治与武装运动，厄立特里亚据称支持部分埃塞武装团体并促成相关接触。文章认为这些力量在意识形态上分歧严重，仅因共同对手而暂时合作，缺乏后阿比时代的政治方案。作者警告，这种“先合作、后谈判”的试错策略可能导致联邦权威严重削弱、领土战争重燃及国家分裂等后果。",
+   "event_type": "political_instability",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Ethiopia"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚出现以Tsmido为名的反阿比政府力量组合",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "There is an emerging logic behind the unusual constellation of forces now associated with the name Tsmido."
+    },
+    {
+     "fact": "据报相关讨论涉及提格雷人民解放阵线、法诺、奥罗莫解放军及其他反对派",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Recent reporting has linked discussions involving the Tigray People’s Liberation Front (TPLF), Fano, the Oromo Liberation Army (OLA), and other opposition actors"
+    },
+    {
+     "fact": "厄立特里亚据称支持部分埃塞武装团体并促成反亚的斯亚贝巴力量间的接触",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eritrea has reportedly supported some Ethiopian armed groups and facilitated contacts among forces opposed to Addis Ababa."
+    },
+    {
+     "fact": "文章认为这些力量意识形态分歧严重，仅因共同对手而暂时合作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "There is little evidence that these actors are converging ideologically. ... What appears to hold the emerging alignment together is a common adversary."
+    },
+    {
+     "fact": "作者警告该策略可能导致联邦权威削弱、领土战争重燃及国家分裂",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "severe weakening or collapse of federal authority, competing armed movements asserting legitimacy, renewed territorial wars, expanded foreign intervention, and perhaps fragmentation of the state itself"
+    }
+   ],
+   "uncertainties": [
+    "相关力量组合及接触情况为媒体报道，尚未获独立证实",
+    "厄立特里亚支持埃塞武装团体的说法为据称，未获确认",
+    "各方是否已达成具体合作安排尚不明确"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "埃塞俄比亚反阿比阵营的“试错”逻辑与风险",
+   "summary_zh": "埃塞俄比亚出现以“Tsmido”为名的反阿比·艾哈迈德政府力量组合，据报涉及提格雷人民解放阵线、法诺、奥罗莫解放军等政治与武装运动，厄立特里亚据称支持部分埃塞武装团体并促成相关接触。文章认为这些力量在意识形态上分歧严重，仅因共同对手而暂时合作，缺乏后阿比时代的政治方案。作者警告，这种“先合作、后谈判”的试错策略可能导致联邦权威严重削弱、领土战争重燃及国家分裂等后果。",
+   "event_type": "political_instability",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Ethiopia"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚出现以Tsmido为名的反阿比政府力量组合",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "There is an emerging logic behind the unusual constellation of forces now associated with the name Tsmido."
+    },
+    {
+     "fact": "据报相关讨论涉及提格雷人民解放阵线、法诺、奥罗莫解放军及其他反对派",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Recent reporting has linked discussions involving the Tigray People’s Liberation Front (TPLF), Fano, the Oromo Liberation Army (OLA), and other opposition actors"
+    },
+    {
+     "fact": "厄立特里亚据称支持部分埃塞武装团体并促成反亚的斯亚贝巴力量间的接触",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eritrea has reportedly supported some Ethiopian armed groups and facilitated contacts among forces opposed to Addis Ababa."
+    },
+    {
+     "fact": "文章认为这些力量意识形态分歧严重，仅因共同对手而暂时合作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "There is little evidence that these actors are converging ideologically. ... What appears to hold the emerging alignment together is a common adversary."
+    },
+    {
+     "fact": "作者警告该策略可能导致联邦权威削弱、领土战争重燃及国家分裂",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "severe weakening or collapse of federal authority, competing armed movements asserting legitimacy, renewed territorial wars, expanded foreign intervention, and perhaps fragmentation of the state itself"
+    }
+   ],
+   "uncertainties": [
+    "相关力量组合及接触情况为媒体报道，尚未获独立证实",
+    "厄立特里亚支持埃塞武装团体的说法为据称，未获确认",
+    "各方是否已达成具体合作安排尚不明确",
+    "据Ethiopia Insight报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_b23fd078a1257404",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

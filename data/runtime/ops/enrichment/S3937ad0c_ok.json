@@ -1,0 +1,117 @@
+{
+ "label": "S3937ad0c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3a904cae54c2f268bf0ba9cd899e78de93edaa4f29383d7179d6bdd3ff87e9e8",
+ "tokens": {
+  "input_tokens": 1976,
+  "output_tokens": 495,
+  "total_tokens": 2471
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克德尔加杜角省叛乱分子被指杀害三人并绑架12人",
+   "summary_zh": "据报，叛乱分子自周末以来在莫桑比克Muidumbe和Macomia地区发动一系列袭击，至少杀害三人并绑架12人。当地消息称，周二在Miangaleua附近有五人被掳走，在Chai有七人被掳走，叛乱分子要求每名人质支付5万梅蒂卡尔。事件引发Messalo河附近社区恐慌，并加剧对EN380公路沿线安全的担忧。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "德尔加杜角省",
+    "city": null,
+    "site": "Muidumbe和Macomia地区",
+    "raw_text": "Muidumbe and Macomia districts, near the Messalo River and along the EN380"
+   },
+   "key_facts": [
+    {
+     "fact": "叛乱分子被指在Muidumbe和Macomia地区杀害至少三人并绑架12人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Insurgents have killed at least three people and abducted 12 others in a series of incursions across Muidumbe and Macomia districts since the weekend"
+    },
+    {
+     "fact": "周二在Miangaleua附近有五人被掳走，在Chai有七人被掳走",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Five people were seized near Miangaleua and seven in Chai on Tuesday"
+    },
+    {
+     "fact": "当地消息称叛乱分子要求每名人质支付5万梅蒂卡尔",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "local sources say the insurgents are demanding MZN50,000 for each hostage"
+    },
+    {
+     "fact": "事件引发Messalo河附近社区恐慌并加剧对EN380公路沿线安全的担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "spreading fear among communities near the Messalo River and raising concerns about security along the EN380"
+    }
+   ],
+   "uncertainties": [
+    "伤亡与绑架人数为据报数据，尚未获得独立确认",
+    "叛乱分子索要赎金的消息来自当地消息源，尚未证实",
+    "目前仅有一个来源（Zitamar News）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克德尔加杜角省叛乱分子被指杀害三人并绑架12人",
+   "summary_zh": "据报，叛乱分子自周末以来在莫桑比克Muidumbe和Macomia地区发动一系列袭击，至少杀害三人并绑架12人。当地消息称，周二在Miangaleua附近有五人被掳走，在Chai有七人被掳走，叛乱分子要求每名人质支付5万梅蒂卡尔。事件引发Messalo河附近社区恐慌，并加剧对EN380公路沿线安全的担忧。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "德尔加杜角省",
+    "city": null,
+    "site": "Muidumbe和Macomia地区",
+    "raw_text": "Muidumbe and Macomia districts, near the Messalo River and along the EN380"
+   },
+   "key_facts": [
+    {
+     "fact": "叛乱分子被指在Muidumbe和Macomia地区杀害至少三人并绑架12人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Insurgents have killed at least three people and abducted 12 others in a series of incursions across Muidumbe and Macomia districts since the weekend"
+    },
+    {
+     "fact": "周二在Miangaleua附近有五人被掳走，在Chai有七人被掳走",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Five people were seized near Miangaleua and seven in Chai on Tuesday"
+    },
+    {
+     "fact": "当地消息称叛乱分子要求每名人质支付5万梅蒂卡尔",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "local sources say the insurgents are demanding MZN50,000 for each hostage"
+    },
+    {
+     "fact": "事件引发Messalo河附近社区恐慌并加剧对EN380公路沿线安全的担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "spreading fear among communities near the Messalo River and raising concerns about security along the EN380"
+    }
+   ],
+   "uncertainties": [
+    "伤亡与绑架人数为据报数据，尚未获得独立确认",
+    "叛乱分子索要赎金的消息来自当地消息源，尚未证实",
+    "目前仅有一个来源（Zitamar News）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_567e8d1a3937ad0c",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

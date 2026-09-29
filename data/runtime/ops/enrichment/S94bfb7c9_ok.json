@@ -1,0 +1,104 @@
+{
+ "label": "S94bfb7c9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "aca8c6767d8e9454e2abe043da0eb485af37ba6c4cb0585c801b70e8f0681df8",
+ "tokens": {
+  "input_tokens": 2218,
+  "output_tokens": 300,
+  "total_tokens": 2518
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\"]",
+    "after": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳议长巴格宾警告政治人物：侮辱不能取代辩论，言论或危及民主",
+   "summary_zh": "加纳议会议长阿尔班·巴格宾呼吁政治人物，尤其是议员，在言辞和行为上保持更大克制，警告滥用言论自由可能损害加纳的民主稳定。他强调强烈批评是正当的，但侮辱不是辩论。相关报道为单一来源。",
+   "event_type": "political_instability",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳议会议长巴格宾警告政治人物滥用言论自由可能损害民主稳定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Speaker of Parliament Alban Bagbin has urged political actors, particularly Members of Parliament, to exercise greater restraint in their language and conduct, warning that the misuse of free speech could undermine Ghana’s democratic stability."
+    },
+    {
+     "fact": "巴格宾表示强烈批评是正当的，但侮辱不是辩论",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "‘Strong criticism is legitimate but insult is not argument’ – Speaker urges restraint in public discourse"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳议长巴格宾警告政治人物：侮辱不能取代辩论，言论或危及民主",
+   "summary_zh": "加纳议会议长阿尔班·巴格宾呼吁政治人物，尤其是议员，在言辞和行为上保持更大克制，警告滥用言论自由可能损害加纳的民主稳定。他强调强烈批评是正当的，但侮辱不是辩论。相关报道为单一来源。",
+   "event_type": "political_instability",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳议会议长巴格宾警告政治人物滥用言论自由可能损害民主稳定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Speaker of Parliament Alban Bagbin has urged political actors, particularly Members of Parliament, to exercise greater restraint in their language and conduct, warning that the misuse of free speech could undermine Ghana’s democratic stability."
+    },
+    {
+     "fact": "巴格宾表示强烈批评是正当的，但侮辱不是辩论",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "‘Strong criticism is legitimate but insult is not argument’ – Speaker urges restraint in public discourse"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_caf8557394bfb7c9",
+ "disease_event_id": null,
+ "country_code": "GH"
+}
