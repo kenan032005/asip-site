@@ -1,0 +1,134 @@
+{
+ "label": "Sf537c8b0",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "7fd2dcca0025a94a6e718006ce2c9cc588e27ffc96be95d5aca3fb7b26e20f77",
+ "tokens": {
+  "input_tokens": 2727,
+  "output_tokens": 675,
+  "total_tokens": 3402
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该事件目前仅有一个来源（乍得复兴门户），尚缺乏交叉验证\"]",
+    "after": "[\"该事件目前仅有一个来源（乍得复兴门户），尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得恩内迪东部联合评估团抵达阿姆贾拉斯，加强对弱势群体的援助",
+   "summary_zh": "由乍得社会行动、团结与人道主义事务部长扎拉·马哈马特·伊萨率领的联合评估与动员团于本周一抵达恩内迪东部省首府阿姆贾拉斯。该团旨在更好地了解难民、流离失所者及收容社区的需求，并加强对该省人道主义和社会援助的动员。访问期间将开展实地考察，重点关注难民和流离失所者安置点及基础设施，并讨论降雨偏少带来的风险。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "恩内迪东部省",
+    "city": "阿姆贾拉斯",
+    "site": null,
+    "raw_text": "Amdjarass, chef-lieu de la province de l’Ennedi-Est"
+   },
+   "key_facts": [
+    {
+     "fact": "联合评估与动员团抵达恩内迪东部省首府阿姆贾拉斯",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une mission conjointe d’évaluation et de mobilisation des partenaires techniques et financiers est arrivée ce lundi à Amdjarass, chef-lieu de la province de l’Ennedi-Est"
+    },
+    {
+     "fact": "该团由社会行动、团结与人道主义事务部长扎拉·马哈马特·伊萨率领",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Conduite par la ministre de l’Action sociale, de la Solidarité et des Affaires humanitaires, Zara Mahamat Issa"
+    },
+    {
+     "fact": "访问旨在了解难民、流离失所者和收容社区的需求并加强人道主义动员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cette mission vise à mieux cerner les besoins des réfugiés, des personnes déplacées et des populations hôtes, tout en renforçant la mobilisation en faveur des réponses humanitaires et sociales dans la province"
+    },
+    {
+     "fact": "代表团将与地方当局会面并开展实地考察，重点关注难民和流离失所者安置点及基础设施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la délégation doit effectuer plusieurs visites de terrain et rencontrer les différents acteurs locaux. Une attention particulière sera accordée aux sites accueillant les réfugiés et les personnes déplacées, ainsi qu’à certaines infrastructures de la province"
+    },
+    {
+     "fact": "降雨偏少对当地居民、难民和流离失所者的用水和生计构成额外风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La question de la faible pluviométrie occupe notamment une place importante dans les échanges. Cette situation fait peser des risques supplémentaires sur les populations locales, les réfugiés et les personnes déplacées, notamment en matière d’accès à l’eau et de moyens de subsistance"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（乍得复兴门户），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得恩内迪东部联合评估团抵达阿姆贾拉斯，加强对弱势群体的援助",
+   "summary_zh": "由乍得社会行动、团结与人道主义事务部长扎拉·马哈马特·伊萨率领的联合评估与动员团于本周一抵达恩内迪东部省首府阿姆贾拉斯。该团旨在更好地了解难民、流离失所者及收容社区的需求，并加强对该省人道主义和社会援助的动员。访问期间将开展实地考察，重点关注难民和流离失所者安置点及基础设施，并讨论降雨偏少带来的风险。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "恩内迪东部省",
+    "city": "阿姆贾拉斯",
+    "site": null,
+    "raw_text": "Amdjarass, chef-lieu de la province de l’Ennedi-Est"
+   },
+   "key_facts": [
+    {
+     "fact": "联合评估与动员团抵达恩内迪东部省首府阿姆贾拉斯",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une mission conjointe d’évaluation et de mobilisation des partenaires techniques et financiers est arrivée ce lundi à Amdjarass, chef-lieu de la province de l’Ennedi-Est"
+    },
+    {
+     "fact": "该团由社会行动、团结与人道主义事务部长扎拉·马哈马特·伊萨率领",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Conduite par la ministre de l’Action sociale, de la Solidarité et des Affaires humanitaires, Zara Mahamat Issa"
+    },
+    {
+     "fact": "访问旨在了解难民、流离失所者和收容社区的需求并加强人道主义动员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cette mission vise à mieux cerner les besoins des réfugiés, des personnes déplacées et des populations hôtes, tout en renforçant la mobilisation en faveur des réponses humanitaires et sociales dans la province"
+    },
+    {
+     "fact": "代表团将与地方当局会面并开展实地考察，重点关注难民和流离失所者安置点及基础设施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la délégation doit effectuer plusieurs visites de terrain et rencontrer les différents acteurs locaux. Une attention particulière sera accordée aux sites accueillant les réfugiés et les personnes déplacées, ainsi qu’à certaines infrastructures de la province"
+    },
+    {
+     "fact": "降雨偏少对当地居民、难民和流离失所者的用水和生计构成额外风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La question de la faible pluviométrie occupe notamment une place importante dans les échanges. Cette situation fait peser des risques supplémentaires sur les populations locales, les réfugiés et les personnes déplacées, notamment en matière d’accès à l’eau et de moyens de subsistance"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（乍得复兴门户），尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_c259929df537c8b0",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

@@ -1,0 +1,127 @@
+{
+ "label": "S4135a9e1",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "32eafc2b4f7be66442fbc9dff2e2e75226909d6b831e8787aaf0df6b0fa5084f",
+ "tokens": {
+  "input_tokens": 2741,
+  "output_tokens": 758,
+  "total_tokens": 3499
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚北部再发大规模绑架事件，逾80人失踪",
+   "summary_zh": "尼日利亚北部尼日尔州和扎姆法拉州在9月26日至27日周末发生两起犯罪团伙袭击，超过80人被绑架，受害者多为农村社区的妇女和儿童。据当地居民称，武装分子骑摩托车袭击了里米等村庄，并将被绑者带入附近森林。这些偏远村庄尽管有安全行动，仍频繁成为袭击目标。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "尼日尔州、扎姆法拉州",
+    "city": null,
+    "site": "里米、迈加马马拉伊凯等村庄",
+    "raw_text": "Au nord du Nigeria, dans les États de Niger et de Zamfara, communautés rurales de Rimi, Maigama Maraike et villages voisins"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚北部周末发生新一轮大规模绑架，超过80人失踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au nord du Nigeria, plus de 80 personnes ont fait l'objet d'une nouvelle vague d'enlèvements de masse au cours du week-end, du 26 et 27 septembre."
+    },
+    {
+     "fact": "袭击发生在尼日尔州和扎姆法拉州，目标为农村社区的妇女和儿童",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des femmes et des enfants de communautés rurales ont été visés lors de deux attaques de groupes criminels, appelés « bandits », dans les États de Niger et de Zamfara."
+    },
+    {
+     "fact": "9月26日，约50名武装分子骑摩托车袭击尼日尔州里米社区，数十人被绑入附近森林",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Samedi 26 septembre, des agriculteurs étaient en pleine récolte d'arachides lorsqu'une cinquantaine d'hommes armés ont débarqué à bord de motos dans la communauté rurale de Rimi, dans l'État de Niger, pour y semer la terreur"
+    },
+    {
+     "fact": "一名居民声称迈加马马拉伊凯半数居民落入匪徒之手，匪徒称系报复当地民兵杀害其同伙",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Adamu Lawwali, un habitant, a affirmé à l'AFP que « la moitié des habitants de Maigama Mairake est aux mains des bandits ». Selon ses déclarations, les bandits ont agi en représailles après que plusieurs des leurs ont été tués par des milices locales."
+    },
+    {
+     "fact": "2025年7月至2026年6月间，据SBM Intelligence估计，约77.8亿奈拉（510万欧元）被支付用于赎金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Entre juillet 2025 et juin 2026, le cabinet de conseil SBM Intelligence estime que près de 7,78 milliards de nairas, soit 5,1 millions d'euros, ont été versés pour la libération d'otages."
+    }
+   ],
+   "uncertainties": [
+    "被绑架人数超过80人为报道所述，具体数字尚未获独立确认",
+    "居民关于迈加马马拉伊凯半数居民被绑及报复动机的说法为单一居民陈述，尚未证实",
+    "事件目前仅有一个来源（RFI）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚北部再发大规模绑架事件，逾80人失踪",
+   "summary_zh": "尼日利亚北部尼日尔州和扎姆法拉州在9月26日至27日周末发生两起犯罪团伙袭击，超过80人被绑架，受害者多为农村社区的妇女和儿童。据当地居民称，武装分子骑摩托车袭击了里米等村庄，并将被绑者带入附近森林。这些偏远村庄尽管有安全行动，仍频繁成为袭击目标。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "尼日尔州、扎姆法拉州",
+    "city": null,
+    "site": "里米、迈加马马拉伊凯等村庄",
+    "raw_text": "Au nord du Nigeria, dans les États de Niger et de Zamfara, communautés rurales de Rimi, Maigama Maraike et villages voisins"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚北部周末发生新一轮大规模绑架，超过80人失踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au nord du Nigeria, plus de 80 personnes ont fait l'objet d'une nouvelle vague d'enlèvements de masse au cours du week-end, du 26 et 27 septembre."
+    },
+    {
+     "fact": "袭击发生在尼日尔州和扎姆法拉州，目标为农村社区的妇女和儿童",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des femmes et des enfants de communautés rurales ont été visés lors de deux attaques de groupes criminels, appelés « bandits », dans les États de Niger et de Zamfara."
+    },
+    {
+     "fact": "9月26日，约50名武装分子骑摩托车袭击尼日尔州里米社区，数十人被绑入附近森林",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Samedi 26 septembre, des agriculteurs étaient en pleine récolte d'arachides lorsqu'une cinquantaine d'hommes armés ont débarqué à bord de motos dans la communauté rurale de Rimi, dans l'État de Niger, pour y semer la terreur"
+    },
+    {
+     "fact": "一名居民声称迈加马马拉伊凯半数居民落入匪徒之手，匪徒称系报复当地民兵杀害其同伙",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Adamu Lawwali, un habitant, a affirmé à l'AFP que « la moitié des habitants de Maigama Mairake est aux mains des bandits ». Selon ses déclarations, les bandits ont agi en représailles après que plusieurs des leurs ont été tués par des milices locales."
+    },
+    {
+     "fact": "2025年7月至2026年6月间，据SBM Intelligence估计，约77.8亿奈拉（510万欧元）被支付用于赎金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Entre juillet 2025 et juin 2026, le cabinet de conseil SBM Intelligence estime que près de 7,78 milliards de nairas, soit 5,1 millions d'euros, ont été versés pour la libération d'otages."
+    }
+   ],
+   "uncertainties": [
+    "被绑架人数超过80人为报道所述，具体数字尚未获独立确认",
+    "居民关于迈加马马拉伊凯半数居民被绑及报复动机的说法为单一居民陈述，尚未证实",
+    "事件目前仅有一个来源（RFI）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_afcef0cc4135a9e1",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

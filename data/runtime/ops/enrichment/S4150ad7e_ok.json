@@ -1,0 +1,105 @@
+{
+ "label": "S4150ad7e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4fadec66b0281c2eeb4d326e0950af390963bf663fbf9baa7b8b1e048aa267a9",
+ "tokens": {
+  "input_tokens": 2157,
+  "output_tokens": 339,
+  "total_tokens": 2496
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳沃尔特地区霍霍市洪水致3000余人流离失所",
+   "summary_zh": "加纳沃尔特地区霍霍市遭遇严重洪水，超过3000名居民被迫撤离，据报有400多所房屋受影响。戴伊河（River Dayi）河水漫堤是此次洪灾的直接原因。目前信息仅来自单一来源，尚未获得交叉验证。",
+   "event_type": "natural_disaster",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "Volta Region",
+    "city": "Hohoe",
+    "site": null,
+    "raw_text": "Hohoe Municipality of the Volta Region"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳沃尔特地区霍霍市严重洪水导致超过3000名居民流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than 3,000 residents have been displaced by severe flooding in the Hohoe Municipality of the Volta Region"
+    },
+    {
+     "fact": "据报有400多所房屋受洪水影响",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "with more than 400 homes reportedly affected after the River Dayi overflowed its banks"
+    },
+    {
+     "fact": "戴伊河河水漫堤引发此次洪灾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "after the River Dayi overflowed its banks"
+    }
+   ],
+   "uncertainties": [
+    "房屋受损数量为据报数据，尚未获得独立确认",
+    "目前仅有一个来源（MyJoyOnline）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳沃尔特地区霍霍市洪水致3000余人流离失所",
+   "summary_zh": "加纳沃尔特地区霍霍市遭遇严重洪水，超过3000名居民被迫撤离，据报有400多所房屋受影响。戴伊河（River Dayi）河水漫堤是此次洪灾的直接原因。目前信息仅来自单一来源，尚未获得交叉验证。",
+   "event_type": "natural_disaster",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "Volta Region",
+    "city": "Hohoe",
+    "site": null,
+    "raw_text": "Hohoe Municipality of the Volta Region"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳沃尔特地区霍霍市严重洪水导致超过3000名居民流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than 3,000 residents have been displaced by severe flooding in the Hohoe Municipality of the Volta Region"
+    },
+    {
+     "fact": "据报有400多所房屋受洪水影响",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "with more than 400 homes reportedly affected after the River Dayi overflowed its banks"
+    },
+    {
+     "fact": "戴伊河河水漫堤引发此次洪灾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "after the River Dayi overflowed its banks"
+    }
+   ],
+   "uncertainties": [
+    "房屋受损数量为据报数据，尚未获得独立确认",
+    "目前仅有一个来源（MyJoyOnline）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_1e09f1c14150ad7e",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

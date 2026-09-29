@@ -1,0 +1,128 @@
+{
+ "label": "S92d0b877",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "94395b38f7206574530badec9f869a9f6040feed2d36b48c54df28f3b7c23832",
+ "tokens": {
+  "input_tokens": 2958,
+  "output_tokens": 594,
+  "total_tokens": 3552
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"已故国王之子的身份和亲子关系尚未获独立公开证实\", \"2022年遗嘱的存在及其指定继承人的效力存在争议\", \"王室家族与氏族长老对继承规则的说法不一\"]",
+    "after": "[\"已故国王之子的身份和亲子关系尚未获独立公开证实\", \"2022年遗嘱的存在及其指定继承人的效力存在争议\", \"王室家族与氏族长老对继承规则的说法不一\", \"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乌干达：爱德华·鲁基迪·尼亚邦戈一世加冕托罗国王，继承之争背景浮现",
+   "summary_zh": "乌干达托罗王国于9月29日在福特波特尔为爱德华·鲁基迪·尼亚邦戈一世举行加冕仪式。王室氏族长老选定他为新国王，但已故国王奥约的母亲和姐姐声称一份2022年遗嘱指定奥约之子为继承人。围绕继承权的争议使加冕蒙上阴影，已故国王之子的身份和亲子关系尚未获独立证实。",
+   "event_type": "political_instability",
+   "country_iso3": "UGA",
+   "location": {
+    "country_iso3": "UGA",
+    "admin1": null,
+    "city": "福特波特尔",
+    "site": "卡鲁齐卡宫",
+    "raw_text": "Fort Portal, palais de Karuziika, Buhesi, district de Bunyangabu, Ouganda"
+   },
+   "key_facts": [
+    {
+     "fact": "爱德华·鲁基迪·尼亚邦戈一世于9月29日在福特波特尔加冕为托罗国王",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Edward Rukidi Kijanangoma, ancien présentateur du journal à la télévision nationale ougandaise, doit être couronné ce mardi 29 septembre roi du Tooro sous le nom d'Edward Rukidi Nyabongo Ier"
+    },
+    {
+     "fact": "王室氏族长老选定爱德华继位，但已故国王奥约的家人声称一份2022年遗嘱指定奥约之子为继承人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les anciens du clan dynastique Babiito ont choisi son cousin Edward pour lui succéder... La mère du défunt roi, Best Kemigisa, et sa sœur, la princesse Ruth Komuntale, défendent une autre lecture de la succession. Elles invoquent un testament daté de 2022"
+    },
+    {
+     "fact": "已故国王之子的身份和亲子关系尚未获独立公开证实",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'existence et la filiation de l'enfant n'ont pas été établies publiquement de manière indépendante"
+    },
+    {
+     "fact": "托罗国王不掌握正式政治权力，但象征巴托罗人的文化认同",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Son roi n'exerce pas de pouvoir politique officiel, mais il incarne l'identité culturelle du peuple batooro, dans l'ouest du pays"
+    }
+   ],
+   "uncertainties": [
+    "已故国王之子的身份和亲子关系尚未获独立公开证实",
+    "2022年遗嘱的存在及其指定继承人的效力存在争议",
+    "王室家族与氏族长老对继承规则的说法不一"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乌干达：爱德华·鲁基迪·尼亚邦戈一世加冕托罗国王，继承之争背景浮现",
+   "summary_zh": "乌干达托罗王国于9月29日在福特波特尔为爱德华·鲁基迪·尼亚邦戈一世举行加冕仪式。王室氏族长老选定他为新国王，但已故国王奥约的母亲和姐姐声称一份2022年遗嘱指定奥约之子为继承人。围绕继承权的争议使加冕蒙上阴影，已故国王之子的身份和亲子关系尚未获独立证实。",
+   "event_type": "political_instability",
+   "country_iso3": "UGA",
+   "location": {
+    "country_iso3": "UGA",
+    "admin1": null,
+    "city": "福特波特尔",
+    "site": "卡鲁齐卡宫",
+    "raw_text": "Fort Portal, palais de Karuziika, Buhesi, district de Bunyangabu, Ouganda"
+   },
+   "key_facts": [
+    {
+     "fact": "爱德华·鲁基迪·尼亚邦戈一世于9月29日在福特波特尔加冕为托罗国王",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Edward Rukidi Kijanangoma, ancien présentateur du journal à la télévision nationale ougandaise, doit être couronné ce mardi 29 septembre roi du Tooro sous le nom d'Edward Rukidi Nyabongo Ier"
+    },
+    {
+     "fact": "王室氏族长老选定爱德华继位，但已故国王奥约的家人声称一份2022年遗嘱指定奥约之子为继承人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les anciens du clan dynastique Babiito ont choisi son cousin Edward pour lui succéder... La mère du défunt roi, Best Kemigisa, et sa sœur, la princesse Ruth Komuntale, défendent une autre lecture de la succession. Elles invoquent un testament daté de 2022"
+    },
+    {
+     "fact": "已故国王之子的身份和亲子关系尚未获独立公开证实",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'existence et la filiation de l'enfant n'ont pas été établies publiquement de manière indépendante"
+    },
+    {
+     "fact": "托罗国王不掌握正式政治权力，但象征巴托罗人的文化认同",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Son roi n'exerce pas de pouvoir politique officiel, mais il incarne l'identité culturelle du peuple batooro, dans l'ouest du pays"
+    }
+   ],
+   "uncertainties": [
+    "已故国王之子的身份和亲子关系尚未获独立公开证实",
+    "2022年遗嘱的存在及其指定继承人的效力存在争议",
+    "王室家族与氏族长老对继承规则的说法不一",
+    "据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_e434614b92d0b877",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

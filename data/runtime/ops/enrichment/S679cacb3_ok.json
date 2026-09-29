@@ -1,0 +1,117 @@
+{
+ "label": "S679cacb3",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3b44fe11a21a38a7b1dac313ad400123a3d17ec33a41c29721ba2d299f9f8560",
+ "tokens": {
+  "input_tokens": 2592,
+  "output_tokens": 500,
+  "total_tokens": 3092
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "罗马法院缺席判处三名埃及安全官员绑架意大利学生罪名成立",
+   "summary_zh": "罗马一家法院裁定三名埃及安全官员参与绑架意大利学生朱利奥·雷杰尼，并缺席判处其10年监禁，第四名被告获判无罪。雷杰尼2016年在埃及进行博士研究期间失踪，数日后被发现死于开罗附近，尸检显示其曾遭酷刑。埃及方面否认国家涉案，并曾提出犯罪团伙等其他解释。此案为单一来源报道。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "EGY",
+   "location": {
+    "country_iso3": "EGY",
+    "admin1": null,
+    "city": "开罗",
+    "site": null,
+    "raw_text": "Cairo"
+   },
+   "key_facts": [
+    {
+     "fact": "罗马法院缺席判处三名埃及安全官员加重绑架罪成立，刑期10年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "On Monday they were sentenced to 10 years in prison on charges of aggravated kidnapping. A fourth Egyptian defendant was acquitted."
+    },
+    {
+     "fact": "意大利学生朱利奥·雷杰尼2016年在埃及研究旅行期间失踪，数日后尸体在开罗附近被发现且曾遭酷刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Giulio Regeni, 28, was studying for a doctorate at Cambridge University when he went missing while on a research trip in Egypt in 2016. Days later, his mutilated body was found in a ditch near Cairo."
+    },
+    {
+     "fact": "埃及当局否认国家参与雷杰尼失踪或死亡，并称犯罪团伙应对其死亡负责",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Egyptian authorities argued criminal gangsters were to blame for Regeni's murder... They also denied any state involvement in Regeni's disappearance or death."
+    },
+    {
+     "fact": "意大利与埃及检方最初联合调查，但得出相反结论",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Italian and Egyptian prosecutors originally investigated the case together, but reached opposing conclusions."
+    }
+   ],
+   "uncertainties": [
+    "埃及方面提出的犯罪团伙、车祸、毒品交易失败或抢劫等解释未获意大利检方认可，案件说法存在冲突",
+    "被告均缺席审判并否认指控",
+    "目前仅一个来源（BBC）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "罗马法院缺席判处三名埃及安全官员绑架意大利学生罪名成立",
+   "summary_zh": "罗马一家法院裁定三名埃及安全官员参与绑架意大利学生朱利奥·雷杰尼，并缺席判处其10年监禁，第四名被告获判无罪。雷杰尼2016年在埃及进行博士研究期间失踪，数日后被发现死于开罗附近，尸检显示其曾遭酷刑。埃及方面否认国家涉案，并曾提出犯罪团伙等其他解释。此案为单一来源报道。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "EGY",
+   "location": {
+    "country_iso3": "EGY",
+    "admin1": null,
+    "city": "开罗",
+    "site": null,
+    "raw_text": "Cairo"
+   },
+   "key_facts": [
+    {
+     "fact": "罗马法院缺席判处三名埃及安全官员加重绑架罪成立，刑期10年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "On Monday they were sentenced to 10 years in prison on charges of aggravated kidnapping. A fourth Egyptian defendant was acquitted."
+    },
+    {
+     "fact": "意大利学生朱利奥·雷杰尼2016年在埃及研究旅行期间失踪，数日后尸体在开罗附近被发现且曾遭酷刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Giulio Regeni, 28, was studying for a doctorate at Cambridge University when he went missing while on a research trip in Egypt in 2016. Days later, his mutilated body was found in a ditch near Cairo."
+    },
+    {
+     "fact": "埃及当局否认国家参与雷杰尼失踪或死亡，并称犯罪团伙应对其死亡负责",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Egyptian authorities argued criminal gangsters were to blame for Regeni's murder... They also denied any state involvement in Regeni's disappearance or death."
+    },
+    {
+     "fact": "意大利与埃及检方最初联合调查，但得出相反结论",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Italian and Egyptian prosecutors originally investigated the case together, but reached opposing conclusions."
+    }
+   ],
+   "uncertainties": [
+    "埃及方面提出的犯罪团伙、车祸、毒品交易失败或抢劫等解释未获意大利检方认可，案件说法存在冲突",
+    "被告均缺席审判并否认指控",
+    "目前仅一个来源（BBC）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_cf9fba40679cacb3",
+ "disease_event_id": null,
+ "country_code": "EG"
+}

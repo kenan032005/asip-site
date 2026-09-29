@@ -1,0 +1,129 @@
+{
+ "label": "S3d504e53",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "73e553631c9014ea47064e0b2a23dce05d3403a6673a669d2d871505459e49c6",
+ "tokens": {
+  "input_tokens": 2591,
+  "output_tokens": 628,
+  "total_tokens": 3219
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹公路伏击事件：27名被劫乘客获释，有女性报告遭强奸",
+   "summary_zh": "南苏丹西赤道州蒙德里东县Lui与Lanyi Dawa之间的公路上发生武装伏击，约32人被劫持，其中27人已获释并被家人送往朱巴，仍有人员下落不明。部分获释者称在扣押期间遭到殴打和酷刑，有女性报告遭强奸。警方表示尚未逮捕任何人，袭击动机不明，无组织宣称负责。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Western Equatoria State",
+    "city": null,
+    "site": "Lui与Lanyi Dawa之间的公路（朱巴至蒙德里路段）",
+    "raw_text": "between Lui and Lanyi Dawa in Mundri East County, along the road linking Juba and Mundri"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹西赤道州蒙德里东县Lui与Lanyi Dawa之间的公路上发生武装伏击，约32人被劫持",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Benson George Papa, the acting executive director of Mundri East County, told Radio Tamazuj on Monday that about 32 people had been abducted."
+    },
+    {
+     "fact": "27名被劫乘客已获释并被家人送往朱巴，其余人员仍下落不明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He said 27 of them had since been released and taken to Juba by their families, while others remain unaccounted for."
+    },
+    {
+     "fact": "部分获释者称在扣押期间遭到殴打和酷刑，有女性报告遭强奸",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Some of those released reported being beaten and tortured while in captivity, Papa said. He also said some women had reported being raped during the abduction."
+    },
+    {
+     "fact": "袭击中三辆车被烧毁，包括两辆驶往朱巴的Land Cruiser和一辆自卸卡车",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Three vehicles – two Land Cruisers travelling towards Juba and a tipper truck – were burnt during the attack."
+    },
+    {
+     "fact": "警方称尚未逮捕任何人，调查正在进行，袭击动机不明且无组织宣称负责",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Western Equatoria State police said no arrests had been made and that investigations are underway. Police said the motive for the attack remains unclear and that no group had claimed responsibility."
+    }
+   ],
+   "uncertainties": [
+    "被劫持总人数为约32人，仍有人员下落不明，具体失踪人数未知",
+    "获释者关于遭殴打、酷刑和强奸的报告为受害者陈述，尚未获得独立证实",
+    "袭击动机不明，尚无组织宣称负责",
+    "目前仅单一来源（Radio Tamazuj）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹公路伏击事件：27名被劫乘客获释，有女性报告遭强奸",
+   "summary_zh": "南苏丹西赤道州蒙德里东县Lui与Lanyi Dawa之间的公路上发生武装伏击，约32人被劫持，其中27人已获释并被家人送往朱巴，仍有人员下落不明。部分获释者称在扣押期间遭到殴打和酷刑，有女性报告遭强奸。警方表示尚未逮捕任何人，袭击动机不明，无组织宣称负责。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Western Equatoria State",
+    "city": null,
+    "site": "Lui与Lanyi Dawa之间的公路（朱巴至蒙德里路段）",
+    "raw_text": "between Lui and Lanyi Dawa in Mundri East County, along the road linking Juba and Mundri"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹西赤道州蒙德里东县Lui与Lanyi Dawa之间的公路上发生武装伏击，约32人被劫持",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Benson George Papa, the acting executive director of Mundri East County, told Radio Tamazuj on Monday that about 32 people had been abducted."
+    },
+    {
+     "fact": "27名被劫乘客已获释并被家人送往朱巴，其余人员仍下落不明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He said 27 of them had since been released and taken to Juba by their families, while others remain unaccounted for."
+    },
+    {
+     "fact": "部分获释者称在扣押期间遭到殴打和酷刑，有女性报告遭强奸",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Some of those released reported being beaten and tortured while in captivity, Papa said. He also said some women had reported being raped during the abduction."
+    },
+    {
+     "fact": "袭击中三辆车被烧毁，包括两辆驶往朱巴的Land Cruiser和一辆自卸卡车",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Three vehicles – two Land Cruisers travelling towards Juba and a tipper truck – were burnt during the attack."
+    },
+    {
+     "fact": "警方称尚未逮捕任何人，调查正在进行，袭击动机不明且无组织宣称负责",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Western Equatoria State police said no arrests had been made and that investigations are underway. Police said the motive for the attack remains unclear and that no group had claimed responsibility."
+    }
+   ],
+   "uncertainties": [
+    "被劫持总人数为约32人，仍有人员下落不明，具体失踪人数未知",
+    "获释者关于遭殴打、酷刑和强奸的报告为受害者陈述，尚未获得独立证实",
+    "袭击动机不明，尚无组织宣称负责",
+    "目前仅单一来源（Radio Tamazuj）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_1d5814aa3d504e53",
+ "disease_event_id": null,
+ "country_code": "SS"
+}
