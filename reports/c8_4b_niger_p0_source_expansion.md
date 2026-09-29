@@ -133,3 +133,62 @@
    与尼日尔侧 `niger_lesahel` 非同一 publisher。本包**未改任何配置**，仅记录。
 5. 本包**未触发部署**（内部工件，不接入站点）。
 
+
+---
+
+# C8-4B2 · 尼日尔官方端点纠正（外部核验后的复核）
+
+> **重要纠正**：C8-4B 曾把若干官方站点判为"域名不存在"。经**按确切 URL 重测**（此前误加了 `www.` 或遭遇瞬时 DNS 故障），
+> 结论已推翻。教训记录：**单次 DNS 失败 / 单次超时 ≠ 站点不存在**，必须重试并区分 DNS 故障与真实 404。
+
+## 逐一复核结果（全部为本轮实测）
+
+| 站点 | 确切 URL | HTTP | RSS | 结论 | 处理 |
+|---|---|---|---|---|---|
+| 内政部 | https://interieur.gouv.ne/ | 200 | **真 RSS `https://interieur.gouv.ne/feed/`（10 items，09-22）** | **LIVE + RSS** | **新增 `niger_interieur`** |
+| 国家警察 | https://www.police-nationale.interieur.gouv.ne/ | 200 | 无（首页仅 css/favicon，无结构化列表） | LIVE 但**列表不可稳定解析** | 不建脆弱抓取器（按规则）；待站点改版复评 |
+| 国家卫队 | https://www.garde-nationale.interieur.gouv.ne/ | 200 | 无，但列表 `/post?id=NNNN` 稳定、详情页 `<p>` 可解析 | **LIVE + HTML 可用** | **新增 `niger_garde_nationale`**（LOW_FREQUENCY） |
+| 国防部 | https://www.defense.gouv.ne/ | **404** | — | TEMPORARILY_UNAVAILABLE | 如实记录，不发明端点 |
+| 宪兵 | https://www.gendarmerie-nationale.defense.gouv.ne/ | **404** | — | TEMPORARILY_UNAVAILABLE | 如实记录 |
+| 交通部/民航 | https://transports.gouv.ne/ | 200 | 无 | LIVE 但**纯 JS 渲染、无可解析列表** | 不采集（脆弱） |
+| 卫生部 | https://www.sante.gouv.ne/ → **msppas.ne** | 200 | **真 RSS `https://www.msppas.ne/?feed=rss2`（10 items）** | **LIVE + RSS** | **新增 `niger_sante`** |
+| Le Sahel (ONEP) | https://www.lesahel.org/ | 200 | **`https://www.lesahel.org/feed/`（10 items，09-28）** | **身份正确** | 无需修改（现有配置本就指向该 feed） |
+
+## Le Sahel 身份核验（用户重点）
+
+- 现有 `niger_lesahel` 的 `feed_url` = **`https://www.lesahel.org/feed/`** —— 即**尼日尔 ONEP 的 Le Sahel**，本轮实测 200 / 真 RSS / 内容新鲜（09-28）。
+- 故：**NIGER_LESAHEL_IDENTITY_CORRECT = true** ｜ **NIGER_LESAHEL_COUNTRY_CONTAMINATION_FIXED = not_applicable**
+- C8-4B 中"`lesahel.info` 内容为 N'Djamena"的观察**与本源无关**（那是另一个域名/出版商），已确认**不存在国家污染**。
+
+## RSS 非强制（接受规则修正）
+
+`SOURCE ACCESS != RSS ACCESS`：高权威 P0 官方源若 HTML 可访问、列表稳定、URL/日期/正文可解析，
+即接受 HTML 采集（本轮 `niger_garde_nationale` 即按此纳入）。同时**不**为结构脆弱（JS 渲染/无列表）的站点建一次性抓取器
+（国家警察、交通部据此**未**纳入，理由已记录）。
+
+## 新增源（本包 3 个）
+
+| source_id | 采集 | tier | 角色 | 证据角色 | 策略 | dry validation |
+|---|---|---|---|---|---|---|
+| `niger_interieur` | RSS | tier_2 | OFFICIAL + POLICE_INTERIOR + SECURITY_DEFENCE | PRIMARY_EVIDENCE | **P0_ALWAYS_ON** | 7/7 HEALTHY |
+| `niger_sante` | RSS | tier_2 | HEALTH + OFFICIAL | PRIMARY_EVIDENCE | LOW_FREQUENCY | 7/7 HEALTHY |
+| `niger_garde_nationale` | HTML | tier_3 | SECURITY_DEFENCE | PRIMARY_EVIDENCE | LOW_FREQUENCY（HIGH_VALUE_LOW_FREQUENCY） | 7/7 HEALTHY |
+
+内政部 RSS 的内容为**区域级官方部务**（Maradi / Diffa / Zinder 等）⇒ 直接改善 C8-4B 指出的**区域覆盖**薄弱项。
+
+## 库存与验证
+
+- CONFIGURED = **124**（C8-4A 基线 120）｜ ENABLED = **122**（基线 118）｜ NIGER_RELEVANT = **72**（基线 67）
+- 本包 dry validation：**8 / 8 HEALTHY**（un_who_afro + niger_interieur + niger_sante + niger_garde_nationale + ANP + Studio Kalangou + Le Sahel + Tamtaminfo）
+
+## 与 C8-4A 缺口的对应
+
+| C8-4A 缺口 | 本包状态 |
+|---|---|
+| NIGER_SECURITY_DEFENCE | **已闭合**（`niger_interieur` + `niger_garde_nationale`） |
+| NIGER_POLICE_INTERIOR | **已闭合**（`niger_interieur`，notes 明示内政/治安） |
+| NIGER_HEALTH | **已闭合**（`niger_sante` RSS + `un_who_afro` 区域权威） |
+| NIGER_OFFICIAL | **显著改善**（+2 官方源） |
+| NIGER_LOCAL / SAHEL_REGIONAL | 保持（14 个既有本地/区域源），内政部区域报道形成叠加 |
+| RESEARCH_SECURITY | 仍为 ISS/Crisis Group（ACLED 待凭据）—— 未变 |
+| ENERGY_MINING / TRANSPORT_INFRASTRUCTURE | 仍未闭合（交通部为 JS 渲染、矿业无公开可用端点） |

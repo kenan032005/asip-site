@@ -6343,6 +6343,90 @@
    },
    "listing_max_items": 0,
    "article_link_selectors": []
+  },
+  {
+   "source_id": "niger_interieur",
+   "source_group": "niger-interieur",
+   "source_name": "Ministère de l'Intérieur（尼日尔内政部）",
+   "source_type": "official_media",
+   "source_reliability_tier": "tier_2",
+   "country_scope": [
+    "尼日尔"
+   ],
+   "language": [
+    "fr"
+   ],
+   "is_direct_origin": true,
+   "is_republication_platform": false,
+   "enabled": true,
+   "tested": true,
+   "claim_origin_type": "primary_official",
+   "url": "https://interieur.gouv.ne/",
+   "notes": "尼日尔内政部官方站（实测 200 + 真 RSS 10 items + 区域级官方部务：Maradi/Diffa/Zinder）。角色：OFFICIAL + POLICE_INTERIOR + SECURITY_DEFENCE；证据角色 PRIMARY_EVIDENCE；策略 P0_ALWAYS_ON。",
+   "legacy_payload": {
+    "collection_method": "rss",
+    "feed_url": "https://interieur.gouv.ne/feed/",
+    "country": "尼日尔"
+   },
+   "listing_max_items": 0,
+   "article_link_selectors": []
+  },
+  {
+   "source_id": "niger_garde_nationale",
+   "source_group": "niger-garde",
+   "source_name": "Garde Nationale du Niger（尼日尔国家卫队）",
+   "source_type": "official_media",
+   "source_reliability_tier": "tier_3",
+   "country_scope": [
+    "尼日尔"
+   ],
+   "language": [
+    "fr"
+   ],
+   "is_direct_origin": true,
+   "is_republication_platform": false,
+   "enabled": true,
+   "tested": true,
+   "claim_origin_type": "primary_official",
+   "url": "https://www.garde-nationale.interieur.gouv.ne/",
+   "notes": "官方站（实测 200；列表 /post?id=NNNN 稳定、详情页 <p> 可解析；发布节奏低）。角色：SECURITY_DEFENCE；证据角色 PRIMARY_EVIDENCE；策略 LOW_FREQUENCY；按用户规则：低音量但技术健康 ⇒ HIGH_VALUE_LOW_FREQUENCY，不因量低而拒收。",
+   "legacy_payload": {
+    "collection_method": "html_listing",
+    "feed_url": "",
+    "country": "尼日尔"
+   },
+   "listing_urls": [
+    "https://www.garde-nationale.interieur.gouv.ne/"
+   ],
+   "listing_max_items": 0,
+   "article_link_selectors": []
+  },
+  {
+   "source_id": "niger_sante",
+   "source_group": "niger-sante",
+   "source_name": "Ministère de la Santé et de l'Hygiène Publique（尼日尔卫生部）",
+   "source_type": "official_media",
+   "source_reliability_tier": "tier_2",
+   "country_scope": [
+    "尼日尔"
+   ],
+   "language": [
+    "fr"
+   ],
+   "is_direct_origin": true,
+   "is_republication_platform": false,
+   "enabled": true,
+   "tested": true,
+   "claim_origin_type": "primary_official",
+   "url": "https://www.msppas.ne/",
+   "notes": "尼日尔卫生部官网（sante.gouv.ne → msppas.ne；实测 200）。WordPress 备用 feed `?feed=rss2` 实测 200 / application/rss+xml / 10 items。角色：HEALTH + OFFICIAL；证据角色 PRIMARY_EVIDENCE；策略 LOW_FREQUENCY。",
+   "legacy_payload": {
+    "collection_method": "rss",
+    "feed_url": "https://www.msppas.ne/?feed=rss2",
+    "country": "尼日尔"
+   },
+   "listing_max_items": 0,
+   "article_link_selectors": []
   }
  ]
 }
