@@ -1,0 +1,121 @@
+{
+ "label": "S2fe93cde",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c3affdec4452a767e3bd73d31bdc311604dcff173d1e407f368a1b7ef489fbf9",
+ "tokens": {
+  "input_tokens": 2774,
+  "output_tokens": 498,
+  "total_tokens": 3272
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔公共采购周期：以保障和巩固经济与金融善治为基础的严格流程",
+   "summary_zh": "尼日尔公共采购体系由公共采购监管局（ARCOP）负责监管，其使命基于严格的公共支出执行流程，旨在保障和巩固经济与金融善治，以及透明度、现代化和国家采购体系的效率。该机构设立了争议解决委员会和直接交流平台，并开通绿色号码、期刊和网站作为沟通渠道。公共采购程序涵盖从需求确定到合同执行的各个阶段，并受公共采购与预算业务总局的事前监督。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": null,
+    "raw_text": "NIAMEY"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔公共采购体系由公共采购监管局（ARCOP）负责监管",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Niger, la régulation du système de la commande publique est assurée par l’Autorité de Régulation de la Commande Publique (ARCOP)"
+    },
+    {
+     "fact": "ARCOP设立了争议解决委员会及直接交流平台，并开通绿色号码、期刊和网站",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la création d’un Comité de Règlement des Différends au sein de l’ARCOP, mais également celle des espaces d’échanges directs... l’ARCOP propose un numéro vert, le 08 00 88 88, un périodique et un site web"
+    },
+    {
+     "fact": "公共采购程序涵盖从需求确定到合同执行的各个阶段",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les procédures de transparence concernent notamment toutes les étapes de la commande publique, qui vont de la détermination des besoins à l’exécution du marché public"
+    },
+    {
+     "fact": "公共采购受公共采购与预算业务总局（DGCMP/OB）的事前监督",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sous la supervision de la Direction Générale du Contrôle des Marchés Publics et des Opérations Budgétaires (DGCMP/OB)"
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔公共采购周期：以保障和巩固经济与金融善治为基础的严格流程",
+   "summary_zh": "尼日尔公共采购体系由公共采购监管局（ARCOP）负责监管，其使命基于严格的公共支出执行流程，旨在保障和巩固经济与金融善治，以及透明度、现代化和国家采购体系的效率。该机构设立了争议解决委员会和直接交流平台，并开通绿色号码、期刊和网站作为沟通渠道。公共采购程序涵盖从需求确定到合同执行的各个阶段，并受公共采购与预算业务总局的事前监督。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": null,
+    "raw_text": "NIAMEY"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔公共采购体系由公共采购监管局（ARCOP）负责监管",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Niger, la régulation du système de la commande publique est assurée par l’Autorité de Régulation de la Commande Publique (ARCOP)"
+    },
+    {
+     "fact": "ARCOP设立了争议解决委员会及直接交流平台，并开通绿色号码、期刊和网站",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la création d’un Comité de Règlement des Différends au sein de l’ARCOP, mais également celle des espaces d’échanges directs... l’ARCOP propose un numéro vert, le 08 00 88 88, un périodique et un site web"
+    },
+    {
+     "fact": "公共采购程序涵盖从需求确定到合同执行的各个阶段",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les procédures de transparence concernent notamment toutes les étapes de la commande publique, qui vont de la détermination des besoins à l’exécution du marché public"
+    },
+    {
+     "fact": "公共采购受公共采购与预算业务总局（DGCMP/OB）的事前监督",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sous la supervision de la Direction Générale du Contrôle des Marchés Publics et des Opérations Budgétaires (DGCMP/OB)"
+    }
+   ],
+   "uncertainties": [
+    "据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_d22702ac2fe93cde",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

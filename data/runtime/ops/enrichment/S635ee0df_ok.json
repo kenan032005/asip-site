@@ -1,0 +1,125 @@
+{
+ "label": "S635ee0df",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "27af6cca7b2620e4acba75ef24eb5a0703c4e3df92a47eea461c058c6e3a4b07",
+ "tokens": {
+  "input_tokens": 2620,
+  "output_tokens": 522,
+  "total_tokens": 3142
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "恩贾梅纳住房危机：租金飞涨，租户日常苦不堪言",
+   "summary_zh": "乍得首都恩贾梅纳面临严重住房危机，租金飞涨、看房费高昂且缺乏法律监管。租户反映看房费每次5000至10000中非法郎，市中心单间月租达35000至40000中非法郎。一名法律人士指出，1958年法国民法典仍在乍得沿用，未设定租金上限或调控标准。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N'Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "恩贾梅纳居民寻找住房面临严重困难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Trouver un logement à N'Djamena est devenu un véritable calvaire pour la population."
+    },
+    {
+     "fact": "看房费每次可达5000至10000中非法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les démarcheurs exigent souvent des frais de visite qui peuvent aller de 5 000 à 10 000 francs CFA."
+    },
+    {
+     "fact": "市中心单间月租约35000至40000中非法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il faut débourser entre 35 000 et 40 000 francs CFA pour une chambre simple"
+    },
+    {
+     "fact": "一名法律人士称1958年法国民法典仍在乍得沿用，未设定租金上限",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le code civil français de 1958, toujours en vigueur au Tchad, encadre le bail mais ne fixe aucun plafond ni critère de régulation des loyers."
+    },
+    {
+     "fact": "一名寡妇称因偏远街区不安全而被迫在市中心租房",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans les quartiers reculés, il y a trop d'insécurité. Malgré la cherté, je suis obligée de louer au centre-ville"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Alwihda Info）报道，尚缺乏交叉验证",
+    "租金及看房费金额为受访者与报道所述，未获独立核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "恩贾梅纳住房危机：租金飞涨，租户日常苦不堪言",
+   "summary_zh": "乍得首都恩贾梅纳面临严重住房危机，租金飞涨、看房费高昂且缺乏法律监管。租户反映看房费每次5000至10000中非法郎，市中心单间月租达35000至40000中非法郎。一名法律人士指出，1958年法国民法典仍在乍得沿用，未设定租金上限或调控标准。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N'Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "恩贾梅纳居民寻找住房面临严重困难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Trouver un logement à N'Djamena est devenu un véritable calvaire pour la population."
+    },
+    {
+     "fact": "看房费每次可达5000至10000中非法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les démarcheurs exigent souvent des frais de visite qui peuvent aller de 5 000 à 10 000 francs CFA."
+    },
+    {
+     "fact": "市中心单间月租约35000至40000中非法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il faut débourser entre 35 000 et 40 000 francs CFA pour une chambre simple"
+    },
+    {
+     "fact": "一名法律人士称1958年法国民法典仍在乍得沿用，未设定租金上限",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le code civil français de 1958, toujours en vigueur au Tchad, encadre le bail mais ne fixe aucun plafond ni critère de régulation des loyers."
+    },
+    {
+     "fact": "一名寡妇称因偏远街区不安全而被迫在市中心租房",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans les quartiers reculés, il y a trop d'insécurité. Malgré la cherté, je suis obligée de louer au centre-ville"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Alwihda Info）报道，尚缺乏交叉验证",
+    "租金及看房费金额为受访者与报道所述，未获独立核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_08e7ab44635ee0df",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

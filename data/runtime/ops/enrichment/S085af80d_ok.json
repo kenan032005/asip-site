@@ -1,0 +1,146 @@
+{
+ "label": "S085af80d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "640601b67c857e372777b9cd940f57f4b80595f376411b078311e2ca89810a11",
+ "tokens": {
+  "input_tokens": 2720,
+  "output_tokens": 639,
+  "total_tokens": 3359
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该事件目前仅有单一来源（Tchadinfos）报道，尚缺乏交叉验证\", \"相关报道存在时间差异标记（conflict_flags: time_difference）\"]",
+    "after": "[\"该事件目前仅有单一来源（Tchadinfos）报道，尚缺乏交叉验证\", \"相关报道存在时间差异标记（conflict_flags: time_difference）\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得“新的一天”党在洛贡东区举行党员动员会议",
+   "summary_zh": "乍得政党“新的一天”（Un Nouveau Jour）于2026年9月28日在洛贡东省多巴市举行党员交流与动员会议，由该党全国总书记纳斯拉·吉马斯恩加尔博士主持。会议围绕党内理念进行交流、宣传与信息通报，来自该省六个省的党员参加。会后该党领导人前往多巴市入口桥梁查看其严重损毁状况，并呼吁当局尽快修建双车道新桥。",
+   "event_type": "political_instability",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "洛贡东省",
+    "city": "多巴",
+    "site": null,
+    "raw_text": "Doba, dans la province du Logone oriental"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得政党“新的一天”于2026年9月28日在洛贡东省多巴举行党员动员会议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le parti politique Un Nouveau Jour a tenu, ce 28 septembre 2026 à Doba, dans la province du Logone oriental, une rencontre d’échanges et de mobilisation de ses militants."
+    },
+    {
+     "fact": "会议由该党全国总书记纳斯拉·吉马斯恩加尔博士主持",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "C’est le secrétaire général national dudit parti, Dr Nasra Djimasngar, qui a présidé la rencontre."
+    },
+    {
+     "fact": "会议汇集了来自洛贡东省六个省的党员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Elle a regroupé les militantes et militants venus des six départements que compte la province du Logone oriental."
+    },
+    {
+     "fact": "该党领导人称在乍得要获得权力必须拿起武器",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "« Pour accéder au pouvoir au Tchad, il faut prendre des armes. Cette page doit être entièrement tournée »"
+    },
+    {
+     "fact": "会后该党领导人前往多巴市入口桥梁查看其严重损毁状况",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le secrétaire général national et sa suite se sont rendus sur le pont situé à l’entrée de la ville de Doba pour constater de visu son état de dégradation avancée"
+    },
+    {
+     "fact": "该党呼吁当局尽快修建双车道新桥",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il a ensuite plaidé auprès des plus hautes autorités du pays afin qu’elles s’investissent dans les meilleurs délais pour la construction d’un pont à double voie."
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有单一来源（Tchadinfos）报道，尚缺乏交叉验证",
+    "相关报道存在时间差异标记（conflict_flags: time_difference）"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得“新的一天”党在洛贡东区举行党员动员会议",
+   "summary_zh": "乍得政党“新的一天”（Un Nouveau Jour）于2026年9月28日在洛贡东省多巴市举行党员交流与动员会议，由该党全国总书记纳斯拉·吉马斯恩加尔博士主持。会议围绕党内理念进行交流、宣传与信息通报，来自该省六个省的党员参加。会后该党领导人前往多巴市入口桥梁查看其严重损毁状况，并呼吁当局尽快修建双车道新桥。",
+   "event_type": "political_instability",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "洛贡东省",
+    "city": "多巴",
+    "site": null,
+    "raw_text": "Doba, dans la province du Logone oriental"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得政党“新的一天”于2026年9月28日在洛贡东省多巴举行党员动员会议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le parti politique Un Nouveau Jour a tenu, ce 28 septembre 2026 à Doba, dans la province du Logone oriental, une rencontre d’échanges et de mobilisation de ses militants."
+    },
+    {
+     "fact": "会议由该党全国总书记纳斯拉·吉马斯恩加尔博士主持",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "C’est le secrétaire général national dudit parti, Dr Nasra Djimasngar, qui a présidé la rencontre."
+    },
+    {
+     "fact": "会议汇集了来自洛贡东省六个省的党员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Elle a regroupé les militantes et militants venus des six départements que compte la province du Logone oriental."
+    },
+    {
+     "fact": "该党领导人称在乍得要获得权力必须拿起武器",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "« Pour accéder au pouvoir au Tchad, il faut prendre des armes. Cette page doit être entièrement tournée »"
+    },
+    {
+     "fact": "会后该党领导人前往多巴市入口桥梁查看其严重损毁状况",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le secrétaire général national et sa suite se sont rendus sur le pont situé à l’entrée de la ville de Doba pour constater de visu son état de dégradation avancée"
+    },
+    {
+     "fact": "该党呼吁当局尽快修建双车道新桥",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il a ensuite plaidé auprès des plus hautes autorités du pays afin qu’elles s’investissent dans les meilleurs délais pour la construction d’un pont à double voie."
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有单一来源（Tchadinfos）报道，尚缺乏交叉验证",
+    "相关报道存在时间差异标记（conflict_flags: time_difference）",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_906719ce085af80d",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
