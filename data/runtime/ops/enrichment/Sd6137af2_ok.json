@@ -1,0 +1,136 @@
+{
+ "label": "Sd6137af2",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3ad0510b5a61b600a4b01acf71b40869671fcbbdea16c6352ec93ff637c42951",
+ "tokens": {
+  "input_tokens": 2529,
+  "output_tokens": 598,
+  "total_tokens": 3127
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"政府关于非法交易黄金资助伊斯兰叛乱活动的说法为指控性质，尚未得到独立证实\", \"精炼厂未来产能提升至515吨的计划为政府目标，尚未实现\"]",
+    "after": "[\"政府关于非法交易黄金资助伊斯兰叛乱活动的说法为指控性质，尚未得到独立证实\", \"精炼厂未来产能提升至515吨的计划为政府目标，尚未实现\", \"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "布基纳法索军政府领导人开设大型黄金精炼厂，力求将采矿利润留在国内",
+   "summary_zh": "布基纳法索军政府领导人易卜拉欣·特拉奥雷在首都瓦加杜古为该国首家黄金精炼厂揭幕，旨在将更多矿产财富留在国内加工，并加强对这一重要行业的控制。政府称该精炼厂名为Raffinor-BF，耗资超过110亿非洲法郎（约1900万美元），初期年精炼能力为164吨黄金。当局还声称部分非法交易的黄金被用于资助伊斯兰叛乱活动。",
+   "event_type": "other_security",
+   "country_iso3": "BFA",
+   "location": {
+    "country_iso3": "BFA",
+    "admin1": null,
+    "city": "瓦加杜古",
+    "site": "Raffinor-BF精炼厂",
+    "raw_text": "the plant's inauguration in the capital, Ouagadougou"
+   },
+   "key_facts": [
+    {
+     "fact": "布基纳法索军政府领导人特拉奥雷在瓦加杜古为该国首家黄金精炼厂揭幕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Burkina Faso has opened its first gold refinery... Junta leader Ibrahim Traoré said... at the plant's inauguration in the capital, Ouagadougou, on Monday."
+    },
+    {
+     "fact": "该精炼厂名为Raffinor-BF，耗资超过110亿非洲法郎（约1900万美元）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The new refinery, known as Raffinor-BF, cost more than 11bn CFA francs ($19m; £14m), according to the presidency."
+    },
+    {
+     "fact": "精炼厂初期年精炼能力为164吨黄金，未来可能提升至515吨",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The plant will initially be capable of refining 164 tonnes of gold a year... The government says its eventual capacity could rise to 515 tonnes"
+    },
+    {
+     "fact": "政府声称部分非法交易的黄金被用于资助伊斯兰叛乱活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The government has also alleged that some illegally traded gold helps finance the Islamist insurgency that has engulfed much of the country."
+    },
+    {
+     "fact": "布基纳法索多年来一直在打击与基地组织和伊斯兰国有关联的武装伊斯兰组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Burkina Faso has been fighting armed Islamist groups linked to al-Qaeda and Islamic State for years, with large areas outside full government control."
+    }
+   ],
+   "uncertainties": [
+    "政府关于非法交易黄金资助伊斯兰叛乱活动的说法为指控性质，尚未得到独立证实",
+    "精炼厂未来产能提升至515吨的计划为政府目标，尚未实现"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "布基纳法索军政府领导人开设大型黄金精炼厂，力求将采矿利润留在国内",
+   "summary_zh": "布基纳法索军政府领导人易卜拉欣·特拉奥雷在首都瓦加杜古为该国首家黄金精炼厂揭幕，旨在将更多矿产财富留在国内加工，并加强对这一重要行业的控制。政府称该精炼厂名为Raffinor-BF，耗资超过110亿非洲法郎（约1900万美元），初期年精炼能力为164吨黄金。当局还声称部分非法交易的黄金被用于资助伊斯兰叛乱活动。",
+   "event_type": "other_security",
+   "country_iso3": "BFA",
+   "location": {
+    "country_iso3": "BFA",
+    "admin1": null,
+    "city": "瓦加杜古",
+    "site": "Raffinor-BF精炼厂",
+    "raw_text": "the plant's inauguration in the capital, Ouagadougou"
+   },
+   "key_facts": [
+    {
+     "fact": "布基纳法索军政府领导人特拉奥雷在瓦加杜古为该国首家黄金精炼厂揭幕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Burkina Faso has opened its first gold refinery... Junta leader Ibrahim Traoré said... at the plant's inauguration in the capital, Ouagadougou, on Monday."
+    },
+    {
+     "fact": "该精炼厂名为Raffinor-BF，耗资超过110亿非洲法郎（约1900万美元）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The new refinery, known as Raffinor-BF, cost more than 11bn CFA francs ($19m; £14m), according to the presidency."
+    },
+    {
+     "fact": "精炼厂初期年精炼能力为164吨黄金，未来可能提升至515吨",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The plant will initially be capable of refining 164 tonnes of gold a year... The government says its eventual capacity could rise to 515 tonnes"
+    },
+    {
+     "fact": "政府声称部分非法交易的黄金被用于资助伊斯兰叛乱活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The government has also alleged that some illegally traded gold helps finance the Islamist insurgency that has engulfed much of the country."
+    },
+    {
+     "fact": "布基纳法索多年来一直在打击与基地组织和伊斯兰国有关联的武装伊斯兰组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Burkina Faso has been fighting armed Islamist groups linked to al-Qaeda and Islamic State for years, with large areas outside full government control."
+    }
+   ],
+   "uncertainties": [
+    "政府关于非法交易黄金资助伊斯兰叛乱活动的说法为指控性质，尚未得到独立证实",
+    "精炼厂未来产能提升至515吨的计划为政府目标，尚未实现",
+    "据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_d87be801d6137af2",
+ "disease_event_id": null,
+ "country_code": "BF"
+}

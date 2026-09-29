@@ -1,0 +1,138 @@
+{
+ "label": "Sce5d28f7",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "7ee8ac2c4c49eab3458712816a9e156c1b0d585f77b061f308b505c9fce9650e",
+ "tokens": {
+  "input_tokens": 2399,
+  "output_tokens": 475,
+  "total_tokens": 2874
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"有关“新内战”自2024年以来正在进行的说法被作者称为“完全错误”，但未提供独立核实\", \"“议会政变”或“违宪解散”的指控尚未证实\", \"看守政府官员的财务限制措施据称存在，但具体执行情况有待核实\"]",
+    "after": "[\"有关“新内战”自2024年以来正在进行的说法被作者称为“完全错误”，但未提供独立核实\", \"“议会政变”或“违宪解散”的指控尚未证实\", \"看守政府官员的财务限制措施据称存在，但具体执行情况有待核实\", \"据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "评论：南苏丹过渡期法律终结与看守政府困局",
+   "summary_zh": "南苏丹民族团结过渡政府于2026年9月22日解散，标志着长达六年的过渡框架结束。分析指出，尽管政府通过修宪和选举法修正案以法律途径推进，但永久宪法和人口普查仍未完成，总统权力集中风险加剧。有关“议会政变”或“新内战”的说法被指缺乏依据。",
+   "event_type": "political_instability",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "South Sudan"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹民族团结过渡政府于2026年9月22日解散",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The dissolution of South Sudan’s Revitalised Transitional Government of National Unity (R-TGoNU) on 22 September 2026"
+    },
+    {
+     "fact": "总统基尔于9月21日批准选举法修正案",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "President Salva Kiir assented to the amendments on 21 September"
+    },
+    {
+     "fact": "过渡立法机构与州机构被解散，副总统办公室终止",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the transitional legislature and state institutions were dissolved and the vice-presidential offices were terminated"
+    },
+    {
+     "fact": "永久宪法和人口普查均未完成",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The permanent constitution envisaged in the peace agreement had not been completed, nor had a census taken place"
+    },
+    {
+     "fact": "有指控称存在“议会政变”或“违宪解散”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "We heard about allegations of a “parliamentary coup” or an “unconstitutional dissolution”"
+    }
+   ],
+   "uncertainties": [
+    "有关“新内战”自2024年以来正在进行的说法被作者称为“完全错误”，但未提供独立核实",
+    "“议会政变”或“违宪解散”的指控尚未证实",
+    "看守政府官员的财务限制措施据称存在，但具体执行情况有待核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "评论：南苏丹过渡期法律终结与看守政府困局",
+   "summary_zh": "南苏丹民族团结过渡政府于2026年9月22日解散，标志着长达六年的过渡框架结束。分析指出，尽管政府通过修宪和选举法修正案以法律途径推进，但永久宪法和人口普查仍未完成，总统权力集中风险加剧。有关“议会政变”或“新内战”的说法被指缺乏依据。",
+   "event_type": "political_instability",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "South Sudan"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹民族团结过渡政府于2026年9月22日解散",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The dissolution of South Sudan’s Revitalised Transitional Government of National Unity (R-TGoNU) on 22 September 2026"
+    },
+    {
+     "fact": "总统基尔于9月21日批准选举法修正案",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "President Salva Kiir assented to the amendments on 21 September"
+    },
+    {
+     "fact": "过渡立法机构与州机构被解散，副总统办公室终止",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the transitional legislature and state institutions were dissolved and the vice-presidential offices were terminated"
+    },
+    {
+     "fact": "永久宪法和人口普查均未完成",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The permanent constitution envisaged in the peace agreement had not been completed, nor had a census taken place"
+    },
+    {
+     "fact": "有指控称存在“议会政变”或“违宪解散”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "We heard about allegations of a “parliamentary coup” or an “unconstitutional dissolution”"
+    }
+   ],
+   "uncertainties": [
+    "有关“新内战”自2024年以来正在进行的说法被作者称为“完全错误”，但未提供独立核实",
+    "“议会政变”或“违宪解散”的指控尚未证实",
+    "看守政府官员的财务限制措施据称存在，但具体执行情况有待核实",
+    "据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_1e583cdfce5d28f7",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

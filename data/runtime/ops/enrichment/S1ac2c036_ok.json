@@ -1,0 +1,113 @@
+{
+ "label": "S1ac2c036",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "7e19d0858d022c2685e91179f6d80b2f237f50b0eb664c5eb3b468e8980bb52b",
+ "tokens": {
+  "input_tokens": 2777,
+  "output_tokens": 611,
+  "total_tokens": 3388
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔多索举行民事登记与身份识别改革全国宣传巡回活动",
+   "summary_zh": "尼日尔内政部在 Tahoua 之后继续于多索（Dosso）举办为期两天的全国宣传巡回活动，主题为民事登记、个人身份识别及国家身份识别系统现代化改革。活动汇集行政与地方当局、技术部门、国防与安全力量、民间社会代表及合作伙伴，围绕法律改革、个人数据保护、网络安全、新生物识别国民身份证、国家人口登记册（RNP）及国家人员登记与识别局（ANEI）等议题展开交流。多索地区州长强调建立可靠、安全、包容的身份识别体系的重要性。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "Dosso",
+    "city": "Dosso",
+    "site": null,
+    "raw_text": "Dosso"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔内政部在多索继续举办民事登记与身份识别改革全国宣传巡回活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Après Tahoua, la tournée nationale de sensibilisation sur les réformes en matière d’état civil, d’identification des personnes physiques et de modernisation du système national d’identification s’est poursuivie à Dosso."
+    },
+    {
+     "fact": "活动为期两天，汇集行政与地方当局、技术部门、国防与安全力量、民间社会代表及合作伙伴",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Organisée sur deux jours, cette étape a réuni les autorités administratives et locales, les services techniques, les forces de défense et de sécurité, les représentants de la société civile ainsi que les partenaires concernés."
+    },
+    {
+     "fact": "讨论议题包括法律改革、个人数据保护、网络安全、新生物识别国民身份证及国家人口登记册等",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les travaux ont notamment porté sur les réformes juridiques initiées par le Ministère, la protection des données à caractère personnel en lien avec l’identité légale, la cybersécurité, la nouvelle Carte Nationale d’Identité Biométrique"
+    },
+    {
+     "fact": "多索地区州长强调身份识别体系需可靠、安全、包容并适应尼日尔现实",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Gouverneur de la région de Dosso a rappelé que la modernisation de l’état civil et du système national d’identification répond à la nécessité de disposer d’un dispositif fiable, sécurisé, inclusif et adapté aux réalités du Niger"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（单一来源），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔多索举行民事登记与身份识别改革全国宣传巡回活动",
+   "summary_zh": "尼日尔内政部在 Tahoua 之后继续于多索（Dosso）举办为期两天的全国宣传巡回活动，主题为民事登记、个人身份识别及国家身份识别系统现代化改革。活动汇集行政与地方当局、技术部门、国防与安全力量、民间社会代表及合作伙伴，围绕法律改革、个人数据保护、网络安全、新生物识别国民身份证、国家人口登记册（RNP）及国家人员登记与识别局（ANEI）等议题展开交流。多索地区州长强调建立可靠、安全、包容的身份识别体系的重要性。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "Dosso",
+    "city": "Dosso",
+    "site": null,
+    "raw_text": "Dosso"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔内政部在多索继续举办民事登记与身份识别改革全国宣传巡回活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Après Tahoua, la tournée nationale de sensibilisation sur les réformes en matière d’état civil, d’identification des personnes physiques et de modernisation du système national d’identification s’est poursuivie à Dosso."
+    },
+    {
+     "fact": "活动为期两天，汇集行政与地方当局、技术部门、国防与安全力量、民间社会代表及合作伙伴",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Organisée sur deux jours, cette étape a réuni les autorités administratives et locales, les services techniques, les forces de défense et de sécurité, les représentants de la société civile ainsi que les partenaires concernés."
+    },
+    {
+     "fact": "讨论议题包括法律改革、个人数据保护、网络安全、新生物识别国民身份证及国家人口登记册等",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les travaux ont notamment porté sur les réformes juridiques initiées par le Ministère, la protection des données à caractère personnel en lien avec l’identité légale, la cybersécurité, la nouvelle Carte Nationale d’Identité Biométrique"
+    },
+    {
+     "fact": "多索地区州长强调身份识别体系需可靠、安全、包容并适应尼日尔现实",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Gouverneur de la région de Dosso a rappelé que la modernisation de l’état civil et du système national d’identification répond à la nécessité de disposer d’un dispositif fiable, sécurisé, inclusif et adapté aux réalités du Niger"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（单一来源），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_4501c21a1ac2c036",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
