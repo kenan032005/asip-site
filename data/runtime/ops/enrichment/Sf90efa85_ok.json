@@ -1,0 +1,127 @@
+{
+ "label": "Sf90efa85",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "623f3f1ac428914c7fd5b88ab50f5e3ef5e3c9d75bdbc6ba9436f219311f08de",
+ "tokens": {
+  "input_tokens": 3011,
+  "output_tokens": 650,
+  "total_tokens": 3661
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚比莱村燃气污染被指为居民健康的定时炸弹",
+   "summary_zh": "据法国国际广播电台报道，自2025年10月起，尼日利亚南部哈科特港附近的渔村比莱，居民持续吸入从老化地下管道泄漏的燃气。报道称，尽管比莱已出现多起死亡事件，当地至今未宣布紧急状态或灾难状态。该污染被指混合了甲烷、二氧化碳和氢气，当地医疗设施不足，一名女性于2026年9月21日在哈科特港因爆炸受伤后死亡。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "比莱",
+    "site": "比莱镇",
+    "raw_text": "Bille, proche de Port Harcourt au sud du Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "自2025年10月起，尼日利亚比莱村居民持续吸入从老化地下管道泄漏的燃气",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis octobre 2025, les habitants d’un gros village de pêcheurs, Bille, proche de Port Harcourt au sud du Nigeria, respirent du gaz s’échappant à travers des canalisations vétustes enfouies sous terre depuis des décennies."
+    },
+    {
+     "fact": "尽管比莱出现多起死亡事件，当地至今未宣布紧急状态或灾难状态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucune déclaration d’état d’urgence ou de catastrophe n'a été déclarée à ce jour malgré plusieurs décès dans Bille suite à cette pollution majeure"
+    },
+    {
+     "fact": "污染被指混合甲烷、二氧化碳和氢气，依据多项科学鉴定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cette pollution majeure combinant des émanations de méthane, dioxyde de carbone et hydrogène, selon plusieurs expertises scientifiques"
+    },
+    {
+     "fact": "2026年9月初比莱发生爆炸，一名女性于9月21日在哈科特港因伤死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Début septembre 2026, une explosion souffle la chambre de Joy Amos... Joy Amos est évacuée de Bille vers Port Harcourt, où elle succombe à ses profondes blessures le 21 septembre 2026."
+    },
+    {
+     "fact": "比莱卫生中心无医生在岗，缺乏可靠检查设备",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le centre de santé n'est pas en activité. Le médecin a été muté il y a peu... Il n'y a pas d'installations adéquates pour effectuer des examens fiables."
+    }
+   ],
+   "uncertainties": [
+    "死亡人数未获确认，报道仅提及多起死亡",
+    "污染与健康损害的因果关系依据专家鉴定，尚未获官方确认",
+    "目前仅一个来源（RFI Afrique），尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚比莱村燃气污染被指为居民健康的定时炸弹",
+   "summary_zh": "据法国国际广播电台报道，自2025年10月起，尼日利亚南部哈科特港附近的渔村比莱，居民持续吸入从老化地下管道泄漏的燃气。报道称，尽管比莱已出现多起死亡事件，当地至今未宣布紧急状态或灾难状态。该污染被指混合了甲烷、二氧化碳和氢气，当地医疗设施不足，一名女性于2026年9月21日在哈科特港因爆炸受伤后死亡。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "比莱",
+    "site": "比莱镇",
+    "raw_text": "Bille, proche de Port Harcourt au sud du Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "自2025年10月起，尼日利亚比莱村居民持续吸入从老化地下管道泄漏的燃气",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis octobre 2025, les habitants d’un gros village de pêcheurs, Bille, proche de Port Harcourt au sud du Nigeria, respirent du gaz s’échappant à travers des canalisations vétustes enfouies sous terre depuis des décennies."
+    },
+    {
+     "fact": "尽管比莱出现多起死亡事件，当地至今未宣布紧急状态或灾难状态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucune déclaration d’état d’urgence ou de catastrophe n'a été déclarée à ce jour malgré plusieurs décès dans Bille suite à cette pollution majeure"
+    },
+    {
+     "fact": "污染被指混合甲烷、二氧化碳和氢气，依据多项科学鉴定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cette pollution majeure combinant des émanations de méthane, dioxyde de carbone et hydrogène, selon plusieurs expertises scientifiques"
+    },
+    {
+     "fact": "2026年9月初比莱发生爆炸，一名女性于9月21日在哈科特港因伤死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Début septembre 2026, une explosion souffle la chambre de Joy Amos... Joy Amos est évacuée de Bille vers Port Harcourt, où elle succombe à ses profondes blessures le 21 septembre 2026."
+    },
+    {
+     "fact": "比莱卫生中心无医生在岗，缺乏可靠检查设备",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le centre de santé n'est pas en activité. Le médecin a été muté il y a peu... Il n'y a pas d'installations adéquates pour effectuer des examens fiables."
+    }
+   ],
+   "uncertainties": [
+    "死亡人数未获确认，报道仅提及多起死亡",
+    "污染与健康损害的因果关系依据专家鉴定，尚未获官方确认",
+    "目前仅一个来源（RFI Afrique），尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_940cb3bbf90efa85",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

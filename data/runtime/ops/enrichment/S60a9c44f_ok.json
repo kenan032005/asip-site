@@ -1,0 +1,125 @@
+{
+ "label": "S60a9c44f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "2b14f1dc917f153ca9b1674a57bf2d67d5edddb11b2a8bf62baed884f6148e2a",
+ "tokens": {
+  "input_tokens": 2231,
+  "output_tokens": 615,
+  "total_tokens": 2846
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得阿贝歇遭强风暴雨袭击，造成一人死亡多人受伤",
+   "summary_zh": "2026年9月28日星期一，乍得阿贝歇市遭遇强降雨和狂风袭击，造成重大财产损失，至少一人死亡、多人受伤。阿贝歇中央市场一栋在建的带楼层商铺倒塌，压垮邻近商铺，导致一名儿童死亡、其父亲受伤。另有一处移动通信天线倒塌砸伤一名儿童，伤者已由医疗部门救治。",
+   "event_type": "natural_disaster",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "瓦达伊省",
+    "city": "阿贝歇",
+    "site": "中央市场",
+    "raw_text": "la ville d’Abéché, au marché central d’Abéché"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年9月28日星期一，乍得阿贝歇市遭遇强降雨和狂风袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une forte pluie accompagnée de vents violents s’est abattue ce lundi 28 septembre 2026 sur la ville d’Abéché."
+    },
+    {
+     "fact": "恶劣天气造成重大财产损失，至少一人死亡、多人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les intempéries ont causé d’importants dégâts matériels et fait au moins un mort et plusieurs blessés."
+    },
+    {
+     "fact": "阿贝歇中央市场一栋在建带楼层商铺倒塌压垮邻近商铺，导致一名儿童死亡、其父亲受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au marché central d’Abéché, une boutique à étage en construction s’est effondrée sur un commerce voisin. L’effondrement a entraîné la mort d’un enfant et blessé son père"
+    },
+    {
+     "fact": "一处移动通信天线倒塌砸伤一名儿童，伤者已由医疗部门救治",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une antenne de téléphonie mobile s’est écroulée sur un enfant, qui a été légèrement blessé. Il a été pris en charge par les services de santé."
+    },
+    {
+     "fact": "瓦达伊省委员会主席马哈马特·阿里·拉哈马前往阿贝歇大学医院急诊部了解情况",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le président du Conseil provincial du Ouaddaï, Mahamat Ali Rahama, s’est rendu au pavillon des urgences du Centre hospitalier universitaire (CHU) d’Abéché"
+    }
+   ],
+   "uncertainties": [
+    "伤亡人数为“至少一人死亡、多人受伤”，具体伤者人数尚未明确",
+    "事件目前仅有一个来源（Le N'Djam Post）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得阿贝歇遭强风暴雨袭击，造成一人死亡多人受伤",
+   "summary_zh": "2026年9月28日星期一，乍得阿贝歇市遭遇强降雨和狂风袭击，造成重大财产损失，至少一人死亡、多人受伤。阿贝歇中央市场一栋在建的带楼层商铺倒塌，压垮邻近商铺，导致一名儿童死亡、其父亲受伤。另有一处移动通信天线倒塌砸伤一名儿童，伤者已由医疗部门救治。",
+   "event_type": "natural_disaster",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "瓦达伊省",
+    "city": "阿贝歇",
+    "site": "中央市场",
+    "raw_text": "la ville d’Abéché, au marché central d’Abéché"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年9月28日星期一，乍得阿贝歇市遭遇强降雨和狂风袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une forte pluie accompagnée de vents violents s’est abattue ce lundi 28 septembre 2026 sur la ville d’Abéché."
+    },
+    {
+     "fact": "恶劣天气造成重大财产损失，至少一人死亡、多人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les intempéries ont causé d’importants dégâts matériels et fait au moins un mort et plusieurs blessés."
+    },
+    {
+     "fact": "阿贝歇中央市场一栋在建带楼层商铺倒塌压垮邻近商铺，导致一名儿童死亡、其父亲受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au marché central d’Abéché, une boutique à étage en construction s’est effondrée sur un commerce voisin. L’effondrement a entraîné la mort d’un enfant et blessé son père"
+    },
+    {
+     "fact": "一处移动通信天线倒塌砸伤一名儿童，伤者已由医疗部门救治",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une antenne de téléphonie mobile s’est écroulée sur un enfant, qui a été légèrement blessé. Il a été pris en charge par les services de santé."
+    },
+    {
+     "fact": "瓦达伊省委员会主席马哈马特·阿里·拉哈马前往阿贝歇大学医院急诊部了解情况",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le président du Conseil provincial du Ouaddaï, Mahamat Ali Rahama, s’est rendu au pavillon des urgences du Centre hospitalier universitaire (CHU) d’Abéché"
+    }
+   ],
+   "uncertainties": [
+    "伤亡人数为“至少一人死亡、多人受伤”，具体伤者人数尚未明确",
+    "事件目前仅有一个来源（Le N'Djam Post）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_4b38546660a9c44f",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

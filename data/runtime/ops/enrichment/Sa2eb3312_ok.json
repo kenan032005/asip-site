@@ -1,0 +1,121 @@
+{
+ "label": "Sa2eb3312",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "db701e8d4c6e6feab69f92c1b8a1e21d4b00055ab42e392e844ff7c40191b890",
+ "tokens": {
+  "input_tokens": 2471,
+  "output_tokens": 447,
+  "total_tokens": 2918
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据The New Times报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "卢旺达艺术博物馆举办大屠杀记忆主题展览",
+   "summary_zh": "卢旺达艺术博物馆于9月22日开幕名为“What the Ground Remembers / Ibyo Ubutaka Bwibuka”的展览，持续至2027年1月20日。展览让六名1994年针对图西族大屠杀的亲历者参与决定其记忆的呈现方式，将个人证词与研究、摄影和当代艺术并列展示。展览由卢旺达艺术博物馆和卢旺达文化遗产学院等机构合作组织。",
+   "event_type": "other_security",
+   "country_iso3": "RWA",
+   "location": {
+    "country_iso3": "RWA",
+    "admin1": null,
+    "city": "基加利",
+    "site": "卢旺达艺术博物馆，Kanombe",
+    "raw_text": "Rwanda Art Museum, Kanombe"
+   },
+   "key_facts": [
+    {
+     "fact": "卢旺达艺术博物馆举办关于1994年大屠杀记忆的展览",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A new exhibition at the Rwanda Art Museum is giving people with lived experience of the 1994 Genocide against the Tutsi a direct role in deciding how their memories are presented"
+    },
+    {
+     "fact": "展览于9月22日开幕，持续至2027年1月20日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the exhibition opened on September 22 and runs through January 20, 2027"
+    },
+    {
+     "fact": "六名参与者参与拍摄地点并分享自己的话语和录音",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "bringing together six participants whose memories are tied to ordinary places across Rwanda"
+    },
+    {
+     "fact": "展览由卢旺达艺术博物馆和卢旺达文化遗产学院等合作组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The project was organised through the Rwanda Art Museum and the Rwanda Cultural Heritage Academy in collaboration with the Ministry of Youth and Arts, TheMuseumsLab, ANTITHESIS, a research platform at the University of Oxford, and Culture&."
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "卢旺达艺术博物馆举办大屠杀记忆主题展览",
+   "summary_zh": "卢旺达艺术博物馆于9月22日开幕名为“What the Ground Remembers / Ibyo Ubutaka Bwibuka”的展览，持续至2027年1月20日。展览让六名1994年针对图西族大屠杀的亲历者参与决定其记忆的呈现方式，将个人证词与研究、摄影和当代艺术并列展示。展览由卢旺达艺术博物馆和卢旺达文化遗产学院等机构合作组织。",
+   "event_type": "other_security",
+   "country_iso3": "RWA",
+   "location": {
+    "country_iso3": "RWA",
+    "admin1": null,
+    "city": "基加利",
+    "site": "卢旺达艺术博物馆，Kanombe",
+    "raw_text": "Rwanda Art Museum, Kanombe"
+   },
+   "key_facts": [
+    {
+     "fact": "卢旺达艺术博物馆举办关于1994年大屠杀记忆的展览",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A new exhibition at the Rwanda Art Museum is giving people with lived experience of the 1994 Genocide against the Tutsi a direct role in deciding how their memories are presented"
+    },
+    {
+     "fact": "展览于9月22日开幕，持续至2027年1月20日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the exhibition opened on September 22 and runs through January 20, 2027"
+    },
+    {
+     "fact": "六名参与者参与拍摄地点并分享自己的话语和录音",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "bringing together six participants whose memories are tied to ordinary places across Rwanda"
+    },
+    {
+     "fact": "展览由卢旺达艺术博物馆和卢旺达文化遗产学院等合作组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The project was organised through the Rwanda Art Museum and the Rwanda Cultural Heritage Academy in collaboration with the Ministry of Youth and Arts, TheMuseumsLab, ANTITHESIS, a research platform at the University of Oxford, and Culture&."
+    }
+   ],
+   "uncertainties": [
+    "据The New Times报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_2f0c0ab6a2eb3312",
+ "disease_event_id": null,
+ "country_code": "RW"
+}
