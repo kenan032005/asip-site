@@ -134,6 +134,44 @@ def _recent_failure_reasons():
         return {}
 
 
+# ── C8-4B3 PHASE 0：P0 尼日尔执行保证 ──
+# 生产实测（run ltghil, 09:05Z）：859 次展开执行中，尼日尔源 71 次里仅 3 次被尝试、
+# 68 次被 WALL_CLOCK_LIMIT_REACHED 跳过（官方/本地源 26/26 全跳）。
+# 根因是**顺序**：多国/泛非源（scope 最多 54 国）的展开执行先消耗了墙钟。
+# 本包只改**排序优先级**（不动监控范围、阈值、分类器、geo 逻辑，也不新增源）：
+#   ① 尼日尔（P0 国）在国家循环中被绝对置首（PHASE 0）；
+#   ② 下列 P0 保证源在**其所在国家管线**内绝对置顶，先于 Lane A / 普通 / 展开执行；
+P0_NIGER_IDS = {
+    "niger_anp", "niger_lesahel", "niger_studiokalangou", "niger_nigerinter",
+    "niger_tamtaminfo", "niger_airinfo", "niger_journalduniger", "niger_sahelien",
+    "niger_interieur", "niger_sante", "niger_garde_nationale",
+    # 多国源：**仅其在尼日尔管线的那次执行**属 P0（其余 53 国保持既有优先级）
+    "un_who_afro",
+}
+P0_NIGER_COUNTRY = "尼日尔"
+
+
+def _p0_niger_first(sources, country_cn):
+    """C8-4B3：P0 尼日尔保证源在本国管线内绝对置顶（稳定排序，其余次序不变）。"""
+    if str(country_cn) != P0_NIGER_COUNTRY:
+        return sources
+
+    def key(pair):
+        idx, src = pair
+        sid = str(getattr(src, "source_id", None)
+                  or (src.get("source_id") if isinstance(src, dict) else ""))
+        return (0 if sid in P0_NIGER_IDS else 1, idx)
+
+    return [src for _i, src in sorted(enumerate(sources), key=key)]
+
+
+def _p0_niger_countries_first(countries):
+    """C8-4B3 PHASE 0：把尼日尔提到国家循环最前，其余国家保持既有顺序。"""
+    if P0_NIGER_COUNTRY not in countries:
+        return countries
+    return [P0_NIGER_COUNTRY] + [c for c in countries if c != P0_NIGER_COUNTRY]
+
+
 def _lane_a_countries_first(countries, lane_a_countries):
     """含 Lane A 源的国家优先，其余保持原有（stalest rotation）顺序。"""
     first = [c for c in countries if str(c) in lane_a_countries]
@@ -283,6 +321,8 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
         sources = sources[rot_off:] + sources[:rot_off]
         # C8-1：Lane A 常开高价值源置顶、已知失败源置底（Lane B 轮换顺序不变）
         sources = _lane_a_first(sources, rot_off, recent_reason=_recent_failure_reasons())
+        # C8-4B3 PHASE 0：P0 尼日尔保证源置顶（仅尼日尔管线；un_who_afro 仅此国那次）
+        sources = _p0_niger_first(sources, country_cn)
     total_sources = len(sources)
     attempted_sources = 0
 
@@ -1170,6 +1210,8 @@ def main():
         countries = _lane_a_countries_first(countries, {
             s2.get("source_country") for s2 in registry.enabled()
             if str(s2.get("source_id")) in LANE_A_IDS})
+        # C8-4B3 PHASE 0：尼日尔（P0）绝对置首，保证其 P0 源先于展开执行消耗预算
+        countries = _p0_niger_countries_first(countries)
         if not countries:
             countries = ["乍得", "尼日尔"]
     # 统计两国配置总分（SourceRegistry 中所有来源，含 gdelt_search）
