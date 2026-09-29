@@ -165,6 +165,40 @@ def _p0_niger_first(sources, country_cn):
     return [src for _i, src in sorted(enumerate(sources), key=key)]
 
 
+# ── C8-4C2 PHASE 1：P1 保证核心（在 P0 尼日尔之后、既有 Lane A 之前执行）──
+# 来源：C8-4C2 严格重验通过（生产证书校验；文章 URL/日期/正文/国家范围全绿）的官方与高价值源。
+P1_GUARANTEED_IDS = {
+    "nga_gov_portal", "nga_health_moh", "nga_nan", "nga_transport_moh", "nga_icir",
+    "ben_gouv", "ben_sante", "ben_fraternite",
+    "moz_gov_portal", "moz_defence", "moz_zitamar",
+    "ssd_eyeradio", "ssd_unmiss",
+    "eth_health_moh", "eth_addisfortune", "eth_insight",
+}
+P1_COUNTRIES_ORDER = ["尼日利亚", "贝宁", "莫桑比克", "南苏丹", "埃塞俄比亚"]
+
+
+def _p1_core_first(sources, country_cn):
+    """C8-4C2 PHASE 1：P1 保证核心置顶（稳定排序；P0 已在更早阶段置顶，不受影响）。"""
+    if str(country_cn) not in P1_COUNTRIES_ORDER:
+        return sources
+
+    def key(pair):
+        idx, src = pair
+        sid = str(getattr(src, "source_id", None)
+                  or (src.get("source_id") if isinstance(src, dict) else ""))
+        return (0 if sid in P1_GUARANTEED_IDS else 1, idx)
+
+    return [src for _i, src in sorted(enumerate(sources), key=key)]
+
+
+def _p1_countries_after_p0(countries):
+    """C8-4C2：国家循环顺序 = 尼日尔(P0) → P1 五国 → 其余（保持原相对顺序）。"""
+    head = [c for c in P1_COUNTRIES_ORDER if c in countries]
+    rest = [c for c in countries if c not in head and c != P0_NIGER_COUNTRY]
+    p0 = [P0_NIGER_COUNTRY] if P0_NIGER_COUNTRY in countries else []
+    return p0 + head + rest
+
+
 def _p0_niger_countries_first(countries):
     """C8-4B3 PHASE 0：把尼日尔提到国家循环最前，其余国家保持既有顺序。"""
     if P0_NIGER_COUNTRY not in countries:
@@ -323,6 +357,8 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
         sources = _lane_a_first(sources, rot_off, recent_reason=_recent_failure_reasons())
         # C8-4B3 PHASE 0：P0 尼日尔保证源置顶（仅尼日尔管线；un_who_afro 仅此国那次）
         sources = _p0_niger_first(sources, country_cn)
+        # C8-4C2 PHASE 1：P1 保证核心置顶
+        sources = _p1_core_first(sources, country_cn)
     total_sources = len(sources)
     attempted_sources = 0
 
@@ -1212,6 +1248,8 @@ def main():
             if str(s2.get("source_id")) in LANE_A_IDS})
         # C8-4B3 PHASE 0：尼日尔（P0）绝对置首，保证其 P0 源先于展开执行消耗预算
         countries = _p0_niger_countries_first(countries)
+        # C8-4C2：P1 五国紧随 P0 之后（PHASE 1），其余国家保持既有顺序
+        countries = _p1_countries_after_p0(countries)
         if not countries:
             countries = ["乍得", "尼日尔"]
     # 统计两国配置总分（SourceRegistry 中所有来源，含 gdelt_search）
