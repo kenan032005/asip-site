@@ -1,0 +1,128 @@
+{
+ "label": "S2ac99e6a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "9d17390491db4d71c59120cc738aa42dea5a82250e9ed0f3ec81d5128df6c5e0",
+ "tokens": {
+  "input_tokens": 2654,
+  "output_tokens": 507,
+  "total_tokens": 3161
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"恐怖分子伤亡情况因植被茂密无法确认\", \"被击毙者为疑似民兵成员，身份尚未证实\", \"相关战果目前仅来自尼日利亚通讯社单一来源，尚缺乏交叉验证\"]",
+    "after": "[\"恐怖分子伤亡情况因植被茂密无法确认\", \"被击毙者为疑似民兵成员，身份尚未证实\", \"相关战果目前仅来自尼日利亚通讯社单一来源，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚军方解救46名被绑架者，击毙一名疑似民兵成员",
+   "summary_zh": "尼日利亚陆军在24小时内于全国多地开展行动，共解救46名被绑架者，并击毙一名疑似民兵成员。行动中还缴获枪支、破坏恐怖分子活动并解救其他受害者。相关战果来自军方提供给尼日利亚通讯社的行动报告，目前为单一来源。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "across the country（Zamfara、Kebbi、Niger、Anambra、Plateau、Taraba、Delta等州）"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚陆军在24小时内的多次行动中解救46名被绑架者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Troops of the Nigerian Army have rescued 46 kidnapped victims and neutralised a suspected militia member in separate operations in the last 24 hours across the country."
+    },
+    {
+     "fact": "军方在高原州击毙一名疑似民兵成员并缴获两辆摩托车",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "troops of Operation Enduring Peace (OPEP) engaged suspected militias at Rugan Jallo ... the troops neutralised one suspected militia member and recovered two motorcycles."
+    },
+    {
+     "fact": "在塔拉巴州突袭非法武器库，缴获K2步枪、冲锋枪及弹药",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "troops of 114 Battalion ... raided an illegal arms store at Abbare, Lau Local Government Area ... yielded one K2 rifle, one K2 magazine, one submachine gun, one magazine, 10 rounds of 7.62mm NATO ammunition and six rounds of 9mm ammunition"
+    },
+    {
+     "fact": "军方称因植被茂密无法确认恐怖分子伤亡情况",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "casualties among the terrorists could not be confirmed because of the thick vegetation"
+    }
+   ],
+   "uncertainties": [
+    "恐怖分子伤亡情况因植被茂密无法确认",
+    "被击毙者为疑似民兵成员，身份尚未证实",
+    "相关战果目前仅来自尼日利亚通讯社单一来源，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚军方解救46名被绑架者，击毙一名疑似民兵成员",
+   "summary_zh": "尼日利亚陆军在24小时内于全国多地开展行动，共解救46名被绑架者，并击毙一名疑似民兵成员。行动中还缴获枪支、破坏恐怖分子活动并解救其他受害者。相关战果来自军方提供给尼日利亚通讯社的行动报告，目前为单一来源。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "across the country（Zamfara、Kebbi、Niger、Anambra、Plateau、Taraba、Delta等州）"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚陆军在24小时内的多次行动中解救46名被绑架者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Troops of the Nigerian Army have rescued 46 kidnapped victims and neutralised a suspected militia member in separate operations in the last 24 hours across the country."
+    },
+    {
+     "fact": "军方在高原州击毙一名疑似民兵成员并缴获两辆摩托车",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "troops of Operation Enduring Peace (OPEP) engaged suspected militias at Rugan Jallo ... the troops neutralised one suspected militia member and recovered two motorcycles."
+    },
+    {
+     "fact": "在塔拉巴州突袭非法武器库，缴获K2步枪、冲锋枪及弹药",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "troops of 114 Battalion ... raided an illegal arms store at Abbare, Lau Local Government Area ... yielded one K2 rifle, one K2 magazine, one submachine gun, one magazine, 10 rounds of 7.62mm NATO ammunition and six rounds of 9mm ammunition"
+    },
+    {
+     "fact": "军方称因植被茂密无法确认恐怖分子伤亡情况",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "casualties among the terrorists could not be confirmed because of the thick vegetation"
+    }
+   ],
+   "uncertainties": [
+    "恐怖分子伤亡情况因植被茂密无法确认",
+    "被击毙者为疑似民兵成员，身份尚未证实",
+    "相关战果目前仅来自尼日利亚通讯社单一来源，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_1d118b472ac99e6a",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

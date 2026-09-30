@@ -1,0 +1,116 @@
+{
+ "label": "S34417376",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b68e6641920b7984bf933575cae7dce80bebe2fe69678211659d7a1eefdd130a",
+ "tokens": {
+  "input_tokens": 1997,
+  "output_tokens": 463,
+  "total_tokens": 2460
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"死因及具体情形尚未查明\", \"目前仅单一来源（Tchadinfos）报道，尚缺乏交叉验证\"]",
+    "after": "[\"死因及具体情形尚未查明\", \"目前仅单一来源（Tchadinfos）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得洛贡东区一男子被发现死于Bam村",
+   "summary_zh": "据Tchadinfos报道，2026年9月29日清晨，乍得洛贡东区Monts de Lam省Bessao副县Bam村一名约60岁男子被发现死于其住所。Monts de Lam省省长Idriss Souleymane Bouyemé表示，死因目前尚不清楚。当地行政当局与Bessao副县国防和安全部队已赶赴现场进行勘验并展开调查，以确定事件确切情况。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "Logone oriental",
+    "city": "Bam",
+    "site": "死者住所",
+    "raw_text": "village Bam, sous préfecture de Bessao, département des Monts de Lam, province du Logone oriental"
+   },
+   "key_facts": [
+    {
+     "fact": "一名约60岁男子在乍得洛贡东区Bam村其住所内被发现死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un homme âgé d’environ 60 ans a été retrouvé mort à son domicile au petit matin du 29 septembre 2026 au village Bam"
+    },
+    {
+     "fact": "Monts de Lam省省长称死因目前尚不清楚",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les circonstances exactes de ce décès ne sont pas jusque-là connues, selon le préfet du département des Monts de Lam Idriss Souleymane Bouyemé"
+    },
+    {
+     "fact": "行政当局与安全部队已赴现场勘验并展开调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les autorités administratives et les forces de défense et de sécurité de la sous-préfecture de Bessao se sont déployées sur le terrain pour effectuer les constats d’usage et mener des enquêtes"
+    }
+   ],
+   "uncertainties": [
+    "死因及具体情形尚未查明",
+    "目前仅单一来源（Tchadinfos）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 60
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得洛贡东区一男子被发现死于Bam村",
+   "summary_zh": "据Tchadinfos报道，2026年9月29日清晨，乍得洛贡东区Monts de Lam省Bessao副县Bam村一名约60岁男子被发现死于其住所。Monts de Lam省省长Idriss Souleymane Bouyemé表示，死因目前尚不清楚。当地行政当局与Bessao副县国防和安全部队已赶赴现场进行勘验并展开调查，以确定事件确切情况。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "Logone oriental",
+    "city": "Bam",
+    "site": "死者住所",
+    "raw_text": "village Bam, sous préfecture de Bessao, département des Monts de Lam, province du Logone oriental"
+   },
+   "key_facts": [
+    {
+     "fact": "一名约60岁男子在乍得洛贡东区Bam村其住所内被发现死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un homme âgé d’environ 60 ans a été retrouvé mort à son domicile au petit matin du 29 septembre 2026 au village Bam"
+    },
+    {
+     "fact": "Monts de Lam省省长称死因目前尚不清楚",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les circonstances exactes de ce décès ne sont pas jusque-là connues, selon le préfet du département des Monts de Lam Idriss Souleymane Bouyemé"
+    },
+    {
+     "fact": "行政当局与安全部队已赴现场勘验并展开调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les autorités administratives et les forces de défense et de sécurité de la sous-préfecture de Bessao se sont déployées sur le terrain pour effectuer les constats d’usage et mener des enquêtes"
+    }
+   ],
+   "uncertainties": [
+    "死因及具体情形尚未查明",
+    "目前仅单一来源（Tchadinfos）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 60
+  }
+ },
+ "event_id": "EVT_8de21e9634417376",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
