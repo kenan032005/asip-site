@@ -1,0 +1,104 @@
+{
+ "label": "Sb01a9f6e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5379badb9f41f66520e9a26fcce5ec2c70d28c849c37ea3828a173931e23b125",
+ "tokens": {
+  "input_tokens": 2158,
+  "output_tokens": 250,
+  "total_tokens": 2408
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\"]",
+    "after": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳卫生部副部长呼吁乳腺癌防治从宣传转向行动",
+   "summary_zh": "加纳卫生部副部长Grace Ayensu-Danquah教授呼吁抗击乳腺癌的利益相关方超越宣传活动，加强体系建设，使患者能够及时获得诊断和治疗。该消息由MyJoyOnline单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳卫生部副部长呼吁乳腺癌防治从宣传转向行动",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Breast Cancer awareness must lead to action – Deputy Health Minister"
+    },
+    {
+     "fact": "副部长敦促利益相关方加强体系以让患者及时获得诊断和治疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "has urged stakeholders in the fight against breast cancer to move beyond awareness campaigns and strengthen systems that allow patients to receive timely diagnosis and treatment"
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳卫生部副部长呼吁乳腺癌防治从宣传转向行动",
+   "summary_zh": "加纳卫生部副部长Grace Ayensu-Danquah教授呼吁抗击乳腺癌的利益相关方超越宣传活动，加强体系建设，使患者能够及时获得诊断和治疗。该消息由MyJoyOnline单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳卫生部副部长呼吁乳腺癌防治从宣传转向行动",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Breast Cancer awareness must lead to action – Deputy Health Minister"
+    },
+    {
+     "fact": "副部长敦促利益相关方加强体系以让患者及时获得诊断和治疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "has urged stakeholders in the fight against breast cancer to move beyond awareness campaigns and strengthen systems that allow patients to receive timely diagnosis and treatment"
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_6e442122b01a9f6e",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

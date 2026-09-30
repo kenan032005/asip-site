@@ -1,0 +1,104 @@
+{
+ "label": "Sdb2d531a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "449f590f261fa805cec6ed9a1a450d603bd4048ccfde045339b69d836b1672d6",
+ "tokens": {
+  "input_tokens": 2194,
+  "output_tokens": 297,
+  "total_tokens": 2491
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该保证目前仅来自单一来源（GAPTE方面），尚缺乏独立验证\"]",
+    "after": "[\"该保证目前仅来自单一来源（GAPTE方面），尚缺乏独立验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳GAPTE保证Aayalolo巴士在逆向车道上未超速",
+   "summary_zh": "大阿克拉客运交通管理局总经理Awudu Dawud向通勤者保证，在新引入的逆向车道上运营的Aayalolo巴士并未超速抢道。他坚称司机已接受专门培训以确保乘客安全。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "大阿克拉",
+    "city": null,
+    "site": "逆向车道",
+    "raw_text": "contra-flow lanes"
+   },
+   "key_facts": [
+    {
+     "fact": "GAPTE总经理Awudu Dawud保证Aayalolo巴士在逆向车道上未超速",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Managing Director of the Greater Accra Passenger Transport Executive, Awudu Dawud, has assured commuters that Aayalolo buses operating on the newly introduced contra-flow lanes are not speeding to beat traffic"
+    },
+    {
+     "fact": "司机已接受专门培训以确保乘客安全",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "insisting that drivers have received special training to ensure passenger safety"
+    }
+   ],
+   "uncertainties": [
+    "该保证目前仅来自单一来源（GAPTE方面），尚缺乏独立验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 60
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳GAPTE保证Aayalolo巴士在逆向车道上未超速",
+   "summary_zh": "大阿克拉客运交通管理局总经理Awudu Dawud向通勤者保证，在新引入的逆向车道上运营的Aayalolo巴士并未超速抢道。他坚称司机已接受专门培训以确保乘客安全。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "大阿克拉",
+    "city": null,
+    "site": "逆向车道",
+    "raw_text": "contra-flow lanes"
+   },
+   "key_facts": [
+    {
+     "fact": "GAPTE总经理Awudu Dawud保证Aayalolo巴士在逆向车道上未超速",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Managing Director of the Greater Accra Passenger Transport Executive, Awudu Dawud, has assured commuters that Aayalolo buses operating on the newly introduced contra-flow lanes are not speeding to beat traffic"
+    },
+    {
+     "fact": "司机已接受专门培训以确保乘客安全",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "insisting that drivers have received special training to ensure passenger safety"
+    }
+   ],
+   "uncertainties": [
+    "该保证目前仅来自单一来源（GAPTE方面），尚缺乏独立验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 60
+  }
+ },
+ "event_id": "EVT_2f5e4bbcdb2d531a",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

@@ -1,0 +1,135 @@
+{
+ "label": "S85b47e15",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "2a186d9bd8da293ff55ac67acb55031e1eaf11358c66c5cb29be6e2e43810f9a",
+ "tokens": {
+  "input_tokens": 2967,
+  "output_tokens": 626,
+  "total_tokens": 3593
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "联合国难民署警告资金短缺导致难民保护体系崩溃",
+   "summary_zh": "联合国难民署9月29日发布报告称，因资金严重不足，全球难民保护体系正面临前所未有的财政危机。在乍得和苏丹，数百万脆弱人群可能失去基本服务，包括约31.9万人登记延误、约20万妇女和女童可能失去安全空间、约23.3万儿童面临失去儿童保护服务。难民署可用资源从2024年的52亿美元降至2025年的39亿美元，截至2026年7月底仅收到所需85亿美元的32%。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Au Tchad comme au Soudan"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国难民署报告称资金短缺导致难民保护体系面临崩溃",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "C'est un début de démantèlement des systèmes censés protéger les réfugiés, les déplacés et les apatrides"
+    },
+    {
+     "fact": "难民署可用资源从2024年52亿美元降至2025年39亿美元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ses ressources disponibles sont passées de 5,2 milliards de dollars en 2024 à 3,9 milliards en 2025"
+    },
+    {
+     "fact": "截至2026年7月底难民署仅收到所需85亿美元的32%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fin juillet 2026, le HCR n'avait reçu que 32% des 8,5 milliards de dollars jugés nécessaires"
+    },
+    {
+     "fact": "乍得约31.9万人面临登记延误，可能被拘留或剥削",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quelque 319 000 personnes y subissent des retards d'enregistrement, ce qui les prive de documents officiels et les expose à des risques de détention ou d'exploitation"
+    },
+    {
+     "fact": "约20万妇女和女童可能失去安全空间及性别暴力预防项目",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "jusqu'à 200 000 femmes et filles pourraient également perdre l'accès à des espaces sûrs et à des programmes de prévention contre les violences sexistes et sexuelles"
+    },
+    {
+     "fact": "约23.3万儿童面临失去儿童保护服务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Environ 233 000 enfants risquent, eux, d'être privés de services de protection de l'enfance"
+    }
+   ],
+   "uncertainties": [
+    "报告数据来自联合国难民署单一来源，尚未获得独立交叉验证",
+    "部分受影响人数为预估上限（如'最多20万'），实际规模有待核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "联合国难民署警告资金短缺导致难民保护体系崩溃",
+   "summary_zh": "联合国难民署9月29日发布报告称，因资金严重不足，全球难民保护体系正面临前所未有的财政危机。在乍得和苏丹，数百万脆弱人群可能失去基本服务，包括约31.9万人登记延误、约20万妇女和女童可能失去安全空间、约23.3万儿童面临失去儿童保护服务。难民署可用资源从2024年的52亿美元降至2025年的39亿美元，截至2026年7月底仅收到所需85亿美元的32%。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Au Tchad comme au Soudan"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国难民署报告称资金短缺导致难民保护体系面临崩溃",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "C'est un début de démantèlement des systèmes censés protéger les réfugiés, les déplacés et les apatrides"
+    },
+    {
+     "fact": "难民署可用资源从2024年52亿美元降至2025年39亿美元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ses ressources disponibles sont passées de 5,2 milliards de dollars en 2024 à 3,9 milliards en 2025"
+    },
+    {
+     "fact": "截至2026年7月底难民署仅收到所需85亿美元的32%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fin juillet 2026, le HCR n'avait reçu que 32% des 8,5 milliards de dollars jugés nécessaires"
+    },
+    {
+     "fact": "乍得约31.9万人面临登记延误，可能被拘留或剥削",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quelque 319 000 personnes y subissent des retards d'enregistrement, ce qui les prive de documents officiels et les expose à des risques de détention ou d'exploitation"
+    },
+    {
+     "fact": "约20万妇女和女童可能失去安全空间及性别暴力预防项目",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "jusqu'à 200 000 femmes et filles pourraient également perdre l'accès à des espaces sûrs et à des programmes de prévention contre les violences sexistes et sexuelles"
+    },
+    {
+     "fact": "约23.3万儿童面临失去儿童保护服务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Environ 233 000 enfants risquent, eux, d'être privés de services de protection de l'enfance"
+    }
+   ],
+   "uncertainties": [
+    "报告数据来自联合国难民署单一来源，尚未获得独立交叉验证",
+    "部分受影响人数为预估上限（如'最多20万'），实际规模有待核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_b9ee495d85b47e15",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

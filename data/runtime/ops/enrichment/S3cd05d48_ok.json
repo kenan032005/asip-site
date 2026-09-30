@@ -1,0 +1,104 @@
+{
+ "label": "S3cd05d48",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0c11178ef169720569254e51aa07d6208df7a4f8f4fc1c783e938c0c28a20796",
+ "tokens": {
+  "input_tokens": 2163,
+  "output_tokens": 286,
+  "total_tokens": 2449
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\"]",
+    "after": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳大学副校长呼吁加大科研投入以遏制人才外流",
+   "summary_zh": "加纳大学学术与学生事务副校长Gordon Akanzuwine Awandare教授呼吁对科学与研究进行更强有力且持续的投资。该呼吁旨在遏制人才外流。此消息为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": "加纳大学",
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳大学副校长呼吁加大科研投入以遏制人才外流",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "UG Pro-VC calls for stronger research funding to curb brain drain"
+    },
+    {
+     "fact": "加纳大学学术与学生事务副校长Gordon Akanzuwine Awandare教授呼吁对科学与研究进行更强有力且持续的投资",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Pro-Vice-Chancellor for Academic and Student Affairs at the University of Ghana (UG), Prof. Gordon Akanzuwine Awandare, has called for stronger and sustained investment in science and research."
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳大学副校长呼吁加大科研投入以遏制人才外流",
+   "summary_zh": "加纳大学学术与学生事务副校长Gordon Akanzuwine Awandare教授呼吁对科学与研究进行更强有力且持续的投资。该呼吁旨在遏制人才外流。此消息为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": "加纳大学",
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳大学副校长呼吁加大科研投入以遏制人才外流",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "UG Pro-VC calls for stronger research funding to curb brain drain"
+    },
+    {
+     "fact": "加纳大学学术与学生事务副校长Gordon Akanzuwine Awandare教授呼吁对科学与研究进行更强有力且持续的投资",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Pro-Vice-Chancellor for Academic and Student Affairs at the University of Ghana (UG), Prof. Gordon Akanzuwine Awandare, has called for stronger and sustained investment in science and research."
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_fedaea4e3cd05d48",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

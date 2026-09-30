@@ -1,0 +1,106 @@
+{
+ "label": "Sfeca464f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1e41c25a06ac1e62393b27a7cb683cceae86938597f7f47e664ae89c9d8d4033",
+ "tokens": {
+  "input_tokens": 2165,
+  "output_tokens": 264,
+  "total_tokens": 2429
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"司机违规收费的投诉尚未获得独立证实\", \"该事件目前仅有一个来源报道\"]",
+    "after": "[\"司机违规收费的投诉尚未获得独立证实\", \"该事件目前仅有一个来源报道\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳GPRTU工作组在Kasoa查处违规票价",
+   "summary_zh": "加纳私人道路运输联盟（GPRTU）工作组在Kasoa加强对商业司机的监控，此前有投诉称部分司机向乘客收取超过批准的8%票价涨幅。该事件为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "Kasoa",
+    "site": null,
+    "raw_text": "Kasoa"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳私人道路运输联盟（GPRTU）工作组在Kasoa加强对商业司机的监控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ghana Private Road Transport Union (GPRTU) taskforce has intensified monitoring of commercial drivers at Kasoa"
+    },
+    {
+     "fact": "有投诉称部分司机收取超过批准的8%票价涨幅",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "following complaints that some are charging passengers more than the approved eight percent increase in transport fares"
+    }
+   ],
+   "uncertainties": [
+    "司机违规收费的投诉尚未获得独立证实",
+    "该事件目前仅有一个来源报道"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳GPRTU工作组在Kasoa查处违规票价",
+   "summary_zh": "加纳私人道路运输联盟（GPRTU）工作组在Kasoa加强对商业司机的监控，此前有投诉称部分司机向乘客收取超过批准的8%票价涨幅。该事件为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "Kasoa",
+    "site": null,
+    "raw_text": "Kasoa"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳私人道路运输联盟（GPRTU）工作组在Kasoa加强对商业司机的监控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ghana Private Road Transport Union (GPRTU) taskforce has intensified monitoring of commercial drivers at Kasoa"
+    },
+    {
+     "fact": "有投诉称部分司机收取超过批准的8%票价涨幅",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "following complaints that some are charging passengers more than the approved eight percent increase in transport fares"
+    }
+   ],
+   "uncertainties": [
+    "司机违规收费的投诉尚未获得独立证实",
+    "该事件目前仅有一个来源报道",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_ae5a6a64feca464f",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

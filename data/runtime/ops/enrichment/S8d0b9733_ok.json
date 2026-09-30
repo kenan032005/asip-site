@@ -1,0 +1,131 @@
+{
+ "label": "S8d0b9733",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "67ea837f2e3651a1f5392c1d180d29a7e1d93458e180963f16bd69eadfa0f31a",
+ "tokens": {
+  "input_tokens": 2671,
+  "output_tokens": 543,
+  "total_tokens": 3214
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据Alwihda Info报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得PDRICL-2项目发布水利农业工程研究及监理意向征询",
+   "summary_zh": "乍得综合水稻发展项目第二阶段（PDRICL-2P）发布意向征询，拟招聘咨询工程师负责水利农业整治及基础设施的技术研究、监督与监理工作。申请截止日期为2026年10月16日9时。该项目由阿拉伯非洲经济发展银行和欧佩克国际发展基金提供贷款资助，涉及哈杰尔-拉米斯、沙里-巴吉尔米和东马约-凯比三省。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N’Djaména"
+   },
+   "key_facts": [
+    {
+     "fact": "PDRICL-2P发布意向征询，招聘咨询工程师负责水利农业工程研究及监理",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Projet de Développement Intégré pour la Riziculture dans la plaine du Chari-Logone, deuxième phase (PDRICL-2P), lance un appel à manifestation d’intérêt pour le recrutement d’un ingénieur-conseil"
+    },
+    {
+     "fact": "申请截止日期为2026年10月16日9时",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les candidatures sont attendues au plus tard le 16 octobre 2026 à 9 heures"
+    },
+    {
+     "fact": "项目由BADEA和欧佩克国际发展基金贷款资助",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Financé à travers un prêt de la Banque arabe pour le développement économique en Afrique (BADEA) et du Fonds OPEP pour le développement international"
+    },
+    {
+     "fact": "项目涉及哈杰尔-拉米斯、沙里-巴吉尔米和东马约-凯比三省",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les interventions concernent notamment les provinces du Hadjer-Lamis, du Chari-Baguirmi et du Mayo-Kebbi Est"
+    },
+    {
+     "fact": "研究阶段预计10个月，监理服务36个月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La phase d’études est estimée à 10 mois, tandis que les prestations de surveillance et de contrôle doivent s’étendre sur 36 mois"
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "none",
+   "classification_confidence": 90
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得PDRICL-2项目发布水利农业工程研究及监理意向征询",
+   "summary_zh": "乍得综合水稻发展项目第二阶段（PDRICL-2P）发布意向征询，拟招聘咨询工程师负责水利农业整治及基础设施的技术研究、监督与监理工作。申请截止日期为2026年10月16日9时。该项目由阿拉伯非洲经济发展银行和欧佩克国际发展基金提供贷款资助，涉及哈杰尔-拉米斯、沙里-巴吉尔米和东马约-凯比三省。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N’Djaména"
+   },
+   "key_facts": [
+    {
+     "fact": "PDRICL-2P发布意向征询，招聘咨询工程师负责水利农业工程研究及监理",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Projet de Développement Intégré pour la Riziculture dans la plaine du Chari-Logone, deuxième phase (PDRICL-2P), lance un appel à manifestation d’intérêt pour le recrutement d’un ingénieur-conseil"
+    },
+    {
+     "fact": "申请截止日期为2026年10月16日9时",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les candidatures sont attendues au plus tard le 16 octobre 2026 à 9 heures"
+    },
+    {
+     "fact": "项目由BADEA和欧佩克国际发展基金贷款资助",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Financé à travers un prêt de la Banque arabe pour le développement économique en Afrique (BADEA) et du Fonds OPEP pour le développement international"
+    },
+    {
+     "fact": "项目涉及哈杰尔-拉米斯、沙里-巴吉尔米和东马约-凯比三省",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les interventions concernent notamment les provinces du Hadjer-Lamis, du Chari-Baguirmi et du Mayo-Kebbi Est"
+    },
+    {
+     "fact": "研究阶段预计10个月，监理服务36个月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La phase d’études est estimée à 10 mois, tandis que les prestations de surveillance et de contrôle doivent s’étendre sur 36 mois"
+    }
+   ],
+   "uncertainties": [
+    "据Alwihda Info报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 90
+  }
+ },
+ "event_id": "EVT_718d824a8d0b9733",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

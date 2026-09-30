@@ -1,0 +1,94 @@
+{
+ "label": "S00b528ff",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f57887c5964dfab769169a7dd0631d1d293d7979045fa72e2fca5479fd915bce",
+ "tokens": {
+  "input_tokens": 2161,
+  "output_tokens": 196,
+  "total_tokens": 2357
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该消息目前仅有一个来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"该消息目前仅有一个来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳失业护士被呼吁不要居家等待，应投身创业",
+   "summary_zh": "加纳失业护士和助产士被呼吁在等待政府岗位分配期间投身创业，而非仅依赖政府就业。该消息来自单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳失业护士和助产士被呼吁投身创业而非仅依赖政府就业",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Unemployed nurses and midwives have been urged to venture into entrepreneurship instead of relying solely on government employment."
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 60
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳失业护士被呼吁不要居家等待，应投身创业",
+   "summary_zh": "加纳失业护士和助产士被呼吁在等待政府岗位分配期间投身创业，而非仅依赖政府就业。该消息来自单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳失业护士和助产士被呼吁投身创业而非仅依赖政府就业",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Unemployed nurses and midwives have been urged to venture into entrepreneurship instead of relying solely on government employment."
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 60
+  }
+ },
+ "event_id": "EVT_e835d86c00b528ff",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

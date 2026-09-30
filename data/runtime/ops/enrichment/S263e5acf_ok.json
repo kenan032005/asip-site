@@ -1,0 +1,94 @@
+{
+ "label": "S263e5acf",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "78f07fbd21b2897f89542218c6b16ac0238cb680c4c9c1f207571a9294108ac5",
+ "tokens": {
+  "input_tokens": 2163,
+  "output_tokens": 226,
+  "total_tokens": 2389
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\"]",
+    "after": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳国家服务局公布国家服务人员派遣与验证七步流程",
+   "summary_zh": "加纳国家服务局（NSA）公布了面向准国家服务人员（NSP）的七步流程，用于在正式开始国家服务前完成派遣与验证。该消息由单一来源MyJoyOnline报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳国家服务局公布国家服务人员派遣与验证的七步流程",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The National Service Authority (NSA) has outlined a seven-step process for prospective National Service Personnel (NSP) to complete their posting and validation before officially commencing their national service."
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳国家服务局公布国家服务人员派遣与验证七步流程",
+   "summary_zh": "加纳国家服务局（NSA）公布了面向准国家服务人员（NSP）的七步流程，用于在正式开始国家服务前完成派遣与验证。该消息由单一来源MyJoyOnline报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳国家服务局公布国家服务人员派遣与验证的七步流程",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The National Service Authority (NSA) has outlined a seven-step process for prospective National Service Personnel (NSP) to complete their posting and validation before officially commencing their national service."
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_d8049da4263e5acf",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

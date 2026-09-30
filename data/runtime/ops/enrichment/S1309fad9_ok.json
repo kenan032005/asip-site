@@ -1,0 +1,104 @@
+{
+ "label": "S1309fad9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "226ecc618b9be04ae010be82b6e777ae7084b4f25dc8bdba28134c50200178c9",
+ "tokens": {
+  "input_tokens": 2189,
+  "output_tokens": 278,
+  "total_tokens": 2467
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该报道为单一来源，尚缺乏交叉验证\"]",
+    "after": "[\"该报道为单一来源，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "Joy Prime节目探讨加纳全国性议题对话空间",
+   "summary_zh": "加纳媒体Joy Prime推出《Prime Insight》节目，旨在为全国性议题提供有意义的对话空间。节目关注民众日常关心的交通票价、电费及政治讨论等话题。该报道为单一来源，内容属媒体节目介绍，未涉及具体安全事件。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳媒体Joy Prime推出《Prime Insight》节目，聚焦全国性议题对话",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Prime Insight: Making room for meaningful national conversations on Joy Prime"
+    },
+    {
+     "fact": "节目关注加纳民众日常关心的交通票价、电费及政治讨论等话题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "On any given morning in Ghana, someone is complaining about transport fares, another is worried about electricity bills, and somewhere, a conversation about politics is getting louder than it needs to be."
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 60
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "Joy Prime节目探讨加纳全国性议题对话空间",
+   "summary_zh": "加纳媒体Joy Prime推出《Prime Insight》节目，旨在为全国性议题提供有意义的对话空间。节目关注民众日常关心的交通票价、电费及政治讨论等话题。该报道为单一来源，内容属媒体节目介绍，未涉及具体安全事件。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳媒体Joy Prime推出《Prime Insight》节目，聚焦全国性议题对话",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Prime Insight: Making room for meaningful national conversations on Joy Prime"
+    },
+    {
+     "fact": "节目关注加纳民众日常关心的交通票价、电费及政治讨论等话题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "On any given morning in Ghana, someone is complaining about transport fares, another is worried about electricity bills, and somewhere, a conversation about politics is getting louder than it needs to be."
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 60
+  }
+ },
+ "event_id": "EVT_ef07b3ff1309fad9",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

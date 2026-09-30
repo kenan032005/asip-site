@@ -1,0 +1,114 @@
+{
+ "label": "S95b9da5f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "75eb9d9f74a531865cd9fb21b6432851edc6dc381555e8e1f963f407179bb8a0",
+ "tokens": {
+  "input_tokens": 2242,
+  "output_tokens": 389,
+  "total_tokens": 2631
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\"]",
+    "after": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳艾滋病委员会警告：HIV污名化阻碍检测、预防与治疗",
+   "summary_zh": "加纳艾滋病委员会（GAC）警告称，围绕HIV的污名化正在阻碍人们获取预防、检测、治疗和支持服务。委员会总干事Kharmacelle Prosper Akanbong博士表示，将HIV感染自动等同于滥交的误解持续影响着病毒携带者所受的对待。他称这类观念既不公正，也削弱了相关防治努力。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳艾滋病委员会警告HIV污名化阻碍人们获取预防、检测、治疗和支持服务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Stigma surrounding HIV is discouraging people from accessing prevention, testing, treatment and support services, the Ghana AIDS Commission (GAC) has warned."
+    },
+    {
+     "fact": "委员会总干事称将HIV感染等同于滥交的误解影响病毒携带者所受对待",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Director-General of the Commission, Dr Kharmacelle Prosper Akanbong, said misconceptions linking HIV infection automatically to promiscuity continue to influence how people living with the virus are treated."
+    },
+    {
+     "fact": "总干事在JoyNews节目上表示此类观念不公正并削弱防治努力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Speaking on Konsulting Room 5 on JoyNews, Dr Akanbong said such perceptions were not only unfair but were also undermining efforts"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳艾滋病委员会警告：HIV污名化阻碍检测、预防与治疗",
+   "summary_zh": "加纳艾滋病委员会（GAC）警告称，围绕HIV的污名化正在阻碍人们获取预防、检测、治疗和支持服务。委员会总干事Kharmacelle Prosper Akanbong博士表示，将HIV感染自动等同于滥交的误解持续影响着病毒携带者所受的对待。他称这类观念既不公正，也削弱了相关防治努力。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳艾滋病委员会警告HIV污名化阻碍人们获取预防、检测、治疗和支持服务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Stigma surrounding HIV is discouraging people from accessing prevention, testing, treatment and support services, the Ghana AIDS Commission (GAC) has warned."
+    },
+    {
+     "fact": "委员会总干事称将HIV感染等同于滥交的误解影响病毒携带者所受对待",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Director-General of the Commission, Dr Kharmacelle Prosper Akanbong, said misconceptions linking HIV infection automatically to promiscuity continue to influence how people living with the virus are treated."
+    },
+    {
+     "fact": "总干事在JoyNews节目上表示此类观念不公正并削弱防治努力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Speaking on Konsulting Room 5 on JoyNews, Dr Akanbong said such perceptions were not only unfair but were also undermining efforts"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_525a3e8495b9da5f",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

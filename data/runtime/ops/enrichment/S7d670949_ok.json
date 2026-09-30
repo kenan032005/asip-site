@@ -1,0 +1,129 @@
+{
+ "label": "S7d670949",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "fdcf485e4624a6b82f8af74b70ec8fa61113e92f65892d41bddf41805d8f77ff",
+ "tokens": {
+  "input_tokens": 2512,
+  "output_tokens": 570,
+  "total_tokens": 3082
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "洪水与饥荒加剧南苏丹坦布拉流离失所者困境",
+   "summary_zh": "南苏丹西赤道州坦布拉县连日强降雨导致多个流离失所者营地被淹，简易住所受损，居民被迫转移至高处。当地流离失所者代表称，洪水加剧了原有的饥荒、医疗匮乏和教育中断问题，并警告积水可能引发疟疾等疾病。当地官员表示食品价格上涨，弱势群体已有人因饥饿死亡，居民呼吁政府和人道组织提供紧急援助。",
+   "event_type": "natural_disaster",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Western Equatoria State",
+    "city": "Tambura",
+    "site": "IDP camps",
+    "raw_text": "Tambura County, Western Equatoria State"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹坦布拉县多个流离失所者营地遭洪水淹没",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Heavy rainfall has left several IDP camps flooded, damaging makeshift shelters and leaving some families struggling to find safe places to sleep."
+    },
+    {
+     "fact": "居民称洪水导致儿童和成人行动困难，部分地方水位已漫至床下",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "All the camps are flooded. The water is everywhere, and both children and adults are struggling to move through it... In some places, the water has reached under people's beds."
+    },
+    {
+     "fact": "流离失所者代表称洪水加剧饥荒、医疗匮乏和教育中断问题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Peter Marko Yensi, an IDP representative in Tambura, said the flooding had worsened existing problems, including hunger, limited healthcare and lack of access to education."
+    },
+    {
+     "fact": "当地官员称木薯价格约6000南苏丹镑、花生约7000南苏丹镑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "She said food prices had increased, with a measure of cassava selling for about 6,000 South Sudanese Pounds and groundnuts for about 7,000 pounds."
+    },
+    {
+     "fact": "居民呼吁政府和人道组织提供紧急援助",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Residents are calling for urgent assistance to address flooding, hunger, healthcare, education, shelter and protection needs in Tambura County."
+    }
+   ],
+   "uncertainties": [
+    "报道为单一来源（Radio Tamazuj），尚缺乏交叉验证",
+    "洪水是否持续数日及其对卫生条件的具体影响尚未证实",
+    "居民称有人因饥饿死亡，该说法未获独立确认",
+    "试图联系县当局置评未果"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "洪水与饥荒加剧南苏丹坦布拉流离失所者困境",
+   "summary_zh": "南苏丹西赤道州坦布拉县连日强降雨导致多个流离失所者营地被淹，简易住所受损，居民被迫转移至高处。当地流离失所者代表称，洪水加剧了原有的饥荒、医疗匮乏和教育中断问题，并警告积水可能引发疟疾等疾病。当地官员表示食品价格上涨，弱势群体已有人因饥饿死亡，居民呼吁政府和人道组织提供紧急援助。",
+   "event_type": "natural_disaster",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Western Equatoria State",
+    "city": "Tambura",
+    "site": "IDP camps",
+    "raw_text": "Tambura County, Western Equatoria State"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹坦布拉县多个流离失所者营地遭洪水淹没",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Heavy rainfall has left several IDP camps flooded, damaging makeshift shelters and leaving some families struggling to find safe places to sleep."
+    },
+    {
+     "fact": "居民称洪水导致儿童和成人行动困难，部分地方水位已漫至床下",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "All the camps are flooded. The water is everywhere, and both children and adults are struggling to move through it... In some places, the water has reached under people's beds."
+    },
+    {
+     "fact": "流离失所者代表称洪水加剧饥荒、医疗匮乏和教育中断问题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Peter Marko Yensi, an IDP representative in Tambura, said the flooding had worsened existing problems, including hunger, limited healthcare and lack of access to education."
+    },
+    {
+     "fact": "当地官员称木薯价格约6000南苏丹镑、花生约7000南苏丹镑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "She said food prices had increased, with a measure of cassava selling for about 6,000 South Sudanese Pounds and groundnuts for about 7,000 pounds."
+    },
+    {
+     "fact": "居民呼吁政府和人道组织提供紧急援助",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Residents are calling for urgent assistance to address flooding, hunger, healthcare, education, shelter and protection needs in Tambura County."
+    }
+   ],
+   "uncertainties": [
+    "报道为单一来源（Radio Tamazuj），尚缺乏交叉验证",
+    "洪水是否持续数日及其对卫生条件的具体影响尚未证实",
+    "居民称有人因饥饿死亡，该说法未获独立确认",
+    "试图联系县当局置评未果"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_1d2b4b4b7d670949",
+ "disease_event_id": null,
+ "country_code": "SS"
+}
