@@ -1,17 +1,17 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-01T01:06:21+08:00",
+ "generated_at": "2026-10-01T03:57:39+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 68,
-  "signals_7d": 279,
-  "verified_events_24h": 70,
-  "verified_events_7d": 301,
+  "signals_24h": 57,
+  "signals_7d": 280,
+  "verified_events_24h": 61,
+  "verified_events_7d": 304,
   "multi_source_verified_events_7d": 6,
-  "countries_with_activity_24h": 12,
+  "countries_with_activity_24h": 14,
   "total_countries_monitored": 22
  },
  "countries_24h": [
@@ -25,6 +25,8 @@
   "尼日利亚",
   "尼日尔",
   "布基纳法索",
+  "科特迪瓦",
+  "莫桑比克",
   "贝宁",
   "马里"
  ],
@@ -48,6 +50,8 @@
   "尼日尔",
   "布基纳法索",
   "摩洛哥",
+  "科特迪瓦",
+  "莫桑比克",
   "贝宁",
   "马里"
  ],
@@ -70,11 +74,11 @@
   },
   {
    "value": "南苏丹",
-   "count": 20
+   "count": 21
   },
   {
    "value": "尼日尔",
-   "count": 16
+   "count": 15
   },
   {
    "value": "刚果（金）",
@@ -104,11 +108,15 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 57
+   "count": 46
+  },
+  {
+   "value": "恐怖袭击",
+   "count": 2
   },
   {
    "value": "民众骚乱",
-   "count": 3
+   "count": 2
   },
   {
    "value": "政治危机",
@@ -129,10 +137,6 @@
   {
    "value": "军事行动",
    "count": 1
-  },
-  {
-   "value": "恐怖袭击",
-   "count": 1
   }
  ],
  "source_tier_distribution_7d": [
@@ -142,7 +146,7 @@
   },
   {
    "value": "C",
-   "count": 199
+   "count": 203
   },
   {
    "value": "A",
@@ -150,36 +154,6 @@
   }
  ],
  "top_verified_events": [
-  {
-   "fact_id": "EVT_abcc5245e71019ed",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "尼日尔",
-   "title": "蒂拉贝里：青年参与和平与发展对话",
-   "category": "other_security",
-   "source": "Journal du Niger",
-   "source_tier": "A",
-   "source_role": "official",
-   "time": "2026-09-23 17:45",
-   "importance": "high",
-   "severity": "medium"
-  },
-  {
-   "fact_id": "EVT_a298302129b7e097",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得贝贝贾地区盗窃、不文明行为及酗酒问题加剧",
-   "category": "other_security",
-   "source": "Alwihda Info",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-23 18:21",
-   "importance": "high",
-   "severity": "medium"
-  },
   {
    "fact_id": "EVT_983b7fe3d442135c",
    "level": "verified_event",
@@ -239,9 +213,84 @@
    "time": "2026-09-24 12:23",
    "importance": "high",
    "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_7b7bcfff4eb30437",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日尔",
+   "title": "埃塞俄比亚北部战斗升级，提格雷武装宣布全面开战",
+   "category": "armed_conflict",
+   "source": "AfricaNews (Niger)",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-24 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_e63b497a3e1310ba",
+   "level": "verified_event",
+   "evidence_tier": "multi_source_verified",
+   "source_count": 2,
+   "country": "乍得",
+   "title": "乍得武装部队部长赴湖区执行安全任务",
+   "category": "other_security",
+   "source": "Tchadinfos",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-24 16:30",
+   "importance": "high",
+   "severity": "medium"
   }
  ],
  "top_signals": [
+  {
+   "fact_id": "news:7e799311cca76092",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "莫桑比克",
+   "title": "Islamic State claims two killed as insurgents move across Cabo Delgado",
+   "category": "other_security",
+   "source": "Zitamar News",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-01 01:31",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:d8040017857b73a7",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Crise soudanaise : à Oure Cassoni, l’eau devient une urgence vitale pour plus de 118 000 réfugiés",
+   "category": "other_security",
+   "source": "Le N'Djam Post",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-30 22:41",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:46dfd0b1ab3cbad3",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "Three dead in separate incidents in Yei",
+   "category": "terrorist_attack",
+   "source": "Radio Tamazuj",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-30 22:32",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   {
    "fact_id": "news:ce7dee807ede5231",
    "level": "news_signal",
@@ -556,51 +605,6 @@
    "time": "2026-09-30 21:10",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:762cfca36bbffaad",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "刚果（金）",
-   "title": "刚果（金）与卢旺达在联合国安理会互相提出指控",
-   "category": "other_security",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-09-30 20:50",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:536b7454bc059c69",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得总统马哈马特·伊德里斯·代比视察军校发现多项缺失",
-   "category": "other_security",
-   "source": "Journal du Tchad",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-30 20:40",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:d5eade8616f60c7f",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得东部乌雷卡索尼难民与收容社区呼吁关注优先需求",
-   "category": "other_security",
-   "source": "乍得复兴门户",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-30 19:43",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -681,8 +685,53 @@
   "status": "deterministic",
   "based_on": "过去24小时/7日公开信息（确定性汇总）"
  },
- "fact_count": 580,
+ "fact_count": 584,
  "facts": {
+  "news:7e799311cca76092": {
+   "fact_id": "news:7e799311cca76092",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "莫桑比克",
+   "title": "Islamic State claims two killed as insurgents move across Cabo Delgado",
+   "category": "other_security",
+   "source": "Zitamar News",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-01 01:31",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:d8040017857b73a7": {
+   "fact_id": "news:d8040017857b73a7",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Crise soudanaise : à Oure Cassoni, l’eau devient une urgence vitale pour plus de 118 000 réfugiés",
+   "category": "other_security",
+   "source": "Le N'Djam Post",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-30 22:41",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:46dfd0b1ab3cbad3": {
+   "fact_id": "news:46dfd0b1ab3cbad3",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "Three dead in separate incidents in Yei",
+   "category": "terrorist_attack",
+   "source": "Radio Tamazuj",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-30 22:32",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:ce7dee807ede5231": {
    "fact_id": "news:ce7dee807ede5231",
    "level": "news_signal",
@@ -4837,66 +4886,6 @@
    "time": "2026-09-24 05:14",
    "importance": "low",
    "why_it_matters": ""
-  },
-  "news:2e7bfde599494bd0": {
-   "fact_id": "news:2e7bfde599494bd0",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得贝贝贾地区盗窃、不文明行为及酗酒问题加剧",
-   "category": "other_security",
-   "source": "Alwihda Info",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-24 02:21",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:9922726b2c878753": {
-   "fact_id": "news:9922726b2c878753",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日尔",
-   "title": "蒂拉贝里：青年参与和平与发展对话",
-   "category": "other_security",
-   "source": "Journal du Niger",
-   "source_tier": "A",
-   "source_role": "official",
-   "time": "2026-09-24 01:45",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "EVT_abcc5245e71019ed": {
-   "fact_id": "EVT_abcc5245e71019ed",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "尼日尔",
-   "title": "蒂拉贝里：青年参与和平与发展对话",
-   "category": "other_security",
-   "source": "Journal du Niger",
-   "source_tier": "A",
-   "source_role": "official",
-   "time": "2026-09-23 17:45",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_a298302129b7e097": {
-   "fact_id": "EVT_a298302129b7e097",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得贝贝贾地区盗窃、不文明行为及酗酒问题加剧",
-   "category": "other_security",
-   "source": "Alwihda Info",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-23 18:21",
-   "importance": "high",
-   "severity": "medium"
   },
   "EVT_983b7fe3d442135c": {
    "fact_id": "EVT_983b7fe3d442135c",
@@ -9380,6 +9369,81 @@
    "source_tier": "B",
    "source_role": "aggregator_discovery",
    "time": "2026-09-30 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_91f83a33f5d52e5f": {
+   "fact_id": "EVT_91f83a33f5d52e5f",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "科特迪瓦",
+   "title": "科特迪瓦当局加大打击非法采金力度",
+   "category": "serious_crime",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-09-30 18:31",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_e873b7e209ff3722": {
+   "fact_id": "EVT_e873b7e209ff3722",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "埃塞俄比亚提格雷地区战斗升级，据称造成52名平民死亡",
+   "category": "armed_conflict",
+   "source": "BBC News (Africa)",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-09-30 15:04",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_08587903914835dd": {
+   "fact_id": "EVT_08587903914835dd",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "莫桑比克",
+   "title": "伊斯兰国声称在德尔加杜角省杀害两人，叛乱分子持续活动",
+   "category": "other_security",
+   "source": "Zitamar News",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-30 17:31",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_8b7a421e9ed1be95": {
+   "fact_id": "EVT_8b7a421e9ed1be95",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "南苏丹耶伊发生三起独立事件致三人死亡",
+   "category": "terrorist_attack",
+   "source": "Radio Tamazuj",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-30 14:32",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_5ba5a1c95ef254b0": {
+   "fact_id": "EVT_5ba5a1c95ef254b0",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "苏丹危机：Oure Cassoni难民超11.8万，水资源成生存紧急问题",
+   "category": "other_security",
+   "source": "Le N'Djam Post",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-30 14:41",
    "importance": "high",
    "severity": "medium"
   }

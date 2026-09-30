@@ -1,0 +1,129 @@
+{
+ "label": "S09ff3722",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1ffa3059a55a30bd82a755910628465076c72cd88dc7d007fae08557a62bd25b",
+ "tokens": {
+  "input_tokens": 2553,
+  "output_tokens": 523,
+  "total_tokens": 3076
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "埃塞俄比亚提格雷地区战斗升级，据称造成52名平民死亡",
+   "summary_zh": "据医院消息人士向BBC透露，埃塞俄比亚北部提格雷地区阿拉马塔周边持续三天的激烈战斗已造成至少52名平民死亡。战斗还波及邻近地区，导致33名游客滞留在拉利贝拉。冲突双方互相指责对方违反2022年结束内战的协议，目前尚不清楚谁先发动了最新战斗。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷",
+    "city": "阿拉马塔",
+    "site": null,
+    "raw_text": "Alamata in Ethiopia's northern Tigray region"
+   },
+   "key_facts": [
+    {
+     "fact": "据医院消息人士向BBC透露，阿拉马塔周边三天激烈战斗造成至少52名平民死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least 52 civilians have been killed during three days of heavy fighting around Alamata in Ethiopia's northern Tigray region, hospital sources have told the BBC."
+    },
+    {
+     "fact": "战斗波及邻近地区，33名游客滞留在拉利贝拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fighting has also affected neighbouring regions with 33 tourists stranded for the last week in Lalibela, a Unesco world heritage site."
+    },
+    {
+     "fact": "冲突双方互相指责对方违反2022年结束内战的协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Clashes broke out last week after months of tension between the government and the party that controls Tigray, with both accusing each other of violating a 2022 deal that ended a two-year civil war."
+    },
+    {
+     "fact": "双方对谁先发动最新战斗说法不一",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The two sides disagree over who started the latest fighting."
+    },
+    {
+     "fact": "无国界医生称超过700名伤者被送往其支持的提格雷医院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "medical charity Médecins Sans Frontières (MSF) said more than 700 wounded people had been admitted to hospitals it supports in Tigray."
+    }
+   ],
+   "uncertainties": [
+    "52名平民死亡为医院消息人士向BBC透露，尚未获得独立核实",
+    "谁先发动最新战斗双方说法不一",
+    "通信中断导致难以核实提格雷及周边地区实际情况",
+    "互联网关闭的指令来源尚不清楚"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "埃塞俄比亚提格雷地区战斗升级，据称造成52名平民死亡",
+   "summary_zh": "据医院消息人士向BBC透露，埃塞俄比亚北部提格雷地区阿拉马塔周边持续三天的激烈战斗已造成至少52名平民死亡。战斗还波及邻近地区，导致33名游客滞留在拉利贝拉。冲突双方互相指责对方违反2022年结束内战的协议，目前尚不清楚谁先发动了最新战斗。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷",
+    "city": "阿拉马塔",
+    "site": null,
+    "raw_text": "Alamata in Ethiopia's northern Tigray region"
+   },
+   "key_facts": [
+    {
+     "fact": "据医院消息人士向BBC透露，阿拉马塔周边三天激烈战斗造成至少52名平民死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least 52 civilians have been killed during three days of heavy fighting around Alamata in Ethiopia's northern Tigray region, hospital sources have told the BBC."
+    },
+    {
+     "fact": "战斗波及邻近地区，33名游客滞留在拉利贝拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fighting has also affected neighbouring regions with 33 tourists stranded for the last week in Lalibela, a Unesco world heritage site."
+    },
+    {
+     "fact": "冲突双方互相指责对方违反2022年结束内战的协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Clashes broke out last week after months of tension between the government and the party that controls Tigray, with both accusing each other of violating a 2022 deal that ended a two-year civil war."
+    },
+    {
+     "fact": "双方对谁先发动最新战斗说法不一",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The two sides disagree over who started the latest fighting."
+    },
+    {
+     "fact": "无国界医生称超过700名伤者被送往其支持的提格雷医院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "medical charity Médecins Sans Frontières (MSF) said more than 700 wounded people had been admitted to hospitals it supports in Tigray."
+    }
+   ],
+   "uncertainties": [
+    "52名平民死亡为医院消息人士向BBC透露，尚未获得独立核实",
+    "谁先发动最新战斗双方说法不一",
+    "通信中断导致难以核实提格雷及周边地区实际情况",
+    "互联网关闭的指令来源尚不清楚"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_e873b7e209ff3722",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

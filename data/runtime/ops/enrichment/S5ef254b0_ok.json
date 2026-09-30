@@ -1,0 +1,125 @@
+{
+ "label": "S5ef254b0",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3b6b090cd4c89b27b3aea46ba8c78174737f252a77616bedd6cda1145f8c81db",
+ "tokens": {
+  "input_tokens": 2574,
+  "output_tokens": 589,
+  "total_tokens": 3163
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "苏丹危机：Oure Cassoni难民超11.8万，水资源成生存紧急问题",
+   "summary_zh": "乍得东部Ennedi-Est省Oure Cassoni难民营因苏丹持续危机，难民人数在不到四年内从约3.75万增至超过11.8万。难民营基础设施和服务不堪重负，饮用水、住所、医疗和教育成为最紧迫需求。据单一来源报道，联合国代表团于2026年9月30日访问该地，难民和收容社区直接反映困难，约85%难民依赖农业和畜牧业为生，而降水不足加剧了水资源紧张。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "Ennedi-Est",
+    "city": null,
+    "site": "Oure Cassoni难民营",
+    "raw_text": "province de l’Ennedi-Est, site de Oure Cassoni"
+   },
+   "key_facts": [
+    {
+     "fact": "Oure Cassoni难民人数在不到四年内从约3.75万增至超过11.8万",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En moins de quatre ans, la population réfugiée sur le site est passée d’environ 37 500 à plus de 118 000 personnes"
+    },
+    {
+     "fact": "难民增长源于邻国苏丹持续危机",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "sous l’effet de la crise persistante au Soudan voisin"
+    },
+    {
+     "fact": "饮用水、住所、医疗和教育是最紧迫需求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eau potable, abris, soins de santé et éducation figurent désormais parmi les besoins les plus pressants"
+    },
+    {
+     "fact": "约85%难民依赖农业和畜牧业为生，降水不足加剧困难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "activités dont dépendent les moyens de subsistance d’environ 85 % des réfugiés. La faiblesse des précipitations vient cependant compliquer davantage la situation"
+    },
+    {
+     "fact": "联合国代表团于2026年9月30日访问该地，难民和收容社区反映困难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Lors d’une visite effectuée sur le site, ce 30 septembre 2026, les réfugiés et les communautés d’accueil ont directement exposé leurs difficultés à une mission des Nations Unies au Tchad"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Le N'Djam Post）报道，尚缺乏交叉验证",
+    "难民人数等数据来自单一来源，未获独立确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "苏丹危机：Oure Cassoni难民超11.8万，水资源成生存紧急问题",
+   "summary_zh": "乍得东部Ennedi-Est省Oure Cassoni难民营因苏丹持续危机，难民人数在不到四年内从约3.75万增至超过11.8万。难民营基础设施和服务不堪重负，饮用水、住所、医疗和教育成为最紧迫需求。据单一来源报道，联合国代表团于2026年9月30日访问该地，难民和收容社区直接反映困难，约85%难民依赖农业和畜牧业为生，而降水不足加剧了水资源紧张。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "Ennedi-Est",
+    "city": null,
+    "site": "Oure Cassoni难民营",
+    "raw_text": "province de l’Ennedi-Est, site de Oure Cassoni"
+   },
+   "key_facts": [
+    {
+     "fact": "Oure Cassoni难民人数在不到四年内从约3.75万增至超过11.8万",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En moins de quatre ans, la population réfugiée sur le site est passée d’environ 37 500 à plus de 118 000 personnes"
+    },
+    {
+     "fact": "难民增长源于邻国苏丹持续危机",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "sous l’effet de la crise persistante au Soudan voisin"
+    },
+    {
+     "fact": "饮用水、住所、医疗和教育是最紧迫需求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eau potable, abris, soins de santé et éducation figurent désormais parmi les besoins les plus pressants"
+    },
+    {
+     "fact": "约85%难民依赖农业和畜牧业为生，降水不足加剧困难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "activités dont dépendent les moyens de subsistance d’environ 85 % des réfugiés. La faiblesse des précipitations vient cependant compliquer davantage la situation"
+    },
+    {
+     "fact": "联合国代表团于2026年9月30日访问该地，难民和收容社区反映困难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Lors d’une visite effectuée sur le site, ce 30 septembre 2026, les réfugiés et les communautés d’accueil ont directement exposé leurs difficultés à une mission des Nations Unies au Tchad"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Le N'Djam Post）报道，尚缺乏交叉验证",
+    "难民人数等数据来自单一来源，未获独立确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_5ba5a1c95ef254b0",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

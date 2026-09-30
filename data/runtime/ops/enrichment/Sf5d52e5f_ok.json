@@ -1,0 +1,124 @@
+{
+ "label": "Sf5d52e5f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d457e0b32084ef753836e532c0a5b6ea9db3ff925962ceb7082fb84a5c793dc8",
+ "tokens": {
+  "input_tokens": 2565,
+  "output_tokens": 476,
+  "total_tokens": 3041
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（RFI Afrique），尚缺乏交叉验证\"]",
+    "after": "[\"目前仅一个来源（RFI Afrique），尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "科特迪瓦当局加大打击非法采金力度",
+   "summary_zh": "科特迪瓦当局加大打击非法采金力度，目标是在六个月内根除这一现象。政府已通过修改刑法典加大处罚力度，并向打击非法采金特别行动组移交了数百辆车辆等装备。当局将打击非法采金称为“国家安全要求”。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "CIV",
+   "location": {
+    "country_iso3": "CIV",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "En Côte d’Ivoire"
+   },
+   "key_facts": [
+    {
+     "fact": "科特迪瓦当局加大打击非法采金力度，并设定六个月期限根除该现象",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les autorités ivoiriennes se sont données six mois pour éradiquer le phénomène"
+    },
+    {
+     "fact": "政府通过修改刑法典加大处罚力度，罚款50万至1亿西非法郎，监禁2至5年，涉及公职人员时最高可判20年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "De 50 à 100 millions FCFA d’amende, et 2 à 5 ans de prison pour les acteurs impliqués… Les peines peuvent atteindre jusqu’à 20 ans d’emprisonnement lorsque les faits mettent en cause un agent public"
+    },
+    {
+     "fact": "向打击非法采金特别行动组移交300辆摩托车、30辆皮卡、12艘橡皮艇及无人机等装备",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "300 motos, 30 véhicules pickup, 12 zodiaques et des drones… Ce matériel est destiné à renforcer les moyens d’action du GS-LOI"
+    },
+    {
+     "fact": "国家安全委员会执行秘书称打击非法采金已成为“国家安全要求”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La lutte contre l’orpaillage illégal est devenue une « exigence de sécurité nationale »"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（RFI Afrique），尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "科特迪瓦当局加大打击非法采金力度",
+   "summary_zh": "科特迪瓦当局加大打击非法采金力度，目标是在六个月内根除这一现象。政府已通过修改刑法典加大处罚力度，并向打击非法采金特别行动组移交了数百辆车辆等装备。当局将打击非法采金称为“国家安全要求”。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "CIV",
+   "location": {
+    "country_iso3": "CIV",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "En Côte d’Ivoire"
+   },
+   "key_facts": [
+    {
+     "fact": "科特迪瓦当局加大打击非法采金力度，并设定六个月期限根除该现象",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les autorités ivoiriennes se sont données six mois pour éradiquer le phénomène"
+    },
+    {
+     "fact": "政府通过修改刑法典加大处罚力度，罚款50万至1亿西非法郎，监禁2至5年，涉及公职人员时最高可判20年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "De 50 à 100 millions FCFA d’amende, et 2 à 5 ans de prison pour les acteurs impliqués… Les peines peuvent atteindre jusqu’à 20 ans d’emprisonnement lorsque les faits mettent en cause un agent public"
+    },
+    {
+     "fact": "向打击非法采金特别行动组移交300辆摩托车、30辆皮卡、12艘橡皮艇及无人机等装备",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "300 motos, 30 véhicules pickup, 12 zodiaques et des drones… Ce matériel est destiné à renforcer les moyens d’action du GS-LOI"
+    },
+    {
+     "fact": "国家安全委员会执行秘书称打击非法采金已成为“国家安全要求”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La lutte contre l’orpaillage illégal est devenue une « exigence de sécurité nationale »"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（RFI Afrique），尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_91f83a33f5d52e5f",
+ "disease_event_id": null,
+ "country_code": "CI"
+}
