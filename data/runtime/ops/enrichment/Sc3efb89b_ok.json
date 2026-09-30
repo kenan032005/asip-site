@@ -1,0 +1,94 @@
+{
+ "label": "Sc3efb89b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "97bfdbd4cd672dc8bdfba92b0e247e42ec278c10c2a0781b1032b1f0d7176309",
+ "tokens": {
+  "input_tokens": 2160,
+  "output_tokens": 241,
+  "total_tokens": 2401
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该事件目前仅有一个来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"该事件目前仅有一个来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳财政部长就2027年预算与行业协会及企业领袖磋商",
+   "summary_zh": "加纳财政部长Cassiel Ato Forson于周五与加纳工业协会（AGI）及主要行业高管进行磋商，作为2027年预算编制咨询工作的一部分。该消息由单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳财政部长Cassiel Ato Forson与加纳工业协会及行业高管就2027年预算进行磋商",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dr Cassiel Ato Forson, the Minister of Finance, on Friday engaged the Association of Ghana Industries (AGI) and leading industry executives as part of consultations towards the 2027 Budget."
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳财政部长就2027年预算与行业协会及企业领袖磋商",
+   "summary_zh": "加纳财政部长Cassiel Ato Forson于周五与加纳工业协会（AGI）及主要行业高管进行磋商，作为2027年预算编制咨询工作的一部分。该消息由单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳财政部长Cassiel Ato Forson与加纳工业协会及行业高管就2027年预算进行磋商",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dr Cassiel Ato Forson, the Minister of Finance, on Friday engaged the Association of Ghana Industries (AGI) and leading industry executives as part of consultations towards the 2027 Budget."
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_714361ccc3efb89b",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

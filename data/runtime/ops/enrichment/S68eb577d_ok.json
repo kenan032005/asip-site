@@ -1,0 +1,114 @@
+{
+ "label": "S68eb577d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1c510f1a1671e9b96b8451735ef9e995857820a51030df91b80a50f048945037",
+ "tokens": {
+  "input_tokens": 2151,
+  "output_tokens": 285,
+  "total_tokens": 2436
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该报道为单一来源，尚缺乏交叉验证\"]",
+    "after": "[\"该报道为单一来源，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳2025年信贷查询中银行占比达86%",
+   "summary_zh": "据加纳银行2025年信用报告，银行占2025年信贷查询总量的86%。移动货币贷款和工资贷款数量增加，解释了查询量持续上升的原因。该报道为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "银行占2025年信贷查询总量的86%",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Banks accounted for 86% total enquiries for credit in 2025"
+    },
+    {
+     "fact": "移动货币贷款和工资贷款增加导致查询量持续上升",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the increasing number of mobile money loans and payroll lending explains the continuous increase in enquiries"
+    },
+    {
+     "fact": "2025年金融机构进行了超过2500万次信贷评估等查询",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Over 25m enquiries conducted by financial institutions for credit appraisals, others in 2025"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳2025年信贷查询中银行占比达86%",
+   "summary_zh": "据加纳银行2025年信用报告，银行占2025年信贷查询总量的86%。移动货币贷款和工资贷款数量增加，解释了查询量持续上升的原因。该报道为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "银行占2025年信贷查询总量的86%",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Banks accounted for 86% total enquiries for credit in 2025"
+    },
+    {
+     "fact": "移动货币贷款和工资贷款增加导致查询量持续上升",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the increasing number of mobile money loans and payroll lending explains the continuous increase in enquiries"
+    },
+    {
+     "fact": "2025年金融机构进行了超过2500万次信贷评估等查询",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Over 25m enquiries conducted by financial institutions for credit appraisals, others in 2025"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_dc2b6ff968eb577d",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

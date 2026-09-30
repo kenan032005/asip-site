@@ -1,0 +1,104 @@
+{
+ "label": "S864dba82",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e9e2a62b7e95526e74a57354cc5a8ad1e101841627b93a418583059f70a7f153",
+ "tokens": {
+  "input_tokens": 2175,
+  "output_tokens": 267,
+  "total_tokens": 2442
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\"]",
+    "after": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "布基纳法索军政府领导人开设大型黄金精炼厂，力求将采矿利润留在国内",
+   "summary_zh": "布基纳法索开设了该国首座黄金精炼厂，军政府希望在国内加工更多矿产资源，并加强对这一最重要产业之一的控制。该消息由加纳媒体MyJoyOnline报道，目前为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "BFA",
+   "location": {
+    "country_iso3": "BFA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "布基纳法索开设了该国首座黄金精炼厂",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Burkina Faso has opened its first gold refinery"
+    },
+    {
+     "fact": "军政府寻求在国内加工更多矿产资源并加强对其最重要产业之一的控制",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "as the military-led government seeks to process more of the country's mineral wealth at home and tighten its control over one of its most important industries"
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 60
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "布基纳法索军政府领导人开设大型黄金精炼厂，力求将采矿利润留在国内",
+   "summary_zh": "布基纳法索开设了该国首座黄金精炼厂，军政府希望在国内加工更多矿产资源，并加强对这一最重要产业之一的控制。该消息由加纳媒体MyJoyOnline报道，目前为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "BFA",
+   "location": {
+    "country_iso3": "BFA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "布基纳法索开设了该国首座黄金精炼厂",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Burkina Faso has opened its first gold refinery"
+    },
+    {
+     "fact": "军政府寻求在国内加工更多矿产资源并加强对其最重要产业之一的控制",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "as the military-led government seeks to process more of the country's mineral wealth at home and tighten its control over one of its most important industries"
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 60
+  }
+ },
+ "event_id": "EVT_e1cfbd44864dba82",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

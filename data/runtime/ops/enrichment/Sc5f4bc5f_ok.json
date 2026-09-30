@@ -1,0 +1,127 @@
+{
+ "label": "Sc5f4bc5f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6fd0c9c1810771a253715069bff35b4c10e34eaa96a665b8848c4e95e46049e7",
+ "tokens": {
+  "input_tokens": 3000,
+  "output_tokens": 680,
+  "total_tokens": 3680
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "埃塞俄比亚北部战斗持续，亚的斯亚贝巴指控厄立特里亚、苏丹和埃及支持提格雷叛军",
+   "summary_zh": "埃塞俄比亚北部多个战线战斗持续，联邦军队与反对派武装联盟交战，造成大量平民伤亡。亚的斯亚贝巴指控厄立特里亚、苏丹和埃及支持提格雷地区叛军，前两国予以坚决否认。提格雷、阿法尔等地医院不堪重负，阿法尔约有12万至15万人流离失所。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷州",
+    "city": null,
+    "site": null,
+    "raw_text": "nord de l'Éthiopie (Tigré, Afar)"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚北部多个战线战斗持续，联邦军队与反对派武装联盟交战",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les affrontements entre l'armée fédérale et les groupes armés membres d'une alliance d'opposition récemment constituée se poursuivent sur plusieurs fronts dans le nord du pays"
+    },
+    {
+     "fact": "亚的斯亚贝巴指控厄立特里亚、苏丹和埃及支持提格雷叛军，厄立特里亚和苏丹坚决否认",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'armée éthiopienne accuse, elle, l'Érythrée, le Soudan et l'Égypte d'être en partie responsables de la situation... ce que les deux premiers ont fermement démenti"
+    },
+    {
+     "fact": "提格雷地区医院不堪重负，上周Korem和Alamata收治420名伤员，Shire医院9月25日单日收治超300名伤员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "à Korem et à Alamata... 420 blessés ont été pris en charge la semaine dernière... l'hôpital de Shire a lui accueilli plus de 300 blessés durant la seule journée du 25 septembre"
+    },
+    {
+     "fact": "阿法尔地区约12万至15万人因战斗逃离家园",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "elles seraient entre 120 000 et 150 000 selon l'Afar Pastoralist Development Association"
+    },
+    {
+     "fact": "梅凯莱医院收治44名平民重伤者，其中33名儿童，系遭炮击受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'hôpital de Mekele... a ouvert ses portes à 44 civils - dont 33 enfants - grièvement blessés par des tirs d'artillerie"
+    }
+   ],
+   "uncertainties": [
+    "厄立特里亚、苏丹和埃及支持提格雷叛军的指控尚未证实，厄立特里亚和苏丹已否认",
+    "厄立特里亚对提格雷叛军提供物质支持缺乏证据，相关说法仅为研究人员推测",
+    "阿法尔地区流离失所人数（12万至15万）为单一来源估计，尚未获独立核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "埃塞俄比亚北部战斗持续，亚的斯亚贝巴指控厄立特里亚、苏丹和埃及支持提格雷叛军",
+   "summary_zh": "埃塞俄比亚北部多个战线战斗持续，联邦军队与反对派武装联盟交战，造成大量平民伤亡。亚的斯亚贝巴指控厄立特里亚、苏丹和埃及支持提格雷地区叛军，前两国予以坚决否认。提格雷、阿法尔等地医院不堪重负，阿法尔约有12万至15万人流离失所。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷州",
+    "city": null,
+    "site": null,
+    "raw_text": "nord de l'Éthiopie (Tigré, Afar)"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚北部多个战线战斗持续，联邦军队与反对派武装联盟交战",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les affrontements entre l'armée fédérale et les groupes armés membres d'une alliance d'opposition récemment constituée se poursuivent sur plusieurs fronts dans le nord du pays"
+    },
+    {
+     "fact": "亚的斯亚贝巴指控厄立特里亚、苏丹和埃及支持提格雷叛军，厄立特里亚和苏丹坚决否认",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'armée éthiopienne accuse, elle, l'Érythrée, le Soudan et l'Égypte d'être en partie responsables de la situation... ce que les deux premiers ont fermement démenti"
+    },
+    {
+     "fact": "提格雷地区医院不堪重负，上周Korem和Alamata收治420名伤员，Shire医院9月25日单日收治超300名伤员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "à Korem et à Alamata... 420 blessés ont été pris en charge la semaine dernière... l'hôpital de Shire a lui accueilli plus de 300 blessés durant la seule journée du 25 septembre"
+    },
+    {
+     "fact": "阿法尔地区约12万至15万人因战斗逃离家园",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "elles seraient entre 120 000 et 150 000 selon l'Afar Pastoralist Development Association"
+    },
+    {
+     "fact": "梅凯莱医院收治44名平民重伤者，其中33名儿童，系遭炮击受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'hôpital de Mekele... a ouvert ses portes à 44 civils - dont 33 enfants - grièvement blessés par des tirs d'artillerie"
+    }
+   ],
+   "uncertainties": [
+    "厄立特里亚、苏丹和埃及支持提格雷叛军的指控尚未证实，厄立特里亚和苏丹已否认",
+    "厄立特里亚对提格雷叛军提供物质支持缺乏证据，相关说法仅为研究人员推测",
+    "阿法尔地区流离失所人数（12万至15万）为单一来源估计，尚未获独立核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_14429227c5f4bc5f",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

@@ -1,0 +1,114 @@
+{
+ "label": "Sa31fa6c3",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "9f911ecc869b2f52383ea82ad60551abd4e5812080131ccede64ea53e572ebbe",
+ "tokens": {
+  "input_tokens": 2158,
+  "output_tokens": 286,
+  "total_tokens": 2444
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"目前仅一个来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳塔夸一父亲因性侵13岁女儿被判20年监禁",
+   "summary_zh": "加纳西部区塔夸巡回法院判处一名40岁泥瓦匠20年苦役监禁，罪名是性侵其13岁女儿。该消息目前为单一来源报道。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "Western Region",
+    "city": "Tarkwa",
+    "site": null,
+    "raw_text": "Tarkwa, Western Region"
+   },
+   "key_facts": [
+    {
+     "fact": "塔夸巡回法院判处一名40岁泥瓦匠20年苦役监禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Tarkwa Circuit Court has sentenced a 40-year-old mason to 20 years’ imprisonment in hard labour"
+    },
+    {
+     "fact": "该男子因性侵其13岁女儿被判刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "for defiling his 13-year-old daughter in the Western Region"
+    },
+    {
+     "fact": "案件发生在加纳西部区塔夸",
+     "evidence_field": "location",
+     "evidence_excerpt": "Tarkwa, Western Region"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳塔夸一父亲因性侵13岁女儿被判20年监禁",
+   "summary_zh": "加纳西部区塔夸巡回法院判处一名40岁泥瓦匠20年苦役监禁，罪名是性侵其13岁女儿。该消息目前为单一来源报道。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "Western Region",
+    "city": "Tarkwa",
+    "site": null,
+    "raw_text": "Tarkwa, Western Region"
+   },
+   "key_facts": [
+    {
+     "fact": "塔夸巡回法院判处一名40岁泥瓦匠20年苦役监禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Tarkwa Circuit Court has sentenced a 40-year-old mason to 20 years’ imprisonment in hard labour"
+    },
+    {
+     "fact": "该男子因性侵其13岁女儿被判刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "for defiling his 13-year-old daughter in the Western Region"
+    },
+    {
+     "fact": "案件发生在加纳西部区塔夸",
+     "evidence_field": "location",
+     "evidence_excerpt": "Tarkwa, Western Region"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_6184ffb2a31fa6c3",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

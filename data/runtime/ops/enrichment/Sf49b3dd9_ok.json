@@ -1,0 +1,114 @@
+{
+ "label": "Sf49b3dd9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "bda8dbee0b2db7b70a93b75a6b5dda5c556ec54e07f39740f63da620e093d4a5",
+ "tokens": {
+  "input_tokens": 2154,
+  "output_tokens": 303,
+  "total_tokens": 2457
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该任命消息目前仅有一个来源，尚未获得其他来源交叉验证\"]",
+    "after": "[\"该任命消息目前仅有一个来源，尚未获得其他来源交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "摩洛哥大选后任命首位女总理",
+   "summary_zh": "据加纳媒体MyJoyOnline报道，法蒂玛·扎赫拉·曼苏里被任命为摩洛哥首位女总理。其所属的中立派政党真实与现代党（PAM）在上周议会选举中赢得最多席位。该消息目前为单一来源，尚缺乏交叉验证。",
+   "event_type": "political_instability",
+   "country_iso3": "MAR",
+   "location": {
+    "country_iso3": "MAR",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "法蒂玛·扎赫拉·曼苏里被任命为摩洛哥首位女总理",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fatima Zahra El Mansouri has been named Morocco's first female prime minister"
+    },
+    {
+     "fact": "其所属真实与现代党在上周议会选举中赢得最多席位",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "after her centrist Authenticity and Modernity Party (PAM) won the most seats in last week's parliamentary elections"
+    },
+    {
+     "fact": "该报道目前为单一来源",
+     "evidence_field": "source_links",
+     "evidence_excerpt": "MyJoyOnline"
+    }
+   ],
+   "uncertainties": [
+    "该任命消息目前仅有一个来源，尚未获得其他来源交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "摩洛哥大选后任命首位女总理",
+   "summary_zh": "据加纳媒体MyJoyOnline报道，法蒂玛·扎赫拉·曼苏里被任命为摩洛哥首位女总理。其所属的中立派政党真实与现代党（PAM）在上周议会选举中赢得最多席位。该消息目前为单一来源，尚缺乏交叉验证。",
+   "event_type": "political_instability",
+   "country_iso3": "MAR",
+   "location": {
+    "country_iso3": "MAR",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "法蒂玛·扎赫拉·曼苏里被任命为摩洛哥首位女总理",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fatima Zahra El Mansouri has been named Morocco's first female prime minister"
+    },
+    {
+     "fact": "其所属真实与现代党在上周议会选举中赢得最多席位",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "after her centrist Authenticity and Modernity Party (PAM) won the most seats in last week's parliamentary elections"
+    },
+    {
+     "fact": "该报道目前为单一来源",
+     "evidence_field": "source_links",
+     "evidence_excerpt": "MyJoyOnline"
+    }
+   ],
+   "uncertainties": [
+    "该任命消息目前仅有一个来源，尚未获得其他来源交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_f5508db8f49b3dd9",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

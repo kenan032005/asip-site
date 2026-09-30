@@ -1,0 +1,114 @@
+{
+ "label": "Scb2c9744",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "acdc0ddc9734544f1c54b32a9239f442c84b53e98bb47270585020ef57a2004b",
+ "tokens": {
+  "input_tokens": 2163,
+  "output_tokens": 311,
+  "total_tokens": 2474
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该事件目前仅有一个来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"该事件目前仅有一个来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳一20岁手工采矿者因盗窃4300塞地被判24个月监禁",
+   "summary_zh": "加纳塔夸巡回法院判处一名20岁手工采矿者24个月苦役监禁，罪名是从塔夸火车站一间酒吧盗窃4300加纳塞地。该消息目前为单一来源报道。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "塔夸",
+    "site": "塔夸火车站一间酒吧",
+    "raw_text": "a drinking bar at the Tarkwa Railway Station"
+   },
+   "key_facts": [
+    {
+     "fact": "一名20岁手工采矿者被塔夸巡回法院判处24个月苦役监禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A 20-year-old small-scale miner has been sentenced to 24 months' imprisonment in hard labour by the Tarkwa Circuit Court"
+    },
+    {
+     "fact": "其罪名是从塔夸火车站一间酒吧盗窃4300加纳塞地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "for stealing GH¢4,300 from a drinking bar at the Tarkwa Railway Station"
+    },
+    {
+     "fact": "该报道目前为单一来源",
+     "evidence_field": "source_links",
+     "evidence_excerpt": "MyJoyOnline"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳一20岁手工采矿者因盗窃4300塞地被判24个月监禁",
+   "summary_zh": "加纳塔夸巡回法院判处一名20岁手工采矿者24个月苦役监禁，罪名是从塔夸火车站一间酒吧盗窃4300加纳塞地。该消息目前为单一来源报道。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "塔夸",
+    "site": "塔夸火车站一间酒吧",
+    "raw_text": "a drinking bar at the Tarkwa Railway Station"
+   },
+   "key_facts": [
+    {
+     "fact": "一名20岁手工采矿者被塔夸巡回法院判处24个月苦役监禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A 20-year-old small-scale miner has been sentenced to 24 months' imprisonment in hard labour by the Tarkwa Circuit Court"
+    },
+    {
+     "fact": "其罪名是从塔夸火车站一间酒吧盗窃4300加纳塞地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "for stealing GH¢4,300 from a drinking bar at the Tarkwa Railway Station"
+    },
+    {
+     "fact": "该报道目前为单一来源",
+     "evidence_field": "source_links",
+     "evidence_excerpt": "MyJoyOnline"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_324c1323cb2c9744",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

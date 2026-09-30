@@ -1,0 +1,104 @@
+{
+ "label": "Se3184661",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "02fc002b58fd3b5bc8b96732e9a39420f1086df44ce1ff7528a0c7ecbcf1d1b9",
+ "tokens": {
+  "input_tokens": 2147,
+  "output_tokens": 247,
+  "total_tokens": 2394
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该内容为单一来源的评论文章，尚缺乏交叉验证\"]",
+    "after": "[\"该内容为单一来源的评论文章，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "繁荣架构：第二幅图——为共享繁荣组织制度",
+   "summary_zh": "一篇评论文章探讨非洲如何组织制度以实现共享繁荣，指出非洲已掌握建设繁荣所需的大部分知识。该文为单一来源的评论性内容，未涉及具体安全事件。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "文章标题为《繁荣架构：第二幅图——为共享繁荣组织制度》",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Prosperity Architecture: Drawing II – Organising institutions for shared prosperity"
+    },
+    {
+     "fact": "作者在文中主张非洲已掌握建设繁荣所需的大部分知识",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In the first drawing of Prosperity Architecture, I argued that Africa already possesses much of the knowledge required to build prosperity."
+    }
+   ],
+   "uncertainties": [
+    "该内容为单一来源的评论文章，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "繁荣架构：第二幅图——为共享繁荣组织制度",
+   "summary_zh": "一篇评论文章探讨非洲如何组织制度以实现共享繁荣，指出非洲已掌握建设繁荣所需的大部分知识。该文为单一来源的评论性内容，未涉及具体安全事件。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "文章标题为《繁荣架构：第二幅图——为共享繁荣组织制度》",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Prosperity Architecture: Drawing II – Organising institutions for shared prosperity"
+    },
+    {
+     "fact": "作者在文中主张非洲已掌握建设繁荣所需的大部分知识",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In the first drawing of Prosperity Architecture, I argued that Africa already possesses much of the knowledge required to build prosperity."
+    }
+   ],
+   "uncertainties": [
+    "该内容为单一来源的评论文章，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_933f1633e3184661",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
