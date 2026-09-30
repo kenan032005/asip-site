@@ -1,0 +1,117 @@
+{
+ "label": "Se925eef6",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3b44b150789a63c55d76d5cfd0b7fbf614747045544785c1f6d14681995915c9",
+ "tokens": {
+  "input_tokens": 2583,
+  "output_tokens": 466,
+  "total_tokens": 3049
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚阿比亚州森林中发现人类遗骸",
+   "summary_zh": "尼日利亚警方9月26日在东南部阿比亚州多片森林中发现人类遗骸，据警方称这些28具头骨和骨骸可能是绑架受害者的遗骸，但死亡时间尚不清楚。嫌疑人已在警方和特种部队抵达时逃离，未有人被捕。国际特赦组织尼日利亚分部呼吁当局展开调查并追究责任人。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "阿比亚州",
+    "city": null,
+    "site": "森林",
+    "raw_text": "plusieurs forêts de l'État d'Abia"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚警方在阿比亚州多片森林中发现人类遗骸",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des restes humains ont été retrouvés samedi 26 septembre par la police dans plusieurs forêts de l'État d'Abia"
+    },
+    {
+     "fact": "据警方称，发现的28具头骨和骨骸可能是绑架受害者的遗骸",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon les déclarations de la police, ces 28 crânes et ossements pourraient être ceux de victimes de kidnapping, sans que l'on sache exactement à quand remontent les décès"
+    },
+    {
+     "fact": "嫌疑人逃离，未有人被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucune arrestation n'a pu être effectuée : les suspects ont fui à l'arrivée des policiers et des forces spéciales"
+    },
+    {
+     "fact": "国际特赦组织尼日利亚分部呼吁当局调查并追究责任人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Amnesty International Nigeria a exhorté les autorités à enquêter et à traduire en justice les responsables de ces exactions"
+    }
+   ],
+   "uncertainties": [
+    "这些遗骸是否确为绑架受害者尚未证实",
+    "死亡时间尚不清楚",
+    "目前仅一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚阿比亚州森林中发现人类遗骸",
+   "summary_zh": "尼日利亚警方9月26日在东南部阿比亚州多片森林中发现人类遗骸，据警方称这些28具头骨和骨骸可能是绑架受害者的遗骸，但死亡时间尚不清楚。嫌疑人已在警方和特种部队抵达时逃离，未有人被捕。国际特赦组织尼日利亚分部呼吁当局展开调查并追究责任人。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "阿比亚州",
+    "city": null,
+    "site": "森林",
+    "raw_text": "plusieurs forêts de l'État d'Abia"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚警方在阿比亚州多片森林中发现人类遗骸",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des restes humains ont été retrouvés samedi 26 septembre par la police dans plusieurs forêts de l'État d'Abia"
+    },
+    {
+     "fact": "据警方称，发现的28具头骨和骨骸可能是绑架受害者的遗骸",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon les déclarations de la police, ces 28 crânes et ossements pourraient être ceux de victimes de kidnapping, sans que l'on sache exactement à quand remontent les décès"
+    },
+    {
+     "fact": "嫌疑人逃离，未有人被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucune arrestation n'a pu être effectuée : les suspects ont fui à l'arrivée des policiers et des forces spéciales"
+    },
+    {
+     "fact": "国际特赦组织尼日利亚分部呼吁当局调查并追究责任人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Amnesty International Nigeria a exhorté les autorités à enquêter et à traduire en justice les responsables de ces exactions"
+    }
+   ],
+   "uncertainties": [
+    "这些遗骸是否确为绑架受害者尚未证实",
+    "死亡时间尚不清楚",
+    "目前仅一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_3b772fe6e925eef6",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

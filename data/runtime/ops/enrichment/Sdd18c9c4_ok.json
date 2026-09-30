@@ -1,0 +1,128 @@
+{
+ "label": "Sdd18c9c4",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "7c9a4e3320a92e47dc4f57898f2801dd4f0583d8d74dcb7d4c58875da2538b9f",
+ "tokens": {
+  "input_tokens": 2599,
+  "output_tokens": 540,
+  "total_tokens": 3139
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"丹格特否认补偿不足的指控，相关说法尚未得到独立证实\", \"环保组织称项目方尚未与当地社区直接沟通，该说法为单方面陈述\", \"抗议规模及参与人数未获确认\"]",
+    "after": "[\"丹格特否认补偿不足的指控，相关说法尚未得到独立证实\", \"环保组织称项目方尚未与当地社区直接沟通，该说法为单方面陈述\", \"抗议规模及参与人数未获确认\", \"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "非洲首富拟在肯尼亚启动炼油厂项目 当地土地抗议持续",
+   "summary_zh": "尼日利亚亿万富翁阿里科·丹格特与肯尼亚总统威廉·鲁托计划在肯尼亚北部海岸拉穆动工建设一座价值160亿美元的炼油厂，预计日处理原油70万桶，将成为东非最大工业项目。动工前，部分当地居民上街抗议，要求为炼油厂用地提供更多补偿。丹格特否认补偿不足的指控，称抗议是当地营销商和国际参与者玩的把戏，项目将按计划于2030年完工。",
+   "event_type": "civil_unrest",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": "拉穆郡",
+    "city": "拉穆",
+    "site": "炼油厂项目用地",
+    "raw_text": "Lamu, on Kenya's northern coast"
+   },
+   "key_facts": [
+    {
+     "fact": "丹格特与肯尼亚总统鲁托计划在拉穆动工建设价值160亿美元的炼油厂",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigerian billionaire Aliko Dangote and Kenya's President William Ruto are set to break ground on a $16bn (£12bn) oil refinery in Lamu, on Kenya's northern coast."
+    },
+    {
+     "fact": "部分当地居民上街抗议，要求为炼油厂用地提供更多补偿",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ahead of the launch, some local residents took to the streets to demand more compensation for land used for the refinery."
+    },
+    {
+     "fact": "丹格特否认补偿不足的指控，称抗议是当地营销商和国际参与者玩的把戏",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dangote, who is Africa's richest man, dismissed the protests as games played by local marketers and international players, insisting the refinery would go ahead and would be ready by 2030 as planned."
+    },
+    {
+     "fact": "环保组织Save Lamu对项目环境影响表示担忧，要求公开环评结果",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Walid Ali, the co-founder of the Save Lamu campaign group, told the BBC that they are concerned about the environmental impact the project could have on the local community."
+    }
+   ],
+   "uncertainties": [
+    "丹格特否认补偿不足的指控，相关说法尚未得到独立证实",
+    "环保组织称项目方尚未与当地社区直接沟通，该说法为单方面陈述",
+    "抗议规模及参与人数未获确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "非洲首富拟在肯尼亚启动炼油厂项目 当地土地抗议持续",
+   "summary_zh": "尼日利亚亿万富翁阿里科·丹格特与肯尼亚总统威廉·鲁托计划在肯尼亚北部海岸拉穆动工建设一座价值160亿美元的炼油厂，预计日处理原油70万桶，将成为东非最大工业项目。动工前，部分当地居民上街抗议，要求为炼油厂用地提供更多补偿。丹格特否认补偿不足的指控，称抗议是当地营销商和国际参与者玩的把戏，项目将按计划于2030年完工。",
+   "event_type": "civil_unrest",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": "拉穆郡",
+    "city": "拉穆",
+    "site": "炼油厂项目用地",
+    "raw_text": "Lamu, on Kenya's northern coast"
+   },
+   "key_facts": [
+    {
+     "fact": "丹格特与肯尼亚总统鲁托计划在拉穆动工建设价值160亿美元的炼油厂",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigerian billionaire Aliko Dangote and Kenya's President William Ruto are set to break ground on a $16bn (£12bn) oil refinery in Lamu, on Kenya's northern coast."
+    },
+    {
+     "fact": "部分当地居民上街抗议，要求为炼油厂用地提供更多补偿",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ahead of the launch, some local residents took to the streets to demand more compensation for land used for the refinery."
+    },
+    {
+     "fact": "丹格特否认补偿不足的指控，称抗议是当地营销商和国际参与者玩的把戏",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dangote, who is Africa's richest man, dismissed the protests as games played by local marketers and international players, insisting the refinery would go ahead and would be ready by 2030 as planned."
+    },
+    {
+     "fact": "环保组织Save Lamu对项目环境影响表示担忧，要求公开环评结果",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Walid Ali, the co-founder of the Save Lamu campaign group, told the BBC that they are concerned about the environmental impact the project could have on the local community."
+    }
+   ],
+   "uncertainties": [
+    "丹格特否认补偿不足的指控，相关说法尚未得到独立证实",
+    "环保组织称项目方尚未与当地社区直接沟通，该说法为单方面陈述",
+    "抗议规模及参与人数未获确认",
+    "据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_5bb54396dd18c9c4",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
