@@ -36,7 +36,7 @@ COLLECTION_SUMMARY = ps.OPS_DIR / "collection_summary.json"
 #: 背景：V1.0 实测同源集（103 配置 / 101 启用）需 741–780s，紧贴旧的 900s 硬超时；
 #: V1.1 增加逐源工作后 900s 不足，且硬超时会 SIGKILL 采集器、丢失全部统计。
 COLLECTION_WALL_CLOCK_LIMIT = int(
-    os.environ.get("ASIP_COLLECTION_WALL_CLOCK_SECONDS", "2400"))
+    os.environ.get("ASIP_COLLECTION_WALL_CLOCK_SECONDS", "3000"))
 
 #: 采集统计中读取的真实字段 → 对外指标名
 _STAT_FIELDS = {

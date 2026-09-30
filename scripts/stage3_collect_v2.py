@@ -323,7 +323,8 @@ def _record_rotation(country_cn, rot_off, attempted, total):
         print("  ! rotation write failed: %s" % e)
 
 
-def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=False, max_items=0, run_id=""):
+def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=False, max_items=0,
+                       run_id="", only_sids=None):
     """对单个国家执行完整采集。"""
     # C1C：国家 → 配置键改为由 config/countries 派生（原先硬编码 chad/niger）
     from countries import key_for as _cfg_key_for
@@ -331,6 +332,12 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
     run_id = run_id or os.environ.get("ASIP_RUN_ID", "local")
     country_cfg = load_country_cfg(cfg_key)
     sources = registry.by_country(country_cn)
+    # C8-4C3：仅执行指定执行键（全局相位预跑用；None=该国全部源）
+    if only_sids is not None:
+        _want = set(only_sids)
+        sources = [x for x in sources if str(x.get("source_id")) in _want]
+        if not sources:
+            return [], [], []
 
     print(f"\n{'='*60}")
     print(f"{country_cn} — {len(sources)} 个启用来源")
@@ -976,6 +983,14 @@ def write_stats(per_source, run_id, configured_sources=0, article_stats=None,
     except Exception:
         totals["gdelt_rate_limiter"] = None
     # C8-3 STEP 4：显式核算"非丢弃"的跳过，并给出真未计入数（应恒为 0）
+    # C8-4C3：相位遥测（内部指标，不影响公开 UI）
+    try:
+        for _p in range(5):
+            totals["PHASE%d_EXECUTIONS" % _p] = phase_stats[_p]["executions"]
+            totals["PHASE%d_SKIPPED_WALL_CLOCK" % _p] = phase_stats[_p]["skipped"]
+            totals["PHASE%d_ELAPSED_SECONDS" % _p] = round(phase_stats[_p]["elapsed"], 1)
+    except NameError:
+        pass
     totals["OTHER_SOURCE_ITEMS_SKIPPED"] = _osa
     totals["ACCOUNTED_ITEMS"] = _acct
     totals["TRUE_UNACCOUNTED_DROP"] = max(0, _tot - _acct - _osa)
@@ -1264,14 +1279,61 @@ def main():
     per_source = []
     all_errors = []
 
-    for cn in countries:
-        arts, ps, errs = run_country_pipeline(cn, registry, discoverer,
+    # ── C8-4C3：全局相位调度（两趟；不重写架构，仅改执行顺序）──
+    # PASS A = 相位 0/1/2（P0 尼日尔 → P1 保证核心 → 既有 Lane A）
+    # PASS B = 相位 3/4（普通国家/本地、展开 pan/global/背景）
+    # 执行键 = (国家, source_id)，用 done_keys 去重，绝不重复执行同一键。
+    import time as _t2
+    _phase = {}
+    for _cn in countries:
+        for _src in registry.by_country(_cn):
+            _sid = str(_src.get("source_id"))
+            if _cn == P0_NIGER_COUNTRY and _sid in P0_NIGER_IDS:
+                _ph = 0
+            elif _cn in P1_COUNTRIES_ORDER and _sid in P1_GUARANTEED_IDS:
+                _ph = 1
+            elif _sid in LANE_A_IDS:
+                _ph = 2
+            else:
+                _v = _src.get("country_scope")
+                _ph = 3 if len(_v if isinstance(_v, list) else ([_v] if _v else [])) <= 2 else 4
+            _phase[(_cn, _sid)] = _ph
+    done_keys = set()
+    phase_stats = {p: {"executions": 0, "skipped": 0, "elapsed": 0.0} for p in range(5)}
+
+    def _run_phase_pass(phases):
+        _ao, _po, _eo = [], [], []
+        for _cn in countries:
+            _keys = [s_ for (c_, s_), p_ in list(_phase.items())
+                     if c_ == _cn and p_ in phases and (c_, s_) not in done_keys]
+            if not _keys:
+                continue
+            _t0 = _t2.time()
+            _a, _p, _e = run_country_pipeline(_cn, registry, discoverer,
                                               dry=args.dry, fresh=args.fresh,
                                               max_items=args.max_items,
-                                              run_id=run_id)
-        all_articles.extend(arts)
-        per_source.extend(ps)
-        all_errors.extend(errs)
+                                              run_id=run_id, only_sids=_keys)
+            _el = _t2.time() - _t0
+            _phs = sorted({_phase[(_cn, k_)] for k_ in _keys})
+            for _p2 in _phs:
+                phase_stats[_p2]["elapsed"] += _el / max(1, len(_phs))
+                phase_stats[_p2]["executions"] += 1
+            done_keys.update((_cn, k_) for k_ in _keys)
+            _ao.extend(_a); _po.extend(_p); _eo.extend(_e)
+        return _ao, _po, _eo
+
+    _a, _p, _e = _run_phase_pass({0, 1, 2})
+    all_articles.extend(_a); per_source.extend(_p); all_errors.extend(_e)
+    _a, _p, _e = _run_phase_pass({3, 4})
+    all_articles.extend(_a); per_source.extend(_p); all_errors.extend(_e)
+    for _ps in per_source:
+        if str(_ps.get("status")) == "skipped_wall_clock":
+            _kk = (_ps.get("country"), str(_ps.get("source_id")))
+            if _kk in _phase:
+                phase_stats[_phase[_kk]]["skipped"] += 1
+    for _kv in _phase.items():
+        if _kv[0] not in done_keys:
+            phase_stats[_kv[1]]["skipped"] += 1
 
     # ── C1B §十七：事件级聚类（修复 G3：一稿一事件 → 同一事件可多来源印证）──
     # 只处理本次 run_id 的事件；canonical 阈值（independent_source_count>=2 AND

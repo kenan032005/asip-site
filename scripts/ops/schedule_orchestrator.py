@@ -430,10 +430,10 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
         nonlocal report_ran
         results[label] = {"task": task, "trigger": trigger, "ok": False, "detail": None}
         if task == "collection":
-            # C7-3 P1：外层超时 2760s > 采集器内层预算（wall-clock 2400s / 兜底 2700s），
+            # C7-3 P1：外层超时 3300s > 采集器内层预算（wall-clock 3000s / 兜底 3300s），
             # 让兜底优雅停机先于外层硬杀生效（修复实测 1858/2631/1817s 三轮被 1800s 硬杀）。
             ok = _run_script(["scripts/ops/collection_run.py", "--execute"], emit,
-                             timeout=2760)
+                             timeout=3300)
             state = _reload_state(state)
             if ok:
                 ps.record_run(state, "last_successful_collection", ok=True)
@@ -604,12 +604,12 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
     results["apply_enrichment"] = {
         "ok": _run_script(["scripts/ops/enrichment_bridge.py", "--apply"], emit),
         "detail": "enrichment_bridge"}
-    # C7-3 P1：采集外层超时必须 > 采集器内层预算（wall-clock 2400s / 兜底 2700s），
-    # 否则长采集轮次被外层硬杀（实测 1858/2631/1817s 三轮失败）。2760s 给兜底留出
+    # C7-3 P1：采集外层超时必须 > 采集器内层预算（wall-clock 3000s / 兜底 3300s），
+    # 否则长采集轮次被外层硬杀（实测 1858/2631/1817s 三轮失败）。3300s 给兜底留出
     # 优雅停机窗口，且 46min + 下游 AI/报告/导出 ≈ 仍在编排 job 的 60min 之内。
     results["news_localization"] = {
         "ok": _run_script(["scripts/ops/news_localization_run.py"], emit,
-                          timeout=2760),
+                          timeout=3300),
         "detail": "news_localization"}
     # C7-5：先重建 C1A 情报流视图（news_stream）。
     # 此前只有站点构建阶段才会重建它，编排器里的 data/views/news_stream.json 长期停在
