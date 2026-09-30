@@ -5,14 +5,22 @@
  "ATTRIBUTION_GATE": "PASS",
  "ANALYSIS_SCHEMA_GATE": "NOT_APPLICABLE_FALLBACK",
  "ANALYSIS_FACT_BOUNDARY_GATE": "NOT_APPLICABLE_FALLBACK",
- "FINAL_SCHEMA_GATE": "PASS",
- "final_schema_issues": [],
+ "FINAL_SCHEMA_GATE": "FAIL",
+ "final_schema_issues": [
+  "$.executive_summary[4].fact_summary: expected type string, got null",
+  "$.executive_summary[5].fact_summary: expected type string, got null",
+  "$.executive_summary[24].fact_summary: expected type string, got null",
+  "$.major_security_developments[4].fact_summary: expected type string, got null",
+  "$.major_security_developments[5].fact_summary: expected type string, got null"
+ ],
  "METADATA_GATE": "PASS",
- "issues": [],
+ "issues": [
+  "FINAL_SCHEMA_GATE"
+ ],
  "REPORT_BUSINESS_DATE_GATE": "PASS",
  "DAILY_PERIOD_FRESHNESS_GATE": "PASS",
- "expected_report_date": "2026-09-29",
- "actual_report_date": "2026-09-29",
+ "expected_report_date": "2026-09-30",
+ "actual_report_date": "2026-09-30",
  "TRIAL_FIXTURE_LEAK_GATE": "PASS",
  "REPORT_ID_DATE_CONSISTENCY_GATE": "PASS"
 }
