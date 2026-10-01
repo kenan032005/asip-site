@@ -1,0 +1,127 @@
+{
+ "label": "Sa7dce86e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d235e1033436786aab92bc153068101bcaf469479374e81288f978c456b90b05",
+ "tokens": {
+  "input_tokens": 2989,
+  "output_tokens": 585,
+  "total_tokens": 3574
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "休达：危机两个月后，众多移民面临警察暴力",
+   "summary_zh": "据RFI报道，自7月30日至31日超过7万人从摩洛哥涌入西班牙飞地休达两个月后，当地人道主义状况依然严峻。据马德里方面估计，9月底仍有至少2500人露宿街头，缺乏住宿与照护。报道称，除物资匮乏外，移民还面临西班牙安全部队的暴力，包括殴打和骚扰，西班牙政府已就逾百起类似暴力事件展开调查。",
+   "event_type": "civil_unrest",
+   "country_iso3": "ESP",
+   "location": {
+    "country_iso3": "ESP",
+    "admin1": null,
+    "city": "休达",
+    "site": "塔拉哈尔工业区",
+    "raw_text": "Ceuta, zone industrielle de Tarajal"
+   },
+   "key_facts": [
+    {
+     "fact": "超过7万人于7月30日至31日从摩洛哥涌入休达，两个月后人道状况仍严峻",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Deux mois après la migration massive de plus de 70 000 personnes depuis le Maroc vers Ceuta, les 30 et 31 juillet, la situation humanitaire reste catastrophique dans l'enclave espagnole."
+    },
+    {
+     "fact": "据马德里估计，9月底至少2500人仍露宿街头，缺乏住宿",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "au moins 2 500 personnes étaient toujours à la rue fin septembre, faute de place d'hébergement"
+    },
+    {
+     "fact": "报道称移民遭受西班牙安全部队暴力，包括殴打和骚扰",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ici, tout le monde dénonce le harcèlement des forces de sécurité espagnoles. La situation dégénère rapidement. Un militaire sort sa matraque, frappe un jeune homme et casse son téléphone."
+    },
+    {
+     "fact": "西班牙政府在逾百起类似暴力事件曝光后展开调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement espagnol a ouvert une enquête, après la révélation de plus d'une centaine de cas de violences similaires."
+    },
+    {
+     "fact": "据西班牙当局称，每天多达200名移民离开休达",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Jusqu'à 200 migrants quittent Ceuta chaque jour, selon les autorités espagnoles."
+    }
+   ],
+   "uncertainties": [
+    "移民人数及露宿街头人数为马德里方面的估计，尚未获独立核实",
+    "有关警察暴力的指控主要来自移民与志愿者证词，西班牙政府调查结果尚未公布",
+    "报道为单一来源（RFI），尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "休达：危机两个月后，众多移民面临警察暴力",
+   "summary_zh": "据RFI报道，自7月30日至31日超过7万人从摩洛哥涌入西班牙飞地休达两个月后，当地人道主义状况依然严峻。据马德里方面估计，9月底仍有至少2500人露宿街头，缺乏住宿与照护。报道称，除物资匮乏外，移民还面临西班牙安全部队的暴力，包括殴打和骚扰，西班牙政府已就逾百起类似暴力事件展开调查。",
+   "event_type": "civil_unrest",
+   "country_iso3": "ESP",
+   "location": {
+    "country_iso3": "ESP",
+    "admin1": null,
+    "city": "休达",
+    "site": "塔拉哈尔工业区",
+    "raw_text": "Ceuta, zone industrielle de Tarajal"
+   },
+   "key_facts": [
+    {
+     "fact": "超过7万人于7月30日至31日从摩洛哥涌入休达，两个月后人道状况仍严峻",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Deux mois après la migration massive de plus de 70 000 personnes depuis le Maroc vers Ceuta, les 30 et 31 juillet, la situation humanitaire reste catastrophique dans l'enclave espagnole."
+    },
+    {
+     "fact": "据马德里估计，9月底至少2500人仍露宿街头，缺乏住宿",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "au moins 2 500 personnes étaient toujours à la rue fin septembre, faute de place d'hébergement"
+    },
+    {
+     "fact": "报道称移民遭受西班牙安全部队暴力，包括殴打和骚扰",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ici, tout le monde dénonce le harcèlement des forces de sécurité espagnoles. La situation dégénère rapidement. Un militaire sort sa matraque, frappe un jeune homme et casse son téléphone."
+    },
+    {
+     "fact": "西班牙政府在逾百起类似暴力事件曝光后展开调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement espagnol a ouvert une enquête, après la révélation de plus d'une centaine de cas de violences similaires."
+    },
+    {
+     "fact": "据西班牙当局称，每天多达200名移民离开休达",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Jusqu'à 200 migrants quittent Ceuta chaque jour, selon les autorités espagnoles."
+    }
+   ],
+   "uncertainties": [
+    "移民人数及露宿街头人数为马德里方面的估计，尚未获独立核实",
+    "有关警察暴力的指控主要来自移民与志愿者证词，西班牙政府调查结果尚未公布",
+    "报道为单一来源（RFI），尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_f196a83ba7dce86e",
+ "disease_event_id": null,
+ "country_code": "MA"
+}
