@@ -1,0 +1,148 @@
+{
+ "label": "S52c7fefc",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c44cfa2a850265fdfc6fc2584b358d27a7527ec77834e303a1ce41f6af7ec56b",
+ "tokens": {
+  "input_tokens": 2432,
+  "output_tokens": 556,
+  "total_tokens": 2988
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"针对Brown的指控尚未经法院判决，其有罪或无罪有待司法程序确定\", \"另外六名被调查个人的身份和具体指控尚未在现有来源中确认\", \"2024年在Gateshead被捕男子的调查仍在进行，其仍处于警方保释中\"]",
+    "after": "[\"针对Brown的指控尚未经法院判决，其有罪或无罪有待司法程序确定\", \"另外六名被调查个人的身份和具体指控尚未在现有来源中确认\", \"2024年在Gateshead被捕男子的调查仍在进行，其仍处于警方保释中\", \"据The New Times报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "英国首次就卢旺达大屠杀相关指控起诉嫌疑人",
+   "summary_zh": "英国皇家检察署于2026年9月21日宣布，对现居英国的Vincent Bajinya（又名Vincent Brown）提出一项与种族灭绝相关行为的指控及六项与危害人类罪中的谋杀相关行为的指控。检方指控其在1994年4月于基加利指挥并煽动他人犯罪，Brown否认涉案。这是英国首次就针对图西族的种族灭绝提出指控，案件涉及卢旺达与英国之间长期的司法合作与引渡争议。",
+   "event_type": "other_security",
+   "country_iso3": "GBR",
+   "location": {
+    "country_iso3": "GBR",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Britain"
+   },
+   "key_facts": [
+    {
+     "fact": "英国皇家检察署于2026年9月21日宣布对Vincent Brown提出指控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "On September 21, 2026, the Crown Prosecution Service announced that Brown had been charged with one offence of conduct ancillary to genocide and six offences of conduct ancillary to murder as a crime against humanity."
+    },
+    {
+     "fact": "检方指控Bajinya于1994年4月在基加利指挥并煽动他人犯罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Prosecutors allege that Bajinya directed and incited crimes committed by others in Kigali in April 1994."
+    },
+    {
+     "fact": "Brown否认涉案",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Brown denies involvement."
+    },
+    {
+     "fact": "这是英国首次就针对图西族的种族灭绝提出指控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "These are the first charges brought in the United Kingdom relating to the Genocide against the Tutsi in Rwanda."
+    },
+    {
+     "fact": "英国法院此前以对卢旺达公平审判保障的担忧为由拒绝引渡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "British courts ultimately refused extradition, citing concerns about fair-trial safeguards in Rwanda."
+    },
+    {
+     "fact": "路透社报道警方仍在调查另外六名个人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Reuters reported on September 21 that police were continuing investigations into six other individuals, excluding Brown."
+    }
+   ],
+   "uncertainties": [
+    "针对Brown的指控尚未经法院判决，其有罪或无罪有待司法程序确定",
+    "另外六名被调查个人的身份和具体指控尚未在现有来源中确认",
+    "2024年在Gateshead被捕男子的调查仍在进行，其仍处于警方保释中"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "英国首次就卢旺达大屠杀相关指控起诉嫌疑人",
+   "summary_zh": "英国皇家检察署于2026年9月21日宣布，对现居英国的Vincent Bajinya（又名Vincent Brown）提出一项与种族灭绝相关行为的指控及六项与危害人类罪中的谋杀相关行为的指控。检方指控其在1994年4月于基加利指挥并煽动他人犯罪，Brown否认涉案。这是英国首次就针对图西族的种族灭绝提出指控，案件涉及卢旺达与英国之间长期的司法合作与引渡争议。",
+   "event_type": "other_security",
+   "country_iso3": "GBR",
+   "location": {
+    "country_iso3": "GBR",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Britain"
+   },
+   "key_facts": [
+    {
+     "fact": "英国皇家检察署于2026年9月21日宣布对Vincent Brown提出指控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "On September 21, 2026, the Crown Prosecution Service announced that Brown had been charged with one offence of conduct ancillary to genocide and six offences of conduct ancillary to murder as a crime against humanity."
+    },
+    {
+     "fact": "检方指控Bajinya于1994年4月在基加利指挥并煽动他人犯罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Prosecutors allege that Bajinya directed and incited crimes committed by others in Kigali in April 1994."
+    },
+    {
+     "fact": "Brown否认涉案",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Brown denies involvement."
+    },
+    {
+     "fact": "这是英国首次就针对图西族的种族灭绝提出指控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "These are the first charges brought in the United Kingdom relating to the Genocide against the Tutsi in Rwanda."
+    },
+    {
+     "fact": "英国法院此前以对卢旺达公平审判保障的担忧为由拒绝引渡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "British courts ultimately refused extradition, citing concerns about fair-trial safeguards in Rwanda."
+    },
+    {
+     "fact": "路透社报道警方仍在调查另外六名个人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Reuters reported on September 21 that police were continuing investigations into six other individuals, excluding Brown."
+    }
+   ],
+   "uncertainties": [
+    "针对Brown的指控尚未经法院判决，其有罪或无罪有待司法程序确定",
+    "另外六名被调查个人的身份和具体指控尚未在现有来源中确认",
+    "2024年在Gateshead被捕男子的调查仍在进行，其仍处于警方保释中",
+    "据The New Times报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_6d96015352c7fefc",
+ "disease_event_id": null,
+ "country_code": "RW"
+}

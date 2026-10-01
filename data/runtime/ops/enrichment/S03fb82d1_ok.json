@@ -1,0 +1,101 @@
+{
+ "label": "S03fb82d1",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c77f20b4d4f7c69d27eab4197643184bb1385cd4a8a5744f39dc0e912d41e78a",
+ "tokens": {
+  "input_tokens": 2141,
+  "output_tokens": 246,
+  "total_tokens": 2387
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据MyJoyOnline报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "CEO每日洞察系列：第四季度为关键执行期",
+   "summary_zh": "加纳媒体MyJoyOnline发布“CEO每日洞察系列”内容，指出第四季度是CEO的关键时期，需加速执行、追求有意义的增长、强化领导效能，并为2027年的机遇与挑战做好准备。该内容为商业管理类资讯，不涉及安全事件。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "第四季度被视为CEO加速执行与追求增长的关键时期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The final quarter is a critical period for CEOs. It is a time to accelerate execution, pursue meaningful growth, strengthen leadership effectiveness"
+    },
+    {
+     "fact": "内容建议为2027年的机遇与挑战提前准备组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "begin preparing the organization for the opportunities and challenges of 2027"
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "none",
+   "classification_confidence": 90
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "CEO每日洞察系列：第四季度为关键执行期",
+   "summary_zh": "加纳媒体MyJoyOnline发布“CEO每日洞察系列”内容，指出第四季度是CEO的关键时期，需加速执行、追求有意义的增长、强化领导效能，并为2027年的机遇与挑战做好准备。该内容为商业管理类资讯，不涉及安全事件。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "第四季度被视为CEO加速执行与追求增长的关键时期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The final quarter is a critical period for CEOs. It is a time to accelerate execution, pursue meaningful growth, strengthen leadership effectiveness"
+    },
+    {
+     "fact": "内容建议为2027年的机遇与挑战提前准备组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "begin preparing the organization for the opportunities and challenges of 2027"
+    }
+   ],
+   "uncertainties": [
+    "据MyJoyOnline报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 90
+  }
+ },
+ "event_id": "EVT_8f1f542a03fb82d1",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

@@ -1,0 +1,166 @@
+{
+ "label": "S44472dc5",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "73193ac2bb07e6b859b5e90f208d240cca5f2daff53dbfc4c253947616b636b3",
+ "tokens": {
+  "input_tokens": 2775,
+  "output_tokens": 809,
+  "total_tokens": 3584
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"事件目前仅有一个来源（RFI）报道，尚未获得交叉验证\", \"CNC称该决定基于媒体内容且“没有任何政治因素”，但L'Anecdote集团及媒体工会对此提出异议，双方说法存在分歧\"]",
+    "after": "[\"事件目前仅有一个来源（RFI）报道，尚未获得交叉验证\", \"CNC称该决定基于媒体内容且“没有任何政治因素”，但L'Anecdote集团及媒体工会对此提出异议，双方说法存在分歧\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "喀麦隆国家通信委员会暂停Vision 4电视台，L'Anecdote集团指其“蓄意打压”",
+   "summary_zh": "喀麦隆国家通信委员会（CNC）于9月29日暂时吊销Vision 4电视台的播出许可，该台隶属于商人让-皮埃尔·阿穆古·贝林加的L'Anecdote集团，后者是2023年电台主持人马丁内斯·佐戈遇害案的主要被告之一。CNC称该台在报道庭审时存在多项违规。L'Anecdote集团则指责这是“蓄意打压”。",
+   "event_type": "other_security",
+   "country_iso3": "CMR",
+   "location": {
+    "country_iso3": "CMR",
+    "admin1": null,
+    "city": "雅温得",
+    "site": null,
+    "raw_text": "Yaoundé, Cameroun"
+   },
+   "key_facts": [
+    {
+     "fact": "喀麦隆国家通信委员会（CNC）于9月29日暂时吊销Vision 4电视台的播出许可",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Conseil national de la communication (CNC) a suspendu temporairement, mardi 29 septembre, la chaîne Vision 4"
+    },
+    {
+     "fact": "Vision 4隶属于商人让-皮埃尔·阿穆古·贝林加的L'Anecdote集团，后者是2023年马丁内斯·佐戈遇害案的主要被告之一",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la chaîne Vision 4, qui appartient au groupe L'Anecdote de l'homme d'affaires Jean-Pierre Amougou Belinga, l'un des principaux accusés dans l'assassinat de l'animateur radio Martinez Zogo en 2023"
+    },
+    {
+     "fact": "CNC称该台在报道庭审时存在多项违规",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le CNC invoque plusieurs infractions relevées dans la couverture du procès"
+    },
+    {
+     "fact": "L'Anecdote集团指责这是“蓄意打压”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le groupe dénonce un acharnement"
+    },
+    {
+     "fact": "该电视台被暂停播出一个月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la chaîne de télévision a été suspendue pour un mois"
+    },
+    {
+     "fact": "记者Martial Owona的停职期从三个月延长至六个月，Boney Philippe被停职一个月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le CNC a également prolongé de trois à six mois la suspension du journaliste Martial Owona... Boney Philippe, directeur des médias du groupe L'Anecdote, écope également d'un mois de suspension"
+    },
+    {
+     "fact": "媒体从业者工会主席Thierry Eba认为该处罚不成比例，构成对新闻自由的严重阻碍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la sanction est jugée disproportionnée par Thierry Eba, président du Syndicat des professionnels des médias : « Cette mesure constitue une entrave grave au principe fondamental de la liberté de la presse »"
+    },
+    {
+     "fact": "一名CNC官员向RFI表示，该决定“没有任何政治因素”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un responsable du CNC confie à RFI que seule une accumulation de fautes a conduit à la suspension du média de Jean-Pierre Amougou Belinga. Il ajoute qu'il n'y a « rien de politique » dans cette décision"
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（RFI）报道，尚未获得交叉验证",
+    "CNC称该决定基于媒体内容且“没有任何政治因素”，但L'Anecdote集团及媒体工会对此提出异议，双方说法存在分歧"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "喀麦隆国家通信委员会暂停Vision 4电视台，L'Anecdote集团指其“蓄意打压”",
+   "summary_zh": "喀麦隆国家通信委员会（CNC）于9月29日暂时吊销Vision 4电视台的播出许可，该台隶属于商人让-皮埃尔·阿穆古·贝林加的L'Anecdote集团，后者是2023年电台主持人马丁内斯·佐戈遇害案的主要被告之一。CNC称该台在报道庭审时存在多项违规。L'Anecdote集团则指责这是“蓄意打压”。",
+   "event_type": "other_security",
+   "country_iso3": "CMR",
+   "location": {
+    "country_iso3": "CMR",
+    "admin1": null,
+    "city": "雅温得",
+    "site": null,
+    "raw_text": "Yaoundé, Cameroun"
+   },
+   "key_facts": [
+    {
+     "fact": "喀麦隆国家通信委员会（CNC）于9月29日暂时吊销Vision 4电视台的播出许可",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Conseil national de la communication (CNC) a suspendu temporairement, mardi 29 septembre, la chaîne Vision 4"
+    },
+    {
+     "fact": "Vision 4隶属于商人让-皮埃尔·阿穆古·贝林加的L'Anecdote集团，后者是2023年马丁内斯·佐戈遇害案的主要被告之一",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la chaîne Vision 4, qui appartient au groupe L'Anecdote de l'homme d'affaires Jean-Pierre Amougou Belinga, l'un des principaux accusés dans l'assassinat de l'animateur radio Martinez Zogo en 2023"
+    },
+    {
+     "fact": "CNC称该台在报道庭审时存在多项违规",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le CNC invoque plusieurs infractions relevées dans la couverture du procès"
+    },
+    {
+     "fact": "L'Anecdote集团指责这是“蓄意打压”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le groupe dénonce un acharnement"
+    },
+    {
+     "fact": "该电视台被暂停播出一个月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la chaîne de télévision a été suspendue pour un mois"
+    },
+    {
+     "fact": "记者Martial Owona的停职期从三个月延长至六个月，Boney Philippe被停职一个月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le CNC a également prolongé de trois à six mois la suspension du journaliste Martial Owona... Boney Philippe, directeur des médias du groupe L'Anecdote, écope également d'un mois de suspension"
+    },
+    {
+     "fact": "媒体从业者工会主席Thierry Eba认为该处罚不成比例，构成对新闻自由的严重阻碍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la sanction est jugée disproportionnée par Thierry Eba, président du Syndicat des professionnels des médias : « Cette mesure constitue une entrave grave au principe fondamental de la liberté de la presse »"
+    },
+    {
+     "fact": "一名CNC官员向RFI表示，该决定“没有任何政治因素”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un responsable du CNC confie à RFI que seule une accumulation de fautes a conduit à la suspension du média de Jean-Pierre Amougou Belinga. Il ajoute qu'il n'y a « rien de politique » dans cette décision"
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（RFI）报道，尚未获得交叉验证",
+    "CNC称该决定基于媒体内容且“没有任何政治因素”，但L'Anecdote集团及媒体工会对此提出异议，双方说法存在分歧",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_715a87ef44472dc5",
+ "disease_event_id": null,
+ "country_code": "CM"
+}

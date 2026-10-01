@@ -1,0 +1,141 @@
+{
+ "label": "Se1a7b7af",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "726b5e50ffee473a0ecfa75bcc3e7bcfede95b5f24fbc63cb4e0c25f5e07dcc4",
+ "tokens": {
+  "input_tokens": 2023,
+  "output_tokens": 545,
+  "total_tokens": 2568
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "埃塞俄比亚：联邦军队在提格雷推进，据报52名平民丧生",
+   "summary_zh": "埃塞俄比亚北部冲突加剧，联邦军队在重新夺回战略城镇阿拉马塔后继续向提格雷推进。医院消息人士告诉BBC，阿拉马塔周边三天战斗中至少有52名平民丧生，另有700多名伤者在提格雷各地由无国界医生支持的医院接受治疗。冲突还蔓延至邻近的阿法尔和阿姆哈拉地区，通信中断使独立核实战场说法变得困难。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷",
+    "city": "阿拉马塔",
+    "site": null,
+    "raw_text": "Alamata, Tigray, northern Ethiopia"
+   },
+   "key_facts": [
+    {
+     "fact": "联邦军队在重新夺回阿拉马塔后继续向提格雷推进",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "federal troops pushing further into Tigray after recapturing the strategic town of Alamata"
+    },
+    {
+     "fact": "医院消息人士告诉BBC，阿拉马塔周边三天战斗中至少有52名平民丧生",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Hospital sources told the BBC that at least 52 civilians were killed during three days of fighting around Alamata"
+    },
+    {
+     "fact": "重炮据报击中居民区和一处市场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "heavy artillery reportedly striking residential areas and a market"
+    },
+    {
+     "fact": "提格雷各地由无国界医生支持的医院已治疗700多名伤者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than 700 wounded people have also been treated at hospitals supported by Médecins Sans Frontières across Tigray"
+    },
+    {
+     "fact": "冲突蔓延至邻近的阿法尔和阿姆哈拉地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The conflict is also spreading beyond Tigray, with fighting reported in neighbouring Afar and Amhara regions"
+    },
+    {
+     "fact": "通信中断使独立核实战场说法变得困难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Communications remain disrupted, making independent verification of battlefield claims difficult"
+    }
+   ],
+   "uncertainties": [
+    "平民死亡人数为医院消息人士向BBC提供的说法，尚未获得独立核实",
+    "重炮击中居民区和市场的说法为据报，未获确认",
+    "科雷姆周边发生冲突的说法为据报",
+    "战场说法因通信中断而难以独立核实",
+    "目前仅一个来源（Africanews）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "埃塞俄比亚：联邦军队在提格雷推进，据报52名平民丧生",
+   "summary_zh": "埃塞俄比亚北部冲突加剧，联邦军队在重新夺回战略城镇阿拉马塔后继续向提格雷推进。医院消息人士告诉BBC，阿拉马塔周边三天战斗中至少有52名平民丧生，另有700多名伤者在提格雷各地由无国界医生支持的医院接受治疗。冲突还蔓延至邻近的阿法尔和阿姆哈拉地区，通信中断使独立核实战场说法变得困难。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷",
+    "city": "阿拉马塔",
+    "site": null,
+    "raw_text": "Alamata, Tigray, northern Ethiopia"
+   },
+   "key_facts": [
+    {
+     "fact": "联邦军队在重新夺回阿拉马塔后继续向提格雷推进",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "federal troops pushing further into Tigray after recapturing the strategic town of Alamata"
+    },
+    {
+     "fact": "医院消息人士告诉BBC，阿拉马塔周边三天战斗中至少有52名平民丧生",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Hospital sources told the BBC that at least 52 civilians were killed during three days of fighting around Alamata"
+    },
+    {
+     "fact": "重炮据报击中居民区和一处市场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "heavy artillery reportedly striking residential areas and a market"
+    },
+    {
+     "fact": "提格雷各地由无国界医生支持的医院已治疗700多名伤者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than 700 wounded people have also been treated at hospitals supported by Médecins Sans Frontières across Tigray"
+    },
+    {
+     "fact": "冲突蔓延至邻近的阿法尔和阿姆哈拉地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The conflict is also spreading beyond Tigray, with fighting reported in neighbouring Afar and Amhara regions"
+    },
+    {
+     "fact": "通信中断使独立核实战场说法变得困难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Communications remain disrupted, making independent verification of battlefield claims difficult"
+    }
+   ],
+   "uncertainties": [
+    "平民死亡人数为医院消息人士向BBC提供的说法，尚未获得独立核实",
+    "重炮击中居民区和市场的说法为据报，未获确认",
+    "科雷姆周边发生冲突的说法为据报",
+    "战场说法因通信中断而难以独立核实",
+    "目前仅一个来源（Africanews）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_b9f5b574e1a7b7af",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

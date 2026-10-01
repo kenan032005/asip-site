@@ -1,0 +1,117 @@
+{
+ "label": "S4dc215b8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "483b1684d91ae9d89b075cfa67246d254e1a56e9f6d9b0e11e660a69a04b0847",
+ "tokens": {
+  "input_tokens": 2141,
+  "output_tokens": 493,
+  "total_tokens": 2634
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "津巴布韦商人Wicknell Chivayo与妻子在直升机坠毁中遇难",
+   "summary_zh": "津巴布韦知名商人Wicknell Chivayo及其妻子Lucy Muteke在哈拉雷以东的直升机坠毁事故中遇难，机上共六人全部死亡。警方称直升机在距首都约72公里的Marondera地区坠毁并起火，无人生还。警方在X平台简短声明中确认机上载有六人，但未能立即确认遇难者身份。",
+   "event_type": "other_security",
+   "country_iso3": "ZWE",
+   "location": {
+    "country_iso3": "ZWE",
+    "admin1": null,
+    "city": "Marondera",
+    "site": null,
+    "raw_text": "Marondera area, about 72 kilometres from the capital (Harare)"
+   },
+   "key_facts": [
+    {
+     "fact": "津巴布韦商人Wicknell Chivayo与妻子Lucy Muteke在直升机坠毁中遇难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Prominent Zimbabwean businessman Wicknell Chivayo and his wife, Lucy Muteke, were among six people killed when a helicopter crashed east of Harare on Wednesday."
+    },
+    {
+     "fact": "直升机在距首都约72公里的Marondera地区坠毁并起火，无人生还",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Police said the aircraft went down in the Marondera area, about 72 kilometres from the capital, at around 3 p.m. local time. The helicopter burst into flames and there were no survivors."
+    },
+    {
+     "fact": "警方称机上载有六人，但未能立即确认遇难者身份",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Police confirmed in a short statement on X that the helicopter was carrying six occupants but could not immediately confirm the identities of the victims."
+    },
+    {
+     "fact": "事故发生在哈拉雷以东，当地时间为周三下午3时左右",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "crashed east of Harare on Wednesday ... at around 3 p.m. local time"
+    }
+   ],
+   "uncertainties": [
+    "遇难者身份尚未获警方立即确认",
+    "事件时间存在差异（冲突标记：time_difference）",
+    "目前为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "津巴布韦商人Wicknell Chivayo与妻子在直升机坠毁中遇难",
+   "summary_zh": "津巴布韦知名商人Wicknell Chivayo及其妻子Lucy Muteke在哈拉雷以东的直升机坠毁事故中遇难，机上共六人全部死亡。警方称直升机在距首都约72公里的Marondera地区坠毁并起火，无人生还。警方在X平台简短声明中确认机上载有六人，但未能立即确认遇难者身份。",
+   "event_type": "other_security",
+   "country_iso3": "ZWE",
+   "location": {
+    "country_iso3": "ZWE",
+    "admin1": null,
+    "city": "Marondera",
+    "site": null,
+    "raw_text": "Marondera area, about 72 kilometres from the capital (Harare)"
+   },
+   "key_facts": [
+    {
+     "fact": "津巴布韦商人Wicknell Chivayo与妻子Lucy Muteke在直升机坠毁中遇难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Prominent Zimbabwean businessman Wicknell Chivayo and his wife, Lucy Muteke, were among six people killed when a helicopter crashed east of Harare on Wednesday."
+    },
+    {
+     "fact": "直升机在距首都约72公里的Marondera地区坠毁并起火，无人生还",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Police said the aircraft went down in the Marondera area, about 72 kilometres from the capital, at around 3 p.m. local time. The helicopter burst into flames and there were no survivors."
+    },
+    {
+     "fact": "警方称机上载有六人，但未能立即确认遇难者身份",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Police confirmed in a short statement on X that the helicopter was carrying six occupants but could not immediately confirm the identities of the victims."
+    },
+    {
+     "fact": "事故发生在哈拉雷以东，当地时间为周三下午3时左右",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "crashed east of Harare on Wednesday ... at around 3 p.m. local time"
+    }
+   ],
+   "uncertainties": [
+    "遇难者身份尚未获警方立即确认",
+    "事件时间存在差异（冲突标记：time_difference）",
+    "目前为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_0e1490ea4dc215b8",
+ "disease_event_id": null,
+ "country_code": "ZW"
+}

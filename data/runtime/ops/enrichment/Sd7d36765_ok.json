@@ -1,0 +1,117 @@
+{
+ "label": "Sd7d36765",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "70e99ff2fba5a980731a4e7be327d562ea4634f7287728cc74d26b1cc18f9733",
+ "tokens": {
+  "input_tokens": 2745,
+  "output_tokens": 572,
+  "total_tokens": 3317
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔军队与警察高层会晤，加强安全战线协调",
+   "summary_zh": "2026年9月30日，尼日尔武装部队总参谋长与警察总局局长在尼亚美举行战略会晤，标志着国防与安全部队协调进入新阶段。此次会晤背景是2026年8月发生的未遂兵变及总统蒂亚尼主导的军事指挥层大调整。双方强调加强军队与警察在边境和高风险地区的协同，以应对恐怖主义、跨境犯罪等混合威胁。",
+   "event_type": "political_instability",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": null,
+    "raw_text": "Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔武装部队总参谋长与警察总局局长于2026年9月30日在尼亚美举行战略会晤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une visite de prise de contact à portée stratégique a eu lieu , le 30 septembre 2026 à Niamey, entre le chef d’état major des armées et le DG de la police"
+    },
+    {
+     "fact": "会晤背景是2026年8月发生的未遂兵变及总统蒂亚尼主导的军事指挥层大调整",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette rencontre, qualifiée d’historique par certains observateurs, intervient dans un contexte marqué par la récente tentative de mutinerie d’août 2026 et par le profond remaniement du commandement militaire décidé par le président de la République"
+    },
+    {
+     "fact": "双方讨论加强军队与警察在边境和高风险地区的协调",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le commissaire général de police Assahaba Ebankawel a réaffirmé l’engagement de la Police nationale à œuvrer en étroite collaboration avec l’Armée, notamment dans les zones frontalières et les régions à risque sécuritaire élevé"
+    },
+    {
+     "fact": "会晤旨在应对恐怖主义、跨境犯罪和局部叛乱等混合威胁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la lutte contre les menaces hybrides, terrorisme, criminalité transfrontalière et insurrections locales exige une réponse unifiée et parfaitement coordonnée"
+    }
+   ],
+   "uncertainties": [
+    "会晤被部分观察者称为“历史性”，但该评价属主观判断，尚未获独立证实",
+    "此次会晤的实际操作效果尚待观察",
+    "信息目前仅来自单一来源（Tamtaminfo）"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔军队与警察高层会晤，加强安全战线协调",
+   "summary_zh": "2026年9月30日，尼日尔武装部队总参谋长与警察总局局长在尼亚美举行战略会晤，标志着国防与安全部队协调进入新阶段。此次会晤背景是2026年8月发生的未遂兵变及总统蒂亚尼主导的军事指挥层大调整。双方强调加强军队与警察在边境和高风险地区的协同，以应对恐怖主义、跨境犯罪等混合威胁。",
+   "event_type": "political_instability",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": null,
+    "raw_text": "Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔武装部队总参谋长与警察总局局长于2026年9月30日在尼亚美举行战略会晤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une visite de prise de contact à portée stratégique a eu lieu , le 30 septembre 2026 à Niamey, entre le chef d’état major des armées et le DG de la police"
+    },
+    {
+     "fact": "会晤背景是2026年8月发生的未遂兵变及总统蒂亚尼主导的军事指挥层大调整",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette rencontre, qualifiée d’historique par certains observateurs, intervient dans un contexte marqué par la récente tentative de mutinerie d’août 2026 et par le profond remaniement du commandement militaire décidé par le président de la République"
+    },
+    {
+     "fact": "双方讨论加强军队与警察在边境和高风险地区的协调",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le commissaire général de police Assahaba Ebankawel a réaffirmé l’engagement de la Police nationale à œuvrer en étroite collaboration avec l’Armée, notamment dans les zones frontalières et les régions à risque sécuritaire élevé"
+    },
+    {
+     "fact": "会晤旨在应对恐怖主义、跨境犯罪和局部叛乱等混合威胁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la lutte contre les menaces hybrides, terrorisme, criminalité transfrontalière et insurrections locales exige une réponse unifiée et parfaitement coordonnée"
+    }
+   ],
+   "uncertainties": [
+    "会晤被部分观察者称为“历史性”，但该评价属主观判断，尚未获独立证实",
+    "此次会晤的实际操作效果尚待观察",
+    "信息目前仅来自单一来源（Tamtaminfo）"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_fd5dfa5ed7d36765",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

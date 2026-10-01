@@ -1,0 +1,124 @@
+{
+ "label": "S9b9dbf31",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e2b1648e9d96e1f7779de57530dfa2b954fc502c0c842919796361ba525d30e3",
+ "tokens": {
+  "input_tokens": 2933,
+  "output_tokens": 396,
+  "total_tokens": 3329
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（RFI Afrique）报道，尚缺乏交叉验证\"]",
+    "after": "[\"目前仅一个来源（RFI Afrique）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "南非：系列杀害女性事件后，各协会呼吁司法改革",
+   "summary_zh": "南非约翰内斯堡东部发生一系列杀害女性案件，引发民众和协会要求回应。9月29日，总统拉马福萨承认政府在打击性别暴力方面存在失败，要求对未处理案件进行审计并在三个月内提出推进计划。但各协会认为需要进行司法系统的深度改革。",
+   "event_type": "other_security",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": null,
+    "city": "约翰内斯堡",
+    "site": null,
+    "raw_text": "à l'est de Johannesburg"
+   },
+   "key_facts": [
+    {
+     "fact": "南非约翰内斯堡东部发生一系列杀害女性案件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La série de meurtres de femmes à l'est de Johannesburg scandalise l'Afrique du Sud"
+    },
+    {
+     "fact": "总统拉马福萨承认政府在打击性别暴力方面存在失败",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le président Cyril Ramaphosa a reconnu les échecs de son gouvernement dans la lutte contre les violences basées sur le genre"
+    },
+    {
+     "fact": "拉马福萨要求对未处理案件进行审计并在三个月内提出推进计划",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il réclame un audit des affaires non traitées par la justice et un plan d'ici trois mois pour les faire progresser"
+    },
+    {
+     "fact": "各协会呼吁进行司法系统的深度改革",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "pour les associations, c'est une réforme en profondeur du système judiciaire qui est nécessaire"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（RFI Afrique）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "南非：系列杀害女性事件后，各协会呼吁司法改革",
+   "summary_zh": "南非约翰内斯堡东部发生一系列杀害女性案件，引发民众和协会要求回应。9月29日，总统拉马福萨承认政府在打击性别暴力方面存在失败，要求对未处理案件进行审计并在三个月内提出推进计划。但各协会认为需要进行司法系统的深度改革。",
+   "event_type": "other_security",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": null,
+    "city": "约翰内斯堡",
+    "site": null,
+    "raw_text": "à l'est de Johannesburg"
+   },
+   "key_facts": [
+    {
+     "fact": "南非约翰内斯堡东部发生一系列杀害女性案件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La série de meurtres de femmes à l'est de Johannesburg scandalise l'Afrique du Sud"
+    },
+    {
+     "fact": "总统拉马福萨承认政府在打击性别暴力方面存在失败",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le président Cyril Ramaphosa a reconnu les échecs de son gouvernement dans la lutte contre les violences basées sur le genre"
+    },
+    {
+     "fact": "拉马福萨要求对未处理案件进行审计并在三个月内提出推进计划",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il réclame un audit des affaires non traitées par la justice et un plan d'ici trois mois pour les faire progresser"
+    },
+    {
+     "fact": "各协会呼吁进行司法系统的深度改革",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "pour les associations, c'est une réforme en profondeur du système judiciaire qui est nécessaire"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（RFI Afrique）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_e207ad8b9b9dbf31",
+ "disease_event_id": null,
+ "country_code": "ZA"
+}
