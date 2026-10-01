@@ -1,0 +1,96 @@
+{
+ "label": "S949315f7",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1539090327ad5ddc9e0f1ea065dd63a1f007ffef5b705240094cafe1c6a13cbf",
+ "tokens": {
+  "input_tokens": 2336,
+  "output_tokens": 258,
+  "total_tokens": 2594
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\", \"事件时间存在差异（16:12:35至17:23:41）\"]",
+    "after": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\", \"事件时间存在差异（16:12:35至17:23:41）\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "摩洛哥Attijariwafa银行收购Société Générale加纳多数股权",
+   "summary_zh": "Société Générale集团宣布与泛非银行集团Attijariwafa Bank达成协议，出售其在Société Générale加纳的多数股权。该消息由单一来源MyJoyOnline报道，尚缺乏交叉验证。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "Société Générale集团宣布与Attijariwafa Bank达成协议，出售其在Société Générale加纳的多数股权",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Société Générale Group has announced an agreement with Pan-African banking group Attijariwafa Bank to sell its majority stake in Société Générale Ghana."
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证",
+    "事件时间存在差异（16:12:35至17:23:41）"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "摩洛哥Attijariwafa银行收购Société Générale加纳多数股权",
+   "summary_zh": "Société Générale集团宣布与泛非银行集团Attijariwafa Bank达成协议，出售其在Société Générale加纳的多数股权。该消息由单一来源MyJoyOnline报道，尚缺乏交叉验证。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "Société Générale集团宣布与Attijariwafa Bank达成协议，出售其在Société Générale加纳的多数股权",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Société Générale Group has announced an agreement with Pan-African banking group Attijariwafa Bank to sell its majority stake in Société Générale Ghana."
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证",
+    "事件时间存在差异（16:12:35至17:23:41）",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_2e06e854949315f7",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

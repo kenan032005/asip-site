@@ -1,0 +1,130 @@
+{
+ "label": "Sabe6b4f7",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "18f74ec91d6f70046caaa41b3340c3726b7ac0e51c32efba3f1734ca2ddc2307",
+ "tokens": {
+  "input_tokens": 2959,
+  "output_tokens": 485,
+  "total_tokens": 3444
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"受损财产所有者是否获得赔偿尚未明确\", \"赔偿对象是业主还是租户尚未说明\", \"灾民能否在10月5日开学前找到新住房并完成子女入学登记尚不确定\", \"该事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证\"]",
+    "after": "[\"受损财产所有者是否获得赔偿尚未明确\", \"赔偿对象是业主还是租户尚未说明\", \"灾民能否在10月5日开学前找到新住房并完成子女入学登记尚不确定\", \"该事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "几内亚：科纳克里垃圾场垮塌一个月后，灾民安置工作启动",
+   "summary_zh": "科纳克里Dar-es-Salaam垃圾场垮塌事故发生一个月后，造成36人死亡，随后该街区居民被清退。政府正组织安置约2000名暂住在学校中的灾民，每户家长获得2100万几内亚法郎用于租房。但当局尚未就受损财产所有者可能的赔偿问题表态，引发业主担忧。",
+   "event_type": "other_security",
+   "country_iso3": "GIN",
+   "location": {
+    "country_iso3": "GIN",
+    "admin1": null,
+    "city": "科纳克里",
+    "site": "Dar-es-Salaam垃圾场",
+    "raw_text": "la décharge de Dar-es-Salaam, à Conakry"
+   },
+   "key_facts": [
+    {
+     "fact": "科纳克里Dar-es-Salaam垃圾场垮塌造成36人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un mois après l'effondrement de la décharge de Dar-es-Salaam, à Conakry, qui a fait 36 morts"
+    },
+    {
+     "fact": "政府正组织约2000名灾民从学校安置点迁出",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement organise le départ des près de 2 000 sinistrés hébergés dans des écoles"
+    },
+    {
+     "fact": "每户家长获得2100万几内亚法郎（约2100欧元）用于租房",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement octroie donc 21 millions de francs guinéens (2 100 euros) à chaque chef de famille"
+    },
+    {
+     "fact": "当局尚未就受损财产所有者可能的赔偿问题表态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les autorités ne se sont pas exprimées sur l'indemnisation éventuelle des propriétaires de biens détruits"
+    }
+   ],
+   "uncertainties": [
+    "受损财产所有者是否获得赔偿尚未明确",
+    "赔偿对象是业主还是租户尚未说明",
+    "灾民能否在10月5日开学前找到新住房并完成子女入学登记尚不确定",
+    "该事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "几内亚：科纳克里垃圾场垮塌一个月后，灾民安置工作启动",
+   "summary_zh": "科纳克里Dar-es-Salaam垃圾场垮塌事故发生一个月后，造成36人死亡，随后该街区居民被清退。政府正组织安置约2000名暂住在学校中的灾民，每户家长获得2100万几内亚法郎用于租房。但当局尚未就受损财产所有者可能的赔偿问题表态，引发业主担忧。",
+   "event_type": "other_security",
+   "country_iso3": "GIN",
+   "location": {
+    "country_iso3": "GIN",
+    "admin1": null,
+    "city": "科纳克里",
+    "site": "Dar-es-Salaam垃圾场",
+    "raw_text": "la décharge de Dar-es-Salaam, à Conakry"
+   },
+   "key_facts": [
+    {
+     "fact": "科纳克里Dar-es-Salaam垃圾场垮塌造成36人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un mois après l'effondrement de la décharge de Dar-es-Salaam, à Conakry, qui a fait 36 morts"
+    },
+    {
+     "fact": "政府正组织约2000名灾民从学校安置点迁出",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement organise le départ des près de 2 000 sinistrés hébergés dans des écoles"
+    },
+    {
+     "fact": "每户家长获得2100万几内亚法郎（约2100欧元）用于租房",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement octroie donc 21 millions de francs guinéens (2 100 euros) à chaque chef de famille"
+    },
+    {
+     "fact": "当局尚未就受损财产所有者可能的赔偿问题表态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les autorités ne se sont pas exprimées sur l'indemnisation éventuelle des propriétaires de biens détruits"
+    }
+   ],
+   "uncertainties": [
+    "受损财产所有者是否获得赔偿尚未明确",
+    "赔偿对象是业主还是租户尚未说明",
+    "灾民能否在10月5日开学前找到新住房并完成子女入学登记尚不确定",
+    "该事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_e97597ecabe6b4f7",
+ "disease_event_id": null,
+ "country_code": "GN"
+}

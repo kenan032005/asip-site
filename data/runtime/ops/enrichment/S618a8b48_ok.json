@@ -1,0 +1,114 @@
+{
+ "label": "S618a8b48",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "24c9b7cb4b23da9435d0e95ecb191674a395ff35daafd83282d878c91885f15d",
+ "tokens": {
+  "input_tokens": 2213,
+  "output_tokens": 350,
+  "total_tokens": 2563
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"目前仅一个来源报道，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳大学图书馆员协会表彰前任领导人杰出服务",
+   "summary_zh": "加纳大学图书馆员协会（ULG）于周三表彰四位前任高管，表彰他们十多年来为加纳大学图书馆员专业机构在变革时期提供的服务。获奖者包括Hawa Osman博士、Mac Anthony Cobblah博士、Theresa L. Adu博士和Gloria Bosomtwi Amoah博士。该消息目前仅来自单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳大学图书馆员协会表彰四位前任高管",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "University Librarians Ghana honours past leaders for distinguished service"
+    },
+    {
+     "fact": "四位前高管十多年来轮流协助引导加纳大学图书馆员专业机构度过变革时期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "For more than a decade, Dr Hawa Osman, Dr Mac Anthony Cobblah, Dr Theresa L. Adu and Dr Gloria Bosomtwi Amoah have taken turns helping to steer Ghana’s university librarians’ professional body through periods of change."
+    },
+    {
+     "fact": "表彰于周三进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "On Wednesday, their contributions were formally recognised when University Librarians Ghana (ULG) honoured the four former executives"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳大学图书馆员协会表彰前任领导人杰出服务",
+   "summary_zh": "加纳大学图书馆员协会（ULG）于周三表彰四位前任高管，表彰他们十多年来为加纳大学图书馆员专业机构在变革时期提供的服务。获奖者包括Hawa Osman博士、Mac Anthony Cobblah博士、Theresa L. Adu博士和Gloria Bosomtwi Amoah博士。该消息目前仅来自单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳大学图书馆员协会表彰四位前任高管",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "University Librarians Ghana honours past leaders for distinguished service"
+    },
+    {
+     "fact": "四位前高管十多年来轮流协助引导加纳大学图书馆员专业机构度过变革时期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "For more than a decade, Dr Hawa Osman, Dr Mac Anthony Cobblah, Dr Theresa L. Adu and Dr Gloria Bosomtwi Amoah have taken turns helping to steer Ghana’s university librarians’ professional body through periods of change."
+    },
+    {
+     "fact": "表彰于周三进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "On Wednesday, their contributions were formally recognised when University Librarians Ghana (ULG) honoured the four former executives"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源报道，尚缺乏交叉验证",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_7ce05a30618a8b48",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

@@ -1,0 +1,104 @@
+{
+ "label": "S279bf875",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e3327c1fee629f32c511384049ee4278324937c3e92f9a40dc326a16425dddcd",
+ "tokens": {
+  "input_tokens": 2177,
+  "output_tokens": 270,
+  "total_tokens": 2447
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"该报道为单一来源，尚缺乏交叉验证\"]",
+    "after": "[\"该报道为单一来源，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳幕僚长：24小时经济需加快商业案件司法审理",
+   "summary_zh": "加纳幕僚长Julius Debrah强调，加纳需加快商业纠纷解决、提高许可确定性并推动法律框架现代化，以支持投资和该国24小时经济议程。该表态由单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳幕僚长Julius Debrah强调需加快商业纠纷解决",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Chief of Staff Julius Debrah has stressed the need for Ghana to speed up commercial dispute resolution, improve licensing certainty, and modernise its legal framework to support investment and the country’s 24-hour economy agenda."
+    },
+    {
+     "fact": "该表态旨在支持加纳24小时经济议程",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "24-hour economy requires faster justice for commercial cases – Chief of Staff"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳幕僚长：24小时经济需加快商业案件司法审理",
+   "summary_zh": "加纳幕僚长Julius Debrah强调，加纳需加快商业纠纷解决、提高许可确定性并推动法律框架现代化，以支持投资和该国24小时经济议程。该表态由单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳幕僚长Julius Debrah强调需加快商业纠纷解决",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Chief of Staff Julius Debrah has stressed the need for Ghana to speed up commercial dispute resolution, improve licensing certainty, and modernise its legal framework to support investment and the country’s 24-hour economy agenda."
+    },
+    {
+     "fact": "该表态旨在支持加纳24小时经济议程",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "24-hour economy requires faster justice for commercial cases – Chief of Staff"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚缺乏交叉验证",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_f6b2afb7279bf875",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

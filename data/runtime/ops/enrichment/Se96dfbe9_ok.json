@@ -1,0 +1,104 @@
+{
+ "label": "Se96dfbe9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ca107c14b7ae851e1905b7b7bfa7eab5ea418f782f2d5a35033b63983a3d7f5e",
+ "tokens": {
+  "input_tokens": 2239,
+  "output_tokens": 308,
+  "total_tokens": 2547
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"该事件目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\"]",
+    "after": "[\"该事件目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "塞舌尔总统在纽约FALS全球对话会上主持非洲数字未来高级别对话",
+   "summary_zh": "塞舌尔总统帕特里克·埃尔米尼博士在纽约出席“前进非洲领导人研讨会”（FALS）2026全球对话会，与非洲联盟领导人、政策制定者、发展金融机构、投资者及企业高管共同参与。此次对话与非洲同行审议机制（APRM）合作举办，主题为“建设……”。该活动为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "SYC",
+   "location": {
+    "country_iso3": "SYC",
+    "admin1": null,
+    "city": "纽约",
+    "site": null,
+    "raw_text": "New York"
+   },
+   "key_facts": [
+    {
+     "fact": "塞舌尔总统埃尔米尼在纽约出席FALS全球对话会",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Seychelles President leads high-level dialogue on Africa’s digital future at FALS Global Conversations in New York"
+    },
+    {
+     "fact": "对话会与非洲同行审议机制（APRM）合作举办，主题为“建设……”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The dialogue was convened in partnership with the African Peer Review Mechanism (APRM) under the theme “Building […]"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "塞舌尔总统在纽约FALS全球对话会上主持非洲数字未来高级别对话",
+   "summary_zh": "塞舌尔总统帕特里克·埃尔米尼博士在纽约出席“前进非洲领导人研讨会”（FALS）2026全球对话会，与非洲联盟领导人、政策制定者、发展金融机构、投资者及企业高管共同参与。此次对话与非洲同行审议机制（APRM）合作举办，主题为“建设……”。该活动为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "SYC",
+   "location": {
+    "country_iso3": "SYC",
+    "admin1": null,
+    "city": "纽约",
+    "site": null,
+    "raw_text": "New York"
+   },
+   "key_facts": [
+    {
+     "fact": "塞舌尔总统埃尔米尼在纽约出席FALS全球对话会",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Seychelles President leads high-level dialogue on Africa’s digital future at FALS Global Conversations in New York"
+    },
+    {
+     "fact": "对话会与非洲同行审议机制（APRM）合作举办，主题为“建设……”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The dialogue was convened in partnership with the African Peer Review Mechanism (APRM) under the theme “Building […]"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_54692437e96dfbe9",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

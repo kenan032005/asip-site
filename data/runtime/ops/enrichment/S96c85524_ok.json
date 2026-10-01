@@ -1,0 +1,104 @@
+{
+ "label": "S96c85524",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "eb3f01784140406bffd88fdb830f365672a4c38d6f3007b263333be11b6dbb22",
+ "tokens": {
+  "input_tokens": 2164,
+  "output_tokens": 263,
+  "total_tokens": 2427
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\"]",
+    "after": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳五所农业学院获数字工具推动气候智能型农业",
+   "summary_zh": "加纳五所农业学院引入数字技术，用于教学与学习，以培养学生适应农业领域不断变化的需求。报道称此举旨在推动气候智能型农业。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳五所农业学院获得数字工具以推动气候智能型农业",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Five Agric Colleges receive digital tools to drive climate-smart farming"
+    },
+    {
+     "fact": "五所农业学院引入数字技术以培养学生适应农业领域变化的需求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Five colleges of agriculture in Ghana are witnessing a major transformation in teaching and learning with the introduction of digital technologies designed to prepare students for the changing demands of the agricultural sector."
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳五所农业学院获数字工具推动气候智能型农业",
+   "summary_zh": "加纳五所农业学院引入数字技术，用于教学与学习，以培养学生适应农业领域不断变化的需求。报道称此举旨在推动气候智能型农业。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳五所农业学院获得数字工具以推动气候智能型农业",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Five Agric Colleges receive digital tools to drive climate-smart farming"
+    },
+    {
+     "fact": "五所农业学院引入数字技术以培养学生适应农业领域变化的需求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Five colleges of agriculture in Ghana are witnessing a major transformation in teaching and learning with the introduction of digital technologies designed to prepare students for the changing demands of the agricultural sector."
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_d6c206a096c85524",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

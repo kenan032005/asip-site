@@ -1,0 +1,98 @@
+{
+ "label": "Sab1a47f2",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6856f52a58be059fda69212fe4c7e5872f694f102f8f6d3eee067b6a4907d6f2",
+ "tokens": {
+  "input_tokens": 2174,
+  "output_tokens": 253,
+  "total_tokens": 2427
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源报道，尚缺乏交叉验证\", \"被困及获救人数未明确\", \"暂无人员伤亡信息\"]",
+    "after": "[\"目前仅一个来源报道，尚缺乏交叉验证\", \"被困及获救人数未明确\", \"暂无人员伤亡信息\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳霍霍地区暴雨引发洪水，消防部门救出被困人员",
+   "summary_zh": "加纳国家消防局霍霍消防站在霍霍市部分地区因暴雨引发洪水后，救出并疏散了多名被困人员。事件发生于9月28日星期一。目前为单一来源报道，暂无人员伤亡信息。",
+   "event_type": "natural_disaster",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "Hohoe",
+    "site": null,
+    "raw_text": "Hohoe Municipality"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳国家消防局霍霍消防站在霍霍市洪水后救出并疏散多名被困人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Ghana National Fire Service (GNFS), Hohoe Fire Station, rescued and evacuated several persons stranded by flooding in parts of the Hohoe Municipality following heavy rainfall on Monday September 28."
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源报道，尚缺乏交叉验证",
+    "被困及获救人数未明确",
+    "暂无人员伤亡信息"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳霍霍地区暴雨引发洪水，消防部门救出被困人员",
+   "summary_zh": "加纳国家消防局霍霍消防站在霍霍市部分地区因暴雨引发洪水后，救出并疏散了多名被困人员。事件发生于9月28日星期一。目前为单一来源报道，暂无人员伤亡信息。",
+   "event_type": "natural_disaster",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "Hohoe",
+    "site": null,
+    "raw_text": "Hohoe Municipality"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳国家消防局霍霍消防站在霍霍市洪水后救出并疏散多名被困人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Ghana National Fire Service (GNFS), Hohoe Fire Station, rescued and evacuated several persons stranded by flooding in parts of the Hohoe Municipality following heavy rainfall on Monday September 28."
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源报道，尚缺乏交叉验证",
+    "被困及获救人数未明确",
+    "暂无人员伤亡信息",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_c39a9b17ab1a47f2",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

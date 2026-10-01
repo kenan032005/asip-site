@@ -1,0 +1,137 @@
+{
+ "label": "Sb7d514cb",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "95092db30d15422f57a9d2f66808f55b5108e4c015dd0e2bd3d06c8a1f276adc",
+ "tokens": {
+  "input_tokens": 2653,
+  "output_tokens": 608,
+  "total_tokens": 3261
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹西赤道州78名被绑架平民获释",
+   "summary_zh": "南苏丹西赤道州朱巴-蒙德里公路沿线至少78名平民遭绑架后被释放，部分人已被扣押长达四天。一名地方官员和多名幸存者向Radio Tamazuj描述了伏击经过，称武装人员抢劫并焚烧车辆，将人质带入丛林。有幸存者认为袭击者与某个反对派武装组织有关，但这一说法无法得到独立证实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Western Equatoria State",
+    "city": "Mundri",
+    "site": "Juba-Mundri road",
+    "raw_text": "Juba-Mundri road in Western Equatoria State"
+   },
+   "key_facts": [
+    {
+     "fact": "至少78名平民在朱巴-蒙德里公路沿线被绑架后获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least 78 civilians abducted along the Juba-Mundri road in Western Equatoria State have been released after spending up to four days in captivity"
+    },
+    {
+     "fact": "被绑架者于9月26日在朱巴-蒙德里公路旅行时遭绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The civilians were abducted on 26 September while travelling along the Juba-Mundri road, he said."
+    },
+    {
+     "fact": "蒙德里东县执行主任称约40人于周三凌晨5点左右抵达警察局，包括29名男子和11名妇女及儿童",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "about 40 people arrived at a police station on Wednesday at about 5am. The group included 29 men and 11 women, including children"
+    },
+    {
+     "fact": "幸存者称武装人员抢劫乘客财物并焚烧部分车辆",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "several vehicles were stopped and passengers were robbed of money, phones and other belongings. Some vehicles were also burned, including a Land Cruiser"
+    },
+    {
+     "fact": "有幸存者认为袭击者与某个反对派武装组织有关，但无法独立核实",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "some survivors believed the attackers were associated with an opposition armed group, but this could not be independently verified"
+    },
+    {
+     "fact": "当地官员称没有信息表明任何被绑架者遇害",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Papa said there was no information to suggest that any of those abducted had been killed."
+    }
+   ],
+   "uncertainties": [
+    "被绑架女性是否遭受性暴力尚无法确认，幸存者称因男女被分开而不知情",
+    "袭击者是否与反对派武装组织有关联尚未得到独立证实",
+    "目前仅有一个来源（Radio Tamazuj）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹西赤道州78名被绑架平民获释",
+   "summary_zh": "南苏丹西赤道州朱巴-蒙德里公路沿线至少78名平民遭绑架后被释放，部分人已被扣押长达四天。一名地方官员和多名幸存者向Radio Tamazuj描述了伏击经过，称武装人员抢劫并焚烧车辆，将人质带入丛林。有幸存者认为袭击者与某个反对派武装组织有关，但这一说法无法得到独立证实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Western Equatoria State",
+    "city": "Mundri",
+    "site": "Juba-Mundri road",
+    "raw_text": "Juba-Mundri road in Western Equatoria State"
+   },
+   "key_facts": [
+    {
+     "fact": "至少78名平民在朱巴-蒙德里公路沿线被绑架后获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least 78 civilians abducted along the Juba-Mundri road in Western Equatoria State have been released after spending up to four days in captivity"
+    },
+    {
+     "fact": "被绑架者于9月26日在朱巴-蒙德里公路旅行时遭绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The civilians were abducted on 26 September while travelling along the Juba-Mundri road, he said."
+    },
+    {
+     "fact": "蒙德里东县执行主任称约40人于周三凌晨5点左右抵达警察局，包括29名男子和11名妇女及儿童",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "about 40 people arrived at a police station on Wednesday at about 5am. The group included 29 men and 11 women, including children"
+    },
+    {
+     "fact": "幸存者称武装人员抢劫乘客财物并焚烧部分车辆",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "several vehicles were stopped and passengers were robbed of money, phones and other belongings. Some vehicles were also burned, including a Land Cruiser"
+    },
+    {
+     "fact": "有幸存者认为袭击者与某个反对派武装组织有关，但无法独立核实",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "some survivors believed the attackers were associated with an opposition armed group, but this could not be independently verified"
+    },
+    {
+     "fact": "当地官员称没有信息表明任何被绑架者遇害",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Papa said there was no information to suggest that any of those abducted had been killed."
+    }
+   ],
+   "uncertainties": [
+    "被绑架女性是否遭受性暴力尚无法确认，幸存者称因男女被分开而不知情",
+    "袭击者是否与反对派武装组织有关联尚未得到独立证实",
+    "目前仅有一个来源（Radio Tamazuj）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_813bc7c0b7d514cb",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

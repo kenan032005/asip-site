@@ -1,0 +1,114 @@
+{
+ "label": "S4ebb8b1d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1871f79493fc48f34cd7a585adaf9fb8cd0b5faf1e6e967b946e609b9fffc5b2",
+ "tokens": {
+  "input_tokens": 2226,
+  "output_tokens": 337,
+  "total_tokens": 2563
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"该事件目前仅有一个来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"该事件目前仅有一个来源报道，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "消费者保护机构赞扬FDA销毁非法二手尿布",
+   "summary_zh": "消费者保护机构（CPA）对食品与药品管理局（FDA）拦截并销毁28包二手及劣质尿布表示赞赏。CPA调解与仲裁执行主任Nana Prempeh Okogyeabour Aduhene称赞FDA的执法行动。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "消费者保护机构赞扬FDA销毁28包非法二手尿布",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Consumer Protection Agency commends FDA for destroying illegal bales of diapers"
+    },
+    {
+     "fact": "FDA拦截并销毁28包二手及劣质尿布",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Food and Drugs Authority (FDA) for intercepting and destroying 28 bales of second-hand and low-grade diapers"
+    },
+    {
+     "fact": "CPA调解与仲裁执行主任Nana Prempeh Okogyeabour Aduhene称赞FDA的执法行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nana Prempeh Okogyeabour Aduhene, Executive Director of Mediation and Arbitration at the Consumer Protection Agency, commended the FDA for the enforcement action"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "消费者保护机构赞扬FDA销毁非法二手尿布",
+   "summary_zh": "消费者保护机构（CPA）对食品与药品管理局（FDA）拦截并销毁28包二手及劣质尿布表示赞赏。CPA调解与仲裁执行主任Nana Prempeh Okogyeabour Aduhene称赞FDA的执法行动。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "消费者保护机构赞扬FDA销毁28包非法二手尿布",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Consumer Protection Agency commends FDA for destroying illegal bales of diapers"
+    },
+    {
+     "fact": "FDA拦截并销毁28包二手及劣质尿布",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Food and Drugs Authority (FDA) for intercepting and destroying 28 bales of second-hand and low-grade diapers"
+    },
+    {
+     "fact": "CPA调解与仲裁执行主任Nana Prempeh Okogyeabour Aduhene称赞FDA的执法行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nana Prempeh Okogyeabour Aduhene, Executive Director of Mediation and Arbitration at the Consumer Protection Agency, commended the FDA for the enforcement action"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_be109d244ebb8b1d",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

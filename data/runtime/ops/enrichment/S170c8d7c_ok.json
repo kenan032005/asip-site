@@ -1,0 +1,113 @@
+{
+ "label": "S170c8d7c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3e8f7bddd272a7a3bf8b38a89fa0370a37d7f0a2cbf8495404aa107a1c071dbe",
+ "tokens": {
+  "input_tokens": 2396,
+  "output_tokens": 608,
+  "total_tokens": 3004
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克国防军加强马克西谢地区医疗援助",
+   "summary_zh": "莫桑比克国防军（FADM）通过派驻军医团队，加强伊尼扬巴内省马克西谢地区的医疗援助，覆盖奇库克农村医院和Mabili 4社区的先进医疗站。军医团队提供门诊、一般医疗及手术支持，当地民众就诊踊跃。国防部长克里斯托旺·舒梅于9月24日视察了上述医疗点。该活动属于FADM成立62周年庆祝活动的一部分。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "伊尼扬巴内",
+    "city": "马克西谢",
+    "site": "奇库克农村医院及Mabili 4社区先进医疗站",
+    "raw_text": "distrito da Maxixe, em Inhambane, através de equipas de saúde militar destacadas para o Hospital Rural de Chicuque e para o Posto Médico Avançado (PMA), instalado no Bairro Mabili 4"
+   },
+   "key_facts": [
+    {
+     "fact": "莫桑比克国防军向马克西谢地区派驻军医团队加强医疗援助",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "As Forças Armadas de Defesa de Moçambique (FADM) estão a reforçar a assistência médica às populações do distrito da Maxixe, em Inhambane, através de equipas de saúde militar destacadas"
+    },
+    {
+     "fact": "军医团队在奇库克农村医院支援手术，在Mabili 4先进医疗站提供门诊和一般医疗服务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "No PMA, os profissionais de saúde militares prestam consultas e outros serviços de assistência médica geral... No Hospital Rural de Chicuque, o trabalho está concentrado no apoio à realização de cirurgias"
+    },
+    {
+     "fact": "国防部长克里斯托旺·舒梅于9月24日视察奇库克农村医院和先进医疗站",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "o Ministro da Defesa Nacional, Cristóvão Chume, visitou esta quinta-feira, 24 de Setembro, o Hospital Rural de Chicuque e o PMA"
+    },
+    {
+     "fact": "活动属于莫桑比克国防军成立62周年庆祝活动的一部分",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "As actividades decorrem no âmbito das celebrações dos 62 anos das Forças Armadas de Defesa de Moçambique, que se assinalam amanhã, 25 de Setembro"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（莫桑比克国防部官网），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克国防军加强马克西谢地区医疗援助",
+   "summary_zh": "莫桑比克国防军（FADM）通过派驻军医团队，加强伊尼扬巴内省马克西谢地区的医疗援助，覆盖奇库克农村医院和Mabili 4社区的先进医疗站。军医团队提供门诊、一般医疗及手术支持，当地民众就诊踊跃。国防部长克里斯托旺·舒梅于9月24日视察了上述医疗点。该活动属于FADM成立62周年庆祝活动的一部分。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "伊尼扬巴内",
+    "city": "马克西谢",
+    "site": "奇库克农村医院及Mabili 4社区先进医疗站",
+    "raw_text": "distrito da Maxixe, em Inhambane, através de equipas de saúde militar destacadas para o Hospital Rural de Chicuque e para o Posto Médico Avançado (PMA), instalado no Bairro Mabili 4"
+   },
+   "key_facts": [
+    {
+     "fact": "莫桑比克国防军向马克西谢地区派驻军医团队加强医疗援助",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "As Forças Armadas de Defesa de Moçambique (FADM) estão a reforçar a assistência médica às populações do distrito da Maxixe, em Inhambane, através de equipas de saúde militar destacadas"
+    },
+    {
+     "fact": "军医团队在奇库克农村医院支援手术，在Mabili 4先进医疗站提供门诊和一般医疗服务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "No PMA, os profissionais de saúde militares prestam consultas e outros serviços de assistência médica geral... No Hospital Rural de Chicuque, o trabalho está concentrado no apoio à realização de cirurgias"
+    },
+    {
+     "fact": "国防部长克里斯托旺·舒梅于9月24日视察奇库克农村医院和先进医疗站",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "o Ministro da Defesa Nacional, Cristóvão Chume, visitou esta quinta-feira, 24 de Setembro, o Hospital Rural de Chicuque e o PMA"
+    },
+    {
+     "fact": "活动属于莫桑比克国防军成立62周年庆祝活动的一部分",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "As actividades decorrem no âmbito das celebrações dos 62 anos das Forças Armadas de Defesa de Moçambique, que se assinalam amanhã, 25 de Setembro"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（莫桑比克国防部官网），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_8587e3e1170c8d7c",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}
