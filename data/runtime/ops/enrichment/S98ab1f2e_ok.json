@@ -1,0 +1,113 @@
+{
+ "label": "S98ab1f2e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1029eac431aeaeaf84dba19e207d80c8a1a13d87a1d2df588dda1977c3082a08",
+ "tokens": {
+  "input_tokens": 3067,
+  "output_tokens": 558,
+  "total_tokens": 3625
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔尼亚美大区区长主持2026-2027学年开学启动仪式",
+   "summary_zh": "尼日尔尼亚美大区区长、少将阿苏马内·阿卜杜·哈鲁纳于2026年10月1日在尼亚美CEG 25学校主持2026-2027学年开学启动仪式，尼亚美市代表行政官、共和国检察官、国家教育大区主任及学生家长协会大区主席出席。区长表示，得益于学校合作伙伴的投入，过去三个学年运行正常且成绩良好，希望新学年延续这一势头。据尼日尔官方通讯社报道，全国今年约有400万名学生和94800名教师返校。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "尼亚美大区",
+    "city": "尼亚美",
+    "site": "CEG 25学校",
+    "raw_text": "Niamey, CEG 25 de Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "尼亚美大区区长于2026年10月1日在尼亚美CEG 25学校主持2026-2027学年开学启动仪式",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Gouverneur de la Région de Niamey, le Général de Division Assoumane Abdou Harouna, a donné, ce jeudi 1 er octobre 2026 au CEG 25 de Niamey, le coup d’envoi de la rentrée scolaire au titre de l’année 2026-2027."
+    },
+    {
+     "fact": "区长称过去三个学年运行正常且成绩良好，希望新学年延续",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "grâce à l’engagement des partenaires de l’école nous avons connu trois (3) années normales avec des très bons résultats, et nous entamons aujourd’hui la 4éme année"
+    },
+    {
+     "fact": "全国今年约有400万名学生和94800名教师返校",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils sont cette année près de 4 millions d’élèves et 94800 enseignants à reprendre le chemin de l’école sur toute l’étendue du territoire national"
+    },
+    {
+     "fact": "活动于2026年10月1日举行",
+     "evidence_field": "event_time",
+     "evidence_excerpt": "2026-10-01 19:34:56"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（尼日尔官方通讯社ANP），尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 88
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔尼亚美大区区长主持2026-2027学年开学启动仪式",
+   "summary_zh": "尼日尔尼亚美大区区长、少将阿苏马内·阿卜杜·哈鲁纳于2026年10月1日在尼亚美CEG 25学校主持2026-2027学年开学启动仪式，尼亚美市代表行政官、共和国检察官、国家教育大区主任及学生家长协会大区主席出席。区长表示，得益于学校合作伙伴的投入，过去三个学年运行正常且成绩良好，希望新学年延续这一势头。据尼日尔官方通讯社报道，全国今年约有400万名学生和94800名教师返校。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "尼亚美大区",
+    "city": "尼亚美",
+    "site": "CEG 25学校",
+    "raw_text": "Niamey, CEG 25 de Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "尼亚美大区区长于2026年10月1日在尼亚美CEG 25学校主持2026-2027学年开学启动仪式",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Gouverneur de la Région de Niamey, le Général de Division Assoumane Abdou Harouna, a donné, ce jeudi 1 er octobre 2026 au CEG 25 de Niamey, le coup d’envoi de la rentrée scolaire au titre de l’année 2026-2027."
+    },
+    {
+     "fact": "区长称过去三个学年运行正常且成绩良好，希望新学年延续",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "grâce à l’engagement des partenaires de l’école nous avons connu trois (3) années normales avec des très bons résultats, et nous entamons aujourd’hui la 4éme année"
+    },
+    {
+     "fact": "全国今年约有400万名学生和94800名教师返校",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils sont cette année près de 4 millions d’élèves et 94800 enseignants à reprendre le chemin de l’école sur toute l’étendue du territoire national"
+    },
+    {
+     "fact": "活动于2026年10月1日举行",
+     "evidence_field": "event_time",
+     "evidence_excerpt": "2026-10-01 19:34:56"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（尼日尔官方通讯社ANP），尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 88
+  }
+ },
+ "event_id": "EVT_0087484a98ab1f2e",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

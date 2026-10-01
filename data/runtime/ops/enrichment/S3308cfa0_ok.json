@@ -1,0 +1,125 @@
+{
+ "label": "S3308cfa0",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "7ec617ed5d89076e9cf86e602f04deb486055be8e035e27ed81aadd7b5e0d247",
+ "tokens": {
+  "input_tokens": 2694,
+  "output_tokens": 534,
+  "total_tokens": 3228
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）一名无国界医生工作人员感染埃博拉被转移至荷兰",
+   "summary_zh": "一名参与刚果（金）埃博拉应对工作的无国界医生组织工作人员于10月1日被转移至荷兰。无国界医生确认其感染了邦地布优型埃博拉病毒。据刚果（金）卫生部长罗杰·坎巴向RFI表示，这名未透露国籍的欧洲外籍人员在北基伍省贝尼地区感染。截至9月29日，该国累计死亡病例已接近4000例。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "北基伍省",
+    "city": "贝尼",
+    "site": null,
+    "raw_text": "zone de Beni, au Nord-Kivu"
+   },
+   "key_facts": [
+    {
+     "fact": "一名无国界医生组织工作人员感染埃博拉病毒后被转移至荷兰",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un membre du personnel de Médecins sans frontières (MSF) engagé dans la riposte contre Ebola en RDC a été évacué ce jeudi 1er octobre vers les Pays-Bas."
+    },
+    {
+     "fact": "无国界医生确认该人员感染邦地布优型埃博拉病毒",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "MSF confirme une infection au virus Bundibugyo."
+    },
+    {
+     "fact": "据刚果（金）卫生部长称，该人员在北基伍省贝尼地区感染",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon le ministre congolais de la Santé, Roger Kamba, interrogé par RFI, cet expatrié européen dont la nationalité n'a pas été révélée a été contaminé dans la zone de Beni, au Nord-Kivu."
+    },
+    {
+     "fact": "截至9月29日该国累计死亡病例接近4000例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette évacuation intervient alors que le pays comptait près de 4 000 décès au 29 septembre."
+    },
+    {
+     "fact": "该感染者尚未接种疫苗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Roger Kamba précise que cette personne n'avait pas encore été vaccinée."
+    }
+   ],
+   "uncertainties": [
+    "感染者国籍尚未公布",
+    "该事件目前仅有一个来源（RFI），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）一名无国界医生工作人员感染埃博拉被转移至荷兰",
+   "summary_zh": "一名参与刚果（金）埃博拉应对工作的无国界医生组织工作人员于10月1日被转移至荷兰。无国界医生确认其感染了邦地布优型埃博拉病毒。据刚果（金）卫生部长罗杰·坎巴向RFI表示，这名未透露国籍的欧洲外籍人员在北基伍省贝尼地区感染。截至9月29日，该国累计死亡病例已接近4000例。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "北基伍省",
+    "city": "贝尼",
+    "site": null,
+    "raw_text": "zone de Beni, au Nord-Kivu"
+   },
+   "key_facts": [
+    {
+     "fact": "一名无国界医生组织工作人员感染埃博拉病毒后被转移至荷兰",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un membre du personnel de Médecins sans frontières (MSF) engagé dans la riposte contre Ebola en RDC a été évacué ce jeudi 1er octobre vers les Pays-Bas."
+    },
+    {
+     "fact": "无国界医生确认该人员感染邦地布优型埃博拉病毒",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "MSF confirme une infection au virus Bundibugyo."
+    },
+    {
+     "fact": "据刚果（金）卫生部长称，该人员在北基伍省贝尼地区感染",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon le ministre congolais de la Santé, Roger Kamba, interrogé par RFI, cet expatrié européen dont la nationalité n'a pas été révélée a été contaminé dans la zone de Beni, au Nord-Kivu."
+    },
+    {
+     "fact": "截至9月29日该国累计死亡病例接近4000例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette évacuation intervient alors que le pays comptait près de 4 000 décès au 29 septembre."
+    },
+    {
+     "fact": "该感染者尚未接种疫苗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Roger Kamba précise que cette personne n'avait pas encore été vaccinée."
+    }
+   ],
+   "uncertainties": [
+    "感染者国籍尚未公布",
+    "该事件目前仅有一个来源（RFI），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_3350f86a3308cfa0",
+ "disease_event_id": null,
+ "country_code": "CD"
+}
