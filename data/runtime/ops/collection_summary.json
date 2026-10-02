@@ -1,41 +1,37 @@
 {
  "sources_configured": 875,
  "sources_attempted": 875,
- "sources_succeeded": 348,
- "sources_failed": 379,
- "articles_discovered": 5750,
- "duplicates": 3077,
- "published": 10,
- "quarantined": 116,
- "articles_persisted_total": 865,
- "articles_persisted_new": 3,
- "articles_excluded_total": 2710,
+ "sources_succeeded": 232,
+ "sources_failed": 571,
+ "articles_discovered": 3644,
+ "duplicates": 1700,
+ "published": 4,
+ "quarantined": 105,
+ "articles_persisted_total": 867,
+ "articles_persisted_new": 2,
+ "articles_excluded_total": 1992,
  "article_persistence_ok": true,
  "metrics_source": "logs/stage3_collection_stats.json",
- "collector_run_id": "20261002T140613+0800_r45y39",
- "collector_generated_at": "2026-10-02T22:53:17+08:00",
+ "collector_run_id": "20261002T180620+0800_glq2mz",
+ "collector_generated_at": "2026-10-03T02:57:43+08:00",
  "failure_reasons": {
-  "WALL_CLOCK_LIMIT_REACHED": 379,
-  "OK_PRODUCTIVE": 188,
-  "DUPLICATE_ONLY": 160,
-  "RSS_EMPTY": 73,
-  "QUERY_NO_RESULT": 34,
-  "HTTP_429": 34,
+  "WALL_CLOCK_LIMIT_REACHED": 571,
+  "OK_PRODUCTIVE": 134,
+  "DUPLICATE_ONLY": 98,
+  "HTTP_429": 35,
+  "RSS_EMPTY": 32,
   "HTTP_404": 3,
-  "UNKNOWN": 2,
-  "TIMEOUT": 1,
-  "HTTP_403": 1
+  "UNKNOWN": 2
  },
- "sources_blocked_by_external": 39,
- "sources_no_output_not_blocked": 648,
+ "sources_blocked_by_external": 38,
+ "sources_no_output_not_blocked": 703,
  "gdelt_rate_limiter": {
   "schema": "gdelt-rate-limiter-v1",
   "host": "api.gdeltproject.org",
-  "requests": 4,
+  "requests": 3,
   "cache_hits": 0,
   "status_counts": {
-   "200": 2,
-   "429": 2
+   "429": 3
   },
   "current_interval_s": 300.0,
   "min_interval_s": 20.0,
@@ -44,24 +40,24 @@
   "retry_after_honored": 0,
   "request_budget": 120,
   "budget_exhausted": false,
-  "labeled_requests": 4,
-  "labeled_success": 2,
-  "labeled_rate_limited": 2,
-  "success_rate": 0.5,
-  "rate_limited_rate": 0.5,
+  "labeled_requests": 3,
+  "labeled_success": 0,
+  "labeled_rate_limited": 3,
+  "success_rate": 0.0,
+  "rate_limited_rate": 1.0,
   "by_label": {
    "|Niger": {
     "requests": 1,
-    "success": 1,
-    "rate_limited": 0,
+    "success": 0,
+    "rate_limited": 1,
     "errors": 0,
     "cache_hits": 0,
     "items": 0
    },
    "|尼日尔": {
     "requests": 1,
-    "success": 1,
-    "rate_limited": 0,
+    "success": 0,
+    "rate_limited": 1,
     "errors": 0,
     "cache_hits": 0,
     "items": 0
@@ -73,21 +69,13 @@
     "errors": 0,
     "cache_hits": 0,
     "items": 0
-   },
-   "|乍得": {
-    "requests": 1,
-    "success": 0,
-    "rate_limited": 1,
-    "errors": 0,
-    "cache_hits": 0,
-    "items": 0
    }
   }
  },
  "per_source_stats_persisted": "data/runtime/ops/collection_source_stats.json",
  "ok": true,
- "raw_candidates_on_disk": 700,
+ "raw_candidates_on_disk": 703,
  "pending_events_on_disk": 21,
  "executed": true,
- "started_at": "2026-10-02T14:06:13Z"
+ "started_at": "2026-10-02T18:06:20Z"
 }

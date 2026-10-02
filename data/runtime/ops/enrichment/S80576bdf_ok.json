@@ -1,0 +1,103 @@
+{
+ "label": "S80576bdf",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "72bc2593cf79cff00496d61ac2fae01e13e6ebefe13206ff9b1f391cb674fd46",
+ "tokens": {
+  "input_tokens": 2178,
+  "output_tokens": 377,
+  "total_tokens": 2555
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔装备部长视察蒂拉贝里道路工程",
+   "summary_zh": "尼日尔装备与基础设施部长萨利苏·马哈曼·萨利苏视察了蒂拉贝里地区的道路工程，其中RN1西线两座桥梁已交付通车，一座河港码头已完成过半。据单一来源报道，部长于周五实地查看了这些工程。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "Tillabéri",
+    "city": "Tillabéri",
+    "site": null,
+    "raw_text": "Tillabéri, région de Tillabéri"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔装备与基础设施部长视察蒂拉贝里地区道路工程",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le ministre de l’Équipement a passé en revue, ce vendredi, des chantiers qui redessinent les déplacements dans l’Ouest nigérien"
+    },
+    {
+     "fact": "RN1西线两座桥梁已交付，河港码头完成过半",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Deux ouvrages livrés sur la RN1 Ouest et un quai fluvial réalisé à plus de moitié"
+    },
+    {
+     "fact": "位于RN1西线88+500公里处的马拉桥已通车",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le pont de Mara, situé au point kilométrique 88+500 de la RN1 Ouest, n’est plus un chantier. Il accueille désormais la circulation"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（Journal du Niger），尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔装备部长视察蒂拉贝里道路工程",
+   "summary_zh": "尼日尔装备与基础设施部长萨利苏·马哈曼·萨利苏视察了蒂拉贝里地区的道路工程，其中RN1西线两座桥梁已交付通车，一座河港码头已完成过半。据单一来源报道，部长于周五实地查看了这些工程。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "Tillabéri",
+    "city": "Tillabéri",
+    "site": null,
+    "raw_text": "Tillabéri, région de Tillabéri"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔装备与基础设施部长视察蒂拉贝里地区道路工程",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le ministre de l’Équipement a passé en revue, ce vendredi, des chantiers qui redessinent les déplacements dans l’Ouest nigérien"
+    },
+    {
+     "fact": "RN1西线两座桥梁已交付，河港码头完成过半",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Deux ouvrages livrés sur la RN1 Ouest et un quai fluvial réalisé à plus de moitié"
+    },
+    {
+     "fact": "位于RN1西线88+500公里处的马拉桥已通车",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le pont de Mara, situé au point kilométrique 88+500 de la RN1 Ouest, n’est plus un chantier. Il accueille désormais la circulation"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（Journal du Niger），尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_660e13aa80576bdf",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
