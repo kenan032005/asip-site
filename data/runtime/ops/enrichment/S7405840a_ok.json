@@ -1,0 +1,127 @@
+{
+ "label": "S7405840a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a4f73c9409d741588eb32af84b185d352677b17ba0403c19f14fdd5f7f652527",
+ "tokens": {
+  "input_tokens": 2138,
+  "output_tokens": 571,
+  "total_tokens": 2709
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚独立日NYSC成员遭绑架 家长呼吁总统介入营救",
+   "summary_zh": "尼日利亚独立日当天，数名前往orientation营地的准国家青年服务团（NYSC）成员在伊莫州Owerri-Onitsha公路Umunoha附近乘车途中遭疑似枪手袭击绑架。一名家长呼吁总统博拉·蒂努布介入营救。伊莫州警方证实袭击事件，称已部署战术小组并救出10名受害者，但被掳走的确切人数仍在核实中。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Imo State",
+    "city": null,
+    "site": "Owerri-Onitsha Road near Umunoha",
+    "raw_text": "along the Owerri-Onitsha Road near Umunoha, Imo State"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚独立日当天，准NYSC成员乘车前往orientation营地途中遭疑似枪手袭击绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "prospective National Youth Service Corps (NYSC) members who were abducted while travelling to orientation camps on Nigeria’s Independence Day"
+    },
+    {
+     "fact": "事件发生于10月1日周四约6时30分，地点在伊莫州Owerri-Onitsha公路Umunoha附近",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The incident occurred at about 6:30 a.m. on Thursday, October 1, along the Owerri-Onitsha Road near Umunoha, Imo State"
+    },
+    {
+     "fact": "伊莫州警方证实袭击并称已部署战术小组，两辆巴士被追回，现场救出10名受害者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The command said both buses had been recovered and 10 victims rescued at the scene."
+    },
+    {
+     "fact": "警方称被掳走的确切人数仍在核实中",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the police said the exact number of persons whisked away by the assailants was still being verified"
+    },
+    {
+     "fact": "一名被绑架者家长呼吁总统博拉·蒂努布介入营救",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ONE of the parents of prospective National Youth Service Corps (NYSC) members who were abducted ... has appealed to President Bola Tinubu to intervene in their rescue."
+    }
+   ],
+   "uncertainties": [
+    "被掳走的确切人数尚未核实",
+    "袭击者身份为疑似枪手，尚未确认",
+    "目前仅单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚独立日NYSC成员遭绑架 家长呼吁总统介入营救",
+   "summary_zh": "尼日利亚独立日当天，数名前往orientation营地的准国家青年服务团（NYSC）成员在伊莫州Owerri-Onitsha公路Umunoha附近乘车途中遭疑似枪手袭击绑架。一名家长呼吁总统博拉·蒂努布介入营救。伊莫州警方证实袭击事件，称已部署战术小组并救出10名受害者，但被掳走的确切人数仍在核实中。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Imo State",
+    "city": null,
+    "site": "Owerri-Onitsha Road near Umunoha",
+    "raw_text": "along the Owerri-Onitsha Road near Umunoha, Imo State"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚独立日当天，准NYSC成员乘车前往orientation营地途中遭疑似枪手袭击绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "prospective National Youth Service Corps (NYSC) members who were abducted while travelling to orientation camps on Nigeria’s Independence Day"
+    },
+    {
+     "fact": "事件发生于10月1日周四约6时30分，地点在伊莫州Owerri-Onitsha公路Umunoha附近",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The incident occurred at about 6:30 a.m. on Thursday, October 1, along the Owerri-Onitsha Road near Umunoha, Imo State"
+    },
+    {
+     "fact": "伊莫州警方证实袭击并称已部署战术小组，两辆巴士被追回，现场救出10名受害者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The command said both buses had been recovered and 10 victims rescued at the scene."
+    },
+    {
+     "fact": "警方称被掳走的确切人数仍在核实中",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the police said the exact number of persons whisked away by the assailants was still being verified"
+    },
+    {
+     "fact": "一名被绑架者家长呼吁总统博拉·蒂努布介入营救",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ONE of the parents of prospective National Youth Service Corps (NYSC) members who were abducted ... has appealed to President Bola Tinubu to intervene in their rescue."
+    }
+   ],
+   "uncertainties": [
+    "被掳走的确切人数尚未核实",
+    "袭击者身份为疑似枪手，尚未确认",
+    "目前仅单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_3ed82bea7405840a",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

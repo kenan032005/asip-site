@@ -1,0 +1,131 @@
+{
+ "label": "S1c35c784",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "53559993d2b93c7af69e415bdeb1471e30447bc7e1e7467325227f7ef47bdd14",
+ "tokens": {
+  "input_tokens": 3026,
+  "output_tokens": 468,
+  "total_tokens": 3494
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "after": "[\"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "马达加斯加首款主机游戏《Kalanoro》发布，寄望推动本土游戏产业发展",
+   "summary_zh": "马达加斯加工作室Red Raketa制作的冒险战斗游戏《Kalanoro》于9月24日首次登陆主要游戏主机平台。该游戏以马达加斯加文化为灵感，配乐由当地知名艺术家参与，团队希望借此推动本土游戏产业形成。游戏将通过Red Raketa与日本世嘉的合作在日本及亚洲其他市场发行。",
+   "event_type": "other_security",
+   "country_iso3": "MDG",
+   "location": {
+    "country_iso3": "MDG",
+    "admin1": null,
+    "city": "塔那那利佛",
+    "site": "Ankadindramamy街区",
+    "raw_text": "Antananarivo, quartier d'Ankadindramamy"
+   },
+   "key_facts": [
+    {
+     "fact": "马达加斯加游戏《Kalanoro》于9月24日首次登陆主要游戏主机平台",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un jeu vidéo malgache est, pour la première fois, disponible sur les principales consoles de jeu. « Kalanoro », une création du studio Red Raketa basé à Antananarivo, est sorti le 24 septembre."
+    },
+    {
+     "fact": "该游戏由位于塔那那利佛的Red Raketa工作室创作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "« Kalanoro », une création du studio Red Raketa basé à Antananarivo"
+    },
+    {
+     "fact": "游戏将在日本及亚洲其他市场发行，依托Red Raketa与日本世嘉的合作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le jeu sera notamment distribué au Japon et sur d'autres marchés asiatiques, grâce à un partenariat entre Red Raketa et le développeur de jeux vidéo japonais Sega."
+    },
+    {
+     "fact": "团队希望借此推动马达加斯加本土游戏产业的形成",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Steevie Rasoanaivo espère que cette sortie encouragera le développement d'une filière professionnelle à Madagascar."
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "none",
+   "classification_confidence": 90
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "马达加斯加首款主机游戏《Kalanoro》发布，寄望推动本土游戏产业发展",
+   "summary_zh": "马达加斯加工作室Red Raketa制作的冒险战斗游戏《Kalanoro》于9月24日首次登陆主要游戏主机平台。该游戏以马达加斯加文化为灵感，配乐由当地知名艺术家参与，团队希望借此推动本土游戏产业形成。游戏将通过Red Raketa与日本世嘉的合作在日本及亚洲其他市场发行。",
+   "event_type": "other_security",
+   "country_iso3": "MDG",
+   "location": {
+    "country_iso3": "MDG",
+    "admin1": null,
+    "city": "塔那那利佛",
+    "site": "Ankadindramamy街区",
+    "raw_text": "Antananarivo, quartier d'Ankadindramamy"
+   },
+   "key_facts": [
+    {
+     "fact": "马达加斯加游戏《Kalanoro》于9月24日首次登陆主要游戏主机平台",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un jeu vidéo malgache est, pour la première fois, disponible sur les principales consoles de jeu. « Kalanoro », une création du studio Red Raketa basé à Antananarivo, est sorti le 24 septembre."
+    },
+    {
+     "fact": "该游戏由位于塔那那利佛的Red Raketa工作室创作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "« Kalanoro », une création du studio Red Raketa basé à Antananarivo"
+    },
+    {
+     "fact": "游戏将在日本及亚洲其他市场发行，依托Red Raketa与日本世嘉的合作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le jeu sera notamment distribué au Japon et sur d'autres marchés asiatiques, grâce à un partenariat entre Red Raketa et le développeur de jeux vidéo japonais Sega."
+    },
+    {
+     "fact": "团队希望借此推动马达加斯加本土游戏产业的形成",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Steevie Rasoanaivo espère que cette sortie encouragera le développement d'une filière professionnelle à Madagascar."
+    }
+   ],
+   "uncertainties": [
+    "据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 90
+  }
+ },
+ "event_id": "EVT_6663556c1c35c784",
+ "disease_event_id": null,
+ "country_code": "MG"
+}

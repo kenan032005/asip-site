@@ -1,0 +1,136 @@
+{
+ "label": "Sf179430b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d8897298044e64c1b5a769d53fe989dc5d8e17591435915f215e5d017ea6985f",
+ "tokens": {
+  "input_tokens": 2495,
+  "output_tokens": 534,
+  "total_tokens": 3029
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"文章为观点文章，作者对阿卜耶伊边界争议影响的论述属于个人观点\", \"阿卜耶伊最终地位及公投前景尚未解决\"]",
+    "after": "[\"文章为观点文章，作者对阿卜耶伊边界争议影响的论述属于个人观点\", \"阿卜耶伊最终地位及公投前景尚未解决\", \"据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"文章为观点文章，作者对阿卜耶伊边界争议影响的论述属于个人观点\", \"阿卜耶伊最终地位及公投前景尚未解决\", \"据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "after": "[\"文章为观点文章，作者对阿卜耶伊边界争议影响的论述属于个人观点\", \"阿卜耶伊最终地位及公投前景尚未解决\", \"据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "观点：阿卜耶伊冲突的新动态",
+   "summary_zh": "一篇观点文章回顾了2005年《全面和平协议》以来阿卜耶伊地区的冲突演变，包括阿卜耶伊议定书、边界委员会争议及2009年常设仲裁法院裁决。文章指出阿卜耶伊公投始终未能举行，最终地位仍未解决，并认为边界争议还引发了与邻近社区的新纠纷。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "阿卜耶伊地区",
+    "city": null,
+    "site": null,
+    "raw_text": "Abyei"
+   },
+   "key_facts": [
+    {
+     "fact": "2005年签署的《全面和平协议》旨在结束苏丹长期内战，并为南苏丹、阿卜耶伊等地区设立单独机制",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Comprehensive Peace Agreement (CPA), signed in 2005, was brokered to end Sudan’s long-running civil war. The agreement established separate mechanisms for addressing the conflicts in Southern Sudan, Abyei, Southern Kordofan and Blue Nile."
+    },
+    {
+     "fact": "2011年1月南苏丹举行独立公投，98.83%选民选择分离，南苏丹于2011年7月9日独立",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In January 2011, South Sudan held its independence referendum, with 98.83% of voters choosing secession. South Sudan became independent on 9 July 2011."
+    },
+    {
+     "fact": "阿卜耶伊公投未能举行，阿卜耶伊公投委员会从未成立，该地区最终地位仍未解决",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Abyei referendum, however, was not held. The Abyei Referendum Commission was never established, leaving the territory’s final status unresolved."
+    },
+    {
+     "fact": "2009年7月常设仲裁法院作出最终裁决，缩减了阿卜耶伊边界委员会主张的区域并确立修订边界",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In July 2009, an arbitral tribunal constituted under the Permanent Court of Arbitration issued its final award on the delimitation of Abyei."
+    }
+   ],
+   "uncertainties": [
+    "文章为观点文章，作者对阿卜耶伊边界争议影响的论述属于个人观点",
+    "阿卜耶伊最终地位及公投前景尚未解决"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "观点：阿卜耶伊冲突的新动态",
+   "summary_zh": "一篇观点文章回顾了2005年《全面和平协议》以来阿卜耶伊地区的冲突演变，包括阿卜耶伊议定书、边界委员会争议及2009年常设仲裁法院裁决。文章指出阿卜耶伊公投始终未能举行，最终地位仍未解决，并认为边界争议还引发了与邻近社区的新纠纷。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "阿卜耶伊地区",
+    "city": null,
+    "site": null,
+    "raw_text": "Abyei"
+   },
+   "key_facts": [
+    {
+     "fact": "2005年签署的《全面和平协议》旨在结束苏丹长期内战，并为南苏丹、阿卜耶伊等地区设立单独机制",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Comprehensive Peace Agreement (CPA), signed in 2005, was brokered to end Sudan’s long-running civil war. The agreement established separate mechanisms for addressing the conflicts in Southern Sudan, Abyei, Southern Kordofan and Blue Nile."
+    },
+    {
+     "fact": "2011年1月南苏丹举行独立公投，98.83%选民选择分离，南苏丹于2011年7月9日独立",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In January 2011, South Sudan held its independence referendum, with 98.83% of voters choosing secession. South Sudan became independent on 9 July 2011."
+    },
+    {
+     "fact": "阿卜耶伊公投未能举行，阿卜耶伊公投委员会从未成立，该地区最终地位仍未解决",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Abyei referendum, however, was not held. The Abyei Referendum Commission was never established, leaving the territory’s final status unresolved."
+    },
+    {
+     "fact": "2009年7月常设仲裁法院作出最终裁决，缩减了阿卜耶伊边界委员会主张的区域并确立修订边界",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In July 2009, an arbitral tribunal constituted under the Permanent Court of Arbitration issued its final award on the delimitation of Abyei."
+    }
+   ],
+   "uncertainties": [
+    "文章为观点文章，作者对阿卜耶伊边界争议影响的论述属于个人观点",
+    "阿卜耶伊最终地位及公投前景尚未解决",
+    "据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_092c9102f179430b",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

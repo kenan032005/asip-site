@@ -1,0 +1,128 @@
+{
+ "label": "S6ea7f833",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "cda27ed333404417516ca96b44245decc3b1a6509bd70bd4ecae7dd60c4010f7",
+ "tokens": {
+  "input_tokens": 2836,
+  "output_tokens": 609,
+  "total_tokens": 3445
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"关于格劳尔大猩猩这一濒危物种的数据仍过于零散\", \"森林砍伐面积存在不同说法：公园负责人称约100公顷，刚果（金）媒体称数万公顷\", \"该事件为单一来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"关于格劳尔大猩猩这一濒危物种的数据仍过于零散\", \"森林砍伐面积存在不同说法：公园负责人称约100公顷，刚果（金）媒体称数万公顷\", \"该事件为单一来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）东部卡胡齐-比埃加公园2026年第一季度约100公顷森林被砍伐",
+   "summary_zh": "刚果（金）东部南基伍省的卡胡齐-比埃加国家公园因当地不安全局势中断监测两年后，于2026年初恢复自然资源评估工作。据公园生物监测负责人法布里斯·亚皮称，2026年1月至3月约有100公顷森林被砍伐，这一数字远低于刚果（金）媒体流传的数万公顷说法。该公园因栖息着格劳尔大猩猩而备受关注，森林砍伐与偷猎威胁引发担忧。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "南基伍省",
+    "city": "布卡武",
+    "site": "卡胡齐-比埃加国家公园",
+    "raw_text": "parc national de Kahuzi-Biega, dans le Sud-Kivu, à quelques kilomètres de la ville de Bukavu"
+   },
+   "key_facts": [
+    {
+     "fact": "卡胡齐-比埃加国家公园因东部不安全局势中断监测两年后，于2026年初恢复自然资源评估",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Après deux ans sans surveillance en raison de l'insécurité dans l'est de la République démocratique du Congo, le parc national de Kahuzi-Biega, dans le Sud-Kivu, a repris en début d'année 2026 sa mission d'évaluation des ressources naturelles."
+    },
+    {
+     "fact": "据公园生物监测负责人称，2026年1月至3月约有100公顷森林被砍伐",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "environ 100 hectares de forêt ont été déboisés entre janvier et mars, selon le responsable de la biosurveillance du parc"
+    },
+    {
+     "fact": "该数字远低于刚果（金）媒体流传的数万公顷说法",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un chiffre très en deçà de celui qui circule dans la presse congolaise, qui évoque des dizaines de milliers d'hectares"
+    },
+    {
+     "fact": "该公园栖息着格劳尔大猩猩，面临森林砍伐与偷猎威胁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce parc est particulièrement scruté en raison des menaces de déforestation et de braconnage, alors qu'il abrite les gorilles de Grauer"
+    }
+   ],
+   "uncertainties": [
+    "关于格劳尔大猩猩这一濒危物种的数据仍过于零散",
+    "森林砍伐面积存在不同说法：公园负责人称约100公顷，刚果（金）媒体称数万公顷",
+    "该事件为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）东部卡胡齐-比埃加公园2026年第一季度约100公顷森林被砍伐",
+   "summary_zh": "刚果（金）东部南基伍省的卡胡齐-比埃加国家公园因当地不安全局势中断监测两年后，于2026年初恢复自然资源评估工作。据公园生物监测负责人法布里斯·亚皮称，2026年1月至3月约有100公顷森林被砍伐，这一数字远低于刚果（金）媒体流传的数万公顷说法。该公园因栖息着格劳尔大猩猩而备受关注，森林砍伐与偷猎威胁引发担忧。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "南基伍省",
+    "city": "布卡武",
+    "site": "卡胡齐-比埃加国家公园",
+    "raw_text": "parc national de Kahuzi-Biega, dans le Sud-Kivu, à quelques kilomètres de la ville de Bukavu"
+   },
+   "key_facts": [
+    {
+     "fact": "卡胡齐-比埃加国家公园因东部不安全局势中断监测两年后，于2026年初恢复自然资源评估",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Après deux ans sans surveillance en raison de l'insécurité dans l'est de la République démocratique du Congo, le parc national de Kahuzi-Biega, dans le Sud-Kivu, a repris en début d'année 2026 sa mission d'évaluation des ressources naturelles."
+    },
+    {
+     "fact": "据公园生物监测负责人称，2026年1月至3月约有100公顷森林被砍伐",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "environ 100 hectares de forêt ont été déboisés entre janvier et mars, selon le responsable de la biosurveillance du parc"
+    },
+    {
+     "fact": "该数字远低于刚果（金）媒体流传的数万公顷说法",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un chiffre très en deçà de celui qui circule dans la presse congolaise, qui évoque des dizaines de milliers d'hectares"
+    },
+    {
+     "fact": "该公园栖息着格劳尔大猩猩，面临森林砍伐与偷猎威胁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce parc est particulièrement scruté en raison des menaces de déforestation et de braconnage, alors qu'il abrite les gorilles de Grauer"
+    }
+   ],
+   "uncertainties": [
+    "关于格劳尔大猩猩这一濒危物种的数据仍过于零散",
+    "森林砍伐面积存在不同说法：公园负责人称约100公顷，刚果（金）媒体称数万公顷",
+    "该事件为单一来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_dae2e1466ea7f833",
+ "disease_event_id": null,
+ "country_code": "CD"
+}
