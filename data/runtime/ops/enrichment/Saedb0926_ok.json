@@ -1,0 +1,115 @@
+{
+ "label": "Saedb0926",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d275f6a32e8572f1195a4eafbed3ae1bffa4971b2267716d661e7f117bd9f7ed",
+ "tokens": {
+  "input_tokens": 2508,
+  "output_tokens": 494,
+  "total_tokens": 3002
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁科林斯省韦梅河及多条河流泛滥，多个村镇被淹",
+   "summary_zh": "贝宁科林斯省韦梅河及部分河流近日泛滥，该省六个市镇受灾，多个村镇被洪水淹没。农田、房屋和牲畜受损，数百公顷玉米、木薯、辣椒和豇豆被淹，许多灾民陷入困境。目前灾情为初步统计，灾民正等待援助措施。",
+   "event_type": "natural_disaster",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": "科林斯省",
+    "city": null,
+    "site": null,
+    "raw_text": "le département des Collines, commune de Dassa-Zoumè, arrondissement de Kpingni, arrondissement d'Akoffodjoulè, village de Houassimi, Igoho"
+   },
+   "key_facts": [
+    {
+     "fact": "贝宁科林斯省韦梅河及部分河流泛滥，该省六个市镇受灾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La crue du fleuve Ouémé et de certaines rivières fait des dégâts depuis quelques jours dans les six communes du département des Collines."
+    },
+    {
+     "fact": "多个村镇被洪水淹没，农田、房屋和牲畜受损",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plusieurs localités sont envahies par les eaux. Des champs, des habitations et du bétail sont touchés"
+    },
+    {
+     "fact": "初步统计显示数百公顷玉米、木薯、辣椒和豇豆被淹",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un bilan provisoire fait état de centaines d’hectares de maïs, de manioc, de piment et de niébé touchés par les inondations."
+    },
+    {
+     "fact": "灾民处境艰难，等待援助措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les populations sinistrées se retrouvent dans une grande détresse et attendent des mesures d’assistance"
+    }
+   ],
+   "uncertainties": [
+    "灾情为初步统计（bilan provisoire），具体损失规模尚未最终确认",
+    "目前仅一个来源（Fraternité）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁科林斯省韦梅河及多条河流泛滥，多个村镇被淹",
+   "summary_zh": "贝宁科林斯省韦梅河及部分河流近日泛滥，该省六个市镇受灾，多个村镇被洪水淹没。农田、房屋和牲畜受损，数百公顷玉米、木薯、辣椒和豇豆被淹，许多灾民陷入困境。目前灾情为初步统计，灾民正等待援助措施。",
+   "event_type": "natural_disaster",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": "科林斯省",
+    "city": null,
+    "site": null,
+    "raw_text": "le département des Collines, commune de Dassa-Zoumè, arrondissement de Kpingni, arrondissement d'Akoffodjoulè, village de Houassimi, Igoho"
+   },
+   "key_facts": [
+    {
+     "fact": "贝宁科林斯省韦梅河及部分河流泛滥，该省六个市镇受灾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La crue du fleuve Ouémé et de certaines rivières fait des dégâts depuis quelques jours dans les six communes du département des Collines."
+    },
+    {
+     "fact": "多个村镇被洪水淹没，农田、房屋和牲畜受损",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plusieurs localités sont envahies par les eaux. Des champs, des habitations et du bétail sont touchés"
+    },
+    {
+     "fact": "初步统计显示数百公顷玉米、木薯、辣椒和豇豆被淹",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un bilan provisoire fait état de centaines d’hectares de maïs, de manioc, de piment et de niébé touchés par les inondations."
+    },
+    {
+     "fact": "灾民处境艰难，等待援助措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les populations sinistrées se retrouvent dans une grande détresse et attendent des mesures d’assistance"
+    }
+   ],
+   "uncertainties": [
+    "灾情为初步统计（bilan provisoire），具体损失规模尚未最终确认",
+    "目前仅一个来源（Fraternité）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_59d1f0f4aedb0926",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
