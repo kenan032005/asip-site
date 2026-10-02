@@ -1,0 +1,179 @@
+{
+ "label": "S902538a6",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0dd683f0d625666b621bde3ba7d476b9bcbd69a46026707aa93800d23a16eece",
+ "tokens": {
+  "input_tokens": 2490,
+  "output_tokens": 899,
+  "total_tokens": 3389
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "埃塞俄比亚与厄立特里亚因北部冲突升级断绝外交关系",
+   "summary_zh": "埃塞俄比亚与厄立特里亚宣布断绝外交关系，此前埃塞俄比亚以威胁国家安全为由关闭驻阿斯马拉使馆并要求10名厄立特里亚外交官48小时内离境。厄立特里亚称别无选择只能对等回应。与此同时，埃塞俄比亚北部提格雷、阿法尔和阿姆哈拉地区联邦部队与提格雷人民解放阵线及其盟友持续交战，据报已有超过50人丧生。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷",
+    "city": "亚的斯亚贝巴",
+    "site": null,
+    "raw_text": "northern Ethiopia; Addis Ababa; Tigray, Afar and Amhara"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚与厄立特里亚断绝外交关系",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ethiopia and Eritrea have severed diplomatic relations as renewed fighting in northern Ethiopia raises fears of a wider regional conflict."
+    },
+    {
+     "fact": "埃塞俄比亚关闭驻阿斯马拉使馆并要求10名厄立特里亚外交官48小时内离境，指控其从事威胁国家安全的活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ethiopia announced that it was closing its embassy in the Eritrean capital, Asmara, and ordered 10 Eritrean diplomats to leave the country within 48 hours, accusing them of activities that threatened national security."
+    },
+    {
+     "fact": "埃塞俄比亚首都亚的斯亚贝巴夜间听到强烈爆炸声，包括军事总部附近",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "powerful explosions were heard overnight in Ethiopian capital, Addis Ababa, including near Ethiopia's military headquarters."
+    },
+    {
+     "fact": "埃塞俄比亚联邦部队在提格雷、阿法尔和阿姆哈拉地区与提格雷人民解放阵线及其盟友交战",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ethiopian federal forces battle fighters from the Tigray People's Liberation Front (TPLF) and its allies across parts of the northern regions of Tigray, Afar and Amhara."
+    },
+    {
+     "fact": "自上周北部重燃战火以来已有超过50人丧生",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than 50 people have been killed since heavy fighting resumed in northern Ethiopia last week"
+    },
+    {
+     "fact": "一名医生称在阿拉马塔三天激烈战斗中至少52名平民丧生",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In Alamata, a doctor told the BBC earlier this week that at least 52 civilians had been killed during three days of intense fighting."
+    },
+    {
+     "fact": "埃塞俄比亚指控厄立特里亚支持新的反叛联盟，厄立特里亚多次否认",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ethiopia accusing Eritrea of supporting a new rebel alliance – an allegation Asmara has repeatedly denied."
+    },
+    {
+     "fact": "一名亲政府民兵指挥官称厄立特里亚士兵出现在前线，BBC未能独立核实",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A pro-government militia commander fighting in Tigray told the BBC that Eritrean soldiers had been involved on the front lines. The BBC has not independently verified the allegation."
+    },
+    {
+     "fact": "厄立特里亚信息部长否认参与提格雷战斗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eritrea's Information Minister Yemane Gebremeskel denied that it was involved in the fighting in Tigray, which borders his country."
+    },
+    {
+     "fact": "埃塞俄比亚政府与提格雷人民解放阵线互相指责对方发动最新敌对行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Both the Ethiopian government and the TPLF accuse the other of starting the latest hostilities."
+    }
+   ],
+   "uncertainties": [
+    "厄立特里亚士兵参与提格雷前线作战的说法尚未获BBC独立核实",
+    "提格雷地区通信被切断，无法获取可靠信息，尚不清楚是谁切断了通信",
+    "埃塞俄比亚驱逐埃及外交官的原因未公开说明",
+    "伤亡数字来自单一来源（一名医生），尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "埃塞俄比亚与厄立特里亚因北部冲突升级断绝外交关系",
+   "summary_zh": "埃塞俄比亚与厄立特里亚宣布断绝外交关系，此前埃塞俄比亚以威胁国家安全为由关闭驻阿斯马拉使馆并要求10名厄立特里亚外交官48小时内离境。厄立特里亚称别无选择只能对等回应。与此同时，埃塞俄比亚北部提格雷、阿法尔和阿姆哈拉地区联邦部队与提格雷人民解放阵线及其盟友持续交战，据报已有超过50人丧生。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷",
+    "city": "亚的斯亚贝巴",
+    "site": null,
+    "raw_text": "northern Ethiopia; Addis Ababa; Tigray, Afar and Amhara"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚与厄立特里亚断绝外交关系",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ethiopia and Eritrea have severed diplomatic relations as renewed fighting in northern Ethiopia raises fears of a wider regional conflict."
+    },
+    {
+     "fact": "埃塞俄比亚关闭驻阿斯马拉使馆并要求10名厄立特里亚外交官48小时内离境，指控其从事威胁国家安全的活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ethiopia announced that it was closing its embassy in the Eritrean capital, Asmara, and ordered 10 Eritrean diplomats to leave the country within 48 hours, accusing them of activities that threatened national security."
+    },
+    {
+     "fact": "埃塞俄比亚首都亚的斯亚贝巴夜间听到强烈爆炸声，包括军事总部附近",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "powerful explosions were heard overnight in Ethiopian capital, Addis Ababa, including near Ethiopia's military headquarters."
+    },
+    {
+     "fact": "埃塞俄比亚联邦部队在提格雷、阿法尔和阿姆哈拉地区与提格雷人民解放阵线及其盟友交战",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ethiopian federal forces battle fighters from the Tigray People's Liberation Front (TPLF) and its allies across parts of the northern regions of Tigray, Afar and Amhara."
+    },
+    {
+     "fact": "自上周北部重燃战火以来已有超过50人丧生",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than 50 people have been killed since heavy fighting resumed in northern Ethiopia last week"
+    },
+    {
+     "fact": "一名医生称在阿拉马塔三天激烈战斗中至少52名平民丧生",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In Alamata, a doctor told the BBC earlier this week that at least 52 civilians had been killed during three days of intense fighting."
+    },
+    {
+     "fact": "埃塞俄比亚指控厄立特里亚支持新的反叛联盟，厄立特里亚多次否认",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ethiopia accusing Eritrea of supporting a new rebel alliance – an allegation Asmara has repeatedly denied."
+    },
+    {
+     "fact": "一名亲政府民兵指挥官称厄立特里亚士兵出现在前线，BBC未能独立核实",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A pro-government militia commander fighting in Tigray told the BBC that Eritrean soldiers had been involved on the front lines. The BBC has not independently verified the allegation."
+    },
+    {
+     "fact": "厄立特里亚信息部长否认参与提格雷战斗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eritrea's Information Minister Yemane Gebremeskel denied that it was involved in the fighting in Tigray, which borders his country."
+    },
+    {
+     "fact": "埃塞俄比亚政府与提格雷人民解放阵线互相指责对方发动最新敌对行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Both the Ethiopian government and the TPLF accuse the other of starting the latest hostilities."
+    }
+   ],
+   "uncertainties": [
+    "厄立特里亚士兵参与提格雷前线作战的说法尚未获BBC独立核实",
+    "提格雷地区通信被切断，无法获取可靠信息，尚不清楚是谁切断了通信",
+    "埃塞俄比亚驱逐埃及外交官的原因未公开说明",
+    "伤亡数字来自单一来源（一名医生），尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_f2ddff84902538a6",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

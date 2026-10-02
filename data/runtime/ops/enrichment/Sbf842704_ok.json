@@ -1,0 +1,137 @@
+{
+ "label": "Sbf842704",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5317ecd76811310ebd425a64820923312a0e6e0065d0a49a60f2db4d5b4b329a",
+ "tokens": {
+  "input_tokens": 2842,
+  "output_tokens": 679,
+  "total_tokens": 3521
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "突尼斯：被指为镇压工具的54号法令获当局放宽",
+   "summary_zh": "突尼斯总统府2022年颁布、官方称用于打击社交媒体虚假信息的54号法令，于9月30日经部长会议大幅修订。修订后，散布可能损害他人的虚假信息不再面临五年监禁，改为2万第纳尔（约6000欧元）罚款，累犯则处六个月监禁并罚款5万第纳尔（约1.5万欧元）。非政府组织此前批评该法令被滥用于压制记者、律师和反对派，此次修订引发褒贬不一的反应。",
+   "event_type": "political_instability",
+   "country_iso3": "TUN",
+   "location": {
+    "country_iso3": "TUN",
+    "admin1": null,
+    "city": "突尼斯",
+    "site": null,
+    "raw_text": "Tunisie"
+   },
+   "key_facts": [
+    {
+     "fact": "突尼斯54号法令于9月30日经部长会议大幅修订",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le décret 54, promulgué en 2022 par la présidence de la République et officiellement destiné à lutter contre la désinformation sur les réseaux sociaux, a été largement amendé ce mercredi 30 septembre"
+    },
+    {
+     "fact": "修订后散布虚假信息不再面临五年监禁，改为2万第纳尔罚款",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au lieu des cinq ans d'emprisonnement prévus, l'auteur de diffusion de fausses informations risque désormais une amende de 20 000 dinars, soit 6 000 euros"
+    },
+    {
+     "fact": "累犯将面临六个月监禁及5万第纳尔罚款",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En cas de récidive, une peine de six mois de prison est prévue, assortie d'une amende de 50 000 dinars, soit 15 000 euros"
+    },
+    {
+     "fact": "非政府组织三年来指该法令被滥用于压制批评声音和反对派",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des ONG dénoncent depuis trois ans une utilisation abusive pour réprimer toutes sortes de voix critiques ou d'opposition au gouvernement et au président de la République"
+    },
+    {
+     "fact": "自2022年以来非政府组织记录了约六十起相关案件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une soixantaine de cas ont été répertoriés depuis 2022 par les ONG, mais il ne s'agit que des affaires documentées et médiatisées par les familles"
+    },
+    {
+     "fact": "总统府未就此次修改原因作出评论",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Présidence n'a pas commenté les raisons de ce changement qui a eu lieu lors d’un Conseil des ministres"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证",
+    "总统府未说明修改法令的原因",
+    "非政府组织记录的约六十起案件仅为已记录和媒体披露的案件，实际数量可能更多"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "突尼斯：被指为镇压工具的54号法令获当局放宽",
+   "summary_zh": "突尼斯总统府2022年颁布、官方称用于打击社交媒体虚假信息的54号法令，于9月30日经部长会议大幅修订。修订后，散布可能损害他人的虚假信息不再面临五年监禁，改为2万第纳尔（约6000欧元）罚款，累犯则处六个月监禁并罚款5万第纳尔（约1.5万欧元）。非政府组织此前批评该法令被滥用于压制记者、律师和反对派，此次修订引发褒贬不一的反应。",
+   "event_type": "political_instability",
+   "country_iso3": "TUN",
+   "location": {
+    "country_iso3": "TUN",
+    "admin1": null,
+    "city": "突尼斯",
+    "site": null,
+    "raw_text": "Tunisie"
+   },
+   "key_facts": [
+    {
+     "fact": "突尼斯54号法令于9月30日经部长会议大幅修订",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le décret 54, promulgué en 2022 par la présidence de la République et officiellement destiné à lutter contre la désinformation sur les réseaux sociaux, a été largement amendé ce mercredi 30 septembre"
+    },
+    {
+     "fact": "修订后散布虚假信息不再面临五年监禁，改为2万第纳尔罚款",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au lieu des cinq ans d'emprisonnement prévus, l'auteur de diffusion de fausses informations risque désormais une amende de 20 000 dinars, soit 6 000 euros"
+    },
+    {
+     "fact": "累犯将面临六个月监禁及5万第纳尔罚款",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En cas de récidive, une peine de six mois de prison est prévue, assortie d'une amende de 50 000 dinars, soit 15 000 euros"
+    },
+    {
+     "fact": "非政府组织三年来指该法令被滥用于压制批评声音和反对派",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des ONG dénoncent depuis trois ans une utilisation abusive pour réprimer toutes sortes de voix critiques ou d'opposition au gouvernement et au président de la République"
+    },
+    {
+     "fact": "自2022年以来非政府组织记录了约六十起相关案件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une soixantaine de cas ont été répertoriés depuis 2022 par les ONG, mais il ne s'agit que des affaires documentées et médiatisées par les familles"
+    },
+    {
+     "fact": "总统府未就此次修改原因作出评论",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Présidence n'a pas commenté les raisons de ce changement qui a eu lieu lors d’un Conseil des ministres"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证",
+    "总统府未说明修改法令的原因",
+    "非政府组织记录的约六十起案件仅为已记录和媒体披露的案件，实际数量可能更多"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_eb4dae69bf842704",
+ "disease_event_id": null,
+ "country_code": "TN"
+}

@@ -1,17 +1,17 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-02T17:06:37+08:00",
+ "generated_at": "2026-10-02T18:54:39+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 53,
-  "signals_7d": 338,
-  "verified_events_24h": 57,
-  "verified_events_7d": 370,
+  "signals_24h": 39,
+  "signals_7d": 339,
+  "verified_events_24h": 52,
+  "verified_events_7d": 381,
   "multi_source_verified_events_7d": 8,
-  "countries_with_activity_24h": 13,
+  "countries_with_activity_24h": 15,
   "total_countries_monitored": 22
  },
  "countries_24h": [
@@ -27,6 +27,8 @@
   "埃塞俄比亚",
   "尼日利亚",
   "尼日尔",
+  "突尼斯",
+  "莫桑比克",
   "贝宁"
  ],
  "countries_7d": [
@@ -100,18 +102,18 @@
    "count": 4
   },
   {
-   "value": "喀麦隆",
+   "value": "莫桑比克",
    "count": 3
   },
   {
-   "value": "埃及",
+   "value": "喀麦隆",
    "count": 3
   }
  ],
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 43
+   "count": 29
   },
   {
    "value": "武装冲突",
@@ -141,15 +143,15 @@
  "source_tier_distribution_7d": [
   {
    "value": "B",
-   "count": 405
+   "count": 413
   },
   {
    "value": "C",
-   "count": 209
+   "count": 211
   },
   {
    "value": "A",
-   "count": 94
+   "count": 96
   }
  ],
  "top_verified_events": [
@@ -245,6 +247,21 @@
   }
  ],
  "top_signals": [
+  {
+   "fact_id": "news:03da5f89c0a8c531",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "莫桑比克",
+   "title": "PR PROMETE REFORÇAR MEIOS DE SEGURANÇA E COMBATE AO CONFLITO ENTRE PESSOAS E ANIMAIS EM MABALANE",
+   "category": "other_security",
+   "source": "Portal do Governo de Mocambique",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-02 18:16",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   {
    "fact_id": "news:42825fb35a8b24e0",
    "level": "news_signal",
@@ -589,21 +606,6 @@
    "time": "2026-10-01 22:51",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:5f289e057ecc0bf9",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "加纳",
-   "title": "加纳商业教育教师协会对新高中课程师资培训与资源不足表达关切",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-10-01 22:49",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -681,17 +683,26 @@
   }
  ],
  "existing_assessment": {
-  "status": "ai",
-  "overall_assessment": "已核实事件方面，乍得方向最为集中：苏丹难民持续涌入（逾5.5万人）、提贝斯提矿区枪击致一死两伤、萨尔市场冲突致死、蒙杜车祸四人死亡，并伴随人道与安全双重紧急状态及在联合国为退出国际刑事法院辩护。南苏丹琼莱州杜克县冲突致至少13人死亡，伦拜克北部枪击致死两人。南非埃库鲁莱尼连环杀害女性案已发现第十具遗体，两起大规模枪击致至少27人死亡。加纳以治理与治安类事件为主，包括北部光缆中断、洪灾致93栋房屋倒塌、EOCO拘留争议及禁毒委员会相关指控。情报信号层面，均为单源或尚待核实消息：埃塞俄比亚与厄立特里亚断交及提格雷战事加剧（其中一条为两源）、刚果（金）东部战斗持续并伴虚假信息、联合国报告称AFC/M23行动波及平民、贝宁韦梅河泛滥。上述信号尚未核实，需持续跟踪。",
-  "risk_direction": "worsening",
-  "confidence": "medium",
-  "generated_time": "2026-10-02T17:06:29+08:00",
-  "based_on": "过去24小时/7日公开信息",
-  "model": "",
-  "date": "20261002"
+  "status": "deterministic",
+  "based_on": "过去24小时/7日公开信息（确定性汇总）"
  },
- "fact_count": 708,
+ "fact_count": 720,
  "facts": {
+  "news:03da5f89c0a8c531": {
+   "fact_id": "news:03da5f89c0a8c531",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "莫桑比克",
+   "title": "PR PROMETE REFORÇAR MEIOS DE SEGURANÇA E COMBATE AO CONFLITO ENTRE PESSOAS E ANIMAIS EM MABALANE",
+   "category": "other_security",
+   "source": "Portal do Governo de Mocambique",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-02 18:16",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:42825fb35a8b24e0": {
    "fact_id": "news:42825fb35a8b24e0",
    "level": "news_signal",
@@ -11309,6 +11320,171 @@
    "source_tier": "B",
    "source_role": "aggregator_discovery",
    "time": "2026-10-02 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_af63f35eb208d1e7": {
+   "fact_id": "EVT_af63f35eb208d1e7",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "刚果（金）",
+   "title": "移动实验室加快刚果（金）东部埃博拉检测速度",
+   "category": "public_health",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-02 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_f2ddff84902538a6": {
+   "fact_id": "EVT_f2ddff84902538a6",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "埃塞俄比亚与厄立特里亚因北部冲突升级断绝外交关系",
+   "category": "armed_conflict",
+   "source": "BBC News (Africa)",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-02 05:42",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_7ef82459a3b362de": {
+   "fact_id": "EVT_7ef82459a3b362de",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳体育部长科菲·亚当斯称“我不聘用教练，也不解雇教练”",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-02 09:29",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_b11443910bb53966": {
+   "fact_id": "EVT_b11443910bb53966",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳新爱国党设立31个投票中心以加快全国执行委员会选举",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-02 09:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_51006c2e38f8dc8f": {
+   "fact_id": "EVT_51006c2e38f8dc8f",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳阿克拉La Pleasure Beach在重兵戒备下开始拆除",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-02 08:54",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_a42a1d03d036447e": {
+   "fact_id": "EVT_a42a1d03d036447e",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "Innovare Limited祝贺Ahantaman社区银行获ISO/IEC 27001:2022认证",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-02 08:13",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_1183c73981200a84": {
+   "fact_id": "EVT_1183c73981200a84",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳体育部长称政府“无法解散”加纳足协",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-02 07:42",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_60a5b9e6337c7f1a": {
+   "fact_id": "EVT_60a5b9e6337c7f1a",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳NAIMOS突袭非法采矿点 查获10台挖掘机",
+   "category": "military_operation",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-02 06:36",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_389ea4bcd701af16": {
+   "fact_id": "EVT_389ea4bcd701af16",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "几内亚",
+   "title": "几内亚流亡前总理西迪亚·图雷将在科特迪瓦安葬",
+   "category": "other_security",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-02 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_94e1a94e4fa35675": {
+   "fact_id": "EVT_94e1a94e4fa35675",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "莫桑比克",
+   "title": "莫桑比克总统承诺在Mabalane加强安全力量并应对人兽冲突",
+   "category": "other_security",
+   "source": "Portal do Governo de Mocambique",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-02 10:16",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_eb4dae69bf842704": {
+   "fact_id": "EVT_eb4dae69bf842704",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "突尼斯",
+   "title": "突尼斯：被指为镇压工具的54号法令获当局放宽",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-02 09:12",
    "importance": "high",
    "severity": "medium"
   }
