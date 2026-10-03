@@ -1,0 +1,131 @@
+{
+ "label": "Sda36a336",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "bb59564752b1506bd07e2672ad9b62eb235972cc9cdc106fd099bf99e55dc68a",
+ "tokens": {
+  "input_tokens": 2846,
+  "output_tokens": 520,
+  "total_tokens": 3366
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "after": "[\"据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "蒂拉贝里大区启动2026-2027学年开学",
+   "summary_zh": "尼日尔蒂拉贝里大区区长迈纳·布卡尔上校于2026年10月1日在该地区正式启动2026-2027学年开学活动，走访了蒂拉贝里市的两所学校并向学生发放学习用品。区长强调新学年应以纪律、工作和卓越为主题，呼吁学生重视教育、努力学习。地区教育负责人表示，本学年该地区收到224.34吨学习用品，数量为多年来最多。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "Tillabéri",
+    "city": "Tillabéri",
+    "site": "école Quartier 和 CEG 2",
+    "raw_text": "Tillabéri, école Quartier et CEG 2 de Tillabéri"
+   },
+   "key_facts": [
+    {
+     "fact": "蒂拉贝里大区区长迈纳·布卡尔上校于2026年10月1日正式启动2026-2027学年开学",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Gouverneur de la Région de Tillabéri, le Colonel Maïna Boukar a officiellement lancé, ce jeudi 1 er  octobre 2026, la rentrée scolaire 2026-2027 dans la région."
+    },
+    {
+     "fact": "区长走访了蒂拉贝里市的école Quartier和CEG 2两所学校并分发学习用品",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La première étape a conduit la délégation à l'école Quartier de Tillabéri... Après la distribution des fournitures scolaires... La délégation s'est ensuite rendue au CEG 2 de Tillabéri."
+    },
+    {
+     "fact": "区长强调新学年应以纪律、工作和卓越为主题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cette rentrée scolaire 2026-2027 doit être placée sous le signe de la discipline, du travail et de l'excellence"
+    },
+    {
+     "fact": "蒂拉贝里大区本学年收到224.34吨学习用品",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La région de Tillabéri a bénéficié de 224,34 tonnes de fournitures, comprenant également des manuels scolaires."
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "none",
+   "classification_confidence": 90
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "蒂拉贝里大区启动2026-2027学年开学",
+   "summary_zh": "尼日尔蒂拉贝里大区区长迈纳·布卡尔上校于2026年10月1日在该地区正式启动2026-2027学年开学活动，走访了蒂拉贝里市的两所学校并向学生发放学习用品。区长强调新学年应以纪律、工作和卓越为主题，呼吁学生重视教育、努力学习。地区教育负责人表示，本学年该地区收到224.34吨学习用品，数量为多年来最多。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "Tillabéri",
+    "city": "Tillabéri",
+    "site": "école Quartier 和 CEG 2",
+    "raw_text": "Tillabéri, école Quartier et CEG 2 de Tillabéri"
+   },
+   "key_facts": [
+    {
+     "fact": "蒂拉贝里大区区长迈纳·布卡尔上校于2026年10月1日正式启动2026-2027学年开学",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Gouverneur de la Région de Tillabéri, le Colonel Maïna Boukar a officiellement lancé, ce jeudi 1 er  octobre 2026, la rentrée scolaire 2026-2027 dans la région."
+    },
+    {
+     "fact": "区长走访了蒂拉贝里市的école Quartier和CEG 2两所学校并分发学习用品",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La première étape a conduit la délégation à l'école Quartier de Tillabéri... Après la distribution des fournitures scolaires... La délégation s'est ensuite rendue au CEG 2 de Tillabéri."
+    },
+    {
+     "fact": "区长强调新学年应以纪律、工作和卓越为主题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cette rentrée scolaire 2026-2027 doit être placée sous le signe de la discipline, du travail et de l'excellence"
+    },
+    {
+     "fact": "蒂拉贝里大区本学年收到224.34吨学习用品",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La région de Tillabéri a bénéficié de 224,34 tonnes de fournitures, comprenant également des manuels scolaires."
+    }
+   ],
+   "uncertainties": [
+    "据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 90
+  }
+ },
+ "event_id": "EVT_c9a7346ada36a336",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
