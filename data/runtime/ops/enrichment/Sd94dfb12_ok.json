@@ -1,0 +1,115 @@
+{
+ "label": "Sd94dfb12",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "cfae6468e40c3c989ef585ea542204c6b3423857e4dda008daef4e2dcd9e8bfa",
+ "tokens": {
+  "input_tokens": 2379,
+  "output_tokens": 466,
+  "total_tokens": 2845
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得公共卫生部门通报恩贾梅纳及三个省份出现登革热病例",
+   "summary_zh": "乍得公共卫生与预防部通报，该国瓦达伊、瓦迪菲拉、西拉三个省份以及首都恩贾梅纳四个地区出现登革热病例。该部门在2026年10月3日发布的公报中呼吁民众加强预防措施，以限制这种由受感染蚊虫叮咬传播的病毒性疾病的扩散。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "le Ouaddaï, le Wadi Fira, le Sila et la ville de N’Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得公共卫生与预防部通报四个地区出现登革热病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministère de la Santé publique et de la Prévention alerte sur la notification de cas de dengue dans quatre zones du pays : le Ouaddaï, le Wadi Fira, le Sila et la ville de N’Djamena."
+    },
+    {
+     "fact": "涉及地区为瓦达伊、瓦迪菲拉、西拉和恩贾梅纳市",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Ouaddaï, le Wadi Fira, le Sila et la ville de N’Djamena"
+    },
+    {
+     "fact": "公报于2026年10月3日发布",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans un communiqué rendu public ce 3 octobre 2026"
+    },
+    {
+     "fact": "该部门呼吁民众加强预防措施以限制疾病传播",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le département appelle la population à renforcer les mesures de prévention afin de limiter la propagation de cette maladie virale transmise par les piqûres de moustiques infectés"
+    }
+   ],
+   "uncertainties": [
+    "病例数量尚未公布",
+    "信息来源为单一来源（Le N'Djam Post），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 80
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得公共卫生部门通报恩贾梅纳及三个省份出现登革热病例",
+   "summary_zh": "乍得公共卫生与预防部通报，该国瓦达伊、瓦迪菲拉、西拉三个省份以及首都恩贾梅纳四个地区出现登革热病例。该部门在2026年10月3日发布的公报中呼吁民众加强预防措施，以限制这种由受感染蚊虫叮咬传播的病毒性疾病的扩散。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "le Ouaddaï, le Wadi Fira, le Sila et la ville de N’Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得公共卫生与预防部通报四个地区出现登革热病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministère de la Santé publique et de la Prévention alerte sur la notification de cas de dengue dans quatre zones du pays : le Ouaddaï, le Wadi Fira, le Sila et la ville de N’Djamena."
+    },
+    {
+     "fact": "涉及地区为瓦达伊、瓦迪菲拉、西拉和恩贾梅纳市",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Ouaddaï, le Wadi Fira, le Sila et la ville de N’Djamena"
+    },
+    {
+     "fact": "公报于2026年10月3日发布",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans un communiqué rendu public ce 3 octobre 2026"
+    },
+    {
+     "fact": "该部门呼吁民众加强预防措施以限制疾病传播",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le département appelle la population à renforcer les mesures de prévention afin de limiter la propagation de cette maladie virale transmise par les piqûres de moustiques infectés"
+    }
+   ],
+   "uncertainties": [
+    "病例数量尚未公布",
+    "信息来源为单一来源（Le N'Djam Post），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 80
+  }
+ },
+ "event_id": "EVT_b37bbc50d94dfb12",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
