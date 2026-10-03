@@ -1,0 +1,136 @@
+{
+ "label": "Sfcf2136c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0f5f8617a6870c78a113dbefa70a61cae3a8857d11e3e23ad845421d6166b42d",
+ "tokens": {
+  "input_tokens": 2553,
+  "output_tokens": 427,
+  "total_tokens": 2980
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"事故原因尚未确定\", \"当局未立即确认所有机上人员身份\"]",
+    "after": "[\"事故原因尚未确定\", \"当局未立即确认所有机上人员身份\", \"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"事故原因尚未确定\", \"当局未立即确认所有机上人员身份\", \"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "after": "[\"事故原因尚未确定\", \"当局未立即确认所有机上人员身份\", \"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "津巴布韦富商Wicknell Chivayo与妻子在直升机坠毁中遇难",
+   "summary_zh": "津巴布韦知名商人Wicknell Chivayo及其妻子在Marondera农村地区发生的直升机坠毁事故中遇难，机上六人全部死亡。事故原因尚未确定，警方与民航部门正在调查。Chivayo以奢华生活方式、与非洲多国总统的密切关系及政府合同而闻名。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "ZWE",
+   "location": {
+    "country_iso3": "ZWE",
+    "admin1": "Mashonaland East",
+    "city": "Marondera",
+    "site": "Kudenga Farm",
+    "raw_text": "Marondera rural area, about 70km east of Harare"
+   },
+   "key_facts": [
+    {
+     "fact": "津巴布韦商人Wicknell Chivayo与妻子在直升机坠毁中遇难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Prominent Zimbabwean businessman Wicknell Chivayo and his wife have been killed in a helicopter crash that left six people dead, his family have confirmed."
+    },
+    {
+     "fact": "直升机在Marondera农村地区坠毁，机上六人全部死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The helicopter came down in the Marondera rural area, about 70km (43 miles) east of the capital, Harare, on Wednesday evening. Police said all six people on board died."
+    },
+    {
+     "fact": "事故原因尚未确定，调查正在进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The cause of the crash was not immediately known, and police said investigations were under way."
+    },
+    {
+     "fact": "调查人员已找到完整的黑匣子",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "investigators recovered the aircraft's intact black box as they began investigating"
+    }
+   ],
+   "uncertainties": [
+    "事故原因尚未确定",
+    "当局未立即确认所有机上人员身份"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "津巴布韦富商Wicknell Chivayo与妻子在直升机坠毁中遇难",
+   "summary_zh": "津巴布韦知名商人Wicknell Chivayo及其妻子在Marondera农村地区发生的直升机坠毁事故中遇难，机上六人全部死亡。事故原因尚未确定，警方与民航部门正在调查。Chivayo以奢华生活方式、与非洲多国总统的密切关系及政府合同而闻名。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "ZWE",
+   "location": {
+    "country_iso3": "ZWE",
+    "admin1": "Mashonaland East",
+    "city": "Marondera",
+    "site": "Kudenga Farm",
+    "raw_text": "Marondera rural area, about 70km east of Harare"
+   },
+   "key_facts": [
+    {
+     "fact": "津巴布韦商人Wicknell Chivayo与妻子在直升机坠毁中遇难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Prominent Zimbabwean businessman Wicknell Chivayo and his wife have been killed in a helicopter crash that left six people dead, his family have confirmed."
+    },
+    {
+     "fact": "直升机在Marondera农村地区坠毁，机上六人全部死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The helicopter came down in the Marondera rural area, about 70km (43 miles) east of the capital, Harare, on Wednesday evening. Police said all six people on board died."
+    },
+    {
+     "fact": "事故原因尚未确定，调查正在进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The cause of the crash was not immediately known, and police said investigations were under way."
+    },
+    {
+     "fact": "调查人员已找到完整的黑匣子",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "investigators recovered the aircraft's intact black box as they began investigating"
+    }
+   ],
+   "uncertainties": [
+    "事故原因尚未确定",
+    "当局未立即确认所有机上人员身份",
+    "据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_469846f3fcf2136c",
+ "disease_event_id": null,
+ "country_code": "ZW"
+}

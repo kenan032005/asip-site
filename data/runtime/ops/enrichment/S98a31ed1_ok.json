@@ -1,0 +1,138 @@
+{
+ "label": "S98a31ed1",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6d3ef7d282b497e6d0f1e1628c77d1ca4a5078625f429db0329efd6337c104ec",
+ "tokens": {
+  "input_tokens": 2625,
+  "output_tokens": 585,
+  "total_tokens": 3210
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"部分埃库鲁莱尼死亡案件之间是否存在关联尚未确认\", \"警方未表示正在调查连环杀手\", \"案件嫌疑人情况尚待核实\"]",
+    "after": "[\"部分埃库鲁莱尼死亡案件之间是否存在关联尚未确认\", \"警方未表示正在调查连环杀手\", \"案件嫌疑人情况尚待核实\", \"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南非男性尝试终结针对女性的暴力：“每个男人都应发挥作用”",
+   "summary_zh": "约翰内斯堡附近埃库鲁莱尼三个月内发现12名女性遗体，再次凸显南非针对女性的暴力问题。当地非营利组织“国家之父”在约翰内斯堡非正式定居点组织男性集会，倡导正面男性气质并呼吁男性承担责任。南非总统拉马福萨承认政府做得不够，并宣布改善路灯、复查未破案件等措施。警方尚未排除部分死亡案件之间存在关联，但未表示正在调查连环杀手。",
+   "event_type": "civil_unrest",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": "豪登省",
+    "city": "约翰内斯堡",
+    "site": "Organic Market非正式定居点",
+    "raw_text": "a narrow street in a Johannesburg informal settlement known as Organic Market, close to Alexandra township"
+   },
+   "key_facts": [
+    {
+     "fact": "约翰内斯堡附近埃库鲁莱尼三个月内发现12名女性遗体",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The discovery of the bodies of 12 women over three months, in the city of Ekurhuleni, near Johannesburg has reignited questions about the scale of what many people see as being a crisis of violence against women."
+    },
+    {
+     "fact": "南非总统拉马福萨承认政府做得不够并宣布相关措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South Africa's President Cyril Ramaphosa has acknowledged that his government has not done enough and announced measures he hopes can make women feel safer."
+    },
+    {
+     "fact": "今年4月至6月南非有569名女性被杀，平均每天6人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In that period, according to the South African Human Rights Commission, 569 women were killed, an average of six a day, and 1,052 others survived attempted murder."
+    },
+    {
+     "fact": "警方尚未排除部分埃库鲁莱尼死亡案件之间存在关联，但未表示正在调查连环杀手",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Police have not ruled out potential links between some of the Ekurhuleni deaths but have not said they are investigating a serial killer."
+    },
+    {
+     "fact": "当地非营利组织“国家之父”在约翰内斯堡非正式定居点组织男性集会倡导正面男性气质",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Bra Steve is the local organiser of Father A Nation, a non-profit that works with men and boys to promote positive masculinity and help end violence against women."
+    }
+   ],
+   "uncertainties": [
+    "部分埃库鲁莱尼死亡案件之间是否存在关联尚未确认",
+    "警方未表示正在调查连环杀手",
+    "案件嫌疑人情况尚待核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南非男性尝试终结针对女性的暴力：“每个男人都应发挥作用”",
+   "summary_zh": "约翰内斯堡附近埃库鲁莱尼三个月内发现12名女性遗体，再次凸显南非针对女性的暴力问题。当地非营利组织“国家之父”在约翰内斯堡非正式定居点组织男性集会，倡导正面男性气质并呼吁男性承担责任。南非总统拉马福萨承认政府做得不够，并宣布改善路灯、复查未破案件等措施。警方尚未排除部分死亡案件之间存在关联，但未表示正在调查连环杀手。",
+   "event_type": "civil_unrest",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": "豪登省",
+    "city": "约翰内斯堡",
+    "site": "Organic Market非正式定居点",
+    "raw_text": "a narrow street in a Johannesburg informal settlement known as Organic Market, close to Alexandra township"
+   },
+   "key_facts": [
+    {
+     "fact": "约翰内斯堡附近埃库鲁莱尼三个月内发现12名女性遗体",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The discovery of the bodies of 12 women over three months, in the city of Ekurhuleni, near Johannesburg has reignited questions about the scale of what many people see as being a crisis of violence against women."
+    },
+    {
+     "fact": "南非总统拉马福萨承认政府做得不够并宣布相关措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South Africa's President Cyril Ramaphosa has acknowledged that his government has not done enough and announced measures he hopes can make women feel safer."
+    },
+    {
+     "fact": "今年4月至6月南非有569名女性被杀，平均每天6人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In that period, according to the South African Human Rights Commission, 569 women were killed, an average of six a day, and 1,052 others survived attempted murder."
+    },
+    {
+     "fact": "警方尚未排除部分埃库鲁莱尼死亡案件之间存在关联，但未表示正在调查连环杀手",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Police have not ruled out potential links between some of the Ekurhuleni deaths but have not said they are investigating a serial killer."
+    },
+    {
+     "fact": "当地非营利组织“国家之父”在约翰内斯堡非正式定居点组织男性集会倡导正面男性气质",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Bra Steve is the local organiser of Father A Nation, a non-profit that works with men and boys to promote positive masculinity and help end violence against women."
+    }
+   ],
+   "uncertainties": [
+    "部分埃库鲁莱尼死亡案件之间是否存在关联尚未确认",
+    "警方未表示正在调查连环杀手",
+    "案件嫌疑人情况尚待核实",
+    "据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_5f1ddd9b98a31ed1",
+ "disease_event_id": null,
+ "country_code": "ZA"
+}

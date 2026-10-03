@@ -1,0 +1,103 @@
+{
+ "label": "S6dd1f400",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "fdb77c991262d680d5feabf7d9fa8762c32791449f99c28574e467e5b2a509af",
+ "tokens": {
+  "input_tokens": 1946,
+  "output_tokens": 360,
+  "total_tokens": 2306
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "苏丹燃油短缺推高物价，民众生活承压",
+   "summary_zh": "苏丹正面临燃油短缺，原因包括与中东冲突相关的全球石油供应中断以及国内进口限制。短缺已影响公共交通、货运和工厂生产，运输成本上升进一步推高食品价格。喀土穆居民穆罕默德·哈桑表示，货物和人员流动已停止，市场完全瘫痪。",
+   "event_type": "other_security",
+   "country_iso3": "SDN",
+   "location": {
+    "country_iso3": "SDN",
+    "admin1": null,
+    "city": "喀土穆",
+    "site": null,
+    "raw_text": "Sudan; Khartoum"
+   },
+   "key_facts": [
+    {
+     "fact": "苏丹正面临燃油短缺，受全球石油供应中断和国内进口限制影响",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sudan is grappling with a fuel shortage driven by global oil disruptions tied to the Middle East conflict and by domestic import restrictions."
+    },
+    {
+     "fact": "燃油短缺已影响公共交通、货运和工厂生产，并推高食品价格",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "This has impacted public transport, freight and factory production, while higher transport costs have pushed up food prices for ordinary people."
+    },
+    {
+     "fact": "喀土穆居民称货物和人员流动已停止，市场完全瘫痪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "\"The movement of goods and people has stopped, and the market is totally paralyzed, we need solutions, not promises,\" said Khartoum resident Mohamed Hassan."
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Africanews）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "苏丹燃油短缺推高物价，民众生活承压",
+   "summary_zh": "苏丹正面临燃油短缺，原因包括与中东冲突相关的全球石油供应中断以及国内进口限制。短缺已影响公共交通、货运和工厂生产，运输成本上升进一步推高食品价格。喀土穆居民穆罕默德·哈桑表示，货物和人员流动已停止，市场完全瘫痪。",
+   "event_type": "other_security",
+   "country_iso3": "SDN",
+   "location": {
+    "country_iso3": "SDN",
+    "admin1": null,
+    "city": "喀土穆",
+    "site": null,
+    "raw_text": "Sudan; Khartoum"
+   },
+   "key_facts": [
+    {
+     "fact": "苏丹正面临燃油短缺，受全球石油供应中断和国内进口限制影响",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sudan is grappling with a fuel shortage driven by global oil disruptions tied to the Middle East conflict and by domestic import restrictions."
+    },
+    {
+     "fact": "燃油短缺已影响公共交通、货运和工厂生产，并推高食品价格",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "This has impacted public transport, freight and factory production, while higher transport costs have pushed up food prices for ordinary people."
+    },
+    {
+     "fact": "喀土穆居民称货物和人员流动已停止，市场完全瘫痪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "\"The movement of goods and people has stopped, and the market is totally paralyzed, we need solutions, not promises,\" said Khartoum resident Mohamed Hassan."
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Africanews）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_e00a54b56dd1f400",
+ "disease_event_id": null,
+ "country_code": "SD"
+}

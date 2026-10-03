@@ -1,0 +1,106 @@
+{
+ "label": "S7d90f2d9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "bde2f3734557b1e05c0e111dc618711ac903b7a82b57e0f71dcd881746eac5ba",
+ "tokens": {
+  "input_tokens": 2127,
+  "output_tokens": 269,
+  "total_tokens": 2396
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该消息目前仅有一个来源（MyJoyOnline），尚未获得其他来源交叉验证\", \"死刑执行失败的具体原因尚未在文中说明\"]",
+    "after": "[\"该消息目前仅有一个来源（MyJoyOnline），尚未获得其他来源交叉验证\", \"死刑执行失败的具体原因尚未在文中说明\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "美国田纳西州监狱主管在Christa Pike死刑执行失败后辞职",
+   "summary_zh": "美国田纳西州监狱系统负责人于周三死刑犯Christa Pike执行失败后宣布辞职。该消息由加纳媒体MyJoyOnline报道，目前为单一来源，尚未获得其他来源交叉验证。",
+   "event_type": "other_security",
+   "country_iso3": "USA",
+   "location": {
+    "country_iso3": "USA",
+    "admin1": "田纳西州",
+    "city": null,
+    "site": null,
+    "raw_text": "Tennessee"
+   },
+   "key_facts": [
+    {
+     "fact": "美国田纳西州监狱系统负责人宣布辞职",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Tennessee prison chief to resign after Christa Pike’s failed execution"
+    },
+    {
+     "fact": "辞职发生在死刑犯Christa Pike周三执行失败之后",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The head of prisons in the US state of Tennessee is resigning after the failed execution of death row inmate Christa Pike on Wednesday."
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚未获得其他来源交叉验证",
+    "死刑执行失败的具体原因尚未在文中说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "美国田纳西州监狱主管在Christa Pike死刑执行失败后辞职",
+   "summary_zh": "美国田纳西州监狱系统负责人于周三死刑犯Christa Pike执行失败后宣布辞职。该消息由加纳媒体MyJoyOnline报道，目前为单一来源，尚未获得其他来源交叉验证。",
+   "event_type": "other_security",
+   "country_iso3": "USA",
+   "location": {
+    "country_iso3": "USA",
+    "admin1": "田纳西州",
+    "city": null,
+    "site": null,
+    "raw_text": "Tennessee"
+   },
+   "key_facts": [
+    {
+     "fact": "美国田纳西州监狱系统负责人宣布辞职",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Tennessee prison chief to resign after Christa Pike’s failed execution"
+    },
+    {
+     "fact": "辞职发生在死刑犯Christa Pike周三执行失败之后",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The head of prisons in the US state of Tennessee is resigning after the failed execution of death row inmate Christa Pike on Wednesday."
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚未获得其他来源交叉验证",
+    "死刑执行失败的具体原因尚未在文中说明",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_298b34df7d90f2d9",
+ "disease_event_id": null,
+ "country_code": "GH"
+}
