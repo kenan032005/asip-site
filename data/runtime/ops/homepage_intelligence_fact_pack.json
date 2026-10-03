@@ -1,13 +1,13 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-03T14:51:54+08:00",
+ "generated_at": "2026-10-03T14:53:09+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 19,
-  "signals_7d": 349,
+  "signals_24h": 22,
+  "signals_7d": 352,
   "verified_events_24h": 24,
   "verified_events_7d": 385,
   "multi_source_verified_events_7d": 7,
@@ -67,11 +67,11 @@
   },
   {
    "value": "乍得",
-   "count": 37
+   "count": 38
   },
   {
    "value": "埃塞俄比亚",
-   "count": 29
+   "count": 30
   },
   {
    "value": "南苏丹",
@@ -83,7 +83,7 @@
   },
   {
    "value": "刚果（金）",
-   "count": 16
+   "count": 17
   },
   {
    "value": "贝宁",
@@ -109,7 +109,7 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 11
+   "count": 12
   },
   {
    "value": "基础设施安全",
@@ -117,6 +117,10 @@
   },
   {
    "value": "严重犯罪",
+   "count": 2
+  },
+  {
+   "value": "公共卫生",
    "count": 1
   },
   {
@@ -135,11 +139,11 @@
   },
   {
    "value": "C",
-   "count": 198
+   "count": 199
   },
   {
    "value": "A",
-   "count": 105
+   "count": 107
   }
  ],
  "top_verified_events": [
@@ -235,6 +239,51 @@
   }
  ],
  "top_signals": [
+  {
+   "fact_id": "news:5ad589dc92daf60d",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "刚果（金）",
+   "title": "刚果（金）埃博拉疫情死亡人数突破4000人，卫生部长仍表乐观",
+   "category": "public_health",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-03 11:53",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:6af121bdf2de443f",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "马拉维前陆军司令因涉嫌向苏丹走私武器被捕",
+   "category": "serious_crime",
+   "source": "RFI Afrique (Chad)",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-03 11:03",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:6e2db63b741780f9",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "埃塞俄比亚：与联邦政府结盟的民兵宣称夺取默克莱机场",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-03 11:01",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   {
    "fact_id": "news:4fb1222d43dd846a",
    "level": "news_signal",
@@ -549,51 +598,6 @@
    "time": "2026-10-02 14:06",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:ca71849e7abfc276",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "加纳",
-   "title": "加纳议员律师批评EOCO持续拘留当事人，称“权力操弄令人作呕”",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-10-02 13:52",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:d88161099bfdf0db",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "埃塞俄比亚与厄立特里亚因北部冲突升级断绝外交关系",
-   "category": "armed_conflict",
-   "source": "BBC News (Africa)",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-02 13:42",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:e5bae9e4484e635f",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "刚果（金）",
-   "title": "联合国报告：AFC/M23针对FDLR的军事行动系统性波及平民",
-   "category": "civil_unrest",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-02 12:36",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -671,17 +675,56 @@
   }
  ],
  "existing_assessment": {
-  "status": "ai",
-  "overall_assessment": "已核实事件方面，乍得在联合国为退出国际刑事法院辩护并警告苏丹，同时警告反对边境入侵并收容逾两百万流离失所者；今年以来逾5.5万苏丹人逃往乍得，援助资金崩溃。乍得萨尔市市场冲突致一人死亡，蒙杜附近车祸致四人死亡。埃塞俄比亚北部冲突扩大，联合国人权高专呼吁紧急缓和。南非约翰内斯堡与开普敦发生两起枪击事件共致27人死亡，连环杀害女性案遇害人数升至11人。加纳方面，全国教师罢工持续，政府称已处理6079例晋升案，工会将于周一与政府会面；北部因光缆中断出现大规模通信中断。情报信号方面，均为单源消息尚待核实：乍得提贝斯提金矿开采点紧张局势并筹备部长级访问；尼日尔马拉迪难民儿童教育问题及装备部长视察蒂拉贝里道路工程；加纳博诺地区教师工会支持全国罢工、三大教师工会重申罢工仍在进行。",
-  "risk_direction": "worsening",
-  "confidence": "medium",
-  "generated_time": "2026-10-03T14:51:47+08:00",
-  "based_on": "过去24小时/7日公开信息",
-  "model": "",
-  "date": "20261003"
+  "status": "deterministic",
+  "based_on": "过去24小时/7日公开信息（确定性汇总）"
  },
- "fact_count": 734,
+ "fact_count": 737,
  "facts": {
+  "news:5ad589dc92daf60d": {
+   "fact_id": "news:5ad589dc92daf60d",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "刚果（金）",
+   "title": "刚果（金）埃博拉疫情死亡人数突破4000人，卫生部长仍表乐观",
+   "category": "public_health",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-03 11:53",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:6af121bdf2de443f": {
+   "fact_id": "news:6af121bdf2de443f",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "马拉维前陆军司令因涉嫌向苏丹走私武器被捕",
+   "category": "serious_crime",
+   "source": "RFI Afrique (Chad)",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-03 11:03",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:6e2db63b741780f9": {
+   "fact_id": "news:6e2db63b741780f9",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "埃塞俄比亚：与联邦政府结盟的民兵宣称夺取默克莱机场",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-03 11:01",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:4fb1222d43dd846a": {
    "fact_id": "news:4fb1222d43dd846a",
    "level": "news_signal",
