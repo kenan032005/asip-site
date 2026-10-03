@@ -1,15 +1,15 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-03T16:06:21+08:00",
+ "generated_at": "2026-10-03T17:06:22+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 21,
-  "signals_7d": 351,
-  "verified_events_24h": 23,
-  "verified_events_7d": 384,
+  "signals_24h": 18,
+  "signals_7d": 350,
+  "verified_events_24h": 20,
+  "verified_events_7d": 383,
   "multi_source_verified_events_7d": 7,
   "countries_with_activity_24h": 11,
   "total_countries_monitored": 22
@@ -67,7 +67,7 @@
   },
   {
    "value": "乍得",
-   "count": 37
+   "count": 36
   },
   {
    "value": "埃塞俄比亚",
@@ -109,7 +109,7 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 11
+   "count": 8
   },
   {
    "value": "基础设施安全",
@@ -139,7 +139,7 @@
   },
   {
    "value": "C",
-   "count": 197
+   "count": 195
   },
   {
    "value": "A",
@@ -147,21 +147,6 @@
   }
  ],
  "top_verified_events": [
-  {
-   "fact_id": "EVT_fca98abf095ba245",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得在联合国为其退出国际刑事法院辩护并警告苏丹",
-   "category": "military_operation",
-   "source": "Tchadinfos",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-26 08:32",
-   "importance": "high",
-   "severity": "medium"
-  },
   {
    "fact_id": "EVT_02cd702655cd49df",
    "level": "verified_event",
@@ -234,6 +219,21 @@
    "source_tier": "B",
    "source_role": "regional",
    "time": "2026-09-26 21:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_952d1b50702680bc",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳阿哈福地区利益相关方要求打击外国人主导的非法采矿",
+   "category": "infrastructure_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-09-26 19:24",
    "importance": "high",
    "severity": "medium"
   }
@@ -675,10 +675,16 @@
   }
  ],
  "existing_assessment": {
-  "status": "deterministic",
-  "based_on": "过去24小时/7日公开信息（确定性汇总）"
+  "status": "ai",
+  "overall_assessment": "已核实事件方面：加纳为本周最活跃国家（7日142条），涉及教师全国罢工持续、EOCO执法争议、毒品外流与出口商风险、北部光缆中断、东北贡贾洪灾致93栋房屋倒塌246人无家可归；南非约翰内斯堡与开普敦发生两起枪击致至少27人死亡，连环杀害女性案遇害人数升至11人；乍得萨尔市场冲突致一人死亡，苏丹难民持续涌入；埃塞俄比亚北部冲突扩大，联合国人权高专呼吁紧急缓和。情报信号（单源消息，尚待核实）方面：刚果（金）埃博拉疫情死亡人数突破4000人；与联邦政府结盟的民兵宣称夺取默克莱机场；马拉维前陆军司令因涉嫌向苏丹走私武器被捕；乍得金矿开采点紧张局势。上述信号均未经多源交叉核实，不宜作为决策既定依据。整体风险方向趋于恶化，建议重点关注埃塞俄比亚北部、南非治安与加纳罢工走向。",
+  "risk_direction": "worsening",
+  "confidence": "medium",
+  "generated_time": "2026-10-03T17:06:16+08:00",
+  "based_on": "过去24小时/7日公开信息",
+  "model": "",
+  "date": "20261003"
  },
- "fact_count": 735,
+ "fact_count": 733,
  "facts": {
   "news:5ad589dc92daf60d": {
    "fact_id": "news:5ad589dc92daf60d",
@@ -5929,36 +5935,6 @@
    "time": "2026-09-26 17:18",
    "importance": "low",
    "why_it_matters": ""
-  },
-  "news:5ef3932ede4e0750": {
-   "fact_id": "news:5ef3932ede4e0750",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得在联合国为其退出国际刑事法院辩护并警告苏丹",
-   "category": "military_operation",
-   "source": "Tchadinfos",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-26 16:32",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "EVT_fca98abf095ba245": {
-   "fact_id": "EVT_fca98abf095ba245",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得在联合国为其退出国际刑事法院辩护并警告苏丹",
-   "category": "military_operation",
-   "source": "Tchadinfos",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-26 08:32",
-   "importance": "high",
-   "severity": "medium"
   },
   "EVT_02cd702655cd49df": {
    "fact_id": "EVT_02cd702655cd49df",
