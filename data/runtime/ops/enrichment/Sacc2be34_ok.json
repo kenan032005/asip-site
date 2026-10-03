@@ -1,0 +1,125 @@
+{
+ "label": "Sacc2be34",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a8831a06efb7946d7b68e26ef0c3990594723341fb9f2c4057e87de331637b82",
+ "tokens": {
+  "input_tokens": 2892,
+  "output_tokens": 626,
+  "total_tokens": 3518
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）埃博拉疫情死亡人数突破4000人，卫生部长仍表乐观",
+   "summary_zh": "刚果（金）埃博拉疫情死亡人数已突破4000人，确诊病例超过8300例，是该国历史上最严重的一次疫情。卫生部长罗杰·坎巴在金沙萨的记者会上称“疫情高峰已经过去”，并援引多数疫区感染人数下降为依据。但疫情形势依然严峻，44个卫生区仍处于活跃状态，北基伍省的贝尼、布滕博和卡图瓦等地疫情持续，不安全局势和社区抵制阻碍了应对工作。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": "金沙萨",
+    "site": null,
+    "raw_text": "République démocratique du Congo, Kinshasa"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）埃博拉疫情死亡人数突破4000人，确诊病例超过8300例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’épidémie d’Ebola a franchi le seuil des 4 000 morts en République démocratique du Congo, pour plus de 8 300 cas confirmés."
+    },
+    {
+     "fact": "卫生部长罗杰·坎巴在金沙萨记者会上称疫情高峰已经过去",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Lors d’une conférence de presse tenue vendredi à Kinshasa, le ministre de la Santé, Roger Kamba, a affirmé que « le pic est derrière nous »."
+    },
+    {
+     "fact": "63个卫生区中19个已至少三周无新增病例，44个仍处于活跃状态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "19 zones de santé sur 63 n'ont plus enregistré de cas depuis au moins trois semaines... Mais la situation demeure critique. 44 zones restent actives"
+    },
+    {
+     "fact": "超过一半的死亡仍发生在医疗机构之外，接触者追踪率降至82%以下",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plus de la moitié des décès surviennent encore hors des structures médicales... le suivi des sujets contacts est repassé sous la barre des 82 %"
+    },
+    {
+     "fact": "政府要求人道主义组织说明境外资金使用情况，首轮应对计划2.26亿美元中仅略超半数获得说明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sur les 226 millions de dollars mobilisés du premier plan de riposte, à peine plus de la moitié ont été justifiés au gouvernement par les humanitaires."
+    }
+   ],
+   "uncertainties": [
+    "卫生部长关于疫情高峰已过的说法为单方面表态，疫情形势仍被描述为严峻",
+    "该报道为单一来源（RFI），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）埃博拉疫情死亡人数突破4000人，卫生部长仍表乐观",
+   "summary_zh": "刚果（金）埃博拉疫情死亡人数已突破4000人，确诊病例超过8300例，是该国历史上最严重的一次疫情。卫生部长罗杰·坎巴在金沙萨的记者会上称“疫情高峰已经过去”，并援引多数疫区感染人数下降为依据。但疫情形势依然严峻，44个卫生区仍处于活跃状态，北基伍省的贝尼、布滕博和卡图瓦等地疫情持续，不安全局势和社区抵制阻碍了应对工作。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": "金沙萨",
+    "site": null,
+    "raw_text": "République démocratique du Congo, Kinshasa"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）埃博拉疫情死亡人数突破4000人，确诊病例超过8300例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’épidémie d’Ebola a franchi le seuil des 4 000 morts en République démocratique du Congo, pour plus de 8 300 cas confirmés."
+    },
+    {
+     "fact": "卫生部长罗杰·坎巴在金沙萨记者会上称疫情高峰已经过去",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Lors d’une conférence de presse tenue vendredi à Kinshasa, le ministre de la Santé, Roger Kamba, a affirmé que « le pic est derrière nous »."
+    },
+    {
+     "fact": "63个卫生区中19个已至少三周无新增病例，44个仍处于活跃状态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "19 zones de santé sur 63 n'ont plus enregistré de cas depuis au moins trois semaines... Mais la situation demeure critique. 44 zones restent actives"
+    },
+    {
+     "fact": "超过一半的死亡仍发生在医疗机构之外，接触者追踪率降至82%以下",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plus de la moitié des décès surviennent encore hors des structures médicales... le suivi des sujets contacts est repassé sous la barre des 82 %"
+    },
+    {
+     "fact": "政府要求人道主义组织说明境外资金使用情况，首轮应对计划2.26亿美元中仅略超半数获得说明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sur les 226 millions de dollars mobilisés du premier plan de riposte, à peine plus de la moitié ont été justifiés au gouvernement par les humanitaires."
+    }
+   ],
+   "uncertainties": [
+    "卫生部长关于疫情高峰已过的说法为单方面表态，疫情形势仍被描述为严峻",
+    "该报道为单一来源（RFI），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_33ae6911acc2be34",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

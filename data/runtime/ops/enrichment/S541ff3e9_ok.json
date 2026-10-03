@@ -1,0 +1,127 @@
+{
+ "label": "S541ff3e9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "7f6c8e284c72442560cbb1f0f029275896ff5cc5e445711f45cc25aab7b77244",
+ "tokens": {
+  "input_tokens": 2769,
+  "output_tokens": 677,
+  "total_tokens": 3446
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "马拉维前陆军司令因涉嫌向苏丹走私武器被捕",
+   "summary_zh": "马拉维前陆军司令保罗·瓦伦蒂诺·菲里被指利用职权，协助一批武器经利隆圭中转，最终运往苏丹境内的“反叛武装”。他面临五项指控，已被反腐败局逮捕并接受审讯，随后以1000万克瓦查（约5000多欧元）保释。据反腐败局称，这批武器从肯尼亚运抵利隆圭后，经乍得转运至苏丹。目前该案为单一来源报道，指控尚未经法院证实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "MWI",
+   "location": {
+    "country_iso3": "MWI",
+    "admin1": null,
+    "city": "利隆圭",
+    "site": null,
+    "raw_text": "Lilongwe, la capitale malawite"
+   },
+   "key_facts": [
+    {
+     "fact": "马拉维前陆军司令保罗·瓦伦蒂诺·菲里被反腐败局逮捕并审讯",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’ancien chef de l’armée, Paul Valentino Phiri, a été arrêté, jeudi 1er octobre"
+    },
+    {
+     "fact": "菲里面临五项指控，包括两项滥用职权、一项违反采购程序及两项涉及被检方称为“恐怖分子”的资产交易",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce dernier doit désormais répondre de cinq chefs d’accusation ... deux « abus de fonction », un pour « non-respect des procédures d’achat » et deux pour des opérations sur des biens qualifiés de « terroristes » par le parquet"
+    },
+    {
+     "fact": "据反腐败局称，菲里被指通过伪造最终目的地为马拉维军队的方式，协助武器经利隆圭中转",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon l’ACB, le trafic d’armes qu’il aurait mis en place reposait sur le maquillage de la destination finale de la cargaison"
+    },
+    {
+     "fact": "武器据称从肯尼亚运抵利隆圭，随后经乍得转运至苏丹",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Acheminée à Lilongwe, la capitale malawite, en provenance du Kenya, la cargaison d'armes aurait ensuite été redirigée vers le Soudan via le Tchad"
+    },
+    {
+     "fact": "菲里以1000万克瓦查（约5000多欧元）保释，等待审判日期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Libéré en échange du paiement d'une caution de 10 millions de kwacha - l'équivalent de plus de 5 000 euros -"
+    }
+   ],
+   "uncertainties": [
+    "菲里被指控的武器走私行为尚未经法院判决证实",
+    "武器最终接收方为苏丹境内“反叛武装”的说法来自反腐败局，具体是哪支武装未在起诉书中说明",
+    "该事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "马拉维前陆军司令因涉嫌向苏丹走私武器被捕",
+   "summary_zh": "马拉维前陆军司令保罗·瓦伦蒂诺·菲里被指利用职权，协助一批武器经利隆圭中转，最终运往苏丹境内的“反叛武装”。他面临五项指控，已被反腐败局逮捕并接受审讯，随后以1000万克瓦查（约5000多欧元）保释。据反腐败局称，这批武器从肯尼亚运抵利隆圭后，经乍得转运至苏丹。目前该案为单一来源报道，指控尚未经法院证实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "MWI",
+   "location": {
+    "country_iso3": "MWI",
+    "admin1": null,
+    "city": "利隆圭",
+    "site": null,
+    "raw_text": "Lilongwe, la capitale malawite"
+   },
+   "key_facts": [
+    {
+     "fact": "马拉维前陆军司令保罗·瓦伦蒂诺·菲里被反腐败局逮捕并审讯",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’ancien chef de l’armée, Paul Valentino Phiri, a été arrêté, jeudi 1er octobre"
+    },
+    {
+     "fact": "菲里面临五项指控，包括两项滥用职权、一项违反采购程序及两项涉及被检方称为“恐怖分子”的资产交易",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce dernier doit désormais répondre de cinq chefs d’accusation ... deux « abus de fonction », un pour « non-respect des procédures d’achat » et deux pour des opérations sur des biens qualifiés de « terroristes » par le parquet"
+    },
+    {
+     "fact": "据反腐败局称，菲里被指通过伪造最终目的地为马拉维军队的方式，协助武器经利隆圭中转",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon l’ACB, le trafic d’armes qu’il aurait mis en place reposait sur le maquillage de la destination finale de la cargaison"
+    },
+    {
+     "fact": "武器据称从肯尼亚运抵利隆圭，随后经乍得转运至苏丹",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Acheminée à Lilongwe, la capitale malawite, en provenance du Kenya, la cargaison d'armes aurait ensuite été redirigée vers le Soudan via le Tchad"
+    },
+    {
+     "fact": "菲里以1000万克瓦查（约5000多欧元）保释，等待审判日期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Libéré en échange du paiement d'une caution de 10 millions de kwacha - l'équivalent de plus de 5 000 euros -"
+    }
+   ],
+   "uncertainties": [
+    "菲里被指控的武器走私行为尚未经法院判决证实",
+    "武器最终接收方为苏丹境内“反叛武装”的说法来自反腐败局，具体是哪支武装未在起诉书中说明",
+    "该事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_2ea4f724541ff3e9",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
