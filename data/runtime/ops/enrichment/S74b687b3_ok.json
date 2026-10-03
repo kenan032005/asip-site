@@ -1,0 +1,125 @@
+{
+ "label": "S74b687b3",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "34b59fe84dc977ed65cee55198664f61f90ce9fa61e02f0c5bd3ba20e70bd461",
+ "tokens": {
+  "input_tokens": 2114,
+  "output_tokens": 452,
+  "total_tokens": 2566
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚高原州发生多车相撞事故，FRSC确认20人死亡",
+   "summary_zh": "尼日利亚联邦道路安全队（FRSC）确认，高原州Hawan Kibo至乔斯路段发生多车相撞事故，造成20人死亡。事故涉及4辆车、共25人，另有5人受伤。初步判断刹车失灵和失控可能是事故原因。",
+   "event_type": "transport_disruption",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Plateau",
+    "city": "Jos",
+    "site": "Hawan Kibo-Jos route",
+    "raw_text": "along the Hawan Kibo-Jos route in Plateau"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦道路安全队确认高原州多车相撞事故造成20人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "THE Federal Road Safety Corps (FRSC) has confirmed the death of 20 people in a multiple road traffic crash along the Hawan Kibo-Jos route in Plateau."
+    },
+    {
+     "fact": "事故涉及25人，其中23名男性、2名女性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He said 25 people were involved in the crash, comprising 23 males and two females."
+    },
+    {
+     "fact": "5人受伤，20名男性死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "five people, comprising three males and two females, sustained injuries, while 20 males died in the crash."
+    },
+    {
+     "fact": "事故涉及4辆车，包括一辆豪沃卡车",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Four vehicles were involved in the crash, including a Howo Sino truck with registration number AGL 525 YN."
+    },
+    {
+     "fact": "刹车失灵和失控被认定为可能原因",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "with brake failure and loss of control identified as likely causes."
+    }
+   ],
+   "uncertainties": [
+    "事故原因（刹车失灵和失控）仅为可能原因，尚未最终确认",
+    "目前仅有一个来源（FRSC声明），缺乏独立交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚高原州发生多车相撞事故，FRSC确认20人死亡",
+   "summary_zh": "尼日利亚联邦道路安全队（FRSC）确认，高原州Hawan Kibo至乔斯路段发生多车相撞事故，造成20人死亡。事故涉及4辆车、共25人，另有5人受伤。初步判断刹车失灵和失控可能是事故原因。",
+   "event_type": "transport_disruption",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Plateau",
+    "city": "Jos",
+    "site": "Hawan Kibo-Jos route",
+    "raw_text": "along the Hawan Kibo-Jos route in Plateau"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦道路安全队确认高原州多车相撞事故造成20人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "THE Federal Road Safety Corps (FRSC) has confirmed the death of 20 people in a multiple road traffic crash along the Hawan Kibo-Jos route in Plateau."
+    },
+    {
+     "fact": "事故涉及25人，其中23名男性、2名女性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He said 25 people were involved in the crash, comprising 23 males and two females."
+    },
+    {
+     "fact": "5人受伤，20名男性死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "five people, comprising three males and two females, sustained injuries, while 20 males died in the crash."
+    },
+    {
+     "fact": "事故涉及4辆车，包括一辆豪沃卡车",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Four vehicles were involved in the crash, including a Howo Sino truck with registration number AGL 525 YN."
+    },
+    {
+     "fact": "刹车失灵和失控被认定为可能原因",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "with brake failure and loss of control identified as likely causes."
+    }
+   ],
+   "uncertainties": [
+    "事故原因（刹车失灵和失控）仅为可能原因，尚未最终确认",
+    "目前仅有一个来源（FRSC声明），缺乏独立交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_1c984ffe74b687b3",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
