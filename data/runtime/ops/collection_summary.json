@@ -1,38 +1,40 @@
 {
  "sources_configured": 875,
  "sources_attempted": 875,
- "sources_succeeded": 221,
- "sources_failed": 585,
- "articles_discovered": 3462,
- "duplicates": 1560,
- "published": 7,
- "quarantined": 87,
- "articles_persisted_total": 876,
- "articles_persisted_new": 7,
- "articles_excluded_total": 1950,
+ "sources_succeeded": 222,
+ "sources_failed": 584,
+ "articles_discovered": 3337,
+ "duplicates": 1475,
+ "published": 4,
+ "quarantined": 72,
+ "articles_persisted_total": 877,
+ "articles_persisted_new": 1,
+ "articles_excluded_total": 1909,
  "article_persistence_ok": true,
  "metrics_source": "logs/stage3_collection_stats.json",
- "collector_run_id": "20261003T140618+0800_52hrbr",
- "collector_generated_at": "2026-10-03T22:54:23+08:00",
+ "collector_run_id": "20261003T180626+0800_pgnw5l",
+ "collector_generated_at": "2026-10-04T02:57:36+08:00",
  "failure_reasons": {
-  "WALL_CLOCK_LIMIT_REACHED": 585,
+  "WALL_CLOCK_LIMIT_REACHED": 584,
   "OK_PRODUCTIVE": 126,
-  "DUPLICATE_ONLY": 95,
-  "HTTP_429": 35,
+  "DUPLICATE_ONLY": 96,
   "RSS_EMPTY": 28,
+  "HTTP_429": 27,
+  "QUERY_NO_RESULT": 8,
   "HTTP_404": 3,
   "UNKNOWN": 2,
-  "TIMEOUT": 1
+  "HTTP_403": 1
  },
- "sources_blocked_by_external": 39,
- "sources_no_output_not_blocked": 710,
+ "sources_blocked_by_external": 31,
+ "sources_no_output_not_blocked": 718,
  "gdelt_rate_limiter": {
   "schema": "gdelt-rate-limiter-v1",
   "host": "api.gdeltproject.org",
   "requests": 3,
   "cache_hits": 0,
   "status_counts": {
-   "429": 3
+   "429": 2,
+   "200": 1
   },
   "current_interval_s": 300.0,
   "min_interval_s": 20.0,
@@ -42,10 +44,10 @@
   "request_budget": 120,
   "budget_exhausted": false,
   "labeled_requests": 3,
-  "labeled_success": 0,
-  "labeled_rate_limited": 3,
-  "success_rate": 0.0,
-  "rate_limited_rate": 1.0,
+  "labeled_success": 1,
+  "labeled_rate_limited": 2,
+  "success_rate": 0.3333,
+  "rate_limited_rate": 0.6667,
   "by_label": {
    "|Niger": {
     "requests": 1,
@@ -57,13 +59,13 @@
    },
    "|尼日尔": {
     "requests": 1,
-    "success": 0,
-    "rate_limited": 1,
+    "success": 1,
+    "rate_limited": 0,
     "errors": 0,
     "cache_hits": 0,
     "items": 0
    },
-   "|乍得": {
+   "|Chad": {
     "requests": 1,
     "success": 0,
     "rate_limited": 1,
@@ -75,8 +77,8 @@
  },
  "per_source_stats_persisted": "data/runtime/ops/collection_source_stats.json",
  "ok": true,
- "raw_candidates_on_disk": 707,
+ "raw_candidates_on_disk": 714,
  "pending_events_on_disk": 21,
  "executed": true,
- "started_at": "2026-10-03T14:06:18Z"
+ "started_at": "2026-10-03T18:06:25Z"
 }
