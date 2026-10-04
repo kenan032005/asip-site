@@ -1,0 +1,105 @@
+{
+ "label": "Sd26467f9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4ff70ebdac41c4d839104de4476e775ae1f4839e158fee199421fea41a44581f",
+ "tokens": {
+  "input_tokens": 2227,
+  "output_tokens": 578,
+  "total_tokens": 2805
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得卫生部通报三个省份及恩贾梅纳出现登革热病例",
+   "summary_zh": "乍得公共卫生与预防部在2026年10月3日发布的公报中宣布，瓦达伊省、瓦迪菲拉省、西拉省以及恩贾梅纳已通报登革热病例。该部门提醒登革热为蚊媒病毒性疾病，症状包括高烧、头痛、肌肉关节疼痛、恶心呕吐，重症可能出现出血。卫生部门呼吁出现症状者尽快就医，并建议使用蚊帐、穿长袖衣物、使用驱蚊剂及清除积水。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "瓦达伊省、瓦迪菲拉省、西拉省",
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "les provinces du Ouaddaï, du Wadi Fira, du Sila et à N’Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得卫生部通报瓦达伊、瓦迪菲拉、西拉三省及恩贾梅纳出现登革热病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministère de la Santé publique et de la Prévention a annoncé, dans un communiqué daté de ce samedi 3 octobre 2026, la notification de cas de dengue dans les provinces du Ouaddaï, du Wadi Fira, du Sila et à N’Djamena."
+    },
+    {
+     "fact": "登革热为蚊媒病毒性疾病，症状包括高烧、头痛、肌肉关节疼痛、恶心呕吐，重症可出血",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cette maladie virale est transmise par les piqûres de moustiques infectés. Elle se manifeste notamment par une forte fièvre, des maux de tête, des douleurs musculaires et articulaires, des nausées et des vomissements. Dans les formes sévères, des saignements peuvent survenir."
+    },
+    {
+     "fact": "卫生部门建议出现症状者就近就医，并采取防蚊措施、清除积水",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les autorités sanitaires invitent toute personne présentant ces symptômes à se rendre dans la formation sanitaire la plus proche... elles recommandent également de dormir sous des moustiquaires imprégnées... éliminer les eaux stagnantes autour des habitations"
+    }
+   ],
+   "uncertainties": [
+    "病例数量及具体分布尚未公布",
+    "信息目前仅来自单一来源（Le Pays Tchad），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得卫生部通报三个省份及恩贾梅纳出现登革热病例",
+   "summary_zh": "乍得公共卫生与预防部在2026年10月3日发布的公报中宣布，瓦达伊省、瓦迪菲拉省、西拉省以及恩贾梅纳已通报登革热病例。该部门提醒登革热为蚊媒病毒性疾病，症状包括高烧、头痛、肌肉关节疼痛、恶心呕吐，重症可能出现出血。卫生部门呼吁出现症状者尽快就医，并建议使用蚊帐、穿长袖衣物、使用驱蚊剂及清除积水。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "瓦达伊省、瓦迪菲拉省、西拉省",
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "les provinces du Ouaddaï, du Wadi Fira, du Sila et à N’Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得卫生部通报瓦达伊、瓦迪菲拉、西拉三省及恩贾梅纳出现登革热病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministère de la Santé publique et de la Prévention a annoncé, dans un communiqué daté de ce samedi 3 octobre 2026, la notification de cas de dengue dans les provinces du Ouaddaï, du Wadi Fira, du Sila et à N’Djamena."
+    },
+    {
+     "fact": "登革热为蚊媒病毒性疾病，症状包括高烧、头痛、肌肉关节疼痛、恶心呕吐，重症可出血",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cette maladie virale est transmise par les piqûres de moustiques infectés. Elle se manifeste notamment par une forte fièvre, des maux de tête, des douleurs musculaires et articulaires, des nausées et des vomissements. Dans les formes sévères, des saignements peuvent survenir."
+    },
+    {
+     "fact": "卫生部门建议出现症状者就近就医，并采取防蚊措施、清除积水",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les autorités sanitaires invitent toute personne présentant ces symptômes à se rendre dans la formation sanitaire la plus proche... elles recommandent également de dormir sous des moustiquaires imprégnées... éliminer les eaux stagnantes autour des habitations"
+    }
+   ],
+   "uncertainties": [
+    "病例数量及具体分布尚未公布",
+    "信息目前仅来自单一来源（Le Pays Tchad），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_132c7ed2d26467f9",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
