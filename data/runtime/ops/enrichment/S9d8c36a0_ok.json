@@ -1,0 +1,138 @@
+{
+ "label": "S9d8c36a0",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "bdcfcfd422acc04c9e6311b504a12bc05a511921271c8e6b325da0cb1e68a16b",
+ "tokens": {
+  "input_tokens": 2518,
+  "output_tokens": 511,
+  "total_tokens": 3029
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"亲政府部队控制默克莱的说法目前仅来自两名当地居民，尚未获官方或独立核实\", \"TPLF撤出是否为暂时性行动尚不明确\", \"移动电话服务部分恢复的说法仅来自一名居民，未获确认\"]",
+    "after": "[\"亲政府部队控制默克莱的说法目前仅来自两名当地居民，尚未获官方或独立核实\", \"TPLF撤出是否为暂时性行动尚不明确\", \"移动电话服务部分恢复的说法仅来自一名居民，未获确认\", \"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "埃塞俄比亚反叛武装撤出提格雷州首府",
+   "summary_zh": "埃塞俄比亚提格雷人民解放阵线（TPLF）称已暂时撤出提格雷州首府默克莱，理由是担心平民面临风险。两名默克莱居民向BBC表示，亲政府部队现已控制该市，TPLF武装已撤离。近期TPLF与联邦政府军及其盟友在提格雷、阿法尔和阿姆哈拉地区爆发战斗，引发外界对非洲之角局势进一步动荡的担忧。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷州",
+    "city": "默克莱",
+    "site": null,
+    "raw_text": "Mekelle, Tigray region, northern Ethiopia"
+   },
+   "key_facts": [
+    {
+     "fact": "TPLF称已暂时撤出提格雷州首府默克莱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Rebel forces in Ethiopia's northern Tigray region have said they have temporarily withdrawn from the regional capital, Mekelle"
+    },
+    {
+     "fact": "两名默克莱居民向BBC表示亲政府部队已控制该市",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Two residents in Mekelle told the BBC that pro-government forces now control the city and TPLF forces have abandoned it"
+    },
+    {
+     "fact": "TPLF称撤离原因是担心平民面临风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "said its decision to relocate was made because of concerns about risks to civilians"
+    },
+    {
+     "fact": "近期TPLF与联邦政府军及盟友在提格雷、阿法尔和阿姆哈拉地区爆发战斗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fighting has erupted in recent weeks between the TPLF and federal government forces alongside allied fighters in parts of Ethiopia's northern regions of Tigray, Afar and Amhara"
+    },
+    {
+     "fact": "美国国务院呼吁各方保持克制并开展对话",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The US Department of State called for \"restraint\" and \"dialogue\" on all sides"
+    }
+   ],
+   "uncertainties": [
+    "亲政府部队控制默克莱的说法目前仅来自两名当地居民，尚未获官方或独立核实",
+    "TPLF撤出是否为暂时性行动尚不明确",
+    "移动电话服务部分恢复的说法仅来自一名居民，未获确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "埃塞俄比亚反叛武装撤出提格雷州首府",
+   "summary_zh": "埃塞俄比亚提格雷人民解放阵线（TPLF）称已暂时撤出提格雷州首府默克莱，理由是担心平民面临风险。两名默克莱居民向BBC表示，亲政府部队现已控制该市，TPLF武装已撤离。近期TPLF与联邦政府军及其盟友在提格雷、阿法尔和阿姆哈拉地区爆发战斗，引发外界对非洲之角局势进一步动荡的担忧。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷州",
+    "city": "默克莱",
+    "site": null,
+    "raw_text": "Mekelle, Tigray region, northern Ethiopia"
+   },
+   "key_facts": [
+    {
+     "fact": "TPLF称已暂时撤出提格雷州首府默克莱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Rebel forces in Ethiopia's northern Tigray region have said they have temporarily withdrawn from the regional capital, Mekelle"
+    },
+    {
+     "fact": "两名默克莱居民向BBC表示亲政府部队已控制该市",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Two residents in Mekelle told the BBC that pro-government forces now control the city and TPLF forces have abandoned it"
+    },
+    {
+     "fact": "TPLF称撤离原因是担心平民面临风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "said its decision to relocate was made because of concerns about risks to civilians"
+    },
+    {
+     "fact": "近期TPLF与联邦政府军及盟友在提格雷、阿法尔和阿姆哈拉地区爆发战斗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fighting has erupted in recent weeks between the TPLF and federal government forces alongside allied fighters in parts of Ethiopia's northern regions of Tigray, Afar and Amhara"
+    },
+    {
+     "fact": "美国国务院呼吁各方保持克制并开展对话",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The US Department of State called for \"restraint\" and \"dialogue\" on all sides"
+    }
+   ],
+   "uncertainties": [
+    "亲政府部队控制默克莱的说法目前仅来自两名当地居民，尚未获官方或独立核实",
+    "TPLF撤出是否为暂时性行动尚不明确",
+    "移动电话服务部分恢复的说法仅来自一名居民，未获确认",
+    "据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_f5b0e4769d8c36a0",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

@@ -1,0 +1,125 @@
+{
+ "label": "Sf61b06e2",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3a948b6cecaf2490400a526a84a2fbbb9207f71af31c6333fe9c7de768d4ba82",
+ "tokens": {
+  "input_tokens": 2912,
+  "output_tokens": 631,
+  "total_tokens": 3543
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔COVACC在24个市镇开展2026年防洪预警能力建设培训",
+   "summary_zh": "尼日尔预警与危机应对行动中心（COVACC）在世界粮食计划署（PAM）技术与资金支持下，于2026年7月1日至7日在全国8个大区24个目标市镇举办信息宣传与能力建设研讨会，旨在提升地方机构和社区在2026年雨季来临前的备灾与响应能力。培训共涉及600名参与者，包括120名接受地方危机治理培训的市政人员及480名社区意见领袖。尼日尔民防总局中央服务器最终收到551份调查问卷，少于原计划的600人。",
+   "event_type": "natural_disaster",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": null,
+    "raw_text": "Niamey, 03 Oct(ANP)"
+   },
+   "key_facts": [
+    {
+     "fact": "COVACC在世界粮食计划署支持下于2026年7月1日至7日举办防洪预警能力建设研讨会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Centre Opérationnel de Veille, d’Alerte et de Conduite des Crises (COVACC), avec le soutien technique et financier du Programme Alimentaire Mondial (PAM), a organisé, du 01 au 07 juillet 2026, des ateliers d’information et de sensibilisation"
+    },
+    {
+     "fact": "研讨会覆盖尼日尔8个大区的24个目标市镇",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "dans 24 communes cibles reparties sur les huit (8) régions du Niger"
+    },
+    {
+     "fact": "培训共涉及600名参与者，其中120名市政人员和480名社区意见领袖",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils globalisent un total de 600 participants dont 120 agents municipaux formés à la gouvernance locale des crises, 480 leaders d’opinion"
+    },
+    {
+     "fact": "民防总局中央服务器实际收到551份调查问卷，少于原计划的600人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les données reçues sur le serveur central de la Direction Générale de la Protection Civile totalisent 551 personnes enquêtées au lieu de 600 personnes initialement prévues"
+    },
+    {
+     "fact": "研讨会旨在2026年雨季前提升社区备灾与响应能力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "contribuer à anticiper les risques de catastrophes en renforçant les capacités de préparation et de réponse des communautés locales"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（尼日尔官方通讯社ANP），尚缺乏交叉验证",
+    "实际调查人数（551人）与计划人数（600人）存在差异，原因未说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔COVACC在24个市镇开展2026年防洪预警能力建设培训",
+   "summary_zh": "尼日尔预警与危机应对行动中心（COVACC）在世界粮食计划署（PAM）技术与资金支持下，于2026年7月1日至7日在全国8个大区24个目标市镇举办信息宣传与能力建设研讨会，旨在提升地方机构和社区在2026年雨季来临前的备灾与响应能力。培训共涉及600名参与者，包括120名接受地方危机治理培训的市政人员及480名社区意见领袖。尼日尔民防总局中央服务器最终收到551份调查问卷，少于原计划的600人。",
+   "event_type": "natural_disaster",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": null,
+    "raw_text": "Niamey, 03 Oct(ANP)"
+   },
+   "key_facts": [
+    {
+     "fact": "COVACC在世界粮食计划署支持下于2026年7月1日至7日举办防洪预警能力建设研讨会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Centre Opérationnel de Veille, d’Alerte et de Conduite des Crises (COVACC), avec le soutien technique et financier du Programme Alimentaire Mondial (PAM), a organisé, du 01 au 07 juillet 2026, des ateliers d’information et de sensibilisation"
+    },
+    {
+     "fact": "研讨会覆盖尼日尔8个大区的24个目标市镇",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "dans 24 communes cibles reparties sur les huit (8) régions du Niger"
+    },
+    {
+     "fact": "培训共涉及600名参与者，其中120名市政人员和480名社区意见领袖",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils globalisent un total de 600 participants dont 120 agents municipaux formés à la gouvernance locale des crises, 480 leaders d’opinion"
+    },
+    {
+     "fact": "民防总局中央服务器实际收到551份调查问卷，少于原计划的600人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les données reçues sur le serveur central de la Direction Générale de la Protection Civile totalisent 551 personnes enquêtées au lieu de 600 personnes initialement prévues"
+    },
+    {
+     "fact": "研讨会旨在2026年雨季前提升社区备灾与响应能力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "contribuer à anticiper les risques de catastrophes en renforçant les capacités de préparation et de réponse des communautés locales"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（尼日尔官方通讯社ANP），尚缺乏交叉验证",
+    "实际调查人数（551人）与计划人数（600人）存在差异，原因未说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_333124bff61b06e2",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
