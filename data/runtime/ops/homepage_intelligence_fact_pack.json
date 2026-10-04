@@ -1,6 +1,6 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-04T14:06:25+08:00",
+ "generated_at": "2026-10-04T15:54:17+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
@@ -8,22 +8,25 @@
  "counts": {
   "signals_24h": 11,
   "signals_7d": 319,
-  "verified_events_24h": 11,
-  "verified_events_7d": 353,
+  "verified_events_24h": 14,
+  "verified_events_7d": 356,
   "multi_source_verified_events_7d": 8,
-  "countries_with_activity_24h": 4,
+  "countries_with_activity_24h": 6,
   "total_countries_monitored": 22
  },
  "countries_24h": [
   "乍得",
+  "刚果（布）",
   "加纳",
   "南苏丹",
+  "卢旺达",
   "尼日利亚"
  ],
  "countries_7d": [
   "乍得",
   "几内亚",
   "几内亚比绍",
+  "刚果（布）",
   "刚果（金）",
   "利比亚",
   "加纳",
@@ -117,11 +120,11 @@
   },
   {
    "value": "C",
-   "count": 189
+   "count": 190
   },
   {
    "value": "A",
-   "count": 106
+   "count": 108
   }
  ],
  "top_verified_events": [
@@ -653,10 +656,16 @@
   }
  ],
  "existing_assessment": {
-  "status": "deterministic",
-  "based_on": "过去24小时/7日公开信息（确定性汇总）"
+  "status": "ai",
+  "overall_assessment": "已核实事件层面，埃塞俄比亚北部战事持续升级，联邦军称重新夺回阿拉马塔，七个反叛组织宣布结成新联盟对抗阿比政府，提格雷州公共电视台遭无人机袭击，苏丹否认支持提格雷武装；南非约翰内斯堡与开普敦发生两起枪击事件共致27人死亡；刚果（金）基伍湖船只倾覆致至少12人死亡、数十人失踪，肯盖飞机坠毁致17人死亡，埃博拉确诊病例突破8000例；乍得今年以来逾5.5万苏丹人涌入，农牧资源稀缺加剧农村紧张。情报信号层面，乍得四省报告登革热病例（多源但尚待核实）；尼日利亚伊莫州警方发现被绑架青年服务队成员疑似营地，因担心简易爆炸装置推迟突袭；加纳方面出现要求调查涉加可卡因货运资助者的单源信号。整体风险方向趋于恶化，需重点跟踪埃塞俄比亚战事外溢与萨赫勒—乍得湖流域安全联动。",
+  "risk_direction": "worsening",
+  "confidence": "medium",
+  "generated_time": "2026-10-04T15:54:10+08:00",
+  "based_on": "过去24小时/7日公开信息",
+  "model": "",
+  "date": "20261004"
  },
- "fact_count": 672,
+ "fact_count": 675,
  "facts": {
   "news:457ff81e9f0f3dc5": {
    "fact_id": "news:457ff81e9f0f3dc5",
@@ -10735,6 +10744,51 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-03 10:27",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_0d2ed6076bcd7149": {
+   "fact_id": "EVT_0d2ed6076bcd7149",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "刚果（布）",
+   "title": "刚果（金）总统齐塞克迪访问刚果（布），就两国军人交火事件致歉",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-04 04:29",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_b6cc7eae69646608": {
+   "fact_id": "EVT_b6cc7eae69646608",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "卢旺达",
+   "title": "卢旺达图西族大屠杀：达弗罗扎·戈蒂埃逝世，毕生致力于追捕卢旺达大屠杀凶手",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-04 04:02",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_bc0a9c8cc595db85": {
+   "fact_id": "EVT_bc0a9c8cc595db85",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "联合国南苏丹特派团举办“和平对话” 聚焦气候冲击对和平建设的影响",
+   "category": "natural_disaster",
+   "source": "UNMISS",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-04 15:18",
    "importance": "high",
    "severity": "medium"
   }
