@@ -1,0 +1,146 @@
+{
+ "label": "Sc09891f9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c325a234b8a1647afd9f5f9d1853e7d253848787400bce2317c08ddbdacbeb1a",
+ "tokens": {
+  "input_tokens": 2766,
+  "output_tokens": 573,
+  "total_tokens": 3339
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该报道为单一来源，尚未获得其他独立来源交叉验证\", \"报告所述影响为预警性评估，实际后果尚待观察\"]",
+    "after": "[\"该报道为单一来源，尚未获得其他独立来源交叉验证\", \"报告所述影响为预警性评估，实际后果尚待观察\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "联合国难民署警告：预算削减致830万人面临人道援助危机，乍得数十万人或受影响",
+   "summary_zh": "联合国难民署9月30日发布报告警告，由于国际捐助方大幅削减人道资金，全球约830万难民、流离失所者和无国籍人士可能失去基本服务。在乍得，数十万人可能受到影响，其中31.9万难民的登记程序受阻，20万妇女和女童可能失去安全空间，23.3万儿童可能失去社会保障。该报告为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Au Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国难民署报告称约830万难民、流离失所者和无国籍人士面临失去基本服务的风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "près de 8,3 millions de réfugiés, de personnes déplacées et d’apatrides sont sur le point d’être privés d'assistance vitale"
+    },
+    {
+     "fact": "在乍得，31.9万难民的登记程序受阻",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Tchad, 319 000 réfugiés voient leurs démarches d'enregistrement bloquées"
+    },
+    {
+     "fact": "在乍得，20万妇女和女童可能失去安全空间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "200 000 femmes et filles risquent de perdre l’accès à des espaces sécurisés"
+    },
+    {
+     "fact": "在乍得，23.3万儿童可能失去社会保障",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "233 000 enfants pourraient se retrouver sans aucune protection sociale"
+    },
+    {
+     "fact": "难民署资金从2024年的52亿美元降至2025年的39亿美元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les ressources de l'agence ont chuté de 5,2 milliards de dollars en 2024 à 3,9 milliards en 2025"
+    },
+    {
+     "fact": "截至2026年7月底，仅筹集到所需85亿美元中的32%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fin juillet 2026, à peine 32 % des 8,5 milliards jugés indispensables pour boucler l'année avaient été collectés"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚未获得其他独立来源交叉验证",
+    "报告所述影响为预警性评估，实际后果尚待观察"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "联合国难民署警告：预算削减致830万人面临人道援助危机，乍得数十万人或受影响",
+   "summary_zh": "联合国难民署9月30日发布报告警告，由于国际捐助方大幅削减人道资金，全球约830万难民、流离失所者和无国籍人士可能失去基本服务。在乍得，数十万人可能受到影响，其中31.9万难民的登记程序受阻，20万妇女和女童可能失去安全空间，23.3万儿童可能失去社会保障。该报告为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Au Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国难民署报告称约830万难民、流离失所者和无国籍人士面临失去基本服务的风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "près de 8,3 millions de réfugiés, de personnes déplacées et d’apatrides sont sur le point d’être privés d'assistance vitale"
+    },
+    {
+     "fact": "在乍得，31.9万难民的登记程序受阻",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Tchad, 319 000 réfugiés voient leurs démarches d'enregistrement bloquées"
+    },
+    {
+     "fact": "在乍得，20万妇女和女童可能失去安全空间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "200 000 femmes et filles risquent de perdre l’accès à des espaces sécurisés"
+    },
+    {
+     "fact": "在乍得，23.3万儿童可能失去社会保障",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "233 000 enfants pourraient se retrouver sans aucune protection sociale"
+    },
+    {
+     "fact": "难民署资金从2024年的52亿美元降至2025年的39亿美元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les ressources de l'agence ont chuté de 5,2 milliards de dollars en 2024 à 3,9 milliards en 2025"
+    },
+    {
+     "fact": "截至2026年7月底，仅筹集到所需85亿美元中的32%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fin juillet 2026, à peine 32 % des 8,5 milliards jugés indispensables pour boucler l'année avaient été collectés"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚未获得其他独立来源交叉验证",
+    "报告所述影响为预警性评估，实际后果尚待观察",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_d9fb40b3c09891f9",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

@@ -1,15 +1,15 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-04T18:06:35+08:00",
+ "generated_at": "2026-10-04T19:59:50+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 11,
-  "signals_7d": 316,
-  "verified_events_24h": 13,
-  "verified_events_7d": 351,
+  "signals_24h": 8,
+  "signals_7d": 305,
+  "verified_events_24h": 10,
+  "verified_events_7d": 339,
   "multi_source_verified_events_7d": 8,
   "countries_with_activity_24h": 6,
   "total_countries_monitored": 22
@@ -56,7 +56,7 @@
  "country_distribution_7d": [
   {
    "value": "加纳",
-   "count": 112
+   "count": 110
   },
   {
    "value": "尼日利亚",
@@ -67,16 +67,16 @@
    "count": 33
   },
   {
-   "value": "埃塞俄比亚",
-   "count": 28
-  },
-  {
    "value": "南苏丹",
-   "count": 25
+   "count": 24
   },
   {
    "value": "尼日尔",
    "count": 21
+  },
+  {
+   "value": "埃塞俄比亚",
+   "count": 20
   },
   {
    "value": "刚果（金）",
@@ -106,7 +106,7 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 9
+   "count": 6
   },
   {
    "value": "自然灾害",
@@ -120,15 +120,15 @@
  "source_tier_distribution_7d": [
   {
    "value": "B",
-   "count": 371
+   "count": 351
   },
   {
    "value": "C",
-   "count": 189
+   "count": 187
   },
   {
    "value": "A",
-   "count": 107
+   "count": 106
   }
  ],
  "top_verified_events": [
@@ -193,37 +193,52 @@
    "severity": "medium"
   },
   {
-   "fact_id": "EVT_00311c004bf0c477",
+   "fact_id": "EVT_f9b7cf2224ac8cce",
    "level": "verified_event",
    "evidence_tier": "single_source_published",
    "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "美国东北部遭遇东北风暴，纽约和新泽西宣布进入紧急状态",
+   "country": "加纳",
+   "title": "一名加纳裔男子在美国遭枪击身亡，家人举行最后告别",
    "category": "other_security",
    "source": "MyJoyOnline",
    "source_tier": "B",
    "source_role": "regional",
-   "time": "2026-09-27 11:52",
+   "time": "2026-09-27 14:29",
    "importance": "high",
    "severity": "medium"
   },
   {
-   "fact_id": "EVT_b80710ea089bb0b8",
+   "fact_id": "EVT_19cbce9ccaeb82f0",
    "level": "verified_event",
    "evidence_tier": "single_source_published",
    "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "非洲首富出资参与埃塞俄比亚与吉布提之间6.6亿美元燃料管道项目",
-   "category": "infrastructure_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 11:19",
+   "country": "乍得",
+   "title": "今年以来逾5.5万苏丹人逃往乍得",
+   "category": "border_security",
+   "source": "Tchadinfos",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-27 15:00",
    "importance": "high",
    "severity": "medium"
   }
  ],
  "top_signals": [
+  {
+   "fact_id": "news:11d06188be4ec2e4",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Aide humanitaire : 8,3 millions de personnes menacées par des coupes budgétaires, selon le HCR",
+   "category": "other_security",
+   "source": "Le N'Djam Post",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-04 17:07",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   {
    "fact_id": "news:ecf8e0ee6695d3c3",
    "level": "news_signal",
@@ -568,21 +583,6 @@
    "time": "2026-10-02 22:08",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:3449b783e1c26441",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "加纳",
-   "title": "CEO每日洞察：将第四季度优先事项转化为可衡量成果",
-   "category": "infrastructure_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-10-02 22:03",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -661,16 +661,31 @@
  ],
  "existing_assessment": {
   "status": "ai",
-  "overall_assessment": "已核实事件层面，埃塞俄比亚北部战事显著升级：联邦军队称重新夺回阿拉马塔并加强北部反攻，提格雷州公共电视台遭无人机袭击，七个反叛组织宣布结成新联盟对抗阿比政府，苏丹否认支持提格雷武装，虚假信息同步蔓延。刚果（金）埃博拉确诊病例突破8000例，伊图里流离失所者营地引发联合国担忧，基伍湖船只倾覆致至少12人死亡。尼日利亚森林发现数十名疑似绑架受害者遗骸，南非约翰内斯堡与开普敦两起枪击共致27人死亡。情报信号层面（单源消息，尚待核实）：乍得四省报告登革热病例，卫生部门发布警报；尼日利亚伊莫州警方发现被绑架青年服务队成员疑似营地，因担心简易爆炸装置推迟突袭；加纳方面出现要求调查涉加可卡因货运资助者的呼声。整体风险方向趋于恶化。",
+  "overall_assessment": "已核实事件层面，埃塞俄比亚北部联邦军与提格雷武装战事持续加剧，七个反叛组织宣布结成新联盟对抗阿比政府，苏丹否认支持提格雷武装，虚假信息同步蔓延；刚果（金）埃博拉确诊突破8000例，伊图里流离失所营地安全与防疫双重承压，基伍湖船只倾覆致至少12人死亡；乍得持续接收苏丹难民，农牧资源稀缺加剧农村紧张；尼日利亚森林发现数十名疑似绑架受害者遗骸，教师罢工未止；加纳教师罢工持续、特马港截获突击步枪与弹药。情报信号层面，均为单源消息、尚待核实：乍得四省报告登革热病例（4源）、联合国难民署称830万人面临预算削减威胁、尼日利亚伊莫州警方因简易爆炸物担忧推迟突袭、加纳涉可卡因货运资助者调查呼声。整体风险方向趋于恶化。",
   "risk_direction": "worsening",
   "confidence": "medium",
-  "generated_time": "2026-10-04T18:06:28+08:00",
+  "generated_time": "2026-10-04T19:59:43+08:00",
   "based_on": "过去24小时/7日公开信息",
   "model": "",
   "date": "20261004"
  },
- "fact_count": 667,
+ "fact_count": 644,
  "facts": {
+  "news:11d06188be4ec2e4": {
+   "fact_id": "news:11d06188be4ec2e4",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Aide humanitaire : 8,3 millions de personnes menacées par des coupes budgétaires, selon le HCR",
+   "category": "other_security",
+   "source": "Le N'Djam Post",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-04 17:07",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:ecf8e0ee6695d3c3": {
    "fact_id": "news:ecf8e0ee6695d3c3",
    "level": "news_signal",
@@ -5231,186 +5246,6 @@
    "importance": "low",
    "why_it_matters": ""
   },
-  "news:1f41aa28f79a0a06": {
-   "fact_id": "news:1f41aa28f79a0a06",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "美国东北部遭遇东北风暴，纽约和新泽西宣布进入紧急状态",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 19:52",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:9962a82de3370004": {
-   "fact_id": "news:9962a82de3370004",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "非洲首富出资参与埃塞俄比亚与吉布提之间6.6亿美元燃料管道项目",
-   "category": "infrastructure_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 19:19",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:8bee599ee2350566": {
-   "fact_id": "news:8bee599ee2350566",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "审查报告称查理·柯克遇害的犹他州校园存在安全漏洞",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 19:14",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:951f5345060b5b35": {
-   "fact_id": "news:951f5345060b5b35",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "白宫禁止CNN随特朗普乘坐空军一号出行",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 19:09",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:ca2f9dd71898855b": {
-   "fact_id": "news:ca2f9dd71898855b",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "教皇在巴黎大型露天弥撒上赞扬年轻人的“活力与奉献”",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 19:00",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:a7e58fb159654244": {
-   "fact_id": "news:a7e58fb159654244",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "加纳西部北部地区Nyankamam居民获免费医疗筛查服务",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 18:55",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:292f51e75a07b3aa": {
-   "fact_id": "news:292f51e75a07b3aa",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "加纳",
-   "title": "加纳与波音探讨建立区域飞机维修中心",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 18:54",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:6c3aaa0b87af486e": {
-   "fact_id": "news:6c3aaa0b87af486e",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "曼谷道路被淹，泰国宣布洪水灾害",
-   "category": "natural_disaster",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 18:54",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:864f8a3872581f56": {
-   "fact_id": "news:864f8a3872581f56",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "蒙特利尔附近发生直升机坠毁事故，四人死亡",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 18:48",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:ea116dd1e691e24d": {
-   "fact_id": "news:ea116dd1e691e24d",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "南非约翰内斯堡和开普敦发生两起枪击事件，共27人死亡",
-   "category": "other_security",
-   "source": "Tchadinfos",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-27 18:30",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:2fea39670c9b48e1": {
-   "fact_id": "news:2fea39670c9b48e1",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "南苏丹",
-   "title": "南苏丹伦拜克北部：两兄弟因山羊纠纷互相开枪身亡",
-   "category": "other_security",
-   "source": "Radio Tamazuj",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-27 18:27",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:2166a19d839f0f61": {
-   "fact_id": "news:2166a19d839f0f61",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "加纳",
-   "title": "马哈马在纽约与加纳侨民座谈，讨论加纳经济复苏",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 18:08",
-   "importance": "low",
-   "why_it_matters": ""
-  },
   "EVT_03eac7c113509968": {
    "fact_id": "EVT_03eac7c113509968",
    "level": "verified_event",
@@ -5471,186 +5306,6 @@
    "importance": "high",
    "severity": "medium"
   },
-  "EVT_00311c004bf0c477": {
-   "fact_id": "EVT_00311c004bf0c477",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "美国东北部遭遇东北风暴，纽约和新泽西宣布进入紧急状态",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 11:52",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_b80710ea089bb0b8": {
-   "fact_id": "EVT_b80710ea089bb0b8",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "非洲首富出资参与埃塞俄比亚与吉布提之间6.6亿美元燃料管道项目",
-   "category": "infrastructure_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 11:19",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_2aeeaa6d3efa69f0": {
-   "fact_id": "EVT_2aeeaa6d3efa69f0",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "审查报告称查理·柯克遇害的犹他州校园存在安全漏洞",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 11:14",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_41e6fb76e25ec379": {
-   "fact_id": "EVT_41e6fb76e25ec379",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "白宫禁止CNN随特朗普乘坐空军一号出行",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 11:09",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_ce615c04ef78c74a": {
-   "fact_id": "EVT_ce615c04ef78c74a",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "教皇在巴黎大型露天弥撒上赞扬年轻人的“活力与奉献”",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 11:00",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_9e483333f6b7292b": {
-   "fact_id": "EVT_9e483333f6b7292b",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "加纳西部北部地区Nyankamam居民获免费医疗筛查服务",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 10:55",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_b1f5fe304049e000": {
-   "fact_id": "EVT_b1f5fe304049e000",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "曼谷道路被淹，泰国宣布洪水灾害",
-   "category": "natural_disaster",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 10:54",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_71c8be8594f1baa4": {
-   "fact_id": "EVT_71c8be8594f1baa4",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "蒙特利尔附近发生直升机坠毁事故，四人死亡",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 10:48",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_8c2f1eb8550c315b": {
-   "fact_id": "EVT_8c2f1eb8550c315b",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "加纳",
-   "title": "加纳与波音探讨建立区域飞机维修中心",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 10:54",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_f0990876ad8714d1": {
-   "fact_id": "EVT_f0990876ad8714d1",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "加纳",
-   "title": "马哈马在纽约与加纳侨民座谈，讨论加纳经济复苏",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-09-27 10:08",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_304a9c83a6a6071f": {
-   "fact_id": "EVT_304a9c83a6a6071f",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "南苏丹",
-   "title": "南苏丹伦拜克北部：两兄弟因山羊纠纷互相开枪身亡",
-   "category": "other_security",
-   "source": "Radio Tamazuj",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-27 10:27",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_415cbf75463749f0": {
-   "fact_id": "EVT_415cbf75463749f0",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "南非",
-   "title": "南非约翰内斯堡与开普敦发生两起枪击事件 共致27人死亡",
-   "category": "other_security",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-09-27 11:15",
-   "importance": "high",
-   "severity": "medium"
-  },
   "EVT_f9b7cf2224ac8cce": {
    "fact_id": "EVT_f9b7cf2224ac8cce",
    "level": "verified_event",
@@ -5678,21 +5333,6 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-09-27 15:00",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_c144c514cec31c64": {
-   "fact_id": "EVT_c144c514cec31c64",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "南非约翰内斯堡和开普敦发生两起枪击事件，共27人死亡",
-   "category": "other_security",
-   "source": "Tchadinfos",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-27 10:30",
    "importance": "high",
    "severity": "medium"
   },
@@ -10673,6 +10313,21 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-04 15:18",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_d9fb40b3c09891f9": {
+   "fact_id": "EVT_d9fb40b3c09891f9",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "联合国难民署警告：预算削减致830万人面临人道援助危机，乍得数十万人或受影响",
+   "category": "other_security",
+   "source": "Le N'Djam Post",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-04 09:07",
    "importance": "high",
    "severity": "medium"
   }
