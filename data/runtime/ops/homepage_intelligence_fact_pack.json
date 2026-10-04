@@ -1,13 +1,13 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-05T03:49:59+08:00",
+ "generated_at": "2026-10-05T03:51:02+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 24,
-  "signals_7d": 303,
+  "signals_24h": 25,
+  "signals_7d": 304,
   "verified_events_24h": 27,
   "verified_events_7d": 338,
   "multi_source_verified_events_7d": 9,
@@ -80,12 +80,12 @@
    "count": 21
   },
   {
-   "value": "刚果（金）",
+   "value": "埃塞俄比亚",
    "count": 18
   },
   {
-   "value": "埃塞俄比亚",
-   "count": 17
+   "value": "刚果（金）",
+   "count": 18
   },
   {
    "value": "贝宁",
@@ -111,7 +111,7 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 18
+   "count": 19
   },
   {
    "value": "自然灾害",
@@ -141,7 +141,7 @@
   },
   {
    "value": "A",
-   "count": 107
+   "count": 108
   }
  ],
  "top_verified_events": [
@@ -243,7 +243,7 @@
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "乍得",
-   "title": "Lac : une mission évalue l’accès à l’éducation et la protection de l’enfance",
+   "title": "乍得湖省：一项任务评估教育普及与儿童保护状况",
    "category": "armed_conflict",
    "source": "Tchadinfos",
    "source_tier": "C",
@@ -258,7 +258,7 @@
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "尼日尔",
-   "title": "Gestion anticipatoire des inondations 2026 : Le COVACC renforce les capacités de ses structures déconcentrées et les communautés locales",
+   "title": "尼日尔COVACC在24个市镇开展2026年防洪预警能力建设培训",
    "category": "natural_disaster",
    "source": "ANP(尼日尔官方通讯社)",
    "source_tier": "C",
@@ -288,7 +288,7 @@
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "尼日利亚",
-   "title": "APC attacks Amaechi over claim he could not afford mother’s medication",
+   "title": "尼日利亚执政党APC抨击阿马埃奇称无力负担母亲药费的说法",
    "category": "other_security",
    "source": "International Centre for Investigative Reporting",
    "source_tier": "C",
@@ -324,6 +324,21 @@
    "source_tier": "B",
    "source_role": "regional",
    "time": "2026-10-04 22:04",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:c0a51edc408a9941",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "埃塞俄比亚反叛武装撤出提格雷州首府",
+   "category": "other_security",
+   "source": "BBC News (Africa)",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-04 21:33",
    "importance": "low",
    "why_it_matters": ""
   },
@@ -581,21 +596,6 @@
    "time": "2026-10-04 05:51",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:8e635cf1158b188f",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "加纳",
-   "title": "美国田纳西州监狱主管在Christa Pike死刑执行失败后辞职",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-10-04 04:53",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -673,16 +673,10 @@
   }
  ],
  "existing_assessment": {
-  "status": "ai",
-  "overall_assessment": "已核实事件方面，埃塞俄比亚北部联邦军与提格雷武装战事持续加剧，反叛组织宣布结成新联盟，提格雷州公共电视台遭无人机袭击；刚果（金）埃博拉确诊突破8000例，伊图里流离失所者营地引发联合国担忧，基伍湖船只倾覆致至少12人死亡；尼日利亚北部再发大规模绑架，逾80人失踪，森林中发现数十具疑似绑架受害者遗骸；南苏丹朱巴-蒙德里公路袭击致车辆被焚、平民遭绑架；乍得阿贝歇强风暴致1死多伤，西凯比省农民遭袭；加纳特马港截获突击步枪及弹药，教师罢工持续，沃尔特地区洪水致3000余人流离失所。情报信号方面（均为单源消息，尚待核实）：乍得湖区教育评估、尼日尔洪水预警能力建设、加纳卡索阿发现女子死亡及党内选举动态、尼日利亚APC与阿马埃奇争执等，需进一步核实。",
-  "risk_direction": "worsening",
-  "confidence": "medium",
-  "generated_time": "2026-10-05T03:49:53+08:00",
-  "based_on": "过去24小时/7日公开信息",
-  "model": "",
-  "date": "20261005"
+  "status": "deterministic",
+  "based_on": "过去24小时/7日公开信息（确定性汇总）"
  },
- "fact_count": 641,
+ "fact_count": 642,
  "facts": {
   "news:d6eb5bec74f49e73": {
    "fact_id": "news:d6eb5bec74f49e73",
@@ -690,7 +684,7 @@
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "乍得",
-   "title": "Lac : une mission évalue l’accès à l’éducation et la protection de l’enfance",
+   "title": "乍得湖省：一项任务评估教育普及与儿童保护状况",
    "category": "armed_conflict",
    "source": "Tchadinfos",
    "source_tier": "C",
@@ -705,7 +699,7 @@
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "尼日尔",
-   "title": "Gestion anticipatoire des inondations 2026 : Le COVACC renforce les capacités de ses structures déconcentrées et les communautés locales",
+   "title": "尼日尔COVACC在24个市镇开展2026年防洪预警能力建设培训",
    "category": "natural_disaster",
    "source": "ANP(尼日尔官方通讯社)",
    "source_tier": "C",
@@ -735,7 +729,7 @@
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "尼日利亚",
-   "title": "APC attacks Amaechi over claim he could not afford mother’s medication",
+   "title": "尼日利亚执政党APC抨击阿马埃奇称无力负担母亲药费的说法",
    "category": "other_security",
    "source": "International Centre for Investigative Reporting",
    "source_tier": "C",
@@ -771,6 +765,21 @@
    "source_tier": "B",
    "source_role": "regional",
    "time": "2026-10-04 22:04",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:c0a51edc408a9941": {
+   "fact_id": "news:c0a51edc408a9941",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "埃塞俄比亚反叛武装撤出提格雷州首府",
+   "category": "other_security",
+   "source": "BBC News (Africa)",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-04 21:33",
    "importance": "low",
    "why_it_matters": ""
   },
