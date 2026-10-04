@@ -1,0 +1,107 @@
+{
+ "label": "Sd924d566",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a087add9e80f1b3df66bc95e1848b65f728e22ef2a9d2dad2ee6aa242f1f7086",
+ "tokens": {
+  "input_tokens": 1970,
+  "output_tokens": 370,
+  "total_tokens": 2340
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "肯尼亚高速公路车祸致至少17人死亡，多数为天主教朝圣者",
+   "summary_zh": "肯尼亚通往蒙巴萨港的高速公路发生多车相撞事故，造成至少17人死亡，其中多数是前往祈祷地点的天主教朝圣者。事故发生在萨拉马地区，据称一名卡车司机在超车时引发碰撞。目前信息为单一来源，官方说法有待进一步核实。",
+   "event_type": "other_security",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": null,
+    "city": "萨拉马",
+    "site": "通往蒙巴萨的高速公路",
+    "raw_text": "Salama, on a highway to the Kenyan port of Mombasa"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚通往蒙巴萨的高速公路发生多车相撞事故，至少17人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least 17 people, most of them Catholic pilgrims, have been killed in a crash on a highway to the Kenyan port of Mombasa."
+    },
+    {
+     "fact": "事故发生在萨拉马地区，时间为周六凌晨",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The accident happened in Salama in the early hours of Saturday morning as a truck driver tried to overtake another vehicle."
+    },
+    {
+     "fact": "死者中多数为前往祈祷地点的天主教朝圣者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "most of them pilgrims on the way to a prayer site, officials said"
+    }
+   ],
+   "uncertainties": [
+    "事故原因（卡车司机超车）为初步说法，尚未获官方最终确认",
+    "伤亡人数及身份信息有待进一步核实",
+    "目前仅单一来源报道，缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "肯尼亚高速公路车祸致至少17人死亡，多数为天主教朝圣者",
+   "summary_zh": "肯尼亚通往蒙巴萨港的高速公路发生多车相撞事故，造成至少17人死亡，其中多数是前往祈祷地点的天主教朝圣者。事故发生在萨拉马地区，据称一名卡车司机在超车时引发碰撞。目前信息为单一来源，官方说法有待进一步核实。",
+   "event_type": "other_security",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": null,
+    "city": "萨拉马",
+    "site": "通往蒙巴萨的高速公路",
+    "raw_text": "Salama, on a highway to the Kenyan port of Mombasa"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚通往蒙巴萨的高速公路发生多车相撞事故，至少17人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least 17 people, most of them Catholic pilgrims, have been killed in a crash on a highway to the Kenyan port of Mombasa."
+    },
+    {
+     "fact": "事故发生在萨拉马地区，时间为周六凌晨",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The accident happened in Salama in the early hours of Saturday morning as a truck driver tried to overtake another vehicle."
+    },
+    {
+     "fact": "死者中多数为前往祈祷地点的天主教朝圣者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "most of them pilgrims on the way to a prayer site, officials said"
+    }
+   ],
+   "uncertainties": [
+    "事故原因（卡车司机超车）为初步说法，尚未获官方最终确认",
+    "伤亡人数及身份信息有待进一步核实",
+    "目前仅单一来源报道，缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_e578337cd924d566",
+ "disease_event_id": null,
+ "country_code": "KE"
+}

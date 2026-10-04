@@ -1,0 +1,103 @@
+{
+ "label": "S5a90016e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0562305b21ed720028713225f56710927b96c1f343dccadbfa9cf0b6b22c5bae",
+ "tokens": {
+  "input_tokens": 2025,
+  "output_tokens": 353,
+  "total_tokens": 2378
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "布隆迪总统在非盟峰会称持续暴力阻碍非洲发展",
+   "summary_zh": "布隆迪总统恩达伊施米耶在埃及阿拉曼举行的非洲联盟会议上表示，非洲各地持续不断的暴力正在损害农业、教育和发展。他提到刚果（金）和苏丹的局势是前所未有的人道主义灾难。该消息目前为单一来源报道。",
+   "event_type": "civil_unrest",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "EGY",
+    "admin1": null,
+    "city": "阿拉曼",
+    "site": "阿拉曼非洲论坛",
+    "raw_text": "El Alamein, Egypt"
+   },
+   "key_facts": [
+    {
+     "fact": "布隆迪总统恩达伊施米耶在埃及阿拉曼举行的非盟会议上发言",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Evariste Ndayishimiye was speaking at the Alamein Africa Forum, attended by heads of state and business leaders from across the continent."
+    },
+    {
+     "fact": "恩达伊施米耶称持续暴力损害非洲农业、教育和发展",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Persistent violence across Africa is taking a toll on farming, education and development, Burundi’s President told leaders at an African Union meeting in Egypt."
+    },
+    {
+     "fact": "他称刚果（金）和苏丹的暴力是前所未有的人道主义灾难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In DRC, in Sudan, it is an unprecedented humanitarian catastrophe."
+    }
+   ],
+   "uncertainties": [
+    "该报道目前仅有一个来源（Africanews），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "布隆迪总统在非盟峰会称持续暴力阻碍非洲发展",
+   "summary_zh": "布隆迪总统恩达伊施米耶在埃及阿拉曼举行的非洲联盟会议上表示，非洲各地持续不断的暴力正在损害农业、教育和发展。他提到刚果（金）和苏丹的局势是前所未有的人道主义灾难。该消息目前为单一来源报道。",
+   "event_type": "civil_unrest",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "EGY",
+    "admin1": null,
+    "city": "阿拉曼",
+    "site": "阿拉曼非洲论坛",
+    "raw_text": "El Alamein, Egypt"
+   },
+   "key_facts": [
+    {
+     "fact": "布隆迪总统恩达伊施米耶在埃及阿拉曼举行的非盟会议上发言",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Evariste Ndayishimiye was speaking at the Alamein Africa Forum, attended by heads of state and business leaders from across the continent."
+    },
+    {
+     "fact": "恩达伊施米耶称持续暴力损害非洲农业、教育和发展",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Persistent violence across Africa is taking a toll on farming, education and development, Burundi’s President told leaders at an African Union meeting in Egypt."
+    },
+    {
+     "fact": "他称刚果（金）和苏丹的暴力是前所未有的人道主义灾难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In DRC, in Sudan, it is an unprecedented humanitarian catastrophe."
+    }
+   ],
+   "uncertainties": [
+    "该报道目前仅有一个来源（Africanews），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_535a0b1e5a90016e",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

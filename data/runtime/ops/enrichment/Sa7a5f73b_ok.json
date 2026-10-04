@@ -1,0 +1,132 @@
+{
+ "label": "Sa7a5f73b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "628e56cebbc000dcfda3c873147e2d33d68c8e22751347cd36f43fc1acafc3ec",
+ "tokens": {
+  "input_tokens": 2146,
+  "output_tokens": 438,
+  "total_tokens": 2584
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"联邦部队重新夺回机场的具体时间尚未确认\", \"机场易手过程及是否发生战斗尚未证实\", \"消息来自当地人士，因担心报复而要求匿名\", \"提格雷地区互联网和手机网络严重中断，信息收集与核实困难\", \"目前仅单一来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"联邦部队重新夺回机场的具体时间尚未确认\", \"机场易手过程及是否发生战斗尚未证实\", \"消息来自当地人士，因担心报复而要求匿名\", \"提格雷地区互联网和手机网络严重中断，信息收集与核实困难\", \"目前仅单一来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "埃塞俄比亚联邦部队重新夺回默克莱机场",
+   "summary_zh": "据美联社援引默克莱当地人士消息，埃塞俄比亚联邦部队已重新控制提格雷州首府默克莱的机场，逆转了上月提格雷武装的接管。上月提格雷武装接管该机场曾导致商业航班暂停。目前尚不清楚联邦部队何时重新夺回该机场，机场易手的具体过程及是否发生战斗仍不明确。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷州",
+    "city": "默克莱",
+    "site": "阿卢拉阿巴内加机场",
+    "raw_text": "Mekelle, the capital of the northern Tigray region"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚联邦部队已控制默克莱机场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ethiopian federal forces have taken the airport in Mekelle, the capital of the northern Tigray region"
+    },
+    {
+     "fact": "此次行动逆转了上月提格雷武装对该机场的接管",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "reversing a takeover by Tigrayan fighters that prompted the suspension of commercial flights last month"
+    },
+    {
+     "fact": "联邦部队重新夺回机场的具体时间尚不清楚",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It wasn't immediately clear when federal forces recaptured Alula Aba Nega Airport."
+    },
+    {
+     "fact": "机场易手的具体过程及是否发生战斗仍不明确",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Details of how the airport changed hands, including whether fighting took place there, remained unclear."
+    }
+   ],
+   "uncertainties": [
+    "联邦部队重新夺回机场的具体时间尚未确认",
+    "机场易手过程及是否发生战斗尚未证实",
+    "消息来自当地人士，因担心报复而要求匿名",
+    "提格雷地区互联网和手机网络严重中断，信息收集与核实困难",
+    "目前仅单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "埃塞俄比亚联邦部队重新夺回默克莱机场",
+   "summary_zh": "据美联社援引默克莱当地人士消息，埃塞俄比亚联邦部队已重新控制提格雷州首府默克莱的机场，逆转了上月提格雷武装的接管。上月提格雷武装接管该机场曾导致商业航班暂停。目前尚不清楚联邦部队何时重新夺回该机场，机场易手的具体过程及是否发生战斗仍不明确。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷州",
+    "city": "默克莱",
+    "site": "阿卢拉阿巴内加机场",
+    "raw_text": "Mekelle, the capital of the northern Tigray region"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚联邦部队已控制默克莱机场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ethiopian federal forces have taken the airport in Mekelle, the capital of the northern Tigray region"
+    },
+    {
+     "fact": "此次行动逆转了上月提格雷武装对该机场的接管",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "reversing a takeover by Tigrayan fighters that prompted the suspension of commercial flights last month"
+    },
+    {
+     "fact": "联邦部队重新夺回机场的具体时间尚不清楚",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It wasn't immediately clear when federal forces recaptured Alula Aba Nega Airport."
+    },
+    {
+     "fact": "机场易手的具体过程及是否发生战斗仍不明确",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Details of how the airport changed hands, including whether fighting took place there, remained unclear."
+    }
+   ],
+   "uncertainties": [
+    "联邦部队重新夺回机场的具体时间尚未确认",
+    "机场易手过程及是否发生战斗尚未证实",
+    "消息来自当地人士，因担心报复而要求匿名",
+    "提格雷地区互联网和手机网络严重中断，信息收集与核实困难",
+    "目前仅单一来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_582bdb47a7a5f73b",
+ "disease_event_id": null,
+ "country_code": "ET"
+}
