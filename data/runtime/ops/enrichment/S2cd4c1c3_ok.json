@@ -1,0 +1,115 @@
+{
+ "label": "S2cd4c1c3",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "95df8c030a94f5e91969bd6c6aedd5318ca0d7b6f49800174ddfabb22003803b",
+ "tokens": {
+  "input_tokens": 2298,
+  "output_tokens": 444,
+  "total_tokens": 2742
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "琼莱州州长任命六名看守县专员",
+   "summary_zh": "南苏丹琼莱州看守州长摩西·马乔克·加特卢阿克签署2026年第02号州长令，任命六名看守县专员，此前一天已任命特维克东和杜克两县的新行政官员。任命之际，琼莱州持续面临社区间暴力，据报上周特维克东武装青年袭击杜克县一村庄，造成十余人死亡。民间社会人士呼吁新专员优先处理安全、和解与重建社区信任。",
+   "event_type": "civil_unrest",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "琼莱州",
+    "city": null,
+    "site": null,
+    "raw_text": "Jonglei State"
+   },
+   "key_facts": [
+    {
+     "fact": "琼莱州看守州长签署2026年第02号州长令，任命六名看守县专员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The appointments were made in Gubernatorial Decree No. 02 of 2026, signed on Oct. 2."
+    },
+    {
+     "fact": "任命之际琼莱州持续发生社区间暴力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "as the state grapples with continuing intercommunal violence"
+    },
+    {
+     "fact": "据报上周特维克东武装青年袭击杜克县一村庄，造成十余人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than a dozen people were reportedly killed last week when armed youth from Twic East attacked Apiir Palaidhiim village in Duk County."
+    },
+    {
+     "fact": "民间社会人士称新专员应优先处理安全、和解与重建社区信任",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the new commissioners should prioritise security, reconciliation and rebuilding trust among communities"
+    }
+   ],
+   "uncertainties": [
+    "上周袭击造成十余人死亡为据报（reportedly），尚未获独立证实",
+    "事件信息目前仅来自单一来源（Radio Tamazuj）"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "琼莱州州长任命六名看守县专员",
+   "summary_zh": "南苏丹琼莱州看守州长摩西·马乔克·加特卢阿克签署2026年第02号州长令，任命六名看守县专员，此前一天已任命特维克东和杜克两县的新行政官员。任命之际，琼莱州持续面临社区间暴力，据报上周特维克东武装青年袭击杜克县一村庄，造成十余人死亡。民间社会人士呼吁新专员优先处理安全、和解与重建社区信任。",
+   "event_type": "civil_unrest",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "琼莱州",
+    "city": null,
+    "site": null,
+    "raw_text": "Jonglei State"
+   },
+   "key_facts": [
+    {
+     "fact": "琼莱州看守州长签署2026年第02号州长令，任命六名看守县专员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The appointments were made in Gubernatorial Decree No. 02 of 2026, signed on Oct. 2."
+    },
+    {
+     "fact": "任命之际琼莱州持续发生社区间暴力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "as the state grapples with continuing intercommunal violence"
+    },
+    {
+     "fact": "据报上周特维克东武装青年袭击杜克县一村庄，造成十余人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than a dozen people were reportedly killed last week when armed youth from Twic East attacked Apiir Palaidhiim village in Duk County."
+    },
+    {
+     "fact": "民间社会人士称新专员应优先处理安全、和解与重建社区信任",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the new commissioners should prioritise security, reconciliation and rebuilding trust among communities"
+    }
+   ],
+   "uncertainties": [
+    "上周袭击造成十余人死亡为据报（reportedly），尚未获独立证实",
+    "事件信息目前仅来自单一来源（Radio Tamazuj）"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_1fa6975f2cd4c1c3",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

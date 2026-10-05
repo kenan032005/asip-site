@@ -1,0 +1,127 @@
+{
+ "label": "S2a2bf8c0",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "010a8136b7fcc72ff9223b5b81d9ec1322f49811148a7faccba6216b0d4b52b5",
+ "tokens": {
+  "input_tokens": 2634,
+  "output_tokens": 560,
+  "total_tokens": 3194
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "联合国南苏丹特派团巡逻队抵达偏远伊巴社区，当地面临暴雨、不安全局势与健康威胁",
+   "summary_zh": "联合国南苏丹特派团（UNMISS）一支巡逻队历经艰难抵达西赤道州伊巴县偏远社区，当地因暴雨、道路损毁及不安全局势而更加孤立。近期袭击、车辆伏击和绑架事件加剧了风险，据报有人员被绑架后至今未寻获。当地还担忧与刚果（金）接壤带来的埃博拉疫情威胁。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Western Equatoria",
+    "city": "Ibba County",
+    "site": null,
+    "raw_text": "Ibba County in Western Equatoria State, along the Yambio–Ibba road and Juba–Mundri–Yambio highway"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国南苏丹特派团巡逻队抵达西赤道州伊巴县偏远社区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a recent UNMISS patrol travelled day and night on a tortuous journey to conquer the hundred kilometers of the almost impassable road connecting Yambio to Ibba County"
+    },
+    {
+     "fact": "暴雨和不安全局势使伊巴县社区更加孤立",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Heavy rains and insecurity have left communities in Ibba County in Western Equatoria State even more isolated than before"
+    },
+    {
+     "fact": "近期袭击、车辆伏击和绑架事件加剧了车队风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Recent attacks, vehicle ambushes, and abductions amplified the risks to the convoy"
+    },
+    {
+     "fact": "据伊巴县酋长称，5月有人员前往朱巴购货，返程途中被绑架，至今未寻获",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In May, some of our sons travelled to Juba to buy goods. On their way back, they were abducted, and, to date, they have not been found"
+    },
+    {
+     "fact": "当地担忧与刚果（金）接壤带来的埃博拉疫情威胁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "On health, we are also concerned because we share a border with the Democratic Republic of Congo"
+    }
+   ],
+   "uncertainties": [
+    "被绑架人员至今未寻获，其下落尚未确认",
+    "埃博拉疫情威胁为当地担忧，尚未证实当地出现病例",
+    "事件信息目前仅来自UNMISS单一来源，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "联合国南苏丹特派团巡逻队抵达偏远伊巴社区，当地面临暴雨、不安全局势与健康威胁",
+   "summary_zh": "联合国南苏丹特派团（UNMISS）一支巡逻队历经艰难抵达西赤道州伊巴县偏远社区，当地因暴雨、道路损毁及不安全局势而更加孤立。近期袭击、车辆伏击和绑架事件加剧了风险，据报有人员被绑架后至今未寻获。当地还担忧与刚果（金）接壤带来的埃博拉疫情威胁。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Western Equatoria",
+    "city": "Ibba County",
+    "site": null,
+    "raw_text": "Ibba County in Western Equatoria State, along the Yambio–Ibba road and Juba–Mundri–Yambio highway"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国南苏丹特派团巡逻队抵达西赤道州伊巴县偏远社区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a recent UNMISS patrol travelled day and night on a tortuous journey to conquer the hundred kilometers of the almost impassable road connecting Yambio to Ibba County"
+    },
+    {
+     "fact": "暴雨和不安全局势使伊巴县社区更加孤立",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Heavy rains and insecurity have left communities in Ibba County in Western Equatoria State even more isolated than before"
+    },
+    {
+     "fact": "近期袭击、车辆伏击和绑架事件加剧了车队风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Recent attacks, vehicle ambushes, and abductions amplified the risks to the convoy"
+    },
+    {
+     "fact": "据伊巴县酋长称，5月有人员前往朱巴购货，返程途中被绑架，至今未寻获",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In May, some of our sons travelled to Juba to buy goods. On their way back, they were abducted, and, to date, they have not been found"
+    },
+    {
+     "fact": "当地担忧与刚果（金）接壤带来的埃博拉疫情威胁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "On health, we are also concerned because we share a border with the Democratic Republic of Congo"
+    }
+   ],
+   "uncertainties": [
+    "被绑架人员至今未寻获，其下落尚未确认",
+    "埃博拉疫情威胁为当地担忧，尚未证实当地出现病例",
+    "事件信息目前仅来自UNMISS单一来源，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_f1750bfa2a2bf8c0",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

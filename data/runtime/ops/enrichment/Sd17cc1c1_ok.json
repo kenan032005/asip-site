@@ -1,0 +1,115 @@
+{
+ "label": "Sd17cc1c1",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6c3bc9651d8079c231430ac9499b96a02babd7ce73e985986a108a9896f0fcf8",
+ "tokens": {
+  "input_tokens": 3081,
+  "output_tokens": 505,
+  "total_tokens": 3586
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "被美国驱逐后在斯威士兰被拘留的老挝移民获释，启程返回老挝",
+   "summary_zh": "一名老挝籍男子Phone Chomsavanh被美国驱逐至斯威士兰，在Matsapha高度戒备监狱被关押超过14个月后于近日获释，目前正途经南非约翰内斯堡返回老挝。他称美国当局在将其送往斯威士兰前可能未联系老挝政府，并批评美国总统漠视被其政策破坏的家庭。联合国曾批评美国将移民驱逐至第三国的做法违反国际法。",
+   "event_type": "other_security",
+   "country_iso3": "SWZ",
+   "location": {
+    "country_iso3": "SWZ",
+    "admin1": null,
+    "city": "Matsapha",
+    "site": "Matsapha高度戒备监狱",
+    "raw_text": "la prison de haute sécurité de Matsapha, en Eswatini"
+   },
+   "key_facts": [
+    {
+     "fact": "一名老挝籍移民被美国驱逐至斯威士兰后，在Matsapha高度戒备监狱被关押超过14个月，现已获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Après 15 mois dans une prison de haute sécurité dans ce pays, Phone Chomsavanh vient d’être libéré."
+    },
+    {
+     "fact": "该男子称美国当局在将其送往斯威士兰前可能未联系老挝政府",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Je crois que les autorités américaines n’ont même pas contacté le gouvernement laotien avant de m’envoyer en Eswatini"
+    },
+    {
+     "fact": "联合国批评美国将移民驱逐至第三国的政策违反国际法",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "dénoncée par l’ONU comme contraire au droit international"
+    },
+    {
+     "fact": "该男子目前正途经南非约翰内斯堡返回老挝",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Phone Chomsavanh était en transit à l’aéroport de Johannesburg en Afrique du Sud, ce 5 octobre 2026"
+    }
+   ],
+   "uncertainties": [
+    "该男子关于美国当局未联系老挝政府的说法为其个人陈述，尚未获得独立证实",
+    "事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "被美国驱逐后在斯威士兰被拘留的老挝移民获释，启程返回老挝",
+   "summary_zh": "一名老挝籍男子Phone Chomsavanh被美国驱逐至斯威士兰，在Matsapha高度戒备监狱被关押超过14个月后于近日获释，目前正途经南非约翰内斯堡返回老挝。他称美国当局在将其送往斯威士兰前可能未联系老挝政府，并批评美国总统漠视被其政策破坏的家庭。联合国曾批评美国将移民驱逐至第三国的做法违反国际法。",
+   "event_type": "other_security",
+   "country_iso3": "SWZ",
+   "location": {
+    "country_iso3": "SWZ",
+    "admin1": null,
+    "city": "Matsapha",
+    "site": "Matsapha高度戒备监狱",
+    "raw_text": "la prison de haute sécurité de Matsapha, en Eswatini"
+   },
+   "key_facts": [
+    {
+     "fact": "一名老挝籍移民被美国驱逐至斯威士兰后，在Matsapha高度戒备监狱被关押超过14个月，现已获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Après 15 mois dans une prison de haute sécurité dans ce pays, Phone Chomsavanh vient d’être libéré."
+    },
+    {
+     "fact": "该男子称美国当局在将其送往斯威士兰前可能未联系老挝政府",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Je crois que les autorités américaines n’ont même pas contacté le gouvernement laotien avant de m’envoyer en Eswatini"
+    },
+    {
+     "fact": "联合国批评美国将移民驱逐至第三国的政策违反国际法",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "dénoncée par l’ONU comme contraire au droit international"
+    },
+    {
+     "fact": "该男子目前正途经南非约翰内斯堡返回老挝",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Phone Chomsavanh était en transit à l’aéroport de Johannesburg en Afrique du Sud, ce 5 octobre 2026"
+    }
+   ],
+   "uncertainties": [
+    "该男子关于美国当局未联系老挝政府的说法为其个人陈述，尚未获得独立证实",
+    "事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_32574121d17cc1c1",
+ "disease_event_id": null,
+ "country_code": "SZ"
+}

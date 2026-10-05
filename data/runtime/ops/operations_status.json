@@ -2,51 +2,6 @@
  "schema": "stage8c-package3-v1",
  "runs": [
   {
-   "run_id": "37223065834",
-   "workflow": "asip-production-orchestrator",
-   "started_at": "2026-10-04T18:06:23Z",
-   "completed_at": "2026-10-04T18:06:37Z",
-   "status": "completed",
-   "sources_attempted": 0,
-   "sources_succeeded": 0,
-   "sources_failed": 0,
-   "candidates_new": 0,
-   "ai_attempted": 0,
-   "ai_succeeded": 0,
-   "ai_failed": 0,
-   "ai_held": 0,
-   "safety_checked": 0,
-   "safety_corrected": 0,
-   "safety_held": 0,
-   "reports_full": 0,
-   "reports_fallback": 0,
-   "reports_low_data": 0,
-   "reports_hold": 0,
-   "build_status": "not_executed",
-   "deploy_status": "not_executed",
-   "token_usage": {},
-   "notes": [
-    "trigger=external_scheduler",
-    "trigger_type=automation",
-    "automation=true",
-    "human=false"
-   ],
-   "deploy_requested": true,
-   "deploy_provenance": {
-    "trigger_type": "automation",
-    "trigger_source": "external_scheduler",
-    "automation": true,
-    "human": false,
-    "mode": "production",
-    "root_orchestrator_run_id": "37223065834",
-    "report_date": null,
-    "report_classification": null,
-    "deploy_requested_at": "2026-10-04T18:06:37Z",
-    "reason": "ai_publication_changed",
-    "publication_localized_events": 535
-   }
-  },
-  {
    "run_id": "37226529941",
    "workflow": "asip-production-orchestrator",
    "started_at": "2026-10-04T18:59:52Z",
@@ -963,6 +918,58 @@
     "report_classification": "FALLBACK",
     "deploy_requested_at": "2026-10-05T12:06:28Z",
     "report_id": "DAILY_20260910"
+   }
+  },
+  {
+   "run_id": "37314202453",
+   "workflow": "asip-production-orchestrator",
+   "started_at": "2026-10-05T13:06:27Z",
+   "completed_at": "2026-10-05T13:59:58Z",
+   "status": "completed",
+   "sources_attempted": 875,
+   "sources_succeeded": 220,
+   "sources_failed": 585,
+   "candidates_new": 11,
+   "ai_attempted": 11,
+   "ai_succeeded": 0,
+   "ai_failed": 0,
+   "ai_held": 0,
+   "safety_checked": 11,
+   "safety_corrected": 0,
+   "safety_held": 0,
+   "reports_full": 0,
+   "reports_fallback": 0,
+   "reports_low_data": 0,
+   "reports_hold": 0,
+   "build_status": "not_executed",
+   "deploy_status": "not_executed",
+   "token_usage": {
+    "social_enrichment": {
+     "calls": 11,
+     "input_tokens": 28003,
+     "output_tokens": 5609,
+     "total_tokens": 33612
+    }
+   },
+   "notes": [
+    "trigger=external_scheduler",
+    "trigger_type=automation",
+    "automation=true",
+    "human=false"
+   ],
+   "deploy_requested": true,
+   "deploy_provenance": {
+    "trigger_type": "automation",
+    "trigger_source": "external_scheduler",
+    "automation": true,
+    "human": false,
+    "mode": "production",
+    "root_orchestrator_run_id": "37314202453",
+    "report_date": null,
+    "report_classification": null,
+    "deploy_requested_at": "2026-10-05T13:59:58Z",
+    "reason": "ai_publication_changed",
+    "publication_localized_events": 572
    }
   }
  ]
