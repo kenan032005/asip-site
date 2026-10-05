@@ -1,0 +1,136 @@
+{
+ "label": "Scb134de3",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "bcf7eee2ea6d7c7b79a0934ef741286421952536a82b5be8589f823c9f2972c8",
+ "tokens": {
+  "input_tokens": 3060,
+  "output_tokens": 579,
+  "total_tokens": 3639
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（RFI Afrique）报道，尚缺乏交叉验证\", \"西索科律师主张其行为不构成犯罪，称文章涉及公共利益，该辩护意见尚未被法院采纳\"]",
+    "after": "[\"目前仅一个来源（RFI Afrique）报道，尚缺乏交叉验证\", \"西索科律师主张其行为不构成犯罪，称文章涉及公共利益，该辩护意见尚未被法院采纳\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "马里记者尤素福·西索科上诉案开庭审理",
+   "summary_zh": "马里巴马科上诉法院于2026年10月5日审理记者尤素福·西索科的上诉案。西索科是《L'Alternance》报社长，因发表质疑尼日尔总统蒂亚尼言论的文章，于3月被判处两年监禁及100万西非法郎罚款。马里司法部门认定其犯有损害国家信用、冒犯外国元首及传播虚假信息罪。无国界记者组织等机构谴责此案为对新闻自由的严重侵犯。",
+   "event_type": "political_instability",
+   "country_iso3": "MLI",
+   "location": {
+    "country_iso3": "MLI",
+    "admin1": null,
+    "city": "巴马科",
+    "site": "上诉法院",
+    "raw_text": "la cour d'appel de Bamako"
+   },
+   "key_facts": [
+    {
+     "fact": "马里巴马科上诉法院审理记者尤素福·西索科上诉案",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Mali, la cour d'appel de Bamako doit examiner ce lundi 5 octobre 2026 le cas du journaliste Youssouf Sissoko."
+    },
+    {
+     "fact": "西索科于3月被判处两年监禁及100万西非法郎罚款",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le directeur de L'Alternance a été condamné en mars à deux ans de prison ferme et un million de FCFA d'amende"
+    },
+    {
+     "fact": "西索科因发表质疑尼日尔总统蒂亚尼言论的文章被定罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "pour avoir publié un article mettant en doute des déclarations du président nigérien Abdourahamane Tiani"
+    },
+    {
+     "fact": "马里司法部门认定其犯有损害国家信用、冒犯外国元首及传播虚假信息罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La justice malienne avait jugé le journaliste coupable d'« atteinte au crédit de l'État », « offense à un chef d'État étranger » et de « diffusion de fausses informations »."
+    },
+    {
+     "fact": "无国界记者组织谴责此案为对新闻自由的严重侵犯",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Reporters sans frontières avait dénoncé « une violation grave de la liberté de la presse »"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（RFI Afrique）报道，尚缺乏交叉验证",
+    "西索科律师主张其行为不构成犯罪，称文章涉及公共利益，该辩护意见尚未被法院采纳"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "马里记者尤素福·西索科上诉案开庭审理",
+   "summary_zh": "马里巴马科上诉法院于2026年10月5日审理记者尤素福·西索科的上诉案。西索科是《L'Alternance》报社长，因发表质疑尼日尔总统蒂亚尼言论的文章，于3月被判处两年监禁及100万西非法郎罚款。马里司法部门认定其犯有损害国家信用、冒犯外国元首及传播虚假信息罪。无国界记者组织等机构谴责此案为对新闻自由的严重侵犯。",
+   "event_type": "political_instability",
+   "country_iso3": "MLI",
+   "location": {
+    "country_iso3": "MLI",
+    "admin1": null,
+    "city": "巴马科",
+    "site": "上诉法院",
+    "raw_text": "la cour d'appel de Bamako"
+   },
+   "key_facts": [
+    {
+     "fact": "马里巴马科上诉法院审理记者尤素福·西索科上诉案",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Mali, la cour d'appel de Bamako doit examiner ce lundi 5 octobre 2026 le cas du journaliste Youssouf Sissoko."
+    },
+    {
+     "fact": "西索科于3月被判处两年监禁及100万西非法郎罚款",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le directeur de L'Alternance a été condamné en mars à deux ans de prison ferme et un million de FCFA d'amende"
+    },
+    {
+     "fact": "西索科因发表质疑尼日尔总统蒂亚尼言论的文章被定罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "pour avoir publié un article mettant en doute des déclarations du président nigérien Abdourahamane Tiani"
+    },
+    {
+     "fact": "马里司法部门认定其犯有损害国家信用、冒犯外国元首及传播虚假信息罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La justice malienne avait jugé le journaliste coupable d'« atteinte au crédit de l'État », « offense à un chef d'État étranger » et de « diffusion de fausses informations »."
+    },
+    {
+     "fact": "无国界记者组织谴责此案为对新闻自由的严重侵犯",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Reporters sans frontières avait dénoncé « une violation grave de la liberté de la presse »"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（RFI Afrique）报道，尚缺乏交叉验证",
+    "西索科律师主张其行为不构成犯罪，称文章涉及公共利益，该辩护意见尚未被法院采纳",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_acc2dfe1cb134de3",
+ "disease_event_id": null,
+ "country_code": "ML"
+}

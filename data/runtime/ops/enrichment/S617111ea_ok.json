@@ -1,0 +1,103 @@
+{
+ "label": "S617111ea",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c0664695ba78e6f73eb6ca6c1f4a9c9a627010f444b4b53a9007252aea638f8e",
+ "tokens": {
+  "input_tokens": 2154,
+  "output_tokens": 346,
+  "total_tokens": 2500
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "巴西大选进入第二轮，右翼候选人弗拉维奥·博索纳罗赢得首轮",
+   "summary_zh": "巴西总统选举首轮投票中，右翼候选人弗拉维奥·博索纳罗击败现任左翼总统卢拉·达席尔瓦。但他未获得直接胜选所需的超过50%选票，选举将进入第二轮。该消息目前为单一来源报道。",
+   "event_type": "political_instability",
+   "country_iso3": "BRA",
+   "location": {
+    "country_iso3": "BRA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "右翼候选人弗拉维奥·博索纳罗赢得巴西总统选举首轮",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Brazil election goes to run-off as right-wing Flávio Bolsonaro wins first round"
+    },
+    {
+     "fact": "弗拉维奥·博索纳罗击败现任左翼总统卢拉·达席尔瓦",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The right-wing Flávio Bolsonaro has won the first round of Brazil's presidential election, beating the incumbent left-wing President Lula da Silva."
+    },
+    {
+     "fact": "他未获得直接胜选所需的超过50%选票，选举进入第二轮",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "But he did not obtain more than 50% of the votes required to win outright."
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "巴西大选进入第二轮，右翼候选人弗拉维奥·博索纳罗赢得首轮",
+   "summary_zh": "巴西总统选举首轮投票中，右翼候选人弗拉维奥·博索纳罗击败现任左翼总统卢拉·达席尔瓦。但他未获得直接胜选所需的超过50%选票，选举将进入第二轮。该消息目前为单一来源报道。",
+   "event_type": "political_instability",
+   "country_iso3": "BRA",
+   "location": {
+    "country_iso3": "BRA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "右翼候选人弗拉维奥·博索纳罗赢得巴西总统选举首轮",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Brazil election goes to run-off as right-wing Flávio Bolsonaro wins first round"
+    },
+    {
+     "fact": "弗拉维奥·博索纳罗击败现任左翼总统卢拉·达席尔瓦",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The right-wing Flávio Bolsonaro has won the first round of Brazil's presidential election, beating the incumbent left-wing President Lula da Silva."
+    },
+    {
+     "fact": "他未获得直接胜选所需的超过50%选票，选举进入第二轮",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "But he did not obtain more than 50% of the votes required to win outright."
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_423c7f37617111ea",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

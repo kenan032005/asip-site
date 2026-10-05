@@ -1,0 +1,103 @@
+{
+ "label": "Saf0ecf74",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "131b1e499c4cdbdf4bef76706c684049799252da5cd15f3790b1a5d4017da611",
+ "tokens": {
+  "input_tokens": 2151,
+  "output_tokens": 302,
+  "total_tokens": 2453
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "刚果（金）埃博拉疫情死亡人数超过4000人",
+   "summary_zh": "据政府数据显示，刚果民主共和国埃博拉疫情死亡人数已超过4000人。这是该国历史上最严重的埃博拉疫情，目前仍在持续，防控工作面临挑战。该信息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Democratic Republic of Congo"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果民主共和国埃博拉疫情死亡人数超过4000人",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Congo’s Ebola outbreak has killed more than 4,000, government data shows"
+    },
+    {
+     "fact": "政府数据显示死亡人数已超过4000人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The number of deaths in Democratic Republic ​of Congo's Ebola outbreak has surpassed 4,000, ‌government data showed on Friday"
+    },
+    {
+     "fact": "这是该国历史上最严重的疫情，且仍在持续",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "as the worst epidemic in the country's history resists containment efforts"
+    }
+   ],
+   "uncertainties": [
+    "该数据为单一来源报道，尚未获得独立交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "刚果（金）埃博拉疫情死亡人数超过4000人",
+   "summary_zh": "据政府数据显示，刚果民主共和国埃博拉疫情死亡人数已超过4000人。这是该国历史上最严重的埃博拉疫情，目前仍在持续，防控工作面临挑战。该信息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Democratic Republic of Congo"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果民主共和国埃博拉疫情死亡人数超过4000人",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Congo’s Ebola outbreak has killed more than 4,000, government data shows"
+    },
+    {
+     "fact": "政府数据显示死亡人数已超过4000人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The number of deaths in Democratic Republic ​of Congo's Ebola outbreak has surpassed 4,000, ‌government data showed on Friday"
+    },
+    {
+     "fact": "这是该国历史上最严重的疫情，且仍在持续",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "as the worst epidemic in the country's history resists containment efforts"
+    }
+   ],
+   "uncertainties": [
+    "该数据为单一来源报道，尚未获得独立交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_a555f2f4af0ecf74",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

@@ -1,0 +1,101 @@
+{
+ "label": "Sc97f9105",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1101f2398b46843198bc02976aaf39300ae29ad1572829e94949e8a89d10a96d",
+ "tokens": {
+  "input_tokens": 2100,
+  "output_tokens": 204,
+  "total_tokens": 2304
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据MyJoyOnline报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "求职面试中可以不回答的问题",
+   "summary_zh": "一篇关于求职面试的文章指出，面试中常有一个令人不适的问题，求职者其实可以选择不回答。文章建议求职者做好准备，但该问题并非必须回应。",
+   "event_type": "other_security",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "文章主题为求职面试中可以不回答的问题",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "The job interview question you don’t have to answer"
+    },
+    {
+     "fact": "文章称面试中常有一个令人不适的问题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Prepare all you like, but there is often still one job interview question that leaves you feeling uncomfortable."
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "none",
+   "classification_confidence": 90
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "求职面试中可以不回答的问题",
+   "summary_zh": "一篇关于求职面试的文章指出，面试中常有一个令人不适的问题，求职者其实可以选择不回答。文章建议求职者做好准备，但该问题并非必须回应。",
+   "event_type": "other_security",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "文章主题为求职面试中可以不回答的问题",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "The job interview question you don’t have to answer"
+    },
+    {
+     "fact": "文章称面试中常有一个令人不适的问题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Prepare all you like, but there is often still one job interview question that leaves you feeling uncomfortable."
+    }
+   ],
+   "uncertainties": [
+    "据MyJoyOnline报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 90
+  }
+ },
+ "event_id": "EVT_73bd0358c97f9105",
+ "disease_event_id": null,
+ "country_code": "ET"
+}
