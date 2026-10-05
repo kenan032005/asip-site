@@ -1,0 +1,123 @@
+{
+ "label": "S0c534e68",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6ef52f9d0ee058b7f77d04def32019c2bdf34cb077d199e3d51556962d69149a",
+ "tokens": {
+  "input_tokens": 3007,
+  "output_tokens": 672,
+  "total_tokens": 3679
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "公开信呼吁西共体推动几内亚比绍恢复宪政秩序",
+   "summary_zh": "2026年10月3日，来自塞内加尔、佛得角和几内亚比绍的24名政治人物与活动人士发表公开信，呼吁西非国家经济共同体（西共体）更深入介入几内亚比绍政治危机的解决。信中要求落实西共体弗里敦峰会关于尽快恢复宪政秩序的决定，释放全部政治犯，并制定结束军人过渡期的可信时间表。该国目前处于军事政变推翻总统恩巴洛后的军人主导过渡期。",
+   "event_type": "political_instability",
+   "country_iso3": "GNB",
+   "location": {
+    "country_iso3": "GNB",
+    "admin1": null,
+    "city": "比绍",
+    "site": null,
+    "raw_text": "Bissau"
+   },
+   "key_facts": [
+    {
+     "fact": "24名来自塞内加尔、佛得角和几内亚比绍的政治人物与活动人士发表公开信，呼吁西共体介入几内亚比绍政治危机",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "C’est l’appel lancé samedi 3 octobre 2026 par 24 personnalités politiques et militantes du Sénégal, du Cap-Vert et de la Guinée-Bissau."
+    },
+    {
+     "fact": "公开信要求落实西共体弗里敦峰会关于尽快恢复宪政秩序的决定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ils appellent désormais à donner pleinement suite aux décisions prises par la Cédéao lors du sommet de Freetown, en particulier celles qui portent sur un retour rapide à l’ordre constitutionnel à Bissau"
+    },
+    {
+     "fact": "公开信要求释放全部政治犯并制定结束军人过渡期的可信时间表",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils demandent également la libération définitive de tous les prisonniers politiques, ainsi que la mise en place d’un calendrier crédible pour la fin de la transition militaire."
+    },
+    {
+     "fact": "几内亚比绍目前处于军事政变推翻总统恩巴洛后的军人主导过渡期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le pays vit une transition menée par des militaires qui ont pris le pouvoir à la suite du coup d’État ayant renversé le président Umaro Sissoco Embalo."
+    },
+    {
+     "fact": "签署人包括几内亚比绍前总理阿里斯蒂德斯·戈麦斯、佛得角前总理安东尼奥·瓜尔贝托及塞内加尔前部长等",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Parmi les auteurs de la lettre figurent les anciens Premiers ministres bissau-guinéen et cap-verdien, Aristides Gomes et António Gualberto, ainsi que les anciens ministres sénégalais Cheikh Tidiane Gadio et Abdoulaye Bathily."
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "公开信呼吁西共体推动几内亚比绍恢复宪政秩序",
+   "summary_zh": "2026年10月3日，来自塞内加尔、佛得角和几内亚比绍的24名政治人物与活动人士发表公开信，呼吁西非国家经济共同体（西共体）更深入介入几内亚比绍政治危机的解决。信中要求落实西共体弗里敦峰会关于尽快恢复宪政秩序的决定，释放全部政治犯，并制定结束军人过渡期的可信时间表。该国目前处于军事政变推翻总统恩巴洛后的军人主导过渡期。",
+   "event_type": "political_instability",
+   "country_iso3": "GNB",
+   "location": {
+    "country_iso3": "GNB",
+    "admin1": null,
+    "city": "比绍",
+    "site": null,
+    "raw_text": "Bissau"
+   },
+   "key_facts": [
+    {
+     "fact": "24名来自塞内加尔、佛得角和几内亚比绍的政治人物与活动人士发表公开信，呼吁西共体介入几内亚比绍政治危机",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "C’est l’appel lancé samedi 3 octobre 2026 par 24 personnalités politiques et militantes du Sénégal, du Cap-Vert et de la Guinée-Bissau."
+    },
+    {
+     "fact": "公开信要求落实西共体弗里敦峰会关于尽快恢复宪政秩序的决定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ils appellent désormais à donner pleinement suite aux décisions prises par la Cédéao lors du sommet de Freetown, en particulier celles qui portent sur un retour rapide à l’ordre constitutionnel à Bissau"
+    },
+    {
+     "fact": "公开信要求释放全部政治犯并制定结束军人过渡期的可信时间表",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils demandent également la libération définitive de tous les prisonniers politiques, ainsi que la mise en place d’un calendrier crédible pour la fin de la transition militaire."
+    },
+    {
+     "fact": "几内亚比绍目前处于军事政变推翻总统恩巴洛后的军人主导过渡期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le pays vit une transition menée par des militaires qui ont pris le pouvoir à la suite du coup d’État ayant renversé le président Umaro Sissoco Embalo."
+    },
+    {
+     "fact": "签署人包括几内亚比绍前总理阿里斯蒂德斯·戈麦斯、佛得角前总理安东尼奥·瓜尔贝托及塞内加尔前部长等",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Parmi les auteurs de la lettre figurent les anciens Premiers ministres bissau-guinéen et cap-verdien, Aristides Gomes et António Gualberto, ainsi que les anciens ministres sénégalais Cheikh Tidiane Gadio et Abdoulaye Bathily."
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_40210add0c534e68",
+ "disease_event_id": null,
+ "country_code": "GW"
+}
