@@ -1,0 +1,114 @@
+{
+ "label": "S812678c5",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d4bda0e261c23dd29d2f17c440e1e0a51bdf8917dc314426eb5a177215acf76a",
+ "tokens": {
+  "input_tokens": 2229,
+  "output_tokens": 324,
+  "total_tokens": 2553
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\"]",
+    "after": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "GoldBod珠宝在塔科拉迪开设新展厅以促进黄金增值",
+   "summary_zh": "GoldBod珠宝与B-Light珠宝合作，在西部省塔科拉迪购物中心开设新展厅，旨在让本地加工黄金首饰更贴近消费者并推动加纳黄金产业增值。展厅于10月2日周五开业。该消息为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "Western Region",
+    "city": "Takoradi",
+    "site": "Takoradi Mall",
+    "raw_text": "Takoradi Mall in the Western Region"
+   },
+   "key_facts": [
+    {
+     "fact": "GoldBod珠宝与B-Light珠宝合作在塔科拉迪购物中心开设新展厅",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "GoldBod Jewellery, in partnership with B-Light Jewellery, has opened a new showroom at the Takoradi Mall in the Western Region"
+    },
+    {
+     "fact": "展厅于10月2日周五开业",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The showroom, which was opened on Friday, October 2"
+    },
+    {
+     "fact": "此举旨在推动加纳黄金产业增值",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "promote value addition in Ghana’s gold industry"
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "GoldBod珠宝在塔科拉迪开设新展厅以促进黄金增值",
+   "summary_zh": "GoldBod珠宝与B-Light珠宝合作，在西部省塔科拉迪购物中心开设新展厅，旨在让本地加工黄金首饰更贴近消费者并推动加纳黄金产业增值。展厅于10月2日周五开业。该消息为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "Western Region",
+    "city": "Takoradi",
+    "site": "Takoradi Mall",
+    "raw_text": "Takoradi Mall in the Western Region"
+   },
+   "key_facts": [
+    {
+     "fact": "GoldBod珠宝与B-Light珠宝合作在塔科拉迪购物中心开设新展厅",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "GoldBod Jewellery, in partnership with B-Light Jewellery, has opened a new showroom at the Takoradi Mall in the Western Region"
+    },
+    {
+     "fact": "展厅于10月2日周五开业",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The showroom, which was opened on Friday, October 2"
+    },
+    {
+     "fact": "此举旨在推动加纳黄金产业增值",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "promote value addition in Ghana’s gold industry"
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_2dbcd739812678c5",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

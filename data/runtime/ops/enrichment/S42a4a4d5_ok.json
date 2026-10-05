@@ -1,0 +1,114 @@
+{
+ "label": "S42a4a4d5",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "7c35c261a3bac3bab08aae7793152e13528030f1b53ef43fdf003d01ee4d123c",
+ "tokens": {
+  "input_tokens": 2213,
+  "output_tokens": 330,
+  "total_tokens": 2543
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该报道为单一来源，尚缺乏交叉验证\"]",
+    "after": "[\"该报道为单一来源，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳纪念世界人居日，政府公布扩大经济适用住房供应措施",
+   "summary_zh": "加纳政府重申致力于让更多加纳人获得体面、安全、可负担且包容的住房，并在2026年世界人居日以“人人享有适足住房”为主题之际公布相关扩大住房供应的措施。该消息来自单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳政府重申致力于让更多加纳人获得体面、安全、可负担且包容的住房",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Government has reaffirmed its commitment to making decent, safe, affordable and inclusive housing accessible to more Ghanaians"
+    },
+    {
+     "fact": "加纳纪念2026年世界人居日，主题为“人人享有适足住房”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "as the country joins the international community to commemorate World Habitat Day 2026 under the theme “Adequate Housing for All.”"
+    },
+    {
+     "fact": "政府公布扩大经济适用住房供应的措施",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Gov’t outlines measures to expand access to affordable housing as Ghana marks World Habitat Day"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳纪念世界人居日，政府公布扩大经济适用住房供应措施",
+   "summary_zh": "加纳政府重申致力于让更多加纳人获得体面、安全、可负担且包容的住房，并在2026年世界人居日以“人人享有适足住房”为主题之际公布相关扩大住房供应的措施。该消息来自单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳政府重申致力于让更多加纳人获得体面、安全、可负担且包容的住房",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Government has reaffirmed its commitment to making decent, safe, affordable and inclusive housing accessible to more Ghanaians"
+    },
+    {
+     "fact": "加纳纪念2026年世界人居日，主题为“人人享有适足住房”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "as the country joins the international community to commemorate World Habitat Day 2026 under the theme “Adequate Housing for All.”"
+    },
+    {
+     "fact": "政府公布扩大经济适用住房供应的措施",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Gov’t outlines measures to expand access to affordable housing as Ghana marks World Habitat Day"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_78b21c4e42a4a4d5",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

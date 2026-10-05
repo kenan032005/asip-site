@@ -1,0 +1,114 @@
+{
+ "label": "Sc35bc982",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "33aa6f27b1d8cc2958df2d8567e01f5d05a005b5942442a75aa95c63fb6c83f2",
+ "tokens": {
+  "input_tokens": 2194,
+  "output_tokens": 356,
+  "total_tokens": 2550
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该事件为单一来源报道，尚未获得其他独立来源交叉验证\"]",
+    "after": "[\"该事件为单一来源报道，尚未获得其他独立来源交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳内政部长呼吁国家安全建设不应局限于阿克拉",
+   "summary_zh": "加纳内政部长Muntaka Mohammed-Mubarak呼吁阿散蒂地区安全委员会及各大都市、市、区行政长官采用情报主导的安全管理方式。此举正值加纳开始实施《2026年安全与情报机构法》（第1168号法案）之际。他提出国家安全建设不应仅限于首都阿克拉。",
+   "event_type": "political_instability",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "阿克拉",
+    "site": null,
+    "raw_text": "Accra"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳内政部长呼吁采用情报主导的安全管理方式",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Minister for the Interior, Muntaka Mohammed-Mubarak, has called on the Ashanti Regional Security Council (REGSEC) and Metropolitan, Municipal and District Chief Executives (MMDCEs) to adopt an intelligence-led approach to security management"
+    },
+    {
+     "fact": "加纳开始实施《2026年安全与情报机构法》（第1168号法案）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "as Ghana begins implementing the Security and Intelligence Agencies Act, 2026 (Act 1168)"
+    },
+    {
+     "fact": "内政部长称国家安全建设不应局限于阿克拉",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "National security must be built beyond Accra – Muntaka"
+    }
+   ],
+   "uncertainties": [
+    "该事件为单一来源报道，尚未获得其他独立来源交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳内政部长呼吁国家安全建设不应局限于阿克拉",
+   "summary_zh": "加纳内政部长Muntaka Mohammed-Mubarak呼吁阿散蒂地区安全委员会及各大都市、市、区行政长官采用情报主导的安全管理方式。此举正值加纳开始实施《2026年安全与情报机构法》（第1168号法案）之际。他提出国家安全建设不应仅限于首都阿克拉。",
+   "event_type": "political_instability",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "阿克拉",
+    "site": null,
+    "raw_text": "Accra"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳内政部长呼吁采用情报主导的安全管理方式",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Minister for the Interior, Muntaka Mohammed-Mubarak, has called on the Ashanti Regional Security Council (REGSEC) and Metropolitan, Municipal and District Chief Executives (MMDCEs) to adopt an intelligence-led approach to security management"
+    },
+    {
+     "fact": "加纳开始实施《2026年安全与情报机构法》（第1168号法案）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "as Ghana begins implementing the Security and Intelligence Agencies Act, 2026 (Act 1168)"
+    },
+    {
+     "fact": "内政部长称国家安全建设不应局限于阿克拉",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "National security must be built beyond Accra – Muntaka"
+    }
+   ],
+   "uncertainties": [
+    "该事件为单一来源报道，尚未获得其他独立来源交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_a9d75ab2c35bc982",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

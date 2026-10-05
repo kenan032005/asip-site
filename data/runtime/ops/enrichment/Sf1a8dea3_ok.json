@@ -1,0 +1,94 @@
+{
+ "label": "Sf1a8dea3",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f0ce80da0e67c4c2213f7eda47f09e76f4b599424e100d14bb1b0b107ef5a629",
+ "tokens": {
+  "input_tokens": 2222,
+  "output_tokens": 309,
+  "total_tokens": 2531
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\"]",
+    "after": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "世界宣明会计划在加纳阿苏纳福北与阿苏蒂菲北实现90%的WASH普及率",
+   "summary_zh": "世界宣明会加纳分会设定目标，计划在未来五年内为阿哈福地区的阿苏纳福北市和阿苏蒂菲北区的目标农村社区提供至少90%的普遍饮用水、环境卫生和个人卫生（WASH）基础设施与服务。该消息来自单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "Ahafo",
+    "city": null,
+    "site": null,
+    "raw_text": "Asunafo North Municipality and Asutifi North District of the Ahafo region"
+   },
+   "key_facts": [
+    {
+     "fact": "世界宣明会加纳分会计划在未来五年内为阿哈福地区目标农村社区实现至少90%的WASH普及率",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "World Vision Ghana has set a target to deliver at least 90 percent universal access to Water, Sanitation, and Hygiene (WASH) infrastructure and services across targeted rural communities in the Asunafo North Municipality and Asutifi North District of the Ahafo region over the next five years."
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "世界宣明会计划在加纳阿苏纳福北与阿苏蒂菲北实现90%的WASH普及率",
+   "summary_zh": "世界宣明会加纳分会设定目标，计划在未来五年内为阿哈福地区的阿苏纳福北市和阿苏蒂菲北区的目标农村社区提供至少90%的普遍饮用水、环境卫生和个人卫生（WASH）基础设施与服务。该消息来自单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "Ahafo",
+    "city": null,
+    "site": null,
+    "raw_text": "Asunafo North Municipality and Asutifi North District of the Ahafo region"
+   },
+   "key_facts": [
+    {
+     "fact": "世界宣明会加纳分会计划在未来五年内为阿哈福地区目标农村社区实现至少90%的WASH普及率",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "World Vision Ghana has set a target to deliver at least 90 percent universal access to Water, Sanitation, and Hygiene (WASH) infrastructure and services across targeted rural communities in the Asunafo North Municipality and Asutifi North District of the Ahafo region over the next five years."
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_534747a2f1a8dea3",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

@@ -1,0 +1,116 @@
+{
+ "label": "S6129c78f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f1c2123c93d7f9c3a3f8419f84ade42a92b77ad56537ad4cb6661cfeffb735e5",
+ "tokens": {
+  "input_tokens": 2197,
+  "output_tokens": 316,
+  "total_tokens": 2513
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该消息目前为单一来源报道，尚缺乏交叉验证\", \"总检察长审查结果尚未公布\"]",
+    "after": "[\"该消息目前为单一来源报道，尚缺乏交叉验证\", \"总检察长审查结果尚未公布\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳国家大教堂地块交还政府，等待总检察长审查",
+   "summary_zh": "加纳地方政府、酋长与宗教事务部长马哈马·阿亚里加披露，国家大教堂项目地块已交还政府。政府正在等待总检察长对该项目支出的法务审计进行审查。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": "国家大教堂项目地块",
+    "raw_text": "National Cathedral site"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳国家大教堂项目地块已交还政府",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The site of the National Cathedral has been handed back to the government"
+    },
+    {
+     "fact": "政府正等待总检察长审查该项目的法务审计",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Mahama administration awaits the Attorney-General’s review of a forensic audit into expenditure on the project"
+    },
+    {
+     "fact": "该消息由地方政府、酋长与宗教事务部长马哈马·阿亚里加披露",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Local Government, Chieftaincy and Religious Affairs Minister Mahama Ayariga has disclosed"
+    }
+   ],
+   "uncertainties": [
+    "该消息目前为单一来源报道，尚缺乏交叉验证",
+    "总检察长审查结果尚未公布"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳国家大教堂地块交还政府，等待总检察长审查",
+   "summary_zh": "加纳地方政府、酋长与宗教事务部长马哈马·阿亚里加披露，国家大教堂项目地块已交还政府。政府正在等待总检察长对该项目支出的法务审计进行审查。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": "国家大教堂项目地块",
+    "raw_text": "National Cathedral site"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳国家大教堂项目地块已交还政府",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The site of the National Cathedral has been handed back to the government"
+    },
+    {
+     "fact": "政府正等待总检察长审查该项目的法务审计",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Mahama administration awaits the Attorney-General’s review of a forensic audit into expenditure on the project"
+    },
+    {
+     "fact": "该消息由地方政府、酋长与宗教事务部长马哈马·阿亚里加披露",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Local Government, Chieftaincy and Religious Affairs Minister Mahama Ayariga has disclosed"
+    }
+   ],
+   "uncertainties": [
+    "该消息目前为单一来源报道，尚缺乏交叉验证",
+    "总检察长审查结果尚未公布",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_a763ccfe6129c78f",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

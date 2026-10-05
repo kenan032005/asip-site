@@ -1,0 +1,107 @@
+{
+ "label": "Se97fb575",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "8653a3277ab0a0e1f43b76f83f932d270cb5979b651a486e32736cba2597e927",
+ "tokens": {
+  "input_tokens": 2204,
+  "output_tokens": 360,
+  "total_tokens": 2564
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "报道称迪拜航空副驾驶曾计划驾机撞向特拉维夫机场或建筑",
+   "summary_zh": "据美国和以色列方面的报道，一名被指试图劫持迪拜航空（flydubai）客机的副驾驶，曾计划驾机撞向以色列特拉维夫的本·古里安机场或该市一栋高楼。相关说法目前仅来自单一来源，尚未获得独立证实。",
+   "event_type": "terrorism",
+   "country_iso3": "ISR",
+   "location": {
+    "country_iso3": "ISR",
+    "admin1": null,
+    "city": "特拉维夫",
+    "site": "本·古里安机场",
+    "raw_text": "Tel Aviv's Ben Gurion airport or a tower block in the Israeli city"
+   },
+   "key_facts": [
+    {
+     "fact": "一名被指试图劫持迪拜航空客机的副驾驶曾计划驾机撞向特拉维夫的本·古里安机场或一栋高楼",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The co-pilot accused of trying to hijack a flydubai plane planned to crash the aircraft into Tel Aviv's Ben Gurion airport or a tower block in the Israeli city, US and Israeli reports suggest."
+    },
+    {
+     "fact": "相关说法来自美国和以色列方面的报道",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "US and Israeli reports suggest"
+    },
+    {
+     "fact": "该事件目前为单一来源报道",
+     "evidence_field": "source_links",
+     "evidence_excerpt": "MyJoyOnline"
+    }
+   ],
+   "uncertainties": [
+    "相关计划与指控尚未获得独立证实",
+    "目前仅有一个来源报道，缺乏交叉验证",
+    "报道未说明事件具体时间及是否已被阻止"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 60
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "报道称迪拜航空副驾驶曾计划驾机撞向特拉维夫机场或建筑",
+   "summary_zh": "据美国和以色列方面的报道，一名被指试图劫持迪拜航空（flydubai）客机的副驾驶，曾计划驾机撞向以色列特拉维夫的本·古里安机场或该市一栋高楼。相关说法目前仅来自单一来源，尚未获得独立证实。",
+   "event_type": "terrorism",
+   "country_iso3": "ISR",
+   "location": {
+    "country_iso3": "ISR",
+    "admin1": null,
+    "city": "特拉维夫",
+    "site": "本·古里安机场",
+    "raw_text": "Tel Aviv's Ben Gurion airport or a tower block in the Israeli city"
+   },
+   "key_facts": [
+    {
+     "fact": "一名被指试图劫持迪拜航空客机的副驾驶曾计划驾机撞向特拉维夫的本·古里安机场或一栋高楼",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The co-pilot accused of trying to hijack a flydubai plane planned to crash the aircraft into Tel Aviv's Ben Gurion airport or a tower block in the Israeli city, US and Israeli reports suggest."
+    },
+    {
+     "fact": "相关说法来自美国和以色列方面的报道",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "US and Israeli reports suggest"
+    },
+    {
+     "fact": "该事件目前为单一来源报道",
+     "evidence_field": "source_links",
+     "evidence_excerpt": "MyJoyOnline"
+    }
+   ],
+   "uncertainties": [
+    "相关计划与指控尚未获得独立证实",
+    "目前仅有一个来源报道，缺乏交叉验证",
+    "报道未说明事件具体时间及是否已被阻止"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 60
+  }
+ },
+ "event_id": "EVT_2b40f622e97fb575",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

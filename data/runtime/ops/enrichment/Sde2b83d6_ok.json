@@ -1,0 +1,104 @@
+{
+ "label": "Sde2b83d6",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "2159a51eb8502a4a599a65158a02d31fd058d67cbc5547bcf3988e9166fa1967",
+ "tokens": {
+  "input_tokens": 2176,
+  "output_tokens": 309,
+  "total_tokens": 2485
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\"]",
+    "after": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳禁止在公交车上布道，违者将面临监禁",
+   "summary_zh": "加纳出台规定，禁止在公交车上布道，违者将面临监禁处罚。在首都阿克拉的Neoplan公交站，一群基督徒在早高峰前聚集，准备在跨城车辆上开展福音传播活动。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "阿克拉",
+    "site": "Neoplan公交站",
+    "raw_text": "Neoplan bus station in Ghana's capital, Accra"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳禁止在公交车上布道，违者将面临监禁",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Ghana bans preaching on buses with jail terms for offenders"
+    },
+    {
+     "fact": "在阿克拉Neoplan公交站，一群基督徒聚集准备在跨城车辆上布道",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Before the morning rush begins, the sound of praise and worship fills the Neoplan bus station in Ghana's capital, Accra, as a group of Christians gather to prepare to evangelise on vehicles taking travellers across the country."
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳禁止在公交车上布道，违者将面临监禁",
+   "summary_zh": "加纳出台规定，禁止在公交车上布道，违者将面临监禁处罚。在首都阿克拉的Neoplan公交站，一群基督徒在早高峰前聚集，准备在跨城车辆上开展福音传播活动。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "阿克拉",
+    "site": "Neoplan公交站",
+    "raw_text": "Neoplan bus station in Ghana's capital, Accra"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳禁止在公交车上布道，违者将面临监禁",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Ghana bans preaching on buses with jail terms for offenders"
+    },
+    {
+     "fact": "在阿克拉Neoplan公交站，一群基督徒聚集准备在跨城车辆上布道",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Before the morning rush begins, the sound of praise and worship fills the Neoplan bus station in Ghana's capital, Accra, as a group of Christians gather to prepare to evangelise on vehicles taking travellers across the country."
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_c54fa3fcde2b83d6",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

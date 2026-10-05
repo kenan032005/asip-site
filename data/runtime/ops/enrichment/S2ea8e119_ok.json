@@ -1,0 +1,114 @@
+{
+ "label": "S2ea8e119",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c4ce359a38761c91ca0cb5bded84af091910e83c0a309ea4711db6b59f3cd687",
+ "tokens": {
+  "input_tokens": 2209,
+  "output_tokens": 365,
+  "total_tokens": 2574
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\"]",
+    "after": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳人工智能峰会2027年3月将在阿克拉举行",
+   "summary_zh": "第三届加纳人工智能峰会暨颁奖典礼将于2027年3月30日至31日在阿克拉举行，汇聚政策制定者、商界领袖、科技公司、投资者、研究人员和创新者，讨论该国对人工智能的应用。为期两天的活动主题为“智能未来：人、政策、利润、进步”。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "阿克拉",
+    "site": null,
+    "raw_text": "Accra"
+   },
+   "key_facts": [
+    {
+     "fact": "第三届加纳人工智能峰会暨颁奖典礼将于2027年3月30日至31日在阿克拉举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The third edition of the Ghana AI Summit and Awards will be held in Accra from March 30 to 31, 2027"
+    },
+    {
+     "fact": "峰会将汇聚政策制定者、商界领袖、科技公司、投资者、研究人员和创新者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "bringing together policymakers, business leaders, technology companies, investors, researchers and innovators to discuss the country's adoption of artificial intelligence"
+    },
+    {
+     "fact": "活动主题为“智能未来：人、政策、利润、进步”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The two-day event will be held under the theme, “The Intelligent Future: People. Policy. Profit. Progress.”"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳人工智能峰会2027年3月将在阿克拉举行",
+   "summary_zh": "第三届加纳人工智能峰会暨颁奖典礼将于2027年3月30日至31日在阿克拉举行，汇聚政策制定者、商界领袖、科技公司、投资者、研究人员和创新者，讨论该国对人工智能的应用。为期两天的活动主题为“智能未来：人、政策、利润、进步”。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "阿克拉",
+    "site": null,
+    "raw_text": "Accra"
+   },
+   "key_facts": [
+    {
+     "fact": "第三届加纳人工智能峰会暨颁奖典礼将于2027年3月30日至31日在阿克拉举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The third edition of the Ghana AI Summit and Awards will be held in Accra from March 30 to 31, 2027"
+    },
+    {
+     "fact": "峰会将汇聚政策制定者、商界领袖、科技公司、投资者、研究人员和创新者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "bringing together policymakers, business leaders, technology companies, investors, researchers and innovators to discuss the country's adoption of artificial intelligence"
+    },
+    {
+     "fact": "活动主题为“智能未来：人、政策、利润、进步”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The two-day event will be held under the theme, “The Intelligent Future: People. Policy. Profit. Progress.”"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_256a511f2ea8e119",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

@@ -1,0 +1,108 @@
+{
+ "label": "S759b15ac",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "89b19daa8f2ce6016793a876ee0423bd833238c4c2d22d0ccb5d72ce4e73c921",
+ "tokens": {
+  "input_tokens": 2172,
+  "output_tokens": 278,
+  "total_tokens": 2450
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"营地是否确实布有爆炸物尚未证实\", \"被绑架人员情况未获确认\", \"目前仅一个来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"营地是否确实布有爆炸物尚未证实\", \"被绑架人员情况未获确认\", \"目前仅一个来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚警方称炸弹阻碍营救被绑架青年",
+   "summary_zh": "尼日利亚警方表示已定位一处关押19名国家青年服务队招募人员的营地，武装分子将这些人扣押。警方称因怀疑该地点布有爆炸物，目前无法进入营救。该消息为单一来源报道。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚警方称已定位一处关押19名国家青年服务队招募人员的营地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigerian police say they have located a camp where 19 national youth service recruits are being held by gunmen"
+    },
+    {
+     "fact": "警方称因怀疑该地点布有爆炸物而无法进入营救",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cannot move in as they believe the place is mined with explosives"
+    }
+   ],
+   "uncertainties": [
+    "营地是否确实布有爆炸物尚未证实",
+    "被绑架人员情况未获确认",
+    "目前仅一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚警方称炸弹阻碍营救被绑架青年",
+   "summary_zh": "尼日利亚警方表示已定位一处关押19名国家青年服务队招募人员的营地，武装分子将这些人扣押。警方称因怀疑该地点布有爆炸物，目前无法进入营救。该消息为单一来源报道。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚警方称已定位一处关押19名国家青年服务队招募人员的营地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigerian police say they have located a camp where 19 national youth service recruits are being held by gunmen"
+    },
+    {
+     "fact": "警方称因怀疑该地点布有爆炸物而无法进入营救",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cannot move in as they believe the place is mined with explosives"
+    }
+   ],
+   "uncertainties": [
+    "营地是否确实布有爆炸物尚未证实",
+    "被绑架人员情况未获确认",
+    "目前仅一个来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_d9a4d039759b15ac",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

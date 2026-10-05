@@ -1,0 +1,96 @@
+{
+ "label": "S45b882b7",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a050159f1d10d4011b8bc2f63b2b1d7ae86d8c720431d382dce7bfe5aa13d7ff",
+ "tokens": {
+  "input_tokens": 2320,
+  "output_tokens": 281,
+  "total_tokens": 2601
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该报道为单一来源，尚未获得其他来源交叉验证\", \"“buga”的具体含义未在原文中说明\"]",
+    "after": "[\"该报道为单一来源，尚未获得其他来源交叉验证\", \"“buga”的具体含义未在原文中说明\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳新爱国党通讯主任称2028年大选将结合策略与“buga”",
+   "summary_zh": "加纳新爱国党（NPP）新当选的通讯主任Dennis Miracles Aboagye表示，该党将在2028年大选中结合策略与其所称的“buga”来保护选票。相关报道为单一来源，尚未获得其他来源交叉验证。",
+   "event_type": "political_instability",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳新爱国党通讯主任称2028年大选将结合策略与“buga”保护选票",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Newly elected Communications Director of the New Patriotic Party (NPP), Dennis Miracles Aboagye, says the party will combine strategy with what he describes as “buga” to protect its votes in the 2028 general election."
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚未获得其他来源交叉验证",
+    "“buga”的具体含义未在原文中说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 60
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳新爱国党通讯主任称2028年大选将结合策略与“buga”",
+   "summary_zh": "加纳新爱国党（NPP）新当选的通讯主任Dennis Miracles Aboagye表示，该党将在2028年大选中结合策略与其所称的“buga”来保护选票。相关报道为单一来源，尚未获得其他来源交叉验证。",
+   "event_type": "political_instability",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳新爱国党通讯主任称2028年大选将结合策略与“buga”保护选票",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Newly elected Communications Director of the New Patriotic Party (NPP), Dennis Miracles Aboagye, says the party will combine strategy with what he describes as “buga” to protect its votes in the 2028 general election."
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚未获得其他来源交叉验证",
+    "“buga”的具体含义未在原文中说明",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 60
+  }
+ },
+ "event_id": "EVT_4f5ac85645b882b7",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

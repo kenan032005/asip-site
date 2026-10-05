@@ -1,0 +1,114 @@
+{
+ "label": "Sdad6d2a5",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a41058bb1bfa16465c2e6a34dd4957a8199e084af1b23b88e0c98c9e2066d1be",
+ "tokens": {
+  "input_tokens": 2197,
+  "output_tokens": 364,
+  "total_tokens": 2561
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\"]",
+    "after": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳地方政府部长称马哈马对Aayalolo逆向车道系统初步成效表示满意",
+   "summary_zh": "加纳地方政府、酋长与宗教事务部长马哈马·阿亚里加表示，总统约翰·德拉马尼·马哈马对在阿克拉推行的Aayalolo逆向车道系统初步成效表示满意。该系统旨在缓解交通拥堵、改善通勤者出行。相关消息为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "阿克拉",
+    "site": null,
+    "raw_text": "Accra"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳总统马哈马对Aayalolo逆向车道系统初步成效表示满意",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "President John Dramani Mahama is satisfied with the initial results of the Aayalolo contra-flow system introduced to ease traffic congestion and improve the movement of commuters in Accra"
+    },
+    {
+     "fact": "该消息由地方政府、酋长与宗教事务部长马哈马·阿亚里加披露",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Minister for Local Government, Chieftaincy and Religious Affairs Mahama Ayariga has disclosed"
+    },
+    {
+     "fact": "Aayalolo逆向车道系统旨在缓解阿克拉交通拥堵并改善通勤者出行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "introduced to ease traffic congestion and improve the movement of commuters in Accra"
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳地方政府部长称马哈马对Aayalolo逆向车道系统初步成效表示满意",
+   "summary_zh": "加纳地方政府、酋长与宗教事务部长马哈马·阿亚里加表示，总统约翰·德拉马尼·马哈马对在阿克拉推行的Aayalolo逆向车道系统初步成效表示满意。该系统旨在缓解交通拥堵、改善通勤者出行。相关消息为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "阿克拉",
+    "site": null,
+    "raw_text": "Accra"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳总统马哈马对Aayalolo逆向车道系统初步成效表示满意",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "President John Dramani Mahama is satisfied with the initial results of the Aayalolo contra-flow system introduced to ease traffic congestion and improve the movement of commuters in Accra"
+    },
+    {
+     "fact": "该消息由地方政府、酋长与宗教事务部长马哈马·阿亚里加披露",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Minister for Local Government, Chieftaincy and Religious Affairs Mahama Ayariga has disclosed"
+    },
+    {
+     "fact": "Aayalolo逆向车道系统旨在缓解阿克拉交通拥堵并改善通勤者出行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "introduced to ease traffic congestion and improve the movement of commuters in Accra"
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_96f680dadad6d2a5",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
