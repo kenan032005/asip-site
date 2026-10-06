@@ -1,10 +1,11 @@
 {
  "schema": "gdelt-rate-limiter-v1",
  "host": "api.gdeltproject.org",
- "requests": 3,
+ "requests": 4,
  "cache_hits": 0,
  "status_counts": {
-  "429": 3
+  "429": 3,
+  "200": 1
  },
  "current_interval_s": 300.0,
  "min_interval_s": 20.0,
@@ -13,11 +14,11 @@
  "retry_after_honored": 0,
  "request_budget": 120,
  "budget_exhausted": false,
- "labeled_requests": 3,
- "labeled_success": 0,
+ "labeled_requests": 4,
+ "labeled_success": 1,
  "labeled_rate_limited": 3,
- "success_rate": 0.0,
- "rate_limited_rate": 1.0,
+ "success_rate": 0.25,
+ "rate_limited_rate": 0.75,
  "by_label": {
   "|Niger": {
    "requests": 1,
@@ -29,13 +30,21 @@
   },
   "|尼日尔": {
    "requests": 1,
+   "success": 1,
+   "rate_limited": 0,
+   "errors": 0,
+   "cache_hits": 0,
+   "items": 0
+  },
+  "|Chad": {
+   "requests": 1,
    "success": 0,
    "rate_limited": 1,
    "errors": 0,
    "cache_hits": 0,
    "items": 0
   },
-  "|Chad": {
+  "|乍得": {
    "requests": 1,
    "success": 0,
    "rate_limited": 1,
