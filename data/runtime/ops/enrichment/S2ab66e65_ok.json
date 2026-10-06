@@ -1,0 +1,121 @@
+{
+ "label": "S2ab66e65",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5043f96ea579d0e4217523a112495f12c5de48996736343a5f079131229571f9",
+ "tokens": {
+  "input_tokens": 2433,
+  "output_tokens": 451,
+  "total_tokens": 2884
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚陆军炮兵部队寻求本土技术以提升联合火力支援能力",
+   "summary_zh": "尼日利亚陆军炮兵部队在卡杜纳州卡奇亚举行2026年“火神训练期/火神之光XII”学习期，主题为优化炮兵在联合与多域作战中的决定性火力支援能力。退役少将Jokotola呼吁深化本土研究、技术与专业训练，并强调尼日利亚陆军必须发展本土解决方案。炮兵司令Adeyemo表示正与本土技术公司合作改进炮兵平台，并计划在10月16日进行火力演示。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "卡杜纳州",
+    "city": "卡奇亚",
+    "site": "尼日利亚陆军炮兵学校",
+    "raw_text": "Kachia, Kaduna State"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚陆军炮兵部队在卡杜纳州卡奇亚举行2026年火神训练期学习活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "at the 2026 Vulcan Training Period/Exercise Vulcan Glow XII Study Period in Kachia, Kaduna State, on Tuesday"
+    },
+    {
+     "fact": "退役少将Jokotola呼吁深化本土研究、技术与专业训练以提升联合火力支援能力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Nigerian Army Corps of Artillery has been urged to deepen indigenous research, technology and professional training to enhance its capacity for effective fire support in joint and multi-domain operations"
+    },
+    {
+     "fact": "炮兵司令Adeyemo表示正与本土技术公司合作改进炮兵平台",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the corps was also strengthening research and development through partnerships with indigenous technical companies to improve artillery platforms and equipment"
+    },
+    {
+     "fact": "火力演示计划于10月16日举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "scheduled to culminate in an artillery firepower demonstration on Oct. 16"
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚陆军炮兵部队寻求本土技术以提升联合火力支援能力",
+   "summary_zh": "尼日利亚陆军炮兵部队在卡杜纳州卡奇亚举行2026年“火神训练期/火神之光XII”学习期，主题为优化炮兵在联合与多域作战中的决定性火力支援能力。退役少将Jokotola呼吁深化本土研究、技术与专业训练，并强调尼日利亚陆军必须发展本土解决方案。炮兵司令Adeyemo表示正与本土技术公司合作改进炮兵平台，并计划在10月16日进行火力演示。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "卡杜纳州",
+    "city": "卡奇亚",
+    "site": "尼日利亚陆军炮兵学校",
+    "raw_text": "Kachia, Kaduna State"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚陆军炮兵部队在卡杜纳州卡奇亚举行2026年火神训练期学习活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "at the 2026 Vulcan Training Period/Exercise Vulcan Glow XII Study Period in Kachia, Kaduna State, on Tuesday"
+    },
+    {
+     "fact": "退役少将Jokotola呼吁深化本土研究、技术与专业训练以提升联合火力支援能力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Nigerian Army Corps of Artillery has been urged to deepen indigenous research, technology and professional training to enhance its capacity for effective fire support in joint and multi-domain operations"
+    },
+    {
+     "fact": "炮兵司令Adeyemo表示正与本土技术公司合作改进炮兵平台",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the corps was also strengthening research and development through partnerships with indigenous technical companies to improve artillery platforms and equipment"
+    },
+    {
+     "fact": "火力演示计划于10月16日举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "scheduled to culminate in an artillery firepower demonstration on Oct. 16"
+    }
+   ],
+   "uncertainties": [
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_ba17d3972ab66e65",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

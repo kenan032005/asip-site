@@ -1,0 +1,131 @@
+{
+ "label": "Sa098c165",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5f4bb447dcf44142e8df0c6808036c4000e998d2ad84994cdb095ebbca41a6d0",
+ "tokens": {
+  "input_tokens": 2368,
+  "output_tokens": 614,
+  "total_tokens": 2982
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹耶伊一名学生据称遭纵火袭击后幸存",
+   "summary_zh": "南苏丹中赤道州耶伊镇一名20岁中学生据称被武装人员捆绑在床上后房屋遭纵火，该学生幸存并受重伤，正在耶伊民事医院接受治疗。警方和家属称，袭击者持枪和砍刀闯入其住所，用铁丝将其捆绑并泼洒汽油纵火。警方还指称袭击者抢走300美元，并疑似对其使用曲马多。目前信息为单一来源，尚未获得独立证实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Central Equatoria State",
+    "city": "Yei Town",
+    "site": "Kondeko Sub-Boma",
+    "raw_text": "Yei Town, Central Equatoria State, Kondeko Sub-Boma"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹中赤道州耶伊镇一名20岁中学生据称被武装人员捆绑在床上后房屋遭纵火，该学生幸存",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A 20-year-old secondary school student survived a house fire in Yei Town, Central Equatoria State, after armed men allegedly tied him to his bed and set the building ablaze, police and relatives said."
+    },
+    {
+     "fact": "袭击者据称用铁丝捆绑该学生并泼洒汽油纵火",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the attackers allegedly broke into the student’s home, tied him with wire and poured petrol over the house before setting it on fire."
+    },
+    {
+     "fact": "邻居和家属发现火灾后破门将其救出，该学生受重伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Neighbours and family members responded after noticing the fire, broke into the house and rescued the student... Gala was found tied to his bed with wire and had sustained serious injuries."
+    },
+    {
+     "fact": "警方指称袭击者抢走300美元并疑似对其使用曲马多",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Batali also alleged that the assailants took $300 from Gala and that he appeared to have been drugged with tramadol before the fire was started."
+    },
+    {
+     "fact": "该学生正在耶伊民事医院接受治疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Gala, a Senior Two student at Emmanuel Christian Academy Secondary School, is receiving treatment at Yei Civil Hospital."
+    }
+   ],
+   "uncertainties": [
+    "袭击动机及嫌疑人身份尚未证实",
+    "该学生此前是否曾遭遇未遂谋杀的说法尚未证实",
+    "袭击者是否与帮派活动有关联尚未证实",
+    "警方关于抢走300美元及使用曲马多的说法仅为指控，尚未证实",
+    "事件目前为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹耶伊一名学生据称遭纵火袭击后幸存",
+   "summary_zh": "南苏丹中赤道州耶伊镇一名20岁中学生据称被武装人员捆绑在床上后房屋遭纵火，该学生幸存并受重伤，正在耶伊民事医院接受治疗。警方和家属称，袭击者持枪和砍刀闯入其住所，用铁丝将其捆绑并泼洒汽油纵火。警方还指称袭击者抢走300美元，并疑似对其使用曲马多。目前信息为单一来源，尚未获得独立证实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Central Equatoria State",
+    "city": "Yei Town",
+    "site": "Kondeko Sub-Boma",
+    "raw_text": "Yei Town, Central Equatoria State, Kondeko Sub-Boma"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹中赤道州耶伊镇一名20岁中学生据称被武装人员捆绑在床上后房屋遭纵火，该学生幸存",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A 20-year-old secondary school student survived a house fire in Yei Town, Central Equatoria State, after armed men allegedly tied him to his bed and set the building ablaze, police and relatives said."
+    },
+    {
+     "fact": "袭击者据称用铁丝捆绑该学生并泼洒汽油纵火",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the attackers allegedly broke into the student’s home, tied him with wire and poured petrol over the house before setting it on fire."
+    },
+    {
+     "fact": "邻居和家属发现火灾后破门将其救出，该学生受重伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Neighbours and family members responded after noticing the fire, broke into the house and rescued the student... Gala was found tied to his bed with wire and had sustained serious injuries."
+    },
+    {
+     "fact": "警方指称袭击者抢走300美元并疑似对其使用曲马多",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Batali also alleged that the assailants took $300 from Gala and that he appeared to have been drugged with tramadol before the fire was started."
+    },
+    {
+     "fact": "该学生正在耶伊民事医院接受治疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Gala, a Senior Two student at Emmanuel Christian Academy Secondary School, is receiving treatment at Yei Civil Hospital."
+    }
+   ],
+   "uncertainties": [
+    "袭击动机及嫌疑人身份尚未证实",
+    "该学生此前是否曾遭遇未遂谋杀的说法尚未证实",
+    "袭击者是否与帮派活动有关联尚未证实",
+    "警方关于抢走300美元及使用曲马多的说法仅为指控，尚未证实",
+    "事件目前为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_82aee3e2a098c165",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

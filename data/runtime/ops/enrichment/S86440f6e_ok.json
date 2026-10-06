@@ -1,0 +1,136 @@
+{
+ "label": "S86440f6e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3c280f3fee113b9b9da8957250eb3c5fb905cb4852a62f6dc496b14d6712dc63",
+ "tokens": {
+  "input_tokens": 2962,
+  "output_tokens": 509,
+  "total_tokens": 3471
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"事故原因尚未公布\", \"目前仅一个来源（RFI）报道，尚缺乏交叉验证\"]",
+    "after": "[\"事故原因尚未公布\", \"目前仅一个来源（RFI）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚空军将坠机死亡人数从32人下修至25人",
+   "summary_zh": "尼日利亚空军10月6日将前一日军机坠毁事故的死亡人数从32人下修至25人，并公布遇难者名单，称未发现幸存者。NAF 931航班载有25人，包括5名机组人员和20名乘客。事故发生在翁多州，尼日利亚总统蒂努布宣布为期三天的全国哀悼。事故原因尚未公布。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "翁多州",
+    "city": null,
+    "site": "伊格博科达村附近",
+    "raw_text": "État d'Ondo, au sud-ouest du Nigeria; village d'Igbokoda"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚空军将坠机死亡人数从32人下修至25人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'armée de l'air nigériane a revu ce 6 octobre 2026 à la baisse le bilan du crash de son avion survenu la veille, le portant à 25 morts au lieu de 32"
+    },
+    {
+     "fact": "NAF 931航班载有25人，包括5名机组人员和20名乘客",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le vol NAF 931 transportait 25 personnes, dont cinq membres d'équipage et 20 passagers"
+    },
+    {
+     "fact": "未发现幸存者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucun survivant n'a été retrouvé"
+    },
+    {
+     "fact": "事故发生在翁多州，尼日利亚总统宣布三天全国哀悼",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Trois jours de deuil national ont été décrétés au Nigeria après la mort de 25 personnes dans l'accident d'un avion militaire dans l'État d'Ondo"
+    },
+    {
+     "fact": "事故原因尚未公布",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La cause du crash pas encore dévoilée"
+    }
+   ],
+   "uncertainties": [
+    "事故原因尚未公布",
+    "目前仅一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚空军将坠机死亡人数从32人下修至25人",
+   "summary_zh": "尼日利亚空军10月6日将前一日军机坠毁事故的死亡人数从32人下修至25人，并公布遇难者名单，称未发现幸存者。NAF 931航班载有25人，包括5名机组人员和20名乘客。事故发生在翁多州，尼日利亚总统蒂努布宣布为期三天的全国哀悼。事故原因尚未公布。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "翁多州",
+    "city": null,
+    "site": "伊格博科达村附近",
+    "raw_text": "État d'Ondo, au sud-ouest du Nigeria; village d'Igbokoda"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚空军将坠机死亡人数从32人下修至25人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'armée de l'air nigériane a revu ce 6 octobre 2026 à la baisse le bilan du crash de son avion survenu la veille, le portant à 25 morts au lieu de 32"
+    },
+    {
+     "fact": "NAF 931航班载有25人，包括5名机组人员和20名乘客",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le vol NAF 931 transportait 25 personnes, dont cinq membres d'équipage et 20 passagers"
+    },
+    {
+     "fact": "未发现幸存者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucun survivant n'a été retrouvé"
+    },
+    {
+     "fact": "事故发生在翁多州，尼日利亚总统宣布三天全国哀悼",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Trois jours de deuil national ont été décrétés au Nigeria après la mort de 25 personnes dans l'accident d'un avion militaire dans l'État d'Ondo"
+    },
+    {
+     "fact": "事故原因尚未公布",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La cause du crash pas encore dévoilée"
+    }
+   ],
+   "uncertainties": [
+    "事故原因尚未公布",
+    "目前仅一个来源（RFI）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_1088752d86440f6e",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

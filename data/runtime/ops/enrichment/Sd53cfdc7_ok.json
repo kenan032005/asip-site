@@ -1,0 +1,127 @@
+{
+ "label": "Sd53cfdc7",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "84a8148f27df804ef2007a37983e27886becfa4cfa1fe7cf63b77cc216512020",
+ "tokens": {
+  "input_tokens": 3118,
+  "output_tokens": 588,
+  "total_tokens": 3706
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "马里：阿扎瓦德解放阵线撤出基达尔，政府军与俄方伙伴进入该城",
+   "summary_zh": "马里政府军及其俄罗斯伙伴于10月6日下午进入北部城市基达尔。此前，阿扎瓦德解放阵线（FLA）宣布进行“战略撤退”，政府军未遇战斗即进入该城。马里军方称此次行动旨在“消灭武装恐怖组织”，而FLA则指责政府军实施“盲目空袭”打击民用目标，但伤亡情况尚未获得独立来源证实。",
+   "event_type": "armed_conflict",
+   "country_iso3": "MLI",
+   "location": {
+    "country_iso3": "MLI",
+    "admin1": "基达尔区",
+    "city": "基达尔",
+    "site": null,
+    "raw_text": "Kidal, région de Kidal, Mali"
+   },
+   "key_facts": [
+    {
+     "fact": "马里政府军及其俄罗斯伙伴于10月6日下午进入基达尔",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Mali, l'armée malienne et ses partenaires russes sont entrés à Kidal mardi 6 octobre après-midi."
+    },
+    {
+     "fact": "阿扎瓦德解放阵线（FLA）宣布从基达尔进行“战略撤退”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le FLA confirme avoir procédé à « un repli stratégique » de Kidal afin de « préserver des vies humaines »"
+    },
+    {
+     "fact": "马里军方声称已在该地区开展大规模空地联合作战，以“消灭武装恐怖组织”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'état-major revendique pour la première fois « avoir engagé des opérations aéroterrestres d'envergure dans la région de Kidal »"
+    },
+    {
+     "fact": "FLA指责政府军实施“盲目空袭”打击民用目标，但无独立来源核实伤亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le FLA dénonce, de son côté, des « frappes aveugles » contre des cibles civiles... Aucun bilan n'a pu être vérifié de source indépendante."
+    },
+    {
+     "fact": "基达尔市目前几乎空无一人，居民此前已大批逃离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kidal est aujourd'hui pratiquement vide. En 2023, ses habitants avaient majoritairement fui l'arrivée de l'armée malienne et du groupe Wagner."
+    }
+   ],
+   "uncertainties": [
+    "空袭造成的伤亡人数尚未获得独立来源证实",
+    "FLA关于“盲目空袭”打击民用目标的指控尚未得到独立核实",
+    "目前仅有一个来源（RFI）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "马里：阿扎瓦德解放阵线撤出基达尔，政府军与俄方伙伴进入该城",
+   "summary_zh": "马里政府军及其俄罗斯伙伴于10月6日下午进入北部城市基达尔。此前，阿扎瓦德解放阵线（FLA）宣布进行“战略撤退”，政府军未遇战斗即进入该城。马里军方称此次行动旨在“消灭武装恐怖组织”，而FLA则指责政府军实施“盲目空袭”打击民用目标，但伤亡情况尚未获得独立来源证实。",
+   "event_type": "armed_conflict",
+   "country_iso3": "MLI",
+   "location": {
+    "country_iso3": "MLI",
+    "admin1": "基达尔区",
+    "city": "基达尔",
+    "site": null,
+    "raw_text": "Kidal, région de Kidal, Mali"
+   },
+   "key_facts": [
+    {
+     "fact": "马里政府军及其俄罗斯伙伴于10月6日下午进入基达尔",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Mali, l'armée malienne et ses partenaires russes sont entrés à Kidal mardi 6 octobre après-midi."
+    },
+    {
+     "fact": "阿扎瓦德解放阵线（FLA）宣布从基达尔进行“战略撤退”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le FLA confirme avoir procédé à « un repli stratégique » de Kidal afin de « préserver des vies humaines »"
+    },
+    {
+     "fact": "马里军方声称已在该地区开展大规模空地联合作战，以“消灭武装恐怖组织”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'état-major revendique pour la première fois « avoir engagé des opérations aéroterrestres d'envergure dans la région de Kidal »"
+    },
+    {
+     "fact": "FLA指责政府军实施“盲目空袭”打击民用目标，但无独立来源核实伤亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le FLA dénonce, de son côté, des « frappes aveugles » contre des cibles civiles... Aucun bilan n'a pu être vérifié de source indépendante."
+    },
+    {
+     "fact": "基达尔市目前几乎空无一人，居民此前已大批逃离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kidal est aujourd'hui pratiquement vide. En 2023, ses habitants avaient majoritairement fui l'arrivée de l'armée malienne et du groupe Wagner."
+    }
+   ],
+   "uncertainties": [
+    "空袭造成的伤亡人数尚未获得独立来源证实",
+    "FLA关于“盲目空袭”打击民用目标的指控尚未得到独立核实",
+    "目前仅有一个来源（RFI）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_407c4815d53cfdc7",
+ "disease_event_id": null,
+ "country_code": "ML"
+}
