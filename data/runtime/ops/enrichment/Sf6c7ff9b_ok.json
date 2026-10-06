@@ -1,0 +1,124 @@
+{
+ "label": "Sf6c7ff9b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "cf22fd03e182999dd370ce3f17a93bcbcd3de940068d3da4bbe8da801e924384",
+ "tokens": {
+  "input_tokens": 2713,
+  "output_tokens": 517,
+  "total_tokens": 3230
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（Tchadinfos）报道，尚缺乏交叉验证\"]",
+    "after": "[\"目前仅一个来源（Tchadinfos）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得多省发布天气预警：沙尘、高温与雷暴来袭",
+   "summary_zh": "乍得国家气象局（ANAM）呼吁民众对2026年10月6日至7日夜间全国范围内的复杂天气保持警惕。北部省份将出现沙尘雾并导致能见度下降，最高气温可达42°C；南部多个省份预计出现降雨和雷暴天气。ANAM建议民众采取防暑、防雷及行车安全等预防措施。",
+   "event_type": "natural_disaster",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "l’ensemble du territoire tchadien"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得国家气象局对2026年10月6日至7日夜间全国复杂天气发布预警",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’Agence Nationale de la Météorologie (ANAM) appelle à la vigilance face à des conditions météorologiques contrastées attendues sur l’ensemble du territoire tchadien dans la nuit du 6 au 7 octobre 2026"
+    },
+    {
+     "fact": "北部省份沙尘雾将持续并导致能见度下降，最高气温可达42°C",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans les provinces septentrionales, la brume de poussière devrait persister, entraînant une réduction de la visibilité. Les températures resteront également élevées, avec des maximales pouvant atteindre 42 °C"
+    },
+    {
+     "fact": "南部多个省份预计出现降雨和雷暴天气",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des manifestations pluvio-orageuses sont prévues dans plusieurs provinces, notamment les deux Logone, les deux Mayo-Kebbi, la Tandjilé, le Mandoul, le Moyen-Chari, le Salamat, le Guera et le Chari-Baguirmi"
+    },
+    {
+     "fact": "ANAM建议民众采取防暑、防雷及行车安全等预防措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’ANAM recommande aux populations de prendre plusieurs précautions"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Tchadinfos）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得多省发布天气预警：沙尘、高温与雷暴来袭",
+   "summary_zh": "乍得国家气象局（ANAM）呼吁民众对2026年10月6日至7日夜间全国范围内的复杂天气保持警惕。北部省份将出现沙尘雾并导致能见度下降，最高气温可达42°C；南部多个省份预计出现降雨和雷暴天气。ANAM建议民众采取防暑、防雷及行车安全等预防措施。",
+   "event_type": "natural_disaster",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "l’ensemble du territoire tchadien"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得国家气象局对2026年10月6日至7日夜间全国复杂天气发布预警",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’Agence Nationale de la Météorologie (ANAM) appelle à la vigilance face à des conditions météorologiques contrastées attendues sur l’ensemble du territoire tchadien dans la nuit du 6 au 7 octobre 2026"
+    },
+    {
+     "fact": "北部省份沙尘雾将持续并导致能见度下降，最高气温可达42°C",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans les provinces septentrionales, la brume de poussière devrait persister, entraînant une réduction de la visibilité. Les températures resteront également élevées, avec des maximales pouvant atteindre 42 °C"
+    },
+    {
+     "fact": "南部多个省份预计出现降雨和雷暴天气",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des manifestations pluvio-orageuses sont prévues dans plusieurs provinces, notamment les deux Logone, les deux Mayo-Kebbi, la Tandjilé, le Mandoul, le Moyen-Chari, le Salamat, le Guera et le Chari-Baguirmi"
+    },
+    {
+     "fact": "ANAM建议民众采取防暑、防雷及行车安全等预防措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’ANAM recommande aux populations de prendre plusieurs précautions"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Tchadinfos）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_5556d4d4f6c7ff9b",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

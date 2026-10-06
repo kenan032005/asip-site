@@ -1,0 +1,125 @@
+{
+ "label": "S6032629a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e724724d53e5c9ea05a801238c1b64e52a88e933e20dd0d7bc04632777e90b51",
+ "tokens": {
+  "input_tokens": 1984,
+  "output_tokens": 441,
+  "total_tokens": 2425
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "提格雷地区无人机袭击持续，默克莱生活逐步恢复",
+   "summary_zh": "据一名提格雷和平力量指挥官称，政府盟军正在埃塞俄比亚提格雷地区实施无人机袭击，战斗持续加剧。此前提格雷武装于9月23日夺取默克莱机场，据报联邦部队随后重新控制该设施，总理阿比·艾哈迈德誓言镇压叛乱。与此同时，地区首府默克莱的市场和本地交通正缓慢恢复。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷地区",
+    "city": "默克莱",
+    "site": null,
+    "raw_text": "Tigray Region / Mekelle"
+   },
+   "key_facts": [
+    {
+     "fact": "据一名提格雷和平力量指挥官称，政府盟军正在提格雷地区实施无人机袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Government-allied forces are carrying out drone strikes in Ethiopia’s Tigray region as fighting intensifies, according to a Tigray Peace Force commander."
+    },
+    {
+     "fact": "提格雷武装于9月23日夺取默克莱机场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The renewed clashes come after Tigray fighters seized Mekelle's airport on September 23."
+    },
+    {
+     "fact": "据报联邦部队此后重新控制该机场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Federal forces have reportedly since retaken the facility"
+    },
+    {
+     "fact": "总理阿比·艾哈迈德誓言镇压叛乱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Prime Minister Abiy Ahmed has vowed to crush the insurgency."
+    },
+    {
+     "fact": "默克莱的市场和本地交通正缓慢恢复",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "markets and local transport are slowly returning to the streets of the regional capital"
+    }
+   ],
+   "uncertainties": [
+    "联邦部队重新控制默克莱机场的说法为据报，尚未获独立证实",
+    "无人机袭击及战斗加剧的说法来自单一来源（提格雷和平力量指挥官），尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "提格雷地区无人机袭击持续，默克莱生活逐步恢复",
+   "summary_zh": "据一名提格雷和平力量指挥官称，政府盟军正在埃塞俄比亚提格雷地区实施无人机袭击，战斗持续加剧。此前提格雷武装于9月23日夺取默克莱机场，据报联邦部队随后重新控制该设施，总理阿比·艾哈迈德誓言镇压叛乱。与此同时，地区首府默克莱的市场和本地交通正缓慢恢复。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷地区",
+    "city": "默克莱",
+    "site": null,
+    "raw_text": "Tigray Region / Mekelle"
+   },
+   "key_facts": [
+    {
+     "fact": "据一名提格雷和平力量指挥官称，政府盟军正在提格雷地区实施无人机袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Government-allied forces are carrying out drone strikes in Ethiopia’s Tigray region as fighting intensifies, according to a Tigray Peace Force commander."
+    },
+    {
+     "fact": "提格雷武装于9月23日夺取默克莱机场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The renewed clashes come after Tigray fighters seized Mekelle's airport on September 23."
+    },
+    {
+     "fact": "据报联邦部队此后重新控制该机场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Federal forces have reportedly since retaken the facility"
+    },
+    {
+     "fact": "总理阿比·艾哈迈德誓言镇压叛乱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Prime Minister Abiy Ahmed has vowed to crush the insurgency."
+    },
+    {
+     "fact": "默克莱的市场和本地交通正缓慢恢复",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "markets and local transport are slowly returning to the streets of the regional capital"
+    }
+   ],
+   "uncertainties": [
+    "联邦部队重新控制默克莱机场的说法为据报，尚未获独立证实",
+    "无人机袭击及战斗加剧的说法来自单一来源（提格雷和平力量指挥官），尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_d014dbaf6032629a",
+ "disease_event_id": null,
+ "country_code": "ET"
+}
