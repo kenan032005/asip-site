@@ -1,0 +1,115 @@
+{
+ "label": "Sc86c48bd",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "92aecdc4b210e57f5cfb489358a95170635367b72b88ff5251ae7e009134ce15",
+ "tokens": {
+  "input_tokens": 2028,
+  "output_tokens": 423,
+  "total_tokens": 2451
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚空军将坠机死亡人数下调至25人，遇难者中含平民",
+   "summary_zh": "尼日利亚空军10月6日表示，前一天发生的军机坠毁事故造成25人死亡，较此前公布的死亡人数有所下调。官方称未发现幸存者，遇难者中包括随机的平民家属。此前空军曾称机上共有32人，总统博拉·蒂努布称全部32人遇难。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "翁多州",
+    "city": null,
+    "site": "海军基地附近的沼泽地带",
+    "raw_text": "a swampy area near a naval base in Ondo state"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚空军将坠机死亡人数下调至25人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Nigerian Air Force on Tuesday lowered the death toll from its plane that crashed a day earlier to 25"
+    },
+    {
+     "fact": "官方称未发现幸存者，遇难者中包括平民家属",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "released the victims' names which included civilians and said no survivors were found"
+    },
+    {
+     "fact": "坠机发生在翁多州一处海军基地附近的沼泽地带",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "went down in a swampy area near a naval base in Ondo state"
+    },
+    {
+     "fact": "总统蒂努布此前称机上32人全部遇难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "President Bola Tinubu later Monday evening said that all 32 people aboard — 25 passengers and seven crew — had been killed"
+    }
+   ],
+   "uncertainties": [
+    "死亡人数存在前后差异：空军先称机上32人，后下调为25人死亡，具体数字尚未获独立确认",
+    "目前仅一个来源（Africanews）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚空军将坠机死亡人数下调至25人，遇难者中含平民",
+   "summary_zh": "尼日利亚空军10月6日表示，前一天发生的军机坠毁事故造成25人死亡，较此前公布的死亡人数有所下调。官方称未发现幸存者，遇难者中包括随机的平民家属。此前空军曾称机上共有32人，总统博拉·蒂努布称全部32人遇难。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "翁多州",
+    "city": null,
+    "site": "海军基地附近的沼泽地带",
+    "raw_text": "a swampy area near a naval base in Ondo state"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚空军将坠机死亡人数下调至25人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Nigerian Air Force on Tuesday lowered the death toll from its plane that crashed a day earlier to 25"
+    },
+    {
+     "fact": "官方称未发现幸存者，遇难者中包括平民家属",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "released the victims' names which included civilians and said no survivors were found"
+    },
+    {
+     "fact": "坠机发生在翁多州一处海军基地附近的沼泽地带",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "went down in a swampy area near a naval base in Ondo state"
+    },
+    {
+     "fact": "总统蒂努布此前称机上32人全部遇难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "President Bola Tinubu later Monday evening said that all 32 people aboard — 25 passengers and seven crew — had been killed"
+    }
+   ],
+   "uncertainties": [
+    "死亡人数存在前后差异：空军先称机上32人，后下调为25人死亡，具体数字尚未获独立确认",
+    "目前仅一个来源（Africanews）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_2a848125c86c48bd",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

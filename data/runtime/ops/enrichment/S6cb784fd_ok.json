@@ -1,0 +1,138 @@
+{
+ "label": "S6cb784fd",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "add831f44e3b58740f048e06debd00d5d82cad7139a264eff7fa1451304c8054",
+ "tokens": {
+  "input_tokens": 2453,
+  "output_tokens": 539,
+  "total_tokens": 2992
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"阿尔多关于基尔将获胜的预测尚未得到证实\", \"马查尔否认叛国等指控，相关审判结果未定\", \"选举准备工作伴随政治和安全担忧\"]",
+    "after": "[\"阿尔多关于基尔将获胜的预测尚未得到证实\", \"马查尔否认叛国等指控，相关审判结果未定\", \"选举准备工作伴随政治和安全担忧\", \"据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹政客称基尔将在大选中获胜，继任者将来自年轻一代",
+   "summary_zh": "南苏丹资深政治家阿尔多·阿朱·登表示，总统萨尔瓦·基尔将在12月22日的大选中以压倒性优势获胜，并称目前尚无政治人物能成为基尔的可信继任者。阿尔多认为基尔的最终继任者可能来自年轻一代政治家。基尔的政治对手里克·马查尔目前因叛国等指控在朱巴被拘留受审，他否认这些指控。",
+   "event_type": "political_instability",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": null,
+    "city": "朱巴",
+    "site": null,
+    "raw_text": "Juba"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹资深政治家阿尔多·阿朱·登称总统基尔将在12月22日大选中以压倒性优势获胜",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Veteran South Sudanese politician Dr. Aldo Ajou Deng said that President Salva Kiir would win the country’s Dec. 22 election by a landslide"
+    },
+    {
+     "fact": "基尔的政治对手里克·马查尔目前因叛国等指控在朱巴被拘留受审，他否认指控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Riek Machar, Kiir’s longtime political rival and a potential election challenger, is currently detained and on trial in Juba on treason and other charges, which he denies."
+    },
+    {
+     "fact": "阿尔多称基尔的最终继任者可能来自年轻一代政治家",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "any eventual successor to Kiir would likely come from a younger generation of politicians"
+    },
+    {
+     "fact": "国家选举委员会将12月22日定为总统和立法选举日期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The National Elections Commission has set Dec. 22 as the date for presidential and legislative elections."
+    },
+    {
+     "fact": "基尔于9月22日解散过渡政府并在选举前任命看守政府",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kiir dissolved the transitional government on Sept. 22 and appointed a caretaker administration ahead of the election."
+    }
+   ],
+   "uncertainties": [
+    "阿尔多关于基尔将获胜的预测尚未得到证实",
+    "马查尔否认叛国等指控，相关审判结果未定",
+    "选举准备工作伴随政治和安全担忧"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹政客称基尔将在大选中获胜，继任者将来自年轻一代",
+   "summary_zh": "南苏丹资深政治家阿尔多·阿朱·登表示，总统萨尔瓦·基尔将在12月22日的大选中以压倒性优势获胜，并称目前尚无政治人物能成为基尔的可信继任者。阿尔多认为基尔的最终继任者可能来自年轻一代政治家。基尔的政治对手里克·马查尔目前因叛国等指控在朱巴被拘留受审，他否认这些指控。",
+   "event_type": "political_instability",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": null,
+    "city": "朱巴",
+    "site": null,
+    "raw_text": "Juba"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹资深政治家阿尔多·阿朱·登称总统基尔将在12月22日大选中以压倒性优势获胜",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Veteran South Sudanese politician Dr. Aldo Ajou Deng said that President Salva Kiir would win the country’s Dec. 22 election by a landslide"
+    },
+    {
+     "fact": "基尔的政治对手里克·马查尔目前因叛国等指控在朱巴被拘留受审，他否认指控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Riek Machar, Kiir’s longtime political rival and a potential election challenger, is currently detained and on trial in Juba on treason and other charges, which he denies."
+    },
+    {
+     "fact": "阿尔多称基尔的最终继任者可能来自年轻一代政治家",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "any eventual successor to Kiir would likely come from a younger generation of politicians"
+    },
+    {
+     "fact": "国家选举委员会将12月22日定为总统和立法选举日期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The National Elections Commission has set Dec. 22 as the date for presidential and legislative elections."
+    },
+    {
+     "fact": "基尔于9月22日解散过渡政府并在选举前任命看守政府",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kiir dissolved the transitional government on Sept. 22 and appointed a caretaker administration ahead of the election."
+    }
+   ],
+   "uncertainties": [
+    "阿尔多关于基尔将获胜的预测尚未得到证实",
+    "马查尔否认叛国等指控，相关审判结果未定",
+    "选举准备工作伴随政治和安全担忧",
+    "据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_607fb15a6cb784fd",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

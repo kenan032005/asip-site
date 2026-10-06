@@ -1,0 +1,136 @@
+{
+ "label": "Sefca8a69",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "fa450d160674849f30fa351de0d92b42915494f4730dcbfa1c9b0ec875d24f7d",
+ "tokens": {
+  "input_tokens": 2648,
+  "output_tokens": 486,
+  "total_tokens": 3134
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"坠机原因尚未查明，有待调查\", \"目前仅一个来源（BBC）报道，尚缺乏交叉验证\"]",
+    "after": "[\"坠机原因尚未查明，有待调查\", \"目前仅一个来源（BBC）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚军机坠入沼泽致32人遇难，全国哀悼三日",
+   "summary_zh": "尼日利亚一架军用飞机在南部翁多州坠入沼泽，造成32人死亡，总统蒂努布宣布全国哀悼三天并下令彻查。当局称该机当时正执行从贝宁城飞往拉各斯的例行任务。这是自1992年以来尼日利亚军方最严重的一起空难。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "翁多州",
+    "city": "伊格博科达",
+    "site": "一处海军基地附近的沼泽",
+    "raw_text": "a swamp near a naval base in Igbokoda, Ondo state"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚一架军用飞机在南部翁多州坠毁，造成32人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a military aircraft crashed in southern Ondo State, killing 32 people"
+    },
+    {
+     "fact": "当局称该机当时正执行从贝宁城飞往拉各斯的例行任务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the plane was on a routine mission from Benin City to Lagos when it came down in a swamp near a naval base on Monday morning"
+    },
+    {
+     "fact": "总统蒂努布宣布全国哀悼三天并下令全面调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria's President Bola Tinubu has declared three days of national mourning ... has ordered a full investigation"
+    },
+    {
+     "fact": "这是自1992年以来尼日利亚军方最严重的一起空难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It is the deadliest crash involving a Nigerian military aircraft since 1992"
+    },
+    {
+     "fact": "航空部长称该机尾号为NGR 931，从贝宁飞往拉各斯途中失联",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the disappearance of a military aircraft with tail number NGR 931, enroute Lagos from Benin at 0913 hours earlier today"
+    }
+   ],
+   "uncertainties": [
+    "坠机原因尚未查明，有待调查",
+    "目前仅一个来源（BBC）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚军机坠入沼泽致32人遇难，全国哀悼三日",
+   "summary_zh": "尼日利亚一架军用飞机在南部翁多州坠入沼泽，造成32人死亡，总统蒂努布宣布全国哀悼三天并下令彻查。当局称该机当时正执行从贝宁城飞往拉各斯的例行任务。这是自1992年以来尼日利亚军方最严重的一起空难。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "翁多州",
+    "city": "伊格博科达",
+    "site": "一处海军基地附近的沼泽",
+    "raw_text": "a swamp near a naval base in Igbokoda, Ondo state"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚一架军用飞机在南部翁多州坠毁，造成32人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a military aircraft crashed in southern Ondo State, killing 32 people"
+    },
+    {
+     "fact": "当局称该机当时正执行从贝宁城飞往拉各斯的例行任务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the plane was on a routine mission from Benin City to Lagos when it came down in a swamp near a naval base on Monday morning"
+    },
+    {
+     "fact": "总统蒂努布宣布全国哀悼三天并下令全面调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria's President Bola Tinubu has declared three days of national mourning ... has ordered a full investigation"
+    },
+    {
+     "fact": "这是自1992年以来尼日利亚军方最严重的一起空难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It is the deadliest crash involving a Nigerian military aircraft since 1992"
+    },
+    {
+     "fact": "航空部长称该机尾号为NGR 931，从贝宁飞往拉各斯途中失联",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the disappearance of a military aircraft with tail number NGR 931, enroute Lagos from Benin at 0913 hours earlier today"
+    }
+   ],
+   "uncertainties": [
+    "坠机原因尚未查明，有待调查",
+    "目前仅一个来源（BBC）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_87a2f4e7efca8a69",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

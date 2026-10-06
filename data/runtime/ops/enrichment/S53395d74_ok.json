@@ -1,0 +1,136 @@
+{
+ "label": "S53395d74",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b340b6c8c346d852cc77b34241e1f7dee4c5b383518d1a9019d41681a02a36b8",
+ "tokens": {
+  "input_tokens": 2430,
+  "output_tokens": 538,
+  "total_tokens": 2968
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "conflicting",
+    "field": "uncertainties",
+    "before": "[\"事件信息目前仅来自单一来源（Radio Tamazuj），尚缺乏交叉验证\", \"教会领袖所述各地伤亡与流离失所的具体数字未获独立确认\"]",
+    "after": "[\"事件信息目前仅来自单一来源（Radio Tamazuj），尚缺乏交叉验证\", \"教会领袖所述各地伤亡与流离失所的具体数字未获独立确认\", \"相关信息存在冲突，尚无法确认。\"]",
+    "rule_id": "SAFETY-CORR-C1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹教会领袖呼吁立即停止暴力",
+   "summary_zh": "南苏丹教会领袖在朱巴举行记者会，呼吁全国立即停止敌对行动，警告武装暴力、青年动员和族群间冲突正在造成平民伤亡和流离失所，并阻碍人道主义行动。南苏丹教会理事会点名上尼罗州、琼莱州、团结州、瓦拉普州及赤道地区等多地局势持续恶化。教会领袖敦促政府、武装团体和社区保护平民、停止报复性袭击并保障人道准入。",
+   "event_type": "civil_unrest",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": null,
+    "city": "朱巴",
+    "site": null,
+    "raw_text": "Juba"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹教会领袖呼吁全国立即停止敌对行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South Sudan’s church leaders have called for an immediate cessation of hostilities across the country"
+    },
+    {
+     "fact": "教会领袖警告武装暴力、青年动员和族群间冲突正造成平民伤亡与流离失所并阻碍人道行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "warning that rising armed violence, youth mobilisation and inter-communal fighting are killing and displacing civilians and disrupting humanitarian operations"
+    },
+    {
+     "fact": "南苏丹教会理事会在朱巴举行记者会发出上述呼吁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The South Sudan Council of Churches made the appeal a press conference in Juba on Tuesday"
+    },
+    {
+     "fact": "教会领袖称上尼罗州纳西尔和乌兰两县的战斗与武装青年动员已造成死亡、流离失所并限制人道准入",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The council cited renewed fighting and mobilisation of armed youth in Nasir and Ulang counties in Upper Nile State, saying the violence had caused deaths, displacement and restrictions on humanitarian access"
+    },
+    {
+     "fact": "教会领袖对朱巴至蒙德里、托里特和耶伊公路沿线袭击等赤道地区不安全局势表示关切",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the council also cited insecurity in the Equatoria region, including attacks along roads linking Juba with Mundri, Torit and Yei"
+    }
+   ],
+   "uncertainties": [
+    "事件信息目前仅来自单一来源（Radio Tamazuj），尚缺乏交叉验证",
+    "教会领袖所述各地伤亡与流离失所的具体数字未获独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹教会领袖呼吁立即停止暴力",
+   "summary_zh": "南苏丹教会领袖在朱巴举行记者会，呼吁全国立即停止敌对行动，警告武装暴力、青年动员和族群间冲突正在造成平民伤亡和流离失所，并阻碍人道主义行动。南苏丹教会理事会点名上尼罗州、琼莱州、团结州、瓦拉普州及赤道地区等多地局势持续恶化。教会领袖敦促政府、武装团体和社区保护平民、停止报复性袭击并保障人道准入。",
+   "event_type": "civil_unrest",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": null,
+    "city": "朱巴",
+    "site": null,
+    "raw_text": "Juba"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹教会领袖呼吁全国立即停止敌对行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South Sudan’s church leaders have called for an immediate cessation of hostilities across the country"
+    },
+    {
+     "fact": "教会领袖警告武装暴力、青年动员和族群间冲突正造成平民伤亡与流离失所并阻碍人道行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "warning that rising armed violence, youth mobilisation and inter-communal fighting are killing and displacing civilians and disrupting humanitarian operations"
+    },
+    {
+     "fact": "南苏丹教会理事会在朱巴举行记者会发出上述呼吁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The South Sudan Council of Churches made the appeal a press conference in Juba on Tuesday"
+    },
+    {
+     "fact": "教会领袖称上尼罗州纳西尔和乌兰两县的战斗与武装青年动员已造成死亡、流离失所并限制人道准入",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The council cited renewed fighting and mobilisation of armed youth in Nasir and Ulang counties in Upper Nile State, saying the violence had caused deaths, displacement and restrictions on humanitarian access"
+    },
+    {
+     "fact": "教会领袖对朱巴至蒙德里、托里特和耶伊公路沿线袭击等赤道地区不安全局势表示关切",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the council also cited insecurity in the Equatoria region, including attacks along roads linking Juba with Mundri, Torit and Yei"
+    }
+   ],
+   "uncertainties": [
+    "事件信息目前仅来自单一来源（Radio Tamazuj），尚缺乏交叉验证",
+    "教会领袖所述各地伤亡与流离失所的具体数字未获独立确认",
+    "相关信息存在冲突，尚无法确认。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_064a84fe53395d74",
+ "disease_event_id": null,
+ "country_code": "SS"
+}
