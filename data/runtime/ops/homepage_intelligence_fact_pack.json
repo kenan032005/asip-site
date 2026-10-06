@@ -1,15 +1,15 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-06T17:06:53+08:00",
+ "generated_at": "2026-10-06T18:06:44+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 73,
-  "signals_7d": 327,
-  "verified_events_24h": 75,
-  "verified_events_7d": 352,
+  "signals_24h": 71,
+  "signals_7d": 325,
+  "verified_events_24h": 73,
+  "verified_events_7d": 350,
   "multi_source_verified_events_7d": 8,
   "countries_with_activity_24h": 15,
   "total_countries_monitored": 22
@@ -83,7 +83,7 @@
   },
   {
    "value": "南苏丹",
-   "count": 23
+   "count": 21
   },
   {
    "value": "尼日尔",
@@ -117,7 +117,7 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 45
+   "count": 44
   },
   {
    "value": "election_security",
@@ -132,15 +132,15 @@
    "count": 2
   },
   {
-   "value": "民众骚乱",
-   "count": 2
-  },
-  {
    "value": "公共卫生",
    "count": 1
   },
   {
    "value": "基础设施安全",
+   "count": 1
+  },
+  {
+   "value": "民众骚乱",
    "count": 1
   },
   {
@@ -167,7 +167,7 @@
   },
   {
    "value": "C",
-   "count": 182
+   "count": 178
   },
   {
    "value": "A",
@@ -175,21 +175,6 @@
   }
  ],
  "top_verified_events": [
-  {
-   "fact_id": "EVT_9ea9a8daaeddd8f0",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "南苏丹",
-   "title": "SSOMA称基尔篡权，呼吁启动新的和平进程",
-   "category": "political_crisis",
-   "source": "Radio Tamazuj",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-29 09:07",
-   "importance": "high",
-   "severity": "medium"
-  },
   {
    "fact_id": "EVT_40cc56835e49c0ca",
    "level": "verified_event",
@@ -251,17 +236,32 @@
    "severity": "medium"
   },
   {
-   "fact_id": "EVT_1e583cdfce5d28f7",
+   "fact_id": "EVT_fa00d9b7a7b528e6",
    "level": "verified_event",
    "evidence_tier": "single_source_published",
    "source_count": 1,
-   "country": "南苏丹",
-   "title": "评论：南苏丹过渡期法律终结与看守政府困局",
-   "category": "political_crisis",
-   "source": "Radio Tamazuj",
+   "country": "贝宁",
+   "title": "Éducation",
+   "category": "other_security",
+   "source": "Gouvernement du Benin",
    "source_tier": "C",
    "source_role": "local_signal",
-   "time": "2026-09-29 09:49",
+   "time": "2026-09-30 01:47",
+   "importance": "high",
+   "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_3c54636973317ae1",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "贝宁",
+   "title": "Toutes les opportunités",
+   "category": "other_security",
+   "source": "Gouvernement du Benin",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-09-30 01:48",
    "importance": "high",
    "severity": "medium"
   }
@@ -703,10 +703,16 @@
   }
  ],
  "existing_assessment": {
-  "status": "deterministic",
-  "based_on": "过去24小时/7日公开信息（确定性汇总）"
+  "status": "ai",
+  "overall_assessment": "已核实事件层面，加纳议会与毒品治理议题持续发酵：议长驳回少数党关于毒品缴获调查的动议并无限期休会，特马港3.9吨可卡因案六名嫌疑人被拒保释，全球有组织犯罪指数指毒品资金涉政党与房地产。尼日尔阿尔利特查获逾50公斤可卡因，迪法大区疟疾预防覆盖率超100%。南苏丹琼莱州维和巡逻遇袭致两名维和人员死亡。马里方向，Jnim据称伏击俄非洲军团车队，国际特赦组织报告指马里军队与瓦格纳实施暴行。埃塞俄比亚北部战事持续。情报信号层面（均为单源消息，尚待核实）：尼日利亚军机坠毁致32人死亡、加纳全国教师罢工未止、加纳议会质询东莱贡集装箱激增、加纳政党着手备战2028年大选。整体风险方向趋于恶化，需持续跟踪。",
+  "risk_direction": "worsening",
+  "confidence": "medium",
+  "generated_time": "2026-10-06T18:06:36+08:00",
+  "based_on": "过去24小时/7日公开信息",
+  "model": "",
+  "date": "20261006"
  },
- "fact_count": 679,
+ "fact_count": 675,
  "facts": {
   "news:4216c369685cade2": {
    "fact_id": "news:4216c369685cade2",
@@ -5583,51 +5589,6 @@
    "importance": "low",
    "why_it_matters": ""
   },
-  "news:c6b881acf25f436a": {
-   "fact_id": "news:c6b881acf25f436a",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "南苏丹",
-   "title": "评论：南苏丹过渡期法律终结与看守政府困局",
-   "category": "political_crisis",
-   "source": "Radio Tamazuj",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-29 17:49",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:c07179e8594f639b": {
-   "fact_id": "news:c07179e8594f639b",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "南苏丹",
-   "title": "SSOMA称基尔篡权，呼吁启动新的和平进程",
-   "category": "political_crisis",
-   "source": "Radio Tamazuj",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-29 17:07",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "EVT_9ea9a8daaeddd8f0": {
-   "fact_id": "EVT_9ea9a8daaeddd8f0",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "南苏丹",
-   "title": "SSOMA称基尔篡权，呼吁启动新的和平进程",
-   "category": "political_crisis",
-   "source": "Radio Tamazuj",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-29 09:07",
-   "importance": "high",
-   "severity": "medium"
-  },
   "EVT_40cc56835e49c0ca": {
    "fact_id": "EVT_40cc56835e49c0ca",
    "level": "verified_event",
@@ -5685,21 +5646,6 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-09-29 13:06",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_1e583cdfce5d28f7": {
-   "fact_id": "EVT_1e583cdfce5d28f7",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "南苏丹",
-   "title": "评论：南苏丹过渡期法律终结与看守政府困局",
-   "category": "political_crisis",
-   "source": "Radio Tamazuj",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-29 09:49",
    "importance": "high",
    "severity": "medium"
   },
