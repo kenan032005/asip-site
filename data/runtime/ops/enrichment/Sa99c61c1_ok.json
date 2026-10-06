@@ -1,0 +1,114 @@
+{
+ "label": "Sa99c61c1",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f2ff7de28292341099ee092303c02cb991cfcb3191b8ba321952222c44c2d24e",
+ "tokens": {
+  "input_tokens": 2924,
+  "output_tokens": 359,
+  "total_tokens": 3283
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"相关说法为工会人士单方面陈述，尚未获得官方或其他来源交叉验证\"]",
+    "after": "[\"相关说法为工会人士单方面陈述，尚未获得官方或其他来源交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁教师工会人士称教师形象遭受重创",
+   "summary_zh": "在世界教师日之际，贝宁教师兼工会人士Alexandre Adjinan对贝宁教师处境作出严厉评价。他称教育行业已十年未举行招聘考试，见习教师处境不稳定，职业晋升受阻，教师职业的社会尊重正在流失。他呼吁采取紧急措施改善教师待遇。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Bénin"
+   },
+   "key_facts": [
+    {
+     "fact": "贝宁教师工会人士Alexandre Adjinan在世界教师日对教师处境作出严厉评价",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À l’occasion de la Journée mondiale de l’Enseignant, Alexandre Adjinan, Enseignant-Syndicaliste, dresse un constat sévère de la condition enseignante au Bénin."
+    },
+    {
+     "fact": "据其称，教育行业已十年未举行招聘考试",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dix ans sans concours de recrutement, aspirants en situation précaire, carrières bloquées"
+    },
+    {
+     "fact": "他称教师职业的社会尊重正在流失，年轻人从教意愿下降",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "selon lui, la considération pour le métier s’érode, et avec elle la vocation des jeunes"
+    }
+   ],
+   "uncertainties": [
+    "相关说法为工会人士单方面陈述，尚未获得官方或其他来源交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁教师工会人士称教师形象遭受重创",
+   "summary_zh": "在世界教师日之际，贝宁教师兼工会人士Alexandre Adjinan对贝宁教师处境作出严厉评价。他称教育行业已十年未举行招聘考试，见习教师处境不稳定，职业晋升受阻，教师职业的社会尊重正在流失。他呼吁采取紧急措施改善教师待遇。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Bénin"
+   },
+   "key_facts": [
+    {
+     "fact": "贝宁教师工会人士Alexandre Adjinan在世界教师日对教师处境作出严厉评价",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À l’occasion de la Journée mondiale de l’Enseignant, Alexandre Adjinan, Enseignant-Syndicaliste, dresse un constat sévère de la condition enseignante au Bénin."
+    },
+    {
+     "fact": "据其称，教育行业已十年未举行招聘考试",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dix ans sans concours de recrutement, aspirants en situation précaire, carrières bloquées"
+    },
+    {
+     "fact": "他称教师职业的社会尊重正在流失，年轻人从教意愿下降",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "selon lui, la considération pour le métier s’érode, et avec elle la vocation des jeunes"
+    }
+   ],
+   "uncertainties": [
+    "相关说法为工会人士单方面陈述，尚未获得官方或其他来源交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_a4fa1e1aa99c61c1",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

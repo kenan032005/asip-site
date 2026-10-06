@@ -1,0 +1,126 @@
+{
+ "label": "S91e26cba",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "cb7623b0fc45b5fc33367d007011363ac927956c9f3f97ec2cd5eabe9ee8b00d",
+ "tokens": {
+  "input_tokens": 2385,
+  "output_tokens": 538,
+  "total_tokens": 2923
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"会议决议能否转化为实际资金和协调行动尚待观察\", \"加纳226亿美元资金需求为估算值，尚未确认已获承诺\"]",
+    "after": "[\"会议决议能否转化为实际资金和协调行动尚待观察\", \"加纳226亿美元资金需求为估算值，尚未确认已获承诺\", \"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "西非国家经济共同体议会能否将气候承诺转化为区域行动？",
+   "summary_zh": "西非国家经济共同体（ECOWAS）议会在加纳阿克拉举行2026年第二次特别会议及议会研讨会，主题为气候变化作为环境退化、人口流离失所和日益加剧的不安全感的驱动因素。议会通过决议，敦促ECOWAS领导人考虑设立区域气候韧性与人类安全基金，并将气候韧性纳入国家预算、发展规划、土地利用政策、冲突预防机制和减灾战略。加纳方面表示到2030年需要约226亿美元实施气候行动。议长指出西非缺乏的是落实现有框架所需的资金和政治意愿。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿克拉",
+    "site": "ECOWAS议会特别会议及研讨会",
+    "raw_text": "Accra, Ghana"
+   },
+   "key_facts": [
+    {
+     "fact": "ECOWAS议会在加纳阿克拉举行2026年第二次特别会议及议会研讨会，主题为气候变化与不安全",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "That convergence framed the ECOWAS Parliament’s Second 2026 Extraordinary Session and Second Parliamentary Seminar in Accra, Ghana. It was themed “Climate Change as a Driver of Environmental Degradation, Population Displacement and Growing Insecurity in the ECOWAS Region.”"
+    },
+    {
+     "fact": "议会通过决议，敦促ECOWAS领导人考虑设立区域气候韧性与人类安全基金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Parliament’s adopted resolutions offered one answer, urging ECOWAS leaders to consider establishing a regional fund dedicated to climate resilience and human security."
+    },
+    {
+     "fact": "加纳表示到2030年需要约226亿美元实施气候行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He disclosed that Ghana would require an estimated 22.6 billion dollars by 2030 to implement its climate actions and strengthen resilience."
+    },
+    {
+     "fact": "ECOWAS议会议长称西非缺乏的是落实现有框架所需的资金和政治意愿",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "“What West Africa lacks are the financing and political will required to implement existing frameworks and transform them into visible and tangible assets for citizens,” she said."
+    }
+   ],
+   "uncertainties": [
+    "会议决议能否转化为实际资金和协调行动尚待观察",
+    "加纳226亿美元资金需求为估算值，尚未确认已获承诺"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "西非国家经济共同体议会能否将气候承诺转化为区域行动？",
+   "summary_zh": "西非国家经济共同体（ECOWAS）议会在加纳阿克拉举行2026年第二次特别会议及议会研讨会，主题为气候变化作为环境退化、人口流离失所和日益加剧的不安全感的驱动因素。议会通过决议，敦促ECOWAS领导人考虑设立区域气候韧性与人类安全基金，并将气候韧性纳入国家预算、发展规划、土地利用政策、冲突预防机制和减灾战略。加纳方面表示到2030年需要约226亿美元实施气候行动。议长指出西非缺乏的是落实现有框架所需的资金和政治意愿。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿克拉",
+    "site": "ECOWAS议会特别会议及研讨会",
+    "raw_text": "Accra, Ghana"
+   },
+   "key_facts": [
+    {
+     "fact": "ECOWAS议会在加纳阿克拉举行2026年第二次特别会议及议会研讨会，主题为气候变化与不安全",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "That convergence framed the ECOWAS Parliament’s Second 2026 Extraordinary Session and Second Parliamentary Seminar in Accra, Ghana. It was themed “Climate Change as a Driver of Environmental Degradation, Population Displacement and Growing Insecurity in the ECOWAS Region.”"
+    },
+    {
+     "fact": "议会通过决议，敦促ECOWAS领导人考虑设立区域气候韧性与人类安全基金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Parliament’s adopted resolutions offered one answer, urging ECOWAS leaders to consider establishing a regional fund dedicated to climate resilience and human security."
+    },
+    {
+     "fact": "加纳表示到2030年需要约226亿美元实施气候行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He disclosed that Ghana would require an estimated 22.6 billion dollars by 2030 to implement its climate actions and strengthen resilience."
+    },
+    {
+     "fact": "ECOWAS议会议长称西非缺乏的是落实现有框架所需的资金和政治意愿",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "“What West Africa lacks are the financing and political will required to implement existing frameworks and transform them into visible and tangible assets for citizens,” she said."
+    }
+   ],
+   "uncertainties": [
+    "会议决议能否转化为实际资金和协调行动尚待观察",
+    "加纳226亿美元资金需求为估算值，尚未确认已获承诺",
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_3aa1fc3291e26cba",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

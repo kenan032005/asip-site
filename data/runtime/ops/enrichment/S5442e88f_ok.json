@@ -1,0 +1,116 @@
+{
+ "label": "S5442e88f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "50cf627769893e40b8025618b72ae1cb650e72e0b57cf2ef8abc59c9c90d5f9f",
+ "tokens": {
+  "input_tokens": 2885,
+  "output_tokens": 507,
+  "total_tokens": 3392
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"Mountaga Tall的关押地点和健康状况尚未证实，仅有传闻称其被转移至Markala或生病卧床\", \"目前仅有一个来源（RFI Afrique）报道此事，尚缺乏交叉验证\"]",
+    "after": "[\"Mountaga Tall的关押地点和健康状况尚未证实，仅有传闻称其被转移至Markala或生病卧床\", \"目前仅有一个来源（RFI Afrique）报道此事，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "马里前司法部长被国安部门绑架五个月后，前司法部长呼吁当局作出回应",
+   "summary_zh": "马里律师、前部长Mountaga Tall于五月初在家中被国家安保部门蒙面人员带走，至今已超过五个月无任何消息。其子及多名民主活动人士随后也被马里安全部门带走，均被关押在未知地点，未经任何法律程序。前司法部长Mamadou Ismaïla Konaté批评当局对此保持沉默，呼吁当局提供有关其关押地点的信息。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "MLI",
+   "location": {
+    "country_iso3": "MLI",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Mali"
+   },
+   "key_facts": [
+    {
+     "fact": "马里律师、前部长Mountaga Tall于五月初在家中被国家安保部门蒙面人员带走，至今已超过五个月无消息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Mali, cela fait désormais plus de cinq mois qu'on est sans nouvelles de Me Mountaga Tall, avocat et ancien ministre, enlevé chez lui début mai par des hommes encagoulés de la Sécurité d'État."
+    },
+    {
+     "fact": "其子及多名民主活动人士随后也被马里安全部门带走，均被关押在未知地点，未经任何法律程序",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Après lui, son fils et plusieurs personnalités engagées pour la défense de la démocratie ont été enlevés par les services maliens. Tous sont détenus dans des lieux inconnus, en dehors de toute procédure légale."
+    },
+    {
+     "fact": "前司法部长Mamadou Ismaïla Konaté批评当局沉默，呼吁提供关押地点信息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pour l'ancien ministre malien de la Justice, Me Mamadou Ismaïla Konaté, le mutisme des autorités est intolérable."
+    }
+   ],
+   "uncertainties": [
+    "Mountaga Tall的关押地点和健康状况尚未证实，仅有传闻称其被转移至Markala或生病卧床",
+    "目前仅有一个来源（RFI Afrique）报道此事，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "马里前司法部长被国安部门绑架五个月后，前司法部长呼吁当局作出回应",
+   "summary_zh": "马里律师、前部长Mountaga Tall于五月初在家中被国家安保部门蒙面人员带走，至今已超过五个月无任何消息。其子及多名民主活动人士随后也被马里安全部门带走，均被关押在未知地点，未经任何法律程序。前司法部长Mamadou Ismaïla Konaté批评当局对此保持沉默，呼吁当局提供有关其关押地点的信息。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "MLI",
+   "location": {
+    "country_iso3": "MLI",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Mali"
+   },
+   "key_facts": [
+    {
+     "fact": "马里律师、前部长Mountaga Tall于五月初在家中被国家安保部门蒙面人员带走，至今已超过五个月无消息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Mali, cela fait désormais plus de cinq mois qu'on est sans nouvelles de Me Mountaga Tall, avocat et ancien ministre, enlevé chez lui début mai par des hommes encagoulés de la Sécurité d'État."
+    },
+    {
+     "fact": "其子及多名民主活动人士随后也被马里安全部门带走，均被关押在未知地点，未经任何法律程序",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Après lui, son fils et plusieurs personnalités engagées pour la défense de la démocratie ont été enlevés par les services maliens. Tous sont détenus dans des lieux inconnus, en dehors de toute procédure légale."
+    },
+    {
+     "fact": "前司法部长Mamadou Ismaïla Konaté批评当局沉默，呼吁提供关押地点信息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pour l'ancien ministre malien de la Justice, Me Mamadou Ismaïla Konaté, le mutisme des autorités est intolérable."
+    }
+   ],
+   "uncertainties": [
+    "Mountaga Tall的关押地点和健康状况尚未证实，仅有传闻称其被转移至Markala或生病卧床",
+    "目前仅有一个来源（RFI Afrique）报道此事，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_14e298a05442e88f",
+ "disease_event_id": null,
+ "country_code": "ML"
+}

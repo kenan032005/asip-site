@@ -1,0 +1,125 @@
+{
+ "label": "Se3137c4e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0dc2887c1a520d7d83085df7737c25a2a013c9e613870edc8d492f8eac818035",
+ "tokens": {
+  "input_tokens": 2764,
+  "output_tokens": 609,
+  "total_tokens": 3373
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "阿尔及利亚总统特本抨击食品价格上涨，归咎于“中间商”",
+   "summary_zh": "阿尔及利亚总统阿卜杜勒马吉德·特本在10月3日晚间播出的定期媒体采访中，猛烈抨击食品等基本必需品价格飙升，并将责任归咎于“中间商”。他称这些从中牟利者是“寄生虫”，并称其行为是“对人民的犯罪”。特本承诺迅速采取措施，包括国家介入生产与消费之间，并已将土豆零售价上限设为每公斤90第纳尔。",
+   "event_type": "other_security",
+   "country_iso3": "DZA",
+   "location": {
+    "country_iso3": "DZA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Algérie"
+   },
+   "key_facts": [
+    {
+     "fact": "阿尔及利亚总统特本在10月3日晚间播出的媒体采访中抨击食品价格飙升",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le chef de l’État algérien Abdelmadjid Tebboune s’est montré particulièrement offensif lors de son entretien périodique avec la presse nationale, diffusé samedi 3 octobre au soir sur les chaînes de télévision et de radio nationales."
+    },
+    {
+     "fact": "特本将价格上涨归咎于“中间商”，称其行为是“对人民的犯罪”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les intermédiaires qui génèrent des profits sur des biens de grande consommation commettent, selon le chef de l’État algérien, « un crime contre le peuple »"
+    },
+    {
+     "fact": "特本指控中间商“利用局势扩大利润”，并称其为“寄生虫”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il accuse sans détour les intermédiaires qui « profitent de la situation pour accroître leurs marges ». Un mélange de spéculation et de cupidité de la part de ceux qui profitent de la situation et que le président Tebboune qualifie de « parasites »"
+    },
+    {
+     "fact": "阿尔及利亚政府将土豆零售价上限设为每公斤90第纳尔",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement algérien a plafonné à 90 dinars, soit environ 56 centimes d’euro, le prix de vente au détail du kilo de pommes de terre"
+    },
+    {
+     "fact": "特本承诺“明天价格就会下降”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "« Les prix baisseront dès demain », a-t-il affirmé."
+    }
+   ],
+   "uncertainties": [
+    "特本驳斥了60多年来从未见过的价格飙升的传言",
+    "报道为单一来源（RFI Afrique），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "阿尔及利亚总统特本抨击食品价格上涨，归咎于“中间商”",
+   "summary_zh": "阿尔及利亚总统阿卜杜勒马吉德·特本在10月3日晚间播出的定期媒体采访中，猛烈抨击食品等基本必需品价格飙升，并将责任归咎于“中间商”。他称这些从中牟利者是“寄生虫”，并称其行为是“对人民的犯罪”。特本承诺迅速采取措施，包括国家介入生产与消费之间，并已将土豆零售价上限设为每公斤90第纳尔。",
+   "event_type": "other_security",
+   "country_iso3": "DZA",
+   "location": {
+    "country_iso3": "DZA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Algérie"
+   },
+   "key_facts": [
+    {
+     "fact": "阿尔及利亚总统特本在10月3日晚间播出的媒体采访中抨击食品价格飙升",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le chef de l’État algérien Abdelmadjid Tebboune s’est montré particulièrement offensif lors de son entretien périodique avec la presse nationale, diffusé samedi 3 octobre au soir sur les chaînes de télévision et de radio nationales."
+    },
+    {
+     "fact": "特本将价格上涨归咎于“中间商”，称其行为是“对人民的犯罪”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les intermédiaires qui génèrent des profits sur des biens de grande consommation commettent, selon le chef de l’État algérien, « un crime contre le peuple »"
+    },
+    {
+     "fact": "特本指控中间商“利用局势扩大利润”，并称其为“寄生虫”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il accuse sans détour les intermédiaires qui « profitent de la situation pour accroître leurs marges ». Un mélange de spéculation et de cupidité de la part de ceux qui profitent de la situation et que le président Tebboune qualifie de « parasites »"
+    },
+    {
+     "fact": "阿尔及利亚政府将土豆零售价上限设为每公斤90第纳尔",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement algérien a plafonné à 90 dinars, soit environ 56 centimes d’euro, le prix de vente au détail du kilo de pommes de terre"
+    },
+    {
+     "fact": "特本承诺“明天价格就会下降”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "« Les prix baisseront dès demain », a-t-il affirmé."
+    }
+   ],
+   "uncertainties": [
+    "特本驳斥了60多年来从未见过的价格飙升的传言",
+    "报道为单一来源（RFI Afrique），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_6a59df60e3137c4e",
+ "disease_event_id": null,
+ "country_code": "DZ"
+}
