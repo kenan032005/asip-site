@@ -1,0 +1,115 @@
+{
+ "label": "S27925276",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d290a963bc6f0d8928b37b818bd4e2796356dc2885791f859f9151e38cca127a",
+ "tokens": {
+  "input_tokens": 1973,
+  "output_tokens": 425,
+  "total_tokens": 2398
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "塞内加尔暴雨引发洪灾致数人死亡，基础设施受损",
+   "summary_zh": "塞内加尔首都达喀尔及该国其他地区遭遇强降雨和山洪，部分地区被淹。内政部确认有数人死亡或受伤，马塔姆一处墙体倒塌致一名25岁女子及其4岁孩子死亡。部分地区单日降雨量超过140毫米，造成基础设施和交通大面积受损，而数周后塞内加尔将举办青年奥运会。",
+   "event_type": "natural_disaster",
+   "country_iso3": "SEN",
+   "location": {
+    "country_iso3": "SEN",
+    "admin1": null,
+    "city": "达喀尔",
+    "site": null,
+    "raw_text": "Senegal's capital Dakar; Matam"
+   },
+   "key_facts": [
+    {
+     "fact": "塞内加尔首都达喀尔及该国其他地区遭遇强降雨和山洪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Torrential rainfall and flash flooding left parts of Senegal’s capital Dakar underwater on Monday with other regions of the country also affected."
+    },
+    {
+     "fact": "内政部确认有数人死亡或受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Ministry of Interior confirmed that several people have been killed or injured."
+    },
+    {
+     "fact": "马塔姆一处墙体倒塌致一名25岁女子及其4岁孩子死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A 25-year-old woman and her 4-year-old child died when a wall collapsed in Matam."
+    },
+    {
+     "fact": "部分地区单日降雨量超过140毫米，基础设施和交通大面积受损",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Some areas received more than 140 mm of rain in a single day, causing widespread damage to infrastructure and transportation just weeks before Senegal is due to host the Youth Olympics."
+    }
+   ],
+   "uncertainties": [
+    "伤亡总人数尚未明确，仅称“数人”",
+    "事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "塞内加尔暴雨引发洪灾致数人死亡，基础设施受损",
+   "summary_zh": "塞内加尔首都达喀尔及该国其他地区遭遇强降雨和山洪，部分地区被淹。内政部确认有数人死亡或受伤，马塔姆一处墙体倒塌致一名25岁女子及其4岁孩子死亡。部分地区单日降雨量超过140毫米，造成基础设施和交通大面积受损，而数周后塞内加尔将举办青年奥运会。",
+   "event_type": "natural_disaster",
+   "country_iso3": "SEN",
+   "location": {
+    "country_iso3": "SEN",
+    "admin1": null,
+    "city": "达喀尔",
+    "site": null,
+    "raw_text": "Senegal's capital Dakar; Matam"
+   },
+   "key_facts": [
+    {
+     "fact": "塞内加尔首都达喀尔及该国其他地区遭遇强降雨和山洪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Torrential rainfall and flash flooding left parts of Senegal’s capital Dakar underwater on Monday with other regions of the country also affected."
+    },
+    {
+     "fact": "内政部确认有数人死亡或受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Ministry of Interior confirmed that several people have been killed or injured."
+    },
+    {
+     "fact": "马塔姆一处墙体倒塌致一名25岁女子及其4岁孩子死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A 25-year-old woman and her 4-year-old child died when a wall collapsed in Matam."
+    },
+    {
+     "fact": "部分地区单日降雨量超过140毫米，基础设施和交通大面积受损",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Some areas received more than 140 mm of rain in a single day, causing widespread damage to infrastructure and transportation just weeks before Senegal is due to host the Youth Olympics."
+    }
+   ],
+   "uncertainties": [
+    "伤亡总人数尚未明确，仅称“数人”",
+    "事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_adec2e3427925276",
+ "disease_event_id": null,
+ "country_code": "SN"
+}

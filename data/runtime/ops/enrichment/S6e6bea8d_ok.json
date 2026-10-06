@@ -1,0 +1,115 @@
+{
+ "label": "S6e6bea8d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "8565abab378afaf67276787f97215b61c1ff958b3d5e5090e721944a2dbfd04a",
+ "tokens": {
+  "input_tokens": 2472,
+  "output_tokens": 499,
+  "total_tokens": 2971
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "提格雷战争：专家称无证据表明TPLF能获得开展游击战所需的民众支持",
+   "summary_zh": "埃塞俄比亚总理阿比·艾哈迈德在议会获连任，其正面对由七个武装反叛组织组成的联盟，其中包括提格雷人民解放阵线（TPLF）。此外，埃塞俄比亚与北方邻国厄立特里亚也处于公开冲突状态。独立研究员勒内·勒福尔在采访中表示，没有证据表明TPLF能够获得开展任何游击战所需的民众支持。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷州",
+    "city": null,
+    "site": null,
+    "raw_text": "Tigré"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚总理阿比·艾哈迈德在亚的斯亚贝巴议会获连任",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "c'est un Premier ministre chef de guerre qui a été reconduit à son poste, lundi, par le Parlement d'Addis-Abeba"
+    },
+    {
+     "fact": "阿比·艾哈迈德正面对由七个武装反叛组织组成的联盟，其中包括提格雷人民解放阵线（TPLF）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "depuis deux semaines, Abiy Ahmed affronte une alliance de sept groupes armés rebelles, qui compte dans ses rangs le redoutable Front de libération du peuple du Tigré, le TPLF"
+    },
+    {
+     "fact": "埃塞俄比亚与北方邻国厄立特里亚处于公开冲突状态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Premier ministre éthiopien est à présent en conflit ouvert également avec son voisin du Nord, l'Érythrée"
+    },
+    {
+     "fact": "专家称无证据表明TPLF能获得开展游击战所需的民众支持",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Rien ne prouve que le TPLF trouvera l'appui populaire nécessaire à toute guérilla"
+    }
+   ],
+   "uncertainties": [
+    "TPLF能否获得开展游击战所需的民众支持尚无证据",
+    "该报道为单一来源（RFI Afrique），缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "提格雷战争：专家称无证据表明TPLF能获得开展游击战所需的民众支持",
+   "summary_zh": "埃塞俄比亚总理阿比·艾哈迈德在议会获连任，其正面对由七个武装反叛组织组成的联盟，其中包括提格雷人民解放阵线（TPLF）。此外，埃塞俄比亚与北方邻国厄立特里亚也处于公开冲突状态。独立研究员勒内·勒福尔在采访中表示，没有证据表明TPLF能够获得开展任何游击战所需的民众支持。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷州",
+    "city": null,
+    "site": null,
+    "raw_text": "Tigré"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚总理阿比·艾哈迈德在亚的斯亚贝巴议会获连任",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "c'est un Premier ministre chef de guerre qui a été reconduit à son poste, lundi, par le Parlement d'Addis-Abeba"
+    },
+    {
+     "fact": "阿比·艾哈迈德正面对由七个武装反叛组织组成的联盟，其中包括提格雷人民解放阵线（TPLF）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "depuis deux semaines, Abiy Ahmed affronte une alliance de sept groupes armés rebelles, qui compte dans ses rangs le redoutable Front de libération du peuple du Tigré, le TPLF"
+    },
+    {
+     "fact": "埃塞俄比亚与北方邻国厄立特里亚处于公开冲突状态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Premier ministre éthiopien est à présent en conflit ouvert également avec son voisin du Nord, l'Érythrée"
+    },
+    {
+     "fact": "专家称无证据表明TPLF能获得开展游击战所需的民众支持",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Rien ne prouve que le TPLF trouvera l'appui populaire nécessaire à toute guérilla"
+    }
+   ],
+   "uncertainties": [
+    "TPLF能否获得开展游击战所需的民众支持尚无证据",
+    "该报道为单一来源（RFI Afrique），缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_f1e155ae6e6bea8d",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

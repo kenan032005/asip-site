@@ -1,0 +1,125 @@
+{
+ "label": "Saf373553",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ad59a27d31cbfd114e5d0e274e98477ab966253e6c569430413781111c85155b",
+ "tokens": {
+  "input_tokens": 2668,
+  "output_tokens": 587,
+  "total_tokens": 3255
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）埃博拉疫情加剧，无国界医生对北基伍省局势表示担忧",
+   "summary_zh": "刚果（金）埃博拉疫情持续蔓延，已造成超过4000人死亡、逾8500例确诊病例，七个省份受影响。无国界医生警告疫情如“大火”般扩散，每周出现新疫区，医疗救治能力已严重超负荷。伊图里仍是疫情中心，但北基伍省目前集中了近40%的新增确诊病例，该组织尤其担忧当地局势恶化。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "北基伍省",
+    "city": null,
+    "site": null,
+    "raw_text": "Nord-Kivu"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）埃博拉疫情已造成超过4000人死亡、逾8500例确诊病例，七个省份受影响",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plus de 4 000 morts, plus de 8 500 cas confirmés, sept provinces touchées"
+    },
+    {
+     "fact": "无国界医生警告疫情如“大火”般蔓延，每周出现新疫区，救治能力已严重超负荷",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’épidémie d'Ebola s’étend « comme un méga-feu » avec de « nouveaux foyers chaque semaine » et une capacité de prise en charge déjà largement dépassée, alerte Médecins sans frontières"
+    },
+    {
+     "fact": "伊图里仍是疫情中心，曼巴萨地区周日24小时内有18人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'Ituri reste l’épicentre de l’épidémie, notamment le territoire de Mambasa où ce dimanche 18 personnes sont décédées en l’espace de 24 heures"
+    },
+    {
+     "fact": "北基伍省集中了近40%的新增确诊病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Nord-Kivu concentre désormais près de 40% des nouveaux cas confirmés"
+    },
+    {
+     "fact": "无国界医生表示，在新增疫区不断增多的情况下，无法遏制这场大规模疫情",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il est impossible d'endiguer cette épidémie de grande ampleur tant que de nouveaux foyers continuent de se multiplier"
+    }
+   ],
+   "uncertainties": [
+    "疫情数据及局势评估目前仅来自单一来源（RFI报道，引述无国界医生），尚缺乏交叉验证",
+    "无国界医生对北基伍省局势可能进一步恶化的担忧属预警性表述，尚未证实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）埃博拉疫情加剧，无国界医生对北基伍省局势表示担忧",
+   "summary_zh": "刚果（金）埃博拉疫情持续蔓延，已造成超过4000人死亡、逾8500例确诊病例，七个省份受影响。无国界医生警告疫情如“大火”般扩散，每周出现新疫区，医疗救治能力已严重超负荷。伊图里仍是疫情中心，但北基伍省目前集中了近40%的新增确诊病例，该组织尤其担忧当地局势恶化。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "北基伍省",
+    "city": null,
+    "site": null,
+    "raw_text": "Nord-Kivu"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）埃博拉疫情已造成超过4000人死亡、逾8500例确诊病例，七个省份受影响",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plus de 4 000 morts, plus de 8 500 cas confirmés, sept provinces touchées"
+    },
+    {
+     "fact": "无国界医生警告疫情如“大火”般蔓延，每周出现新疫区，救治能力已严重超负荷",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’épidémie d'Ebola s’étend « comme un méga-feu » avec de « nouveaux foyers chaque semaine » et une capacité de prise en charge déjà largement dépassée, alerte Médecins sans frontières"
+    },
+    {
+     "fact": "伊图里仍是疫情中心，曼巴萨地区周日24小时内有18人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'Ituri reste l’épicentre de l’épidémie, notamment le territoire de Mambasa où ce dimanche 18 personnes sont décédées en l’espace de 24 heures"
+    },
+    {
+     "fact": "北基伍省集中了近40%的新增确诊病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Nord-Kivu concentre désormais près de 40% des nouveaux cas confirmés"
+    },
+    {
+     "fact": "无国界医生表示，在新增疫区不断增多的情况下，无法遏制这场大规模疫情",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il est impossible d'endiguer cette épidémie de grande ampleur tant que de nouveaux foyers continuent de se multiplier"
+    }
+   ],
+   "uncertainties": [
+    "疫情数据及局势评估目前仅来自单一来源（RFI报道，引述无国界医生），尚缺乏交叉验证",
+    "无国界医生对北基伍省局势可能进一步恶化的担忧属预警性表述，尚未证实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_4262ec66af373553",
+ "disease_event_id": null,
+ "country_code": "CD"
+}
