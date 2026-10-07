@@ -1,0 +1,105 @@
+{
+ "label": "Sacd8dd5e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "43c52ffa594de7455043bc3130153614555952eabaa059840cb9806270b82aa4",
+ "tokens": {
+  "input_tokens": 1966,
+  "output_tokens": 427,
+  "total_tokens": 2393
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚军机坠毁致25人遇难 搜救因沼泽地形受阻",
+   "summary_zh": "尼日利亚翁多州一架军用飞机坠毁，机上25人全部遇难，其中包括平民。搜救人员正继续打捞遇难者遗体，但飞机坠入难以进入的沼泽地带，救援行动受阻。当地媒体报道称残骸已沉入水下，现场消息称红树林和浑浊水域增加了作业难度，潜水员正在现场工作。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "翁多州",
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria's Ondo state, swampy area"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚翁多州一架军用飞机坠毁，机上25人全部遇难，包括平民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Search and rescue teams in Nigeria’s Ondo state are continuing in efforts to recover the bodies of victims of Monday’s military aircraft crash which killed all 25 people on board, including civilians."
+    },
+    {
+     "fact": "救援行动因飞机坠入难以进入的沼泽地带而受阻",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Rescue operations have been hampered by the fact that the plane crashed into a swampy area that is difficult to access."
+    },
+    {
+     "fact": "当地媒体报道残骸已沉入水下，现场消息称红树林和浑浊水域增加作业难度，潜水员正在现场工作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Local media are reporting the wreckage is submerged. Sources at the scene are saying mangroves and murky water have made operations difficult but divers are working at the site."
+    }
+   ],
+   "uncertainties": [
+    "残骸沉没及现场水域情况来自当地媒体和现场消息，尚未获官方确认",
+    "事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚军机坠毁致25人遇难 搜救因沼泽地形受阻",
+   "summary_zh": "尼日利亚翁多州一架军用飞机坠毁，机上25人全部遇难，其中包括平民。搜救人员正继续打捞遇难者遗体，但飞机坠入难以进入的沼泽地带，救援行动受阻。当地媒体报道称残骸已沉入水下，现场消息称红树林和浑浊水域增加了作业难度，潜水员正在现场工作。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "翁多州",
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria's Ondo state, swampy area"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚翁多州一架军用飞机坠毁，机上25人全部遇难，包括平民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Search and rescue teams in Nigeria’s Ondo state are continuing in efforts to recover the bodies of victims of Monday’s military aircraft crash which killed all 25 people on board, including civilians."
+    },
+    {
+     "fact": "救援行动因飞机坠入难以进入的沼泽地带而受阻",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Rescue operations have been hampered by the fact that the plane crashed into a swampy area that is difficult to access."
+    },
+    {
+     "fact": "当地媒体报道残骸已沉入水下，现场消息称红树林和浑浊水域增加作业难度，潜水员正在现场工作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Local media are reporting the wreckage is submerged. Sources at the scene are saying mangroves and murky water have made operations difficult but divers are working at the site."
+    }
+   ],
+   "uncertainties": [
+    "残骸沉没及现场水域情况来自当地媒体和现场消息，尚未获官方确认",
+    "事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_13d6a97eacd8dd5e",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

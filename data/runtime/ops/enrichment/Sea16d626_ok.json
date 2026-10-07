@@ -1,0 +1,137 @@
+{
+ "label": "Sea16d626",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "fcfdc0afa3b24fac315b9e0ec01d1d8072a367741a9f1ffeb799d52eafd96565",
+ "tokens": {
+  "input_tokens": 2548,
+  "output_tokens": 605,
+  "total_tokens": 3153
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "肯尼亚确认首例埃博拉死亡病例，疫情持续蔓延",
+   "summary_zh": "肯尼亚确认该国首例埃博拉病例，患者为一名在刚果（金）居住七年的肯尼亚公民，抵达内罗毕后死亡。刚果（金）今年已有超过4000人死于埃博拉，世界卫生组织记录当前疫情累计4114例死亡、8544例病例。卫生部门已加强机场和边境检查，并追踪至少28名接触者及同机乘客。",
+   "event_type": "other_security",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": null,
+    "city": "内罗毕",
+    "site": null,
+    "raw_text": "Nairobi, Kenya"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚确认首例埃博拉病例，患者死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kenya has confirmed its first ever case of Ebola - a Kenyan citizen who has been living in the Democratic Republic of Congo for the past seven years."
+    },
+    {
+     "fact": "患者为在刚果（金）居住七年的肯尼亚公民，抵达内罗毕后死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the patient, who fell ill a month ago, and was treated in several hospitals in DR Congo, died days after arriving in the capital, Nairobi."
+    },
+    {
+     "fact": "刚果（金）今年已有超过4000人死于埃博拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than 4,000 people have died from Ebola in DR Congo this year, in what is the second most deadly known outbreak of the disease."
+    },
+    {
+     "fact": "世界卫生组织记录当前疫情4114例死亡、8544例病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The WHO has recorded 4,114 deaths out of 8,544 cases in the current outbreak"
+    },
+    {
+     "fact": "至少28名接触者被识别，另有23名乘客和4名机组人员正在追踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least 28 contacts, including family members and healthcare workers, have been identified, while health authorities are tracing a further 23 passengers and four crew members who travelled on the same flight."
+    },
+    {
+     "fact": "肯尼亚已加强机场和边境检查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kenya introduced tighter checks at airports and border posts after the outbreak was declared in DR Congo but these have now been further intensified."
+    }
+   ],
+   "uncertainties": [
+    "患者可能因服药掩盖症状而通过机场筛查（据一名高级卫生部官员称）",
+    "无国界医生认为实际死亡人数可能更高，因监测和检测存在缺口",
+    "当前疫情由相对罕见的本迪布焦型埃博拉病毒引起，尚无获批疫苗或治疗方法"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "肯尼亚确认首例埃博拉死亡病例，疫情持续蔓延",
+   "summary_zh": "肯尼亚确认该国首例埃博拉病例，患者为一名在刚果（金）居住七年的肯尼亚公民，抵达内罗毕后死亡。刚果（金）今年已有超过4000人死于埃博拉，世界卫生组织记录当前疫情累计4114例死亡、8544例病例。卫生部门已加强机场和边境检查，并追踪至少28名接触者及同机乘客。",
+   "event_type": "other_security",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": null,
+    "city": "内罗毕",
+    "site": null,
+    "raw_text": "Nairobi, Kenya"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚确认首例埃博拉病例，患者死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kenya has confirmed its first ever case of Ebola - a Kenyan citizen who has been living in the Democratic Republic of Congo for the past seven years."
+    },
+    {
+     "fact": "患者为在刚果（金）居住七年的肯尼亚公民，抵达内罗毕后死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the patient, who fell ill a month ago, and was treated in several hospitals in DR Congo, died days after arriving in the capital, Nairobi."
+    },
+    {
+     "fact": "刚果（金）今年已有超过4000人死于埃博拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than 4,000 people have died from Ebola in DR Congo this year, in what is the second most deadly known outbreak of the disease."
+    },
+    {
+     "fact": "世界卫生组织记录当前疫情4114例死亡、8544例病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The WHO has recorded 4,114 deaths out of 8,544 cases in the current outbreak"
+    },
+    {
+     "fact": "至少28名接触者被识别，另有23名乘客和4名机组人员正在追踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least 28 contacts, including family members and healthcare workers, have been identified, while health authorities are tracing a further 23 passengers and four crew members who travelled on the same flight."
+    },
+    {
+     "fact": "肯尼亚已加强机场和边境检查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kenya introduced tighter checks at airports and border posts after the outbreak was declared in DR Congo but these have now been further intensified."
+    }
+   ],
+   "uncertainties": [
+    "患者可能因服药掩盖症状而通过机场筛查（据一名高级卫生部官员称）",
+    "无国界医生认为实际死亡人数可能更高，因监测和检测存在缺口",
+    "当前疫情由相对罕见的本迪布焦型埃博拉病毒引起，尚无获批疫苗或治疗方法"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_d70cd4cfea16d626",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

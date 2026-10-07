@@ -1,0 +1,113 @@
+{
+ "label": "S83549ef6",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "8ff8c1f2d3da813d777e5c53ce096c1dadb0881cfe7e87f8f68f0641b5d00b3e",
+ "tokens": {
+  "input_tokens": 2508,
+  "output_tokens": 420,
+  "total_tokens": 2928
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "恩贾梅纳交通拥堵：每日出行之困",
+   "summary_zh": "乍得首都恩贾梅纳交通拥堵严重，长时间等待和交通费用上涨使市民出行日益困难。报道称，出行困难主要与部分使用者的不文明行为有关，高峰时段通过部分路段成为真正的考验。市民希望道路改造和持续警力部署能改善交通状况。",
+   "event_type": "transport_disruption",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N’Djaména"
+   },
+   "key_facts": [
+    {
+     "fact": "恩贾梅纳交通拥堵、长时间等待和交通费用上涨使市民出行日益困难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Embouteillages, longues attentes, coup de transport en hausse, compliquent de plus en plus la mobilité des N'djaménois"
+    },
+    {
+     "fact": "报道称出行困难主要与部分使用者的不文明行为有关",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les difficultés de déplacement sont surtout liées à l'incivisme de certains usagers"
+    },
+    {
+     "fact": "高峰时段通过部分路段成为真正的考验",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Entre 6h-9h, puis 12h-14h et de 16h à 19h, franchir certaines artères de la ville comme celle-ci devient une véritable épreuve"
+    },
+    {
+     "fact": "市民希望道路改造和持续警力部署能改善交通",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'espoir d'une amélioration repose désormais sur le réaménagement de cette voie pour fluidifier la circulation et la présence continue des forces de l'ordre"
+    }
+   ],
+   "uncertainties": [
+    "报道为单一来源，尚未获得交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "恩贾梅纳交通拥堵：每日出行之困",
+   "summary_zh": "乍得首都恩贾梅纳交通拥堵严重，长时间等待和交通费用上涨使市民出行日益困难。报道称，出行困难主要与部分使用者的不文明行为有关，高峰时段通过部分路段成为真正的考验。市民希望道路改造和持续警力部署能改善交通状况。",
+   "event_type": "transport_disruption",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N’Djaména"
+   },
+   "key_facts": [
+    {
+     "fact": "恩贾梅纳交通拥堵、长时间等待和交通费用上涨使市民出行日益困难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Embouteillages, longues attentes, coup de transport en hausse, compliquent de plus en plus la mobilité des N'djaménois"
+    },
+    {
+     "fact": "报道称出行困难主要与部分使用者的不文明行为有关",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les difficultés de déplacement sont surtout liées à l'incivisme de certains usagers"
+    },
+    {
+     "fact": "高峰时段通过部分路段成为真正的考验",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Entre 6h-9h, puis 12h-14h et de 16h à 19h, franchir certaines artères de la ville comme celle-ci devient une véritable épreuve"
+    },
+    {
+     "fact": "市民希望道路改造和持续警力部署能改善交通",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'espoir d'une amélioration repose désormais sur le réaménagement de cette voie pour fluidifier la circulation et la présence continue des forces de l'ordre"
+    }
+   ],
+   "uncertainties": [
+    "报道为单一来源，尚未获得交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_c664e07c83549ef6",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
