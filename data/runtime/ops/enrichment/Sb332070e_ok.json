@@ -1,0 +1,117 @@
+{
+ "label": "Sb332070e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4eb34fc0fa8b9dc350f9ac5d31cd59162325736133a14e617a998fe3295eb4d1",
+ "tokens": {
+  "input_tokens": 2261,
+  "output_tokens": 548,
+  "total_tokens": 2809
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁媒体评论文章：博希孔被指存在买卖儿童与性侵犯罪行",
+   "summary_zh": "贝宁媒体Fraternité发表评论文章《罪与罚》，称在博希孔（Bohicon）有儿童被以一顿饭、少量零钱或电子游戏为诱饵遭到买卖和侵害。文章称这些儿童被刺伤、折磨，甚至被故意传染疾病，并指其施害者还曾将儿童转卖他人牟利。文章呼吁对组织、获利、出资或包庇此类罪行的人实行零容忍与严惩。上述指控目前仅来自单一来源，尚未获得独立证实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "博希孔",
+    "site": null,
+    "raw_text": "À Bohicon"
+   },
+   "key_facts": [
+    {
+     "fact": "文章称在博希孔，一顿饭、少量零钱或电子游戏被用来买卖儿童并换取其沉默",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À Bohicon, un repas insignifiant, quelques malheureuses pièces ou de simples jeux vidéos auraient honteusement servi à acheter des corps d’enfants et… leur silence."
+    },
+    {
+     "fact": "文章称受害儿童被刺伤、折磨、毁坏，有的被故意传染疾病而终身受害",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des garçons transpercés, suppliciés, détruits, parfois condamnés à vie par une maladie qu’on leur aurait sciemment transmise."
+    },
+    {
+     "fact": "文章称施害者在虐待儿童后，有时还将其转卖他人以获取报酬",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Après les avoir ignominieusement traumatisés, leurs tortionnaires les refourguaient parfois à des bêtes de leur espèce, contre rémunération."
+    },
+    {
+     "fact": "文章呼吁对组织、获利、出资或包庇这些罪行的人实行零容忍并予以严惩",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ceux qui ont organisé, rentabilisé, payé ou couvert ces crimes doivent expier"
+    }
+   ],
+   "uncertainties": [
+    "相关指控目前仅来自单一来源（Fraternité），尚未获得独立证实",
+    "文中使用条件式表述（auraient servi），事件细节有待核实",
+    "未提供涉案人员身份、受害者人数及官方调查或司法进展信息"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁媒体评论文章：博希孔被指存在买卖儿童与性侵犯罪行",
+   "summary_zh": "贝宁媒体Fraternité发表评论文章《罪与罚》，称在博希孔（Bohicon）有儿童被以一顿饭、少量零钱或电子游戏为诱饵遭到买卖和侵害。文章称这些儿童被刺伤、折磨，甚至被故意传染疾病，并指其施害者还曾将儿童转卖他人牟利。文章呼吁对组织、获利、出资或包庇此类罪行的人实行零容忍与严惩。上述指控目前仅来自单一来源，尚未获得独立证实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "博希孔",
+    "site": null,
+    "raw_text": "À Bohicon"
+   },
+   "key_facts": [
+    {
+     "fact": "文章称在博希孔，一顿饭、少量零钱或电子游戏被用来买卖儿童并换取其沉默",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À Bohicon, un repas insignifiant, quelques malheureuses pièces ou de simples jeux vidéos auraient honteusement servi à acheter des corps d’enfants et… leur silence."
+    },
+    {
+     "fact": "文章称受害儿童被刺伤、折磨、毁坏，有的被故意传染疾病而终身受害",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des garçons transpercés, suppliciés, détruits, parfois condamnés à vie par une maladie qu’on leur aurait sciemment transmise."
+    },
+    {
+     "fact": "文章称施害者在虐待儿童后，有时还将其转卖他人以获取报酬",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Après les avoir ignominieusement traumatisés, leurs tortionnaires les refourguaient parfois à des bêtes de leur espèce, contre rémunération."
+    },
+    {
+     "fact": "文章呼吁对组织、获利、出资或包庇这些罪行的人实行零容忍并予以严惩",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ceux qui ont organisé, rentabilisé, payé ou couvert ces crimes doivent expier"
+    }
+   ],
+   "uncertainties": [
+    "相关指控目前仅来自单一来源（Fraternité），尚未获得独立证实",
+    "文中使用条件式表述（auraient servi），事件细节有待核实",
+    "未提供涉案人员身份、受害者人数及官方调查或司法进展信息"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_1ebd537ab332070e",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

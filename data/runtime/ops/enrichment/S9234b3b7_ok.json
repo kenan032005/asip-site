@@ -1,0 +1,121 @@
+{
+ "label": "S9234b3b7",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e4225606a2ba0caba05939bb1a65d1d2365f2fe2ef8124aacb22173a3843f4d9",
+ "tokens": {
+  "input_tokens": 2787,
+  "output_tokens": 476,
+  "total_tokens": 3263
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔Mainé-Soroa警方与民众加强合作预防不安全",
+   "summary_zh": "尼日尔迪法大区Mainé-Soroa国家警察部门于2026年10月6日组织了一场警民合作与公民警惕意识宣传对话会，旨在落实国家社区警务战略。会议讨论了预防不安全、打击青少年犯罪及毒品消费等议题，警方与民众代表分别作出合作承诺。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "迪法大区",
+    "city": "Mainé-Soroa",
+    "site": "Mainé酋长宫广场",
+    "raw_text": "Mainé-Soroa (Diffa), esplanade du palais du Chef de canton de Mainé"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔Mainé-Soroa国家警察部门组织警民合作宣传对话会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Direction Départementale de la Police Nationale de Mainé-Soroa... a organisé... une séance de sensibilisation et de dialogue avec les populations sur la collaboration Police-Population"
+    },
+    {
+     "fact": "会议于2026年10月6日在Mainé酋长宫广场举行",
+     "evidence_field": "event_time",
+     "evidence_excerpt": "ce mardi 6 octobre 2026, à l’esplanade du palais du Chef de canton de Mainé"
+    },
+    {
+     "fact": "讨论议题包括预防不安全、打击青少年犯罪和毒品消费",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la collaboration Police-Population et la vigilance citoyenne pour la prévention de l’insécurité... la lutte contre la délinquance juvénile, notamment la consommation des stupéfiants"
+    },
+    {
+     "fact": "警方承诺依法处理信息并保护民众生命财产安全",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la Police Nationale s’est engagée à rester à l’écoute des préoccupations des populations, à traiter les informations reçues avec professionnalisme et confidentialité et à intervenir conformément aux dispositions de la loi"
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔Mainé-Soroa警方与民众加强合作预防不安全",
+   "summary_zh": "尼日尔迪法大区Mainé-Soroa国家警察部门于2026年10月6日组织了一场警民合作与公民警惕意识宣传对话会，旨在落实国家社区警务战略。会议讨论了预防不安全、打击青少年犯罪及毒品消费等议题，警方与民众代表分别作出合作承诺。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "迪法大区",
+    "city": "Mainé-Soroa",
+    "site": "Mainé酋长宫广场",
+    "raw_text": "Mainé-Soroa (Diffa), esplanade du palais du Chef de canton de Mainé"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔Mainé-Soroa国家警察部门组织警民合作宣传对话会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Direction Départementale de la Police Nationale de Mainé-Soroa... a organisé... une séance de sensibilisation et de dialogue avec les populations sur la collaboration Police-Population"
+    },
+    {
+     "fact": "会议于2026年10月6日在Mainé酋长宫广场举行",
+     "evidence_field": "event_time",
+     "evidence_excerpt": "ce mardi 6 octobre 2026, à l’esplanade du palais du Chef de canton de Mainé"
+    },
+    {
+     "fact": "讨论议题包括预防不安全、打击青少年犯罪和毒品消费",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la collaboration Police-Population et la vigilance citoyenne pour la prévention de l’insécurité... la lutte contre la délinquance juvénile, notamment la consommation des stupéfiants"
+    },
+    {
+     "fact": "警方承诺依法处理信息并保护民众生命财产安全",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la Police Nationale s’est engagée à rester à l’écoute des préoccupations des populations, à traiter les informations reçues avec professionnalisme et confidentialité et à intervenir conformément aux dispositions de la loi"
+    }
+   ],
+   "uncertainties": [
+    "据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_1337553d9234b3b7",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

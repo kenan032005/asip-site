@@ -1,17 +1,17 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-07T07:06:39+08:00",
+ "generated_at": "2026-10-07T08:57:51+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 53,
-  "signals_7d": 311,
-  "verified_events_24h": 53,
-  "verified_events_7d": 335,
+  "signals_24h": 47,
+  "signals_7d": 308,
+  "verified_events_24h": 48,
+  "verified_events_7d": 331,
   "multi_source_verified_events_7d": 9,
-  "countries_with_activity_24h": 12,
+  "countries_with_activity_24h": 13,
   "total_countries_monitored": 22
  },
  "countries_24h": [
@@ -21,10 +21,11 @@
   "南苏丹",
   "喀麦隆",
   "埃塞俄比亚",
-  "塞内加尔",
   "尼日利亚",
+  "尼日尔",
   "莫桑比克",
   "贝宁",
+  "阿尔及利亚",
   "马达加斯加",
   "马里"
  ],
@@ -34,7 +35,6 @@
   "几内亚比绍",
   "刚果（布）",
   "刚果（金）",
-  "利比亚",
   "加纳",
   "南苏丹",
   "南非",
@@ -68,11 +68,11 @@
   },
   {
    "value": "尼日利亚",
-   "count": 76
+   "count": 75
   },
   {
    "value": "埃塞俄比亚",
-   "count": 34
+   "count": 33
   },
   {
    "value": "乍得",
@@ -88,7 +88,7 @@
   },
   {
    "value": "尼日尔",
-   "count": 13
+   "count": 14
   },
   {
    "value": "莫桑比克",
@@ -96,7 +96,7 @@
   },
   {
    "value": "贝宁",
-   "count": 4
+   "count": 5
   },
   {
    "value": "马里",
@@ -114,19 +114,19 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 40
-  },
-  {
-   "value": "民众骚乱",
-   "count": 4
+   "count": 39
   },
   {
    "value": "武装冲突",
-   "count": 3
+   "count": 2
+  },
+  {
+   "value": "民众骚乱",
+   "count": 2
   },
   {
    "value": "公共卫生",
-   "count": 3
+   "count": 2
   },
   {
    "value": "军事行动",
@@ -135,42 +135,23 @@
   {
    "value": "election_security",
    "count": 1
-  },
-  {
-   "value": "基础设施安全",
-   "count": 1
   }
  ],
  "source_tier_distribution_7d": [
   {
    "value": "B",
-   "count": 384
+   "count": 374
   },
   {
    "value": "C",
-   "count": 171
+   "count": 173
   },
   {
    "value": "A",
-   "count": 91
+   "count": 92
   }
  ],
  "top_verified_events": [
-  {
-   "fact_id": "EVT_1d118b472ac99e6a",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "尼日利亚军方解救46名被绑架者，击毙一名疑似民兵成员",
-   "category": "other_security",
-   "source": "News Agency of Nigeria",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-29 23:09",
-   "importance": "high",
-   "severity": "medium"
-  },
   {
    "fact_id": "EVT_14429227c5f4bc5f",
    "level": "verified_event",
@@ -245,9 +226,54 @@
    "time": "2026-09-30 04:18",
    "importance": "high",
    "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_e1cfbd44864dba82",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "布基纳法索军政府领导人开设大型黄金精炼厂，力求将采矿利润留在国内",
+   "category": "infrastructure_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-09-30 04:10",
+   "importance": "high",
+   "severity": "medium"
   }
  ],
  "top_signals": [
+  {
+   "fact_id": "news:8f581fe9f4060626",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "贝宁",
+   "title": "Crime et châtiment",
+   "category": "other_security",
+   "source": "Fraternite (官方日报)",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-07 07:05",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:b6d3c4c6dd23f98a",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "尼日尔",
+   "title": "Mainé-Soroa (Diffa): La Police et la population renforcent leur collaboration pour prévenir l’insécurité",
+   "category": "other_security",
+   "source": "ANP(尼日尔官方通讯社)",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-07 05:14",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   {
    "fact_id": "news:bf3c7e39e4b2f674",
    "level": "news_signal",
@@ -577,36 +603,6 @@
    "time": "2026-10-06 15:19",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:351f776a883f9dd4",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "刚果（金）",
-   "title": "非盟调解人抵达刚果（金）东部戈马，与AFC/M23举行会晤",
-   "category": "armed_conflict",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-06 15:15",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:6541af2620b8565f",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "尼日利亚军机坠入沼泽致32人遇难，全国哀悼三日",
-   "category": "other_security",
-   "source": "BBC News (Africa)",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-06 14:33",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -684,17 +680,41 @@
   }
  ],
  "existing_assessment": {
-  "status": "ai",
-  "overall_assessment": "已核实事件方面，埃塞俄比亚北部提格雷战事重燃，亚的斯亚贝巴指控厄立特里亚、苏丹和埃及支持叛军，联邦军队称反攻取得进展，据称造成52名平民死亡；尼日利亚军方解救46名被绑架者；南苏丹西赤道州78名被绑架平民获释，但耶伊、琼莱等地暴力与洪水持续；乍得东部苏丹难民超11.8万，水资源紧张，阿德里口岸开放延长至年底；莫桑比克德尔加杜角叛乱活动持续；利比亚教师连续第三周罢工。情报信号方面，均为单源消息、尚待核实：加纳三名儿童被发现死于车后备箱、尼日利亚翁多州军机坠毁相关致哀与历史损失统计、乍得多省沙尘高温雷暴天气预警、尼日利亚机构呼吁防范安全行动中性暴力。整体风险方向趋于恶化，需持续跟踪提格雷战事外溢、萨赫勒与乍得难民压力及加纳涉毒治理。",
-  "risk_direction": "worsening",
-  "confidence": "medium",
-  "generated_time": "2026-10-07T07:06:30+08:00",
-  "based_on": "过去24小时/7日公开信息",
-  "model": "",
-  "date": "20261007"
+  "status": "deterministic",
+  "based_on": "过去24小时/7日公开信息（确定性汇总）"
  },
- "fact_count": 646,
+ "fact_count": 639,
  "facts": {
+  "news:8f581fe9f4060626": {
+   "fact_id": "news:8f581fe9f4060626",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "贝宁",
+   "title": "Crime et châtiment",
+   "category": "other_security",
+   "source": "Fraternite (官方日报)",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-07 07:05",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:b6d3c4c6dd23f98a": {
+   "fact_id": "news:b6d3c4c6dd23f98a",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "尼日尔",
+   "title": "Mainé-Soroa (Diffa): La Police et la population renforcent leur collaboration pour prévenir l’insécurité",
+   "category": "other_security",
+   "source": "ANP(尼日尔官方通讯社)",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-07 05:14",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:bf3c7e39e4b2f674": {
    "fact_id": "news:bf3c7e39e4b2f674",
    "level": "news_signal",
@@ -5285,96 +5305,6 @@
    "importance": "low",
    "why_it_matters": ""
   },
-  "news:acdaf6fff1bf7860": {
-   "fact_id": "news:acdaf6fff1bf7860",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "教宗良十四世呼吁埃塞俄比亚对话，提格雷战火重燃",
-   "category": "armed_conflict",
-   "source": "Africanews",
-   "source_tier": "B",
-   "source_role": "aggregator_discovery",
-   "time": "2026-09-30 08:00",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:2c851aff2dc38a1a": {
-   "fact_id": "news:2c851aff2dc38a1a",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "利比亚",
-   "title": "利比亚公立学校教师连续第三周罢工抗议薪资与工作条件",
-   "category": "other_security",
-   "source": "Africanews",
-   "source_tier": "B",
-   "source_role": "aggregator_discovery",
-   "time": "2026-09-30 08:00",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:ec32f74e03e0e7bf": {
-   "fact_id": "news:ec32f74e03e0e7bf",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "摩洛哥",
-   "title": "三名欧洲议员称休达人道主义状况“严峻”",
-   "category": "other_security",
-   "source": "Africanews",
-   "source_tier": "B",
-   "source_role": "aggregator_discovery",
-   "time": "2026-09-30 08:00",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:e0bee20a1f72ec4b": {
-   "fact_id": "news:e0bee20a1f72ec4b",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "突尼斯",
-   "title": "突尼斯总统在人权组织批评后放宽“假新闻”法令",
-   "category": "other_security",
-   "source": "Africanews",
-   "source_tier": "B",
-   "source_role": "aggregator_discovery",
-   "time": "2026-09-30 08:00",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:59efbb5a8e38f41b": {
-   "fact_id": "news:59efbb5a8e38f41b",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "尼日利亚军方解救46名被绑架者，击毙一名疑似民兵成员",
-   "category": "other_security",
-   "source": "News Agency of Nigeria",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-30 07:09",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "EVT_1d118b472ac99e6a": {
-   "fact_id": "EVT_1d118b472ac99e6a",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "尼日利亚军方解救46名被绑架者，击毙一名疑似民兵成员",
-   "category": "other_security",
-   "source": "News Agency of Nigeria",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-09-29 23:09",
-   "importance": "high",
-   "severity": "medium"
-  },
   "EVT_14429227c5f4bc5f": {
    "fact_id": "EVT_14429227c5f4bc5f",
    "level": "verified_event",
@@ -5690,21 +5620,6 @@
    "importance": "high",
    "severity": "medium"
   },
-  "EVT_9589b089f7b8b999": {
-   "fact_id": "EVT_9589b089f7b8b999",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "教宗良十四世呼吁埃塞俄比亚对话，提格雷战火重燃",
-   "category": "armed_conflict",
-   "source": "Africanews",
-   "source_tier": "B",
-   "source_role": "aggregator_discovery",
-   "time": "2026-09-30 00:00",
-   "importance": "high",
-   "severity": "medium"
-  },
   "EVT_fedaea4e3cd05d48": {
    "fact_id": "EVT_fedaea4e3cd05d48",
    "level": "verified_event",
@@ -5930,21 +5845,6 @@
    "importance": "high",
    "severity": "medium"
   },
-  "EVT_990058a3b95501e8": {
-   "fact_id": "EVT_990058a3b95501e8",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "利比亚",
-   "title": "利比亚公立学校教师连续第三周罢工抗议薪资与工作条件",
-   "category": "other_security",
-   "source": "Africanews",
-   "source_tier": "B",
-   "source_role": "aggregator_discovery",
-   "time": "2026-09-30 00:00",
-   "importance": "high",
-   "severity": "medium"
-  },
   "EVT_18f7cc6b088dd416": {
    "fact_id": "EVT_18f7cc6b088dd416",
    "level": "verified_event",
@@ -6062,21 +5962,6 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-09-30 11:43",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_c2e82ac5f28fee9c": {
-   "fact_id": "EVT_c2e82ac5f28fee9c",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "南非",
-   "title": "南非总统拉马福萨宣布应对性别暴力措施",
-   "category": "civil_unrest",
-   "source": "Africanews",
-   "source_tier": "B",
-   "source_role": "aggregator_discovery",
-   "time": "2026-09-30 00:00",
    "importance": "high",
    "severity": "medium"
   },
@@ -6875,21 +6760,6 @@
    "importance": "high",
    "severity": "medium"
   },
-  "EVT_475713a0b12d7572": {
-   "fact_id": "EVT_475713a0b12d7572",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "摩洛哥",
-   "title": "三名欧洲议员称休达人道主义状况“严峻”",
-   "category": "other_security",
-   "source": "Africanews",
-   "source_tier": "B",
-   "source_role": "aggregator_discovery",
-   "time": "2026-09-30 00:00",
-   "importance": "high",
-   "severity": "medium"
-  },
   "EVT_eb13075322e81d8a": {
    "fact_id": "EVT_eb13075322e81d8a",
    "level": "verified_event",
@@ -7010,21 +6880,6 @@
    "importance": "high",
    "severity": "medium"
   },
-  "EVT_82cb4ca12810d8c7": {
-   "fact_id": "EVT_82cb4ca12810d8c7",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "突尼斯",
-   "title": "突尼斯总统在人权组织批评后放宽“假新闻”法令",
-   "category": "other_security",
-   "source": "Africanews",
-   "source_tier": "B",
-   "source_role": "aggregator_discovery",
-   "time": "2026-09-30 00:00",
-   "importance": "high",
-   "severity": "medium"
-  },
   "EVT_e207ad8b9b9dbf31": {
    "fact_id": "EVT_e207ad8b9b9dbf31",
    "level": "verified_event",
@@ -7037,21 +6892,6 @@
    "source_tier": "A",
    "source_role": "major_media",
    "time": "2026-10-01 12:12",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_c6d932383907a52c": {
-   "fact_id": "EVT_c6d932383907a52c",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "南非",
-   "title": "南非反移民抗议者在德班集会，誓言继续游行",
-   "category": "protest",
-   "source": "Africanews",
-   "source_tier": "B",
-   "source_role": "aggregator_discovery",
-   "time": "2026-09-30 00:00",
    "importance": "high",
    "severity": "medium"
   },
@@ -10382,6 +10222,51 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-06 19:54",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_1ebd537ab332070e": {
+   "fact_id": "EVT_1ebd537ab332070e",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "贝宁",
+   "title": "贝宁媒体评论文章：博希孔被指存在买卖儿童与性侵犯罪行",
+   "category": "other_security",
+   "source": "Fraternite (官方日报)",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-06 23:05",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_ae353b7672759a09": {
+   "fact_id": "EVT_ae353b7672759a09",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "阿尔及利亚",
+   "title": "阿尔及利亚九人因毒品和精神药物贩运被判处死刑",
+   "category": "serious_crime",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-06 20:12",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_1337553d9234b3b7": {
+   "fact_id": "EVT_1337553d9234b3b7",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日尔",
+   "title": "尼日尔Mainé-Soroa警方与民众加强合作预防不安全",
+   "category": "other_security",
+   "source": "ANP(尼日尔官方通讯社)",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-06 21:14",
    "importance": "high",
    "severity": "medium"
   }
