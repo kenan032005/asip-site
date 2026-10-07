@@ -1,0 +1,111 @@
+{
+ "label": "S7549a20d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0e1e07d44832e7cb179ac0f6c6ce75576ce569b7b815867c3ef1b69bd31d03c9",
+ "tokens": {
+  "input_tokens": 2866,
+  "output_tokens": 328,
+  "total_tokens": 3194
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据Fraternite (官方日报)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁社会学家谈DNA检测：不是实验室结果，而是社会地震",
+   "summary_zh": "贝宁社会学家Jean Djissouklounon就DNA检测在贝宁日益普及接受采访，指出其结果可能动摇父子关系、姓氏、继承权乃至两个家庭之间的关系。他呼吁对DNA检测的社会与心理后果加强规范，并称这反映了家庭从“言语信任”向“科学证明”的转变。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Bénin"
+   },
+   "key_facts": [
+    {
+     "fact": "贝宁社会学家Jean Djissouklounon就DNA检测普及接受采访",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Interview avec Jean Djissouklounon, sociologue"
+    },
+    {
+     "fact": "DNA检测结果可能动摇父子关系、姓氏、继承权及两个家庭间关系",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un résultat ADN peut remettre en cause une paternité, un nom, un héritage et même les relations entre deux familles"
+    },
+    {
+     "fact": "该社会学家呼吁对DNA检测的社会与心理后果加强规范",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le sociologue Jean Djissouklounon appelle à mieux encadrer leurs conséquences sociales et psychologiques"
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁社会学家谈DNA检测：不是实验室结果，而是社会地震",
+   "summary_zh": "贝宁社会学家Jean Djissouklounon就DNA检测在贝宁日益普及接受采访，指出其结果可能动摇父子关系、姓氏、继承权乃至两个家庭之间的关系。他呼吁对DNA检测的社会与心理后果加强规范，并称这反映了家庭从“言语信任”向“科学证明”的转变。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Bénin"
+   },
+   "key_facts": [
+    {
+     "fact": "贝宁社会学家Jean Djissouklounon就DNA检测普及接受采访",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Interview avec Jean Djissouklounon, sociologue"
+    },
+    {
+     "fact": "DNA检测结果可能动摇父子关系、姓氏、继承权及两个家庭间关系",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un résultat ADN peut remettre en cause une paternité, un nom, un héritage et même les relations entre deux familles"
+    },
+    {
+     "fact": "该社会学家呼吁对DNA检测的社会与心理后果加强规范",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le sociologue Jean Djissouklounon appelle à mieux encadrer leurs conséquences sociales et psychologiques"
+    }
+   ],
+   "uncertainties": [
+    "据Fraternite (官方日报)报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_d83e8b3f7549a20d",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

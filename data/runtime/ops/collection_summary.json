@@ -1,37 +1,39 @@
 {
  "sources_configured": 875,
  "sources_attempted": 875,
- "sources_succeeded": 231,
- "sources_failed": 571,
- "articles_discovered": 3504,
- "duplicates": 1705,
+ "sources_succeeded": 223,
+ "sources_failed": 585,
+ "articles_discovered": 3407,
+ "duplicates": 1595,
  "published": 3,
  "quarantined": 75,
- "articles_persisted_total": 927,
+ "articles_persisted_total": 929,
  "articles_persisted_new": 2,
- "articles_excluded_total": 1852,
+ "articles_excluded_total": 1868,
  "article_persistence_ok": true,
  "metrics_source": "logs/stage3_collection_stats.json",
- "collector_run_id": "20261007T000631+0800_3vaccj",
- "collector_generated_at": "2026-10-07T08:56:30+08:00",
+ "collector_run_id": "20261007T050642+0800_1amamo",
+ "collector_generated_at": "2026-10-07T13:58:58+08:00",
  "failure_reasons": {
-  "WALL_CLOCK_LIMIT_REACHED": 571,
-  "OK_PRODUCTIVE": 125,
-  "DUPLICATE_ONLY": 106,
-  "HTTP_429": 35,
-  "RSS_EMPTY": 32,
-  "HTTP_404": 4,
-  "UNKNOWN": 2
+  "WALL_CLOCK_LIMIT_REACHED": 585,
+  "OK_PRODUCTIVE": 122,
+  "DUPLICATE_ONLY": 101,
+  "RSS_EMPTY": 28,
+  "HTTP_429": 27,
+  "QUERY_NO_RESULT": 8,
+  "HTTP_404": 3,
+  "UNKNOWN": 1
  },
- "sources_blocked_by_external": 39,
- "sources_no_output_not_blocked": 711,
+ "sources_blocked_by_external": 30,
+ "sources_no_output_not_blocked": 723,
  "gdelt_rate_limiter": {
   "schema": "gdelt-rate-limiter-v1",
   "host": "api.gdeltproject.org",
   "requests": 3,
   "cache_hits": 0,
   "status_counts": {
-   "429": 3
+   "429": 2,
+   "200": 1
   },
   "current_interval_s": 300.0,
   "min_interval_s": 20.0,
@@ -41,10 +43,10 @@
   "request_budget": 120,
   "budget_exhausted": false,
   "labeled_requests": 3,
-  "labeled_success": 0,
-  "labeled_rate_limited": 3,
-  "success_rate": 0.0,
-  "rate_limited_rate": 1.0,
+  "labeled_success": 1,
+  "labeled_rate_limited": 2,
+  "success_rate": 0.3333,
+  "rate_limited_rate": 0.6667,
   "by_label": {
    "|Niger": {
     "requests": 1,
@@ -56,8 +58,8 @@
    },
    "|尼日尔": {
     "requests": 1,
-    "success": 0,
-    "rate_limited": 1,
+    "success": 1,
+    "rate_limited": 0,
     "errors": 0,
     "cache_hits": 0,
     "items": 0
@@ -74,8 +76,8 @@
  },
  "per_source_stats_persisted": "data/runtime/ops/collection_source_stats.json",
  "ok": true,
- "raw_candidates_on_disk": 763,
+ "raw_candidates_on_disk": 765,
  "pending_events_on_disk": 21,
  "executed": true,
- "started_at": "2026-10-07T00:06:31Z"
+ "started_at": "2026-10-07T05:06:42Z"
 }
