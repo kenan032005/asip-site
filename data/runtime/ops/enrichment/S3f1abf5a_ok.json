@@ -1,0 +1,140 @@
+{
+ "label": "S3f1abf5a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0d72994f3056b3307a2dd74003296f900933b4a30cb863d1c980696327d1e94b",
+ "tokens": {
+  "input_tokens": 2581,
+  "output_tokens": 520,
+  "total_tokens": 3101
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"BBC表示尚未能独立核实任何有关军队调动的报道\", \"社交媒体上流传的军事卡车图片未经BBC独立核实\", \"厄立特里亚此前否认支持提格雷人民解放阵线\", \"据称厄立特里亚士兵在2020-2022年内战中犯下暴行，该指控尚未得到独立证实\"]",
+    "after": "[\"BBC表示尚未能独立核实任何有关军队调动的报道\", \"社交媒体上流传的军事卡车图片未经BBC独立核实\", \"厄立特里亚此前否认支持提格雷人民解放阵线\", \"据称厄立特里亚士兵在2020-2022年内战中犯下暴行，该指控尚未得到独立证实\", \"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "厄立特里亚军队深入埃塞俄比亚提格雷地区，战斗升级",
+   "summary_zh": "据阿迪格拉特居民向BBC透露，厄立特里亚士兵已越过边境进入埃塞俄比亚北部，向提格雷地区冲突区域推进。当地居民报告看到数十辆载有士兵的卡车向南行驶。埃塞俄比亚政府官员指控厄立特里亚直接参与冲突，但BBC表示尚未能独立核实这些军事调动。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷",
+    "city": "阿迪格拉特",
+    "site": null,
+    "raw_text": "Adigrat, Tigray region, northern Ethiopia"
+   },
+   "key_facts": [
+    {
+     "fact": "厄立特里亚士兵越过边境进入埃塞俄比亚北部提格雷地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eritrean soldiers have crossed into northern Ethiopia heading towards an area where clashes have been taking place between national army troops and regional forces"
+    },
+    {
+     "fact": "阿迪格拉特居民报告看到约40辆载有士兵的卡车向南行驶",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "I saw about 40 trucks carrying soldiers. The convoy was moving south"
+    },
+    {
+     "fact": "埃塞俄比亚政府官员指控厄立特里亚直接参与冲突",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "senior Ethiopian government official Abraham Belay accused Eritrea of direct participation in the conflict"
+    },
+    {
+     "fact": "提格雷人民解放阵线武装从默克莱撤出，该市现由政府军控制",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "TPLF forces withdrew from Tigray's main city of Mekelle, which is 115km (71 miles) south of Adigrat and is now under army control"
+    },
+    {
+     "fact": "埃塞俄比亚与厄立特里亚上周断绝外交关系",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Last week the two countries severed diplomatic relations as the renewed fighting raised fears of a wider regional conflict"
+    }
+   ],
+   "uncertainties": [
+    "BBC表示尚未能独立核实任何有关军队调动的报道",
+    "社交媒体上流传的军事卡车图片未经BBC独立核实",
+    "厄立特里亚此前否认支持提格雷人民解放阵线",
+    "据称厄立特里亚士兵在2020-2022年内战中犯下暴行，该指控尚未得到独立证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "厄立特里亚军队深入埃塞俄比亚提格雷地区，战斗升级",
+   "summary_zh": "据阿迪格拉特居民向BBC透露，厄立特里亚士兵已越过边境进入埃塞俄比亚北部，向提格雷地区冲突区域推进。当地居民报告看到数十辆载有士兵的卡车向南行驶。埃塞俄比亚政府官员指控厄立特里亚直接参与冲突，但BBC表示尚未能独立核实这些军事调动。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷",
+    "city": "阿迪格拉特",
+    "site": null,
+    "raw_text": "Adigrat, Tigray region, northern Ethiopia"
+   },
+   "key_facts": [
+    {
+     "fact": "厄立特里亚士兵越过边境进入埃塞俄比亚北部提格雷地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eritrean soldiers have crossed into northern Ethiopia heading towards an area where clashes have been taking place between national army troops and regional forces"
+    },
+    {
+     "fact": "阿迪格拉特居民报告看到约40辆载有士兵的卡车向南行驶",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "I saw about 40 trucks carrying soldiers. The convoy was moving south"
+    },
+    {
+     "fact": "埃塞俄比亚政府官员指控厄立特里亚直接参与冲突",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "senior Ethiopian government official Abraham Belay accused Eritrea of direct participation in the conflict"
+    },
+    {
+     "fact": "提格雷人民解放阵线武装从默克莱撤出，该市现由政府军控制",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "TPLF forces withdrew from Tigray's main city of Mekelle, which is 115km (71 miles) south of Adigrat and is now under army control"
+    },
+    {
+     "fact": "埃塞俄比亚与厄立特里亚上周断绝外交关系",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Last week the two countries severed diplomatic relations as the renewed fighting raised fears of a wider regional conflict"
+    }
+   ],
+   "uncertainties": [
+    "BBC表示尚未能独立核实任何有关军队调动的报道",
+    "社交媒体上流传的军事卡车图片未经BBC独立核实",
+    "厄立特里亚此前否认支持提格雷人民解放阵线",
+    "据称厄立特里亚士兵在2020-2022年内战中犯下暴行，该指控尚未得到独立证实",
+    "据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_9b6fb35d3f1abf5a",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

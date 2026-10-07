@@ -1,0 +1,125 @@
+{
+ "label": "Sa1e5acb9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "bd0c7e33052c5fdc4595097f2f7b4d69908cc9e793b4582b2d2f818e61da996c",
+ "tokens": {
+  "input_tokens": 2802,
+  "output_tokens": 579,
+  "total_tokens": 3381
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "肯尼亚在报告首例埃博拉死亡病例后加强防控与监测",
+   "summary_zh": "肯尼亚当局宣布该国出现首例埃博拉死亡病例后，总统威廉·鲁托于10月6日宣布一系列措施并呼吁民众保持警惕。死者为一名居住在刚果（金）的肯尼亚人，经乌干达陆路转乘飞机抵达内罗毕，虽立即被隔离救治，仍在48小时后死亡。当局已对8名家属和21名医护人员实施隔离，并追踪同机27名乘客。",
+   "event_type": "other_security",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": null,
+    "city": "内罗毕",
+    "site": "内罗毕医院",
+    "raw_text": "Nairobi, au Kenya"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚报告首例埃博拉死亡病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au lendemain de l’annonce par les autorités d’un premier mort d’Ebola au Kenya"
+    },
+    {
+     "fact": "死者为一名居住在刚果（金）的肯尼亚人，经乌干达转乘飞机抵达内罗毕，48小时后死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la mort d’un Kenyan vivant en RDC, qui a ensuite traversé la frontière avec l’Ouganda par la route avant un avion qui l’a emmené à Nairobi samedi. Quoique pris en charge immédiatement, il est décédé 48h plus tard."
+    },
+    {
+     "fact": "8名家属和21名医护人员被隔离，27名同机乘客被追踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Huit membres de la famille du défunt ont été placés en quarantaine... tout comme les 21 soignants... un total de 27 passagers identifiés et contactés"
+    },
+    {
+     "fact": "当局已检查超过65万名旅客，分析267份样本，目前均为阴性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les autorités indiquent avoir contrôlé plus de 650 000 voyageurs et analysé 267 échantillons : tous se sont révélés négatifs pour l’instant."
+    },
+    {
+     "fact": "内罗毕五家医院进入警戒状态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cinq hôpitaux dans la capitale kenyane ont été mis en état d’alerte"
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源报道，尚缺乏交叉验证",
+    "事件时间存在差异（conflict_flags: time_difference）"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "肯尼亚在报告首例埃博拉死亡病例后加强防控与监测",
+   "summary_zh": "肯尼亚当局宣布该国出现首例埃博拉死亡病例后，总统威廉·鲁托于10月6日宣布一系列措施并呼吁民众保持警惕。死者为一名居住在刚果（金）的肯尼亚人，经乌干达陆路转乘飞机抵达内罗毕，虽立即被隔离救治，仍在48小时后死亡。当局已对8名家属和21名医护人员实施隔离，并追踪同机27名乘客。",
+   "event_type": "other_security",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": null,
+    "city": "内罗毕",
+    "site": "内罗毕医院",
+    "raw_text": "Nairobi, au Kenya"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚报告首例埃博拉死亡病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au lendemain de l’annonce par les autorités d’un premier mort d’Ebola au Kenya"
+    },
+    {
+     "fact": "死者为一名居住在刚果（金）的肯尼亚人，经乌干达转乘飞机抵达内罗毕，48小时后死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la mort d’un Kenyan vivant en RDC, qui a ensuite traversé la frontière avec l’Ouganda par la route avant un avion qui l’a emmené à Nairobi samedi. Quoique pris en charge immédiatement, il est décédé 48h plus tard."
+    },
+    {
+     "fact": "8名家属和21名医护人员被隔离，27名同机乘客被追踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Huit membres de la famille du défunt ont été placés en quarantaine... tout comme les 21 soignants... un total de 27 passagers identifiés et contactés"
+    },
+    {
+     "fact": "当局已检查超过65万名旅客，分析267份样本，目前均为阴性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les autorités indiquent avoir contrôlé plus de 650 000 voyageurs et analysé 267 échantillons : tous se sont révélés négatifs pour l’instant."
+    },
+    {
+     "fact": "内罗毕五家医院进入警戒状态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cinq hôpitaux dans la capitale kenyane ont été mis en état d’alerte"
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源报道，尚缺乏交叉验证",
+    "事件时间存在差异（conflict_flags: time_difference）"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_3444c7e0a1e5acb9",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

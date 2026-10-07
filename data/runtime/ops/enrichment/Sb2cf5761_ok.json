@@ -1,0 +1,105 @@
+{
+ "label": "Sb2cf5761",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d993bede595c4cebab779a517f17b5b6ed57be277ce34aba584d0da6dbc9f294",
+ "tokens": {
+  "input_tokens": 1993,
+  "output_tokens": 358,
+  "total_tokens": 2351
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "无国界医生警告刚果（金）北基伍省埃博拉疫情“失控”",
+   "summary_zh": "无国界医生组织于周二警告，刚果（金）北基伍省的埃博拉病例出现令人警觉的激增。该组织称，这一东北部地区目前占全国新增确诊病例的近40%，疫情传播“失控”。无国界医生驻布滕博埃博拉治疗中心协调员表示，多数新增病例来自未知的传播链。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "北基伍省",
+    "city": "布滕博",
+    "site": "无国界医生埃博拉治疗中心",
+    "raw_text": "North Kivu province, Butembo"
+   },
+   "key_facts": [
+    {
+     "fact": "无国界医生警告刚果（金）北基伍省埃博拉疫情传播“失控”",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "MSF warns Ebola spread in DR Congo's North Kivu province is 'out of control'"
+    },
+    {
+     "fact": "北基伍省占全国新增确诊病例近40%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the north-eastern region now accounts for nearly 40 per cent of all newly confirmed incidents nationwide"
+    },
+    {
+     "fact": "多数新增病例来自未知传播链",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "most new cases were coming from unknown chains of transmission"
+    }
+   ],
+   "uncertainties": [
+    "信息为单一来源（Africanews），尚未获得交叉验证",
+    "新增病例的未知传播链具体情况尚未明确"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "无国界医生警告刚果（金）北基伍省埃博拉疫情“失控”",
+   "summary_zh": "无国界医生组织于周二警告，刚果（金）北基伍省的埃博拉病例出现令人警觉的激增。该组织称，这一东北部地区目前占全国新增确诊病例的近40%，疫情传播“失控”。无国界医生驻布滕博埃博拉治疗中心协调员表示，多数新增病例来自未知的传播链。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "北基伍省",
+    "city": "布滕博",
+    "site": "无国界医生埃博拉治疗中心",
+    "raw_text": "North Kivu province, Butembo"
+   },
+   "key_facts": [
+    {
+     "fact": "无国界医生警告刚果（金）北基伍省埃博拉疫情传播“失控”",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "MSF warns Ebola spread in DR Congo's North Kivu province is 'out of control'"
+    },
+    {
+     "fact": "北基伍省占全国新增确诊病例近40%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the north-eastern region now accounts for nearly 40 per cent of all newly confirmed incidents nationwide"
+    },
+    {
+     "fact": "多数新增病例来自未知传播链",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "most new cases were coming from unknown chains of transmission"
+    }
+   ],
+   "uncertainties": [
+    "信息为单一来源（Africanews），尚未获得交叉验证",
+    "新增病例的未知传播链具体情况尚未明确"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_77db5aa9b2cf5761",
+ "disease_event_id": null,
+ "country_code": "CD"
+}
