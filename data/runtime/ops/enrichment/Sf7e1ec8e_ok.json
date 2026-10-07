@@ -1,0 +1,134 @@
+{
+ "label": "Sf7e1ec8e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b145407f7cf1dd26b8fd783da3721a85e5196ca5d0b7dff20c03134a62de2bfa",
+ "tokens": {
+  "input_tokens": 2766,
+  "output_tokens": 639,
+  "total_tokens": 3405
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该事件目前仅有一个来源（尼日尔官方通讯社ANP），尚缺乏交叉验证\"]",
+    "after": "[\"该事件目前仅有一个来源（尼日尔官方通讯社ANP），尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "马拉迪举办保护被迫流离失所者及无国籍风险人群能力建设研讨会",
+   "summary_zh": "尼日尔马拉迪大区于2026年10月7日举办为期两天的能力建设研讨会，主题为保护被迫流离失所者及面临无国籍风险的人群。研讨会由大区区长、警察总监伊素福·马马内主持开幕，联合国难民署及合作伙伴提供支持。马拉迪因靠近尼日利亚边境，收容了难民、寻求庇护者、境内流离失所者和返回者等各类人群。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "马拉迪大区",
+    "city": "马拉迪",
+    "site": "马拉迪大区政府会议室",
+    "raw_text": "salle de réunion du Gouvernorat de Maradi"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔马拉迪大区举办保护被迫流离失所者及无国籍风险人群的能力建设研讨会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un atelier de renforcement des capacités sur la protection des personnes déplacées de force et des personnes à risque d’apatridie s’est ouvert, ce mercredi 7 octobre 2026, dans la salle de réunion du Gouvernorat de Maradi"
+    },
+    {
+     "fact": "研讨会由马拉迪大区区长、警察总监伊素福·马马内主持开幕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "sous la présidence du Gouverneur de la région, le Contrôleur Général de Police Issoufou Mamane"
+    },
+    {
+     "fact": "联合国难民署驻马拉迪办事处负责人表示，马拉迪因靠近尼日利亚边境而收容了难民、寻求庇护者、境内流离失所者和返回者等各类人群",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la région de Maradi, en raison de sa proximité avec la frontière nigériane, accueille différentes catégories de populations déplacées, notamment des réfugiés, des demandeurs d’asile, des personnes déplacées internes et des retournés"
+    },
+    {
+     "fact": "研讨会旨在提升参与者在保护、庇护权、预防无国籍状态以及识别和转介有特殊需求人员方面的能力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’atelier vise à renforcer les capacités des participants sur la protection, le droit d’asile, la prévention de l’apatridie ainsi que l’identification et l’orientation des personnes ayant des besoins spécifiques"
+    },
+    {
+     "fact": "活动时间为2026年10月7日",
+     "evidence_field": "event_time",
+     "evidence_excerpt": "2026-10-07 22:39:27"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（尼日尔官方通讯社ANP），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "马拉迪举办保护被迫流离失所者及无国籍风险人群能力建设研讨会",
+   "summary_zh": "尼日尔马拉迪大区于2026年10月7日举办为期两天的能力建设研讨会，主题为保护被迫流离失所者及面临无国籍风险的人群。研讨会由大区区长、警察总监伊素福·马马内主持开幕，联合国难民署及合作伙伴提供支持。马拉迪因靠近尼日利亚边境，收容了难民、寻求庇护者、境内流离失所者和返回者等各类人群。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "马拉迪大区",
+    "city": "马拉迪",
+    "site": "马拉迪大区政府会议室",
+    "raw_text": "salle de réunion du Gouvernorat de Maradi"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔马拉迪大区举办保护被迫流离失所者及无国籍风险人群的能力建设研讨会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un atelier de renforcement des capacités sur la protection des personnes déplacées de force et des personnes à risque d’apatridie s’est ouvert, ce mercredi 7 octobre 2026, dans la salle de réunion du Gouvernorat de Maradi"
+    },
+    {
+     "fact": "研讨会由马拉迪大区区长、警察总监伊素福·马马内主持开幕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "sous la présidence du Gouverneur de la région, le Contrôleur Général de Police Issoufou Mamane"
+    },
+    {
+     "fact": "联合国难民署驻马拉迪办事处负责人表示，马拉迪因靠近尼日利亚边境而收容了难民、寻求庇护者、境内流离失所者和返回者等各类人群",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la région de Maradi, en raison de sa proximité avec la frontière nigériane, accueille différentes catégories de populations déplacées, notamment des réfugiés, des demandeurs d’asile, des personnes déplacées internes et des retournés"
+    },
+    {
+     "fact": "研讨会旨在提升参与者在保护、庇护权、预防无国籍状态以及识别和转介有特殊需求人员方面的能力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’atelier vise à renforcer les capacités des participants sur la protection, le droit d’asile, la prévention de l’apatridie ainsi que l’identification et l’orientation des personnes ayant des besoins spécifiques"
+    },
+    {
+     "fact": "活动时间为2026年10月7日",
+     "evidence_field": "event_time",
+     "evidence_excerpt": "2026-10-07 22:39:27"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（尼日尔官方通讯社ANP），尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_82623ed4f7e1ec8e",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

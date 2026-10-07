@@ -1,0 +1,117 @@
+{
+ "label": "S4e10c53c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "624f2c707f395efad6c2c3f445cb9b15186d137bf1a6a1e782c7e0c2ca5dadd8",
+ "tokens": {
+  "input_tokens": 2080,
+  "output_tokens": 459,
+  "total_tokens": 2539
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "以色列纪念10月7日袭击三周年，加沙民众身处战争废墟",
+   "summary_zh": "以色列民众于周三举行活动，纪念2023年10月7日哈马斯主导的袭击三周年，该袭击造成1200人死亡、251人被劫为人质，并引发加沙战争。加沙地带近两百万人生活在废墟之中。据加沙卫生部称，以色列在加沙的战争已造成至少7.4万名巴勒斯坦人死亡；多家国际非政府组织及一个联合国委员会认定以色列在加沙地带实施了种族灭绝。",
+   "event_type": "terrorism",
+   "country_iso3": "ISR",
+   "location": {
+    "country_iso3": "ISR",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Israel; Gaza"
+   },
+   "key_facts": [
+    {
+     "fact": "以色列民众纪念2023年10月7日哈马斯主导袭击三周年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Israelis gathered Wednesday to commemorate the October 7, 2023, Hamas-led attack"
+    },
+    {
+     "fact": "该袭击造成1200人死亡、251人被劫为人质",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "that killed 1,200 people, saw 251 taken hostage and sparked a devastating war in Gaza"
+    },
+    {
+     "fact": "据加沙卫生部称，以色列在加沙的战争已造成至少7.4万名巴勒斯坦人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "as Israel's war in Gaza killed at least 74,000 Palestinians, according to the Gaza Health Ministry"
+    },
+    {
+     "fact": "多家国际非政府组织及一个联合国委员会认定以色列在加沙地带实施了种族灭绝",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Several international NGOs as well as a UN commission have found that Israel has committed genocide in the Gaza Strip"
+    }
+   ],
+   "uncertainties": [
+    "加沙卫生部公布的死亡人数为单一来源数据，尚未获得独立核实",
+    "国际非政府组织及联合国委员会关于种族灭绝的认定存在争议，尚未获普遍确认",
+    "事件目前仅有一个来源（Africanews）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "以色列纪念10月7日袭击三周年，加沙民众身处战争废墟",
+   "summary_zh": "以色列民众于周三举行活动，纪念2023年10月7日哈马斯主导的袭击三周年，该袭击造成1200人死亡、251人被劫为人质，并引发加沙战争。加沙地带近两百万人生活在废墟之中。据加沙卫生部称，以色列在加沙的战争已造成至少7.4万名巴勒斯坦人死亡；多家国际非政府组织及一个联合国委员会认定以色列在加沙地带实施了种族灭绝。",
+   "event_type": "terrorism",
+   "country_iso3": "ISR",
+   "location": {
+    "country_iso3": "ISR",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Israel; Gaza"
+   },
+   "key_facts": [
+    {
+     "fact": "以色列民众纪念2023年10月7日哈马斯主导袭击三周年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Israelis gathered Wednesday to commemorate the October 7, 2023, Hamas-led attack"
+    },
+    {
+     "fact": "该袭击造成1200人死亡、251人被劫为人质",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "that killed 1,200 people, saw 251 taken hostage and sparked a devastating war in Gaza"
+    },
+    {
+     "fact": "据加沙卫生部称，以色列在加沙的战争已造成至少7.4万名巴勒斯坦人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "as Israel's war in Gaza killed at least 74,000 Palestinians, according to the Gaza Health Ministry"
+    },
+    {
+     "fact": "多家国际非政府组织及一个联合国委员会认定以色列在加沙地带实施了种族灭绝",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Several international NGOs as well as a UN commission have found that Israel has committed genocide in the Gaza Strip"
+    }
+   ],
+   "uncertainties": [
+    "加沙卫生部公布的死亡人数为单一来源数据，尚未获得独立核实",
+    "国际非政府组织及联合国委员会关于种族灭绝的认定存在争议，尚未获普遍确认",
+    "事件目前仅有一个来源（Africanews）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_5061939e4e10c53c",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

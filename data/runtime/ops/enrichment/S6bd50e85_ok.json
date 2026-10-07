@@ -1,0 +1,115 @@
+{
+ "label": "S6bd50e85",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "25e2c32be0681aa6cf44f80165cc9cb77e289d40f3dbcc0351708a17d63541f0",
+ "tokens": {
+  "input_tokens": 2008,
+  "output_tokens": 459,
+  "total_tokens": 2467
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "目击者称厄立特里亚军队部署至埃塞俄比亚提格雷地区",
+   "summary_zh": "据当地官员和居民向法新社表示，厄立特里亚军队近日在埃塞俄比亚北部提格雷地区阿迪格拉特镇周边部署。此前，提格雷人民解放阵线与埃塞俄比亚联邦部队于9月23日爆发冲突，引发对重返2020至2022年内战的担忧。埃塞俄比亚指控厄立特里亚支持叛军，两国上周断绝外交关系。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷地区",
+    "city": "阿迪格拉特",
+    "site": null,
+    "raw_text": "around the town of Adigrat, in Ethiopia's Tigray region"
+   },
+   "key_facts": [
+    {
+     "fact": "目击者称厄立特里亚军队近日在埃塞俄比亚提格雷地区阿迪格拉特镇周边部署",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eritrean troops have deployed in recent days around a town in Ethiopia's northern Tigray region, a local official and residents said Wednesday"
+    },
+    {
+     "fact": "提格雷人民解放阵线与埃塞俄比亚联邦部队于9月23日爆发冲突",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fighting broke out between the rebel Tigray People's Liberation Front (TPLF) and Ethiopian federal forces on September 23"
+    },
+    {
+     "fact": "埃塞俄比亚指控厄立特里亚支持叛军",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ethiopia accuses Eritrea of backing the rebels"
+    },
+    {
+     "fact": "埃塞俄比亚与厄立特里亚上周断绝外交关系",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Long-standing tensions between the two neighbours deepened last week when they severed diplomatic ties"
+    }
+   ],
+   "uncertainties": [
+    "厄立特里亚军队部署情况目前仅由当地官员和居民向法新社描述，尚未获得独立证实",
+    "埃塞俄比亚对厄立特里亚支持叛军的指控尚未得到证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "目击者称厄立特里亚军队部署至埃塞俄比亚提格雷地区",
+   "summary_zh": "据当地官员和居民向法新社表示，厄立特里亚军队近日在埃塞俄比亚北部提格雷地区阿迪格拉特镇周边部署。此前，提格雷人民解放阵线与埃塞俄比亚联邦部队于9月23日爆发冲突，引发对重返2020至2022年内战的担忧。埃塞俄比亚指控厄立特里亚支持叛军，两国上周断绝外交关系。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷地区",
+    "city": "阿迪格拉特",
+    "site": null,
+    "raw_text": "around the town of Adigrat, in Ethiopia's Tigray region"
+   },
+   "key_facts": [
+    {
+     "fact": "目击者称厄立特里亚军队近日在埃塞俄比亚提格雷地区阿迪格拉特镇周边部署",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eritrean troops have deployed in recent days around a town in Ethiopia's northern Tigray region, a local official and residents said Wednesday"
+    },
+    {
+     "fact": "提格雷人民解放阵线与埃塞俄比亚联邦部队于9月23日爆发冲突",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fighting broke out between the rebel Tigray People's Liberation Front (TPLF) and Ethiopian federal forces on September 23"
+    },
+    {
+     "fact": "埃塞俄比亚指控厄立特里亚支持叛军",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ethiopia accuses Eritrea of backing the rebels"
+    },
+    {
+     "fact": "埃塞俄比亚与厄立特里亚上周断绝外交关系",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Long-standing tensions between the two neighbours deepened last week when they severed diplomatic ties"
+    }
+   ],
+   "uncertainties": [
+    "厄立特里亚军队部署情况目前仅由当地官员和居民向法新社描述，尚未获得独立证实",
+    "埃塞俄比亚对厄立特里亚支持叛军的指控尚未得到证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_71abda696bd50e85",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

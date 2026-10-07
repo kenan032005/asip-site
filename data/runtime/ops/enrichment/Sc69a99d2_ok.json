@@ -1,0 +1,126 @@
+{
+ "label": "Sc69a99d2",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "84ef2ea60d0855258da3ec0f7e0daa41be365237342174c8fcd3826ba2cd81c4",
+ "tokens": {
+  "input_tokens": 2769,
+  "output_tokens": 489,
+  "total_tokens": 3258
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"学校被淹数量及清理进度来自单一来源（RFI），尚未获得交叉验证\", \"教师工会关于五天期限不足的说法为工会主张，未获官方确认\"]",
+    "after": "[\"学校被淹数量及清理进度来自单一来源（RFI），尚未获得交叉验证\", \"教师工会关于五天期限不足的说法为工会主张，未获官方确认\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "塞内加尔因洪水将全国开学日期推迟五天",
+   "summary_zh": "塞内加尔原定10月7日的开学因强降雨引发的洪水被推迟五天至10月12日，这一全国性推迟决定属首次。周末达喀尔多地24小时内降雨近140毫米，全国241所学校被淹，其中近半数位于达喀尔及周边。多个教师工会认为五天时间不足以清理和修复受损学校。",
+   "event_type": "natural_disaster",
+   "country_iso3": "SEN",
+   "location": {
+    "country_iso3": "SEN",
+    "admin1": null,
+    "city": "达喀尔",
+    "site": null,
+    "raw_text": "Sénégal, Dakar"
+   },
+   "key_facts": [
+    {
+     "fact": "塞内加尔因洪水将全国开学日期推迟五天至10月12日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La rentrée scolaire a été exceptionnellement reportée de cinq jours, à lundi 12 octobre, en raison des inondations provoquées par les fortes pluies du week-end."
+    },
+    {
+     "fact": "周末达喀尔多个街区24小时内降雨近140毫米",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La pluie, particulièrement forte dimanche, avec près de 140 mm tombés en 24 heures dans plusieurs quartiers de Dakar"
+    },
+    {
+     "fact": "全国241所学校被淹，其中近半数位于达喀尔及周边",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A l'échelle nationale, 241 établissements scolaires ont les pieds dans l'eau, selon la brigade nationale des sapeurs pompiers, dont près de la moitié rien que sur Dakar et sa banlieue."
+    },
+    {
+     "fact": "多个教师工会称五天期限不足以清理和修复受损学校",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plusieurs syndicats d'enseignants affirment déjà que ce délai de cinq jours est insuffisant pour nettoyer et remettre en état les nombreux établissements dégradés"
+    }
+   ],
+   "uncertainties": [
+    "学校被淹数量及清理进度来自单一来源（RFI），尚未获得交叉验证",
+    "教师工会关于五天期限不足的说法为工会主张，未获官方确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "塞内加尔因洪水将全国开学日期推迟五天",
+   "summary_zh": "塞内加尔原定10月7日的开学因强降雨引发的洪水被推迟五天至10月12日，这一全国性推迟决定属首次。周末达喀尔多地24小时内降雨近140毫米，全国241所学校被淹，其中近半数位于达喀尔及周边。多个教师工会认为五天时间不足以清理和修复受损学校。",
+   "event_type": "natural_disaster",
+   "country_iso3": "SEN",
+   "location": {
+    "country_iso3": "SEN",
+    "admin1": null,
+    "city": "达喀尔",
+    "site": null,
+    "raw_text": "Sénégal, Dakar"
+   },
+   "key_facts": [
+    {
+     "fact": "塞内加尔因洪水将全国开学日期推迟五天至10月12日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La rentrée scolaire a été exceptionnellement reportée de cinq jours, à lundi 12 octobre, en raison des inondations provoquées par les fortes pluies du week-end."
+    },
+    {
+     "fact": "周末达喀尔多个街区24小时内降雨近140毫米",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La pluie, particulièrement forte dimanche, avec près de 140 mm tombés en 24 heures dans plusieurs quartiers de Dakar"
+    },
+    {
+     "fact": "全国241所学校被淹，其中近半数位于达喀尔及周边",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A l'échelle nationale, 241 établissements scolaires ont les pieds dans l'eau, selon la brigade nationale des sapeurs pompiers, dont près de la moitié rien que sur Dakar et sa banlieue."
+    },
+    {
+     "fact": "多个教师工会称五天期限不足以清理和修复受损学校",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plusieurs syndicats d'enseignants affirment déjà que ce délai de cinq jours est insuffisant pour nettoyer et remettre en état les nombreux établissements dégradés"
+    }
+   ],
+   "uncertainties": [
+    "学校被淹数量及清理进度来自单一来源（RFI），尚未获得交叉验证",
+    "教师工会关于五天期限不足的说法为工会主张，未获官方确认",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_9e713ea0c69a99d2",
+ "disease_event_id": null,
+ "country_code": "SN"
+}

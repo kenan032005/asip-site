@@ -1,0 +1,111 @@
+{
+ "label": "Scb418eea",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "811a229f4726588d6fceb3873323617cdb9987947a8b249e81b083c9ec938fd5",
+ "tokens": {
+  "input_tokens": 2435,
+  "output_tokens": 433,
+  "total_tokens": 2868
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "红十字国际委员会与尼日利亚护理委员会合作开发暴力降级课程",
+   "summary_zh": "红十字国际委员会（ICRC）支持尼日利亚护理与助产士委员会（NMCN）开发一门关于预防医疗场所暴力的持续专业发展课程。ICRC代表团副团长James Matthews在阿布贾举行的为期三天研讨会上表示，该支持旨在为医护人员、患者和社区创造更安全的环境。NMCN注册主任Ndagi Alhassan指出，医护人员面临攻击、威胁、敌意等可能升级为暴力的情形，需要具备相应的沟通和干预技能。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "红十字国际委员会支持尼日利亚护理与助产士委员会开发预防医疗场所暴力的持续专业发展课程",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The International Committee of the Red Cross (ICRC) has supported the Nursing and Midwifery Council of Nigeria (NMCN) to develop a Continuing Professional Development (CPD) course on preventing violence in Nigeria."
+    },
+    {
+     "fact": "为期三天的研讨会在阿布贾举行，旨在开发针对执业护士的暴力降级课程",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Matthews said this on Wednesday in Abuja at a three-day workshop organised by the NMCN to develop the CPD course on De-escalation of Violence in Healthcare Settings specifically for practising nurses."
+    },
+    {
+     "fact": "尼日利亚医护人员面临攻击、威胁、敌意、情绪困扰、过度拥挤和冲突等可能升级为暴力的情形",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Alhassan said healthcare workers in facilities faced aggression, threats, hostility, emotional distress, overcrowding and conflict, among circumstances capable of escalating into violence"
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "红十字国际委员会与尼日利亚护理委员会合作开发暴力降级课程",
+   "summary_zh": "红十字国际委员会（ICRC）支持尼日利亚护理与助产士委员会（NMCN）开发一门关于预防医疗场所暴力的持续专业发展课程。ICRC代表团副团长James Matthews在阿布贾举行的为期三天研讨会上表示，该支持旨在为医护人员、患者和社区创造更安全的环境。NMCN注册主任Ndagi Alhassan指出，医护人员面临攻击、威胁、敌意等可能升级为暴力的情形，需要具备相应的沟通和干预技能。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "红十字国际委员会支持尼日利亚护理与助产士委员会开发预防医疗场所暴力的持续专业发展课程",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The International Committee of the Red Cross (ICRC) has supported the Nursing and Midwifery Council of Nigeria (NMCN) to develop a Continuing Professional Development (CPD) course on preventing violence in Nigeria."
+    },
+    {
+     "fact": "为期三天的研讨会在阿布贾举行，旨在开发针对执业护士的暴力降级课程",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Matthews said this on Wednesday in Abuja at a three-day workshop organised by the NMCN to develop the CPD course on De-escalation of Violence in Healthcare Settings specifically for practising nurses."
+    },
+    {
+     "fact": "尼日利亚医护人员面临攻击、威胁、敌意、情绪困扰、过度拥挤和冲突等可能升级为暴力的情形",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Alhassan said healthcare workers in facilities faced aggression, threats, hostility, emotional distress, overcrowding and conflict, among circumstances capable of escalating into violence"
+    }
+   ],
+   "uncertainties": [
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_b105866ccb418eea",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
