@@ -1,0 +1,115 @@
+{
+ "label": "S6c769885",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f631926d13bff6757167755ae7426d0b8c4fad6cc5869075a44f4dca979557b5",
+ "tokens": {
+  "input_tokens": 2742,
+  "output_tokens": 429,
+  "total_tokens": 3171
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "加纳教师罢工持续，谈判破裂后进入第二周",
+   "summary_zh": "加纳教师罢工进入第二周，10月6日（周二）的谈判未达成协议，讨论定于本周三继续。教师要求支付晋升后未兑现的加薪，并呼吁为贫困地区教师发放20%补贴。政府承诺在10月30日前支付欠款，但称处理档案存在困难。",
+   "event_type": "civil_unrest",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Au Ghana"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳教师罢工进入第二周，10月6日谈判未达成协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Ghana, la grève des enseignants se poursuit pour une deuxième semaine. Les négociations de mardi 6 octobre se sont terminées sans accord"
+    },
+    {
+     "fact": "据全国教师协会称，约8万名教师今年获得晋升但未获相应加薪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon l'Association nationale des enseignants, environ 80 000 professeurs ont accédé à un grade supérieur cette année, sans toucher l'augmentation qui va avec"
+    },
+    {
+     "fact": "工会要求为贫困地区教师发放20%补贴",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les syndicats réclament une indemnité de 20 % pour les enseignants des zones défavorisées"
+    },
+    {
+     "fact": "政府承诺在10月30日前支付欠款",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement promet de verser les sommes dues avant le 30 octobre"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（RFI）报道，尚缺乏交叉验证",
+    "政府称因档案处理困难导致加薪延迟，该说法未获独立证实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "加纳教师罢工持续，谈判破裂后进入第二周",
+   "summary_zh": "加纳教师罢工进入第二周，10月6日（周二）的谈判未达成协议，讨论定于本周三继续。教师要求支付晋升后未兑现的加薪，并呼吁为贫困地区教师发放20%补贴。政府承诺在10月30日前支付欠款，但称处理档案存在困难。",
+   "event_type": "civil_unrest",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Au Ghana"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳教师罢工进入第二周，10月6日谈判未达成协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Ghana, la grève des enseignants se poursuit pour une deuxième semaine. Les négociations de mardi 6 octobre se sont terminées sans accord"
+    },
+    {
+     "fact": "据全国教师协会称，约8万名教师今年获得晋升但未获相应加薪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon l'Association nationale des enseignants, environ 80 000 professeurs ont accédé à un grade supérieur cette année, sans toucher l'augmentation qui va avec"
+    },
+    {
+     "fact": "工会要求为贫困地区教师发放20%补贴",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les syndicats réclament une indemnité de 20 % pour les enseignants des zones défavorisées"
+    },
+    {
+     "fact": "政府承诺在10月30日前支付欠款",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement promet de verser les sommes dues avant le 30 octobre"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（RFI）报道，尚缺乏交叉验证",
+    "政府称因档案处理困难导致加薪延迟，该说法未获独立证实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_390ac8ed6c769885",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

@@ -1,0 +1,113 @@
+{
+ "label": "S2bac72ad",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "26019305c7c01af12bdaf80669b609539fcfff7319d091670ac65851c1c9c40c",
+ "tokens": {
+  "input_tokens": 2158,
+  "output_tokens": 511,
+  "total_tokens": 2669
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "洪水与冲突致方加克社区难以获得医疗服务",
+   "summary_zh": "据无国界医生组织报告，南苏丹琼莱州方加克县的社区因多年洪水、流离失所和冲突而难以获得医疗服务。居民称洪水摧毁了房屋、农田和牲畜，迫使家庭迁往高地。无国界医生表示其位于老方加克的医院于2025年5月遭空袭被毁，造成7人死亡、27人受伤。该组织于2026年2月在方加克启动社区辅助医疗项目以改善医疗可及性。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "琼莱州",
+    "city": "方加克县",
+    "site": "老方加克",
+    "raw_text": "Fangak County in Jonglei State"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹琼莱州方加克县社区因洪水、流离失所和冲突难以获得医疗服务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Communities in Fangak County in Jonglei State are struggling to access healthcare after years of flooding, displacement and conflict, according to a report by Médecins Sans Frontières (MSF)."
+    },
+    {
+     "fact": "无国界医生位于老方加克的医院于2025年5月遭空袭被毁，造成7人死亡、27人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "MSF said its hospital in Old Fangak was destroyed in an aerial attack in May 2025, killing seven people and injuring 27 others."
+    },
+    {
+     "fact": "该医院此前服务超过11万人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The hospital had served more than 110,000 people."
+    },
+    {
+     "fact": "无国界医生于2026年2月在方加克启动社区辅助医疗项目，覆盖四个区域，惠及超过2.5万人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "MSF launched a community paramedicine programme in Fangak in February 2026. The programme provides basic medical care, maternal healthcare and referrals across four areas, reaching more than 25,000 people."
+    }
+   ],
+   "uncertainties": [
+    "事件信息目前仅来自单一来源（Radio Tamazuj）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "洪水与冲突致方加克社区难以获得医疗服务",
+   "summary_zh": "据无国界医生组织报告，南苏丹琼莱州方加克县的社区因多年洪水、流离失所和冲突而难以获得医疗服务。居民称洪水摧毁了房屋、农田和牲畜，迫使家庭迁往高地。无国界医生表示其位于老方加克的医院于2025年5月遭空袭被毁，造成7人死亡、27人受伤。该组织于2026年2月在方加克启动社区辅助医疗项目以改善医疗可及性。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "琼莱州",
+    "city": "方加克县",
+    "site": "老方加克",
+    "raw_text": "Fangak County in Jonglei State"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹琼莱州方加克县社区因洪水、流离失所和冲突难以获得医疗服务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Communities in Fangak County in Jonglei State are struggling to access healthcare after years of flooding, displacement and conflict, according to a report by Médecins Sans Frontières (MSF)."
+    },
+    {
+     "fact": "无国界医生位于老方加克的医院于2025年5月遭空袭被毁，造成7人死亡、27人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "MSF said its hospital in Old Fangak was destroyed in an aerial attack in May 2025, killing seven people and injuring 27 others."
+    },
+    {
+     "fact": "该医院此前服务超过11万人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The hospital had served more than 110,000 people."
+    },
+    {
+     "fact": "无国界医生于2026年2月在方加克启动社区辅助医疗项目，覆盖四个区域，惠及超过2.5万人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "MSF launched a community paramedicine programme in Fangak in February 2026. The programme provides basic medical care, maternal healthcare and referrals across four areas, reaching more than 25,000 people."
+    }
+   ],
+   "uncertainties": [
+    "事件信息目前仅来自单一来源（Radio Tamazuj）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_de234cd42bac72ad",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

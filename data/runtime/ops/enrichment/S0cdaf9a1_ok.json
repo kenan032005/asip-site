@@ -1,0 +1,105 @@
+{
+ "label": "S0cdaf9a1",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "46bad9b32233dfb427e3e74f948aa46026a37d74bf781ff3d6b942ad718a26df",
+ "tokens": {
+  "input_tokens": 2364,
+  "output_tokens": 357,
+  "total_tokens": 2721
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "以色列人纪念10月7日三周年，巴勒斯坦人哀悼加沙遭破坏",
+   "summary_zh": "以色列人在加沙边境附近一个基布兹举行默哀，纪念三年前遭哈马斯武装人员袭击的遇难者。该袭击引发了以色列对加沙的军事行动，并使中东陷入战争。巴勒斯坦人则哀悼加沙遭受的破坏。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ISR",
+   "location": {
+    "country_iso3": "ISR",
+    "admin1": null,
+    "city": null,
+    "site": "加沙边境附近的一个基布兹",
+    "raw_text": "a kibbutz near the Gaza border"
+   },
+   "key_facts": [
+    {
+     "fact": "以色列人在加沙边境附近一个基布兹举行默哀，纪念10月7日袭击三周年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Israelis gathered in silence on Wednesday in a ​kibbutz near the Gaza border that was overrun by Hamas militants on October 7 three years ago, mourning victims of attacks"
+    },
+    {
+     "fact": "该袭击引发以色列对加沙的军事行动，并使中东陷入战争",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "attacks that set off Israel's assault in ‌Gaza and plunged the Middle East into war"
+    },
+    {
+     "fact": "巴勒斯坦人哀悼加沙遭受的破坏",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Palestinians mourn Gaza’s destruction"
+    }
+   ],
+   "uncertainties": [
+    "事件为单一来源报道，尚缺乏交叉验证",
+    "不同来源在时间上存在差异"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "以色列人纪念10月7日三周年，巴勒斯坦人哀悼加沙遭破坏",
+   "summary_zh": "以色列人在加沙边境附近一个基布兹举行默哀，纪念三年前遭哈马斯武装人员袭击的遇难者。该袭击引发了以色列对加沙的军事行动，并使中东陷入战争。巴勒斯坦人则哀悼加沙遭受的破坏。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ISR",
+   "location": {
+    "country_iso3": "ISR",
+    "admin1": null,
+    "city": null,
+    "site": "加沙边境附近的一个基布兹",
+    "raw_text": "a kibbutz near the Gaza border"
+   },
+   "key_facts": [
+    {
+     "fact": "以色列人在加沙边境附近一个基布兹举行默哀，纪念10月7日袭击三周年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Israelis gathered in silence on Wednesday in a ​kibbutz near the Gaza border that was overrun by Hamas militants on October 7 three years ago, mourning victims of attacks"
+    },
+    {
+     "fact": "该袭击引发以色列对加沙的军事行动，并使中东陷入战争",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "attacks that set off Israel's assault in ‌Gaza and plunged the Middle East into war"
+    },
+    {
+     "fact": "巴勒斯坦人哀悼加沙遭受的破坏",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Palestinians mourn Gaza’s destruction"
+    }
+   ],
+   "uncertainties": [
+    "事件为单一来源报道，尚缺乏交叉验证",
+    "不同来源在时间上存在差异"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_af68af830cdaf9a1",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

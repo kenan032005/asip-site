@@ -1,0 +1,113 @@
+{
+ "label": "S73806a9b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d091acab2aae8b5b783e40b998384df958ca09e74a9ad424c6a7e698e8452079",
+ "tokens": {
+  "input_tokens": 2204,
+  "output_tokens": 512,
+  "total_tokens": 2716
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚联邦首都区工人开始无限期罢工，学校、医院等机构关闭",
+   "summary_zh": "尼日利亚劳工大会联邦首都区理事会指示联邦首都区行政部门所有工人，包括私营部门工人，自周三起开始无限期罢工。此举是在向联邦首都区部长Nyesom Wike发出的七天最后通牒到期后作出的，涉及未解决的劳资纠纷及影响教师的政策不满。理事会主席Knabayi Adalo表示，罢工是因政府未满足工人诉求而必要采取的行动。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Federal Capital Territory",
+    "city": null,
+    "site": null,
+    "raw_text": "Federal Capital Territory (FCT)"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚劳工大会联邦首都区理事会指示所有工人自周三起开始无限期罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "THE Nigeria Labour Congress (NLC), Federal Capital Territory (FCT) Council, has directed all workers in the FCT Administration, including those in the private sector, to commence an indefinite strike from Wednesday."
+    },
+    {
+     "fact": "罢工起因是向联邦首都区部长Nyesom Wike发出的七天最后通牒到期，涉及未解决的劳资纠纷和影响教师的政策不满",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The directive followed the expiration of a seven-day ultimatum issued to the Minister of the FCT, Nyesom Wike, over unresolved labour disputes and policy grievances affecting teachers."
+    },
+    {
+     "fact": "理事会主席Knabayi Adalo表示，罢工是因联邦首都区行政部门未能满足工人诉求而必要采取的行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Adalo explained that the industrial action became necessary after the FCT Administration failed to meet the workers’ demands."
+    },
+    {
+     "fact": "工人诉求包括废除教师晋升的空缺前提条件，以及立即撤回向教育秘书处下属机构主任发出的调职和降职信",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He identified one of the demands as the abolition of the vacancy precondition for teachers’ promotions... He also demanded the immediate withdrawal of redeployment and demotion letters issued to directors in agencies under the Education Secretariat"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚未获得交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚联邦首都区工人开始无限期罢工，学校、医院等机构关闭",
+   "summary_zh": "尼日利亚劳工大会联邦首都区理事会指示联邦首都区行政部门所有工人，包括私营部门工人，自周三起开始无限期罢工。此举是在向联邦首都区部长Nyesom Wike发出的七天最后通牒到期后作出的，涉及未解决的劳资纠纷及影响教师的政策不满。理事会主席Knabayi Adalo表示，罢工是因政府未满足工人诉求而必要采取的行动。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Federal Capital Territory",
+    "city": null,
+    "site": null,
+    "raw_text": "Federal Capital Territory (FCT)"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚劳工大会联邦首都区理事会指示所有工人自周三起开始无限期罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "THE Nigeria Labour Congress (NLC), Federal Capital Territory (FCT) Council, has directed all workers in the FCT Administration, including those in the private sector, to commence an indefinite strike from Wednesday."
+    },
+    {
+     "fact": "罢工起因是向联邦首都区部长Nyesom Wike发出的七天最后通牒到期，涉及未解决的劳资纠纷和影响教师的政策不满",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The directive followed the expiration of a seven-day ultimatum issued to the Minister of the FCT, Nyesom Wike, over unresolved labour disputes and policy grievances affecting teachers."
+    },
+    {
+     "fact": "理事会主席Knabayi Adalo表示，罢工是因联邦首都区行政部门未能满足工人诉求而必要采取的行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Adalo explained that the industrial action became necessary after the FCT Administration failed to meet the workers’ demands."
+    },
+    {
+     "fact": "工人诉求包括废除教师晋升的空缺前提条件，以及立即撤回向教育秘书处下属机构主任发出的调职和降职信",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He identified one of the demands as the abolition of the vacancy precondition for teachers’ promotions... He also demanded the immediate withdrawal of redeployment and demotion letters issued to directors in agencies under the Education Secretariat"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚未获得交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_0fcf703f73806a9b",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

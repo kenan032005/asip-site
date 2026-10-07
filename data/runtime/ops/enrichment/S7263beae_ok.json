@@ -1,0 +1,138 @@
+{
+ "label": "S7263beae",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "2949c978b4f94fb0c652a9356b04020a8fda53bc9010940bb6bee9db7c558a70",
+ "tokens": {
+  "input_tokens": 2587,
+  "output_tokens": 593,
+  "total_tokens": 3180
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"死因尚未最终确定，检方称调查仍在进行\", \"目击者关于出血性疾病的说法为初步证词，尚未证实\", \"事件目前为单一来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"死因尚未最终确定，检方称调查仍在进行\", \"目击者关于出血性疾病的说法为初步证词，尚未证实\", \"事件目前为单一来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得阿贝歇一女子被发现死于阿姆卡米尔干河谷",
+   "summary_zh": "据乍得媒体报道，阿贝歇市第六区阿姆卡米尔干河谷发现一名约三十岁女子死亡，其约两岁幼儿被发现于母亲遗体旁。当地居民称死者可能因出血性疾病致死，检方表示初步勘验显示死者确有出血症状，但死因与具体情形仍在调查中。遗体已被送往阿贝歇大学医院太平间。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "瓦达伊",
+    "city": "阿贝歇",
+    "site": "阿姆卡米尔干河谷（第六区）",
+    "raw_text": "le wadi Amkamil, situé dans le 6ᵉ arrondissement de la ville d’Abéché"
+   },
+   "key_facts": [
+    {
+     "fact": "阿贝歇市第六区阿姆卡米尔干河谷发现一名约三十岁女子死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une femme, âgée d’une trentaine d’années, a été retrouvée sans vie."
+    },
+    {
+     "fact": "死者约两岁的幼儿被发现于母亲遗体旁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À ses côtés, son enfant, âgé d’environ deux ans, a été découvert auprès du corps de sa mère."
+    },
+    {
+     "fact": "当地目击者称死者可能患有出血性疾病，或为死因",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon les premiers témoignages recueillis sur place, la victime aurait souffert d’une maladie liée à une hémorragie, qui pourrait être à l’origine de son décès."
+    },
+    {
+     "fact": "检方称初步勘验显示死者确有出血症状，但死因与情形仍在调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les premières constatations font ressortir que la défunte souffrait effectivement d’une hémorragie. Toutefois, précise-t-il, l’enquête se poursuit afin de déterminer avec exactitude les circonstances et les causes du décès."
+    },
+    {
+     "fact": "遗体被送往阿贝歇大学医院太平间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le corps de la victime a été transporté à la morgue du Centre hospitalier universitaire d’Abéché"
+    }
+   ],
+   "uncertainties": [
+    "死因尚未最终确定，检方称调查仍在进行",
+    "目击者关于出血性疾病的说法为初步证词，尚未证实",
+    "事件目前为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得阿贝歇一女子被发现死于阿姆卡米尔干河谷",
+   "summary_zh": "据乍得媒体报道，阿贝歇市第六区阿姆卡米尔干河谷发现一名约三十岁女子死亡，其约两岁幼儿被发现于母亲遗体旁。当地居民称死者可能因出血性疾病致死，检方表示初步勘验显示死者确有出血症状，但死因与具体情形仍在调查中。遗体已被送往阿贝歇大学医院太平间。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "瓦达伊",
+    "city": "阿贝歇",
+    "site": "阿姆卡米尔干河谷（第六区）",
+    "raw_text": "le wadi Amkamil, situé dans le 6ᵉ arrondissement de la ville d’Abéché"
+   },
+   "key_facts": [
+    {
+     "fact": "阿贝歇市第六区阿姆卡米尔干河谷发现一名约三十岁女子死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une femme, âgée d’une trentaine d’années, a été retrouvée sans vie."
+    },
+    {
+     "fact": "死者约两岁的幼儿被发现于母亲遗体旁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À ses côtés, son enfant, âgé d’environ deux ans, a été découvert auprès du corps de sa mère."
+    },
+    {
+     "fact": "当地目击者称死者可能患有出血性疾病，或为死因",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon les premiers témoignages recueillis sur place, la victime aurait souffert d’une maladie liée à une hémorragie, qui pourrait être à l’origine de son décès."
+    },
+    {
+     "fact": "检方称初步勘验显示死者确有出血症状，但死因与情形仍在调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les premières constatations font ressortir que la défunte souffrait effectivement d’une hémorragie. Toutefois, précise-t-il, l’enquête se poursuit afin de déterminer avec exactitude les circonstances et les causes du décès."
+    },
+    {
+     "fact": "遗体被送往阿贝歇大学医院太平间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le corps de la victime a été transporté à la morgue du Centre hospitalier universitaire d’Abéché"
+    }
+   ],
+   "uncertainties": [
+    "死因尚未最终确定，检方称调查仍在进行",
+    "目击者关于出血性疾病的说法为初步证词，尚未证实",
+    "事件目前为单一来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_bf2b8a357263beae",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
