@@ -1,0 +1,148 @@
+{
+ "label": "S9119c03f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "8794b89eec36887c107635bf16be147ffe61d621b4b8692ac091b37665154b2f",
+ "tokens": {
+  "input_tokens": 2521,
+  "output_tokens": 589,
+  "total_tokens": 3110
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"患者是否因服药掩盖症状而通过筛查，仅为肯尼亚卫生部官员的说法，尚未证实\", \"非洲疾控中心正在调查该病例，调查结果尚未公布\", \"肯尼亚医生工会代表称边境存在疏漏，属其个人观察，未获官方确认\"]",
+    "after": "[\"患者是否因服药掩盖症状而通过筛查，仅为肯尼亚卫生部官员的说法，尚未证实\", \"非洲疾控中心正在调查该病例，调查结果尚未公布\", \"肯尼亚医生工会代表称边境存在疏漏，属其个人观察，未获官方确认\", \"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "肯尼亚首例埃博拉病例相关十人被隔离，筛查担忧加剧",
+   "summary_zh": "肯尼亚卫生官员称，与一名死于埃博拉的男子有过接触的十人已被隔离，当局正试图追踪另外57名接触者。该患者从刚果（金）出发，途经乌干达，最终飞抵内罗毕，其间病情未被发现。非洲疾控中心负责人对筛查措施提出质疑，肯尼亚当局则呼吁民众不要恐慌。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": "内罗毕",
+    "site": null,
+    "raw_text": "Nairobi, Kenya; patient travelled from Buta, DR Congo via Kisangani, Beni, Uganda"
+   },
+   "key_facts": [
+    {
+     "fact": "与肯尼亚首例埃博拉死亡病例接触的十人被隔离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ten people who came into contact with a man who died of Ebola in Kenya have been quarantined, health officials in the East African nation say."
+    },
+    {
+     "fact": "当局正试图追踪另外57名接触者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "They are also trying to trace 57 other contacts of the Kenyan patient after he travelled from the Democratic Republic of Congo, dying in hospital in Nairobi on Monday."
+    },
+    {
+     "fact": "该患者从刚果（金）出发，途经乌干达，最终飞抵内罗毕，其间病情未被发现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the patient passed through multiple cities in DR Congo, driving to Uganda and eventually flying to Kenya without his sickness being detected"
+    },
+    {
+     "fact": "非洲疾控中心负责人对筛查措施提出质疑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "What are symptoms he was presenting? Why was he not detected? he asked."
+    },
+    {
+     "fact": "肯尼亚当局呼吁民众不要恐慌，并加强机场和边境口岸监测",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kenyan authorities have urged people not to panic, with the health ministry assuring of heightened surveillance at airports and border crossings."
+    },
+    {
+     "fact": "今年刚果（金）已有超过4000人死于埃博拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than 4,000 people have died from Ebola in DR Congo this year, in what is the second most deadly known outbreak of the disease."
+    }
+   ],
+   "uncertainties": [
+    "患者是否因服药掩盖症状而通过筛查，仅为肯尼亚卫生部官员的说法，尚未证实",
+    "非洲疾控中心正在调查该病例，调查结果尚未公布",
+    "肯尼亚医生工会代表称边境存在疏漏，属其个人观察，未获官方确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "肯尼亚首例埃博拉病例相关十人被隔离，筛查担忧加剧",
+   "summary_zh": "肯尼亚卫生官员称，与一名死于埃博拉的男子有过接触的十人已被隔离，当局正试图追踪另外57名接触者。该患者从刚果（金）出发，途经乌干达，最终飞抵内罗毕，其间病情未被发现。非洲疾控中心负责人对筛查措施提出质疑，肯尼亚当局则呼吁民众不要恐慌。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": "内罗毕",
+    "site": null,
+    "raw_text": "Nairobi, Kenya; patient travelled from Buta, DR Congo via Kisangani, Beni, Uganda"
+   },
+   "key_facts": [
+    {
+     "fact": "与肯尼亚首例埃博拉死亡病例接触的十人被隔离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ten people who came into contact with a man who died of Ebola in Kenya have been quarantined, health officials in the East African nation say."
+    },
+    {
+     "fact": "当局正试图追踪另外57名接触者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "They are also trying to trace 57 other contacts of the Kenyan patient after he travelled from the Democratic Republic of Congo, dying in hospital in Nairobi on Monday."
+    },
+    {
+     "fact": "该患者从刚果（金）出发，途经乌干达，最终飞抵内罗毕，其间病情未被发现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the patient passed through multiple cities in DR Congo, driving to Uganda and eventually flying to Kenya without his sickness being detected"
+    },
+    {
+     "fact": "非洲疾控中心负责人对筛查措施提出质疑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "What are symptoms he was presenting? Why was he not detected? he asked."
+    },
+    {
+     "fact": "肯尼亚当局呼吁民众不要恐慌，并加强机场和边境口岸监测",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kenyan authorities have urged people not to panic, with the health ministry assuring of heightened surveillance at airports and border crossings."
+    },
+    {
+     "fact": "今年刚果（金）已有超过4000人死于埃博拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than 4,000 people have died from Ebola in DR Congo this year, in what is the second most deadly known outbreak of the disease."
+    }
+   ],
+   "uncertainties": [
+    "患者是否因服药掩盖症状而通过筛查，仅为肯尼亚卫生部官员的说法，尚未证实",
+    "非洲疾控中心正在调查该病例，调查结果尚未公布",
+    "肯尼亚医生工会代表称边境存在疏漏，属其个人观察，未获官方确认",
+    "据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_7aaa706f9119c03f",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

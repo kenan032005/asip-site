@@ -1,0 +1,136 @@
+{
+ "label": "Sa8302515",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "97579a77d7c781a94aa78c96d810cd03a8b07c623b970396d33c5bfe32eb86eb",
+ "tokens": {
+  "input_tokens": 2877,
+  "output_tokens": 572,
+  "total_tokens": 3449
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"事件为单一来源报道（RFI），尚缺乏其他独立来源交叉验证\", \"被扣出租车的确切数量为“超过3000辆”，具体数字未获官方确认\"]",
+    "after": "[\"事件为单一来源报道（RFI），尚缺乏其他独立来源交叉验证\", \"被扣出租车的确切数量为“超过3000辆”，具体数字未获官方确认\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "喀麦隆雅温得数千辆出租车因不符合新识别规定被扣",
+   "summary_zh": "喀麦隆首都雅温得推行出租车司机集中数据库，要求每辆出租车车门张贴二维码和唯一编号。自本周初起，市政当局进入执法阶段，超过3000辆出租车被执法人员扣留，数百名司机在市政厅外排队。出租车司机工会批评此举为“伏击式治理”，市政厅则指责司机拖延登记。",
+   "event_type": "other_security",
+   "country_iso3": "CMR",
+   "location": {
+    "country_iso3": "CMR",
+    "admin1": null,
+    "city": "雅温得",
+    "site": "市政厅",
+    "raw_text": "Yaoundé, hôtel de ville"
+   },
+   "key_facts": [
+    {
+     "fact": "雅温得市政当局要求出租车张贴二维码和唯一编号以建立司机集中数据库",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La ville de Yaoundé, qui veut créer une base de données centralisée des chauffeurs de taxi, impose désormais des QR codes et des numéros uniques sur les portières de chaque taxi."
+    },
+    {
+     "fact": "自本周初起市政当局进入执法阶段，超过3000辆出租车被扣留",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis le début de la semaine, la mairie de la ville est passée à la phase répressive. Plus de 3 000 taxis ont été mis en fourrière."
+    },
+    {
+     "fact": "数百名司机在市政厅外排队等待办理电子编号和二维码",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des centaines de chauffeurs font la queue devant l'hôtel de ville."
+    },
+    {
+     "fact": "出租车司机工会主席批评此举为“伏击式治理”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ondoua Thomas, qui préside le Syndicat national des conducteurs des transports urbains et interurbains (SYNATURCAM), dénonce ce qu'il qualifie de « gouvernance par embuscade »."
+    },
+    {
+     "fact": "市政厅官员称雅温得约有3万多辆出租车在运营，已登记超过2万辆",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "On pense qu'on a un peu plus de 30 000 taxis en circulation dans la ville de Yaoundé. On a déjà réussi à en enregistrer plus de 20 000."
+    }
+   ],
+   "uncertainties": [
+    "事件为单一来源报道（RFI），尚缺乏其他独立来源交叉验证",
+    "被扣出租车的确切数量为“超过3000辆”，具体数字未获官方确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "喀麦隆雅温得数千辆出租车因不符合新识别规定被扣",
+   "summary_zh": "喀麦隆首都雅温得推行出租车司机集中数据库，要求每辆出租车车门张贴二维码和唯一编号。自本周初起，市政当局进入执法阶段，超过3000辆出租车被执法人员扣留，数百名司机在市政厅外排队。出租车司机工会批评此举为“伏击式治理”，市政厅则指责司机拖延登记。",
+   "event_type": "other_security",
+   "country_iso3": "CMR",
+   "location": {
+    "country_iso3": "CMR",
+    "admin1": null,
+    "city": "雅温得",
+    "site": "市政厅",
+    "raw_text": "Yaoundé, hôtel de ville"
+   },
+   "key_facts": [
+    {
+     "fact": "雅温得市政当局要求出租车张贴二维码和唯一编号以建立司机集中数据库",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La ville de Yaoundé, qui veut créer une base de données centralisée des chauffeurs de taxi, impose désormais des QR codes et des numéros uniques sur les portières de chaque taxi."
+    },
+    {
+     "fact": "自本周初起市政当局进入执法阶段，超过3000辆出租车被扣留",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis le début de la semaine, la mairie de la ville est passée à la phase répressive. Plus de 3 000 taxis ont été mis en fourrière."
+    },
+    {
+     "fact": "数百名司机在市政厅外排队等待办理电子编号和二维码",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des centaines de chauffeurs font la queue devant l'hôtel de ville."
+    },
+    {
+     "fact": "出租车司机工会主席批评此举为“伏击式治理”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ondoua Thomas, qui préside le Syndicat national des conducteurs des transports urbains et interurbains (SYNATURCAM), dénonce ce qu'il qualifie de « gouvernance par embuscade »."
+    },
+    {
+     "fact": "市政厅官员称雅温得约有3万多辆出租车在运营，已登记超过2万辆",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "On pense qu'on a un peu plus de 30 000 taxis en circulation dans la ville de Yaoundé. On a déjà réussi à en enregistrer plus de 20 000."
+    }
+   ],
+   "uncertainties": [
+    "事件为单一来源报道（RFI），尚缺乏其他独立来源交叉验证",
+    "被扣出租车的确切数量为“超过3000辆”，具体数字未获官方确认",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_11b4dbd5a8302515",
+ "disease_event_id": null,
+ "country_code": "CM"
+}

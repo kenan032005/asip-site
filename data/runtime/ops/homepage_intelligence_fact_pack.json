@@ -1,6 +1,6 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-08T12:06:51+08:00",
+ "generated_at": "2026-10-08T13:55:33+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
@@ -8,8 +8,8 @@
  "counts": {
   "signals_24h": 35,
   "signals_7d": 292,
-  "verified_events_24h": 35,
-  "verified_events_7d": 311,
+  "verified_events_24h": 38,
+  "verified_events_7d": 314,
   "multi_source_verified_events_7d": 11,
   "countries_with_activity_24h": 14,
   "total_countries_monitored": 22
@@ -109,7 +109,7 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 21
+   "count": 20
   },
   {
    "value": "武装冲突",
@@ -122,6 +122,10 @@
   {
    "value": "政治危机",
    "count": 2
+  },
+  {
+   "value": "election_security",
+   "count": 1
   },
   {
    "value": "恐怖袭击",
@@ -159,25 +163,10 @@
   },
   {
    "value": "A",
-   "count": 96
+   "count": 99
   }
  ],
  "top_verified_events": [
-  {
-   "fact_id": "EVT_5a6f46dd732e8a33",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "尼日利亚国家紧急事务管理局通过USAR项目应对洪灾",
-   "category": "other_security",
-   "source": "News Agency of Nigeria",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-01 05:09",
-   "importance": "high",
-   "severity": "medium"
-  },
   {
    "fact_id": "EVT_a9c6db913067b752",
    "level": "verified_event",
@@ -252,9 +241,39 @@
    "time": "2026-10-01 10:42",
    "importance": "high",
    "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_c39a9b17ab1a47f2",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "加纳霍霍地区暴雨引发洪水，消防部门救出被困人员",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-01 10:21",
+   "importance": "high",
+   "severity": "medium"
   }
  ],
  "top_signals": [
+  {
+   "fact_id": "news:e1a0de10cc9084e6",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "Weaponising hate in the 2027 Nigerian election",
+   "category": "election_security",
+   "source": "International Centre for Investigative Reporting",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-08 12:50",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   {
    "fact_id": "news:033b65aeb01ef575",
    "level": "news_signal",
@@ -599,21 +618,6 @@
    "time": "2026-10-07 19:46",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:afcff54fbb1a6abb",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "南苏丹",
-   "title": "南苏丹人民国防军称上尼罗河冲突中13名苏丹人民解放军反对派武装人员被打死",
-   "category": "armed_conflict",
-   "source": "Radio Tamazuj",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-07 19:45",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -692,16 +696,31 @@
  ],
  "existing_assessment": {
   "status": "ai",
-  "overall_assessment": "已核实事件方面：埃塞俄比亚与厄立特里亚外交危机升级并断交、提格雷战事加剧（多源）；刚果（金）东部AFC/M23针对FDLR行动被联合国报告指系统性波及平民，东部战斗持续且虚假信息蔓延；南苏丹琼莱州任命看守专员、西赤道州78名被绑架平民获释，洪水致坦布拉流离失所者处境艰难；贝宁韦梅河等多条河流泛滥淹没村镇；加纳教师工会全国罢工持续、议员Baffour Awuah被控洗钱、NAIMOS查获10台非法采矿挖掘机；尼日尔军警高层会晤加强协调。情报信号（单源，尚待核实）：厄立特里亚军队深入提格雷、尼日利亚20名被绑架毕业生及伊莫州20名准服役人员获释、肯尼亚报告首例埃博拉死亡后加强监测（两源）、多哥军人因申请贝宁护照受审。整体风险方向趋于恶化，需持续跟踪。",
+  "overall_assessment": "已核实事件方面，埃塞俄比亚与厄立特里亚断交、提格雷战事加剧（多源），刚果（金）东部AFC/M23行动波及平民及埃博拉疫情持续，南苏丹琼莱州紧张与洪水流离失所并存，加纳教师工会全国罢工延续、议员Baffour Awuah被控洗钱，尼日尔军警高层协调安全战线。情报信号方面，均为单源消息、尚待核实：厄立特里亚军队深入提格雷、尼日利亚20名被绑架毕业生及伊莫州准服役人员获释、2027年选举仇恨动员、肯尼亚报告首例埃博拉死亡后加强监测（两源）。整体风险方向趋于恶化，需持续跟踪萨赫勒—东非冲突带与选举安全。",
   "risk_direction": "worsening",
   "confidence": "medium",
-  "generated_time": "2026-10-08T11:06:39+08:00",
+  "generated_time": "2026-10-08T13:55:24+08:00",
   "based_on": "过去24小时/7日公开信息",
   "model": "",
   "date": "20261008"
  },
- "fact_count": 603,
+ "fact_count": 606,
  "facts": {
+  "news:e1a0de10cc9084e6": {
+   "fact_id": "news:e1a0de10cc9084e6",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "Weaponising hate in the 2027 Nigerian election",
+   "category": "election_security",
+   "source": "International Centre for Investigative Reporting",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-08 12:50",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:033b65aeb01ef575": {
    "fact_id": "news:033b65aeb01ef575",
    "level": "news_signal",
@@ -5066,36 +5085,6 @@
    "time": "2026-10-01 14:05",
    "importance": "low",
    "why_it_matters": ""
-  },
-  "news:bc4b7072a148bf2c": {
-   "fact_id": "news:bc4b7072a148bf2c",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "尼日利亚国家紧急事务管理局通过USAR项目应对洪灾",
-   "category": "other_security",
-   "source": "News Agency of Nigeria",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-01 13:09",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "EVT_5a6f46dd732e8a33": {
-   "fact_id": "EVT_5a6f46dd732e8a33",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "尼日利亚国家紧急事务管理局通过USAR项目应对洪灾",
-   "category": "other_security",
-   "source": "News Agency of Nigeria",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-01 05:09",
-   "importance": "high",
-   "severity": "medium"
   },
   "EVT_a9c6db913067b752": {
    "fact_id": "EVT_a9c6db913067b752",
@@ -9744,6 +9733,66 @@
    "source_tier": "A",
    "source_role": "major_media",
    "time": "2026-10-07 21:30",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_ad17f8de1bba554a": {
+   "fact_id": "EVT_ad17f8de1bba554a",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "刚果（金）",
+   "title": "刚果（金）东部冲突：非洲联盟调解人访问戈马后开启接触但未取得突破",
+   "category": "armed_conflict",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-08 02:40",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_7aaa706f9119c03f": {
+   "fact_id": "EVT_7aaa706f9119c03f",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "刚果（金）",
+   "title": "肯尼亚首例埃博拉病例相关十人被隔离，筛查担忧加剧",
+   "category": "public_health",
+   "source": "BBC News (Africa)",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-07 12:34",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_11b4dbd5a8302515": {
+   "fact_id": "EVT_11b4dbd5a8302515",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "喀麦隆",
+   "title": "喀麦隆雅温得数千辆出租车因不符合新识别规定被扣",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-08 03:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_7c254e13f27b22db": {
+   "fact_id": "EVT_7c254e13f27b22db",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "尼日利亚2027年大选前仇恨情绪被武器化引担忧",
+   "category": "election_security",
+   "source": "International Centre for Investigative Reporting",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-08 04:50",
    "importance": "high",
    "severity": "medium"
   }
