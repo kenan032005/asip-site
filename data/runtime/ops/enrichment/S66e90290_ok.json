@@ -1,0 +1,127 @@
+{
+ "label": "S66e90290",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ad432af95d4550cfa888d1ee6de406514d621a8dd8c2e39e89c8a438660b55eb",
+ "tokens": {
+  "input_tokens": 2458,
+  "output_tokens": 492,
+  "total_tokens": 2950
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹为接收美国驱逐的八名第三国国民辩护",
+   "summary_zh": "南苏丹政府为其接收八名被美国驱逐人员（含一名南苏丹公民）的决定进行辩护，此前该决定在国内受到批评。外交部称这八人于7月5日抵达朱巴国际机场，属美方“标准驱逐程序”，目前正接受相关部门审查。美方官员表示，其中多数人的原籍国拒绝接收他们。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": null,
+    "city": "朱巴",
+    "site": "朱巴国际机场",
+    "raw_text": "Juba International Airport"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹政府为接收八名被美国驱逐人员辩护",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South Sudan’s government has defended its decision to receive third-country nationals and one South Sudanese citizen recently deported from the United States"
+    },
+    {
+     "fact": "八人于7月5日抵达朱巴国际机场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the eight individuals arrived at Juba International Airport on July 5 as part of “standard deportation procedures” conducted by the U.S. government"
+    },
+    {
+     "fact": "被驱逐者中仅一人来自南苏丹，其余为缅甸、古巴、越南、老挝和墨西哥国民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Only one of the eight individuals is from South Sudan, while the others are nationals of Myanmar, Cuba, Vietnam, Laos, and Mexico"
+    },
+    {
+     "fact": "美方官员称多数人的原籍国拒绝接收他们",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "U.S. officials said most of their home countries had refused to accept them"
+    },
+    {
+     "fact": "被驱逐者因谋杀、性侵和抢劫等罪行被定罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The deportees , convicted of crimes including murder, sexual assault, and robbery, had either completed or were nearing the end of their prison sentences"
+    }
+   ],
+   "uncertainties": [
+    "被驱逐者最初身份状态不明",
+    "南苏丹与美方协议的具体条款尚未明确",
+    "该报道为单一来源，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹为接收美国驱逐的八名第三国国民辩护",
+   "summary_zh": "南苏丹政府为其接收八名被美国驱逐人员（含一名南苏丹公民）的决定进行辩护，此前该决定在国内受到批评。外交部称这八人于7月5日抵达朱巴国际机场，属美方“标准驱逐程序”，目前正接受相关部门审查。美方官员表示，其中多数人的原籍国拒绝接收他们。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": null,
+    "city": "朱巴",
+    "site": "朱巴国际机场",
+    "raw_text": "Juba International Airport"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹政府为接收八名被美国驱逐人员辩护",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South Sudan’s government has defended its decision to receive third-country nationals and one South Sudanese citizen recently deported from the United States"
+    },
+    {
+     "fact": "八人于7月5日抵达朱巴国际机场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the eight individuals arrived at Juba International Airport on July 5 as part of “standard deportation procedures” conducted by the U.S. government"
+    },
+    {
+     "fact": "被驱逐者中仅一人来自南苏丹，其余为缅甸、古巴、越南、老挝和墨西哥国民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Only one of the eight individuals is from South Sudan, while the others are nationals of Myanmar, Cuba, Vietnam, Laos, and Mexico"
+    },
+    {
+     "fact": "美方官员称多数人的原籍国拒绝接收他们",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "U.S. officials said most of their home countries had refused to accept them"
+    },
+    {
+     "fact": "被驱逐者因谋杀、性侵和抢劫等罪行被定罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The deportees , convicted of crimes including murder, sexual assault, and robbery, had either completed or were nearing the end of their prison sentences"
+    }
+   ],
+   "uncertainties": [
+    "被驱逐者最初身份状态不明",
+    "南苏丹与美方协议的具体条款尚未明确",
+    "该报道为单一来源，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_937d0d3a66e90290",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

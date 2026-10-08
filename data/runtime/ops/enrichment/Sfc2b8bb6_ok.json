@@ -1,0 +1,104 @@
+{
+ "label": "Sfc2b8bb6",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "188d8f5f17f461768de8c65cb33181c4d66c7f6adab23bed2c97d3b0afb41eac",
+ "tokens": {
+  "input_tokens": 2149,
+  "output_tokens": 300,
+  "total_tokens": 2449
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"该事件目前仅有一个来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"该事件目前仅有一个来源报道，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳总统马哈马就尼日利亚坠机致25人遇难致哀",
+   "summary_zh": "加纳总统约翰·德拉马尼·马哈马代表加纳政府和人民，就尼日利亚翁多州伊格博科达发生的坠机事故向尼日利亚表示深切哀悼。该事故造成25人遇难。目前该消息为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "翁多州",
+    "city": "伊格博科达",
+    "site": null,
+    "raw_text": "Igbokoda, Ondo State"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚翁多州伊格博科达发生坠机事故，造成25人遇难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a plane crash in Igbokoda, Ondo State, which claimed 25 lives"
+    },
+    {
+     "fact": "加纳总统马哈马代表加纳政府和人民向尼日利亚致哀",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "President John Dramani Mahama, on behalf of the Government and people of Ghana, has expressed deep condolences to Nigeria"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳总统马哈马就尼日利亚坠机致25人遇难致哀",
+   "summary_zh": "加纳总统约翰·德拉马尼·马哈马代表加纳政府和人民，就尼日利亚翁多州伊格博科达发生的坠机事故向尼日利亚表示深切哀悼。该事故造成25人遇难。目前该消息为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "翁多州",
+    "city": "伊格博科达",
+    "site": null,
+    "raw_text": "Igbokoda, Ondo State"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚翁多州伊格博科达发生坠机事故，造成25人遇难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a plane crash in Igbokoda, Ondo State, which claimed 25 lives"
+    },
+    {
+     "fact": "加纳总统马哈马代表加纳政府和人民向尼日利亚致哀",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "President John Dramani Mahama, on behalf of the Government and people of Ghana, has expressed deep condolences to Nigeria"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_8e260483fc2b8bb6",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

@@ -1,17 +1,17 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-09T01:10:47+08:00",
+ "generated_at": "2026-10-09T02:56:19+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 23,
-  "signals_7d": 265,
-  "verified_events_24h": 24,
-  "verified_events_7d": 281,
+  "signals_24h": 24,
+  "signals_7d": 267,
+  "verified_events_24h": 35,
+  "verified_events_7d": 293,
   "multi_source_verified_events_7d": 11,
-  "countries_with_activity_24h": 12,
+  "countries_with_activity_24h": 14,
   "total_countries_monitored": 22
  },
  "countries_24h": [
@@ -22,9 +22,11 @@
   "刚果（金）",
   "南苏丹",
   "喀麦隆",
+  "埃及",
   "埃塞俄比亚",
   "尼日利亚",
   "尼日尔",
+  "科特迪瓦",
   "莫桑比克",
   "贝宁"
  ],
@@ -47,6 +49,7 @@
   "尼日利亚",
   "尼日尔",
   "斯威士兰",
+  "科特迪瓦",
   "突尼斯",
   "肯尼亚",
   "苏丹",
@@ -59,18 +62,18 @@
  "country_distribution_7d": [
   {
    "value": "尼日利亚",
-   "count": 64
+   "count": 65
   },
   {
    "value": "加纳",
    "count": 53
   },
   {
-   "value": "乍得",
-   "count": 31
+   "value": "埃塞俄比亚",
+   "count": 32
   },
   {
-   "value": "埃塞俄比亚",
+   "value": "乍得",
    "count": 31
   },
   {
@@ -109,7 +112,7 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 12
+   "count": 13
   },
   {
    "value": "武装冲突",
@@ -139,15 +142,15 @@
  "source_tier_distribution_7d": [
   {
    "value": "B",
-   "count": 269
+   "count": 278
   },
   {
    "value": "C",
-   "count": 179
+   "count": 182
   },
   {
    "value": "A",
-   "count": 98
+   "count": 100
   }
  ],
  "top_verified_events": [
@@ -212,21 +215,6 @@
    "severity": "medium"
   },
   {
-   "fact_id": "EVT_2cfdd54031dfe714",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得阿贝歇2026-2027学年开学以双语教育为主题",
-   "category": "political_crisis",
-   "source": "Alwihda Info",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-01 17:16",
-   "importance": "high",
-   "severity": "medium"
-  },
-  {
    "fact_id": "EVT_59d1f0f4aedb0926",
    "level": "verified_event",
    "evidence_tier": "single_source_published",
@@ -240,9 +228,54 @@
    "time": "2026-10-02 00:35",
    "importance": "high",
    "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_1617c3f47b4589b6",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "刚果（金）",
+   "title": "联合国报告：AFC/M23针对FDLR的军事行动系统性波及平民",
+   "category": "civil_unrest",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-02 04:36",
+   "importance": "high",
+   "severity": "medium"
   }
  ],
  "top_signals": [
+  {
+   "fact_id": "news:bb2ce1c795a24c1e",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Mongo : mobilisation pour une opération de salubrité à l’université polytechnique",
+   "category": "other_security",
+   "source": "Tchadinfos",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-09 00:30",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:4e14b74d469ff805",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "Abductors of corps members in Imo collected ransom in dollars – Family",
+   "category": "other_security",
+   "source": "International Centre for Investigative Reporting",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-08 22:31",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   {
    "fact_id": "news:e29058095a29f3e8",
    "level": "news_signal",
@@ -499,6 +532,21 @@
    "why_it_matters": ""
   },
   {
+   "fact_id": "news:ea254030aea43667",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "Ethiopian drones strike Eritrean forces near Adigrat",
+   "category": "armed_conflict",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-08 08:00",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
    "fact_id": "news:033b65aeb01ef575",
    "level": "news_signal",
    "evidence_tier": "news_signal",
@@ -555,51 +603,6 @@
    "source_tier": "A",
    "source_role": "major_media",
    "time": "2026-10-08 04:31",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:05d8c65e06d65e00",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "厄立特里亚军队深入埃塞俄比亚提格雷地区，战斗升级",
-   "category": "armed_conflict",
-   "source": "BBC News (Africa)",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-08 02:37",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:01617c88858c9db8",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "尼日利亚伊莫州20名被绑架准服役人员获释",
-   "category": "other_security",
-   "source": "International Centre for Investigative Reporting",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-08 02:21",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:9eb778ff03ce51cc",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "恩贾梅纳发生摩托车与行人严重碰撞事故",
-   "category": "other_security",
-   "source": "Alwihda Info",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-08 01:02",
    "importance": "low",
    "why_it_matters": ""
   }
@@ -680,16 +683,46 @@
  ],
  "existing_assessment": {
   "status": "ai",
-  "overall_assessment": "已核实事件方面，埃塞俄比亚与厄立特里亚断交、提格雷战事加剧并围绕默克莱机场反复易手，构成当前最突出的国家间冲突风险；刚果（金）东部AFC/M23行动波及平民、埃博拉死亡人数突破4000人并启动暴露后药物试验；乍得四省及恩贾梅纳报告登革热；几内亚比绍军政府以安全为由阻止前总统恩巴洛回国；加纳教师工会全国罢工持续，并伴随议员洗钱指控与EOCO调查争议。情报信号层面，均为单源消息、尚待核实：尼日尔武装部队就总动员令开展宣导、莫桑比克与坦桑尼亚签署联合议定书应对跨境威胁、厄立特里亚军队据报在提格雷北部部署、南苏丹因肯尼亚报告埃博拉病例提高警戒、中非前总统博齐泽之子在刚果（金）被短暂拘留后获释。整体风险方向趋于恶化，需重点跟踪提格雷战事与埃博拉跨境扩散。",
+  "overall_assessment": "已核实事件方面，埃塞俄比亚与厄立特里亚断交并伴随提格雷战事升级，联邦部队重新夺回默克莱机场，反叛武装撤出提格雷州首府，为本周最重大事态。刚果（金）东部AFC/M23行动被联合国报告指系统性波及平民，埃博拉死亡人数突破4000人并启动暴露后药物试验。乍得四省报告登革热病例，贝宁韦梅河泛滥致村镇被淹，几内亚比绍军政府以安全为由阻止前总统恩巴洛回国。加纳集中出现议员洗钱指控、教师工会全国罢工及非法采矿突袭等治理类事件。情报信号层面，均为单源消息、尚待核实：尼日利亚伊莫州被绑青年服务队家属称以美元支付赎金、尼日尔武装部队就总动员令开展宣导、莫桑比克与坦桑尼亚签署跨境威胁联合议定书、南苏丹因肯尼亚报告埃博拉病例提高警戒级别。上述信号需进一步核实后再作判断。",
   "risk_direction": "worsening",
   "confidence": "medium",
-  "generated_time": "2026-10-09T01:07:41+08:00",
+  "generated_time": "2026-10-09T02:56:11+08:00",
   "based_on": "过去24小时/7日公开信息",
   "model": "",
   "date": "20261009"
  },
- "fact_count": 546,
+ "fact_count": 560,
  "facts": {
+  "news:bb2ce1c795a24c1e": {
+   "fact_id": "news:bb2ce1c795a24c1e",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Mongo : mobilisation pour une opération de salubrité à l’université polytechnique",
+   "category": "other_security",
+   "source": "Tchadinfos",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-09 00:30",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:4e14b74d469ff805": {
+   "fact_id": "news:4e14b74d469ff805",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "Abductors of corps members in Imo collected ransom in dollars – Family",
+   "category": "other_security",
+   "source": "International Centre for Investigative Reporting",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-08 22:31",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:e29058095a29f3e8": {
    "fact_id": "news:e29058095a29f3e8",
    "level": "news_signal",
@@ -938,6 +971,21 @@
    "country": "尼日利亚",
    "title": "尼日利亚：20名被绑架毕业生经一周搜寻后获救",
    "category": "other_security",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-08 08:00",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:ea254030aea43667": {
+   "fact_id": "news:ea254030aea43667",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "Ethiopian drones strike Eritrean forces near Adigrat",
+   "category": "armed_conflict",
    "source": "Africanews",
    "source_tier": "B",
    "source_role": "aggregator_discovery",
@@ -4650,21 +4698,6 @@
    "importance": "low",
    "why_it_matters": ""
   },
-  "news:76379666a0d2724b": {
-   "fact_id": "news:76379666a0d2724b",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得阿贝歇2026-2027学年开学以双语教育为主题",
-   "category": "political_crisis",
-   "source": "Alwihda Info",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-02 01:16",
-   "importance": "low",
-   "why_it_matters": ""
-  },
   "EVT_7d09e0abc24bbf42": {
    "fact_id": "EVT_7d09e0abc24bbf42",
    "level": "verified_event",
@@ -4722,21 +4755,6 @@
    "source_tier": "B",
    "source_role": "regional",
    "time": "2026-10-01 19:39",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_2cfdd54031dfe714": {
-   "fact_id": "EVT_2cfdd54031dfe714",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得阿贝歇2026-2027学年开学以双语教育为主题",
-   "category": "political_crisis",
-   "source": "Alwihda Info",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-01 17:16",
    "importance": "high",
    "severity": "medium"
   },
@@ -8877,6 +8895,201 @@
    "source_tier": "B",
    "source_role": "aggregator_discovery",
    "time": "2026-10-08 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_d445f291cc3eb3fb": {
+   "fact_id": "EVT_d445f291cc3eb3fb",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "科特迪瓦",
+   "title": "科特迪瓦：多名网红因涉嫌团伙犯罪和洗钱被起诉",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-08 14:13",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_de015f712fc36c8f": {
+   "fact_id": "EVT_de015f712fc36c8f",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "埃及",
+   "title": "埃及指控6名记者涉恐 打压新闻自由",
+   "category": "terrorist_attack",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-08 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_5f870102d856092b": {
+   "fact_id": "EVT_5f870102d856092b",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "埃塞俄比亚无人机据称袭击阿迪格拉特附近的厄立特里亚部队",
+   "category": "armed_conflict",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-08 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_bfd2ae6c878286a8": {
+   "fact_id": "EVT_bfd2ae6c878286a8",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "几内亚比绍",
+   "title": "几内亚比绍过渡总理称12月6日选举条件尚不具备",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-08 11:46",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_5f8f3c98aae05ae2": {
+   "fact_id": "EVT_5f8f3c98aae05ae2",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "几内亚比绍",
+   "title": "几内亚比绍选举委员会称12月选举条件未满足",
+   "category": "political_crisis",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-08 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_89a62469c2c8d711": {
+   "fact_id": "EVT_89a62469c2c8d711",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "莫桑比克",
+   "title": "加沙战争致逾2万名巴勒斯坦学生和教育工作者死亡",
+   "category": "other_security",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-08 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_28e44bd2e0fbe583": {
+   "fact_id": "EVT_28e44bd2e0fbe583",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "尼日利亚伊莫州被绑青年服务队成员家属称已支付赎金",
+   "category": "other_security",
+   "source": "International Centre for Investigative Reporting",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-08 14:31",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_8e260483fc2b8bb6": {
+   "fact_id": "EVT_8e260483fc2b8bb6",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "加纳总统马哈马就尼日利亚坠机致25人遇难致哀",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-08 17:04",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_16ba7a398a16baf4": {
+   "fact_id": "EVT_16ba7a398a16baf4",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "加纳塔马利警方特别行动逮捕12人 缴获枪支与疑似毒品",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-08 16:52",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_f9782ce19f59e3d4": {
+   "fact_id": "EVT_f9782ce19f59e3d4",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "加纳大学警告：若GAUA罢工延续至下周，学历日程可能崩溃",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-08 16:39",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_c4f592f5e3f89419": {
+   "fact_id": "EVT_c4f592f5e3f89419",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "马哈马称雀巢加纳工厂扩建体现24小时经济政策成效",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-08 16:20",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_5bc6ce34ccfcc068": {
+   "fact_id": "EVT_5bc6ce34ccfcc068",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "南苏丹西赤道州启动性暴力幸存者支持网络",
+   "category": "civil_unrest",
+   "source": "UNMISS",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-09 02:19",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_ee2da4d250534bdb": {
+   "fact_id": "EVT_ee2da4d250534bdb",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Mongo : mobilisation pour une opération de salubrité à l’université polytechnique",
+   "category": "other_security",
+   "source": "Tchadinfos",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-08 16:30",
    "importance": "high",
    "severity": "medium"
   }

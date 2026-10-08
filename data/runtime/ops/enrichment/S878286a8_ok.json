@@ -1,0 +1,115 @@
+{
+ "label": "S878286a8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "af2ea0bac31282ac9de1f6919b3decc45f2c843cc088ca1889ba46039c9ff991",
+ "tokens": {
+  "input_tokens": 2946,
+  "output_tokens": 524,
+  "total_tokens": 3470
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "几内亚比绍过渡总理称12月6日选举条件尚不具备",
+   "summary_zh": "几内亚比绍过渡总理伊尔迪奥·维埃拉·特在会见政变后掌权的军政府领导人奥尔塔·恩塔姆将军后对媒体表示，12月6日举行选举的条件尚不具备。全国选举委员会副主席亦表示，宣布推迟选举应由过渡总统作出。自2025年11月26日政变以来，该国持续处于不确定状态。",
+   "event_type": "political_instability",
+   "country_iso3": "GNB",
+   "location": {
+    "country_iso3": "GNB",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Guinée-Bissau"
+   },
+   "key_facts": [
+    {
+     "fact": "几内亚比绍过渡总理称12月6日选举条件尚不具备",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Guinée-Bissau: «Les conditions pas réunies pour tenir les élections le 6 décembre», dit le Premier ministre de transition"
+    },
+    {
+     "fact": "过渡总理伊尔迪奥·维埃拉·特于2026年10月8日在会见军政府领导人奥尔塔·恩塔姆将军后向媒体作出上述表态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a déclaré ce 8 octobre 2026 le Premier ministre de transition, Ilídio Vieira Té, à la presse, après avoir rencontré le général Horta N'Tam, chef de la junte au pouvoir suite au coup d'État du 26 novembre 2025"
+    },
+    {
+     "fact": "选举委员会副主席称宣布推迟选举应由过渡总统作出",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "« Il revient au président de transition, le général Horta N’Tam, d’annoncer un report », a dit Felisberta Moura Vez"
+    },
+    {
+     "fact": "自2025年11月26日政变以来该国处于不确定时期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Guinée-Bissau traverse une période d’incertitude depuis que la junte au pouvoir a interdit à l’ex-président Umaro Sissoco de rentrer au pays"
+    }
+   ],
+   "uncertainties": [
+    "选举是否正式推迟及新日期尚未由过渡总统宣布",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "几内亚比绍过渡总理称12月6日选举条件尚不具备",
+   "summary_zh": "几内亚比绍过渡总理伊尔迪奥·维埃拉·特在会见政变后掌权的军政府领导人奥尔塔·恩塔姆将军后对媒体表示，12月6日举行选举的条件尚不具备。全国选举委员会副主席亦表示，宣布推迟选举应由过渡总统作出。自2025年11月26日政变以来，该国持续处于不确定状态。",
+   "event_type": "political_instability",
+   "country_iso3": "GNB",
+   "location": {
+    "country_iso3": "GNB",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Guinée-Bissau"
+   },
+   "key_facts": [
+    {
+     "fact": "几内亚比绍过渡总理称12月6日选举条件尚不具备",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Guinée-Bissau: «Les conditions pas réunies pour tenir les élections le 6 décembre», dit le Premier ministre de transition"
+    },
+    {
+     "fact": "过渡总理伊尔迪奥·维埃拉·特于2026年10月8日在会见军政府领导人奥尔塔·恩塔姆将军后向媒体作出上述表态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a déclaré ce 8 octobre 2026 le Premier ministre de transition, Ilídio Vieira Té, à la presse, après avoir rencontré le général Horta N'Tam, chef de la junte au pouvoir suite au coup d'État du 26 novembre 2025"
+    },
+    {
+     "fact": "选举委员会副主席称宣布推迟选举应由过渡总统作出",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "« Il revient au président de transition, le général Horta N’Tam, d’annoncer un report », a dit Felisberta Moura Vez"
+    },
+    {
+     "fact": "自2025年11月26日政变以来该国处于不确定时期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Guinée-Bissau traverse une période d’incertitude depuis que la junte au pouvoir a interdit à l’ex-président Umaro Sissoco de rentrer au pays"
+    }
+   ],
+   "uncertainties": [
+    "选举是否正式推迟及新日期尚未由过渡总统宣布",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_bfd2ae6c878286a8",
+ "disease_event_id": null,
+ "country_code": "GW"
+}

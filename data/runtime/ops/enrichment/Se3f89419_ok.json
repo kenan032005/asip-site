@@ -1,0 +1,114 @@
+{
+ "label": "Se3f89419",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "7b853a813439840d11c8abd60f0736af298f31ae69befc65b4bdd290a071747f",
+ "tokens": {
+  "input_tokens": 2166,
+  "output_tokens": 358,
+  "total_tokens": 2524
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\"]",
+    "after": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "马哈马称雀巢加纳工厂扩建体现24小时经济政策成效",
+   "summary_zh": "加纳总统约翰·德拉马尼·马哈马称，雀巢加纳公司特马工厂的扩建是政府24小时经济政策落地见效的明确体现。他表示，这项投资反映出加纳提高本地生产、扩大出口的雄心。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "特马",
+    "site": "雀巢加纳特马工厂",
+    "raw_text": "Nestlé Ghana's Tema factory"
+   },
+   "key_facts": [
+    {
+     "fact": "马哈马称雀巢加纳特马工厂扩建体现政府24小时经济政策成效",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "President John Dramani Mahama has described the expansion of Nestlé Ghana’s Tema factory as a clear demonstration of the government’s 24-hour economy in action"
+    },
+    {
+     "fact": "马哈马称该投资反映加纳提高本地生产与扩大出口的雄心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "saying the investment reflects Ghana’s ambition to produce more of what it consumes and export more of what it produces"
+    },
+    {
+     "fact": "雀巢加纳扩建特马工厂并提高淡奶产能",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nestlé Ghana expands Tema factory, raises evaporated milk production capacity"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "马哈马称雀巢加纳工厂扩建体现24小时经济政策成效",
+   "summary_zh": "加纳总统约翰·德拉马尼·马哈马称，雀巢加纳公司特马工厂的扩建是政府24小时经济政策落地见效的明确体现。他表示，这项投资反映出加纳提高本地生产、扩大出口的雄心。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "特马",
+    "site": "雀巢加纳特马工厂",
+    "raw_text": "Nestlé Ghana's Tema factory"
+   },
+   "key_facts": [
+    {
+     "fact": "马哈马称雀巢加纳特马工厂扩建体现政府24小时经济政策成效",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "President John Dramani Mahama has described the expansion of Nestlé Ghana’s Tema factory as a clear demonstration of the government’s 24-hour economy in action"
+    },
+    {
+     "fact": "马哈马称该投资反映加纳提高本地生产与扩大出口的雄心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "saying the investment reflects Ghana’s ambition to produce more of what it consumes and export more of what it produces"
+    },
+    {
+     "fact": "雀巢加纳扩建特马工厂并提高淡奶产能",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nestlé Ghana expands Tema factory, raises evaporated milk production capacity"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_c4f592f5e3f89419",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
