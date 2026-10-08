@@ -1,0 +1,137 @@
+{
+ "label": "S16a32313",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "843ece9fc2bb050303b4df349fbe2c0bbb69cc33f5e0e82305684044878ec4c9",
+ "tokens": {
+  "input_tokens": 3131,
+  "output_tokens": 672,
+  "total_tokens": 3803
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "厄立特里亚军队据报在埃塞俄比亚提格雷北部部署",
+   "summary_zh": "据多方观察人士称，厄立特里亚军队正在埃塞俄比亚北部提格雷地区多个地点部署，包括靠近厄立特里亚边境的拉马、谢拉罗以及阿迪格拉特附近的法齐。埃塞俄比亚指控厄立特里亚支持提格雷人民解放阵线（TPLF）叛军，厄立特里亚信息部长则否认这一说法，称其为“虚假的自卫叙事”。两国上周已断绝外交关系，外界担忧冲突可能升级为大规模区域战争。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷",
+    "city": null,
+    "site": null,
+    "raw_text": "nord du Tigré, Éthiopie; Rama, Sheraro, Fatsi, près d'Adigrat"
+   },
+   "key_facts": [
+    {
+     "fact": "据多方观察人士称，厄立特里亚军队正在提格雷地区多个地点部署",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D’après de nombreux observateurs, des soldats se déploient actuellement sur le territoire du Tigré, dans le nord éthiopien, dans plusieurs localités."
+    },
+    {
+     "fact": "厄立特里亚军队在拉马、谢拉罗及阿迪格拉特附近的法齐等地部署",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des soldats en patrouille à Rama et autour de Sheraro... D’autres encore à Fatsi, près de la ville d’Adigrat, à 40 kilomètres de la frontière"
+    },
+    {
+     "fact": "埃塞俄比亚指控厄立特里亚支持提格雷人民解放阵线（TPLF）叛军",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Addis-Abeba accuse Asmara de soutenir les rebelles de la Coalition pour la survie, dont le Front de libération du peuple du Tigré (TPLF)."
+    },
+    {
+     "fact": "厄立特里亚信息部长否认埃塞俄比亚的指控，称其为“虚假的自卫叙事”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le ministre érythréen de l’Information, Yemane Gebremeskel, a dénoncé « un narratif fallacieux de légitime défense »"
+    },
+    {
+     "fact": "两国上周断绝外交关系",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les deux pays, à couteaux tirés, ont rompu leurs relations diplomatiques la semaine précédente"
+    },
+    {
+     "fact": "冲突于9月23日在埃塞俄比亚北部重新爆发",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les hostilités ont repris le 23 septembre dans le nord de l'Éthiopie"
+    }
+   ],
+   "uncertainties": [
+    "厄立特里亚军队部署情况目前仅依据观察人士说法，尚未获得独立证实",
+    "厄立特里亚是否直接介入冲突尚未得到官方确认",
+    "冲突是否将升级为大规模区域战争尚不确定"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "厄立特里亚军队据报在埃塞俄比亚提格雷北部部署",
+   "summary_zh": "据多方观察人士称，厄立特里亚军队正在埃塞俄比亚北部提格雷地区多个地点部署，包括靠近厄立特里亚边境的拉马、谢拉罗以及阿迪格拉特附近的法齐。埃塞俄比亚指控厄立特里亚支持提格雷人民解放阵线（TPLF）叛军，厄立特里亚信息部长则否认这一说法，称其为“虚假的自卫叙事”。两国上周已断绝外交关系，外界担忧冲突可能升级为大规模区域战争。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷",
+    "city": null,
+    "site": null,
+    "raw_text": "nord du Tigré, Éthiopie; Rama, Sheraro, Fatsi, près d'Adigrat"
+   },
+   "key_facts": [
+    {
+     "fact": "据多方观察人士称，厄立特里亚军队正在提格雷地区多个地点部署",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D’après de nombreux observateurs, des soldats se déploient actuellement sur le territoire du Tigré, dans le nord éthiopien, dans plusieurs localités."
+    },
+    {
+     "fact": "厄立特里亚军队在拉马、谢拉罗及阿迪格拉特附近的法齐等地部署",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des soldats en patrouille à Rama et autour de Sheraro... D’autres encore à Fatsi, près de la ville d’Adigrat, à 40 kilomètres de la frontière"
+    },
+    {
+     "fact": "埃塞俄比亚指控厄立特里亚支持提格雷人民解放阵线（TPLF）叛军",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Addis-Abeba accuse Asmara de soutenir les rebelles de la Coalition pour la survie, dont le Front de libération du peuple du Tigré (TPLF)."
+    },
+    {
+     "fact": "厄立特里亚信息部长否认埃塞俄比亚的指控，称其为“虚假的自卫叙事”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le ministre érythréen de l’Information, Yemane Gebremeskel, a dénoncé « un narratif fallacieux de légitime défense »"
+    },
+    {
+     "fact": "两国上周断绝外交关系",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les deux pays, à couteaux tirés, ont rompu leurs relations diplomatiques la semaine précédente"
+    },
+    {
+     "fact": "冲突于9月23日在埃塞俄比亚北部重新爆发",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les hostilités ont repris le 23 septembre dans le nord de l'Éthiopie"
+    }
+   ],
+   "uncertainties": [
+    "厄立特里亚军队部署情况目前仅依据观察人士说法，尚未获得独立证实",
+    "厄立特里亚是否直接介入冲突尚未得到官方确认",
+    "冲突是否将升级为大规模区域战争尚不确定"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_9d3e014616a32313",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

@@ -1,0 +1,127 @@
+{
+ "label": "S16ead5aa",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a05878c21c1f7155bfb78efd88902a2d1777987950c7c43f54c27f90df4b7e91",
+ "tokens": {
+  "input_tokens": 2616,
+  "output_tokens": 513,
+  "total_tokens": 3129
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "埃及事实核查网站记者面临恐怖主义指控",
+   "summary_zh": "埃及检方指控独立事实核查平台Matsda2sh的六名记者属于被取缔的穆斯林兄弟会，罪名包括加入恐怖组织、资助恐怖主义、发布虚假新闻及利用社交媒体呼吁恐怖活动。该平台否认相关指控。据其律师称，其中五人已被国家安全检察署羁押15天，第六人仍在接受审讯。埃及内政部否认存在酷刑，并称该平台无证经营、创始人系穆斯林兄弟会成员。",
+   "event_type": "terrorism",
+   "country_iso3": "EGY",
+   "location": {
+    "country_iso3": "EGY",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Egypt"
+   },
+   "key_facts": [
+    {
+     "fact": "埃及检方指控Matsda2sh六名记者属于被取缔的穆斯林兄弟会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Prosecutors in Egypt have charged six journalists working for the independent fact-checking platform Matsda2sh with belonging to the outlawed Muslim Brotherhood, according to their lawyer."
+    },
+    {
+     "fact": "律师称五人被国家安全检察署羁押15天，第六人仍在接受审讯",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ganadi said the State Security Prosecution had remanded five of them in custody for 15 days, and that the sixth was still being interrogated."
+    },
+    {
+     "fact": "Matsda2sh否认相关指控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Matsda2sh has denied the allegations."
+    },
+    {
+     "fact": "埃及内政部否认记者遭受酷刑或虐待",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The interior ministry denied that they had been tortured or mistreated."
+    },
+    {
+     "fact": "六名记者于9月28日和29日在埃及多地家中被安全人员逮捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Security personnel arrested the six Matsda2sh journalists ... in a series of raids on their homes across Egypt on 28 and 29 September"
+    }
+   ],
+   "uncertainties": [
+    "记者被指控的罪名及是否属于穆斯林兄弟会尚未经法院证实，仅为检方指控",
+    "记者据称在国家安全局设施遭受酷刑的说法尚未获独立证实，内政部予以否认",
+    "目前仅一个来源（BBC News）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "埃及事实核查网站记者面临恐怖主义指控",
+   "summary_zh": "埃及检方指控独立事实核查平台Matsda2sh的六名记者属于被取缔的穆斯林兄弟会，罪名包括加入恐怖组织、资助恐怖主义、发布虚假新闻及利用社交媒体呼吁恐怖活动。该平台否认相关指控。据其律师称，其中五人已被国家安全检察署羁押15天，第六人仍在接受审讯。埃及内政部否认存在酷刑，并称该平台无证经营、创始人系穆斯林兄弟会成员。",
+   "event_type": "terrorism",
+   "country_iso3": "EGY",
+   "location": {
+    "country_iso3": "EGY",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Egypt"
+   },
+   "key_facts": [
+    {
+     "fact": "埃及检方指控Matsda2sh六名记者属于被取缔的穆斯林兄弟会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Prosecutors in Egypt have charged six journalists working for the independent fact-checking platform Matsda2sh with belonging to the outlawed Muslim Brotherhood, according to their lawyer."
+    },
+    {
+     "fact": "律师称五人被国家安全检察署羁押15天，第六人仍在接受审讯",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ganadi said the State Security Prosecution had remanded five of them in custody for 15 days, and that the sixth was still being interrogated."
+    },
+    {
+     "fact": "Matsda2sh否认相关指控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Matsda2sh has denied the allegations."
+    },
+    {
+     "fact": "埃及内政部否认记者遭受酷刑或虐待",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The interior ministry denied that they had been tortured or mistreated."
+    },
+    {
+     "fact": "六名记者于9月28日和29日在埃及多地家中被安全人员逮捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Security personnel arrested the six Matsda2sh journalists ... in a series of raids on their homes across Egypt on 28 and 29 September"
+    }
+   ],
+   "uncertainties": [
+    "记者被指控的罪名及是否属于穆斯林兄弟会尚未经法院证实，仅为检方指控",
+    "记者据称在国家安全局设施遭受酷刑的说法尚未获独立证实，内政部予以否认",
+    "目前仅一个来源（BBC News）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_38d8f9a316ead5aa",
+ "disease_event_id": null,
+ "country_code": "EG"
+}

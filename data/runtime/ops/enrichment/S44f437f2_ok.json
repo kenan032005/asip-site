@@ -1,0 +1,136 @@
+{
+ "label": "S44f437f2",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "17c885b1ee79c9ba4dfeb200c10877da05b0db3a6c22050d7e9d4ada037d1c93",
+ "tokens": {
+  "input_tokens": 2697,
+  "output_tokens": 728,
+  "total_tokens": 3425
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"查获量增长的原因尚不能确定，ONUDC表示可能反映管控加强和检测能力提升，需谨慎解读\", \"该报道为单一来源（Le N'Djam Post），尚缺乏交叉验证\"]",
+    "after": "[\"查获量增长的原因尚不能确定，ONUDC表示可能反映管控加强和检测能力提升，需谨慎解读\", \"该报道为单一来源（Le N'Djam Post），尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得药品价格高昂：贫困民众在就医需求与地下市场之间",
+   "summary_zh": "在乍得，药品获取对大部分民众而言依然困难，价格高昂、医疗机构偏远和供应不足为非法药品市场提供了土壤。联合国毒品和犯罪问题办公室（ONUDC）10月6日发布的新报告揭示了该现象在中部非洲经货共同体（CEMAC）地区的规模，乍得情况尤为令人担忧。报告称2020年至2025年间，喀麦隆、刚果、加蓬、中非共和国和乍得共查获251吨医疗产品。ONUDC同时指出，这一增长应谨慎解读，也可能反映管控加强和检测能力提升。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Au Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国毒品和犯罪问题办公室（ONUDC）10月6日发布报告，揭示中部非洲地区非法药品市场现象，乍得情况尤为令人担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un nouveau rapport de l’Office des Nations Unies contre la drogue et le crime (ONUDC), publié le 6 octobre 2026, met en lumière l’ampleur du phénomène dans la sous-région, avec une situation particulièrement préoccupante au Tchad."
+    },
+    {
+     "fact": "2020年至2025年间，喀麦隆、刚果、加蓬、中非共和国和乍得共查获251吨医疗产品",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Entre 2020 et 2025, 251 tonnes de produits médicaux ont été saisies au Cameroun, au Congo, au Gabon, en République centrafricaine et au Tchad."
+    },
+    {
+     "fact": "查获量从2020年约5吨增至2024年近116吨，2025年超过97吨",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les volumes interceptés sont passés d’environ 5 tonnes en 2020 à près de 116 tonnes en 2024, avant de dépasser 97 tonnes en 2025."
+    },
+    {
+     "fact": "ONUDC指出查获量增长应谨慎解读，可能反映管控加强和检测能力提升",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’ONUDC souligne toutefois que cette progression doit être interprétée avec prudence, car elle peut aussi refléter le renforcement des contrôles et l’amélioration des capacités de détection."
+    },
+    {
+     "fact": "报告援引数据显示，中非共和国和乍得超过一半人口居住在距离提供急诊服务的公立医院两小时以上路程的地方",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En République centrafricaine et au Tchad, plus de la moitié de la population vivait, selon les données citées par le rapport, à plus de deux heures d’un hôpital public disposant de services d’urgence."
+    }
+   ],
+   "uncertainties": [
+    "查获量增长的原因尚不能确定，ONUDC表示可能反映管控加强和检测能力提升，需谨慎解读",
+    "该报道为单一来源（Le N'Djam Post），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得药品价格高昂：贫困民众在就医需求与地下市场之间",
+   "summary_zh": "在乍得，药品获取对大部分民众而言依然困难，价格高昂、医疗机构偏远和供应不足为非法药品市场提供了土壤。联合国毒品和犯罪问题办公室（ONUDC）10月6日发布的新报告揭示了该现象在中部非洲经货共同体（CEMAC）地区的规模，乍得情况尤为令人担忧。报告称2020年至2025年间，喀麦隆、刚果、加蓬、中非共和国和乍得共查获251吨医疗产品。ONUDC同时指出，这一增长应谨慎解读，也可能反映管控加强和检测能力提升。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Au Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国毒品和犯罪问题办公室（ONUDC）10月6日发布报告，揭示中部非洲地区非法药品市场现象，乍得情况尤为令人担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un nouveau rapport de l’Office des Nations Unies contre la drogue et le crime (ONUDC), publié le 6 octobre 2026, met en lumière l’ampleur du phénomène dans la sous-région, avec une situation particulièrement préoccupante au Tchad."
+    },
+    {
+     "fact": "2020年至2025年间，喀麦隆、刚果、加蓬、中非共和国和乍得共查获251吨医疗产品",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Entre 2020 et 2025, 251 tonnes de produits médicaux ont été saisies au Cameroun, au Congo, au Gabon, en République centrafricaine et au Tchad."
+    },
+    {
+     "fact": "查获量从2020年约5吨增至2024年近116吨，2025年超过97吨",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les volumes interceptés sont passés d’environ 5 tonnes en 2020 à près de 116 tonnes en 2024, avant de dépasser 97 tonnes en 2025."
+    },
+    {
+     "fact": "ONUDC指出查获量增长应谨慎解读，可能反映管控加强和检测能力提升",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’ONUDC souligne toutefois que cette progression doit être interprétée avec prudence, car elle peut aussi refléter le renforcement des contrôles et l’amélioration des capacités de détection."
+    },
+    {
+     "fact": "报告援引数据显示，中非共和国和乍得超过一半人口居住在距离提供急诊服务的公立医院两小时以上路程的地方",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En République centrafricaine et au Tchad, plus de la moitié de la population vivait, selon les données citées par le rapport, à plus de deux heures d’un hôpital public disposant de services d’urgence."
+    }
+   ],
+   "uncertainties": [
+    "查获量增长的原因尚不能确定，ONUDC表示可能反映管控加强和检测能力提升，需谨慎解读",
+    "该报道为单一来源（Le N'Djam Post），尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_174c0a3e44f437f2",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

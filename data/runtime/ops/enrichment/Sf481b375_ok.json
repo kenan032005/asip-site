@@ -1,0 +1,134 @@
+{
+ "label": "Sf481b375",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "402196f99ed7af9fe21c5c92597cc1d2aa03aa4be64b4b4c05a2948cb61ace2e",
+ "tokens": {
+  "input_tokens": 2849,
+  "output_tokens": 565,
+  "total_tokens": 3414
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"报告为单一来源（ONUDC与OMS及CEMAC合作编写），尚缺乏其他独立来源交叉验证\"]",
+    "after": "[\"报告为单一来源（ONUDC与OMS及CEMAC合作编写），尚缺乏其他独立来源交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "中部非洲五年查获逾250吨医疗产品",
+   "summary_zh": "据联合国毒品和犯罪问题办公室（ONUDC）与世卫组织（OMS）及中非经货共同体（CEMAC）合作编写的报告，2020年至2025年间，喀麦隆、刚果、加蓬、中非共和国和乍得共查获超过251吨医疗产品。查获量从2020年约5吨增至2024年近116吨，2025年超过97吨。报告指出，非法药品交易涉及伪造产品、监管供应链被渗透以及武装团体参与等风险。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Cameroun, Congo, Gabon, République centrafricaine et Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "2020年至2025年间，中部非洲五国查获超过251吨医疗产品",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "251 tonnes de produits médicaux ont été saisies entre 2020 et 2025 dans cinq pays de la sous-région"
+    },
+    {
+     "fact": "查获量从2020年约5吨增至2024年近116吨",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils sont passés d’environ 5 tonnes en 2020 à près de 116 tonnes en 2024, avant de dépasser 97 tonnes en 2025"
+    },
+    {
+     "fact": "喀麦隆2025年查获约96吨医疗产品",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quelque 96 tonnes de produits médicaux y ont été interceptées en 2025, contre environ 2,5 tonnes cinq ans auparavant"
+    },
+    {
+     "fact": "报告称约三分之一事件在受监管供应链中被发现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "environ un tiers des incidents ont été détectés dans des chaînes d’approvisionnement réglementées"
+    },
+    {
+     "fact": "武装团体可能通过抢劫卫生中心、转售药品或对车队征税参与其中",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des groupes armés peuvent également intervenir, notamment à travers le pillage de centres de santé, la revente de médicaments ou l’imposition de taxes sur les convois"
+    }
+   ],
+   "uncertainties": [
+    "报告为单一来源（ONUDC与OMS及CEMAC合作编写），尚缺乏其他独立来源交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "中部非洲五年查获逾250吨医疗产品",
+   "summary_zh": "据联合国毒品和犯罪问题办公室（ONUDC）与世卫组织（OMS）及中非经货共同体（CEMAC）合作编写的报告，2020年至2025年间，喀麦隆、刚果、加蓬、中非共和国和乍得共查获超过251吨医疗产品。查获量从2020年约5吨增至2024年近116吨，2025年超过97吨。报告指出，非法药品交易涉及伪造产品、监管供应链被渗透以及武装团体参与等风险。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Cameroun, Congo, Gabon, République centrafricaine et Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "2020年至2025年间，中部非洲五国查获超过251吨医疗产品",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "251 tonnes de produits médicaux ont été saisies entre 2020 et 2025 dans cinq pays de la sous-région"
+    },
+    {
+     "fact": "查获量从2020年约5吨增至2024年近116吨",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils sont passés d’environ 5 tonnes en 2020 à près de 116 tonnes en 2024, avant de dépasser 97 tonnes en 2025"
+    },
+    {
+     "fact": "喀麦隆2025年查获约96吨医疗产品",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quelque 96 tonnes de produits médicaux y ont été interceptées en 2025, contre environ 2,5 tonnes cinq ans auparavant"
+    },
+    {
+     "fact": "报告称约三分之一事件在受监管供应链中被发现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "environ un tiers des incidents ont été détectés dans des chaînes d’approvisionnement réglementées"
+    },
+    {
+     "fact": "武装团体可能通过抢劫卫生中心、转售药品或对车队征税参与其中",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des groupes armés peuvent également intervenir, notamment à travers le pillage de centres de santé, la revente de médicaments ou l’imposition de taxes sur les convois"
+    }
+   ],
+   "uncertainties": [
+    "报告为单一来源（ONUDC与OMS及CEMAC合作编写），尚缺乏其他独立来源交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_93ee25ddf481b375",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

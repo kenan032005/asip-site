@@ -1,0 +1,117 @@
+{
+ "label": "Sdf27c324",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "49773970a5c86e9dd9ce2bae3591d3354c27d0a583e4f0c6b1ba3c9da6d47732",
+ "tokens": {
+  "input_tokens": 2232,
+  "output_tokens": 563,
+  "total_tokens": 2795
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得提贝斯提地区：图尔库事件后政府代表团抵达巴尔代",
+   "summary_zh": "据称，乍得提贝斯提地区一名年轻企业家遭暗杀、疑似凶手多名家属遭绑架后，当地紧张局势持续升温。2026年10月7日，乍得政府派遣由副总理利马内·马哈马特率领的代表团前往巴尔代，成员包括公共安全与移民部长等高级官员。代表团在巴尔代受到提贝斯提省秘书长代表地方政府接待。上述事件目前仅为传闻，尚未获得证实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "提贝斯提",
+    "city": "巴尔代",
+    "site": null,
+    "raw_text": "Tibesti, Bardaï, département de Wour, Tourkou"
+   },
+   "key_facts": [
+    {
+     "fact": "据称提贝斯提一名年轻企业家遭暗杀，疑似凶手多名家属遭绑架，当地紧张局势升温",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis plusieurs jours, des rumeurs indiquent que des tensions montent après l'assassinat d'un jeune entrepreneur dans le Tibesti et l'enlèvement de plusieurs membres de la famille du présumé assassin."
+    },
+    {
+     "fact": "2026年10月7日乍得政府派遣代表团前往巴尔代",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement a dépêché une délégation le mercredi 07 octobre 2026"
+    },
+    {
+     "fact": "代表团由副总理利马内·马哈马特率领，包括公共安全与移民部长等高级官员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Elle est conduite par le vice-Premier ministre chargé de l’Administration territoriale et de la Décentralisation, Limane Mahamat. Et comprend notamment le ministre de la Sécurité publique et de l’Immigration, Ali Ahmat Aghabache"
+    },
+    {
+     "fact": "代表团在巴尔代受到提贝斯提省秘书长代表地方政府接待",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ladite délégation a été accueillie à Bardaï par le secrétaire général de la province du Tibesti, Moustapha Souleymane Tourgoudi"
+    }
+   ],
+   "uncertainties": [
+    "暗杀与绑架事件目前仅为传闻（rumeurs），尚未获得证实",
+    "事件具体经过与伤亡情况不明",
+    "目前仅一个来源（Le N'Djam Post），缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得提贝斯提地区：图尔库事件后政府代表团抵达巴尔代",
+   "summary_zh": "据称，乍得提贝斯提地区一名年轻企业家遭暗杀、疑似凶手多名家属遭绑架后，当地紧张局势持续升温。2026年10月7日，乍得政府派遣由副总理利马内·马哈马特率领的代表团前往巴尔代，成员包括公共安全与移民部长等高级官员。代表团在巴尔代受到提贝斯提省秘书长代表地方政府接待。上述事件目前仅为传闻，尚未获得证实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "提贝斯提",
+    "city": "巴尔代",
+    "site": null,
+    "raw_text": "Tibesti, Bardaï, département de Wour, Tourkou"
+   },
+   "key_facts": [
+    {
+     "fact": "据称提贝斯提一名年轻企业家遭暗杀，疑似凶手多名家属遭绑架，当地紧张局势升温",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis plusieurs jours, des rumeurs indiquent que des tensions montent après l'assassinat d'un jeune entrepreneur dans le Tibesti et l'enlèvement de plusieurs membres de la famille du présumé assassin."
+    },
+    {
+     "fact": "2026年10月7日乍得政府派遣代表团前往巴尔代",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement a dépêché une délégation le mercredi 07 octobre 2026"
+    },
+    {
+     "fact": "代表团由副总理利马内·马哈马特率领，包括公共安全与移民部长等高级官员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Elle est conduite par le vice-Premier ministre chargé de l’Administration territoriale et de la Décentralisation, Limane Mahamat. Et comprend notamment le ministre de la Sécurité publique et de l’Immigration, Ali Ahmat Aghabache"
+    },
+    {
+     "fact": "代表团在巴尔代受到提贝斯提省秘书长代表地方政府接待",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ladite délégation a été accueillie à Bardaï par le secrétaire général de la province du Tibesti, Moustapha Souleymane Tourgoudi"
+    }
+   ],
+   "uncertainties": [
+    "暗杀与绑架事件目前仅为传闻（rumeurs），尚未获得证实",
+    "事件具体经过与伤亡情况不明",
+    "目前仅一个来源（Le N'Djam Post），缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_e28dfee8df27c324",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

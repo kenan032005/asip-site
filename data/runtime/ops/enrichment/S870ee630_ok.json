@@ -1,0 +1,121 @@
+{
+ "label": "S870ee630",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3185a629996cf7d27f8b52b4658d8ddf748cc6b536130da4efbffa88f5402d25",
+ "tokens": {
+  "input_tokens": 2310,
+  "output_tokens": 466,
+  "total_tokens": 2776
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚工程师协会呼吁总统蒂努布应对不安全局势与建筑成本上涨",
+   "summary_zh": "尼日利亚建筑与土木工程高级职员协会（CCESSA）发表公报，呼吁总统博拉·蒂努布紧急干预不安全局势、生活成本上涨及影响建筑业的各项挑战。该协会呼吁政府加大打击恐怖主义、土匪活动、绑架和社区暴力等犯罪的力度，并加强情报收集与机构间协调。协会还对建筑业联合会（FOCI）与联邦工程部之间持续存在的分歧表示担忧，警告长期中断可能影响就业。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚建筑与土木工程高级职员协会（CCESSA）呼吁总统蒂努布紧急干预不安全局势、生活成本上涨及建筑业挑战",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Construction and Civil Engineering Senior Staff Association of Nigeria (CCESSA) has appealed to President Bola Tinubu to urgently intervene in insecurity, rising cost of living and the challenges affecting the construction industry."
+    },
+    {
+     "fact": "该协会呼吁政府加大打击恐怖主义、土匪活动、绑架、社区暴力及其他犯罪的力度",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "We call on the Federal Government to intensify the fight against terrorism, banditry, kidnapping, communal violence and other forms of criminality."
+    },
+    {
+     "fact": "协会对建筑业联合会（FOCI）与联邦工程部之间持续存在的分歧表示担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It also raised concern over the continuing disagreement between the Federation of Construction Industry (FOCI) and the Federal Ministry of Works."
+    },
+    {
+     "fact": "公报于周三在阿布贾举行的全国执行委员会会议后发布",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The association made the appeal in a communiqué issued at the end of its National Executive Committee (NEC) meeting... on Wednesday in Abuja."
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚工程师协会呼吁总统蒂努布应对不安全局势与建筑成本上涨",
+   "summary_zh": "尼日利亚建筑与土木工程高级职员协会（CCESSA）发表公报，呼吁总统博拉·蒂努布紧急干预不安全局势、生活成本上涨及影响建筑业的各项挑战。该协会呼吁政府加大打击恐怖主义、土匪活动、绑架和社区暴力等犯罪的力度，并加强情报收集与机构间协调。协会还对建筑业联合会（FOCI）与联邦工程部之间持续存在的分歧表示担忧，警告长期中断可能影响就业。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚建筑与土木工程高级职员协会（CCESSA）呼吁总统蒂努布紧急干预不安全局势、生活成本上涨及建筑业挑战",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Construction and Civil Engineering Senior Staff Association of Nigeria (CCESSA) has appealed to President Bola Tinubu to urgently intervene in insecurity, rising cost of living and the challenges affecting the construction industry."
+    },
+    {
+     "fact": "该协会呼吁政府加大打击恐怖主义、土匪活动、绑架、社区暴力及其他犯罪的力度",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "We call on the Federal Government to intensify the fight against terrorism, banditry, kidnapping, communal violence and other forms of criminality."
+    },
+    {
+     "fact": "协会对建筑业联合会（FOCI）与联邦工程部之间持续存在的分歧表示担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It also raised concern over the continuing disagreement between the Federation of Construction Industry (FOCI) and the Federal Ministry of Works."
+    },
+    {
+     "fact": "公报于周三在阿布贾举行的全国执行委员会会议后发布",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The association made the appeal in a communiqué issued at the end of its National Executive Committee (NEC) meeting... on Wednesday in Abuja."
+    }
+   ],
+   "uncertainties": [
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_5bade309870ee630",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

@@ -1,0 +1,125 @@
+{
+ "label": "S17a676b0",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "81790f2da29159e05c6068d5506ea5d7eac13583df813021bf4f664b2c159e0b",
+ "tokens": {
+  "input_tokens": 2481,
+  "output_tokens": 505,
+  "total_tokens": 2986
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "肯尼亚确诊首例埃博拉病例后，南苏丹提高埃博拉警戒级别",
+   "summary_zh": "在邻国肯尼亚确认首例埃博拉病例后，南苏丹卫生当局于周三表示已提高埃博拉警戒级别，但南苏丹境内尚未确认任何病例。南苏丹看守卫生部长表示，政府正密切关注地区疫情，并因边境及人员货物流动将国家卫生系统置于高度戒备状态。世界卫生组织称南苏丹的防范水平已从5月的29%提升至目前的65%。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": null,
+    "city": "朱巴",
+    "site": null,
+    "raw_text": "Juba"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚确认首例埃博拉病例后，南苏丹提高埃博拉警戒级别",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "South Sudan raises Ebola alert after Kenya confirms first case"
+    },
+    {
+     "fact": "南苏丹境内尚未确认任何埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "although no cases have been confirmed in South Sudan"
+    },
+    {
+     "fact": "南苏丹看守卫生部长称政府正密切监测地区疫情并将国家卫生系统置于高度戒备状态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Caretaker Health Minister Dak Duop Bichiok said the government was closely monitoring the regional situation and had placed the national health system on a high state of alert"
+    },
+    {
+     "fact": "南苏丹在15个高风险县及朱巴国际机场等入境点开展筛查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "We have people doing screening at the points of entry across the border, along the border in the 15 high-risk counties, as well as our international airport, Juba International Airport"
+    },
+    {
+     "fact": "据世界卫生组织，南苏丹防范水平从5月的29%升至目前的65%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "rising from 29% in May to 45% in June and 65% currently"
+    }
+   ],
+   "uncertainties": [
+    "南苏丹境内是否会出现埃博拉病例尚未证实",
+    "该事件目前仅有一个来源（Radio Tamazuj）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "肯尼亚确诊首例埃博拉病例后，南苏丹提高埃博拉警戒级别",
+   "summary_zh": "在邻国肯尼亚确认首例埃博拉病例后，南苏丹卫生当局于周三表示已提高埃博拉警戒级别，但南苏丹境内尚未确认任何病例。南苏丹看守卫生部长表示，政府正密切关注地区疫情，并因边境及人员货物流动将国家卫生系统置于高度戒备状态。世界卫生组织称南苏丹的防范水平已从5月的29%提升至目前的65%。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": null,
+    "city": "朱巴",
+    "site": null,
+    "raw_text": "Juba"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚确认首例埃博拉病例后，南苏丹提高埃博拉警戒级别",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "South Sudan raises Ebola alert after Kenya confirms first case"
+    },
+    {
+     "fact": "南苏丹境内尚未确认任何埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "although no cases have been confirmed in South Sudan"
+    },
+    {
+     "fact": "南苏丹看守卫生部长称政府正密切监测地区疫情并将国家卫生系统置于高度戒备状态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Caretaker Health Minister Dak Duop Bichiok said the government was closely monitoring the regional situation and had placed the national health system on a high state of alert"
+    },
+    {
+     "fact": "南苏丹在15个高风险县及朱巴国际机场等入境点开展筛查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "We have people doing screening at the points of entry across the border, along the border in the 15 high-risk counties, as well as our international airport, Juba International Airport"
+    },
+    {
+     "fact": "据世界卫生组织，南苏丹防范水平从5月的29%升至目前的65%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "rising from 29% in May to 45% in June and 65% currently"
+    }
+   ],
+   "uncertainties": [
+    "南苏丹境内是否会出现埃博拉病例尚未证实",
+    "该事件目前仅有一个来源（Radio Tamazuj）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_8e43041417a676b0",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

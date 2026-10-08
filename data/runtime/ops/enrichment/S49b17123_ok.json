@@ -1,0 +1,117 @@
+{
+ "label": "S49b17123",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0a4d9958c165083df1a454ff848f965249e8b79715489785315c1097176c1ccc",
+ "tokens": {
+  "input_tokens": 2814,
+  "output_tokens": 643,
+  "total_tokens": 3457
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "中非前总统博齐泽之子在刚果（金）被短暂拘留后获释",
+   "summary_zh": "据RFI报道，中非共和国前总统弗朗索瓦·博齐泽之子凯文·博齐泽在刚果（金）首都金沙萨被军方情报人员短暂拘留，随后获释。他称自己因被怀疑与中非前军方人员有联系而遭“粗暴”逮捕，并被问及所谓政变图谋，他称这些指控“荒谬”。联合国难民署和刚果（金）国家难民委员会据称曾介入其获释，但双方均未对此事置评。",
+   "event_type": "other_security",
+   "country_iso3": "CAF",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "金沙萨",
+    "city": "金沙萨",
+    "site": "巴泰凯高原附近（N'sele区）",
+    "raw_text": "aux abords des plateaux des Batéké, dans la commune de la N’sele, dans la capitale de RDC"
+   },
+   "key_facts": [
+    {
+     "fact": "中非前总统博齐泽之子凯文·博齐泽在刚果（金）金沙萨被军方情报人员短暂拘留后获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un fils de l’ex-président centrafricain aujourd’hui en exil à Bissau, François Bozizé, a été brièvement interpellé et détenu à Kinshasa par les services de renseignements militaires"
+    },
+    {
+     "fact": "凯文·博齐泽称被问及所谓在中非策划政变的图谋，他称指控“荒谬”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le fils de l’ancien président centrafricain dit avoir été questionné sur une présumée tentative d’association en vue d’un coup d’État en Centrafrique. Des accusations que Kévin Bozizé qualifie de « farfelues »"
+    },
+    {
+     "fact": "联合国难民署和刚果（金）国家难民委员会据称曾介入其获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Haut-commissariat des Nations unies (HCR) pour les réfugiés et la Commission nationale pour les réfugiés seraient intervenus pour sa libération, selon l’intéressé"
+    },
+    {
+     "fact": "联合国难民署和刚果（金）当局均未对此事置评",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ni le HCR ni les autorités congolaises n’ont souhaité commenter cette affaire"
+    }
+   ],
+   "uncertainties": [
+    "逮捕原因及所谓政变图谋指控尚未证实，仅为当事人说法",
+    "联合国难民署和刚果（金）国家难民委员会介入获释的说法仅来自当事人，未获官方确认",
+    "事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "中非前总统博齐泽之子在刚果（金）被短暂拘留后获释",
+   "summary_zh": "据RFI报道，中非共和国前总统弗朗索瓦·博齐泽之子凯文·博齐泽在刚果（金）首都金沙萨被军方情报人员短暂拘留，随后获释。他称自己因被怀疑与中非前军方人员有联系而遭“粗暴”逮捕，并被问及所谓政变图谋，他称这些指控“荒谬”。联合国难民署和刚果（金）国家难民委员会据称曾介入其获释，但双方均未对此事置评。",
+   "event_type": "other_security",
+   "country_iso3": "CAF",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "金沙萨",
+    "city": "金沙萨",
+    "site": "巴泰凯高原附近（N'sele区）",
+    "raw_text": "aux abords des plateaux des Batéké, dans la commune de la N’sele, dans la capitale de RDC"
+   },
+   "key_facts": [
+    {
+     "fact": "中非前总统博齐泽之子凯文·博齐泽在刚果（金）金沙萨被军方情报人员短暂拘留后获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un fils de l’ex-président centrafricain aujourd’hui en exil à Bissau, François Bozizé, a été brièvement interpellé et détenu à Kinshasa par les services de renseignements militaires"
+    },
+    {
+     "fact": "凯文·博齐泽称被问及所谓在中非策划政变的图谋，他称指控“荒谬”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le fils de l’ancien président centrafricain dit avoir été questionné sur une présumée tentative d’association en vue d’un coup d’État en Centrafrique. Des accusations que Kévin Bozizé qualifie de « farfelues »"
+    },
+    {
+     "fact": "联合国难民署和刚果（金）国家难民委员会据称曾介入其获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Haut-commissariat des Nations unies (HCR) pour les réfugiés et la Commission nationale pour les réfugiés seraient intervenus pour sa libération, selon l’intéressé"
+    },
+    {
+     "fact": "联合国难民署和刚果（金）当局均未对此事置评",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ni le HCR ni les autorités congolaises n’ont souhaité commenter cette affaire"
+    }
+   ],
+   "uncertainties": [
+    "逮捕原因及所谓政变图谋指控尚未证实，仅为当事人说法",
+    "联合国难民署和刚果（金）国家难民委员会介入获释的说法仅来自当事人，未获官方确认",
+    "事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_3e3079c449b17123",
+ "disease_event_id": null,
+ "country_code": "CF"
+}
