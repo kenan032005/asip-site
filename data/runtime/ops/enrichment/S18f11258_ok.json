@@ -1,0 +1,113 @@
+{
+ "label": "S18f11258",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1dd9727739e4ed87e687bfb8b5fb8abba6831e54e451d3ef5d602bb7b358c56e",
+ "tokens": {
+  "input_tokens": 2725,
+  "output_tokens": 597,
+  "total_tokens": 3322
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔多索举行2024-2025年脑膜炎疫情应对行动后审查研讨会",
+   "summary_zh": "尼日尔公共卫生部通过疫情监测与应对司，与技术和金融伙伴合作，于2026年4月2日至6日在多索GALAXY酒店举办全国行动后审查研讨会，评估2024至2025年脑膜炎疫情的应对表现。会议分析了流行病学数据，总结了病例通报改善、卫生人员能力加强等良好做法，同时指出后勤挑战、设备不足、督导不规律及协调不足等问题。研讨会提出正式宣布疫情起止、加强样本运输、强化社区监测等建议。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "多索",
+    "city": "多索",
+    "site": "GALAXY酒店",
+    "raw_text": "Dosso, hôtel GALAXY"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔公共卫生部于2026年4月2日至6日在多索举办脑膜炎疫情应对行动后审查研讨会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Ministère de la Santé et de l’Hygiène Publique ... a organisé du 02 au 06 avril 2026, à l’hôtel GALAXY, un atelier national de Revue Après-Action (RAA) des réponses aux épidémies de méningite survenues au Niger au cours des années 2024 et 2025"
+    },
+    {
+     "fact": "会议分析2024和2025年流行病学数据并评估监测系统表现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les participants ont procédé à une analyse détaillée des données épidémiologiques des années 2024 et 2025, mettant en évidence les tendances, les zones les plus touchées et les performances du système de surveillance"
+    },
+    {
+     "fact": "会议指出后勤挑战、设备不足、督导不规律及协调不足等缺陷",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des insuffisances ont été relevées, notamment les défis logistiques, l’insuffisance de certains équipements, la faible régularité des supervisions et la nécessité d’une meilleure coordination"
+    },
+    {
+     "fact": "研讨会提出正式宣布疫情起止、加强样本运输和社区监测等建议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Déclarer officiellement le début et la fin des épidémies; Renforcer le mécanisme de transport des échantillons ... Renforcer la surveillance à base communautaire"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（尼日尔卫生部），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔多索举行2024-2025年脑膜炎疫情应对行动后审查研讨会",
+   "summary_zh": "尼日尔公共卫生部通过疫情监测与应对司，与技术和金融伙伴合作，于2026年4月2日至6日在多索GALAXY酒店举办全国行动后审查研讨会，评估2024至2025年脑膜炎疫情的应对表现。会议分析了流行病学数据，总结了病例通报改善、卫生人员能力加强等良好做法，同时指出后勤挑战、设备不足、督导不规律及协调不足等问题。研讨会提出正式宣布疫情起止、加强样本运输、强化社区监测等建议。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "多索",
+    "city": "多索",
+    "site": "GALAXY酒店",
+    "raw_text": "Dosso, hôtel GALAXY"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔公共卫生部于2026年4月2日至6日在多索举办脑膜炎疫情应对行动后审查研讨会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Ministère de la Santé et de l’Hygiène Publique ... a organisé du 02 au 06 avril 2026, à l’hôtel GALAXY, un atelier national de Revue Après-Action (RAA) des réponses aux épidémies de méningite survenues au Niger au cours des années 2024 et 2025"
+    },
+    {
+     "fact": "会议分析2024和2025年流行病学数据并评估监测系统表现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les participants ont procédé à une analyse détaillée des données épidémiologiques des années 2024 et 2025, mettant en évidence les tendances, les zones les plus touchées et les performances du système de surveillance"
+    },
+    {
+     "fact": "会议指出后勤挑战、设备不足、督导不规律及协调不足等缺陷",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des insuffisances ont été relevées, notamment les défis logistiques, l’insuffisance de certains équipements, la faible régularité des supervisions et la nécessité d’une meilleure coordination"
+    },
+    {
+     "fact": "研讨会提出正式宣布疫情起止、加强样本运输和社区监测等建议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Déclarer officiellement le début et la fin des épidémies; Renforcer le mécanisme de transport des échantillons ... Renforcer la surveillance à base communautaire"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（尼日尔卫生部），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_a5faab3218f11258",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

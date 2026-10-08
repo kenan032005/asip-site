@@ -1,0 +1,107 @@
+{
+ "label": "Sed5c5e81",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "2d605313237c1e67053d8286d035655c018427faa810c9fcc4d3f9cb52c82c84",
+ "tokens": {
+  "input_tokens": 2083,
+  "output_tokens": 403,
+  "total_tokens": 2486
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "肯尼亚卫生部长坚称该国未暴发埃博拉疫情",
+   "summary_zh": "肯尼亚卫生部长Aden Duale于周三表示，肯尼亚并未暴发埃博拉疫情，但承认该国出现一例埃博拉病例，并称这是该国首例埃博拉死亡病例。他表示已加强追踪该患者的接触者，最初确认的55名接触者又新增2人，总数达57人，其中10人已被找到并接受隔离观察。",
+   "event_type": "other_security",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": null,
+    "city": "内罗毕",
+    "site": "国家警察服务医院",
+    "raw_text": "Nairobi; National Police Service Hospital in Nairobi"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚卫生部长坚称该国未暴发埃博拉疫情",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Kenya: Health Minister insists no ebola outbreak in country"
+    },
+    {
+     "fact": "肯尼亚卫生部长承认该国出现一例埃博拉病例，并称这是该国首例埃博拉死亡病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "in the wake of Kenya's first death from the disease"
+    },
+    {
+     "fact": "接触者追踪总数从55人增至57人，其中10人已被找到并接受隔离观察",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "of the initial 55 identified contacts, an additional two have been added, bringing the total of contacts to 57. Ten of them have been accounted for and they are already under a quarantine facility"
+    }
+   ],
+   "uncertainties": [
+    "疫情是否已暴发存在官方否认与首例死亡病例并存的矛盾信息",
+    "接触者追踪仍在进行中，其余47名接触者尚未找到",
+    "信息目前仅来自单一来源（Africanews）"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "肯尼亚卫生部长坚称该国未暴发埃博拉疫情",
+   "summary_zh": "肯尼亚卫生部长Aden Duale于周三表示，肯尼亚并未暴发埃博拉疫情，但承认该国出现一例埃博拉病例，并称这是该国首例埃博拉死亡病例。他表示已加强追踪该患者的接触者，最初确认的55名接触者又新增2人，总数达57人，其中10人已被找到并接受隔离观察。",
+   "event_type": "other_security",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": null,
+    "city": "内罗毕",
+    "site": "国家警察服务医院",
+    "raw_text": "Nairobi; National Police Service Hospital in Nairobi"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚卫生部长坚称该国未暴发埃博拉疫情",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Kenya: Health Minister insists no ebola outbreak in country"
+    },
+    {
+     "fact": "肯尼亚卫生部长承认该国出现一例埃博拉病例，并称这是该国首例埃博拉死亡病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "in the wake of Kenya's first death from the disease"
+    },
+    {
+     "fact": "接触者追踪总数从55人增至57人，其中10人已被找到并接受隔离观察",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "of the initial 55 identified contacts, an additional two have been added, bringing the total of contacts to 57. Ten of them have been accounted for and they are already under a quarantine facility"
+    }
+   ],
+   "uncertainties": [
+    "疫情是否已暴发存在官方否认与首例死亡病例并存的矛盾信息",
+    "接触者追踪仍在进行中，其余47名接触者尚未找到",
+    "信息目前仅来自单一来源（Africanews）"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_85a7957bed5c5e81",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

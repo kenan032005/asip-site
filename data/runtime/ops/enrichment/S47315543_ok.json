@@ -1,0 +1,138 @@
+{
+ "label": "S47315543",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "292c524f445363d64c279c67ab4c19a65c6c3c5397c1692cb8beb7c2b8eea569",
+ "tokens": {
+  "input_tokens": 2495,
+  "output_tokens": 591,
+  "total_tokens": 3086
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"嫌疑人申请贝宁护照的真实动机尚未确认\", \"嫌疑人是否意图离开多哥或逃避职业义务尚未证实\", \"目前仅有一个来源（Fraternité）报道，尚缺乏交叉验证\"]",
+    "after": "[\"嫌疑人申请贝宁护照的真实动机尚未确认\", \"嫌疑人是否意图离开多哥或逃避职业义务尚未证实\", \"目前仅有一个来源（Fraternité）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "多哥军人因申请贝宁护照被押至贝宁经济与恐怖主义犯罪法庭",
+   "summary_zh": "一名多哥军人因涉嫌欺诈性获取贝宁护照，被贝宁经济与恐怖主义犯罪法庭（CRIET）羁押。2026年10月5日庭审中，该嫌疑人承认自己并非贝宁籍，但称其有贝宁籍妻子和子女。法庭认为这些理由不足以确立贝宁国籍，维持羁押令，案件延期至2026年11月审理。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": null,
+    "site": "经济与恐怖主义犯罪法庭（CRIET）",
+    "raw_text": "Cour de répression des infractions économiques et du terrorisme (CRIET)"
+   },
+   "key_facts": [
+    {
+     "fact": "一名多哥军人因涉嫌欺诈性获取贝宁护照被押至贝宁CRIET",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un militaire togolais a été placé en détention provisoire au Bénin par la Cour de Répression des Infractions Économiques et du Terrorisme (CRIET) après une tentative d’obtention frauduleuse d’un passeport béninois."
+    },
+    {
+     "fact": "2026年10月5日庭审中嫌疑人承认自己并非贝宁籍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Face aux juges, le prévenu reconnaît ne pas être un ressortissant béninois."
+    },
+    {
+     "fact": "嫌疑人称有贝宁籍妻子和子女，但法庭认为不足以确立贝宁国籍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le militaire dit avoir une épouse béninoise avec laquelle il a des enfants. [...] Mais pour la Cour, ces éléments ne suffisent pas à établir la nationalité béninoise."
+    },
+    {
+     "fact": "嫌疑人否认有意逃离多哥或逃避职业义务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À cette interrogation, le militaire a nié toute volonté de déserter."
+    },
+    {
+     "fact": "CRIET维持羁押令，案件延期至2026年11月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À l’issue de l’audience, la CRIET a maintenu le mandat de dépôt. L’affaire a été renvoyée en novembre 2026."
+    }
+   ],
+   "uncertainties": [
+    "嫌疑人申请贝宁护照的真实动机尚未确认",
+    "嫌疑人是否意图离开多哥或逃避职业义务尚未证实",
+    "目前仅有一个来源（Fraternité）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "多哥军人因申请贝宁护照被押至贝宁经济与恐怖主义犯罪法庭",
+   "summary_zh": "一名多哥军人因涉嫌欺诈性获取贝宁护照，被贝宁经济与恐怖主义犯罪法庭（CRIET）羁押。2026年10月5日庭审中，该嫌疑人承认自己并非贝宁籍，但称其有贝宁籍妻子和子女。法庭认为这些理由不足以确立贝宁国籍，维持羁押令，案件延期至2026年11月审理。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": null,
+    "site": "经济与恐怖主义犯罪法庭（CRIET）",
+    "raw_text": "Cour de répression des infractions économiques et du terrorisme (CRIET)"
+   },
+   "key_facts": [
+    {
+     "fact": "一名多哥军人因涉嫌欺诈性获取贝宁护照被押至贝宁CRIET",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un militaire togolais a été placé en détention provisoire au Bénin par la Cour de Répression des Infractions Économiques et du Terrorisme (CRIET) après une tentative d’obtention frauduleuse d’un passeport béninois."
+    },
+    {
+     "fact": "2026年10月5日庭审中嫌疑人承认自己并非贝宁籍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Face aux juges, le prévenu reconnaît ne pas être un ressortissant béninois."
+    },
+    {
+     "fact": "嫌疑人称有贝宁籍妻子和子女，但法庭认为不足以确立贝宁国籍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le militaire dit avoir une épouse béninoise avec laquelle il a des enfants. [...] Mais pour la Cour, ces éléments ne suffisent pas à établir la nationalité béninoise."
+    },
+    {
+     "fact": "嫌疑人否认有意逃离多哥或逃避职业义务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À cette interrogation, le militaire a nié toute volonté de déserter."
+    },
+    {
+     "fact": "CRIET维持羁押令，案件延期至2026年11月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À l’issue de l’audience, la CRIET a maintenu le mandat de dépôt. L’affaire a été renvoyée en novembre 2026."
+    }
+   ],
+   "uncertainties": [
+    "嫌疑人申请贝宁护照的真实动机尚未确认",
+    "嫌疑人是否意图离开多哥或逃避职业义务尚未证实",
+    "目前仅有一个来源（Fraternité）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_cb1d5bce47315543",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
