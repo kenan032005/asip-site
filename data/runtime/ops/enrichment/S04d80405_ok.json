@@ -1,0 +1,113 @@
+{
+ "label": "S04d80405",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ffc0154afe1c2a94fbd2a2e6e6c6fea0f20b83f393d99d5683768653cda6251c",
+ "tokens": {
+  "input_tokens": 2924,
+  "output_tokens": 642,
+  "total_tokens": 3566
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔武装部队就总动员令开展宣导活动",
+   "summary_zh": "尼日尔武装部队总参谋长马马内·萨尼·基奥准将于2026年10月7日在尼亚美会议宫主持与总动员组织、筹备及实施监督委员会（COMOG）的交流会议。会议面向尼亚美-通迪比亚驻地的军官、士官和士兵，宣导总动员令的意义与要求。该总动员令由总统阿卜杜拉哈马内·蒂亚尼于2025年12月26日以法令设立，旨在加强国防、应对恐怖主义及破坏性威胁。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "会议宫",
+    "raw_text": "palais des congrès de Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔武装部队总参谋长在尼亚美主持与COMOG的交流会议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Chef d’État-Major des Armées, le Général de Brigade Mamane Sani KIAOU a présidé, le mercredi 07 octobre 2026 au palais des congrès de Niamey, une rencontre d’échange avec la Commission chargée de l’organisation, de la préparation et du suivi de la mise en œuvre de la Mobilisation Générale (COMOG)"
+    },
+    {
+     "fact": "会议面向尼亚美-通迪比亚驻地的军官、士官和士兵宣导总动员令",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il s’agit de l’ensemble des composantes des Forces Armées Nigériennes, à savoir Officiers, Sous-officiers et Militaires du rang de la place Niamey-Tondibiah qui se sont rassemblés pour échanger avec la Commission"
+    },
+    {
+     "fact": "总动员令由总统蒂亚尼于2025年12月26日以法令设立，旨在加强国防、应对恐怖主义及破坏性威胁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Instituée par ordonnance prise le 26 décembre 2025 par le Président de la République, le Général d’Armée Abdourahamane Tiani, la mobilisation générale vise à renforcer la défense de la patrie et faire face aux défis sécuritaires et économiques du pays"
+    },
+    {
+     "fact": "尼日尔武装部队是此次总动员宣导车队的最后一站",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les Forces Armées Nigériennes (FAN) ont constitué la dernière étape de la caravane de sensibilisation des Forces de Défense et de Sécurité sur la Mobilisation Générale"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（尼日尔官方通讯社ANP），尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔武装部队就总动员令开展宣导活动",
+   "summary_zh": "尼日尔武装部队总参谋长马马内·萨尼·基奥准将于2026年10月7日在尼亚美会议宫主持与总动员组织、筹备及实施监督委员会（COMOG）的交流会议。会议面向尼亚美-通迪比亚驻地的军官、士官和士兵，宣导总动员令的意义与要求。该总动员令由总统阿卜杜拉哈马内·蒂亚尼于2025年12月26日以法令设立，旨在加强国防、应对恐怖主义及破坏性威胁。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "会议宫",
+    "raw_text": "palais des congrès de Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔武装部队总参谋长在尼亚美主持与COMOG的交流会议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Chef d’État-Major des Armées, le Général de Brigade Mamane Sani KIAOU a présidé, le mercredi 07 octobre 2026 au palais des congrès de Niamey, une rencontre d’échange avec la Commission chargée de l’organisation, de la préparation et du suivi de la mise en œuvre de la Mobilisation Générale (COMOG)"
+    },
+    {
+     "fact": "会议面向尼亚美-通迪比亚驻地的军官、士官和士兵宣导总动员令",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il s’agit de l’ensemble des composantes des Forces Armées Nigériennes, à savoir Officiers, Sous-officiers et Militaires du rang de la place Niamey-Tondibiah qui se sont rassemblés pour échanger avec la Commission"
+    },
+    {
+     "fact": "总动员令由总统蒂亚尼于2025年12月26日以法令设立，旨在加强国防、应对恐怖主义及破坏性威胁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Instituée par ordonnance prise le 26 décembre 2025 par le Président de la République, le Général d’Armée Abdourahamane Tiani, la mobilisation générale vise à renforcer la défense de la patrie et faire face aux défis sécuritaires et économiques du pays"
+    },
+    {
+     "fact": "尼日尔武装部队是此次总动员宣导车队的最后一站",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les Forces Armées Nigériennes (FAN) ont constitué la dernière étape de la caravane de sensibilisation des Forces de Défense et de Sécurité sur la Mobilisation Générale"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（尼日尔官方通讯社ANP），尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_e9aa2de404d80405",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
