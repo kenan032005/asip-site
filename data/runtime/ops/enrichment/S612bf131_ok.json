@@ -1,0 +1,115 @@
+{
+ "label": "S612bf131",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "50d7b389b591fe0025b5c43f56e1abae2c6ef021f284fed9c046e463a41ea181",
+ "tokens": {
+  "input_tokens": 2450,
+  "output_tokens": 504,
+  "total_tokens": 2954
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得提贝斯提地区危机：十四名人质获释",
+   "summary_zh": "乍得提贝斯提地区图尔库山区的十四名人质在被扣押七十二小时后获释。政府称，此次无条件释放是通过与当地传统权威共同调解实现的。获释人质为两个社区的青年，均健康状况良好。当局表示，仍在追捕一名谋杀嫌疑人及其同伙。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "提贝斯提",
+    "city": "巴尔达伊",
+    "site": "图尔库山区",
+    "raw_text": "massifs de Tourkou, dans le Tibesti, département de Wour"
+   },
+   "key_facts": [
+    {
+     "fact": "十四名人质在图尔库山区被扣押七十二小时后获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Après soixante-douze heures de captivité dans les massifs de Tourkou, dans le département de Wour, les quatorze personnes qui avaient été enlevées ont été libérées dans la soirée de ce jeudi"
+    },
+    {
+     "fact": "获释是通过与达尔比利亚苏丹及图布族代表共同调解实现的",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La libération a été obtenue grâce à une médiation menée conjointement avec le Sultan du Dar Bilia, Sa Majesté Sidick Timan Déby, et le représentant du Derdey des Toubous"
+    },
+    {
+     "fact": "人质为两个社区的青年，均健康状况良好",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les otages, des jeunes issus des deux communautés qui étaient retenus de part et d'autre, ont tous été retrouvés en bonne santé et présentés aux autorités"
+    },
+    {
+     "fact": "当局称仍在追捕一名谋杀嫌疑人及其同伙",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les recherches se poursuivaient pour retrouver le meurtrier présumé de Tahir Souleymane Arim, actuellement en cavale, ainsi que ses complices"
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（Alwihda Info）报道，尚缺乏交叉验证",
+    "谋杀嫌疑人身份及其同伙情况尚未证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得提贝斯提地区危机：十四名人质获释",
+   "summary_zh": "乍得提贝斯提地区图尔库山区的十四名人质在被扣押七十二小时后获释。政府称，此次无条件释放是通过与当地传统权威共同调解实现的。获释人质为两个社区的青年，均健康状况良好。当局表示，仍在追捕一名谋杀嫌疑人及其同伙。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "提贝斯提",
+    "city": "巴尔达伊",
+    "site": "图尔库山区",
+    "raw_text": "massifs de Tourkou, dans le Tibesti, département de Wour"
+   },
+   "key_facts": [
+    {
+     "fact": "十四名人质在图尔库山区被扣押七十二小时后获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Après soixante-douze heures de captivité dans les massifs de Tourkou, dans le département de Wour, les quatorze personnes qui avaient été enlevées ont été libérées dans la soirée de ce jeudi"
+    },
+    {
+     "fact": "获释是通过与达尔比利亚苏丹及图布族代表共同调解实现的",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La libération a été obtenue grâce à une médiation menée conjointement avec le Sultan du Dar Bilia, Sa Majesté Sidick Timan Déby, et le représentant du Derdey des Toubous"
+    },
+    {
+     "fact": "人质为两个社区的青年，均健康状况良好",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les otages, des jeunes issus des deux communautés qui étaient retenus de part et d'autre, ont tous été retrouvés en bonne santé et présentés aux autorités"
+    },
+    {
+     "fact": "当局称仍在追捕一名谋杀嫌疑人及其同伙",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les recherches se poursuivaient pour retrouver le meurtrier présumé de Tahir Souleymane Arim, actuellement en cavale, ainsi que ses complices"
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（Alwihda Info）报道，尚缺乏交叉验证",
+    "谋杀嫌疑人身份及其同伙情况尚未证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_972c9913612bf131",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
