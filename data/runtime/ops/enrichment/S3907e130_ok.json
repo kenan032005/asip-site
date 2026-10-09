@@ -1,0 +1,105 @@
+{
+ "label": "S3907e130",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "272eb379a2ea690fa0f8223a98e745d4d16a8c7342d9ed2300dcdee2105f643e",
+ "tokens": {
+  "input_tokens": 2152,
+  "output_tokens": 368,
+  "total_tokens": 2520
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳一男子在公交车上布道引发乘客不满",
+   "summary_zh": "据加纳媒体报道，一名男子在Kejetia登上trotro（当地小巴）后，手持圣经、以洪亮嗓音向乘客布道，声称要在车辆抵达Ejisu前拯救灵魂。报道称部分乘客本意是休息或打电话，一名疲惫女性只希望安静回家。该报道为单一来源，内容带有叙事色彩。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "Kejetia",
+    "site": "trotro（当地小巴）",
+    "raw_text": "a man boarded a trotro at Kejetia"
+   },
+   "key_facts": [
+    {
+     "fact": "一名男子在Kejetia登上trotro后向乘客布道",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a man boarded a trotro at Kejetia with a Bible, a powerful voice and an urgent assignment from Heaven"
+    },
+    {
+     "fact": "该男子称其任务是在车辆抵达Ejisu前拯救灵魂",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "His mission was to save souls before the vehicle reached Ejisu"
+    },
+    {
+     "fact": "部分乘客对布道感到不满，有人想睡觉或打电话",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Some wanted to sleep, others wanted to make telephone calls, and one exhausted woman simply wanted to reach home"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "报道内容带有叙事/文学化色彩，具体细节未获独立确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 55
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳一男子在公交车上布道引发乘客不满",
+   "summary_zh": "据加纳媒体报道，一名男子在Kejetia登上trotro（当地小巴）后，手持圣经、以洪亮嗓音向乘客布道，声称要在车辆抵达Ejisu前拯救灵魂。报道称部分乘客本意是休息或打电话，一名疲惫女性只希望安静回家。该报道为单一来源，内容带有叙事色彩。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "Kejetia",
+    "site": "trotro（当地小巴）",
+    "raw_text": "a man boarded a trotro at Kejetia"
+   },
+   "key_facts": [
+    {
+     "fact": "一名男子在Kejetia登上trotro后向乘客布道",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a man boarded a trotro at Kejetia with a Bible, a powerful voice and an urgent assignment from Heaven"
+    },
+    {
+     "fact": "该男子称其任务是在车辆抵达Ejisu前拯救灵魂",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "His mission was to save souls before the vehicle reached Ejisu"
+    },
+    {
+     "fact": "部分乘客对布道感到不满，有人想睡觉或打电话",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Some wanted to sleep, others wanted to make telephone calls, and one exhausted woman simply wanted to reach home"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "报道内容带有叙事/文学化色彩，具体细节未获独立确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 55
+  }
+ },
+ "event_id": "EVT_8fb008833907e130",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
