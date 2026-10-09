@@ -1,0 +1,139 @@
+{
+ "label": "Scb2740c7",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "791e40ed5d9d44a3a4aa3f81a5fd38488ad792f3de3840e3a5ac13f869808184",
+ "tokens": {
+  "input_tokens": 2279,
+  "output_tokens": 619,
+  "total_tokens": 2898
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹伦拜克武装冲突初步报告称死亡人数达71人",
+   "summary_zh": "南苏丹湖泊州首府伦拜克发生武装平民之间的冲突，一份政府初步报告称死亡人数约为71人，其中包括4名士兵。信息部表示该数字基于初步安全报告，确切死伤人数尚未确认。政府称已部署联合安全部队控制局势，并逮捕4名武装平民、缴获4支枪械。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "湖泊州",
+    "city": "伦拜克",
+    "site": null,
+    "raw_text": "Rumbek, the capital of South Sudan’s Lakes State"
+   },
+   "key_facts": [
+    {
+     "fact": "一份政府初步报告称伦拜克冲突死亡人数约为71人，其中包括4名士兵",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A preliminary government report puts the death toll from clashes between armed civilians in Rumbek, the capital of South Sudan’s Lakes State, at about 71, including four soldiers."
+    },
+    {
+     "fact": "冲突于周五凌晨约4时在伦拜克镇爆发",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The fighting erupted in the town of Rumbek at about 4 a.m. on Friday."
+    },
+    {
+     "fact": "信息部称该数字基于初步安全报告，确切死伤人数尚未确认",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the figure was based on preliminary security reports and that the exact number of people killed and wounded remained unconfirmed"
+    },
+    {
+     "fact": "政府称已部署南苏丹人民国防军、国家安全局和国家警察组成的联合安全部队并控制局势",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the government said it had deployed joint security forces comprising the South Sudan People’s Defence Forces (SSPDF), the National Security Service and the national police, adding that they had brought the situation under control."
+    },
+    {
+     "fact": "4名武装平民被捕，4支枪械被缴获，嫌疑人及武器由南苏丹人民国防军羁押待查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Four armed civilians had been arrested and four firearms recovered, the statement said. The suspects and weapons were in SSPDF custody pending further investigation and legal action."
+    },
+    {
+     "fact": "此前周四伦拜克中县郊外Nyangkot村发生冲突，当地官员称4人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Four people were killed in the initial clashes in Nyangkot, according to local officials."
+    }
+   ],
+   "uncertainties": [
+    "确切死亡和受伤人数尚未确认，71人为政府初步报告数字",
+    "政府未提供平民伤亡的分类明细",
+    "政府未说明被捕嫌疑人是否涉嫌具体杀戮行为",
+    "事件目前仅有一个来源（Radio Tamazuj）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹伦拜克武装冲突初步报告称死亡人数达71人",
+   "summary_zh": "南苏丹湖泊州首府伦拜克发生武装平民之间的冲突，一份政府初步报告称死亡人数约为71人，其中包括4名士兵。信息部表示该数字基于初步安全报告，确切死伤人数尚未确认。政府称已部署联合安全部队控制局势，并逮捕4名武装平民、缴获4支枪械。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "湖泊州",
+    "city": "伦拜克",
+    "site": null,
+    "raw_text": "Rumbek, the capital of South Sudan’s Lakes State"
+   },
+   "key_facts": [
+    {
+     "fact": "一份政府初步报告称伦拜克冲突死亡人数约为71人，其中包括4名士兵",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A preliminary government report puts the death toll from clashes between armed civilians in Rumbek, the capital of South Sudan’s Lakes State, at about 71, including four soldiers."
+    },
+    {
+     "fact": "冲突于周五凌晨约4时在伦拜克镇爆发",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The fighting erupted in the town of Rumbek at about 4 a.m. on Friday."
+    },
+    {
+     "fact": "信息部称该数字基于初步安全报告，确切死伤人数尚未确认",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the figure was based on preliminary security reports and that the exact number of people killed and wounded remained unconfirmed"
+    },
+    {
+     "fact": "政府称已部署南苏丹人民国防军、国家安全局和国家警察组成的联合安全部队并控制局势",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the government said it had deployed joint security forces comprising the South Sudan People’s Defence Forces (SSPDF), the National Security Service and the national police, adding that they had brought the situation under control."
+    },
+    {
+     "fact": "4名武装平民被捕，4支枪械被缴获，嫌疑人及武器由南苏丹人民国防军羁押待查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Four armed civilians had been arrested and four firearms recovered, the statement said. The suspects and weapons were in SSPDF custody pending further investigation and legal action."
+    },
+    {
+     "fact": "此前周四伦拜克中县郊外Nyangkot村发生冲突，当地官员称4人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Four people were killed in the initial clashes in Nyangkot, according to local officials."
+    }
+   ],
+   "uncertainties": [
+    "确切死亡和受伤人数尚未确认，71人为政府初步报告数字",
+    "政府未提供平民伤亡的分类明细",
+    "政府未说明被捕嫌疑人是否涉嫌具体杀戮行为",
+    "事件目前仅有一个来源（Radio Tamazuj）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_67c19d75cb2740c7",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

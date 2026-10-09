@@ -1,0 +1,127 @@
+{
+ "label": "S21e4c6d9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6fe94f4f4acdf23214644941ed1207931f28f6c330183978b251739ba781f649",
+ "tokens": {
+  "input_tokens": 1997,
+  "output_tokens": 508,
+  "total_tokens": 2505
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "埃塞俄比亚与厄立特里亚互指侵略，地区冲突恐升级",
+   "summary_zh": "埃塞俄比亚与厄立特里亚相互指控对方发动侵略，埃塞俄比亚北部战事引发对新一轮地区战争的担忧。埃塞俄比亚指责厄立特里亚支持提格雷武装，厄立特里亚则称亚的斯亚贝巴对其发动无端战争。据报厄立特里亚军队已部署至提格雷，埃塞俄比亚部队对其发动无人机打击，一名安全消息人士估计该地区有5000至8000名厄立特里亚士兵。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷",
+    "city": null,
+    "site": null,
+    "raw_text": "northern Ethiopia / Tigray"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚与厄立特里亚互指对方发动侵略",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ethiopia and Eritrea are trading accusations of aggression"
+    },
+    {
+     "fact": "埃塞俄比亚指责厄立特里亚支持提格雷武装",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ethiopia accuses Eritrea of backing Tigrayan rebels"
+    },
+    {
+     "fact": "厄立特里亚称亚的斯亚贝巴对其发动无端战争",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eritrea says Addis Ababa is waging an unprovoked war against it"
+    },
+    {
+     "fact": "据报厄立特里亚军队已部署至提格雷，埃塞俄比亚部队对其发动无人机打击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eritrean troops reportedly deployed in Tigray and Ethiopian forces launching drone strikes against them"
+    },
+    {
+     "fact": "一名安全消息人士估计该地区有5000至8000名厄立特里亚士兵",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A security source estimates between 5,000 and 8,000 Eritrean soldiers are in the region"
+    }
+   ],
+   "uncertainties": [
+    "厄立特里亚军队部署及无人机打击情况为据报，尚未证实",
+    "5000至8000名厄立特里亚士兵的估计来自单一安全消息人士，未获交叉验证",
+    "事件目前仅有一个来源报道，缺乏独立来源证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "埃塞俄比亚与厄立特里亚互指侵略，地区冲突恐升级",
+   "summary_zh": "埃塞俄比亚与厄立特里亚相互指控对方发动侵略，埃塞俄比亚北部战事引发对新一轮地区战争的担忧。埃塞俄比亚指责厄立特里亚支持提格雷武装，厄立特里亚则称亚的斯亚贝巴对其发动无端战争。据报厄立特里亚军队已部署至提格雷，埃塞俄比亚部队对其发动无人机打击，一名安全消息人士估计该地区有5000至8000名厄立特里亚士兵。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷",
+    "city": null,
+    "site": null,
+    "raw_text": "northern Ethiopia / Tigray"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚与厄立特里亚互指对方发动侵略",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ethiopia and Eritrea are trading accusations of aggression"
+    },
+    {
+     "fact": "埃塞俄比亚指责厄立特里亚支持提格雷武装",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ethiopia accuses Eritrea of backing Tigrayan rebels"
+    },
+    {
+     "fact": "厄立特里亚称亚的斯亚贝巴对其发动无端战争",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eritrea says Addis Ababa is waging an unprovoked war against it"
+    },
+    {
+     "fact": "据报厄立特里亚军队已部署至提格雷，埃塞俄比亚部队对其发动无人机打击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eritrean troops reportedly deployed in Tigray and Ethiopian forces launching drone strikes against them"
+    },
+    {
+     "fact": "一名安全消息人士估计该地区有5000至8000名厄立特里亚士兵",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A security source estimates between 5,000 and 8,000 Eritrean soldiers are in the region"
+    }
+   ],
+   "uncertainties": [
+    "厄立特里亚军队部署及无人机打击情况为据报，尚未证实",
+    "5000至8000名厄立特里亚士兵的估计来自单一安全消息人士，未获交叉验证",
+    "事件目前仅有一个来源报道，缺乏独立来源证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_815db2c521e4c6d9",
+ "disease_event_id": null,
+ "country_code": "ET"
+}
