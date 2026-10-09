@@ -1,15 +1,15 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-10T05:28:35+08:00",
+ "generated_at": "2026-10-10T06:58:12+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 39,
-  "signals_7d": 286,
-  "verified_events_24h": 40,
-  "verified_events_7d": 300,
+  "signals_24h": 29,
+  "signals_7d": 289,
+  "verified_events_24h": 32,
+  "verified_events_7d": 305,
   "multi_source_verified_events_7d": 11,
   "countries_with_activity_24h": 12,
   "total_countries_monitored": 22
@@ -17,10 +17,10 @@
  "countries_24h": [
   "乍得",
   "几内亚比绍",
+  "刚果（金）",
   "加纳",
   "南苏丹",
   "吉布提",
-  "喀麦隆",
   "埃塞俄比亚",
   "尼日利亚",
   "尼日尔",
@@ -69,7 +69,7 @@
   },
   {
    "value": "乍得",
-   "count": 37
+   "count": 38
   },
   {
    "value": "埃塞俄比亚",
@@ -77,7 +77,7 @@
   },
   {
    "value": "南苏丹",
-   "count": 23
+   "count": 24
   },
   {
    "value": "刚果（金）",
@@ -89,7 +89,7 @@
   },
   {
    "value": "莫桑比克",
-   "count": 9
+   "count": 10
   },
   {
    "value": "贝宁",
@@ -110,16 +110,16 @@
  ],
  "category_distribution_24h": [
   {
-   "value": "election_security",
-   "count": 15
-  },
-  {
    "value": "其他安全",
-   "count": 13
+   "count": 16
   },
   {
    "value": "武装冲突",
    "count": 5
+  },
+  {
+   "value": "election_security",
+   "count": 3
   },
   {
    "value": "绑架",
@@ -136,24 +136,20 @@
   {
    "value": "基础设施安全",
    "count": 1
-  },
-  {
-   "value": "民众骚乱",
-   "count": 1
   }
  ],
  "source_tier_distribution_7d": [
   {
    "value": "B",
-   "count": 284
+   "count": 286
   },
   {
    "value": "C",
-   "count": 206
+   "count": 211
   },
   {
    "value": "A",
-   "count": 96
+   "count": 97
   }
  ],
  "top_verified_events": [
@@ -249,6 +245,36 @@
   }
  ],
  "top_signals": [
+  {
+   "fact_id": "news:81bc29fd3f6f78ef",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "MPS : Mobilisation et concorde affichées entre la Coordination Bamina Assas et les militants du Guéra",
+   "category": "other_security",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-10 04:17",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:90ea09ee39680295",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "Eight killed, seven injured in attack near Pariang",
+   "category": "other_security",
+   "source": "Radio Tamazuj",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-10 02:38",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   {
    "fact_id": "news:15a5d3566a3671bb",
    "level": "news_signal",
@@ -578,36 +604,6 @@
    "time": "2026-10-09 13:21",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:b009b76905f81dcd",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "提格雷战争：和平谈判为何可能在开始前就失败",
-   "category": "armed_conflict",
-   "source": "Africanews",
-   "source_tier": "B",
-   "source_role": "aggregator_discovery",
-   "time": "2026-10-09 08:00",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:2ebe7e8b9091f857",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "埃塞俄比亚与厄立特里亚互指侵略，地区冲突恐升级",
-   "category": "armed_conflict",
-   "source": "Africanews",
-   "source_tier": "B",
-   "source_role": "aggregator_discovery",
-   "time": "2026-10-09 08:00",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -686,16 +682,46 @@
  ],
  "existing_assessment": {
   "status": "ai",
-  "overall_assessment": "已核实事件方面，刚果（金）埃博拉疫情死亡人数突破4000人，并已启动暴露后药物试验，东部军队与联刚稳定团部署支援应对；埃塞俄比亚联邦部队重新夺回默克莱机场，反叛武装撤出提格雷州首府；乍得四个省份及恩贾梅纳报告登革热病例，卫生部门发布警报；尼日利亚高原州多车相撞致20人死亡，伊莫州警方因担心简易爆炸装置推迟营救突袭；苏丹燃油短缺推高物价；几内亚比绍被罢黜总统被禁止回国引发不同反应。情报信号方面，均为单源消息、尚待核实：南苏丹伦拜克武装冲突初步报告称死亡71人；马里基达尔士兵人数超过居民；莫桑比克纳卡拉局势；尼日尔津德尔警方捣毁两个犯罪网络；乍得提贝斯提图尔库14名人质获释（两源）。整体风险方向趋于恶化，需持续跟踪疫情、冲突与选举相关动态。",
+  "overall_assessment": "已核实事件方面，乍得登革热疫情在恩贾梅纳及多省持续报告，卫生部门发布警报；刚果（金）埃博拉死亡人数突破4000人并启动暴露后药物试验，东部军队与联刚稳定团支援应对；埃塞俄比亚联邦部队重新夺回默克莱机场，反叛武装撤出提格雷首府；尼日利亚、肯尼亚发生重大交通事故，南苏丹、苏丹面临洪水与燃油短缺压力。情报信号方面，均为单源消息、尚待核实：南苏丹伦拜克武装冲突初步报告称死亡71人，帕里昂附近袭击致8死7伤；马里基达尔士兵人数超过居民；莫桑比克纳卡拉局势；乍得提贝斯提图尔库14名人质获释（两源）。整体看，公共卫生与武装冲突风险并存，萨赫勒与东非方向需持续关注。",
   "risk_direction": "worsening",
   "confidence": "medium",
-  "generated_time": "2026-10-10T05:28:27+08:00",
+  "generated_time": "2026-10-10T06:58:03+08:00",
   "based_on": "过去24小时/7日公开信息",
   "model": "",
   "date": "20261010"
  },
- "fact_count": 586,
+ "fact_count": 594,
  "facts": {
+  "news:81bc29fd3f6f78ef": {
+   "fact_id": "news:81bc29fd3f6f78ef",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "MPS : Mobilisation et concorde affichées entre la Coordination Bamina Assas et les militants du Guéra",
+   "category": "other_security",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-10 04:17",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:90ea09ee39680295": {
+   "fact_id": "news:90ea09ee39680295",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "Eight killed, seven injured in attack near Pariang",
+   "category": "other_security",
+   "source": "Radio Tamazuj",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-10 02:38",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:15a5d3566a3671bb": {
    "fact_id": "news:15a5d3566a3671bb",
    "level": "news_signal",
@@ -1049,6 +1075,21 @@
    "country": "埃塞俄比亚",
    "title": "埃塞俄比亚与厄立特里亚互指侵略，地区冲突恐升级",
    "category": "armed_conflict",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-09 08:00",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:f2bc214d306f79aa": {
+   "fact_id": "news:f2bc214d306f79aa",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "莫桑比克",
+   "title": "Navi Pillay wins Nobel Peace Prize as US sanctions threaten international justice",
+   "category": "other_security",
    "source": "Africanews",
    "source_tier": "B",
    "source_role": "aggregator_discovery",
@@ -9483,6 +9524,81 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-09 11:23",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_93f937827ce09c17": {
+   "fact_id": "EVT_93f937827ce09c17",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "刚果（金）",
+   "title": "刚果（金）前总统卡比拉抨击齐塞克迪：国家局势持续恶化",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-09 20:02",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_f605798fc78844f1": {
+   "fact_id": "EVT_f605798fc78844f1",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "莫桑比克",
+   "title": "Navi Pillay wins Nobel Peace Prize as US sanctions threaten international justice",
+   "category": "other_security",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-09 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_ee36b371339091eb": {
+   "fact_id": "EVT_ee36b371339091eb",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "南苏丹Pariang附近村庄遭武装袭击，至少8死7伤",
+   "category": "other_security",
+   "source": "Radio Tamazuj",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-09 18:38",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_a71c50471e8cae1c": {
+   "fact_id": "EVT_a71c50471e8cae1c",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "乍得执政党MPS在恩贾梅纳举行动员与团结集会",
+   "category": "other_security",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-09 20:17",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_30c4065b1d6d8046": {
+   "fact_id": "EVT_30c4065b1d6d8046",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "乍得提贝斯提14名人质被囚三天后获释",
+   "category": "other_security",
+   "source": "Journal du Tchad",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-09 12:47",
    "importance": "high",
    "severity": "medium"
   }

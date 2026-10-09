@@ -1,0 +1,135 @@
+{
+ "label": "S7ce09c17",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "8c45d5b8638e5db5fa0aa09f7c77e993909f023a9e6eba2a52f0489a3fc9623b",
+ "tokens": {
+  "input_tokens": 2725,
+  "output_tokens": 608,
+  "total_tokens": 3333
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）前总统卡比拉抨击齐塞克迪：国家局势持续恶化",
+   "summary_zh": "刚果（金）前总统约瑟夫·卡比拉于10月9日发表全国讲话，指责其继任者齐塞克迪将国家带入政治、安全与经济危机。卡比拉称刚果（金）已不再是一个共和国，更谈不上民主，并批评现政权在安全领域继续战争却缺乏意愿与手段。他同时指责现政权与武装团体保持合作，并认为与美国的关键矿产协议威胁国家独立。",
+   "event_type": "political_instability",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）前总统卡比拉发表全国讲话，抨击继任者齐塞克迪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'ancien président congolais, Joseph Kabila, s'est adressé à la nation, vendredi 9 octobre en fin d'après-midi"
+    },
+    {
+     "fact": "卡比拉指控齐塞克迪将刚果（金）带入政治、安全与经济危机",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Joseph Kabila accuse Félix Tshisekedi d'avoir conduit la RDC vers une crise politique, sécuritaire et économique majeure."
+    },
+    {
+     "fact": "卡比拉称刚果（金）已不再是共和国，更谈不上民主",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la RDC « n'est plus une République, encore moins démocratique »"
+    },
+    {
+     "fact": "卡比拉批评现政权在安全领域继续战争却缺乏意愿与手段",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Joseph Kabila reproche au pouvoir actuel de poursuivre une « guerre » sans avoir « ni la volonté ni les moyens de (la) gagner »"
+    },
+    {
+     "fact": "卡比拉指控现政权与武装团体保持合作，包括瓦扎伦多和卢旺达解放民主力量",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "de maintenir sa collaboration avec des groupes armés, notamment les wazalendo et les Forces démocratiques de libération du Rwanda (FDLR)"
+    },
+    {
+     "fact": "卡比拉认为与美国的关键矿产协议威胁国家独立与后代未来",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les accords sur les minerais critiques avec les États-Unis menacent « l'indépendance nationale et l'avenir des générations futures »"
+    }
+   ],
+   "uncertainties": [
+    "卡比拉的指控尚未获得独立证实",
+    "目前仅一个来源（RFI）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）前总统卡比拉抨击齐塞克迪：国家局势持续恶化",
+   "summary_zh": "刚果（金）前总统约瑟夫·卡比拉于10月9日发表全国讲话，指责其继任者齐塞克迪将国家带入政治、安全与经济危机。卡比拉称刚果（金）已不再是一个共和国，更谈不上民主，并批评现政权在安全领域继续战争却缺乏意愿与手段。他同时指责现政权与武装团体保持合作，并认为与美国的关键矿产协议威胁国家独立。",
+   "event_type": "political_instability",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）前总统卡比拉发表全国讲话，抨击继任者齐塞克迪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'ancien président congolais, Joseph Kabila, s'est adressé à la nation, vendredi 9 octobre en fin d'après-midi"
+    },
+    {
+     "fact": "卡比拉指控齐塞克迪将刚果（金）带入政治、安全与经济危机",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Joseph Kabila accuse Félix Tshisekedi d'avoir conduit la RDC vers une crise politique, sécuritaire et économique majeure."
+    },
+    {
+     "fact": "卡比拉称刚果（金）已不再是共和国，更谈不上民主",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la RDC « n'est plus une République, encore moins démocratique »"
+    },
+    {
+     "fact": "卡比拉批评现政权在安全领域继续战争却缺乏意愿与手段",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Joseph Kabila reproche au pouvoir actuel de poursuivre une « guerre » sans avoir « ni la volonté ni les moyens de (la) gagner »"
+    },
+    {
+     "fact": "卡比拉指控现政权与武装团体保持合作，包括瓦扎伦多和卢旺达解放民主力量",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "de maintenir sa collaboration avec des groupes armés, notamment les wazalendo et les Forces démocratiques de libération du Rwanda (FDLR)"
+    },
+    {
+     "fact": "卡比拉认为与美国的关键矿产协议威胁国家独立与后代未来",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les accords sur les minerais critiques avec les États-Unis menacent « l'indépendance nationale et l'avenir des générations futures »"
+    }
+   ],
+   "uncertainties": [
+    "卡比拉的指控尚未获得独立证实",
+    "目前仅一个来源（RFI）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_93f937827ce09c17",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

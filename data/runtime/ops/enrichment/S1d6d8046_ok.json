@@ -1,0 +1,125 @@
+{
+ "label": "S1d6d8046",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "33afff42d9b49c9d1a69aca42893b17e304e576342ae80e9901139c46f91056e",
+ "tokens": {
+  "input_tokens": 2264,
+  "output_tokens": 506,
+  "total_tokens": 2770
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得提贝斯提14名人质被囚三天后获释",
+   "summary_zh": "据官方消息，在乍得提贝斯提省图尔库山区被绑架的14人已于2026年10月8日傍晚获释，被囚禁72小时后无条件释放。据称他们健康状况良好，并被介绍给行政、传统和军事负责人。此次释放是在一个部级代表团与部落调解人参与密集谈判后实现的。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "提贝斯提省",
+    "city": null,
+    "site": "图尔库山区",
+    "raw_text": "massif de Tourkou, province du Tibesti"
+   },
+   "key_facts": [
+    {
+     "fact": "14人在提贝斯提省图尔库山区被绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les 14 personnes enlevées dans le massif de Tourkou, province du Tibesti"
+    },
+    {
+     "fact": "被囚禁72小时后于2026年10月8日傍晚无条件获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les 14 personnes gardées en captivité pendant 72 heures ont recouvré la liberté le jeudi 08 octobre 2026 en soirée. Elles ont été libérées sans condition"
+    },
+    {
+     "fact": "获释者据称健康状况良好",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "elles sont en bonne santé et ont été présentées aux responsables administratifs, traditionnels et militaires"
+    },
+    {
+     "fact": "释放是在部级代表团与部落调解人密集谈判后实现的",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Leur libération intervient suite à d’intenses négociations conduites par une délégation ministérielle, avec la participation des médiateurs traditionnels"
+    },
+    {
+     "fact": "14名年轻人因达尔巴利亚与图鲁斯之间的族群冲突被扣押",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les 14 jeunes étaient détenus dans le cadre d’un conflit intercommunautaire opposant Dar Balia aux Tourous"
+    }
+   ],
+   "uncertainties": [
+    "消息仅来自单一来源（官方消息），尚未获得独立交叉验证",
+    "获释者健康状况良好等细节尚未获独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得提贝斯提14名人质被囚三天后获释",
+   "summary_zh": "据官方消息，在乍得提贝斯提省图尔库山区被绑架的14人已于2026年10月8日傍晚获释，被囚禁72小时后无条件释放。据称他们健康状况良好，并被介绍给行政、传统和军事负责人。此次释放是在一个部级代表团与部落调解人参与密集谈判后实现的。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "提贝斯提省",
+    "city": null,
+    "site": "图尔库山区",
+    "raw_text": "massif de Tourkou, province du Tibesti"
+   },
+   "key_facts": [
+    {
+     "fact": "14人在提贝斯提省图尔库山区被绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les 14 personnes enlevées dans le massif de Tourkou, province du Tibesti"
+    },
+    {
+     "fact": "被囚禁72小时后于2026年10月8日傍晚无条件获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les 14 personnes gardées en captivité pendant 72 heures ont recouvré la liberté le jeudi 08 octobre 2026 en soirée. Elles ont été libérées sans condition"
+    },
+    {
+     "fact": "获释者据称健康状况良好",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "elles sont en bonne santé et ont été présentées aux responsables administratifs, traditionnels et militaires"
+    },
+    {
+     "fact": "释放是在部级代表团与部落调解人密集谈判后实现的",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Leur libération intervient suite à d’intenses négociations conduites par une délégation ministérielle, avec la participation des médiateurs traditionnels"
+    },
+    {
+     "fact": "14名年轻人因达尔巴利亚与图鲁斯之间的族群冲突被扣押",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les 14 jeunes étaient détenus dans le cadre d’un conflit intercommunautaire opposant Dar Balia aux Tourous"
+    }
+   ],
+   "uncertainties": [
+    "消息仅来自单一来源（官方消息），尚未获得独立交叉验证",
+    "获释者健康状况良好等细节尚未获独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_30c4065b1d6d8046",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
