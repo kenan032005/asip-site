@@ -1,0 +1,135 @@
+{
+ "label": "S8fc7c78c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "8b7f0992b9a1f8b5fb1e13beb98f61ae7c99d12879dceda1691bacf9499c16bb",
+ "tokens": {
+  "input_tokens": 2282,
+  "output_tokens": 680,
+  "total_tokens": 2962
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "瓦乌军事法庭就联合国南苏丹特派团工作人员遇害案作出判决",
+   "summary_zh": "南苏丹瓦乌普通军事法庭裁定一名南苏丹人民国防军士兵绑架并杀害联合国南苏丹特派团一名本国工作人员罪名成立，判处十年监禁、降级并开除军籍，同时向受害者家属赔偿51头牛。该判决允许上诉。联合国南苏丹特派团表示欢迎，并称自2011年成立以来已有19名维和人员因恶意行为遇害、32人受伤。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Western Bahr-el-Ghazal",
+    "city": "Wau",
+    "site": "Hai Masna",
+    "raw_text": "Wau, Western Bahr-el-Ghazal, Hai Masna"
+   },
+   "key_facts": [
+    {
+     "fact": "瓦乌普通军事法庭裁定一名南苏丹人民国防军士兵绑架并杀害联合国南苏丹特派团一名本国工作人员罪名成立",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A General Court Martial conducted in Wau has found a soldier serving with the South Sudan Peoples’ Defense Forces guilty of the abduction and murder of a United Nations Mission in South Sudan national staff member"
+    },
+    {
+     "fact": "案发时间为2025年12月15日，地点为西加扎勒河州海马斯纳，受害者当时正在执行公务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "while he was on official duty in Hai Masna, Western Bahr-el-Ghazal, on 15 December 2025"
+    },
+    {
+     "fact": "法庭判处被告十年监禁、降级并开除军籍，并向受害者家属赔偿51头牛",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Court Martial sentenced the accused to ten years’ imprisonment, ordered a reduction in rank and dismissal from the SSPDF, and awarded compensation of 51 head of cattle to the victim’s family"
+    },
+    {
+     "fact": "判决允许上诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The judgment provides for a right of appeal"
+    },
+    {
+     "fact": "自2011年7月9日联合国南苏丹特派团成立以来，已有19名维和人员因恶意行为遇害、32人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Since UNMISS was established on 9 July 2011, 19 peacekeepers have been killed and 32 injured due to malicious acts"
+    },
+    {
+     "fact": "瓦乌普通军事法庭共审理10起案件，对8起作出判决，其中4名南苏丹人民国防军成员被定罪、4人无罪释放",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In total, the General Court Martial in Wau heard 10 cases and delivered judgements in eight cases, resulting in the conviction of four members of the SSPDF and four acquittals"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前为单一来源（联合国南苏丹特派团新闻稿），尚缺乏独立交叉验证",
+    "其余案件仍在调查和审理考虑中，结果尚未确定"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "瓦乌军事法庭就联合国南苏丹特派团工作人员遇害案作出判决",
+   "summary_zh": "南苏丹瓦乌普通军事法庭裁定一名南苏丹人民国防军士兵绑架并杀害联合国南苏丹特派团一名本国工作人员罪名成立，判处十年监禁、降级并开除军籍，同时向受害者家属赔偿51头牛。该判决允许上诉。联合国南苏丹特派团表示欢迎，并称自2011年成立以来已有19名维和人员因恶意行为遇害、32人受伤。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Western Bahr-el-Ghazal",
+    "city": "Wau",
+    "site": "Hai Masna",
+    "raw_text": "Wau, Western Bahr-el-Ghazal, Hai Masna"
+   },
+   "key_facts": [
+    {
+     "fact": "瓦乌普通军事法庭裁定一名南苏丹人民国防军士兵绑架并杀害联合国南苏丹特派团一名本国工作人员罪名成立",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A General Court Martial conducted in Wau has found a soldier serving with the South Sudan Peoples’ Defense Forces guilty of the abduction and murder of a United Nations Mission in South Sudan national staff member"
+    },
+    {
+     "fact": "案发时间为2025年12月15日，地点为西加扎勒河州海马斯纳，受害者当时正在执行公务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "while he was on official duty in Hai Masna, Western Bahr-el-Ghazal, on 15 December 2025"
+    },
+    {
+     "fact": "法庭判处被告十年监禁、降级并开除军籍，并向受害者家属赔偿51头牛",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Court Martial sentenced the accused to ten years’ imprisonment, ordered a reduction in rank and dismissal from the SSPDF, and awarded compensation of 51 head of cattle to the victim’s family"
+    },
+    {
+     "fact": "判决允许上诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The judgment provides for a right of appeal"
+    },
+    {
+     "fact": "自2011年7月9日联合国南苏丹特派团成立以来，已有19名维和人员因恶意行为遇害、32人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Since UNMISS was established on 9 July 2011, 19 peacekeepers have been killed and 32 injured due to malicious acts"
+    },
+    {
+     "fact": "瓦乌普通军事法庭共审理10起案件，对8起作出判决，其中4名南苏丹人民国防军成员被定罪、4人无罪释放",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In total, the General Court Martial in Wau heard 10 cases and delivered judgements in eight cases, resulting in the conviction of four members of the SSPDF and four acquittals"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前为单一来源（联合国南苏丹特派团新闻稿），尚缺乏独立交叉验证",
+    "其余案件仍在调查和审理考虑中，结果尚未确定"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_63ee4d558fc7c78c",
+ "disease_event_id": null,
+ "country_code": "SS"
+}
