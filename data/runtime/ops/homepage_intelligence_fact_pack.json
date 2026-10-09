@@ -1,15 +1,15 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-09T09:06:36+08:00",
+ "generated_at": "2026-10-09T10:55:59+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 23,
-  "signals_7d": 269,
-  "verified_events_24h": 24,
-  "verified_events_7d": 284,
+  "signals_24h": 22,
+  "signals_7d": 268,
+  "verified_events_24h": 40,
+  "verified_events_7d": 300,
   "multi_source_verified_events_7d": 10,
   "countries_with_activity_24h": 11,
   "total_countries_monitored": 22
@@ -18,7 +18,7 @@
   "中非共和国",
   "乍得",
   "几内亚比绍",
-  "刚果（金）",
+  "加纳",
   "南苏丹",
   "喀麦隆",
   "埃塞俄比亚",
@@ -45,6 +45,7 @@
   "塞内加尔",
   "尼日利亚",
   "尼日尔",
+  "布隆迪",
   "斯威士兰",
   "科特迪瓦",
   "突尼斯",
@@ -71,7 +72,7 @@
   },
   {
    "value": "埃塞俄比亚",
-   "count": 31
+   "count": 30
   },
   {
    "value": "南苏丹",
@@ -116,15 +117,15 @@
    "count": 3
   },
   {
-   "value": "武装冲突",
-   "count": 2
-  },
-  {
    "value": "公共卫生",
    "count": 1
   },
   {
    "value": "绑架",
+   "count": 1
+  },
+  {
+   "value": "武装冲突",
    "count": 1
   },
   {
@@ -135,7 +136,7 @@
  "source_tier_distribution_7d": [
   {
    "value": "B",
-   "count": 267
+   "count": 284
   },
   {
    "value": "C",
@@ -143,7 +144,7 @@
   },
   {
    "value": "A",
-   "count": 101
+   "count": 99
   }
  ],
  "top_verified_events": [
@@ -178,21 +179,6 @@
    "severity": "medium"
   },
   {
-   "fact_id": "EVT_8f4ab7a9c7556390",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "埃塞俄比亚与厄立特里亚外交危机升级：驱逐外交官并断绝外交关系",
-   "category": "military_operation",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-02 02:51",
-   "importance": "high",
-   "severity": "medium"
-  },
-  {
    "fact_id": "EVT_e6ec3aec5eb5ee12",
    "level": "verified_event",
    "evidence_tier": "single_source_published",
@@ -208,21 +194,6 @@
    "severity": "medium"
   },
   {
-   "fact_id": "EVT_a4c922c14da05dce",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "几内亚",
-   "title": "几内亚比绍军政府称前总统恩巴洛返国所需安全条件尚未具备",
-   "category": "other_security",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-02 02:47",
-   "importance": "high",
-   "severity": "medium"
-  },
-  {
    "fact_id": "EVT_f2ddff84902538a6",
    "level": "verified_event",
    "evidence_tier": "single_source_published",
@@ -234,6 +205,36 @@
    "source_tier": "A",
    "source_role": "major_media",
    "time": "2026-10-02 05:42",
+   "importance": "high",
+   "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_7ef82459a3b362de",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳体育部长科菲·亚当斯称“我不聘用教练，也不解雇教练”",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-02 09:29",
+   "importance": "high",
+   "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_b11443910bb53966",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳新爱国党设立31个投票中心以加快全国执行委员会选举",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-02 09:00",
    "importance": "high",
    "severity": "medium"
   }
@@ -675,10 +676,16 @@
   }
  ],
  "existing_assessment": {
-  "status": "deterministic",
-  "based_on": "过去24小时/7日公开信息（确定性汇总）"
+  "status": "ai",
+  "overall_assessment": "已核实事件方面，刚果（金）东部AFC/M23针对FDLR的军事行动被联合国报告指系统性波及平民，当地战斗持续且虚假信息蔓延；埃塞俄比亚与厄立特里亚因北部冲突升级断交，联邦部队重新夺回默克莱机场，反叛武装撤出提格雷州首府；刚果（金）埃博拉死亡人数突破4000人并启动暴露后药物试验；乍得四省报告登革热病例；几内亚比绍军政府阻止前总统恩巴洛回国；加纳教师工会全国罢工持续。情报信号方面，南苏丹执政党SPLM禁止现役武装部队成员参加党内提名、西赤道州启动性暴力幸存者支持网络，以及尼日利亚坠机致25人遇难等均为单源消息，尚待核实。整体风险方向趋于恶化。",
+  "risk_direction": "worsening",
+  "confidence": "medium",
+  "generated_time": "2026-10-09T10:55:50+08:00",
+  "based_on": "过去24小时/7日公开信息",
+  "model": "",
+  "date": "20261009"
  },
- "fact_count": 553,
+ "fact_count": 568,
  "facts": {
   "news:b0cfe7cdf7cbbfdc": {
    "fact_id": "news:b0cfe7cdf7cbbfdc",
@@ -4700,21 +4707,6 @@
    "importance": "low",
    "why_it_matters": ""
   },
-  "news:1807fabf48fea7bb": {
-   "fact_id": "news:1807fabf48fea7bb",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "埃塞俄比亚与厄立特里亚外交危机升级：驱逐外交官并断绝外交关系",
-   "category": "military_operation",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-02 10:51",
-   "importance": "low",
-   "why_it_matters": ""
-  },
   "EVT_1617c3f47b4589b6": {
    "fact_id": "EVT_1617c3f47b4589b6",
    "level": "verified_event",
@@ -4745,21 +4737,6 @@
    "importance": "high",
    "severity": "medium"
   },
-  "EVT_8f4ab7a9c7556390": {
-   "fact_id": "EVT_8f4ab7a9c7556390",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "埃塞俄比亚与厄立特里亚外交危机升级：驱逐外交官并断绝外交关系",
-   "category": "military_operation",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-02 02:51",
-   "importance": "high",
-   "severity": "medium"
-  },
   "EVT_e6ec3aec5eb5ee12": {
    "fact_id": "EVT_e6ec3aec5eb5ee12",
    "level": "verified_event",
@@ -4772,21 +4749,6 @@
    "source_tier": "B",
    "source_role": "regional",
    "time": "2026-10-02 05:52",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_a4c922c14da05dce": {
-   "fact_id": "EVT_a4c922c14da05dce",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "几内亚",
-   "title": "几内亚比绍军政府称前总统恩巴洛返国所需安全条件尚未具备",
-   "category": "other_security",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-02 02:47",
    "importance": "high",
    "severity": "medium"
   },
@@ -8972,6 +8934,276 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-08 20:19",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_98757c68241aa6c0": {
+   "fact_id": "EVT_98757c68241aa6c0",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "布隆迪",
+   "title": "世界粮食计划署紧急寻求逾3000万美元以维持对布隆迪境内刚果难民的粮食援助",
+   "category": "other_security",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-08 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_190d58545271e548": {
+   "fact_id": "EVT_190d58545271e548",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "喀麦隆",
+   "title": "喀麦隆：雅温得贾莫特医院为女性暴力受害者打破沉默",
+   "category": "civil_unrest",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-08 22:32",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_b9dfc75ffcd799ac": {
+   "fact_id": "EVT_b9dfc75ffcd799ac",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "BBC调查：Asos黑客获取的用户个人信息比最初披露的更多",
+   "category": "election_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-08 23:17",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_1d0bd472e4b5c6a3": {
+   "fact_id": "EVT_1d0bd472e4b5c6a3",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "五角大楼称胡德堡枪击案凶手将以枪决方式处决并直播",
+   "category": "election_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-08 23:08",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_e8e95de3093bb6f9": {
+   "fact_id": "EVT_e8e95de3093bb6f9",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "克莱斯勒大厦被出售后将修复其标志性冠顶",
+   "category": "election_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-08 22:58",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_c3fe60686293bd3c": {
+   "fact_id": "EVT_c3fe60686293bd3c",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "因凡蒂诺连任前景获提振，中北美及加勒比海足联主席无意参选",
+   "category": "election_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-08 22:49",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_b13f875f53e84a9f": {
+   "fact_id": "EVT_b13f875f53e84a9f",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "埃弗顿球员谢里夫因违反投注规则被罚款",
+   "category": "election_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-08 22:40",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_37631731240999fa": {
+   "fact_id": "EVT_37631731240999fa",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "扎卡因使用伪造新冠疫苗接种证明被处以缓期罚款",
+   "category": "election_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-08 22:34",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_7146eebb20b82a59": {
+   "fact_id": "EVT_7146eebb20b82a59",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳一商人因涉嫌48万塞地欺诈被诉至法院",
+   "category": "election_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-08 22:25",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_8ef8e3d63eecd0d8": {
+   "fact_id": "EVT_8ef8e3d63eecd0d8",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳沃尔特地区Anloga一孕妇与丈夫被发现死于房内",
+   "category": "election_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-08 22:13",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_ed96df60c543fa0f": {
+   "fact_id": "EVT_ed96df60c543fa0f",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳Ofankor一名87岁男子因性侵9岁女童被判20年监禁",
+   "category": "election_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-08 22:02",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_6cb3742efd559dbe": {
+   "fact_id": "EVT_6cb3742efd559dbe",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "曼城主帅马雷斯卡称球队氛围“非常好”",
+   "category": "election_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-08 21:50",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_62d61a221d316c18": {
+   "fact_id": "EVT_62d61a221d316c18",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳通信部长警告FBI局长勿独揽网络犯罪行动功劳",
+   "category": "election_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-08 21:47",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_e65c7969892115d2": {
+   "fact_id": "EVT_e65c7969892115d2",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳投资促进局CEO：外资无权进入加纳非正规零售市场",
+   "category": "election_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-08 21:37",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_782d36bd1c3901a3": {
+   "fact_id": "EVT_782d36bd1c3901a3",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳投资促进局负责人称E&P模式应成为打造本土矿业巨头的蓝图",
+   "category": "election_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-08 21:30",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_4970f638edccb048": {
+   "fact_id": "EVT_4970f638edccb048",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳注册护士与助产士协会支持政府缩减护士培训规模的决定",
+   "category": "election_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-08 21:29",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_7ee9d36c6a14d5dd": {
+   "fact_id": "EVT_7ee9d36c6a14d5dd",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "SEND Ghana呼吁加纳设立公共卫生应急基金以快速应对疫情",
+   "category": "election_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-08 21:21",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_92c724a0f3b3fad7": {
+   "fact_id": "EVT_92c724a0f3b3fad7",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳《2026年安全与情报机构法》（第1168号法案）的国家安全影响",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-08 21:04",
    "importance": "high",
    "severity": "medium"
   }
