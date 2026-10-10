@@ -1,0 +1,125 @@
+{
+ "label": "S14c4e1e6",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5cf545813f1327925c1720971f468d5d1942263b88525bd87814f3ad45b9ef3a",
+ "tokens": {
+  "input_tokens": 2993,
+  "output_tokens": 652,
+  "total_tokens": 3645
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）前情报局长Kalev Mutond在巴黎去世，ARSP发起200亿美元分包监管行动",
+   "summary_zh": "刚果（金）媒体本周头条聚焦前国家情报局（ANR）局长Kalev Mutond于10月5日在巴黎一家医院去世，享年69岁。他曾于2011至2019年执掌ANR，被指涉及任意逮捕、非法拘禁、酷刑和绑架，并因此于2016年遭美国制裁、2017年遭欧盟限制措施。与此同时，私营部门分包监管局（ARSP）新任负责人Juan Ted Beleshayi Kasanda称刚果（金）每年在该领域损失近200亿美元，并已对Sicomines的6家企业和Ivanhoe Mines的140份合同进行审查。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": "巴黎",
+    "site": "医院",
+    "raw_text": "un hôpital de la capitale française"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）前国家情报局（ANR）局长Kalev Mutond于10月5日在巴黎一家医院去世，享年69岁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’ancien administrateur général de l’Agence nationale de renseignements est mort le 5 octobre, à l’âge de 69 ans, dans un hôpital de la capitale française"
+    },
+    {
+     "fact": "Mutond于2011至2019年执掌ANR，被指涉及任意逮捕、非法拘禁、酷刑和绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il exerçait un pouvoir considérable, sur fond d’accusations d’arrestations arbitraires, de détentions illégales, de tortures et d’enlèvements"
+    },
+    {
+     "fact": "这些指控使其于2016年遭美国制裁、2017年遭欧盟限制措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des accusations qui lui ont valu des sanctions américaines en 2016 et des mesures restrictives européennes en 2017"
+    },
+    {
+     "fact": "ARSP负责人称刚果（金）每年在分包领域损失近200亿美元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon lui, la RDC perd chaque année près de vingt milliards de dollars dans ce secteur"
+    },
+    {
+     "fact": "监管检查发现Sicomines的6家企业和Ivanhoe Mines的140份合同被认定不合格",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les contrôles ont notamment épinglé six entreprises jugées non éligibles chez Sicomines et 140 contrats chez Ivanhoe Mines"
+    }
+   ],
+   "uncertainties": [
+    "Mutond所涉指控为媒体转述的指控内容，尚未经司法确认",
+    "ARSP所称每年损失近200亿美元为单一官员说法，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）前情报局长Kalev Mutond在巴黎去世，ARSP发起200亿美元分包监管行动",
+   "summary_zh": "刚果（金）媒体本周头条聚焦前国家情报局（ANR）局长Kalev Mutond于10月5日在巴黎一家医院去世，享年69岁。他曾于2011至2019年执掌ANR，被指涉及任意逮捕、非法拘禁、酷刑和绑架，并因此于2016年遭美国制裁、2017年遭欧盟限制措施。与此同时，私营部门分包监管局（ARSP）新任负责人Juan Ted Beleshayi Kasanda称刚果（金）每年在该领域损失近200亿美元，并已对Sicomines的6家企业和Ivanhoe Mines的140份合同进行审查。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": "巴黎",
+    "site": "医院",
+    "raw_text": "un hôpital de la capitale française"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）前国家情报局（ANR）局长Kalev Mutond于10月5日在巴黎一家医院去世，享年69岁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’ancien administrateur général de l’Agence nationale de renseignements est mort le 5 octobre, à l’âge de 69 ans, dans un hôpital de la capitale française"
+    },
+    {
+     "fact": "Mutond于2011至2019年执掌ANR，被指涉及任意逮捕、非法拘禁、酷刑和绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il exerçait un pouvoir considérable, sur fond d’accusations d’arrestations arbitraires, de détentions illégales, de tortures et d’enlèvements"
+    },
+    {
+     "fact": "这些指控使其于2016年遭美国制裁、2017年遭欧盟限制措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des accusations qui lui ont valu des sanctions américaines en 2016 et des mesures restrictives européennes en 2017"
+    },
+    {
+     "fact": "ARSP负责人称刚果（金）每年在分包领域损失近200亿美元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon lui, la RDC perd chaque année près de vingt milliards de dollars dans ce secteur"
+    },
+    {
+     "fact": "监管检查发现Sicomines的6家企业和Ivanhoe Mines的140份合同被认定不合格",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les contrôles ont notamment épinglé six entreprises jugées non éligibles chez Sicomines et 140 contrats chez Ivanhoe Mines"
+    }
+   ],
+   "uncertainties": [
+    "Mutond所涉指控为媒体转述的指控内容，尚未经司法确认",
+    "ARSP所称每年损失近200亿美元为单一官员说法，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_f9669d0a14c4e1e6",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

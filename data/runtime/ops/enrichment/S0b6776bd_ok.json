@@ -1,0 +1,127 @@
+{
+ "label": "S0b6776bd",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "fdba0ecf04c8ebafaffa0eea6d84b2c4ce6fd6b99f8214db50b51f26e197af39",
+ "tokens": {
+  "input_tokens": 2792,
+  "output_tokens": 598,
+  "total_tokens": 3390
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "南苏丹伦拜克遭武装团体袭击，政府称71人死亡",
+   "summary_zh": "南苏丹中部湖泊州首府伦拜克10月9日遭武装青年牧民袭击，武装人员一度占领该市数小时，居民逃离。政府称事件造成71人死亡，其中包括4名南苏丹政府军士兵，并宣布增派安全部队；联合国方面已部署维和人员。事件反映南苏丹安全局势恶化，使原定12月举行的选举前景更加不确定。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "湖泊州",
+    "city": "伦拜克",
+    "site": null,
+    "raw_text": "la ville de Rumbek, capitale de l’État régional des Lacs, au centre du pays"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹伦拜克遭武装团体袭击，政府称71人死亡",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Soudan du Sud: la ville de Rumbek attaquée par un groupe armé, le gouvernement fait état de 71 morts"
+    },
+    {
+     "fact": "来自伦拜克北部一个丁卡族部落的武装青年牧民一度占领伦拜克数小时，导致居民逃离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "De jeunes bergers armés issus d’un clan dinka du nord de Rumbek ont pris possession de la ville de Rumbek pendant quelques heures, le 9 octobre 2026, provoquant la fuite des habitants."
+    },
+    {
+     "fact": "政府称71人死亡，其中包括4名南苏丹政府军士兵，并宣布增派安全部队",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement a fait état de 71 morts, dont quatre soldats de l’armée sud-soudanaise, et annoncé le déploiement de forces de sécurité additionnelles."
+    },
+    {
+     "fact": "联合国已部署维和人员以预防战斗并保护医院和非政府组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des « casques bleus » ont été déployés afin de « prévenir les combats » ainsi que « protéger l’hôpital et les ONG »"
+    },
+    {
+     "fact": "事件发生时间为2026年10月9日",
+     "evidence_field": "event_time",
+     "evidence_excerpt": "2026-10-10 12:35:21"
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字（71人死亡）为南苏丹政府单方面说法，尚未获得独立核实",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证",
+    "事件起因被描述为两个丁卡族部落之间的冲突，其历史根源据称从未得到解决"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "南苏丹伦拜克遭武装团体袭击，政府称71人死亡",
+   "summary_zh": "南苏丹中部湖泊州首府伦拜克10月9日遭武装青年牧民袭击，武装人员一度占领该市数小时，居民逃离。政府称事件造成71人死亡，其中包括4名南苏丹政府军士兵，并宣布增派安全部队；联合国方面已部署维和人员。事件反映南苏丹安全局势恶化，使原定12月举行的选举前景更加不确定。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "湖泊州",
+    "city": "伦拜克",
+    "site": null,
+    "raw_text": "la ville de Rumbek, capitale de l’État régional des Lacs, au centre du pays"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹伦拜克遭武装团体袭击，政府称71人死亡",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Soudan du Sud: la ville de Rumbek attaquée par un groupe armé, le gouvernement fait état de 71 morts"
+    },
+    {
+     "fact": "来自伦拜克北部一个丁卡族部落的武装青年牧民一度占领伦拜克数小时，导致居民逃离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "De jeunes bergers armés issus d’un clan dinka du nord de Rumbek ont pris possession de la ville de Rumbek pendant quelques heures, le 9 octobre 2026, provoquant la fuite des habitants."
+    },
+    {
+     "fact": "政府称71人死亡，其中包括4名南苏丹政府军士兵，并宣布增派安全部队",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement a fait état de 71 morts, dont quatre soldats de l’armée sud-soudanaise, et annoncé le déploiement de forces de sécurité additionnelles."
+    },
+    {
+     "fact": "联合国已部署维和人员以预防战斗并保护医院和非政府组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des « casques bleus » ont été déployés afin de « prévenir les combats » ainsi que « protéger l’hôpital et les ONG »"
+    },
+    {
+     "fact": "事件发生时间为2026年10月9日",
+     "evidence_field": "event_time",
+     "evidence_excerpt": "2026-10-10 12:35:21"
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字（71人死亡）为南苏丹政府单方面说法，尚未获得独立核实",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证",
+    "事件起因被描述为两个丁卡族部落之间的冲突，其历史根源据称从未得到解决"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_2b439d660b6776bd",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

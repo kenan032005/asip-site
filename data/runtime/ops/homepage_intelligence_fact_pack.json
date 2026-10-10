@@ -1,17 +1,17 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-10T13:06:56+08:00",
+ "generated_at": "2026-10-10T16:03:47+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 31,
-  "signals_7d": 291,
-  "verified_events_24h": 34,
-  "verified_events_7d": 306,
+  "signals_24h": 30,
+  "signals_7d": 293,
+  "verified_events_24h": 42,
+  "verified_events_7d": 317,
   "multi_source_verified_events_7d": 11,
-  "countries_with_activity_24h": 14,
+  "countries_with_activity_24h": 15,
   "total_countries_monitored": 22
  },
  "countries_24h": [
@@ -26,6 +26,7 @@
   "埃塞俄比亚",
   "尼日利亚",
   "尼日尔",
+  "科特迪瓦",
   "莫桑比克",
   "贝宁",
   "马里"
@@ -63,7 +64,7 @@
  "country_distribution_7d": [
   {
    "value": "尼日利亚",
-   "count": 72
+   "count": 73
   },
   {
    "value": "加纳",
@@ -71,7 +72,7 @@
   },
   {
    "value": "乍得",
-   "count": 36
+   "count": 37
   },
   {
    "value": "埃塞俄比亚",
@@ -113,7 +114,7 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 21
+   "count": 20
   },
   {
    "value": "武装冲突",
@@ -147,15 +148,15 @@
  "source_tier_distribution_7d": [
   {
    "value": "B",
-   "count": 289
+   "count": 295
   },
   {
    "value": "C",
-   "count": 211
+   "count": 215
   },
   {
    "value": "A",
-   "count": 97
+   "count": 100
   }
  ],
  "top_verified_events": [
@@ -251,6 +252,36 @@
   }
  ],
  "top_signals": [
+  {
+   "fact_id": "news:6a3114edf9b37d21",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "Wassa IDPs hail CAF, philanthropist over solar borehole",
+   "category": "other_security",
+   "source": "News Agency of Nigeria",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-10 14:00",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:9fc9705b380f4432",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Lac : la peur des attaques terroristes prive les enfants de soins",
+   "category": "other_security",
+   "source": "Le N'Djam Post",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-10 14:00",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   {
    "fact_id": "news:af00bdba041680ec",
    "level": "news_signal",
@@ -580,36 +611,6 @@
    "time": "2026-10-09 19:23",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:93dca5fa2a0e58d1",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "埃塞俄比亚与厄立特里亚在提格雷冲突背景下相互指控侵略",
-   "category": "armed_conflict",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-09 19:06",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:ea0d085f31503ce7",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得人口贩运问题：零调查、零定罪，华盛顿发出警告",
-   "category": "other_security",
-   "source": "Le N'Djam Post",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-09 18:31",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -687,11 +688,47 @@
   }
  ],
  "existing_assessment": {
-  "status": "deterministic",
-  "based_on": "过去24小时/7日公开信息（确定性汇总）"
+  "status": "ai",
+  "overall_assessment": "已核实事件方面，乍得登革热疫情持续受关注，恩贾梅纳及四个省份报告病例，多源交叉核实（EVT_800d35b44d95af03、EVT_6cbacefa41a7504e、EVT_434cd1fda926f96b），卫生部呼吁保持警惕；尼日利亚高原州多车相撞致20人死亡（EVT_1c984ffe74b687b3）；肯尼亚高速公路车祸致至少17人死亡（EVT_e578337cd924d566）；埃塞俄比亚联邦部队重新夺回默克莱机场（EVT_582bdb47a7a5f73b）；刚果（金）总统就两国军人交火向刚果（布）致歉（EVT_0d2ed6076bcd7149）。情报信号方面，均为单源消息、尚待核实：乍得湖省民众因恐惧恐怖袭击影响儿童就医（news:9fc9705b380f4432）；乌干达埃博拉患者横跨三国未被发现（news:6d78d4f27cc32ab4）；刚果（金）前总统卡比拉抨击齐塞克迪（news:dd725cc670e687d2）；加纳教师协会称罢工暂停后谈判继续（news:3f5256f42567a546）。7日内尼日利亚、加纳、乍得为事件最集中三国。",
+  "risk_direction": "worsening",
+  "confidence": "medium",
+  "generated_time": "2026-10-10T16:03:37+08:00",
+  "based_on": "过去24小时/7日公开信息",
+  "model": "",
+  "date": "20261010"
  },
- "fact_count": 597,
+ "fact_count": 610,
  "facts": {
+  "news:6a3114edf9b37d21": {
+   "fact_id": "news:6a3114edf9b37d21",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "Wassa IDPs hail CAF, philanthropist over solar borehole",
+   "category": "other_security",
+   "source": "News Agency of Nigeria",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-10 14:00",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:9fc9705b380f4432": {
+   "fact_id": "news:9fc9705b380f4432",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Lac : la peur des attaques terroristes prive les enfants de soins",
+   "category": "other_security",
+   "source": "Le N'Djam Post",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-10 14:00",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:af00bdba041680ec": {
    "fact_id": "news:af00bdba041680ec",
    "level": "news_signal",
@@ -9644,6 +9681,171 @@
    "source_tier": "A",
    "source_role": "major_media",
    "time": "2026-10-09 04:44",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_f9669d0a14c4e1e6": {
+   "fact_id": "EVT_f9669d0a14c4e1e6",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "刚果（金）",
+   "title": "刚果（金）前情报局长Kalev Mutond在巴黎去世，ARSP发起200亿美元分包监管行动",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-10 05:04",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_196dfdd9fbb611fb": {
+   "fact_id": "EVT_196dfdd9fbb611fb",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "科特迪瓦",
+   "title": "科特迪瓦北部Boundiali附近发现重要金矿",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-10 03:58",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_e6519a52e7e1f861": {
+   "fact_id": "EVT_e6519a52e7e1f861",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "阿布贾Wassa营地流离失所者感谢CAF与慈善人士捐赠太阳能水井",
+   "category": "other_security",
+   "source": "News Agency of Nigeria",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-10 06:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_ad892ba8f2159d57": {
+   "fact_id": "EVT_ad892ba8f2159d57",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "加纳大学教师协会威胁10月19日罢工 抗议津贴未付",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-10 07:33",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_4084605ed3ec5e9b": {
+   "fact_id": "EVT_4084605ed3ec5e9b",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "评论呼吁宪法赋予传统酋长制地方发展职能",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-10 06:22",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_fb6e02c8c56ea5cd": {
+   "fact_id": "EVT_fb6e02c8c56ea5cd",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "加纳能源部长提出2027年可再生能源与核电优先事项",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-10 05:56",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_ffe4b801e043dd33": {
+   "fact_id": "EVT_ffe4b801e043dd33",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "加纳精神卫生机构上半年记录36196例主要精神健康病例",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-10 04:37",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_941d68d168b60f76": {
+   "fact_id": "EVT_941d68d168b60f76",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "一名律师回顾在加纳执业第一年的经历",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-09 23:10",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_3bfd507369533e20": {
+   "fact_id": "EVT_3bfd507369533e20",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "联合国儿童基金会：将LEAP与生产性包容挂钩或可在2030年前减少极端贫困",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-09 21:10",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_2b439d660b6776bd": {
+   "fact_id": "EVT_2b439d660b6776bd",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "南苏丹伦拜克遭武装团体袭击，政府称71人死亡",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-10 04:35",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_1e683e1548012b9a": {
+   "fact_id": "EVT_1e683e1548012b9a",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "乍得湖省：恐怖袭击恐惧使儿童无法获得医疗服务",
+   "category": "other_security",
+   "source": "Le N'Djam Post",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-10 06:00",
    "importance": "high",
    "severity": "medium"
   }
