@@ -1,0 +1,127 @@
+{
+ "label": "S29be3a19",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "15cbe808d76b2b1abd6b7023af28cfc3220bf82e07269b39501815f29e8ea8d1",
+ "tokens": {
+  "input_tokens": 2137,
+  "output_tokens": 684,
+  "total_tokens": 2821
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "苏丹准军事组织无人机袭击埃塞俄比亚边境附近，据称致41人死亡",
+   "summary_zh": "据人权组织“紧急律师”称，苏丹快速支援部队（RSF）周五对青尼罗州阿布尚迪地区一处流离失所者营地发动无人机袭击，造成41人死亡，据称其中包括8名儿童。联合国人道主义事务协调厅表示对相关报道感到震惊，初步报告显示伤亡者多为妇女和儿童。该事件目前为单一来源报道，具体伤亡数字尚未获得独立核实。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SDN",
+   "location": {
+    "country_iso3": "SDN",
+    "admin1": "青尼罗州",
+    "city": null,
+    "site": "阿布尚迪地区一处流离失所者营地",
+    "raw_text": "the state's Abu Shandi area, Blue Nile region bordering Ethiopia"
+   },
+   "key_facts": [
+    {
+     "fact": "苏丹快速支援部队（RSF）无人机袭击青尼罗州阿布尚迪地区一处流离失所者营地，据称造成41人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A drone attack by Sudan's paramilitary forces has killed 41 people in the country's Blue Nile region bordering Ethiopia, a rights group has said. The strike by the Rapid Support Forces (RSF) targeted a camp for displaced people in the state's Abu Shandi area on Friday, Emergency Lawyers said."
+    },
+    {
+     "fact": "据称死者中包括8名儿童",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eight children are said to be among those killed by the strike, which hit a gathering of displaced people."
+    },
+    {
+     "fact": "联合国人道主义事务协调厅称初步报告显示伤亡者多为妇女和儿童",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The UN Office for the Co-ordination of Humanitarian Affairs (Ocha) said it was \"appalled by horrifying reports\". It said initial reports suggested most of the casualties were women and children."
+    },
+    {
+     "fact": "苏丹军方与包括RSF在内的准军事力量自2023年起持续权力斗争，已致数十万人死亡、逾1400万人流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Sudanese army and paramilitary forces including the RSF have been locked in a power struggle since 2023, a conflict that has killed hundreds of thousands and displaced more than 14 million from their homes."
+    },
+    {
+     "fact": "联合国人道主义事务协调厅称遭袭地区近几周持续遭受攻击，数千平民流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ocha said in a statement that the area reportedly struck on Friday had been \"under sustained atttack in recent weeks, displacing thousands of civilians and exposing many more to grave harm\"."
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字（41人死亡、含8名儿童）目前仅来自人权组织“紧急律师”的单一来源，尚未获得独立核实",
+    "袭击方为RSF的说法系人权组织指控，苏丹军方与RSF双方均被指使用无人机袭击",
+    "联合国方面称相关报道为“初步报告”，具体伤亡构成有待进一步确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "苏丹准军事组织无人机袭击埃塞俄比亚边境附近，据称致41人死亡",
+   "summary_zh": "据人权组织“紧急律师”称，苏丹快速支援部队（RSF）周五对青尼罗州阿布尚迪地区一处流离失所者营地发动无人机袭击，造成41人死亡，据称其中包括8名儿童。联合国人道主义事务协调厅表示对相关报道感到震惊，初步报告显示伤亡者多为妇女和儿童。该事件目前为单一来源报道，具体伤亡数字尚未获得独立核实。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SDN",
+   "location": {
+    "country_iso3": "SDN",
+    "admin1": "青尼罗州",
+    "city": null,
+    "site": "阿布尚迪地区一处流离失所者营地",
+    "raw_text": "the state's Abu Shandi area, Blue Nile region bordering Ethiopia"
+   },
+   "key_facts": [
+    {
+     "fact": "苏丹快速支援部队（RSF）无人机袭击青尼罗州阿布尚迪地区一处流离失所者营地，据称造成41人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A drone attack by Sudan's paramilitary forces has killed 41 people in the country's Blue Nile region bordering Ethiopia, a rights group has said. The strike by the Rapid Support Forces (RSF) targeted a camp for displaced people in the state's Abu Shandi area on Friday, Emergency Lawyers said."
+    },
+    {
+     "fact": "据称死者中包括8名儿童",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eight children are said to be among those killed by the strike, which hit a gathering of displaced people."
+    },
+    {
+     "fact": "联合国人道主义事务协调厅称初步报告显示伤亡者多为妇女和儿童",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The UN Office for the Co-ordination of Humanitarian Affairs (Ocha) said it was \"appalled by horrifying reports\". It said initial reports suggested most of the casualties were women and children."
+    },
+    {
+     "fact": "苏丹军方与包括RSF在内的准军事力量自2023年起持续权力斗争，已致数十万人死亡、逾1400万人流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Sudanese army and paramilitary forces including the RSF have been locked in a power struggle since 2023, a conflict that has killed hundreds of thousands and displaced more than 14 million from their homes."
+    },
+    {
+     "fact": "联合国人道主义事务协调厅称遭袭地区近几周持续遭受攻击，数千平民流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ocha said in a statement that the area reportedly struck on Friday had been \"under sustained atttack in recent weeks, displacing thousands of civilians and exposing many more to grave harm\"."
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字（41人死亡、含8名儿童）目前仅来自人权组织“紧急律师”的单一来源，尚未获得独立核实",
+    "袭击方为RSF的说法系人权组织指控，苏丹军方与RSF双方均被指使用无人机袭击",
+    "联合国方面称相关报道为“初步报告”，具体伤亡构成有待进一步确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_057ac05629be3a19",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

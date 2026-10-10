@@ -1,0 +1,125 @@
+{
+ "label": "S1e5258a8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "69e24eb08c7a1b17f8529c754db27b313f34cf2f7f07364981dbccfd3c31f10b",
+ "tokens": {
+  "input_tokens": 2653,
+  "output_tokens": 645,
+  "total_tokens": 3298
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔马拉迪举办领导人抗疟能力建设研讨会",
+   "summary_zh": "尼日尔马拉迪地区于2026年10月8日举行抗疟能力建设研讨会开幕式，来自全国8个地区的40名领导人及决策者参加。马拉迪地区州长指出，疟疾仍是尼日尔重大公共卫生问题，2024年报告690万例病例和8305例死亡。国家抗疟规划协调员则称2024年记录超过730万例病例。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "马拉迪",
+    "city": "马拉迪",
+    "site": "商人工会会议室",
+    "raw_text": "Maradi, salle de réunion du Syndicat des Commerçants"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔马拉迪举办抗疟领导人能力建设研讨会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Maradi, 8 Oct (ANP) – Le Gouverneur de la région de Maradi... a présidé... l’ouverture officielle d’un atelier de formation et de renforcement des capacités des leaders et décideurs des huit (8) régions du pays sur la lutte contre le paludisme."
+    },
+    {
+     "fact": "来自尼日尔8个地区的40名参与者参加研讨会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Gouverneur de la région de Maradi... a souhaité la bienvenue aux 40 participants venus des huit (8) régions du Niger"
+    },
+    {
+     "fact": "马拉迪地区州长称2024年尼日尔报告690万例疟疾病例和8305例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il a rappelé que le paludisme demeure un problème majeur de santé publique au Niger, avec 6,9 millions de cas notifiés et 8 305 décès en 2024."
+    },
+    {
+     "fact": "国家抗疟规划协调员称2024年记录超过730万例病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a rappelé que le paludisme demeure un problème majeur de santé publique au Niger, avec plus de 7,3 millions de cas enregistrés en 2024."
+    },
+    {
+     "fact": "研讨会旨在制定地方承诺和行动计划以推动尼日尔抗击疟疾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il a enfin invité les participants à prendre une part active aux travaux afin de formuler des engagements et des plans d’actions locaux pour contribuer à faire reculer durablement le paludisme au Niger."
+    }
+   ],
+   "uncertainties": [
+    "2024年疟疾病例数存在不同说法：州长称690万例，国家抗疟规划协调员称超过730万例，尚无法确认",
+    "该事件目前仅有一个来源（尼日尔官方通讯社ANP）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔马拉迪举办领导人抗疟能力建设研讨会",
+   "summary_zh": "尼日尔马拉迪地区于2026年10月8日举行抗疟能力建设研讨会开幕式，来自全国8个地区的40名领导人及决策者参加。马拉迪地区州长指出，疟疾仍是尼日尔重大公共卫生问题，2024年报告690万例病例和8305例死亡。国家抗疟规划协调员则称2024年记录超过730万例病例。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "马拉迪",
+    "city": "马拉迪",
+    "site": "商人工会会议室",
+    "raw_text": "Maradi, salle de réunion du Syndicat des Commerçants"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔马拉迪举办抗疟领导人能力建设研讨会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Maradi, 8 Oct (ANP) – Le Gouverneur de la région de Maradi... a présidé... l’ouverture officielle d’un atelier de formation et de renforcement des capacités des leaders et décideurs des huit (8) régions du pays sur la lutte contre le paludisme."
+    },
+    {
+     "fact": "来自尼日尔8个地区的40名参与者参加研讨会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Gouverneur de la région de Maradi... a souhaité la bienvenue aux 40 participants venus des huit (8) régions du Niger"
+    },
+    {
+     "fact": "马拉迪地区州长称2024年尼日尔报告690万例疟疾病例和8305例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il a rappelé que le paludisme demeure un problème majeur de santé publique au Niger, avec 6,9 millions de cas notifiés et 8 305 décès en 2024."
+    },
+    {
+     "fact": "国家抗疟规划协调员称2024年记录超过730万例病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a rappelé que le paludisme demeure un problème majeur de santé publique au Niger, avec plus de 7,3 millions de cas enregistrés en 2024."
+    },
+    {
+     "fact": "研讨会旨在制定地方承诺和行动计划以推动尼日尔抗击疟疾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il a enfin invité les participants à prendre une part active aux travaux afin de formuler des engagements et des plans d’actions locaux pour contribuer à faire reculer durablement le paludisme au Niger."
+    }
+   ],
+   "uncertainties": [
+    "2024年疟疾病例数存在不同说法：州长称690万例，国家抗疟规划协调员称超过730万例，尚无法确认",
+    "该事件目前仅有一个来源（尼日尔官方通讯社ANP）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_21327ded1e5258a8",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
