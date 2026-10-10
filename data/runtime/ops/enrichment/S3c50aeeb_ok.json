@@ -1,0 +1,126 @@
+{
+ "label": "S3c50aeeb",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1ab34099c711e5a0c4ec523f8585ac9dde96e0a1dbc45df7c35114a2cb28006a",
+ "tokens": {
+  "input_tokens": 2505,
+  "output_tokens": 640,
+  "total_tokens": 3145
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该事件目前仅有一个来源（Aïr Info）报道，尚缺乏交叉验证\", \"发电机组安装时间表及新电厂融资情况尚未明确\"]",
+    "after": "[\"该事件目前仅有一个来源（Aïr Info）报道，尚缺乏交叉验证\", \"发电机组安装时间表及新电厂融资情况尚未明确\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔SONICHAR煤矿与电厂设备老化致北部电力产量下降",
+   "summary_zh": "尼日尔能源部长阿尔祖马·塞尼表示，SONICHAR公司在Tchirozérine开采的煤矿设备老旧且数量不足，其热电厂设备老化及煤炭质量不佳，导致阿加德兹地区电力产量下降。该电厂两台机组分别于1981年和1982年投运，已运行超过40年，远超25年设计寿命。北部城市数月来出现可长达24小时以上的长时间停电，影响商业和经济活动。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "阿加德兹",
+    "city": "Tchirozérine",
+    "site": "SONICHAR煤矿及热电厂",
+    "raw_text": "Tchirozérine, région d'Agadez, Niger"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔能源部长称SONICHAR煤矿设备老旧且数量不足，热电厂设备老化及煤炭质量不佳导致阿加德兹地区电力产量下降",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la vétusté des engins de la mine de charbon exploitée par la SONICHAR ... et le vieillissement des équipements de sa centrale thermique contribuent à la baisse de la production électrique dans la région d'Agadez, selon le ministre de l'Énergie, Alzouma Seyni"
+    },
+    {
+     "fact": "该热电厂两台机组分别于1981年和1982年投运，已运行超过40年，设计寿命为25年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La centrale, dont les deux unités ont été mises en service en 1981 et 1982, a dépassé les 40 ans de fonctionnement, alors qu'elle avait été conçue pour une durée de vie de 25 ans"
+    },
+    {
+     "fact": "北部城市数月来出现可长达24小时以上的长时间停电，影响商业和经济活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis plusieurs mois, des longues coupures d'électricité pouvant parfois durer plus de 24 heures sont observées dans les villes du nord, avec des conséquences sur les commerces et les activités économiques"
+    },
+    {
+     "fact": "计划短期内向阿加德兹运送四台各3兆瓦的发电机组，共增加12兆瓦，可行性研究正在进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "quatre groupes électrogènes de 3 MW chacun, soit 12 MW supplémentaires, doivent également être acheminés à court terme à Agadez ... Les études de faisabilité pour leur installation sont en cours"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（Aïr Info）报道，尚缺乏交叉验证",
+    "发电机组安装时间表及新电厂融资情况尚未明确"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔SONICHAR煤矿与电厂设备老化致北部电力产量下降",
+   "summary_zh": "尼日尔能源部长阿尔祖马·塞尼表示，SONICHAR公司在Tchirozérine开采的煤矿设备老旧且数量不足，其热电厂设备老化及煤炭质量不佳，导致阿加德兹地区电力产量下降。该电厂两台机组分别于1981年和1982年投运，已运行超过40年，远超25年设计寿命。北部城市数月来出现可长达24小时以上的长时间停电，影响商业和经济活动。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "阿加德兹",
+    "city": "Tchirozérine",
+    "site": "SONICHAR煤矿及热电厂",
+    "raw_text": "Tchirozérine, région d'Agadez, Niger"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔能源部长称SONICHAR煤矿设备老旧且数量不足，热电厂设备老化及煤炭质量不佳导致阿加德兹地区电力产量下降",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la vétusté des engins de la mine de charbon exploitée par la SONICHAR ... et le vieillissement des équipements de sa centrale thermique contribuent à la baisse de la production électrique dans la région d'Agadez, selon le ministre de l'Énergie, Alzouma Seyni"
+    },
+    {
+     "fact": "该热电厂两台机组分别于1981年和1982年投运，已运行超过40年，设计寿命为25年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La centrale, dont les deux unités ont été mises en service en 1981 et 1982, a dépassé les 40 ans de fonctionnement, alors qu'elle avait été conçue pour une durée de vie de 25 ans"
+    },
+    {
+     "fact": "北部城市数月来出现可长达24小时以上的长时间停电，影响商业和经济活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis plusieurs mois, des longues coupures d'électricité pouvant parfois durer plus de 24 heures sont observées dans les villes du nord, avec des conséquences sur les commerces et les activités économiques"
+    },
+    {
+     "fact": "计划短期内向阿加德兹运送四台各3兆瓦的发电机组，共增加12兆瓦，可行性研究正在进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "quatre groupes électrogènes de 3 MW chacun, soit 12 MW supplémentaires, doivent également être acheminés à court terme à Agadez ... Les études de faisabilité pour leur installation sont en cours"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（Aïr Info）报道，尚缺乏交叉验证",
+    "发电机组安装时间表及新电厂融资情况尚未明确",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_196ca73a3c50aeeb",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

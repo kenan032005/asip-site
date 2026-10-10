@@ -1,0 +1,148 @@
+{
+ "label": "S6c6bf84a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "588e98999976bc3823a94152dcb8c5740d7830552c0bc7312b037978c80d7662",
+ "tokens": {
+  "input_tokens": 3005,
+  "output_tokens": 875,
+  "total_tokens": 3880
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"法诺民兵人数为估计值（1.5万至2万），尚未获独立确认\", \"联盟各武装团体目标有时相互矛盾，其是否获得外国势力支持尚不明确\", \"提格雷西部（沃尔凯特）地区存在歧视提格雷族人的指控，来源为人权观察\"]",
+    "after": "[\"法诺民兵人数为估计值（1.5万至2万），尚未获独立确认\", \"联盟各武装团体目标有时相互矛盾，其是否获得外国势力支持尚不明确\", \"提格雷西部（沃尔凯特）地区存在歧视提格雷族人的指控，来源为人权观察\", \"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "埃塞俄比亚：从提格雷人民解放阵线到法诺民兵，谁在挑战阿比·艾哈迈德政权？",
+   "summary_zh": "提格雷冲突结束四年后，埃塞俄比亚战火重燃。联邦军队与由七个武装团体组成的“埃塞俄比亚人民力量生存联盟”在北部多条战线交战，该联盟旨在推翻总理阿比·艾哈迈德并建立过渡政府。近日联邦军队在提格雷的反攻引发地区局势升级的担忧。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "nord de l'Éthiopie; Tigré; Amhara; Afar; Shewa-Nord; Mekele"
+   },
+   "key_facts": [
+    {
+     "fact": "自2026年9月22日至23日夜间起，埃塞俄比亚重新陷入战争，联邦军队在北部多条战线与七个武装团体交战",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis la nuit du 22 au 23 septembre 2026, l'Éthiopie a replongé dans la guerre. Sur plusieurs fronts concentrés dans le nord du pays, l'armée fédérale affronte sept groupes armés, membres de la Coalition pour la survie."
+    },
+    {
+     "fact": "该联盟于2026年9月20日正式成立，目标是推翻总理阿比·艾哈迈德并建立过渡政府",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette nouvelle alliance – officiellement formée le 20 septembre – poursuit un objectif : celui de destituer le Premier ministre Abiy Ahmed, en poste depuis 2018, et d'installer un gouvernement de transition."
+    },
+    {
+     "fact": "提格雷人民解放阵线（TPLF）是该联盟中的首要力量，其武装分支提格雷国防军曾在2020至2022年与联邦军队交战",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Front de libération pour le peuple du Tigré (TPLF) reste la première force de la Coalition... Sa branche armée – les Forces de défense du Tigré (TDF) – a affronté l'armée fédérale il y a seulement quatre ans, lors de la guerre au Tigré de 2020 à 2022."
+    },
+    {
+     "fact": "2020至2022年提格雷战争造成超过60万人死亡，是21世纪最致命的冲突之一",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Avec plus de 600 000 morts, le conflit est l'un des plus meurtriers du XXIe siècle."
+    },
+    {
+     "fact": "法诺民兵估计有1.5万至2万名战斗人员，自2023年4月起在阿姆哈拉地区与联邦军队及其盟友交战",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis avril 2023, les milliers de combattants Fano – entre 15 000 et 20 000 selon les estimations – affrontent leurs anciens alliés dans cette région du nord"
+    },
+    {
+     "fact": "联邦军队在提格雷反攻中重新夺回阿法尔地区此前被提格雷国防军占领的所有城镇，并于9月28日攻占阿拉马塔后进入默克莱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plus à l'est, dans la région Afar en revanche, toutes les villes acquises au début du conflit par les TDF... ont été reprises par l'armée lors de sa contre-offensive. Après la prise d'Alamata, le 28 septembre... sont entrées sans combattre à Mekele"
+    }
+   ],
+   "uncertainties": [
+    "法诺民兵人数为估计值（1.5万至2万），尚未获独立确认",
+    "联盟各武装团体目标有时相互矛盾，其是否获得外国势力支持尚不明确",
+    "提格雷西部（沃尔凯特）地区存在歧视提格雷族人的指控，来源为人权观察"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "埃塞俄比亚：从提格雷人民解放阵线到法诺民兵，谁在挑战阿比·艾哈迈德政权？",
+   "summary_zh": "提格雷冲突结束四年后，埃塞俄比亚战火重燃。联邦军队与由七个武装团体组成的“埃塞俄比亚人民力量生存联盟”在北部多条战线交战，该联盟旨在推翻总理阿比·艾哈迈德并建立过渡政府。近日联邦军队在提格雷的反攻引发地区局势升级的担忧。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "nord de l'Éthiopie; Tigré; Amhara; Afar; Shewa-Nord; Mekele"
+   },
+   "key_facts": [
+    {
+     "fact": "自2026年9月22日至23日夜间起，埃塞俄比亚重新陷入战争，联邦军队在北部多条战线与七个武装团体交战",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis la nuit du 22 au 23 septembre 2026, l'Éthiopie a replongé dans la guerre. Sur plusieurs fronts concentrés dans le nord du pays, l'armée fédérale affronte sept groupes armés, membres de la Coalition pour la survie."
+    },
+    {
+     "fact": "该联盟于2026年9月20日正式成立，目标是推翻总理阿比·艾哈迈德并建立过渡政府",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette nouvelle alliance – officiellement formée le 20 septembre – poursuit un objectif : celui de destituer le Premier ministre Abiy Ahmed, en poste depuis 2018, et d'installer un gouvernement de transition."
+    },
+    {
+     "fact": "提格雷人民解放阵线（TPLF）是该联盟中的首要力量，其武装分支提格雷国防军曾在2020至2022年与联邦军队交战",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Front de libération pour le peuple du Tigré (TPLF) reste la première force de la Coalition... Sa branche armée – les Forces de défense du Tigré (TDF) – a affronté l'armée fédérale il y a seulement quatre ans, lors de la guerre au Tigré de 2020 à 2022."
+    },
+    {
+     "fact": "2020至2022年提格雷战争造成超过60万人死亡，是21世纪最致命的冲突之一",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Avec plus de 600 000 morts, le conflit est l'un des plus meurtriers du XXIe siècle."
+    },
+    {
+     "fact": "法诺民兵估计有1.5万至2万名战斗人员，自2023年4月起在阿姆哈拉地区与联邦军队及其盟友交战",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis avril 2023, les milliers de combattants Fano – entre 15 000 et 20 000 selon les estimations – affrontent leurs anciens alliés dans cette région du nord"
+    },
+    {
+     "fact": "联邦军队在提格雷反攻中重新夺回阿法尔地区此前被提格雷国防军占领的所有城镇，并于9月28日攻占阿拉马塔后进入默克莱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plus à l'est, dans la région Afar en revanche, toutes les villes acquises au début du conflit par les TDF... ont été reprises par l'armée lors de sa contre-offensive. Après la prise d'Alamata, le 28 septembre... sont entrées sans combattre à Mekele"
+    }
+   ],
+   "uncertainties": [
+    "法诺民兵人数为估计值（1.5万至2万），尚未获独立确认",
+    "联盟各武装团体目标有时相互矛盾，其是否获得外国势力支持尚不明确",
+    "提格雷西部（沃尔凯特）地区存在歧视提格雷族人的指控，来源为人权观察",
+    "据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_d3f644426c6bf84a",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

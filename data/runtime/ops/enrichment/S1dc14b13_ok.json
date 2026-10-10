@@ -1,0 +1,121 @@
+{
+ "label": "S1dc14b13",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "317e574358de16cca2bd395ed57b2cacc4a761c6f55a8d975c83c9b11244665d",
+ "tokens": {
+  "input_tokens": 2487,
+  "output_tokens": 479,
+  "total_tokens": 2966
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚信息部长呼吁APC成员摒弃暴力，开展议题导向竞选",
+   "summary_zh": "尼日利亚信息与国家导向部长穆罕默德·伊德里斯在纳萨拉瓦州拉菲亚举行的APC中北部基层动员集会上，呼吁全体APC成员摒弃暴力、打斗及其他形式的政治敌对行为，以和平、议题导向的方式开展2027年大选竞选。伊德里斯还预测总统蒂努布将在中北部地区获得85%的选票。农业国务部长阿利尤·萨比也出席了集会并呼吁支持者坚持和平政治参与。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Nasarawa State",
+    "city": "Lafia",
+    "site": "政治集会现场",
+    "raw_text": "Lafia, Nasarawa State"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚信息部长穆罕默德·伊德里斯呼吁APC成员摒弃暴力与政治敌对行为",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Minister of Information and National Orientation, Mohammed Idris, has urged members of the All Progressives Congress (APC) to shun violence, fighting and other forms of political hostility."
+    },
+    {
+     "fact": "伊德里斯在纳萨拉瓦州拉菲亚举行的APC中北部基层动员集会上发表上述言论",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Idris gave the advice on Saturday while speaking with newsmen at a political rally organised by the APC North Central Grassroots Mobilisation Movement in Lafia, Nasarawa State."
+    },
+    {
+     "fact": "伊德里斯呼吁在2027年大选前开展和平、议题导向的竞选活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The minister also urged party members to embrace peaceful and issues-based campaigns ahead of the 2027 general elections."
+    },
+    {
+     "fact": "伊德里斯预测蒂努布将在中北部地区获得85%的选票",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "President Bola Tinubu is going to get 85 per cent of the vote of the North Central."
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚信息部长呼吁APC成员摒弃暴力，开展议题导向竞选",
+   "summary_zh": "尼日利亚信息与国家导向部长穆罕默德·伊德里斯在纳萨拉瓦州拉菲亚举行的APC中北部基层动员集会上，呼吁全体APC成员摒弃暴力、打斗及其他形式的政治敌对行为，以和平、议题导向的方式开展2027年大选竞选。伊德里斯还预测总统蒂努布将在中北部地区获得85%的选票。农业国务部长阿利尤·萨比也出席了集会并呼吁支持者坚持和平政治参与。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Nasarawa State",
+    "city": "Lafia",
+    "site": "政治集会现场",
+    "raw_text": "Lafia, Nasarawa State"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚信息部长穆罕默德·伊德里斯呼吁APC成员摒弃暴力与政治敌对行为",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Minister of Information and National Orientation, Mohammed Idris, has urged members of the All Progressives Congress (APC) to shun violence, fighting and other forms of political hostility."
+    },
+    {
+     "fact": "伊德里斯在纳萨拉瓦州拉菲亚举行的APC中北部基层动员集会上发表上述言论",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Idris gave the advice on Saturday while speaking with newsmen at a political rally organised by the APC North Central Grassroots Mobilisation Movement in Lafia, Nasarawa State."
+    },
+    {
+     "fact": "伊德里斯呼吁在2027年大选前开展和平、议题导向的竞选活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The minister also urged party members to embrace peaceful and issues-based campaigns ahead of the 2027 general elections."
+    },
+    {
+     "fact": "伊德里斯预测蒂努布将在中北部地区获得85%的选票",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "President Bola Tinubu is going to get 85 per cent of the vote of the North Central."
+    }
+   ],
+   "uncertainties": [
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_9cdeaa561dc14b13",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

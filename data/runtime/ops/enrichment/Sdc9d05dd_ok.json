@@ -1,0 +1,117 @@
+{
+ "label": "Sdc9d05dd",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6ef05db97c3b8ac19da3e859383510fbc7c3ba307c53acd3934d9fe4fcd7fe4a",
+ "tokens": {
+  "input_tokens": 2363,
+  "output_tokens": 552,
+  "total_tokens": 2915
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "喀麦隆在与乍得边境的库塞里捣毁一个恐怖组织小组",
+   "summary_zh": "喀麦隆洛贡-沙里省宪兵队通报“触手”行动第六阶段成果，在靠近乍得边境的库塞里区捣毁一个潜伏的恐怖组织小组，并实施多起逮捕。行动期间共进行3571次身份检查，两名西方公民因涉嫌资助恐怖主义、洗钱和危害国家安全被捕。搜查中还缴获4094发弹药及大量刀具和自制枪支。",
+   "event_type": "terrorism",
+   "country_iso3": "CMR",
+   "location": {
+    "country_iso3": "CMR",
+    "admin1": "洛贡-沙里省",
+    "city": "库塞里",
+    "site": "Harazaï街区",
+    "raw_text": "Kousseri, quartier Harazaï, département du Logone-et-Chari, frontière avec le Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "喀麦隆宪兵队在库塞里捣毁一个潜伏的恐怖组织小组",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À Kousseri, et plus particulièrement au quartier Harazaï, les forces de l'ordre ont procédé au démantèlement d'une cellule terroriste dormante."
+    },
+    {
+     "fact": "行动共进行3571次身份检查并逮捕多名被通缉人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le bilan provisoire fait état de 3 571 contrôles d'identité et de l'interpellation de plusieurs individus recherchés."
+    },
+    {
+     "fact": "两名西方公民因涉嫌资助恐怖主义、洗钱和危害国家安全被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Deux ressortissants occidentaux ont par ailleurs été arrêtés pour des soupçons de financement du terrorisme, de blanchiment de capitaux et d'atteinte à la sûreté de l'État."
+    },
+    {
+     "fact": "搜查中在Kalakafra缴获4094发弹药及大量刀具和自制枪支",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les fouilles ont permis de saisir 4 094 munitions à Kalakafra, ainsi que de nombreuses armes blanches et armes à feu artisanales."
+    }
+   ],
+   "uncertainties": [
+    "行动成果为初步统计（bilan provisoire）",
+    "两名西方公民的指控仅为涉嫌，尚未经司法证实",
+    "事件目前仅有一个来源（Alwihda Info）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "喀麦隆在与乍得边境的库塞里捣毁一个恐怖组织小组",
+   "summary_zh": "喀麦隆洛贡-沙里省宪兵队通报“触手”行动第六阶段成果，在靠近乍得边境的库塞里区捣毁一个潜伏的恐怖组织小组，并实施多起逮捕。行动期间共进行3571次身份检查，两名西方公民因涉嫌资助恐怖主义、洗钱和危害国家安全被捕。搜查中还缴获4094发弹药及大量刀具和自制枪支。",
+   "event_type": "terrorism",
+   "country_iso3": "CMR",
+   "location": {
+    "country_iso3": "CMR",
+    "admin1": "洛贡-沙里省",
+    "city": "库塞里",
+    "site": "Harazaï街区",
+    "raw_text": "Kousseri, quartier Harazaï, département du Logone-et-Chari, frontière avec le Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "喀麦隆宪兵队在库塞里捣毁一个潜伏的恐怖组织小组",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À Kousseri, et plus particulièrement au quartier Harazaï, les forces de l'ordre ont procédé au démantèlement d'une cellule terroriste dormante."
+    },
+    {
+     "fact": "行动共进行3571次身份检查并逮捕多名被通缉人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le bilan provisoire fait état de 3 571 contrôles d'identité et de l'interpellation de plusieurs individus recherchés."
+    },
+    {
+     "fact": "两名西方公民因涉嫌资助恐怖主义、洗钱和危害国家安全被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Deux ressortissants occidentaux ont par ailleurs été arrêtés pour des soupçons de financement du terrorisme, de blanchiment de capitaux et d'atteinte à la sûreté de l'État."
+    },
+    {
+     "fact": "搜查中在Kalakafra缴获4094发弹药及大量刀具和自制枪支",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les fouilles ont permis de saisir 4 094 munitions à Kalakafra, ainsi que de nombreuses armes blanches et armes à feu artisanales."
+    }
+   ],
+   "uncertainties": [
+    "行动成果为初步统计（bilan provisoire）",
+    "两名西方公民的指控仅为涉嫌，尚未经司法证实",
+    "事件目前仅有一个来源（Alwihda Info）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_d9d2ec6ddc9d05dd",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
