@@ -1,0 +1,150 @@
+{
+ "label": "Sec862757",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "dcf8493c6fac6d44ae7d1d9a9b9b8fa561549b27cc302143c51880461f83e45c",
+ "tokens": {
+  "input_tokens": 2499,
+  "output_tokens": 548,
+  "total_tokens": 3047
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"患者具体感染时间和地点尚不清楚\", \"尚不清楚患者过境乌干达时是否经过官方卫生检查站\", \"调查人员正在核查其药物是否可能抑制了体温\", \"其在基桑加尼接受治疗的医院和用药情况不明\"]",
+    "after": "[\"患者具体感染时间和地点尚不清楚\", \"尚不清楚患者过境乌干达时是否经过官方卫生检查站\", \"调查人员正在核查其药物是否可能抑制了体温\", \"其在基桑加尼接受治疗的医院和用药情况不明\", \"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"患者具体感染时间和地点尚不清楚\", \"尚不清楚患者过境乌干达时是否经过官方卫生检查站\", \"调查人员正在核查其药物是否可能抑制了体温\", \"其在基桑加尼接受治疗的医院和用药情况不明\", \"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "after": "[\"患者具体感染时间和地点尚不清楚\", \"尚不清楚患者过境乌干达时是否经过官方卫生检查站\", \"调查人员正在核查其药物是否可能抑制了体温\", \"其在基桑加尼接受治疗的医院和用药情况不明\", \"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "埃博拉患者横跨三国未被发现引发质疑",
+   "summary_zh": "一名40岁肯尼亚商人感染埃博拉后，在刚果（金）多地就医未被诊断，随后经乌干达飞抵肯尼亚内罗毕，成为肯尼亚首例确诊病例，两天后于10月5日死亡。非洲疾控中心重建其近六周行程，显示多国卫生筛查存在漏洞。刚果（金）今年已有超4000人死于埃博拉。",
+   "event_type": "other_security",
+   "country_iso3": "UGA",
+   "location": {
+    "country_iso3": "UGA",
+    "admin1": null,
+    "city": "坎帕拉",
+    "site": "恩德培国际机场",
+    "raw_text": "Uganda, Kampala, Entebbe International Airport"
+   },
+   "key_facts": [
+    {
+     "fact": "一名40岁肯尼亚商人感染埃博拉后横跨三国未被发现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A Kenyan businessman was able to spend time in one of the regions worst-affected by Ebola, then travel to two more countries before his illness was identified."
+    },
+    {
+     "fact": "该患者成为肯尼亚首例确诊病例，两天后于10月5日死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The 40-year-old - who was only diagnosed with the deadly infectious disease after arriving seriously ill at a Nairobi hospital - became Kenya's first confirmed case. He died two days later on 5 October."
+    },
+    {
+     "fact": "刚果（金）今年已有超4000人死于埃博拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than 4,000 people have died from Ebola in DR Congo this year, in what is the second most deadly known outbreak to date."
+    },
+    {
+     "fact": "患者于10月3日在恩德培国际机场登机飞往内罗毕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "he travelled by road to the capital, Kampala, and then Entebbe International Airport, where he boarded a flight to Nairobi on 3 October."
+    },
+    {
+     "fact": "乌干达官员称其通过机场筛查时体温正常",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ugandan officials said his temperature was normal when he passed through airport screening."
+    }
+   ],
+   "uncertainties": [
+    "患者具体感染时间和地点尚不清楚",
+    "尚不清楚患者过境乌干达时是否经过官方卫生检查站",
+    "调查人员正在核查其药物是否可能抑制了体温",
+    "其在基桑加尼接受治疗的医院和用药情况不明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "埃博拉患者横跨三国未被发现引发质疑",
+   "summary_zh": "一名40岁肯尼亚商人感染埃博拉后，在刚果（金）多地就医未被诊断，随后经乌干达飞抵肯尼亚内罗毕，成为肯尼亚首例确诊病例，两天后于10月5日死亡。非洲疾控中心重建其近六周行程，显示多国卫生筛查存在漏洞。刚果（金）今年已有超4000人死于埃博拉。",
+   "event_type": "other_security",
+   "country_iso3": "UGA",
+   "location": {
+    "country_iso3": "UGA",
+    "admin1": null,
+    "city": "坎帕拉",
+    "site": "恩德培国际机场",
+    "raw_text": "Uganda, Kampala, Entebbe International Airport"
+   },
+   "key_facts": [
+    {
+     "fact": "一名40岁肯尼亚商人感染埃博拉后横跨三国未被发现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A Kenyan businessman was able to spend time in one of the regions worst-affected by Ebola, then travel to two more countries before his illness was identified."
+    },
+    {
+     "fact": "该患者成为肯尼亚首例确诊病例，两天后于10月5日死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The 40-year-old - who was only diagnosed with the deadly infectious disease after arriving seriously ill at a Nairobi hospital - became Kenya's first confirmed case. He died two days later on 5 October."
+    },
+    {
+     "fact": "刚果（金）今年已有超4000人死于埃博拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than 4,000 people have died from Ebola in DR Congo this year, in what is the second most deadly known outbreak to date."
+    },
+    {
+     "fact": "患者于10月3日在恩德培国际机场登机飞往内罗毕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "he travelled by road to the capital, Kampala, and then Entebbe International Airport, where he boarded a flight to Nairobi on 3 October."
+    },
+    {
+     "fact": "乌干达官员称其通过机场筛查时体温正常",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ugandan officials said his temperature was normal when he passed through airport screening."
+    }
+   ],
+   "uncertainties": [
+    "患者具体感染时间和地点尚不清楚",
+    "尚不清楚患者过境乌干达时是否经过官方卫生检查站",
+    "调查人员正在核查其药物是否可能抑制了体温",
+    "其在基桑加尼接受治疗的医院和用药情况不明",
+    "据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_de0e8c9fec862757",
+ "disease_event_id": null,
+ "country_code": "UG"
+}

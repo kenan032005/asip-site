@@ -1,0 +1,136 @@
+{
+ "label": "S71e7550e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "eedf84fa51e0494f00b9c96438d4d8397238e6d3acb8062ca54a1d051d82c10a",
+ "tokens": {
+  "input_tokens": 2412,
+  "output_tokens": 582,
+  "total_tokens": 2994
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"德班示威转为暴力的起因系据称一名外籍人士袭击抗议者，该指控尚未证实\", \"目前尚无人员受伤报告，但局势仍在发展，伤亡情况有待核实\"]",
+    "after": "[\"德班示威转为暴力的起因系据称一名外籍人士袭击抗议者，该指控尚未证实\", \"目前尚无人员受伤报告，但局势仍在发展，伤亡情况有待核实\", \"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南非反移民暴力爆发：车辆被焚、商铺遭抢",
+   "summary_zh": "南非约翰内斯堡索韦托和德班两大城市爆发反移民抗议并演变为暴力事件，警方称至少24辆汽车被纵火焚烧，外国人经营的商铺遭抢劫。德班示威起因是据称一名外籍人士袭击抗议者，警方已逮捕三名外籍人士。警方表示目前尚无人员受伤报告，并已增派警力防止暴力升级。",
+   "event_type": "civil_unrest",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": null,
+    "city": "约翰内斯堡、德班",
+    "site": null,
+    "raw_text": "Soweto, a sprawling township outside Johannesburg, and Durban, a major port on the east coast"
+   },
+   "key_facts": [
+    {
+     "fact": "南非索韦托和德班爆发反移民暴力事件，至少24辆汽车被纵火焚烧，外国人商铺遭抢劫",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least 24 vehicles have been set ablaze and foreign-owned shops looted in South Africa as anti-immigration protests descended into violence in two major cities, police say."
+    },
+    {
+     "fact": "德班示威因据称一名外籍人士袭击抗议者而转为暴力，三名外籍人士因涉嫌该袭击被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Thursday's demonstration turned violent following allegations that a foreign national had assaulted one of the protesters in Durban. Three foreign nationals were arrested in connection with the alleged assault, police said."
+    },
+    {
+     "fact": "警方称德班14辆、索韦托10辆汽车被焚，索韦托还传出枪声",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Police said 14 vehicles were torched in Durban and 10 in Soweto, where gunshots were also reported during confrontations between residents and foreign shopkeepers."
+    },
+    {
+     "fact": "警方表示目前尚无人员受伤报告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "\"At the present moment, I can confirm that no injuries have been reported,\" he added."
+    },
+    {
+     "fact": "暴力事件发生在宪法法院7月裁决允许部分非法入境移民申请庇护之后",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The latest unrest follows a July ruling by Constitutional Court, South Africa's highest court, which struck down restrictions preventing some people from seeking asylum because of how they entered the country or missed immigration deadlines."
+    }
+   ],
+   "uncertainties": [
+    "德班示威转为暴力的起因系据称一名外籍人士袭击抗议者，该指控尚未证实",
+    "目前尚无人员受伤报告，但局势仍在发展，伤亡情况有待核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 88
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南非反移民暴力爆发：车辆被焚、商铺遭抢",
+   "summary_zh": "南非约翰内斯堡索韦托和德班两大城市爆发反移民抗议并演变为暴力事件，警方称至少24辆汽车被纵火焚烧，外国人经营的商铺遭抢劫。德班示威起因是据称一名外籍人士袭击抗议者，警方已逮捕三名外籍人士。警方表示目前尚无人员受伤报告，并已增派警力防止暴力升级。",
+   "event_type": "civil_unrest",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": null,
+    "city": "约翰内斯堡、德班",
+    "site": null,
+    "raw_text": "Soweto, a sprawling township outside Johannesburg, and Durban, a major port on the east coast"
+   },
+   "key_facts": [
+    {
+     "fact": "南非索韦托和德班爆发反移民暴力事件，至少24辆汽车被纵火焚烧，外国人商铺遭抢劫",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least 24 vehicles have been set ablaze and foreign-owned shops looted in South Africa as anti-immigration protests descended into violence in two major cities, police say."
+    },
+    {
+     "fact": "德班示威因据称一名外籍人士袭击抗议者而转为暴力，三名外籍人士因涉嫌该袭击被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Thursday's demonstration turned violent following allegations that a foreign national had assaulted one of the protesters in Durban. Three foreign nationals were arrested in connection with the alleged assault, police said."
+    },
+    {
+     "fact": "警方称德班14辆、索韦托10辆汽车被焚，索韦托还传出枪声",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Police said 14 vehicles were torched in Durban and 10 in Soweto, where gunshots were also reported during confrontations between residents and foreign shopkeepers."
+    },
+    {
+     "fact": "警方表示目前尚无人员受伤报告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "\"At the present moment, I can confirm that no injuries have been reported,\" he added."
+    },
+    {
+     "fact": "暴力事件发生在宪法法院7月裁决允许部分非法入境移民申请庇护之后",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The latest unrest follows a July ruling by Constitutional Court, South Africa's highest court, which struck down restrictions preventing some people from seeking asylum because of how they entered the country or missed immigration deadlines."
+    }
+   ],
+   "uncertainties": [
+    "德班示威转为暴力的起因系据称一名外籍人士袭击抗议者，该指控尚未证实",
+    "目前尚无人员受伤报告，但局势仍在发展，伤亡情况有待核实",
+    "据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 88
+  }
+ },
+ "event_id": "EVT_cfe8291d71e7550e",
+ "disease_event_id": null,
+ "country_code": "ZA"
+}

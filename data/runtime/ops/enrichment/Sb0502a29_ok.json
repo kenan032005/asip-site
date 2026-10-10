@@ -1,0 +1,137 @@
+{
+ "label": "Sb0502a29",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "20ad55618e10af20e199846b6e9fed22059f8a496046ba726e91f091845882f8",
+ "tokens": {
+  "input_tokens": 2319,
+  "output_tokens": 587,
+  "total_tokens": 2906
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "被控涉1994年卢旺达种族灭绝罪行的医生将在英国受审",
+   "summary_zh": "一名被控与1994年卢旺达种族灭绝相关的多项罪行的医生将在英国接受审判，庭审暂定于2027年10月开始。65岁的文森特·布朗（原名文森特·巴金亚）被指在种族灭绝初期“杀害、指挥或鼓励”杀害图西族成员，他是英国首位因该种族灭绝被起诉的人。他否认有不当行为，并表示将作无罪答辩。该案目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GBR",
+   "location": {
+    "country_iso3": "GBR",
+    "admin1": null,
+    "city": "伦敦",
+    "site": "中央刑事法院（Old Bailey）",
+    "raw_text": "Old Bailey, London"
+   },
+   "key_facts": [
+    {
+     "fact": "一名医生被控与1994年卢旺达种族灭绝相关的多项罪行，将在英国受审",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Doctor accused of 1994 Rwanda genocide offences to face trial in UK"
+    },
+    {
+     "fact": "65岁的文森特·布朗被指在种族灭绝初期“杀害、指挥或鼓励”杀害图西族成员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dr Vincent Brown, formerly Dr Vincent Bajinya, 65, is accused of \"killing, directing or encouraging\" the deaths of members of the Tutsi ethnic group in Rwanda."
+    },
+    {
+     "fact": "他是英国首位因该种族灭绝被起诉的人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He is the first person in the UK to have been charged over the genocide."
+    },
+    {
+     "fact": "法官将暂定庭审日期定于2027年10月开始",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A judge has now set his provisional trial date to begin in October 2027."
+    },
+    {
+     "fact": "他否认有不当行为，并表示将作无罪答辩",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He denies wrongdoing and has not yet entered a plea. ... He has indicated he will plead not guilty to the charges against him."
+    },
+    {
+     "fact": "1994年卢旺达种族灭绝持续100天，估计有80万图西族及政治温和的胡图族被杀",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "An estimated 800,000 Tutsis and politically moderate Hutus were killed during the 1994 Rwanda genocide which lasted for 100 days."
+    }
+   ],
+   "uncertainties": [
+    "相关指控为据称，尚未经法院判决确认",
+    "被告尚未正式答辩，表示将作无罪答辩",
+    "目前仅一个来源（BBC News）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "被控涉1994年卢旺达种族灭绝罪行的医生将在英国受审",
+   "summary_zh": "一名被控与1994年卢旺达种族灭绝相关的多项罪行的医生将在英国接受审判，庭审暂定于2027年10月开始。65岁的文森特·布朗（原名文森特·巴金亚）被指在种族灭绝初期“杀害、指挥或鼓励”杀害图西族成员，他是英国首位因该种族灭绝被起诉的人。他否认有不当行为，并表示将作无罪答辩。该案目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GBR",
+   "location": {
+    "country_iso3": "GBR",
+    "admin1": null,
+    "city": "伦敦",
+    "site": "中央刑事法院（Old Bailey）",
+    "raw_text": "Old Bailey, London"
+   },
+   "key_facts": [
+    {
+     "fact": "一名医生被控与1994年卢旺达种族灭绝相关的多项罪行，将在英国受审",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Doctor accused of 1994 Rwanda genocide offences to face trial in UK"
+    },
+    {
+     "fact": "65岁的文森特·布朗被指在种族灭绝初期“杀害、指挥或鼓励”杀害图西族成员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dr Vincent Brown, formerly Dr Vincent Bajinya, 65, is accused of \"killing, directing or encouraging\" the deaths of members of the Tutsi ethnic group in Rwanda."
+    },
+    {
+     "fact": "他是英国首位因该种族灭绝被起诉的人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He is the first person in the UK to have been charged over the genocide."
+    },
+    {
+     "fact": "法官将暂定庭审日期定于2027年10月开始",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A judge has now set his provisional trial date to begin in October 2027."
+    },
+    {
+     "fact": "他否认有不当行为，并表示将作无罪答辩",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He denies wrongdoing and has not yet entered a plea. ... He has indicated he will plead not guilty to the charges against him."
+    },
+    {
+     "fact": "1994年卢旺达种族灭绝持续100天，估计有80万图西族及政治温和的胡图族被杀",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "An estimated 800,000 Tutsis and politically moderate Hutus were killed during the 1994 Rwanda genocide which lasted for 100 days."
+    }
+   ],
+   "uncertainties": [
+    "相关指控为据称，尚未经法院判决确认",
+    "被告尚未正式答辩，表示将作无罪答辩",
+    "目前仅一个来源（BBC News）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_96b252dab0502a29",
+ "disease_event_id": null,
+ "country_code": "RW"
+}
