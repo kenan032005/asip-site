@@ -1,0 +1,103 @@
+{
+ "label": "S3a6134ac",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1f122525d2c520719562711e13bcbd6bcf530f8744a663063494a232b816fdea",
+ "tokens": {
+  "input_tokens": 2193,
+  "output_tokens": 288,
+  "total_tokens": 2481
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "俄罗斯滑翔炸弹袭击扎波罗热，至少15人死亡",
+   "summary_zh": "据乌克兰总统泽连斯基及紧急服务部门称，俄罗斯以五枚滑翔炸弹袭击乌克兰城市扎波罗热，造成至少15人死亡，其中包括三名儿童。该消息目前为单一来源报道。",
+   "event_type": "armed_conflict",
+   "country_iso3": "UKR",
+   "location": {
+    "country_iso3": "UKR",
+    "admin1": null,
+    "city": "扎波罗热",
+    "site": null,
+    "raw_text": "Zaporizhzhia"
+   },
+   "key_facts": [
+    {
+     "fact": "俄罗斯以五枚滑翔炸弹袭击乌克兰城市扎波罗热",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Russia has attacked the Ukrainian city of Zaporizhzhia with five glide bombs"
+    },
+    {
+     "fact": "袭击造成至少15人死亡，其中包括三名儿童",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "killing at least 15 people including three children"
+    },
+    {
+     "fact": "上述消息来自乌克兰总统泽连斯基及紧急服务部门",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "President Volodymyr Zelensky and emergency services have said"
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字来自乌克兰总统及紧急服务部门，目前仅一个来源，尚未获得独立交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "俄罗斯滑翔炸弹袭击扎波罗热，至少15人死亡",
+   "summary_zh": "据乌克兰总统泽连斯基及紧急服务部门称，俄罗斯以五枚滑翔炸弹袭击乌克兰城市扎波罗热，造成至少15人死亡，其中包括三名儿童。该消息目前为单一来源报道。",
+   "event_type": "armed_conflict",
+   "country_iso3": "UKR",
+   "location": {
+    "country_iso3": "UKR",
+    "admin1": null,
+    "city": "扎波罗热",
+    "site": null,
+    "raw_text": "Zaporizhzhia"
+   },
+   "key_facts": [
+    {
+     "fact": "俄罗斯以五枚滑翔炸弹袭击乌克兰城市扎波罗热",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Russia has attacked the Ukrainian city of Zaporizhzhia with five glide bombs"
+    },
+    {
+     "fact": "袭击造成至少15人死亡，其中包括三名儿童",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "killing at least 15 people including three children"
+    },
+    {
+     "fact": "上述消息来自乌克兰总统泽连斯基及紧急服务部门",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "President Volodymyr Zelensky and emergency services have said"
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字来自乌克兰总统及紧急服务部门，目前仅一个来源，尚未获得独立交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_fb8e177a3a6134ac",
+ "disease_event_id": null,
+ "country_code": "GH"
+}
