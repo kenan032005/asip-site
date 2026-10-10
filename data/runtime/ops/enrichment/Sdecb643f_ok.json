@@ -1,0 +1,115 @@
+{
+ "label": "Sdecb643f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "79c48e8b23659aa6caeb7b12ee5d5488da8742f39935a4f1d64626ed6a5b893f",
+ "tokens": {
+  "input_tokens": 1963,
+  "output_tokens": 400,
+  "total_tokens": 2363
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南非反移民热点地区加强安保",
+   "summary_zh": "南非约翰内斯堡和德班针对外国人的暴力抗议进入第二天，反移民热点地区已加强安保。示威者焚烧汽车、袭击外国人并抢劫商铺，警方发射催泪瓦斯和震爆弹驱散人群。抗议据称源于有关内政部执行宪法法院庇护寻求者裁决指令的广泛错误信息。",
+   "event_type": "civil_unrest",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": null,
+    "city": "约翰内斯堡和德班",
+    "site": "反移民热点地区",
+    "raw_text": "anti-immigrant hotspots in the South African cities of Johannesburg and Durban"
+   },
+   "key_facts": [
+    {
+     "fact": "南非约翰内斯堡和德班反移民热点地区加强安保",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Heightened security at anti-immigrant hotspots in South Africa"
+    },
+    {
+     "fact": "针对外国人的暴力抗议进入第二天，示威者焚烧汽车、袭击外国人并抢劫商铺",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Demonstrators torched cars, attacked foreigners, and looted shops"
+    },
+    {
+     "fact": "警方发射催泪瓦斯和震爆弹驱散示威者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "police fired tear gas and stun grenades to try to disperse them"
+    },
+    {
+     "fact": "抗议据称源于有关内政部庇护寻求者裁决指令的广泛错误信息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The protests erupted following widespread misinformation about a Home Affairs directive on implementing a Constitutional Court ruling on the processing of asylum seekers"
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源报道，尚缺乏交叉验证",
+    "抗议起因与错误信息的关联为报道所述，尚未获独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南非反移民热点地区加强安保",
+   "summary_zh": "南非约翰内斯堡和德班针对外国人的暴力抗议进入第二天，反移民热点地区已加强安保。示威者焚烧汽车、袭击外国人并抢劫商铺，警方发射催泪瓦斯和震爆弹驱散人群。抗议据称源于有关内政部执行宪法法院庇护寻求者裁决指令的广泛错误信息。",
+   "event_type": "civil_unrest",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": null,
+    "city": "约翰内斯堡和德班",
+    "site": "反移民热点地区",
+    "raw_text": "anti-immigrant hotspots in the South African cities of Johannesburg and Durban"
+   },
+   "key_facts": [
+    {
+     "fact": "南非约翰内斯堡和德班反移民热点地区加强安保",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Heightened security at anti-immigrant hotspots in South Africa"
+    },
+    {
+     "fact": "针对外国人的暴力抗议进入第二天，示威者焚烧汽车、袭击外国人并抢劫商铺",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Demonstrators torched cars, attacked foreigners, and looted shops"
+    },
+    {
+     "fact": "警方发射催泪瓦斯和震爆弹驱散示威者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "police fired tear gas and stun grenades to try to disperse them"
+    },
+    {
+     "fact": "抗议据称源于有关内政部庇护寻求者裁决指令的广泛错误信息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The protests erupted following widespread misinformation about a Home Affairs directive on implementing a Constitutional Court ruling on the processing of asylum seekers"
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源报道，尚缺乏交叉验证",
+    "抗议起因与错误信息的关联为报道所述，尚未获独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_6205426bdecb643f",
+ "disease_event_id": null,
+ "country_code": "ZA"
+}

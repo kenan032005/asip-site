@@ -1,17 +1,17 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-11T06:07:17+08:00",
+ "generated_at": "2026-10-11T07:55:31+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
   "signals_24h": 28,
-  "signals_7d": 308,
-  "verified_events_24h": 28,
-  "verified_events_7d": 323,
+  "signals_7d": 309,
+  "verified_events_24h": 32,
+  "verified_events_7d": 328,
   "multi_source_verified_events_7d": 8,
-  "countries_with_activity_24h": 9,
+  "countries_with_activity_24h": 12,
   "total_countries_monitored": 22
  },
  "countries_24h": [
@@ -20,10 +20,13 @@
   "刚果（金）",
   "加纳",
   "南苏丹",
+  "南非",
   "埃塞俄比亚",
   "尼日利亚",
   "尼日尔",
-  "科特迪瓦"
+  "摩洛哥",
+  "科特迪瓦",
+  "贝宁"
  ],
  "countries_7d": [
   "中非共和国",
@@ -45,6 +48,7 @@
   "尼日利亚",
   "尼日尔",
   "布隆迪",
+  "摩洛哥",
   "斯威士兰",
   "科特迪瓦",
   "肯尼亚",
@@ -66,7 +70,7 @@
   },
   {
    "value": "乍得",
-   "count": 36
+   "count": 37
   },
   {
    "value": "埃塞俄比亚",
@@ -108,7 +112,7 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 21
+   "count": 20
   },
   {
    "value": "民众骚乱",
@@ -117,6 +121,10 @@
   {
    "value": "公共卫生",
    "count": 2
+  },
+  {
+   "value": "恐怖袭击",
+   "count": 1
   },
   {
    "value": "军事行动",
@@ -134,11 +142,11 @@
  "source_tier_distribution_7d": [
   {
    "value": "B",
-   "count": 305
+   "count": 309
   },
   {
    "value": "C",
-   "count": 219
+   "count": 221
   },
   {
    "value": "A",
@@ -238,6 +246,21 @@
   }
  ],
  "top_signals": [
+  {
+   "fact_id": "news:5d6e690daeabfac5",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Lac Tchad : les parlementaires condamnent avec fermeté les attaques sanglantes de Boko Haram",
+   "category": "terrorist_attack",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-11 03:51",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   {
    "fact_id": "news:dfb889cb8aac9517",
    "level": "news_signal",
@@ -582,21 +605,6 @@
    "time": "2026-10-10 11:58",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:af00bdba041680ec",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "尼日利亚高原州潘克辛地方政府主席誓言打击疑似仪式杀人",
-   "category": "other_security",
-   "source": "News Agency of Nigeria",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-10 08:20",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -675,16 +683,31 @@
  ],
  "existing_assessment": {
   "status": "ai",
-  "overall_assessment": "已核实事件方面，埃塞俄比亚联邦部队重新夺回提格雷州首府默克莱（多源核实），反叛武装暂时撤出；刚果（金）总统齐塞克迪就两国军人交火向刚果（布）致歉；联合国难民署警告预算削减致830万人面临人道援助危机，乍得数十万人或受影响；刚果（金）东部埃博拉疫情死亡人数超4000人，军队与联刚稳定团部署支援应对；肯尼亚高速公路车祸致至少17人死亡。情报信号方面，均为单源消息、尚待核实：尼日尔SONICHAR煤矿与电厂设备老化致北部电力产量下降；中非共和国军队在靠近乍得的三国边境实施预防性空袭；喀麦隆在与乍得边境库塞里捣毁恐怖组织小组；苏丹准军事组织无人机袭击埃塞俄比亚边境附近，据称致41人死亡。上述信号涉及跨境武装与关键基础设施，需持续跟踪核实。",
+  "overall_assessment": "已核实事件方面，埃塞俄比亚联邦部队重新夺回提格雷州首府默克莱，反叛武装撤出，该方向军事态势出现阶段性变化；刚果（金）总统齐塞克迪就两国军人交火向刚果（布）致歉，双边摩擦进入外交处置轨道；刚果（金）东部埃博拉死亡人数超4000人，军队与联刚稳定团已部署支援应对；联合国难民署警告预算削减致830万人面临人道援助危机，乍得数十万人或受影响；肯尼亚高速公路车祸致至少17人死亡。情报信号层面，均为单源消息、尚待核实：乍得湖省议员谴责博科圣地袭击；中非共和国军队在靠近乍得的三国边境实施预防性空袭；喀麦隆在与乍得边境捣毁恐怖组织小组；尼日尔北部电力产量因设备老化下降；尼日利亚执政党呼吁摒弃暴力竞选。整体风险方向偏于恶化，萨赫勒—乍得湖盆地与提格雷方向需持续跟踪。",
   "risk_direction": "worsening",
   "confidence": "medium",
-  "generated_time": "2026-10-11T06:07:07+08:00",
+  "generated_time": "2026-10-11T07:55:22+08:00",
   "based_on": "过去24小时/7日公开信息",
   "model": "",
   "date": "20261011"
  },
- "fact_count": 631,
+ "fact_count": 637,
  "facts": {
+  "news:5d6e690daeabfac5": {
+   "fact_id": "news:5d6e690daeabfac5",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Lac Tchad : les parlementaires condamnent avec fermeté les attaques sanglantes de Boko Haram",
+   "category": "terrorist_attack",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-11 03:51",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:dfb889cb8aac9517": {
    "fact_id": "news:dfb889cb8aac9517",
    "level": "news_signal",
@@ -10147,6 +10170,81 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-10 15:28",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_f41ed02c3f02f929": {
+   "fact_id": "EVT_f41ed02c3f02f929",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "贝宁",
+   "title": "专家呼吁医护人员将医学知识转化为实践以挽救母婴生命",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-10 22:30",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_9eab79f5e569c786": {
+   "fact_id": "EVT_9eab79f5e569c786",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "贝宁",
+   "title": "专家：护理人员之间的冲突与孕产妇及新生儿死亡相关",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-10 20:55",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_a1e21c42c25f1fca": {
+   "fact_id": "EVT_a1e21c42c25f1fca",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "摩洛哥",
+   "title": "摩洛哥国王称青年议题必须置于政策议程首位",
+   "category": "other_security",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-10 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_3b516a6b7b2a986e": {
+   "fact_id": "EVT_3b516a6b7b2a986e",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "乍得湖地区议员强烈谴责博科圣地血腥袭击",
+   "category": "terrorist_attack",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-10 19:51",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_6205426bdecb643f": {
+   "fact_id": "EVT_6205426bdecb643f",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "南非",
+   "title": "南非反移民热点地区加强安保",
+   "category": "foreign_national_security",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-10 00:00",
    "importance": "high",
    "severity": "medium"
   }
