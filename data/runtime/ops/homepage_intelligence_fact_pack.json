@@ -1,22 +1,23 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-11T18:34:17+08:00",
+ "generated_at": "2026-10-11T19:58:16+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 35,
+  "signals_24h": 33,
   "signals_7d": 327,
-  "verified_events_24h": 35,
-  "verified_events_7d": 341,
+  "verified_events_24h": 34,
+  "verified_events_7d": 342,
   "multi_source_verified_events_7d": 7,
-  "countries_with_activity_24h": 8,
+  "countries_with_activity_24h": 9,
   "total_countries_monitored": 22
  },
  "countries_24h": [
   "乍得",
-  "加纳",
+  "南苏丹",
+  "南非",
   "埃塞俄比亚",
   "尼日利亚",
   "尼日尔",
@@ -61,7 +62,7 @@
   },
   {
    "value": "加纳",
-   "count": 58
+   "count": 56
   },
   {
    "value": "乍得",
@@ -73,7 +74,7 @@
   },
   {
    "value": "南苏丹",
-   "count": 23
+   "count": 25
   },
   {
    "value": "尼日尔",
@@ -107,11 +108,15 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 26
+   "count": 22
   },
   {
    "value": "武装冲突",
    "count": 3
+  },
+  {
+   "value": "民众骚乱",
+   "count": 2
   },
   {
    "value": "边境安全",
@@ -122,26 +127,26 @@
    "count": 2
   },
   {
-   "value": "恐怖袭击",
+   "value": "自然灾害",
    "count": 1
   },
   {
-   "value": "民众骚乱",
+   "value": "恐怖袭击",
    "count": 1
   }
  ],
  "source_tier_distribution_7d": [
   {
    "value": "B",
-   "count": 336
+   "count": 332
   },
   {
    "value": "C",
-   "count": 221
+   "count": 225
   },
   {
    "value": "A",
-   "count": 111
+   "count": 112
   }
  ],
  "top_verified_events": [
@@ -237,6 +242,36 @@
   }
  ],
  "top_signals": [
+  {
+   "fact_id": "news:5538517211bd1d5a",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "Twic East, Duk communities agree to end hostilities",
+   "category": "civil_unrest",
+   "source": "Radio Tamazuj",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-11 17:44",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:dc257faefa7dadf7",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "South Sudan girls highlight education, flood risks at UK embassy event",
+   "category": "natural_disaster",
+   "source": "Radio Tamazuj",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-11 17:28",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   {
    "fact_id": "news:2042f155d44ccb16",
    "level": "news_signal",
@@ -566,36 +601,6 @@
    "time": "2026-10-11 04:55",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:5d6e690daeabfac5",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得湖地区议员强烈谴责博科圣地血腥袭击",
-   "category": "terrorist_attack",
-   "source": "Alwihda Info",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-11 03:51",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:dfb889cb8aac9517",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日尔",
-   "title": "尼日尔SONICHAR煤矿与电厂设备老化致北部电力产量下降",
-   "category": "other_security",
-   "source": "Aïr Info",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-11 03:05",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -676,8 +681,38 @@
   "status": "deterministic",
   "based_on": "过去24小时/7日公开信息（确定性汇总）"
  },
- "fact_count": 668,
+ "fact_count": 669,
  "facts": {
+  "news:5538517211bd1d5a": {
+   "fact_id": "news:5538517211bd1d5a",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "Twic East, Duk communities agree to end hostilities",
+   "category": "civil_unrest",
+   "source": "Radio Tamazuj",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-11 17:44",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:dc257faefa7dadf7": {
+   "fact_id": "news:dc257faefa7dadf7",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "South Sudan girls highlight education, flood risks at UK embassy event",
+   "category": "natural_disaster",
+   "source": "Radio Tamazuj",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-11 17:28",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:2042f155d44ccb16": {
    "fact_id": "news:2042f155d44ccb16",
    "level": "news_signal",
@@ -5553,36 +5588,6 @@
    "importance": "low",
    "why_it_matters": ""
   },
-  "news:49dee0a953ffec37": {
-   "fact_id": "news:49dee0a953ffec37",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "加纳",
-   "title": "加纳前驻华大使祝贺Boadu与Kodua当选新爱国党要职",
-   "category": "election_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-10-04 19:36",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:cf254512141063ba": {
-   "fact_id": "news:cf254512141063ba",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "加纳",
-   "title": "加纳前议长奥夸耶警告：行政机构恐吓反对派破坏权力分立",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-10-04 19:16",
-   "importance": "low",
-   "why_it_matters": ""
-  },
   "EVT_1d3a05642365316d": {
    "fact_id": "EVT_1d3a05642365316d",
    "level": "verified_event",
@@ -5745,36 +5750,6 @@
    "source_tier": "B",
    "source_role": "regional",
    "time": "2026-10-04 12:01",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_afadbab8553cb70c": {
-   "fact_id": "EVT_afadbab8553cb70c",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "加纳",
-   "title": "加纳前驻华大使祝贺Boadu与Kodua当选新爱国党要职",
-   "category": "election_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-10-04 11:36",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_8c0f0bf47763db76": {
-   "fact_id": "EVT_8c0f0bf47763db76",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "加纳",
-   "title": "加纳前议长奥夸耶警告：行政机构恐吓反对派破坏权力分立",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-10-04 11:16",
    "importance": "high",
    "severity": "medium"
   },
@@ -10695,6 +10670,51 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-11 07:15",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_9f51f72c067013ab": {
+   "fact_id": "EVT_9f51f72c067013ab",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "南苏丹琼莱州Twic East与Duk社区同意停止敌对行动",
+   "category": "civil_unrest",
+   "source": "Radio Tamazuj",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-11 09:44",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_eca270bf724ddb3b": {
+   "fact_id": "EVT_eca270bf724ddb3b",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "南苏丹女孩在英国使馆活动中呼吁关注教育与洪水风险",
+   "category": "natural_disaster",
+   "source": "Radio Tamazuj",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-11 09:28",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_40530cfe7fc902c9": {
+   "fact_id": "EVT_40530cfe7fc902c9",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "南非",
+   "title": "南非：宪法法院裁决引发反移民暴力，政府撤回庇护申请指令",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-11 09:56",
    "importance": "high",
    "severity": "medium"
   }

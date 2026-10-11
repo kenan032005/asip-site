@@ -1,0 +1,123 @@
+{
+ "label": "S7fc902c9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f0ae8edfbcbaa0c50309eda8f3de37df7ab0118a76706d9b496f7a239eb20362",
+ "tokens": {
+  "input_tokens": 2855,
+  "output_tokens": 488,
+  "total_tokens": 3343
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "南非：宪法法院裁决引发反移民暴力，政府撤回庇护申请指令",
+   "summary_zh": "南非宪法法院2026年7月的一项裁决允许非法入境者申请庇护，政府随后于9月底发布指令放宽相关限制，引发反移民示威者不满。本周德班和约翰内斯堡爆发暴力事件，20人被捕，军队已部署至德班地区。面对暴力，政府撤回该指令，副总统马沙蒂莱呼吁冷静。",
+   "event_type": "civil_unrest",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": null,
+    "city": "德班",
+    "site": null,
+    "raw_text": "Durban et Johannesburg"
+   },
+   "key_facts": [
+    {
+     "fact": "南非宪法法院2026年7月裁决允许非法入境者申请庇护",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un arrêt de la Cour constitutionnelle qui date du mois de juillet 2026"
+    },
+    {
+     "fact": "政府9月底发布指令允许更多外国人包括无证者就地申请庇护",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fin septembre, le gouvernement a donc émis une directive pour permettre, à davantage d’étrangers y compris ceux sans papiers ou entrés illégalement dans le pays, de déposer une demande d’asile sur place"
+    },
+    {
+     "fact": "本周德班和约翰内斯堡爆发暴力事件，20人被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des violences ont éclaté cette semaine à Durban et Johannesburg. Vingt personnes ont été arrêtées"
+    },
+    {
+     "fact": "军队已部署至德班地区，车辆被焚毁、商铺遭抢劫",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’armée a été déployée dans la région de Durban, alors que des véhicules ont été incendiés et des commerces pillés"
+    },
+    {
+     "fact": "政府撤回该指令，副总统马沙蒂莱呼吁冷静",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement a finalement fait marche arrière et a retiré la directive"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "南非：宪法法院裁决引发反移民暴力，政府撤回庇护申请指令",
+   "summary_zh": "南非宪法法院2026年7月的一项裁决允许非法入境者申请庇护，政府随后于9月底发布指令放宽相关限制，引发反移民示威者不满。本周德班和约翰内斯堡爆发暴力事件，20人被捕，军队已部署至德班地区。面对暴力，政府撤回该指令，副总统马沙蒂莱呼吁冷静。",
+   "event_type": "civil_unrest",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": null,
+    "city": "德班",
+    "site": null,
+    "raw_text": "Durban et Johannesburg"
+   },
+   "key_facts": [
+    {
+     "fact": "南非宪法法院2026年7月裁决允许非法入境者申请庇护",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un arrêt de la Cour constitutionnelle qui date du mois de juillet 2026"
+    },
+    {
+     "fact": "政府9月底发布指令允许更多外国人包括无证者就地申请庇护",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fin septembre, le gouvernement a donc émis une directive pour permettre, à davantage d’étrangers y compris ceux sans papiers ou entrés illégalement dans le pays, de déposer une demande d’asile sur place"
+    },
+    {
+     "fact": "本周德班和约翰内斯堡爆发暴力事件，20人被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des violences ont éclaté cette semaine à Durban et Johannesburg. Vingt personnes ont été arrêtées"
+    },
+    {
+     "fact": "军队已部署至德班地区，车辆被焚毁、商铺遭抢劫",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’armée a été déployée dans la région de Durban, alors que des véhicules ont été incendiés et des commerces pillés"
+    },
+    {
+     "fact": "政府撤回该指令，副总统马沙蒂莱呼吁冷静",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement a finalement fait marche arrière et a retiré la directive"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_40530cfe7fc902c9",
+ "disease_event_id": null,
+ "country_code": "ZA"
+}
