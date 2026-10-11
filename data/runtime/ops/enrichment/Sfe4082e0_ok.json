@@ -1,0 +1,129 @@
+{
+ "label": "Sfe4082e0",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "bece63fe236c5d88c7e2788567138ba3d4af87aff9a1faedc14c52013f1ae6f7",
+ "tokens": {
+  "input_tokens": 2490,
+  "output_tokens": 552,
+  "total_tokens": 3042
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "苏丹与埃及边境金矿营地遭空袭，据称至少72名淘金者死亡",
+   "summary_zh": "据总部位于喀土穆的权益组织“紧急律师”称，苏丹尼罗河州一处手工采金营地周六遭空袭，至少72名平民死亡，死亡人数为初步统计且可能上升。埃及政府和苏丹实际当局均未就此作出回应。该组织称此次袭击可能构成战争罪，并提及开罗此前曾被指对淘金者发动致命打击。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SDN",
+   "location": {
+    "country_iso3": "SDN",
+    "admin1": "尼罗河州",
+    "city": null,
+    "site": "手工采金营地",
+    "raw_text": "a popular gold mining sites in Sudan's River Nile state"
+   },
+   "key_facts": [
+    {
+     "fact": "据权益组织“紧急律师”称，苏丹尼罗河州一处手工采金营地遭空袭，至少72名平民死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least 72 civilians who had been prospecting for gold in a border region of Sudan have been killed in air strikes, a regional rights group says."
+    },
+    {
+     "fact": "埃及政府和苏丹实际当局迄今均未就此次袭击作出回应",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Neither the Egyptian government nor the de facto Sudanese authorities have so far commented."
+    },
+    {
+     "fact": "该组织称死亡人数为初步统计，可能上升",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It noted that its death toll was provisional and could rise."
+    },
+    {
+     "fact": "目击者称袭击于当地时间约06:00开始，飞机向矿工营地发射超过五枚导弹",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eyewitnesses said the attack began around 06:00 local time (04:00 GMT), with the aircraft firing more than five missiles directly at the miners' camps"
+    },
+    {
+     "fact": "开罗此前曾被指对淘金者发动致命打击，作为打击南部边境非法活动的一部分",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cairo has previously faced accusations of deadly strikes on gold prospectors as part of a crackdown on illicit activity along its southern border."
+    }
+   ],
+   "uncertainties": [
+    "袭击责任方尚未确认，埃及与苏丹当局均未回应",
+    "死亡人数为初步统计，可能上升",
+    "该事件目前仅有一个来源（单一来源），尚缺乏交叉验证",
+    "此前针对淘金者的袭击属被指行为，未获证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "苏丹与埃及边境金矿营地遭空袭，据称至少72名淘金者死亡",
+   "summary_zh": "据总部位于喀土穆的权益组织“紧急律师”称，苏丹尼罗河州一处手工采金营地周六遭空袭，至少72名平民死亡，死亡人数为初步统计且可能上升。埃及政府和苏丹实际当局均未就此作出回应。该组织称此次袭击可能构成战争罪，并提及开罗此前曾被指对淘金者发动致命打击。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SDN",
+   "location": {
+    "country_iso3": "SDN",
+    "admin1": "尼罗河州",
+    "city": null,
+    "site": "手工采金营地",
+    "raw_text": "a popular gold mining sites in Sudan's River Nile state"
+   },
+   "key_facts": [
+    {
+     "fact": "据权益组织“紧急律师”称，苏丹尼罗河州一处手工采金营地遭空袭，至少72名平民死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least 72 civilians who had been prospecting for gold in a border region of Sudan have been killed in air strikes, a regional rights group says."
+    },
+    {
+     "fact": "埃及政府和苏丹实际当局迄今均未就此次袭击作出回应",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Neither the Egyptian government nor the de facto Sudanese authorities have so far commented."
+    },
+    {
+     "fact": "该组织称死亡人数为初步统计，可能上升",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It noted that its death toll was provisional and could rise."
+    },
+    {
+     "fact": "目击者称袭击于当地时间约06:00开始，飞机向矿工营地发射超过五枚导弹",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eyewitnesses said the attack began around 06:00 local time (04:00 GMT), with the aircraft firing more than five missiles directly at the miners' camps"
+    },
+    {
+     "fact": "开罗此前曾被指对淘金者发动致命打击，作为打击南部边境非法活动的一部分",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cairo has previously faced accusations of deadly strikes on gold prospectors as part of a crackdown on illicit activity along its southern border."
+    }
+   ],
+   "uncertainties": [
+    "袭击责任方尚未确认，埃及与苏丹当局均未回应",
+    "死亡人数为初步统计，可能上升",
+    "该事件目前仅有一个来源（单一来源），尚缺乏交叉验证",
+    "此前针对淘金者的袭击属被指行为，未获证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_2b53440dfe4082e0",
+ "disease_event_id": null,
+ "country_code": "EG"
+}

@@ -1,0 +1,126 @@
+{
+ "label": "Sf91656c1",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a1f34c919f25a94a5daca0e639dbc1afe25eaa99086cbee3089011f8e9354ff8",
+ "tokens": {
+  "input_tokens": 2436,
+  "output_tokens": 521,
+  "total_tokens": 2957
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"伤亡数字为初步统计（bilan provisoire），尚未最终确认\", \"事件为单一来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"伤亡数字为初步统计（bilan provisoire），尚未最终确认\", \"事件为单一来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得强烈谴责胡塞武装对沙特阿拉伯的袭击",
+   "summary_zh": "针对胡塞武装于2026年10月10日对沙特阿拉伯民用基础设施发动的袭击，乍得政府表示严重关切并予以谴责。据初步统计，袭击造成12人死亡、309人受伤，并造成重大物质损失。乍得向沙特政府和人民表示声援，并向遇难者家属致哀。",
+   "event_type": "terrorism",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N'Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得政府谴责胡塞武装2026年10月10日对沙特阿拉伯机场设施和民用基础设施的袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement tchadien a vivement réagi aux attaques menées le samedi 10 octobre 2026 par les rebelles houthis contre des installations aéroportuaires et des infrastructures civiles au Royaume d'Arabie saoudite."
+    },
+    {
+     "fact": "据初步统计，袭击造成12人死亡、309人受伤及重大物质损失",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces frappes ont fait, selon un bilan provisoire, douze morts et trois cent neuf blessés, en plus d'importants dégâts matériels."
+    },
+    {
+     "fact": "乍得在恩贾梅纳发布官方公报，由新闻部长兼政府发言人签署",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans un communiqué officiel publié le 11 octobre à N'Djamena et signé par le ministre de la Communication et porte-parole du gouvernement, Gassim Cherif Mahamat"
+    },
+    {
+     "fact": "乍得向沙特政府和人民表示声援，向遇难者家属致哀并祝愿伤者早日康复",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Tchad adresse sa solidarité au gouvernement et au peuple saoudien, formule ses condoléances aux familles des victimes et souhaite un prompt rétablissement aux blessés"
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字为初步统计（bilan provisoire），尚未最终确认",
+    "事件为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得强烈谴责胡塞武装对沙特阿拉伯的袭击",
+   "summary_zh": "针对胡塞武装于2026年10月10日对沙特阿拉伯民用基础设施发动的袭击，乍得政府表示严重关切并予以谴责。据初步统计，袭击造成12人死亡、309人受伤，并造成重大物质损失。乍得向沙特政府和人民表示声援，并向遇难者家属致哀。",
+   "event_type": "terrorism",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N'Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得政府谴责胡塞武装2026年10月10日对沙特阿拉伯机场设施和民用基础设施的袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement tchadien a vivement réagi aux attaques menées le samedi 10 octobre 2026 par les rebelles houthis contre des installations aéroportuaires et des infrastructures civiles au Royaume d'Arabie saoudite."
+    },
+    {
+     "fact": "据初步统计，袭击造成12人死亡、309人受伤及重大物质损失",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces frappes ont fait, selon un bilan provisoire, douze morts et trois cent neuf blessés, en plus d'importants dégâts matériels."
+    },
+    {
+     "fact": "乍得在恩贾梅纳发布官方公报，由新闻部长兼政府发言人签署",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans un communiqué officiel publié le 11 octobre à N'Djamena et signé par le ministre de la Communication et porte-parole du gouvernement, Gassim Cherif Mahamat"
+    },
+    {
+     "fact": "乍得向沙特政府和人民表示声援，向遇难者家属致哀并祝愿伤者早日康复",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Tchad adresse sa solidarité au gouvernement et au peuple saoudien, formule ses condoléances aux familles des victimes et souhaite un prompt rétablissement aux blessés"
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字为初步统计（bilan provisoire），尚未最终确认",
+    "事件为单一来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_26a2c5b7f91656c1",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

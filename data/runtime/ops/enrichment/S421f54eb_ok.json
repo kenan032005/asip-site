@@ -1,0 +1,136 @@
+{
+ "label": "S421f54eb",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "54adeebfd8765958e06a18394307bd9009f50b9123974ae66233e9f157dc291e",
+ "tokens": {
+  "input_tokens": 2636,
+  "output_tokens": 478,
+  "total_tokens": 3114
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证\", \"律师协会所称的诉求是否最终得到满足尚未证实\"]",
+    "after": "[\"该事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证\", \"律师协会所称的诉求是否最终得到满足尚未证实\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "摩洛哥律师结束数月罢工恢复工作",
+   "summary_zh": "摩洛哥律师在持续四个多月的停工后恢复执业，此次停工是为抗议一项改革其职业的新法案。组织罢工的摩洛哥律师协会（ABAM）表示，希望给新政府留出反思期。夏季期间司法案件积压，造成严重延误。律师方面称动员并未结束，将继续争取诉求。",
+   "event_type": "other_security",
+   "country_iso3": "MAR",
+   "location": {
+    "country_iso3": "MAR",
+    "admin1": null,
+    "city": "拉巴特",
+    "site": null,
+    "raw_text": "Maroc"
+   },
+   "key_facts": [
+    {
+     "fact": "摩洛哥律师在四个多月停工后恢复执业",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Après plusieurs semaines de mobilisation, les 19 000 avocats marocains ont décidé de suspendre provisoirement leur arrêt de travail"
+    },
+    {
+     "fact": "此次停工是为抗议一项改革律师职业的新法案",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "après plus de quatre mois de blocage en réponse au vote d'un nouveau projet de loi qui réforment leur profession"
+    },
+    {
+     "fact": "组织罢工的摩洛哥律师协会表示希望给新政府留出反思期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'Association des barreaux du Maroc (ABAM) qui a organisé la grève, explique vouloir laisser une période de réflexion au nouveau gouvernement marocain"
+    },
+    {
+     "fact": "夏季期间司法案件积压造成严重延误",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les affaires judiciaires se sont entassées durant l'été, provoquant des retards importants"
+    },
+    {
+     "fact": "律师方面称动员并未结束，将继续争取诉求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La mobilisation ne fait que commencer, nous défendrons notre cause jusqu'à obtention de nos revendications"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证",
+    "律师协会所称的诉求是否最终得到满足尚未证实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "摩洛哥律师结束数月罢工恢复工作",
+   "summary_zh": "摩洛哥律师在持续四个多月的停工后恢复执业，此次停工是为抗议一项改革其职业的新法案。组织罢工的摩洛哥律师协会（ABAM）表示，希望给新政府留出反思期。夏季期间司法案件积压，造成严重延误。律师方面称动员并未结束，将继续争取诉求。",
+   "event_type": "other_security",
+   "country_iso3": "MAR",
+   "location": {
+    "country_iso3": "MAR",
+    "admin1": null,
+    "city": "拉巴特",
+    "site": null,
+    "raw_text": "Maroc"
+   },
+   "key_facts": [
+    {
+     "fact": "摩洛哥律师在四个多月停工后恢复执业",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Après plusieurs semaines de mobilisation, les 19 000 avocats marocains ont décidé de suspendre provisoirement leur arrêt de travail"
+    },
+    {
+     "fact": "此次停工是为抗议一项改革律师职业的新法案",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "après plus de quatre mois de blocage en réponse au vote d'un nouveau projet de loi qui réforment leur profession"
+    },
+    {
+     "fact": "组织罢工的摩洛哥律师协会表示希望给新政府留出反思期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'Association des barreaux du Maroc (ABAM) qui a organisé la grève, explique vouloir laisser une période de réflexion au nouveau gouvernement marocain"
+    },
+    {
+     "fact": "夏季期间司法案件积压造成严重延误",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les affaires judiciaires se sont entassées durant l'été, provoquant des retards importants"
+    },
+    {
+     "fact": "律师方面称动员并未结束，将继续争取诉求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La mobilisation ne fait que commencer, nous défendrons notre cause jusqu'à obtention de nos revendications"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证",
+    "律师协会所称的诉求是否最终得到满足尚未证实",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_e7e7a9f1421f54eb",
+ "disease_event_id": null,
+ "country_code": "MA"
+}

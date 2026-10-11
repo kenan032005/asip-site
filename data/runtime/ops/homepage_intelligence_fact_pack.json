@@ -1,29 +1,32 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-12T06:06:48+08:00",
+ "generated_at": "2026-10-12T07:56:22+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 31,
-  "signals_7d": 317,
-  "verified_events_24h": 49,
-  "verified_events_7d": 348,
-  "multi_source_verified_events_7d": 9,
-  "countries_with_activity_24h": 11,
+  "signals_24h": 29,
+  "signals_7d": 319,
+  "verified_events_24h": 52,
+  "verified_events_7d": 355,
+  "multi_source_verified_events_7d": 10,
+  "countries_with_activity_24h": 14,
   "total_countries_monitored": 22
  },
  "countries_24h": [
   "乍得",
   "几内亚",
+  "加纳",
   "南苏丹",
   "南非",
   "吉布提",
+  "埃及",
   "埃塞俄比亚",
   "尼日利亚",
   "尼日尔",
   "布基纳法索",
+  "摩洛哥",
   "莫桑比克",
   "贝宁"
  ],
@@ -64,7 +67,7 @@
   },
   {
    "value": "乍得",
-   "count": 43
+   "count": 44
   },
   {
    "value": "加纳",
@@ -110,11 +113,15 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 21
+   "count": 18
   },
   {
    "value": "武装冲突",
    "count": 3
+  },
+  {
+   "value": "军事行动",
+   "count": 2
   },
   {
    "value": "边境安全",
@@ -131,24 +138,20 @@
   {
    "value": "民众骚乱",
    "count": 1
-  },
-  {
-   "value": "军事行动",
-   "count": 1
   }
  ],
  "source_tier_distribution_7d": [
   {
    "value": "B",
-   "count": 324
+   "count": 326
   },
   {
    "value": "C",
-   "count": 230
+   "count": 234
   },
   {
    "value": "A",
-   "count": 111
+   "count": 114
   }
  ],
  "top_verified_events": [
@@ -244,6 +247,36 @@
   }
  ],
  "top_signals": [
+  {
+   "fact_id": "news:c449b35ceab1053e",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "埃及",
+   "title": "Dozens of gold prospectors killed in strikes on Egypt-Sudan border, rights group says",
+   "category": "other_security",
+   "source": "BBC News (Africa)",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-12 05:12",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:5dc7f1908d4a9143",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Centrafrique : 1 300 combattants préparaient une offensive, le Tchad a été \"averti\"",
+   "category": "military_operation",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-12 05:06",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   {
    "fact_id": "news:ce9f81c13f22720a",
    "level": "news_signal",
@@ -573,36 +606,6 @@
    "time": "2026-10-11 13:27",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:e947308dc4bd2325",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "刚果（金）东部冲突：非洲联盟代表团结束访问",
-   "category": "armed_conflict",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-11 12:10",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:f9be720f23597417",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "布基纳法索",
-   "title": "联合国难民署：萨赫勒地区布基纳法索、马里和尼日尔流离失所人数自2020年以来几乎翻倍",
-   "category": "other_security",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-11 11:02",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -681,16 +684,46 @@
  ],
  "existing_assessment": {
   "status": "ai",
-  "overall_assessment": "已核实事件方面，刚果（金）东部埃博拉疫情持续恶化，死亡人数已超4000人，军队与联刚稳定团部署支援应对，无国界医生对北基伍省局势表示担忧；埃塞俄比亚提格雷方向出现反复，反叛武装暂时撤出提格雷州首府，联邦部队重新夺回默克莱并继续推进；尼日利亚发生军机坠毁致32人死亡，赞法拉州九名议员据称退出APC转投ADC；塞内加尔达喀尔洪灾致至少四人死亡；几内亚反对派领袖阿利乌·巴获总统特赦出狱。情报信号方面，乍得政府就中非共和国军队越境事件召见中非驻乍得大使并提出严正警告，该消息为单源或双源信号，尚待核实；乍得谴责胡塞武装袭击沙特并声援利雅得，属多源但未经核实的信号；尼日尔尼亚美社区治安讨论亦为单源信号。整体看，疫情、武装冲突与边境摩擦构成主要风险面。",
+  "overall_assessment": "已核实事件方面，刚果（金）东部埃博拉疫情持续，死亡人数已超4000人，军队与联刚稳定团部署支援应对，无国界医生对北基伍省局势表示担忧；埃塞俄比亚提格雷方向出现反叛武装暂时撤出首府、联邦部队重新夺回默克莱等动态，但专家称无证据表明TPLF能获得游击战所需民众支持。尼日利亚发生军机坠毁致32人死亡，赞法拉州九名议员据称退党。塞内加尔达喀尔洪灾致至少四人死亡。情报信号方面，乍得政府就中非共和国军队越境事件召见中非大使并提出严正警告（含单源消息，尚待核实）；有单源信号称约1300名战斗人员准备发动攻势、乍得已被预警；另有单源消息称埃及-苏丹边境金矿勘探者遭袭致数十人死亡。上述信号均未经多源核实，需谨慎对待。",
   "risk_direction": "worsening",
   "confidence": "medium",
-  "generated_time": "2026-10-12T06:06:36+08:00",
+  "generated_time": "2026-10-12T07:56:11+08:00",
   "based_on": "过去24小时/7日公开信息",
   "model": "",
   "date": "20261012"
  },
- "fact_count": 665,
+ "fact_count": 674,
  "facts": {
+  "news:c449b35ceab1053e": {
+   "fact_id": "news:c449b35ceab1053e",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "埃及",
+   "title": "Dozens of gold prospectors killed in strikes on Egypt-Sudan border, rights group says",
+   "category": "other_security",
+   "source": "BBC News (Africa)",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-12 05:12",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:5dc7f1908d4a9143": {
+   "fact_id": "news:5dc7f1908d4a9143",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Centrafrique : 1 300 combattants préparaient une offensive, le Tchad a été \"averti\"",
+   "category": "military_operation",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-12 05:06",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:ce9f81c13f22720a": {
    "fact_id": "news:ce9f81c13f22720a",
    "level": "news_signal",
@@ -10663,6 +10696,111 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-11 17:09",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_5d730ddafee6b828": {
+   "fact_id": "EVT_5d730ddafee6b828",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "吉布提",
+   "title": "吉布提海域移民船倾覆 至少139人死亡",
+   "category": "other_security",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-11 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_2b53440dfe4082e0": {
+   "fact_id": "EVT_2b53440dfe4082e0",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "埃及",
+   "title": "苏丹与埃及边境金矿营地遭空袭，据称至少72名淘金者死亡",
+   "category": "other_security",
+   "source": "BBC News (Africa)",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-11 21:12",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_ce692ef0973c984e": {
+   "fact_id": "EVT_ce692ef0973c984e",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳霍市中央清真寺在领导权争端未解之际重新开放",
+   "category": "border_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-11 16:17",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_e7e7a9f1421f54eb": {
+   "fact_id": "EVT_e7e7a9f1421f54eb",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "摩洛哥",
+   "title": "摩洛哥律师结束数月罢工恢复工作",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-11 20:06",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_b197c752d2d782a8": {
+   "fact_id": "EVT_b197c752d2d782a8",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "中非共和国：约1300名武装分子策划进攻，乍得称已获通报",
+   "category": "military_operation",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-11 21:06",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_d1751f165ed8b239": {
+   "fact_id": "EVT_d1751f165ed8b239",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "乍得就中非共和国边境武装入侵事件正式提出抗议",
+   "category": "border_security",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-11 18:38",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_26a2c5b7f91656c1": {
+   "fact_id": "EVT_26a2c5b7f91656c1",
+   "level": "verified_event",
+   "evidence_tier": "multi_source_verified",
+   "source_count": 2,
+   "country": "乍得",
+   "title": "乍得强烈谴责胡塞武装对沙特阿拉伯的袭击",
+   "category": "other_security",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-11 16:56",
    "importance": "high",
    "severity": "medium"
   }
