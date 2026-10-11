@@ -1,0 +1,107 @@
+{
+ "label": "Sf715d03d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5a16e5cad81d54361d0c293b660891a7f7519bca81ad5a82be66ff53cb1988fc",
+ "tokens": {
+  "input_tokens": 2357,
+  "output_tokens": 423,
+  "total_tokens": 2780
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳库马西中央市场火灾疑因恢复供电故障引发",
+   "summary_zh": "加纳国家消防局正在调查库马西中央市场Aboabo车站附近火灾，怀疑由恢复供电故障引发。阿散蒂地区消防指挥官ACFO I Peter Tetteh表示，初步目击者描述显示火灾在短暂停电后恢复供电不久后发生。目前该事件为单一来源报道，具体原因尚未证实。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "Ashanti",
+    "city": "Kumasi",
+    "site": "Kumasi Central Market near Aboabo station",
+    "raw_text": "Kumasi Central Market near the Aboabo station"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳国家消防局正在调查库马西中央市场火灾疑似由恢复供电故障引发",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Ghana National Fire Service is investigating a suspected power-restoration fault as a possible trigger for a fire that swept through part of the Kumasi Central Market near the Aboabo station."
+    },
+    {
+     "fact": "阿散蒂地区消防指挥官称初步目击者描述显示火灾在短暂停电后恢复供电不久后发生",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ashanti Regional Fire Commander ACFO I Peter Tetteh said preliminary eyewitness accounts indicated that the fire started shortly after electricity returned following a brief outage."
+    },
+    {
+     "fact": "消防指挥官与地方政府部长一同视察了火灾受损区域",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He disclosed this during an inspection of the fire-ravaged area with the Minister for Local Government, Chieftaincy and Re"
+    }
+   ],
+   "uncertainties": [
+    "火灾原因尚未证实，仅为疑似恢复供电故障",
+    "目前仅一个来源报道，缺乏交叉验证",
+    "事件时间存在差异（冲突标记：time_difference）"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳库马西中央市场火灾疑因恢复供电故障引发",
+   "summary_zh": "加纳国家消防局正在调查库马西中央市场Aboabo车站附近火灾，怀疑由恢复供电故障引发。阿散蒂地区消防指挥官ACFO I Peter Tetteh表示，初步目击者描述显示火灾在短暂停电后恢复供电不久后发生。目前该事件为单一来源报道，具体原因尚未证实。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "Ashanti",
+    "city": "Kumasi",
+    "site": "Kumasi Central Market near Aboabo station",
+    "raw_text": "Kumasi Central Market near the Aboabo station"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳国家消防局正在调查库马西中央市场火灾疑似由恢复供电故障引发",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Ghana National Fire Service is investigating a suspected power-restoration fault as a possible trigger for a fire that swept through part of the Kumasi Central Market near the Aboabo station."
+    },
+    {
+     "fact": "阿散蒂地区消防指挥官称初步目击者描述显示火灾在短暂停电后恢复供电不久后发生",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ashanti Regional Fire Commander ACFO I Peter Tetteh said preliminary eyewitness accounts indicated that the fire started shortly after electricity returned following a brief outage."
+    },
+    {
+     "fact": "消防指挥官与地方政府部长一同视察了火灾受损区域",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He disclosed this during an inspection of the fire-ravaged area with the Minister for Local Government, Chieftaincy and Re"
+    }
+   ],
+   "uncertainties": [
+    "火灾原因尚未证实，仅为疑似恢复供电故障",
+    "目前仅一个来源报道，缺乏交叉验证",
+    "事件时间存在差异（冲突标记：time_difference）"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_6da1607cf715d03d",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

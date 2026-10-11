@@ -1,0 +1,136 @@
+{
+ "label": "Safa969cb",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4e20cc0dd94af7b09c8480c15d3f036407df9e36e0b55bf6733f0780200f839c",
+ "tokens": {
+  "input_tokens": 2881,
+  "output_tokens": 679,
+  "total_tokens": 3560
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该报道为单一来源（RFI Afrique），尚缺乏其他独立来源交叉验证\", \"流离失所人数及安全事件翻倍的说法来自联合国难民署，具体统计口径与核实情况未在文中说明\"]",
+    "after": "[\"该报道为单一来源（RFI Afrique），尚缺乏其他独立来源交叉验证\", \"流离失所人数及安全事件翻倍的说法来自联合国难民署，具体统计口径与核实情况未在文中说明\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "联合国难民署：萨赫勒地区布基纳法索、马里和尼日尔流离失所人数自2020年以来几乎翻倍",
+   "summary_zh": "联合国难民署警告萨赫勒地区流离失所危机，布基纳法索、马里和尼日尔目前共有近400万流离失所者和难民，几乎是2020年的两倍。该机构称三国安全事件自2020年以来几乎翻倍，削弱了国家存在，并增加了流离失所者与收容社区的风险。此外，贝宁、科特迪瓦、加纳和多哥等沿海国家也收容了数十万难民，而国际援助资金严重不足。",
+   "event_type": "other_security",
+   "country_iso3": "BFA",
+   "location": {
+    "country_iso3": "BFA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Burkina Faso, Mali et Niger (Sahel)"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国难民署称布基纳法索、马里和尼日尔共有近400万流离失所者和难民，几乎是2020年的两倍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Mali, le Burkina Faso et le Niger comptent désormais près de 4 millions de déplacés et de réfugiés, presque deux fois plus qu'en 2020"
+    },
+    {
+     "fact": "难民署官员称三国安全事件自2020年以来几乎翻倍，削弱国家存在并增加流离失所者与收容社区风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les incidents sécuritaires ont presque doublé depuis 2020, affaiblissant la présence de l'État [...] et augmentant les risques tant pour les personnes déplacées que pour les communautés d'accueil"
+    },
+    {
+     "fact": "流离失所者中超过81.8万人为难民和寻求庇护者，其余为国内流离失所者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Parmi elles, plus de 818 000 sont des réfugiés et demandeurs d'asile. Les autres sont des déplacés internes."
+    },
+    {
+     "fact": "马里Bandiagara地区Koro在7月收容了8.6万名来自布基纳法索的难民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Koro, dans la région de Bandiagara, au Mali, qui accueillait au mois de juillet dernier 86 000 réfugiés venus du Burkina Faso"
+    },
+    {
+     "fact": "难民署9月仅获得萨赫勒行动所需近300万欧元资金的27%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "en septembre, le HCR ne disposait en effet que de 27% des près de 3 millions d'euros nécessaires pour mener ses activités au Sahel"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源（RFI Afrique），尚缺乏其他独立来源交叉验证",
+    "流离失所人数及安全事件翻倍的说法来自联合国难民署，具体统计口径与核实情况未在文中说明"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "联合国难民署：萨赫勒地区布基纳法索、马里和尼日尔流离失所人数自2020年以来几乎翻倍",
+   "summary_zh": "联合国难民署警告萨赫勒地区流离失所危机，布基纳法索、马里和尼日尔目前共有近400万流离失所者和难民，几乎是2020年的两倍。该机构称三国安全事件自2020年以来几乎翻倍，削弱了国家存在，并增加了流离失所者与收容社区的风险。此外，贝宁、科特迪瓦、加纳和多哥等沿海国家也收容了数十万难民，而国际援助资金严重不足。",
+   "event_type": "other_security",
+   "country_iso3": "BFA",
+   "location": {
+    "country_iso3": "BFA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Burkina Faso, Mali et Niger (Sahel)"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国难民署称布基纳法索、马里和尼日尔共有近400万流离失所者和难民，几乎是2020年的两倍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Mali, le Burkina Faso et le Niger comptent désormais près de 4 millions de déplacés et de réfugiés, presque deux fois plus qu'en 2020"
+    },
+    {
+     "fact": "难民署官员称三国安全事件自2020年以来几乎翻倍，削弱国家存在并增加流离失所者与收容社区风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les incidents sécuritaires ont presque doublé depuis 2020, affaiblissant la présence de l'État [...] et augmentant les risques tant pour les personnes déplacées que pour les communautés d'accueil"
+    },
+    {
+     "fact": "流离失所者中超过81.8万人为难民和寻求庇护者，其余为国内流离失所者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Parmi elles, plus de 818 000 sont des réfugiés et demandeurs d'asile. Les autres sont des déplacés internes."
+    },
+    {
+     "fact": "马里Bandiagara地区Koro在7月收容了8.6万名来自布基纳法索的难民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Koro, dans la région de Bandiagara, au Mali, qui accueillait au mois de juillet dernier 86 000 réfugiés venus du Burkina Faso"
+    },
+    {
+     "fact": "难民署9月仅获得萨赫勒行动所需近300万欧元资金的27%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "en septembre, le HCR ne disposait en effet que de 27% des près de 3 millions d'euros nécessaires pour mener ses activités au Sahel"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源（RFI Afrique），尚缺乏其他独立来源交叉验证",
+    "流离失所人数及安全事件翻倍的说法来自联合国难民署，具体统计口径与核实情况未在文中说明",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_39a96be2afa969cb",
+ "disease_event_id": null,
+ "country_code": "BF"
+}
