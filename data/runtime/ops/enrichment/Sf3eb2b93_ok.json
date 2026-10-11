@@ -1,0 +1,136 @@
+{
+ "label": "Sf3eb2b93",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c02507431e2b4e807bf31711be43fa39aaaf5051c43f4d22b687c01825682917",
+ "tokens": {
+  "input_tokens": 2523,
+  "output_tokens": 514,
+  "total_tokens": 3037
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"仍有数十人失踪，具体人数尚未确认\", \"事件目前仅有一个来源（BBC）报道，尚缺乏交叉验证\"]",
+    "after": "[\"仍有数十人失踪，具体人数尚未确认\", \"事件目前仅有一个来源（BBC）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "吉布提海域船只倾覆致109人死亡，其中包括儿童",
+   "summary_zh": "据国际移民组织称，一艘从吉布提驶往也门的船只周四晚在奥博克港镇附近倾覆，船上载有350人，至少109名移民死亡，其中包括15名儿童，另有数十人失踪，约80人获救。国际移民组织表示，死者中包括52名男性、42名女性、9名女孩和6名男孩。该机构称，2025年已有900多名移民在同一路线上死亡或失踪。",
+   "event_type": "other_security",
+   "country_iso3": "DJI",
+   "location": {
+    "country_iso3": "DJI",
+    "admin1": null,
+    "city": "奥博克",
+    "site": "奥博克港镇附近海域",
+    "raw_text": "near the port town of Obock"
+   },
+   "key_facts": [
+    {
+     "fact": "一艘从吉布提驶往也门的船只倾覆，船上载有350人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The boat was travelling from Djibouti to Yemen with 350 people on board, when it capsized near the port town of Obock on Thursday night."
+    },
+    {
+     "fact": "至少109名移民死亡，其中包括15名儿童",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least 109 migrants including 15 children have died and dozens more are still missing after a boat sank off the coast of Djibouti, the International Organization for Migration (IOM) has said."
+    },
+    {
+     "fact": "约80人获救",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Around 80 people were rescued, the IOM said."
+    },
+    {
+     "fact": "死者中包括52名男性、42名女性、9名女孩和6名男孩",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the organisation said 52 men, 42 women, nine girls and six boys were among the bodies recovered."
+    },
+    {
+     "fact": "2025年已有900多名移民在同一路线上死亡或失踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "more than 900 migrants died or went missing taking the same route in 2025, with an 18% increase in the number of people attempting the journey."
+    }
+   ],
+   "uncertainties": [
+    "仍有数十人失踪，具体人数尚未确认",
+    "事件目前仅有一个来源（BBC）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "吉布提海域船只倾覆致109人死亡，其中包括儿童",
+   "summary_zh": "据国际移民组织称，一艘从吉布提驶往也门的船只周四晚在奥博克港镇附近倾覆，船上载有350人，至少109名移民死亡，其中包括15名儿童，另有数十人失踪，约80人获救。国际移民组织表示，死者中包括52名男性、42名女性、9名女孩和6名男孩。该机构称，2025年已有900多名移民在同一路线上死亡或失踪。",
+   "event_type": "other_security",
+   "country_iso3": "DJI",
+   "location": {
+    "country_iso3": "DJI",
+    "admin1": null,
+    "city": "奥博克",
+    "site": "奥博克港镇附近海域",
+    "raw_text": "near the port town of Obock"
+   },
+   "key_facts": [
+    {
+     "fact": "一艘从吉布提驶往也门的船只倾覆，船上载有350人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The boat was travelling from Djibouti to Yemen with 350 people on board, when it capsized near the port town of Obock on Thursday night."
+    },
+    {
+     "fact": "至少109名移民死亡，其中包括15名儿童",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least 109 migrants including 15 children have died and dozens more are still missing after a boat sank off the coast of Djibouti, the International Organization for Migration (IOM) has said."
+    },
+    {
+     "fact": "约80人获救",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Around 80 people were rescued, the IOM said."
+    },
+    {
+     "fact": "死者中包括52名男性、42名女性、9名女孩和6名男孩",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the organisation said 52 men, 42 women, nine girls and six boys were among the bodies recovered."
+    },
+    {
+     "fact": "2025年已有900多名移民在同一路线上死亡或失踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "more than 900 migrants died or went missing taking the same route in 2025, with an 18% increase in the number of people attempting the journey."
+    }
+   ],
+   "uncertainties": [
+    "仍有数十人失踪，具体人数尚未确认",
+    "事件目前仅有一个来源（BBC）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_72f70fa5f3eb2b93",
+ "disease_event_id": null,
+ "country_code": "DJ"
+}

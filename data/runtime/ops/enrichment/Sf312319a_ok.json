@@ -1,0 +1,136 @@
+{
+ "label": "Sf312319a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "363dad576f968b285d2eb79193c42541934a09ef199d84035df90e5d51142ba8",
+ "tokens": {
+  "input_tokens": 2706,
+  "output_tokens": 587,
+  "total_tokens": 3293
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"伤亡数字仍属临时统计，搜救行动仍在继续\", \"该事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证\"]",
+    "after": "[\"伤亡数字仍属临时统计，搜救行动仍在继续\", \"该事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "吉布提海域移民船倾覆：至少139人死亡、84人失踪",
+   "summary_zh": "据联合国消息，一艘载有约350名移民的船只在吉布提沿海城市奥博克附近倾覆，造成至少139人死亡、84人以上失踪。国际移民组织已上调此前公布的死亡人数，并表示搜救行动仍在继续，伤亡数字仍属临时统计。所有遇难者均为埃塞俄比亚籍，事发时船只正由吉布提驶往也门。",
+   "event_type": "other_security",
+   "country_iso3": "DJI",
+   "location": {
+    "country_iso3": "DJI",
+    "admin1": null,
+    "city": "奥博克",
+    "site": "奥博克附近海域",
+    "raw_text": "au large de la ville djiboutienne d'Obock"
+   },
+   "key_facts": [
+    {
+     "fact": "一艘载有约350名移民的船只在吉布提奥博克附近海域倾覆",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des survivants ont raconté que le bateau transportait près de 350 personnes de Djibouti vers le Yémen. Il a chaviré au large de la ville djiboutienne d'Obock."
+    },
+    {
+     "fact": "据联合国消息，至少139名移民死亡、84人以上失踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au moins 139 migrants sont morts et plus de 84 autres sont portés disparus après le naufrage de leur embarcation, dans la nuit du 8 au 9 octobre, a indiqué l'ONU"
+    },
+    {
+     "fact": "国际移民组织将死亡人数从109人上调至139人，并称数字仍属临时统计",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un premier bilan faisait état d'au moins 109 morts et 116 disparus. L'OIM l'a revu à la hausse quelques heures plus tard : « Le bilan de 109 morts s'est alourdi après la découverte de 30 corps supplémentaires. » Il s'agit d'un bilan toujours provisoire"
+    },
+    {
+     "fact": "所有遇难者均为埃塞俄比亚籍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Toutes les victimes sont de nationalité éthiopienne."
+    },
+    {
+     "fact": "国际移民组织正在现场提供紧急援助",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'Organisation internationale pour les migrations (OIM) est sur le terrain pour fournir une aide d'urgence."
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字仍属临时统计，搜救行动仍在继续",
+    "该事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "吉布提海域移民船倾覆：至少139人死亡、84人失踪",
+   "summary_zh": "据联合国消息，一艘载有约350名移民的船只在吉布提沿海城市奥博克附近倾覆，造成至少139人死亡、84人以上失踪。国际移民组织已上调此前公布的死亡人数，并表示搜救行动仍在继续，伤亡数字仍属临时统计。所有遇难者均为埃塞俄比亚籍，事发时船只正由吉布提驶往也门。",
+   "event_type": "other_security",
+   "country_iso3": "DJI",
+   "location": {
+    "country_iso3": "DJI",
+    "admin1": null,
+    "city": "奥博克",
+    "site": "奥博克附近海域",
+    "raw_text": "au large de la ville djiboutienne d'Obock"
+   },
+   "key_facts": [
+    {
+     "fact": "一艘载有约350名移民的船只在吉布提奥博克附近海域倾覆",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des survivants ont raconté que le bateau transportait près de 350 personnes de Djibouti vers le Yémen. Il a chaviré au large de la ville djiboutienne d'Obock."
+    },
+    {
+     "fact": "据联合国消息，至少139名移民死亡、84人以上失踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au moins 139 migrants sont morts et plus de 84 autres sont portés disparus après le naufrage de leur embarcation, dans la nuit du 8 au 9 octobre, a indiqué l'ONU"
+    },
+    {
+     "fact": "国际移民组织将死亡人数从109人上调至139人，并称数字仍属临时统计",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un premier bilan faisait état d'au moins 109 morts et 116 disparus. L'OIM l'a revu à la hausse quelques heures plus tard : « Le bilan de 109 morts s'est alourdi après la découverte de 30 corps supplémentaires. » Il s'agit d'un bilan toujours provisoire"
+    },
+    {
+     "fact": "所有遇难者均为埃塞俄比亚籍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Toutes les victimes sont de nationalité éthiopienne."
+    },
+    {
+     "fact": "国际移民组织正在现场提供紧急援助",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'Organisation internationale pour les migrations (OIM) est sur le terrain pour fournir une aide d'urgence."
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字仍属临时统计，搜救行动仍在继续",
+    "该事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_de15f8a9f312319a",
+ "disease_event_id": null,
+ "country_code": "DJ"
+}
