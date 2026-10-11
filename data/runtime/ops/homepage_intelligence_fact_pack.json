@@ -1,15 +1,15 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-11T12:00:17+08:00",
+ "generated_at": "2026-10-11T12:02:47+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 25,
-  "signals_7d": 309,
+  "signals_24h": 27,
+  "signals_7d": 311,
   "verified_events_24h": 27,
-  "verified_events_7d": 327,
+  "verified_events_7d": 326,
   "multi_source_verified_events_7d": 7,
   "countries_with_activity_24h": 9,
   "total_countries_monitored": 22
@@ -87,7 +87,7 @@
   },
   {
    "value": "贝宁",
-   "count": 11
+   "count": 12
   },
   {
    "value": "莫桑比克",
@@ -109,7 +109,7 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 19
+   "count": 21
   },
   {
    "value": "民众骚乱",
@@ -135,7 +135,7 @@
  "source_tier_distribution_7d": [
   {
    "value": "B",
-   "count": 307
+   "count": 308
   },
   {
    "value": "C",
@@ -159,21 +159,6 @@
    "source_tier": "A",
    "source_role": "major_media",
    "time": "2026-10-04 04:29",
-   "importance": "high",
-   "severity": "medium"
-  },
-  {
-   "fact_id": "EVT_b6cc7eae69646608",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "卢旺达",
-   "title": "卢旺达图西族大屠杀：达弗罗扎·戈蒂埃逝世，毕生致力于追捕卢旺达大屠杀凶手",
-   "category": "other_security",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-04 04:02",
    "importance": "high",
    "severity": "medium"
   },
@@ -236,9 +221,54 @@
    "time": "2026-10-04 14:29",
    "importance": "high",
    "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_3c2f973bf3157420",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳媒体节目探讨合法逮捕法律问题",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-04 14:04",
+   "importance": "high",
+   "severity": "medium"
   }
  ],
  "top_signals": [
+  {
+   "fact_id": "news:f9be720f23597417",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "布基纳法索",
+   "title": "联合国难民署：萨赫勒地区布基纳法索、马里和尼日尔流离失所人数自2020年以来几乎翻倍",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-11 11:02",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:59b8b3a0b3dbb063",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "贝宁",
+   "title": "加纳库马西中央市场火灾疑因恢复供电故障引发",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-11 08:16",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   {
    "fact_id": "news:88a3dfbf274406a1",
    "level": "news_signal",
@@ -568,36 +598,6 @@
    "time": "2026-10-10 13:56",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:dc76317b1cdcef08",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "刚果（金）",
-   "title": "刚果（金）前情报局长Kalev Mutond在巴黎去世，ARSP发起200亿美元分包监管行动",
-   "category": "other_security",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-10 13:04",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:bd1866f2ed86eb46",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "加纳精神卫生机构上半年记录36196例主要精神健康病例",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-10-10 12:37",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -676,16 +676,46 @@
  ],
  "existing_assessment": {
   "status": "ai",
-  "overall_assessment": "已核实事件方面，刚果（金）总统齐塞克迪就两国军人交火向刚果（布）致歉，属中等级别外交摩擦；埃塞俄比亚联邦部队重新夺回提格雷首府默克莱，反叛武装暂时撤出，提格雷局势出现阶段性变化；刚果（金）东部埃博拉死亡人数超4000人，军队与联刚稳定团已部署支援；联合国难民署警告预算削减致830万人面临人道危机，乍得数十万人或受影响；南苏丹琼莱州武装青年拦截援助车队，湖泊州因洪水重组和平委员会。情报信号方面，均为单源消息、尚待核实：乍得湖地区议员谴责博科圣地袭击、中非共和国军队在靠近乍得的三国边境实施预防性空袭、尼日尔北部电力产量下降及前武装团体重返社会研讨会、尼日利亚执政党呼吁议题导向竞选、埃塞俄比亚法诺民兵动向等。整体风险方向趋于恶化，需持续跟踪边境安全与人道状况。",
+  "overall_assessment": "已核实事件方面：刚果（金）总统齐塞克迪就两国军人交火向刚果（布）致歉；埃塞俄比亚反叛武装撤出提格雷州首府，联邦部队重新夺回默克莱；刚果（金）东部埃博拉死亡人数超4000人，军队与联刚稳定团部署支援应对；联合国难民署警告预算削减致830万人面临人道援助危机，乍得数十万人或受影响；南苏丹琼莱州武装青年拦截援助车队。情报信号方面（均为单源消息，尚待核实）：萨赫勒布基纳法索、马里、尼日尔流离失所人数自2020年以来几乎翻倍；乍得湖地区议员谴责博科圣地袭击；尼日尔SONICHAR设备老化致北部电力产量下降；尼日利亚执政党呼吁摒弃暴力、开展议题导向竞选。7日内尼日利亚、加纳、乍得为事件最集中方向，选举安全与公共卫生类别占比突出。",
   "risk_direction": "worsening",
   "confidence": "medium",
-  "generated_time": "2026-10-11T12:00:09+08:00",
+  "generated_time": "2026-10-11T12:02:38+08:00",
   "based_on": "过去24小时/7日公开信息",
   "model": "",
   "date": "20261011"
  },
- "fact_count": 636,
+ "fact_count": 637,
  "facts": {
+  "news:f9be720f23597417": {
+   "fact_id": "news:f9be720f23597417",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "布基纳法索",
+   "title": "联合国难民署：萨赫勒地区布基纳法索、马里和尼日尔流离失所人数自2020年以来几乎翻倍",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-11 11:02",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:59b8b3a0b3dbb063": {
+   "fact_id": "news:59b8b3a0b3dbb063",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "贝宁",
+   "title": "加纳库马西中央市场火灾疑因恢复供电故障引发",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-11 08:16",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:88a3dfbf274406a1": {
    "fact_id": "news:88a3dfbf274406a1",
    "level": "news_signal",
@@ -5333,21 +5363,6 @@
    "source_tier": "A",
    "source_role": "major_media",
    "time": "2026-10-04 04:29",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_b6cc7eae69646608": {
-   "fact_id": "EVT_b6cc7eae69646608",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "卢旺达",
-   "title": "卢旺达图西族大屠杀：达弗罗扎·戈蒂埃逝世，毕生致力于追捕卢旺达大屠杀凶手",
-   "category": "other_security",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-04 04:02",
    "importance": "high",
    "severity": "medium"
   },
