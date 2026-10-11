@@ -1,0 +1,138 @@
+{
+ "label": "Sdee2a852",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "03b08bfee8a20bf4b658f071e9e43bca03636dfec2293fbe258a1a97209818e9",
+ "tokens": {
+  "input_tokens": 2632,
+  "output_tokens": 658,
+  "total_tokens": 3290
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"事件经过存在不同说法：乍得方面称中非军队越境，中非方面称系针对武装团体的打击\", \"目前仅一个来源（Tchadinfos）报道，尚缺乏交叉验证\", \"越境具体情形及责任归属有待核实\"]",
+    "after": "[\"事件经过存在不同说法：乍得方面称中非军队越境，中非方面称系针对武装团体的打击\", \"目前仅一个来源（Tchadinfos）报道，尚缺乏交叉验证\", \"越境具体情形及责任归属有待核实\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得政府就中非共和国军队越境事件召见中非驻乍得大使并提出“严正警告”",
+   "summary_zh": "乍得外交部长艾哈迈德·科格里于2026年10月11日召见中非共和国驻乍得大使，就中非军队10月10日进入乍得萨拉马特省阿布纳巴克地区一事正式提出抗议。此次越境造成包括军人和平民在内的多人重伤。乍得政府要求中非方面就事件经过作出“明确解释”，并转达了“严正警告”。中非政府方面则表示，这是针对正在集结准备发动袭击的武装团体实施的地面和空中打击。",
+   "event_type": "border_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "萨拉马特省",
+    "city": null,
+    "site": "阿布纳巴克",
+    "raw_text": "à Abnabak, dans la province du Salamat"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得外长科格里召见中非共和国驻乍得大使，就中非军队越境正式提出抗议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministre des Affaires étrangères, Ahmed Kogri, a convoqué ce dimanche 11 octobre 2026 l’ambassadeur de la République centrafricaine au Tchad pour protester officiellement"
+    },
+    {
+     "fact": "中非军队于2026年10月10日进入乍得萨拉马特省阿布纳巴克地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "contre l’incursion, le 10 octobre 2026, en territoire tchadien, à Abnabak, dans la province du Salamat, de l’Armée centrafricaine"
+    },
+    {
+     "fact": "此次越境造成包括军人和平民在内的多人重伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cet incursion a causé plusieurs blessés graves, parmi lesquels des militaires et des civils"
+    },
+    {
+     "fact": "乍得政府要求中非方面就事件经过作出明确解释并转达严正警告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement exige du gouvernement centrafricain des »explications précises« sur les circonstances de cette incursion"
+    },
+    {
+     "fact": "中非政府称这是针对正在集结准备发动袭击的武装团体实施的地面和空中打击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement centrafricain a informé qu’il s’agissait de frappes et attaques terrestres contre de groupes armés qui s’organisaient pour lancer imminemment des assauts"
+    }
+   ],
+   "uncertainties": [
+    "事件经过存在不同说法：乍得方面称中非军队越境，中非方面称系针对武装团体的打击",
+    "目前仅一个来源（Tchadinfos）报道，尚缺乏交叉验证",
+    "越境具体情形及责任归属有待核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得政府就中非共和国军队越境事件召见中非驻乍得大使并提出“严正警告”",
+   "summary_zh": "乍得外交部长艾哈迈德·科格里于2026年10月11日召见中非共和国驻乍得大使，就中非军队10月10日进入乍得萨拉马特省阿布纳巴克地区一事正式提出抗议。此次越境造成包括军人和平民在内的多人重伤。乍得政府要求中非方面就事件经过作出“明确解释”，并转达了“严正警告”。中非政府方面则表示，这是针对正在集结准备发动袭击的武装团体实施的地面和空中打击。",
+   "event_type": "border_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "萨拉马特省",
+    "city": null,
+    "site": "阿布纳巴克",
+    "raw_text": "à Abnabak, dans la province du Salamat"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得外长科格里召见中非共和国驻乍得大使，就中非军队越境正式提出抗议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministre des Affaires étrangères, Ahmed Kogri, a convoqué ce dimanche 11 octobre 2026 l’ambassadeur de la République centrafricaine au Tchad pour protester officiellement"
+    },
+    {
+     "fact": "中非军队于2026年10月10日进入乍得萨拉马特省阿布纳巴克地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "contre l’incursion, le 10 octobre 2026, en territoire tchadien, à Abnabak, dans la province du Salamat, de l’Armée centrafricaine"
+    },
+    {
+     "fact": "此次越境造成包括军人和平民在内的多人重伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cet incursion a causé plusieurs blessés graves, parmi lesquels des militaires et des civils"
+    },
+    {
+     "fact": "乍得政府要求中非方面就事件经过作出明确解释并转达严正警告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement exige du gouvernement centrafricain des »explications précises« sur les circonstances de cette incursion"
+    },
+    {
+     "fact": "中非政府称这是针对正在集结准备发动袭击的武装团体实施的地面和空中打击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement centrafricain a informé qu’il s’agissait de frappes et attaques terrestres contre de groupes armés qui s’organisaient pour lancer imminemment des assauts"
+    }
+   ],
+   "uncertainties": [
+    "事件经过存在不同说法：乍得方面称中非军队越境，中非方面称系针对武装团体的打击",
+    "目前仅一个来源（Tchadinfos）报道，尚缺乏交叉验证",
+    "越境具体情形及责任归属有待核实",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_e58cc4c9dee2a852",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

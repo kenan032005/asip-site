@@ -1,0 +1,115 @@
+{
+ "label": "S63ce77ca",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "154d8f409e9fd90a6a2b7e3153e7be0f6cb81e5d91a1510646c7e3da290610cc",
+ "tokens": {
+  "input_tokens": 2586,
+  "output_tokens": 495,
+  "total_tokens": 3081
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得Dangleat-Est地区首领呼吁农牧民维护和平",
+   "summary_zh": "受干旱影响及牧民提前南下寻找水源和牧场，乍得Dangleat-Est地区首领Idriss Dokoky Adiker呼吁农牧民以对话、团结和相互尊重为先，预防冲突。他要求农民不要堵塞通道、方便牲畜通行，同时保护庄稼；牧民则应遵守转场通道并看管好牲畜。他还强调应通过传统和制度化的争端解决机制处理分歧，不得自行执法。",
+   "event_type": "natural_disaster",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "Dangleat-Est",
+    "raw_text": "Dangleat-Est"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得Dangleat-Est地区首领呼吁农牧民维护和平",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Tchad : le chef de canton de Dangleat-Est appelle agriculteurs et éleveurs à préserver la paix"
+    },
+    {
+     "fact": "干旱导致牧民提前南下寻找水源和牧场，可能加剧农牧社区间紧张",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Face aux effets de la sécheresse et à la descente précoce des troupeaux à la recherche d’eau et de pâturages"
+    },
+    {
+     "fact": "首领呼吁农民不要堵塞通道、方便牲畜通行并保护庄稼，牧民应遵守转场通道并看管牲畜",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "invite les agriculteurs à ne pas obstruer les couloirs de passage et à faciliter la circulation des troupeaux, tout en protégeant leurs cultures"
+    },
+    {
+     "fact": "首领强调通过传统和制度化机制解决争端，不得自行执法",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "nul ne doit se faire justice lui-même et recommande aux personnes concernées de saisir les chefs de village, les comités locaux de gestion des conflits ou la chefferie traditionnelle"
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（Tchadinfos）报道，尚缺乏交叉验证",
+    "农牧社区间紧张是否会实际升级为冲突尚未证实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得Dangleat-Est地区首领呼吁农牧民维护和平",
+   "summary_zh": "受干旱影响及牧民提前南下寻找水源和牧场，乍得Dangleat-Est地区首领Idriss Dokoky Adiker呼吁农牧民以对话、团结和相互尊重为先，预防冲突。他要求农民不要堵塞通道、方便牲畜通行，同时保护庄稼；牧民则应遵守转场通道并看管好牲畜。他还强调应通过传统和制度化的争端解决机制处理分歧，不得自行执法。",
+   "event_type": "natural_disaster",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "Dangleat-Est",
+    "raw_text": "Dangleat-Est"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得Dangleat-Est地区首领呼吁农牧民维护和平",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Tchad : le chef de canton de Dangleat-Est appelle agriculteurs et éleveurs à préserver la paix"
+    },
+    {
+     "fact": "干旱导致牧民提前南下寻找水源和牧场，可能加剧农牧社区间紧张",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Face aux effets de la sécheresse et à la descente précoce des troupeaux à la recherche d’eau et de pâturages"
+    },
+    {
+     "fact": "首领呼吁农民不要堵塞通道、方便牲畜通行并保护庄稼，牧民应遵守转场通道并看管牲畜",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "invite les agriculteurs à ne pas obstruer les couloirs de passage et à faciliter la circulation des troupeaux, tout en protégeant leurs cultures"
+    },
+    {
+     "fact": "首领强调通过传统和制度化机制解决争端，不得自行执法",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "nul ne doit se faire justice lui-même et recommande aux personnes concernées de saisir les chefs de village, les comités locaux de gestion des conflits ou la chefferie traditionnelle"
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（Tchadinfos）报道，尚缺乏交叉验证",
+    "农牧社区间紧张是否会实际升级为冲突尚未证实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_0f43ecc363ce77ca",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

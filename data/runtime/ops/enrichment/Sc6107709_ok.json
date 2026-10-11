@@ -1,0 +1,119 @@
+{
+ "label": "Sc6107709",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "dbc61d6a5f717e07033f5da8d21be81023d6c34f238e6f3e8e3f2be16ad81b40",
+ "tokens": {
+  "input_tokens": 2641,
+  "output_tokens": 473,
+  "total_tokens": 3114
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得谴责胡塞武装袭击沙特并声援利雅得",
+   "summary_zh": "乍得政府于2026年10月11日谴责据称由胡塞武装对沙特阿拉伯机场设施和民用基础设施发动的袭击。据乍得新闻部官方公报称，这些袭击造成12人死亡、309人受伤。乍得方面表达了对沙特政府和人民的声援，并呼吁尊重国际法、保护平民和关键基础设施。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N'Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得政府谴责据称由胡塞武装对沙特阿拉伯发动的袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement tchadien a condamné, ce dimanche 11 octobre 2026, les attaques attribuées aux Houthis contre des installations aéroportuaires et des infrastructures civiles en Arabie saoudite."
+    },
+    {
+     "fact": "据公报称袭击造成12人死亡、309人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces attaques auraient fait 12 morts et 309 blessés, selon un communiqué officiel du ministère de la Communication."
+    },
+    {
+     "fact": "袭击发生于2026年10月10日沙特境内",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les attaques survenues le samedi 10 octobre 2026 sur le territoire saoudien"
+    },
+    {
+     "fact": "乍得表达对沙特政府和人民的声援",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "N'Djamena a exprimé sa solidarité avec le gouvernement et le peuple saoudiens."
+    }
+   ],
+   "uncertainties": [
+    "袭击由胡塞武装实施的说法为归因表述，尚未独立证实",
+    "伤亡数字（12死309伤）来自乍得新闻部公报，尚未获独立确认",
+    "事件时间存在差异（冲突标记：time_difference）",
+    "目前为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得谴责胡塞武装袭击沙特并声援利雅得",
+   "summary_zh": "乍得政府于2026年10月11日谴责据称由胡塞武装对沙特阿拉伯机场设施和民用基础设施发动的袭击。据乍得新闻部官方公报称，这些袭击造成12人死亡、309人受伤。乍得方面表达了对沙特政府和人民的声援，并呼吁尊重国际法、保护平民和关键基础设施。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N'Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得政府谴责据称由胡塞武装对沙特阿拉伯发动的袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement tchadien a condamné, ce dimanche 11 octobre 2026, les attaques attribuées aux Houthis contre des installations aéroportuaires et des infrastructures civiles en Arabie saoudite."
+    },
+    {
+     "fact": "据公报称袭击造成12人死亡、309人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces attaques auraient fait 12 morts et 309 blessés, selon un communiqué officiel du ministère de la Communication."
+    },
+    {
+     "fact": "袭击发生于2026年10月10日沙特境内",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les attaques survenues le samedi 10 octobre 2026 sur le territoire saoudien"
+    },
+    {
+     "fact": "乍得表达对沙特政府和人民的声援",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "N'Djamena a exprimé sa solidarité avec le gouvernement et le peuple saoudiens."
+    }
+   ],
+   "uncertainties": [
+    "袭击由胡塞武装实施的说法为归因表述，尚未独立证实",
+    "伤亡数字（12死309伤）来自乍得新闻部公报，尚未获独立确认",
+    "事件时间存在差异（冲突标记：time_difference）",
+    "目前为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_5cfec312c6107709",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

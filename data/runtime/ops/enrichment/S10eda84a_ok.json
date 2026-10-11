@@ -1,0 +1,105 @@
+{
+ "label": "S10eda84a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "91c2586f3a92cba450136602730a4a999d8b898334f2c490ba87f2531e4a6393",
+ "tokens": {
+  "input_tokens": 2178,
+  "output_tokens": 407,
+  "total_tokens": 2585
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼亚美：Tchangarey社区居民讨论治安问题",
+   "summary_zh": "尼亚美第一区Tchangarey社区居民与电台节目《Tous à la fada》流动直播间讨论当地治安问题。据该报道，与首都多个社区一样，Tchangarey居民面临盗窃手机、年轻人斗殴和入室盗窃等犯罪行为，影响居民安宁。节目邀请当地青年协会主席及多名青年参与讨论。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "Niamey",
+    "city": "Niamey",
+    "site": "Tchangarey",
+    "raw_text": "Tchangarey, dans le 1er arrondissement communal de Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "尼亚美Tchangarey社区居民讨论当地治安问题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le studio mobile de l’émission « Tous à la fada » s’installe à Tchangarey, dans le 1 er  arrondissement communal de Niamey, pour aborder la question du banditisme dans le quartier."
+    },
+    {
+     "fact": "据该报道，Tchangarey居民面临盗窃手机、年轻人斗殴和入室盗窃等犯罪行为",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les habitants de Tchangarey sont confrontés à des actes de banditisme, notamment des vols de téléphones, des bagarres entre jeunes et des cambriolages de maisons"
+    },
+    {
+     "fact": "这些治安问题影响居民安宁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces situations affectent la tranquillité des populations."
+    }
+   ],
+   "uncertainties": [
+    "事件为单一来源报道，尚缺乏交叉验证",
+    "报道未提供具体案件数量或时间等细节"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼亚美：Tchangarey社区居民讨论治安问题",
+   "summary_zh": "尼亚美第一区Tchangarey社区居民与电台节目《Tous à la fada》流动直播间讨论当地治安问题。据该报道，与首都多个社区一样，Tchangarey居民面临盗窃手机、年轻人斗殴和入室盗窃等犯罪行为，影响居民安宁。节目邀请当地青年协会主席及多名青年参与讨论。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "Niamey",
+    "city": "Niamey",
+    "site": "Tchangarey",
+    "raw_text": "Tchangarey, dans le 1er arrondissement communal de Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "尼亚美Tchangarey社区居民讨论当地治安问题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le studio mobile de l’émission « Tous à la fada » s’installe à Tchangarey, dans le 1 er  arrondissement communal de Niamey, pour aborder la question du banditisme dans le quartier."
+    },
+    {
+     "fact": "据该报道，Tchangarey居民面临盗窃手机、年轻人斗殴和入室盗窃等犯罪行为",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les habitants de Tchangarey sont confrontés à des actes de banditisme, notamment des vols de téléphones, des bagarres entre jeunes et des cambriolages de maisons"
+    },
+    {
+     "fact": "这些治安问题影响居民安宁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces situations affectent la tranquillité des populations."
+    }
+   ],
+   "uncertainties": [
+    "事件为单一来源报道，尚缺乏交叉验证",
+    "报道未提供具体案件数量或时间等细节"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_4cd72fd810eda84a",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
