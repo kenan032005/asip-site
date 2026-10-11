@@ -1,0 +1,124 @@
+{
+ "label": "Sfe431194",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a1ba5b6db212aa06918009e3b3f9b44217f86c559fbfb5ae0ebbf42257c2f96a",
+ "tokens": {
+  "input_tokens": 2194,
+  "output_tokens": 362,
+  "total_tokens": 2556
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"该事件目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\"]",
+    "after": "[\"该事件目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该事件目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "after": "[\"该事件目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"相关情况尚未证实。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "塔夸法院以盗窃罪判处一名劳工三年监禁",
+   "summary_zh": "加纳塔夸巡回法院判处26岁劳工Nuredeen Issaka三年苦役监禁，罪名是盗窃其雇主在塔夸恩苏埃姆市Essamang Kakraba的款项，涉案金额为123,000加纳塞地。该消息目前为单一来源报道。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "西部大区",
+    "city": "塔夸",
+    "site": "Essamang Kakraba",
+    "raw_text": "Essamang Kakraba in the Tarkwa Nsuaem Municipality"
+   },
+   "key_facts": [
+    {
+     "fact": "塔夸巡回法院判处26岁劳工Nuredeen Issaka三年苦役监禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Tarkwa Circuit Court has sentenced Nuredeen Issaka, a 26-year-old labourer, to three years imprisonment in hard labour"
+    },
+    {
+     "fact": "其罪名是盗窃雇主在Essamang Kakraba的款项",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "for stealing money belonging to his employer at Essamang Kakraba in the Tarkwa Nsuaem Municipality"
+    },
+    {
+     "fact": "涉案金额为123,000加纳塞地",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Tarkwa court jails labourer for three years over GH¢123,000 theft"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "塔夸法院以盗窃罪判处一名劳工三年监禁",
+   "summary_zh": "加纳塔夸巡回法院判处26岁劳工Nuredeen Issaka三年苦役监禁，罪名是盗窃其雇主在塔夸恩苏埃姆市Essamang Kakraba的款项，涉案金额为123,000加纳塞地。该消息目前为单一来源报道。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "西部大区",
+    "city": "塔夸",
+    "site": "Essamang Kakraba",
+    "raw_text": "Essamang Kakraba in the Tarkwa Nsuaem Municipality"
+   },
+   "key_facts": [
+    {
+     "fact": "塔夸巡回法院判处26岁劳工Nuredeen Issaka三年苦役监禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Tarkwa Circuit Court has sentenced Nuredeen Issaka, a 26-year-old labourer, to three years imprisonment in hard labour"
+    },
+    {
+     "fact": "其罪名是盗窃雇主在Essamang Kakraba的款项",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "for stealing money belonging to his employer at Essamang Kakraba in the Tarkwa Nsuaem Municipality"
+    },
+    {
+     "fact": "涉案金额为123,000加纳塞地",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Tarkwa court jails labourer for three years over GH¢123,000 theft"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "相关情况尚未证实。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_a47f9a11fe431194",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

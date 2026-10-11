@@ -1,0 +1,114 @@
+{
+ "label": "S35b3a657",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6f564bdd78236c885eb754ce91e480d8f58b976f1e0a9f63e2b83c7c95355823",
+ "tokens": {
+  "input_tokens": 2168,
+  "output_tokens": 262,
+  "total_tokens": 2430
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"该事件目前仅有一个来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"该事件目前仅有一个来源报道，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该事件目前仅有一个来源报道，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "after": "[\"该事件目前仅有一个来源报道，尚缺乏交叉验证\", \"相关情况尚未证实。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚Sege一辆Sprinter巴士爆胎翻车致22人受伤",
+   "summary_zh": "尼日利亚Sege发生一起交通事故，一辆Sprinter巴士因轮胎爆裂翻车，造成约22人受伤。事故发生于2026年10月9日星期五。该消息目前为单一来源报道。",
+   "event_type": "transport_disruption",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "Sege",
+    "site": null,
+    "raw_text": "Sege"
+   },
+   "key_facts": [
+    {
+     "fact": "一辆Sprinter巴士在Sege因轮胎爆裂翻车",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "22 injured as Sprinter bus overturns at Sege after tyre burst"
+    },
+    {
+     "fact": "事故造成约22人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "About 22 people were injured in a road accident at Sege after a Sprinter bus suffered a tyre burst and overturned on Friday, October 09, 2026."
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚Sege一辆Sprinter巴士爆胎翻车致22人受伤",
+   "summary_zh": "尼日利亚Sege发生一起交通事故，一辆Sprinter巴士因轮胎爆裂翻车，造成约22人受伤。事故发生于2026年10月9日星期五。该消息目前为单一来源报道。",
+   "event_type": "transport_disruption",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "Sege",
+    "site": null,
+    "raw_text": "Sege"
+   },
+   "key_facts": [
+    {
+     "fact": "一辆Sprinter巴士在Sege因轮胎爆裂翻车",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "22 injured as Sprinter bus overturns at Sege after tyre burst"
+    },
+    {
+     "fact": "事故造成约22人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "About 22 people were injured in a road accident at Sege after a Sprinter bus suffered a tyre burst and overturned on Friday, October 09, 2026."
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证",
+    "相关情况尚未证实。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_9be8773635b3a657",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

@@ -1,17 +1,17 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-11T14:06:59+08:00",
+ "generated_at": "2026-10-11T15:56:42+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 21,
-  "signals_7d": 311,
-  "verified_events_24h": 21,
-  "verified_events_7d": 325,
+  "signals_24h": 22,
+  "signals_7d": 313,
+  "verified_events_24h": 37,
+  "verified_events_7d": 342,
   "multi_source_verified_events_7d": 7,
-  "countries_with_activity_24h": 7,
+  "countries_with_activity_24h": 8,
   "total_countries_monitored": 22
  },
  "countries_24h": [
@@ -21,6 +21,7 @@
   "尼日利亚",
   "尼日尔",
   "布基纳法索",
+  "莫桑比克",
   "贝宁"
  ],
  "countries_7d": [
@@ -64,7 +65,7 @@
   },
   {
    "value": "乍得",
-   "count": 37
+   "count": 39
   },
   {
    "value": "埃塞俄比亚",
@@ -72,7 +73,7 @@
   },
   {
    "value": "南苏丹",
-   "count": 24
+   "count": 23
   },
   {
    "value": "尼日尔",
@@ -88,7 +89,7 @@
   },
   {
    "value": "莫桑比克",
-   "count": 9
+   "count": 10
   },
   {
    "value": "塞内加尔",
@@ -106,7 +107,15 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 15
+   "count": 14
+  },
+  {
+   "value": "军事行动",
+   "count": 2
+  },
+  {
+   "value": "武装冲突",
+   "count": 2
   },
   {
    "value": "民众骚乱",
@@ -117,14 +126,6 @@
    "count": 1
   },
   {
-   "value": "军事行动",
-   "count": 1
-  },
-  {
-   "value": "武装冲突",
-   "count": 1
-  },
-  {
    "value": "边境安全",
    "count": 1
   }
@@ -132,33 +133,18 @@
  "source_tier_distribution_7d": [
   {
    "value": "B",
-   "count": 308
+   "count": 323
   },
   {
    "value": "C",
-   "count": 221
+   "count": 223
   },
   {
    "value": "A",
-   "count": 107
+   "count": 109
   }
  ],
  "top_verified_events": [
-  {
-   "fact_id": "EVT_bc0a9c8cc595db85",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "南苏丹",
-   "title": "联合国南苏丹特派团举办“和平对话” 聚焦气候冲击对和平建设的影响",
-   "category": "natural_disaster",
-   "source": "UNMISS",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-04 15:18",
-   "importance": "high",
-   "severity": "medium"
-  },
   {
    "fact_id": "EVT_d9fb40b3c09891f9",
    "level": "verified_event",
@@ -233,9 +219,54 @@
    "time": "2026-10-04 13:29",
    "importance": "high",
    "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_2a3f7391621637b1",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳新爱国党全国执委选举后，巴乌米亚祝贺约翰·博阿杜并承诺支持2028年大选",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-04 13:28",
+   "importance": "high",
+   "severity": "medium"
   }
  ],
  "top_signals": [
+  {
+   "fact_id": "news:65c562d0662d433a",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Le Tchad rétrogradé au Niveau 3 dans le rapport américain sur la traite des personnes",
+   "category": "other_security",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-11 15:15",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:ba8f6ec69eec3674",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Centrafrique : l’Armée annonce des frappes contre des groupes armés près des frontières du Tchad et du Soudan",
+   "category": "military_operation",
+   "source": "Tchadinfos",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-11 14:00",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   {
    "fact_id": "news:f9be720f23597417",
    "level": "news_signal",
@@ -263,6 +294,21 @@
    "source_tier": "B",
    "source_role": "regional",
    "time": "2026-10-11 08:16",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:a7cb3710814c42be",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "莫桑比克",
+   "title": "Egypt and Malaysia discuss political settlement to Middle East conflict",
+   "category": "armed_conflict",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-11 08:00",
    "importance": "low",
    "why_it_matters": ""
   },
@@ -550,51 +596,6 @@
    "time": "2026-10-10 14:22",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:6a3114edf9b37d21",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "阿布贾Wassa营地流离失所者感谢CAF与慈善人士捐赠太阳能水井",
-   "category": "other_security",
-   "source": "News Agency of Nigeria",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-10 14:00",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:9fc9705b380f4432",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得湖省：恐怖袭击恐惧使儿童无法获得医疗服务",
-   "category": "other_security",
-   "source": "Le N'Djam Post",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-10 14:00",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:11c1b33a4ee1a065",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "加纳能源部长提出2027年可再生能源与核电优先事项",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-10-10 13:56",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -675,8 +676,38 @@
   "status": "deterministic",
   "based_on": "过去24小时/7日公开信息（确定性汇总）"
  },
- "fact_count": 636,
+ "fact_count": 655,
  "facts": {
+  "news:65c562d0662d433a": {
+   "fact_id": "news:65c562d0662d433a",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Le Tchad rétrogradé au Niveau 3 dans le rapport américain sur la traite des personnes",
+   "category": "other_security",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-11 15:15",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:ba8f6ec69eec3674": {
+   "fact_id": "news:ba8f6ec69eec3674",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Centrafrique : l’Armée annonce des frappes contre des groupes armés près des frontières du Tchad et du Soudan",
+   "category": "military_operation",
+   "source": "Tchadinfos",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-11 14:00",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:f9be720f23597417": {
    "fact_id": "news:f9be720f23597417",
    "level": "news_signal",
@@ -704,6 +735,21 @@
    "source_tier": "B",
    "source_role": "regional",
    "time": "2026-10-11 08:16",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:a7cb3710814c42be": {
+   "fact_id": "news:a7cb3710814c42be",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "莫桑比克",
+   "title": "Egypt and Malaysia discuss political settlement to Middle East conflict",
+   "category": "armed_conflict",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-11 08:00",
    "importance": "low",
    "why_it_matters": ""
   },
@@ -5326,36 +5372,6 @@
    "time": "2026-10-04 17:07",
    "importance": "low",
    "why_it_matters": ""
-  },
-  "news:ecf8e0ee6695d3c3": {
-   "fact_id": "news:ecf8e0ee6695d3c3",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "南苏丹",
-   "title": "联合国南苏丹特派团举办“和平对话” 聚焦气候冲击对和平建设的影响",
-   "category": "natural_disaster",
-   "source": "UNMISS",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-04 15:18",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "EVT_bc0a9c8cc595db85": {
-   "fact_id": "EVT_bc0a9c8cc595db85",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "南苏丹",
-   "title": "联合国南苏丹特派团举办“和平对话” 聚焦气候冲击对和平建设的影响",
-   "category": "natural_disaster",
-   "source": "UNMISS",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-04 15:18",
-   "importance": "high",
-   "severity": "medium"
   },
   "EVT_d9fb40b3c09891f9": {
    "fact_id": "EVT_d9fb40b3c09891f9",
@@ -10214,6 +10230,276 @@
    "source_tier": "B",
    "source_role": "regional",
    "time": "2026-10-11 00:16",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_6f623e67888ae843": {
+   "fact_id": "EVT_6f623e67888ae843",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "埃塞俄比亚与厄立特里亚濒临冲突边缘",
+   "category": "border_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-11 06:38",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_d45c698f698d1b72": {
+   "fact_id": "EVT_d45c698f698d1b72",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "刚果（金）东部冲突：非洲联盟代表团结束访问",
+   "category": "armed_conflict",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-11 04:10",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_65931465d7bb390e": {
+   "fact_id": "EVT_65931465d7bb390e",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "莫桑比克",
+   "title": "埃及与马来西亚讨论中东冲突政治解决",
+   "category": "armed_conflict",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-11 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_8e251f903f732501": {
+   "fact_id": "EVT_8e251f903f732501",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "塔夸巡回法院对闯入黄金收购店的矿工处以罚款",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-11 07:24",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_a47f9a11fe431194": {
+   "fact_id": "EVT_a47f9a11fe431194",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "塔夸法院以盗窃罪判处一名劳工三年监禁",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-11 06:29",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_7d40e4506e13c87c": {
+   "fact_id": "EVT_7d40e4506e13c87c",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "加纳环境部长呼吁加纳原子能委员会留住核科学家以推进核能目标",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-11 05:57",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_fd55f9e0bda24eec": {
+   "fact_id": "EVT_fd55f9e0bda24eec",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "尼日利亚一男子据称被猎人误认为猎物射杀于森林",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-11 05:55",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_3416e432b075d30c": {
+   "fact_id": "EVT_3416e432b075d30c",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "加纳19岁泥瓦匠因性侵7岁幼童被判15年监禁",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-11 05:50",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_59864e8735dc408e": {
+   "fact_id": "EVT_59864e8735dc408e",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "加纳银行业资产增长20.47%至5002亿塞地——加纳央行行长",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-11 05:46",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_9be8773635b3a657": {
+   "fact_id": "EVT_9be8773635b3a657",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "尼日利亚Sege一辆Sprinter巴士爆胎翻车致22人受伤",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-11 05:45",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_5deb1906b0175a88": {
+   "fact_id": "EVT_5deb1906b0175a88",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "联合国住房专家敦促加纳加强租金管制部门以应对住房可负担性问题",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-11 05:36",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_09faa8b57b8f2a42": {
+   "fact_id": "EVT_09faa8b57b8f2a42",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "达美航空与BCI合作十年，在加纳开展乳腺癌教育覆盖16.6万人",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-11 05:27",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_80b825d3b419b81c": {
+   "fact_id": "EVT_80b825d3b419b81c",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "加纳政府承诺为库马西中央市场火灾受害者提供支持",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-10 23:31",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_551ab7f78a6a29a4": {
+   "fact_id": "EVT_551ab7f78a6a29a4",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "尼日利亚上诉法院退休法官称两次获最高法院提名未果",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-10 22:52",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_d04474af82a05a64": {
+   "fact_id": "EVT_d04474af82a05a64",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "MamaCare首席执行官警告医护人员间未解决的冲突可能损害母婴护理",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-10 22:37",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_f97f7c60ad983c53": {
+   "fact_id": "EVT_f97f7c60ad983c53",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "加纳退休法官科比尔勉励1568名新律师坚守诚信",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-10 21:09",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_ba5b2473224c5408": {
+   "fact_id": "EVT_ba5b2473224c5408",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "中非共和国军方宣布在乍得与苏丹边境附近对武装团体实施打击",
+   "category": "military_operation",
+   "source": "Tchadinfos",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-11 06:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_dc3303c7e8ee1971": {
+   "fact_id": "EVT_dc3303c7e8ee1971",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Le Tchad rétrogradé au Niveau 3 dans le rapport américain sur la traite des personnes",
+   "category": "other_security",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-11 07:15",
    "importance": "high",
    "severity": "medium"
   }

@@ -1,0 +1,114 @@
+{
+ "label": "S82a05a64",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "43ca62fb9cb6fe7c85763a633651149123a19541e69b82666e097acc6f0eebf4",
+ "tokens": {
+  "input_tokens": 2236,
+  "output_tokens": 362,
+  "total_tokens": 2598
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该警告为单一来源报道，尚未获得其他来源交叉验证\"]",
+    "after": "[\"该警告为单一来源报道，尚未获得其他来源交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "MamaCare首席执行官警告医护人员间未解决的冲突可能损害母婴护理",
+   "summary_zh": "MamaCare首席执行官Racheal Hesse Matey在Korle-Bu护理与助产培训学院举行的年度健康会议上警告称，产科护理人员之间未解决的冲突可能破坏团队合作，并危及孕妇和新生儿的护理。她表示，医护人员之间的分歧以及未遵循既定临床规程可能导致误诊和不恰当干预。该报道为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": "Korle-Bu Nursing and Midwifery Training College",
+    "raw_text": "Korle-Bu Nursing and Midwifery Training College"
+   },
+   "key_facts": [
+    {
+     "fact": "MamaCare首席执行官警告医护人员间未解决的冲突可能损害母婴护理",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "MamaCare CEO warns unresolved conflicts among health workers could undermine maternal and neonatal care"
+    },
+    {
+     "fact": "她在Korle-Bu护理与助产培训学院的年度健康会议上发言",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Speaking at the Annual Health Conference at the Korle-Bu Nursing and Midwifery Training College"
+    },
+    {
+     "fact": "她表示医护人员之间的分歧和未遵循临床规程可能导致误诊和不恰当干预",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "disagreements among health workers and failure to follow agreed clinical protocols could lead to misdiagnosis, inappropriate interventions a"
+    }
+   ],
+   "uncertainties": [
+    "该警告为单一来源报道，尚未获得其他来源交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 60
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "MamaCare首席执行官警告医护人员间未解决的冲突可能损害母婴护理",
+   "summary_zh": "MamaCare首席执行官Racheal Hesse Matey在Korle-Bu护理与助产培训学院举行的年度健康会议上警告称，产科护理人员之间未解决的冲突可能破坏团队合作，并危及孕妇和新生儿的护理。她表示，医护人员之间的分歧以及未遵循既定临床规程可能导致误诊和不恰当干预。该报道为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": "Korle-Bu Nursing and Midwifery Training College",
+    "raw_text": "Korle-Bu Nursing and Midwifery Training College"
+   },
+   "key_facts": [
+    {
+     "fact": "MamaCare首席执行官警告医护人员间未解决的冲突可能损害母婴护理",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "MamaCare CEO warns unresolved conflicts among health workers could undermine maternal and neonatal care"
+    },
+    {
+     "fact": "她在Korle-Bu护理与助产培训学院的年度健康会议上发言",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Speaking at the Annual Health Conference at the Korle-Bu Nursing and Midwifery Training College"
+    },
+    {
+     "fact": "她表示医护人员之间的分歧和未遵循临床规程可能导致误诊和不恰当干预",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "disagreements among health workers and failure to follow agreed clinical protocols could lead to misdiagnosis, inappropriate interventions a"
+    }
+   ],
+   "uncertainties": [
+    "该警告为单一来源报道，尚未获得其他来源交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 60
+  }
+ },
+ "event_id": "EVT_d04474af82a05a64",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

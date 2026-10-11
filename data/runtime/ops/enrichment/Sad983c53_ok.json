@@ -1,0 +1,114 @@
+{
+ "label": "Sad983c53",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "7a52361cf75307280491fa3a971c43323b27174945350d14c3d7f2895319632e",
+ "tokens": {
+  "input_tokens": 2201,
+  "output_tokens": 302,
+  "total_tokens": 2503
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\"]",
+    "after": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "after": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\", \"相关情况尚未证实。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳退休法官科比尔勉励1568名新律师坚守诚信",
+   "summary_zh": "加纳上诉法院退休法官弗朗西斯·贾菲里·科比尔在周五举行的加纳律师协会新律师宣誓仪式上，勉励1568名新晋律师坚守诚信、勤奋工作，并忠于职业职责，尤其是在与客户打交道时。该消息为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳上诉法院退休法官科比尔勉励1568名新晋律师坚守诚信",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Retired Court of Appeal judge Justice Francis Gyafiiry Korbieh has urged the 1,568 newly qualified lawyers called to the Ghana Bar on Friday to uphold integrity, work hard and remain faithful to their professional duties, particularly in their dealings with clients."
+    },
+    {
+     "fact": "新律师于周五被召入加纳律师协会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the 1,568 newly qualified lawyers called to the Ghana Bar on Friday"
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳退休法官科比尔勉励1568名新律师坚守诚信",
+   "summary_zh": "加纳上诉法院退休法官弗朗西斯·贾菲里·科比尔在周五举行的加纳律师协会新律师宣誓仪式上，勉励1568名新晋律师坚守诚信、勤奋工作，并忠于职业职责，尤其是在与客户打交道时。该消息为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳上诉法院退休法官科比尔勉励1568名新晋律师坚守诚信",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Retired Court of Appeal judge Justice Francis Gyafiiry Korbieh has urged the 1,568 newly qualified lawyers called to the Ghana Bar on Friday to uphold integrity, work hard and remain faithful to their professional duties, particularly in their dealings with clients."
+    },
+    {
+     "fact": "新律师于周五被召入加纳律师协会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the 1,568 newly qualified lawyers called to the Ghana Bar on Friday"
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证",
+    "相关情况尚未证实。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_f97f7c60ad983c53",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

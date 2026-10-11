@@ -1,0 +1,114 @@
+{
+ "label": "S8a6a29a4",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "29bd8f4ac76c8224249a25692b6b7338f3c60f705594c066efda8678153ef1f7",
+ "tokens": {
+  "input_tokens": 2198,
+  "output_tokens": 281,
+  "total_tokens": 2479
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"科尔比耶关于提名及程序未获遵循的说法目前仅有一个来源报道，尚未获得独立证实\"]",
+    "after": "[\"科尔比耶关于提名及程序未获遵循的说法目前仅有一个来源报道，尚未获得独立证实\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"科尔比耶关于提名及程序未获遵循的说法目前仅有一个来源报道，尚未获得独立证实\", \"相关情况尚未证实。\"]",
+    "after": "[\"科尔比耶关于提名及程序未获遵循的说法目前仅有一个来源报道，尚未获得独立证实\", \"相关情况尚未证实。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚上诉法院退休法官称两次获最高法院提名未果",
+   "summary_zh": "尼日利亚上诉法院退休法官弗朗西斯·贾菲里·科尔比耶表示，他曾两次获得最高法院任命提名，但未能进入最高法院，他认为原因在于相关程序未获遵循。该说法为单一来源报道，尚未获得独立证实。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚上诉法院退休法官科尔比耶称曾两次获最高法院任命提名",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Retired Court of Appeal judge Justice Francis Gyafiiry Korbieh says he was nominated for appointment to the Supreme Court on two occasions"
+    },
+    {
+     "fact": "科尔比耶称未能进入最高法院是因相关程序未获遵循",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "could not make it to the apex court because, in his view, the required processes were not followed"
+    }
+   ],
+   "uncertainties": [
+    "科尔比耶关于提名及程序未获遵循的说法目前仅有一个来源报道，尚未获得独立证实"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 60
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚上诉法院退休法官称两次获最高法院提名未果",
+   "summary_zh": "尼日利亚上诉法院退休法官弗朗西斯·贾菲里·科尔比耶表示，他曾两次获得最高法院任命提名，但未能进入最高法院，他认为原因在于相关程序未获遵循。该说法为单一来源报道，尚未获得独立证实。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚上诉法院退休法官科尔比耶称曾两次获最高法院任命提名",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Retired Court of Appeal judge Justice Francis Gyafiiry Korbieh says he was nominated for appointment to the Supreme Court on two occasions"
+    },
+    {
+     "fact": "科尔比耶称未能进入最高法院是因相关程序未获遵循",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "could not make it to the apex court because, in his view, the required processes were not followed"
+    }
+   ],
+   "uncertainties": [
+    "科尔比耶关于提名及程序未获遵循的说法目前仅有一个来源报道，尚未获得独立证实",
+    "相关情况尚未证实。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 60
+  }
+ },
+ "event_id": "EVT_551ab7f78a6a29a4",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

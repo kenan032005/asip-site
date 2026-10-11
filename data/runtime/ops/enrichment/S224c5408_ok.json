@@ -1,0 +1,139 @@
+{
+ "label": "S224c5408",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4ca6102363944feac7449c575bd211bbbd2ca0bf7644f87b958390dd0a693b2f",
+ "tokens": {
+  "input_tokens": 2559,
+  "output_tokens": 775,
+  "total_tokens": 3334
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "中非共和国军方宣布在乍得与苏丹边境附近对武装团体实施打击",
+   "summary_zh": "中非共和国军方宣布在东北部瓦卡加省、靠近乍得与苏丹边境地区对武装团体实施空袭和地面行动，称此举旨在阻止其认为即将发生的袭击。中非国防部称情报部门发现“三国交界地带”的进攻准备，并将威胁归咎于“外国雇佣兵”，但未说明其国籍或所属组织。军方声称已“消灭”敌对分子并控制局势，行动与俄罗斯军事专家协调进行，但未公布具体伤亡或物资损失，相关战果无法独立核实。目前尚无经核实的信息显示乍得境内遭到打击或乍得武装团体参与此次行动。",
+   "event_type": "armed_conflict",
+   "country_iso3": "CAF",
+   "location": {
+    "country_iso3": "CAF",
+    "admin1": "瓦卡加省",
+    "city": null,
+    "site": "三国交界地带（乍得与苏丹边境附近）",
+    "raw_text": "la préfecture de la Vakaga, dans le nord-est du pays, à proximité des frontières du Tchad et du Soudan"
+   },
+   "key_facts": [
+    {
+     "fact": "中非共和国军方宣布在瓦卡加省对武装团体实施空袭和地面行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’Armée centrafricaine a annoncé samedi avoir mené des frappes aériennes et des opérations terrestres contre des groupes armés dans la préfecture de la Vakaga"
+    },
+    {
+     "fact": "军方称行动旨在阻止其认为即将发生的袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "afin de prévenir une attaque qu’elle jugeait imminente"
+    },
+    {
+     "fact": "中非当局将威胁归咎于“外国雇佣兵”，未说明国籍或所属组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les autorités centrafricaines attribuent cette menace à des groupes de « mercenaires étrangers », sans préciser leur nationalité ni leur appartenance"
+    },
+    {
+     "fact": "军方称敌对分子已被消灭、局势已受控，行动与俄罗斯军事专家协调进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministère affirme que les éléments hostiles ont été neutralisés et que la situation est désormais sous contrôle. Il précise que les opérations se poursuivent en coordination avec des spécialistes militaires russes"
+    },
+    {
+     "fact": "未公布具体人员或物资损失，军方宣布的战果无法独立核实",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucun bilan humain ou matériel précis n’a été communiqué. Les résultats annoncés par l’armée centrafricaine n’ont pas pu être vérifiés de manière indépendante"
+    },
+    {
+     "fact": "尚无经核实信息显示乍得境内遭到打击或乍得武装团体参与行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À ce stade, aucune information vérifiée ne fait état de frappes sur le territoire tchadien ni d’une implication de groupes armés tchadiens dans l’opération annoncée samedi"
+    }
+   ],
+   "uncertainties": [
+    "军方宣布的打击战果（敌对分子被消灭、局势受控）尚未获得独立核实",
+    "被指威胁来源的“外国雇佣兵”国籍与所属组织不明",
+    "尚无经核实信息显示乍得境内遭到打击或乍得武装团体参与此次行动",
+    "事件目前仅有一个来源（Tchadinfos），缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "中非共和国军方宣布在乍得与苏丹边境附近对武装团体实施打击",
+   "summary_zh": "中非共和国军方宣布在东北部瓦卡加省、靠近乍得与苏丹边境地区对武装团体实施空袭和地面行动，称此举旨在阻止其认为即将发生的袭击。中非国防部称情报部门发现“三国交界地带”的进攻准备，并将威胁归咎于“外国雇佣兵”，但未说明其国籍或所属组织。军方声称已“消灭”敌对分子并控制局势，行动与俄罗斯军事专家协调进行，但未公布具体伤亡或物资损失，相关战果无法独立核实。目前尚无经核实的信息显示乍得境内遭到打击或乍得武装团体参与此次行动。",
+   "event_type": "armed_conflict",
+   "country_iso3": "CAF",
+   "location": {
+    "country_iso3": "CAF",
+    "admin1": "瓦卡加省",
+    "city": null,
+    "site": "三国交界地带（乍得与苏丹边境附近）",
+    "raw_text": "la préfecture de la Vakaga, dans le nord-est du pays, à proximité des frontières du Tchad et du Soudan"
+   },
+   "key_facts": [
+    {
+     "fact": "中非共和国军方宣布在瓦卡加省对武装团体实施空袭和地面行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’Armée centrafricaine a annoncé samedi avoir mené des frappes aériennes et des opérations terrestres contre des groupes armés dans la préfecture de la Vakaga"
+    },
+    {
+     "fact": "军方称行动旨在阻止其认为即将发生的袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "afin de prévenir une attaque qu’elle jugeait imminente"
+    },
+    {
+     "fact": "中非当局将威胁归咎于“外国雇佣兵”，未说明国籍或所属组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les autorités centrafricaines attribuent cette menace à des groupes de « mercenaires étrangers », sans préciser leur nationalité ni leur appartenance"
+    },
+    {
+     "fact": "军方称敌对分子已被消灭、局势已受控，行动与俄罗斯军事专家协调进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministère affirme que les éléments hostiles ont été neutralisés et que la situation est désormais sous contrôle. Il précise que les opérations se poursuivent en coordination avec des spécialistes militaires russes"
+    },
+    {
+     "fact": "未公布具体人员或物资损失，军方宣布的战果无法独立核实",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucun bilan humain ou matériel précis n’a été communiqué. Les résultats annoncés par l’armée centrafricaine n’ont pas pu être vérifiés de manière indépendante"
+    },
+    {
+     "fact": "尚无经核实信息显示乍得境内遭到打击或乍得武装团体参与行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À ce stade, aucune information vérifiée ne fait état de frappes sur le territoire tchadien ni d’une implication de groupes armés tchadiens dans l’opération annoncée samedi"
+    }
+   ],
+   "uncertainties": [
+    "军方宣布的打击战果（敌对分子被消灭、局势受控）尚未获得独立核实",
+    "被指威胁来源的“外国雇佣兵”国籍与所属组织不明",
+    "尚无经核实信息显示乍得境内遭到打击或乍得武装团体参与此次行动",
+    "事件目前仅有一个来源（Tchadinfos），缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_ba5b2473224c5408",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

@@ -1,0 +1,126 @@
+{
+ "label": "S7b8f2a42",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b4f1ba18c54b8b0f9c11f99c0399a180f0b1729c661e4d832564403fd8c0b8f9",
+ "tokens": {
+  "input_tokens": 2241,
+  "output_tokens": 463,
+  "total_tokens": 2704
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"近2100例疑似病例尚未获得独立确认\", \"该事件目前仅有一个来源报道\"]",
+    "after": "[\"近2100例疑似病例尚未获得独立确认\", \"该事件目前仅有一个来源报道\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "达美航空与BCI合作十年，在加纳开展乳腺癌教育覆盖16.6万人",
+   "summary_zh": "达美航空与Breast Care International（BCI）长达十年的合作在加纳通过乳腺癌教育覆盖超过16.6万人，筛查超过2.25万人，发现近2100例疑似病例。两家机构在阿散蒂地区Mampong举行的2026年BCI Walk for the Cure活动上纪念合作十周年时公布了上述数据。该项目还通过有针对性的农村筛查举措覆盖了超过7.01万名女性。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "阿散蒂地区",
+    "city": "Mampong",
+    "site": null,
+    "raw_text": "Mampong, in the Ashanti Region"
+   },
+   "key_facts": [
+    {
+     "fact": "达美航空与BCI合作十年在加纳通过乳腺癌教育覆盖超过16.6万人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A decade-long partnership between Delta Air Lines and Breast Care International (BCI) has reached more than 166,000 people with breast cancer education in Ghana"
+    },
+    {
+     "fact": "筛查超过2.25万人，发现近2100例疑似病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "with over 22,500 people screened and nearly 2,100 suspected cases identified"
+    },
+    {
+     "fact": "两家机构在阿散蒂地区Mampong举行的2026年BCI Walk for the Cure活动上纪念合作十周年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The figures were highlighted as the two organisations marked 10 years of collaboration at the 2026 BCI Walk for the Cure in Mampong, in the Ashanti Region"
+    },
+    {
+     "fact": "项目通过农村筛查举措覆盖超过7.01万名女性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The programme has also reached more than 70,100 women through targeted rural screening initiatives"
+    }
+   ],
+   "uncertainties": [
+    "近2100例疑似病例尚未获得独立确认",
+    "该事件目前仅有一个来源报道"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "达美航空与BCI合作十年，在加纳开展乳腺癌教育覆盖16.6万人",
+   "summary_zh": "达美航空与Breast Care International（BCI）长达十年的合作在加纳通过乳腺癌教育覆盖超过16.6万人，筛查超过2.25万人，发现近2100例疑似病例。两家机构在阿散蒂地区Mampong举行的2026年BCI Walk for the Cure活动上纪念合作十周年时公布了上述数据。该项目还通过有针对性的农村筛查举措覆盖了超过7.01万名女性。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "阿散蒂地区",
+    "city": "Mampong",
+    "site": null,
+    "raw_text": "Mampong, in the Ashanti Region"
+   },
+   "key_facts": [
+    {
+     "fact": "达美航空与BCI合作十年在加纳通过乳腺癌教育覆盖超过16.6万人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A decade-long partnership between Delta Air Lines and Breast Care International (BCI) has reached more than 166,000 people with breast cancer education in Ghana"
+    },
+    {
+     "fact": "筛查超过2.25万人，发现近2100例疑似病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "with over 22,500 people screened and nearly 2,100 suspected cases identified"
+    },
+    {
+     "fact": "两家机构在阿散蒂地区Mampong举行的2026年BCI Walk for the Cure活动上纪念合作十周年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The figures were highlighted as the two organisations marked 10 years of collaboration at the 2026 BCI Walk for the Cure in Mampong, in the Ashanti Region"
+    },
+    {
+     "fact": "项目通过农村筛查举措覆盖超过7.01万名女性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The programme has also reached more than 70,100 women through targeted rural screening initiatives"
+    }
+   ],
+   "uncertainties": [
+    "近2100例疑似病例尚未获得独立确认",
+    "该事件目前仅有一个来源报道",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_09faa8b57b8f2a42",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

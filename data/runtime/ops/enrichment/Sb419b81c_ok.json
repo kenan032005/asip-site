@@ -1,0 +1,118 @@
+{
+ "label": "Sb419b81c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6581454083b837008bbd0960b3f3e5120f1399e9796576af8668148fb2a479f2",
+ "tokens": {
+  "input_tokens": 2218,
+  "output_tokens": 425,
+  "total_tokens": 2643
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"火灾原因尚不明确，有报道称疑似电力恢复故障所致\", \"政府支持的具体内容与规模尚未确定\", \"该事件目前仅有一个来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"火灾原因尚不明确，有报道称疑似电力恢复故障所致\", \"政府支持的具体内容与规模尚未确定\", \"该事件目前仅有一个来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳政府承诺为库马西中央市场火灾受害者提供支持",
+   "summary_zh": "加纳政府向库马西中央市场火灾受灾商户承诺将提供国家支持，国家灾害管理组织（NADMO）预计将评估损失并确定所需援助。地方政府、酋长与宗教事务部长马哈马·阿亚里加与阿散蒂地区部长及库马西市长一同紧急视察现场后作出上述保证。目前该事件为单一来源报道。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "阿散蒂地区",
+    "city": "库马西",
+    "site": "库马西中央市场",
+    "raw_text": "Kumasi Central Market"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳政府承诺为库马西中央市场火灾受灾商户提供国家支持",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Government promises support for Kumasi Central Market fire victims"
+    },
+    {
+     "fact": "国家灾害管理组织（NADMO）预计将评估损失并确定所需援助",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the National Disaster Management Organisation (NADMO) expected to assess the damage and determine the assistance required"
+    },
+    {
+     "fact": "地方政府、酋长与宗教事务部长马哈马·阿亚里加与阿散蒂地区部长及库马西市长紧急视察火灾现场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Minister for Local Government, Chieftaincy and Religious Affairs Mahama Ayariga gave the assurance during an emergency visit to the scene with Ashanti Regional Minister Dr Frank Amoakohene and Kumasi Mayor Richard Ofori Agyemang Boadi"
+    }
+   ],
+   "uncertainties": [
+    "火灾原因尚不明确，有报道称疑似电力恢复故障所致",
+    "政府支持的具体内容与规模尚未确定",
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳政府承诺为库马西中央市场火灾受害者提供支持",
+   "summary_zh": "加纳政府向库马西中央市场火灾受灾商户承诺将提供国家支持，国家灾害管理组织（NADMO）预计将评估损失并确定所需援助。地方政府、酋长与宗教事务部长马哈马·阿亚里加与阿散蒂地区部长及库马西市长一同紧急视察现场后作出上述保证。目前该事件为单一来源报道。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "阿散蒂地区",
+    "city": "库马西",
+    "site": "库马西中央市场",
+    "raw_text": "Kumasi Central Market"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳政府承诺为库马西中央市场火灾受灾商户提供国家支持",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Government promises support for Kumasi Central Market fire victims"
+    },
+    {
+     "fact": "国家灾害管理组织（NADMO）预计将评估损失并确定所需援助",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the National Disaster Management Organisation (NADMO) expected to assess the damage and determine the assistance required"
+    },
+    {
+     "fact": "地方政府、酋长与宗教事务部长马哈马·阿亚里加与阿散蒂地区部长及库马西市长紧急视察火灾现场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Minister for Local Government, Chieftaincy and Religious Affairs Mahama Ayariga gave the assurance during an emergency visit to the scene with Ashanti Regional Minister Dr Frank Amoakohene and Kumasi Mayor Richard Ofori Agyemang Boadi"
+    }
+   ],
+   "uncertainties": [
+    "火灾原因尚不明确，有报道称疑似电力恢复故障所致",
+    "政府支持的具体内容与规模尚未确定",
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_80b825d3b419b81c",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
