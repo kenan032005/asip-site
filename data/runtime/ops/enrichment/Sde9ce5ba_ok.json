@@ -1,0 +1,127 @@
+{
+ "label": "Sde9ce5ba",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "15a4b29a4e66fed89d42b5cf6cda01de4e780a2123dfb201b931ffdb1e9d6bcf",
+ "tokens": {
+  "input_tokens": 2171,
+  "output_tokens": 549,
+  "total_tokens": 2720
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得要求中非共和国就军队越境事件作出解释",
+   "summary_zh": "乍得政府于2026年10月11日召见中非共和国驻乍得大使，就前一天发生在蒂西地区阿布纳巴克的中非军队越境事件提出抗议。据乍得当局称，此次越境造成军人和平民多人重伤。乍得方面要求班吉就事件经过作出解释，并重申捍卫主权和领土完整的决心。",
+   "event_type": "border_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "蒂西地区",
+    "city": null,
+    "site": "阿布纳巴克",
+    "raw_text": "Abnabak, dans la région de Tissi"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得政府召见中非共和国大使，抗议中非军队越境",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement tchadien a convoqué, dimanche 11 octobre 2026, l’ambassadeur centrafricain au Tchad pour protester contre une incursion de l’armée centrafricaine"
+    },
+    {
+     "fact": "越境事件发生在蒂西地区阿布纳巴克",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "survenue la veille à Abnabak, dans la région de Tissi"
+    },
+    {
+     "fact": "据乍得当局称，越境造成军人和平民多人重伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon les autorités tchadiennes, cette incursion a fait plusieurs blessés graves parmi les militaires et les civils"
+    },
+    {
+     "fact": "乍得外长谴责严重行为，并称自2021年以来该边境地区已多次发生越境事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministre d’État chargé des Affaires étrangères, Ahmed Kogri, a dénoncé des actes graves et rappelé que plusieurs incursions avaient déjà été enregistrées dans cette zone frontalière depuis 2021"
+    },
+    {
+     "fact": "乍得要求班吉就事件经过作出解释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "N’Djaména exige des explications de Bangui sur les circonstances de l’incident"
+    }
+   ],
+   "uncertainties": [
+    "伤亡人数及具体伤情尚未获独立证实",
+    "事件经过仅有乍得方面说法，中非共和国方面尚未回应",
+    "目前仅一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得要求中非共和国就军队越境事件作出解释",
+   "summary_zh": "乍得政府于2026年10月11日召见中非共和国驻乍得大使，就前一天发生在蒂西地区阿布纳巴克的中非军队越境事件提出抗议。据乍得当局称，此次越境造成军人和平民多人重伤。乍得方面要求班吉就事件经过作出解释，并重申捍卫主权和领土完整的决心。",
+   "event_type": "border_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "蒂西地区",
+    "city": null,
+    "site": "阿布纳巴克",
+    "raw_text": "Abnabak, dans la région de Tissi"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得政府召见中非共和国大使，抗议中非军队越境",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement tchadien a convoqué, dimanche 11 octobre 2026, l’ambassadeur centrafricain au Tchad pour protester contre une incursion de l’armée centrafricaine"
+    },
+    {
+     "fact": "越境事件发生在蒂西地区阿布纳巴克",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "survenue la veille à Abnabak, dans la région de Tissi"
+    },
+    {
+     "fact": "据乍得当局称，越境造成军人和平民多人重伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon les autorités tchadiennes, cette incursion a fait plusieurs blessés graves parmi les militaires et les civils"
+    },
+    {
+     "fact": "乍得外长谴责严重行为，并称自2021年以来该边境地区已多次发生越境事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministre d’État chargé des Affaires étrangères, Ahmed Kogri, a dénoncé des actes graves et rappelé que plusieurs incursions avaient déjà été enregistrées dans cette zone frontalière depuis 2021"
+    },
+    {
+     "fact": "乍得要求班吉就事件经过作出解释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "N’Djaména exige des explications de Bangui sur les circonstances de l’incident"
+    }
+   ],
+   "uncertainties": [
+    "伤亡人数及具体伤情尚未获独立证实",
+    "事件经过仅有乍得方面说法，中非共和国方面尚未回应",
+    "目前仅一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_c01cbbfede9ce5ba",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

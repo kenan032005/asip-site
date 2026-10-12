@@ -1,0 +1,121 @@
+{
+ "label": "S88fa5966",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "cd5d3ee540ad2a99f0b70adf58c76809e5cdcae2000e46ced3b01c239151c80d",
+ "tokens": {
+  "input_tokens": 2551,
+  "output_tokens": 372,
+  "total_tokens": 2923
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚一专科医院一年内完成50例机器人手术",
+   "summary_zh": "尼日利亚拉各斯Kelina医院宣布，一年内完成超过50例机器人辅助根治性前列腺切除术，为前列腺癌患者提供创伤更小、功能恢复更好的治疗选择。院方称自6月起每周开展机器人前列腺手术，且未给任何患者输血。该院还称2025年完成尼日利亚首例机器人根治性肾切除术。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "拉各斯",
+    "site": "Kelina医院",
+    "raw_text": "Lagos"
+   },
+   "key_facts": [
+    {
+     "fact": "Kelina医院一年内完成超过50例机器人辅助根治性前列腺切除术",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kelina Hospital has performed over 50 robotic radical prostatectomy surgeries in one year"
+    },
+    {
+     "fact": "院方称自6月起每周开展机器人前列腺手术且未给患者输血",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the hospital has been performing robotic prostate surgery weekly since June, and has never given any patient blood transfusion since then"
+    },
+    {
+     "fact": "院方称2025年完成尼日利亚首例机器人根治性肾切除术",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the hospital successfully performed the first Robotic Radical Nephrectomy in Nigeria in 2025"
+    },
+    {
+     "fact": "尼日利亚每年估计新诊断24396例前列腺癌病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "24,396 new prostate cancer cases are diagnosed annually in Nigeria"
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚一专科医院一年内完成50例机器人手术",
+   "summary_zh": "尼日利亚拉各斯Kelina医院宣布，一年内完成超过50例机器人辅助根治性前列腺切除术，为前列腺癌患者提供创伤更小、功能恢复更好的治疗选择。院方称自6月起每周开展机器人前列腺手术，且未给任何患者输血。该院还称2025年完成尼日利亚首例机器人根治性肾切除术。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "拉各斯",
+    "site": "Kelina医院",
+    "raw_text": "Lagos"
+   },
+   "key_facts": [
+    {
+     "fact": "Kelina医院一年内完成超过50例机器人辅助根治性前列腺切除术",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kelina Hospital has performed over 50 robotic radical prostatectomy surgeries in one year"
+    },
+    {
+     "fact": "院方称自6月起每周开展机器人前列腺手术且未给患者输血",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the hospital has been performing robotic prostate surgery weekly since June, and has never given any patient blood transfusion since then"
+    },
+    {
+     "fact": "院方称2025年完成尼日利亚首例机器人根治性肾切除术",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the hospital successfully performed the first Robotic Radical Nephrectomy in Nigeria in 2025"
+    },
+    {
+     "fact": "尼日利亚每年估计新诊断24396例前列腺癌病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "24,396 new prostate cancer cases are diagnosed annually in Nigeria"
+    }
+   ],
+   "uncertainties": [
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_a0e10ec088fa5966",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

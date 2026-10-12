@@ -1,0 +1,104 @@
+{
+ "label": "Sb3a79ebb",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "102b9a067687932181a961b0c26366b6dab7e25fc74d5ef27289be24acab0f7d",
+ "tokens": {
+  "input_tokens": 2156,
+  "output_tokens": 291,
+  "total_tokens": 2447
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\"]",
+    "after": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳作家Abena Asomaning推出三本新书支持监狱帮扶项目",
+   "summary_zh": "加纳作家、倡导者兼艺术家Abena Nyarkoa Asomaning博士推出三本新书，并拍卖其原创画作，以支持被监禁女性、年轻人及正在重建生活的前囚犯。该消息由单一来源MyJoyOnline报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "Abena Nyarkoa Asomaning博士推出三本新书并拍卖原创画作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Author, advocate and artist Dr Abena Nyarkoa Asomaning has launched three books and auctioned her original paintings to support incarcerated women, young people and former inmates rebuilding their lives."
+    },
+    {
+     "fact": "该活动旨在支持被监禁女性、年轻人及前囚犯重建生活",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "to support incarcerated women, young people and former inmates rebuilding their lives"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 60
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳作家Abena Asomaning推出三本新书支持监狱帮扶项目",
+   "summary_zh": "加纳作家、倡导者兼艺术家Abena Nyarkoa Asomaning博士推出三本新书，并拍卖其原创画作，以支持被监禁女性、年轻人及正在重建生活的前囚犯。该消息由单一来源MyJoyOnline报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "Abena Nyarkoa Asomaning博士推出三本新书并拍卖原创画作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Author, advocate and artist Dr Abena Nyarkoa Asomaning has launched three books and auctioned her original paintings to support incarcerated women, young people and former inmates rebuilding their lives."
+    },
+    {
+     "fact": "该活动旨在支持被监禁女性、年轻人及前囚犯重建生活",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "to support incarcerated women, young people and former inmates rebuilding their lives"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 60
+  }
+ },
+ "event_id": "EVT_0e087eb3b3a79ebb",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

@@ -1,0 +1,138 @@
+{
+ "label": "S62b64c93",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "96a4cc1bd4c1e06c97237a5356bb69db3580c16a1fbe09d8bcb66928ee149433",
+ "tokens": {
+  "input_tokens": 2999,
+  "output_tokens": 579,
+  "total_tokens": 3578
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"报告内容基于人权观察组织的调查和证词，尚未获得独立交叉验证\", \"被捕人数212人为RADDHO单方面统计，未获官方确认\", \"部分指控（如未经同意进行HIV检测、被拘留者遭殴打）为受访者单方陈述，有待核实\"]",
+    "after": "[\"报告内容基于人权观察组织的调查和证词，尚未获得独立交叉验证\", \"被捕人数212人为RADDHO单方面统计，未获官方确认\", \"部分指控（如未经同意进行HIV检测、被拘留者遭殴打）为受访者单方陈述，有待核实\", \"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "人权观察组织谴责塞内加尔对LGBT群体镇压加剧",
+   "summary_zh": "人权观察组织于10月12日发布报告，对塞内加尔同性恋和跨性别公民权利日益受到侵犯表示担忧。报告称，自3月11日通过加重“违反自然行为”刑罚的法律以来，镇压不断加剧。该组织基于39份证词，并援引RADDHO的数据称新法生效六个多月内已有至少212人被捕。",
+   "event_type": "other_security",
+   "country_iso3": "SEN",
+   "location": {
+    "country_iso3": "SEN",
+    "admin1": null,
+    "city": "达喀尔",
+    "site": null,
+    "raw_text": "Sénégal, Dakar"
+   },
+   "key_facts": [
+    {
+     "fact": "人权观察组织发布报告，谴责塞内加尔对LGBT群体的镇压加剧",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Sénégal: l'ONG Human Rights Watch dénonce un durcissement de la répression contre les personnes LGBT"
+    },
+    {
+     "fact": "塞内加尔于3月11日通过法律，将“违反自然行为”的刑罚加倍至五至十年监禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Adoptée le 11 mars dernier, celle-ci prévoit un doublement des peines d'emprisonnement pour les actes qualifiés de « contre nature », punis désormais de cinq à dix ans de prison."
+    },
+    {
+     "fact": "RADDHO称新法生效六个多月内至少有212人被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'organisation dénombre au moins 212 personnes arrêtées depuis l'entrée en vigueur de la nouvelle loi, soit en un peu plus de six mois seulement"
+    },
+    {
+     "fact": "报告称部分被拘留者未经知情同意被进行HIV检测",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "certains détenus ont subi des tests de dépistage du VIH sans leur consentement éclairé"
+    },
+    {
+     "fact": "一名在蒂耶斯被捕的年轻男子称遭到殴打、鞭打和大腿受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un jeune homme arrêté chez lui, à Thiès, qui dit avoir été « battu, fouetté et blessé à la cuisse »"
+    }
+   ],
+   "uncertainties": [
+    "报告内容基于人权观察组织的调查和证词，尚未获得独立交叉验证",
+    "被捕人数212人为RADDHO单方面统计，未获官方确认",
+    "部分指控（如未经同意进行HIV检测、被拘留者遭殴打）为受访者单方陈述，有待核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "人权观察组织谴责塞内加尔对LGBT群体镇压加剧",
+   "summary_zh": "人权观察组织于10月12日发布报告，对塞内加尔同性恋和跨性别公民权利日益受到侵犯表示担忧。报告称，自3月11日通过加重“违反自然行为”刑罚的法律以来，镇压不断加剧。该组织基于39份证词，并援引RADDHO的数据称新法生效六个多月内已有至少212人被捕。",
+   "event_type": "other_security",
+   "country_iso3": "SEN",
+   "location": {
+    "country_iso3": "SEN",
+    "admin1": null,
+    "city": "达喀尔",
+    "site": null,
+    "raw_text": "Sénégal, Dakar"
+   },
+   "key_facts": [
+    {
+     "fact": "人权观察组织发布报告，谴责塞内加尔对LGBT群体的镇压加剧",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Sénégal: l'ONG Human Rights Watch dénonce un durcissement de la répression contre les personnes LGBT"
+    },
+    {
+     "fact": "塞内加尔于3月11日通过法律，将“违反自然行为”的刑罚加倍至五至十年监禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Adoptée le 11 mars dernier, celle-ci prévoit un doublement des peines d'emprisonnement pour les actes qualifiés de « contre nature », punis désormais de cinq à dix ans de prison."
+    },
+    {
+     "fact": "RADDHO称新法生效六个多月内至少有212人被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'organisation dénombre au moins 212 personnes arrêtées depuis l'entrée en vigueur de la nouvelle loi, soit en un peu plus de six mois seulement"
+    },
+    {
+     "fact": "报告称部分被拘留者未经知情同意被进行HIV检测",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "certains détenus ont subi des tests de dépistage du VIH sans leur consentement éclairé"
+    },
+    {
+     "fact": "一名在蒂耶斯被捕的年轻男子称遭到殴打、鞭打和大腿受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un jeune homme arrêté chez lui, à Thiès, qui dit avoir été « battu, fouetté et blessé à la cuisse »"
+    }
+   ],
+   "uncertainties": [
+    "报告内容基于人权观察组织的调查和证词，尚未获得独立交叉验证",
+    "被捕人数212人为RADDHO单方面统计，未获官方确认",
+    "部分指控（如未经同意进行HIV检测、被拘留者遭殴打）为受访者单方陈述，有待核实",
+    "据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_dbf1da5b62b64c93",
+ "disease_event_id": null,
+ "country_code": "SN"
+}

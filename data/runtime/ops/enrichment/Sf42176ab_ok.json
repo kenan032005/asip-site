@@ -1,0 +1,104 @@
+{
+ "label": "Sf42176ab",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "051d98f78ab1d633a6c61bff1b252d13f0f2a8ec4095745cc5786f80f0b34406",
+ "tokens": {
+  "input_tokens": 2135,
+  "output_tokens": 252,
+  "total_tokens": 2387
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\"]",
+    "after": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳教育部长赞扬教师工会暂停全国罢工",
+   "summary_zh": "加纳教育部对三个教师工会暂停全国罢工表示赞扬。此举是在与政府及公平工资与薪金委员会（FWSC）谈判后作出的。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳教育部长赞扬教师工会暂停全国罢工",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Education Minister commends teacher unions for suspending nationwide strike"
+    },
+    {
+     "fact": "罢工暂停是在与政府及公平工资与薪金委员会谈判后作出的",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Ministry of Education has commended the three teacher unions for suspending their nationwide strike following negotiations with the Government and the Fair Wages and Salaries Commission (FWSC)."
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳教育部长赞扬教师工会暂停全国罢工",
+   "summary_zh": "加纳教育部对三个教师工会暂停全国罢工表示赞扬。此举是在与政府及公平工资与薪金委员会（FWSC）谈判后作出的。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳教育部长赞扬教师工会暂停全国罢工",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Education Minister commends teacher unions for suspending nationwide strike"
+    },
+    {
+     "fact": "罢工暂停是在与政府及公平工资与薪金委员会谈判后作出的",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Ministry of Education has commended the three teacher unions for suspending their nationwide strike following negotiations with the Government and the Fair Wages and Salaries Commission (FWSC)."
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_d3f8b2f0f42176ab",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

@@ -1,0 +1,104 @@
+{
+ "label": "S7131c22a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "fb4d03f232d88aa3b1ba528f998fb73b026776c2e68fa77bab7853dc033b2aba",
+ "tokens": {
+  "input_tokens": 2117,
+  "output_tokens": 240,
+  "total_tokens": 2357
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"目前仅一个来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳在美国打击人口贩运排名中升至最高等级",
+   "summary_zh": "加纳在美国国务院2026年《人口贩运报告》中被提升至第一等级（Tier 1）。该消息由加纳媒体MyJoyOnline报道，目前为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳在美国国务院2026年《人口贩运报告》中被提升至第一等级",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ghana has been upgraded to Tier 1 in the United States Department of State’s 2026 Trafficking in Persons Report."
+    },
+    {
+     "fact": "该报道来自加纳媒体MyJoyOnline，属单一来源",
+     "evidence_field": "source_links",
+     "evidence_excerpt": "MyJoyOnline"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳在美国打击人口贩运排名中升至最高等级",
+   "summary_zh": "加纳在美国国务院2026年《人口贩运报告》中被提升至第一等级（Tier 1）。该消息由加纳媒体MyJoyOnline报道，目前为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳在美国国务院2026年《人口贩运报告》中被提升至第一等级",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ghana has been upgraded to Tier 1 in the United States Department of State’s 2026 Trafficking in Persons Report."
+    },
+    {
+     "fact": "该报道来自加纳媒体MyJoyOnline，属单一来源",
+     "evidence_field": "source_links",
+     "evidence_excerpt": "MyJoyOnline"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_a98e5db07131c22a",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

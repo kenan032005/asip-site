@@ -1,0 +1,150 @@
+{
+ "label": "S9789892c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b6d5a361f37030d64065277bcac9e67fb6a89712c214ba696c4184a1d7a916fd",
+ "tokens": {
+  "input_tokens": 2576,
+  "output_tokens": 651,
+  "total_tokens": 3227
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"BBC无法确定具体哪颗子弹击中每位遇难者，也无法排除体育场内其他警察开枪的可能性\", \"内政部长关于人群投掷石块的说法未获BBC分析证实\", \"警方开枪是否属于“克制”行动存在争议\", \"独立警务监督局调查尚未公布结论\"]",
+    "after": "[\"BBC无法确定具体哪颗子弹击中每位遇难者，也无法排除体育场内其他警察开枪的可能性\", \"内政部长关于人群投掷石块的说法未获BBC分析证实\", \"警方开枪是否属于“克制”行动存在争议\", \"独立警务监督局调查尚未公布结论\", \"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "BBC调查：肯尼亚警方在前总理国葬期间射杀悼念者，遇难者远离冲突现场",
+   "summary_zh": "BBC非洲之眼调查发现，2025年10月16日在肯尼亚前总理奥廷加国葬期间被警方开枪打死的三名悼念者，事发时距离引发枪击的冲突现场至少60米至160米。肯尼亚内政部长称警方行动“克制”，但BBC分析显示现场投掷物中未见石块证据。目前肯尼亚独立警务监督局仍在调查，无人被追责。",
+   "event_type": "civil_unrest",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": "内罗毕",
+    "city": "内罗毕",
+    "site": "卡萨拉尼体育场",
+    "raw_text": "Nairobi's Kasarani Stadium"
+   },
+   "key_facts": [
+    {
+     "fact": "BBC调查发现三名悼念者在肯尼亚前总理国葬期间被警方开枪打死，事发时远离冲突现场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Three mourners killed when Kenyan police opened fire at a national farewell for former Prime Minister Raila Odinga were not involved in a clash that sparked gunfire, a BBC Africa Eye investigation has found."
+    },
+    {
+     "fact": "三名遇难者距离冲突现场至少60米至160米",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "BBC analysis from inside the stadium shows the victims were each between at least 60m (197 ft) and 160m from the scuffles."
+    },
+    {
+     "fact": "肯尼亚内政部长称警方行动“克制”，因人群投掷石块",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kenya's Interior Minister Kipchumba Murkomen told the BBC that the police action had been \"restrained\" after the crowd starting throwing stones."
+    },
+    {
+     "fact": "BBC分析显示现场投掷物包括塑料椅，但无证据表明包含石块",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In footage analysed by the BBC, it is clear that objects, including plastic chairs, are thrown, but we have no evidence that they included stones."
+    },
+    {
+     "fact": "BBC法医分析表明可能是负责总统安保的精锐警察部队开了致命枪击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Forensic analysis by the BBC suggests an elite police unit responsible for protecting the president may have fired the fatal shots."
+    },
+    {
+     "fact": "肯尼亚独立警务监督局仍在调查，无人被追责",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A year on, Kenya's police watchdog, the Independent Policing Oversight Authority (IPOA), is still investigating the deaths and police response and no-one has been held to account."
+    }
+   ],
+   "uncertainties": [
+    "BBC无法确定具体哪颗子弹击中每位遇难者，也无法排除体育场内其他警察开枪的可能性",
+    "内政部长关于人群投掷石块的说法未获BBC分析证实",
+    "警方开枪是否属于“克制”行动存在争议",
+    "独立警务监督局调查尚未公布结论"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "BBC调查：肯尼亚警方在前总理国葬期间射杀悼念者，遇难者远离冲突现场",
+   "summary_zh": "BBC非洲之眼调查发现，2025年10月16日在肯尼亚前总理奥廷加国葬期间被警方开枪打死的三名悼念者，事发时距离引发枪击的冲突现场至少60米至160米。肯尼亚内政部长称警方行动“克制”，但BBC分析显示现场投掷物中未见石块证据。目前肯尼亚独立警务监督局仍在调查，无人被追责。",
+   "event_type": "civil_unrest",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": "内罗毕",
+    "city": "内罗毕",
+    "site": "卡萨拉尼体育场",
+    "raw_text": "Nairobi's Kasarani Stadium"
+   },
+   "key_facts": [
+    {
+     "fact": "BBC调查发现三名悼念者在肯尼亚前总理国葬期间被警方开枪打死，事发时远离冲突现场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Three mourners killed when Kenyan police opened fire at a national farewell for former Prime Minister Raila Odinga were not involved in a clash that sparked gunfire, a BBC Africa Eye investigation has found."
+    },
+    {
+     "fact": "三名遇难者距离冲突现场至少60米至160米",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "BBC analysis from inside the stadium shows the victims were each between at least 60m (197 ft) and 160m from the scuffles."
+    },
+    {
+     "fact": "肯尼亚内政部长称警方行动“克制”，因人群投掷石块",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kenya's Interior Minister Kipchumba Murkomen told the BBC that the police action had been \"restrained\" after the crowd starting throwing stones."
+    },
+    {
+     "fact": "BBC分析显示现场投掷物包括塑料椅，但无证据表明包含石块",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In footage analysed by the BBC, it is clear that objects, including plastic chairs, are thrown, but we have no evidence that they included stones."
+    },
+    {
+     "fact": "BBC法医分析表明可能是负责总统安保的精锐警察部队开了致命枪击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Forensic analysis by the BBC suggests an elite police unit responsible for protecting the president may have fired the fatal shots."
+    },
+    {
+     "fact": "肯尼亚独立警务监督局仍在调查，无人被追责",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A year on, Kenya's police watchdog, the Independent Policing Oversight Authority (IPOA), is still investigating the deaths and police response and no-one has been held to account."
+    }
+   ],
+   "uncertainties": [
+    "BBC无法确定具体哪颗子弹击中每位遇难者，也无法排除体育场内其他警察开枪的可能性",
+    "内政部长关于人群投掷石块的说法未获BBC分析证实",
+    "警方开枪是否属于“克制”行动存在争议",
+    "独立警务监督局调查尚未公布结论",
+    "据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_d6946b6b9789892c",
+ "disease_event_id": null,
+ "country_code": "KE"
+}
