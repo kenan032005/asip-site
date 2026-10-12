@@ -1,0 +1,115 @@
+{
+ "label": "Sa6afd2a9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4dde0e556cb9b8e59bbb89867b015384354892a47cda1edbe61fe264824c0914",
+ "tokens": {
+  "input_tokens": 2229,
+  "output_tokens": 469,
+  "total_tokens": 2698
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳电力公司称无法继续免费赊供电力",
+   "summary_zh": "加纳电力公司（ECG）表示无法继续无偿赊供电力，指出其需先购电并通过电网输送，无论后付费用户是否按时缴费都须向供应商付款。文章称，当有支付能力的用户拖欠电费时，该公用事业公司被迫以营运资金、拖欠供应商款项等方式为这一延迟融资，最终可能对公共财政和其他用户造成压力。文章援引国际货币基金组织2026年评估对加纳能源行业收入成本的估算。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳电力公司（ECG）表示无法继续免费赊供电力",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "ECG cannot keep lending electricity for free"
+    },
+    {
+     "fact": "ECG需先购电并通过电网输送，无论后付费用户是否按时缴费都须向供应商付款",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ECG buys power, moves it across a network, and must pay suppliers whether a postpaid customer settles on time or not"
+    },
+    {
+     "fact": "文章称有支付能力的用户拖欠电费会迫使公用事业公司为延迟融资，最终可能对公共财政和其他用户造成压力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "When a customer who can pay holds back payment, the utility is forced to finance that delay, with working capital, supplier arrears, or ultimately pressure on public finances and other customers"
+    },
+    {
+     "fact": "文章援引国际货币基金组织2026年评估对加纳能源行业收入成本的估算",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The IMF’s 2026 review estimated Ghana’s energy-sector revenue-cos"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源（MyJoyOnline），尚缺乏交叉验证",
+    "国际货币基金组织2026年评估的具体估算数值在原文中不完整，无法确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 60
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳电力公司称无法继续免费赊供电力",
+   "summary_zh": "加纳电力公司（ECG）表示无法继续无偿赊供电力，指出其需先购电并通过电网输送，无论后付费用户是否按时缴费都须向供应商付款。文章称，当有支付能力的用户拖欠电费时，该公用事业公司被迫以营运资金、拖欠供应商款项等方式为这一延迟融资，最终可能对公共财政和其他用户造成压力。文章援引国际货币基金组织2026年评估对加纳能源行业收入成本的估算。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳电力公司（ECG）表示无法继续免费赊供电力",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "ECG cannot keep lending electricity for free"
+    },
+    {
+     "fact": "ECG需先购电并通过电网输送，无论后付费用户是否按时缴费都须向供应商付款",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ECG buys power, moves it across a network, and must pay suppliers whether a postpaid customer settles on time or not"
+    },
+    {
+     "fact": "文章称有支付能力的用户拖欠电费会迫使公用事业公司为延迟融资，最终可能对公共财政和其他用户造成压力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "When a customer who can pay holds back payment, the utility is forced to finance that delay, with working capital, supplier arrears, or ultimately pressure on public finances and other customers"
+    },
+    {
+     "fact": "文章援引国际货币基金组织2026年评估对加纳能源行业收入成本的估算",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The IMF’s 2026 review estimated Ghana’s energy-sector revenue-cos"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源（MyJoyOnline），尚缺乏交叉验证",
+    "国际货币基金组织2026年评估的具体估算数值在原文中不完整，无法确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 60
+  }
+ },
+ "event_id": "EVT_aad7f20aa6afd2a9",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

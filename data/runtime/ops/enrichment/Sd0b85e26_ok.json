@@ -1,0 +1,114 @@
+{
+ "label": "Sd0b85e26",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e48d5b189ba5086729bb34ef953cf9fe6411766c59dfbfd410cdd5722b9915f4",
+ "tokens": {
+  "input_tokens": 1984,
+  "output_tokens": 388,
+  "total_tokens": 2372
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"信息为单一来源（Africanews），尚缺乏交叉验证\"]",
+    "after": "[\"信息为单一来源（Africanews），尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "肯尼亚称首例埃博拉死亡病例后无新增病例",
+   "summary_zh": "肯尼亚当局10月12日表示，自10月5日一名埃博拉阳性患者死亡以来，该国未再记录新增病例。当局对293份样本进行了检测，均未呈阳性。肯尼亚上周报告该国首例埃博拉病例，一名40岁男子在刚果（金）检测呈阳性后前往内罗毕并死亡。当局正追踪接触者，并呼吁出现症状者就医。",
+   "event_type": "other_security",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": null,
+    "city": "内罗毕",
+    "site": null,
+    "raw_text": "Nairobi"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚当局称自10月5日一名阳性患者死亡以来无新增埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kenyan authorities on Sunday said the country has recorded no new cases of Ebola following the death of a positive patient on October 5"
+    },
+    {
+     "fact": "共检测293份样本，均未呈阳性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Tests were conducted on 293 samples, but none came back positive"
+    },
+    {
+     "fact": "肯尼亚上周报告该国首例埃博拉病例，一名40岁男子在刚果（金）检测呈阳性后前往内罗毕并死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kenya reported its first-ever case of the virus last week, after a 40-year-old man was tested positive in the Democratic Republic of Congo and travelled to Nairobi, where he died"
+    }
+   ],
+   "uncertainties": [
+    "信息为单一来源（Africanews），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "肯尼亚称首例埃博拉死亡病例后无新增病例",
+   "summary_zh": "肯尼亚当局10月12日表示，自10月5日一名埃博拉阳性患者死亡以来，该国未再记录新增病例。当局对293份样本进行了检测，均未呈阳性。肯尼亚上周报告该国首例埃博拉病例，一名40岁男子在刚果（金）检测呈阳性后前往内罗毕并死亡。当局正追踪接触者，并呼吁出现症状者就医。",
+   "event_type": "other_security",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": null,
+    "city": "内罗毕",
+    "site": null,
+    "raw_text": "Nairobi"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚当局称自10月5日一名阳性患者死亡以来无新增埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kenyan authorities on Sunday said the country has recorded no new cases of Ebola following the death of a positive patient on October 5"
+    },
+    {
+     "fact": "共检测293份样本，均未呈阳性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Tests were conducted on 293 samples, but none came back positive"
+    },
+    {
+     "fact": "肯尼亚上周报告该国首例埃博拉病例，一名40岁男子在刚果（金）检测呈阳性后前往内罗毕并死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kenya reported its first-ever case of the virus last week, after a 40-year-old man was tested positive in the Democratic Republic of Congo and travelled to Nairobi, where he died"
+    }
+   ],
+   "uncertainties": [
+    "信息为单一来源（Africanews），尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_131a4d38d0b85e26",
+ "disease_event_id": null,
+ "country_code": "CI"
+}

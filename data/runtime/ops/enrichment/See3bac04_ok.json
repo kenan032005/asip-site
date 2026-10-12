@@ -1,0 +1,105 @@
+{
+ "label": "See3bac04",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1fd3d2f9016add429e8054334e15ace63da08938f5cf370a3744fcb32959d371",
+ "tokens": {
+  "input_tokens": 2180,
+  "output_tokens": 314,
+  "total_tokens": 2494
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳公共账目委员会下令驱逐前灌溉公司总经理",
+   "summary_zh": "加纳公共账目委员会（PAC）指示食品与农业部，若前灌溉公司总经理未腾退官方住所，则请警方将其强制迁出。该住所位于上东区。目前信息为单一来源报道。",
+   "event_type": "political_instability",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "Upper East Region",
+    "city": null,
+    "site": "official residence",
+    "raw_text": "official residence in the Upper East Region"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳公共账目委员会指示食品与农业部介入驱逐前灌溉公司总经理",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Public Accounts Committee (PAC) has directed the Ministry of Food and Agriculture to involve the police to remove the former Managing Director of an irrigation company in the Upper East Region from an official residence if he fails to vacate the property."
+    },
+    {
+     "fact": "涉事住所位于上东区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "from an official residence if he fails to vacate the property"
+    },
+    {
+     "fact": "该报道为单一来源",
+     "evidence_field": "source_links",
+     "evidence_excerpt": "MyJoyOnline"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚未获得交叉验证",
+    "前总经理是否已腾退住所尚未证实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳公共账目委员会下令驱逐前灌溉公司总经理",
+   "summary_zh": "加纳公共账目委员会（PAC）指示食品与农业部，若前灌溉公司总经理未腾退官方住所，则请警方将其强制迁出。该住所位于上东区。目前信息为单一来源报道。",
+   "event_type": "political_instability",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "Upper East Region",
+    "city": null,
+    "site": "official residence",
+    "raw_text": "official residence in the Upper East Region"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳公共账目委员会指示食品与农业部介入驱逐前灌溉公司总经理",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Public Accounts Committee (PAC) has directed the Ministry of Food and Agriculture to involve the police to remove the former Managing Director of an irrigation company in the Upper East Region from an official residence if he fails to vacate the property."
+    },
+    {
+     "fact": "涉事住所位于上东区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "from an official residence if he fails to vacate the property"
+    },
+    {
+     "fact": "该报道为单一来源",
+     "evidence_field": "source_links",
+     "evidence_excerpt": "MyJoyOnline"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚未获得交叉验证",
+    "前总经理是否已腾退住所尚未证实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_a46c59b4ee3bac04",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

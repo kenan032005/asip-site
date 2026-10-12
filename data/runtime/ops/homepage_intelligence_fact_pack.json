@@ -1,17 +1,17 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-13T02:07:14+08:00",
+ "generated_at": "2026-10-13T03:57:16+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 32,
+  "signals_24h": 30,
   "signals_7d": 303,
-  "verified_events_24h": 33,
-  "verified_events_7d": 336,
+  "verified_events_24h": 41,
+  "verified_events_7d": 346,
   "multi_source_verified_events_7d": 11,
-  "countries_with_activity_24h": 13,
+  "countries_with_activity_24h": 14,
   "total_countries_monitored": 22
  },
  "countries_24h": [
@@ -26,6 +26,7 @@
   "尼日利亚",
   "尼日尔",
   "摩洛哥",
+  "科特迪瓦",
   "肯尼亚",
   "莫桑比克"
  ],
@@ -71,11 +72,11 @@
   },
   {
    "value": "乍得",
-   "count": 46
+   "count": 45
   },
   {
    "value": "南苏丹",
-   "count": 24
+   "count": 25
   },
   {
    "value": "埃塞俄比亚",
@@ -113,11 +114,15 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 26
+   "count": 24
   },
   {
    "value": "民众骚乱",
    "count": 2
+  },
+  {
+   "value": "policy_security",
+   "count": 1
   },
   {
    "value": "自然灾害",
@@ -130,16 +135,12 @@
   {
    "value": "军事行动",
    "count": 1
-  },
-  {
-   "value": "边境安全",
-   "count": 1
   }
  ],
  "source_tier_distribution_7d": [
   {
    "value": "B",
-   "count": 274
+   "count": 284
   },
   {
    "value": "C",
@@ -243,6 +244,21 @@
   }
  ],
  "top_signals": [
+  {
+   "fact_id": "news:77e333d0403f3731",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "Curfew imposed in Rumbek after deadly clashes",
+   "category": "policy_security",
+   "source": "Radio Tamazuj",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-12 23:23",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   {
    "fact_id": "news:17f1e7f022c38d72",
    "level": "news_signal",
@@ -587,21 +603,6 @@
    "time": "2026-10-12 08:00",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:6760077469d9d41c",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "埃塞俄比亚政府军进入提格雷靠近厄立特里亚边境重镇",
-   "category": "armed_conflict",
-   "source": "Africanews",
-   "source_tier": "B",
-   "source_role": "aggregator_discovery",
-   "time": "2026-10-12 08:00",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -680,16 +681,31 @@
  ],
  "existing_assessment": {
   "status": "ai",
-  "overall_assessment": "已核实事件方面，尼日利亚军机坠毁为当日最重事件，死亡人数经空军由32人下修至25人，含平民，全国哀悼三日，国防部长与阿布贾商会致哀；塞内加尔达喀尔洪灾致至少四人死亡、多街区被淹；刚果（金）北基伍埃博拉疫情加剧，肯尼亚确认首例死亡并追踪28名接触者；马里阿扎瓦德解放阵线撤出基达尔，政府军与俄方伙伴进入；莫桑比克伊斯兰国分支加强针对平民袭击；埃塞俄比亚提格雷暴力再起，数十名儿童受伤。情报信号层面，均为单源消息、尚待核实：南苏丹民间社会呼吁遏制社区暴力、美国谴责琼莱州袭击世界粮食计划署人员及物资被劫；中非共和国班吉举行反对燃油涨价的“死城日”活动；摩洛哥卡萨布兰卡民众谴责西班牙国王访问休达和梅利利亚；塞内加尔洪水推迟开学后部分学校复课。整体风险方向趋于恶化，需持续跟踪。",
+  "overall_assessment": "已核实事件方面：尼日利亚军机坠毁造成人员死亡（官方将死亡人数由32人下修至25人，含平民），全国哀悼三日；塞内加尔达喀尔洪灾致至少四人死亡、多街区被淹；刚果河两船相撞致至少22人死亡；刚果（金）北基伍省埃博拉疫情加剧，肯尼亚确认首例埃博拉死亡病例并追踪28名接触者；马里阿扎瓦德解放阵线撤出基达尔，政府军与俄方伙伴进入；莫桑比克伊斯兰国分支加强针对平民袭击。情报信号（均为单源消息，尚待核实）：南苏丹伦拜克冲突后实施宵禁、琼莱州袭击世界粮食计划署人员及物资被劫、民间社会呼吁遏制社区暴力；中非共和国班吉举行反对燃油涨价的“死城日”活动。7日统计显示尼日利亚、加纳、乍得事件量居前，类别以其他安全、民事骚乱、武装冲突为主。",
   "risk_direction": "worsening",
   "confidence": "medium",
-  "generated_time": "2026-10-13T02:07:02+08:00",
+  "generated_time": "2026-10-13T03:57:07+08:00",
   "based_on": "过去24小时/7日公开信息",
   "model": "",
   "date": "20261013"
  },
- "fact_count": 639,
+ "fact_count": 649,
  "facts": {
+  "news:77e333d0403f3731": {
+   "fact_id": "news:77e333d0403f3731",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "Curfew imposed in Rumbek after deadly clashes",
+   "category": "policy_security",
+   "source": "Radio Tamazuj",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-12 23:23",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:17f1e7f022c38d72": {
    "fact_id": "news:17f1e7f022c38d72",
    "level": "news_signal",
@@ -5220,21 +5236,6 @@
    "importance": "low",
    "why_it_matters": ""
   },
-  "news:3213e35d3e07199c": {
-   "fact_id": "news:3213e35d3e07199c",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得：司法警察在博洛洛学校开展卫生清洁行动",
-   "category": "political_crisis",
-   "source": "Alwihda Info",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-06 03:41",
-   "importance": "low",
-   "why_it_matters": ""
-  },
   "EVT_a4fa1e1aa99c61c1": {
    "fact_id": "EVT_a4fa1e1aa99c61c1",
    "level": "verified_event",
@@ -5607,21 +5608,6 @@
    "source_tier": "B",
    "source_role": "regional",
    "time": "2026-10-05 23:34",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_9b8d65e328bba0b5": {
-   "fact_id": "EVT_9b8d65e328bba0b5",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得：司法警察在博洛洛学校开展卫生清洁行动",
-   "category": "political_crisis",
-   "source": "Alwihda Info",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-05 19:41",
    "importance": "high",
    "severity": "medium"
   },
@@ -10272,6 +10258,171 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-12 07:49",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_131a4d38d0b85e26": {
+   "fact_id": "EVT_131a4d38d0b85e26",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "科特迪瓦",
+   "title": "肯尼亚称首例埃博拉死亡病例后无新增病例",
+   "category": "public_health",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-12 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_c8d14e541c992116": {
+   "fact_id": "EVT_c8d14e541c992116",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳超级联赛：阿杜阿纳FC不敌青年使徒，主帅博阿杜称需纠正错误",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-12 19:30",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_07812655718a4dc4": {
+   "fact_id": "EVT_07812655718a4dc4",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳库马西市政当局宣布：无无障碍设施将不予发放建筑许可",
+   "category": "armed_conflict",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-12 19:29",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_63a4147f3d73dc4f": {
+   "fact_id": "EVT_63a4147f3d73dc4f",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳贫困者因无力承担司法费用而被监禁——Crime Check Foundation",
+   "category": "armed_conflict",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-12 19:24",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_8368d8507522f458": {
+   "fact_id": "EVT_8368d8507522f458",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳全国民主大会党称任命Emelia Agbenyo为选举委员会副主席不存在利益冲突",
+   "category": "armed_conflict",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-12 19:24",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_dab0cfbc90c81349": {
+   "fact_id": "EVT_dab0cfbc90c81349",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳87岁男子因性侵9岁女童被判20年监禁",
+   "category": "armed_conflict",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-12 19:21",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_c7cc54034e40af66": {
+   "fact_id": "EVT_c7cc54034e40af66",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "Sankofa金矿停产九个月后复产，目标产量70公斤",
+   "category": "armed_conflict",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-12 19:19",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_a46c59b4ee3bac04": {
+   "fact_id": "EVT_a46c59b4ee3bac04",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳公共账目委员会下令驱逐前灌溉公司总经理",
+   "category": "armed_conflict",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-12 19:08",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_aad7f20aa6afd2a9": {
+   "fact_id": "EVT_aad7f20aa6afd2a9",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳电力公司称无法继续免费赊供电力",
+   "category": "infrastructure_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-12 18:42",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_2d3b574ef90ca3fb": {
+   "fact_id": "EVT_2d3b574ef90ca3fb",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "塞内加尔",
+   "title": "人权观察警告塞内加尔对LGBTQ+群体的打压加剧，逮捕人数上升",
+   "category": "other_security",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-12 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_8cff0a35c70cff87": {
+   "fact_id": "EVT_8cff0a35c70cff87",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "南苏丹湖泊州伦贝克因致命冲突实施宵禁",
+   "category": "policy_security",
+   "source": "Radio Tamazuj",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-12 15:23",
    "importance": "high",
    "severity": "medium"
   }

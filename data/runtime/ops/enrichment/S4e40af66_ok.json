@@ -1,0 +1,114 @@
+{
+ "label": "S4e40af66",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "835008bba0347a7e947cf82c654a16442b4851dde495caf3dcb8f9268ab1b3d2",
+ "tokens": {
+  "input_tokens": 2199,
+  "output_tokens": 303,
+  "total_tokens": 2502
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该报道为单一来源，尚未获得其他独立来源证实\"]",
+    "after": "[\"该报道为单一来源，尚未获得其他独立来源证实\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "Sankofa金矿停产九个月后复产，目标产量70公斤",
+   "summary_zh": "加纳Prestea Sankofa Gold Limited在停产九个月后恢复生产，目标是在2026年10月底前生产70公斤黄金。该公司计划每日处理850吨物料，以恢复运营并提高加工效率。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": "Prestea Sankofa Gold Limited",
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "Prestea Sankofa Gold Limited在停产九个月后恢复生产",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Prestea Sankofa Gold Limited is targeting 70 kilogrammes of gold production by the end of October 2026 following a nine-month shutdown"
+    },
+    {
+     "fact": "公司目标在2026年10月底前生产70公斤黄金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "targeting 70 kilogrammes of gold production by the end of October 2026"
+    },
+    {
+     "fact": "公司计划每日处理850吨物料",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "with a target of processing 850 tonnes of material daily"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚未获得其他独立来源证实"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "Sankofa金矿停产九个月后复产，目标产量70公斤",
+   "summary_zh": "加纳Prestea Sankofa Gold Limited在停产九个月后恢复生产，目标是在2026年10月底前生产70公斤黄金。该公司计划每日处理850吨物料，以恢复运营并提高加工效率。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": "Prestea Sankofa Gold Limited",
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "Prestea Sankofa Gold Limited在停产九个月后恢复生产",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Prestea Sankofa Gold Limited is targeting 70 kilogrammes of gold production by the end of October 2026 following a nine-month shutdown"
+    },
+    {
+     "fact": "公司目标在2026年10月底前生产70公斤黄金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "targeting 70 kilogrammes of gold production by the end of October 2026"
+    },
+    {
+     "fact": "公司计划每日处理850吨物料",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "with a target of processing 850 tonnes of material daily"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚未获得其他独立来源证实",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_c7cc54034e40af66",
+ "disease_event_id": null,
+ "country_code": "GH"
+}
