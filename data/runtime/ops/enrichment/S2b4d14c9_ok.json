@@ -1,0 +1,115 @@
+{
+ "label": "S2b4d14c9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3baf28c398126e8a164c508eda06f14a6edc952c8eee19bd6664296225f8a672",
+ "tokens": {
+  "input_tokens": 2194,
+  "output_tokens": 557,
+  "total_tokens": 2751
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得谴责沙特阿拉伯基础设施遭袭事件",
+   "summary_zh": "乍得政府发言人加西姆·谢里夫·马哈马特于2026年10月11日发表公报，谴责针对沙特阿拉伯机场设施及其他民用基础设施的袭击。据公报，胡塞武装于10月10日发动的袭击造成12人死亡、309人受伤及重大物质损失。乍得政府呼吁遵守国际法规则，特别是保护平民和民众生活必需基础设施的相关规定。",
+   "event_type": "terrorism",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "乍得政府发言人发表公报谴责针对沙特阿拉伯机场设施及民用基础设施的袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le porte-parole du gouvernement tchadien, Gassim Cherif Mahamat a produit un communiqué le 11 octobre 2026 pour condamner les attaques contre des installations aéroportuaires et d’autres infrastructures civiles Arabie Saoudite."
+    },
+    {
+     "fact": "据公报，胡塞武装10月10日的袭击造成12人死亡、309人受伤及重大物质损失",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les attaques Houtis du samedi 10 octobre 2026, contre ces installations ont fait douze morts, trois cent neuf blessés ainsi que d’importants dommages matériels."
+    },
+    {
+     "fact": "乍得政府呼吁遵守国际法规则，特别是保护平民和民众生活必需基础设施的规定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement tchadien condamne ces attaques et appelle au respect des règles du droit international, notamment celles relatives à la protection des civils et des infrastructures indispensables à la vie des populations."
+    },
+    {
+     "fact": "乍得新闻部长在公报中向沙特阿拉伯政府与人民表达声援，并向受害者及其家属致以慰问",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministre de la Communication à travers son communiqué exprime toute sa solidarité au gouvernement et au peuple du Royaume d’Arabie Saoudite. Et adresse sa compassion à toutes les victimes, à leurs familles"
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字（12人死亡、309人受伤）来自乍得政府公报转述，尚未获得独立来源交叉验证",
+    "事件目前仅有一个来源（Journal du Tchad），属单一来源报道"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得谴责沙特阿拉伯基础设施遭袭事件",
+   "summary_zh": "乍得政府发言人加西姆·谢里夫·马哈马特于2026年10月11日发表公报，谴责针对沙特阿拉伯机场设施及其他民用基础设施的袭击。据公报，胡塞武装于10月10日发动的袭击造成12人死亡、309人受伤及重大物质损失。乍得政府呼吁遵守国际法规则，特别是保护平民和民众生活必需基础设施的相关规定。",
+   "event_type": "terrorism",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "乍得政府发言人发表公报谴责针对沙特阿拉伯机场设施及民用基础设施的袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le porte-parole du gouvernement tchadien, Gassim Cherif Mahamat a produit un communiqué le 11 octobre 2026 pour condamner les attaques contre des installations aéroportuaires et d’autres infrastructures civiles Arabie Saoudite."
+    },
+    {
+     "fact": "据公报，胡塞武装10月10日的袭击造成12人死亡、309人受伤及重大物质损失",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les attaques Houtis du samedi 10 octobre 2026, contre ces installations ont fait douze morts, trois cent neuf blessés ainsi que d’importants dommages matériels."
+    },
+    {
+     "fact": "乍得政府呼吁遵守国际法规则，特别是保护平民和民众生活必需基础设施的规定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement tchadien condamne ces attaques et appelle au respect des règles du droit international, notamment celles relatives à la protection des civils et des infrastructures indispensables à la vie des populations."
+    },
+    {
+     "fact": "乍得新闻部长在公报中向沙特阿拉伯政府与人民表达声援，并向受害者及其家属致以慰问",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministre de la Communication à travers son communiqué exprime toute sa solidarité au gouvernement et au peuple du Royaume d’Arabie Saoudite. Et adresse sa compassion à toutes les victimes, à leurs familles"
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字（12人死亡、309人受伤）来自乍得政府公报转述，尚未获得独立来源交叉验证",
+    "事件目前仅有一个来源（Journal du Tchad），属单一来源报道"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_36c3b6422b4d14c9",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
