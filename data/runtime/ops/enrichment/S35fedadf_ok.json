@@ -1,0 +1,117 @@
+{
+ "label": "S35fedadf",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "7cfff589ede3392f5179aec8f6999f59b293fd071396a35ca6f7fbe047b90dff",
+ "tokens": {
+  "input_tokens": 2242,
+  "output_tokens": 580,
+  "total_tokens": 2822
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得恩贾梅纳Moursal区一男子因争执被朋友刺死",
+   "summary_zh": "乍得首都恩贾梅纳第6区Moursal街区发生一起暴力争执，两名朋友之间的冲突升级，其中一人持刀将对方刺死，随后试图逃跑。据初步信息，事件起因是一场争执，具体动机尚待确定。据称嫌疑人已被执法人员抓获，受害者家属曾试图纵火报复，警方在现场维持警戒。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "恩贾梅纳",
+    "city": "恩贾梅纳",
+    "site": "Moursal街区（第6区）",
+    "raw_text": "quartier Moursal, situé dans le 6e arrondissement de N’Djaména"
+   },
+   "key_facts": [
+    {
+     "fact": "恩贾梅纳Moursal街区两名朋友发生暴力争执，一人持刀将对方刺死",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une violente dispute entre deux amis a dégénéré ce lundi au quartier Moursal, situé dans le 6e arrondissement de N’Djaména. L’un des protagonistes a mortellement poignardé son ami à l’aide d’un couteau avant de tenter de prendre la fuite."
+    },
+    {
+     "fact": "据初步信息，事件起因是一场争执，具体动机尚待确定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon les premières informations, le drame aurait éclaté à la suite d’un différend dont le mobile exact reste à déterminer."
+    },
+    {
+     "fact": "据称嫌疑人作案后不久被执法人员抓获",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les témoins indiquent que l’auteur présumé du meurtre a été rattrapé peu après les faits par les éléments des forces de l’ordre."
+    },
+    {
+     "fact": "受害者家属曾前往嫌疑人家中试图纵火报复，警方维持警戒",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des membres de la famille de la victime, furieux, se sont ensuite rendus au domicile du suspect avec l’intention de mettre le feu à la maison familiale. Cette tentative de représailles a créé un climat de tension, obligeant les policiers à maintenir la garde."
+    }
+   ],
+   "uncertainties": [
+    "事件具体动机尚待确定",
+    "嫌疑人身份及抓获情况为目击者说法，尚未获官方证实",
+    "目前仅单一来源（Tchadinfos）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得恩贾梅纳Moursal区一男子因争执被朋友刺死",
+   "summary_zh": "乍得首都恩贾梅纳第6区Moursal街区发生一起暴力争执，两名朋友之间的冲突升级，其中一人持刀将对方刺死，随后试图逃跑。据初步信息，事件起因是一场争执，具体动机尚待确定。据称嫌疑人已被执法人员抓获，受害者家属曾试图纵火报复，警方在现场维持警戒。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "恩贾梅纳",
+    "city": "恩贾梅纳",
+    "site": "Moursal街区（第6区）",
+    "raw_text": "quartier Moursal, situé dans le 6e arrondissement de N’Djaména"
+   },
+   "key_facts": [
+    {
+     "fact": "恩贾梅纳Moursal街区两名朋友发生暴力争执，一人持刀将对方刺死",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une violente dispute entre deux amis a dégénéré ce lundi au quartier Moursal, situé dans le 6e arrondissement de N’Djaména. L’un des protagonistes a mortellement poignardé son ami à l’aide d’un couteau avant de tenter de prendre la fuite."
+    },
+    {
+     "fact": "据初步信息，事件起因是一场争执，具体动机尚待确定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon les premières informations, le drame aurait éclaté à la suite d’un différend dont le mobile exact reste à déterminer."
+    },
+    {
+     "fact": "据称嫌疑人作案后不久被执法人员抓获",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les témoins indiquent que l’auteur présumé du meurtre a été rattrapé peu après les faits par les éléments des forces de l’ordre."
+    },
+    {
+     "fact": "受害者家属曾前往嫌疑人家中试图纵火报复，警方维持警戒",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des membres de la famille de la victime, furieux, se sont ensuite rendus au domicile du suspect avec l’intention de mettre le feu à la maison familiale. Cette tentative de représailles a créé un climat de tension, obligeant les policiers à maintenir la garde."
+    }
+   ],
+   "uncertainties": [
+    "事件具体动机尚待确定",
+    "嫌疑人身份及抓获情况为目击者说法，尚未获官方证实",
+    "目前仅单一来源（Tchadinfos）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_d069ba9135fedadf",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

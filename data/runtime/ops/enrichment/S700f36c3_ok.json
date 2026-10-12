@@ -1,0 +1,131 @@
+{
+ "label": "S700f36c3",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c831c26aacd7b947a223ae95c7a94c7e9260c8313ba13f6a42b79cdaec963079",
+ "tokens": {
+  "input_tokens": 2403,
+  "output_tokens": 466,
+  "total_tokens": 2869
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "after": "[\"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚与挪威合作开展卫星监控打击非法捕鱼",
+   "summary_zh": "尼日利亚联邦政府向挪威保证将参与“蓝色正义倡议”，以加强对其水域的卫星监控并打击非法、未报告和无管制（IUU）捕鱼。海洋与蓝色经济部长奥耶托拉在阿布贾会见挪威驻尼日利亚大使贝尔拉时作出上述表示，双方讨论了部署卫星船舶追踪技术、共享情报及发展水产养殖等合作。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦政府向挪威保证将参与“蓝色正义倡议”以加强水域卫星监控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Government has assured Norway of Nigeria’s participation in the Blue Justice Initiative to strengthen satellite surveillance of its waters and intensify action against Illegal, Unreported and Unregulated (IUU) fishing."
+    },
+    {
+     "fact": "尼日利亚海洋与蓝色经济部长奥耶托拉在阿布贾会见挪威大使贝尔拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Minister of Marine and Blue Economy, Dr Adegboyega Oyetola, gave the assurance on Monday when Norwegian Ambassador to Nigeria, Mr Svein Baera, paid him a courtesy visit in Abuja."
+    },
+    {
+     "fact": "挪威称已开发五颗卫星可监控尼日利亚海岸及西非海域活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The ambassador said Norway had developed five satellites capable of monitoring maritime activities along the Nigerian coast and across West Africa"
+    },
+    {
+     "fact": "尼日利亚表示有意加入“蓝色正义社区”以打击非法捕鱼等海上犯罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He expressed appreciation for Norway’s willingness to share its expertise and reaffirmed Nigeria’s readiness to join the Blue Justice Community, a network of countries collaborating to combat illegal fishing and other maritime crimes."
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚与挪威合作开展卫星监控打击非法捕鱼",
+   "summary_zh": "尼日利亚联邦政府向挪威保证将参与“蓝色正义倡议”，以加强对其水域的卫星监控并打击非法、未报告和无管制（IUU）捕鱼。海洋与蓝色经济部长奥耶托拉在阿布贾会见挪威驻尼日利亚大使贝尔拉时作出上述表示，双方讨论了部署卫星船舶追踪技术、共享情报及发展水产养殖等合作。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦政府向挪威保证将参与“蓝色正义倡议”以加强水域卫星监控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Government has assured Norway of Nigeria’s participation in the Blue Justice Initiative to strengthen satellite surveillance of its waters and intensify action against Illegal, Unreported and Unregulated (IUU) fishing."
+    },
+    {
+     "fact": "尼日利亚海洋与蓝色经济部长奥耶托拉在阿布贾会见挪威大使贝尔拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Minister of Marine and Blue Economy, Dr Adegboyega Oyetola, gave the assurance on Monday when Norwegian Ambassador to Nigeria, Mr Svein Baera, paid him a courtesy visit in Abuja."
+    },
+    {
+     "fact": "挪威称已开发五颗卫星可监控尼日利亚海岸及西非海域活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The ambassador said Norway had developed five satellites capable of monitoring maritime activities along the Nigerian coast and across West Africa"
+    },
+    {
+     "fact": "尼日利亚表示有意加入“蓝色正义社区”以打击非法捕鱼等海上犯罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He expressed appreciation for Norway’s willingness to share its expertise and reaffirmed Nigeria’s readiness to join the Blue Justice Community, a network of countries collaborating to combat illegal fishing and other maritime crimes."
+    }
+   ],
+   "uncertainties": [
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_4e951fda700f36c3",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
