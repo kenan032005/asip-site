@@ -1,0 +1,138 @@
+{
+ "label": "Seb59ba17",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b0eabb4c5922cc29f552829269cce7f176c436dd525f214c9a4530b12beb2ba9",
+ "tokens": {
+  "input_tokens": 2493,
+  "output_tokens": 565,
+  "total_tokens": 3058
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"市场拆迁导致人员死亡的说法为据称/据报，尚未证实\", \"相关团体的困难与拆迁及多重征税的因果关系为指控性表述\", \"纳吉的承诺以其当选为前提，尚未落实\"]",
+    "after": "[\"市场拆迁导致人员死亡的说法为据称/据报，尚未证实\", \"相关团体的困难与拆迁及多重征税的因果关系为指控性表述\", \"纳吉的承诺以其当选为前提，尚未落实\", \"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚埃努古州人民民主党州长候选人承诺为市场拆迁受影响商户提供免费商铺",
+   "summary_zh": "尼日利亚埃努古州人民民主党（PDP）州长候选人乌切·纳吉承诺，若当选将重建被拆市场并为受影响商户提供免费商铺，同时审查并废除其称为过度且剥削性的税收。他于周日在埃努古竞选办公室会见由北方论坛、被拆迁商户及跨信仰委员会等组成的团体时作出上述承诺。相关团体据称因市场拆迁和多重征税而陷入困境，并提及有人因此死亡的说法。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Enugu State",
+    "city": "Enugu",
+    "site": "竞选办公室",
+    "raw_text": "Enugu State, campaign office in Enugu"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚埃努古州PDP州长候选人乌切·纳吉承诺重建被拆市场并为受影响商户提供免费商铺",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Peoples Democratic Party (PDP) governorship candidate in Enugu State, Uche Nnaji, has promised to rebuild demolished markets and provide free shops to affected traders if elected."
+    },
+    {
+     "fact": "纳吉承诺审查州税收制度并废除其称为过度且剥削性的税收",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nnaji also pledged to review the state’s tax regime and abolish what he described as excessive and exploitative taxes"
+    },
+    {
+     "fact": "相关团体据称因市场拆迁和多重征税而遭受困难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the groups expressed solidarity with Nnaji and lamented the hardship allegedly caused by market demolitions and multiple taxation"
+    },
+    {
+     "fact": "纳吉称据其所知许多人已经死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "“From the experience people have had and the trauma they have gone through, I know for a fact that many people have died,” he said."
+    },
+    {
+     "fact": "PDP官员称集会包括据报因拆迁困境而死亡者的家属",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a PDP chieftain, Chief Basil Ani, said the gathering brought together traders affected by market demolitions and families of people reportedly killed following the resulting hardship"
+    }
+   ],
+   "uncertainties": [
+    "市场拆迁导致人员死亡的说法为据称/据报，尚未证实",
+    "相关团体的困难与拆迁及多重征税的因果关系为指控性表述",
+    "纳吉的承诺以其当选为前提，尚未落实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚埃努古州人民民主党州长候选人承诺为市场拆迁受影响商户提供免费商铺",
+   "summary_zh": "尼日利亚埃努古州人民民主党（PDP）州长候选人乌切·纳吉承诺，若当选将重建被拆市场并为受影响商户提供免费商铺，同时审查并废除其称为过度且剥削性的税收。他于周日在埃努古竞选办公室会见由北方论坛、被拆迁商户及跨信仰委员会等组成的团体时作出上述承诺。相关团体据称因市场拆迁和多重征税而陷入困境，并提及有人因此死亡的说法。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Enugu State",
+    "city": "Enugu",
+    "site": "竞选办公室",
+    "raw_text": "Enugu State, campaign office in Enugu"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚埃努古州PDP州长候选人乌切·纳吉承诺重建被拆市场并为受影响商户提供免费商铺",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Peoples Democratic Party (PDP) governorship candidate in Enugu State, Uche Nnaji, has promised to rebuild demolished markets and provide free shops to affected traders if elected."
+    },
+    {
+     "fact": "纳吉承诺审查州税收制度并废除其称为过度且剥削性的税收",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nnaji also pledged to review the state’s tax regime and abolish what he described as excessive and exploitative taxes"
+    },
+    {
+     "fact": "相关团体据称因市场拆迁和多重征税而遭受困难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the groups expressed solidarity with Nnaji and lamented the hardship allegedly caused by market demolitions and multiple taxation"
+    },
+    {
+     "fact": "纳吉称据其所知许多人已经死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "“From the experience people have had and the trauma they have gone through, I know for a fact that many people have died,” he said."
+    },
+    {
+     "fact": "PDP官员称集会包括据报因拆迁困境而死亡者的家属",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a PDP chieftain, Chief Basil Ani, said the gathering brought together traders affected by market demolitions and families of people reportedly killed following the resulting hardship"
+    }
+   ],
+   "uncertainties": [
+    "市场拆迁导致人员死亡的说法为据称/据报，尚未证实",
+    "相关团体的困难与拆迁及多重征税的因果关系为指控性表述",
+    "纳吉的承诺以其当选为前提，尚未落实",
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_b2661b26eb59ba17",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
