@@ -1,0 +1,117 @@
+{
+ "label": "S5961a9dc",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c1cd8e606ae8ff9170c2f7ef14626ab5a619f3e1b2949940cc2c2f28eceae8d8",
+ "tokens": {
+  "input_tokens": 1997,
+  "output_tokens": 447,
+  "total_tokens": 2444
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "厄立特里亚呼吁联合国介入与埃塞俄比亚的对峙",
+   "summary_zh": "厄立特里亚就提格雷地区冲突致函联合国，要求采取“威慑措施”，并称埃塞俄比亚的行为构成“宣战”。此前一天，埃塞俄比亚指控厄立特里亚发动“全面入侵”，称厄军已深入提格雷60公里。双方互相指责对方挑起战争。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷州",
+    "city": null,
+    "site": null,
+    "raw_text": "Tigray region"
+   },
+   "key_facts": [
+    {
+     "fact": "厄立特里亚致函联合国，要求就与埃塞俄比亚的对峙采取“威慑措施”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eritrea on Saturday asked the United Nations to take “deterrent measures”"
+    },
+    {
+     "fact": "厄立特里亚称埃塞俄比亚的行为构成“宣战”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "after what it described as Ethiopia’s “declaration of war” in the conflict over the Tigray region"
+    },
+    {
+     "fact": "埃塞俄比亚指控厄立特里亚发动“全面入侵”，称厄军已深入提格雷60公里",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Addis Ababa accused Asmara of launching an “all-out invasion”, saying Eritrean troops had advanced up to 60 kilometres into Tigray"
+    },
+    {
+     "fact": "双方互相指责对方在提格雷问题上挑起战争",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The neighbours have accused each other of starting a war over Tigray"
+    }
+   ],
+   "uncertainties": [
+    "厄立特里亚“宣战”与埃塞俄比亚“全面入侵”的指控均为双方各自说法，尚未获得独立证实",
+    "厄立特里亚军队深入提格雷60公里的说法为埃塞俄比亚单方面指控",
+    "目前仅有一个来源（Africanews）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "厄立特里亚呼吁联合国介入与埃塞俄比亚的对峙",
+   "summary_zh": "厄立特里亚就提格雷地区冲突致函联合国，要求采取“威慑措施”，并称埃塞俄比亚的行为构成“宣战”。此前一天，埃塞俄比亚指控厄立特里亚发动“全面入侵”，称厄军已深入提格雷60公里。双方互相指责对方挑起战争。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷州",
+    "city": null,
+    "site": null,
+    "raw_text": "Tigray region"
+   },
+   "key_facts": [
+    {
+     "fact": "厄立特里亚致函联合国，要求就与埃塞俄比亚的对峙采取“威慑措施”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eritrea on Saturday asked the United Nations to take “deterrent measures”"
+    },
+    {
+     "fact": "厄立特里亚称埃塞俄比亚的行为构成“宣战”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "after what it described as Ethiopia’s “declaration of war” in the conflict over the Tigray region"
+    },
+    {
+     "fact": "埃塞俄比亚指控厄立特里亚发动“全面入侵”，称厄军已深入提格雷60公里",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Addis Ababa accused Asmara of launching an “all-out invasion”, saying Eritrean troops had advanced up to 60 kilometres into Tigray"
+    },
+    {
+     "fact": "双方互相指责对方在提格雷问题上挑起战争",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The neighbours have accused each other of starting a war over Tigray"
+    }
+   ],
+   "uncertainties": [
+    "厄立特里亚“宣战”与埃塞俄比亚“全面入侵”的指控均为双方各自说法，尚未获得独立证实",
+    "厄立特里亚军队深入提格雷60公里的说法为埃塞俄比亚单方面指控",
+    "目前仅有一个来源（Africanews）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_28cfedc35961a9dc",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

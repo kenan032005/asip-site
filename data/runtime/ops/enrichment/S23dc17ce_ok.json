@@ -1,0 +1,125 @@
+{
+ "label": "S23dc17ce",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6e3a533336a13946dea39dcec5ed2689aef8141bed0a7b453f1d0b36f777a5ef",
+ "tokens": {
+  "input_tokens": 2423,
+  "output_tokens": 519,
+  "total_tokens": 2942
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "美国谴责琼莱州袭击世界粮食计划署工作人员及援助物资被劫事件",
+   "summary_zh": "美国强烈谴责9月29日在南苏丹琼莱州发生的针对世界粮食计划署人道主义工作人员的武装袭击，以及强行卸载原定用于救助近2万人的粮食。美方呼吁南苏丹领导人保障人道准入并追究责任。2026年南苏丹针对援助人员的袭击大幅增加，已有至少36名人道工作者和承包商遇害。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "琼莱州",
+    "city": null,
+    "site": null,
+    "raw_text": "Jonglei State"
+   },
+   "key_facts": [
+    {
+     "fact": "美国强烈谴责9月29日针对世界粮食计划署人道主义工作人员的武装袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The United States has strongly condemned the 29 September armed assault on World Food Programme (WFP) humanitarian workers in Jonglei State"
+    },
+    {
+     "fact": "袭击中粮食被强行卸载，原定用于救助近2万人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the forced offloading of food meant to feed nearly 20,000 people in need"
+    },
+    {
+     "fact": "2026年已有至少36名人道主义工作者和承包商在南苏丹遇害，超过2025年全年的31人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least 36 humanitarian workers and contractors—overwhelmingly South Sudanese nationals—have been killed in 2026, already surpassing the total of 31 deaths recorded for all of 2025"
+    },
+    {
+     "fact": "2026年1月至7月记录到450多起针对援助组织的暴力事件、伏击和物资抢劫",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than 450 violent incidents, ambushes, and asset lootings against aid organizations were recorded between January and July 2026"
+    },
+    {
+     "fact": "美国非洲事务局威胁因未能保护援助行动而对过渡政府实施潜在制裁和签证限制",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The U.S. Bureau of African Affairs has threatened the transitional government with potential sanctions and visa restrictions due to the failure to protect aid operations"
+    }
+   ],
+   "uncertainties": [
+    "事件目前为单一来源报道，尚缺乏独立交叉验证",
+    "袭击具体实施方身份尚未确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "美国谴责琼莱州袭击世界粮食计划署工作人员及援助物资被劫事件",
+   "summary_zh": "美国强烈谴责9月29日在南苏丹琼莱州发生的针对世界粮食计划署人道主义工作人员的武装袭击，以及强行卸载原定用于救助近2万人的粮食。美方呼吁南苏丹领导人保障人道准入并追究责任。2026年南苏丹针对援助人员的袭击大幅增加，已有至少36名人道工作者和承包商遇害。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "琼莱州",
+    "city": null,
+    "site": null,
+    "raw_text": "Jonglei State"
+   },
+   "key_facts": [
+    {
+     "fact": "美国强烈谴责9月29日针对世界粮食计划署人道主义工作人员的武装袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The United States has strongly condemned the 29 September armed assault on World Food Programme (WFP) humanitarian workers in Jonglei State"
+    },
+    {
+     "fact": "袭击中粮食被强行卸载，原定用于救助近2万人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the forced offloading of food meant to feed nearly 20,000 people in need"
+    },
+    {
+     "fact": "2026年已有至少36名人道主义工作者和承包商在南苏丹遇害，超过2025年全年的31人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least 36 humanitarian workers and contractors—overwhelmingly South Sudanese nationals—have been killed in 2026, already surpassing the total of 31 deaths recorded for all of 2025"
+    },
+    {
+     "fact": "2026年1月至7月记录到450多起针对援助组织的暴力事件、伏击和物资抢劫",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than 450 violent incidents, ambushes, and asset lootings against aid organizations were recorded between January and July 2026"
+    },
+    {
+     "fact": "美国非洲事务局威胁因未能保护援助行动而对过渡政府实施潜在制裁和签证限制",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The U.S. Bureau of African Affairs has threatened the transitional government with potential sanctions and visa restrictions due to the failure to protect aid operations"
+    }
+   ],
+   "uncertainties": [
+    "事件目前为单一来源报道，尚缺乏独立交叉验证",
+    "袭击具体实施方身份尚未确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_6e0471d223dc17ce",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

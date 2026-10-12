@@ -1,0 +1,131 @@
+{
+ "label": "Sdbe00bcb",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b3c0251df2860b59e2b5c41d9ee812fd508f6ee6bbc8a5c8b8af870ed210c4ec",
+ "tokens": {
+  "input_tokens": 2813,
+  "output_tokens": 674,
+  "total_tokens": 3487
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据Le Sahel报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔启动流离失所者与弱势群体经济赋权项目，1028名受益人接受培训",
+   "summary_zh": "尼日尔人口、社会行动与团结部于2026年10月9日在尼亚美启动针对境内流离失所者、难民及收容社区的经济赋权项目，由沙特国王萨勒曼救援与人道主义中心资助977293美元。项目在蒂拉贝里和马拉迪地区实施，为期12个月，为1028名受益人提供职业培训、农业农场及水井建设。官员称选择这两地是因蒂拉贝里与马里、布基纳法索接壤的安全形势，以及尼日利亚不安全局势对马拉迪的压力。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": null,
+    "raw_text": "Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔在尼亚美启动针对境内流离失所者、难民和收容社区的经济赋权项目",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a procédé, le vendredi 9 octobre 2026 à Niamey, au lancement du Projet d’autonomisation économique des personnes déplacées internes, des réfugiés et des communautés hôtes"
+    },
+    {
+     "fact": "项目由沙特国王萨勒曼救援与人道主义中心资助977293美元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Financé par le Centre Roi Salman pour le Secours et l’Action Humanitaire pour un montant de 977 293 dollars américains"
+    },
+    {
+     "fact": "项目在蒂拉贝里和马拉迪地区实施，为期12个月，惠及1028人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "bénéficiera directement à 1 028 personnes parmi les déplacés internes, les réfugiés et les communautés hôtes les plus vulnérables sur une période de douze (12) mois, mis en œuvre dans les régions de Maradi et de Tillabéri"
+    },
+    {
+     "fact": "项目包括为728名受益人提供职业培训和设备，以及建设7个农场和7口水井",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la formation professionnelle et l’équipement de 728 bénéficiaires... l’aménagement et l’équipement de sept (7) fermes agricoles, ainsi que la réalisation de sept (7) forages"
+    },
+    {
+     "fact": "官员称选择蒂拉贝里和马拉迪是因两地分别受马里、布基纳法索边境安全形势和尼日利亚不安全局势影响",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il se justifie par le contexte sécuritaire de la région de Tillabéri, qui partage des frontières avec le Mali et le Burkina Faso, ainsi que par la pression liée à l’insécurité au Nigéria qui affecte la région de Maradi"
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔启动流离失所者与弱势群体经济赋权项目，1028名受益人接受培训",
+   "summary_zh": "尼日尔人口、社会行动与团结部于2026年10月9日在尼亚美启动针对境内流离失所者、难民及收容社区的经济赋权项目，由沙特国王萨勒曼救援与人道主义中心资助977293美元。项目在蒂拉贝里和马拉迪地区实施，为期12个月，为1028名受益人提供职业培训、农业农场及水井建设。官员称选择这两地是因蒂拉贝里与马里、布基纳法索接壤的安全形势，以及尼日利亚不安全局势对马拉迪的压力。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": null,
+    "raw_text": "Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔在尼亚美启动针对境内流离失所者、难民和收容社区的经济赋权项目",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a procédé, le vendredi 9 octobre 2026 à Niamey, au lancement du Projet d’autonomisation économique des personnes déplacées internes, des réfugiés et des communautés hôtes"
+    },
+    {
+     "fact": "项目由沙特国王萨勒曼救援与人道主义中心资助977293美元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Financé par le Centre Roi Salman pour le Secours et l’Action Humanitaire pour un montant de 977 293 dollars américains"
+    },
+    {
+     "fact": "项目在蒂拉贝里和马拉迪地区实施，为期12个月，惠及1028人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "bénéficiera directement à 1 028 personnes parmi les déplacés internes, les réfugiés et les communautés hôtes les plus vulnérables sur une période de douze (12) mois, mis en œuvre dans les régions de Maradi et de Tillabéri"
+    },
+    {
+     "fact": "项目包括为728名受益人提供职业培训和设备，以及建设7个农场和7口水井",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la formation professionnelle et l’équipement de 728 bénéficiaires... l’aménagement et l’équipement de sept (7) fermes agricoles, ainsi que la réalisation de sept (7) forages"
+    },
+    {
+     "fact": "官员称选择蒂拉贝里和马拉迪是因两地分别受马里、布基纳法索边境安全形势和尼日利亚不安全局势影响",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il se justifie par le contexte sécuritaire de la région de Tillabéri, qui partage des frontières avec le Mali et le Burkina Faso, ainsi que par la pression liée à l’insécurité au Nigéria qui affecte la région de Maradi"
+    }
+   ],
+   "uncertainties": [
+    "据Le Sahel报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_0d749761dbe00bcb",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

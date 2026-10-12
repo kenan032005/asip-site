@@ -1,0 +1,126 @@
+{
+ "label": "S0ea487d9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1dcf068749d01114f826adfcef610b312e148823adc3b3f4aa546b49281e62b8",
+ "tokens": {
+  "input_tokens": 2337,
+  "output_tokens": 422,
+  "total_tokens": 2759
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"该信息目前仅来自尼日利亚联邦卫生部单一来源，尚缺乏交叉验证\", \"刚果民主共和国和乌干达的埃博拉疫情报告未在本文中提供具体细节\"]",
+    "after": "[\"该信息目前仅来自尼日利亚联邦卫生部单一来源，尚缺乏交叉验证\", \"刚果民主共和国和乌干达的埃博拉疫情报告未在本文中提供具体细节\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚联邦政府称无埃博拉确诊病例，宣布加强防控准备并呼吁公众保持冷静",
+   "summary_zh": "尼日利亚联邦政府表示，目前该国尚无确诊的埃博拉病毒病病例，并已启动一系列加强国家防控与应对能力的预防措施。此举是在刚果民主共和国和乌干达部分地区近期报告埃博拉疫情之后作出的。卫生部长呼吁公众保持冷静、避免传播不实信息，并继续遵守预防措施。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja, Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦政府表示目前该国无确诊埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Government has reassured Nigerians that there is currently no confirmed case of Ebola Virus Disease (EVD) in Nigeria"
+    },
+    {
+     "fact": "此举是在刚果民主共和国和乌干达部分地区近期报告埃博拉疫情之后作出的",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "This follows recent reports of Ebola outbreaks in parts of the Democratic Republic of the Congo (DRC) and Uganda."
+    },
+    {
+     "fact": "尼日利亚已启动加强监测、入境筛查、实验室诊断能力等预防措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Enhanced surveillance and monitoring nationwide; Strengthened screening and health declaration protocols at points of entry"
+    },
+    {
+     "fact": "卫生部长呼吁公众保持冷静并避免传播不实信息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Minister urged Nigerians to remain calm, avoid spreading misinformation"
+    }
+   ],
+   "uncertainties": [
+    "该信息目前仅来自尼日利亚联邦卫生部单一来源，尚缺乏交叉验证",
+    "刚果民主共和国和乌干达的埃博拉疫情报告未在本文中提供具体细节"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚联邦政府称无埃博拉确诊病例，宣布加强防控准备并呼吁公众保持冷静",
+   "summary_zh": "尼日利亚联邦政府表示，目前该国尚无确诊的埃博拉病毒病病例，并已启动一系列加强国家防控与应对能力的预防措施。此举是在刚果民主共和国和乌干达部分地区近期报告埃博拉疫情之后作出的。卫生部长呼吁公众保持冷静、避免传播不实信息，并继续遵守预防措施。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja, Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦政府表示目前该国无确诊埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Government has reassured Nigerians that there is currently no confirmed case of Ebola Virus Disease (EVD) in Nigeria"
+    },
+    {
+     "fact": "此举是在刚果民主共和国和乌干达部分地区近期报告埃博拉疫情之后作出的",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "This follows recent reports of Ebola outbreaks in parts of the Democratic Republic of the Congo (DRC) and Uganda."
+    },
+    {
+     "fact": "尼日利亚已启动加强监测、入境筛查、实验室诊断能力等预防措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Enhanced surveillance and monitoring nationwide; Strengthened screening and health declaration protocols at points of entry"
+    },
+    {
+     "fact": "卫生部长呼吁公众保持冷静并避免传播不实信息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Minister urged Nigerians to remain calm, avoid spreading misinformation"
+    }
+   ],
+   "uncertainties": [
+    "该信息目前仅来自尼日利亚联邦卫生部单一来源，尚缺乏交叉验证",
+    "刚果民主共和国和乌干达的埃博拉疫情报告未在本文中提供具体细节",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_bcb5a91c0ea487d9",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

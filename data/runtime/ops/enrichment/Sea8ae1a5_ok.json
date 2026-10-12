@@ -1,0 +1,117 @@
+{
+ "label": "Sea8ae1a5",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "35618da5fa74c2ae8af7b6c1815f331c7630c7646c50f91ce136d311b217c983",
+ "tokens": {
+  "input_tokens": 2523,
+  "output_tokens": 443,
+  "total_tokens": 2966
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得谴责胡塞武装袭击沙特阿拉伯并声援利雅得",
+   "summary_zh": "乍得政府于2026年10月11日发表公报，谴责胡塞武装对沙特阿拉伯机场设施及其他民用基础设施的袭击，称袭击造成12人死亡、309人受伤。公报称袭击发生于2026年10月10日。乍得方面表示全力声援沙特阿拉伯当局和人民，向遇难者家属致哀，并呼吁缓和局势、遵守国际法。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "乍得政府发表公报谴责胡塞武装对沙特阿拉伯的袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement tchadien a condamné les attaques menées par les Houthis contre des installations aéroportuaires et d’autres infrastructures civiles en Arabie saoudite"
+    },
+    {
+     "fact": "公报称袭击造成12人死亡、309人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "qui ont fait 12 morts et 309 blessés"
+    },
+    {
+     "fact": "公报称袭击发生于2026年10月10日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ces attaques, survenues le samedi 10 octobre 2026"
+    },
+    {
+     "fact": "乍得表达对沙特阿拉伯的声援并呼吁缓和局势",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement tchadien exprime également sa pleine solidarité avec les autorités et le peuple du Royaume d’Arabie saoudite"
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字（12人死亡、309人受伤）来自乍得政府公报，尚未获得独立核实",
+    "事件为单一来源报道，缺乏交叉验证",
+    "相关事件存在时间差异（conflict_flags: time_difference）"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得谴责胡塞武装袭击沙特阿拉伯并声援利雅得",
+   "summary_zh": "乍得政府于2026年10月11日发表公报，谴责胡塞武装对沙特阿拉伯机场设施及其他民用基础设施的袭击，称袭击造成12人死亡、309人受伤。公报称袭击发生于2026年10月10日。乍得方面表示全力声援沙特阿拉伯当局和人民，向遇难者家属致哀，并呼吁缓和局势、遵守国际法。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "乍得政府发表公报谴责胡塞武装对沙特阿拉伯的袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement tchadien a condamné les attaques menées par les Houthis contre des installations aéroportuaires et d’autres infrastructures civiles en Arabie saoudite"
+    },
+    {
+     "fact": "公报称袭击造成12人死亡、309人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "qui ont fait 12 morts et 309 blessés"
+    },
+    {
+     "fact": "公报称袭击发生于2026年10月10日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ces attaques, survenues le samedi 10 octobre 2026"
+    },
+    {
+     "fact": "乍得表达对沙特阿拉伯的声援并呼吁缓和局势",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement tchadien exprime également sa pleine solidarité avec les autorités et le peuple du Royaume d’Arabie saoudite"
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字（12人死亡、309人受伤）来自乍得政府公报，尚未获得独立核实",
+    "事件为单一来源报道，缺乏交叉验证",
+    "相关事件存在时间差异（conflict_flags: time_difference）"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_1405f5f6ea8ae1a5",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
