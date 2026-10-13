@@ -1,0 +1,148 @@
+{
+ "label": "S56537d9e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "85ce1fd555ef53060f7bac16b27abe39ec67e728d6ae7a45ffa9690c05c8e43d",
+ "tokens": {
+  "input_tokens": 2374,
+  "output_tokens": 649,
+  "total_tokens": 3023
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"其2024年3月被捕及被安全人员带走的说法为据报，尚未获独立证实\", \"警方称其可能被国家安全局羁押，具体羁押方尚未确认\", \"人权组织对其失踪及拘留合法性的关切属指控性表述\"]",
+    "after": "[\"其2024年3月被捕及被安全人员带走的说法为据报，尚未获独立证实\", \"警方称其可能被国家安全局羁押，具体羁押方尚未确认\", \"人权组织对其失踪及拘留合法性的关切属指控性表述\", \"据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "评论：南苏丹需要无畏的领导——以卡利斯托·拉多为例",
+   "summary_zh": "一篇评论文章称，南苏丹需要敢于直面不公、为普通民众发声的领导者，并以朱巴县看守专员卡利斯托·拉多·福斯蒂诺·尼吉洛为例。文章回顾了他2021年任朱巴市长、2024年3月据称因谴责土地掠夺而被捕、约五个月后于2024年9月6日获释，以及2026年10月2日宣誓就任朱巴县看守专员的经历。文章还提到人权组织对其拘留情况的关切。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": null,
+    "city": "朱巴",
+    "site": null,
+    "raw_text": "Juba County"
+   },
+   "key_facts": [
+    {
+     "fact": "评论文章称南苏丹需要敢于直面不公、为普通民众发声的领导者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South Sudan needs leaders who are not afraid to stand up for what is right, confront injustice and speak for ordinary citizens"
+    },
+    {
+     "fact": "卡利斯托·拉多于2021年3月出任朱巴市长，约八个月后于2021年11月被解职",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In March 2021, he became Mayor of Juba... During his approximately eight-month tenure... his dismissal in November 2021 prompted petitions"
+    },
+    {
+     "fact": "据报他于2024年3月发表谴责土地掠夺的讲话后被捕，安全人员据称于3月30日将其从家中带走",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "in March 2024, when he was reportedly arrested after delivering a speech condemning land-grabbing practices... Security personnel reportedly took him from his home on 30 March"
+    },
+    {
+     "fact": "人权观察称其被单独隔离关押且未经法庭审理即获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Human Rights Watch subsequently reported that he had been held incommunicado and released without being presented in court"
+    },
+    {
+     "fact": "他于2024年9月6日获释，此前被关押约五个月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kalisto was released on 6 September 2024, after approximately five months in detention"
+    },
+    {
+     "fact": "他于2026年10月2日宣誓就任朱巴县看守专员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "His return to public administration as Caretaker Commissioner of Juba County, following his swearing-in on 2 October 2026"
+    }
+   ],
+   "uncertainties": [
+    "其2024年3月被捕及被安全人员带走的说法为据报，尚未获独立证实",
+    "警方称其可能被国家安全局羁押，具体羁押方尚未确认",
+    "人权组织对其失踪及拘留合法性的关切属指控性表述"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "评论：南苏丹需要无畏的领导——以卡利斯托·拉多为例",
+   "summary_zh": "一篇评论文章称，南苏丹需要敢于直面不公、为普通民众发声的领导者，并以朱巴县看守专员卡利斯托·拉多·福斯蒂诺·尼吉洛为例。文章回顾了他2021年任朱巴市长、2024年3月据称因谴责土地掠夺而被捕、约五个月后于2024年9月6日获释，以及2026年10月2日宣誓就任朱巴县看守专员的经历。文章还提到人权组织对其拘留情况的关切。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": null,
+    "city": "朱巴",
+    "site": null,
+    "raw_text": "Juba County"
+   },
+   "key_facts": [
+    {
+     "fact": "评论文章称南苏丹需要敢于直面不公、为普通民众发声的领导者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South Sudan needs leaders who are not afraid to stand up for what is right, confront injustice and speak for ordinary citizens"
+    },
+    {
+     "fact": "卡利斯托·拉多于2021年3月出任朱巴市长，约八个月后于2021年11月被解职",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In March 2021, he became Mayor of Juba... During his approximately eight-month tenure... his dismissal in November 2021 prompted petitions"
+    },
+    {
+     "fact": "据报他于2024年3月发表谴责土地掠夺的讲话后被捕，安全人员据称于3月30日将其从家中带走",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "in March 2024, when he was reportedly arrested after delivering a speech condemning land-grabbing practices... Security personnel reportedly took him from his home on 30 March"
+    },
+    {
+     "fact": "人权观察称其被单独隔离关押且未经法庭审理即获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Human Rights Watch subsequently reported that he had been held incommunicado and released without being presented in court"
+    },
+    {
+     "fact": "他于2024年9月6日获释，此前被关押约五个月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kalisto was released on 6 September 2024, after approximately five months in detention"
+    },
+    {
+     "fact": "他于2026年10月2日宣誓就任朱巴县看守专员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "His return to public administration as Caretaker Commissioner of Juba County, following his swearing-in on 2 October 2026"
+    }
+   ],
+   "uncertainties": [
+    "其2024年3月被捕及被安全人员带走的说法为据报，尚未获独立证实",
+    "警方称其可能被国家安全局羁押，具体羁押方尚未确认",
+    "人权组织对其失踪及拘留合法性的关切属指控性表述",
+    "据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_e074311056537d9e",
+ "disease_event_id": null,
+ "country_code": "SS"
+}
