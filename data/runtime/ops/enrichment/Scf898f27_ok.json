@@ -1,0 +1,132 @@
+{
+ "label": "Scf898f27",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "21f4bcb8ffa7c60bb9d33c02fb9ff4e0766ca071e9b3e139d4496110f932c6be",
+ "tokens": {
+  "input_tokens": 2352,
+  "output_tokens": 563,
+  "total_tokens": 2915
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"死亡的具体情况仍不明确\", \"死因尚未正式确定\", \"可能的责任方尚未确定\", \"死者是否被勒死仅为初步信息，尚未证实\", \"事件目前为单一来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"死亡的具体情况仍不明确\", \"死因尚未正式确定\", \"可能的责任方尚未确定\", \"死者是否被勒死仅为初步信息，尚未证实\", \"事件目前为单一来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得阿贝歇一名年轻男子被发现死亡",
+   "summary_zh": "2026年10月12日晚，乍得东部城市阿贝歇（Abéché）第四区Kamayine一带发现一名约二十岁年轻男子死亡。据初步信息，死者可能系被勒死，安全部队到场后将遗体送往阿贝歇大学医院中心。目前死亡的具体情况、死因及可能的责任方尚未正式确定，仍有待当局进一步说明。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "Ouaddaï",
+    "city": "Abéché",
+    "site": "Kamayine街区（第四区）",
+    "raw_text": "secteur de Kamayine, situé dans le 4ᵉ arrondissement de la ville d'Abéché"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年10月12日晚，乍得阿贝歇一名约二十岁年轻男子被发现死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un drame aux circonstances encore floues s’est produit dans la soirée du lundi 12 octobre 2026 à Abéché. Un jeune homme, âgé d’une vingtaine d’années, a été retrouvé mort aux environs de 21 heures dans le secteur de Kamayine, situé dans le 4ᵉ arrondissement de la ville."
+    },
+    {
+     "fact": "据初步信息，死者可能系被勒死",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon les premières informations recueillies, la victime aurait été retrouvée étranglée."
+    },
+    {
+     "fact": "安全部队到场后将遗体送往阿贝歇大学医院中心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les forces de défense et de sécurité, intervenues sur les lieux, ont ensuite transporté le corps au Centre hospitalier universitaire d’Abéché."
+    },
+    {
+     "fact": "死亡的具体情况、死因及可能的责任方尚未正式确定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pour l’heure, les circonstances exactes de ce décès restent inconnues. Les causes de la mort et les éventuelles responsabilités n’ont pas encore été officiellement établies."
+    }
+   ],
+   "uncertainties": [
+    "死亡的具体情况仍不明确",
+    "死因尚未正式确定",
+    "可能的责任方尚未确定",
+    "死者是否被勒死仅为初步信息，尚未证实",
+    "事件目前为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得阿贝歇一名年轻男子被发现死亡",
+   "summary_zh": "2026年10月12日晚，乍得东部城市阿贝歇（Abéché）第四区Kamayine一带发现一名约二十岁年轻男子死亡。据初步信息，死者可能系被勒死，安全部队到场后将遗体送往阿贝歇大学医院中心。目前死亡的具体情况、死因及可能的责任方尚未正式确定，仍有待当局进一步说明。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "Ouaddaï",
+    "city": "Abéché",
+    "site": "Kamayine街区（第四区）",
+    "raw_text": "secteur de Kamayine, situé dans le 4ᵉ arrondissement de la ville d'Abéché"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年10月12日晚，乍得阿贝歇一名约二十岁年轻男子被发现死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un drame aux circonstances encore floues s’est produit dans la soirée du lundi 12 octobre 2026 à Abéché. Un jeune homme, âgé d’une vingtaine d’années, a été retrouvé mort aux environs de 21 heures dans le secteur de Kamayine, situé dans le 4ᵉ arrondissement de la ville."
+    },
+    {
+     "fact": "据初步信息，死者可能系被勒死",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon les premières informations recueillies, la victime aurait été retrouvée étranglée."
+    },
+    {
+     "fact": "安全部队到场后将遗体送往阿贝歇大学医院中心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les forces de défense et de sécurité, intervenues sur les lieux, ont ensuite transporté le corps au Centre hospitalier universitaire d’Abéché."
+    },
+    {
+     "fact": "死亡的具体情况、死因及可能的责任方尚未正式确定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pour l’heure, les circonstances exactes de ce décès restent inconnues. Les causes de la mort et les éventuelles responsabilités n’ont pas encore été officiellement établies."
+    }
+   ],
+   "uncertainties": [
+    "死亡的具体情况仍不明确",
+    "死因尚未正式确定",
+    "可能的责任方尚未确定",
+    "死者是否被勒死仅为初步信息，尚未证实",
+    "事件目前为单一来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_a9964209cf898f27",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
