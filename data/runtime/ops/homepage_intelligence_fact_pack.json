@@ -1,17 +1,17 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-14T06:08:10+08:00",
+ "generated_at": "2026-10-14T07:57:17+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 24,
-  "signals_7d": 261,
-  "verified_events_24h": 23,
-  "verified_events_7d": 292,
+  "signals_24h": 27,
+  "signals_7d": 263,
+  "verified_events_24h": 29,
+  "verified_events_7d": 297,
   "multi_source_verified_events_7d": 10,
-  "countries_with_activity_24h": 11,
+  "countries_with_activity_24h": 12,
   "total_countries_monitored": 22
  },
  "countries_24h": [
@@ -19,6 +19,7 @@
   "刚果（金）",
   "加纳",
   "南苏丹",
+  "南非",
   "埃塞俄比亚",
   "尼日利亚",
   "尼日尔",
@@ -59,11 +60,11 @@
  "country_distribution_7d": [
   {
    "value": "尼日利亚",
-   "count": 57
+   "count": 58
   },
   {
    "value": "乍得",
-   "count": 45
+   "count": 47
   },
   {
    "value": "加纳",
@@ -86,11 +87,11 @@
    "count": 11
   },
   {
-   "value": "贝宁",
-   "count": 10
+   "value": "莫桑比克",
+   "count": 9
   },
   {
-   "value": "莫桑比克",
+   "value": "贝宁",
    "count": 9
   },
   {
@@ -109,11 +110,15 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 20
+   "count": 21
   },
   {
    "value": "民众骚乱",
-   "count": 2
+   "count": 3
+  },
+  {
+   "value": "武装冲突",
+   "count": 1
   },
   {
    "value": "军事行动",
@@ -127,33 +132,18 @@
  "source_tier_distribution_7d": [
   {
    "value": "C",
-   "count": 230
+   "count": 234
   },
   {
    "value": "B",
-   "count": 214
+   "count": 216
   },
   {
    "value": "A",
-   "count": 109
+   "count": 110
   }
  ],
  "top_verified_events": [
-  {
-   "fact_id": "EVT_1ebd537ab332070e",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "贝宁",
-   "title": "贝宁媒体评论文章：博希孔被指存在买卖儿童与性侵犯罪行",
-   "category": "other_security",
-   "source": "Fraternite (官方日报)",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-06 23:05",
-   "importance": "high",
-   "severity": "medium"
-  },
   {
    "fact_id": "EVT_d83e8b3f7549a20d",
    "level": "verified_event",
@@ -228,9 +218,69 @@
    "time": "2026-10-07 09:10",
    "importance": "high",
    "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_5ebb0c4acb1cdf2f",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "尼日利亚疾控中心因肯尼亚输入性本迪布焦病毒病例提高警惕",
+   "category": "other_security",
+   "source": "News Agency of Nigeria",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-07 08:35",
+   "importance": "high",
+   "severity": "medium"
   }
  ],
  "top_signals": [
+  {
+   "fact_id": "news:0980f5a479298967",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Tchad : à Danamadji, les femmes mobilisées pour l’éducation des filles et la protection des enfants",
+   "category": "civil_unrest",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-14 06:51",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:2228b79eb4dae54b",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Kanem Est : Un opérateur économique félicité pour son soutien à la Gendarmerie",
+   "category": "armed_conflict",
+   "source": "Toumaï Web Médias",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-14 04:11",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:673c01ce37c39878",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "Nigeria seeks action against terrorists’ use of AI, drones",
+   "category": "other_security",
+   "source": "News Agency of Nigeria",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-14 03:49",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   {
    "fact_id": "news:d2fe1752bcf68f0e",
    "level": "news_signal",
@@ -545,51 +595,6 @@
    "time": "2026-10-13 12:57",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:cd3a5763bfb6f2ae",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "埃塞俄比亚联邦军队继续反攻，未遇抵抗进入提格雷两座城市",
-   "category": "military_operation",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-13 12:41",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:d2e55cd8fe60c0d5",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "马里",
-   "title": "马里：一名年轻男子在库雷马莱死亡后，示威者谴责警方“滥杀”",
-   "category": "border_security",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-13 12:24",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:e6f44d50bf37ca2d",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "摩洛哥",
-   "title": "西班牙国王在移民危机后对休达进行高度紧张访问",
-   "category": "other_security",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-13 11:12",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -667,17 +672,56 @@
   }
  ],
  "existing_assessment": {
-  "status": "ai",
-  "overall_assessment": "已核实事件方面，尼日利亚安全形势最为突出：军机坠毁致25人遇难、联邦首都区工人无限期罢工致学校医院关闭、伊莫州20名被绑准服役人员获释、疾控中心因肯尼亚输入性本迪布焦病毒病例提高警惕。刚果（金）北基伍省埃博拉疫情被无国界医生警告“失控”，肯尼亚首例埃博拉死亡病例引发多国（南苏丹、乌干达、尼日利亚）提升警戒。埃塞俄比亚提格雷地区据报出现厄立特里亚军队部署与无人机袭击。南苏丹上尼罗河冲突致13名反对派武装人员死亡，马沙尔称其审判具政治性质。乍得、尼日尔、贝宁、几内亚比绍均有司法、选举与治理类事件。情报信号均为单源消息，尚待核实：加纳遣返120名尼日利亚人、尼日利亚国家安全顾问要求严控石油盗窃、FCT部长称罢工系政治敲诈、莫桑比克尼亚萨省三名被绑工人获释、南苏丹伦拜克族群冲突后UNMISS加强平民保护。整体风险方向趋于恶化。",
-  "risk_direction": "worsening",
-  "confidence": "medium",
-  "generated_time": "2026-10-14T06:07:58+08:00",
-  "based_on": "过去24小时/7日公开信息",
-  "model": "",
-  "date": "20261014"
+  "status": "deterministic",
+  "based_on": "过去24小时/7日公开信息（确定性汇总）"
  },
- "fact_count": 553,
+ "fact_count": 560,
  "facts": {
+  "news:0980f5a479298967": {
+   "fact_id": "news:0980f5a479298967",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Tchad : à Danamadji, les femmes mobilisées pour l’éducation des filles et la protection des enfants",
+   "category": "civil_unrest",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-14 06:51",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:2228b79eb4dae54b": {
+   "fact_id": "news:2228b79eb4dae54b",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Kanem Est : Un opérateur économique félicité pour son soutien à la Gendarmerie",
+   "category": "armed_conflict",
+   "source": "Toumaï Web Médias",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-14 04:11",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:673c01ce37c39878": {
+   "fact_id": "news:673c01ce37c39878",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "Nigeria seeks action against terrorists’ use of AI, drones",
+   "category": "other_security",
+   "source": "News Agency of Nigeria",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-14 03:49",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:d2fe1752bcf68f0e": {
    "fact_id": "news:d2fe1752bcf68f0e",
    "level": "news_signal",
@@ -4577,36 +4621,6 @@
    "time": "2026-10-07 08:00",
    "importance": "low",
    "why_it_matters": ""
-  },
-  "news:8f581fe9f4060626": {
-   "fact_id": "news:8f581fe9f4060626",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "贝宁",
-   "title": "贝宁媒体评论文章：博希孔被指存在买卖儿童与性侵犯罪行",
-   "category": "other_security",
-   "source": "Fraternite (官方日报)",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-07 07:05",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "EVT_1ebd537ab332070e": {
-   "fact_id": "EVT_1ebd537ab332070e",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "贝宁",
-   "title": "贝宁媒体评论文章：博希孔被指存在买卖儿童与性侵犯罪行",
-   "category": "other_security",
-   "source": "Fraternite (官方日报)",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-06 23:05",
-   "importance": "high",
-   "severity": "medium"
   },
   "EVT_d83e8b3f7549a20d": {
    "fact_id": "EVT_d83e8b3f7549a20d",
@@ -8970,6 +8984,96 @@
    "source_tier": "B",
    "source_role": "regional",
    "time": "2026-10-13 19:42",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_80de05214357bff9": {
+   "fact_id": "EVT_80de05214357bff9",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "刚果（金）",
+   "title": "刚果（金）：卡比拉重返政治博弈，武装路线能否助其脱困？",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-13 19:53",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_992c9ca8aa02ff31": {
+   "fact_id": "EVT_992c9ca8aa02ff31",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "马哈马为85张床位的警察医院病房揭幕并捐赠两辆救护车",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-13 20:01",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_02b3cd36a9af9bfd": {
+   "fact_id": "EVT_02b3cd36a9af9bfd",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "尼日利亚呼吁采取行动应对恐怖分子使用AI和无人机",
+   "category": "other_security",
+   "source": "News Agency of Nigeria",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-13 19:49",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_82342d6ed28a0869": {
+   "fact_id": "EVT_82342d6ed28a0869",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "乍得卡内姆东省：一名经济经营者因支持宪兵队获表彰",
+   "category": "armed_conflict",
+   "source": "Toumaï Web Médias",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-13 20:11",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_d1e7c67faf7071fc": {
+   "fact_id": "EVT_d1e7c67faf7071fc",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "乍得Danamadji妇女动员推动女童教育与儿童保护",
+   "category": "civil_unrest",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-13 22:51",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_43a90ce2e2d391ae": {
+   "fact_id": "EVT_43a90ce2e2d391ae",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "南非",
+   "title": "环保人士在开普敦非洲能源周会场外抗议",
+   "category": "protest",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-13 00:00",
    "importance": "high",
    "severity": "medium"
   }

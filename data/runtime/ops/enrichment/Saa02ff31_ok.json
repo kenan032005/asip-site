@@ -1,0 +1,114 @@
+{
+ "label": "Saa02ff31",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f3b5ee30ceb9e5333fff1cce9da709f4bd8d276ce8a98c555f138d96ee707431",
+ "tokens": {
+  "input_tokens": 2176,
+  "output_tokens": 319,
+  "total_tokens": 2495
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"该事件目前仅有一个来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"该事件目前仅有一个来源报道，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "马哈马为85张床位的警察医院病房揭幕并捐赠两辆救护车",
+   "summary_zh": "加纳总统约翰·德拉马尼·马哈马为警察医院一座85张床位的病房揭幕，并捐赠两辆救护车。他赞扬加纳警察局在公共安全和犯罪调查方面的改善，同时敦促该局继续努力保护生命和财产。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": "警察医院",
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "马哈马为警察医院85张床位的病房揭幕并捐赠两辆救护车",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Photos: Mahama commissions 85-bed Police Hospital ward, donates two ambulances"
+    },
+    {
+     "fact": "马哈马赞扬加纳警察局在公共安全和犯罪调查方面的改善",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "President John Dramani Mahama has commended the Ghana Police Service for improvements in public safety and crime investigations"
+    },
+    {
+     "fact": "马哈马敦促警察局继续努力保护生命和财产",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "while urging the Service to sustain efforts to protect lives and property"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "马哈马为85张床位的警察医院病房揭幕并捐赠两辆救护车",
+   "summary_zh": "加纳总统约翰·德拉马尼·马哈马为警察医院一座85张床位的病房揭幕，并捐赠两辆救护车。他赞扬加纳警察局在公共安全和犯罪调查方面的改善，同时敦促该局继续努力保护生命和财产。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": "警察医院",
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "马哈马为警察医院85张床位的病房揭幕并捐赠两辆救护车",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Photos: Mahama commissions 85-bed Police Hospital ward, donates two ambulances"
+    },
+    {
+     "fact": "马哈马赞扬加纳警察局在公共安全和犯罪调查方面的改善",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "President John Dramani Mahama has commended the Ghana Police Service for improvements in public safety and crime investigations"
+    },
+    {
+     "fact": "马哈马敦促警察局继续努力保护生命和财产",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "while urging the Service to sustain efforts to protect lives and property"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_992c9ca8aa02ff31",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

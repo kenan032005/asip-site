@@ -1,0 +1,150 @@
+{
+ "label": "S4357bff9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6642fceb6a930b8b1f28abfe5600b0a46ca3a7cd455b95192c2d4cc4120510a3",
+ "tokens": {
+  "input_tokens": 2868,
+  "output_tokens": 726,
+  "total_tokens": 3594
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"卡比拉对军事指挥部的实际权威范围尚不明确\", \"M23的最终地位以及卡比拉2025年发起的政治平台“拯救刚果（金）”的走向尚未说明\", \"FRN内部此前的分歧是否已解决，目前尚无信息证实\", \"卡比拉与金沙萨支持者的内部沟通状况依据其亲信说法，尚未获独立证实\"]",
+    "after": "[\"卡比拉对军事指挥部的实际权威范围尚不明确\", \"M23的最终地位以及卡比拉2025年发起的政治平台“拯救刚果（金）”的走向尚未说明\", \"FRN内部此前的分歧是否已解决，目前尚无信息证实\", \"卡比拉与金沙萨支持者的内部沟通状况依据其亲信说法，尚未获独立证实\", \"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"卡比拉对军事指挥部的实际权威范围尚不明确\", \"M23的最终地位以及卡比拉2025年发起的政治平台“拯救刚果（金）”的走向尚未说明\", \"FRN内部此前的分歧是否已解决，目前尚无信息证实\", \"卡比拉与金沙萨支持者的内部沟通状况依据其亲信说法，尚未获独立证实\", \"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "after": "[\"卡比拉对军事指挥部的实际权威范围尚不明确\", \"M23的最终地位以及卡比拉2025年发起的政治平台“拯救刚果（金）”的走向尚未说明\", \"FRN内部此前的分歧是否已解决，目前尚无信息证实\", \"卡比拉与金沙萨支持者的内部沟通状况依据其亲信说法，尚未获独立证实\", \"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）：卡比拉重返政治博弈，武装路线能否助其脱困？",
+   "summary_zh": "2026年10月12日，刚果（金）前总统约瑟夫·卡比拉在戈马被任命为政治军事组织“国家重建阵线”（FRN）领导人，该组织宣布取代“刚果河联盟”（AFC）。卡比拉由此重新回到反对现政权的核心位置，但其武装路线已导致部分支持者疏远，且其死刑判决与美国制裁仍未解除。联合国专家报告曾指出卡比拉与南加等人有意夺取金沙萨政权，而多数M23领导人反对在北基伍和南基伍以外开展行动。",
+   "event_type": "political_instability",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "北基伍省",
+    "city": "戈马",
+    "site": null,
+    "raw_text": "À Goma, l’ancien président a été désigné à la tête du Front pour la refondation de la nation"
+   },
+   "key_facts": [
+    {
+     "fact": "卡比拉在戈马被任命为FRN领导人，该组织宣布取代AFC",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À Goma, l’ancien président a été désigné à la tête du Front pour la refondation de la nation, le FRN, une organisation politico-militaire qui annonce remplacer l’Alliance fleuve Congo."
+    },
+    {
+     "fact": "卡比拉的死刑判决与美国制裁并未因FRN成立而解除",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La création du FRN ne lève ni sa condamnation à mort ni les sanctions américaines."
+    },
+    {
+     "fact": "联合国专家报告称卡比拉与南加有意夺取金沙萨政权，多数M23领导人反对在北基伍和南基伍以外行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les experts de l’ONU indiquaient que Kabila et Nangaa ambitionnaient de prendre le pouvoir à Kinshasa, tandis que la plupart des dirigeants du M23 s’opposaient à des opérations au-delà du Nord-Kivu et du Sud-Kivu."
+    },
+    {
+     "fact": "前人权部长穆肖贝夸等部分卡比拉支持者拒绝武装路线，与其保持距离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Marie-Ange Mushobekwa l’a exprimé clairement. L’ancienne ministre des Droits humains remercie Kabila pour les années passées à ses côtés, mais prend ses distances avec la voie armée."
+    },
+    {
+     "fact": "FRN宣布将以包括武力在内的一切手段打击其所称的暴政",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le FRN annonce vouloir combattre ce qu’il qualifie de tyrannie, « par tous les moyens y compris la force »."
+    }
+   ],
+   "uncertainties": [
+    "卡比拉对军事指挥部的实际权威范围尚不明确",
+    "M23的最终地位以及卡比拉2025年发起的政治平台“拯救刚果（金）”的走向尚未说明",
+    "FRN内部此前的分歧是否已解决，目前尚无信息证实",
+    "卡比拉与金沙萨支持者的内部沟通状况依据其亲信说法，尚未获独立证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）：卡比拉重返政治博弈，武装路线能否助其脱困？",
+   "summary_zh": "2026年10月12日，刚果（金）前总统约瑟夫·卡比拉在戈马被任命为政治军事组织“国家重建阵线”（FRN）领导人，该组织宣布取代“刚果河联盟”（AFC）。卡比拉由此重新回到反对现政权的核心位置，但其武装路线已导致部分支持者疏远，且其死刑判决与美国制裁仍未解除。联合国专家报告曾指出卡比拉与南加等人有意夺取金沙萨政权，而多数M23领导人反对在北基伍和南基伍以外开展行动。",
+   "event_type": "political_instability",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "北基伍省",
+    "city": "戈马",
+    "site": null,
+    "raw_text": "À Goma, l’ancien président a été désigné à la tête du Front pour la refondation de la nation"
+   },
+   "key_facts": [
+    {
+     "fact": "卡比拉在戈马被任命为FRN领导人，该组织宣布取代AFC",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À Goma, l’ancien président a été désigné à la tête du Front pour la refondation de la nation, le FRN, une organisation politico-militaire qui annonce remplacer l’Alliance fleuve Congo."
+    },
+    {
+     "fact": "卡比拉的死刑判决与美国制裁并未因FRN成立而解除",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La création du FRN ne lève ni sa condamnation à mort ni les sanctions américaines."
+    },
+    {
+     "fact": "联合国专家报告称卡比拉与南加有意夺取金沙萨政权，多数M23领导人反对在北基伍和南基伍以外行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les experts de l’ONU indiquaient que Kabila et Nangaa ambitionnaient de prendre le pouvoir à Kinshasa, tandis que la plupart des dirigeants du M23 s’opposaient à des opérations au-delà du Nord-Kivu et du Sud-Kivu."
+    },
+    {
+     "fact": "前人权部长穆肖贝夸等部分卡比拉支持者拒绝武装路线，与其保持距离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Marie-Ange Mushobekwa l’a exprimé clairement. L’ancienne ministre des Droits humains remercie Kabila pour les années passées à ses côtés, mais prend ses distances avec la voie armée."
+    },
+    {
+     "fact": "FRN宣布将以包括武力在内的一切手段打击其所称的暴政",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le FRN annonce vouloir combattre ce qu’il qualifie de tyrannie, « par tous les moyens y compris la force »."
+    }
+   ],
+   "uncertainties": [
+    "卡比拉对军事指挥部的实际权威范围尚不明确",
+    "M23的最终地位以及卡比拉2025年发起的政治平台“拯救刚果（金）”的走向尚未说明",
+    "FRN内部此前的分歧是否已解决，目前尚无信息证实",
+    "卡比拉与金沙萨支持者的内部沟通状况依据其亲信说法，尚未获独立证实",
+    "据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_80de05214357bff9",
+ "disease_event_id": null,
+ "country_code": "CD"
+}
