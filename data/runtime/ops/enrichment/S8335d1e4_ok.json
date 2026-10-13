@@ -1,0 +1,127 @@
+{
+ "label": "S8335d1e4",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "95b98676a5613e7753ee31b7e548950c2c14f53a3d1f16647414c331d95ef080",
+ "tokens": {
+  "input_tokens": 2461,
+  "output_tokens": 598,
+  "total_tokens": 3059
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚FCT部长称NLC与NUT无限期罢工系政治动机的敲诈",
+   "summary_zh": "尼日利亚联邦首都区（FCT）部长尼耶索姆·维克在阿布贾媒体交流会上称，尼日利亚劳工大会（NLC）与尼日利亚教师联盟（NUT）发起的无限期罢工是出于政治动机的敲诈，意在使政府瘫痪。维克指控NLC主席具有党派动机，并否认FCT政府拖欠教师款项，同时威胁对工会领导人采取法律行动。NLC FCT理事会于10月7日因与NUT及FCTA之间未解决的问题宣布无限期罢工。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Federal Capital Territory",
+    "city": "Abuja",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "FCT部长维克称NLC与NUT的无限期罢工是出于政治动机的敲诈",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Minister of the Federal Capital Territory (FCT), Mr Nyesom Wike, has described the strike declared by the Nigeria Labour Congress (NLC) and the Nigeria Union of Teachers (NUT) as a politically motivated blackmail aimed at paralysing the government."
+    },
+    {
+     "fact": "维克在阿布贾媒体交流会上指控NLC主席具有党派动机",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Speaking during a media chat in Abuja on Tuesday, Wike claimed that the ongoing labour dispute... was being driven by opposition political interests rather than genuine worker grievances."
+    },
+    {
+     "fact": "维克否认FCT政府拖欠教师款项并称已履行财政义务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Addressing accusations that the FCT Administration owes teachers unpaid entitlements and promotion arrears, Wike insisted that his administration has met its financial obligations"
+    },
+    {
+     "fact": "维克威胁对工会领导人采取法律行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He threatened to take legal action against the labour union leaders to curb their actions, adding that FCTA’s legal advisers were currently finalising the suit."
+    },
+    {
+     "fact": "NLC FCT理事会于10月7日宣布无限期罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the NLC, FCT Council had on Oct. 7 declared an indefinite strike over unresolved issues between the FCTA and the NUT."
+    }
+   ],
+   "uncertainties": [
+    "维克关于罢工出于政治动机的指控尚未得到独立证实",
+    "维克关于FCT政府不拖欠教师款项的说法与工会指控存在冲突",
+    "目前仅有一个来源（尼日利亚通讯社）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚FCT部长称NLC与NUT无限期罢工系政治动机的敲诈",
+   "summary_zh": "尼日利亚联邦首都区（FCT）部长尼耶索姆·维克在阿布贾媒体交流会上称，尼日利亚劳工大会（NLC）与尼日利亚教师联盟（NUT）发起的无限期罢工是出于政治动机的敲诈，意在使政府瘫痪。维克指控NLC主席具有党派动机，并否认FCT政府拖欠教师款项，同时威胁对工会领导人采取法律行动。NLC FCT理事会于10月7日因与NUT及FCTA之间未解决的问题宣布无限期罢工。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Federal Capital Territory",
+    "city": "Abuja",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "FCT部长维克称NLC与NUT的无限期罢工是出于政治动机的敲诈",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Minister of the Federal Capital Territory (FCT), Mr Nyesom Wike, has described the strike declared by the Nigeria Labour Congress (NLC) and the Nigeria Union of Teachers (NUT) as a politically motivated blackmail aimed at paralysing the government."
+    },
+    {
+     "fact": "维克在阿布贾媒体交流会上指控NLC主席具有党派动机",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Speaking during a media chat in Abuja on Tuesday, Wike claimed that the ongoing labour dispute... was being driven by opposition political interests rather than genuine worker grievances."
+    },
+    {
+     "fact": "维克否认FCT政府拖欠教师款项并称已履行财政义务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Addressing accusations that the FCT Administration owes teachers unpaid entitlements and promotion arrears, Wike insisted that his administration has met its financial obligations"
+    },
+    {
+     "fact": "维克威胁对工会领导人采取法律行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He threatened to take legal action against the labour union leaders to curb their actions, adding that FCTA’s legal advisers were currently finalising the suit."
+    },
+    {
+     "fact": "NLC FCT理事会于10月7日宣布无限期罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the NLC, FCT Council had on Oct. 7 declared an indefinite strike over unresolved issues between the FCTA and the NUT."
+    }
+   ],
+   "uncertainties": [
+    "维克关于罢工出于政治动机的指控尚未得到独立证实",
+    "维克关于FCT政府不拖欠教师款项的说法与工会指控存在冲突",
+    "目前仅有一个来源（尼日利亚通讯社）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_1caf8a0e8335d1e4",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

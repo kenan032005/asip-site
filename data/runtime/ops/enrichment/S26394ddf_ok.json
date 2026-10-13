@@ -1,0 +1,121 @@
+{
+ "label": "S26394ddf",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "389c87f574e6960624836224efb8acc96cc7b829ac3f190c992ca0b9bbf9e51f",
+ "tokens": {
+  "input_tokens": 2312,
+  "output_tokens": 573,
+  "total_tokens": 2885
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克尼亚萨省三名被绑工人获释，其余七名失踪者家属不满",
+   "summary_zh": "据Zitamar报道，莫桑比克野生动物探险公司（MWA）三名员工在尼亚萨省一处狩猎营地被绑架后，于10月4日在一笔约5.3万美元（340万梅蒂卡尔）付款后获释，由一架南非注册直升机及私人武装团队接走。同一袭击中被绑的另外七人命运不明，其家属在MWA驻地聚集表达不满。尼亚萨省国务秘书称当局正努力解救其余人员，并呼吁家属不要示威。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "尼亚萨省",
+    "city": null,
+    "site": "蒙特普埃兹区交接点",
+    "raw_text": "a handover point in Montepuez district"
+   },
+   "key_facts": [
+    {
+     "fact": "三名MWA员工在支付约5.3万美元后于10月4日获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The three Mozambique Wildlife Adventures (MWA) employees were released on 4 October after a payment of about $53,000 (MZN3.4m), sources told Zitamar."
+    },
+    {
+     "fact": "获释人员在蒙特普埃兹区一处交接点过夜，次日由南非注册直升机及私人武装团队接走",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "They spent the night at a handover point in Montepuez district, its coordinates supplied by the insurgents, before a South-African-registered helicopter and an armed private team collected them the next morning."
+    },
+    {
+     "fact": "同一袭击中被绑的另外七人命运不明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the families of seven others seized in the same attack have no clear account of their fate"
+    },
+    {
+     "fact": "尼亚萨省国务秘书称当局正努力解救其余人员并呼吁家属不要示威",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Niassa’s secretary of state, Silva Livone, says the authorities are working to free the children and has asked the families not to demonstrate."
+    }
+   ],
+   "uncertainties": [
+    "获释细节（付款金额及安排）来自消息人士，尚未获官方证实",
+    "其余七名被绑人员是否可能以相同条件获释尚不清楚",
+    "公司对被绑人员关押地点了解程度不明",
+    "家属认为国家解救了工人却留下其子女，与消息人士所述纯属私人安排、政府未参与的说法存在冲突",
+    "目前为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克尼亚萨省三名被绑工人获释，其余七名失踪者家属不满",
+   "summary_zh": "据Zitamar报道，莫桑比克野生动物探险公司（MWA）三名员工在尼亚萨省一处狩猎营地被绑架后，于10月4日在一笔约5.3万美元（340万梅蒂卡尔）付款后获释，由一架南非注册直升机及私人武装团队接走。同一袭击中被绑的另外七人命运不明，其家属在MWA驻地聚集表达不满。尼亚萨省国务秘书称当局正努力解救其余人员，并呼吁家属不要示威。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "尼亚萨省",
+    "city": null,
+    "site": "蒙特普埃兹区交接点",
+    "raw_text": "a handover point in Montepuez district"
+   },
+   "key_facts": [
+    {
+     "fact": "三名MWA员工在支付约5.3万美元后于10月4日获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The three Mozambique Wildlife Adventures (MWA) employees were released on 4 October after a payment of about $53,000 (MZN3.4m), sources told Zitamar."
+    },
+    {
+     "fact": "获释人员在蒙特普埃兹区一处交接点过夜，次日由南非注册直升机及私人武装团队接走",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "They spent the night at a handover point in Montepuez district, its coordinates supplied by the insurgents, before a South-African-registered helicopter and an armed private team collected them the next morning."
+    },
+    {
+     "fact": "同一袭击中被绑的另外七人命运不明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the families of seven others seized in the same attack have no clear account of their fate"
+    },
+    {
+     "fact": "尼亚萨省国务秘书称当局正努力解救其余人员并呼吁家属不要示威",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Niassa’s secretary of state, Silva Livone, says the authorities are working to free the children and has asked the families not to demonstrate."
+    }
+   ],
+   "uncertainties": [
+    "获释细节（付款金额及安排）来自消息人士，尚未获官方证实",
+    "其余七名被绑人员是否可能以相同条件获释尚不清楚",
+    "公司对被绑人员关押地点了解程度不明",
+    "家属认为国家解救了工人却留下其子女，与消息人士所述纯属私人安排、政府未参与的说法存在冲突",
+    "目前为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_441a6bb826394ddf",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

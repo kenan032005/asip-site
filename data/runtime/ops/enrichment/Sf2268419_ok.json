@@ -1,0 +1,115 @@
+{
+ "label": "Sf2268419",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "9a2398e60ca0bca2f94f7ee7acd901af2e63d021f517c1f56a142a3cafb2821e",
+ "tokens": {
+  "input_tokens": 2255,
+  "output_tokens": 504,
+  "total_tokens": 2759
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔商业部在紧缩背景下筹备2027年预算",
+   "summary_zh": "尼日尔商业与工业部长阿卜杜拉耶·塞杜于10月13日在尼亚美召开第九次部务会议，着手为2027年预算制定财务框架。会议旨在重构公共支出，将工业转型、预算纪律和提升本国商业价值列为国家新战略核心。报道称该预算工作意在巩固国家经济主权。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "商业与工业部",
+    "raw_text": "NIAMEY"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔商业与工业部长阿卜杜拉耶·塞杜召开部务会议筹备2027年预算",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce mardi, le ministre du Commerce et de l’Industrie, Abdoulaye Seydou, a réuni l’état-major de son département afin de poser les jalons financiers du budget 2027"
+    },
+    {
+     "fact": "会议为第九次部务会议，汇集秘书长、技术顾问及各部门中央主管",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette neuvième réunion de cabinet, qui a rassemblé les secrétaires généraux, les conseillers techniques et l’ensemble des directeurs centraux du ministère"
+    },
+    {
+     "fact": "会议目标为重构公共支出，将每笔资金导向能产生实际效益的项目",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’objectif affiché par la hiérarchie ministérielle consiste ainsi à canaliser chaque franc CFA vers des projets capables d’engendrer des retombées concrètes pour le tissu productif local"
+    },
+    {
+     "fact": "报道称工业转型、预算纪律和提升本国商业价值成为国家新战略核心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Reconversion industrielle, discipline budgétaire accrue et valorisation du commerce national figurent désormais au cœur de la nouvelle stratégie d’État"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源（Journal du Niger），尚缺乏其他来源交叉验证",
+    "预算具体内容与最终方案尚未公布"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔商业部在紧缩背景下筹备2027年预算",
+   "summary_zh": "尼日尔商业与工业部长阿卜杜拉耶·塞杜于10月13日在尼亚美召开第九次部务会议，着手为2027年预算制定财务框架。会议旨在重构公共支出，将工业转型、预算纪律和提升本国商业价值列为国家新战略核心。报道称该预算工作意在巩固国家经济主权。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "商业与工业部",
+    "raw_text": "NIAMEY"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔商业与工业部长阿卜杜拉耶·塞杜召开部务会议筹备2027年预算",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce mardi, le ministre du Commerce et de l’Industrie, Abdoulaye Seydou, a réuni l’état-major de son département afin de poser les jalons financiers du budget 2027"
+    },
+    {
+     "fact": "会议为第九次部务会议，汇集秘书长、技术顾问及各部门中央主管",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette neuvième réunion de cabinet, qui a rassemblé les secrétaires généraux, les conseillers techniques et l’ensemble des directeurs centraux du ministère"
+    },
+    {
+     "fact": "会议目标为重构公共支出，将每笔资金导向能产生实际效益的项目",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’objectif affiché par la hiérarchie ministérielle consiste ainsi à canaliser chaque franc CFA vers des projets capables d’engendrer des retombées concrètes pour le tissu productif local"
+    },
+    {
+     "fact": "报道称工业转型、预算纪律和提升本国商业价值成为国家新战略核心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Reconversion industrielle, discipline budgétaire accrue et valorisation du commerce national figurent désormais au cœur de la nouvelle stratégie d’État"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源（Journal du Niger），尚缺乏其他来源交叉验证",
+    "预算具体内容与最终方案尚未公布"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_6f361336f2268419",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

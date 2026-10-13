@@ -1,0 +1,136 @@
+{
+ "label": "S84bf0b26",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ffa00e13a5afb3fc633c713ecc89008de0ad6e9ab8b5ca5928e0a6feb91602f0",
+ "tokens": {
+  "input_tokens": 2415,
+  "output_tokens": 616,
+  "total_tokens": 3031
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"石油产量恢复及执法成果数据为尼日利亚国家石油公司首席执行官单方面披露，尚未获得独立核实\", \"标准作业程序的实际执行效果有待观察\"]",
+    "after": "[\"石油产量恢复及执法成果数据为尼日利亚国家石油公司首席执行官单方面披露，尚未获得独立核实\", \"标准作业程序的实际执行效果有待观察\", \"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚国家安全顾问要求安全机构与承包商严格执行石油盗窃防控标准作业程序",
+   "summary_zh": "尼日利亚国家安全顾问努胡·里巴杜在阿布贾举行的《标准作业程序》签署启动仪式上，要求安全机构、石油行业运营商和监控承包商严格执行新框架，以加强保护该国石油和天然气资产。里巴杜将原油盗窃、管道破坏和非法炼油列为国家安全、环境保护和经济复苏的主要威胁。尼日利亚国家石油公司首席执行官奥朱拉里表示，石油日产量已从2022年8月的约95万桶恢复至超过170万桶，并称已取缔逾1万个非法炼油点、逮捕3700多名嫌疑人。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚国家安全顾问里巴杜要求安全机构、石油运营商和监控承包商严格执行新标准作业程序",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The National Security Adviser (NSA), Malam Nuhu Ribadu, has tasked security agencies, oil industry operators and surveillance contractors on strict implementation of a new framework to strengthen the protection of Nigeria’s oil and gas assets."
+    },
+    {
+     "fact": "里巴杜将原油盗窃、管道破坏和非法炼油列为国家安全、环境保护和经济复苏的主要威胁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ribadu identified crude oil theft, pipeline vandalism and illegal refining as major threats to national security, environmental protection and economic recovery."
+    },
+    {
+     "fact": "尼日利亚石油日产量据称从2022年8月的约95万桶恢复至超过170万桶",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria’s oil production had recovered from approximately 950,000 barrels per day in August 2022 to more than 1.7 million barrels per day."
+    },
+    {
+     "fact": "据称已取缔逾1万个非法炼油点、清除近7000个非法连接、追回超过240万桶被盗原油并逮捕3700多名嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "more than 10,000 illegal refining sites had been deactivated, nearly 7,000 illegal connections removed, over 2.4 million barrels of stolen crude recovered and more than 3,700 suspects apprehended"
+    },
+    {
+     "fact": "标准作业程序签署启动仪式在阿布贾举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "at the signing and launch of the Standard Operating Procedure (SOP) ... in Abuja"
+    }
+   ],
+   "uncertainties": [
+    "石油产量恢复及执法成果数据为尼日利亚国家石油公司首席执行官单方面披露，尚未获得独立核实",
+    "标准作业程序的实际执行效果有待观察"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚国家安全顾问要求安全机构与承包商严格执行石油盗窃防控标准作业程序",
+   "summary_zh": "尼日利亚国家安全顾问努胡·里巴杜在阿布贾举行的《标准作业程序》签署启动仪式上，要求安全机构、石油行业运营商和监控承包商严格执行新框架，以加强保护该国石油和天然气资产。里巴杜将原油盗窃、管道破坏和非法炼油列为国家安全、环境保护和经济复苏的主要威胁。尼日利亚国家石油公司首席执行官奥朱拉里表示，石油日产量已从2022年8月的约95万桶恢复至超过170万桶，并称已取缔逾1万个非法炼油点、逮捕3700多名嫌疑人。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚国家安全顾问里巴杜要求安全机构、石油运营商和监控承包商严格执行新标准作业程序",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The National Security Adviser (NSA), Malam Nuhu Ribadu, has tasked security agencies, oil industry operators and surveillance contractors on strict implementation of a new framework to strengthen the protection of Nigeria’s oil and gas assets."
+    },
+    {
+     "fact": "里巴杜将原油盗窃、管道破坏和非法炼油列为国家安全、环境保护和经济复苏的主要威胁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ribadu identified crude oil theft, pipeline vandalism and illegal refining as major threats to national security, environmental protection and economic recovery."
+    },
+    {
+     "fact": "尼日利亚石油日产量据称从2022年8月的约95万桶恢复至超过170万桶",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria’s oil production had recovered from approximately 950,000 barrels per day in August 2022 to more than 1.7 million barrels per day."
+    },
+    {
+     "fact": "据称已取缔逾1万个非法炼油点、清除近7000个非法连接、追回超过240万桶被盗原油并逮捕3700多名嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "more than 10,000 illegal refining sites had been deactivated, nearly 7,000 illegal connections removed, over 2.4 million barrels of stolen crude recovered and more than 3,700 suspects apprehended"
+    },
+    {
+     "fact": "标准作业程序签署启动仪式在阿布贾举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "at the signing and launch of the Standard Operating Procedure (SOP) ... in Abuja"
+    }
+   ],
+   "uncertainties": [
+    "石油产量恢复及执法成果数据为尼日利亚国家石油公司首席执行官单方面披露，尚未获得独立核实",
+    "标准作业程序的实际执行效果有待观察",
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_20ec1b5284bf0b26",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
