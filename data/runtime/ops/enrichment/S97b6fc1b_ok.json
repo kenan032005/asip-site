@@ -1,0 +1,138 @@
+{
+ "label": "S97b6fc1b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d72d9c8b7387646643c38a825d822f67c4053e1583b3c3e772874b52a73eca3a",
+ "tokens": {
+  "input_tokens": 2811,
+  "output_tokens": 566,
+  "total_tokens": 3377
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"死亡人数可能已升至十人，该说法尚未获确认\", \"空袭由马里军队实施的说法来自当地居民和社区代表，军方未予确认\", \"目前仅RFI单一来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"死亡人数可能已升至十人，该说法尚未获确认\", \"空袭由马里军队实施的说法来自当地居民和社区代表，军方未予确认\", \"目前仅RFI单一来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "马里塞古地区遭军队空袭，至少八名妇女和儿童丧生",
+   "summary_zh": "据RFI报道，2026年10月12日马里塞古地区富拉族村庄Zanakoro遭空袭，至少八人死亡，主要为妇女和儿童，另有约十人重伤。马里军方未就此次空袭作出回应。有消息称死亡人数其后可能升至十人，相关说法尚未获确认。",
+   "event_type": "armed_conflict",
+   "country_iso3": "MLI",
+   "location": {
+    "country_iso3": "MLI",
+    "admin1": "塞古地区",
+    "city": null,
+    "site": "Zanakoro村",
+    "raw_text": "Zanakoro, un village peul de la région de Ségou"
+   },
+   "key_facts": [
+    {
+     "fact": "马里塞古地区Zanakoro村遭空袭，至少八人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "au moins huit personnes, essentiellement des femmes et des enfants, ont été tuées le lundi 12 octobre 2026 dans des bombardements aériens à Zanakoro, un village peul de la région de Ségou"
+    },
+    {
+     "fact": "死者包括一名孕妇和三名十岁以下女童，另有约十人重伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les frappes ont fait au moins huit morts – des femmes, dont une était enceinte, et trois petites filles de moins de dix ans – ainsi qu'une dizaine de blessées graves"
+    },
+    {
+     "fact": "目击者称两架飞机投下8至9枚炸弹",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "deux avions ont survolé le village et largué successivement 8 ou 9 bombes, selon les témoignages"
+    },
+    {
+     "fact": "马里军方未就此次空袭作出回应",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'armée malienne n'a pas communiqué sur ces frappes et, sollicitée par RFI, n'a pas donné suite"
+    },
+    {
+     "fact": "一名马里安全部门消息人士确认有人丧生，但未提供更多细节",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une source sécuritaire malienne confirme que « des vies ont été fauchées », sans préciser davantage"
+    }
+   ],
+   "uncertainties": [
+    "死亡人数可能已升至十人，该说法尚未获确认",
+    "空袭由马里军队实施的说法来自当地居民和社区代表，军方未予确认",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "马里塞古地区遭军队空袭，至少八名妇女和儿童丧生",
+   "summary_zh": "据RFI报道，2026年10月12日马里塞古地区富拉族村庄Zanakoro遭空袭，至少八人死亡，主要为妇女和儿童，另有约十人重伤。马里军方未就此次空袭作出回应。有消息称死亡人数其后可能升至十人，相关说法尚未获确认。",
+   "event_type": "armed_conflict",
+   "country_iso3": "MLI",
+   "location": {
+    "country_iso3": "MLI",
+    "admin1": "塞古地区",
+    "city": null,
+    "site": "Zanakoro村",
+    "raw_text": "Zanakoro, un village peul de la région de Ségou"
+   },
+   "key_facts": [
+    {
+     "fact": "马里塞古地区Zanakoro村遭空袭，至少八人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "au moins huit personnes, essentiellement des femmes et des enfants, ont été tuées le lundi 12 octobre 2026 dans des bombardements aériens à Zanakoro, un village peul de la région de Ségou"
+    },
+    {
+     "fact": "死者包括一名孕妇和三名十岁以下女童，另有约十人重伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les frappes ont fait au moins huit morts – des femmes, dont une était enceinte, et trois petites filles de moins de dix ans – ainsi qu'une dizaine de blessées graves"
+    },
+    {
+     "fact": "目击者称两架飞机投下8至9枚炸弹",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "deux avions ont survolé le village et largué successivement 8 ou 9 bombes, selon les témoignages"
+    },
+    {
+     "fact": "马里军方未就此次空袭作出回应",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'armée malienne n'a pas communiqué sur ces frappes et, sollicitée par RFI, n'a pas donné suite"
+    },
+    {
+     "fact": "一名马里安全部门消息人士确认有人丧生，但未提供更多细节",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une source sécuritaire malienne confirme que « des vies ont été fauchées », sans préciser davantage"
+    }
+   ],
+   "uncertainties": [
+    "死亡人数可能已升至十人，该说法尚未获确认",
+    "空袭由马里军队实施的说法来自当地居民和社区代表，军方未予确认",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_ee285cee97b6fc1b",
+ "disease_event_id": null,
+ "country_code": "ML"
+}

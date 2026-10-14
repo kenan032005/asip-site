@@ -1,0 +1,126 @@
+{
+ "label": "S27fa5080",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d93a471743c3d591e38529990b4bba95c9ac5adb8b013c3bb95610b34a7b2e33",
+ "tokens": {
+  "input_tokens": 2431,
+  "output_tokens": 510,
+  "total_tokens": 2941
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"Yansunu的具体健康状况仅据Bip Radio报道，尚未获独立确认\", \"目前仅一个来源（Fraternité）报道，尚缺乏交叉验证\"]",
+    "after": "[\"Yansunu的具体健康状况仅据Bip Radio报道，尚未获独立确认\", \"目前仅一个来源（Fraternité）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁律师Yansunu以健康为由申请临时释放",
+   "summary_zh": "贝宁经济犯罪与恐怖主义法庭（CRIET）上诉庭审中，被判处七年监禁的律师Magloire Yansunu的辩护律师以其健康状况恶化为由，申请临时释放以便就医。该律师因“背信与洗钱”于2026年7月13日被判刑，并已提出上诉。法院将于10月26日就此申请作出裁决。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": null,
+    "site": "经济犯罪与恐怖主义法庭（CRIET）上诉庭",
+    "raw_text": "Cour d’appel de la Cour de répression des infractions économiques et du terrorisme (CRIET)"
+   },
+   "key_facts": [
+    {
+     "fact": "律师Magloire Yansunu的辩护律师在CRIET上诉庭申请其临时释放以便就医",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’avocat condamné à sept ans de prison ferme a vu ses conseils demander sa mise en liberté provisoire afin qu’il puisse se soigner"
+    },
+    {
+     "fact": "Yansunu于2026年7月13日因背信与洗钱被CRIET判处七年监禁及约2900万非洲法郎罚款",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "avait été condamné le 13 juillet 2026 par la CRIET pour « abus de confiance et blanchiment de capitaux ». La peine comprend sept ans de prison ferme, une amende d’environ 29 millions de FCFA"
+    },
+    {
+     "fact": "法院将于10月26日就临时释放申请作出裁决",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La cour rendra sa décision sur la demande de mise en liberté provisoire le 26 octobre prochain"
+    },
+    {
+     "fact": "Yansunu已提出上诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Me Yansunu a fait appel"
+    }
+   ],
+   "uncertainties": [
+    "Yansunu的具体健康状况仅据Bip Radio报道，尚未获独立确认",
+    "目前仅一个来源（Fraternité）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁律师Yansunu以健康为由申请临时释放",
+   "summary_zh": "贝宁经济犯罪与恐怖主义法庭（CRIET）上诉庭审中，被判处七年监禁的律师Magloire Yansunu的辩护律师以其健康状况恶化为由，申请临时释放以便就医。该律师因“背信与洗钱”于2026年7月13日被判刑，并已提出上诉。法院将于10月26日就此申请作出裁决。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": null,
+    "site": "经济犯罪与恐怖主义法庭（CRIET）上诉庭",
+    "raw_text": "Cour d’appel de la Cour de répression des infractions économiques et du terrorisme (CRIET)"
+   },
+   "key_facts": [
+    {
+     "fact": "律师Magloire Yansunu的辩护律师在CRIET上诉庭申请其临时释放以便就医",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’avocat condamné à sept ans de prison ferme a vu ses conseils demander sa mise en liberté provisoire afin qu’il puisse se soigner"
+    },
+    {
+     "fact": "Yansunu于2026年7月13日因背信与洗钱被CRIET判处七年监禁及约2900万非洲法郎罚款",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "avait été condamné le 13 juillet 2026 par la CRIET pour « abus de confiance et blanchiment de capitaux ». La peine comprend sept ans de prison ferme, une amende d’environ 29 millions de FCFA"
+    },
+    {
+     "fact": "法院将于10月26日就临时释放申请作出裁决",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La cour rendra sa décision sur la demande de mise en liberté provisoire le 26 octobre prochain"
+    },
+    {
+     "fact": "Yansunu已提出上诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Me Yansunu a fait appel"
+    }
+   ],
+   "uncertainties": [
+    "Yansunu的具体健康状况仅据Bip Radio报道，尚未获独立确认",
+    "目前仅一个来源（Fraternité）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_3fb125b927fa5080",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

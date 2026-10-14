@@ -1,0 +1,95 @@
+{
+ "label": "S0b493629",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "2d1213c5a8b3dbeb4a4651cb2150a03110751b47f647805ab90c7e975d1998e6",
+ "tokens": {
+  "input_tokens": 2141,
+  "output_tokens": 266,
+  "total_tokens": 2407
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "美国最高法院将审理涉及尼日利亚厨师庇护案",
+   "summary_zh": "美国最高法院同意审理特朗普政府寻求拒绝一名尼日利亚男子庇护申请的案件。该男子据称在尼日利亚被迫为一个疑似分离主义组织准备餐食。此案目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "美国最高法院同意审理特朗普政府寻求拒绝一名尼日利亚男子庇护申请的案件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The US Supreme Court agreed on Tuesday to hear a bid by President Donald Trump's administration to deny asylum to a man"
+    },
+    {
+     "fact": "该男子据称在尼日利亚被迫为一个疑似分离主义组织准备餐食",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "who was forced to prepare meals for an apparent separatist group in Nigeria"
+    }
+   ],
+   "uncertainties": [
+    "该男子被迫为疑似分离主义组织准备餐食的说法尚未获独立证实",
+    "目前仅一个来源报道此事"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "美国最高法院将审理涉及尼日利亚厨师庇护案",
+   "summary_zh": "美国最高法院同意审理特朗普政府寻求拒绝一名尼日利亚男子庇护申请的案件。该男子据称在尼日利亚被迫为一个疑似分离主义组织准备餐食。此案目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "美国最高法院同意审理特朗普政府寻求拒绝一名尼日利亚男子庇护申请的案件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The US Supreme Court agreed on Tuesday to hear a bid by President Donald Trump's administration to deny asylum to a man"
+    },
+    {
+     "fact": "该男子据称在尼日利亚被迫为一个疑似分离主义组织准备餐食",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "who was forced to prepare meals for an apparent separatist group in Nigeria"
+    }
+   ],
+   "uncertainties": [
+    "该男子被迫为疑似分离主义组织准备餐食的说法尚未获独立证实",
+    "目前仅一个来源报道此事"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_2d25fb6a0b493629",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

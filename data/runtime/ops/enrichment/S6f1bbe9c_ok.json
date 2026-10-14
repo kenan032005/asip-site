@@ -1,0 +1,114 @@
+{
+ "label": "S6f1bbe9c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "61f9307262cfade536b149619da77ee9fcabc309b66e98e93247bafd0103eccd",
+ "tokens": {
+  "input_tokens": 2144,
+  "output_tokens": 280,
+  "total_tokens": 2424
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"目前仅一个来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "Anthropic就五角大楼安全风险定性案请求复审",
+   "summary_zh": "Anthropic于周二请求美国上诉法院重新审理一项裁决，该裁决维持了五角大楼将其列为国家安全供应链风险的决定。争议源于该公司技术安全护栏问题。目前该消息为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "USA",
+   "location": {
+    "country_iso3": "USA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "Anthropic请求美国上诉法院重新审理一项裁决",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Anthropic asked a US appeals court on Tuesday to reconsider a ruling"
+    },
+    {
+     "fact": "该裁决维持了五角大楼将Anthropic列为国家安全供应链风险的决定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "that upheld the Pentagon's decision to ​label the AI company as a national security supply ‌chain risk"
+    },
+    {
+     "fact": "争议涉及该公司技术安全护栏问题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "over a dispute about safety guardrails on its technology"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "Anthropic就五角大楼安全风险定性案请求复审",
+   "summary_zh": "Anthropic于周二请求美国上诉法院重新审理一项裁决，该裁决维持了五角大楼将其列为国家安全供应链风险的决定。争议源于该公司技术安全护栏问题。目前该消息为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "USA",
+   "location": {
+    "country_iso3": "USA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "Anthropic请求美国上诉法院重新审理一项裁决",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Anthropic asked a US appeals court on Tuesday to reconsider a ruling"
+    },
+    {
+     "fact": "该裁决维持了五角大楼将Anthropic列为国家安全供应链风险的决定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "that upheld the Pentagon's decision to ​label the AI company as a national security supply ‌chain risk"
+    },
+    {
+     "fact": "争议涉及该公司技术安全护栏问题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "over a dispute about safety guardrails on its technology"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_837291f56f1bbe9c",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

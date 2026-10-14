@@ -1,0 +1,124 @@
+{
+ "label": "S68a183e7",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "2d2461faaf8d738d8fd4d56e5af9637339d0b8ca12895e27860f7b62f4b1e712",
+ "tokens": {
+  "input_tokens": 2203,
+  "output_tokens": 386,
+  "total_tokens": 2589
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\"]",
+    "after": "[\"该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚商人哈姆扎·乌马尔宣布竞选NDC副全国组织者",
+   "summary_zh": "尼日利亚商人、前学生领袖哈姆扎·乌马尔宣布有意竞选全国民主大会党（NDC）副全国组织者一职，承诺加强党内基层参与和协调。来自阿散蒂地区塔福的乌马尔表示，其目标是改善党在全国、地区和选区结构之间的协作，并让基层成员在决策中拥有更大发言权。该消息目前为单一来源报道。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "阿散蒂地区",
+    "city": "塔福",
+    "site": null,
+    "raw_text": "Tafo in the Ashanti Region"
+   },
+   "key_facts": [
+    {
+     "fact": "哈姆扎·乌马尔宣布竞选全国民主大会党副全国组织者",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "NDC Deputy National Organizer Aspirant Hamza Umar targets grassroots mobilisation"
+    },
+    {
+     "fact": "乌马尔承诺加强党内基层参与和协调",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "pledging to strengthen grassroots participation and coordination within the party"
+    },
+    {
+     "fact": "乌马尔来自阿散蒂地区塔福，为活动人士",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "an activist from Tafo in the Ashanti Region"
+    },
+    {
+     "fact": "乌马尔称目标是改善党全国、地区和选区结构间的协作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "his ambition is to improve collaboration between the party’s national, regional and constituency structures"
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚商人哈姆扎·乌马尔宣布竞选NDC副全国组织者",
+   "summary_zh": "尼日利亚商人、前学生领袖哈姆扎·乌马尔宣布有意竞选全国民主大会党（NDC）副全国组织者一职，承诺加强党内基层参与和协调。来自阿散蒂地区塔福的乌马尔表示，其目标是改善党在全国、地区和选区结构之间的协作，并让基层成员在决策中拥有更大发言权。该消息目前为单一来源报道。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "阿散蒂地区",
+    "city": "塔福",
+    "site": null,
+    "raw_text": "Tafo in the Ashanti Region"
+   },
+   "key_facts": [
+    {
+     "fact": "哈姆扎·乌马尔宣布竞选全国民主大会党副全国组织者",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "NDC Deputy National Organizer Aspirant Hamza Umar targets grassroots mobilisation"
+    },
+    {
+     "fact": "乌马尔承诺加强党内基层参与和协调",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "pledging to strengthen grassroots participation and coordination within the party"
+    },
+    {
+     "fact": "乌马尔来自阿散蒂地区塔福，为活动人士",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "an activist from Tafo in the Ashanti Region"
+    },
+    {
+     "fact": "乌马尔称目标是改善党全国、地区和选区结构间的协作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "his ambition is to improve collaboration between the party’s national, regional and constituency structures"
+    }
+   ],
+   "uncertainties": [
+    "该消息目前仅有一个来源（MyJoyOnline），尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_148573ea68a183e7",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

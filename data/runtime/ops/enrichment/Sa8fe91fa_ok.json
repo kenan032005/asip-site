@@ -1,0 +1,129 @@
+{
+ "label": "Sa8fe91fa",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "2dba1619a037715ade5bd8f8e412b0254a3f32cf509f70d660a71dc02045f15e",
+ "tokens": {
+  "input_tokens": 2833,
+  "output_tokens": 581,
+  "total_tokens": 3414
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "阿尔及利亚称逮捕约60名涉嫌策划破坏活动的摩洛哥人",
+   "summary_zh": "阿尔及利亚国家警察总局（DGSN）称，在奥兰附近逮捕了61名涉嫌策划破坏国家领土活动的摩洛哥人，其中包括一名前皇家军队军人。阿方称这些人经突尼斯非法入境，被捕时查获摩洛哥护照及大量第纳尔和欧元现金。由于阿尔及利亚方面缺乏细节、摩洛哥官方尚未回应，该事件仍存在诸多不明之处。",
+   "event_type": "other_security",
+   "country_iso3": "DZA",
+   "location": {
+    "country_iso3": "DZA",
+    "admin1": "奥兰省",
+    "city": "奥兰",
+    "site": null,
+    "raw_text": "près d’Oran"
+   },
+   "key_facts": [
+    {
+     "fact": "阿尔及利亚国家警察总局称在奥兰附近逮捕61名摩洛哥人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la Direction générale de la Sûreté nationale (DGSN) a communiqué dimanche 11 octobre 2026 au soir sur l’arrestation de 61 Marocains près d’Oran"
+    },
+    {
+     "fact": "被捕者被指涉嫌策划破坏国家领土、危害安全与公共秩序的活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "soupçonnés de « préparer des actes de sabotage portant atteinte à la sécurité et à l’ordre public »"
+    },
+    {
+     "fact": "阿方称这些人经突尼斯非法入境阿尔及利亚后前往奥兰",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils seraient passés par la Tunisie avant d’entrer illégalement sur le territoire algérien, en empruntant des sentiers dans la région d’El Kala, proche de la frontière tunisienne, puis de rejoindre Oran"
+    },
+    {
+     "fact": "被捕时据称查获摩洛哥护照及大量第纳尔和欧元现金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des passeports marocains ainsi que d’importantes sommes en dirhams et en euros auraient été saisis"
+    },
+    {
+     "fact": "摩洛哥当局尚未回应媒体询问",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Contactées, les autorités marocaines n’ont pas encore répondu à nos sollicitations"
+    }
+   ],
+   "uncertainties": [
+    "阿尔及利亚当局未提供关于指控事实的更多细节",
+    "摩洛哥方面尚未作出官方回应，事件仍不明朗",
+    "被捕者人数及身份等细节尚未获独立证实",
+    "目前仅单一来源（RFI）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "阿尔及利亚称逮捕约60名涉嫌策划破坏活动的摩洛哥人",
+   "summary_zh": "阿尔及利亚国家警察总局（DGSN）称，在奥兰附近逮捕了61名涉嫌策划破坏国家领土活动的摩洛哥人，其中包括一名前皇家军队军人。阿方称这些人经突尼斯非法入境，被捕时查获摩洛哥护照及大量第纳尔和欧元现金。由于阿尔及利亚方面缺乏细节、摩洛哥官方尚未回应，该事件仍存在诸多不明之处。",
+   "event_type": "other_security",
+   "country_iso3": "DZA",
+   "location": {
+    "country_iso3": "DZA",
+    "admin1": "奥兰省",
+    "city": "奥兰",
+    "site": null,
+    "raw_text": "près d’Oran"
+   },
+   "key_facts": [
+    {
+     "fact": "阿尔及利亚国家警察总局称在奥兰附近逮捕61名摩洛哥人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la Direction générale de la Sûreté nationale (DGSN) a communiqué dimanche 11 octobre 2026 au soir sur l’arrestation de 61 Marocains près d’Oran"
+    },
+    {
+     "fact": "被捕者被指涉嫌策划破坏国家领土、危害安全与公共秩序的活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "soupçonnés de « préparer des actes de sabotage portant atteinte à la sécurité et à l’ordre public »"
+    },
+    {
+     "fact": "阿方称这些人经突尼斯非法入境阿尔及利亚后前往奥兰",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils seraient passés par la Tunisie avant d’entrer illégalement sur le territoire algérien, en empruntant des sentiers dans la région d’El Kala, proche de la frontière tunisienne, puis de rejoindre Oran"
+    },
+    {
+     "fact": "被捕时据称查获摩洛哥护照及大量第纳尔和欧元现金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des passeports marocains ainsi que d’importantes sommes en dirhams et en euros auraient été saisis"
+    },
+    {
+     "fact": "摩洛哥当局尚未回应媒体询问",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Contactées, les autorités marocaines n’ont pas encore répondu à nos sollicitations"
+    }
+   ],
+   "uncertainties": [
+    "阿尔及利亚当局未提供关于指控事实的更多细节",
+    "摩洛哥方面尚未作出官方回应，事件仍不明朗",
+    "被捕者人数及身份等细节尚未获独立证实",
+    "目前仅单一来源（RFI）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_efe70767a8fe91fa",
+ "disease_event_id": null,
+ "country_code": "MA"
+}

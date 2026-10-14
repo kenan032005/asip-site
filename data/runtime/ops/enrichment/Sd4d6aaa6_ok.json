@@ -1,0 +1,104 @@
+{
+ "label": "Sd4d6aaa6",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "7bf0fff22a0ee5ab8eb70c835401e418249e68e23c9f2307424bdd6037973e06",
+ "tokens": {
+  "input_tokens": 2141,
+  "output_tokens": 248,
+  "total_tokens": 2389
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该报道为单一来源，尚未获得交叉验证\"]",
+    "after": "[\"该报道为单一来源，尚未获得交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳学者警告：若无实质改革，党派任命循环将持续",
+   "summary_zh": "加纳CDD-Ghana研究员约翰·奥萨-夸蓬博士警告称，除非进行有意义的机构改革，否则对独立宪法机构的党派任命循环将持续存在。他是在评论选举委员会（EC）任命争议时作出上述表态的。该报道为单一来源。",
+   "event_type": "political_instability",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳学者警告党派任命循环将持续",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "CDD-Ghana Fellow, Dr John Osae Kwapong, has warned that partisan appointments to independent constitutional bodies will persist unless meaningful institutional reforms break the cycle."
+    },
+    {
+     "fact": "该报道为单一来源",
+     "evidence_field": "source_links",
+     "evidence_excerpt": "MyJoyOnline"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚未获得交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳学者警告：若无实质改革，党派任命循环将持续",
+   "summary_zh": "加纳CDD-Ghana研究员约翰·奥萨-夸蓬博士警告称，除非进行有意义的机构改革，否则对独立宪法机构的党派任命循环将持续存在。他是在评论选举委员会（EC）任命争议时作出上述表态的。该报道为单一来源。",
+   "event_type": "political_instability",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳学者警告党派任命循环将持续",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "CDD-Ghana Fellow, Dr John Osae Kwapong, has warned that partisan appointments to independent constitutional bodies will persist unless meaningful institutional reforms break the cycle."
+    },
+    {
+     "fact": "该报道为单一来源",
+     "evidence_field": "source_links",
+     "evidence_excerpt": "MyJoyOnline"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚未获得交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_2fd390f2d4d6aaa6",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
