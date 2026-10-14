@@ -1,0 +1,131 @@
+{
+ "label": "Sc35c1e1f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "cccff4da83790cb95fdeede6c164895429734e996edbcbff13783c0e05a44cf2",
+ "tokens": {
+  "input_tokens": 2795,
+  "output_tokens": 695,
+  "total_tokens": 3490
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "埃塞俄比亚联邦部队控制与厄立特里亚边境附近城镇",
+   "summary_zh": "埃塞俄比亚联邦军队重新控制边境城镇扎兰贝萨，此前该地驻有厄立特里亚部队。过去一周，埃塞俄比亚军队在北部对提格雷叛军发动反攻，从TPLF手中夺回多座城镇，并迫使进入埃塞俄比亚领土的厄立特里亚部队后撤。埃塞俄比亚指控厄立特里亚侵入其领土超过60公里，厄立特里亚对此予以否认。",
+   "event_type": "border_security",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": null,
+    "city": "扎兰贝萨",
+    "site": "扎兰贝萨边境口岸",
+    "raw_text": "Zalambessa, ville frontalière près de la frontière avec l'Érythrée"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚联邦军队重新控制边境城镇扎兰贝萨",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’armée fédérale reprend le contrôle de la ville frontalière de Zalambessa"
+    },
+    {
+     "fact": "埃塞俄比亚军队在北部对提格雷叛军发动反攻并夺回多座城镇",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis une semaine, l’armée éthiopienne a lancé une contre-offensive contre les rebelles tigréens dans le nord du pays, reprenant le contrôle de plusieurs villes des mains du TPLF"
+    },
+    {
+     "fact": "据Acled组织称，此前驻扎的厄立特里亚部队已撤离，因此未发生战斗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les troupes érythréennes qui y étaient positionnées depuis vendredi dernier s'étaient déjà retirées, d'après l’organisation Acled, qui analyse les conflits ; il n’y a donc pas eu de combats"
+    },
+    {
+     "fact": "据安全消息来源称，厄立特里亚在提格雷部署了5000至8000名士兵",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "selon des sources sécuritaires, Asmara a déployé entre 5 000 et 8 000 soldats au Tigré"
+    },
+    {
+     "fact": "埃塞俄比亚指控厄立特里亚侵入其领土超过60公里，厄立特里亚予以否认",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'Éthiopie accuse l’Érythrée d'avoir pénétré sur plus de 60 km sur son territoire, ce que nie Asmara"
+    }
+   ],
+   "uncertainties": [
+    "厄立特里亚部队撤离及未发生战斗的说法来自Acled组织，尚未获得独立证实",
+    "厄立特里亚在提格雷部署5000至8000名士兵的说法来自安全消息来源，尚未证实",
+    "埃塞俄比亚关于厄立特里亚侵入其领土超过60公里的指控遭厄立特里亚否认，双方说法存在冲突",
+    "埃塞俄比亚军队是否会越过边境进入厄立特里亚领土尚不确定",
+    "目前仅有一个来源（RFI）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "埃塞俄比亚联邦部队控制与厄立特里亚边境附近城镇",
+   "summary_zh": "埃塞俄比亚联邦军队重新控制边境城镇扎兰贝萨，此前该地驻有厄立特里亚部队。过去一周，埃塞俄比亚军队在北部对提格雷叛军发动反攻，从TPLF手中夺回多座城镇，并迫使进入埃塞俄比亚领土的厄立特里亚部队后撤。埃塞俄比亚指控厄立特里亚侵入其领土超过60公里，厄立特里亚对此予以否认。",
+   "event_type": "border_security",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": null,
+    "city": "扎兰贝萨",
+    "site": "扎兰贝萨边境口岸",
+    "raw_text": "Zalambessa, ville frontalière près de la frontière avec l'Érythrée"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚联邦军队重新控制边境城镇扎兰贝萨",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’armée fédérale reprend le contrôle de la ville frontalière de Zalambessa"
+    },
+    {
+     "fact": "埃塞俄比亚军队在北部对提格雷叛军发动反攻并夺回多座城镇",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis une semaine, l’armée éthiopienne a lancé une contre-offensive contre les rebelles tigréens dans le nord du pays, reprenant le contrôle de plusieurs villes des mains du TPLF"
+    },
+    {
+     "fact": "据Acled组织称，此前驻扎的厄立特里亚部队已撤离，因此未发生战斗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les troupes érythréennes qui y étaient positionnées depuis vendredi dernier s'étaient déjà retirées, d'après l’organisation Acled, qui analyse les conflits ; il n’y a donc pas eu de combats"
+    },
+    {
+     "fact": "据安全消息来源称，厄立特里亚在提格雷部署了5000至8000名士兵",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "selon des sources sécuritaires, Asmara a déployé entre 5 000 et 8 000 soldats au Tigré"
+    },
+    {
+     "fact": "埃塞俄比亚指控厄立特里亚侵入其领土超过60公里，厄立特里亚予以否认",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'Éthiopie accuse l’Érythrée d'avoir pénétré sur plus de 60 km sur son territoire, ce que nie Asmara"
+    }
+   ],
+   "uncertainties": [
+    "厄立特里亚部队撤离及未发生战斗的说法来自Acled组织，尚未获得独立证实",
+    "厄立特里亚在提格雷部署5000至8000名士兵的说法来自安全消息来源，尚未证实",
+    "埃塞俄比亚关于厄立特里亚侵入其领土超过60公里的指控遭厄立特里亚否认，双方说法存在冲突",
+    "埃塞俄比亚军队是否会越过边境进入厄立特里亚领土尚不确定",
+    "目前仅有一个来源（RFI）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_560027e4c35c1e1f",
+ "disease_event_id": null,
+ "country_code": "ET"
+}
