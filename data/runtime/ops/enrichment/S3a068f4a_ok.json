@@ -1,0 +1,115 @@
+{
+ "label": "S3a068f4a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "fb9c7a959048ad998c84a761bbd35751e69d83dbba1956817bdf3fa7908a9983",
+ "tokens": {
+  "input_tokens": 2002,
+  "output_tokens": 540,
+  "total_tokens": 2542
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "肯尼亚报告第二例埃博拉病例，为首例患者家属",
+   "summary_zh": "肯尼亚卫生部周三表示，该国录得第二例埃博拉病例，距其首次报告埃博拉病例及死亡病例仅一周多。第二例患者为39岁男性，是首例病例的密切家属，在隔离期间于周二出现症状。首例患者曾赴刚果（金）患病，经陆路进入乌干达后于10月3日飞抵内罗毕，10月5日在内罗毕一家医院死亡。该病例引发对该地区边境筛查的担忧，因患者得以从刚果（金）进入乌干达，而该边境自5月以来一直关闭。",
+   "event_type": "other_security",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": null,
+    "city": "内罗毕",
+    "site": null,
+    "raw_text": "Kenya / Nairobi"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚报告第二例埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kenya reported a second case of Ebola on Wednesday, a week after confirming its first-ever infection linked to the outbreak in neighbouring Democratic Republic of Congo."
+    },
+    {
+     "fact": "第二例患者为39岁男性，是首例病例的密切家属，隔离期间出现症状",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The second patient, a 39-year-old man and close family member of the first case, was already in quarantine when he developed symptoms on Tuesday, the health ministry said."
+    },
+    {
+     "fact": "首例患者经陆路进入乌干达后飞抵内罗毕，于10月5日在内罗毕医院死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The first patient, a Kenyan man who had been ill in Congo, travelled by road to Uganda before flying to Nairobi on October 3. He died in a Nairobi hospital on October 5."
+    },
+    {
+     "fact": "患者得以从刚果（金）进入乌干达，而该边境自5月以来一直关闭，引发对地区边境筛查的担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The case has raised concerns about border screening in the region, as the patient was able to cross from Congo into Uganda despite the border having been closed since May."
+    }
+   ],
+   "uncertainties": [
+    "该事件目前为单一来源报道，尚缺乏交叉验证",
+    "第二例病例的感染来源及传播链尚未完全确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "肯尼亚报告第二例埃博拉病例，为首例患者家属",
+   "summary_zh": "肯尼亚卫生部周三表示，该国录得第二例埃博拉病例，距其首次报告埃博拉病例及死亡病例仅一周多。第二例患者为39岁男性，是首例病例的密切家属，在隔离期间于周二出现症状。首例患者曾赴刚果（金）患病，经陆路进入乌干达后于10月3日飞抵内罗毕，10月5日在内罗毕一家医院死亡。该病例引发对该地区边境筛查的担忧，因患者得以从刚果（金）进入乌干达，而该边境自5月以来一直关闭。",
+   "event_type": "other_security",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": null,
+    "city": "内罗毕",
+    "site": null,
+    "raw_text": "Kenya / Nairobi"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚报告第二例埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kenya reported a second case of Ebola on Wednesday, a week after confirming its first-ever infection linked to the outbreak in neighbouring Democratic Republic of Congo."
+    },
+    {
+     "fact": "第二例患者为39岁男性，是首例病例的密切家属，隔离期间出现症状",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The second patient, a 39-year-old man and close family member of the first case, was already in quarantine when he developed symptoms on Tuesday, the health ministry said."
+    },
+    {
+     "fact": "首例患者经陆路进入乌干达后飞抵内罗毕，于10月5日在内罗毕医院死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The first patient, a Kenyan man who had been ill in Congo, travelled by road to Uganda before flying to Nairobi on October 3. He died in a Nairobi hospital on October 5."
+    },
+    {
+     "fact": "患者得以从刚果（金）进入乌干达，而该边境自5月以来一直关闭，引发对地区边境筛查的担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The case has raised concerns about border screening in the region, as the patient was able to cross from Congo into Uganda despite the border having been closed since May."
+    }
+   ],
+   "uncertainties": [
+    "该事件目前为单一来源报道，尚缺乏交叉验证",
+    "第二例病例的感染来源及传播链尚未完全确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_b9da34413a068f4a",
+ "disease_event_id": null,
+ "country_code": "UG"
+}

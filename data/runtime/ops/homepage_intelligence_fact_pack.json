@@ -1,20 +1,21 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-15T06:07:56+08:00",
+ "generated_at": "2026-10-15T07:53:36+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
   "signals_24h": 32,
-  "signals_7d": 254,
-  "verified_events_24h": 35,
-  "verified_events_7d": 289,
+  "signals_7d": 255,
+  "verified_events_24h": 41,
+  "verified_events_7d": 295,
   "multi_source_verified_events_7d": 6,
   "countries_with_activity_24h": 13,
   "total_countries_monitored": 22
  },
  "countries_24h": [
+  "乌干达",
   "乍得",
   "刚果（金）",
   "加纳",
@@ -25,7 +26,6 @@
   "尼日尔",
   "摩洛哥",
   "毛里求斯",
-  "贝宁",
   "阿尔及利亚",
   "马里"
  ],
@@ -87,7 +87,7 @@
   },
   {
    "value": "刚果（金）",
-   "count": 10
+   "count": 11
   },
   {
    "value": "摩洛哥",
@@ -95,19 +95,19 @@
   },
   {
    "value": "贝宁",
-   "count": 8
+   "count": 7
   },
   {
    "value": "莫桑比克",
    "count": 7
   },
   {
-   "value": "科特迪瓦",
+   "value": "乌干达",
    "count": 4
   },
   {
-   "value": "马里",
-   "count": 3
+   "value": "科特迪瓦",
+   "count": 4
   }
  ],
  "category_distribution_24h": [
@@ -117,11 +117,11 @@
   },
   {
    "value": "公共卫生",
-   "count": 4
+   "count": 6
   },
   {
    "value": "民众骚乱",
-   "count": 3
+   "count": 2
   },
   {
    "value": "武装冲突",
@@ -138,57 +138,23 @@
   {
    "value": "军事行动",
    "count": 1
-  },
-  {
-   "value": "恐怖袭击",
-   "count": 1
   }
  ],
  "source_tier_distribution_7d": [
   {
    "value": "B",
-   "count": 227
+   "count": 233
   },
   {
    "value": "C",
-   "count": 213
+   "count": 211
   },
   {
    "value": "A",
-   "count": 103
+   "count": 106
   }
  ],
  "top_verified_events": [
-  {
-   "fact_id": "EVT_cb1d5bce47315543",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "贝宁",
-   "title": "多哥军人因申请贝宁护照被押至贝宁经济与恐怖主义犯罪法庭",
-   "category": "terrorist_attack",
-   "source": "Fraternite (官方日报)",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-07 23:09",
-   "importance": "high",
-   "severity": "medium"
-  },
-  {
-   "fact_id": "EVT_911399837e95db05",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "几内亚比绍",
-   "title": "几内亚比绍：针对前总统恩巴洛亲信的部长清洗持续进行",
-   "category": "other_security",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-07 23:23",
-   "importance": "high",
-   "severity": "medium"
-  },
   {
    "fact_id": "EVT_ad17f8de1bba554a",
    "level": "verified_event",
@@ -248,6 +214,36 @@
    "time": "2026-10-08 00:00",
    "importance": "high",
    "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_3e3079c449b17123",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "中非共和国",
+   "title": "中非前总统博齐泽之子在刚果（金）被短暂拘留后获释",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-08 08:15",
+   "importance": "high",
+   "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_9d3e014616a32313",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "厄立特里亚军队据报在埃塞俄比亚提格雷北部部署",
+   "category": "armed_conflict",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-08 07:35",
+   "importance": "high",
+   "severity": "medium"
   }
  ],
  "top_signals": [
@@ -278,6 +274,21 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-15 01:23",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:d3d671138d3f70c5",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "刚果（金）",
+   "title": "Kenya confirms second Ebola case - a relative of the first victim",
+   "category": "public_health",
+   "source": "BBC News (Africa)",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-15 00:23",
    "importance": "low",
    "why_it_matters": ""
   },
@@ -595,21 +606,6 @@
    "time": "2026-10-14 09:57",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:407fba7229fb0f5d",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "美国最高法院将审理涉及尼日利亚厨师庇护案",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-10-14 09:34",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -690,7 +686,7 @@
   "status": "deterministic",
   "based_on": "过去24小时/7日公开信息（确定性汇总）"
  },
- "fact_count": 543,
+ "fact_count": 550,
  "facts": {
   "news:294508521f0775c4": {
    "fact_id": "news:294508521f0775c4",
@@ -719,6 +715,21 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-15 01:23",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:d3d671138d3f70c5": {
+   "fact_id": "news:d3d671138d3f70c5",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "刚果（金）",
+   "title": "Kenya confirms second Ebola case - a relative of the first victim",
+   "category": "public_health",
+   "source": "BBC News (Africa)",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-15 00:23",
    "importance": "low",
    "why_it_matters": ""
   },
@@ -1135,6 +1146,21 @@
    "country": "南苏丹",
    "title": "南苏丹湖泊州敌对社区冲突致多人死亡",
    "category": "armed_conflict",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-14 08:00",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:c0987edb7e300889": {
+   "fact_id": "news:c0987edb7e300889",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乌干达",
+   "title": "Kenya reports second Ebola case, family member of first patient",
+   "category": "public_health",
    "source": "Africanews",
    "source_tier": "B",
    "source_role": "aggregator_discovery",
@@ -4486,51 +4512,6 @@
    "time": "2026-10-08 08:00",
    "importance": "low",
    "why_it_matters": ""
-  },
-  "news:033b65aeb01ef575": {
-   "fact_id": "news:033b65aeb01ef575",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "贝宁",
-   "title": "多哥军人因申请贝宁护照被押至贝宁经济与恐怖主义犯罪法庭",
-   "category": "terrorist_attack",
-   "source": "Fraternite (官方日报)",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-08 07:09",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "EVT_cb1d5bce47315543": {
-   "fact_id": "EVT_cb1d5bce47315543",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "贝宁",
-   "title": "多哥军人因申请贝宁护照被押至贝宁经济与恐怖主义犯罪法庭",
-   "category": "terrorist_attack",
-   "source": "Fraternite (官方日报)",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-07 23:09",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_911399837e95db05": {
-   "fact_id": "EVT_911399837e95db05",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "几内亚比绍",
-   "title": "几内亚比绍：针对前总统恩巴洛亲信的部长清洗持续进行",
-   "category": "other_security",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-07 23:23",
-   "importance": "high",
-   "severity": "medium"
   },
   "EVT_ad17f8de1bba554a": {
    "fact_id": "EVT_ad17f8de1bba554a",
@@ -8834,6 +8815,126 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-14 17:23",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_6d3cb51188c93bfb": {
+   "fact_id": "EVT_6d3cb51188c93bfb",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "刚果（金）",
+   "title": "刚果（金）布尼亚：妇科医生Leki Taji救治感染埃博拉的患者",
+   "category": "public_health",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-14 22:01",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_6d8baed13e6ddb9c": {
+   "fact_id": "EVT_6d8baed13e6ddb9c",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "刚果（金）",
+   "title": "世卫组织警告刚果（金）大量埃博拉死亡病例发生在社区",
+   "category": "public_health",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-14 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_68d7add2ac939606": {
+   "fact_id": "EVT_68d7add2ac939606",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "刚果（金）",
+   "title": "肯尼亚确认第二例埃博拉病例，为首例死者亲属",
+   "category": "public_health",
+   "source": "BBC News (Africa)",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-14 16:23",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_37a5d860a2b32e36": {
+   "fact_id": "EVT_37a5d860a2b32e36",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "加纳大学行政人员协会坚持罢工将持续至公平工资委员会解决市场溢价问题",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-14 20:46",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_4ca9fda3415e9051": {
+   "fact_id": "EVT_4ca9fda3415e9051",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "摩洛哥",
+   "title": "阿尔及利亚奥兰逮捕61名摩洛哥人引发图像争议",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-14 20:05",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_cfa31e3d98282adf": {
+   "fact_id": "EVT_cfa31e3d98282adf",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "马里",
+   "title": "马里收容逾32.2万名难民和寻求庇护者",
+   "category": "other_security",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-14 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_b9da34413a068f4a": {
+   "fact_id": "EVT_b9da34413a068f4a",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乌干达",
+   "title": "肯尼亚报告第二例埃博拉病例，为首例患者家属",
+   "category": "public_health",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-14 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_fa65b79c235c759f": {
+   "fact_id": "EVT_fa65b79c235c759f",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "南非",
+   "title": "南非一政界人士追悼会后发生枪击 至少四人死亡",
+   "category": "other_security",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-14 00:00",
    "importance": "high",
    "severity": "medium"
   }

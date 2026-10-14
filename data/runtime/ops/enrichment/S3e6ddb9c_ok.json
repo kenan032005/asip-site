@@ -1,0 +1,103 @@
+{
+ "label": "S3e6ddb9c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f4db3a74238072a15c4f5a72b216d7c1db0dbb6af8608aea52ca3268c4c73962",
+ "tokens": {
+  "input_tokens": 1970,
+  "output_tokens": 292,
+  "total_tokens": 2262
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "世卫组织警告刚果（金）大量埃博拉死亡病例发生在社区",
+   "summary_zh": "刚果（金）埃博拉疫情持续恶化，确诊病例已超过9000例，死亡人数超过4300人。疫情已蔓延至七个省份，卫生部门在多个热点地区难以遏制传播。世卫组织警告称，许多死亡病例发生在治疗中心之外，患者生前未被发现。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Democratic Republic Of Congo"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）埃博拉确诊病例超过9000例，死亡人数超过4300人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the number of confirmed cases surging past 9,000 with more than 4,300 deaths"
+    },
+    {
+     "fact": "疫情已蔓延至七个省份",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "has now spread across seven provinces"
+    },
+    {
+     "fact": "许多死亡病例发生在治疗中心之外",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "many of the deaths are occurring outside treatment centres"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚未获得交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "世卫组织警告刚果（金）大量埃博拉死亡病例发生在社区",
+   "summary_zh": "刚果（金）埃博拉疫情持续恶化，确诊病例已超过9000例，死亡人数超过4300人。疫情已蔓延至七个省份，卫生部门在多个热点地区难以遏制传播。世卫组织警告称，许多死亡病例发生在治疗中心之外，患者生前未被发现。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Democratic Republic Of Congo"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）埃博拉确诊病例超过9000例，死亡人数超过4300人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the number of confirmed cases surging past 9,000 with more than 4,300 deaths"
+    },
+    {
+     "fact": "疫情已蔓延至七个省份",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "has now spread across seven provinces"
+    },
+    {
+     "fact": "许多死亡病例发生在治疗中心之外",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "many of the deaths are occurring outside treatment centres"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚未获得交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_6d8baed13e6ddb9c",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

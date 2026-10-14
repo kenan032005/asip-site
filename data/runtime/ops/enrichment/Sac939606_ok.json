@@ -1,0 +1,125 @@
+{
+ "label": "Sac939606",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d0edfda5b084cdc7c8ac9684c116a3ed1d3e1ce22b25938b024a2d00b7d27830",
+ "tokens": {
+  "input_tokens": 2694,
+  "output_tokens": 613,
+  "total_tokens": 3307
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "肯尼亚确认第二例埃博拉病例，为首例死者亲属",
+   "summary_zh": "肯尼亚确认第二例埃博拉病例，患者为39岁男性，是首例死亡病例的密切接触者，此前已在隔离中。首例死者为一名40岁肯尼亚男子，10月5日去世，曾从刚果（金）经乌干达入境肯尼亚而未被检出。肯尼亚卫生部称两例病例相关联，无证据显示疫情在更广泛社区传播。刚果（金）今年已有超过4000人死于埃博拉。",
+   "event_type": "other_security",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": null,
+    "city": "内罗毕",
+    "site": null,
+    "raw_text": "Kenya"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚确认第二例埃博拉病例，患者为39岁男性，是首例病例的密切亲属",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kenya has confirmed a second case of Ebola... The new patient, a 39-year-old man, is a close relative of the first case and was already in quarantine when he fell ill on Tuesday"
+    },
+    {
+     "fact": "首例病例为一名40岁肯尼亚男子，10月5日去世，曾从刚果（金）经乌干达入境肯尼亚而未被检出",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The 40-year-old Kenyan man who died on 5 October was diagnosed with Ebola shortly after being admitted to hospital in the capital, Nairobi... He had travelled from DR Congo, through Uganda to Kenya without his illness being detected"
+    },
+    {
+     "fact": "肯尼亚卫生部称两例病例相关联，无证据显示疫情在更广泛社区传播",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "\"Both cases are linked, and there is no evidence of spread in the wider community,\" the ministry said"
+    },
+    {
+     "fact": "刚果（金）今年已有超过4000人死于埃博拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than 4,000 people have died from Ebola in DR Congo this year, in what is the second most deadly known outbreak to date"
+    },
+    {
+     "fact": "首例病例死亡后已确定128名接触者，其中113人已被找到，108人在肯尼亚隔离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "officials had determined that he had been in contact with 128 people - and since Tuesday 113 of them had been found... Of these, 108 were in quarantine in Kenya and tracing of the remaining 15 continued"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（BBC News Africa）报道，尚缺乏交叉验证",
+    "首例病例在刚果（金）及机场筛查中多次未被检出，具体原因尚未完全明确"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "肯尼亚确认第二例埃博拉病例，为首例死者亲属",
+   "summary_zh": "肯尼亚确认第二例埃博拉病例，患者为39岁男性，是首例死亡病例的密切接触者，此前已在隔离中。首例死者为一名40岁肯尼亚男子，10月5日去世，曾从刚果（金）经乌干达入境肯尼亚而未被检出。肯尼亚卫生部称两例病例相关联，无证据显示疫情在更广泛社区传播。刚果（金）今年已有超过4000人死于埃博拉。",
+   "event_type": "other_security",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": null,
+    "city": "内罗毕",
+    "site": null,
+    "raw_text": "Kenya"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚确认第二例埃博拉病例，患者为39岁男性，是首例病例的密切亲属",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kenya has confirmed a second case of Ebola... The new patient, a 39-year-old man, is a close relative of the first case and was already in quarantine when he fell ill on Tuesday"
+    },
+    {
+     "fact": "首例病例为一名40岁肯尼亚男子，10月5日去世，曾从刚果（金）经乌干达入境肯尼亚而未被检出",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The 40-year-old Kenyan man who died on 5 October was diagnosed with Ebola shortly after being admitted to hospital in the capital, Nairobi... He had travelled from DR Congo, through Uganda to Kenya without his illness being detected"
+    },
+    {
+     "fact": "肯尼亚卫生部称两例病例相关联，无证据显示疫情在更广泛社区传播",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "\"Both cases are linked, and there is no evidence of spread in the wider community,\" the ministry said"
+    },
+    {
+     "fact": "刚果（金）今年已有超过4000人死于埃博拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than 4,000 people have died from Ebola in DR Congo this year, in what is the second most deadly known outbreak to date"
+    },
+    {
+     "fact": "首例病例死亡后已确定128名接触者，其中113人已被找到，108人在肯尼亚隔离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "officials had determined that he had been in contact with 128 people - and since Tuesday 113 of them had been found... Of these, 108 were in quarantine in Kenya and tracing of the remaining 15 continued"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（BBC News Africa）报道，尚缺乏交叉验证",
+    "首例病例在刚果（金）及机场筛查中多次未被检出，具体原因尚未完全明确"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_68d7add2ac939606",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

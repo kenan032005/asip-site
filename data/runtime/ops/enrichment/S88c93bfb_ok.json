@@ -1,0 +1,116 @@
+{
+ "label": "S88c93bfb",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c6588168d66e8f3d4f99aa03d7950b1865e60755d25f841cf6bd082ebf095ed7",
+ "tokens": {
+  "input_tokens": 3111,
+  "output_tokens": 473,
+  "total_tokens": 3584
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该报道为单一来源（RFI Afrique），尚未获得其他独立来源交叉验证\", \"报道称疫情应对已出现初步希望迹象，但挑战仍然巨大，具体进展尚未证实\"]",
+    "after": "[\"该报道为单一来源（RFI Afrique），尚未获得其他独立来源交叉验证\", \"报道称疫情应对已出现初步希望迹象，但挑战仍然巨大，具体进展尚未证实\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）布尼亚：妇科医生Leki Taji救治感染埃博拉的患者",
+   "summary_zh": "刚果（金）埃博拉疫情在五个月内已造成超过4000人死亡，成为该国历史上最致命的一次疫情。世界卫生组织已将其列为国际关注的突发公共卫生事件。在伊图里省布尼亚的埃博拉治疗中心，妇科医生、埃博拉幸存者Leki Taji正在救治感染埃博拉的孕妇患者。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "伊图里",
+    "city": "布尼亚",
+    "site": "布尼亚综合参考医院埃博拉治疗中心",
+    "raw_text": "hôpital général de référence de Bunia, en Ituri, RDC"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）埃博拉疫情五个月内造成超过4000人死亡，成为该国历史上最致命疫情",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Avec plus de 4 000 morts en cinq mois, l’épidémie d’Ebola en République démocratique du Congo est devenue la plus meurtrière de l’histoire du pays."
+    },
+    {
+     "fact": "世界卫生组织将该疫情列为国际关注的突发公共卫生事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette 17ᵉ flambée épidémique a été qualifiée d’urgence de santé publique de portée internationale par l’Organisation mondiale de la santé (OMS)."
+    },
+    {
+     "fact": "妇科医生Leki Taji本人是埃博拉幸存者，在布尼亚医院治疗感染埃博拉的孕妇患者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À l’hôpital général de référence de Bunia, le docteur Leki Taji, gynécologue et survivant de cette épidémie, soigne ses patientes."
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源（RFI Afrique），尚未获得其他独立来源交叉验证",
+    "报道称疫情应对已出现初步希望迹象，但挑战仍然巨大，具体进展尚未证实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）布尼亚：妇科医生Leki Taji救治感染埃博拉的患者",
+   "summary_zh": "刚果（金）埃博拉疫情在五个月内已造成超过4000人死亡，成为该国历史上最致命的一次疫情。世界卫生组织已将其列为国际关注的突发公共卫生事件。在伊图里省布尼亚的埃博拉治疗中心，妇科医生、埃博拉幸存者Leki Taji正在救治感染埃博拉的孕妇患者。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "伊图里",
+    "city": "布尼亚",
+    "site": "布尼亚综合参考医院埃博拉治疗中心",
+    "raw_text": "hôpital général de référence de Bunia, en Ituri, RDC"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）埃博拉疫情五个月内造成超过4000人死亡，成为该国历史上最致命疫情",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Avec plus de 4 000 morts en cinq mois, l’épidémie d’Ebola en République démocratique du Congo est devenue la plus meurtrière de l’histoire du pays."
+    },
+    {
+     "fact": "世界卫生组织将该疫情列为国际关注的突发公共卫生事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette 17ᵉ flambée épidémique a été qualifiée d’urgence de santé publique de portée internationale par l’Organisation mondiale de la santé (OMS)."
+    },
+    {
+     "fact": "妇科医生Leki Taji本人是埃博拉幸存者，在布尼亚医院治疗感染埃博拉的孕妇患者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À l’hôpital général de référence de Bunia, le docteur Leki Taji, gynécologue et survivant de cette épidémie, soigne ses patientes."
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源（RFI Afrique），尚未获得其他独立来源交叉验证",
+    "报道称疫情应对已出现初步希望迹象，但挑战仍然巨大，具体进展尚未证实",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_6d3cb51188c93bfb",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

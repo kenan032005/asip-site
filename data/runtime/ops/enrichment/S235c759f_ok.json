@@ -1,0 +1,126 @@
+{
+ "label": "S235c759f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "854d20908d25ccf1706a2275bc493ea0ceba832414fdae3e4d443de1939b3e80",
+ "tokens": {
+  "input_tokens": 1986,
+  "output_tokens": 401,
+  "total_tokens": 2387
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"事件目前为单一来源报道，尚缺乏交叉验证\", \"枪击动机尚未公布\"]",
+    "after": "[\"事件目前为单一来源报道，尚缺乏交叉验证\", \"枪击动机尚未公布\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南非一政界人士追悼会后发生枪击 至少四人死亡",
+   "summary_zh": "南非卡特洪镇一场地方政界人士追悼会结束后，一名枪手向离开的哀悼者开枪，警方称至少四人死亡、三人受伤。警方表示，一名伤者为儿童，嫌疑人已自首并被拘留。当局最初称两名男子在现场死亡，随后在周三将死亡人数上调至四人。",
+   "event_type": "other_security",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": null,
+    "city": "Katlehong",
+    "site": "追悼会现场附近",
+    "raw_text": "Katlehong township, southeast of Johannesburg"
+   },
+   "key_facts": [
+    {
+     "fact": "南非卡特洪镇追悼会后发生枪击，至少四人死亡、三人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A gunman fired on a group of mourners leaving a memorial service for a local politician in South Africa, killing at least four people and injuring three others, police said Wednesday."
+    },
+    {
+     "fact": "伤者中至少有一名儿童",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least one of those wounded in the shooting late Tuesday in Katlehong township was a child"
+    },
+    {
+     "fact": "嫌疑人已自首并被拘留",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the suspect was in custody after turning himself in"
+    },
+    {
+     "fact": "警方最初称两名男子在现场死亡，后死亡人数上调至四人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Police initially said two men died at the scene southeast of Johannesburg, but authorities raised the death toll to four after two more people died in a hospital on Wednesday."
+    }
+   ],
+   "uncertainties": [
+    "事件目前为单一来源报道，尚缺乏交叉验证",
+    "枪击动机尚未公布"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南非一政界人士追悼会后发生枪击 至少四人死亡",
+   "summary_zh": "南非卡特洪镇一场地方政界人士追悼会结束后，一名枪手向离开的哀悼者开枪，警方称至少四人死亡、三人受伤。警方表示，一名伤者为儿童，嫌疑人已自首并被拘留。当局最初称两名男子在现场死亡，随后在周三将死亡人数上调至四人。",
+   "event_type": "other_security",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": null,
+    "city": "Katlehong",
+    "site": "追悼会现场附近",
+    "raw_text": "Katlehong township, southeast of Johannesburg"
+   },
+   "key_facts": [
+    {
+     "fact": "南非卡特洪镇追悼会后发生枪击，至少四人死亡、三人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A gunman fired on a group of mourners leaving a memorial service for a local politician in South Africa, killing at least four people and injuring three others, police said Wednesday."
+    },
+    {
+     "fact": "伤者中至少有一名儿童",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least one of those wounded in the shooting late Tuesday in Katlehong township was a child"
+    },
+    {
+     "fact": "嫌疑人已自首并被拘留",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the suspect was in custody after turning himself in"
+    },
+    {
+     "fact": "警方最初称两名男子在现场死亡，后死亡人数上调至四人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Police initially said two men died at the scene southeast of Johannesburg, but authorities raised the death toll to four after two more people died in a hospital on Wednesday."
+    }
+   ],
+   "uncertainties": [
+    "事件目前为单一来源报道，尚缺乏交叉验证",
+    "枪击动机尚未公布",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_fa65b79c235c759f",
+ "disease_event_id": null,
+ "country_code": "ZA"
+}
