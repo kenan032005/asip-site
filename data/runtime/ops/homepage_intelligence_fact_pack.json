@@ -1,15 +1,15 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-15T00:28:44+08:00",
+ "generated_at": "2026-10-15T01:08:05+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
   "signals_24h": 38,
-  "signals_7d": 259,
+  "signals_7d": 257,
   "verified_events_24h": 41,
-  "verified_events_7d": 294,
+  "verified_events_7d": 292,
   "multi_source_verified_events_7d": 7,
   "countries_with_activity_24h": 13,
   "total_countries_monitored": 22
@@ -67,7 +67,7 @@
   },
   {
    "value": "乍得",
-   "count": 45
+   "count": 44
   },
   {
    "value": "加纳",
@@ -83,7 +83,7 @@
   },
   {
    "value": "尼日尔",
-   "count": 15
+   "count": 14
   },
   {
    "value": "刚果（金）",
@@ -151,44 +151,14 @@
   },
   {
    "value": "C",
-   "count": 215
+   "count": 213
   },
   {
    "value": "A",
-   "count": 111
+   "count": 109
   }
  ],
  "top_verified_events": [
-  {
-   "fact_id": "EVT_4a589da907574a6a",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "尼日尔",
-   "title": "塔瓦监狱开展心理社会干预，为囚犯重返社会做准备",
-   "category": "other_security",
-   "source": "Journal du Niger",
-   "source_tier": "A",
-   "source_role": "official",
-   "time": "2026-10-07 16:56",
-   "importance": "high",
-   "severity": "medium"
-  },
-  {
-   "fact_id": "EVT_6a38cb90c77d13a0",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "恩贾梅纳发生摩托车与行人严重碰撞事故",
-   "category": "other_security",
-   "source": "Alwihda Info",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-07 17:02",
-   "importance": "high",
-   "severity": "medium"
-  },
   {
    "fact_id": "EVT_3444c7e0a1e5acb9",
    "level": "verified_event",
@@ -246,6 +216,36 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-07 23:09",
+   "importance": "high",
+   "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_911399837e95db05",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "几内亚比绍",
+   "title": "几内亚比绍：针对前总统恩巴洛亲信的部长清洗持续进行",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-07 23:23",
+   "importance": "high",
+   "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_3a4e730c48eea81c",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "尼日利亚伊莫州20名被绑架准服役人员获释",
+   "category": "other_security",
+   "source": "International Centre for Investigative Reporting",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-07 18:21",
    "importance": "high",
    "severity": "medium"
   }
@@ -687,16 +687,10 @@
   }
  ],
  "existing_assessment": {
-  "status": "ai",
-  "overall_assessment": "已核实事件方面，埃塞俄比亚与厄立特里亚围绕提格雷方向相互指控侵略、厄军越境部署与无人机袭击，构成当前最突出的国家间冲突风险；南苏丹湖泊州伦拜克族群武装冲突、瓦乌军事法庭就联合国人员遇害案判刑，显示地方暴力与司法追责并行；乍得提贝斯提图尔库14名人质获释、尼日利亚伊莫州20名被绑毕业生获救，绑架与释放事件密集；肯尼亚报告首例埃博拉死亡病例后，刚果（金）、南苏丹、乌干达相继提升警戒，公共卫生跨境风险上升。情报信号层面，均为单源消息、尚待核实：南苏丹团结州SPLM-IO敌对派系冲突、埃塞联邦部队控制厄立特里亚边境附近城镇、乍得米斯基自卫委员会称矿区鸣枪违反停火、阿尔及利亚奥兰逮捕61名摩洛哥人后社媒紧张升温。7日统计显示尼日利亚、乍得、加纳为事件高发国，其他安全类占比最高。",
-  "risk_direction": "worsening",
-  "confidence": "medium",
-  "generated_time": "2026-10-15T00:28:30+08:00",
-  "based_on": "过去24小时/7日公开信息",
-  "model": "",
-  "date": "20261015"
+  "status": "deterministic",
+  "based_on": "过去24小时/7日公开信息（确定性汇总）"
  },
- "fact_count": 553,
+ "fact_count": 549,
  "facts": {
   "news:31bb673acca2bb10": {
    "fact_id": "news:31bb673acca2bb10",
@@ -4552,66 +4546,6 @@
    "time": "2026-10-08 02:21",
    "importance": "low",
    "why_it_matters": ""
-  },
-  "news:9eb778ff03ce51cc": {
-   "fact_id": "news:9eb778ff03ce51cc",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "恩贾梅纳发生摩托车与行人严重碰撞事故",
-   "category": "other_security",
-   "source": "Alwihda Info",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-08 01:02",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:2a51b644a789574f": {
-   "fact_id": "news:2a51b644a789574f",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日尔",
-   "title": "塔瓦监狱开展心理社会干预，为囚犯重返社会做准备",
-   "category": "other_security",
-   "source": "Journal du Niger",
-   "source_tier": "A",
-   "source_role": "official",
-   "time": "2026-10-08 00:56",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "EVT_4a589da907574a6a": {
-   "fact_id": "EVT_4a589da907574a6a",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "尼日尔",
-   "title": "塔瓦监狱开展心理社会干预，为囚犯重返社会做准备",
-   "category": "other_security",
-   "source": "Journal du Niger",
-   "source_tier": "A",
-   "source_role": "official",
-   "time": "2026-10-07 16:56",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_6a38cb90c77d13a0": {
-   "fact_id": "EVT_6a38cb90c77d13a0",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "恩贾梅纳发生摩托车与行人严重碰撞事故",
-   "category": "other_security",
-   "source": "Alwihda Info",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-07 17:02",
-   "importance": "high",
-   "severity": "medium"
   },
   "EVT_3444c7e0a1e5acb9": {
    "fact_id": "EVT_3444c7e0a1e5acb9",
