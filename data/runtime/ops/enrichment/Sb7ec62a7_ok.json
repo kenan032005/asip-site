@@ -1,0 +1,136 @@
+{
+ "label": "Sb7ec62a7",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "838cd443fb837dc4b5f65067a709c0701217a961bd9d60923ea00aebd58dfdef",
+ "tokens": {
+  "input_tokens": 2537,
+  "output_tokens": 583,
+  "total_tokens": 3120
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"霍乱疫情的具体病例数和死亡人数未在报道中提供\", \"报道为单一来源（The ICIR）的特别报道，部分数据引自Mass Atrocities Tracker，尚缺乏其他来源交叉验证\"]",
+    "after": "[\"霍乱疫情的具体病例数和死亡人数未在报道中提供\", \"报道为单一来源（The ICIR）的特别报道，部分数据引自Mass Atrocities Tracker，尚缺乏其他来源交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"霍乱疫情的具体病例数和死亡人数未在报道中提供\", \"报道为单一来源（The ICIR）的特别报道，部分数据引自Mass Atrocities Tracker，尚缺乏其他来源交叉验证\", \"相关情况尚未证实。\"]",
+    "after": "[\"霍乱疫情的具体病例数和死亡人数未在报道中提供\", \"报道为单一来源（The ICIR）的特别报道，部分数据引自Mass Atrocities Tracker，尚缺乏其他来源交叉验证\", \"相关情况尚未证实。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "不安全局势削弱赞法拉州医疗服务，霍乱疫情蔓延",
+   "summary_zh": "尼日利亚赞法拉州多年不安全局势导致许多农村社区医疗服务瘫痪，居民在霍乱等疾病暴发时面临更大风险。报道描述了布库尤姆地方政府区流离失所家庭在霍乱疫情期间就医困难的处境。当地700多个初级卫生保健中心中仅约200个仍在运作，不安全局势被归咎为许多设施关闭或废弃的原因。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Zamfara State",
+    "city": "Bukkuyum",
+    "site": "Orphan and Less Privileged Clinic (OLPC)",
+    "raw_text": "Zamfara State, Bukkuyum Local Government Area, Bukkuyum town"
+   },
+   "key_facts": [
+    {
+     "fact": "赞法拉州多年不安全局势导致许多农村社区医疗服务瘫痪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "IN Zamfara State, years of insecurity have crippled health services in many rural communities, exposing residents to greater risks during disease outbreaks such as cholera."
+    },
+    {
+     "fact": "2025年8月布库尤姆地方政府区暴发霍乱疫情，一名20岁居民被诊断感染",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It was in August 2025, during a cholera outbreak in Bukkuyum Local Government Area of Zamfara State, that Saidu fell ill."
+    },
+    {
+     "fact": "2025年报告显示赞法拉州700多个初级卫生保健中心中仅约200个仍在运作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Reports in 2025 indicated that only about 200 of Zamfara’s more than 700 Primary Healthcare Centres (PHCs) were functional, with persistent insecurity blamed for the closure or abandonment of many facilities."
+    },
+    {
+     "fact": "2021年至2025年间尼日利亚记录28974人死亡，赞法拉州3936人死亡、5447人被绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "28,974 people were killed across Nigeria between 2021 and 2025. Borno in the northeast recorded the highest number, with 4,539 deaths, followed by Zamfara with 3,936 and Kaduna with 2,811. The data on abductions shows Zamfara recorded the highest during the same period, with 5,447 people kidnapped"
+    }
+   ],
+   "uncertainties": [
+    "霍乱疫情的具体病例数和死亡人数未在报道中提供",
+    "报道为单一来源（The ICIR）的特别报道，部分数据引自Mass Atrocities Tracker，尚缺乏其他来源交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "不安全局势削弱赞法拉州医疗服务，霍乱疫情蔓延",
+   "summary_zh": "尼日利亚赞法拉州多年不安全局势导致许多农村社区医疗服务瘫痪，居民在霍乱等疾病暴发时面临更大风险。报道描述了布库尤姆地方政府区流离失所家庭在霍乱疫情期间就医困难的处境。当地700多个初级卫生保健中心中仅约200个仍在运作，不安全局势被归咎为许多设施关闭或废弃的原因。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Zamfara State",
+    "city": "Bukkuyum",
+    "site": "Orphan and Less Privileged Clinic (OLPC)",
+    "raw_text": "Zamfara State, Bukkuyum Local Government Area, Bukkuyum town"
+   },
+   "key_facts": [
+    {
+     "fact": "赞法拉州多年不安全局势导致许多农村社区医疗服务瘫痪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "IN Zamfara State, years of insecurity have crippled health services in many rural communities, exposing residents to greater risks during disease outbreaks such as cholera."
+    },
+    {
+     "fact": "2025年8月布库尤姆地方政府区暴发霍乱疫情，一名20岁居民被诊断感染",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It was in August 2025, during a cholera outbreak in Bukkuyum Local Government Area of Zamfara State, that Saidu fell ill."
+    },
+    {
+     "fact": "2025年报告显示赞法拉州700多个初级卫生保健中心中仅约200个仍在运作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Reports in 2025 indicated that only about 200 of Zamfara’s more than 700 Primary Healthcare Centres (PHCs) were functional, with persistent insecurity blamed for the closure or abandonment of many facilities."
+    },
+    {
+     "fact": "2021年至2025年间尼日利亚记录28974人死亡，赞法拉州3936人死亡、5447人被绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "28,974 people were killed across Nigeria between 2021 and 2025. Borno in the northeast recorded the highest number, with 4,539 deaths, followed by Zamfara with 3,936 and Kaduna with 2,811. The data on abductions shows Zamfara recorded the highest during the same period, with 5,447 people kidnapped"
+    }
+   ],
+   "uncertainties": [
+    "霍乱疫情的具体病例数和死亡人数未在报道中提供",
+    "报道为单一来源（The ICIR）的特别报道，部分数据引自Mass Atrocities Tracker，尚缺乏其他来源交叉验证",
+    "相关情况尚未证实。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_3570f792b7ec62a7",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
