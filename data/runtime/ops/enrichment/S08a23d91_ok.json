@@ -1,0 +1,117 @@
+{
+ "label": "S08a23d91",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "732b161e883d470e187cf935d74046de49f3f66a14818cac80adaa039bf2215c",
+ "tokens": {
+  "input_tokens": 2235,
+  "output_tokens": 494,
+  "total_tokens": 2729
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得米斯基发生自卫委员会与矿业旅交火事件",
+   "summary_zh": "2026年10月14日，乍得米斯基地区发生交火，交战双方为米斯基自卫委员会成员与矿业旅人员。自卫委员会呼吁其人员保持冷静克制、立即停止射击并返回各自基地，同时要求政府和全国调解员紧急介入，制止博基特将军及其手下的行为，恢复公共秩序并保障平民安全。该消息目前为单一来源报道。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "米斯基",
+    "site": null,
+    "raw_text": "à Miski"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得米斯基地区发生自卫委员会与矿业旅之间的交火",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un échange de tirs a opposé, à Miski, des membres du Comité d'autodéfense à des éléments de la Brigade minière, ce 14 octobre 2026."
+    },
+    {
+     "fact": "自卫委员会呼吁其人员保持冷静克制、立即停止射击并返回各自基地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Comité populaire d'autodéfense a exhorté l'ensemble de ses troupes au calme et à la retenue. Il leur enjoint de cesser immédiatement les tirs, d'éviter toute provocation et de regagner leurs bases respectives"
+    },
+    {
+     "fact": "自卫委员会要求政府和全国调解员紧急介入，制止博基特将军及其手下的行为",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Comité appelle le gouvernement ainsi que le Médiateur national à intervenir d'urgence pour neutraliser les agissements du général Bokit et de ses hommes"
+    },
+    {
+     "fact": "事件发生于2026年10月14日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ce 14 octobre 2026"
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（Alwihda Info）报道，尚缺乏交叉验证",
+    "交火的具体伤亡情况未获确认",
+    "对博基特将军及其手下的指控来自自卫委员会单方说法，尚未证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得米斯基发生自卫委员会与矿业旅交火事件",
+   "summary_zh": "2026年10月14日，乍得米斯基地区发生交火，交战双方为米斯基自卫委员会成员与矿业旅人员。自卫委员会呼吁其人员保持冷静克制、立即停止射击并返回各自基地，同时要求政府和全国调解员紧急介入，制止博基特将军及其手下的行为，恢复公共秩序并保障平民安全。该消息目前为单一来源报道。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "米斯基",
+    "site": null,
+    "raw_text": "à Miski"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得米斯基地区发生自卫委员会与矿业旅之间的交火",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un échange de tirs a opposé, à Miski, des membres du Comité d'autodéfense à des éléments de la Brigade minière, ce 14 octobre 2026."
+    },
+    {
+     "fact": "自卫委员会呼吁其人员保持冷静克制、立即停止射击并返回各自基地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Comité populaire d'autodéfense a exhorté l'ensemble de ses troupes au calme et à la retenue. Il leur enjoint de cesser immédiatement les tirs, d'éviter toute provocation et de regagner leurs bases respectives"
+    },
+    {
+     "fact": "自卫委员会要求政府和全国调解员紧急介入，制止博基特将军及其手下的行为",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Comité appelle le gouvernement ainsi que le Médiateur national à intervenir d'urgence pour neutraliser les agissements du général Bokit et de ses hommes"
+    },
+    {
+     "fact": "事件发生于2026年10月14日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ce 14 octobre 2026"
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（Alwihda Info）报道，尚缺乏交叉验证",
+    "交火的具体伤亡情况未获确认",
+    "对博基特将军及其手下的指控来自自卫委员会单方说法，尚未证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_095e02b508a23d91",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
