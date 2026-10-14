@@ -1,0 +1,115 @@
+{
+ "label": "S3555f5b4",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "476775af17a2cf4ea7751c44b89c9ce5e8f15ab74685596cc393b1d0c9dc48eb",
+ "tokens": {
+  "input_tokens": 2477,
+  "output_tokens": 461,
+  "total_tokens": 2938
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得燃油短缺：加油站排长队，油价飞涨",
+   "summary_zh": "连日来乍得各地加油站被抢购，恩贾梅纳的超级汽油和柴油分别售至每升700和800中非法郎，而经济首都蒙杜的汽油价格高达每升1200中非法郎。消费者在不确定与愤怒中排队数小时仍难以加油。消费者保护组织呼吁当局尽快解决，但截至目前乍得当局和加油站方面均未给出官方解释。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": "加油站",
+    "raw_text": "N’Djamena; Moundou, capitale économique"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得多地加油站连日出现长时间排队加油现象",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis plusieurs jours, les stations‑service du Tchad sont prises d’assaut."
+    },
+    {
+     "fact": "恩贾梅纳超级汽油和柴油分别售至每升700和800中非法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À N’Djamena, le super et le gasoil se vendent respectivement à 700 et 800 francs CFA le litre."
+    },
+    {
+     "fact": "蒙杜汽油价格达每升1200中非法郎，为首都价格的两倍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "à Moundou, capitale économique, l’essence atteint 1 200 francs CFA le litre"
+    },
+    {
+     "fact": "消费者保护组织呼吁当局尽快解决，但尚无官方解释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les organisations de défense des consommateurs interpellent les autorités afin qu’elles trouvent une solution rapide. Mais, à ce jour, aucune explication officielle n’a été donnée"
+    }
+   ],
+   "uncertainties": [
+    "燃油短缺的具体原因尚不清楚，责任方也未明确",
+    "目前仅有一个来源（Le Pays Tchad）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得燃油短缺：加油站排长队，油价飞涨",
+   "summary_zh": "连日来乍得各地加油站被抢购，恩贾梅纳的超级汽油和柴油分别售至每升700和800中非法郎，而经济首都蒙杜的汽油价格高达每升1200中非法郎。消费者在不确定与愤怒中排队数小时仍难以加油。消费者保护组织呼吁当局尽快解决，但截至目前乍得当局和加油站方面均未给出官方解释。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": "加油站",
+    "raw_text": "N’Djamena; Moundou, capitale économique"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得多地加油站连日出现长时间排队加油现象",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis plusieurs jours, les stations‑service du Tchad sont prises d’assaut."
+    },
+    {
+     "fact": "恩贾梅纳超级汽油和柴油分别售至每升700和800中非法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À N’Djamena, le super et le gasoil se vendent respectivement à 700 et 800 francs CFA le litre."
+    },
+    {
+     "fact": "蒙杜汽油价格达每升1200中非法郎，为首都价格的两倍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "à Moundou, capitale économique, l’essence atteint 1 200 francs CFA le litre"
+    },
+    {
+     "fact": "消费者保护组织呼吁当局尽快解决，但尚无官方解释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les organisations de défense des consommateurs interpellent les autorités afin qu’elles trouvent une solution rapide. Mais, à ce jour, aucune explication officielle n’a été donnée"
+    }
+   ],
+   "uncertainties": [
+    "燃油短缺的具体原因尚不清楚，责任方也未明确",
+    "目前仅有一个来源（Le Pays Tchad）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_e246b24a3555f5b4",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

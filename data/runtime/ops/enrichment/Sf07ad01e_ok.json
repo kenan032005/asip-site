@@ -1,0 +1,105 @@
+{
+ "label": "Sf07ad01e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e0acf5baafe0d7308d62960b26117c748e52241fdcfedc0cf6ce77370212a409",
+ "tokens": {
+  "input_tokens": 1974,
+  "output_tokens": 386,
+  "total_tokens": 2360
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "刚果（金）埃博拉疫情累计病例突破9000例，死亡超4000人",
+   "summary_zh": "刚果（金）卫生当局表示，该国史上最严重的埃博拉疫情累计病例已超过9000例，死亡人数超过4000人。此次疫情于5月中旬宣布暴发，但专家认为病毒可能更早出现。这是该国第17次埃博拉疫情，始于东北部伊图里省。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "伊图里省",
+    "city": null,
+    "site": null,
+    "raw_text": "Ituri province in northeastern DRC"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）埃博拉疫情累计病例超过9000例，死亡超过4000人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "DR Congo’s worst ever Ebola outbreak has passed 9,000 cases and more than 4,000 deaths, health authorities said on Tuesday."
+    },
+    {
+     "fact": "疫情于5月中旬宣布暴发，但专家认为病毒可能更早出现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The outbreak was declared in mid-May but experts believe the virus emerged weeks or even months earlier."
+    },
+    {
+     "fact": "这是刚果（金）第17次埃博拉疫情，始于东北部伊图里省",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The country’s 17th Ebola outbreak started in Ituri province in northeastern DRC."
+    }
+   ],
+   "uncertainties": [
+    "病毒实际出现时间尚未确认，专家认为可能早于5月中旬数周甚至数月",
+    "目前仅一个来源报道（单一来源），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "刚果（金）埃博拉疫情累计病例突破9000例，死亡超4000人",
+   "summary_zh": "刚果（金）卫生当局表示，该国史上最严重的埃博拉疫情累计病例已超过9000例，死亡人数超过4000人。此次疫情于5月中旬宣布暴发，但专家认为病毒可能更早出现。这是该国第17次埃博拉疫情，始于东北部伊图里省。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "伊图里省",
+    "city": null,
+    "site": null,
+    "raw_text": "Ituri province in northeastern DRC"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）埃博拉疫情累计病例超过9000例，死亡超过4000人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "DR Congo’s worst ever Ebola outbreak has passed 9,000 cases and more than 4,000 deaths, health authorities said on Tuesday."
+    },
+    {
+     "fact": "疫情于5月中旬宣布暴发，但专家认为病毒可能更早出现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The outbreak was declared in mid-May but experts believe the virus emerged weeks or even months earlier."
+    },
+    {
+     "fact": "这是刚果（金）第17次埃博拉疫情，始于东北部伊图里省",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The country’s 17th Ebola outbreak started in Ituri province in northeastern DRC."
+    }
+   ],
+   "uncertainties": [
+    "病毒实际出现时间尚未确认，专家认为可能早于5月中旬数周甚至数月",
+    "目前仅一个来源报道（单一来源），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_0fa9ac87f07ad01e",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

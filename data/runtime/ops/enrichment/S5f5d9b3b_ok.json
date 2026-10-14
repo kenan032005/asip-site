@@ -1,0 +1,128 @@
+{
+ "label": "S5f5d9b3b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1dfe355173a6d3ebd4c665ade72bd1c60dc69de126391f520e97410d5d075525",
+ "tokens": {
+  "input_tokens": 2619,
+  "output_tokens": 520,
+  "total_tokens": 3139
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"马里米被移交的具体过程及是否构成非法引渡尚未经法院裁定\", \"辩护方关于民兵组织实施绑架的指控尚未证实\", \"美国与利比亚政府之间是否存在相关交易的说法未经证实\"]",
+    "after": "[\"马里米被移交的具体过程及是否构成非法引渡尚未经法院裁定\", \"辩护方关于民兵组织实施绑架的指控尚未证实\", \"美国与利比亚政府之间是否存在相关交易的说法未经证实\", \"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "洛克比空难嫌疑人被指遭利比亚秘密行动抓捕",
+   "summary_zh": "洛克比空难嫌疑人阿布·阿吉拉·穆罕默德·马斯乌德·海尔·马里米声称，他于2022年12月被武装人员从利比亚的黎波里非法带走，并被移交给美国联邦调查局，属于“夜间秘密行动”。他否认制造并引爆了1988年泛美航空103号班机炸弹，并请求华盛顿特区法官撤销此案。美国司法部回应称，根据美国法律，被告被移交的方式不应阻止其审判于明年1月进行。",
+   "event_type": "terrorism",
+   "country_iso3": "LBY",
+   "location": {
+    "country_iso3": "LBY",
+    "admin1": null,
+    "city": "的黎波里",
+    "site": null,
+    "raw_text": "Tripoli, Libya"
+   },
+   "key_facts": [
+    {
+     "fact": "洛克比空难嫌疑人声称被非法从利比亚带走以在美国受审",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A Lockerbie bombing suspect has claimed he was illegally removed from Libya to stand trial in the United States after \"a cloak and dagger operation conducted in the dead of night\"."
+    },
+    {
+     "fact": "马里米被指在的黎波里家中被武装人员重新逮捕并移交FBI",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "About two weeks later, a group of armed men, many wearing masks, came to his house and rearrested him, without telling him why or who they were."
+    },
+    {
+     "fact": "美国司法部称移交方式不影响法院管辖权",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the US Department of Justice said, under American law, the manner of his removal should not stop his thrice-postponed trial from finally getting underway in January."
+    },
+    {
+     "fact": "马里米否认制造并引爆泛美航空103号班机炸弹",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Al-Marimi, also known as Mas'ud, has denied building and priming the bomb that brought down Pan Am Flight 103 over Lockerbie on 21 December 1988, killing 270 people."
+    }
+   ],
+   "uncertainties": [
+    "马里米被移交的具体过程及是否构成非法引渡尚未经法院裁定",
+    "辩护方关于民兵组织实施绑架的指控尚未证实",
+    "美国与利比亚政府之间是否存在相关交易的说法未经证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "洛克比空难嫌疑人被指遭利比亚秘密行动抓捕",
+   "summary_zh": "洛克比空难嫌疑人阿布·阿吉拉·穆罕默德·马斯乌德·海尔·马里米声称，他于2022年12月被武装人员从利比亚的黎波里非法带走，并被移交给美国联邦调查局，属于“夜间秘密行动”。他否认制造并引爆了1988年泛美航空103号班机炸弹，并请求华盛顿特区法官撤销此案。美国司法部回应称，根据美国法律，被告被移交的方式不应阻止其审判于明年1月进行。",
+   "event_type": "terrorism",
+   "country_iso3": "LBY",
+   "location": {
+    "country_iso3": "LBY",
+    "admin1": null,
+    "city": "的黎波里",
+    "site": null,
+    "raw_text": "Tripoli, Libya"
+   },
+   "key_facts": [
+    {
+     "fact": "洛克比空难嫌疑人声称被非法从利比亚带走以在美国受审",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A Lockerbie bombing suspect has claimed he was illegally removed from Libya to stand trial in the United States after \"a cloak and dagger operation conducted in the dead of night\"."
+    },
+    {
+     "fact": "马里米被指在的黎波里家中被武装人员重新逮捕并移交FBI",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "About two weeks later, a group of armed men, many wearing masks, came to his house and rearrested him, without telling him why or who they were."
+    },
+    {
+     "fact": "美国司法部称移交方式不影响法院管辖权",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the US Department of Justice said, under American law, the manner of his removal should not stop his thrice-postponed trial from finally getting underway in January."
+    },
+    {
+     "fact": "马里米否认制造并引爆泛美航空103号班机炸弹",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Al-Marimi, also known as Mas'ud, has denied building and priming the bomb that brought down Pan Am Flight 103 over Lockerbie on 21 December 1988, killing 270 people."
+    }
+   ],
+   "uncertainties": [
+    "马里米被移交的具体过程及是否构成非法引渡尚未经法院裁定",
+    "辩护方关于民兵组织实施绑架的指控尚未证实",
+    "美国与利比亚政府之间是否存在相关交易的说法未经证实",
+    "据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_2e0f3c7c5f5d9b3b",
+ "disease_event_id": null,
+ "country_code": "LY"
+}
