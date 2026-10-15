@@ -1,0 +1,127 @@
+{
+ "label": "S0533b339",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ee57b46ed92f0bbfea5a5eea2b2ae5e0e6953aea8ff7b10053d300c4626d6948",
+ "tokens": {
+  "input_tokens": 2594,
+  "output_tokens": 562,
+  "total_tokens": 3156
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得米斯基矿业旅遭袭，两名军官身亡",
+   "summary_zh": "乍得军队总参谋部宣布，2026年10月14日米斯基一处矿业旅阵地遭袭，两名军官死亡、多人受伤。军方将袭击归咎于当地自卫委员会，并谴责其违反2025年4月20日协议。军方要求自卫委员会成员立即放下武器，否则将被视为叛乱行为。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "米斯基",
+    "site": "矿业旅阵地",
+    "raw_text": "Miski, dans le nord du Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得军队总参谋部宣布两名军官在米斯基矿业旅阵地遇袭身亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’État-major général des armées tchadiennes a annoncé, ce jeudi 15 octobre 2026, la mort de deux officiers et plusieurs blessés à la suite d’une attaque contre une position de la Brigade minière à Miski"
+    },
+    {
+     "fact": "军方将袭击归咎于当地自卫委员会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’armée attribue cette attaque au comité d’autodéfense de la localité"
+    },
+    {
+     "fact": "袭击发生于2026年10月14日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ont été attaqués le mercredi 14 octobre par des membres du comité d’autodéfense de la localité"
+    },
+    {
+     "fact": "军方指控自卫委员会违反2025年4月20日协议并多次挑衅",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il accuse notamment le comité d’autodéfense de Miski de multiplier les actes de provocation et de menace, malgré l’application de ces accords par le gouvernement"
+    },
+    {
+     "fact": "军方要求自卫委员会立即放下武器，否则视为叛乱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’État-major général des armées appelle les membres du comité d’autodéfense à déposer immédiatement les armes. Il prévient que tout refus d’obtempérer sera considéré comme un acte de rébellion"
+    }
+   ],
+   "uncertainties": [
+    "袭击责任归属为军方单方面指控，自卫委员会方面尚未回应",
+    "事件目前为单一来源报道，尚缺乏独立交叉验证",
+    "不同来源在事件时间上存在差异"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得米斯基矿业旅遭袭，两名军官身亡",
+   "summary_zh": "乍得军队总参谋部宣布，2026年10月14日米斯基一处矿业旅阵地遭袭，两名军官死亡、多人受伤。军方将袭击归咎于当地自卫委员会，并谴责其违反2025年4月20日协议。军方要求自卫委员会成员立即放下武器，否则将被视为叛乱行为。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "米斯基",
+    "site": "矿业旅阵地",
+    "raw_text": "Miski, dans le nord du Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得军队总参谋部宣布两名军官在米斯基矿业旅阵地遇袭身亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’État-major général des armées tchadiennes a annoncé, ce jeudi 15 octobre 2026, la mort de deux officiers et plusieurs blessés à la suite d’une attaque contre une position de la Brigade minière à Miski"
+    },
+    {
+     "fact": "军方将袭击归咎于当地自卫委员会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’armée attribue cette attaque au comité d’autodéfense de la localité"
+    },
+    {
+     "fact": "袭击发生于2026年10月14日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ont été attaqués le mercredi 14 octobre par des membres du comité d’autodéfense de la localité"
+    },
+    {
+     "fact": "军方指控自卫委员会违反2025年4月20日协议并多次挑衅",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il accuse notamment le comité d’autodéfense de Miski de multiplier les actes de provocation et de menace, malgré l’application de ces accords par le gouvernement"
+    },
+    {
+     "fact": "军方要求自卫委员会立即放下武器，否则视为叛乱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’État-major général des armées appelle les membres du comité d’autodéfense à déposer immédiatement les armes. Il prévient que tout refus d’obtempérer sera considéré comme un acte de rébellion"
+    }
+   ],
+   "uncertainties": [
+    "袭击责任归属为军方单方面指控，自卫委员会方面尚未回应",
+    "事件目前为单一来源报道，尚缺乏独立交叉验证",
+    "不同来源在事件时间上存在差异"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_7c35e0b40533b339",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

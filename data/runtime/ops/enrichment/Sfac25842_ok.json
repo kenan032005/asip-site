@@ -1,0 +1,113 @@
+{
+ "label": "Sfac25842",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ddcb1b94ce0cbf6ccab49641ccab8fa5ccc764febd46b53a1ad06ba2cc32fea3",
+ "tokens": {
+  "input_tokens": 2325,
+  "output_tokens": 549,
+  "total_tokens": 2874
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "阿加德兹召开扩大区域安全委员会会议，讨论非法武器收缴与管控",
+   "summary_zh": "尼日尔阿加德兹地区于2026年10月15日召开区域安全委员会（CRS）扩大会议，国家非法武器收缴与管控委员会（CNCCAI）成员参加。会议由阿加德兹地区省长、少将Ibra Boulama Issa主持，国防力量与会协调非法武器收缴与管控工作。报道称该委员会在区域安全中发挥战略作用，有助于地区和平与安全。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "阿加德兹",
+    "city": "阿加德兹",
+    "site": "省长办公区会议室",
+    "raw_text": "Agadez, salle de réunion du Gouvernorat"
+   },
+   "key_facts": [
+    {
+     "fact": "阿加德兹地区省长Ibra Boulama Issa少将主持区域安全委员会扩大会议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Gouverneur de la Région d’Agadez, le Général de Division Ibra Boulama Issa a présidé, ce Jeudi 15 octobre 2026 dans la salle de réunion du Gouvernorat, une réunion du Conseil Régional de Sécurité (CRS)"
+    },
+    {
+     "fact": "会议扩大至国家非法武器收缴与管控委员会（CNCCAI）成员参加",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une réunion du Conseil Régional de Sécurité (CRS) élargie aux membres de la Commission Nationale pour la Collecte et le Contrôle des Armes illicites (CNCCAI)"
+    },
+    {
+     "fact": "会议协调国防力量开展非法武器收缴与管控工作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "réunissant les forces de défense pour coordonner les efforts de collecte et de contrôle des armes illicites"
+    },
+    {
+     "fact": "会议在国家非法武器收缴与管控委员会常设秘书及文职和军事成员出席下举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La réunion s’est déroulée en présence du Secrétaire permanent de la Commission Nationale pour la Collecte et le Contrôle des Armes Illicites, des membres civils et militaires de l’instance."
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（尼日尔官方通讯社ANP）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "阿加德兹召开扩大区域安全委员会会议，讨论非法武器收缴与管控",
+   "summary_zh": "尼日尔阿加德兹地区于2026年10月15日召开区域安全委员会（CRS）扩大会议，国家非法武器收缴与管控委员会（CNCCAI）成员参加。会议由阿加德兹地区省长、少将Ibra Boulama Issa主持，国防力量与会协调非法武器收缴与管控工作。报道称该委员会在区域安全中发挥战略作用，有助于地区和平与安全。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "阿加德兹",
+    "city": "阿加德兹",
+    "site": "省长办公区会议室",
+    "raw_text": "Agadez, salle de réunion du Gouvernorat"
+   },
+   "key_facts": [
+    {
+     "fact": "阿加德兹地区省长Ibra Boulama Issa少将主持区域安全委员会扩大会议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Gouverneur de la Région d’Agadez, le Général de Division Ibra Boulama Issa a présidé, ce Jeudi 15 octobre 2026 dans la salle de réunion du Gouvernorat, une réunion du Conseil Régional de Sécurité (CRS)"
+    },
+    {
+     "fact": "会议扩大至国家非法武器收缴与管控委员会（CNCCAI）成员参加",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une réunion du Conseil Régional de Sécurité (CRS) élargie aux membres de la Commission Nationale pour la Collecte et le Contrôle des Armes illicites (CNCCAI)"
+    },
+    {
+     "fact": "会议协调国防力量开展非法武器收缴与管控工作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "réunissant les forces de défense pour coordonner les efforts de collecte et de contrôle des armes illicites"
+    },
+    {
+     "fact": "会议在国家非法武器收缴与管控委员会常设秘书及文职和军事成员出席下举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La réunion s’est déroulée en présence du Secrétaire permanent de la Commission Nationale pour la Collecte et le Contrôle des Armes Illicites, des membres civils et militaires de l’instance."
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（尼日尔官方通讯社ANP）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_2ba6ed36fac25842",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

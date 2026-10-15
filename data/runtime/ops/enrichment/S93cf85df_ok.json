@@ -1,0 +1,113 @@
+{
+ "label": "S93cf85df",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "334f426b7a94b1628162c55cc84444aa8920af5d60b564c91bda57400569d732",
+ "tokens": {
+  "input_tokens": 1925,
+  "output_tokens": 347,
+  "total_tokens": 2272
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "开罗一栋五层建筑倒塌，至少六人死亡",
+   "summary_zh": "埃及首都开罗一栋五层建筑倒塌，紧急救援人员已找到六名遇难者遗体，其中包括三名儿童。据当地媒体报道，另有七人受伤被送往医院。救援人员周三继续在废墟中搜寻仍被困人员。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "EGY",
+   "location": {
+    "country_iso3": "EGY",
+    "admin1": null,
+    "city": "开罗",
+    "site": null,
+    "raw_text": "Cairo"
+   },
+   "key_facts": [
+    {
+     "fact": "开罗一栋五层建筑倒塌，至少六人死亡",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "At least six dead after 5-storey building collapses in Cairo"
+    },
+    {
+     "fact": "救援人员找到六名遇难者遗体，其中包括三名儿童",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Emergency crews in the Egyptian capital Cairo have recovered the bodies of six people, including three children, after the collapse of a five-storey building."
+    },
+    {
+     "fact": "据当地媒体报道，七人受伤被送往医院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Seven people were taken to hospital with injuries, according to local media reports."
+    },
+    {
+     "fact": "救援人员周三继续在废墟中搜寻被困人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Rescuers continued to search the debris on Wednesday for anyone still trapped."
+    }
+   ],
+   "uncertainties": [
+    "伤亡人数及被困情况目前仅来自单一来源，尚未获得交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "开罗一栋五层建筑倒塌，至少六人死亡",
+   "summary_zh": "埃及首都开罗一栋五层建筑倒塌，紧急救援人员已找到六名遇难者遗体，其中包括三名儿童。据当地媒体报道，另有七人受伤被送往医院。救援人员周三继续在废墟中搜寻仍被困人员。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "EGY",
+   "location": {
+    "country_iso3": "EGY",
+    "admin1": null,
+    "city": "开罗",
+    "site": null,
+    "raw_text": "Cairo"
+   },
+   "key_facts": [
+    {
+     "fact": "开罗一栋五层建筑倒塌，至少六人死亡",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "At least six dead after 5-storey building collapses in Cairo"
+    },
+    {
+     "fact": "救援人员找到六名遇难者遗体，其中包括三名儿童",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Emergency crews in the Egyptian capital Cairo have recovered the bodies of six people, including three children, after the collapse of a five-storey building."
+    },
+    {
+     "fact": "据当地媒体报道，七人受伤被送往医院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Seven people were taken to hospital with injuries, according to local media reports."
+    },
+    {
+     "fact": "救援人员周三继续在废墟中搜寻被困人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Rescuers continued to search the debris on Wednesday for anyone still trapped."
+    }
+   ],
+   "uncertainties": [
+    "伤亡人数及被困情况目前仅来自单一来源，尚未获得交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_aa9d7e6693cf85df",
+ "disease_event_id": null,
+ "country_code": "EG"
+}
