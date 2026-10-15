@@ -1,0 +1,117 @@
+{
+ "label": "S10d9c578",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "274f342f72f0870f624affeeb90e70d9f011e66e143f55e70442b3993e1db8ba",
+ "tokens": {
+  "input_tokens": 2174,
+  "output_tokens": 527,
+  "total_tokens": 2701
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "美国最高法院将审理特朗普政府就尼日利亚寻求庇护者案件提出的上诉",
+   "summary_zh": "美国最高法院同意审理联邦政府提出的上诉，寻求拒绝尼日利亚人伊祖楚库·奥祖伦巴的庇护申请。据称奥祖伦巴曾被一个疑似分离主义组织“无名枪手”违背意愿扣押并被迫为其做饭。案件焦点在于为被列为恐怖组织的成员做饭是否构成提供物质支持，即使当事人声称受到胁迫。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "拉各斯",
+    "site": null,
+    "raw_text": "a remote camp outside Lagos"
+   },
+   "key_facts": [
+    {
+     "fact": "美国最高法院同意审理联邦政府寻求拒绝尼日利亚人奥祖伦巴庇护申请的上诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The United States Supreme Court has agreed to hear an appeal by the federal government seeking to deny asylum to Izuchukwu Ozurumba, a Nigerian"
+    },
+    {
+     "fact": "奥祖伦巴据称被违背意愿扣押并被迫为一个疑似分离主义组织“无名枪手”做饭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a Nigerian who was allegedly held against his will and forced to cook for a suspected separatist group known as Unknown Gunmen"
+    },
+    {
+     "fact": "案件焦点在于为被列为恐怖组织的成员做饭是否构成提供物质支持，即使当事人声称受到胁迫",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The case centres on whether preparing meals for members of a group designated as a terrorist organisation amounts to providing material support, even when the person involved claims to have been coerced."
+    },
+    {
+     "fact": "奥祖伦巴2022年前往拉各斯郊外一处偏远营地，受雇为厨师，后据称发现该营地由“无名枪手”运营",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ozurumba travelled to a remote camp outside Lagos in 2022 after learning of a job opportunity. He was employed as a cook but later discovered that the camp was allegedly operated by the Unknown Gunmen"
+    }
+   ],
+   "uncertainties": [
+    "奥祖伦巴被扣押及被迫做饭的说法为据称，尚未证实",
+    "“无名枪手”与分离主义活动的关联为据信，尚未确认",
+    "目前仅一个来源（路透社/ICIR）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "美国最高法院将审理特朗普政府就尼日利亚寻求庇护者案件提出的上诉",
+   "summary_zh": "美国最高法院同意审理联邦政府提出的上诉，寻求拒绝尼日利亚人伊祖楚库·奥祖伦巴的庇护申请。据称奥祖伦巴曾被一个疑似分离主义组织“无名枪手”违背意愿扣押并被迫为其做饭。案件焦点在于为被列为恐怖组织的成员做饭是否构成提供物质支持，即使当事人声称受到胁迫。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "拉各斯",
+    "site": null,
+    "raw_text": "a remote camp outside Lagos"
+   },
+   "key_facts": [
+    {
+     "fact": "美国最高法院同意审理联邦政府寻求拒绝尼日利亚人奥祖伦巴庇护申请的上诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The United States Supreme Court has agreed to hear an appeal by the federal government seeking to deny asylum to Izuchukwu Ozurumba, a Nigerian"
+    },
+    {
+     "fact": "奥祖伦巴据称被违背意愿扣押并被迫为一个疑似分离主义组织“无名枪手”做饭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a Nigerian who was allegedly held against his will and forced to cook for a suspected separatist group known as Unknown Gunmen"
+    },
+    {
+     "fact": "案件焦点在于为被列为恐怖组织的成员做饭是否构成提供物质支持，即使当事人声称受到胁迫",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The case centres on whether preparing meals for members of a group designated as a terrorist organisation amounts to providing material support, even when the person involved claims to have been coerced."
+    },
+    {
+     "fact": "奥祖伦巴2022年前往拉各斯郊外一处偏远营地，受雇为厨师，后据称发现该营地由“无名枪手”运营",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ozurumba travelled to a remote camp outside Lagos in 2022 after learning of a job opportunity. He was employed as a cook but later discovered that the camp was allegedly operated by the Unknown Gunmen"
+    }
+   ],
+   "uncertainties": [
+    "奥祖伦巴被扣押及被迫做饭的说法为据称，尚未证实",
+    "“无名枪手”与分离主义活动的关联为据信，尚未确认",
+    "目前仅一个来源（路透社/ICIR）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_40d4c4af10d9c578",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
