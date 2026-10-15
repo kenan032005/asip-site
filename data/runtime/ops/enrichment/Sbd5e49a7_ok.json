@@ -1,0 +1,121 @@
+{
+ "label": "Sbd5e49a7",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1c2398199d18dad1931d06cff50f7361455f32dbb2586e8f51575e664564feee",
+ "tokens": {
+  "input_tokens": 2905,
+  "output_tokens": 473,
+  "total_tokens": 3378
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）伊图里省布尼亚埃博拉疫情应对深入社区",
+   "summary_zh": "刚果（金）埃博拉疫情五个月内已致4000多人死亡，成为该国历史上最致命的疫情，世界卫生组织已将其列为国际关注的突发公共卫生事件。疫情震中位于伊图里省布尼亚，当地社区应对工作开始显现成效，但说服民众、维持卫生服务、保护儿童和帮助幸存者等挑战依然存在。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "伊图里省",
+    "city": "布尼亚",
+    "site": null,
+    "raw_text": "Bunia, province de l'Ituri, RDC"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）埃博拉疫情五个月内已致4000多人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Avec plus de 4 000 morts en cinq mois, l'épidémie d'Ebola en République démocratique du Congo est devenue la plus meurtrière de l'histoire du pays."
+    },
+    {
+     "fact": "世界卫生组织将此次疫情列为国际关注的突发公共卫生事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette 17ᵉ flambée épidémique a été qualifiée d'urgence de santé publique de portée internationale par l'Organisation mondiale de la santé (OMS)."
+    },
+    {
+     "fact": "疫情震中位于伊图里省布尼亚",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À Bunia, dans la province de l'Ituri, épicentre de l'épidémie, les efforts de la riposte commencent à porter leurs fruits."
+    },
+    {
+     "fact": "社区应对工作面临说服民众、维持卫生服务、保护儿童和帮助幸存者等挑战",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Mais derrière les premiers signes d'espoir, les défis restent nombreux : convaincre les populations, maintenir les services de santé, protéger les enfants et accompagner les survivants."
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "indirect",
+   "classification_confidence": 90
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）伊图里省布尼亚埃博拉疫情应对深入社区",
+   "summary_zh": "刚果（金）埃博拉疫情五个月内已致4000多人死亡，成为该国历史上最致命的疫情，世界卫生组织已将其列为国际关注的突发公共卫生事件。疫情震中位于伊图里省布尼亚，当地社区应对工作开始显现成效，但说服民众、维持卫生服务、保护儿童和帮助幸存者等挑战依然存在。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "伊图里省",
+    "city": "布尼亚",
+    "site": null,
+    "raw_text": "Bunia, province de l'Ituri, RDC"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）埃博拉疫情五个月内已致4000多人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Avec plus de 4 000 morts en cinq mois, l'épidémie d'Ebola en République démocratique du Congo est devenue la plus meurtrière de l'histoire du pays."
+    },
+    {
+     "fact": "世界卫生组织将此次疫情列为国际关注的突发公共卫生事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette 17ᵉ flambée épidémique a été qualifiée d'urgence de santé publique de portée internationale par l'Organisation mondiale de la santé (OMS)."
+    },
+    {
+     "fact": "疫情震中位于伊图里省布尼亚",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À Bunia, dans la province de l'Ituri, épicentre de l'épidémie, les efforts de la riposte commencent à porter leurs fruits."
+    },
+    {
+     "fact": "社区应对工作面临说服民众、维持卫生服务、保护儿童和帮助幸存者等挑战",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Mais derrière les premiers signes d'espoir, les défis restent nombreux : convaincre les populations, maintenir les services de santé, protéger les enfants et accompagner les survivants."
+    }
+   ],
+   "uncertainties": [
+    "据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 90
+  }
+ },
+ "event_id": "EVT_37d8bcb5bd5e49a7",
+ "disease_event_id": null,
+ "country_code": "CD"
+}
