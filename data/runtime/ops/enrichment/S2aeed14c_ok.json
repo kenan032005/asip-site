@@ -1,0 +1,144 @@
+{
+ "label": "S2aeed14c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "677a06ae8dd9d1efad2d61213fe976aec488cd84eba12c1eb17c1d9e04d89883",
+ "tokens": {
+  "input_tokens": 2897,
+  "output_tokens": 514,
+  "total_tokens": 3411
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"蝙蝠在埃博拉病毒传播中的具体作用尚未完全确认，报道称其被怀疑为宿主之一\"]",
+    "after": "[\"蝙蝠在埃博拉病毒传播中的具体作用尚未完全确认，报道称其被怀疑为宿主之一\", \"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"蝙蝠在埃博拉病毒传播中的具体作用尚未完全确认，报道称其被怀疑为宿主之一\", \"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "after": "[\"蝙蝠在埃博拉病毒传播中的具体作用尚未完全确认，报道称其被怀疑为宿主之一\", \"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "埃博拉病毒如何传播至人类？刚果（金）疫情已致4300余人死亡",
+   "summary_zh": "刚果（金）当前埃博拉出血热疫情已造成超过4300人死亡。报道指出，森林与生物多样性退化是动物传人疾病发展的主要因素，蝙蝠、猴子、羚羊等可能为病毒宿主。人类进入自然栖息地、森林砍伐、农业和采矿等活动增加了与潜在携带病毒动物的接触风险。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "République démocratique du Congo (RDC)"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）当前埃博拉疫情已致超过4300人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'actuelle épidémie du virus hémorragique qui frappe essentiellement la République démocratique du Congo (RDC) a tué plus de 4 300 personnes."
+    },
+    {
+     "fact": "森林与生物多样性退化是动物传人疾病发展的主要因素",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le recul des forêts et de la biodiversité est le principal facteur de développement d'une maladie transmise aux humains par des animaux."
+    },
+    {
+     "fact": "1976年首例埃博拉患者因购买猴子和羚羊等丛林肉而感染",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce patient 0 avait acheté de la viande de brousse, du singe et de l'antilope. Et c'est comme cela qu'il a été contaminé."
+    },
+    {
+     "fact": "蝙蝠被怀疑为埃博拉病毒宿主之一",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un animal en particulier attire les soupçons : la chauve-souris, capable d'héberger de nombreux virus."
+    },
+    {
+     "fact": "森林砍伐、农业和采矿等人类活动增加与潜在携带病毒动物的接触风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la déforestation, l'agriculture, l'exploitation des mines…"
+    }
+   ],
+   "uncertainties": [
+    "蝙蝠在埃博拉病毒传播中的具体作用尚未完全确认，报道称其被怀疑为宿主之一"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "埃博拉病毒如何传播至人类？刚果（金）疫情已致4300余人死亡",
+   "summary_zh": "刚果（金）当前埃博拉出血热疫情已造成超过4300人死亡。报道指出，森林与生物多样性退化是动物传人疾病发展的主要因素，蝙蝠、猴子、羚羊等可能为病毒宿主。人类进入自然栖息地、森林砍伐、农业和采矿等活动增加了与潜在携带病毒动物的接触风险。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "République démocratique du Congo (RDC)"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）当前埃博拉疫情已致超过4300人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'actuelle épidémie du virus hémorragique qui frappe essentiellement la République démocratique du Congo (RDC) a tué plus de 4 300 personnes."
+    },
+    {
+     "fact": "森林与生物多样性退化是动物传人疾病发展的主要因素",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le recul des forêts et de la biodiversité est le principal facteur de développement d'une maladie transmise aux humains par des animaux."
+    },
+    {
+     "fact": "1976年首例埃博拉患者因购买猴子和羚羊等丛林肉而感染",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce patient 0 avait acheté de la viande de brousse, du singe et de l'antilope. Et c'est comme cela qu'il a été contaminé."
+    },
+    {
+     "fact": "蝙蝠被怀疑为埃博拉病毒宿主之一",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un animal en particulier attire les soupçons : la chauve-souris, capable d'héberger de nombreux virus."
+    },
+    {
+     "fact": "森林砍伐、农业和采矿等人类活动增加与潜在携带病毒动物的接触风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la déforestation, l'agriculture, l'exploitation des mines…"
+    }
+   ],
+   "uncertainties": [
+    "蝙蝠在埃博拉病毒传播中的具体作用尚未完全确认，报道称其被怀疑为宿主之一",
+    "据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_9fe8a3152aeed14c",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

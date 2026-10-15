@@ -1,0 +1,138 @@
+{
+ "label": "Sf5af4d63",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4e81a5d08016af6c0c96946bf8f67a007035a8643974801730e8656515e55bec",
+ "tokens": {
+  "input_tokens": 2862,
+  "output_tokens": 616,
+  "total_tokens": 3478
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"Ervebo疫苗对Bundibugyo病毒的保护效果尚未确定，仅有实验室和动物数据提示可能存在交叉保护\", \"牛津和Moderna候选疫苗的安全性和免疫原性数据尚未公布，哪款更有前景尚无法判断\", \"疫情能否在新型疫苗到来前得到控制尚不确定\"]",
+    "after": "[\"Ervebo疫苗对Bundibugyo病毒的保护效果尚未确定，仅有实验室和动物数据提示可能存在交叉保护\", \"牛津和Moderna候选疫苗的安全性和免疫原性数据尚未公布，哪款更有前景尚无法判断\", \"疫情能否在新型疫苗到来前得到控制尚不确定\", \"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）埃博拉Bundibugyo疫情：牛津与Moderna疫苗试验“带来希望”",
+   "summary_zh": "刚果（金）埃博拉Bundibugyo疫情已报告超过9000例病例和超过4300例死亡，疫情暴发五个月后尚无针对该病毒株的获批疫苗。牛津大学和Moderna的两款候选疫苗正在进行一期试验，预计10月公布结果。Gavi已动员5000万美元支持应对，并释放7万剂Ervebo疫苗用于研究。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "伊图里省",
+    "city": "布尼亚",
+    "site": "布尼亚综合医院埃博拉治疗中心",
+    "raw_text": "centre de traitement d'Ebola de l'hôpital général de Bunia, dans la province de l'Ituri, à l'est du Congo"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）埃博拉Bundibugyo疫情已报告超过9000例病例和超过4300例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plus de 9 000 cas et plus de 4 300 morts en République démocratique du Congo"
+    },
+    {
+     "fact": "疫情暴发五个月后尚无针对Bundibugyo病毒的获批疫苗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cinq mois après le début de l’épidémie, aucun vaccin n’est encore homologué contre Bundibugyo, le virus qui en est responsable"
+    },
+    {
+     "fact": "牛津大学和Moderna的两款候选疫苗正在进行一期试验，预计10月公布结果",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Deux sont en tête : celui de l’université d’Oxford... et celui de Moderna... Nous attendons en octobre les résultats de leurs essais de phase 1"
+    },
+    {
+     "fact": "Gavi已动员5000万美元支持疫情应对",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Gavi a mobilisé 50 millions de dollars au début de l’épidémie pour soutenir la riposte"
+    },
+    {
+     "fact": "应刚果（金）政府请求，已从全球库存中释放7万剂Ervebo疫苗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À la demande du gouvernement congolais, 70 000 doses ont été libérées en août depuis le stock mondial financé par Gavi"
+    }
+   ],
+   "uncertainties": [
+    "Ervebo疫苗对Bundibugyo病毒的保护效果尚未确定，仅有实验室和动物数据提示可能存在交叉保护",
+    "牛津和Moderna候选疫苗的安全性和免疫原性数据尚未公布，哪款更有前景尚无法判断",
+    "疫情能否在新型疫苗到来前得到控制尚不确定"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）埃博拉Bundibugyo疫情：牛津与Moderna疫苗试验“带来希望”",
+   "summary_zh": "刚果（金）埃博拉Bundibugyo疫情已报告超过9000例病例和超过4300例死亡，疫情暴发五个月后尚无针对该病毒株的获批疫苗。牛津大学和Moderna的两款候选疫苗正在进行一期试验，预计10月公布结果。Gavi已动员5000万美元支持应对，并释放7万剂Ervebo疫苗用于研究。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "伊图里省",
+    "city": "布尼亚",
+    "site": "布尼亚综合医院埃博拉治疗中心",
+    "raw_text": "centre de traitement d'Ebola de l'hôpital général de Bunia, dans la province de l'Ituri, à l'est du Congo"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）埃博拉Bundibugyo疫情已报告超过9000例病例和超过4300例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plus de 9 000 cas et plus de 4 300 morts en République démocratique du Congo"
+    },
+    {
+     "fact": "疫情暴发五个月后尚无针对Bundibugyo病毒的获批疫苗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cinq mois après le début de l’épidémie, aucun vaccin n’est encore homologué contre Bundibugyo, le virus qui en est responsable"
+    },
+    {
+     "fact": "牛津大学和Moderna的两款候选疫苗正在进行一期试验，预计10月公布结果",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Deux sont en tête : celui de l’université d’Oxford... et celui de Moderna... Nous attendons en octobre les résultats de leurs essais de phase 1"
+    },
+    {
+     "fact": "Gavi已动员5000万美元支持疫情应对",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Gavi a mobilisé 50 millions de dollars au début de l’épidémie pour soutenir la riposte"
+    },
+    {
+     "fact": "应刚果（金）政府请求，已从全球库存中释放7万剂Ervebo疫苗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À la demande du gouvernement congolais, 70 000 doses ont été libérées en août depuis le stock mondial financé par Gavi"
+    }
+   ],
+   "uncertainties": [
+    "Ervebo疫苗对Bundibugyo病毒的保护效果尚未确定，仅有实验室和动物数据提示可能存在交叉保护",
+    "牛津和Moderna候选疫苗的安全性和免疫原性数据尚未公布，哪款更有前景尚无法判断",
+    "疫情能否在新型疫苗到来前得到控制尚不确定",
+    "据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_ecb5c166f5af4d63",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

@@ -1,0 +1,125 @@
+{
+ "label": "Sa7e1a23d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c37f83fb8a413f4f3a0e96b92f94352dfdbc4af77bf1d1e38f24ad99b124e853",
+ "tokens": {
+  "input_tokens": 2959,
+  "output_tokens": 542,
+  "total_tokens": 3501
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）埃博拉疫情：病例追踪、救治、研究与预防",
+   "summary_zh": "刚果（金）于2026年5月15日在伊图里省宣布埃博拉疫情，至今已满五个月，目前有七个省份直接受到影响。此次为该国第17次埃博拉疫情，由本迪布焦（Bundibugyo）毒株引发，被世界卫生组织列为国际关注的突发公共卫生事件。报道聚焦研究人员、医生和非政府组织在预防、治疗、筛查、宣传与研究等方面的应对工作。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "伊图里省",
+    "city": "金沙萨",
+    "site": null,
+    "raw_text": "province de l'Ituri, Nord-Est du territoire; Kinshasa"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）于2026年5月15日宣布埃博拉疫情，首发病例位于伊图里省",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le 15 mai 2026, la République démocratique du Congo a déclaré l'épidémie d'Ebola, dans la province de l'Ituri, première région touchée dans le Nord-Est du territoire"
+    },
+    {
+     "fact": "目前有七个省份直接受到疫情影响",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aujourd'hui, ce sont sept provinces qui sont directement concernées"
+    },
+    {
+     "fact": "此次为该国第17次埃博拉疫情，被世卫组织列为国际关注的突发公共卫生事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette 17e épidémie a été qualifiée d'urgence de santé publique de portée internationale par l'OMS"
+    },
+    {
+     "fact": "疫情由本迪布焦（Bundibugyo）毒株引发，致死性较强",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cette infection à virus Bundibugyo qui présente un fort caractère létal"
+    },
+    {
+     "fact": "专家称病毒可能在官方警报前已悄然传播数周甚至数月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plusieurs semaines, voire plusieurs mois, de circulation silencieuse auraient pu précéder son identification"
+    }
+   ],
+   "uncertainties": [
+    "病毒在官方警报前已悄然传播数周至数月属推测性表述，尚未证实",
+    "该报道为单一来源（RFI），缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）埃博拉疫情：病例追踪、救治、研究与预防",
+   "summary_zh": "刚果（金）于2026年5月15日在伊图里省宣布埃博拉疫情，至今已满五个月，目前有七个省份直接受到影响。此次为该国第17次埃博拉疫情，由本迪布焦（Bundibugyo）毒株引发，被世界卫生组织列为国际关注的突发公共卫生事件。报道聚焦研究人员、医生和非政府组织在预防、治疗、筛查、宣传与研究等方面的应对工作。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "伊图里省",
+    "city": "金沙萨",
+    "site": null,
+    "raw_text": "province de l'Ituri, Nord-Est du territoire; Kinshasa"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）于2026年5月15日宣布埃博拉疫情，首发病例位于伊图里省",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le 15 mai 2026, la République démocratique du Congo a déclaré l'épidémie d'Ebola, dans la province de l'Ituri, première région touchée dans le Nord-Est du territoire"
+    },
+    {
+     "fact": "目前有七个省份直接受到疫情影响",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aujourd'hui, ce sont sept provinces qui sont directement concernées"
+    },
+    {
+     "fact": "此次为该国第17次埃博拉疫情，被世卫组织列为国际关注的突发公共卫生事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette 17e épidémie a été qualifiée d'urgence de santé publique de portée internationale par l'OMS"
+    },
+    {
+     "fact": "疫情由本迪布焦（Bundibugyo）毒株引发，致死性较强",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cette infection à virus Bundibugyo qui présente un fort caractère létal"
+    },
+    {
+     "fact": "专家称病毒可能在官方警报前已悄然传播数周甚至数月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plusieurs semaines, voire plusieurs mois, de circulation silencieuse auraient pu précéder son identification"
+    }
+   ],
+   "uncertainties": [
+    "病毒在官方警报前已悄然传播数周至数月属推测性表述，尚未证实",
+    "该报道为单一来源（RFI），缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_6639569ca7e1a23d",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

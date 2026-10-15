@@ -1,0 +1,125 @@
+{
+ "label": "S3853741d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b988c25b3b367cd4dd5b7e8fac6aec48d752bdfaf6f94be683160d7d623e00a6",
+ "tokens": {
+  "input_tokens": 2519,
+  "output_tokens": 536,
+  "total_tokens": 3055
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得西北部：两名军人在与地方自卫委员会冲突中丧生",
+   "summary_zh": "乍得西北部提贝斯提地区米斯基金矿区10月14日发生武装冲突，两名军官丧生、九名士兵受伤。冲突双方为米斯基地方自卫委员会与国家矿业活动管控旅。军方要求自卫委员会立即放下武器，否则视为叛乱行为。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "提贝斯提",
+    "city": "米斯基",
+    "site": "金矿区",
+    "raw_text": "région du Tibesti, à Miski, une zone aurifère"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得西北部提贝斯提地区米斯基10月14日发生冲突，两名军官丧生、九名士兵受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "deux officiers ont été tués et neuf soldats blessés le 14 octobre dans des affrontements dans le nord-ouest du pays"
+    },
+    {
+     "fact": "冲突双方为米斯基地方自卫委员会与国家矿业活动管控旅",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils ont opposé le comité d’autodéfense de Miski et la brigade nationale de contrôle des activités minières"
+    },
+    {
+     "fact": "该金矿区因矿产收入分配问题已持续冲突近10年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une zone aurifère en conflit depuis près de 10 ans sur les questions de répartition des revenus miniers"
+    },
+    {
+     "fact": "军方要求自卫委员会立即放下武器，否则视为叛乱行为",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’état-major appelle le comité d’autodéfense à « déposer immédiatement les armes » et « l’inobservation de cet ordre sera considérée comme un acte de rébellion »"
+    },
+    {
+     "fact": "自卫委员会指控矿业管控旅协调员参与黄金开采，要求其撤职",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le retrait du coordinateur de la brigade minière qu’il accuse d’être impliqué dans l’exploitation de l’or"
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅为单一来源（RFI）报道，尚缺乏交叉验证",
+    "自卫委员会关于矿业管控旅协调员参与黄金开采的指控尚未得到证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得西北部：两名军人在与地方自卫委员会冲突中丧生",
+   "summary_zh": "乍得西北部提贝斯提地区米斯基金矿区10月14日发生武装冲突，两名军官丧生、九名士兵受伤。冲突双方为米斯基地方自卫委员会与国家矿业活动管控旅。军方要求自卫委员会立即放下武器，否则视为叛乱行为。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "提贝斯提",
+    "city": "米斯基",
+    "site": "金矿区",
+    "raw_text": "région du Tibesti, à Miski, une zone aurifère"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得西北部提贝斯提地区米斯基10月14日发生冲突，两名军官丧生、九名士兵受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "deux officiers ont été tués et neuf soldats blessés le 14 octobre dans des affrontements dans le nord-ouest du pays"
+    },
+    {
+     "fact": "冲突双方为米斯基地方自卫委员会与国家矿业活动管控旅",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils ont opposé le comité d’autodéfense de Miski et la brigade nationale de contrôle des activités minières"
+    },
+    {
+     "fact": "该金矿区因矿产收入分配问题已持续冲突近10年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une zone aurifère en conflit depuis près de 10 ans sur les questions de répartition des revenus miniers"
+    },
+    {
+     "fact": "军方要求自卫委员会立即放下武器，否则视为叛乱行为",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’état-major appelle le comité d’autodéfense à « déposer immédiatement les armes » et « l’inobservation de cet ordre sera considérée comme un acte de rébellion »"
+    },
+    {
+     "fact": "自卫委员会指控矿业管控旅协调员参与黄金开采，要求其撤职",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le retrait du coordinateur de la brigade minière qu’il accuse d’être impliqué dans l’exploitation de l’or"
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅为单一来源（RFI）报道，尚缺乏交叉验证",
+    "自卫委员会关于矿业管控旅协调员参与黄金开采的指控尚未得到证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_5cb821683853741d",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

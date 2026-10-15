@@ -1,0 +1,148 @@
+{
+ "label": "S85500a0d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e173b890b7786cfa2b8fd4422d4c4856925dc236191881a18a7b2626ef66f7ac",
+ "tokens": {
+  "input_tokens": 2914,
+  "output_tokens": 622,
+  "total_tokens": 3536
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"疫情高峰已过的判断基于部长单方面声明，尚未获得独立来源交叉验证\", \"疫苗能否在两个月内投入使用尚不确定\", \"每日新增病例数据存在波动，部长称有几天更多、有几天更少\"]",
+    "after": "[\"疫情高峰已过的判断基于部长单方面声明，尚未获得独立来源交叉验证\", \"疫苗能否在两个月内投入使用尚不确定\", \"每日新增病例数据存在波动，部长称有几天更多、有几天更少\", \"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"疫情高峰已过的判断基于部长单方面声明，尚未获得独立来源交叉验证\", \"疫苗能否在两个月内投入使用尚不确定\", \"每日新增病例数据存在波动，部长称有几天更多、有几天更少\", \"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "after": "[\"疫情高峰已过的判断基于部长单方面声明，尚未获得独立来源交叉验证\", \"疫苗能否在两个月内投入使用尚不确定\", \"每日新增病例数据存在波动，部长称有几天更多、有几天更少\", \"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）卫生部长称埃博拉疫情高峰已过，疫情中心转移至北基伍省",
+   "summary_zh": "刚果（金）公共卫生部长Samuel Roger Kamba于10月15日接受RFI采访时表示，该国埃博拉疫情高峰已过，目前每日新增病例约50至70例，低于高峰期的约120例。他确认疫情中心已从伊图里省转移至北基伍省，贝尼、布滕博和卡图瓦是当前重点监控地区。部长称累计病例已超过9000例，死亡超过4300例，死亡率约48.2%，并希望疫苗能在两个月内投入使用。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "北基伍省",
+    "city": null,
+    "site": null,
+    "raw_text": "province du Nord-Kivu, notamment trois endroits à Beni, à Butembo et Katwa"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）卫生部长称埃博拉疫情高峰已过，每日新增病例从约120例降至50至70例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "au plus haut de l'épidémie, nous avons atteint à peu près 120 nouveaux cas par jour... actuellement, nous sommes autour de 50 à 70 cas nouveaux par jour"
+    },
+    {
+     "fact": "部长确认疫情中心已从伊图里省转移至北基伍省",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "on a plus de nouveaux cas maintenant au Nord-Kivu qu'en Ituri... l'épidémie, en termes d'épicentre, s'est déplacée vers le Nord-Kivu"
+    },
+    {
+     "fact": "累计病例超过9000例，死亡超过4300例，死亡率约48.2%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nous sommes au-delà de 9 000 cas et au-delà de 4 300 décès. On est autour d'une mortalité de 48,2 %"
+    },
+    {
+     "fact": "贝尼、布滕博和卡图瓦是当前重点监控地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Nord-Kivu est l'endroit que nous regardons avec plus de vigilance maintenant, notamment trois endroits à Beni, à Butembo et Katwa"
+    },
+    {
+     "fact": "部长表示希望疫苗能在两个月内投入使用",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "nous espérons le lancement d'un vaccin d'ici deux mois"
+    }
+   ],
+   "uncertainties": [
+    "疫情高峰已过的判断基于部长单方面声明，尚未获得独立来源交叉验证",
+    "疫苗能否在两个月内投入使用尚不确定",
+    "每日新增病例数据存在波动，部长称有几天更多、有几天更少"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）卫生部长称埃博拉疫情高峰已过，疫情中心转移至北基伍省",
+   "summary_zh": "刚果（金）公共卫生部长Samuel Roger Kamba于10月15日接受RFI采访时表示，该国埃博拉疫情高峰已过，目前每日新增病例约50至70例，低于高峰期的约120例。他确认疫情中心已从伊图里省转移至北基伍省，贝尼、布滕博和卡图瓦是当前重点监控地区。部长称累计病例已超过9000例，死亡超过4300例，死亡率约48.2%，并希望疫苗能在两个月内投入使用。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "北基伍省",
+    "city": null,
+    "site": null,
+    "raw_text": "province du Nord-Kivu, notamment trois endroits à Beni, à Butembo et Katwa"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）卫生部长称埃博拉疫情高峰已过，每日新增病例从约120例降至50至70例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "au plus haut de l'épidémie, nous avons atteint à peu près 120 nouveaux cas par jour... actuellement, nous sommes autour de 50 à 70 cas nouveaux par jour"
+    },
+    {
+     "fact": "部长确认疫情中心已从伊图里省转移至北基伍省",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "on a plus de nouveaux cas maintenant au Nord-Kivu qu'en Ituri... l'épidémie, en termes d'épicentre, s'est déplacée vers le Nord-Kivu"
+    },
+    {
+     "fact": "累计病例超过9000例，死亡超过4300例，死亡率约48.2%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nous sommes au-delà de 9 000 cas et au-delà de 4 300 décès. On est autour d'une mortalité de 48,2 %"
+    },
+    {
+     "fact": "贝尼、布滕博和卡图瓦是当前重点监控地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Nord-Kivu est l'endroit que nous regardons avec plus de vigilance maintenant, notamment trois endroits à Beni, à Butembo et Katwa"
+    },
+    {
+     "fact": "部长表示希望疫苗能在两个月内投入使用",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "nous espérons le lancement d'un vaccin d'ici deux mois"
+    }
+   ],
+   "uncertainties": [
+    "疫情高峰已过的判断基于部长单方面声明，尚未获得独立来源交叉验证",
+    "疫苗能否在两个月内投入使用尚不确定",
+    "每日新增病例数据存在波动，部长称有几天更多、有几天更少",
+    "据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_1c7a03f185500a0d",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

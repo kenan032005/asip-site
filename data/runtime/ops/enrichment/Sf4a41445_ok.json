@@ -1,0 +1,137 @@
+{
+ "label": "Sf4a41445",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b0e38ba16aadb1219858b9c1b8bc1f6b484dbb681806755ec346f6e099a9f749",
+ "tokens": {
+  "input_tokens": 2508,
+  "output_tokens": 563,
+  "total_tokens": 3071
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹军方与湖泊州官员就伦拜克暴力事件死亡人数说法不一",
+   "summary_zh": "南苏丹军方与湖泊州地方当局就10月9日伦拜克暴力事件的死亡人数给出不同数字：军方估计约40人死亡，伦拜克中县官员称46人被杀、65人受伤，而国家信息部上周公布的初步数字为71人。军方称已在冲突群体间设立缓冲区，局势已趋稳定。当地官员称暴力源于帕卡姆与尼扬社区武装青年之间的冲突及长期存在的安全、偷牛等紧张关系。",
+   "event_type": "civil_unrest",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Lakes State",
+    "city": "Rumbek",
+    "site": null,
+    "raw_text": "Rumbek, Lakes State, South Sudan"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹军方与湖泊州官员就伦拜克暴力事件死亡人数说法不一",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "SSPDF, Lakes officials dispute Rumbek violence death toll"
+    },
+    {
+     "fact": "军方估计约40人死亡，其中包括10至11名武装部队成员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "military reports indicated about 40 people had been killed, including 10 to 11 members of the organised forces"
+    },
+    {
+     "fact": "伦拜克中县官员称46人死亡、65人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "46 people, including three women and a girl, were killed and 65 others wounded in attacks in Rumbek town on Friday"
+    },
+    {
+     "fact": "国家信息部上周公布的初步死亡数字为71人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The national Ministry of Information last week put the death toll at 71 , describing the figure as preliminary"
+    },
+    {
+     "fact": "军方称已在敌对群体间部署部队并设立缓冲区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the South Sudan People’s Defence Forces (SSPDF) had deployed troops and established a buffer zone between the rival groups"
+    },
+    {
+     "fact": "暴力涉及帕卡姆与尼扬社区的武装青年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The violence in Rumbek Central County involved armed youth from the Pakam and Nyang communities"
+    }
+   ],
+   "uncertainties": [
+    "死亡人数存在冲突：军方约40人、县官员46人、信息部初步数字71人，尚无法确认",
+    "军方称死亡数字可能随统计变化",
+    "目前仅一个来源（Radio Tamazuj）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹军方与湖泊州官员就伦拜克暴力事件死亡人数说法不一",
+   "summary_zh": "南苏丹军方与湖泊州地方当局就10月9日伦拜克暴力事件的死亡人数给出不同数字：军方估计约40人死亡，伦拜克中县官员称46人被杀、65人受伤，而国家信息部上周公布的初步数字为71人。军方称已在冲突群体间设立缓冲区，局势已趋稳定。当地官员称暴力源于帕卡姆与尼扬社区武装青年之间的冲突及长期存在的安全、偷牛等紧张关系。",
+   "event_type": "civil_unrest",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Lakes State",
+    "city": "Rumbek",
+    "site": null,
+    "raw_text": "Rumbek, Lakes State, South Sudan"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹军方与湖泊州官员就伦拜克暴力事件死亡人数说法不一",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "SSPDF, Lakes officials dispute Rumbek violence death toll"
+    },
+    {
+     "fact": "军方估计约40人死亡，其中包括10至11名武装部队成员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "military reports indicated about 40 people had been killed, including 10 to 11 members of the organised forces"
+    },
+    {
+     "fact": "伦拜克中县官员称46人死亡、65人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "46 people, including three women and a girl, were killed and 65 others wounded in attacks in Rumbek town on Friday"
+    },
+    {
+     "fact": "国家信息部上周公布的初步死亡数字为71人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The national Ministry of Information last week put the death toll at 71 , describing the figure as preliminary"
+    },
+    {
+     "fact": "军方称已在敌对群体间部署部队并设立缓冲区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the South Sudan People’s Defence Forces (SSPDF) had deployed troops and established a buffer zone between the rival groups"
+    },
+    {
+     "fact": "暴力涉及帕卡姆与尼扬社区的武装青年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The violence in Rumbek Central County involved armed youth from the Pakam and Nyang communities"
+    }
+   ],
+   "uncertainties": [
+    "死亡人数存在冲突：军方约40人、县官员46人、信息部初步数字71人，尚无法确认",
+    "军方称死亡数字可能随统计变化",
+    "目前仅一个来源（Radio Tamazuj）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_41185779f4a41445",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

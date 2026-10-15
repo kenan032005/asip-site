@@ -1,0 +1,125 @@
+{
+ "label": "S042c3e02",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f4a7ab4fa8587072cd11a28523695f4784498b24064d246481301c19b82ccc05",
+ "tokens": {
+  "input_tokens": 2327,
+  "output_tokens": 535,
+  "total_tokens": 2862
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹通季东郡族群冲突致16死34伤",
+   "summary_zh": "南苏丹瓦拉普州通季东郡发生族群间暴力冲突，涉及Akok Deng Achuil与Thiik Majok Makom两个社区，造成至少16人死亡、34人受伤。当地代理专员称，冲突源于此前一名社区成员被不明武装人员杀害，该社区怀疑是邻近社区所为并发动报复性袭击。民间组织呼吁停止暴力并追究责任。",
+   "event_type": "civil_unrest",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Warrap State",
+    "city": "Tonj East County",
+    "site": "Ngap Agok and Malual Chum payams",
+    "raw_text": "Ngap Agok and Malual Chum payams in Tonj East County, Warrap State"
+   },
+   "key_facts": [
+    {
+     "fact": "通季东郡族群冲突造成至少16人死亡、34人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least 16 people were killed and 34 others wounded in intercommunal violence"
+    },
+    {
+     "fact": "冲突涉及Akok Deng Achuil与Thiik Majok Makom两个社区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "involving the Akok Deng Achuil and Thiik Majok Makom communities in Ngap Agok and Malual Chum payams"
+    },
+    {
+     "fact": "伤亡发生于10月12日至13日双方冲突中",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the casualties were reported on both sides of the conflict between Oct. 12 and 13"
+    },
+    {
+     "fact": "冲突起因是一名社区成员此前被不明武装人员杀害，该社区怀疑邻近社区并发动报复袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the violence followed the killing of a member of the Akok Deng Achuil community by unidentified armed men... suspected their neighbours from the Thiik Majok Makom community of being responsible for the killing and launched a retaliatory attack"
+    },
+    {
+     "fact": "瓦拉普州民间社会网络呼吁停止暴力并追究责任",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Bona Malual, chairperson of the Warrap State Civil Society Network, called for calm and an end to recurring communal violence"
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（Radio Tamazuj）报道，尚缺乏交叉验证",
+    "袭击者身份及责任归属为社区怀疑，尚未证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹通季东郡族群冲突致16死34伤",
+   "summary_zh": "南苏丹瓦拉普州通季东郡发生族群间暴力冲突，涉及Akok Deng Achuil与Thiik Majok Makom两个社区，造成至少16人死亡、34人受伤。当地代理专员称，冲突源于此前一名社区成员被不明武装人员杀害，该社区怀疑是邻近社区所为并发动报复性袭击。民间组织呼吁停止暴力并追究责任。",
+   "event_type": "civil_unrest",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Warrap State",
+    "city": "Tonj East County",
+    "site": "Ngap Agok and Malual Chum payams",
+    "raw_text": "Ngap Agok and Malual Chum payams in Tonj East County, Warrap State"
+   },
+   "key_facts": [
+    {
+     "fact": "通季东郡族群冲突造成至少16人死亡、34人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least 16 people were killed and 34 others wounded in intercommunal violence"
+    },
+    {
+     "fact": "冲突涉及Akok Deng Achuil与Thiik Majok Makom两个社区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "involving the Akok Deng Achuil and Thiik Majok Makom communities in Ngap Agok and Malual Chum payams"
+    },
+    {
+     "fact": "伤亡发生于10月12日至13日双方冲突中",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the casualties were reported on both sides of the conflict between Oct. 12 and 13"
+    },
+    {
+     "fact": "冲突起因是一名社区成员此前被不明武装人员杀害，该社区怀疑邻近社区并发动报复袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the violence followed the killing of a member of the Akok Deng Achuil community by unidentified armed men... suspected their neighbours from the Thiik Majok Makom community of being responsible for the killing and launched a retaliatory attack"
+    },
+    {
+     "fact": "瓦拉普州民间社会网络呼吁停止暴力并追究责任",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Bona Malual, chairperson of the Warrap State Civil Society Network, called for calm and an end to recurring communal violence"
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（Radio Tamazuj）报道，尚缺乏交叉验证",
+    "袭击者身份及责任归属为社区怀疑，尚未证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_a316f747042c3e02",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

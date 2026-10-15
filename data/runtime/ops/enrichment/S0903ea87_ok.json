@@ -1,0 +1,138 @@
+{
+ "label": "S0903ea87",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "eda2e5b259017ce8af75c2fe5059d522ba5f934f0f09ccae85bf0f54967844d9",
+ "tokens": {
+  "input_tokens": 2933,
+  "output_tokens": 591,
+  "total_tokens": 3524
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"监狱管理部门是否已收到相关文件，与辩护律师的说法存在分歧，尚无法确认\", \"被羁押者是否已实际缴纳罚款，目前仅有辩护方说法\", \"报道为单一来源（RFI），尚缺乏交叉验证\"]",
+    "after": "[\"监狱管理部门是否已收到相关文件，与辩护律师的说法存在分歧，尚无法确认\", \"被羁押者是否已实际缴纳罚款，目前仅有辩护方说法\", \"报道为单一来源（RFI），尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "喀麦隆选举后抗议：22名可获释的已定罪者仍被羁押",
+   "summary_zh": "据RFI报道，喀麦隆军事法庭于10月8日对2025年10月选举后危机中的一批被羁押者作出判决，其中约30人被判处10至11个月监禁，部分人刑期已满。辩护律师称，22名已缴纳罚款、本应获释的被羁押者仍被关押在雅温得Nkondengui监狱；监狱管理部门则表示尚未收到军事法庭书记处出具的释放令及罚款缴纳证明。目前仍有60余名被羁押者在等待审判，人权组织批评由军事法庭审理平民的做法。",
+   "event_type": "political_instability",
+   "country_iso3": "CMR",
+   "location": {
+    "country_iso3": "CMR",
+    "admin1": "中部区",
+    "city": "雅温得",
+    "site": "Nkondengui中央监狱",
+    "raw_text": "la prison de Nkondengui de Yaoundé"
+   },
+   "key_facts": [
+    {
+     "fact": "22名已缴纳罚款、刑期已满的选举后危机被羁押者仍被关押在雅温得Nkondengui监狱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "22 d’entre eux l'ont déjà fait mais n'ont pas été libérés comme ils s'y attendaient"
+    },
+    {
+     "fact": "辩护律师称已完成为获释所需的手续",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Leurs avocats affirment avoir fait les démarches requises"
+    },
+    {
+     "fact": "监狱管理部门称尚未收到军事法庭书记处的释放令及罚款缴纳证明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les responsables de la prison de Yaoundé-Nkondengui affirment n’avoir toujours rien reçu comme documents du greffe du tribunal militaire, notamment la levée d’écrous et les preuves du paiement des amendes"
+    },
+    {
+     "fact": "据选举后危机被羁押者辩护团体称，仍有60余名被羁押者在等待审判",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plus de 60 détenus sont toujours en attente de jugement devant le tribunal militaire de Yaoundé"
+    },
+    {
+     "fact": "人权组织批评由军事法庭审理平民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ce procès est conduit par une juridiction militaire contre de civils"
+    }
+   ],
+   "uncertainties": [
+    "监狱管理部门是否已收到相关文件，与辩护律师的说法存在分歧，尚无法确认",
+    "被羁押者是否已实际缴纳罚款，目前仅有辩护方说法",
+    "报道为单一来源（RFI），尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "喀麦隆选举后抗议：22名可获释的已定罪者仍被羁押",
+   "summary_zh": "据RFI报道，喀麦隆军事法庭于10月8日对2025年10月选举后危机中的一批被羁押者作出判决，其中约30人被判处10至11个月监禁，部分人刑期已满。辩护律师称，22名已缴纳罚款、本应获释的被羁押者仍被关押在雅温得Nkondengui监狱；监狱管理部门则表示尚未收到军事法庭书记处出具的释放令及罚款缴纳证明。目前仍有60余名被羁押者在等待审判，人权组织批评由军事法庭审理平民的做法。",
+   "event_type": "political_instability",
+   "country_iso3": "CMR",
+   "location": {
+    "country_iso3": "CMR",
+    "admin1": "中部区",
+    "city": "雅温得",
+    "site": "Nkondengui中央监狱",
+    "raw_text": "la prison de Nkondengui de Yaoundé"
+   },
+   "key_facts": [
+    {
+     "fact": "22名已缴纳罚款、刑期已满的选举后危机被羁押者仍被关押在雅温得Nkondengui监狱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "22 d’entre eux l'ont déjà fait mais n'ont pas été libérés comme ils s'y attendaient"
+    },
+    {
+     "fact": "辩护律师称已完成为获释所需的手续",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Leurs avocats affirment avoir fait les démarches requises"
+    },
+    {
+     "fact": "监狱管理部门称尚未收到军事法庭书记处的释放令及罚款缴纳证明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les responsables de la prison de Yaoundé-Nkondengui affirment n’avoir toujours rien reçu comme documents du greffe du tribunal militaire, notamment la levée d’écrous et les preuves du paiement des amendes"
+    },
+    {
+     "fact": "据选举后危机被羁押者辩护团体称，仍有60余名被羁押者在等待审判",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plus de 60 détenus sont toujours en attente de jugement devant le tribunal militaire de Yaoundé"
+    },
+    {
+     "fact": "人权组织批评由军事法庭审理平民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ce procès est conduit par une juridiction militaire contre de civils"
+    }
+   ],
+   "uncertainties": [
+    "监狱管理部门是否已收到相关文件，与辩护律师的说法存在分歧，尚无法确认",
+    "被羁押者是否已实际缴纳罚款，目前仅有辩护方说法",
+    "报道为单一来源（RFI），尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_0136148e0903ea87",
+ "disease_event_id": null,
+ "country_code": "CM"
+}
