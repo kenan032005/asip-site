@@ -1,0 +1,127 @@
+{
+ "label": "S59e7a684",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "abb9a97e671d2eee1107c38d1abc675e661911dde96a15850308981598eca154",
+ "tokens": {
+  "input_tokens": 2068,
+  "output_tokens": 503,
+  "total_tokens": 2571
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克莫辛布瓦-达普拉亚发生叛乱分子绑架平民事件，柴村三人受伤",
+   "summary_zh": "据Zitamar报道，莫桑比克德尔加杜角省莫辛布瓦-达普拉亚地区发生多起疑似叛乱分子袭击事件，包括10月8日在莫辛布瓦村绑架七人、10月10日在柴村枪伤三人。据称被绑架者在支付赎金后获释，另有一家庭就一名年轻男子被海军拘留寻求说法。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "德尔加杜角省",
+    "city": "莫辛布瓦-达普拉亚",
+    "site": null,
+    "raw_text": "Mocímboa da Praia, Chai, Macomia district, Cabo Delgado"
+   },
+   "key_facts": [
+    {
+     "fact": "疑似叛乱分子在莫辛布瓦-达普拉亚附近海域出现船只",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "7 Oct: Suspected insurgent boat seen off Mocímboa da Praia"
+    },
+    {
+     "fact": "10月8日莫辛布瓦村七人遭绑架以索取赎金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "8 Oct: Seven kidnapped for ransom in Mocímboa village"
+    },
+    {
+     "fact": "10月10日叛乱分子袭击柴村致三人中枪受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Three people suffered minor gunshot wounds when insurgents raided Chai, in Macomia district, Cabo Delgado, on the evening of 10 October"
+    },
+    {
+     "fact": "据称被绑架者在支付赎金后获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The abductees were reportedly freed after a ransom payment"
+    },
+    {
+     "fact": "有家庭就一名年轻男子被海军拘留寻求说法",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a family seeks answers over a young man’s detention by the navy"
+    }
+   ],
+   "uncertainties": [
+    "袭击者身份为疑似叛乱分子，尚未证实",
+    "被绑架者获释及支付赎金情况据称，尚未获独立确认",
+    "目前仅Zitamar News单一来源报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克莫辛布瓦-达普拉亚发生叛乱分子绑架平民事件，柴村三人受伤",
+   "summary_zh": "据Zitamar报道，莫桑比克德尔加杜角省莫辛布瓦-达普拉亚地区发生多起疑似叛乱分子袭击事件，包括10月8日在莫辛布瓦村绑架七人、10月10日在柴村枪伤三人。据称被绑架者在支付赎金后获释，另有一家庭就一名年轻男子被海军拘留寻求说法。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "德尔加杜角省",
+    "city": "莫辛布瓦-达普拉亚",
+    "site": null,
+    "raw_text": "Mocímboa da Praia, Chai, Macomia district, Cabo Delgado"
+   },
+   "key_facts": [
+    {
+     "fact": "疑似叛乱分子在莫辛布瓦-达普拉亚附近海域出现船只",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "7 Oct: Suspected insurgent boat seen off Mocímboa da Praia"
+    },
+    {
+     "fact": "10月8日莫辛布瓦村七人遭绑架以索取赎金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "8 Oct: Seven kidnapped for ransom in Mocímboa village"
+    },
+    {
+     "fact": "10月10日叛乱分子袭击柴村致三人中枪受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Three people suffered minor gunshot wounds when insurgents raided Chai, in Macomia district, Cabo Delgado, on the evening of 10 October"
+    },
+    {
+     "fact": "据称被绑架者在支付赎金后获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The abductees were reportedly freed after a ransom payment"
+    },
+    {
+     "fact": "有家庭就一名年轻男子被海军拘留寻求说法",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a family seeks answers over a young man’s detention by the navy"
+    }
+   ],
+   "uncertainties": [
+    "袭击者身份为疑似叛乱分子，尚未证实",
+    "被绑架者获释及支付赎金情况据称，尚未获独立确认",
+    "目前仅Zitamar News单一来源报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_88f1ab1259e7a684",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

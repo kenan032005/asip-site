@@ -1,0 +1,136 @@
+{
+ "label": "S83115ad4",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c14d269598ef81d7f990c59c0756e354aa292019ea9b71612b4d4e35d60b534c",
+ "tokens": {
+  "input_tokens": 3089,
+  "output_tokens": 572,
+  "total_tokens": 3661
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"汽油和柴油的官方储备量尚未公布\", \"停产期间进口与库存能否覆盖全部需求尚不确定\"]",
+    "after": "[\"汽油和柴油的官方储备量尚未公布\", \"停产期间进口与库存能否覆盖全部需求尚不确定\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得Djermaya炼油厂停产七周引发燃油供应担忧",
+   "summary_zh": "据Tchadinfos报道，乍得石油部长公开信显示，Djermaya炼油厂自10月15日至11月30日因全面维护暂停生产。同日Le Pays报道恩贾梅纳加油站排起长队，超级汽油售价700中非法郎/升，柴油800中非法郎/升，蒙杜汽油达1200中非法郎/升。8月全国消耗6500万升汽油和柴油，其中Djermaya供应4400万升，停产期间进口与库存需覆盖全部需求，而汽油和柴油的官方储备量尚未公布。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "Djermaya",
+    "site": "Djermaya炼油厂",
+    "raw_text": "la raffinerie de Djermaya"
+   },
+   "key_facts": [
+    {
+     "fact": "Djermaya炼油厂自10月15日至11月30日暂停生产进行维护",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la raffinerie de Djermaya suspend sa production du 15 octobre au 30 novembre pour une maintenance générale"
+    },
+    {
+     "fact": "恩贾梅纳加油站排长队，超级汽油700中非法郎/升，柴油800中非法郎/升",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le même jour, Le Pays décrivait de longues files devant les stations de N’Djaména, où le super se vendait 700 FCFA le litre et le gasoil 800 FCFA"
+    },
+    {
+     "fact": "蒙杜汽油价格达1200中非法郎/升",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "à Moundou, l’essence atteignait 1 200 FCFA le litre"
+    },
+    {
+     "fact": "8月全国消耗6500万升汽油和柴油，Djermaya供应4400万升",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En août, le pays a consommé 65 millions de litres d’essence et de gazole ; Djermaya en a fourni 44 millions"
+    },
+    {
+     "fact": "汽油和柴油的官方储备量尚未公布",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "pour l’essence et le gazole, aucun volume de réserve officiel n’a été publié"
+    }
+   ],
+   "uncertainties": [
+    "汽油和柴油的官方储备量尚未公布",
+    "停产期间进口与库存能否覆盖全部需求尚不确定"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得Djermaya炼油厂停产七周引发燃油供应担忧",
+   "summary_zh": "据Tchadinfos报道，乍得石油部长公开信显示，Djermaya炼油厂自10月15日至11月30日因全面维护暂停生产。同日Le Pays报道恩贾梅纳加油站排起长队，超级汽油售价700中非法郎/升，柴油800中非法郎/升，蒙杜汽油达1200中非法郎/升。8月全国消耗6500万升汽油和柴油，其中Djermaya供应4400万升，停产期间进口与库存需覆盖全部需求，而汽油和柴油的官方储备量尚未公布。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "Djermaya",
+    "site": "Djermaya炼油厂",
+    "raw_text": "la raffinerie de Djermaya"
+   },
+   "key_facts": [
+    {
+     "fact": "Djermaya炼油厂自10月15日至11月30日暂停生产进行维护",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la raffinerie de Djermaya suspend sa production du 15 octobre au 30 novembre pour une maintenance générale"
+    },
+    {
+     "fact": "恩贾梅纳加油站排长队，超级汽油700中非法郎/升，柴油800中非法郎/升",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le même jour, Le Pays décrivait de longues files devant les stations de N’Djaména, où le super se vendait 700 FCFA le litre et le gasoil 800 FCFA"
+    },
+    {
+     "fact": "蒙杜汽油价格达1200中非法郎/升",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "à Moundou, l’essence atteignait 1 200 FCFA le litre"
+    },
+    {
+     "fact": "8月全国消耗6500万升汽油和柴油，Djermaya供应4400万升",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En août, le pays a consommé 65 millions de litres d’essence et de gazole ; Djermaya en a fourni 44 millions"
+    },
+    {
+     "fact": "汽油和柴油的官方储备量尚未公布",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "pour l’essence et le gazole, aucun volume de réserve officiel n’a été publié"
+    }
+   ],
+   "uncertainties": [
+    "汽油和柴油的官方储备量尚未公布",
+    "停产期间进口与库存能否覆盖全部需求尚不确定",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_b46ad18e83115ad4",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
