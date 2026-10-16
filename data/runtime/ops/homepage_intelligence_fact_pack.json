@@ -1,15 +1,15 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-17T03:17:48+08:00",
+ "generated_at": "2026-10-17T04:08:20+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
   "signals_24h": 21,
-  "signals_7d": 237,
+  "signals_7d": 235,
   "verified_events_24h": 24,
-  "verified_events_7d": 269,
+  "verified_events_7d": 267,
   "multi_source_verified_events_7d": 6,
   "countries_with_activity_24h": 13,
   "total_countries_monitored": 22
@@ -63,7 +63,7 @@
  "country_distribution_7d": [
   {
    "value": "尼日利亚",
-   "count": 56
+   "count": 55
   },
   {
    "value": "乍得",
@@ -75,7 +75,7 @@
   },
   {
    "value": "刚果（金）",
-   "count": 22
+   "count": 21
   },
   {
    "value": "南苏丹",
@@ -146,34 +146,19 @@
  ],
  "source_tier_distribution_7d": [
   {
-   "value": "C",
-   "count": 198
-  },
-  {
    "value": "B",
    "count": 197
   },
   {
+   "value": "C",
+   "count": 196
+  },
+  {
    "value": "A",
-   "count": 111
+   "count": 109
   }
  ],
  "top_verified_events": [
-  {
-   "fact_id": "EVT_93f937827ce09c17",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "刚果（金）",
-   "title": "刚果（金）前总统卡比拉抨击齐塞克迪：国家局势持续恶化",
-   "category": "other_security",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-09 20:02",
-   "importance": "high",
-   "severity": "medium"
-  },
   {
    "fact_id": "EVT_a71c50471e8cae1c",
    "level": "verified_event",
@@ -235,17 +220,32 @@
    "severity": "medium"
   },
   {
-   "fact_id": "EVT_f95b686feaa5d11d",
+   "fact_id": "EVT_de0e8c9fec862757",
    "level": "verified_event",
    "evidence_tier": "single_source_published",
    "source_count": 1,
-   "country": "尼日利亚",
-   "title": "尼日利亚FCT部长称教师罢工出于政治动机，威胁实施“不工作不付薪”",
+   "country": "乌干达",
+   "title": "埃博拉患者横跨三国未被发现引发质疑",
+   "category": "public_health",
+   "source": "BBC News (Africa)",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-10 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_f9669d0a14c4e1e6",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "刚果（金）",
+   "title": "刚果（金）前情报局长Kalev Mutond在巴黎去世，ARSP发起200亿美元分包监管行动",
    "category": "other_security",
-   "source": "International Centre for Investigative Reporting",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-09 19:28",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-10 05:04",
    "importance": "high",
    "severity": "medium"
   }
@@ -687,10 +687,16 @@
   }
  ],
  "existing_assessment": {
-  "status": "deterministic",
-  "based_on": "过去24小时/7日公开信息（确定性汇总）"
+  "status": "ai",
+  "overall_assessment": "已核实事件方面，南苏丹伦拜克遭武装团体袭击致71人死亡，琼莱州两社区同意停止敌对行动；吉布提海域移民船倾覆致至少109人死亡、含儿童；埃塞俄比亚与厄立特里亚对峙升级，厄方呼吁联合国介入；萨赫勒流离失所人数自2020年以来近乎翻倍；乌干达埃博拉患者横跨三国未被发现；乍得被美国报告降至第三级。情报信号方面（均为单源消息，尚待核实）：尼日利亚总统下令清剿恐怖分子营地并解救人质；南苏丹通季东部武装青年枪杀4名乘客；塞内加尔达喀尔特大暴雨致多人死亡；联合国开发计划署呼吁加强南苏丹预警机制。整体看，萨赫勒—乍得湖—东非之角构成风险主线，选举周期与公共卫生压力叠加。",
+  "risk_direction": "worsening",
+  "confidence": "medium",
+  "generated_time": "2026-10-17T04:08:08+08:00",
+  "based_on": "过去24小时/7日公开信息",
+  "model": "",
+  "date": "20261017"
  },
- "fact_count": 506,
+ "fact_count": 502,
  "facts": {
   "news:795b7b4cf11d4301": {
    "fact_id": "news:795b7b4cf11d4301",
@@ -4217,51 +4223,6 @@
    "importance": "low",
    "why_it_matters": ""
   },
-  "news:dd725cc670e687d2": {
-   "fact_id": "news:dd725cc670e687d2",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "刚果（金）",
-   "title": "刚果（金）前总统卡比拉抨击齐塞克迪：国家局势持续恶化",
-   "category": "other_security",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-10 04:02",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:2005247d53e4a36b": {
-   "fact_id": "news:2005247d53e4a36b",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "尼日利亚FCT部长称教师罢工出于政治动机，威胁实施“不工作不付薪”",
-   "category": "other_security",
-   "source": "International Centre for Investigative Reporting",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-10 03:28",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "EVT_93f937827ce09c17": {
-   "fact_id": "EVT_93f937827ce09c17",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "刚果（金）",
-   "title": "刚果（金）前总统卡比拉抨击齐塞克迪：国家局势持续恶化",
-   "category": "other_security",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-09 20:02",
-   "importance": "high",
-   "severity": "medium"
-  },
   "EVT_a71c50471e8cae1c": {
    "fact_id": "EVT_a71c50471e8cae1c",
    "level": "verified_event",
@@ -4319,21 +4280,6 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-10 00:20",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_f95b686feaa5d11d": {
-   "fact_id": "EVT_f95b686feaa5d11d",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "尼日利亚FCT部长称教师罢工出于政治动机，威胁实施“不工作不付薪”",
-   "category": "other_security",
-   "source": "International Centre for Investigative Reporting",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-09 19:28",
    "importance": "high",
    "severity": "medium"
   },
