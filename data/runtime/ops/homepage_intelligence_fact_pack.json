@@ -1,15 +1,15 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-16T19:08:03+08:00",
+ "generated_at": "2026-10-16T20:08:06+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 23,
-  "signals_7d": 244,
-  "verified_events_24h": 26,
-  "verified_events_7d": 279,
+  "signals_24h": 21,
+  "signals_7d": 242,
+  "verified_events_24h": 24,
+  "verified_events_7d": 275,
   "multi_source_verified_events_7d": 7,
   "countries_with_activity_24h": 13,
   "total_countries_monitored": 22
@@ -41,7 +41,6 @@
   "加纳",
   "南苏丹",
   "南非",
-  "卢旺达",
   "吉布提",
   "喀麦隆",
   "埃及",
@@ -64,11 +63,11 @@
  "country_distribution_7d": [
   {
    "value": "尼日利亚",
-   "count": 56
+   "count": 55
   },
   {
    "value": "乍得",
-   "count": 46
+   "count": 45
   },
   {
    "value": "加纳",
@@ -114,7 +113,7 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 12
+   "count": 11
   },
   {
    "value": "民众骚乱",
@@ -129,11 +128,11 @@
    "count": 2
   },
   {
-   "value": "公共卫生",
-   "count": 2
+   "value": "族群冲突",
+   "count": 1
   },
   {
-   "value": "族群冲突",
+   "value": "公共卫生",
    "count": 1
   },
   {
@@ -144,7 +143,7 @@
  "source_tier_distribution_7d": [
   {
    "value": "C",
-   "count": 208
+   "count": 204
   },
   {
    "value": "B",
@@ -152,7 +151,7 @@
   },
   {
    "value": "A",
-   "count": 120
+   "count": 118
   }
  ],
  "top_verified_events": [
@@ -168,21 +167,6 @@
    "source_tier": "B",
    "source_role": "regional",
    "time": "2026-10-09 13:36",
-   "importance": "high",
-   "severity": "medium"
-  },
-  {
-   "fact_id": "EVT_cef713ae3efe70e4",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "吉布提",
-   "title": "也门战争外溢至非洲之角：难民涌入吉布提，胡塞武装扩张影响",
-   "category": "other_security",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-09 11:27",
    "importance": "high",
    "severity": "medium"
   },
@@ -243,6 +227,21 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-09 14:10",
+   "importance": "high",
+   "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_81ede1fa39335357",
+   "level": "verified_event",
+   "evidence_tier": "multi_source_verified",
+   "source_count": 2,
+   "country": "乍得",
+   "title": "乍得提贝斯提地区图尔库14名人质获释",
+   "category": "kidnapping",
+   "source": "Journal du Tchad",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-09 13:49",
    "importance": "high",
    "severity": "medium"
   }
@@ -684,10 +683,16 @@
   }
  ],
  "existing_assessment": {
-  "status": "deterministic",
-  "based_on": "过去24小时/7日公开信息（确定性汇总）"
+  "status": "ai",
+  "overall_assessment": "已核实事件方面，南苏丹伦拜克武装袭击致71人死亡、琼莱州两社区同意停止敌对行动；吉布提海域移民船倾覆致至少139人死亡、84人失踪；埃塞俄比亚与厄立特里亚对峙持续，厄方呼吁联合国介入；乍得提贝斯提14名人质获释，执政党MPS在恩贾梅纳集会；加纳教师工会暂停罢工后谈判继续，库马西中央市场火灾疑因恢复供电故障；尼日尔津德尔捣毁两个犯罪网络并推进前武装人员重返社会。情报信号（均为单源消息，尚待核实）显示：塞内加尔达喀尔特大暴雨引发洪灾致多人死亡；南苏丹通季东部武装青年枪杀4名乘客；萨赫勒Jnim与EIS在马里-布基纳法索边境交战；中非共和国“死城日”组织者被捕；刚果（金）埃博拉疫情蔓延至与中非共和国接壤的新省份。整体风险方向趋于恶化，需持续跟踪边境冲突、疫情跨境传播与选举相关暴力风险。",
+  "risk_direction": "worsening",
+  "confidence": "medium",
+  "generated_time": "2026-10-16T20:07:52+08:00",
+  "based_on": "过去24小时/7日公开信息",
+  "model": "",
+  "date": "20261016"
  },
- "fact_count": 523,
+ "fact_count": 517,
  "facts": {
   "news:68b33a93cb8c521d": {
    "fact_id": "news:68b33a93cb8c521d",
@@ -4319,36 +4324,6 @@
    "importance": "low",
    "why_it_matters": ""
   },
-  "news:6cebdb13628d6cfa": {
-   "fact_id": "news:6cebdb13628d6cfa",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "尼日利亚赞法拉州武装分子袭击军事基地与矿区，据称致数十人死亡",
-   "category": "infrastructure_security",
-   "source": "International Centre for Investigative Reporting",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-09 19:52",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:3b84d1f5c63b69af": {
-   "fact_id": "news:3b84d1f5c63b69af",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得提贝斯提地区14名人质被扣押72小时后获释",
-   "category": "kidnapping",
-   "source": "Le Pays Tchad",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-09 19:23",
-   "importance": "low",
-   "why_it_matters": ""
-  },
   "EVT_8fb008833907e130": {
    "fact_id": "EVT_8fb008833907e130",
    "level": "verified_event",
@@ -4361,21 +4336,6 @@
    "source_tier": "B",
    "source_role": "regional",
    "time": "2026-10-09 13:36",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_cef713ae3efe70e4": {
-   "fact_id": "EVT_cef713ae3efe70e4",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "吉布提",
-   "title": "也门战争外溢至非洲之角：难民涌入吉布提，胡塞武装扩张影响",
-   "category": "other_security",
-   "source": "RFI Afrique",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-09 11:27",
    "importance": "high",
    "severity": "medium"
   },
@@ -4514,21 +4474,6 @@
    "importance": "high",
    "severity": "medium"
   },
-  "EVT_4d783091d595a9ae": {
-   "fact_id": "EVT_4d783091d595a9ae",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "尼日利亚赞法拉州武装分子袭击军事基地与矿区，据称致数十人死亡",
-   "category": "infrastructure_security",
-   "source": "International Centre for Investigative Reporting",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-09 11:52",
-   "importance": "high",
-   "severity": "medium"
-  },
   "EVT_67c19d75cb2740c7": {
    "fact_id": "EVT_67c19d75cb2740c7",
    "level": "verified_event",
@@ -4541,21 +4486,6 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-09 18:15",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_e78341a7a298a3a5": {
-   "fact_id": "EVT_e78341a7a298a3a5",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得提贝斯提地区14名人质被扣押72小时后获释",
-   "category": "kidnapping",
-   "source": "Le Pays Tchad",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-09 11:23",
    "importance": "high",
    "severity": "medium"
   },
@@ -4691,21 +4621,6 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-09 19:28",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_96b252dab0502a29": {
-   "fact_id": "EVT_96b252dab0502a29",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "卢旺达",
-   "title": "被控涉1994年卢旺达种族灭绝罪行的医生将在英国受审",
-   "category": "other_security",
-   "source": "BBC News (Africa)",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-09 11:42",
    "importance": "high",
    "severity": "medium"
   },
