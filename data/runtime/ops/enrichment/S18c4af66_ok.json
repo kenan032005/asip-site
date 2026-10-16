@@ -1,0 +1,121 @@
+{
+ "label": "S18c4af66",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f1cb56c94b7528c157ad293971e6be16a79590c318a6331ce2969a9858a610b3",
+ "tokens": {
+  "input_tokens": 2416,
+  "output_tokens": 429,
+  "total_tokens": 2845
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚联邦政府成立工作组协调解除武装与重返社会事务",
+   "summary_zh": "尼日利亚联邦政府在阿布贾成立国家解除武装、复员和重返社会（DDR）工作组，由国家反恐中心协调员代表国家安全顾问主持就职仪式。该工作组旨在以协调统一的国家方式应对暴力极端主义、恐怖主义及其他武装暴力。工作组将加强与相关机构及国际伙伴的合作，并获得英国SPRiNG项目及联合国开发计划署等技术支持。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦政府在阿布贾成立国家DDR工作组",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Government has inaugurated the National Disarmament, Demobilisation and Reintegration (DDR) Task Team"
+    },
+    {
+     "fact": "工作组旨在协调应对暴力极端主义、恐怖主义及其他武装暴力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "to drive coherent, coordinated and nationally-owned approach to addressing violent extremism, terrorism and other armed violence"
+    },
+    {
+     "fact": "就职仪式由国家反恐中心协调员代表国家安全顾问主持",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Task Team was inaugurated on Friday in Abuja by the National Coordinator of National Counter Terrorism Centre (NCTC), Maj.-Gen. Adamu Laka, on behalf of the National Security Adviser (NSA), Malam Nuhu Ribadu"
+    },
+    {
+     "fact": "工作组获得英国SPRiNG项目及联合国开发计划署等技术支持",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He acknowledged the support of the United Kingdom’s Strengthening Peace and Resilience Group (UK: SPRiNG) and the technical contributions of the United Nations Development Programme (UNDP)"
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚联邦政府成立工作组协调解除武装与重返社会事务",
+   "summary_zh": "尼日利亚联邦政府在阿布贾成立国家解除武装、复员和重返社会（DDR）工作组，由国家反恐中心协调员代表国家安全顾问主持就职仪式。该工作组旨在以协调统一的国家方式应对暴力极端主义、恐怖主义及其他武装暴力。工作组将加强与相关机构及国际伙伴的合作，并获得英国SPRiNG项目及联合国开发计划署等技术支持。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦政府在阿布贾成立国家DDR工作组",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Government has inaugurated the National Disarmament, Demobilisation and Reintegration (DDR) Task Team"
+    },
+    {
+     "fact": "工作组旨在协调应对暴力极端主义、恐怖主义及其他武装暴力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "to drive coherent, coordinated and nationally-owned approach to addressing violent extremism, terrorism and other armed violence"
+    },
+    {
+     "fact": "就职仪式由国家反恐中心协调员代表国家安全顾问主持",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Task Team was inaugurated on Friday in Abuja by the National Coordinator of National Counter Terrorism Centre (NCTC), Maj.-Gen. Adamu Laka, on behalf of the National Security Adviser (NSA), Malam Nuhu Ribadu"
+    },
+    {
+     "fact": "工作组获得英国SPRiNG项目及联合国开发计划署等技术支持",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He acknowledged the support of the United Kingdom’s Strengthening Peace and Resilience Group (UK: SPRiNG) and the technical contributions of the United Nations Development Programme (UNDP)"
+    }
+   ],
+   "uncertainties": [
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_c5dc585918c4af66",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

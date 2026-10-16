@@ -1,0 +1,131 @@
+{
+ "label": "S1f707879",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "94f155bbfacb68c4d2e23319a9061c34bd59e799877530177b423ee90cce2da1",
+ "tokens": {
+  "input_tokens": 2771,
+  "output_tokens": 547,
+  "total_tokens": 3318
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "after": "[\"据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔迪法地区举办前战斗人员投降与重返社会区域能力建设研讨会",
+   "summary_zh": "尼日尔迪法地区于2026年10月12日举行区域研讨会，旨在加强地方行为体对武装团体前战斗人员及相关人员投降、接收与重返社会进程的能力。会议由尼日尔稳定与投降接收国家方案协调机构（CNPSR）在内政部监督下组织，系全国巡回活动的一部分。迪法地区秘书长在会上回顾了该地区自2016年以来在博科圣地相关投降与重返社会方面的经验。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "迪法大区",
+    "city": "迪法",
+    "site": "大区政府会议室",
+    "raw_text": "Diffa, salle de réunion du Gouvernorat"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔迪法地区举办关于前战斗人员投降与重返社会进程的区域能力建设研讨会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la cérémonie d’ouverture d’un atelier régional de sensibilisation et de renforcement des capacités des acteurs sur le processus de reddition, de prise en charge et de réintégration des ex-combattants des groupes armés"
+    },
+    {
+     "fact": "会议由尼日尔稳定与投降接收国家方案协调机构（CNPSR）在内政部监督下组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Organisée par la Coordination nationale des programmes de stabilisation et de prise en charge de la reddition au Niger (CNPSR), sous la tutelle du ministère de l’Intérieur"
+    },
+    {
+     "fact": "迪法地区秘书长称该地区自2016年以来积累了前战斗人员投降与重返社会的经验",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Diffa dispose «d’une expérience significative en matière de reddition et de réintégration des ex-combattants, acquise au fil des années de crise"
+    },
+    {
+     "fact": "2016年12月迪法记录首批投降，2017年7月在古杜马里亚设立首个社会经济重返中心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les premières redditions enregistrées à Diffa en décembre 2016 ont été suivies, en juillet 2017, de la mise en place à Goudoumaria du premier centre de réinsertion socio-économique"
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔迪法地区举办前战斗人员投降与重返社会区域能力建设研讨会",
+   "summary_zh": "尼日尔迪法地区于2026年10月12日举行区域研讨会，旨在加强地方行为体对武装团体前战斗人员及相关人员投降、接收与重返社会进程的能力。会议由尼日尔稳定与投降接收国家方案协调机构（CNPSR）在内政部监督下组织，系全国巡回活动的一部分。迪法地区秘书长在会上回顾了该地区自2016年以来在博科圣地相关投降与重返社会方面的经验。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "迪法大区",
+    "city": "迪法",
+    "site": "大区政府会议室",
+    "raw_text": "Diffa, salle de réunion du Gouvernorat"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔迪法地区举办关于前战斗人员投降与重返社会进程的区域能力建设研讨会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la cérémonie d’ouverture d’un atelier régional de sensibilisation et de renforcement des capacités des acteurs sur le processus de reddition, de prise en charge et de réintégration des ex-combattants des groupes armés"
+    },
+    {
+     "fact": "会议由尼日尔稳定与投降接收国家方案协调机构（CNPSR）在内政部监督下组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Organisée par la Coordination nationale des programmes de stabilisation et de prise en charge de la reddition au Niger (CNPSR), sous la tutelle du ministère de l’Intérieur"
+    },
+    {
+     "fact": "迪法地区秘书长称该地区自2016年以来积累了前战斗人员投降与重返社会的经验",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Diffa dispose «d’une expérience significative en matière de reddition et de réintégration des ex-combattants, acquise au fil des années de crise"
+    },
+    {
+     "fact": "2016年12月迪法记录首批投降，2017年7月在古杜马里亚设立首个社会经济重返中心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les premières redditions enregistrées à Diffa en décembre 2016 ont été suivies, en juillet 2017, de la mise en place à Goudoumaria du premier centre de réinsertion socio-économique"
+    }
+   ],
+   "uncertainties": [
+    "据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_12e7477a1f707879",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

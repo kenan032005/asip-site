@@ -1,0 +1,105 @@
+{
+ "label": "S50e7763b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6ae694614f7314251cdfee63362b02da9c44d3606af00b5f1302668153d29edd",
+ "tokens": {
+  "input_tokens": 2008,
+  "output_tokens": 398,
+  "total_tokens": 2406
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "肯尼亚确认第三例埃博拉病例，卫生官员加紧控制疫情",
+   "summary_zh": "肯尼亚确认该国第三例埃博拉病例，引发对病毒在东非扩散的担忧。卫生部称最新患者为一名65岁女性，是肯尼亚前两例病例的密切接触者，自10月6日起接受隔离后出现发热、咽痛和乏力等症状。肯尼亚上周记录首例埃博拉病例，一名40岁商人于10月5日从刚果民主共和国旅行后死亡。",
+   "event_type": "other_security",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Kenya"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚确认第三例埃博拉病例",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Kenya confirms third Ebola case as health officials race to contain outbreak"
+    },
+    {
+     "fact": "最新患者为65岁女性，是前两例病例的密切接触者，自10月6日起隔离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Health Ministry says the latest patient is a 65-year-old woman and a close relative of the country’s first two cases. She had been in quarantine since October 6."
+    },
+    {
+     "fact": "肯尼亚上周记录首例埃博拉病例，一名40岁商人于10月5日从刚果民主共和国旅行后死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kenya recorded its first-ever Ebola case last week, when a 40-year-old businessman died on October 5 after travelling from the Democratic Republic of Congo."
+    }
+   ],
+   "uncertainties": [
+    "信息来自单一来源（Africanews），尚未获得交叉验证",
+    "疫情扩散范围及后续病例情况有待核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "肯尼亚确认第三例埃博拉病例，卫生官员加紧控制疫情",
+   "summary_zh": "肯尼亚确认该国第三例埃博拉病例，引发对病毒在东非扩散的担忧。卫生部称最新患者为一名65岁女性，是肯尼亚前两例病例的密切接触者，自10月6日起接受隔离后出现发热、咽痛和乏力等症状。肯尼亚上周记录首例埃博拉病例，一名40岁商人于10月5日从刚果民主共和国旅行后死亡。",
+   "event_type": "other_security",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Kenya"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚确认第三例埃博拉病例",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Kenya confirms third Ebola case as health officials race to contain outbreak"
+    },
+    {
+     "fact": "最新患者为65岁女性，是前两例病例的密切接触者，自10月6日起隔离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Health Ministry says the latest patient is a 65-year-old woman and a close relative of the country’s first two cases. She had been in quarantine since October 6."
+    },
+    {
+     "fact": "肯尼亚上周记录首例埃博拉病例，一名40岁商人于10月5日从刚果民主共和国旅行后死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kenya recorded its first-ever Ebola case last week, when a 40-year-old businessman died on October 5 after travelling from the Democratic Republic of Congo."
+    }
+   ],
+   "uncertainties": [
+    "信息来自单一来源（Africanews），尚未获得交叉验证",
+    "疫情扩散范围及后续病例情况有待核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_3dab887b50e7763b",
+ "disease_event_id": null,
+ "country_code": "KE"
+}

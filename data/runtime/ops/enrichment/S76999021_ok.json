@@ -1,0 +1,115 @@
+{
+ "label": "S76999021",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "170b47810445965f914888f1ac7133c8eb0b3e80cdfab1d476cbb53e03bf48e0",
+ "tokens": {
+  "input_tokens": 2493,
+  "output_tokens": 450,
+  "total_tokens": 2943
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得登革热疫情暴发，恩贾梅纳医院不堪重负",
+   "summary_zh": "乍得五个省份暴发登革热疫情，累计报告近3000例疑似病例。首都恩贾梅纳集中了大部分确诊病例，当地医院面临严重饱和。据称实际感染和死亡人数可能高于官方统计。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N'Djamena, Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得五个省份暴发登革热疫情，累计报告2929例疑似病例、213例确诊病例和7例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le pays déplore **2 929 cas suspects** et **213 cas confirmés**, pour un total de **7 décès** enregistrés"
+    },
+    {
+     "fact": "213例确诊病例中173例来自首都恩贾梅纳，约占81%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sur les 213 cas confirmés au niveau national, 173 proviennent de N'Djamena, soit environ 81 % du total"
+    },
+    {
+     "fact": "恩贾梅纳医院因患者激增而不堪重负",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Face à l'afflux de malades dans la capitale, les hôpitaux sont actuellement submergés"
+    },
+    {
+     "fact": "疫情最初在东部瓦迪菲拉省Kounougou难民营被发现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le foyer initial de l'épidémie avait été identifié dans le camp de réfugiés de Kounougou, situé dans la province du Wadi Fira, dans l'est du pays"
+    }
+   ],
+   "uncertainties": [
+    "据称存在病例和死亡漏报，实际影响可能高于官方统计",
+    "目前仅一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得登革热疫情暴发，恩贾梅纳医院不堪重负",
+   "summary_zh": "乍得五个省份暴发登革热疫情，累计报告近3000例疑似病例。首都恩贾梅纳集中了大部分确诊病例，当地医院面临严重饱和。据称实际感染和死亡人数可能高于官方统计。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N'Djamena, Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得五个省份暴发登革热疫情，累计报告2929例疑似病例、213例确诊病例和7例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le pays déplore **2 929 cas suspects** et **213 cas confirmés**, pour un total de **7 décès** enregistrés"
+    },
+    {
+     "fact": "213例确诊病例中173例来自首都恩贾梅纳，约占81%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sur les 213 cas confirmés au niveau national, 173 proviennent de N'Djamena, soit environ 81 % du total"
+    },
+    {
+     "fact": "恩贾梅纳医院因患者激增而不堪重负",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Face à l'afflux de malades dans la capitale, les hôpitaux sont actuellement submergés"
+    },
+    {
+     "fact": "疫情最初在东部瓦迪菲拉省Kounougou难民营被发现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le foyer initial de l'épidémie avait été identifié dans le camp de réfugiés de Kounougou, situé dans la province du Wadi Fira, dans l'est du pays"
+    }
+   ],
+   "uncertainties": [
+    "据称存在病例和死亡漏报，实际影响可能高于官方统计",
+    "目前仅一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_91c1f9a276999021",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
