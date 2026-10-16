@@ -1,0 +1,103 @@
+{
+ "label": "Sf95482d1",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "cec9c62b3e40be3b9000fe3469ad7f5be7b03141e2fb6ef91846a4c5b96cb944",
+ "tokens": {
+  "input_tokens": 2453,
+  "output_tokens": 409,
+  "total_tokens": 2862
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "联合国开发计划署呼吁加强预警机制以防止南苏丹冲突",
+   "summary_zh": "联合国开发计划署呼吁南苏丹加强早期预警与响应机制，以识别有害叙事并防止其升级为冲突。该机构高级经济治理顾问在朱巴举行的为期三天研讨会上表示，仇恨言论与虚假信息可能加剧社区间紧张、削弱和解努力。南苏丹外交部官员也呼吁全国协调应对，并强调需要国际合作。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": null,
+    "city": "朱巴",
+    "site": null,
+    "raw_text": "Juba"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国开发计划署呼吁加强早期预警与响应机制以防止南苏丹冲突",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The United Nations Development Programme (UNDP) has called for stronger early warning and response mechanisms to identify harmful narratives and prevent them from escalating into conflict in South Sudan."
+    },
+    {
+     "fact": "联合国开发计划署高级经济治理顾问在朱巴为期三天的研讨会上发表上述言论",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dr. Ligane Massamba Sene, UNDP Senior Economic Governance Advisor, made the remarks on Tuesday during a three-day workshop in Juba to establish a national multi-agency coordination platform to address hate speech and disinformation."
+    },
+    {
+     "fact": "南苏丹外交部多边事务总司长呼吁全国协调应对仇恨言论与虚假信息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Riek Kok, Director General for Multilateral Affairs at the foreign ministry, called for a coordinated national effort to combat hate speech and disinformation, saying the responsibility should not be left to individual institutions."
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（Radio Tamazuj），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "联合国开发计划署呼吁加强预警机制以防止南苏丹冲突",
+   "summary_zh": "联合国开发计划署呼吁南苏丹加强早期预警与响应机制，以识别有害叙事并防止其升级为冲突。该机构高级经济治理顾问在朱巴举行的为期三天研讨会上表示，仇恨言论与虚假信息可能加剧社区间紧张、削弱和解努力。南苏丹外交部官员也呼吁全国协调应对，并强调需要国际合作。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": null,
+    "city": "朱巴",
+    "site": null,
+    "raw_text": "Juba"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国开发计划署呼吁加强早期预警与响应机制以防止南苏丹冲突",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The United Nations Development Programme (UNDP) has called for stronger early warning and response mechanisms to identify harmful narratives and prevent them from escalating into conflict in South Sudan."
+    },
+    {
+     "fact": "联合国开发计划署高级经济治理顾问在朱巴为期三天的研讨会上发表上述言论",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dr. Ligane Massamba Sene, UNDP Senior Economic Governance Advisor, made the remarks on Tuesday during a three-day workshop in Juba to establish a national multi-agency coordination platform to address hate speech and disinformation."
+    },
+    {
+     "fact": "南苏丹外交部多边事务总司长呼吁全国协调应对仇恨言论与虚假信息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Riek Kok, Director General for Multilateral Affairs at the foreign ministry, called for a coordinated national effort to combat hate speech and disinformation, saying the responsibility should not be left to individual institutions."
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（Radio Tamazuj），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_be38c077f95482d1",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

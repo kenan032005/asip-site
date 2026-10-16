@@ -1,0 +1,123 @@
+{
+ "label": "S697a0d66",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a575c51a37929d18148c83417960e7d72037937c195b8365b9271c82260845e6",
+ "tokens": {
+  "input_tokens": 2608,
+  "output_tokens": 684,
+  "total_tokens": 3292
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "东洛贡省议会修订预算达78亿中非法郎",
+   "summary_zh": "乍得东洛贡省议会特别预算会议于2026年10月15日闭幕，通过修订预算，收支平衡总额为7,838,488,017中非法郎。预算从最初的3,595,185,933中非法郎增至7,838,488,017中非法郎，增加约42.4亿中非法郎。资金将用于可再生能源、农业、畜牧、饮用水、卫生、学校基础设施等领域，并计划偿还欠本地经济运营者的债务及支付代课教师欠薪。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "东洛贡省",
+    "city": null,
+    "site": null,
+    "raw_text": "Logone oriental"
+   },
+   "key_facts": [
+    {
+     "fact": "东洛贡省议会修订预算收支平衡总额为7,838,488,017中非法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le budget prévisionnel rectificatif du Conseil provincial du Logone oriental est équilibré en recettes et en dépenses à un montant de 7 838 488 017 francs CFA."
+    },
+    {
+     "fact": "预算从3,595,185,933中非法郎增至7,838,488,017中非法郎，增加4,243,302,084中非法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Initialement fixé à 3 595 185 933 FCFA, le budget est désormais porté à 7 838 488 017 francs CFA, soit une augmentation de 4 243 302 084 francs CFA."
+    },
+    {
+     "fact": "特别预算会议于2026年10月15日闭幕，由省议会主席Obendjé Dieudonné主持",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Clôturée ce 15 octobre 2026 après quinze jours de travaux, la session budgétaire extraordinaire du Conseil provincial du Logone oriental a permis aux conseillers d’examiner le niveau d’exécution du budget initial de 2026 au premier semestre."
+    },
+    {
+     "fact": "预算将用于可再生能源、农业、畜牧、饮用水、卫生、学校基础设施、青年、体育和文化等优先领域",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ce budget vise à soutenir plusieurs axes prioritaires, notamment les énergies renouvelables, l’agriculture, l’élevage, l’approvisionnement en eau potable, la santé, les infrastructures scolaires, la jeunesse, les sports et la culture."
+    },
+    {
+     "fact": "省议会计划偿还欠本地经济运营者的债务，并支付代课教师两个月欠薪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Conseil provincial entend s’acquitter de ses dettes exigibles, notamment celles dues aux opérateurs économiques locaux, et payer deux mois d’arriérés aux enseignants vacataires"
+    }
+   ],
+   "uncertainties": [
+    "该事件为单一来源报道，尚未获得其他来源交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 90
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "东洛贡省议会修订预算达78亿中非法郎",
+   "summary_zh": "乍得东洛贡省议会特别预算会议于2026年10月15日闭幕，通过修订预算，收支平衡总额为7,838,488,017中非法郎。预算从最初的3,595,185,933中非法郎增至7,838,488,017中非法郎，增加约42.4亿中非法郎。资金将用于可再生能源、农业、畜牧、饮用水、卫生、学校基础设施等领域，并计划偿还欠本地经济运营者的债务及支付代课教师欠薪。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "东洛贡省",
+    "city": null,
+    "site": null,
+    "raw_text": "Logone oriental"
+   },
+   "key_facts": [
+    {
+     "fact": "东洛贡省议会修订预算收支平衡总额为7,838,488,017中非法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le budget prévisionnel rectificatif du Conseil provincial du Logone oriental est équilibré en recettes et en dépenses à un montant de 7 838 488 017 francs CFA."
+    },
+    {
+     "fact": "预算从3,595,185,933中非法郎增至7,838,488,017中非法郎，增加4,243,302,084中非法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Initialement fixé à 3 595 185 933 FCFA, le budget est désormais porté à 7 838 488 017 francs CFA, soit une augmentation de 4 243 302 084 francs CFA."
+    },
+    {
+     "fact": "特别预算会议于2026年10月15日闭幕，由省议会主席Obendjé Dieudonné主持",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Clôturée ce 15 octobre 2026 après quinze jours de travaux, la session budgétaire extraordinaire du Conseil provincial du Logone oriental a permis aux conseillers d’examiner le niveau d’exécution du budget initial de 2026 au premier semestre."
+    },
+    {
+     "fact": "预算将用于可再生能源、农业、畜牧、饮用水、卫生、学校基础设施、青年、体育和文化等优先领域",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ce budget vise à soutenir plusieurs axes prioritaires, notamment les énergies renouvelables, l’agriculture, l’élevage, l’approvisionnement en eau potable, la santé, les infrastructures scolaires, la jeunesse, les sports et la culture."
+    },
+    {
+     "fact": "省议会计划偿还欠本地经济运营者的债务，并支付代课教师两个月欠薪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Conseil provincial entend s’acquitter de ses dettes exigibles, notamment celles dues aux opérateurs économiques locaux, et payer deux mois d’arriérés aux enseignants vacataires"
+    }
+   ],
+   "uncertainties": [
+    "该事件为单一来源报道，尚未获得其他来源交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 90
+  }
+ },
+ "event_id": "EVT_fbe9929b697a0d66",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
