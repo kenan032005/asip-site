@@ -1,0 +1,115 @@
+{
+ "label": "S3db6efb3",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "33733d2ce0183a3df9af8aecb40ed56a2fb0265d30dbd472da2f4832f8ec821c",
+ "tokens": {
+  "input_tokens": 2668,
+  "output_tokens": 506,
+  "total_tokens": 3174
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚总统蒂努布下令安全部门清剿恐怖分子营地并解救被绑架者",
+   "summary_zh": "尼日利亚总统博拉·蒂努布指示安全部门负责人清剿恐怖分子和匪徒营地，解救被绑架的尼日利亚人，并在2027年大选前加强安全。国防部长穆萨在阿布贾总统府会议后披露了这一指令，并称安全机构将保持中立以确保选举自由公正。穆萨还表示政府已增加招募、训练和装备采购，新购的约10架飞机和直升机即将由总统主持启用。",
+   "event_type": "terrorism",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": "总统府",
+    "raw_text": "State House, Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚总统蒂努布下令安全部门清剿恐怖分子和匪徒营地并解救被绑架者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "President Bola Tinubu has directed security chiefs to dismantle terrorist and bandit camps, rescue abducted Nigerians and strengthen security ahead of the 2027 general elections."
+    },
+    {
+     "fact": "国防部长穆萨在阿布贾总统府会议后披露该指令",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Minister of Defence, retired Gen. Christopher Musa, disclosed this on Thursday after a meeting between Tinubu and security agency heads at the State House, Abuja."
+    },
+    {
+     "fact": "蒂努布强调需要自由、公正和可信的选举，安全机构将保持专业和中立",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He said Tinubu also stressed the need for free, fair and credible elections, assuring Nigerians that security agencies would remain professional and neutral."
+    },
+    {
+     "fact": "政府已增加招募、训练和装备采购，新购约10架飞机和直升机即将启用",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Musa said the government had increased recruitment, training and procurement of security equipment. He disclosed that newly acquired aircraft and helicopters would soon be commissioned by the President."
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源（尼日利亚通讯社），尚缺乏其他独立来源交叉验证",
+    "被绑架者人数及具体解救进展未在报道中说明"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚总统蒂努布下令安全部门清剿恐怖分子营地并解救被绑架者",
+   "summary_zh": "尼日利亚总统博拉·蒂努布指示安全部门负责人清剿恐怖分子和匪徒营地，解救被绑架的尼日利亚人，并在2027年大选前加强安全。国防部长穆萨在阿布贾总统府会议后披露了这一指令，并称安全机构将保持中立以确保选举自由公正。穆萨还表示政府已增加招募、训练和装备采购，新购的约10架飞机和直升机即将由总统主持启用。",
+   "event_type": "terrorism",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": "总统府",
+    "raw_text": "State House, Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚总统蒂努布下令安全部门清剿恐怖分子和匪徒营地并解救被绑架者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "President Bola Tinubu has directed security chiefs to dismantle terrorist and bandit camps, rescue abducted Nigerians and strengthen security ahead of the 2027 general elections."
+    },
+    {
+     "fact": "国防部长穆萨在阿布贾总统府会议后披露该指令",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Minister of Defence, retired Gen. Christopher Musa, disclosed this on Thursday after a meeting between Tinubu and security agency heads at the State House, Abuja."
+    },
+    {
+     "fact": "蒂努布强调需要自由、公正和可信的选举，安全机构将保持专业和中立",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He said Tinubu also stressed the need for free, fair and credible elections, assuring Nigerians that security agencies would remain professional and neutral."
+    },
+    {
+     "fact": "政府已增加招募、训练和装备采购，新购约10架飞机和直升机即将启用",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Musa said the government had increased recruitment, training and procurement of security equipment. He disclosed that newly acquired aircraft and helicopters would soon be commissioned by the President."
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源（尼日利亚通讯社），尚缺乏其他独立来源交叉验证",
+    "被绑架者人数及具体解救进展未在报道中说明"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_e6a3d14f3db6efb3",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
