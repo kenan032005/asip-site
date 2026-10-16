@@ -1,0 +1,138 @@
+{
+ "label": "Sa0466d6d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "96072c02f4ba7aab5f6bb4fce4deb87869c813350ea1749f60dbb85217c60d94",
+ "tokens": {
+  "input_tokens": 2379,
+  "output_tokens": 558,
+  "total_tokens": 2937
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"事件细节主要来自单一来源（Radio Tamazuj）报道，尚未获得独立交叉验证\", \"匿名居民关于武器归还及2支枪失踪的说法尚未获官方证实\", \"袭击者动机为误认的说法来自代理县长，有待进一步核实\"]",
+    "after": "[\"事件细节主要来自单一来源（Radio Tamazuj）报道，尚未获得独立交叉验证\", \"匿名居民关于武器归还及2支枪失踪的说法尚未获官方证实\", \"袭击者动机为误认的说法来自代理县长，有待进一步核实\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "武装青年枪杀4名乘客，通季东部冲突升级",
+   "summary_zh": "南苏丹瓦拉普州通季东部县当局报告，周二武装青年在Ngap Anet Boma伏击三辆通勤车辆，枪杀包括一名士兵和一名女孩在内的4名乘客。据代理县长称，袭击者误将乘客当作敌对社区的伤员。另有4名受伤乘客被送往通季镇医院，当局已展开调查。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Warrap State",
+    "city": "Tonj East County",
+    "site": "Ngap Anet Boma, Ngap Agok Payam",
+    "raw_text": "Ngap Anet Boma under Ngap Agok Payam in Tonj East County, Warrap State"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹瓦拉普州通季东部县武装青年枪杀4名乘客",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "four passengers, including a soldier and a girl, were shot dead by armed youth on Tuesday"
+    },
+    {
+     "fact": "袭击发生在Ngap Anet Boma，乘客乘坐三辆通勤车辆从Romich地区前往通季南部县",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "They were travelers in three commuter vehicles traveling from the Romich area in Tonj East County heading to Tonj South County when they fell in the deadly road ambush on Tuesday."
+    },
+    {
+     "fact": "据代理县长称，袭击者误将乘客当作Thiik Majok社区的伤员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the assailants mistook the travelers for their wounded adversaries from the Thiik Majok community"
+    },
+    {
+     "fact": "4名受伤乘客被送往通季镇医院，当局已展开调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Four wounded passengers were admitted to a hospital in Tonj Town, and the authorities have launched investigations"
+    },
+    {
+     "fact": "一名匿名居民称士兵被解除武装，8支枪被归还军营，2支枪仍下落不明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eight guns taken from the soldiers escorting the convoy were later returned to a military barracks, but two guns are still missing."
+    }
+   ],
+   "uncertainties": [
+    "事件细节主要来自单一来源（Radio Tamazuj）报道，尚未获得独立交叉验证",
+    "匿名居民关于武器归还及2支枪失踪的说法尚未获官方证实",
+    "袭击者动机为误认的说法来自代理县长，有待进一步核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "武装青年枪杀4名乘客，通季东部冲突升级",
+   "summary_zh": "南苏丹瓦拉普州通季东部县当局报告，周二武装青年在Ngap Anet Boma伏击三辆通勤车辆，枪杀包括一名士兵和一名女孩在内的4名乘客。据代理县长称，袭击者误将乘客当作敌对社区的伤员。另有4名受伤乘客被送往通季镇医院，当局已展开调查。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Warrap State",
+    "city": "Tonj East County",
+    "site": "Ngap Anet Boma, Ngap Agok Payam",
+    "raw_text": "Ngap Anet Boma under Ngap Agok Payam in Tonj East County, Warrap State"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹瓦拉普州通季东部县武装青年枪杀4名乘客",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "four passengers, including a soldier and a girl, were shot dead by armed youth on Tuesday"
+    },
+    {
+     "fact": "袭击发生在Ngap Anet Boma，乘客乘坐三辆通勤车辆从Romich地区前往通季南部县",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "They were travelers in three commuter vehicles traveling from the Romich area in Tonj East County heading to Tonj South County when they fell in the deadly road ambush on Tuesday."
+    },
+    {
+     "fact": "据代理县长称，袭击者误将乘客当作Thiik Majok社区的伤员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the assailants mistook the travelers for their wounded adversaries from the Thiik Majok community"
+    },
+    {
+     "fact": "4名受伤乘客被送往通季镇医院，当局已展开调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Four wounded passengers were admitted to a hospital in Tonj Town, and the authorities have launched investigations"
+    },
+    {
+     "fact": "一名匿名居民称士兵被解除武装，8支枪被归还军营，2支枪仍下落不明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eight guns taken from the soldiers escorting the convoy were later returned to a military barracks, but two guns are still missing."
+    }
+   ],
+   "uncertainties": [
+    "事件细节主要来自单一来源（Radio Tamazuj）报道，尚未获得独立交叉验证",
+    "匿名居民关于武器归还及2支枪失踪的说法尚未获官方证实",
+    "袭击者动机为误认的说法来自代理县长，有待进一步核实",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_4a64daaba0466d6d",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

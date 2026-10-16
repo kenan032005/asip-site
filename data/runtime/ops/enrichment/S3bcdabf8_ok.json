@@ -1,0 +1,138 @@
+{
+ "label": "S3bcdabf8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0f577b516e79165827bc75ee1e5e1496e6d37db054c13b7f26f1042921080482",
+ "tokens": {
+  "input_tokens": 3078,
+  "output_tokens": 540,
+  "total_tokens": 3618
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"死亡人数为“多人”，具体数字尚未明确\", \"降雨量数据为初步统计，有待最终确认\", \"摘要中遇难儿童年龄存在4岁与5岁两种表述\"]",
+    "after": "[\"死亡人数为“多人”，具体数字尚未明确\", \"降雨量数据为初步统计，有待最终确认\", \"摘要中遇难儿童年龄存在4岁与5岁两种表述\", \"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"死亡人数为“多人”，具体数字尚未明确\", \"降雨量数据为初步统计，有待最终确认\", \"摘要中遇难儿童年龄存在4岁与5岁两种表述\", \"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "after": "[\"死亡人数为“多人”，具体数字尚未明确\", \"降雨量数据为初步统计，有待最终确认\", \"摘要中遇难儿童年龄存在4岁与5岁两种表述\", \"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "塞内加尔达喀尔遭遇特大暴雨引发洪灾，多人死亡",
+   "summary_zh": "2026年10月4日，塞内加尔达喀尔地区遭遇特大暴雨，造成多人死亡，其中包括一名年轻母亲及其4岁儿子。据国家民航与气象局初步数据，当地24小时内降雨量高达142毫米，属雨季末期异常降水。达喀尔Parcelles assainies区受灾严重，总理已宣布9210亿非洲法郎（约14亿欧元）的国家排水整治计划。",
+   "event_type": "natural_disaster",
+   "country_iso3": "SEN",
+   "location": {
+    "country_iso3": "SEN",
+    "admin1": "达喀尔",
+    "city": "达喀尔",
+    "site": "Parcelles assainies区",
+    "raw_text": "aux Parcelles assainies, à Dakar"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年10月4日塞内加尔达喀尔遭遇特大暴雨，造成多人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Sénégal, les pluies diluviennes du 4 octobre 2026 ont fait plusieurs morts, dont une jeune mère et son fils de 4 ans, aux Parcelles assainies, à Dakar."
+    },
+    {
+     "fact": "据国家民航与气象局初步数据，当地24小时降雨量达142毫米",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Jusqu'à 142 millimètres de pluie en 24 heures ont été relevés dans la région, selon des chiffres provisoires de l'Agence nationale de l'aviation civile et de la météorologie."
+    },
+    {
+     "fact": "达喀尔Parcelles assainies区一名妇女及其5岁儿子在洪水中溺亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans la même maison, une femme et son fils de 5 ans ont perdu la vie, noyés."
+    },
+    {
+     "fact": "总理宣布9210亿非洲法郎（约14亿欧元）国家排水整治计划",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il a annoncé 921 milliards de francs CFA pour un programme national d'assainissement, soit environ 1,4 milliard d'euros."
+    }
+   ],
+   "uncertainties": [
+    "死亡人数为“多人”，具体数字尚未明确",
+    "降雨量数据为初步统计，有待最终确认",
+    "摘要中遇难儿童年龄存在4岁与5岁两种表述"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "塞内加尔达喀尔遭遇特大暴雨引发洪灾，多人死亡",
+   "summary_zh": "2026年10月4日，塞内加尔达喀尔地区遭遇特大暴雨，造成多人死亡，其中包括一名年轻母亲及其4岁儿子。据国家民航与气象局初步数据，当地24小时内降雨量高达142毫米，属雨季末期异常降水。达喀尔Parcelles assainies区受灾严重，总理已宣布9210亿非洲法郎（约14亿欧元）的国家排水整治计划。",
+   "event_type": "natural_disaster",
+   "country_iso3": "SEN",
+   "location": {
+    "country_iso3": "SEN",
+    "admin1": "达喀尔",
+    "city": "达喀尔",
+    "site": "Parcelles assainies区",
+    "raw_text": "aux Parcelles assainies, à Dakar"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年10月4日塞内加尔达喀尔遭遇特大暴雨，造成多人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Sénégal, les pluies diluviennes du 4 octobre 2026 ont fait plusieurs morts, dont une jeune mère et son fils de 4 ans, aux Parcelles assainies, à Dakar."
+    },
+    {
+     "fact": "据国家民航与气象局初步数据，当地24小时降雨量达142毫米",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Jusqu'à 142 millimètres de pluie en 24 heures ont été relevés dans la région, selon des chiffres provisoires de l'Agence nationale de l'aviation civile et de la météorologie."
+    },
+    {
+     "fact": "达喀尔Parcelles assainies区一名妇女及其5岁儿子在洪水中溺亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans la même maison, une femme et son fils de 5 ans ont perdu la vie, noyés."
+    },
+    {
+     "fact": "总理宣布9210亿非洲法郎（约14亿欧元）国家排水整治计划",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il a annoncé 921 milliards de francs CFA pour un programme national d'assainissement, soit environ 1,4 milliard d'euros."
+    }
+   ],
+   "uncertainties": [
+    "死亡人数为“多人”，具体数字尚未明确",
+    "降雨量数据为初步统计，有待最终确认",
+    "摘要中遇难儿童年龄存在4岁与5岁两种表述",
+    "据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_f5c84a0c3bcdabf8",
+ "disease_event_id": null,
+ "country_code": "SN"
+}

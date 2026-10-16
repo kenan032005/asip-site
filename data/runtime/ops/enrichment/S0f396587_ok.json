@@ -1,0 +1,124 @@
+{
+ "label": "S0f396587",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c4a30a6f71b9548f45f29eb2de859019655b5c1feadc76d446103492229cc49a",
+ "tokens": {
+  "input_tokens": 2626,
+  "output_tokens": 481,
+  "total_tokens": 3107
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（RFI）报道，尚缺乏交叉验证\"]",
+    "after": "[\"目前仅一个来源（RFI）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "中部非洲经共体国家协调埃博拉应对系列协议",
+   "summary_zh": "中部非洲国家经济共同体（Cemac）六个成员国因刚果（金）自去年5月以来暴发的埃博拉疫情而感到威胁，于10月15日在布拉柴维尔举行会议，协调统一了埃博拉病毒病防控计划。会议共协调了八项协议，涵盖流行病学监测、接触者追踪管理、入境边境管控及风险沟通等。与会国家承诺立即落实这些协议。",
+   "event_type": "other_security",
+   "country_iso3": "COG",
+   "location": {
+    "country_iso3": "COG",
+    "admin1": null,
+    "city": "布拉柴维尔",
+    "site": null,
+    "raw_text": "Brazzaville"
+   },
+   "key_facts": [
+    {
+     "fact": "中部非洲经共体六国因埃博拉疫情威胁而协调统一防控计划",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les six pays membres de la Communauté économique des Etats de l’Afrique centrale (Cemac) se sentent menacés par Ebola, qui sévit en République démocratique du Congo depuis mai dernier."
+    },
+    {
+     "fact": "会议于10月15日在布拉柴维尔举行，共协调八项协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ils ont harmonisé leurs plans de prévention de la maladie à virus Ebola au terme d’une réunion tenue jusqu’à hier jeudi 15 octobre à Brazzaville."
+    },
+    {
+     "fact": "协议涵盖流行病学监测、接触者追踪管理、入境边境管控及风险沟通",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au total, ces pays ont harmonisé huit protocoles axés, entre autres, sur la surveillance épidémiologique, le suivi et la gestion des contacts, le contrôle aux frontières d’entrée ou encore la communication sur les risques."
+    },
+    {
+     "fact": "与会国家承诺立即落实这些协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces pays se sont engagés à mettre en application immédiatement ces protocoles."
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "中部非洲经共体国家协调埃博拉应对系列协议",
+   "summary_zh": "中部非洲国家经济共同体（Cemac）六个成员国因刚果（金）自去年5月以来暴发的埃博拉疫情而感到威胁，于10月15日在布拉柴维尔举行会议，协调统一了埃博拉病毒病防控计划。会议共协调了八项协议，涵盖流行病学监测、接触者追踪管理、入境边境管控及风险沟通等。与会国家承诺立即落实这些协议。",
+   "event_type": "other_security",
+   "country_iso3": "COG",
+   "location": {
+    "country_iso3": "COG",
+    "admin1": null,
+    "city": "布拉柴维尔",
+    "site": null,
+    "raw_text": "Brazzaville"
+   },
+   "key_facts": [
+    {
+     "fact": "中部非洲经共体六国因埃博拉疫情威胁而协调统一防控计划",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les six pays membres de la Communauté économique des Etats de l’Afrique centrale (Cemac) se sentent menacés par Ebola, qui sévit en République démocratique du Congo depuis mai dernier."
+    },
+    {
+     "fact": "会议于10月15日在布拉柴维尔举行，共协调八项协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ils ont harmonisé leurs plans de prévention de la maladie à virus Ebola au terme d’une réunion tenue jusqu’à hier jeudi 15 octobre à Brazzaville."
+    },
+    {
+     "fact": "协议涵盖流行病学监测、接触者追踪管理、入境边境管控及风险沟通",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au total, ces pays ont harmonisé huit protocoles axés, entre autres, sur la surveillance épidémiologique, le suivi et la gestion des contacts, le contrôle aux frontières d’entrée ou encore la communication sur les risques."
+    },
+    {
+     "fact": "与会国家承诺立即落实这些协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces pays se sont engagés à mettre en application immédiatement ces protocoles."
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（RFI）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_a47d67a30f396587",
+ "disease_event_id": null,
+ "country_code": "CG"
+}
