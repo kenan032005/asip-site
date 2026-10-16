@@ -1,0 +1,141 @@
+{
+ "label": "S2b8113c2",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f9eae981f7305094a7df29510689e4495b3e84a8cc98bd41e990df5da8fb8239",
+ "tokens": {
+  "input_tokens": 2978,
+  "output_tokens": 772,
+  "total_tokens": 3750
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "萨赫勒：Jnim与EIS圣战分子在马里-布基纳法索边境激烈交战",
+   "summary_zh": "自8月以来，与基地组织有关联的Jnim与萨赫勒伊斯兰国（EIS）武装分子在马里与布基纳法索边境、靠近尼日尔边境一带持续发生激烈战斗。最近一次冲突发生在上周五（10月9日），地点位于布基纳法索乌达兰省Gonadaouri，据称造成数百人死亡。EIS声称在乌达兰杀死400多名Jnim战斗人员，但一名西非研究人员称EIS的伤亡数字一贯不实，目前尚无可靠独立的伤亡统计。",
+   "event_type": "terrorism",
+   "country_iso3": "BFA",
+   "location": {
+    "country_iso3": "BFA",
+    "admin1": "乌达兰省（Oudalan）",
+    "city": "Gonadaouri",
+    "site": null,
+    "raw_text": "à la frontière entre le Mali et le Burkina Faso, non loin également de la frontière nigérienne... le vendredi 9 octobre à Gonadaouri, dans la province burkinabè de l'Oudalan"
+   },
+   "key_facts": [
+    {
+     "fact": "自8月以来，与基地组织有关联的Jnim与萨赫勒伊斯兰国（EIS）在马里-布基纳法索边境持续发生激烈战斗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D'importants combats opposent depuis le mois d'août les jihadistes du Jnim, liés à al-Qaïda, à leurs rivaux de l'État islamique au Sahel (EIS). Ces combats se déroulent à la frontière entre le Mali et le Burkina Faso"
+    },
+    {
+     "fact": "最近一次冲突主要发生在10月9日星期五，地点为布基纳法索乌达兰省Gonadaouri",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les derniers affrontements ont eu lieu en fin de semaine dernière, principalement le vendredi 9 octobre à Gonadaouri, dans la province burkinabè de l'Oudalan"
+    },
+    {
+     "fact": "据称这些战斗造成数百人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils auraient fait plusieurs centaines de morts"
+    },
+    {
+     "fact": "EIS声称一周前在乌达兰杀死400多名Jnim战斗人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La branche sahélienne de l'État islamique affirme avoir tué plus de 400 combattants du Jnim il y a une semaine dans l'Oudalan"
+    },
+    {
+     "fact": "一名西非研究人员称EIS的伤亡数字一贯不实，目前无法建立可靠独立的伤亡统计",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "« Les bilans de l'EIS sont toujours mensongers », tempère un chercheur ouest-africain... aucun bilan fiable et indépendant ne peut être établi à ce stade"
+    },
+    {
+     "fact": "Jnim方面未就这些冲突正式发布消息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Jnim n'a, de son côté, pas communiqué officiellement sur ces affrontements"
+    }
+   ],
+   "uncertainties": [
+    "战斗造成的死亡人数尚未证实，据称有数百人死亡",
+    "EIS声称杀死400多名Jnim战斗人员，但该说法被指一贯不实，未获独立证实",
+    "目前无法建立可靠且独立的伤亡统计",
+    "Jnim未正式确认相关战斗情况",
+    "事件为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "萨赫勒：Jnim与EIS圣战分子在马里-布基纳法索边境激烈交战",
+   "summary_zh": "自8月以来，与基地组织有关联的Jnim与萨赫勒伊斯兰国（EIS）武装分子在马里与布基纳法索边境、靠近尼日尔边境一带持续发生激烈战斗。最近一次冲突发生在上周五（10月9日），地点位于布基纳法索乌达兰省Gonadaouri，据称造成数百人死亡。EIS声称在乌达兰杀死400多名Jnim战斗人员，但一名西非研究人员称EIS的伤亡数字一贯不实，目前尚无可靠独立的伤亡统计。",
+   "event_type": "terrorism",
+   "country_iso3": "BFA",
+   "location": {
+    "country_iso3": "BFA",
+    "admin1": "乌达兰省（Oudalan）",
+    "city": "Gonadaouri",
+    "site": null,
+    "raw_text": "à la frontière entre le Mali et le Burkina Faso, non loin également de la frontière nigérienne... le vendredi 9 octobre à Gonadaouri, dans la province burkinabè de l'Oudalan"
+   },
+   "key_facts": [
+    {
+     "fact": "自8月以来，与基地组织有关联的Jnim与萨赫勒伊斯兰国（EIS）在马里-布基纳法索边境持续发生激烈战斗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D'importants combats opposent depuis le mois d'août les jihadistes du Jnim, liés à al-Qaïda, à leurs rivaux de l'État islamique au Sahel (EIS). Ces combats se déroulent à la frontière entre le Mali et le Burkina Faso"
+    },
+    {
+     "fact": "最近一次冲突主要发生在10月9日星期五，地点为布基纳法索乌达兰省Gonadaouri",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les derniers affrontements ont eu lieu en fin de semaine dernière, principalement le vendredi 9 octobre à Gonadaouri, dans la province burkinabè de l'Oudalan"
+    },
+    {
+     "fact": "据称这些战斗造成数百人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils auraient fait plusieurs centaines de morts"
+    },
+    {
+     "fact": "EIS声称一周前在乌达兰杀死400多名Jnim战斗人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La branche sahélienne de l'État islamique affirme avoir tué plus de 400 combattants du Jnim il y a une semaine dans l'Oudalan"
+    },
+    {
+     "fact": "一名西非研究人员称EIS的伤亡数字一贯不实，目前无法建立可靠独立的伤亡统计",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "« Les bilans de l'EIS sont toujours mensongers », tempère un chercheur ouest-africain... aucun bilan fiable et indépendant ne peut être établi à ce stade"
+    },
+    {
+     "fact": "Jnim方面未就这些冲突正式发布消息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Jnim n'a, de son côté, pas communiqué officiellement sur ces affrontements"
+    }
+   ],
+   "uncertainties": [
+    "战斗造成的死亡人数尚未证实，据称有数百人死亡",
+    "EIS声称杀死400多名Jnim战斗人员，但该说法被指一贯不实，未获独立证实",
+    "目前无法建立可靠且独立的伤亡统计",
+    "Jnim未正式确认相关战斗情况",
+    "事件为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_6f495a422b8113c2",
+ "disease_event_id": null,
+ "country_code": "BF"
+}

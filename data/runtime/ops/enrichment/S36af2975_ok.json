@@ -1,0 +1,127 @@
+{
+ "label": "S36af2975",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ae58ac1f493e90c2601cde69be2e50a246ee06e9f8c979e9e47f7ed804eaf6b2",
+ "tokens": {
+  "input_tokens": 2874,
+  "output_tokens": 536,
+  "total_tokens": 3410
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "中非共和国：反对燃油涨价的“死城日”组织者被捕",
+   "summary_zh": "中非共和国五名民间社会人士于2026年10月15日（周四）在班吉被国家安全公司（CNS）人员逮捕，当时他们正准备举行新闻发布会。这些活动人士此前发起反对燃油价格上涨的“死城日”动员，民众部分响应。逮捕发生在亲政府组织就此次号召提出投诉的次日。政府与CNS尚未就逮捕原因作出回应。",
+   "event_type": "civil_unrest",
+   "country_iso3": "CAF",
+   "location": {
+    "country_iso3": "CAF",
+    "admin1": null,
+    "city": "班吉",
+    "site": "让二十三世中心",
+    "raw_text": "au centre Jean-XXIII de Bangui"
+   },
+   "key_facts": [
+    {
+     "fact": "五名民间社会人士在班吉被国家安全公司人员逮捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cinq figures de la société civile ont été interpellées jeudi 15 octobre 2026 à Bangui"
+    },
+    {
+     "fact": "他们当时正准备举行新闻发布会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces acteurs de la société civile s'apprêtaient à tenir une conférence de presse lorsque des éléments de la Compagnie nationale de sécurité (CNS) ont fait irruption dans les lieux pour les interpeller"
+    },
+    {
+     "fact": "这些活动人士此前发起反对燃油价格上涨的“死城日”动员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces activistes avaient lancé, lundi dernier, un appel à une journée « ville morte », une mobilisation contre la hausse des prix du carburant partiellement suivie par la population"
+    },
+    {
+     "fact": "逮捕发生在亲政府组织提出投诉的次日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces interpellations interviennent au lendemain du dépôt d'une plainte par des organisations proches du pouvoir contre les responsables de cet appel"
+    },
+    {
+     "fact": "政府尚未回应，CNS未公布逮捕理由",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pour l'heure, le gouvernement n'a pas encore réagi. De son côté, la Compagnie nationale de sécurité n'a pas communiqué les motifs de ces interpellations"
+    }
+   ],
+   "uncertainties": [
+    "逮捕原因尚未由国家安全公司公布",
+    "政府尚未作出回应",
+    "事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "中非共和国：反对燃油涨价的“死城日”组织者被捕",
+   "summary_zh": "中非共和国五名民间社会人士于2026年10月15日（周四）在班吉被国家安全公司（CNS）人员逮捕，当时他们正准备举行新闻发布会。这些活动人士此前发起反对燃油价格上涨的“死城日”动员，民众部分响应。逮捕发生在亲政府组织就此次号召提出投诉的次日。政府与CNS尚未就逮捕原因作出回应。",
+   "event_type": "civil_unrest",
+   "country_iso3": "CAF",
+   "location": {
+    "country_iso3": "CAF",
+    "admin1": null,
+    "city": "班吉",
+    "site": "让二十三世中心",
+    "raw_text": "au centre Jean-XXIII de Bangui"
+   },
+   "key_facts": [
+    {
+     "fact": "五名民间社会人士在班吉被国家安全公司人员逮捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cinq figures de la société civile ont été interpellées jeudi 15 octobre 2026 à Bangui"
+    },
+    {
+     "fact": "他们当时正准备举行新闻发布会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces acteurs de la société civile s'apprêtaient à tenir une conférence de presse lorsque des éléments de la Compagnie nationale de sécurité (CNS) ont fait irruption dans les lieux pour les interpeller"
+    },
+    {
+     "fact": "这些活动人士此前发起反对燃油价格上涨的“死城日”动员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces activistes avaient lancé, lundi dernier, un appel à une journée « ville morte », une mobilisation contre la hausse des prix du carburant partiellement suivie par la population"
+    },
+    {
+     "fact": "逮捕发生在亲政府组织提出投诉的次日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces interpellations interviennent au lendemain du dépôt d'une plainte par des organisations proches du pouvoir contre les responsables de cet appel"
+    },
+    {
+     "fact": "政府尚未回应，CNS未公布逮捕理由",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pour l'heure, le gouvernement n'a pas encore réagi. De son côté, la Compagnie nationale de sécurité n'a pas communiqué les motifs de ces interpellations"
+    }
+   ],
+   "uncertainties": [
+    "逮捕原因尚未由国家安全公司公布",
+    "政府尚未作出回应",
+    "事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_3636a51336af2975",
+ "disease_event_id": null,
+ "country_code": "CF"
+}

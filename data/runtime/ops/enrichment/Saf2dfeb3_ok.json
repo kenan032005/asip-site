@@ -1,0 +1,125 @@
+{
+ "label": "Saf2dfeb3",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0aa8cbfb201b0e8c05b2c5d63be9d9e2dc4a9db3cf5d80c57e5f9fa4bf42809e",
+ "tokens": {
+  "input_tokens": 2599,
+  "output_tokens": 612,
+  "total_tokens": 3211
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "几内亚前国防部长穆罕默德·迪亚内上诉获减刑",
+   "summary_zh": "几内亚打击经济和金融犯罪法庭（CRIEF）于2026年10月15日就前国防部长穆罕默德·迪亚内一案作出上诉判决，将其刑期减至四年零八个月监禁，并判处罚金30亿几内亚法郎（约30万欧元）。法院宣告其挪用公款罪名不成立，但维持非法敛财和洗钱罪名成立。检察机关表示将向最高法院提起上诉。",
+   "event_type": "other_security",
+   "country_iso3": "GIN",
+   "location": {
+    "country_iso3": "GIN",
+    "admin1": null,
+    "city": "科纳克里",
+    "site": null,
+    "raw_text": "Conakry"
+   },
+   "key_facts": [
+    {
+     "fact": "几内亚打击经济和金融犯罪法庭（CRIEF）于2026年10月15日作出上诉判决，将前国防部长穆罕默德·迪亚内的刑期减至四年零八个月监禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La chambre des appels de la CRIEF l'a condamné à quatre ans et huit mois d'emprisonnement, assortis d'une amende de trois milliards de francs guinéens, soit environ 300 000 euros."
+    },
+    {
+     "fact": "法院宣告迪亚内挪用公款罪名不成立，但维持非法敛财和洗钱罪名成立",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les juges l'ont déclaré non coupable de détournement de deniers publics, mais ont confirmé sa culpabilité pour enrichissement illicite et blanchiment de capitaux."
+    },
+    {
+     "fact": "迪亚内被判处30亿几内亚法郎罚金，约合30万欧元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "assortis d'une amende de trois milliards de francs guinéens, soit environ 300 000 euros"
+    },
+    {
+     "fact": "检察机关宣布将向最高法院提起上诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le parquet spécial a annoncé son intention de se pourvoir en cassation pour contester les motifs juridiques de la décision"
+    },
+    {
+     "fact": "迪亚内曾于2015年至2021年担任国防部长，2024年12月一审被判处五年监禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ancien ministre de la Défense nationale de 2015 à 2021, Mohamed Diané avait été condamné en première instance, en décembre 2024, à cinq ans de prison"
+    }
+   ],
+   "uncertainties": [
+    "案件目前仅有一个来源（RFI）报道，尚缺乏交叉验证",
+    "检察机关的上诉可能导致判决发生变化"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "几内亚前国防部长穆罕默德·迪亚内上诉获减刑",
+   "summary_zh": "几内亚打击经济和金融犯罪法庭（CRIEF）于2026年10月15日就前国防部长穆罕默德·迪亚内一案作出上诉判决，将其刑期减至四年零八个月监禁，并判处罚金30亿几内亚法郎（约30万欧元）。法院宣告其挪用公款罪名不成立，但维持非法敛财和洗钱罪名成立。检察机关表示将向最高法院提起上诉。",
+   "event_type": "other_security",
+   "country_iso3": "GIN",
+   "location": {
+    "country_iso3": "GIN",
+    "admin1": null,
+    "city": "科纳克里",
+    "site": null,
+    "raw_text": "Conakry"
+   },
+   "key_facts": [
+    {
+     "fact": "几内亚打击经济和金融犯罪法庭（CRIEF）于2026年10月15日作出上诉判决，将前国防部长穆罕默德·迪亚内的刑期减至四年零八个月监禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La chambre des appels de la CRIEF l'a condamné à quatre ans et huit mois d'emprisonnement, assortis d'une amende de trois milliards de francs guinéens, soit environ 300 000 euros."
+    },
+    {
+     "fact": "法院宣告迪亚内挪用公款罪名不成立，但维持非法敛财和洗钱罪名成立",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les juges l'ont déclaré non coupable de détournement de deniers publics, mais ont confirmé sa culpabilité pour enrichissement illicite et blanchiment de capitaux."
+    },
+    {
+     "fact": "迪亚内被判处30亿几内亚法郎罚金，约合30万欧元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "assortis d'une amende de trois milliards de francs guinéens, soit environ 300 000 euros"
+    },
+    {
+     "fact": "检察机关宣布将向最高法院提起上诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le parquet spécial a annoncé son intention de se pourvoir en cassation pour contester les motifs juridiques de la décision"
+    },
+    {
+     "fact": "迪亚内曾于2015年至2021年担任国防部长，2024年12月一审被判处五年监禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ancien ministre de la Défense nationale de 2015 à 2021, Mohamed Diané avait été condamné en première instance, en décembre 2024, à cinq ans de prison"
+    }
+   ],
+   "uncertainties": [
+    "案件目前仅有一个来源（RFI）报道，尚缺乏交叉验证",
+    "检察机关的上诉可能导致判决发生变化"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_9d176300af2dfeb3",
+ "disease_event_id": null,
+ "country_code": "GN"
+}
