@@ -1,0 +1,138 @@
+{
+ "label": "S0065a755",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "cd75c25b60003408e4c1c8ee09d775ae1618a6322a973b170d9d90d2bd0901ac",
+ "tokens": {
+  "input_tokens": 2482,
+  "output_tokens": 495,
+  "total_tokens": 2977
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"相关指控尚未经法院审理证实\", \"其余失踪儿童的下落尚未确认\", \"各嫌疑人的具体涉案程度仍在调查中\"]",
+    "after": "[\"相关指控尚未经法院审理证实\", \"其余失踪儿童的下落尚未确认\", \"各嫌疑人的具体涉案程度仍在调查中\", \"据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹军方在朱巴逮捕八名涉嫌贩卖儿童嫌疑人",
+   "summary_zh": "南苏丹军方称，在朱巴芒加廷社区开展的行动中逮捕了八名涉嫌绑架和贩卖儿童的嫌疑人，其中三人为南苏丹人民国防军人员。据报当地有23名儿童失踪，目前已找回一名儿童并与家人团聚。军方发言人表示，该涉嫌贩卖网络涉及不同社区人员，部分嫌疑人被指将儿童转卖至大皮博尔行政区。案件调查仍在进行中。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "中赤道州",
+    "city": "朱巴",
+    "site": "芒加廷社区苏克达尔富尔（达尔富尔市场）",
+    "raw_text": "Souk Darfur, an area of Juba's Mangateen neighbourhood"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹军方称逮捕八名涉嫌绑架和贩卖儿童的嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South Sudan's military says it has arrested eight suspects over alleged child abduction and trafficking in Juba"
+    },
+    {
+     "fact": "据报芒加廷住宅区有23名儿童失踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "amid reports of 23 children missing from the Mangateen residential area"
+    },
+    {
+     "fact": "三名嫌疑人系南苏丹人民国防军人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Three of the suspects presented by the military are SSPDF personnel, while civilians are also among those arrested"
+    },
+    {
+     "fact": "一名儿童已被找回并与家人团聚",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "One child, identified as Hakim, has been recovered and reunited with his family"
+    },
+    {
+     "fact": "军方发言人称涉嫌贩卖网络涉及不同社区人员，部分嫌疑人被指将儿童转卖至大皮博尔行政区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the alleged trafficking network involved people from different communities, with some suspects accused of arranging the transfer of children to buyers in the Greater Pibor Administrative Area"
+    }
+   ],
+   "uncertainties": [
+    "相关指控尚未经法院审理证实",
+    "其余失踪儿童的下落尚未确认",
+    "各嫌疑人的具体涉案程度仍在调查中"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹军方在朱巴逮捕八名涉嫌贩卖儿童嫌疑人",
+   "summary_zh": "南苏丹军方称，在朱巴芒加廷社区开展的行动中逮捕了八名涉嫌绑架和贩卖儿童的嫌疑人，其中三人为南苏丹人民国防军人员。据报当地有23名儿童失踪，目前已找回一名儿童并与家人团聚。军方发言人表示，该涉嫌贩卖网络涉及不同社区人员，部分嫌疑人被指将儿童转卖至大皮博尔行政区。案件调查仍在进行中。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "中赤道州",
+    "city": "朱巴",
+    "site": "芒加廷社区苏克达尔富尔（达尔富尔市场）",
+    "raw_text": "Souk Darfur, an area of Juba's Mangateen neighbourhood"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹军方称逮捕八名涉嫌绑架和贩卖儿童的嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South Sudan's military says it has arrested eight suspects over alleged child abduction and trafficking in Juba"
+    },
+    {
+     "fact": "据报芒加廷住宅区有23名儿童失踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "amid reports of 23 children missing from the Mangateen residential area"
+    },
+    {
+     "fact": "三名嫌疑人系南苏丹人民国防军人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Three of the suspects presented by the military are SSPDF personnel, while civilians are also among those arrested"
+    },
+    {
+     "fact": "一名儿童已被找回并与家人团聚",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "One child, identified as Hakim, has been recovered and reunited with his family"
+    },
+    {
+     "fact": "军方发言人称涉嫌贩卖网络涉及不同社区人员，部分嫌疑人被指将儿童转卖至大皮博尔行政区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the alleged trafficking network involved people from different communities, with some suspects accused of arranging the transfer of children to buyers in the Greater Pibor Administrative Area"
+    }
+   ],
+   "uncertainties": [
+    "相关指控尚未经法院审理证实",
+    "其余失踪儿童的下落尚未确认",
+    "各嫌疑人的具体涉案程度仍在调查中",
+    "据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_a7c7877a0065a755",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

@@ -1,0 +1,111 @@
+{
+ "label": "S3bf32bf3",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d97888cdf0ec90c3c2d59cacd266e9649182ab18ead4bd13c69f430490153b1b",
+ "tokens": {
+  "input_tokens": 2405,
+  "output_tokens": 402,
+  "total_tokens": 2807
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "埃多州审查VAPP法以加强性暴力应对",
+   "summary_zh": "尼日利亚埃多州政府正在审查2021年《暴力侵害人身（禁止）法》（VAPP法），以解决实施缺口并加强对性暴力和性别暴力（SGBV）的法律保护。审查由妇女事务与社会发展部牵头，与BraveHeart青年与妇女倡议及法治与反腐败项目（RoLAC）合作开展，并召开了利益相关方磋商论坛。论坛汇集政府机构、民间社会组织、安全机构和合作伙伴，讨论实施挑战并提出改进建议。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "埃多州",
+    "city": null,
+    "site": null,
+    "raw_text": "Edo"
+   },
+   "key_facts": [
+    {
+     "fact": "埃多州政府正在审查2021年《暴力侵害人身（禁止）法》",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Edo Government is reviewing the Violence Against Persons (Prohibition) (VAPP) Law, 2021, to address implementation gaps and strengthen legal protection against sexual and gender-based violence (SGBV)"
+    },
+    {
+     "fact": "审查由妇女事务与社会发展部牵头，与BraveHeart倡议及RoLAC合作开展",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The review is being undertaken through the Ministry of Women Affairs and Social Development, in partnership with the BraveHeart Initiative for Youth and Women and the Rule of Law and Anti-Corruption Programme (RoLAC)."
+    },
+    {
+     "fact": "合作伙伴召开了关于加强SGBV预防政策实施的磋商论坛",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The partners convened a consultative forum on strengthening policy implementation for SGBV prevention in Edo."
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "埃多州审查VAPP法以加强性暴力应对",
+   "summary_zh": "尼日利亚埃多州政府正在审查2021年《暴力侵害人身（禁止）法》（VAPP法），以解决实施缺口并加强对性暴力和性别暴力（SGBV）的法律保护。审查由妇女事务与社会发展部牵头，与BraveHeart青年与妇女倡议及法治与反腐败项目（RoLAC）合作开展，并召开了利益相关方磋商论坛。论坛汇集政府机构、民间社会组织、安全机构和合作伙伴，讨论实施挑战并提出改进建议。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "埃多州",
+    "city": null,
+    "site": null,
+    "raw_text": "Edo"
+   },
+   "key_facts": [
+    {
+     "fact": "埃多州政府正在审查2021年《暴力侵害人身（禁止）法》",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Edo Government is reviewing the Violence Against Persons (Prohibition) (VAPP) Law, 2021, to address implementation gaps and strengthen legal protection against sexual and gender-based violence (SGBV)"
+    },
+    {
+     "fact": "审查由妇女事务与社会发展部牵头，与BraveHeart倡议及RoLAC合作开展",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The review is being undertaken through the Ministry of Women Affairs and Social Development, in partnership with the BraveHeart Initiative for Youth and Women and the Rule of Law and Anti-Corruption Programme (RoLAC)."
+    },
+    {
+     "fact": "合作伙伴召开了关于加强SGBV预防政策实施的磋商论坛",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The partners convened a consultative forum on strengthening policy implementation for SGBV prevention in Edo."
+    }
+   ],
+   "uncertainties": [
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_7fe2a4983bf32bf3",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

@@ -1,0 +1,125 @@
+{
+ "label": "Sc4ea3f14",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "57487f38d09e90ae391695ff4af3298a51319acfc36f4424488ed775778732e1",
+ "tokens": {
+  "input_tokens": 3114,
+  "output_tokens": 489,
+  "total_tokens": 3603
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "哈杰尔-拉米斯省交通事故频发引发担忧",
+   "summary_zh": "乍得哈杰尔-拉米斯省交通事故日益增多，引发当地担忧。2026年10月17日，马萨盖特附近发生一起事故，造成1人死亡、3人重伤，其中一名年轻学生被车辆撞倒后截肢。据初步信息，事故原因可能是车轮松动。近几个月该省道路上已报告多起事故。",
+   "event_type": "transport_disruption",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "哈杰尔-拉米斯省",
+    "city": "马萨盖特",
+    "site": null,
+    "raw_text": "province de Hadjer-Lamis, près de Massaguet"
+   },
+   "key_facts": [
+    {
+     "fact": "哈杰尔-拉米斯省交通事故日益增多引发担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les accidents de la circulation deviennent de plus en plus préoccupants dans la province de Hadjer-Lamis"
+    },
+    {
+     "fact": "2026年10月17日马萨盖特附近一起事故造成1人死亡、3人重伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ce samedi 17 octobre 2026, un nouvel accident survenu près de Massaguet a fait un mort et trois blessés graves"
+    },
+    {
+     "fact": "一名年轻学生被车辆撞倒后一条腿被截肢",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un jeune talibé a été percuté par un véhicule et a subi l’amputation d’une jambe"
+    },
+    {
+     "fact": "据初步信息，事故原因可能是车轮松动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon les premières informations, le desserrage d’une roue serait à l’origine de l’accident"
+    },
+    {
+     "fact": "近几个月该省道路上已报告多起事故",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces derniers mois, plusieurs accidents ont été signalés sur les routes de la province"
+    }
+   ],
+   "uncertainties": [
+    "事故原因（车轮松动）仅为初步信息，尚未证实",
+    "伤亡数字来自单一来源，未获交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "哈杰尔-拉米斯省交通事故频发引发担忧",
+   "summary_zh": "乍得哈杰尔-拉米斯省交通事故日益增多，引发当地担忧。2026年10月17日，马萨盖特附近发生一起事故，造成1人死亡、3人重伤，其中一名年轻学生被车辆撞倒后截肢。据初步信息，事故原因可能是车轮松动。近几个月该省道路上已报告多起事故。",
+   "event_type": "transport_disruption",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "哈杰尔-拉米斯省",
+    "city": "马萨盖特",
+    "site": null,
+    "raw_text": "province de Hadjer-Lamis, près de Massaguet"
+   },
+   "key_facts": [
+    {
+     "fact": "哈杰尔-拉米斯省交通事故日益增多引发担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les accidents de la circulation deviennent de plus en plus préoccupants dans la province de Hadjer-Lamis"
+    },
+    {
+     "fact": "2026年10月17日马萨盖特附近一起事故造成1人死亡、3人重伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ce samedi 17 octobre 2026, un nouvel accident survenu près de Massaguet a fait un mort et trois blessés graves"
+    },
+    {
+     "fact": "一名年轻学生被车辆撞倒后一条腿被截肢",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un jeune talibé a été percuté par un véhicule et a subi l’amputation d’une jambe"
+    },
+    {
+     "fact": "据初步信息，事故原因可能是车轮松动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon les premières informations, le desserrage d’une roue serait à l’origine de l’accident"
+    },
+    {
+     "fact": "近几个月该省道路上已报告多起事故",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces derniers mois, plusieurs accidents ont été signalés sur les routes de la province"
+    }
+   ],
+   "uncertainties": [
+    "事故原因（车轮松动）仅为初步信息，尚未证实",
+    "伤亡数字来自单一来源，未获交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_5530abb1c4ea3f14",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
