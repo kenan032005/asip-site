@@ -1,0 +1,117 @@
+{
+ "label": "S5cdef742",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c0b69e591b19dd1fa186818acb56996d308caea2a64d88ed1484062a10fd292d",
+ "tokens": {
+  "input_tokens": 2486,
+  "output_tokens": 511,
+  "total_tokens": 2997
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹伦拜克主教当选人遭枪击受伤，24名嫌疑人被拘留",
+   "summary_zh": "据单一来源报道，身份不明的袭击者夜间闯入南苏丹湖泊州伦拜克主教当选人克里斯蒂安·卡尔拉萨雷的住所，向其腿部开枪，这名意大利出生的孔博尼会传教士受伤后被送往当地医院，随后安排转送内罗毕接受进一步治疗。湖泊州代理新闻部长表示，警方和安全部队在教堂区域展开搜查，已拘留24名嫌疑人，调查仍在进行中。当局称伤者情况良好，预计可完全康复。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "湖泊州",
+    "city": "伦拜克",
+    "site": "教区大院主教当选人住所",
+    "raw_text": "Rumbek, Lakes State, South Sudan"
+   },
+   "key_facts": [
+    {
+     "fact": "身份不明的袭击者闯入伦拜克主教当选人卡尔拉萨雷的住所并向其腿部开枪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Unknown assailants stormed the residence of Bishop-elect Christian Carlassare in Rumbek late last night, leaving the Italian-born Comboni missionary with gunshot wounds to his leg."
+    },
+    {
+     "fact": "当地当局称已拘留24名嫌疑人，调查仍在进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Local authorities report that 24 suspects have been detained as part of an ongoing investigation into the assault."
+    },
+    {
+     "fact": "伤者先被送往伦拜克Cuamn医院稳定伤情，随后安排空运至内罗毕接受治疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He was swiftly taken to Cuamn Hospital in Rumbek, where staff stabilized his condition before arranging an airlift to Nairobi for advanced treatment."
+    },
+    {
+     "fact": "湖泊州代理新闻部长称伤者情况良好，预计完全康复",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Minister Kocji Kerjok assured the public that Bishop-elect Carlassare remains in “good condition” and is expected to make a full recovery."
+    }
+   ],
+   "uncertainties": [
+    "袭击者身份与作案动机尚未查明",
+    "被拘留24名嫌疑人是否与袭击有关联尚待调查确认",
+    "目前仅有一个来源（Juba Echo）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹伦拜克主教当选人遭枪击受伤，24名嫌疑人被拘留",
+   "summary_zh": "据单一来源报道，身份不明的袭击者夜间闯入南苏丹湖泊州伦拜克主教当选人克里斯蒂安·卡尔拉萨雷的住所，向其腿部开枪，这名意大利出生的孔博尼会传教士受伤后被送往当地医院，随后安排转送内罗毕接受进一步治疗。湖泊州代理新闻部长表示，警方和安全部队在教堂区域展开搜查，已拘留24名嫌疑人，调查仍在进行中。当局称伤者情况良好，预计可完全康复。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "湖泊州",
+    "city": "伦拜克",
+    "site": "教区大院主教当选人住所",
+    "raw_text": "Rumbek, Lakes State, South Sudan"
+   },
+   "key_facts": [
+    {
+     "fact": "身份不明的袭击者闯入伦拜克主教当选人卡尔拉萨雷的住所并向其腿部开枪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Unknown assailants stormed the residence of Bishop-elect Christian Carlassare in Rumbek late last night, leaving the Italian-born Comboni missionary with gunshot wounds to his leg."
+    },
+    {
+     "fact": "当地当局称已拘留24名嫌疑人，调查仍在进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Local authorities report that 24 suspects have been detained as part of an ongoing investigation into the assault."
+    },
+    {
+     "fact": "伤者先被送往伦拜克Cuamn医院稳定伤情，随后安排空运至内罗毕接受治疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He was swiftly taken to Cuamn Hospital in Rumbek, where staff stabilized his condition before arranging an airlift to Nairobi for advanced treatment."
+    },
+    {
+     "fact": "湖泊州代理新闻部长称伤者情况良好，预计完全康复",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Minister Kocji Kerjok assured the public that Bishop-elect Carlassare remains in “good condition” and is expected to make a full recovery."
+    }
+   ],
+   "uncertainties": [
+    "袭击者身份与作案动机尚未查明",
+    "被拘留24名嫌疑人是否与袭击有关联尚待调查确认",
+    "目前仅有一个来源（Juba Echo）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_137d98595cdef742",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

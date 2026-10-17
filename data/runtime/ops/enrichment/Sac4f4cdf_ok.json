@@ -1,0 +1,130 @@
+{
+ "label": "Sac4f4cdf",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "97842bf4254354b30a577b28e8bac2cc0a2555f926f91c9cd10662a245cc9715",
+ "tokens": {
+  "input_tokens": 2823,
+  "output_tokens": 615,
+  "total_tokens": 3438
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"参议员关于武器来源及军官参与武装牧民的指控属其单方面声称，尚未获证实\", \"参议员所称行政与商业界存在支持牧民网络的指控未经证实\", \"省政府否认指控，双方说法存在冲突\", \"冲突中武器来源问题尚未查明\"]",
+    "after": "[\"参议员关于武器来源及军官参与武装牧民的指控属其单方面声称，尚未获证实\", \"参议员所称行政与商业界存在支持牧民网络的指控未经证实\", \"省政府否认指控，双方说法存在冲突\", \"冲突中武器来源问题尚未查明\", \"据Tchadinfos报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "西洛贡省：参议员姆巴伊戈尔梅姆·塞巴斯蒂安与省政府就农牧民冲突问题展开对峙",
+   "summary_zh": "10月14日在劳卡西举行的一次会议上，参议员姆巴伊戈尔梅姆·塞巴斯蒂安就游牧管控措施的落实发出警告，并指控农牧民冲突中所用武器的来源存在问题。三天后，即10月17日，省政府在蒙杜举行新闻发布会，否认其指控，并提及可能采取司法后续行动。争议焦点包括游牧措施的执行、省内武器流通以及当局在预防冲突方面的责任。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "西洛贡省",
+    "city": "蒙杜",
+    "site": "劳卡西",
+    "raw_text": "province du Logone occidental, Laoukassi, Moundou"
+   },
+   "key_facts": [
+    {
+     "fact": "参议员姆巴伊戈尔梅姆·塞巴斯蒂安在10月14日劳卡西会议上就游牧管控措施落实发出警告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Lors d’une réunion tenue à Laoukassi le 14 octobre, le sénateur Mbaïgolmem Sébastien a alerté sur l’application des mesures encadrant la transhumance"
+    },
+    {
+     "fact": "参议员指控农牧民冲突中所用武器来源存在问题，并称怀疑一名军官参与武装牧民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le sénateur a affirmé connaître un responsable militaire qu’il soupçonne d’être impliqué dans l’armement d’éleveurs, sans toutefois révéler son identité"
+    },
+    {
+     "fact": "省政府于10月17日在蒙杜举行新闻发布会，否认参议员的指控并提及可能采取司法后续行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’administration provinciale a réagi, ce 17 octobre, en rejetant ses accusations et en évoquant d’éventuelles suites judiciaires"
+    },
+    {
+     "fact": "省政府称自2026年8月起已向4名省长和21名副省长发出指示，跟踪牧民流动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "dès août 2026, après l’arrivée massive de troupeaux dans la sous-préfecture de Laoukassi, un message radio a été adressé aux quatre préfets et aux 21 sous-préfets de la province"
+    }
+   ],
+   "uncertainties": [
+    "参议员关于武器来源及军官参与武装牧民的指控属其单方面声称，尚未获证实",
+    "参议员所称行政与商业界存在支持牧民网络的指控未经证实",
+    "省政府否认指控，双方说法存在冲突",
+    "冲突中武器来源问题尚未查明"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "西洛贡省：参议员姆巴伊戈尔梅姆·塞巴斯蒂安与省政府就农牧民冲突问题展开对峙",
+   "summary_zh": "10月14日在劳卡西举行的一次会议上，参议员姆巴伊戈尔梅姆·塞巴斯蒂安就游牧管控措施的落实发出警告，并指控农牧民冲突中所用武器的来源存在问题。三天后，即10月17日，省政府在蒙杜举行新闻发布会，否认其指控，并提及可能采取司法后续行动。争议焦点包括游牧措施的执行、省内武器流通以及当局在预防冲突方面的责任。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "西洛贡省",
+    "city": "蒙杜",
+    "site": "劳卡西",
+    "raw_text": "province du Logone occidental, Laoukassi, Moundou"
+   },
+   "key_facts": [
+    {
+     "fact": "参议员姆巴伊戈尔梅姆·塞巴斯蒂安在10月14日劳卡西会议上就游牧管控措施落实发出警告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Lors d’une réunion tenue à Laoukassi le 14 octobre, le sénateur Mbaïgolmem Sébastien a alerté sur l’application des mesures encadrant la transhumance"
+    },
+    {
+     "fact": "参议员指控农牧民冲突中所用武器来源存在问题，并称怀疑一名军官参与武装牧民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le sénateur a affirmé connaître un responsable militaire qu’il soupçonne d’être impliqué dans l’armement d’éleveurs, sans toutefois révéler son identité"
+    },
+    {
+     "fact": "省政府于10月17日在蒙杜举行新闻发布会，否认参议员的指控并提及可能采取司法后续行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’administration provinciale a réagi, ce 17 octobre, en rejetant ses accusations et en évoquant d’éventuelles suites judiciaires"
+    },
+    {
+     "fact": "省政府称自2026年8月起已向4名省长和21名副省长发出指示，跟踪牧民流动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "dès août 2026, après l’arrivée massive de troupeaux dans la sous-préfecture de Laoukassi, un message radio a été adressé aux quatre préfets et aux 21 sous-préfets de la province"
+    }
+   ],
+   "uncertainties": [
+    "参议员关于武器来源及军官参与武装牧民的指控属其单方面声称，尚未获证实",
+    "参议员所称行政与商业界存在支持牧民网络的指控未经证实",
+    "省政府否认指控，双方说法存在冲突",
+    "冲突中武器来源问题尚未查明",
+    "据Tchadinfos报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_eec7a2abac4f4cdf",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

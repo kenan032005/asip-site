@@ -1,0 +1,115 @@
+{
+ "label": "S50936ed4",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "2579f336ca5127e09afafa7310888676c1dff655436387a8d46dbc242915bf00",
+ "tokens": {
+  "input_tokens": 2510,
+  "output_tokens": 481,
+  "total_tokens": 2991
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹反对派抗议议会扩员",
+   "summary_zh": "南苏丹过渡国民立法议会通过《2023年全国选举法案》，执政的SPLM-IG推动修正案将议会席位从原定的250席增至332席，引发反对派SPLM-IO强烈抗议。SPLM-IO在朱巴议会大楼外举行退场抗议和烛光守夜，指责扩员及赋予总统更多任命权削弱民意代表性。反对派要求恢复250席上限并取消总统单方面提名，威胁采取法律行动并呼吁地区调解方介入。执政方则称修正案经正当议会程序通过，旨在实现包容性治理。",
+   "event_type": "political_instability",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": null,
+    "city": "朱巴",
+    "site": "议会大楼外",
+    "raw_text": "outside the parliamentary complex in Juba"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹过渡国民立法议会通过《2023年全国选举法案》",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South Sudan’s Transitional National Legislative Assembly (TNLA) has passed the National Elections Bill 2023"
+    },
+    {
+     "fact": "执政的SPLM-IG推动修正案将议会席位从250席增至332席",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Originally drafted to limit the assembly to 250 seats, the Elections Bill was amended by the SPLM-IG majority led by President Salva Kiir, increasing membership to 332"
+    },
+    {
+     "fact": "反对派SPLM-IO在朱巴议会大楼外举行退场抗议和烛光守夜",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "staging walkouts and candlelight vigils outside the parliamentary complex in Juba"
+    },
+    {
+     "fact": "SPLM-IO威胁采取法律行动并呼吁地区调解方介入",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "SPLM-IO has threatened legal action and has appealed to regional mediators to intervene"
+    }
+   ],
+   "uncertainties": [
+    "反对派称立法过程缺乏充分公众咨询，此说法尚未获独立证实",
+    "目前仅单一来源（Juba Echo）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹反对派抗议议会扩员",
+   "summary_zh": "南苏丹过渡国民立法议会通过《2023年全国选举法案》，执政的SPLM-IG推动修正案将议会席位从原定的250席增至332席，引发反对派SPLM-IO强烈抗议。SPLM-IO在朱巴议会大楼外举行退场抗议和烛光守夜，指责扩员及赋予总统更多任命权削弱民意代表性。反对派要求恢复250席上限并取消总统单方面提名，威胁采取法律行动并呼吁地区调解方介入。执政方则称修正案经正当议会程序通过，旨在实现包容性治理。",
+   "event_type": "political_instability",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": null,
+    "city": "朱巴",
+    "site": "议会大楼外",
+    "raw_text": "outside the parliamentary complex in Juba"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹过渡国民立法议会通过《2023年全国选举法案》",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South Sudan’s Transitional National Legislative Assembly (TNLA) has passed the National Elections Bill 2023"
+    },
+    {
+     "fact": "执政的SPLM-IG推动修正案将议会席位从250席增至332席",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Originally drafted to limit the assembly to 250 seats, the Elections Bill was amended by the SPLM-IG majority led by President Salva Kiir, increasing membership to 332"
+    },
+    {
+     "fact": "反对派SPLM-IO在朱巴议会大楼外举行退场抗议和烛光守夜",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "staging walkouts and candlelight vigils outside the parliamentary complex in Juba"
+    },
+    {
+     "fact": "SPLM-IO威胁采取法律行动并呼吁地区调解方介入",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "SPLM-IO has threatened legal action and has appealed to regional mediators to intervene"
+    }
+   ],
+   "uncertainties": [
+    "反对派称立法过程缺乏充分公众咨询，此说法尚未获独立证实",
+    "目前仅单一来源（Juba Echo）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_dc35c02050936ed4",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

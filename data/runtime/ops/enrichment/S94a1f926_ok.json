@@ -1,0 +1,125 @@
+{
+ "label": "S94a1f926",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b1257d19768f47af6bf4570dc5c64afb6b3ba8a58158c7dcbfb8038deda10bc2",
+ "tokens": {
+  "input_tokens": 2961,
+  "output_tokens": 616,
+  "total_tokens": 3577
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "津德尔大区秘书长启动黄热病预防性疫苗接种活动",
+   "summary_zh": "尼日尔津德尔大区秘书长Idrissa Abou于周四在达马加兰苏丹宫正式启动黄热病预防性大规模疫苗接种活动。活动为期六天（10月15日至21日），覆盖9个月至60岁人群，目标为至少95%的覆盖率，涉及该大区11个卫生区约546.9598万人。据尼日尔官方通讯社ANP报道，该活动获世界卫生组织、全球疫苗免疫联盟和联合国儿童基金会支持。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "津德尔大区",
+    "city": "津德尔",
+    "site": "达马加兰苏丹宫",
+    "raw_text": "Palais du Sultanat du Damagaram, Zinder"
+   },
+   "key_facts": [
+    {
+     "fact": "津德尔大区秘书长在达马加兰苏丹宫启动黄热病预防性疫苗接种活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Secrétaire général de la région, M.Idrissa Abou a procédé jeudi au Lancement officiel de la campagne préventive de masse contre la fièvre jaune au Palais du Sultanat du Damagaram"
+    },
+    {
+     "fact": "活动为期六天，覆盖9个月至60岁人群",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette campagne qui durera de six jours va concerner les personnes cibles âgés de 9 mois à 60 ans"
+    },
+    {
+     "fact": "活动时间为10月15日至21日，目标为至少95%的目标人群接种",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La présente campagne est organisée pour la période du 15 au 21 octobre dans toute la région avec comme objectif de vacciner au moins 95% de la population âgés de 9 mois à 60 ans"
+    },
+    {
+     "fact": "活动覆盖津德尔大区11个卫生区，目标人群约546.9598万人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "se déroulera dans tous les onze districts sanitaires que compte notre région avec une cible totale estimée à 5.469. 598 personnes"
+    },
+    {
+     "fact": "据世界卫生组织数据，全球每年约出现20万新病例、近3万例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon l’OMS, dans le monde entier, environ 200.000 nouveaux cas apparaissent chaque année avec près de 30.000 décès"
+    }
+   ],
+   "uncertainties": [
+    "目前仅尼日尔官方通讯社ANP单一来源报道，尚缺乏交叉验证",
+    "目标接种人数5,469,598为活动方估计值，实际完成情况尚未证实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "津德尔大区秘书长启动黄热病预防性疫苗接种活动",
+   "summary_zh": "尼日尔津德尔大区秘书长Idrissa Abou于周四在达马加兰苏丹宫正式启动黄热病预防性大规模疫苗接种活动。活动为期六天（10月15日至21日），覆盖9个月至60岁人群，目标为至少95%的覆盖率，涉及该大区11个卫生区约546.9598万人。据尼日尔官方通讯社ANP报道，该活动获世界卫生组织、全球疫苗免疫联盟和联合国儿童基金会支持。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "津德尔大区",
+    "city": "津德尔",
+    "site": "达马加兰苏丹宫",
+    "raw_text": "Palais du Sultanat du Damagaram, Zinder"
+   },
+   "key_facts": [
+    {
+     "fact": "津德尔大区秘书长在达马加兰苏丹宫启动黄热病预防性疫苗接种活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Secrétaire général de la région, M.Idrissa Abou a procédé jeudi au Lancement officiel de la campagne préventive de masse contre la fièvre jaune au Palais du Sultanat du Damagaram"
+    },
+    {
+     "fact": "活动为期六天，覆盖9个月至60岁人群",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette campagne qui durera de six jours va concerner les personnes cibles âgés de 9 mois à 60 ans"
+    },
+    {
+     "fact": "活动时间为10月15日至21日，目标为至少95%的目标人群接种",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La présente campagne est organisée pour la période du 15 au 21 octobre dans toute la région avec comme objectif de vacciner au moins 95% de la population âgés de 9 mois à 60 ans"
+    },
+    {
+     "fact": "活动覆盖津德尔大区11个卫生区，目标人群约546.9598万人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "se déroulera dans tous les onze districts sanitaires que compte notre région avec une cible totale estimée à 5.469. 598 personnes"
+    },
+    {
+     "fact": "据世界卫生组织数据，全球每年约出现20万新病例、近3万例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon l’OMS, dans le monde entier, environ 200.000 nouveaux cas apparaissent chaque année avec près de 30.000 décès"
+    }
+   ],
+   "uncertainties": [
+    "目前仅尼日尔官方通讯社ANP单一来源报道，尚缺乏交叉验证",
+    "目标接种人数5,469,598为活动方估计值，实际完成情况尚未证实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_b9a14c1394a1f926",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

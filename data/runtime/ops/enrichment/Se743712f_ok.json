@@ -1,0 +1,107 @@
+{
+ "label": "Se743712f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5c1e60f0a4dcbcb53a97a471df4a53bd611aadfa5fa99ddfd2b88755e6b5ac98",
+ "tokens": {
+  "input_tokens": 2115,
+  "output_tokens": 486,
+  "total_tokens": 2601
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "晚间新闻综述：韦斯特霍夫抗癌、奥孔乔-伊韦阿拉回忆母亲遭绑架等",
+   "summary_zh": "尼日利亚媒体Punch发布晚间新闻综述，内容包括前超级雄鹰队主教练克莱门斯·韦斯特霍夫在荷兰被诊断出结肠癌、病情危重；世贸组织总干事恩戈齐·奥孔乔-伊韦阿拉回忆其调查一笔据称24亿美元燃油补贴欺诈案后遭威胁、其母亲被绑架；以及陆军参谋长抵达博尔诺州迈杜古里。上述内容为单一来源的新闻综述汇编。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "奥孔乔-伊韦阿拉称其调查一笔据称24亿美元燃油补贴欺诈案后遭威胁、其母亲被绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ngozi Okonjo-Iweala has recounted how her probe into an alleged $2.4bn fuel subsidy fraud led to threats against her and the kidnapping of her mother."
+    },
+    {
+     "fact": "前超级雄鹰队主教练韦斯特霍夫在荷兰被诊断出结肠癌，病情危重",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Former Super Eagles coach Clemens Westerhof is in critical condition after being diagnosed with colon cancer in the Netherlands, his wife has disclosed."
+    },
+    {
+     "fact": "陆军参谋长在总统下令清剿恐怖分子和匪徒营地48小时后抵达博尔诺州迈杜古里",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Chief of Army Staff, Lieutenant General Waidi Shuaibu, has arrived in Maiduguri, Borno State, 48 hours after President Bola Tinubu ordered the clearance of all terrorist and bandit camps."
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源的新闻综述汇编，尚缺乏交叉验证",
+    "母亲遭绑架事件为当事人回忆叙述，具体时间与细节未在文中说明",
+    "24亿美元燃油补贴欺诈为“据称”（alleged），尚未证实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 55
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "晚间新闻综述：韦斯特霍夫抗癌、奥孔乔-伊韦阿拉回忆母亲遭绑架等",
+   "summary_zh": "尼日利亚媒体Punch发布晚间新闻综述，内容包括前超级雄鹰队主教练克莱门斯·韦斯特霍夫在荷兰被诊断出结肠癌、病情危重；世贸组织总干事恩戈齐·奥孔乔-伊韦阿拉回忆其调查一笔据称24亿美元燃油补贴欺诈案后遭威胁、其母亲被绑架；以及陆军参谋长抵达博尔诺州迈杜古里。上述内容为单一来源的新闻综述汇编。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "奥孔乔-伊韦阿拉称其调查一笔据称24亿美元燃油补贴欺诈案后遭威胁、其母亲被绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ngozi Okonjo-Iweala has recounted how her probe into an alleged $2.4bn fuel subsidy fraud led to threats against her and the kidnapping of her mother."
+    },
+    {
+     "fact": "前超级雄鹰队主教练韦斯特霍夫在荷兰被诊断出结肠癌，病情危重",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Former Super Eagles coach Clemens Westerhof is in critical condition after being diagnosed with colon cancer in the Netherlands, his wife has disclosed."
+    },
+    {
+     "fact": "陆军参谋长在总统下令清剿恐怖分子和匪徒营地48小时后抵达博尔诺州迈杜古里",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Chief of Army Staff, Lieutenant General Waidi Shuaibu, has arrived in Maiduguri, Borno State, 48 hours after President Bola Tinubu ordered the clearance of all terrorist and bandit camps."
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源的新闻综述汇编，尚缺乏交叉验证",
+    "母亲遭绑架事件为当事人回忆叙述，具体时间与细节未在文中说明",
+    "24亿美元燃油补贴欺诈为“据称”（alleged），尚未证实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 55
+  }
+ },
+ "event_id": "EVT_49d5ee95e743712f",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
