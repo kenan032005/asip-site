@@ -1,0 +1,126 @@
+{
+ "label": "S75179c0d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4c4f2463d223b818ffc8d34b4fc16be0f942f20f8016d2148a691ca58bb54644",
+ "tokens": {
+  "input_tokens": 2787,
+  "output_tokens": 470,
+  "total_tokens": 3257
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"伤亡与逮捕数字为报道引述，未获独立交叉验证\", \"目前仅单一来源（RFI）报道\"]",
+    "after": "[\"伤亡与逮捕数字为报道引述，未获独立交叉验证\", \"目前仅单一来源（RFI）报道\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "本杰明·斯托拉：1961年10月17日大屠杀“必须写入教科书”",
+   "summary_zh": "历史学家本杰明·斯托拉在法国国际广播电台访谈中表示，1961年10月17日阿尔及利亚人遭镇压事件应被承认为国家罪行并写入教科书。约三十名市长呼吁全面承认该事件并列入官方纪念日。据报当年近2.5万名阿尔及利亚人在巴黎集会抗议歧视性宵禁，随后遭镇压，至少150人被杀。该事件至今未获法国官方承认为国家罪行。",
+   "event_type": "other_security",
+   "country_iso3": "DZA",
+   "location": {
+    "country_iso3": "DZA",
+    "admin1": null,
+    "city": "巴黎",
+    "site": null,
+    "raw_text": "Paris"
+   },
+   "key_facts": [
+    {
+     "fact": "约三十名市长呼吁全面承认1961年10月17日大屠杀为国家罪行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "« La reconnaissance pleine et entière du massacre du 17 octobre 1961 comme un crime d’État » ... C’est ce que demandent aujourd’hui une trentaine de maires"
+    },
+    {
+     "fact": "据报当年近2.5万名阿尔及利亚人在巴黎集会抗议歧视性宵禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "près de 25 000 Algériens se sont rassemblés à Paris, à l’appel du FLN pour contester un couvre-feu discriminatoire"
+    },
+    {
+     "fact": "镇压造成至少150名阿尔及利亚人死亡、逾1.2万人被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plus de 12 000 arrestations, au moins 150 Algériens tués, par balle, jetés dans la Seine"
+    },
+    {
+     "fact": "法国官方仍未承认该事件为国家罪行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "toujours pas de reconnaissance de crime d'État"
+    }
+   ],
+   "uncertainties": [
+    "伤亡与逮捕数字为报道引述，未获独立交叉验证",
+    "目前仅单一来源（RFI）报道"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "本杰明·斯托拉：1961年10月17日大屠杀“必须写入教科书”",
+   "summary_zh": "历史学家本杰明·斯托拉在法国国际广播电台访谈中表示，1961年10月17日阿尔及利亚人遭镇压事件应被承认为国家罪行并写入教科书。约三十名市长呼吁全面承认该事件并列入官方纪念日。据报当年近2.5万名阿尔及利亚人在巴黎集会抗议歧视性宵禁，随后遭镇压，至少150人被杀。该事件至今未获法国官方承认为国家罪行。",
+   "event_type": "other_security",
+   "country_iso3": "DZA",
+   "location": {
+    "country_iso3": "DZA",
+    "admin1": null,
+    "city": "巴黎",
+    "site": null,
+    "raw_text": "Paris"
+   },
+   "key_facts": [
+    {
+     "fact": "约三十名市长呼吁全面承认1961年10月17日大屠杀为国家罪行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "« La reconnaissance pleine et entière du massacre du 17 octobre 1961 comme un crime d’État » ... C’est ce que demandent aujourd’hui une trentaine de maires"
+    },
+    {
+     "fact": "据报当年近2.5万名阿尔及利亚人在巴黎集会抗议歧视性宵禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "près de 25 000 Algériens se sont rassemblés à Paris, à l’appel du FLN pour contester un couvre-feu discriminatoire"
+    },
+    {
+     "fact": "镇压造成至少150名阿尔及利亚人死亡、逾1.2万人被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plus de 12 000 arrestations, au moins 150 Algériens tués, par balle, jetés dans la Seine"
+    },
+    {
+     "fact": "法国官方仍未承认该事件为国家罪行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "toujours pas de reconnaissance de crime d'État"
+    }
+   ],
+   "uncertainties": [
+    "伤亡与逮捕数字为报道引述，未获独立交叉验证",
+    "目前仅单一来源（RFI）报道",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_39543c0c75179c0d",
+ "disease_event_id": null,
+ "country_code": "DZ"
+}

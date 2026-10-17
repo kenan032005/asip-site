@@ -1,17 +1,17 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-17T08:07:48+08:00",
+ "generated_at": "2026-10-17T09:52:37+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 15,
-  "signals_7d": 235,
-  "verified_events_24h": 18,
-  "verified_events_7d": 267,
+  "signals_24h": 16,
+  "signals_7d": 234,
+  "verified_events_24h": 22,
+  "verified_events_7d": 269,
   "multi_source_verified_events_7d": 6,
-  "countries_with_activity_24h": 10,
+  "countries_with_activity_24h": 12,
   "total_countries_monitored": 22
  },
  "countries_24h": [
@@ -21,9 +21,11 @@
   "刚果（布）",
   "加纳",
   "南苏丹",
+  "埃塞俄比亚",
   "塞内加尔",
   "尼日利亚",
   "布基纳法索",
+  "阿尔及利亚",
   "马达加斯加"
  ],
  "countries_7d": [
@@ -60,11 +62,11 @@
  "country_distribution_7d": [
   {
    "value": "尼日利亚",
-   "count": 54
+   "count": 52
   },
   {
    "value": "乍得",
-   "count": 44
+   "count": 45
   },
   {
    "value": "加纳",
@@ -113,6 +115,10 @@
    "count": 8
   },
   {
+   "value": "武装冲突",
+   "count": 2
+  },
+  {
    "value": "恐怖袭击",
    "count": 2
   },
@@ -122,10 +128,6 @@
   },
   {
    "value": "民众骚乱",
-   "count": 1
-  },
-  {
-   "value": "武装冲突",
    "count": 1
   },
   {
@@ -140,7 +142,7 @@
  "source_tier_distribution_7d": [
   {
    "value": "C",
-   "count": 202
+   "count": 200
   },
   {
    "value": "B",
@@ -148,25 +150,10 @@
   },
   {
    "value": "A",
-   "count": 107
+   "count": 110
   }
  ],
  "top_verified_events": [
-  {
-   "fact_id": "EVT_271929b42effea3c",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "尼日利亚高原州潘克辛地方政府主席誓言打击疑似仪式杀人",
-   "category": "other_security",
-   "source": "News Agency of Nigeria",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-10 00:20",
-   "importance": "high",
-   "severity": "medium"
-  },
   {
    "fact_id": "EVT_f9669d0a14c4e1e6",
    "level": "verified_event",
@@ -241,9 +228,39 @@
    "time": "2026-10-10 06:22",
    "importance": "high",
    "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_fb6e02c8c56ea5cd",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "加纳能源部长提出2027年可再生能源与核电优先事项",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-10 05:56",
+   "importance": "high",
+   "severity": "medium"
   }
  ],
  "top_signals": [
+  {
+   "fact_id": "news:8e8a9c75df5b5339",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Guerre au Soudan : l’ONU met en garde contre un risque d’extension du conflit aux pays voisins",
+   "category": "armed_conflict",
+   "source": "Tchadinfos",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-17 05:48",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   {
    "fact_id": "news:bd65c0dbcff0779b",
    "level": "news_signal",
@@ -588,21 +605,6 @@
    "time": "2026-10-16 08:00",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:96eb6034063d53ed",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "利比亚",
-   "title": "人权组织称利比亚东部当局实施处决",
-   "category": "other_security",
-   "source": "Africanews",
-   "source_tier": "B",
-   "source_role": "aggregator_discovery",
-   "time": "2026-10-16 08:00",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -681,16 +683,31 @@
  ],
  "existing_assessment": {
   "status": "ai",
-  "overall_assessment": "已核实事件方面，南苏丹伦拜克遭武装团体袭击致71人死亡，琼莱州两社区同意停止敌对行动；吉布提海域移民船倾覆致至少139人死亡、84人失踪；乍得就中非共和国军队越境事件召见中非大使并提出严正警告；苏丹与埃及边境金矿营地遭空袭据称致72人死亡；南非宪法法院裁决引发反移民暴力；萨赫勒流离失所人数自2020年以来近乎翻倍。情报信号方面，均为单源消息、尚待核实：尼日利亚联邦政府成立解除武装与重返社会工作组、总统下令清剿恐怖分子营地；加纳武装部队接收45辆通用车辆；乍得恩贾梅纳登革热疫情暴发、医院不堪重负；南苏丹性暴力防治项目四年期满结束、联合国开发计划署呼吁加强预警机制。整体风险方向趋于恶化，需持续跟踪边境冲突、疫情与移民安全。",
+  "overall_assessment": "已核实事件方面，乍得与中非共和国边境紧张升级：中非军队在三国边境实施预防性空袭，乍得召见中非大使并提出严正警告，另有约1300名武装分子策划进攻的通报；吉布提海域移民船倾覆致至少139人死亡、84人失踪；南苏丹伦拜克遭袭致71人死亡，琼莱州两社区同意停止敌对；苏丹与埃及边境金矿营地遭空袭致至少72人死亡；埃塞俄比亚与厄立特里亚对峙持续，厄方呼吁联合国介入。情报信号均为单源、尚待核实：联合国警告苏丹冲突可能外溢至邻国、乍得恩贾梅纳登革热疫情致医院承压、尼日利亚总统下令清剿恐怖营地并解救人质、加纳军方接收45辆车辆。整体风险方向趋于恶化，需重点跟踪边境冲突外溢与疫情。",
   "risk_direction": "worsening",
   "confidence": "medium",
-  "generated_time": "2026-10-17T08:07:35+08:00",
+  "generated_time": "2026-10-17T09:52:23+08:00",
   "based_on": "过去24小时/7日公开信息",
   "model": "",
   "date": "20261017"
  },
- "fact_count": 502,
+ "fact_count": 503,
  "facts": {
+  "news:8e8a9c75df5b5339": {
+   "fact_id": "news:8e8a9c75df5b5339",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Guerre au Soudan : l’ONU met en garde contre un risque d’extension du conflit aux pays voisins",
+   "category": "armed_conflict",
+   "source": "Tchadinfos",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-17 05:48",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:bd65c0dbcff0779b": {
    "fact_id": "news:bd65c0dbcff0779b",
    "level": "news_signal",
@@ -4186,51 +4203,6 @@
    "importance": "low",
    "why_it_matters": ""
   },
-  "news:af00bdba041680ec": {
-   "fact_id": "news:af00bdba041680ec",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "尼日利亚高原州潘克辛地方政府主席誓言打击疑似仪式杀人",
-   "category": "other_security",
-   "source": "News Agency of Nigeria",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-10 08:20",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:a9d21027d06607e6": {
-   "fact_id": "news:a9d21027d06607e6",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "尼日利亚高原州潘克辛地方政府主席誓言打击疑似仪式杀人",
-   "category": "other_security",
-   "source": "News Agency of Nigeria",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-10 08:20",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "EVT_271929b42effea3c": {
-   "fact_id": "EVT_271929b42effea3c",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "尼日利亚高原州潘克辛地方政府主席誓言打击疑似仪式杀人",
-   "category": "other_security",
-   "source": "News Agency of Nigeria",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-10 00:20",
-   "importance": "high",
-   "severity": "medium"
-  },
   "EVT_f9669d0a14c4e1e6": {
    "fact_id": "EVT_f9669d0a14c4e1e6",
    "level": "verified_event",
@@ -4423,21 +4395,6 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-10 10:25",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_6aec999c9f466747": {
-   "fact_id": "EVT_6aec999c9f466747",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "尼日利亚高原州潘克辛地方政府主席誓言打击疑似仪式杀人",
-   "category": "other_security",
-   "source": "News Agency of Nigeria",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-10 00:20",
    "importance": "high",
    "severity": "medium"
   },
@@ -8218,6 +8175,66 @@
    "source_tier": "B",
    "source_role": "aggregator_discovery",
    "time": "2026-10-16 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_39543c0c75179c0d": {
+   "fact_id": "EVT_39543c0c75179c0d",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "阿尔及利亚",
+   "title": "本杰明·斯托拉：1961年10月17日大屠杀“必须写入教科书”",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-16 16:07",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_4edd05240c970ae5": {
+   "fact_id": "EVT_4edd05240c970ae5",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "埃塞俄比亚联邦政府在提格雷设立为期六个月的临时行政机构",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-17 00:20",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_c1beff34371146aa": {
+   "fact_id": "EVT_c1beff34371146aa",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "塞内加尔",
+   "title": "塞内加尔达喀尔举行反对杀害女性游行，此前一名女子遭泼酸身亡",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-16 22:36",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_136629e63e5c7874": {
+   "fact_id": "EVT_136629e63e5c7874",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "联合国警告苏丹战争可能蔓延至邻国",
+   "category": "armed_conflict",
+   "source": "Tchadinfos",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-16 21:48",
    "importance": "high",
    "severity": "medium"
   }

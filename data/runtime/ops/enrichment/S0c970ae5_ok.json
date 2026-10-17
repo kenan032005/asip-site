@@ -1,0 +1,127 @@
+{
+ "label": "S0c970ae5",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f2d9bd4f55b2974c6fbd4a6ed7c4d9e3f2f2e822a8e6d56ff4668a1c2fc277b5",
+ "tokens": {
+  "input_tokens": 2731,
+  "output_tokens": 598,
+  "total_tokens": 3329
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "埃塞俄比亚联邦政府在提格雷设立为期六个月的临时行政机构",
+   "summary_zh": "埃塞俄比亚联邦政府于10月16日宣布，在提格雷地区设立为期六个月的临时行政机构，正式恢复对该地区的行政管理。该地区此前由提格雷人民解放阵线（TPLF）控制，其武装在数周战斗后被击退至北部并失去主要城市控制权。联邦政府任命五名负责人，任务是恢复公共服务、巩固和平、安置前士兵并为选举创造条件。提格雷政党Salsaye Woyané高层Hadush Kinfe批评该进程包容性不足，称多数居民未参与。",
+   "event_type": "political_instability",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷",
+    "city": "默克莱",
+    "site": null,
+    "raw_text": "Tigré, Mekele"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚联邦政府宣布在提格雷设立为期六个月的临时行政机构",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il a annoncé vendredi 16 octobre la mise en place d'une administration intérimaire pour six mois."
+    },
+    {
+     "fact": "联邦政府正式恢复对提格雷地区的行政管理，该地区此前由TPLF领导",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les autorités fédérales reprennent ainsi formellement l'administration de cette région, jusqu'ici dirigée par les rebelles du Front de libération du peuple du Tigré (TPLF)."
+    },
+    {
+     "fact": "TPLF武装在数周战斗后被击退至北部并失去该地区主要城市控制权",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les troupes du TPLF ont été repoussées vers le nord et ont perdu le contrôle des grandes villes de la région."
+    },
+    {
+     "fact": "五名负责人被任命领导临时行政机构",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cinq responsables ont été désignés à sa tête pour une durée de six mois."
+    },
+    {
+     "fact": "提格雷政党Salsaye Woyané高层Hadush Kinfe称该进程包容性不足",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "pour Hadush Kinfe, haut responsable du parti tigréen Salsaye Woyané, ce processus, mené par les autorités fédérales, n'est pas assez inclusif."
+    }
+   ],
+   "uncertainties": [
+    "提格雷政党Salsaye Woyané高层称多数居民未参与地方选举进程，该说法为单一政党人士观点，尚未获独立证实",
+    "联邦政府承诺六个月内举行自由透明选举，但选举能否如期举行尚不确定",
+    "目前仅RFI一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "埃塞俄比亚联邦政府在提格雷设立为期六个月的临时行政机构",
+   "summary_zh": "埃塞俄比亚联邦政府于10月16日宣布，在提格雷地区设立为期六个月的临时行政机构，正式恢复对该地区的行政管理。该地区此前由提格雷人民解放阵线（TPLF）控制，其武装在数周战斗后被击退至北部并失去主要城市控制权。联邦政府任命五名负责人，任务是恢复公共服务、巩固和平、安置前士兵并为选举创造条件。提格雷政党Salsaye Woyané高层Hadush Kinfe批评该进程包容性不足，称多数居民未参与。",
+   "event_type": "political_instability",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷",
+    "city": "默克莱",
+    "site": null,
+    "raw_text": "Tigré, Mekele"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚联邦政府宣布在提格雷设立为期六个月的临时行政机构",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il a annoncé vendredi 16 octobre la mise en place d'une administration intérimaire pour six mois."
+    },
+    {
+     "fact": "联邦政府正式恢复对提格雷地区的行政管理，该地区此前由TPLF领导",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les autorités fédérales reprennent ainsi formellement l'administration de cette région, jusqu'ici dirigée par les rebelles du Front de libération du peuple du Tigré (TPLF)."
+    },
+    {
+     "fact": "TPLF武装在数周战斗后被击退至北部并失去该地区主要城市控制权",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les troupes du TPLF ont été repoussées vers le nord et ont perdu le contrôle des grandes villes de la région."
+    },
+    {
+     "fact": "五名负责人被任命领导临时行政机构",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cinq responsables ont été désignés à sa tête pour une durée de six mois."
+    },
+    {
+     "fact": "提格雷政党Salsaye Woyané高层Hadush Kinfe称该进程包容性不足",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "pour Hadush Kinfe, haut responsable du parti tigréen Salsaye Woyané, ce processus, mené par les autorités fédérales, n'est pas assez inclusif."
+    }
+   ],
+   "uncertainties": [
+    "提格雷政党Salsaye Woyané高层称多数居民未参与地方选举进程，该说法为单一政党人士观点，尚未获独立证实",
+    "联邦政府承诺六个月内举行自由透明选举，但选举能否如期举行尚不确定",
+    "目前仅RFI一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_4edd05240c970ae5",
+ "disease_event_id": null,
+ "country_code": "ET"
+}
