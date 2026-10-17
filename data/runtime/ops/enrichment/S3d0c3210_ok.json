@@ -1,0 +1,115 @@
+{
+ "label": "S3d0c3210",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "31564879b25ef59b9fab00339792def542491445d349f036666ac1efcee61052",
+ "tokens": {
+  "input_tokens": 2771,
+  "output_tokens": 537,
+  "total_tokens": 3308
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "Amnesty International 披露摩洛哥针对异见声音的监控系统",
+   "summary_zh": "据法媒报道，国际特赦组织经多年调查发布报告，称摩洛哥领土监视总局（DGST）在缺乏法律授权和问责的情况下，使用多种监控技术针对人权活动人士、记者及其亲属。报告基于一名前DGST特工举报、独立来源、受害者证词及泄露数据等，涉及2017至2021年期间。报道还提及国际供应商向摩洛哥提供监控系统，相关指控尚未获摩洛哥官方回应或独立确认。",
+   "event_type": "other_security",
+   "country_iso3": "MAR",
+   "location": {
+    "country_iso3": "MAR",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Maroc"
+   },
+   "key_facts": [
+    {
+     "fact": "国际特赦组织发布报告，称摩洛哥DGST使用非法监控手段压制批评者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Amnesty International a enquêté sur les procédures illégales utilisées par la Direction générale de la surveillance du territoire pour réduire au silence toutes celles et ceux qui entendent émettre des critiques à l'égard du Maroc."
+    },
+    {
+     "fact": "报告调查时段为2017至2021年，基于前特工举报及多种来源",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "on a pu mener vraiment une enquête très fouillée sur la période 2017-2021"
+    },
+    {
+     "fact": "2017年调查曾识别103个摩洛哥手机号码为Pegasus潜在目标，其中65人为民间社会成员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Amnesty avait ainsi identifié les propriétaires de 103 numéros de téléphone marocains figurant parmi les cibles potentielles de Pegasus. Parmi eux, soixante-cinq étaient des membres de la société civile"
+    },
+    {
+     "fact": "报道称摩洛哥情报机构还通过网吧、手机店及邻里线人等方式实施监控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les renseignements marocains infectent aussi de nombreux cybercafés de logiciels espions"
+    }
+   ],
+   "uncertainties": [
+    "相关监控系统指控由国际特赦组织单方报告提出，尚未获摩洛哥官方回应或独立确认",
+    "报告部分依据一名前DGST特工举报及泄露数据，证据细节有待核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "Amnesty International 披露摩洛哥针对异见声音的监控系统",
+   "summary_zh": "据法媒报道，国际特赦组织经多年调查发布报告，称摩洛哥领土监视总局（DGST）在缺乏法律授权和问责的情况下，使用多种监控技术针对人权活动人士、记者及其亲属。报告基于一名前DGST特工举报、独立来源、受害者证词及泄露数据等，涉及2017至2021年期间。报道还提及国际供应商向摩洛哥提供监控系统，相关指控尚未获摩洛哥官方回应或独立确认。",
+   "event_type": "other_security",
+   "country_iso3": "MAR",
+   "location": {
+    "country_iso3": "MAR",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Maroc"
+   },
+   "key_facts": [
+    {
+     "fact": "国际特赦组织发布报告，称摩洛哥DGST使用非法监控手段压制批评者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Amnesty International a enquêté sur les procédures illégales utilisées par la Direction générale de la surveillance du territoire pour réduire au silence toutes celles et ceux qui entendent émettre des critiques à l'égard du Maroc."
+    },
+    {
+     "fact": "报告调查时段为2017至2021年，基于前特工举报及多种来源",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "on a pu mener vraiment une enquête très fouillée sur la période 2017-2021"
+    },
+    {
+     "fact": "2017年调查曾识别103个摩洛哥手机号码为Pegasus潜在目标，其中65人为民间社会成员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Amnesty avait ainsi identifié les propriétaires de 103 numéros de téléphone marocains figurant parmi les cibles potentielles de Pegasus. Parmi eux, soixante-cinq étaient des membres de la société civile"
+    },
+    {
+     "fact": "报道称摩洛哥情报机构还通过网吧、手机店及邻里线人等方式实施监控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les renseignements marocains infectent aussi de nombreux cybercafés de logiciels espions"
+    }
+   ],
+   "uncertainties": [
+    "相关监控系统指控由国际特赦组织单方报告提出，尚未获摩洛哥官方回应或独立确认",
+    "报告部分依据一名前DGST特工举报及泄露数据，证据细节有待核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_1dad04d73d0c3210",
+ "disease_event_id": null,
+ "country_code": "MA"
+}

@@ -1,6 +1,6 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-17T21:08:10+08:00",
+ "generated_at": "2026-10-17T22:55:07+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
@@ -8,10 +8,10 @@
  "counts": {
   "signals_24h": 17,
   "signals_7d": 229,
-  "verified_events_24h": 17,
-  "verified_events_7d": 261,
+  "verified_events_24h": 20,
+  "verified_events_7d": 264,
   "multi_source_verified_events_7d": 6,
-  "countries_with_activity_24h": 8,
+  "countries_with_activity_24h": 9,
   "total_countries_monitored": 22
  },
  "countries_24h": [
@@ -22,6 +22,7 @@
   "埃塞俄比亚",
   "塞内加尔",
   "尼日利亚",
+  "摩洛哥",
   "阿尔及利亚"
  ],
  "countries_7d": [
@@ -62,7 +63,7 @@
   },
   {
    "value": "乍得",
-   "count": 43
+   "count": 44
   },
   {
    "value": "加纳",
@@ -78,7 +79,7 @@
   },
   {
    "value": "埃塞俄比亚",
-   "count": 16
+   "count": 15
   },
   {
    "value": "尼日尔",
@@ -108,11 +109,15 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 12
+   "count": 11
   },
   {
    "value": "公共卫生",
    "count": 2
+  },
+  {
+   "value": "政治危机",
+   "count": 1
   },
   {
    "value": "武装冲突",
@@ -130,33 +135,18 @@
  "source_tier_distribution_7d": [
   {
    "value": "C",
-   "count": 194
+   "count": 196
   },
   {
    "value": "B",
-   "count": 185
+   "count": 187
   },
   {
    "value": "A",
-   "count": 111
+   "count": 110
   }
  ],
  "top_verified_events": [
-  {
-   "fact_id": "EVT_057ac05629be3a19",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "苏丹准军事组织无人机袭击埃塞俄比亚边境附近，据称致41人死亡",
-   "category": "other_security",
-   "source": "BBC News (Africa)",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-10 14:49",
-   "importance": "high",
-   "severity": "medium"
-  },
   {
    "fact_id": "EVT_2dcad8e0c3e8421d",
    "level": "verified_event",
@@ -231,9 +221,39 @@
    "time": "2026-10-10 18:28",
    "importance": "high",
    "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_8fdab27059cfd8db",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "中非共和国军队在靠近乍得的三国边境地区实施预防性空袭",
+   "category": "military_operation",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-10 17:17",
+   "importance": "high",
+   "severity": "medium"
   }
  ],
  "top_signals": [
+  {
+   "fact_id": "news:941744f119985d04",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Tchad : 4 583 candidats lancés dans la course pour le BTS national 2026",
+   "category": "political_crisis",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-17 19:44",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   {
    "fact_id": "news:5c9954c58d607e71",
    "level": "news_signal",
@@ -578,21 +598,6 @@
    "time": "2026-10-16 15:55",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:8b1f5006d35d55f8",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "尼日利亚联邦首都区传统统治者妻子协会加大力度打击性别暴力",
-   "category": "other_security",
-   "source": "News Agency of Nigeria",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-16 14:17",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -671,16 +676,31 @@
  ],
  "existing_assessment": {
   "status": "ai",
-  "overall_assessment": "已核实事件方面：乍得与中非共和国边境紧张升级，乍方就中非军队越境召见大使并提出严正警告，另有约1300名武装分子策划进攻的通报；吉布提海域移民船倾覆致至少139人死亡、84人失踪；苏丹与埃及边境金矿营地遭空袭据称致72人死亡；埃塞俄比亚与厄立特里亚对峙持续，厄方呼吁联合国介入；南非宪法法院裁决引发反移民暴力；萨赫勒流离失所人数自2020年以来近乎翻倍。情报信号（均为单源、尚待核实）：刚果（金）东部据称ADF新袭击令埃博拉防控复杂化、刚方限制与比利时使馆接触；乍得瓦达伊难民涌入；埃塞提格雷设临时行政机构及前战斗人员登记。7日统计显示尼日利亚、乍得、加纳为事件高发国。",
+  "overall_assessment": "已核实事件方面，乍得与中非共和国边境紧张升级：乍得就中非军队越境召见中非大使并提出严正警告，另有约1300名武装分子策划进攻的通报；吉布提海域移民船倾覆造成重大伤亡；埃塞俄比亚与厄立特里亚对峙持续，厄方呼吁联合国介入；苏丹与埃及边境金矿营地遭空袭。萨赫勒流离失所人数自2020年以来近乎翻倍。情报信号层面（均为单源消息，尚待核实）：刚果（金）东部据称ADF发动新袭击并影响埃博拉防控，刚果（金）限制与比利时使馆接触，乍得瓦达伊地区难民涌入，埃塞俄比亚在提格雷设立六个月临时行政机构。整体态势趋于紧张，边境与跨境武装风险突出。",
   "risk_direction": "worsening",
   "confidence": "medium",
-  "generated_time": "2026-10-17T20:07:46+08:00",
+  "generated_time": "2026-10-17T22:54:53+08:00",
   "based_on": "过去24小时/7日公开信息",
   "model": "",
   "date": "20261017"
  },
- "fact_count": 490,
+ "fact_count": 493,
  "facts": {
+  "news:941744f119985d04": {
+   "fact_id": "news:941744f119985d04",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Tchad : 4 583 candidats lancés dans la course pour le BTS national 2026",
+   "category": "political_crisis",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-17 19:44",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:5c9954c58d607e71": {
    "fact_id": "news:5c9954c58d607e71",
    "level": "news_signal",
@@ -4100,36 +4120,6 @@
    "time": "2026-10-10 23:00",
    "importance": "low",
    "why_it_matters": ""
-  },
-  "news:93c6ca380e8608c0": {
-   "fact_id": "news:93c6ca380e8608c0",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "苏丹准军事组织无人机袭击埃塞俄比亚边境附近，据称致41人死亡",
-   "category": "other_security",
-   "source": "BBC News (Africa)",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-10 22:49",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "EVT_057ac05629be3a19": {
-   "fact_id": "EVT_057ac05629be3a19",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "埃塞俄比亚",
-   "title": "苏丹准军事组织无人机袭击埃塞俄比亚边境附近，据称致41人死亡",
-   "category": "other_security",
-   "source": "BBC News (Africa)",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-10 14:49",
-   "importance": "high",
-   "severity": "medium"
   },
   "EVT_2dcad8e0c3e8421d": {
    "fact_id": "EVT_2dcad8e0c3e8421d",
@@ -8028,6 +8018,66 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-17 08:58",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_b0475bd4b5580fb5": {
+   "fact_id": "EVT_b0475bd4b5580fb5",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "刚果（金）",
+   "title": "刚果（金）埃博拉疫情持续扩散 一线人员接种Ervebo疫苗",
+   "category": "public_health",
+   "source": "Africanews",
+   "source_tier": "B",
+   "source_role": "aggregator_discovery",
+   "time": "2026-10-17 00:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_3bd03dd86c33fdef": {
+   "fact_id": "EVT_3bd03dd86c33fdef",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "加纳",
+   "title": "西共体向加纳6月29日洪灾受灾者捐赠25万美元",
+   "category": "natural_disaster",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-17 11:20",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_1dad04d73d0c3210": {
+   "fact_id": "EVT_1dad04d73d0c3210",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "摩洛哥",
+   "title": "Amnesty International 披露摩洛哥针对异见声音的监控系统",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-17 09:38",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_f990f5bfe099dc8b": {
+   "fact_id": "EVT_f990f5bfe099dc8b",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "乍得：4583名考生参加2026年全国BTS考试",
+   "category": "political_crisis",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-17 11:44",
    "importance": "high",
    "severity": "medium"
   }
