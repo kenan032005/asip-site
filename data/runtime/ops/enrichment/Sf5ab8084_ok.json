@@ -1,0 +1,119 @@
+{
+ "label": "Sf5ab8084",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4bc90f1ed00c09a688e7b3cd0b20c4c64b48b3be132fa07311bd3cd975ca6bf2",
+ "tokens": {
+  "input_tokens": 2631,
+  "output_tokens": 598,
+  "total_tokens": 3229
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）东部：据称ADF伊斯兰武装组织发动新袭击，令埃博拉防控复杂化",
+   "summary_zh": "据当地公民社会反映，刚果（金）伊图里省曼巴萨地区出现被指与伊斯兰国有关联的乌干达武装组织“民主同盟军”（ADF）成员活动。本周多个村镇据称遭ADF入侵，包括对采矿点和一家卫生中心的袭击，据称至少十余人死亡、有人被劫为人质，伤亡数字尚未核实。该地区同时是埃博拉病毒流行区，安全局势恶化使疫情防控部署受阻。上述信息目前仅来自单一来源报道。",
+   "event_type": "terrorism",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "伊图里省",
+    "city": "曼巴萨",
+    "site": "巴比拉·巴博姆比酋长领地",
+    "raw_text": "province de l'Ituri, territoire de Mambasa, chefferie de Babila Babombi"
+   },
+   "key_facts": [
+    {
+     "fact": "公民社会称伊图里省曼巴萨地区出现被指为ADF的武装成员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "dans la province de l'Ituri, la société civile alerte sur la présence de membres des Forces démocratiques alliées (ADF)"
+    },
+    {
+     "fact": "本周曼巴萨多个村镇据称遭ADF入侵",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plusieurs localités du territoire de Mambasa, situé au sud-ouest de la province, ont signalé des incursions attribuées aux ADF"
+    },
+    {
+     "fact": "据称袭击针对采矿点和一家卫生中心，至少十余人死亡、有人被劫为人质，伤亡数字尚未核实",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des attaques contre des sites miniers et un centre de santé. Le bilan n'est pas encore consolidé, mais il y aurait au moins une dizaine de morts et des personnes prises en otage"
+    },
+    {
+     "fact": "该地区为埃博拉病毒流行区，不安全局势阻碍疫情防控部署",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le territoire de Mambasa, et particulièrement la chefferie de Babila Babombi, est une zone où circule le virus Ebola. Cette insécurité complique le déploiement et le renforcement de la riposte contre l'épidémie"
+    }
+   ],
+   "uncertainties": [
+    "袭击由ADF实施的说法目前为归因，尚未获独立证实",
+    "伤亡人数尚未核实，仅称“至少十余人死亡”",
+    "人质人数与状况不明",
+    "信息仅来自单一来源（RFI）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）东部：据称ADF伊斯兰武装组织发动新袭击，令埃博拉防控复杂化",
+   "summary_zh": "据当地公民社会反映，刚果（金）伊图里省曼巴萨地区出现被指与伊斯兰国有关联的乌干达武装组织“民主同盟军”（ADF）成员活动。本周多个村镇据称遭ADF入侵，包括对采矿点和一家卫生中心的袭击，据称至少十余人死亡、有人被劫为人质，伤亡数字尚未核实。该地区同时是埃博拉病毒流行区，安全局势恶化使疫情防控部署受阻。上述信息目前仅来自单一来源报道。",
+   "event_type": "terrorism",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "伊图里省",
+    "city": "曼巴萨",
+    "site": "巴比拉·巴博姆比酋长领地",
+    "raw_text": "province de l'Ituri, territoire de Mambasa, chefferie de Babila Babombi"
+   },
+   "key_facts": [
+    {
+     "fact": "公民社会称伊图里省曼巴萨地区出现被指为ADF的武装成员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "dans la province de l'Ituri, la société civile alerte sur la présence de membres des Forces démocratiques alliées (ADF)"
+    },
+    {
+     "fact": "本周曼巴萨多个村镇据称遭ADF入侵",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plusieurs localités du territoire de Mambasa, situé au sud-ouest de la province, ont signalé des incursions attribuées aux ADF"
+    },
+    {
+     "fact": "据称袭击针对采矿点和一家卫生中心，至少十余人死亡、有人被劫为人质，伤亡数字尚未核实",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des attaques contre des sites miniers et un centre de santé. Le bilan n'est pas encore consolidé, mais il y aurait au moins une dizaine de morts et des personnes prises en otage"
+    },
+    {
+     "fact": "该地区为埃博拉病毒流行区，不安全局势阻碍疫情防控部署",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le territoire de Mambasa, et particulièrement la chefferie de Babila Babombi, est une zone où circule le virus Ebola. Cette insécurité complique le déploiement et le renforcement de la riposte contre l'épidémie"
+    }
+   ],
+   "uncertainties": [
+    "袭击由ADF实施的说法目前为归因，尚未获独立证实",
+    "伤亡人数尚未核实，仅称“至少十余人死亡”",
+    "人质人数与状况不明",
+    "信息仅来自单一来源（RFI）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_68d294dcf5ab8084",
+ "disease_event_id": null,
+ "country_code": "CD"
+}
