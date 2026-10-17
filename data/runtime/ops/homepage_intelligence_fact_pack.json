@@ -1,17 +1,17 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-17T07:07:50+08:00",
+ "generated_at": "2026-10-17T08:07:48+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 24,
-  "signals_7d": 239,
-  "verified_events_24h": 28,
-  "verified_events_7d": 272,
+  "signals_24h": 15,
+  "signals_7d": 235,
+  "verified_events_24h": 18,
+  "verified_events_7d": 267,
   "multi_source_verified_events_7d": 6,
-  "countries_with_activity_24h": 16,
+  "countries_with_activity_24h": 10,
   "total_countries_monitored": 22
  },
  "countries_24h": [
@@ -19,17 +19,11 @@
   "乍得",
   "几内亚",
   "刚果（布）",
-  "刚果（金）",
-  "利比亚",
   "加纳",
   "南苏丹",
-  "南非",
-  "埃塞俄比亚",
   "塞内加尔",
   "尼日利亚",
-  "尼日尔",
   "布基纳法索",
-  "肯尼亚",
   "马达加斯加"
  ],
  "countries_7d": [
@@ -66,7 +60,7 @@
  "country_distribution_7d": [
   {
    "value": "尼日利亚",
-   "count": 55
+   "count": 54
   },
   {
    "value": "乍得",
@@ -78,7 +72,7 @@
   },
   {
    "value": "刚果（金）",
-   "count": 22
+   "count": 21
   },
   {
    "value": "南苏丹",
@@ -94,7 +88,7 @@
   },
   {
    "value": "摩洛哥",
-   "count": 10
+   "count": 9
   },
   {
    "value": "贝宁",
@@ -116,22 +110,22 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 11
-  },
-  {
-   "value": "公共卫生",
-   "count": 5
+   "count": 8
   },
   {
    "value": "恐怖袭击",
-   "count": 3
-  },
-  {
-   "value": "武装冲突",
    "count": 2
   },
   {
+   "value": "公共卫生",
+   "count": 1
+  },
+  {
    "value": "民众骚乱",
+   "count": 1
+  },
+  {
+   "value": "武装冲突",
    "count": 1
   },
   {
@@ -150,11 +144,11 @@
   },
   {
    "value": "B",
-   "count": 200
+   "count": 193
   },
   {
    "value": "A",
-   "count": 109
+   "count": 107
   }
  ],
  "top_verified_events": [
@@ -170,21 +164,6 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-10 00:20",
-   "importance": "high",
-   "severity": "medium"
-  },
-  {
-   "fact_id": "EVT_de0e8c9fec862757",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乌干达",
-   "title": "埃博拉患者横跨三国未被发现引发质疑",
-   "category": "public_health",
-   "source": "BBC News (Africa)",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-10 00:00",
    "importance": "high",
    "severity": "medium"
   },
@@ -245,6 +224,21 @@
    "source_tier": "B",
    "source_role": "regional",
    "time": "2026-10-10 07:33",
+   "importance": "high",
+   "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_4084605ed3ec5e9b",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "评论呼吁宪法赋予传统酋长制地方发展职能",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-10 06:22",
    "importance": "high",
    "severity": "medium"
   }
@@ -686,10 +680,16 @@
   }
  ],
  "existing_assessment": {
-  "status": "deterministic",
-  "based_on": "过去24小时/7日公开信息（确定性汇总）"
+  "status": "ai",
+  "overall_assessment": "已核实事件方面，南苏丹伦拜克遭武装团体袭击致71人死亡，琼莱州两社区同意停止敌对行动；吉布提海域移民船倾覆致至少139人死亡、84人失踪；乍得就中非共和国军队越境事件召见中非大使并提出严正警告；苏丹与埃及边境金矿营地遭空袭据称致72人死亡；南非宪法法院裁决引发反移民暴力；萨赫勒流离失所人数自2020年以来近乎翻倍。情报信号方面，均为单源消息、尚待核实：尼日利亚联邦政府成立解除武装与重返社会工作组、总统下令清剿恐怖分子营地；加纳武装部队接收45辆通用车辆；乍得恩贾梅纳登革热疫情暴发、医院不堪重负；南苏丹性暴力防治项目四年期满结束、联合国开发计划署呼吁加强预警机制。整体风险方向趋于恶化，需持续跟踪边境冲突、疫情与移民安全。",
+  "risk_direction": "worsening",
+  "confidence": "medium",
+  "generated_time": "2026-10-17T08:07:35+08:00",
+  "based_on": "过去24小时/7日公开信息",
+  "model": "",
+  "date": "20261017"
  },
- "fact_count": 511,
+ "fact_count": 502,
  "facts": {
   "news:bd65c0dbcff0779b": {
    "fact_id": "news:bd65c0dbcff0779b",
@@ -4216,66 +4216,6 @@
    "importance": "low",
    "why_it_matters": ""
   },
-  "news:6d78d4f27cc32ab4": {
-   "fact_id": "news:6d78d4f27cc32ab4",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乌干达",
-   "title": "埃博拉患者横跨三国未被发现引发质疑",
-   "category": "public_health",
-   "source": "BBC News (Africa)",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-10 08:00",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:721cadf4fc208bc5": {
-   "fact_id": "news:721cadf4fc208bc5",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "刚果（金）",
-   "title": "肯尼亚卫生部呼吁教堂提高对埃博拉的认识",
-   "category": "public_health",
-   "source": "Africanews",
-   "source_tier": "B",
-   "source_role": "aggregator_discovery",
-   "time": "2026-10-10 08:00",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:d7ef6bb21827a2d4": {
-   "fact_id": "news:d7ef6bb21827a2d4",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "摩洛哥",
-   "title": "摩洛哥国王称青年议题必须置于政策议程首位",
-   "category": "other_security",
-   "source": "Africanews",
-   "source_tier": "B",
-   "source_role": "aggregator_discovery",
-   "time": "2026-10-10 08:00",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:3a5477e514b15278": {
-   "fact_id": "news:3a5477e514b15278",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "一名律师回顾在加纳执业第一年的经历",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-10-10 07:10",
-   "importance": "low",
-   "why_it_matters": ""
-  },
   "EVT_271929b42effea3c": {
    "fact_id": "EVT_271929b42effea3c",
    "level": "verified_event",
@@ -4288,21 +4228,6 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-10 00:20",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_de0e8c9fec862757": {
-   "fact_id": "EVT_de0e8c9fec862757",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乌干达",
-   "title": "埃博拉患者横跨三国未被发现引发质疑",
-   "category": "public_health",
-   "source": "BBC News (Africa)",
-   "source_tier": "A",
-   "source_role": "major_media",
-   "time": "2026-10-10 00:00",
    "importance": "high",
    "severity": "medium"
   },
@@ -4408,21 +4333,6 @@
    "source_tier": "B",
    "source_role": "regional",
    "time": "2026-10-10 04:37",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_941d68d168b60f76": {
-   "fact_id": "EVT_941d68d168b60f76",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "一名律师回顾在加纳执业第一年的经历",
-   "category": "other_security",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-10-09 23:10",
    "importance": "high",
    "severity": "medium"
   },
@@ -4558,21 +4468,6 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-10 09:43",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_d89457975860cb2e": {
-   "fact_id": "EVT_d89457975860cb2e",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "刚果（金）",
-   "title": "肯尼亚卫生部呼吁教堂提高对埃博拉的认识",
-   "category": "public_health",
-   "source": "Africanews",
-   "source_tier": "B",
-   "source_role": "aggregator_discovery",
-   "time": "2026-10-10 00:00",
    "importance": "high",
    "severity": "medium"
   },
@@ -4726,21 +4621,6 @@
    "importance": "high",
    "severity": "medium"
   },
-  "EVT_a1e21c42c25f1fca": {
-   "fact_id": "EVT_a1e21c42c25f1fca",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "摩洛哥",
-   "title": "摩洛哥国王称青年议题必须置于政策议程首位",
-   "category": "other_security",
-   "source": "Africanews",
-   "source_tier": "B",
-   "source_role": "aggregator_discovery",
-   "time": "2026-10-10 00:00",
-   "importance": "high",
-   "severity": "medium"
-  },
   "EVT_3b516a6b7b2a986e": {
    "fact_id": "EVT_3b516a6b7b2a986e",
    "level": "verified_event",
@@ -4753,21 +4633,6 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-10 19:51",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_6205426bdecb643f": {
-   "fact_id": "EVT_6205426bdecb643f",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "南非",
-   "title": "南非反移民热点地区加强安保",
-   "category": "foreign_national_security",
-   "source": "Africanews",
-   "source_tier": "B",
-   "source_role": "aggregator_discovery",
-   "time": "2026-10-10 00:00",
    "importance": "high",
    "severity": "medium"
   },
