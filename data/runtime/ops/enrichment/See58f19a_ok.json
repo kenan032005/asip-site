@@ -1,0 +1,115 @@
+{
+ "label": "See58f19a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "bdcf80e12ae2e1d2778f4cc7082bf67e7ea4df15e0cea86beff2b33a7daeedd4",
+ "tokens": {
+  "input_tokens": 2335,
+  "output_tokens": 445,
+  "total_tokens": 2780
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "奥巴塞基哀悼贝宁火灾遇难者，呼吁加强安全措施",
+   "summary_zh": "尼日利亚埃多州前州长戈德温·奥巴塞基对周四贝宁发生的火灾表示深切关注，该火灾造成人员死亡。他将奥卢库市场火灾描述为“悲剧且本可避免”，并呼吁严格执行安全法规、强化应急响应机制。据尼日利亚通讯社报道，事故起因是一辆油罐车翻倒后发生爆炸并引发火灾，造成人员伤亡和财产损失。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Edo",
+    "city": "Benin",
+    "site": "Oluku market",
+    "raw_text": "Benin, Edo (Oluku market)"
+   },
+   "key_facts": [
+    {
+     "fact": "埃多州前州长奥巴塞基对贝宁火灾遇难者表示哀悼",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Former Edo governor Godwin Obaseki on Friday expressed deep concern over the fire incident that claimed lives in Benin on Thursday."
+    },
+    {
+     "fact": "火灾发生在奥卢库市场，造成人员死亡和财产损失",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "he described the Oluku market fire as saddening"
+    },
+    {
+     "fact": "据尼日利亚通讯社报道，事故起因是油罐车翻倒后爆炸起火",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The News Agency of Nigeria (NAN) reports that the incident occurred after a petrol tanker fell, leading to an explosion and subsequent fire that claimed lives and destroyed property."
+    },
+    {
+     "fact": "奥巴塞基呼吁严格执行安全法规并强化应急响应机制",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The former governor called for effective emergency response mechanisms, strict enforcement of safety regulations and decisive action"
+    }
+   ],
+   "uncertainties": [
+    "伤亡人数尚未确认",
+    "目前仅一个来源（尼日利亚通讯社）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "奥巴塞基哀悼贝宁火灾遇难者，呼吁加强安全措施",
+   "summary_zh": "尼日利亚埃多州前州长戈德温·奥巴塞基对周四贝宁发生的火灾表示深切关注，该火灾造成人员死亡。他将奥卢库市场火灾描述为“悲剧且本可避免”，并呼吁严格执行安全法规、强化应急响应机制。据尼日利亚通讯社报道，事故起因是一辆油罐车翻倒后发生爆炸并引发火灾，造成人员伤亡和财产损失。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Edo",
+    "city": "Benin",
+    "site": "Oluku market",
+    "raw_text": "Benin, Edo (Oluku market)"
+   },
+   "key_facts": [
+    {
+     "fact": "埃多州前州长奥巴塞基对贝宁火灾遇难者表示哀悼",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Former Edo governor Godwin Obaseki on Friday expressed deep concern over the fire incident that claimed lives in Benin on Thursday."
+    },
+    {
+     "fact": "火灾发生在奥卢库市场，造成人员死亡和财产损失",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "he described the Oluku market fire as saddening"
+    },
+    {
+     "fact": "据尼日利亚通讯社报道，事故起因是油罐车翻倒后爆炸起火",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The News Agency of Nigeria (NAN) reports that the incident occurred after a petrol tanker fell, leading to an explosion and subsequent fire that claimed lives and destroyed property."
+    },
+    {
+     "fact": "奥巴塞基呼吁严格执行安全法规并强化应急响应机制",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The former governor called for effective emergency response mechanisms, strict enforcement of safety regulations and decisive action"
+    }
+   ],
+   "uncertainties": [
+    "伤亡人数尚未确认",
+    "目前仅一个来源（尼日利亚通讯社）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_4bcb86bfee58f19a",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
