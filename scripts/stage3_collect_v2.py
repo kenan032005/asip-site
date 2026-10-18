@@ -934,7 +934,7 @@ def _classify_failure(stat, dis_errors):
 
 
 def write_stats(per_source, run_id, configured_sources=0, article_stats=None,
-                cluster_stats=None):
+                cluster_stats=None, phase_stats=None):
     # C8-3 STEP 4：把"非丢弃"的跳过显式汇总，便于计算 TRUE_SILENT_DROP_COUNT
     _osa = sum(int(r.get("other_source_items") or 0) for r in per_source)
     _tot = sum(int(r.get("discovered") or 0) for r in per_source)
@@ -984,22 +984,62 @@ def write_stats(per_source, run_id, configured_sources=0, article_stats=None,
     except Exception:
         totals["gdelt_rate_limiter"] = None
     # C8-3 STEP 4：显式核算"非丢弃"的跳过，并给出真未计入数（应恒为 0）
-    # C8-4C3/C8-4D1：相位遥测（内部指标，不影响公开 UI）。
-    # 上游字段不可用时上报 UNKNOWN —— 绝不臆造 0（0 会掩盖"本相位根本没执行"）。
-    try:
-        _phases = phase_stats
-    except NameError:
-        _phases = None
-    totals["PHASE_TELEMETRY_AVAILABLE"] = _phases is not None
+    # C8-4D1 STEP0（预部署修正）：相位遥测改为**显式入参 + 从真实 source-country
+    # 执行行派生**。禁止依赖 main() 内局部变量的全局查找，也禁止用 except NameError
+    # 掩盖"遥测其实存在但没传进来"。相位归因以 per_source 行的 phase 戳为准；
+    # 相位耗时只累加**逐行实测 duration_s**（实际测量），绝不把混合相位的耗时
+    # 均分后当作精确测量上报。
+    _has_phase_stamp = any("phase" in s for s in per_source)
+    _phase_rows = {}
     for _p in range(5):
-        if _phases is None:
+        _rows_p = [s for s in per_source if s.get("phase") == _p]
+        _sk = sum(1 for s in _rows_p if s.get("status") == "skipped_wall_clock")
+        _phase_rows[_p] = {
+            "enumerated": len(_rows_p),
+            "attempted": len(_rows_p) - _sk,
+            "skipped": _sk,
+            "elapsed": round(sum(float(s.get("duration_s") or 0.0) for s in _rows_p
+                                 if s.get("status") != "skipped_wall_clock"), 1),
+        }
+    _telemetry_ok = bool(_has_phase_stamp or phase_stats is not None)
+    totals["PHASE_TELEMETRY_AVAILABLE"] = _telemetry_ok
+    totals["PHASE_TELEMETRY_BASIS"] = (
+        "measured_source_country_rows" if _has_phase_stamp
+        else ("aggregate_fallback" if phase_stats is not None else "UNKNOWN"))
+    totals["PHASE_ELAPSED_BASIS"] = (
+        "measured_row_durations" if _has_phase_stamp else "UNKNOWN")
+    for _p in range(5):
+        if _has_phase_stamp:
+            totals["PHASE%d_EXECUTIONS" % _p] = _phase_rows[_p]["attempted"]
+            totals["PHASE%d_SKIPPED_WALL_CLOCK" % _p] = _phase_rows[_p]["skipped"]
+            totals["PHASE%d_ELAPSED_SECONDS" % _p] = _phase_rows[_p]["elapsed"]
+            totals["PHASE%d_ENUMERATED" % _p] = _phase_rows[_p]["enumerated"]
+            totals["PHASE%d_ATTEMPTED" % _p] = _phase_rows[_p]["attempted"]
+        elif phase_stats is not None:
+            # 兼容旧调用方（无 phase 戳）：只上报可核对的计数，耗时标记 UNKNOWN
+            totals["PHASE%d_EXECUTIONS" % _p] = int(phase_stats[_p].get("executions", 0))
+            totals["PHASE%d_SKIPPED_WALL_CLOCK" % _p] = int(phase_stats[_p].get("skipped", 0))
+            totals["PHASE%d_ELAPSED_SECONDS" % _p] = "UNKNOWN"
+            totals["PHASE%d_ENUMERATED" % _p] = "UNKNOWN"
+            totals["PHASE%d_ATTEMPTED" % _p] = "UNKNOWN"
+        else:
             totals["PHASE%d_EXECUTIONS" % _p] = "UNKNOWN"
             totals["PHASE%d_SKIPPED_WALL_CLOCK" % _p] = "UNKNOWN"
             totals["PHASE%d_ELAPSED_SECONDS" % _p] = "UNKNOWN"
-        else:
-            totals["PHASE%d_EXECUTIONS" % _p] = _phases[_p]["executions"]
-            totals["PHASE%d_SKIPPED_WALL_CLOCK" % _p] = _phases[_p]["skipped"]
-            totals["PHASE%d_ELAPSED_SECONDS" % _p] = round(_phases[_p]["elapsed"], 1)
+            totals["PHASE%d_ENUMERATED" % _p] = "UNKNOWN"
+            totals["PHASE%d_ATTEMPTED" % _p] = "UNKNOWN"
+    # 相位跳过与 per_source 墙钟跳过必须对账（不一致即视为遥测内部不一致）
+    _rows_skipped = sum(1 for s in per_source if s.get("status") == "skipped_wall_clock")
+    _phase_skipped_total = (sum(_phase_rows[_p]["skipped"] for _p in range(5))
+                            if _has_phase_stamp else "UNKNOWN")
+    totals["PHASE_SKIPPED_TOTAL"] = _phase_skipped_total
+    totals["PHASE_SKIP_RECONCILED"] = (
+        (_phase_skipped_total == _rows_skipped) if _has_phase_stamp else "UNKNOWN")
+    # 未进入任何国家管线即被墙钟截断的执行键（不产生 per_source 行，单独披露）
+    try:
+        totals["PHASE_UNENUMERATED_KEYS"] = int((phase_stats or {}).get("unenumerated", 0))
+    except Exception:  # noqa: BLE001
+        totals["PHASE_UNENUMERATED_KEYS"] = "UNKNOWN"
     # C8-4D1 §4：采集指标命名拆分。
     # 旧名（attempted_sources/successful_sources）语义**保持不变**（attempted_sources 一直是
     # "执行行数 = 枚举行数"，含 skipped_wall_clock），新增精确字段供新消费者使用；
@@ -1025,8 +1065,10 @@ def write_stats(per_source, run_id, configured_sources=0, article_stats=None,
             "enabled": _rs.get("enabled"),
             "cache_hits": _rs.get("cache_hits"),
             "cache_misses": _rs.get("cache_misses"),
+            "cache_expired": _rs.get("cache_expired"),
             "cache_entries": _rs.get("cache_entries"),
             "cache_bytes": _rs.get("cache_bytes"),
+            "ttl_seconds": _rs.get("ttl_seconds"),
             "reused_requests": _rs.get("reused_requests"),
             "evictions": _rs.get("evictions"),
             "bypass_flag_disabled": _rs.get("bypass_flag_disabled"),
@@ -1357,16 +1399,17 @@ def main():
                      if c_ == _cn and p_ in phases and (c_, s_) not in done_keys]
             if not _keys:
                 continue
-            _t0 = _t2.time()
             _a, _p, _e = run_country_pipeline(_cn, registry, discoverer,
                                               dry=args.dry, fresh=args.fresh,
                                               max_items=args.max_items,
                                               run_id=run_id, only_sids=_keys)
-            _el = _t2.time() - _t0
-            _phs = sorted({_phase[(_cn, k_)] for k_ in _keys})
-            for _p2 in _phs:
-                phase_stats[_p2]["elapsed"] += _el / max(1, len(_phs))
-                phase_stats[_p2]["executions"] += 1
+            # C8-4D1 STEP0：相位遥测的唯一事实来源 = 每条 source-country 执行行。
+            # 在此给行盖 phase 戳，write_stats 由行派生计数与**实测**耗时；
+            # 不再把一次调用的耗时按相位数量均分（那会把估算当精确值上报）。
+            for _row in _p:
+                _rk = (_cn, str(_row.get("source_id")))
+                if _rk in _phase:
+                    _row["phase"] = _phase[_rk]
             done_keys.update((_cn, k_) for k_ in _keys)
             _ao.extend(_a); _po.extend(_p); _eo.extend(_e)
         return _ao, _po, _eo
@@ -1380,9 +1423,8 @@ def main():
             _kk = (_ps.get("country"), str(_ps.get("source_id")))
             if _kk in _phase:
                 phase_stats[_phase[_kk]]["skipped"] += 1
-    for _kv in _phase.items():
-        if _kv[0] not in done_keys:
-            phase_stats[_kv[1]]["skipped"] += 1
+    # 未进入任何国家管线即被墙钟截断的执行键：不产生 per_source 行，单独披露
+    phase_stats["unenumerated"] = sum(1 for _kv in _phase.items() if _kv[0] not in done_keys)
 
     # ── C1B §十七：事件级聚类（修复 G3：一稿一事件 → 同一事件可多来源印证）──
     # 只处理本次 run_id 的事件；canonical 阈值（independent_source_count>=2 AND
@@ -1424,7 +1466,8 @@ def main():
                  cluster_stats.get("multi_source_clusters"),
                  cluster_stats.get("max_independent_sources")))
     totals = write_stats(per_source, run_id, configured_sources=configured_sources,
-                         article_stats=article_stats, cluster_stats=cluster_stats)
+                         article_stats=article_stats, cluster_stats=cluster_stats,
+                         phase_stats=phase_stats)
     # C1B §八/§九：GDELT 限流器遥测落盘（随 data/runtime/ops 一并持久化），
     # 使「最近窗口的请求数/429/成功率/唯一产出」成为可长期统计的事实，而非临时日志。
     try:

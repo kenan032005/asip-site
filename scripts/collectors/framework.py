@@ -115,24 +115,28 @@ SHARED_REUSE_ENV = "ASIP_SHARED_FEED_REUSE"
 SHARED_REUSE_SOURCES_ENV = "ASIP_SHARED_FEED_REUSE_SOURCES"
 SHARED_REUSE_MAX_ENTRIES = int(os.environ.get("ASIP_SHARED_FEED_REUSE_MAX_ENTRIES", "64"))
 SHARED_REUSE_MAX_BYTES = int(os.environ.get("ASIP_SHARED_FEED_REUSE_MAX_BYTES", str(24 * 1024 * 1024)))
+#: 缓存新鲜度上限（秒）。长采集周期内同一响应不得无限期可复用；超龄即视为未命中并重新抓取。
+SHARED_REUSE_TTL_SECONDS = int(os.environ.get("ASIP_SHARED_FEED_REUSE_TTL_SECONDS", "600"))
 
 #: 参与请求身份判定的头（大小写不敏感）。UA 之外的头一律视为不影响 feed 内容，
 #: 但鉴权/敏感头不进入明文：仅以哈希摘要参与身份，缓存键本身不可反推凭据。
 RELEVANT_REQUEST_HEADERS = ("user-agent",)
 SENSITIVE_HEADERS = ("authorization", "cookie", "x-api-key", "proxy-authorization")
 
-_SHARED_CACHE = {}          # identity -> (text, err, status, nbytes)
+_SHARED_CACHE = {}          # identity -> (text, err, status, nbytes, stored_at)
 _SHARED_ORDER = []          # 插入顺序，用于有界淘汰（FIFO）
 _SHARED_BYTES = 0
 _SHARED_STATS = {
     "cache_hits": 0,
     "cache_misses": 0,
+    "cache_expired": 0,
     "reused_requests": 0,
     "bypass_flag_disabled": 0,
     "bypass_not_allowlisted": 0,
     "evictions": 0,
     "cache_entries": 0,
     "cache_bytes": 0,
+    "ttl_seconds": 0,
     # 真实网络请求计数（每次 urlopen 尝试都计数，含重试）
     "physical_network_requests": 0,
 }
@@ -199,11 +203,31 @@ def _cache_put(key, value):
             _SHARED_STATS["evictions"] += 1
     if len(_SHARED_ORDER) >= SHARED_REUSE_MAX_ENTRIES or n > SHARED_REUSE_MAX_BYTES:
         return  # 单条超限则不缓存（不改变行为，仅放弃复用）
-    _SHARED_CACHE[key] = (value[0], value[1], value[2], n)
+    _SHARED_CACHE[key] = (value[0], value[1], value[2], n, time.time())
     _SHARED_ORDER.append(key)
     _SHARED_BYTES += n
     _SHARED_STATS["cache_entries"] = len(_SHARED_ORDER)
     _SHARED_STATS["cache_bytes"] = _SHARED_BYTES
+
+
+def _cache_get(key):
+    """取缓存；超过 TTL 视为未命中并移除（长周期内不无限期复用同一响应）。"""
+    global _SHARED_BYTES
+    hit = _SHARED_CACHE.get(key)
+    if hit is None:
+        return None
+    if SHARED_REUSE_TTL_SECONDS > 0 and (time.time() - hit[4]) > SHARED_REUSE_TTL_SECONDS:
+        _SHARED_CACHE.pop(key, None)
+        try:
+            _SHARED_ORDER.remove(key)
+        except ValueError:
+            pass
+        _SHARED_BYTES -= hit[3]
+        _SHARED_STATS["cache_expired"] += 1
+        _SHARED_STATS["cache_entries"] = len(_SHARED_ORDER)
+        _SHARED_STATS["cache_bytes"] = _SHARED_BYTES
+        return None
+    return hit
 
 
 def get_request_stats():
@@ -211,6 +235,7 @@ def get_request_stats():
     d = dict(_SHARED_STATS)
     d["cache_bytes"] = _SHARED_BYTES
     d["enabled"] = shared_reuse_flag_state()[0]
+    d["ttl_seconds"] = SHARED_REUSE_TTL_SECONDS
     return d
 
 
@@ -235,7 +260,7 @@ def fetch_page(url, timeout=HTTP_TIMEOUT, reuse=False, source_id=None, auth_cont
     if reuse:
         if shared_reuse_enabled(source_id):
             cache_key = request_identity(url, "GET", {"User-Agent": UA}, auth_context)
-            hit = _SHARED_CACHE.get(cache_key)
+            hit = _cache_get(cache_key)
             if hit is not None:
                 _SHARED_STATS["cache_hits"] += 1
                 _SHARED_STATS["reused_requests"] += 1
