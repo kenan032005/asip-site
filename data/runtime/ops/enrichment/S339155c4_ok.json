@@ -1,0 +1,115 @@
+{
+ "label": "S339155c4",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ae087029cad7858ceb164757136a3df5490a662d8686bc5cf0a073f928556d88",
+ "tokens": {
+  "input_tokens": 2767,
+  "output_tokens": 612,
+  "total_tokens": 3379
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "喀麦隆选后抗议：首批获刑人员获释",
+   "summary_zh": "2026年10月8日，喀麦隆66名因2025年10月选后危机被捕者被判处6至15个月监禁。10月16日夜至17日凌晨，雅温得孔登吉主监狱首批19名在押人员获释。一名辩护律师称，这些人本应数日前就获释，因行政拖延而多关押数日，属于非法羁押。其余被判刑人员预计在2027年2月前陆续获释。",
+   "event_type": "civil_unrest",
+   "country_iso3": "CMR",
+   "location": {
+    "country_iso3": "CMR",
+    "admin1": null,
+    "city": "雅温得",
+    "site": "雅温得孔登吉主监狱",
+    "raw_text": "prison principale de Yaoundé-Kondengui"
+   },
+   "key_facts": [
+    {
+     "fact": "10月8日，喀麦隆66名因2025年10月选后危机被捕者被判处6至15个月监禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le 8 octobre, au Cameroun, 66 personnes arrêtées lors de la crise post-électorale d'octobre 2025 étaient condamnées à des peines allant de six à quinze mois de prison."
+    },
+    {
+     "fact": "10月16日夜至17日凌晨，雅温得孔登吉主监狱首批19名在押人员获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "dans la nuit du vendredi 16 au samedi 17 octobre, des premières libérations ont eu lieu à la prison principale de Yaoundé-Kondengui. Dans cette première vague, 19 détenus ont été libérés."
+    },
+    {
+     "fact": "一名辩护律师称，获释者本应数日前就获释，因行政拖延而多关押数日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les personnes qui sortent aujourd'hui devaient l'être depuis plusieurs jours déjà, mais les lenteurs administratives ont fait qu'elles ont dû passer plusieurs jours en détention abusive."
+    },
+    {
+     "fact": "其余被判刑人员预计在2027年2月前获释，另有60多名在押人员仍在等待审判",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D'ici à février 2027, le reste des détenus – ceux condamnés le 8 octobre – sera libéré. Plus de 60 autres détenus de la prison de Yaoundé sont en attente de jugement."
+    }
+   ],
+   "uncertainties": [
+    "部分获释者声称自己系因维权而被无端关押，该说法尚未获得独立核实",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "喀麦隆选后抗议：首批获刑人员获释",
+   "summary_zh": "2026年10月8日，喀麦隆66名因2025年10月选后危机被捕者被判处6至15个月监禁。10月16日夜至17日凌晨，雅温得孔登吉主监狱首批19名在押人员获释。一名辩护律师称，这些人本应数日前就获释，因行政拖延而多关押数日，属于非法羁押。其余被判刑人员预计在2027年2月前陆续获释。",
+   "event_type": "civil_unrest",
+   "country_iso3": "CMR",
+   "location": {
+    "country_iso3": "CMR",
+    "admin1": null,
+    "city": "雅温得",
+    "site": "雅温得孔登吉主监狱",
+    "raw_text": "prison principale de Yaoundé-Kondengui"
+   },
+   "key_facts": [
+    {
+     "fact": "10月8日，喀麦隆66名因2025年10月选后危机被捕者被判处6至15个月监禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le 8 octobre, au Cameroun, 66 personnes arrêtées lors de la crise post-électorale d'octobre 2025 étaient condamnées à des peines allant de six à quinze mois de prison."
+    },
+    {
+     "fact": "10月16日夜至17日凌晨，雅温得孔登吉主监狱首批19名在押人员获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "dans la nuit du vendredi 16 au samedi 17 octobre, des premières libérations ont eu lieu à la prison principale de Yaoundé-Kondengui. Dans cette première vague, 19 détenus ont été libérés."
+    },
+    {
+     "fact": "一名辩护律师称，获释者本应数日前就获释，因行政拖延而多关押数日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les personnes qui sortent aujourd'hui devaient l'être depuis plusieurs jours déjà, mais les lenteurs administratives ont fait qu'elles ont dû passer plusieurs jours en détention abusive."
+    },
+    {
+     "fact": "其余被判刑人员预计在2027年2月前获释，另有60多名在押人员仍在等待审判",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D'ici à février 2027, le reste des détenus – ceux condamnés le 8 octobre – sera libéré. Plus de 60 autres détenus de la prison de Yaoundé sont en attente de jugement."
+    }
+   ],
+   "uncertainties": [
+    "部分获释者声称自己系因维权而被无端关押，该说法尚未获得独立核实",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_4f9f6e5b339155c4",
+ "disease_event_id": null,
+ "country_code": "CM"
+}

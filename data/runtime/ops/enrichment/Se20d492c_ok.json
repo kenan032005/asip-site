@@ -1,0 +1,115 @@
+{
+ "label": "Se20d492c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "fd7434ac72fe2ee309efd4b8e896edfd4663d72344f1c93cc4419776bb2a6b33",
+ "tokens": {
+  "input_tokens": 2003,
+  "output_tokens": 539,
+  "total_tokens": 2542
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚奥约州油罐车失控撞车致至少五人死亡",
+   "summary_zh": "尼日利亚奥约州首府伊巴丹的Iwo Road-Ojoo高速公路上，一辆满载柴油的油罐车刹车失灵，撞上多辆汽车，造成至少五人死亡。事故发生在周六上午10时左右，地点位于Aduloju公交站附近。奥约州道路交通管理局局长向《Punch》证实了这起事故，并称事故起因是一辆载有汽车零配件的长挂车在Arilogu附近抛锚导致交通拥堵。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Oyo State",
+    "city": "Ibadan",
+    "site": "Aduloju Bus Stop, Iwo Road-Ojoo Expressway",
+    "raw_text": "Iwo Road-Ojoo Expressway in Ibadan, Oyo State capital, at Aduloju Bus Stop, opposite Dominion City"
+   },
+   "key_facts": [
+    {
+     "fact": "一辆柴油油罐车在伊巴丹Iwo Road-Ojoo高速公路撞上多辆汽车，造成至少五人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least five people have been killed after a diesel tanker crashed into several vehicles along the Iwo Road-Ojoo Expressway in Ibadan, the Oyo State capital."
+    },
+    {
+     "fact": "事故发生在周六上午10时左右，地点为Aduloju公交站附近",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The accident occurred around 10 am on Saturday at Aduloju Bus Stop, opposite Dominion City"
+    },
+    {
+     "fact": "奥约州道路交通管理局局长Adeoye Ayoade向《Punch》证实了这起事故",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The General Manager of the Oyo State Road Traffic Management Authority, Adeoye Ayoade, confirmed the incident to Sunday PUNCH."
+    },
+    {
+     "fact": "事故起因是一辆载有汽车零配件的长挂车在Arilogu附近抛锚导致交通拥堵",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the accident was triggered by a traffic build-up following the breakdown of a long trailer carrying motor spare parts around Arilogu at about 5 am."
+    }
+   ],
+   "uncertainties": [
+    "伤亡人数目前仅由单一来源报道，尚未获得交叉验证",
+    "事故具体原因及责任认定有待进一步核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚奥约州油罐车失控撞车致至少五人死亡",
+   "summary_zh": "尼日利亚奥约州首府伊巴丹的Iwo Road-Ojoo高速公路上，一辆满载柴油的油罐车刹车失灵，撞上多辆汽车，造成至少五人死亡。事故发生在周六上午10时左右，地点位于Aduloju公交站附近。奥约州道路交通管理局局长向《Punch》证实了这起事故，并称事故起因是一辆载有汽车零配件的长挂车在Arilogu附近抛锚导致交通拥堵。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Oyo State",
+    "city": "Ibadan",
+    "site": "Aduloju Bus Stop, Iwo Road-Ojoo Expressway",
+    "raw_text": "Iwo Road-Ojoo Expressway in Ibadan, Oyo State capital, at Aduloju Bus Stop, opposite Dominion City"
+   },
+   "key_facts": [
+    {
+     "fact": "一辆柴油油罐车在伊巴丹Iwo Road-Ojoo高速公路撞上多辆汽车，造成至少五人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least five people have been killed after a diesel tanker crashed into several vehicles along the Iwo Road-Ojoo Expressway in Ibadan, the Oyo State capital."
+    },
+    {
+     "fact": "事故发生在周六上午10时左右，地点为Aduloju公交站附近",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The accident occurred around 10 am on Saturday at Aduloju Bus Stop, opposite Dominion City"
+    },
+    {
+     "fact": "奥约州道路交通管理局局长Adeoye Ayoade向《Punch》证实了这起事故",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The General Manager of the Oyo State Road Traffic Management Authority, Adeoye Ayoade, confirmed the incident to Sunday PUNCH."
+    },
+    {
+     "fact": "事故起因是一辆载有汽车零配件的长挂车在Arilogu附近抛锚导致交通拥堵",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the accident was triggered by a traffic build-up following the breakdown of a long trailer carrying motor spare parts around Arilogu at about 5 am."
+    }
+   ],
+   "uncertainties": [
+    "伤亡人数目前仅由单一来源报道，尚未获得交叉验证",
+    "事故具体原因及责任认定有待进一步核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_f12afd0fe20d492c",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
