@@ -39,7 +39,7 @@ CACHE_MISSES=5
 CACHE_BYTES=162729
 CACHE_TTL_SECONDS=600
 
-P0_SKIPS=PENDING               (默认关闭周期尚未到达：下一次 collection-due = 2026-10-18T18:05Z 起)
+P0_SKIPS=PENDING               (默认关闭周期尚未到达：首个新 pin 周期 = 2026-10-18T19:05Z)
 P1_SKIPS=PENDING
 LANE_A_SKIPS=PENDING
 
@@ -308,8 +308,9 @@ Gate B 实现（身份判定 + run-local 有界缓存 + TTL + 开关 + 计数）
 
 **未完成（阻塞 PASS 的硬条件）**：
 1. `DEFAULT_OFF_RUN`：部署后**尚未到达**首个 collection-due 周期。
-   最后一次成功采集 `2026-10-18T11:58:33Z`；阈值 5h45m → 17:43Z 之后才 due；
-   下一次 orchestrator 唤醒 `18:05Z` 才会命中。本报告生成于 17:21Z。
+   最后一次成功采集 `2026-10-18T15:55:01Z`（旧 pin e5ab2fbe）；
+   采集最小间隔 `COLLECTION_MIN_GAP=2h45m` → 18:40Z 之后才 due，
+   即首个命中新 pin 的周期为 `19:05Z` 唤醒（约 BJT 22:05）。本报告生成于 17:30Z。
 2. `CANARY_RUN_1 / CANARY_RUN_2`：canary 需先在仓库变量中设置
    `ASIP_SHARED_FEED_REUSE=1` 与 `ASIP_SHARED_FEED_REUSE_SOURCES=<三 RFI ID>`，
    再观察两个**自然** collection-due 周期。
@@ -377,7 +378,7 @@ Gate B 实现（身份判定 + run-local 有界缓存 + TTL + 开关 + 计数）
 ```text
 # 1) 默认关闭周期（验证 PHASE 遥测与 P0/P1/LaneA 健康）
 #    仓库变量保持 ASIP_SHARED_FEED_REUSE=0（或不存在）
-#    等待 2026-10-18T18:05Z 起的自然 collection-due 周期
+#    首个命中新 pin 的 collection-due 周期：2026-10-18T19:05Z（旧 pin 末次采集 15:55:01Z，最小间隔 2h45m）
 # 2) canary 开启（三 RFI 源，已核验请求身份一致）
 ASIP_SHARED_FEED_REUSE=1
 ASIP_SHARED_FEED_REUSE_SOURCES=intl_rfi_afrique_chad,intl_rfi_afrique_niger,pan_rfi_afrique
