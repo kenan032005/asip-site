@@ -1,0 +1,126 @@
+{
+ "label": "Sf0964421",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "9ec6776135f2bf247ea0150014994a037bcaa6caae8de246e96d47812b60222d",
+ "tokens": {
+  "input_tokens": 2665,
+  "output_tokens": 499,
+  "total_tokens": 3164
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅RFI单一来源报道，尚缺乏交叉验证\", \"课程改革的具体实施范围与效果尚未获独立确认\"]",
+    "after": "[\"目前仅RFI单一来源报道，尚缺乏交叉验证\", \"课程改革的具体实施范围与效果尚未获独立确认\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "布基纳法索政府改革历史地理课程，以“去殖民化”教科书",
+   "summary_zh": "布基纳法索自10月初开学起，中学师生开始使用新的历史、地理和公民教育课程。据RFI报道，执政军政府推动此次课程改革，目标是“去殖民化”教科书，并向教师发放了190页的教学指南。新课程新增“萨赫勒国家邦联的建立”“西方对法索自然资源的掠夺”等章节，并要求将“殖民者”改称“入侵者”、“探险家”改称“间谍”等。",
+   "event_type": "other_security",
+   "country_iso3": "BFA",
+   "location": {
+    "country_iso3": "BFA",
+    "admin1": null,
+    "city": "瓦加杜古",
+    "site": null,
+    "raw_text": "Ouagadougou"
+   },
+   "key_facts": [
+    {
+     "fact": "布基纳法索军政府改革中学历史地理课程以“去殖民化”教科书",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la junte au pouvoir à Ouagadougou a inauguré une refonte des programmes en vue de « décoloniser » les manuels scolaires"
+    },
+    {
+     "fact": "改革自10月初开学起实施，覆盖初中和高中师生",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis la rentrée scolaire qui a eu lieu au début du mois d’octobre, élèves et professeurs des collèges et des lycées doivent composer avec un nouveau lexique"
+    },
+    {
+     "fact": "向教师发放了190页的新教学指南",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un manuel de 190 pages explicitant la nouvelle façon d'enseigner leur a été distribué"
+    },
+    {
+     "fact": "新课程新增“萨赫勒国家邦联的建立”和“西方对法索自然资源的掠夺”等章节",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "de nouveaux chapitres comme la création de la confédération des États du Sahel ou un autre intitulé « Prédation des ressources naturelles du Faso par l’Occident »"
+    }
+   ],
+   "uncertainties": [
+    "目前仅RFI单一来源报道，尚缺乏交叉验证",
+    "课程改革的具体实施范围与效果尚未获独立确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "布基纳法索政府改革历史地理课程，以“去殖民化”教科书",
+   "summary_zh": "布基纳法索自10月初开学起，中学师生开始使用新的历史、地理和公民教育课程。据RFI报道，执政军政府推动此次课程改革，目标是“去殖民化”教科书，并向教师发放了190页的教学指南。新课程新增“萨赫勒国家邦联的建立”“西方对法索自然资源的掠夺”等章节，并要求将“殖民者”改称“入侵者”、“探险家”改称“间谍”等。",
+   "event_type": "other_security",
+   "country_iso3": "BFA",
+   "location": {
+    "country_iso3": "BFA",
+    "admin1": null,
+    "city": "瓦加杜古",
+    "site": null,
+    "raw_text": "Ouagadougou"
+   },
+   "key_facts": [
+    {
+     "fact": "布基纳法索军政府改革中学历史地理课程以“去殖民化”教科书",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la junte au pouvoir à Ouagadougou a inauguré une refonte des programmes en vue de « décoloniser » les manuels scolaires"
+    },
+    {
+     "fact": "改革自10月初开学起实施，覆盖初中和高中师生",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis la rentrée scolaire qui a eu lieu au début du mois d’octobre, élèves et professeurs des collèges et des lycées doivent composer avec un nouveau lexique"
+    },
+    {
+     "fact": "向教师发放了190页的新教学指南",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un manuel de 190 pages explicitant la nouvelle façon d'enseigner leur a été distribué"
+    },
+    {
+     "fact": "新课程新增“萨赫勒国家邦联的建立”和“西方对法索自然资源的掠夺”等章节",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "de nouveaux chapitres comme la création de la confédération des États du Sahel ou un autre intitulé « Prédation des ressources naturelles du Faso par l’Occident »"
+    }
+   ],
+   "uncertainties": [
+    "目前仅RFI单一来源报道，尚缺乏交叉验证",
+    "课程改革的具体实施范围与效果尚未获独立确认",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_0fb06865f0964421",
+ "disease_event_id": null,
+ "country_code": "BF"
+}
