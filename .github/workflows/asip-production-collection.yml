@@ -38,7 +38,7 @@ jobs:
       - name: Checkout production code
         uses: actions/checkout@v4
         with:
-          ref: e5ab2fbe653e2d9aed0e07c545203b5dec14e202
+          ref: e0628ac99a3230dca29b5368e7379307e0b6ec48
           fetch-depth: 1
 
       - name: Checkout production state branch
@@ -62,6 +62,9 @@ jobs:
       - name: Collection run（§五，无 AI）
         env:
           EXECUTE: ${{ github.event.inputs.execute }}
+          # C8-4D1：共享请求复用开关（仓库变量，默认 "0" = 关闭）
+          ASIP_SHARED_FEED_REUSE: ${{ vars.ASIP_SHARED_FEED_REUSE || '0' }}
+          ASIP_SHARED_FEED_REUSE_SOURCES: ${{ vars.ASIP_SHARED_FEED_REUSE_SOURCES || '' }}
         run: |
           python scripts/ops/collection_run.py $([ "$EXECUTE" = "true" ] && echo "--execute" || true)
 
