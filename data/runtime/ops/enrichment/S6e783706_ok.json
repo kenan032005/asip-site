@@ -1,0 +1,127 @@
+{
+ "label": "S6e783706",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1c52ef4e796a366e361661bd2e2526430f85f4d711b79368f62df5c6c8e5f5ea",
+ "tokens": {
+  "input_tokens": 2350,
+  "output_tokens": 735,
+  "total_tokens": 3085
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "洛贡东省：被绑人质获释并移交喀麦隆当局",
+   "summary_zh": "据乍得媒体报道，2026年10月16日，乍得洛贡东省蒙德朗省省长在乍得与喀麦隆边境的库泰雷主持仪式，将获释的11名人质移交给喀麦隆当局。报道称，这些人质中8人为喀麦隆籍，数日前在喀麦隆境内被俗称“扎拉吉纳”的公路劫匪绑架，经姆拜博库姆国防与安全部队行动后获释。该省长还表示，部分喀麦隆边境地区行政当局缺乏协作。上述信息目前仅来自单一来源，尚未获得交叉验证。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "洛贡东省",
+    "city": "库泰雷",
+    "site": "乍得与喀麦隆边境",
+    "raw_text": "Koutéré, à la frontière entre le Tchad et le Cameroun, département des Monts de Lam, province du Logone oriental"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年10月16日，乍得洛贡东省蒙德朗省省长在库泰雷主持向喀麦隆当局移交获释人质的仪式",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le préfet du département des Monts de Lam, Idriss Souleymane Bouyemé, a présidé, le 16 octobre 2026 à Koutéré, à la frontière entre le Tchad et le Cameroun, la cérémonie officielle de remise d’otages libérés aux autorités camerounaises."
+    },
+    {
+     "fact": "共有11名人质获释，其中8人为喀麦隆籍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au total, 11 otages, dont huit de nationalité camerounaise, enlevés depuis plusieurs jours en territoire camerounais par des coupeurs de route communément appelés « Zaraguina », ont été libérés."
+    },
+    {
+     "fact": "人质数日前在喀麦隆境内被公路劫匪绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "enlevés depuis plusieurs jours en territoire camerounais par des coupeurs de route communément appelés « Zaraguina »"
+    },
+    {
+     "fact": "获释得益于姆拜博库姆国防与安全部队的干预",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette libération a été rendue possible grâce à l’intervention des forces de défense et de sécurité de Mbaïbokoum, chef-lieu du département des Monts de Lam, dans la province du Logone oriental."
+    },
+    {
+     "fact": "省长表示部分喀麦隆边境地区行政当局缺乏协作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Idriss Souleymane Bouyemé a ensuite déploré le manque de collaboration entre certaines autorités administratives camerounaises, particulièrement celles de la zone frontalière."
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（Tchadinfos）报道，尚未获得交叉验证",
+    "人质被绑架的具体日期与地点细节未明确",
+    "安全部队行动的具体过程与劫匪伤亡情况未获证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "洛贡东省：被绑人质获释并移交喀麦隆当局",
+   "summary_zh": "据乍得媒体报道，2026年10月16日，乍得洛贡东省蒙德朗省省长在乍得与喀麦隆边境的库泰雷主持仪式，将获释的11名人质移交给喀麦隆当局。报道称，这些人质中8人为喀麦隆籍，数日前在喀麦隆境内被俗称“扎拉吉纳”的公路劫匪绑架，经姆拜博库姆国防与安全部队行动后获释。该省长还表示，部分喀麦隆边境地区行政当局缺乏协作。上述信息目前仅来自单一来源，尚未获得交叉验证。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "洛贡东省",
+    "city": "库泰雷",
+    "site": "乍得与喀麦隆边境",
+    "raw_text": "Koutéré, à la frontière entre le Tchad et le Cameroun, département des Monts de Lam, province du Logone oriental"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年10月16日，乍得洛贡东省蒙德朗省省长在库泰雷主持向喀麦隆当局移交获释人质的仪式",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le préfet du département des Monts de Lam, Idriss Souleymane Bouyemé, a présidé, le 16 octobre 2026 à Koutéré, à la frontière entre le Tchad et le Cameroun, la cérémonie officielle de remise d’otages libérés aux autorités camerounaises."
+    },
+    {
+     "fact": "共有11名人质获释，其中8人为喀麦隆籍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au total, 11 otages, dont huit de nationalité camerounaise, enlevés depuis plusieurs jours en territoire camerounais par des coupeurs de route communément appelés « Zaraguina », ont été libérés."
+    },
+    {
+     "fact": "人质数日前在喀麦隆境内被公路劫匪绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "enlevés depuis plusieurs jours en territoire camerounais par des coupeurs de route communément appelés « Zaraguina »"
+    },
+    {
+     "fact": "获释得益于姆拜博库姆国防与安全部队的干预",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette libération a été rendue possible grâce à l’intervention des forces de défense et de sécurité de Mbaïbokoum, chef-lieu du département des Monts de Lam, dans la province du Logone oriental."
+    },
+    {
+     "fact": "省长表示部分喀麦隆边境地区行政当局缺乏协作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Idriss Souleymane Bouyemé a ensuite déploré le manque de collaboration entre certaines autorités administratives camerounaises, particulièrement celles de la zone frontalière."
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（Tchadinfos）报道，尚未获得交叉验证",
+    "人质被绑架的具体日期与地点细节未明确",
+    "安全部队行动的具体过程与劫匪伤亡情况未获证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_8e33a4a96e783706",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

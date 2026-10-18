@@ -1,0 +1,115 @@
+{
+ "label": "S10df21ef",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "34987c7c55b146852c97841bbacc751edb28c5beac48d743f264171ba688c899",
+ "tokens": {
+  "input_tokens": 2259,
+  "output_tokens": 478,
+  "total_tokens": 2737
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克总统沙波就太特省13人车祸遇难表示哀悼",
+   "summary_zh": "莫桑比克总统丹尼尔·弗朗西斯科·沙波就10月17日（周六）在太特省尚加拉区马佐埃村发生的交通事故造成13人死亡表示哀悼。沙波在慰问电中向遇难者家属致以深切哀悼，并对16名伤者表示慰问，祝愿其早日康复。他还呼吁道路使用者严格遵守交通规则、安全驾驶，以预防事故、保护生命并加强全国道路安全。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "太特省",
+    "city": null,
+    "site": "尚加拉区马佐埃村",
+    "raw_text": "povoado de Mazoe, distrito de Changara, província de Tete"
+   },
+   "key_facts": [
+    {
+     "fact": "10月17日（周六）太特省尚加拉区马佐埃村发生交通事故，造成13人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "um acidente de viação ocorrido no sábado, 17 de Outubro, no povoado de Mazoe, distrito de Changara, província de Tete"
+    },
+    {
+     "fact": "总统沙波就事故造成13人死亡表示哀悼",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Chapo manifesta pesar pela morte de 13 pessoas em acidente de viação em Tete"
+    },
+    {
+     "fact": "事故另有16名公民受伤，总统对其表示慰问并祝愿早日康复",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Daniel Chapo manifestou igualmente solidariedade para com os 16 cidadãos feridos no acidente"
+    },
+    {
+     "fact": "总统呼吁道路使用者严格遵守交通规则以预防事故",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "apelou aos utentes das vias públicas para que observem rigorosamente as regras de trânsito"
+    }
+   ],
+   "uncertainties": [
+    "事故原因及责任情况尚未披露",
+    "目前仅单一来源（O País）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克总统沙波就太特省13人车祸遇难表示哀悼",
+   "summary_zh": "莫桑比克总统丹尼尔·弗朗西斯科·沙波就10月17日（周六）在太特省尚加拉区马佐埃村发生的交通事故造成13人死亡表示哀悼。沙波在慰问电中向遇难者家属致以深切哀悼，并对16名伤者表示慰问，祝愿其早日康复。他还呼吁道路使用者严格遵守交通规则、安全驾驶，以预防事故、保护生命并加强全国道路安全。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "太特省",
+    "city": null,
+    "site": "尚加拉区马佐埃村",
+    "raw_text": "povoado de Mazoe, distrito de Changara, província de Tete"
+   },
+   "key_facts": [
+    {
+     "fact": "10月17日（周六）太特省尚加拉区马佐埃村发生交通事故，造成13人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "um acidente de viação ocorrido no sábado, 17 de Outubro, no povoado de Mazoe, distrito de Changara, província de Tete"
+    },
+    {
+     "fact": "总统沙波就事故造成13人死亡表示哀悼",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Chapo manifesta pesar pela morte de 13 pessoas em acidente de viação em Tete"
+    },
+    {
+     "fact": "事故另有16名公民受伤，总统对其表示慰问并祝愿早日康复",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Daniel Chapo manifestou igualmente solidariedade para com os 16 cidadãos feridos no acidente"
+    },
+    {
+     "fact": "总统呼吁道路使用者严格遵守交通规则以预防事故",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "apelou aos utentes das vias públicas para que observem rigorosamente as regras de trânsito"
+    }
+   ],
+   "uncertainties": [
+    "事故原因及责任情况尚未披露",
+    "目前仅单一来源（O País）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_284bbc2e10df21ef",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

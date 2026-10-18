@@ -1,0 +1,117 @@
+{
+ "label": "Se1dd26ad",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4a62474281fac43e001c204e14f5445e1f401e58ed28a97dcc7089b619e753a8",
+ "tokens": {
+  "input_tokens": 2028,
+  "output_tokens": 428,
+  "total_tokens": 2456
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "阿布贾一栋五层在建建筑部分坍塌，一人受伤",
+   "summary_zh": "尼日利亚阿布贾Wuse II区Durban街一栋在建五层建筑发生部分坍塌，造成一人轻伤。国家紧急事务管理局表示，于2026年10月17日傍晚约6时30分接到警报，并协调消防及救援力量到场处置。该机构称现场情况属轻微事故，涉事建筑此前已被部分拆除。目前信息来自单一来源。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "联邦首都区",
+    "city": "阿布贾",
+    "site": "Wuse II区Durban街",
+    "raw_text": "Durban Street, Wuse II, Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "阿布贾Wuse II区一栋在建五层建筑发生部分坍塌",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the partial collapse of a five-storey building under construction on Durban Street, Wuse II, Abuja"
+    },
+    {
+     "fact": "事故造成一人轻伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "One person sustained minor injuries following the partial collapse"
+    },
+    {
+     "fact": "国家紧急事务管理局称于2026年10月17日傍晚约6时30分接到警报",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "it received an alert about the incident at approximately 6:30 pm on Saturday, October 17, 2026"
+    },
+    {
+     "fact": "该机构称现场情况属轻微事故，涉事建筑此前已被部分拆除",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the incident was minor and involved a five-storey building under construction that had been partially pulled down"
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（Punch）报道，尚缺乏交叉验证",
+    "坍塌原因尚未说明",
+    "伤者身份及具体伤情细节未披露"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "阿布贾一栋五层在建建筑部分坍塌，一人受伤",
+   "summary_zh": "尼日利亚阿布贾Wuse II区Durban街一栋在建五层建筑发生部分坍塌，造成一人轻伤。国家紧急事务管理局表示，于2026年10月17日傍晚约6时30分接到警报，并协调消防及救援力量到场处置。该机构称现场情况属轻微事故，涉事建筑此前已被部分拆除。目前信息来自单一来源。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "联邦首都区",
+    "city": "阿布贾",
+    "site": "Wuse II区Durban街",
+    "raw_text": "Durban Street, Wuse II, Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "阿布贾Wuse II区一栋在建五层建筑发生部分坍塌",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the partial collapse of a five-storey building under construction on Durban Street, Wuse II, Abuja"
+    },
+    {
+     "fact": "事故造成一人轻伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "One person sustained minor injuries following the partial collapse"
+    },
+    {
+     "fact": "国家紧急事务管理局称于2026年10月17日傍晚约6时30分接到警报",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "it received an alert about the incident at approximately 6:30 pm on Saturday, October 17, 2026"
+    },
+    {
+     "fact": "该机构称现场情况属轻微事故，涉事建筑此前已被部分拆除",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the incident was minor and involved a five-storey building under construction that had been partially pulled down"
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（Punch）报道，尚缺乏交叉验证",
+    "坍塌原因尚未说明",
+    "伤者身份及具体伤情细节未披露"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_fc5666f6e1dd26ad",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
