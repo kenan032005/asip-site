@@ -10,10 +10,10 @@
 ## 0. 关键字段（可机读）
 
 ```
-SOURCE_COMMIT=573d121a72c7900e03a0680e464c058418e9d46e   (baseline e5ab2fbe653e2d9aed0e07c545203b5dec14e202)
-MAIN_SHA=b62f94e3d14869dd1def2c3114aa12f9c0a6a3ed
-PRODUCTION_STATE_SHA=69864f0ded837ea2be30ef3637f076a5bd9d49cd   (as of 2026-10-18T16:35Z)
-GH_PAGES_SHA=761f3487237cc86da7ab5d8bc18e2175a13332af         (as of 2026-10-18T16:35Z)
+SOURCE_COMMIT=e0628ac99a3230dca29b5368e7379307e0b6ec48
+MAIN_RELEASE_SHA=c2c48d12175489b256a9914d74bdfad7b66f9bfc   (release: pin C8-4D1 (e0628ac9))
+PRODUCTION_STATE_SHA=c64d70399b371643f75cc06c3384461e0f6e30c5   (as of 2026-10-18T17:21Z)
+GH_PAGES_SHA=ec6eb48f335e03912b4cdfcfa3c2297087b4cdbd         (as of 2026-10-18T17:21Z)
 
 BASELINE_LOGICAL_SOURCES=153
 FINAL_LOGICAL_SOURCES=153
@@ -27,20 +27,21 @@ STATIC_FEEDS_CONFIRMED=16
 COUNTRY_DEPENDENT_FEEDS_CONFIRMED=0
 SHARED_FEED_GROUPS=5
 SHARED_FEED_SOURCE_IDS=12
-SOURCES_REUSE_ENABLED=0        (生产中 flag 关闭；本包只建立可开启路径)
+SOURCES_REUSE_ENABLED=0        (生产 flag 仍为 OFF；canary 待仓库变量开启)
 
 HTTP_REQUESTS_BEFORE=12        (5 shared feeds × 各自 source_id 执行，真实网络)
 HTTP_REQUESTS_AFTER=5
 MEASURED_REQUEST_SAVINGS=7     (58.3%)
-HTTP_TIME_BEFORE=10.21
-HTTP_TIME_AFTER=3.14
+HTTP_TIME_BEFORE=9.89
+HTTP_TIME_AFTER=2.27
 CACHE_HITS=7
 CACHE_MISSES=5
 CACHE_BYTES=162729
+CACHE_TTL_SECONDS=600
 
-P0_SKIPS=UNKNOWN               (改动前遥测未上抛；部署后两轮自然周期方可实测)
-P1_SKIPS=UNKNOWN
-LANE_A_SKIPS=UNKNOWN
+P0_SKIPS=PENDING               (默认关闭周期尚未到达：下一次 collection-due = 2026-10-18T18:05Z 起)
+P1_SKIPS=PENDING
+LANE_A_SKIPS=PENDING
 
 GEO_EQUIVALENCE=PASS
 ARTICLE_EQUIVALENCE=PASS
@@ -48,10 +49,20 @@ PUBLICATION_GATE_PRESERVED=PASS
 
 BEN_WEBTV_FIX=PASS
 NGA_NRC_FIX=PASS
-PHASE_TELEMETRY_FIX=PASS
+PHASE_TELEMETRY_FIX=PASS       (代码+回归测试；生产首轮实证待观察)
 METRIC_NAMING_FIX=PASS
+ROLLBACK_TESTED=PASS           (flag=0 时行为等价于 C8-4C4；默认关闭路径有测试)
 
-FINAL_RESULT=PARTIAL
+GATE_A_FIX=PASS
+PHASE_TELEMETRY=PASS
+DEFAULT_OFF_RUN=PENDING
+
+CANARY_ALLOWLIST=intl_rfi_afrique_chad,intl_rfi_afrique_niger,pan_rfi_afrique
+CANARY_ALLOWLIST_VERIFIED=YES  (三 ID 均存在于 e0628ac9 注册表；feed 同为 https://www.rfi.fr/fr/afrique/rss；请求身份一致 89568512c1683f6a)
+CANARY_RUN_1=PENDING
+CANARY_RUN_2=PENDING
+
+FINAL_RESULT=PARTIAL_PENDING_PRODUCTION_OBSERVATION
 ```
 
 ---
@@ -229,10 +240,11 @@ EXACT REQUEST IDENTITY（sha256: method + url + 相关头 + 鉴权上下文摘�
 
 回滚 = 将 `ASIP_SHARED_FEED_REUSE` 置 `0`（或删除变量）即回到 C8-4C4 行为，无需回滚代码。
 
-### 4.3 生产启用所需的最小补丁（尚未应用，需授权）
+### 4.3 生产启用路径（已随 release pin 完成透传，默认关闭）
 
-工作流定义在 `main`（pin 树不含 orchestrator）。启用需在
-`.github/workflows/asip-production-orchestrator.yml` 的 `Run due-task orchestrator` 步骤 env 增加：
+工作流定义在 `main`（pin 树不含 orchestrator）。**已于 release 提交
+`c2c48d12` 中加入**下列 env 透传（`asip-production-orchestrator.yml` 的
+`Run due-task orchestrator` 步骤、`asip-production-collection.yml` 的 `Collection run` 步骤）：
 
 ```yaml
           ASIP_SHARED_FEED_REUSE: ${{ vars.ASIP_SHARED_FEED_REUSE || '0' }}
@@ -240,7 +252,9 @@ EXACT REQUEST IDENTITY（sha256: method + url + 相关头 + 鉴权上下文摘�
 ```
 
 编排器以 `subprocess.run(...)`（未传 `env=`）调用 `scripts/ops/collection_run.py --execute`，环境变量正常继承。
-建议首次只填 2–3 个静态源做灰滚（例：`intl_bbc_afrique_chad,intl_bbc_afrique_niger,pan_africanews,niger_africanews`）。
+激活时只需在仓库变量（Settings → Secrets and variables → Actions → Variables）写入
+`ASIP_SHARED_FEED_REUSE=1` 与 `ASIP_SHARED_FEED_REUSE_SOURCES=intl_rfi_afrique_chad,intl_rfi_afrique_niger,pan_rfi_afrique`，
+无需再改代码或 workflow；回滚就是把它置 0。
 
 ---
 
@@ -289,18 +303,101 @@ EXACT REQUEST IDENTITY（sha256: method + url + 相关头 + 鉴权上下文摘�
 ## 7. 收尾结论与待办
 
 **已完成且可复核**：Gate A 四项（ben_webtv / nga_nrc / PHASE 遥测 / 指标命名）、
-Gate B 实现（身份判定 + run-local 有界缓存 + 开关 + 计数）、固定 fixture 与真实网络等价性、
-真实节省测量、18+31 项测试。
+Gate B 实现（身份判定 + run-local 有界缓存 + TTL + 开关 + 计数）、固定 fixture 与真实网络等价性、
+真实节省测量、**24 项新增测试（18 + 6）全部通过**，release pin 已切到 `e0628ac9`（见 §9）。
 
 **未完成（阻塞 PASS 的硬条件）**：
-1. §B9 生产验证（两个**自然** collection-due 周期，P0/P1/Lane A 全 0 跳过）——需要：
-   新 release pin（含本包代码）+ orchestrator 环境变量透传（§4.3）+ 仓库变量开启灰滚。
-   本轮**未部署、未改生产分支、未触发生产采集**（遵守预验收前禁项）。
-2. `P0_SKIPS/P1_SKIPS/LANE_A_SKIPS` 当前为 **UNKNOWN**：改动前 PHASE 遥测未进入 summary 层，
-   历史 production run 无该字段。部署后首轮即可实测（新指标已就位）。
+1. `DEFAULT_OFF_RUN`：部署后**尚未到达**首个 collection-due 周期。
+   最后一次成功采集 `2026-10-18T11:58:33Z`；阈值 5h45m → 17:43Z 之后才 due；
+   下一次 orchestrator 唤醒 `18:05Z` 才会命中。本报告生成于 17:21Z。
+2. `CANARY_RUN_1 / CANARY_RUN_2`：canary 需先在仓库变量中设置
+   `ASIP_SHARED_FEED_REUSE=1` 与 `ASIP_SHARED_FEED_REUSE_SOURCES=<三 RFI ID>`，
+   再观察两个**自然** collection-due 周期。
+3. `P0_SKIPS/P1_SKIPS/LANE_A_SKIPS`：本轮仍为 PENDING——改动前遥测未进入 summary 层，
+   历史 run 无该字段；新指标随 `e0628ac9` 生效后首轮即可实测。
 
-**FINAL_RESULT = PARTIAL**（A、B、C、D、E 的本地/预生产部分成立；F 需部署后两轮自然周期）。
-未新增全局/区域源；未启动 C8-4D2。
+**FINAL_RESULT = PARTIAL_PENDING_PRODUCTION_OBSERVATION**（A–E 成立；F 待两轮自然周期）。
+未新增全局/区域源；未启动 C8-4D2；canary 白名单未自动扩大。
+
+---
+
+## 9. 生产切换执行记录（Controlled Cutover）
+
+### 9.1 STEP 0 — 预部署修正（已实施）
+
+独立评审指出的问题属实：`phase_stats` 在 `main()` 局部构造，`write_stats()` 靠全局查找 +
+`except NameError` 吞掉缺失，导致生产可能长期 UNKNOWN。实际修法：
+
+- `write_stats(..., phase_stats=phase_stats)` **显式入参**；调用点同步传入。
+- 相位归因改为**行级戳**：`_run_phase_pass` 对每条 source-country 执行行写入 `phase`，
+  遥测从 `per_source` 派生（`PHASE_TELEMETRY_BASIS=measured_source_country_rows`）。
+- 每相位三组计数：`PHASE{p}_ENUMERATED / _ATTEMPTED / _SKIPPED_WALL_CLOCK`，
+  且 `PHASE{p}_EXECUTIONS`＝ATTEMPTED（明确语义）。
+- 相位耗时 **只累加逐行实测 `duration_s`**（`PHASE_ELAPSED_BASIS=measured_row_durations`）；
+  删除原先把"一次调用耗时 ÷ 相位个数"均分后当精确值上报的逻辑。
+- 对账：`PHASE_SKIPPED_TOTAL` 与 `per_source` 墙钟跳过数比对 → `PHASE_SKIP_RECONCILED`；
+  未枚举键（未进入任何国家管线即被墙钟截断）单独披露为 `PHASE_UNENUMERATED_KEYS`。
+- 无 `phase` 戳但显式传入 `phase_stats` → `aggregate_fallback`，**耗时标记 UNKNOWN**（不冒充精确值）。
+- 6 项确定性回归测试覆盖：行派生、fallback、全缺失→UNKNOWN、对账失败显式暴露、TTL 过期重取、TTL 内复用。
+
+### 9.2 STEP 1 — 释放安全核对
+
+| 检查 | 结果 |
+|---|---|
+| ALL_TESTS | **PASS**（55 tests：18 + 6 + 12 + 19） |
+| SOURCE_COUNT / ENABLED | 153 / 151 |
+| EXPANDED_EXECUTIONS | 888（本轮未改变展开逻辑） |
+| ben_webtv / nga_nrc | 绝对 https + 实测 200 RSS |
+| flag 默认 OFF | `shared_reuse_enabled()` 默认 False；默认路径 0 命中 |
+| allowlist 行为 | 白名单外一律 bypass（`bypass_not_allowlisted` 计数） |
+| 请求身份 | 同 URL/方法/相关头/鉴权上下文才同键；敏感头只参与摘要 |
+| 缓存隔离 | 每轮 `reset_run_caches()`；跨轮不复用 |
+| 有界内存 | 64 条 / 24MB，FIFO 淘汰 + `evictions` 计数 |
+| 仅成功响应缓存 | 失败不写缓存 |
+| **新鲜度上限（新增）** | `ASIP_SHARED_FEED_REUSE_TTL_SECONDS` 默认 **600s**；超龄视为未命中并重取（`cache_expired`） |
+| 回滚 | `ASIP_SHARED_FEED_REUSE=0` 即回到 C8-4C4 行为（无需回滚代码） |
+| 文章安全/地理策略 | 未改动 |
+
+### 9.3 STEP 2 — Release Pin
+
+- NEW_SOURCE_COMMIT = `e0628ac99a3230dca29b5368e7379307e0b6ec48`（feature 分支 tip，已推送）
+- MAIN_RELEASE_SHA = `c2c48d12175489b256a9914d74bdfad7b66f9bfc`（main 上一次性 release-controller 提交）
+- 变更范围：仅 5 个 production workflow 的 `ref:`（e5ab2fbe → e0628ac9），共 5 行；
+  **未** merge 整个 feature 分支到 main（两侧发布历史不同），**未**触碰
+  production-state / gh-pages / canonical 数据 / 报告 / 调度。
+- 环境变量透传（默认关闭）已加入：
+  - `asip-production-orchestrator.yml`（`Run due-task orchestrator` 步骤）
+  - `asip-production-collection.yml`（`Collection run` 步骤）
+  - 取值 `${{ vars.ASIP_SHARED_FEED_REUSE || '0' }}` / `${{ vars.ASIP_SHARED_FEED_REUSE_SOURCES || '' }}`
+- YAML 校验：5 个文件 `yaml.safe_load` 全部 OK；pin 与 env 均被解析器确认。
+- 触发器未变（无 `push` 触发），故本次 main 提交不会自动触发任何生产运行。
+
+### 9.4 STEP 3/4 待执行（下一个人工/自然窗口）
+
+```text
+# 1) 默认关闭周期（验证 PHASE 遥测与 P0/P1/LaneA 健康）
+#    仓库变量保持 ASIP_SHARED_FEED_REUSE=0（或不存在）
+#    等待 2026-10-18T18:05Z 起的自然 collection-due 周期
+# 2) canary 开启（三 RFI 源，已核验请求身份一致）
+ASIP_SHARED_FEED_REUSE=1
+ASIP_SHARED_FEED_REUSE_SOURCES=intl_rfi_afrique_chad,intl_rfi_afrique_niger,pan_rfi_afrique
+# 3) 观察两个自然 collection-due 周期（约 5h45m 间隔）
+```
+
+观测取数位置（production-state 分支，无需登录 Actions 日志）：
+
+- `data/runtime/ops/operations_status.json` → 每轮 run 记录（新字段已随 `e0628ac9` 落盘）：
+  `execution_rows_*`、`physical_network_requests`、`PHASE0..4_*`、`PHASE_TELEMETRY_AVAILABLE`、
+  `PHASE_SKIP_RECONCILED`、`shared_feed_reuse{cache_hits,cache_misses,cache_expired,reused_requests}`
+- `data/runtime/ops/collection_summary.json` → 同一组指标
+- `data/runtime/ops/operations_summary.md` → 人类可读的 `execution_rows:` / `phases(...)` 行
+
+判定阈值（任一触发即回滚 `ASIP_SHARED_FEED_REUSE=0`）：
+P0/P1 保证键被墙钟跳过 > 0；Lane A material starvation > 0；缓存身份碰撞或错误复用；
+文章/国家归属回归；异常持续错误；生产处理中断。
+
+**说明**：`framework.fetch_page` 的 `physical_network_requests` 只覆盖走该函数的请求；
+GDELT 采集器与其它独立 HTTP 客户端（reliefweb 等）不计入，比较时须按同一口径。
 
 ---
 
