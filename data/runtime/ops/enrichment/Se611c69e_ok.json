@@ -1,0 +1,116 @@
+{
+ "label": "Se611c69e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6e4dfefc6dd57f2785cd971850751d02540523069856855b369d1e3f53e49360",
+ "tokens": {
+  "input_tokens": 2207,
+  "output_tokens": 323,
+  "total_tokens": 2530
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"事件仅由单一来源MyJoyOnline报道，尚缺乏交叉验证\", \"南非排外袭击的具体情况未在文中详述\"]",
+    "after": "[\"事件仅由单一来源MyJoyOnline报道，尚缺乏交叉验证\", \"南非排外袭击的具体情况未在文中详述\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳政府耗资4970万塞地从南非撤离1964名公民并公布名单",
+   "summary_zh": "加纳外交部长塞缪尔·奥库泽托·阿布拉夸披露，政府花费4972万加纳塞地（GH¢49.72 million）从南非撤离1964名加纳公民。此次撤离是在南非排外袭击再度抬头后进行的。相关撤离人员名单已公布。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "South Africa"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳政府花费4972万塞地从南非撤离1964名公民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The government spent GH¢49.72 million to evacuate 1,964 Ghanaians from South Africa following a resurgence of xenophobic attacks"
+    },
+    {
+     "fact": "加纳外交部长阿布拉夸披露了撤离开支情况",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Foreign Affairs Minister Samuel Okudzeto Ablakwa has disclosed."
+    },
+    {
+     "fact": "撤离人员名单已公布",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "names published"
+    }
+   ],
+   "uncertainties": [
+    "事件仅由单一来源MyJoyOnline报道，尚缺乏交叉验证",
+    "南非排外袭击的具体情况未在文中详述"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳政府耗资4970万塞地从南非撤离1964名公民并公布名单",
+   "summary_zh": "加纳外交部长塞缪尔·奥库泽托·阿布拉夸披露，政府花费4972万加纳塞地（GH¢49.72 million）从南非撤离1964名加纳公民。此次撤离是在南非排外袭击再度抬头后进行的。相关撤离人员名单已公布。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "South Africa"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳政府花费4972万塞地从南非撤离1964名公民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The government spent GH¢49.72 million to evacuate 1,964 Ghanaians from South Africa following a resurgence of xenophobic attacks"
+    },
+    {
+     "fact": "加纳外交部长阿布拉夸披露了撤离开支情况",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Foreign Affairs Minister Samuel Okudzeto Ablakwa has disclosed."
+    },
+    {
+     "fact": "撤离人员名单已公布",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "names published"
+    }
+   ],
+   "uncertainties": [
+    "事件仅由单一来源MyJoyOnline报道，尚缺乏交叉验证",
+    "南非排外袭击的具体情况未在文中详述",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_33d1d26ee611c69e",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

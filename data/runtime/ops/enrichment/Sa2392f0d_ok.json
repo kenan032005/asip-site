@@ -1,0 +1,116 @@
+{
+ "label": "Sa2392f0d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "deb94dece3b2ec1832c6a9d4383050b53de2ecc27ffc8132f868a8b40d1dcd79",
+ "tokens": {
+  "input_tokens": 2208,
+  "output_tokens": 337,
+  "total_tokens": 2545
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"报道正文主要为网站其他新闻条目，项目细节有限\"]",
+    "after": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"报道正文主要为网站其他新闻条目，项目细节有限\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "可可中心项目推进农村农业服务中的性别主流化",
+   "summary_zh": "由Fairtrade Africa实施的可可中心项目正在加纳可可种植区采取措施，通过加强女性参与和领导力，推进农村农业服务中的性别主流化。该项目与Tropenbos Ghana合作，并获得荷兰王国大使馆的资金支持。该报道为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "cocoa-growing regions in Ghana"
+   },
+   "key_facts": [
+    {
+     "fact": "可可中心项目由Fairtrade Africa在加纳实施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Cocoa Hubs Project, implemented by Fairtrade Africa, is taking steps to advance gender mainstreaming in rural agricultural service delivery"
+    },
+    {
+     "fact": "项目旨在加强加纳可可种植区女性的参与和领导力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "strengthening women’s participation and leadership across cocoa-growing regions in Ghana"
+    },
+    {
+     "fact": "项目与Tropenbos Ghana合作并获得荷兰王国大使馆资金支持",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fairtrade Africa, in partnership with Tropenbos Ghana and with funding support from the Embassy of the Kingdom of the"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "报道正文主要为网站其他新闻条目，项目细节有限"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "可可中心项目推进农村农业服务中的性别主流化",
+   "summary_zh": "由Fairtrade Africa实施的可可中心项目正在加纳可可种植区采取措施，通过加强女性参与和领导力，推进农村农业服务中的性别主流化。该项目与Tropenbos Ghana合作，并获得荷兰王国大使馆的资金支持。该报道为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "cocoa-growing regions in Ghana"
+   },
+   "key_facts": [
+    {
+     "fact": "可可中心项目由Fairtrade Africa在加纳实施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Cocoa Hubs Project, implemented by Fairtrade Africa, is taking steps to advance gender mainstreaming in rural agricultural service delivery"
+    },
+    {
+     "fact": "项目旨在加强加纳可可种植区女性的参与和领导力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "strengthening women’s participation and leadership across cocoa-growing regions in Ghana"
+    },
+    {
+     "fact": "项目与Tropenbos Ghana合作并获得荷兰王国大使馆资金支持",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fairtrade Africa, in partnership with Tropenbos Ghana and with funding support from the Embassy of the Kingdom of the"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "报道正文主要为网站其他新闻条目，项目细节有限",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_7cf71abfa2392f0d",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

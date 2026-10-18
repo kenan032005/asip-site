@@ -1,0 +1,114 @@
+{
+ "label": "S7ce662ff",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b4df618ea4cbef9f1fcd6330066fb5eb8c500b3150f66cce17549086ea9a0d39",
+ "tokens": {
+  "input_tokens": 2238,
+  "output_tokens": 324,
+  "total_tokens": 2562
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\"]",
+    "after": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳Ho市Habitat Fair展会第三天吸引家庭与教会人士参与",
+   "summary_zh": "加纳Ho市体育场举办Republic Bank–JoyNews Habitat Fair展会最后一天活动，家庭、教会人士等公众前往参观，在展位间了解住房和建筑行业的产品与服务。部分访客在礼拜后结伴到场。该报道来自单一来源MyJoyOnline。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "Ho",
+    "site": "Ho Sports Stadium",
+    "raw_text": "Ho Sports Stadium"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳Ho市体育场举办Habitat Fair展会最后一天活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Families, churchgoers and other members of the public are making their way to the Ho Sports Stadium for the final day of the Republic Bank–JoyNews Habitat Fair"
+    },
+    {
+     "fact": "访客在展位间了解住房和建筑行业产品与服务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "visitors moving between exhibition booths to explore products and engage professionals in the housing and construction sectors"
+    },
+    {
+     "fact": "部分访客在礼拜后结伴到场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Some visitors are arriving in groups after church services"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳Ho市Habitat Fair展会第三天吸引家庭与教会人士参与",
+   "summary_zh": "加纳Ho市体育场举办Republic Bank–JoyNews Habitat Fair展会最后一天活动，家庭、教会人士等公众前往参观，在展位间了解住房和建筑行业的产品与服务。部分访客在礼拜后结伴到场。该报道来自单一来源MyJoyOnline。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "Ho",
+    "site": "Ho Sports Stadium",
+    "raw_text": "Ho Sports Stadium"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳Ho市体育场举办Habitat Fair展会最后一天活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Families, churchgoers and other members of the public are making their way to the Ho Sports Stadium for the final day of the Republic Bank–JoyNews Habitat Fair"
+    },
+    {
+     "fact": "访客在展位间了解住房和建筑行业产品与服务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "visitors moving between exhibition booths to explore products and engage professionals in the housing and construction sectors"
+    },
+    {
+     "fact": "部分访客在礼拜后结伴到场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Some visitors are arriving in groups after church services"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_a1980e4c7ce662ff",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

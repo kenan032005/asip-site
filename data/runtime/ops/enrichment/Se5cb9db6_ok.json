@@ -1,0 +1,121 @@
+{
+ "label": "Se5cb9db6",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "579ffbd19a128520a0d5b909bb01082f8578faefbf9ff90cc988fd863399d231",
+ "tokens": {
+  "input_tokens": 2457,
+  "output_tokens": 460,
+  "total_tokens": 2917
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "TechHer呼吁对网络性别暴力实现平等司法",
+   "summary_zh": "尼日利亚民间组织TechHer执行主任Chioma Agwuegbo在阿布贾举行的Dare 2026会议上呼吁，为遭受技术辅助性别暴力的妇女和女童提供平等司法保护。她指出网络暴力会对受害者造成严重的线下后果，并敦促社交媒体平台结合尼日利亚语言和文化现实进行内容审核。该组织通过Kuram平台接收幸存者报告，并与数字平台、警方及尼日利亚安全和民防部队合作推动司法救助。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": "Dare 2026会议",
+    "raw_text": "Abuja at the Dare 2026 conference"
+   },
+   "key_facts": [
+    {
+     "fact": "TechHer执行主任在阿布贾Dare 2026会议上呼吁为网络性别暴力受害者提供平等司法",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Chioma Agwuegbo, Executive Director of TechHer, a civil society organisation has called for equal justice to protect women and girls against technology-facilitated gender-based violence."
+    },
+    {
+     "fact": "会议于周六在阿布贾举行，由TechHer与Youth Hub Africa合作举办",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Agwuegbo made the call on Saturday in Abuja at the Dare 2026 conference, organised by TechHer in partnership with Youth Hub Africa."
+    },
+    {
+     "fact": "TechHer的Kuram平台接收幸存者报告并支持其获得司法救助",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "TechHer’s Kuram platform receives survivors’ reports and supports access to justice through engagement with digital platforms, police and the Nigeria Security and Civil Defence Corps"
+    },
+    {
+     "fact": "该组织呼吁制定更严格的法律和执法以威慑犯罪行为",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "called for stricker laws and enforcement that would deter people from indulging in criminality"
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "TechHer呼吁对网络性别暴力实现平等司法",
+   "summary_zh": "尼日利亚民间组织TechHer执行主任Chioma Agwuegbo在阿布贾举行的Dare 2026会议上呼吁，为遭受技术辅助性别暴力的妇女和女童提供平等司法保护。她指出网络暴力会对受害者造成严重的线下后果，并敦促社交媒体平台结合尼日利亚语言和文化现实进行内容审核。该组织通过Kuram平台接收幸存者报告，并与数字平台、警方及尼日利亚安全和民防部队合作推动司法救助。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": "Dare 2026会议",
+    "raw_text": "Abuja at the Dare 2026 conference"
+   },
+   "key_facts": [
+    {
+     "fact": "TechHer执行主任在阿布贾Dare 2026会议上呼吁为网络性别暴力受害者提供平等司法",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Chioma Agwuegbo, Executive Director of TechHer, a civil society organisation has called for equal justice to protect women and girls against technology-facilitated gender-based violence."
+    },
+    {
+     "fact": "会议于周六在阿布贾举行，由TechHer与Youth Hub Africa合作举办",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Agwuegbo made the call on Saturday in Abuja at the Dare 2026 conference, organised by TechHer in partnership with Youth Hub Africa."
+    },
+    {
+     "fact": "TechHer的Kuram平台接收幸存者报告并支持其获得司法救助",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "TechHer’s Kuram platform receives survivors’ reports and supports access to justice through engagement with digital platforms, police and the Nigeria Security and Civil Defence Corps"
+    },
+    {
+     "fact": "该组织呼吁制定更严格的法律和执法以威慑犯罪行为",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "called for stricker laws and enforcement that would deter people from indulging in criminality"
+    }
+   ],
+   "uncertainties": [
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_8cafb84ae5cb9db6",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

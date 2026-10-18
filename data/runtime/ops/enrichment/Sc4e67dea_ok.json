@@ -1,0 +1,126 @@
+{
+ "label": "Sc4e67dea",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3534a6f8e11f1c6c7807cfc3c2685c065469f93cc09ed2aaa413cefeb5f38bfa",
+ "tokens": {
+  "input_tokens": 2233,
+  "output_tokens": 422,
+  "total_tokens": 2655
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"该事件目前仅有一个来源报道，尚缺乏交叉验证\", \"拆迁是否合法合规、是否事先通知等细节尚未获独立确认\"]",
+    "after": "[\"该事件目前仅有一个来源报道，尚缺乏交叉验证\", \"拆迁是否合法合规、是否事先通知等细节尚未获独立确认\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳旅游联合会要求为拉普莱asure海滩85家被拆商户提供赔偿",
+   "summary_zh": "加纳旅游联合会（GHATOF）要求为拉普莱asure海滩拆迁中受影响的85家企业提供赔偿，并警告约4000个就业岗位面临风险，其中大部分由女性从事。该联合会还呼吁在未来的海滨再开发中给予这些被迁商户优先承租权，认为持有正式许可的企业在建筑被拆前应获得适当通知。目前该消息为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": "拉普莱asure海滩",
+    "raw_text": "La Pleasure Beach"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳旅游联合会要求为拉普莱asure海滩被拆的85家企业提供赔偿",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Ghana Tourism Federation demands compensation for 85 businesses demolished at La Pleasure Beach"
+    },
+    {
+     "fact": "约4000个就业岗位面临风险，其中大部分由女性从事",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "warning that about 4,000 jobs, largely held by women, have been put at risk"
+    },
+    {
+     "fact": "该联合会呼吁给予被迁商户未来海滨再开发的优先承租权",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "calling for the displaced traders to be given the first right of refusal in any future redevelopment of the beachfront"
+    },
+    {
+     "fact": "该联合会认为持有正式许可的企业在建筑被拆前应获得适当通知",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "businesses operating with official permits should have received proper notice before their structures were demolished"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证",
+    "拆迁是否合法合规、是否事先通知等细节尚未获独立确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳旅游联合会要求为拉普莱asure海滩85家被拆商户提供赔偿",
+   "summary_zh": "加纳旅游联合会（GHATOF）要求为拉普莱asure海滩拆迁中受影响的85家企业提供赔偿，并警告约4000个就业岗位面临风险，其中大部分由女性从事。该联合会还呼吁在未来的海滨再开发中给予这些被迁商户优先承租权，认为持有正式许可的企业在建筑被拆前应获得适当通知。目前该消息为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": "拉普莱asure海滩",
+    "raw_text": "La Pleasure Beach"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳旅游联合会要求为拉普莱asure海滩被拆的85家企业提供赔偿",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Ghana Tourism Federation demands compensation for 85 businesses demolished at La Pleasure Beach"
+    },
+    {
+     "fact": "约4000个就业岗位面临风险，其中大部分由女性从事",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "warning that about 4,000 jobs, largely held by women, have been put at risk"
+    },
+    {
+     "fact": "该联合会呼吁给予被迁商户未来海滨再开发的优先承租权",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "calling for the displaced traders to be given the first right of refusal in any future redevelopment of the beachfront"
+    },
+    {
+     "fact": "该联合会认为持有正式许可的企业在建筑被拆前应获得适当通知",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "businesses operating with official permits should have received proper notice before their structures were demolished"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证",
+    "拆迁是否合法合规、是否事先通知等细节尚未获独立确认",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_01ba40bec4e67dea",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

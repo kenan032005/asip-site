@@ -1,0 +1,114 @@
+{
+ "label": "Sc016abfc",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4b1d92be7a960a8e01e40122c71cbdbbe572b14260cbecb51fb6c7c282bbd418",
+ "tokens": {
+  "input_tokens": 2184,
+  "output_tokens": 331,
+  "total_tokens": 2515
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\"]",
+    "after": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳通信部长称“百万程序员计划”不会降低认证标准",
+   "summary_zh": "加纳通信、数字技术与创新部长塞缪尔·纳特伊·乔治表示，政府将在“百万程序员计划”（OMCP）下维持国际认证标准，即使相关要求会使受益者的培训更具挑战性。该表态由单一来源报道，尚无其他来源交叉验证。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳政府表示不会降低“百万程序员计划”的认证标准",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Gov’t will not lower certification standards under One Million Coders Programme – Sam George"
+    },
+    {
+     "fact": "通信、数字技术与创新部长塞缪尔·纳特伊·乔治称将维持国际认证标准",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Minister for Communication, Digital Technology and Innovation, Samuel Nartey George, says that the government will maintain international certification standards under the One Million Coders Programme (OMCP)"
+    },
+    {
+     "fact": "即使相关要求使培训更具挑战性，仍维持标准",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "even if the requirements make the training more demanding for beneficiaries"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳通信部长称“百万程序员计划”不会降低认证标准",
+   "summary_zh": "加纳通信、数字技术与创新部长塞缪尔·纳特伊·乔治表示，政府将在“百万程序员计划”（OMCP）下维持国际认证标准，即使相关要求会使受益者的培训更具挑战性。该表态由单一来源报道，尚无其他来源交叉验证。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳政府表示不会降低“百万程序员计划”的认证标准",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Gov’t will not lower certification standards under One Million Coders Programme – Sam George"
+    },
+    {
+     "fact": "通信、数字技术与创新部长塞缪尔·纳特伊·乔治称将维持国际认证标准",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Minister for Communication, Digital Technology and Innovation, Samuel Nartey George, says that the government will maintain international certification standards under the One Million Coders Programme (OMCP)"
+    },
+    {
+     "fact": "即使相关要求使培训更具挑战性，仍维持标准",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "even if the requirements make the training more demanding for beneficiaries"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_0ca8752dc016abfc",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

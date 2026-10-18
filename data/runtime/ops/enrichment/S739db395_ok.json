@@ -1,0 +1,108 @@
+{
+ "label": "S739db395",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1c7245f72bde3efd29c9d3744718e08cbe01ea5c7dc27f4d2966d3ae21c4eb51",
+ "tokens": {
+  "input_tokens": 2164,
+  "output_tokens": 272,
+  "total_tokens": 2436
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"事件仅由单一来源报道，尚未获得交叉验证\", \"坠落物为十字架还是耶稣雕像，标题与正文表述不一致\", \"具体事发地点及时间未在原文中明确\"]",
+    "after": "[\"事件仅由单一来源报道，尚未获得交叉验证\", \"坠落物为十字架还是耶稣雕像，标题与正文表述不一致\", \"具体事发地点及时间未在原文中明确\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "厄瓜多尔一神父在弥撒直播中被耶稣雕像砸中身亡",
+   "summary_zh": "厄瓜多尔一名天主教神父在主持弥撒时被一座十字架或耶稣雕像砸中身亡，当时弥撒正在网络直播。该消息目前仅由单一来源报道，具体细节尚未获得其他来源确认。",
+   "event_type": "other_security",
+   "country_iso3": "ECU",
+   "location": {
+    "country_iso3": "ECU",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Ecuador"
+   },
+   "key_facts": [
+    {
+     "fact": "一名天主教神父在主持弥撒时被十字架砸中身亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A Catholic priest died after a cross fell on top of him while he was performing a mass in Ecuador"
+    },
+    {
+     "fact": "事发时弥撒正在网络直播",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "which was being livestreamed at the time"
+    }
+   ],
+   "uncertainties": [
+    "事件仅由单一来源报道，尚未获得交叉验证",
+    "坠落物为十字架还是耶稣雕像，标题与正文表述不一致",
+    "具体事发地点及时间未在原文中明确"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 55
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "厄瓜多尔一神父在弥撒直播中被耶稣雕像砸中身亡",
+   "summary_zh": "厄瓜多尔一名天主教神父在主持弥撒时被一座十字架或耶稣雕像砸中身亡，当时弥撒正在网络直播。该消息目前仅由单一来源报道，具体细节尚未获得其他来源确认。",
+   "event_type": "other_security",
+   "country_iso3": "ECU",
+   "location": {
+    "country_iso3": "ECU",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Ecuador"
+   },
+   "key_facts": [
+    {
+     "fact": "一名天主教神父在主持弥撒时被十字架砸中身亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A Catholic priest died after a cross fell on top of him while he was performing a mass in Ecuador"
+    },
+    {
+     "fact": "事发时弥撒正在网络直播",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "which was being livestreamed at the time"
+    }
+   ],
+   "uncertainties": [
+    "事件仅由单一来源报道，尚未获得交叉验证",
+    "坠落物为十字架还是耶稣雕像，标题与正文表述不一致",
+    "具体事发地点及时间未在原文中明确",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 55
+  }
+ },
+ "event_id": "EVT_783c3ca2739db395",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

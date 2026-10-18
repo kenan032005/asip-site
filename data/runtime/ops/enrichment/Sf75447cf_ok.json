@@ -1,0 +1,127 @@
+{
+ "label": "Sf75447cf",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5efffe9aab82998140f0f53748fc288c252ee0b6b9b862bb663381c995299f46",
+ "tokens": {
+  "input_tokens": 2518,
+  "output_tokens": 523,
+  "total_tokens": 3041
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "昌加拉交通事故死亡人数升至14人",
+   "summary_zh": "莫桑比克太特省昌加拉区马佐埃村发生一起交通事故，一辆半集体客运小巴与一辆省际客运大巴相撞，死亡人数由13人升至14人，另有16人受伤。据太特省医院急诊服务负责人称，9人在碰撞现场死亡，其余人员随后在医院死亡。事故原因仍在调查中，有幸存者称大巴越入对向车道并撞上小巴，但相关说法尚未得到官方确认。",
+   "event_type": "transport_disruption",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "太特省",
+    "city": "昌加拉区",
+    "site": "马佐埃村",
+    "raw_text": "povoado de Mazóe, distrito de Changara, província de Tete"
+   },
+   "key_facts": [
+    {
+     "fact": "昌加拉交通事故死亡人数由13人升至14人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "O número de vítimas mortais do acidente de viação ocorrido no povoado de Mazóe, distrito de Changara, província de Tete, subiu de 13 para 14"
+    },
+    {
+     "fact": "事故涉及一辆半集体客运小巴与一辆省际客运大巴",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "O sinistro envolveu um minibus de transporte semi colectivo de passageiros e um autocarro de transporte interprovincial"
+    },
+    {
+     "fact": "事故造成16人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "tendo ainda provocado 16 feridos"
+    },
+    {
+     "fact": "9人在碰撞现场死亡，其余人员随后在医院死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "nove pessoas morreram no local da colisão, enquanto outras perderam a vida posteriormente na unidade sanitária"
+    },
+    {
+     "fact": "事故原因仍在调查中，官方尚未得出结论",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "decorrem trabalhos para apurar as circunstâncias em que ocorreu a colisão, sem avançar conclusões"
+    }
+   ],
+   "uncertainties": [
+    "事故原因尚未查明，官方仍在调查",
+    "幸存者关于大巴越入对向车道并高速行驶的说法尚未得到官方确认",
+    "目前仅有一个来源报道（单一来源），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "昌加拉交通事故死亡人数升至14人",
+   "summary_zh": "莫桑比克太特省昌加拉区马佐埃村发生一起交通事故，一辆半集体客运小巴与一辆省际客运大巴相撞，死亡人数由13人升至14人，另有16人受伤。据太特省医院急诊服务负责人称，9人在碰撞现场死亡，其余人员随后在医院死亡。事故原因仍在调查中，有幸存者称大巴越入对向车道并撞上小巴，但相关说法尚未得到官方确认。",
+   "event_type": "transport_disruption",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "太特省",
+    "city": "昌加拉区",
+    "site": "马佐埃村",
+    "raw_text": "povoado de Mazóe, distrito de Changara, província de Tete"
+   },
+   "key_facts": [
+    {
+     "fact": "昌加拉交通事故死亡人数由13人升至14人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "O número de vítimas mortais do acidente de viação ocorrido no povoado de Mazóe, distrito de Changara, província de Tete, subiu de 13 para 14"
+    },
+    {
+     "fact": "事故涉及一辆半集体客运小巴与一辆省际客运大巴",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "O sinistro envolveu um minibus de transporte semi colectivo de passageiros e um autocarro de transporte interprovincial"
+    },
+    {
+     "fact": "事故造成16人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "tendo ainda provocado 16 feridos"
+    },
+    {
+     "fact": "9人在碰撞现场死亡，其余人员随后在医院死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "nove pessoas morreram no local da colisão, enquanto outras perderam a vida posteriormente na unidade sanitária"
+    },
+    {
+     "fact": "事故原因仍在调查中，官方尚未得出结论",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "decorrem trabalhos para apurar as circunstâncias em que ocorreu a colisão, sem avançar conclusões"
+    }
+   ],
+   "uncertainties": [
+    "事故原因尚未查明，官方仍在调查",
+    "幸存者关于大巴越入对向车道并高速行驶的说法尚未得到官方确认",
+    "目前仅有一个来源报道（单一来源），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_342be269f75447cf",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

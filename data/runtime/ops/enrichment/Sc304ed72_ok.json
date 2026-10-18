@@ -1,0 +1,106 @@
+{
+ "label": "Sc304ed72",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3f7a597522945a10b3c101424174ac243d1321e79ca893a2547f108182697c46",
+ "tokens": {
+  "input_tokens": 2175,
+  "output_tokens": 336,
+  "total_tokens": 2511
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"选举“成功”的表述来自该党自身说法，尚未获独立核实\", \"目前仅一个来源报道该活动\"]",
+    "after": "[\"选举“成功”的表述来自该党自身说法，尚未获独立核实\", \"目前仅一个来源报道该活动\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳新爱国党在戈阿索举行全国感恩礼拜",
+   "summary_zh": "加纳新爱国党（NPP）在阿哈福地区戈阿索的基督复临安息日会教堂举行全国感恩礼拜，就其所称的党内高管及总统候选人选举成功向上帝表达感谢。该活动属党务与宗教性质，未涉及安全事件。目前仅单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "阿哈福地区",
+    "city": "戈阿索",
+    "site": "基督复临安息日会教堂",
+    "raw_text": "Seventh-day Adventist (SDA) Church in Goaso in the Ahafo Region"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳新爱国党在阿哈福地区戈阿索举行全国感恩礼拜",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The New Patriotic Party (NPP) has held a national thanksgiving service at the Seventh-day Adventist (SDA) Church in Goaso in the Ahafo Region"
+    },
+    {
+     "fact": "该党称此次礼拜是为其高管及总统候选人选举成功表达感谢",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "to express gratitude to God following what it described as successful elections of its executives and flagbearer"
+    }
+   ],
+   "uncertainties": [
+    "选举“成功”的表述来自该党自身说法，尚未获独立核实",
+    "目前仅一个来源报道该活动"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳新爱国党在戈阿索举行全国感恩礼拜",
+   "summary_zh": "加纳新爱国党（NPP）在阿哈福地区戈阿索的基督复临安息日会教堂举行全国感恩礼拜，就其所称的党内高管及总统候选人选举成功向上帝表达感谢。该活动属党务与宗教性质，未涉及安全事件。目前仅单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "阿哈福地区",
+    "city": "戈阿索",
+    "site": "基督复临安息日会教堂",
+    "raw_text": "Seventh-day Adventist (SDA) Church in Goaso in the Ahafo Region"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳新爱国党在阿哈福地区戈阿索举行全国感恩礼拜",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The New Patriotic Party (NPP) has held a national thanksgiving service at the Seventh-day Adventist (SDA) Church in Goaso in the Ahafo Region"
+    },
+    {
+     "fact": "该党称此次礼拜是为其高管及总统候选人选举成功表达感谢",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "to express gratitude to God following what it described as successful elections of its executives and flagbearer"
+    }
+   ],
+   "uncertainties": [
+    "选举“成功”的表述来自该党自身说法，尚未获独立核实",
+    "目前仅一个来源报道该活动",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_c78507fec304ed72",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

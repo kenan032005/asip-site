@@ -1,0 +1,106 @@
+{
+ "label": "Se8128fdb",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e2d039c756cfe7fe105d7775e39f169b485f895628df6369f126793c37bef2e9",
+ "tokens": {
+  "input_tokens": 2180,
+  "output_tokens": 296,
+  "total_tokens": 2476
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源报道该活动\", \"活动细节尚未获得交叉验证\"]",
+    "after": "[\"目前仅一个来源报道该活动\", \"活动细节尚未获得交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "CIMG颁奖典礼在拉巴迪海滩酒店表彰营销卓越表现",
+   "summary_zh": "加纳特许营销学会（CIMG）于10月17日星期六在阿克拉拉巴迪海滩酒店举行第37届年度全国营销绩效奖颁奖典礼，表彰在营销和商业绩效方面取得成就的个人和组织。该报道为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "阿克拉",
+    "site": "拉巴迪海滩酒店",
+    "raw_text": "Labadi Beach Hotel in Accra"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳特许营销学会在阿克拉拉巴迪海滩酒店举行第37届年度全国营销绩效奖颁奖典礼",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Chartered Institute of Marketing, Ghana (CIMG), held its 37th Annual National Marketing Performance Awards at the Labadi Beach Hotel in Accra on Saturday, October 17"
+    },
+    {
+     "fact": "颁奖典礼旨在表彰在营销和商业绩效方面取得成就的个人和组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "recognising individuals and organisations for their achievements in marketing and business performance"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源报道该活动",
+    "活动细节尚未获得交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "CIMG颁奖典礼在拉巴迪海滩酒店表彰营销卓越表现",
+   "summary_zh": "加纳特许营销学会（CIMG）于10月17日星期六在阿克拉拉巴迪海滩酒店举行第37届年度全国营销绩效奖颁奖典礼，表彰在营销和商业绩效方面取得成就的个人和组织。该报道为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "阿克拉",
+    "site": "拉巴迪海滩酒店",
+    "raw_text": "Labadi Beach Hotel in Accra"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳特许营销学会在阿克拉拉巴迪海滩酒店举行第37届年度全国营销绩效奖颁奖典礼",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Chartered Institute of Marketing, Ghana (CIMG), held its 37th Annual National Marketing Performance Awards at the Labadi Beach Hotel in Accra on Saturday, October 17"
+    },
+    {
+     "fact": "颁奖典礼旨在表彰在营销和商业绩效方面取得成就的个人和组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "recognising individuals and organisations for their achievements in marketing and business performance"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源报道该活动",
+    "活动细节尚未获得交叉验证",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_3d386c8ce8128fdb",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

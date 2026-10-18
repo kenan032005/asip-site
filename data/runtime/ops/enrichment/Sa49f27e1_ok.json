@@ -1,0 +1,105 @@
+{
+ "label": "Sa49f27e1",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5fb714fa548847f535e73e52f25746d15c4e73eb2d52cd15e88ffda2c69a17ce",
+ "tokens": {
+  "input_tokens": 2038,
+  "output_tokens": 404,
+  "total_tokens": 2442
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "刚果（金）政府指控前总统卡比拉策划对该国发动“全面攻击”",
+   "summary_zh": "刚果（金）政府发言人指控前总统约瑟夫·卡比拉与卢旺达支持的武装组织M23联手后，正策划对该国发动“全面攻击”。卡比拉于周一与M23武装联合组建新组织，更直接地介入东部地区的叛乱活动。政府方面称其“选择拿起武器”，意图“征服领土”。该指控目前仅来自单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Democratic Republic Of Congo"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）政府指控前总统卡比拉策划对该国发动“全面攻击”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The DR Congo government on Friday accused former president Joseph Kabila of planning a \"general attack\" after he teamed up with Rwandan-backed armed group M23 to take on government forces."
+    },
+    {
+     "fact": "卡比拉于周一与M23武装联合组建新组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kabila on Monday joined forces with the rebel M23 to head a new outfit , taking a more direct role in the insurgency ravaging eastern DRC."
+    },
+    {
+     "fact": "政府发言人指其“选择拿起武器”意在征服领土",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the choice to take up arms means killing Congolese in order to try to conquer territories."
+    }
+   ],
+   "uncertainties": [
+    "对卡比拉的指控目前仅来自刚果（金）政府单一来源，尚未获得独立证实",
+    "卡比拉与M23组建新组织的具体性质与规模尚未明确"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "刚果（金）政府指控前总统卡比拉策划对该国发动“全面攻击”",
+   "summary_zh": "刚果（金）政府发言人指控前总统约瑟夫·卡比拉与卢旺达支持的武装组织M23联手后，正策划对该国发动“全面攻击”。卡比拉于周一与M23武装联合组建新组织，更直接地介入东部地区的叛乱活动。政府方面称其“选择拿起武器”，意图“征服领土”。该指控目前仅来自单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Democratic Republic Of Congo"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）政府指控前总统卡比拉策划对该国发动“全面攻击”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The DR Congo government on Friday accused former president Joseph Kabila of planning a \"general attack\" after he teamed up with Rwandan-backed armed group M23 to take on government forces."
+    },
+    {
+     "fact": "卡比拉于周一与M23武装联合组建新组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kabila on Monday joined forces with the rebel M23 to head a new outfit , taking a more direct role in the insurgency ravaging eastern DRC."
+    },
+    {
+     "fact": "政府发言人指其“选择拿起武器”意在征服领土",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the choice to take up arms means killing Congolese in order to try to conquer territories."
+    }
+   ],
+   "uncertainties": [
+    "对卡比拉的指控目前仅来自刚果（金）政府单一来源，尚未获得独立证实",
+    "卡比拉与M23组建新组织的具体性质与规模尚未明确"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_01d6cc37a49f27e1",
+ "disease_event_id": null,
+ "country_code": "CD"
+}
