@@ -1,0 +1,127 @@
+{
+ "label": "S7a39d90d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "889a14df2c45897da86ad99111b20f659961870d9fe4dabda9ee132113c08b5b",
+ "tokens": {
+  "input_tokens": 2093,
+  "output_tokens": 565,
+  "total_tokens": 2658
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "前埃尔-鲁法伊盟友等人在卡杜纳转投APC",
+   "summary_zh": "尼日利亚卡杜纳州前财政专员、前州长纳西尔·埃尔-鲁法伊的前盟友穆罕默德·赛义杜宣布脱离非洲民主大会（ADC），与数千名支持者一同加入执政党全体进步大会（APC）。赛义杜在扎里亚举行的接收仪式上称ADC在该州已“死亡”，并声称超过20万名持证党员已加入APC。他称其团体因党内结构被他人“据称”劫持而被迫离开。目前该消息为单一来源报道。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "卡杜纳州",
+    "city": "扎里亚",
+    "site": null,
+    "raw_text": "Zaria, Kaduna State"
+   },
+   "key_facts": [
+    {
+     "fact": "穆罕默德·赛义杜脱离ADC转投APC",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Muhammad Sa’idu, has declared the African Democratic Congress dead in the state following his defection to the All Progressives Congress with thousands of supporters"
+    },
+    {
+     "fact": "赛义杜在扎里亚举行的仪式上宣布转投",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sa’idu made the declaration on Saturday in Zaria at a ceremony organised to receive him and other ADC defectors into the APC"
+    },
+    {
+     "fact": "赛义杜声称超过20万名持证党员加入执政党",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "claiming that more than 200,000 card-carrying members had joined the ruling party"
+    },
+    {
+     "fact": "前ADC州长候选人贾法鲁·萨尼及前参议员苏莱曼·阿卜杜·夸里一同转投",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "defected alongside a former ADC governorship aspirant, Jafaru Sani, and former Senator Suleiman Abdu Kwari"
+    },
+    {
+     "fact": "赛义杜称其团体因党内结构被他人劫持而被迫离开",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "was forced to leave after some individuals allegedly hijacked the party"
+    }
+   ],
+   "uncertainties": [
+    "超过20万名党员加入APC的说法为赛义杜单方面声称，尚未获得独立核实",
+    "ADC党内结构被“据称”劫持的说法为指控性表述，未获证实",
+    "该事件目前仅有一个来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "前埃尔-鲁法伊盟友等人在卡杜纳转投APC",
+   "summary_zh": "尼日利亚卡杜纳州前财政专员、前州长纳西尔·埃尔-鲁法伊的前盟友穆罕默德·赛义杜宣布脱离非洲民主大会（ADC），与数千名支持者一同加入执政党全体进步大会（APC）。赛义杜在扎里亚举行的接收仪式上称ADC在该州已“死亡”，并声称超过20万名持证党员已加入APC。他称其团体因党内结构被他人“据称”劫持而被迫离开。目前该消息为单一来源报道。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "卡杜纳州",
+    "city": "扎里亚",
+    "site": null,
+    "raw_text": "Zaria, Kaduna State"
+   },
+   "key_facts": [
+    {
+     "fact": "穆罕默德·赛义杜脱离ADC转投APC",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Muhammad Sa’idu, has declared the African Democratic Congress dead in the state following his defection to the All Progressives Congress with thousands of supporters"
+    },
+    {
+     "fact": "赛义杜在扎里亚举行的仪式上宣布转投",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sa’idu made the declaration on Saturday in Zaria at a ceremony organised to receive him and other ADC defectors into the APC"
+    },
+    {
+     "fact": "赛义杜声称超过20万名持证党员加入执政党",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "claiming that more than 200,000 card-carrying members had joined the ruling party"
+    },
+    {
+     "fact": "前ADC州长候选人贾法鲁·萨尼及前参议员苏莱曼·阿卜杜·夸里一同转投",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "defected alongside a former ADC governorship aspirant, Jafaru Sani, and former Senator Suleiman Abdu Kwari"
+    },
+    {
+     "fact": "赛义杜称其团体因党内结构被他人劫持而被迫离开",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "was forced to leave after some individuals allegedly hijacked the party"
+    }
+   ],
+   "uncertainties": [
+    "超过20万名党员加入APC的说法为赛义杜单方面声称，尚未获得独立核实",
+    "ADC党内结构被“据称”劫持的说法为指控性表述，未获证实",
+    "该事件目前仅有一个来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_501ab6db7a39d90d",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

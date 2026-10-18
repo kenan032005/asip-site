@@ -1,0 +1,127 @@
+{
+ "label": "S5f67816c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "8545ede553bfadb731f2a500c1c9def50959a33fa3f2ef93468388bbafb41976",
+ "tokens": {
+  "input_tokens": 2099,
+  "output_tokens": 536,
+  "total_tokens": 2635
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚卡诺州森林猎人击毙两名疑似匪徒，追回1000万奈拉赎金",
+   "summary_zh": "据称，在尼日利亚卡诺州多加瓦地方政府区的法尔戈雷森林，猎人伏击并击毙了两名疑似匪徒，追回1000万奈拉赎金。这笔钱据称是为换取一名于2026年9月11日被绑架、后获释的45岁男子而支付的。另有一名嫌疑人受伤逃脱，卡诺州警察司令部据报已下令搜捕。上述信息目前仅来自单一来源的报道。",
+   "event_type": "armed_conflict",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "卡诺州",
+    "city": null,
+    "site": "法尔戈雷森林",
+    "raw_text": "Falgore Forest, Doguwa Local Government Area of Kano State"
+   },
+   "key_facts": [
+    {
+     "fact": "猎人据称在卡诺州法尔戈雷森林击毙两名疑似匪徒",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Hunters have reportedly killed two suspected bandits and recovered N10 million in ransom money in Falgore Forest, Doguwa Local Government Area of Kano State."
+    },
+    {
+     "fact": "追回赎金1000万奈拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "recovered N10 million in ransom money"
+    },
+    {
+     "fact": "这笔钱据称是为换取一名于2026年9月11日被绑架、后获释的45岁男子而支付",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the recovered money was allegedly paid to secure the release of Kabiru Aliyu, 45, who was abducted on September 11, 2026, and later released unharmed"
+    },
+    {
+     "fact": "另一名嫌疑人受伤逃脱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "One other suspect was said to have escaped with injuries."
+    },
+    {
+     "fact": "卡诺州警察司令部据报下令搜查法尔戈雷森林及周边社区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Kano State Police Command reportedly ordered a search of Falgore Forest and surrounding communities"
+    }
+   ],
+   "uncertainties": [
+    "事件细节均来自单一来源的报道，尚未获得交叉验证",
+    "击毙、追回赎金及赎金支付等情节均为据称/被指，尚未证实",
+    "逃脱嫌疑人是否被捕尚不明确"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚卡诺州森林猎人击毙两名疑似匪徒，追回1000万奈拉赎金",
+   "summary_zh": "据称，在尼日利亚卡诺州多加瓦地方政府区的法尔戈雷森林，猎人伏击并击毙了两名疑似匪徒，追回1000万奈拉赎金。这笔钱据称是为换取一名于2026年9月11日被绑架、后获释的45岁男子而支付的。另有一名嫌疑人受伤逃脱，卡诺州警察司令部据报已下令搜捕。上述信息目前仅来自单一来源的报道。",
+   "event_type": "armed_conflict",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "卡诺州",
+    "city": null,
+    "site": "法尔戈雷森林",
+    "raw_text": "Falgore Forest, Doguwa Local Government Area of Kano State"
+   },
+   "key_facts": [
+    {
+     "fact": "猎人据称在卡诺州法尔戈雷森林击毙两名疑似匪徒",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Hunters have reportedly killed two suspected bandits and recovered N10 million in ransom money in Falgore Forest, Doguwa Local Government Area of Kano State."
+    },
+    {
+     "fact": "追回赎金1000万奈拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "recovered N10 million in ransom money"
+    },
+    {
+     "fact": "这笔钱据称是为换取一名于2026年9月11日被绑架、后获释的45岁男子而支付",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the recovered money was allegedly paid to secure the release of Kabiru Aliyu, 45, who was abducted on September 11, 2026, and later released unharmed"
+    },
+    {
+     "fact": "另一名嫌疑人受伤逃脱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "One other suspect was said to have escaped with injuries."
+    },
+    {
+     "fact": "卡诺州警察司令部据报下令搜查法尔戈雷森林及周边社区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Kano State Police Command reportedly ordered a search of Falgore Forest and surrounding communities"
+    }
+   ],
+   "uncertainties": [
+    "事件细节均来自单一来源的报道，尚未获得交叉验证",
+    "击毙、追回赎金及赎金支付等情节均为据称/被指，尚未证实",
+    "逃脱嫌疑人是否被捕尚不明确"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_2b6f7b5b5f67816c",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
