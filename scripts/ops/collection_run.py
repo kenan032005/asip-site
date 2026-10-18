@@ -55,6 +55,23 @@ _STAT_FIELDS = {
     "article_persistence_ok": "article_persistence_ok",
 }
 
+#: C8-4D1：执行行/物理请求/相位遥测/共享复用 —— 显式转发到 summary 层。
+#: 上游缺失时上报命名字段 UNKNOWN（不得以 0 冒充"没执行"）。
+_EXTRA_FIELDS = {
+    "execution_rows_configured": "execution_rows_configured",
+    "execution_rows_enumerated": "execution_rows_enumerated",
+    "execution_rows_skipped_wall_clock": "execution_rows_skipped_wall_clock",
+    "execution_rows_actually_attempted": "execution_rows_actually_attempted",
+    "physical_network_requests": "physical_network_requests",
+    "successful_source_executions": "successful_source_executions",
+    "shared_feed_reuse": "shared_feed_reuse",
+    "PHASE_TELEMETRY_AVAILABLE": "PHASE_TELEMETRY_AVAILABLE",
+}
+for _p in range(5):
+    for _suffix in ("EXECUTIONS", "SKIPPED_WALL_CLOCK", "ELAPSED_SECONDS"):
+        _k = "PHASE%d_%s" % (_p, _suffix)
+        _EXTRA_FIELDS[_k] = _k
+
 
 def _count_candidates():
     n_raw = 0
@@ -129,6 +146,12 @@ def run_collection(execute=False, emit=lambda s: print(s), state=None, ops_run=N
         metrics["sources_blocked_by_external"] = totals.get("sources_blocked_by_external")
         metrics["sources_no_output_not_blocked"] = totals.get("sources_no_output_not_blocked")
         metrics["gdelt_rate_limiter"] = totals.get("gdelt_rate_limiter")
+        # C8-4D1：执行行 / 物理请求 / 相位遥测 / 共享复用（缺失 → UNKNOWN）
+        for _k, _src_key in _EXTRA_FIELDS.items():
+            if _src_key in totals:
+                metrics[_k] = totals.get(_src_key)
+            else:
+                metrics[_k] = "UNKNOWN"
         try:
             src = ROOT / "logs" / "stage3_collection_stats.json"
             if src.exists():
@@ -140,6 +163,9 @@ def run_collection(execute=False, emit=lambda s: print(s), state=None, ops_run=N
     else:
         # 不得猜值：标记为 unavailable（execute=False 属预期 shadow 记账）
         metrics = {k: None for k in _STAT_FIELDS}
+        # C8-4D1：shadow 未执行采集，扩展指标同样不适用（None，而非伪造 0）
+        for _k in _EXTRA_FIELDS:
+            metrics[_k] = None
         metrics["metrics_source"] = "none_shadow" if not execute else "unavailable"
         metrics["collector_run_id"] = None
         metrics["collector_generated_at"] = None
@@ -163,6 +189,10 @@ def run_collection(execute=False, emit=lambda s: print(s), state=None, ops_run=N
                   "articles_persisted_total", "articles_persisted_new",
                   "articles_excluded_total", "article_persistence_ok"):
             ops_run[k] = metrics.get(k)
+        # C8-4D1：执行行 / 物理请求 / 相位遥测 / 共享复用 一并进入 ops 账本，
+        # 使 C8-4D2 与独立复核可直接从 operations_status.json 取证。
+        for _k in _EXTRA_FIELDS:
+            ops_run[_k] = metrics.get(_k)
         ops_run["candidates_new"] = max(n_pending, 0)
         if not stats:
             ops_run["notes"].append(

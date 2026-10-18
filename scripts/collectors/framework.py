@@ -106,6 +106,113 @@ def validate_url(url):
 # ── 网络抓取 ─────────────────────────────────────────
 _last_hit = {}
 
+# ── C8-4D1：run-local 共享请求复用（feature flag，默认关闭）────────────
+# 目标：不同 source_id 指向**同一有效请求**（同 URL/同方法/同相关头/同鉴权上下文）时，
+# 一轮内只做一次真实 HTTP 抓取，其余复用原始响应；解析、国家地理门槛、准入、
+# 去重、发布门槛**全部照旧逐源执行**，绝不复用解析结果或跳过过滤。
+# 关闭时行为与 C8-4C4 完全一致（零行为变化）。
+SHARED_REUSE_ENV = "ASIP_SHARED_FEED_REUSE"
+SHARED_REUSE_SOURCES_ENV = "ASIP_SHARED_FEED_REUSE_SOURCES"
+SHARED_REUSE_MAX_ENTRIES = int(os.environ.get("ASIP_SHARED_FEED_REUSE_MAX_ENTRIES", "64"))
+SHARED_REUSE_MAX_BYTES = int(os.environ.get("ASIP_SHARED_FEED_REUSE_MAX_BYTES", str(24 * 1024 * 1024)))
+
+#: 参与请求身份判定的头（大小写不敏感）。UA 之外的头一律视为不影响 feed 内容，
+#: 但鉴权/敏感头不进入明文：仅以哈希摘要参与身份，缓存键本身不可反推凭据。
+RELEVANT_REQUEST_HEADERS = ("user-agent",)
+SENSITIVE_HEADERS = ("authorization", "cookie", "x-api-key", "proxy-authorization")
+
+_SHARED_CACHE = {}          # identity -> (text, err, status, nbytes)
+_SHARED_ORDER = []          # 插入顺序，用于有界淘汰（FIFO）
+_SHARED_BYTES = 0
+_SHARED_STATS = {
+    "cache_hits": 0,
+    "cache_misses": 0,
+    "reused_requests": 0,
+    "bypass_flag_disabled": 0,
+    "bypass_not_allowlisted": 0,
+    "evictions": 0,
+    "cache_entries": 0,
+    "cache_bytes": 0,
+    # 真实网络请求计数（每次 urlopen 尝试都计数，含重试）
+    "physical_network_requests": 0,
+}
+
+
+def shared_reuse_flag_state():
+    """返回 (enabled, allowlist)。enabled 由环境变量决定，默认 False。"""
+    raw = (os.environ.get(SHARED_REUSE_ENV) or "").strip().lower()
+    enabled = raw in ("1", "true", "yes", "on")
+    allow = [x.strip() for x in (os.environ.get(SHARED_REUSE_SOURCES_ENV) or "").split(",") if x.strip()]
+    return enabled, allow
+
+
+def shared_reuse_enabled(source_id=None):
+    """该 source 本轮是否参与共享复用。默认关闭；allowlist 非空时仅白名单内生效。"""
+    enabled, allow = shared_reuse_flag_state()
+    if not enabled:
+        return False
+    if allow and str(source_id or "") not in allow:
+        return False
+    return True
+
+
+def request_identity(url, method="GET", headers=None, auth_context=""):
+    """有效请求身份（sha256）。仅相同身份才允许共享物理响应。"""
+    headers = headers or {}
+    hdr = {}
+    for k, v in headers.items():
+        lk = str(k).lower()
+        if lk in SENSITIVE_HEADERS:
+            # 敏感头：只以摘要参与身份，绝不写入缓存键明文
+            hdr[lk] = "sha256:" + hashlib.sha256(str(v).encode("utf-8")).hexdigest()[:16]
+        elif lk in RELEVANT_REQUEST_HEADERS:
+            hdr[lk] = str(v)
+    payload = {
+        "method": str(method or "GET").upper(),
+        "url": str(url or "").strip(),
+        "headers": hdr,
+        "auth_context": "sha256:" + hashlib.sha256(str(auth_context or "").encode("utf-8")).hexdigest()[:16]
+        if auth_context else "",
+    }
+    return hashlib.sha256(json.dumps(payload, sort_keys=True).encode("utf-8")).hexdigest()
+
+
+def reset_run_caches():
+    """run 边界清理：复用缓存与计数器按轮隔离，绝不跨轮复用响应。"""
+    global _SHARED_BYTES
+    _SHARED_CACHE.clear()
+    _SHARED_ORDER.clear()
+    _SHARED_BYTES = 0
+    for k in list(_SHARED_STATS):
+        _SHARED_STATS[k] = 0
+
+
+def _cache_put(key, value):
+    global _SHARED_BYTES
+    n = len(value[0] or "") if isinstance(value[0], str) else 0
+    while _SHARED_ORDER and (len(_SHARED_ORDER) >= SHARED_REUSE_MAX_ENTRIES
+                             or _SHARED_BYTES + n > SHARED_REUSE_MAX_BYTES):
+        old = _SHARED_ORDER.pop(0)
+        oldv = _SHARED_CACHE.pop(old, None)
+        if oldv:
+            _SHARED_BYTES -= oldv[3]
+            _SHARED_STATS["evictions"] += 1
+    if len(_SHARED_ORDER) >= SHARED_REUSE_MAX_ENTRIES or n > SHARED_REUSE_MAX_BYTES:
+        return  # 单条超限则不缓存（不改变行为，仅放弃复用）
+    _SHARED_CACHE[key] = (value[0], value[1], value[2], n)
+    _SHARED_ORDER.append(key)
+    _SHARED_BYTES += n
+    _SHARED_STATS["cache_entries"] = len(_SHARED_ORDER)
+    _SHARED_STATS["cache_bytes"] = _SHARED_BYTES
+
+
+def get_request_stats():
+    """供 summary/ops 层读取的真实请求与复用计数（缺失即未知，不臆造）。"""
+    d = dict(_SHARED_STATS)
+    d["cache_bytes"] = _SHARED_BYTES
+    d["enabled"] = shared_reuse_flag_state()[0]
+    return d
+
 
 def _rate_limit(url):
     host = urllib.parse.urlparse(url).netloc
@@ -115,17 +222,36 @@ def _rate_limit(url):
     _last_hit[host] = time.time()
 
 
-def fetch_page(url, timeout=HTTP_TIMEOUT):
-    """抓取页面文本。返回 (text_or_None, error_or_None, http_status_or_None)。"""
+def fetch_page(url, timeout=HTTP_TIMEOUT, reuse=False, source_id=None, auth_context=""):
+    """抓取页面文本。返回 (text_or_None, error_or_None, http_status_or_None)。
+
+    C8-4D1：reuse=True 且特性开关启用时，按**有效请求身份**在 run-local 缓存中复用
+    原始响应；缓存只存成功响应，跨轮清空，命中/未命中均计数。默认关闭 = 原行为。
+    """
     ok, reason = validate_url(url)
     if not ok:
         return None, reason, None
+    cache_key = None
+    if reuse:
+        if shared_reuse_enabled(source_id):
+            cache_key = request_identity(url, "GET", {"User-Agent": UA}, auth_context)
+            hit = _SHARED_CACHE.get(cache_key)
+            if hit is not None:
+                _SHARED_STATS["cache_hits"] += 1
+                _SHARED_STATS["reused_requests"] += 1
+                return hit[0], hit[1], hit[2]
+            _SHARED_STATS["cache_misses"] += 1
+        elif shared_reuse_flag_state()[0]:
+            _SHARED_STATS["bypass_not_allowlisted"] += 1
+        else:
+            _SHARED_STATS["bypass_flag_disabled"] += 1
     _rate_limit(url)
     last_err = None
     last_status = None
     for attempt in range(MAX_RETRIES + 1):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": UA})
+            _SHARED_STATS["physical_network_requests"] += 1
             with urllib.request.urlopen(req, timeout=timeout) as r:
                 raw = r.read(MAX_BODY_BYTES + 1)
                 if len(raw) > MAX_BODY_BYTES:
@@ -144,9 +270,13 @@ def fetch_page(url, timeout=HTTP_TIMEOUT):
                     pass
                 enc = r.headers.get_content_charset() or "utf-8"
                 try:
-                    return raw.decode(enc, "ignore"), None, r.status
+                    out = (raw.decode(enc, "ignore"), None, r.status)
                 except LookupError:
-                    return raw.decode("utf-8", "ignore"), None, r.status
+                    out = (raw.decode("utf-8", "ignore"), None, r.status)
+                # C8-4D1：仅缓存成功响应；失败/异常不缓存（由既有重试与下轮处理）
+                if cache_key:
+                    _cache_put(cache_key, out)
+                return out
         except urllib.error.HTTPError as e:
             last_err = e
             last_status = e.code

@@ -283,7 +283,9 @@ class ArticleDiscoverer:
         feed_url = source["feed_url"]
         if not feed_url:
             return [], [f"{source['source_id']}: no feed_url"]
-        text, err, status = fetch_page(feed_url)
+        # C8-4D1：RSS/Atom 静态 feed 参与 run-local 共享请求复用（同一有效请求的
+        # 不同 source_id 只做一次真实抓取）。开关默认关闭；关闭时与原行为一致。
+        text, err, status = fetch_page(feed_url, reuse=True, source_id=source["source_id"])
         if err:
             return [], [f"{source['source_id']}: fetch {err}"]
         # C1B §十：改用健壮解析器（BOM/垃圾前缀/非法控制字符/未声明实体、

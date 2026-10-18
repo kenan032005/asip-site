@@ -6907,10 +6907,10 @@
    "tested": true,
    "claim_origin_type": "primary_official",
    "url": "https://nrc.gov.ng/",
-   "notes": "C8-4C4 WAVE 2 严格重验通过（生产证书校验；ACCESS/TLS/DISCOVERY/ARTICLE_URL/DATE/FULL_BODY/COUNTRY_SCOPE/PUBLISHER_IDENTITY 全绿）。角色：['OFFICIAL', 'TRANSPORT_INFRASTRUCTURE']；证据角色：PRIMARY_EVIDENCE；优先级：NORMAL。铁路官方（重验全绿）",
+   "notes": "C8-4C4 WAVE 2 严格重验通过（生产证书校验；ACCESS/TLS/DISCOVERY/ARTICLE_URL/DATE/FULL_BODY/COUNTRY_SCOPE/PUBLISHER_IDENTITY 全绿）。角色：['OFFICIAL', 'TRANSPORT_INFRASTRUCTURE']；证据角色：PRIMARY_EVIDENCE；优先级：NORMAL。铁路官方（重验全绿）；C8-4D1 修正缺陷 feed_url：http:// 实测 301（不安全且非规范），改为经验证的 https://nrc.gov.ng/feed/（200 application/rss+xml，1 valid item 带日期）",
    "legacy_payload": {
     "collection_method": "rss",
-    "feed_url": "http://nrc.gov.ng/feed/",
+    "feed_url": "https://nrc.gov.ng/feed/",
     "country": "尼日利亚"
    },
    "listing_urls": [],
@@ -7109,10 +7109,10 @@
    "tested": true,
    "claim_origin_type": "original_reporting",
    "url": "https://beninwebtv.com/",
-   "notes": "C8-4C4 WAVE 2 严格重验通过（生产证书校验；ACCESS/TLS/DISCOVERY/ARTICLE_URL/DATE/FULL_BODY/COUNTRY_SCOPE/PUBLISHER_IDENTITY 全绿）。角色：['NATIONAL_NEWS']；证据角色：CORROBORATION；优先级：NORMAL。主流媒体（重验全绿）",
+   "notes": "C8-4C4 WAVE 2 严格重验通过（生产证书校验；ACCESS/TLS/DISCOVERY/ARTICLE_URL/DATE/FULL_BODY/COUNTRY_SCOPE/PUBLISHER_IDENTITY 全绿）。角色：['NATIONAL_NEWS']；证据角色：CORROBORATION；优先级：NORMAL。主流媒体（重验全绿）；C8-4D1 修正缺陷 feed_url：原相对路径 /feed.xml 实测 HTTP 404，改用经验证的 https://beninwebtv.com/feed/（200 application/rss+xml，50 items/全部带日期）",
    "legacy_payload": {
     "collection_method": "rss",
-    "feed_url": "/feed.xml",
+    "feed_url": "https://beninwebtv.com/feed/",
     "country": "贝宁"
    },
    "listing_urls": [],

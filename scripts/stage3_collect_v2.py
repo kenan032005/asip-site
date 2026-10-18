@@ -35,6 +35,7 @@ from framework import (  # noqa: E402
     STATE, TERMINAL_STATES, RETRYABLE_STATES,
     MAX_FETCH_ATTEMPTS, MAX_EXTRACTION_ATTEMPTS,
     _http_is_retryable, _http_is_terminal, CACHE_DIR,
+    reset_run_caches as reset_request_caches,
 )
 from registry import SourceRegistry, ArticleDiscoverer  # noqa: E402
 from country_runner import CLASSIFIER_VERSION as _CLASSIFIER_VERSION
@@ -983,14 +984,57 @@ def write_stats(per_source, run_id, configured_sources=0, article_stats=None,
     except Exception:
         totals["gdelt_rate_limiter"] = None
     # C8-3 STEP 4：显式核算"非丢弃"的跳过，并给出真未计入数（应恒为 0）
-    # C8-4C3：相位遥测（内部指标，不影响公开 UI）
+    # C8-4C3/C8-4D1：相位遥测（内部指标，不影响公开 UI）。
+    # 上游字段不可用时上报 UNKNOWN —— 绝不臆造 0（0 会掩盖"本相位根本没执行"）。
     try:
-        for _p in range(5):
-            totals["PHASE%d_EXECUTIONS" % _p] = phase_stats[_p]["executions"]
-            totals["PHASE%d_SKIPPED_WALL_CLOCK" % _p] = phase_stats[_p]["skipped"]
-            totals["PHASE%d_ELAPSED_SECONDS" % _p] = round(phase_stats[_p]["elapsed"], 1)
+        _phases = phase_stats
     except NameError:
-        pass
+        _phases = None
+    totals["PHASE_TELEMETRY_AVAILABLE"] = _phases is not None
+    for _p in range(5):
+        if _phases is None:
+            totals["PHASE%d_EXECUTIONS" % _p] = "UNKNOWN"
+            totals["PHASE%d_SKIPPED_WALL_CLOCK" % _p] = "UNKNOWN"
+            totals["PHASE%d_ELAPSED_SECONDS" % _p] = "UNKNOWN"
+        else:
+            totals["PHASE%d_EXECUTIONS" % _p] = _phases[_p]["executions"]
+            totals["PHASE%d_SKIPPED_WALL_CLOCK" % _p] = _phases[_p]["skipped"]
+            totals["PHASE%d_ELAPSED_SECONDS" % _p] = round(_phases[_p]["elapsed"], 1)
+    # C8-4D1 §4：采集指标命名拆分。
+    # 旧名（attempted_sources/successful_sources）语义**保持不变**（attempted_sources 一直是
+    # "执行行数 = 枚举行数"，含 skipped_wall_clock），新增精确字段供新消费者使用；
+    # 迁移别名显式声明，避免下游误把"枚举行"当成"真实尝试/真实请求"。
+    _skipped_wc = sum(1 for s in per_source if s.get("status") == "skipped_wall_clock")
+    _enumerated = len(per_source)
+    totals["execution_rows_configured"] = configured_sources
+    totals["execution_rows_enumerated"] = _enumerated
+    totals["execution_rows_skipped_wall_clock"] = _skipped_wc
+    totals["execution_rows_actually_attempted"] = max(0, _enumerated - _skipped_wc)
+    totals["successful_source_executions"] = totals["successful_sources"]
+    totals["metrics_alias"] = {
+        "sources_attempted": "execution_rows_enumerated",
+        "sources_succeeded": "successful_source_executions",
+        "note": "attempted_sources 历史上即枚举行数（含墙钟跳过），非真实网络请求数",
+    }
+    # C8-4D1 §8：真实物理请求与共享复用计数（缺失即 None，不臆造）
+    try:
+        from framework import get_request_stats as _req_stats
+        _rs = _req_stats()
+        totals["physical_network_requests"] = _rs.get("physical_network_requests")
+        totals["shared_feed_reuse"] = {
+            "enabled": _rs.get("enabled"),
+            "cache_hits": _rs.get("cache_hits"),
+            "cache_misses": _rs.get("cache_misses"),
+            "cache_entries": _rs.get("cache_entries"),
+            "cache_bytes": _rs.get("cache_bytes"),
+            "reused_requests": _rs.get("reused_requests"),
+            "evictions": _rs.get("evictions"),
+            "bypass_flag_disabled": _rs.get("bypass_flag_disabled"),
+            "bypass_not_allowlisted": _rs.get("bypass_not_allowlisted"),
+        }
+    except Exception as _e:  # noqa: BLE001
+        totals["physical_network_requests"] = None
+        totals["shared_feed_reuse"] = {"error": str(_e)[:120]}
     totals["OTHER_SOURCE_ITEMS_SKIPPED"] = _osa
     totals["ACCOUNTED_ITEMS"] = _acct
     totals["TRUE_UNACCOUNTED_DROP"] = max(0, _tot - _acct - _osa)
@@ -1217,6 +1261,11 @@ def main():
     # C8-3：每轮清空跨国家管线的发现/抽取缓存
     _reset_discover_cache()
     _reset_extract_cache()
+    # C8-4D1：共享请求复用缓存与计数器同样按轮隔离（绝不跨轮复用响应）
+    try:
+        reset_request_caches()
+    except Exception as _e:  # noqa: BLE001
+        print("  ! shared request cache reset failed: %s" % _e)
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--country", default=None,

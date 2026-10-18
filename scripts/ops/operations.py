@@ -60,6 +60,33 @@ def save_ops(run, previous=None):
                 r.get("reports_low_data"), r.get("reports_hold")),
             "- build=%s deploy=%s" % (r.get("build_status"), r.get("deploy_status")),
             "- tokens: %s" % json.dumps(r.get("token_usage"), ensure_ascii=False),
+        ]
+        # C8-4D1：执行行 / 物理请求 / 相位遥测 / 共享复用（缺失显示 UNKNOWN）
+        if "execution_rows_enumerated" in r:
+            lines.append(
+                "- execution_rows: configured=%s enumerated=%s skipped_wall_clock=%s "
+                "attempted=%s physical_http=%s" % (
+                    r.get("execution_rows_configured", "UNKNOWN"),
+                    r.get("execution_rows_enumerated", "UNKNOWN"),
+                    r.get("execution_rows_skipped_wall_clock", "UNKNOWN"),
+                    r.get("execution_rows_actually_attempted", "UNKNOWN"),
+                    r.get("physical_network_requests", "UNKNOWN")))
+        if "PHASE0_EXECUTIONS" in r:
+            _ph = []
+            for _p in range(5):
+                _ph.append("P%d=%s/%s/%ss" % (
+                    _p, r.get("PHASE%d_EXECUTIONS" % _p, "UNKNOWN"),
+                    r.get("PHASE%d_SKIPPED_WALL_CLOCK" % _p, "UNKNOWN"),
+                    r.get("PHASE%d_ELAPSED_SECONDS" % _p, "UNKNOWN")))
+            lines.append("- phases(exec/skip_wc/elapsed): %s" % " ".join(_ph))
+        _sfr = r.get("shared_feed_reuse")
+        if isinstance(_sfr, dict):
+            lines.append(
+                "- shared_feed_reuse: enabled=%s hits=%s misses=%s bytes=%s reused=%s" % (
+                    _sfr.get("enabled"), _sfr.get("cache_hits"),
+                    _sfr.get("cache_misses"), _sfr.get("cache_bytes"),
+                    _sfr.get("reused_requests")))
+        lines += [
             "",
         ]
     (OPS_DIR / "operations_summary.md").write_text("\n".join(lines), encoding="utf-8")
