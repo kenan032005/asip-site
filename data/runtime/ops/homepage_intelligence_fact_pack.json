@@ -1,16 +1,16 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-19T01:08:38+08:00",
+ "generated_at": "2026-10-19T01:49:07+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
   "signals_24h": 46,
-  "signals_7d": 248,
+  "signals_7d": 246,
   "verified_events_24h": 46,
-  "verified_events_7d": 258,
-  "multi_source_verified_events_7d": 5,
+  "verified_events_7d": 256,
+  "multi_source_verified_events_7d": 4,
   "countries_with_activity_24h": 10,
   "total_countries_monitored": 22
  },
@@ -67,7 +67,7 @@
   },
   {
    "value": "乍得",
-   "count": 42
+   "count": 40
   },
   {
    "value": "刚果（金）",
@@ -147,7 +147,7 @@
  "source_tier_distribution_7d": [
   {
    "value": "C",
-   "count": 232
+   "count": 228
   },
   {
    "value": "B",
@@ -171,36 +171,6 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-11 18:54",
-   "importance": "high",
-   "severity": "medium"
-  },
-  {
-   "fact_id": "EVT_5cfec312c6107709",
-   "level": "verified_event",
-   "evidence_tier": "multi_source_verified",
-   "source_count": 3,
-   "country": "乍得",
-   "title": "乍得谴责胡塞武装袭击沙特并声援利雅得",
-   "category": "other_security",
-   "source": "Tchadinfos",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-11 17:15",
-   "importance": "high",
-   "severity": "medium"
-  },
-  {
-   "fact_id": "EVT_0f43ecc363ce77ca",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得Dangleat-Est地区首领呼吁农牧民维护和平",
-   "category": "natural_disaster",
-   "source": "Tchadinfos",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-11 17:09",
    "importance": "high",
    "severity": "medium"
   },
@@ -246,6 +216,36 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-11 21:06",
+   "importance": "high",
+   "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_d1751f165ed8b239",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "乍得就中非共和国边境武装入侵事件正式提出抗议",
+   "category": "border_security",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-11 18:38",
+   "importance": "high",
+   "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_fd8a1d68d6a6a4d1",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "中非共和国",
+   "title": "中非共和国民间组织呼吁班吉举行“死城日”抗议燃油涨价",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-12 02:56",
    "importance": "high",
    "severity": "medium"
   }
@@ -687,10 +687,16 @@
   }
  ],
  "existing_assessment": {
-  "status": "deterministic",
-  "based_on": "过去24小时/7日公开信息（确定性汇总）"
+  "status": "ai",
+  "overall_assessment": "已核实事件方面，乍得与中非共和国边境紧张升级：乍得就中非军队进入萨拉马特地区召见班吉大使并提出严正警告，另有约1300名武装分子策划进攻的通报（单源）。埃塞俄比亚联邦部队进入提格雷并恢复默克莱航班；刚果（金）前总统卡比拉被任命为新反叛联盟领导人；南苏丹湖泊州伦贝克族群冲突后实施宵禁并获UNMISS增援；马里塞古空袭致平民死亡。情报信号均为单源、尚待核实：加纳非法采金矿井坍塌致两人死亡、莫桑比克昌加拉交通事故死亡升至14人、加纳拆除疑似犯罪窝点及遣返相关案件。7日统计显示尼日利亚、加纳、乍得为信息活跃前三，其他安全类占比最高。",
+  "risk_direction": "worsening",
+  "confidence": "medium",
+  "generated_time": "2026-10-19T01:48:58+08:00",
+  "based_on": "过去24小时/7日公开信息",
+  "model": "",
+  "date": "20261019"
  },
- "fact_count": 506,
+ "fact_count": 502,
  "facts": {
   "news:8b4b594584f32a2f": {
    "fact_id": "news:8b4b594584f32a2f",
@@ -4382,36 +4388,6 @@
    "importance": "low",
    "why_it_matters": ""
   },
-  "news:f16816645a0ab910": {
-   "fact_id": "news:f16816645a0ab910",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 3,
-   "country": "乍得",
-   "title": "乍得谴责胡塞武装袭击沙特并声援利雅得",
-   "category": "other_security",
-   "source": "Tchadinfos",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-12 01:15",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:3cd85f8cbe26df35": {
-   "fact_id": "news:3cd85f8cbe26df35",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得Dangleat-Est地区首领呼吁农牧民维护和平",
-   "category": "natural_disaster",
-   "source": "Tchadinfos",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-12 01:09",
-   "importance": "low",
-   "why_it_matters": ""
-  },
   "EVT_e58cc4c9dee2a852": {
    "fact_id": "EVT_e58cc4c9dee2a852",
    "level": "verified_event",
@@ -4424,36 +4400,6 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-11 18:54",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_5cfec312c6107709": {
-   "fact_id": "EVT_5cfec312c6107709",
-   "level": "verified_event",
-   "evidence_tier": "multi_source_verified",
-   "source_count": 3,
-   "country": "乍得",
-   "title": "乍得谴责胡塞武装袭击沙特并声援利雅得",
-   "category": "other_security",
-   "source": "Tchadinfos",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-11 17:15",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_0f43ecc363ce77ca": {
-   "fact_id": "EVT_0f43ecc363ce77ca",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得Dangleat-Est地区首领呼吁农牧民维护和平",
-   "category": "natural_disaster",
-   "source": "Tchadinfos",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-11 17:09",
    "importance": "high",
    "severity": "medium"
   },
