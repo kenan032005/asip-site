@@ -39,9 +39,9 @@ CACHE_MISSES=5
 CACHE_BYTES=162729
 CACHE_TTL_SECONDS=600
 
-P0_SKIPS=PENDING               (默认关闭周期尚未到达：首个新 pin 周期 = 2026-10-18T19:05Z)
-P1_SKIPS=PENDING
-LANE_A_SKIPS=PENDING
+P0_SKIPS=0                     (首个新 pin 周期 run 39157137491：PHASE0 skipped=0/exec=12)
+P1_SKIPS=0                     (PHASE1 skipped=0/exec=16)
+LANE_A_SKIPS=0                 (PHASE2 skipped=0/exec=123)
 
 GEO_EQUIVALENCE=PASS
 ARTICLE_EQUIVALENCE=PASS
@@ -55,7 +55,7 @@ ROLLBACK_TESTED=PASS           (flag=0 时行为等价于 C8-4C4；默认关闭�
 
 GATE_A_FIX=PASS
 PHASE_TELEMETRY=PASS
-DEFAULT_OFF_RUN=PENDING
+DEFAULT_OFF_RUN=PASS           (run 39157137491 @2026-10-18T19:07:57Z, pin e0628ac9)
 
 CANARY_ALLOWLIST=intl_rfi_afrique_chad,intl_rfi_afrique_niger,pan_rfi_afrique
 CANARY_ALLOWLIST_VERIFIED=YES  (三 ID 均存在于 e0628ac9 注册表；feed 同为 https://www.rfi.fr/fr/afrique/rss；请求身份一致 89568512c1683f6a)
@@ -387,11 +387,16 @@ ASIP_SHARED_FEED_REUSE_SOURCES=intl_rfi_afrique_chad,intl_rfi_afrique_niger,pan_
 
 观测取数位置（production-state 分支，无需登录 Actions 日志）：
 
-- `data/runtime/ops/operations_status.json` → 每轮 run 记录（新字段已随 `e0628ac9` 落盘）：
-  `execution_rows_*`、`physical_network_requests`、`PHASE0..4_*`、`PHASE_TELEMETRY_AVAILABLE`、
-  `PHASE_SKIP_RECONCILED`、`shared_feed_reuse{cache_hits,cache_misses,cache_expired,reused_requests}`
-- `data/runtime/ops/collection_summary.json` → 同一组指标
-- `data/runtime/ops/operations_summary.md` → 人类可读的 `execution_rows:` / `phases(...)` 行
+- **主取数口**：`data/runtime/ops/collection_summary.json`（每轮覆写 + 随 production-state 提交，
+  历史可回溯）→ 含 `execution_rows_*`、`physical_network_requests`、`successful_source_executions`、
+  `PHASE0..4_{EXECUTIONS,SKIPPED_WALL_CLOCK,ELAPSED_SECONDS}`、`PHASE_TELEMETRY_AVAILABLE`、
+  `shared_feed_reuse{cache_hits,cache_misses,cache_expired,ttl_seconds,reused_requests}`
+- **逐源明细**：`data/runtime/ops/collection_source_stats.json`（含 `PHASE{p}_ENUMERATED/_ATTEMPTED`、
+  `PHASE_SKIP_RECONCILED`、`PHASE_UNENUMERATED_KEYS`、`TRUE_UNACCOUNTED_DROP`、per_source 数组）
+- **注意（已核实并纠正）**：`operations_status.json` 的每轮记录**仍只有旧字段**。原因：编排器以
+  subprocess 调 `collection_run.py`（拿不到父进程 ops_run 对象），父进程只从 summary 里拷贝固定
+  字段清单。要让 ops 账本也带新指标，需在 `schedule_orchestrator.py` 的 collection 分支补一次
+  key 拷贝（需新 pin）。本轮判定**不依赖**该路径——summary/stats 两个产物已提供同等级证据。
 
 判定阈值（任一触发即回滚 `ASIP_SHARED_FEED_REUSE=0`）：
 P0/P1 保证键被墙钟跳过 > 0；Lane A material starvation > 0；缓存身份碰撞或错误复用；
@@ -415,3 +420,50 @@ ASIP_SHARED_FEED_REUSE=0 python scripts/ops/c8_4d1_measure.py --out /tmp/c8_4d1.
 ```
 
 （`c8_4d1_measure.py` 内部已自行切换 flag 做 OLD/NEW 两轮，并输出 `savings` 与 `url_set_diffs`。）
+
+---
+
+## 10. STEP 3 实测结果（默认关闭周期，首个新 pin 运行）
+
+运行：`run_id=39157137491`，`trigger=external_scheduler`，`2026-10-18T19:07:57Z` 起，`20:00:20Z` 完成，
+`head_sha=c2c48d12`（workflow），代码 checkout `ref=e0628ac9`，采集器 run_id `20261018T190757+0800_y65ptw`。
+
+| 指标 | 实测值 |
+|---|---|
+| execution_rows_configured / enumerated | 888 / 888 |
+| execution_rows_skipped_wall_clock | 584 |
+| execution_rows_actually_attempted | 304 |
+| successful_source_executions | 234 |
+| physical_network_requests | **873**（仅 `framework.fetch_page` 口径） |
+| PHASE_TELEMETRY_AVAILABLE | **true** |
+| PHASE_TELEMETRY_BASIS | `measured_source_country_rows` |
+| PHASE_ELAPSED_BASIS | `measured_row_durations` |
+| PHASE_SKIP_RECONCILED | **true**（584 == wall_clock.sources_skipped 584） |
+| PHASE_UNENUMERATED_KEYS | 0 |
+| PHASE0（P0 尼日尔） | exec 12 / skipped **0** / 300.3s |
+| PHASE1（P1 保证核心） | exec 16 / skipped **0** / 366.1s |
+| PHASE2（Lane A） | exec 123 / skipped **0** / 694.3s |
+| PHASE3（普通国家/本地） | exec 153 / skipped 584 / 472.8s |
+| PHASE4（展开 pan/global） | exec 0 / skipped 0 / 0s |
+| 相位自洽 | enumerated 888 = 12+16+123+737+0；attempted 304 = 12+16+123+153 |
+| shared_feed_reuse | `enabled=false, cache_hits=0, cache_misses=0, cache_expired=0` |
+| TRUE_UNACCOUNTED_DROP | **0**（ACCOUNTED 1535 + OTHER_SKIPPED 6495） |
+| 文章 | discovered 3254 / published 8 / quarantined 134 |
+
+结论：`DEFAULT_OFF_RUN = PASS`；P0 / P1 / Lane A 墙钟跳过均为 0；缓存命中为 0（符合"关闭时不应命中"）；
+15 个 PHASE 字段全部为数值且与 `per_source` 墙钟跳过严格对账；无静默丢弃。
+
+`physical_network_requests=873` 与 `attempted=304` 不等属预期：前者按每次 `urlopen`（含正文抓取与重试）计数，
+后者是 source-country 执行行；且 GDELT 采集器（70 源）走独立 HTTP 客户端，不计入此口径。
+
+### 10.1 待执行（STEP 4/5）
+
+canary 开启只差仓库变量（本机无 GitHub API 凭据，无法代设）：
+
+```text
+ASIP_SHARED_FEED_REUSE=1
+ASIP_SHARED_FEED_REUSE_SOURCES=intl_rfi_afrique_chad,intl_rfi_afrique_niger,pan_rfi_afrique
+```
+
+设置后需观察两个自然 collection-due 周期（间隔 ≥2h45m）。当前末次成功采集 `19:56:31Z`，
+首个可命中周期约 `23:05Z`，第二个约 `02:00Z(+1d)`。
