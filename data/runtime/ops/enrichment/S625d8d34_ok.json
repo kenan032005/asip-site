@@ -1,0 +1,127 @@
+{
+ "label": "S625d8d34",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c2c61990efa6afe67f53a7f9cf457977cf8334ac1b1e99dccf3be0d2917e70f2",
+ "tokens": {
+  "input_tokens": 2939,
+  "output_tokens": 596,
+  "total_tokens": 3535
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）埃博拉：一非政府组织呼吁澄清捐助方资金管理",
+   "summary_zh": "非洲疾控中心主任让·卡塞亚表示，捐助方宣布为抗击埃博拉拨付的9.62亿美元中，刚果（金）仅能追溯约2亿美元的管理去向。泛非反腐败网络（Unis）主席吉米·坎德呼吁对资金管理进行严肃澄清，但同时指出资金追溯不足并不必然意味着被挪用。刚果（金）已宣布第17次埃博拉疫情，全国累计确诊9415例，其中4536例死亡。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": "金沙萨",
+    "site": null,
+    "raw_text": "Kinshasa / RDC"
+   },
+   "key_facts": [
+    {
+     "fact": "非洲疾控中心主任称，捐助方宣布拨付的9.62亿美元与刚果（金）可追溯的约2亿美元之间存在差额",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il y a une différence entre les 962 millions de dollars annoncés comme décaissés par des bailleurs pour la lutte contre Ebola et les quelques 200 millions dont la gestion a pu être retracée en RDC"
+    },
+    {
+     "fact": "泛非反腐败网络主席呼吁对资金管理进行严肃澄清",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces révélations sont préoccupantes et appellent à des clarifications sérieuses"
+    },
+    {
+     "fact": "该非政府组织表示，资金追溯不足并不必然意味着资金被挪用",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des fonds insuffisamment retracés ne sont pas nécessairement des fonds détournés"
+    },
+    {
+     "fact": "刚果（金）全国累计确诊埃博拉病例9415例，其中4536例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le nombre total de cas confirmés est désormais de 9 415, dont 4 536 décès"
+    },
+    {
+     "fact": "刚果（金）已宣布第17次埃博拉疫情，西北部北乌班吉省新增两例确诊病例，其中一例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Mi-mai, la RDC a déclaré la 17e épidémie de son histoire... une huitième province est désormais touchée par Ebola, le Nord-Ubangi"
+    }
+   ],
+   "uncertainties": [
+    "约7亿美元资金去向尚未查明，是否被挪用尚未证实",
+    "相关指控仅为非政府组织及非洲疾控中心官员的表态，尚缺乏独立调查结论",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）埃博拉：一非政府组织呼吁澄清捐助方资金管理",
+   "summary_zh": "非洲疾控中心主任让·卡塞亚表示，捐助方宣布为抗击埃博拉拨付的9.62亿美元中，刚果（金）仅能追溯约2亿美元的管理去向。泛非反腐败网络（Unis）主席吉米·坎德呼吁对资金管理进行严肃澄清，但同时指出资金追溯不足并不必然意味着被挪用。刚果（金）已宣布第17次埃博拉疫情，全国累计确诊9415例，其中4536例死亡。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": "金沙萨",
+    "site": null,
+    "raw_text": "Kinshasa / RDC"
+   },
+   "key_facts": [
+    {
+     "fact": "非洲疾控中心主任称，捐助方宣布拨付的9.62亿美元与刚果（金）可追溯的约2亿美元之间存在差额",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il y a une différence entre les 962 millions de dollars annoncés comme décaissés par des bailleurs pour la lutte contre Ebola et les quelques 200 millions dont la gestion a pu être retracée en RDC"
+    },
+    {
+     "fact": "泛非反腐败网络主席呼吁对资金管理进行严肃澄清",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces révélations sont préoccupantes et appellent à des clarifications sérieuses"
+    },
+    {
+     "fact": "该非政府组织表示，资金追溯不足并不必然意味着资金被挪用",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des fonds insuffisamment retracés ne sont pas nécessairement des fonds détournés"
+    },
+    {
+     "fact": "刚果（金）全国累计确诊埃博拉病例9415例，其中4536例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le nombre total de cas confirmés est désormais de 9 415, dont 4 536 décès"
+    },
+    {
+     "fact": "刚果（金）已宣布第17次埃博拉疫情，西北部北乌班吉省新增两例确诊病例，其中一例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Mi-mai, la RDC a déclaré la 17e épidémie de son histoire... une huitième province est désormais touchée par Ebola, le Nord-Ubangi"
+    }
+   ],
+   "uncertainties": [
+    "约7亿美元资金去向尚未查明，是否被挪用尚未证实",
+    "相关指控仅为非政府组织及非洲疾控中心官员的表态，尚缺乏独立调查结论",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_43a84400625d8d34",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

@@ -1,0 +1,127 @@
+{
+ "label": "S706ef3fc",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "637149d28aac5358fab3d87007bbad60d29a42111788e0793197c358245a1e0d",
+ "tokens": {
+  "input_tokens": 2337,
+  "output_tokens": 484,
+  "total_tokens": 2821
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁查获假冒药品，一对夫妇被捕",
+   "summary_zh": "贝宁朱古市警方于2026年10月16日开展联合行动，在基利尔区一处疑似用作假冒保健品物流据点的住所查获243.4公斤假冒药品。警方当场逮捕一对据称负责经营的夫妇并予以拘留。警方表示正追查一名在逃的第三名同伙，调查在检察院监督下继续进行。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "朱古",
+    "site": "基利尔区一处住所",
+    "raw_text": "Djougou, quartier Kilir"
+   },
+   "key_facts": [
+    {
+     "fact": "贝宁朱古市警方查获243.4公斤假冒药品",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "243,4 kilogrammes de marchandises illicites définitivement retirés du circuit"
+    },
+    {
+     "fact": "警方在基利尔区一处疑似物流据点住所开展联合行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ont mené une opération conjointe au quartier Kilir, dans un domicile suspecté de servir de base logistique"
+    },
+    {
+     "fact": "一对据称负责经营的夫妇被逮捕并拘留",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les enquêteurs ont procédé à l’interpellation d’un couple de gérants présumés. Les deux individus sont placés en garde à vue"
+    },
+    {
+     "fact": "警方正追查一名在逃的第三名同伙",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "pour localiser et appréhender un troisième complice, actuellement en cavale"
+    },
+    {
+     "fact": "行动时间为2026年10月16日星期五",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le vendredi 16 octobre 2026 à Djougou"
+    }
+   ],
+   "uncertainties": [
+    "涉案夫妇被指为经营者，属警方表述，尚未经司法确认",
+    "第三名同伙仍在逃，尚未归案",
+    "目前仅单一来源（La Nouvelle Tribune）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁查获假冒药品，一对夫妇被捕",
+   "summary_zh": "贝宁朱古市警方于2026年10月16日开展联合行动，在基利尔区一处疑似用作假冒保健品物流据点的住所查获243.4公斤假冒药品。警方当场逮捕一对据称负责经营的夫妇并予以拘留。警方表示正追查一名在逃的第三名同伙，调查在检察院监督下继续进行。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "朱古",
+    "site": "基利尔区一处住所",
+    "raw_text": "Djougou, quartier Kilir"
+   },
+   "key_facts": [
+    {
+     "fact": "贝宁朱古市警方查获243.4公斤假冒药品",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "243,4 kilogrammes de marchandises illicites définitivement retirés du circuit"
+    },
+    {
+     "fact": "警方在基利尔区一处疑似物流据点住所开展联合行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ont mené une opération conjointe au quartier Kilir, dans un domicile suspecté de servir de base logistique"
+    },
+    {
+     "fact": "一对据称负责经营的夫妇被逮捕并拘留",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les enquêteurs ont procédé à l’interpellation d’un couple de gérants présumés. Les deux individus sont placés en garde à vue"
+    },
+    {
+     "fact": "警方正追查一名在逃的第三名同伙",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "pour localiser et appréhender un troisième complice, actuellement en cavale"
+    },
+    {
+     "fact": "行动时间为2026年10月16日星期五",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le vendredi 16 octobre 2026 à Djougou"
+    }
+   ],
+   "uncertainties": [
+    "涉案夫妇被指为经营者，属警方表述，尚未经司法确认",
+    "第三名同伙仍在逃，尚未归案",
+    "目前仅单一来源（La Nouvelle Tribune）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_39d798ea706ef3fc",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
