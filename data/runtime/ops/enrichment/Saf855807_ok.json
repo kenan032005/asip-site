@@ -1,0 +1,115 @@
+{
+ "label": "Saf855807",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "87d46769b4441130cf090f2f20bbe459e66530b62b6de6e45ac9238cee176116",
+ "tokens": {
+  "input_tokens": 2082,
+  "output_tokens": 486,
+  "total_tokens": 2568
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "30亿奈拉电力线路：废品商要求祖卢姆提供电缆被盗证据",
+   "summary_zh": "尼日利亚全国废品与废物经销商雇主协会要求博尔诺州州长巴巴加纳·祖卢姆就其指控提供证据。祖卢姆此前声称，废金属拾荒者盗走了为一条价值30亿奈拉的配电线路采购的全部电缆。该协会质疑所称盗窃的相关情况以及将废品商与该事件关联起来的证据。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "博尔诺州",
+    "city": "迈杜古里",
+    "site": null,
+    "raw_text": "Borno State; Maiduguri; Damaturu, Yobe State"
+   },
+   "key_facts": [
+    {
+     "fact": "废品经销商协会要求博尔诺州州长祖卢姆就其电缆被盗指控提供证据",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The National Association of Scrap and Waste Dealers Employers of Nigeria has challenged Borno State Governor, Babagana Zulum, to provide evidence for his allegation that scrap metal scavengers stole electrical cables"
+    },
+    {
+     "fact": "祖卢姆声称拾荒者盗走了为一条价值30亿奈拉的配电线路采购的全部电缆",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Zulum said metal scavengers looted all the wires purchased for a N3bn electricity distribution line linking Damaturu, Yobe State, to Maiduguri"
+    },
+    {
+     "fact": "该协会质疑所称盗窃的相关情况以及将废品商与该事件关联起来的证据",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "questioning the circumstances surrounding the alleged theft and the evidence linking scrap dealers to the incident"
+    },
+    {
+     "fact": "祖卢姆称该事件及其他安全关切促使州政府决定在博尔诺州禁止废金属交易",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He said the incident, alongside other security concerns, informed the state government’s decision to ban the scrap metal trade in Borno State"
+    }
+   ],
+   "uncertainties": [
+    "电缆被盗指控尚未证实，废品经销商要求提供证据",
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "30亿奈拉电力线路：废品商要求祖卢姆提供电缆被盗证据",
+   "summary_zh": "尼日利亚全国废品与废物经销商雇主协会要求博尔诺州州长巴巴加纳·祖卢姆就其指控提供证据。祖卢姆此前声称，废金属拾荒者盗走了为一条价值30亿奈拉的配电线路采购的全部电缆。该协会质疑所称盗窃的相关情况以及将废品商与该事件关联起来的证据。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "博尔诺州",
+    "city": "迈杜古里",
+    "site": null,
+    "raw_text": "Borno State; Maiduguri; Damaturu, Yobe State"
+   },
+   "key_facts": [
+    {
+     "fact": "废品经销商协会要求博尔诺州州长祖卢姆就其电缆被盗指控提供证据",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The National Association of Scrap and Waste Dealers Employers of Nigeria has challenged Borno State Governor, Babagana Zulum, to provide evidence for his allegation that scrap metal scavengers stole electrical cables"
+    },
+    {
+     "fact": "祖卢姆声称拾荒者盗走了为一条价值30亿奈拉的配电线路采购的全部电缆",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Zulum said metal scavengers looted all the wires purchased for a N3bn electricity distribution line linking Damaturu, Yobe State, to Maiduguri"
+    },
+    {
+     "fact": "该协会质疑所称盗窃的相关情况以及将废品商与该事件关联起来的证据",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "questioning the circumstances surrounding the alleged theft and the evidence linking scrap dealers to the incident"
+    },
+    {
+     "fact": "祖卢姆称该事件及其他安全关切促使州政府决定在博尔诺州禁止废金属交易",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He said the incident, alongside other security concerns, informed the state government’s decision to ban the scrap metal trade in Borno State"
+    }
+   ],
+   "uncertainties": [
+    "电缆被盗指控尚未证实，废品经销商要求提供证据",
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_b63c3aa8af855807",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

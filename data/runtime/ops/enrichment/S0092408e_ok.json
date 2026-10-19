@@ -1,0 +1,138 @@
+{
+ "label": "S0092408e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b17a5657e4f6539889e99a991436625016a427bbeb97eb374c13b2813ca96e78",
+ "tokens": {
+  "input_tokens": 2321,
+  "output_tokens": 517,
+  "total_tokens": 2838
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"袭击者身份尚未确认，团结州方面称仍在调查\", \"鲁旺官员关于追击过程中伤亡的说法不明确\", \"事件目前仅有一个来源（Radio Tamazuj）报道，尚缺乏交叉验证\"]",
+    "after": "[\"袭击者身份尚未确认，团结州方面称仍在调查\", \"鲁旺官员关于追击过程中伤亡的说法不明确\", \"事件目前仅有一个来源（Radio Tamazuj）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹鲁旺行政区遭袭，至少九死六伤",
+   "summary_zh": "南苏丹鲁旺行政区两处地点遭武装袭击，至少9人死亡、6人受伤，另有数百头牛被抢。鲁旺看守政府指责邻州团结州武装青年所为，但团结州方面表示仍在调查，尚未确认袭击者身份。事件为单一来源报道。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "鲁旺行政区",
+    "city": null,
+    "site": "Bhal Payam（湖泊-诺县）与Pochod Boma（阿利尼县阿利朗Payam）",
+    "raw_text": "Bhal Payam in Lake-No County and Pochod Boma in Alilang Payam, Aliny County, Ruweng Administrative Area"
+   },
+   "key_facts": [
+    {
+     "fact": "鲁旺行政区两处地点遭袭，至少9人死亡、6人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least nine people have been killed and six wounded in attacks on two locations in South Sudan’s Ruweng Administrative Area"
+    },
+    {
+     "fact": "袭击发生于周日10月18日晚约11时",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The attacks took place at about 11 p.m. on Sunday, October 18"
+    },
+    {
+     "fact": "鲁旺看守政府信息部长称共501头牛被抢、5座牛棚被毁、15间房屋被烧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "501 head of cattle were raided, five cattle byres were destroyed and 15 huts were burned"
+    },
+    {
+     "fact": "鲁旺方面指责团结州Bul与Leek社区的武装青年发动袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Tony blamed armed youth from the Bul and Leek communities of Unity State for the attacks"
+    },
+    {
+     "fact": "团结州看守政府信息部长称当局仍在调查，尚未确认袭击者身份",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "authorities are still investigating the incident and had not established the identities of those responsible"
+    }
+   ],
+   "uncertainties": [
+    "袭击者身份尚未确认，团结州方面称仍在调查",
+    "鲁旺官员关于追击过程中伤亡的说法不明确",
+    "事件目前仅有一个来源（Radio Tamazuj）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹鲁旺行政区遭袭，至少九死六伤",
+   "summary_zh": "南苏丹鲁旺行政区两处地点遭武装袭击，至少9人死亡、6人受伤，另有数百头牛被抢。鲁旺看守政府指责邻州团结州武装青年所为，但团结州方面表示仍在调查，尚未确认袭击者身份。事件为单一来源报道。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "鲁旺行政区",
+    "city": null,
+    "site": "Bhal Payam（湖泊-诺县）与Pochod Boma（阿利尼县阿利朗Payam）",
+    "raw_text": "Bhal Payam in Lake-No County and Pochod Boma in Alilang Payam, Aliny County, Ruweng Administrative Area"
+   },
+   "key_facts": [
+    {
+     "fact": "鲁旺行政区两处地点遭袭，至少9人死亡、6人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least nine people have been killed and six wounded in attacks on two locations in South Sudan’s Ruweng Administrative Area"
+    },
+    {
+     "fact": "袭击发生于周日10月18日晚约11时",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The attacks took place at about 11 p.m. on Sunday, October 18"
+    },
+    {
+     "fact": "鲁旺看守政府信息部长称共501头牛被抢、5座牛棚被毁、15间房屋被烧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "501 head of cattle were raided, five cattle byres were destroyed and 15 huts were burned"
+    },
+    {
+     "fact": "鲁旺方面指责团结州Bul与Leek社区的武装青年发动袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Tony blamed armed youth from the Bul and Leek communities of Unity State for the attacks"
+    },
+    {
+     "fact": "团结州看守政府信息部长称当局仍在调查，尚未确认袭击者身份",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "authorities are still investigating the incident and had not established the identities of those responsible"
+    }
+   ],
+   "uncertainties": [
+    "袭击者身份尚未确认，团结州方面称仍在调查",
+    "鲁旺官员关于追击过程中伤亡的说法不明确",
+    "事件目前仅有一个来源（Radio Tamazuj）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_29644fe10092408e",
+ "disease_event_id": null,
+ "country_code": "SS"
+}
