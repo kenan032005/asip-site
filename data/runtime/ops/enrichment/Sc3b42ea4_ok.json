@@ -1,0 +1,148 @@
+{
+ "label": "Sc3b42ea4",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3dd4c98a1614d15a609ca58ea626b8fafeb36134b44b9279835e49895a06c3e0",
+ "tokens": {
+  "input_tokens": 2308,
+  "output_tokens": 594,
+  "total_tokens": 2902
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"袭击责任方为当地官员的说法，尚未获得独立证实\", \"伤亡数字为初步统计，尚未获独立核实\", \"目前仅单一来源（Radio Tamazuj）报道，缺乏交叉验证\"]",
+    "after": "[\"袭击责任方为当地官员的说法，尚未获得独立证实\", \"伤亡数字为初步统计，尚未获独立核实\", \"目前仅单一来源（Radio Tamazuj）报道，缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹就阿卜耶伊市场遭袭事件召见苏丹大使",
+   "summary_zh": "南苏丹政府表示已召见苏丹驻朱巴大使，就阿卜耶伊争议地区阿米特共同市场遭无人机袭击提出强烈抗议。当地官员将袭击归咎于苏丹武装部队，袭击造成至少73人死亡、19人受伤。阿卜耶伊信息部长称遇难者包括苏丹与南苏丹平民。该地区归属问题自2011年南苏丹独立以来一直悬而未决。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "阿卜耶伊地区",
+    "city": "阿卜耶伊镇",
+    "site": "阿米特共同市场",
+    "raw_text": "Amiet Common Market, about 10 km north of Abyei town in Ameth-Aguok County, disputed Abyei region"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹政府召见苏丹驻南苏丹大使，就阿米特市场遭袭提出强烈抗议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South Sudan’s government said it had summoned Sudan’s ambassador to protest a drone attack on Amiet Common Market in the disputed Abyei region"
+    },
+    {
+     "fact": "袭击造成至少73人死亡、19人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "that killed at least 73 people and wounded 19"
+    },
+    {
+     "fact": "当地官员将袭击归咎于苏丹武装部队",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The attack, which local officials blamed on the Sudanese Armed Forces"
+    },
+    {
+     "fact": "袭击发生于周一上午约11时30分，打击市场中部、南部及北门",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "struck the market at about 11:30 a.m. on Monday, hitting its central and southern sections and the northern gate"
+    },
+    {
+     "fact": "阿卜耶伊信息部长称遇难者包括苏丹和南苏丹平民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Abyei Information Minister Yohana Akol Ngor said the victims included Sudanese and South Sudanese civilians"
+    },
+    {
+     "fact": "恩戈克丁卡族最高酋长称约12次无人机袭击击中该市场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Bulabek Deng Kuol, paramount chief of the Ngok Dinka community, said about 12 drone strikes had hit the market"
+    }
+   ],
+   "uncertainties": [
+    "袭击责任方为当地官员的说法，尚未获得独立证实",
+    "伤亡数字为初步统计，尚未获独立核实",
+    "目前仅单一来源（Radio Tamazuj）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹就阿卜耶伊市场遭袭事件召见苏丹大使",
+   "summary_zh": "南苏丹政府表示已召见苏丹驻朱巴大使，就阿卜耶伊争议地区阿米特共同市场遭无人机袭击提出强烈抗议。当地官员将袭击归咎于苏丹武装部队，袭击造成至少73人死亡、19人受伤。阿卜耶伊信息部长称遇难者包括苏丹与南苏丹平民。该地区归属问题自2011年南苏丹独立以来一直悬而未决。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "阿卜耶伊地区",
+    "city": "阿卜耶伊镇",
+    "site": "阿米特共同市场",
+    "raw_text": "Amiet Common Market, about 10 km north of Abyei town in Ameth-Aguok County, disputed Abyei region"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹政府召见苏丹驻南苏丹大使，就阿米特市场遭袭提出强烈抗议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South Sudan’s government said it had summoned Sudan’s ambassador to protest a drone attack on Amiet Common Market in the disputed Abyei region"
+    },
+    {
+     "fact": "袭击造成至少73人死亡、19人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "that killed at least 73 people and wounded 19"
+    },
+    {
+     "fact": "当地官员将袭击归咎于苏丹武装部队",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The attack, which local officials blamed on the Sudanese Armed Forces"
+    },
+    {
+     "fact": "袭击发生于周一上午约11时30分，打击市场中部、南部及北门",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "struck the market at about 11:30 a.m. on Monday, hitting its central and southern sections and the northern gate"
+    },
+    {
+     "fact": "阿卜耶伊信息部长称遇难者包括苏丹和南苏丹平民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Abyei Information Minister Yohana Akol Ngor said the victims included Sudanese and South Sudanese civilians"
+    },
+    {
+     "fact": "恩戈克丁卡族最高酋长称约12次无人机袭击击中该市场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Bulabek Deng Kuol, paramount chief of the Ngok Dinka community, said about 12 drone strikes had hit the market"
+    }
+   ],
+   "uncertainties": [
+    "袭击责任方为当地官员的说法，尚未获得独立证实",
+    "伤亡数字为初步统计，尚未获独立核实",
+    "目前仅单一来源（Radio Tamazuj）报道，缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_fefa85e6c3b42ea4",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

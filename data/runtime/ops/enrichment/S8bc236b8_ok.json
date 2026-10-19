@@ -1,0 +1,131 @@
+{
+ "label": "S8bc236b8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ca2b393633c6593bb5421248ffefacc8be817d0e14de9fd434ac080302eaaaad",
+ "tokens": {
+  "input_tokens": 2926,
+  "output_tokens": 560,
+  "total_tokens": 3486
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "两年后埃尔维诺·迪亚斯之死仍无定论",
+   "summary_zh": "莫桑比克律师协会在首都马普托举行游行，纪念律师埃尔维诺·迪亚斯遇害两周年，并呼吁司法当局给出答案。迪亚斯曾任韦南西奥·蒙德拉内的法律顾问，两年前在不明情况下被杀害，案件至今未获澄清。律师协会负责人表示，律师不应因执业而受到威胁或恐吓，并称对案件调查进展缺乏信息。据该协会称，近三年已有35起侵犯律师权利的案件得到证实。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": null,
+    "city": "马普托",
+    "site": "若阿金·希萨诺大道",
+    "raw_text": "Maputo, avenida Joaquim Chissano"
+   },
+   "key_facts": [
+    {
+     "fact": "律师埃尔维诺·迪亚斯遇害两年后案件仍无定论",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Dois anos depois, a morte de Elvino Dias continua uma incógnita"
+    },
+    {
+     "fact": "莫桑比克律师协会在马普托举行游行，要求司法当局作出回应",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a Ordem dos Advogados de Moçambique organizou uma marcha na cidade de Maputo"
+    },
+    {
+     "fact": "游行终点为迪亚斯遇害地点若阿金·希萨诺大道",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "culminou na avenida Joaquim Chissano, exactamente no local onde Elvino Dias deu o último suspiro"
+    },
+    {
+     "fact": "律师协会称对案件调查进展及涉案人员情况缺乏信息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Não sabemos quem são, onde é que estão, o que é que fazem e não sabemos qual é neste momento o avanço da investigação criminal para este caso"
+    },
+    {
+     "fact": "据该协会称，近三年有35起侵犯律师权利的案件得到证实",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Só nos últimos três anos, 35 casos de violação de direitos e garantias dos advogados foram comprovados"
+    }
+   ],
+   "uncertainties": [
+    "迪亚斯遇害的具体情况至今不明",
+    "是否有人员被拘留尚不清楚",
+    "刑事调查进展不明",
+    "一名律师称可能存在隐瞒事实的情况，但未获证实",
+    "目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "两年后埃尔维诺·迪亚斯之死仍无定论",
+   "summary_zh": "莫桑比克律师协会在首都马普托举行游行，纪念律师埃尔维诺·迪亚斯遇害两周年，并呼吁司法当局给出答案。迪亚斯曾任韦南西奥·蒙德拉内的法律顾问，两年前在不明情况下被杀害，案件至今未获澄清。律师协会负责人表示，律师不应因执业而受到威胁或恐吓，并称对案件调查进展缺乏信息。据该协会称，近三年已有35起侵犯律师权利的案件得到证实。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": null,
+    "city": "马普托",
+    "site": "若阿金·希萨诺大道",
+    "raw_text": "Maputo, avenida Joaquim Chissano"
+   },
+   "key_facts": [
+    {
+     "fact": "律师埃尔维诺·迪亚斯遇害两年后案件仍无定论",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Dois anos depois, a morte de Elvino Dias continua uma incógnita"
+    },
+    {
+     "fact": "莫桑比克律师协会在马普托举行游行，要求司法当局作出回应",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a Ordem dos Advogados de Moçambique organizou uma marcha na cidade de Maputo"
+    },
+    {
+     "fact": "游行终点为迪亚斯遇害地点若阿金·希萨诺大道",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "culminou na avenida Joaquim Chissano, exactamente no local onde Elvino Dias deu o último suspiro"
+    },
+    {
+     "fact": "律师协会称对案件调查进展及涉案人员情况缺乏信息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Não sabemos quem são, onde é que estão, o que é que fazem e não sabemos qual é neste momento o avanço da investigação criminal para este caso"
+    },
+    {
+     "fact": "据该协会称，近三年有35起侵犯律师权利的案件得到证实",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Só nos últimos três anos, 35 casos de violação de direitos e garantias dos advogados foram comprovados"
+    }
+   ],
+   "uncertainties": [
+    "迪亚斯遇害的具体情况至今不明",
+    "是否有人员被拘留尚不清楚",
+    "刑事调查进展不明",
+    "一名律师称可能存在隐瞒事实的情况，但未获证实",
+    "目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_48df16d78bc236b8",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

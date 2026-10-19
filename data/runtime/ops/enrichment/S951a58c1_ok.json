@@ -1,0 +1,127 @@
+{
+ "label": "S951a58c1",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e634389a122c9decaac9fc3516b0cd558e7366b53d82c40a7707e09a5ba16b45",
+ "tokens": {
+  "input_tokens": 2216,
+  "output_tokens": 569,
+  "total_tokens": 2785
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克政府被指在德尔加杜角省问责问题上行动迟缓",
+   "summary_zh": "莫桑比克政府称保护德尔加杜角省民众是紧迫任务，但司法部常务秘书在回应人权优先事项时未提出具体承诺或机制。自2017年以来，该地区冲突已造成超过6600人死亡，逾120万人流离失所。报道还提到，今年3月海军被指在莫辛布瓦-达普拉亚附近海域向渔民船只开火，造成至少13人死亡，军方否认责任并归咎于身着军装的叛乱分子。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "德尔加杜角省",
+    "city": "莫辛布瓦-达普拉亚",
+    "site": null,
+    "raw_text": "Cabo Delgado; off the coast of Mocímboa da Praia"
+   },
+   "key_facts": [
+    {
+     "fact": "莫桑比克政府称保护德尔加杜角省民众是紧迫任务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The government says protecting people in Cabo Delgado is urgent."
+    },
+    {
+     "fact": "自2017年以来冲突已造成超过6600人死亡、逾120万人流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Since 2017, the conflict has claimed more than 6,600 lives and forced over 1.2 million people from their homes."
+    },
+    {
+     "fact": "国际移民组织记录9月至10月间至少新增4445名流离失所者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Between September and October alone, the International Organization for Migration (IOM) recorded at least 4,445 newly displaced people."
+    },
+    {
+     "fact": "今年3月15日至少13人在莫辛布瓦-达普拉亚附近海域被杀，海军被指开火",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "at least 13 people were killed on 15 March this year after the Navy allegedly opened fire on their boats off the coast of Mocímboa da Praia"
+    },
+    {
+     "fact": "军方否认责任，将杀戮归咎于身着军装的叛乱分子",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The armed forces denied responsibility, attributing the killings to insurgents wearing military uniforms."
+    }
+   ],
+   "uncertainties": [
+    "海军被指对渔民开火一事尚未获独立证实，军方予以否认，说法存在冲突",
+    "政府是否将就问责采取具体机制尚不明确",
+    "报道为单一来源（Zitamar News），尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克政府被指在德尔加杜角省问责问题上行动迟缓",
+   "summary_zh": "莫桑比克政府称保护德尔加杜角省民众是紧迫任务，但司法部常务秘书在回应人权优先事项时未提出具体承诺或机制。自2017年以来，该地区冲突已造成超过6600人死亡，逾120万人流离失所。报道还提到，今年3月海军被指在莫辛布瓦-达普拉亚附近海域向渔民船只开火，造成至少13人死亡，军方否认责任并归咎于身着军装的叛乱分子。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "德尔加杜角省",
+    "city": "莫辛布瓦-达普拉亚",
+    "site": null,
+    "raw_text": "Cabo Delgado; off the coast of Mocímboa da Praia"
+   },
+   "key_facts": [
+    {
+     "fact": "莫桑比克政府称保护德尔加杜角省民众是紧迫任务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The government says protecting people in Cabo Delgado is urgent."
+    },
+    {
+     "fact": "自2017年以来冲突已造成超过6600人死亡、逾120万人流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Since 2017, the conflict has claimed more than 6,600 lives and forced over 1.2 million people from their homes."
+    },
+    {
+     "fact": "国际移民组织记录9月至10月间至少新增4445名流离失所者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Between September and October alone, the International Organization for Migration (IOM) recorded at least 4,445 newly displaced people."
+    },
+    {
+     "fact": "今年3月15日至少13人在莫辛布瓦-达普拉亚附近海域被杀，海军被指开火",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "at least 13 people were killed on 15 March this year after the Navy allegedly opened fire on their boats off the coast of Mocímboa da Praia"
+    },
+    {
+     "fact": "军方否认责任，将杀戮归咎于身着军装的叛乱分子",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The armed forces denied responsibility, attributing the killings to insurgents wearing military uniforms."
+    }
+   ],
+   "uncertainties": [
+    "海军被指对渔民开火一事尚未获独立证实，军方予以否认，说法存在冲突",
+    "政府是否将就问责采取具体机制尚不明确",
+    "报道为单一来源（Zitamar News），尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_f840c68e951a58c1",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}
