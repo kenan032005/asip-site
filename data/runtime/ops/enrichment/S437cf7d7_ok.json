@@ -1,0 +1,127 @@
+{
+ "label": "S437cf7d7",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "2849193918b7e2d5a0534309201e3075803fff01e56f8a4916627e9fa24cbc3e",
+ "tokens": {
+  "input_tokens": 2453,
+  "output_tokens": 564,
+  "total_tokens": 3017
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "恩贾梅纳：两名涉毒品贩运被告质疑审前羁押合法性",
+   "summary_zh": "恩贾梅纳大审法院于2026年10月19日审理两名被控毒品贩运、羁押于Klessoum监狱的被告案件。辩护方强烈质疑羁押程序的合法性，指称当事人遭任意羁押，并指出初步调查存在重大缺陷。两名被告当庭均不认罪，法院辩论结束后作出即时裁决。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": "恩贾梅纳大审法院",
+    "raw_text": "N'Djamena, tribunal de grande instance"
+   },
+   "key_facts": [
+    {
+     "fact": "恩贾梅纳大审法院审理两名被控毒品贩运的被告案件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le tribunal de grande instance de N'Djamena s'est penché, ce 19 octobre 2026, sur le dossier de deux prévenus poursuivis pour trafic de stupéfiants"
+    },
+    {
+     "fact": "两名被告被羁押于Klessoum监狱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "placés en détention provisoire à la maison d'arrêt de Klessoum"
+    },
+    {
+     "fact": "辩护方指称当事人遭任意羁押并质疑程序合法性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le conseil des prévenus a vivement contesté la régularité de la procédure, soutenant que ses clients faisaient l'objet d'une détention arbitraire"
+    },
+    {
+     "fact": "辩护方称涉案公交车未被扣押、乘客均未接受询问",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le bus de transport en commun à bord duquel se trouvaient les prévenus n'a jamais été immobilisé pour les besoins de l'enquête, et aucun des passagers n'a été auditionné"
+    },
+    {
+     "fact": "两名被告当庭均不认罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les deux prévenus ont fermement plaidé non coupables, rejetant l'ensemble des charges retenues contre eux"
+    }
+   ],
+   "uncertainties": [
+    "辩护方关于任意羁押及调查缺陷的指控尚未经法院认定",
+    "一名女乘客据称指认毒品袋真正所有者，该说法未获独立证实",
+    "目前仅单一来源（Alwihda Info）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "恩贾梅纳：两名涉毒品贩运被告质疑审前羁押合法性",
+   "summary_zh": "恩贾梅纳大审法院于2026年10月19日审理两名被控毒品贩运、羁押于Klessoum监狱的被告案件。辩护方强烈质疑羁押程序的合法性，指称当事人遭任意羁押，并指出初步调查存在重大缺陷。两名被告当庭均不认罪，法院辩论结束后作出即时裁决。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": "恩贾梅纳大审法院",
+    "raw_text": "N'Djamena, tribunal de grande instance"
+   },
+   "key_facts": [
+    {
+     "fact": "恩贾梅纳大审法院审理两名被控毒品贩运的被告案件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le tribunal de grande instance de N'Djamena s'est penché, ce 19 octobre 2026, sur le dossier de deux prévenus poursuivis pour trafic de stupéfiants"
+    },
+    {
+     "fact": "两名被告被羁押于Klessoum监狱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "placés en détention provisoire à la maison d'arrêt de Klessoum"
+    },
+    {
+     "fact": "辩护方指称当事人遭任意羁押并质疑程序合法性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le conseil des prévenus a vivement contesté la régularité de la procédure, soutenant que ses clients faisaient l'objet d'une détention arbitraire"
+    },
+    {
+     "fact": "辩护方称涉案公交车未被扣押、乘客均未接受询问",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le bus de transport en commun à bord duquel se trouvaient les prévenus n'a jamais été immobilisé pour les besoins de l'enquête, et aucun des passagers n'a été auditionné"
+    },
+    {
+     "fact": "两名被告当庭均不认罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les deux prévenus ont fermement plaidé non coupables, rejetant l'ensemble des charges retenues contre eux"
+    }
+   ],
+   "uncertainties": [
+    "辩护方关于任意羁押及调查缺陷的指控尚未经法院认定",
+    "一名女乘客据称指认毒品袋真正所有者，该说法未获独立证实",
+    "目前仅单一来源（Alwihda Info）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_49c4da6f437cf7d7",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

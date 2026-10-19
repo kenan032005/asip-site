@@ -1,0 +1,129 @@
+{
+ "label": "S4a351173",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "7f3c9c11b48ce5c565f12060b82eeef011dd0bb3ebb5d6692a1cdfdae506c3a2",
+ "tokens": {
+  "input_tokens": 2200,
+  "output_tokens": 570,
+  "total_tokens": 2770
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚民众谴责大选前对异见的打压",
+   "summary_zh": "尼日利亚民众谴责总统博拉·蒂努布政府被指不断升级对言论自由的打压。据称，警方上周阻止了卡诺州一场“蒂努布必须下台”活动的场地使用；此前卡杜纳一场批评总统“重燃希望议程”的新书推介活动也被取消。卡诺州警察局长为警力部署辩护，称旨在保护组织者与居民、防止秩序失控。相关指控目前仅来自单一来源，尚未获得独立证实。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "卡诺州",
+    "city": null,
+    "site": "私人租用的活动中心",
+    "raw_text": "Kano State"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚民众谴责蒂努布政府被指升级对言论自由的打压",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigerians have condemned what they describe as an escalating crackdown on freedom of expression under President Bola Tinubu’s administration."
+    },
+    {
+     "fact": "据称警方上周阻止了卡诺州一场“蒂努布必须下台”活动的场地使用",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Last week, police reportedly blocked the venue of a “Tinubu Must Go” event in Kano State."
+    },
+    {
+     "fact": "卡杜纳一场批评总统“重燃希望议程”的新书推介活动此前被取消",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Previously, a planned book presentation criticising the president’s Renewed Hope Agenda got cancelled in Kaduna."
+    },
+    {
+     "fact": "活动召集人阿巴·希基马指控警方在场地周边部署超过10辆机动警车",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Abba Hikima, alleged that the police deployed more than 10 mobile police vehicles around the venue"
+    },
+    {
+     "fact": "卡诺州警察局长为部署辩护，称旨在保护组织者与居民、防止秩序失控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Kano State Commissioner of Police, Ibrahim Adamu Bakori, defended the deployment in a statement, saying it was intended to protect the organisers and residents and prevent a possible breakdown of law and order."
+    }
+   ],
+   "uncertainties": [
+    "警方阻止活动场地使用一事为“据称”，尚未获独立证实",
+    "活动召集人关于警方部署10余辆警车的指控未经核实",
+    "卡杜纳新书推介活动被取消的具体原因未说明",
+    "事件目前仅有单一来源报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚民众谴责大选前对异见的打压",
+   "summary_zh": "尼日利亚民众谴责总统博拉·蒂努布政府被指不断升级对言论自由的打压。据称，警方上周阻止了卡诺州一场“蒂努布必须下台”活动的场地使用；此前卡杜纳一场批评总统“重燃希望议程”的新书推介活动也被取消。卡诺州警察局长为警力部署辩护，称旨在保护组织者与居民、防止秩序失控。相关指控目前仅来自单一来源，尚未获得独立证实。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "卡诺州",
+    "city": null,
+    "site": "私人租用的活动中心",
+    "raw_text": "Kano State"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚民众谴责蒂努布政府被指升级对言论自由的打压",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigerians have condemned what they describe as an escalating crackdown on freedom of expression under President Bola Tinubu’s administration."
+    },
+    {
+     "fact": "据称警方上周阻止了卡诺州一场“蒂努布必须下台”活动的场地使用",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Last week, police reportedly blocked the venue of a “Tinubu Must Go” event in Kano State."
+    },
+    {
+     "fact": "卡杜纳一场批评总统“重燃希望议程”的新书推介活动此前被取消",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Previously, a planned book presentation criticising the president’s Renewed Hope Agenda got cancelled in Kaduna."
+    },
+    {
+     "fact": "活动召集人阿巴·希基马指控警方在场地周边部署超过10辆机动警车",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Abba Hikima, alleged that the police deployed more than 10 mobile police vehicles around the venue"
+    },
+    {
+     "fact": "卡诺州警察局长为部署辩护，称旨在保护组织者与居民、防止秩序失控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Kano State Commissioner of Police, Ibrahim Adamu Bakori, defended the deployment in a statement, saying it was intended to protect the organisers and residents and prevent a possible breakdown of law and order."
+    }
+   ],
+   "uncertainties": [
+    "警方阻止活动场地使用一事为“据称”，尚未获独立证实",
+    "活动召集人关于警方部署10余辆警车的指控未经核实",
+    "卡杜纳新书推介活动被取消的具体原因未说明",
+    "事件目前仅有单一来源报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_d96742aa4a351173",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

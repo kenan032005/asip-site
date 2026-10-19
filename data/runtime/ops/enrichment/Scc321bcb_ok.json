@@ -1,0 +1,128 @@
+{
+ "label": "Scc321bcb",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f3a6ae7c5f7a50a3ca8c5b0ec0473694e67c8cdb035e839a56810f507e124a77",
+ "tokens": {
+  "input_tokens": 2670,
+  "output_tokens": 590,
+  "total_tokens": 3260
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"伤亡数字为初步统计，尚未最终确认\", \"400人死亡数据来自CEDYS研究人员，属单一研究机构估算\", \"事件目前仅有一个来源（Le N'Djam Post）报道，尚缺乏交叉验证\"]",
+    "after": "[\"伤亡数字为初步统计，尚未最终确认\", \"400人死亡数据来自CEDYS研究人员，属单一研究机构估算\", \"事件目前仅有一个来源（Le N'Djam Post）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "农牧民冲突：两年内至少400人死亡",
+   "summary_zh": "尽管当局宣布了相关措施，乍得农牧民之间的冲突仍持续造成人员伤亡。2026年10月18日至19日夜间，萨拉马特地区穆赖一带因牲畜迁徙通道走向分歧爆发冲突，据安全部门消息源称造成12人死亡、3人受伤，为初步统计。据CEDYS研究人员数据，2025年至2026年间此类冲突已造成至少400人死亡。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "萨拉马特",
+    "city": "穆赖",
+    "site": "穆赖地区，巴赫尔-阿祖姆省，萨拉马特与西拉省交界处",
+    "raw_text": "zone de Mouray, dans le département du Bahr-Azoum, à la frontière entre les provinces du Salamat et du Sila"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年10月18日至19日夜间，萨拉马特地区穆赖一带农牧民冲突造成12人死亡、3人受伤（初步统计）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Douze morts et trois blessés : c'est le bilan provisoire des affrontements entre agriculteurs et éleveurs survenus dans la zone de Mouray, dans le département du Bahr-Azoum, à la frontière entre les provinces du Salamat et du Sila."
+    },
+    {
+     "fact": "冲突起因是牲畜迁徙通道走向存在分歧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À l’origine du drame, un désaccord sur le tracé d’un couloir de transhumance"
+    },
+    {
+     "fact": "据CEDYS研究人员数据，2025年至2026年间至少400人在此类冲突中死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon des chiffres des chercheurs du Centre d'Etude des Dynamiques Sociales (CEDYS), au moins 400 personnes auraient été tuées dans ces affrontements entre 2025 et 2026."
+    },
+    {
+     "fact": "省级当局与国防安全力量及司法代表已赶赴现场控制局势",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Alertées, les autorités provinciales, accompagnées des forces de défense et de sécurité et de représentants de la justice, se sont rendues sur place pour tenter de maîtriser la situation."
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字为初步统计，尚未最终确认",
+    "400人死亡数据来自CEDYS研究人员，属单一研究机构估算",
+    "事件目前仅有一个来源（Le N'Djam Post）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "农牧民冲突：两年内至少400人死亡",
+   "summary_zh": "尽管当局宣布了相关措施，乍得农牧民之间的冲突仍持续造成人员伤亡。2026年10月18日至19日夜间，萨拉马特地区穆赖一带因牲畜迁徙通道走向分歧爆发冲突，据安全部门消息源称造成12人死亡、3人受伤，为初步统计。据CEDYS研究人员数据，2025年至2026年间此类冲突已造成至少400人死亡。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "萨拉马特",
+    "city": "穆赖",
+    "site": "穆赖地区，巴赫尔-阿祖姆省，萨拉马特与西拉省交界处",
+    "raw_text": "zone de Mouray, dans le département du Bahr-Azoum, à la frontière entre les provinces du Salamat et du Sila"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年10月18日至19日夜间，萨拉马特地区穆赖一带农牧民冲突造成12人死亡、3人受伤（初步统计）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Douze morts et trois blessés : c'est le bilan provisoire des affrontements entre agriculteurs et éleveurs survenus dans la zone de Mouray, dans le département du Bahr-Azoum, à la frontière entre les provinces du Salamat et du Sila."
+    },
+    {
+     "fact": "冲突起因是牲畜迁徙通道走向存在分歧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À l’origine du drame, un désaccord sur le tracé d’un couloir de transhumance"
+    },
+    {
+     "fact": "据CEDYS研究人员数据，2025年至2026年间至少400人在此类冲突中死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon des chiffres des chercheurs du Centre d'Etude des Dynamiques Sociales (CEDYS), au moins 400 personnes auraient été tuées dans ces affrontements entre 2025 et 2026."
+    },
+    {
+     "fact": "省级当局与国防安全力量及司法代表已赶赴现场控制局势",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Alertées, les autorités provinciales, accompagnées des forces de défense et de sécurité et de représentants de la justice, se sont rendues sur place pour tenter de maîtriser la situation."
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字为初步统计，尚未最终确认",
+    "400人死亡数据来自CEDYS研究人员，属单一研究机构估算",
+    "事件目前仅有一个来源（Le N'Djam Post）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_dc136464cc321bcb",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
