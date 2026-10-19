@@ -1,0 +1,138 @@
+{
+ "label": "Sc27c5a33",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "cc83e36a38c8a184a35408ff984f21e1b66cdf130997f58685281ca3d91f62b9",
+ "tokens": {
+  "input_tokens": 2302,
+  "output_tokens": 508,
+  "total_tokens": 2810
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"伤亡数字为救援部门初步统计，尚未最终确认\", \"事故具体原因尚未查明\", \"目前仅有一个来源（Fraternite，援引Bip Radio）报道，尚缺乏交叉验证\"]",
+    "after": "[\"伤亡数字为救援部门初步统计，尚未最终确认\", \"事故具体原因尚未查明\", \"目前仅有一个来源（Fraternite，援引Bip Radio）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁科托努-博希孔公路发生事故，造成一人死亡、五人受伤",
+   "summary_zh": "2026年10月18日星期日，贝宁科托努-博希孔公路在佐格博多梅地区发生交通事故，造成一人死亡、五人受伤。据Bip Radio援引救援部门的初步统计，一辆卡车翻落到路面并阻断交通。事故具体原因尚待查明，目前交通拥堵严重，救援人员正调派吊车清理道路。",
+   "event_type": "transport_disruption",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "佐格博多梅",
+    "site": "科托努-博希孔公路",
+    "raw_text": "l’axe Cotonou-Bohicon, dans la commune de Zogbodomey"
+   },
+   "key_facts": [
+    {
+     "fact": "科托努-博希孔公路在佐格博多梅发生事故，造成一人死亡、五人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un accident sur l’axe Cotonou-Bohicon a fait un mort et cinq blessés ce dimanche 18 octobre 2026, à Zogbodomey."
+    },
+    {
+     "fact": "一辆卡车翻落到路面并阻断交通",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un camion a chuté sur la chaussée et bloqué la circulation"
+    },
+    {
+     "fact": "伤亡数字为救援部门提供的初步统计",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon le bilan provisoire des secours rapporté par Bip Radio"
+    },
+    {
+     "fact": "事故具体原因尚待查明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les circonstances exactes de l’accident restent à préciser."
+    },
+    {
+     "fact": "事故造成数公里长的交通拥堵，救援人员正调派吊车清理道路",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un embouteillage s’étend sur plusieurs kilomètres. Les équipes mobilisent une grue pour dégager la chaussée."
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字为救援部门初步统计，尚未最终确认",
+    "事故具体原因尚未查明",
+    "目前仅有一个来源（Fraternite，援引Bip Radio）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁科托努-博希孔公路发生事故，造成一人死亡、五人受伤",
+   "summary_zh": "2026年10月18日星期日，贝宁科托努-博希孔公路在佐格博多梅地区发生交通事故，造成一人死亡、五人受伤。据Bip Radio援引救援部门的初步统计，一辆卡车翻落到路面并阻断交通。事故具体原因尚待查明，目前交通拥堵严重，救援人员正调派吊车清理道路。",
+   "event_type": "transport_disruption",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "佐格博多梅",
+    "site": "科托努-博希孔公路",
+    "raw_text": "l’axe Cotonou-Bohicon, dans la commune de Zogbodomey"
+   },
+   "key_facts": [
+    {
+     "fact": "科托努-博希孔公路在佐格博多梅发生事故，造成一人死亡、五人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un accident sur l’axe Cotonou-Bohicon a fait un mort et cinq blessés ce dimanche 18 octobre 2026, à Zogbodomey."
+    },
+    {
+     "fact": "一辆卡车翻落到路面并阻断交通",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un camion a chuté sur la chaussée et bloqué la circulation"
+    },
+    {
+     "fact": "伤亡数字为救援部门提供的初步统计",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon le bilan provisoire des secours rapporté par Bip Radio"
+    },
+    {
+     "fact": "事故具体原因尚待查明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les circonstances exactes de l’accident restent à préciser."
+    },
+    {
+     "fact": "事故造成数公里长的交通拥堵，救援人员正调派吊车清理道路",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un embouteillage s’étend sur plusieurs kilomètres. Les équipes mobilisent une grue pour dégager la chaussée."
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字为救援部门初步统计，尚未最终确认",
+    "事故具体原因尚未查明",
+    "目前仅有一个来源（Fraternite，援引Bip Radio）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_6fb797abc27c5a33",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
