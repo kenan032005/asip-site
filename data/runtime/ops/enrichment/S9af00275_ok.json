@@ -1,0 +1,117 @@
+{
+ "label": "S9af00275",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4b53008d2fe2370b0d6c50a62e6cdddc198ae9ed284a8bb8796fc8e7152a863e",
+ "tokens": {
+  "input_tokens": 2961,
+  "output_tokens": 461,
+  "total_tokens": 3422
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）政府承诺缓解马卡拉监狱过度拥挤问题",
+   "summary_zh": "刚果（金）司法部长与最高法院检察长于周末视察金沙萨马卡拉中央监狱，承诺减少在押人数。该监狱一年内在押人数翻倍，约1.6万名囚犯中仅5000人已被判刑，其余仍在等待审判。民间社会对政府承诺持怀疑态度，并指任意逮捕与司法程序缓慢是根本原因。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "金沙萨",
+    "city": "金沙萨",
+    "site": "马卡拉中央监狱",
+    "raw_text": "la prison centrale de Makala, à Kinshasa"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）司法部长与最高法院检察长周末视察金沙萨马卡拉中央监狱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le ministre congolais de la Justice et le procureur général près la Cour de cassation se sont rendus sur place ce week-end"
+    },
+    {
+     "fact": "政府承诺减少马卡拉监狱在押人数",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'exécutif a notamment promis de réduire la population carcérale dans l'établissement"
+    },
+    {
+     "fact": "该监狱一年内在押人数翻倍，约1.6万名囚犯中仅5000人已被判刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sur les quelque 16 000 prisonniers qui y sont incarcérés, seuls 5 000 ont effectivement été condamnés"
+    },
+    {
+     "fact": "民间社会对政府承诺持怀疑态度",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la société civile congolaise, elle, a du mal à croire à ces déclarations"
+    }
+   ],
+   "uncertainties": [
+    "部分在押人员从未被法官审理的说法来自多个非政府组织，尚未获独立确认",
+    "民间社会指控司法成为部分法官和司法警察官员牟利工具，属指控性质",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）政府承诺缓解马卡拉监狱过度拥挤问题",
+   "summary_zh": "刚果（金）司法部长与最高法院检察长于周末视察金沙萨马卡拉中央监狱，承诺减少在押人数。该监狱一年内在押人数翻倍，约1.6万名囚犯中仅5000人已被判刑，其余仍在等待审判。民间社会对政府承诺持怀疑态度，并指任意逮捕与司法程序缓慢是根本原因。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "金沙萨",
+    "city": "金沙萨",
+    "site": "马卡拉中央监狱",
+    "raw_text": "la prison centrale de Makala, à Kinshasa"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）司法部长与最高法院检察长周末视察金沙萨马卡拉中央监狱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le ministre congolais de la Justice et le procureur général près la Cour de cassation se sont rendus sur place ce week-end"
+    },
+    {
+     "fact": "政府承诺减少马卡拉监狱在押人数",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'exécutif a notamment promis de réduire la population carcérale dans l'établissement"
+    },
+    {
+     "fact": "该监狱一年内在押人数翻倍，约1.6万名囚犯中仅5000人已被判刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sur les quelque 16 000 prisonniers qui y sont incarcérés, seuls 5 000 ont effectivement été condamnés"
+    },
+    {
+     "fact": "民间社会对政府承诺持怀疑态度",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la société civile congolaise, elle, a du mal à croire à ces déclarations"
+    }
+   ],
+   "uncertainties": [
+    "部分在押人员从未被法官审理的说法来自多个非政府组织，尚未获独立确认",
+    "民间社会指控司法成为部分法官和司法警察官员牟利工具，属指控性质",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_2ab831a59af00275",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

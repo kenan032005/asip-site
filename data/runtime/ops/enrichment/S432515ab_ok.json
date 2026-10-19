@@ -1,0 +1,125 @@
+{
+ "label": "S432515ab",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1ebe8cbb34f7fcfdcf24f3da01c68dae120d37692468b8a880faa9cf59f6371e",
+ "tokens": {
+  "input_tokens": 2936,
+  "output_tokens": 550,
+  "total_tokens": 3486
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "马达加斯加：厄尔尼诺将加剧南部粮食不安全",
+   "summary_zh": "据行动援助组织（Action contre la Faim）警告，厄尔尼诺现象将在未来数月加剧马达加斯加大南部的干旱，该地区已有超过250万人面临严重粮食不安全。该组织预计将遭遇自2021年以来最严重的粮食危机，预计到2027年4月将有50万名五岁以下儿童严重营养不良。该组织还指出，人道援助资金减少导致其行动规模缩减。",
+   "event_type": "other_security",
+   "country_iso3": "MDG",
+   "location": {
+    "country_iso3": "MDG",
+    "admin1": null,
+    "city": null,
+    "site": "大南部（Grand Sud）",
+    "raw_text": "le Grand Sud malgache"
+   },
+   "key_facts": [
+    {
+     "fact": "厄尔尼诺现象预计将加剧马达加斯加大南部的干旱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "El Niño va impacter la prochaine campagne agricole par une pluviométrie plus faible et des températures plus élevées."
+    },
+    {
+     "fact": "超过250万人目前面临严重粮食不安全",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plus de 2,5 millions de personnes sont actuellement confrontées à une insécurité alimentaire aiguë"
+    },
+    {
+     "fact": "预计到2027年4月将有50万名五岁以下儿童严重营养不良",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au total, 500 000 enfants de moins de cinq ans devraient souffrir de malnutrition aiguë d’ici avril 2027"
+    },
+    {
+     "fact": "大南部六个区在粮食不安全预测中处于“第四阶段”，即饥荒前的最后阶段",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Six districts du Grand Sud malgache sont en « phase 4 » dans les projections sur l’insécurité alimentaire, soit le dernier stade avant la famine"
+    },
+    {
+     "fact": "行动援助组织因资金减少关闭了Ampanihy的办公室，仅保留Ambovombe一个办公室",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ACF a fermé son bureau à Ampanihy, dans la région Atsimo Andrefana. Nous ne répondons plus à la situation dans le sud qu’à partir d’un seul bureau, à Ambovombe."
+    }
+   ],
+   "uncertainties": [
+    "粮食危机预测基于行动援助组织单一来源，尚未获得交叉验证",
+    "营养不良与粮食不安全的具体规模为预测值，有待后续核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "马达加斯加：厄尔尼诺将加剧南部粮食不安全",
+   "summary_zh": "据行动援助组织（Action contre la Faim）警告，厄尔尼诺现象将在未来数月加剧马达加斯加大南部的干旱，该地区已有超过250万人面临严重粮食不安全。该组织预计将遭遇自2021年以来最严重的粮食危机，预计到2027年4月将有50万名五岁以下儿童严重营养不良。该组织还指出，人道援助资金减少导致其行动规模缩减。",
+   "event_type": "other_security",
+   "country_iso3": "MDG",
+   "location": {
+    "country_iso3": "MDG",
+    "admin1": null,
+    "city": null,
+    "site": "大南部（Grand Sud）",
+    "raw_text": "le Grand Sud malgache"
+   },
+   "key_facts": [
+    {
+     "fact": "厄尔尼诺现象预计将加剧马达加斯加大南部的干旱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "El Niño va impacter la prochaine campagne agricole par une pluviométrie plus faible et des températures plus élevées."
+    },
+    {
+     "fact": "超过250万人目前面临严重粮食不安全",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plus de 2,5 millions de personnes sont actuellement confrontées à une insécurité alimentaire aiguë"
+    },
+    {
+     "fact": "预计到2027年4月将有50万名五岁以下儿童严重营养不良",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au total, 500 000 enfants de moins de cinq ans devraient souffrir de malnutrition aiguë d’ici avril 2027"
+    },
+    {
+     "fact": "大南部六个区在粮食不安全预测中处于“第四阶段”，即饥荒前的最后阶段",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Six districts du Grand Sud malgache sont en « phase 4 » dans les projections sur l’insécurité alimentaire, soit le dernier stade avant la famine"
+    },
+    {
+     "fact": "行动援助组织因资金减少关闭了Ampanihy的办公室，仅保留Ambovombe一个办公室",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ACF a fermé son bureau à Ampanihy, dans la région Atsimo Andrefana. Nous ne répondons plus à la situation dans le sud qu’à partir d’un seul bureau, à Ambovombe."
+    }
+   ],
+   "uncertainties": [
+    "粮食危机预测基于行动援助组织单一来源，尚未获得交叉验证",
+    "营养不良与粮食不安全的具体规模为预测值，有待后续核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_50b6c8bb432515ab",
+ "disease_event_id": null,
+ "country_code": "MG"
+}

@@ -1,0 +1,115 @@
+{
+ "label": "S4651fa76",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "7f5e6768bd94da3e60c2719dc69a0893ac2b8ee54000e5d79e4195bd32a194f5",
+ "tokens": {
+  "input_tokens": 2239,
+  "output_tokens": 586,
+  "total_tokens": 2825
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克：南非大坝放水后马普托河流域面临洪水风险",
+   "summary_zh": "据莫桑比克国家水资源管理总局（DNGRH）声明，南非Pongolapoort大坝计划于11月2日开始年度放水，马普托河流域因此面临中等洪水风险。预计11月8日最大流量达每秒700立方米，11月13日起马普托省南部Madubula水文站水位可能超出警戒线两米，或淹没农田并影响道路交通。Catuane、Salamanga和Tinonganine等沿河社区被建议避免穿越河床，农民被敦促提前抢收并推迟新种植。",
+   "event_type": "natural_disaster",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "马普托省",
+    "city": null,
+    "site": "马普托河流域（含Catuane、Salamanga、Tinonganine）",
+    "raw_text": "Mozambique's Maputo River basin; settlements of Catuane, Salamanga and Tinonganine in southern Maputo province"
+   },
+   "key_facts": [
+    {
+     "fact": "南非Pongolapoort大坝计划于11月2日开始年度放水，马普托河流域面临中等洪水风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Mozambique's Maputo River basin faces a moderate risk of flooding following planned annual water discharge from the South African Pongolapoort Dam, which is scheduled to begin on 2 November."
+    },
+    {
+     "fact": "预计11月8日最大流量达每秒700立方米",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the water discharge is expected to reach a maximum flow of 700 cubic metres per second on 8 November"
+    },
+    {
+     "fact": "11月13日起Madubula水文站水位可能超出警戒线两米，或淹没农田并影响道路交通",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "could raise water levels at the Madubula hydrometric station in southern Maputo province to up to two metres above the alert level from 13 November, potentially flooding agricultural fields and disrupting road traffic"
+    },
+    {
+     "fact": "Catuane、Salamanga和Tinonganine等沿河社区被建议避免穿越河床",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The areas at risk include the settlements of Catuane, Salamanga and Tinonganine, where riverside communities have been advised to avoid crossing the riverbed"
+    }
+   ],
+   "uncertainties": [
+    "洪水影响为预警性预测，实际水位与受灾程度尚未发生或确认",
+    "目前仅单一来源（Club of Mozambique，引述DNGRH声明）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克：南非大坝放水后马普托河流域面临洪水风险",
+   "summary_zh": "据莫桑比克国家水资源管理总局（DNGRH）声明，南非Pongolapoort大坝计划于11月2日开始年度放水，马普托河流域因此面临中等洪水风险。预计11月8日最大流量达每秒700立方米，11月13日起马普托省南部Madubula水文站水位可能超出警戒线两米，或淹没农田并影响道路交通。Catuane、Salamanga和Tinonganine等沿河社区被建议避免穿越河床，农民被敦促提前抢收并推迟新种植。",
+   "event_type": "natural_disaster",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "马普托省",
+    "city": null,
+    "site": "马普托河流域（含Catuane、Salamanga、Tinonganine）",
+    "raw_text": "Mozambique's Maputo River basin; settlements of Catuane, Salamanga and Tinonganine in southern Maputo province"
+   },
+   "key_facts": [
+    {
+     "fact": "南非Pongolapoort大坝计划于11月2日开始年度放水，马普托河流域面临中等洪水风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Mozambique's Maputo River basin faces a moderate risk of flooding following planned annual water discharge from the South African Pongolapoort Dam, which is scheduled to begin on 2 November."
+    },
+    {
+     "fact": "预计11月8日最大流量达每秒700立方米",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the water discharge is expected to reach a maximum flow of 700 cubic metres per second on 8 November"
+    },
+    {
+     "fact": "11月13日起Madubula水文站水位可能超出警戒线两米，或淹没农田并影响道路交通",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "could raise water levels at the Madubula hydrometric station in southern Maputo province to up to two metres above the alert level from 13 November, potentially flooding agricultural fields and disrupting road traffic"
+    },
+    {
+     "fact": "Catuane、Salamanga和Tinonganine等沿河社区被建议避免穿越河床",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The areas at risk include the settlements of Catuane, Salamanga and Tinonganine, where riverside communities have been advised to avoid crossing the riverbed"
+    }
+   ],
+   "uncertainties": [
+    "洪水影响为预警性预测，实际水位与受灾程度尚未发生或确认",
+    "目前仅单一来源（Club of Mozambique，引述DNGRH声明）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_ee61e0b84651fa76",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}
