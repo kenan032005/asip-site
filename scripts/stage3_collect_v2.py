@@ -178,6 +178,71 @@ P1_GUARANTEED_IDS = {
 P1_COUNTRIES_ORDER = ["尼日利亚", "贝宁", "莫桑比克", "南苏丹", "埃塞俄比亚"]
 
 
+# ── C8-4D2 Part A：执行相位归属（可单测，禁止内联在 main 里）──────────
+def _assign_execution_phase(country_cn, source):
+    """返回该 (country, source) 执行键的相位 0..4。
+
+    优先级：P0 尼日尔保证键 → P1 保证核心 → 既有 Lane A → 国家展开数拆分。
+
+    C8-4D2 修正：`registry._unified()` 暴露的键是 **source_scope**（多国源为完整
+    列表）；旧实现读取不存在的 `country_scope`，恒为 None → 长度 0 → 一律判
+    phase 3，导致 PHASE4 结构性为 0、多国展开源与普通国家源混在同一相位。
+    """
+    sid = str(source.get("source_id"))
+    if country_cn == P0_NIGER_COUNTRY and sid in P0_NIGER_IDS:
+        return 0
+    if country_cn in P1_COUNTRIES_ORDER and sid in P1_GUARANTEED_IDS:
+        return 1
+    if sid in LANE_A_IDS:
+        return 2
+    scope = source.get("source_scope")
+    if scope is None:  # 兼容旧视图字段
+        scope = source.get("country_scope")
+    n = len(scope) if isinstance(scope, list) else (1 if scope else 0)
+    return 3 if n <= 2 else 4
+
+
+#: C8-4D2 Part A：执行趟顺序。PASS A = 保证键（0/1/2）；
+#: PASS B1 = 普通国家/本地（3）全局先行；PASS B2 = 多国展开背景源（4）殿后。
+#: 普通国家源先于多国展开源执行，"where safe"：保证键仍在 PASS A，不受拆分影响。
+PHASE_PASSES = ({0, 1, 2}, {3}, {4})
+
+
+def _phase_pass_keys(phase_map, country_cn, phases, done_keys):
+    """某国家在指定相位集合内、尚未执行的执行键（保持注册表顺序，去重）。"""
+    return [sid for (c_, sid), p in phase_map.items()
+            if c_ == country_cn and p in phases and (c_, sid) not in done_keys]
+
+
+def active_phase_passes():
+    """C8-4D2：实际执行趟顺序。
+
+    默认 = PHASE_PASSES（普通国家 phase 3 全局先行，多国展开 phase 4 殿后）。
+    `ASIP_PHASE_B_SPLIT=0` → 回退 C8-4C3 的单趟 {3,4}（立即回滚路径，无需改代码）。
+    """
+    raw = (os.environ.get("ASIP_PHASE_B_SPLIT") or "1").strip().lower()
+    if raw in ("0", "false", "no", "off"):
+        return ({0, 1, 2}, {3, 4})
+    return PHASE_PASSES
+
+
+def plan_phase_execution(phase_map, countries):
+    """C8-4D2：按 PHASE_PASSES 顺序展开执行计划 → [(pass_idx, country, [source_id...])]。
+
+    纯函数（相同 phase_map + countries ⇒ 相同计划），供 main() 执行与回归测试比对：
+      - 保证键（PASS A）先于一切；
+      - 普通国家/本地（phase 3）全局先行；
+      - 多国展开背景源（phase 4）殿后。
+    """
+    plan = []
+    for idx, phases in enumerate(PHASE_PASSES):
+        for cn in countries:
+            sids = _phase_pass_keys(phase_map, cn, phases, set())
+            if sids:
+                plan.append((idx, cn, sids))
+    return plan
+
+
 def _p1_core_first(sources, country_cn):
     """C8-4C2 PHASE 1：P1 保证核心置顶（稳定排序；P0 已在更早阶段置顶，不受影响）。"""
     if str(country_cn) not in P1_COUNTRIES_ORDER:
@@ -1372,31 +1437,21 @@ def main():
 
     # ── C8-4C3：全局相位调度（两趟；不重写架构，仅改执行顺序）──
     # PASS A = 相位 0/1/2（P0 尼日尔 → P1 保证核心 → 既有 Lane A）
-    # PASS B = 相位 3/4（普通国家/本地、展开 pan/global/背景）
+    # C8-4D2 Part A：PASS B 拆为两趟 —— B1 = 普通国家/本地（phase 3，全局先行），
+    #   B2 = 多国展开背景源（phase 4，殿后）。保证键优先级不变。
     # 执行键 = (国家, source_id)，用 done_keys 去重，绝不重复执行同一键。
     import time as _t2
     _phase = {}
     for _cn in countries:
         for _src in registry.by_country(_cn):
-            _sid = str(_src.get("source_id"))
-            if _cn == P0_NIGER_COUNTRY and _sid in P0_NIGER_IDS:
-                _ph = 0
-            elif _cn in P1_COUNTRIES_ORDER and _sid in P1_GUARANTEED_IDS:
-                _ph = 1
-            elif _sid in LANE_A_IDS:
-                _ph = 2
-            else:
-                _v = _src.get("country_scope")
-                _ph = 3 if len(_v if isinstance(_v, list) else ([_v] if _v else [])) <= 2 else 4
-            _phase[(_cn, _sid)] = _ph
+            _phase[(_cn, str(_src.get("source_id")))] = _assign_execution_phase(_cn, _src)
     done_keys = set()
     phase_stats = {p: {"executions": 0, "skipped": 0, "elapsed": 0.0} for p in range(5)}
 
     def _run_phase_pass(phases):
         _ao, _po, _eo = [], [], []
         for _cn in countries:
-            _keys = [s_ for (c_, s_), p_ in list(_phase.items())
-                     if c_ == _cn and p_ in phases and (c_, s_) not in done_keys]
+            _keys = _phase_pass_keys(_phase, _cn, phases, done_keys)
             if not _keys:
                 continue
             _a, _p, _e = run_country_pipeline(_cn, registry, discoverer,
@@ -1414,10 +1469,11 @@ def main():
             _ao.extend(_a); _po.extend(_p); _eo.extend(_e)
         return _ao, _po, _eo
 
-    _a, _p, _e = _run_phase_pass({0, 1, 2})
-    all_articles.extend(_a); per_source.extend(_p); all_errors.extend(_e)
-    _a, _p, _e = _run_phase_pass({3, 4})
-    all_articles.extend(_a); per_source.extend(_p); all_errors.extend(_e)
+    # C8-4D2 Part A：按 active_phase_passes() 顺序执行
+    # （PASS A → 普通国家 → 多国展开殿后；ASIP_PHASE_B_SPLIT=0 可回退单趟）
+    for _pass in active_phase_passes():
+        _a, _p, _e = _run_phase_pass(_pass)
+        all_articles.extend(_a); per_source.extend(_p); all_errors.extend(_e)
     for _ps in per_source:
         if str(_ps.get("status")) == "skipped_wall_clock":
             _kk = (_ps.get("country"), str(_ps.get("source_id")))

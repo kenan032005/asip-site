@@ -5927,14 +5927,14 @@
     "name": "VOA Africa",
     "url": "https://www.voaafrica.com/",
     "collection_method": "rss",
-    "feed_url": "https://www.voaafrica.com/api/zrqiteukiq",
+    "feed_url": "https://www.voaafrica.com/api/",
     "enabled": true,
     "tested": false,
     "status": "active",
-    "notes": "VOA 官方 RSS 目录；本机 egress 阻断（502），由 runner 首轮实测"
+    "notes": "C8-4D2 修正：原 /api/zrqiteukiq 实测返回 text/plain 'Invalid url'；改用官方 alternate 指向的 /api/（实测 200 application/rss+xml，20 items）。注意：该 feed 内容冻结于 2025-03-31（非我方问题），故仍无近期产出"
    },
    "listing_urls": [
-    "https://www.voaafrica.com/api/zrqiteukiq"
+    "https://www.voaafrica.com/api/"
    ],
    "listing_max_items": 20,
    "article_link_selectors": [],
@@ -6019,14 +6019,14 @@
     "name": "VOA Afrique",
     "url": "https://www.voaafrique.com/",
     "collection_method": "rss",
-    "feed_url": "https://www.voaafrique.com/api/zrqiteukiq",
+    "feed_url": "https://www.voaafrique.com/api/",
     "enabled": true,
     "tested": false,
     "status": "active",
-    "notes": "VOA 法语非洲频道；本机返回非 RSS（text/plain），由 runner 实测"
+    "notes": "C8-4D2 修正：原 /api/zrqiteukiq 实测返回 text/plain 'Invalid url'；改用官方 alternate 指向的 /api/（实测 200 application/rss+xml，20 items）。注意：该 feed 内容冻结于 2025-03-31（非我方问题），故仍无近期产出"
    },
    "listing_urls": [
-    "https://www.voaafrique.com/api/zrqiteukiq"
+    "https://www.voaafrique.com/api/"
    ],
    "listing_max_items": 20,
    "article_link_selectors": [],
@@ -6242,22 +6242,22 @@
    "tested": false,
    "claim_origin_type": "unknown",
    "url": "https://africacenter.org/",
-   "notes": "ACSS 公共站点 WP feed；本机 egress 阻断，由 runner 实测；内容为分析，非突发",
+   "notes": "C8-4D2 修正：WP /feed/ 实测为**空 channel**（354B、0 items，lastBuildDate 当日但无条目）；改用站点 spotlight 栏目页 HTML 发现（实测 11 条文章链接、full_body 1436-3779 词）。注意：页面无可机读日期（提取器 published_original 为空），与其它 html_listing 源同限",
    "source_tier": "B",
    "source_role": "specialist_analysis",
    "legacy_payload": {
     "source_id": "specialist_acss",
     "name": "Africa Center for Strategic Studies",
     "url": "https://africacenter.org/",
-    "collection_method": "rss",
-    "feed_url": "https://africacenter.org/feed/",
+    "collection_method": "html_listing",
+    "feed_url": "",
     "enabled": true,
     "tested": false,
     "status": "active",
     "notes": "ACSS 公共站点 WP feed；本机 egress 阻断，由 runner 实测；内容为分析，非突发"
    },
    "listing_urls": [
-    "https://africacenter.org/feed/"
+    "https://africacenter.org/"
    ],
    "listing_max_items": 20,
    "article_link_selectors": [],
