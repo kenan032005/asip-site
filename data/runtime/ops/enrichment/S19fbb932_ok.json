@@ -1,0 +1,115 @@
+{
+ "label": "S19fbb932",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f5e7fd1b472880318b0a5a43b200a54c2f8902e0d8a2950abd295b239b5eef84",
+ "tokens": {
+  "input_tokens": 2086,
+  "output_tokens": 458,
+  "total_tokens": 2544
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚联邦政府确认联邦首都区出现一例埃博拉病例并启动公共卫生响应",
+   "summary_zh": "尼日利亚联邦政府于2026年10月20日确认，联邦首都区（FCT）出现一例经实验室确诊的埃博拉病例。患者为一名近期从乌干达乘国际航班抵达尼日利亚的女性，曾在FCT一家私立医院接受治疗数日后确诊，目前已被隔离并接受治疗。当局已启动接触者追踪，目前识别出44名密切接触者，并加强对医护人员的监测与医院感染防控支持。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Federal Capital Territory",
+    "city": "Abuja",
+    "site": null,
+    "raw_text": "Federal Capital Territory (FCT), Abuja, Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦政府确认联邦首都区出现一例埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Government of Nigeria confirm one case of Ebola disease in the Federal Capital Territory (FCT), following laboratory confirmation today, 20 October 2026."
+    },
+    {
+     "fact": "患者为一名近期从乌干达乘国际航班抵达尼日利亚的女性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The patient, a woman who recently arrived in Nigeria on an international flight from Uganda"
+    },
+    {
+     "fact": "患者曾在FCT一家私立医院接受治疗数日后确诊，目前处于隔离状态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "was admitted to a private hospital in the FCT, where she received care for several days before the diagnosis was confirmed. She is currently in isolation and receiving medical care."
+    },
+    {
+     "fact": "目前已识别44名密切接触者并启动接触者追踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Contact tracing has commenced with 44 close contacts identified presently"
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（尼日利亚联邦卫生部）报道，尚缺乏独立交叉验证",
+    "感染源与传播链尚未完全确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚联邦政府确认联邦首都区出现一例埃博拉病例并启动公共卫生响应",
+   "summary_zh": "尼日利亚联邦政府于2026年10月20日确认，联邦首都区（FCT）出现一例经实验室确诊的埃博拉病例。患者为一名近期从乌干达乘国际航班抵达尼日利亚的女性，曾在FCT一家私立医院接受治疗数日后确诊，目前已被隔离并接受治疗。当局已启动接触者追踪，目前识别出44名密切接触者，并加强对医护人员的监测与医院感染防控支持。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Federal Capital Territory",
+    "city": "Abuja",
+    "site": null,
+    "raw_text": "Federal Capital Territory (FCT), Abuja, Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦政府确认联邦首都区出现一例埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Government of Nigeria confirm one case of Ebola disease in the Federal Capital Territory (FCT), following laboratory confirmation today, 20 October 2026."
+    },
+    {
+     "fact": "患者为一名近期从乌干达乘国际航班抵达尼日利亚的女性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The patient, a woman who recently arrived in Nigeria on an international flight from Uganda"
+    },
+    {
+     "fact": "患者曾在FCT一家私立医院接受治疗数日后确诊，目前处于隔离状态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "was admitted to a private hospital in the FCT, where she received care for several days before the diagnosis was confirmed. She is currently in isolation and receiving medical care."
+    },
+    {
+     "fact": "目前已识别44名密切接触者并启动接触者追踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Contact tracing has commenced with 44 close contacts identified presently"
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（尼日利亚联邦卫生部）报道，尚缺乏独立交叉验证",
+    "感染源与传播链尚未完全确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_e62540c019fbb932",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

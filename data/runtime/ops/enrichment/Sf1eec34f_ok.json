@@ -1,0 +1,126 @@
+{
+ "label": "Sf1eec34f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "840f9afdd0bdd58728bebb1506277df513beb520f383ed588002b2583ba6fe82",
+ "tokens": {
+  "input_tokens": 1981,
+  "output_tokens": 431,
+  "total_tokens": 2412
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该事件目前仅有一个来源（Punch）报道，尚缺乏交叉验证\", \"患者感染来源与接触范围尚未获确认\"]",
+    "after": "[\"该事件目前仅有一个来源（Punch）报道，尚缺乏交叉验证\", \"患者感染来源与接触范围尚未获确认\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚阿布贾确诊一例埃博拉病例，联邦政府发布预防提示",
+   "summary_zh": "尼日利亚联邦政府确认首都阿布贾联邦首都区出现一例埃博拉病例，患者为一名近期从乌干达乘国际航班抵达尼日利亚的女性。卫生部长阿里·帕特表示，该患者曾在当地一家私立医院接受治疗数日，目前已被隔离并接受医疗照护，相关部门已启动接触者追踪。联邦政府同时发布了病毒传播途径与防护措施的预防提示。该信息目前仅来自单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "联邦首都区",
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Federal Capital Territory, Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦政府确认阿布贾联邦首都区出现一例埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Government has confirmed a case of Ebola disease in the Federal Capital Territory, Abuja"
+    },
+    {
+     "fact": "患者为一名近期从乌干达乘国际航班抵达尼日利亚的女性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a woman who recently arrived in Nigeria on an international flight from Uganda"
+    },
+    {
+     "fact": "患者曾在联邦首都区一家私立医院接受治疗数日，目前已被隔离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The woman was admitted to a private hospital in the FCT, where she received treatment for several days before the infection was confirmed. She is currently in isolation"
+    },
+    {
+     "fact": "相关部门已启动接触者追踪以阻止传播",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "commenced contact tracing to prevent further transmission of the infection"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（Punch）报道，尚缺乏交叉验证",
+    "患者感染来源与接触范围尚未获确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚阿布贾确诊一例埃博拉病例，联邦政府发布预防提示",
+   "summary_zh": "尼日利亚联邦政府确认首都阿布贾联邦首都区出现一例埃博拉病例，患者为一名近期从乌干达乘国际航班抵达尼日利亚的女性。卫生部长阿里·帕特表示，该患者曾在当地一家私立医院接受治疗数日，目前已被隔离并接受医疗照护，相关部门已启动接触者追踪。联邦政府同时发布了病毒传播途径与防护措施的预防提示。该信息目前仅来自单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "联邦首都区",
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Federal Capital Territory, Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦政府确认阿布贾联邦首都区出现一例埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Government has confirmed a case of Ebola disease in the Federal Capital Territory, Abuja"
+    },
+    {
+     "fact": "患者为一名近期从乌干达乘国际航班抵达尼日利亚的女性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a woman who recently arrived in Nigeria on an international flight from Uganda"
+    },
+    {
+     "fact": "患者曾在联邦首都区一家私立医院接受治疗数日，目前已被隔离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The woman was admitted to a private hospital in the FCT, where she received treatment for several days before the infection was confirmed. She is currently in isolation"
+    },
+    {
+     "fact": "相关部门已启动接触者追踪以阻止传播",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "commenced contact tracing to prevent further transmission of the infection"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（Punch）报道，尚缺乏交叉验证",
+    "患者感染来源与接触范围尚未获确认",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_173613bbf1eec34f",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

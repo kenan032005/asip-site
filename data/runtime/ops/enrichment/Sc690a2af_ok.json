@@ -1,0 +1,148 @@
+{
+ "label": "Sc690a2af",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b193b552cde8c2f7515268b06697d788937ad0aad187e9da7c5ff1f6b2273bab",
+ "tokens": {
+  "input_tokens": 2434,
+  "output_tokens": 622,
+  "total_tokens": 3056
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"融资规模尚未评估，框架仍在制定中\", \"30亿美元年投资机会、1亿至2亿美元试点及10亿美元扩展目标均为目标数字，非已确认的出资承诺\", \"报道未说明框架的出台时间表\"]",
+    "after": "[\"融资规模尚未评估，框架仍在制定中\", \"30亿美元年投资机会、1亿至2亿美元试点及10亿美元扩展目标均为目标数字，非已确认的出资承诺\", \"报道未说明框架的出台时间表\", \"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚联邦政府制定框架，为小农户吸引气候融资",
+   "summary_zh": "尼日利亚联邦政府正在制定一项框架，为受干旱、洪水等气候问题影响的小农户吸引气候融资。总统技术转让实施委员会主席在阿布贾举行的研讨会上表示，该框架旨在引导气候资金流向脆弱农业社区。相关方称融资规模尚未评估，30亿美元年投资机会及1亿至2亿美元试点等数字均为目标而非已确认的出资承诺。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦政府正在制定框架，为受干旱、洪水等气候问题影响的小农户吸引气候融资",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Government is developing a framework to attract climate finance for smallholder farmers affected by drought, flooding and other climate-related challenges."
+    },
+    {
+     "fact": "总统技术转让实施委员会主席Dahiru Muhammed在阿布贾举行的研讨会上宣布这一消息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dr Dahiru Muhammed, Chairman, Presidential Implementation Committee on Technology Transfer (PICTT), said this at a Taxonomy Validation Workshop on Adaptation and Resilience Solutions ... on Tuesday in Abuja."
+    },
+    {
+     "fact": "相关方表示融资规模尚未评估，仍在制定框架并确定实施伙伴",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Financing has not yet been assessed; stakeholders are still developing the framework and identifying the partners required to implement it."
+    },
+    {
+     "fact": "YAPU Solutions称气候适应对小农户而言是每年高达300亿美元的投资机会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "climate adaptation presented an investment opportunity worth up to 30 billion dollars annually for smallholder farmers"
+    },
+    {
+     "fact": "拟议试点项目规模为1亿至2亿美元，首阶段扩展目标为10亿美元，但均为目标而非已确认出资承诺",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Initial plans can involve a pilot project worth between 100 million dollars and 200 million dollars, with the ambition of scaling up financing to one billion dollars in the first expansion phase. However, these figures represent targets rather than confirmed funding commitments"
+    },
+    {
+     "fact": "尼日利亚已吸引约25亿美元气候相关融资，但仍远低于估算需求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria has attracted about 2.5 billion dollars in climate-related financing, but the amount remains significantly below estimated requirements."
+    }
+   ],
+   "uncertainties": [
+    "融资规模尚未评估，框架仍在制定中",
+    "30亿美元年投资机会、1亿至2亿美元试点及10亿美元扩展目标均为目标数字，非已确认的出资承诺",
+    "报道未说明框架的出台时间表"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚联邦政府制定框架，为小农户吸引气候融资",
+   "summary_zh": "尼日利亚联邦政府正在制定一项框架，为受干旱、洪水等气候问题影响的小农户吸引气候融资。总统技术转让实施委员会主席在阿布贾举行的研讨会上表示，该框架旨在引导气候资金流向脆弱农业社区。相关方称融资规模尚未评估，30亿美元年投资机会及1亿至2亿美元试点等数字均为目标而非已确认的出资承诺。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦政府正在制定框架，为受干旱、洪水等气候问题影响的小农户吸引气候融资",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Government is developing a framework to attract climate finance for smallholder farmers affected by drought, flooding and other climate-related challenges."
+    },
+    {
+     "fact": "总统技术转让实施委员会主席Dahiru Muhammed在阿布贾举行的研讨会上宣布这一消息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dr Dahiru Muhammed, Chairman, Presidential Implementation Committee on Technology Transfer (PICTT), said this at a Taxonomy Validation Workshop on Adaptation and Resilience Solutions ... on Tuesday in Abuja."
+    },
+    {
+     "fact": "相关方表示融资规模尚未评估，仍在制定框架并确定实施伙伴",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Financing has not yet been assessed; stakeholders are still developing the framework and identifying the partners required to implement it."
+    },
+    {
+     "fact": "YAPU Solutions称气候适应对小农户而言是每年高达300亿美元的投资机会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "climate adaptation presented an investment opportunity worth up to 30 billion dollars annually for smallholder farmers"
+    },
+    {
+     "fact": "拟议试点项目规模为1亿至2亿美元，首阶段扩展目标为10亿美元，但均为目标而非已确认出资承诺",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Initial plans can involve a pilot project worth between 100 million dollars and 200 million dollars, with the ambition of scaling up financing to one billion dollars in the first expansion phase. However, these figures represent targets rather than confirmed funding commitments"
+    },
+    {
+     "fact": "尼日利亚已吸引约25亿美元气候相关融资，但仍远低于估算需求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria has attracted about 2.5 billion dollars in climate-related financing, but the amount remains significantly below estimated requirements."
+    }
+   ],
+   "uncertainties": [
+    "融资规模尚未评估，框架仍在制定中",
+    "30亿美元年投资机会、1亿至2亿美元试点及10亿美元扩展目标均为目标数字，非已确认的出资承诺",
+    "报道未说明框架的出台时间表",
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_a2274463c690a2af",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

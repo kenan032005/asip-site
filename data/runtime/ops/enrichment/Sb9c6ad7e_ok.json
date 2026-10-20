@@ -1,0 +1,126 @@
+{
+ "label": "Sb9c6ad7e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "45cbb11c05e782aa6e53ebb4920e11702ce1b66e895f1d3dfc06e19537eb11c8",
+ "tokens": {
+  "input_tokens": 2998,
+  "output_tokens": 428,
+  "total_tokens": 3426
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅RFI单一来源报道，尚缺乏交叉验证\", \"罢工是否如期举行及规模尚待观察\"]",
+    "after": "[\"目前仅RFI单一来源报道，尚缺乏交叉验证\", \"罢工是否如期举行及规模尚待观察\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "塞内加尔：数百名工人动员，宣布举行为期三天的大罢工",
+   "summary_zh": "2026年10月20日下午，数百名塞内加尔工人响应全国捍卫劳动阵线（FSDT）的号召在达喀尔游行，该组织汇集了13个工会。此次游行宣布从周三起举行为期72小时的大罢工。尽管政府呼吁取消罢工，工会仍坚持其立场。",
+   "event_type": "civil_unrest",
+   "country_iso3": "SEN",
+   "location": {
+    "country_iso3": "SEN",
+    "admin1": null,
+    "city": "达喀尔",
+    "site": null,
+    "raw_text": "Dakar"
+   },
+   "key_facts": [
+    {
+     "fact": "数百名塞内加尔工人响应FSDT号召在达喀尔游行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quelques centaines de travailleurs sénégalais sont descendus ce mardi 20 octobre dans l'après-midi à Dakar à l'appel du Front national pour la défense du travail (FSDT)"
+    },
+    {
+     "fact": "游行宣布从周三起举行为期72小时的大罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette marche annonce une grève générale de 72 heures à compter de mercredi."
+    },
+    {
+     "fact": "尽管政府呼吁取消罢工，工会仍坚持立场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Malgré l'appel du gouvernement à lever leur mot d'ordre, les syndicats campent sur leur position."
+    },
+    {
+     "fact": "工会诉求包括修改2026年9月3日颁布的新劳动法",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "On retrouve par exemple la révision du nouveau Code du travail du Sénégal, promulgué le 3 septembre 2026."
+    }
+   ],
+   "uncertainties": [
+    "目前仅RFI单一来源报道，尚缺乏交叉验证",
+    "罢工是否如期举行及规模尚待观察"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "塞内加尔：数百名工人动员，宣布举行为期三天的大罢工",
+   "summary_zh": "2026年10月20日下午，数百名塞内加尔工人响应全国捍卫劳动阵线（FSDT）的号召在达喀尔游行，该组织汇集了13个工会。此次游行宣布从周三起举行为期72小时的大罢工。尽管政府呼吁取消罢工，工会仍坚持其立场。",
+   "event_type": "civil_unrest",
+   "country_iso3": "SEN",
+   "location": {
+    "country_iso3": "SEN",
+    "admin1": null,
+    "city": "达喀尔",
+    "site": null,
+    "raw_text": "Dakar"
+   },
+   "key_facts": [
+    {
+     "fact": "数百名塞内加尔工人响应FSDT号召在达喀尔游行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quelques centaines de travailleurs sénégalais sont descendus ce mardi 20 octobre dans l'après-midi à Dakar à l'appel du Front national pour la défense du travail (FSDT)"
+    },
+    {
+     "fact": "游行宣布从周三起举行为期72小时的大罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette marche annonce une grève générale de 72 heures à compter de mercredi."
+    },
+    {
+     "fact": "尽管政府呼吁取消罢工，工会仍坚持立场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Malgré l'appel du gouvernement à lever leur mot d'ordre, les syndicats campent sur leur position."
+    },
+    {
+     "fact": "工会诉求包括修改2026年9月3日颁布的新劳动法",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "On retrouve par exemple la révision du nouveau Code du travail du Sénégal, promulgué le 3 septembre 2026."
+    }
+   ],
+   "uncertainties": [
+    "目前仅RFI单一来源报道，尚缺乏交叉验证",
+    "罢工是否如期举行及规模尚待观察",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_0a720e53b9c6ad7e",
+ "disease_event_id": null,
+ "country_code": "SN"
+}

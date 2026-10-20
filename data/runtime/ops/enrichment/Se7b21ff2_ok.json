@@ -1,0 +1,117 @@
+{
+ "label": "Se7b21ff2",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d4b75fdc9ebb5b19815897c4b6b4b507d7bda22636d1f6590d85762f2385f66c",
+ "tokens": {
+  "input_tokens": 2179,
+  "output_tokens": 460,
+  "total_tokens": 2639
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "乌干达就尼日利亚女子埃博拉感染向尼日利亚政府索要旅行史",
+   "summary_zh": "乌干达卫生部表示该国目前无确诊活跃埃博拉病例，正就一名在尼日利亚确诊感染埃博拉的女子的旅行史向尼日利亚方面索取详细信息。该女子此前曾前往刚果（金）东部经商，并于10月初过境乌干达。乌干达政府强调，该女子过境乌干达并不表明其在该国感染病毒，感染来源仍在调查中。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "FCT, Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "乌干达卫生部表示该国无确诊活跃埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Uganda’s Ministry of Health says the country has no confirmed active Ebola cases"
+    },
+    {
+     "fact": "乌干达正就一名在尼日利亚确诊埃博拉女子的旅行史向尼日利亚索取详细信息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "is seeking detailed information from Nigeria on the travel history of a Nigerian woman who tested positive for the disease"
+    },
+    {
+     "fact": "该女子曾前往刚果（金）东部经商，并于10月初过境乌干达",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the woman travelled to the eastern Democratic Republic of the Congo for business before transiting through Uganda in early October"
+    },
+    {
+     "fact": "乌干达政府称该女子过境不表明其在该国感染病毒，感染来源仍在调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the woman’s transit through the country did not establish that she contracted the virus there, adding that the source of infection remained under investigation"
+    }
+   ],
+   "uncertainties": [
+    "感染来源尚未查明，仍在调查中",
+    "该女子在乌干达期间是否已具传染性尚未确认",
+    "目前仅单一来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "乌干达就尼日利亚女子埃博拉感染向尼日利亚政府索要旅行史",
+   "summary_zh": "乌干达卫生部表示该国目前无确诊活跃埃博拉病例，正就一名在尼日利亚确诊感染埃博拉的女子的旅行史向尼日利亚方面索取详细信息。该女子此前曾前往刚果（金）东部经商，并于10月初过境乌干达。乌干达政府强调，该女子过境乌干达并不表明其在该国感染病毒，感染来源仍在调查中。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "FCT, Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "乌干达卫生部表示该国无确诊活跃埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Uganda’s Ministry of Health says the country has no confirmed active Ebola cases"
+    },
+    {
+     "fact": "乌干达正就一名在尼日利亚确诊埃博拉女子的旅行史向尼日利亚索取详细信息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "is seeking detailed information from Nigeria on the travel history of a Nigerian woman who tested positive for the disease"
+    },
+    {
+     "fact": "该女子曾前往刚果（金）东部经商，并于10月初过境乌干达",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the woman travelled to the eastern Democratic Republic of the Congo for business before transiting through Uganda in early October"
+    },
+    {
+     "fact": "乌干达政府称该女子过境不表明其在该国感染病毒，感染来源仍在调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the woman’s transit through the country did not establish that she contracted the virus there, adding that the source of infection remained under investigation"
+    }
+   ],
+   "uncertainties": [
+    "感染来源尚未查明，仍在调查中",
+    "该女子在乌干达期间是否已具传染性尚未确认",
+    "目前仅单一来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_70291d99e7b21ff2",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
