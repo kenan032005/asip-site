@@ -1,0 +1,115 @@
+{
+ "label": "S0e5058e6",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6a21cd5547d85c280b0d20decc9266773f3f5ab1cab6a7a75dce8219aebff674",
+ "tokens": {
+  "input_tokens": 2413,
+  "output_tokens": 560,
+  "total_tokens": 2973
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "恩贾梅纳未成年人强奸案开庭：检方求刑两年实刑",
+   "summary_zh": "恩贾梅纳大审法院审理一名男子被控强奸其15岁姻亲侄女的案件，检方请求判处两年实刑并处罚金10万非洲法郎。据称该男子利用寄住其姐姐家、姐夫长期不在的机会多次对受害人实施性侵，受害人因健康状况恶化就医后被发现怀孕。目前该案为单一来源报道，指控内容尚待法院判决确认。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": "恩贾梅纳大审法院",
+    "raw_text": "N'Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "恩贾梅纳大审法院审理一名男子被控强奸15岁姻亲侄女案",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le tribunal de grande instance de N'Djamena a examiné, ce lundi 19 octobre 2026, l'affaire d'un homme poursuivi pour des faits d'agression sexuelle et de viol sur une mineure de 15 ans, qui s'avère être sa belle-nièce."
+    },
+    {
+     "fact": "检方请求判处两年实刑并处罚金10万非洲法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il a requis une peine de deux ans d'emprisonnement ferme ainsi qu'une amende de 100 000 francs CFA, sur le fondement de l'article 383 du Code pénal tchadien."
+    },
+    {
+     "fact": "据称被告利用姐夫长期不在家多次对受害人实施性侵",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Hébergé au domicile de sa sœur, il aurait profité de l'absence prolongée de son beau-frère pour imposer, à plusieurs reprises, des relations sexuelles à la jeune victime."
+    },
+    {
+     "fact": "受害人因健康状况恶化就医检查后被发现怀孕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "C'est finalement la dégradation de l'état de santé de l'adolescente et l'échec de plusieurs traitements médicaux qui ont conduit à des examens hospitaliers, révélant sa grossesse."
+    }
+   ],
+   "uncertainties": [
+    "强奸指控属据称事实，尚未经法院判决确认",
+    "案件目前仅有一个来源（Alwihda Info）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "恩贾梅纳未成年人强奸案开庭：检方求刑两年实刑",
+   "summary_zh": "恩贾梅纳大审法院审理一名男子被控强奸其15岁姻亲侄女的案件，检方请求判处两年实刑并处罚金10万非洲法郎。据称该男子利用寄住其姐姐家、姐夫长期不在的机会多次对受害人实施性侵，受害人因健康状况恶化就医后被发现怀孕。目前该案为单一来源报道，指控内容尚待法院判决确认。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": "恩贾梅纳大审法院",
+    "raw_text": "N'Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "恩贾梅纳大审法院审理一名男子被控强奸15岁姻亲侄女案",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le tribunal de grande instance de N'Djamena a examiné, ce lundi 19 octobre 2026, l'affaire d'un homme poursuivi pour des faits d'agression sexuelle et de viol sur une mineure de 15 ans, qui s'avère être sa belle-nièce."
+    },
+    {
+     "fact": "检方请求判处两年实刑并处罚金10万非洲法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il a requis une peine de deux ans d'emprisonnement ferme ainsi qu'une amende de 100 000 francs CFA, sur le fondement de l'article 383 du Code pénal tchadien."
+    },
+    {
+     "fact": "据称被告利用姐夫长期不在家多次对受害人实施性侵",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Hébergé au domicile de sa sœur, il aurait profité de l'absence prolongée de son beau-frère pour imposer, à plusieurs reprises, des relations sexuelles à la jeune victime."
+    },
+    {
+     "fact": "受害人因健康状况恶化就医检查后被发现怀孕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "C'est finalement la dégradation de l'état de santé de l'adolescente et l'échec de plusieurs traitements médicaux qui ont conduit à des examens hospitaliers, révélant sa grossesse."
+    }
+   ],
+   "uncertainties": [
+    "强奸指控属据称事实，尚未经法院判决确认",
+    "案件目前仅有一个来源（Alwihda Info）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_3c594c8a0e5058e6",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

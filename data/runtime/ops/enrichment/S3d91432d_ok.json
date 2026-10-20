@@ -1,0 +1,128 @@
+{
+ "label": "S3d91432d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "903c1b4c90256bc22cbff1178727589218e57d09c5ac04f95e0cddc0756dc043",
+ "tokens": {
+  "input_tokens": 2951,
+  "output_tokens": 548,
+  "total_tokens": 3499
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"资金管理“模糊”系非洲疾控中心单方面说法，世卫组织称追溯工作仍在进行，尚未完成\", \"约7亿美元资金的使用情况尚未获得所有合作伙伴的完整答复\", \"目前仅有一个来源（RFI）报道，尚缺乏交叉验证\"]",
+    "after": "[\"资金管理“模糊”系非洲疾控中心单方面说法，世卫组织称追溯工作仍在进行，尚未完成\", \"约7亿美元资金的使用情况尚未获得所有合作伙伴的完整答复\", \"目前仅有一个来源（RFI）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "埃博拉：世卫组织称资金可追溯，非洲疾控中心指资金管理“模糊”",
+   "summary_zh": "非洲疾控中心总干事卡塞亚称，国际捐助方宣布为抗击埃博拉拨付9.62亿美元，但刚果（金）当局仅能追溯约2.2亿美元的资金管理情况，并指约7亿美元资金管理“模糊”。世卫组织官员回应称，这些资金“当然可以追溯”，正通过财务追踪机制与刚果（金）政府及合作伙伴推进核查。刚果（金）已宣布第17次埃博拉疫情，累计确诊9455例、死亡4561例，疫情已扩散至第八个省份。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "République démocratique du Congo"
+   },
+   "key_facts": [
+    {
+     "fact": "非洲疾控中心称捐助方宣布拨付9.62亿美元用于抗击埃博拉，但刚果（金）当局仅能追溯约2.2亿美元的资金管理情况",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une différence entre les 962 millions de dollars annoncés comme décaissés par des bailleurs internationaux pour la lutte contre Ebola et les quelques 220 millions dont la gestion a pu être retracée par les autorités congolaises"
+    },
+    {
+     "fact": "世卫组织官员称这些资金当然可以追溯，正通过财务追踪机制推进核查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "C'est bien sûr possible de retracer ces 700 millions de fonds"
+    },
+    {
+     "fact": "刚果（金）累计确诊埃博拉病例9455例，其中死亡4561例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le nombre total de cas confirmés est désormais de 9 455, dont 4 561 décès"
+    },
+    {
+     "fact": "刚果（金）第八个省份北乌班吉已受埃博拉疫情影响",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une huitième province est désormais touchée par Ebola, le Nord-Ubangi"
+    }
+   ],
+   "uncertainties": [
+    "资金管理“模糊”系非洲疾控中心单方面说法，世卫组织称追溯工作仍在进行，尚未完成",
+    "约7亿美元资金的使用情况尚未获得所有合作伙伴的完整答复",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "埃博拉：世卫组织称资金可追溯，非洲疾控中心指资金管理“模糊”",
+   "summary_zh": "非洲疾控中心总干事卡塞亚称，国际捐助方宣布为抗击埃博拉拨付9.62亿美元，但刚果（金）当局仅能追溯约2.2亿美元的资金管理情况，并指约7亿美元资金管理“模糊”。世卫组织官员回应称，这些资金“当然可以追溯”，正通过财务追踪机制与刚果（金）政府及合作伙伴推进核查。刚果（金）已宣布第17次埃博拉疫情，累计确诊9455例、死亡4561例，疫情已扩散至第八个省份。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "République démocratique du Congo"
+   },
+   "key_facts": [
+    {
+     "fact": "非洲疾控中心称捐助方宣布拨付9.62亿美元用于抗击埃博拉，但刚果（金）当局仅能追溯约2.2亿美元的资金管理情况",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une différence entre les 962 millions de dollars annoncés comme décaissés par des bailleurs internationaux pour la lutte contre Ebola et les quelques 220 millions dont la gestion a pu être retracée par les autorités congolaises"
+    },
+    {
+     "fact": "世卫组织官员称这些资金当然可以追溯，正通过财务追踪机制推进核查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "C'est bien sûr possible de retracer ces 700 millions de fonds"
+    },
+    {
+     "fact": "刚果（金）累计确诊埃博拉病例9455例，其中死亡4561例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le nombre total de cas confirmés est désormais de 9 455, dont 4 561 décès"
+    },
+    {
+     "fact": "刚果（金）第八个省份北乌班吉已受埃博拉疫情影响",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une huitième province est désormais touchée par Ebola, le Nord-Ubangi"
+    }
+   ],
+   "uncertainties": [
+    "资金管理“模糊”系非洲疾控中心单方面说法，世卫组织称追溯工作仍在进行，尚未完成",
+    "约7亿美元资金的使用情况尚未获得所有合作伙伴的完整答复",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_308b10d83d91432d",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

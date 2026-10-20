@@ -1,0 +1,127 @@
+{
+ "label": "S7c8aa573",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "efa9a46a9b8f00c18fcdf81cc1649bb17b8354044eec8478c4ea8bde19642621",
+ "tokens": {
+  "input_tokens": 2853,
+  "output_tokens": 603,
+  "total_tokens": 3456
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "中非共和国：10月12日“死城日”活动的五名组织者接受宪兵队讯问",
+   "summary_zh": "中非共和国五名民间社会领袖因呼吁10月12日举行“死城日”活动，于10月15日在班吉被捕，10月19日接受宪兵队调查部门讯问。他们被控扰乱公共秩序和煽动公民抗命，辩护方指称部分讯问在没有律师在场的情况下进行。五人否认与反对派有联系，也否认参与骚乱，定于本周二被移送检察官，以决定是否释放或羁押。",
+   "event_type": "civil_unrest",
+   "country_iso3": "CAF",
+   "location": {
+    "country_iso3": "CAF",
+    "admin1": null,
+    "city": "班吉",
+    "site": "宪兵队调查与侦查科（SRI）",
+    "raw_text": "Bangui, Section de recherches et d'investigations (SRI)"
+   },
+   "key_facts": [
+    {
+     "fact": "五名民间社会领袖因呼吁10月12日“死城日”活动于10月15日在班吉被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cinq acteurs de la société civile arrêtés le 15 octobre 2026 à Bangui"
+    },
+    {
+     "fact": "五人于10月19日接受宪兵队调查与侦查科讯问，被控扰乱公共秩序和煽动公民抗命",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "auditionnés ce 19 octobre à la Section de recherches et d'investigations (SRI)... poursuivis notamment pour troubles à l'ordre public et incitation à la désobéissance civile, selon le parquet"
+    },
+    {
+     "fact": "辩护方指称部分讯问在没有律师在场的情况下进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la défense a dénoncé une procédure irrégulière, menée en partie sans la présence des avocats"
+    },
+    {
+     "fact": "五人否认寻求反对派支持，也否认参与骚乱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les cinq hommes ont nié avoir sollicité le soutien de l'opposition et contesté toute implication dans des troubles"
+    },
+    {
+     "fact": "五人定于本周二被移送检察官，以决定是否释放或羁押",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ils doivent être présentés ce mardi au procureur de la République, qui décidera de leur éventuelle libération ou de leur placement en détention"
+    }
+   ],
+   "uncertainties": [
+    "指控内容来自检方说法，尚未经法院审理确认",
+    "辩护方关于程序违规的指称尚未获独立证实",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "中非共和国：10月12日“死城日”活动的五名组织者接受宪兵队讯问",
+   "summary_zh": "中非共和国五名民间社会领袖因呼吁10月12日举行“死城日”活动，于10月15日在班吉被捕，10月19日接受宪兵队调查部门讯问。他们被控扰乱公共秩序和煽动公民抗命，辩护方指称部分讯问在没有律师在场的情况下进行。五人否认与反对派有联系，也否认参与骚乱，定于本周二被移送检察官，以决定是否释放或羁押。",
+   "event_type": "civil_unrest",
+   "country_iso3": "CAF",
+   "location": {
+    "country_iso3": "CAF",
+    "admin1": null,
+    "city": "班吉",
+    "site": "宪兵队调查与侦查科（SRI）",
+    "raw_text": "Bangui, Section de recherches et d'investigations (SRI)"
+   },
+   "key_facts": [
+    {
+     "fact": "五名民间社会领袖因呼吁10月12日“死城日”活动于10月15日在班吉被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cinq acteurs de la société civile arrêtés le 15 octobre 2026 à Bangui"
+    },
+    {
+     "fact": "五人于10月19日接受宪兵队调查与侦查科讯问，被控扰乱公共秩序和煽动公民抗命",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "auditionnés ce 19 octobre à la Section de recherches et d'investigations (SRI)... poursuivis notamment pour troubles à l'ordre public et incitation à la désobéissance civile, selon le parquet"
+    },
+    {
+     "fact": "辩护方指称部分讯问在没有律师在场的情况下进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la défense a dénoncé une procédure irrégulière, menée en partie sans la présence des avocats"
+    },
+    {
+     "fact": "五人否认寻求反对派支持，也否认参与骚乱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les cinq hommes ont nié avoir sollicité le soutien de l'opposition et contesté toute implication dans des troubles"
+    },
+    {
+     "fact": "五人定于本周二被移送检察官，以决定是否释放或羁押",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ils doivent être présentés ce mardi au procureur de la République, qui décidera de leur éventuelle libération ou de leur placement en détention"
+    }
+   ],
+   "uncertainties": [
+    "指控内容来自检方说法，尚未经法院审理确认",
+    "辩护方关于程序违规的指称尚未获独立证实",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_130aa8357c8aa573",
+ "disease_event_id": null,
+ "country_code": "CF"
+}
