@@ -12,8 +12,8 @@
 ```
 SOURCE_COMMIT=e0628ac99a3230dca29b5368e7379307e0b6ec48
 MAIN_RELEASE_SHA=c2c48d12175489b256a9914d74bdfad7b66f9bfc   (release: pin C8-4D1 (e0628ac9))
-PRODUCTION_STATE_SHA=c64d70399b371643f75cc06c3384461e0f6e30c5   (as of 2026-10-18T17:21Z)
-GH_PAGES_SHA=ec6eb48f335e03912b4cdfcfa3c2297087b4cdbd         (as of 2026-10-18T17:21Z)
+PRODUCTION_STATE_SHA=f0225f848ee26c877d26f204c853c014e73763b3   (as of 2026-10-20T06:07Z)
+GH_PAGES_SHA=d7443a26601c50bb0a7441b137bcf33cdd2f48d5         (as of 2026-10-20T06:07Z)
 
 BASELINE_LOGICAL_SOURCES=153
 FINAL_LOGICAL_SOURCES=153
@@ -27,21 +27,22 @@ STATIC_FEEDS_CONFIRMED=16
 COUNTRY_DEPENDENT_FEEDS_CONFIRMED=0
 SHARED_FEED_GROUPS=5
 SHARED_FEED_SOURCE_IDS=12
-SOURCES_REUSE_ENABLED=0        (生产 flag 仍为 OFF；canary 待仓库变量开启)
+SOURCES_REUSE_ENABLED=3        (canary 白名单：intl_rfi_afrique_chad / intl_rfi_afrique_niger / pan_rfi_afrique)
 
 HTTP_REQUESTS_BEFORE=12        (5 shared feeds × 各自 source_id 执行，真实网络)
 HTTP_REQUESTS_AFTER=5
-MEASURED_REQUEST_SAVINGS=7     (58.3%)
+MEASURED_REQUEST_SAVINGS=2     (生产三轮合计复用 2 次 / 2963 次物理请求 ≈ 0.07%；实验室 bench 为 7/12=58.3%)
 HTTP_TIME_BEFORE=9.89
 HTTP_TIME_AFTER=2.27
-CACHE_HITS=7
-CACHE_MISSES=5
-CACHE_BYTES=162729
+CACHE_HITS=2                    (生产三轮：1 / 0 / 1；实验室 5 组 bench：7)
+CACHE_MISSES=7                  (生产三轮：2 / 3 / 2)
+CACHE_EXPIRED=4                 (生产三轮：1 / 2 / 1；TTL=600s 是主要限制)
+CACHE_BYTES=33190               (生产单条 RFI feed)
 CACHE_TTL_SECONDS=600
 
-P0_SKIPS=0                     (首个新 pin 周期 run 39157137491：PHASE0 skipped=0/exec=12)
-P1_SKIPS=0                     (PHASE1 skipped=0/exec=16)
-LANE_A_SKIPS=0                 (PHASE2 skipped=0/exec=123)
+P0_SKIPS=0                     (四轮均为 0：19:07Z + 三轮 canary)
+P1_SKIPS=0                     (四轮均为 0)
+LANE_A_SKIPS=0                 (四轮均为 0)
 
 GEO_EQUIVALENCE=PASS
 ARTICLE_EQUIVALENCE=PASS
@@ -56,13 +57,15 @@ ROLLBACK_TESTED=PASS           (flag=0 时行为等价于 C8-4C4；默认关闭�
 GATE_A_FIX=PASS
 PHASE_TELEMETRY=PASS
 DEFAULT_OFF_RUN=PASS           (run 39157137491 @2026-10-18T19:07:57Z, pin e0628ac9)
+CANARY_RUNS_COMPLETED=3        (三轮自然采集，全部 reconciled=true / drop=0)
 
 CANARY_ALLOWLIST=intl_rfi_afrique_chad,intl_rfi_afrique_niger,pan_rfi_afrique
 CANARY_ALLOWLIST_VERIFIED=YES  (三 ID 均存在于 e0628ac9 注册表；feed 同为 https://www.rfi.fr/fr/afrique/rss；请求身份一致 89568512c1683f6a)
-CANARY_RUN_1=PENDING
-CANARY_RUN_2=PENDING
+CANARY_RUN_1=20261019T180842+0800_tcbxvg   (run 39299596472, 2026-10-19T18:08:41Z)
+CANARY_RUN_2=20261019T220901+0800_4i3o8r   (run 39332417561, 2026-10-19T22:09:00Z)
+CANARY_RUN_3=20261020T020858+0800_ldqbhm   (run 39356999342, 2026-10-20T02:08:58Z)
 
-FINAL_RESULT=PARTIAL_PENDING_PRODUCTION_OBSERVATION
+FINAL_RESULT=PASS_C8_4D1_SHARED_FEED_OPTIMIZATION
 ```
 
 ---
@@ -317,7 +320,10 @@ Gate B 实现（身份判定 + run-local 有界缓存 + TTL + 开关 + 计数）
 3. `P0_SKIPS/P1_SKIPS/LANE_A_SKIPS`：本轮仍为 PENDING——改动前遥测未进入 summary 层，
    历史 run 无该字段；新指标随 `e0628ac9` 生效后首轮即可实测。
 
-**FINAL_RESULT = PARTIAL_PENDING_PRODUCTION_OBSERVATION**（A–E 成立；F 待两轮自然周期）。
+> 本节记录的是切换当晚的中间状态，**已被 §11（三轮自然周期终验）取代**：最终判定为
+> `PASS_C8_4D1_SHARED_FEED_OPTIMIZATION`。
+
+**（历史）FINAL_RESULT = PARTIAL_PENDING_PRODUCTION_OBSERVATION**（A–E 成立；F 待自然周期）。
 未新增全局/区域源；未启动 C8-4D2；canary 白名单未自动扩大。
 
 ---
@@ -467,3 +473,84 @@ ASIP_SHARED_FEED_REUSE_SOURCES=intl_rfi_afrique_chad,intl_rfi_afrique_niger,pan_
 
 设置后需观察两个自然 collection-due 周期（间隔 ≥2h45m）。当前末次成功采集 `19:56:31Z`，
 首个可命中周期约 `23:05Z`，第二个约 `02:00Z(+1d)`。
+
+---
+
+## 11. 终验记录（FINAL CLOSEOUT — 三轮自然采集）
+
+独立复核方式：对 `production-state` 历史用 `git log -S<collector_run_id>` 定位每轮产物提交，
+直接读取该提交的 `data/runtime/ops/collection_summary.json` 与 `collection_source_stats.json`，
+并与同提交 `operations_status.json` 的运行记录对照（未触发任何采集，未改生产代码）。
+
+| 项 | 轮 1 | 轮 2 | 轮 3 |
+|---|---|---|---|
+| collector run_id | `20261019T180842+0800_tcbxvg` | `20261019T220901+0800_4i3o8r` | `20261020T020858+0800_ldqbhm` |
+| 状态提交 | `52c7c94c2` | `81bb1ed7f` | `f012ce4cd` |
+| orchestrator run | `39299596472` (19:08:41Z) | `39332417561` (22:09:00Z) | `39356999342` (02:08:58Z) |
+| trigger | external_scheduler / automation | 同左 | 同左 |
+| EXPANDED_EXECUTIONS | 888 | 888 | 888 |
+| CACHE_HITS | **1** | **0** | **1** |
+| CACHE_MISSES | 2 | 3 | 2 |
+| CACHE_EXPIRED | 1 | 2 | 1 |
+| REUSED_REQUESTS | 1 | 0 | 1 |
+| PHYSICAL_NETWORK_REQUESTS | 1044 | 857 | 1062 |
+| P0_NIGER_ATTEMPTED / SKIPPED | 12 / **0** | 12 / **0** | 12 / **0** |
+| P1_CORE_ATTEMPTED / SKIPPED | 16 / **0** | 16 / **0** | 16 / **0** |
+| LANE_A_ATTEMPTED / SKIPPED | 123 / **0** | 123 / **0** | 123 / **0** |
+| PHASE3_ATTEMPTED / SKIPPED | 305 / 432 | 152 / 585 | 373 / 364 |
+| PHASE_SKIP_RECONCILED | **true** | **true** | **true** |
+| PHASE_UNENUMERATED_KEYS | 0 | 0 | 0 |
+| TRUE_UNACCOUNTED_DROP | **0** | **0** | **0** |
+| ARTICLES_DISCOVERED | 4954 | 3292 | 5856 |
+| PUBLISHED / QUARANTINED | 15 / 179 | 8 / 118 | 7 / 67 |
+| DUPLICATES | 2407 | 1319 | 3196 |
+| bypass_not_allowlisted | 121 | 89 | 139 |
+
+三轮合计：物理请求 2963 次，缓存复用 **2** 次；P0/P1/LaneA 墙钟跳过合计 **0**；
+对账逐轮成立；静默丢弃逐轮为 0。
+
+### 11.1 必须记录的三个限制/缺陷
+
+1. **实际节省很小（诚实口径）**：canary 仅启用 RFI 三源，单轮理论最大复用 2 次（1 miss + 2 hit），
+   实测 1 / 0 / 1，三轮共 2 次，占 2963 次物理请求的 **≈0.07%**。实验室 5 组 bench 的
+   12→5（-58.3%）是"同一批共享 feed 执行行"的局部口径，**不能**外推为整轮收益。
+2. **TTL 过期是主要限制**：`ASIP_SHARED_FEED_REUSE_TTL_SECONDS=600`，而单轮墙钟约 3000s；
+   三个 RFI 源在相位/国家管线中的执行时点经常相隔 10 分钟以上，缓存条目在第二次使用前即过期
+   （`cache_expired` 三轮合计 4）。这正是轮 2 出现 `hits=0 / expired=2` 的原因。
+   若要提高收益，需要评估 TTL 与相位顺序（属后续优化，不在本包范围内，且本轮不调整）。
+3. **PHASE4 分类缺陷（遥测归因错误，非调度错误）**：
+   `registry._unified()` 暴露的是 `source_scope`（54 国等多国源为长列表），而相位分类读的是
+   `_src.get("country_scope")` —— 该键不存在，恒为 `None` → 长度 0 → 一律判为 **phase 3**。
+   因此三轮 `PHASE4_*` 全为 0，泛非/多国源全部计入 PHASE3。
+   影响面：**仅相位遥测的归因**；PASS B 同时执行 phase 3 与 4，故调度行为与保证键不受影响
+   （P0/P1/Lane A 三轮跳过均为 0 可佐证）。修复需改 `stage3_collect_v2.py` 的取值键
+   （`source_scope`）并补一个回归测试，属独立小修，未在本轮授权内实施。
+
+### 11.2 生产配置保持
+
+- `main` 仍为 `c2c48d12`（release pin 未再变动），本轮未修改任何生产代码。
+- 仓库变量保持 canary 状态：`ASIP_SHARED_FEED_REUSE=1`、
+  `ASIP_SHARED_FEED_REUSE_SOURCES=intl_rfi_afrique_chad,intl_rfi_afrique_niger,pan_rfi_afrique`。
+- **未扩大白名单**（`bypass_not_allowlisted` 每轮 89–139，绝大多数 RSS 源仍不复用）。
+- 回滚路径不变：变量置 `0` 即回到 C8-4C4 行为。
+
+### 11.3 验收对照
+
+| 条件 | 结果 |
+|---|---|
+| 1. Gate A 遥测真实可用 | PASS（`PHASE_TELEMETRY_BASIS=measured_source_country_rows`，四轮均 true） |
+| 2. 四个已知缺陷已解决 | PASS（ben_webtv / nga_nrc / PHASE 上抛 / 指标命名） |
+| 3. 默认关闭周期健康 | PASS（19:07Z 轮：hits=0，P0/P1/LaneA 跳过 0） |
+| 4. 两轮以上 canary 自然周期 | PASS（三轮） |
+| 5. 至少一次真实共享复用 | PASS（三轮合计 2 次，`reused_requests=2`） |
+| 6. 节省由真实计数器支撑 | PASS（`cache_hits` / `physical_network_requests` 实测，非推算） |
+| 7. P0/P1/Lane A 无实质回归 | PASS（三轮跳过全 0） |
+| 8. 无文章/地理/溯源回归 | PASS（固定 fixture 语义等价 + 三轮 `TRUE_UNACCOUNTED_DROP=0`；自然周期人群不可直接比同） |
+| 9. 回滚可用 | PASS（变量开关） |
+| 10. 未改源数/AI/策略 | PASS（153/151；AI 与安全策略未触碰） |
+
+```
+FINAL_RESULT = PASS_C8_4D1_SHARED_FEED_OPTIMIZATION
+```
+
+停止条件：本包至此结束。不扩大白名单、不启动 C8-4D2、不再触发采集。
