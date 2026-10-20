@@ -1,0 +1,117 @@
+{
+ "label": "S8da2873c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f0b8e07459234f392fe0666298138525d57a39aba7b135d3867834d3f753196b",
+ "tokens": {
+  "input_tokens": 2736,
+  "output_tokens": 511,
+  "total_tokens": 3247
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁埃克佩前区长因虚假车辆销售案面临7年监禁",
+   "summary_zh": "贝宁塞梅-波吉市埃克佩PK 10前区长因涉嫌网络诈骗25.44万非洲法郎被起诉，检方要求判处其7年监禁并罚款200万非洲法郎。案件于10月19日在打击经济犯罪和恐怖主义法院开庭审理，另有3名被告同案受审，其中两人被指为MTN贝宁公司员工。法院定于2026年12月7日宣判，四名被告目前均享有无罪推定。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": "韦梅省",
+    "city": "塞梅-波吉",
+    "site": "埃克佩PK 10",
+    "raw_text": "Ekpè PK 10, dans la commune de Sèmè-Podji"
+   },
+   "key_facts": [
+    {
+     "fact": "检方要求判处埃克佩前区长7年监禁并罚款200万非洲法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sept ans de prison ferme et deux millions de FCFA d'amende. C'est la peine requise, ce lundi 19 octobre, par le ministère public contre l'ancien chef quartier d'Ekpè PK 10"
+    },
+    {
+     "fact": "案件涉及涉嫌网络诈骗25.44万非洲法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il est impliqué dans une affaire présumée d'escroquerie via internet portant sur 25,44 millions de FCFA"
+    },
+    {
+     "fact": "法院定于2026年12月7日宣判",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le verdict est attendu le 7 décembre 2026"
+    },
+    {
+     "fact": "四名被告目前享有无罪推定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les quatre prévenus bénéficient de la présomption d'innocence"
+    }
+   ],
+   "uncertainties": [
+    "案件事实为涉嫌性质，尚未经法院判决确认",
+    "目前仅单一来源（Fraternité）报道，尚缺乏交叉验证",
+    "被告享有无罪推定，最终判决待2026年12月7日公布"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁埃克佩前区长因虚假车辆销售案面临7年监禁",
+   "summary_zh": "贝宁塞梅-波吉市埃克佩PK 10前区长因涉嫌网络诈骗25.44万非洲法郎被起诉，检方要求判处其7年监禁并罚款200万非洲法郎。案件于10月19日在打击经济犯罪和恐怖主义法院开庭审理，另有3名被告同案受审，其中两人被指为MTN贝宁公司员工。法院定于2026年12月7日宣判，四名被告目前均享有无罪推定。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": "韦梅省",
+    "city": "塞梅-波吉",
+    "site": "埃克佩PK 10",
+    "raw_text": "Ekpè PK 10, dans la commune de Sèmè-Podji"
+   },
+   "key_facts": [
+    {
+     "fact": "检方要求判处埃克佩前区长7年监禁并罚款200万非洲法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sept ans de prison ferme et deux millions de FCFA d'amende. C'est la peine requise, ce lundi 19 octobre, par le ministère public contre l'ancien chef quartier d'Ekpè PK 10"
+    },
+    {
+     "fact": "案件涉及涉嫌网络诈骗25.44万非洲法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il est impliqué dans une affaire présumée d'escroquerie via internet portant sur 25,44 millions de FCFA"
+    },
+    {
+     "fact": "法院定于2026年12月7日宣判",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le verdict est attendu le 7 décembre 2026"
+    },
+    {
+     "fact": "四名被告目前享有无罪推定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les quatre prévenus bénéficient de la présomption d'innocence"
+    }
+   ],
+   "uncertainties": [
+    "案件事实为涉嫌性质，尚未经法院判决确认",
+    "目前仅单一来源（Fraternité）报道，尚缺乏交叉验证",
+    "被告享有无罪推定，最终判决待2026年12月7日公布"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_570c470e8da2873c",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

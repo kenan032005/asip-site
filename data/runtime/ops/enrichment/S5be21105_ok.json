@@ -1,0 +1,117 @@
+{
+ "label": "S5be21105",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c9467087a39e1df0b52c82645cc4fe28833c470ba57246779ca38c7162776201",
+ "tokens": {
+  "input_tokens": 3103,
+  "output_tokens": 489,
+  "total_tokens": 3592
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得：提贝斯提民间力量呼吁米斯基停止敌对行动",
+   "summary_zh": "2026年10月14日，乍得国防与安全部队与米斯基自卫委员会在提贝斯提地区发生冲突后，提贝斯提省民间力量公开呼吁立即停止战斗。他们要求全面执行2025年4月20日签署的巴尔达伊和平协议，并建立常设协商机制。声明对人员伤亡表示哀悼，敦促双方通过对话保护平民。据称反复冲突未能解决金矿资源管理问题，并延缓了埃米库西省行政、学校和医疗服务的恢复。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "提贝斯提",
+    "city": "米斯基",
+    "site": null,
+    "raw_text": "Miski, province du Tibesti, Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年10月14日，乍得国防与安全部队与米斯基自卫委员会发生冲突",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Après les affrontements du 14 octobre 2026 entre les Forces de défense et de sécurité et le Comité d’autodéfense de Miski"
+    },
+    {
+     "fact": "提贝斯提民间力量呼吁立即停止战斗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les forces vives du Tibesti appellent à l’arrêt immédiat des combats"
+    },
+    {
+     "fact": "声明要求全面执行2025年4月20日签署的巴尔达伊和平协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les signataires demandent l’application intégrale de l’accord de Bardaï, signé le 20 avril 2025"
+    },
+    {
+     "fact": "声明对人员伤亡表示哀悼并呼吁保护平民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les signataires déplorent les pertes en vies humaines et expriment leur compassion aux familles endeuillées"
+    }
+   ],
+   "uncertainties": [
+    "冲突具体伤亡人数尚未公布",
+    "冲突起因与责任归属尚未获独立证实",
+    "目前仅单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得：提贝斯提民间力量呼吁米斯基停止敌对行动",
+   "summary_zh": "2026年10月14日，乍得国防与安全部队与米斯基自卫委员会在提贝斯提地区发生冲突后，提贝斯提省民间力量公开呼吁立即停止战斗。他们要求全面执行2025年4月20日签署的巴尔达伊和平协议，并建立常设协商机制。声明对人员伤亡表示哀悼，敦促双方通过对话保护平民。据称反复冲突未能解决金矿资源管理问题，并延缓了埃米库西省行政、学校和医疗服务的恢复。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "提贝斯提",
+    "city": "米斯基",
+    "site": null,
+    "raw_text": "Miski, province du Tibesti, Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年10月14日，乍得国防与安全部队与米斯基自卫委员会发生冲突",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Après les affrontements du 14 octobre 2026 entre les Forces de défense et de sécurité et le Comité d’autodéfense de Miski"
+    },
+    {
+     "fact": "提贝斯提民间力量呼吁立即停止战斗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les forces vives du Tibesti appellent à l’arrêt immédiat des combats"
+    },
+    {
+     "fact": "声明要求全面执行2025年4月20日签署的巴尔达伊和平协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les signataires demandent l’application intégrale de l’accord de Bardaï, signé le 20 avril 2025"
+    },
+    {
+     "fact": "声明对人员伤亡表示哀悼并呼吁保护平民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les signataires déplorent les pertes en vies humaines et expriment leur compassion aux familles endeuillées"
+    }
+   ],
+   "uncertainties": [
+    "冲突具体伤亡人数尚未公布",
+    "冲突起因与责任归属尚未获独立证实",
+    "目前仅单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_2ca35d685be21105",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
