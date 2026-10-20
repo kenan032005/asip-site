@@ -1,0 +1,136 @@
+{
+ "label": "S8d91f25b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d5cc613fb8b99e96252b6cf3679d1697b10f738e91d827d0e17df83249b9f861",
+ "tokens": {
+  "input_tokens": 2731,
+  "output_tokens": 584,
+  "total_tokens": 3315
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"数据来源为IDMC（2025）、世界银行（2025）、IOM和UNHCR（2026年中）等，统计口径与时间点存在差异\", \"部分流离失所者返回原籍的情况被描述为不稳定，实际安全状况有待核实\"]",
+    "after": "[\"数据来源为IDMC（2025）、世界银行（2025）、IOM和UNHCR（2026年中）等，统计口径与时间点存在差异\", \"部分流离失所者返回原籍的情况被描述为不稳定，实际安全状况有待核实\", \"据Africa Center for Strategic Studies报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "非洲长期冲突加剧人口流离失所",
+   "summary_zh": "非洲大陆因长期冲突持续面临接近历史最高水平的被迫流离失所问题。据非洲战略研究中心报告，近4500万非洲人被迫流离失所，约占非洲人口的3%，其中苏丹、刚果民主共和国、索马里、尼日利亚、布基纳法索、南苏丹和埃塞俄比亚七国约占这一总数的85%。报告称冲突仍是非洲被迫流离失所的主要驱动因素，前十大流离失所来源国均处于冲突状态至少8年。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Africa (continent-wide); Nigeria listed among top displacement-producing countries"
+   },
+   "key_facts": [
+    {
+     "fact": "近4500万非洲人被迫流离失所，约占非洲人口3%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nearly 45 million Africans (roughly 3 percent of the African population) are forcibly displaced"
+    },
+    {
+     "fact": "苏丹、刚果民主共和国、索马里、尼日利亚等七国约占非洲流离失所总数的85%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Seven countries—Sudan, the Democratic Republic of the Congo (DRC), Somalia, Nigeria, Burkina Faso, South Sudan, and Ethiopia—account for roughly 85 percent of that number."
+    },
+    {
+     "fact": "尼日利亚境内流离失所者约371万，难民及寻求庇护者约42.7万，合计约413.8万",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria  3,711,314  427,152  4,138,466  2"
+    },
+    {
+     "fact": "非洲前十大流离失所来源国均处于冲突状态至少8年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Of the top 10 source countries of displacement, all have been in conflict for at least 8 years."
+    },
+    {
+     "fact": "过去一年索马里、尼日利亚、尼日尔和喀麦隆的流离失所人口显著增加",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Somalia, Nigeria, Niger, and Cameroon also saw notable increases in their displaced populations over the past year."
+    }
+   ],
+   "uncertainties": [
+    "数据来源为IDMC（2025）、世界银行（2025）、IOM和UNHCR（2026年中）等，统计口径与时间点存在差异",
+    "部分流离失所者返回原籍的情况被描述为不稳定，实际安全状况有待核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "非洲长期冲突加剧人口流离失所",
+   "summary_zh": "非洲大陆因长期冲突持续面临接近历史最高水平的被迫流离失所问题。据非洲战略研究中心报告，近4500万非洲人被迫流离失所，约占非洲人口的3%，其中苏丹、刚果民主共和国、索马里、尼日利亚、布基纳法索、南苏丹和埃塞俄比亚七国约占这一总数的85%。报告称冲突仍是非洲被迫流离失所的主要驱动因素，前十大流离失所来源国均处于冲突状态至少8年。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Africa (continent-wide); Nigeria listed among top displacement-producing countries"
+   },
+   "key_facts": [
+    {
+     "fact": "近4500万非洲人被迫流离失所，约占非洲人口3%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nearly 45 million Africans (roughly 3 percent of the African population) are forcibly displaced"
+    },
+    {
+     "fact": "苏丹、刚果民主共和国、索马里、尼日利亚等七国约占非洲流离失所总数的85%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Seven countries—Sudan, the Democratic Republic of the Congo (DRC), Somalia, Nigeria, Burkina Faso, South Sudan, and Ethiopia—account for roughly 85 percent of that number."
+    },
+    {
+     "fact": "尼日利亚境内流离失所者约371万，难民及寻求庇护者约42.7万，合计约413.8万",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria  3,711,314  427,152  4,138,466  2"
+    },
+    {
+     "fact": "非洲前十大流离失所来源国均处于冲突状态至少8年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Of the top 10 source countries of displacement, all have been in conflict for at least 8 years."
+    },
+    {
+     "fact": "过去一年索马里、尼日利亚、尼日尔和喀麦隆的流离失所人口显著增加",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Somalia, Nigeria, Niger, and Cameroon also saw notable increases in their displaced populations over the past year."
+    }
+   ],
+   "uncertainties": [
+    "数据来源为IDMC（2025）、世界银行（2025）、IOM和UNHCR（2026年中）等，统计口径与时间点存在差异",
+    "部分流离失所者返回原籍的情况被描述为不稳定，实际安全状况有待核实",
+    "据Africa Center for Strategic Studies报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_bdef953b8d91f25b",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

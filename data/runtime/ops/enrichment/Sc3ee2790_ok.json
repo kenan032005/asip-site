@@ -1,0 +1,125 @@
+{
+ "label": "Sc3ee2790",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "92541689952131b4304e3d3125575ab3bc60396d6a7dd944f39495d92b998d16",
+ "tokens": {
+  "input_tokens": 2666,
+  "output_tokens": 606,
+  "total_tokens": 3272
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍中友谊医院：医生罢工致服务运转受阻",
+   "summary_zh": "乍得医生工会（SYMET）乍中友谊大学医院（CHU-ATC）分会的成员于2026年10月19日至21日举行为期三天的罢工，要求支付数月拖欠的绩效奖金。罢工导致该医疗机构仅维持最低限度的医疗服务，急诊、儿科、产科和重症监护等部门均受影响。据工会称，此前交涉未果，因此被迫罢工，但仍表示愿意进行建设性对话。院方管理层尚未回应置评请求。",
+   "event_type": "civil_unrest",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "乍中友谊大学医院（CHU de l’Amitié Tchad-Chine）",
+    "raw_text": "Centre hospitalier universitaire (CHU) de l’Amitié Tchad-Chine"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得医生工会乍中友谊大学医院分会举行为期三天罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les membres du Syndicat des médecins du Tchad (SYMET), cellule du Centre hospitalier universitaire (CHU) de l’Amitié Tchad-Chine observent une grève de trois jours, du lundi 19 au mercredi 21 octobre 2026"
+    },
+    {
+     "fact": "罢工诉求为支付2026年5月至9月等多月拖欠的绩效奖金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cette grève de 72 heures vise à obtenir le versement intégral des arriérés de primes de rendement des mois de mai, juin, juillet, août et septembre 2026"
+    },
+    {
+     "fact": "医院仅维持最低限度服务以保障医疗连续性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "seul un service minimum est assuré pour garantir la continuité des soins"
+    },
+    {
+     "fact": "工会称此前交涉未果，被迫罢工，但仍愿对话",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La cellule du SYMET affirme avoir mené des démarches qui n’ont pas porté leurs fruits et s’est vue contrainte d’entrer en grève. Elle affirme toutefois rester ouverte à un dialogue constructif"
+    },
+    {
+     "fact": "院方管理层未回应置评请求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nos tentatives d’entrer en contact avec la direction générale du CHU-ATC n’ont pas abouti"
+    }
+   ],
+   "uncertainties": [
+    "院方管理层尚未回应置评请求，其立场未获确认",
+    "目前仅单一来源（Tchadinfos）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍中友谊医院：医生罢工致服务运转受阻",
+   "summary_zh": "乍得医生工会（SYMET）乍中友谊大学医院（CHU-ATC）分会的成员于2026年10月19日至21日举行为期三天的罢工，要求支付数月拖欠的绩效奖金。罢工导致该医疗机构仅维持最低限度的医疗服务，急诊、儿科、产科和重症监护等部门均受影响。据工会称，此前交涉未果，因此被迫罢工，但仍表示愿意进行建设性对话。院方管理层尚未回应置评请求。",
+   "event_type": "civil_unrest",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "乍中友谊大学医院（CHU de l’Amitié Tchad-Chine）",
+    "raw_text": "Centre hospitalier universitaire (CHU) de l’Amitié Tchad-Chine"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得医生工会乍中友谊大学医院分会举行为期三天罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les membres du Syndicat des médecins du Tchad (SYMET), cellule du Centre hospitalier universitaire (CHU) de l’Amitié Tchad-Chine observent une grève de trois jours, du lundi 19 au mercredi 21 octobre 2026"
+    },
+    {
+     "fact": "罢工诉求为支付2026年5月至9月等多月拖欠的绩效奖金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cette grève de 72 heures vise à obtenir le versement intégral des arriérés de primes de rendement des mois de mai, juin, juillet, août et septembre 2026"
+    },
+    {
+     "fact": "医院仅维持最低限度服务以保障医疗连续性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "seul un service minimum est assuré pour garantir la continuité des soins"
+    },
+    {
+     "fact": "工会称此前交涉未果，被迫罢工，但仍愿对话",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La cellule du SYMET affirme avoir mené des démarches qui n’ont pas porté leurs fruits et s’est vue contrainte d’entrer en grève. Elle affirme toutefois rester ouverte à un dialogue constructif"
+    },
+    {
+     "fact": "院方管理层未回应置评请求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nos tentatives d’entrer en contact avec la direction générale du CHU-ATC n’ont pas abouti"
+    }
+   ],
+   "uncertainties": [
+    "院方管理层尚未回应置评请求，其立场未获确认",
+    "目前仅单一来源（Tchadinfos）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_99039141c3ee2790",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

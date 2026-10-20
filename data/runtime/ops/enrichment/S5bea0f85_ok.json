@@ -1,0 +1,117 @@
+{
+ "label": "S5bea0f85",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6f59d3f79a8c763e326b1775f4c813e5b8d92c4be303d52dd3d58c7f63cd5517",
+ "tokens": {
+  "input_tokens": 2164,
+  "output_tokens": 467,
+  "total_tokens": 2631
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "奥贡州医院因学生死亡引发抗议，无限期暂停护理学校活动",
+   "summary_zh": "尼日利亚奥贡州阿贝奥库塔的联邦神经精神病医院宣布无限期暂停其基础后精神科护理学校的全部教学活动，并命令住宿学生立即搬离宿舍。院方称，此举源于学生护士Godwin Ayodeji Taiwo死亡后据称在医院社区内引发的骚乱，暂停活动是为了便于调查事件经过。院方呼吁学生和相关方保持冷静并遵守指令。该消息目前仅来自单一来源。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Ogun State",
+    "city": "Abeokuta",
+    "site": "Federal Neuropsychiatric Hospital, Aro",
+    "raw_text": "Federal Neuropsychiatric Hospital, Aro, Abeokuta, Ogun State"
+   },
+   "key_facts": [
+    {
+     "fact": "奥贡州阿贝奥库塔的联邦神经精神病医院无限期暂停护理学校全部教学活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "has suspended all academic activities at its School of Post-Basic Psychiatric Nursing indefinitely"
+    },
+    {
+     "fact": "院方命令住宿学生立即搬离学校宿舍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "directed all students residing in the school’s hostel to vacate the facility immediately"
+    },
+    {
+     "fact": "暂停决定源于学生护士Godwin Ayodeji Taiwo死亡后据称引发的医院社区骚乱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "This decision follows the unfortunate demise of Student Nurse Godwin Ayodeji Taiwo, which has reportedly resulted in student unrest within the hospital community"
+    },
+    {
+     "fact": "院方称暂停活动旨在为调查学生死亡情况提供平静环境",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the decision was intended to provide a peaceful environment for the hospital management to investigate the circumstances surrounding the student's death"
+    }
+   ],
+   "uncertainties": [
+    "学生死亡的具体原因和经过尚未证实",
+    "医院社区内骚乱的具体规模和形式未获确认",
+    "目前仅有一个来源（Sahara Reporters）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "奥贡州医院因学生死亡引发抗议，无限期暂停护理学校活动",
+   "summary_zh": "尼日利亚奥贡州阿贝奥库塔的联邦神经精神病医院宣布无限期暂停其基础后精神科护理学校的全部教学活动，并命令住宿学生立即搬离宿舍。院方称，此举源于学生护士Godwin Ayodeji Taiwo死亡后据称在医院社区内引发的骚乱，暂停活动是为了便于调查事件经过。院方呼吁学生和相关方保持冷静并遵守指令。该消息目前仅来自单一来源。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Ogun State",
+    "city": "Abeokuta",
+    "site": "Federal Neuropsychiatric Hospital, Aro",
+    "raw_text": "Federal Neuropsychiatric Hospital, Aro, Abeokuta, Ogun State"
+   },
+   "key_facts": [
+    {
+     "fact": "奥贡州阿贝奥库塔的联邦神经精神病医院无限期暂停护理学校全部教学活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "has suspended all academic activities at its School of Post-Basic Psychiatric Nursing indefinitely"
+    },
+    {
+     "fact": "院方命令住宿学生立即搬离学校宿舍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "directed all students residing in the school’s hostel to vacate the facility immediately"
+    },
+    {
+     "fact": "暂停决定源于学生护士Godwin Ayodeji Taiwo死亡后据称引发的医院社区骚乱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "This decision follows the unfortunate demise of Student Nurse Godwin Ayodeji Taiwo, which has reportedly resulted in student unrest within the hospital community"
+    },
+    {
+     "fact": "院方称暂停活动旨在为调查学生死亡情况提供平静环境",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the decision was intended to provide a peaceful environment for the hospital management to investigate the circumstances surrounding the student's death"
+    }
+   ],
+   "uncertainties": [
+    "学生死亡的具体原因和经过尚未证实",
+    "医院社区内骚乱的具体规模和形式未获确认",
+    "目前仅有一个来源（Sahara Reporters）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_acae19065bea0f85",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

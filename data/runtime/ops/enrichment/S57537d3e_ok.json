@@ -1,0 +1,121 @@
+{
+ "label": "S57537d3e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "33b561aa51a9f4940ea795d4ba20aa3b9062b57435a9cf10a02dd5671700fa0a",
+ "tokens": {
+  "input_tokens": 2424,
+  "output_tokens": 481,
+  "total_tokens": 2905
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚与联合国毒罪办呼吁加强对恐怖主义性暴力幸存者的保护",
+   "summary_zh": "尼日利亚国家反恐中心与联合国毒品和犯罪问题办公室在阿布贾举行第二次专家组会议，讨论制定针对恐怖主义相关性暴力和性别暴力案件一线应急人员的工具包。尼方官员表示，恐怖主义后果超出袭击本身，幸存者面临身心创伤与污名化。联合国毒罪办代表指出，恐怖组织蓄意利用性暴力实施恐吓与控制，并提及2014年博尔诺州奇博克276名女学生遭绑架事件。",
+   "event_type": "terrorism",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚国家反恐中心与联合国毒罪办呼吁改善恐怖主义相关性暴力幸存者的保护与司法救助",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The National Counter-Terrorism Centre (NCTC) and the United Nations Office on Drugs and Crime (UNODC) have called for improved protection and access to justice for survivors of sexual and gender-based violence linked to terrorism."
+    },
+    {
+     "fact": "第二次专家组会议在阿布贾举行，讨论制定一线应急人员工具包",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "They made the call on Tuesday, at the Second Expert Group Meeting on the Development of a Toolkit for First Emergency Responders in Cases of Sexual and Gender-Based Violence Linked to Terrorism in Abuja."
+    },
+    {
+     "fact": "联合国毒罪办代表提及2014年4月博尔诺州奇博克276名女学生遭绑架事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Toure cited the abduction of 276 schoolgirls from Chibok, Borno, in April 2014, as an example of the devastating consequences of terrorism."
+    },
+    {
+     "fact": "该倡议由德国、以色列和瑞士支持，加拿大支持本次会议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The initiative is supported by Germany, Israel and Switzerland, while Canada supported the meeting."
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚与联合国毒罪办呼吁加强对恐怖主义性暴力幸存者的保护",
+   "summary_zh": "尼日利亚国家反恐中心与联合国毒品和犯罪问题办公室在阿布贾举行第二次专家组会议，讨论制定针对恐怖主义相关性暴力和性别暴力案件一线应急人员的工具包。尼方官员表示，恐怖主义后果超出袭击本身，幸存者面临身心创伤与污名化。联合国毒罪办代表指出，恐怖组织蓄意利用性暴力实施恐吓与控制，并提及2014年博尔诺州奇博克276名女学生遭绑架事件。",
+   "event_type": "terrorism",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚国家反恐中心与联合国毒罪办呼吁改善恐怖主义相关性暴力幸存者的保护与司法救助",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The National Counter-Terrorism Centre (NCTC) and the United Nations Office on Drugs and Crime (UNODC) have called for improved protection and access to justice for survivors of sexual and gender-based violence linked to terrorism."
+    },
+    {
+     "fact": "第二次专家组会议在阿布贾举行，讨论制定一线应急人员工具包",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "They made the call on Tuesday, at the Second Expert Group Meeting on the Development of a Toolkit for First Emergency Responders in Cases of Sexual and Gender-Based Violence Linked to Terrorism in Abuja."
+    },
+    {
+     "fact": "联合国毒罪办代表提及2014年4月博尔诺州奇博克276名女学生遭绑架事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Toure cited the abduction of 276 schoolgirls from Chibok, Borno, in April 2014, as an example of the devastating consequences of terrorism."
+    },
+    {
+     "fact": "该倡议由德国、以色列和瑞士支持，加拿大支持本次会议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The initiative is supported by Germany, Israel and Switzerland, while Canada supported the meeting."
+    }
+   ],
+   "uncertainties": [
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_71d61bca57537d3e",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

@@ -1,0 +1,115 @@
+{
+ "label": "S1c2522a6",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "607e57d02a87cfec844d4ac531aa9a41eae1d646ad22a7e225803f49d1217742",
+ "tokens": {
+  "input_tokens": 2464,
+  "output_tokens": 527,
+  "total_tokens": 2991
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "萨拉马特：政府总代表赴农牧民致命冲突现场",
+   "summary_zh": "乍得萨拉马特省穆赖副省库济瓦希特地区因牲畜迁徙通道走向争议，农牧民之间发生冲突。政府总代表率安全、行政及司法官员组成的代表团于2026年10月18日夜至19日前往该地，国防与安全部队在第十军区指挥下加强监控并恢复秩序。据初步统计，事件造成12人死亡、多人受伤，目前紧张局势有所缓和。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "萨拉马特省",
+    "city": "穆赖",
+    "site": "库济瓦希特地区",
+    "raw_text": "zone de Kouzi Wahit, sous-préfecture de Mouray, département de Bahr-Azoum, à la frontière avec la province du Sila"
+   },
+   "key_facts": [
+    {
+     "fact": "冲突起因是围绕牲畜迁徙通道走向的分歧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce conflit entre éleveurs et agriculteurs est né à la suite d’un désaccord autour du tracé d’une voie de transhumance."
+    },
+    {
+     "fact": "政府总代表率代表团于10月18日夜至19日前往冲突地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le délégué général du gouvernement auprès de la province du Salamat, Ahmat Choua Rozi, s’est rendu dans la nuit du dimanche 18 au lundi 19 octobre 2026 dans la zone de Kouzi Wahit"
+    },
+    {
+     "fact": "国防与安全部队在第十军区指挥下开展行动以恢复秩序",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les forces de défense et de sécurité mènent l’opération sous le commandement du chef de la zone militaire n° 10, le général Fouzari Hassan"
+    },
+    {
+     "fact": "事件初步统计为12人死亡、多人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le bilan des incidents survenus qui reste provisoire à ce jour fait état de 12 morts. Plusieurs personnes ont été également été blessées."
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字为初步统计，尚未最终确认",
+    "目前仅有一个来源（Tchadinfos）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "萨拉马特：政府总代表赴农牧民致命冲突现场",
+   "summary_zh": "乍得萨拉马特省穆赖副省库济瓦希特地区因牲畜迁徙通道走向争议，农牧民之间发生冲突。政府总代表率安全、行政及司法官员组成的代表团于2026年10月18日夜至19日前往该地，国防与安全部队在第十军区指挥下加强监控并恢复秩序。据初步统计，事件造成12人死亡、多人受伤，目前紧张局势有所缓和。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "萨拉马特省",
+    "city": "穆赖",
+    "site": "库济瓦希特地区",
+    "raw_text": "zone de Kouzi Wahit, sous-préfecture de Mouray, département de Bahr-Azoum, à la frontière avec la province du Sila"
+   },
+   "key_facts": [
+    {
+     "fact": "冲突起因是围绕牲畜迁徙通道走向的分歧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce conflit entre éleveurs et agriculteurs est né à la suite d’un désaccord autour du tracé d’une voie de transhumance."
+    },
+    {
+     "fact": "政府总代表率代表团于10月18日夜至19日前往冲突地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le délégué général du gouvernement auprès de la province du Salamat, Ahmat Choua Rozi, s’est rendu dans la nuit du dimanche 18 au lundi 19 octobre 2026 dans la zone de Kouzi Wahit"
+    },
+    {
+     "fact": "国防与安全部队在第十军区指挥下开展行动以恢复秩序",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les forces de défense et de sécurité mènent l’opération sous le commandement du chef de la zone militaire n° 10, le général Fouzari Hassan"
+    },
+    {
+     "fact": "事件初步统计为12人死亡、多人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le bilan des incidents survenus qui reste provisoire à ce jour fait état de 12 morts. Plusieurs personnes ont été également été blessées."
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字为初步统计，尚未最终确认",
+    "目前仅有一个来源（Tchadinfos）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_6c60e0e11c2522a6",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

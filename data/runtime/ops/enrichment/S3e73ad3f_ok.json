@@ -1,0 +1,136 @@
+{
+ "label": "S3e73ad3f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "abddbb8892e3c39d18fe021f46741c2ee488ead10550a9afeccd98dba114d2a9",
+ "tokens": {
+  "input_tokens": 2894,
+  "output_tokens": 537,
+  "total_tokens": 3431
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"北乌班吉省目前未再报告其他感染病例，但该信息来自单一来源（RFI）的应对报告，尚未获交叉验证\", \"疫情数据来自刚果（金）当局最新报告，为单一来源，有待核实\"]",
+    "after": "[\"北乌班吉省目前未再报告其他感染病例，但该信息来自单一来源（RFI）的应对报告，尚未获交叉验证\", \"疫情数据来自刚果（金）当局最新报告，为单一来源，有待核实\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）埃博拉疫情：北基伍省24小时新增病例数超过疫情中心伊图里省",
+   "summary_zh": "刚果（金）埃博拉疫情已扩散至全国26个省中的8个省，上周末在北乌班吉省确诊两例。最新应对报告显示，24小时内新增97例病例，为10月3日以来最高。10月18日北基伍省确诊病例数（48例）超过伊图里省（42例），后者仍被视为疫情中心。武装组织ADF的存在使疫区防控工作复杂化。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "北基伍省",
+    "city": null,
+    "site": null,
+    "raw_text": "Nord-Kivu, Ituri, Nord-Ubangi, RDC"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）埃博拉疫情已蔓延至26个省中的8个省",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En RDC, Ebola sévit désormais dans huit des 26 provinces du pays"
+    },
+    {
+     "fact": "上周末在北乌班吉省确诊两例埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "deux cas ayant été confirmés le week-end précédent au Nord-Ubangi"
+    },
+    {
+     "fact": "24小时内新增97例病例，为10月3日以来最高",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un rapport qui enregistre 97 nouveaux cas en 24 heures. Un chiffre qui n’avait pas été atteint depuis le 3 octobre"
+    },
+    {
+     "fact": "10月18日北基伍省确诊48例，超过伊图里省的42例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quarante-huit cas confirmés au Nord-Kivu contre 42 cas en Ituri"
+    },
+    {
+     "fact": "武装组织ADF的存在使疫区卫生应对工作复杂化",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une zone sécuritairement compliquée avec la présence de groupes armés et notamment des Allied Democratic Forces (ADF)"
+    }
+   ],
+   "uncertainties": [
+    "北乌班吉省目前未再报告其他感染病例，但该信息来自单一来源（RFI）的应对报告，尚未获交叉验证",
+    "疫情数据来自刚果（金）当局最新报告，为单一来源，有待核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）埃博拉疫情：北基伍省24小时新增病例数超过疫情中心伊图里省",
+   "summary_zh": "刚果（金）埃博拉疫情已扩散至全国26个省中的8个省，上周末在北乌班吉省确诊两例。最新应对报告显示，24小时内新增97例病例，为10月3日以来最高。10月18日北基伍省确诊病例数（48例）超过伊图里省（42例），后者仍被视为疫情中心。武装组织ADF的存在使疫区防控工作复杂化。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "北基伍省",
+    "city": null,
+    "site": null,
+    "raw_text": "Nord-Kivu, Ituri, Nord-Ubangi, RDC"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）埃博拉疫情已蔓延至26个省中的8个省",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En RDC, Ebola sévit désormais dans huit des 26 provinces du pays"
+    },
+    {
+     "fact": "上周末在北乌班吉省确诊两例埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "deux cas ayant été confirmés le week-end précédent au Nord-Ubangi"
+    },
+    {
+     "fact": "24小时内新增97例病例，为10月3日以来最高",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un rapport qui enregistre 97 nouveaux cas en 24 heures. Un chiffre qui n’avait pas été atteint depuis le 3 octobre"
+    },
+    {
+     "fact": "10月18日北基伍省确诊48例，超过伊图里省的42例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quarante-huit cas confirmés au Nord-Kivu contre 42 cas en Ituri"
+    },
+    {
+     "fact": "武装组织ADF的存在使疫区卫生应对工作复杂化",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une zone sécuritairement compliquée avec la présence de groupes armés et notamment des Allied Democratic Forces (ADF)"
+    }
+   ],
+   "uncertainties": [
+    "北乌班吉省目前未再报告其他感染病例，但该信息来自单一来源（RFI）的应对报告，尚未获交叉验证",
+    "疫情数据来自刚果（金）当局最新报告，为单一来源，有待核实",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_9e6a26a43e73ad3f",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

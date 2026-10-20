@@ -1,0 +1,129 @@
+{
+ "label": "Sd4c00c7d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6acad4c931f89f0c0bd6751e07dae234f568ba31a2781999af9040759c3ec596",
+ "tokens": {
+  "input_tokens": 2889,
+  "output_tokens": 725,
+  "total_tokens": 3614
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "马里梅纳卡地区武装分子袭击致约40名平民死亡",
+   "summary_zh": "马里梅纳卡地区塔加达亚特一带周日遭武装分子袭击，伊达克萨哈克族群执行委员会称该族群48名平民死亡，并指袭击者为“伊斯兰国”武装人员。该委员会称袭击引发大量人口流离，幸存者逃往约40公里外的梅纳卡市。有说法称此次袭击系对马里军队此前针对“伊斯兰国”军事行动的报复，但相关归因尚未获独立证实，目前仅有单一来源报道。",
+   "event_type": "terrorism",
+   "country_iso3": "MLI",
+   "location": {
+    "country_iso3": "MLI",
+    "admin1": "梅纳卡大区",
+    "city": "梅纳卡",
+    "site": "塔加达亚特",
+    "raw_text": "du côté de Tagadayat, dans la région de Ménaka"
+   },
+   "key_facts": [
+    {
+     "fact": "伊达克萨哈克族群执行委员会称该族群48名平民在梅纳卡地区塔加达亚特遇袭身亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Bureau exécutif de la communuauté Idaksahak a exprimé lundi « sa vive émotion et son immense consternation » après la mort de 48 civils de la communauté, dimanche dernier, du côté de Tagadayat, dans la région de Ménaka"
+    },
+    {
+     "fact": "该委员会在公告中称袭击者为乘摩托车抵达的“伊斯兰国”武装人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "« ces populations civiles sans défense ont été attaquées par des éléments armés de Daesh [groupe État islamique, NDLR], arrivés à bord de plusieurs motos »"
+    },
+    {
+     "fact": "袭击造成大量人口流离，幸存者逃往约40公里外的梅纳卡市",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un massacre qui a provoqué d'importants déplacements de populations, les survivants ayant trouvé refuge dans la ville de Ménaka, une quarantaine de kilomètres plus loin"
+    },
+    {
+     "fact": "同日梅纳卡市伊达克萨哈克族群领袖住所亦遭袭击，被守卫击退",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le domicile du chef de la communauté Idaksahak, Moussa Ag Acharatoumane, a également fait l’objet d’une attaque, très vite repoussée par les gardes"
+    },
+    {
+     "fact": "有组织称此次袭击系对马里军队及俄罗斯辅助部队针对“伊斯兰国”行动的报复",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il estime que cette attaque terroriste vient en représailles à des opérations contre l'EIGS menées par les Forces armées maliennes (Fama) accompagnées de leurs supplétifs russes de l'Africa Corps"
+    }
+   ],
+   "uncertainties": [
+    "袭击者身份及所属组织系据伊达克萨哈克族群执行委员会公告及媒体报道，尚未获独立证实",
+    "死亡人数48人系该族群委员会单方面统计，未获官方或其他来源交叉验证",
+    "袭击动机为报复马里军队行动的说法属相关组织判断，尚未证实",
+    "目前仅有单一来源（RFI）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "马里梅纳卡地区武装分子袭击致约40名平民死亡",
+   "summary_zh": "马里梅纳卡地区塔加达亚特一带周日遭武装分子袭击，伊达克萨哈克族群执行委员会称该族群48名平民死亡，并指袭击者为“伊斯兰国”武装人员。该委员会称袭击引发大量人口流离，幸存者逃往约40公里外的梅纳卡市。有说法称此次袭击系对马里军队此前针对“伊斯兰国”军事行动的报复，但相关归因尚未获独立证实，目前仅有单一来源报道。",
+   "event_type": "terrorism",
+   "country_iso3": "MLI",
+   "location": {
+    "country_iso3": "MLI",
+    "admin1": "梅纳卡大区",
+    "city": "梅纳卡",
+    "site": "塔加达亚特",
+    "raw_text": "du côté de Tagadayat, dans la région de Ménaka"
+   },
+   "key_facts": [
+    {
+     "fact": "伊达克萨哈克族群执行委员会称该族群48名平民在梅纳卡地区塔加达亚特遇袭身亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Bureau exécutif de la communuauté Idaksahak a exprimé lundi « sa vive émotion et son immense consternation » après la mort de 48 civils de la communauté, dimanche dernier, du côté de Tagadayat, dans la région de Ménaka"
+    },
+    {
+     "fact": "该委员会在公告中称袭击者为乘摩托车抵达的“伊斯兰国”武装人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "« ces populations civiles sans défense ont été attaquées par des éléments armés de Daesh [groupe État islamique, NDLR], arrivés à bord de plusieurs motos »"
+    },
+    {
+     "fact": "袭击造成大量人口流离，幸存者逃往约40公里外的梅纳卡市",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un massacre qui a provoqué d'importants déplacements de populations, les survivants ayant trouvé refuge dans la ville de Ménaka, une quarantaine de kilomètres plus loin"
+    },
+    {
+     "fact": "同日梅纳卡市伊达克萨哈克族群领袖住所亦遭袭击，被守卫击退",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le domicile du chef de la communauté Idaksahak, Moussa Ag Acharatoumane, a également fait l’objet d’une attaque, très vite repoussée par les gardes"
+    },
+    {
+     "fact": "有组织称此次袭击系对马里军队及俄罗斯辅助部队针对“伊斯兰国”行动的报复",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il estime que cette attaque terroriste vient en représailles à des opérations contre l'EIGS menées par les Forces armées maliennes (Fama) accompagnées de leurs supplétifs russes de l'Africa Corps"
+    }
+   ],
+   "uncertainties": [
+    "袭击者身份及所属组织系据伊达克萨哈克族群执行委员会公告及媒体报道，尚未获独立证实",
+    "死亡人数48人系该族群委员会单方面统计，未获官方或其他来源交叉验证",
+    "袭击动机为报复马里军队行动的说法属相关组织判断，尚未证实",
+    "目前仅有单一来源（RFI）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_f6c097e6d4c00c7d",
+ "disease_event_id": null,
+ "country_code": "ML"
+}
