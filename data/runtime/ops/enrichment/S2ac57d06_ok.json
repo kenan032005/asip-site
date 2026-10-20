@@ -1,0 +1,139 @@
+{
+ "label": "S2ac57d06",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ac713f74561192088bcd3b5477a5a5b77f0fb3da597f6a990c1e4c06017b407c",
+ "tokens": {
+  "input_tokens": 2601,
+  "output_tokens": 616,
+  "total_tokens": 3217
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得：提贝斯提地区发生冲突后，共和国调解员呼吁保持冷静",
+   "summary_zh": "乍得共和国调解员萨利赫·凯布扎博呼吁保持冷静，提贝斯提地区紧张局势持续。一周前，米斯基金矿区自卫委员会成员与国家矿业活动管制旅之间爆发战斗。冲突双方互相指责对方违反去年签署的和平协议；该地区围绕矿产收入分配已冲突近十年。乍得政府尚未就此表态。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "提贝斯提",
+    "city": null,
+    "site": "米斯基金矿区",
+    "raw_text": "Tibesti, zone aurifère de Miski, Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得共和国调解员萨利赫·凯布扎博在提贝斯提冲突后呼吁保持冷静",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Tchad, le médiateur de la République Saleh Kebzabo appelle au calme alors que la tension reste vive dans le Tibesti."
+    },
+    {
+     "fact": "一周前米斯基金矿区自卫委员会与国家矿业活动管制旅之间爆发战斗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il y a une semaine, des combats ont éclaté entre les éléments du comité d’auto défense de la zone aurifère de Miski et la Brigade nationale de contrôle des activités minières."
+    },
+    {
+     "fact": "冲突双方互相指责对方违反去年签署的和平协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Chaque camp accuse l’autre d’avoir violé les accords de paix signés l’an dernier"
+    },
+    {
+     "fact": "10月14日冲突造成至少两名乍得军官死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À la suite des affrontements du mercredi 14 octobre, qui ont coûté la vie à au moins deux officiers tchadiens"
+    },
+    {
+     "fact": "自卫委员会声称军队无人机袭击造成七名平民死亡并实施抢劫",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le comité d’autodéfense accuse l’armée d’avoir tué sept civils dans une frappe de drones et de se livrer à des « pillages »"
+    },
+    {
+     "fact": "乍得政府尚未就此事表态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement tchadien, quant à lui, ne s’est toujours pas exprimé."
+    }
+   ],
+   "uncertainties": [
+    "自卫委员会所称七名平民死于无人机袭击的说法尚未获得独立证实",
+    "双方互相违反和平协议的指控说法不一，尚无法确认",
+    "目前仅RFI单一来源报道，缺乏交叉验证",
+    "乍得政府尚未表态，官方立场不明"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得：提贝斯提地区发生冲突后，共和国调解员呼吁保持冷静",
+   "summary_zh": "乍得共和国调解员萨利赫·凯布扎博呼吁保持冷静，提贝斯提地区紧张局势持续。一周前，米斯基金矿区自卫委员会成员与国家矿业活动管制旅之间爆发战斗。冲突双方互相指责对方违反去年签署的和平协议；该地区围绕矿产收入分配已冲突近十年。乍得政府尚未就此表态。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "提贝斯提",
+    "city": null,
+    "site": "米斯基金矿区",
+    "raw_text": "Tibesti, zone aurifère de Miski, Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得共和国调解员萨利赫·凯布扎博在提贝斯提冲突后呼吁保持冷静",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Tchad, le médiateur de la République Saleh Kebzabo appelle au calme alors que la tension reste vive dans le Tibesti."
+    },
+    {
+     "fact": "一周前米斯基金矿区自卫委员会与国家矿业活动管制旅之间爆发战斗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il y a une semaine, des combats ont éclaté entre les éléments du comité d’auto défense de la zone aurifère de Miski et la Brigade nationale de contrôle des activités minières."
+    },
+    {
+     "fact": "冲突双方互相指责对方违反去年签署的和平协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Chaque camp accuse l’autre d’avoir violé les accords de paix signés l’an dernier"
+    },
+    {
+     "fact": "10月14日冲突造成至少两名乍得军官死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À la suite des affrontements du mercredi 14 octobre, qui ont coûté la vie à au moins deux officiers tchadiens"
+    },
+    {
+     "fact": "自卫委员会声称军队无人机袭击造成七名平民死亡并实施抢劫",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le comité d’autodéfense accuse l’armée d’avoir tué sept civils dans une frappe de drones et de se livrer à des « pillages »"
+    },
+    {
+     "fact": "乍得政府尚未就此事表态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement tchadien, quant à lui, ne s’est toujours pas exprimé."
+    }
+   ],
+   "uncertainties": [
+    "自卫委员会所称七名平民死于无人机袭击的说法尚未获得独立证实",
+    "双方互相违反和平协议的指控说法不一，尚无法确认",
+    "目前仅RFI单一来源报道，缺乏交叉验证",
+    "乍得政府尚未表态，官方立场不明"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_e1cfd2542ac57d06",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

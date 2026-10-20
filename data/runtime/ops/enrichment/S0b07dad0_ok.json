@@ -1,0 +1,142 @@
+{
+ "label": "S0b07dad0",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6ca9fb1bdf43956f6a6edf895a4752ff81ef2c2c8851491569faf371c8fd7b84",
+ "tokens": {
+  "input_tokens": 2445,
+  "output_tokens": 640,
+  "total_tokens": 3085
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"演练具体预算未公布，官员称资金细节稍后通报\", \"官员未说明跨境人员流动开始的具体日期及人员详情\", \"未提供接受筛查人数或筛查结果数据\", \"官员未表示入境人员已被诊断为本迪布焦病毒病\", \"演练详细日程及结果评估方式未公布\"]",
+    "after": "[\"演练具体预算未公布，官员称资金细节稍后通报\", \"官员未说明跨境人员流动开始的具体日期及人员详情\", \"未提供接受筛查人数或筛查结果数据\", \"官员未表示入境人员已被诊断为本迪布焦病毒病\", \"演练详细日程及结果评估方式未公布\", \"据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹将模拟疑似病毒病例以测试应急响应",
+   "summary_zh": "南苏丹卫生部宣布，将于10月19日至23日在朱巴、耶伊和扬比奥开展全面模拟演练，模拟发现一例疑似本迪布焦埃博拉病毒病病例，以测试监测、感染防控、患者转运和隔离等应急响应流程。卫生官员强调，此次演练属防范性活动，不应被解读为疫情暴发声明。尼穆莱边境口岸因预算限制未纳入首阶段演练，将考虑在第二阶段进行。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": null,
+    "city": "朱巴",
+    "site": null,
+    "raw_text": "Juba, Yei and Yambio"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹卫生当局将在朱巴、耶伊和扬比奥开展全面模拟演练，测试对潜在本迪布焦埃博拉病毒病病例的防范与响应系统",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South Sudan’s health authorities will conduct a full-scale simulation exercise to test the country’s preparedness and response systems for a potential Bundibugyo Ebola Virus disease (BVD) case in Juba, Yei and Yambio"
+    },
+    {
+     "fact": "演练定于10月19日至23日举行，模拟在朱巴国际机场发现疑似病例并报告至应急行动中心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The exercise, scheduled to run from 19 to 23 October, will simulate the detection of a suspected case and test how health authorities coordinate emergency response activities"
+    },
+    {
+     "fact": "卫生部长强调该演练属防范性活动，不应被解读为疫情暴发声明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The exercise is a preparedness activity and should not be interpreted as a declaration of an outbreak."
+    },
+    {
+     "fact": "尼穆莱边境口岸因预算限制未纳入首阶段演练，将考虑在第二阶段进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nimule had not been excluded permanently but would be considered in a second phase because of budget constraints."
+    },
+    {
+     "fact": "据估计约有2000至3000人从刚果（金）经伊巴县纳班加地区返回南苏丹，人数仍在增加，卫生团队正进行筛查和监测",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the NPHI representative estimated that between 2,000 and 3,000 people had crossed back into the country around the Nabanga area of Ibba County, adding that the number was increasing"
+    }
+   ],
+   "uncertainties": [
+    "演练具体预算未公布，官员称资金细节稍后通报",
+    "官员未说明跨境人员流动开始的具体日期及人员详情",
+    "未提供接受筛查人数或筛查结果数据",
+    "官员未表示入境人员已被诊断为本迪布焦病毒病",
+    "演练详细日程及结果评估方式未公布"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹将模拟疑似病毒病例以测试应急响应",
+   "summary_zh": "南苏丹卫生部宣布，将于10月19日至23日在朱巴、耶伊和扬比奥开展全面模拟演练，模拟发现一例疑似本迪布焦埃博拉病毒病病例，以测试监测、感染防控、患者转运和隔离等应急响应流程。卫生官员强调，此次演练属防范性活动，不应被解读为疫情暴发声明。尼穆莱边境口岸因预算限制未纳入首阶段演练，将考虑在第二阶段进行。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": null,
+    "city": "朱巴",
+    "site": null,
+    "raw_text": "Juba, Yei and Yambio"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹卫生当局将在朱巴、耶伊和扬比奥开展全面模拟演练，测试对潜在本迪布焦埃博拉病毒病病例的防范与响应系统",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South Sudan’s health authorities will conduct a full-scale simulation exercise to test the country’s preparedness and response systems for a potential Bundibugyo Ebola Virus disease (BVD) case in Juba, Yei and Yambio"
+    },
+    {
+     "fact": "演练定于10月19日至23日举行，模拟在朱巴国际机场发现疑似病例并报告至应急行动中心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The exercise, scheduled to run from 19 to 23 October, will simulate the detection of a suspected case and test how health authorities coordinate emergency response activities"
+    },
+    {
+     "fact": "卫生部长强调该演练属防范性活动，不应被解读为疫情暴发声明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The exercise is a preparedness activity and should not be interpreted as a declaration of an outbreak."
+    },
+    {
+     "fact": "尼穆莱边境口岸因预算限制未纳入首阶段演练，将考虑在第二阶段进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nimule had not been excluded permanently but would be considered in a second phase because of budget constraints."
+    },
+    {
+     "fact": "据估计约有2000至3000人从刚果（金）经伊巴县纳班加地区返回南苏丹，人数仍在增加，卫生团队正进行筛查和监测",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the NPHI representative estimated that between 2,000 and 3,000 people had crossed back into the country around the Nabanga area of Ibba County, adding that the number was increasing"
+    }
+   ],
+   "uncertainties": [
+    "演练具体预算未公布，官员称资金细节稍后通报",
+    "官员未说明跨境人员流动开始的具体日期及人员详情",
+    "未提供接受筛查人数或筛查结果数据",
+    "官员未表示入境人员已被诊断为本迪布焦病毒病",
+    "演练详细日程及结果评估方式未公布",
+    "据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_eed5db7c0b07dad0",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

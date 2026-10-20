@@ -1,0 +1,128 @@
+{
+ "label": "S82df649b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4d336f9a6867c7f8c50686b5e96aa1e2fc0f0a1d934e6970cabf670994fe103e",
+ "tokens": {
+  "input_tokens": 2758,
+  "output_tokens": 497,
+  "total_tokens": 3255
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"病例数字为疑似病例统计，尚未全部经实验室确诊\", \"疫情数据来自单一来源（RFI），尚缺乏交叉验证\", \"重症监护床位具体数量为医生估计（不足100张），未获官方确认\"]",
+    "after": "[\"病例数字为疑似病例统计，尚未全部经实验室确诊\", \"疫情数据来自单一来源（RFI），尚缺乏交叉验证\", \"重症监护床位具体数量为医生估计（不足100张），未获官方确认\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得登革热疫情持续蔓延，凸显卫生系统脆弱性",
+   "summary_zh": "乍得登革热疫情持续扩散，目前已有五个省份正式受到疫情影响，累计报告8例死亡和超过3000例疑似病例，其中仅瓦迪菲拉省就有2472例。疫情同时暴露出该国重症监护床位不足、实验室检测试剂盒供应紧张等卫生系统短板。据公共卫生应急行动协调员表示，许多患者自行用药，往往到出现并发症才就医。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Tchad（五个省份，包括Wadi Fira省）"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得登革热疫情已波及五个省份，累计报告8例死亡、超过3000例疑似病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cinq provinces du pays sont désormais officiellement touchées par la maladie qui vient s’ajouter à la flambée saisonnière de paludisme, celle-ci a déjà fait huit morts pour plus de 3 000 cas suspects recensés"
+    },
+    {
+     "fact": "仅瓦迪菲拉省就报告2472例疑似病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "dont 2 472 dans la seule province du Wadi Fira, selon le bilan fourni par Dicia Fitouin, coordinateur du Centre des opérations d’urgence de santé publique"
+    },
+    {
+     "fact": "乍得全国重症监护床位不足100张",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Tchad en compte moins d’une centaine..."
+    },
+    {
+     "fact": "实验室检测试剂盒库存正在减少",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les problèmes d’approvisionnement des laboratoires en kits de dépistage, qui se raréfient. « Le stock s’amenuise »"
+    }
+   ],
+   "uncertainties": [
+    "病例数字为疑似病例统计，尚未全部经实验室确诊",
+    "疫情数据来自单一来源（RFI），尚缺乏交叉验证",
+    "重症监护床位具体数量为医生估计（不足100张），未获官方确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得登革热疫情持续蔓延，凸显卫生系统脆弱性",
+   "summary_zh": "乍得登革热疫情持续扩散，目前已有五个省份正式受到疫情影响，累计报告8例死亡和超过3000例疑似病例，其中仅瓦迪菲拉省就有2472例。疫情同时暴露出该国重症监护床位不足、实验室检测试剂盒供应紧张等卫生系统短板。据公共卫生应急行动协调员表示，许多患者自行用药，往往到出现并发症才就医。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Tchad（五个省份，包括Wadi Fira省）"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得登革热疫情已波及五个省份，累计报告8例死亡、超过3000例疑似病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cinq provinces du pays sont désormais officiellement touchées par la maladie qui vient s’ajouter à la flambée saisonnière de paludisme, celle-ci a déjà fait huit morts pour plus de 3 000 cas suspects recensés"
+    },
+    {
+     "fact": "仅瓦迪菲拉省就报告2472例疑似病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "dont 2 472 dans la seule province du Wadi Fira, selon le bilan fourni par Dicia Fitouin, coordinateur du Centre des opérations d’urgence de santé publique"
+    },
+    {
+     "fact": "乍得全国重症监护床位不足100张",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Tchad en compte moins d’une centaine..."
+    },
+    {
+     "fact": "实验室检测试剂盒库存正在减少",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les problèmes d’approvisionnement des laboratoires en kits de dépistage, qui se raréfient. « Le stock s’amenuise »"
+    }
+   ],
+   "uncertainties": [
+    "病例数字为疑似病例统计，尚未全部经实验室确诊",
+    "疫情数据来自单一来源（RFI），尚缺乏交叉验证",
+    "重症监护床位具体数量为医生估计（不足100张），未获官方确认",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_0174134c82df649b",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

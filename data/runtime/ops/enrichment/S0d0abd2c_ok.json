@@ -1,0 +1,115 @@
+{
+ "label": "S0d0abd2c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "8ccbe132f7147f339c67500ac6e9aaf34d2431146e6cdb4473c0ebff5312f3f4",
+ "tokens": {
+  "input_tokens": 2651,
+  "output_tokens": 470,
+  "total_tokens": 3121
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克马尼卡省省长承认难以管控非法采金活动",
+   "summary_zh": "莫桑比克马尼卡省省长于10月19日承认，对“seis carros”矿区的非法采矿活动难以管控，该矿区曾聚集约1.2万名手工采矿者，并多次记录死亡事件。9月万杜齐区因非法采矿引发的地面塌陷在三天内造成至少9人死亡。省长表示正推动将手工采矿者组织为合作社，以实现更有序的开采。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "马尼卡省",
+    "city": null,
+    "site": "seis carros矿区",
+    "raw_text": "“seis carros” mine, Manica province"
+   },
+   "key_facts": [
+    {
+     "fact": "马尼卡省省长承认难以管控seis carros矿区的非法采矿活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the governor of the Mozambican province of Manica admitted on Monday, 19 October, that there are difficulties in controlling illegal mining at the “seis carros” mine"
+    },
+    {
+     "fact": "该矿区曾聚集超过1.2万名手工采矿者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "We even reached a point where there were more than 12,000 people mining at the ‘seis carros’ mine"
+    },
+    {
+     "fact": "9月万杜齐区非法采矿引发的地面塌陷在三天内造成至少9人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In September, at least nine people died over three days as a result of land collapses associated with illegal mining in Vanduzi district"
+    },
+    {
+     "fact": "矿区开挖区域目前约20米深、直径25米",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "which is currently around 20 metres deep and 25 metres in diameter"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（Lusa/Club of Mozambique）报道，尚缺乏交叉验证",
+    "死亡人数及矿区人数为当地政府与省长说法，未获独立核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克马尼卡省省长承认难以管控非法采金活动",
+   "summary_zh": "莫桑比克马尼卡省省长于10月19日承认，对“seis carros”矿区的非法采矿活动难以管控，该矿区曾聚集约1.2万名手工采矿者，并多次记录死亡事件。9月万杜齐区因非法采矿引发的地面塌陷在三天内造成至少9人死亡。省长表示正推动将手工采矿者组织为合作社，以实现更有序的开采。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "马尼卡省",
+    "city": null,
+    "site": "seis carros矿区",
+    "raw_text": "“seis carros” mine, Manica province"
+   },
+   "key_facts": [
+    {
+     "fact": "马尼卡省省长承认难以管控seis carros矿区的非法采矿活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the governor of the Mozambican province of Manica admitted on Monday, 19 October, that there are difficulties in controlling illegal mining at the “seis carros” mine"
+    },
+    {
+     "fact": "该矿区曾聚集超过1.2万名手工采矿者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "We even reached a point where there were more than 12,000 people mining at the ‘seis carros’ mine"
+    },
+    {
+     "fact": "9月万杜齐区非法采矿引发的地面塌陷在三天内造成至少9人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In September, at least nine people died over three days as a result of land collapses associated with illegal mining in Vanduzi district"
+    },
+    {
+     "fact": "矿区开挖区域目前约20米深、直径25米",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "which is currently around 20 metres deep and 25 metres in diameter"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（Lusa/Club of Mozambique）报道，尚缺乏交叉验证",
+    "死亡人数及矿区人数为当地政府与省长说法，未获独立核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_943ac9830d0abd2c",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

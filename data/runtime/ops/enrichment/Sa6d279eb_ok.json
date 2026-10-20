@@ -1,0 +1,127 @@
+{
+ "label": "Sa6d279eb",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "dc85b75f46feeb4919cc20be97c5890bb37150517d35c241b2ea4a8c6690c74a",
+ "tokens": {
+  "input_tokens": 2701,
+  "output_tokens": 635,
+  "total_tokens": 3336
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "中非共和国：三名被扣押人员获释，包括班布蒂副省长，被扣押近十个月",
+   "summary_zh": "中非共和国东南部上姆博穆省三名被扣押近十个月的人员于10月19日周一获释，包括班布蒂副省长库姆巴·恩迪亚耶和两名国家选举管理局工作人员，他们于2025年12月28日被绑架。据称绑架由阿赞德·阿尼·克皮·格贝（AAKG）民兵组织宣称实施。此次获释据称经天主教教会、议员及中非稳定团（MINUSCA）调解促成，据报未支付赎金。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "CAF",
+   "location": {
+    "country_iso3": "CAF",
+    "admin1": "上姆博穆省",
+    "city": "班布蒂",
+    "site": null,
+    "raw_text": "Haut-Mbomou, dans le sud-est de la Centrafrique; Bambouti"
+   },
+   "key_facts": [
+    {
+     "fact": "三名被扣押近十个月的人员于10月19日周一获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Trois personnes retenues en otage depuis près de dix mois dans le Haut-Mbomou, dans le sud-est de la Centrafrique, ont été libérées, lundi 19 octobre."
+    },
+    {
+     "fact": "获释人员包括班布蒂副省长库姆巴·恩迪亚耶和两名国家选举管理局工作人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il s'agit de la sous-préfète de Bambouti, Koumba Ndiaye, et de deux agents de l'Autorité nationale des élections"
+    },
+    {
+     "fact": "三人于2025年12月28日被绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "enlevés le 28 décembre 2025"
+    },
+    {
+     "fact": "绑架事件被指由AAKG民兵组织宣称实施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Leur enlèvement avait été revendiqué par les miliciens du groupe Azandé Ani Kpi Gbé (AAKG)."
+    },
+    {
+     "fact": "获释据称经教会、议员及MINUSCA调解促成，据报未支付赎金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la médiation a été menée par l'évêque de Bangassou, Monseigneur Aurelio, ainsi que le collectif des députés du Haut-Mbomou et de la Minusca. Aucune rançon n'aurait été versée, selon les informations recueillies."
+    }
+   ],
+   "uncertainties": [
+    "据报未支付赎金，尚未获独立确认",
+    "获释人员健康状况被认为总体良好，但仍需进一步医学检查",
+    "目前仅单一来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "中非共和国：三名被扣押人员获释，包括班布蒂副省长，被扣押近十个月",
+   "summary_zh": "中非共和国东南部上姆博穆省三名被扣押近十个月的人员于10月19日周一获释，包括班布蒂副省长库姆巴·恩迪亚耶和两名国家选举管理局工作人员，他们于2025年12月28日被绑架。据称绑架由阿赞德·阿尼·克皮·格贝（AAKG）民兵组织宣称实施。此次获释据称经天主教教会、议员及中非稳定团（MINUSCA）调解促成，据报未支付赎金。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "CAF",
+   "location": {
+    "country_iso3": "CAF",
+    "admin1": "上姆博穆省",
+    "city": "班布蒂",
+    "site": null,
+    "raw_text": "Haut-Mbomou, dans le sud-est de la Centrafrique; Bambouti"
+   },
+   "key_facts": [
+    {
+     "fact": "三名被扣押近十个月的人员于10月19日周一获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Trois personnes retenues en otage depuis près de dix mois dans le Haut-Mbomou, dans le sud-est de la Centrafrique, ont été libérées, lundi 19 octobre."
+    },
+    {
+     "fact": "获释人员包括班布蒂副省长库姆巴·恩迪亚耶和两名国家选举管理局工作人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il s'agit de la sous-préfète de Bambouti, Koumba Ndiaye, et de deux agents de l'Autorité nationale des élections"
+    },
+    {
+     "fact": "三人于2025年12月28日被绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "enlevés le 28 décembre 2025"
+    },
+    {
+     "fact": "绑架事件被指由AAKG民兵组织宣称实施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Leur enlèvement avait été revendiqué par les miliciens du groupe Azandé Ani Kpi Gbé (AAKG)."
+    },
+    {
+     "fact": "获释据称经教会、议员及MINUSCA调解促成，据报未支付赎金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la médiation a été menée par l'évêque de Bangassou, Monseigneur Aurelio, ainsi que le collectif des députés du Haut-Mbomou et de la Minusca. Aucune rançon n'aurait été versée, selon les informations recueillies."
+    }
+   ],
+   "uncertainties": [
+    "据报未支付赎金，尚未获独立确认",
+    "获释人员健康状况被认为总体良好，但仍需进一步医学检查",
+    "目前仅单一来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_48b1f1c4a6d279eb",
+ "disease_event_id": null,
+ "country_code": "CF"
+}

@@ -1,0 +1,126 @@
+{
+ "label": "S38b04233",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "8ff44184f62c48153ae743baf87447dbf43d44239aa18b98c407647b1757f3ce",
+ "tokens": {
+  "input_tokens": 2071,
+  "output_tokens": 435,
+  "total_tokens": 2506
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（Punch）报道，尚缺乏交叉验证\", \"没收1080万美元的具体执行情况未在正文中说明\"]",
+    "after": "[\"目前仅一个来源（Punch）报道，尚缺乏交叉验证\", \"没收1080万美元的具体执行情况未在正文中说明\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "美国法院判处一名尼日利亚人八年监禁并下令没收1080万美元",
+   "summary_zh": "美国法院判处40岁尼日利亚人Chukwuemeka Amachukwu八年监禁，罪名涉及黑客入侵、身份盗用和电信诈骗。他此前已对共谋实施计算机入侵和共谋实施电信诈骗认罪。据美国纽约南区联邦检察官办公室称，其与同伙自2019年起通过鱼叉式钓鱼邮件入侵美国报税企业系统。该报道为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "美国法院判处40岁尼日利亚人Chukwuemeka Amachukwu八年监禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A 40-year-old Nigerian, Chukwuemeka Amachukwu, has been sentenced to eight years in prison in the United States"
+    },
+    {
+     "fact": "其罪名涉及黑客入侵、身份盗用和电信诈骗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "for his role in hacking, identity theft and fraud schemes involving millions of dollars"
+    },
+    {
+     "fact": "他此前已对共谋实施计算机入侵和共谋实施电信诈骗认罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He had pleaded guilty to conspiracy to commit computer intrusions and conspiracy to commit wire fraud"
+    },
+    {
+     "fact": "其与同伙自2019年起通过鱼叉式钓鱼邮件入侵美国报税企业系统",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "began hacking US tax preparation businesses in 2019 using spear-phishing emails to gain access to their electronic systems"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Punch）报道，尚缺乏交叉验证",
+    "没收1080万美元的具体执行情况未在正文中说明"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "美国法院判处一名尼日利亚人八年监禁并下令没收1080万美元",
+   "summary_zh": "美国法院判处40岁尼日利亚人Chukwuemeka Amachukwu八年监禁，罪名涉及黑客入侵、身份盗用和电信诈骗。他此前已对共谋实施计算机入侵和共谋实施电信诈骗认罪。据美国纽约南区联邦检察官办公室称，其与同伙自2019年起通过鱼叉式钓鱼邮件入侵美国报税企业系统。该报道为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "美国法院判处40岁尼日利亚人Chukwuemeka Amachukwu八年监禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A 40-year-old Nigerian, Chukwuemeka Amachukwu, has been sentenced to eight years in prison in the United States"
+    },
+    {
+     "fact": "其罪名涉及黑客入侵、身份盗用和电信诈骗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "for his role in hacking, identity theft and fraud schemes involving millions of dollars"
+    },
+    {
+     "fact": "他此前已对共谋实施计算机入侵和共谋实施电信诈骗认罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He had pleaded guilty to conspiracy to commit computer intrusions and conspiracy to commit wire fraud"
+    },
+    {
+     "fact": "其与同伙自2019年起通过鱼叉式钓鱼邮件入侵美国报税企业系统",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "began hacking US tax preparation businesses in 2019 using spear-phishing emails to gain access to their electronic systems"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Punch）报道，尚缺乏交叉验证",
+    "没收1080万美元的具体执行情况未在正文中说明",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_cd2c66c638b04233",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
