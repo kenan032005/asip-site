@@ -25,6 +25,8 @@ permissions:
 
 env:
   ASIP_MODE: development
+  # C8-4D2：与 orchestrator 对齐，透传 Phase 拆分回滚开关（默认 '1'）
+  ASIP_PHASE_B_SPLIT: ${{ vars.ASIP_PHASE_B_SPLIT || '1' }}
   browser_direct_api_call: "false"
 
 jobs:
