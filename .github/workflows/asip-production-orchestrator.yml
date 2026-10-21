@@ -168,18 +168,19 @@ jobs:
           # C8-4D2：Phase 拆分回滚开关必须透传到采集执行路径；默认 '1'（不擅自回滚）
           ASIP_PHASE_B_SPLIT: ${{ vars.ASIP_PHASE_B_SPLIT || '1' }}
           ASIP_SHARED_FEED_REUSE_SOURCES: ${{ vars.ASIP_SHARED_FEED_REUSE_SOURCES || '' }}
+          # C8-4D2：采集软预算显式透传（APPROVED 3000s→2800s）；仓库变量可覆盖
+          ASIP_COLLECTION_WALL_CLOCK_SECONDS: ${{ vars.ASIP_COLLECTION_WALL_CLOCK_SECONDS || '2800' }}
         run: |
           FLAGS="--run --json"
           [ "$CANARY" = "true" ] && FLAGS="$FLAGS --canary"
-          python scripts/ops/schedule_orchestrator.py $FLAGS > /tmp/orch.json 2> /tmp/orch.err || {
-            echo "ORCHESTRATOR_EXIT=$?"; tail -50 /tmp/orch.err; exit 1; }
-          # C8-4D2 事实纠正：orch.json（results[task].ok / error_type / exit_status）必须
-          # 先于失败分支打印，否则真实失败子任务永远不出现在日志里。
-          # 只增加可观测性；不改变退出码语义，不关闭任何 fail-closed 检查。
-          if [ -s /tmp/orch.json ]; then echo '--- orch.json(results 摘要) ---';
-            python -c "import json;d=json.load(open('/tmp/orch.json'));r=d.get('results') or {};
-          print('status =',d.get('status'));[print(' task=%-22s ok=%-5s exit=%s err=%s'%(k,v.get('ok'),v.get('exit_status'),str(v.get('error_type') or v.get('error') or '')[:60])) for k,v in (r.items() if isinstance(r,dict) else [])]"
-          fi
+          # C8-4D2 超时热修复：先保存退出码 → 打印脱敏摘要 → 恢复原始退出码（上一版把摘要放在 exit 1 之后，不可达）。
+          # 不修改 fail-closed：恢复的 $RC 原样作为步骤退出码。
+          RC=0
+          python scripts/ops/schedule_orchestrator.py $FLAGS > /tmp/orch.json 2> /tmp/orch.err || RC=$?
+          echo "ORCHESTRATOR_EXIT=$RC"
+          python scripts/ops/orch_result_summary.py /tmp/orch.json || true
+          if [ -s /tmp/orch.err ]; then echo "--- stderr(tail) ---"; tail -30 /tmp/orch.err; fi
+          exit $RC
           cat /tmp/orch.json
           python - <<'PY' >> "$GITHUB_OUTPUT"
           import json
