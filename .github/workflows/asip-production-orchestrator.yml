@@ -172,20 +172,11 @@ jobs:
         run: |
           FLAGS="--run --json"
           [ "$CANARY" = "true" ] && FLAGS="$FLAGS --canary"
-          # C8-4D2 超时热修复：先保存退出码 → 打印脱敏摘要 → 恢复原始退出码（上一版把摘要放在 exit 1 之后，不可达）。
-          # 不修改 fail-closed：恢复的 $RC 原样作为步骤退出码。
-          RC=0
-          python scripts/ops/schedule_orchestrator.py $FLAGS > /tmp/orch.json 2> /tmp/orch.err || RC=$?
-          echo "ORCHESTRATOR_EXIT=$RC"
-          if [ -s /tmp/orch.err ]; then echo "--- stderr(tail) ---"; tail -30 /tmp/orch.err; fi
-          # C8-4D2 P0 auto-deploy hotfix：**仅失败时**以原退出码结束；
-        run: |
-          FLAGS="--run --json"
-          [ "$CANARY" = "true" ] && FLAGS="$FLAGS --canary"
           # C8-4D2 紧急修复：YAML 曾因缩进断裂（0/2 空格脱离 run: |）导致 workflow 零 Job。
           # 先保存退出码 → 白名单诊断 → 仅失败时以原退出码退出；成功必须继续往下走，
           # 否则 Auto deploy 拿不到 deploy_required。
           RC=0
+          python scripts/ops/schedule_orchestrator.py $FLAGS > /tmp/orch.json 2> /tmp/orch.err || RC=$?
           echo "ORCHESTRATOR_EXIT=$RC"
           # 白名单诊断：只输出类型检查过的 task / ok / exit_status / elapsed。
           # 不打印完整 orch.json，不打印任意 error/detail 文本。
