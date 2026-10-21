@@ -1,0 +1,115 @@
+{
+ "label": "Se82490b3",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "21eb14fcd9d63b15699015e09367a1e01e5f9f0aff46837a412817577e9aec61",
+ "tokens": {
+  "input_tokens": 2181,
+  "output_tokens": 551,
+  "total_tokens": 2732
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "阿加德兹：州长伊布拉·布瓦拉马·伊萨探望SONITRAV巴士袭击事件伤者",
+   "summary_zh": "尼日尔阿加德兹地区州长、少将伊布拉·布瓦拉马·伊萨周三前往地区医院中心，探望在Tchirozérine至阿加德兹路段遭武装袭击的两辆SONITRAV巴士的幸存者。据初步统计，袭击造成十二人死亡，其中包括妇女和儿童。州长在地区安全委员会成员、国防与安全部队负责人及阿加德兹大审法院共和国检察官陪同下，了解了伤者的健康状况。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "阿加德兹",
+    "city": "阿加德兹",
+    "site": "地区医院中心",
+    "raw_text": "Centre hospitalier régional d’Agadez, axe Tchirozérine-Agadez"
+   },
+   "key_facts": [
+    {
+     "fact": "阿加德兹地区州长伊布拉·布瓦拉马·伊萨周三前往地区医院中心探望武装袭击的幸存者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouverneur de la région d’Agadez, le général de division Ibra Boulama Issa, s’est rendu mercredi au Centre hospitalier régional afin de rencontrer les survivants de l’attaque armée"
+    },
+    {
+     "fact": "袭击针对Tchirozérine至阿加德兹路段的两辆SONITRAV巴士",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ayant visé deux bus de la SONITRAV sur l’axe Tchirozérine-Agadez"
+    },
+    {
+     "fact": "初步统计显示袭击造成十二人死亡，其中包括妇女和儿童",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le bilan provisoire fait état de douze morts, parmi lesquels figurent des femmes et des enfants"
+    },
+    {
+     "fact": "州长在地区安全委员会成员、国防与安全部队负责人及检察官陪同下探望伤者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Accompagné des membres du Conseil régional de sécurité, de responsables des Forces de défense et de sécurité (FDS), du procureur de la République près le tribunal de grande instance d’Agadez"
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字为初步统计，尚未最终确认",
+    "事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "阿加德兹：州长伊布拉·布瓦拉马·伊萨探望SONITRAV巴士袭击事件伤者",
+   "summary_zh": "尼日尔阿加德兹地区州长、少将伊布拉·布瓦拉马·伊萨周三前往地区医院中心，探望在Tchirozérine至阿加德兹路段遭武装袭击的两辆SONITRAV巴士的幸存者。据初步统计，袭击造成十二人死亡，其中包括妇女和儿童。州长在地区安全委员会成员、国防与安全部队负责人及阿加德兹大审法院共和国检察官陪同下，了解了伤者的健康状况。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "阿加德兹",
+    "city": "阿加德兹",
+    "site": "地区医院中心",
+    "raw_text": "Centre hospitalier régional d’Agadez, axe Tchirozérine-Agadez"
+   },
+   "key_facts": [
+    {
+     "fact": "阿加德兹地区州长伊布拉·布瓦拉马·伊萨周三前往地区医院中心探望武装袭击的幸存者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouverneur de la région d’Agadez, le général de division Ibra Boulama Issa, s’est rendu mercredi au Centre hospitalier régional afin de rencontrer les survivants de l’attaque armée"
+    },
+    {
+     "fact": "袭击针对Tchirozérine至阿加德兹路段的两辆SONITRAV巴士",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ayant visé deux bus de la SONITRAV sur l’axe Tchirozérine-Agadez"
+    },
+    {
+     "fact": "初步统计显示袭击造成十二人死亡，其中包括妇女和儿童",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le bilan provisoire fait état de douze morts, parmi lesquels figurent des femmes et des enfants"
+    },
+    {
+     "fact": "州长在地区安全委员会成员、国防与安全部队负责人及检察官陪同下探望伤者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Accompagné des membres du Conseil régional de sécurité, de responsables des Forces de défense et de sécurité (FDS), du procureur de la République près le tribunal de grande instance d’Agadez"
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字为初步统计，尚未最终确认",
+    "事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_6b21264fe82490b3",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

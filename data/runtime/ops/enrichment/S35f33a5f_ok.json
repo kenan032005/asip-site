@@ -1,0 +1,125 @@
+{
+ "label": "S35f33a5f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "413cb732d54de409ccc24ee6649bf0b7db5d827fb5e5a541a12812a1991571e0",
+ "tokens": {
+  "input_tokens": 2631,
+  "output_tokens": 549,
+  "total_tokens": 3180
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁：GDIZ筹备逾625兆瓦能源攻势",
+   "summary_zh": "贝宁格洛-吉格贝工业区（GDIZ）正筹备新的发电产能，以增强能源自主。SIPI-Bénin S.A.总经理莱通吉·贝赫顿在特别经济区投资论坛期间举行的新闻发布会上介绍了相关项目，包括建设逾225兆瓦热电厂、总容量300兆瓦的太阳能电站，以及在仓库屋顶安装光伏板以额外生产约100兆瓦。连接工业区与玛丽亚-格莱塔的30公里天然气管道据称已完工。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "格洛-吉格贝",
+    "site": "格洛-吉格贝工业区（GDIZ）",
+    "raw_text": "Zone industrielle de Glo-Djigbé (GDIZ)"
+   },
+   "key_facts": [
+    {
+     "fact": "GDIZ正筹备新的发电产能以增强能源自主",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Zone industrielle de Glo-Djigbé (GDIZ) prépare de nouvelles capacités de production pour renforcer son autonomie énergétique."
+    },
+    {
+     "fact": "计划在GDIZ建设逾225兆瓦热电厂",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la construction d’une centrale thermique de plus de 225 mégawatts (MW) dans la GDIZ"
+    },
+    {
+     "fact": "连接工业区与玛丽亚-格莱塔的30公里天然气管道据称已完工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un pipeline gazier de 30 kilomètres reliant la zone industrielle à Maria-Gléta ... vient d’être achevé"
+    },
+    {
+     "fact": "计划建设总容量300兆瓦的太阳能电站",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des projets de centrales solaires, pour une capacité totale de 300 MW, sont prévus"
+    },
+    {
+     "fact": "仓库屋顶光伏板预计可额外生产约100兆瓦",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’installation de panneaux photovoltaïques sur les toitures des entrepôts ... produire environ 100 MW supplémentaires"
+    }
+   ],
+   "uncertainties": [
+    "项目进展与时间表（如首座太阳能电站18个月内开工）为官员表态，尚未获独立证实",
+    "目前仅单一来源（La Nouvelle Tribune）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁：GDIZ筹备逾625兆瓦能源攻势",
+   "summary_zh": "贝宁格洛-吉格贝工业区（GDIZ）正筹备新的发电产能，以增强能源自主。SIPI-Bénin S.A.总经理莱通吉·贝赫顿在特别经济区投资论坛期间举行的新闻发布会上介绍了相关项目，包括建设逾225兆瓦热电厂、总容量300兆瓦的太阳能电站，以及在仓库屋顶安装光伏板以额外生产约100兆瓦。连接工业区与玛丽亚-格莱塔的30公里天然气管道据称已完工。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "格洛-吉格贝",
+    "site": "格洛-吉格贝工业区（GDIZ）",
+    "raw_text": "Zone industrielle de Glo-Djigbé (GDIZ)"
+   },
+   "key_facts": [
+    {
+     "fact": "GDIZ正筹备新的发电产能以增强能源自主",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Zone industrielle de Glo-Djigbé (GDIZ) prépare de nouvelles capacités de production pour renforcer son autonomie énergétique."
+    },
+    {
+     "fact": "计划在GDIZ建设逾225兆瓦热电厂",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la construction d’une centrale thermique de plus de 225 mégawatts (MW) dans la GDIZ"
+    },
+    {
+     "fact": "连接工业区与玛丽亚-格莱塔的30公里天然气管道据称已完工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un pipeline gazier de 30 kilomètres reliant la zone industrielle à Maria-Gléta ... vient d’être achevé"
+    },
+    {
+     "fact": "计划建设总容量300兆瓦的太阳能电站",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des projets de centrales solaires, pour une capacité totale de 300 MW, sont prévus"
+    },
+    {
+     "fact": "仓库屋顶光伏板预计可额外生产约100兆瓦",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’installation de panneaux photovoltaïques sur les toitures des entrepôts ... produire environ 100 MW supplémentaires"
+    }
+   ],
+   "uncertainties": [
+    "项目进展与时间表（如首座太阳能电站18个月内开工）为官员表态，尚未获独立证实",
+    "目前仅单一来源（La Nouvelle Tribune）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_5939eeca35f33a5f",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

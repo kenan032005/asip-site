@@ -1,0 +1,126 @@
+{
+ "label": "S7e4e648e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a4f556f42e88218c71447b1862d021ed8457abb43a5db00c1c0949eb3b97f863",
+ "tokens": {
+  "input_tokens": 2059,
+  "output_tokens": 427,
+  "total_tokens": 2486
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅有一个来源（Africanews）报道，尚缺乏交叉验证\", \"患者身份及行程细节据报，尚未获独立确认\"]",
+    "after": "[\"目前仅有一个来源（Africanews）报道，尚缺乏交叉验证\", \"患者身份及行程细节据报，尚未获独立确认\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚首例埃博拉病例引发全国震惊与紧急关注",
+   "summary_zh": "尼日利亚报告该国首例埃博拉病例，患者为一名外交官，感染的是本迪布焦型毒株，该毒株与刚果（金）的重大疫情相关。该患者据报于10月3日从乌干达抵达首都阿布贾，当局正加紧追踪接触者。尼日利亚疾控中心表示已进行三个层面的检测。目前该信息为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "capital Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚检测出该国首例埃博拉病例，毒株为本迪布焦型",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The first Ebola case detected in Nigeria is the Bundibugyo strain, which is behind a major DR Congo outbreak"
+    },
+    {
+     "fact": "患者为一名女性外交官，于10月3日从乌干达抵达首都阿布贾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "was detected in a woman who had travelled from Uganda to the capital Abuja on October 3"
+    },
+    {
+     "fact": "尼日利亚当局正加紧追踪接触者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigerian authorities are racing to trace contacts after a diplomat was declared the country’s first Ebola case"
+    },
+    {
+     "fact": "尼日利亚疾控中心表示已进行三个层面的检测，结果均为分子检测",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "We did three levels of tests, but all molecular. The strain was Bundibugyo"
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（Africanews）报道，尚缺乏交叉验证",
+    "患者身份及行程细节据报，尚未获独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚首例埃博拉病例引发全国震惊与紧急关注",
+   "summary_zh": "尼日利亚报告该国首例埃博拉病例，患者为一名外交官，感染的是本迪布焦型毒株，该毒株与刚果（金）的重大疫情相关。该患者据报于10月3日从乌干达抵达首都阿布贾，当局正加紧追踪接触者。尼日利亚疾控中心表示已进行三个层面的检测。目前该信息为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "capital Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚检测出该国首例埃博拉病例，毒株为本迪布焦型",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The first Ebola case detected in Nigeria is the Bundibugyo strain, which is behind a major DR Congo outbreak"
+    },
+    {
+     "fact": "患者为一名女性外交官，于10月3日从乌干达抵达首都阿布贾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "was detected in a woman who had travelled from Uganda to the capital Abuja on October 3"
+    },
+    {
+     "fact": "尼日利亚当局正加紧追踪接触者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigerian authorities are racing to trace contacts after a diplomat was declared the country’s first Ebola case"
+    },
+    {
+     "fact": "尼日利亚疾控中心表示已进行三个层面的检测，结果均为分子检测",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "We did three levels of tests, but all molecular. The strain was Bundibugyo"
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（Africanews）报道，尚缺乏交叉验证",
+    "患者身份及行程细节据报，尚未获独立确认",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_fcf3cf067e4e648e",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

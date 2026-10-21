@@ -1,0 +1,115 @@
+{
+ "label": "S7d63d083",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a7d1c2566c0516bb437569ee9351dda59bb0d9f499406b96c147abd0e59754c5",
+ "tokens": {
+  "input_tokens": 1983,
+  "output_tokens": 423,
+  "total_tokens": 2406
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "联合国警告维和人员不宜过早撤离中非共和国",
+   "summary_zh": "联合国驻中非共和国最高官员在安理会警告称，MINUSCA维和人员若过早撤离，可能危及近期取得的进展。她指出，邻国苏丹的战争正加剧中非东部边境地区的不稳定。她还提到6月30日边境城镇Am-Dafock遭武装团体袭击，造成平民和安全人员死亡、1.7万人流离失所、6名维和人员受伤。",
+   "event_type": "other_security",
+   "country_iso3": "CAF",
+   "location": {
+    "country_iso3": "CAF",
+    "admin1": null,
+    "city": "Am-Dafock",
+    "site": "边境城镇",
+    "raw_text": "border town of Am‑Dafock"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国驻中非共和国最高官员警告MINUSCA维和人员不宜过早撤离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The United Nations’ top official in the Central African Republic on Tuesday warned against the premature withdrawal of MINUSCA peacekeepers from the country."
+    },
+    {
+     "fact": "苏丹战争加剧中非东部边境地区的不稳定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the war in neighbouring Sudan fuels instability along its eastern borders"
+    },
+    {
+     "fact": "6月30日边境城镇Am-Dafock遭武装团体袭击，造成平民和安全人员死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a 30 June attack on the border town of Am‑Dafock where an armed group killed civilians and security personnel"
+    },
+    {
+     "fact": "袭击导致1.7万人流离失所，6名维和人员受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "displaced 17,000 people, and wounded six peacekeepers"
+    }
+   ],
+   "uncertainties": [
+    "事件细节来自单一来源（Africanews），尚缺乏交叉验证",
+    "伤亡与流离失所人数尚未获独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "联合国警告维和人员不宜过早撤离中非共和国",
+   "summary_zh": "联合国驻中非共和国最高官员在安理会警告称，MINUSCA维和人员若过早撤离，可能危及近期取得的进展。她指出，邻国苏丹的战争正加剧中非东部边境地区的不稳定。她还提到6月30日边境城镇Am-Dafock遭武装团体袭击，造成平民和安全人员死亡、1.7万人流离失所、6名维和人员受伤。",
+   "event_type": "other_security",
+   "country_iso3": "CAF",
+   "location": {
+    "country_iso3": "CAF",
+    "admin1": null,
+    "city": "Am-Dafock",
+    "site": "边境城镇",
+    "raw_text": "border town of Am‑Dafock"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国驻中非共和国最高官员警告MINUSCA维和人员不宜过早撤离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The United Nations’ top official in the Central African Republic on Tuesday warned against the premature withdrawal of MINUSCA peacekeepers from the country."
+    },
+    {
+     "fact": "苏丹战争加剧中非东部边境地区的不稳定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the war in neighbouring Sudan fuels instability along its eastern borders"
+    },
+    {
+     "fact": "6月30日边境城镇Am-Dafock遭武装团体袭击，造成平民和安全人员死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a 30 June attack on the border town of Am‑Dafock where an armed group killed civilians and security personnel"
+    },
+    {
+     "fact": "袭击导致1.7万人流离失所，6名维和人员受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "displaced 17,000 people, and wounded six peacekeepers"
+    }
+   ],
+   "uncertainties": [
+    "事件细节来自单一来源（Africanews），尚缺乏交叉验证",
+    "伤亡与流离失所人数尚未获独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_b8168be07d63d083",
+ "disease_event_id": null,
+ "country_code": "CF"
+}

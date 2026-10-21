@@ -1,0 +1,115 @@
+{
+ "label": "S17839fbf",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "48d145d7339ca5cc27f49eddf133e0dc260ed2a6186cdb578973996c9e5c3523",
+ "tokens": {
+  "input_tokens": 2656,
+  "output_tokens": 532,
+  "total_tokens": 3188
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "萨拉马特省：阿尔多副省长呼吁促进和平",
+   "summary_zh": "乍得萨拉马特省穆赖副省辖区发生农牧民冲突，邻近的阿尔多副省长比沙拉·卜拉欣·阿卜德拉曼前往萨基内村，呼吁促进和平与共处。此前穆赖地区冲突据报造成12人死亡、3人受伤。副省长还提到10月20日至21日夜间一处农田遭牲畜毁坏，经调解和平解决。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "萨拉马特省",
+    "city": "萨基内村",
+    "site": "萨基内村",
+    "raw_text": "village de Sakinet, sous-préfecture d’Ardo, province du Salamat"
+   },
+   "key_facts": [
+    {
+     "fact": "阿尔多副省长比沙拉·卜拉欣·阿卜德拉曼前往萨基内村呼吁促进和平",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le sous-préfet d’Ardo, Bichara Brahim Abdraman, s’est rendu au village de Sakinet"
+    },
+    {
+     "fact": "穆赖副省辖区正面临农牧民冲突",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la sous-préfecture de Mouray, voisine de celle d’Ardo, située à environ 45 kilomètres à l’est d’Amtiman, chef-lieu de la province du Salamat"
+    },
+    {
+     "fact": "相关报道称穆赖农牧民冲突造成12人死亡、3人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Salamat : 12 morts et 3 blessés dans un conflit entre agriculteurs et éleveurs dans la sous-préfecture de Mouray"
+    },
+    {
+     "fact": "10月20日至21日夜间一处农田遭牲畜毁坏，经副省长调解和平解决",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un champ dévasté par des troupeaux dans la nuit du mardi 20 au mercredi 21 octobre 2026 a fait l’objet d’un règlement pacifique sous la médiation du sous-préfet"
+    }
+   ],
+   "uncertainties": [
+    "穆赖冲突的伤亡数字来自文中引述的另一篇报道，尚未获独立确认",
+    "事件目前为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "萨拉马特省：阿尔多副省长呼吁促进和平",
+   "summary_zh": "乍得萨拉马特省穆赖副省辖区发生农牧民冲突，邻近的阿尔多副省长比沙拉·卜拉欣·阿卜德拉曼前往萨基内村，呼吁促进和平与共处。此前穆赖地区冲突据报造成12人死亡、3人受伤。副省长还提到10月20日至21日夜间一处农田遭牲畜毁坏，经调解和平解决。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "萨拉马特省",
+    "city": "萨基内村",
+    "site": "萨基内村",
+    "raw_text": "village de Sakinet, sous-préfecture d’Ardo, province du Salamat"
+   },
+   "key_facts": [
+    {
+     "fact": "阿尔多副省长比沙拉·卜拉欣·阿卜德拉曼前往萨基内村呼吁促进和平",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le sous-préfet d’Ardo, Bichara Brahim Abdraman, s’est rendu au village de Sakinet"
+    },
+    {
+     "fact": "穆赖副省辖区正面临农牧民冲突",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la sous-préfecture de Mouray, voisine de celle d’Ardo, située à environ 45 kilomètres à l’est d’Amtiman, chef-lieu de la province du Salamat"
+    },
+    {
+     "fact": "相关报道称穆赖农牧民冲突造成12人死亡、3人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Salamat : 12 morts et 3 blessés dans un conflit entre agriculteurs et éleveurs dans la sous-préfecture de Mouray"
+    },
+    {
+     "fact": "10月20日至21日夜间一处农田遭牲畜毁坏，经副省长调解和平解决",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un champ dévasté par des troupeaux dans la nuit du mardi 20 au mercredi 21 octobre 2026 a fait l’objet d’un règlement pacifique sous la médiation du sous-préfet"
+    }
+   ],
+   "uncertainties": [
+    "穆赖冲突的伤亡数字来自文中引述的另一篇报道，尚未获独立确认",
+    "事件目前为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_e72b215517839fbf",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

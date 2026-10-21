@@ -1,0 +1,115 @@
+{
+ "label": "S19b96f47",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a2e7ba403f4ed8bf487d2c2b8485a18731a4a8bdf56dc91074c9e3664c2d0b87",
+ "tokens": {
+  "input_tokens": 2489,
+  "output_tokens": 478,
+  "total_tokens": 2967
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "西加扎勒河州州长向湖泊州捐赠药品",
+   "summary_zh": "南苏丹西加扎勒河州看守州长谢里夫·丹尼尔·谢里夫向湖泊州伦拜克州立医院捐赠药品，用于救治2026年10月9日始于伦拜克镇郊外并蔓延至镇内的族群间暴力冲突伤者。湖泊州方面称冲突造成40人死亡、100多人受伤，其中包括妇女和儿童。此次捐赠为单一来源报道。",
+   "event_type": "civil_unrest",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "湖泊州",
+    "city": "伦拜克",
+    "site": "伦拜克州立医院",
+    "raw_text": "Rumbek State Hospital in Lakes State"
+   },
+   "key_facts": [
+    {
+     "fact": "西加扎勒河州看守州长向湖泊州伦拜克州立医院捐赠药品",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The caretaker governor of Western Bahr el Ghazal State, Sheriff Daniel Sheriff, has donated medicines to Rumbek State Hospital in Lakes State"
+    },
+    {
+     "fact": "族群间暴力冲突于2026年10月9日始于伦拜克镇郊外并蔓延至镇内",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "intercommunal violence that started on the outskirts of Rumbek Town and spilled into the town on 9 October 2026"
+    },
+    {
+     "fact": "湖泊州卫生部长称冲突造成40人死亡、多人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The total number of people we lost during the clashes was 40 and others were injured."
+    },
+    {
+     "fact": "民间社会网络主席称冲突造成100多人受伤，包括妇女和儿童",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "recent deadly clashes in Rumbek Town that left over people dead and over 100 wounded, including women and children"
+    }
+   ],
+   "uncertainties": [
+    "冲突死亡与受伤人数说法不一：卫生部长称40人死亡，民间社会网络主席称100多人受伤，具体伤亡总数尚未确认",
+    "事件目前仅有一个来源（Radio Tamazuj）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "西加扎勒河州州长向湖泊州捐赠药品",
+   "summary_zh": "南苏丹西加扎勒河州看守州长谢里夫·丹尼尔·谢里夫向湖泊州伦拜克州立医院捐赠药品，用于救治2026年10月9日始于伦拜克镇郊外并蔓延至镇内的族群间暴力冲突伤者。湖泊州方面称冲突造成40人死亡、100多人受伤，其中包括妇女和儿童。此次捐赠为单一来源报道。",
+   "event_type": "civil_unrest",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "湖泊州",
+    "city": "伦拜克",
+    "site": "伦拜克州立医院",
+    "raw_text": "Rumbek State Hospital in Lakes State"
+   },
+   "key_facts": [
+    {
+     "fact": "西加扎勒河州看守州长向湖泊州伦拜克州立医院捐赠药品",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The caretaker governor of Western Bahr el Ghazal State, Sheriff Daniel Sheriff, has donated medicines to Rumbek State Hospital in Lakes State"
+    },
+    {
+     "fact": "族群间暴力冲突于2026年10月9日始于伦拜克镇郊外并蔓延至镇内",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "intercommunal violence that started on the outskirts of Rumbek Town and spilled into the town on 9 October 2026"
+    },
+    {
+     "fact": "湖泊州卫生部长称冲突造成40人死亡、多人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The total number of people we lost during the clashes was 40 and others were injured."
+    },
+    {
+     "fact": "民间社会网络主席称冲突造成100多人受伤，包括妇女和儿童",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "recent deadly clashes in Rumbek Town that left over people dead and over 100 wounded, including women and children"
+    }
+   ],
+   "uncertainties": [
+    "冲突死亡与受伤人数说法不一：卫生部长称40人死亡，民间社会网络主席称100多人受伤，具体伤亡总数尚未确认",
+    "事件目前仅有一个来源（Radio Tamazuj）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_e83eb2de19b96f47",
+ "disease_event_id": null,
+ "country_code": "SS"
+}
