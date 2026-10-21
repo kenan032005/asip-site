@@ -1,0 +1,138 @@
+{
+ "label": "Sf703a3f4",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "95d3cd468b86d1fb9f1ac519211280d4b7022f1e9b8b28a51a1d9a6bfa966360",
+ "tokens": {
+  "input_tokens": 2815,
+  "output_tokens": 572,
+  "total_tokens": 3387
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"罢工参与程度因行业而异，报道称“或多或少广泛”，后续走势尚待观察\", \"工会称征用措施“滥用”，该说法为工会单方主张\", \"目前仅RFI单一来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"罢工参与程度因行业而异，报道称“或多或少广泛”，后续走势尚待观察\", \"工会称征用措施“滥用”，该说法为工会单方主张\", \"目前仅RFI单一来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "塞内加尔：在与政府对峙背景下爆发全国性罢工",
+   "summary_zh": "塞内加尔自10月21日（周三）起开始为期72小时的全国性罢工，由汇集教育、卫生、司法和交通等十三个工会的劳工保护工会阵线（FSDT）发起，持续至周五。政府称此次罢工“非法”，呼吁工人放弃罢工，并宣布征用国家电力公司数百名员工。首都达喀尔的公共交通停运，公立医院仅维持急诊最低服务。",
+   "event_type": "civil_unrest",
+   "country_iso3": "SEN",
+   "location": {
+    "country_iso3": "SEN",
+    "admin1": null,
+    "city": "达喀尔",
+    "site": null,
+    "raw_text": "Dakar"
+   },
+   "key_facts": [
+    {
+     "fact": "塞内加尔自10月21日起开始为期72小时的全国性罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Sénégal, la grève générale de 72 heures a commencé ce mercredi 21 octobre."
+    },
+    {
+     "fact": "罢工由汇集十三个工会的劳工保护工会阵线（FSDT）发起，涉及教育、卫生、司法和交通等行业",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le mot d’ordre lancé par le Front syndical pour la défense du travail (FSDT), qui réunit treize syndicats dans le secteur de l'éducation, de la santé, de la justice ou encore du transport"
+    },
+    {
+     "fact": "政府称此次罢工“非法”，并呼吁工人放弃罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement a appelé les travailleurs à renoncer à cette grève jugée « illicite »."
+    },
+    {
+     "fact": "达喀尔公共交通停运，公立医院仅维持急诊最低服务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Du côté du transport public, tout est à l’arrêt à Dakar. ... À l’hôpital public Abass Ndao ... seul le service minimum des urgences est garanti"
+    },
+    {
+     "fact": "达喀尔市长宣布征用国家电力公司数百名员工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Mardi 20 octobre, le gouverneur de Dakar a aussi annoncé la réquisition de centaines d’agents de la Société nationale d’électricité (Senelec)"
+    }
+   ],
+   "uncertainties": [
+    "罢工参与程度因行业而异，报道称“或多或少广泛”，后续走势尚待观察",
+    "工会称征用措施“滥用”，该说法为工会单方主张",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "塞内加尔：在与政府对峙背景下爆发全国性罢工",
+   "summary_zh": "塞内加尔自10月21日（周三）起开始为期72小时的全国性罢工，由汇集教育、卫生、司法和交通等十三个工会的劳工保护工会阵线（FSDT）发起，持续至周五。政府称此次罢工“非法”，呼吁工人放弃罢工，并宣布征用国家电力公司数百名员工。首都达喀尔的公共交通停运，公立医院仅维持急诊最低服务。",
+   "event_type": "civil_unrest",
+   "country_iso3": "SEN",
+   "location": {
+    "country_iso3": "SEN",
+    "admin1": null,
+    "city": "达喀尔",
+    "site": null,
+    "raw_text": "Dakar"
+   },
+   "key_facts": [
+    {
+     "fact": "塞内加尔自10月21日起开始为期72小时的全国性罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Sénégal, la grève générale de 72 heures a commencé ce mercredi 21 octobre."
+    },
+    {
+     "fact": "罢工由汇集十三个工会的劳工保护工会阵线（FSDT）发起，涉及教育、卫生、司法和交通等行业",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le mot d’ordre lancé par le Front syndical pour la défense du travail (FSDT), qui réunit treize syndicats dans le secteur de l'éducation, de la santé, de la justice ou encore du transport"
+    },
+    {
+     "fact": "政府称此次罢工“非法”，并呼吁工人放弃罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement a appelé les travailleurs à renoncer à cette grève jugée « illicite »."
+    },
+    {
+     "fact": "达喀尔公共交通停运，公立医院仅维持急诊最低服务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Du côté du transport public, tout est à l’arrêt à Dakar. ... À l’hôpital public Abass Ndao ... seul le service minimum des urgences est garanti"
+    },
+    {
+     "fact": "达喀尔市长宣布征用国家电力公司数百名员工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Mardi 20 octobre, le gouverneur de Dakar a aussi annoncé la réquisition de centaines d’agents de la Société nationale d’électricité (Senelec)"
+    }
+   ],
+   "uncertainties": [
+    "罢工参与程度因行业而异，报道称“或多或少广泛”，后续走势尚待观察",
+    "工会称征用措施“滥用”，该说法为工会单方主张",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_be5d4218f703a3f4",
+ "disease_event_id": null,
+ "country_code": "SN"
+}

@@ -1,0 +1,117 @@
+{
+ "label": "Se464c952",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "8b99d7db7b10eb92e21e42927d32082b5c00beb64174784b3e453b24377675f5",
+ "tokens": {
+  "input_tokens": 2452,
+  "output_tokens": 534,
+  "total_tokens": 2986
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "米斯基：检察官警告“无人凌驾于法律之上”",
+   "summary_zh": "乍得恩贾梅纳大审法院共和国检察官穆萨·阿卜杜勒克里姆·萨利赫于2026年10月21日周三通报，已逮捕四名与10月14日提贝斯提省米斯基袭击事件调查有关的嫌疑人。据检察官称，这四名嫌疑人被控危害国家安全、扰乱公共秩序和结伙犯罪等多项罪名。检察官同时强调无罪推定和辩护权，表示嫌疑人将在合法程序下接受审判。据军方称，此次袭击造成两名军人死亡、九人受伤。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "提贝斯提省",
+    "city": "米斯基",
+    "site": null,
+    "raw_text": "Miski, dans la province du Tibesti"
+   },
+   "key_facts": [
+    {
+     "fact": "检察官通报逮捕四名与米斯基袭击调查有关的嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a présenté ce mercredi 21 octobre 2026 quatre personnes interpellées dans le cadre de l’enquête sur l’attaque du 14 octobre à Miski"
+    },
+    {
+     "fact": "四名嫌疑人被控危害国家安全、扰乱公共秩序和结伙犯罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les quatre suspects sont poursuivis pour plusieurs chefs d’accusation, dont l’atteinte à la sûreté de l’État, le trouble à l’ordre public et l’association de malfaiteurs"
+    },
+    {
+     "fact": "据军方称，10月14日袭击造成两名军人死亡、九人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D’après l’armée, cette attaque a fait deux militaires tués et neuf blessés"
+    },
+    {
+     "fact": "米斯基自卫委员会被要求交出武器，军事行动仍在继续",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Comité d’autodéfense de Miski a été sommé de déposer les armes, tandis qu’une opération militaire se poursuit"
+    }
+   ],
+   "uncertainties": [
+    "袭击具体细节及责任方尚未完全查明，调查仍在进行",
+    "伤亡数字来自军方说法，尚未获得独立核实",
+    "目前仅单一来源（Le N'Djam Post）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "米斯基：检察官警告“无人凌驾于法律之上”",
+   "summary_zh": "乍得恩贾梅纳大审法院共和国检察官穆萨·阿卜杜勒克里姆·萨利赫于2026年10月21日周三通报，已逮捕四名与10月14日提贝斯提省米斯基袭击事件调查有关的嫌疑人。据检察官称，这四名嫌疑人被控危害国家安全、扰乱公共秩序和结伙犯罪等多项罪名。检察官同时强调无罪推定和辩护权，表示嫌疑人将在合法程序下接受审判。据军方称，此次袭击造成两名军人死亡、九人受伤。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "提贝斯提省",
+    "city": "米斯基",
+    "site": null,
+    "raw_text": "Miski, dans la province du Tibesti"
+   },
+   "key_facts": [
+    {
+     "fact": "检察官通报逮捕四名与米斯基袭击调查有关的嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a présenté ce mercredi 21 octobre 2026 quatre personnes interpellées dans le cadre de l’enquête sur l’attaque du 14 octobre à Miski"
+    },
+    {
+     "fact": "四名嫌疑人被控危害国家安全、扰乱公共秩序和结伙犯罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les quatre suspects sont poursuivis pour plusieurs chefs d’accusation, dont l’atteinte à la sûreté de l’État, le trouble à l’ordre public et l’association de malfaiteurs"
+    },
+    {
+     "fact": "据军方称，10月14日袭击造成两名军人死亡、九人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D’après l’armée, cette attaque a fait deux militaires tués et neuf blessés"
+    },
+    {
+     "fact": "米斯基自卫委员会被要求交出武器，军事行动仍在继续",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Comité d’autodéfense de Miski a été sommé de déposer les armes, tandis qu’une opération militaire se poursuit"
+    }
+   ],
+   "uncertainties": [
+    "袭击具体细节及责任方尚未完全查明，调查仍在进行",
+    "伤亡数字来自军方说法，尚未获得独立核实",
+    "目前仅单一来源（Le N'Djam Post）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_66f772d5e464c952",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

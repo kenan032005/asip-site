@@ -1,0 +1,117 @@
+{
+ "label": "S657d1cd8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "cbe0e32693bf27e6ea63f397fe83c9cb15a3d059772292f372643de1b4b45c5a",
+ "tokens": {
+  "input_tokens": 2741,
+  "output_tokens": 584,
+  "total_tokens": 3325
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "阿加德兹：地区安全委员会召开例行会议",
+   "summary_zh": "尼日尔阿加德兹地区安全委员会于2026年10月21日召开例行会议，由地区长官、少将易卜拉·布拉马·伊萨主持，重点审议和分析地区安全形势，尤其是10月20日阿尔利特—阿加德兹路段上两辆SONITRAV巴士遭袭事件。会后地区长官前往阿加德兹地区医院探望伤者，称袭击造成12人死亡、约十人受伤，部分伤者伤势严重。据初步信息，袭击可能与其中一辆卡车运输黄金有关。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "阿加德兹地区",
+    "city": "阿加德兹",
+    "site": null,
+    "raw_text": "Agadez, Région d’Agadez"
+   },
+   "key_facts": [
+    {
+     "fact": "阿加德兹地区安全委员会于2026年10月21日召开例行会议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Gouverneur de la Région d’Agadez, le Général de Division Ibra Boulama Issa, a présidé ce mercredi 21 octobre 2026, une réunion ordinaire du Conseil Régional de Sécurité (CRS)."
+    },
+    {
+     "fact": "会议重点分析地区安全形势，尤其是10月20日阿尔利特—阿加德兹路段两辆SONITRAV巴士遭袭事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’examen et l’analyse de la situation sécuritaire de la région avec un accent sur l’attaque des deux bus de SONITRAV, survenue le mardi 20 octobre 2026, sur l’axe Arlit – Agadez"
+    },
+    {
+     "fact": "袭击造成12人死亡、约十人受伤，部分伤者伤势严重",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’attaque armée ayant visé les deux bus de la société SONITRAV, causant 12 victimes et plusieurs blessés"
+    },
+    {
+     "fact": "据初步信息，袭击可能与其中一辆卡车运输黄金有关",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon les premières informations, l’attaque serait liée au transport d’or à bord de l’un des camions."
+    }
+   ],
+   "uncertainties": [
+    "袭击动机尚未证实，仅称据初步信息可能与运输黄金有关",
+    "伤亡数字为地区长官单方面表述，尚未获得独立来源交叉验证",
+    "事件目前仅有一个来源（尼日尔官方通讯社ANP）报道"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "阿加德兹：地区安全委员会召开例行会议",
+   "summary_zh": "尼日尔阿加德兹地区安全委员会于2026年10月21日召开例行会议，由地区长官、少将易卜拉·布拉马·伊萨主持，重点审议和分析地区安全形势，尤其是10月20日阿尔利特—阿加德兹路段上两辆SONITRAV巴士遭袭事件。会后地区长官前往阿加德兹地区医院探望伤者，称袭击造成12人死亡、约十人受伤，部分伤者伤势严重。据初步信息，袭击可能与其中一辆卡车运输黄金有关。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "阿加德兹地区",
+    "city": "阿加德兹",
+    "site": null,
+    "raw_text": "Agadez, Région d’Agadez"
+   },
+   "key_facts": [
+    {
+     "fact": "阿加德兹地区安全委员会于2026年10月21日召开例行会议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Gouverneur de la Région d’Agadez, le Général de Division Ibra Boulama Issa, a présidé ce mercredi 21 octobre 2026, une réunion ordinaire du Conseil Régional de Sécurité (CRS)."
+    },
+    {
+     "fact": "会议重点分析地区安全形势，尤其是10月20日阿尔利特—阿加德兹路段两辆SONITRAV巴士遭袭事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’examen et l’analyse de la situation sécuritaire de la région avec un accent sur l’attaque des deux bus de SONITRAV, survenue le mardi 20 octobre 2026, sur l’axe Arlit – Agadez"
+    },
+    {
+     "fact": "袭击造成12人死亡、约十人受伤，部分伤者伤势严重",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’attaque armée ayant visé les deux bus de la société SONITRAV, causant 12 victimes et plusieurs blessés"
+    },
+    {
+     "fact": "据初步信息，袭击可能与其中一辆卡车运输黄金有关",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon les premières informations, l’attaque serait liée au transport d’or à bord de l’un des camions."
+    }
+   ],
+   "uncertainties": [
+    "袭击动机尚未证实，仅称据初步信息可能与运输黄金有关",
+    "伤亡数字为地区长官单方面表述，尚未获得独立来源交叉验证",
+    "事件目前仅有一个来源（尼日尔官方通讯社ANP）报道"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_8948d2f8657d1cd8",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

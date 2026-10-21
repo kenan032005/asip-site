@@ -1,0 +1,127 @@
+{
+ "label": "Sa63e840a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a4b47d8aedd712949a74568a9f8dc47310f4b2e81c10bbb4e3b1b01242f951f7",
+ "tokens": {
+  "input_tokens": 2433,
+  "output_tokens": 546,
+  "total_tokens": 2979
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁经济与恐怖主义犯罪法庭：司机否认知晓车内发现弹药",
+   "summary_zh": "2026年10月19日，贝宁经济与恐怖主义犯罪法庭（Criet）开庭审理一名在坎迪被拦截的司机，其车内被发现藏有3000发12号口径弹药，弹药被藏在多件衣物下。该司机当庭声称对这批货物毫不知情，称自己从加纳搭载12名乘客，行李装载通常交由停车场搬运工负责。案件延期至2026年11月23日，届时进行公诉方意见和辩论。",
+   "event_type": "terrorism",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "坎迪",
+    "site": "经济与恐怖主义犯罪法庭（Criet）",
+    "raw_text": "Kandi"
+   },
+   "key_facts": [
+    {
+     "fact": "一名司机在坎迪被拦截，其车内发现3000发12号口径弹药",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un chauffeur interpellé à Kandi avec 3 000 cartouches d'armes à feu dans son véhicule a comparu"
+    },
+    {
+     "fact": "弹药被藏在多件衣物下，于坎迪的一次搜查中被发现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un sac contenant 3 000 cartouches de calibre 12, dissimulées sous plusieurs vêtements, a été découvert dans le véhicule"
+    },
+    {
+     "fact": "被告司机当庭否认知晓车内有弹药",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le prévenu a affirmé qu'il ignorait l'existence de ce colis"
+    },
+    {
+     "fact": "司机称从加纳搭载12名乘客，行李装载交由停车场搬运工负责",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il a déclaré avoir embarqué douze passagers en provenance du Ghana et qu'il ne s'occupe pas personnellement du chargement des bagages"
+    },
+    {
+     "fact": "案件延期至2026年11月23日审理",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'affaire a été renvoyée au 23 novembre 2026 pour les réquisitions du ministère public et les plaidoiries"
+    }
+   ],
+   "uncertainties": [
+    "司机关于不知情的说法尚未获证实",
+    "弹药来源与目的地尚不明确",
+    "目前仅单一来源（La Nouvelle Tribune）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁经济与恐怖主义犯罪法庭：司机否认知晓车内发现弹药",
+   "summary_zh": "2026年10月19日，贝宁经济与恐怖主义犯罪法庭（Criet）开庭审理一名在坎迪被拦截的司机，其车内被发现藏有3000发12号口径弹药，弹药被藏在多件衣物下。该司机当庭声称对这批货物毫不知情，称自己从加纳搭载12名乘客，行李装载通常交由停车场搬运工负责。案件延期至2026年11月23日，届时进行公诉方意见和辩论。",
+   "event_type": "terrorism",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "坎迪",
+    "site": "经济与恐怖主义犯罪法庭（Criet）",
+    "raw_text": "Kandi"
+   },
+   "key_facts": [
+    {
+     "fact": "一名司机在坎迪被拦截，其车内发现3000发12号口径弹药",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un chauffeur interpellé à Kandi avec 3 000 cartouches d'armes à feu dans son véhicule a comparu"
+    },
+    {
+     "fact": "弹药被藏在多件衣物下，于坎迪的一次搜查中被发现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un sac contenant 3 000 cartouches de calibre 12, dissimulées sous plusieurs vêtements, a été découvert dans le véhicule"
+    },
+    {
+     "fact": "被告司机当庭否认知晓车内有弹药",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le prévenu a affirmé qu'il ignorait l'existence de ce colis"
+    },
+    {
+     "fact": "司机称从加纳搭载12名乘客，行李装载交由停车场搬运工负责",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il a déclaré avoir embarqué douze passagers en provenance du Ghana et qu'il ne s'occupe pas personnellement du chargement des bagages"
+    },
+    {
+     "fact": "案件延期至2026年11月23日审理",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'affaire a été renvoyée au 23 novembre 2026 pour les réquisitions du ministère public et les plaidoiries"
+    }
+   ],
+   "uncertainties": [
+    "司机关于不知情的说法尚未获证实",
+    "弹药来源与目的地尚不明确",
+    "目前仅单一来源（La Nouvelle Tribune）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_679af1d6a63e840a",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

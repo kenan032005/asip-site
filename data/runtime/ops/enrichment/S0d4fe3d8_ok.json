@@ -1,0 +1,126 @@
+{
+ "label": "S0d4fe3d8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d07604b78a05772b40e1ed0452aed39419b628b87ffb2de32f17dedf8a74f32f",
+ "tokens": {
+  "input_tokens": 2634,
+  "output_tokens": 532,
+  "total_tokens": 3166
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"伤亡数字（至少12人死亡、多人受伤）来自当地消息源，尚未获官方确认\", \"目前仅单一来源（RFI）报道，缺乏交叉验证\"]",
+    "after": "[\"伤亡数字（至少12人死亡、多人受伤）来自当地消息源，尚未获官方确认\", \"目前仅单一来源（RFI）报道，缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得东南部农牧民冲突造成至少12人死亡",
+   "summary_zh": "乍得萨拉马特省巴赫尔-阿祖姆地区穆拉耶附近村庄因游牧通道走向发生争执，阿拉伯族游牧民与达加尔族农民发生冲突。据当地消息源称，冲突造成至少12人死亡、多人受伤，死者绝大多数为农民。当局已派地方官员和军方增援前往现场，试图缓和紧张局势。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "萨拉马特省",
+    "city": "穆拉耶",
+    "site": "库济-瓦希特村附近",
+    "raw_text": "près du village de Kouzi-Wahit, non loin de Mouraye, département du Bahr-Azoum, province du Salamat"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得东南部萨拉马特省农牧民冲突造成至少12人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un conflit autour d’une route de transhumance a fait au moins 12 morts dans cette région du sud-est"
+    },
+    {
+     "fact": "冲突起因是游牧通道走向争议，阿拉伯族游牧民欲穿越达加尔族农民土地遭反对",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des éleveurs nomades appartenant à la communauté arabe souhaitent traverser avec leurs bêtes les terres des agriculteurs de la communauté Dagal, alors que ces derniers s’y opposent"
+    },
+    {
+     "fact": "据当地消息源称死者绝大多数为农民，另有多人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’affrontement fait au moins douze morts et plusieurs blessés selon des sources locales, en grande majorité chez les agriculteurs"
+    },
+    {
+     "fact": "地方当局与军方增援于10月20日抵达现场试图缓和局势",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce mardi 20 octobre, les autorités locales, le délégué général et président du conseil provincial notamment, se sont rendus sur place pour tenter de désamorcer les tensions, accompagnés de renforts militaires"
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字（至少12人死亡、多人受伤）来自当地消息源，尚未获官方确认",
+    "目前仅单一来源（RFI）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得东南部农牧民冲突造成至少12人死亡",
+   "summary_zh": "乍得萨拉马特省巴赫尔-阿祖姆地区穆拉耶附近村庄因游牧通道走向发生争执，阿拉伯族游牧民与达加尔族农民发生冲突。据当地消息源称，冲突造成至少12人死亡、多人受伤，死者绝大多数为农民。当局已派地方官员和军方增援前往现场，试图缓和紧张局势。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "萨拉马特省",
+    "city": "穆拉耶",
+    "site": "库济-瓦希特村附近",
+    "raw_text": "près du village de Kouzi-Wahit, non loin de Mouraye, département du Bahr-Azoum, province du Salamat"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得东南部萨拉马特省农牧民冲突造成至少12人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un conflit autour d’une route de transhumance a fait au moins 12 morts dans cette région du sud-est"
+    },
+    {
+     "fact": "冲突起因是游牧通道走向争议，阿拉伯族游牧民欲穿越达加尔族农民土地遭反对",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des éleveurs nomades appartenant à la communauté arabe souhaitent traverser avec leurs bêtes les terres des agriculteurs de la communauté Dagal, alors que ces derniers s’y opposent"
+    },
+    {
+     "fact": "据当地消息源称死者绝大多数为农民，另有多人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’affrontement fait au moins douze morts et plusieurs blessés selon des sources locales, en grande majorité chez les agriculteurs"
+    },
+    {
+     "fact": "地方当局与军方增援于10月20日抵达现场试图缓和局势",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce mardi 20 octobre, les autorités locales, le délégué général et président du conseil provincial notamment, se sont rendus sur place pour tenter de désamorcer les tensions, accompagnés de renforts militaires"
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字（至少12人死亡、多人受伤）来自当地消息源，尚未获官方确认",
+    "目前仅单一来源（RFI）报道，缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_a7d783240d4fe3d8",
+ "disease_event_id": null,
+ "country_code": "CF"
+}

@@ -1,0 +1,117 @@
+{
+ "label": "S1750fb93",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ba9018d7f26b283c8821508f393825718387217919a58710ee5895c1b45e645c",
+ "tokens": {
+  "input_tokens": 2603,
+  "output_tokens": 505,
+  "total_tokens": 3108
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚参议院呼吁紧急拨款并强制筛查以应对埃博拉",
+   "summary_zh": "尼日利亚参议院周三通过动议，敦促联邦政府从服务范围拨款中拨出紧急资金应对埃博拉疫情，并防止其进一步扩散。动议还要求在国际机场、海港和指定陆路口岸实施强制性健康筛查，包括健康申报表、体温检测和症状筛查。参议员提及刚果（金）据报出现埃博拉疫情并扩散至其他国家，参议院议长对一名旅客未经充分筛查入境表示担忧。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria's international airports, seaports and designated land borders"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚参议院通过动议，敦促联邦政府从服务范围拨款中拨出紧急资金应对埃博拉疫情",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Senate on Wednesday urged the federal government to release emergency funds from the Service-Wide Vote to tackle the Ebola outbreak and prevent further spread."
+    },
+    {
+     "fact": "动议要求在国际机场、海港和指定陆路口岸实施强制性健康筛查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "mandatory health screening at Nigeria’s international airports, seaports and designated land borders"
+    },
+    {
+     "fact": "参议员称刚果（金）据报出现埃博拉疫情并已扩散至其他国家",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Faduyile said the reported outbreak of Ebola in the Democratic Republic of the Congo and its spread to other countries required immediate preventive measures."
+    },
+    {
+     "fact": "参议院议长对一名旅客未经充分筛查入境表示担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Senate President Godswill Akpabio expressed concern over reports that a traveller who entered Nigeria without adequate screening at the point of arrival."
+    }
+   ],
+   "uncertainties": [
+    "刚果（金）埃博拉疫情及扩散情况为参议员引述的报道，尚未在文中获得独立确认",
+    "旅客未经充分筛查入境的具体情况尚未证实",
+    "目前仅单一来源（尼日利亚通讯社）报道"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚参议院呼吁紧急拨款并强制筛查以应对埃博拉",
+   "summary_zh": "尼日利亚参议院周三通过动议，敦促联邦政府从服务范围拨款中拨出紧急资金应对埃博拉疫情，并防止其进一步扩散。动议还要求在国际机场、海港和指定陆路口岸实施强制性健康筛查，包括健康申报表、体温检测和症状筛查。参议员提及刚果（金）据报出现埃博拉疫情并扩散至其他国家，参议院议长对一名旅客未经充分筛查入境表示担忧。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria's international airports, seaports and designated land borders"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚参议院通过动议，敦促联邦政府从服务范围拨款中拨出紧急资金应对埃博拉疫情",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Senate on Wednesday urged the federal government to release emergency funds from the Service-Wide Vote to tackle the Ebola outbreak and prevent further spread."
+    },
+    {
+     "fact": "动议要求在国际机场、海港和指定陆路口岸实施强制性健康筛查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "mandatory health screening at Nigeria’s international airports, seaports and designated land borders"
+    },
+    {
+     "fact": "参议员称刚果（金）据报出现埃博拉疫情并已扩散至其他国家",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Faduyile said the reported outbreak of Ebola in the Democratic Republic of the Congo and its spread to other countries required immediate preventive measures."
+    },
+    {
+     "fact": "参议院议长对一名旅客未经充分筛查入境表示担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Senate President Godswill Akpabio expressed concern over reports that a traveller who entered Nigeria without adequate screening at the point of arrival."
+    }
+   ],
+   "uncertainties": [
+    "刚果（金）埃博拉疫情及扩散情况为参议员引述的报道，尚未在文中获得独立确认",
+    "旅客未经充分筛查入境的具体情况尚未证实",
+    "目前仅单一来源（尼日利亚通讯社）报道"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_c6d2efe61750fb93",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

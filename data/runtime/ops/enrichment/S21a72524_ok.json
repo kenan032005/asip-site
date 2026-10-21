@@ -1,0 +1,127 @@
+{
+ "label": "S21a72524",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3a153c320e164db1313ffdaa58c20765b15c4cf10ead84d975122d127702e0c8",
+ "tokens": {
+  "input_tokens": 2560,
+  "output_tokens": 571,
+  "total_tokens": 3131
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "米斯基危机：四人因“危害国家安全”被逮捕",
+   "summary_zh": "乍得恩贾梅纳共和国检察官穆萨·阿卜杜勒克里姆·萨利赫于2026年10月21日向媒体通报，四人因涉及10月14日提贝斯提省米斯基矿业旅阵地遭袭事件而被逮捕。检方称这四人被控危害国家安全、扰乱公共秩序和结伙犯罪等罪名。据军方称，该袭击造成两名军人死亡、九人受伤，米斯基自卫委员会被要求交出武器，军事行动仍在进行中。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "提贝斯提省",
+    "city": "米斯基",
+    "site": "矿业旅阵地",
+    "raw_text": "Miski, dans la province du Tibesti"
+   },
+   "key_facts": [
+    {
+     "fact": "恩贾梅纳检察官通报四人因米斯基袭击事件被逮捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le procureur de la République près le Tribunal de grande instance de N'Djaména, Moussa Abdelkerim Saleh, a présenté ce mercredi 21 octobre 2026, à la presse, quatre personnes interpellées dans le cadre de l'attaque survenue le 14 octobre dernier contre une position de la brigade minière à Miski"
+    },
+    {
+     "fact": "四人被控危害国家安全、扰乱公共秩序和结伙犯罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les quatre personnes interpellées sont poursuivies pour plusieurs infractions, notamment atteinte à la sûreté de l'État, trouble à l'ordre public et association de malfaiteurs"
+    },
+    {
+     "fact": "据军方称袭击造成两名军人死亡、九人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon l'Armée, deux militaires ont été tuées et neuf autres ont été blessés"
+    },
+    {
+     "fact": "米斯基自卫委员会被要求交出武器",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Comité d'autodéfense de Miski a été sommé de déposer les armes"
+    },
+    {
+     "fact": "军事行动正在该国极北地区进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une opération militaire est actuellement en cours dans cette partie de l'extrême-nord du pays"
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字仅来自军方说法，尚未获得独立核实",
+    "事件目前仅有一个来源报道，尚缺乏交叉验证",
+    "被捕人员的具体罪责有待司法审理确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "米斯基危机：四人因“危害国家安全”被逮捕",
+   "summary_zh": "乍得恩贾梅纳共和国检察官穆萨·阿卜杜勒克里姆·萨利赫于2026年10月21日向媒体通报，四人因涉及10月14日提贝斯提省米斯基矿业旅阵地遭袭事件而被逮捕。检方称这四人被控危害国家安全、扰乱公共秩序和结伙犯罪等罪名。据军方称，该袭击造成两名军人死亡、九人受伤，米斯基自卫委员会被要求交出武器，军事行动仍在进行中。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "提贝斯提省",
+    "city": "米斯基",
+    "site": "矿业旅阵地",
+    "raw_text": "Miski, dans la province du Tibesti"
+   },
+   "key_facts": [
+    {
+     "fact": "恩贾梅纳检察官通报四人因米斯基袭击事件被逮捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le procureur de la République près le Tribunal de grande instance de N'Djaména, Moussa Abdelkerim Saleh, a présenté ce mercredi 21 octobre 2026, à la presse, quatre personnes interpellées dans le cadre de l'attaque survenue le 14 octobre dernier contre une position de la brigade minière à Miski"
+    },
+    {
+     "fact": "四人被控危害国家安全、扰乱公共秩序和结伙犯罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les quatre personnes interpellées sont poursuivies pour plusieurs infractions, notamment atteinte à la sûreté de l'État, trouble à l'ordre public et association de malfaiteurs"
+    },
+    {
+     "fact": "据军方称袭击造成两名军人死亡、九人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon l'Armée, deux militaires ont été tuées et neuf autres ont été blessés"
+    },
+    {
+     "fact": "米斯基自卫委员会被要求交出武器",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Comité d'autodéfense de Miski a été sommé de déposer les armes"
+    },
+    {
+     "fact": "军事行动正在该国极北地区进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une opération militaire est actuellement en cours dans cette partie de l'extrême-nord du pays"
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字仅来自军方说法，尚未获得独立核实",
+    "事件目前仅有一个来源报道，尚缺乏交叉验证",
+    "被捕人员的具体罪责有待司法审理确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_67b8bf1921a72524",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
