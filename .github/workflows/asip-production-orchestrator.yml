@@ -157,6 +157,51 @@ jobs:
           exit 1
 
       - name: Run due-task orchestrator（production mode）
+        env:
+          CANARY: ${{ github.event.inputs.canary }}
+          # §三/§十七：触发来源上下文（不含任何凭据）
+          ASIP_CLIENT_PAYLOAD: ${{ toJSON(github.event.client_payload) }}
+          ASIP_WORKFLOW_INPUTS: ${{ toJSON(github.event.inputs) }}
+          # C8-4D1：共享请求复用开关（仓库变量，默认 "0" = 关闭）
+          ASIP_SHARED_FEED_REUSE: ${{ vars.ASIP_SHARED_FEED_REUSE || '0' }}
+          # C8-4D2：Phase 拆分回滚开关必须透传到采集执行路径；默认 '1'（不擅自回滚）
+          ASIP_PHASE_B_SPLIT: ${{ vars.ASIP_PHASE_B_SPLIT || '1' }}
+          ASIP_SHARED_FEED_REUSE_SOURCES: ${{ vars.ASIP_SHARED_FEED_REUSE_SOURCES || '' }}
+          # C8-4D2：采集软预算显式透传（APPROVED 3000s→2800s）；仓库变量可覆盖
+          ASIP_COLLECTION_WALL_CLOCK_SECONDS: ${{ vars.ASIP_COLLECTION_WALL_CLOCK_SECONDS || '2800' }}
+        run: |
+          FLAGS="--run --json"
+          [ "$CANARY" = "true" ] && FLAGS="$FLAGS --canary"
+          # C8-4D2 超时热修复：先保存退出码 → 打印脱敏摘要 → 恢复原始退出码（上一版把摘要放在 exit 1 之后，不可达）。
+          # 不修改 fail-closed：恢复的 $RC 原样作为步骤退出码。
+          RC=0
+          python scripts/ops/schedule_orchestrator.py $FLAGS > /tmp/orch.json 2> /tmp/orch.err || RC=$?
+          echo "ORCHESTRATOR_EXIT=$RC"
+          python - <<'ORCHSUM' || true
+          import json,re,sys
+          SENS=re.compile(r'key|token|secret|password|credential|authorization',re.I)
+          try:
+              d=json.load(open('/tmp/orch.json',encoding='utf-8'))
+              res=d.get('results') or {}
+              print('ORCH_SUMMARY status=%s deploy_required=%s real_ai_calls=%s'%(d.get('status'),d.get('deploy_required'),d.get('real_ai_calls')))
+              bad=0
+              for n,r in (res.items() if isinstance(res,dict) else []):
+                  if not isinstance(r,dict):
+                      print('  task=%-24s type=%s'%(str(n)[:24],type(r).__name__)); continue
+                  ok=r.get('ok'); bad+= 1 if ok is False else 0
+                  det=SENS.sub('<redacted>',str(r.get('detail') or r.get('error') or r.get('error_type') or ''))[:160]
+                  el=None
+                  for kk in ('elapsed_seconds','elapsed_s','duration_s','duration_seconds'):
+                      if isinstance(r.get(kk),(int,float)): el=r[kk]; break
+                  print('  task=%-24s ok=%-5s exit=%-5s elapsed=%-7s detail=%s'%(str(n)[:24],ok,r.get('exit_status'),el,det))
+              print('ORCH_SUMMARY tasks=%d failed=%d'%(len(res) if isinstance(res,dict) else 0,bad))
+          except FileNotFoundError:
+              print('ORCH_SUMMARY file_missing=/tmp/orch.json')
+          except Exception as e:
+              print('ORCH_SUMMARY parse_error=%s'%type(e).__name__)
+          ORCHSUM
+          if [ -s /tmp/orch.err ]; then echo "--- stderr(tail) ---"; tail -30 /tmp/orch.err; fi
+          # C8-4D2 P0 auto-deploy hotfix：**仅失败时**以原退出码结束；
         run: |
           FLAGS="--run --json"
           [ "$CANARY" = "true" ] && FLAGS="$FLAGS --canary"
