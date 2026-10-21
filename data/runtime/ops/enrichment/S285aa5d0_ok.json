@@ -1,0 +1,126 @@
+{
+ "label": "S285aa5d0",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "2b14efd388c3c02ee6e90215f6dee66e38f31ece52621b5552b365e868358abc",
+ "tokens": {
+  "input_tokens": 2772,
+  "output_tokens": 482,
+  "total_tokens": 3254
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"报道为单一来源（RFI），尚缺乏其他来源交叉验证\", \"公款挪用适用终身监禁的具体金额门槛未公开\"]",
+    "after": "[\"报道为单一来源（RFI），尚缺乏其他来源交叉验证\", \"公款挪用适用终身监禁的具体金额门槛未公开\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "布基纳法索军政府恢复死刑",
+   "summary_zh": "布基纳法索71名议员于10月20日一致通过新刑法典，恢复对恐怖主义、间谍、叛国及进口过期或违禁致人死亡产品等罪行适用死刑。新法典还加重了多项罪行的刑罚，包括对一定金额以上的公款挪用判处终身监禁。死刑曾于2018年被从刑法典中删除。",
+   "event_type": "political_instability",
+   "country_iso3": "BFA",
+   "location": {
+    "country_iso3": "BFA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Burkina Faso"
+   },
+   "key_facts": [
+    {
+     "fact": "布基纳法索71名议员一致通过恢复死刑的新刑法典",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les 71 députés burkinabè ont adopté à l'unanimité, mardi 20 octobre, un nouveau code pénal qui réintroduit la peine capitale"
+    },
+    {
+     "fact": "死刑适用于恐怖主义、间谍、叛国及进口过期或违禁致人死亡产品等罪行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la peine capitale pour un certain nombre de crimes en lien avec le terrorisme, l’espionnage, la trahison ou encore l’importation de produits périmés ou prohibés susceptibles d'entraîner la mort"
+    },
+    {
+     "fact": "新法典对一定金额以上的公款挪用判处终身监禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une personne reconnue coupable de détournement de fonds publics - à hauteur d’un certain montant qui n'a pas été rendu public - encourra par exemple « la prison à vie »"
+    },
+    {
+     "fact": "死刑曾于2018年被从布基纳法索刑法典中删除",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La peine de mort avait été retirée du code pénal burkinabè en 2018"
+    }
+   ],
+   "uncertainties": [
+    "报道为单一来源（RFI），尚缺乏其他来源交叉验证",
+    "公款挪用适用终身监禁的具体金额门槛未公开"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "布基纳法索军政府恢复死刑",
+   "summary_zh": "布基纳法索71名议员于10月20日一致通过新刑法典，恢复对恐怖主义、间谍、叛国及进口过期或违禁致人死亡产品等罪行适用死刑。新法典还加重了多项罪行的刑罚，包括对一定金额以上的公款挪用判处终身监禁。死刑曾于2018年被从刑法典中删除。",
+   "event_type": "political_instability",
+   "country_iso3": "BFA",
+   "location": {
+    "country_iso3": "BFA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Burkina Faso"
+   },
+   "key_facts": [
+    {
+     "fact": "布基纳法索71名议员一致通过恢复死刑的新刑法典",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les 71 députés burkinabè ont adopté à l'unanimité, mardi 20 octobre, un nouveau code pénal qui réintroduit la peine capitale"
+    },
+    {
+     "fact": "死刑适用于恐怖主义、间谍、叛国及进口过期或违禁致人死亡产品等罪行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la peine capitale pour un certain nombre de crimes en lien avec le terrorisme, l’espionnage, la trahison ou encore l’importation de produits périmés ou prohibés susceptibles d'entraîner la mort"
+    },
+    {
+     "fact": "新法典对一定金额以上的公款挪用判处终身监禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une personne reconnue coupable de détournement de fonds publics - à hauteur d’un certain montant qui n'a pas été rendu public - encourra par exemple « la prison à vie »"
+    },
+    {
+     "fact": "死刑曾于2018年被从布基纳法索刑法典中删除",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La peine de mort avait été retirée du code pénal burkinabè en 2018"
+    }
+   ],
+   "uncertainties": [
+    "报道为单一来源（RFI），尚缺乏其他来源交叉验证",
+    "公款挪用适用终身监禁的具体金额门槛未公开",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_a690c410285aa5d0",
+ "disease_event_id": null,
+ "country_code": "BF"
+}

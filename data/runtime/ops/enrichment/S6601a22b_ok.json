@@ -1,0 +1,148 @@
+{
+ "label": "S6601a22b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b794742c03832a6d268c71c4705517933a14016b6c0c56e8e7c0769c69023d7f",
+ "tokens": {
+  "input_tokens": 2459,
+  "output_tokens": 482,
+  "total_tokens": 2941
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"疫情是否会进一步扩散尚不确定\", \"首例患者如何未被及时发现并跨境旅行尚待调查\", \"边境防控疏漏的具体情况有待核实\"]",
+    "after": "[\"疫情是否会进一步扩散尚不确定\", \"首例患者如何未被及时发现并跨境旅行尚待调查\", \"边境防控疏漏的具体情况有待核实\", \"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"疫情是否会进一步扩散尚不确定\", \"首例患者如何未被及时发现并跨境旅行尚待调查\", \"边境防控疏漏的具体情况有待核实\", \"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "after": "[\"疫情是否会进一步扩散尚不确定\", \"首例患者如何未被及时发现并跨境旅行尚待调查\", \"边境防控疏漏的具体情况有待核实\", \"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "肯尼亚确诊9例埃博拉病例后疫情是否受控引关注",
+   "summary_zh": "肯尼亚正应对该国首次埃博拉疫情，已确诊9例病例，均与首例患者有关联，该患者从刚果（金）入境后死亡。美国建议公民重新考虑赴肯旅行，乌干达、埃塞俄比亚和索马里等邻国处于警戒状态。肯尼亚政府称患者病情好转，并加强入境筛查与接触者隔离，但医生工会对边境口岸人手不足表示担忧。",
+   "event_type": "other_security",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": null,
+    "city": "内罗毕",
+    "site": null,
+    "raw_text": "Kenya"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚已确诊9例埃博拉病例，均与首例从刚果（金）入境后死亡的患者有关联",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nine cases have now been confirmed including its first patient, who travelled from DR Congo and died two weeks ago. Four relatives of the first victim, three health workers and a hospital cleaner have now tested positive"
+    },
+    {
+     "fact": "美国建议本国公民重新考虑前往肯尼亚旅行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The US has advised its citizens to reconsider travelling to Kenya"
+    },
+    {
+     "fact": "肯尼亚对来自10个高风险国家的旅客加强筛查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kenya has since introduced enhanced screening for travellers arriving from 10 countries it considers to be at high risk"
+    },
+    {
+     "fact": "135名接触者中134人仍在隔离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In Kenya, 134 out of 135 people listed as contacts of the first patient remain in quarantine"
+    },
+    {
+     "fact": "肯尼亚医生工会对边境口岸存在疏漏表示担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The doctors' union in Kenya has expressed concerns at \"lapses\" at various border points"
+    }
+   ],
+   "uncertainties": [
+    "疫情是否会进一步扩散尚不确定",
+    "首例患者如何未被及时发现并跨境旅行尚待调查",
+    "边境防控疏漏的具体情况有待核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "肯尼亚确诊9例埃博拉病例后疫情是否受控引关注",
+   "summary_zh": "肯尼亚正应对该国首次埃博拉疫情，已确诊9例病例，均与首例患者有关联，该患者从刚果（金）入境后死亡。美国建议公民重新考虑赴肯旅行，乌干达、埃塞俄比亚和索马里等邻国处于警戒状态。肯尼亚政府称患者病情好转，并加强入境筛查与接触者隔离，但医生工会对边境口岸人手不足表示担忧。",
+   "event_type": "other_security",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": null,
+    "city": "内罗毕",
+    "site": null,
+    "raw_text": "Kenya"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚已确诊9例埃博拉病例，均与首例从刚果（金）入境后死亡的患者有关联",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nine cases have now been confirmed including its first patient, who travelled from DR Congo and died two weeks ago. Four relatives of the first victim, three health workers and a hospital cleaner have now tested positive"
+    },
+    {
+     "fact": "美国建议本国公民重新考虑前往肯尼亚旅行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The US has advised its citizens to reconsider travelling to Kenya"
+    },
+    {
+     "fact": "肯尼亚对来自10个高风险国家的旅客加强筛查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kenya has since introduced enhanced screening for travellers arriving from 10 countries it considers to be at high risk"
+    },
+    {
+     "fact": "135名接触者中134人仍在隔离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In Kenya, 134 out of 135 people listed as contacts of the first patient remain in quarantine"
+    },
+    {
+     "fact": "肯尼亚医生工会对边境口岸存在疏漏表示担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The doctors' union in Kenya has expressed concerns at \"lapses\" at various border points"
+    }
+   ],
+   "uncertainties": [
+    "疫情是否会进一步扩散尚不确定",
+    "首例患者如何未被及时发现并跨境旅行尚待调查",
+    "边境防控疏漏的具体情况有待核实",
+    "据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_948397bb6601a22b",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

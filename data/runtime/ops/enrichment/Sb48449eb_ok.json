@@ -1,0 +1,135 @@
+{
+ "label": "Sb48449eb",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ab383deeda75d4d78fa9d7175bf160f609eaf4013332323c8212f4d88dfc0e19",
+ "tokens": {
+  "input_tokens": 2742,
+  "output_tokens": 621,
+  "total_tokens": 3363
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚发现首例邦迪布焦型埃博拉病例",
+   "summary_zh": "尼日利亚卫生部长于10月20日宣布，该国发现首例邦迪布焦型埃博拉确诊病例，患者为近期从乌干达抵达的女性，目前已在阿布贾一家私立医院接受隔离治疗。已识别44名密切接触者并对其进行监测。这是尼日利亚自2014年疫情以来首次报告该病病例，政府已要求全国公私医疗机构进入最高警戒状态。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": "一家私立医院",
+    "raw_text": "un hôpital privé de la capitale, Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚卫生部长宣布该国发现首例邦迪布焦型埃博拉确诊病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le ministre nigérian de la Santé, Muhammad Ali Pate, a annoncé qu'un premier cas de la maladie avait été recensé dans le pays, mardi 20 octobre"
+    },
+    {
+     "fact": "患者为近期从乌干达抵达的女性，经实验室检测确诊",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Confirmé par des tests en laboratoire, le diagnostic a été fait sur une patiente récemment arrivée d’Ouganda"
+    },
+    {
+     "fact": "患者目前在阿布贾一家私立医院隔离并接受治疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "prise en charge pendant plusieurs jours dans un hôpital privé de la capitale, Abuja. « Actuellement placée en isolement, elle reçoit des soins médicaux »"
+    },
+    {
+     "fact": "已识别44名密切接触者，包括医护人员、患者和旅客，并对其进行特别监测",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quarante-quatre cas contacts parmi le personnel soignant, des patients mais aussi des voyageurs ont par ailleurs été identifiés et font l’objet d’une surveillance particulière"
+    },
+    {
+     "fact": "这是尼日利亚自2014年疫情以来首次报告该病病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il s'agit du premier cas de la maladie recensé dans le pays depuis l’épidémie qui y avait sévi en 2014"
+    },
+    {
+     "fact": "政府要求全国公私医疗机构进入最高警戒状态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement à lancer un appel à « tous les établissements de santé publics et privés du pays [pour qu'ils se mettent] en état d'alerte maximale »"
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证",
+    "密切接触者的感染状况尚未确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚发现首例邦迪布焦型埃博拉病例",
+   "summary_zh": "尼日利亚卫生部长于10月20日宣布，该国发现首例邦迪布焦型埃博拉确诊病例，患者为近期从乌干达抵达的女性，目前已在阿布贾一家私立医院接受隔离治疗。已识别44名密切接触者并对其进行监测。这是尼日利亚自2014年疫情以来首次报告该病病例，政府已要求全国公私医疗机构进入最高警戒状态。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": "一家私立医院",
+    "raw_text": "un hôpital privé de la capitale, Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚卫生部长宣布该国发现首例邦迪布焦型埃博拉确诊病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le ministre nigérian de la Santé, Muhammad Ali Pate, a annoncé qu'un premier cas de la maladie avait été recensé dans le pays, mardi 20 octobre"
+    },
+    {
+     "fact": "患者为近期从乌干达抵达的女性，经实验室检测确诊",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Confirmé par des tests en laboratoire, le diagnostic a été fait sur une patiente récemment arrivée d’Ouganda"
+    },
+    {
+     "fact": "患者目前在阿布贾一家私立医院隔离并接受治疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "prise en charge pendant plusieurs jours dans un hôpital privé de la capitale, Abuja. « Actuellement placée en isolement, elle reçoit des soins médicaux »"
+    },
+    {
+     "fact": "已识别44名密切接触者，包括医护人员、患者和旅客，并对其进行特别监测",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quarante-quatre cas contacts parmi le personnel soignant, des patients mais aussi des voyageurs ont par ailleurs été identifiés et font l’objet d’une surveillance particulière"
+    },
+    {
+     "fact": "这是尼日利亚自2014年疫情以来首次报告该病病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il s'agit du premier cas de la maladie recensé dans le pays depuis l’épidémie qui y avait sévi en 2014"
+    },
+    {
+     "fact": "政府要求全国公私医疗机构进入最高警戒状态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement à lancer un appel à « tous les établissements de santé publics et privés du pays [pour qu'ils se mettent] en état d'alerte maximale »"
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证",
+    "密切接触者的感染状况尚未确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_f5327138b48449eb",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

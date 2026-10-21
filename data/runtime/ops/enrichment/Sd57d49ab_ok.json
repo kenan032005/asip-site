@@ -1,0 +1,142 @@
+{
+ "label": "Sd57d49ab",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c53928308d4e12cdf90013571b1f871467d8d7f58f98391d15f5b464e4c0300d",
+ "tokens": {
+  "input_tokens": 2264,
+  "output_tokens": 573,
+  "total_tokens": 2837
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"解散是否意味着过渡期各项目标已全部完成，尚不明确\", \"看守政府是否仅为前SPLA/M忠诚者的排他性复辟，未获证实\", \"是否存在隐藏的继任安排，尚无证据支持\", \"图迈尼和平倡议与此次解散之间是否存在因果关系，缺乏既定依据\", \"选举能否具备可信条件（时间表、资源、登记、人员、公正管理）尚不确定\"]",
+    "after": "[\"解散是否意味着过渡期各项目标已全部完成，尚不明确\", \"看守政府是否仅为前SPLA/M忠诚者的排他性复辟，未获证实\", \"是否存在隐藏的继任安排，尚无证据支持\", \"图迈尼和平倡议与此次解散之间是否存在因果关系，缺乏既定依据\", \"选举能否具备可信条件（时间表、资源、登记、人员、公正管理）尚不确定\", \"据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "评论：过渡政府被解散的四大关键原因",
+   "summary_zh": "南苏丹总统萨尔瓦·基尔于2026年9月22日解散过渡团结政府，解除五名副总统职务，并在12月22日选举前任命看守政府，同时解散国家立法机构及州政府。文章分析称，官方给出的理由包括结束过渡安排、开启新阶段、为选举扫清法律障碍以及重组行政权力，但这些理由的充分程度不一。文章指出，选举理由属公开表述，而更广泛的影响仍需审视，相关怀疑尚缺乏证据支持。",
+   "event_type": "political_instability",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "South Sudan"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年9月22日，总统基尔解散过渡团结政府并解除五名副总统职务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "On 22 September 2026, President Salva Kiir dissolved the transitional unity government, removed the five vice-presidents and appointed a caretaker administration ahead of elections scheduled for 22 December."
+    },
+    {
+     "fact": "解散同时涉及国家立法机构、州政府及其议会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The changes also dissolved the national legislature, state governments and their assemblies."
+    },
+    {
+     "fact": "总统职位在解散后得以延续",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Yet the presidency continued."
+    },
+    {
+     "fact": "基尔于9月21日签署《国家选举法》修正案，将选举与永久宪法及人口普查脱钩",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "According to SSBC, President Kiir signed amendments to the National Elections Act on 21 September. The amendments separated elections from the completion of a permanent constitution and a national census."
+    },
+    {
+     "fact": "看守政府任命中包含马丁·埃利亚·洛穆罗和迈克尔·马库埃·卢埃思等既有政治人物",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Catholic Radio Network’s published appointments included established figures such as Martin Elia Lomuro and Michael Makuei Lueth."
+    }
+   ],
+   "uncertainties": [
+    "解散是否意味着过渡期各项目标已全部完成，尚不明确",
+    "看守政府是否仅为前SPLA/M忠诚者的排他性复辟，未获证实",
+    "是否存在隐藏的继任安排，尚无证据支持",
+    "图迈尼和平倡议与此次解散之间是否存在因果关系，缺乏既定依据",
+    "选举能否具备可信条件（时间表、资源、登记、人员、公正管理）尚不确定"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "评论：过渡政府被解散的四大关键原因",
+   "summary_zh": "南苏丹总统萨尔瓦·基尔于2026年9月22日解散过渡团结政府，解除五名副总统职务，并在12月22日选举前任命看守政府，同时解散国家立法机构及州政府。文章分析称，官方给出的理由包括结束过渡安排、开启新阶段、为选举扫清法律障碍以及重组行政权力，但这些理由的充分程度不一。文章指出，选举理由属公开表述，而更广泛的影响仍需审视，相关怀疑尚缺乏证据支持。",
+   "event_type": "political_instability",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "South Sudan"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年9月22日，总统基尔解散过渡团结政府并解除五名副总统职务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "On 22 September 2026, President Salva Kiir dissolved the transitional unity government, removed the five vice-presidents and appointed a caretaker administration ahead of elections scheduled for 22 December."
+    },
+    {
+     "fact": "解散同时涉及国家立法机构、州政府及其议会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The changes also dissolved the national legislature, state governments and their assemblies."
+    },
+    {
+     "fact": "总统职位在解散后得以延续",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Yet the presidency continued."
+    },
+    {
+     "fact": "基尔于9月21日签署《国家选举法》修正案，将选举与永久宪法及人口普查脱钩",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "According to SSBC, President Kiir signed amendments to the National Elections Act on 21 September. The amendments separated elections from the completion of a permanent constitution and a national census."
+    },
+    {
+     "fact": "看守政府任命中包含马丁·埃利亚·洛穆罗和迈克尔·马库埃·卢埃思等既有政治人物",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Catholic Radio Network’s published appointments included established figures such as Martin Elia Lomuro and Michael Makuei Lueth."
+    }
+   ],
+   "uncertainties": [
+    "解散是否意味着过渡期各项目标已全部完成，尚不明确",
+    "看守政府是否仅为前SPLA/M忠诚者的排他性复辟，未获证实",
+    "是否存在隐藏的继任安排，尚无证据支持",
+    "图迈尼和平倡议与此次解散之间是否存在因果关系，缺乏既定依据",
+    "选举能否具备可信条件（时间表、资源、登记、人员、公正管理）尚不确定",
+    "据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_da6a24e2d57d49ab",
+ "disease_event_id": null,
+ "country_code": "SS"
+}
