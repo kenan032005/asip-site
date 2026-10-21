@@ -157,6 +157,7 @@ jobs:
           exit 1
 
       - name: Run due-task orchestrator（production mode）
+        id: orch
         env:
           CANARY: ${{ github.event.inputs.canary }}
           # §三/§十七：触发来源上下文（不含任何凭据）
