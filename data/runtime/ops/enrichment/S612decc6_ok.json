@@ -1,0 +1,121 @@
+{
+ "label": "S612decc6",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e131c9f4752dbeac81d5e557e15be89dfc9a16078c4cfdedeaa39480d08a56d4",
+ "tokens": {
+  "input_tokens": 2742,
+  "output_tokens": 400,
+  "total_tokens": 3142
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据Le Sahel报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "多索举办洪水风险管理研讨会：加强一线人员预防能力",
+   "summary_zh": "尼日尔多索地区于2026年10月19日举办洪水风险管理宣传与培训研讨会，由民防总局在联合国开发计划署支持下组织。会议旨在加强地方一线人员在灾害预防、准备和响应方面的能力。多索地区副秘书长期望通过培训提升社区预警与应急能力。",
+   "event_type": "natural_disaster",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "多索大区",
+    "city": "多索",
+    "site": "Salma Dan Rani 摔跤竞技场会议室",
+    "raw_text": "La salle de réunions de l’Arène de lutte Salma Dan Rani de Dosso"
+   },
+   "key_facts": [
+    {
+     "fact": "多索地区举办洪水风险管理宣传与培训研讨会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un atelier de sensibilisation et de formation à l’intention des acteurs locaux intervenant dans la gestion des risques liés aux inondations"
+    },
+    {
+     "fact": "研讨会由民防总局在联合国开发计划署支持下组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Organisée par la Direction Générale de la Protection Civile avec l’appui du Programme des Nations Unies pour le Développement (PNUD)"
+    },
+    {
+     "fact": "会议于2026年10月19日举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le lundi 19 octobre 2026"
+    },
+    {
+     "fact": "多索地区副秘书长期望加强社区预警与应急准备",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "M. Mamoudou Hassan Hamadou a insisté sur l’importance de la sensibilisation et de la formation"
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "多索举办洪水风险管理研讨会：加强一线人员预防能力",
+   "summary_zh": "尼日尔多索地区于2026年10月19日举办洪水风险管理宣传与培训研讨会，由民防总局在联合国开发计划署支持下组织。会议旨在加强地方一线人员在灾害预防、准备和响应方面的能力。多索地区副秘书长期望通过培训提升社区预警与应急能力。",
+   "event_type": "natural_disaster",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "多索大区",
+    "city": "多索",
+    "site": "Salma Dan Rani 摔跤竞技场会议室",
+    "raw_text": "La salle de réunions de l’Arène de lutte Salma Dan Rani de Dosso"
+   },
+   "key_facts": [
+    {
+     "fact": "多索地区举办洪水风险管理宣传与培训研讨会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un atelier de sensibilisation et de formation à l’intention des acteurs locaux intervenant dans la gestion des risques liés aux inondations"
+    },
+    {
+     "fact": "研讨会由民防总局在联合国开发计划署支持下组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Organisée par la Direction Générale de la Protection Civile avec l’appui du Programme des Nations Unies pour le Développement (PNUD)"
+    },
+    {
+     "fact": "会议于2026年10月19日举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le lundi 19 octobre 2026"
+    },
+    {
+     "fact": "多索地区副秘书长期望加强社区预警与应急准备",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "M. Mamoudou Hassan Hamadou a insisté sur l’importance de la sensibilisation et de la formation"
+    }
+   ],
+   "uncertainties": [
+    "据Le Sahel报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_e13ed376612decc6",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

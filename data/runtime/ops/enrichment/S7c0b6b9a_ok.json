@@ -1,0 +1,137 @@
+{
+ "label": "S7c0b6b9a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0e80e8453bf4298c821ff42c7b5aad87c3b6d653062033e2ec925b4b57ed3da7",
+ "tokens": {
+  "input_tokens": 2821,
+  "output_tokens": 660,
+  "total_tokens": 3481
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁政府加强埃博拉防控措施",
+   "summary_zh": "尼日利亚于2026年10月20日在阿布贾确认一例输入性埃博拉病例（Bundibugyo毒株），患者为来自乌干达的旅行者，卫生部门正在追踪44名接触者。贝宁随即进入预警戒阶段，加强边境和科托努机场的监测，以快速发现可能出现的病例。贝宁卫生部表示，截至目前贝宁境内尚未记录埃博拉病例。卫生部长于10月21日视察科托努机场，评估快速检测措施。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "科托努",
+    "site": "科托努国际机场",
+    "raw_text": "aéroport international Cardinal Bernardin Gantin de Cotonou"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚于2026年10月20日在阿布贾确认一例输入性埃博拉病例，毒株为Bundibugyo",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Nigeria a confirmé un cas importé de maladie à virus Ebola, de souche Bundibugyo, le 20 octobre 2026 à Abuja."
+    },
+    {
+     "fact": "患者为来自乌干达的旅行者，卫生部门正在追踪44名接触者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La patiente est une voyageuse en provenance d’Ouganda. Les autorités sanitaires suivent actuellement 44 contacts."
+    },
+    {
+     "fact": "贝宁在尼日利亚确认病例后进入预警戒阶段",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Bénin passe en phase de préalerte après la confirmation d’un cas de maladie à virus Ebola au Nigeria."
+    },
+    {
+     "fact": "贝宁加强边境和科托努机场的监测",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement renforce la surveillance aux frontières et à l’aéroport de Cotonou pour détecter rapidement d’éventuels cas."
+    },
+    {
+     "fact": "贝宁卫生部表示截至目前贝宁境内未记录埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministère de la Santé précise qu’aucun cas d’Ebola n’a été enregistré au Bénin à ce jour."
+    },
+    {
+     "fact": "卫生部长于2026年10月21日视察科托努机场，评估快速检测措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministre de la Santé, le professeur Benjamin Hounkpatin, s’est rendu mercredi 21 octobre 2026 à l’aéroport international Cardinal Bernardin Gantin de Cotonou."
+    }
+   ],
+   "uncertainties": [
+    "贝宁境内是否会出现埃博拉病例尚未证实",
+    "尼日利亚疫情后续发展及对贝宁的影响有待观察",
+    "目前为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁政府加强埃博拉防控措施",
+   "summary_zh": "尼日利亚于2026年10月20日在阿布贾确认一例输入性埃博拉病例（Bundibugyo毒株），患者为来自乌干达的旅行者，卫生部门正在追踪44名接触者。贝宁随即进入预警戒阶段，加强边境和科托努机场的监测，以快速发现可能出现的病例。贝宁卫生部表示，截至目前贝宁境内尚未记录埃博拉病例。卫生部长于10月21日视察科托努机场，评估快速检测措施。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "科托努",
+    "site": "科托努国际机场",
+    "raw_text": "aéroport international Cardinal Bernardin Gantin de Cotonou"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚于2026年10月20日在阿布贾确认一例输入性埃博拉病例，毒株为Bundibugyo",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Nigeria a confirmé un cas importé de maladie à virus Ebola, de souche Bundibugyo, le 20 octobre 2026 à Abuja."
+    },
+    {
+     "fact": "患者为来自乌干达的旅行者，卫生部门正在追踪44名接触者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La patiente est une voyageuse en provenance d’Ouganda. Les autorités sanitaires suivent actuellement 44 contacts."
+    },
+    {
+     "fact": "贝宁在尼日利亚确认病例后进入预警戒阶段",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Bénin passe en phase de préalerte après la confirmation d’un cas de maladie à virus Ebola au Nigeria."
+    },
+    {
+     "fact": "贝宁加强边境和科托努机场的监测",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement renforce la surveillance aux frontières et à l’aéroport de Cotonou pour détecter rapidement d’éventuels cas."
+    },
+    {
+     "fact": "贝宁卫生部表示截至目前贝宁境内未记录埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministère de la Santé précise qu’aucun cas d’Ebola n’a été enregistré au Bénin à ce jour."
+    },
+    {
+     "fact": "卫生部长于2026年10月21日视察科托努机场，评估快速检测措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministre de la Santé, le professeur Benjamin Hounkpatin, s’est rendu mercredi 21 octobre 2026 à l’aéroport international Cardinal Bernardin Gantin de Cotonou."
+    }
+   ],
+   "uncertainties": [
+    "贝宁境内是否会出现埃博拉病例尚未证实",
+    "尼日利亚疫情后续发展及对贝宁的影响有待观察",
+    "目前为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_cbb5782d7c0b6b9a",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

@@ -1,0 +1,126 @@
+{
+ "label": "Sd2f4b251",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "bb2b4cb763115e1df34f9ca9673d075894437fb92dc3a3e9c9050ad90039e973",
+ "tokens": {
+  "input_tokens": 2556,
+  "output_tokens": 395,
+  "total_tokens": 2951
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"阿布贾埃博拉病例的详细信息未在文中说明\", \"目前仅有一个来源（尼日利亚通讯社）报道，尚缺乏交叉验证\"]",
+    "after": "[\"阿布贾埃博拉病例的详细信息未在文中说明\", \"目前仅有一个来源（尼日利亚通讯社）报道，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "阿布贾确诊埃博拉病例后，埃努古州加强疾病监测",
+   "summary_zh": "尼日利亚埃努古州政府表示，在阿布贾确诊一例埃博拉病例后，该州已在全部17个地方政府区域加强疾病监测，并让卫生官员保持警戒。州卫生专员George Ugwu称，州公共卫生应急行动中心已重启并加强，机场周边监测也已强化。他强调，埃努古州目前没有确诊病例，相关措施属预防性质。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Enugu",
+    "city": "Enugu",
+    "site": null,
+    "raw_text": "Enugu State, Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "阿布贾确诊一例埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "following the confirmation of an Ebola case in Abuja"
+    },
+    {
+     "fact": "埃努古州在17个地方政府区域加强疾病监测",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the state has intensified disease surveillance across its 17 Local Government Areas"
+    },
+    {
+     "fact": "埃努古州公共卫生应急行动中心已重启并加强",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the government had reactivated and strengthened the Enugu State Public Health Emergency Operations Centre (PHEOC)"
+    },
+    {
+     "fact": "埃努古州目前没有确诊病例，措施属预防性质",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "There is currently no confirmed case of Ebola in Enugu State, and the measures being taken are precautionary"
+    }
+   ],
+   "uncertainties": [
+    "阿布贾埃博拉病例的详细信息未在文中说明",
+    "目前仅有一个来源（尼日利亚通讯社）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "阿布贾确诊埃博拉病例后，埃努古州加强疾病监测",
+   "summary_zh": "尼日利亚埃努古州政府表示，在阿布贾确诊一例埃博拉病例后，该州已在全部17个地方政府区域加强疾病监测，并让卫生官员保持警戒。州卫生专员George Ugwu称，州公共卫生应急行动中心已重启并加强，机场周边监测也已强化。他强调，埃努古州目前没有确诊病例，相关措施属预防性质。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Enugu",
+    "city": "Enugu",
+    "site": null,
+    "raw_text": "Enugu State, Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "阿布贾确诊一例埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "following the confirmation of an Ebola case in Abuja"
+    },
+    {
+     "fact": "埃努古州在17个地方政府区域加强疾病监测",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the state has intensified disease surveillance across its 17 Local Government Areas"
+    },
+    {
+     "fact": "埃努古州公共卫生应急行动中心已重启并加强",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the government had reactivated and strengthened the Enugu State Public Health Emergency Operations Centre (PHEOC)"
+    },
+    {
+     "fact": "埃努古州目前没有确诊病例，措施属预防性质",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "There is currently no confirmed case of Ebola in Enugu State, and the measures being taken are precautionary"
+    }
+   ],
+   "uncertainties": [
+    "阿布贾埃博拉病例的详细信息未在文中说明",
+    "目前仅有一个来源（尼日利亚通讯社）报道，尚缺乏交叉验证",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_f57e739ed2f4b251",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

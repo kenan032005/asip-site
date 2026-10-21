@@ -1,0 +1,126 @@
+{
+ "label": "S9bfd3af2",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6e6f7f62ad76c2440d9b4a8500897d52ff162a2f19ab52f687a6e19483362eb5",
+ "tokens": {
+  "input_tokens": 2258,
+  "output_tokens": 424,
+  "total_tokens": 2682
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅尼日利亚通讯社单一来源报道，尚缺乏交叉验证\", \"疫情规模与具体病例数据未在报道中披露\"]",
+    "after": "[\"目前仅尼日利亚通讯社单一来源报道，尚缺乏交叉验证\", \"疫情规模与具体病例数据未在报道中披露\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚疾控中心召开首次事件管理会议协调埃博拉应对",
+   "summary_zh": "尼日利亚疾病控制与预防中心（NCDC）周三召开首次事件管理会议，以协调埃博拉疫情应对工作。此前尼日利亚已正式宣布埃博拉疫情暴发。NCDC表示正在敲定事件行动计划，团队已在现场开展病例管理、加强监测、接触者追踪和感染预防控制等工作。该消息由尼日利亚通讯社报道，目前为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚疾控中心召开首次事件管理会议协调埃博拉应对",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "NCDC convenes first incident management meeting to coordinate Ebola response"
+    },
+    {
+     "fact": "会议是在尼日利亚正式宣布埃博拉疫情暴发后召开的",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "convened its first Incident Management Meeting following Nigeria's official declaration of an Ebola outbreak to coordinate response efforts"
+    },
+    {
+     "fact": "NCDC表示正在敲定事件行动计划以指导协调干预",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The NCDC said the Incident Action Plan was being finalised to guide coordinated interventions and strengthen the country's response to the outbreak"
+    },
+    {
+     "fact": "NCDC团队已在现场开展病例管理并加强监测、接触者追踪和感染预防控制",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "its teams were already on the ground conducting case management and other response activities, with emphasis on enhanced surveillance, contact tracing and infection prevention and control"
+    }
+   ],
+   "uncertainties": [
+    "目前仅尼日利亚通讯社单一来源报道，尚缺乏交叉验证",
+    "疫情规模与具体病例数据未在报道中披露"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚疾控中心召开首次事件管理会议协调埃博拉应对",
+   "summary_zh": "尼日利亚疾病控制与预防中心（NCDC）周三召开首次事件管理会议，以协调埃博拉疫情应对工作。此前尼日利亚已正式宣布埃博拉疫情暴发。NCDC表示正在敲定事件行动计划，团队已在现场开展病例管理、加强监测、接触者追踪和感染预防控制等工作。该消息由尼日利亚通讯社报道，目前为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚疾控中心召开首次事件管理会议协调埃博拉应对",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "NCDC convenes first incident management meeting to coordinate Ebola response"
+    },
+    {
+     "fact": "会议是在尼日利亚正式宣布埃博拉疫情暴发后召开的",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "convened its first Incident Management Meeting following Nigeria's official declaration of an Ebola outbreak to coordinate response efforts"
+    },
+    {
+     "fact": "NCDC表示正在敲定事件行动计划以指导协调干预",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The NCDC said the Incident Action Plan was being finalised to guide coordinated interventions and strengthen the country's response to the outbreak"
+    },
+    {
+     "fact": "NCDC团队已在现场开展病例管理并加强监测、接触者追踪和感染预防控制",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "its teams were already on the ground conducting case management and other response activities, with emphasis on enhanced surveillance, contact tracing and infection prevention and control"
+    }
+   ],
+   "uncertainties": [
+    "目前仅尼日利亚通讯社单一来源报道，尚缺乏交叉验证",
+    "疫情规模与具体病例数据未在报道中披露",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_2ef8e6469bfd3af2",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

@@ -1,0 +1,115 @@
+{
+ "label": "S3aff6b9f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "343c88803b2a0f7cd09a420364e3b7188fad5c8229195e9e7b4aa27e09e10df4",
+ "tokens": {
+  "input_tokens": 2041,
+  "output_tokens": 437,
+  "total_tokens": 2478
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚贡贝州暴发霍乱疫情，已致两人死亡",
+   "summary_zh": "尼日利亚贡贝州政府宣布，Billiri地方政府区Kedo村暴发霍乱疫情，10月4日出现腹泻和呕吐病例并造成两人死亡。卫生专员表示，已有74名患者经治疗后出院，简报发布时无在院病例。州政府已派出快速响应小组支援当地调查并为受影响居民提供免费治疗。该信息目前仅来自单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Gombe State",
+    "city": null,
+    "site": "Kedo village, Todi Ward, Billiri Local Government Area",
+    "raw_text": "Kedo village, Todi Ward, Billiri Local Government Area, Gombe State"
+   },
+   "key_facts": [
+    {
+     "fact": "贡贝州政府宣布Billiri地方政府区暴发霍乱疫情",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Gombe State Government has declared a cholera outbreak in Kedo village, Todi Ward, Billiri Local Government Area"
+    },
+    {
+     "fact": "10月4日腹泻和呕吐病例造成两人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "following reports of diarrhoea and vomiting that claimed two lives on October 4"
+    },
+    {
+     "fact": "已有74名患者经治疗后出院，简报时无在院病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Since then, 74 persons were treated and discharged, and there is nobody currently on admission"
+    },
+    {
+     "fact": "州政府派出快速响应小组支援当地调查和免费治疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the state government immediately deployed a Rapid Response Team to support the local government health team"
+    }
+   ],
+   "uncertainties": [
+    "疫情信息目前仅来自单一来源（Punch）报道，尚缺乏交叉验证",
+    "死亡与病例数据由州卫生专员在简报中披露，未获独立确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚贡贝州暴发霍乱疫情，已致两人死亡",
+   "summary_zh": "尼日利亚贡贝州政府宣布，Billiri地方政府区Kedo村暴发霍乱疫情，10月4日出现腹泻和呕吐病例并造成两人死亡。卫生专员表示，已有74名患者经治疗后出院，简报发布时无在院病例。州政府已派出快速响应小组支援当地调查并为受影响居民提供免费治疗。该信息目前仅来自单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Gombe State",
+    "city": null,
+    "site": "Kedo village, Todi Ward, Billiri Local Government Area",
+    "raw_text": "Kedo village, Todi Ward, Billiri Local Government Area, Gombe State"
+   },
+   "key_facts": [
+    {
+     "fact": "贡贝州政府宣布Billiri地方政府区暴发霍乱疫情",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Gombe State Government has declared a cholera outbreak in Kedo village, Todi Ward, Billiri Local Government Area"
+    },
+    {
+     "fact": "10月4日腹泻和呕吐病例造成两人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "following reports of diarrhoea and vomiting that claimed two lives on October 4"
+    },
+    {
+     "fact": "已有74名患者经治疗后出院，简报时无在院病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Since then, 74 persons were treated and discharged, and there is nobody currently on admission"
+    },
+    {
+     "fact": "州政府派出快速响应小组支援当地调查和免费治疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the state government immediately deployed a Rapid Response Team to support the local government health team"
+    }
+   ],
+   "uncertainties": [
+    "疫情信息目前仅来自单一来源（Punch）报道，尚缺乏交叉验证",
+    "死亡与病例数据由州卫生专员在简报中披露，未获独立确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_dbf466d23aff6b9f",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
