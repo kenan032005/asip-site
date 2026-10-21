@@ -208,7 +208,18 @@ jobs:
 if [ "$RC" -ne 0 ]; then
   exit "$RC"
 fi
-          cat /tmp/orch.json
+          # C8-4D2：原样 cat 会把整份 orch.json（可能含敏感键）打进日志 → 改为脱敏打印
+          python - <<'ORCHCAT' || true
+          import json,re
+          SENS=re.compile(r'key|token|secret|password|credential|authorization',re.I)
+          try:
+              d=json.load(open('/tmp/orch.json',encoding='utf-8'))
+              print('ORCH_JSON '+SENS.sub('<redacted>',json.dumps(d,ensure_ascii=False))[:6000])
+          except FileNotFoundError:
+              print('ORCH_JSON file_missing')
+          except Exception as e:
+              print('ORCH_JSON parse_error=%s'%type(e).__name__)
+          ORCHCAT
           python - <<'PY' >> "$GITHUB_OUTPUT"
           import json
           d = json.load(open('/tmp/orch.json'))
