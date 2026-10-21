@@ -173,6 +173,13 @@ jobs:
           [ "$CANARY" = "true" ] && FLAGS="$FLAGS --canary"
           python scripts/ops/schedule_orchestrator.py $FLAGS > /tmp/orch.json 2> /tmp/orch.err || {
             echo "ORCHESTRATOR_EXIT=$?"; tail -50 /tmp/orch.err; exit 1; }
+          # C8-4D2 事实纠正：orch.json（results[task].ok / error_type / exit_status）必须
+          # 先于失败分支打印，否则真实失败子任务永远不出现在日志里。
+          # 只增加可观测性；不改变退出码语义，不关闭任何 fail-closed 检查。
+          if [ -s /tmp/orch.json ]; then echo '--- orch.json(results 摘要) ---';
+            python -c "import json;d=json.load(open('/tmp/orch.json'));r=d.get('results') or {};
+          print('status =',d.get('status'));[print(' task=%-22s ok=%-5s exit=%s err=%s'%(k,v.get('ok'),v.get('exit_status'),str(v.get('error_type') or v.get('error') or '')[:60])) for k,v in (r.items() if isinstance(r,dict) else [])]"
+          fi
           cat /tmp/orch.json
           python - <<'PY' >> "$GITHUB_OUTPUT"
           import json
