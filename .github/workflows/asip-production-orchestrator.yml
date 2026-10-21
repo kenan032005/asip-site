@@ -178,7 +178,29 @@ jobs:
           RC=0
           python scripts/ops/schedule_orchestrator.py $FLAGS > /tmp/orch.json 2> /tmp/orch.err || RC=$?
           echo "ORCHESTRATOR_EXIT=$RC"
-          python scripts/ops/orch_result_summary.py /tmp/orch.json || true
+          python - <<'ORCHSUM' || true
+          import json,re,sys
+          SENS=re.compile(r'key|token|secret|password|credential|authorization',re.I)
+          try:
+              d=json.load(open('/tmp/orch.json',encoding='utf-8'))
+              res=d.get('results') or {}
+              print('ORCH_SUMMARY status=%s deploy_required=%s real_ai_calls=%s'%(d.get('status'),d.get('deploy_required'),d.get('real_ai_calls')))
+              bad=0
+              for n,r in (res.items() if isinstance(res,dict) else []):
+                  if not isinstance(r,dict):
+                      print('  task=%-24s type=%s'%(str(n)[:24],type(r).__name__)); continue
+                  ok=r.get('ok'); bad+= 1 if ok is False else 0
+                  det=SENS.sub('<redacted>',str(r.get('detail') or r.get('error') or r.get('error_type') or ''))[:160]
+                  el=None
+                  for kk in ('elapsed_seconds','elapsed_s','duration_s','duration_seconds'):
+                      if isinstance(r.get(kk),(int,float)): el=r[kk]; break
+                  print('  task=%-24s ok=%-5s exit=%-5s elapsed=%-7s detail=%s'%(str(n)[:24],ok,r.get('exit_status'),el,det))
+              print('ORCH_SUMMARY tasks=%d failed=%d'%(len(res) if isinstance(res,dict) else 0,bad))
+          except FileNotFoundError:
+              print('ORCH_SUMMARY file_missing=/tmp/orch.json')
+          except Exception as e:
+              print('ORCH_SUMMARY parse_error=%s'%type(e).__name__)
+          ORCHSUM
           if [ -s /tmp/orch.err ]; then echo "--- stderr(tail) ---"; tail -30 /tmp/orch.err; fi
           exit $RC
           cat /tmp/orch.json
