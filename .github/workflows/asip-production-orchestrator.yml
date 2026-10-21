@@ -127,6 +127,14 @@ jobs:
               a = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
               b = json.loads(sp.read_text(encoding="utf-8"))
               if a.get("run_id") != b.get("run_id") or len(a.get("items", [])) != len(b.get("items", [])):
+                  # C8-4D2：fail-closed 保持，但先输出非敏感诊断（task_name/ok/error_type/exit_status + 双方 run_id/条目数/大小）
+                  _diag = {"task_name": "load_state", "ok": False, "error_type": "STATE_LOAD_MISMATCH",
+                           "exit_status": 1,
+                           "local": {"run_id": a.get("run_id"), "items": len(a.get("items", [])),
+                                     "size": (p.stat().st_size if p.exists() else None)},
+                           "state_snapshot": {"run_id": b.get("run_id"), "items": len(b.get("items", [])),
+                                              "size": (sp.stat().st_size if sp.exists() else None)}}
+                  print("STATE_LOAD_DIAG " + json.dumps(_diag, ensure_ascii=False))
                   raise SystemExit("STATE_LOAD_MISMATCH: data/canonical 未采用 state 快照")
               print("STATE_LOAD_OK run_id=%s items=%d" % (b.get("run_id"), len(b.get("items", []))))
           PY
@@ -157,6 +165,8 @@ jobs:
           ASIP_WORKFLOW_INPUTS: ${{ toJSON(github.event.inputs) }}
           # C8-4D1：共享请求复用开关（仓库变量，默认 "0" = 关闭）
           ASIP_SHARED_FEED_REUSE: ${{ vars.ASIP_SHARED_FEED_REUSE || '0' }}
+          # C8-4D2：Phase 拆分回滚开关必须透传到采集执行路径；默认 '1'（不擅自回滚）
+          ASIP_PHASE_B_SPLIT: ${{ vars.ASIP_PHASE_B_SPLIT || '1' }}
           ASIP_SHARED_FEED_REUSE_SOURCES: ${{ vars.ASIP_SHARED_FEED_REUSE_SOURCES || '' }}
         run: |
           FLAGS="--run --json"
