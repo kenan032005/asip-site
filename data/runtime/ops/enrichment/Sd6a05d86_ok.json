@@ -1,0 +1,126 @@
+{
+ "label": "Sd6a05d86",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f23af39cb6a6e69ebf55126847d7ccec036e7d6c0db121b843df7cba9d48de38",
+ "tokens": {
+  "input_tokens": 3152,
+  "output_tokens": 540,
+  "total_tokens": 3692
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"伤亡数字为初步统计，尚未最终确认\", \"冲突具体起因与责任归属尚未获独立核实\"]",
+    "after": "[\"伤亡数字为初步统计，尚未最终确认\", \"冲突具体起因与责任归属尚未获独立核实\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得萨拉马特地区农牧民冲突致十二人死亡",
+   "summary_zh": "据Tchadinfos和APA报道，2026年10月18日至19日夜间，乍得萨拉马特地区穆赖副省Kouzi-Wahit一带农民与牧民因牲畜迁徙通道走向发生冲突，初步统计造成12人死亡、3人重伤。萨拉马特地区政府代表已与国防安全部队及司法代表赶赴现场。人权观察指出，此类冲突在2025年有所增多，根源涉及人口压力、耕地减少与气候约束。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "萨拉马特",
+    "city": "穆赖",
+    "site": "Kouzi-Wahit",
+    "raw_text": "Kouzi-Wahit, dans la sous-préfecture de Mouray, au Salamat"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年10月18日至19日夜间，乍得萨拉马特地区穆赖副省Kouzi-Wahit发生农民与牧民冲突",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans la nuit du 18 au 19 octobre 2026, à Kouzi-Wahit, dans la sous-préfecture de Mouray, au Salamat, agriculteurs et éleveurs se sont affrontés autour du tracé d'un couloir de transhumance."
+    },
+    {
+     "fact": "据Tchadinfos和APA报道，初步统计12人死亡、3人重伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Bilan provisoire : douze morts et trois blessés graves, selon Tchadinfos et l'APA."
+    },
+    {
+     "fact": "萨拉马特地区政府代表与国防安全部队及司法代表赶赴现场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le délégué général du gouvernement au Salamat, Ahmat Choua Rozi, s'est rendu sur place avec les forces de défense et de sécurité et des représentants de la justice."
+    },
+    {
+     "fact": "人权观察指出此类农牧冲突在2025年有所增多",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Human Rights Watch, qui note que ces affrontements se sont multipliés en 2025."
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字为初步统计，尚未最终确认",
+    "冲突具体起因与责任归属尚未获独立核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得萨拉马特地区农牧民冲突致十二人死亡",
+   "summary_zh": "据Tchadinfos和APA报道，2026年10月18日至19日夜间，乍得萨拉马特地区穆赖副省Kouzi-Wahit一带农民与牧民因牲畜迁徙通道走向发生冲突，初步统计造成12人死亡、3人重伤。萨拉马特地区政府代表已与国防安全部队及司法代表赶赴现场。人权观察指出，此类冲突在2025年有所增多，根源涉及人口压力、耕地减少与气候约束。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "萨拉马特",
+    "city": "穆赖",
+    "site": "Kouzi-Wahit",
+    "raw_text": "Kouzi-Wahit, dans la sous-préfecture de Mouray, au Salamat"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年10月18日至19日夜间，乍得萨拉马特地区穆赖副省Kouzi-Wahit发生农民与牧民冲突",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans la nuit du 18 au 19 octobre 2026, à Kouzi-Wahit, dans la sous-préfecture de Mouray, au Salamat, agriculteurs et éleveurs se sont affrontés autour du tracé d'un couloir de transhumance."
+    },
+    {
+     "fact": "据Tchadinfos和APA报道，初步统计12人死亡、3人重伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Bilan provisoire : douze morts et trois blessés graves, selon Tchadinfos et l'APA."
+    },
+    {
+     "fact": "萨拉马特地区政府代表与国防安全部队及司法代表赶赴现场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le délégué général du gouvernement au Salamat, Ahmat Choua Rozi, s'est rendu sur place avec les forces de défense et de sécurité et des représentants de la justice."
+    },
+    {
+     "fact": "人权观察指出此类农牧冲突在2025年有所增多",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Human Rights Watch, qui note que ces affrontements se sont multipliés en 2025."
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字为初步统计，尚未最终确认",
+    "冲突具体起因与责任归属尚未获独立核实",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_6739fb91d6a05d86",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

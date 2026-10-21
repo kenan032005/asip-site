@@ -1,0 +1,130 @@
+{
+ "label": "S3e6d94d4",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "df22608f726eed8df269bca0611e0a63232fb29991d6b879de212cacafbb8568",
+ "tokens": {
+  "input_tokens": 2564,
+  "output_tokens": 457,
+  "total_tokens": 3021
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"患者据报在确诊前曾在私立医院接受治疗数日，具体暴露范围尚未完全确认\", \"卫生工作者、患者、照护者及同机旅客等可能的额外暴露仍在调查中\", \"不同来源对密切接触者数量存在差异（44人与111人），尚无法确认\", \"目前为单一来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"患者据报在确诊前曾在私立医院接受治疗数日，具体暴露范围尚未完全确认\", \"卫生工作者、患者、照护者及同机旅客等可能的额外暴露仍在调查中\", \"不同来源对密切接触者数量存在差异（44人与111人），尚无法确认\", \"目前为单一来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚阿布贾确诊一例埃博拉病例，追踪44名密切接触者",
+   "summary_zh": "尼日利亚卫生当局确认阿布贾出现一例埃博拉病毒病病例，患者为一名近期从乌干达乘国际航班抵达尼日利亚的女性，此前曾在联邦首都区一家私立医院接受治疗数日。卫生部长穆罕默德·阿里·帕特表示，患者已被隔离并接受治疗，公共卫生官员已识别44名密切接触者并展开调查。目前相关机构正协调防控工作，以防疫情进一步传播。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "联邦首都区",
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja, Federal Capital Territory (FCT)"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚确认阿布贾出现一例埃博拉病毒病病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "NIGERIA has confirmed a case of Ebola virus disease in Abuja"
+    },
+    {
+     "fact": "患者为一名近期从乌干达乘国际航班抵达尼日利亚的女性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the patient is a woman who recently travelled from Uganda to Nigeria on an international flight"
+    },
+    {
+     "fact": "患者已被隔离并正在接受医疗救治",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the woman had since been isolated and was receiving medical care"
+    },
+    {
+     "fact": "公共卫生官员已识别44名密切接触者并调查可能的其他暴露",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "public health officials had identified 44 close contacts and were investigating possible additional exposures"
+    }
+   ],
+   "uncertainties": [
+    "患者据报在确诊前曾在私立医院接受治疗数日，具体暴露范围尚未完全确认",
+    "卫生工作者、患者、照护者及同机旅客等可能的额外暴露仍在调查中",
+    "不同来源对密切接触者数量存在差异（44人与111人），尚无法确认",
+    "目前为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚阿布贾确诊一例埃博拉病例，追踪44名密切接触者",
+   "summary_zh": "尼日利亚卫生当局确认阿布贾出现一例埃博拉病毒病病例，患者为一名近期从乌干达乘国际航班抵达尼日利亚的女性，此前曾在联邦首都区一家私立医院接受治疗数日。卫生部长穆罕默德·阿里·帕特表示，患者已被隔离并接受治疗，公共卫生官员已识别44名密切接触者并展开调查。目前相关机构正协调防控工作，以防疫情进一步传播。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "联邦首都区",
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja, Federal Capital Territory (FCT)"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚确认阿布贾出现一例埃博拉病毒病病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "NIGERIA has confirmed a case of Ebola virus disease in Abuja"
+    },
+    {
+     "fact": "患者为一名近期从乌干达乘国际航班抵达尼日利亚的女性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the patient is a woman who recently travelled from Uganda to Nigeria on an international flight"
+    },
+    {
+     "fact": "患者已被隔离并正在接受医疗救治",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the woman had since been isolated and was receiving medical care"
+    },
+    {
+     "fact": "公共卫生官员已识别44名密切接触者并调查可能的其他暴露",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "public health officials had identified 44 close contacts and were investigating possible additional exposures"
+    }
+   ],
+   "uncertainties": [
+    "患者据报在确诊前曾在私立医院接受治疗数日，具体暴露范围尚未完全确认",
+    "卫生工作者、患者、照护者及同机旅客等可能的额外暴露仍在调查中",
+    "不同来源对密切接触者数量存在差异（44人与111人），尚无法确认",
+    "目前为单一来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_e47a8be63e6d94d4",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

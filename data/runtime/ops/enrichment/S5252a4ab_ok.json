@@ -1,0 +1,126 @@
+{
+ "label": "S5252a4ab",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "882a058c6b814f2ff1dfe0d4052b20c3ac29132699120741cd34b7a16d93929b",
+ "tokens": {
+  "input_tokens": 2055,
+  "output_tokens": 418,
+  "total_tokens": 2473
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "title",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"事故原因（刹车失灵）为初步报告说法，尚未获独立确认\", \"目前仅单一来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"事故原因（刹车失灵）为初步报告说法，尚未获独立确认\", \"目前仅单一来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "卡诺发生车祸致两人死亡",
+   "summary_zh": "尼日利亚卡诺州卡诺-扎里亚公路Dangi地下通道处发生一起致命交通事故，一辆刹车失灵的豪沃自卸卡车与一辆梅赛德斯-奔驰轿车相撞。联邦道路安全队卡诺分区指挥部证实，事故造成两名成年男性死亡，共四名成年男性卷入事故。该事故由单一来源报道，目前尚缺乏交叉验证。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "卡诺州",
+    "city": "卡诺",
+    "site": "卡诺-扎里亚公路Dangi地下通道",
+    "raw_text": "Kano-Zaria Road at Dangi Underpass"
+   },
+   "key_facts": [
+    {
+     "fact": "联邦道路安全队卡诺分区指挥部证实两人在交通事故中死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Road Safety Corps, Kano Sector Command, has confirmed the death of two persons following a fatal road traffic crash"
+    },
+    {
+     "fact": "事故涉及一辆满载沥青的豪沃自卸卡车和一辆梅赛德斯-奔驰轿车",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "involved a Howo tipper truck fully loaded with bitumen , and a Mercedes-Benz C10"
+    },
+    {
+     "fact": "事故共涉及四名成年男性，其中两人确认死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A total of four male adults were involved in the crash, with two persons confirmed dead"
+    },
+    {
+     "fact": "事故发生在卡诺-扎里亚公路Dangi地下通道处",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "along the Kano-Zaria Road at Dangi Underpass"
+    }
+   ],
+   "uncertainties": [
+    "事故原因（刹车失灵）为初步报告说法，尚未获独立确认",
+    "目前仅单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "卡诺发生车祸致两人死亡",
+   "summary_zh": "尼日利亚卡诺州卡诺-扎里亚公路Dangi地下通道处发生一起致命交通事故，一辆刹车失灵的豪沃自卸卡车与一辆梅赛德斯-奔驰轿车相撞。联邦道路安全队卡诺分区指挥部证实，事故造成两名成年男性死亡，共四名成年男性卷入事故。该事故由单一来源报道，目前尚缺乏交叉验证。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "卡诺州",
+    "city": "卡诺",
+    "site": "卡诺-扎里亚公路Dangi地下通道",
+    "raw_text": "Kano-Zaria Road at Dangi Underpass"
+   },
+   "key_facts": [
+    {
+     "fact": "联邦道路安全队卡诺分区指挥部证实两人在交通事故中死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Road Safety Corps, Kano Sector Command, has confirmed the death of two persons following a fatal road traffic crash"
+    },
+    {
+     "fact": "事故涉及一辆满载沥青的豪沃自卸卡车和一辆梅赛德斯-奔驰轿车",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "involved a Howo tipper truck fully loaded with bitumen , and a Mercedes-Benz C10"
+    },
+    {
+     "fact": "事故共涉及四名成年男性，其中两人确认死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A total of four male adults were involved in the crash, with two persons confirmed dead"
+    },
+    {
+     "fact": "事故发生在卡诺-扎里亚公路Dangi地下通道处",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "along the Kano-Zaria Road at Dangi Underpass"
+    }
+   ],
+   "uncertainties": [
+    "事故原因（刹车失灵）为初步报告说法，尚未获独立确认",
+    "目前仅单一来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_e3b97f3d5252a4ab",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

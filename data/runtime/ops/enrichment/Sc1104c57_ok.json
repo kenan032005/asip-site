@@ -1,0 +1,105 @@
+{
+ "label": "Sc1104c57",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6fca65c66dffda78b021cd07486cc8cc1008cfc1e04cc110f236c9f164ea3abd",
+ "tokens": {
+  "input_tokens": 2031,
+  "output_tokens": 408,
+  "total_tokens": 2439
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚机场管理局加强机场监测，应对埃博拉确诊病例",
+   "summary_zh": "尼日利亚联邦机场管理局在联邦首都区出现一例确诊埃博拉病例后，加强了各机场运营中的卫生监测。该局表示正与尼日利亚疾病控制与预防中心、港口卫生服务局、尼日利亚民航局等机构合作，支持防控工作。该局称，病例的早期识别和接触者追踪工作的启动，凸显了有效卫生监测和机构协作的重要性。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": "机场",
+    "raw_text": "airports across airport operations; Federal Capital Territory"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦机场管理局在联邦首都区出现一例确诊埃博拉病例后加强了机场卫生监测",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Airports Authority of Nigeria has heightened health surveillance across airport operations following a confirmed case of Ebola Virus Disease in the Federal Capital Territory."
+    },
+    {
+     "fact": "该局正与尼日利亚疾病控制与预防中心、港口卫生服务局、尼日利亚民航局等机构合作支持防控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "working with the Nigeria Centre for Disease Control and Prevention, Port Health Services, the Nigerian Civil Aviation Authority and other relevant agencies to support ongoing containment efforts"
+    },
+    {
+     "fact": "该局称病例早期识别和接触者追踪工作已启动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the early identification of the case and the commencement of contact tracing underscore the importance of effective health surveillance"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Punch）报道，尚缺乏交叉验证",
+    "确诊病例的具体细节及接触者追踪进展未在报道中说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚机场管理局加强机场监测，应对埃博拉确诊病例",
+   "summary_zh": "尼日利亚联邦机场管理局在联邦首都区出现一例确诊埃博拉病例后，加强了各机场运营中的卫生监测。该局表示正与尼日利亚疾病控制与预防中心、港口卫生服务局、尼日利亚民航局等机构合作，支持防控工作。该局称，病例的早期识别和接触者追踪工作的启动，凸显了有效卫生监测和机构协作的重要性。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": "机场",
+    "raw_text": "airports across airport operations; Federal Capital Territory"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦机场管理局在联邦首都区出现一例确诊埃博拉病例后加强了机场卫生监测",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Airports Authority of Nigeria has heightened health surveillance across airport operations following a confirmed case of Ebola Virus Disease in the Federal Capital Territory."
+    },
+    {
+     "fact": "该局正与尼日利亚疾病控制与预防中心、港口卫生服务局、尼日利亚民航局等机构合作支持防控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "working with the Nigeria Centre for Disease Control and Prevention, Port Health Services, the Nigerian Civil Aviation Authority and other relevant agencies to support ongoing containment efforts"
+    },
+    {
+     "fact": "该局称病例早期识别和接触者追踪工作已启动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the early identification of the case and the commencement of contact tracing underscore the importance of effective health surveillance"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Punch）报道，尚缺乏交叉验证",
+    "确诊病例的具体细节及接触者追踪进展未在报道中说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_768066cdc1104c57",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

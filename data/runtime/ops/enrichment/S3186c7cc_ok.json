@@ -1,0 +1,115 @@
+{
+ "label": "S3186c7cc",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "cbf6aa90ac240aab9a5e0d46a92bfea79b44535d03a96e7cc336c4b0aa80dac6",
+ "tokens": {
+  "input_tokens": 2454,
+  "output_tokens": 476,
+  "total_tokens": 2930
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克政府计划投资约2.35亿美元助卫生部门适应气候变化",
+   "summary_zh": "莫桑比克政府计划投资约2.35亿美元，用于提升卫生部门适应气候变化的能力。卫生部长乌塞内·伊塞在马普托举行的第三届气候变化对健康影响会议开幕式上表示，该计划旨在预防预计约3万人死亡及超过160万人年寿命损失。相关投资被纳入增强国家卫生系统韧性的路线图。报道同时提到，该国国家结核病参考实验室近日被纳入世卫组织超国家结核病实验室全球网络。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": null,
+    "city": "马普托",
+    "site": null,
+    "raw_text": "Maputo"
+   },
+   "key_facts": [
+    {
+     "fact": "莫桑比克政府计划投资约2.35亿美元用于卫生部门适应气候变化",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Mozambican government plans to invest approximately 235 million US dollars into adapting the health sector to climate change."
+    },
+    {
+     "fact": "卫生部长伊塞称该计划旨在预防预计约3万人死亡及超过160万人年寿命损失",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the initiative aims to prevent an estimated 30,000 deaths and the loss of more than 1.6 million years of human life."
+    },
+    {
+     "fact": "伊塞在马普托举行的第三届气候变化对健康影响会议开幕式上发言",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "speaking on Monday, in Maputo, at the opening of the Third Conference on the Impact of Climate Change on Health"
+    },
+    {
+     "fact": "莫桑比克国家结核病参考实验室被纳入世卫组织超国家结核病实验室全球网络",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the World Health Organization announced that the National Tuberculosis Reference Laboratory at the National Institute of Health has joined the global network of supranational tuberculosis laboratories"
+    }
+   ],
+   "uncertainties": [
+    "报道为单一来源（Club of Mozambique/AIM），尚缺乏交叉验证",
+    "投资金额及预防死亡人数为政府方面提出的计划与估算，尚未见独立核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克政府计划投资约2.35亿美元助卫生部门适应气候变化",
+   "summary_zh": "莫桑比克政府计划投资约2.35亿美元，用于提升卫生部门适应气候变化的能力。卫生部长乌塞内·伊塞在马普托举行的第三届气候变化对健康影响会议开幕式上表示，该计划旨在预防预计约3万人死亡及超过160万人年寿命损失。相关投资被纳入增强国家卫生系统韧性的路线图。报道同时提到，该国国家结核病参考实验室近日被纳入世卫组织超国家结核病实验室全球网络。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": null,
+    "city": "马普托",
+    "site": null,
+    "raw_text": "Maputo"
+   },
+   "key_facts": [
+    {
+     "fact": "莫桑比克政府计划投资约2.35亿美元用于卫生部门适应气候变化",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Mozambican government plans to invest approximately 235 million US dollars into adapting the health sector to climate change."
+    },
+    {
+     "fact": "卫生部长伊塞称该计划旨在预防预计约3万人死亡及超过160万人年寿命损失",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the initiative aims to prevent an estimated 30,000 deaths and the loss of more than 1.6 million years of human life."
+    },
+    {
+     "fact": "伊塞在马普托举行的第三届气候变化对健康影响会议开幕式上发言",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "speaking on Monday, in Maputo, at the opening of the Third Conference on the Impact of Climate Change on Health"
+    },
+    {
+     "fact": "莫桑比克国家结核病参考实验室被纳入世卫组织超国家结核病实验室全球网络",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the World Health Organization announced that the National Tuberculosis Reference Laboratory at the National Institute of Health has joined the global network of supranational tuberculosis laboratories"
+    }
+   ],
+   "uncertainties": [
+    "报道为单一来源（Club of Mozambique/AIM），尚缺乏交叉验证",
+    "投资金额及预防死亡人数为政府方面提出的计划与估算，尚未见独立核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_4573fbcf3186c7cc",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}
