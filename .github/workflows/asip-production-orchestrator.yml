@@ -202,7 +202,12 @@ jobs:
               print('ORCH_SUMMARY parse_error=%s'%type(e).__name__)
           ORCHSUM
           if [ -s /tmp/orch.err ]; then echo "--- stderr(tail) ---"; tail -30 /tmp/orch.err; fi
-          exit $RC
+          # C8-4D2 P0 auto-deploy hotfix：**仅失败时**以原退出码结束；
+# 成功时必须继续往下走（cat /tmp/orch.json + 写 $GITHUB_OUTPUT），否则 Auto deploy 永远拿不到
+# deploy_required → 步骤被 skipped。fail-closed 保持不变：非 0 一律退出。
+if [ "$RC" -ne 0 ]; then
+  exit "$RC"
+fi
           cat /tmp/orch.json
           python - <<'PY' >> "$GITHUB_OUTPUT"
           import json
