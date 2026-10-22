@@ -1,0 +1,128 @@
+{
+ "label": "Sc026485f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d332b2a8fbb6e9100112a214c594b34ec8a148a0d8147019783865895cd67fa2",
+ "tokens": {
+  "input_tokens": 2832,
+  "output_tokens": 506,
+  "total_tokens": 3338
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"米斯基暴力事件的具体经过和伤亡情况尚未获得独立核实\", \"目前仅有一个来源（Le Pays Tchad）报道，尚缺乏交叉验证\", \"反对派所称的暴力事件细节未获官方确认\"]",
+    "after": "[\"米斯基暴力事件的具体经过和伤亡情况尚未获得独立核实\", \"目前仅有一个来源（Le Pays Tchad）报道，尚缺乏交叉验证\", \"反对派所称的暴力事件细节未获官方确认\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "米斯基危机：反对派要求伸张正义、透明与对话",
+   "summary_zh": "乍得民主反对派于2026年10月20日发表联合声明，谴责提贝斯提省米斯基发生的暴力事件，并呼吁停止敌对行动。反对派要求开展独立调查、就自然资源管理进行协商，并遵守2025年4月签署的和平协议。反对派还要求建立独立可信的事实核查机制，并主张以政治对话而非单纯武力应对危机。",
+   "event_type": "civil_unrest",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "提贝斯提省",
+    "city": "米斯基",
+    "site": null,
+    "raw_text": "Miski, dans la province du Tibesti"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得民主反对派发表联合声明，谴责提贝斯提省米斯基发生的暴力事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans un communiqué conjoint publié le 20 octobre 2026, l’opposition démocratique tchadienne condamne les violences survenues à Miski, dans la province du Tibesti"
+    },
+    {
+     "fact": "反对派呼吁停止敌对行动，并要求开展独立调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Elle réclame une enquête indépendante, une concertation sur la gestion des ressources naturelles et le respect de l’accord de paix signé en avril 2025."
+    },
+    {
+     "fact": "反对派提及2025年4月20日政府与自卫委员会签署的和平协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’opposition remet également en avant l’accord de paix conclu le 20 avril 2025 entre le gouvernement et le Comité d’autodéfense."
+    },
+    {
+     "fact": "反对派要求建立独立可信的事实核查机制以查明暴力事件经过",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ils demandent « l’établissement d’un mécanisme indépendant et crédible de vérification des faits »"
+    }
+   ],
+   "uncertainties": [
+    "米斯基暴力事件的具体经过和伤亡情况尚未获得独立核实",
+    "目前仅有一个来源（Le Pays Tchad）报道，尚缺乏交叉验证",
+    "反对派所称的暴力事件细节未获官方确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "米斯基危机：反对派要求伸张正义、透明与对话",
+   "summary_zh": "乍得民主反对派于2026年10月20日发表联合声明，谴责提贝斯提省米斯基发生的暴力事件，并呼吁停止敌对行动。反对派要求开展独立调查、就自然资源管理进行协商，并遵守2025年4月签署的和平协议。反对派还要求建立独立可信的事实核查机制，并主张以政治对话而非单纯武力应对危机。",
+   "event_type": "civil_unrest",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "提贝斯提省",
+    "city": "米斯基",
+    "site": null,
+    "raw_text": "Miski, dans la province du Tibesti"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得民主反对派发表联合声明，谴责提贝斯提省米斯基发生的暴力事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans un communiqué conjoint publié le 20 octobre 2026, l’opposition démocratique tchadienne condamne les violences survenues à Miski, dans la province du Tibesti"
+    },
+    {
+     "fact": "反对派呼吁停止敌对行动，并要求开展独立调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Elle réclame une enquête indépendante, une concertation sur la gestion des ressources naturelles et le respect de l’accord de paix signé en avril 2025."
+    },
+    {
+     "fact": "反对派提及2025年4月20日政府与自卫委员会签署的和平协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’opposition remet également en avant l’accord de paix conclu le 20 avril 2025 entre le gouvernement et le Comité d’autodéfense."
+    },
+    {
+     "fact": "反对派要求建立独立可信的事实核查机制以查明暴力事件经过",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ils demandent « l’établissement d’un mécanisme indépendant et crédible de vérification des faits »"
+    }
+   ],
+   "uncertainties": [
+    "米斯基暴力事件的具体经过和伤亡情况尚未获得独立核实",
+    "目前仅有一个来源（Le Pays Tchad）报道，尚缺乏交叉验证",
+    "反对派所称的暴力事件细节未获官方确认",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_4b5a90cfc026485f",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

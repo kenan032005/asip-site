@@ -1,0 +1,136 @@
+{
+ "label": "S79d60a54",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "38960f8d1073c229b30e808b04d66ae7ac6d5230bab580b10d53bac7e2cd8a78",
+ "tokens": {
+  "input_tokens": 2431,
+  "output_tokens": 468,
+  "total_tokens": 2899
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅单一来源（Club of Mozambique）报道，尚未获得交叉验证\", \"协议具体签署时间尚未公布\"]",
+    "after": "[\"目前仅单一来源（Club of Mozambique）报道，尚未获得交叉验证\", \"协议具体签署时间尚未公布\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "澳门与莫桑比克金融情报机构将签署反洗钱合作备忘录",
+   "summary_zh": "澳门政府宣布，将与莫桑比克金融情报办公室（GIFiM）签署谅解备忘录，交换金融信息以打击洗钱、恐怖融资及大规模杀伤性武器扩散。该命令由行政长官岑浩辉于10月12日签署，保安司司长可授权警察总局局长代表签署。报道称澳门金融情报办公室此前已与33个国家和地区签署信息交换协议。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Macau and Mozambique"
+   },
+   "key_facts": [
+    {
+     "fact": "澳门与莫桑比克将签署反洗钱和反恐融资信息交换协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Macau and Mozambique will sign an agreement to exchange information to prevent money laundering and terrorist financing"
+    },
+    {
+     "fact": "协议涉及打击洗钱、关联上游犯罪、恐怖融资及大规模杀伤性武器扩散",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the protocol involves the exchange of “financial information” to combat money laundering, “associated predicate offences”, terrorist financing and the proliferation of weapons of mass destruction"
+    },
+    {
+     "fact": "备忘录将与莫桑比克金融情报办公室（GIFiM）签署",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The memorandum of understanding will be signed with Mozambique’s Financial Information Office (GIFiM)"
+    },
+    {
+     "fact": "相关命令由行政长官岑浩辉于10月12日签署",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "signed by the Chief Executive, Sam Hou Fai, on 12 October"
+    },
+    {
+     "fact": "澳门金融情报办公室已与33个国家和地区签署信息交换协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Macau’s GIF has signed information-exchange agreements with 33 countries and territories"
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（Club of Mozambique）报道，尚未获得交叉验证",
+    "协议具体签署时间尚未公布"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "澳门与莫桑比克金融情报机构将签署反洗钱合作备忘录",
+   "summary_zh": "澳门政府宣布，将与莫桑比克金融情报办公室（GIFiM）签署谅解备忘录，交换金融信息以打击洗钱、恐怖融资及大规模杀伤性武器扩散。该命令由行政长官岑浩辉于10月12日签署，保安司司长可授权警察总局局长代表签署。报道称澳门金融情报办公室此前已与33个国家和地区签署信息交换协议。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Macau and Mozambique"
+   },
+   "key_facts": [
+    {
+     "fact": "澳门与莫桑比克将签署反洗钱和反恐融资信息交换协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Macau and Mozambique will sign an agreement to exchange information to prevent money laundering and terrorist financing"
+    },
+    {
+     "fact": "协议涉及打击洗钱、关联上游犯罪、恐怖融资及大规模杀伤性武器扩散",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the protocol involves the exchange of “financial information” to combat money laundering, “associated predicate offences”, terrorist financing and the proliferation of weapons of mass destruction"
+    },
+    {
+     "fact": "备忘录将与莫桑比克金融情报办公室（GIFiM）签署",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The memorandum of understanding will be signed with Mozambique’s Financial Information Office (GIFiM)"
+    },
+    {
+     "fact": "相关命令由行政长官岑浩辉于10月12日签署",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "signed by the Chief Executive, Sam Hou Fai, on 12 October"
+    },
+    {
+     "fact": "澳门金融情报办公室已与33个国家和地区签署信息交换协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Macau’s GIF has signed information-exchange agreements with 33 countries and territories"
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（Club of Mozambique）报道，尚未获得交叉验证",
+    "协议具体签署时间尚未公布",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_f2315f3479d60a54",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

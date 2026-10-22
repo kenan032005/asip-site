@@ -1,0 +1,127 @@
+{
+ "label": "Sc0a79694",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a4a669b3dcaa661defc4e376648fc5e780928fd8ebe61c32172bc5e7807b681f",
+ "tokens": {
+  "input_tokens": 2237,
+  "output_tokens": 571,
+  "total_tokens": 2808
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克：万杜济桥发生武装抢劫，一名男子被枪杀，约50万梅蒂卡尔被抢",
+   "summary_zh": "据莫桑比克警方通报，一伙仍在逃的犯罪分子在马尼卡省6号国道万杜济河大桥上实施武装抢劫，开枪打死一名年轻男子，抢走约50万梅蒂卡尔，并用金属钉刺带（当地称“lagarta”）封锁道路。警方称，四名劫匪持枪拦截了一辆本田Fit轿车，车上人员反抗时遭枪击。目前尚无人员被正式拘留，案件仍在调查中。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "马尼卡省",
+    "city": "万杜济",
+    "site": "6号国道万杜济河大桥",
+    "raw_text": "bridge over the Vanduzi River, along National Road No. 6, in Manica Province"
+   },
+   "key_facts": [
+    {
+     "fact": "一伙仍在逃的犯罪分子在马尼卡省6号国道万杜济河大桥实施武装抢劫",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A group of criminals who remain at large carried out an armed robbery last night on the bridge over the Vanduzi River, along National Road No. 6, in Manica Province."
+    },
+    {
+     "fact": "劫匪开枪打死一名年轻男子，抢走约50万梅蒂卡尔",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "They shot and killed a young man, stole around 500,000 meticais"
+    },
+    {
+     "fact": "劫匪用金属钉刺带封锁道路，导致其他车辆轮胎被扎破",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "blocked the road with a tire deflation device (TDD), a metal-spiked strip as a “lagarta”"
+    },
+    {
+     "fact": "警方称四名持枪劫匪拦截了一辆本田Fit轿车",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the victim and three other people were travelling in a Honda Fit in the direction of Chimoio–Manica when they were intercepted by four robbers travelling in a Toyota Axio and armed with a firearm whose type has not yet been identified"
+    },
+    {
+     "fact": "目前尚无人员因该案被正式拘留",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "So far, no one has been formally detained in connection with the case."
+    }
+   ],
+   "uncertainties": [
+    "劫匪所持枪支类型尚未确认",
+    "目前仅单一来源报道，尚缺乏交叉验证",
+    "尚无人员被正式拘留，案件仍在调查中"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克：万杜济桥发生武装抢劫，一名男子被枪杀，约50万梅蒂卡尔被抢",
+   "summary_zh": "据莫桑比克警方通报，一伙仍在逃的犯罪分子在马尼卡省6号国道万杜济河大桥上实施武装抢劫，开枪打死一名年轻男子，抢走约50万梅蒂卡尔，并用金属钉刺带（当地称“lagarta”）封锁道路。警方称，四名劫匪持枪拦截了一辆本田Fit轿车，车上人员反抗时遭枪击。目前尚无人员被正式拘留，案件仍在调查中。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "马尼卡省",
+    "city": "万杜济",
+    "site": "6号国道万杜济河大桥",
+    "raw_text": "bridge over the Vanduzi River, along National Road No. 6, in Manica Province"
+   },
+   "key_facts": [
+    {
+     "fact": "一伙仍在逃的犯罪分子在马尼卡省6号国道万杜济河大桥实施武装抢劫",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A group of criminals who remain at large carried out an armed robbery last night on the bridge over the Vanduzi River, along National Road No. 6, in Manica Province."
+    },
+    {
+     "fact": "劫匪开枪打死一名年轻男子，抢走约50万梅蒂卡尔",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "They shot and killed a young man, stole around 500,000 meticais"
+    },
+    {
+     "fact": "劫匪用金属钉刺带封锁道路，导致其他车辆轮胎被扎破",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "blocked the road with a tire deflation device (TDD), a metal-spiked strip as a “lagarta”"
+    },
+    {
+     "fact": "警方称四名持枪劫匪拦截了一辆本田Fit轿车",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the victim and three other people were travelling in a Honda Fit in the direction of Chimoio–Manica when they were intercepted by four robbers travelling in a Toyota Axio and armed with a firearm whose type has not yet been identified"
+    },
+    {
+     "fact": "目前尚无人员因该案被正式拘留",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "So far, no one has been formally detained in connection with the case."
+    }
+   ],
+   "uncertainties": [
+    "劫匪所持枪支类型尚未确认",
+    "目前仅单一来源报道，尚缺乏交叉验证",
+    "尚无人员被正式拘留，案件仍在调查中"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_28ebc5c3c0a79694",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}
