@@ -1,0 +1,125 @@
+{
+ "label": "S02781eb6",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "253f13a2f5d9928670f82ad166364d2672ef81b41ecd75664f235f5cc9a6f3eb",
+ "tokens": {
+  "input_tokens": 2040,
+  "output_tokens": 496,
+  "total_tokens": 2536
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚准军事部队招募：入围候选人须接受强制药物检测",
+   "summary_zh": "尼日利亚民防、惩教、消防与移民服务委员会宣布，首批3万名准军事人员的招募门户将于10月28日开放，入围候选人须查询状态并接受强制药物检测。委员会秘书、退役少将阿卜杜勒马利克·吉布林在阿布贾向记者通报了董事会会议结果。门户将开放至11月13日，通过口试的入围者需登录确认状态并获取检测所需代码，随后在所在州指定国家禁毒执法局办公室完成检测，再前往阿布贾领取任命书。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚准军事部队招募门户将于10月28日开放",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "its recruitment portal will open on October 28 for candidates shortlisted for the first batch of 30,000 paramilitary personnel"
+    },
+    {
+     "fact": "入围候选人须接受强制药物检测",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Shortlisted candidates face mandatory drug tests"
+    },
+    {
+     "fact": "委员会秘书吉布林在阿布贾通报董事会会议结果",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Board Secretary, Maj. Gen. Abdulmalik Jibrin (retd.), disclosed this while briefing journalists on the outcome of the board’s meeting in Abuja on Thursday"
+    },
+    {
+     "fact": "招募门户将开放至11月13日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He said the portal would remain open until November 13"
+    },
+    {
+     "fact": "候选人在所在州指定禁毒执法局办公室完成检测后前往阿布贾领取任命书",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "candidates would undergo the mandatory test at designated National Drug Law Enforcement Agency offices in their respective states before proceeding to Abuja to collect their appointment letters"
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（Punch）报道，尚缺乏交叉验证",
+    "正文为部分提取，招募细节可能不完整"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚准军事部队招募：入围候选人须接受强制药物检测",
+   "summary_zh": "尼日利亚民防、惩教、消防与移民服务委员会宣布，首批3万名准军事人员的招募门户将于10月28日开放，入围候选人须查询状态并接受强制药物检测。委员会秘书、退役少将阿卜杜勒马利克·吉布林在阿布贾向记者通报了董事会会议结果。门户将开放至11月13日，通过口试的入围者需登录确认状态并获取检测所需代码，随后在所在州指定国家禁毒执法局办公室完成检测，再前往阿布贾领取任命书。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚准军事部队招募门户将于10月28日开放",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "its recruitment portal will open on October 28 for candidates shortlisted for the first batch of 30,000 paramilitary personnel"
+    },
+    {
+     "fact": "入围候选人须接受强制药物检测",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Shortlisted candidates face mandatory drug tests"
+    },
+    {
+     "fact": "委员会秘书吉布林在阿布贾通报董事会会议结果",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Board Secretary, Maj. Gen. Abdulmalik Jibrin (retd.), disclosed this while briefing journalists on the outcome of the board’s meeting in Abuja on Thursday"
+    },
+    {
+     "fact": "招募门户将开放至11月13日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He said the portal would remain open until November 13"
+    },
+    {
+     "fact": "候选人在所在州指定禁毒执法局办公室完成检测后前往阿布贾领取任命书",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "candidates would undergo the mandatory test at designated National Drug Law Enforcement Agency offices in their respective states before proceeding to Abuja to collect their appointment letters"
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（Punch）报道，尚缺乏交叉验证",
+    "正文为部分提取，招募细节可能不完整"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_546b19bd02781eb6",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

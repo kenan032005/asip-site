@@ -1,0 +1,129 @@
+{
+ "label": "Se8319148",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "7cc27e964ab650431aaf1600aa2117a3337f1a214b30cf3b75f9a715eaadbb51",
+ "tokens": {
+  "input_tokens": 2936,
+  "output_tokens": 509,
+  "total_tokens": 3445
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚出现首例埃博拉病例，当局紧急追踪接触者",
+   "summary_zh": "尼日利亚宣布发现首例本迪布焦型埃博拉病例，患者为一名从乌干达乘飞机抵达的女性。当局正争分夺秒追踪接触者，目前已发现44名潜在接触者，包括医护人员。患者症状于10月6日出现，但直到10月20日才确诊，引发对诊断延迟的担忧。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja, Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚宣布发现首例本迪布焦型埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Nigeria est en état d'alerte après l'annonce mardi soir d'un premier cas d'Ebola Bundibugyo sur son territoire."
+    },
+    {
+     "fact": "患者为一名从乌干达乘飞机抵达的女性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La personne infectée est une femme arrivée d'Ouganda par avion."
+    },
+    {
+     "fact": "目前已发现44名潜在接触者，包括医护人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "44 ont déjà été détectés jusque-là, notamment les personnels de santé qui ont côtoyé cette patiente"
+    },
+    {
+     "fact": "患者症状于10月6日出现，10月20日才确诊",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ses symptômes du virus Ebola se sont déclenchés le 6 octobre, au Nigeria. Mais le diagnostic n'a été posé que le 20 octobre"
+    },
+    {
+     "fact": "尼日利亚自2014年以来未再出现埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le pays, qui n'avait pas recensé de cas d'Ebola depuis 12 ans"
+    }
+   ],
+   "uncertainties": [
+    "感染源尚未完全确定，据称属“输入性”而非社区传播",
+    "乌干达当局仍声称其境内无活跃埃博拉病例，与患者旅行史存在信息差异",
+    "诊断延迟可能导致更多病例出现，尚待观察",
+    "目前为单一来源报道"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚出现首例埃博拉病例，当局紧急追踪接触者",
+   "summary_zh": "尼日利亚宣布发现首例本迪布焦型埃博拉病例，患者为一名从乌干达乘飞机抵达的女性。当局正争分夺秒追踪接触者，目前已发现44名潜在接触者，包括医护人员。患者症状于10月6日出现，但直到10月20日才确诊，引发对诊断延迟的担忧。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja, Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚宣布发现首例本迪布焦型埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Nigeria est en état d'alerte après l'annonce mardi soir d'un premier cas d'Ebola Bundibugyo sur son territoire."
+    },
+    {
+     "fact": "患者为一名从乌干达乘飞机抵达的女性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La personne infectée est une femme arrivée d'Ouganda par avion."
+    },
+    {
+     "fact": "目前已发现44名潜在接触者，包括医护人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "44 ont déjà été détectés jusque-là, notamment les personnels de santé qui ont côtoyé cette patiente"
+    },
+    {
+     "fact": "患者症状于10月6日出现，10月20日才确诊",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ses symptômes du virus Ebola se sont déclenchés le 6 octobre, au Nigeria. Mais le diagnostic n'a été posé que le 20 octobre"
+    },
+    {
+     "fact": "尼日利亚自2014年以来未再出现埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le pays, qui n'avait pas recensé de cas d'Ebola depuis 12 ans"
+    }
+   ],
+   "uncertainties": [
+    "感染源尚未完全确定，据称属“输入性”而非社区传播",
+    "乌干达当局仍声称其境内无活跃埃博拉病例，与患者旅行史存在信息差异",
+    "诊断延迟可能导致更多病例出现，尚待观察",
+    "目前为单一来源报道"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_aedeb909e8319148",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

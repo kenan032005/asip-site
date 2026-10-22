@@ -1,0 +1,107 @@
+{
+ "label": "S792aec08",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3e815c88a9e1312f634217637051fc4096237fd1a81c777a1d18cae9867689ba",
+ "tokens": {
+  "input_tokens": 2102,
+  "output_tokens": 400,
+  "total_tokens": 2502
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南非德班一名外籍人士遭约50人群体殴打致死",
+   "summary_zh": "据警方称，南非港口城市德班周四发生一起群体暴力事件，约50人将一名外籍人士殴打致死。德班近月来一直是反外籍人士抗议的焦点，两周前当地一场反移民游行后曾爆发抢劫和暴力事件。警方表示，周四的袭击发生在市中心一场游行的外围，但无法说明该游行的具体诉求。",
+   "event_type": "civil_unrest",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": null,
+    "city": "德班",
+    "site": "市中心",
+    "raw_text": "South Africa's port city of Durban, city centre"
+   },
+   "key_facts": [
+    {
+     "fact": "约50人组成的群体在德班将一名外籍人士殴打致死",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A mob of about 50 people beat a foreign national to death Thursday in South Africa's port city of Durban"
+    },
+    {
+     "fact": "德班近月来是反外籍人士抗议的焦点，两周前反移民游行后爆发抢劫和暴力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Durban has been a focus of months of protests against foreign nationals, with looting and violence erupting after an anti-migrant march in the city two weeks ago."
+    },
+    {
+     "fact": "警方称袭击发生在市中心一场游行外围，但无法说明游行诉求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Thursday's attack in the city centre was on the sidelines of a march, police said, without being able to say what the demonstration was about."
+    }
+   ],
+   "uncertainties": [
+    "事件目前为单一来源报道，尚缺乏交叉验证",
+    "游行示威的具体诉求尚未明确",
+    "事件时间在不同来源间存在差异"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南非德班一名外籍人士遭约50人群体殴打致死",
+   "summary_zh": "据警方称，南非港口城市德班周四发生一起群体暴力事件，约50人将一名外籍人士殴打致死。德班近月来一直是反外籍人士抗议的焦点，两周前当地一场反移民游行后曾爆发抢劫和暴力事件。警方表示，周四的袭击发生在市中心一场游行的外围，但无法说明该游行的具体诉求。",
+   "event_type": "civil_unrest",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": null,
+    "city": "德班",
+    "site": "市中心",
+    "raw_text": "South Africa's port city of Durban, city centre"
+   },
+   "key_facts": [
+    {
+     "fact": "约50人组成的群体在德班将一名外籍人士殴打致死",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A mob of about 50 people beat a foreign national to death Thursday in South Africa's port city of Durban"
+    },
+    {
+     "fact": "德班近月来是反外籍人士抗议的焦点，两周前反移民游行后爆发抢劫和暴力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Durban has been a focus of months of protests against foreign nationals, with looting and violence erupting after an anti-migrant march in the city two weeks ago."
+    },
+    {
+     "fact": "警方称袭击发生在市中心一场游行外围，但无法说明游行诉求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Thursday's attack in the city centre was on the sidelines of a march, police said, without being able to say what the demonstration was about."
+    }
+   ],
+   "uncertainties": [
+    "事件目前为单一来源报道，尚缺乏交叉验证",
+    "游行示威的具体诉求尚未明确",
+    "事件时间在不同来源间存在差异"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_6b78154e792aec08",
+ "disease_event_id": null,
+ "country_code": "ZA"
+}

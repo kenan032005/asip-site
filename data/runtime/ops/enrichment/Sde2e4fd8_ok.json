@@ -1,0 +1,148 @@
+{
+ "label": "Sde2e4fd8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "9f3b87eeeae6de65c5a4ca3c16ed08277f8e29a6b47e8d4d850c32c6e5291128",
+ "tokens": {
+  "input_tokens": 2539,
+  "output_tokens": 617,
+  "total_tokens": 3156
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"患者国籍与行程说法不一：乌干达卫生部称其为赴刚果（金）东部出差、仅过境乌干达的尼日利亚公民，而尼日利亚卫生部长与非洲疾控中心称其原籍乌干达、赴坎帕拉度假\", \"患者可能在何处感染病毒尚未确定\", \"接触者中尚无人出现症状，但埃博拉潜伏期为2至21天，后续情况有待观察\"]",
+    "after": "[\"患者国籍与行程说法不一：乌干达卫生部称其为赴刚果（金）东部出差、仅过境乌干达的尼日利亚公民，而尼日利亚卫生部长与非洲疾控中心称其原籍乌干达、赴坎帕拉度假\", \"患者可能在何处感染病毒尚未确定\", \"接触者中尚无人出现症状，但埃博拉潜伏期为2至21天，后续情况有待观察\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚首例埃博拉患者曾在乌干达度假，官员称",
+   "summary_zh": "据非洲疾控中心负责人向BBC表示，尼日利亚自东非疫情暴发以来首例确诊埃博拉病例为一名驻阿布贾外交官的妻子，她曾前往乌干达首都坎帕拉度假。尼日利亚卫生部长称这名42岁患者病情稳定、正在好转，当局已识别44名接触者并实施隔离，另有46人被禁止登机。关于该患者的国籍与行程，乌干达卫生部与尼日利亚及非洲疾控中心的说法存在矛盾，乌方称其为赴刚果（金）东部出差、仅过境乌干达的尼日利亚公民。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja, Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚确诊该国自东非疫情暴发以来的首例埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria's first confirmed case of Ebola since the outbreak in East Africa began in May"
+    },
+    {
+     "fact": "患者为一名驻阿布贾外交官的妻子，曾赴乌干达首都坎帕拉度假",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "is the wife of a diplomat who travelled to Uganda's capital for a holiday"
+    },
+    {
+     "fact": "当局已识别44名接触者并实施隔离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "had identified 44 people who had been in contact with the woman"
+    },
+    {
+     "fact": "46人被禁止登机，包括44名医院接触者和2名在其家中工作的人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "46 people - 44 who had come into contact with the woman at hospital and two people who worked in her home - had been banned from boarding flights"
+    },
+    {
+     "fact": "患者病情稳定并正在好转",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "\"She's stable, she's improving,\" Muhammad Ali Pate said"
+    },
+    {
+     "fact": "乌干达卫生部与尼日利亚及非洲疾控中心关于患者行程的说法存在矛盾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "There have been conflicting accounts about the patient in Nigeria and her movements"
+    }
+   ],
+   "uncertainties": [
+    "患者国籍与行程说法不一：乌干达卫生部称其为赴刚果（金）东部出差、仅过境乌干达的尼日利亚公民，而尼日利亚卫生部长与非洲疾控中心称其原籍乌干达、赴坎帕拉度假",
+    "患者可能在何处感染病毒尚未确定",
+    "接触者中尚无人出现症状，但埃博拉潜伏期为2至21天，后续情况有待观察"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚首例埃博拉患者曾在乌干达度假，官员称",
+   "summary_zh": "据非洲疾控中心负责人向BBC表示，尼日利亚自东非疫情暴发以来首例确诊埃博拉病例为一名驻阿布贾外交官的妻子，她曾前往乌干达首都坎帕拉度假。尼日利亚卫生部长称这名42岁患者病情稳定、正在好转，当局已识别44名接触者并实施隔离，另有46人被禁止登机。关于该患者的国籍与行程，乌干达卫生部与尼日利亚及非洲疾控中心的说法存在矛盾，乌方称其为赴刚果（金）东部出差、仅过境乌干达的尼日利亚公民。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja, Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚确诊该国自东非疫情暴发以来的首例埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria's first confirmed case of Ebola since the outbreak in East Africa began in May"
+    },
+    {
+     "fact": "患者为一名驻阿布贾外交官的妻子，曾赴乌干达首都坎帕拉度假",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "is the wife of a diplomat who travelled to Uganda's capital for a holiday"
+    },
+    {
+     "fact": "当局已识别44名接触者并实施隔离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "had identified 44 people who had been in contact with the woman"
+    },
+    {
+     "fact": "46人被禁止登机，包括44名医院接触者和2名在其家中工作的人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "46 people - 44 who had come into contact with the woman at hospital and two people who worked in her home - had been banned from boarding flights"
+    },
+    {
+     "fact": "患者病情稳定并正在好转",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "\"She's stable, she's improving,\" Muhammad Ali Pate said"
+    },
+    {
+     "fact": "乌干达卫生部与尼日利亚及非洲疾控中心关于患者行程的说法存在矛盾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "There have been conflicting accounts about the patient in Nigeria and her movements"
+    }
+   ],
+   "uncertainties": [
+    "患者国籍与行程说法不一：乌干达卫生部称其为赴刚果（金）东部出差、仅过境乌干达的尼日利亚公民，而尼日利亚卫生部长与非洲疾控中心称其原籍乌干达、赴坎帕拉度假",
+    "患者可能在何处感染病毒尚未确定",
+    "接触者中尚无人出现症状，但埃博拉潜伏期为2至21天，后续情况有待观察",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_10260a9dde2e4fd8",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

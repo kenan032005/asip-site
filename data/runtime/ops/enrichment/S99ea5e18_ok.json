@@ -1,0 +1,138 @@
+{
+ "label": "S99ea5e18",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1beed18875792788649b93b063fde9854027a2823a042b6015328be200917ee7",
+ "tokens": {
+  "input_tokens": 2721,
+  "output_tokens": 642,
+  "total_tokens": 3363
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"无人机来源及袭击具体情形尚未查明\", \"尚无任何方面被正式认定对袭击负责\", \"伤亡数字来自省级当局，目前仅单一来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"无人机来源及袭击具体情形尚未查明\", \"尚无任何方面被正式认定对袭击负责\", \"伤亡数字来自省级当局，目前仅单一来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得瓦迪菲拉地区遭无人机袭击致4人死亡，政府否认军方参与",
+   "summary_zh": "据省级当局称，10月19日（周一）乍得东北部靠近苏丹边境的瓦迪菲拉省巴米纳镇遭无人机袭击，造成4人死亡、14人受伤。瓦迪菲拉省政府代表已赴现场查看损失并慰问遇难者家属，并呼吁尽快展开调查以查明袭击来源。政府发言人加西姆·谢里夫·马哈马特向Tchadinfos坚决否认乍得军队参与此次袭击。目前无人机来源及袭击具体情形尚未查明，尚无任何方面被正式认定对此次袭击负责。",
+   "event_type": "border_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "瓦迪菲拉省",
+    "city": "巴米纳",
+    "site": null,
+    "raw_text": "Bamina, dans la province du Wadi Fira, au nord-est du Tchad, près de la frontière soudanaise"
+   },
+   "key_facts": [
+    {
+     "fact": "10月19日乍得瓦迪菲拉省巴米纳镇遭无人机袭击，造成4人死亡、14人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quatre personnes ont été tuées et 14 autres blessées dans une attaque de drone survenue lundi 19 octobre à Bamina, dans la province du Wadi Fira, au nord-est du Tchad, près de la frontière soudanaise."
+    },
+    {
+     "fact": "巴米纳位于乍得与苏丹边境地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La localité de Bamina se trouve dans une zone frontalière avec le Soudan"
+    },
+    {
+     "fact": "乍得政府发言人否认乍得军队参与此次袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le porte-parole du gouvernement, Gassim Chérif Mahamat, a catégoriquement rejeté les informations attribuant cette attaque à l’armée tchadienne"
+    },
+    {
+     "fact": "无人机来源及袭击具体情形尚未查明，尚无责任方被正式认定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À ce stade, l’origine du drone et les circonstances exactes de l’attaque n’ont pas été établies. Aucun responsable de cette frappe n’a été officiellement identifié."
+    },
+    {
+     "fact": "瓦迪菲拉省政府代表赴现场查看损失并呼吁尽快调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le responsable provincial a également appelé à l’ouverture rapide d’une enquête pour déterminer l’origine de l’attaque."
+    }
+   ],
+   "uncertainties": [
+    "无人机来源及袭击具体情形尚未查明",
+    "尚无任何方面被正式认定对袭击负责",
+    "伤亡数字来自省级当局，目前仅单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得瓦迪菲拉地区遭无人机袭击致4人死亡，政府否认军方参与",
+   "summary_zh": "据省级当局称，10月19日（周一）乍得东北部靠近苏丹边境的瓦迪菲拉省巴米纳镇遭无人机袭击，造成4人死亡、14人受伤。瓦迪菲拉省政府代表已赴现场查看损失并慰问遇难者家属，并呼吁尽快展开调查以查明袭击来源。政府发言人加西姆·谢里夫·马哈马特向Tchadinfos坚决否认乍得军队参与此次袭击。目前无人机来源及袭击具体情形尚未查明，尚无任何方面被正式认定对此次袭击负责。",
+   "event_type": "border_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "瓦迪菲拉省",
+    "city": "巴米纳",
+    "site": null,
+    "raw_text": "Bamina, dans la province du Wadi Fira, au nord-est du Tchad, près de la frontière soudanaise"
+   },
+   "key_facts": [
+    {
+     "fact": "10月19日乍得瓦迪菲拉省巴米纳镇遭无人机袭击，造成4人死亡、14人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quatre personnes ont été tuées et 14 autres blessées dans une attaque de drone survenue lundi 19 octobre à Bamina, dans la province du Wadi Fira, au nord-est du Tchad, près de la frontière soudanaise."
+    },
+    {
+     "fact": "巴米纳位于乍得与苏丹边境地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La localité de Bamina se trouve dans une zone frontalière avec le Soudan"
+    },
+    {
+     "fact": "乍得政府发言人否认乍得军队参与此次袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le porte-parole du gouvernement, Gassim Chérif Mahamat, a catégoriquement rejeté les informations attribuant cette attaque à l’armée tchadienne"
+    },
+    {
+     "fact": "无人机来源及袭击具体情形尚未查明，尚无责任方被正式认定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À ce stade, l’origine du drone et les circonstances exactes de l’attaque n’ont pas été établies. Aucun responsable de cette frappe n’a été officiellement identifié."
+    },
+    {
+     "fact": "瓦迪菲拉省政府代表赴现场查看损失并呼吁尽快调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le responsable provincial a également appelé à l’ouverture rapide d’une enquête pour déterminer l’origine de l’attaque."
+    }
+   ],
+   "uncertainties": [
+    "无人机来源及袭击具体情形尚未查明",
+    "尚无任何方面被正式认定对袭击负责",
+    "伤亡数字来自省级当局，目前仅单一来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_c3c6c8aa99ea5e18",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

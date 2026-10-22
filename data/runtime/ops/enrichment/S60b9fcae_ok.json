@@ -1,0 +1,124 @@
+{
+ "label": "S60b9fcae",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b2d7fc821517e02eaec3e834617ec3971b0a705ec2f9f98a2f9b12d79d65fd4a",
+ "tokens": {
+  "input_tokens": 2203,
+  "output_tokens": 387,
+  "total_tokens": 2590
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\"]",
+    "after": "[\"目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "after": "[\"目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"相关情况尚未证实。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "Hitz Praise Zone获2026年Praise Achievement Awards提名",
+   "summary_zh": "加纳广播节目Hitz Praise Zone获得2026年Praise Achievement Awards提名，该奖项类别共10个提名名额，旨在表彰对加纳基督教广播有贡献的电台节目。其他提名者来自Spice FM、Sunny FM、Energy Radio、No. 1 FM、Sweet Melodies、Starr FM、Zed FM和Kristocentric等电台。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "Hitz Praise Zone获得2026年Praise Achievement Awards提名",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Hitz Praise Zone earns nomination at 2026 Praise Achievement Awards"
+    },
+    {
+     "fact": "该奖项类别共有10个提名名额，旨在表彰对加纳基督教广播有贡献的电台节目",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The programme is among 10 nominees in the category, which recognises radio shows that contribute to Christian broadcasting in Ghana."
+    },
+    {
+     "fact": "其他提名者来自Spice FM、Sunny FM、Energy Radio、No. 1 FM、Sweet Melodies、Starr FM、Zed FM和Kristocentric等电台",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Other nominees represent stations including Spice FM, Sunny FM, Energy Radio, No. 1 FM, Sweet Melodies, Starr FM, Zed FM and Kristocentric."
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "Hitz Praise Zone获2026年Praise Achievement Awards提名",
+   "summary_zh": "加纳广播节目Hitz Praise Zone获得2026年Praise Achievement Awards提名，该奖项类别共10个提名名额，旨在表彰对加纳基督教广播有贡献的电台节目。其他提名者来自Spice FM、Sunny FM、Energy Radio、No. 1 FM、Sweet Melodies、Starr FM、Zed FM和Kristocentric等电台。该消息目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "Hitz Praise Zone获得2026年Praise Achievement Awards提名",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Hitz Praise Zone earns nomination at 2026 Praise Achievement Awards"
+    },
+    {
+     "fact": "该奖项类别共有10个提名名额，旨在表彰对加纳基督教广播有贡献的电台节目",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The programme is among 10 nominees in the category, which recognises radio shows that contribute to Christian broadcasting in Ghana."
+    },
+    {
+     "fact": "其他提名者来自Spice FM、Sunny FM、Energy Radio、No. 1 FM、Sweet Melodies、Starr FM、Zed FM和Kristocentric等电台",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Other nominees represent stations including Spice FM, Sunny FM, Energy Radio, No. 1 FM, Sweet Melodies, Starr FM, Zed FM and Kristocentric."
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "相关情况尚未证实。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_b78bfaac60b9fcae",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

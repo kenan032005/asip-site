@@ -1,0 +1,121 @@
+{
+ "label": "Sdfd4e185",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a9a6957235b060092a438249412760eff48e4321723479cb3a1240bed4644c00",
+ "tokens": {
+  "input_tokens": 2720,
+  "output_tokens": 481,
+  "total_tokens": 3201
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据O Pais报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "赞比西亚省希望将文化认同转化为发展动力",
+   "summary_zh": "莫桑比克赞比西亚省的艺术与文化界人士呼吁在《2027-2036年文化战略计划》中更加重视该省的文化认同表达。为期两天的全国意见征询旨在为未来十年指导文化政策的文件收集建议。与会者希望将赞比西亚的文化从单纯的身份表达转变为促进旅游、创造经济机会和推动文化产业发展的动力。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "赞比西亚省",
+    "city": null,
+    "site": null,
+    "raw_text": "Zambézia"
+   },
+   "key_facts": [
+    {
+     "fact": "赞比西亚省艺术与文化界人士呼吁在2027-2036年文化战略计划中重视该省文化认同",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Os fazedores das artes e cultura na Zambézia defendem maior valorização das manifestações identitárias da província no Plano Estratégico da Cultura 2027–2036"
+    },
+    {
+     "fact": "为期两天的全国意见征询旨在为未来十年文化政策文件收集建议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A auscultação nacional, que decorre durante dois dias, procura recolher contribuições para um documento que deverá orientar as políticas culturais na próxima década"
+    },
+    {
+     "fact": "赞比西亚省长Pio Matos称与会者应作为重要参与者贡献建议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Não estamos nesta reunião como meros ouvintes, mas como actores importantes que possam contribuir para construção de um instrumento que possa nortear o sector da cultura"
+    },
+    {
+     "fact": "提议将mucapata和galinha à zambeziana等传统美食纳入文化战略",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Entre as propostas que se pretende ver reflectidas no Plano Estratégico da Cultura está a valorização da gastronomia zambeziana, com destaque para a mucapata e a galinha à zambeziana"
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "赞比西亚省希望将文化认同转化为发展动力",
+   "summary_zh": "莫桑比克赞比西亚省的艺术与文化界人士呼吁在《2027-2036年文化战略计划》中更加重视该省的文化认同表达。为期两天的全国意见征询旨在为未来十年指导文化政策的文件收集建议。与会者希望将赞比西亚的文化从单纯的身份表达转变为促进旅游、创造经济机会和推动文化产业发展的动力。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "赞比西亚省",
+    "city": null,
+    "site": null,
+    "raw_text": "Zambézia"
+   },
+   "key_facts": [
+    {
+     "fact": "赞比西亚省艺术与文化界人士呼吁在2027-2036年文化战略计划中重视该省文化认同",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Os fazedores das artes e cultura na Zambézia defendem maior valorização das manifestações identitárias da província no Plano Estratégico da Cultura 2027–2036"
+    },
+    {
+     "fact": "为期两天的全国意见征询旨在为未来十年文化政策文件收集建议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A auscultação nacional, que decorre durante dois dias, procura recolher contribuições para um documento que deverá orientar as políticas culturais na próxima década"
+    },
+    {
+     "fact": "赞比西亚省长Pio Matos称与会者应作为重要参与者贡献建议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Não estamos nesta reunião como meros ouvintes, mas como actores importantes que possam contribuir para construção de um instrumento que possa nortear o sector da cultura"
+    },
+    {
+     "fact": "提议将mucapata和galinha à zambeziana等传统美食纳入文化战略",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Entre as propostas que se pretende ver reflectidas no Plano Estratégico da Cultura está a valorização da gastronomia zambeziana, com destaque para a mucapata e a galinha à zambeziana"
+    }
+   ],
+   "uncertainties": [
+    "据O Pais报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_2027593cdfd4e185",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

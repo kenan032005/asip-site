@@ -1,0 +1,126 @@
+{
+ "label": "Sf1812be0",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f5b4accf6b6c3ea2601bc6d6610fd9fea21c4a34edd341e20248f63c21632415",
+ "tokens": {
+  "input_tokens": 2200,
+  "output_tokens": 343,
+  "total_tokens": 2543
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"目前仅单一来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"塞地连续数周升值的具体幅度与时间范围未在原文中说明\"]",
+    "after": "[\"目前仅单一来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"塞地连续数周升值的具体幅度与时间范围未在原文中说明\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅单一来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"塞地连续数周升值的具体幅度与时间范围未在原文中说明\", \"相关情况尚未证实。\"]",
+    "after": "[\"目前仅单一来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"塞地连续数周升值的具体幅度与时间范围未在原文中说明\", \"相关情况尚未证实。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳黄金局称出售1.3亿美元外汇，塞地连续数周升值",
+   "summary_zh": "加纳黄金局（GoldBod）称，以每美元11.60塞地的价格出售了1.3亿美元即期外汇，以此支撑塞地并增强外汇市场稳定。该消息由单一来源MyJoyOnline报道，尚未获得其他来源交叉验证。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳黄金局称以每美元11.60塞地的价格出售1.3亿美元即期外汇",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Ghana Gold Board (GoldBod) has cited a US$130 million spot foreign exchange sale at GH¢11.60 per dollar"
+    },
+    {
+     "fact": "此举旨在支撑塞地并增强外汇市场稳定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "as part of efforts to support the cedi and strengthen stability on the foreign exchange market"
+    },
+    {
+     "fact": "塞地据报连续数周升值",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "GoldBod cites US$130m FX sale as cedi records weeks of appreciation"
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "塞地连续数周升值的具体幅度与时间范围未在原文中说明"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳黄金局称出售1.3亿美元外汇，塞地连续数周升值",
+   "summary_zh": "加纳黄金局（GoldBod）称，以每美元11.60塞地的价格出售了1.3亿美元即期外汇，以此支撑塞地并增强外汇市场稳定。该消息由单一来源MyJoyOnline报道，尚未获得其他来源交叉验证。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳黄金局称以每美元11.60塞地的价格出售1.3亿美元即期外汇",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Ghana Gold Board (GoldBod) has cited a US$130 million spot foreign exchange sale at GH¢11.60 per dollar"
+    },
+    {
+     "fact": "此举旨在支撑塞地并增强外汇市场稳定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "as part of efforts to support the cedi and strengthen stability on the foreign exchange market"
+    },
+    {
+     "fact": "塞地据报连续数周升值",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "GoldBod cites US$130m FX sale as cedi records weeks of appreciation"
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "塞地连续数周升值的具体幅度与时间范围未在原文中说明",
+    "相关情况尚未证实。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_9881f787f1812be0",
+ "disease_event_id": null,
+ "country_code": "GH"
+}

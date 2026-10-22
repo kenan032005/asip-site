@@ -1,0 +1,126 @@
+{
+ "label": "S8eddf971",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6cb89d3df360a43f33e9b152240b88fda575a5b70b53adaff628dc16907c4434",
+ "tokens": {
+  "input_tokens": 2452,
+  "output_tokens": 571,
+  "total_tokens": 3023
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"伏击实施者身份尚未确定，有待调查\", \"停火能否维持存在不确定性，有代表称停火“脆弱”\"]",
+    "after": "[\"伏击实施者身份尚未确定，有待调查\", \"停火能否维持存在不确定性，有代表称停火“脆弱”\", \"据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹各方在CTSAMVM会议上要求调查维和人员遇害事件",
+   "summary_zh": "南苏丹停火与过渡安全安排监测核查机制（CTSAMVM）董事会各方高级代表敦促该机制及看守政府调查8月琼格莱州造成两名埃塞俄比亚维和人员死亡的伏击事件，并将责任人绳之以法。此次伏击发生在琼格莱州帕朱特附近，除两名维和人员死亡外，另有七人受伤，包括三名维和人员、两名南苏丹国家警察局警员和两名文职人员。各方代表还就安全局势、脆弱的停火以及2026年12月22日选举筹备工作表达关切。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "琼格莱州",
+    "city": null,
+    "site": "帕朱特附近",
+    "raw_text": "near Pajut in Jonglei State"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹各方代表要求调查8月琼格莱州伏击维和人员事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Senior party representatives on the board of the Ceasefire and Transitional Security Arrangements Monitoring and Verification Mechanism (CTSAMVM) have urged the Mechanism and the caretaker government to investigate an ambush that killed two Ethiopian peacekeepers in Jonglei State in August"
+    },
+    {
+     "fact": "伏击造成两名埃塞俄比亚维和人员死亡、七人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The attack near Pajut in Jonglei State left two Ethiopian peacekeepers dead and seven other people wounded, including three peacekeepers, two South Sudan National Police Service officers and two civilian staff."
+    },
+    {
+     "fact": "CTSAMVM会议在朱巴举行，各方还就停火与选举筹备表达关切",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The calls were made during Thursday’s meeting of CTSAMVM in Juba, where representatives also raised concerns about insecurity, the fragile ceasefire and preparations for the 22 December 2026 elections."
+    },
+    {
+     "fact": "CTSAMVM主席提到中赤道州、蒙德里-朱巴公路沿线及湖泊州和瓦拉普州发生暴力事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He cited clashes in Central Equatoria, attacks along the Mundri–Juba Highway and intercommunal violence in Lakes and Warrap states."
+    }
+   ],
+   "uncertainties": [
+    "伏击实施者身份尚未确定，有待调查",
+    "停火能否维持存在不确定性，有代表称停火“脆弱”"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹各方在CTSAMVM会议上要求调查维和人员遇害事件",
+   "summary_zh": "南苏丹停火与过渡安全安排监测核查机制（CTSAMVM）董事会各方高级代表敦促该机制及看守政府调查8月琼格莱州造成两名埃塞俄比亚维和人员死亡的伏击事件，并将责任人绳之以法。此次伏击发生在琼格莱州帕朱特附近，除两名维和人员死亡外，另有七人受伤，包括三名维和人员、两名南苏丹国家警察局警员和两名文职人员。各方代表还就安全局势、脆弱的停火以及2026年12月22日选举筹备工作表达关切。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "琼格莱州",
+    "city": null,
+    "site": "帕朱特附近",
+    "raw_text": "near Pajut in Jonglei State"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹各方代表要求调查8月琼格莱州伏击维和人员事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Senior party representatives on the board of the Ceasefire and Transitional Security Arrangements Monitoring and Verification Mechanism (CTSAMVM) have urged the Mechanism and the caretaker government to investigate an ambush that killed two Ethiopian peacekeepers in Jonglei State in August"
+    },
+    {
+     "fact": "伏击造成两名埃塞俄比亚维和人员死亡、七人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The attack near Pajut in Jonglei State left two Ethiopian peacekeepers dead and seven other people wounded, including three peacekeepers, two South Sudan National Police Service officers and two civilian staff."
+    },
+    {
+     "fact": "CTSAMVM会议在朱巴举行，各方还就停火与选举筹备表达关切",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The calls were made during Thursday’s meeting of CTSAMVM in Juba, where representatives also raised concerns about insecurity, the fragile ceasefire and preparations for the 22 December 2026 elections."
+    },
+    {
+     "fact": "CTSAMVM主席提到中赤道州、蒙德里-朱巴公路沿线及湖泊州和瓦拉普州发生暴力事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He cited clashes in Central Equatoria, attacks along the Mundri–Juba Highway and intercommunal violence in Lakes and Warrap states."
+    }
+   ],
+   "uncertainties": [
+    "伏击实施者身份尚未确定，有待调查",
+    "停火能否维持存在不确定性，有代表称停火“脆弱”",
+    "据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_e3c8f0d08eddf971",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

@@ -1,0 +1,126 @@
+{
+ "label": "Sc621dfca",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "46a2f0ef174ac4b8b532ab43993faa1f55b91264b4437e0dca44e472c3bd9475",
+ "tokens": {
+  "input_tokens": 2495,
+  "output_tokens": 459,
+  "total_tokens": 2954
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"死亡具体过程（是否在岸上死亡）为同伴推测，尚未获官方确认\", \"目前仅单一来源（BBC）报道，尚缺乏交叉验证\"]",
+    "after": "[\"死亡具体过程（是否在岸上死亡）为同伴推测，尚未获官方确认\", \"目前仅单一来源（BBC）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南非东海岸发生鲨鱼袭击事件，65岁游泳者身亡",
+   "summary_zh": "南非东海岸KuGompo City（原东伦敦）一处海滩发生鲨鱼袭击，65岁的Janine Lochrenberg在晨泳时被咬伤身亡。目击者称她大腿和上臂两处被咬，被同伴救上岸前已死亡。当局已关闭事发海滩及附近另一处海滩。这是南非今年首起有记录的鲨鱼致死事件。",
+   "event_type": "other_security",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": null,
+    "city": "KuGompo City（原东伦敦）",
+    "site": "Orient Beach",
+    "raw_text": "Orient Beach, KuGompo City (formerly East London), South Africa's east coast"
+   },
+   "key_facts": [
+    {
+     "fact": "65岁女子Janine Lochrenberg在南非东海岸KuGompo City一处海滩晨泳时遭鲨鱼袭击身亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Janine Lochrenberg was swimming off a beach in KuGompo City (formerly East London) on Tuesday morning when she was attacked."
+    },
+    {
+     "fact": "目击者称她大腿和上臂两处被咬，被同伴带上岸前已死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Witnesses said the 65-year-old was bitten in two places and died before she was brought to shore."
+    },
+    {
+     "fact": "当局已关闭事发海滩Orient Beach及附近另一处海滩",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Orient Beach, where the attack took place, has been closed alongside another nearby beach, authorities confirmed."
+    },
+    {
+     "fact": "这是南非今年首起有记录的鲨鱼致死事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "in what is the first recorded such fatality this year"
+    }
+   ],
+   "uncertainties": [
+    "死亡具体过程（是否在岸上死亡）为同伴推测，尚未获官方确认",
+    "目前仅单一来源（BBC）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南非东海岸发生鲨鱼袭击事件，65岁游泳者身亡",
+   "summary_zh": "南非东海岸KuGompo City（原东伦敦）一处海滩发生鲨鱼袭击，65岁的Janine Lochrenberg在晨泳时被咬伤身亡。目击者称她大腿和上臂两处被咬，被同伴救上岸前已死亡。当局已关闭事发海滩及附近另一处海滩。这是南非今年首起有记录的鲨鱼致死事件。",
+   "event_type": "other_security",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": null,
+    "city": "KuGompo City（原东伦敦）",
+    "site": "Orient Beach",
+    "raw_text": "Orient Beach, KuGompo City (formerly East London), South Africa's east coast"
+   },
+   "key_facts": [
+    {
+     "fact": "65岁女子Janine Lochrenberg在南非东海岸KuGompo City一处海滩晨泳时遭鲨鱼袭击身亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Janine Lochrenberg was swimming off a beach in KuGompo City (formerly East London) on Tuesday morning when she was attacked."
+    },
+    {
+     "fact": "目击者称她大腿和上臂两处被咬，被同伴带上岸前已死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Witnesses said the 65-year-old was bitten in two places and died before she was brought to shore."
+    },
+    {
+     "fact": "当局已关闭事发海滩Orient Beach及附近另一处海滩",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Orient Beach, where the attack took place, has been closed alongside another nearby beach, authorities confirmed."
+    },
+    {
+     "fact": "这是南非今年首起有记录的鲨鱼致死事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "in what is the first recorded such fatality this year"
+    }
+   ],
+   "uncertainties": [
+    "死亡具体过程（是否在岸上死亡）为同伴推测，尚未获官方确认",
+    "目前仅单一来源（BBC）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_a9c90112c621dfca",
+ "disease_event_id": null,
+ "country_code": "ZA"
+}

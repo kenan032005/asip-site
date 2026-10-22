@@ -1,0 +1,107 @@
+{
+ "label": "S4ca16bf9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a2493e274e5c867763bcce4b81373394a778ff6202b922d1082cabe6fbb2b391",
+ "tokens": {
+  "input_tokens": 2194,
+  "output_tokens": 337,
+  "total_tokens": 2531
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "拉帕兹司机因涉嫌出售70片疑似未注册药片被还押",
+   "summary_zh": "阿克拉巡回法院将一名38岁司机还押警方羁押，其被指涉嫌出售70片疑似未注册的Royal Tapentadol 250毫克药片。该指控尚未经法院证实，目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "大阿克拉地区",
+    "city": "阿克拉",
+    "site": "阿克拉巡回法院",
+    "raw_text": "Accra Circuit Court; Lapaz"
+   },
+   "key_facts": [
+    {
+     "fact": "阿克拉巡回法院将一名38岁司机还押警方羁押",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "An Accra Circuit Court has remanded a 38-year-old driver into police custody"
+    },
+    {
+     "fact": "该司机被指涉嫌出售70片疑似未注册的Royal Tapentadol 250毫克药片",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "for allegedly offering 70 tablets of suspected unregistered Royal Tapentadol 250 mg for sale"
+    },
+    {
+     "fact": "涉事司机来自拉帕兹",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Lapaz driver remanded over alleged sale of 70 suspected unregistered drug tablets"
+    }
+   ],
+   "uncertainties": [
+    "药片是否确属未注册尚未证实",
+    "出售指控尚未经法院审理确认",
+    "目前仅有一个来源报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "拉帕兹司机因涉嫌出售70片疑似未注册药片被还押",
+   "summary_zh": "阿克拉巡回法院将一名38岁司机还押警方羁押，其被指涉嫌出售70片疑似未注册的Royal Tapentadol 250毫克药片。该指控尚未经法院证实，目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "大阿克拉地区",
+    "city": "阿克拉",
+    "site": "阿克拉巡回法院",
+    "raw_text": "Accra Circuit Court; Lapaz"
+   },
+   "key_facts": [
+    {
+     "fact": "阿克拉巡回法院将一名38岁司机还押警方羁押",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "An Accra Circuit Court has remanded a 38-year-old driver into police custody"
+    },
+    {
+     "fact": "该司机被指涉嫌出售70片疑似未注册的Royal Tapentadol 250毫克药片",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "for allegedly offering 70 tablets of suspected unregistered Royal Tapentadol 250 mg for sale"
+    },
+    {
+     "fact": "涉事司机来自拉帕兹",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Lapaz driver remanded over alleged sale of 70 suspected unregistered drug tablets"
+    }
+   ],
+   "uncertainties": [
+    "药片是否确属未注册尚未证实",
+    "出售指控尚未经法院审理确认",
+    "目前仅有一个来源报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_b2700be54ca16bf9",
+ "disease_event_id": null,
+ "country_code": "GH"
+}
