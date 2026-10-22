@@ -1,0 +1,138 @@
+{
+ "label": "S12db7edb",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "2498f8e3c7a9b8cb5880215b045d47bb64ca310c9e07c2833e8f6e725f770da7",
+ "tokens": {
+  "input_tokens": 2909,
+  "output_tokens": 612,
+  "total_tokens": 3521
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"贝宁境内是否出现病例尚未证实，官方称截至10月20日无病例\", \"尼日利亚疫情后续扩散情况尚不明确\", \"目前仅一个来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"贝宁境内是否出现病例尚未证实，官方称截至10月20日无病例\", \"尼日利亚疫情后续扩散情况尚不明确\", \"目前仅一个来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚出现埃博拉病例，贝宁启动预警戒阶段",
+   "summary_zh": "贝宁卫生当局宣布全国进入预警戒阶段，并在各入境口岸加强监测措施。此举是在尼日利亚确认一例埃博拉病毒感染病例后采取的。据贝宁卫生部10月20日发布的新闻公报，截至该日期贝宁境内尚未记录任何病例。尼日利亚阿布贾的确诊病例为一名来自乌干达的旅行者，感染的是本迪布焦型毒株，已有44名接触者接受追踪观察。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "科托努",
+    "site": "科托努国际机场",
+    "raw_text": "aéroport international Cardinal Bernardin Gantin de Cotonou"
+   },
+   "key_facts": [
+    {
+     "fact": "贝宁卫生当局将全国置于预警戒阶段并加强入境口岸监测",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les autorités sanitaires béninoises ont placé le pays en phase de préalerte et ont renforcé les mesures de surveillance aux points d’entrée."
+    },
+    {
+     "fact": "该措施是在尼日利亚确认一例埃博拉病例后采取的",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La mesure est intervenue après la confirmation d’un cas du virus Ebola au Nigéria."
+    },
+    {
+     "fact": "据贝宁卫生部公报，截至该日期贝宁境内未记录任何病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucun cas n’a été enregistré au Bénin à cette date , selon un communiqué de presse du ministère de la Santé publié le 20 octobre."
+    },
+    {
+     "fact": "尼日利亚阿布贾确诊病例为一名来自乌干达的旅行者，感染本迪布焦型毒株，44名接触者接受追踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le cas confirmé à Abuja concerne une voyageuse en provenance d’Ouganda, infectée par la souche Bundibugyo. Quarante-quatre contacts font l’objet d’un suivi au Nigeria."
+    },
+    {
+     "fact": "贝宁卫生部长视察科托努国际机场，评估快速检测能力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’autorité ministérielle en charge de la Santé a effectué ce mercredi 21 octobre un déplacement à l’aéroport international Cardinal Bernardin Gantin de Cotonou."
+    }
+   ],
+   "uncertainties": [
+    "贝宁境内是否出现病例尚未证实，官方称截至10月20日无病例",
+    "尼日利亚疫情后续扩散情况尚不明确",
+    "目前仅一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚出现埃博拉病例，贝宁启动预警戒阶段",
+   "summary_zh": "贝宁卫生当局宣布全国进入预警戒阶段，并在各入境口岸加强监测措施。此举是在尼日利亚确认一例埃博拉病毒感染病例后采取的。据贝宁卫生部10月20日发布的新闻公报，截至该日期贝宁境内尚未记录任何病例。尼日利亚阿布贾的确诊病例为一名来自乌干达的旅行者，感染的是本迪布焦型毒株，已有44名接触者接受追踪观察。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "科托努",
+    "site": "科托努国际机场",
+    "raw_text": "aéroport international Cardinal Bernardin Gantin de Cotonou"
+   },
+   "key_facts": [
+    {
+     "fact": "贝宁卫生当局将全国置于预警戒阶段并加强入境口岸监测",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les autorités sanitaires béninoises ont placé le pays en phase de préalerte et ont renforcé les mesures de surveillance aux points d’entrée."
+    },
+    {
+     "fact": "该措施是在尼日利亚确认一例埃博拉病例后采取的",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La mesure est intervenue après la confirmation d’un cas du virus Ebola au Nigéria."
+    },
+    {
+     "fact": "据贝宁卫生部公报，截至该日期贝宁境内未记录任何病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucun cas n’a été enregistré au Bénin à cette date , selon un communiqué de presse du ministère de la Santé publié le 20 octobre."
+    },
+    {
+     "fact": "尼日利亚阿布贾确诊病例为一名来自乌干达的旅行者，感染本迪布焦型毒株，44名接触者接受追踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le cas confirmé à Abuja concerne une voyageuse en provenance d’Ouganda, infectée par la souche Bundibugyo. Quarante-quatre contacts font l’objet d’un suivi au Nigeria."
+    },
+    {
+     "fact": "贝宁卫生部长视察科托努国际机场，评估快速检测能力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’autorité ministérielle en charge de la Santé a effectué ce mercredi 21 octobre un déplacement à l’aéroport international Cardinal Bernardin Gantin de Cotonou."
+    }
+   ],
+   "uncertainties": [
+    "贝宁境内是否出现病例尚未证实，官方称截至10月20日无病例",
+    "尼日利亚疫情后续扩散情况尚不明确",
+    "目前仅一个来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_2ce29d0b12db7edb",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

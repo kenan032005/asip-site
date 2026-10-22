@@ -1,0 +1,152 @@
+{
+ "label": "S60327f51",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "535a22c11d136eda31b4dcf3164e6d7ce04b1d2011c8b3571ae9c95d57d17f59",
+ "tokens": {
+  "input_tokens": 2927,
+  "output_tokens": 654,
+  "total_tokens": 3581
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"患者感染病毒的地点尚未确定\", \"世卫组织、非洲疾控中心与乌干达当局对患者行程的说法存在冲突\", \"基因分析结果尚未公布\", \"乌干达当局未回应置评请求\", \"单一来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"患者感染病毒的地点尚未确定\", \"世卫组织、非洲疾控中心与乌干达当局对患者行程的说法存在冲突\", \"基因分析结果尚未公布\", \"乌干达当局未回应置评请求\", \"单一来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚埃博拉病例：经乌干达的患者行程存在疑点",
+   "summary_zh": "尼日利亚阿布贾确诊一例本迪布焦型埃博拉病例，但该患者如何感染病毒仍不清楚。世界卫生组织与非洲疾控中心提供的信息同乌干达当局的说法存在差异：乌干达称患者曾前往刚果（金）东部，而非洲疾控中心和世卫组织表示，目前没有信息显示她曾到访刚果（金）。基因分析正在进行，以确定该病例是否与区域疫情相关。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja, Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚阿布贾确诊一例本迪布焦型埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la patiente diagnostiquée au Nigeria comme atteinte d'Ebola de souche Bundibugyo"
+    },
+    {
+     "fact": "乌干达卫生部称患者曾赴刚果（金）东部出差，后于10月初过境乌干达",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le ministère ougandais de la Santé indique que la patiente diagnostiquée au Nigeria avait effectué un voyage d'affaires dans l'est de la République démocratique du Congo (RDC) avant de transiter par l'Ouganda début octobre"
+    },
+    {
+     "fact": "非洲疾控中心负责人称患者从未前往刚果（金），而是在坎帕拉停留两周",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Jean Kaseya, directeur général de l'Africa CDC, donne une autre version dans un entretien à RFI : la patiente ne serait jamais allée en RDC"
+    },
+    {
+     "fact": "世卫组织表示，目前没有信息显示患者曾到访刚果（金）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il n'y a pas eu de visite en RDC, pour ce que nous savons actuellement"
+    },
+    {
+     "fact": "患者于10月3日乘机抵达尼日利亚，10月7日出现首批症状",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la patiente a séjourné plus d'une semaine en Ouganda avant de prendre l'avion pour le Nigeria le 3 octobre. Les premiers symptômes sont apparus le 7 octobre"
+    },
+    {
+     "fact": "基因分析正在进行，以确定感染源",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des analyses génétiques sont en cours pour comparer le virus de la patiente à ceux identifiés dans la région"
+    }
+   ],
+   "uncertainties": [
+    "患者感染病毒的地点尚未确定",
+    "世卫组织、非洲疾控中心与乌干达当局对患者行程的说法存在冲突",
+    "基因分析结果尚未公布",
+    "乌干达当局未回应置评请求",
+    "单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚埃博拉病例：经乌干达的患者行程存在疑点",
+   "summary_zh": "尼日利亚阿布贾确诊一例本迪布焦型埃博拉病例，但该患者如何感染病毒仍不清楚。世界卫生组织与非洲疾控中心提供的信息同乌干达当局的说法存在差异：乌干达称患者曾前往刚果（金）东部，而非洲疾控中心和世卫组织表示，目前没有信息显示她曾到访刚果（金）。基因分析正在进行，以确定该病例是否与区域疫情相关。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja, Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚阿布贾确诊一例本迪布焦型埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la patiente diagnostiquée au Nigeria comme atteinte d'Ebola de souche Bundibugyo"
+    },
+    {
+     "fact": "乌干达卫生部称患者曾赴刚果（金）东部出差，后于10月初过境乌干达",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le ministère ougandais de la Santé indique que la patiente diagnostiquée au Nigeria avait effectué un voyage d'affaires dans l'est de la République démocratique du Congo (RDC) avant de transiter par l'Ouganda début octobre"
+    },
+    {
+     "fact": "非洲疾控中心负责人称患者从未前往刚果（金），而是在坎帕拉停留两周",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Jean Kaseya, directeur général de l'Africa CDC, donne une autre version dans un entretien à RFI : la patiente ne serait jamais allée en RDC"
+    },
+    {
+     "fact": "世卫组织表示，目前没有信息显示患者曾到访刚果（金）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il n'y a pas eu de visite en RDC, pour ce que nous savons actuellement"
+    },
+    {
+     "fact": "患者于10月3日乘机抵达尼日利亚，10月7日出现首批症状",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la patiente a séjourné plus d'une semaine en Ouganda avant de prendre l'avion pour le Nigeria le 3 octobre. Les premiers symptômes sont apparus le 7 octobre"
+    },
+    {
+     "fact": "基因分析正在进行，以确定感染源",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des analyses génétiques sont en cours pour comparer le virus de la patiente à ceux identifiés dans la région"
+    }
+   ],
+   "uncertainties": [
+    "患者感染病毒的地点尚未确定",
+    "世卫组织、非洲疾控中心与乌干达当局对患者行程的说法存在冲突",
+    "基因分析结果尚未公布",
+    "乌干达当局未回应置评请求",
+    "单一来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_df23fb6360327f51",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

@@ -1,0 +1,117 @@
+{
+ "label": "S13b09d62",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ca0a9fb94445b530e2c0c1141d3102fe3e50b6bf179770d5ed405c715a2bc9d1",
+ "tokens": {
+  "input_tokens": 2618,
+  "output_tokens": 593,
+  "total_tokens": 3211
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "喀麦隆最高法院决定将埃德加·阿兰·梅贝·恩戈案撤出排期重新审查",
+   "summary_zh": "喀麦隆最高法院法官合议庭决定将前国防部长埃德加·阿兰·梅贝·恩戈的案件撤出排期并重新审查。该案原定于10月21日开庭审理其针对2023年因挪用公款被判处30年监禁提出的上诉。据多个来源称，法官作出这一决定是因为诉讼程序中的某些问题仍存疑问，尤其是检察院关于各被告在案发时所扮演角色及相互关系的结论。这一决定引发了对法官独立性和程序透明度的质疑。",
+   "event_type": "other_security",
+   "country_iso3": "CMR",
+   "location": {
+    "country_iso3": "CMR",
+    "admin1": null,
+    "city": "雅温得",
+    "site": "最高法院",
+    "raw_text": "La Cour suprême du Cameroun, à Yaoundé"
+   },
+   "key_facts": [
+    {
+     "fact": "喀麦隆最高法院决定将前国防部长埃德加·阿兰·梅贝·恩戈的案件撤出排期重新审查",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Cameroun: la Cour suprême décide de déprogrammer l'affaire Edgar Alain Mebe Ngo'o pour réexamen"
+    },
+    {
+     "fact": "该案原定于10月21日开庭审理其针对2023年因挪用公款被判处30年监禁提出的上诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'ancien ministre de la Défense Edgar Alain Mebe Ngo'o ... devait comparaître, mercredi 21 octobre, devant la Cour suprême dans le cadre de son pourvoi en cassation contre sa condamnation, en 2023, à 30 ans de prison pour détournement de fonds"
+    },
+    {
+     "fact": "据多个来源称，法官因诉讼程序中的某些问题仍存疑问而作出该决定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon plusieurs sources, les juges auraient fait ce choix en raison des interrogations toujours suscitées par certains points de la procédure en question"
+    },
+    {
+     "fact": "该决定引发了对法官独立性和程序透明度的质疑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cette déprogrammation interroge, posant notamment la question de l'indépendance des magistrats et de la transparence de la procédure"
+    }
+   ],
+   "uncertainties": [
+    "法官作出撤出排期决定的具体原因尚未获官方确认，报道仅称据多个来源",
+    "案件最终结果对被告而言仍悬而未决",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "喀麦隆最高法院决定将埃德加·阿兰·梅贝·恩戈案撤出排期重新审查",
+   "summary_zh": "喀麦隆最高法院法官合议庭决定将前国防部长埃德加·阿兰·梅贝·恩戈的案件撤出排期并重新审查。该案原定于10月21日开庭审理其针对2023年因挪用公款被判处30年监禁提出的上诉。据多个来源称，法官作出这一决定是因为诉讼程序中的某些问题仍存疑问，尤其是检察院关于各被告在案发时所扮演角色及相互关系的结论。这一决定引发了对法官独立性和程序透明度的质疑。",
+   "event_type": "other_security",
+   "country_iso3": "CMR",
+   "location": {
+    "country_iso3": "CMR",
+    "admin1": null,
+    "city": "雅温得",
+    "site": "最高法院",
+    "raw_text": "La Cour suprême du Cameroun, à Yaoundé"
+   },
+   "key_facts": [
+    {
+     "fact": "喀麦隆最高法院决定将前国防部长埃德加·阿兰·梅贝·恩戈的案件撤出排期重新审查",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Cameroun: la Cour suprême décide de déprogrammer l'affaire Edgar Alain Mebe Ngo'o pour réexamen"
+    },
+    {
+     "fact": "该案原定于10月21日开庭审理其针对2023年因挪用公款被判处30年监禁提出的上诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'ancien ministre de la Défense Edgar Alain Mebe Ngo'o ... devait comparaître, mercredi 21 octobre, devant la Cour suprême dans le cadre de son pourvoi en cassation contre sa condamnation, en 2023, à 30 ans de prison pour détournement de fonds"
+    },
+    {
+     "fact": "据多个来源称，法官因诉讼程序中的某些问题仍存疑问而作出该决定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon plusieurs sources, les juges auraient fait ce choix en raison des interrogations toujours suscitées par certains points de la procédure en question"
+    },
+    {
+     "fact": "该决定引发了对法官独立性和程序透明度的质疑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cette déprogrammation interroge, posant notamment la question de l'indépendance des magistrats et de la transparence de la procédure"
+    }
+   ],
+   "uncertainties": [
+    "法官作出撤出排期决定的具体原因尚未获官方确认，报道仅称据多个来源",
+    "案件最终结果对被告而言仍悬而未决",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_0c2f24d313b09d62",
+ "disease_event_id": null,
+ "country_code": "CM"
+}
