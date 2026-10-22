@@ -1,0 +1,115 @@
+{
+ "label": "Saf14b45e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "2789761a0aa65b244bcf277252b37532a073ce92709c249eeed0305bac1ed3d3",
+ "tokens": {
+  "input_tokens": 2342,
+  "output_tokens": 544,
+  "total_tokens": 2886
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "约贝州法院判处一名男子死刑，其罪名是杀害妻子",
+   "summary_zh": "尼日利亚约贝州高等法院在达马图鲁判处45岁男子阿布巴卡尔·穆萨死刑，罪名是杀害其42岁的妻子阿米·阿达穆·马曼。穆萨此前辩称无罪，声称有其他人闯入其住所行凶，但法院认定检方已排除合理怀疑地证明其有罪。法官告知其可在30天内上诉。该报道目前为单一来源。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "约贝州",
+    "city": "达马图鲁",
+    "site": "约贝州高等法院",
+    "raw_text": "Yobe State High Court sitting in Damaturu"
+   },
+   "key_facts": [
+    {
+     "fact": "约贝州高等法院在达马图鲁判处45岁男子阿布巴卡尔·穆萨死刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A Yobe State High Court sitting in Damaturu on Thursday sentenced a 45-year-old man, Abubakar Musa, popularly known as Daddy, to death by hanging for the killing of his wife, Ammi Adamu Mamman."
+    },
+    {
+     "fact": "穆萨被控对其42岁妻子犯有杀人罪，2024年1月4日被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Musa was arrested by operatives of the Yobe State Police Command on January 4, 2024, following the death of his 42-year-old wife at their residence in New Bra-Bra Housing Estate, Damaturu. He was subsequently charged with culpable homicide."
+    },
+    {
+     "fact": "穆萨在庭审中辩称无罪，声称有其他人闯入其住所杀害其妻子",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Musa pleaded not guilty to the charge, maintaining through his lawyers that other persons had broken into their home and killed his wife."
+    },
+    {
+     "fact": "法官认定检方已排除合理怀疑地证明其有罪，并告知其可在30天内上诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Justice Kaigama found Musa guilty of culpable homicide, ruling that the prosecution had proved its case beyond reasonable doubt."
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（Punch）报道，尚缺乏交叉验证",
+    "穆萨关于他人闯入行凶的说法未获法院采信，相关情节未获独立证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "约贝州法院判处一名男子死刑，其罪名是杀害妻子",
+   "summary_zh": "尼日利亚约贝州高等法院在达马图鲁判处45岁男子阿布巴卡尔·穆萨死刑，罪名是杀害其42岁的妻子阿米·阿达穆·马曼。穆萨此前辩称无罪，声称有其他人闯入其住所行凶，但法院认定检方已排除合理怀疑地证明其有罪。法官告知其可在30天内上诉。该报道目前为单一来源。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "约贝州",
+    "city": "达马图鲁",
+    "site": "约贝州高等法院",
+    "raw_text": "Yobe State High Court sitting in Damaturu"
+   },
+   "key_facts": [
+    {
+     "fact": "约贝州高等法院在达马图鲁判处45岁男子阿布巴卡尔·穆萨死刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A Yobe State High Court sitting in Damaturu on Thursday sentenced a 45-year-old man, Abubakar Musa, popularly known as Daddy, to death by hanging for the killing of his wife, Ammi Adamu Mamman."
+    },
+    {
+     "fact": "穆萨被控对其42岁妻子犯有杀人罪，2024年1月4日被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Musa was arrested by operatives of the Yobe State Police Command on January 4, 2024, following the death of his 42-year-old wife at their residence in New Bra-Bra Housing Estate, Damaturu. He was subsequently charged with culpable homicide."
+    },
+    {
+     "fact": "穆萨在庭审中辩称无罪，声称有其他人闯入其住所杀害其妻子",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Musa pleaded not guilty to the charge, maintaining through his lawyers that other persons had broken into their home and killed his wife."
+    },
+    {
+     "fact": "法官认定检方已排除合理怀疑地证明其有罪，并告知其可在30天内上诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Justice Kaigama found Musa guilty of culpable homicide, ruling that the prosecution had proved its case beyond reasonable doubt."
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（Punch）报道，尚缺乏交叉验证",
+    "穆萨关于他人闯入行凶的说法未获法院采信，相关情节未获独立证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_4257d76faf14b45e",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

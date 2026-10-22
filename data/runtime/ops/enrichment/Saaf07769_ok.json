@@ -1,0 +1,116 @@
+{
+ "label": "Saaf07769",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e95c1af9976260c5724bea56780f8766c452e90d907636b197871ffab360e5f1",
+ "tokens": {
+  "input_tokens": 2288,
+  "output_tokens": 293,
+  "total_tokens": 2581
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"项目成本与建设计划目前仅来自单一来源，尚未获得交叉验证\", \"机场项目具体选址与开工时间尚未明确\"]",
+    "after": "[\"项目成本与建设计划目前仅来自单一来源，尚未获得交叉验证\", \"机场项目具体选址与开工时间尚未明确\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "达芒金矿机场项目预计耗资至少8000万美元",
+   "summary_zh": "达芒金矿有限公司社区关系经理拉米·奥博罗表示，该公司计划在西部省建设的机场预计至少耗资8000万美元才能完工。该消息目前仅由单一来源报道，具体细节尚未获得其他来源交叉验证。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "西部省",
+    "city": null,
+    "site": "达芒金矿",
+    "raw_text": "Western Region"
+   },
+   "key_facts": [
+    {
+     "fact": "达芒金矿有限公司计划在西部省建设机场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the company's planned airport in the Western Region"
+    },
+    {
+     "fact": "该机场项目预计至少耗资8000万美元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "expected to cost at least US$80 million to complete"
+    },
+    {
+     "fact": "消息由社区关系经理拉米·奥博罗披露",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Community Relations Manager, Ramy Oboro, has disclosed"
+    }
+   ],
+   "uncertainties": [
+    "项目成本与建设计划目前仅来自单一来源，尚未获得交叉验证",
+    "机场项目具体选址与开工时间尚未明确"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "达芒金矿机场项目预计耗资至少8000万美元",
+   "summary_zh": "达芒金矿有限公司社区关系经理拉米·奥博罗表示，该公司计划在西部省建设的机场预计至少耗资8000万美元才能完工。该消息目前仅由单一来源报道，具体细节尚未获得其他来源交叉验证。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "西部省",
+    "city": null,
+    "site": "达芒金矿",
+    "raw_text": "Western Region"
+   },
+   "key_facts": [
+    {
+     "fact": "达芒金矿有限公司计划在西部省建设机场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the company's planned airport in the Western Region"
+    },
+    {
+     "fact": "该机场项目预计至少耗资8000万美元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "expected to cost at least US$80 million to complete"
+    },
+    {
+     "fact": "消息由社区关系经理拉米·奥博罗披露",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Community Relations Manager, Ramy Oboro, has disclosed"
+    }
+   ],
+   "uncertainties": [
+    "项目成本与建设计划目前仅来自单一来源，尚未获得交叉验证",
+    "机场项目具体选址与开工时间尚未明确",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_5e4502ddaaf07769",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

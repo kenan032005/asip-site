@@ -1,0 +1,95 @@
+{
+ "label": "S636564ef",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1d2a126f6f15aa0b7c91e081004f822010b594654c6a58d9f1c208357efe2e13",
+ "tokens": {
+  "input_tokens": 1949,
+  "output_tokens": 240,
+  "total_tokens": 2189
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "健康：更好地了解唇裂",
+   "summary_zh": "Sahelien网站发布一篇健康科普文章，介绍唇裂相关知识。该文章正文内容不完整，仅包含网站导航与相关新闻列表。目前仅有一个来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "Sahelien网站发布关于唇裂的健康科普文章",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Santé : mieux comprendre la fente labiale"
+    },
+    {
+     "fact": "文章正文内容不完整，仅含导航与相关新闻列表",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans l'actualité Agadez : après l’attaque contre deux bus, 12 morts et des blessés pris en charge"
+    }
+   ],
+   "uncertainties": [
+    "文章正文内容不完整，无法确认具体健康信息内容",
+    "目前仅一个来源报道"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 40
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "健康：更好地了解唇裂",
+   "summary_zh": "Sahelien网站发布一篇健康科普文章，介绍唇裂相关知识。该文章正文内容不完整，仅包含网站导航与相关新闻列表。目前仅有一个来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "Sahelien网站发布关于唇裂的健康科普文章",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Santé : mieux comprendre la fente labiale"
+    },
+    {
+     "fact": "文章正文内容不完整，仅含导航与相关新闻列表",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans l'actualité Agadez : après l’attaque contre deux bus, 12 morts et des blessés pris en charge"
+    }
+   ],
+   "uncertainties": [
+    "文章正文内容不完整，无法确认具体健康信息内容",
+    "目前仅一个来源报道"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 40
+  }
+ },
+ "event_id": "EVT_ab4da6a3636564ef",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

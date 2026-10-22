@@ -1,0 +1,128 @@
+{
+ "label": "S043db755",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f45d71b69634afd94c6771980b2155e0fa103a0ae4ccc49a4ad38981af6af53a",
+ "tokens": {
+  "input_tokens": 2556,
+  "output_tokens": 439,
+  "total_tokens": 2995
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"患者能否最终康复尚未确定，部长称不能掉以轻心\", \"病例是否已发生社区传播尚未证实，有待进一步监测\", \"目前为单一来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"患者能否最终康复尚未确定，部长称不能掉以轻心\", \"病例是否已发生社区传播尚未证实，有待进一步监测\", \"目前为单一来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚联邦政府称输入性埃博拉病例患者正在康复，并加强防控措施",
+   "summary_zh": "尼日利亚联邦政府表示，一名被诊断为输入性本迪布焦型埃博拉病毒病的女性患者正在康复，实验室结果显示明显好转。卫生部长帕特在阿布贾新闻发布会上称，政府已启动接触者追踪，将高风险接触者隔离，并加强入境筛查与医疗机构防控。部长表示，通报时尚无证据表明该病例已扩散至社区。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦政府称一名输入性本迪布焦型埃博拉病毒病女性患者正在康复",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Government says the woman diagnosed with an imported case of the Bundibugyo Ebola Virus Disease in Nigeria is recovering, with laboratory results showing significant improvement."
+    },
+    {
+     "fact": "卫生部长帕特在阿布贾新闻发布会上通报防控措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Coordinating Minister of Health and Social Welfare, Prof. Muhammad Pate, said this at a news conference in Abuja on Thursday"
+    },
+    {
+     "fact": "政府已启动接触者追踪，高风险接触者被隔离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The high-risk contacts have been quarantined fully in a facility"
+    },
+    {
+     "fact": "通报时无证据表明病例已扩散至社区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pate said there was no evidence at the time of the briefing that the case had spread into communities"
+    }
+   ],
+   "uncertainties": [
+    "患者能否最终康复尚未确定，部长称不能掉以轻心",
+    "病例是否已发生社区传播尚未证实，有待进一步监测",
+    "目前为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚联邦政府称输入性埃博拉病例患者正在康复，并加强防控措施",
+   "summary_zh": "尼日利亚联邦政府表示，一名被诊断为输入性本迪布焦型埃博拉病毒病的女性患者正在康复，实验室结果显示明显好转。卫生部长帕特在阿布贾新闻发布会上称，政府已启动接触者追踪，将高风险接触者隔离，并加强入境筛查与医疗机构防控。部长表示，通报时尚无证据表明该病例已扩散至社区。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦政府称一名输入性本迪布焦型埃博拉病毒病女性患者正在康复",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Government says the woman diagnosed with an imported case of the Bundibugyo Ebola Virus Disease in Nigeria is recovering, with laboratory results showing significant improvement."
+    },
+    {
+     "fact": "卫生部长帕特在阿布贾新闻发布会上通报防控措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Coordinating Minister of Health and Social Welfare, Prof. Muhammad Pate, said this at a news conference in Abuja on Thursday"
+    },
+    {
+     "fact": "政府已启动接触者追踪，高风险接触者被隔离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The high-risk contacts have been quarantined fully in a facility"
+    },
+    {
+     "fact": "通报时无证据表明病例已扩散至社区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pate said there was no evidence at the time of the briefing that the case had spread into communities"
+    }
+   ],
+   "uncertainties": [
+    "患者能否最终康复尚未确定，部长称不能掉以轻心",
+    "病例是否已发生社区传播尚未证实，有待进一步监测",
+    "目前为单一来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_9f1aa301043db755",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

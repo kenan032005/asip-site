@@ -1,0 +1,104 @@
+{
+ "label": "S17b9ee52",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "36c10425c039c97621892e8a7d6b3336bc579cec455aac0d5c093354bc19b465",
+ "tokens": {
+  "input_tokens": 2193,
+  "output_tokens": 306,
+  "total_tokens": 2499
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\"]",
+    "after": "[\"目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "“ECOWAS For All”宣传活动走进Makola市场，向商贩讲解跨境贸易",
+   "summary_zh": "加纳外交部将于10月23日（周五）在阿克拉Makola市场开展“ECOWAS For All”公众宣传活动，向商贩及其他经营者介绍区域贸易与人员自由流动机会。该消息目前仅由单一来源MyJoyOnline报道，尚缺乏交叉验证。",
+   "event_type": "border_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "阿克拉",
+    "site": "Makola市场",
+    "raw_text": "Makola Market in Accra"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳外交部将于10月23日周五在阿克拉Makola市场开展“ECOWAS For All”宣传活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Ministry of Foreign Affairs will take its “ECOWAS For All” public sensitisation campaign to the Makola Market in Accra on Friday, October 23"
+    },
+    {
+     "fact": "活动目的是向商贩和其他经营者讲解区域贸易与人员自由流动机会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "to educate traders and other business operators on regional trade and free-movement opportunities"
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "“ECOWAS For All”宣传活动走进Makola市场，向商贩讲解跨境贸易",
+   "summary_zh": "加纳外交部将于10月23日（周五）在阿克拉Makola市场开展“ECOWAS For All”公众宣传活动，向商贩及其他经营者介绍区域贸易与人员自由流动机会。该消息目前仅由单一来源MyJoyOnline报道，尚缺乏交叉验证。",
+   "event_type": "border_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "阿克拉",
+    "site": "Makola市场",
+    "raw_text": "Makola Market in Accra"
+   },
+   "key_facts": [
+    {
+     "fact": "加纳外交部将于10月23日周五在阿克拉Makola市场开展“ECOWAS For All”宣传活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Ministry of Foreign Affairs will take its “ECOWAS For All” public sensitisation campaign to the Makola Market in Accra on Friday, October 23"
+    },
+    {
+     "fact": "活动目的是向商贩和其他经营者讲解区域贸易与人员自由流动机会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "to educate traders and other business operators on regional trade and free-movement opportunities"
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_20e2e7fc17b9ee52",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

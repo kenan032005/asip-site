@@ -1,0 +1,115 @@
+{
+ "label": "S0e2c9bae",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "388d0dfb12907dd1b82945b1dbe5bbaabc0398acf1aca09ec5275c0ecae07b1c",
+ "tokens": {
+  "input_tokens": 2417,
+  "output_tokens": 508,
+  "total_tokens": 2925
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "登革热疫情：乍得总理呼吁集体动员与协调行动",
+   "summary_zh": "2026年10月22日，乍得总理阿拉·马耶·哈林纳主持召开跨部门会议，讨论登革热疫情发展。会议数据显示，六个省份共发现3846例疑似病例，其中299例确诊，另有11例死亡。总理要求各方协同应对，加强预防、公众宣传、环境卫生以及地面和空中喷洒作业。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "Tchad; provinces: Ennedi Ouest, Batha, N'Djamena, Ouaddaï, Sila, Wadi-Fira"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得总理主持召开关于登革热疫情的跨部门会议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Premier ministre Allah Maye Halina, a présidé, ce jeudi 22 octobre 2026, une réunion interministérielle consacrée à l’évolution de la dengue au Tchad."
+    },
+    {
+     "fact": "六个省份共记录3846例疑似病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "3 846 cas suspects ont été recensés dans six provinces : l’Ennedi Ouest, le Batha, N’Djamena, le Ouaddaï, le Sila et le Wadi-Fira."
+    },
+    {
+     "fact": "其中299例确诊，11例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Parmi ces cas suspects, 299 ont été confirmés. Le bilan fait également état de 11 décès."
+    },
+    {
+     "fact": "总理要求加强预防、公众宣传、环境卫生及喷洒作业",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il a souligné l’importance de la prévention, de l’information des populations et de l’assainissement du cadre de vie. Il a aussi insisté sur le renforcement des opérations de pulvérisation terrestre et aérienne"
+    }
+   ],
+   "uncertainties": [
+    "数据来自会议通报，目前仅单一来源报道，尚未获得交叉验证",
+    "疑似病例与确诊病例的统计口径及最新进展有待核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "登革热疫情：乍得总理呼吁集体动员与协调行动",
+   "summary_zh": "2026年10月22日，乍得总理阿拉·马耶·哈林纳主持召开跨部门会议，讨论登革热疫情发展。会议数据显示，六个省份共发现3846例疑似病例，其中299例确诊，另有11例死亡。总理要求各方协同应对，加强预防、公众宣传、环境卫生以及地面和空中喷洒作业。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "Tchad; provinces: Ennedi Ouest, Batha, N'Djamena, Ouaddaï, Sila, Wadi-Fira"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得总理主持召开关于登革热疫情的跨部门会议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Premier ministre Allah Maye Halina, a présidé, ce jeudi 22 octobre 2026, une réunion interministérielle consacrée à l’évolution de la dengue au Tchad."
+    },
+    {
+     "fact": "六个省份共记录3846例疑似病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "3 846 cas suspects ont été recensés dans six provinces : l’Ennedi Ouest, le Batha, N’Djamena, le Ouaddaï, le Sila et le Wadi-Fira."
+    },
+    {
+     "fact": "其中299例确诊，11例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Parmi ces cas suspects, 299 ont été confirmés. Le bilan fait également état de 11 décès."
+    },
+    {
+     "fact": "总理要求加强预防、公众宣传、环境卫生及喷洒作业",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il a souligné l’importance de la prévention, de l’information des populations et de l’assainissement du cadre de vie. Il a aussi insisté sur le renforcement des opérations de pulvérisation terrestre et aérienne"
+    }
+   ],
+   "uncertainties": [
+    "数据来自会议通报，目前仅单一来源报道，尚未获得交叉验证",
+    "疑似病例与确诊病例的统计口径及最新进展有待核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_c56b228c0e2c9bae",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
