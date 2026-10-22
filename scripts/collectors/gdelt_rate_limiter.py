@@ -27,6 +27,7 @@ import hashlib
 import json
 import os
 import random
+import re
 import threading
 import time
 import urllib.error
@@ -34,6 +35,54 @@ import urllib.parse
 import urllib.request
 
 HOST = "api.gdeltproject.org"
+
+# ── C8-4E W1：GDELT 响应体分类（「有响应」≠「有可用结果」）──────────
+#: 五类区分的落点：合法空结果才记为 QUERY_NO_RESULT；429 / 非 JSON 限流提示 /
+#: JSON 解析或结构异常 / 网络超时及其它 HTTP 错误各有独立原因码。
+BODY_JSON_OK = "json_ok"                # 合法 JSON 且 articles 为列表
+BODY_JSON_STRUCTURE = "json_structure"  # 合法 JSON 但结构不符合 ArtList 约定
+BODY_JSON_CORRUPT = "json_corrupt"      # 形如 JSON 但解析失败
+BODY_NON_JSON = "non_json"              # 非 JSON 响应体（如 GDELT 限流建议文本）
+BODY_EMPTY = "empty"                    # 空响应体
+
+ERR_GDELT_NON_JSON = "GDELT_NON_JSON_RESPONSE"
+ERR_GDELT_JSON_INVALID = "GDELT_JSON_INVALID"
+
+#: 已知 GDELT 限流建议的特征串 —— 只用于输出布尔标记，**绝不输出原文**
+_ADVISORY_RX = re.compile(r"limit requests|gdeltproject|ngrams dataset|kalev\.leetaru", re.I)
+
+
+def _safe_detail(**kw):
+    """只保留安全元数据（长度/类型/布尔标记），绝不包含原始响应体内容。"""
+    return ", ".join("%s=%s" % (k, v) for k, v in sorted(kw.items()))
+
+
+def classify_body(text):
+    """对 GDELT 响应体做确定性分类。
+
+    返回 (body_class, detail_dict, error_or_None)。
+    error 为确定性错误码（例：GDELT_NON_JSON_RESPONSE(body_len=347, advisory_like=True)），
+    **不含原始响应体任何内容**（C8-4E W1：禁止打印原始响应中的潜在敏感数据）。
+    """
+    if text is None:
+        return None, {}, None
+    s = text.strip()
+    if not s:
+        return BODY_EMPTY, {"body_len": 0}, "%s(body_len=0)" % ERR_GDELT_NON_JSON
+    if s[:1] not in "{[":
+        det = {"body_len": len(s), "advisory_like": bool(_ADVISORY_RX.search(s))}
+        return BODY_NON_JSON, det, "%s(%s)" % (ERR_GDELT_NON_JSON, _safe_detail(**det))
+    try:
+        obj = json.loads(s)
+    except Exception as e:  # noqa: BLE001
+        det = {"body_len": len(s), "parse_error": type(e).__name__}
+        return BODY_JSON_CORRUPT, det, "%s(%s)" % (ERR_GDELT_JSON_INVALID, _safe_detail(**det))
+    if not isinstance(obj, dict) or not isinstance(obj.get("articles"), list):
+        det = {"body_len": len(s), "root_type": type(obj).__name__,
+               "has_articles": isinstance(obj, dict) and isinstance(obj.get("articles"), list)}
+        return BODY_JSON_STRUCTURE, det, "%s(%s)" % (ERR_GDELT_JSON_INVALID, _safe_detail(**det))
+    return BODY_JSON_OK, {"body_len": len(s), "articles": len(obj["articles"])}, None
+
 
 #: 事件 / 快速路径用的 UA（与 collectors/base.py 保持一致语义）
 UA = ("Mozilla/5.0 (compatible; ASIP-Collector/1.0; "
@@ -119,6 +168,7 @@ class GdeltSharedRateLimiter:
         self.cache_hits = 0
         self.status_counts = {}   # "200" / "429" / "timeout" / ...
         self.by_label = {}        # label -> {requests, success, errors, cache_hits}
+        self.body_class_counts = {}  # body_class -> 次数（C8-4E W1）
 
     # ── 内部 ────────────────────────────────────────────
     def _label(self, label):
@@ -170,10 +220,13 @@ class GdeltSharedRateLimiter:
                 self.cache_hits += 1
                 self._acc(label, "cache_hits")
                 e = self._cache[sig]
+                if e.get("body_class"):
+                    self.body_class_counts[e["body_class"]] = \
+                        self.body_class_counts.get(e["body_class"], 0) + 1
                 return e["text"], e["error"], {
                     "signature": sig, "cache": True, "status": e["status"],
                     "attempts": 0, "rate_limited": e["rate_limited"],
-                    "retry_after": None,
+                    "retry_after": None, "body_class": e.get("body_class"),
                 }
             if self.requests >= self.budget:
                 err = "GLOBAL_REQUEST_BUDGET_EXHAUSTED(%d)" % self.budget
@@ -188,12 +241,13 @@ class GdeltSharedRateLimiter:
             err = "NETWORK_DISABLED_FOR_TEST"
             with self._lock:
                 self._cache[sig] = {"text": None, "error": err, "status": "offline",
-                                    "rate_limited": False}
+                                    "rate_limited": False, "body_class": None}
                 self._acc(label, "errors")
             return None, err, {"signature": sig, "cache": False, "status": "offline",
                                "attempts": 0, "rate_limited": False, "retry_after": None}
 
         text, err, status, attempts, rate_limited, retry_after = None, None, None, 0, False, None
+        body_class = None
         for attempt in range(1, self.max_attempts + 1):
             attempts = attempt
             self._pace()
@@ -207,7 +261,14 @@ class GdeltSharedRateLimiter:
                         text = raw.decode(enc, "ignore")
                     except LookupError:
                         text = raw.decode("utf-8", "ignore")
-                    err = None
+                    # C8-4E W1：HTTP 200 也可能带不可用响应体（限流建议文本等），
+                    # 先分类再决定是否当作成功；不可用时 text=None + 确定性错误码。
+                    body_class, _det, body_err = classify_body(text)
+                    if body_err is not None:
+                        text = None
+                        err = body_err
+                    else:
+                        err = None
                 break
             except urllib.error.HTTPError as e:
                 status = e.code
@@ -243,11 +304,14 @@ class GdeltSharedRateLimiter:
                 self._acc(label, "success")
             else:
                 self._acc(label, "rate_limited" if rate_limited else "errors")
-            self._cache[sig] = {"text": text, "error": err,
-                                "status": status, "rate_limited": rate_limited}
+            if body_class:
+                self.body_class_counts[body_class] = \
+                    self.body_class_counts.get(body_class, 0) + 1
+            self._cache[sig] = {"text": text, "error": err, "status": status,
+                                "rate_limited": rate_limited, "body_class": body_class}
         return text, err, {"signature": sig, "cache": False, "status": status,
                            "attempts": attempts, "rate_limited": rate_limited,
-                           "retry_after": retry_after}
+                           "retry_after": retry_after, "body_class": body_class}
 
     def spread_offsets(self, n, window=None):
         """schedule spreading：把同批 n 个请求在节流窗口内均匀铺开（确定性）。
@@ -279,6 +343,13 @@ class GdeltSharedRateLimiter:
                 "retry_after_honored": self.retry_after_honored,
                 "request_budget": self.budget,
                 "budget_exhausted": self.requests >= self.budget,
+                # C8-4E W1：明确「实际 HTTP 请求数」与「按源聚合计数」的区别，
+                # 不得把按源聚合的失败计数说成实际 HTTP 请求数。
+                "actual_http_requests": self.requests,
+                "body_class_counts": dict(self.body_class_counts),
+                "counting_note": ("requests/actual_http_requests=实际 HTTP 请求数（已扣除缓存命中"
+                                  "与预算拒绝）；labeled_* 与 failure_reasons 均按 source_id×国家管线"
+                                  "聚合，一组共享查询会被多个源重复计数，不得当作 HTTP 请求数"),
                 "labeled_requests": total,
                 "labeled_success": success,
                 "labeled_rate_limited": rl,
@@ -305,6 +376,7 @@ class GdeltSharedRateLimiter:
             self.cache_hits = 0
             self.status_counts = {}
             self.by_label = {}
+            self.body_class_counts = {}
 
 
 #: 进程内唯一实例 —— 所有采集器共用（68 个 gdelt 源共享一个闸门）

@@ -99,14 +99,18 @@ def _fetch_group(source, kw, timespan):
         if rate:
             entry["error"] = ("GDELT_RATE_LIMITED(HTTP 429)：公共接口对本出口节流；"
                               "已遵循 Retry-After 并退避至 %.0fs，本窗口该组查询暂停。"
-                              "原始错误: %s" % (GLOBAL.interval, err))
+                              "错误: %s" % (GLOBAL.interval, err))
         else:
-            entry["error"] = "gdelt fetch: %s" % err
+            # C8-4E W1：透传限流器的确定性错误码（非 JSON / JSON 结构异常 / 网络 /
+            # 其它 HTTP），**不再转储原始响应体**（旧实现写 body 前 120 字，有泄漏风险）。
+            entry["error"] = "gdelt fetch: %s" % (err or "unknown_error")
     else:
         try:
-            entry["articles"] = json.loads(text).get("articles", [])
+            arts = json.loads(text).get("articles", [])
+            entry["articles"] = arts if isinstance(arts, list) else []
         except Exception as e:
-            entry["error"] = "gdelt json: %s / body: %s" % (e, text[:120])
+            # 正常不会到这里（限流器已完成结构校验）；保留兜底且不输出响应体
+            entry["error"] = "gdelt json: %s" % type(e).__name__
     _CACHE[key] = entry
     return entry
 
