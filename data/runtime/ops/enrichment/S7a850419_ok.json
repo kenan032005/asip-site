@@ -1,0 +1,148 @@
+{
+ "label": "S7a850419",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f2af17848e37b1fe1bc0ea28aeb8e5c169524e90c81ed1bfa48a5d15468dfe6c",
+ "tokens": {
+  "input_tokens": 2981,
+  "output_tokens": 765,
+  "total_tokens": 3746
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"绑架者身份尚未证实，仅表示可能为萨赫勒地区“伊斯兰国”武装分子\", \"获释具体条件及斡旋细节未获独立证实，主要依据利比亚电视台报道\", \"报道中关于被扣押时长的表述存在差异（18个月与21个月）\"]",
+    "after": "[\"绑架者身份尚未证实，仅表示可能为萨赫勒地区“伊斯兰国”武装分子\", \"获释具体条件及斡旋细节未获独立证实，主要依据利比亚电视台报道\", \"报道中关于被扣押时长的表述存在差异（18个月与21个月）\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "两名2025年在尼日尔被绑架的欧洲前人质获释并抵达利比亚",
+   "summary_zh": "据利比亚电视台报道并经奥地利和瑞士当局确认，2025年在尼日尔被绑架的两名欧洲女性——奥地利人Eva Gretzmacher和瑞士-尼日利亚籍人Claudia Abbt——已获释并抵达利比亚班加西。报道称，她们是通过利比亚东部强人哈利法·哈夫塔尔及其子萨达姆·哈夫塔尔的斡旋而重获自由的。两人被绑架期间从未有人宣称负责，但外界普遍将怀疑指向在萨赫勒地区活跃的“伊斯兰国”组织。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "阿加德兹",
+    "city": "阿加德兹",
+    "site": null,
+    "raw_text": "Agadez, dans le nord du Niger"
+   },
+   "key_facts": [
+    {
+     "fact": "两名欧洲女性Eva Gretzmacher和Claudia Abbt于2025年在尼日尔被绑架后获释，并抵达利比亚班加西",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eva Gretzmacher et Claudia Abbt, deux Européennes enlevées au Sahel en 2025, sont libres, a annoncé une chaîne de télévision libyenne. L'annonce a été confirmée jeudi 22 octobre grâce à des images des deux ex-otages arrivées à Benghazi."
+    },
+    {
+     "fact": "奥地利人Eva Gretzmacher于2025年1月12日在尼日尔北部阿加德兹的家中被武装人员绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'Autrichienne Eva Gretzmacher avait été enlevée le 12 janvier 2025 à Agadez, dans le nord du Niger"
+    },
+    {
+     "fact": "瑞士-尼日利亚籍人Claudia Abbt约三个月后在阿加德兹同样遭绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Trois mois plus tard, c'est la Suisso-Nigérienne Claudia Abbt, vivant également à Agadez, qui subissait le même sort."
+    },
+    {
+     "fact": "奥地利和瑞士当局已确认两人获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les autorités suisses et autrichiennes ont confirmé ces libérations, ce jeudi matin."
+    },
+    {
+     "fact": "报道称获释经由利比亚东部指挥官哈利法·哈夫塔尔及其子萨达姆·哈夫塔尔斡旋促成",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Car c'est par l'entremise de l’homme fort de l'est libyen, le maréchal Khalifa Haftar, qu'elles ont recouvré la liberté."
+    },
+    {
+     "fact": "两起绑架均无人宣称负责，但外界怀疑指向“伊斯兰国”组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il n'y a jamais eu de revendications pour les deux rapts, mais tous les regards se sont tournés vers l'État islamique, très actif dans la région."
+    }
+   ],
+   "uncertainties": [
+    "绑架者身份尚未证实，仅表示可能为萨赫勒地区“伊斯兰国”武装分子",
+    "获释具体条件及斡旋细节未获独立证实，主要依据利比亚电视台报道",
+    "报道中关于被扣押时长的表述存在差异（18个月与21个月）"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "两名2025年在尼日尔被绑架的欧洲前人质获释并抵达利比亚",
+   "summary_zh": "据利比亚电视台报道并经奥地利和瑞士当局确认，2025年在尼日尔被绑架的两名欧洲女性——奥地利人Eva Gretzmacher和瑞士-尼日利亚籍人Claudia Abbt——已获释并抵达利比亚班加西。报道称，她们是通过利比亚东部强人哈利法·哈夫塔尔及其子萨达姆·哈夫塔尔的斡旋而重获自由的。两人被绑架期间从未有人宣称负责，但外界普遍将怀疑指向在萨赫勒地区活跃的“伊斯兰国”组织。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "阿加德兹",
+    "city": "阿加德兹",
+    "site": null,
+    "raw_text": "Agadez, dans le nord du Niger"
+   },
+   "key_facts": [
+    {
+     "fact": "两名欧洲女性Eva Gretzmacher和Claudia Abbt于2025年在尼日尔被绑架后获释，并抵达利比亚班加西",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eva Gretzmacher et Claudia Abbt, deux Européennes enlevées au Sahel en 2025, sont libres, a annoncé une chaîne de télévision libyenne. L'annonce a été confirmée jeudi 22 octobre grâce à des images des deux ex-otages arrivées à Benghazi."
+    },
+    {
+     "fact": "奥地利人Eva Gretzmacher于2025年1月12日在尼日尔北部阿加德兹的家中被武装人员绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'Autrichienne Eva Gretzmacher avait été enlevée le 12 janvier 2025 à Agadez, dans le nord du Niger"
+    },
+    {
+     "fact": "瑞士-尼日利亚籍人Claudia Abbt约三个月后在阿加德兹同样遭绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Trois mois plus tard, c'est la Suisso-Nigérienne Claudia Abbt, vivant également à Agadez, qui subissait le même sort."
+    },
+    {
+     "fact": "奥地利和瑞士当局已确认两人获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les autorités suisses et autrichiennes ont confirmé ces libérations, ce jeudi matin."
+    },
+    {
+     "fact": "报道称获释经由利比亚东部指挥官哈利法·哈夫塔尔及其子萨达姆·哈夫塔尔斡旋促成",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Car c'est par l'entremise de l’homme fort de l'est libyen, le maréchal Khalifa Haftar, qu'elles ont recouvré la liberté."
+    },
+    {
+     "fact": "两起绑架均无人宣称负责，但外界怀疑指向“伊斯兰国”组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il n'y a jamais eu de revendications pour les deux rapts, mais tous les regards se sont tournés vers l'État islamique, très actif dans la région."
+    }
+   ],
+   "uncertainties": [
+    "绑架者身份尚未证实，仅表示可能为萨赫勒地区“伊斯兰国”武装分子",
+    "获释具体条件及斡旋细节未获独立证实，主要依据利比亚电视台报道",
+    "报道中关于被扣押时长的表述存在差异（18个月与21个月）",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_51bce6577a850419",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

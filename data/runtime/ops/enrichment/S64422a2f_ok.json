@@ -1,0 +1,117 @@
+{
+ "label": "S64422a2f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "bd898a0d9228257d737cc27e4bcecd790a1558340dfb840dbece01f2fbe53e6e",
+ "tokens": {
+  "input_tokens": 2861,
+  "output_tokens": 474,
+  "total_tokens": 3335
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "肯尼亚埃博拉疫情：当局应对措施受批评，正寻找一名乌干达籍接触者",
+   "summary_zh": "肯尼亚卫生当局10月21日表示，仍在寻找一名与10月5日在内罗毕确诊的首例埃博拉患者有关的接触者，该接触者为乌干达籍。10月20日该国宣布第九例病例，仍与首例患者关联。当局称疫情仍在控制之中，但外界对当局应对缺乏透明度的批评开始出现。",
+   "event_type": "other_security",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": null,
+    "city": "内罗毕",
+    "site": null,
+    "raw_text": "Nairobi"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚卫生当局仍在寻找一名与首例埃博拉患者相关的乌干达籍接触者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les autorités sanitaires sont toujours à la recherche d’un cas contact, lié au premier patient victime d’Ebola à Nairobi le 5 octobre"
+    },
+    {
+     "fact": "10月20日肯尼亚宣布第九例埃博拉病例，仍与首个病例群关联",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Mardi soir, un neuvième cas d’ Ebola a été déclaré au Kenya, « toujours lié au premier cluster »"
+    },
+    {
+     "fact": "当局称疫情仍在控制之中，但批评声音开始出现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les autorités assurent que la situation reste sous contrôle. Mais les critiques commencent à se faire entendre."
+    },
+    {
+     "fact": "前最高法院院长David Maraga批评隔离中心正变成病毒孵化场所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il est clair que les centres de quarantaine se transforment en unités d'incubation du virus Ebola"
+    }
+   ],
+   "uncertainties": [
+    "被寻找的乌干达籍接触者尚未被定位，当局怀疑其经隐蔽路线旅行",
+    "疫情是否真正受控存在争议，批评者质疑当局缺乏透明度",
+    "目前仅单一来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "肯尼亚埃博拉疫情：当局应对措施受批评，正寻找一名乌干达籍接触者",
+   "summary_zh": "肯尼亚卫生当局10月21日表示，仍在寻找一名与10月5日在内罗毕确诊的首例埃博拉患者有关的接触者，该接触者为乌干达籍。10月20日该国宣布第九例病例，仍与首例患者关联。当局称疫情仍在控制之中，但外界对当局应对缺乏透明度的批评开始出现。",
+   "event_type": "other_security",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": null,
+    "city": "内罗毕",
+    "site": null,
+    "raw_text": "Nairobi"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚卫生当局仍在寻找一名与首例埃博拉患者相关的乌干达籍接触者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les autorités sanitaires sont toujours à la recherche d’un cas contact, lié au premier patient victime d’Ebola à Nairobi le 5 octobre"
+    },
+    {
+     "fact": "10月20日肯尼亚宣布第九例埃博拉病例，仍与首个病例群关联",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Mardi soir, un neuvième cas d’ Ebola a été déclaré au Kenya, « toujours lié au premier cluster »"
+    },
+    {
+     "fact": "当局称疫情仍在控制之中，但批评声音开始出现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les autorités assurent que la situation reste sous contrôle. Mais les critiques commencent à se faire entendre."
+    },
+    {
+     "fact": "前最高法院院长David Maraga批评隔离中心正变成病毒孵化场所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il est clair que les centres de quarantaine se transforment en unités d'incubation du virus Ebola"
+    }
+   ],
+   "uncertainties": [
+    "被寻找的乌干达籍接触者尚未被定位，当局怀疑其经隐蔽路线旅行",
+    "疫情是否真正受控存在争议，批评者质疑当局缺乏透明度",
+    "目前仅单一来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_766a15fa64422a2f",
+ "disease_event_id": null,
+ "country_code": "KE"
+}

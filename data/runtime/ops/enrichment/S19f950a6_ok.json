@@ -1,0 +1,111 @@
+{
+ "label": "S19f950a6",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "db5885daed1f275aa88c9109d2c8745aedb0cea7ecba404dd03581275e6196d6",
+ "tokens": {
+  "input_tokens": 2451,
+  "output_tokens": 376,
+  "total_tokens": 2827
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚军养老金委员会新任主席称死亡抚恤金延迟发放打击部队士气，承诺改革",
+   "summary_zh": "尼日利亚军事养老金委员会（MPB）新任主席朱利叶斯·奥西福少将在阿布贾交接仪式上警告，向阵亡士兵家属延迟发放死亡抚恤金可能削弱部队士气、贬低阵亡人员的牺牲。他承诺消除官僚障碍、引入现代技术，加快发放养老金、退休金和死亡抚恤金，并确保只有合法受益人获得款项。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": "军事养老金委员会总部",
+    "raw_text": "MPB headquarters, Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "MPB新任主席奥西福警告死亡抚恤金延迟发放可能削弱部队士气",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "delays in paying death benefits to families of soldiers killed in action could undermine troop morale and diminish the sacrifices of fallen military personnel"
+    },
+    {
+     "fact": "奥西福承诺消除官僚障碍并加快发放养老金和死亡抚恤金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He pledged to eliminate bureaucratic bottlenecks, deploy modern technology and accelerate the payment of pensions, gratuities and death benefits"
+    },
+    {
+     "fact": "交接仪式在阿布贾MPB总部举行，前任为AVM Mikail Abdulraheem",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "during the handing and taking-over ceremony between him and his predecessor, AVM Mikail Abdulraheem, at the MPB headquarters"
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚军养老金委员会新任主席称死亡抚恤金延迟发放打击部队士气，承诺改革",
+   "summary_zh": "尼日利亚军事养老金委员会（MPB）新任主席朱利叶斯·奥西福少将在阿布贾交接仪式上警告，向阵亡士兵家属延迟发放死亡抚恤金可能削弱部队士气、贬低阵亡人员的牺牲。他承诺消除官僚障碍、引入现代技术，加快发放养老金、退休金和死亡抚恤金，并确保只有合法受益人获得款项。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": "军事养老金委员会总部",
+    "raw_text": "MPB headquarters, Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "MPB新任主席奥西福警告死亡抚恤金延迟发放可能削弱部队士气",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "delays in paying death benefits to families of soldiers killed in action could undermine troop morale and diminish the sacrifices of fallen military personnel"
+    },
+    {
+     "fact": "奥西福承诺消除官僚障碍并加快发放养老金和死亡抚恤金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He pledged to eliminate bureaucratic bottlenecks, deploy modern technology and accelerate the payment of pensions, gratuities and death benefits"
+    },
+    {
+     "fact": "交接仪式在阿布贾MPB总部举行，前任为AVM Mikail Abdulraheem",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "during the handing and taking-over ceremony between him and his predecessor, AVM Mikail Abdulraheem, at the MPB headquarters"
+    }
+   ],
+   "uncertainties": [
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_df4fb66d19f950a6",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

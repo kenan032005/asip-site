@@ -1,0 +1,138 @@
+{
+ "label": "S4f7f23b8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c4b9512abcf7398867d44cc01f98464c574243bd1dd9786611902ffd9a3812c5",
+ "tokens": {
+  "input_tokens": 2656,
+  "output_tokens": 569,
+  "total_tokens": 3225
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"无人机来源不明，尚未确认袭击方\", \"伤亡数字来自单一地方政府官员表述，尚未获独立核实\", \"事件为单一来源报道（法新社转引），缺乏交叉验证\"]",
+    "after": "[\"无人机来源不明，尚未确认袭击方\", \"伤亡数字来自单一地方政府官员表述，尚未获独立核实\", \"事件为单一来源报道（法新社转引），缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得：苏丹边境无人机袭击致四人死亡",
+   "summary_zh": "据乍得瓦迪菲拉省地方政府代表向法新社表示，10月19日（周一）在乍得与苏丹边境的巴米纳发生一起无人机袭击，造成四人死亡、14人受伤。该官员称无人机来源不明，将展开调查以确定袭击来源。苏丹内战持续外溢至乍得境内，乍得与苏丹边境线长约1400公里，管控困难。",
+   "event_type": "border_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "瓦迪菲拉省",
+    "city": "巴米纳",
+    "site": null,
+    "raw_text": "Bamina, ville frontalière du Soudan, province de Wadi-Fira"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得与苏丹边境巴米纳遭无人机袭击，造成四人死亡、14人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nous déplorons quatre morts et 14 blessés lors d'une attaque d'un drone d'origine inconnue à Bamina"
+    },
+    {
+     "fact": "瓦迪菲拉省地方政府代表将展开调查以确定袭击来源",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nous allons diligenter une enquête pour déterminer l'origine de cette attaque"
+    },
+    {
+     "fact": "四名伤者被送往Tiné Djagarba区医院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les quatre blessés ont été admis à l'hôpital de district de Tiné Djagarba"
+    },
+    {
+     "fact": "苏丹内战自2023年以来持续外溢至乍得境内",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La guerre au Soudan, qui s'oppose à l'armée soudanaise aux paramilitaires des Forces de soutien rapide (FSR) depuis 2023, déborde régulièrement sur le territoire tchadien"
+    },
+    {
+     "fact": "乍得与苏丹边境线长约1400公里，地处沙漠地区，管控困难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Longue de près de 1.400 kilomètres et située dans une région désertique, la frontière entre le Tchad et le Soudan demeure poreuse et difficile à contrôler"
+    }
+   ],
+   "uncertainties": [
+    "无人机来源不明，尚未确认袭击方",
+    "伤亡数字来自单一地方政府官员表述，尚未获独立核实",
+    "事件为单一来源报道（法新社转引），缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得：苏丹边境无人机袭击致四人死亡",
+   "summary_zh": "据乍得瓦迪菲拉省地方政府代表向法新社表示，10月19日（周一）在乍得与苏丹边境的巴米纳发生一起无人机袭击，造成四人死亡、14人受伤。该官员称无人机来源不明，将展开调查以确定袭击来源。苏丹内战持续外溢至乍得境内，乍得与苏丹边境线长约1400公里，管控困难。",
+   "event_type": "border_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "瓦迪菲拉省",
+    "city": "巴米纳",
+    "site": null,
+    "raw_text": "Bamina, ville frontalière du Soudan, province de Wadi-Fira"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得与苏丹边境巴米纳遭无人机袭击，造成四人死亡、14人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nous déplorons quatre morts et 14 blessés lors d'une attaque d'un drone d'origine inconnue à Bamina"
+    },
+    {
+     "fact": "瓦迪菲拉省地方政府代表将展开调查以确定袭击来源",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nous allons diligenter une enquête pour déterminer l'origine de cette attaque"
+    },
+    {
+     "fact": "四名伤者被送往Tiné Djagarba区医院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les quatre blessés ont été admis à l'hôpital de district de Tiné Djagarba"
+    },
+    {
+     "fact": "苏丹内战自2023年以来持续外溢至乍得境内",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La guerre au Soudan, qui s'oppose à l'armée soudanaise aux paramilitaires des Forces de soutien rapide (FSR) depuis 2023, déborde régulièrement sur le territoire tchadien"
+    },
+    {
+     "fact": "乍得与苏丹边境线长约1400公里，地处沙漠地区，管控困难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Longue de près de 1.400 kilomètres et située dans une région désertique, la frontière entre le Tchad et le Soudan demeure poreuse et difficile à contrôler"
+    }
+   ],
+   "uncertainties": [
+    "无人机来源不明，尚未确认袭击方",
+    "伤亡数字来自单一地方政府官员表述，尚未获独立核实",
+    "事件为单一来源报道（法新社转引），缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_11074d1e4f7f23b8",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

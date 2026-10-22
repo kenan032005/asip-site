@@ -1,0 +1,136 @@
+{
+ "label": "S20f370dd",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6aecd891ccefde3ba7a71c0fc4dc56f7a2824665bc72a8d64747d5f0dbcff00b",
+ "tokens": {
+  "input_tokens": 2948,
+  "output_tokens": 527,
+  "total_tokens": 3475
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"首日罢工参与率90%为工会单方面说法，媒体对罢工规模说法不一\", \"罢工对经济和社会服务的实际影响程度尚未获独立确认\"]",
+    "after": "[\"首日罢工参与率90%为工会单方面说法，媒体对罢工规模说法不一\", \"罢工对经济和社会服务的实际影响程度尚未获独立确认\", \"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "塞内加尔爆发全国性大罢工",
+   "summary_zh": "塞内加尔工会阵线（FSDT）自10月21日起发起为期三天的社会动员与全国大罢工，教育、卫生、司法和交通等多个行业工会参与。工会方面声称首日罢工在全国范围内参与率达90%，但部分媒体认为罢工影响不一、力度有限。罢工发生在购买力、就业和社会保护等紧张氛围中，同时政府与议会围绕预算修正案存在分歧。",
+   "event_type": "civil_unrest",
+   "country_iso3": "SEN",
+   "location": {
+    "country_iso3": "SEN",
+    "admin1": null,
+    "city": "达喀尔",
+    "site": null,
+    "raw_text": "Sénégal / Dakar"
+   },
+   "key_facts": [
+    {
+     "fact": "塞内加尔工会阵线自10月21日起发起三天社会动员和全国大罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Sénégal a entamé mercredi 21 octobre trois journées de mobilisation sociale à l’appel du Front syndical pour la défense des travailleurs (FSDT)."
+    },
+    {
+     "fact": "教育、卫生、司法和交通等多个行业工会加入罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plusieurs organisations syndicales se sont jointes au mouvement, notamment dans les secteurs de l’enseignement, de la santé, de la justice et des transports."
+    },
+    {
+     "fact": "工会方面声称首日罢工在全国范围内参与率达90%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la première journée de grève a été massivement suivie, à 90 % sur l’ensemble du territoire national"
+    },
+    {
+     "fact": "部分媒体认为罢工影响不一、力度有限",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Certains journaux tempèrent ce bel enthousiasme : « grève générale, impact variable », nuance Walf Quotidien. « Un mouvement en demi-teinte », relève Le Soleil."
+    },
+    {
+     "fact": "罢工期间医院运转放缓、行政手续受阻、能源网络承压",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "hôpitaux au ralenti, démarches administratives bloquées et tensions sur le réseau énergétique"
+    }
+   ],
+   "uncertainties": [
+    "首日罢工参与率90%为工会单方面说法，媒体对罢工规模说法不一",
+    "罢工对经济和社会服务的实际影响程度尚未获独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "塞内加尔爆发全国性大罢工",
+   "summary_zh": "塞内加尔工会阵线（FSDT）自10月21日起发起为期三天的社会动员与全国大罢工，教育、卫生、司法和交通等多个行业工会参与。工会方面声称首日罢工在全国范围内参与率达90%，但部分媒体认为罢工影响不一、力度有限。罢工发生在购买力、就业和社会保护等紧张氛围中，同时政府与议会围绕预算修正案存在分歧。",
+   "event_type": "civil_unrest",
+   "country_iso3": "SEN",
+   "location": {
+    "country_iso3": "SEN",
+    "admin1": null,
+    "city": "达喀尔",
+    "site": null,
+    "raw_text": "Sénégal / Dakar"
+   },
+   "key_facts": [
+    {
+     "fact": "塞内加尔工会阵线自10月21日起发起三天社会动员和全国大罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Sénégal a entamé mercredi 21 octobre trois journées de mobilisation sociale à l’appel du Front syndical pour la défense des travailleurs (FSDT)."
+    },
+    {
+     "fact": "教育、卫生、司法和交通等多个行业工会加入罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plusieurs organisations syndicales se sont jointes au mouvement, notamment dans les secteurs de l’enseignement, de la santé, de la justice et des transports."
+    },
+    {
+     "fact": "工会方面声称首日罢工在全国范围内参与率达90%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la première journée de grève a été massivement suivie, à 90 % sur l’ensemble du territoire national"
+    },
+    {
+     "fact": "部分媒体认为罢工影响不一、力度有限",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Certains journaux tempèrent ce bel enthousiasme : « grève générale, impact variable », nuance Walf Quotidien. « Un mouvement en demi-teinte », relève Le Soleil."
+    },
+    {
+     "fact": "罢工期间医院运转放缓、行政手续受阻、能源网络承压",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "hôpitaux au ralenti, démarches administratives bloquées et tensions sur le réseau énergétique"
+    }
+   ],
+   "uncertainties": [
+    "首日罢工参与率90%为工会单方面说法，媒体对罢工规模说法不一",
+    "罢工对经济和社会服务的实际影响程度尚未获独立确认",
+    "据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_a17c4c6f20f370dd",
+ "disease_event_id": null,
+ "country_code": "SN"
+}

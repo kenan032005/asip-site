@@ -1,0 +1,127 @@
+{
+ "label": "Sac18f562",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "17e2871bc74e39a1c3f2b82e835d43fe98ae33abf6b35a0528be296858a13bab",
+ "tokens": {
+  "input_tokens": 2598,
+  "output_tokens": 648,
+  "total_tokens": 3246
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（布）宣布向利夸拉省受灾民众提供援助措施",
+   "summary_zh": "刚果（布）政府决定采取一系列措施，援助利夸拉省（北部）约4.3万名受强降雨引发严重洪灾影响的民众。降雨在该地区仍在持续。政府称局势“灾难性”，已在首都与利夸拉省首府因普丰多之间建立空中桥梁运送食品、防水布和药品等物资，并计划通过人道主义车队和刚果河运输物资。",
+   "event_type": "natural_disaster",
+   "country_iso3": "COG",
+   "location": {
+    "country_iso3": "COG",
+    "admin1": "利夸拉省",
+    "city": "因普丰多",
+    "site": "乌班吉河沿岸及埃佩纳县",
+    "raw_text": "la Likouala (nord), Impfondo, sous-préfecture d'Epena, rivière Oubangui"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（布）政府决定采取措施援助利夸拉省约4.3万名洪灾受灾民众",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement a décidé de mettre en place une série de mesures, en vue d’assister près de 43 000 personnes dans la Likouala (nord), frappées par de fortes inondations"
+    },
+    {
+     "fact": "降雨在利夸拉地区仍在持续",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces pluies continuent encore dans la zone."
+    },
+    {
+     "fact": "政府称局势“灾难性”，已在首都与因普丰多之间建立空中桥梁运送物资",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La situation est jugée « catastrophique » et préoccupante par le gouvernement du Congo-Brazzaville. Un pont aérien a donc été instauré entre la capitale du pays et celle de la Likouala, Impfondo"
+    },
+    {
+     "fact": "埃佩纳县被完全淹没，周边15个村庄亦被淹，洪水已开始波及布阿内拉和因普丰多",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les dégâts se concentrent dans la sous-préfecture d'Epena, totalement submergée. Quinze villages aux alentours sont également inondés. Et les eaux ont commencé à toucher Bouanela et Impfondo."
+    },
+    {
+     "fact": "据联合国儿童基金会称，利夸拉省是受周期性洪灾影响最严重的省份",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon l’Unicef, parmi les départements vulnérables, celui de la Likouala est de loin le plus touché par des inondations cycliques"
+    }
+   ],
+   "uncertainties": [
+    "受灾人数及损失规模目前仅来自单一来源（RFI）报道，尚缺乏交叉验证",
+    "政府承诺的安置地点尚未确定",
+    "局势可能进一步恶化，后续影响有待核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（布）宣布向利夸拉省受灾民众提供援助措施",
+   "summary_zh": "刚果（布）政府决定采取一系列措施，援助利夸拉省（北部）约4.3万名受强降雨引发严重洪灾影响的民众。降雨在该地区仍在持续。政府称局势“灾难性”，已在首都与利夸拉省首府因普丰多之间建立空中桥梁运送食品、防水布和药品等物资，并计划通过人道主义车队和刚果河运输物资。",
+   "event_type": "natural_disaster",
+   "country_iso3": "COG",
+   "location": {
+    "country_iso3": "COG",
+    "admin1": "利夸拉省",
+    "city": "因普丰多",
+    "site": "乌班吉河沿岸及埃佩纳县",
+    "raw_text": "la Likouala (nord), Impfondo, sous-préfecture d'Epena, rivière Oubangui"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（布）政府决定采取措施援助利夸拉省约4.3万名洪灾受灾民众",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement a décidé de mettre en place une série de mesures, en vue d’assister près de 43 000 personnes dans la Likouala (nord), frappées par de fortes inondations"
+    },
+    {
+     "fact": "降雨在利夸拉地区仍在持续",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces pluies continuent encore dans la zone."
+    },
+    {
+     "fact": "政府称局势“灾难性”，已在首都与因普丰多之间建立空中桥梁运送物资",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La situation est jugée « catastrophique » et préoccupante par le gouvernement du Congo-Brazzaville. Un pont aérien a donc été instauré entre la capitale du pays et celle de la Likouala, Impfondo"
+    },
+    {
+     "fact": "埃佩纳县被完全淹没，周边15个村庄亦被淹，洪水已开始波及布阿内拉和因普丰多",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les dégâts se concentrent dans la sous-préfecture d'Epena, totalement submergée. Quinze villages aux alentours sont également inondés. Et les eaux ont commencé à toucher Bouanela et Impfondo."
+    },
+    {
+     "fact": "据联合国儿童基金会称，利夸拉省是受周期性洪灾影响最严重的省份",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon l’Unicef, parmi les départements vulnérables, celui de la Likouala est de loin le plus touché par des inondations cycliques"
+    }
+   ],
+   "uncertainties": [
+    "受灾人数及损失规模目前仅来自单一来源（RFI）报道，尚缺乏交叉验证",
+    "政府承诺的安置地点尚未确定",
+    "局势可能进一步恶化，后续影响有待核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_bc810b99ac18f562",
+ "disease_event_id": null,
+ "country_code": "CG"
+}

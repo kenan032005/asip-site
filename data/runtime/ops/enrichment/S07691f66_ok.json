@@ -1,0 +1,115 @@
+{
+ "label": "S07691f66",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "52d9033ed1150a616cbd3b976475ed990e89b982771082b651e7b06e2920235d",
+ "tokens": {
+  "input_tokens": 2254,
+  "output_tokens": 498,
+  "total_tokens": 2752
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "联合国对尼日利亚遏制埃博拉疫情表示有信心",
+   "summary_zh": "联合国表示相信尼日利亚有能力控制其新确诊的埃博拉病例，并承诺提供支持以防止这种致命疾病进一步传播。联合国秘书长发言人斯特凡·迪雅里克在纽约联合国总部回答尼日利亚通讯社提问时作出上述表态。迪雅里克称，联合国对尼日利亚检测出埃博拉邦迪布焦型病毒感到关切，该国是当前疫情中第五个报告病例的国家。他同时赞扬尼日利亚卫生当局的快速反应和广泛接触者追踪工作。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国表示相信尼日利亚有能力控制新确诊的埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "THE United Nations has expressed confidence in Nigeria’s capacity to contain its newly confirmed Ebola case, pledging support to prevent further spread of the deadly disease."
+    },
+    {
+     "fact": "尼日利亚检测出埃博拉邦迪布焦型病毒，为当前疫情中第五个报告病例的国家",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dujarric said the UN was concerned about the detection of the Ebola Bundibugyo virus in Nigeria, the fifth country to report a case during the current outbreak."
+    },
+    {
+     "fact": "联合国秘书长发言人迪雅里克在纽约联合国总部作出上述表态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "UN Secretary-General’s Spokesperson, Stéphane Dujarric, gave the assurance on Wednesday while responding to questions from the News Agency of Nigeria (NAN) at the UN Headquarters in New York."
+    },
+    {
+     "fact": "联合国对尼日利亚卫生当局的快速反应和接触者追踪工作表示赞赏",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "he expressed confidence in Nigeria’s health authorities, commending their swift response and extensive contact-tracing efforts following the confirmation."
+    }
+   ],
+   "uncertainties": [
+    "该事件目前为单一来源报道，尚缺乏交叉验证",
+    "埃博拉病例的具体感染人数和传播范围未在文中说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "联合国对尼日利亚遏制埃博拉疫情表示有信心",
+   "summary_zh": "联合国表示相信尼日利亚有能力控制其新确诊的埃博拉病例，并承诺提供支持以防止这种致命疾病进一步传播。联合国秘书长发言人斯特凡·迪雅里克在纽约联合国总部回答尼日利亚通讯社提问时作出上述表态。迪雅里克称，联合国对尼日利亚检测出埃博拉邦迪布焦型病毒感到关切，该国是当前疫情中第五个报告病例的国家。他同时赞扬尼日利亚卫生当局的快速反应和广泛接触者追踪工作。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国表示相信尼日利亚有能力控制新确诊的埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "THE United Nations has expressed confidence in Nigeria’s capacity to contain its newly confirmed Ebola case, pledging support to prevent further spread of the deadly disease."
+    },
+    {
+     "fact": "尼日利亚检测出埃博拉邦迪布焦型病毒，为当前疫情中第五个报告病例的国家",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dujarric said the UN was concerned about the detection of the Ebola Bundibugyo virus in Nigeria, the fifth country to report a case during the current outbreak."
+    },
+    {
+     "fact": "联合国秘书长发言人迪雅里克在纽约联合国总部作出上述表态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "UN Secretary-General’s Spokesperson, Stéphane Dujarric, gave the assurance on Wednesday while responding to questions from the News Agency of Nigeria (NAN) at the UN Headquarters in New York."
+    },
+    {
+     "fact": "联合国对尼日利亚卫生当局的快速反应和接触者追踪工作表示赞赏",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "he expressed confidence in Nigeria’s health authorities, commending their swift response and extensive contact-tracing efforts following the confirmation."
+    }
+   ],
+   "uncertainties": [
+    "该事件目前为单一来源报道，尚缺乏交叉验证",
+    "埃博拉病例的具体感染人数和传播范围未在文中说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_06777aac07691f66",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

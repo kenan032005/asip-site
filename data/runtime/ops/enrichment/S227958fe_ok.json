@@ -1,0 +1,115 @@
+{
+ "label": "S227958fe",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1210e0edba74f1771bda06a33807e98e6ba957ddf0d2bee2684390a206074987",
+ "tokens": {
+  "input_tokens": 2840,
+  "output_tokens": 552,
+  "total_tokens": 3392
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "毛里塔尼亚反对党Tawassoul示威，反对总统可能寻求第三个任期",
+   "summary_zh": "毛里塔尼亚反对党全国改革与发展联盟（Tawassoul）于10月21日在努瓦克肖特三个地区举行静坐示威，反对总统穆罕默德·乌尔德·加祖瓦尼可能寻求第三个任期。该党以“三个不”为口号启动政治活动：反对第三个任期、反对限制和侵犯自由、反对腐败。示威在首都多个市镇获得该党活动人士的广泛响应。此次集会是在执政阵营部分人士、包括改组后政府成员呼吁第三个任期之后举行的。",
+   "event_type": "civil_unrest",
+   "country_iso3": "MRT",
+   "location": {
+    "country_iso3": "MRT",
+    "admin1": "努瓦克肖特",
+    "city": "努瓦克肖特",
+    "site": null,
+    "raw_text": "Nouakchott, dans les trois régions de Nouakchott, département d'Arafat, à Nouakchott-Sud"
+   },
+   "key_facts": [
+    {
+     "fact": "毛里塔尼亚反对党Tawassoul于10月21日在努瓦克肖特三个地区举行静坐示威",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le parti du Rassemblement national pour la réforme et le développement Tawassoul a tenu le 21 octobre des sit-in dans les trois régions de Nouakchott"
+    },
+    {
+     "fact": "示威针对总统穆罕默德·乌尔德·加祖瓦尼可能寻求第三个任期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "pour contester un éventuel troisième mandat du président"
+    },
+    {
+     "fact": "该党以“三个不”为口号启动政治活动：反对第三个任期、反对限制和侵犯自由、反对腐败",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Tawassoul lance sa campagne sous le signe des « trois non » : non à un troisième mandat, non aux restrictions et aux atteintes aux libertés, et non à la corruption"
+    },
+    {
+     "fact": "此次集会是在执政阵营部分人士呼吁第三个任期之后举行的",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce rassemblement fait suite à des appels à un troisième mandat lancés par des partisans du pouvoir, dont certains membres du gouvernement en place"
+    }
+   ],
+   "uncertainties": [
+    "总统是否确实寻求第三个任期仅为“可能”（éventuel），尚未证实",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "毛里塔尼亚反对党Tawassoul示威，反对总统可能寻求第三个任期",
+   "summary_zh": "毛里塔尼亚反对党全国改革与发展联盟（Tawassoul）于10月21日在努瓦克肖特三个地区举行静坐示威，反对总统穆罕默德·乌尔德·加祖瓦尼可能寻求第三个任期。该党以“三个不”为口号启动政治活动：反对第三个任期、反对限制和侵犯自由、反对腐败。示威在首都多个市镇获得该党活动人士的广泛响应。此次集会是在执政阵营部分人士、包括改组后政府成员呼吁第三个任期之后举行的。",
+   "event_type": "civil_unrest",
+   "country_iso3": "MRT",
+   "location": {
+    "country_iso3": "MRT",
+    "admin1": "努瓦克肖特",
+    "city": "努瓦克肖特",
+    "site": null,
+    "raw_text": "Nouakchott, dans les trois régions de Nouakchott, département d'Arafat, à Nouakchott-Sud"
+   },
+   "key_facts": [
+    {
+     "fact": "毛里塔尼亚反对党Tawassoul于10月21日在努瓦克肖特三个地区举行静坐示威",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le parti du Rassemblement national pour la réforme et le développement Tawassoul a tenu le 21 octobre des sit-in dans les trois régions de Nouakchott"
+    },
+    {
+     "fact": "示威针对总统穆罕默德·乌尔德·加祖瓦尼可能寻求第三个任期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "pour contester un éventuel troisième mandat du président"
+    },
+    {
+     "fact": "该党以“三个不”为口号启动政治活动：反对第三个任期、反对限制和侵犯自由、反对腐败",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Tawassoul lance sa campagne sous le signe des « trois non » : non à un troisième mandat, non aux restrictions et aux atteintes aux libertés, et non à la corruption"
+    },
+    {
+     "fact": "此次集会是在执政阵营部分人士呼吁第三个任期之后举行的",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce rassemblement fait suite à des appels à un troisième mandat lancés par des partisans du pouvoir, dont certains membres du gouvernement en place"
+    }
+   ],
+   "uncertainties": [
+    "总统是否确实寻求第三个任期仅为“可能”（éventuel），尚未证实",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_910ada71227958fe",
+ "disease_event_id": null,
+ "country_code": "MR"
+}

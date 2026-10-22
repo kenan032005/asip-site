@@ -1,0 +1,127 @@
+{
+ "label": "Sedce9239",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "fcb8325ad5e068d32702f202d885a10b74e8fa3545b5e6afba9e58629d71c93b",
+ "tokens": {
+  "input_tokens": 2951,
+  "output_tokens": 595,
+  "total_tokens": 3546
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）南部：手工采矿者与执法部队冲突后科卢韦齐局势暂时平静",
+   "summary_zh": "刚果（金）南部卢阿拉巴省科卢韦齐在连续两天手工采矿者与执法部队冲突后，于10月21日周三出现暂时平静。手工采矿者要求重新开放通常由中方人员经营的收购站和小型矿石加工厂。据民间社会称，初步统计显示手工采矿者中1人死亡、4人受伤、32人被捕。约百名非法居留的中国员工已被遣返。",
+   "event_type": "civil_unrest",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "卢阿拉巴省",
+    "city": "科卢韦齐",
+    "site": null,
+    "raw_text": "Kolwezi, province de Lualaba, sud de la République démocratique du Congo"
+   },
+   "key_facts": [
+    {
+     "fact": "科卢韦齐连续两天发生手工采矿者与执法部队冲突后局势暂时平静",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kolwezi ... a connu une accalmie mercredi 21 octobre, après deux journées consécutives d'affrontements entre mineurs artisanaux et forces de l'ordre."
+    },
+    {
+     "fact": "手工采矿者要求重新开放收购站和小型矿石加工厂",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces exploitants exigeaient la réouverture des comptoirs d'achat ainsi que des petites usines de traitement"
+    },
+    {
+     "fact": "据民间社会称，初步统计为1名手工采矿者死亡、4人受伤、32人被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon la société civile, le bilan provisoire fait état d’un mort parmi les mineurs artisanaux, quatre blessés et 32 arrestations."
+    },
+    {
+     "fact": "约百名非法居留的中国员工被遣返",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une centaine d’employés chinois de petites sociétés minières et des comptoirs d’achat, en séjour irrégulier à Kolwezi, ont été rapatriés."
+    },
+    {
+     "fact": "部分中国公民因签证过期被指非法居留而遭逮捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "vous avez appris l’arrestation de certains ressortissants chinois. Ils sont accusés de séjour irrégulier, leur visa a expiré."
+    }
+   ],
+   "uncertainties": [
+    "伤亡与逮捕数字为民间社会提供的初步统计，尚未获官方确认",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证",
+    "部分中国公民被指非法居留的说法为当局表述，有待核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）南部：手工采矿者与执法部队冲突后科卢韦齐局势暂时平静",
+   "summary_zh": "刚果（金）南部卢阿拉巴省科卢韦齐在连续两天手工采矿者与执法部队冲突后，于10月21日周三出现暂时平静。手工采矿者要求重新开放通常由中方人员经营的收购站和小型矿石加工厂。据民间社会称，初步统计显示手工采矿者中1人死亡、4人受伤、32人被捕。约百名非法居留的中国员工已被遣返。",
+   "event_type": "civil_unrest",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "卢阿拉巴省",
+    "city": "科卢韦齐",
+    "site": null,
+    "raw_text": "Kolwezi, province de Lualaba, sud de la République démocratique du Congo"
+   },
+   "key_facts": [
+    {
+     "fact": "科卢韦齐连续两天发生手工采矿者与执法部队冲突后局势暂时平静",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kolwezi ... a connu une accalmie mercredi 21 octobre, après deux journées consécutives d'affrontements entre mineurs artisanaux et forces de l'ordre."
+    },
+    {
+     "fact": "手工采矿者要求重新开放收购站和小型矿石加工厂",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces exploitants exigeaient la réouverture des comptoirs d'achat ainsi que des petites usines de traitement"
+    },
+    {
+     "fact": "据民间社会称，初步统计为1名手工采矿者死亡、4人受伤、32人被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon la société civile, le bilan provisoire fait état d’un mort parmi les mineurs artisanaux, quatre blessés et 32 arrestations."
+    },
+    {
+     "fact": "约百名非法居留的中国员工被遣返",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une centaine d’employés chinois de petites sociétés minières et des comptoirs d’achat, en séjour irrégulier à Kolwezi, ont été rapatriés."
+    },
+    {
+     "fact": "部分中国公民因签证过期被指非法居留而遭逮捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "vous avez appris l’arrestation de certains ressortissants chinois. Ils sont accusés de séjour irrégulier, leur visa a expiré."
+    }
+   ],
+   "uncertainties": [
+    "伤亡与逮捕数字为民间社会提供的初步统计，尚未获官方确认",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证",
+    "部分中国公民被指非法居留的说法为当局表述，有待核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_e41074b9edce9239",
+ "disease_event_id": null,
+ "country_code": "CD"
+}
