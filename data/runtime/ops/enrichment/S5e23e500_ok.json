@@ -1,0 +1,125 @@
+{
+ "label": "S5e23e500",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1853ac22c925b913264f004e262ac034b3bcc6b640ca0790e08d24bb8d929856",
+ "tokens": {
+  "input_tokens": 2508,
+  "output_tokens": 614,
+  "total_tokens": 3122
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚出现埃博拉病例，乍得加强防范传播风险",
+   "summary_zh": "乍得公共卫生与预防部于2026年10月23日发表公报，宣布在尼日利亚阿布贾于10月20日确认一例埃博拉病毒病病例后，加强监测与应对准备措施。乍得卫生当局表示正与世界卫生组织及地区国家协调，密切跟踪疫情发展，评估跨境传播风险。措施包括加强医疗机构、社区和优先入境点的监测，启动公共卫生应急行动中心，并核查应急队伍、防护装备及隔离和疑似病例救治能力。该部同时安抚民众称，尼日利亚确诊一例并不意味着乍得已发现病例。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得公共卫生与预防部宣布加强针对埃博拉病毒的监测与准备措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministère de la Santé publique et de la Prévention a annoncé, le vendredi 23 octobre 2026, dans un communiqué, le renforcement des mesures de surveillance et de préparation face à la maladie à virus Ebola"
+    },
+    {
+     "fact": "尼日利亚阿布贾于10月20日确认一例埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "après la confirmation d’un cas de maladie à Abuja, au Nigeria, le 20 octobre dernier"
+    },
+    {
+     "fact": "乍得卫生当局正与世界卫生组织及地区国家协调跟踪疫情",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les autorités sanitaires tchadiennes indiquent suivre de près l’évolution de la situation en coordination avec l’Organisation mondiale de la Santé (OMS) et les pays de la région"
+    },
+    {
+     "fact": "措施包括加强入境点监测和启动公共卫生应急行动中心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le renforcement de la surveillance dans les formations sanitaires, les communautés et les points d’entrée prioritaires, la mise en alerte du Centre des opérations d’urgence de santé publique (COUSP)"
+    },
+    {
+     "fact": "乍得卫生部称尼日利亚确诊一例不代表乍得已发现病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la confirmation d’un cas au Nigeria ne signifie pas qu’un cas a été détecté au Tchad"
+    }
+   ],
+   "uncertainties": [
+    "乍得境内是否存在埃博拉病例尚未证实，卫生部称尼日利亚确诊一例不代表乍得已发现病例",
+    "该信息目前仅来自单一来源（Le N'Djam Post），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚出现埃博拉病例，乍得加强防范传播风险",
+   "summary_zh": "乍得公共卫生与预防部于2026年10月23日发表公报，宣布在尼日利亚阿布贾于10月20日确认一例埃博拉病毒病病例后，加强监测与应对准备措施。乍得卫生当局表示正与世界卫生组织及地区国家协调，密切跟踪疫情发展，评估跨境传播风险。措施包括加强医疗机构、社区和优先入境点的监测，启动公共卫生应急行动中心，并核查应急队伍、防护装备及隔离和疑似病例救治能力。该部同时安抚民众称，尼日利亚确诊一例并不意味着乍得已发现病例。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得公共卫生与预防部宣布加强针对埃博拉病毒的监测与准备措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministère de la Santé publique et de la Prévention a annoncé, le vendredi 23 octobre 2026, dans un communiqué, le renforcement des mesures de surveillance et de préparation face à la maladie à virus Ebola"
+    },
+    {
+     "fact": "尼日利亚阿布贾于10月20日确认一例埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "après la confirmation d’un cas de maladie à Abuja, au Nigeria, le 20 octobre dernier"
+    },
+    {
+     "fact": "乍得卫生当局正与世界卫生组织及地区国家协调跟踪疫情",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les autorités sanitaires tchadiennes indiquent suivre de près l’évolution de la situation en coordination avec l’Organisation mondiale de la Santé (OMS) et les pays de la région"
+    },
+    {
+     "fact": "措施包括加强入境点监测和启动公共卫生应急行动中心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le renforcement de la surveillance dans les formations sanitaires, les communautés et les points d’entrée prioritaires, la mise en alerte du Centre des opérations d’urgence de santé publique (COUSP)"
+    },
+    {
+     "fact": "乍得卫生部称尼日利亚确诊一例不代表乍得已发现病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la confirmation d’un cas au Nigeria ne signifie pas qu’un cas a été détecté au Tchad"
+    }
+   ],
+   "uncertainties": [
+    "乍得境内是否存在埃博拉病例尚未证实，卫生部称尼日利亚确诊一例不代表乍得已发现病例",
+    "该信息目前仅来自单一来源（Le N'Djam Post），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_dc303a7f5e23e500",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

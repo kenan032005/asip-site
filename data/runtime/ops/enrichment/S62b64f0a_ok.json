@@ -1,0 +1,117 @@
+{
+ "label": "S62b64f0a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ebcf60effd4ea0d66f39ca60aad6de99cb4b9b6d86ee1ab6d8add1a7c3058352",
+ "tokens": {
+  "input_tokens": 2216,
+  "output_tokens": 549,
+  "total_tokens": 2765
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚警方逮捕七名绑架嫌疑人并寻回受害者遗体",
+   "summary_zh": "尼日利亚警方在阿布贾和卡达纳州逮捕了七名涉嫌参与绑架团伙的嫌疑人，并在库杰的森林营地中寻回一名受害者奥卢瓦达米洛拉·阿德达约的遗体。据警方称，该受害者于2026年8月23日与母亲、12岁弟弟及女佣一同在家中被持枪绑架。目前该案为单一来源报道，部分细节尚待核实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "联邦首都区",
+    "city": "阿布贾",
+    "site": "库杰图库巴森林",
+    "raw_text": "Tukuba Forest, Kuje, Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "警方在阿布贾和卡达纳逮捕七名涉嫌绑架团伙成员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "have arrested seven suspected members of a kidnapping syndicate operating in the Federal Capital Territory and Kaduna State"
+    },
+    {
+     "fact": "警方于10月19日在库杰图库巴森林营地寻回受害者奥卢瓦达米洛拉·阿德达约的遗体",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "recovery of the remains of Miss Oluwadamilola Adedayo from the gang’s camp in Tukuba Forest, Kuje, Abuja, on October 19"
+    },
+    {
+     "fact": "受害者于2026年8月23日与母亲、12岁弟弟及女佣在家中被持枪绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The victim was abducted alongside her mother, Mrs Nancy Adedayo, her 12-year-old brother, David Adedayo, and their housemaid, Jennifer David, during a gunpoint operation at their residence"
+    },
+    {
+     "fact": "绑架者约一小时后释放受害者母亲以筹措赎金，女佣和12岁男孩遭殴打后被弃于森林",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the kidnappers released the victim’s mother about an hour after the abduction to arrange ransom payment, while the housemaid and the 12-year-old boy were assaulted and abandoned unconscious in a forest"
+    }
+   ],
+   "uncertainties": [
+    "案件目前仅有一个来源（Punch）报道，尚缺乏交叉验证",
+    "嫌疑人身份及最终指控尚未经司法确认",
+    "事件时间存在来源间差异（冲突标记：time_difference）"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚警方逮捕七名绑架嫌疑人并寻回受害者遗体",
+   "summary_zh": "尼日利亚警方在阿布贾和卡达纳州逮捕了七名涉嫌参与绑架团伙的嫌疑人，并在库杰的森林营地中寻回一名受害者奥卢瓦达米洛拉·阿德达约的遗体。据警方称，该受害者于2026年8月23日与母亲、12岁弟弟及女佣一同在家中被持枪绑架。目前该案为单一来源报道，部分细节尚待核实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "联邦首都区",
+    "city": "阿布贾",
+    "site": "库杰图库巴森林",
+    "raw_text": "Tukuba Forest, Kuje, Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "警方在阿布贾和卡达纳逮捕七名涉嫌绑架团伙成员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "have arrested seven suspected members of a kidnapping syndicate operating in the Federal Capital Territory and Kaduna State"
+    },
+    {
+     "fact": "警方于10月19日在库杰图库巴森林营地寻回受害者奥卢瓦达米洛拉·阿德达约的遗体",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "recovery of the remains of Miss Oluwadamilola Adedayo from the gang’s camp in Tukuba Forest, Kuje, Abuja, on October 19"
+    },
+    {
+     "fact": "受害者于2026年8月23日与母亲、12岁弟弟及女佣在家中被持枪绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The victim was abducted alongside her mother, Mrs Nancy Adedayo, her 12-year-old brother, David Adedayo, and their housemaid, Jennifer David, during a gunpoint operation at their residence"
+    },
+    {
+     "fact": "绑架者约一小时后释放受害者母亲以筹措赎金，女佣和12岁男孩遭殴打后被弃于森林",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the kidnappers released the victim’s mother about an hour after the abduction to arrange ransom payment, while the housemaid and the 12-year-old boy were assaulted and abandoned unconscious in a forest"
+    }
+   ],
+   "uncertainties": [
+    "案件目前仅有一个来源（Punch）报道，尚缺乏交叉验证",
+    "嫌疑人身份及最终指控尚未经司法确认",
+    "事件时间存在来源间差异（冲突标记：time_difference）"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_a65d462c62b64f0a",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

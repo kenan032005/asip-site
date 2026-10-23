@@ -1,0 +1,138 @@
+{
+ "label": "Sbcc398e7",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "031adfeb73e68b865c0e3c36831cfee4b130ae411522ef3ef8fdbd2c2ce79cbb",
+ "tokens": {
+  "input_tokens": 2465,
+  "output_tokens": 528,
+  "total_tokens": 2993
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"Ervebo疫苗对人间本迪布焦病毒的有效性仍未知\", \"候选疫苗的有效性尚需通过严格临床研究确定\", \"病例与死亡数字为CEPI声明所引数据，未获独立核实\"]",
+    "after": "[\"Ervebo疫苗对人间本迪布焦病毒的有效性仍未知\", \"候选疫苗的有效性尚需通过严格临床研究确定\", \"病例与死亡数字为CEPI声明所引数据，未获独立核实\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "刚果（金）启动针对本迪布焦埃博拉病毒的候选疫苗试验——CEPI",
+   "summary_zh": "刚果（金）在布尼亚启动名为Tumaini的2/3期临床试验，评估针对本迪布焦病毒的候选疫苗，首名受试者已接种。据CEPI称，该国正面临有记录以来最大的本迪布焦病毒病疫情，截至10月21日累计报告9552例病例、4602例死亡。该疫情已于5月15日宣布，并被世卫组织列为国际关注的突发公共卫生事件。目前尚无专门针对本迪布焦病毒的获批疫苗。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": "布尼亚",
+    "site": null,
+    "raw_text": "Bunia, DRC"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）启动针对本迪布焦病毒的候选疫苗2/3期临床试验",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Democratic Republic of the Congo (DRC) has commenced a pivotal Phase 2/3 clinical trial to evaluate vaccine candidates against Bundibugyo virus"
+    },
+    {
+     "fact": "首名受试者在布尼亚接种疫苗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the first participant was vaccinated on Friday in Bunia, DRC, marking the commencement of the Tumaini trial"
+    },
+    {
+     "fact": "截至10月21日累计报告9552例病例、4602例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "As of Oct. 21, the country had recorded 9,552 cases and 4,602 deaths"
+    },
+    {
+     "fact": "疫情于5月15日宣布，并被世卫组织列为国际关注的突发公共卫生事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The outbreak was declared on May 15, and subsequently designated a Public Health Emergency of International Concern by the World Health Organisation (WHO)"
+    },
+    {
+     "fact": "目前尚无专门针对本迪布焦病毒的获批疫苗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "no vaccine had yet been approved specifically for Bundibugyo virus"
+    }
+   ],
+   "uncertainties": [
+    "Ervebo疫苗对人间本迪布焦病毒的有效性仍未知",
+    "候选疫苗的有效性尚需通过严格临床研究确定",
+    "病例与死亡数字为CEPI声明所引数据，未获独立核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "刚果（金）启动针对本迪布焦埃博拉病毒的候选疫苗试验——CEPI",
+   "summary_zh": "刚果（金）在布尼亚启动名为Tumaini的2/3期临床试验，评估针对本迪布焦病毒的候选疫苗，首名受试者已接种。据CEPI称，该国正面临有记录以来最大的本迪布焦病毒病疫情，截至10月21日累计报告9552例病例、4602例死亡。该疫情已于5月15日宣布，并被世卫组织列为国际关注的突发公共卫生事件。目前尚无专门针对本迪布焦病毒的获批疫苗。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": "布尼亚",
+    "site": null,
+    "raw_text": "Bunia, DRC"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）启动针对本迪布焦病毒的候选疫苗2/3期临床试验",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Democratic Republic of the Congo (DRC) has commenced a pivotal Phase 2/3 clinical trial to evaluate vaccine candidates against Bundibugyo virus"
+    },
+    {
+     "fact": "首名受试者在布尼亚接种疫苗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the first participant was vaccinated on Friday in Bunia, DRC, marking the commencement of the Tumaini trial"
+    },
+    {
+     "fact": "截至10月21日累计报告9552例病例、4602例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "As of Oct. 21, the country had recorded 9,552 cases and 4,602 deaths"
+    },
+    {
+     "fact": "疫情于5月15日宣布，并被世卫组织列为国际关注的突发公共卫生事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The outbreak was declared on May 15, and subsequently designated a Public Health Emergency of International Concern by the World Health Organisation (WHO)"
+    },
+    {
+     "fact": "目前尚无专门针对本迪布焦病毒的获批疫苗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "no vaccine had yet been approved specifically for Bundibugyo virus"
+    }
+   ],
+   "uncertainties": [
+    "Ervebo疫苗对人间本迪布焦病毒的有效性仍未知",
+    "候选疫苗的有效性尚需通过严格临床研究确定",
+    "病例与死亡数字为CEPI声明所引数据，未获独立核实",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_78625804bcc398e7",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

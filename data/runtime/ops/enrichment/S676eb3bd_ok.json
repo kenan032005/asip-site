@@ -1,0 +1,115 @@
+{
+ "label": "S676eb3bd",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "30bc4068c6f12bc0d83187f52406bc4a785b4209379fb99e5d328e75826338a6",
+ "tokens": {
+  "input_tokens": 2212,
+  "output_tokens": 493,
+  "total_tokens": 2705
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "阿提库批评蒂努布：声称尼日利亚人爱戴你，卡杜纳广告牌却需安保",
+   "summary_zh": "尼日利亚前副总统阿提库·阿布巴卡尔批评总统博拉·蒂努布，针对据报在卡杜纳部署安保人员保护其竞选广告牌一事提出质疑。阿提库在社交媒体发文中称，蒂努布声称尼日利亚人爱戴他，但其卡杜纳广告牌却需要安保守卫，并批评政府在持续不安全局势下的优先事项。他援引《每日信托》关于安保人员被派去守卫蒂努布竞选海报和广告牌的报道。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "卡杜纳州",
+    "city": "卡杜纳",
+    "site": null,
+    "raw_text": "Kaduna"
+   },
+   "key_facts": [
+    {
+     "fact": "阿提库·阿布巴卡尔批评总统蒂努布在卡杜纳为竞选广告牌部署安保人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "FORMER Vice-President Atiku Abubakar has criticised President Bola Tinubu over the reported deployment of security operatives to protect his campaign billboards in Kaduna"
+    },
+    {
+     "fact": "阿提库援引《每日信托》报道称安保人员被派去守卫蒂努布的竞选海报和广告牌",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "reacted to a Daily Trust report that security personnel had been assigned to guard Tinubu's campaign posters and billboards"
+    },
+    {
+     "fact": "阿提库称蒂努布声称尼日利亚人爱戴他，但其卡杜纳广告牌却需要安保守卫",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Bola, you claim Nigerians love you, yet your billboards in Kaduna require security guards."
+    },
+    {
+     "fact": "阿提库批评政府在持续不安全局势下的优先事项",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "questioning the government's priorities amid persistent insecurity across Nigeria"
+    }
+   ],
+   "uncertainties": [
+    "安保人员被部署保护竞选广告牌一事仅依据《每日信托》报道，尚未获独立确认",
+    "目前仅一个来源报道此事"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "阿提库批评蒂努布：声称尼日利亚人爱戴你，卡杜纳广告牌却需安保",
+   "summary_zh": "尼日利亚前副总统阿提库·阿布巴卡尔批评总统博拉·蒂努布，针对据报在卡杜纳部署安保人员保护其竞选广告牌一事提出质疑。阿提库在社交媒体发文中称，蒂努布声称尼日利亚人爱戴他，但其卡杜纳广告牌却需要安保守卫，并批评政府在持续不安全局势下的优先事项。他援引《每日信托》关于安保人员被派去守卫蒂努布竞选海报和广告牌的报道。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "卡杜纳州",
+    "city": "卡杜纳",
+    "site": null,
+    "raw_text": "Kaduna"
+   },
+   "key_facts": [
+    {
+     "fact": "阿提库·阿布巴卡尔批评总统蒂努布在卡杜纳为竞选广告牌部署安保人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "FORMER Vice-President Atiku Abubakar has criticised President Bola Tinubu over the reported deployment of security operatives to protect his campaign billboards in Kaduna"
+    },
+    {
+     "fact": "阿提库援引《每日信托》报道称安保人员被派去守卫蒂努布的竞选海报和广告牌",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "reacted to a Daily Trust report that security personnel had been assigned to guard Tinubu's campaign posters and billboards"
+    },
+    {
+     "fact": "阿提库称蒂努布声称尼日利亚人爱戴他，但其卡杜纳广告牌却需要安保守卫",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Bola, you claim Nigerians love you, yet your billboards in Kaduna require security guards."
+    },
+    {
+     "fact": "阿提库批评政府在持续不安全局势下的优先事项",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "questioning the government's priorities amid persistent insecurity across Nigeria"
+    }
+   ],
+   "uncertainties": [
+    "安保人员被部署保护竞选广告牌一事仅依据《每日信托》报道，尚未获独立确认",
+    "目前仅一个来源报道此事"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_89c05158676eb3bd",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

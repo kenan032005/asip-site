@@ -1,0 +1,136 @@
+{
+ "label": "Sd889441a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e5e40ad9b64a874e8927e229d67b6e066376bf4d04b294ea98a91eeb018049da",
+ "tokens": {
+  "input_tokens": 2808,
+  "output_tokens": 564,
+  "total_tokens": 3372
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"判决尚未生效，上诉期内或上诉审理前不具终局性\", \"目前仅单一来源（Benin Web TV）报道，尚缺乏交叉验证\"]",
+    "after": "[\"判决尚未生效，上诉期内或上诉审理前不具终局性\", \"目前仅单一来源（Benin Web TV）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁：TikTok博主Barnabé Azongnidé被判处七年实刑",
+   "summary_zh": "贝宁经济犯罪与恐怖主义犯罪惩治法院刑事庭判处TikTok内容创作者Barnabé Azongnidé七年实刑，并处罚金200万非洲法郎，同时下令没收被扣押的手机。其同案被告被判处五年实刑。法院认定其犯有利用电子系统实施诈骗罪，两名被告可在十五日内提出上诉。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "TikTok博主Barnabé Azongnidé被判处七年实刑并处罚金200万非洲法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le tiktokeur béninois Barnabé Azongnidé a été condamné jeudi 22 octobre à sept ans de prison ferme et à deux millions de FCFA d'amende par la chambre correctionnelle de la Cour de répression des infractions économiques et du terrorisme."
+    },
+    {
+     "fact": "法院认定其犯有利用电子系统实施诈骗罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il a été reconnu coupable d'escroquerie au moyen d'un système électronique, selon le compte rendu d'audience de Libre Express."
+    },
+    {
+     "fact": "其同案被告被判处五年实刑和100万非洲法郎罚金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Son coprévenu a écopé de cinq ans de prison ferme et d'un million de FCFA d'amende."
+    },
+    {
+     "fact": "法院下令没收被扣押的手机，两名被告有十五日上诉期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La juridiction a également ordonné la confiscation des téléphones portables saisis. Les deux condamnés disposent d'un délai de quinze jours pour interjeter appel."
+    },
+    {
+     "fact": "案件源于2025年11月该内容创作者与其伴侣被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'affaire remonte à novembre 2025, lorsque le créateur de contenus avait été interpellé avec sa compagne Laura."
+    }
+   ],
+   "uncertainties": [
+    "判决尚未生效，上诉期内或上诉审理前不具终局性",
+    "目前仅单一来源（Benin Web TV）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁：TikTok博主Barnabé Azongnidé被判处七年实刑",
+   "summary_zh": "贝宁经济犯罪与恐怖主义犯罪惩治法院刑事庭判处TikTok内容创作者Barnabé Azongnidé七年实刑，并处罚金200万非洲法郎，同时下令没收被扣押的手机。其同案被告被判处五年实刑。法院认定其犯有利用电子系统实施诈骗罪，两名被告可在十五日内提出上诉。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "TikTok博主Barnabé Azongnidé被判处七年实刑并处罚金200万非洲法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le tiktokeur béninois Barnabé Azongnidé a été condamné jeudi 22 octobre à sept ans de prison ferme et à deux millions de FCFA d'amende par la chambre correctionnelle de la Cour de répression des infractions économiques et du terrorisme."
+    },
+    {
+     "fact": "法院认定其犯有利用电子系统实施诈骗罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il a été reconnu coupable d'escroquerie au moyen d'un système électronique, selon le compte rendu d'audience de Libre Express."
+    },
+    {
+     "fact": "其同案被告被判处五年实刑和100万非洲法郎罚金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Son coprévenu a écopé de cinq ans de prison ferme et d'un million de FCFA d'amende."
+    },
+    {
+     "fact": "法院下令没收被扣押的手机，两名被告有十五日上诉期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La juridiction a également ordonné la confiscation des téléphones portables saisis. Les deux condamnés disposent d'un délai de quinze jours pour interjeter appel."
+    },
+    {
+     "fact": "案件源于2025年11月该内容创作者与其伴侣被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'affaire remonte à novembre 2025, lorsque le créateur de contenus avait été interpellé avec sa compagne Laura."
+    }
+   ],
+   "uncertainties": [
+    "判决尚未生效，上诉期内或上诉审理前不具终局性",
+    "目前仅单一来源（Benin Web TV）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_bf286125d889441a",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
