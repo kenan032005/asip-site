@@ -166,6 +166,8 @@ class GdeltSharedRateLimiter:
         self.backoff_events = 0
         self.requests = 0          # 逻辑查询数（通过缓存/预算门后的 fetch 次数）
         self.http_attempts = 0    # 物理 HTTP 尝试数（含重试；C8-4E W2 STEP3）
+        self.deadline_skips = 0   # 因硬截止线守卫而未发起的查询数（C8-4E 稳定性修复）
+        self.hard_deadline = None  # time.monotonic() 硬截止线；None = 不守卫
         self.cache_hits = 0
         self.status_counts = {}   # "200" / "429" / "timeout" / ...
         self.by_label = {}        # label -> {requests, success, errors, cache_hits}
@@ -180,6 +182,28 @@ class GdeltSharedRateLimiter:
                                      {"requests": 0, "success": 0, "rate_limited": 0,
                                       "errors": 0, "cache_hits": 0, "items": 0})
         d[key] = d.get(key, 0) + n
+
+    def set_hard_deadline(self, monotonic_or_none):
+        """注册进程硬截止线（time.monotonic() 绝对值）。
+
+        C8-4E 稳定性修复：采集器墙钟预算耗尽后，GDELT 的 429 指数退避 sleep
+        （interval 最高 300s × 最多 3 次尝试）可能把采集进程推过外层硬杀线
+        （budget+300s），导致 SIGKILL、统计全丢。注册后，限流器在每次尝试前
+        评估最坏耗时，越线即放弃该查询（GDELT 当前零产出，不损失覆盖）。
+        """
+        self.hard_deadline = float(monotonic_or_none) if monotonic_or_none else None
+
+    def _worst_case_cost(self, attempt, timeout):
+        """本次 fetch 剩余尝试的最坏耗时：剩余次数 ×（当前节流间隔 + 请求超时）。"""
+        remaining = max(1, self.max_attempts - attempt + 1)
+        per = max(self.interval, self.min_interval) + float(timeout or self.timeout)
+        return remaining * per
+
+    def _deadline_would_exceed(self, attempt, timeout):
+        """True = 若继续尝试，最坏耗时将越过硬截止线。"""
+        if self.hard_deadline is None:
+            return False
+        return (self._clock() + self._worst_case_cost(attempt, timeout)) > self.hard_deadline
 
     def _pace(self):
         """全局节流：保证任意两次 GDELT 请求之间至少间隔 self.interval 秒。"""
@@ -253,6 +277,17 @@ class GdeltSharedRateLimiter:
             attempts = attempt
             # C8-4E W2 STEP3：每一次物理 urlopen 尝试都计数，重试不得遗漏
             self.http_attempts += 1
+            # C8-4E 稳定性修复：最坏耗时越过硬截止线则放弃本查询（不发起、不 sleep）
+            if self._deadline_would_exceed(attempt, timeout):
+                self.deadline_skips += 1
+                err = ("GDELT_WALL_CLOCK_SKIP(remaining=%.0fs, worst=%.0fs, "
+                       "deadline_set=%s)" % (max(0.0, (self.hard_deadline or 0) - self._clock()),
+                                              self._worst_case_cost(attempt, timeout),
+                                              self.hard_deadline is not None))
+                return None, err, {"signature": sig, "cache": False,
+                                   "status": "deadline_skip", "attempts": attempts,
+                                   "rate_limited": rate_limited, "retry_after": retry_after,
+                                   "body_class": None, "deadline_skip": True}
             self._pace()
             try:
                 req = urllib.request.Request(url, headers={"User-Agent": UA})
@@ -350,6 +385,8 @@ class GdeltSharedRateLimiter:
                 # C8-4E W1：明确「实际 HTTP 请求数」与「按源聚合计数」的区别，
                 # 不得把按源聚合的失败计数说成实际 HTTP 请求数。
                 "physical_http_attempts": self.http_attempts,
+                "deadline_skips": self.deadline_skips,
+                "hard_deadline_set": self.hard_deadline is not None,
                 "actual_http_requests": self.http_attempts,
                 "body_class_counts": dict(self.body_class_counts),
                 "counting_note": ("logical_queries/requests=逻辑查询数（已扣除缓存命中与预算拒绝）；"
@@ -382,6 +419,8 @@ class GdeltSharedRateLimiter:
             self.requests = 0
             self.cache_hits = 0
             self.http_attempts = 0
+            self.deadline_skips = 0
+            self.hard_deadline = None
             self.status_counts = {}
             self.by_label = {}
             self.body_class_counts = {}

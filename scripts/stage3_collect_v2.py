@@ -291,6 +291,15 @@ def set_wall_clock_limit(seconds):
         _DEADLINE = time.monotonic() + float(seconds)
     else:
         _DEADLINE = None
+    # C8-4E 稳定性修复：把软截止线同步给 GDELT 共享限流器。GDELT 的 429 退避
+    # sleep 不受单源 90s 预算/180s 保留区约束，历史上把采集推过 budget+300s 硬杀线
+    # （SIGKILL、统计全丢；实测 00:05/01:05/10:05/11:05Z 四轮步骤 3120–3132s）。
+    # GDELT 当前零产出，提前放弃不损失覆盖；保留 300s 兜底给收尾与统计落盘。
+    try:
+        from gdelt_rate_limiter import GLOBAL as _GDELT_LIMITER
+        _GDELT_LIMITER.set_hard_deadline(_DEADLINE)
+    except Exception:
+        pass
     return _DEADLINE
 
 

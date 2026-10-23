@@ -34,7 +34,7 @@ from gdelt_rate_limiter import (  # noqa: E402
 import gdelt_search_collector as gsc  # noqa: E402
 from failure_reasons import (  # noqa: E402
     classify_source_failure, QUERY_NO_RESULT, HTTP_429, HTTP_403, TIMEOUT,
-    GDELT_NON_JSON_RESPONSE, GDELT_JSON_INVALID)
+    GDELT_NON_JSON_RESPONSE, GDELT_JSON_INVALID, WALL_CLOCK_LIMIT_REACHED)
 
 URL = "https://api.gdeltproject.org/api/v2/doc/doc?q=x"
 ADVISORY = ("Please limit requests to one every 5 seconds or contact "
@@ -320,6 +320,77 @@ class TestE_RequestCounting(unittest.TestCase):
         self.assertEqual(st["logical_queries"], 1)
         self.assertEqual(st["physical_http_attempts"], 2)   # 1 次 429 + 1 次成功
         self.assertEqual(m.call_count, 2)
+
+
+class TestF_WallClockDeadlineGuard(unittest.TestCase):
+    """F. 硬截止线守卫（C8-4E 稳定性修复：退避 sleep 不得穿越硬杀线）"""
+
+    def test_f1_past_deadline_skips_without_request(self):
+        with mock.patch("urllib.request.urlopen", return_value=_FakeResp("{}")) as m:
+            lim = _limiter()
+            lim.set_hard_deadline(lim._clock() - 1.0)     # 已过期
+            text, err, meta = lim.fetch(URL)
+            st = lim.stats()
+        self.assertIsNone(text)
+        self.assertIn("GDELT_WALL_CLOCK_SKIP", err)
+        self.assertTrue(meta.get("deadline_skip"))
+        self.assertEqual(m.call_count, 0)                 # 未发起任何请求
+        self.assertEqual(st["deadline_skips"], 1)
+        self.assertEqual(st["hard_deadline_set"], True)
+
+    def test_f2_far_deadline_allows_request(self):
+        body = json.dumps({"articles": []})
+        with mock.patch("urllib.request.urlopen", return_value=_FakeResp(body)) as m:
+            lim = _limiter()
+            lim.set_hard_deadline(lim._clock() + 100000.0)
+            text, err, meta = lim.fetch(URL)
+        self.assertIsNotNone(text)
+        self.assertIsNone(err)
+        self.assertEqual(m.call_count, 1)
+        self.assertEqual(lim.stats()["deadline_skips"], 0)
+
+    def test_f3_short_deadline_skips_before_first_attempt(self):
+        # 测试桩 interval=0、timeout=5 ⇒ 最坏耗时 = 3 次 × 5s = 15s；
+        # 截止线设在 +10s（< 15s）⇒ 第一次尝试前即放弃
+        with mock.patch("urllib.request.urlopen", side_effect=_http_error(429)) as m:
+            lim = _limiter(max_attempts=3)
+            lim.set_hard_deadline(lim._clock() + 10.0)
+            text, err, meta = lim.fetch(URL)
+        self.assertIsNone(text)
+        self.assertIn("GDELT_WALL_CLOCK_SKIP", err)
+        self.assertEqual(m.call_count, 0)
+
+    def test_f4_escalating_backoff_respects_deadline(self):
+        # 截止线 +10s < 最坏 15s ⇒ 即便 GDELT 持续 429，也不会发起任何尝试/退避 sleep
+        def flaky(*a, **k):
+            raise _http_error(429)
+
+        with mock.patch("urllib.request.urlopen", side_effect=flaky) as m:
+            lim = _limiter(max_attempts=3)
+            lim.set_hard_deadline(lim._clock() + 10.0)
+            text, err, meta = lim.fetch(URL)
+        self.assertEqual(m.call_count, 0)
+        self.assertIn("GDELT_WALL_CLOCK_SKIP", err)
+        self.assertEqual(lim.stats()["deadline_skips"], 1)
+
+    def test_f5_clear_deadline_restores_normal(self):
+        body = json.dumps({"articles": [{"title": "t", "url": "https://a.example/x"}]})
+        url2 = "https://api.gdeltproject.org/api/v2/doc/doc?query=Niger"
+        with mock.patch("urllib.request.urlopen", return_value=_FakeResp(body)) as m:
+            lim = _limiter()
+            lim.set_hard_deadline(lim._clock() + 100000.0)
+            lim.fetch(URL)
+            lim.set_hard_deadline(None)                  # 解除守卫
+            text, err, meta = lim.fetch(url2)            # 不同 query ⇒ 不同签名，非缓存
+        self.assertIsNotNone(text)
+        self.assertIsNone(err)
+        self.assertEqual(m.call_count, 2)
+
+    def test_f6_skip_maps_to_wall_clock_reason(self):
+        code, _ev = classify_source_failure(
+            {"discovered": 0, "method": "gdelt_search"},
+            ["intl_reuters_chad: gdelt fetch: GDELT_WALL_CLOCK_SKIP(remaining=95s, worst=1020s, deadline_set=True)"])
+        self.assertEqual(code, WALL_CLOCK_LIMIT_REACHED)
 
 
 if __name__ == "__main__":

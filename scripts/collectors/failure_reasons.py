@@ -32,6 +32,10 @@ GDELT_NON_JSON_RESPONSE = "GDELT_NON_JSON_RESPONSE"
 GDELT_JSON_INVALID = "GDELT_JSON_INVALID"
 SOURCE_MAPPING_ERROR = "SOURCE_MAPPING_ERROR"
 NO_RECENT_CONTENT = "NO_RECENT_CONTENT"
+# C8-4E 稳定性修复：该码早已由 stage3 _skipped_stat 直接写入生产遥测
+# （collection_summary.failure_reasons 中即 WALL_CLOCK_LIMIT_REACHED），此处补入词表
+# 以便分类器把「GDELT 因硬截止线守卫放弃」归入同一语义。
+WALL_CLOCK_LIMIT_REACHED = "WALL_CLOCK_LIMIT_REACHED"
 DUPLICATE_ONLY = "DUPLICATE_ONLY"
 UNKNOWN = "UNKNOWN"
 
@@ -39,7 +43,7 @@ UNKNOWN = "UNKNOWN"
 REASON_CODES = [
     HTTP_429, HTTP_403, HTTP_404, DNS, TIMEOUT, ROBOTS_OR_ACCESS,
     RSS_EMPTY, RSS_PARSE_FAILURE, HTML_PARSE_FAILURE, QUERY_NO_RESULT,
-    GDELT_NON_JSON_RESPONSE, GDELT_JSON_INVALID,
+    GDELT_NON_JSON_RESPONSE, GDELT_JSON_INVALID, WALL_CLOCK_LIMIT_REACHED,
     SOURCE_MAPPING_ERROR, NO_RECENT_CONTENT, DUPLICATE_ONLY, UNKNOWN,
 ]
 
@@ -49,6 +53,8 @@ _RULES = [
     (GDELT_NON_JSON_RESPONSE, re.compile(r"GDELT_NON_JSON_RESPONSE|limit requests to one every|"
                                          r"gdeltproject\.org/api", re.I)),
     (GDELT_JSON_INVALID, re.compile(r"GDELT_JSON_INVALID|gdelt json:", re.I)),
+    # C8-4E 稳定性修复：GDELT 因硬截止线守卫放弃 → 归入既有墙钟词表（不新增类别）
+    (WALL_CLOCK_LIMIT_REACHED, re.compile(r"GDELT_WALL_CLOCK_SKIP", re.I)),
     (HTTP_429, re.compile(r"\b429\b|RATE_LIMIT|Too Many Requests", re.I)),
     (HTTP_403, re.compile(r"\b403\b|Forbidden", re.I)),
     (HTTP_404, re.compile(r"\b404\b|Not Found", re.I)),
