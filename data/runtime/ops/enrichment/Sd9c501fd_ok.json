@@ -1,0 +1,127 @@
+{
+ "label": "Sd9c501fd",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a874fa410d310a739f1066655a4b97d295ab869a75b0200f96378fc9941d9778",
+ "tokens": {
+  "input_tokens": 2925,
+  "output_tokens": 541,
+  "total_tokens": 3466
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚网约车司机在Uber退出一个月后仍持续抗议",
+   "summary_zh": "在尼日利亚拉各斯，Uber于9月退出后，剩余网约车应用难以满足出行需求，司机因收入下降和工作条件恶化举行罢工。司机要求平台降低佣金并提高车费，以应对燃油价格自伊朗战争以来上涨超过60%的压力。据网约车司机工会称，目前正与Bolt进行谈判。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "拉各斯州",
+    "city": "拉各斯",
+    "site": null,
+    "raw_text": "Lagos, Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "Uber于9月退出尼日利亚后，拉各斯网约车需求难以被剩余应用满足",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis le départ d'Uber en septembre dernier, la demande a du mal à être satisfaite par les applications restantes."
+    },
+    {
+     "fact": "司机在拉各斯举行罢工，要求改善工作条件、降低佣金并提高车费",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les transporteurs continuent de réclamer un effort aux plateformes... notamment en organisant des grèves à Lagos, comme la semaine dernière"
+    },
+    {
+     "fact": "据网约车司机工会称，尼日利亚约有5万名网约车司机曾活跃于各平台",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon les chiffres du syndicat des transporteurs en ligne, 50 000 conducteurs étaient actifs sur les applications de transport à la demande au Nigeria"
+    },
+    {
+     "fact": "司机称燃油价格自伊朗战争以来上涨超过60%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'augmentation de plus de 60 % du litre de carburant depuis le début de la guerre en Iran"
+    },
+    {
+     "fact": "尼日利亚公司Moove宣布退出尼日利亚市场，并向司机提供车辆",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'entreprise nigériane Moove... a également annoncé quitter le marché nigérian, offrant à ces derniers les voitures mises à disposition"
+    }
+   ],
+   "uncertainties": [
+    "与Bolt的谈判进展尚未确认",
+    "司机收入下降的具体幅度未获证实",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚网约车司机在Uber退出一个月后仍持续抗议",
+   "summary_zh": "在尼日利亚拉各斯，Uber于9月退出后，剩余网约车应用难以满足出行需求，司机因收入下降和工作条件恶化举行罢工。司机要求平台降低佣金并提高车费，以应对燃油价格自伊朗战争以来上涨超过60%的压力。据网约车司机工会称，目前正与Bolt进行谈判。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "拉各斯州",
+    "city": "拉各斯",
+    "site": null,
+    "raw_text": "Lagos, Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "Uber于9月退出尼日利亚后，拉各斯网约车需求难以被剩余应用满足",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis le départ d'Uber en septembre dernier, la demande a du mal à être satisfaite par les applications restantes."
+    },
+    {
+     "fact": "司机在拉各斯举行罢工，要求改善工作条件、降低佣金并提高车费",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les transporteurs continuent de réclamer un effort aux plateformes... notamment en organisant des grèves à Lagos, comme la semaine dernière"
+    },
+    {
+     "fact": "据网约车司机工会称，尼日利亚约有5万名网约车司机曾活跃于各平台",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon les chiffres du syndicat des transporteurs en ligne, 50 000 conducteurs étaient actifs sur les applications de transport à la demande au Nigeria"
+    },
+    {
+     "fact": "司机称燃油价格自伊朗战争以来上涨超过60%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'augmentation de plus de 60 % du litre de carburant depuis le début de la guerre en Iran"
+    },
+    {
+     "fact": "尼日利亚公司Moove宣布退出尼日利亚市场，并向司机提供车辆",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'entreprise nigériane Moove... a également annoncé quitter le marché nigérian, offrant à ces derniers les voitures mises à disposition"
+    }
+   ],
+   "uncertainties": [
+    "与Bolt的谈判进展尚未确认",
+    "司机收入下降的具体幅度未获证实",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_2744eae8d9c501fd",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

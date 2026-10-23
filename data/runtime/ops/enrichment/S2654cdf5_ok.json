@@ -1,0 +1,121 @@
+{
+ "label": "S2654cdf5",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "8bbb054624d3e0dfc8c7deec2aeb97168096473b32a48c9664663060aa150d37",
+ "tokens": {
+  "input_tokens": 2742,
+  "output_tokens": 538,
+  "total_tokens": 3280
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "多索：加强地方行为体预防和洪水风险管理能力",
+   "summary_zh": "尼日尔多索地区在联合国开发计划署支持下举办宣传与培训研讨会，旨在加强地方行为体在洪水灾害预防、准备和应对方面的能力。多索地区官员表示，洪水对当地社区构成反复出现的威胁，常造成人员伤亡、财产损失、基础设施破坏和人口流离失所。会议呼吁行政、市政、传统和宗教当局以及民间社会共同参与防灾，并重视排水设施维护和空间占用规则的遵守。",
+   "event_type": "natural_disaster",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "多索",
+    "city": "多索",
+    "site": "Salma Dan Rani 摔跤竞技场",
+    "raw_text": "Dosso, Arène de lutte Salma Dan Rani de Dosso"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔多索地区举办洪水风险管理培训研讨会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la Direction Générale de la Protection Civile (DGPC) avec l’appui du Programme des Nations Unies pour le Développement (PNUD), a organisé ce lundi 19 octobre 2026 à l’Arène de lutte Salma Dan Rani de Dosso, un atelier de sensibilisation et de formation"
+    },
+    {
+     "fact": "研讨会旨在加强地方行为体在洪水预防、准备和应对方面的能力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette rencontre qui vise à renforcer les capacités des acteurs de terrain en matière de prévention, de préparation et de réponse aux catastrophes"
+    },
+    {
+     "fact": "官员称洪水常造成人员伤亡、财产损失、基础设施破坏和人口流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ces phénomènes occasionnent souvent des pertes en vies humaines, d’importants dégâts matériels, la destruction des infrastructures, des dommages aux cultures ainsi que des déplacements de populations"
+    },
+    {
+     "fact": "多索地区因地理特征和河流泛滥风险需特别关注洪水预防",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la région de Dosso, compte tenu de ses caractéristiques géographiques et de l’existence de zones exposées aux débordements des cours d’eau et au ruissellement des eaux pluviales, mérite une attention particulière"
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "多索：加强地方行为体预防和洪水风险管理能力",
+   "summary_zh": "尼日尔多索地区在联合国开发计划署支持下举办宣传与培训研讨会，旨在加强地方行为体在洪水灾害预防、准备和应对方面的能力。多索地区官员表示，洪水对当地社区构成反复出现的威胁，常造成人员伤亡、财产损失、基础设施破坏和人口流离失所。会议呼吁行政、市政、传统和宗教当局以及民间社会共同参与防灾，并重视排水设施维护和空间占用规则的遵守。",
+   "event_type": "natural_disaster",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "多索",
+    "city": "多索",
+    "site": "Salma Dan Rani 摔跤竞技场",
+    "raw_text": "Dosso, Arène de lutte Salma Dan Rani de Dosso"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔多索地区举办洪水风险管理培训研讨会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la Direction Générale de la Protection Civile (DGPC) avec l’appui du Programme des Nations Unies pour le Développement (PNUD), a organisé ce lundi 19 octobre 2026 à l’Arène de lutte Salma Dan Rani de Dosso, un atelier de sensibilisation et de formation"
+    },
+    {
+     "fact": "研讨会旨在加强地方行为体在洪水预防、准备和应对方面的能力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette rencontre qui vise à renforcer les capacités des acteurs de terrain en matière de prévention, de préparation et de réponse aux catastrophes"
+    },
+    {
+     "fact": "官员称洪水常造成人员伤亡、财产损失、基础设施破坏和人口流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ces phénomènes occasionnent souvent des pertes en vies humaines, d’importants dégâts matériels, la destruction des infrastructures, des dommages aux cultures ainsi que des déplacements de populations"
+    },
+    {
+     "fact": "多索地区因地理特征和河流泛滥风险需特别关注洪水预防",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la région de Dosso, compte tenu de ses caractéristiques géographiques et de l’existence de zones exposées aux débordements des cours d’eau et au ruissellement des eaux pluviales, mérite une attention particulière"
+    }
+   ],
+   "uncertainties": [
+    "据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_8b6459142654cdf5",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

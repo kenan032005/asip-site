@@ -1,0 +1,127 @@
+{
+ "label": "Sbb42839b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "85c5afedff090d1ee3eeba8f2db4cad7aa4064b29f4c4aca42fe74c0284e80ac",
+ "tokens": {
+  "input_tokens": 2835,
+  "output_tokens": 565,
+  "total_tokens": 3400
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "埃塞俄比亚：提格雷人民解放阵线领导人声称其部队继续战斗",
+   "summary_zh": "埃塞俄比亚提格雷地区战事在重启一个月后仍未结束。提格雷人民解放阵线（TPLF）领导人德布雷齐翁·格布雷迈克尔10月21日现身当地电视台，声称其部队仍在进行机动作战并取得战术胜利。埃塞俄比亚政府此前称已收复主要城市并控制该地区，但未对上述最新表态作出回应。报道还提及提格雷南部一次无人机袭击造成四人死亡，以及阿姆哈拉地区针对平民和一所学校的无人机打击。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷州",
+    "city": null,
+    "site": null,
+    "raw_text": "Éthiopie, Tigré"
+   },
+   "key_facts": [
+    {
+     "fact": "提格雷人民解放阵线领导人德布雷齐翁·格布雷迈克尔声称其部队继续作战",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il a affirmé que l'armée du TPLF continuait les combats et avait récemment acquis des victoires tactiques."
+    },
+    {
+     "fact": "埃塞俄比亚政府声称已收复主要城市并控制提格雷地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement éthiopien affirme avoir repris les grandes villes et le contrôle de la région"
+    },
+    {
+     "fact": "TPLF声称上周在提格雷北部和中部农村地区打击数百名联邦士兵",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La semaine dernière le TPLF a annoncé avoir neutralisé plusieurs centaines de soldats des forces fédérales dans des combats au nord et au centre du Tigré dans les régions rurales."
+    },
+    {
+     "fact": "10月20日提格雷南部一次无人机袭击造成四人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Mardi 20 octobre, une frappe de drone a tué quatre personnes dans le sud du Tigré"
+    },
+    {
+     "fact": "阿姆哈拉地区平民和一所学校遭无人机打击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plusieurs frappes de drones ont ciblé lundi des civils et une école en région Amhara"
+    }
+   ],
+   "uncertainties": [
+    "TPLF所称的战术胜利与联邦士兵伤亡数字为其单方面声称，尚未获得独立核实",
+    "埃塞俄比亚政府未对TPLF最新表态作出回应",
+    "提格雷及阿姆哈拉地区战况缺乏交叉验证，目前仅有一个来源报道"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "埃塞俄比亚：提格雷人民解放阵线领导人声称其部队继续战斗",
+   "summary_zh": "埃塞俄比亚提格雷地区战事在重启一个月后仍未结束。提格雷人民解放阵线（TPLF）领导人德布雷齐翁·格布雷迈克尔10月21日现身当地电视台，声称其部队仍在进行机动作战并取得战术胜利。埃塞俄比亚政府此前称已收复主要城市并控制该地区，但未对上述最新表态作出回应。报道还提及提格雷南部一次无人机袭击造成四人死亡，以及阿姆哈拉地区针对平民和一所学校的无人机打击。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷州",
+    "city": null,
+    "site": null,
+    "raw_text": "Éthiopie, Tigré"
+   },
+   "key_facts": [
+    {
+     "fact": "提格雷人民解放阵线领导人德布雷齐翁·格布雷迈克尔声称其部队继续作战",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il a affirmé que l'armée du TPLF continuait les combats et avait récemment acquis des victoires tactiques."
+    },
+    {
+     "fact": "埃塞俄比亚政府声称已收复主要城市并控制提格雷地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement éthiopien affirme avoir repris les grandes villes et le contrôle de la région"
+    },
+    {
+     "fact": "TPLF声称上周在提格雷北部和中部农村地区打击数百名联邦士兵",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La semaine dernière le TPLF a annoncé avoir neutralisé plusieurs centaines de soldats des forces fédérales dans des combats au nord et au centre du Tigré dans les régions rurales."
+    },
+    {
+     "fact": "10月20日提格雷南部一次无人机袭击造成四人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Mardi 20 octobre, une frappe de drone a tué quatre personnes dans le sud du Tigré"
+    },
+    {
+     "fact": "阿姆哈拉地区平民和一所学校遭无人机打击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plusieurs frappes de drones ont ciblé lundi des civils et une école en région Amhara"
+    }
+   ],
+   "uncertainties": [
+    "TPLF所称的战术胜利与联邦士兵伤亡数字为其单方面声称，尚未获得独立核实",
+    "埃塞俄比亚政府未对TPLF最新表态作出回应",
+    "提格雷及阿姆哈拉地区战况缺乏交叉验证，目前仅有一个来源报道"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_4268d7f8bb42839b",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

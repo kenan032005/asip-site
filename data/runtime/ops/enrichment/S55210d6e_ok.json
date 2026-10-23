@@ -1,0 +1,126 @@
+{
+ "label": "S55210d6e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "7360d5be1ddda1591890c96269501c59a0003725faa72c4557c80bab516045d0",
+ "tokens": {
+  "input_tokens": 2315,
+  "output_tokens": 478,
+  "total_tokens": 2793
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"该专家质疑部分隔离中心和实验室当前是否仍具备功能与应对埃博拉的准备状态\", \"尼日利亚是否已充分吸取新冠疫情的教训尚不明确\"]",
+    "after": "[\"该专家质疑部分隔离中心和实验室当前是否仍具备功能与应对埃博拉的准备状态\", \"尼日利亚是否已充分吸取新冠疫情的教训尚不明确\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该专家质疑部分隔离中心和实验室当前是否仍具备功能与应对埃博拉的准备状态\", \"尼日利亚是否已充分吸取新冠疫情的教训尚不明确\", \"相关情况尚未证实。\"]",
+    "after": "[\"该专家质疑部分隔离中心和实验室当前是否仍具备功能与应对埃博拉的准备状态\", \"尼日利亚是否已充分吸取新冠疫情的教训尚不明确\", \"相关情况尚未证实。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "专家呼吁为医护人员配备防护装备以应对埃博拉",
+   "summary_zh": "尼日利亚医学实验室专家Stephen Oricha警告称，医护人员在缺乏充足防护装备和严格感染防控措施的情况下，面临更高的埃博拉暴露风险。据尼日利亚通讯社报道，尼日利亚于10月20日在阿布贾确认一例输入性埃博拉邦迪布焦型病毒病病例，患者为一名近期从乌干达返回的女性。该专家呼吁政府在全国医疗机构、尤其是基层机构保障手套和消毒剂等个人防护装备的供应，并加强应急准备与实验室检测能力。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚于10月20日在阿布贾确认一例输入性埃博拉邦迪布焦型病毒病病例，患者为一名近期从乌干达返回的女性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria confirmed an imported case of Ebola Bundibugyo virus disease in Abuja on Oct. 20, involving a woman who recently travelled from Uganda."
+    },
+    {
+     "fact": "医学实验室专家Stephen Oricha警告称，医护人员在缺乏充足防护装备和严格感染防控措施的情况下，面临更高的埃博拉暴露风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Medical laboratory expert Stephen Oricha has warned that healthcare workers face increased exposure to Ebola without adequate protective equipment and strict infection prevention measures in health facilities."
+    },
+    {
+     "fact": "该专家呼吁政府在全国医疗机构、尤其是基层机构保障手套和消毒剂等个人防护装备的供应",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He urged the government to ensure adequate supplies of Personal Protective Equipment (PPE), including hand gloves and sanitisers, in health facilities nationwide, particularly at the grassroots level where resources were limited."
+    }
+   ],
+   "uncertainties": [
+    "该专家质疑部分隔离中心和实验室当前是否仍具备功能与应对埃博拉的准备状态",
+    "尼日利亚是否已充分吸取新冠疫情的教训尚不明确"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "专家呼吁为医护人员配备防护装备以应对埃博拉",
+   "summary_zh": "尼日利亚医学实验室专家Stephen Oricha警告称，医护人员在缺乏充足防护装备和严格感染防控措施的情况下，面临更高的埃博拉暴露风险。据尼日利亚通讯社报道，尼日利亚于10月20日在阿布贾确认一例输入性埃博拉邦迪布焦型病毒病病例，患者为一名近期从乌干达返回的女性。该专家呼吁政府在全国医疗机构、尤其是基层机构保障手套和消毒剂等个人防护装备的供应，并加强应急准备与实验室检测能力。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚于10月20日在阿布贾确认一例输入性埃博拉邦迪布焦型病毒病病例，患者为一名近期从乌干达返回的女性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria confirmed an imported case of Ebola Bundibugyo virus disease in Abuja on Oct. 20, involving a woman who recently travelled from Uganda."
+    },
+    {
+     "fact": "医学实验室专家Stephen Oricha警告称，医护人员在缺乏充足防护装备和严格感染防控措施的情况下，面临更高的埃博拉暴露风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Medical laboratory expert Stephen Oricha has warned that healthcare workers face increased exposure to Ebola without adequate protective equipment and strict infection prevention measures in health facilities."
+    },
+    {
+     "fact": "该专家呼吁政府在全国医疗机构、尤其是基层机构保障手套和消毒剂等个人防护装备的供应",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He urged the government to ensure adequate supplies of Personal Protective Equipment (PPE), including hand gloves and sanitisers, in health facilities nationwide, particularly at the grassroots level where resources were limited."
+    }
+   ],
+   "uncertainties": [
+    "该专家质疑部分隔离中心和实验室当前是否仍具备功能与应对埃博拉的准备状态",
+    "尼日利亚是否已充分吸取新冠疫情的教训尚不明确",
+    "相关情况尚未证实。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_7fb3e5c755210d6e",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

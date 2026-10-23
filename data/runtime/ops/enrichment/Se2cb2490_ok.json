@@ -1,0 +1,126 @@
+{
+ "label": "Se2cb2490",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "31e1f6d1f03e78a39613c5c364f346027a0045b02a69e05758605611dd6a825e",
+ "tokens": {
+  "input_tokens": 2539,
+  "output_tokens": 419,
+  "total_tokens": 2958
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "verification_level",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"疫情后续是否需调整大型集会安排尚未确定，将视情况与专家磋商后决定\", \"病例传播范围与接触者追踪情况未在文中说明\"]",
+    "after": "[\"疫情后续是否需调整大型集会安排尚未确定，将视情况与专家磋商后决定\", \"病例传播范围与接触者追踪情况未在文中说明\", \"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚卫生部长警告政界人士勿将埃博拉病例政治化",
+   "summary_zh": "尼日利亚卫生与社会福利协调部长穆罕默德·帕特教授在阿布贾新闻发布会上表示，联邦首都区确诊一例输入性本迪布焦型埃博拉病毒病病例，该病例三次检测均为阳性。他呼吁政治领导人不要将这一公共卫生事件政治化，并称目前没有迹象表明需要改变已计划的大型集会。他强调防控决策将严格依据科学证据和专家建议。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "联邦首都区",
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦首都区确诊一例输入性本迪布焦型埃博拉病毒病病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "providing an update on the imported case confirmed in the Federal Capital Territory (FCT)"
+    },
+    {
+     "fact": "该确诊病例三次检测结果均为阳性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It has been tested three times, and those three times’ tests came back positive"
+    },
+    {
+     "fact": "卫生部长帕特在阿布贾新闻发布会上呼吁政界人士不要将病例政治化",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pate made the appeal on Thursday at a news conference in Abuja"
+    },
+    {
+     "fact": "目前没有迹象表明需要改变已计划的大型集会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At this moment, there is no indication that requires us to alter the course of large gatherings that have been planned"
+    }
+   ],
+   "uncertainties": [
+    "疫情后续是否需调整大型集会安排尚未确定，将视情况与专家磋商后决定",
+    "病例传播范围与接触者追踪情况未在文中说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚卫生部长警告政界人士勿将埃博拉病例政治化",
+   "summary_zh": "尼日利亚卫生与社会福利协调部长穆罕默德·帕特教授在阿布贾新闻发布会上表示，联邦首都区确诊一例输入性本迪布焦型埃博拉病毒病病例，该病例三次检测均为阳性。他呼吁政治领导人不要将这一公共卫生事件政治化，并称目前没有迹象表明需要改变已计划的大型集会。他强调防控决策将严格依据科学证据和专家建议。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "联邦首都区",
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦首都区确诊一例输入性本迪布焦型埃博拉病毒病病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "providing an update on the imported case confirmed in the Federal Capital Territory (FCT)"
+    },
+    {
+     "fact": "该确诊病例三次检测结果均为阳性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It has been tested three times, and those three times’ tests came back positive"
+    },
+    {
+     "fact": "卫生部长帕特在阿布贾新闻发布会上呼吁政界人士不要将病例政治化",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pate made the appeal on Thursday at a news conference in Abuja"
+    },
+    {
+     "fact": "目前没有迹象表明需要改变已计划的大型集会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At this moment, there is no indication that requires us to alter the course of large gatherings that have been planned"
+    }
+   ],
+   "uncertainties": [
+    "疫情后续是否需调整大型集会安排尚未确定，将视情况与专家磋商后决定",
+    "病例传播范围与接触者追踪情况未在文中说明",
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_8b5a6644e2cb2490",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

@@ -1,0 +1,124 @@
+{
+ "label": "S195b0351",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "36c0e31b8d5117f9cfd5178a74276b505058f931387847b3c6846845bf40efde",
+ "tokens": {
+  "input_tokens": 3055,
+  "output_tokens": 470,
+  "total_tokens": 3525
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"报道为单一来源（RFI），相关数据与患者经历尚未获得其他来源交叉验证\"]",
+    "after": "[\"报道为单一来源（RFI），相关数据与患者经历尚未获得其他来源交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "马达加斯加“粉红十月”：免费筛查活动持续，但治疗费用依然高昂",
+   "summary_zh": "马达加斯加开展“粉红十月”乳腺癌和宫颈癌免费筛查活动。据联合国机构国际原子能机构（AIEA）数据，该国每年有超过1.4万人死于癌症，其中8000人为女性。报道指出，筛查只是第一步，患者随后还要面对高昂的治疗费用、超负荷的医疗系统以及社会禁忌带来的压力。",
+   "event_type": "other_security",
+   "country_iso3": "MDG",
+   "location": {
+    "country_iso3": "MDG",
+    "admin1": null,
+    "city": "塔那那利佛",
+    "site": null,
+    "raw_text": "Antananarivo, Madagascar"
+   },
+   "key_facts": [
+    {
+     "fact": "马达加斯加开展乳腺癌和宫颈癌免费筛查活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Octobre rose bat son plein à Madagascar, avec des campagnes de dépistage gratuit des cancers du sein et du col de l’utérus."
+    },
+    {
+     "fact": "据国际原子能机构数据，该国每年逾1.4万人死于癌症，其中8000人为女性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le cancer tue plus de 14 000 personnes par an dans le pays, dont 8 000 femmes, selon l’AIEA, une agence des Nations unies."
+    },
+    {
+     "fact": "患者化疗药物费用每次最高达45万阿里亚里（约90欧元）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les soins y sont gratuits, mais pas les médicaments : jusqu’à 450 000 ariary la séance, près de 90 euros."
+    },
+    {
+     "fact": "本年度卫生支出占国家预算的5.4%，低于去年的6.5%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette année, la santé représente 5,4 % du budget de l’État, contre 6,5 % l’an dernier."
+    }
+   ],
+   "uncertainties": [
+    "报道为单一来源（RFI），相关数据与患者经历尚未获得其他来源交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "马达加斯加“粉红十月”：免费筛查活动持续，但治疗费用依然高昂",
+   "summary_zh": "马达加斯加开展“粉红十月”乳腺癌和宫颈癌免费筛查活动。据联合国机构国际原子能机构（AIEA）数据，该国每年有超过1.4万人死于癌症，其中8000人为女性。报道指出，筛查只是第一步，患者随后还要面对高昂的治疗费用、超负荷的医疗系统以及社会禁忌带来的压力。",
+   "event_type": "other_security",
+   "country_iso3": "MDG",
+   "location": {
+    "country_iso3": "MDG",
+    "admin1": null,
+    "city": "塔那那利佛",
+    "site": null,
+    "raw_text": "Antananarivo, Madagascar"
+   },
+   "key_facts": [
+    {
+     "fact": "马达加斯加开展乳腺癌和宫颈癌免费筛查活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Octobre rose bat son plein à Madagascar, avec des campagnes de dépistage gratuit des cancers du sein et du col de l’utérus."
+    },
+    {
+     "fact": "据国际原子能机构数据，该国每年逾1.4万人死于癌症，其中8000人为女性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le cancer tue plus de 14 000 personnes par an dans le pays, dont 8 000 femmes, selon l’AIEA, une agence des Nations unies."
+    },
+    {
+     "fact": "患者化疗药物费用每次最高达45万阿里亚里（约90欧元）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les soins y sont gratuits, mais pas les médicaments : jusqu’à 450 000 ariary la séance, près de 90 euros."
+    },
+    {
+     "fact": "本年度卫生支出占国家预算的5.4%，低于去年的6.5%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette année, la santé représente 5,4 % du budget de l’État, contre 6,5 % l’an dernier."
+    }
+   ],
+   "uncertainties": [
+    "报道为单一来源（RFI），相关数据与患者经历尚未获得其他来源交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_c225e2c6195b0351",
+ "disease_event_id": null,
+ "country_code": "MG"
+}
