@@ -70,9 +70,9 @@ def _http_error(code):
     return urllib.error.HTTPError(URL, code, "err", {}, None)
 
 
-def _limiter():
+def _limiter(max_attempts=2):
     """零间隔 + 假时钟：测试不产生真实等待、不发起真实请求。"""
-    return GdeltSharedRateLimiter(min_interval=0.0, max_interval=0.0, max_attempts=2,
+    return GdeltSharedRateLimiter(min_interval=0.0, max_interval=0.0, max_attempts=max_attempts,
                                   budget=10, timeout=5, allow_network=True,
                                   clock=lambda: 0.0, sleeper=lambda s: None)
 
@@ -263,6 +263,63 @@ class TestD_NoSensitiveLeak(unittest.TestCase):
                                   "query": "domain:reuters.com Chad"}, "Chad", "72h")
         self.assertNotIn("SECRET_TOKEN_123", e["error"])
         self.assertNotIn("body:", e["error"])
+
+
+class TestE_RequestCounting(unittest.TestCase):
+    """E. 逻辑查询数 vs 物理 HTTP 尝试数（C8-4E W2 STEP3：重试不得遗漏在物理计数之外）"""
+
+    def test_e1_success_is_one_query_one_attempt(self):
+        body = json.dumps({"articles": [{"title": "t", "url": "https://a.example/x"}]})
+        with mock.patch("urllib.request.urlopen", return_value=_FakeResp(body)) as m:
+            lim = _limiter()
+            lim.fetch(URL)
+            st = lim.stats()
+        self.assertEqual(st["logical_queries"], 1)
+        self.assertEqual(st["physical_http_attempts"], 1)
+        self.assertEqual(st["actual_http_requests"], 1)
+        self.assertEqual(m.call_count, 1)
+
+    def test_e2_429_retries_counted_as_physical_attempts(self):
+        with mock.patch("urllib.request.urlopen", side_effect=_http_error(429)) as m:
+            lim = _limiter(max_attempts=3)
+            lim.fetch(URL)
+            st = lim.stats()
+        self.assertEqual(st["logical_queries"], 1)          # 一次逻辑查询
+        self.assertEqual(st["physical_http_attempts"], 3)   # 3 次物理尝试（含 2 次重试）
+        self.assertEqual(st["actual_http_requests"], 3)
+        self.assertEqual(m.call_count, 3)
+        self.assertGreaterEqual(st["backoff_events"], 1)
+
+    def test_e3_cache_hit_adds_no_query_no_attempt(self):
+        body = json.dumps({"articles": []})
+        with mock.patch("urllib.request.urlopen", return_value=_FakeResp(body)) as m:
+            lim = _limiter()
+            lim.fetch(URL)
+            lim.fetch(URL)          # 同签名：缓存命中
+            st = lim.stats()
+        self.assertEqual(st["logical_queries"], 1)
+        self.assertEqual(st["physical_http_attempts"], 1)
+        self.assertEqual(st["cache_hits"], 1)
+        self.assertEqual(m.call_count, 1)
+
+    def test_e4_retry_then_success_counts_two_attempts(self):
+        calls = {"n": 0}
+
+        def flaky(*a, **k):
+            calls["n"] += 1
+            if calls["n"] == 1:
+                raise _http_error(429)
+            return _FakeResp(json.dumps({"articles": [{"title": "t", "url": "https://a.example/x"}]}))
+
+        with mock.patch("urllib.request.urlopen", side_effect=flaky) as m:
+            lim = _limiter(max_attempts=3)
+            text, err, meta = lim.fetch(URL)
+            st = lim.stats()
+        self.assertIsNotNone(text)
+        self.assertIsNone(err)
+        self.assertEqual(st["logical_queries"], 1)
+        self.assertEqual(st["physical_http_attempts"], 2)   # 1 次 429 + 1 次成功
+        self.assertEqual(m.call_count, 2)
 
 
 if __name__ == "__main__":

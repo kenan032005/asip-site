@@ -164,7 +164,8 @@ class GdeltSharedRateLimiter:
         self.interval = self.min_interval
         self.retry_after_honored = 0
         self.backoff_events = 0
-        self.requests = 0
+        self.requests = 0          # 逻辑查询数（通过缓存/预算门后的 fetch 次数）
+        self.http_attempts = 0    # 物理 HTTP 尝试数（含重试；C8-4E W2 STEP3）
         self.cache_hits = 0
         self.status_counts = {}   # "200" / "429" / "timeout" / ...
         self.by_label = {}        # label -> {requests, success, errors, cache_hits}
@@ -250,6 +251,8 @@ class GdeltSharedRateLimiter:
         body_class = None
         for attempt in range(1, self.max_attempts + 1):
             attempts = attempt
+            # C8-4E W2 STEP3：每一次物理 urlopen 尝试都计数，重试不得遗漏
+            self.http_attempts += 1
             self._pace()
             try:
                 req = urllib.request.Request(url, headers={"User-Agent": UA})
@@ -334,6 +337,7 @@ class GdeltSharedRateLimiter:
                 "schema": "gdelt-rate-limiter-v1",
                 "host": HOST,
                 "requests": self.requests,
+                "logical_queries": self.requests,
                 "cache_hits": self.cache_hits,
                 "status_counts": dict(self.status_counts),
                 "current_interval_s": round(self.interval, 2),
@@ -345,11 +349,14 @@ class GdeltSharedRateLimiter:
                 "budget_exhausted": self.requests >= self.budget,
                 # C8-4E W1：明确「实际 HTTP 请求数」与「按源聚合计数」的区别，
                 # 不得把按源聚合的失败计数说成实际 HTTP 请求数。
-                "actual_http_requests": self.requests,
+                "physical_http_attempts": self.http_attempts,
+                "actual_http_requests": self.http_attempts,
                 "body_class_counts": dict(self.body_class_counts),
-                "counting_note": ("requests/actual_http_requests=实际 HTTP 请求数（已扣除缓存命中"
-                                  "与预算拒绝）；labeled_* 与 failure_reasons 均按 source_id×国家管线"
-                                  "聚合，一组共享查询会被多个源重复计数，不得当作 HTTP 请求数"),
+                "counting_note": ("logical_queries/requests=逻辑查询数（已扣除缓存命中与预算拒绝）；"
+                                  "physical_http_attempts/actual_http_requests=物理 HTTP 尝试数，"
+                                  "**含 429/超时重试**（一次逻辑查询可产生多次物理尝试）；"
+                                  "labeled_* 与 failure_reasons 均按 source_id×国家管线聚合，"
+                                  "一组共享查询会被多个源重复计数，既不是逻辑查询数也不是物理请求数"),
                 "labeled_requests": total,
                 "labeled_success": success,
                 "labeled_rate_limited": rl,
@@ -374,6 +381,7 @@ class GdeltSharedRateLimiter:
             self.backoff_events = 0
             self.requests = 0
             self.cache_hits = 0
+            self.http_attempts = 0
             self.status_counts = {}
             self.by_label = {}
             self.body_class_counts = {}
