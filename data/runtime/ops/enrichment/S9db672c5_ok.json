@@ -1,0 +1,129 @@
+{
+ "label": "S9db672c5",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "85955a21e6e59f3323a3d3cd924849c56364992968dc88bd8f79715331184de4",
+ "tokens": {
+  "input_tokens": 2505,
+  "output_tokens": 615,
+  "total_tokens": 3120
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得呼吁调查乍苏边境致命无人机袭击事件",
+   "summary_zh": "乍得政府要求对乍得与苏丹边境发生的一起无人机袭击展开调查，该袭击造成至少四人死亡，发生在该国东北部。政府发言人否认乍得军队参与其中，表示袭击来源仍有待确定。苏丹方面民间社会则称有五人死亡，包括三名苏丹难民和两名紧急救援网络志愿者，伤亡数字说法不一。袭击尚未被任何一方宣称负责。",
+   "event_type": "border_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "Wadi Fira",
+    "city": "Bamina",
+    "site": "乍得与苏丹边境的Bamina",
+    "raw_text": "à la frontière entre le Tchad et le Soudan ... dans le nord-est du pays ... à Bamina, une localité frontalière du Soudan"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得政府要求对乍苏边境无人机袭击展开调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement tchadien demande l'ouverture d'une enquête après une frappe de drone à la frontière entre le Tchad et le Soudan"
+    },
+    {
+     "fact": "据乍得Wadi Fira省代表称，10月19日周一Bamina的无人机袭击造成四人死亡、十四人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon le représentant du gouvernement dans la province tchadienne de Wadi Fira, quatre personnes ont été tuées dans une frappe de drone lundi 19 octobre à Bamina"
+    },
+    {
+     "fact": "政府发言人否认乍得军队参与此次袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le porte-parole du gouvernement dément toute implication de l’armée tchadienne, indiquant que l’origine de la frappe reste à déterminer"
+    },
+    {
+     "fact": "苏丹方面民间社会称有五人死亡，包括三名苏丹难民和两名紧急救援网络志愿者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Côté soudanais, la société civile indique cinq morts – trois réfugiés soudanais et deux bénévoles appartenant aux cellules d’urgence"
+    },
+    {
+     "fact": "袭击尚未被任何一方宣称负责",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’attaque n’a pas été revendiquée et le gouvernement a demandé une enquête pour en déterminer l'origine"
+    }
+   ],
+   "uncertainties": [
+    "袭击来源尚未确定，有待调查",
+    "死亡人数说法不一：乍得方面称四人死亡，苏丹民间社会称五人死亡",
+    "袭击方身份未获确认，尚无任何一方宣称负责",
+    "目前仅单一来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得呼吁调查乍苏边境致命无人机袭击事件",
+   "summary_zh": "乍得政府要求对乍得与苏丹边境发生的一起无人机袭击展开调查，该袭击造成至少四人死亡，发生在该国东北部。政府发言人否认乍得军队参与其中，表示袭击来源仍有待确定。苏丹方面民间社会则称有五人死亡，包括三名苏丹难民和两名紧急救援网络志愿者，伤亡数字说法不一。袭击尚未被任何一方宣称负责。",
+   "event_type": "border_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "Wadi Fira",
+    "city": "Bamina",
+    "site": "乍得与苏丹边境的Bamina",
+    "raw_text": "à la frontière entre le Tchad et le Soudan ... dans le nord-est du pays ... à Bamina, une localité frontalière du Soudan"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得政府要求对乍苏边境无人机袭击展开调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement tchadien demande l'ouverture d'une enquête après une frappe de drone à la frontière entre le Tchad et le Soudan"
+    },
+    {
+     "fact": "据乍得Wadi Fira省代表称，10月19日周一Bamina的无人机袭击造成四人死亡、十四人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon le représentant du gouvernement dans la province tchadienne de Wadi Fira, quatre personnes ont été tuées dans une frappe de drone lundi 19 octobre à Bamina"
+    },
+    {
+     "fact": "政府发言人否认乍得军队参与此次袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le porte-parole du gouvernement dément toute implication de l’armée tchadienne, indiquant que l’origine de la frappe reste à déterminer"
+    },
+    {
+     "fact": "苏丹方面民间社会称有五人死亡，包括三名苏丹难民和两名紧急救援网络志愿者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Côté soudanais, la société civile indique cinq morts – trois réfugiés soudanais et deux bénévoles appartenant aux cellules d’urgence"
+    },
+    {
+     "fact": "袭击尚未被任何一方宣称负责",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’attaque n’a pas été revendiquée et le gouvernement a demandé une enquête pour en déterminer l'origine"
+    }
+   ],
+   "uncertainties": [
+    "袭击来源尚未确定，有待调查",
+    "死亡人数说法不一：乍得方面称四人死亡，苏丹民间社会称五人死亡",
+    "袭击方身份未获确认，尚无任何一方宣称负责",
+    "目前仅单一来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_415980cb9db672c5",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

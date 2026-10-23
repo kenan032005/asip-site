@@ -1,0 +1,127 @@
+{
+ "label": "Se5186093",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "69c8458b0c0029ed200a4b661a987667d7cb46263bbd2d21fe5bfded7d8aa7bd",
+ "tokens": {
+  "input_tokens": 2626,
+  "output_tokens": 557,
+  "total_tokens": 3183
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "马达加斯加：米歇尔·兰德里亚尼里纳要求部长公开反腐败战略",
+   "summary_zh": "马达加斯加总统米歇尔·兰德里亚尼里纳要求所有部长在国家电视台公开介绍各自的反腐败战略和重大项目，并允许公民提问。这一宣布正值11名中国籍在押人员据称非法出狱的丑闻发酵之际，司法部长与监狱工会互相指责。目前尚不清楚是谁批准了这些在押人员出狱。",
+   "event_type": "other_security",
+   "country_iso3": "MDG",
+   "location": {
+    "country_iso3": "MDG",
+    "admin1": null,
+    "city": "塔那那利佛",
+    "site": null,
+    "raw_text": "Antananarivo, Madagascar"
+   },
+   "key_facts": [
+    {
+     "fact": "马达加斯加总统米歇尔·兰德里亚尼里纳要求所有部长公开介绍反腐败战略",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le colonel Michaël Randrianirina, a demandé à tous les ministres qu’ils présentent publiquement aux Malgaches leur stratégie de lutte contre la corruption"
+    },
+    {
+     "fact": "11名中国籍在押人员据称非法出狱，其中4人已离境、7人仍在追捕中",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Onze détenus chinois avaient été exfiltrés de leur prison en toute illégalité. Selon la ministre de la Justice, quatre ont déjà quitté le pays, sept sont toujours recherchés."
+    },
+    {
+     "fact": "司法部长与监狱工会就谁批准出狱互相指责",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La ministre de la Justice Fanirsoa Enairvo et le syndicat des agents pénitentiaires s’accusent mutuellement."
+    },
+    {
+     "fact": "监狱长被停职，15名被指为共犯的监狱人员被拘留",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le directeur de la prison a été suspendu et 15 agents penitentiers considérés comme complices ont été placées en garde à vue."
+    },
+    {
+     "fact": "中国表示愿支持调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Chine s’est dit prête à soutenir l’enquête."
+    }
+   ],
+   "uncertainties": [
+    "在押人员出狱的批准者尚未查明",
+    "在押人员据称以数十亿阿里亚里行贿换取出狱，该说法尚未证实",
+    "事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "马达加斯加：米歇尔·兰德里亚尼里纳要求部长公开反腐败战略",
+   "summary_zh": "马达加斯加总统米歇尔·兰德里亚尼里纳要求所有部长在国家电视台公开介绍各自的反腐败战略和重大项目，并允许公民提问。这一宣布正值11名中国籍在押人员据称非法出狱的丑闻发酵之际，司法部长与监狱工会互相指责。目前尚不清楚是谁批准了这些在押人员出狱。",
+   "event_type": "other_security",
+   "country_iso3": "MDG",
+   "location": {
+    "country_iso3": "MDG",
+    "admin1": null,
+    "city": "塔那那利佛",
+    "site": null,
+    "raw_text": "Antananarivo, Madagascar"
+   },
+   "key_facts": [
+    {
+     "fact": "马达加斯加总统米歇尔·兰德里亚尼里纳要求所有部长公开介绍反腐败战略",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le colonel Michaël Randrianirina, a demandé à tous les ministres qu’ils présentent publiquement aux Malgaches leur stratégie de lutte contre la corruption"
+    },
+    {
+     "fact": "11名中国籍在押人员据称非法出狱，其中4人已离境、7人仍在追捕中",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Onze détenus chinois avaient été exfiltrés de leur prison en toute illégalité. Selon la ministre de la Justice, quatre ont déjà quitté le pays, sept sont toujours recherchés."
+    },
+    {
+     "fact": "司法部长与监狱工会就谁批准出狱互相指责",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La ministre de la Justice Fanirsoa Enairvo et le syndicat des agents pénitentiaires s’accusent mutuellement."
+    },
+    {
+     "fact": "监狱长被停职，15名被指为共犯的监狱人员被拘留",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le directeur de la prison a été suspendu et 15 agents penitentiers considérés comme complices ont été placées en garde à vue."
+    },
+    {
+     "fact": "中国表示愿支持调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Chine s’est dit prête à soutenir l’enquête."
+    }
+   ],
+   "uncertainties": [
+    "在押人员出狱的批准者尚未查明",
+    "在押人员据称以数十亿阿里亚里行贿换取出狱，该说法尚未证实",
+    "事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_98dd700fe5186093",
+ "disease_event_id": null,
+ "country_code": "MG"
+}

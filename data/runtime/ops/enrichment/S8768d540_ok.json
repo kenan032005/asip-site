@@ -1,0 +1,117 @@
+{
+ "label": "S8768d540",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "776ce7588b91006b9685debcb0b1ff400ff66dc1ec74e476e80054c77c9a48cb",
+ "tokens": {
+  "input_tokens": 2480,
+  "output_tokens": 542,
+  "total_tokens": 3022
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "多巴：一名男子遭冷血杀害",
+   "summary_zh": "乍得洛贡东省首府多巴，一名40多岁、已婚并育有六名子女的男子于10月22日约19时在贝蒂路段、多巴监狱之后遭不明身份武装人员枪杀。据死者侄子称，袭击者先以摩托车灯照射并辱骂死者，随后连开数枪后驾车逃往多巴方向。司法与安全部门已到场处置，多巴法院共和国检察官要求彻查并追查凶手。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "洛贡东省",
+    "city": "多巴",
+    "site": "贝蒂路段，多巴监狱之后",
+    "raw_text": "sur l’axe de Beti, après la maison d’arrêt de Doba, chef-lieu de la province du Logone Oriental"
+   },
+   "key_facts": [
+    {
+     "fact": "一名40多岁、已婚并育有六名子女的男子遭不明身份武装人员冷血杀害",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un homme âgé de plus de 40 ans, marié et père de six enfants, a été froidement assassiné par des inconnus armés."
+    },
+    {
+     "fact": "事件发生于10月22日约19时，地点在多巴监狱之后的贝蒂路段",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le drame s’est produit le 22 octobre, aux environs de 19 h, sur l’axe de Beti, après la maison d’arrêt de Doba, chef-lieu de la province du Logone Oriental."
+    },
+    {
+     "fact": "据死者侄子称，袭击者开枪后骑摩托车逃往多巴方向",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Après avoir tué mon oncle, ils ont pris leur moto et ont disparu dans la nature en direction de Doba."
+    },
+    {
+     "fact": "多巴法院共和国检察官要求安全部队展开细致调查以查明作案者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Elle a instruit les forces de l’ordre et de sécurité de diligenter des enquêtes minutieuses afin d’identifier les auteurs."
+    }
+   ],
+   "uncertainties": [
+    "袭击者身份尚未确认，目击者称无法辨认开枪者",
+    "作案动机不明",
+    "目前仅单一来源（Tchadinfos）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "多巴：一名男子遭冷血杀害",
+   "summary_zh": "乍得洛贡东省首府多巴，一名40多岁、已婚并育有六名子女的男子于10月22日约19时在贝蒂路段、多巴监狱之后遭不明身份武装人员枪杀。据死者侄子称，袭击者先以摩托车灯照射并辱骂死者，随后连开数枪后驾车逃往多巴方向。司法与安全部门已到场处置，多巴法院共和国检察官要求彻查并追查凶手。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "洛贡东省",
+    "city": "多巴",
+    "site": "贝蒂路段，多巴监狱之后",
+    "raw_text": "sur l’axe de Beti, après la maison d’arrêt de Doba, chef-lieu de la province du Logone Oriental"
+   },
+   "key_facts": [
+    {
+     "fact": "一名40多岁、已婚并育有六名子女的男子遭不明身份武装人员冷血杀害",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un homme âgé de plus de 40 ans, marié et père de six enfants, a été froidement assassiné par des inconnus armés."
+    },
+    {
+     "fact": "事件发生于10月22日约19时，地点在多巴监狱之后的贝蒂路段",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le drame s’est produit le 22 octobre, aux environs de 19 h, sur l’axe de Beti, après la maison d’arrêt de Doba, chef-lieu de la province du Logone Oriental."
+    },
+    {
+     "fact": "据死者侄子称，袭击者开枪后骑摩托车逃往多巴方向",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Après avoir tué mon oncle, ils ont pris leur moto et ont disparu dans la nature en direction de Doba."
+    },
+    {
+     "fact": "多巴法院共和国检察官要求安全部队展开细致调查以查明作案者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Elle a instruit les forces de l’ordre et de sécurité de diligenter des enquêtes minutieuses afin d’identifier les auteurs."
+    }
+   ],
+   "uncertainties": [
+    "袭击者身份尚未确认，目击者称无法辨认开枪者",
+    "作案动机不明",
+    "目前仅单一来源（Tchadinfos）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_d27de20e8768d540",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
