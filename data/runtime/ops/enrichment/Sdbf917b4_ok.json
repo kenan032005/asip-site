@@ -1,0 +1,125 @@
+{
+ "label": "Sdbf917b4",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6200460d1b838677f06c1ae953692dee4918a75737c276af68628abb0c3fd6b7",
+ "tokens": {
+  "input_tokens": 2080,
+  "output_tokens": 488,
+  "total_tokens": 2568
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "APC总统竞选集会前数千人走上卡杜纳街头",
+   "summary_zh": "在周六全体进步大会党（APC）总统竞选集会前夕，数千名总统博拉·蒂努布的支持者于周五在卡杜纳州举行团结游行。游行由APC支持团体主任西拉斯·阿加拉带领，从萨凡纳银行一带行进至卡杜纳州政府大楼，州长乌巴·萨尼接见了代表团。报道称卡杜纳街头布满支持蒂努布的APC旗帜，市中心和巴纳瓦地区几乎所有酒店均已订满。该报道为单一来源。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "卡杜纳州",
+    "city": "卡杜纳",
+    "site": "萨凡纳银行一带至卡杜纳州政府大楼",
+    "raw_text": "Kaduna State, Savannah Bank area, Kaduna State Government House"
+   },
+   "key_facts": [
+    {
+     "fact": "数千名蒂努布支持者在卡杜纳州举行团结游行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Thousands of supporters of President Bola Tinubu on Friday took to the streets of Kaduna State for a solidarity walk"
+    },
+    {
+     "fact": "游行由APC支持团体主任西拉斯·阿加拉带领",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The procession, led by the Head of the APC Support Group Directorate, Silas Agara"
+    },
+    {
+     "fact": "游行队伍从萨凡纳银行一带行进至卡杜纳州政府大楼",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "began around the Savannah Bank area and proceeded to the Kaduna State Government House"
+    },
+    {
+     "fact": "州长乌巴·萨尼接见了游行代表团",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "where Governor Uba Sani received the delegation"
+    },
+    {
+     "fact": "市中心和巴纳瓦地区几乎所有酒店均已订满",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "almost all hotels in the city centre and the Barnawa area were fully booked"
+    }
+   ],
+   "uncertainties": [
+    "报道为单一来源，尚未获得交叉验证",
+    "参与人数仅以“数千人”描述，未提供确切数字"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "APC总统竞选集会前数千人走上卡杜纳街头",
+   "summary_zh": "在周六全体进步大会党（APC）总统竞选集会前夕，数千名总统博拉·蒂努布的支持者于周五在卡杜纳州举行团结游行。游行由APC支持团体主任西拉斯·阿加拉带领，从萨凡纳银行一带行进至卡杜纳州政府大楼，州长乌巴·萨尼接见了代表团。报道称卡杜纳街头布满支持蒂努布的APC旗帜，市中心和巴纳瓦地区几乎所有酒店均已订满。该报道为单一来源。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "卡杜纳州",
+    "city": "卡杜纳",
+    "site": "萨凡纳银行一带至卡杜纳州政府大楼",
+    "raw_text": "Kaduna State, Savannah Bank area, Kaduna State Government House"
+   },
+   "key_facts": [
+    {
+     "fact": "数千名蒂努布支持者在卡杜纳州举行团结游行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Thousands of supporters of President Bola Tinubu on Friday took to the streets of Kaduna State for a solidarity walk"
+    },
+    {
+     "fact": "游行由APC支持团体主任西拉斯·阿加拉带领",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The procession, led by the Head of the APC Support Group Directorate, Silas Agara"
+    },
+    {
+     "fact": "游行队伍从萨凡纳银行一带行进至卡杜纳州政府大楼",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "began around the Savannah Bank area and proceeded to the Kaduna State Government House"
+    },
+    {
+     "fact": "州长乌巴·萨尼接见了游行代表团",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "where Governor Uba Sani received the delegation"
+    },
+    {
+     "fact": "市中心和巴纳瓦地区几乎所有酒店均已订满",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "almost all hotels in the city centre and the Barnawa area were fully booked"
+    }
+   ],
+   "uncertainties": [
+    "报道为单一来源，尚未获得交叉验证",
+    "参与人数仅以“数千人”描述，未提供确切数字"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_ca5881d1dbf917b4",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

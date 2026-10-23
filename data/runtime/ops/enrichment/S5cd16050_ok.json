@@ -1,0 +1,128 @@
+{
+ "label": "S5cd16050",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b7f038a6206fce2b359a2f099df450943940b76313925ef04e5ba55b6ece753c",
+ "tokens": {
+  "input_tokens": 2003,
+  "output_tokens": 392,
+  "total_tokens": 2395
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"枪击来源尚未确认\", \"事件起因不明\", \"目前仅一个来源（Africanews）报道，尚缺乏交叉验证\"]",
+    "after": "[\"枪击来源尚未确认\", \"事件起因不明\", \"目前仅一个来源（Africanews）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "埃塞俄比亚-肯尼亚边境发生枪击事件，数百人逃离",
+   "summary_zh": "据警方消息，周四在边境城镇莫亚莱发生枪击和混乱场面，数百名埃塞俄比亚人越境进入肯尼亚。一名警察被子弹击中帐篷金属支架后头部受击但未受伤，一名女子颈部中弹后被送往私人医院取出子弹，情况稳定。另有子弹击碎La-Tahsan酒店窗户。警方未说明子弹来源。",
+   "event_type": "border_security",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": null,
+    "city": "莫亚莱",
+    "site": "莫亚莱警察局足球场及La-Tahsan酒店",
+    "raw_text": "border town of Moyale"
+   },
+   "key_facts": [
+    {
+     "fact": "数百名埃塞俄比亚人越境进入肯尼亚",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Hundreds of Ethiopians crossed into Kenya on Thursday"
+    },
+    {
+     "fact": "边境城镇莫亚莱发生枪击和混乱场面",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "gunfire and chaotic scenes were reported in the border town of Moyale"
+    },
+    {
+     "fact": "一名女子颈部中弹后被送往私人医院取出子弹，情况稳定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A woman was shot in the neck and taken to a private hospital in Moyale, where the bullet was removed. She was reported to be in stable condition."
+    },
+    {
+     "fact": "警方未说明子弹来源",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Police did not identify the source of the bullets."
+    }
+   ],
+   "uncertainties": [
+    "枪击来源尚未确认",
+    "事件起因不明",
+    "目前仅一个来源（Africanews）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "埃塞俄比亚-肯尼亚边境发生枪击事件，数百人逃离",
+   "summary_zh": "据警方消息，周四在边境城镇莫亚莱发生枪击和混乱场面，数百名埃塞俄比亚人越境进入肯尼亚。一名警察被子弹击中帐篷金属支架后头部受击但未受伤，一名女子颈部中弹后被送往私人医院取出子弹，情况稳定。另有子弹击碎La-Tahsan酒店窗户。警方未说明子弹来源。",
+   "event_type": "border_security",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": null,
+    "city": "莫亚莱",
+    "site": "莫亚莱警察局足球场及La-Tahsan酒店",
+    "raw_text": "border town of Moyale"
+   },
+   "key_facts": [
+    {
+     "fact": "数百名埃塞俄比亚人越境进入肯尼亚",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Hundreds of Ethiopians crossed into Kenya on Thursday"
+    },
+    {
+     "fact": "边境城镇莫亚莱发生枪击和混乱场面",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "gunfire and chaotic scenes were reported in the border town of Moyale"
+    },
+    {
+     "fact": "一名女子颈部中弹后被送往私人医院取出子弹，情况稳定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A woman was shot in the neck and taken to a private hospital in Moyale, where the bullet was removed. She was reported to be in stable condition."
+    },
+    {
+     "fact": "警方未说明子弹来源",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Police did not identify the source of the bullets."
+    }
+   ],
+   "uncertainties": [
+    "枪击来源尚未确认",
+    "事件起因不明",
+    "目前仅一个来源（Africanews）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_aa78d20d5cd16050",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

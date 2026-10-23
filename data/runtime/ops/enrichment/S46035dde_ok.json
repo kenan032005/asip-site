@@ -1,0 +1,136 @@
+{
+ "label": "S46035dde",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "cbf7c295feffc9fa22800d07f34f1aa0f444386bce3ef5edb9e03a38023ce24f",
+ "tokens": {
+  "input_tokens": 2474,
+  "output_tokens": 568,
+  "total_tokens": 3042
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"科技公司违反选举法投放付费广告的指控尚未证实\", \"女性在网络空间受攻击的具体规模缺乏量化数据\"]",
+    "after": "[\"科技公司违反选举法投放付费广告的指控尚未证实\", \"女性在网络空间受攻击的具体规模缺乏量化数据\", \"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚联盟呼吁媒体应对针对女性的网络暴力",
+   "summary_zh": "尼日利亚一个由多家公民社会组织组成的联盟在阿布贾举行媒体交流活动，呼吁加强媒体合作以保护数字权利、促进网络安全，并追究科技平台责任。该联盟指出，女性政治人物、记者等知名女性面临有针对性的网络攻击，包括身体羞辱和威胁发布伪造或私密影像。活动人士还提到据称科技公司在2023年选举前24小时限制期内违规投放付费广告。联盟呼吁在2027年大选前采取性别敏感报道方式并保护女性候选人免受数字恐吓。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚公民社会组织联盟在阿布贾举行媒体交流活动，呼吁加强媒体合作保护数字权利",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A coalition of civil society organisations has called for stronger media partnerships to protect digital rights, promote online safety and hold technology platforms accountable ahead of the 2027 general elections."
+    },
+    {
+     "fact": "该联盟由Digital Africa Research and Safety Lab、DigiCivic Initiative和TechHer组成",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the coalition comprises Digital Africa Research and Safety Lab, DigiCivic Initiative and TechHer"
+    },
+    {
+     "fact": "活动人士称女性政治人物和记者面临有针对性的网络攻击，包括身体羞辱和威胁发布伪造或私密影像",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "women politicians, journalists and other prominent women faced targeted online attacks, including body shaming and threats to release fabricated or intimate images, to force them out of public spaces"
+    },
+    {
+     "fact": "活动人士提到据称科技公司在2023年选举前24小时限制期内违规投放付费广告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "citing alleged breaches of electoral laws by technology companies that ran paid campaigns within the 24-hour restriction period before the 2023 elections"
+    },
+    {
+     "fact": "TechHer运营的聊天机器人Kuram接收技术助长性别暴力的报告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "TechHer operated Kuram, a chatbot that received reports of technology-facilitated gender-based violence, including cyber harassment, doxxing and the non-consensual sharing of intimate images"
+    }
+   ],
+   "uncertainties": [
+    "科技公司违反选举法投放付费广告的指控尚未证实",
+    "女性在网络空间受攻击的具体规模缺乏量化数据"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚联盟呼吁媒体应对针对女性的网络暴力",
+   "summary_zh": "尼日利亚一个由多家公民社会组织组成的联盟在阿布贾举行媒体交流活动，呼吁加强媒体合作以保护数字权利、促进网络安全，并追究科技平台责任。该联盟指出，女性政治人物、记者等知名女性面临有针对性的网络攻击，包括身体羞辱和威胁发布伪造或私密影像。活动人士还提到据称科技公司在2023年选举前24小时限制期内违规投放付费广告。联盟呼吁在2027年大选前采取性别敏感报道方式并保护女性候选人免受数字恐吓。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚公民社会组织联盟在阿布贾举行媒体交流活动，呼吁加强媒体合作保护数字权利",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A coalition of civil society organisations has called for stronger media partnerships to protect digital rights, promote online safety and hold technology platforms accountable ahead of the 2027 general elections."
+    },
+    {
+     "fact": "该联盟由Digital Africa Research and Safety Lab、DigiCivic Initiative和TechHer组成",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the coalition comprises Digital Africa Research and Safety Lab, DigiCivic Initiative and TechHer"
+    },
+    {
+     "fact": "活动人士称女性政治人物和记者面临有针对性的网络攻击，包括身体羞辱和威胁发布伪造或私密影像",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "women politicians, journalists and other prominent women faced targeted online attacks, including body shaming and threats to release fabricated or intimate images, to force them out of public spaces"
+    },
+    {
+     "fact": "活动人士提到据称科技公司在2023年选举前24小时限制期内违规投放付费广告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "citing alleged breaches of electoral laws by technology companies that ran paid campaigns within the 24-hour restriction period before the 2023 elections"
+    },
+    {
+     "fact": "TechHer运营的聊天机器人Kuram接收技术助长性别暴力的报告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "TechHer operated Kuram, a chatbot that received reports of technology-facilitated gender-based violence, including cyber harassment, doxxing and the non-consensual sharing of intimate images"
+    }
+   ],
+   "uncertainties": [
+    "科技公司违反选举法投放付费广告的指控尚未证实",
+    "女性在网络空间受攻击的具体规模缺乏量化数据",
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_da80c17146035dde",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

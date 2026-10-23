@@ -1,0 +1,107 @@
+{
+ "label": "Sbc678779",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "50653e31127126d3094d41a1445bc0df42cdb765750a2947166792edb242f42a",
+ "tokens": {
+  "input_tokens": 2048,
+  "output_tokens": 395,
+  "total_tokens": 2443
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚卫生部长称本国埃博拉毒株与肯尼亚病例密切相关",
+   "summary_zh": "尼日利亚卫生与社会福利协调部长穆罕默德·帕特表示，基因组分析显示尼日利亚确诊的埃博拉毒株与肯尼亚发现的毒株密切相关。但他同时表示，该发现尚未确立尼日利亚病例与肯尼亚指示病例之间的直接流行病学关联，仍需进一步调查以确定可能的传播路径。联邦政府正继续开展接触者追踪、检测和其他公共卫生干预措施。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚卫生部长称基因组分析显示本国埃博拉毒株与肯尼亚发现的毒株密切相关",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "genomic analysis of the country’s confirmed Ebola case shows that the virus is closely related to the one identified in Kenya"
+    },
+    {
+     "fact": "部长表示尚未确立尼日利亚病例与肯尼亚指示病例之间的直接流行病学关联",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the findings had not established a direct epidemiological link between Nigeria’s case and Kenya’s index case"
+    },
+    {
+     "fact": "联邦政府正继续开展接触者追踪、检测和其他公共卫生干预措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Federal Government was continuing contact tracing, testing and other public health interventions to prevent further transmission"
+    }
+   ],
+   "uncertainties": [
+    "尼日利亚病例与肯尼亚指示病例之间是否存在直接流行病学关联尚未确立",
+    "可能的传播路径有待进一步调查确定",
+    "该信息目前仅来自单一来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚卫生部长称本国埃博拉毒株与肯尼亚病例密切相关",
+   "summary_zh": "尼日利亚卫生与社会福利协调部长穆罕默德·帕特表示，基因组分析显示尼日利亚确诊的埃博拉毒株与肯尼亚发现的毒株密切相关。但他同时表示，该发现尚未确立尼日利亚病例与肯尼亚指示病例之间的直接流行病学关联，仍需进一步调查以确定可能的传播路径。联邦政府正继续开展接触者追踪、检测和其他公共卫生干预措施。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚卫生部长称基因组分析显示本国埃博拉毒株与肯尼亚发现的毒株密切相关",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "genomic analysis of the country’s confirmed Ebola case shows that the virus is closely related to the one identified in Kenya"
+    },
+    {
+     "fact": "部长表示尚未确立尼日利亚病例与肯尼亚指示病例之间的直接流行病学关联",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the findings had not established a direct epidemiological link between Nigeria’s case and Kenya’s index case"
+    },
+    {
+     "fact": "联邦政府正继续开展接触者追踪、检测和其他公共卫生干预措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Federal Government was continuing contact tracing, testing and other public health interventions to prevent further transmission"
+    }
+   ],
+   "uncertainties": [
+    "尼日利亚病例与肯尼亚指示病例之间是否存在直接流行病学关联尚未确立",
+    "可能的传播路径有待进一步调查确定",
+    "该信息目前仅来自单一来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_b4bbe490bc678779",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

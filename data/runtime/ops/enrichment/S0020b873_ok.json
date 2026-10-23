@@ -1,0 +1,116 @@
+{
+ "label": "S0020b873",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b71bedadcb9aebc412a08731c395fa5e9cc1257e71b9218e0a102a5e31d53c95",
+ "tokens": {
+  "input_tokens": 2050,
+  "output_tokens": 299,
+  "total_tokens": 2349
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"患者感染途径尚未查明\", \"该信息目前仅来自单一来源，尚未获得交叉验证\"]",
+    "after": "[\"患者感染途径尚未查明\", \"该信息目前仅来自单一来源，尚未获得交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚发现一例埃博拉患者，24州支持州警察修正案",
+   "summary_zh": "据Punch报道，尼日利亚阿布贾一名埃博拉患者被确认为一名瑞士外交官的妻子，当局仍在调查其感染途径。报道还提到，24个州批准了州警察修正案。该信息目前仅来自单一来源，尚未获得交叉验证。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚一名埃博拉患者被确认为阿布贾一名瑞士外交官的妻子",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria’s Ebola patient has been identified as the wife of a Swiss diplomat in Abuja"
+    },
+    {
+     "fact": "当局仍在调查该患者感染病毒的途径",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "authorities continue investigating where she contracted the virus"
+    },
+    {
+     "fact": "24个州批准了州警察修正案",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "24 states back state police"
+    }
+   ],
+   "uncertainties": [
+    "患者感染途径尚未查明",
+    "该信息目前仅来自单一来源，尚未获得交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚发现一例埃博拉患者，24州支持州警察修正案",
+   "summary_zh": "据Punch报道，尼日利亚阿布贾一名埃博拉患者被确认为一名瑞士外交官的妻子，当局仍在调查其感染途径。报道还提到，24个州批准了州警察修正案。该信息目前仅来自单一来源，尚未获得交叉验证。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚一名埃博拉患者被确认为阿布贾一名瑞士外交官的妻子",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria’s Ebola patient has been identified as the wife of a Swiss diplomat in Abuja"
+    },
+    {
+     "fact": "当局仍在调查该患者感染病毒的途径",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "authorities continue investigating where she contracted the virus"
+    },
+    {
+     "fact": "24个州批准了州警察修正案",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "24 states back state police"
+    }
+   ],
+   "uncertainties": [
+    "患者感染途径尚未查明",
+    "该信息目前仅来自单一来源，尚未获得交叉验证",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_a8bd71cf0020b873",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
