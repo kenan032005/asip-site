@@ -1,0 +1,130 @@
+{
+ "label": "S42b48ecc",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "fc1ee00c429fdef1cab24d4a5b281b434897fe168bffb97f2497c8be300a5d1a",
+ "tokens": {
+  "input_tokens": 2916,
+  "output_tokens": 588,
+  "total_tokens": 3504
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"缴获武器库的具体清单、地点和对象尚未公布，缺乏独立核实\", \"事件性质存在说法不一：尼日尔当局称“情绪波动”，部分区域和国际媒体称未遂政变或破坏稳定企图\", \"被加布里埃尔上尉提及的法国、贝宁和科特迪瓦尚未公开回应\", \"逮捕人数仅有“数十名”的模糊说法，无官方详细统计\"]",
+    "after": "[\"缴获武器库的具体清单、地点和对象尚未公布，缺乏独立核实\", \"事件性质存在说法不一：尼日尔当局称“情绪波动”，部分区域和国际媒体称未遂政变或破坏稳定企图\", \"被加布里埃尔上尉提及的法国、贝宁和科特迪瓦尚未公开回应\", \"逮捕人数仅有“数十名”的模糊说法，无官方详细统计\", \"据Niger Infos报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔国家电视台展示兵变后缴获的武器库",
+   "summary_zh": "尼日尔国家电视台在8月28日至29日第101空军基地兵变五天后，展示了安全部队据称从特种部队安全与情报营（BSR-COS）缴获的武器和军事装备。当局此前将事件定性为士兵的“情绪波动”，而部分区域和国际媒体则称之为未遂政变或破坏稳定企图。官方叙事从口头声明转向展示实物证据，但独立核实仍待观察。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "第101空军基地",
+    "raw_text": "base aérienne 101 de Niamey, attenante à l'aéroport international Diori-Hamani"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年8月28日至29日夜间，尼亚美第101空军基地附近发生枪击事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans la nuit du 28 au 29 août 2026, des tirs éclatent aux abords de la base aérienne 101 de Niamey"
+    },
+    {
+     "fact": "尼日尔国家电视台展示了据称从BSR-COS缴获的武器和军事装备",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le journal télévisé de ce mercredi a montré les armes et le matériel militaire que les Forces de défense et de sécurité disent avoir saisis auprès du BSR-COS"
+    },
+    {
+     "fact": "当局称自8月29日以来已逮捕“数十名”军人，但未公布详细数字",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "« Plusieurs dizaines » de militaires arrêtés selon les autorités depuis le 29 août, sans bilan chiffré officiel détaillé"
+    },
+    {
+     "fact": "乍得总统穆罕默德·伊德里斯·代比否认了罗杰·加布里埃尔上尉的证词",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le témoignage de Roger Gabriel a provoqué un démenti du président tchadien Mahamat Idriss Déby"
+    }
+   ],
+   "uncertainties": [
+    "缴获武器库的具体清单、地点和对象尚未公布，缺乏独立核实",
+    "事件性质存在说法不一：尼日尔当局称“情绪波动”，部分区域和国际媒体称未遂政变或破坏稳定企图",
+    "被加布里埃尔上尉提及的法国、贝宁和科特迪瓦尚未公开回应",
+    "逮捕人数仅有“数十名”的模糊说法，无官方详细统计"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔国家电视台展示兵变后缴获的武器库",
+   "summary_zh": "尼日尔国家电视台在8月28日至29日第101空军基地兵变五天后，展示了安全部队据称从特种部队安全与情报营（BSR-COS）缴获的武器和军事装备。当局此前将事件定性为士兵的“情绪波动”，而部分区域和国际媒体则称之为未遂政变或破坏稳定企图。官方叙事从口头声明转向展示实物证据，但独立核实仍待观察。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "第101空军基地",
+    "raw_text": "base aérienne 101 de Niamey, attenante à l'aéroport international Diori-Hamani"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年8月28日至29日夜间，尼亚美第101空军基地附近发生枪击事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans la nuit du 28 au 29 août 2026, des tirs éclatent aux abords de la base aérienne 101 de Niamey"
+    },
+    {
+     "fact": "尼日尔国家电视台展示了据称从BSR-COS缴获的武器和军事装备",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le journal télévisé de ce mercredi a montré les armes et le matériel militaire que les Forces de défense et de sécurité disent avoir saisis auprès du BSR-COS"
+    },
+    {
+     "fact": "当局称自8月29日以来已逮捕“数十名”军人，但未公布详细数字",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "« Plusieurs dizaines » de militaires arrêtés selon les autorités depuis le 29 août, sans bilan chiffré officiel détaillé"
+    },
+    {
+     "fact": "乍得总统穆罕默德·伊德里斯·代比否认了罗杰·加布里埃尔上尉的证词",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le témoignage de Roger Gabriel a provoqué un démenti du président tchadien Mahamat Idriss Déby"
+    }
+   ],
+   "uncertainties": [
+    "缴获武器库的具体清单、地点和对象尚未公布，缺乏独立核实",
+    "事件性质存在说法不一：尼日尔当局称“情绪波动”，部分区域和国际媒体称未遂政变或破坏稳定企图",
+    "被加布里埃尔上尉提及的法国、贝宁和科特迪瓦尚未公开回应",
+    "逮捕人数仅有“数十名”的模糊说法，无官方详细统计",
+    "据Niger Infos报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_ef0be58d42b48ecc",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

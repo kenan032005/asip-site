@@ -1,0 +1,117 @@
+{
+ "label": "S1bce0540",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "284e2df207231379c0fd37f25c17e7eb53e64e314550efb70fef98466a93ceaa",
+ "tokens": {
+  "input_tokens": 2310,
+  "output_tokens": 594,
+  "total_tokens": 2904
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼亚美：国防部确认101基地发生事件，局势已受控",
+   "summary_zh": "尼日尔国防部于8月29日就尼亚美夜间传出的枪声和爆炸声发布公报，称一名军人试图在101基地扣押同袍，并向市内部分敏感地点开枪，安全部队迅速反应后已逐步控制局势。国防部将此事称为“情绪性举动”，未提及恐怖分子、机场或总统府。此前路透社和RFI等国际媒体援引未经证实的安全消息源，称可能发生针对机场的“恐怖”袭击及有人试图闯入总统府周边，官方版本与这些说法明显不同。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "101基地",
+    "raw_text": "Niamey, base 101"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔国防部确认尼亚美101基地发生事件，局势已受控",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Niamey : le ministère de la Défense confirme un incident à la base 101, la situation sous contrôle"
+    },
+    {
+     "fact": "国防部称一名军人试图在101基地扣押同袍并向市内敏感地点开枪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un élément militaire a entrepris de séquestrer certains de ses camarades dans la caserne de la base 101 de Niamey et d'effectuer des tirs sur certains sites sensibles de la ville"
+    },
+    {
+     "fact": "安全部队迅速反应，逐步重新控制相关地点",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la prompte réaction des forces de défense et de sécurité a permis de circonscrire ce que le ministère qualifie de « mouvement d'humeur », et de reprendre progressivement le contrôle des sites concernés"
+    },
+    {
+     "fact": "此前国际媒体援引未经证实的安全消息源称可能发生针对机场的恐怖袭击及试图闯入总统府周边",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plusieurs médias internationaux, dont Reuters et RFI, qui évoquaient, sur la foi d'une source sécuritaire non confirmée, une possible attaque « terroriste » contre l'aéroport et une tentative de franchissement du périmètre de la présidence"
+    }
+   ],
+   "uncertainties": [
+    "事件起因与具体经过仅有国防部官方版本，尚无独立交叉验证",
+    "此前媒体所称针对机场的恐怖袭击及试图闯入总统府周边均基于未经证实的安全消息源，官方公报未予提及",
+    "目前仅有一个来源（Niger Infos）报道，缺乏其他独立来源印证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼亚美：国防部确认101基地发生事件，局势已受控",
+   "summary_zh": "尼日尔国防部于8月29日就尼亚美夜间传出的枪声和爆炸声发布公报，称一名军人试图在101基地扣押同袍，并向市内部分敏感地点开枪，安全部队迅速反应后已逐步控制局势。国防部将此事称为“情绪性举动”，未提及恐怖分子、机场或总统府。此前路透社和RFI等国际媒体援引未经证实的安全消息源，称可能发生针对机场的“恐怖”袭击及有人试图闯入总统府周边，官方版本与这些说法明显不同。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "101基地",
+    "raw_text": "Niamey, base 101"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔国防部确认尼亚美101基地发生事件，局势已受控",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Niamey : le ministère de la Défense confirme un incident à la base 101, la situation sous contrôle"
+    },
+    {
+     "fact": "国防部称一名军人试图在101基地扣押同袍并向市内敏感地点开枪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un élément militaire a entrepris de séquestrer certains de ses camarades dans la caserne de la base 101 de Niamey et d'effectuer des tirs sur certains sites sensibles de la ville"
+    },
+    {
+     "fact": "安全部队迅速反应，逐步重新控制相关地点",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la prompte réaction des forces de défense et de sécurité a permis de circonscrire ce que le ministère qualifie de « mouvement d'humeur », et de reprendre progressivement le contrôle des sites concernés"
+    },
+    {
+     "fact": "此前国际媒体援引未经证实的安全消息源称可能发生针对机场的恐怖袭击及试图闯入总统府周边",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plusieurs médias internationaux, dont Reuters et RFI, qui évoquaient, sur la foi d'une source sécuritaire non confirmée, une possible attaque « terroriste » contre l'aéroport et une tentative de franchissement du périmètre de la présidence"
+    }
+   ],
+   "uncertainties": [
+    "事件起因与具体经过仅有国防部官方版本，尚无独立交叉验证",
+    "此前媒体所称针对机场的恐怖袭击及试图闯入总统府周边均基于未经证实的安全消息源，官方公报未予提及",
+    "目前仅有一个来源（Niger Infos）报道，缺乏其他独立来源印证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_9f179e9e1bce0540",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

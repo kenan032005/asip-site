@@ -1,0 +1,115 @@
+{
+ "label": "S8de3894f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e4ecc1d91ce930d9d5ca17fe8cf1fa296cecc31a60993895f320b080af5ed521",
+ "tokens": {
+  "input_tokens": 2473,
+  "output_tokens": 484,
+  "total_tokens": 2957
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚出现埃博拉病例，乍得进入警戒状态",
+   "summary_zh": "乍得公共卫生与预防部2026年10月23日发布公告称，尼日利亚阿布贾于10月20日确诊一例本迪布焦型埃博拉病毒病病例，该信息由世界卫生组织同日公布。乍得方面表示正与世卫组织及地区国家卫生部门合作评估跨境传播风险，并加强监测、预警和应急准备。该部强调，尼日利亚确诊一例并不意味着乍得已发现病例。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚阿布贾于10月20日确诊一例本迪布焦型埃博拉病毒病病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un cas de maladie à virus Bundibugyo, l’un des virus responsables de la maladie à virus Ebola, a été confirmé le 20 octobre à Abuja, au Nigeria"
+    },
+    {
+     "fact": "该信息由世界卫生组织于同日公布",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette information a été rendue publique le même jour par l’Organisation mondiale de la Santé (OMS)"
+    },
+    {
+     "fact": "乍得卫生部称正与世卫组织及地区国家卫生部门合作评估风险并加强监测预警",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le ministère dit suivre l’évolution de la situation en liaison avec l’OMS et les autorités sanitaires des pays de la région afin d’évaluer les risques pour le Tchad"
+    },
+    {
+     "fact": "乍得卫生部表示尼日利亚确诊一例不代表乍得已发现病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un cas confirmé au Nigeria ne signifie pas qu’un cas a été détecté au Tchad"
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（Tchadinfos）报道，尚缺乏交叉验证",
+    "乍得境内是否出现病例尚未证实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚出现埃博拉病例，乍得进入警戒状态",
+   "summary_zh": "乍得公共卫生与预防部2026年10月23日发布公告称，尼日利亚阿布贾于10月20日确诊一例本迪布焦型埃博拉病毒病病例，该信息由世界卫生组织同日公布。乍得方面表示正与世卫组织及地区国家卫生部门合作评估跨境传播风险，并加强监测、预警和应急准备。该部强调，尼日利亚确诊一例并不意味着乍得已发现病例。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚阿布贾于10月20日确诊一例本迪布焦型埃博拉病毒病病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un cas de maladie à virus Bundibugyo, l’un des virus responsables de la maladie à virus Ebola, a été confirmé le 20 octobre à Abuja, au Nigeria"
+    },
+    {
+     "fact": "该信息由世界卫生组织于同日公布",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette information a été rendue publique le même jour par l’Organisation mondiale de la Santé (OMS)"
+    },
+    {
+     "fact": "乍得卫生部称正与世卫组织及地区国家卫生部门合作评估风险并加强监测预警",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le ministère dit suivre l’évolution de la situation en liaison avec l’OMS et les autorités sanitaires des pays de la région afin d’évaluer les risques pour le Tchad"
+    },
+    {
+     "fact": "乍得卫生部表示尼日利亚确诊一例不代表乍得已发现病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un cas confirmé au Nigeria ne signifie pas qu’un cas a été détecté au Tchad"
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（Tchadinfos）报道，尚缺乏交叉验证",
+    "乍得境内是否出现病例尚未证实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_22ce0a5a8de3894f",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

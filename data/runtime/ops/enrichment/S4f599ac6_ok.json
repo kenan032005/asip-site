@@ -1,0 +1,140 @@
+{
+ "label": "S4f599ac6",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f3b491e4d707e8f133b0de62ddd6eca87c32c8eeb53559d4083cfd2a09bb356e",
+ "tokens": {
+  "input_tokens": 2881,
+  "output_tokens": 647,
+  "total_tokens": 3528
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"官方公报未说明此次指挥层改组的原因\", \"尚无官方公开确认此次改组与8月未遂破坏事件之间存在直接关联\", \"8月事件最初被当局称为“情绪运动”，后由尼日尔通讯社改称“未遂破坏”，定性存在变化\", \"报道对改组是收紧指挥链还是长期计划的人事调整未作定论\"]",
+    "after": "[\"官方公报未说明此次指挥层改组的原因\", \"尚无官方公开确认此次改组与8月未遂破坏事件之间存在直接关联\", \"8月事件最初被当局称为“情绪运动”，后由尼日尔通讯社改称“未遂破坏”，定性存在变化\", \"报道对改组是收紧指挥链还是长期计划的人事调整未作定论\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔：8月未遂破坏事件后，蒂亚尼改组武装部队指挥层",
+   "summary_zh": "尼日尔总统蒂亚尼于2026年9月11日签署四项总统令，改组尼日尔武装部队指挥层，任命准将马马内·萨尼·基亚乌为总参谋长，接替自2023年起任职的穆萨·萨拉乌·巴尔穆。此次改组发生在8月28日至29日尼亚美未遂破坏事件约13天之后，当局称忠诚部队在俄罗斯军事合作支持下挫败了该事件。报道指出，官方公报未说明改组原因，也未公开确认改组与该事件之间的直接关联。",
+   "event_type": "political_instability",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": null,
+    "raw_text": "Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年9月11日签署四项总统令，改组尼日尔武装部队指挥层",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quatre décrets signés le 11 septembre 2026 renouvellent le commandement des Forces armées nigériennes."
+    },
+    {
+     "fact": "准将马马内·萨尼·基亚乌被任命为总参谋长，接替穆萨·萨拉乌·巴尔穆",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le général de brigade Mamane Sani Kiaou est nommé Chef d'État-Major des Armées, succédant au général de brigade Moussa Salaou Barmou"
+    },
+    {
+     "fact": "8月28日至29日夜间尼亚美发生被当局称为未遂破坏的事件，武装人员袭击空军基地101、机场、总统府周边及国家电视台",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des éléments armés ont visé la base aérienne 101, l'aéroport international Diori Hamani, les abords du palais présidentiel et le siège de la télévision nationale"
+    },
+    {
+     "fact": "忠诚部队在俄罗斯军事合作支持下数小时内重新控制相关地点",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les forces loyalistes, avec l'appui de la coopération militaire russe déployée dans le pays, ont repris le contrôle des sites en quelques heures."
+    },
+    {
+     "fact": "此次改组距未遂破坏事件13天",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "13 jours entre la tentative de déstabilisation du 28-29 août et ce renouvellement du commandement"
+    }
+   ],
+   "uncertainties": [
+    "官方公报未说明此次指挥层改组的原因",
+    "尚无官方公开确认此次改组与8月未遂破坏事件之间存在直接关联",
+    "8月事件最初被当局称为“情绪运动”，后由尼日尔通讯社改称“未遂破坏”，定性存在变化",
+    "报道对改组是收紧指挥链还是长期计划的人事调整未作定论"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔：8月未遂破坏事件后，蒂亚尼改组武装部队指挥层",
+   "summary_zh": "尼日尔总统蒂亚尼于2026年9月11日签署四项总统令，改组尼日尔武装部队指挥层，任命准将马马内·萨尼·基亚乌为总参谋长，接替自2023年起任职的穆萨·萨拉乌·巴尔穆。此次改组发生在8月28日至29日尼亚美未遂破坏事件约13天之后，当局称忠诚部队在俄罗斯军事合作支持下挫败了该事件。报道指出，官方公报未说明改组原因，也未公开确认改组与该事件之间的直接关联。",
+   "event_type": "political_instability",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": null,
+    "raw_text": "Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年9月11日签署四项总统令，改组尼日尔武装部队指挥层",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quatre décrets signés le 11 septembre 2026 renouvellent le commandement des Forces armées nigériennes."
+    },
+    {
+     "fact": "准将马马内·萨尼·基亚乌被任命为总参谋长，接替穆萨·萨拉乌·巴尔穆",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le général de brigade Mamane Sani Kiaou est nommé Chef d'État-Major des Armées, succédant au général de brigade Moussa Salaou Barmou"
+    },
+    {
+     "fact": "8月28日至29日夜间尼亚美发生被当局称为未遂破坏的事件，武装人员袭击空军基地101、机场、总统府周边及国家电视台",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des éléments armés ont visé la base aérienne 101, l'aéroport international Diori Hamani, les abords du palais présidentiel et le siège de la télévision nationale"
+    },
+    {
+     "fact": "忠诚部队在俄罗斯军事合作支持下数小时内重新控制相关地点",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les forces loyalistes, avec l'appui de la coopération militaire russe déployée dans le pays, ont repris le contrôle des sites en quelques heures."
+    },
+    {
+     "fact": "此次改组距未遂破坏事件13天",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "13 jours entre la tentative de déstabilisation du 28-29 août et ce renouvellement du commandement"
+    }
+   ],
+   "uncertainties": [
+    "官方公报未说明此次指挥层改组的原因",
+    "尚无官方公开确认此次改组与8月未遂破坏事件之间存在直接关联",
+    "8月事件最初被当局称为“情绪运动”，后由尼日尔通讯社改称“未遂破坏”，定性存在变化",
+    "报道对改组是收紧指挥链还是长期计划的人事调整未作定论",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_a29ed9644f599ac6",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

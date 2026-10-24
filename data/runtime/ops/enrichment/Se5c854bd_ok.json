@@ -1,0 +1,136 @@
+{
+ "label": "Se5c854bd",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f03cfeb563b8f97481afe88182188968f2e50c394f5147ecb03909541adaf62d",
+ "tokens": {
+  "input_tokens": 2818,
+  "output_tokens": 781,
+  "total_tokens": 3599
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"戈伊塔正式访阿日期尚未确定\", \"报道未提供尼日尔总理此访达成的具体成果细节\"]",
+    "after": "[\"戈伊塔正式访阿日期尚未确定\", \"报道未提供尼日尔总理此访达成的具体成果细节\", \"据Niger Infos报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "阿尔及尔接连接待马里和尼日尔总理，深化萨赫勒地区外交布局",
+   "summary_zh": "阿尔及利亚在三天内先后接待马里总理阿卜杜拉耶·马伊加和尼日尔总理阿里·马哈曼·拉明·泽内，延续自2月以来的阿尔及尔-尼亚美接近势头，并开启马里与阿尔及利亚关系的新篇章。马里总理转达了过渡总统戈伊塔对阿尔及利亚总统特本邀请的感谢，并原则同意日后正式访阿，但具体日期尚未确定。报道指出，阿尔及利亚正以非洲联盟和平与安全理事会轮值主席身份推动2026-2030年反恐战略行动计划，并通过直升机援助、电力项目及跨撒哈拉公路走廊等举措扩大地区影响。",
+   "event_type": "political_instability",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Alger (Algérie) — visites des Premiers ministres du Mali et du Niger"
+   },
+   "key_facts": [
+    {
+     "fact": "阿尔及利亚在三天内先后接待马里总理马伊加和尼日尔总理泽内",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En l'espace de trois jours, Alger a vu défiler deux Premiers ministres de l'AES. Abdoulaye Maïga d'abord, lundi, puis Ali Mahamane Lamine Zeine, arrivé mercredi soir pour deux jours de travail."
+    },
+    {
+     "fact": "尼日尔总理泽内于8月26日率部长级代表团抵达阿尔及尔进行为期两天的工作访问",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ali Mahamane Lamine Zeine, Premier ministre nigérien, est arrivé mercredi 26 août à la tête d'une importante délégation ministérielle, pour une visite de travail de deux jours."
+    },
+    {
+     "fact": "马里总理转达戈伊塔对特本邀请的感谢，并原则同意正式访阿，日期尚未确定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le chef du gouvernement malien est porteur d'un message d'Assimi Goïta, président de la Transition, qui remercie Tebboune pour son invitation et donne son accord de principe pour effectuer lui-même une visite officielle en Algérie, sans date encore fixée par les canaux diplomatiques."
+    },
+    {
+     "fact": "阿尔及利亚自2026年8月1日起担任非洲联盟和平与安全理事会主席，推动2026-2030年反恐行动计划",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'Algérie préside depuis le 1er août 2026 le Conseil de paix et de sécurité de l'Union africaine, et le président Tebboune porte, à ce titre, un plan d'action stratégique de lutte contre le terrorisme pour la période 2026-2030."
+    },
+    {
+     "fact": "阿尔及利亚向尼日尔捐赠直升机、资助乍得40兆瓦电站，并重启跨撒哈拉公路走廊项目",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "don d'hélicoptères au Niger, financement d'une centrale électrique de 40 mégawatts au Tchad, et surtout la relance du projet de corridor routier transsaharien reliant Tamanrasset à Gao et Bamako"
+    }
+   ],
+   "uncertainties": [
+    "戈伊塔正式访阿日期尚未确定",
+    "报道未提供尼日尔总理此访达成的具体成果细节"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "阿尔及尔接连接待马里和尼日尔总理，深化萨赫勒地区外交布局",
+   "summary_zh": "阿尔及利亚在三天内先后接待马里总理阿卜杜拉耶·马伊加和尼日尔总理阿里·马哈曼·拉明·泽内，延续自2月以来的阿尔及尔-尼亚美接近势头，并开启马里与阿尔及利亚关系的新篇章。马里总理转达了过渡总统戈伊塔对阿尔及利亚总统特本邀请的感谢，并原则同意日后正式访阿，但具体日期尚未确定。报道指出，阿尔及利亚正以非洲联盟和平与安全理事会轮值主席身份推动2026-2030年反恐战略行动计划，并通过直升机援助、电力项目及跨撒哈拉公路走廊等举措扩大地区影响。",
+   "event_type": "political_instability",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Alger (Algérie) — visites des Premiers ministres du Mali et du Niger"
+   },
+   "key_facts": [
+    {
+     "fact": "阿尔及利亚在三天内先后接待马里总理马伊加和尼日尔总理泽内",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En l'espace de trois jours, Alger a vu défiler deux Premiers ministres de l'AES. Abdoulaye Maïga d'abord, lundi, puis Ali Mahamane Lamine Zeine, arrivé mercredi soir pour deux jours de travail."
+    },
+    {
+     "fact": "尼日尔总理泽内于8月26日率部长级代表团抵达阿尔及尔进行为期两天的工作访问",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ali Mahamane Lamine Zeine, Premier ministre nigérien, est arrivé mercredi 26 août à la tête d'une importante délégation ministérielle, pour une visite de travail de deux jours."
+    },
+    {
+     "fact": "马里总理转达戈伊塔对特本邀请的感谢，并原则同意正式访阿，日期尚未确定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le chef du gouvernement malien est porteur d'un message d'Assimi Goïta, président de la Transition, qui remercie Tebboune pour son invitation et donne son accord de principe pour effectuer lui-même une visite officielle en Algérie, sans date encore fixée par les canaux diplomatiques."
+    },
+    {
+     "fact": "阿尔及利亚自2026年8月1日起担任非洲联盟和平与安全理事会主席，推动2026-2030年反恐行动计划",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'Algérie préside depuis le 1er août 2026 le Conseil de paix et de sécurité de l'Union africaine, et le président Tebboune porte, à ce titre, un plan d'action stratégique de lutte contre le terrorisme pour la période 2026-2030."
+    },
+    {
+     "fact": "阿尔及利亚向尼日尔捐赠直升机、资助乍得40兆瓦电站，并重启跨撒哈拉公路走廊项目",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "don d'hélicoptères au Niger, financement d'une centrale électrique de 40 mégawatts au Tchad, et surtout la relance du projet de corridor routier transsaharien reliant Tamanrasset à Gao et Bamako"
+    }
+   ],
+   "uncertainties": [
+    "戈伊塔正式访阿日期尚未确定",
+    "报道未提供尼日尔总理此访达成的具体成果细节",
+    "据Niger Infos报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_d62c0b11e5c854bd",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
