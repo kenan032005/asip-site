@@ -1,0 +1,117 @@
+{
+ "label": "S2a1e42a3",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e32d6a33f354c2d8f7f1c17ee39380c5b6357b25233696d2099f416c3dc5a399",
+ "tokens": {
+  "input_tokens": 2383,
+  "output_tokens": 600,
+  "total_tokens": 2983
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "蒙古省一中学遭火灾焚毁",
+   "summary_zh": "2026年10月23日夜间，乍得盖拉省蒙古市第9区的马哈马特·泽内·巴达普通教育中学（CEG）发生火灾，多栋建筑和大量课桌椅被烧毁，造成重大财产损失。校长阿巴卡尔·加利立即通知了市政消防部门，在场居民自发参与救援，保住了部分屋顶。目前火灾的确切原因尚不清楚，官方尚未确定起火原因，警方和有关部门已展开调查。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "盖拉省",
+    "city": "蒙古",
+    "site": "第9区马哈马特·泽内·巴达普通教育中学（CEG）",
+    "raw_text": "secteur 9 de Mongo, dans la province du Guéra"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年10月23日夜间，蒙古市第9区的马哈马特·泽内·巴达中学发生火灾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un incendie a ravagé, dans la nuit du vendredi 23 octobre 2026, le collège d’enseignement général (CEG) Mahamat Zène Bada, situé au secteur 9 de Mongo, dans la province du Guéra."
+    },
+    {
+     "fact": "火灾造成重大财产损失，多栋建筑和大量课桌椅被烧毁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le sinistre a causé d’importants dégâts matériels, détruisant plusieurs bâtiments et une grande partie des tables-bancs."
+    },
+    {
+     "fact": "校长阿巴卡尔·加利立即通知了市政消防部门，居民自发参与救援保住部分屋顶",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le directeur de l’établissement, Abakar Gali, a immédiatement alerté les pompiers de la mairie. Grâce à la mobilisation spontanée des habitants présents sur les lieux, quelques toitures ont pu être sauvées."
+    },
+    {
+     "fact": "火灾确切原因尚不清楚，官方尚未确定起火原因，警方已展开调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pour l’heure, les circonstances exactes de cet incendie restent inconnues. Aucune cause officielle n’a encore été établie. Des enquêtes ont été ouvertes par la police et les autorités compétentes"
+    }
+   ],
+   "uncertainties": [
+    "火灾的确切原因尚未确定",
+    "官方尚未公布起火原因",
+    "目前仅有一个来源（Tchadinfos）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "蒙古省一中学遭火灾焚毁",
+   "summary_zh": "2026年10月23日夜间，乍得盖拉省蒙古市第9区的马哈马特·泽内·巴达普通教育中学（CEG）发生火灾，多栋建筑和大量课桌椅被烧毁，造成重大财产损失。校长阿巴卡尔·加利立即通知了市政消防部门，在场居民自发参与救援，保住了部分屋顶。目前火灾的确切原因尚不清楚，官方尚未确定起火原因，警方和有关部门已展开调查。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "盖拉省",
+    "city": "蒙古",
+    "site": "第9区马哈马特·泽内·巴达普通教育中学（CEG）",
+    "raw_text": "secteur 9 de Mongo, dans la province du Guéra"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年10月23日夜间，蒙古市第9区的马哈马特·泽内·巴达中学发生火灾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un incendie a ravagé, dans la nuit du vendredi 23 octobre 2026, le collège d’enseignement général (CEG) Mahamat Zène Bada, situé au secteur 9 de Mongo, dans la province du Guéra."
+    },
+    {
+     "fact": "火灾造成重大财产损失，多栋建筑和大量课桌椅被烧毁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le sinistre a causé d’importants dégâts matériels, détruisant plusieurs bâtiments et une grande partie des tables-bancs."
+    },
+    {
+     "fact": "校长阿巴卡尔·加利立即通知了市政消防部门，居民自发参与救援保住部分屋顶",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le directeur de l’établissement, Abakar Gali, a immédiatement alerté les pompiers de la mairie. Grâce à la mobilisation spontanée des habitants présents sur les lieux, quelques toitures ont pu être sauvées."
+    },
+    {
+     "fact": "火灾确切原因尚不清楚，官方尚未确定起火原因，警方已展开调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pour l’heure, les circonstances exactes de cet incendie restent inconnues. Aucune cause officielle n’a encore été établie. Des enquêtes ont été ouvertes par la police et les autorités compétentes"
+    }
+   ],
+   "uncertainties": [
+    "火灾的确切原因尚未确定",
+    "官方尚未公布起火原因",
+    "目前仅有一个来源（Tchadinfos）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_7fc57a5c2a1e42a3",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

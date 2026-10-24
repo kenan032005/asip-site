@@ -1,0 +1,140 @@
+{
+ "label": "S5cd5dd76",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5cbb871fc04eb86672e20d3f25f290e4c4f4b1921e24fdd791086624a4520289",
+ "tokens": {
+  "input_tokens": 2932,
+  "output_tokens": 622,
+  "total_tokens": 3554
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"证词内容仅为一名警官的单方面陈述，尚未获得独立证实\", \"贝宁、科特迪瓦、法国和乍得此前均否认相关指控\", \"据称的破坏稳定计划及营救巴祖姆计划的具体细节未获确认\", \"证词未说明部分事件的具体日期\"]",
+    "after": "[\"证词内容仅为一名警官的单方面陈述，尚未获得独立证实\", \"贝宁、科特迪瓦、法国和乍得此前均否认相关指控\", \"据称的破坏稳定计划及营救巴祖姆计划的具体细节未获确认\", \"证词未说明部分事件的具体日期\", \"据Niger Infos报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔国家电视台播出警方证词，详述破坏稳定计划",
+   "summary_zh": "尼日尔国家电视台（RTN）播出一名警官的证词，据称其描述了在尼亚美散发传单并开枪制造骚乱的计划、2023年7月一次策划“营救”前总统巴祖姆的会议，以及2026年2月至3月间据称由贝宁方面出资寻找贝宁中校帕斯卡尔·蒂格里的行动。证词还涉及8月29日兵变后有人试图联系事件幕后主使。相关指控尚未获得独立证实。",
+   "event_type": "political_instability",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": null,
+    "raw_text": "Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔国家电视台播出一名警官的证词，详述破坏稳定计划",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Niger : une déposition diffusée par la RTN détaille des projets de déstabilisation"
+    },
+    {
+     "fact": "据称计划在尼亚美夜间张贴传单，随后在清晨发动示威并开枪制造伤员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il s'agissait de coller des tracts la nuit dans les carrefours, puis de lancer très tôt le matin des manifestations où des tirs devaient faire des blessés."
+    },
+    {
+     "fact": "据称2023年7月26日一次会议讨论“营救巴祖姆总统”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'ordre du jour est la planification de « l'extraction du président Bazoum »."
+    },
+    {
+     "fact": "据称贝宁方面出资500万非洲法郎寻找贝宁中校帕斯卡尔·蒂格里",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le 9 mars, Ange détaille le prix du succès: 50 millions de FCFA, des passeports diplomatiques béninois et des postes de chargés de mission."
+    },
+    {
+     "fact": "2026年8月28日至29日夜间士兵在101空军基地扣押同僚并向首都多处目标开枪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "dans la nuit du 28 au 29 août 2026, des soldats ont séquestré des camarades à la base aérienne 101 et tiré sur plusieurs sites sensibles de la capitale"
+    }
+   ],
+   "uncertainties": [
+    "证词内容仅为一名警官的单方面陈述，尚未获得独立证实",
+    "贝宁、科特迪瓦、法国和乍得此前均否认相关指控",
+    "据称的破坏稳定计划及营救巴祖姆计划的具体细节未获确认",
+    "证词未说明部分事件的具体日期"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔国家电视台播出警方证词，详述破坏稳定计划",
+   "summary_zh": "尼日尔国家电视台（RTN）播出一名警官的证词，据称其描述了在尼亚美散发传单并开枪制造骚乱的计划、2023年7月一次策划“营救”前总统巴祖姆的会议，以及2026年2月至3月间据称由贝宁方面出资寻找贝宁中校帕斯卡尔·蒂格里的行动。证词还涉及8月29日兵变后有人试图联系事件幕后主使。相关指控尚未获得独立证实。",
+   "event_type": "political_instability",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": null,
+    "raw_text": "Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔国家电视台播出一名警官的证词，详述破坏稳定计划",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Niger : une déposition diffusée par la RTN détaille des projets de déstabilisation"
+    },
+    {
+     "fact": "据称计划在尼亚美夜间张贴传单，随后在清晨发动示威并开枪制造伤员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il s'agissait de coller des tracts la nuit dans les carrefours, puis de lancer très tôt le matin des manifestations où des tirs devaient faire des blessés."
+    },
+    {
+     "fact": "据称2023年7月26日一次会议讨论“营救巴祖姆总统”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'ordre du jour est la planification de « l'extraction du président Bazoum »."
+    },
+    {
+     "fact": "据称贝宁方面出资500万非洲法郎寻找贝宁中校帕斯卡尔·蒂格里",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le 9 mars, Ange détaille le prix du succès: 50 millions de FCFA, des passeports diplomatiques béninois et des postes de chargés de mission."
+    },
+    {
+     "fact": "2026年8月28日至29日夜间士兵在101空军基地扣押同僚并向首都多处目标开枪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "dans la nuit du 28 au 29 août 2026, des soldats ont séquestré des camarades à la base aérienne 101 et tiré sur plusieurs sites sensibles de la capitale"
+    }
+   ],
+   "uncertainties": [
+    "证词内容仅为一名警官的单方面陈述，尚未获得独立证实",
+    "贝宁、科特迪瓦、法国和乍得此前均否认相关指控",
+    "据称的破坏稳定计划及营救巴祖姆计划的具体细节未获确认",
+    "证词未说明部分事件的具体日期",
+    "据Niger Infos报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_413032115cd5dd76",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

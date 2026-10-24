@@ -1,0 +1,115 @@
+{
+ "label": "S76d3c096",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "2c6f44278bf32e26d2b36a6fd4561ef1f20e245b6bc2d092ec8a885d4a063be6",
+ "tokens": {
+  "input_tokens": 2379,
+  "output_tokens": 599,
+  "total_tokens": 2978
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克在非洲反恐问题上主张非洲团结",
+   "summary_zh": "莫桑比克总统丹尼尔·查波在埃塞俄比亚举行的第12届塔纳非洲安全高级别论坛上，主张加强非洲国家之间的团结以及国际反恐合作，认为安全是发展的必要条件。查波提到莫桑比克天然气发现与恐怖主义出现的时间重合，呼吁非洲国家联合保护自然资源。他还呼吁改革全球安全架构，让非洲更多参与联合国安理会常任辩论，并介绍了莫桑比克与南共体、卢旺达和坦桑尼亚合作打击暴力极端主义的经验。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Etiópia（第12届塔纳非洲安全高级别论坛）"
+   },
+   "key_facts": [
+    {
+     "fact": "莫桑比克在埃塞俄比亚举行的第12届塔纳非洲安全高级别论坛上主张加强非洲团结与国际反恐合作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Moçambique defendeu hoje, na Etiópia, durante o 12.º Fórum de Alto Nível de Tana sobre Segurança em África, o reforço da união entre os países africanos e da cooperação internacional no combate ao terrorismo"
+    },
+    {
+     "fact": "总统查波称莫桑比克天然气发现与恐怖主义出现时间重合，呼吁非洲国家联合保护自然资源",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "O Presidente da República, Daniel Chapo, chamou a atenção para a coincidência entre a descoberta de gás natural em Moçambique e o surgimento do terrorismo, defendendo a união dos países africanos para a protecção dos recursos naturais."
+    },
+    {
+     "fact": "查波呼吁改革全球安全架构，让非洲更多参与联合国安理会常任辩论",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Chapo considera igualmente necessário repensar a arquitectura de segurança mundial, com maior participação de África nos debates permanentes do Conselho de Segurança das Nações Unidas."
+    },
+    {
+     "fact": "查波介绍莫桑比克与南共体、卢旺达和坦桑尼亚合作打击暴力极端主义的经验",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Daniel Chapo destacou a cooperação com a Comunidade de Desenvolvimento da África Austral (SADC), o Ruanda e a Tanzânia."
+    }
+   ],
+   "uncertainties": [
+    "单一来源报道，尚未获得其他来源交叉验证",
+    "论坛发言内容为莫桑比克方面表态，未提供具体反恐行动细节"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克在非洲反恐问题上主张非洲团结",
+   "summary_zh": "莫桑比克总统丹尼尔·查波在埃塞俄比亚举行的第12届塔纳非洲安全高级别论坛上，主张加强非洲国家之间的团结以及国际反恐合作，认为安全是发展的必要条件。查波提到莫桑比克天然气发现与恐怖主义出现的时间重合，呼吁非洲国家联合保护自然资源。他还呼吁改革全球安全架构，让非洲更多参与联合国安理会常任辩论，并介绍了莫桑比克与南共体、卢旺达和坦桑尼亚合作打击暴力极端主义的经验。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Etiópia（第12届塔纳非洲安全高级别论坛）"
+   },
+   "key_facts": [
+    {
+     "fact": "莫桑比克在埃塞俄比亚举行的第12届塔纳非洲安全高级别论坛上主张加强非洲团结与国际反恐合作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Moçambique defendeu hoje, na Etiópia, durante o 12.º Fórum de Alto Nível de Tana sobre Segurança em África, o reforço da união entre os países africanos e da cooperação internacional no combate ao terrorismo"
+    },
+    {
+     "fact": "总统查波称莫桑比克天然气发现与恐怖主义出现时间重合，呼吁非洲国家联合保护自然资源",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "O Presidente da República, Daniel Chapo, chamou a atenção para a coincidência entre a descoberta de gás natural em Moçambique e o surgimento do terrorismo, defendendo a união dos países africanos para a protecção dos recursos naturais."
+    },
+    {
+     "fact": "查波呼吁改革全球安全架构，让非洲更多参与联合国安理会常任辩论",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Chapo considera igualmente necessário repensar a arquitectura de segurança mundial, com maior participação de África nos debates permanentes do Conselho de Segurança das Nações Unidas."
+    },
+    {
+     "fact": "查波介绍莫桑比克与南共体、卢旺达和坦桑尼亚合作打击暴力极端主义的经验",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Daniel Chapo destacou a cooperação com a Comunidade de Desenvolvimento da África Austral (SADC), o Ruanda e a Tanzânia."
+    }
+   ],
+   "uncertainties": [
+    "单一来源报道，尚未获得其他来源交叉验证",
+    "论坛发言内容为莫桑比克方面表态，未提供具体反恐行动细节"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_4f83670176d3c096",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}
