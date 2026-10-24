@@ -1,0 +1,117 @@
+{
+ "label": "Sf95718bf",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "048e7bd615f529e4b64cbb4c01431357cb3f15e74571772cf27a55c03fc450b8",
+ "tokens": {
+  "input_tokens": 2620,
+  "output_tokens": 480,
+  "total_tokens": 3100
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚：首例埃博拉病例发现引发政治争议",
+   "summary_zh": "尼日利亚发现首例埃博拉病例，此事在距离2027年1月中旬大选仅数月之际扰乱了公共辩论。卫生部长Muhammad Pate警告不要将该公共卫生问题“政治化”，称目前仅为“单一孤立且已受控”的病例。反对派领袖Atiku Abubakar领导的非洲民主大会要求说明用于埃博拉监测的750万美元公共资金去向，并质疑患者检测耗时超过十天才得到警报的过程。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚发现首例埃博拉病例",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Nigeria: la découverte d'un premier cas d'Ebola s'immisce dans le débat politique"
+    },
+    {
+     "fact": "卫生部长称目前为单一孤立且已受控的病例，无需取消大型集会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il s'agit « d'un seul cas isolé et contenu », qui ne nécessite pas d'annuler les grands rassemblements"
+    },
+    {
+     "fact": "反对党非洲民主大会要求说明应于6月拨付的750万美元埃博拉防范资金去向",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Congrès démocratique africain d'Atiku Abubakar demande également des comptes sur les 7,5 millions de dollars qui devaient être débloqués au mois de juin"
+    },
+    {
+     "fact": "患者检测耗时超过十天才得到警报，反对派要求说明警报与应对过程",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le dépistage de la patiente contaminée a pris plus de dix jours"
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证",
+    "反对派关于公共卫生指令可能被政治化的担忧属其声称，尚未证实",
+    "750万美元资金拨付与使用情况有待核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚：首例埃博拉病例发现引发政治争议",
+   "summary_zh": "尼日利亚发现首例埃博拉病例，此事在距离2027年1月中旬大选仅数月之际扰乱了公共辩论。卫生部长Muhammad Pate警告不要将该公共卫生问题“政治化”，称目前仅为“单一孤立且已受控”的病例。反对派领袖Atiku Abubakar领导的非洲民主大会要求说明用于埃博拉监测的750万美元公共资金去向，并质疑患者检测耗时超过十天才得到警报的过程。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚发现首例埃博拉病例",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Nigeria: la découverte d'un premier cas d'Ebola s'immisce dans le débat politique"
+    },
+    {
+     "fact": "卫生部长称目前为单一孤立且已受控的病例，无需取消大型集会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il s'agit « d'un seul cas isolé et contenu », qui ne nécessite pas d'annuler les grands rassemblements"
+    },
+    {
+     "fact": "反对党非洲民主大会要求说明应于6月拨付的750万美元埃博拉防范资金去向",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Congrès démocratique africain d'Atiku Abubakar demande également des comptes sur les 7,5 millions de dollars qui devaient être débloqués au mois de juin"
+    },
+    {
+     "fact": "患者检测耗时超过十天才得到警报，反对派要求说明警报与应对过程",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le dépistage de la patiente contaminée a pris plus de dix jours"
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（RFI）报道，尚缺乏交叉验证",
+    "反对派关于公共卫生指令可能被政治化的担忧属其声称，尚未证实",
+    "750万美元资金拨付与使用情况有待核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_ec1cf516f95718bf",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

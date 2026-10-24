@@ -1,24 +1,26 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-24T11:10:11+08:00",
+ "generated_at": "2026-10-24T12:59:27+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
   "signals_24h": 48,
-  "signals_7d": 434,
-  "verified_events_24h": 47,
-  "verified_events_7d": 421,
-  "multi_source_verified_events_7d": 20,
-  "countries_with_activity_24h": 9,
+  "signals_7d": 436,
+  "verified_events_24h": 55,
+  "verified_events_7d": 430,
+  "multi_source_verified_events_7d": 21,
+  "countries_with_activity_24h": 11,
   "total_countries_monitored": 22
  },
  "countries_24h": [
   "乍得",
   "刚果（金）",
   "南苏丹",
+  "卢旺达",
   "埃塞俄比亚",
+  "塞内加尔",
   "尼日利亚",
   "尼日尔",
   "莫桑比克",
@@ -37,6 +39,7 @@
   "加纳",
   "南苏丹",
   "南非",
+  "卢旺达",
   "喀麦隆",
   "埃及",
   "埃塞俄比亚",
@@ -56,11 +59,11 @@
  "country_distribution_7d": [
   {
    "value": "尼日利亚",
-   "count": 210
+   "count": 213
   },
   {
    "value": "乍得",
-   "count": 63
+   "count": 62
   },
   {
    "value": "莫桑比克",
@@ -106,15 +109,19 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 28
+   "count": 29
   },
   {
    "value": "公共卫生",
-   "count": 12
+   "count": 11
   },
   {
    "value": "绑架",
    "count": 3
+  },
+  {
+   "value": "恐怖袭击",
+   "count": 1
   },
   {
    "value": "基础设施安全",
@@ -131,42 +138,23 @@
   {
    "value": "政治危机",
    "count": 1
-  },
-  {
-   "value": "军事行动",
-   "count": 1
   }
  ],
  "source_tier_distribution_7d": [
   {
    "value": "C",
-   "count": 606
+   "count": 610
   },
   {
    "value": "B",
-   "count": 148
+   "count": 152
   },
   {
    "value": "A",
-   "count": 101
+   "count": 104
   }
  ],
  "top_verified_events": [
-  {
-   "fact_id": "EVT_09eda557acce5857",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得：瓦达伊难民涌入，当局呼吁公民保持警惕",
-   "category": "other_security",
-   "source": "Alwihda Info",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-17 04:20",
-   "importance": "high",
-   "severity": "medium"
-  },
   {
    "fact_id": "EVT_4bcb86bfee58f19a",
    "level": "verified_event",
@@ -241,9 +229,69 @@
    "time": "2026-10-17 17:05",
    "importance": "high",
    "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_a7c7877a0065a755",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "南苏丹军方在朱巴逮捕八名涉嫌贩卖儿童嫌疑人",
+   "category": "other_security",
+   "source": "Radio Tamazuj",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-17 16:49",
+   "importance": "high",
+   "severity": "medium"
   }
  ],
  "top_signals": [
+  {
+   "fact_id": "news:34dffb08b07053dc",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "FG convicts 653 suspects in mass terrorism trials — AGF",
+   "category": "terrorist_attack",
+   "source": "Punch",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-24 12:36",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:44f9db09aa4baa82",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "Robbers threatened to kill, frame me as cultist — UNILAG student",
+   "category": "other_security",
+   "source": "Punch",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-24 12:28",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:8f81672519d27f0d",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "Health workers threaten strike over unpaid allowances",
+   "category": "other_security",
+   "source": "Punch",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-24 12:07",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   {
    "fact_id": "news:b07b3148172bcc12",
    "level": "news_signal",
@@ -558,51 +606,6 @@
    "time": "2026-10-23 23:47",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:7137b82cb969c467",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "夸克瓦索批评蒂努布政府在安全与贫困问题上失职",
-   "category": "other_security",
-   "source": "Punch",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-23 23:38",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:e76daef6a3e0ffcd",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "刚果（金）本迪布焦病毒疫苗试验首名参与者完成接种",
-   "category": "other_security",
-   "source": "News Agency of Nigeria",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-23 23:17",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:585fa64eafa387a1",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "刚果（金）启动针对本迪布焦埃博拉病毒的候选疫苗试验——CEPI",
-   "category": "public_health",
-   "source": "News Agency of Nigeria",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-23 23:05",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -680,11 +683,62 @@
   }
  ],
  "existing_assessment": {
-  "status": "deterministic",
-  "based_on": "过去24小时/7日公开信息（确定性汇总）"
+  "status": "ai",
+  "overall_assessment": "已核实事件层面，尼日利亚仍为态势重心：高原州枪手杀害四名治安志愿者、阿比亚州警局遭纵火致两名警员死亡、博尔诺州15名士兵死亡后陆军参谋长赴前线视察，喀麦隆边境地雷炸死八名士兵；刚果（金）北乌班吉省记录两例埃博拉病例并伴随资金管理与污名化争议；莫桑比克德尔加杜角恐怖分子日益针对平民，马普托河流域面临洪水风险；马里士兵遭Jnim处决。情报信号层面，尼日利亚单源消息称大规模反恐审判已定罪653人、拉各斯在建建筑倒塌致一人死亡、医护人员威胁罢工、陆军派600名士兵赴印度训练，均属单源消息，尚待核实。整体风险方向趋于恶化。",
+  "risk_direction": "worsening",
+  "confidence": "medium",
+  "generated_time": "2026-10-24T12:59:09+08:00",
+  "based_on": "过去24小时/7日公开信息",
+  "model": "",
+  "date": "20261024"
  },
- "fact_count": 855,
+ "fact_count": 866,
  "facts": {
+  "news:34dffb08b07053dc": {
+   "fact_id": "news:34dffb08b07053dc",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "FG convicts 653 suspects in mass terrorism trials — AGF",
+   "category": "terrorist_attack",
+   "source": "Punch",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-24 12:36",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:44f9db09aa4baa82": {
+   "fact_id": "news:44f9db09aa4baa82",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "Robbers threatened to kill, frame me as cultist — UNILAG student",
+   "category": "other_security",
+   "source": "Punch",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-24 12:28",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:8f81672519d27f0d": {
+   "fact_id": "news:8f81672519d27f0d",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "Health workers threaten strike over unpaid allowances",
+   "category": "other_security",
+   "source": "Punch",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-24 12:07",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:b07b3148172bcc12": {
    "fact_id": "news:b07b3148172bcc12",
    "level": "news_signal",
@@ -7180,36 +7234,6 @@
    "importance": "low",
    "why_it_matters": ""
   },
-  "news:65629d194591c827": {
-   "fact_id": "news:65629d194591c827",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得：瓦达伊难民涌入，当局呼吁公民保持警惕",
-   "category": "other_security",
-   "source": "Alwihda Info",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-17 12:20",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "EVT_09eda557acce5857": {
-   "fact_id": "EVT_09eda557acce5857",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "乍得：瓦达伊难民涌入，当局呼吁公民保持警惕",
-   "category": "other_security",
-   "source": "Alwihda Info",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-17 04:20",
-   "importance": "high",
-   "severity": "medium"
-  },
   "EVT_4bcb86bfee58f19a": {
    "fact_id": "EVT_4bcb86bfee58f19a",
    "level": "verified_event",
@@ -13507,6 +13531,156 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-23 22:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_ec1cf516f95718bf": {
+   "fact_id": "EVT_ec1cf516f95718bf",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "尼日利亚：首例埃博拉病例发现引发政治争议",
+   "category": "public_health",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-24 02:40",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_bb3f6a94d1e06ebc": {
+   "fact_id": "EVT_bb3f6a94d1e06ebc",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "尼日利亚联邦政府在大规模恐怖主义审判中判定653名嫌疑人罪名成立",
+   "category": "terrorist_attack",
+   "source": "Punch",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-24 04:36",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_93c442f03da6c0a5": {
+   "fact_id": "EVT_93c442f03da6c0a5",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "尼日利亚拉各斯一名大学生遭持枪抢劫 劫匪威胁杀人并诬其为邪教成员",
+   "category": "other_security",
+   "source": "Punch",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-24 04:28",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_d61d1c2908d2ff6e": {
+   "fact_id": "EVT_d61d1c2908d2ff6e",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "尼日利亚卫生工作者威胁因未付津贴举行罢工",
+   "category": "other_security",
+   "source": "Punch",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-24 04:07",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_1500507237077a1e": {
+   "fact_id": "EVT_1500507237077a1e",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "尼日利亚女子因人口贩运在塔马利被判七年监禁",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-24 04:31",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_d513b87361289300": {
+   "fact_id": "EVT_d513b87361289300",
+   "level": "verified_event",
+   "evidence_tier": "multi_source_verified",
+   "source_count": 2,
+   "country": "尼日利亚",
+   "title": "肯尼亚一名65岁女性成为该国第二例埃博拉死亡病例",
+   "category": "public_health",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-24 01:37",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_abe5b7c347b46684": {
+   "fact_id": "EVT_abe5b7c347b46684",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "巴黎近郊发生致命枪击，马克龙称其为“种族主义恐怖袭击”",
+   "category": "terrorist_attack",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-23 23:42",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_4b9a46c711fd321f": {
+   "fact_id": "EVT_4b9a46c711fd321f",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "总检察长建议起诉NDC的Ashie Moore，其被指盗窃一名新加坡商人财产",
+   "category": "other_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-23 12:35",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_967bffdbaf34e622": {
+   "fact_id": "EVT_967bffdbaf34e622",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "卢旺达",
+   "title": "卢旺达：基加利设立难民与寻求庇护者上诉法庭",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-24 02:50",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_3732230301d6dd8b": {
+   "fact_id": "EVT_3732230301d6dd8b",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "塞内加尔",
+   "title": "塞内加尔：三天总罢工后的盘点",
+   "category": "strike",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-24 02:45",
    "importance": "high",
    "severity": "medium"
   }

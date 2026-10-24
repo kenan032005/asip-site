@@ -1,0 +1,125 @@
+{
+ "label": "S08d2ff6e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3298f1c0bee7720202375774fba7b3d3070696adb908940cdd18309bea5e2bc5",
+ "tokens": {
+  "input_tokens": 2043,
+  "output_tokens": 471,
+  "total_tokens": 2514
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚卫生工作者威胁因未付津贴举行罢工",
+   "summary_zh": "尼日利亚联合卫生专业人员工会指示全国会员开始动员，准备就联邦政府未落实商定的薪资调整和未结清应得待遇举行全国性罢工。工会要求立即支付19个月的专业津贴欠款，并实施统一卫生薪资结构调整。工会警告称，持续拖延可能引发卫生领域新一轮工业行动。该信息来自工会全国执行委员会会议公报，目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "埃努古州",
+    "city": "埃努古",
+    "site": "Dannic Hotels, New Haven",
+    "raw_text": "Dannic Hotels, New Haven, Enugu State"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联合卫生专业人员工会指示全国会员动员准备全国性罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Nigerian Union of Allied Health Professionals has directed its members across the country to begin mobilisation for a nationwide strike"
+    },
+    {
+     "fact": "罢工原因是联邦政府未落实商定的薪资调整和未结清应得待遇",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "over the Federal Government’s failure to implement agreed salary adjustments and settle outstanding entitlements"
+    },
+    {
+     "fact": "工会要求立即支付19个月的专业津贴欠款",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "demanded the immediate payment of 19 months’ arrears of reviewed professional allowances"
+    },
+    {
+     "fact": "工会警告持续拖延可能引发卫生领域新一轮工业行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "warning that continued delays could trigger another round of industrial action in the health sector"
+    },
+    {
+     "fact": "该指令载于在埃努古州新港Dannic Hotels举行的全国执行委员会会议公报",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "communiqué issued at the end of the union’s statutory National Executive Council meeting held at Dannic Hotels, New Haven, Enugu State"
+    }
+   ],
+   "uncertainties": [
+    "罢工是否实际举行尚未证实",
+    "目前仅为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚卫生工作者威胁因未付津贴举行罢工",
+   "summary_zh": "尼日利亚联合卫生专业人员工会指示全国会员开始动员，准备就联邦政府未落实商定的薪资调整和未结清应得待遇举行全国性罢工。工会要求立即支付19个月的专业津贴欠款，并实施统一卫生薪资结构调整。工会警告称，持续拖延可能引发卫生领域新一轮工业行动。该信息来自工会全国执行委员会会议公报，目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "埃努古州",
+    "city": "埃努古",
+    "site": "Dannic Hotels, New Haven",
+    "raw_text": "Dannic Hotels, New Haven, Enugu State"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联合卫生专业人员工会指示全国会员动员准备全国性罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Nigerian Union of Allied Health Professionals has directed its members across the country to begin mobilisation for a nationwide strike"
+    },
+    {
+     "fact": "罢工原因是联邦政府未落实商定的薪资调整和未结清应得待遇",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "over the Federal Government’s failure to implement agreed salary adjustments and settle outstanding entitlements"
+    },
+    {
+     "fact": "工会要求立即支付19个月的专业津贴欠款",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "demanded the immediate payment of 19 months’ arrears of reviewed professional allowances"
+    },
+    {
+     "fact": "工会警告持续拖延可能引发卫生领域新一轮工业行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "warning that continued delays could trigger another round of industrial action in the health sector"
+    },
+    {
+     "fact": "该指令载于在埃努古州新港Dannic Hotels举行的全国执行委员会会议公报",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "communiqué issued at the end of the union’s statutory National Executive Council meeting held at Dannic Hotels, New Haven, Enugu State"
+    }
+   ],
+   "uncertainties": [
+    "罢工是否实际举行尚未证实",
+    "目前仅为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_d61d1c2908d2ff6e",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

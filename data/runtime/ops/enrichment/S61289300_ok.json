@@ -1,0 +1,108 @@
+{
+ "label": "S61289300",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0fb9fec3cfd5cd783a03a40acd696f482249e5520a90dbb0a4812bdbaf82775f",
+ "tokens": {
+  "input_tokens": 2272,
+  "output_tokens": 276,
+  "total_tokens": 2548
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该报道为单一来源，尚缺乏交叉验证\", \"具体死亡地点与时间细节未在正文中明确\", \"输入存在时间差异标记（conflict_flags: time_difference）\"]",
+    "after": "[\"该报道为单一来源，尚缺乏交叉验证\", \"具体死亡地点与时间细节未在正文中明确\", \"输入存在时间差异标记（conflict_flags: time_difference）\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "肯尼亚一名65岁女性成为该国第二例埃博拉死亡病例",
+   "summary_zh": "肯尼亚在应对该国首次埃博拉疫情暴发期间，记录了第二例埃博拉死亡病例，死者为一名65岁女性。该信息目前为单一来源报道，尚缺乏交叉验证。",
+   "event_type": "other_security",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Kenya"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚记录第二例埃博拉死亡病例，死者为65岁女性",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Woman, 65, becomes second patient to die of Ebola in Kenya"
+    },
+    {
+     "fact": "肯尼亚正在应对该国首次埃博拉疫情暴发",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kenya has recorded its second death from Ebola as it handles its first ever outbreak of the disease."
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚缺乏交叉验证",
+    "具体死亡地点与时间细节未在正文中明确",
+    "输入存在时间差异标记（conflict_flags: time_difference）"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "肯尼亚一名65岁女性成为该国第二例埃博拉死亡病例",
+   "summary_zh": "肯尼亚在应对该国首次埃博拉疫情暴发期间，记录了第二例埃博拉死亡病例，死者为一名65岁女性。该信息目前为单一来源报道，尚缺乏交叉验证。",
+   "event_type": "other_security",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Kenya"
+   },
+   "key_facts": [
+    {
+     "fact": "肯尼亚记录第二例埃博拉死亡病例，死者为65岁女性",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Woman, 65, becomes second patient to die of Ebola in Kenya"
+    },
+    {
+     "fact": "肯尼亚正在应对该国首次埃博拉疫情暴发",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kenya has recorded its second death from Ebola as it handles its first ever outbreak of the disease."
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚缺乏交叉验证",
+    "具体死亡地点与时间细节未在正文中明确",
+    "输入存在时间差异标记（conflict_flags: time_difference）",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_d513b87361289300",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

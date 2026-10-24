@@ -1,0 +1,115 @@
+{
+ "label": "S3da6c0a5",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0f3a7f7d700855767c3c692a4e6f15c1eb96b7cfa66e0cb6f06c16d7db3a32bb",
+ "tokens": {
+  "input_tokens": 2079,
+  "output_tokens": 422,
+  "total_tokens": 2501
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚拉各斯一名大学生遭持枪抢劫 劫匪威胁杀人并诬其为邪教成员",
+   "summary_zh": "据尼日利亚《Punch》报道，拉各斯大学一名三年级学生奥里吉·佩尔费克申在拉各斯格巴加达地区遭两名持枪劫匪拦截，被抢走手机和笔记本电脑。该学生称，劫匪威胁若不配合就将其杀害，并威胁将其诬指为邪教成员。事件发生于10月12日下午，目前为单一来源报道。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "拉各斯州",
+    "city": "拉各斯",
+    "site": "格巴加达 New Garage 附近",
+    "raw_text": "off New Garage in Gbagada, Lagos"
+   },
+   "key_facts": [
+    {
+     "fact": "拉各斯大学一名三年级学生在格巴加达遭两名持枪劫匪拦截",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "two men cornered me and threatened to kill me if I did not cooperate with them"
+    },
+    {
+     "fact": "劫匪抢走该学生的手机和笔记本电脑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "They threatened to kill him and seized his phone and laptop"
+    },
+    {
+     "fact": "该学生称劫匪威胁将其诬指为邪教成员",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Robbers threatened to kill, frame me as cultist — UNILAG student"
+    },
+    {
+     "fact": "事件发生于10月12日下午3点至4点之间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The incident happened on Monday, October 12, between 3pm and 4pm"
+    }
+   ],
+   "uncertainties": [
+    "事件细节仅来自受害者本人叙述，目前为单一来源，尚未获得交叉验证",
+    "劫匪身份及是否被抓获尚不明确"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚拉各斯一名大学生遭持枪抢劫 劫匪威胁杀人并诬其为邪教成员",
+   "summary_zh": "据尼日利亚《Punch》报道，拉各斯大学一名三年级学生奥里吉·佩尔费克申在拉各斯格巴加达地区遭两名持枪劫匪拦截，被抢走手机和笔记本电脑。该学生称，劫匪威胁若不配合就将其杀害，并威胁将其诬指为邪教成员。事件发生于10月12日下午，目前为单一来源报道。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "拉各斯州",
+    "city": "拉各斯",
+    "site": "格巴加达 New Garage 附近",
+    "raw_text": "off New Garage in Gbagada, Lagos"
+   },
+   "key_facts": [
+    {
+     "fact": "拉各斯大学一名三年级学生在格巴加达遭两名持枪劫匪拦截",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "two men cornered me and threatened to kill me if I did not cooperate with them"
+    },
+    {
+     "fact": "劫匪抢走该学生的手机和笔记本电脑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "They threatened to kill him and seized his phone and laptop"
+    },
+    {
+     "fact": "该学生称劫匪威胁将其诬指为邪教成员",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Robbers threatened to kill, frame me as cultist — UNILAG student"
+    },
+    {
+     "fact": "事件发生于10月12日下午3点至4点之间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The incident happened on Monday, October 12, between 3pm and 4pm"
+    }
+   ],
+   "uncertainties": [
+    "事件细节仅来自受害者本人叙述，目前为单一来源，尚未获得交叉验证",
+    "劫匪身份及是否被抓获尚不明确"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_93c442f03da6c0a5",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

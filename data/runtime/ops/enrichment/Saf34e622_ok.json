@@ -1,0 +1,124 @@
+{
+ "label": "Saf34e622",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b18744b23342a9c2dc69743aa21be7d82244b6c9405d36d4a32247fc4238d322",
+ "tokens": {
+  "input_tokens": 2715,
+  "output_tokens": 422,
+  "total_tokens": 3137
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"单一来源报道（RFI），尚缺乏其他来源交叉验证\"]",
+    "after": "[\"单一来源报道（RFI），尚缺乏其他来源交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "卢旺达：基加利设立难民与寻求庇护者上诉法庭",
+   "summary_zh": "卢旺达基加利新设立的难民与寻求庇护者上诉法庭本周举行首次庭审，闭门审理约二十起案件。该法庭旨在处理庇护申请被拒或难民身份被撤销后的上诉。卢旺达目前收容近14万名难民，多为刚果人和布隆迪人。",
+   "event_type": "other_security",
+   "country_iso3": "RWA",
+   "location": {
+    "country_iso3": "RWA",
+    "admin1": null,
+    "city": "基加利",
+    "site": null,
+    "raw_text": "Kigali"
+   },
+   "key_facts": [
+    {
+     "fact": "卢旺达基加利新设难民与寻求庇护者上诉法庭本周首次开庭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Rwanda, un tout nouveau tribunal d’appel pour réfugiés et demandeurs d’asile a tenu ses premières séances cette semaine."
+    },
+    {
+     "fact": "本周闭门审理约二十起案件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une vingtaine d’affaires ont été entendues dans des audiences à huis clos cette semaine."
+    },
+    {
+     "fact": "该法庭旨在处理庇护申请被拒或难民身份被撤销后的上诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'objectif de ce nouveau tribunal est de traiter des recours émis concernant des demandes d’asile refusées ou des statuts de réfugiés révoqués."
+    },
+    {
+     "fact": "卢旺达收容近14万名难民，多为刚果人和布隆迪人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Rwanda accueille près de 140 000 réfugiés, en majorité des Congolais et des Burundais."
+    }
+   ],
+   "uncertainties": [
+    "单一来源报道（RFI），尚缺乏其他来源交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "卢旺达：基加利设立难民与寻求庇护者上诉法庭",
+   "summary_zh": "卢旺达基加利新设立的难民与寻求庇护者上诉法庭本周举行首次庭审，闭门审理约二十起案件。该法庭旨在处理庇护申请被拒或难民身份被撤销后的上诉。卢旺达目前收容近14万名难民，多为刚果人和布隆迪人。",
+   "event_type": "other_security",
+   "country_iso3": "RWA",
+   "location": {
+    "country_iso3": "RWA",
+    "admin1": null,
+    "city": "基加利",
+    "site": null,
+    "raw_text": "Kigali"
+   },
+   "key_facts": [
+    {
+     "fact": "卢旺达基加利新设难民与寻求庇护者上诉法庭本周首次开庭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Rwanda, un tout nouveau tribunal d’appel pour réfugiés et demandeurs d’asile a tenu ses premières séances cette semaine."
+    },
+    {
+     "fact": "本周闭门审理约二十起案件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une vingtaine d’affaires ont été entendues dans des audiences à huis clos cette semaine."
+    },
+    {
+     "fact": "该法庭旨在处理庇护申请被拒或难民身份被撤销后的上诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'objectif de ce nouveau tribunal est de traiter des recours émis concernant des demandes d’asile refusées ou des statuts de réfugiés révoqués."
+    },
+    {
+     "fact": "卢旺达收容近14万名难民，多为刚果人和布隆迪人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Rwanda accueille près de 140 000 réfugiés, en majorité des Congolais et des Burundais."
+    }
+   ],
+   "uncertainties": [
+    "单一来源报道（RFI），尚缺乏其他来源交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_967bffdbaf34e622",
+ "disease_event_id": null,
+ "country_code": "RW"
+}
