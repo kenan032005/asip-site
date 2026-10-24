@@ -1,0 +1,138 @@
+{
+ "label": "S85f99058",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "acb996b7d94f332af2587a1aa81c4a44d997b083489e665085f2ab55e56bb0cc",
+ "tokens": {
+  "input_tokens": 2872,
+  "output_tokens": 665,
+  "total_tokens": 3537
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"报道为单一来源，尚无其他独立来源交叉验证\", \"赔偿与搬迁的具体条件尚未明确\", \"政府称已与受影响者代表沟通并获理解，该说法仅来自政府发言人一方\"]",
+    "after": "[\"报道为单一来源，尚无其他独立来源交叉验证\", \"赔偿与搬迁的具体条件尚未明确\", \"政府称已与受影响者代表沟通并获理解，该说法仅来自政府发言人一方\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁政府为“渔民之路”沿线清退行动辩护，称将回购合规产权",
+   "summary_zh": "贝宁政府计划清退“渔民之路”（Route des Pêches）沿线的河岸和水域占用，以预防洪涝、保护红树林并整治相关区域。政府发言人Wilfried Léandre Houngbédji为这一他称为艰难但必要的决定辩护，称其关乎民众安全。对于合规占用者，国家将回购其产权；发言人还否认政府意在低价收回后高价转售的说法。报道为单一来源。",
+   "event_type": "natural_disaster",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": "Littoral / Atlantique",
+    "city": null,
+    "site": "Route des Pêches 沿线河岸与水域",
+    "raw_text": "les berges et les plans d’eau le long de la Route des Pêches, entre Cotonou, dans le Littoral, et le département de l’Atlantique, notamment vers Abomey-Calavi et Ouidah"
+   },
+   "key_facts": [
+    {
+     "fact": "贝宁政府计划清退“渔民之路”沿线的河岸和水域占用，以预防洪涝并保护红树林",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement entend libérer les berges et les plans d’eau le long de la Route des Pêches pour prévenir les inondations, protéger les mangroves et aménager les espaces concernés."
+    },
+    {
+     "fact": "政府发言人称该决定艰难但为民众安全所必需",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Wilfried Léandre Houngbédji, Porte-parole du gouvernement, défend une décision qu’il juge difficile, mais nécessaire à la sécurité des populations."
+    },
+    {
+     "fact": "国家将对合规占用者的产权进行回购",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’exécutif a décidé de déplacer les personnes installées dans les zones concernées, avec un dispositif de rachat des propriétés pour les propriétaires en règle"
+    },
+    {
+     "fact": "发言人否认政府意在收回产权后高价转售",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Wilfried Léandre Houngbédji rejette par ailleurs l’idée selon laquelle l’État chercherait à récupérer les propriétés pour les revendre à des prix plus élevés."
+    },
+    {
+     "fact": "受影响区域横跨科托努与大西洋省，涉及Abomey-Calavi和Ouidah方向",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cette zone qui s’étend entre Cotonou, dans le Littoral, et le département de l’Atlantique, notamment vers Abomey-Calavi et Ouidah"
+    }
+   ],
+   "uncertainties": [
+    "报道为单一来源，尚无其他独立来源交叉验证",
+    "赔偿与搬迁的具体条件尚未明确",
+    "政府称已与受影响者代表沟通并获理解，该说法仅来自政府发言人一方"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁政府为“渔民之路”沿线清退行动辩护，称将回购合规产权",
+   "summary_zh": "贝宁政府计划清退“渔民之路”（Route des Pêches）沿线的河岸和水域占用，以预防洪涝、保护红树林并整治相关区域。政府发言人Wilfried Léandre Houngbédji为这一他称为艰难但必要的决定辩护，称其关乎民众安全。对于合规占用者，国家将回购其产权；发言人还否认政府意在低价收回后高价转售的说法。报道为单一来源。",
+   "event_type": "natural_disaster",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": "Littoral / Atlantique",
+    "city": null,
+    "site": "Route des Pêches 沿线河岸与水域",
+    "raw_text": "les berges et les plans d’eau le long de la Route des Pêches, entre Cotonou, dans le Littoral, et le département de l’Atlantique, notamment vers Abomey-Calavi et Ouidah"
+   },
+   "key_facts": [
+    {
+     "fact": "贝宁政府计划清退“渔民之路”沿线的河岸和水域占用，以预防洪涝并保护红树林",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement entend libérer les berges et les plans d’eau le long de la Route des Pêches pour prévenir les inondations, protéger les mangroves et aménager les espaces concernés."
+    },
+    {
+     "fact": "政府发言人称该决定艰难但为民众安全所必需",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Wilfried Léandre Houngbédji, Porte-parole du gouvernement, défend une décision qu’il juge difficile, mais nécessaire à la sécurité des populations."
+    },
+    {
+     "fact": "国家将对合规占用者的产权进行回购",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’exécutif a décidé de déplacer les personnes installées dans les zones concernées, avec un dispositif de rachat des propriétés pour les propriétaires en règle"
+    },
+    {
+     "fact": "发言人否认政府意在收回产权后高价转售",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Wilfried Léandre Houngbédji rejette par ailleurs l’idée selon laquelle l’État chercherait à récupérer les propriétés pour les revendre à des prix plus élevés."
+    },
+    {
+     "fact": "受影响区域横跨科托努与大西洋省，涉及Abomey-Calavi和Ouidah方向",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cette zone qui s’étend entre Cotonou, dans le Littoral, et le département de l’Atlantique, notamment vers Abomey-Calavi et Ouidah"
+    }
+   ],
+   "uncertainties": [
+    "报道为单一来源，尚无其他独立来源交叉验证",
+    "赔偿与搬迁的具体条件尚未明确",
+    "政府称已与受影响者代表沟通并获理解，该说法仅来自政府发言人一方",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_5a5e785785f99058",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

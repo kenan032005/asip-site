@@ -1,0 +1,124 @@
+{
+ "label": "S3476274e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "53afcec36cdb7a9063e57b16613d72603c637a37be22e90f30070a0c96da53ca",
+ "tokens": {
+  "input_tokens": 3031,
+  "output_tokens": 559,
+  "total_tokens": 3590
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"单一来源：目前仅Fraternite一家媒体报道，尚缺乏交叉验证\"]",
+    "after": "[\"单一来源：目前仅Fraternite一家媒体报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁记者发起卒中预防宣传活动",
+   "summary_zh": "贝宁记者埃尔韦·普吕当斯·埃苏发起AVerCion Aversion协会，于2026年10月25日至11月1日开展卒中（AVC）预防宣传周。活动内容包括每日发布预警信号、风险因素和康复知识，并将于10月31日在科托努举行“大脑与声音对话”活动。据世界卫生组织数据，全球每年约1500万人发生卒中，近600万人死亡。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "科托努",
+    "site": "Thomas MEGNANSSAN Gbèdjromédé媒体之家",
+    "raw_text": "Maison des médias Thomas MEGNANSSAN Gbèdjromédé, à Cotonou"
+   },
+   "key_facts": [
+    {
+     "fact": "AVerCion Aversion协会于2026年10月25日至11月1日开展卒中预防宣传周",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Du 25 octobre au 1er novembre 2026, l’association AVerCion Aversion mène une semaine de sensibilisation à l’accident vasculaire cérébral (AVC)."
+    },
+    {
+     "fact": "据世界卫生组织数据，全球每年约1500万人发生卒中，近600万人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans le monde, 15 millions de personnes sont touchées chaque année par un AVC et près de 6 millions en meurent, selon l’OMS"
+    },
+    {
+     "fact": "科托努一项针对逾1.5万居民的调查估计卒中患病率为4.6‰",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Bénin, une enquête menée à Cotonou auprès de plus de 15 000 habitants a estimé la prévalence de l’AVC à 4,6 pour 1 000"
+    },
+    {
+     "fact": "10月31日将在科托努媒体之家举行“大脑与声音对话”活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La campagne culmine le samedi 31 octobre à 10h, avec le « Dialogue Cerveau & Voix » à la Maison des médias Thomas MEGNANSSAN Gbèdjromédé, à Cotonou."
+    }
+   ],
+   "uncertainties": [
+    "单一来源：目前仅Fraternite一家媒体报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁记者发起卒中预防宣传活动",
+   "summary_zh": "贝宁记者埃尔韦·普吕当斯·埃苏发起AVerCion Aversion协会，于2026年10月25日至11月1日开展卒中（AVC）预防宣传周。活动内容包括每日发布预警信号、风险因素和康复知识，并将于10月31日在科托努举行“大脑与声音对话”活动。据世界卫生组织数据，全球每年约1500万人发生卒中，近600万人死亡。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "科托努",
+    "site": "Thomas MEGNANSSAN Gbèdjromédé媒体之家",
+    "raw_text": "Maison des médias Thomas MEGNANSSAN Gbèdjromédé, à Cotonou"
+   },
+   "key_facts": [
+    {
+     "fact": "AVerCion Aversion协会于2026年10月25日至11月1日开展卒中预防宣传周",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Du 25 octobre au 1er novembre 2026, l’association AVerCion Aversion mène une semaine de sensibilisation à l’accident vasculaire cérébral (AVC)."
+    },
+    {
+     "fact": "据世界卫生组织数据，全球每年约1500万人发生卒中，近600万人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans le monde, 15 millions de personnes sont touchées chaque année par un AVC et près de 6 millions en meurent, selon l’OMS"
+    },
+    {
+     "fact": "科托努一项针对逾1.5万居民的调查估计卒中患病率为4.6‰",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Bénin, une enquête menée à Cotonou auprès de plus de 15 000 habitants a estimé la prévalence de l’AVC à 4,6 pour 1 000"
+    },
+    {
+     "fact": "10月31日将在科托努媒体之家举行“大脑与声音对话”活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La campagne culmine le samedi 31 octobre à 10h, avec le « Dialogue Cerveau & Voix » à la Maison des médias Thomas MEGNANSSAN Gbèdjromédé, à Cotonou."
+    }
+   ],
+   "uncertainties": [
+    "单一来源：目前仅Fraternite一家媒体报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_ffb5d3f53476274e",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

@@ -1,0 +1,133 @@
+{
+ "label": "S042f19e5",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "199a4e38cf3af14b92bc206249dfbe27f85b4d78f3270aed26865309cf416e33",
+ "tokens": {
+  "input_tokens": 2252,
+  "output_tokens": 511,
+  "total_tokens": 2763
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚塔拉巴州社区遭恐怖分子袭击 死亡人数升至26人",
+   "summary_zh": "尼日利亚塔拉巴州卡里姆拉米多地方政府区宾纳里村遭武装袭击者袭击，死亡人数在周六又发现11具遗体后升至26人。此前一天据报至少有15人在周五主麻礼拜期间遇袭身亡。搜救行动仍在进行，失踪人数、伤者情况及财产损失程度尚不清楚，目前尚无逮捕或袭击者身份的信息。",
+   "event_type": "terrorism",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "塔拉巴州",
+    "city": null,
+    "site": "宾纳里村",
+    "raw_text": "Binnari village in Karim Lamido Local Government Area of Taraba State"
+   },
+   "key_facts": [
+    {
+     "fact": "塔拉巴州宾纳里村遭恐怖分子袭击，死亡人数升至26人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The death toll from a terrorists attack on Binnari village in Karim Lamido Local Government Area of Taraba State has risen to 26 following the recovery of 11 additional bodies on Saturday morning."
+    },
+    {
+     "fact": "袭击发生在周五穆斯林居民进行主麻礼拜期间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the assailants struck the community on Friday while Muslim residents were observing their weekly congregational prayers."
+    },
+    {
+     "fact": "此前据报至少有15人在袭击中身亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a day after at least 15 people were reportedly killed when armed attackers invaded the community during Juma’a prayers on Friday."
+    },
+    {
+     "fact": "袭击者还焚烧了多辆摩托车",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The attackers were also said to have set several motorcycles ablaze during the assault"
+    },
+    {
+     "fact": "搜救行动仍在进行，失踪人数尚不清楚",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The search and recovery operation is still ongoing, amid fears that more victims could be discovered"
+    }
+   ],
+   "uncertainties": [
+    "死亡人数可能进一步上升，搜救仍在进行",
+    "失踪人数尚不清楚",
+    "伤者伤情程度不明",
+    "财产损失全貌不明",
+    "袭击者身份及是否有人被捕尚无信息",
+    "目前仅单一来源（Sahara Reporters）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚塔拉巴州社区遭恐怖分子袭击 死亡人数升至26人",
+   "summary_zh": "尼日利亚塔拉巴州卡里姆拉米多地方政府区宾纳里村遭武装袭击者袭击，死亡人数在周六又发现11具遗体后升至26人。此前一天据报至少有15人在周五主麻礼拜期间遇袭身亡。搜救行动仍在进行，失踪人数、伤者情况及财产损失程度尚不清楚，目前尚无逮捕或袭击者身份的信息。",
+   "event_type": "terrorism",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "塔拉巴州",
+    "city": null,
+    "site": "宾纳里村",
+    "raw_text": "Binnari village in Karim Lamido Local Government Area of Taraba State"
+   },
+   "key_facts": [
+    {
+     "fact": "塔拉巴州宾纳里村遭恐怖分子袭击，死亡人数升至26人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The death toll from a terrorists attack on Binnari village in Karim Lamido Local Government Area of Taraba State has risen to 26 following the recovery of 11 additional bodies on Saturday morning."
+    },
+    {
+     "fact": "袭击发生在周五穆斯林居民进行主麻礼拜期间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the assailants struck the community on Friday while Muslim residents were observing their weekly congregational prayers."
+    },
+    {
+     "fact": "此前据报至少有15人在袭击中身亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a day after at least 15 people were reportedly killed when armed attackers invaded the community during Juma’a prayers on Friday."
+    },
+    {
+     "fact": "袭击者还焚烧了多辆摩托车",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The attackers were also said to have set several motorcycles ablaze during the assault"
+    },
+    {
+     "fact": "搜救行动仍在进行，失踪人数尚不清楚",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The search and recovery operation is still ongoing, amid fears that more victims could be discovered"
+    }
+   ],
+   "uncertainties": [
+    "死亡人数可能进一步上升，搜救仍在进行",
+    "失踪人数尚不清楚",
+    "伤者伤情程度不明",
+    "财产损失全貌不明",
+    "袭击者身份及是否有人被捕尚无信息",
+    "目前仅单一来源（Sahara Reporters）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_41ec6d16042f19e5",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
