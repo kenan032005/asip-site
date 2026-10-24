@@ -1,0 +1,127 @@
+{
+ "label": "S20015020",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e7e97fe93734cf9dc8ed0662beb75932cf7390604c185bc76b6aece680c3e183",
+ "tokens": {
+  "input_tokens": 2069,
+  "output_tokens": 517,
+  "total_tokens": 2586
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚埃博拉筛查收紧，拉各斯建筑倒塌致一死三伤",
+   "summary_zh": "尼日利亚因据报出现防疫规程漏洞而收紧入境点埃博拉筛查，乌干达称感染旅客离境前未出现症状。刚果（金）方面，世界卫生组织启动了针对本迪布焦型毒株的候选疫苗临床试验。此外，中东紧张局势推高全球原油价格，可能引发新一轮汽油涨价；拉各斯州政府将法德伊一栋建筑倒塌、造成一人死亡三人受伤归咎于开发商被指的疏忽。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "拉各斯州",
+    "city": "拉各斯",
+    "site": "法德伊",
+    "raw_text": "Fadeyi, Lagos"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚因据报出现防疫规程漏洞而收紧入境点埃博拉筛查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria faces renewed concerns over Ebola containment as the Federal Government moves to tighten screening at entry points following reported protocol breaches"
+    },
+    {
+     "fact": "乌干达称感染旅客离境前未出现症状",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Uganda says the infected traveller showed no symptoms before leaving the country"
+    },
+    {
+     "fact": "世卫组织在刚果（金）启动针对本迪布焦型毒株的候选疫苗临床试验",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In the Democratic Republic of Congo, the World Health Organisation has launched a clinical trial of vaccine candidates against the Bundibugyo strain"
+    },
+    {
+     "fact": "拉各斯法德伊一栋建筑倒塌造成一人死亡、三人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a building collapse in Fadeyi that killed one person and injured three others"
+    },
+    {
+     "fact": "拉各斯州政府将建筑倒塌归咎于开发商被指的疏忽",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Lagos State Government blames alleged negligence by a developer for a building collapse in Fadeyi"
+    }
+   ],
+   "uncertainties": [
+    "防疫规程漏洞的具体情况尚未证实",
+    "建筑倒塌原因仅为拉各斯州政府单方面指控，开发商疏忽说法尚未证实",
+    "目前仅一个来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 62
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚埃博拉筛查收紧，拉各斯建筑倒塌致一死三伤",
+   "summary_zh": "尼日利亚因据报出现防疫规程漏洞而收紧入境点埃博拉筛查，乌干达称感染旅客离境前未出现症状。刚果（金）方面，世界卫生组织启动了针对本迪布焦型毒株的候选疫苗临床试验。此外，中东紧张局势推高全球原油价格，可能引发新一轮汽油涨价；拉各斯州政府将法德伊一栋建筑倒塌、造成一人死亡三人受伤归咎于开发商被指的疏忽。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "拉各斯州",
+    "city": "拉各斯",
+    "site": "法德伊",
+    "raw_text": "Fadeyi, Lagos"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚因据报出现防疫规程漏洞而收紧入境点埃博拉筛查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria faces renewed concerns over Ebola containment as the Federal Government moves to tighten screening at entry points following reported protocol breaches"
+    },
+    {
+     "fact": "乌干达称感染旅客离境前未出现症状",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Uganda says the infected traveller showed no symptoms before leaving the country"
+    },
+    {
+     "fact": "世卫组织在刚果（金）启动针对本迪布焦型毒株的候选疫苗临床试验",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In the Democratic Republic of Congo, the World Health Organisation has launched a clinical trial of vaccine candidates against the Bundibugyo strain"
+    },
+    {
+     "fact": "拉各斯法德伊一栋建筑倒塌造成一人死亡、三人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a building collapse in Fadeyi that killed one person and injured three others"
+    },
+    {
+     "fact": "拉各斯州政府将建筑倒塌归咎于开发商被指的疏忽",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Lagos State Government blames alleged negligence by a developer for a building collapse in Fadeyi"
+    }
+   ],
+   "uncertainties": [
+    "防疫规程漏洞的具体情况尚未证实",
+    "建筑倒塌原因仅为拉各斯州政府单方面指控，开发商疏忽说法尚未证实",
+    "目前仅一个来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 62
+  }
+ },
+ "event_id": "EVT_53ebeb6720015020",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

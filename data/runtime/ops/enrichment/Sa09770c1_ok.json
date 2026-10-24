@@ -1,0 +1,117 @@
+{
+ "label": "Sa09770c1",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "62dcf943b57286172fc1ff358189ec64ebb2d13aa980acb0e3f02cccd485d00a",
+ "tokens": {
+  "input_tokens": 2097,
+  "output_tokens": 508,
+  "total_tokens": 2605
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚阿南布拉州警方逮捕一名23岁女性死亡案嫌疑人",
+   "summary_zh": "尼日利亚阿南布拉州警方在乌加地区逮捕嫌疑人奇马·奥福埃克，其涉嫌谋杀23岁的前女友姆梅索马·乌梅奥里尼。警方称，受害者母亲此前报案称女儿自2026年10月16日起失踪。据警方说法，嫌疑人初步审讯中据称已供认因感情破裂而杀害受害者，并带领警员找到遗体。目前该案为单一来源报道，相关指控尚未经法院证实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "阿南布拉州",
+    "city": "乌加",
+    "site": "阿瓜塔地方政府区乌加",
+    "raw_text": "Uga, Aguata Local Government Area, Anambra State"
+   },
+   "key_facts": [
+    {
+     "fact": "阿南布拉州警方逮捕涉嫌谋杀23岁女性姆梅索马·乌梅奥里尼的嫌疑人奇马·奥福埃克",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Anambra State Police Command has arrested a suspect, Chima Ofoeke, over the suspected murder of 23-year-old Mmesoma Umeorini in Uga, Aguata Local Government Area of the state."
+    },
+    {
+     "fact": "受害者母亲报案称女儿自2026年10月16日起失踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "her daughter had been missing since October 16, 2026, despite efforts to establish her whereabouts"
+    },
+    {
+     "fact": "警方称嫌疑人初步审讯中据称供认因感情破裂杀害受害者并带领找到遗体",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the suspect allegedly confessed during preliminary interrogation to killing the victim following the breakdown of their relationship and subsequently led detectives to the location where her remains were discovered and recovered"
+    },
+    {
+     "fact": "嫌疑人被指为死者前男友",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the deceased’s alleged former boyfriend"
+    }
+   ],
+   "uncertainties": [
+    "嫌疑人的供述与谋杀指控目前仅为警方说法，尚未经法院审理证实",
+    "案件目前仅有一个来源（Punch）报道，尚缺乏交叉验证",
+    "遗体发现及死亡原因等细节有待进一步核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚阿南布拉州警方逮捕一名23岁女性死亡案嫌疑人",
+   "summary_zh": "尼日利亚阿南布拉州警方在乌加地区逮捕嫌疑人奇马·奥福埃克，其涉嫌谋杀23岁的前女友姆梅索马·乌梅奥里尼。警方称，受害者母亲此前报案称女儿自2026年10月16日起失踪。据警方说法，嫌疑人初步审讯中据称已供认因感情破裂而杀害受害者，并带领警员找到遗体。目前该案为单一来源报道，相关指控尚未经法院证实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "阿南布拉州",
+    "city": "乌加",
+    "site": "阿瓜塔地方政府区乌加",
+    "raw_text": "Uga, Aguata Local Government Area, Anambra State"
+   },
+   "key_facts": [
+    {
+     "fact": "阿南布拉州警方逮捕涉嫌谋杀23岁女性姆梅索马·乌梅奥里尼的嫌疑人奇马·奥福埃克",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Anambra State Police Command has arrested a suspect, Chima Ofoeke, over the suspected murder of 23-year-old Mmesoma Umeorini in Uga, Aguata Local Government Area of the state."
+    },
+    {
+     "fact": "受害者母亲报案称女儿自2026年10月16日起失踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "her daughter had been missing since October 16, 2026, despite efforts to establish her whereabouts"
+    },
+    {
+     "fact": "警方称嫌疑人初步审讯中据称供认因感情破裂杀害受害者并带领找到遗体",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the suspect allegedly confessed during preliminary interrogation to killing the victim following the breakdown of their relationship and subsequently led detectives to the location where her remains were discovered and recovered"
+    },
+    {
+     "fact": "嫌疑人被指为死者前男友",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the deceased’s alleged former boyfriend"
+    }
+   ],
+   "uncertainties": [
+    "嫌疑人的供述与谋杀指控目前仅为警方说法，尚未经法院审理证实",
+    "案件目前仅有一个来源（Punch）报道，尚缺乏交叉验证",
+    "遗体发现及死亡原因等细节有待进一步核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_96a5e6b0a09770c1",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
