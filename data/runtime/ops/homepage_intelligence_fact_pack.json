@@ -1,15 +1,15 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-24T21:00:26+08:00",
+ "generated_at": "2026-10-24T21:10:26+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 41,
+  "signals_24h": 42,
   "signals_7d": 442,
   "verified_events_24h": 43,
-  "verified_events_7d": 433,
+  "verified_events_7d": 432,
   "multi_source_verified_events_7d": 21,
   "countries_with_activity_24h": 10,
   "total_countries_monitored": 22
@@ -69,12 +69,12 @@
    "count": 27
   },
   {
-   "value": "贝宁",
+   "value": "南苏丹",
    "count": 24
   },
   {
-   "value": "南苏丹",
-   "count": 24
+   "value": "贝宁",
+   "count": 23
   },
   {
    "value": "加纳",
@@ -115,16 +115,16 @@
    "count": 11
   },
   {
+   "value": "罢工行动",
+   "count": 2
+  },
+  {
    "value": "恐怖袭击",
    "count": 2
   },
   {
    "value": "绑架",
    "count": 2
-  },
-  {
-   "value": "罢工行动",
-   "count": 1
   },
   {
    "value": "基础设施安全",
@@ -146,7 +146,7 @@
  "source_tier_distribution_7d": [
   {
    "value": "C",
-   "count": 614
+   "count": 612
   },
   {
    "value": "B",
@@ -154,7 +154,7 @@
   },
   {
    "value": "A",
-   "count": 107
+   "count": 108
   }
  ],
  "top_verified_events": [
@@ -234,29 +234,44 @@
    "severity": "medium"
   },
   {
-   "fact_id": "EVT_d012d59b3fe14276",
+   "fact_id": "EVT_d73ad9679b66752c",
    "level": "verified_event",
    "evidence_tier": "single_source_published",
    "source_count": 1,
-   "country": "贝宁",
-   "title": "贝宁：科托努民事监狱五名囚犯被发现死亡",
-   "category": "other_security",
-   "source": "La Nouvelle Tribune",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-17 13:01",
+   "country": "加纳",
+   "title": "Hubtel首席执行官称公司部署人工智能协助加纳电力公司识别疑似窃电行为",
+   "category": "infrastructure_security",
+   "source": "MyJoyOnline",
+   "source_tier": "B",
+   "source_role": "regional",
+   "time": "2026-10-17 20:29",
    "importance": "high",
    "severity": "medium"
   }
  ],
  "top_signals": [
   {
+   "fact_id": "news:af5dcd8092c152a0",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "毛里塔尼亚",
+   "title": "毛里塔尼亚：学生持续罢课，抗议生活与学习条件",
+   "category": "strike",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-24 19:19",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
    "fact_id": "news:b05865c9acb38d5c",
    "level": "news_signal",
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "尼日利亚",
-   "title": "World Polio Day: Rotary urges parents to vaccinate children",
+   "title": "世界脊髓灰质炎日：扶轮社呼吁家长为儿童接种疫苗",
    "category": "other_security",
    "source": "Punch",
    "source_tier": "C",
@@ -594,21 +609,6 @@
    "time": "2026-10-24 04:04",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:9f47085fad7a1ab2",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "Tchad : la famille Kassiré annonce la libération des trois enfants de Hawa Kassiré en Haïti",
-   "category": "kidnapping",
-   "source": "Tchadinfos",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-24 03:45",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -689,15 +689,30 @@
   "status": "deterministic",
   "based_on": "过去24小时/7日公开信息（确定性汇总）"
  },
- "fact_count": 875,
+ "fact_count": 874,
  "facts": {
+  "news:af5dcd8092c152a0": {
+   "fact_id": "news:af5dcd8092c152a0",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "毛里塔尼亚",
+   "title": "毛里塔尼亚：学生持续罢课，抗议生活与学习条件",
+   "category": "strike",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-24 19:19",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:b05865c9acb38d5c": {
    "fact_id": "news:b05865c9acb38d5c",
    "level": "news_signal",
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "尼日利亚",
-   "title": "World Polio Day: Rotary urges parents to vaccinate children",
+   "title": "世界脊髓灰质炎日：扶轮社呼吁家长为儿童接种疫苗",
    "category": "other_security",
    "source": "Punch",
    "source_tier": "C",
@@ -7306,21 +7321,6 @@
    "importance": "low",
    "why_it_matters": ""
   },
-  "news:f91fa03693a8c47b": {
-   "fact_id": "news:f91fa03693a8c47b",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "贝宁",
-   "title": "贝宁：科托努民事监狱五名囚犯被发现死亡",
-   "category": "other_security",
-   "source": "La Nouvelle Tribune",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-17 21:01",
-   "importance": "low",
-   "why_it_matters": ""
-  },
   "EVT_7fe2a4983bf32bf3": {
    "fact_id": "EVT_7fe2a4983bf32bf3",
    "level": "verified_event",
@@ -7393,21 +7393,6 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-17 15:40",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_d012d59b3fe14276": {
-   "fact_id": "EVT_d012d59b3fe14276",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "贝宁",
-   "title": "贝宁：科托努民事监狱五名囚犯被发现死亡",
-   "category": "other_security",
-   "source": "La Nouvelle Tribune",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-17 13:01",
    "importance": "high",
    "severity": "medium"
   },
