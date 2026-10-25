@@ -110,7 +110,9 @@ class SourceRegistry:
             "priority": lp.get("priority", 50),
             "timeout_seconds": lp.get("timeout_seconds", 15),
             "max_items": lp.get("max_items", 20),
-            "extractor_profile": lp.get("extractor_profile", {}),
+            # 顶层优先、legacy 兜底：新增源的解析适配配置写在顶层，
+            # 现有源两者皆为空 {} —— 取值结果不变。
+            "extractor_profile": s.get("extractor_profile") or lp.get("extractor_profile") or {},
             "health_status": lp.get("status", "unknown"),
             "last_success_at": lp.get("last_success_at", ""),
             "last_failure_at": lp.get("last_failure_at", ""),
@@ -326,27 +328,74 @@ class ArticleDiscoverer:
             if err:
                 errors.append(f"{source['source_id']}: {lu} fetch {err}")
                 continue
+            # 可选适配（opt-in）：仅当该源在 extractor_profile 中显式声明时才生效。
+            # 现有 153 条已启用源的 extractor_profile 均为 {}，故此段对既有采集零影响。
+            prof = source.get("extractor_profile") or {}
+            inc = prof.get("include_link_patterns") or []
+            exc = prof.get("exclude_link_patterns") or []
+            date_rx = prof.get("listing_date_regex") or ""
+            date_tz = prof.get("listing_date_tz") or ""
             for link, txt in self._extract_links(text, lu):
                 if not link or not txt:
                     continue
                 ok, reason = validate_url(link)
                 if not ok:
                     continue
+                if inc and not any(re.search(p, link) for p in inc):
+                    continue
+                if exc and any(re.search(p, link) for p in exc):
+                    continue
                 if link in seen:
                     continue
                 seen.add(link)
+                published = ""
+                if date_rx:
+                    published = self._extract_listing_date(
+                        text, lu, link, date_rx, date_tz)
                 out.append({
                     "title": txt,
                     "url": link,
                     "guid": link,
                     "summary": "",
-                    "published": "",
+                    "published": published,
                     "method": "html_listing",
                     "feed_url": "",
                     "listing_url": lu,
                     "language": source["language"],
                 })
         return out[:source["max_items"]], errors
+
+    # 列表页日期抽取（opt-in）：锚点闭合后取邻近窗口匹配日期，
+    # 命中则归一为 ISO；未命中返回空串 —— 绝不用抓取时间冒充发布时间。
+    _MON_ABBR = {m: i + 1 for i, m in enumerate(
+        ["jan", "feb", "mar", "apr", "may", "jun",
+         "jul", "aug", "sep", "oct", "nov", "dec"])}
+
+    @classmethod
+    def _extract_listing_date(cls, html_text, base_url, link, date_regex, tz_offset):
+        try:
+            rx = re.compile(date_regex, re.I)
+        except re.error:
+            return ""
+        try:
+            for m in re.finditer(r'<a[^>]+href=["\']([^"\']+)["\'][^>]*>',
+                                 html_text, re.I | re.S):
+                if urllib.parse.urljoin(base_url, m.group(1).strip()) != link:
+                    continue
+                window = html_text[m.end():m.end() + 900]
+                dm = rx.search(window)
+                if not dm or len(dm.groups()) != 3:
+                    return ""
+                mon, day, year = dm.group(1), dm.group(2), dm.group(3)
+                key = str(mon)[:3].lower()
+                if key not in cls._MON_ABBR:
+                    return ""
+                iso = "%04d-%02d-%02d" % (int(year), cls._MON_ABBR[key], int(day))
+                # 站点所在时区由治理侧显式声明（如 EAT +03:00）；未声明则仅日期
+                return iso + ("T00:00:00%s" % tz_offset if tz_offset else "")
+        except Exception:
+            return ""
+        return ""
 
     @staticmethod
     def _extract_links(html_text, base_url):
