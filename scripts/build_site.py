@@ -141,8 +141,13 @@ def _build_and_copy_c1a_views(dist_root):
         return 0
 
 
-WIN_PATH_RE = re.compile(r"[A-Za-z]:[\\/]+[^\s\"'<>|]*")
-POSIX_PATH_RE = re.compile(r"/(?:home|Users)/[^\s\"'<>|]*")
+# 负向后顾 (?<![A-Za-z])：URL scheme 的末字母 + 冒号（"https:" 的 "s:"）不得
+# 被当作 Windows 盘符，否则整条 URL 被抹成 http<redacted-path>。
+# 真实 Windows 绝对路径（C:\... / D:/...）前置字符为串首/空白/引号/等号，不受影响。
+WIN_PATH_RE = re.compile(r"(?<![A-Za-z])[A-Za-z]:[\\/]+[^\s\"'<>|]*")
+# 同理：URL 路径段可能含 /home/ 或 /Users/（如 https://ex.com/home/index），
+# 只在串首或"非路径字符"之后才认定为 Linux 本机绝对路径。
+POSIX_PATH_RE = re.compile(r"(?<![A-Za-z0-9/._:\-])/(?:home|Users)/[^\s\"'<>|]*")
 
 # 脱敏时移除的内部字段
 _SANITIZE_KEYS = (
