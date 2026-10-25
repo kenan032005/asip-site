@@ -1,14 +1,14 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-26T04:59:45+08:00",
+ "generated_at": "2026-10-26T05:05:50+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 45,
-  "signals_7d": 450,
-  "verified_events_24h": 42,
+  "signals_24h": 43,
+  "signals_7d": 451,
+  "verified_events_24h": 39,
   "verified_events_7d": 438,
   "multi_source_verified_events_7d": 21,
   "countries_with_activity_24h": 7,
@@ -55,7 +55,7 @@
  "country_distribution_7d": [
   {
    "value": "尼日利亚",
-   "count": 232
+   "count": 233
   },
   {
    "value": "乍得",
@@ -105,7 +105,7 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 18
+   "count": 16
   },
   {
    "value": "武装冲突",
@@ -143,7 +143,7 @@
  "source_tier_distribution_7d": [
   {
    "value": "C",
-   "count": 644
+   "count": 645
   },
   {
    "value": "B",
@@ -248,12 +248,27 @@
  ],
  "top_signals": [
   {
+   "fact_id": "news:886fddd11d723a33",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "三角洲州校车司机因涉嫌绑架并强奸14岁学生、收取赎金被捕",
+   "category": "kidnapping",
+   "source": "Sahara Reporters",
+   "source_tier": "C",
+   "source_role": "major_media",
+   "time": "2026-10-26 04:47",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
    "fact_id": "news:6b6fe01874ddcc01",
    "level": "news_signal",
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "尼日利亚",
-   "title": "Lagos steps up Ebola surveillance, urges calm",
+   "title": "拉各斯加强埃博拉监测并呼吁民众保持冷静",
    "category": "public_health",
    "source": "Punch",
    "source_tier": "C",
@@ -268,7 +283,7 @@
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "尼日利亚",
-   "title": "NCDC boosts states’ Ebola response capacity through training",
+   "title": "尼日利亚疾控中心通过培训提升各州埃博拉应对能力",
    "category": "public_health",
    "source": "News Agency of Nigeria",
    "source_tier": "C",
@@ -298,7 +313,7 @@
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "尼日利亚",
-   "title": "Police foil motorcycle, generator theft, arrest suspect in Ogun",
+   "title": "尼日利亚奥贡州警方挫败摩托车与发电机盗窃案并逮捕嫌疑人",
    "category": "other_security",
    "source": "Punch",
    "source_tier": "C",
@@ -313,7 +328,7 @@
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "尼日利亚",
-   "title": "Sultan Maccido’s family urges tolerance 20 years after death",
+   "title": "索科托苏丹马西多逝世20周年，家族呼吁宽容",
    "category": "communal_conflict",
    "source": "Punch",
    "source_tier": "C",
@@ -591,21 +606,6 @@
    "time": "2026-10-25 14:33",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:10c251ab85d3fc70",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "奥辛巴乔呼吁非洲加强数字支付互联以促进区域贸易",
-   "category": "armed_conflict",
-   "source": "MyJoyOnline",
-   "source_tier": "B",
-   "source_role": "regional",
-   "time": "2026-10-25 14:16",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -683,18 +683,39 @@
   }
  ],
  "existing_assessment": {
-  "status": "deterministic",
-  "based_on": "过去24小时/7日公开信息（确定性汇总）"
+  "status": "ai",
+  "overall_assessment": "已核实事件方面，尼日利亚安全压力持续：贝努埃州警方解救被绑天主教神父等八人，联邦首都区农牧民冲突致3人死亡；空军在乍得湖地区空袭打死ISWAP头目。乍得萨拉马特农牧民冲突致12死3伤，两年内相关冲突累计至少400人死亡，提贝斯提米斯基冲突后多方呼吁克制。南苏丹鲁旺行政区遭袭至少九死六伤，博尔县治安恶化致五人死亡。刚果（金）与肯尼亚埃博拉疫情及资金管理争议延续。情报信号方面，均为单源消息、尚待核实：拉各斯加强埃博拉监测、尼日利亚疾控中心识别53名接触者并称确诊患者病情好转、莫桑比克德尔加杜角发现疑似叛乱分子受害者遗体、南苏丹蒙德里流离失所家庭处境艰难。整体风险方向偏恶化。",
+  "risk_direction": "worsening",
+  "confidence": "medium",
+  "generated_time": "2026-10-26T05:05:29+08:00",
+  "based_on": "过去24小时/7日公开信息",
+  "model": "",
+  "date": "20261026"
  },
- "fact_count": 888,
+ "fact_count": 889,
  "facts": {
+  "news:886fddd11d723a33": {
+   "fact_id": "news:886fddd11d723a33",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "三角洲州校车司机因涉嫌绑架并强奸14岁学生、收取赎金被捕",
+   "category": "kidnapping",
+   "source": "Sahara Reporters",
+   "source_tier": "C",
+   "source_role": "major_media",
+   "time": "2026-10-26 04:47",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:6b6fe01874ddcc01": {
    "fact_id": "news:6b6fe01874ddcc01",
    "level": "news_signal",
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "尼日利亚",
-   "title": "Lagos steps up Ebola surveillance, urges calm",
+   "title": "拉各斯加强埃博拉监测并呼吁民众保持冷静",
    "category": "public_health",
    "source": "Punch",
    "source_tier": "C",
@@ -709,7 +730,7 @@
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "尼日利亚",
-   "title": "NCDC boosts states’ Ebola response capacity through training",
+   "title": "尼日利亚疾控中心通过培训提升各州埃博拉应对能力",
    "category": "public_health",
    "source": "News Agency of Nigeria",
    "source_tier": "C",
@@ -739,7 +760,7 @@
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "尼日利亚",
-   "title": "Police foil motorcycle, generator theft, arrest suspect in Ogun",
+   "title": "尼日利亚奥贡州警方挫败摩托车与发电机盗窃案并逮捕嫌疑人",
    "category": "other_security",
    "source": "Punch",
    "source_tier": "C",
@@ -754,7 +775,7 @@
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "尼日利亚",
-   "title": "Sultan Maccido’s family urges tolerance 20 years after death",
+   "title": "索科托苏丹马西多逝世20周年，家族呼吁宽容",
    "category": "communal_conflict",
    "source": "Punch",
    "source_tier": "C",
@@ -1339,7 +1360,7 @@
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "埃塞俄比亚",
-   "title": "Defense Minister Praises ENDF’s Courage, Resilience in Overcoming Challenges",
+   "title": "埃塞俄比亚国防部长赞扬国防军克服挑战的勇气与韧性",
    "category": "other_security",
    "source": "Ethiopian News Agency（ENA）",
    "source_tier": "C",
@@ -1354,7 +1375,7 @@
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "埃塞俄比亚",
-   "title": "Ethiopia Marks 119th Defense Forces Day Under Theme: “Army of Victory”",
+   "title": "埃塞俄比亚以“胜利之军”为主题纪念第119个国防军日",
    "category": "other_security",
    "source": "Ethiopian News Agency（ENA）",
    "source_tier": "C",
@@ -2044,7 +2065,7 @@
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "埃塞俄比亚",
-   "title": "Egyptian Writer Accuses Gov't of Training Sudanese Forces to Use Chemical Weapons",
+   "title": "埃及作家指控埃及政府训练苏丹武装人员使用化学武器",
    "category": "other_security",
    "source": "Ethiopian News Agency（ENA）",
    "source_tier": "C",
