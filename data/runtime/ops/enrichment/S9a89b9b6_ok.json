@@ -1,0 +1,136 @@
+{
+ "label": "S9a89b9b6",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "cae333b218c314e20cffc76e19f5e032c75965cd209be6f45816ed33550e9ae3",
+ "tokens": {
+  "input_tokens": 2477,
+  "output_tokens": 484,
+  "total_tokens": 2961
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该报道为单一来源（UNMISS），尚缺乏其他独立来源交叉验证\", \"绑架、抢劫和性暴力事件的具体数量与细节未获确认\"]",
+    "after": "[\"该报道为单一来源（UNMISS），尚缺乏其他独立来源交叉验证\", \"绑架、抢劫和性暴力事件的具体数量与细节未获确认\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹蒙德里流离失所家庭在持续不安全中艰难重建生活",
+   "summary_zh": "据联合国南苏丹特派团（UNMISS）报道，西赤道州蒙德里地区聚集了因凯迪巴暴力事件而流离失所的家庭，持续的不安全局势威胁着他们重建生活的努力。当地存在绑架、抢劫和性暴力等问题，枪声频发迫使居民放弃生计。UNMISS强调需加强平民保护，社区保护团体正协助流离失所者识别风险并获取信息。目前该报道为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Western Equatoria",
+    "city": "Mundri",
+    "site": null,
+    "raw_text": "Mundri, Western Equatoria"
+   },
+   "key_facts": [
+    {
+     "fact": "西赤道州凯迪巴的暴力事件导致民众流离失所至蒙德里",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Displaced by violence in Kediba, Western Equatoria, she sought refuge in Mundri, hoping to find safety."
+    },
+    {
+     "fact": "蒙德里地区持续存在绑架、抢劫和性暴力等安全问题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "where abductions, looting and sexual violence compound the hardships of displacement"
+    },
+    {
+     "fact": "UNMISS在访问中强调加强平民保护和社区应对不安全的重要性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the United Nations Mission in South Sudan (UNMISS) highlighted the importance of strengthening civilian protection and community-based responses to insecurity"
+    },
+    {
+     "fact": "有民众在遭绑架后获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "There have been cases of abduction, with civilians later released."
+    },
+    {
+     "fact": "七年前从凯迪巴逃离的部分民众仍居住在流离失所营地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Some people who fled from Kediba seven years ago are still living in this displacement camp"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源（UNMISS），尚缺乏其他独立来源交叉验证",
+    "绑架、抢劫和性暴力事件的具体数量与细节未获确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹蒙德里流离失所家庭在持续不安全中艰难重建生活",
+   "summary_zh": "据联合国南苏丹特派团（UNMISS）报道，西赤道州蒙德里地区聚集了因凯迪巴暴力事件而流离失所的家庭，持续的不安全局势威胁着他们重建生活的努力。当地存在绑架、抢劫和性暴力等问题，枪声频发迫使居民放弃生计。UNMISS强调需加强平民保护，社区保护团体正协助流离失所者识别风险并获取信息。目前该报道为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Western Equatoria",
+    "city": "Mundri",
+    "site": null,
+    "raw_text": "Mundri, Western Equatoria"
+   },
+   "key_facts": [
+    {
+     "fact": "西赤道州凯迪巴的暴力事件导致民众流离失所至蒙德里",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Displaced by violence in Kediba, Western Equatoria, she sought refuge in Mundri, hoping to find safety."
+    },
+    {
+     "fact": "蒙德里地区持续存在绑架、抢劫和性暴力等安全问题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "where abductions, looting and sexual violence compound the hardships of displacement"
+    },
+    {
+     "fact": "UNMISS在访问中强调加强平民保护和社区应对不安全的重要性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the United Nations Mission in South Sudan (UNMISS) highlighted the importance of strengthening civilian protection and community-based responses to insecurity"
+    },
+    {
+     "fact": "有民众在遭绑架后获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "There have been cases of abduction, with civilians later released."
+    },
+    {
+     "fact": "七年前从凯迪巴逃离的部分民众仍居住在流离失所营地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Some people who fled from Kediba seven years ago are still living in this displacement camp"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源（UNMISS），尚缺乏其他独立来源交叉验证",
+    "绑架、抢劫和性暴力事件的具体数量与细节未获确认",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_572a83499a89b9b6",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

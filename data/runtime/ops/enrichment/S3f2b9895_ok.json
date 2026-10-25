@@ -1,0 +1,117 @@
+{
+ "label": "S3f2b9895",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0cfae03eb66621c1d9d7173b7c123241f2de1a75bd0dfce1f6d864a993404678",
+ "tokens": {
+  "input_tokens": 2226,
+  "output_tokens": 487,
+  "total_tokens": 2713
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚三角洲州校车司机因涉嫌绑架并性侵未成年人被捕",
+   "summary_zh": "尼日利亚三角洲州警方逮捕28岁校车司机Onome Ughagha，其被指在萨佩莱绑架并性侵一名14岁女学生。据称嫌疑人向学生父亲索要并收取了50.3万奈拉赎金，随后将受害者遗弃在Oton路。警方发言人表示，案件于2026年10月20日由受害者父亲报案。目前信息仅来自单一来源，相关指控尚未经证实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "三角洲州",
+    "city": "萨佩莱",
+    "site": "Oton路",
+    "raw_text": "Sapele, Delta State, along Oton Road"
+   },
+   "key_facts": [
+    {
+     "fact": "三角洲州警方逮捕28岁校车司机Onome Ughagha",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A 28-year-old school bus driver, Onome Ughagha, has been arrested by operatives of the Delta State Police Command"
+    },
+    {
+     "fact": "嫌疑人被指绑架并性侵一名14岁女学生",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "for allegedly kidnapping and sexually assaulting a 14-year-old female student in Sapele"
+    },
+    {
+     "fact": "嫌疑人被指索要并收取50.3万奈拉赎金后将受害者遗弃在Oton路",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The suspect allegedly demanded and collected ₦503,000 in ransom from the student’s father before abandoning her along Oton Road, Sapele"
+    },
+    {
+     "fact": "案件于2026年10月20日由受害者父亲向萨佩莱地区指挥部报案",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the incident was reported at the Sapele Area Command on October 20, 2026, by the victim’s father"
+    }
+   ],
+   "uncertainties": [
+    "绑架与性侵指控目前仅为据称，尚未经证实",
+    "信息仅来自单一来源（Punch），尚缺乏交叉验证",
+    "赎金金额及案件细节有待进一步核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚三角洲州校车司机因涉嫌绑架并性侵未成年人被捕",
+   "summary_zh": "尼日利亚三角洲州警方逮捕28岁校车司机Onome Ughagha，其被指在萨佩莱绑架并性侵一名14岁女学生。据称嫌疑人向学生父亲索要并收取了50.3万奈拉赎金，随后将受害者遗弃在Oton路。警方发言人表示，案件于2026年10月20日由受害者父亲报案。目前信息仅来自单一来源，相关指控尚未经证实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "三角洲州",
+    "city": "萨佩莱",
+    "site": "Oton路",
+    "raw_text": "Sapele, Delta State, along Oton Road"
+   },
+   "key_facts": [
+    {
+     "fact": "三角洲州警方逮捕28岁校车司机Onome Ughagha",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A 28-year-old school bus driver, Onome Ughagha, has been arrested by operatives of the Delta State Police Command"
+    },
+    {
+     "fact": "嫌疑人被指绑架并性侵一名14岁女学生",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "for allegedly kidnapping and sexually assaulting a 14-year-old female student in Sapele"
+    },
+    {
+     "fact": "嫌疑人被指索要并收取50.3万奈拉赎金后将受害者遗弃在Oton路",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The suspect allegedly demanded and collected ₦503,000 in ransom from the student’s father before abandoning her along Oton Road, Sapele"
+    },
+    {
+     "fact": "案件于2026年10月20日由受害者父亲向萨佩莱地区指挥部报案",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the incident was reported at the Sapele Area Command on October 20, 2026, by the victim’s father"
+    }
+   ],
+   "uncertainties": [
+    "绑架与性侵指控目前仅为据称，尚未经证实",
+    "信息仅来自单一来源（Punch），尚缺乏交叉验证",
+    "赎金金额及案件细节有待进一步核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_23e1e6bc3f2b9895",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

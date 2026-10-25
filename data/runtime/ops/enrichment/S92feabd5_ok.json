@@ -1,0 +1,126 @@
+{
+ "label": "S92feabd5",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "2bf9766411b893a9d066a1dcd19f23e667ca6201eaea12c0cfc4d777c79d241a",
+ "tokens": {
+  "input_tokens": 2085,
+  "output_tokens": 462,
+  "total_tokens": 2547
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"桥梁坍塌传言源自社交媒体，其具体内容与来源尚未核实\", \"工程进度85%为州政府单方面说法，目前仅单一来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"桥梁坍塌传言源自社交媒体，其具体内容与来源尚未核实\", \"工程进度85%为州政府单方面说法，目前仅单一来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "巴耶尔萨州政府否认宁贝-布拉斯桥坍塌传言，称道路工程已完成85%",
+   "summary_zh": "巴耶尔萨州政府否认社交媒体上关于宁贝-布拉斯公路项目桥梁存在结构缺陷或坍塌的说法，称施工按批准的设计推进。州政府表示，这条21公里公路项目一期已完成约85%，预计2027年第一季度可交付启用。工程与基础设施专员及信息专员在项目巡查期间作出上述表态。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "巴耶尔萨州",
+    "city": null,
+    "site": "宁贝-布拉斯公路",
+    "raw_text": "Nembe-Brass road, Bayelsa State"
+   },
+   "key_facts": [
+    {
+     "fact": "巴耶尔萨州政府否认宁贝-布拉斯公路桥梁坍塌的社交媒体传言",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Bayelsa State Government has dismissed reports circulating on social media alleging a structural defect or collapse of a bridge along the ongoing Nembe-Brass road project"
+    },
+    {
+     "fact": "州政府称21公里公路项目一期已完成约85%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the first phase of the 21-kilometre road project was about 85 per cent complete"
+    },
+    {
+     "fact": "州政府预计该公路将于2027年第一季度交付启用",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "expressing confidence that the road would be ready for commissioning in the first quarter of 2027"
+    },
+    {
+     "fact": "工程与基础设施专员及信息专员在项目巡查期间作出上述表态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Commissioners for Works and Infrastructure, Moses Teibowei, and his Information, Orientation and Strategy counterpart, Ebiuwou Koku-Obiyai, stated this on Saturday during an inspection tour"
+    }
+   ],
+   "uncertainties": [
+    "桥梁坍塌传言源自社交媒体，其具体内容与来源尚未核实",
+    "工程进度85%为州政府单方面说法，目前仅单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "巴耶尔萨州政府否认宁贝-布拉斯桥坍塌传言，称道路工程已完成85%",
+   "summary_zh": "巴耶尔萨州政府否认社交媒体上关于宁贝-布拉斯公路项目桥梁存在结构缺陷或坍塌的说法，称施工按批准的设计推进。州政府表示，这条21公里公路项目一期已完成约85%，预计2027年第一季度可交付启用。工程与基础设施专员及信息专员在项目巡查期间作出上述表态。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "巴耶尔萨州",
+    "city": null,
+    "site": "宁贝-布拉斯公路",
+    "raw_text": "Nembe-Brass road, Bayelsa State"
+   },
+   "key_facts": [
+    {
+     "fact": "巴耶尔萨州政府否认宁贝-布拉斯公路桥梁坍塌的社交媒体传言",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Bayelsa State Government has dismissed reports circulating on social media alleging a structural defect or collapse of a bridge along the ongoing Nembe-Brass road project"
+    },
+    {
+     "fact": "州政府称21公里公路项目一期已完成约85%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the first phase of the 21-kilometre road project was about 85 per cent complete"
+    },
+    {
+     "fact": "州政府预计该公路将于2027年第一季度交付启用",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "expressing confidence that the road would be ready for commissioning in the first quarter of 2027"
+    },
+    {
+     "fact": "工程与基础设施专员及信息专员在项目巡查期间作出上述表态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Commissioners for Works and Infrastructure, Moses Teibowei, and his Information, Orientation and Strategy counterpart, Ebiuwou Koku-Obiyai, stated this on Saturday during an inspection tour"
+    }
+   ],
+   "uncertainties": [
+    "桥梁坍塌传言源自社交媒体，其具体内容与来源尚未核实",
+    "工程进度85%为州政府单方面说法，目前仅单一来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_b371066d92feabd5",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
