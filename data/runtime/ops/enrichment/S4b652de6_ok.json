@@ -1,0 +1,136 @@
+{
+ "label": "S4b652de6",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "93ada3a26d70063178e626c5bc3df7c297ed20d94885b4e83f3ea6cb69f9d91b",
+ "tokens": {
+  "input_tokens": 2783,
+  "output_tokens": 607,
+  "total_tokens": 3390
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"乞讨者人数增加的说法基于观察，未提供具体统计数据\", \"儿童被强迫乞讨的规模与涉及网络情况未获具体证实\"]",
+    "after": "[\"乞讨者人数增加的说法基于观察，未提供具体统计数据\", \"儿童被强迫乞讨的规模与涉及网络情况未获具体证实\", \"据Tchadinfos报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得出现新型乞讨形式，社会学家Ignafiné Césaire博士提出解决方案",
+   "summary_zh": "乍得乞讨问题在恩贾梅纳等主要城市日益突出，极端贫困、经济依赖以及来自苏丹、尼日利亚和中非共和国的大量难民与流离失所者涌入加剧了民众的脆弱性。社会学家Ignafiné Césaire博士在接受Tchadinfos采访时指出，乞讨形式已发生变化，出现外表健康、衣着得体者以临时困难为由索要钱财的隐蔽形式。他认为家庭与国家均负有责任，需通过就业、社会保障和援助机制加以应对。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N’Djamena et dans d’autres grands centres urbains"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得乞讨问题在恩贾梅纳等主要城市尤为突出",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le problème de la mendicité au Tchad, particulièrement visible à N’Djamena et dans d’autres grands centres urbains"
+    },
+    {
+     "fact": "来自苏丹、尼日利亚和中非共和国的大量难民与流离失所者涌入加剧民众脆弱性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’afflux massif de réfugiés et de personnes déplacées provenant notamment du Soudan, du Nigéria ou de la République centrafricaine accentuent la vulnérabilité des populations"
+    },
+    {
+     "fact": "有年幼儿童被网络或不择手段的师傅强迫上街乞讨",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "De très jeunes enfants, parfois confiés à des écoles coraniques itinérantes, sont contraints par des réseaux ou des maîtres peu scrupuleux de mendier dans la rue"
+    },
+    {
+     "fact": "尽管政府多次开展行动，该现象仍在扩大",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Malgré des multiples opérations menées de la part du gouvernement tchadien, ce phénomène prend de l’ampleur"
+    },
+    {
+     "fact": "社会学家Ignafiné Césaire博士就乞讨问题接受Tchadinfos采访",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dr Ignafiné Césaire, sociologue, enseignant du supérieur et consultant expert en Développement rural a accordé une interview à Tchadinfos sur ce sujet"
+    }
+   ],
+   "uncertainties": [
+    "乞讨者人数增加的说法基于观察，未提供具体统计数据",
+    "儿童被强迫乞讨的规模与涉及网络情况未获具体证实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得出现新型乞讨形式，社会学家Ignafiné Césaire博士提出解决方案",
+   "summary_zh": "乍得乞讨问题在恩贾梅纳等主要城市日益突出，极端贫困、经济依赖以及来自苏丹、尼日利亚和中非共和国的大量难民与流离失所者涌入加剧了民众的脆弱性。社会学家Ignafiné Césaire博士在接受Tchadinfos采访时指出，乞讨形式已发生变化，出现外表健康、衣着得体者以临时困难为由索要钱财的隐蔽形式。他认为家庭与国家均负有责任，需通过就业、社会保障和援助机制加以应对。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N’Djamena et dans d’autres grands centres urbains"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得乞讨问题在恩贾梅纳等主要城市尤为突出",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le problème de la mendicité au Tchad, particulièrement visible à N’Djamena et dans d’autres grands centres urbains"
+    },
+    {
+     "fact": "来自苏丹、尼日利亚和中非共和国的大量难民与流离失所者涌入加剧民众脆弱性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’afflux massif de réfugiés et de personnes déplacées provenant notamment du Soudan, du Nigéria ou de la République centrafricaine accentuent la vulnérabilité des populations"
+    },
+    {
+     "fact": "有年幼儿童被网络或不择手段的师傅强迫上街乞讨",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "De très jeunes enfants, parfois confiés à des écoles coraniques itinérantes, sont contraints par des réseaux ou des maîtres peu scrupuleux de mendier dans la rue"
+    },
+    {
+     "fact": "尽管政府多次开展行动，该现象仍在扩大",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Malgré des multiples opérations menées de la part du gouvernement tchadien, ce phénomène prend de l’ampleur"
+    },
+    {
+     "fact": "社会学家Ignafiné Césaire博士就乞讨问题接受Tchadinfos采访",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dr Ignafiné Césaire, sociologue, enseignant du supérieur et consultant expert en Développement rural a accordé une interview à Tchadinfos sur ce sujet"
+    }
+   ],
+   "uncertainties": [
+    "乞讨者人数增加的说法基于观察，未提供具体统计数据",
+    "儿童被强迫乞讨的规模与涉及网络情况未获具体证实",
+    "据Tchadinfos报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_7349b2ff4b652de6",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
