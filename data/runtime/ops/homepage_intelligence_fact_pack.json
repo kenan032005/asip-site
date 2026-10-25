@@ -1,13 +1,13 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-25T13:01:46+08:00",
+ "generated_at": "2026-10-25T13:10:46+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 33,
-  "signals_7d": 444,
+  "signals_24h": 35,
+  "signals_7d": 446,
   "verified_events_24h": 36,
   "verified_events_7d": 436,
   "multi_source_verified_events_7d": 21,
@@ -89,26 +89,26 @@
    "count": 10
   },
   {
+   "value": "埃塞俄比亚",
+   "count": 6
+  },
+  {
    "value": "中非共和国",
    "count": 6
   },
   {
+   "value": "肯尼亚",
+   "count": 5
+  },
+  {
    "value": "塞内加尔",
    "count": 5
-  },
-  {
-   "value": "埃塞俄比亚",
-   "count": 5
-  },
-  {
-   "value": "肯尼亚",
-   "count": 4
   }
  ],
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 13
+   "count": 15
   },
   {
    "value": "公共卫生",
@@ -150,7 +150,7 @@
   },
   {
    "value": "A",
-   "count": 106
+   "count": 108
   }
  ],
  "top_verified_events": [
@@ -247,12 +247,42 @@
  ],
  "top_signals": [
   {
+   "fact_id": "news:dfe7177a51204bca",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "埃塞俄比亚索马里与奥罗米亚地区武装冲突致多人死亡",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-25 12:00",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
+   "fact_id": "news:805830efd28f72d3",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "肯尼亚",
+   "title": "肯尼亚：内罗毕一栋在建楼房倒塌后争议升温",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-25 11:50",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  {
    "fact_id": "news:8db4bd16f0f1794e",
    "level": "news_signal",
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "尼日利亚",
-   "title": "Varsity workers protest shortfalls in FG’s arrears payment",
+   "title": "尼日利亚多所大学员工抗议联邦政府欠款支付不足",
    "category": "protest",
    "source": "Punch",
    "source_tier": "C",
@@ -575,36 +605,6 @@
    "time": "2026-10-24 22:28",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:ed8103c6cd3da19f",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "乌干达重申无埃博拉状态，尼日利亚病例调查进行中",
-   "category": "public_health",
-   "source": "International Centre for Investigative Reporting",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-24 22:01",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:7e39c956028ce1f6",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "尼日利亚军方在博尔诺州空袭中打死15名恐怖分子",
-   "category": "other_security",
-   "source": "Punch",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-24 21:46",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -682,18 +682,54 @@
   }
  ],
  "existing_assessment": {
-  "status": "deterministic",
-  "based_on": "过去24小时/7日公开信息（确定性汇总）"
+  "status": "ai",
+  "overall_assessment": "已核实事件方面，尼日利亚仍为态势重心：联邦首都区农牧民冲突致3人死亡，贝努埃州警方解救天主教神父及七名被绑人员，卡诺州猎人击毙两名疑似匪徒并追回赎金；乍得萨拉马特穆赖农牧冲突致12死3伤；南苏丹鲁旺行政区遭袭至少九死六伤；莫桑比克德尔加杜角恐怖分子日益针对平民。情报信号（均为单源消息，尚待核实）显示：埃塞俄比亚索马里与奥罗米亚地区武装冲突致多人死亡；乍得登革热已确认8例死亡、250例病例，萨拉马特曼盖涅公路伏击致两名宪兵被杀；尼日利亚多所大学员工与奥贡州护士抗议，另有绑架案件报道。整体风险方向偏恶化，需重点跟踪萨赫勒—乍得湖走廊与东非疫情、冲突信号。",
+  "risk_direction": "worsening",
+  "confidence": "medium",
+  "generated_time": "2026-10-25T13:10:24+08:00",
+  "based_on": "过去24小时/7日公开信息",
+  "model": "",
+  "date": "20261025"
  },
- "fact_count": 880,
+ "fact_count": 882,
  "facts": {
+  "news:dfe7177a51204bca": {
+   "fact_id": "news:dfe7177a51204bca",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "埃塞俄比亚索马里与奥罗米亚地区武装冲突致多人死亡",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-25 12:00",
+   "importance": "low",
+   "why_it_matters": ""
+  },
+  "news:805830efd28f72d3": {
+   "fact_id": "news:805830efd28f72d3",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "肯尼亚",
+   "title": "肯尼亚：内罗毕一栋在建楼房倒塌后争议升温",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-25 11:50",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:8db4bd16f0f1794e": {
    "fact_id": "news:8db4bd16f0f1794e",
    "level": "news_signal",
    "evidence_tier": "news_signal",
    "source_count": 1,
    "country": "尼日利亚",
-   "title": "Varsity workers protest shortfalls in FG’s arrears payment",
+   "title": "尼日利亚多所大学员工抗议联邦政府欠款支付不足",
    "category": "protest",
    "source": "Punch",
    "source_tier": "C",

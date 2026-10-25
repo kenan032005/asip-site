@@ -1,5 +1,14 @@
 # ASIP Operations Summary
 
+## asip-production-orchestrator 40164270185
+- status: completed | started: 2026-10-25T05:10:16Z | completed: 2026-10-25T05:10:49Z
+- sources: attempted=0 succeeded=0 failed=0
+- candidates_new: 0 | ai: attempted=0 ok=0 fail=0 held=0
+- safety: checked=0 corrected=0 held=0
+- reports: full=0 fallback=0 low_data=0 hold=0
+- build=not_executed deploy=not_executed
+- tokens: {}
+
 ## asip-production-orchestrator 40160616046
 - status: completed | started: 2026-10-25T04:10:26Z | completed: 2026-10-25T05:01:51Z
 - sources: attempted=890 succeeded=168 failed=680
@@ -74,15 +83,6 @@
 
 ## asip-production-orchestrator 40137063369
 - status: completed | started: 2026-10-24T22:10:31Z | completed: 2026-10-24T22:10:51Z
-- sources: attempted=0 succeeded=0 failed=0
-- candidates_new: 0 | ai: attempted=0 ok=0 fail=0 held=0
-- safety: checked=0 corrected=0 held=0
-- reports: full=0 fallback=0 low_data=0 hold=0
-- build=not_executed deploy=not_executed
-- tokens: {}
-
-## asip-production-orchestrator 40132688870
-- status: completed | started: 2026-10-24T21:10:27Z | completed: 2026-10-24T21:10:49Z
 - sources: attempted=0 succeeded=0 failed=0
 - candidates_new: 0 | ai: attempted=0 ok=0 fail=0 held=0
 - safety: checked=0 corrected=0 held=0
