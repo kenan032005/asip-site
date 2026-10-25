@@ -1,0 +1,118 @@
+{
+ "label": "S702cdfa5",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a120790ba4d47473ef1080fb916b7d67c769bcdc0f81c6c1dd28a5153bc1c44e",
+ "tokens": {
+  "input_tokens": 2228,
+  "output_tokens": 493,
+  "total_tokens": 2721
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"袭击者身份和动机尚未确认\", \"信息仅来自单一来源（Tchadinfos），尚缺乏交叉验证\", \"副区长及区长本人是否受伤未获确认\"]",
+    "after": "[\"袭击者身份和动机尚未确认\", \"信息仅来自单一来源（Tchadinfos），尚缺乏交叉验证\", \"副区长及区长本人是否受伤未获确认\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "萨拉马特：曼盖涅公路发生伏击，两名宪兵被杀",
+   "summary_zh": "乍得萨拉马特地区曼盖涅副区长车队在前往曼盖涅的途中遭四人伏击，随行的两名宪兵（goumiers）死亡，其中一人当场死亡，另一人受伤后在送往阿贝歇途中于库库死亡。据安全部门消息，此次行程旨在宣传遵守牲畜迁徙通道和当地政府倡导的共处。目前信息仅来自单一来源。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "萨拉马特",
+    "city": "曼盖涅",
+    "site": "曼盖涅公路",
+    "raw_text": "route de Mangueigne, Salamat"
+   },
+   "key_facts": [
+    {
+     "fact": "曼盖涅副区长车队在曼盖涅公路遭四人持枪伏击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le cortège du sous-préfet de Mangueigne, Hassan Awat Mahadi, dans lequel se trouvait le chef de canton Naoun Tourkama, Mahamat Djibrine, a été victime d’une attaque à armes à feu par quatre personnes qui ont tendu une embuscade à l’équipe le mercredi 21 Octobre 2026"
+    },
+    {
+     "fact": "伏击中一名宪兵当场死亡，另一人受伤后在送往阿贝歇途中于库库死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’un des goumiers est tué sur place. L’autre, blessé, a succombé à ses blessures à Koukou en évacuation d’urgence vers Abéché"
+    },
+    {
+     "fact": "据安全部门消息，此次行程旨在宣传遵守牲畜迁徙通道和共处",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la mission visait la sensibilisation pour le respect des couloirs de transhumance et le vivre-ensemble prôné par les autorités locales"
+    }
+   ],
+   "uncertainties": [
+    "袭击者身份和动机尚未确认",
+    "信息仅来自单一来源（Tchadinfos），尚缺乏交叉验证",
+    "副区长及区长本人是否受伤未获确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "萨拉马特：曼盖涅公路发生伏击，两名宪兵被杀",
+   "summary_zh": "乍得萨拉马特地区曼盖涅副区长车队在前往曼盖涅的途中遭四人伏击，随行的两名宪兵（goumiers）死亡，其中一人当场死亡，另一人受伤后在送往阿贝歇途中于库库死亡。据安全部门消息，此次行程旨在宣传遵守牲畜迁徙通道和当地政府倡导的共处。目前信息仅来自单一来源。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "萨拉马特",
+    "city": "曼盖涅",
+    "site": "曼盖涅公路",
+    "raw_text": "route de Mangueigne, Salamat"
+   },
+   "key_facts": [
+    {
+     "fact": "曼盖涅副区长车队在曼盖涅公路遭四人持枪伏击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le cortège du sous-préfet de Mangueigne, Hassan Awat Mahadi, dans lequel se trouvait le chef de canton Naoun Tourkama, Mahamat Djibrine, a été victime d’une attaque à armes à feu par quatre personnes qui ont tendu une embuscade à l’équipe le mercredi 21 Octobre 2026"
+    },
+    {
+     "fact": "伏击中一名宪兵当场死亡，另一人受伤后在送往阿贝歇途中于库库死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’un des goumiers est tué sur place. L’autre, blessé, a succombé à ses blessures à Koukou en évacuation d’urgence vers Abéché"
+    },
+    {
+     "fact": "据安全部门消息，此次行程旨在宣传遵守牲畜迁徙通道和共处",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la mission visait la sensibilisation pour le respect des couloirs de transhumance et le vivre-ensemble prôné par les autorités locales"
+    }
+   ],
+   "uncertainties": [
+    "袭击者身份和动机尚未确认",
+    "信息仅来自单一来源（Tchadinfos），尚缺乏交叉验证",
+    "副区长及区长本人是否受伤未获确认",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_1d4039a9702cdfa5",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

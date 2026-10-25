@@ -1,0 +1,117 @@
+{
+ "label": "Sa4624fae",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "9d9dd2667cec88ef1e412b32c454e854e70018eb7d9d988b5c16be4b9cd9ff0c",
+ "tokens": {
+  "input_tokens": 2126,
+  "output_tokens": 389,
+  "total_tokens": 2515
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得登革热疫情持续，已确认8例死亡、250例病例",
+   "summary_zh": "据France24非洲频道报道，乍得登革热疫情已持续数周，已确认8例死亡和250例病例，另有超过3000例疑似病例。疫情于10月初在该国东部出现，目前已波及五个省份，首都地区传播尤为严重。该信息目前仅来自单一来源，尚未获得交叉验证。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "est du pays; cinq provinces; la capitale"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得登革热疫情已持续数周，已确认8例死亡和250例病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'épidémie de dengue frappe le Tchad depuis plusieurs semaines. 8 morts et 250 cas ont été confirmés"
+    },
+    {
+     "fact": "另有超过3000例疑似病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plus de 3000 autres sont suspectés"
+    },
+    {
+     "fact": "疫情于10月初在该国东部出现，目前已波及五个省份",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Apparue début octobre dans l'est du pays, la maladie touche désormais cinq provinces"
+    },
+    {
+     "fact": "首都地区登革热传播严重",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "avec une forte circulation dans la capitale"
+    }
+   ],
+   "uncertainties": [
+    "超过3000例仅为疑似病例，尚未确诊",
+    "疫情信息目前仅来自单一来源，尚缺乏交叉验证",
+    "具体受影响省份名称未在原文中说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得登革热疫情持续，已确认8例死亡、250例病例",
+   "summary_zh": "据France24非洲频道报道，乍得登革热疫情已持续数周，已确认8例死亡和250例病例，另有超过3000例疑似病例。疫情于10月初在该国东部出现，目前已波及五个省份，首都地区传播尤为严重。该信息目前仅来自单一来源，尚未获得交叉验证。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "est du pays; cinq provinces; la capitale"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得登革热疫情已持续数周，已确认8例死亡和250例病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'épidémie de dengue frappe le Tchad depuis plusieurs semaines. 8 morts et 250 cas ont été confirmés"
+    },
+    {
+     "fact": "另有超过3000例疑似病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plus de 3000 autres sont suspectés"
+    },
+    {
+     "fact": "疫情于10月初在该国东部出现，目前已波及五个省份",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Apparue début octobre dans l'est du pays, la maladie touche désormais cinq provinces"
+    },
+    {
+     "fact": "首都地区登革热传播严重",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "avec une forte circulation dans la capitale"
+    }
+   ],
+   "uncertainties": [
+    "超过3000例仅为疑似病例，尚未确诊",
+    "疫情信息目前仅来自单一来源，尚缺乏交叉验证",
+    "具体受影响省份名称未在原文中说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_65af252ca4624fae",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

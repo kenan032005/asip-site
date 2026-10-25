@@ -1,0 +1,125 @@
+{
+ "label": "S09a12827",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d4b971ef1338568798dccf71450c2b3d8840d53b11f0112e14de4e7354648fb2",
+ "tokens": {
+  "input_tokens": 2595,
+  "output_tokens": 586,
+  "total_tokens": 3181
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚警方逮捕7名涉嫌绑架并杀害受害者的嫌疑人",
+   "summary_zh": "尼日利亚警察部队特别战术队（STS）在阿布贾举行新闻发布会，宣布逮捕7名涉嫌在联邦首都区库杰地区绑架并杀害一名受害者的嫌疑人。据称，该团伙在持枪入室绑架中劫走一名女子及其家人，家属支付1620万奈拉赎金后，受害者遗体于10月19日在库杰图库巴森林被发现。警方称受害者因反抗强奸企图而遇害，行动中缴获4支AK-47步枪等物品。目前信息为单一来源。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "联邦首都区",
+    "city": "阿布贾",
+    "site": "库杰地区",
+    "raw_text": "Kuje area of the Federal Capital Territory (FCT)"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚警方特别战术队逮捕7名涉嫌绑架和谋杀受害者的嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Operatives of the Nigeria Police Force Special Tactical Squad (STS) have arrested seven suspects over the kidnapping and murder of one of their victims in Kuje area of the Federal Capital Territory (FCT)."
+    },
+    {
+     "fact": "受害者遗体于10月19日在库杰图库巴森林被发现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the decomposing body of Oluwadamilola Adedayo was recovered on Oct. 19, following an operation he led where operatives proceeded to the gang's camp in Tukuba forest in Kuje Area Council."
+    },
+    {
+     "fact": "家属为释放女儿支付1620万奈拉赎金，绑匪另索要5000万奈拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The family subsequently paid a ransom of N16.2 million for the release of their daughter with an additional request for N50 million by the kidnappers"
+    },
+    {
+     "fact": "警方称受害者因反抗强奸企图而遇害",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "investigation had revealed that the victim was murdered after resisting an attempt to rape her"
+    },
+    {
+     "fact": "行动中缴获4支AK-47步枪、1支本地制造左轮手枪和63发实弹",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "one mobile phone, used for negotiation, four Ak-47 riffles, one locally made revolver pistol and 63 rounds of live ammunition"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（尼日利亚通讯社）报道，尚缺乏交叉验证",
+    "警方关于受害者遇害动机的说法尚未经独立证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚警方逮捕7名涉嫌绑架并杀害受害者的嫌疑人",
+   "summary_zh": "尼日利亚警察部队特别战术队（STS）在阿布贾举行新闻发布会，宣布逮捕7名涉嫌在联邦首都区库杰地区绑架并杀害一名受害者的嫌疑人。据称，该团伙在持枪入室绑架中劫走一名女子及其家人，家属支付1620万奈拉赎金后，受害者遗体于10月19日在库杰图库巴森林被发现。警方称受害者因反抗强奸企图而遇害，行动中缴获4支AK-47步枪等物品。目前信息为单一来源。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "联邦首都区",
+    "city": "阿布贾",
+    "site": "库杰地区",
+    "raw_text": "Kuje area of the Federal Capital Territory (FCT)"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚警方特别战术队逮捕7名涉嫌绑架和谋杀受害者的嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Operatives of the Nigeria Police Force Special Tactical Squad (STS) have arrested seven suspects over the kidnapping and murder of one of their victims in Kuje area of the Federal Capital Territory (FCT)."
+    },
+    {
+     "fact": "受害者遗体于10月19日在库杰图库巴森林被发现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the decomposing body of Oluwadamilola Adedayo was recovered on Oct. 19, following an operation he led where operatives proceeded to the gang's camp in Tukuba forest in Kuje Area Council."
+    },
+    {
+     "fact": "家属为释放女儿支付1620万奈拉赎金，绑匪另索要5000万奈拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The family subsequently paid a ransom of N16.2 million for the release of their daughter with an additional request for N50 million by the kidnappers"
+    },
+    {
+     "fact": "警方称受害者因反抗强奸企图而遇害",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "investigation had revealed that the victim was murdered after resisting an attempt to rape her"
+    },
+    {
+     "fact": "行动中缴获4支AK-47步枪、1支本地制造左轮手枪和63发实弹",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "one mobile phone, used for negotiation, four Ak-47 riffles, one locally made revolver pistol and 63 rounds of live ammunition"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（尼日利亚通讯社）报道，尚缺乏交叉验证",
+    "警方关于受害者遇害动机的说法尚未经独立证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_950a61f009a12827",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
