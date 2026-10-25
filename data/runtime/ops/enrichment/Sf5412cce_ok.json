@@ -1,0 +1,127 @@
+{
+ "label": "Sf5412cce",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "32ad7854e90cf6e3ad66d5e3687c920c43003d2c8e4e9d5cd77fdddffe8bc112",
+ "tokens": {
+  "input_tokens": 2339,
+  "output_tokens": 602,
+  "total_tokens": 2941
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "三角洲州校车司机因涉嫌绑架并强奸14岁学生、收取赎金被捕",
+   "summary_zh": "尼日利亚三角洲州警方逮捕一名28岁校车司机Onome Lucky Ughagha，其被指在Sapele绑架并性侵一名14岁女学生，并向其父亲索要并收取50.3万奈拉赎金。据警方称，嫌疑人取钱后将女孩遗弃在Sapele的Oton路，女孩获救时处于受创状态，有遭性侵迹象。嫌疑人于10月23日在Sapele的Ajimele地区落网，据称初步审讯中已认罪。案件目前为单一来源报道，相关指控尚未经法院证实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Delta State",
+    "city": "Sapele",
+    "site": "Oton Road",
+    "raw_text": "Sapele, Delta State"
+   },
+   "key_facts": [
+    {
+     "fact": "三角洲州警方逮捕28岁校车司机Onome Lucky Ughagha，其涉嫌绑架并性侵一名14岁女学生",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Delta State Police Command has arrested a 28-year-old school bus driver, Onome Lucky Ughagha, for allegedly kidnapping and sexually assaulting a 14-year-old female student in Sapele, Delta State"
+    },
+    {
+     "fact": "嫌疑人被指向女孩父亲索要并收取50.3万奈拉赎金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "after demanding and collecting ₦503,000 in ransom from her father"
+    },
+    {
+     "fact": "女孩在Oton路被遗弃后与家人团聚，当时处于受创状态并有遭性侵迹象",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the victim was reportedly abandoned along Oton Road, Sapele, where she was reunited with her family in a traumatised condition, with indications of sexual assault"
+    },
+    {
+     "fact": "嫌疑人于10月23日在Sapele的Ajimele地区被抓获",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "operatives acting on intelligence traced Ughagha to his hideout in the Ajimele area of Sapele, where he was arrested on October 23"
+    },
+    {
+     "fact": "警方称嫌疑人初步审讯中已供认涉案",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "During preliminary interrogation, he reportedly confessed to his involvement in the crime"
+    }
+   ],
+   "uncertainties": [
+    "绑架、性侵及认罪等情节均为警方指控与据称内容，尚未经法院审理证实",
+    "目前仅单一来源（Sahara Reporters）报道，缺乏交叉验证",
+    "性侵迹象有待医学检查结果确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "三角洲州校车司机因涉嫌绑架并强奸14岁学生、收取赎金被捕",
+   "summary_zh": "尼日利亚三角洲州警方逮捕一名28岁校车司机Onome Lucky Ughagha，其被指在Sapele绑架并性侵一名14岁女学生，并向其父亲索要并收取50.3万奈拉赎金。据警方称，嫌疑人取钱后将女孩遗弃在Sapele的Oton路，女孩获救时处于受创状态，有遭性侵迹象。嫌疑人于10月23日在Sapele的Ajimele地区落网，据称初步审讯中已认罪。案件目前为单一来源报道，相关指控尚未经法院证实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Delta State",
+    "city": "Sapele",
+    "site": "Oton Road",
+    "raw_text": "Sapele, Delta State"
+   },
+   "key_facts": [
+    {
+     "fact": "三角洲州警方逮捕28岁校车司机Onome Lucky Ughagha，其涉嫌绑架并性侵一名14岁女学生",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Delta State Police Command has arrested a 28-year-old school bus driver, Onome Lucky Ughagha, for allegedly kidnapping and sexually assaulting a 14-year-old female student in Sapele, Delta State"
+    },
+    {
+     "fact": "嫌疑人被指向女孩父亲索要并收取50.3万奈拉赎金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "after demanding and collecting ₦503,000 in ransom from her father"
+    },
+    {
+     "fact": "女孩在Oton路被遗弃后与家人团聚，当时处于受创状态并有遭性侵迹象",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the victim was reportedly abandoned along Oton Road, Sapele, where she was reunited with her family in a traumatised condition, with indications of sexual assault"
+    },
+    {
+     "fact": "嫌疑人于10月23日在Sapele的Ajimele地区被抓获",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "operatives acting on intelligence traced Ughagha to his hideout in the Ajimele area of Sapele, where he was arrested on October 23"
+    },
+    {
+     "fact": "警方称嫌疑人初步审讯中已供认涉案",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "During preliminary interrogation, he reportedly confessed to his involvement in the crime"
+    }
+   ],
+   "uncertainties": [
+    "绑架、性侵及认罪等情节均为警方指控与据称内容，尚未经法院审理证实",
+    "目前仅单一来源（Sahara Reporters）报道，缺乏交叉验证",
+    "性侵迹象有待医学检查结果确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_6d3fe66df5412cce",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
