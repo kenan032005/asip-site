@@ -1,0 +1,127 @@
+{
+ "label": "S174d0a70",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ea7d12ce4ca6a2509e9fd96627fe6731c63d47247f8a3a36717a073a0859c05b",
+ "tokens": {
+  "input_tokens": 2223,
+  "output_tokens": 526,
+  "total_tokens": 2749
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "联合国呼吁调查阿卜耶伊致命无人机袭击",
+   "summary_zh": "联合国安理会呼吁对阿卜耶伊地区阿米埃特市场与托达奇附近发生的致命无人机袭击展开调查，并追究责任方。南苏丹官员指责苏丹武装部队发动了10月19日的袭击，造成包括妇女和儿童在内的平民伤亡。安理会警告称，针对平民的袭击可能构成战争罪，并表示随着联合国阿卜耶伊临时安全部队核实伤亡，死亡人数可能上升。该报道为单一来源。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "阿卜耶伊地区",
+    "city": null,
+    "site": "阿米埃特市场与托达奇附近",
+    "raw_text": "Amiet Market and Todach in the disputed Abyei area"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国安理会呼吁调查阿卜耶伊致命无人机袭击并追究责任方",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The United Nations Security Council has called for those responsible for deadly drone attacks near Amiet Market and Todach in the disputed Abyei area to be held accountable"
+    },
+    {
+     "fact": "南苏丹官员指责苏丹武装部队发动了10月19日的袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South Sudanese officials have blamed the Sudanese Armed Forces for the attacks, which took place on Monday, 19 October, and killed and injured civilians, including women and children."
+    },
+    {
+     "fact": "安理会警告针对平民的袭击可能构成战争罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "warning that attacks targeting civilians could constitute war crimes"
+    },
+    {
+     "fact": "死亡人数可能上升，联合国阿卜耶伊临时安全部队仍在核实伤亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the death toll could rise as the United Nations Interim Security Force for Abyei (UNISFA) continued to verify the casualties"
+    },
+    {
+     "fact": "阿卜耶伊是苏丹与南苏丹存在争议的地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Abyei is a disputed area claimed by Sudan and South Sudan."
+    }
+   ],
+   "uncertainties": [
+    "袭击责任方为南苏丹官员的指控，尚未获独立证实",
+    "伤亡人数尚未最终确认，死亡人数可能上升",
+    "目前仅有一个来源（Radio Tamazuj）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "联合国呼吁调查阿卜耶伊致命无人机袭击",
+   "summary_zh": "联合国安理会呼吁对阿卜耶伊地区阿米埃特市场与托达奇附近发生的致命无人机袭击展开调查，并追究责任方。南苏丹官员指责苏丹武装部队发动了10月19日的袭击，造成包括妇女和儿童在内的平民伤亡。安理会警告称，针对平民的袭击可能构成战争罪，并表示随着联合国阿卜耶伊临时安全部队核实伤亡，死亡人数可能上升。该报道为单一来源。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "阿卜耶伊地区",
+    "city": null,
+    "site": "阿米埃特市场与托达奇附近",
+    "raw_text": "Amiet Market and Todach in the disputed Abyei area"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国安理会呼吁调查阿卜耶伊致命无人机袭击并追究责任方",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The United Nations Security Council has called for those responsible for deadly drone attacks near Amiet Market and Todach in the disputed Abyei area to be held accountable"
+    },
+    {
+     "fact": "南苏丹官员指责苏丹武装部队发动了10月19日的袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South Sudanese officials have blamed the Sudanese Armed Forces for the attacks, which took place on Monday, 19 October, and killed and injured civilians, including women and children."
+    },
+    {
+     "fact": "安理会警告针对平民的袭击可能构成战争罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "warning that attacks targeting civilians could constitute war crimes"
+    },
+    {
+     "fact": "死亡人数可能上升，联合国阿卜耶伊临时安全部队仍在核实伤亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the death toll could rise as the United Nations Interim Security Force for Abyei (UNISFA) continued to verify the casualties"
+    },
+    {
+     "fact": "阿卜耶伊是苏丹与南苏丹存在争议的地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Abyei is a disputed area claimed by Sudan and South Sudan."
+    }
+   ],
+   "uncertainties": [
+    "袭击责任方为南苏丹官员的指控，尚未获独立证实",
+    "伤亡人数尚未最终确认，死亡人数可能上升",
+    "目前仅有一个来源（Radio Tamazuj）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_0e2accda174d0a70",
+ "disease_event_id": null,
+ "country_code": "SS"
+}
