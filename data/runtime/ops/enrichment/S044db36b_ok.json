@@ -1,0 +1,129 @@
+{
+ "label": "S044db36b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1622f0a4c6063df621704323cd0e08b9e38ce470a7cc8d68d70e7f9130cc5335",
+ "tokens": {
+  "input_tokens": 2871,
+  "output_tokens": 597,
+  "total_tokens": 3468
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "肯尼亚：内罗毕一栋在建楼房倒塌后争议升温",
+   "summary_zh": "肯尼亚首都内罗毕东部的Eastleigh区一栋在建楼房于10月23日周五倒塌，救援人员正争分夺秒搜寻可能的幸存者。据肯尼亚红十字会称，周六又有两人从废墟中被救出；内政部长此前一天表示有七人失踪。救援仍在继续，而围绕这起事故的起因以及建筑行业监管的争议正在升温。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": "内罗毕",
+    "city": "内罗毕",
+    "site": "Eastleigh区",
+    "raw_text": "quartier d’Eastleigh dans l’est de Nairobi, la capitale"
+   },
+   "key_facts": [
+    {
+     "fact": "内罗毕Eastleigh区一栋在建楼房于10月23日周五倒塌",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’effondrement vendredi 23 octobre d’un immeuble en construction dans le quartier d’Eastleigh dans l’est de Nairobi"
+    },
+    {
+     "fact": "据肯尼亚红十字会称，周六又有两人从废墟中被救出",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Deux nouvelles personnes ont été secourues de sous les décombres samedi selon la Croix-Rouge kényane"
+    },
+    {
+     "fact": "内政部长此前一天表示有七人失踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministre de l’Intérieur a annoncé la veille que sept personnes étaient portées disparues"
+    },
+    {
+     "fact": "内罗毕州长Johnson Sakaja声称该建筑未获得必要的建设许可",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouverneur de Nairobi, Johnson Sakaja, a affirmé que le bâtiment n’avait pas reçu les autorisations nécessaires pour sa construction"
+    },
+    {
+     "fact": "警方已就倒塌原因和刑事责任立案调查，并追捕业主和施工方",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La police a annoncé dans la foulée avoir ouvert une enquête afin d’établir les causes de l’effondrement et de déterminer les responsabilités pénales. Une « chasse à l’homme » a été lancée pour retrouver le propriétaire de l’immeuble et l’entrepreneur chargé des travaux"
+    }
+   ],
+   "uncertainties": [
+    "失踪人数为内政部长单方面公布，尚未获独立确认",
+    "建筑未获许可的说法系内罗毕州长声称，有待核实",
+    "倒塌原因与责任归属仍在调查中",
+    "目前仅单一来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "肯尼亚：内罗毕一栋在建楼房倒塌后争议升温",
+   "summary_zh": "肯尼亚首都内罗毕东部的Eastleigh区一栋在建楼房于10月23日周五倒塌，救援人员正争分夺秒搜寻可能的幸存者。据肯尼亚红十字会称，周六又有两人从废墟中被救出；内政部长此前一天表示有七人失踪。救援仍在继续，而围绕这起事故的起因以及建筑行业监管的争议正在升温。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": "内罗毕",
+    "city": "内罗毕",
+    "site": "Eastleigh区",
+    "raw_text": "quartier d’Eastleigh dans l’est de Nairobi, la capitale"
+   },
+   "key_facts": [
+    {
+     "fact": "内罗毕Eastleigh区一栋在建楼房于10月23日周五倒塌",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’effondrement vendredi 23 octobre d’un immeuble en construction dans le quartier d’Eastleigh dans l’est de Nairobi"
+    },
+    {
+     "fact": "据肯尼亚红十字会称，周六又有两人从废墟中被救出",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Deux nouvelles personnes ont été secourues de sous les décombres samedi selon la Croix-Rouge kényane"
+    },
+    {
+     "fact": "内政部长此前一天表示有七人失踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministre de l’Intérieur a annoncé la veille que sept personnes étaient portées disparues"
+    },
+    {
+     "fact": "内罗毕州长Johnson Sakaja声称该建筑未获得必要的建设许可",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouverneur de Nairobi, Johnson Sakaja, a affirmé que le bâtiment n’avait pas reçu les autorisations nécessaires pour sa construction"
+    },
+    {
+     "fact": "警方已就倒塌原因和刑事责任立案调查，并追捕业主和施工方",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La police a annoncé dans la foulée avoir ouvert une enquête afin d’établir les causes de l’effondrement et de déterminer les responsabilités pénales. Une « chasse à l’homme » a été lancée pour retrouver le propriétaire de l’immeuble et l’entrepreneur chargé des travaux"
+    }
+   ],
+   "uncertainties": [
+    "失踪人数为内政部长单方面公布，尚未获独立确认",
+    "建筑未获许可的说法系内罗毕州长声称，有待核实",
+    "倒塌原因与责任归属仍在调查中",
+    "目前仅单一来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_3be7189f044db36b",
+ "disease_event_id": null,
+ "country_code": "KE"
+}

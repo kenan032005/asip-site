@@ -1,26 +1,28 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-25T11:10:41+08:00",
+ "generated_at": "2026-10-25T13:01:46+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 36,
-  "signals_7d": 443,
-  "verified_events_24h": 37,
-  "verified_events_7d": 433,
+  "signals_24h": 33,
+  "signals_7d": 444,
+  "verified_events_24h": 36,
+  "verified_events_7d": 436,
   "multi_source_verified_events_7d": 21,
-  "countries_with_activity_24h": 8,
+  "countries_with_activity_24h": 10,
   "total_countries_monitored": 22
  },
  "countries_24h": [
   "乍得",
   "南苏丹",
   "吉布提",
+  "埃塞俄比亚",
   "尼日利亚",
   "尼日尔",
   "毛里塔尼亚",
+  "肯尼亚",
   "莫桑比克",
   "贝宁"
  ],
@@ -56,7 +58,7 @@
  "country_distribution_7d": [
   {
    "value": "尼日利亚",
-   "count": 224
+   "count": 225
   },
   {
    "value": "乍得",
@@ -106,7 +108,7 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 16
+   "count": 13
   },
   {
    "value": "公共卫生",
@@ -121,11 +123,11 @@
    "count": 4
   },
   {
-   "value": "恐怖袭击",
+   "value": "抗议示威",
    "count": 2
   },
   {
-   "value": "抗议示威",
+   "value": "恐怖袭击",
    "count": 1
   },
   {
@@ -140,7 +142,7 @@
  "source_tier_distribution_7d": [
   {
    "value": "C",
-   "count": 626
+   "count": 628
   },
   {
    "value": "B",
@@ -148,7 +150,7 @@
   },
   {
    "value": "A",
-   "count": 104
+   "count": 106
   }
  ],
  "top_verified_events": [
@@ -244,6 +246,21 @@
   }
  ],
  "top_signals": [
+  {
+   "fact_id": "news:8db4bd16f0f1794e",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "Varsity workers protest shortfalls in FG’s arrears payment",
+   "category": "protest",
+   "source": "Punch",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-25 08:56",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   {
    "fact_id": "news:f20296f76cbd7b19",
    "level": "news_signal",
@@ -588,21 +605,6 @@
    "time": "2026-10-24 21:46",
    "importance": "low",
    "why_it_matters": ""
-  },
-  {
-   "fact_id": "news:39f8eb8a17ae8486",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "巴耶尔萨州专员称该州无埃博拉确诊病例",
-   "category": "public_health",
-   "source": "Punch",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-24 21:31",
-   "importance": "low",
-   "why_it_matters": ""
   }
  ],
  "health": [
@@ -683,8 +685,23 @@
   "status": "deterministic",
   "based_on": "过去24小时/7日公开信息（确定性汇总）"
  },
- "fact_count": 876,
+ "fact_count": 880,
  "facts": {
+  "news:8db4bd16f0f1794e": {
+   "fact_id": "news:8db4bd16f0f1794e",
+   "level": "news_signal",
+   "evidence_tier": "news_signal",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "Varsity workers protest shortfalls in FG’s arrears payment",
+   "category": "protest",
+   "source": "Punch",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-25 08:56",
+   "importance": "low",
+   "why_it_matters": ""
+  },
   "news:f20296f76cbd7b19": {
    "fact_id": "news:f20296f76cbd7b19",
    "level": "news_signal",
@@ -13822,6 +13839,51 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-24 21:27",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_9a845cb6a91943a1": {
+   "fact_id": "EVT_9a845cb6a91943a1",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "埃塞俄比亚",
+   "title": "埃塞俄比亚索马里与奥罗米亚地区武装冲突致多人死亡",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-25 04:00",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_3be7189f044db36b": {
+   "fact_id": "EVT_3be7189f044db36b",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "肯尼亚",
+   "title": "肯尼亚：内罗毕一栋在建楼房倒塌后争议升温",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-10-25 03:50",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_72053e26e7a863e2": {
+   "fact_id": "EVT_72053e26e7a863e2",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "尼日利亚多所大学员工抗议联邦政府欠款支付不足",
+   "category": "protest",
+   "source": "Punch",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-10-25 00:56",
    "importance": "high",
    "severity": "medium"
   }
