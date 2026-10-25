@@ -11404,13 +11404,87 @@
           "last_observed_failure": ""
         }
       }
+    },
+    {
+      "source_id": "eth_ena",
+      "source_name": "Ethiopian News Agency（ENA）",
+      "source_group": "ethiopia",
+      "source_type": "state_media",
+      "source_role": "major_media",
+      "evidence_role": "news_reporting",
+      "business_use": "",
+      "claim_origin_type": "news_report",
+      "is_direct_origin": true,
+      "is_republication_platform": false,
+      "url": "https://www.ena.et/web/eng",
+      "language": [
+        "en"
+      ],
+      "country_scope": [
+        "埃塞俄比亚"
+      ],
+      "enabled": true,
+      "source_reliability_tier": "tier_2",
+      "tier_reason": "",
+      "tested": false,
+      "notes": "埃塞俄比亚国家通讯社（ENA）英文站。TLS：GlobalSign TLSv1.3 证书链完整（exp 2026-12-04），SAN=*.ena.et/ena.et。采集：html_listing，列表页 https://www.ena.et/web/eng；仅收 /web/<lang>/w/<prefix>_<id> 形态的文章详情页（排除语言切换页噪声）。发布日期：列表条目内 'Mon D, YYYY' 文本解析，按站点所在地亚的斯亚贝巴EAT(+03:00) 归一；未解析到时留空，不用抓取时间冒充。影子准入：20 条样本 16 条 full_body（1229–18199 字符）+ 真实日期，4 条 extraction 失败被正常隔离，未发布。",
+      "governance": {
+        "rev": "g2c",
+        "documented_at": "2026-10-25",
+        "role_basis": "verified_national_news_agency",
+        "role_evidence": "埃塞俄比亚国家通讯社自有英文站点；与 nga_nan（尼日利亚通讯社）同型归类",
+        "evidence_basis": "structural",
+        "use_basis": "pending",
+        "use_evidence": "",
+        "tier_basis": "pending_initial",
+        "tier_flag": "",
+        "redundancy_group": "ena.et",
+        "consistency_flag": "",
+        "lifecycle": {
+          "state": "ACTIVE",
+          "observed_consecutive_failures": 0,
+          "observation_rounds": 0,
+          "threshold_status": "NOT_EVALUABLE",
+          "threshold_note": "新接入源，尚无生产观测轮；不得凭单轮结果判定 WATCH/REVIEW",
+          "last_observed_failure": ""
+        },
+        "publisher_id": "pub_038",
+        "publisher_verified": true
+      },
+      "legacy_payload": {
+        "collection_method": "html_listing",
+        "source_position": "PH1",
+        "priority": 40,
+        "country": "埃塞俄比亚",
+        "name": "Ethiopian News Agency（ENA）",
+        "url": "https://www.ena.et/web/eng",
+        "category_urls": [
+          "https://www.ena.et/web/eng"
+        ],
+        "feed_url": "",
+        "enabled": true,
+        "max_items": 20,
+        "timeout_seconds": 30,
+        "language": "en",
+        "status": "unknown",
+        "failure_count": 0,
+        "last_success_at": "",
+        "last_failure_at": ""
+      },
+      "extractor_profile": {
+        "include_link_patterns": [
+          "/web/[a-z]{2,3}/w/[a-z]{2,3}_\\d+"
+        ],
+        "listing_date_regex": "(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\.?\\s+(\\d{1,2}),\\s*(20\\d\\d)",
+        "listing_date_tz": "+03:00"
+      }
     }
   ],
   "governance_meta": {
     "schema": "asip-source-governance-v1",
     "revision": "g2c",
     "documented_at": "2026-10-25",
-    "scope_sources": 155,
+    "scope_sources": 156,
     "field_contract": {
       "source_type": "机构/来源类别（既有，未改）",
       "source_role": "来源在采集体系中的角色：local_signal/official/major_media/regional/aggregator_discovery/specialist_analysis",
@@ -11484,6 +11558,10 @@
     "evidence_separation_note": "来源层 evidence_role 仅描述渠道承载的证据形态；**不替代文章级原始发布者**。文章级出处仍以 articles[].source_links / article_url 为准，A1 不得用 evidence_role 反推单篇文章归属。",
     "publisher_policy_v2": "publisher_id 仅为待核映射，且仅对多成员组赋值；publisher_verified=true 表示本轮实测过该域名归属。不得据此合并/删除 source_id，不得提前计算最终独立机构总数。",
     "type_compat": "v2",
-    "type_compat_note": "v2：local_signal 仅兼容 local_media/social_media（v1 允许 other/international，致 30 条国际媒体被误标本地信号而不报错）；其余方向未放宽"
+    "type_compat_note": "v2：local_signal 仅兼容 local_media/social_media（v1 允许 other/international，致 30 条国际媒体被误标本地信号而不报错）；其余方向未放宽",
+    "new_sources_g2c": [
+      "eth_ena"
+    ],
+    "admission_note": "第 3 包 C：3 个候选中仅 eth_ena 通过影子准入；eth_edrmc（TLS 证书链不完整，edrmc.gov.et 与 www 双主机名均 verify error 20）与 ssd_op（op.gov.ss /news 为 JS 外壳，服务端文章链接 0，/api/news 为不受支持的 JSON API）保持 PREPARED，未接入"
   }
 }
