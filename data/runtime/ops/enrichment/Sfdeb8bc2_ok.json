@@ -1,0 +1,115 @@
+{
+ "label": "Sfdeb8bc2",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0f06690df5e15a2c3040ccfd86fcc31aa0a8f91ecb9f6b0df27001ef5d66964b",
+ "tokens": {
+  "input_tokens": 2157,
+  "output_tokens": 491,
+  "total_tokens": 2648
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚疾控中心追踪阿布贾埃博拉患者53名接触者，河流州疑似病例检测为阴性",
+   "summary_zh": "尼日利亚疾病控制与预防中心（NCDC）表示，已识别并追踪联邦首都区一例确诊埃博拉病例的53名接触者，该病例由本迪布焦型埃博拉病毒引起。NCDC总干事Jide Idris在阿布贾的媒体会上称，这名42岁女性患者病情明显好转，正在隔离中接受治疗。患者于10月3日经亚的斯亚贝巴从乌干达返回，10月7日出现症状。河流州相关病例检测结果为阴性。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "联邦首都区",
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Federal Capital Territory (FCT), Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "NCDC已识别并追踪与阿布贾确诊埃博拉病例相关的53名接触者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "it has identified and followed up 53 contacts linked to the confirmed case of Ebola disease caused by the Bundibugyo virus in the Federal Capital Territory (FCT)"
+    },
+    {
+     "fact": "确诊患者为42岁女性，病情明显好转并在隔离中接受治疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the 42-year-old female patient had improved remarkably and was receiving medical care under isolation"
+    },
+    {
+     "fact": "患者于10月3日经亚的斯亚贝巴从乌干达返回，10月7日出现发热等症状",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the patient returned from Uganda through Addis Ababa on October 3 and developed symptoms, including fever, diarrhoea, generalised body aches and sore throat on October 7"
+    },
+    {
+     "fact": "河流州相关病例检测结果为阴性",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Rivers case tests negative"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前为单一来源报道，尚缺乏交叉验证",
+    "患者此前多器官衰竭的早期报道与当前病情好转说法之间的具体病程细节未完全说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚疾控中心追踪阿布贾埃博拉患者53名接触者，河流州疑似病例检测为阴性",
+   "summary_zh": "尼日利亚疾病控制与预防中心（NCDC）表示，已识别并追踪联邦首都区一例确诊埃博拉病例的53名接触者，该病例由本迪布焦型埃博拉病毒引起。NCDC总干事Jide Idris在阿布贾的媒体会上称，这名42岁女性患者病情明显好转，正在隔离中接受治疗。患者于10月3日经亚的斯亚贝巴从乌干达返回，10月7日出现症状。河流州相关病例检测结果为阴性。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "联邦首都区",
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Federal Capital Territory (FCT), Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "NCDC已识别并追踪与阿布贾确诊埃博拉病例相关的53名接触者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "it has identified and followed up 53 contacts linked to the confirmed case of Ebola disease caused by the Bundibugyo virus in the Federal Capital Territory (FCT)"
+    },
+    {
+     "fact": "确诊患者为42岁女性，病情明显好转并在隔离中接受治疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the 42-year-old female patient had improved remarkably and was receiving medical care under isolation"
+    },
+    {
+     "fact": "患者于10月3日经亚的斯亚贝巴从乌干达返回，10月7日出现发热等症状",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the patient returned from Uganda through Addis Ababa on October 3 and developed symptoms, including fever, diarrhoea, generalised body aches and sore throat on October 7"
+    },
+    {
+     "fact": "河流州相关病例检测结果为阴性",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Rivers case tests negative"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前为单一来源报道，尚缺乏交叉验证",
+    "患者此前多器官衰竭的早期报道与当前病情好转说法之间的具体病程细节未完全说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_96e58982fdeb8bc2",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
