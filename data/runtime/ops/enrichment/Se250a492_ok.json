@@ -1,0 +1,115 @@
+{
+ "label": "Se250a492",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "cf27e075ba948b0b25579dd083418f0f355b33f0d082d47d423264f0f395f6da",
+ "tokens": {
+  "input_tokens": 2586,
+  "output_tokens": 398,
+  "total_tokens": 2984
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "世卫组织称尼日利亚无埃博拉病例，患者已转运至瑞士",
+   "summary_zh": "世界卫生组织非洲区域主任穆罕默德·贾纳比表示，在患者及其丈夫被医疗转运至瑞士后，尼日利亚目前没有埃博拉病例。尼日利亚将继续监测52名接触者，瑞士负责患者后续治疗及其丈夫的监测。贾纳比称患者经尼日利亚医疗团队救治后临床状况稳定，但强调仍需保持警惕。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "世卫组织表示尼日利亚目前没有埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "says Nigeria currently has no Ebola cases following the medical evacuation of the patient and her husband to Switzerland"
+    },
+    {
+     "fact": "患者及其丈夫为瑞士公民，已被医疗转运至瑞士",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the evacuation took place earlier in the morning, noting that both the patient and her husband were Swiss citizens"
+    },
+    {
+     "fact": "尼日利亚将继续监测52名接触者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria would continue monitoring 52 contacts, while Switzerland would manage the patient and follow up her husband"
+    },
+    {
+     "fact": "世卫组织强调尽管已完成转运，仍需保持警惕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "vigilance remained critical despite the evacuation, urging continued attention to contact monitoring and other response measures"
+    }
+   ],
+   "uncertainties": [
+    "事件信息目前为单一来源报道，尚缺乏交叉验证",
+    "患者感染埃博拉的具体情况未在文中详细说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "世卫组织称尼日利亚无埃博拉病例，患者已转运至瑞士",
+   "summary_zh": "世界卫生组织非洲区域主任穆罕默德·贾纳比表示，在患者及其丈夫被医疗转运至瑞士后，尼日利亚目前没有埃博拉病例。尼日利亚将继续监测52名接触者，瑞士负责患者后续治疗及其丈夫的监测。贾纳比称患者经尼日利亚医疗团队救治后临床状况稳定，但强调仍需保持警惕。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "世卫组织表示尼日利亚目前没有埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "says Nigeria currently has no Ebola cases following the medical evacuation of the patient and her husband to Switzerland"
+    },
+    {
+     "fact": "患者及其丈夫为瑞士公民，已被医疗转运至瑞士",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the evacuation took place earlier in the morning, noting that both the patient and her husband were Swiss citizens"
+    },
+    {
+     "fact": "尼日利亚将继续监测52名接触者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria would continue monitoring 52 contacts, while Switzerland would manage the patient and follow up her husband"
+    },
+    {
+     "fact": "世卫组织强调尽管已完成转运，仍需保持警惕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "vigilance remained critical despite the evacuation, urging continued attention to contact monitoring and other response measures"
+    }
+   ],
+   "uncertainties": [
+    "事件信息目前为单一来源报道，尚缺乏交叉验证",
+    "患者感染埃博拉的具体情况未在文中详细说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_08a2edf1e250a492",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

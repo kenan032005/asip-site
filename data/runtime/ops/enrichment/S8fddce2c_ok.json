@@ -1,0 +1,137 @@
+{
+ "label": "S8fddce2c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0ad6323c73b39db6fc172d1eb42d42e63b0f5a3bccdfc9bfd7bc5049dd43b573",
+ "tokens": {
+  "input_tokens": 2784,
+  "output_tokens": 691,
+  "total_tokens": 3475
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "提贝斯提：米斯基冲突后，国家面临信任考验",
+   "summary_zh": "乍得极北部提贝斯提省在10月14日米斯基冲突两周后寻求缓和局势。10月26日，省级当局在巴尔达伊召开周会，对日益加剧的不安全局势表示严重关切。军方称，米斯基一支负责保护金矿区的矿业旅遭袭，造成两名军官死亡、九人受伤，并将袭击归咎于米斯基自卫委员会；该委员会承认自身有人员伤亡，但否认对暴力负全部责任，并称倾向于对话。冲突确切情况仍存争议，当局已宣布逮捕四名嫌疑人并成立调解委员会。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "提贝斯提",
+    "city": "米斯基",
+    "site": "米斯基",
+    "raw_text": "Miski, dans l'extrême nord du Tchad, province du Tibesti"
+   },
+   "key_facts": [
+    {
+     "fact": "10月14日米斯基冲突两周后，提贝斯提省寻求缓和局势",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Deux semaines après les affrontements du 14 octobre à Miski, dans l'extrême nord du Tchad, la province du Tibesti cherche la voie de l'apaisement."
+    },
+    {
+     "fact": "军方称矿业旅遭袭，两名军官死亡、九人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'état-major général des armées a annoncé la mort de deux officiers et neuf blessés après une attaque visant la Brigade minière, le 14 octobre à Miski."
+    },
+    {
+     "fact": "军方将袭击归咎于米斯基自卫委员会，该委员会否认负全部责任",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'armée impute l'attaque au comité d'autodéfense de Miski. Ce dernier a déploré des pertes humaines de son côté, tout en rejetant la responsabilité exclusive des violences"
+    },
+    {
+     "fact": "冲突确切情况仍存争议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les circonstances exactes restent donc contestées."
+    },
+    {
+     "fact": "10月20日一名军方负责人宣布逮捕四名嫌疑人并缴获十件武器",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le 20 octobre, un responsable militaire a annoncé l'arrestation de quatre suspects et la récupération de dix armes, dont deux bazookas"
+    },
+    {
+     "fact": "巴尔达伊会议决定设立就近调解委员会以恢复和平",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sur proposition du Président du Conseil provincial, Senoussi Koki Chidi, la mise en place d'un comité de médiation de proximité a été actée afin de rétablir la paix"
+    }
+   ],
+   "uncertainties": [
+    "冲突确切情况存在争议，军方与自卫委员会说法不一",
+    "事件目前仅有一个来源（Le N'Djam Post）报道，尚缺乏交叉验证",
+    "军方宣布的逮捕与缴获武器情况未获独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "提贝斯提：米斯基冲突后，国家面临信任考验",
+   "summary_zh": "乍得极北部提贝斯提省在10月14日米斯基冲突两周后寻求缓和局势。10月26日，省级当局在巴尔达伊召开周会，对日益加剧的不安全局势表示严重关切。军方称，米斯基一支负责保护金矿区的矿业旅遭袭，造成两名军官死亡、九人受伤，并将袭击归咎于米斯基自卫委员会；该委员会承认自身有人员伤亡，但否认对暴力负全部责任，并称倾向于对话。冲突确切情况仍存争议，当局已宣布逮捕四名嫌疑人并成立调解委员会。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "提贝斯提",
+    "city": "米斯基",
+    "site": "米斯基",
+    "raw_text": "Miski, dans l'extrême nord du Tchad, province du Tibesti"
+   },
+   "key_facts": [
+    {
+     "fact": "10月14日米斯基冲突两周后，提贝斯提省寻求缓和局势",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Deux semaines après les affrontements du 14 octobre à Miski, dans l'extrême nord du Tchad, la province du Tibesti cherche la voie de l'apaisement."
+    },
+    {
+     "fact": "军方称矿业旅遭袭，两名军官死亡、九人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'état-major général des armées a annoncé la mort de deux officiers et neuf blessés après une attaque visant la Brigade minière, le 14 octobre à Miski."
+    },
+    {
+     "fact": "军方将袭击归咎于米斯基自卫委员会，该委员会否认负全部责任",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'armée impute l'attaque au comité d'autodéfense de Miski. Ce dernier a déploré des pertes humaines de son côté, tout en rejetant la responsabilité exclusive des violences"
+    },
+    {
+     "fact": "冲突确切情况仍存争议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les circonstances exactes restent donc contestées."
+    },
+    {
+     "fact": "10月20日一名军方负责人宣布逮捕四名嫌疑人并缴获十件武器",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le 20 octobre, un responsable militaire a annoncé l'arrestation de quatre suspects et la récupération de dix armes, dont deux bazookas"
+    },
+    {
+     "fact": "巴尔达伊会议决定设立就近调解委员会以恢复和平",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sur proposition du Président du Conseil provincial, Senoussi Koki Chidi, la mise en place d'un comité de médiation de proximité a été actée afin de rétablir la paix"
+    }
+   ],
+   "uncertainties": [
+    "冲突确切情况存在争议，军方与自卫委员会说法不一",
+    "事件目前仅有一个来源（Le N'Djam Post）报道，尚缺乏交叉验证",
+    "军方宣布的逮捕与缴获武器情况未获独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_69e4bdb28fddce2c",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

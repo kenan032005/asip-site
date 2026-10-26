@@ -1,0 +1,117 @@
+{
+ "label": "S4c201a67",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d85e7944285a5b086c0dcf4af206bac0cb1dcc5f828b0ad8492cae8f54366c7f",
+ "tokens": {
+  "input_tokens": 2157,
+  "output_tokens": 603,
+  "total_tokens": 2760
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "阿加德兹：阿尔利特-阿加德兹公路武装袭击遇难者遗体下葬",
+   "summary_zh": "尼日尔阿加德兹地区当局于2026年10月21日为在阿尔利特-阿加德兹公路武装袭击中遇难的SONITRAV公司巴士乘客举行遗体告别和下葬仪式。阿加德兹地区州长伊布拉·布拉马·伊萨少将出席仪式，多名军政人士及遇难者家属参加。当局向遇难者家属表示哀悼。该事件目前为单一来源报道。",
+   "event_type": "armed_conflict",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "阿加德兹地区",
+    "city": "阿加德兹",
+    "site": "阿加德兹地区医院中心太平间及城西公墓",
+    "raw_text": "Agadez, axe Arlit–Agadez"
+   },
+   "key_facts": [
+    {
+     "fact": "阿加德兹地区为阿尔利特-阿加德兹公路武装袭击遇难者举行下葬仪式",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Gouverneur de la Région d’Agadez, le Général de Division Ibra Boulama Issa a assisté, ce mercredi 21 octobre 2026 à la levée des corps, suivie de l’inhumation des victimes de l’attaque perpétrée contre les bus de la SONITRAV sur l’axe Arlit–Agadez."
+    },
+    {
+     "fact": "袭击针对SONITRAV公司的巴士，造成约十余名遇难者",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Inhumation des corps d’une douzaine de victimes de l’attaque armée sur l’axe Arlit-Agadez"
+    },
+    {
+     "fact": "仪式在阿加德兹地区医院中心太平间举行，随后葬于城西公墓",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La cérémonie s’est déroulée à la morgue du Centre Hospitalier Régional (CHR) d’Agadez, avant l’inhumation des défunts au cimetière ouest de la ville."
+    },
+    {
+     "fact": "地区当局向遇难者家属表示哀悼",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les autorités régionales ont renouvelé leurs sincères condoléances aux familles endeuillées"
+    }
+   ],
+   "uncertainties": [
+    "袭击的具体实施者及动机尚未在报道中说明",
+    "遇难人数仅表述为“约十余名”，未获精确确认",
+    "目前仅有一个来源（尼日尔官方通讯社ANP）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "阿加德兹：阿尔利特-阿加德兹公路武装袭击遇难者遗体下葬",
+   "summary_zh": "尼日尔阿加德兹地区当局于2026年10月21日为在阿尔利特-阿加德兹公路武装袭击中遇难的SONITRAV公司巴士乘客举行遗体告别和下葬仪式。阿加德兹地区州长伊布拉·布拉马·伊萨少将出席仪式，多名军政人士及遇难者家属参加。当局向遇难者家属表示哀悼。该事件目前为单一来源报道。",
+   "event_type": "armed_conflict",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "阿加德兹地区",
+    "city": "阿加德兹",
+    "site": "阿加德兹地区医院中心太平间及城西公墓",
+    "raw_text": "Agadez, axe Arlit–Agadez"
+   },
+   "key_facts": [
+    {
+     "fact": "阿加德兹地区为阿尔利特-阿加德兹公路武装袭击遇难者举行下葬仪式",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Gouverneur de la Région d’Agadez, le Général de Division Ibra Boulama Issa a assisté, ce mercredi 21 octobre 2026 à la levée des corps, suivie de l’inhumation des victimes de l’attaque perpétrée contre les bus de la SONITRAV sur l’axe Arlit–Agadez."
+    },
+    {
+     "fact": "袭击针对SONITRAV公司的巴士，造成约十余名遇难者",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Inhumation des corps d’une douzaine de victimes de l’attaque armée sur l’axe Arlit-Agadez"
+    },
+    {
+     "fact": "仪式在阿加德兹地区医院中心太平间举行，随后葬于城西公墓",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La cérémonie s’est déroulée à la morgue du Centre Hospitalier Régional (CHR) d’Agadez, avant l’inhumation des défunts au cimetière ouest de la ville."
+    },
+    {
+     "fact": "地区当局向遇难者家属表示哀悼",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les autorités régionales ont renouvelé leurs sincères condoléances aux familles endeuillées"
+    }
+   ],
+   "uncertainties": [
+    "袭击的具体实施者及动机尚未在报道中说明",
+    "遇难人数仅表述为“约十余名”，未获精确确认",
+    "目前仅有一个来源（尼日尔官方通讯社ANP）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_86257e214c201a67",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

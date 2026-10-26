@@ -1,0 +1,125 @@
+{
+ "label": "S45e14c9a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "391c9bd70cc1c3725e079cbbd51e464cb604eeca0586a456dd778e1e3e84ac59",
+ "tokens": {
+  "input_tokens": 2708,
+  "output_tokens": 563,
+  "total_tokens": 3271
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚埃博拉患者被转运至瑞士",
+   "summary_zh": "尼日利亚卫生部长穆罕默德·阿里·帕特宣布，一名在尼日利亚确诊的埃博拉患者于2026年10月26日乘医疗专机从阿布贾前往瑞士，其丈夫作为无症状接触者陪同。患者意识清醒、病情稳定，尼日利亚卫生部门继续对接触者进行21天医学观察。西非卫生组织呼吁区域各国保持警惕，贝宁卫生部此前已宣布进入预警阶段。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚卫生部长宣布一名埃博拉患者从阿布贾乘医疗专机前往瑞士",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La patiente atteinte d’Ebola au Nigeria a quitté Abuja pour la Suisse par avion médicalisé lundi 26 octobre 2026, a annoncé le ministre de la Santé, Muhammad Ali Pate."
+    },
+    {
+     "fact": "患者丈夫作为无症状接触者陪同前往",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Son époux, identifié comme cas contact et ne présentant pas de symptômes, l’accompagne."
+    },
+    {
+     "fact": "尼日利亚卫生部门对接触者进行21天医学观察，出发时无人出现症状",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les autorités sanitaires nigérianes poursuivent le suivi des contacts pendant vingt et un jours après leur dernière exposition possible au virus. Aucun d’entre eux n’avait développé de symptômes au moment du départ."
+    },
+    {
+     "fact": "西非卫生组织呼吁区域民众保持警惕并加强跨境监测",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’Organisation ouest-africaine de la santé (OOAS) à appeler les populations de la région à la vigilance."
+    },
+    {
+     "fact": "贝宁卫生部宣布进入预警阶段，并在科托努机场评估测温设备",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Bénin, le ministère de la Santé avait annoncé une phase de préalerte dans un communiqué daté du 20 octobre."
+    }
+   ],
+   "uncertainties": [
+    "事件信息目前仅来自单一来源（Benin Web TV），尚缺乏交叉验证",
+    "患者后续病情及转运后情况尚未获确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚埃博拉患者被转运至瑞士",
+   "summary_zh": "尼日利亚卫生部长穆罕默德·阿里·帕特宣布，一名在尼日利亚确诊的埃博拉患者于2026年10月26日乘医疗专机从阿布贾前往瑞士，其丈夫作为无症状接触者陪同。患者意识清醒、病情稳定，尼日利亚卫生部门继续对接触者进行21天医学观察。西非卫生组织呼吁区域各国保持警惕，贝宁卫生部此前已宣布进入预警阶段。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚卫生部长宣布一名埃博拉患者从阿布贾乘医疗专机前往瑞士",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La patiente atteinte d’Ebola au Nigeria a quitté Abuja pour la Suisse par avion médicalisé lundi 26 octobre 2026, a annoncé le ministre de la Santé, Muhammad Ali Pate."
+    },
+    {
+     "fact": "患者丈夫作为无症状接触者陪同前往",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Son époux, identifié comme cas contact et ne présentant pas de symptômes, l’accompagne."
+    },
+    {
+     "fact": "尼日利亚卫生部门对接触者进行21天医学观察，出发时无人出现症状",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les autorités sanitaires nigérianes poursuivent le suivi des contacts pendant vingt et un jours après leur dernière exposition possible au virus. Aucun d’entre eux n’avait développé de symptômes au moment du départ."
+    },
+    {
+     "fact": "西非卫生组织呼吁区域民众保持警惕并加强跨境监测",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’Organisation ouest-africaine de la santé (OOAS) à appeler les populations de la région à la vigilance."
+    },
+    {
+     "fact": "贝宁卫生部宣布进入预警阶段，并在科托努机场评估测温设备",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Bénin, le ministère de la Santé avait annoncé une phase de préalerte dans un communiqué daté du 20 octobre."
+    }
+   ],
+   "uncertainties": [
+    "事件信息目前仅来自单一来源（Benin Web TV），尚缺乏交叉验证",
+    "患者后续病情及转运后情况尚未获确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_96b8645745e14c9a",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

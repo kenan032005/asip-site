@@ -1,0 +1,117 @@
+{
+ "label": "Sa12a73af",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "79486ab6b6937d4e0e03abe976fc4b8587c909d370ed2bbeea9eff91eaa6172d",
+ "tokens": {
+  "input_tokens": 2169,
+  "output_tokens": 466,
+  "total_tokens": 2635
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚阿南布拉州警方逮捕32岁连环手机盗窃嫌疑人",
+   "summary_zh": "尼日利亚阿南布拉州警方逮捕一名32岁嫌疑人Ifeanyi Obi，据称其与Awka、Isuaniocha和Mgbakwu等地酒店多起手机盗窃案有关。警方称，此次逮捕是在调查相关报案并审查监控录像后实施的。据称嫌疑人在审讯中承认从涉事社区酒店盗走五部安卓手机。该信息目前仅来自单一来源。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Anambra State",
+    "city": "Awka",
+    "site": null,
+    "raw_text": "Anambra State, hotels in Awka, Isuaniocha and Mgbakwu communities"
+   },
+   "key_facts": [
+    {
+     "fact": "阿南布拉州警方逮捕一名32岁疑似连环手机盗窃嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Anambra State Police Command has arrested a 32-year-old suspected serial mobile phone thief, identified as Ifeanyi Obi"
+    },
+    {
+     "fact": "嫌疑人被指与Awka、Isuaniocha和Mgbakwu社区酒店多起手机盗窃案有关",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "in connection with multiple cases of mobile phone theft at hotels in Awka, Isuaniocha and Mgbakwu communities in the state"
+    },
+    {
+     "fact": "警方称逮捕依据是调查和监控录像审查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the arrest followed investigations into reported cases of mobile phone theft and a review of video surveillance footage allegedly linking the suspect to the incidents"
+    },
+    {
+     "fact": "据称嫌疑人在审讯中承认盗走五部安卓手机",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "during interrogation, the suspect reportedly confessed to stealing five Android phones from hotels in the affected communities"
+    }
+   ],
+   "uncertainties": [
+    "嫌疑人身份及作案细节尚未经独立来源证实",
+    "嫌疑人供述内容为据称，尚未获法院确认",
+    "目前仅有一个来源（Punch）报道"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚阿南布拉州警方逮捕32岁连环手机盗窃嫌疑人",
+   "summary_zh": "尼日利亚阿南布拉州警方逮捕一名32岁嫌疑人Ifeanyi Obi，据称其与Awka、Isuaniocha和Mgbakwu等地酒店多起手机盗窃案有关。警方称，此次逮捕是在调查相关报案并审查监控录像后实施的。据称嫌疑人在审讯中承认从涉事社区酒店盗走五部安卓手机。该信息目前仅来自单一来源。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Anambra State",
+    "city": "Awka",
+    "site": null,
+    "raw_text": "Anambra State, hotels in Awka, Isuaniocha and Mgbakwu communities"
+   },
+   "key_facts": [
+    {
+     "fact": "阿南布拉州警方逮捕一名32岁疑似连环手机盗窃嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Anambra State Police Command has arrested a 32-year-old suspected serial mobile phone thief, identified as Ifeanyi Obi"
+    },
+    {
+     "fact": "嫌疑人被指与Awka、Isuaniocha和Mgbakwu社区酒店多起手机盗窃案有关",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "in connection with multiple cases of mobile phone theft at hotels in Awka, Isuaniocha and Mgbakwu communities in the state"
+    },
+    {
+     "fact": "警方称逮捕依据是调查和监控录像审查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the arrest followed investigations into reported cases of mobile phone theft and a review of video surveillance footage allegedly linking the suspect to the incidents"
+    },
+    {
+     "fact": "据称嫌疑人在审讯中承认盗走五部安卓手机",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "during interrogation, the suspect reportedly confessed to stealing five Android phones from hotels in the affected communities"
+    }
+   ],
+   "uncertainties": [
+    "嫌疑人身份及作案细节尚未经独立来源证实",
+    "嫌疑人供述内容为据称，尚未获法院确认",
+    "目前仅有一个来源（Punch）报道"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_5d13d07fa12a73af",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
