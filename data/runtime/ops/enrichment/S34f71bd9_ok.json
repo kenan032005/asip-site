@@ -1,0 +1,115 @@
+{
+ "label": "S34f71bd9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "fa86bfafa5a1324a3942fa5bdd28de7c9575d6ab4319b6940e4a250ff45b06f5",
+ "tokens": {
+  "input_tokens": 2012,
+  "output_tokens": 457,
+  "total_tokens": 2469
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚阿南布拉州一住宅楼发生火灾",
+   "summary_zh": "尼日利亚阿南布拉州首府阿沃卡Okenwa住宅区一栋平房发生火灾，财产和家用电器被毁。周日发生的这起事件未造成人员伤亡。阿南布拉州消防局表示，初步观察显示火灾可能由电路火花引发，但疑似原因尚未得到确认。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Anambra State",
+    "city": "Awka",
+    "site": "Okenwa Housing Estate",
+    "raw_text": "Okenwa Housing Estate, behind Tourist Gardens Hotels, near the Anambra State Government House in Awka, Anambra State"
+   },
+   "key_facts": [
+    {
+     "fact": "阿南布拉州阿沃卡Okenwa住宅区一栋平房发生火灾，财产和家用电器被毁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fire has gutted a bungalow at Okenwa Housing Estate, behind Tourist Gardens Hotels, near the Anambra State Government House in Awka, destroying property and household appliances."
+    },
+    {
+     "fact": "这起周日发生的事件未造成人员伤亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "No casualties were recorded in the incident, which occurred on Sunday."
+    },
+    {
+     "fact": "消防局称初步观察显示火灾可能由电路火花引发，但疑似原因尚未确认",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "preliminary observations suggested that the fire might have been triggered by a spark from an electrical circuit, although the suspected cause was yet to be confirmed"
+    },
+    {
+     "fact": "消防员响应求救电话并扑灭大火，阻止火势蔓延至相邻建筑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "firefighters responded to a distress call and successfully extinguished the blaze, preventing it from spreading to adjoining properties"
+    }
+   ],
+   "uncertainties": [
+    "火灾疑似原因（电路火花）尚未得到确认",
+    "目前仅有一个来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚阿南布拉州一住宅楼发生火灾",
+   "summary_zh": "尼日利亚阿南布拉州首府阿沃卡Okenwa住宅区一栋平房发生火灾，财产和家用电器被毁。周日发生的这起事件未造成人员伤亡。阿南布拉州消防局表示，初步观察显示火灾可能由电路火花引发，但疑似原因尚未得到确认。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Anambra State",
+    "city": "Awka",
+    "site": "Okenwa Housing Estate",
+    "raw_text": "Okenwa Housing Estate, behind Tourist Gardens Hotels, near the Anambra State Government House in Awka, Anambra State"
+   },
+   "key_facts": [
+    {
+     "fact": "阿南布拉州阿沃卡Okenwa住宅区一栋平房发生火灾，财产和家用电器被毁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fire has gutted a bungalow at Okenwa Housing Estate, behind Tourist Gardens Hotels, near the Anambra State Government House in Awka, destroying property and household appliances."
+    },
+    {
+     "fact": "这起周日发生的事件未造成人员伤亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "No casualties were recorded in the incident, which occurred on Sunday."
+    },
+    {
+     "fact": "消防局称初步观察显示火灾可能由电路火花引发，但疑似原因尚未确认",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "preliminary observations suggested that the fire might have been triggered by a spark from an electrical circuit, although the suspected cause was yet to be confirmed"
+    },
+    {
+     "fact": "消防员响应求救电话并扑灭大火，阻止火势蔓延至相邻建筑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "firefighters responded to a distress call and successfully extinguished the blaze, preventing it from spreading to adjoining properties"
+    }
+   ],
+   "uncertainties": [
+    "火灾疑似原因（电路火花）尚未得到确认",
+    "目前仅有一个来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_1b021e5134f71bd9",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

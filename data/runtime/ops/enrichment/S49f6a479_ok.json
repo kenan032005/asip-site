@@ -1,0 +1,105 @@
+{
+ "label": "S49f6a479",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "327a2db1bf199f2d63f9bf19e14eb09b741df78053317b606994d648841cd8e0",
+ "tokens": {
+  "input_tokens": 2151,
+  "output_tokens": 428,
+  "total_tokens": 2579
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚卫生部长称该国或于12月宣布无埃博拉疫情",
+   "summary_zh": "尼日利亚卫生与社会福利协调部长穆罕默德·帕特表示，若在42天内未确认新增病例，尼日利亚可能在2026年12月7日被宣布为无埃博拉疫情。他同时指出，一旦出现新病例，将需按世界卫生组织标准重新开始倒计时。帕特还确认一名瑞士籍患者及其配偶已于周一乘空中救护车返回瑞士，患者经尼日利亚医护人员治疗后临床状况稳定。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚卫生部长称该国可能在2026年12月7日被宣布无埃博拉疫情",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria could be declared Ebola-free by December 7, 2026, only if no new cases are confirmed, subject to the 42-day countdown by the World Health Organisation"
+    },
+    {
+     "fact": "若出现新病例需按世卫组织标准重新开始42天倒计时",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "any further case would require a fresh countdown “in accordance” with the WHO criteria"
+    },
+    {
+     "fact": "一名瑞士籍患者及其配偶乘空中救护车返回瑞士，患者临床状况稳定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the departure of the Swiss patient and her spouse via an air ambulance to Switzerland also on Monday. He said both were Swiss citizens, adding that the patient was clinically stable following treatment by Nigerian medical personnel"
+    }
+   ],
+   "uncertainties": [
+    "无埃博拉疫情宣布取决于未来42天内不再出现新增确诊病例，目前尚未实现",
+    "该消息目前为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚卫生部长称该国或于12月宣布无埃博拉疫情",
+   "summary_zh": "尼日利亚卫生与社会福利协调部长穆罕默德·帕特表示，若在42天内未确认新增病例，尼日利亚可能在2026年12月7日被宣布为无埃博拉疫情。他同时指出，一旦出现新病例，将需按世界卫生组织标准重新开始倒计时。帕特还确认一名瑞士籍患者及其配偶已于周一乘空中救护车返回瑞士，患者经尼日利亚医护人员治疗后临床状况稳定。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚卫生部长称该国可能在2026年12月7日被宣布无埃博拉疫情",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria could be declared Ebola-free by December 7, 2026, only if no new cases are confirmed, subject to the 42-day countdown by the World Health Organisation"
+    },
+    {
+     "fact": "若出现新病例需按世卫组织标准重新开始42天倒计时",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "any further case would require a fresh countdown “in accordance” with the WHO criteria"
+    },
+    {
+     "fact": "一名瑞士籍患者及其配偶乘空中救护车返回瑞士，患者临床状况稳定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the departure of the Swiss patient and her spouse via an air ambulance to Switzerland also on Monday. He said both were Swiss citizens, adding that the patient was clinically stable following treatment by Nigerian medical personnel"
+    }
+   ],
+   "uncertainties": [
+    "无埃博拉疫情宣布取决于未来42天内不再出现新增确诊病例，目前尚未实现",
+    "该消息目前为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_75e0a33149f6a479",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
