@@ -1,15 +1,15 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-10-26T18:15:25+08:00",
+ "generated_at": "2026-10-26T19:11:33+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 41,
-  "signals_7d": 455,
-  "verified_events_24h": 40,
-  "verified_events_7d": 443,
+  "signals_24h": 39,
+  "signals_7d": 453,
+  "verified_events_24h": 38,
+  "verified_events_7d": 441,
   "multi_source_verified_events_7d": 22,
   "countries_with_activity_24h": 8,
   "total_countries_monitored": 22
@@ -60,11 +60,11 @@
   },
   {
    "value": "乍得",
-   "count": 65
+   "count": 64
   },
   {
    "value": "南苏丹",
-   "count": 28
+   "count": 27
   },
   {
    "value": "贝宁",
@@ -114,14 +114,10 @@
   },
   {
    "value": "绑架",
-   "count": 5
+   "count": 4
   },
   {
    "value": "民众骚乱",
-   "count": 2
-  },
-  {
-   "value": "武装冲突",
    "count": 2
   },
   {
@@ -130,6 +126,10 @@
   },
   {
    "value": "恐怖袭击",
+   "count": 1
+  },
+  {
+   "value": "武装冲突",
    "count": 1
   },
   {
@@ -148,7 +148,7 @@
  "source_tier_distribution_7d": [
   {
    "value": "C",
-   "count": 666
+   "count": 662
   },
   {
    "value": "B",
@@ -688,10 +688,16 @@
   }
  ],
  "existing_assessment": {
-  "status": "deterministic",
-  "based_on": "过去24小时/7日公开信息（确定性汇总）"
+  "status": "ai",
+  "overall_assessment": "已核实事件显示，过去一周非洲安全态势以尼日利亚为重心（7日219条），乍得、南苏丹、贝宁、莫桑比克次之。尼日利亚方面，军方在凯比州解救被绑人员、在贝努埃州解救神父等八人，空军在乍得湖地区空袭打死ISWAP头目；乍得提贝斯提米斯基冲突后多方呼吁停火，农牧民冲突两年内至少400人死亡；南苏丹鲁旺行政区遭袭九死六伤；马里梅纳卡袭击致约40名平民死亡；尼日尔阿尔利特-阿加德兹公路伏击至少11人死亡。公共卫生压力突出，刚果（金）埃博拉疫情扩散且资金去向不明，乍得登革热蔓延。情报信号层面（均为单源消息，尚待核实）：贝宁Kika武装袭击致三人死亡、南苏丹通季北县袭击至少10人死亡、尼日利亚埃博拉密切接触者增至53人及围绕2027年大选的争议言论。整体风险方向趋于恶化。",
+  "risk_direction": "worsening",
+  "confidence": "medium",
+  "generated_time": "2026-10-26T19:11:16+08:00",
+  "based_on": "过去24小时/7日公开信息",
+  "model": "",
+  "date": "20261026"
  },
- "fact_count": 898,
+ "fact_count": 894,
  "facts": {
   "news:34a9ead6e8073818": {
    "fact_id": "news:34a9ead6e8073818",
@@ -7488,36 +7494,6 @@
    "importance": "low",
    "why_it_matters": ""
   },
-  "news:d9a06d41597d224e": {
-   "fact_id": "news:d9a06d41597d224e",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "南苏丹",
-   "title": "湖泊州州长林呼吁武装反对派停止暴力并参与选举",
-   "category": "civil_unrest",
-   "source": "Radio Tamazuj",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-19 18:39",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:6845e9c775859dee": {
-   "fact_id": "news:6845e9c775859dee",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "萨拉马特：穆赖副省农民与牧民冲突致12死3伤",
-   "category": "border_security",
-   "source": "Tchadinfos",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-19 18:27",
-   "importance": "low",
-   "why_it_matters": ""
-  },
   "EVT_e445224584850092": {
    "fact_id": "EVT_e445224584850092",
    "level": "verified_event",
@@ -7620,36 +7596,6 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-10-19 11:31",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_5674d605edecceaf": {
-   "fact_id": "EVT_5674d605edecceaf",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "南苏丹",
-   "title": "湖泊州州长林呼吁武装反对派停止暴力并参与选举",
-   "category": "civil_unrest",
-   "source": "Radio Tamazuj",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-19 10:39",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_c4c91e078de7fe7b": {
-   "fact_id": "EVT_c4c91e078de7fe7b",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "萨拉马特：穆赖副省农民与牧民冲突致12死3伤",
-   "category": "border_security",
-   "source": "Tchadinfos",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-10-19 10:27",
    "importance": "high",
    "severity": "medium"
   },
