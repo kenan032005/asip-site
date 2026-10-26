@@ -1,5 +1,14 @@
 # ASIP Operations Summary
 
+## asip-production-orchestrator 40247665883
+- status: completed | started: 2026-10-26T00:10:26Z | completed: 2026-10-26T01:01:01Z
+- sources: attempted=891 succeeded=182 failed=631
+- candidates_new: 10 | ai: attempted=9 ok=0 fail=0 held=0
+- safety: checked=9 corrected=0 held=0
+- reports: full=0 fallback=0 low_data=0 hold=0
+- build=not_executed deploy=not_executed
+- tokens: {"social_enrichment": {"calls": 9, "input_tokens": 20577, "output_tokens": 4421, "total_tokens": 24998}}
+
 ## asip-production-orchestrator 40243180602
 - status: completed | started: 2026-10-25T23:15:57Z | completed: 2026-10-25T23:16:21Z
 - sources: attempted=0 succeeded=0 failed=0
@@ -74,15 +83,6 @@
 
 ## asip-production-orchestrator 40216777730
 - status: completed | started: 2026-10-25T17:35:00Z | completed: 2026-10-25T17:35:32Z
-- sources: attempted=0 succeeded=0 failed=0
-- candidates_new: 0 | ai: attempted=0 ok=0 fail=0 held=0
-- safety: checked=0 corrected=0 held=0
-- reports: full=0 fallback=0 low_data=0 hold=0
-- build=not_executed deploy=not_executed
-- tokens: {}
-
-## asip-production-orchestrator 40214790245
-- status: completed | started: 2026-10-25T17:10:30Z | completed: 2026-10-25T17:11:02Z
 - sources: attempted=0 succeeded=0 failed=0
 - candidates_new: 0 | ai: attempted=0 ok=0 fail=0 held=0
 - safety: checked=0 corrected=0 held=0

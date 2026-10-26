@@ -1,0 +1,125 @@
+{
+ "label": "S55186204",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "29ac3041484772354d580aad3e0a2d5464a8f4f621d3a55fa164f7c7ba87b408",
+ "tokens": {
+  "input_tokens": 2688,
+  "output_tokens": 554,
+  "total_tokens": 3242
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚疾控中心追踪53名埃博拉接触者，确诊患者病情好转",
+   "summary_zh": "尼日利亚疾病控制与预防中心（NCDC）表示，已识别并追踪与首都阿布贾（联邦首都区）一例确诊埃博拉病例相关的53名接触者。该病例由本迪布焦型埃博拉病毒引起，患者为一名42岁女性，从乌干达经亚的斯亚贝巴返回后出现症状，目前病情明显好转，正在隔离中接受治疗。NCDC称已启动国家级事件管理系统协调应对，接触者追踪和监测正在进行。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "联邦首都区",
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Federal Capital Territory (FCT), Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "NCDC已识别并追踪53名与确诊埃博拉病例相关的接触者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Nigeria Centre for Disease Control and Prevention (NCDC) says it has identified and followed up 53 contacts linked to the confirmed case of Ebola disease"
+    },
+    {
+     "fact": "确诊患者为42岁女性，感染本迪布焦型埃博拉病毒，病情明显好转并在隔离中接受治疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the 42-year-old female patient had improved remarkably and was receiving medical care under isolation"
+    },
+    {
+     "fact": "患者于10月3日从乌干达经亚的斯亚贝巴返回，10月7日出现症状，10月20日经实验室确诊",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the patient returned from Uganda through Addis Ababa on Oct. 3 and developed symptoms... laboratory confirmation was made on Oct. 20"
+    },
+    {
+     "fact": "接触者包括医护人员、家政人员和患者配偶，接触者追踪与21天监测正在进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the 53 contacts identified included healthcare workers, domestic staff and the patient’s spouse... monitor them for 21 days"
+    },
+    {
+     "fact": "河流州10月23日报告的疑似病例检测结果为阴性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a suspected case reported by Rivers State on Oct. 23 tested negative for Ebola disease"
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（尼日利亚通讯社）报道，尚缺乏独立交叉验证",
+    "接触者后续监测结果及是否出现新增病例尚未公布"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚疾控中心追踪53名埃博拉接触者，确诊患者病情好转",
+   "summary_zh": "尼日利亚疾病控制与预防中心（NCDC）表示，已识别并追踪与首都阿布贾（联邦首都区）一例确诊埃博拉病例相关的53名接触者。该病例由本迪布焦型埃博拉病毒引起，患者为一名42岁女性，从乌干达经亚的斯亚贝巴返回后出现症状，目前病情明显好转，正在隔离中接受治疗。NCDC称已启动国家级事件管理系统协调应对，接触者追踪和监测正在进行。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "联邦首都区",
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Federal Capital Territory (FCT), Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "NCDC已识别并追踪53名与确诊埃博拉病例相关的接触者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Nigeria Centre for Disease Control and Prevention (NCDC) says it has identified and followed up 53 contacts linked to the confirmed case of Ebola disease"
+    },
+    {
+     "fact": "确诊患者为42岁女性，感染本迪布焦型埃博拉病毒，病情明显好转并在隔离中接受治疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the 42-year-old female patient had improved remarkably and was receiving medical care under isolation"
+    },
+    {
+     "fact": "患者于10月3日从乌干达经亚的斯亚贝巴返回，10月7日出现症状，10月20日经实验室确诊",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the patient returned from Uganda through Addis Ababa on Oct. 3 and developed symptoms... laboratory confirmation was made on Oct. 20"
+    },
+    {
+     "fact": "接触者包括医护人员、家政人员和患者配偶，接触者追踪与21天监测正在进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the 53 contacts identified included healthcare workers, domestic staff and the patient’s spouse... monitor them for 21 days"
+    },
+    {
+     "fact": "河流州10月23日报告的疑似病例检测结果为阴性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a suspected case reported by Rivers State on Oct. 23 tested negative for Ebola disease"
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（尼日利亚通讯社）报道，尚缺乏独立交叉验证",
+    "接触者后续监测结果及是否出现新增病例尚未公布"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_0488db9455186204",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

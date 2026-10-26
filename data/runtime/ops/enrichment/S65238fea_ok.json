@@ -1,0 +1,129 @@
+{
+ "label": "S65238fea",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "04c25fa2d3a4c465285707bc08c6ffd6c012223f1d022778026a6f1a2c0e053b",
+ "tokens": {
+  "input_tokens": 2889,
+  "output_tokens": 545,
+  "total_tokens": 3434
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "科托努民事监狱五名囚犯被发现死亡，官方尚未证实",
+   "summary_zh": "据网络媒体报道，2026年10月17日贝宁科托努民事监狱H楼发现五名囚犯死亡。报道称，此后没有任何官方来源证实或否认这一消息，监狱内据称曾短暂发生紧张情绪和骚动，需要部署机动干预连，探视据称被暂停。国际特赦组织呼吁进行独立公正的调查，但官方至今保持沉默，舆论仍在等待五名同胞的下落得到澄清。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "科托努",
+    "site": "科托努民事监狱H楼",
+    "raw_text": "bâtiment H de la prison civile de Cotonou"
+   },
+   "key_facts": [
+    {
+     "fact": "据网络媒体报道，2026年10月17日科托努民事监狱H楼发现五名囚犯死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cinq détenus ont été retrouvés morts le 17 octobre 2026 dans le bâtiment H de la prison civile de Cotonou"
+    },
+    {
+     "fact": "报道称此后没有任何官方来源证实或否认该消息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "depuis, aucune source officielle n’a confirmé ou démenti l’information"
+    },
+    {
+     "fact": "报道称监狱内据称曾短暂发生紧张情绪和骚动，需要部署机动干预连",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des tensions et des mouvements d’humeur auraient brièvement éclaté parmi les détenus, ce qui a nécessité le déploiement de la Compagnie mobile d’intervention"
+    },
+    {
+     "fact": "报道称该监狱探视据称被暂停",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les visites auraient été suspendues dans cette prison"
+    },
+    {
+     "fact": "国际特赦组织呼吁进行独立公正的调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Amnesty International, dont c’est la vocation, réclame une enquête indépendante et impartiale"
+    }
+   ],
+   "uncertainties": [
+    "五名囚犯死亡的消息尚未获得官方证实或否认",
+    "监狱内骚动与探视暂停的说法均为据称，尚未证实",
+    "死亡原因不明",
+    "目前仅有一个来源（Fraternité）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "科托努民事监狱五名囚犯被发现死亡，官方尚未证实",
+   "summary_zh": "据网络媒体报道，2026年10月17日贝宁科托努民事监狱H楼发现五名囚犯死亡。报道称，此后没有任何官方来源证实或否认这一消息，监狱内据称曾短暂发生紧张情绪和骚动，需要部署机动干预连，探视据称被暂停。国际特赦组织呼吁进行独立公正的调查，但官方至今保持沉默，舆论仍在等待五名同胞的下落得到澄清。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "科托努",
+    "site": "科托努民事监狱H楼",
+    "raw_text": "bâtiment H de la prison civile de Cotonou"
+   },
+   "key_facts": [
+    {
+     "fact": "据网络媒体报道，2026年10月17日科托努民事监狱H楼发现五名囚犯死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cinq détenus ont été retrouvés morts le 17 octobre 2026 dans le bâtiment H de la prison civile de Cotonou"
+    },
+    {
+     "fact": "报道称此后没有任何官方来源证实或否认该消息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "depuis, aucune source officielle n’a confirmé ou démenti l’information"
+    },
+    {
+     "fact": "报道称监狱内据称曾短暂发生紧张情绪和骚动，需要部署机动干预连",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des tensions et des mouvements d’humeur auraient brièvement éclaté parmi les détenus, ce qui a nécessité le déploiement de la Compagnie mobile d’intervention"
+    },
+    {
+     "fact": "报道称该监狱探视据称被暂停",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les visites auraient été suspendues dans cette prison"
+    },
+    {
+     "fact": "国际特赦组织呼吁进行独立公正的调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Amnesty International, dont c’est la vocation, réclame une enquête indépendante et impartiale"
+    }
+   ],
+   "uncertainties": [
+    "五名囚犯死亡的消息尚未获得官方证实或否认",
+    "监狱内骚动与探视暂停的说法均为据称，尚未证实",
+    "死亡原因不明",
+    "目前仅有一个来源（Fraternité）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_815d304e65238fea",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

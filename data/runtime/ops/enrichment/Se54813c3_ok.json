@@ -1,0 +1,105 @@
+{
+ "label": "Se54813c3",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "37dd2fb8f2c497ac0afddb16b74d0e3c00f43965471e8c45775b74a3fe405a94",
+ "tokens": {
+  "input_tokens": 2094,
+  "output_tokens": 397,
+  "total_tokens": 2491
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得：恩贾梅纳第一区法尔查发生事故致三人死亡",
+   "summary_zh": "据初步消息，周日晚间在恩贾梅纳第一区法尔查街区发生一起严重交通事故。一辆汽车在米莱齐森林附近翻覆多圈，当时司机正试图避让一名摩托车骑手。事故造成三人死亡。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "恩贾梅纳",
+    "city": "恩贾梅纳",
+    "site": "法尔查街区米莱齐森林附近",
+    "raw_text": "quartier Farcha, dans le 1er arrondissement de N’Djamena, près de la forêt de Milezi"
+   },
+   "key_facts": [
+    {
+     "fact": "恩贾梅纳第一区法尔查街区发生一起严重交通事故",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un accident grave a eu lieu ce dimanche soir au quartier Farcha, dans le 1er arrondissement de N’Djamena."
+    },
+    {
+     "fact": "一辆汽车在米莱齐森林附近翻覆多圈，司机当时试图避让一名摩托车骑手",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un véhicule a fait plusieurs tonneaux près de la forêt de Milezi, alors que son conducteur tentait d’éviter un motocycliste."
+    },
+    {
+     "fact": "据初步消息，事故造成三人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon les premières informations, trois personnes ont perdu la vie."
+    }
+   ],
+   "uncertainties": [
+    "伤亡人数及事故细节仅据初步消息，尚未获得独立来源交叉验证",
+    "目前仅有一个来源（Tchadinfos）报道"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得：恩贾梅纳第一区法尔查发生事故致三人死亡",
+   "summary_zh": "据初步消息，周日晚间在恩贾梅纳第一区法尔查街区发生一起严重交通事故。一辆汽车在米莱齐森林附近翻覆多圈，当时司机正试图避让一名摩托车骑手。事故造成三人死亡。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "恩贾梅纳",
+    "city": "恩贾梅纳",
+    "site": "法尔查街区米莱齐森林附近",
+    "raw_text": "quartier Farcha, dans le 1er arrondissement de N’Djamena, près de la forêt de Milezi"
+   },
+   "key_facts": [
+    {
+     "fact": "恩贾梅纳第一区法尔查街区发生一起严重交通事故",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un accident grave a eu lieu ce dimanche soir au quartier Farcha, dans le 1er arrondissement de N’Djamena."
+    },
+    {
+     "fact": "一辆汽车在米莱齐森林附近翻覆多圈，司机当时试图避让一名摩托车骑手",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un véhicule a fait plusieurs tonneaux près de la forêt de Milezi, alors que son conducteur tentait d’éviter un motocycliste."
+    },
+    {
+     "fact": "据初步消息，事故造成三人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon les premières informations, trois personnes ont perdu la vie."
+    }
+   ],
+   "uncertainties": [
+    "伤亡人数及事故细节仅据初步消息，尚未获得独立来源交叉验证",
+    "目前仅有一个来源（Tchadinfos）报道"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_ec4050f1e54813c3",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
