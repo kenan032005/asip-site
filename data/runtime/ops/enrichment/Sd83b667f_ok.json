@@ -1,0 +1,115 @@
+{
+ "label": "Sd83b667f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "15361e32183704d34e45dfb2f6e6cd9b5376f6ae17b8981af37eb20b4ae02c03",
+ "tokens": {
+  "input_tokens": 2537,
+  "output_tokens": 568,
+  "total_tokens": 3105
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得-中国友谊医院医生再次罢工72小时",
+   "summary_zh": "乍得医生工会（SYMET）乍得-中国友谊大学医院（CHU-ATC）分会决定将罢工号召延长72小时。据新闻公报，2026年10月22日在急诊楼多媒体厅召开特别大会，超过三分之二的在职成员出席并达到法定人数。与会者认为院方承诺仍未满足医生诉求，因此决定10月26日（周一）至29日（周四）继续罢工，期间将维持最低医疗服务。",
+   "event_type": "civil_unrest",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "乍得-中国友谊大学医院（CHU-ATC）",
+    "raw_text": "Centre hospitalier universitaire de l’Amitié Tchad-Chine (CHU-ATC)"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得医生工会CHU-ATC分会决定将罢工延长72小时",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Syndicat des médecins du Tchad (SYMET), cellule du Centre hospitalier universitaire de l’Amitié Tchad-Chine (CHU-ATC), a décidé de reconduire le mot d’ordre de grève pour une durée de 72 heures."
+    },
+    {
+     "fact": "2026年10月22日召开特别大会，超过三分之二在职成员出席达到法定人数",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une assemblée générale extraordinaire s’est tenue le 22 octobre 2026 dans la salle multimédia des pavillons des urgences. Plus des deux tiers des membres actifs étaient présents, ce qui a permis de valider le quorum."
+    },
+    {
+     "fact": "罢工定于10月26日至29日进行，期间维持最低医疗服务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’assemblée a décidé de reconduire la grève du lundi 26 au jeudi 29 octobr. ... un service minimum sera assuré pendant toute la durée du mouvement."
+    },
+    {
+     "fact": "与会者认为院方承诺仍未满足医生诉求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les participants ont estimé que les engagements pris par la direction de l’établissement ne répondaient toujours pas aux revendications des médecins."
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（Tchadinfos）报道，尚缺乏交叉验证",
+    "罢工结束后的后续行动尚未确定，将视评估结果而定"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得-中国友谊医院医生再次罢工72小时",
+   "summary_zh": "乍得医生工会（SYMET）乍得-中国友谊大学医院（CHU-ATC）分会决定将罢工号召延长72小时。据新闻公报，2026年10月22日在急诊楼多媒体厅召开特别大会，超过三分之二的在职成员出席并达到法定人数。与会者认为院方承诺仍未满足医生诉求，因此决定10月26日（周一）至29日（周四）继续罢工，期间将维持最低医疗服务。",
+   "event_type": "civil_unrest",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "乍得-中国友谊大学医院（CHU-ATC）",
+    "raw_text": "Centre hospitalier universitaire de l’Amitié Tchad-Chine (CHU-ATC)"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得医生工会CHU-ATC分会决定将罢工延长72小时",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Syndicat des médecins du Tchad (SYMET), cellule du Centre hospitalier universitaire de l’Amitié Tchad-Chine (CHU-ATC), a décidé de reconduire le mot d’ordre de grève pour une durée de 72 heures."
+    },
+    {
+     "fact": "2026年10月22日召开特别大会，超过三分之二在职成员出席达到法定人数",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une assemblée générale extraordinaire s’est tenue le 22 octobre 2026 dans la salle multimédia des pavillons des urgences. Plus des deux tiers des membres actifs étaient présents, ce qui a permis de valider le quorum."
+    },
+    {
+     "fact": "罢工定于10月26日至29日进行，期间维持最低医疗服务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’assemblée a décidé de reconduire la grève du lundi 26 au jeudi 29 octobr. ... un service minimum sera assuré pendant toute la durée du mouvement."
+    },
+    {
+     "fact": "与会者认为院方承诺仍未满足医生诉求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les participants ont estimé que les engagements pris par la direction de l’établissement ne répondaient toujours pas aux revendications des médecins."
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（Tchadinfos）报道，尚缺乏交叉验证",
+    "罢工结束后的后续行动尚未确定，将视评估结果而定"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_200e7c80d83b667f",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
