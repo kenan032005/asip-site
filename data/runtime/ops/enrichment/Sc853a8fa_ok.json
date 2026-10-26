@@ -1,0 +1,127 @@
+{
+ "label": "Sc853a8fa",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "05cf3338ef04595c9bcc4981c88d1906ff3321608879c005fdddc3fdb350a16f",
+ "tokens": {
+  "input_tokens": 2765,
+  "output_tokens": 506,
+  "total_tokens": 3271
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "南非：非盟委员会谴责一名外国公民在德班被杀害",
+   "summary_zh": "非洲人权委员会敦促南非将针对外国人的袭击定性为“危机”。该声明针对上周在德班市中心发生的一起事件：一名外国公民据称被约五十名排外示威者殴打致死。报道称，近几个月排外示威已造成多人死亡，数万人逃离南非，而施暴者很少被逮捕。",
+   "event_type": "civil_unrest",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": null,
+    "city": "德班",
+    "site": "市中心",
+    "raw_text": "Durban city center"
+   },
+   "key_facts": [
+    {
+     "fact": "非盟非洲人权委员会谴责一名外国公民在德班被杀害",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "la commission de l’UA dénonce le meurtre d’un ressortissant étranger à Durban"
+    },
+    {
+     "fact": "据南非警方称，受害者据称在反移民示威期间被约五十人群体殴打致死",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon la police sud-africaine, la victime aurait été agressée par un groupe d’une cinquantaine de personnes, en marge d’une manifestation anti-immigration."
+    },
+    {
+     "fact": "非盟委员会称该谋杀情节可能构成反人类罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les circonstances (...) du meurtre pourraient constituer un crime contre l’humanité"
+    },
+    {
+     "fact": "近几个月排外示威已造成多人死亡，数万人逃离该国",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces manifestations xénophobes ... ont déjà fait plusieurs morts ces derniers mois ... Des dizaines de milliers de personnes ont fui le pays"
+    },
+    {
+     "fact": "事件发生时间为2026年10月22日星期四，地点在德班市中心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "battu à mort dans le centre-ville de Durban jeudi 22 octobre"
+    }
+   ],
+   "uncertainties": [
+    "受害者身份与国籍未获确认",
+    "施暴者人数及具体情节依据南非警方单方说法，尚未获独立证实",
+    "目前仅一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "南非：非盟委员会谴责一名外国公民在德班被杀害",
+   "summary_zh": "非洲人权委员会敦促南非将针对外国人的袭击定性为“危机”。该声明针对上周在德班市中心发生的一起事件：一名外国公民据称被约五十名排外示威者殴打致死。报道称，近几个月排外示威已造成多人死亡，数万人逃离南非，而施暴者很少被逮捕。",
+   "event_type": "civil_unrest",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": null,
+    "city": "德班",
+    "site": "市中心",
+    "raw_text": "Durban city center"
+   },
+   "key_facts": [
+    {
+     "fact": "非盟非洲人权委员会谴责一名外国公民在德班被杀害",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "la commission de l’UA dénonce le meurtre d’un ressortissant étranger à Durban"
+    },
+    {
+     "fact": "据南非警方称，受害者据称在反移民示威期间被约五十人群体殴打致死",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon la police sud-africaine, la victime aurait été agressée par un groupe d’une cinquantaine de personnes, en marge d’une manifestation anti-immigration."
+    },
+    {
+     "fact": "非盟委员会称该谋杀情节可能构成反人类罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les circonstances (...) du meurtre pourraient constituer un crime contre l’humanité"
+    },
+    {
+     "fact": "近几个月排外示威已造成多人死亡，数万人逃离该国",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces manifestations xénophobes ... ont déjà fait plusieurs morts ces derniers mois ... Des dizaines de milliers de personnes ont fui le pays"
+    },
+    {
+     "fact": "事件发生时间为2026年10月22日星期四，地点在德班市中心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "battu à mort dans le centre-ville de Durban jeudi 22 octobre"
+    }
+   ],
+   "uncertainties": [
+    "受害者身份与国籍未获确认",
+    "施暴者人数及具体情节依据南非警方单方说法，尚未获独立证实",
+    "目前仅一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_a3287274c853a8fa",
+ "disease_event_id": null,
+ "country_code": "ZA"
+}

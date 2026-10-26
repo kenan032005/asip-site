@@ -1,35 +1,42 @@
 {
  "schema": "gdelt-rate-limiter-v1",
  "host": "api.gdeltproject.org",
- "requests": 4,
- "logical_queries": 4,
+ "requests": 3,
+ "logical_queries": 3,
  "cache_hits": 0,
  "status_counts": {
-  "429": 1,
-  "200": 3
+  "200": 1,
+  "429": 2
  },
- "current_interval_s": 160.0,
+ "current_interval_s": 300.0,
  "min_interval_s": 20.0,
  "max_interval_s": 300.0,
- "backoff_events": 3,
+ "backoff_events": 5,
  "retry_after_honored": 0,
  "request_budget": 120,
  "budget_exhausted": false,
- "physical_http_attempts": 7,
+ "physical_http_attempts": 8,
  "deadline_skips": 0,
  "hard_deadline_set": true,
- "actual_http_requests": 7,
+ "actual_http_requests": 8,
  "body_class_counts": {
-  "json_structure": 2,
-  "non_json": 1
+  "json_structure": 1
  },
  "counting_note": "logical_queries/requests=逻辑查询数（已扣除缓存命中与预算拒绝）；physical_http_attempts/actual_http_requests=物理 HTTP 尝试数，**含 429/超时重试**（一次逻辑查询可产生多次物理尝试）；labeled_* 与 failure_reasons 均按 source_id×国家管线聚合，一组共享查询会被多个源重复计数，既不是逻辑查询数也不是物理请求数",
- "labeled_requests": 4,
+ "labeled_requests": 3,
  "labeled_success": 0,
- "labeled_rate_limited": 2,
+ "labeled_rate_limited": 3,
  "success_rate": 0.0,
- "rate_limited_rate": 0.5,
+ "rate_limited_rate": 1.0,
  "by_label": {
+  "|尼日尔": {
+   "requests": 1,
+   "success": 0,
+   "rate_limited": 1,
+   "errors": 0,
+   "cache_hits": 0,
+   "items": 0
+  },
   "|Niger": {
    "requests": 1,
    "success": 0,
@@ -38,23 +45,7 @@
    "cache_hits": 0,
    "items": 0
   },
-  "|尼日尔": {
-   "requests": 1,
-   "success": 0,
-   "rate_limited": 0,
-   "errors": 1,
-   "cache_hits": 0,
-   "items": 0
-  },
   "|Chad": {
-   "requests": 1,
-   "success": 0,
-   "rate_limited": 0,
-   "errors": 1,
-   "cache_hits": 0,
-   "items": 0
-  },
-  "|乍得": {
    "requests": 1,
    "success": 0,
    "rate_limited": 1,
