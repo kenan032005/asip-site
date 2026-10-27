@@ -1,0 +1,119 @@
+{
+ "label": "Se0336dc1",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "540aa3c6e2957139ebf6e0ea6c928f07a7e2a7826e7f6b6194eaf4607eb4e6b2",
+ "tokens": {
+  "input_tokens": 2431,
+  "output_tokens": 499,
+  "total_tokens": 2930
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔指控乍得无人机越境空袭并诉诸联合国",
+   "summary_zh": "尼日尔政府指控乍得于2026年10月24日凌晨对尼日尔领土发动无人机空袭，并称此次行动得到法国支持。尼日尔方面表示将乍得视为该事件的完全责任方，已召见乍得驻尼亚美大使并向联合国正式提出申诉。相关指控目前为尼日尔单方面说法，尚未获得乍得方面或独立来源确认。",
+   "event_type": "border_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "territoire du Niger (frappe menée depuis le Tchad)"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔政府指控乍得于2026年10月24日凌晨对尼日尔领土发动无人机空袭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'exécutif nigérien affirme que le territoire national a été la cible d'une frappe aérienne par drone le 24 octobre vers 1 heure du matin"
+    },
+    {
+     "fact": "尼日尔方面称此次行动自乍得发起并得到法国支持",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cette opération aurait été menée depuis le Tchad « avec l'appui d'une puissance étrangère, la France »"
+    },
+    {
+     "fact": "尼日尔称乍得对此事件负完全责任",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement nigérien « tient le Tchad pour entièrement responsable » de cet acte"
+    },
+    {
+     "fact": "尼日尔已召见乍得驻尼亚美大使并向联合国提出申诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les autorités nigériennes ont annoncé la convocation de l'ambassadeur du Tchad à Niamey ainsi que la saisine officielle des Nations Unies"
+    }
+   ],
+   "uncertainties": [
+    "无人机空袭是否确实发生尚未获得独立证实",
+    "乍得方面尚未回应相关指控",
+    "法国参与的说法仅为尼日尔单方面指控",
+    "目前主要依据尼日尔官方声明，属单一来源报道"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔指控乍得无人机越境空袭并诉诸联合国",
+   "summary_zh": "尼日尔政府指控乍得于2026年10月24日凌晨对尼日尔领土发动无人机空袭，并称此次行动得到法国支持。尼日尔方面表示将乍得视为该事件的完全责任方，已召见乍得驻尼亚美大使并向联合国正式提出申诉。相关指控目前为尼日尔单方面说法，尚未获得乍得方面或独立来源确认。",
+   "event_type": "border_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "territoire du Niger (frappe menée depuis le Tchad)"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔政府指控乍得于2026年10月24日凌晨对尼日尔领土发动无人机空袭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'exécutif nigérien affirme que le territoire national a été la cible d'une frappe aérienne par drone le 24 octobre vers 1 heure du matin"
+    },
+    {
+     "fact": "尼日尔方面称此次行动自乍得发起并得到法国支持",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cette opération aurait été menée depuis le Tchad « avec l'appui d'une puissance étrangère, la France »"
+    },
+    {
+     "fact": "尼日尔称乍得对此事件负完全责任",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement nigérien « tient le Tchad pour entièrement responsable » de cet acte"
+    },
+    {
+     "fact": "尼日尔已召见乍得驻尼亚美大使并向联合国提出申诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les autorités nigériennes ont annoncé la convocation de l'ambassadeur du Tchad à Niamey ainsi que la saisine officielle des Nations Unies"
+    }
+   ],
+   "uncertainties": [
+    "无人机空袭是否确实发生尚未获得独立证实",
+    "乍得方面尚未回应相关指控",
+    "法国参与的说法仅为尼日尔单方面指控",
+    "目前主要依据尼日尔官方声明，属单一来源报道"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_27ea66bfe0336dc1",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

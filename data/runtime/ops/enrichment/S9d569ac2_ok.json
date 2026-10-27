@@ -1,0 +1,115 @@
+{
+ "label": "S9d569ac2",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6548cd9c1c8d434c2b6959483921afed49db091fcbd507e2085c892c49f6a246",
+ "tokens": {
+  "input_tokens": 2787,
+  "output_tokens": 518,
+  "total_tokens": 3305
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "马里：巴马科市长因“非法地块”案被判十年监禁",
+   "summary_zh": "马里巴马科国家经济与金融中心刑事庭于10月26日就巴马科机场区域“非法”地块案作出判决，包括巴马科前市长阿达马·桑加雷在内的七名被告被判处十年监禁，另有一名缺席被告被判二十年并遭国际通缉。辩方称当时总统曾口头下令分配地块，并已决定上诉。目前该消息仅来自单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "MLI",
+   "location": {
+    "country_iso3": "MLI",
+    "admin1": null,
+    "city": "巴马科",
+    "site": "巴马科机场区域",
+    "raw_text": "zone aéroportuaire de Bamako"
+   },
+   "key_facts": [
+    {
+     "fact": "巴马科国家经济与金融中心刑事庭就机场区域非法地块案作出判决",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la chambre criminelle du Pôle national économique et financier de Bamako a rendu, ce lundi 26 octobre, son délibéré dans l’affaire des lotissements « illégaux » de la zone aéroportuaire de Bamako"
+    },
+    {
+     "fact": "包括巴马科前市长阿达马·桑加雷在内的七名被告被判处十年监禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sept des prévenus, dont un ancien maire de Bamako, ont été condamnés à dix ans de prison"
+    },
+    {
+     "fact": "一名缺席被告被判二十年监禁并遭国际通缉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un autre élu, absent au procès, a été condamné à vingt ans de prison avec un mandat d’arrêt international décerné"
+    },
+    {
+     "fact": "辩方称时任总统曾口头下令分配地块，并已决定上诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "c’est le Président de la République de l’époque ... qui ... a donné au maire de Bamako l’ordre verbal d’attribuer les parcelles ... La défense a décidé de faire appel"
+    }
+   ],
+   "uncertainties": [
+    "辩方关于时任总统口头下令的说法尚未获独立证实",
+    "目前仅单一来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "马里：巴马科市长因“非法地块”案被判十年监禁",
+   "summary_zh": "马里巴马科国家经济与金融中心刑事庭于10月26日就巴马科机场区域“非法”地块案作出判决，包括巴马科前市长阿达马·桑加雷在内的七名被告被判处十年监禁，另有一名缺席被告被判二十年并遭国际通缉。辩方称当时总统曾口头下令分配地块，并已决定上诉。目前该消息仅来自单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "MLI",
+   "location": {
+    "country_iso3": "MLI",
+    "admin1": null,
+    "city": "巴马科",
+    "site": "巴马科机场区域",
+    "raw_text": "zone aéroportuaire de Bamako"
+   },
+   "key_facts": [
+    {
+     "fact": "巴马科国家经济与金融中心刑事庭就机场区域非法地块案作出判决",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la chambre criminelle du Pôle national économique et financier de Bamako a rendu, ce lundi 26 octobre, son délibéré dans l’affaire des lotissements « illégaux » de la zone aéroportuaire de Bamako"
+    },
+    {
+     "fact": "包括巴马科前市长阿达马·桑加雷在内的七名被告被判处十年监禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sept des prévenus, dont un ancien maire de Bamako, ont été condamnés à dix ans de prison"
+    },
+    {
+     "fact": "一名缺席被告被判二十年监禁并遭国际通缉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un autre élu, absent au procès, a été condamné à vingt ans de prison avec un mandat d’arrêt international décerné"
+    },
+    {
+     "fact": "辩方称时任总统曾口头下令分配地块，并已决定上诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "c’est le Président de la République de l’époque ... qui ... a donné au maire de Bamako l’ordre verbal d’attribuer les parcelles ... La défense a décidé de faire appel"
+    }
+   ],
+   "uncertainties": [
+    "辩方关于时任总统口头下令的说法尚未获独立证实",
+    "目前仅单一来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_b72f81619d569ac2",
+ "disease_event_id": null,
+ "country_code": "ET"
+}
