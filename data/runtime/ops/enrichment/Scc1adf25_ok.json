@@ -1,0 +1,126 @@
+{
+ "label": "Scc1adf25",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "473a378c795b186308797ef5071ca748c057af03bc279fea2d7b8ee8691c654c",
+ "tokens": {
+  "input_tokens": 2540,
+  "output_tokens": 454,
+  "total_tokens": 2994
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"“终结饥饿行动”每年动员超过10亿美元的说法来自该组织自身，尚未获得独立证实\", \"该计划能否在两年内取得可衡量成果尚待观察\"]",
+    "after": "[\"“终结饥饿行动”每年动员超过10亿美元的说法来自该组织自身，尚未获得独立证实\", \"该计划能否在两年内取得可衡量成果尚待观察\", \"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚联邦政府与国际组织合作应对全国饥饿与儿童营养不良",
+   "summary_zh": "尼日利亚联邦政府通过卫生与社会福利部，与国际组织及慈善机构合作，共同应对全国范围内的饥饿和儿童营养不良问题。卫生部长阿里·帕特教授在阿布贾总统府表示，该部已与第一夫人发起的“ renewed hope initiative”建立战略伙伴关系。合作方“终结饥饿行动”称计划每年动员超过10亿美元用于防止儿童因饥饿死亡，并将尼日利亚列为主要示范地点。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": "总统府",
+    "raw_text": "State House, Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦政府通过卫生与社会福利部与国际组织及慈善机构合作应对饥饿和儿童营养不良",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Government, through the Ministry of Health and Social Welfare, has partnered with international organisations and philanthropic institutions to combat hunger and child malnutrition across Nigeria."
+    },
+    {
+     "fact": "卫生部长阿里·帕特在阿布贾总统府宣布该合作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Coordinating Minister of Health and Social Welfare, Prof. Ali Pate, disclosed this on Monday at the State House, Abuja"
+    },
+    {
+     "fact": "合作方“终结饥饿行动”称计划每年动员超过10亿美元用于防止儿童因饥饿死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Moore said the initiative aimed to mobilise more than one billion dollars annually towards preventing child deaths caused by starvation"
+    },
+    {
+     "fact": "该营养支持计划覆盖尼日利亚全部774个地方政府区域",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "across all 774 Local Government Areas (LGAs) of Nigeria"
+    }
+   ],
+   "uncertainties": [
+    "“终结饥饿行动”每年动员超过10亿美元的说法来自该组织自身，尚未获得独立证实",
+    "该计划能否在两年内取得可衡量成果尚待观察"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚联邦政府与国际组织合作应对全国饥饿与儿童营养不良",
+   "summary_zh": "尼日利亚联邦政府通过卫生与社会福利部，与国际组织及慈善机构合作，共同应对全国范围内的饥饿和儿童营养不良问题。卫生部长阿里·帕特教授在阿布贾总统府表示，该部已与第一夫人发起的“ renewed hope initiative”建立战略伙伴关系。合作方“终结饥饿行动”称计划每年动员超过10亿美元用于防止儿童因饥饿死亡，并将尼日利亚列为主要示范地点。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": "总统府",
+    "raw_text": "State House, Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦政府通过卫生与社会福利部与国际组织及慈善机构合作应对饥饿和儿童营养不良",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Government, through the Ministry of Health and Social Welfare, has partnered with international organisations and philanthropic institutions to combat hunger and child malnutrition across Nigeria."
+    },
+    {
+     "fact": "卫生部长阿里·帕特在阿布贾总统府宣布该合作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Coordinating Minister of Health and Social Welfare, Prof. Ali Pate, disclosed this on Monday at the State House, Abuja"
+    },
+    {
+     "fact": "合作方“终结饥饿行动”称计划每年动员超过10亿美元用于防止儿童因饥饿死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Moore said the initiative aimed to mobilise more than one billion dollars annually towards preventing child deaths caused by starvation"
+    },
+    {
+     "fact": "该营养支持计划覆盖尼日利亚全部774个地方政府区域",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "across all 774 Local Government Areas (LGAs) of Nigeria"
+    }
+   ],
+   "uncertainties": [
+    "“终结饥饿行动”每年动员超过10亿美元的说法来自该组织自身，尚未获得独立证实",
+    "该计划能否在两年内取得可衡量成果尚待观察",
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_1249446ccc1adf25",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

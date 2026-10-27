@@ -1,0 +1,131 @@
+{
+ "label": "S157be45b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "aeb7c0c26a7cf3a020e2b1460a6eaa94e4d8468fc398bf993efec60ba7f725d6",
+ "tokens": {
+  "input_tokens": 2781,
+  "output_tokens": 599,
+  "total_tokens": 3380
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔：尼亚美指控乍得在法国支持下发动致命无人机袭击",
+   "summary_zh": "尼日尔政府指控乍得在法国支持下对尼日尔领土发动无人机袭击，造成两名平民死亡、多人受伤。据尼日尔当局称，袭击发生于10月24日凌晨1时左右，地点在阿加德兹地区埃米卢卢一带，袭击据称从乍得境内发起。尼亚美方面宣布召见乍得大使提出正式抗议，并诉诸联合国和非洲联盟，要求开展独立国际调查。相关指控尚未获得独立核实。",
+   "event_type": "border_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "zone d’Émiloulou, région d’Agadez (nord), depuis le territoire tchadien"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔政府指控乍得在法国支持下发动无人机袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement nigérien a accusé le Tchad d’avoir mené, avec le soutien de la France, une frappe de drone sur son territoire"
+    },
+    {
+     "fact": "袭击据称造成两名平民死亡、多人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ayant fait deux morts et plusieurs blessés civils"
+    },
+    {
+     "fact": "袭击据称发生于10月24日凌晨1时左右，地点在阿加德兹地区埃米卢卢一带",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’attaque s’est produite le 24 octobre, vers 01H00, dans la zone d’Émiloulou, dans la région d’Agadez (nord)"
+    },
+    {
+     "fact": "尼亚美宣布召见乍得大使并提出正式抗议，同时诉诸联合国和非洲联盟",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "convoquer l’ambassadeur du Tchad pour lui notifier une protestation officielle, de saisir le Conseil de sécurité de l’ONU et le Conseil de paix et de sécurité de l’Union africaine"
+    },
+    {
+     "fact": "针对乍得和法国的指控无法获得独立核实",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les accusations visant le Tchad et la France n’ont pas pu être vérifiées de manière indépendante."
+    }
+   ],
+   "uncertainties": [
+    "针对乍得和法国的指控尚未获得独立核实",
+    "尼日尔当局未提供支撑其结论的技术细节",
+    "袭击是否确从乍得境内发起尚未证实",
+    "伤亡数字为尼日尔官方单方面说法",
+    "事件时间存在差异（冲突标记：time_difference）"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔：尼亚美指控乍得在法国支持下发动致命无人机袭击",
+   "summary_zh": "尼日尔政府指控乍得在法国支持下对尼日尔领土发动无人机袭击，造成两名平民死亡、多人受伤。据尼日尔当局称，袭击发生于10月24日凌晨1时左右，地点在阿加德兹地区埃米卢卢一带，袭击据称从乍得境内发起。尼亚美方面宣布召见乍得大使提出正式抗议，并诉诸联合国和非洲联盟，要求开展独立国际调查。相关指控尚未获得独立核实。",
+   "event_type": "border_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "zone d’Émiloulou, région d’Agadez (nord), depuis le territoire tchadien"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔政府指控乍得在法国支持下发动无人机袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement nigérien a accusé le Tchad d’avoir mené, avec le soutien de la France, une frappe de drone sur son territoire"
+    },
+    {
+     "fact": "袭击据称造成两名平民死亡、多人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ayant fait deux morts et plusieurs blessés civils"
+    },
+    {
+     "fact": "袭击据称发生于10月24日凌晨1时左右，地点在阿加德兹地区埃米卢卢一带",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’attaque s’est produite le 24 octobre, vers 01H00, dans la zone d’Émiloulou, dans la région d’Agadez (nord)"
+    },
+    {
+     "fact": "尼亚美宣布召见乍得大使并提出正式抗议，同时诉诸联合国和非洲联盟",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "convoquer l’ambassadeur du Tchad pour lui notifier une protestation officielle, de saisir le Conseil de sécurité de l’ONU et le Conseil de paix et de sécurité de l’Union africaine"
+    },
+    {
+     "fact": "针对乍得和法国的指控无法获得独立核实",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les accusations visant le Tchad et la France n’ont pas pu être vérifiées de manière indépendante."
+    }
+   ],
+   "uncertainties": [
+    "针对乍得和法国的指控尚未获得独立核实",
+    "尼日尔当局未提供支撑其结论的技术细节",
+    "袭击是否确从乍得境内发起尚未证实",
+    "伤亡数字为尼日尔官方单方面说法",
+    "事件时间存在差异（冲突标记：time_difference）"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_1460544d157be45b",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

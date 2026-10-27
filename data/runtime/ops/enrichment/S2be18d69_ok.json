@@ -1,0 +1,126 @@
+{
+ "label": "S2be18d69",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a3766054c1e5a0a7c25701707393d7caa18d832a065481a1839c5a5a66e35859",
+ "tokens": {
+  "input_tokens": 2294,
+  "output_tokens": 447,
+  "total_tokens": 2741
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"事件目前为单一来源报道，尚缺乏交叉验证\", \"患者当前传染性状态及后续公共卫生风险有待核实\"]",
+    "after": "[\"事件目前为单一来源报道，尚缺乏交叉验证\", \"患者当前传染性状态及后续公共卫生风险有待核实\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚将埃博拉患者空运至瑞士",
+   "summary_zh": "尼日利亚卫生与社会福利部长阿里·帕特确认，该国首例输入性埃博拉病毒病患者因临床状况好转，已获准从阿布贾撤离至瑞士。患者为一名瑞士外交官的妻子，其配偶无症状并一同撤离。部长强调，患者病情改善且实验室结果趋近基线，并不意味着她已不再具有传染性。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": "纳姆迪·阿齐基韦国际机场私人飞机航站楼",
+    "raw_text": "Nnamdi Azikiwe International Airport in Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚卫生部长确认该国首例输入性埃博拉患者被撤离至瑞士",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "NIGERIA’S Minister of Health and Social Welfare, Ali Pate, has confirmed the evacuation of the country’s first imported Ebola virus disease patient to Switzerland"
+    },
+    {
+     "fact": "患者为一名瑞士外交官的妻子，其配偶无症状并一同撤离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The patient, a wife of a Swiss diplomat in Nigeria, was evacuated alongside her spouse, who has remained asymptomatic"
+    },
+    {
+     "fact": "部长表示患者病情改善不代表已不再具有传染性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "This does not mean she is not still infectious, hence the strict protocols in place"
+    },
+    {
+     "fact": "撤离行动于周一早6时在阿布贾机场私人飞机航站楼进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "heightened activity at the private jet wing of the Nnamdi Azikiwe International Airport in Abuja at 6 a.m. on Monday"
+    }
+   ],
+   "uncertainties": [
+    "事件目前为单一来源报道，尚缺乏交叉验证",
+    "患者当前传染性状态及后续公共卫生风险有待核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚将埃博拉患者空运至瑞士",
+   "summary_zh": "尼日利亚卫生与社会福利部长阿里·帕特确认，该国首例输入性埃博拉病毒病患者因临床状况好转，已获准从阿布贾撤离至瑞士。患者为一名瑞士外交官的妻子，其配偶无症状并一同撤离。部长强调，患者病情改善且实验室结果趋近基线，并不意味着她已不再具有传染性。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": "纳姆迪·阿齐基韦国际机场私人飞机航站楼",
+    "raw_text": "Nnamdi Azikiwe International Airport in Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚卫生部长确认该国首例输入性埃博拉患者被撤离至瑞士",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "NIGERIA’S Minister of Health and Social Welfare, Ali Pate, has confirmed the evacuation of the country’s first imported Ebola virus disease patient to Switzerland"
+    },
+    {
+     "fact": "患者为一名瑞士外交官的妻子，其配偶无症状并一同撤离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The patient, a wife of a Swiss diplomat in Nigeria, was evacuated alongside her spouse, who has remained asymptomatic"
+    },
+    {
+     "fact": "部长表示患者病情改善不代表已不再具有传染性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "This does not mean she is not still infectious, hence the strict protocols in place"
+    },
+    {
+     "fact": "撤离行动于周一早6时在阿布贾机场私人飞机航站楼进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "heightened activity at the private jet wing of the Nnamdi Azikiwe International Airport in Abuja at 6 a.m. on Monday"
+    }
+   ],
+   "uncertainties": [
+    "事件目前为单一来源报道，尚缺乏交叉验证",
+    "患者当前传染性状态及后续公共卫生风险有待核实",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_51d6e7132be18d69",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
