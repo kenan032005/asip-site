@@ -279,7 +279,29 @@ class Repository:
         return self._load_items(self._canonical("quarantine.json"))
 
     def save_quarantine(self, items: list, run_id: str = "") -> dict:
-        return self._save_dedup(self._canonical("quarantine.json"), items, run_id, "quarantine_id", "quarantine")
+        """asip5：分片模式走 QuarantineStore.upsert（仍先做 schema 校验）；
+        未迁移（旧单体）时保持原有 _save_dedup 行为，字节级兼容。"""
+        rid = run_id or self.run_id or generate_run_id()
+        pre = self._validate_records(items, "quarantine", "quarantine_id")
+        if pre:
+            raise RepositorySchemaError(
+                f"quarantine: {len(pre)} 条记录不合规，整个保存已中止（原文件保持不变）",
+                errors=pre)
+        try:
+            from data.quarantine_store import QuarantineStore
+            store = QuarantineStore(root=self.root)
+            if store.is_sharded():
+                res = store.upsert(items, run_id=rid)
+                self.log["added"] += res.get("added", 0)
+                self.log["modified"] += res.get("modified", 0)
+                self.log["skipped"] += res.get("skipped", 0)
+                self.log["failed"] += res.get("failed", 0)
+                return res
+        except RepositorySchemaError:
+            raise
+        except Exception:
+            pass  # 回退旧路径（不因分片不可用而中断生产）
+        return self._save_dedup(self._canonical("quarantine.json"), items, rid, "quarantine_id", "quarantine")
 
     # ── Sources（参考配置，非运行时数据池）────────────
     def load_sources(self) -> list:

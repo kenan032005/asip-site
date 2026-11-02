@@ -395,8 +395,18 @@ def _build_weekly_input(country, social, disease, cutoff):
 # ────────────────────────────────────────────────────────────────────────────
 
 def _flash_provider():
+    """asip5：所有付费路径的唯一 provider 出口。
+
+    - 调用前：`paid_gate.assert_paid_allowed()`（暂停/熔断/体积超限时直接抛，不发请求）
+    - 调用后：`ai_ledger` 统一记账（组件/模型/token/缓存/重试/估算费用）
+    """
     from scripts.ai.providers.deepseek_v4_flash import DeepSeekV4FlashProvider
-    return DeepSeekV4FlashProvider()
+    inner = DeepSeekV4FlashProvider()
+    try:
+        from scripts.ops import ai_ledger
+        return ai_ledger.wrap_provider(inner)
+    except Exception:
+        return inner
 
 
 def _enrich_prompt(task_type):

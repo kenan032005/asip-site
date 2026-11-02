@@ -168,6 +168,16 @@ def main():
 
     # 追加隔离
     if quarantine_entries:
+        # asip5：优先走双格式存储（分片模式只重写当月分片，不再整体重写 100MB）
+        try:
+            from data.quarantine_store import QuarantineStore
+            _store = QuarantineStore()
+            if _store.is_sharded():
+                _res = _store.upsert(quarantine_entries)
+                print("隔离区: +%s (总计 %s)" % (_res.get("added"), _res.get("total_items")))
+                return 0
+        except Exception as _e:  # noqa: BLE001
+            print("隔离区分片写入失败，回退单体:", _e)
         q = load_json(QUARANTINE_PATH, {"items": []})
         existing_ids = {e.get("candidate_id") or e.get("original_event_id") for e in q.get("items", [])}
         new_q = [e for e in quarantine_entries if e["candidate_id"] not in existing_ids]

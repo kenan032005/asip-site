@@ -1195,20 +1195,26 @@ def _make_legacy_record(nu, state, **extra):
 
 
 def _load_quarantine_urls():
+    """C8/asip5：兼容单体与分片两种存储（分片走 QuarantineStore，失败回退旧实现）。"""
     try:
-        path = os.path.join(ROOT, "data", "canonical", "quarantine.json")
-        with open(path, "r", encoding="utf-8") as f:
-            q = json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
-        return {}
-    urls = {}
-    for item in q.get("items", []):
-        oid = norm_url(item.get("original_id", ""))
-        if oid and item.get("reason_code") not in ("", "not_security_relevant",
-                                                    "weak_signal_needs_review",
-                                                    "wrong_country"):
-            urls[oid] = item.get("quarantine_id", "")
-    return urls
+        from data.quarantine_store import QuarantineStore
+        return QuarantineStore(root=ROOT).url_map()
+    except Exception:
+        # 回退：旧单体直读（保证新代码在旧数据/旧环境下仍可运行）
+        try:
+            path = os.path.join(ROOT, "data", "canonical", "quarantine.json")
+            with open(path, "r", encoding="utf-8") as f:
+                q = json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError):
+            return {}
+        urls = {}
+        for item in q.get("items", []):
+            oid = norm_url(item.get("original_id", ""))
+            if oid and item.get("reason_code") not in ("", "not_security_relevant",
+                                                        "weak_signal_needs_review",
+                                                        "wrong_country"):
+                urls[oid] = item.get("quarantine_id", "")
+        return urls
 
 
 # ── 向后兼容：保留旧函数签名，内部委托到集中式状态 ──

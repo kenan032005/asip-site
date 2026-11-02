@@ -304,6 +304,9 @@ class DeepSeekV4FlashProvider(BaseAIProvider):
             "input_tokens": usage.get("prompt_tokens"),
             "output_tokens": usage.get("completion_tokens"),
             "total_tokens": usage.get("total_tokens"),
+            # asip5：供应商返回的缓存命中/未命中 token（缺失 → None，不臆造 0）
+            "cache_hit_tokens": usage.get("prompt_cache_hit_tokens"),
+            "cache_miss_tokens": usage.get("prompt_cache_miss_tokens"),
             "finish_reason": finish_reason,
             "reasoning_content_present": bool(reasoning_content),
             "reasoning_content_length_chars": len(reasoning_content) if reasoning_content else 0,

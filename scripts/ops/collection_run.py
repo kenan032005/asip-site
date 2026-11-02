@@ -112,6 +112,16 @@ def run_collection(execute=False, emit=lambda s: print(s), state=None, ops_run=N
     """execute=False：仅编排记账（shadow/dry）；True：调用 stage3_collect_v2。"""
     state = state or ps.load_state()
     started = ps._utcnow_iso()
+    # asip5 P0-R1：暂停门禁（COLLECTION_EXECUTIONS=0）
+    if execute:
+        try:
+            from scripts.ops import paid_gate as _pg
+            _p, _w = _pg.paused()
+            if _p:
+                emit("COLLECTION_SKIPPED_PAUSED = %s" % _w)
+                return False
+        except Exception:
+            pass
     ps.record_run(state, "last_collection_run", ok=False)
     ok = True
     if execute:

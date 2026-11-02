@@ -315,10 +315,14 @@ def plan_due_tasks(state, now_bjt=None, schedule_enabled=True):
     return {"enabled": True, "due": due, "now_bjt": now.isoformat()}
 
 
-def _run_script(args, emit, timeout=1800):
+def _run_script(args, emit, timeout=1800, component=""):
     emit("$ python %s" % " ".join(args))
+    _env = dict(os.environ)
+    if component:
+        _env["ASIP_AI_COMPONENT"] = component
+    _env.setdefault("ASIP_RUN_ID", os.environ.get("GITHUB_RUN_ID") or "")
     try:
-        r = subprocess.run([sys.executable] + args, cwd=str(ROOT),
+        r = subprocess.run([sys.executable] + args, cwd=str(ROOT), env=_env,
                            capture_output=True, text=True, timeout=timeout)
         emit((r.stdout or "")[-2500:])
         if r.returncode != 0:
@@ -398,6 +402,22 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
     trigger = "manual_canary" if canary else (tm.get("trigger_source")
                                               or "scheduled_orchestrator")
     root = Path(data_root) if data_root else ROOT / "data"
+
+    # ── asip5 P0-R1：最外层暂停门禁（先于任何付费子任务）──────────────
+    # PRODUCTION_SCHEDULE_ENABLED=false 只清空 due 列表；execute() 仍会运行
+    # news_localization / assessment / homepage_brief 等无条件付费子任务。
+    # 因此在入口即判定：暂停 → 立即返回，不采集、不调用模型、不写状态。
+    try:
+        from scripts.ops import paid_gate as _pg
+        _paused, _why = _pg.paused()
+    except Exception as _e:  # noqa: BLE001
+        _paused, _why = True, "gate_unavailable:%s" % _e
+    if _paused:
+        emit("PAID_TASKS_PAUSED = %s" % _why)
+        return {"deploy_required": False, "deploy_request": None,
+                "executed": [], "pause_reason": _why,
+                "results": {"paused": {"ok": True, "detail": _why}}}
+
     run = ops.new_run("asip-production-orchestrator",
                       os.environ.get("GITHUB_RUN_ID") or "local")
     run["notes"].append("trigger=%s" % trigger)
@@ -437,6 +457,21 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
             state = _reload_state(state)
             if ok:
                 ps.record_run(state, "last_successful_collection", ok=True)
+                # asip5 P0-R1：采集完成立刻持久化，避免"采集 50min + AI 超时"丢掉整轮成果
+                # 并导致下轮重复采集/重复付费。失败 → strike 并中止后续付费任务。
+                if (os.environ.get("ASIP_COMMIT_AFTER_COLLECTION", "1") or "1").strip() != "0":
+                    try:
+                        from scripts.ops.commit_state import commit_now as _commit_now
+                        _c = _commit_now("ops: collection checkpoint (%s)" % trigger,
+                                         after="collection")
+                        emit("STATE_CHECKPOINT = %s" % json.dumps(_c, ensure_ascii=False)[:300])
+                        if not _c.get("ok"):
+                            results[label] = {"ok": False, "detail": "state_checkpoint_failed",
+                                              "error": _c.get("error")}
+                            emit("STATE_CHECKPOINT_FAILED -> abort paid tasks")
+                            return False
+                    except Exception as _e:  # noqa: BLE001
+                        emit("STATE_CHECKPOINT_ERROR = %s" % _e)
                 # §十四：真实采集成功后刷新 source health 快照
                 sh_ok = _run_script(["scripts/ops/source_health.py"], emit)
                 results["source_health"] = {"ok": sh_ok,
@@ -472,7 +507,7 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
                 results[label] = {"ok": True, "detail": "no_new_eligible_zero_calls",
                                   "ai_calls": 0}
                 return True
-            ok = _run_script(["scripts/ops/enrichment_run.py", "--kind", "social"], emit)
+            ok = _run_script(["scripts/ops/enrichment_run.py", "--kind", "social"], emit, component="social_ai")
             state = _reload_state(state)
             if ok:
                 ps.record_run(state, "last_successful_ai", ok=True)
@@ -511,7 +546,7 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
                 results[label] = {"ok": True, "detail": "no_new_eligible_zero_calls",
                                   "ai_calls": 0}
                 return True
-            ok = _run_script(["scripts/ops/enrichment_run.py", "--kind", "disease"], emit)
+            ok = _run_script(["scripts/ops/enrichment_run.py", "--kind", "disease"], emit, component="disease_ai")
             state = _reload_state(state)
             if ok:
                 ps.record_run(state, "last_disease_run", ok=True)
@@ -608,7 +643,7 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
     # 否则长采集轮次被外层硬杀（实测 1858/2631/1817s 三轮失败）。3300s 给兜底留出
     # 优雅停机窗口，且 46min + 下游 AI/报告/导出 ≈ 仍在编排 job 的 60min 之内。
     results["news_localization"] = {
-        "ok": _run_script(["scripts/ops/news_localization_run.py"], emit,
+        "ok": _run_script(["scripts/ops/news_localization_run.py"], emit, component="news_localization",
                           timeout=3300),
         "detail": "news_localization"}
     # C7-5：先重建 C1A 情报流视图（news_stream）。
@@ -624,7 +659,7 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
         "ok": _run_script(["tools/c1a/build_views.py"], emit, timeout=600),
         "detail": "c1a_views"}
     results["daily_assessment"] = {
-        "ok": _run_script(["scripts/ops/assessment_run.py"], emit, timeout=900),
+        "ok": _run_script(["scripts/ops/assessment_run.py"], emit, timeout=900, component="daily_assessment"),
         "detail": "assessment_run"}
     # canonical 变更后必须再生成遗留/公开视图（events.json / pending / raw / quarantine /
     # public/published_events / current_metrics），否则 deploy 的 V17 canonical↔legacy 校验失败
@@ -636,7 +671,7 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
     # C7-5：首页情报事实包 → 首页 AI 简报（6h 节奏 + input_hash 缓存；无实质变化则 REAL_AI_CALLS=0）
     #       → 首页公开视图（8 板块 + 风险/活动地图 + 情报流）。必须在 executive_view 之后。
     results["homepage_brief"] = {
-        "ok": _run_script(["scripts/ops/homepage_brief_run.py"], emit, timeout=900),
+        "ok": _run_script(["scripts/ops/homepage_brief_run.py"], emit, timeout=900, component="homepage_brief"),
         "detail": "homepage_brief"}
     results["homepage_view"] = {
         "ok": _run_script(["scripts/ops/homepage_view.py", "--apply"], emit),
@@ -667,6 +702,23 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
         deploy_ctx["publication_localized_events"] = pub.get("localized")
         deploy_ctx["deploy_requested_at"] = ps._utcnow_iso()
     record_publication_digest(pub, ps._utcnow_iso(), emit)
+
+    # asip5 P0-R1：统一 AI 账本汇总（覆盖全部付费路径）+ 阈值告警
+    try:
+        from scripts.ops import ai_ledger as _al, paid_gate as _pg3
+        _sum = _al.write_summary(run_id=run.get("run_id"))
+        run["ai_usage"] = _sum
+        run["ai_calls_total"] = _sum["totals"]["calls"]
+        run["ai_tokens_input"] = _sum["totals"]["input_tokens"]
+        run["ai_tokens_output"] = _sum["totals"]["output_tokens"]
+        run["ai_cache_hit_tokens"] = _sum["totals"]["cache_hit_tokens"]
+        run["ai_estimated_cost"] = _sum["totals"]["estimated_cost"]
+        run["ai_cost_basis"] = ("estimated" if _sum["totals"]["estimated_cost_available"] else "unpriced")
+        for _a in _pg3.check_thresholds(state=state, ai_last_run_calls=_sum["totals"]["calls"]):
+            _pg3.emit_alert(_a["kind"], _a["detail"])
+            run["notes"].append("alert:%s" % _a["kind"])
+    except Exception as _e:  # noqa: BLE001
+        run["notes"].append("ai_ledger_summary_failed:%s" % str(_e)[:120])
 
     ops.finish_run(run, status="completed")
     # §K：deploy 请求与 provenance 持久化到 ops run（随 production-state 提交）。

@@ -102,7 +102,7 @@ class _ProvHarness:
     def __enter__(self):
         self._orig = (so._run_script, so._daily_report_meta, so._export_views,
                       so._reload_state, ps_record, ps_save, so.ops.save_ops)
-        so._run_script = lambda args, emit, timeout=1800: True
+        so._run_script = lambda args, emit, timeout=1800, component="": True
         so._daily_report_meta = lambda root: {
             "report_date": "2026-08-30", "classification": self.classification,
             "report_id": self.report_id, "fact_count": 1}
@@ -250,7 +250,7 @@ class TestDeployRequiredAndProvenance(unittest.TestCase):
         orig = so.ops.finish_run
         try:
             so.ops.finish_run = fake_finish
-            so._run_script = lambda args, emit, timeout=1800: True
+            so._run_script = lambda args, emit, timeout=1800, component="": True
             so._daily_report_meta = lambda root: {
                 "report_date": "2026-08-30", "classification": "LOW_DATA",
                 "report_id": "DAILY_20260830", "fact_count": 0}
