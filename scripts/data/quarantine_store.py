@@ -451,7 +451,7 @@ class QuarantineStore:
 
     # ── 迁移 / 校验 / 回滚 ──────────────────────────────────
     def migrate(self, dry_run=True, source_items=None, max_shard_bytes=None,
-                allow_remigrate=False):
+                allow_remigrate=False, expect_items=None):
         """单体 → 分片。dry_run 只计算不落盘。
 
         防呆：已经处于分片状态时**拒绝再次迁移**（否则会用旧单体覆盖迁移后新增的记录）。
@@ -477,6 +477,9 @@ class QuarantineStore:
                 raise QuarantineCorrupt(
                     "refusing to overwrite %d sharded records with %d source records "
                     "(would lose increments)" % (cur, len(items)))
+        if expect_items is not None and len(items) != int(expect_items):
+            raise QuarantineCorrupt("source item count %d != expected %d"
+                                    % (len(items), int(expect_items)))
         limit = int(max_shard_bytes or self.max_shard_bytes)
         by_month = {}
         for it in items:
@@ -643,6 +646,48 @@ class QuarantineStore:
         return {"ok": True, "path": str(dest), "bytes": dest.stat().st_size,
                 "sha256": dst_sha, "items": n,
                 "note": "离线备份：>100MB，禁止推回生产分支；仅用于离线恢复"}
+
+    def write_backup_manifest(self, dest_dir, expect_items=None, path=None):
+        """在离线备份目录写清单（sha256/bytes/items），供迁移前核对。"""
+        src = self.legacy
+        if not src.exists():
+            raise QuarantineCorrupt("legacy monolith not found for backup")
+        dest_dir = Path(dest_dir)
+        dest_dir.mkdir(parents=True, exist_ok=True)
+        payload = Path(dest_dir) / "quarantine.pre_migration.json"
+        rep = self.backup_legacy(payload, expect_items=expect_items)
+        manifest = {
+            "schema": "asip-quarantine-backup-v1",
+            "created_at": _now_iso(),
+            "source_path": "data/canonical/quarantine.json",
+            "backup_path": str(payload),
+            "bytes": rep["bytes"], "sha256": rep["sha256"], "items": rep["items"],
+            "note": "离线备份：>100MB，禁止推回生产分支；仅用于离线恢复",
+        }
+        mp = Path(path) if path else (dest_dir / "quarantine.backup.json")
+        _atomic_write(mp, (json.dumps(manifest, ensure_ascii=False, indent=1) + "\n").encode())
+        return dict(manifest, manifest_path=str(mp))
+
+    def assert_backup_matches(self, manifest_path):
+        """迁移前校验：清单的 sha256/bytes 必须与**当前**单体一致（防备份过期）。"""
+        try:
+            m = json.loads(Path(manifest_path).read_text(encoding="utf-8"))
+        except (FileNotFoundError, json.JSONDecodeError):
+            raise QuarantineCorrupt("backup manifest missing/invalid: %s" % manifest_path)
+        if m.get("schema") != "asip-quarantine-backup-v1":
+            raise QuarantineCorrupt("backup manifest schema invalid")
+        if not self.legacy.exists():
+            raise QuarantineCorrupt("legacy monolith missing")
+        cur_bytes = self.legacy.stat().st_size
+        cur_sha = _sha256(self.legacy)
+        if cur_bytes != int(m.get("bytes") or -1) or cur_sha != m.get("sha256"):
+            raise QuarantineCorrupt(
+                "backup does not match current monolith (bytes %s/%s sha %s/%s)"
+                % (cur_bytes, m.get("bytes"), cur_sha[:12], str(m.get("sha256"))[:12]))
+        if not Path(m.get("backup_path") or "").exists():
+            raise QuarantineCorrupt("backup file missing on disk: %s" % m.get("backup_path"))
+        return {"ok": True, "bytes": cur_bytes, "sha256": cur_sha, "items": m.get("items"),
+                "backup_path": m.get("backup_path")}
 
     def retire_monolith(self, backup_dir=None, expect_items=None):
         """分片迁移后**安全退役**旧单体：替换为小型墓碑清单（不含任何记录）。

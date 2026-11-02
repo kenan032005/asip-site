@@ -12,6 +12,7 @@
 
 设计：`commit_now()` 是唯一入口；`sync_to_state_branch()` 仅做复制并逐项校验。
 """
+import json
 import os
 import shutil
 import subprocess
@@ -202,8 +203,63 @@ def _verify_content(expect):
     return {"checked": True, "path": path}
 
 
+def _verify_remote_tree(sha, expected_paths):
+    """比对远端提交里 data/canonical 下每个文件的实际字节数与预期完全一致。"""
+    r = _git_ok(["ls-tree", "-r", "-l", sha, "--", "data/canonical"], "verify_remote_tree")
+    actual = {}
+    for line in (r.stdout or "").splitlines():
+        parts = line.split()
+        if len(parts) < 5:
+            continue
+        size, path = parts[3], parts[4]
+        try:
+            actual[path] = int(size)
+        except ValueError:
+            continue
+    want = {k: int(v) for k, v in (expected_paths or {}).items()
+            if k.startswith("data/canonical/")}
+    missing = sorted(set(want) - set(actual))
+    extra = sorted(set(actual) - set(want))
+    mismatch = {k: (want[k], actual[k]) for k in want if k in actual and actual[k] != want[k]}
+    if missing or extra or mismatch:
+        raise CheckpointError("verify_remote_tree",
+                              "tree mismatch: missing=%s extra=%s size_diff=%s"
+                              % (missing[:5], extra[:5], list(mismatch.items())[:5]))
+    return {"checked": True, "files": len(actual), "max_bytes": max(actual.values() or [0])}
+
+
+def verify_migration(root=None, expect_items=20461):
+    """迁移后的硬校验：墓碑/manifest/index/ids/全部分片/记录集合与哈希/预期树。"""
+    from scripts.data.quarantine_store import QuarantineStore, QuarantineCorrupt
+    base = Path(root) if root else STATE_DIR
+    store = QuarantineStore(root=base)
+    if store.mode() != "sharded":
+        raise CheckpointError("verify_migration", "store is not sharded")
+    if not store.legacy.exists():
+        raise CheckpointError("verify_migration", "tombstone missing")
+    tomb = json.loads(store.legacy.read_text(encoding="utf-8"))
+    if not tomb.get("retired") or tomb.get("items"):
+        raise CheckpointError("verify_migration", "tombstone invalid (retired/items)")
+    if store.legacy.stat().st_size >= 4096:
+        raise CheckpointError("verify_migration", "tombstone too large: %d"
+                              % store.legacy.stat().st_size)
+    try:
+        cons = store.verify_consistency()
+    except QuarantineCorrupt as e:
+        raise CheckpointError("verify_migration", "consistency failed: %s" % e)
+    if int(expect_items) and cons["on_disk"] != int(expect_items):
+        raise CheckpointError("verify_migration", "item count %d != expected %d"
+                              % (cons["on_disk"], expect_items))
+    tree = store.expected_tree()
+    if not tree["all_below_hard_limit"]:
+        raise CheckpointError("verify_migration", "tree contains oversize file")
+    return {"ok": True, "items": cons["on_disk"], "ids": cons["ids"],
+            "shards": cons["shards"], "tombstone_bytes": store.legacy.stat().st_size,
+            "tree": tree}
+
+
 def commit_now(message, after="state", expect=None, push=True, branch="production-state",
-               require_expect=False, guard_extra=None):
+               require_expect=False, guard_extra=None, state_only=False, migration=None):
     """提交 state 分支。返回 dict；失败抛 CheckpointError（不吞异常）。
 
     参数 expect: {"path","field","equals"/"present","fields_present":[...]}；
@@ -218,36 +274,81 @@ def commit_now(message, after="state", expect=None, push=True, branch="productio
             raise CheckpointError("expect_required",
                                   "commit_now(require_expect=True) 必须显式传 expect")
         info["stages"]["guard"] = assert_state_worktree(**(guard_extra or {}))
-        info["stages"]["sync"] = sync_to_state_branch()
+        if state_only:
+            # 迁移/墓碑等 state_src 内已生成的产物：**绝不**用代码树覆盖
+            info["stages"]["sync"] = {"skipped": "state_only"}
+        else:
+            info["stages"]["sync"] = sync_to_state_branch()
         _git_ok(["add", "-f"] + GIT_PATHS, "add")
         info["stages"]["add"] = {"paths": len(GIT_PATHS)}
 
         st = _git_ok(["status", "--porcelain"], "status").stdout
+        head0 = _git_ok(["rev-parse", "HEAD"], "rev-parse").stdout.strip()
+
+        # ── 无变更：require_expect 时仍必须验证 HEAD 内容与远端引用 ──
         if not (st or "").strip():
+            vc0 = _verify_content(expect) if expect else {"checked": False}
+            if expect and not vc0.get("checked"):
+                raise CheckpointError("verify_content", "content verification not performed")
+            remote0 = _remote_sha(branch) if push else None
+            if push and not remote0:
+                raise CheckpointError("verify_remote", "cannot read remote ref %s" % branch)
+            if push and remote0 != head0:
+                raise CheckpointError("verify_remote",
+                                      "no changes but remote %s != local %s"
+                                      % (remote0[:12], head0[:12]))
             info.update({"ok": True, "committed": False, "pushed": False,
-                         "content_verified": False,
+                         "content_verified": bool(vc0.get("checked")),
+                         "head": head0, "remote": remote0,
                          "message": "no changes (%s)" % after})
+            info["stages"]["verify_content"] = vc0
             return info
 
         _git_ok(["commit", "-m", "%s [%s]" % (message, after)], "commit")
-        info["stages"]["commit"] = {"sha": _git_ok(["rev-parse", "HEAD"], "commit").stdout.strip()}
+        local = _git_ok(["rev-parse", "HEAD"], "commit").stdout.strip()
+        info["stages"]["commit"] = {"sha": local}
+
+        # ── R1D：commit 之后、push 之前完成内容校验（迁移场景额外做结构校验）──
+        vc = _verify_content(expect)
+        if expect and not vc.get("checked"):
+            raise CheckpointError("verify_content", "content verification not performed")
+        info["stages"]["verify_content"] = vc
+
+        mig = None
+        if migration:
+            mig = verify_migration(root=(migration or {}).get("root"),
+                                   expect_items=(migration or {}).get("expect_items", 20461))
+            info["stages"]["verify_migration"] = {k: mig[k] for k in
+                                                  ("ok", "items", "ids", "shards", "tombstone_bytes")}
+
         if not push:
-            info.update({"ok": True, "committed": True, "pushed": False})
+            info.update({"ok": True, "committed": True, "pushed": False,
+                         "content_verified": bool(vc.get("checked")), "head": local})
             return info
 
-        # 并发写入者：fetch + merge -X ours（保留本地本轮数据），失败即抛
+        # ── 并发写入者：fetch + merge -X ours；非零必须显式解释，不得被 ahead-count 掩盖 ──
         _git_ok(["fetch", "origin", branch], "fetch")
         m = _git(["merge", "-X", "ours", "--no-edit", "origin/%s" % branch], timeout=180)
+        out = (m.stdout or "") + (m.stderr or "")
         if m.returncode != 0:
-            # 已在本地提交之上无需合并 / 或合并冲突：都要显式判定，不得静默继续
-            ahead = _git(["rev-list", "--count", "origin/%s..HEAD" % branch], timeout=60)
-            if ahead.returncode != 0 or not (ahead.stdout or "").strip().isdigit():
-                raise CheckpointError("merge", "merge failed and ahead-count unknown",
-                                      (m.stderr or "")[-400:])
-        info["stages"]["merge"] = {"rc": m.returncode}
+            if "Already up to date" in out or "Already up-to-date" in out:
+                info["stages"]["merge"] = {"rc": 0, "note": "already_up_to_date"}
+            else:
+                raise CheckpointError("merge", "merge failed (rc=%d)" % m.returncode, out[-400:])
+        else:
+            info["stages"]["merge"] = {"rc": 0}
         st2 = _git_ok(["status", "--porcelain"], "status").stdout
         if (st2 or "").strip():
             _git_ok(["commit", "--no-edit"], "merge_commit")
+            # merge 可能改变 HEAD：再次校验内容与迁移结构
+            vc2 = _verify_content(expect)
+            if expect and not vc2.get("checked"):
+                raise CheckpointError("verify_content", "post-merge verification failed")
+            info["stages"]["verify_content_post_merge"] = vc2
+            if migration:
+                mig = verify_migration(root=(migration or {}).get("root"),
+                                       expect_items=(migration or {}).get("expect_items", 20461))
+                info["stages"]["verify_migration_post_merge"] = {"ok": mig["ok"]}
         local = _git_ok(["rev-parse", "HEAD"], "rev-parse").stdout.strip()
 
         p = _git(["push", "origin", "HEAD:%s" % branch], timeout=300)
@@ -262,11 +363,11 @@ def commit_now(message, after="state", expect=None, push=True, branch="productio
             raise CheckpointError("verify_remote",
                                   "remote %s != local %s (not persisted)" % (remote[:12], local[:12]))
         info["stages"]["verify_remote"] = {"remote": remote, "match": True}
-        vc = _verify_content(expect)
-        # 有 expect 就必须真的校验过；无 expect 时如实标注未校验（不得冒充已校验）
-        if expect and not vc.get("checked"):
-            raise CheckpointError("verify_content", "content verification not performed")
-        info["stages"]["verify_content"] = vc
+
+        # push 后：远端树逐文件字节校验（迁移场景）
+        if mig:
+            info["stages"]["verify_remote_tree"] = _verify_remote_tree(remote, mig["tree"]["paths"])
+
         info["content_verified"] = bool(vc.get("checked"))
         info.update({"ok": True, "committed": True, "pushed": True, "head": local, "remote": remote})
         return info
@@ -298,6 +399,11 @@ def main(argv=None):
     ap.add_argument("--branch", default="production-state")
     ap.add_argument("--no-push", action="store_true")
     ap.add_argument("--collection", action="store_true")
+    ap.add_argument("--state-only", action="store_true",
+                    help="不复制代码树内容（用于迁移/墓碑等 state_src 内已生成产物）")
+    ap.add_argument("--migration", action="store_true",
+                    help="迁移提交：强制校验墓碑/manifest/index/ids/分片/远端树")
+    ap.add_argument("--expect-items", type=int, default=20461)
     a = ap.parse_args(argv)
 
     expect = None
@@ -313,9 +419,11 @@ def main(argv=None):
         if a.expect_fields:
             expect["fields_present"] = [x for x in a.expect_fields.split(",") if x]
     try:
+        mig = ({"root": str(STATE_DIR), "expect_items": a.expect_items}
+               if a.migration else None)
         res = commit_now(a.message, after=a.after, expect=expect, push=not a.no_push,
-                         branch=a.branch,
-                         require_expect=(a.require_expect or a.collection),
+                         branch=a.branch, state_only=a.state_only, migration=mig,
+                         require_expect=(a.require_expect or a.collection or a.migration),
                          guard_extra={"expected_remote_substr":
                                       os.environ.get("ASIP_EXPECT_REPO_SUBSTR", "asip-site")})
     except CheckpointError as e:

@@ -224,7 +224,11 @@ def paused(root=None, breaker=None, size_report=None):
 
 
 def assert_paid_allowed(component, root=None):
-    """付费调用前必须调用；暂停时抛 PaidTasksPaused（不得捕获后继续）。"""
+    """付费调用前必须调用；暂停/collection_only 时抛 PaidTasksPaused（不得捕获后继续）。"""
+    # R1D：collection_only 是"零付费采集"模式——与全局暂停开关不同，它只禁付费、
+    # 不禁采集，因此在这里单独判定（不能用暂停开关实现，否则采集也被禁）。
+    if (os.environ.get("ASIP_RUN_MODE") or "").strip().lower() == "collection_only":
+        raise PaidTasksPaused("collection_only_mode", component)
     is_paused, reason = paused(root)
     if is_paused:
         raise PaidTasksPaused(reason, component)

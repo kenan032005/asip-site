@@ -26,6 +26,15 @@ name: ASIP Production Orchestrator
 on:
   workflow_dispatch:
     inputs:
+      run_mode:
+        description: "运行模式：shadow / collection_only / production（collection_only = 零付费采集，仅采集+checkpoint）"
+        required: false
+        type: choice
+        options:
+          - shadow
+          - collection_only
+          - production
+        default: shadow
       canary:
         description: "显式 production-equivalent Canary（true=执行 due 任务并标记 manual_canary）"
         required: false
@@ -168,6 +177,8 @@ jobs:
           # §三/§十七：触发来源上下文（不含任何凭据）
           ASIP_CLIENT_PAYLOAD: ${{ toJSON(github.event.client_payload) }}
           ASIP_WORKFLOW_INPUTS: ${{ toJSON(github.event.inputs) }}
+          # R1D：显式运行模式（collection_only=零付费采集；自动触发默认 production）
+          ASIP_RUN_MODE: ${{ github.event.inputs.run_mode || 'production' }}
           # C8-4D1：共享请求复用开关（仓库变量，默认 "0" = 关闭）
           ASIP_SHARED_FEED_REUSE: ${{ vars.ASIP_SHARED_FEED_REUSE || '0' }}
           # C8-4D2：Phase 拆分回滚开关必须透传到采集执行路径；默认 '1'（不擅自回滚）

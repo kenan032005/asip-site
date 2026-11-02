@@ -389,6 +389,20 @@ def _daily_report_meta(root):
             "report_id": report_id, "fact_count": daily.get("fact_count")}
 
 
+RUN_MODES = ("production", "shadow", "collection_only")
+COLLECTION_ONLY_TASKS = {"collection"}
+
+
+def run_mode():
+    """运行模式：production（默认）/ shadow / collection_only。
+
+    collection_only：只跑采集 + 采集 checkpoint；禁止任何付费路径与自动部署，
+    且**不依赖** canary=false，也不使用全局暂停开关（否则采集也会被禁）。
+    """
+    m = (os.environ.get("ASIP_RUN_MODE") or "production").strip().lower()
+    return m if m in RUN_MODES else "production"
+
+
 class CheckpointFailed(RuntimeError):
     """采集后 checkpoint 失败：必须中止整轮（后续付费任务一律不得启动）。"""
 
@@ -635,6 +649,16 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
             return ok
         return False
 
+    _mode = run_mode()
+    if _mode == "collection_only":
+        # 只保留采集任务：即使历史 due 列表包含 AI/报告，也不会触发付费调用
+        _dropped = [t.get("task") for t in plan["due"]
+                    if t.get("task") not in COLLECTION_ONLY_TASKS]
+        plan = {"due": [t for t in plan["due"] if t.get("task") in COLLECTION_ONLY_TASKS]}
+        if _dropped:
+            run["notes"].append("collection_only_dropped:%s" % ",".join(map(str, _dropped)))
+        run["notes"].append("mode=collection_only")
+
     for t in plan["due"]:
         if t["task"] == "collection":
             ok = _do("collection", "collection")
@@ -648,6 +672,23 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
             _do(t["task"], t["task"])
         elif t["task"] in ("daily_report", "weekly_report"):
             _do(t["task"], t["task"])
+    if _mode == "collection_only":
+        # 采集 + checkpoint 之后立即收尾：不跑 timeline / AI / 评估 / 简报 / 报告 / 视图 / 部署
+        ops.finish_run(run, status="completed")
+        run["deploy_requested"] = False
+        run["deploy_provenance"] = None
+        prev = []
+        if ps.OPS_STATUS_FILE.exists():
+            try:
+                prev = json.loads(ps.OPS_STATUS_FILE.read_text(encoding="utf-8")).get("runs", [])
+            except Exception:
+                prev = []
+        ops.save_ops(run, previous=prev[-20:])
+        emit("DEPLOY_REQUIRED = false (collection_only)")
+        return {"deploy_required": False, "deploy_request": None,
+                "executed": [k for k in results], "results": results,
+                "mode": "collection_only"}
+
     results.setdefault("timeline", {"ok": _run_script(["scripts/ops/timeline_run.py"], emit),
                                     "detail": "timeline_run"})
     # C6-R5E：AI enrichment → 发布链桥接。
@@ -805,6 +846,8 @@ def _latest_report_class(root):
 def main(argv=None):
     ap = argparse.ArgumentParser(description="Stage8D hourly due-task orchestrator")
     ap.add_argument("--run", action="store_true", help="执行 due 任务")
+    ap.add_argument("--mode", default=None, choices=list(RUN_MODES),
+                    help="运行模式：production/shadow/collection_only（collection_only=零付费采集）")
     ap.add_argument("--plan", action="store_true", help="只输出计划（不执行）")
     ap.add_argument("--canary", action="store_true", help="manual canary 标记")
     ap.add_argument("--now", default=None, help="测试用 BJT now（ISO）")
@@ -848,6 +891,8 @@ def main(argv=None):
     def _emit(s):
         print(s, file=sys.stderr)
 
+    if getattr(args, "mode", None):
+        os.environ["ASIP_RUN_MODE"] = args.mode
     try:
         res = execute(plan, state, emit=_emit, canary=args.canary,
                       trigger_meta=trigger_meta)
