@@ -960,6 +960,13 @@ def main(argv=None):
         res = execute(plan, state, emit=_emit, canary=args.canary,
                       trigger_meta=trigger_meta)
     except CheckpointFailed as _e:
+        # 只有"状态/checkpoint 类"失败才写标记：workflow 据此熔断；
+        # 未授权 production / 非法 run_mode 等拒绝路径不得造成误 strike。
+        try:
+            with open("/tmp/orch_state_failure", "w", encoding="utf-8") as _f:
+                _f.write(str(_e)[:300])
+        except OSError:
+            pass
         emit("RUN_ABORTED = %s" % _e)
         return 2
     if args.json:
