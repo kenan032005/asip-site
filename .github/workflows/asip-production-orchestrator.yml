@@ -79,7 +79,7 @@ jobs:
       - name: Checkout release code
         uses: actions/checkout@v4
         with:
-          ref: a16ded0a43e2c7684b7dfd83754429ccc974c31e
+          ref: 6666ec2403ce0349efea5dac51d8807eca698019
           fetch-depth: 1
 
       - name: Checkout production state branch
@@ -188,6 +188,8 @@ jobs:
           # R1D-HOTFIX：发布闸门（默认全部锁定；恢复自动调度/人工 production 需显式置 1）
           ASIP_ALLOW_AUTOMATIC_RUNS: ${{ vars.ASIP_ALLOW_AUTOMATIC_RUNS || '0' }}
           ASIP_ALLOW_MANUAL_PRODUCTION: ${{ vars.ASIP_ALLOW_MANUAL_PRODUCTION || '0' }}
+          # R1D：状态失败标记必须在工作区内（hashFiles 只认 workspace 相对路径）
+          ASIP_STATE_FAILURE_MARKER: ${{ github.workspace }}/.orch_state_failure
           # C8-4D1：共享请求复用开关（仓库变量，默认 "0" = 关闭）
           ASIP_SHARED_FEED_REUSE: ${{ vars.ASIP_SHARED_FEED_REUSE || '0' }}
           # C8-4D2：Phase 拆分回滚开关必须透传到采集执行路径；默认 '1'（不擅自回滚）
@@ -202,8 +204,7 @@ jobs:
           # 先保存退出码 → 白名单诊断 → 仅失败时以原退出码退出；成功必须继续往下走，
           # 否则 Auto deploy 拿不到 deploy_required。
           RC=0
-          : > /tmp/orch_state_failure   # 清空上一轮标记（仅当本轮 checkpoint 失败才写入）
-          rm -f /tmp/orch_state_failure
+          rm -f /tmp/orch_state_failure .orch_state_failure   # 清空上一轮标记
           python scripts/ops/schedule_orchestrator.py $FLAGS > /tmp/orch.json 2> /tmp/orch.err || RC=$?
           # 早退路径（自动触发被闸门拦截/未授权等）不输出 JSON → 补最小对象，避免下游解析空文件
           if [ ! -s /tmp/orch.json ]; then
@@ -278,7 +279,7 @@ jobs:
         # 任一步失败即尝试把熔断推到远端；本地已 strike，远端失败只记录（不掩盖原始错误）
         # R1D-HOTFIX：仅当 orchestrator 写出状态失败标记时才熔断；
         # 未授权 production / 非法 run_mode 等拒绝路径不得造成误 strike。
-        if: failure() && hashFiles('/tmp/orch_state_failure') != ''
+        if: failure() && hashFiles('.orch_state_failure') != ''
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
