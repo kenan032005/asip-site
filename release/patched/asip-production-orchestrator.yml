@@ -179,6 +179,9 @@ jobs:
           ASIP_WORKFLOW_INPUTS: ${{ toJSON(github.event.inputs) }}
           # R1D：显式运行模式（collection_only=零付费采集；自动触发默认 production）
           ASIP_RUN_MODE: ${{ github.event.inputs.run_mode || 'production' }}
+          # R1D-HOTFIX：发布闸门（默认全部锁定；恢复自动调度/人工 production 需显式置 1）
+          ASIP_ALLOW_AUTOMATIC_RUNS: ${{ vars.ASIP_ALLOW_AUTOMATIC_RUNS || '0' }}
+          ASIP_ALLOW_MANUAL_PRODUCTION: ${{ vars.ASIP_ALLOW_MANUAL_PRODUCTION || '0' }}
           # C8-4D1：共享请求复用开关（仓库变量，默认 "0" = 关闭）
           ASIP_SHARED_FEED_REUSE: ${{ vars.ASIP_SHARED_FEED_REUSE || '0' }}
           # C8-4D2：Phase 拆分回滚开关必须透传到采集执行路径；默认 '1'（不擅自回滚）

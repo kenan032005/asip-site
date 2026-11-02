@@ -393,14 +393,45 @@ RUN_MODES = ("production", "shadow", "collection_only")
 COLLECTION_ONLY_TASKS = {"collection"}
 
 
-def run_mode():
-    """运行模式：production（默认）/ shadow / collection_only。
+class InvalidRunMode(RuntimeError):
+    """非法运行模式：一律拒绝，绝不静默降级为 production。"""
 
-    collection_only：只跑采集 + 采集 checkpoint；禁止任何付费路径与自动部署，
-    且**不依赖** canary=false，也不使用全局暂停开关（否则采集也会被禁）。
+
+def run_mode():
+    """运行模式：production（未设置时）/ shadow / collection_only。
+
+    - 非法值 → InvalidRunMode（fail-closed，不降级）
+    - shadow：**只读**，不采集、不 AI、不报告、不写回、不部署
+    - collection_only：只跑采集 + 采集 checkpoint；禁止一切付费路径与自动部署，
+      且不依赖 canary=false、不使用全局暂停开关（否则采集也会被禁）
     """
-    m = (os.environ.get("ASIP_RUN_MODE") or "production").strip().lower()
-    return m if m in RUN_MODES else "production"
+    raw = os.environ.get("ASIP_RUN_MODE")
+    if raw is None or str(raw).strip() == "":
+        return "production"
+    m = str(raw).strip().lower()
+    if m not in RUN_MODES:
+        raise InvalidRunMode("invalid ASIP_RUN_MODE=%r (allowed: %s)" % (raw, ",".join(RUN_MODES)))
+    return m
+
+
+def _event_name():
+    return os.environ.get("GITHUB_EVENT_NAME", "schedule")
+
+
+def automatic_runs_locked():
+    """独立闸门：自动触发（schedule / repository_dispatch）在恢复前一律阻断。
+
+    与 PRODUCTION_SCHEDULE_ENABLED 无关：后者是"业务开关"，本闸门是"发布闸门"，
+    必须在正式恢复自动调度时显式置 ASIP_ALLOW_AUTOMATIC_RUNS=1 才放行。
+    """
+    if _event_name() not in ("schedule", "repository_dispatch"):
+        return False
+    return (os.environ.get("ASIP_ALLOW_AUTOMATIC_RUNS", "0") or "0").strip() != "1"
+
+
+def manual_production_authorized():
+    """人工 production 轮需要显式授权（collection_only 不需要）。"""
+    return (os.environ.get("ASIP_ALLOW_MANUAL_PRODUCTION", "0") or "0").strip() == "1"
 
 
 class CheckpointFailed(RuntimeError):
@@ -420,6 +451,18 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
     trigger = "manual_canary" if canary else (tm.get("trigger_source")
                                               or "scheduled_orchestrator")
     root = Path(data_root) if data_root else ROOT / "data"
+
+    # ── R1D-HOTFIX：运行模式（shadow 只读；非法值拒绝）─────────────────
+    try:
+        _mode = run_mode()
+    except InvalidRunMode as _e:
+        emit("INVALID_RUN_MODE = %s" % _e)
+        raise
+    if _mode == "shadow":
+        emit("SHADOW_READ_ONLY = true（不采集/AI/报告/写回/部署）")
+        return {"deploy_required": False, "deploy_request": None,
+                "executed": [], "mode": "shadow",
+                "results": {"shadow": {"ok": True, "detail": "read_only_noop"}}}
 
     # ── asip5 P0-R1：最外层暂停门禁（先于任何付费子任务）──────────────
     # PRODUCTION_SCHEDULE_ENABLED=false 只清空 due 列表；execute() 仍会运行
@@ -507,9 +550,13 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
                         emit("STATE_CHECKPOINT_ERROR = %s -> abort entire run" % _e)
                         raise CheckpointFailed("state_checkpoint_exception: %s" % _e)
                 # §十四：真实采集成功后刷新 source health 快照
-                sh_ok = _run_script(["scripts/ops/source_health.py"], emit)
-                results["source_health"] = {"ok": sh_ok,
-                                            "detail": "source_health refresh"}
+                # R1D-HOTFIX：collection_only 只允许 collection_run + checkpoint，跳过此项
+                if _mode == "collection_only":
+                    run["notes"].append("collection_only_skipped_source_health")
+                else:
+                    sh_ok = _run_script(["scripts/ops/source_health.py"], emit)
+                    results["source_health"] = {"ok": sh_ok,
+                                                "detail": "source_health refresh"}
             m = _read_json_file(ps.OPS_DIR / "collection_summary.json") or {}
             results[label] = {"ok": ok, "detail": "collection_run --execute",
                               "metrics_source": m.get("metrics_source"),
@@ -649,7 +696,6 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
             return ok
         return False
 
-    _mode = run_mode()
     if _mode == "collection_only":
         # 只保留采集任务：即使历史 due 列表包含 AI/报告，也不会触发付费调用
         _dropped = [t.get("task") for t in plan["due"]
@@ -662,12 +708,14 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
     for t in plan["due"]:
         if t["task"] == "collection":
             ok = _do("collection", "collection")
-            if ok:
-                # 采集后重估 AI（新 eligible 可能出现）
+            if ok and _mode != "collection_only":
+                # 采集后重估 AI（新 eligible 可能出现）；collection_only 下严禁自动触发
                 if new_eligible_exists(state, "social", root):
                     _do("social_ai", "social_ai")
                 if new_eligible_exists(state, "disease", root):
                     _do("disease_ai", "disease_ai")
+            elif ok:
+                run["notes"].append("collection_only_skipped_auto_ai")
         elif t["task"] in ("social_ai", "disease_ai"):
             _do(t["task"], t["task"])
         elif t["task"] in ("daily_report", "weekly_report"):
@@ -893,6 +941,21 @@ def main(argv=None):
 
     if getattr(args, "mode", None):
         os.environ["ASIP_RUN_MODE"] = args.mode
+    try:
+        _m = run_mode()
+    except InvalidRunMode as _e:
+        _emit("INVALID_RUN_MODE = %s" % _e)
+        return 4
+    # 发布闸门：正式恢复自动调度前，自动触发一律阻断（不依赖 PRODUCTION_SCHEDULE_ENABLED）
+    if automatic_runs_locked():
+        _emit("AUTOMATIC_RUNS_LOCKED = true（event=%s；恢复自动调度需 ASIP_ALLOW_AUTOMATIC_RUNS=1）"
+              % _event_name())
+        return 0
+    # 人工 production 轮必须有显式授权（collection_only/shadow 不需要）
+    if _m == "production" and _event_name() == "workflow_dispatch" and not manual_production_authorized():
+        _emit("MANUAL_PRODUCTION_NOT_AUTHORIZED = true（需 ASIP_ALLOW_MANUAL_PRODUCTION=1，"
+              "或改用 run_mode=collection_only）")
+        return 3
     try:
         res = execute(plan, state, emit=_emit, canary=args.canary,
                       trigger_meta=trigger_meta)

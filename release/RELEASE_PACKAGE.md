@@ -7,6 +7,8 @@ CONTROLLER_BRANCH     = release/asip5-controller
 CONTROLLER_BASE       = main @ 3ada28027c0a5f992935d7da3ce4f86496dded61
 PIN_IN_WORKFLOWS      = 3dc363ea5c…（5 个生产 workflow 一致切换；无动态 ref）
 WORKFLOW_STATE        = disabled_manually（本包未启用）
+RUN_MODES             = shadow(默认只读) / collection_only(零付费采集) / production(需授权)
+RELEASE_GATES         = ASIP_ALLOW_AUTOMATIC_RUNS=0 / ASIP_ALLOW_MANUAL_PRODUCTION=0（默认全锁）
 PRODUCTION_MODIFIED   = NO
 ```
 
@@ -133,3 +135,47 @@ ASIP-5 全量（不含真实快照）          84 passed / 2 skipped
 受影响既有套件                      56 passed / 4 skipped
 已知既有失败（与本包无关）            test_c8_4d2_phase_order 硬编码 888 键（本 pin 891）
 ```
+
+
+---
+
+## 7. 受控运行方式（workflow 处于 disabled）
+
+**关键事实**：`disabled_manually` 状态下 workflow_dispatch 也会被 GitHub 拒绝。
+因此人工受控运行必须"短暂启用 → 立即回禁"，且**必须靠发布闸门而不是靠禁用状态**来防止误跑：
+
+```
+# 变量默认（未创建时按 0 处理，即全部锁定）
+ASIP_ALLOW_AUTOMATIC_RUNS   = 0     # schedule / repository_dispatch 一律被阻断
+ASIP_ALLOW_MANUAL_PRODUCTION= 0     # 人工 production 轮被拒绝（返回码 3）
+```
+
+受控采集（零付费）步骤：
+1. `gh workflow enable asip-production-orchestrator.yml`（或 API PUT enable）
+2. `gh workflow run asip-production-orchestrator.yml -f run_mode=collection_only`
+3. 观察：`mode=collection_only`、AI_CALLS=0、`deploy_required=false`、state SHA 前进
+4. `gh workflow disable asip-production-orchestrator.yml`（立即回禁）
+
+窗口期风险已由闸门覆盖：即使每小时 cron 在这几分钟内触发，`ASIP_ALLOW_AUTOMATIC_RUNS=0`
+会让它**在入口直接返回**（不采集、不写、不付费）；因此"为手动运行而短暂 enable"不会
+意外放开定时/外部触发。
+
+**shadow 默认**：`workflow_dispatch` 的 `run_mode` 默认 `shadow` → 即使有人直接点运行，
+也只会得到 `mode=shadow, executed=[]`（不采集/AI/报告/写回/部署）。
+
+## 8. 生产切换前置检查清单（执行前逐项打勾）
+
+| # | 检查 | 期望 |
+|---|---|---|
+| 1 | `git ls-remote origin refs/heads/main` | `3ada28027c`（切换前不变） |
+| 2 | `git ls-remote origin refs/heads/production-state` | `1a9cf45267`（切换前不变） |
+| 3 | `git ls-remote origin refs/heads/gh-pages` | `60542214e6`（切换前不变） |
+| 4 | workflow 状态 | `disabled_manually` |
+| 5 | `ops-health` 分支 | 不存在（首次需 `breakerctl bootstrap --repo …`，会建分支+写入+读回校验） |
+| 6 | 仓库变量 | 已有 4 个；**需新增** `ASIP_ALLOW_AUTOMATIC_RUNS=0`、`ASIP_ALLOW_MANUAL_PRODUCTION=0` |
+| 7 | 备份目录 | 工作树之外（如 `/data/asip-backup`），可写、非仓库路径 |
+| 8 | 备份凭据/权限 | 备份只需本地文件权限；state 提交需 `contents:write`（checkout 自带 token） |
+| 9 | 熔断读取权限 | `breakerctl fetch/publish` 需 `contents:write`（同一 token） |
+| 10 | 回滚 | `--rollback --expect N`（含迁移后新增）；>100MB 单体只可离线恢复 |
+| 11 | 只读验收 | `--plan --json` 输出 `due=[]`（或 collection_only 下仅 collection） |
+| 12 | 代码 pin | 5 个 workflow 均为同一精确 SHA（无分支/tag 漂移） |

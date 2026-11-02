@@ -20,8 +20,9 @@ import sys
 import time
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
-STATE_DIR = ROOT / "state_src"
+#: 允许运维/测试用环境变量指向临时工作区（默认：代码仓库根 + 其 state_src）
+ROOT = Path(os.environ.get("ASIP_CODE_ROOT") or Path(__file__).resolve().parents[2])
+STATE_DIR = Path(os.environ.get("ASIP_STATE_DIR") or (ROOT / "state_src"))
 
 #: 与 workflow "Commit state" 的 git add -f 集合完全一致（路径相对 state_src）
 GIT_PATHS = [
@@ -279,8 +280,13 @@ def commit_now(message, after="state", expect=None, push=True, branch="productio
             info["stages"]["sync"] = {"skipped": "state_only"}
         else:
             info["stages"]["sync"] = sync_to_state_branch()
-        _git_ok(["add", "-f"] + GIT_PATHS, "add")
-        info["stages"]["add"] = {"paths": len(GIT_PATHS)}
+        # 只 add 实际存在的路径（缺失路径 → git pathspec 报错；生产 state 分支通常齐全）
+        _present = [p for p in GIT_PATHS if (STATE_DIR / p).exists()]
+        if not _present:
+            raise CheckpointError("add", "no state paths exist under %s" % STATE_DIR)
+        _git_ok(["add", "-f"] + _present, "add")
+        info["stages"]["add"] = {"paths": len(_present),
+                                 "missing": [p for p in GIT_PATHS if p not in _present]}
 
         st = _git_ok(["status", "--porcelain"], "status").stdout
         head0 = _git_ok(["rev-parse", "HEAD"], "rev-parse").stdout.strip()
@@ -407,6 +413,10 @@ def main(argv=None):
     a = ap.parse_args(argv)
 
     expect = None
+    if a.migration and not (a.expect_path or a.collection):
+        # R1D-HOTFIX：迁移提交必须带可验证 expect（Runbook 命令不再因缺 expect 失败）
+        expect = {"path": "data/runtime/ops/production_state.json",
+                  "fields_present": ["processed_hashes"]}
     if a.collection:
         expect = {"path": "data/runtime/ops/production_state.json",
                   "fields_present": ["last_successful_collection", "processed_hashes"]}
