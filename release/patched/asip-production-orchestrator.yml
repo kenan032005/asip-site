@@ -1,0 +1,362 @@
+name: ASIP Production Orchestrator
+
+# Stage8D schedule fix — Hourly Due-Task Orchestrator（§十五/§十六/§十七）。
+#
+# 背景（Root Cause，见 docs/stage8d_schedule_root_cause.md）：
+#   - 原 multi-cron（collection/AI/reports）实测 10 tick 中 7 MISSED、3 延迟 1h45m–3h
+#     → GITHUB_SCHEDULE_DELAY_OR_DROP，GITHUB_SCHEDULE_RELIABILITY_RISK=true。
+#   - 原 schedule 路径依赖 github.event.inputs.*（schedule 下为空）→ 全部进入 Shadow。
+#
+# 本 workflow 是唯一 schedule 执行入口：
+#   - 单一每小时 cron（0 * * * *）；
+#   - schedule_orchestrator.py 依据 production-state 判断 due 任务并**以 production
+#     mode 真实执行**（collection --execute / AI 真实 provider / reports --source
+#     canonical / timeline）；
+#   - 幂等：processed_hashes + last_successful_* + 报告日期；
+#   - trigger=scheduled_orchestrator（自然 Automation）。
+#
+# workflow_dispatch 仅用于显式 Canary（canary=true → 同 production-equivalent 路径，
+# 但 trigger=manual_canary；deploy 以 shadow_only=true 仅做 build/validate/secret scan，
+# 不发布 gh-pages）。
+
+# §十六/§十七：GITHUB_NATIVE_SCHEDULE_PRIMARY = REJECTED（实测 24 tick 仅 6 命中、
+# max_gap=361min）。保留每小时 cron 作为 **secondary wake-up**；主唤醒改为外部
+# 调度器经 repository_dispatch 调用（type=external_scheduler_wakeup），由 workflow
+# 校验 trigger_source=external_scheduler 后才认定为 automation。
+on:
+  workflow_dispatch:
+    inputs:
+      canary:
+        description: "显式 production-equivalent Canary（true=执行 due 任务并标记 manual_canary）"
+        required: false
+        type: boolean
+        default: false
+      force_deploy_dispatch:
+        description: "Canary 专用：对最近 publishable 报告执行一次 shadow deploy dispatch（验证 actions:write 与 provenance 链，绝不发布 gh-pages）"
+        required: false
+        type: boolean
+        default: false
+  repository_dispatch:
+    types: [external_scheduler_wakeup]
+  schedule:
+    - cron: '0 * * * *'
+
+concurrency:
+  group: asip-prod-orchestrator
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  # GITHUB_TOKEN 派发 asip-production-deploy（workflow_dispatch）需要 actions: write；
+  # 缺失时 dispatch 返回 403（Canary 实测发现，AUTO_DEPLOY_TRIGGER_HTTP=403）。
+  actions: write
+
+env:
+  ASIP_MODE: production
+  browser_direct_api_call: "false"
+  ASIP_DEEPSEEK_API_KEY: ${{ secrets.ASIP_DEEPSEEK_API_KEY }}
+  PRODUCTION_SCHEDULE_ENABLED: ${{ vars.PRODUCTION_SCHEDULE_ENABLED }}
+
+jobs:
+  orchestrate:
+    if: github.event_name != 'schedule' || vars.PRODUCTION_SCHEDULE_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout release code
+        uses: actions/checkout@v4
+        with:
+          ref: __RELEASE_CODE_SHA__
+          fetch-depth: 1
+
+      - name: Checkout production state branch
+        uses: actions/checkout@v4
+        with:
+          ref: production-state
+          path: state_src
+          fetch-depth: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Load state（cold start）
+        run: |
+          # 必须与下方 "Commit state" 写回的路径集完全对称：
+          # 若只恢复 ops，则每个 run 都从 release 仓库自带的静态 data/ 起步，
+          # 未重新生成该路径的 run 会把仓库旧副本写回 production-state，
+          # 导致 canonical 每约 6 小时被回退一次（V1.0 hotfix: 2026-09-11 定位）。
+          mkdir -p data/runtime/ops
+          cp -r state_src/data/runtime/ops/* data/runtime/ops/ 2>/dev/null || true
+          cp -rf state_src/data/canonical/. data/canonical/ 2>/dev/null || true
+          cp -rf state_src/data/disease/. data/disease/ 2>/dev/null || true
+          cp -rf state_src/data/runtime/timeline/. data/runtime/timeline/ 2>/dev/null || true
+          cp -f state_src/data/events.json data/events.json 2>/dev/null || true
+          cp -f state_src/data/pending_events.json data/pending_events.json 2>/dev/null || true
+          cp -f state_src/data/raw_candidates.json data/raw_candidates.json 2>/dev/null || true
+          cp -f state_src/data/quarantine_events.json data/quarantine_events.json 2>/dev/null || true
+          cp -rf state_src/data/public/. data/public/ 2>/dev/null || true
+          # C7-3：恢复情报内容引擎工件（本地化缓存 / 每日研判 / 编排生成的公开视图）
+          mkdir -p data/intelligence data/views
+          cp -rf state_src/data/intelligence/. data/intelligence/ 2>/dev/null || true
+          cp -rf state_src/data/views/. data/views/ 2>/dev/null || true
+          # C7-6R4：canonical 报告树必须与 Commit state 的写回路径**对称**，
+          # 否则每轮从仓库静态副本起步，运行期物化的 data/reports/** 会丢失，
+          # 而 report_index 引用它们 → deploy 的 REPORT_ARTIFACT_PUBLICATION=FAIL。
+          mkdir -p data/reports
+          cp -rf state_src/data/reports/. data/reports/ 2>/dev/null || true
+          # C8-3：采集处理状态（logs/collector_cache）此前既不提交也不恢复，
+          # 导致每轮从 pin 里的旧快照起步、跨轮去重与隔离恢复都无法持久化。
+          mkdir -p logs/collector_cache
+          cp -rf state_src/logs/collector_cache/. logs/collector_cache/ 2>/dev/null || true
+          # C8-3 FINAL：采集**处理状态**的真身在 data/runtime/article_processing_state.json
+          # （framework._STATE_PATH）。此前它既不被提交也不被恢复，导致每轮从 pin 树旧快照起步：
+          # PENDING_RECOVERY 重置丢失、抓取级去重弱化。条件拷贝，不假设 .bak 存在。
+          mkdir -p data/runtime
+          cp -f state_src/data/runtime/article_processing_state.json                 data/runtime/article_processing_state.json 2>/dev/null || true
+          if [ -f state_src/data/runtime/article_processing_state.json.bak ]; then
+            cp -f state_src/data/runtime/article_processing_state.json.bak                   data/runtime/article_processing_state.json.bak 2>/dev/null || true
+          fi
+          # 载入后校验：state 快照必须胜出（防止再次出现"仓库静态副本覆盖 state"）
+          python - <<'PY'
+          import json, pathlib
+          p = pathlib.Path("data/canonical/event_clusters.json")
+          sp = pathlib.Path("state_src/data/canonical/event_clusters.json")
+          if sp.exists():
+              a = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+              b = json.loads(sp.read_text(encoding="utf-8"))
+              if a.get("run_id") != b.get("run_id") or len(a.get("items", [])) != len(b.get("items", [])):
+                  # C8-4D2：fail-closed 保持，但先输出非敏感诊断（task_name/ok/error_type/exit_status + 双方 run_id/条目数/大小）
+                  _diag = {"task_name": "load_state", "ok": False, "error_type": "STATE_LOAD_MISMATCH",
+                           "exit_status": 1,
+                           "local": {"run_id": a.get("run_id"), "items": len(a.get("items", [])),
+                                     "size": (p.stat().st_size if p.exists() else None)},
+                           "state_snapshot": {"run_id": b.get("run_id"), "items": len(b.get("items", [])),
+                                              "size": (sp.stat().st_size if sp.exists() else None)}}
+                  print("STATE_LOAD_DIAG " + json.dumps(_diag, ensure_ascii=False))
+                  raise SystemExit("STATE_LOAD_MISMATCH: data/canonical 未采用 state 快照")
+              print("STATE_LOAD_OK run_id=%s items=%d" % (b.get("run_id"), len(b.get("items", []))))
+          PY
+
+      - name: Runtime confirmation（§二：非敏感信息）
+        run: |
+          python - <<'PY'
+          import os
+          ok = bool(os.environ.get("ASIP_DEEPSEEK_API_KEY", "").strip())
+          print("credential_available = " + str(ok).lower())
+          print("requested_model = deepseek-v4-flash")
+          print("browser_direct_api_call = false")
+          print("schedule_enabled = " + os.environ.get("PRODUCTION_SCHEDULE_ENABLED", "true"))
+          PY
+
+      - name: Guard unverified external trigger（§十七 fail-closed）
+        if: github.event_name == 'repository_dispatch' && github.event.client_payload.trigger_source != 'external_scheduler'
+        run: |
+          echo "::error::repository_dispatch 未声明 trigger_source=external_scheduler；不得冒充 automation"
+          exit 1
+
+      - name: Fetch breaker state（fail-closed if unverifiable）
+        # R1C：每轮先读远端熔断状态；不可验证 → 非零退出 → 后续付费任务不启动
+        run: |
+          python scripts/ops/breakerctl.py fetch --repo "${{ github.repository }}"
+
+      - name: Run due-task orchestrator（production mode）
+        id: orch
+        env:
+          CANARY: ${{ github.event.inputs.canary }}
+          # §三/§十七：触发来源上下文（不含任何凭据）
+          ASIP_CLIENT_PAYLOAD: ${{ toJSON(github.event.client_payload) }}
+          ASIP_WORKFLOW_INPUTS: ${{ toJSON(github.event.inputs) }}
+          # C8-4D1：共享请求复用开关（仓库变量，默认 "0" = 关闭）
+          ASIP_SHARED_FEED_REUSE: ${{ vars.ASIP_SHARED_FEED_REUSE || '0' }}
+          # C8-4D2：Phase 拆分回滚开关必须透传到采集执行路径；默认 '1'（不擅自回滚）
+          ASIP_PHASE_B_SPLIT: ${{ vars.ASIP_PHASE_B_SPLIT || '1' }}
+          ASIP_SHARED_FEED_REUSE_SOURCES: ${{ vars.ASIP_SHARED_FEED_REUSE_SOURCES || '' }}
+          # C8-4D2：采集软预算显式透传（APPROVED 3000s→2800s）；仓库变量可覆盖
+          ASIP_COLLECTION_WALL_CLOCK_SECONDS: ${{ vars.ASIP_COLLECTION_WALL_CLOCK_SECONDS || '2800' }}
+        run: |
+          FLAGS="--run --json"
+          [ "$CANARY" = "true" ] && FLAGS="$FLAGS --canary"
+          # C8-4D2 紧急修复：YAML 曾因缩进断裂（0/2 空格脱离 run: |）导致 workflow 零 Job。
+          # 先保存退出码 → 白名单诊断 → 仅失败时以原退出码退出；成功必须继续往下走，
+          # 否则 Auto deploy 拿不到 deploy_required。
+          RC=0
+          python scripts/ops/schedule_orchestrator.py $FLAGS > /tmp/orch.json 2> /tmp/orch.err || RC=$?
+          echo "ORCHESTRATOR_EXIT=$RC"
+          # 白名单诊断：只输出类型检查过的 task / ok / exit_status / elapsed。
+          # 不打印完整 orch.json，不打印任意 error/detail 文本。
+          python - <<'ORCHCAT' || true
+          import json
+          try:
+              d = json.load(open('/tmp/orch.json', encoding='utf-8'))
+              if not isinstance(d, dict):
+                  print('ORCH_DIAG root_type=' + type(d).__name__)
+              else:
+                  res = d.get('results')
+                  print('ORCH_DIAG status=%s deploy_required=%s real_ai_calls=%s' % (d.get('status'), d.get('deploy_required'), d.get('real_ai_calls')))
+                  if isinstance(res, dict):
+                      for _n, _r in res.items():
+                          if not isinstance(_r, dict):
+                              print('  task=%s type=%s' % (str(_n)[:24], type(_r).__name__)); continue
+                          _el = None
+                          for _k in ('elapsed_seconds', 'elapsed_s', 'duration_s', 'duration_seconds'):
+                              _v = _r.get(_k)
+                              if isinstance(_v, (int, float)) and not isinstance(_v, bool): _el = _v; break
+                          _ok = _r.get('ok');  _ok = _ok if isinstance(_ok, bool) else None
+                          _ex = _r.get('exit_status'); _ex = _ex if (isinstance(_ex, int) and not isinstance(_ex, bool)) else None
+                          print('  task=%s ok=%s exit=%s elapsed=%s' % (str(_n)[:24], _ok, _ex, _el))
+          except FileNotFoundError:
+              print('ORCH_DIAG file_missing')
+          except Exception as _e:
+              print('ORCH_DIAG parse_error=%s' % type(_e).__name__)
+          ORCHCAT
+          if [ -s /tmp/orch.err ]; then echo "--- stderr(tail) ---"; tail -30 /tmp/orch.err; fi
+          # 仅失败时以原退出码结束（fail-closed 保持不变）
+          if [ "$RC" -ne 0 ]; then
+            exit "$RC"
+          fi
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          d = json.load(open('/tmp/orch.json'))
+          dr = d.get('deploy_request') or {}
+          print("deploy_required=" + str(d.get('deploy_required', False)).lower())
+          print("deploy_trigger_source=" + str(dr.get('trigger_source') or ''))
+          print("deploy_trigger_type=" + str(dr.get('trigger_type') or ''))
+          print("deploy_automation=" + str(bool(dr.get('automation'))).lower())
+          print("deploy_human=" + str(bool(dr.get('human'))).lower())
+          print("deploy_report_date=" + str(dr.get('report_date') or ''))
+          print("deploy_report_classification=" + str(dr.get('report_classification') or ''))
+          print("deploy_report_id=" + str(dr.get('report_id') or ''))
+          print("deploy_root_orchestrator_run_id=" + str(dr.get('root_orchestrator_run_id') or ''))
+          PY
+      - name: Commit state → production-state（guarded checkpoint）
+        # R1C：唯一提交入口。commit_state 在 state_src 内执行：复制校验 → git add -f（与旧集合一致）
+        # → commit → merge -X ours → push → 校验远端 SHA == 本地 HEAD → 校验提交内容。
+        # 采集阶段的 checkpoint 由 orchestrator 内部完成（更早持久化，避免超时丢数据）。
+        run: |
+          python scripts/ops/commit_state.py "ops: orchestrator run ${{ github.run_id }}" final \
+            --expect-path data/runtime/ops/production_state.json \
+            --expect-fields processed_hashes \
+            --require-expect
+
+      - name: Trip breaker on state failure（fail-closed）
+        # 任一步失败即尝试把熔断推到远端；本地已 strike，远端失败只记录（不掩盖原始错误）
+        if: failure()
+        run: |
+          python scripts/ops/breakerctl.py strike --reason state_push_failed \
+            --repo "${{ github.repository }}" || echo "::warning::breaker publish failed (local strike recorded)"
+
+      - name: Auto deploy（publishable report 后自动派发；canary 仅 shadow build/validate）
+        if: vars.AUTO_DEPLOY_ENABLED == 'true' && steps.orch.outputs.deploy_required == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CANARY: ${{ github.event.inputs.canary }}
+          # §三/§I Deploy Provenance：automation 派发必须携带完整 provenance
+          DEPLOY_ROOT_RUN_ID: ${{ steps.orch.outputs.deploy_root_orchestrator_run_id }}
+          DEPLOY_ROOT_RUN_URL: ${{ github.server_url }}/kenan032005/asip-site/actions/runs/${{ steps.orch.outputs.deploy_root_orchestrator_run_id }}
+          DEPLOY_TRIGGER_SOURCE: ${{ steps.orch.outputs.deploy_trigger_source }}
+          DEPLOY_TRIGGER_TYPE: ${{ steps.orch.outputs.deploy_trigger_type }}
+          DEPLOY_REPORT_DATE: ${{ steps.orch.outputs.deploy_report_date }}
+          DEPLOY_REPORT_CLASS: ${{ steps.orch.outputs.deploy_report_classification }}
+          DEPLOY_REPORT_ID: ${{ steps.orch.outputs.deploy_report_id }}
+        run: |
+          SHADOW="true"
+          [ "$CANARY" != "true" ] && SHADOW="false"
+          export SHADOW
+          # §J/§I：正式（非 canary）automation 派发的 trigger_source 必须可判定
+          if [ "$SHADOW" = "false" ]; then
+            case "$DEPLOY_TRIGGER_SOURCE" in
+              github_native_schedule|external_scheduler) DEPLOY_AUTO="true";;
+              *) echo "::error::automation dispatch 缺少合法 trigger_source=$DEPLOY_TRIGGER_SOURCE"; exit 1;;
+            esac
+          else
+            DEPLOY_AUTO="false"
+          fi
+          export DEPLOY_AUTO
+          python - <<'PY' > /tmp/deploy_payload.json
+          import json, os
+          payload = {
+            "ref": "main",
+            "inputs": {
+              "shadow_only": os.environ.get("SHADOW", "true"),
+              "automation": os.environ.get("DEPLOY_AUTO", "false"),
+              "root_orchestrator_run_id": os.environ.get("DEPLOY_ROOT_RUN_ID", ""),
+              "root_orchestrator_run_url": os.environ.get("DEPLOY_ROOT_RUN_URL", ""),
+              "trigger_source": os.environ.get("DEPLOY_TRIGGER_SOURCE", ""),
+              "trigger_type": os.environ.get("DEPLOY_TRIGGER_TYPE", ""),
+              "report_date": os.environ.get("DEPLOY_REPORT_DATE", ""),
+              "report_classification": os.environ.get("DEPLOY_REPORT_CLASS", ""),
+              "report_id": os.environ.get("DEPLOY_REPORT_ID", ""),
+            },
+          }
+          print(json.dumps(payload))
+          PY
+          echo "DEPLOY_PROVENANCE = $(cat /tmp/deploy_payload.json)"
+          HTTP=$(curl -s -X POST -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/kenan032005/asip-site/actions/workflows/asip-production-deploy.yml/dispatches \
+            -d @/tmp/deploy_payload.json \
+            -o /tmp/deploy_resp.json -w "%{http_code}")
+          echo "AUTO_DEPLOY_TRIGGER_HTTP=$HTTP"
+          # §M fail-closed：非 2xx 不得静默吞掉，本轮 run 置为失败
+          if [ "$HTTP" -lt 200 ] || [ "$HTTP" -ge 300 ]; then
+            echo "::error::auto deploy dispatch 失败 HTTP=$HTTP body=$(head -c 300 /tmp/deploy_resp.json)"
+            exit 1
+          fi
+
+      - name: Canary deploy-dispatch verification（§R：canary 专用，shadow only）
+        if: github.event.inputs.canary == 'true' && github.event.inputs.force_deploy_dispatch == 'true' && vars.AUTO_DEPLOY_ENABLED == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # 读取已提交 state 中最近一次 daily 报告的真实元数据（不得伪造）；
+          # dispatch 以 manual_canary（human）provenance 标记，仅验证
+          # GITHUB_TOKEN actions:write → HTTP 2xx → deploy run 产生 → inputs 收到。
+          python - <<'PY' > /tmp/dep_meta.sh
+          import json, glob, os
+          base = 'data/runtime/ops/reports'
+          rid = rd = cls = ''
+          try:
+              s = json.load(open(base + '/reports_run_summary.json', encoding='utf-8'))
+              cls = ((s.get('results') or {}).get('daily') or {}).get('classification') or ''
+          except Exception:
+              pass
+          for p in sorted(glob.glob(base + '/daily_*.json')):
+              try:
+                  doc = json.load(open(p, encoding='utf-8'))
+              except Exception:
+                  continue
+              if doc.get('report_date'):
+                  rid = doc.get('report_id') or ''
+                  rd = doc.get('report_date') or ''
+                  break
+          print('REPORT_ID=%s' % rid)
+          print('REPORT_DATE=%s' % rd)
+          print('REPORT_CLASS=%s' % cls)
+          print('CANARY_DEPLOY_META report_id=%s report_date=%s classification=%s' % (rid, rd, cls))
+          PY
+          grep '^CANARY_DEPLOY_META' /tmp/dep_meta.sh || true
+          source <(grep -E '^(REPORT_ID|REPORT_DATE|REPORT_CLASS)=' /tmp/dep_meta.sh)
+          if [ -z "$REPORT_ID" ]; then echo "::error::无可用 daily 报告元数据，拒绝伪造 dispatch"; exit 1; fi
+          HTTP=$(curl -s -X POST -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/kenan032005/asip-site/actions/workflows/asip-production-deploy.yml/dispatches \
+            -d "{\"ref\":\"main\",\"inputs\":{\"shadow_only\":\"true\",\"automation\":\"false\",\"root_orchestrator_run_id\":\"${{ github.run_id }}\",\"root_orchestrator_run_url\":\"${{ github.server_url }}/kenan032005/asip-site/actions/runs/${{ github.run_id }}\",\"trigger_source\":\"manual_canary\",\"trigger_type\":\"human\",\"report_date\":\"$REPORT_DATE\",\"report_classification\":\"$REPORT_CLASS\",\"report_id\":\"$REPORT_ID\"}}" \
+            -o /tmp/deploy_resp.json -w "%{http_code}")
+          echo "AUTO_DEPLOY_DISPATCH_HTTP=$HTTP"
+          echo "AUTO_DEPLOY_CANARY_PROVENANCE = trigger_source=manual_canary report_id=$REPORT_ID report_date=$REPORT_DATE classification=$REPORT_CLASS"
+          if [ "$HTTP" -lt 200 ] || [ "$HTTP" -ge 300 ]; then
+            echo "::error::canary deploy dispatch 失败 HTTP=$HTTP body=$(head -c 300 /tmp/deploy_resp.json)"
+            exit 1
+          fi
+
+      - name: Upload ops artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ops-orchestrator
+          path: |
+            data/runtime/ops/
+            data/runtime/ops/enrichment/
+          if-no-files-found: warn

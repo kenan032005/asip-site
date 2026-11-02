@@ -466,8 +466,20 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
                 if (os.environ.get("ASIP_COMMIT_AFTER_COLLECTION", "1") or "1").strip() != "0":
                     try:
                         from scripts.ops.commit_state import commit_now as _commit_now
+                        # R1C：先把本轮 last_successful_collection 落盘，再带 expect 提交，
+                        # 并强制校验内容（禁止 verify_content.checked=false 误报成功）
+                        _last_coll = state.get("last_successful_collection") or ""
+                        ps.save_state(state)
                         _c = _commit_now("ops: collection checkpoint (%s)" % trigger,
-                                         after="collection")
+                                         after="collection",
+                                         expect={"path": "data/runtime/ops/production_state.json",
+                                                 "field": "last_successful_collection",
+                                                 "equals": _last_coll,
+                                                 "fields_present": ["processed_hashes"]},
+                                         require_expect=True,
+                                         guard_extra={"expected_remote_substr":
+                                                      os.environ.get("ASIP_EXPECT_REPO_SUBSTR",
+                                                                     "asip-site")})
                         emit("STATE_CHECKPOINT = %s" % json.dumps(_c, ensure_ascii=False)[:300])
                         if not _c.get("ok"):
                             results[label] = {"ok": False, "detail": "state_checkpoint_failed",

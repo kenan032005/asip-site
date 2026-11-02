@@ -29,6 +29,10 @@ def main(argv=None):
     ap.add_argument("--apply", action="store_true")
     ap.add_argument("--verify", action="store_true")
     ap.add_argument("--rollback", action="store_true")
+    ap.add_argument("--retire", action="store_true", help="迁移后退役旧单体（写墓碑）")
+    ap.add_argument("--backup-dir", default=None, help="旧单体离线备份目录（不进入仓库）")
+    ap.add_argument("--tree", action="store_true", help="输出迁移后预期的 Git 树")
+    ap.add_argument("--allow-remigrate", action="store_true")
     ap.add_argument("--expect", type=int, default=None, help="期望条目数（例如 20461）")
     ap.add_argument("--max-shard-mb", type=float, default=20.0)
     a = ap.parse_args(argv)
@@ -36,10 +40,20 @@ def main(argv=None):
     store = QuarantineStore(root=root, max_shard_bytes=int(a.max_shard_mb * 1024 * 1024))
     try:
         if a.dry_run or a.apply:
-            rep = store.migrate(dry_run=not a.apply)
+            rep = store.migrate(dry_run=not a.apply, allow_remigrate=a.allow_remigrate)
             print(json.dumps(rep, ensure_ascii=False, indent=1))
+            if rep.get("refused"):
+                return 9          # 已迁移：拒绝覆盖（非零，防误用）
             if a.apply:
                 print(json.dumps(store.verify_consistency(), ensure_ascii=False, indent=1))
+            return 0
+        if a.retire:
+            rep = store.retire_monolith(backup_dir=a.backup_dir, expect_items=a.expect)
+            print(json.dumps(rep, ensure_ascii=False, indent=1))
+            print(json.dumps(store.expected_tree(), ensure_ascii=False, indent=1))
+            return 0
+        if a.tree:
+            print(json.dumps(store.expected_tree(), ensure_ascii=False, indent=1))
             return 0
         if a.verify:
             rep = store.verify(expect_items=a.expect)

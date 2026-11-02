@@ -24,6 +24,7 @@
 import hashlib
 import json
 import os
+import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -98,28 +99,76 @@ class QuarantineStore:
 
     # ── 状态 ────────────────────────────────────────────────
     def mode(self):
-        """存储形态：legacy / sharded；manifest 存在但索引缺失 → 损坏（fail-closed）。"""
+        """存储形态：legacy / sharded。任何不一致都 fail-closed，绝不静默回退。
+
+        * manifest + index             → sharded（并校验 manifest schema）
+        * manifest 无 index            → corrupt
+        * 无 manifest 但 index/分片遗留 → corrupt（孤儿分片，说明迁移不完整/被误删）
+        * 都没有                        → legacy
+        """
         has_manifest = self.manifest_path.exists()
         has_index = self.index_path.exists()
-        if has_manifest and not has_index:
-            raise QuarantineCorrupt("manifest present but index.json missing "
-                                    "(migrated-but-broken; refusing to fall back to legacy)")
-        return "sharded" if (has_manifest and has_index) else "legacy"
+        orphan_shards = (self.shard_dir.exists()
+                         and (self.index_path.exists() or any(self.shard_dir.glob("*.json"))))
+        if has_manifest:
+            try:
+                m = json.loads(self.manifest_path.read_text(encoding="utf-8"))
+            except json.JSONDecodeError as e:
+                raise QuarantineCorrupt("manifest invalid json: %s" % e)
+            if not isinstance(m, dict) or m.get("schema") != SCHEMA_MANIFEST:
+                raise QuarantineCorrupt("manifest schema invalid: %r"
+                                        % (m.get("schema") if isinstance(m, dict) else None))
+            if not has_index:
+                raise QuarantineCorrupt("manifest present but index.json missing "
+                                        "(migrated-but-broken; refusing to fall back to legacy)")
+            self.read_index()      # 校验 index JSON 可解析 + schema/结构合法（损坏即抛）
+            return "sharded"
+        if orphan_shards:
+            raise QuarantineCorrupt("shards/index exist without manifest (incomplete migration)")
+        return "legacy"
 
     def is_sharded(self):
         return self.mode() == "sharded"
 
-    def read_index(self):
+    def read_index(self, strict=True):
+        """读索引。strict：JSON 损坏/schema 错误/结构非法 → QuarantineCorrupt（不得静默空）。"""
         try:
-            return json.loads(self.index_path.read_text(encoding="utf-8"))
-        except (FileNotFoundError, json.JSONDecodeError):
+            raw = self.index_path.read_text(encoding="utf-8")
+        except FileNotFoundError:
+            if strict and self.shard_dir.exists() and any(self.shard_dir.glob("*.json")):
+                raise QuarantineCorrupt("index.json missing while shard files exist")
             return {"schema": SCHEMA_INDEX, "total_items": 0, "shards": []}
-
-    def read_ids(self):
         try:
-            return json.loads(self.ids_path.read_text(encoding="utf-8"))
-        except (FileNotFoundError, json.JSONDecodeError):
+            doc = json.loads(raw)
+        except json.JSONDecodeError as e:
+            raise QuarantineCorrupt("index.json invalid json: %s" % e)
+        if strict:
+            if not isinstance(doc, dict) or doc.get("schema") != SCHEMA_INDEX:
+                raise QuarantineCorrupt("index.json schema invalid: %r" % (doc.get("schema")
+                                                                           if isinstance(doc, dict) else None))
+            if not isinstance(doc.get("shards"), list):
+                raise QuarantineCorrupt("index.json shards not a list")
+            for s_ in doc["shards"]:
+                for k in ("shard", "month", "part", "count", "bytes"):
+                    if k not in s_:
+                        raise QuarantineCorrupt("index shard entry missing %s: %r" % (k, s_))
+        return doc
+
+    def read_ids(self, strict=True):
+        """读 id 索引。strict：损坏/类型错误 → QuarantineCorrupt。"""
+        try:
+            raw = self.ids_path.read_text(encoding="utf-8")
+        except FileNotFoundError:
+            if strict and self.manifest_path.exists():
+                raise QuarantineCorrupt("ids.json missing while manifest exists")
             return {}
+        try:
+            doc = json.loads(raw)
+        except json.JSONDecodeError as e:
+            raise QuarantineCorrupt("ids.json invalid json: %s" % e)
+        if strict and not isinstance(doc, dict):
+            raise QuarantineCorrupt("ids.json must be an object")
+        return doc
 
     def _cleanup_temp(self, directory=None):
         d = Path(directory) if directory else self.shard_dir
@@ -135,7 +184,7 @@ class QuarantineStore:
         return n
 
     # ── 读 ──────────────────────────────────────────────────
-    def load_items(self, verify_checksums=False):
+    def load_items(self, verify_checksums=True):
         """读取全部条目：有分片走分片，否则回退旧单体。"""
         if self.is_sharded():
             idx = self.read_index()
@@ -162,14 +211,17 @@ class QuarantineStore:
             return []
         return doc.get("items") or []
 
-    def iter_items(self):
-        """流式读取（分片模式下逐片 yield，避免一次性 100MB 内存峰值）。"""
+    def iter_items(self, verify_checksums=True):
+        """流式读取（逐片 yield，避免一次 100MB 峰值）；默认校验每片 sha256。"""
         if self.is_sharded():
             idx = self.read_index()
+            self._cleanup_temp()
             for s in idx.get("shards", []):
                 path = self.shard_dir / s["shard"]
                 if not path.exists():
                     raise QuarantineCorrupt("missing shard: %s" % s["shard"])
+                if verify_checksums and s.get("sha256") and _sha256(path) != s["sha256"]:
+                    raise QuarantineCorrupt("sha256 mismatch: %s" % s["shard"])
                 try:
                     doc = json.loads(path.read_text(encoding="utf-8"))
                 except json.JSONDecodeError as e:
@@ -398,9 +450,33 @@ class QuarantineStore:
         _atomic_write(self.manifest_path, (json.dumps(manifest, ensure_ascii=False, indent=1) + "\n").encode())
 
     # ── 迁移 / 校验 / 回滚 ──────────────────────────────────
-    def migrate(self, dry_run=True, source_items=None, max_shard_bytes=None):
-        """单体 → 分片。dry_run 只计算不落盘。返回报告（含逐条哈希等价性）。"""
+    def migrate(self, dry_run=True, source_items=None, max_shard_bytes=None,
+                allow_remigrate=False):
+        """单体 → 分片。dry_run 只计算不落盘。
+
+        防呆：已经处于分片状态时**拒绝再次迁移**（否则会用旧单体覆盖迁移后新增的记录）。
+        需要重跑时显式 `allow_remigrate=True`，且仍会先校验现有分片自洽。
+        """
+        if not dry_run:
+            try:
+                state = self.mode()
+            except QuarantineCorrupt:
+                raise
+            if state == "sharded":
+                rep = self.verify_consistency()
+                if not allow_remigrate:
+                    return {"dry_run": False, "refused": True, "reason": "already_migrated",
+                            "consistent": True, "total_items": rep["on_disk"],
+                            "note": "拒绝用旧单体覆盖分片（会丢失迁移后新增）；"
+                                    "如需重建请显式 allow_remigrate=True 并先备份"}
         items = source_items if source_items is not None else self._load_legacy()
+        # 防丢增量：源端条目数少于现有分片条目数时，任何"迁移"都会丢数据 → 拒绝
+        if not dry_run and self.is_sharded():
+            cur = len(self.load_items())
+            if len(items) < cur:
+                raise QuarantineCorrupt(
+                    "refusing to overwrite %d sharded records with %d source records "
+                    "(would lose increments)" % (cur, len(items)))
         limit = int(max_shard_bytes or self.max_shard_bytes)
         by_month = {}
         for it in items:
@@ -467,51 +543,169 @@ class QuarantineStore:
             rep["count_match"] = len(items) == expect_items
         return rep
 
-    def verify_consistency(self):
-        """index / ids / manifest / 实际分片条目 四者一致性；不一致即抛。"""
+    def _read_manifest_strict(self):
+        try:
+            m = json.loads(self.manifest_path.read_text(encoding="utf-8"))
+        except FileNotFoundError:
+            raise QuarantineCorrupt("manifest missing")
+        except json.JSONDecodeError as e:
+            raise QuarantineCorrupt("manifest invalid json: %s" % e)
+        if not isinstance(m, dict) or m.get("schema") != SCHEMA_MANIFEST:
+            raise QuarantineCorrupt("manifest schema invalid")
+        return m
+
+    def verify_consistency(self, verify_checksums=True):
+        """内容级一致性：逐条 id 集合 / 归属月份 / ids 映射 / index / manifest / 分片字节。
+
+        只比较计数是不够的：必须证明"哪些记录"与"记录在哪个分片/哪个月"也一致。
+        """
+        if self.mode() != "sharded":
+            raise QuarantineCorrupt("not sharded")
         idx = self.read_index()
         ids = self.read_ids()
-        manifest = {}
-        try:
-            manifest = json.loads(self.manifest_path.read_text(encoding="utf-8"))
-        except (FileNotFoundError, json.JSONDecodeError):
-            pass
-        sum_counts = sum(int(s.get("count") or 0) for s in idx.get("shards", []))
-        on_disk = 0
-        missing = []
-        for s_ in idx.get("shards", []):
-            p = self.shard_dir / s_["shard"]
-            if not p.exists():
-                missing.append(s_["shard"])
-                continue
-            try:
-                doc = json.loads(p.read_text(encoding="utf-8"))
-            except json.JSONDecodeError:
-                raise QuarantineCorrupt("invalid json: %s" % s_["shard"])
-            n = len(doc.get("items") or [])
-            if n != int(s_.get("count") or 0):
-                raise QuarantineCorrupt("count mismatch %s: index=%s file=%d"
-                                        % (s_["shard"], s_.get("count"), n))
-            if s_.get("sha256") and _sha256(p) != s_["sha256"]:
+        manifest = self._read_manifest_strict()
+        if manifest.get("index") and manifest["index"] != "data/canonical/quarantine/index.json":
+            raise QuarantineCorrupt("manifest.index pointer unexpected: %r" % manifest["index"])
+        if manifest.get("shard_dir") and manifest["shard_dir"] != "data/canonical/quarantine/":
+            raise QuarantineCorrupt("manifest.shard_dir unexpected: %r" % manifest["shard_dir"])
+
+        items, seen_ids, dup_ids = [], {}, []
+        for s_ in idx["shards"]:
+            path = self.shard_dir / s_["shard"]
+            if not path.exists():
+                raise QuarantineCorrupt("missing shard: %s" % s_["shard"])
+            raw = path.read_bytes()
+            if int(s_.get("bytes") or -1) != len(raw):
+                raise QuarantineCorrupt("bytes mismatch %s: index=%s file=%d"
+                                        % (s_["shard"], s_.get("bytes"), len(raw)))
+            if verify_checksums and s_.get("sha256") and hashlib.sha256(raw).hexdigest() != s_["sha256"]:
                 raise QuarantineCorrupt("sha256 mismatch: %s" % s_["shard"])
-            on_disk += n
-        if missing:
-            raise QuarantineCorrupt("missing shards: %s" % ",".join(missing))
-        rep = {
-            "index_total": int(idx.get("total_items") or 0),
-            "sum_counts": sum_counts,
-            "on_disk": on_disk,
-            "ids": len(ids),
-            "manifest_total": manifest.get("total_items"),
-            "shards": len(idx.get("shards", [])),
+            try:
+                rows = json.loads(raw.decode("utf-8")).get("items") or []
+            except (json.JSONDecodeError, UnicodeDecodeError) as e:
+                raise QuarantineCorrupt("invalid json %s: %s" % (s_["shard"], e))
+            if len(rows) != int(s_.get("count") or 0):
+                raise QuarantineCorrupt("count mismatch %s: index=%s file=%d"
+                                        % (s_["shard"], s_.get("count"), len(rows)))
+            for it in rows:
+                qid = str(it.get("quarantine_id") or "")
+                if not qid:
+                    raise QuarantineCorrupt("record without quarantine_id in %s" % s_["shard"])
+                month = _month_of(it)
+                if month != s_["month"]:
+                    raise QuarantineCorrupt("month attribution mismatch: %s in %s (record month=%s)"
+                                            % (qid, s_["shard"], month))
+                if qid in seen_ids:
+                    dup_ids.append(qid)
+                seen_ids[qid] = month
+                items.append(it)
+        if dup_ids:
+            raise QuarantineCorrupt("duplicate quarantine_id: %s%s"
+                                    % (dup_ids[:5], "..." if len(dup_ids) > 5 else ""))
+
+        # ids 映射必须与真实记录集合、归属月份完全一致
+        missing_in_ids = sorted(set(seen_ids) - set(ids))
+        extra_in_ids = sorted(set(ids) - set(seen_ids))
+        if missing_in_ids or extra_in_ids:
+            raise QuarantineCorrupt("ids mapping mismatch: missing=%d%s extra=%d%s"
+                                    % (len(missing_in_ids), missing_in_ids[:3],
+                                       len(extra_in_ids), extra_in_ids[:3]))
+        bad_month = [k for k, v in ids.items() if seen_ids.get(k) != v]
+        if bad_month:
+            raise QuarantineCorrupt("ids month mismatch: %s" % bad_month[:5])
+
+        total = len(items)
+        sum_counts = sum(int(x.get("count") or 0) for x in idx["shards"])
+        if not (total == sum_counts == int(idx.get("total_items") or -1)
+                == int(manifest.get("total_items") or -1)):
+            raise QuarantineCorrupt("totals inconsistent: disk=%d sum=%d index=%s manifest=%s"
+                                    % (total, sum_counts, idx.get("total_items"),
+                                       manifest.get("total_items")))
+        return {"consistent": True, "on_disk": total, "ids": len(ids),
+                "index_total": int(idx["total_items"]), "sum_counts": sum_counts,
+                "manifest_total": int(manifest["total_items"]),
+                "shards": len(idx["shards"]), "months": sorted({v for v in seen_ids.values()})}
+
+    def backup_legacy(self, dest, expect_items=None):
+        """把迁移前单体复制到**离线**位置并校验 sha256（不进入生产分支）。"""
+        src = self.legacy
+        if not src.exists():
+            return {"ok": False, "error": "legacy monolith not found"}
+        dest = Path(dest)
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(src, dest)
+        src_sha, dst_sha = _sha256(src), _sha256(dest)
+        if src_sha != dst_sha:
+            raise QuarantineCorrupt("backup sha mismatch: %s != %s" % (src_sha, dst_sha))
+        n = len(json.loads(dest.read_text(encoding="utf-8")).get("items") or [])
+        if expect_items is not None and n != expect_items:
+            raise QuarantineCorrupt("backup item count %d != expected %d" % (n, expect_items))
+        return {"ok": True, "path": str(dest), "bytes": dest.stat().st_size,
+                "sha256": dst_sha, "items": n,
+                "note": "离线备份：>100MB，禁止推回生产分支；仅用于离线恢复"}
+
+    def retire_monolith(self, backup_dir=None, expect_items=None):
+        """分片迁移后**安全退役**旧单体：替换为小型墓碑清单（不含任何记录）。
+
+        动机：迁移完成后若 104,825,716 B 的旧单体仍留在 `data/canonical/quarantine.json`，
+        下一次 Commit state 会再次触发 GitHub 100MB 单文件限制（本次故障的根因）。
+        墓碑文件 < 4KB，声明 retired 与迁移前体积/哈希/条目数，旧读者读到 0 条（这是
+        退役的预期语义：数据在分片中，旧代码不得再直接读单体）。
+        """
+        if self.mode() != "sharded":
+            raise QuarantineCorrupt("retire requires sharded mode")
+        rep = self.verify_consistency()
+        if expect_items is not None and rep["on_disk"] != expect_items:
+            raise QuarantineCorrupt("shard item count %d != expected %d"
+                                    % (rep["on_disk"], expect_items))
+        backup = None
+        if self.legacy.exists():
+            pre_bytes = self.legacy.stat().st_size
+            pre_sha = _sha256(self.legacy)
+            if backup_dir:
+                backup = self.backup_legacy(Path(backup_dir) / "quarantine.pre_shard.json",
+                                            expect_items=expect_items)
+            else:
+                backup = {"ok": False, "note": "no backup_dir given (offline copy skipped)",
+                          "bytes": pre_bytes, "sha256": pre_sha}
+            # 保留离线备份的哈希（用于再次校验）；单体 >100MB 不得留在仓库路径
+            pre = {"bytes": pre_bytes, "sha256": pre_sha, "items": rep["on_disk"]}
+        else:
+            pre = {"bytes": 0, "sha256": "", "items": 0}
+        tombstone = {
+            "schema_version": "2.0",
+            "retired": True,
+            "items": [],
+            "note": "单体已退役：quarantine 数据改为分片存储，读取请用 QuarantineStore",
+            "manifest": "data/canonical/quarantine_manifest.json",
+            "total_items": rep["on_disk"],
+            "pre_migration": pre,
         }
-        vals = {rep["index_total"], rep["sum_counts"], rep["on_disk"], rep["ids"]}
-        if len(vals) != 1:
-            raise QuarantineCorrupt("inconsistent totals: %s" % rep)
-        if rep["manifest_total"] is not None and int(rep["manifest_total"]) != rep["on_disk"]:
-            raise QuarantineCorrupt("manifest total mismatch: %s" % rep)
-        rep["consistent"] = True
-        return rep
+        _atomic_write(self.legacy, (json.dumps(tombstone, ensure_ascii=False, indent=1) + "\n").encode())
+        size = self.legacy.stat().st_size
+        if size >= 4096:
+            raise QuarantineCorrupt("tombstone unexpectedly large: %d" % size)
+        if self.mode() != "sharded" or len(self.load_items()) != rep["on_disk"]:
+            raise QuarantineCorrupt("post-retire verification failed")
+        return {"ok": True, "tombstone_bytes": size, "items_in_shards": rep["on_disk"],
+                "backup": backup, "committable": True,
+                "warning": "旧代码直接读 quarantine.json 将得到 0 条；必须先部署新 pin"}
+
+    def expected_tree(self):
+        """迁移+退役后的预期 Git 树（path → bytes），用于远端/本地 tree 校验。"""
+        tree = {}
+        if self.mode() == "sharded":
+            idx = self.read_index()
+            for s_ in idx["shards"]:
+                tree["data/canonical/quarantine/%s" % s_["shard"]] = int(s_["bytes"])
+            tree["data/canonical/quarantine/index.json"] = self.index_path.stat().st_size
+            tree["data/canonical/quarantine/ids.json"] = self.ids_path.stat().st_size
+            tree["data/canonical/quarantine_manifest.json"] = self.manifest_path.stat().st_size
+        if self.legacy.exists():
+            tree["data/canonical/quarantine.json"] = self.legacy.stat().st_size
+        return {"paths": tree, "files": len(tree), "max_bytes": max(tree.values() or [0]),
+                "github_hard_limit": 100 * 1024 * 1024,
+                "all_below_hard_limit": all(v < 100 * 1024 * 1024 for v in tree.values())}
 
     def rollback_to_monolith(self, expect_items=None):
         """回滚：把**当前全部分片（含迁移后新增记录）**合并回旧单体，再移除分片。

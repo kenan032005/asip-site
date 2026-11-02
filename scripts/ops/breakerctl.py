@@ -161,9 +161,13 @@ def main(argv=None):
     elif a.cmd == "strike":
         doc = paid_gate.record_strike(a.reason, ttl_hours=a.ttl_hours)
         out = {"breaker": doc}
+        rc = 0
         if a.repo:
             out["publish"] = publish(a.repo, a.branch)
+            if not out["publish"].get("ok"):
+                rc = 6      # 本地已熔断但远端持久化失败：必须非零（不得当成功）
         print(json.dumps(out, ensure_ascii=False, indent=1))
+        return rc
     elif a.cmd == "clear":
         if not a.reason or a.reason == "manual":
             print(json.dumps({"ok": False, "error": "clear requires explicit --reason (audit)"},
@@ -171,20 +175,41 @@ def main(argv=None):
             return 2
         doc = paid_gate.clear_breaker(by=a.by, reason=a.reason)
         out = {"breaker": doc}
+        rc = 0
         if a.repo:
             out["publish"] = publish(a.repo, a.branch, doc=doc)
+            if not out["publish"].get("ok"):
+                rc = 7      # 本地已解除但远端未同步 → 非零（远端仍可能 tripped）
         print(json.dumps(out, ensure_ascii=False, indent=1))
+        return rc
     elif a.cmd == "publish":
-        print(json.dumps(publish(a.repo, a.branch), ensure_ascii=False))
+        res = publish(a.repo, a.branch)
+        print(json.dumps(res, ensure_ascii=False))
+        return 0 if res.get("ok") else 4
     elif a.cmd == "bootstrap":
+        # 首次初始化：建分支 + 写入初始状态 + 读回验证（与日常 fetch 分离）
         try:
-            print(json.dumps(ensure_branch(a.repo, a.branch), ensure_ascii=False))
+            boot = ensure_branch(a.repo, a.branch)
         except RemoteError as e:
             print(json.dumps({"ok": False, "error": str(e)[:200]}, ensure_ascii=False))
             return 1
+        pub = publish(a.repo, a.branch)
+        if not pub.get("ok"):
+            print(json.dumps({"ok": False, "bootstrap": boot, "publish": pub},
+                             ensure_ascii=False))
+            return 5
+        back = fetch(a.repo, a.branch)
+        ok = bool(back.get("ok"))
+        print(json.dumps({"ok": ok, "bootstrap": boot, "publish": pub, "readback": back},
+                         ensure_ascii=False))
+        return 0 if ok else 5
     else:
-        print(json.dumps(fetch(a.repo, a.branch), ensure_ascii=False))
-    return 0
+        res = fetch(a.repo, a.branch)
+        print(json.dumps(res, ensure_ascii=False))
+        if res.get("ok"):
+            return 0
+        # 远端不可验证/文件缺失 → 非零退出（workflow 步骤失败 → 后续付费任务不启动）
+        return 3 if (res.get("bootstrap_required") or "error" in res) else 3
 
 
 if __name__ == "__main__":
