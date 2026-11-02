@@ -722,6 +722,20 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
             _do(t["task"], t["task"])
     if _mode == "collection_only":
         # 采集 + checkpoint 之后立即收尾：不跑 timeline / AI / 评估 / 简报 / 报告 / 视图 / 部署
+        # R1D-HOTFIX：账本汇总也必须留痕——collection_only 的"全 0 账本"本身就是审计证据
+        try:
+            from scripts.ops import ai_ledger as _al
+            _sum = _al.write_summary(run_id=run.get("run_id"))
+            run["ai_usage"] = _sum
+            run["ai_calls_total"] = _sum["totals"]["calls"]
+            run["ai_tokens_input"] = _sum["totals"]["input_tokens"]
+            run["ai_tokens_output"] = _sum["totals"]["output_tokens"]
+            run["ai_estimated_cost"] = _sum["totals"]["estimated_cost"]
+            run["ai_cost_basis"] = ("estimated" if _sum["totals"]["estimated_cost_available"]
+                                    else "zero_calls_unpriced")
+            run["notes"].append("collection_only_no_paid_calls")
+        except Exception as _e:  # noqa: BLE001
+            run["notes"].append("ai_ledger_summary_failed:%s" % str(_e)[:120])
         ops.finish_run(run, status="completed")
         run["deploy_requested"] = False
         run["deploy_provenance"] = None
@@ -962,12 +976,15 @@ def main(argv=None):
     except CheckpointFailed as _e:
         # 只有"状态/checkpoint 类"失败才写标记：workflow 据此熔断；
         # 未授权 production / 非法 run_mode 等拒绝路径不得造成误 strike。
+        # 标记路径可由 workflow 指定（必须在 $GITHUB_WORKSPACE 内，hashFiles 才看得见）
+        _marker = os.environ.get("ASIP_STATE_FAILURE_MARKER") or "/tmp/orch_state_failure"
         try:
-            with open("/tmp/orch_state_failure", "w", encoding="utf-8") as _f:
-                _f.write(str(_e)[:300])
+            _mp = Path(_marker)
+            _mp.parent.mkdir(parents=True, exist_ok=True)
+            _mp.write_text(str(_e)[:300], encoding="utf-8")
         except OSError:
             pass
-        emit("RUN_ABORTED = %s" % _e)
+        _emit("RUN_ABORTED = %s" % _e)
         return 2
     if args.json:
         print(json.dumps({"deploy_required": res["deploy_required"],
