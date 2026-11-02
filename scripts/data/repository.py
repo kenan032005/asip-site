@@ -408,6 +408,13 @@ class Repository:
     def _save_dedup(self, path: Path, items: list, run_id: str, id_key: str, schema_name: str = None) -> dict:
         rid = run_id or self.run_id or generate_run_id()
         # 保存前整体校验：任一记录不合规 → 整个保存失败，原文件保持字节级不变
+        # P0-2A：行级 run_id 是记账元数据；上游（stage3）可能写入 GITHUB_RUN_ID（纯数字）。
+        # 规范化为合规信封 rid，避免整批保存中止（C6-R5F 已知缺陷，导出修好后暴露）。
+        import re as _re
+        _rid_re = _re.compile(r"^\d{8}T\d{6}\+0800_[a-z0-9]{6}$")
+        for _it in items:
+            if isinstance(_it, dict) and not _rid_re.match(str(_it.get("run_id") or "")):
+                _it["run_id"] = rid
         if schema_name:
             pre = self._validate_records(items, schema_name, id_key)
             if pre:

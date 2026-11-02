@@ -291,6 +291,13 @@ def finalize_run_ledger(run_id=None, path=None, summary_path=None):
               and back.get("totals", {}).get("output_tokens") == s["totals"]["output_tokens"])
         s["verified"] = bool(ok)
         s["ok"] = bool(ok)
+        # 把 verified 标志写回文件（落盘证据与内存一致），并再次读回确认
+        tmp2 = p_.with_suffix(".json.tmp")
+        tmp2.write_text(json.dumps(s, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+        os.replace(tmp2, p_)
+        back2 = json.loads(p_.read_text(encoding="utf-8"))
+        s["verified"] = s["verified"] and (back2.get("verified") is True)
+        s["ok"] = s["verified"]
         return s
     except LedgerUnavailable as e:
         return {"ok": False, "verified": False, "run_id": rid,
