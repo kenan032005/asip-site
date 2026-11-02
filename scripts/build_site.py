@@ -455,17 +455,55 @@ def load_db(data_dir=None):
 
 
 def get_build_meta(run_id=None):
-    """从 status.json 读取或生成构建元数据。"""
+    """从 status.json / canonical 读取或生成构建元数据（asip5：附带数据截止时间）。"""
     status = load_json(os.path.join(DATA_DIR, "status.json"), {})
     if run_id is None:
         run_id = status.get("run_id", "")
+    # asip5 P0-R1：数据新鲜度 —— data_as_of 优先取时间契约/status，其次 canonical run_id 时间
+    data_as_of = (status.get("data_as_of") or status.get("data_generated_at") or "")
+    if not data_as_of:
+        try:
+            canon = load_json(os.path.join(DATA_DIR, "canonical", "event_clusters.json"), {})
+            data_as_of = canon.get("updated_at") or canon.get("generated_at") or ""
+        except Exception:
+            data_as_of = ""
+    age_hours = None
+    try:
+        from datetime import datetime, timezone
+        ts = str(data_as_of).replace("Z", "+00:00")
+        dt = datetime.fromisoformat(ts)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        age_hours = round((datetime.now(timezone.utc) - dt).total_seconds() / 3600, 1)
+    except Exception:
+        age_hours = None
     return {
         "run_id": run_id,
         "pipeline_version": PIPELINE_VERSION,
         "build_time": bj_iso(),
         "build_time_bj": bj_format(),
         "source_commit": (status.get("source_commit") or "")[:8],
+        "data_as_of": data_as_of,
+        "data_age_hours": age_hours,
+        "data_stale": bool(age_hours is not None and age_hours > 12),
     }
+
+
+def _staleness_banner(meta):
+    """asip5 P0-R1：数据过期提示（>12h 黄色 / >48h 红色）。无 data_as_of 时不显示。"""
+    age = meta.get("data_age_hours")
+    if age is None:
+        return ""
+    if age <= 12:
+        return ""
+    color = "#b45309" if age <= 48 else "#b91c1c"
+    bg = "#fef3c7" if age <= 48 else "#fee2e2"
+    label = "数据可能已过期" if age <= 48 else "数据严重过期"
+    return ('<div id="asip-staleness-banner" role="status" style="position:sticky;top:0;z-index:9999;'
+            'background:%s;color:%s;border-bottom:1px solid %s;padding:8px 12px;'
+            'font:14px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;text-align:center;">'
+            '%s：数据截至 %s（距今 %.1f 小时），请谨慎引用。</div>\n'
+            % (bg, color, color, label, meta.get("data_as_of") or "未知", age))
 
 
 def inject_meta(html, meta):
@@ -476,9 +514,14 @@ def inject_meta(html, meta):
     if 'rel="icon"' not in html:
         meta_js = '<link rel="icon" href="data:,">' + chr(10) + meta_js
     # 插入在 <head> 末尾或 api.js 引用之前
+    banner = _staleness_banner(meta)
     head_close = "</head>"
     if head_close in html:
-        return html.replace(head_close, meta_js + head_close, 1)
+        out = html.replace(head_close, meta_js + head_close, 1)
+        if banner and "<body" in out:
+            idx = out.index(">", out.index("<body"))
+            out = out[:idx + 1] + "\n" + banner + out[idx + 1:]
+        return out
     # fallback: 插入在 <body> 之前
     body_open = "<body"
     if body_open in html:

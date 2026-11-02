@@ -1195,20 +1195,13 @@ def _make_legacy_record(nu, state, **extra):
 
 
 def _load_quarantine_urls():
-    try:
-        path = os.path.join(ROOT, "data", "canonical", "quarantine.json")
-        with open(path, "r", encoding="utf-8") as f:
-            q = json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
-        return {}
-    urls = {}
-    for item in q.get("items", []):
-        oid = norm_url(item.get("original_id", ""))
-        if oid and item.get("reason_code") not in ("", "not_security_relevant",
-                                                    "weak_signal_needs_review",
-                                                    "wrong_country"):
-            urls[oid] = item.get("quarantine_id", "")
-    return urls
+    """asip5：统一走 QuarantineStore（单体/分片自适应）。
+
+    已迁移（manifest 存在）但索引/分片损坏时 **抛 QuarantineCorrupt**，绝不静默回退
+    旧单体或返回空表——隔离终态去重必须 fail-closed，否则会重新处理已隔离内容。
+    """
+    from data.quarantine_store import QuarantineStore
+    return QuarantineStore(root=ROOT).url_map()
 
 
 # ── 向后兼容：保留旧函数签名，内部委托到集中式状态 ──

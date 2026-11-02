@@ -395,8 +395,21 @@ def _build_weekly_input(country, social, disease, cutoff):
 # ────────────────────────────────────────────────────────────────────────────
 
 def _flash_provider():
+    """asip5：所有付费路径的唯一 provider 出口。
+
+    - 调用前：`paid_gate.assert_paid_allowed()`（暂停/熔断/体积超限时直接抛，不发请求）
+    - 调用后：`ai_ledger` 统一记账（组件/模型/token/缓存/重试/估算费用）
+    """
     from scripts.ai.providers.deepseek_v4_flash import DeepSeekV4FlashProvider
-    return DeepSeekV4FlashProvider()
+    inner = DeepSeekV4FlashProvider()
+    # 最终付费门禁：构造 provider 之前先判定（暂停/熔断/体积超限即拒绝）
+    from scripts.ops import ai_ledger, paid_gate
+    paid_gate.assert_paid_allowed("provider_factory")
+    try:
+        return ai_ledger.wrap_provider(inner)
+    except Exception as e:  # noqa: BLE001
+        # 包装失败绝不允许退回裸 provider（否则门禁与账本同时失效）
+        raise RuntimeError("provider_gate_unavailable: %s" % e) from e
 
 
 def _enrich_prompt(task_type):

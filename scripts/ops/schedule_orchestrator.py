@@ -315,10 +315,14 @@ def plan_due_tasks(state, now_bjt=None, schedule_enabled=True):
     return {"enabled": True, "due": due, "now_bjt": now.isoformat()}
 
 
-def _run_script(args, emit, timeout=1800):
+def _run_script(args, emit, timeout=1800, component=""):
     emit("$ python %s" % " ".join(args))
+    _env = dict(os.environ)
+    if component:
+        _env["ASIP_AI_COMPONENT"] = component
+    _env.setdefault("ASIP_RUN_ID", os.environ.get("GITHUB_RUN_ID") or "")
     try:
-        r = subprocess.run([sys.executable] + args, cwd=str(ROOT),
+        r = subprocess.run([sys.executable] + args, cwd=str(ROOT), env=_env,
                            capture_output=True, text=True, timeout=timeout)
         emit((r.stdout or "")[-2500:])
         if r.returncode != 0:
@@ -385,6 +389,55 @@ def _daily_report_meta(root):
             "report_id": report_id, "fact_count": daily.get("fact_count")}
 
 
+RUN_MODES = ("production", "shadow", "collection_only")
+COLLECTION_ONLY_TASKS = {"collection"}
+
+
+class InvalidRunMode(RuntimeError):
+    """非法运行模式：一律拒绝，绝不静默降级为 production。"""
+
+
+def run_mode():
+    """运行模式：production（未设置时）/ shadow / collection_only。
+
+    - 非法值 → InvalidRunMode（fail-closed，不降级）
+    - shadow：**只读**，不采集、不 AI、不报告、不写回、不部署
+    - collection_only：只跑采集 + 采集 checkpoint；禁止一切付费路径与自动部署，
+      且不依赖 canary=false、不使用全局暂停开关（否则采集也会被禁）
+    """
+    raw = os.environ.get("ASIP_RUN_MODE")
+    if raw is None or str(raw).strip() == "":
+        return "production"
+    m = str(raw).strip().lower()
+    if m not in RUN_MODES:
+        raise InvalidRunMode("invalid ASIP_RUN_MODE=%r (allowed: %s)" % (raw, ",".join(RUN_MODES)))
+    return m
+
+
+def _event_name():
+    return os.environ.get("GITHUB_EVENT_NAME", "schedule")
+
+
+def automatic_runs_locked():
+    """独立闸门：自动触发（schedule / repository_dispatch）在恢复前一律阻断。
+
+    与 PRODUCTION_SCHEDULE_ENABLED 无关：后者是"业务开关"，本闸门是"发布闸门"，
+    必须在正式恢复自动调度时显式置 ASIP_ALLOW_AUTOMATIC_RUNS=1 才放行。
+    """
+    if _event_name() not in ("schedule", "repository_dispatch"):
+        return False
+    return (os.environ.get("ASIP_ALLOW_AUTOMATIC_RUNS", "0") or "0").strip() != "1"
+
+
+def manual_production_authorized():
+    """人工 production 轮需要显式授权（collection_only 不需要）。"""
+    return (os.environ.get("ASIP_ALLOW_MANUAL_PRODUCTION", "0") or "0").strip() == "1"
+
+
+class CheckpointFailed(RuntimeError):
+    """采集后 checkpoint 失败：必须中止整轮（后续付费任务一律不得启动）。"""
+
+
 def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
             trigger_meta=None):
     """执行 due 任务（production mode）。
@@ -398,6 +451,34 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
     trigger = "manual_canary" if canary else (tm.get("trigger_source")
                                               or "scheduled_orchestrator")
     root = Path(data_root) if data_root else ROOT / "data"
+
+    # ── R1D-HOTFIX：运行模式（shadow 只读；非法值拒绝）─────────────────
+    try:
+        _mode = run_mode()
+    except InvalidRunMode as _e:
+        emit("INVALID_RUN_MODE = %s" % _e)
+        raise
+    if _mode == "shadow":
+        emit("SHADOW_READ_ONLY = true（不采集/AI/报告/写回/部署）")
+        return {"deploy_required": False, "deploy_request": None,
+                "executed": [], "mode": "shadow",
+                "results": {"shadow": {"ok": True, "detail": "read_only_noop"}}}
+
+    # ── asip5 P0-R1：最外层暂停门禁（先于任何付费子任务）──────────────
+    # PRODUCTION_SCHEDULE_ENABLED=false 只清空 due 列表；execute() 仍会运行
+    # news_localization / assessment / homepage_brief 等无条件付费子任务。
+    # 因此在入口即判定：暂停 → 立即返回，不采集、不调用模型、不写状态。
+    try:
+        from scripts.ops import paid_gate as _pg
+        _paused, _why = _pg.paused()
+    except Exception as _e:  # noqa: BLE001
+        _paused, _why = True, "gate_unavailable:%s" % _e
+    if _paused:
+        emit("PAID_TASKS_PAUSED = %s" % _why)
+        return {"deploy_required": False, "deploy_request": None,
+                "executed": [], "pause_reason": _why,
+                "results": {"paused": {"ok": True, "detail": _why}}}
+
     run = ops.new_run("asip-production-orchestrator",
                       os.environ.get("GITHUB_RUN_ID") or "local")
     run["notes"].append("trigger=%s" % trigger)
@@ -437,10 +518,45 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
             state = _reload_state(state)
             if ok:
                 ps.record_run(state, "last_successful_collection", ok=True)
+                # asip5 P0-R1：采集完成立刻持久化，避免"采集 50min + AI 超时"丢掉整轮成果
+                # 并导致下轮重复采集/重复付费。失败 → strike 并中止后续付费任务。
+                if (os.environ.get("ASIP_COMMIT_AFTER_COLLECTION", "1") or "1").strip() != "0":
+                    try:
+                        from scripts.ops.commit_state import commit_now as _commit_now
+                        # R1C：先把本轮 last_successful_collection 落盘，再带 expect 提交，
+                        # 并强制校验内容（禁止 verify_content.checked=false 误报成功）
+                        _last_coll = state.get("last_successful_collection") or ""
+                        ps.save_state(state)
+                        _c = _commit_now("ops: collection checkpoint (%s)" % trigger,
+                                         after="collection",
+                                         expect={"path": "data/runtime/ops/production_state.json",
+                                                 "field": "last_successful_collection",
+                                                 "equals": _last_coll,
+                                                 "fields_present": ["processed_hashes"]},
+                                         require_expect=True,
+                                         guard_extra={"expected_remote_substr":
+                                                      os.environ.get("ASIP_EXPECT_REPO_SUBSTR",
+                                                                     "asip-site")})
+                        emit("STATE_CHECKPOINT = %s" % json.dumps(_c, ensure_ascii=False)[:300])
+                        if not _c.get("ok"):
+                            results[label] = {"ok": False, "detail": "state_checkpoint_failed",
+                                              "error": _c.get("error")}
+                            emit("STATE_CHECKPOINT_FAILED -> abort entire run")
+                            raise CheckpointFailed("state_checkpoint_failed: %s" % _c.get("error"))
+                    except CheckpointFailed:
+                        raise
+                    except Exception as _e:  # noqa: BLE001
+                        # 异常同样必须中止（不得用 try/except/pass 掩盖）
+                        emit("STATE_CHECKPOINT_ERROR = %s -> abort entire run" % _e)
+                        raise CheckpointFailed("state_checkpoint_exception: %s" % _e)
                 # §十四：真实采集成功后刷新 source health 快照
-                sh_ok = _run_script(["scripts/ops/source_health.py"], emit)
-                results["source_health"] = {"ok": sh_ok,
-                                            "detail": "source_health refresh"}
+                # R1D-HOTFIX：collection_only 只允许 collection_run + checkpoint，跳过此项
+                if _mode == "collection_only":
+                    run["notes"].append("collection_only_skipped_source_health")
+                else:
+                    sh_ok = _run_script(["scripts/ops/source_health.py"], emit)
+                    results["source_health"] = {"ok": sh_ok,
+                                                "detail": "source_health refresh"}
             m = _read_json_file(ps.OPS_DIR / "collection_summary.json") or {}
             results[label] = {"ok": ok, "detail": "collection_run --execute",
                               "metrics_source": m.get("metrics_source"),
@@ -472,7 +588,7 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
                 results[label] = {"ok": True, "detail": "no_new_eligible_zero_calls",
                                   "ai_calls": 0}
                 return True
-            ok = _run_script(["scripts/ops/enrichment_run.py", "--kind", "social"], emit)
+            ok = _run_script(["scripts/ops/enrichment_run.py", "--kind", "social"], emit, component="social_ai")
             state = _reload_state(state)
             if ok:
                 ps.record_run(state, "last_successful_ai", ok=True)
@@ -511,7 +627,7 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
                 results[label] = {"ok": True, "detail": "no_new_eligible_zero_calls",
                                   "ai_calls": 0}
                 return True
-            ok = _run_script(["scripts/ops/enrichment_run.py", "--kind", "disease"], emit)
+            ok = _run_script(["scripts/ops/enrichment_run.py", "--kind", "disease"], emit, component="disease_ai")
             state = _reload_state(state)
             if ok:
                 ps.record_run(state, "last_disease_run", ok=True)
@@ -580,19 +696,47 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
             return ok
         return False
 
+    if _mode == "collection_only":
+        # 只保留采集任务：即使历史 due 列表包含 AI/报告，也不会触发付费调用
+        _dropped = [t.get("task") for t in plan["due"]
+                    if t.get("task") not in COLLECTION_ONLY_TASKS]
+        plan = {"due": [t for t in plan["due"] if t.get("task") in COLLECTION_ONLY_TASKS]}
+        if _dropped:
+            run["notes"].append("collection_only_dropped:%s" % ",".join(map(str, _dropped)))
+        run["notes"].append("mode=collection_only")
+
     for t in plan["due"]:
         if t["task"] == "collection":
             ok = _do("collection", "collection")
-            if ok:
-                # 采集后重估 AI（新 eligible 可能出现）
+            if ok and _mode != "collection_only":
+                # 采集后重估 AI（新 eligible 可能出现）；collection_only 下严禁自动触发
                 if new_eligible_exists(state, "social", root):
                     _do("social_ai", "social_ai")
                 if new_eligible_exists(state, "disease", root):
                     _do("disease_ai", "disease_ai")
+            elif ok:
+                run["notes"].append("collection_only_skipped_auto_ai")
         elif t["task"] in ("social_ai", "disease_ai"):
             _do(t["task"], t["task"])
         elif t["task"] in ("daily_report", "weekly_report"):
             _do(t["task"], t["task"])
+    if _mode == "collection_only":
+        # 采集 + checkpoint 之后立即收尾：不跑 timeline / AI / 评估 / 简报 / 报告 / 视图 / 部署
+        ops.finish_run(run, status="completed")
+        run["deploy_requested"] = False
+        run["deploy_provenance"] = None
+        prev = []
+        if ps.OPS_STATUS_FILE.exists():
+            try:
+                prev = json.loads(ps.OPS_STATUS_FILE.read_text(encoding="utf-8")).get("runs", [])
+            except Exception:
+                prev = []
+        ops.save_ops(run, previous=prev[-20:])
+        emit("DEPLOY_REQUIRED = false (collection_only)")
+        return {"deploy_required": False, "deploy_request": None,
+                "executed": [k for k in results], "results": results,
+                "mode": "collection_only"}
+
     results.setdefault("timeline", {"ok": _run_script(["scripts/ops/timeline_run.py"], emit),
                                     "detail": "timeline_run"})
     # C6-R5E：AI enrichment → 发布链桥接。
@@ -608,7 +752,7 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
     # 否则长采集轮次被外层硬杀（实测 1858/2631/1817s 三轮失败）。3300s 给兜底留出
     # 优雅停机窗口，且 46min + 下游 AI/报告/导出 ≈ 仍在编排 job 的 60min 之内。
     results["news_localization"] = {
-        "ok": _run_script(["scripts/ops/news_localization_run.py"], emit,
+        "ok": _run_script(["scripts/ops/news_localization_run.py"], emit, component="news_localization",
                           timeout=3300),
         "detail": "news_localization"}
     # C7-5：先重建 C1A 情报流视图（news_stream）。
@@ -624,7 +768,7 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
         "ok": _run_script(["tools/c1a/build_views.py"], emit, timeout=600),
         "detail": "c1a_views"}
     results["daily_assessment"] = {
-        "ok": _run_script(["scripts/ops/assessment_run.py"], emit, timeout=900),
+        "ok": _run_script(["scripts/ops/assessment_run.py"], emit, timeout=900, component="daily_assessment"),
         "detail": "assessment_run"}
     # canonical 变更后必须再生成遗留/公开视图（events.json / pending / raw / quarantine /
     # public/published_events / current_metrics），否则 deploy 的 V17 canonical↔legacy 校验失败
@@ -636,7 +780,7 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
     # C7-5：首页情报事实包 → 首页 AI 简报（6h 节奏 + input_hash 缓存；无实质变化则 REAL_AI_CALLS=0）
     #       → 首页公开视图（8 板块 + 风险/活动地图 + 情报流）。必须在 executive_view 之后。
     results["homepage_brief"] = {
-        "ok": _run_script(["scripts/ops/homepage_brief_run.py"], emit, timeout=900),
+        "ok": _run_script(["scripts/ops/homepage_brief_run.py"], emit, timeout=900, component="homepage_brief"),
         "detail": "homepage_brief"}
     results["homepage_view"] = {
         "ok": _run_script(["scripts/ops/homepage_view.py", "--apply"], emit),
@@ -667,6 +811,23 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
         deploy_ctx["publication_localized_events"] = pub.get("localized")
         deploy_ctx["deploy_requested_at"] = ps._utcnow_iso()
     record_publication_digest(pub, ps._utcnow_iso(), emit)
+
+    # asip5 P0-R1：统一 AI 账本汇总（覆盖全部付费路径）+ 阈值告警
+    try:
+        from scripts.ops import ai_ledger as _al, paid_gate as _pg3
+        _sum = _al.write_summary(run_id=run.get("run_id"))
+        run["ai_usage"] = _sum
+        run["ai_calls_total"] = _sum["totals"]["calls"]
+        run["ai_tokens_input"] = _sum["totals"]["input_tokens"]
+        run["ai_tokens_output"] = _sum["totals"]["output_tokens"]
+        run["ai_cache_hit_tokens"] = _sum["totals"]["cache_hit_tokens"]
+        run["ai_estimated_cost"] = _sum["totals"]["estimated_cost"]
+        run["ai_cost_basis"] = ("estimated" if _sum["totals"]["estimated_cost_available"] else "unpriced")
+        for _a in _pg3.check_thresholds(state=state, ai_last_run_calls=_sum["totals"]["calls"]):
+            _pg3.emit_alert(_a["kind"], _a["detail"])
+            run["notes"].append("alert:%s" % _a["kind"])
+    except Exception as _e:  # noqa: BLE001
+        run["notes"].append("ai_ledger_summary_failed:%s" % str(_e)[:120])
 
     ops.finish_run(run, status="completed")
     # §K：deploy 请求与 provenance 持久化到 ops run（随 production-state 提交）。
@@ -733,6 +894,8 @@ def _latest_report_class(root):
 def main(argv=None):
     ap = argparse.ArgumentParser(description="Stage8D hourly due-task orchestrator")
     ap.add_argument("--run", action="store_true", help="执行 due 任务")
+    ap.add_argument("--mode", default=None, choices=list(RUN_MODES),
+                    help="运行模式：production/shadow/collection_only（collection_only=零付费采集）")
     ap.add_argument("--plan", action="store_true", help="只输出计划（不执行）")
     ap.add_argument("--canary", action="store_true", help="manual canary 标记")
     ap.add_argument("--now", default=None, help="测试用 BJT now（ISO）")
@@ -776,8 +939,36 @@ def main(argv=None):
     def _emit(s):
         print(s, file=sys.stderr)
 
-    res = execute(plan, state, emit=_emit, canary=args.canary,
-                  trigger_meta=trigger_meta)
+    if getattr(args, "mode", None):
+        os.environ["ASIP_RUN_MODE"] = args.mode
+    try:
+        _m = run_mode()
+    except InvalidRunMode as _e:
+        _emit("INVALID_RUN_MODE = %s" % _e)
+        return 4
+    # 发布闸门：正式恢复自动调度前，自动触发一律阻断（不依赖 PRODUCTION_SCHEDULE_ENABLED）
+    if automatic_runs_locked():
+        _emit("AUTOMATIC_RUNS_LOCKED = true（event=%s；恢复自动调度需 ASIP_ALLOW_AUTOMATIC_RUNS=1）"
+              % _event_name())
+        return 0
+    # 人工 production 轮必须有显式授权（collection_only/shadow 不需要）
+    if _m == "production" and _event_name() == "workflow_dispatch" and not manual_production_authorized():
+        _emit("MANUAL_PRODUCTION_NOT_AUTHORIZED = true（需 ASIP_ALLOW_MANUAL_PRODUCTION=1，"
+              "或改用 run_mode=collection_only）")
+        return 3
+    try:
+        res = execute(plan, state, emit=_emit, canary=args.canary,
+                      trigger_meta=trigger_meta)
+    except CheckpointFailed as _e:
+        # 只有"状态/checkpoint 类"失败才写标记：workflow 据此熔断；
+        # 未授权 production / 非法 run_mode 等拒绝路径不得造成误 strike。
+        try:
+            with open("/tmp/orch_state_failure", "w", encoding="utf-8") as _f:
+                _f.write(str(_e)[:300])
+        except OSError:
+            pass
+        emit("RUN_ABORTED = %s" % _e)
+        return 2
     if args.json:
         print(json.dumps({"deploy_required": res["deploy_required"],
                           "deploy_request": res["deploy_request"],

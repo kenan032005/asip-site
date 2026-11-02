@@ -264,22 +264,18 @@ def persist_collected_articles(root, articles, run_id, verbose=True):
 
     # 隔离区（安全hold）：本次已判定的隔离 URL + store 中已有的隔离 URL
     quarantined_urls = set()
-    q_path = os.path.join(root, "data", "canonical", "quarantine.json")
-    if os.path.exists(q_path):
-        try:
-            import json as _json
-            qd = _json.load(open(q_path, encoding="utf-8"))
-            for q in (qd.get("items") or []):
-                # C2 §七：已被正式释放（重判通过）的 hold 不再构成安全拦截，
-                # 否则「释放」会被自己的历史 hold 记录立即挡回，成为空操作。
-                if str(q.get("review_status") or "").lower() in ("released", "restored"):
-                    continue
-                u = q.get("original_id") or q.get("url")
-                n = normalize_url(u) if u else ""
-                if n:
-                    quarantined_urls.add(n)
-        except Exception:
-            pass
+    # asip5：统一走 QuarantineStore（分片流式读取）；已迁移但损坏 → 抛出（fail-closed，
+    # 绝不静默返回空集合，否则安全 hold 失效会导致已隔离内容重新进入）
+    from data.quarantine_store import QuarantineStore
+    for q in QuarantineStore(root=root).iter_items():
+        # C2 §七：已被正式释放（重判通过）的 hold 不再构成安全拦截，
+        # 否则「释放」会被自己的历史 hold 记录立即挡回，成为空操作。
+        if str(q.get("review_status") or "").lower() in ("released", "restored"):
+            continue
+        u = q.get("original_id") or q.get("url")
+        n = normalize_url(u) if u else ""
+        if n:
+            quarantined_urls.add(n)
     non_article_rejects = []
     for a in articles:
         _u = (a.get("canonical_url") or a.get("article_url") or "")
