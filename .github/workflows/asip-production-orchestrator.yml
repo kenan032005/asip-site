@@ -7,7 +7,7 @@ name: ASIP Production Orchestrator
 #     → GITHUB_SCHEDULE_DELAY_OR_DROP，GITHUB_SCHEDULE_RELIABILITY_RISK=true。
 #   - 原 schedule 路径依赖 github.event.inputs.*（schedule 下为空）→ 全部进入 Shadow。
 #
-# Phase 3 / I.1：本 workflow 已拆成**两个串行 Job**（collect → post）：
+# Phase 3 / I.1：本 workflow 已拆成两个**串行** Job（collect → post）：
 #   阶段 A（collect, collection_only）只做采集并立即持久化；
 #   阶段 B（post, post_collection）读最新 production-state 做 AI/报告/视图，
 #   并在合格报告产出后派发自动部署。两阶段各有独立超时预算。
@@ -72,28 +72,26 @@ env:
   PRODUCTION_SCHEDULE_ENABLED: ${{ vars.PRODUCTION_SCHEDULE_ENABLED }}
 
 jobs:
-  # ── 阶段 A：采集（自动触发的第一阶段）────────────────────────────────
-  # Phase 3 / I.1：采集与后处理**拆成两个串行 Job**。此前单个 60min Job 同时承担
+  # ── 阶段 A：采集（自动触发的第一阶段）──────────────────────────────
+  # Phase 3 / I.1：采集与后处理拆成两个**串行** Job。此前单个 60min Job 同时承担
   # 约 51min 采集 + AI + 报告 + 状态写回 → 采集超时会把日报一起拖死（报告持续延误）。
-  # 阶段 A 只做采集并立即持久化（collection_only）；阶段 B 读最新 state 做 AI/报告/视图。
+  # 阶段 A 只做采集并立即持久化；阶段 B 读最新 production-state 做 AI/报告/视图。
   # 人工 dispatch 仍保留"单 Job 全流程"语义（run_mode 由输入决定），行为不变。
   collect:
-    # 自动触发（schedule / repository_dispatch）在发布闸门关闭时 Job 级 skip；
-    # 人工 dispatch 不受此闸门影响（但受 run_mode 约束）。
-    # 原生 cron 与外部调度器**互斥**：ASIP_EXTERNAL_SCHEDULER_ENABLED 未设置 → 只走原生 cron，
-    # 排除两条自动触发路径同时生效造成的重复触发（Phase 3 / II.7）。
+    # 自动触发在发布闸门关闭时 Job 级 skip；人工 dispatch 不受此闸门影响。
+    # 两条自动唤醒路径（原生 cron = secondary wake-up、外部调度器 repository_dispatch
+    # = primary）都保留；**重复触发由编排器的唤醒去重闸门排除**（Phase 3 / II.7）。
     if: >-
       (github.event_name == 'workflow_dispatch') ||
       ((vars.ASIP_ALLOW_AUTOMATIC_RUNS == '1') && (vars.PRODUCTION_SCHEDULE_ENABLED == 'true') &&
-       ((github.event_name == 'schedule' && vars.ASIP_EXTERNAL_SCHEDULER_ENABLED != '1') ||
-        (github.event_name == 'repository_dispatch' && vars.ASIP_EXTERNAL_SCHEDULER_ENABLED == '1')))
+       ((github.event_name == 'schedule') || (github.event_name == 'repository_dispatch')))
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
       - name: Checkout release code
         uses: actions/checkout@v4
         with:
-          ref: e256bdae8ed735109ef4990ac327db665fc9104d
+          ref: 917846e16b043be0273840df9eb08d13f7eab115
           fetch-depth: 1
 
       - name: Checkout production state branch
@@ -190,7 +188,7 @@ jobs:
         run: |
           python scripts/ops/breakerctl.py fetch --repo "${{ github.repository }}"
 
-      - name: Run due-task orchestrator（阶段 A：collection_only 采集）
+      - name: Run due-task orchestrator（production mode）
         id: orch
         env:
           CANARY: ${{ github.event.inputs.canary }}
@@ -210,6 +208,8 @@ jobs:
           ASIP_AI_DAILY_MAX_CALLS: ${{ vars.ASIP_AI_DAILY_MAX_CALLS || '130' }}
           # Phase 3 / I.5：单轮富集条目上限（受控小额度，不一次性释放历史积压）
           ASIP_AI_MAX_ITEMS_PER_RUN: ${{ vars.ASIP_AI_MAX_ITEMS_PER_RUN || '0' }}
+          # Phase 3 / II.7：自动唤醒去重窗口（排除 cron 与外部调度器的重复触发）
+          ASIP_MIN_WAKEUP_INTERVAL_MINUTES: ${{ vars.ASIP_MIN_WAKEUP_INTERVAL_MINUTES || '45' }}
           # C8-4D1：共享请求复用开关（仓库变量，默认 "0" = 关闭）
           ASIP_SHARED_FEED_REUSE: ${{ vars.ASIP_SHARED_FEED_REUSE || '0' }}
           # C8-4D2：Phase 拆分回滚开关必须透传到采集执行路径；默认 '1'（不擅自回滚）
@@ -420,18 +420,17 @@ jobs:
             data/runtime/ops/enrichment/
           if-no-files-found: warn
 
-  # ── 阶段 B：AI 富集 / 风险评估 / 报告 / 公开视图（自动触发的第二阶段）────
-  # 严格依赖阶段 A（needs）→ 两阶段**串行**，不会并发修改 production-state。
-  # always()：阶段 A 失败/超时时不因它而饿死报告（报告只依赖已持久化的 state）；
-  # 而依赖阶段 A 结果的 AI 步骤由 ASIP_UPSTREAM_STAGE_FAILED 显式跳过（I.1）。
+  # ── 阶段 B：AI 富集 / 研判 / 报告 / 公开视图（自动触发的第二阶段）──────
+  # 严格依赖阶段 A（needs）→ 两阶段串行，不会并发修改 production-state。
+  # !cancelled()：阶段 A 失败/超时不饿死报告（报告只依赖已持久化的 state）；
+  # 依赖阶段 A 结果的 AI 步骤由 ASIP_UPSTREAM_STAGE_FAILED 显式跳过（I.1）。
   post:
     needs: collect
     if: >-
-      (!cancelled() && (github.event_name != 'workflow_dispatch')) &&
+      (!cancelled() && github.event_name != 'workflow_dispatch') &&
       ((github.event_name == 'workflow_dispatch') ||
        ((vars.ASIP_ALLOW_AUTOMATIC_RUNS == '1') && (vars.PRODUCTION_SCHEDULE_ENABLED == 'true') &&
-        ((github.event_name == 'schedule' && vars.ASIP_EXTERNAL_SCHEDULER_ENABLED != '1') ||
-         (github.event_name == 'repository_dispatch' && vars.ASIP_EXTERNAL_SCHEDULER_ENABLED == '1')))
+        ((github.event_name == 'schedule') || (github.event_name == 'repository_dispatch'))))
     runs-on: ubuntu-latest
     # 独立超时预算：不再与采集共享 60min（报告因此不会被长采集持续延误）。
     timeout-minutes: 75
@@ -439,7 +438,7 @@ jobs:
       - name: Checkout release code
         uses: actions/checkout@v4
         with:
-          ref: e256bdae8ed735109ef4990ac327db665fc9104d
+          ref: 917846e16b043be0273840df9eb08d13f7eab115
           fetch-depth: 1
 
       - name: Checkout production state branch
@@ -536,7 +535,7 @@ jobs:
         run: |
           python scripts/ops/breakerctl.py fetch --repo "${{ github.repository }}"
 
-      - name: Run due-task orchestrator（阶段 B：post_collection AI/报告/视图）
+      - name: Run due-task orchestrator（production mode）
         id: orch
         env:
           CANARY: ${{ github.event.inputs.canary }}
@@ -556,6 +555,8 @@ jobs:
           ASIP_AI_DAILY_MAX_CALLS: ${{ vars.ASIP_AI_DAILY_MAX_CALLS || '130' }}
           # Phase 3 / I.5：单轮富集条目上限（受控小额度，不一次性释放历史积压）
           ASIP_AI_MAX_ITEMS_PER_RUN: ${{ vars.ASIP_AI_MAX_ITEMS_PER_RUN || '0' }}
+          # Phase 3 / II.7：自动唤醒去重窗口（排除 cron 与外部调度器的重复触发）
+          ASIP_MIN_WAKEUP_INTERVAL_MINUTES: ${{ vars.ASIP_MIN_WAKEUP_INTERVAL_MINUTES || '45' }}
           # Phase 3 / I.1：阶段 A 失败 → 不执行依赖其结果的 AI 步骤（报告/视图仍继续）
           ASIP_UPSTREAM_STAGE_FAILED: ${{ needs.collect.result != 'success' }}
           # C8-4D1：共享请求复用开关（仓库变量，默认 "0" = 关闭）
