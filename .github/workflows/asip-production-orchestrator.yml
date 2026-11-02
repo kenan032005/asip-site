@@ -171,6 +171,8 @@ jobs:
 
       - name: Fetch breaker state（fail-closed if unverifiable）
         # R1C：每轮先读远端熔断状态；不可验证 → 非零退出 → 后续付费任务不启动
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   # breakerctl 需要 contents:write 读 ops-health
         run: |
           python scripts/ops/breakerctl.py fetch --repo "${{ github.repository }}"
 
@@ -277,6 +279,8 @@ jobs:
         # R1D-HOTFIX：仅当 orchestrator 写出状态失败标记时才熔断；
         # 未授权 production / 非法 run_mode 等拒绝路径不得造成误 strike。
         if: failure() && hashFiles('/tmp/orch_state_failure') != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python scripts/ops/breakerctl.py strike --reason state_push_failed \
             --repo "${{ github.repository }}" || echo "::warning::breaker publish failed (local strike recorded)"
