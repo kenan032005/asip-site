@@ -1,0 +1,136 @@
+{
+ "label": "Sa22e2f1d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "04c9ce1c3dacde3eca93a1b6ba9aeecd0f745465b965bc0bea87ec03a0742d19",
+ "tokens": {
+  "input_tokens": 2671,
+  "output_tokens": 566,
+  "total_tokens": 3237
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"产量数据来自单一来源（PR-PICA），尚未获交叉验证\", \"该报道为单一来源（La Nouvelle Tribune）\"]",
+    "after": "[\"产量数据来自单一来源（PR-PICA），尚未获交叉验证\", \"该报道为单一来源（La Nouvelle Tribune）\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁政府启动棉花增产计划，目标2026-2027产季",
+   "summary_zh": "贝宁政府启动一项旨在提高2026-2027产季棉花产量的计划，试点集约化项目交由第2、3、4区域农业发展机构（ATDA）负责。10月23日（周五）在萨瓦卢举行启动仪式，农业、畜牧与渔业部长阿丁·耶通·布卢库农·古巴兰出席。据区域综合棉花生产计划（PR-PICA）数据，贝宁2025-2026产季收获533590吨，居西非法郎区首位，但同比下降16.3%。该计划拨款38.83亿西非法郎支持本产季。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "萨瓦卢",
+    "site": null,
+    "raw_text": "Savalou"
+   },
+   "key_facts": [
+    {
+     "fact": "贝宁政府启动2026-2027产季棉花增产计划",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement béninois lance un programme destiné à relever la production cotonnière pour la campagne 2026-2027"
+    },
+    {
+     "fact": "试点集约化项目交由第2、3、4区域农业发展机构负责",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "avec un projet pilote d’intensification confié aux Agences territoriales de développement agricole ( ATDA ) 2, 3 et 4"
+    },
+    {
+     "fact": "启动仪式于2026年10月23日在萨瓦卢举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le coup d’envoi a été donné le vendredi 23 octobre 2026 à Savalou"
+    },
+    {
+     "fact": "贝宁2025-2026产季收获533590吨棉花，同比下降16.3%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Bénin a récolté 533 590 tonnes selon le Programme régional de production intégrée du coton en Afrique ( PR-PICA )... Cette production reste en recul de 16,3 % sur un an"
+    },
+    {
+     "fact": "本产季拨款38.83亿西非法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "3 883 000 000 FCFA sont alloués pour soutenir la campagne"
+    }
+   ],
+   "uncertainties": [
+    "产量数据来自单一来源（PR-PICA），尚未获交叉验证",
+    "该报道为单一来源（La Nouvelle Tribune）"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁政府启动棉花增产计划，目标2026-2027产季",
+   "summary_zh": "贝宁政府启动一项旨在提高2026-2027产季棉花产量的计划，试点集约化项目交由第2、3、4区域农业发展机构（ATDA）负责。10月23日（周五）在萨瓦卢举行启动仪式，农业、畜牧与渔业部长阿丁·耶通·布卢库农·古巴兰出席。据区域综合棉花生产计划（PR-PICA）数据，贝宁2025-2026产季收获533590吨，居西非法郎区首位，但同比下降16.3%。该计划拨款38.83亿西非法郎支持本产季。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "萨瓦卢",
+    "site": null,
+    "raw_text": "Savalou"
+   },
+   "key_facts": [
+    {
+     "fact": "贝宁政府启动2026-2027产季棉花增产计划",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement béninois lance un programme destiné à relever la production cotonnière pour la campagne 2026-2027"
+    },
+    {
+     "fact": "试点集约化项目交由第2、3、4区域农业发展机构负责",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "avec un projet pilote d’intensification confié aux Agences territoriales de développement agricole ( ATDA ) 2, 3 et 4"
+    },
+    {
+     "fact": "启动仪式于2026年10月23日在萨瓦卢举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le coup d’envoi a été donné le vendredi 23 octobre 2026 à Savalou"
+    },
+    {
+     "fact": "贝宁2025-2026产季收获533590吨棉花，同比下降16.3%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Bénin a récolté 533 590 tonnes selon le Programme régional de production intégrée du coton en Afrique ( PR-PICA )... Cette production reste en recul de 16,3 % sur un an"
+    },
+    {
+     "fact": "本产季拨款38.83亿西非法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "3 883 000 000 FCFA sont alloués pour soutenir la campagne"
+    }
+   ],
+   "uncertainties": [
+    "产量数据来自单一来源（PR-PICA），尚未获交叉验证",
+    "该报道为单一来源（La Nouvelle Tribune）",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_45877728a22e2f1d",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

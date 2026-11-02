@@ -1,0 +1,115 @@
+{
+ "label": "S0ac8b1a9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "32bccdca0149c326f9889450f759078542b64d40aeca00e7018f4d8a26270bc9",
+ "tokens": {
+  "input_tokens": 2405,
+  "output_tokens": 620,
+  "total_tokens": 3025
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁：一男子向警察开枪，家中搜出多件武器",
+   "summary_zh": "贝宁泽市Havikpa-Vouinkpa地区一名被指扰乱公共秩序并发出死亡威胁的男子于2026年10月31日被共和国警察特别行动队逮捕。据称该男子拒绝服从警方，设置路障并持自制手枪向警察射击，警方随后从后门进入将其制服。搜查中在其住所发现自制手枪、11把手工刀、12把小斧、4支箭、一把砍刀和两把小刀。该信息目前仅来自单一来源。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": "祖省",
+    "city": "泽市",
+    "site": "Havikpa-Vouinkpa",
+    "raw_text": "Havikpa-Vouinkpa, dans la commune de Zè"
+   },
+   "key_facts": [
+    {
+     "fact": "一名被指扰乱公共秩序和发出死亡威胁的男子于2026年10月31日在泽市Havikpa-Vouinkpa被逮捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un individu présenté comme l’auteur de troubles à l’ordre public et de menaces de mort a été interpellé samedi 31 octobre 2026 à Havikpa-Vouinkpa, dans la commune de Zè"
+    },
+    {
+     "fact": "行动由共和国警察特别行动队执行，包括泽中央区警察局人员和一支干预部队",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’opération a été menée par une équipe spéciale de la Police républicaine, composée d’éléments du commissariat de l’arrondissement central de Zè et d’une unité d’intervention"
+    },
+    {
+     "fact": "据称该男子拒绝服从，设置路障并用自制手枪向警察射击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il aurait barricadé les accès de la maison... avant d’ouvrir le feu avec un pistolet artisanal à travers les persiennes du salon"
+    },
+    {
+     "fact": "警方搜查住所发现自制手枪、11把手工刀、12把小斧、4支箭、一把砍刀和两把小刀",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La fouille des lieux a permis de découvrir un arsenal composé notamment d’un pistolet artisanal, de 11 épées artisanales, de 12 hachettes, de quatre flèches, d’un coupe-coupe et de deux petits couteaux"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（La Nouvelle Tribune）报道，尚缺乏交叉验证",
+    "男子拒捕及开枪等细节使用条件式表述（aurait），尚未获独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁：一男子向警察开枪，家中搜出多件武器",
+   "summary_zh": "贝宁泽市Havikpa-Vouinkpa地区一名被指扰乱公共秩序并发出死亡威胁的男子于2026年10月31日被共和国警察特别行动队逮捕。据称该男子拒绝服从警方，设置路障并持自制手枪向警察射击，警方随后从后门进入将其制服。搜查中在其住所发现自制手枪、11把手工刀、12把小斧、4支箭、一把砍刀和两把小刀。该信息目前仅来自单一来源。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": "祖省",
+    "city": "泽市",
+    "site": "Havikpa-Vouinkpa",
+    "raw_text": "Havikpa-Vouinkpa, dans la commune de Zè"
+   },
+   "key_facts": [
+    {
+     "fact": "一名被指扰乱公共秩序和发出死亡威胁的男子于2026年10月31日在泽市Havikpa-Vouinkpa被逮捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un individu présenté comme l’auteur de troubles à l’ordre public et de menaces de mort a été interpellé samedi 31 octobre 2026 à Havikpa-Vouinkpa, dans la commune de Zè"
+    },
+    {
+     "fact": "行动由共和国警察特别行动队执行，包括泽中央区警察局人员和一支干预部队",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’opération a été menée par une équipe spéciale de la Police républicaine, composée d’éléments du commissariat de l’arrondissement central de Zè et d’une unité d’intervention"
+    },
+    {
+     "fact": "据称该男子拒绝服从，设置路障并用自制手枪向警察射击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il aurait barricadé les accès de la maison... avant d’ouvrir le feu avec un pistolet artisanal à travers les persiennes du salon"
+    },
+    {
+     "fact": "警方搜查住所发现自制手枪、11把手工刀、12把小斧、4支箭、一把砍刀和两把小刀",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La fouille des lieux a permis de découvrir un arsenal composé notamment d’un pistolet artisanal, de 11 épées artisanales, de 12 hachettes, de quatre flèches, d’un coupe-coupe et de deux petits couteaux"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（La Nouvelle Tribune）报道，尚缺乏交叉验证",
+    "男子拒捕及开枪等细节使用条件式表述（aurait），尚未获独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_c75b2b160ac8b1a9",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
