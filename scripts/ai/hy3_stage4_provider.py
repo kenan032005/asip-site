@@ -318,28 +318,17 @@ def _load_canonical_eligible(min_word_count=30):
     d = json.loads((here / "data" / "canonical" / "event_clusters.json").read_text(encoding="utf-8"))
     items = d.get("items", [])
     qids = set()
-    # asip5：兼容单体/分片（QuarantineStore 自动选择），失败回退旧单体
-    try:
-        import sys as _sys
-        _root = str(here)
-        if _root not in _sys.path:
-            _sys.path.insert(0, _root)
-        from scripts.data.quarantine_store import QuarantineStore
-        _items = QuarantineStore(root=here).iter_items()
-        for it in _items:
-            if it.get("original_object_type") == "event":
-                oid = it.get("original_id")
-                if oid:
-                    qids.add(oid)
-    except Exception:
-        qp = here / "data" / "canonical" / "quarantine.json"
-        if qp.exists():
-            q = json.loads(qp.read_text(encoding="utf-8"))
-            for it in q.get("items", []):
-                if it.get("original_object_type") == "event":
-                    oid = it.get("original_id")
-                    if oid:
-                        qids.add(oid)
+    # asip5：统一走 QuarantineStore；已迁移但损坏 → 抛出（fail-closed，不回退旧单体）
+    import sys as _sys
+    _root = str(here)
+    if _root not in _sys.path:
+        _sys.path.insert(0, _root)
+    from scripts.data.quarantine_store import QuarantineStore
+    for it in QuarantineStore(root=here).iter_items():
+        if it.get("original_object_type") == "event":
+            oid = it.get("original_id")
+            if oid:
+                qids.add(oid)
     # legacy 格式隔离 id（如 EVT-2026-0720-007）映射到当前 event_id：
     # eligibility_status 按 event.get("event_id") 判定，须一并纳入
     for ev in items:

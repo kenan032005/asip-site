@@ -40,6 +40,22 @@ COMPONENTS = (
 _COMPONENT = "other"
 
 
+class LedgerUnavailable(RuntimeError):
+    """账本不可写：不得当作"正常可计费"继续（fail-closed）。"""
+
+
+def ensure_writable(path=None):
+    """调用前的账本可写性探针：不可写即拒绝发起付费调用。"""
+    p = Path(path) if path else LEDGER_PATH
+    try:
+        p.parent.mkdir(parents=True, exist_ok=True)
+        with open(p, "a", encoding="utf-8") as f:
+            f.write("")
+        return True
+    except OSError as e:
+        raise LedgerUnavailable("ledger not writable: %s (%s)" % (p, e))
+
+
 def set_component(name):
     """由各付费入口在开始处声明自身组件（provider 层据此记账）。"""
     global _COMPONENT
@@ -119,8 +135,8 @@ def record(component=None, phase="", requested_model=None, returned_model=None,
         p.parent.mkdir(parents=True, exist_ok=True)
         with open(p, "a", encoding="utf-8") as f:
             f.write(json.dumps(rec, ensure_ascii=False) + "\n")
-    except OSError:
-        pass
+    except OSError as e:
+        raise LedgerUnavailable("ledger write failed: %s (%s)" % (p, e))
     return rec
 
 
@@ -234,14 +250,18 @@ class MeteredProvider:
         comp = self._component or current_component()
         if self._gate:
             paid_gate.assert_paid_allowed(comp)     # 暂停时直接抛，不产生任何网络请求
+            ensure_writable(self._ledger_path)      # 账本不可写 → 拒绝发起（fail-closed）
         t0 = time.time()
         try:
             res = self._inner.submit_task(task)
         except Exception as e:
-            record(component=comp, phase=str(task.get("task_type") or ""),
-                   requested_model=getattr(self._inner, "model", None),
-                   status="error", error=str(e), latency_ms=int((time.time() - t0) * 1000),
-                   run_id=self._run_id, path=self._ledger_path)
+            try:
+                record(component=comp, phase=str(task.get("task_type") or ""),
+                       requested_model=getattr(self._inner, "model", None),
+                       status="error", error=str(e), latency_ms=int((time.time() - t0) * 1000),
+                       run_id=self._run_id, path=self._ledger_path)
+            except LedgerUnavailable:
+                pass  # 原始异常优先（账本已不可写，由上层 fail-closed 处理）
             raise
         result = (res or {}).get("result") or {}
         record(component=comp,

@@ -264,38 +264,18 @@ def persist_collected_articles(root, articles, run_id, verbose=True):
 
     # 隔离区（安全hold）：本次已判定的隔离 URL + store 中已有的隔离 URL
     quarantined_urls = set()
-    # asip5：兼容单体/分片两种存储（分片模式下逐片流式读取，避免 100MB 峰值）
-    try:
-        from data.quarantine_store import QuarantineStore
-        _q_items = list(QuarantineStore(root=root).iter_items())
-    except Exception:
-        _q_items = None
-    if _q_items is not None:
-        try:
-            for q in _q_items:
-                # C2 §七：已被正式释放（重判通过）的 hold 不再构成安全拦截，
-                # 否则「释放」会被自己的历史 hold 记录立即挡回，成为空操作。
-                if str(q.get("review_status") or "").lower() in ("released", "restored"):
-                    continue
-                u = q.get("original_id") or q.get("url")
-                n = normalize_url(u) if u else ""
-                if n:
-                    quarantined_urls.add(n)
-        except Exception:
-            pass
-    elif os.path.exists(os.path.join(root, "data", "canonical", "quarantine.json")):
-        try:
-            import json as _json
-            qd = _json.load(open(os.path.join(root, "data", "canonical", "quarantine.json"), encoding="utf-8"))
-            for q in (qd.get("items") or []):
-                if str(q.get("review_status") or "").lower() in ("released", "restored"):
-                    continue
-                u = q.get("original_id") or q.get("url")
-                n = normalize_url(u) if u else ""
-                if n:
-                    quarantined_urls.add(n)
-        except Exception:
-            pass
+    # asip5：统一走 QuarantineStore（分片流式读取）；已迁移但损坏 → 抛出（fail-closed，
+    # 绝不静默返回空集合，否则安全 hold 失效会导致已隔离内容重新进入）
+    from data.quarantine_store import QuarantineStore
+    for q in QuarantineStore(root=root).iter_items():
+        # C2 §七：已被正式释放（重判通过）的 hold 不再构成安全拦截，
+        # 否则「释放」会被自己的历史 hold 记录立即挡回，成为空操作。
+        if str(q.get("review_status") or "").lower() in ("released", "restored"):
+            continue
+        u = q.get("original_id") or q.get("url")
+        n = normalize_url(u) if u else ""
+        if n:
+            quarantined_urls.add(n)
     non_article_rejects = []
     for a in articles:
         _u = (a.get("canonical_url") or a.get("article_url") or "")

@@ -402,11 +402,14 @@ def _flash_provider():
     """
     from scripts.ai.providers.deepseek_v4_flash import DeepSeekV4FlashProvider
     inner = DeepSeekV4FlashProvider()
+    # 最终付费门禁：构造 provider 之前先判定（暂停/熔断/体积超限即拒绝）
+    from scripts.ops import ai_ledger, paid_gate
+    paid_gate.assert_paid_allowed("provider_factory")
     try:
-        from scripts.ops import ai_ledger
         return ai_ledger.wrap_provider(inner)
-    except Exception:
-        return inner
+    except Exception as e:  # noqa: BLE001
+        # 包装失败绝不允许退回裸 provider（否则门禁与账本同时失效）
+        raise RuntimeError("provider_gate_unavailable: %s" % e) from e
 
 
 def _enrich_prompt(task_type):

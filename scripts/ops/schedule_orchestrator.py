@@ -389,6 +389,10 @@ def _daily_report_meta(root):
             "report_id": report_id, "fact_count": daily.get("fact_count")}
 
 
+class CheckpointFailed(RuntimeError):
+    """采集后 checkpoint 失败：必须中止整轮（后续付费任务一律不得启动）。"""
+
+
 def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
             trigger_meta=None):
     """执行 due 任务（production mode）。
@@ -468,10 +472,14 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
                         if not _c.get("ok"):
                             results[label] = {"ok": False, "detail": "state_checkpoint_failed",
                                               "error": _c.get("error")}
-                            emit("STATE_CHECKPOINT_FAILED -> abort paid tasks")
-                            return False
+                            emit("STATE_CHECKPOINT_FAILED -> abort entire run")
+                            raise CheckpointFailed("state_checkpoint_failed: %s" % _c.get("error"))
+                    except CheckpointFailed:
+                        raise
                     except Exception as _e:  # noqa: BLE001
-                        emit("STATE_CHECKPOINT_ERROR = %s" % _e)
+                        # 异常同样必须中止（不得用 try/except/pass 掩盖）
+                        emit("STATE_CHECKPOINT_ERROR = %s -> abort entire run" % _e)
+                        raise CheckpointFailed("state_checkpoint_exception: %s" % _e)
                 # §十四：真实采集成功后刷新 source health 快照
                 sh_ok = _run_script(["scripts/ops/source_health.py"], emit)
                 results["source_health"] = {"ok": sh_ok,
@@ -828,8 +836,12 @@ def main(argv=None):
     def _emit(s):
         print(s, file=sys.stderr)
 
-    res = execute(plan, state, emit=_emit, canary=args.canary,
-                  trigger_meta=trigger_meta)
+    try:
+        res = execute(plan, state, emit=_emit, canary=args.canary,
+                      trigger_meta=trigger_meta)
+    except CheckpointFailed as _e:
+        emit("RUN_ABORTED = %s" % _e)
+        return 2
     if args.json:
         print(json.dumps({"deploy_required": res["deploy_required"],
                           "deploy_request": res["deploy_request"],

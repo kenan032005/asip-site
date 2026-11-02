@@ -276,7 +276,9 @@ class Repository:
 
     # ── Quarantine ────────────────────────────────────
     def load_quarantine(self) -> list:
-        return self._load_items(self._canonical("quarantine.json"))
+        """asip5：统一走 QuarantineStore（分片优先；已迁移但损坏 → 抛，不回退）。"""
+        from data.quarantine_store import QuarantineStore
+        return QuarantineStore(root=self.root).load_items()
 
     def save_quarantine(self, items: list, run_id: str = "") -> dict:
         """asip5：分片模式走 QuarantineStore.upsert（仍先做 schema 校验）；

@@ -97,8 +97,17 @@ class QuarantineStore:
         self.max_shard_bytes = int(max_shard_bytes or DEFAULT_MAX_SHARD_BYTES)
 
     # ── 状态 ────────────────────────────────────────────────
+    def mode(self):
+        """存储形态：legacy / sharded；manifest 存在但索引缺失 → 损坏（fail-closed）。"""
+        has_manifest = self.manifest_path.exists()
+        has_index = self.index_path.exists()
+        if has_manifest and not has_index:
+            raise QuarantineCorrupt("manifest present but index.json missing "
+                                    "(migrated-but-broken; refusing to fall back to legacy)")
+        return "sharded" if (has_manifest and has_index) else "legacy"
+
     def is_sharded(self):
-        return self.manifest_path.exists() and self.index_path.exists()
+        return self.mode() == "sharded"
 
     def read_index(self):
         try:
@@ -161,7 +170,10 @@ class QuarantineStore:
                 path = self.shard_dir / s["shard"]
                 if not path.exists():
                     raise QuarantineCorrupt("missing shard: %s" % s["shard"])
-                doc = json.loads(path.read_text(encoding="utf-8"))
+                try:
+                    doc = json.loads(path.read_text(encoding="utf-8"))
+                except json.JSONDecodeError as e:
+                    raise QuarantineCorrupt("invalid json %s: %s" % (s["shard"], e))
                 for it in (doc.get("items") or []):
                     yield it
             return
@@ -454,6 +466,77 @@ class QuarantineStore:
             rep["expected_items"] = expect_items
             rep["count_match"] = len(items) == expect_items
         return rep
+
+    def verify_consistency(self):
+        """index / ids / manifest / 实际分片条目 四者一致性；不一致即抛。"""
+        idx = self.read_index()
+        ids = self.read_ids()
+        manifest = {}
+        try:
+            manifest = json.loads(self.manifest_path.read_text(encoding="utf-8"))
+        except (FileNotFoundError, json.JSONDecodeError):
+            pass
+        sum_counts = sum(int(s.get("count") or 0) for s in idx.get("shards", []))
+        on_disk = 0
+        missing = []
+        for s_ in idx.get("shards", []):
+            p = self.shard_dir / s_["shard"]
+            if not p.exists():
+                missing.append(s_["shard"])
+                continue
+            try:
+                doc = json.loads(p.read_text(encoding="utf-8"))
+            except json.JSONDecodeError:
+                raise QuarantineCorrupt("invalid json: %s" % s_["shard"])
+            n = len(doc.get("items") or [])
+            if n != int(s_.get("count") or 0):
+                raise QuarantineCorrupt("count mismatch %s: index=%s file=%d"
+                                        % (s_["shard"], s_.get("count"), n))
+            if s_.get("sha256") and _sha256(p) != s_["sha256"]:
+                raise QuarantineCorrupt("sha256 mismatch: %s" % s_["shard"])
+            on_disk += n
+        if missing:
+            raise QuarantineCorrupt("missing shards: %s" % ",".join(missing))
+        rep = {
+            "index_total": int(idx.get("total_items") or 0),
+            "sum_counts": sum_counts,
+            "on_disk": on_disk,
+            "ids": len(ids),
+            "manifest_total": manifest.get("total_items"),
+            "shards": len(idx.get("shards", [])),
+        }
+        vals = {rep["index_total"], rep["sum_counts"], rep["on_disk"], rep["ids"]}
+        if len(vals) != 1:
+            raise QuarantineCorrupt("inconsistent totals: %s" % rep)
+        if rep["manifest_total"] is not None and int(rep["manifest_total"]) != rep["on_disk"]:
+            raise QuarantineCorrupt("manifest total mismatch: %s" % rep)
+        rep["consistent"] = True
+        return rep
+
+    def rollback_to_monolith(self, expect_items=None):
+        """回滚：把**当前全部分片（含迁移后新增记录）**合并回旧单体，再移除分片。
+
+        与 git revert 的区别：revert 会丢掉迁移后新增的记录；本方法先落单体再清理，
+        保证增量不丢失（可重放）。返回回滚报告。
+        """
+        if self.mode() != "sharded":
+            return {"ok": True, "noop": True, "reason": "not sharded"}
+        self.verify_consistency()
+        items = self.load_items(verify_checksums=True)
+        if expect_items is not None and len(items) != expect_items:
+            raise QuarantineCorrupt("rollback count mismatch: %d != %d" % (len(items), expect_items))
+        doc = {"schema_version": "2.0", "pipeline_version": 2,
+               "run_id": "rollback", "updated_at": _now_iso(), "items": items}
+        _atomic_write(self.legacy, (json.dumps(doc, ensure_ascii=False, indent=1) + "\n").encode())
+        # 校验单体可读且条目一致后再清理分片
+        back = json.loads(self.legacy.read_text(encoding="utf-8")).get("items") or []
+        if len(back) != len(items):
+            raise QuarantineCorrupt("monolith verification failed: %d != %d" % (len(back), len(items)))
+        import shutil
+        shutil.rmtree(self.shard_dir, ignore_errors=True)
+        if self.manifest_path.exists():
+            self.manifest_path.unlink()
+        return {"ok": True, "restored_items": len(items), "shards_removed": True}
 
     def rollback_hint(self):
         """回滚说明（不执行）：迁移是单一提交，回滚 = git revert 该提交，

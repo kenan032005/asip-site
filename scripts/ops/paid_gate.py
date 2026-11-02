@@ -31,6 +31,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 OPS_DIR = ROOT / "data" / "runtime" / "ops"
 BREAKER_PATH = OPS_DIR / "paid_breaker.json"
+#: 远端熔断状态可达性（由 breakerctl fetch/publish 写入；用于跨 runner 的 fail-closed 判定）
+BREAKER_REMOTE_PATH = OPS_DIR / "breaker_remote.json"
+BREAKER_AUDIT_PATH = OPS_DIR / "breaker_audit.jsonl"
 ALERTS_PATH = OPS_DIR / "alerts.jsonl"
 
 #: 暂停开关（与 PRODUCTION_SCHEDULE_ENABLED 相互独立，语义更强：直接禁止付费任务）
@@ -102,10 +105,44 @@ def record_strike(reason, ttl_hours=24, strikes_to_trip=2, path=None):
     return doc
 
 
-def clear_breaker(path=None):
+def clear_breaker(path=None, by="", reason=""):
+    """解除熔断（必须可审计：记录 who/when/why 到状态文件与审计日志）。"""
     doc = {"tripped": False, "reason": "", "tripped_at": None, "until": None, "strikes": 0,
-           "cleared_at": _now_iso()}
+           "cleared_at": _now_iso(), "cleared_by": str(by or "unknown"),
+           "cleared_reason": str(reason or "manual")}
     save_breaker(doc, path)
+    try:
+        p = (Path(path) if path else BREAKER_PATH).parent / "breaker_audit.jsonl"
+        p.parent.mkdir(parents=True, exist_ok=True)
+        with open(p, "a", encoding="utf-8") as f:
+            f.write(json.dumps({"ts": doc["cleared_at"], "action": "clear",
+                                "by": doc["cleared_by"], "reason": doc["cleared_reason"]},
+                               ensure_ascii=False) + "\n")
+    except OSError:
+        pass
+    return doc
+
+
+def save_remote_status(reachable, detail="", path=None):
+    """记录远端熔断状态可达性（供下一轮/另一 runner 判定）。"""
+    p = Path(path) if path else BREAKER_REMOTE_PATH
+    doc = {"reachable": bool(reachable), "detail": str(detail)[:300], "checked_at": _now_iso()}
+    try:
+        p.parent.mkdir(parents=True, exist_ok=True)
+        tmp = p.with_suffix(".json.tmp")
+        tmp.write_text(json.dumps(doc, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+        os.replace(tmp, p)
+    except OSError:
+        pass
+    return doc
+
+
+def breaker_remote():
+    """远端熔断可达性：True / False / None(未知)。"""
+    try:
+        doc = json.loads(BREAKER_REMOTE_PATH.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {"reachable": None, "detail": "no remote status file", "checked_at": None}
     return doc
 
 
@@ -171,6 +208,15 @@ def paused(root=None, breaker=None, size_report=None):
     active, why = breaker_active(breaker)
     if active:
         return True, "breaker:%s" % why
+    # 远端熔断状态不可验证 → 暂停（生产强制；本地可通过 ASIP_REQUIRE_BREAKER_REMOTE=0 放宽）
+    rs = breaker_remote()
+    if rs.get("reachable") is False:
+        return True, "breaker_remote_unavailable:%s" % (rs.get("detail") or "")
+    if rs.get("reachable") is None:
+        required = _truthy(os.environ.get("ASIP_REQUIRE_BREAKER_REMOTE")) or \
+            os.environ.get("GITHUB_ACTIONS") == "true"
+        if required:
+            return True, "breaker_remote_unverified"
     rep = size_report if size_report is not None else state_size_report(root)
     if not rep.get("safe_to_persist"):
         return True, "state_oversize:%s(%.2fMB)" % (rep.get("max_file"), rep.get("max_mb") or 0)
@@ -191,6 +237,7 @@ def pause_mode_summary(root=None):
     return {"paused": is_paused, "reason": reason,
             "env_pause": _truthy(os.environ.get(PAUSE_ENV)),
             "breaker": load_breaker(),
+            "breaker_remote": breaker_remote(),
             "state_size": rep}
 
 
