@@ -20,6 +20,10 @@ import sys
 import time
 from pathlib import Path
 
+#: 允许以 `python scripts/ops/commit_state.py` 直接运行（把仓库根加入 sys.path）
+if __package__ in (None, ""):
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
 #: 允许运维/测试用环境变量指向临时工作区（默认：代码仓库根 + 其 state_src）
 ROOT = Path(os.environ.get("ASIP_CODE_ROOT") or Path(__file__).resolve().parents[2])
 STATE_DIR = Path(os.environ.get("ASIP_STATE_DIR") or (ROOT / "state_src"))
@@ -288,10 +292,12 @@ def commit_now(message, after="state", expect=None, push=True, branch="productio
         info["stages"]["add"] = {"paths": len(_present),
                                  "missing": [p for p in GIT_PATHS if p not in _present]}
 
-        st = _git_ok(["status", "--porcelain"], "status").stdout
+        # 只看**暂存区**：state 工作树可能存在无关的行尾差异（Windows autocrlf），
+        # 它们不会被提交，也不应被当作"本轮有变更"
+        st = _git_ok(["diff", "--cached", "--name-only"], "status").stdout
         head0 = _git_ok(["rev-parse", "HEAD"], "rev-parse").stdout.strip()
 
-        # ── 无变更：require_expect 时仍必须验证 HEAD 内容与远端引用 ──
+        # ── 无待提交改动：仍校验 HEAD 内容；若本地领先远端则补推 ──
         if not (st or "").strip():
             vc0 = _verify_content(expect) if expect else {"checked": False}
             if expect and not vc0.get("checked"):
@@ -299,11 +305,21 @@ def commit_now(message, after="state", expect=None, push=True, branch="productio
             remote0 = _remote_sha(branch) if push else None
             if push and not remote0:
                 raise CheckpointError("verify_remote", "cannot read remote ref %s" % branch)
+            pushed = False
             if push and remote0 != head0:
-                raise CheckpointError("verify_remote",
-                                      "no changes but remote %s != local %s"
-                                      % (remote0[:12], head0[:12]))
-            info.update({"ok": True, "committed": False, "pushed": False,
+                # 上一轮可能已提交但推送失败：这里补推并校验，不重复提交
+                pr = _git(["push", "origin", "HEAD:%s" % branch], timeout=300)
+                if pr.returncode != 0:
+                    raise CheckpointError("push", "push rejected",
+                                          (pr.stderr or "")[-400:])
+                remote0 = _remote_sha(branch)
+                if remote0 != head0:
+                    raise CheckpointError("verify_remote",
+                                          "push ok but remote %s != local %s"
+                                          % (str(remote0)[:12], head0[:12]))
+                pushed = True
+                info["stages"]["push"] = {"local": head0, "recovered": True}
+            info.update({"ok": True, "committed": False, "pushed": pushed,
                          "content_verified": bool(vc0.get("checked")),
                          "head": head0, "remote": remote0,
                          "message": "no changes (%s)" % after})
@@ -343,7 +359,7 @@ def commit_now(message, after="state", expect=None, push=True, branch="productio
                 raise CheckpointError("merge", "merge failed (rc=%d)" % m.returncode, out[-400:])
         else:
             info["stages"]["merge"] = {"rc": 0}
-        st2 = _git_ok(["status", "--porcelain"], "status").stdout
+        st2 = _git_ok(["diff", "--cached", "--name-only"], "status").stdout
         if (st2 or "").strip():
             _git_ok(["commit", "--no-edit"], "merge_commit")
             # merge 可能改变 HEAD：再次校验内容与迁移结构
