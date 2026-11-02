@@ -711,6 +711,13 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
         if task == "timeline":
             return _run_script(["scripts/ops/timeline_run.py"], emit)
         if task == "daily_report":
+            # Phase 3 / I.5：预算耗尽 → 合法跳过（0 calls），不生成报告、不触发部署。
+            # 预算必须表现为"限流器"，不能表现为崩溃（否则整轮作业变红）。
+            if not _ai_budget_available():
+                emit("DAILY_REPORT_BUDGET_EXHAUSTED -> 0 calls（合法跳过，不生成报告/不部署）")
+                results[label] = {"ok": True, "detail": "ai_budget_exhausted_zero_calls",
+                                  "ai_calls": 0, "skipped": True}
+                return True
             report_ran = True
             ok = _run_script(["scripts/ops/reports_run.py", "--mode", "daily",
                               "--source", "canonical"], emit, component="daily_report")
@@ -733,6 +740,12 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
                 cls, "hold")] += 1
             return ok
         if task == "weekly_report":
+            # Phase 3 / I.5：预算耗尽 → 合法跳过（0 calls）
+            if not _ai_budget_available():
+                emit("WEEKLY_REPORT_BUDGET_EXHAUSTED -> 0 calls（合法跳过）")
+                results[label] = {"ok": True, "detail": "ai_budget_exhausted_zero_calls",
+                                  "ai_calls": 0, "skipped": True}
+                return True
             report_ran = True
             ok = True
             for mode in ("tcd_weekly", "ssd_weekly"):
@@ -893,10 +906,17 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
     # C7-3 P1：采集外层超时必须 > 采集器内层预算（wall-clock 3000s / 兜底 3300s），
     # 否则长采集轮次被外层硬杀（实测 1858/2631/1817s 三轮失败）。3300s 给兜底留出
     # 优雅停机窗口，且 46min + 下游 AI/报告/导出 ≈ 仍在编排 job 的 60min 之内。
-    results["news_localization"] = {
-        "ok": _run_script(["scripts/ops/news_localization_run.py"], emit, component="news_localization",
-                          timeout=3300),
-        "detail": "news_localization"}
+    # Phase 3 / I.5：全局预算耗尽 → 该付费子任务**合法跳过**（0 calls），不崩溃。
+    # 预算必须表现为限流器：整轮作业仍应成功，只是本轮不再发起模型调用。
+    if _ai_budget_available():
+        results["news_localization"] = {
+            "ok": _run_script(["scripts/ops/news_localization_run.py"], emit, component="news_localization",
+                              timeout=3300),
+            "detail": "news_localization"}
+    else:
+        emit("NEWS_LOCALIZATION_BUDGET_EXHAUSTED -> 0 calls（合法跳过）")
+        results["news_localization"] = {"ok": True, "detail": "ai_budget_exhausted_zero_calls",
+                                        "ai_calls": 0, "skipped": True}
     # C7-5：先重建 C1A 情报流视图（news_stream）。
     # 此前只有站点构建阶段才会重建它，编排器里的 data/views/news_stream.json 长期停在
     # 陈旧快照（生产实测 generated=2026-09-23），导致每日研判与首页「24h 情报信号」恒为 0。
@@ -909,9 +929,14 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
     results["c1a_views"] = {
         "ok": _run_script(["tools/c1a/build_views.py"], emit, timeout=600),
         "detail": "c1a_views"}
-    results["daily_assessment"] = {
-        "ok": _run_script(["scripts/ops/assessment_run.py"], emit, timeout=900, component="daily_assessment"),
-        "detail": "assessment_run"}
+    if _ai_budget_available():
+        results["daily_assessment"] = {
+            "ok": _run_script(["scripts/ops/assessment_run.py"], emit, timeout=900, component="daily_assessment"),
+            "detail": "assessment_run"}
+    else:
+        emit("DAILY_ASSESSMENT_BUDGET_EXHAUSTED -> 0 calls（合法跳过）")
+        results["daily_assessment"] = {"ok": True, "detail": "ai_budget_exhausted_zero_calls",
+                                       "ai_calls": 0, "skipped": True}
     # canonical 变更后必须再生成遗留/公开视图（events.json / pending / raw / quarantine /
     # public/published_events / current_metrics），否则 deploy 的 V17 canonical↔legacy 校验失败
     results["views_export"] = {"ok": _export_views(emit), "detail": "compatibility_export"}
@@ -921,9 +946,14 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
         "detail": "executive_view"}
     # C7-5：首页情报事实包 → 首页 AI 简报（6h 节奏 + input_hash 缓存；无实质变化则 REAL_AI_CALLS=0）
     #       → 首页公开视图（8 板块 + 风险/活动地图 + 情报流）。必须在 executive_view 之后。
-    results["homepage_brief"] = {
-        "ok": _run_script(["scripts/ops/homepage_brief_run.py"], emit, timeout=900, component="homepage_brief"),
-        "detail": "homepage_brief"}
+    if _ai_budget_available():
+        results["homepage_brief"] = {
+            "ok": _run_script(["scripts/ops/homepage_brief_run.py"], emit, timeout=900, component="homepage_brief"),
+            "detail": "homepage_brief"}
+    else:
+        emit("HOMEPAGE_BRIEF_BUDGET_EXHAUSTED -> 0 calls（合法跳过）")
+        results["homepage_brief"] = {"ok": True, "detail": "ai_budget_exhausted_zero_calls",
+                                     "ai_calls": 0, "skipped": True}
     results["homepage_view"] = {
         "ok": _run_script(["scripts/ops/homepage_view.py", "--apply"], emit),
         "detail": "homepage_view"}

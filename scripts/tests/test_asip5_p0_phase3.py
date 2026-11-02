@@ -338,6 +338,15 @@ class TestPostCollectionStage(unittest.TestCase):
         self.assertFalse(self._has(calls, "enrichment_run.py"),
                          "上游失败时不得执行依赖其结果的 AI 步骤：%s" % calls)
 
+    def test_ai_budget_exhausted_skips_ai_tasks(self):
+        """I.5：预算耗尽 → AI 任务合法跳过（0 calls），整轮不失败、不发起模型调用。"""
+        os.environ["ASIP_AI_RUN_MAX_CALLS"] = "0"
+        self._write_clusters(1)
+        _res, calls = self._execute({"due": [{"task": "daily_report", "reason": "tick"}]},
+                                     {"processed_hashes": {}})
+        self.assertFalse(self._has(calls, "reports_run.py"),
+                         "预算耗尽时不得发起报告的模型调用：%s" % calls)
+
     def test_ai_max_items_bounded_by_budget(self):
         """单轮 AI 条目上限不得超过剩余全局预算。"""
         os.environ["ASIP_AI_MAX_ITEMS_PER_RUN"] = "50"
