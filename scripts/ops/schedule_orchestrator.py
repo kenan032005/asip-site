@@ -16,7 +16,7 @@
 - 所有任务以 production mode 真实执行（collection --execute；AI 真实 provider；
   reports --source canonical）；
 - 幂等：AI 仅处理 content hash 未处理条目；daily/weekly 每日/每周至多一份；
-  collection 以 5h45m 间隔阈值防重复；
+  collection 以 2h45m 间隔阈值防重复；
 - trigger 标记 = scheduled_orchestrator（自然 Automation）；--canary 标记 = manual_canary。
 
 时间语义：全部使用北京时间（UTC+8）。
@@ -283,7 +283,7 @@ def plan_due_tasks(state, now_bjt=None, schedule_enabled=True):
     def last(field):
         return _parse_iso(state.get(field))
 
-    # Collection：距上次成功 ≥5h45m（首跑 None → due）
+    # Collection：距上次成功 ≥2h45m（首跑 None → due）
     lc = last("last_successful_collection")
     if lc is None or (now - lc) >= COLLECTION_MIN_GAP:
         due.append({"task": "collection", "mode": "production",
@@ -313,6 +313,45 @@ def plan_due_tasks(state, now_bjt=None, schedule_enabled=True):
         due.append({"task": "weekly_report", "mode": "production",
                     "trigger": "scheduled_orchestrator", "reason": "weekly_sunday_tick"})
     return {"enabled": True, "due": due, "now_bjt": now.isoformat()}
+
+
+def _ai_budget_available():
+    """全局 AI 预算是否还有余额。
+
+    预算口径跨子进程共享（ai_ledger 的 ai_budget_state.json）；**不可验证 → 视为
+    无余额**（fail-closed）：宁可本轮不调用模型，也不允许在无法保证上限时付费。
+    """
+    try:
+        from scripts.ops import ai_ledger as _al
+        return _al.budget_remaining() > 0
+    except Exception:  # noqa: BLE001
+        return False
+
+
+def _ai_max_items(default=0):
+    """单轮 AI 富集条目上限。
+
+    显式配置（ASIP_AI_MAX_ITEMS_PER_RUN）优先，且**不得超过剩余全局预算**。
+    受控运行阶段用小额度逐轮消化历史积压，不一次性释放全部 AI 任务。
+    0 = 不限条数（但仍受全局预算硬约束）。
+    """
+    raw = os.environ.get("ASIP_AI_MAX_ITEMS_PER_RUN")
+    if raw in (None, ""):
+        raw = default
+    try:
+        lim = int(raw)
+    except (TypeError, ValueError):
+        lim = 0
+    if lim <= 0:
+        return 0
+    try:
+        from scripts.ops import ai_ledger as _al
+        remaining = int(_al.budget_remaining())
+    except Exception:  # noqa: BLE001
+        remaining = 0
+    if remaining <= 0:
+        return 1
+    return max(1, min(lim, remaining))
 
 
 def _run_script(args, emit, timeout=1800, component=""):
@@ -588,7 +627,17 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
                 results[label] = {"ok": True, "detail": "no_new_eligible_zero_calls",
                                   "ai_calls": 0}
                 return True
-            ok = _run_script(["scripts/ops/enrichment_run.py", "--kind", "social"], emit, component="social_ai")
+            # Phase 3 / I.5：全局预算口径（跨子进程共享）→ 预算耗尽则合法跳过 0 calls
+            if not _ai_budget_available():
+                emit("SOCIAL_AI_BUDGET_EXHAUSTED -> 0 calls（合法跳过）")
+                results[label] = {"ok": True, "detail": "ai_budget_exhausted_zero_calls",
+                                  "ai_calls": 0}
+                return True
+            _mi = _ai_max_items()
+            _args = ["scripts/ops/enrichment_run.py", "--kind", "social"]
+            if _mi:
+                _args += ["--max-items", str(_mi)]
+            ok = _run_script(_args, emit, component="social_ai")
             state = _reload_state(state)
             if ok:
                 ps.record_run(state, "last_successful_ai", ok=True)
@@ -627,7 +676,17 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
                 results[label] = {"ok": True, "detail": "no_new_eligible_zero_calls",
                                   "ai_calls": 0}
                 return True
-            ok = _run_script(["scripts/ops/enrichment_run.py", "--kind", "disease"], emit, component="disease_ai")
+            # Phase 3 / I.5：全局预算口径（跨子进程共享）→ 预算耗尽则合法跳过 0 calls
+            if not _ai_budget_available():
+                emit("DISEASE_AI_BUDGET_EXHAUSTED -> 0 calls（合法跳过）")
+                results[label] = {"ok": True, "detail": "ai_budget_exhausted_zero_calls",
+                                  "ai_calls": 0}
+                return True
+            _mi = _ai_max_items()
+            _args = ["scripts/ops/enrichment_run.py", "--kind", "disease"]
+            if _mi:
+                _args += ["--max-items", str(_mi)]
+            ok = _run_script(_args, emit, component="disease_ai")
             state = _reload_state(state)
             if ok:
                 ps.record_run(state, "last_disease_run", ok=True)
@@ -654,7 +713,7 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
         if task == "daily_report":
             report_ran = True
             ok = _run_script(["scripts/ops/reports_run.py", "--mode", "daily",
-                              "--source", "canonical"], emit)
+                              "--source", "canonical"], emit, component="daily_report")
             state = _reload_state(state)
             meta = _daily_report_meta(root)
             cls = meta.get("classification")
@@ -678,7 +737,8 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
             ok = True
             for mode in ("tcd_weekly", "ssd_weekly"):
                 ok = _run_script(["scripts/ops/reports_run.py", "--mode", mode,
-                                  "--source", "canonical"], emit) and ok
+                                  "--source", "canonical"], emit,
+                                 component="weekly_report") and ok
             state = _reload_state(state)
             summary = _read_json_file(ps.OPS_DIR / "reports"
                                       / "reports_run_summary.json") or {}
@@ -711,6 +771,24 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
         plan = {"due": [t for t in plan["due"] if t.get("task") != "collection"]}
         if _dropped:
             run["notes"].append("post_collection_skipped_collection")
+        # ── Phase 3 / I.2：post_collection 必须**重新检查已持久化的 eligible 内容**，
+        # 并把"尚未富集的新增内容"补进 AI 队列。此前 social_ai / disease_ai 只能由
+        # 采集后的采集分支触发（execute 里 collection 成功后的两行）→ post_collection
+        # 模式下永远不会被排入队列 → AI 富集缺口（本任务 I.2 的直接根因）。
+        # 幂等仍由 processed_hashes 保证：已成功处理的项目不会重复调用 API。
+        _ai_queued = []
+        if new_eligible_exists(state, "social", root):
+            plan["due"].insert(0, {"task": "social_ai", "mode": "production",
+                                  "trigger": "post_collection",
+                                  "reason": "new_eligible_social"})
+            _ai_queued.append("social_ai")
+        if new_eligible_exists(state, "disease", root):
+            plan["due"].insert(0, {"task": "disease_ai", "mode": "production",
+                                  "trigger": "post_collection",
+                                  "reason": "new_eligible_disease"})
+            _ai_queued.append("disease_ai")
+        if _ai_queued:
+            run["notes"].append("post_collection_queued_ai:%s" % ",".join(_ai_queued))
         run["notes"].append("mode=post_collection")
 
     for t in plan["due"]:
@@ -759,6 +837,39 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
         return {"deploy_required": False, "deploy_request": None,
                 "executed": [k for k in results], "results": results,
                 "mode": "collection_only"}
+
+    if _mode == "post_collection" and not plan["due"]:
+        # ── Phase 3 / I.3：没有到期工作时**快速 no-op**。
+        # 此前无论 due 是否为空，编排器都会跑完整链路（news_localization /
+        # assessment / homepage_brief / reports / views）→ 每小时都在付费。
+        # 现在：无 due（无新增待富集内容 + 无到期报告）→ 只收尾账本并立即返回。
+        from scripts.ops import ai_ledger as _al
+        _sum = _al.finalize_run_ledger(run_id=run.get("run_id"))
+        run["ai_usage"] = _sum
+        run["ai_calls_total"] = _sum.get("totals", {}).get("calls", 0)
+        run["ai_tokens_input"] = _sum.get("totals", {}).get("input_tokens", 0)
+        run["ai_tokens_output"] = _sum.get("totals", {}).get("output_tokens", 0)
+        run["ai_estimated_cost"] = _sum.get("totals", {}).get("estimated_cost", 0)
+        run["ai_cost_basis"] = ("estimated" if _sum.get("totals", {}).get("estimated_cost_available")
+                                else "zero_calls_unpriced")
+        run["ai_ledger_verified"] = bool(_sum.get("verified"))
+        if not _sum.get("verified"):
+            run["notes"].append("ai_ledger_verify_failed:%s" % str(_sum.get("error"))[:80])
+        run["notes"].append("post_collection_noop_no_due_work")
+        ops.finish_run(run, status="completed")
+        run["deploy_requested"] = False
+        run["deploy_provenance"] = None
+        prev = []
+        if ps.OPS_STATUS_FILE.exists():
+            try:
+                prev = json.loads(ps.OPS_STATUS_FILE.read_text(encoding="utf-8")).get("runs", [])
+            except Exception:
+                prev = []
+        ops.save_ops(run, previous=prev[-20:])
+        emit("DEPLOY_REQUIRED = false (post_collection no-op)")
+        return {"deploy_required": False, "deploy_request": None,
+                "executed": [k for k in results], "results": results,
+                "mode": "post_collection"}
 
     results.setdefault("timeline", {"ok": _run_script(["scripts/ops/timeline_run.py"], emit),
                                     "detail": "timeline_run"})

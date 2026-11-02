@@ -184,12 +184,15 @@ class DeepSeekV4FlashProvider(BaseAIProvider):
         attempt = 0
         last_err = None
         last_info = None
+        # asip5 Phase 3：预算超限 / 预算状态不可验证必须**向上冒泡**（fail-closed），
+        # 不得在下面的通用 except 里被降级成一次普通 provider 失败——那会让越界
+        # 的付费继续发生且看不出是预算原因。
+        from scripts.ops import ai_ledger as _ai_budget
         while attempt < self.max_retries:
             attempt += 1
             try:
                 # asip5：每次真实 HTTP 尝试（含内部重试）都计入运行预算；
                 # 超限 → BudgetExceeded 直接终止（fail-closed，不再发请求）。
-                from scripts.ops import ai_ledger as _ai_budget
                 _ai_budget.charge_attempt(component=str(task.get("task_type") or ""))
                 return self._call_api(system, user, tid, attempt,
                                       task.get("max_output_tokens"),
@@ -206,6 +209,9 @@ class DeepSeekV4FlashProvider(BaseAIProvider):
                 last_err = "transport_error:%s" % type(e).__name__
                 time.sleep(self._backoff(attempt))
                 continue
+            except (_ai_budget.BudgetExceeded, _ai_budget.BudgetStateUnavailable):
+                # 预算/账本口径不可验证 → fail-closed，直接终止本组件的付费
+                raise
             except Exception as e:
                 return self._fail(tid, "provider_error:%s" % str(e)[:80], attempt)
         return self._fail(tid, "retry_exhausted:%s" % last_err, attempt, last_info)

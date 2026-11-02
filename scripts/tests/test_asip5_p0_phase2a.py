@@ -22,9 +22,12 @@ class _Base(unittest.TestCase):
     def setUp(self):
         self.tmp = Path(tempfile.mkdtemp(prefix="asip5_2a_"))
         self._saved = (ai_ledger.LEDGER_PATH, ai_ledger.SUMMARY_PATH,
+                       ai_ledger.BUDGET_STATE_PATH,
                        paid_gate.BREAKER_PATH, paid_gate.BREAKER_REMOTE_PATH)
         ai_ledger.LEDGER_PATH = self.tmp / "ai.jsonl"
         ai_ledger.SUMMARY_PATH = self.tmp / "ai_summary.json"
+        # Phase 3：跨进程共享的预算状态也必须隔离到临时目录（否则测试会写真实仓库 data/）
+        ai_ledger.BUDGET_STATE_PATH = self.tmp / "ai_budget_state.json"
         paid_gate.BREAKER_PATH = self.tmp / "breaker.json"
         paid_gate.BREAKER_REMOTE_PATH = self.tmp / "remote.json"
         paid_gate.save_remote_status(True, "test")
@@ -45,7 +48,7 @@ class _Base(unittest.TestCase):
             os.environ.pop(k, None)
 
     def tearDown(self):
-        (ai_ledger.LEDGER_PATH, ai_ledger.SUMMARY_PATH,
+        (ai_ledger.LEDGER_PATH, ai_ledger.SUMMARY_PATH, ai_ledger.BUDGET_STATE_PATH,
          paid_gate.BREAKER_PATH, paid_gate.BREAKER_REMOTE_PATH) = self._saved
         ps.OPS_DIR, ps.STATE_FILE, ps.OPS_STATUS_FILE = self._ps_saved
         for k, v in self._env.items():

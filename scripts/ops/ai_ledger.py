@@ -23,7 +23,7 @@ assessment / homepage_brief / reports 的模型调用**没有任何账本**，
 import json
 import os
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -236,28 +236,192 @@ class BudgetExceeded(RuntimeError):
     pass
 
 
+class BudgetStateUnavailable(RuntimeError):
+    """预算状态不可读/不可写 → 无法保证上限 → 禁止继续付费（fail-closed）。"""
+
+
+#: 跨进程共享的预算状态（同一轮内所有 AI 子进程共用一份额度）。
+#: 落盘在 data/runtime/ops/ 下 → 随 production-state 提交 → 跨 job 延续。
+BUDGET_STATE_PATH = OPS_DIR / "ai_budget_state.json"
+
+#: 进程内镜像（与共享状态同步；仅用于快速读取与测试注入）
 _BUDGET = {"cap": int(os.environ.get("ASIP_AI_RUN_MAX_CALLS", "80")), "used": 0}
+
+BJT = timezone(timedelta(hours=8))
+
+
+def _budget_scope():
+    """本轮作用域标识：优先 ASIP_RUN_ID / GITHUB_RUN_ID，其次进程内唯一值。"""
+    return (os.environ.get("ASIP_RUN_ID") or os.environ.get("GITHUB_RUN_ID")
+            or ("pid:%d" % os.getpid()))
+
+
+def _daily_key():
+    """预算日键（按业务日 BJT，与 20:00 BJT 日报节奏一致）。"""
+    return datetime.now(BJT).strftime("%Y-%m-%d")
+
+
+def _budget_caps():
+    """(单轮上限, 日累计上限)。取自环境变量；非法值回落到安全默认。
+
+    注意：0 是**合法**上限（= 本轮/本日禁止任何付费调用），不能用 `or` 串联
+    取值（`0 or 80` → 80 会把"预算为 0"悄悄变成 80）。
+    """
+    raw_cap = os.environ.get("ASIP_AI_RUN_MAX_CALLS")
+    if raw_cap in (None, ""):
+        raw_cap = _BUDGET.get("cap")
+    try:
+        cap = int(raw_cap)
+    except (TypeError, ValueError):
+        cap = 80
+    raw_daily = os.environ.get("ASIP_AI_DAILY_MAX_CALLS")
+    if raw_daily in (None, ""):
+        raw_daily = 130
+    try:
+        daily = int(raw_daily)
+    except (TypeError, ValueError):
+        daily = 130
+    return max(0, cap), max(0, daily)
+
+
+def _read_budget_state():
+    """读取共享预算状态；不可读 → fail-closed（BudgetStateUnavailable）。"""
+    p = Path(BUDGET_STATE_PATH)
+    if not p.exists():
+        return {}
+    try:
+        return json.loads(p.read_text(encoding="utf-8")) or {}
+    except Exception as e:  # noqa: BLE001
+        raise BudgetStateUnavailable("budget state unreadable: %s (%s)" % (p, e))
+
+
+def _write_budget_state(doc):
+    """原子写共享预算状态 + 读回校验；不可写/不一致 → fail-closed。"""
+    p = Path(BUDGET_STATE_PATH)
+    try:
+        p.parent.mkdir(parents=True, exist_ok=True)
+        tmp = p.with_suffix(".json.tmp")
+        tmp.write_text(json.dumps(doc, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+        os.replace(str(tmp), str(p))
+        back = json.loads(p.read_text(encoding="utf-8"))
+        if int(back.get("used", -1)) != int(doc.get("used", -2)):
+            raise BudgetStateUnavailable("budget state write-back mismatch")
+        return True
+    except BudgetStateUnavailable:
+        raise
+    except Exception as e:  # noqa: BLE001
+        raise BudgetStateUnavailable("budget state not writable: %s (%s)" % (p, e))
+
+
+class _BudgetLock:
+    """跨进程互斥（防止并发子进程读到同一 used 而超发）。"""
+
+    def __init__(self, timeout=30.0):
+        self.timeout = timeout
+        self.path = Path(str(BUDGET_STATE_PATH) + ".lock")
+        self.held = False
+
+    def __enter__(self):
+        deadline = time.time() + self.timeout
+        try:
+            self.path.parent.mkdir(parents=True, exist_ok=True)
+        except OSError as e:
+            raise BudgetStateUnavailable("budget lock dir not writable: %s (%s)" % (self.path, e))
+        while True:
+            try:
+                fd = os.open(str(self.path), os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+                os.close(fd)
+                self.held = True
+                return self
+            except FileExistsError:
+                if time.time() > deadline:
+                    raise BudgetStateUnavailable("budget lock timeout: %s" % self.path)
+                time.sleep(0.05)
+            except OSError as e:
+                raise BudgetStateUnavailable("budget lock error: %s (%s)" % (self.path, e))
+
+    def __exit__(self, *exc):
+        if self.held:
+            try:
+                self.path.unlink()
+            except OSError:
+                pass
+            self.held = False
+        return False
 
 
 def budget_state():
-    return dict(_BUDGET)
+    """当前预算状态（共享文件 + 进程内镜像）。不可读时如实标记，不抛错。"""
+    st = dict(_BUDGET)
+    cap, daily_cap = _budget_caps()
+    st["cap"] = cap
+    st["daily_cap"] = daily_cap
+    try:
+        doc = _read_budget_state()
+    except BudgetStateUnavailable:
+        st["shared_available"] = False
+        return st
+    st["shared_available"] = True
+    st["scope"] = doc.get("scope")
+    st["daily_date"] = doc.get("daily_date")
+    st["daily_used"] = doc.get("daily_used")
+    st["updated_at"] = doc.get("updated_at")
+    if doc.get("scope") == _budget_scope():
+        st["used"] = int(doc.get("used", 0))
+    return st
 
 
 def budget_remaining():
-    return max(0, _BUDGET["cap"] - _BUDGET["used"])
+    """本轮剩余可调用次数（跨进程共享口径）。
+
+    共享状态不可读 → BudgetStateUnavailable（fail-closed：无法保证上限就不许付费）。
+    """
+    cap, _daily = _budget_caps()
+    doc = _read_budget_state()
+    used = int(doc.get("used", 0)) if doc.get("scope") == _budget_scope() else 0
+    return max(0, cap - used)
 
 
 def charge_attempt(component=""):
     """每次**真实 HTTP 尝试**（含内部重试）调用；超出上限即抛错（fail-closed）。
 
-    上限由 ASIP_AI_RUN_MAX_CALLS 控制（默认 80，参考历史 ≈65 次/日）。
-    进程级计数 = 单次运行的上限，重启归零。
+    - 单轮上限：ASIP_AI_RUN_MAX_CALLS（默认 80）
+    - 日累计上限：ASIP_AI_DAILY_MAX_CALLS（默认 130）
+    - **跨进程共享**：计数持久化在 data/runtime/ops/ai_budget_state.json；
+      同一轮内的多个 AI 子进程（enrichment / news_localization / assessment /
+      homepage_brief / reports）共用**同一份**额度 —— 此前每个子进程各自拿到
+      完整额度，实际上限是 N×cap。
+    - 状态不可读/不可写 → BudgetStateUnavailable（fail-closed，禁止继续付费）。
     """
-    _BUDGET["used"] += 1
-    if _BUDGET["used"] > _BUDGET["cap"]:
+    cap, daily_cap = _budget_caps()
+    scope = _budget_scope()
+    today = _daily_key()
+    with _BudgetLock():
+        doc = _read_budget_state()          # 不可读 → fail-closed
+        if doc.get("scope") != scope:       # 新的一轮 → 单轮计数归零（日累计保留）
+            doc["scope"] = scope
+            doc["used"] = 0
+        if doc.get("daily_date") != today:  # 新的一天 → 日累计归零
+            doc["daily_date"] = today
+            doc["daily_used"] = 0
+        doc["cap"] = cap
+        doc["daily_cap"] = daily_cap
+        used = int(doc.get("used", 0)) + 1
+        daily_used = int(doc.get("daily_used", 0)) + 1
+        doc["used"] = used
+        doc["daily_used"] = daily_used
+        doc["updated_at"] = _now_iso()
+        doc["last_component"] = component
+        _write_budget_state(doc)            # 不可写 → fail-closed
+    _BUDGET["cap"] = cap
+    _BUDGET["used"] = used
+    if used > cap:
         raise BudgetExceeded("ai run cap exceeded: %d/%d (component=%s)"
-                             % (_BUDGET["used"], _BUDGET["cap"], component))
-    return _BUDGET["used"]
+                             % (used, cap, component))
+    if daily_used > daily_cap:
+        raise BudgetExceeded("ai daily cap exceeded: %d/%d (component=%s)"
+                             % (daily_used, daily_cap, component))
+    return used
 
 
 # ── 账本收尾（可复用；真实账本派生，绝不强制写 0）──────────────────────

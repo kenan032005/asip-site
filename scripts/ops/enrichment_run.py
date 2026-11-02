@@ -42,13 +42,16 @@ def _eligible_items(kind):
     return items
 
 
-def _write_back_canonical(kind, fid, summary, data_dir=None):
+def _write_back_canonical(kind, fid, summary, data_dir=None, public=True):
     """§十八 Public Admission：safety gate PASS 记录回写 canonical。
 
     social → data/canonical/event_clusters.json；
     disease → data/disease/canonical/outbreak_events.json。
     只添加字段（public_eligible/master_event_id/enrichment_*/safety），
     不删除/覆盖既有字段。data_dir 可注入（测试隔离用临时副本）。
+
+    public=False（Phase 3 / I.2）：如实记录**未通过**安全闸门条目的真实状态与
+    处理时间，但**不得**置 public_eligible —— 公开准入只认 safety_gate_pass。
     """
     root = Path(data_dir) if data_dir else DATA
     if kind == "social":
@@ -64,9 +67,19 @@ def _write_back_canonical(kind, fid, summary, data_dir=None):
     changed = 0
     for it in items:
         if it.get(fid_field) == fid:
-            it["public_eligible"] = True
-            it["master_event_id"] = it.get("master_event_id") or fid
-            it["enrichment_status"] = "safety_gate_pass"
+            if public:
+                it["public_eligible"] = True
+                it["master_event_id"] = it.get("master_event_id") or fid
+                it["enrichment_status"] = "safety_gate_pass"
+            else:
+                gate = str((summary or {}).get("gate") or "").upper()
+                if gate == "HOLD":
+                    st = "safety_gate_hold"
+                elif gate == "FAIL":
+                    st = "safety_gate_fail"
+                else:
+                    st = str((summary or {}).get("status") or "enrichment_incomplete")
+                it["enrichment_status"] = st
             it["enriched_at"] = ps._utcnow_iso()
             it["safety"] = summary
             changed += 1
@@ -134,13 +147,18 @@ def run_enrichment(kind, provider=None, state=None, ops_run=None, emit=lambda s:
         ps.mark_processed(state, kind_key, fid, {
             "status": rec.get("status"), "public_eligible": eligible_public,
             "content_hash": ch, "ai_input_hash": rec.get("ai_input_hash"),
-            "cache_hit": cache_hit})
-        if eligible_public and write_back:
+            "cache_hit": cache_hit,
+            # Phase 3 / I.2：如实记录处理状态与处理时间（不强制写"成功"）
+            "enriched_at": ps._utcnow_iso(),
+            "gate": safe.get("gate")})
+        if write_back:
+            # I.2：通过闸门 → public_eligible=True；未通过 → 只记录真实状态与时间，
+            # 绝不标记为可公开（公开准入只认 safety_gate_pass）。
             _write_back_canonical(kind, fid, {
                 "gate": safe.get("gate"),
                 "corrections": safe.get("corrections_count") or 0,
                 "status": rec.get("status")},
-                data_dir=data_dir)
+                data_dir=data_dir, public=eligible_public)
         if not eligible_public:
             held += 1
             state["failed_held_records"].append({
