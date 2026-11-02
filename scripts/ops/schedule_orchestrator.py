@@ -1034,6 +1034,56 @@ def _latest_report_class(root):
         return None
 
 
+def duplicate_wakeup_within(minutes, now=None):
+    """自动唤醒去重（Phase 3 / II.7）：排除原生 cron 与外部调度器的重复触发。
+
+    两条自动唤醒路径（每小时 cron = secondary wake-up；外部调度器
+    repository_dispatch = primary）可能在同一时间窗内先后触发。concurrency 组
+    （cancel-in-progress=false）会让后到的那一次**排队**，等前一轮跑完后才开始；
+    本判据让排队的那一次直接 no-op → 不会重复采集、不会重复付费。
+
+    判据读**已提交**的运行记录（data/runtime/ops/operations_status.json 随
+    production-state 提交 → 跨 workflow run 可见）：
+      - 最近一次完成的唤醒属于**同一个 GITHUB_RUN_ID** → 是同一轮的两个阶段
+        （collect → post），不是重复唤醒 → 不去重；
+      - 属于**另一个 run** 且完成时间在 minutes 分钟内 → 判定为重复唤醒。
+
+    返回 (is_duplicate, prev_run_id)。
+    """
+    now = now or datetime.now(BJT)
+    try:
+        p = ps.OPS_STATUS_FILE
+        if not p.exists():
+            return False, None
+        doc = json.loads(p.read_text(encoding="utf-8"))
+    except Exception:  # noqa: BLE001
+        return False, None
+    cur = os.environ.get("GITHUB_RUN_ID") or ""
+    best = None
+    for r in (doc.get("runs") or []):
+        if not isinstance(r, dict):
+            continue
+        ts = r.get("completed_at") or r.get("started_at") or ""
+        if not ts:
+            continue
+        try:
+            t = datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
+        except Exception:  # noqa: BLE001
+            continue
+        if t.tzinfo is None:
+            t = t.replace(tzinfo=BJT)
+        if best is None or t > best[0]:
+            best = (t, str(r.get("run_id") or ""))
+    if best is None:
+        return False, None
+    t, rid = best
+    if rid and cur and rid == cur:
+        return False, None          # 同一 workflow run 的兄弟阶段 → 不去重
+    if (now - t).total_seconds() < minutes * 60:
+        return True, rid
+    return False, None
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description="Stage8D hourly due-task orchestrator")
     ap.add_argument("--run", action="store_true", help="执行 due 任务")
@@ -1100,6 +1150,24 @@ def main(argv=None):
         _emit("MANUAL_PRODUCTION_NOT_AUTHORIZED = true（需 ASIP_ALLOW_MANUAL_PRODUCTION=1，"
               "或改用 run_mode=collection_only）")
         return 3
+    # Phase 3 / II.7：自动唤醒去重（排除原生 cron 与外部调度器的重复触发）。
+    # 只作用于自动触发；人工 dispatch 不受影响。
+    if _event_name() in ("schedule", "repository_dispatch"):
+        try:
+            _mins = int(os.environ.get("ASIP_MIN_WAKEUP_INTERVAL_MINUTES", "45"))
+        except (TypeError, ValueError):
+            _mins = 45
+        if _mins > 0:
+            _dup, _prev = duplicate_wakeup_within(_mins, now)
+            if _dup:
+                _emit("DUPLICATE_WAKEUP_SKIPPED = true（上一轮自动唤醒 run_id=%s 距今 < %d 分钟；"
+                      "不采集/不AI/不写回/不部署）" % (_prev, _mins))
+                if args.json:
+                    print(json.dumps({"deploy_required": False, "deploy_request": None,
+                                      "executed": [], "results": {},
+                                      "duplicate_wakeup_skipped": True},
+                                     ensure_ascii=False, indent=1))
+                return 0
     try:
         res = execute(plan, state, emit=_emit, canary=args.canary,
                       trigger_meta=trigger_meta)

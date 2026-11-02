@@ -16,6 +16,7 @@ import shutil
 import sys
 import tempfile
 import unittest
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -343,6 +344,64 @@ class TestPostCollectionStage(unittest.TestCase):
         os.environ["ASIP_AI_RUN_MAX_CALLS"] = "3"
         lim = so._ai_max_items()
         self.assertLessEqual(lim, 3)
+
+
+class TestWakeupDedup(unittest.TestCase):
+    """Phase 3 / II.7：自动唤醒去重（排除原生 cron 与外部调度器的重复触发）。"""
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp(prefix="asip5_p3_dedup_"))
+        self._ops = self.tmp / "ops"
+        self._ops.mkdir(parents=True, exist_ok=True)
+        self._ps_saved = (ps.OPS_DIR, ps.STATE_FILE, ps.OPS_STATUS_FILE)
+        ps.OPS_DIR = self._ops
+        ps.STATE_FILE = self._ops / "production_state.json"
+        ps.OPS_STATUS_FILE = self._ops / "operations_status.json"
+        self._env = {k: os.environ.get(k) for k in
+                     ("GITHUB_RUN_ID", "ASIP_MIN_WAKEUP_INTERVAL_MINUTES")}
+        for k in self._env:
+            os.environ.pop(k, None)
+
+    def tearDown(self):
+        ps.OPS_DIR, ps.STATE_FILE, ps.OPS_STATUS_FILE = self._ps_saved
+        for k, v in self._env.items():
+            if v is None:
+                os.environ.pop(k, None)
+            else:
+                os.environ[k] = v
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def _write_ops(self, run_id, completed_at):
+        ps.OPS_STATUS_FILE.write_text(json.dumps({
+            "schema": "stage8c-package3-v1",
+            "runs": [{"run_id": run_id, "workflow": "asip-production-orchestrator",
+                      "started_at": completed_at, "completed_at": completed_at,
+                      "status": "completed"}]}), encoding="utf-8")
+
+    def test_sibling_stage_not_deduped(self):
+        """同一 GITHUB_RUN_ID 的兄弟阶段（collect → post）不得被去重。"""
+        os.environ["GITHUB_RUN_ID"] = "111"
+        now = datetime(2026, 11, 2, 23, 0, 0, tzinfo=timezone.utc)
+        self._write_ops("111", "2026-11-02T22:55:00Z")
+        dup, prev = so.duplicate_wakeup_within(45, now)
+        self.assertFalse(dup, "同一 workflow run 的兄弟阶段不得被判定为重复唤醒")
+
+    def test_duplicate_foreign_run_is_deduped(self):
+        """另一个 run 在窗口内完成 → 判定为重复唤醒（不重复采集/不重复付费）。"""
+        os.environ["GITHUB_RUN_ID"] = "222"
+        now = datetime(2026, 11, 2, 23, 0, 0, tzinfo=timezone.utc)
+        self._write_ops("111", "2026-11-02T22:55:00Z")
+        dup, prev = so.duplicate_wakeup_within(45, now)
+        self.assertTrue(dup)
+        self.assertEqual(prev, "111")
+
+    def test_old_run_not_deduped(self):
+        """窗口之外的旧 run 不去重（正常的下一个唤醒周期必须能跑）。"""
+        os.environ["GITHUB_RUN_ID"] = "222"
+        now = datetime(2026, 11, 2, 23, 0, 0, tzinfo=timezone.utc)
+        self._write_ops("111", "2026-11-02T21:00:00Z")
+        dup, prev = so.duplicate_wakeup_within(45, now)
+        self.assertFalse(dup)
 
 
 if __name__ == "__main__":
