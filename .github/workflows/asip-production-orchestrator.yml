@@ -26,6 +26,15 @@ name: ASIP Production Orchestrator
 on:
   workflow_dispatch:
     inputs:
+      run_mode:
+        description: "运行模式：shadow / collection_only / production（collection_only = 零付费采集，仅采集+checkpoint）"
+        required: false
+        type: choice
+        options:
+          - shadow
+          - collection_only
+          - production
+        default: shadow
       canary:
         description: "显式 production-equivalent Canary（true=执行 due 任务并标记 manual_canary）"
         required: false
@@ -59,14 +68,18 @@ env:
 
 jobs:
   orchestrate:
-    if: github.event_name != 'schedule' || vars.PRODUCTION_SCHEDULE_ENABLED == 'true'
+    # R1D-HOTFIX：自动触发（schedule / repository_dispatch）在发布闸门关闭时 Job 级 skip，
+    # 后续步骤不会去解析空的 /tmp/orch.json；人工 dispatch 不受此闸门影响（但受 run_mode 约束）。
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (vars.ASIP_ALLOW_AUTOMATIC_RUNS == '1' && vars.PRODUCTION_SCHEDULE_ENABLED == 'true')
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
       - name: Checkout release code
         uses: actions/checkout@v4
         with:
-          ref: bc08ab90cdcc2829abc07f4e60812fb8cb7f139b
+          ref: e5887371d8f389e3af05de673bb64e0900271312
           fetch-depth: 1
 
       - name: Checkout production state branch
@@ -156,6 +169,11 @@ jobs:
           echo "::error::repository_dispatch 未声明 trigger_source=external_scheduler；不得冒充 automation"
           exit 1
 
+      - name: Fetch breaker state（fail-closed if unverifiable）
+        # R1C：每轮先读远端熔断状态；不可验证 → 非零退出 → 后续付费任务不启动
+        run: |
+          python scripts/ops/breakerctl.py fetch --repo "${{ github.repository }}"
+
       - name: Run due-task orchestrator（production mode）
         id: orch
         env:
@@ -163,6 +181,11 @@ jobs:
           # §三/§十七：触发来源上下文（不含任何凭据）
           ASIP_CLIENT_PAYLOAD: ${{ toJSON(github.event.client_payload) }}
           ASIP_WORKFLOW_INPUTS: ${{ toJSON(github.event.inputs) }}
+          # R1D：显式运行模式（collection_only=零付费采集；自动触发默认 production）
+          ASIP_RUN_MODE: ${{ github.event_name == 'workflow_dispatch' && (github.event.inputs.run_mode || 'shadow') || 'production' }}
+          # R1D-HOTFIX：发布闸门（默认全部锁定；恢复自动调度/人工 production 需显式置 1）
+          ASIP_ALLOW_AUTOMATIC_RUNS: ${{ vars.ASIP_ALLOW_AUTOMATIC_RUNS || '0' }}
+          ASIP_ALLOW_MANUAL_PRODUCTION: ${{ vars.ASIP_ALLOW_MANUAL_PRODUCTION || '0' }}
           # C8-4D1：共享请求复用开关（仓库变量，默认 "0" = 关闭）
           ASIP_SHARED_FEED_REUSE: ${{ vars.ASIP_SHARED_FEED_REUSE || '0' }}
           # C8-4D2：Phase 拆分回滚开关必须透传到采集执行路径；默认 '1'（不擅自回滚）
@@ -177,7 +200,14 @@ jobs:
           # 先保存退出码 → 白名单诊断 → 仅失败时以原退出码退出；成功必须继续往下走，
           # 否则 Auto deploy 拿不到 deploy_required。
           RC=0
+          : > /tmp/orch_state_failure   # 清空上一轮标记（仅当本轮 checkpoint 失败才写入）
+          rm -f /tmp/orch_state_failure
           python scripts/ops/schedule_orchestrator.py $FLAGS > /tmp/orch.json 2> /tmp/orch.err || RC=$?
+          # 早退路径（自动触发被闸门拦截/未授权等）不输出 JSON → 补最小对象，避免下游解析空文件
+          if [ ! -s /tmp/orch.json ]; then
+            printf '{"mode":"noop","executed":[],"deploy_required":false}\n' > /tmp/orch.json
+            echo "ORCH_JSON_PLACEHOLDER=noop"
+          fi
           echo "ORCHESTRATOR_EXIT=$RC"
           # 白名单诊断：只输出类型检查过的 task / ok / exit_status / elapsed。
           # 不打印完整 orch.json，不打印任意 error/detail 文本。
@@ -215,6 +245,11 @@ jobs:
           import json
           d = json.load(open('/tmp/orch.json'))
           dr = d.get('deploy_request') or {}
+          import os as _os
+          _mode = d.get("mode") or _os.environ.get("ASIP_RUN_MODE") or "production"
+          _executed = d.get("executed") or []
+          print("run_mode=" + str(_mode))
+          print("executed_count=" + str(len(_executed)))
           print("deploy_required=" + str(d.get('deploy_required', False)).lower())
           print("deploy_trigger_source=" + str(dr.get('trigger_source') or ''))
           print("deploy_trigger_type=" + str(dr.get('trigger_type') or ''))
@@ -225,54 +260,26 @@ jobs:
           print("deploy_report_id=" + str(dr.get('report_id') or ''))
           print("deploy_root_orchestrator_run_id=" + str(dr.get('root_orchestrator_run_id') or ''))
           PY
-      - name: Commit state → production-state branch
+      - name: Commit state → production-state（guarded checkpoint）
+        # R1D-HOTFIX：shadow/no-op 不得执行 final checkpoint；只有真正产生可持久化状态才提交。
+        if: steps.orch.outputs.run_mode != 'shadow' && steps.orch.outputs.executed_count != '0'
+        # R1C：唯一提交入口。commit_state 在 state_src 内执行：复制校验 → git add -f（与旧集合一致）
+        # → commit → merge -X ours → push → 校验远端 SHA == 本地 HEAD → 校验提交内容。
+        # 采集阶段的 checkpoint 由 orchestrator 内部完成（更早持久化，避免超时丢数据）。
         run: |
-          cp -r data/runtime/ops/* state_src/data/runtime/ops/ 2>/dev/null || true
-          cp -rf data/canonical/. state_src/data/canonical/ 2>/dev/null || true
-          cp -rf data/disease/. state_src/data/disease/ 2>/dev/null || true
-          cp -rf data/runtime/timeline/. state_src/data/runtime/timeline/ 2>/dev/null || true
-          # canonical 变更后再生成的遗留/公开视图一并随 state 提交（V17 一致性 + 站点数据）
-          cp -f data/events.json data/pending_events.json data/raw_candidates.json \
-            data/quarantine_events.json state_src/data/ 2>/dev/null || true
-          cp -rf data/public/. state_src/data/public/ 2>/dev/null || true
-          # C7-3：情报内容引擎工件（每日 AI 研判）随 state 持久化
-          mkdir -p state_src/data/intelligence state_src/data/views
-          cp -rf data/intelligence/. state_src/data/intelligence/ 2>/dev/null || true
-          cp -rf data/views/. state_src/data/views/ 2>/dev/null || true
-          # C7-6R4：随 state 持久化 canonical 报告树（materialize 的产物）
-          mkdir -p state_src/data/reports
-          cp -rf data/reports/. state_src/data/reports/ 2>/dev/null || true
-          # C8-3：处理状态随 state 流转（否则跨轮去重/隔离恢复不可持久）
-          mkdir -p state_src/logs/collector_cache
-          cp -rf logs/collector_cache/. state_src/logs/collector_cache/ 2>/dev/null || true
-          # C8-3 FINAL：处理状态写回 production-state（与 Load 对称）
-          mkdir -p state_src/data/runtime
-          cp -f data/runtime/article_processing_state.json                 state_src/data/runtime/article_processing_state.json 2>/dev/null || true
-          if [ -f data/runtime/article_processing_state.json.bak ]; then
-            cp -f data/runtime/article_processing_state.json.bak                   state_src/data/runtime/article_processing_state.json.bak 2>/dev/null || true
-          fi
-          cd state_src
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -f data/runtime/ops data/canonical data/disease data/runtime/timeline \
-            data/events.json data/pending_events.json data/raw_candidates.json \
-            data/quarantine_events.json data/public data/intelligence data/views data/reports logs             data/runtime/article_processing_state.json
-          git commit -m "ops: orchestrator run ${{ github.run_id }}" --allow-empty || echo "no state change"
-          # C7-4R：并发写入者会导致非快进 push —— rebase 后有限重试（3 次）
-          ok=0
-          for i in 1 2 3; do
-            git fetch origin production-state || true
-            # 冲突时保留本地（本轮采集）数据：-X ours。rebase 在双改大 JSON 时会中止，
-            # 因此改用 merge -X ours（C7-4S：实测 rebase 路径报 unmerged files 直接失败）。
-            git merge -X ours --no-edit origin/production-state >/dev/null 2>&1 || true
-            git add -A 2>/dev/null || true
-            git commit --no-edit >/dev/null 2>&1 || true
-            if git push origin production-state; then ok=1; break; fi
-            echo "push rejected (attempt $i)"
-            sleep 5
-          done
-          if [ "$ok" != "1" ]; then echo "::error::state push failed after 3 attempts"; exit 1; fi
-          cd ..
+          python scripts/ops/commit_state.py "ops: orchestrator run ${{ github.run_id }}" final \
+            --expect-path data/runtime/ops/production_state.json \
+            --expect-fields processed_hashes \
+            --require-expect
+
+      - name: Trip breaker on state failure（fail-closed）
+        # 任一步失败即尝试把熔断推到远端；本地已 strike，远端失败只记录（不掩盖原始错误）
+        # R1D-HOTFIX：仅当 orchestrator 写出状态失败标记时才熔断；
+        # 未授权 production / 非法 run_mode 等拒绝路径不得造成误 strike。
+        if: failure() && hashFiles('/tmp/orch_state_failure') != ''
+        run: |
+          python scripts/ops/breakerctl.py strike --reason state_push_failed \
+            --repo "${{ github.repository }}" || echo "::warning::breaker publish failed (local strike recorded)"
 
       - name: Auto deploy（publishable report 后自动派发；canary 仅 shadow build/validate）
         if: vars.AUTO_DEPLOY_ENABLED == 'true' && steps.orch.outputs.deploy_required == 'true'
