@@ -413,5 +413,37 @@ class TestWakeupDedup(unittest.TestCase):
         self.assertFalse(dup)
 
 
+class TestCollectorImportPath(unittest.TestCase):
+    """回归：采集器以脚本方式运行时，仓库根必须在 sys.path 上。
+
+    根因：Phase 1 的 97eac82（route stage3 quarantine writes through QuarantineStore）
+    引入 `from scripts.data.quarantine_store import QuarantineStore`，但
+    stage3_collect_v2.py 只把 ROOT/scripts、ROOT/scripts/collectors 加入 sys.path，
+    **没有把 ROOT 本身加入** → 以 `python scripts/stage3_collect_v2.py` 运行（编排器的
+    实际调用方式）时 `import scripts.*` 失败 → 采集在第一个来源即崩溃 exit 1
+    （无 stats / metrics unavailable；state 不变、无付费，但自动采集整轮失败）。
+    """
+
+    def test_scripts_package_importable_under_collector_sys_path(self):
+        import subprocess
+        code = ("import os,sys;ROOT=os.getcwd();"
+                "sys.path.insert(0, os.path.join(ROOT,'scripts'));"
+                "sys.path.insert(0, os.path.join(ROOT,'scripts','collectors'));"
+                "import scripts.data.quarantine_store as m;"
+                "print('IMPORT_OK', hasattr(m,'QuarantineStore'))")
+        r = subprocess.run([sys.executable, "-c", code], cwd=str(ROOT),
+                           capture_output=True, text=True, timeout=180)
+        self.assertEqual(r.returncode, 0,
+                         "采集器运行路径下无法导入 scripts 包：%s" % r.stderr[-400:])
+        self.assertIn("IMPORT_OK True", r.stdout)
+
+    def test_stage3_collector_registers_repo_root_on_sys_path(self):
+        """静态断言：stage3_collect_v2.py 必须把仓库根自身加入 sys.path。"""
+        src = (ROOT / "scripts" / "stage3_collect_v2.py").read_text(encoding="utf-8")
+        self.assertRegex(src, r"sys\.path\.insert\(0,\s*ROOT\s*\)",
+                         "stage3_collect_v2.py 必须把 ROOT 加入 sys.path，"
+                         "否则 `from scripts.* import ...` 在脚本运行方式下无法解析")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

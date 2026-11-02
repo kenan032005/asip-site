@@ -23,6 +23,15 @@ import argparse
 import traceback
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# asip5 Phase 3 回归修复：仓库根必须自身在 sys.path 上。
+# 本文件以 `python scripts/stage3_collect_v2.py` 方式运行 → sys.path[0] 是 scripts/，
+# 只把 ROOT/scripts、ROOT/scripts/collectors 加进去**不足以**解析 `scripts.*` 包导入：
+# Phase 1 的 97eac82（route stage3 quarantine writes through QuarantineStore）引入
+#   from scripts.data.quarantine_store import QuarantineStore
+# 后，采集在第一个来源即抛 ModuleNotFoundError: No module named 'scripts' 并 exit 1
+# （无 stats → metrics unavailable；state 不变，无付费，但自动采集整轮失败）。
+# 同类问题在 scripts/ops/enrichment_bridge.py 已有先例（把仓库根加入 sys.path）。
+sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 sys.path.insert(0, os.path.join(ROOT, "scripts", "collectors"))
 
