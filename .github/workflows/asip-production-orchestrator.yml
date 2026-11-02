@@ -33,6 +33,7 @@ on:
         options:
           - shadow
           - collection_only
+          - post_collection
           - production
         default: shadow
       canary:
@@ -79,7 +80,7 @@ jobs:
       - name: Checkout release code
         uses: actions/checkout@v4
         with:
-          ref: 97eac825f2adeec62cfe27e7fafba09b8dec7b28
+          ref: 58ea9b4afa2c218576de178e83aabb1b7695aea4
           fetch-depth: 1
 
       - name: Checkout production state branch
@@ -190,6 +191,8 @@ jobs:
           ASIP_ALLOW_MANUAL_PRODUCTION: ${{ vars.ASIP_ALLOW_MANUAL_PRODUCTION || '0' }}
           # R1D：状态失败标记必须在工作区内（hashFiles 只认 workspace 相对路径）
           ASIP_STATE_FAILURE_MARKER: ${{ github.workspace }}/.orch_state_failure
+          # P0-2A：单轮真实调用上限（重试计入；默认 80，参考历史 ≈65/日）
+          ASIP_AI_RUN_MAX_CALLS: ${{ vars.ASIP_AI_RUN_MAX_CALLS || '80' }}
           # C8-4D1：共享请求复用开关（仓库变量，默认 "0" = 关闭）
           ASIP_SHARED_FEED_REUSE: ${{ vars.ASIP_SHARED_FEED_REUSE || '0' }}
           # C8-4D2：Phase 拆分回滚开关必须透传到采集执行路径；默认 '1'（不擅自回滚）
