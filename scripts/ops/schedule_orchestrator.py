@@ -776,17 +776,25 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
         # 采集后的采集分支触发（execute 里 collection 成功后的两行）→ post_collection
         # 模式下永远不会被排入队列 → AI 富集缺口（本任务 I.2 的直接根因）。
         # 幂等仍由 processed_hashes 保证：已成功处理的项目不会重复调用 API。
+        # ── Phase 3 / I.1：上游（采集阶段）失败 → **不执行依赖其结果的后续步骤**。
+        # 报告 / 公开视图只依赖**已持久化**的 state，不依赖本轮采集结果 → 继续执行，
+        # 保证日报不会因长采集或采集失败而持续延误。
+        _upstream_failed = str(os.environ.get("ASIP_UPSTREAM_STAGE_FAILED", "") or "").lower() \
+            in ("1", "true", "yes")
         _ai_queued = []
-        if new_eligible_exists(state, "social", root):
-            plan["due"].insert(0, {"task": "social_ai", "mode": "production",
-                                  "trigger": "post_collection",
-                                  "reason": "new_eligible_social"})
-            _ai_queued.append("social_ai")
-        if new_eligible_exists(state, "disease", root):
-            plan["due"].insert(0, {"task": "disease_ai", "mode": "production",
-                                  "trigger": "post_collection",
-                                  "reason": "new_eligible_disease"})
-            _ai_queued.append("disease_ai")
+        if _upstream_failed:
+            run["notes"].append("post_collection_skipped_ai_upstream_failed")
+        else:
+            if new_eligible_exists(state, "social", root):
+                plan["due"].insert(0, {"task": "social_ai", "mode": "production",
+                                      "trigger": "post_collection",
+                                      "reason": "new_eligible_social"})
+                _ai_queued.append("social_ai")
+            if new_eligible_exists(state, "disease", root):
+                plan["due"].insert(0, {"task": "disease_ai", "mode": "production",
+                                      "trigger": "post_collection",
+                                      "reason": "new_eligible_disease"})
+                _ai_queued.append("disease_ai")
         if _ai_queued:
             run["notes"].append("post_collection_queued_ai:%s" % ",".join(_ai_queued))
         run["notes"].append("mode=post_collection")

@@ -262,7 +262,7 @@ class TestPostCollectionStage(unittest.TestCase):
         self._env = {k: os.environ.get(k) for k in
                      ("ASIP_RUN_MODE", "GITHUB_EVENT_NAME", "ASIP_AI_MAX_ITEMS_PER_RUN",
                       "ASIP_AI_RUN_MAX_CALLS", "ASIP_ALLOW_MANUAL_PRODUCTION",
-                      "ASIP_DEEPSEEK_API_KEY")}
+                      "ASIP_DEEPSEEK_API_KEY", "ASIP_UPSTREAM_STAGE_FAILED")}
         for k in self._env:
             os.environ.pop(k, None)
         os.environ["ASIP_RUN_MODE"] = "post_collection"
@@ -328,6 +328,14 @@ class TestPostCollectionStage(unittest.TestCase):
         """I.3：无新增待富集内容 + 无到期报告 → 快速 no-op（不跑付费链路）。"""
         _res, calls = self._execute({"due": []}, {"processed_hashes": {}})
         self.assertEqual(calls, [], "无到期工作时必须快速 no-op：%s" % calls)
+
+    def test_post_collection_skips_ai_when_upstream_failed(self):
+        """I.1：上游（采集阶段）失败 → 不执行依赖其结果的后续 AI 步骤。"""
+        self._write_clusters(2)
+        os.environ["ASIP_UPSTREAM_STAGE_FAILED"] = "true"
+        _res, calls = self._execute({"due": []}, {"processed_hashes": {}})
+        self.assertFalse(self._has(calls, "enrichment_run.py"),
+                         "上游失败时不得执行依赖其结果的 AI 步骤：%s" % calls)
 
     def test_ai_max_items_bounded_by_budget(self):
         """单轮 AI 条目上限不得超过剩余全局预算。"""
