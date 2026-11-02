@@ -389,7 +389,7 @@ def _daily_report_meta(root):
             "report_id": report_id, "fact_count": daily.get("fact_count")}
 
 
-RUN_MODES = ("production", "shadow", "collection_only")
+RUN_MODES = ("production", "shadow", "collection_only", "post_collection")
 COLLECTION_ONLY_TASKS = {"collection"}
 
 
@@ -704,6 +704,14 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
         if _dropped:
             run["notes"].append("collection_only_dropped:%s" % ",".join(map(str, _dropped)))
         run["notes"].append("mode=collection_only")
+    if _mode == "post_collection":
+        # 只做 AI/研判/报告/视图：明确跳过采集（绝不重跑 stage3_collect_v2），
+        # 消费 production-state 中已持久化的采集结果与 processed_hashes 幂等。
+        _dropped = [t.get("task") for t in plan["due"] if t.get("task") == "collection"]
+        plan = {"due": [t for t in plan["due"] if t.get("task") != "collection"]}
+        if _dropped:
+            run["notes"].append("post_collection_skipped_collection")
+        run["notes"].append("mode=post_collection")
 
     for t in plan["due"]:
         if t["task"] == "collection":
@@ -722,20 +730,21 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
             _do(t["task"], t["task"])
     if _mode == "collection_only":
         # 采集 + checkpoint 之后立即收尾：不跑 timeline / AI / 评估 / 简报 / 报告 / 视图 / 部署
-        # R1D-HOTFIX：账本汇总也必须留痕——collection_only 的"全 0 账本"本身就是审计证据
-        try:
-            from scripts.ops import ai_ledger as _al
-            _sum = _al.write_summary(run_id=run.get("run_id"))
-            run["ai_usage"] = _sum
-            run["ai_calls_total"] = _sum["totals"]["calls"]
-            run["ai_tokens_input"] = _sum["totals"]["input_tokens"]
-            run["ai_tokens_output"] = _sum["totals"]["output_tokens"]
-            run["ai_estimated_cost"] = _sum["totals"]["estimated_cost"]
-            run["ai_cost_basis"] = ("estimated" if _sum["totals"]["estimated_cost_available"]
-                                    else "zero_calls_unpriced")
-            run["notes"].append("collection_only_no_paid_calls")
-        except Exception as _e:  # noqa: BLE001
-            run["notes"].append("ai_ledger_summary_failed:%s" % str(_e)[:120])
+        # R1D-HOTFIX / P0-2A：账本收尾必须留痕且可核对。
+        # finalize_run_ledger 从该 Run ID 的**真实账本**派生（有调用就如实反映，
+        # 绝不强制写 0 掩盖），写入后读回校验；账本不可写则 ok=False（不报告 PASS）。
+        from scripts.ops import ai_ledger as _al
+        _sum = _al.finalize_run_ledger(run_id=run.get("run_id"))
+        run["ai_usage"] = _sum
+        run["ai_calls_total"] = _sum.get("totals", {}).get("calls", 0)
+        run["ai_tokens_input"] = _sum.get("totals", {}).get("input_tokens", 0)
+        run["ai_tokens_output"] = _sum.get("totals", {}).get("output_tokens", 0)
+        run["ai_estimated_cost"] = _sum.get("totals", {}).get("estimated_cost", 0)
+        run["ai_cost_basis"] = ("estimated" if _sum.get("totals", {}).get("estimated_cost_available")
+                                else "zero_calls_unpriced")
+        run["ai_ledger_verified"] = bool(_sum.get("verified"))
+        if not _sum.get("verified"):
+            run["notes"].append("ai_ledger_verify_failed:%s" % str(_sum.get("error"))[:80])
         ops.finish_run(run, status="completed")
         run["deploy_requested"] = False
         run["deploy_provenance"] = None
@@ -829,8 +838,9 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
     # asip5 P0-R1：统一 AI 账本汇总（覆盖全部付费路径）+ 阈值告警
     try:
         from scripts.ops import ai_ledger as _al, paid_gate as _pg3
-        _sum = _al.write_summary(run_id=run.get("run_id"))
+        _sum = _al.finalize_run_ledger(run_id=run.get("run_id"))
         run["ai_usage"] = _sum
+        run["ai_ledger_verified"] = bool(_sum.get("verified"))
         run["ai_calls_total"] = _sum["totals"]["calls"]
         run["ai_tokens_input"] = _sum["totals"]["input_tokens"]
         run["ai_tokens_output"] = _sum["totals"]["output_tokens"]
@@ -859,7 +869,7 @@ def execute(plan, state, data_root=None, emit=lambda s: print(s), canary=False,
     emit("DEPLOY_REQUIRED = %s" % str(deploy_required).lower())
     emit("DEPLOY_PROVENANCE = %s" % json.dumps(deploy_ctx, ensure_ascii=False))
     return {"deploy_required": deploy_required, "deploy_request": deploy_ctx,
-            "executed": [k for k in results], "results": results}
+            "executed": [k for k in results], "results": results, "mode": _mode}
 
 
 def _export_views(emit):
@@ -966,7 +976,8 @@ def main(argv=None):
               % _event_name())
         return 0
     # 人工 production 轮必须有显式授权（collection_only/shadow 不需要）
-    if _m == "production" and _event_name() == "workflow_dispatch" and not manual_production_authorized():
+    if _m in ("production", "post_collection") and _event_name() == "workflow_dispatch" \
+            and not manual_production_authorized():
         _emit("MANUAL_PRODUCTION_NOT_AUTHORIZED = true（需 ASIP_ALLOW_MANUAL_PRODUCTION=1，"
               "或改用 run_mode=collection_only）")
         return 3

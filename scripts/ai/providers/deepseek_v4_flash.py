@@ -187,6 +187,10 @@ class DeepSeekV4FlashProvider(BaseAIProvider):
         while attempt < self.max_retries:
             attempt += 1
             try:
+                # asip5：每次真实 HTTP 尝试（含内部重试）都计入运行预算；
+                # 超限 → BudgetExceeded 直接终止（fail-closed，不再发请求）。
+                from scripts.ops import ai_ledger as _ai_budget
+                _ai_budget.charge_attempt(component=str(task.get("task_type") or ""))
                 return self._call_api(system, user, tid, attempt,
                                       task.get("max_output_tokens"),
                                       thinking, reasoning_effort)

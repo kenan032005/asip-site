@@ -231,6 +231,74 @@ def coverage(legacy_token_usage, records=None):
             "coverage_pct": round(100.0 * len(recs) / legacy_calls, 1) if legacy_calls else None}
 
 
+# ── 运行级预算（AI 调用上限；HTTP 重试也计入）────────────────────────
+class BudgetExceeded(RuntimeError):
+    pass
+
+
+_BUDGET = {"cap": int(os.environ.get("ASIP_AI_RUN_MAX_CALLS", "80")), "used": 0}
+
+
+def budget_state():
+    return dict(_BUDGET)
+
+
+def budget_remaining():
+    return max(0, _BUDGET["cap"] - _BUDGET["used"])
+
+
+def charge_attempt(component=""):
+    """每次**真实 HTTP 尝试**（含内部重试）调用；超出上限即抛错（fail-closed）。
+
+    上限由 ASIP_AI_RUN_MAX_CALLS 控制（默认 80，参考历史 ≈65 次/日）。
+    进程级计数 = 单次运行的上限，重启归零。
+    """
+    _BUDGET["used"] += 1
+    if _BUDGET["used"] > _BUDGET["cap"]:
+        raise BudgetExceeded("ai run cap exceeded: %d/%d (component=%s)"
+                             % (_BUDGET["used"], _BUDGET["cap"], component))
+    return _BUDGET["used"]
+
+
+# ── 账本收尾（可复用；真实账本派生，绝不强制写 0）──────────────────────
+def finalize_run_ledger(run_id=None, path=None, summary_path=None):
+    """收尾账本并**读回校验**。
+
+    - 数据源是该 run_id 的**真实调用记录**（若实际发生过 AI 调用，汇总如实反映，
+      绝不强制写 0 掩盖事实）；
+    - 汇总写入后读回比对（run_id / calls / input / output），任一不符即 ok=False；
+    - 账本不可写 → ok=False（不得报告 PASS）。
+    """
+    rid = run_id or os.environ.get("ASIP_RUN_ID") or ""
+    try:
+        records = read_ledger(path=path, run_id=rid) if rid else read_ledger(path=path)
+        s = summarize(records)
+        s["run_id"] = rid
+        s["generated_at"] = _now_iso()
+        s["records_for_run"] = len(records)
+        s["zero_calls_confirmed"] = (s["totals"]["calls"] == 0)
+        # 写入
+        p_ = Path(summary_path) if summary_path else SUMMARY_PATH
+        ensure_writable(p_)
+        tmp = p_.with_suffix(".json.tmp")
+        tmp.write_text(json.dumps(s, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+        os.replace(tmp, p_)
+        # 读回校验
+        back = json.loads(p_.read_text(encoding="utf-8"))
+        ok = (back.get("run_id") == rid
+              and back.get("totals", {}).get("calls") == s["totals"]["calls"]
+              and back.get("totals", {}).get("input_tokens") == s["totals"]["input_tokens"]
+              and back.get("totals", {}).get("output_tokens") == s["totals"]["output_tokens"])
+        s["verified"] = bool(ok)
+        s["ok"] = bool(ok)
+        return s
+    except LedgerUnavailable as e:
+        return {"ok": False, "verified": False, "run_id": rid,
+                "error": "ledger_unwritable:%s" % e}
+    except Exception as e:  # noqa: BLE001
+        return {"ok": False, "verified": False, "run_id": rid, "error": str(e)[:200]}
+
+
 # ── provider 包装：门禁 + 记账（唯一出口）─────────────────────────────
 class MeteredProvider:
     """对任意 provider 的透明包装：调用前门禁、调用后记账，其余属性透传。"""
@@ -251,6 +319,8 @@ class MeteredProvider:
         if self._gate:
             paid_gate.assert_paid_allowed(comp)     # 暂停时直接抛，不产生任何网络请求
             ensure_writable(self._ledger_path)      # 账本不可写 → 拒绝发起（fail-closed）
+            if budget_remaining() <= 0:             # 预算耗尽 → 拒绝发起（重试也在 provider 内计数）
+                raise BudgetExceeded("ai run budget exhausted before submit (%s)" % comp)
         t0 = time.time()
         try:
             res = self._inner.submit_task(task)
