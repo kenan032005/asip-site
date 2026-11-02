@@ -903,13 +903,24 @@ def run_country_pipeline(country_cn, registry, discoverer, dry=False, fresh=Fals
             pub_doc["updated_at"] = bj_iso()
             save_json(PUBLISHED_PATH, pub_doc)
         if quarantined:
-            q_doc = load_json(QUARANTINE_PATH, {"items": []})
-            # 按 original_id(URL) 去重：已隔离过的 URL 不再重复追加
-            seen_q = {q.get("original_id") for q in q_doc.get("items", []) if q.get("original_id")}
-            fresh_q = [qr for qr in quarantined if qr.get("original_id") not in seen_q]
-            q_doc["items"] = q_doc.get("items", []) + fresh_q
-            save_json(QUARANTINE_PATH, q_doc)
-            stat["quarantined"] = len(fresh_q)
+            # asip5：隔离写入统一走 QuarantineStore（分片）。单体在迁移后是"墓碑"，
+            # 直写会绕过分片并把已退役文件重新撑大（P0-R1D 实测：683 条进了墓碑）。
+            # 去重语义保持不变：按 original_id(URL) 规范化后与既有隔离集合比对。
+            try:
+                from registry import norm_url as _norm_url
+            except Exception:  # 独立运行时的退化实现
+                def _norm_url(u):
+                    return (str(u or "").strip().split("#")[0].rstrip("/"))
+            from scripts.data.quarantine_store import QuarantineStore
+            _qstore = QuarantineStore()
+            _existing_urls = set(_qstore.url_map())
+            fresh_q = [qr for qr in quarantined
+                       if _norm_url(qr.get("original_id") or "") not in _existing_urls]
+            if fresh_q:
+                _res = _qstore.upsert(fresh_q, run_id=run_id)
+                stat["quarantined"] = _res.get("added", 0)
+            else:
+                stat["quarantined"] = 0
 
         # 数据持久化后保存集中式状态（终态已标记）
         save_processing_state(state_doc)
