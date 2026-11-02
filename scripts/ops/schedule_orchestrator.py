@@ -962,12 +962,15 @@ def main(argv=None):
     except CheckpointFailed as _e:
         # 只有"状态/checkpoint 类"失败才写标记：workflow 据此熔断；
         # 未授权 production / 非法 run_mode 等拒绝路径不得造成误 strike。
+        # 标记路径可由 workflow 指定（必须在 $GITHUB_WORKSPACE 内，hashFiles 才看得见）
+        _marker = os.environ.get("ASIP_STATE_FAILURE_MARKER") or "/tmp/orch_state_failure"
         try:
-            with open("/tmp/orch_state_failure", "w", encoding="utf-8") as _f:
-                _f.write(str(_e)[:300])
+            _mp = Path(_marker)
+            _mp.parent.mkdir(parents=True, exist_ok=True)
+            _mp.write_text(str(_e)[:300], encoding="utf-8")
         except OSError:
             pass
-        emit("RUN_ABORTED = %s" % _e)
+        _emit("RUN_ABORTED = %s" % _e)
         return 2
     if args.json:
         print(json.dumps({"deploy_required": res["deploy_required"],

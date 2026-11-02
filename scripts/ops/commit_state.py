@@ -279,6 +279,14 @@ def commit_now(message, after="state", expect=None, push=True, branch="productio
             raise CheckpointError("expect_required",
                                   "commit_now(require_expect=True) 必须显式传 expect")
         info["stages"]["guard"] = assert_state_worktree(**(guard_extra or {}))
+
+        # 运行器（GitHub Actions ubuntu）默认没有 git 身份 → commit 会 rc=128。
+        # 只在缺失时设置本地身份，不覆盖既有配置。
+        for _k, _v in (("user.name", "asip-automation"),
+                       ("user.email", "asip-automation@users.noreply.github.com")):
+            _cur = _git(["config", "--get", _k], timeout=30)
+            if _cur.returncode != 0 or not (_cur.stdout or "").strip():
+                _git_ok(["config", _k, _v], "git_identity")
         if state_only:
             # 迁移/墓碑等 state_src 内已生成的产物：**绝不**用代码树覆盖
             info["stages"]["sync"] = {"skipped": "state_only"}
