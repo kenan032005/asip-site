@@ -249,5 +249,30 @@ class FreshnessTest(unittest.TestCase):
             _cleanup(d)
 
 
+    def test_K_rebuilt_view_preferred_over_stale_seed(self):
+        """部署时提交态 views/ 种子可能陈旧(Sep21)，但 build_frontend_views 已把
+        新鲜视图写入 runtime/frontend_preview_public/；get_build_meta 必须读取重建后的
+        新鲜视图，而非陈旧种子（这是本次生产误报的根因修复）。"""
+        d = tempfile.mkdtemp(prefix="asip_fresh_k_")
+        try:
+            # 提交态种子：陈旧 Sep-21（模拟当前仓库 data/views/site_overview.json）
+            _write(os.path.join(d, "views", "site_overview.json"),
+                   {"data_as_of": "2026-09-21T12:17:16+00:00",
+                    "data_as_of_status": "EXPLICIT"})
+            # 本次构建重建后的新鲜视图（模拟 build_frontend_views 输出）
+            _write(os.path.join(d, "runtime", "frontend_preview_public", "site_overview.json"),
+                   {"data_as_of": "2026-11-03T18:32:02+00:00",
+                    "data_as_of_status": "EXPLICIT",
+                    "data_as_of_source": "production_state.last_successful_ai"})
+            meta = bs.get_build_meta(data_dir=d, now=FIXED_NOW)
+            self.assertEqual(meta["data_as_of"], "2026-11-03T18:32:02+00:00",
+                             "必须读取重建后的新鲜视图，而非陈旧提交态种子")
+            self.assertEqual(meta["data_as_of_source"], "site_overview.data_as_of")
+            banner = bs._staleness_banner(meta)
+            self.assertFalse(banner, "新鲜重建视图 -> 不应出现过期横幅")
+        finally:
+            _cleanup(d)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

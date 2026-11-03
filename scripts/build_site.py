@@ -505,19 +505,27 @@ def get_build_meta(run_id=None, data_dir=None, now=None):
 
     # ── 经当前生产视图验证的截止时间候选（最新优先）──
     # 仅读取「当前公开视图」；绝不读取 legacy ai_intelligence.json（避免旧 AI 冒充最新）。
-    so, hi, cm = {}, {}, {}
-    try:
-        so = load_json(os.path.join(base, "views", "site_overview.json"), {}) or {}
-    except Exception:
-        so = {}
-    try:
-        hi = load_json(os.path.join(base, "views", "homepage_intelligence.json"), {}) or {}
-    except Exception:
-        hi = {}
-    try:
-        cm = load_json(os.path.join(base, "public", "current_metrics.json"), {}) or {}
-    except Exception:
-        cm = {}
+    # ── 视图读取：优先采用「本次构建已重建」的前端公开视图
+    #    （data/runtime/frontend_preview_public），其 data_as_of 由 build_frontend_views
+    #    从 production-state canonical 解析，是本次生产数据的真实截止时间；
+    #    仅当重建产物缺失时才回退到提交态种子 views/（及 public/）。
+    #    这是 P0-FRESHNESS 修复的核心：get_build_meta 必须在视图重建之后读取，
+    #    否则会读到提交态陈旧种子（data_as_of=2026-09-21），导致误报。 ──
+    def _load_view(name, sub="views"):
+        fpv = os.path.join(base, "runtime", "frontend_preview_public", name + ".json")
+        if os.path.exists(fpv):
+            try:
+                return load_json(fpv, {}) or {}
+            except Exception:
+                pass
+        p = os.path.join(base, sub, name + ".json")
+        try:
+            return load_json(p, {}) or {}
+        except Exception:
+            return {}
+    so = _load_view("site_overview")
+    hi = _load_view("homepage_intelligence")
+    cm = _load_view("current_metrics", sub="public")
 
     candidates = []  # (utc_dt, source_label, status_flag, original_str)
     if so.get("data_as_of"):
@@ -677,10 +685,18 @@ def _reconcile_status_counts(dist_status, cm=None, so=None):
         except Exception:
             cm = {}
     if so is None:
+        # 优先采用本次重建的前端视图（frontend_preview_public），与 get_build_meta 一致；
+        # 仅当重建产物缺失时回退提交态种子 views/site_overview.json。
+        _fpv = os.path.join(DATA_DIR, "runtime", "frontend_preview_public", "site_overview.json")
         try:
-            so = load_json(os.path.join(DATA_DIR, "views", "site_overview.json"), {}) or {}
+            so = load_json(_fpv, {}) or {}
         except Exception:
             so = {}
+        if not so:
+            try:
+                so = load_json(os.path.join(DATA_DIR, "views", "site_overview.json"), {}) or {}
+            except Exception:
+                so = {}
     # 直接等价于 current_metrics 的对外计数
     mapping = [
         ("published_event_count", cm.get("published_events")),
@@ -700,6 +716,18 @@ def _reconcile_status_counts(dist_status, cm=None, so=None):
 
 
 def main(run_id=None, no_embed=False):
+    # P0-FRESHNESS：在派生时效性元数据之前，先重建前端公开视图
+    # （build_frontend_views 将 site_overview.data_as_of 从 production-state
+    #  canonical 解析后写入 data/runtime/frontend_preview_public/）。
+    # 这样 get_build_meta 读取的是「本次重建后的真实生产截止时间」，
+    # 而非提交态陈旧种子（data_as_of=2026-09-21），从根本上消除误报。
+    try:
+        sys.path.insert(0, os.path.join(HERE, "frontend"))
+        import build_frontend_views as _bfv_pre
+        _bfv_pre.main()
+        print("  [freshness] 前端视图已预重建（供时效性元数据派生）")
+    except Exception as _e:
+        print(f"  [freshness] 前端视图预重建跳过（回退提交态种子）: {_e}")
     meta = get_build_meta(run_id)
     print(f"[build_site] run_id={meta['run_id']} pipeline_version={meta['pipeline_version']}")
     print(f"[build_site] build_time={meta['build_time_bj']}")
