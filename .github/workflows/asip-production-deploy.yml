@@ -68,12 +68,13 @@ jobs:
           cp -rf state_src/data/disease/. data/disease/ 2>/dev/null || true
           cp -rf state_src/data/runtime/timeline/. data/runtime/timeline/ 2>/dev/null || true
           cp -rf state_src/data/runtime/ops/reports/. data/runtime/ops/reports/ 2>/dev/null || true
-          # P0-FRESHNESS 回归修复：公开前端视图契约 data/views/ 必须从 production-state
-          # 加载（orchestrator 持续写入此处）。旧流程只加载 runtime/ops/canonical/disease/
-          # timeline，漏掉 data/views/，导致 homepage_intelligence.json 等未被纳入 dist → 404。
-          # 注意：frontend_preview_public 重建的 8 个视图优先级高于 data/views/，此处仅作为
-          # 其余公开视图（homepage_intelligence / ai_intelligence / executive_summary）的权威来源。
-          cp -rf state_src/data/views/. data/views/ 2>/dev/null || true
+          # P0-FRESHNESS 回归修复：homepage_intelligence.json 由 orchestrator 写入
+          # production-state/data/views/，但从未提交进 release code，且不在
+          # build_frontend_views 的生成清单内 → 重建后从 dist 消失（线上 404）。
+          # 仅补回该单一文件（旧线上正是「homepage_intelligence(新) + report_index(22 条)」组合）；
+          # 不整体覆盖 data/views/，以免 production-state 的 report_index（79 条）与本次构建
+          # 实际可用的 22 份报告产物不一致，触发 verify_report_publication 失败。
+          cp -f state_src/data/views/homepage_intelligence.json data/views/homepage_intelligence.json 2>/dev/null || true
 
       - name: Build site（§十九）
         run: python scripts/build_site.py
