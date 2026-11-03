@@ -1,0 +1,125 @@
+{
+ "label": "Sf9807df7",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f76ac06df1ff77d30093e9f7209823bdeee0ef38e60be6dd47f5bbf54ca7d06f",
+ "tokens": {
+  "input_tokens": 2206,
+  "output_tokens": 570,
+  "total_tokens": 2776
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "阿布贾联邦高等法院定于2027年1月27日就Tukur Mamu涉嫌恐怖融资案宣判",
+   "summary_zh": "尼日利亚阿布贾联邦高等法院法官Mohammed Umar于周一将针对Tukur Mamu的恐怖融资指控案判决日期定在2027年1月27日。Mamu被指为2022年阿布贾-卡杜纳列车袭击人质事件中的恐怖分子谈判人，2022年9月7日在开罗国际机场被埃及安全部门逮捕，此前已被以10项恐怖融资罪名起诉，检方后又追加非法持有枪支和洗钱等指控。控辩双方已提交并采纳最终书面陈述。该报道为单一来源。",
+   "event_type": "terrorism",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": "联邦高等法院",
+    "raw_text": "Federal High Court in Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "阿布贾联邦高等法院将Tukur Mamu涉嫌恐怖融资案的判决日期定为2027年1月27日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "THE Federal High Court in Abuja on Monday fixed January 27, 2027, for judgment in a charge filed by the Federal Government against Tukur Mamu"
+    },
+    {
+     "fact": "Mamu被指为2022年阿布贾-卡杜纳列车袭击人质事件中的恐怖分子谈判人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "alleged terrorists’ negotiator during the Abuja-Kaduna train attack hostages in 2022"
+    },
+    {
+     "fact": "Mamu于2022年9月7日在开罗国际机场被埃及安全官员逮捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "who was arrested on September 7, 2022 by the Egyptian security officials at the Cairo International Airport"
+    },
+    {
+     "fact": "Mamu此前被以10项恐怖融资罪名起诉，检方后追加非法持有枪支和洗钱指控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "was earlier arraigned on a 10-count charge bordering on terrorism financing. However, the prosecution amended the counts by bringing in more offences, including unlawful possession of firearms without valid licence and money laundering charges"
+    },
+    {
+     "fact": "控辩双方已采纳最终书面陈述",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "adopted their final written addresses and presented their arguments for and against the case"
+    }
+   ],
+   "uncertainties": [
+    "相关指控为涉嫌性质，尚未经法院判决确认",
+    "目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "阿布贾联邦高等法院定于2027年1月27日就Tukur Mamu涉嫌恐怖融资案宣判",
+   "summary_zh": "尼日利亚阿布贾联邦高等法院法官Mohammed Umar于周一将针对Tukur Mamu的恐怖融资指控案判决日期定在2027年1月27日。Mamu被指为2022年阿布贾-卡杜纳列车袭击人质事件中的恐怖分子谈判人，2022年9月7日在开罗国际机场被埃及安全部门逮捕，此前已被以10项恐怖融资罪名起诉，检方后又追加非法持有枪支和洗钱等指控。控辩双方已提交并采纳最终书面陈述。该报道为单一来源。",
+   "event_type": "terrorism",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": "联邦高等法院",
+    "raw_text": "Federal High Court in Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "阿布贾联邦高等法院将Tukur Mamu涉嫌恐怖融资案的判决日期定为2027年1月27日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "THE Federal High Court in Abuja on Monday fixed January 27, 2027, for judgment in a charge filed by the Federal Government against Tukur Mamu"
+    },
+    {
+     "fact": "Mamu被指为2022年阿布贾-卡杜纳列车袭击人质事件中的恐怖分子谈判人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "alleged terrorists’ negotiator during the Abuja-Kaduna train attack hostages in 2022"
+    },
+    {
+     "fact": "Mamu于2022年9月7日在开罗国际机场被埃及安全官员逮捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "who was arrested on September 7, 2022 by the Egyptian security officials at the Cairo International Airport"
+    },
+    {
+     "fact": "Mamu此前被以10项恐怖融资罪名起诉，检方后追加非法持有枪支和洗钱指控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "was earlier arraigned on a 10-count charge bordering on terrorism financing. However, the prosecution amended the counts by bringing in more offences, including unlawful possession of firearms without valid licence and money laundering charges"
+    },
+    {
+     "fact": "控辩双方已采纳最终书面陈述",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "adopted their final written addresses and presented their arguments for and against the case"
+    }
+   ],
+   "uncertainties": [
+    "相关指控为涉嫌性质，尚未经法院判决确认",
+    "目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_ab67446af9807df7",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

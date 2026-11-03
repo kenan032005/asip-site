@@ -1,0 +1,125 @@
+{
+ "label": "Sa7be51db",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e0d2ec79b39e4210bca40631e567be06b13175d976bf2d2ce160eebeeb3b1609",
+ "tokens": {
+  "input_tokens": 2578,
+  "output_tokens": 544,
+  "total_tokens": 3122
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "联邦首都区流离失所妇女呼吁改善医疗、教育与赋权",
+   "summary_zh": "尼日利亚阿布贾Wassa流离失所者营地的妇女在Civitas Auxilium Foundation成立五周年暨Project RISE启动仪式上，呼吁改善医疗、经济赋权和教育。她们表示高昂的医疗费用导致可预防的并发症和死亡，近期有三名妇女死于分娩并发症，营地还出现儿童因水源性疾病死亡的情况。她们还呼吁政府建立身份识别卡制度，以便流离失所者低价或免费在公立医院就医，并希望开设中学以减少儿童辍学。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "联邦首都区",
+    "city": "阿布贾",
+    "site": "Wassa流离失所者营地",
+    "raw_text": "Wassa Internally Displaced Persons (IDP) camp, Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "Wassa流离失所者营地的妇女呼吁改善医疗、经济赋权和教育",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Women at the Wassa Internally Displaced Persons (IDP) camp have appealed for improved healthcare, economic empowerment and education"
+    },
+    {
+     "fact": "营地代表称近期有三名妇女死于分娩并发症，其中一人与双胞胎婴儿一同死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Recently, we lost three women from complications during childbirth, and one of them died alongside her twin babies."
+    },
+    {
+     "fact": "营地近期还出现儿童因水源性疾病死亡的情况",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "She added that the camp had also recently recorded the deaths of children from waterborne diseases."
+    },
+    {
+     "fact": "妇女呼吁政府建立身份识别卡制度，使流离失所者能低价或免费在公立医院就医",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "She urged the government and partners to introduce an identification card system to enable IDPs to access treatment at public hospitals at little or no cost."
+    },
+    {
+     "fact": "Project RISE计划在贝努埃州和联邦首都区为至少100名妇女提供职业培训",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "We aim to build practical skills of at least 100 women in catering, baking, bag making and other vocational trades"
+    }
+   ],
+   "uncertainties": [
+    "死亡人数与原因系营地妇女单方面陈述，尚未获得独立核实",
+    "事件为单一来源报道（尼日利亚通讯社）"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "联邦首都区流离失所妇女呼吁改善医疗、教育与赋权",
+   "summary_zh": "尼日利亚阿布贾Wassa流离失所者营地的妇女在Civitas Auxilium Foundation成立五周年暨Project RISE启动仪式上，呼吁改善医疗、经济赋权和教育。她们表示高昂的医疗费用导致可预防的并发症和死亡，近期有三名妇女死于分娩并发症，营地还出现儿童因水源性疾病死亡的情况。她们还呼吁政府建立身份识别卡制度，以便流离失所者低价或免费在公立医院就医，并希望开设中学以减少儿童辍学。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "联邦首都区",
+    "city": "阿布贾",
+    "site": "Wassa流离失所者营地",
+    "raw_text": "Wassa Internally Displaced Persons (IDP) camp, Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "Wassa流离失所者营地的妇女呼吁改善医疗、经济赋权和教育",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Women at the Wassa Internally Displaced Persons (IDP) camp have appealed for improved healthcare, economic empowerment and education"
+    },
+    {
+     "fact": "营地代表称近期有三名妇女死于分娩并发症，其中一人与双胞胎婴儿一同死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Recently, we lost three women from complications during childbirth, and one of them died alongside her twin babies."
+    },
+    {
+     "fact": "营地近期还出现儿童因水源性疾病死亡的情况",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "She added that the camp had also recently recorded the deaths of children from waterborne diseases."
+    },
+    {
+     "fact": "妇女呼吁政府建立身份识别卡制度，使流离失所者能低价或免费在公立医院就医",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "She urged the government and partners to introduce an identification card system to enable IDPs to access treatment at public hospitals at little or no cost."
+    },
+    {
+     "fact": "Project RISE计划在贝努埃州和联邦首都区为至少100名妇女提供职业培训",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "We aim to build practical skills of at least 100 women in catering, baking, bag making and other vocational trades"
+    }
+   ],
+   "uncertainties": [
+    "死亡人数与原因系营地妇女单方面陈述，尚未获得独立核实",
+    "事件为单一来源报道（尼日利亚通讯社）"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_d42a8edba7be51db",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

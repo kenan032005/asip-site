@@ -2,58 +2,6 @@
  "schema": "stage8c-package3-v1",
  "runs": [
   {
-   "run_id": "40447811847",
-   "workflow": "asip-production-orchestrator",
-   "started_at": "2026-10-27T04:11:30Z",
-   "completed_at": "2026-10-27T05:03:12Z",
-   "status": "completed",
-   "sources_attempted": 891,
-   "sources_succeeded": 187,
-   "sources_failed": 626,
-   "candidates_new": 10,
-   "ai_attempted": 9,
-   "ai_succeeded": 0,
-   "ai_failed": 0,
-   "ai_held": 0,
-   "safety_checked": 9,
-   "safety_corrected": 0,
-   "safety_held": 0,
-   "reports_full": 0,
-   "reports_fallback": 0,
-   "reports_low_data": 0,
-   "reports_hold": 0,
-   "build_status": "not_executed",
-   "deploy_status": "not_executed",
-   "token_usage": {
-    "social_enrichment": {
-     "calls": 9,
-     "input_tokens": 21883,
-     "output_tokens": 4178,
-     "total_tokens": 26061
-    }
-   },
-   "notes": [
-    "trigger=external_scheduler",
-    "trigger_type=automation",
-    "automation=true",
-    "human=false"
-   ],
-   "deploy_requested": true,
-   "deploy_provenance": {
-    "trigger_type": "automation",
-    "trigger_source": "external_scheduler",
-    "automation": true,
-    "human": false,
-    "mode": "production",
-    "root_orchestrator_run_id": "40447811847",
-    "report_date": null,
-    "report_classification": null,
-    "deploy_requested_at": "2026-10-27T05:03:12Z",
-    "reason": "ai_publication_changed",
-    "publication_localized_events": 1655
-   }
-  },
-  {
    "run_id": "40453342419",
    "workflow": "asip-production-orchestrator",
    "started_at": "2026-10-27T05:11:07Z",
@@ -1840,6 +1788,158 @@
     "deploy_requested_at": "2026-11-03T17:29:24Z",
     "reason": "ai_publication_changed",
     "publication_localized_events": 1681
+   }
+  },
+  {
+   "run_id": "41690441953",
+   "workflow": "asip-production-orchestrator",
+   "started_at": "2026-11-03T18:20:23Z",
+   "completed_at": "2026-11-03T18:33:27Z",
+   "status": "completed",
+   "sources_attempted": 0,
+   "sources_succeeded": 0,
+   "sources_failed": 0,
+   "candidates_new": 0,
+   "ai_attempted": 4,
+   "ai_succeeded": 0,
+   "ai_failed": 0,
+   "ai_held": 0,
+   "safety_checked": 4,
+   "safety_corrected": 0,
+   "safety_held": 0,
+   "reports_full": 0,
+   "reports_fallback": 0,
+   "reports_low_data": 0,
+   "reports_hold": 0,
+   "build_status": "not_executed",
+   "deploy_status": "not_executed",
+   "token_usage": {
+    "social_enrichment": {
+     "calls": 4,
+     "input_tokens": 9316,
+     "output_tokens": 1986,
+     "total_tokens": 11302
+    }
+   },
+   "notes": [
+    "trigger=external_scheduler",
+    "trigger_type=automation",
+    "automation=true",
+    "human=false",
+    "post_collection_queued_ai:social_ai",
+    "mode=post_collection",
+    "alert:deploy_stall"
+   ],
+   "ai_usage": {
+    "by_component": {
+     "social_ai": {
+      "calls": 4,
+      "succeeded": 4,
+      "failed": 0,
+      "retries": 0,
+      "input_tokens": 9316,
+      "output_tokens": 1986,
+      "total_tokens": 11302,
+      "cache_hit_tokens": 4736,
+      "cache_tokens_available_calls": 4,
+      "estimated_cost": 0.0,
+      "models": {
+       "deepseek-flash": 4
+      }
+     },
+     "news_localization": {
+      "calls": 5,
+      "succeeded": 5,
+      "failed": 0,
+      "retries": 0,
+      "input_tokens": 6021,
+      "output_tokens": 3393,
+      "total_tokens": 9414,
+      "cache_hit_tokens": 0,
+      "cache_tokens_available_calls": 5,
+      "estimated_cost": 0.0,
+      "models": {
+       "deepseek-flash": 5
+      }
+     },
+     "daily_assessment": {
+      "calls": 1,
+      "succeeded": 1,
+      "failed": 0,
+      "retries": 0,
+      "input_tokens": 10263,
+      "output_tokens": 661,
+      "total_tokens": 10924,
+      "cache_hit_tokens": 128,
+      "cache_tokens_available_calls": 1,
+      "estimated_cost": 0.0,
+      "models": {
+       "deepseek-flash": 1
+      }
+     },
+     "homepage_brief": {
+      "calls": 1,
+      "succeeded": 1,
+      "failed": 0,
+      "retries": 0,
+      "input_tokens": 7331,
+      "output_tokens": 4247,
+      "total_tokens": 11578,
+      "cache_hit_tokens": 256,
+      "cache_tokens_available_calls": 1,
+      "estimated_cost": 0.0,
+      "models": {
+       "deepseek-flash": 1
+      }
+     }
+    },
+    "totals": {
+     "calls": 11,
+     "succeeded": 11,
+     "failed": 0,
+     "retries": 0,
+     "input_tokens": 32931,
+     "output_tokens": 10287,
+     "total_tokens": 43218,
+     "cache_hit_tokens": 5120,
+     "cache_tokens_available_calls": 11,
+     "estimated_cost": 0.0,
+     "estimated_cost_available": false,
+     "confirmed_cost": null
+    },
+    "pricing": {
+     "input_per_mtok": null,
+     "output_per_mtok": null,
+     "configured": false,
+     "currency": ""
+    },
+    "run_id": "41690441953",
+    "generated_at": "2026-11-03T18:33:27Z",
+    "records_for_run": 11,
+    "zero_calls_confirmed": false,
+    "verified": true,
+    "ok": true
+   },
+   "ai_ledger_verified": true,
+   "ai_calls_total": 11,
+   "ai_tokens_input": 32931,
+   "ai_tokens_output": 10287,
+   "ai_cache_hit_tokens": 5120,
+   "ai_estimated_cost": 0.0,
+   "ai_cost_basis": "unpriced",
+   "deploy_requested": true,
+   "deploy_provenance": {
+    "trigger_type": "automation",
+    "trigger_source": "external_scheduler",
+    "automation": true,
+    "human": false,
+    "mode": "production",
+    "root_orchestrator_run_id": "41690441953",
+    "report_date": null,
+    "report_classification": null,
+    "deploy_requested_at": "2026-11-03T18:33:27Z",
+    "reason": "ai_publication_changed",
+    "publication_localized_events": 1685
    }
   }
  ]
