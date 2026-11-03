@@ -1,0 +1,142 @@
+{
+ "label": "S5e2f5052",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6a705e0330fb48be139ffdadb0d955cf48497ec1f14a89914c9072a756040064",
+ "tokens": {
+  "input_tokens": 2910,
+  "output_tokens": 612,
+  "total_tokens": 3522
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"对乍得和法国的指控为尼日尔官方指控，尚未获独立核实\", \"无人机型号、发射地点、法国支持的性质、伤者人数及遇难者身份均未公布\", \"尼方所称技术证据尚未公开\", \"乍得与法国尚未回应，暂无交叉验证\", \"事发地区人烟稀少，目击者有限，各方说法依赖对现场的接触\"]",
+    "after": "[\"对乍得和法国的指控为尼日尔官方指控，尚未获独立核实\", \"无人机型号、发射地点、法国支持的性质、伤者人数及遇难者身份均未公布\", \"尼方所称技术证据尚未公开\", \"乍得与法国尚未回应，暂无交叉验证\", \"事发地区人烟稀少，目击者有限，各方说法依赖对现场的接触\", \"据Niger Infos报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "阿加德兹附近遭无人机袭击：尼日尔指称侵略并诉诸联合国与非洲联盟",
+   "summary_zh": "10月24日凌晨1时左右，尼日尔阿加德兹地区Emi Lulu一带遭无人机袭击，造成两名平民死亡、多人受伤、车辆受损。尼日尔政府称此次袭击来自乍得境内并获法国支持，已召见乍得大使、诉诸联合国安理会和非洲联盟，要求独立国际调查。乍得与法国截至目前未作回应，尼方所称技术证据尚未公开，相关指控仍属官方指控，尚未获独立核实。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "阿加德兹地区",
+    "city": null,
+    "site": "Emi Lulu",
+    "raw_text": "la zone d'Emi Lulu, dans la région d'Agadez"
+   },
+   "key_facts": [
+    {
+     "fact": "10月24日凌晨1时左右，无人机袭击阿加德兹地区Emi Lulu，造成两名平民死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le 24 octobre, vers 1 heure du matin, une frappe de drone a tué deux civils dans la région d'Agadez."
+    },
+    {
+     "fact": "尼日尔政府称袭击来自乍得领土并获法国支持，指其为侵略",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement nigérien dénonce une agression venue du Tchad avec l'appui de la France"
+    },
+    {
+     "fact": "尼日尔召见乍得大使，并诉诸联合国安理会和非洲联盟和平与安全理事会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "convoquer l'ambassadeur du Tchad pour une protestation solennelle, saisir le Conseil de sécurité des Nations unies et le Conseil de paix et de sécurité de l'Union africaine"
+    },
+    {
+     "fact": "尼日尔要求开展独立国际调查，并称将提供技术证据",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "demander une enquête internationale indépendante"
+    },
+    {
+     "fact": "截至10月27日，乍得与法国均未作公开回应",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au 27 octobre, nous n'avons trouvé aucune réaction publique de N'Djamena ni de Paris"
+    }
+   ],
+   "uncertainties": [
+    "对乍得和法国的指控为尼日尔官方指控，尚未获独立核实",
+    "无人机型号、发射地点、法国支持的性质、伤者人数及遇难者身份均未公布",
+    "尼方所称技术证据尚未公开",
+    "乍得与法国尚未回应，暂无交叉验证",
+    "事发地区人烟稀少，目击者有限，各方说法依赖对现场的接触"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "阿加德兹附近遭无人机袭击：尼日尔指称侵略并诉诸联合国与非洲联盟",
+   "summary_zh": "10月24日凌晨1时左右，尼日尔阿加德兹地区Emi Lulu一带遭无人机袭击，造成两名平民死亡、多人受伤、车辆受损。尼日尔政府称此次袭击来自乍得境内并获法国支持，已召见乍得大使、诉诸联合国安理会和非洲联盟，要求独立国际调查。乍得与法国截至目前未作回应，尼方所称技术证据尚未公开，相关指控仍属官方指控，尚未获独立核实。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "阿加德兹地区",
+    "city": null,
+    "site": "Emi Lulu",
+    "raw_text": "la zone d'Emi Lulu, dans la région d'Agadez"
+   },
+   "key_facts": [
+    {
+     "fact": "10月24日凌晨1时左右，无人机袭击阿加德兹地区Emi Lulu，造成两名平民死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le 24 octobre, vers 1 heure du matin, une frappe de drone a tué deux civils dans la région d'Agadez."
+    },
+    {
+     "fact": "尼日尔政府称袭击来自乍得领土并获法国支持，指其为侵略",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement nigérien dénonce une agression venue du Tchad avec l'appui de la France"
+    },
+    {
+     "fact": "尼日尔召见乍得大使，并诉诸联合国安理会和非洲联盟和平与安全理事会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "convoquer l'ambassadeur du Tchad pour une protestation solennelle, saisir le Conseil de sécurité des Nations unies et le Conseil de paix et de sécurité de l'Union africaine"
+    },
+    {
+     "fact": "尼日尔要求开展独立国际调查，并称将提供技术证据",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "demander une enquête internationale indépendante"
+    },
+    {
+     "fact": "截至10月27日，乍得与法国均未作公开回应",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au 27 octobre, nous n'avons trouvé aucune réaction publique de N'Djamena ni de Paris"
+    }
+   ],
+   "uncertainties": [
+    "对乍得和法国的指控为尼日尔官方指控，尚未获独立核实",
+    "无人机型号、发射地点、法国支持的性质、伤者人数及遇难者身份均未公布",
+    "尼方所称技术证据尚未公开",
+    "乍得与法国尚未回应，暂无交叉验证",
+    "事发地区人烟稀少，目击者有限，各方说法依赖对现场的接触",
+    "据Niger Infos报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_f127796d5e2f5052",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

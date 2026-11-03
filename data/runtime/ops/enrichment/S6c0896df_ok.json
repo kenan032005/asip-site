@@ -1,0 +1,115 @@
+{
+ "label": "S6c0896df",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e6af01b6214c24ec8e7fa4a6024a6ea55641522ed5f91ff1011a6da954509f55",
+ "tokens": {
+  "input_tokens": 2871,
+  "output_tokens": 653,
+  "total_tokens": 3524
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼亚美道路交通安全：ANISER加强检查以打击不文明驾驶行为",
+   "summary_zh": "尼日尔道路交通安全局（ANISER）与国家警察、市政警察和国家宪兵队合作，于2026年10月29日星期四在尼亚美开展新一轮道路检查行动。行动覆盖穆罕默德六世大道、ENA环岛、Baaré、Ferraille、6è环岛和Harobanda等多个环岛和主干道，重点检查头盔佩戴、安全带使用、禁止驾车使用电话、遵守红绿灯和优先通行规则等。ANISER官员表示，尼亚美头盔佩戴情况有所改善，检查旨在宣传教育并依法处罚，而非针对特定群体。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "穆罕默德六世大道、ENA环岛、Baaré环岛、Ferraille环岛、6è环岛、Harobanda环岛等",
+    "raw_text": "Niamey, boulevard Mohamed VI, rond-point ENA, ronds-points Baaré, Ferraille, rond-point 6è et Harobanda"
+   },
+   "key_facts": [
+    {
+     "fact": "ANISER与国家警察、市政警察和国家宪兵队于2026年10月29日在尼亚美开展道路检查行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’Agence nigérienne de la sécurité routière (ANISER), en collaboration avec la Police nationale, la Police municipale et la Gendarmerie nationale, a organisé une nouvelle opération de contrôle routier, le jeudi 29 octobre 2026 à Niamey"
+    },
+    {
+     "fact": "检查覆盖穆罕默德六世大道及多个环岛和主干道",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’opération a ciblé plusieurs ronds-points et axes de la capitale, notamment le boulevard Mohamed VI, non loin du rond-point ENA, ainsi que les ronds-points Baaré, Ferraille, rond-point 6è et Harobanda"
+    },
+    {
+     "fact": "检查重点包括头盔佩戴、安全带、禁止驾车使用电话及遵守红绿灯和优先通行规则",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les contrôles portent particulièrement sur le port du casque, le port de la ceinture de sécurité, l’interdiction de l’utilisation du téléphone au volant, le respect des feux tricolores et des priorités"
+    },
+    {
+     "fact": "ANISER官员称尼亚美头盔佩戴情况有所改善",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nous observons une amélioration du port du casque à Niamey. C’est encourageant et c’est un signal positif"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Le Sahel）报道，尚缺乏交叉验证",
+    "行动具体检查结果和处罚数量未在报道中披露"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼亚美道路交通安全：ANISER加强检查以打击不文明驾驶行为",
+   "summary_zh": "尼日尔道路交通安全局（ANISER）与国家警察、市政警察和国家宪兵队合作，于2026年10月29日星期四在尼亚美开展新一轮道路检查行动。行动覆盖穆罕默德六世大道、ENA环岛、Baaré、Ferraille、6è环岛和Harobanda等多个环岛和主干道，重点检查头盔佩戴、安全带使用、禁止驾车使用电话、遵守红绿灯和优先通行规则等。ANISER官员表示，尼亚美头盔佩戴情况有所改善，检查旨在宣传教育并依法处罚，而非针对特定群体。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "穆罕默德六世大道、ENA环岛、Baaré环岛、Ferraille环岛、6è环岛、Harobanda环岛等",
+    "raw_text": "Niamey, boulevard Mohamed VI, rond-point ENA, ronds-points Baaré, Ferraille, rond-point 6è et Harobanda"
+   },
+   "key_facts": [
+    {
+     "fact": "ANISER与国家警察、市政警察和国家宪兵队于2026年10月29日在尼亚美开展道路检查行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’Agence nigérienne de la sécurité routière (ANISER), en collaboration avec la Police nationale, la Police municipale et la Gendarmerie nationale, a organisé une nouvelle opération de contrôle routier, le jeudi 29 octobre 2026 à Niamey"
+    },
+    {
+     "fact": "检查覆盖穆罕默德六世大道及多个环岛和主干道",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’opération a ciblé plusieurs ronds-points et axes de la capitale, notamment le boulevard Mohamed VI, non loin du rond-point ENA, ainsi que les ronds-points Baaré, Ferraille, rond-point 6è et Harobanda"
+    },
+    {
+     "fact": "检查重点包括头盔佩戴、安全带、禁止驾车使用电话及遵守红绿灯和优先通行规则",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les contrôles portent particulièrement sur le port du casque, le port de la ceinture de sécurité, l’interdiction de l’utilisation du téléphone au volant, le respect des feux tricolores et des priorités"
+    },
+    {
+     "fact": "ANISER官员称尼亚美头盔佩戴情况有所改善",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nous observons une amélioration du port du casque à Niamey. C’est encourageant et c’est un signal positif"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Le Sahel）报道，尚缺乏交叉验证",
+    "行动具体检查结果和处罚数量未在报道中披露"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_66e2816c6c0896df",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
