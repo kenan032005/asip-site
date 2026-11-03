@@ -1,0 +1,148 @@
+{
+ "label": "S39f9b5d4",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5172928ac91883605b242a5341ff12e129e535203e7a693e4d43b359eb371625",
+ "tokens": {
+  "input_tokens": 2572,
+  "output_tokens": 642,
+  "total_tokens": 3214
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"马查尔所提指控与检方指控均为单方说法，尚未经法庭裁决\", \"马查尔关于撤离努力及人质问题的陈述尚未获独立证实\", \"白军指挥关系及SPLA-IO领导权归属存在争议\"]",
+    "after": "[\"马查尔所提指控与检方指控均为单方说法，尚未经法庭裁决\", \"马查尔关于撤离努力及人质问题的陈述尚未获独立证实\", \"白军指挥关系及SPLA-IO领导权归属存在争议\", \"据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "马查尔否认参与马朱尔撤离失败，并为代理领导人辩护",
+   "summary_zh": "南苏丹前第一副总统里克·马查尔在庭审中否认曾下令已故少将戴维·马朱尔·达克在2025年3月纳西尔战斗中投降，称自己曾努力确保其安全撤离。他还否认指挥白军，并否认与当地青年扣押170至176名纳西尔事件幸存者作为人质。马查尔与七名共同被告面临谋杀、共谋、恐怖主义、叛国等指控，检方指控SPLA-IO部队与白军联手在纳西尔杀害257名SSPDF士兵。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "上尼罗州",
+    "city": "纳西尔",
+    "site": null,
+    "raw_text": "Nasir"
+   },
+   "key_facts": [
+    {
+     "fact": "马查尔否认曾下令马朱尔·达克在纳西尔战斗中投降",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Former First Vice President Riek Machar has denied ordering the late Maj. Gen. David Majur Dak to surrender during fighting in Nasir in March 2025"
+    },
+    {
+     "fact": "马查尔称曾努力确保马朱尔·达克安全撤离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "he had instead tried to secure the general’s safe evacuation from the area"
+    },
+    {
+     "fact": "马查尔否认指挥白军，并称代理主席雷吉娜·约瑟夫·卡巴也不指挥该武装青年组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Machar also denied commanding the White Army and said Regina Joseph Kaba... does not command the armed youth group"
+    },
+    {
+     "fact": "马查尔否认与当地青年扣押170至176名纳西尔事件幸存者作为人质",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Machar also denied allegations that he and local youths had held between 170 and 176 survivors of the Nasir incident hostage"
+    },
+    {
+     "fact": "马查尔与七名共同被告面临谋杀、共谋、恐怖主义、叛国等指控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Machar and seven co-defendants face charges including murder, conspiracy, terrorism, treason, destruction of public property and crimes against humanity"
+    },
+    {
+     "fact": "检方指控SPLA-IO部队与白军联手在纳西尔杀害257名SSPDF士兵",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Prosecutors allege that SPLA-IO forces allied with the White Army killed 257 SSPDF soldiers"
+    }
+   ],
+   "uncertainties": [
+    "马查尔所提指控与检方指控均为单方说法，尚未经法庭裁决",
+    "马查尔关于撤离努力及人质问题的陈述尚未获独立证实",
+    "白军指挥关系及SPLA-IO领导权归属存在争议"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "马查尔否认参与马朱尔撤离失败，并为代理领导人辩护",
+   "summary_zh": "南苏丹前第一副总统里克·马查尔在庭审中否认曾下令已故少将戴维·马朱尔·达克在2025年3月纳西尔战斗中投降，称自己曾努力确保其安全撤离。他还否认指挥白军，并否认与当地青年扣押170至176名纳西尔事件幸存者作为人质。马查尔与七名共同被告面临谋杀、共谋、恐怖主义、叛国等指控，检方指控SPLA-IO部队与白军联手在纳西尔杀害257名SSPDF士兵。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "上尼罗州",
+    "city": "纳西尔",
+    "site": null,
+    "raw_text": "Nasir"
+   },
+   "key_facts": [
+    {
+     "fact": "马查尔否认曾下令马朱尔·达克在纳西尔战斗中投降",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Former First Vice President Riek Machar has denied ordering the late Maj. Gen. David Majur Dak to surrender during fighting in Nasir in March 2025"
+    },
+    {
+     "fact": "马查尔称曾努力确保马朱尔·达克安全撤离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "he had instead tried to secure the general’s safe evacuation from the area"
+    },
+    {
+     "fact": "马查尔否认指挥白军，并称代理主席雷吉娜·约瑟夫·卡巴也不指挥该武装青年组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Machar also denied commanding the White Army and said Regina Joseph Kaba... does not command the armed youth group"
+    },
+    {
+     "fact": "马查尔否认与当地青年扣押170至176名纳西尔事件幸存者作为人质",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Machar also denied allegations that he and local youths had held between 170 and 176 survivors of the Nasir incident hostage"
+    },
+    {
+     "fact": "马查尔与七名共同被告面临谋杀、共谋、恐怖主义、叛国等指控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Machar and seven co-defendants face charges including murder, conspiracy, terrorism, treason, destruction of public property and crimes against humanity"
+    },
+    {
+     "fact": "检方指控SPLA-IO部队与白军联手在纳西尔杀害257名SSPDF士兵",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Prosecutors allege that SPLA-IO forces allied with the White Army killed 257 SSPDF soldiers"
+    }
+   ],
+   "uncertainties": [
+    "马查尔所提指控与检方指控均为单方说法，尚未经法庭裁决",
+    "马查尔关于撤离努力及人质问题的陈述尚未获独立证实",
+    "白军指挥关系及SPLA-IO领导权归属存在争议",
+    "据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_17caa9e339f9b5d4",
+ "disease_event_id": null,
+ "country_code": "SS"
+}
