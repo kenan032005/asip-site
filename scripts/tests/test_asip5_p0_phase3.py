@@ -445,5 +445,49 @@ class TestCollectorImportPath(unittest.TestCase):
                          "否则 `from scripts.* import ...` 在脚本运行方式下无法解析")
 
 
+class TestBusinessCadence(unittest.TestCase):
+    """Phase 3 / I.3：自动调度保留原有业务节奏（Phase 3 不得改动这些规则）。"""
+
+    def _plan(self, now_bjt, state=None):
+        return so.plan_due_tasks(state or {}, now_bjt=now_bjt)
+
+    def test_daily_report_due_only_after_2000_bjt(self):
+        """日报：BJT 20:00 之后且当天未出报告才到期。"""
+        bjt = so.BJT
+        before = self._plan(datetime(2026, 11, 3, 19, 59, tzinfo=bjt))
+        self.assertNotIn("daily_report", [t["task"] for t in before["due"]],
+                         "20:00 之前不得触发日报")
+        after = self._plan(datetime(2026, 11, 3, 20, 0, tzinfo=bjt))
+        self.assertIn("daily_report", [t["task"] for t in after["due"]],
+                      "20:00 BJT 必须触发日报")
+        # 当天已出报告 → 不再重复
+        st = {"last_daily_report": "2026-11-03T12:05:00Z"}   # = 20:05 BJT
+        again = self._plan(datetime(2026, 11, 3, 21, 0, tzinfo=bjt), st)
+        self.assertNotIn("daily_report", [t["task"] for t in again["due"]],
+                         "当天已出报告不得重复触发")
+
+    def test_collection_gap_is_2h45m(self):
+        """采集：距上次成功 ≥2h45m 才到期。"""
+        bjt = so.BJT
+        st = {"last_successful_collection": "2026-11-03T00:00:00Z"}   # = 08:00 BJT
+        due_2h44 = self._plan(datetime(2026, 11, 3, 10, 44, tzinfo=bjt), st)
+        self.assertNotIn("collection", [t["task"] for t in due_2h44["due"]],
+                         "未满 2h45m 不得触发采集")
+        due_2h46 = self._plan(datetime(2026, 11, 3, 10, 46, tzinfo=bjt), st)
+        self.assertIn("collection", [t["task"] for t in due_2h46["due"]],
+                      "满 2h45m 必须触发采集")
+
+    def test_weekly_due_sunday_0645_bjt(self):
+        """周报：BJT 周日 ≥06:45 且本周未出才到期。"""
+        bjt = so.BJT
+        sunday = datetime(2026, 11, 8, 6, 44, tzinfo=bjt)      # 周日 06:44
+        self.assertNotIn("weekly_report", [t["task"] for t in self._plan(sunday)["due"]])
+        sunday2 = datetime(2026, 11, 8, 6, 45, tzinfo=bjt)     # 周日 06:45
+        self.assertIn("weekly_report", [t["task"] for t in self._plan(sunday2)["due"]])
+        # 非周日不得触发
+        tuesday = datetime(2026, 11, 10, 20, 0, tzinfo=bjt)
+        self.assertNotIn("weekly_report", [t["task"] for t in self._plan(tuesday)["due"]])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
