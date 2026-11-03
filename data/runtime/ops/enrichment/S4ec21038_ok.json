@@ -1,0 +1,117 @@
+{
+ "label": "S4ec21038",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f31675343b361f203892cc2fac6f7f8d7d3918d5517f4693d120178d8dbab99f",
+ "tokens": {
+  "input_tokens": 2049,
+  "output_tokens": 496,
+  "total_tokens": 2545
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚拉各斯一名五岁女童据称遭绑架，家属求助寻人",
+   "summary_zh": "尼日利亚拉各斯州Ejigbo地区一名女童两年前失踪，失踪时年仅五岁。其父母称，她可能是在与兄弟一同前往阿拉伯语学校时被拐走，并称监控录像拍到疑似绑匪带走两名儿童，男童后来被遗弃在一家商场，女童则被带走。家属表示已与警方合作并多方寻找，但至今未找到，现公开求助，并坚信女儿仍然在世。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "拉各斯州",
+    "city": "拉各斯",
+    "site": "Ejigbo",
+    "raw_text": "Ejigbo, Lagos State"
+   },
+   "key_facts": [
+    {
+     "fact": "拉各斯州Ejigbo地区一名女童两年前失踪，失踪时五岁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The parents of a girl who went missing in Ejigbo, Lagos State, two years ago are appealing for help to find their daughter, who was five at the time of her disappearance."
+    },
+    {
+     "fact": "家属认为她是在与兄弟前往阿拉伯语学校时被拐走",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "They believe she was abducted while she was with her brother at their Arabic school."
+    },
+    {
+     "fact": "家属称监控录像拍到疑似绑匪带走两名儿童，男童后被遗弃在商场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "They said CCTV footage captured the suspected abductor with both children before the boy was later abandoned at a mall, while their daughter was taken away."
+    },
+    {
+     "fact": "家属称已与警方合作并多方寻找，但至今未找到",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the parents say they have tried various means, including working with the police and pursuing other leads, but have yet to find her"
+    }
+   ],
+   "uncertainties": [
+    "女童是否遭绑架尚未获确认，家属表述为相信其被拐走",
+    "疑似绑匪身份及监控录像内容未获独立证实",
+    "目前仅单一来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚拉各斯一名五岁女童据称遭绑架，家属求助寻人",
+   "summary_zh": "尼日利亚拉各斯州Ejigbo地区一名女童两年前失踪，失踪时年仅五岁。其父母称，她可能是在与兄弟一同前往阿拉伯语学校时被拐走，并称监控录像拍到疑似绑匪带走两名儿童，男童后来被遗弃在一家商场，女童则被带走。家属表示已与警方合作并多方寻找，但至今未找到，现公开求助，并坚信女儿仍然在世。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "拉各斯州",
+    "city": "拉各斯",
+    "site": "Ejigbo",
+    "raw_text": "Ejigbo, Lagos State"
+   },
+   "key_facts": [
+    {
+     "fact": "拉各斯州Ejigbo地区一名女童两年前失踪，失踪时五岁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The parents of a girl who went missing in Ejigbo, Lagos State, two years ago are appealing for help to find their daughter, who was five at the time of her disappearance."
+    },
+    {
+     "fact": "家属认为她是在与兄弟前往阿拉伯语学校时被拐走",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "They believe she was abducted while she was with her brother at their Arabic school."
+    },
+    {
+     "fact": "家属称监控录像拍到疑似绑匪带走两名儿童，男童后被遗弃在商场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "They said CCTV footage captured the suspected abductor with both children before the boy was later abandoned at a mall, while their daughter was taken away."
+    },
+    {
+     "fact": "家属称已与警方合作并多方寻找，但至今未找到",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the parents say they have tried various means, including working with the police and pursuing other leads, but have yet to find her"
+    }
+   ],
+   "uncertainties": [
+    "女童是否遭绑架尚未获确认，家属表述为相信其被拐走",
+    "疑似绑匪身份及监控录像内容未获独立证实",
+    "目前仅单一来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_a9a616d44ec21038",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
