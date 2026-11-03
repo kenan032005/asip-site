@@ -1,0 +1,139 @@
+{
+ "label": "S9ca62d90",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6e8c5bbe50cb516e8493781e397a812f27563804a2109d75378259f0669dccfc",
+ "tokens": {
+  "input_tokens": 2605,
+  "output_tokens": 576,
+  "total_tokens": 3181
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹卡波埃塔南部金矿紧张局势引发冲突",
+   "summary_zh": "东赤道州政府证实，卡波埃塔南部县纳凯凯金矿区上周末发生冲突，称安全局势正逐步恢复正常。反对派全国救国阵线（NAS）则指控政府军对托波萨族青年发动报复性袭击，造成数名平民死亡。政府与反对派对事件经过和伤亡情况说法不一，目前信息仅来自单一来源。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "东赤道州",
+    "city": "卡波埃塔南部县",
+    "site": "纳凯凯金矿区",
+    "raw_text": "Nakeke gold mining area of Kapoeta South County, Eastern Equatoria State"
+   },
+   "key_facts": [
+    {
+     "fact": "东赤道州政府证实卡波埃塔南部县纳凯凯金矿区发生冲突",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Eastern Equatoria State Government has confirmed clashes in the Nakeke gold mining area of Kapoeta South County over the weekend"
+    },
+    {
+     "fact": "政府称安全局势正逐步恢复正常",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "saying the security situation is gradually normalising"
+    },
+    {
+     "fact": "冲突造成士兵和平民死亡、多人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "violence that killed soldiers and civilians and wounded several others"
+    },
+    {
+     "fact": "反对派NAS指控政府军对托波萨族青年发动报复性袭击致数名平民死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the opposition National Salvation Front (NAS), which accused government forces of launching a reprisal attack against Toposa youth in the mining area"
+    },
+    {
+     "fact": "NAS声称约600名南苏丹人民国防军士兵从朱巴部署至纳凯凯",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "NAS claimed that about 600 South Sudan People’s Defence Forces (SSPDF) soldiers had been deployed from Juba to Nakeke on October 31"
+    },
+    {
+     "fact": "卡波埃塔-恩高罗公路沿线安全形势仍令人担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Kapoeta-Ngauro road also remains a security concern"
+    }
+   ],
+   "uncertainties": [
+    "政府与反对派NAS对冲突经过和伤亡情况说法不一，尚无法确认",
+    "NAS所称约600名士兵部署及数十人军事伤亡的说法尚未获独立证实",
+    "政府军是否实施报复性袭击及是否存在人权侵犯尚未证实",
+    "目前仅有一个来源（Radio Tamazuj）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹卡波埃塔南部金矿紧张局势引发冲突",
+   "summary_zh": "东赤道州政府证实，卡波埃塔南部县纳凯凯金矿区上周末发生冲突，称安全局势正逐步恢复正常。反对派全国救国阵线（NAS）则指控政府军对托波萨族青年发动报复性袭击，造成数名平民死亡。政府与反对派对事件经过和伤亡情况说法不一，目前信息仅来自单一来源。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "东赤道州",
+    "city": "卡波埃塔南部县",
+    "site": "纳凯凯金矿区",
+    "raw_text": "Nakeke gold mining area of Kapoeta South County, Eastern Equatoria State"
+   },
+   "key_facts": [
+    {
+     "fact": "东赤道州政府证实卡波埃塔南部县纳凯凯金矿区发生冲突",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Eastern Equatoria State Government has confirmed clashes in the Nakeke gold mining area of Kapoeta South County over the weekend"
+    },
+    {
+     "fact": "政府称安全局势正逐步恢复正常",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "saying the security situation is gradually normalising"
+    },
+    {
+     "fact": "冲突造成士兵和平民死亡、多人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "violence that killed soldiers and civilians and wounded several others"
+    },
+    {
+     "fact": "反对派NAS指控政府军对托波萨族青年发动报复性袭击致数名平民死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the opposition National Salvation Front (NAS), which accused government forces of launching a reprisal attack against Toposa youth in the mining area"
+    },
+    {
+     "fact": "NAS声称约600名南苏丹人民国防军士兵从朱巴部署至纳凯凯",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "NAS claimed that about 600 South Sudan People’s Defence Forces (SSPDF) soldiers had been deployed from Juba to Nakeke on October 31"
+    },
+    {
+     "fact": "卡波埃塔-恩高罗公路沿线安全形势仍令人担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Kapoeta-Ngauro road also remains a security concern"
+    }
+   ],
+   "uncertainties": [
+    "政府与反对派NAS对冲突经过和伤亡情况说法不一，尚无法确认",
+    "NAS所称约600名士兵部署及数十人军事伤亡的说法尚未获独立证实",
+    "政府军是否实施报复性袭击及是否存在人权侵犯尚未证实",
+    "目前仅有一个来源（Radio Tamazuj）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_a19dac0c9ca62d90",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

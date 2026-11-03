@@ -1,0 +1,117 @@
+{
+ "label": "Scf556954",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3616ca4d019809668bc15a9442773f7ab49d561826c1705bfd9a888422fca4a6",
+ "tokens": {
+  "input_tokens": 2211,
+  "output_tokens": 493,
+  "total_tokens": 2704
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "CUTS批评满载过境卡车滞留数周，指其暴露安全、执法与国家安全漏洞",
+   "summary_zh": "CUTS International Accra智库批评国家机构长期未处理一辆停在阿克拉-恩萨瓦姆路Achimota路段、ABC Junction前的满载过境卡车。该车为尼日利亚注册的铰接式卡车，车牌号T-26001LA（拉各斯州），已在该地点停留超过数周。CUTS称此事暴露了安全、执法与国家安全方面的漏洞。目前信息来自单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "阿克拉",
+    "site": "阿克拉-恩萨瓦姆路Achimota路段ABC Junction前",
+    "raw_text": "Achimota stretch of the Accra–Nsawam road, just before ABC Junction"
+   },
+   "key_facts": [
+    {
+     "fact": "CUTS International Accra批评国家机构长期未处理一辆满载过境卡车",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "CUTS International Accra, a leading research and public policy think tank, has criticised the prolonged failure of state agencies to address a loaded transit truck parked along the Achimota stretch of the Accra–Nsawam road, just before ABC Junction."
+    },
+    {
+     "fact": "涉事卡车为尼日利亚注册的铰接式卡车，车牌号T-26001LA（拉各斯州）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A Nigerian-registered articulated truck, registration number T-26001LA (Lagos State)"
+    },
+    {
+     "fact": "该卡车已在原地停留超过数周",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "has remained at the location for more than […]"
+    },
+    {
+     "fact": "CUTS称此事暴露安全、执法与国家安全漏洞",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Loaded transit truck left for weeks exposes safety, enforcement and National Security lapses, says CUTS"
+    }
+   ],
+   "uncertainties": [
+    "卡车具体停留时长未明确（原文以省略号截断）",
+    "目前仅单一来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "卡车所载货物内容未披露"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 60
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "CUTS批评满载过境卡车滞留数周，指其暴露安全、执法与国家安全漏洞",
+   "summary_zh": "CUTS International Accra智库批评国家机构长期未处理一辆停在阿克拉-恩萨瓦姆路Achimota路段、ABC Junction前的满载过境卡车。该车为尼日利亚注册的铰接式卡车，车牌号T-26001LA（拉各斯州），已在该地点停留超过数周。CUTS称此事暴露了安全、执法与国家安全方面的漏洞。目前信息来自单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "阿克拉",
+    "site": "阿克拉-恩萨瓦姆路Achimota路段ABC Junction前",
+    "raw_text": "Achimota stretch of the Accra–Nsawam road, just before ABC Junction"
+   },
+   "key_facts": [
+    {
+     "fact": "CUTS International Accra批评国家机构长期未处理一辆满载过境卡车",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "CUTS International Accra, a leading research and public policy think tank, has criticised the prolonged failure of state agencies to address a loaded transit truck parked along the Achimota stretch of the Accra–Nsawam road, just before ABC Junction."
+    },
+    {
+     "fact": "涉事卡车为尼日利亚注册的铰接式卡车，车牌号T-26001LA（拉各斯州）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A Nigerian-registered articulated truck, registration number T-26001LA (Lagos State)"
+    },
+    {
+     "fact": "该卡车已在原地停留超过数周",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "has remained at the location for more than […]"
+    },
+    {
+     "fact": "CUTS称此事暴露安全、执法与国家安全漏洞",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Loaded transit truck left for weeks exposes safety, enforcement and National Security lapses, says CUTS"
+    }
+   ],
+   "uncertainties": [
+    "卡车具体停留时长未明确（原文以省略号截断）",
+    "目前仅单一来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "卡车所载货物内容未披露"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 60
+  }
+ },
+ "event_id": "EVT_683a9831cf556954",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

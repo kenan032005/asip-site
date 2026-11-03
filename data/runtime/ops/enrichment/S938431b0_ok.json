@@ -1,0 +1,136 @@
+{
+ "label": "S938431b0",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4cc89e6123a6b9c63c54117c5786b5fa7a5336fc3e29a1929e16a929daaa239d",
+ "tokens": {
+  "input_tokens": 3003,
+  "output_tokens": 590,
+  "total_tokens": 3593
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"撤军具体进度与时间表尚未获独立来源交叉验证\", \"报道为单一来源（RFI），撤军声明细节有待其他渠道核实\"]",
+    "after": "[\"撤军具体进度与时间表尚未获独立来源交叉验证\", \"报道为单一来源（RFI），撤军声明细节有待其他渠道核实\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乌干达宣布开始从索马里撤军",
+   "summary_zh": "乌干达军方2026年11月2日发表声明，宣布已开始从索马里撤出部署的部队，并称将在2027年底前完成全部撤离。撤军分两阶段进行，先撤出依据双边协议部署的部队，随后撤出非洲联盟支持与稳定特派团（AUSSOM）框架下的士兵，总计约6500名乌干达士兵将离开索马里。报道指出，此次撤军正值非盟特派团因欧美资金终止而陷入严重危机，索马里仍面临青年党控制超过30%领土的威胁。",
+   "event_type": "other_security",
+   "country_iso3": "SOM",
+   "location": {
+    "country_iso3": "SOM",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Somalie"
+   },
+   "key_facts": [
+    {
+     "fact": "乌干达军方宣布已开始从索马里撤军，立即生效",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les Forces de défense populaires de l’Ouganda (UPDF) ont entamé le retrait des troupes déployées en Somalie dans le cadre d’accords bilatéraux conclus avec le gouvernement fédéral, avec effet immédiat"
+    },
+    {
+     "fact": "乌干达称将在2027年底前完成全部撤军",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ajoutant qu’elle achèverait le retrait de toutes ses troupes de Somalie d’ici fin 2027"
+    },
+    {
+     "fact": "撤军分两阶段，先撤双边协议部队，再撤AUSSOM框架下士兵",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le retrait de ces forces se fera en deux temps. D’abord, ce sont les troupes déployées dans le cadre d’accords bilatéraux entre Kampala et Mogadiscio qui rentreront"
+    },
+    {
+     "fact": "总计约6500名乌干达士兵将离开索马里",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En tout, près de 6 500 soldats ougandais quitteront définitivement la Somalie"
+    },
+    {
+     "fact": "索马里青年党仍控制超过30%的领土",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la Somalie est toujours confrontée à la menace du groupe terroriste al-Shebab, qui contrôle plus de 30 % de son territoire"
+    }
+   ],
+   "uncertainties": [
+    "撤军具体进度与时间表尚未获独立来源交叉验证",
+    "报道为单一来源（RFI），撤军声明细节有待其他渠道核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乌干达宣布开始从索马里撤军",
+   "summary_zh": "乌干达军方2026年11月2日发表声明，宣布已开始从索马里撤出部署的部队，并称将在2027年底前完成全部撤离。撤军分两阶段进行，先撤出依据双边协议部署的部队，随后撤出非洲联盟支持与稳定特派团（AUSSOM）框架下的士兵，总计约6500名乌干达士兵将离开索马里。报道指出，此次撤军正值非盟特派团因欧美资金终止而陷入严重危机，索马里仍面临青年党控制超过30%领土的威胁。",
+   "event_type": "other_security",
+   "country_iso3": "SOM",
+   "location": {
+    "country_iso3": "SOM",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Somalie"
+   },
+   "key_facts": [
+    {
+     "fact": "乌干达军方宣布已开始从索马里撤军，立即生效",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les Forces de défense populaires de l’Ouganda (UPDF) ont entamé le retrait des troupes déployées en Somalie dans le cadre d’accords bilatéraux conclus avec le gouvernement fédéral, avec effet immédiat"
+    },
+    {
+     "fact": "乌干达称将在2027年底前完成全部撤军",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ajoutant qu’elle achèverait le retrait de toutes ses troupes de Somalie d’ici fin 2027"
+    },
+    {
+     "fact": "撤军分两阶段，先撤双边协议部队，再撤AUSSOM框架下士兵",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le retrait de ces forces se fera en deux temps. D’abord, ce sont les troupes déployées dans le cadre d’accords bilatéraux entre Kampala et Mogadiscio qui rentreront"
+    },
+    {
+     "fact": "总计约6500名乌干达士兵将离开索马里",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En tout, près de 6 500 soldats ougandais quitteront définitivement la Somalie"
+    },
+    {
+     "fact": "索马里青年党仍控制超过30%的领土",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la Somalie est toujours confrontée à la menace du groupe terroriste al-Shebab, qui contrôle plus de 30 % de son territoire"
+    }
+   ],
+   "uncertainties": [
+    "撤军具体进度与时间表尚未获独立来源交叉验证",
+    "报道为单一来源（RFI），撤军声明细节有待其他渠道核实",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_396db8f8938431b0",
+ "disease_event_id": null,
+ "country_code": "SO"
+}
