@@ -454,67 +454,193 @@ def load_db(data_dir=None):
     return db
 
 
-def get_build_meta(run_id=None):
-    """从 status.json / canonical 读取或生成构建元数据（asip5：附带数据截止时间）。"""
-    status = load_json(os.path.join(DATA_DIR, "status.json"), {})
+def _parse_ts(s):
+    """解析 ISO 时间戳为 UTC datetime；失败返回 None。
+
+    无时区后缀的按北京时间（UTC+8）解释——站点全局约定「所有时间均为北京时间」。
+    例：'2026-11-04T02:32:53'（无后缀）→ 视为北京时间 → UTC 2026-11-03T18:32:53Z。
+    """
+    if not s or not isinstance(s, str):
+        return None
+    try:
+        t = s.strip().replace("Z", "+00:00")
+        dt = datetime.fromisoformat(t)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone(timedelta(hours=8)))
+        return dt.astimezone(timezone.utc)
+    except Exception:
+        return None
+
+
+def _bj_str_from_utc(utc_dt):
+    """UTC datetime → 北京时间字符串 YYYY-MM-DD HH:MM:SS。"""
+    if utc_dt is None:
+        return ""
+    return utc_dt.astimezone(timezone(timedelta(hours=8))).strftime("%Y-%m-%d %H:%M:%S")
+
+
+def get_build_meta(run_id=None, data_dir=None, now=None):
+    """派生公开数据时效性元数据。
+
+    ROOT CAUSE 修复（PUBLIC FRESHNESS METADATA HOTFIX）：
+      旧实现无条件优先 status.json.data_as_of，而该值常被历史兼容产物
+      legacy ai_intelligence.json 污染（来源 production_state.last_daily_report，
+      实为旧 AI 快照），导致线上误报「数据严重过期」。
+
+    修复：data_as_of 优先取自**经当前生产视图验证**的截止时间
+      （site_overview / homepage_intelligence / current_metrics），
+      仅在真实视图均无截止时间时，才谨慎回退 status.json 并标注 FALLBACK_UNVERIFIED。
+      绝不读取 legacy ai_intelligence.json 作为时效来源。
+
+    严格区分四类时间语义（II.3）：
+      - collection_as_of：采集成功时间
+      - analysis_as_of  ：AI 分析有效时间
+      - data_as_of      ：当前公开视图实际截止时间（对外公开时效真值）
+      - build_time      ：网页构建时间（绝不冒充数据更新时间）
+    """
+    base = data_dir or DATA_DIR
+    status = load_json(os.path.join(base, "status.json"), {})
     if run_id is None:
         run_id = status.get("run_id", "")
-    # asip5 P0-R1：数据新鲜度 —— data_as_of 优先取时间契约/status，其次 canonical run_id 时间
-    data_as_of = (status.get("data_as_of") or status.get("data_generated_at") or "")
-    if not data_as_of:
-        try:
-            canon = load_json(os.path.join(DATA_DIR, "canonical", "event_clusters.json"), {})
-            data_as_of = canon.get("updated_at") or canon.get("generated_at") or ""
-        except Exception:
-            data_as_of = ""
-    age_hours = None
+
+    # ── 经当前生产视图验证的截止时间候选（最新优先）──
+    # 仅读取「当前公开视图」；绝不读取 legacy ai_intelligence.json（避免旧 AI 冒充最新）。
+    so, hi, cm = {}, {}, {}
     try:
-        from datetime import datetime, timezone
-        ts = str(data_as_of).replace("Z", "+00:00")
-        dt = datetime.fromisoformat(ts)
-        if dt.tzinfo is None:
-            dt = dt.replace(tzinfo=timezone.utc)
-        age_hours = round((datetime.now(timezone.utc) - dt).total_seconds() / 3600, 1)
+        so = load_json(os.path.join(base, "views", "site_overview.json"), {}) or {}
     except Exception:
-        age_hours = None
+        so = {}
+    try:
+        hi = load_json(os.path.join(base, "views", "homepage_intelligence.json"), {}) or {}
+    except Exception:
+        hi = {}
+    try:
+        cm = load_json(os.path.join(base, "public", "current_metrics.json"), {}) or {}
+    except Exception:
+        cm = {}
+
+    candidates = []  # (utc_dt, source_label, status_flag, original_str)
+    if so.get("data_as_of"):
+        candidates.append((_parse_ts(so.get("data_as_of")),
+                          "site_overview.data_as_of", so.get("data_as_of_status") or "EXPLICIT",
+                          so.get("data_as_of")))
+    if hi.get("data_as_of"):
+        candidates.append((_parse_ts(hi.get("data_as_of")),
+                          "homepage_intelligence.data_as_of", "EXPLICIT",
+                          hi.get("data_as_of")))
+    if so.get("generated_at"):
+        candidates.append((_parse_ts(so.get("generated_at")),
+                          "site_overview.generated_at", "DERIVED", so.get("generated_at")))
+    if cm.get("updated_at"):
+        candidates.append((_parse_ts(cm.get("updated_at")),
+                          "current_metrics.updated_at", "DERIVED", cm.get("updated_at")))
+
+    data_as_of = ""
+    data_as_of_bj = ""
+    data_as_of_source = ""
+    data_as_of_status = ""
+    # 优先采用 site_overview（显式 UTC、状态 EXPLICIT，最权威）；否则取验证候选中最新者。
+    if so.get("data_as_of") and _parse_ts(so.get("data_as_of")) is not None:
+        top = (so.get("data_as_of"), "site_overview.data_as_of",
+               so.get("data_as_of_status") or "EXPLICIT")
+        data_as_of, data_as_of_source, data_as_of_status = top
+        data_as_of_bj = _bj_str_from_utc(_parse_ts(data_as_of))
+    elif candidates:
+        verified = [c for c in candidates if c[0] is not None]
+        verified.sort(key=lambda c: c[0], reverse=True)
+        if verified:
+            top = verified[0]
+            data_as_of, data_as_of_source, data_as_of_status = top[3], top[1], top[2]
+            data_as_of_bj = _bj_str_from_utc(top[0])
+
+    # ── 回退：真实生产视图均无截止时间时，才谨慎使用 status.json（明确标注未验证）──
+    # 不默认新鲜：缺失/解析失败 → data_as_of 仍可能为空，banner 必须给出「新鲜度未知」提醒。
+    if not data_as_of:
+        fb = status.get("data_as_of") or status.get("data_generated_at") or ""
+        if fb and _parse_ts(fb) is not None:
+            data_as_of = fb
+            data_as_of_bj = _bj_str_from_utc(_parse_ts(fb))
+            data_as_of_source = ("status.data_as_of" if status.get("data_as_of")
+                                 else "status.data_generated_at") + ".fallback"
+            data_as_of_status = "FALLBACK_UNVERIFIED"
+
+    # ── 四个语义化时间字段（区分采集/分析/公开截止/构建；build_time 不冒充数据更新）──
+    collection_as_of = so.get("latest_verified_event_time") or status.get("data_generated_at") or ""
+    ai_gen = (hi.get("ai") or {}).get("generated_time") or so.get("data_as_of") or ""
+    analysis_as_of = ai_gen
+    build_time = bj_iso()
+
+    # ── 时效年龄：以 data_as_of 真实截止时间计算，绝不用 build_time 冒充 ──
+    ref_now = now if now is not None else datetime.now(timezone.utc)
+    ref = _parse_ts(data_as_of) if data_as_of else None
+    age_hours = None
+    if ref is not None:
+        age_hours = round((ref_now - ref).total_seconds() / 3600, 1)
+
     return {
         "run_id": run_id,
         "pipeline_version": PIPELINE_VERSION,
-        "build_time": bj_iso(),
+        "build_time": build_time,
         "build_time_bj": bj_format(),
         "source_commit": (status.get("source_commit") or "")[:8],
+        "collection_as_of": collection_as_of,
+        "analysis_as_of": analysis_as_of,
         "data_as_of": data_as_of,
+        "data_as_of_bj": data_as_of_bj,
+        "data_as_of_source": data_as_of_source,
+        "data_as_of_status": data_as_of_status,
         "data_age_hours": age_hours,
         "data_stale": bool(age_hours is not None and age_hours > 12),
     }
 
 
 def _staleness_banner(meta):
-    """asip5 P0-R1：数据过期提示（>12h 黄色 / >48h 红色）。无 data_as_of 时不显示。"""
+    """公开数据时效提醒（>12h 黄色 / >48h 红色）。
+
+    规则（II.5 / II.6）：
+      - 真实数据超过阈值必须显示警告（红/黄），不得删除或永久隐藏；
+      - 缺失/解析失败时 age=None，**不得默认判为新鲜**——给出「新鲜度未知」黄色提醒；
+      - 仅在能确认数据截止时间且距今 ≤12h 时才不显示横幅。
+    """
     age = meta.get("data_age_hours")
+    as_of = meta.get("data_as_of") or "未知"
     if age is None:
-        return ""
+        # 无法判定新鲜度：不得默认新鲜，给出黄色「新鲜度未知」提醒。
+        return ('<div id="asip-staleness-banner" role="status" style="position:sticky;top:0;z-index:9999;'
+                'background:#fef3c7;color:#b45309;border-bottom:1px solid #b45309;padding:8px 12px;'
+                'font:14px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;text-align:center;">'
+                '数据新鲜度未知：未能确认数据截止时间（最后已知 %s），请谨慎引用。</div>\n' % as_of)
     if age <= 12:
         return ""
-    color = "#b45309" if age <= 48 else "#b91c1c"
-    bg = "#fef3c7" if age <= 48 else "#fee2e2"
-    label = "数据可能已过期" if age <= 48 else "数据严重过期"
+    if age <= 48:
+        color, bg, label = "#b45309", "#fef3c7", "数据可能已过期"
+    else:
+        color, bg, label = "#b91c1c", "#fee2e2", "数据严重过期"
     return ('<div id="asip-staleness-banner" role="status" style="position:sticky;top:0;z-index:9999;'
             'background:%s;color:%s;border-bottom:1px solid %s;padding:8px 12px;'
             'font:14px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;text-align:center;">'
             '%s：数据截至 %s（距今 %.1f 小时），请谨慎引用。</div>\n'
-            % (bg, color, color, label, meta.get("data_as_of") or "未知", age))
+            % (bg, color, color, label, as_of, age))
+
+
+# 移除模板中可能已静态烘焙的旧时效横幅（避免新旧叠加）
+_BANNER_RE = re.compile(r'<div id="asip-staleness-banner".*?</div>\s*', re.DOTALL)
 
 
 def inject_meta(html, meta):
-    """在 HTML 中注入 window.ASIP_BUILD_META（并抑制 favicon 404）。"""
+    """在 HTML 中注入 window.ASIP_BUILD_META（并抑制 favicon 404），并按真实时效刷新横幅。
+
+    若模板已静态烘焙旧横幅，先移除再按本次构建的真实 data_as_of 注入
+    （fresh 时不注入横幅，保持页面干净；stale 时注入红/黄警告）。
+    """
     meta_js = f'<script>window.ASIP_BUILD_META = {json.dumps(meta, ensure_ascii=False)};</script>\n'
     # C5-B：站点未提供 favicon，浏览器默认请求 /favicon.ico → 每次加载一条
     # 控制台 404。用 data: 空图标显式声明，消除该噪声（不引入新资源）。
     if 'rel="icon"' not in html:
         meta_js = '<link rel="icon" href="data:,">' + chr(10) + meta_js
-    # 插入在 <head> 末尾或 api.js 引用之前
     banner = _staleness_banner(meta)
+    # 先移除模板中可能已静态烘焙的旧横幅（避免新旧叠加 / 误报残留）
+    html = _BANNER_RE.sub("", html)
     head_close = "</head>"
     if head_close in html:
         out = html.replace(head_close, meta_js + head_close, 1)
@@ -539,6 +665,38 @@ def inject_db(html, db):
     if marker in html:
         return html.replace(marker, script + marker, 1)
     return script + html
+
+
+def _reconcile_status_counts(dist_status, cm=None, so=None):
+    """II.4：把可经 current_metrics / site_overview 直接验证的对外计数同步为真实值，
+    不再输出过时数量作为当前值。仅覆盖「来源存在且类型正确」的字段；其余保持不变
+    （不臆造、不删除），对无法证实的字段保留原值（或置 unknown）。"""
+    if cm is None:
+        try:
+            cm = load_json(os.path.join(DATA_DIR, "public", "current_metrics.json"), {}) or {}
+        except Exception:
+            cm = {}
+    if so is None:
+        try:
+            so = load_json(os.path.join(DATA_DIR, "views", "site_overview.json"), {}) or {}
+        except Exception:
+            so = {}
+    # 直接等价于 current_metrics 的对外计数
+    mapping = [
+        ("published_event_count", cm.get("published_events")),
+        ("quarantine_event_count", cm.get("quarantine")),
+        ("pending_event_count", cm.get("pending_articles")),
+        ("current_event_count", cm.get("current_policy_passed_events")),
+    ]
+    for dst, val in mapping:
+        if isinstance(val, int):
+            dist_status[dst] = val
+    # 来自 site_overview.kpis 的近窗计数
+    kpis = (so.get("kpis") or {}) if isinstance(so, dict) else {}
+    if isinstance(kpis.get("events_24h"), int):
+        dist_status["events_24h"] = kpis["events_24h"]
+    if isinstance(kpis.get("events_7d"), int):
+        dist_status["events_7d"] = kpis["events_7d"]
 
 
 def main(run_id=None, no_embed=False):
@@ -650,12 +808,29 @@ def main(run_id=None, no_embed=False):
     with open(os.path.join(DIST_NEW, ".nojekyll"), "w", encoding="utf-8") as f:
         f.write("")
 
-    # 更新 status.json 的构建完成时间（仅在 dist 中）
+    # 更新 status.json 的构建完成时间 + 时效性元数据协调（仅在 dist 中）
     dist_status_path = os.path.join(DIST_NEW, "data", "status.json")
     dist_status = load_json(dist_status_path, {})
     if dist_status:
         dist_status["build_completed_at"] = bj_iso()
         dist_status["build_completed_at_beijing"] = bj_format()
+        # P0-FRESHNESS：用经当前生产视图验证的截止时间覆盖 status.json 中可能
+        # 被 legacy ai_intelligence.json 污染的 data_as_of（II.4：与本次生产数据一致）。
+        # 保留来源与状态语义（data_as_of_source / data_as_of_status）。
+        if meta.get("data_as_of"):
+            dist_status["data_as_of"] = meta["data_as_of"]
+            dist_status["data_as_of_bj"] = meta.get("data_as_of_bj") or ""
+            dist_status["data_as_of_source"] = meta.get("data_as_of_source") or ""
+            dist_status["data_as_of_status"] = meta.get("data_as_of_status") or ""
+            dist_status["data_updated_at"] = meta["data_as_of"]
+        # 语义化时间字段（区分采集/分析/公开截止/构建；build_time 不冒充数据更新）
+        dist_status["collection_as_of"] = meta.get("collection_as_of") or ""
+        dist_status["analysis_as_of"] = meta.get("analysis_as_of") or ""
+        # 页脚 last_updated_beijing 与公开时效真值一致（避免仍显示陈旧时间）
+        if meta.get("data_as_of_bj"):
+            dist_status["last_updated_beijing"] = meta["data_as_of_bj"]
+        # II.4：把可验证的对外计数同步为真实值
+        _reconcile_status_counts(dist_status)
         save_json(dist_status_path, dist_status)
 
     # 纯改名交换：.dist_new -> dist
