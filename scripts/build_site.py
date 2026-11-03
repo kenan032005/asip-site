@@ -716,25 +716,14 @@ def _reconcile_status_counts(dist_status, cm=None, so=None):
 
 
 def main(run_id=None, no_embed=False):
-    # P0-FRESHNESS：在派生时效性元数据之前，先重建前端公开视图
-    # （build_frontend_views 将 site_overview.data_as_of 从 production-state
-    #  canonical 解析后写入 data/runtime/frontend_preview_public/）。
-    # 这样 get_build_meta 读取的是「本次重建后的真实生产截止时间」，
-    # 而非提交态陈旧种子（data_as_of=2026-09-21），从根本上消除误报。
-    try:
-        sys.path.insert(0, os.path.join(HERE, "frontend"))
-        import build_frontend_views as _bfv_pre
-        _bfv_pre.main()
-        print("  [freshness] 前端视图已预重建（供时效性元数据派生）")
-    except Exception as _e:
-        print(f"  [freshness] 前端视图预重建跳过（回退提交态种子）: {_e}")
-    meta = get_build_meta(run_id)
-    print(f"[build_site] run_id={meta['run_id']} pipeline_version={meta['pipeline_version']}")
-    print(f"[build_site] build_time={meta['build_time_bj']}")
+    import time as _time
+    # 先确定 run_id（供 legacy 同步等使用）；时效性元数据在视图重建后派生。
+    _status0 = load_json(os.path.join(DATA_DIR, "status.json"), {})
+    if run_id is None:
+        run_id = _status0.get("run_id", "")
 
     # 零删除构建：先构建到 .dist_new，最后用纯改名交换（rename 不受
     # 环境批量删除保护限制）。旧 dist 改名入 .dist_trash，尽力清理。
-    import time as _time
     DIST_NEW = os.path.join(ROOT, ".dist_new")
     TRASH = os.path.join(ROOT, ".dist_trash")
     if os.path.isdir(DIST_NEW):  # 上次异常残留
@@ -770,7 +759,43 @@ def main(run_id=None, no_embed=False):
             _rename_retry(DIST, os.path.join(TRASH, f"dist_{int(_time.time()*1000)}"))
         _rename_retry(DIST_NEW, DIST)
 
-    # 构建 HTML
+    # 复制静态资源
+    if os.path.isdir(ASSETS):
+        shutil.copytree(ASSETS, os.path.join(DIST_NEW, "assets"))
+    # V17 Compatibility：canonical → legacy 视图同步（必须在复制公开数据之前）
+    _sync_legacy_from_canonical(run_id)
+    if os.path.isdir(DATA_DIR):
+        # Stage-2 收尾：仅按白名单复制公开数据，绝不复制整个 data/ 目录
+        _copy_public_data(DIST_NEW)
+    # Stage 8A：公开安全前端视图（site_overview/master_events/...）
+    # 先从 canonical + 持久 admission 重建 timelines（确定性，无 AI），
+    # 保证 master_events/disease_outbreaks/event_timelines 反映生产真值。
+    try:
+        sys.path.insert(0, str(Path(HERE).parent))
+        from scripts.ops import timeline_run as _timeline_run
+        _tl = _timeline_run.build_timelines(data_dir=DATA_DIR)
+        print(f"  timelines rebuilt: social={_tl['social']} disease={_tl['disease']}")
+    except Exception as e:
+        print(f"  timeline rebuild failed (use state artifacts): {e}")
+    # P0-FRESHNESS：build_frontend_views.main() 将 site_overview.data_as_of 从
+    # production-state canonical 解析后写入 data/runtime/frontend_preview_public/。
+    # 此步必须在 get_build_meta 之前完成，使横幅/ASIP_BUILD_META 反映本次重建后的
+    # 真实生产截止时间，而非提交态陈旧种子（data_as_of=2026-09-21）。
+    n_views = _copy_frontend_views(DIST_NEW)
+    print(f"  前端视图: {n_views} 个契约")
+    # C1A build integration（§二）：用仓库自身数据重新生成 news-stream-v1 视图，
+    # 不依赖手工复制 / preview 目录。必须在 _copy_frontend_views 之后（
+    # master_events / site_overview 需要是本次构建的新鲜产物）。
+    n_c1a = _build_and_copy_c1a_views(DIST_NEW)
+    print(f"  C1A 视图: {n_c1a} 个公开视图")
+
+    # ── P0-FRESHNESS：视图已重建，此刻派生时效性元数据（读取 frontend_preview_public 新鲜视图）──
+    meta = get_build_meta(run_id)
+    print(f"[build_site] run_id={meta['run_id']} pipeline_version={meta['pipeline_version']}")
+    print(f"[build_site] build_time={meta['build_time_bj']}")
+    print(f"[build_site] data_as_of={meta.get('data_as_of')} (source={meta.get('data_as_of_source')})")
+
+    # 构建 HTML（注入 ASIP_BUILD_META + 时效横幅）
     built = 0
     for fn in HTML_FILES:
         src = os.path.join(ROOT, fn)
@@ -792,31 +817,6 @@ def main(run_id=None, no_embed=False):
             f.write(html)
         built += 1
 
-    # 复制静态资源
-    if os.path.isdir(ASSETS):
-        shutil.copytree(ASSETS, os.path.join(DIST_NEW, "assets"))
-    # V17 Compatibility：canonical → legacy 视图同步（必须在复制公开数据之前）
-    _sync_legacy_from_canonical(meta["run_id"])
-    if os.path.isdir(DATA_DIR):
-        # Stage-2 收尾：仅按白名单复制公开数据，绝不复制整个 data/ 目录
-        _copy_public_data(DIST_NEW)
-    # Stage 8A：公开安全前端视图（site_overview/master_events/...）
-    # 先从 canonical + 持久 admission 重建 timelines（确定性，无 AI），
-    # 保证 master_events/disease_outbreaks/event_timelines 反映生产真值。
-    try:
-        sys.path.insert(0, str(Path(HERE).parent))
-        from scripts.ops import timeline_run as _timeline_run
-        _tl = _timeline_run.build_timelines(data_dir=DATA_DIR)
-        print(f"  timelines rebuilt: social={_tl['social']} disease={_tl['disease']}")
-    except Exception as e:
-        print(f"  timeline rebuild failed (use state artifacts): {e}")
-    n_views = _copy_frontend_views(DIST_NEW)
-    print(f"  前端视图: {n_views} 个契约")
-    # C1A build integration（§二）：用仓库自身数据重新生成 news-stream-v1 视图，
-    # 不依赖手工复制 / preview 目录。必须在 _copy_frontend_views 之后（
-    # master_events / site_overview 需要是本次构建的新鲜产物）。
-    n_c1a = _build_and_copy_c1a_views(DIST_NEW)
-    print(f"  C1A 视图: {n_c1a} 个公开视图")
     if os.path.isdir(REPORTS):
         shutil.copytree(REPORTS, os.path.join(DIST_NEW, "reports"))
     # Production report outputs → 公开归档
