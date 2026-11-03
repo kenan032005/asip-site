@@ -1,0 +1,119 @@
+{
+ "label": "Sf78d30d1",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "574d4548d1735f7d7ab8bc7ae8cba76805b488d1003aaf54c58c6d72abbda5e2",
+ "tokens": {
+  "input_tokens": 2447,
+  "output_tokens": 524,
+  "total_tokens": 2971
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔指控乍得与法国发动致命无人机袭击",
+   "summary_zh": "尼日尔国家电视台于2026年10月26日播出官方声明，直接指控邻国乍得与法国策划并对其领土发动无人机袭击。据称袭击发生于10月24日凌晨，地点为阿加德兹地区埃米卢卢（Emiloulou），造成两名平民死亡、多名居民受伤及重大财产损失。尼日尔当局称已收集到追踪飞行器来源及巴黎后勤支持的确凿证据，但尚未公开相关物证。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "阿加德兹地区",
+    "city": null,
+    "site": "埃米卢卢（Emiloulou）",
+    "raw_text": "localité d'Emiloulou (région d'Agadez)"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔政府指控乍得与法国策划对其领土的无人机袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement accuse directement le Tchad voisin et la France d'avoir orchestré une attaque de drone sur son territoire"
+    },
+    {
+     "fact": "袭击发生于2026年10月24日凌晨，地点为阿加德兹地区埃米卢卢",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'incursion, survenue aux premières heures du 24 octobre dans la localité d'Emiloulou (région d'Agadez)"
+    },
+    {
+     "fact": "袭击造成两名平民死亡、多名居民受伤及重大财产损失",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a coûté la vie à deux civils, blessé plusieurs résidents et causé d'importants dégâts matériels"
+    },
+    {
+     "fact": "尼日尔军方称已收集证据，但政府尚未公开物证",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement n'a pas encore dévoilé publiquement les éléments matériels de son enquête"
+    }
+   ],
+   "uncertainties": [
+    "乍得与法国是否实际参与袭击尚未获独立证实，相关指控来自尼日尔政府单方面声明",
+    "尼日尔军方所称的追踪证据与后勤支持证据尚未公开，有待核实",
+    "事件目前为单一来源报道，尚缺乏交叉验证",
+    "伤亡人数与损失细节尚未获其他来源确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔指控乍得与法国发动致命无人机袭击",
+   "summary_zh": "尼日尔国家电视台于2026年10月26日播出官方声明，直接指控邻国乍得与法国策划并对其领土发动无人机袭击。据称袭击发生于10月24日凌晨，地点为阿加德兹地区埃米卢卢（Emiloulou），造成两名平民死亡、多名居民受伤及重大财产损失。尼日尔当局称已收集到追踪飞行器来源及巴黎后勤支持的确凿证据，但尚未公开相关物证。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "阿加德兹地区",
+    "city": null,
+    "site": "埃米卢卢（Emiloulou）",
+    "raw_text": "localité d'Emiloulou (région d'Agadez)"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔政府指控乍得与法国策划对其领土的无人机袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement accuse directement le Tchad voisin et la France d'avoir orchestré une attaque de drone sur son territoire"
+    },
+    {
+     "fact": "袭击发生于2026年10月24日凌晨，地点为阿加德兹地区埃米卢卢",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'incursion, survenue aux premières heures du 24 octobre dans la localité d'Emiloulou (région d'Agadez)"
+    },
+    {
+     "fact": "袭击造成两名平民死亡、多名居民受伤及重大财产损失",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a coûté la vie à deux civils, blessé plusieurs résidents et causé d'importants dégâts matériels"
+    },
+    {
+     "fact": "尼日尔军方称已收集证据，但政府尚未公开物证",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement n'a pas encore dévoilé publiquement les éléments matériels de son enquête"
+    }
+   ],
+   "uncertainties": [
+    "乍得与法国是否实际参与袭击尚未获独立证实，相关指控来自尼日尔政府单方面声明",
+    "尼日尔军方所称的追踪证据与后勤支持证据尚未公开，有待核实",
+    "事件目前为单一来源报道，尚缺乏交叉验证",
+    "伤亡人数与损失细节尚未获其他来源确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_36cfa237f78d30d1",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

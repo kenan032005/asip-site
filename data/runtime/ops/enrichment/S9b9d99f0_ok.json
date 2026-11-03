@@ -1,0 +1,127 @@
+{
+ "label": "S9b9d99f0",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c211f765b4e086f18c4986ca620c9eb32540ada3fabc7c670127a731d7cd0b81",
+ "tokens": {
+  "input_tokens": 2269,
+  "output_tokens": 574,
+  "total_tokens": 2843
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "欧盟协助莫桑比克组建的快速反应部队被指未能有效应对德尔加杜角叛乱",
+   "summary_zh": "据单一来源报道，欧盟协助莫桑比克在德尔加杜角组建了11支快速反应部队，但叛乱分子仍在扩大活动范围。欧盟军事援助团指挥官埃斯特雷拉准将称，莫桑比克国防军受指挥过度集中、情报薄弱及装备资金短缺制约，这些缺陷无法通过训练解决。报道称，过去五个月叛乱分子发动约154次袭击，绑架占袭击比例从29%升至56%，部分快速反应部队据称长期驻守固定阵地。",
+   "event_type": "armed_conflict",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "德尔加杜角",
+    "city": null,
+    "site": null,
+    "raw_text": "Cabo Delgado and Niassa"
+   },
+   "key_facts": [
+    {
+     "fact": "欧盟协助莫桑比克组建了11支快速反应部队",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The European Union has helped Mozambique create 11 rapid-reaction units for the war in Cabo Delgado."
+    },
+    {
+     "fact": "欧盟军事援助团指挥官称莫桑比克国防军受指挥过度集中、情报薄弱和装备资金短缺制约",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The FADM remain constrained by excessive centralisation of command, weaknesses in intelligence and shortages of equipment and money."
+    },
+    {
+     "fact": "叛乱分子过去五个月发动约154次袭击，分布在德尔加杜角和尼亚萨的16个区约120个地点",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "insurgents had conducted about 154 attacks over the previous five months, spread across approximately 120 locations in 16 districts of Cabo Delgado and Niassa."
+    },
+    {
+     "fact": "绑架占袭击比例从今年上半年的29%升至最近一个季度的56%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Abductions, used to obtain ransom and recruits, rose from 29% of attacks in the first half of the year to 56% in the most recent quarter."
+    },
+    {
+     "fact": "部分快速反应部队据称长期驻守固定阵地，执行普通驻防部队任务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "some have reportedly remained in static positions for months, performing the work of ordinary garrison forces."
+    }
+   ],
+   "uncertainties": [
+    "报道为单一来源，尚未获得交叉验证",
+    "部分快速反应部队长期驻守固定阵地的说法为据称，尚未证实",
+    "袭击次数、地点数量及绑架比例数据来自欧盟军事援助团指挥官单方陈述"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "欧盟协助莫桑比克组建的快速反应部队被指未能有效应对德尔加杜角叛乱",
+   "summary_zh": "据单一来源报道，欧盟协助莫桑比克在德尔加杜角组建了11支快速反应部队，但叛乱分子仍在扩大活动范围。欧盟军事援助团指挥官埃斯特雷拉准将称，莫桑比克国防军受指挥过度集中、情报薄弱及装备资金短缺制约，这些缺陷无法通过训练解决。报道称，过去五个月叛乱分子发动约154次袭击，绑架占袭击比例从29%升至56%，部分快速反应部队据称长期驻守固定阵地。",
+   "event_type": "armed_conflict",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "德尔加杜角",
+    "city": null,
+    "site": null,
+    "raw_text": "Cabo Delgado and Niassa"
+   },
+   "key_facts": [
+    {
+     "fact": "欧盟协助莫桑比克组建了11支快速反应部队",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The European Union has helped Mozambique create 11 rapid-reaction units for the war in Cabo Delgado."
+    },
+    {
+     "fact": "欧盟军事援助团指挥官称莫桑比克国防军受指挥过度集中、情报薄弱和装备资金短缺制约",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The FADM remain constrained by excessive centralisation of command, weaknesses in intelligence and shortages of equipment and money."
+    },
+    {
+     "fact": "叛乱分子过去五个月发动约154次袭击，分布在德尔加杜角和尼亚萨的16个区约120个地点",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "insurgents had conducted about 154 attacks over the previous five months, spread across approximately 120 locations in 16 districts of Cabo Delgado and Niassa."
+    },
+    {
+     "fact": "绑架占袭击比例从今年上半年的29%升至最近一个季度的56%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Abductions, used to obtain ransom and recruits, rose from 29% of attacks in the first half of the year to 56% in the most recent quarter."
+    },
+    {
+     "fact": "部分快速反应部队据称长期驻守固定阵地，执行普通驻防部队任务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "some have reportedly remained in static positions for months, performing the work of ordinary garrison forces."
+    }
+   ],
+   "uncertainties": [
+    "报道为单一来源，尚未获得交叉验证",
+    "部分快速反应部队长期驻守固定阵地的说法为据称，尚未证实",
+    "袭击次数、地点数量及绑架比例数据来自欧盟军事援助团指挥官单方陈述"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_2539945b9b9d99f0",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

@@ -1,0 +1,117 @@
+{
+ "label": "S5979baea",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "31c7dcaa054caec86e460a7fccf287bc7727c5aac03a4c8d1b207fcb4fb2d078",
+ "tokens": {
+  "input_tokens": 2379,
+  "output_tokens": 512,
+  "total_tokens": 2891
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "美国佛罗里达州一架私人飞机坠毁，造成九人死亡",
+   "summary_zh": "一架里尔60型私人飞机在佛罗里达州一个居民区坠毁，机上九人全部遇难。飞机撞击地面后形成大坑并引发爆炸，燃烧的残骸散落在住宅和商业设施附近。当局疏散了约600名居民，美国联邦航空管理局和国家运输安全委员会已展开调查。",
+   "event_type": "transport_disruption",
+   "country_iso3": "USA",
+   "location": {
+    "country_iso3": "USA",
+    "admin1": "佛罗里达州",
+    "city": null,
+    "site": "棕榈滩县一居民区",
+    "raw_text": "zona residencial do Estado norte-americano da Flórida, no condado de Palm Beach"
+   },
+   "key_facts": [
+    {
+     "fact": "一架里尔60型私人飞机在佛罗里达州居民区坠毁，机上九人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Um avião privado do tipo Learjet 60 despenhou-se, domingo, numa zona residencial do Estado norte-americano da Flórida, provocando a morte das nove pessoas que seguiam a bordo."
+    },
+    {
+     "fact": "飞机从得克萨斯州奥斯汀起飞，目的地为巴哈马北伊柳塞拉机场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "O aparelho tinha partido de Austin, no Estado do Texas, com destino ao aeroporto de North Eleuthera, nas Bahamas."
+    },
+    {
+     "fact": "撞击形成大坑并引发爆炸，当局疏散约600名居民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A violência do impacto obrigou as autoridades a retirar cerca de 600 moradores de uma comunidade residencial próxima"
+    },
+    {
+     "fact": "美国联邦航空管理局和国家运输安全委员会已展开调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A Administração Federal de Aviação (FAA) e o Conselho Nacional de Segurança nos Transportes (NTSB) dos Estados Unidos anunciaram a abertura de uma investigação para apurar as causas do acidente."
+    }
+   ],
+   "uncertainties": [
+    "机组曾报告飞机结冰和中等湍流问题，但事故原因尚未确定",
+    "遇难者身份尚未公布",
+    "目前仅有一个来源报道该事件，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "美国佛罗里达州一架私人飞机坠毁，造成九人死亡",
+   "summary_zh": "一架里尔60型私人飞机在佛罗里达州一个居民区坠毁，机上九人全部遇难。飞机撞击地面后形成大坑并引发爆炸，燃烧的残骸散落在住宅和商业设施附近。当局疏散了约600名居民，美国联邦航空管理局和国家运输安全委员会已展开调查。",
+   "event_type": "transport_disruption",
+   "country_iso3": "USA",
+   "location": {
+    "country_iso3": "USA",
+    "admin1": "佛罗里达州",
+    "city": null,
+    "site": "棕榈滩县一居民区",
+    "raw_text": "zona residencial do Estado norte-americano da Flórida, no condado de Palm Beach"
+   },
+   "key_facts": [
+    {
+     "fact": "一架里尔60型私人飞机在佛罗里达州居民区坠毁，机上九人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Um avião privado do tipo Learjet 60 despenhou-se, domingo, numa zona residencial do Estado norte-americano da Flórida, provocando a morte das nove pessoas que seguiam a bordo."
+    },
+    {
+     "fact": "飞机从得克萨斯州奥斯汀起飞，目的地为巴哈马北伊柳塞拉机场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "O aparelho tinha partido de Austin, no Estado do Texas, com destino ao aeroporto de North Eleuthera, nas Bahamas."
+    },
+    {
+     "fact": "撞击形成大坑并引发爆炸，当局疏散约600名居民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A violência do impacto obrigou as autoridades a retirar cerca de 600 moradores de uma comunidade residencial próxima"
+    },
+    {
+     "fact": "美国联邦航空管理局和国家运输安全委员会已展开调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A Administração Federal de Aviação (FAA) e o Conselho Nacional de Segurança nos Transportes (NTSB) dos Estados Unidos anunciaram a abertura de uma investigação para apurar as causas do acidente."
+    }
+   ],
+   "uncertainties": [
+    "机组曾报告飞机结冰和中等湍流问题，但事故原因尚未确定",
+    "遇难者身份尚未公布",
+    "目前仅有一个来源报道该事件，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_2d42b3895979baea",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}
