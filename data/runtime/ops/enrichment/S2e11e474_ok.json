@@ -1,0 +1,123 @@
+{
+ "label": "S2e11e474",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d5eaa50bb8d594e26956d991ee5d49ab60e2e706ebe921cc4d4753341b2213f3",
+ "tokens": {
+  "input_tokens": 2813,
+  "output_tokens": 464,
+  "total_tokens": 3277
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔道路安全局：2025年99.24%交通事故与人为行为相关，致1245人死亡",
+   "summary_zh": "尼日尔道路安全局（ANISER）局长阿布·蒙塔里博士表示，2025年尼日尔99.24%的道路交通事故与人为行为相关，全年造成1245人死亡。官方统计显示，超速、不让行、疏忽等是主要人为因素。2025年全国记录7116起人身伤亡事故，较2024年下降11.26%，但死亡人数上升12.56%。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": null,
+    "raw_text": "Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔道路安全局称2025年99.24%的道路交通事故与人为行为相关",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "99,24% des accidents de la route au Niger sont liés aux comportements humains"
+    },
+    {
+     "fact": "2025年尼日尔道路交通事故造成1245人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "qui ont fait 1245 morts en 2025"
+    },
+    {
+     "fact": "2025年全国记录7116起人身伤亡事故，较2024年下降11.26%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En 2025, il est enregistré au plan national 7116 accidents corporels en baisse de 11,26% par rapport à 2024"
+    },
+    {
+     "fact": "死亡人数较上年上升12.56%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ils ont causé 1245 tuées en hausse de 12,56%"
+    },
+    {
+     "fact": "超速占人为因素的40.76%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’excès de vitesse avec 40,76 %"
+    }
+   ],
+   "uncertainties": [
+    "数据来自尼日尔官方通讯社单一来源报道，尚未获得其他独立来源交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔道路安全局：2025年99.24%交通事故与人为行为相关，致1245人死亡",
+   "summary_zh": "尼日尔道路安全局（ANISER）局长阿布·蒙塔里博士表示，2025年尼日尔99.24%的道路交通事故与人为行为相关，全年造成1245人死亡。官方统计显示，超速、不让行、疏忽等是主要人为因素。2025年全国记录7116起人身伤亡事故，较2024年下降11.26%，但死亡人数上升12.56%。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": null,
+    "raw_text": "Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔道路安全局称2025年99.24%的道路交通事故与人为行为相关",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "99,24% des accidents de la route au Niger sont liés aux comportements humains"
+    },
+    {
+     "fact": "2025年尼日尔道路交通事故造成1245人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "qui ont fait 1245 morts en 2025"
+    },
+    {
+     "fact": "2025年全国记录7116起人身伤亡事故，较2024年下降11.26%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En 2025, il est enregistré au plan national 7116 accidents corporels en baisse de 11,26% par rapport à 2024"
+    },
+    {
+     "fact": "死亡人数较上年上升12.56%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ils ont causé 1245 tuées en hausse de 12,56%"
+    },
+    {
+     "fact": "超速占人为因素的40.76%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’excès de vitesse avec 40,76 %"
+    }
+   ],
+   "uncertainties": [
+    "数据来自尼日尔官方通讯社单一来源报道，尚未获得其他独立来源交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_f2dd9eaf2e11e474",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

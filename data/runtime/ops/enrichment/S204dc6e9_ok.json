@@ -1,0 +1,115 @@
+{
+ "label": "S204dc6e9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "fd7aa3442c3899af8dff606112fc4026c60c835d02da5c218a0056bfc67639f5",
+ "tokens": {
+  "input_tokens": 2322,
+  "output_tokens": 569,
+  "total_tokens": 2891
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "迪尔库农村地区发生火灾，近千人受影响（民防总局）",
+   "summary_zh": "据尼日尔民防总局通报，2026年10月24日迪尔库农村地区阿尔吉村的椰枣林发生猛烈火灾，近千人受影响，多公顷椰枣树和蔬菜作物被毁。比尔马省省长于10月27日前往现场查看灾情并慰问受灾民众。民防总局10月28日统计显示，173户家庭、981人受影响，1197棵椰枣树和185处菜园被烧毁。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "比尔马省",
+    "city": "迪尔库",
+    "site": "阿尔吉村椰枣林",
+    "raw_text": "la palmeraie de la commune rurale de Dirkou au village d’Argui"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年10月24日迪尔库农村地区阿尔吉村椰枣林发生猛烈火灾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le 24 octobre 2026 un violent incendie s’est déclaré dans la palmeraie de la commune rurale de Dirkou au village d’Argui"
+    },
+    {
+     "fact": "火灾影响近千人，烧毁多公顷椰枣树和蔬菜作物",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "affectant près de mille personnes et détruisant plusieurs hectares des dattiers et des cultures maraichères"
+    },
+    {
+     "fact": "民防总局10月28日统计：173户家庭、981人受影响，1197棵椰枣树和185处菜园被毁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le bilan établi par la DGPC, le 28 octobre 2026, fait état de 173 ménages impactés, touchant 981 personnes. Ces incendies ont également détruit 1197 dattiers et consumé 185 jardins de cultures maraichères."
+    },
+    {
+     "fact": "比尔马省省长于10月27日前往阿尔吉村查看灾情并慰问受灾民众",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le mardi 27 octobre 2026, le préfet du département de Bilma, le capitaine Lamine Hamet, s’est rendu à Eyni, dans le village d’Argui, pour constater les dégâts"
+    }
+   ],
+   "uncertainties": [
+    "火灾原因尚未说明",
+    "目前仅尼日尔官方通讯社单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "迪尔库农村地区发生火灾，近千人受影响（民防总局）",
+   "summary_zh": "据尼日尔民防总局通报，2026年10月24日迪尔库农村地区阿尔吉村的椰枣林发生猛烈火灾，近千人受影响，多公顷椰枣树和蔬菜作物被毁。比尔马省省长于10月27日前往现场查看灾情并慰问受灾民众。民防总局10月28日统计显示，173户家庭、981人受影响，1197棵椰枣树和185处菜园被烧毁。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "比尔马省",
+    "city": "迪尔库",
+    "site": "阿尔吉村椰枣林",
+    "raw_text": "la palmeraie de la commune rurale de Dirkou au village d’Argui"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年10月24日迪尔库农村地区阿尔吉村椰枣林发生猛烈火灾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le 24 octobre 2026 un violent incendie s’est déclaré dans la palmeraie de la commune rurale de Dirkou au village d’Argui"
+    },
+    {
+     "fact": "火灾影响近千人，烧毁多公顷椰枣树和蔬菜作物",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "affectant près de mille personnes et détruisant plusieurs hectares des dattiers et des cultures maraichères"
+    },
+    {
+     "fact": "民防总局10月28日统计：173户家庭、981人受影响，1197棵椰枣树和185处菜园被毁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le bilan établi par la DGPC, le 28 octobre 2026, fait état de 173 ménages impactés, touchant 981 personnes. Ces incendies ont également détruit 1197 dattiers et consumé 185 jardins de cultures maraichères."
+    },
+    {
+     "fact": "比尔马省省长于10月27日前往阿尔吉村查看灾情并慰问受灾民众",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le mardi 27 octobre 2026, le préfet du département de Bilma, le capitaine Lamine Hamet, s’est rendu à Eyni, dans le village d’Argui, pour constater les dégâts"
+    }
+   ],
+   "uncertainties": [
+    "火灾原因尚未说明",
+    "目前仅尼日尔官方通讯社单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_d7f913e4204dc6e9",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
