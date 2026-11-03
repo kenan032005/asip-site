@@ -190,10 +190,19 @@ class DeepSeekV4FlashProvider(BaseAIProvider):
         from scripts.ops import ai_ledger as _ai_budget
         while attempt < self.max_retries:
             attempt += 1
+            # ── P0 HOTFIX 预算闸门：必须在**真实 HTTP 请求之前**阻断 ──────────
+            # 额度不足属于**正常限流**，不是故障：返回 deferred 结果（0 付费、
+            # 不计 token、不写结果缓存），由调用方停止消费并正常退出。
+            # 绝不能让 BudgetExceeded 冒泡成进程崩溃 —— 那会使 post Job 失败、
+            # Commit state 被跳过、预算与 processed_hashes 回退，从而对同一批
+            # 输入重复付费（2026-11-03 生产事故的完整链路）。
             try:
-                # asip5：每次真实 HTTP 尝试（含内部重试）都计入运行预算；
-                # 超限 → BudgetExceeded 直接终止（fail-closed，不再发请求）。
                 _ai_budget.charge_attempt(component=str(task.get("task_type") or ""))
+            except _ai_budget.BudgetExceeded as be:
+                return self._deferred(tid, be.deferred_reason, str(be))
+            except _ai_budget.BudgetStateUnavailable as bu:
+                return self._deferred(tid, bu.deferred_reason, str(bu))
+            try:
                 return self._call_api(system, user, tid, attempt,
                                       task.get("max_output_tokens"),
                                       thinking, reasoning_effort)
@@ -209,9 +218,6 @@ class DeepSeekV4FlashProvider(BaseAIProvider):
                 last_err = "transport_error:%s" % type(e).__name__
                 time.sleep(self._backoff(attempt))
                 continue
-            except (_ai_budget.BudgetExceeded, _ai_budget.BudgetStateUnavailable):
-                # 预算/账本口径不可验证 → fail-closed，直接终止本组件的付费
-                raise
             except Exception as e:
                 return self._fail(tid, "provider_error:%s" % str(e)[:80], attempt)
         return self._fail(tid, "retry_exhausted:%s" % last_err, attempt, last_info)
@@ -350,6 +356,27 @@ class DeepSeekV4FlashProvider(BaseAIProvider):
                            "input_tokens": None, "output_tokens": None,
                            "total_tokens": None,
                            "billing_mode": "paid", "estimated_cost": None}}
+
+    def _deferred(self, tid, reason, message):
+        """预算闸门在**发请求前**拦下：明确标记"未调用、未计费、未成功"。
+
+        `deferred=True` 是调用方唯一可靠的判别依据：
+        - 不是 succeeded（绝不写 processed_hashes / 不写 canonical 回写）；
+        - 不是 failed（不触发重试、不让 Job 失败）；
+        - billing_mode=not_charged、token 全 null（未产生任何费用）。
+        """
+        return {"task_id": tid, "status": reason, "deferred": True,
+                "deferred_reason": reason,
+                "result": {"error": {"code": reason, "message": str(message)[:200]},
+                           "credential_status": self.credential_status,
+                           "provider_status": "not_requested",
+                           "requested_model": FLASH_MODEL, "returned_model": None,
+                           "http_status": None,
+                           "attempt_count": 0,
+                           "token_usage_available": False,
+                           "input_tokens": None, "output_tokens": None,
+                           "total_tokens": None,
+                           "billing_mode": "not_charged", "estimated_cost": None}}
 
     # ── smoke（§七）：最小 JSON 请求，验证连接与 Flash 模型 ──
     def smoke(self):

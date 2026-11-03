@@ -233,11 +233,33 @@ def coverage(legacy_token_usage, records=None):
 
 # ── 运行级预算（AI 调用上限；HTTP 重试也计入）────────────────────────
 class BudgetExceeded(RuntimeError):
-    pass
+    """额度用尽 —— 这是**限流**，不是故障。
+
+    P0 HOTFIX（2026-11-03 生产事故）：预算耗尽被当成硬故障抛出后，付费子进程
+    非零退出 → orchestrator 退出码 1 → post Job 失败 → Commit state 被跳过 →
+    预算/processed_hashes 回退到上一轮 → 下一轮又从旧额度开始，对**同一批输入
+    重复付费**（实测 12 轮 × 3 次完全相同的输入 token 2813/2322/2175）。
+
+    因此：
+    - `deferred = True` 供调用方识别"限流而非故障"；
+    - 调用方必须转成 `deferred_budget_exhausted`：0 调用、不记成功、
+      不写 processed_hashes、不写 canonical 回写，且**不让 Job 失败**；
+    - 抛出前**不得**自增计数（否则产生 41/40、42/40 之类的虚增记录）。
+    """
+
+    deferred = True
+    deferred_reason = "deferred_budget_exhausted"
 
 
 class BudgetStateUnavailable(RuntimeError):
-    """预算状态不可读/不可写 → 无法保证上限 → 禁止继续付费（fail-closed）。"""
+    """预算状态不可读/不可写 → 无法保证上限 → 禁止继续付费（fail-closed）。
+
+    同样按"限流"处理（`deferred = True`）：**绝不花钱**，但也不让 checkpoint 失败
+    —— 否则又会触发"预算回退 → 重复付费"的同一条链路。
+    """
+
+    deferred = True
+    deferred_reason = "deferred_budget_ledger_unavailable"
 
 
 #: 跨进程共享的预算状态（同一轮内所有 AI 子进程共用一份额度）。
@@ -371,15 +393,43 @@ def budget_state():
     return st
 
 
-def budget_remaining():
-    """本轮剩余可调用次数（跨进程共享口径）。
+def _daily_used_today(doc):
+    """共享状态里的"今日已用"（跨日 → 视为 0，与 charge_attempt 的归零语义一致）。"""
+    if doc.get("daily_date") != _daily_key():
+        return 0
+    try:
+        return max(0, int(doc.get("daily_used") or 0))
+    except (TypeError, ValueError):
+        return 0
 
-    共享状态不可读 → BudgetStateUnavailable（fail-closed：无法保证上限就不许付费）。
+
+def budget_breakdown():
+    """预算明细（单轮 + 日累计 + 有效余额）。共享状态不可读 → 抛 fail-closed。
+
+    P0 HOTFIX：**唯一**的"还能花几次"口径是 `remaining = min(单轮剩余, 日剩余)`。
+    此前的 budget_remaining() 只看单轮，于是在日额度已耗尽时仍返回 20，
+    让调用方以为还能花 20 次 → 真实 HTTP 发出 → 撞日上限崩掉整个 Job。
     """
-    cap, _daily = _budget_caps()
+    cap, daily_cap = _budget_caps()
     doc = _read_budget_state()
     used = int(doc.get("used", 0)) if doc.get("scope") == _budget_scope() else 0
-    return max(0, cap - used)
+    daily_used = _daily_used_today(doc)
+    run_rem = max(0, cap - used)
+    daily_rem = max(0, daily_cap - daily_used)
+    return {"cap": cap, "used": used, "run_remaining": run_rem,
+            "daily_cap": daily_cap, "daily_used": daily_used,
+            "daily_remaining": daily_rem,
+            "remaining": min(run_rem, daily_rem),
+            "scope": _budget_scope(), "daily_date": _daily_key()}
+
+
+def budget_remaining():
+    """本轮**实际**还能调用几次 = min(单轮剩余, 日累计剩余)。
+
+    P0 HOTFIX：必须同时受**单轮**与**日累计**约束（此前只算单轮）。
+    共享状态不可读 → BudgetStateUnavailable（fail-closed：无法保证上限就不许付费）。
+    """
+    return budget_breakdown()["remaining"]
 
 
 def charge_attempt(component=""):
@@ -392,6 +442,10 @@ def charge_attempt(component=""):
       homepage_brief / reports）共用**同一份**额度 —— 此前每个子进程各自拿到
       完整额度，实际上限是 N×cap。
     - 状态不可读/不可写 → BudgetStateUnavailable（fail-closed，禁止继续付费）。
+
+    P0 HOTFIX（2016-11-03 事故）：**先判额度、再决定记账**。越界时在自增之前
+    抛 BudgetExceeded —— 此时既没有自增、也没有发出 HTTP 请求，因此既不会真实
+    花钱，也不会产生 `41/40`、`42/40` 这类"没花钱却记了一笔"的虚增记录。
     """
     cap, daily_cap = _budget_caps()
     scope = _budget_scope()
@@ -404,10 +458,19 @@ def charge_attempt(component=""):
         if doc.get("daily_date") != today:  # 新的一天 → 日累计归零
             doc["daily_date"] = today
             doc["daily_used"] = 0
+        used = int(doc.get("used", 0))
+        daily_used = int(doc.get("daily_used", 0))
+        # ★ 闸门在**真实 HTTP 请求之前**：越界即抛，不写盘、不自增、不发请求。
+        if used + 1 > cap:
+            raise BudgetExceeded("ai run cap exceeded: %d/%d (component=%s)"
+                                 % (used + 1, cap, component))
+        if daily_used + 1 > daily_cap:
+            raise BudgetExceeded("ai daily cap exceeded: %d/%d (component=%s)"
+                                 % (daily_used + 1, daily_cap, component))
+        used += 1
+        daily_used += 1
         doc["cap"] = cap
         doc["daily_cap"] = daily_cap
-        used = int(doc.get("used", 0)) + 1
-        daily_used = int(doc.get("daily_used", 0)) + 1
         doc["used"] = used
         doc["daily_used"] = daily_used
         doc["updated_at"] = _now_iso()
@@ -415,12 +478,6 @@ def charge_attempt(component=""):
         _write_budget_state(doc)            # 不可写 → fail-closed
     _BUDGET["cap"] = cap
     _BUDGET["used"] = used
-    if used > cap:
-        raise BudgetExceeded("ai run cap exceeded: %d/%d (component=%s)"
-                             % (used, cap, component))
-    if daily_used > daily_cap:
-        raise BudgetExceeded("ai daily cap exceeded: %d/%d (component=%s)"
-                             % (daily_used, daily_cap, component))
     return used
 
 

@@ -413,6 +413,64 @@ def commit_now(message, after="state", expect=None, push=True, branch="productio
         raise CheckpointError("exception", str(e)[:300])
 
 
+# ── 失败路径专用：只提交 AI 预算/账本（防"预算回退 → 重复付费"）────────
+BUDGET_PATHS = [
+    "data/runtime/ops/ai_budget_state.json",
+    "data/runtime/ops/ai_usage.jsonl",
+    "data/runtime/ops/ai_usage_summary.json",
+]
+
+
+def commit_budget_only(message="ops: ai budget checkpoint", branch="production-state",
+                       push=True):
+    """只把 AI 预算/账本文件写回 state 分支（post Job 失败时的兜底提交）。
+
+    P0 HOTFIX（2026-11-03 事故）：预算计数只在 checkpoint 成功时才落盘，一旦
+    post Job 失败 → Commit state 被跳过 → 下一轮又从**旧额度**开始
+    （实测 daily_used 长期钉在 37，12 轮各自重新花掉 3 次真实调用）。
+    因此失败路径必须**与 checkpoint 成败解耦**地提交预算，确保"已花掉的额度
+    永不回退"。只动这 3 个文件，不触碰任何业务数据。
+    """
+    info = {"mode": "budget_only", "branch": branch, "paths": [], "stages": {}}
+    info["stages"]["guard"] = assert_state_worktree(
+        expected_remote_substr=os.environ.get("ASIP_EXPECT_REPO_SUBSTR", "asip-site"))
+    for _k, _v in (("user.name", "asip-automation"),
+                   ("user.email", "asip-automation@users.noreply.github.com")):
+        _cur = _git(["config", "--get", _k], timeout=30)
+        if _cur.returncode != 0 or not (_cur.stdout or "").strip():
+            _git_ok(["config", _k, _v], "git_identity")
+    copied = []
+    for rel in BUDGET_PATHS:
+        src = ROOT / rel
+        if not src.exists():
+            continue
+        dst = STATE_DIR / rel
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(str(src), str(dst))
+        copied.append(rel)
+    if not copied:
+        raise CheckpointError("budget_copy", "no budget files found under %s" % ROOT)
+    info["paths"] = copied
+    _git_ok(["add", "-f"] + copied, "add")
+    staged = (_git_ok(["diff", "--cached", "--name-only"], "status").stdout or "").strip()
+    if not staged:
+        info["committed"] = False
+        info["detail"] = "no_budget_change"
+        return info
+    _git_ok(["commit", "-m", message], "commit")
+    head = _git_ok(["rev-parse", "HEAD"], "rev-parse").stdout.strip()
+    if push:
+        _git_ok(["push", "origin", "HEAD:%s" % branch], "push", timeout=300)
+        remote = _remote_sha(branch)
+        if remote != head:
+            raise CheckpointError("verify_remote",
+                                  "budget push ok but remote %s != local %s"
+                                  % (remote, head))
+    info["committed"] = True
+    info["sha"] = head
+    return info
+
+
 def main(argv=None):
     """CLI：commit_state.py "<message>" [after] [--require-expect] [--expect-path P]
     [--expect-field F] [--expect-equals V] [--expect-fields a,b] [--branch B] [--no-push]
@@ -433,8 +491,20 @@ def main(argv=None):
                     help="不复制代码树内容（用于迁移/墓碑等 state_src 内已生成产物）")
     ap.add_argument("--migration", action="store_true",
                     help="迁移提交：强制校验墓碑/manifest/index/ids/分片/远端树")
+    ap.add_argument("--budget-only", action="store_true",
+                    help="失败路径兜底：只提交 AI 预算/账本文件（防预算回退重花）")
     ap.add_argument("--expect-items", type=int, default=20461)
     a = ap.parse_args(argv)
+
+    if a.budget_only:
+        try:
+            res = commit_budget_only(a.message, branch=a.branch, push=not a.no_push)
+        except CheckpointError as e:
+            print(json.dumps({"ok": False, "stage": e.stage, "error": str(e)},
+                             ensure_ascii=False))
+            return 1
+        print(json.dumps({"ok": True, **res}, ensure_ascii=False))
+        return 0
 
     expect = None
     if a.migration and not (a.expect_path or a.collection):

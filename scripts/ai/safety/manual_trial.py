@@ -509,6 +509,20 @@ def enrich_and_safe(prov, task_type, payload, label, telemetry, use_cache=True):
 
     if res is None:
         res = prov.submit_task(task)
+        if res.get("deferred"):
+            # P0 HOTFIX：预算闸门在真实 HTTP 之前拦下 → **不计 call、不写结果缓存、
+            # 不写 safety、绝不产出"已处理/已成功"记录**（否则会被误判为已富集，
+            # 后续不再重试，等于把"因预算跳过"当成"已完成"）。
+            return {"label": label, "task_type": task_type,
+                    "requested_model": model, "returned_model": None,
+                    "provider_status": res.get("status"),
+                    "deferred": True,
+                    "deferred_reason": (res.get("deferred_reason")
+                                        or res.get("status")),
+                    "cache_hit": False, "ai_input_hash": ai_hash,
+                    "status": "deferred_budget",
+                    "tokens": {"input_tokens": 0, "output_tokens": 0,
+                               "total_tokens": 0}}
         t["calls"] += 1
         t["cache_misses"] += 1
         rr0 = res.get("result") or {}

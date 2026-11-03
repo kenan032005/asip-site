@@ -108,6 +108,8 @@ def run_enrichment(kind, provider=None, state=None, ops_run=None, emit=lambda s:
     skipped = 0
     cached = 0
     held = 0
+    deferred = 0
+    deferred_reason = None
     out = ENRICH_OUT
     out.mkdir(parents=True, exist_ok=True)
     for it in items:
@@ -135,6 +137,17 @@ def run_enrichment(kind, provider=None, state=None, ops_run=None, emit=lambda s:
         label = ("S" if kind == "social" else "D") + "%s" % fid[-8:]
         rec = mt.enrich_and_safe(prov, task_type, it, label, telemetry,
                                  use_cache=use_cache)
+        if rec.get("deferred"):
+            # P0 HOTFIX：预算/账本闸门在真实 HTTP 之前拦下 → 停止继续消费。
+            # 关键：**不** mark_processed、**不** _write_back_canonical、**不**计入
+            # processed/ai_succeeded —— 否则"因预算跳过"会被永久记成"已富集"，
+            # 之后再也不重试。已成功的条目不回退，本轮正常退出（exit 0），
+            # 使 checkpoint 照常提交、预算计数持久化（不回退重花）。
+            deferred += 1
+            deferred_reason = rec.get("deferred_reason") or "deferred_budget_exhausted"
+            emit("DEFERRED_%s %s: %s -> 停止继续消费（0 付费、0 标记）"
+                 % (str(deferred_reason).upper(), kind, fid[-12:]))
+            break
         rec["event_id"] = fid if kind == "social" else None
         rec["disease_event_id"] = fid if kind != "social" else None
         rec["country_code"] = it.get("country_code") or it.get("country_iso3")
@@ -180,11 +193,13 @@ def run_enrichment(kind, provider=None, state=None, ops_run=None, emit=lambda s:
         ops_run["safety_held"] += held
     t = telemetry.get(task_type) or {}
     emit("ENRICHMENT %s: processed=%d skipped=%d cached_same_input=%d held=%d "
-         "calls=%d tokens=%d" % (
-             kind, processed, skipped, cached, held,
+         "deferred=%d calls=%d tokens=%d" % (
+             kind, processed, skipped, cached, held, deferred,
              t.get("calls", 0), t.get("total_tokens", 0)))
     return {"kind": kind, "processed": processed, "skipped": skipped,
             "cached_same_input": cached, "held": held,
+            "deferred_budget_exhausted": deferred,
+            "deferred_reason": deferred_reason,
             "ai_calls": t.get("calls", 0),
             "input_tokens": t.get("input_tokens", 0),
             "output_tokens": t.get("output_tokens", 0),
