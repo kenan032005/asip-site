@@ -1,0 +1,119 @@
+{
+ "label": "S67302b79",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "dcc07e1b5f05f703008246fb956007d95f521eb5b9bb9c55f2e719971632c170",
+ "tokens": {
+  "input_tokens": 2236,
+  "output_tokens": 409,
+  "total_tokens": 2645
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克马普托中央医院肿瘤科发生火灾，本应可预防",
+   "summary_zh": "据Zitamar News报道，马普托中央医院肿瘤科一栋近期翻新的建筑发生火灾，22名患者被安全疏散。报道指出，火灾起因尚未查明，但事件暴露出莫桑比克公共基础设施保护方面的更广泛缺陷。目前仅有一个来源报道此事，火灾原因及消防系统状况仍有待调查。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": null,
+    "city": "马普托",
+    "site": "马普托中央医院肿瘤科",
+    "raw_text": "Maputo Central Hospital’s oncology service"
+   },
+   "key_facts": [
+    {
+     "fact": "马普托中央医院肿瘤科发生火灾，22名患者被安全疏散",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The safe evacuation of all 22 patients from Maputo Central Hospital’s oncology service deserves recognition."
+    },
+    {
+     "fact": "火灾烧毁了这栋近期翻新建筑的大部分",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "How did a fire grow large enough to destroy much of a relatively recently renovated building"
+    },
+    {
+     "fact": "一名护士在约07:10闻到烟味后发出警报",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Reports indicate that a nurse raised the alarm at around 07:10 after smelling smoke."
+    },
+    {
+     "fact": "火灾直接原因尚未查明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The immediate cause remains unknown."
+    }
+   ],
+   "uncertainties": [
+    "火灾直接原因尚未查明",
+    "自动探测与报警系统是否安装、运行并有效尚待调查",
+    "电气系统是否经过检查、防火门是否有效尚待调查",
+    "目前仅有一个来源（Zitamar News）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克马普托中央医院肿瘤科发生火灾，本应可预防",
+   "summary_zh": "据Zitamar News报道，马普托中央医院肿瘤科一栋近期翻新的建筑发生火灾，22名患者被安全疏散。报道指出，火灾起因尚未查明，但事件暴露出莫桑比克公共基础设施保护方面的更广泛缺陷。目前仅有一个来源报道此事，火灾原因及消防系统状况仍有待调查。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": null,
+    "city": "马普托",
+    "site": "马普托中央医院肿瘤科",
+    "raw_text": "Maputo Central Hospital’s oncology service"
+   },
+   "key_facts": [
+    {
+     "fact": "马普托中央医院肿瘤科发生火灾，22名患者被安全疏散",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The safe evacuation of all 22 patients from Maputo Central Hospital’s oncology service deserves recognition."
+    },
+    {
+     "fact": "火灾烧毁了这栋近期翻新建筑的大部分",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "How did a fire grow large enough to destroy much of a relatively recently renovated building"
+    },
+    {
+     "fact": "一名护士在约07:10闻到烟味后发出警报",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Reports indicate that a nurse raised the alarm at around 07:10 after smelling smoke."
+    },
+    {
+     "fact": "火灾直接原因尚未查明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The immediate cause remains unknown."
+    }
+   ],
+   "uncertainties": [
+    "火灾直接原因尚未查明",
+    "自动探测与报警系统是否安装、运行并有效尚待调查",
+    "电气系统是否经过检查、防火门是否有效尚待调查",
+    "目前仅有一个来源（Zitamar News）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_961d04c467302b79",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

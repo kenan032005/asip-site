@@ -1,0 +1,117 @@
+{
+ "label": "Saf6c1908",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "9a7d714c81346311f82694caf5a93967f2d02160c249305e8f24bf7ca7da527f",
+ "tokens": {
+  "input_tokens": 2855,
+  "output_tokens": 479,
+  "total_tokens": 3334
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "马普托中央医院肿瘤科发生大火后，政府着手全面恢复服务",
+   "summary_zh": "莫桑比克马普托中央医院（HCM）肿瘤科发生大规模火灾，设施与设备被烧毁，政府表示将协调各方努力全面恢复该科室运转。总理玛丽亚·本温达·莱维视察医院，称政府与患者、家属及医护人员站在一起，并承诺肿瘤服务将继续运行。当局正在调查火灾原因与经过，损失评估和恢复工作同步进行。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": null,
+    "city": "马普托",
+    "site": "马普托中央医院（HCM）肿瘤科",
+    "raw_text": "Hospital Central de Maputo (HCM), serviços de Oncologia, cidade de Maputo"
+   },
+   "key_facts": [
+    {
+     "fact": "马普托中央医院肿瘤科发生大规模火灾，设施和设备被烧毁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "depois de um incêndio de grandes proporções ter consumido instalações e equipamentos da unidade hospitalar"
+    },
+    {
+     "fact": "政府承诺协调恢复肿瘤科全面运转",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "O Governo moçambicano garante que vai trabalhar de forma articulada para restaurar a plena operacionalidade dos serviços de Oncologia"
+    },
+    {
+     "fact": "总理玛丽亚·本温达·莱维视察医院并承诺肿瘤服务继续运行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A Primeira-Ministra, Maria Benvinda Levi, deslocou-se este domingo ao HCM ... os serviços de Oncologia vão continuar a funcionar"
+    },
+    {
+     "fact": "当局正在调查火灾原因与经过",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "as autoridades procuram apurar as circunstâncias e a origem do incêndio"
+    }
+   ],
+   "uncertainties": [
+    "火灾原因与起火经过尚未查明",
+    "损失规模尚未有具体数字",
+    "目前仅有一个来源（莫桑比克政府门户网站）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "马普托中央医院肿瘤科发生大火后，政府着手全面恢复服务",
+   "summary_zh": "莫桑比克马普托中央医院（HCM）肿瘤科发生大规模火灾，设施与设备被烧毁，政府表示将协调各方努力全面恢复该科室运转。总理玛丽亚·本温达·莱维视察医院，称政府与患者、家属及医护人员站在一起，并承诺肿瘤服务将继续运行。当局正在调查火灾原因与经过，损失评估和恢复工作同步进行。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": null,
+    "city": "马普托",
+    "site": "马普托中央医院（HCM）肿瘤科",
+    "raw_text": "Hospital Central de Maputo (HCM), serviços de Oncologia, cidade de Maputo"
+   },
+   "key_facts": [
+    {
+     "fact": "马普托中央医院肿瘤科发生大规模火灾，设施和设备被烧毁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "depois de um incêndio de grandes proporções ter consumido instalações e equipamentos da unidade hospitalar"
+    },
+    {
+     "fact": "政府承诺协调恢复肿瘤科全面运转",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "O Governo moçambicano garante que vai trabalhar de forma articulada para restaurar a plena operacionalidade dos serviços de Oncologia"
+    },
+    {
+     "fact": "总理玛丽亚·本温达·莱维视察医院并承诺肿瘤服务继续运行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A Primeira-Ministra, Maria Benvinda Levi, deslocou-se este domingo ao HCM ... os serviços de Oncologia vão continuar a funcionar"
+    },
+    {
+     "fact": "当局正在调查火灾原因与经过",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "as autoridades procuram apurar as circunstâncias e a origem do incêndio"
+    }
+   ],
+   "uncertainties": [
+    "火灾原因与起火经过尚未查明",
+    "损失规模尚未有具体数字",
+    "目前仅有一个来源（莫桑比克政府门户网站）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_560b72edaf6c1908",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}
