@@ -1,0 +1,148 @@
+{
+ "label": "S734cf869",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "35c209dde18191bf088978589af8aba6c6650396156db555553b98a3f8a62529",
+ "tokens": {
+  "input_tokens": 2645,
+  "output_tokens": 525,
+  "total_tokens": 3170
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"尼日利亚两例疑似病例尚在检测中，尚未确诊\", \"疫情结束所需时间尚不确定\", \"单一来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"尼日利亚两例疑似病例尚在检测中，尚未确诊\", \"疫情结束所需时间尚不确定\", \"单一来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "刚果（金）埃博拉疫情致逾5000人死亡，为该国有史以来最严重疫情",
+   "summary_zh": "据政府数据，刚果（金）持续暴发的埃博拉疫情已造成超过5000人死亡，确诊病例超过1.03万例，26个省份中有8个受影响。疫情于5月暴发，8月成为该国历史上最致命的一次，当前病死率为48.6%。疫情中心位于冲突地区伊图里省，给防控工作带来困难；肯尼亚、尼日利亚和乌干达也已报告确诊病例。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "伊图里省",
+    "city": null,
+    "site": null,
+    "raw_text": "Ituri province, north-east of DR Congo"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）埃博拉疫情已致超过5000人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than 5,000 people have died from an ongoing Ebola outbreak in the Democratic Republic of Congo, government data shows."
+    },
+    {
+     "fact": "确诊病例超过1.03万例，26个省份中有8个受影响",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eight of 26 provinces are now affected, with more than 10,300 confirmed cases."
+    },
+    {
+     "fact": "当前病死率为48.6%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The current case fatality rate is 48.6%."
+    },
+    {
+     "fact": "疫情中心位于冲突地区伊图里省",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the epicentre of the epidemic remains in the Ituri province, in the north-east of the country, which is a conflict zone, making it harder to contain the virus."
+    },
+    {
+     "fact": "肯尼亚、尼日利亚和乌干达已报告确诊病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cases have also been confirmed in Kenya, Nigeria and Uganda."
+    },
+    {
+     "fact": "一名护士在应对埃博拉警报时遇袭身亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a nurse was killed and another health worker seriously injured in an attack when responding to an Ebola alert."
+    }
+   ],
+   "uncertainties": [
+    "尼日利亚两例疑似病例尚在检测中，尚未确诊",
+    "疫情结束所需时间尚不确定",
+    "单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "刚果（金）埃博拉疫情致逾5000人死亡，为该国有史以来最严重疫情",
+   "summary_zh": "据政府数据，刚果（金）持续暴发的埃博拉疫情已造成超过5000人死亡，确诊病例超过1.03万例，26个省份中有8个受影响。疫情于5月暴发，8月成为该国历史上最致命的一次，当前病死率为48.6%。疫情中心位于冲突地区伊图里省，给防控工作带来困难；肯尼亚、尼日利亚和乌干达也已报告确诊病例。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "伊图里省",
+    "city": null,
+    "site": null,
+    "raw_text": "Ituri province, north-east of DR Congo"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）埃博拉疫情已致超过5000人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than 5,000 people have died from an ongoing Ebola outbreak in the Democratic Republic of Congo, government data shows."
+    },
+    {
+     "fact": "确诊病例超过1.03万例，26个省份中有8个受影响",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eight of 26 provinces are now affected, with more than 10,300 confirmed cases."
+    },
+    {
+     "fact": "当前病死率为48.6%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The current case fatality rate is 48.6%."
+    },
+    {
+     "fact": "疫情中心位于冲突地区伊图里省",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the epicentre of the epidemic remains in the Ituri province, in the north-east of the country, which is a conflict zone, making it harder to contain the virus."
+    },
+    {
+     "fact": "肯尼亚、尼日利亚和乌干达已报告确诊病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cases have also been confirmed in Kenya, Nigeria and Uganda."
+    },
+    {
+     "fact": "一名护士在应对埃博拉警报时遇袭身亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a nurse was killed and another health worker seriously injured in an attack when responding to an Ebola alert."
+    }
+   ],
+   "uncertainties": [
+    "尼日利亚两例疑似病例尚在检测中，尚未确诊",
+    "疫情结束所需时间尚不确定",
+    "单一来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_cd0cd3f8734cf869",
+ "disease_event_id": null,
+ "country_code": "CD"
+}
