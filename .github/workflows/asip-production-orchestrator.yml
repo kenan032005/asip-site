@@ -91,7 +91,7 @@ jobs:
       - name: Checkout release code
         uses: actions/checkout@v4
         with:
-          ref: b140e0aedd734bb8dcc9280d57b94a7c38bdc272
+          ref: a9574e520251b6e5c442ece6dcb0ec2cbc1bda35
           fetch-depth: 1
 
       - name: Checkout production state branch
@@ -438,7 +438,7 @@ jobs:
       - name: Checkout release code
         uses: actions/checkout@v4
         with:
-          ref: b140e0aedd734bb8dcc9280d57b94a7c38bdc272
+          ref: a9574e520251b6e5c442ece6dcb0ec2cbc1bda35
           fetch-depth: 1
 
       - name: Checkout production state branch
@@ -643,6 +643,16 @@ jobs:
             --expect-path data/runtime/ops/production_state.json \
             --expect-fields processed_hashes \
             --require-expect
+
+      # ── P0 HOTFIX（2026-11-03 事故）：失败路径也必须把 AI 预算/账本落盘 ──
+      # 事故链：预算耗尽被判为故障 → post Job 失败 → Commit state 被跳过 →
+      # 预算与 processed_hashes 回退到上一轮 → 下一轮对同一批输入重复付费。
+      # 因此预算计数必须与 checkpoint 成败**解耦**：只要花过钱，就一定写回。
+      - name: Persist AI budget on failure（fail-closed：预算不回退重花）
+        if: failure() && steps.orch.outputs.run_mode != 'shadow'
+        run: |
+          python scripts/ops/commit_state.py --budget-only \
+            "ops: ai budget checkpoint on failure (run ${{ github.run_id }})"
 
       - name: Trip breaker on state failure（fail-closed）
         # 任一步失败即尝试把熔断推到远端；本地已 strike，远端失败只记录（不掩盖原始错误）
