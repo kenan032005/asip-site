@@ -37,12 +37,23 @@ jobs:
           ref: 8777c226e55b65f229110c097ad9226e989df840
           fetch-depth: 1
 
-      - name: Checkout production state branch（数据快照）
+      - name: Checkout production state branch（数据快照，sparse 仅取所需目录）
         uses: actions/checkout@v4
         with:
           ref: production-state
           path: state_src
           fetch-depth: 1
+          # P0-FRESHNESS 可靠性修复：production-state 分支已十分庞大（含大量 .backups 与
+          # 数 MB 视图/事件文件），全量 checkout 在 CI 中长时间挂起（≥15min）导致部署卡死。
+          # 改用 sparse-checkout 仅拉取构建真正需要的目录，彻底规避挂起。
+          sparse-checkout: |
+            data/runtime/ops
+            data/canonical
+            data/disease
+            data/runtime/timeline
+            data/views
+            data/public
+          sparse-checkout-cone-mode: false
 
       - name: Setup Python
         uses: actions/setup-python@v5
