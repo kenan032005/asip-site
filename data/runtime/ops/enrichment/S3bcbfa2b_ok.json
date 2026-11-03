@@ -1,0 +1,129 @@
+{
+ "label": "S3bcbfa2b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "43669a32a7155b316b9ff94eab4272c68977bb8de9fdbd8b5749c09dd487e6c7",
+ "tokens": {
+  "input_tokens": 2267,
+  "output_tokens": 559,
+  "total_tokens": 2826
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "埃塞俄比亚总理让内阁部长参加军事训练",
+   "summary_zh": "埃塞俄比亚总理阿比·艾哈迈德让内阁部长及其他高级政府官员参加军事训练，称军队纪律有助于培养更强的领导者并推动国家发展。照片显示他在Hurso军事训练中心与部长、副部长及政府机构负责人一同参加军事演练。报道指出，此举在埃塞俄比亚较为罕见，且训练开始时间与持续时间尚不清楚。报道还提到，此事发生在埃塞俄比亚面临提格雷地区持续战斗、阿姆哈拉冲突和奥罗米亚不安全局势，以及与厄立特里亚紧张关系加剧的背景下。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": null,
+    "city": null,
+    "site": "Hurso军事训练中心",
+    "raw_text": "Hurso military training centre"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚总理阿比·艾哈迈德让内阁部长和高级政府官员参加军事训练",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ethiopian Prime Minister Abiy Ahmed has put his cabinet ministers and other senior government officials through military training"
+    },
+    {
+     "fact": "训练在Hurso军事训练中心进行，参加者包括联邦院议长、财政部长和卫生部长",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Photos shared by him on social media show him taking part in military exercises alongside ministers, deputy ministers and heads of government institutions at the Hurso military training centre."
+    },
+    {
+     "fact": "训练开始时间和持续时间尚不清楚",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It is unclear when the training began or how long it is expected to last."
+    },
+    {
+     "fact": "报道称埃塞俄比亚面临提格雷地区持续战斗、阿姆哈拉冲突和奥罗米亚不安全局势",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The training comes as Ethiopia faces multiple security challenges, including continued fighting in parts of the northern Tigray region, conflict in Amhara and insecurity in Oromia."
+    },
+    {
+     "fact": "报道称埃塞俄比亚与厄立特里亚紧张关系加剧，存在重新爆发冲突的担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It also takes place amid heightened tensions with neighbouring Eritrea, with concerns over the possibility of renewed conflict between the two countries."
+    }
+   ],
+   "uncertainties": [
+    "训练开始时间尚不清楚",
+    "训练持续时间尚不清楚",
+    "与厄立特里亚可能重新爆发冲突属担忧，尚未证实",
+    "目前仅单一来源（BBC）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "埃塞俄比亚总理让内阁部长参加军事训练",
+   "summary_zh": "埃塞俄比亚总理阿比·艾哈迈德让内阁部长及其他高级政府官员参加军事训练，称军队纪律有助于培养更强的领导者并推动国家发展。照片显示他在Hurso军事训练中心与部长、副部长及政府机构负责人一同参加军事演练。报道指出，此举在埃塞俄比亚较为罕见，且训练开始时间与持续时间尚不清楚。报道还提到，此事发生在埃塞俄比亚面临提格雷地区持续战斗、阿姆哈拉冲突和奥罗米亚不安全局势，以及与厄立特里亚紧张关系加剧的背景下。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": null,
+    "city": null,
+    "site": "Hurso军事训练中心",
+    "raw_text": "Hurso military training centre"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚总理阿比·艾哈迈德让内阁部长和高级政府官员参加军事训练",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ethiopian Prime Minister Abiy Ahmed has put his cabinet ministers and other senior government officials through military training"
+    },
+    {
+     "fact": "训练在Hurso军事训练中心进行，参加者包括联邦院议长、财政部长和卫生部长",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Photos shared by him on social media show him taking part in military exercises alongside ministers, deputy ministers and heads of government institutions at the Hurso military training centre."
+    },
+    {
+     "fact": "训练开始时间和持续时间尚不清楚",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It is unclear when the training began or how long it is expected to last."
+    },
+    {
+     "fact": "报道称埃塞俄比亚面临提格雷地区持续战斗、阿姆哈拉冲突和奥罗米亚不安全局势",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The training comes as Ethiopia faces multiple security challenges, including continued fighting in parts of the northern Tigray region, conflict in Amhara and insecurity in Oromia."
+    },
+    {
+     "fact": "报道称埃塞俄比亚与厄立特里亚紧张关系加剧，存在重新爆发冲突的担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It also takes place amid heightened tensions with neighbouring Eritrea, with concerns over the possibility of renewed conflict between the two countries."
+    }
+   ],
+   "uncertainties": [
+    "训练开始时间尚不清楚",
+    "训练持续时间尚不清楚",
+    "与厄立特里亚可能重新爆发冲突属担忧，尚未证实",
+    "目前仅单一来源（BBC）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_0c1ad1d73bcbfa2b",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

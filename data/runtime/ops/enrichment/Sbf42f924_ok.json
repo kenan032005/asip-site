@@ -1,0 +1,136 @@
+{
+ "label": "Sbf42f924",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a98defe672d3b68933a2020c00877725277ddef645e6528717f9d0602dd5ee6c",
+ "tokens": {
+  "input_tokens": 2717,
+  "output_tokens": 588,
+  "total_tokens": 3305
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅有一个来源（RFI）报道，尚缺乏交叉验证\", \"律师所称判决量刑过重、侵犯创作自由属其单方主张\"]",
+    "after": "[\"目前仅有一个来源（RFI）报道，尚缺乏交叉验证\", \"律师所称判决量刑过重、侵犯创作自由属其单方主张\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "摩洛哥：一名漫画家因讽刺国王穆罕默德六世被判处4年实刑",
+   "summary_zh": "22岁的摩洛哥漫画家、涂鸦艺术家亚西尔·蒙比尔于2026年10月30日被判处4年实刑，并处罚金4万迪拉姆（约3600欧元），罪名是侮辱国王及公职人员。他此前因在Instagram发布讽刺国王的漫画于2026年6月被捕，已在卡萨布兰卡一所监狱羁押超过五个月。其律师已宣布提起上诉，摩洛哥人权协会及数百名请愿者以言论自由为由要求将其释放。",
+   "event_type": "other_security",
+   "country_iso3": "MAR",
+   "location": {
+    "country_iso3": "MAR",
+    "admin1": null,
+    "city": "卡萨布兰卡",
+    "site": null,
+    "raw_text": "une prison de Casablanca"
+   },
+   "key_facts": [
+    {
+     "fact": "摩洛哥漫画家亚西尔·蒙比尔因讽刺国王被判处4年实刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Yasser Mounbir, dessinateur de 22 ans et figure de la scène graffiti marocaine, a été condamné à 4 ans de prison ferme vendredi 30 octobre 2026 pour avoir dessiné et caricaturé le roi."
+    },
+    {
+     "fact": "判决另处罚金4万迪拉姆，约合3600欧元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Verdict : 4 ans de prison et 40 000 dirhams d'amende, soit 3 600 euros."
+    },
+    {
+     "fact": "他于2026年6月被捕，此前已在卡萨布兰卡一所监狱羁押超过五个月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Yasser Mounbir est arrêté en juin 2026 et placé en détention provisoire. Cela faisait déjà plus de cinq mois qu'il était en détention provisoire dans une prison de Casablanca."
+    },
+    {
+     "fact": "其律师已宣布提起上诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Son avocat, Maître Farouk, a annoncé dimanche faire appel de la décision."
+    },
+    {
+     "fact": "摩洛哥人权协会以言论自由为由要求释放他",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'Association marocaine des droits humains a exigé sa libération au nom de la liberté d'expression."
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证",
+    "律师所称判决量刑过重、侵犯创作自由属其单方主张"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "摩洛哥：一名漫画家因讽刺国王穆罕默德六世被判处4年实刑",
+   "summary_zh": "22岁的摩洛哥漫画家、涂鸦艺术家亚西尔·蒙比尔于2026年10月30日被判处4年实刑，并处罚金4万迪拉姆（约3600欧元），罪名是侮辱国王及公职人员。他此前因在Instagram发布讽刺国王的漫画于2026年6月被捕，已在卡萨布兰卡一所监狱羁押超过五个月。其律师已宣布提起上诉，摩洛哥人权协会及数百名请愿者以言论自由为由要求将其释放。",
+   "event_type": "other_security",
+   "country_iso3": "MAR",
+   "location": {
+    "country_iso3": "MAR",
+    "admin1": null,
+    "city": "卡萨布兰卡",
+    "site": null,
+    "raw_text": "une prison de Casablanca"
+   },
+   "key_facts": [
+    {
+     "fact": "摩洛哥漫画家亚西尔·蒙比尔因讽刺国王被判处4年实刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Yasser Mounbir, dessinateur de 22 ans et figure de la scène graffiti marocaine, a été condamné à 4 ans de prison ferme vendredi 30 octobre 2026 pour avoir dessiné et caricaturé le roi."
+    },
+    {
+     "fact": "判决另处罚金4万迪拉姆，约合3600欧元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Verdict : 4 ans de prison et 40 000 dirhams d'amende, soit 3 600 euros."
+    },
+    {
+     "fact": "他于2026年6月被捕，此前已在卡萨布兰卡一所监狱羁押超过五个月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Yasser Mounbir est arrêté en juin 2026 et placé en détention provisoire. Cela faisait déjà plus de cinq mois qu'il était en détention provisoire dans une prison de Casablanca."
+    },
+    {
+     "fact": "其律师已宣布提起上诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Son avocat, Maître Farouk, a annoncé dimanche faire appel de la décision."
+    },
+    {
+     "fact": "摩洛哥人权协会以言论自由为由要求释放他",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'Association marocaine des droits humains a exigé sa libération au nom de la liberté d'expression."
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证",
+    "律师所称判决量刑过重、侵犯创作自由属其单方主张",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_3838bf7fbf42f924",
+ "disease_event_id": null,
+ "country_code": "MA"
+}
