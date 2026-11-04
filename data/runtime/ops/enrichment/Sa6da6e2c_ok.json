@@ -1,0 +1,136 @@
+{
+ "label": "Sa6da6e2c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a71ff7d8e5fdae7ab08a356223cce37376267e88f77dd5913d7c2cf5cbad11ce",
+ "tokens": {
+  "input_tokens": 2182,
+  "output_tokens": 655,
+  "total_tokens": 2837
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"死因尚未确认，家属所称骑车摔倒的说法未获官方证实\", \"事件目前仅有一个来源（Le Pays Tchad）报道，尚缺乏交叉验证\"]",
+    "after": "[\"死因尚未确认，家属所称骑车摔倒的说法未获官方证实\", \"事件目前仅有一个来源（Le Pays Tchad）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得萨尔一名男子在巴尔-科河畔被发现死亡",
+   "summary_zh": "2026年10月30日上午，乍得萨尔市第六区迈恩加拉街区与巴尔-科河畔之间发现一名约五十岁男子死亡。死者名为纳托伊·阿拉·马马吉（绰号“马斯”），其家属称他周四离家前往PARCEC小额信贷机构领取工资后未归。据家属消息，他可能深夜在河边附近骑车摔倒，无人施救。安全部门已将遗体送往医院太平间，随后交还家属安葬。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "Moyen-Chari",
+    "city": "Sarh",
+    "site": "迈恩加拉街区与巴尔-科河畔之间（第六区）",
+    "raw_text": "entre le quartier Maïngara et les abords du fleuve Barh-Kôh, dans le 6ᵉ arrondissement de Sarh"
+   },
+   "key_facts": [
+    {
+     "fact": "一名约五十岁男子在萨尔第六区迈恩加拉街区与巴尔-科河畔之间被发现死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un homme d’une cinquantaine d’années a été retrouvé mort dans la matinée du vendredi 30 octobre 2026, entre le quartier Maïngara et les abords du fleuve Barh-Kôh, dans le 6ᵉ arrondissement de Sarh."
+    },
+    {
+     "fact": "死者名为纳托伊·阿拉·马马吉，绰号“马斯”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Identifié comme Natoï Allah Mammadji, dit « Mas »"
+    },
+    {
+     "fact": "据家属称，他周四离家前往PARCEC小额信贷机构领取工资后未归",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le défunt avait quitté son domicile jeudi pour percevoir son salaire auprès du PARCEC, une institution de microfinance"
+    },
+    {
+     "fact": "据家属消息，他可能深夜在河边附近骑车摔倒，无人施救",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Natoï Allah Mammadji aurait chuté à vélo à proximité du fleuve, tard dans la nuit, sans que personne ne puisse lui porter secours"
+    },
+    {
+     "fact": "安全部门将遗体送往乌特尔·博诺医生省医院太平间，随后交还家属安葬",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les autorités sécuritaires ont fait transporter le corps à la morgue de l’hôpital provincial Dr Outel Bono. La dépouille a ensuite été remise à la famille pour les obsèques"
+    }
+   ],
+   "uncertainties": [
+    "死因尚未确认，家属所称骑车摔倒的说法未获官方证实",
+    "事件目前仅有一个来源（Le Pays Tchad）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 60
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得萨尔一名男子在巴尔-科河畔被发现死亡",
+   "summary_zh": "2026年10月30日上午，乍得萨尔市第六区迈恩加拉街区与巴尔-科河畔之间发现一名约五十岁男子死亡。死者名为纳托伊·阿拉·马马吉（绰号“马斯”），其家属称他周四离家前往PARCEC小额信贷机构领取工资后未归。据家属消息，他可能深夜在河边附近骑车摔倒，无人施救。安全部门已将遗体送往医院太平间，随后交还家属安葬。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "Moyen-Chari",
+    "city": "Sarh",
+    "site": "迈恩加拉街区与巴尔-科河畔之间（第六区）",
+    "raw_text": "entre le quartier Maïngara et les abords du fleuve Barh-Kôh, dans le 6ᵉ arrondissement de Sarh"
+   },
+   "key_facts": [
+    {
+     "fact": "一名约五十岁男子在萨尔第六区迈恩加拉街区与巴尔-科河畔之间被发现死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un homme d’une cinquantaine d’années a été retrouvé mort dans la matinée du vendredi 30 octobre 2026, entre le quartier Maïngara et les abords du fleuve Barh-Kôh, dans le 6ᵉ arrondissement de Sarh."
+    },
+    {
+     "fact": "死者名为纳托伊·阿拉·马马吉，绰号“马斯”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Identifié comme Natoï Allah Mammadji, dit « Mas »"
+    },
+    {
+     "fact": "据家属称，他周四离家前往PARCEC小额信贷机构领取工资后未归",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le défunt avait quitté son domicile jeudi pour percevoir son salaire auprès du PARCEC, une institution de microfinance"
+    },
+    {
+     "fact": "据家属消息，他可能深夜在河边附近骑车摔倒，无人施救",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Natoï Allah Mammadji aurait chuté à vélo à proximité du fleuve, tard dans la nuit, sans que personne ne puisse lui porter secours"
+    },
+    {
+     "fact": "安全部门将遗体送往乌特尔·博诺医生省医院太平间，随后交还家属安葬",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les autorités sécuritaires ont fait transporter le corps à la morgue de l’hôpital provincial Dr Outel Bono. La dépouille a ensuite été remise à la famille pour les obsèques"
+    }
+   ],
+   "uncertainties": [
+    "死因尚未确认，家属所称骑车摔倒的说法未获官方证实",
+    "事件目前仅有一个来源（Le Pays Tchad）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 60
+  }
+ },
+ "event_id": "EVT_8aefbaf3a6da6e2c",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
