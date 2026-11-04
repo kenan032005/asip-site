@@ -5,7 +5,8 @@
  "logical_queries": 4,
  "cache_hits": 0,
  "status_counts": {
-  "429": 2
+  "429": 1,
+  "200": 1
  },
  "current_interval_s": 300.0,
  "min_interval_s": 20.0,
@@ -18,7 +19,9 @@
  "deadline_skips": 2,
  "hard_deadline_set": true,
  "actual_http_requests": 8,
- "body_class_counts": {},
+ "body_class_counts": {
+  "json_structure": 1
+ },
  "counting_note": "logical_queries/requests=逻辑查询数（已扣除缓存命中与预算拒绝）；physical_http_attempts/actual_http_requests=物理 HTTP 尝试数，**含 429/超时重试**（一次逻辑查询可产生多次物理尝试）；labeled_* 与 failure_reasons 均按 source_id×国家管线聚合，一组共享查询会被多个源重复计数，既不是逻辑查询数也不是物理请求数",
  "labeled_requests": 4,
  "labeled_success": 0,
