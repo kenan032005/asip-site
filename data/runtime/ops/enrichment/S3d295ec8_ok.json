@@ -1,0 +1,166 @@
+{
+ "label": "S3d295ec8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "087fcbd37606f7d9e4fc7198809489caf103c8282888bd3d1702f773a1a14a31",
+ "tokens": {
+  "input_tokens": 2403,
+  "output_tokens": 773,
+  "total_tokens": 3176
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"埃博拉疫情后续走向尚未完全确定，NCDC表示该国尚未脱离风险\", \"监测期内是否出现新增病例有待观察\"]",
+    "after": "[\"埃博拉疫情后续走向尚未完全确定，NCDC表示该国尚未脱离风险\", \"监测期内是否出现新增病例有待观察\", \"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚疾控中心：100亿奈拉卫生安全基金并非专用于埃博拉防控",
+   "summary_zh": "尼日利亚疾病控制与预防中心（NCDC）表示，联邦政府拨付的100亿奈拉用于加强该国整体卫生安全体系，而非专门用于埃博拉防控准备。NCDC总干事伊德里斯在阿布贾发布的声明中作出上述澄清，并称该资金覆盖埃博拉、拉沙热、霍乱、脑膜炎等多种公共卫生威胁的预防与应对。他同时表示，该笔资金仅约占《国家卫生安全行动计划2.0》年均需求1044亿奈拉的两成左右，资金仍显不足。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦政府拨付100亿奈拉用于加强整体卫生安全体系，而非专用于埃博拉防控准备",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Federal Government released N10 billion to strengthen Nigeria’s broader health security system, not exclusively for Ebola preparedness"
+    },
+    {
+     "fact": "NCDC总干事伊德里斯在阿布贾发表声明作出澄清",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Director-General of NCDC, Dr Jide Idris, said this in a statement issued in Abuja on Monday"
+    },
+    {
+     "fact": "该资金覆盖埃博拉、拉沙热、霍乱、脑膜炎、白喉、麻疹、猴痘及抗微生物耐药等多种公共卫生威胁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "including Ebola, Lassa fever, cholera and meningitis, among other diseases. Others include diphtheria, measles, Mpox and antimicrobial resistance"
+    },
+    {
+     "fact": "100亿奈拉直接拨付给NCDC，而非总统埃博拉病毒病工作组",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the N10 billion was released directly to NCDC, not the Presidential Task Force on Ebola Virus Disease"
+    },
+    {
+     "fact": "《国家卫生安全行动计划2.0》（2025至2029年）五年约需5220亿奈拉，年均约1044亿奈拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria’s National Action Plan for Health Security (NAPHS) 2.0, covering 2025 to 2029, required approximately N522 billion for implementation over five years"
+    },
+    {
+     "fact": "100亿奈拉约占该计划年均成本的两成",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the N10 billion represented about two per cent of the plan’s average annual cost"
+    },
+    {
+     "fact": "2026年10月20日NCDC实验室确认一例邦迪布焦型埃博拉输入病例，目前尼日利亚无活跃埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Bundibugyo Ebola case was confirmed in NCDC’s laboratory on Oct. 20, 2026 ... Nigeria currently had no active Ebola case"
+    },
+    {
+     "fact": "所有已识别接触者正接受每日监测，监测将持续至最后一名接触者完成21天医学观察",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "all identified contacts were under daily monitoring ... until the last identified contact completed the mandatory 21-day monitoring period"
+    }
+   ],
+   "uncertainties": [
+    "埃博拉疫情后续走向尚未完全确定，NCDC表示该国尚未脱离风险",
+    "监测期内是否出现新增病例有待观察"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚疾控中心：100亿奈拉卫生安全基金并非专用于埃博拉防控",
+   "summary_zh": "尼日利亚疾病控制与预防中心（NCDC）表示，联邦政府拨付的100亿奈拉用于加强该国整体卫生安全体系，而非专门用于埃博拉防控准备。NCDC总干事伊德里斯在阿布贾发布的声明中作出上述澄清，并称该资金覆盖埃博拉、拉沙热、霍乱、脑膜炎等多种公共卫生威胁的预防与应对。他同时表示，该笔资金仅约占《国家卫生安全行动计划2.0》年均需求1044亿奈拉的两成左右，资金仍显不足。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦政府拨付100亿奈拉用于加强整体卫生安全体系，而非专用于埃博拉防控准备",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Federal Government released N10 billion to strengthen Nigeria’s broader health security system, not exclusively for Ebola preparedness"
+    },
+    {
+     "fact": "NCDC总干事伊德里斯在阿布贾发表声明作出澄清",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Director-General of NCDC, Dr Jide Idris, said this in a statement issued in Abuja on Monday"
+    },
+    {
+     "fact": "该资金覆盖埃博拉、拉沙热、霍乱、脑膜炎、白喉、麻疹、猴痘及抗微生物耐药等多种公共卫生威胁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "including Ebola, Lassa fever, cholera and meningitis, among other diseases. Others include diphtheria, measles, Mpox and antimicrobial resistance"
+    },
+    {
+     "fact": "100亿奈拉直接拨付给NCDC，而非总统埃博拉病毒病工作组",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the N10 billion was released directly to NCDC, not the Presidential Task Force on Ebola Virus Disease"
+    },
+    {
+     "fact": "《国家卫生安全行动计划2.0》（2025至2029年）五年约需5220亿奈拉，年均约1044亿奈拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria’s National Action Plan for Health Security (NAPHS) 2.0, covering 2025 to 2029, required approximately N522 billion for implementation over five years"
+    },
+    {
+     "fact": "100亿奈拉约占该计划年均成本的两成",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the N10 billion represented about two per cent of the plan’s average annual cost"
+    },
+    {
+     "fact": "2026年10月20日NCDC实验室确认一例邦迪布焦型埃博拉输入病例，目前尼日利亚无活跃埃博拉病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Bundibugyo Ebola case was confirmed in NCDC’s laboratory on Oct. 20, 2026 ... Nigeria currently had no active Ebola case"
+    },
+    {
+     "fact": "所有已识别接触者正接受每日监测，监测将持续至最后一名接触者完成21天医学观察",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "all identified contacts were under daily monitoring ... until the last identified contact completed the mandatory 21-day monitoring period"
+    }
+   ],
+   "uncertainties": [
+    "埃博拉疫情后续走向尚未完全确定，NCDC表示该国尚未脱离风险",
+    "监测期内是否出现新增病例有待观察",
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_38a0caeb3d295ec8",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
