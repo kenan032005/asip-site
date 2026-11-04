@@ -1,0 +1,115 @@
+{
+ "label": "S1bdc3a6d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b608a3155ceb7e7f649efc5ca3cabb4d2e0a8c36ecbe6b09d6c418e1ce85f7ab",
+ "tokens": {
+  "input_tokens": 2191,
+  "output_tokens": 473,
+  "total_tokens": 2664
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "库拉地区社区冲突致25死22伤，39人被拘",
+   "summary_zh": "乍得西南部库拉地区发生Kreda与Kouka两社区间的武装冲突，双方交火造成至少25人死亡、22人受伤。冲突起因是一名Kreda族牧民在库拉地区一处水塘饮牛时与一名农民发生争执，随后开枪击中对方脚部，引发两社区大规模冲突。另有39人被拘捕。该事件目前为单一来源报道。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "库拉",
+    "site": "库拉地区一处水塘",
+    "raw_text": "zone de Koula, sud-ouest du Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "库拉地区社区间交火造成至少25人死亡、22人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des fusillades entre les deux camps ont fait au moins 25 morts et 22 blessés dans la zone de Koula"
+    },
+    {
+     "fact": "冲突双方为Kreda与Kouka两个社区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des affrontements opposant les communautés Kreda et Kouka ont ensanglanté le sud-ouest du pays"
+    },
+    {
+     "fact": "冲突起因是一名Kreda族牧民饮牛时与农民发生争执并开枪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un éleveur de la communauté de Kreda est allé abreuver son bétail dans un étang dans la zone de Koula. Une dispute ayant éclaté entre les deux hommes a dégénéré en violences armées. L’éleveur a tiré sur le pied de l’agriculteur"
+    },
+    {
+     "fact": "39人被拘捕",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "39 personnes interpellées"
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（Journal du Tchad）报道，尚缺乏交叉验证",
+    "伤亡与拘捕人数尚未获独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "库拉地区社区冲突致25死22伤，39人被拘",
+   "summary_zh": "乍得西南部库拉地区发生Kreda与Kouka两社区间的武装冲突，双方交火造成至少25人死亡、22人受伤。冲突起因是一名Kreda族牧民在库拉地区一处水塘饮牛时与一名农民发生争执，随后开枪击中对方脚部，引发两社区大规模冲突。另有39人被拘捕。该事件目前为单一来源报道。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "库拉",
+    "site": "库拉地区一处水塘",
+    "raw_text": "zone de Koula, sud-ouest du Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "库拉地区社区间交火造成至少25人死亡、22人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des fusillades entre les deux camps ont fait au moins 25 morts et 22 blessés dans la zone de Koula"
+    },
+    {
+     "fact": "冲突双方为Kreda与Kouka两个社区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des affrontements opposant les communautés Kreda et Kouka ont ensanglanté le sud-ouest du pays"
+    },
+    {
+     "fact": "冲突起因是一名Kreda族牧民饮牛时与农民发生争执并开枪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un éleveur de la communauté de Kreda est allé abreuver son bétail dans un étang dans la zone de Koula. Une dispute ayant éclaté entre les deux hommes a dégénéré en violences armées. L’éleveur a tiré sur le pied de l’agriculteur"
+    },
+    {
+     "fact": "39人被拘捕",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "39 personnes interpellées"
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（Journal du Tchad）报道，尚缺乏交叉验证",
+    "伤亡与拘捕人数尚未获独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_6f1b94b41bdc3a6d",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

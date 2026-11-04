@@ -1,0 +1,127 @@
+{
+ "label": "S2977d6d9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5901b4845fdcc217f6e17b0988d814e1a570a5d531c2a71a7aa44b6a10899718",
+ "tokens": {
+  "input_tokens": 2777,
+  "output_tokens": 595,
+  "total_tokens": 3372
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得总理视察医院，评估登革热患者救治情况",
+   "summary_zh": "在主持召开抗击登革热部际会议六天后，乍得总理阿拉·马耶·哈琳娜于2026年10月28日对首都两家大型医院进行突击视察，评估患者救治条件和医院运转情况。院方表示，尽管每日仍有新增病例，但疫情形势已得到控制。总理还就影响医院的医护人员罢工问题作出指示，要求尽快找到解决方案，以保障医疗服务连续性。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": "中乍友谊大学医院及国家参考大学医院",
+    "raw_text": "deux grandes structures hospitalières de la capitale : les Centres Hospitalo-Universitaires (CHU) de l’Amitié Tchad-Chine et celui de Référence Nationale"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得总理于2026年10月28日突击视察首都两家大型医院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Premier ministre, Chef du Gouvernement, Amb. ALLAH MAYE Halina, a effectué ce mercredi 28 octobre 2026, une visite inopinée dans deux grandes structures hospitalières de la capitale"
+    },
+    {
+     "fact": "此次视察旨在评估登革热患者救治条件及医院服务运转情况",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Elle vise notamment à apprécier les conditions de prise en charge des patients, à évaluer le fonctionnement des services hospitaliers"
+    },
+    {
+     "fact": "院方称尽管每日新增病例，疫情形势已得到控制",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Directeur général de l’établissement, Dr Oumar Hamdan Iguemir, a indiqué que la situation était sous contrôle, malgré l’enregistrement quotidien de nouveaux cas"
+    },
+    {
+     "fact": "总理就医护人员罢工问题指示尽快寻求解决方案",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Premier ministre a instruit les responsables de trouver rapidement des solutions, afin de préserver la continuité des prestations médicales"
+    },
+    {
+     "fact": "此次视察是10月22日部际会议的后续行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette visite intervient dans le prolongement direct de la réunion interministérielle du 22 octobre dernier"
+    }
+   ],
+   "uncertainties": [
+    "疫情“已得到控制”的说法仅来自医院院长单方面表述，未提供具体病例数据",
+    "医护人员罢工的具体诉求与规模未在文中说明",
+    "目前仅有一个来源（乍得总理府）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得总理视察医院，评估登革热患者救治情况",
+   "summary_zh": "在主持召开抗击登革热部际会议六天后，乍得总理阿拉·马耶·哈琳娜于2026年10月28日对首都两家大型医院进行突击视察，评估患者救治条件和医院运转情况。院方表示，尽管每日仍有新增病例，但疫情形势已得到控制。总理还就影响医院的医护人员罢工问题作出指示，要求尽快找到解决方案，以保障医疗服务连续性。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": "中乍友谊大学医院及国家参考大学医院",
+    "raw_text": "deux grandes structures hospitalières de la capitale : les Centres Hospitalo-Universitaires (CHU) de l’Amitié Tchad-Chine et celui de Référence Nationale"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得总理于2026年10月28日突击视察首都两家大型医院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Premier ministre, Chef du Gouvernement, Amb. ALLAH MAYE Halina, a effectué ce mercredi 28 octobre 2026, une visite inopinée dans deux grandes structures hospitalières de la capitale"
+    },
+    {
+     "fact": "此次视察旨在评估登革热患者救治条件及医院服务运转情况",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Elle vise notamment à apprécier les conditions de prise en charge des patients, à évaluer le fonctionnement des services hospitaliers"
+    },
+    {
+     "fact": "院方称尽管每日新增病例，疫情形势已得到控制",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Directeur général de l’établissement, Dr Oumar Hamdan Iguemir, a indiqué que la situation était sous contrôle, malgré l’enregistrement quotidien de nouveaux cas"
+    },
+    {
+     "fact": "总理就医护人员罢工问题指示尽快寻求解决方案",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Premier ministre a instruit les responsables de trouver rapidement des solutions, afin de préserver la continuité des prestations médicales"
+    },
+    {
+     "fact": "此次视察是10月22日部际会议的后续行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cette visite intervient dans le prolongement direct de la réunion interministérielle du 22 octobre dernier"
+    }
+   ],
+   "uncertainties": [
+    "疫情“已得到控制”的说法仅来自医院院长单方面表述，未提供具体病例数据",
+    "医护人员罢工的具体诉求与规模未在文中说明",
+    "目前仅有一个来源（乍得总理府）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_e08b2db42977d6d9",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
