@@ -1,0 +1,127 @@
+{
+ "label": "Sea6e1d21",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "77326b4eee0012dd40822f8ce6ef2d852b0624162b0948c82a22273f9d704f0b",
+ "tokens": {
+  "input_tokens": 2639,
+  "output_tokens": 524,
+  "total_tokens": 3163
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁：冒用克洛迪娜·塔隆名义诈骗案，检方求刑五年",
+   "summary_zh": "贝宁检方11月2日请求法院判处一名男子五年监禁，其中四年实刑，该男子被控冒用前第一夫人克洛迪娜·塔隆的身份实施网络诈骗。据称，原告通过Messenger与冒充前第一夫人者联系，对方承诺提供60万非洲法郎援助后增至200万，原告共转账91万非洲法郎，后向基金会核实才发现受骗。检方另请求判令被告赔偿受害者100万非洲法郎，判决预计于2026年12月21日作出。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Bénin"
+   },
+   "key_facts": [
+    {
+     "fact": "贝宁检方请求判处一名男子五年监禁，其中四年实刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministère public a requis lundi 2 novembre cinq ans d’emprisonnement, dont quatre ans ferme, contre un homme poursuivi pour une escroquerie en ligne"
+    },
+    {
+     "fact": "案件由贝宁打击经济犯罪和恐怖主义犯罪法院审理",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le dossier a été examiné par la Cour de répression des infractions économiques et du terrorisme (CRIET)"
+    },
+    {
+     "fact": "原告称共转账91万非洲法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La femme aurait effectué plusieurs versements, pour un total de 910 000 FCFA"
+    },
+    {
+     "fact": "检方另请求判令被告赔偿受害者100万非洲法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministère public a également demandé un million de FCFA de dommages et intérêts au profit de la victime"
+    },
+    {
+     "fact": "判决预计于2026年12月21日作出",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le verdict est attendu le 21 décembre 2026"
+    }
+   ],
+   "uncertainties": [
+    "诈骗细节依据原告陈述及媒体报道，尚未经法院判决确认",
+    "目前仅单一来源报道，尚缺乏交叉验证",
+    "判决结果尚未作出"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁：冒用克洛迪娜·塔隆名义诈骗案，检方求刑五年",
+   "summary_zh": "贝宁检方11月2日请求法院判处一名男子五年监禁，其中四年实刑，该男子被控冒用前第一夫人克洛迪娜·塔隆的身份实施网络诈骗。据称，原告通过Messenger与冒充前第一夫人者联系，对方承诺提供60万非洲法郎援助后增至200万，原告共转账91万非洲法郎，后向基金会核实才发现受骗。检方另请求判令被告赔偿受害者100万非洲法郎，判决预计于2026年12月21日作出。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Bénin"
+   },
+   "key_facts": [
+    {
+     "fact": "贝宁检方请求判处一名男子五年监禁，其中四年实刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministère public a requis lundi 2 novembre cinq ans d’emprisonnement, dont quatre ans ferme, contre un homme poursuivi pour une escroquerie en ligne"
+    },
+    {
+     "fact": "案件由贝宁打击经济犯罪和恐怖主义犯罪法院审理",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le dossier a été examiné par la Cour de répression des infractions économiques et du terrorisme (CRIET)"
+    },
+    {
+     "fact": "原告称共转账91万非洲法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La femme aurait effectué plusieurs versements, pour un total de 910 000 FCFA"
+    },
+    {
+     "fact": "检方另请求判令被告赔偿受害者100万非洲法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministère public a également demandé un million de FCFA de dommages et intérêts au profit de la victime"
+    },
+    {
+     "fact": "判决预计于2026年12月21日作出",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le verdict est attendu le 21 décembre 2026"
+    }
+   ],
+   "uncertainties": [
+    "诈骗细节依据原告陈述及媒体报道，尚未经法院判决确认",
+    "目前仅单一来源报道，尚缺乏交叉验证",
+    "判决结果尚未作出"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_ac4fa07eea6e1d21",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
