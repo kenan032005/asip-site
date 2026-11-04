@@ -1,0 +1,125 @@
+{
+ "label": "S294f90a7",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e515763d1d48550eedd5505df3ebb82a93b7b2fcc7764c69bc5543e902fbc29a",
+ "tokens": {
+  "input_tokens": 2497,
+  "output_tokens": 556,
+  "total_tokens": 3053
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得登革热疫情：政府宣布五项紧急措施",
+   "summary_zh": "面对登革热疫情令人担忧的蔓延以及多家医疗机构饱和，乍得政府于2026年11月2日召开高级别战略会议，由总理阿拉-马耶·哈林纳主持，讨论加强应对措施。会议决定立即实施五项优先措施，包括公立医疗机构对登革热诊疗全面免费、扩充医院收治能力、开展卫生整治周、对飞机和公共交通工具实施系统性灭虫，以及发起全国动员。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N’Djaména"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得总理阿拉-马耶·哈林纳于2026年11月2日主持高级别战略会议，讨论加强登革热应对",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Premier ministre, Allah-Maye Halina, a présidé ce lundi 2 novembre 2026 une réunion stratégique de haut niveau consacrée au renforcement de la riposte contre la maladie."
+    },
+    {
+     "fact": "会议决定对公立医疗机构内的登革热诊疗实行全面免费",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La première concerne la gratuité totale de la prise en charge de la dengue dans toutes les structures sanitaires publiques."
+    },
+    {
+     "fact": "政府计划通过增设医疗帐篷和增加床位扩充医院收治能力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement prévoit également de renforcer les capacités d’accueil des hôpitaux... à travers l’installation de tentes médicalisées et l’ajout de lits supplémentaires"
+    },
+    {
+     "fact": "将开展卫生整治周并对飞机及公共交通工具实施系统性灭虫",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une semaine spéciale de salubrité sera organisée... la désinsectisation systématique des avions et des transports collectifs"
+    },
+    {
+     "fact": "恩贾梅纳行政与市镇当局及国防安全部队代表参加了会议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les autorités administratives et communales de N’Djaména, les responsables des forces de défense et de sécurité"
+    }
+   ],
+   "uncertainties": [
+    "疫情规模与具体病例数据未在文中提供",
+    "信息目前仅来自单一来源（Le N'Djam Post），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得登革热疫情：政府宣布五项紧急措施",
+   "summary_zh": "面对登革热疫情令人担忧的蔓延以及多家医疗机构饱和，乍得政府于2026年11月2日召开高级别战略会议，由总理阿拉-马耶·哈林纳主持，讨论加强应对措施。会议决定立即实施五项优先措施，包括公立医疗机构对登革热诊疗全面免费、扩充医院收治能力、开展卫生整治周、对飞机和公共交通工具实施系统性灭虫，以及发起全国动员。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N’Djaména"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得总理阿拉-马耶·哈林纳于2026年11月2日主持高级别战略会议，讨论加强登革热应对",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Premier ministre, Allah-Maye Halina, a présidé ce lundi 2 novembre 2026 une réunion stratégique de haut niveau consacrée au renforcement de la riposte contre la maladie."
+    },
+    {
+     "fact": "会议决定对公立医疗机构内的登革热诊疗实行全面免费",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La première concerne la gratuité totale de la prise en charge de la dengue dans toutes les structures sanitaires publiques."
+    },
+    {
+     "fact": "政府计划通过增设医疗帐篷和增加床位扩充医院收治能力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement prévoit également de renforcer les capacités d’accueil des hôpitaux... à travers l’installation de tentes médicalisées et l’ajout de lits supplémentaires"
+    },
+    {
+     "fact": "将开展卫生整治周并对飞机及公共交通工具实施系统性灭虫",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une semaine spéciale de salubrité sera organisée... la désinsectisation systématique des avions et des transports collectifs"
+    },
+    {
+     "fact": "恩贾梅纳行政与市镇当局及国防安全部队代表参加了会议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les autorités administratives et communales de N’Djaména, les responsables des forces de défense et de sécurité"
+    }
+   ],
+   "uncertainties": [
+    "疫情规模与具体病例数据未在文中提供",
+    "信息目前仅来自单一来源（Le N'Djam Post），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_ca99443a294f90a7",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
