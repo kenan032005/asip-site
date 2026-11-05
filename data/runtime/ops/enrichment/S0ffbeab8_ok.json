@@ -1,0 +1,138 @@
+{
+ "label": "S0ffbeab8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "515de3207db3608d53da46a2263c76310e25619b2913e47e96d4b4b22c3f6b11",
+ "tokens": {
+  "input_tokens": 2845,
+  "output_tokens": 554,
+  "total_tokens": 3399
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"杀害女性案件数量为民间组织自行统计，尚未获官方确认\", \"法案能否在11月会期提交议会审议尚不确定\", \"目前仅单一来源（RFI）报道，缺乏交叉验证\"]",
+    "after": "[\"杀害女性案件数量为民间组织自行统计，尚未获官方确认\", \"法案能否在11月会期提交议会审议尚不确定\", \"目前仅单一来源（RFI）报道，缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "喀麦隆民间组织推动反性别暴力立法",
+   "summary_zh": "喀麦隆多家民间社会组织于2026年11月2日在雅温得介绍了性别暴力专项法律草案的起草进展。该草案于2026年初起草，比现行法律更具惩罚性，社会组织希望能在11月议会会期提交议员审议。据这些组织统计，2026年以来该国已记录至少76起杀害女性案件。",
+   "event_type": "civil_unrest",
+   "country_iso3": "CMR",
+   "location": {
+    "country_iso3": "CMR",
+    "admin1": null,
+    "city": "雅温得",
+    "site": "议会",
+    "raw_text": "Yaoundé"
+   },
+   "key_facts": [
+    {
+     "fact": "喀麦隆民间组织于2026年11月2日在雅温得介绍性别暴力法律草案进展",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les associations de la société civile luttant contre les féminicides ont présenté le 2 novembre 2026 à Yaoundé l'évolution du processus d'élaboration de l'avant-projet de loi relatif aux violences basées sur le genre"
+    },
+    {
+     "fact": "该草案比现行法律更具惩罚性，于2026年初起草",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il s'agit d'une loi plus répressive que les textes en vigueur, rédigée début 2026."
+    },
+    {
+     "fact": "社会组织希望该法案在11月议会会期提交议员审议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les organisations de la société civile veulent voir sur la table des députés autour de la session de novembre"
+    },
+    {
+     "fact": "草案在埃博洛瓦起草，源自约2500人、约50家非政府组织和多个部委的协商",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un avant-projet de loi a été rédigé à Ebolowa en 2026, issu d'une concertation d'environ 2 500 personnes, d'une cinquantaine d'ONG et de plusieurs ministères."
+    },
+    {
+     "fact": "社会组织统计2026年以来至少76起杀害女性案件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les organisations de la société civile dénombrent au moins 76 cas de féminicide cette année au Cameroun"
+    }
+   ],
+   "uncertainties": [
+    "杀害女性案件数量为民间组织自行统计，尚未获官方确认",
+    "法案能否在11月会期提交议会审议尚不确定",
+    "目前仅单一来源（RFI）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "喀麦隆民间组织推动反性别暴力立法",
+   "summary_zh": "喀麦隆多家民间社会组织于2026年11月2日在雅温得介绍了性别暴力专项法律草案的起草进展。该草案于2026年初起草，比现行法律更具惩罚性，社会组织希望能在11月议会会期提交议员审议。据这些组织统计，2026年以来该国已记录至少76起杀害女性案件。",
+   "event_type": "civil_unrest",
+   "country_iso3": "CMR",
+   "location": {
+    "country_iso3": "CMR",
+    "admin1": null,
+    "city": "雅温得",
+    "site": "议会",
+    "raw_text": "Yaoundé"
+   },
+   "key_facts": [
+    {
+     "fact": "喀麦隆民间组织于2026年11月2日在雅温得介绍性别暴力法律草案进展",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les associations de la société civile luttant contre les féminicides ont présenté le 2 novembre 2026 à Yaoundé l'évolution du processus d'élaboration de l'avant-projet de loi relatif aux violences basées sur le genre"
+    },
+    {
+     "fact": "该草案比现行法律更具惩罚性，于2026年初起草",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il s'agit d'une loi plus répressive que les textes en vigueur, rédigée début 2026."
+    },
+    {
+     "fact": "社会组织希望该法案在11月议会会期提交议员审议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les organisations de la société civile veulent voir sur la table des députés autour de la session de novembre"
+    },
+    {
+     "fact": "草案在埃博洛瓦起草，源自约2500人、约50家非政府组织和多个部委的协商",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un avant-projet de loi a été rédigé à Ebolowa en 2026, issu d'une concertation d'environ 2 500 personnes, d'une cinquantaine d'ONG et de plusieurs ministères."
+    },
+    {
+     "fact": "社会组织统计2026年以来至少76起杀害女性案件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les organisations de la société civile dénombrent au moins 76 cas de féminicide cette année au Cameroun"
+    }
+   ],
+   "uncertainties": [
+    "杀害女性案件数量为民间组织自行统计，尚未获官方确认",
+    "法案能否在11月会期提交议会审议尚不确定",
+    "目前仅单一来源（RFI）报道，缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_f103fb8a0ffbeab8",
+ "disease_event_id": null,
+ "country_code": "CM"
+}

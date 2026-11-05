@@ -1,0 +1,117 @@
+{
+ "label": "S80b4f8ff",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "660515f0bfe73b68e061f0ce3cea65e7d1334aa62185d03c0b49503cc838d4cb",
+ "tokens": {
+  "input_tokens": 2631,
+  "output_tokens": 539,
+  "total_tokens": 3170
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁：冒用前第一夫人克洛迪娜·塔隆名义的诈骗案在CRIET受审",
+   "summary_zh": "据称有人冒用贝宁前第一夫人克洛迪娜·塔隆的身份实施诈骗，该案于2026年11月2日在打击经济犯罪和恐怖主义法院（CRIET）开庭审理。一名女子声称，她向谎称提供资助的人员共支付了91万非洲法郎。检方要求判处被告五年监禁，其中四年实刑，判决预计于2026年12月21日作出。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": null,
+    "site": "打击经济犯罪和恐怖主义法院（CRIET）",
+    "raw_text": "devant la Cour de répression des infractions économiques et du terrorisme (CRIET)"
+   },
+   "key_facts": [
+    {
+     "fact": "该案于2026年11月2日在CRIET开庭审理",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a été examinée, lundi 2 novembre 2026, devant la Cour de répression des infractions économiques et du terrorisme (CRIET)"
+    },
+    {
+     "fact": "一名女子声称向冒用克洛迪娜·塔隆身份的人员支付了91万非洲法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une femme affirme avoir versé 910 000 FCFA à des individus qui lui avaient fait miroiter une aide financière"
+    },
+    {
+     "fact": "检方要求判处被告五年监禁，其中四年实刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le ministère public a requis cinq ans d'emprisonnement, dont quatre ans ferme, contre le prévenu"
+    },
+    {
+     "fact": "判决预计于2026年12月21日作出",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La décision de la chambre correctionnelle de la CRIET est attendue le 21 décembre 2026"
+    }
+   ],
+   "uncertainties": [
+    "诈骗指控为“据称”（présumée），尚未经法院判决确认",
+    "被告是否还冒用现任第一夫人纳塔莉·维莱特·瓦达尼的身份实施类似行为，尚待法院认定",
+    "目前仅有一个来源（La Nouvelle Tribune，转引Libre Express），缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁：冒用前第一夫人克洛迪娜·塔隆名义的诈骗案在CRIET受审",
+   "summary_zh": "据称有人冒用贝宁前第一夫人克洛迪娜·塔隆的身份实施诈骗，该案于2026年11月2日在打击经济犯罪和恐怖主义法院（CRIET）开庭审理。一名女子声称，她向谎称提供资助的人员共支付了91万非洲法郎。检方要求判处被告五年监禁，其中四年实刑，判决预计于2026年12月21日作出。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": null,
+    "site": "打击经济犯罪和恐怖主义法院（CRIET）",
+    "raw_text": "devant la Cour de répression des infractions économiques et du terrorisme (CRIET)"
+   },
+   "key_facts": [
+    {
+     "fact": "该案于2026年11月2日在CRIET开庭审理",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a été examinée, lundi 2 novembre 2026, devant la Cour de répression des infractions économiques et du terrorisme (CRIET)"
+    },
+    {
+     "fact": "一名女子声称向冒用克洛迪娜·塔隆身份的人员支付了91万非洲法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une femme affirme avoir versé 910 000 FCFA à des individus qui lui avaient fait miroiter une aide financière"
+    },
+    {
+     "fact": "检方要求判处被告五年监禁，其中四年实刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le ministère public a requis cinq ans d'emprisonnement, dont quatre ans ferme, contre le prévenu"
+    },
+    {
+     "fact": "判决预计于2026年12月21日作出",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La décision de la chambre correctionnelle de la CRIET est attendue le 21 décembre 2026"
+    }
+   ],
+   "uncertainties": [
+    "诈骗指控为“据称”（présumée），尚未经法院判决确认",
+    "被告是否还冒用现任第一夫人纳塔莉·维莱特·瓦达尼的身份实施类似行为，尚待法院认定",
+    "目前仅有一个来源（La Nouvelle Tribune，转引Libre Express），缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_9f51d32580b4f8ff",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
