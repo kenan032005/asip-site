@@ -1,0 +1,129 @@
+{
+ "label": "Sd5714840",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3bac6c1de88b38d553844dc0410c7d9af2a788fab50453944b0ca9bb1300f980",
+ "tokens": {
+  "input_tokens": 3085,
+  "output_tokens": 586,
+  "total_tokens": 3671
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "厄尔尼诺影响索马里：雨季来临民众担忧洪水",
+   "summary_zh": "索马里10月至12月的Deyr雨季已经开始，今年因厄尔尼诺现象而格外令人担忧。据IGAD气候预测中心，累计降水量可能超过400毫米；索马里灾害管理机构估计有250万至350万人面临洪水威胁，风险主要集中在包括朱巴兰在内的中部和南部各州。朱巴兰官员称已确定疏散和避难地点并启动人道协调，但表示目前尚无援助到位。",
+   "event_type": "natural_disaster",
+   "country_iso3": "SOM",
+   "location": {
+    "country_iso3": "SOM",
+    "admin1": "Jubaland",
+    "city": "Kismayo",
+    "site": null,
+    "raw_text": "Somalie, États du centre et du Sud, Jubaland, Kismayo"
+   },
+   "key_facts": [
+    {
+     "fact": "索马里Deyr雨季已开始，今年因厄尔尼诺现象而格外令人担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En Somalie, la saison des pluies Deyr d’octobre à décembre a déjà commencé. Elle est particulièrement redoutée cette année, à cause du phénomène climatique El Niño."
+    },
+    {
+     "fact": "据IGAD气候预测中心，累计降水量可能超过400毫米",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D’après le Centre de prédiction du climat de l’IGAD, le cumul des précipitations pourrait dépasser les 400 mm."
+    },
+    {
+     "fact": "索马里灾害管理机构估计有250万至350万人面临洪水威胁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’Agence somalienne de gestion des catastrophes estime qu’entre 2,5 et 3,5 millions de personnes sont menacées par les inondations."
+    },
+    {
+     "fact": "洪水风险主要集中在包括朱巴兰在内的中部和南部各州",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce risque pèse surtout sur les États du centre et du Sud du pays, comme celui du Jubaland."
+    },
+    {
+     "fact": "朱巴兰官员称已确定疏散和避难地点，但尚无援助到位",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "On a identifié tous nos sites d’évacuation et de refuge... mais pour l’heure aucune aide n’est arrivée."
+    }
+   ],
+   "uncertainties": [
+    "降水总量为预测值（可能超过400毫米），尚未实际发生",
+    "受灾人数为灾害管理机构的估计值，尚未获确认",
+    "朱巴兰方面称援助尚未到位，该说法来自单一来源",
+    "目前仅一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "厄尔尼诺影响索马里：雨季来临民众担忧洪水",
+   "summary_zh": "索马里10月至12月的Deyr雨季已经开始，今年因厄尔尼诺现象而格外令人担忧。据IGAD气候预测中心，累计降水量可能超过400毫米；索马里灾害管理机构估计有250万至350万人面临洪水威胁，风险主要集中在包括朱巴兰在内的中部和南部各州。朱巴兰官员称已确定疏散和避难地点并启动人道协调，但表示目前尚无援助到位。",
+   "event_type": "natural_disaster",
+   "country_iso3": "SOM",
+   "location": {
+    "country_iso3": "SOM",
+    "admin1": "Jubaland",
+    "city": "Kismayo",
+    "site": null,
+    "raw_text": "Somalie, États du centre et du Sud, Jubaland, Kismayo"
+   },
+   "key_facts": [
+    {
+     "fact": "索马里Deyr雨季已开始，今年因厄尔尼诺现象而格外令人担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En Somalie, la saison des pluies Deyr d’octobre à décembre a déjà commencé. Elle est particulièrement redoutée cette année, à cause du phénomène climatique El Niño."
+    },
+    {
+     "fact": "据IGAD气候预测中心，累计降水量可能超过400毫米",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D’après le Centre de prédiction du climat de l’IGAD, le cumul des précipitations pourrait dépasser les 400 mm."
+    },
+    {
+     "fact": "索马里灾害管理机构估计有250万至350万人面临洪水威胁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’Agence somalienne de gestion des catastrophes estime qu’entre 2,5 et 3,5 millions de personnes sont menacées par les inondations."
+    },
+    {
+     "fact": "洪水风险主要集中在包括朱巴兰在内的中部和南部各州",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce risque pèse surtout sur les États du centre et du Sud du pays, comme celui du Jubaland."
+    },
+    {
+     "fact": "朱巴兰官员称已确定疏散和避难地点，但尚无援助到位",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "On a identifié tous nos sites d’évacuation et de refuge... mais pour l’heure aucune aide n’est arrivée."
+    }
+   ],
+   "uncertainties": [
+    "降水总量为预测值（可能超过400毫米），尚未实际发生",
+    "受灾人数为灾害管理机构的估计值，尚未获确认",
+    "朱巴兰方面称援助尚未到位，该说法来自单一来源",
+    "目前仅一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_c877655ad5714840",
+ "disease_event_id": null,
+ "country_code": "SO"
+}
