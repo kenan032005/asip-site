@@ -1,0 +1,129 @@
+{
+ "label": "Sc951a80c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "779e753a0b2bc3cb0ae327057a81b74ca625a6ffda655b37e4f4b79253f7fad5",
+ "tokens": {
+  "input_tokens": 2720,
+  "output_tokens": 544,
+  "total_tokens": 3264
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "马普托中央医院在临时场所恢复肿瘤患者诊疗",
+   "summary_zh": "莫桑比克马普托中央医院肿瘤科此前遭火灾，院方已将服务转移至皮肤科大楼临时场所，继续为癌症患者提供治疗，但承认诊疗存在一定限制。院方表示约95%的患者病历未受影响，并称周一接诊60名门诊患者、12例急诊和20名化疗患者。部分原定当日接受门诊化疗的患者因病历被烧毁而未能就诊，院方正在建立新病历。火灾原因和损失规模仍在调查中。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": null,
+    "city": "马普托",
+    "site": "马普托中央医院",
+    "raw_text": "Hospital Central de Maputo"
+   },
+   "key_facts": [
+    {
+     "fact": "马普托中央医院肿瘤科遭火灾后，将服务转移至皮肤科大楼临时场所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A unidade sanitária transferiu os serviços para o edifício da Dermatologia, mas reconhece que o atendimento vai decorrer com algumas limitações."
+    },
+    {
+     "fact": "院方称约95%的患者病历未受影响",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "o hospital assegura que cerca de 95% dos processos clínicos dos pacientes não foram afectados"
+    },
+    {
+     "fact": "周一接诊60名门诊患者、12例急诊和20名化疗患者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "só nesta segunda-feira, foram atendidos 60 pacientes em consultas, 12 casos de urgência e 20 pacientes para sessões de quimioterapia"
+    },
+    {
+     "fact": "部分原定当日接受门诊化疗的患者因病历被烧毁而未获诊疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Os pacientes cuja quimioterapia ambulatória estava agendada para esta segunda-feira foram afectados pela destruição de processos clínicos"
+    },
+    {
+     "fact": "火灾原因和损失规模仍在调查中",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "enquanto decorrem investigações para apurar as causas do incêndio e a dimensão dos danos"
+    }
+   ],
+   "uncertainties": [
+    "火灾原因尚未查明",
+    "损失规模尚未确定",
+    "院方称存在冒用医院名义募捐的虚假信息，相关情况未获独立核实",
+    "目前仅单一来源报道"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "马普托中央医院在临时场所恢复肿瘤患者诊疗",
+   "summary_zh": "莫桑比克马普托中央医院肿瘤科此前遭火灾，院方已将服务转移至皮肤科大楼临时场所，继续为癌症患者提供治疗，但承认诊疗存在一定限制。院方表示约95%的患者病历未受影响，并称周一接诊60名门诊患者、12例急诊和20名化疗患者。部分原定当日接受门诊化疗的患者因病历被烧毁而未能就诊，院方正在建立新病历。火灾原因和损失规模仍在调查中。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": null,
+    "city": "马普托",
+    "site": "马普托中央医院",
+    "raw_text": "Hospital Central de Maputo"
+   },
+   "key_facts": [
+    {
+     "fact": "马普托中央医院肿瘤科遭火灾后，将服务转移至皮肤科大楼临时场所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A unidade sanitária transferiu os serviços para o edifício da Dermatologia, mas reconhece que o atendimento vai decorrer com algumas limitações."
+    },
+    {
+     "fact": "院方称约95%的患者病历未受影响",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "o hospital assegura que cerca de 95% dos processos clínicos dos pacientes não foram afectados"
+    },
+    {
+     "fact": "周一接诊60名门诊患者、12例急诊和20名化疗患者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "só nesta segunda-feira, foram atendidos 60 pacientes em consultas, 12 casos de urgência e 20 pacientes para sessões de quimioterapia"
+    },
+    {
+     "fact": "部分原定当日接受门诊化疗的患者因病历被烧毁而未获诊疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Os pacientes cuja quimioterapia ambulatória estava agendada para esta segunda-feira foram afectados pela destruição de processos clínicos"
+    },
+    {
+     "fact": "火灾原因和损失规模仍在调查中",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "enquanto decorrem investigações para apurar as causas do incêndio e a dimensão dos danos"
+    }
+   ],
+   "uncertainties": [
+    "火灾原因尚未查明",
+    "损失规模尚未确定",
+    "院方称存在冒用医院名义募捐的虚假信息，相关情况未获独立核实",
+    "目前仅单一来源报道"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_a713b551c951a80c",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}
