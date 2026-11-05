@@ -1,0 +1,117 @@
+{
+ "label": "S9b39d73f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "36102c372626b65c83f8027900594292725fc5fe2cc0e32e46ca2e630f89476d",
+ "tokens": {
+  "input_tokens": 2130,
+  "output_tokens": 487,
+  "total_tokens": 2617
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "四名尼日利亚女孩在马里获救，其中一人年仅14岁",
+   "summary_zh": "据全球反人口贩运组织（GAHTO）与尼日利亚国家打击人口贩运局（NAPTIP）联合行动，四名来自科吉州奥凯内地方政府的尼日利亚女孩在马里莫里拉从疑似人口贩运者手中获救，其中包括一名14岁未成年人。GAHTO创始人Prosper Michael称，这些女孩据称被以金矿和商铺就业的承诺诱骗至马里，随后被迫卖淫。此次解救源于其中一名女孩通过WhatsApp发出求助信息。该说法目前仅来自单一来源。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "MLI",
+    "admin1": null,
+    "city": "Morila",
+    "site": null,
+    "raw_text": "Morila, Mali"
+   },
+   "key_facts": [
+    {
+     "fact": "四名来自科吉州奥凯内的尼日利亚女孩在马里莫里拉从疑似人口贩运者手中获救",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "FOUR girls from Okene Local Government Area of Kogi State, including a 14-year-old minor, have been rescued from suspected human traffickers in Morila, Mali"
+    },
+    {
+     "fact": "获救女孩中包括一名14岁未成年人",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "14-year-old among four Nigerian girls rescued from human traffickers in Mali"
+    },
+    {
+     "fact": "据称这些女孩被以金矿和商铺就业承诺诱骗至马里并被迫卖淫",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the girls were allegedly lured to Mali with promises of employment in gold mines and shops but were forced into prostitution"
+    },
+    {
+     "fact": "解救行动源于一名女孩通过WhatsApp发出的求助信息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the rescue followed a distress message sent by one of the girls through WhatsApp"
+    }
+   ],
+   "uncertainties": [
+    "人口贩运指控目前仅为GAHTO创始人单方说法，尚未获独立证实",
+    "事件细节仅来自单一来源报道，尚缺乏交叉验证",
+    "女孩被迫卖淫等情节属据称内容，有待核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "四名尼日利亚女孩在马里获救，其中一人年仅14岁",
+   "summary_zh": "据全球反人口贩运组织（GAHTO）与尼日利亚国家打击人口贩运局（NAPTIP）联合行动，四名来自科吉州奥凯内地方政府的尼日利亚女孩在马里莫里拉从疑似人口贩运者手中获救，其中包括一名14岁未成年人。GAHTO创始人Prosper Michael称，这些女孩据称被以金矿和商铺就业的承诺诱骗至马里，随后被迫卖淫。此次解救源于其中一名女孩通过WhatsApp发出求助信息。该说法目前仅来自单一来源。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "MLI",
+    "admin1": null,
+    "city": "Morila",
+    "site": null,
+    "raw_text": "Morila, Mali"
+   },
+   "key_facts": [
+    {
+     "fact": "四名来自科吉州奥凯内的尼日利亚女孩在马里莫里拉从疑似人口贩运者手中获救",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "FOUR girls from Okene Local Government Area of Kogi State, including a 14-year-old minor, have been rescued from suspected human traffickers in Morila, Mali"
+    },
+    {
+     "fact": "获救女孩中包括一名14岁未成年人",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "14-year-old among four Nigerian girls rescued from human traffickers in Mali"
+    },
+    {
+     "fact": "据称这些女孩被以金矿和商铺就业承诺诱骗至马里并被迫卖淫",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the girls were allegedly lured to Mali with promises of employment in gold mines and shops but were forced into prostitution"
+    },
+    {
+     "fact": "解救行动源于一名女孩通过WhatsApp发出的求助信息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the rescue followed a distress message sent by one of the girls through WhatsApp"
+    }
+   ],
+   "uncertainties": [
+    "人口贩运指控目前仅为GAHTO创始人单方说法，尚未获独立证实",
+    "事件细节仅来自单一来源报道，尚缺乏交叉验证",
+    "女孩被迫卖淫等情节属据称内容，有待核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_424e6dc39b39d73f",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

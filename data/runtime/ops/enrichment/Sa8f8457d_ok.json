@@ -1,0 +1,121 @@
+{
+ "label": "Sa8f8457d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "47221933b5c9c4572a761514963ee376d46f7984365466e5d7c67f2b0e01c8a3",
+ "tokens": {
+  "input_tokens": 2624,
+  "output_tokens": 444,
+  "total_tokens": 3068
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "阿布贾Akalaka 009格斗之夜：Ayana与Ezekiel夺冠",
+   "summary_zh": "尼日利亚阿布贾举办第九届Akalaka“神秘之剑之战”综合格斗与表演拳击赛事，Jackiel Ayana和David Ezekiel分别获胜。Ayana在羽量级主赛中以裸绞降服对手，获得最佳降服、最佳拳手及“神秘之剑”三项荣誉。赛事包含七场MMA比赛和一场拳击表演，主办方称该推广活动自2021年起从尼日尔三角洲地方选手扩展至国际关注。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "阿布贾举办Akalaka 009综合格斗与表演拳击赛事",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "an action-packed night of mixed martial arts (MMA) and exhibition boxing in Abuja"
+    },
+    {
+     "fact": "Jackiel Ayana在羽量级主赛中以裸绞降服Victor Dooga获胜",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ayana, popularly known as the “Smiling Assassin”, submitted Victor Dooga, aka “The Benue Boy”, to win the featherweight main event through a rare naked choke in two minutes, 37 seconds."
+    },
+    {
+     "fact": "David Ezekiel以技术击倒击败Joseph James，获最佳击倒奖",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "David Ezekiel, known as “The Badger”, won the Best Knockout Artist of the Night award after defeating Joseph James, aka “The Great Lion”, by technical knockout."
+    },
+    {
+     "fact": "赛事包含七场MMA比赛和一场特别拳击表演",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "featured seven MMA bouts across different weight divisions and a special boxing exhibition"
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "none",
+   "classification_confidence": 95
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "阿布贾Akalaka 009格斗之夜：Ayana与Ezekiel夺冠",
+   "summary_zh": "尼日利亚阿布贾举办第九届Akalaka“神秘之剑之战”综合格斗与表演拳击赛事，Jackiel Ayana和David Ezekiel分别获胜。Ayana在羽量级主赛中以裸绞降服对手，获得最佳降服、最佳拳手及“神秘之剑”三项荣誉。赛事包含七场MMA比赛和一场拳击表演，主办方称该推广活动自2021年起从尼日尔三角洲地方选手扩展至国际关注。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "阿布贾举办Akalaka 009综合格斗与表演拳击赛事",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "an action-packed night of mixed martial arts (MMA) and exhibition boxing in Abuja"
+    },
+    {
+     "fact": "Jackiel Ayana在羽量级主赛中以裸绞降服Victor Dooga获胜",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ayana, popularly known as the “Smiling Assassin”, submitted Victor Dooga, aka “The Benue Boy”, to win the featherweight main event through a rare naked choke in two minutes, 37 seconds."
+    },
+    {
+     "fact": "David Ezekiel以技术击倒击败Joseph James，获最佳击倒奖",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "David Ezekiel, known as “The Badger”, won the Best Knockout Artist of the Night award after defeating Joseph James, aka “The Great Lion”, by technical knockout."
+    },
+    {
+     "fact": "赛事包含七场MMA比赛和一场特别拳击表演",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "featured seven MMA bouts across different weight divisions and a special boxing exhibition"
+    }
+   ],
+   "uncertainties": [
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 95
+  }
+ },
+ "event_id": "EVT_f2b2d573a8f8457d",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
