@@ -1,0 +1,127 @@
+{
+ "label": "Sba99792f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "23a6a8b28fe717dc1068f9015c5c317c9fb2a56f7b7ff477609696badba27011",
+ "tokens": {
+  "input_tokens": 2812,
+  "output_tokens": 609,
+  "total_tokens": 3421
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得在线媒体协会谴责登革热疫情期间媒体进入恩贾梅纳医院受限",
+   "summary_zh": "乍得在线媒体协会（AMET）发表声明，谴责其成员在登革热疫情期间进入恩贾梅纳医疗机构采访受阻。该协会称，部分卫生机构负责人据称收到卫生部传播司限制私营媒体进入医院并限制采访的指示。AMET呼吁卫生部长保障所有媒体公平、非歧视地获取卫生信息，并警告若无具体措施可能暂停对卫生部机构传播活动的报道。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": "医院等卫生机构",
+    "raw_text": "hôpitaux de N'Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得在线媒体协会（AMET）谴责媒体进入恩贾梅纳卫生机构受限",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'Association des Médias en Ligne du Tchad (AMET) dénonce les difficultés rencontrées par ses membres pour accéder aux établissements sanitaires de N'Djamena"
+    },
+    {
+     "fact": "该协会称部分卫生机构负责人据称收到卫生部限制私营媒体进入医院的指示",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "certains responsables de structures sanitaires auraient reçu des consignes de la Direction de la communication du ministère de la Santé publique visant à restreindre l'accès des médias privés aux hôpitaux"
+    },
+    {
+     "fact": "AMET呼吁卫生部长保障所有媒体公平获取卫生信息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'AMET interpelle directement le ministre de la Santé publique et lui demande de s'impliquer personnellement afin de garantir à tous les médias, publics comme privés, un accès équitable et non discriminatoire à l'information sanitaire"
+    },
+    {
+     "fact": "该协会警告若无具体措施可能暂停对卫生部机构传播活动的报道",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "elle pourrait appeler ses membres à suspendre la couverture des activités de communication institutionnelle du ministère de la Santé"
+    },
+    {
+     "fact": "登革热疫情在乍得持续，卫生部官方数字显示有若干确诊病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'épidémie de dengue continue de sévir au Tchad, avec plusieurs cas confirmés selon les chiffres officiels du ministère de la Santé publique"
+    }
+   ],
+   "uncertainties": [
+    "卫生机构负责人收到限制媒体指示的说法来自协会收集的证词，尚未获官方确认",
+    "登革热确诊病例具体数字未在文中给出",
+    "目前仅单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得在线媒体协会谴责登革热疫情期间媒体进入恩贾梅纳医院受限",
+   "summary_zh": "乍得在线媒体协会（AMET）发表声明，谴责其成员在登革热疫情期间进入恩贾梅纳医疗机构采访受阻。该协会称，部分卫生机构负责人据称收到卫生部传播司限制私营媒体进入医院并限制采访的指示。AMET呼吁卫生部长保障所有媒体公平、非歧视地获取卫生信息，并警告若无具体措施可能暂停对卫生部机构传播活动的报道。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": "医院等卫生机构",
+    "raw_text": "hôpitaux de N'Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得在线媒体协会（AMET）谴责媒体进入恩贾梅纳卫生机构受限",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'Association des Médias en Ligne du Tchad (AMET) dénonce les difficultés rencontrées par ses membres pour accéder aux établissements sanitaires de N'Djamena"
+    },
+    {
+     "fact": "该协会称部分卫生机构负责人据称收到卫生部限制私营媒体进入医院的指示",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "certains responsables de structures sanitaires auraient reçu des consignes de la Direction de la communication du ministère de la Santé publique visant à restreindre l'accès des médias privés aux hôpitaux"
+    },
+    {
+     "fact": "AMET呼吁卫生部长保障所有媒体公平获取卫生信息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'AMET interpelle directement le ministre de la Santé publique et lui demande de s'impliquer personnellement afin de garantir à tous les médias, publics comme privés, un accès équitable et non discriminatoire à l'information sanitaire"
+    },
+    {
+     "fact": "该协会警告若无具体措施可能暂停对卫生部机构传播活动的报道",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "elle pourrait appeler ses membres à suspendre la couverture des activités de communication institutionnelle du ministère de la Santé"
+    },
+    {
+     "fact": "登革热疫情在乍得持续，卫生部官方数字显示有若干确诊病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'épidémie de dengue continue de sévir au Tchad, avec plusieurs cas confirmés selon les chiffres officiels du ministère de la Santé publique"
+    }
+   ],
+   "uncertainties": [
+    "卫生机构负责人收到限制媒体指示的说法来自协会收集的证词，尚未获官方确认",
+    "登革热确诊病例具体数字未在文中给出",
+    "目前仅单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_1d2cece3ba99792f",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

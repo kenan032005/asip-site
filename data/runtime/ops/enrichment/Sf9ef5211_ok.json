@@ -1,0 +1,127 @@
+{
+ "label": "Sf9ef5211",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "82fe74798d27dda636864c895630df9463767dd9ff6f1f43182e5aaf292a3f3f",
+ "tokens": {
+  "input_tokens": 2630,
+  "output_tokens": 535,
+  "total_tokens": 3165
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "萨瓦卢发生与kpayo（走私汽油）相关的火灾：2人死亡、1人重伤",
+   "summary_zh": "贝宁萨瓦卢市Logozohè地区于11月1日晚约19时45分发生火灾，一名母亲及其一名孩子死亡，另有一名儿童重伤送医。据当地区长称，另有两名儿童幸存。火灾确切起因尚未查明，调查仍在进行；但死者生前从事走私汽油销售，屋内储存有汽油桶。此事再次引发对住宅内存放和销售走私汽油风险的担忧。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": "萨瓦卢市",
+    "city": "萨瓦卢",
+    "site": "Logozohè",
+    "raw_text": "Logozohè, dans la commune de Savalou"
+   },
+   "key_facts": [
+    {
+     "fact": "11月1日晚约19时45分，萨瓦卢市Logozohè地区发生火灾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un incendie survenu le dimanche 1er novembre aux environs de 19 h 45 à Logozohè, dans la commune de Savalou"
+    },
+    {
+     "fact": "火灾造成一名母亲及其一名孩子死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a coûté la vie à une mère et à l’un de ses enfants"
+    },
+    {
+     "fact": "另有一名儿童重伤，被送往萨瓦卢医院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’un d’eux, grièvement blessé, a été conduit à l’hôpital de Savalou"
+    },
+    {
+     "fact": "火灾确切起因尚未查明，调查仍在进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les circonstances exactes du déclenchement de l’incendie ne sont pas encore établies. Des enquêtes sont en cours"
+    },
+    {
+     "fact": "死者生前从事走私汽油销售，屋内储存有汽油桶",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la victime exerçait dans la vente d’essence frelatée et des bidons de carburant étaient entreposés dans la maison"
+    }
+   ],
+   "uncertainties": [
+    "火灾确切起因尚未查明，调查仍在进行",
+    "汽油储存与火灾起因的关联尚未证实",
+    "目前仅有一个来源（Fraternité）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "萨瓦卢发生与kpayo（走私汽油）相关的火灾：2人死亡、1人重伤",
+   "summary_zh": "贝宁萨瓦卢市Logozohè地区于11月1日晚约19时45分发生火灾，一名母亲及其一名孩子死亡，另有一名儿童重伤送医。据当地区长称，另有两名儿童幸存。火灾确切起因尚未查明，调查仍在进行；但死者生前从事走私汽油销售，屋内储存有汽油桶。此事再次引发对住宅内存放和销售走私汽油风险的担忧。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": "萨瓦卢市",
+    "city": "萨瓦卢",
+    "site": "Logozohè",
+    "raw_text": "Logozohè, dans la commune de Savalou"
+   },
+   "key_facts": [
+    {
+     "fact": "11月1日晚约19时45分，萨瓦卢市Logozohè地区发生火灾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un incendie survenu le dimanche 1er novembre aux environs de 19 h 45 à Logozohè, dans la commune de Savalou"
+    },
+    {
+     "fact": "火灾造成一名母亲及其一名孩子死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a coûté la vie à une mère et à l’un de ses enfants"
+    },
+    {
+     "fact": "另有一名儿童重伤，被送往萨瓦卢医院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’un d’eux, grièvement blessé, a été conduit à l’hôpital de Savalou"
+    },
+    {
+     "fact": "火灾确切起因尚未查明，调查仍在进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les circonstances exactes du déclenchement de l’incendie ne sont pas encore établies. Des enquêtes sont en cours"
+    },
+    {
+     "fact": "死者生前从事走私汽油销售，屋内储存有汽油桶",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la victime exerçait dans la vente d’essence frelatée et des bidons de carburant étaient entreposés dans la maison"
+    }
+   ],
+   "uncertainties": [
+    "火灾确切起因尚未查明，调查仍在进行",
+    "汽油储存与火灾起因的关联尚未证实",
+    "目前仅有一个来源（Fraternité）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_9718370cf9ef5211",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
