@@ -1,0 +1,128 @@
+{
+ "label": "S75a21864",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "bf2a44d10d35508e068bebb80969f40089b65efe292078c9fd5fbc21123cac2f",
+ "tokens": {
+  "input_tokens": 2863,
+  "output_tokens": 567,
+  "total_tokens": 3430
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"肯尼亚警方是否为绑架实施者尚未证实，仅为Vocal Africa的怀疑\", \"姆瓦伊帕亚的下落与安危尚未确认\", \"目前仅有一个来源（RFI）报道，尚缺乏交叉验证\"]",
+    "after": "[\"肯尼亚警方是否为绑架实施者尚未证实，仅为Vocal Africa的怀疑\", \"姆瓦伊帕亚的下落与安危尚未确认\", \"目前仅有一个来源（RFI）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "肯尼亚：坦桑尼亚反对派人士特瓦哈·姆瓦伊帕亚遭绑架后，警方受到指责",
+   "summary_zh": "坦桑尼亚反对派人士特瓦哈·姆瓦伊帕亚于10月25日在肯尼亚内罗毕遭绑架，至今仍无消息。11月2日，内罗毕高等法院传唤警察总监道格拉斯·坎贾和刑事调查局局长穆罕默德·阿明，此前民间组织Vocal Africa已提出申诉。该组织怀疑肯尼亚警方是此次绑架的实施者。两名高级警官未出庭，仅由两名下级警员代表到庭，检方称警方尚未掌握姆瓦伊帕亚的情况，但调查正在进行。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": "内罗毕郡",
+    "city": "内罗毕",
+    "site": null,
+    "raw_text": "Nairobi, Kenya"
+   },
+   "key_facts": [
+    {
+     "fact": "坦桑尼亚反对派人士特瓦哈·姆瓦伊帕亚于10月25日在内罗毕遭绑架，至今无消息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Toujours aucune nouvelle de l’opposant tanzanien Twaha Mwaipaya, enlevé le 25 octobre à Nairobi au Kenya."
+    },
+    {
+     "fact": "民间组织Vocal Africa向内罗毕高等法院提出申诉，怀疑肯尼亚警方实施绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une plainte a été déposée par l’organisation de la société civile Vocal Africa. Elle soupçonne la police kényane d’être l’auteure de l’enlèvement."
+    },
+    {
+     "fact": "警察总监与刑事调查局局长被传唤但未出庭，由两名下级警员代表到庭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les deux officiers ne se sont pas présentés. Ce sont deux agents subalternes qui se sont présentés devant le juge."
+    },
+    {
+     "fact": "检方称警方尚未掌握姆瓦伊帕亚的情况，但调查正在进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la police kényane n'avait pas encore d'informations sur la situation de Twaha Mwaipaya, mais qu'une enquête était en cours"
+    }
+   ],
+   "uncertainties": [
+    "肯尼亚警方是否为绑架实施者尚未证实，仅为Vocal Africa的怀疑",
+    "姆瓦伊帕亚的下落与安危尚未确认",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "肯尼亚：坦桑尼亚反对派人士特瓦哈·姆瓦伊帕亚遭绑架后，警方受到指责",
+   "summary_zh": "坦桑尼亚反对派人士特瓦哈·姆瓦伊帕亚于10月25日在肯尼亚内罗毕遭绑架，至今仍无消息。11月2日，内罗毕高等法院传唤警察总监道格拉斯·坎贾和刑事调查局局长穆罕默德·阿明，此前民间组织Vocal Africa已提出申诉。该组织怀疑肯尼亚警方是此次绑架的实施者。两名高级警官未出庭，仅由两名下级警员代表到庭，检方称警方尚未掌握姆瓦伊帕亚的情况，但调查正在进行。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": "内罗毕郡",
+    "city": "内罗毕",
+    "site": null,
+    "raw_text": "Nairobi, Kenya"
+   },
+   "key_facts": [
+    {
+     "fact": "坦桑尼亚反对派人士特瓦哈·姆瓦伊帕亚于10月25日在内罗毕遭绑架，至今无消息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Toujours aucune nouvelle de l’opposant tanzanien Twaha Mwaipaya, enlevé le 25 octobre à Nairobi au Kenya."
+    },
+    {
+     "fact": "民间组织Vocal Africa向内罗毕高等法院提出申诉，怀疑肯尼亚警方实施绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une plainte a été déposée par l’organisation de la société civile Vocal Africa. Elle soupçonne la police kényane d’être l’auteure de l’enlèvement."
+    },
+    {
+     "fact": "警察总监与刑事调查局局长被传唤但未出庭，由两名下级警员代表到庭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les deux officiers ne se sont pas présentés. Ce sont deux agents subalternes qui se sont présentés devant le juge."
+    },
+    {
+     "fact": "检方称警方尚未掌握姆瓦伊帕亚的情况，但调查正在进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la police kényane n'avait pas encore d'informations sur la situation de Twaha Mwaipaya, mais qu'une enquête était en cours"
+    }
+   ],
+   "uncertainties": [
+    "肯尼亚警方是否为绑架实施者尚未证实，仅为Vocal Africa的怀疑",
+    "姆瓦伊帕亚的下落与安危尚未确认",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_219a961575a21864",
+ "disease_event_id": null,
+ "country_code": "KE"
+}
