@@ -1,0 +1,130 @@
+{
+ "label": "S6d857678",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "cd819a13e517cd0c96931c336d4b43846a9117df1383838e1d903d869364b16e",
+ "tokens": {
+  "input_tokens": 2874,
+  "output_tokens": 670,
+  "total_tokens": 3544
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"塔尔及其子的具体关押地点与状况尚未证实\", \"是否构成强迫失踪尚属受访律师的法律主张，未获官方确认\", \"报道主要基于单一受访者（律师马马杜·伊斯梅尔·科纳特）的陈述，尚缺乏其他来源交叉验证\", \"马里当局未就事件作出任何公开说明\"]",
+    "after": "[\"塔尔及其子的具体关押地点与状况尚未证实\", \"是否构成强迫失踪尚属受访律师的法律主张，未获官方确认\", \"报道主要基于单一受访者（律师马马杜·伊斯梅尔·科纳特）的陈述，尚缺乏其他来源交叉验证\", \"马里当局未就事件作出任何公开说明\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "马里律师、前部长蒙塔加·塔尔被国家安保人员绑架六个月，家属与律师持续追问下落",
+   "summary_zh": "据法国国际广播电台（RFI）报道，马里律师、前部长蒙塔加·塔尔于5月2日至3日夜间在家中被蒙面国家安保人员带走，至今已六个月，其子数日后亦被带走，关押地点不明且未经法律程序。家属律师已向马里司法机构及联合国强迫失踪问题委员会提出申诉，但马里过渡当局始终未作回应。受访律师马马杜·伊斯梅尔·科纳特对塔尔安危表示担忧，要求提供可核实的生活证明、律师会见及独立医疗检查，并指出国家人员拒绝承认剥夺自由或隐瞒其下落可能构成强迫失踪。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "MLI",
+   "location": {
+    "country_iso3": "MLI",
+    "admin1": null,
+    "city": "巴马科",
+    "site": "住所",
+    "raw_text": "chez lui, de nuit（原文未明确城市，报道提及巴马科上诉法院）"
+   },
+   "key_facts": [
+    {
+     "fact": "马里律师、前部长蒙塔加·塔尔于5月2日至3日夜间在家中被蒙面国家安保人员带走，至今已六个月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cela fait six mois, ce mardi, que l’avocat et ancien ministre Mountaga Tall... a été enlevé chez lui, de nuit, par des hommes encagoulés de la Sécurité d’État. C’était dans la nuit du 2 au 3 mai."
+    },
+    {
+     "fact": "数日后其子谢赫·马马杜·塔尔亦被马里安全部门带走，关押地点不明且未经法律程序",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quelques jours après lui, les services maliens ont enlevé son fils, également détenu depuis dans un lieu inconnu en dehors de toute procédure légale."
+    },
+    {
+     "fact": "家属律师已向马里司法机构及联合国强迫失踪问题委员会提出申诉，马里过渡当局仍拒绝沟通",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les avocats de la famille de Mountaga Tall ont saisi la justice malienne et le comité des disparitions forcées des Nations unies, mais les autorités maliennes de transition refusent toujours de communiquer quoi que ce soit"
+    },
+    {
+     "fact": "受访律师要求提供可核实的生活证明、律师会见和独立医疗检查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nous demandons depuis très longtemps une preuve de vie vérifiable, un contact avec ses avocats et un examen médical indépendant."
+    }
+   ],
+   "uncertainties": [
+    "塔尔及其子的具体关押地点与状况尚未证实",
+    "是否构成强迫失踪尚属受访律师的法律主张，未获官方确认",
+    "报道主要基于单一受访者（律师马马杜·伊斯梅尔·科纳特）的陈述，尚缺乏其他来源交叉验证",
+    "马里当局未就事件作出任何公开说明"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "马里律师、前部长蒙塔加·塔尔被国家安保人员绑架六个月，家属与律师持续追问下落",
+   "summary_zh": "据法国国际广播电台（RFI）报道，马里律师、前部长蒙塔加·塔尔于5月2日至3日夜间在家中被蒙面国家安保人员带走，至今已六个月，其子数日后亦被带走，关押地点不明且未经法律程序。家属律师已向马里司法机构及联合国强迫失踪问题委员会提出申诉，但马里过渡当局始终未作回应。受访律师马马杜·伊斯梅尔·科纳特对塔尔安危表示担忧，要求提供可核实的生活证明、律师会见及独立医疗检查，并指出国家人员拒绝承认剥夺自由或隐瞒其下落可能构成强迫失踪。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "MLI",
+   "location": {
+    "country_iso3": "MLI",
+    "admin1": null,
+    "city": "巴马科",
+    "site": "住所",
+    "raw_text": "chez lui, de nuit（原文未明确城市，报道提及巴马科上诉法院）"
+   },
+   "key_facts": [
+    {
+     "fact": "马里律师、前部长蒙塔加·塔尔于5月2日至3日夜间在家中被蒙面国家安保人员带走，至今已六个月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cela fait six mois, ce mardi, que l’avocat et ancien ministre Mountaga Tall... a été enlevé chez lui, de nuit, par des hommes encagoulés de la Sécurité d’État. C’était dans la nuit du 2 au 3 mai."
+    },
+    {
+     "fact": "数日后其子谢赫·马马杜·塔尔亦被马里安全部门带走，关押地点不明且未经法律程序",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quelques jours après lui, les services maliens ont enlevé son fils, également détenu depuis dans un lieu inconnu en dehors de toute procédure légale."
+    },
+    {
+     "fact": "家属律师已向马里司法机构及联合国强迫失踪问题委员会提出申诉，马里过渡当局仍拒绝沟通",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les avocats de la famille de Mountaga Tall ont saisi la justice malienne et le comité des disparitions forcées des Nations unies, mais les autorités maliennes de transition refusent toujours de communiquer quoi que ce soit"
+    },
+    {
+     "fact": "受访律师要求提供可核实的生活证明、律师会见和独立医疗检查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nous demandons depuis très longtemps une preuve de vie vérifiable, un contact avec ses avocats et un examen médical indépendant."
+    }
+   ],
+   "uncertainties": [
+    "塔尔及其子的具体关押地点与状况尚未证实",
+    "是否构成强迫失踪尚属受访律师的法律主张，未获官方确认",
+    "报道主要基于单一受访者（律师马马杜·伊斯梅尔·科纳特）的陈述，尚缺乏其他来源交叉验证",
+    "马里当局未就事件作出任何公开说明",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_5055582b6d857678",
+ "disease_event_id": null,
+ "country_code": "ML"
+}
