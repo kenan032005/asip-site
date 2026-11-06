@@ -1,0 +1,130 @@
+{
+ "label": "Sd22ccfe8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "edfa3e7734b488bb0b88482e075adfd9f93700470be0cc6c39b8b74f66660381",
+ "tokens": {
+  "input_tokens": 2418,
+  "output_tokens": 603,
+  "total_tokens": 3021
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"扣押事件及索要赎金的具体细节尚未获得SPLA-IO方面确认\", \"索要金额说法不一：一名官员称3500万南苏丹镑，另一名官员称不清楚具体金额\", \"被扣押人员的确切人数与车辆数量在不同官员表述中存在差异（八名工人/三辆车）\", \"事件目前主要依据当地官员向Radio Tamazuj的单方面陈述，尚缺乏独立交叉验证\"]",
+    "after": "[\"扣押事件及索要赎金的具体细节尚未获得SPLA-IO方面确认\", \"索要金额说法不一：一名官员称3500万南苏丹镑，另一名官员称不清楚具体金额\", \"被扣押人员的确切人数与车辆数量在不同官员表述中存在差异（八名工人/三辆车）\", \"事件目前主要依据当地官员向Radio Tamazuj的单方面陈述，尚缺乏独立交叉验证\", \"据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "据报八名MTN员工在西赤道州被扣押",
+   "summary_zh": "南苏丹西赤道州地方当局称，八名MTN光纤网络施工人员于2026年10月29日在坦布拉与纳格罗两县之间的公路上遭伏击后，被武装反对派力量扣押在班达拉地区。当局呼吁立即无条件释放这些工人。一名县专员称，扣押方以一名儿童据称死亡为由索要3500万南苏丹镑赔偿，但索要金额说法不一，且尚未获得交叉验证。SPLA-IO方面未回应置评请求。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Western Equatoria State",
+    "city": null,
+    "site": "Bandala",
+    "raw_text": "Bandala, along the road between Tambura and Nagero counties, Western Equatoria State, South Sudan"
+   },
+   "key_facts": [
+    {
+     "fact": "据报八名MTN光纤网络施工人员被武装反对派力量扣押在西赤道州班达拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Local authorities in South Sudan’s Western Equatoria State have called for the immediate and unconditional release of eight MTN fibre-optic workers detained by armed opposition forces in Bandala"
+    },
+    {
+     "fact": "事件发生于2026年10月29日，四辆载有八人的车辆在坦布拉与纳格罗之间的公路上遭伏击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the incident occurred on October 29, 2026, when four vehicles carrying eight people were travelling from Wau through Nagero towards Source Yubu"
+    },
+    {
+     "fact": "一名县专员称扣押方索要3500万南苏丹镑作为一名儿童据称死亡的赔偿",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "condemned the reported detention of three vehicles by SPLA-IO forces in Bandala, allegedly over a demand for 35 million South Sudanese pounds (SSP)"
+    },
+    {
+     "fact": "SPLA-IO代表在发稿前未回应置评请求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "SPLA-IO representatives had not responded to requests for comment on the reported detention, the alleged financial demands or the accusations made by local authorities by the time of publication"
+    }
+   ],
+   "uncertainties": [
+    "扣押事件及索要赎金的具体细节尚未获得SPLA-IO方面确认",
+    "索要金额说法不一：一名官员称3500万南苏丹镑，另一名官员称不清楚具体金额",
+    "被扣押人员的确切人数与车辆数量在不同官员表述中存在差异（八名工人/三辆车）",
+    "事件目前主要依据当地官员向Radio Tamazuj的单方面陈述，尚缺乏独立交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "据报八名MTN员工在西赤道州被扣押",
+   "summary_zh": "南苏丹西赤道州地方当局称，八名MTN光纤网络施工人员于2026年10月29日在坦布拉与纳格罗两县之间的公路上遭伏击后，被武装反对派力量扣押在班达拉地区。当局呼吁立即无条件释放这些工人。一名县专员称，扣押方以一名儿童据称死亡为由索要3500万南苏丹镑赔偿，但索要金额说法不一，且尚未获得交叉验证。SPLA-IO方面未回应置评请求。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Western Equatoria State",
+    "city": null,
+    "site": "Bandala",
+    "raw_text": "Bandala, along the road between Tambura and Nagero counties, Western Equatoria State, South Sudan"
+   },
+   "key_facts": [
+    {
+     "fact": "据报八名MTN光纤网络施工人员被武装反对派力量扣押在西赤道州班达拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Local authorities in South Sudan’s Western Equatoria State have called for the immediate and unconditional release of eight MTN fibre-optic workers detained by armed opposition forces in Bandala"
+    },
+    {
+     "fact": "事件发生于2026年10月29日，四辆载有八人的车辆在坦布拉与纳格罗之间的公路上遭伏击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the incident occurred on October 29, 2026, when four vehicles carrying eight people were travelling from Wau through Nagero towards Source Yubu"
+    },
+    {
+     "fact": "一名县专员称扣押方索要3500万南苏丹镑作为一名儿童据称死亡的赔偿",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "condemned the reported detention of three vehicles by SPLA-IO forces in Bandala, allegedly over a demand for 35 million South Sudanese pounds (SSP)"
+    },
+    {
+     "fact": "SPLA-IO代表在发稿前未回应置评请求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "SPLA-IO representatives had not responded to requests for comment on the reported detention, the alleged financial demands or the accusations made by local authorities by the time of publication"
+    }
+   ],
+   "uncertainties": [
+    "扣押事件及索要赎金的具体细节尚未获得SPLA-IO方面确认",
+    "索要金额说法不一：一名官员称3500万南苏丹镑，另一名官员称不清楚具体金额",
+    "被扣押人员的确切人数与车辆数量在不同官员表述中存在差异（八名工人/三辆车）",
+    "事件目前主要依据当地官员向Radio Tamazuj的单方面陈述，尚缺乏独立交叉验证",
+    "据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_8019cdaed22ccfe8",
+ "disease_event_id": null,
+ "country_code": "SS"
+}
