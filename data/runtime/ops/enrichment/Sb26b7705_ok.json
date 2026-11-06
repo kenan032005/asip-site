@@ -1,0 +1,128 @@
+{
+ "label": "Sb26b7705",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b4d96ad3b75b474d4532fa5d9ea5653f6a6ee929732a9752eeacacd60a0b486e",
+ "tokens": {
+  "input_tokens": 2578,
+  "output_tokens": 422,
+  "total_tokens": 3000
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"火灾原因尚未查明，仍在调查中\", \"物质损失程度尚未确定\", \"目前仅有一个来源（Carta de Moçambique），尚缺乏交叉验证\"]",
+    "after": "[\"火灾原因尚未查明，仍在调查中\", \"物质损失程度尚未确定\", \"目前仅有一个来源（Carta de Moçambique），尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克：马普托中央医院称肿瘤科95%病历在火灾中得以保全",
+   "summary_zh": "马普托中央医院（HCM）肿瘤科大楼上周日发生火灾后，该院周一在皮肤科场所恢复肿瘤患者诊疗，肿瘤科临床活动已临时迁至该处。院方称，95%的肿瘤患者病历因存放在未受火灾及灭火用水影响的地下室而得以保全，团队正着手重建受损病历。院方表示住院患者已安全转移、无人员受伤报告，火灾原因及物质损失程度仍在调查中。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": null,
+    "city": "马普托",
+    "site": "马普托中央医院（HCM）",
+    "raw_text": "Maputo Central Hospital (HCM)"
+   },
+   "key_facts": [
+    {
+     "fact": "马普托中央医院肿瘤科大楼上周日发生火灾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "following the fire that engulfed its building last Sunday"
+    },
+    {
+     "fact": "院方称95%的肿瘤患者病历得以保全",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "95% of oncology patients’ clinical records were preserved because they were kept in the building’s basement"
+    },
+    {
+     "fact": "住院患者已安全转移，无人员受伤报告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "inpatients were safely transferred, with no injuries reported"
+    },
+    {
+     "fact": "火灾原因及物质损失程度仍在调查中",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the causes of the fire, as well as the extent of the material damage, remain under investigation by the competent authorities"
+    }
+   ],
+   "uncertainties": [
+    "火灾原因尚未查明，仍在调查中",
+    "物质损失程度尚未确定",
+    "目前仅有一个来源（Carta de Moçambique），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克：马普托中央医院称肿瘤科95%病历在火灾中得以保全",
+   "summary_zh": "马普托中央医院（HCM）肿瘤科大楼上周日发生火灾后，该院周一在皮肤科场所恢复肿瘤患者诊疗，肿瘤科临床活动已临时迁至该处。院方称，95%的肿瘤患者病历因存放在未受火灾及灭火用水影响的地下室而得以保全，团队正着手重建受损病历。院方表示住院患者已安全转移、无人员受伤报告，火灾原因及物质损失程度仍在调查中。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": null,
+    "city": "马普托",
+    "site": "马普托中央医院（HCM）",
+    "raw_text": "Maputo Central Hospital (HCM)"
+   },
+   "key_facts": [
+    {
+     "fact": "马普托中央医院肿瘤科大楼上周日发生火灾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "following the fire that engulfed its building last Sunday"
+    },
+    {
+     "fact": "院方称95%的肿瘤患者病历得以保全",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "95% of oncology patients’ clinical records were preserved because they were kept in the building’s basement"
+    },
+    {
+     "fact": "住院患者已安全转移，无人员受伤报告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "inpatients were safely transferred, with no injuries reported"
+    },
+    {
+     "fact": "火灾原因及物质损失程度仍在调查中",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the causes of the fire, as well as the extent of the material damage, remain under investigation by the competent authorities"
+    }
+   ],
+   "uncertainties": [
+    "火灾原因尚未查明，仍在调查中",
+    "物质损失程度尚未确定",
+    "目前仅有一个来源（Carta de Moçambique），尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_060d7001b26b7705",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

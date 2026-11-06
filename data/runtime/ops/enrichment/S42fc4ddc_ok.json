@@ -1,0 +1,113 @@
+{
+ "label": "S42fc4ddc",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "7397a636ab03666df2a8f1f1727be70e7188c186385f577aea654908aa3a66cb",
+ "tokens": {
+  "input_tokens": 2342,
+  "output_tokens": 515,
+  "total_tokens": 2857
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "津德尔启动尼日尔补贴大米销售第二阶段",
+   "summary_zh": "尼日尔津德尔地区于2026年11月2日正式启动国家补贴本地大米销售计划第二阶段，以应对粮食安全挑战。该计划由国家水利农业整治办公室（ONAHA）与保卫祖国团结基金（FSSP）合作实施，向津德尔销售点运送125吨大米，共5000袋25公斤装。政府设定补贴价格低于市场价，以保障弱势家庭的基本粮食供应。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "津德尔",
+    "city": "津德尔",
+    "site": null,
+    "raw_text": "région de Zinder"
+   },
+   "key_facts": [
+    {
+     "fact": "津德尔地区启动国家补贴大米销售计划第二阶段",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le lundi 2 novembre 2026, la région de Zinder a donné le coup d'envoi officiel de la deuxième phase du programme national de vente de riz local à prix subventionné."
+    },
+    {
+     "fact": "该计划由ONAHA与FSSP合作实施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fruit d'un partenariat stratégique entre l'Office national des aménagements hydro-agricoles (ONAHA) et le Fonds de solidarité pour la sauvegarde de la patrie (FSSP)"
+    },
+    {
+     "fact": "向津德尔销售点运送125吨大米，共5000袋25公斤装",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'administration régionale a acheminé 125 tonnes de riz vers les points de vente de Zinder, matérialisées par 5 000 sacs de 25 kilogrammes"
+    },
+    {
+     "fact": "补贴大米价格设定为每袋10500和8000非洲法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'État a fixé ainsi le sac de riz « Bondourey L1 » à 10 500 francs CFA, tandis que les variétés « Brabous-ko L3 » et « Dambou » sont proposées au prix de 8 000 francs CFA"
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（Journal du Niger）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "津德尔启动尼日尔补贴大米销售第二阶段",
+   "summary_zh": "尼日尔津德尔地区于2026年11月2日正式启动国家补贴本地大米销售计划第二阶段，以应对粮食安全挑战。该计划由国家水利农业整治办公室（ONAHA）与保卫祖国团结基金（FSSP）合作实施，向津德尔销售点运送125吨大米，共5000袋25公斤装。政府设定补贴价格低于市场价，以保障弱势家庭的基本粮食供应。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "津德尔",
+    "city": "津德尔",
+    "site": null,
+    "raw_text": "région de Zinder"
+   },
+   "key_facts": [
+    {
+     "fact": "津德尔地区启动国家补贴大米销售计划第二阶段",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le lundi 2 novembre 2026, la région de Zinder a donné le coup d'envoi officiel de la deuxième phase du programme national de vente de riz local à prix subventionné."
+    },
+    {
+     "fact": "该计划由ONAHA与FSSP合作实施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fruit d'un partenariat stratégique entre l'Office national des aménagements hydro-agricoles (ONAHA) et le Fonds de solidarité pour la sauvegarde de la patrie (FSSP)"
+    },
+    {
+     "fact": "向津德尔销售点运送125吨大米，共5000袋25公斤装",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'administration régionale a acheminé 125 tonnes de riz vers les points de vente de Zinder, matérialisées par 5 000 sacs de 25 kilogrammes"
+    },
+    {
+     "fact": "补贴大米价格设定为每袋10500和8000非洲法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'État a fixé ainsi le sac de riz « Bondourey L1 » à 10 500 francs CFA, tandis que les variétés « Brabous-ko L3 » et « Dambou » sont proposées au prix de 8 000 francs CFA"
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（Journal du Niger）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_84056a8b42fc4ddc",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

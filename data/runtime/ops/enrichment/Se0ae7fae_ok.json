@@ -1,0 +1,127 @@
+{
+ "label": "Se0ae7fae",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "71c911fdf61c1f3e7f97dd3f705ff95f8a07d6dbf4b3061179ec59a76e02e497",
+ "tokens": {
+  "input_tokens": 2348,
+  "output_tokens": 507,
+  "total_tokens": 2855
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "马普托供水管道破裂导致交通受阻",
+   "summary_zh": "莫桑比克马普托Avenida de Moçambique因电力公司EDM铺设电缆进行挖掘，导致一条供水管道破裂，一条车道被迫关闭，交通受到影响。技术人员已关闭破裂管道，但积水阻碍抢修，目前计划用抽水泵排水后再评估损坏情况。工程师未给出修复完成时间，称取决于技术评估结果。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": null,
+    "city": "马普托",
+    "site": "Avenida de Moçambique",
+    "raw_text": "Avenida de Moçambique"
+   },
+   "key_facts": [
+    {
+     "fact": "Avenida de Moçambique一条供水管道破裂，导致道路交通受阻",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A ruptura de uma conduta de abastecimento de água está a provocar constrangimentos na circulação rodoviária, na Avenida de Moçambique"
+    },
+    {
+     "fact": "破裂发生在EDM铺设中压电缆的挖掘施工之后",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "depois de uma escavação realizada para a passagem de cabos eléctricos da Electricidade de Moçambique (EDM)"
+    },
+    {
+     "fact": "因安全风险，一条车道被关闭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a avaria obrigou ao encerramento de uma das faixas de rodagem, devido ao risco que a situação representa para os automobilistas"
+    },
+    {
+     "fact": "破裂管道已被关闭，但积水仍在阻碍抢修",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a conduta que sofreu a ruptura já foi fechada, mas a água acumulada no interior da escavação continua a dificultar a intervenção"
+    },
+    {
+     "fact": "工程师未给出修复完成期限",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A engenheira não avançou um prazo para a conclusão da intervenção"
+    }
+   ],
+   "uncertainties": [
+    "管道破裂的具体原因尚未确认，报道称挖掘施工“可能”伴随了管道破裂",
+    "修复完成时间尚未确定",
+    "目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "马普托供水管道破裂导致交通受阻",
+   "summary_zh": "莫桑比克马普托Avenida de Moçambique因电力公司EDM铺设电缆进行挖掘，导致一条供水管道破裂，一条车道被迫关闭，交通受到影响。技术人员已关闭破裂管道，但积水阻碍抢修，目前计划用抽水泵排水后再评估损坏情况。工程师未给出修复完成时间，称取决于技术评估结果。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": null,
+    "city": "马普托",
+    "site": "Avenida de Moçambique",
+    "raw_text": "Avenida de Moçambique"
+   },
+   "key_facts": [
+    {
+     "fact": "Avenida de Moçambique一条供水管道破裂，导致道路交通受阻",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A ruptura de uma conduta de abastecimento de água está a provocar constrangimentos na circulação rodoviária, na Avenida de Moçambique"
+    },
+    {
+     "fact": "破裂发生在EDM铺设中压电缆的挖掘施工之后",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "depois de uma escavação realizada para a passagem de cabos eléctricos da Electricidade de Moçambique (EDM)"
+    },
+    {
+     "fact": "因安全风险，一条车道被关闭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a avaria obrigou ao encerramento de uma das faixas de rodagem, devido ao risco que a situação representa para os automobilistas"
+    },
+    {
+     "fact": "破裂管道已被关闭，但积水仍在阻碍抢修",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a conduta que sofreu a ruptura já foi fechada, mas a água acumulada no interior da escavação continua a dificultar a intervenção"
+    },
+    {
+     "fact": "工程师未给出修复完成期限",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A engenheira não avançou um prazo para a conclusão da intervenção"
+    }
+   ],
+   "uncertainties": [
+    "管道破裂的具体原因尚未确认，报道称挖掘施工“可能”伴随了管道破裂",
+    "修复完成时间尚未确定",
+    "目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_dc40ea31e0ae7fae",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}
