@@ -1,0 +1,117 @@
+{
+ "label": "S801e5dff",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "35de5f9d9fb3b8fc09b5cf93de273a1749362da5c9612725221519da5046c5da",
+ "tokens": {
+  "input_tokens": 1969,
+  "output_tokens": 468,
+  "total_tokens": 2437
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "埃塞俄比亚提格雷武装声称重创政府军",
+   "summary_zh": "提格雷人民解放阵线（TPLF）声称在北部地区与联邦政府军及盟军民兵的冲突中重创政府军，据称打死500名士兵（含两名团长）并打伤800人。该说法援引TPLF下属的Dimtsi Weyane电视台，称冲突发生于周六阿克苏姆历史城镇附近的一次反攻中。相关伤亡数字目前仅为单方面声称，尚未获得独立证实。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷州",
+    "city": "阿克苏姆",
+    "site": "阿克苏姆镇附近",
+    "raw_text": "near the historic town of Aksum, northern region"
+   },
+   "key_facts": [
+    {
+     "fact": "提格雷人民解放阵线声称重创埃塞俄比亚政府军",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ethiopia's rebel Tigray People's Liberation Front (TPLF) on Monday claimed to have inflicted heavy losses on the country’s armed forces."
+    },
+    {
+     "fact": "该方声称打死500名士兵（含两名团长）并打伤800人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It said it killed 500 soldiers, including two regiment commanders, and wounded 800 others during clashes with federal government troops and allied militias in the northern region."
+    },
+    {
+     "fact": "冲突据称发生于周六阿克苏姆历史城镇附近的一次反攻中",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "this took place during a counteroffensive on Saturday near the historic town of Aksum."
+    },
+    {
+     "fact": "相关说法来自TPLF下属的Dimtsi Weyane电视台",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "According to the TPLF-affiliated Dimtsi Weyane television station"
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字（500死、800伤）为TPLF单方面声称，尚未获得独立证实",
+    "事件目前仅有一个来源（Africanews）报道，缺乏交叉验证",
+    "政府军方面未就此作出回应或确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "埃塞俄比亚提格雷武装声称重创政府军",
+   "summary_zh": "提格雷人民解放阵线（TPLF）声称在北部地区与联邦政府军及盟军民兵的冲突中重创政府军，据称打死500名士兵（含两名团长）并打伤800人。该说法援引TPLF下属的Dimtsi Weyane电视台，称冲突发生于周六阿克苏姆历史城镇附近的一次反攻中。相关伤亡数字目前仅为单方面声称，尚未获得独立证实。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷州",
+    "city": "阿克苏姆",
+    "site": "阿克苏姆镇附近",
+    "raw_text": "near the historic town of Aksum, northern region"
+   },
+   "key_facts": [
+    {
+     "fact": "提格雷人民解放阵线声称重创埃塞俄比亚政府军",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ethiopia's rebel Tigray People's Liberation Front (TPLF) on Monday claimed to have inflicted heavy losses on the country’s armed forces."
+    },
+    {
+     "fact": "该方声称打死500名士兵（含两名团长）并打伤800人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It said it killed 500 soldiers, including two regiment commanders, and wounded 800 others during clashes with federal government troops and allied militias in the northern region."
+    },
+    {
+     "fact": "冲突据称发生于周六阿克苏姆历史城镇附近的一次反攻中",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "this took place during a counteroffensive on Saturday near the historic town of Aksum."
+    },
+    {
+     "fact": "相关说法来自TPLF下属的Dimtsi Weyane电视台",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "According to the TPLF-affiliated Dimtsi Weyane television station"
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字（500死、800伤）为TPLF单方面声称，尚未获得独立证实",
+    "事件目前仅有一个来源（Africanews）报道，缺乏交叉验证",
+    "政府军方面未就此作出回应或确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_b609e664801e5dff",
+ "disease_event_id": null,
+ "country_code": "ET"
+}
