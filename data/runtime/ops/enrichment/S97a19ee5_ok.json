@@ -1,0 +1,115 @@
+{
+ "label": "S97a19ee5",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0376c8ca7daa5e3307872608c03285299ef2544181f7e0b18c7822d1e3c56216",
+ "tokens": {
+  "input_tokens": 2466,
+  "output_tokens": 486,
+  "total_tokens": 2952
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "消防部门呼吁联邦首都区机动车驾驶员配备有效灭火器",
+   "summary_zh": "尼日利亚联邦消防局联邦首都区指挥部在阿布贾库布瓦的库克瓦巴现代市场及公交站开展消防安全宣传活动，呼吁乘客在乘坐商业车辆前确认车上配备有效灭火器。该活动是2026年全国消防服务周的一部分，消防人员还进行了灭火器正确使用的实操演示。有乘客反映，多数商业车辆驾驶员未配备灭火器，或所配灭火器已过期。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "联邦首都区",
+    "city": "阿布贾",
+    "site": "库布瓦库克瓦巴现代市场及公交站",
+    "raw_text": "Kukwaba Modern Market and Transit Park in Kubwa, Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "联邦消防局联邦首都区指挥部呼吁乘客确认所乘商业车辆配备有效灭火器",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Fire Service (FFS), FCT Command, has urged commuters to ensure that commercial vehicles they board are equipped with functional fire extinguishers."
+    },
+    {
+     "fact": "宣传活动在阿布贾库布瓦的库克瓦巴现代市场及公交站举行，属2026年全国消防服务周活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The sensitisation exercise, held on Tuesday at Kukwaba Modern Market and Transit Park in Kubwa, Abuja, was part of activities to commemorate the 2026 National Fire Service Week."
+    },
+    {
+     "fact": "消防人员进行了灭火器正确使用的实操演示",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "firefighters conducted a practical demonstration on the proper use of fire extinguishers"
+    },
+    {
+     "fact": "一名乘客称多数商业车辆驾驶员没有灭火器，有灭火器的也可能已过期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "most commercial drivers do not have fire extinguishers, while those who have them may be carrying expired ones"
+    }
+   ],
+   "uncertainties": [
+    "商业车辆灭火器配备缺失或过期的说法来自一名匿名乘客的个人陈述，尚未获得独立核实",
+    "目前仅单一来源（尼日利亚通讯社）报道"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "消防部门呼吁联邦首都区机动车驾驶员配备有效灭火器",
+   "summary_zh": "尼日利亚联邦消防局联邦首都区指挥部在阿布贾库布瓦的库克瓦巴现代市场及公交站开展消防安全宣传活动，呼吁乘客在乘坐商业车辆前确认车上配备有效灭火器。该活动是2026年全国消防服务周的一部分，消防人员还进行了灭火器正确使用的实操演示。有乘客反映，多数商业车辆驾驶员未配备灭火器，或所配灭火器已过期。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "联邦首都区",
+    "city": "阿布贾",
+    "site": "库布瓦库克瓦巴现代市场及公交站",
+    "raw_text": "Kukwaba Modern Market and Transit Park in Kubwa, Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "联邦消防局联邦首都区指挥部呼吁乘客确认所乘商业车辆配备有效灭火器",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Fire Service (FFS), FCT Command, has urged commuters to ensure that commercial vehicles they board are equipped with functional fire extinguishers."
+    },
+    {
+     "fact": "宣传活动在阿布贾库布瓦的库克瓦巴现代市场及公交站举行，属2026年全国消防服务周活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The sensitisation exercise, held on Tuesday at Kukwaba Modern Market and Transit Park in Kubwa, Abuja, was part of activities to commemorate the 2026 National Fire Service Week."
+    },
+    {
+     "fact": "消防人员进行了灭火器正确使用的实操演示",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "firefighters conducted a practical demonstration on the proper use of fire extinguishers"
+    },
+    {
+     "fact": "一名乘客称多数商业车辆驾驶员没有灭火器，有灭火器的也可能已过期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "most commercial drivers do not have fire extinguishers, while those who have them may be carrying expired ones"
+    }
+   ],
+   "uncertainties": [
+    "商业车辆灭火器配备缺失或过期的说法来自一名匿名乘客的个人陈述，尚未获得独立核实",
+    "目前仅单一来源（尼日利亚通讯社）报道"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_6b2e88db97a19ee5",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
