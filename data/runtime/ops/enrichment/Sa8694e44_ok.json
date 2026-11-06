@@ -1,0 +1,115 @@
+{
+ "label": "Sa8694e44",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "93483b74f185113317e9c0833730fccf8d3ef7df02a4191855b1cd6b0250ed6a",
+ "tokens": {
+  "input_tokens": 2017,
+  "output_tokens": 490,
+  "total_tokens": 2507
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "消防部门称在纳萨拉瓦州挽回13亿奈拉财产",
+   "summary_zh": "尼日利亚联邦消防局表示，2026年1月至10月期间在纳萨拉瓦州13个地方政府辖区的火灾中挽回了价值13亿奈拉的财产。该州消防负责人Eno Nwachukwu在拉菲亚举行的2026年全国防火周宣传活动上披露，同期约有价值21亿奈拉的财产受到火灾威胁，估计损失约8亿奈拉。该局在此期间共接到约97起紧急报警。上述数据为单一来源，尚未获得交叉验证。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Nasarawa",
+    "city": "Lafia",
+    "site": "联邦秘书处",
+    "raw_text": "Nasarawa State; Federal Secretariat in Lafia"
+   },
+   "key_facts": [
+    {
+     "fact": "联邦消防局称2026年1月至10月在纳萨拉瓦州挽回价值13亿奈拉的财产",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Fire Service says it saved properties worth N1.3bn from fire incidents across the 13 local government areas of Nasarawa State between January and October 2026."
+    },
+    {
+     "fact": "同期约21亿奈拉财产受火灾威胁，估计损失约8亿奈拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "She said properties worth N2.1bn were exposed to fire hazards during the period, while an estimated N800m worth of property was lost in fire incidents."
+    },
+    {
+     "fact": "该局在此期间接到约97起紧急报警",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the service received about 97 emergency calls between January and October."
+    },
+    {
+     "fact": "相关数据在拉菲亚联邦秘书处全国防火周活动上披露",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "disclosed this on Monday during the flag-off of the 2026 National Fire Week Awareness Campaign at the Federal Secretariat in Lafia, the state capital."
+    }
+   ],
+   "uncertainties": [
+    "火灾损失与挽回财产数据由消防部门单方面披露，尚未获得独立核实",
+    "目前仅一个来源（Punch）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "消防部门称在纳萨拉瓦州挽回13亿奈拉财产",
+   "summary_zh": "尼日利亚联邦消防局表示，2026年1月至10月期间在纳萨拉瓦州13个地方政府辖区的火灾中挽回了价值13亿奈拉的财产。该州消防负责人Eno Nwachukwu在拉菲亚举行的2026年全国防火周宣传活动上披露，同期约有价值21亿奈拉的财产受到火灾威胁，估计损失约8亿奈拉。该局在此期间共接到约97起紧急报警。上述数据为单一来源，尚未获得交叉验证。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Nasarawa",
+    "city": "Lafia",
+    "site": "联邦秘书处",
+    "raw_text": "Nasarawa State; Federal Secretariat in Lafia"
+   },
+   "key_facts": [
+    {
+     "fact": "联邦消防局称2026年1月至10月在纳萨拉瓦州挽回价值13亿奈拉的财产",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Fire Service says it saved properties worth N1.3bn from fire incidents across the 13 local government areas of Nasarawa State between January and October 2026."
+    },
+    {
+     "fact": "同期约21亿奈拉财产受火灾威胁，估计损失约8亿奈拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "She said properties worth N2.1bn were exposed to fire hazards during the period, while an estimated N800m worth of property was lost in fire incidents."
+    },
+    {
+     "fact": "该局在此期间接到约97起紧急报警",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the service received about 97 emergency calls between January and October."
+    },
+    {
+     "fact": "相关数据在拉菲亚联邦秘书处全国防火周活动上披露",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "disclosed this on Monday during the flag-off of the 2026 National Fire Week Awareness Campaign at the Federal Secretariat in Lafia, the state capital."
+    }
+   ],
+   "uncertainties": [
+    "火灾损失与挽回财产数据由消防部门单方面披露，尚未获得独立核实",
+    "目前仅一个来源（Punch）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_90c6eba8a8694e44",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
