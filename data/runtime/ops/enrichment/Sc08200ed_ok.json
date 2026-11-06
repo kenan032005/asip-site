@@ -1,0 +1,117 @@
+{
+ "label": "Sc08200ed",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "8f1ccff711c797f562722a4e791d568cefe51d6faa4dde59f25f674866ecc37e",
+ "tokens": {
+  "input_tokens": 2326,
+  "output_tokens": 555,
+  "total_tokens": 2881
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹团结州利尔县SPLA-IO敌对派系冲突致5死9伤",
+   "summary_zh": "据Radio Tamazuj报道，南苏丹团结州利尔县阿多克帕亚姆地区上周五发生SPLA-IO敌对派系交火，至少5名士兵死亡、9人受伤。冲突双方分别效忠于代理主席纳撒尼尔·奥耶特和获任命的代理主席雷吉娜·约瑟夫·卡巴，双方对伤亡数字说法不一。该报道为单一来源，具体伤亡情况尚待核实。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "团结州",
+    "city": "利尔县",
+    "site": "阿多克帕亚姆（Adok Payam）",
+    "raw_text": "Adok Payam in Unity State’s Leer County"
+   },
+   "key_facts": [
+    {
+     "fact": "SPLA-IO敌对派系在利尔县阿多克帕亚姆交火，至少5名士兵死亡、9人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least five soldiers were killed and nine others injured when rival groups of the SPLA-IO clashed in Adok Payam in Unity State’s Leer County last Friday."
+    },
+    {
+     "fact": "效忠奥耶特的军官称其一方2死5伤，并指认卡巴派系发动袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The group of Regina Joseph Kaba are the ones who attacked our Maj. Gen. Puol Gatkoi in the Nordhiech area in Adok Payam on Friday, but we defended our position... Two people were killed, and five others were injured from our side."
+    },
+    {
+     "fact": "对立派系军官称其一方3死4伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "We lost three soldiers, and four of our soldiers were injured."
+    },
+    {
+     "fact": "冲突源于SPLA-IO领导权分裂，奥耶特与卡巴均被不同方面视为代理领导人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Her appointment was subsequently endorsed by the SPLA-IO military command on 3 September 2026, leading to the group splintering between the two acting leaders."
+    }
+   ],
+   "uncertainties": [
+    "伤亡总数与各方具体损失说法不一，尚无法确认",
+    "袭击责任方为单方指控，未获独立核实",
+    "目前仅Radio Tamazuj单一来源报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹团结州利尔县SPLA-IO敌对派系冲突致5死9伤",
+   "summary_zh": "据Radio Tamazuj报道，南苏丹团结州利尔县阿多克帕亚姆地区上周五发生SPLA-IO敌对派系交火，至少5名士兵死亡、9人受伤。冲突双方分别效忠于代理主席纳撒尼尔·奥耶特和获任命的代理主席雷吉娜·约瑟夫·卡巴，双方对伤亡数字说法不一。该报道为单一来源，具体伤亡情况尚待核实。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "团结州",
+    "city": "利尔县",
+    "site": "阿多克帕亚姆（Adok Payam）",
+    "raw_text": "Adok Payam in Unity State’s Leer County"
+   },
+   "key_facts": [
+    {
+     "fact": "SPLA-IO敌对派系在利尔县阿多克帕亚姆交火，至少5名士兵死亡、9人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least five soldiers were killed and nine others injured when rival groups of the SPLA-IO clashed in Adok Payam in Unity State’s Leer County last Friday."
+    },
+    {
+     "fact": "效忠奥耶特的军官称其一方2死5伤，并指认卡巴派系发动袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The group of Regina Joseph Kaba are the ones who attacked our Maj. Gen. Puol Gatkoi in the Nordhiech area in Adok Payam on Friday, but we defended our position... Two people were killed, and five others were injured from our side."
+    },
+    {
+     "fact": "对立派系军官称其一方3死4伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "We lost three soldiers, and four of our soldiers were injured."
+    },
+    {
+     "fact": "冲突源于SPLA-IO领导权分裂，奥耶特与卡巴均被不同方面视为代理领导人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Her appointment was subsequently endorsed by the SPLA-IO military command on 3 September 2026, leading to the group splintering between the two acting leaders."
+    }
+   ],
+   "uncertainties": [
+    "伤亡总数与各方具体损失说法不一，尚无法确认",
+    "袭击责任方为单方指控，未获独立核实",
+    "目前仅Radio Tamazuj单一来源报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_204f22e9c08200ed",
+ "disease_event_id": null,
+ "country_code": "SS"
+}
