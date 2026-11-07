@@ -1,0 +1,150 @@
+{
+ "label": "S6f202f41",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5070a01c4c819f79eca85fcebad21deb66f1843da8bb5e1b55763d4268b52b98",
+ "tokens": {
+  "input_tokens": 2479,
+  "output_tokens": 758,
+  "total_tokens": 3237
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"针对Nwokorie的刑事指控尚未经法院判决，其本人否认全部指控\", \"关于退休副总监Opara试图影响监狱人员施以酷刑的指控尚未获证实\", \"Nwokorie关于警方无证逮捕、蒙眼戴铐及剥夺医疗的指控尚未获独立确认\", \"案件与感情纠纷相关的说法主要来自Nwokorie一方陈述，Genevieve Opara方面未就案件实质置评\"]",
+    "after": "[\"针对Nwokorie的刑事指控尚未经法院判决，其本人否认全部指控\", \"关于退休副总监Opara试图影响监狱人员施以酷刑的指控尚未获证实\", \"Nwokorie关于警方无证逮捕、蒙眼戴铐及剥夺医疗的指控尚未获独立确认\", \"案件与感情纠纷相关的说法主要来自Nwokorie一方陈述，Genevieve Opara方面未就案件实质置评\", \"据Sahara Reporters报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "阿布贾法院放宽商人David Nwokorie保释条件，此前因涉前警察副总监之女案件被羁押数月",
+   "summary_zh": "阿布贾联邦高等法院法官Rita Ofili-Ajumogobia于2026年11月3日裁定，放宽商人David Nwokorie的保释条件，将原需一名上校及以上军衔军官作担保的要求，改为公共服务部门12级及以上可信担保人。Nwokorie因一起据称与其前女友、退休警察副总监Hilary Opara之女Genevieve Opara关系破裂有关的网络犯罪案件，已在Kuje惩教中心羁押七个月。他否认相关指控，并指控警方无证逮捕、蒙眼戴铐及在押期间未获适当医疗；其律师还向联邦司法部提交请愿，指控退休副总监Opara试图影响Kuje监狱人员对其施以酷刑。上述指控尚未获证实。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "联邦首都区",
+    "city": "阿布贾",
+    "site": "联邦高等法院",
+    "raw_text": "Federal High Court in Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "阿布贾联邦高等法院放宽David Nwokorie的保释条件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal High Court in Abuja has relaxed the stringent bail conditions imposed on David Nwokorie"
+    },
+    {
+     "fact": "Nwokorie因网络犯罪案件在Kuje惩教中心羁押七个月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "an Abuja businessman who has spent seven months at the Kuje Correctional Centre over a cybercrime case"
+    },
+    {
+     "fact": "原保释条件要求一名上校及以上军衔军官作担保，后改为公共服务12级及以上可信担保人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "replaced the requirement for a senior military officer with that of a credible surety not below Grade Level 12 in the public service"
+    },
+    {
+     "fact": "Nwokorie于2025年4月9日因包括敲诈、网络跟踪、网络欺凌、勒索和威胁生命等指控被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The businessman was arrested on April 9, 2025, over allegations including extortion, cyberstalking, cyberbullying, blackmail and threats to life"
+    },
+    {
+     "fact": "Nwokorie否认指控，并指控警方无证逮捕、蒙眼戴铐及剥夺律师会见",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He alleged that police officers arrested him without a warrant, handcuffed and blindfolded him, denied him access to a lawyer"
+    },
+    {
+     "fact": "其律师提交请愿，指控退休副总监Opara试图影响Kuje监狱人员对其施以酷刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "accused Opara of allegedly attempting to procure the cooperation of officers at the custodial centre to punish him"
+    }
+   ],
+   "uncertainties": [
+    "针对Nwokorie的刑事指控尚未经法院判决，其本人否认全部指控",
+    "关于退休副总监Opara试图影响监狱人员施以酷刑的指控尚未获证实",
+    "Nwokorie关于警方无证逮捕、蒙眼戴铐及剥夺医疗的指控尚未获独立确认",
+    "案件与感情纠纷相关的说法主要来自Nwokorie一方陈述，Genevieve Opara方面未就案件实质置评"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "阿布贾法院放宽商人David Nwokorie保释条件，此前因涉前警察副总监之女案件被羁押数月",
+   "summary_zh": "阿布贾联邦高等法院法官Rita Ofili-Ajumogobia于2026年11月3日裁定，放宽商人David Nwokorie的保释条件，将原需一名上校及以上军衔军官作担保的要求，改为公共服务部门12级及以上可信担保人。Nwokorie因一起据称与其前女友、退休警察副总监Hilary Opara之女Genevieve Opara关系破裂有关的网络犯罪案件，已在Kuje惩教中心羁押七个月。他否认相关指控，并指控警方无证逮捕、蒙眼戴铐及在押期间未获适当医疗；其律师还向联邦司法部提交请愿，指控退休副总监Opara试图影响Kuje监狱人员对其施以酷刑。上述指控尚未获证实。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "联邦首都区",
+    "city": "阿布贾",
+    "site": "联邦高等法院",
+    "raw_text": "Federal High Court in Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "阿布贾联邦高等法院放宽David Nwokorie的保释条件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal High Court in Abuja has relaxed the stringent bail conditions imposed on David Nwokorie"
+    },
+    {
+     "fact": "Nwokorie因网络犯罪案件在Kuje惩教中心羁押七个月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "an Abuja businessman who has spent seven months at the Kuje Correctional Centre over a cybercrime case"
+    },
+    {
+     "fact": "原保释条件要求一名上校及以上军衔军官作担保，后改为公共服务12级及以上可信担保人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "replaced the requirement for a senior military officer with that of a credible surety not below Grade Level 12 in the public service"
+    },
+    {
+     "fact": "Nwokorie于2025年4月9日因包括敲诈、网络跟踪、网络欺凌、勒索和威胁生命等指控被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The businessman was arrested on April 9, 2025, over allegations including extortion, cyberstalking, cyberbullying, blackmail and threats to life"
+    },
+    {
+     "fact": "Nwokorie否认指控，并指控警方无证逮捕、蒙眼戴铐及剥夺律师会见",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He alleged that police officers arrested him without a warrant, handcuffed and blindfolded him, denied him access to a lawyer"
+    },
+    {
+     "fact": "其律师提交请愿，指控退休副总监Opara试图影响Kuje监狱人员对其施以酷刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "accused Opara of allegedly attempting to procure the cooperation of officers at the custodial centre to punish him"
+    }
+   ],
+   "uncertainties": [
+    "针对Nwokorie的刑事指控尚未经法院判决，其本人否认全部指控",
+    "关于退休副总监Opara试图影响监狱人员施以酷刑的指控尚未获证实",
+    "Nwokorie关于警方无证逮捕、蒙眼戴铐及剥夺医疗的指控尚未获独立确认",
+    "案件与感情纠纷相关的说法主要来自Nwokorie一方陈述，Genevieve Opara方面未就案件实质置评",
+    "据Sahara Reporters报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_74bcff956f202f41",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

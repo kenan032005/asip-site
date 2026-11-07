@@ -1,0 +1,136 @@
+{
+ "label": "Sa5b5a182",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f0fb1cdb161f9d382e165076a7b44e76589803d89d2db3a72edb70861f871516",
+ "tokens": {
+  "input_tokens": 2423,
+  "output_tokens": 646,
+  "total_tokens": 3069
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"道路劣化及涵洞排水设施缺陷的指控尚未获独立证实\", \"无现金收费系统导致延误和拥堵的说法来自驾车者投诉，有待核实\"]",
+    "after": "[\"道路劣化及涵洞排水设施缺陷的指控尚未获独立证实\", \"无现金收费系统导致延误和拥堵的说法来自驾车者投诉，有待核实\", \"据Sahara Reporters报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚凯菲—拉菲亚—马库尔迪公路多收费站引争议，HURIWA要求暂停收费",
+   "summary_zh": "尼日利亚人权作家协会（HURIWA）谴责政府在凯菲—拉菲亚—马库尔迪公路设置多个收费站，称该政策给纳萨拉瓦州和贝努埃州的贫困民众、商业运输业者及商户带来不公正的经济负担。该组织要求立即暂停收费，以待对政策、路况、收费站数量、缴费安排及收入管理透明度进行全面审查。政府自2025年2月4日起在227.2公里的阿布贾—凯菲—阿宽加—拉菲亚—马库尔迪公路开始收费，设四个主要收费点。HURIWA还质疑路况及无现金收费系统的实施问题。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": "凯菲—拉菲亚—马库尔迪公路",
+    "raw_text": "Keffi–Lafia–Makurdi highway"
+   },
+   "key_facts": [
+    {
+     "fact": "HURIWA谴责政府在凯菲—拉菲亚—马库尔迪公路设置多个收费站",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Human Rights Writers Association of Nigeria (HURIWA) has condemned the Nigerian Government’s imposition of multiple toll gates on the Keffi–Lafia–Makurdi highway"
+    },
+    {
+     "fact": "该组织要求立即暂停收费以待全面审查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The group demanded the immediate suspension of toll collection along the corridor pending a comprehensive review of the policy"
+    },
+    {
+     "fact": "政府自2025年2月4日起在227.2公里公路开始收费，设四个主要收费点",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Nigerian government commenced toll operations on February 4, 2025, along the 227.2-kilometre Abuja–Keffi–Akwanga–Lafia– Makurdi highway. The tolling arrangement covers four principal locations"
+    },
+    {
+     "fact": "轿车每站收费500奈拉，卡车等最高1600奈拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "saloon cars pay N500 at each toll point, SUVs and jeeps pay N800, minibuses and light buses pay N1000, while trucks, buses and multi-axle vehicles pay N1,600"
+    },
+    {
+     "fact": "HURIWA指控部分路段在收费前已出现路面剥落等劣化迹象",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "alleging that sections of the road began showing signs of deterioration, including peeling surfaces, before toll collection commenced"
+    }
+   ],
+   "uncertainties": [
+    "道路劣化及涵洞排水设施缺陷的指控尚未获独立证实",
+    "无现金收费系统导致延误和拥堵的说法来自驾车者投诉，有待核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚凯菲—拉菲亚—马库尔迪公路多收费站引争议，HURIWA要求暂停收费",
+   "summary_zh": "尼日利亚人权作家协会（HURIWA）谴责政府在凯菲—拉菲亚—马库尔迪公路设置多个收费站，称该政策给纳萨拉瓦州和贝努埃州的贫困民众、商业运输业者及商户带来不公正的经济负担。该组织要求立即暂停收费，以待对政策、路况、收费站数量、缴费安排及收入管理透明度进行全面审查。政府自2025年2月4日起在227.2公里的阿布贾—凯菲—阿宽加—拉菲亚—马库尔迪公路开始收费，设四个主要收费点。HURIWA还质疑路况及无现金收费系统的实施问题。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": "凯菲—拉菲亚—马库尔迪公路",
+    "raw_text": "Keffi–Lafia–Makurdi highway"
+   },
+   "key_facts": [
+    {
+     "fact": "HURIWA谴责政府在凯菲—拉菲亚—马库尔迪公路设置多个收费站",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Human Rights Writers Association of Nigeria (HURIWA) has condemned the Nigerian Government’s imposition of multiple toll gates on the Keffi–Lafia–Makurdi highway"
+    },
+    {
+     "fact": "该组织要求立即暂停收费以待全面审查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The group demanded the immediate suspension of toll collection along the corridor pending a comprehensive review of the policy"
+    },
+    {
+     "fact": "政府自2025年2月4日起在227.2公里公路开始收费，设四个主要收费点",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Nigerian government commenced toll operations on February 4, 2025, along the 227.2-kilometre Abuja–Keffi–Akwanga–Lafia– Makurdi highway. The tolling arrangement covers four principal locations"
+    },
+    {
+     "fact": "轿车每站收费500奈拉，卡车等最高1600奈拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "saloon cars pay N500 at each toll point, SUVs and jeeps pay N800, minibuses and light buses pay N1000, while trucks, buses and multi-axle vehicles pay N1,600"
+    },
+    {
+     "fact": "HURIWA指控部分路段在收费前已出现路面剥落等劣化迹象",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "alleging that sections of the road began showing signs of deterioration, including peeling surfaces, before toll collection commenced"
+    }
+   ],
+   "uncertainties": [
+    "道路劣化及涵洞排水设施缺陷的指控尚未获独立证实",
+    "无现金收费系统导致延误和拥堵的说法来自驾车者投诉，有待核实",
+    "据Sahara Reporters报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_26cfcb7fa5b5a182",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

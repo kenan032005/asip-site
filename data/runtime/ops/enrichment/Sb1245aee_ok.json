@@ -1,0 +1,119 @@
+{
+ "label": "Sb1245aee",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b5e3e3464edbd6ca2cea049e8bc8c6956fdfff0e1ef9d36925c0592742eecd7c",
+ "tokens": {
+  "input_tokens": 2567,
+  "output_tokens": 548,
+  "total_tokens": 3115
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚总统助理被指威胁分居妻子，警告其勿回家",
+   "summary_zh": "据SaharaReporters报道，尼日利亚总统博拉·蒂努布的学生事务高级特别助理Sunday Adedayo Asefon被指威胁其分居妻子Damilola Tunmise Asefon，警告她不要回家。此前，其妻向埃基蒂州警察局长提交请愿书，指控Asefon暴力殴打他们10岁的女儿，致其耳部和头部出血。报道称，Asefon的家人还举行会议并涉嫌威胁要对付其妻，并指责她泄露请愿书以损害丈夫的政治前途。上述指控均来自接近家庭的单一来源，尚未获得独立证实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "埃基蒂州",
+    "city": null,
+    "site": null,
+    "raw_text": "Ekiti State"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚总统蒂努布的高级特别助理Sunday Asefon被指威胁其分居妻子，警告她不要回家",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "he has threatened his estranged wife, Damilola Tunmise Asefon, over a police petition accusing him of brutally assaulting their 10-year-old daughter"
+    },
+    {
+     "fact": "其妻向埃基蒂州警察局长提交请愿书，指控Asefon殴打10岁女儿致耳部和头部出血",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the petition she submitted to the Ekiti State Commissioner of Police, seeking an investigation and prosecution over the alleged assault that reportedly left their 10-year-old daughter... bleeding from her ears and head"
+    },
+    {
+     "fact": "据称Asefon家人举行会议并威胁要对付其妻",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "members of Asefon's family have been holding meetings over the petition and allegedly threatening to deal with his estranged wife wherever they see her"
+    },
+    {
+     "fact": "Asefon家人被指指责其妻泄露请愿书以损害丈夫政治前途",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Asefon's family members have been accusing the estranged wife of deliberately publicising the allegations to damage her husband's political career"
+    }
+   ],
+   "uncertainties": [
+    "殴打女儿的指控尚未获独立证实",
+    "威胁及家人会议威胁的说法来自接近家庭的单一来源",
+    "Asefon一方尚未就此作出回应",
+    "事件具体地点未明确"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 60
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚总统助理被指威胁分居妻子，警告其勿回家",
+   "summary_zh": "据SaharaReporters报道，尼日利亚总统博拉·蒂努布的学生事务高级特别助理Sunday Adedayo Asefon被指威胁其分居妻子Damilola Tunmise Asefon，警告她不要回家。此前，其妻向埃基蒂州警察局长提交请愿书，指控Asefon暴力殴打他们10岁的女儿，致其耳部和头部出血。报道称，Asefon的家人还举行会议并涉嫌威胁要对付其妻，并指责她泄露请愿书以损害丈夫的政治前途。上述指控均来自接近家庭的单一来源，尚未获得独立证实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "埃基蒂州",
+    "city": null,
+    "site": null,
+    "raw_text": "Ekiti State"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚总统蒂努布的高级特别助理Sunday Asefon被指威胁其分居妻子，警告她不要回家",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "he has threatened his estranged wife, Damilola Tunmise Asefon, over a police petition accusing him of brutally assaulting their 10-year-old daughter"
+    },
+    {
+     "fact": "其妻向埃基蒂州警察局长提交请愿书，指控Asefon殴打10岁女儿致耳部和头部出血",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the petition she submitted to the Ekiti State Commissioner of Police, seeking an investigation and prosecution over the alleged assault that reportedly left their 10-year-old daughter... bleeding from her ears and head"
+    },
+    {
+     "fact": "据称Asefon家人举行会议并威胁要对付其妻",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "members of Asefon's family have been holding meetings over the petition and allegedly threatening to deal with his estranged wife wherever they see her"
+    },
+    {
+     "fact": "Asefon家人被指指责其妻泄露请愿书以损害丈夫政治前途",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Asefon's family members have been accusing the estranged wife of deliberately publicising the allegations to damage her husband's political career"
+    }
+   ],
+   "uncertainties": [
+    "殴打女儿的指控尚未获独立证实",
+    "威胁及家人会议威胁的说法来自接近家庭的单一来源",
+    "Asefon一方尚未就此作出回应",
+    "事件具体地点未明确"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 60
+  }
+ },
+ "event_id": "EVT_198388f7b1245aee",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

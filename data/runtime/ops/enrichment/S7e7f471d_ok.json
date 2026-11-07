@@ -1,0 +1,121 @@
+{
+ "label": "S7e7f471d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6e9a7139d3e96ef5d3a0a6365d9d3a5d4f58bcd9f43cd076bf3bb79cfc12a69e",
+ "tokens": {
+  "input_tokens": 2516,
+  "output_tokens": 630,
+  "total_tokens": 3146
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "抗议者包围阿布贾警察总部，要求逮捕涉嫌暗杀Sowore未遂事件幕后人员",
+   "summary_zh": "尼日利亚抗议者包围阿布贾国家警察总部，要求逮捕并起诉据称对10月30日在埃基蒂州Ado-Ekiti袭击人权活动人士、非洲行动大会总统候选人Omoyele Sowore及其团队负责的人员。Sowore指控埃基蒂州政府及安全人员包庇涉案者，并称一部被盗手机被追踪至州长官邸。警方称已逮捕11名嫌疑人，但Sowore要求追查据称的组织者和资助者。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": "尼日利亚警察总部",
+    "raw_text": "headquarters of the Nigeria Police Force in Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "抗议者包围阿布贾尼日利亚警察总部，要求逮捕并起诉涉嫌袭击Sowore的人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Protesters have besieged the headquarters of the Nigeria Police Force in Abuja, demanding the immediate arrest and prosecution of individuals allegedly responsible for the October 30 violent attack on human rights activist and African Action Congress (AAC) presidential candidate, Omoyele Sowore"
+    },
+    {
+     "fact": "Sowore称一部被盗手机被追踪至埃基蒂州州长官邸",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "One of the phones stolen from a member of our team during Friday’s brutal attack in Ado-Ekiti has now been traced to the Governor’s Lodge in Ekiti State"
+    },
+    {
+     "fact": "埃基蒂州警方宣布逮捕11名与袭击有关的嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Ekiti State Police Command announced the arrest of 11 suspects in connection with the attack"
+    },
+    {
+     "fact": "Sowore指控总统学生事务高级特别助理Asefon Sunday Dayo及联邦住房管理局总经理Oyetunde Oladimeji Ojo涉嫌参与袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sowore also made fresh allegations on Monday, accusing President Bola Tinubu's Senior Special Assistant on Student Engagement, Asefon Sunday Dayo, and the Managing Director of the Federal Housing Authority, Oyetunde Oladimeji Ojo, who is Tinubu's son-in-law, of alleged involvement in the attack"
+    }
+   ],
+   "uncertainties": [
+    "Sowore关于州政府及安全人员包庇涉案者的指控尚未证实",
+    "Sowore关于手机被追踪至州长官邸的说法尚未获独立确认",
+    "Sowore对Asefon、Ojo等人涉嫌参与袭击的指控尚未证实",
+    "警方与Sowore对事件性质（普通争执还是协同袭击）说法不一",
+    "单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "抗议者包围阿布贾警察总部，要求逮捕涉嫌暗杀Sowore未遂事件幕后人员",
+   "summary_zh": "尼日利亚抗议者包围阿布贾国家警察总部，要求逮捕并起诉据称对10月30日在埃基蒂州Ado-Ekiti袭击人权活动人士、非洲行动大会总统候选人Omoyele Sowore及其团队负责的人员。Sowore指控埃基蒂州政府及安全人员包庇涉案者，并称一部被盗手机被追踪至州长官邸。警方称已逮捕11名嫌疑人，但Sowore要求追查据称的组织者和资助者。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": "尼日利亚警察总部",
+    "raw_text": "headquarters of the Nigeria Police Force in Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "抗议者包围阿布贾尼日利亚警察总部，要求逮捕并起诉涉嫌袭击Sowore的人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Protesters have besieged the headquarters of the Nigeria Police Force in Abuja, demanding the immediate arrest and prosecution of individuals allegedly responsible for the October 30 violent attack on human rights activist and African Action Congress (AAC) presidential candidate, Omoyele Sowore"
+    },
+    {
+     "fact": "Sowore称一部被盗手机被追踪至埃基蒂州州长官邸",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "One of the phones stolen from a member of our team during Friday’s brutal attack in Ado-Ekiti has now been traced to the Governor’s Lodge in Ekiti State"
+    },
+    {
+     "fact": "埃基蒂州警方宣布逮捕11名与袭击有关的嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Ekiti State Police Command announced the arrest of 11 suspects in connection with the attack"
+    },
+    {
+     "fact": "Sowore指控总统学生事务高级特别助理Asefon Sunday Dayo及联邦住房管理局总经理Oyetunde Oladimeji Ojo涉嫌参与袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sowore also made fresh allegations on Monday, accusing President Bola Tinubu's Senior Special Assistant on Student Engagement, Asefon Sunday Dayo, and the Managing Director of the Federal Housing Authority, Oyetunde Oladimeji Ojo, who is Tinubu's son-in-law, of alleged involvement in the attack"
+    }
+   ],
+   "uncertainties": [
+    "Sowore关于州政府及安全人员包庇涉案者的指控尚未证实",
+    "Sowore关于手机被追踪至州长官邸的说法尚未获独立确认",
+    "Sowore对Asefon、Ojo等人涉嫌参与袭击的指控尚未证实",
+    "警方与Sowore对事件性质（普通争执还是协同袭击）说法不一",
+    "单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_8d7eae927e7f471d",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
