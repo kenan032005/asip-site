@@ -1,0 +1,126 @@
+{
+ "label": "S2e7331e7",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0058a6e807f8cde88ffad48e0e674c52c9d9630546d14e9a4e6962440fdd41ba",
+ "tokens": {
+  "input_tokens": 2759,
+  "output_tokens": 486,
+  "total_tokens": 3245
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"单一来源报道（La Nouvelle Tribune），尚缺乏交叉验证\", \"报道提及的全国纪念仪式日期尚未确定\"]",
+    "after": "[\"单一来源报道（La Nouvelle Tribune），尚缺乏交叉验证\", \"报道提及的全国纪念仪式日期尚未确定\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "法国：一名四十多岁男子因在Facebook上对穆斯林发出死亡威胁被判刑",
+   "summary_zh": "法国南特刑事法庭于2026年11月3日判处一名45岁男子六个月缓刑，该男子来自卢瓦尔-大西洋省勒热，此前在Facebook上发布针对穆斯林的死亡威胁。PHAROS平台接到举报后，该男子于10月30日被逮捕。此案审理正值特拉普发生种族主义袭击事件之后，该袭击造成一名26岁男子死亡。",
+   "event_type": "other_security",
+   "country_iso3": "FRA",
+   "location": {
+    "country_iso3": "FRA",
+    "admin1": "卢瓦尔-大西洋省",
+    "city": "勒热",
+    "site": "南特刑事法庭",
+    "raw_text": "Legé (Loire-Atlantique), tribunal correctionnel de Nantes, France"
+   },
+   "key_facts": [
+    {
+     "fact": "南特刑事法庭判处一名45岁男子六个月缓刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le tribunal correctionnel de Nantes a condamné lundi 3 novembre 2026, en France, un habitant de Legé (Loire-Atlantique) âgé de 45 ans à six mois de prison avec sursis"
+    },
+    {
+     "fact": "该男子在Facebook上发布针对穆斯林的死亡威胁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il avait publié sur Facebook des menaces de mort contre les musulmans"
+    },
+    {
+     "fact": "PHAROS平台接到举报后该男子于10月30日被逮捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la plateforme PHAROS a reçu un signalement qui a conduit à son interpellation le vendredi 30 octobre"
+    },
+    {
+     "fact": "此案审理正值特拉普种族主义袭击事件之后，该袭击造成一名26岁男子死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il comparaissait une semaine après l’attentat raciste de Trappes, qui a coûté la vie à un jeune homme de 26 ans"
+    }
+   ],
+   "uncertainties": [
+    "单一来源报道（La Nouvelle Tribune），尚缺乏交叉验证",
+    "报道提及的全国纪念仪式日期尚未确定"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "法国：一名四十多岁男子因在Facebook上对穆斯林发出死亡威胁被判刑",
+   "summary_zh": "法国南特刑事法庭于2026年11月3日判处一名45岁男子六个月缓刑，该男子来自卢瓦尔-大西洋省勒热，此前在Facebook上发布针对穆斯林的死亡威胁。PHAROS平台接到举报后，该男子于10月30日被逮捕。此案审理正值特拉普发生种族主义袭击事件之后，该袭击造成一名26岁男子死亡。",
+   "event_type": "other_security",
+   "country_iso3": "FRA",
+   "location": {
+    "country_iso3": "FRA",
+    "admin1": "卢瓦尔-大西洋省",
+    "city": "勒热",
+    "site": "南特刑事法庭",
+    "raw_text": "Legé (Loire-Atlantique), tribunal correctionnel de Nantes, France"
+   },
+   "key_facts": [
+    {
+     "fact": "南特刑事法庭判处一名45岁男子六个月缓刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le tribunal correctionnel de Nantes a condamné lundi 3 novembre 2026, en France, un habitant de Legé (Loire-Atlantique) âgé de 45 ans à six mois de prison avec sursis"
+    },
+    {
+     "fact": "该男子在Facebook上发布针对穆斯林的死亡威胁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il avait publié sur Facebook des menaces de mort contre les musulmans"
+    },
+    {
+     "fact": "PHAROS平台接到举报后该男子于10月30日被逮捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la plateforme PHAROS a reçu un signalement qui a conduit à son interpellation le vendredi 30 octobre"
+    },
+    {
+     "fact": "此案审理正值特拉普种族主义袭击事件之后，该袭击造成一名26岁男子死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il comparaissait une semaine après l’attentat raciste de Trappes, qui a coûté la vie à un jeune homme de 26 ans"
+    }
+   ],
+   "uncertainties": [
+    "单一来源报道（La Nouvelle Tribune），尚缺乏交叉验证",
+    "报道提及的全国纪念仪式日期尚未确定",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_c9654fde2e7331e7",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
