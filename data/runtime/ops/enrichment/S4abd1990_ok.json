@@ -1,0 +1,129 @@
+{
+ "label": "S4abd1990",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f751293a187e11ba018b0dfb53a5639a7c92070ae70b2729cbade379f6aae31e",
+ "tokens": {
+  "input_tokens": 2476,
+  "output_tokens": 579,
+  "total_tokens": 3055
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "喀麦隆杜阿拉Metafrique Steel工厂发生致命爆炸",
+   "summary_zh": "喀麦隆杜阿拉的Metafrique Steel工厂于11月2日（周一）发生爆炸，造成4人死亡、16人重伤。利托拉尔省省长指责厂方未充分落实此前火灾后要求的安全措施，并称其为“业余主义”，要求停产待查；厂方则声称爆炸由“外部因素”引起，呼吁等待调查确定原因。该厂为印度Metafrique集团子公司，约雇有500人。",
+   "event_type": "other_security",
+   "country_iso3": "CMR",
+   "location": {
+    "country_iso3": "CMR",
+    "admin1": "利托拉尔省",
+    "city": "杜阿拉",
+    "site": "Metafrique Steel工厂",
+    "raw_text": "l'usine Metafrique Steel à Douala"
+   },
+   "key_facts": [
+    {
+     "fact": "杜阿拉Metafrique Steel工厂发生爆炸，造成4人死亡、16人重伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'explosion qui a fait un bilan humain conséquent de 4 morts calcinés, extraits des décombres, et 16 blessés"
+    },
+    {
+     "fact": "利托拉尔省省长指责厂方未充分落实此前火灾后要求的安全措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouverneur du Littoral, avait le ton assez dur à l'encontre de la direction de l'usine, qu'il a accusée de ne pas avoir suffisamment pris en compte les mesures de sécurité prescrites après le premier sinistre"
+    },
+    {
+     "fact": "厂方声称爆炸由外部因素引起，呼吁等待调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Metafrique Steel a évoqué un incident « causé par un facteur externe » et a invité à la prudence, le temps qu'une enquête détermine les causes précises"
+    },
+    {
+     "fact": "此次爆炸发生在该厂此前火灾约6个月后",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ce drame est intervenu à peine 6 mois après un premier incendie dans cette même usine"
+    },
+    {
+     "fact": "省长不排除伤亡人数进一步上升",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouverneur n'excluait pas une aggravation de ce bilan, au vu de la gravité des brûlures"
+    }
+   ],
+   "uncertainties": [
+    "爆炸具体原因尚未确定，有待调查",
+    "厂方所称“外部因素”说法未获证实",
+    "伤亡人数可能进一步上升",
+    "目前仅单一来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "喀麦隆杜阿拉Metafrique Steel工厂发生致命爆炸",
+   "summary_zh": "喀麦隆杜阿拉的Metafrique Steel工厂于11月2日（周一）发生爆炸，造成4人死亡、16人重伤。利托拉尔省省长指责厂方未充分落实此前火灾后要求的安全措施，并称其为“业余主义”，要求停产待查；厂方则声称爆炸由“外部因素”引起，呼吁等待调查确定原因。该厂为印度Metafrique集团子公司，约雇有500人。",
+   "event_type": "other_security",
+   "country_iso3": "CMR",
+   "location": {
+    "country_iso3": "CMR",
+    "admin1": "利托拉尔省",
+    "city": "杜阿拉",
+    "site": "Metafrique Steel工厂",
+    "raw_text": "l'usine Metafrique Steel à Douala"
+   },
+   "key_facts": [
+    {
+     "fact": "杜阿拉Metafrique Steel工厂发生爆炸，造成4人死亡、16人重伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'explosion qui a fait un bilan humain conséquent de 4 morts calcinés, extraits des décombres, et 16 blessés"
+    },
+    {
+     "fact": "利托拉尔省省长指责厂方未充分落实此前火灾后要求的安全措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouverneur du Littoral, avait le ton assez dur à l'encontre de la direction de l'usine, qu'il a accusée de ne pas avoir suffisamment pris en compte les mesures de sécurité prescrites après le premier sinistre"
+    },
+    {
+     "fact": "厂方声称爆炸由外部因素引起，呼吁等待调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Metafrique Steel a évoqué un incident « causé par un facteur externe » et a invité à la prudence, le temps qu'une enquête détermine les causes précises"
+    },
+    {
+     "fact": "此次爆炸发生在该厂此前火灾约6个月后",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ce drame est intervenu à peine 6 mois après un premier incendie dans cette même usine"
+    },
+    {
+     "fact": "省长不排除伤亡人数进一步上升",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouverneur n'excluait pas une aggravation de ce bilan, au vu de la gravité des brûlures"
+    }
+   ],
+   "uncertainties": [
+    "爆炸具体原因尚未确定，有待调查",
+    "厂方所称“外部因素”说法未获证实",
+    "伤亡人数可能进一步上升",
+    "目前仅单一来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_aa5b1b644abd1990",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

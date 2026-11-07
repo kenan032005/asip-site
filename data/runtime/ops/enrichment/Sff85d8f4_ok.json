@@ -1,0 +1,115 @@
+{
+ "label": "Sff85d8f4",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c6b3c7ea478e940417ee834d76592b1c8e6a8907c3ca7379532c7dac288c7681",
+ "tokens": {
+  "input_tokens": 2825,
+  "output_tokens": 513,
+  "total_tokens": 3338
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得药剂师协会呼吁避免自行用药，并提醒登革热治疗免费",
+   "summary_zh": "乍得国家药剂师协会（ONPT）于2026年11月3日发表公报，呼吁民众在登革热疫情期间保持冷静、提高警惕并遵守防控措施。该协会强调避免自行用药，并提醒政府已于11月2日决定在公立医疗机构免费治疗登革热。协会还警告登革热疑似或确诊病例不要使用阿司匹林、布洛芬等非甾体抗炎药，以防出血并发症。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得国家药剂师协会发表公报，呼吁民众在登革热疫情期间保持冷静和警惕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’Ordre national des pharmaciens du Tchad (ONPT) appelle la population au calme, à la vigilance et au respect des mesures de prévention"
+    },
+    {
+     "fact": "政府于2026年11月2日决定在公立医疗机构免费治疗登革热",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement a décidé, le 2 novembre 2026, de la gratuité de la prise en charge de la dengue dans les structures sanitaires publiques"
+    },
+    {
+     "fact": "协会警告登革热疑似或确诊病例不要使用阿司匹林、布洛芬等非甾体抗炎药",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’ONPT met en garde contre l’usage de l’aspirine, de l’ibuprofène et d’autres anti-inflammatoires non stéroïdiens"
+    },
+    {
+     "fact": "据世界卫生组织，早期识别重症迹象可将病死率降至1%以下",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon l’OMS, une reconnaissance précoce des signes de gravité permet de ramener la létalité à moins de 1 %"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Tchadinfos）报道，尚缺乏交叉验证",
+    "登革热疫情的具体病例数和死亡人数未在文中提供"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得药剂师协会呼吁避免自行用药，并提醒登革热治疗免费",
+   "summary_zh": "乍得国家药剂师协会（ONPT）于2026年11月3日发表公报，呼吁民众在登革热疫情期间保持冷静、提高警惕并遵守防控措施。该协会强调避免自行用药，并提醒政府已于11月2日决定在公立医疗机构免费治疗登革热。协会还警告登革热疑似或确诊病例不要使用阿司匹林、布洛芬等非甾体抗炎药，以防出血并发症。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得国家药剂师协会发表公报，呼吁民众在登革热疫情期间保持冷静和警惕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’Ordre national des pharmaciens du Tchad (ONPT) appelle la population au calme, à la vigilance et au respect des mesures de prévention"
+    },
+    {
+     "fact": "政府于2026年11月2日决定在公立医疗机构免费治疗登革热",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement a décidé, le 2 novembre 2026, de la gratuité de la prise en charge de la dengue dans les structures sanitaires publiques"
+    },
+    {
+     "fact": "协会警告登革热疑似或确诊病例不要使用阿司匹林、布洛芬等非甾体抗炎药",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’ONPT met en garde contre l’usage de l’aspirine, de l’ibuprofène et d’autres anti-inflammatoires non stéroïdiens"
+    },
+    {
+     "fact": "据世界卫生组织，早期识别重症迹象可将病死率降至1%以下",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon l’OMS, une reconnaissance précoce des signes de gravité permet de ramener la létalité à moins de 1 %"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Tchadinfos）报道，尚缺乏交叉验证",
+    "登革热疫情的具体病例数和死亡人数未在文中提供"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_23c85915ff85d8f4",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
