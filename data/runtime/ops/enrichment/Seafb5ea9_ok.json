@@ -1,0 +1,117 @@
+{
+ "label": "Seafb5ea9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "081cd6df1868381e5e4dc070b79199c7df0e7508f0071240c92ac53044df32a7",
+ "tokens": {
+  "input_tokens": 2395,
+  "output_tokens": 524,
+  "total_tokens": 2919
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克战争复员人员请求议会介入提高补贴",
+   "summary_zh": "莫桑比克前战斗人员和战争复员人员表示其养老金数额微不足道，远不能满足基本生存需求，已向共和国议会反映该问题，议会承诺转交政府处理。莫桑比克前战斗人员论坛（FOMEC）因补贴问题与政府存在分歧，于本周二请求议会议长进行调解。据FOMEC副主席称，复员人员无论军衔高低均领取微薄养老金，例如少校仅约2700梅蒂卡尔。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": null,
+    "city": null,
+    "site": "共和国议会",
+    "raw_text": "Assembleia da República"
+   },
+   "key_facts": [
+    {
+     "fact": "莫桑比克前战斗人员和战争复员人员称养老金数额微不足道，无法满足基本生存需求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Antigos combatentes e desmobilizados de guerra dizem que os valores das suas pensões são insignificantes e estão longe de satisfazer as necessidades básicas para a sua sobrevivência."
+    },
+    {
+     "fact": "该诉求已提交共和国议会，议会承诺转交政府",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A preocupação foi apresentada à Assembleia da República, que prometeu remeter ao Governo."
+    },
+    {
+     "fact": "莫桑比克前战斗人员论坛（FOMEC）因补贴问题与政府存在分歧，请求议会议长调解",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "O Fórum de Ex-combatentes [...] está desavindo com o Governo por causa dos subsídios, e, nesta terça-feira, foi pedir mediação da Presidente da Assembleia da República."
+    },
+    {
+     "fact": "据FOMEC副主席称，复员人员无论军衔均领取微薄养老金，少校约2700梅蒂卡尔",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "o grupo recebe uma pensão irrisória, independentemente da patente [...] até major está tem 2,7 mil"
+    }
+   ],
+   "uncertainties": [
+    "议会承诺转交政府处理的具体结果尚未确认",
+    "政府是否调整补贴标准尚未证实",
+    "目前仅单一来源（O País）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克战争复员人员请求议会介入提高补贴",
+   "summary_zh": "莫桑比克前战斗人员和战争复员人员表示其养老金数额微不足道，远不能满足基本生存需求，已向共和国议会反映该问题，议会承诺转交政府处理。莫桑比克前战斗人员论坛（FOMEC）因补贴问题与政府存在分歧，于本周二请求议会议长进行调解。据FOMEC副主席称，复员人员无论军衔高低均领取微薄养老金，例如少校仅约2700梅蒂卡尔。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": null,
+    "city": null,
+    "site": "共和国议会",
+    "raw_text": "Assembleia da República"
+   },
+   "key_facts": [
+    {
+     "fact": "莫桑比克前战斗人员和战争复员人员称养老金数额微不足道，无法满足基本生存需求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Antigos combatentes e desmobilizados de guerra dizem que os valores das suas pensões são insignificantes e estão longe de satisfazer as necessidades básicas para a sua sobrevivência."
+    },
+    {
+     "fact": "该诉求已提交共和国议会，议会承诺转交政府",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A preocupação foi apresentada à Assembleia da República, que prometeu remeter ao Governo."
+    },
+    {
+     "fact": "莫桑比克前战斗人员论坛（FOMEC）因补贴问题与政府存在分歧，请求议会议长调解",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "O Fórum de Ex-combatentes [...] está desavindo com o Governo por causa dos subsídios, e, nesta terça-feira, foi pedir mediação da Presidente da Assembleia da República."
+    },
+    {
+     "fact": "据FOMEC副主席称，复员人员无论军衔均领取微薄养老金，少校约2700梅蒂卡尔",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "o grupo recebe uma pensão irrisória, independentemente da patente [...] até major está tem 2,7 mil"
+    }
+   ],
+   "uncertainties": [
+    "议会承诺转交政府处理的具体结果尚未确认",
+    "政府是否调整补贴标准尚未证实",
+    "目前仅单一来源（O País）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_29ddfc34eafb5ea9",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

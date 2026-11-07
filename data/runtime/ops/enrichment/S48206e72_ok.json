@@ -1,0 +1,115 @@
+{
+ "label": "S48206e72",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "44d6c9d87ee2de9292acc965cfa57c10a66faa7b86c8fab3ac45c94952fdf9cc",
+ "tokens": {
+  "input_tokens": 2558,
+  "output_tokens": 615,
+  "total_tokens": 3173
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "德尔加杜角省袭击致两周内逾1200人逃离",
+   "summary_zh": "据国际移民组织最新报告，10月14日至27日期间，莫桑比克德尔加杜角省四个地区因武装团体袭击及对新一轮袭击的担忧，至少1235人逃离居住地，涉及316户家庭。流离失所者中包括265名男性、386名女性和584名儿童，儿童约占47%。德尔加杜角省自2017年以来面临武装叛乱，据国际组织数据已造成逾6600人死亡、超过130万人流离失所。",
+   "event_type": "armed_conflict",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "德尔加杜角省",
+    "city": null,
+    "site": null,
+    "raw_text": "distritos de Mocímboa da Praia, Macomia, Muidumbe e Meluco, província de Cabo Delgado"
+   },
+   "key_facts": [
+    {
+     "fact": "10月14日至27日期间，德尔加杜角省四个地区至少1235人因袭击和担忧武装团体再次来袭而逃离居住地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pelo menos 1.235 pessoas abandonaram as suas zonas de residência devido a ataques e ao receio de novas incursões de grupos armados em quatro distritos da província de Cabo Delgado, entre 14 e 27 de Outubro"
+    },
+    {
+     "fact": "流离失所涉及316户家庭，分布在莫辛布瓦-达普拉亚、马科米亚、穆伊敦贝和梅卢科四个地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "os movimentos envolveram 316 agregados familiares nos distritos de Mocímboa da Praia, Macomia, Muidumbe e Meluco"
+    },
+    {
+     "fact": "莫辛布瓦-达普拉亚人口流动最多，有785人流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Mocímboa da Praia registou o maior número de movimentos populacionais, com 785 pessoas deslocadas"
+    },
+    {
+     "fact": "德尔加杜角省自2017年以来面临武装叛乱，据国际组织数据已造成逾6600人死亡、超过130万人流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cabo Delgado enfrenta uma insurgência armada desde 2017, que, ao longo de nove anos, provocou mais de 6.600 mortos e mais de 1,3 milhões de deslocados, segundo dados de organizações internacionais"
+    }
+   ],
+   "uncertainties": [
+    "数据来自国际移民组织单一报告，目前仅一个来源，尚缺乏交叉验证",
+    "武装团体身份及具体袭击细节未在报道中说明"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 88
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "德尔加杜角省袭击致两周内逾1200人逃离",
+   "summary_zh": "据国际移民组织最新报告，10月14日至27日期间，莫桑比克德尔加杜角省四个地区因武装团体袭击及对新一轮袭击的担忧，至少1235人逃离居住地，涉及316户家庭。流离失所者中包括265名男性、386名女性和584名儿童，儿童约占47%。德尔加杜角省自2017年以来面临武装叛乱，据国际组织数据已造成逾6600人死亡、超过130万人流离失所。",
+   "event_type": "armed_conflict",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "德尔加杜角省",
+    "city": null,
+    "site": null,
+    "raw_text": "distritos de Mocímboa da Praia, Macomia, Muidumbe e Meluco, província de Cabo Delgado"
+   },
+   "key_facts": [
+    {
+     "fact": "10月14日至27日期间，德尔加杜角省四个地区至少1235人因袭击和担忧武装团体再次来袭而逃离居住地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pelo menos 1.235 pessoas abandonaram as suas zonas de residência devido a ataques e ao receio de novas incursões de grupos armados em quatro distritos da província de Cabo Delgado, entre 14 e 27 de Outubro"
+    },
+    {
+     "fact": "流离失所涉及316户家庭，分布在莫辛布瓦-达普拉亚、马科米亚、穆伊敦贝和梅卢科四个地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "os movimentos envolveram 316 agregados familiares nos distritos de Mocímboa da Praia, Macomia, Muidumbe e Meluco"
+    },
+    {
+     "fact": "莫辛布瓦-达普拉亚人口流动最多，有785人流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Mocímboa da Praia registou o maior número de movimentos populacionais, com 785 pessoas deslocadas"
+    },
+    {
+     "fact": "德尔加杜角省自2017年以来面临武装叛乱，据国际组织数据已造成逾6600人死亡、超过130万人流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cabo Delgado enfrenta uma insurgência armada desde 2017, que, ao longo de nove anos, provocou mais de 6.600 mortos e mais de 1,3 milhões de deslocados, segundo dados de organizações internacionais"
+    }
+   ],
+   "uncertainties": [
+    "数据来自国际移民组织单一报告，目前仅一个来源，尚缺乏交叉验证",
+    "武装团体身份及具体袭击细节未在报道中说明"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 88
+  }
+ },
+ "event_id": "EVT_3490b83748206e72",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}
