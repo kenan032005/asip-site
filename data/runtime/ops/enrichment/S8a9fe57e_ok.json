@@ -1,0 +1,117 @@
+{
+ "label": "S8a9fe57e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "47e8917b981ace2e3ad0b77b7db25d38ebfbe710c797f1468fc1dcc09215ee11",
+ "tokens": {
+  "input_tokens": 2046,
+  "output_tokens": 411,
+  "total_tokens": 2457
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "2027年大选前埃多州反对党警告政治暴力",
+   "summary_zh": "非洲民主大会（ADC）与尼日利亚民主大会（NDC）在贝宁城联合记者会上警告2027年选举前埃多州存在政治暴力，声称遭到攻击、恐吓和破坏。ADC一名领导人表示反对党将不再容忍针对其政治活动的持续攻击与打压。上述指控目前仅来自单一来源报道，尚未获得独立证实。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Edo State",
+    "city": "Benin City",
+    "site": null,
+    "raw_text": "Edo State, Benin City"
+   },
+   "key_facts": [
+    {
+     "fact": "ADC与NDC警告2027年选举前埃多州存在政治暴力",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "2027: Edo opposition parties warn against political violence"
+    },
+    {
+     "fact": "两党在贝宁城举行联合记者会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Speaking at a joint press conference in Benin City, the state capital"
+    },
+    {
+     "fact": "ADC领导人Dan Asekhame称反对党遭到持续攻击、打压与恐吓",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "persistent attacks, victimisation and attempts to frustrate our political activities and electoral ambitions ahead of the elections"
+    },
+    {
+     "fact": "ADC领导人称选举日将以同样方式回应对方",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "If they come with AK-47 guns, we will come with AK-49s."
+    }
+   ],
+   "uncertainties": [
+    "攻击、恐吓与破坏等指控为反对党单方面声称，尚未获得独立证实",
+    "目前仅有单一来源（Punch）报道，缺乏交叉验证",
+    "报道为部分正文提取，事件细节可能不完整"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "2027年大选前埃多州反对党警告政治暴力",
+   "summary_zh": "非洲民主大会（ADC）与尼日利亚民主大会（NDC）在贝宁城联合记者会上警告2027年选举前埃多州存在政治暴力，声称遭到攻击、恐吓和破坏。ADC一名领导人表示反对党将不再容忍针对其政治活动的持续攻击与打压。上述指控目前仅来自单一来源报道，尚未获得独立证实。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Edo State",
+    "city": "Benin City",
+    "site": null,
+    "raw_text": "Edo State, Benin City"
+   },
+   "key_facts": [
+    {
+     "fact": "ADC与NDC警告2027年选举前埃多州存在政治暴力",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "2027: Edo opposition parties warn against political violence"
+    },
+    {
+     "fact": "两党在贝宁城举行联合记者会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Speaking at a joint press conference in Benin City, the state capital"
+    },
+    {
+     "fact": "ADC领导人Dan Asekhame称反对党遭到持续攻击、打压与恐吓",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "persistent attacks, victimisation and attempts to frustrate our political activities and electoral ambitions ahead of the elections"
+    },
+    {
+     "fact": "ADC领导人称选举日将以同样方式回应对方",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "If they come with AK-47 guns, we will come with AK-49s."
+    }
+   ],
+   "uncertainties": [
+    "攻击、恐吓与破坏等指控为反对党单方面声称，尚未获得独立证实",
+    "目前仅有单一来源（Punch）报道，缺乏交叉验证",
+    "报道为部分正文提取，事件细节可能不完整"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_6fd7e2a38a9fe57e",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
