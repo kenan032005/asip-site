@@ -1,0 +1,146 @@
+{
+ "label": "Sbc758ede",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "993cd6e84b85769d4d7c75f4dceedb70c2a9518e1d85fbc3115c4b39ee1ba723",
+ "tokens": {
+  "input_tokens": 2351,
+  "output_tokens": 640,
+  "total_tokens": 2991
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（Lusa/Club of Mozambique）报道，尚缺乏交叉验证\", \"报告尚待莫桑比克议会审议\"]",
+    "after": "[\"目前仅一个来源（Lusa/Club of Mozambique）报道，尚缺乏交叉验证\", \"报告尚待莫桑比克议会审议\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克截至9月国家财政收入同比增长10.3%，支出下降7%",
+   "summary_zh": "据预算执行数据，莫桑比克截至9月的国家财政收入同比增长10.3%，同期支出下降7%。政府报告显示，财政收入为2910.885亿梅蒂卡尔（约39.27亿欧元），支出为2921.845亿梅蒂卡尔（约39.42亿欧元）。尽管收入增加、支出减少，预算执行仍录得约10.96亿梅蒂卡尔（约1480万欧元）的负结余。该报告预计将提交莫桑比克议会审议。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "莫桑比克截至9月国家财政收入同比增长10.3%，支出下降7%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Mozambique’s state revenues grew by 10.3% by September, while expenditure fell by 7% over the same period, year-on-year"
+    },
+    {
+     "fact": "截至9月财政收入为2910.885亿梅蒂卡尔（约39.27亿欧元）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "state revenues stood at 291.0885 billion meticais (€3.927 billion) by September"
+    },
+    {
+     "fact": "截至9月支出为2921.845亿梅蒂卡尔（约39.42亿欧元）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "expenditure stood at 292.1845 billion meticais (€3.942 billion)"
+    },
+    {
+     "fact": "预算执行录得约10.96亿梅蒂卡尔（约1480万欧元）负结余",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "budget execution recorded a negative balance of around 1.096 billion meticais (€14.8 million) by September"
+    },
+    {
+     "fact": "公共债务存量达1.137万亿梅蒂卡尔（约153.5亿欧元）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the public debt stock reached 1.137 trillion meticais (€15.35 billion)"
+    },
+    {
+     "fact": "1月至9月货物出口同比下降3.8%至37.47亿美元，进口增长7.33%至41.56亿美元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "goods exports totalled US$3.747 billion (€3.227 billion) between January and September, a year-on-year decline of 3.8%, while imports grew by 7.33% to US$4.156 billion (€3.579 billion)"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Lusa/Club of Mozambique）报道，尚缺乏交叉验证",
+    "报告尚待莫桑比克议会审议"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克截至9月国家财政收入同比增长10.3%，支出下降7%",
+   "summary_zh": "据预算执行数据，莫桑比克截至9月的国家财政收入同比增长10.3%，同期支出下降7%。政府报告显示，财政收入为2910.885亿梅蒂卡尔（约39.27亿欧元），支出为2921.845亿梅蒂卡尔（约39.42亿欧元）。尽管收入增加、支出减少，预算执行仍录得约10.96亿梅蒂卡尔（约1480万欧元）的负结余。该报告预计将提交莫桑比克议会审议。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "莫桑比克截至9月国家财政收入同比增长10.3%，支出下降7%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Mozambique’s state revenues grew by 10.3% by September, while expenditure fell by 7% over the same period, year-on-year"
+    },
+    {
+     "fact": "截至9月财政收入为2910.885亿梅蒂卡尔（约39.27亿欧元）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "state revenues stood at 291.0885 billion meticais (€3.927 billion) by September"
+    },
+    {
+     "fact": "截至9月支出为2921.845亿梅蒂卡尔（约39.42亿欧元）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "expenditure stood at 292.1845 billion meticais (€3.942 billion)"
+    },
+    {
+     "fact": "预算执行录得约10.96亿梅蒂卡尔（约1480万欧元）负结余",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "budget execution recorded a negative balance of around 1.096 billion meticais (€14.8 million) by September"
+    },
+    {
+     "fact": "公共债务存量达1.137万亿梅蒂卡尔（约153.5亿欧元）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the public debt stock reached 1.137 trillion meticais (€15.35 billion)"
+    },
+    {
+     "fact": "1月至9月货物出口同比下降3.8%至37.47亿美元，进口增长7.33%至41.56亿美元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "goods exports totalled US$3.747 billion (€3.227 billion) between January and September, a year-on-year decline of 3.8%, while imports grew by 7.33% to US$4.156 billion (€3.579 billion)"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Lusa/Club of Mozambique）报道，尚缺乏交叉验证",
+    "报告尚待莫桑比克议会审议",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_36bb9fecbc758ede",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}
