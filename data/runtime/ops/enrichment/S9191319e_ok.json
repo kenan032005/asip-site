@@ -1,0 +1,115 @@
+{
+ "label": "S9191319e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e0cb4a40802ac74ceb5a06f3b4d4fc62fe543d3bbb8a568cc0c70631d0d3d03c",
+ "tokens": {
+  "input_tokens": 2107,
+  "output_tokens": 574,
+  "total_tokens": 2681
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "奥科罗查就攻击法官一事向乌佐迪马提出交涉",
+   "summary_zh": "尼日利亚伊莫州前州长罗查斯·奥科罗查要求现任州长霍普·乌佐迪马约束其助手，不要因联邦高等法院一项判决而攻击司法机构。该判决于10月29日由法官奥比奥拉·埃格瓦图作出，认定奥科罗查赢得该党5月18日的参议员初选，并使其成为全进步大会党伊莫西参议员选区2027年选举候选人。奥科罗查呼吁乌佐迪马将上诉进行至最高法院，而不是纵容支持者贬损司法机构。据报道，州长副幕僚长和该党全国副主席将判决称为“垃圾”和“被收买的”，奥科罗查对此予以谴责。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": "联邦高等法院",
+    "raw_text": "Federal High Court premises in Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "奥科罗查要求乌佐迪马约束助手，不要攻击司法机构",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A former governor of Imo State, Rochas Okorocha, has asked his successor, Hope Uzodimma, to caution his aides against attacking the judiciary"
+    },
+    {
+     "fact": "联邦高等法院10月29日判决认定奥科罗查赢得该党参议员初选",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the October 29 judgment delivered by Justice Obiora Egwuatu, which recognised the former governor as the winner of the party’s May 18 senatorial primary"
+    },
+    {
+     "fact": "奥科罗查在阿布贾联邦高等法院签署与上诉相关的文件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Okorocha spoke on Tuesday on the Federal High Court premises in Abuja, where he said he had gone to sign some documents at the court’s registry in connection with the appeal filed by Uzodimma against the judgment"
+    },
+    {
+     "fact": "据报道，州长副幕僚长和该党全国副主席将判决称为垃圾和被收买的",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "comments credited to the governor’s Deputy Chief of Staff and the APC National Vice Chairman, who reportedly described the judgment as rubbish and procured"
+    }
+   ],
+   "uncertainties": [
+    "相关攻击性言论的具体内容与出处尚未获独立核实",
+    "目前仅单一来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "奥科罗查就攻击法官一事向乌佐迪马提出交涉",
+   "summary_zh": "尼日利亚伊莫州前州长罗查斯·奥科罗查要求现任州长霍普·乌佐迪马约束其助手，不要因联邦高等法院一项判决而攻击司法机构。该判决于10月29日由法官奥比奥拉·埃格瓦图作出，认定奥科罗查赢得该党5月18日的参议员初选，并使其成为全进步大会党伊莫西参议员选区2027年选举候选人。奥科罗查呼吁乌佐迪马将上诉进行至最高法院，而不是纵容支持者贬损司法机构。据报道，州长副幕僚长和该党全国副主席将判决称为“垃圾”和“被收买的”，奥科罗查对此予以谴责。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": "联邦高等法院",
+    "raw_text": "Federal High Court premises in Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "奥科罗查要求乌佐迪马约束助手，不要攻击司法机构",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A former governor of Imo State, Rochas Okorocha, has asked his successor, Hope Uzodimma, to caution his aides against attacking the judiciary"
+    },
+    {
+     "fact": "联邦高等法院10月29日判决认定奥科罗查赢得该党参议员初选",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the October 29 judgment delivered by Justice Obiora Egwuatu, which recognised the former governor as the winner of the party’s May 18 senatorial primary"
+    },
+    {
+     "fact": "奥科罗查在阿布贾联邦高等法院签署与上诉相关的文件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Okorocha spoke on Tuesday on the Federal High Court premises in Abuja, where he said he had gone to sign some documents at the court’s registry in connection with the appeal filed by Uzodimma against the judgment"
+    },
+    {
+     "fact": "据报道，州长副幕僚长和该党全国副主席将判决称为垃圾和被收买的",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "comments credited to the governor’s Deputy Chief of Staff and the APC National Vice Chairman, who reportedly described the judgment as rubbish and procured"
+    }
+   ],
+   "uncertainties": [
+    "相关攻击性言论的具体内容与出处尚未获独立核实",
+    "目前仅单一来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_f533e6349191319e",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

@@ -1,0 +1,125 @@
+{
+ "label": "Sa8320ad3",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "62b09bb670481b85d317531a71d3465e790be207869f8af2fbbadb9b0a6a184a",
+ "tokens": {
+  "input_tokens": 3103,
+  "output_tokens": 560,
+  "total_tokens": 3663
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "索马里基斯马尤：境内流离失所者遭驱逐",
+   "summary_zh": "索马里境内流离失所者处境本已脆弱，又因多轮驱逐而进一步恶化。据联合国数据，索马里境内流离失所者超过250万，营地不断增多，他们占用私人或国有土地，土地所有者时常主张权利并驱逐他们。这一情况在首都摩加迪沙和南部朱巴兰州尤为突出。据朱巴兰州难民委员会称，基斯马尤有近200个境内流离失所者营地；挪威难民理事会称，2025年至2026年间有超过4300人被驱逐。",
+   "event_type": "other_security",
+   "country_iso3": "SOM",
+   "location": {
+    "country_iso3": "SOM",
+    "admin1": "Jubaland",
+    "city": "Kismayo",
+    "site": null,
+    "raw_text": "Somalie, Kismayo, État fédéral du Jubaland"
+   },
+   "key_facts": [
+    {
+     "fact": "据联合国数据，索马里境内流离失所者超过250万",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon les Nations unies, il y a plus de 2,5 millions de déplacés dans le pays"
+    },
+    {
+     "fact": "基斯马尤有近200个境内流离失所者营地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D’après la Commission du Jubaland pour les réfugiés, Kismayo abrite près de 200 camps de déplacés internes"
+    },
+    {
+     "fact": "据挪威难民理事会称，2025年至2026年间超过4300人被驱逐",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D’après le Conseil norvégien pour les réfugiés, plus de 4 300 personnes ont été expulsées entre 2025 et 2026"
+    },
+    {
+     "fact": "朱巴兰州政府向被驱逐家庭分配600平方米土地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Notre gouvernement y alloue un terrain de 600 m² à chaque famille de déplacés victimes d’expulsions"
+    },
+    {
+     "fact": "目前仅有1000名流离失所者获得重新安置",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "seuls 1 000 déplacés ont pu bénéficier de la relocalisation offerte par le Jubaland"
+    }
+   ],
+   "uncertainties": [
+    "报道为单一来源（RFI），相关数字尚未获得交叉验证",
+    "一名受访者推测土地所有者驱逐原因，属个人猜测，未获证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "索马里基斯马尤：境内流离失所者遭驱逐",
+   "summary_zh": "索马里境内流离失所者处境本已脆弱，又因多轮驱逐而进一步恶化。据联合国数据，索马里境内流离失所者超过250万，营地不断增多，他们占用私人或国有土地，土地所有者时常主张权利并驱逐他们。这一情况在首都摩加迪沙和南部朱巴兰州尤为突出。据朱巴兰州难民委员会称，基斯马尤有近200个境内流离失所者营地；挪威难民理事会称，2025年至2026年间有超过4300人被驱逐。",
+   "event_type": "other_security",
+   "country_iso3": "SOM",
+   "location": {
+    "country_iso3": "SOM",
+    "admin1": "Jubaland",
+    "city": "Kismayo",
+    "site": null,
+    "raw_text": "Somalie, Kismayo, État fédéral du Jubaland"
+   },
+   "key_facts": [
+    {
+     "fact": "据联合国数据，索马里境内流离失所者超过250万",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon les Nations unies, il y a plus de 2,5 millions de déplacés dans le pays"
+    },
+    {
+     "fact": "基斯马尤有近200个境内流离失所者营地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D’après la Commission du Jubaland pour les réfugiés, Kismayo abrite près de 200 camps de déplacés internes"
+    },
+    {
+     "fact": "据挪威难民理事会称，2025年至2026年间超过4300人被驱逐",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D’après le Conseil norvégien pour les réfugiés, plus de 4 300 personnes ont été expulsées entre 2025 et 2026"
+    },
+    {
+     "fact": "朱巴兰州政府向被驱逐家庭分配600平方米土地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Notre gouvernement y alloue un terrain de 600 m² à chaque famille de déplacés victimes d’expulsions"
+    },
+    {
+     "fact": "目前仅有1000名流离失所者获得重新安置",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "seuls 1 000 déplacés ont pu bénéficier de la relocalisation offerte par le Jubaland"
+    }
+   ],
+   "uncertainties": [
+    "报道为单一来源（RFI），相关数字尚未获得交叉验证",
+    "一名受访者推测土地所有者驱逐原因，属个人猜测，未获证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_4c550b8ba8320ad3",
+ "disease_event_id": null,
+ "country_code": "SO"
+}
