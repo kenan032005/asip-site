@@ -1,0 +1,146 @@
+{
+ "label": "Sc3cf64e0",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ada1595ab916ba6795adc73d42ec85c1278ca42d70012b72bfddbeaab837a3e2",
+ "tokens": {
+  "input_tokens": 2871,
+  "output_tokens": 639,
+  "total_tokens": 3510
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"暴力事件被归因于博科圣地及其分支，但报道未提供具体事件细节\", \"价格数据来自商贩和消费者个人陈述，未经独立核实\"]",
+    "after": "[\"暴力事件被归因于博科圣地及其分支，但报道未提供具体事件细节\", \"价格数据来自商贩和消费者个人陈述，未经独立核实\", \"据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"暴力事件被归因于博科圣地及其分支，但报道未提供具体事件细节\", \"价格数据来自商贩和消费者个人陈述，未经独立核实\", \"据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "after": "[\"暴力事件被归因于博科圣地及其分支，但报道未提供具体事件细节\", \"价格数据来自商贩和消费者个人陈述，未经独立核实\", \"据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔迪法每周集市部分农产品价格下跌，其他商品价格高企",
+   "summary_zh": "尼日尔迪法每周蔬菜和调料集市呈现价格分化：部分农产品价格显著下跌，而洋葱等商品价格大幅上涨。当地商贩和消费者表示，价格波动给家庭开支带来压力。迪法地区十余年来接收了数千名因博科圣地及其分支暴力而流离失所的人员，集市成为许多流离失所者和难民的重要收入来源。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "迪法",
+    "city": "迪法",
+    "site": "每周蔬菜和调料集市",
+    "raw_text": "Diffa, marché hebdomadaire de légumes et de condiments"
+   },
+   "key_facts": [
+    {
+     "fact": "迪法每周集市部分农产品价格下跌，其他商品价格上涨",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Diffa : au marché hebdomadaire, la baisse de certains prix contraste avec la cherté d'autres produits"
+    },
+    {
+     "fact": "迪法地区十余年来接收数千名因博科圣地及其分支暴力而流离失所的人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis plus d'une décennie, faut-il le rappeler la région de Diffa accueille des milliers de personnes contraintes de quitter leurs localités en raison des violences attribuées au groupe terroriste Boko Haram et à ses ramifications dans le bassin du lac Tchad."
+    },
+    {
+     "fact": "辣椒价格从去年8000奈拉降至目前1300奈拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La tasse de piment coûte actuellement 1 300 nairas, ( 700fcfa) alors qu'elle se vendait à 8 000 nairas ( 3.600fcfa) l'année dernière"
+    },
+    {
+     "fact": "洋葱价格从先前1500奈拉上涨至目前6000奈拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La tasse d'oignon coûte actuellement 6 000 nairas ( 2.400fcfa) , alors qu'elle se vendait auparavant à 1 500 nairas( 1200fcfa)"
+    },
+    {
+     "fact": "集市是许多流离失所者和难民的重要收入来源",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pour de nombreuses personnes déplacées et réfugiées, le marché représente bien plus qu'un espace de vente : il constitue une source essentielle de revenus, malgré la précarité de leurs conditions de vie et les inquiétudes liées à la sécurité."
+    }
+   ],
+   "uncertainties": [
+    "暴力事件被归因于博科圣地及其分支，但报道未提供具体事件细节",
+    "价格数据来自商贩和消费者个人陈述，未经独立核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔迪法每周集市部分农产品价格下跌，其他商品价格高企",
+   "summary_zh": "尼日尔迪法每周蔬菜和调料集市呈现价格分化：部分农产品价格显著下跌，而洋葱等商品价格大幅上涨。当地商贩和消费者表示，价格波动给家庭开支带来压力。迪法地区十余年来接收了数千名因博科圣地及其分支暴力而流离失所的人员，集市成为许多流离失所者和难民的重要收入来源。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "迪法",
+    "city": "迪法",
+    "site": "每周蔬菜和调料集市",
+    "raw_text": "Diffa, marché hebdomadaire de légumes et de condiments"
+   },
+   "key_facts": [
+    {
+     "fact": "迪法每周集市部分农产品价格下跌，其他商品价格上涨",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Diffa : au marché hebdomadaire, la baisse de certains prix contraste avec la cherté d'autres produits"
+    },
+    {
+     "fact": "迪法地区十余年来接收数千名因博科圣地及其分支暴力而流离失所的人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis plus d'une décennie, faut-il le rappeler la région de Diffa accueille des milliers de personnes contraintes de quitter leurs localités en raison des violences attribuées au groupe terroriste Boko Haram et à ses ramifications dans le bassin du lac Tchad."
+    },
+    {
+     "fact": "辣椒价格从去年8000奈拉降至目前1300奈拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La tasse de piment coûte actuellement 1 300 nairas, ( 700fcfa) alors qu'elle se vendait à 8 000 nairas ( 3.600fcfa) l'année dernière"
+    },
+    {
+     "fact": "洋葱价格从先前1500奈拉上涨至目前6000奈拉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La tasse d'oignon coûte actuellement 6 000 nairas ( 2.400fcfa) , alors qu'elle se vendait auparavant à 1 500 nairas( 1200fcfa)"
+    },
+    {
+     "fact": "集市是许多流离失所者和难民的重要收入来源",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pour de nombreuses personnes déplacées et réfugiées, le marché représente bien plus qu'un espace de vente : il constitue une source essentielle de revenus, malgré la précarité de leurs conditions de vie et les inquiétudes liées à la sécurité."
+    }
+   ],
+   "uncertainties": [
+    "暴力事件被归因于博科圣地及其分支，但报道未提供具体事件细节",
+    "价格数据来自商贩和消费者个人陈述，未经独立核实",
+    "据ANP(尼日尔官方通讯社)报道，目前仅获单一来源支持，尚缺乏交叉验证。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_ca1424e8c3cf64e0",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
