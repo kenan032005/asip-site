@@ -1,0 +1,115 @@
+{
+ "label": "S6b094915",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c747a5f12dfaa7fd44fc66c98273a8b202c4f8d3b21ff26482d751ae134dbaf2",
+ "tokens": {
+  "input_tokens": 2074,
+  "output_tokens": 500,
+  "total_tokens": 2574
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚国家安全局否认阿提库关于扰乱ADC集会的指控并下令调查",
+   "summary_zh": "尼日利亚国家安全局（DSS）否认了前副总统、非洲民主大会党总统候选人阿提库·阿布巴卡尔关于该机构计划在索科托州组织抗议以扰乱其竞选集会的指控，并下令对此展开调查。DSS称该指控与其保护各党派政治人物的职责不符。阿提库此前在阿布贾对记者声称，DSS领导层招募抗议者制造混乱，以期为实施宵禁、阻止该党竞选集会提供借口。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "索科托州",
+    "city": null,
+    "site": null,
+    "raw_text": "Sokoto State"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚国家安全局否认阿提库关于其计划扰乱索科托集会的指控",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "DSS denies Atiku’s ADC rally disruption claim, orders probe"
+    },
+    {
+     "fact": "DSS总干事下令对该指控展开调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Department of State Services has ordered an investigation into an allegation by former Vice-President and African Democratic Congress presidential candidate, Atiku Abubakar"
+    },
+    {
+     "fact": "阿提库指控DSS领导层招募抗议者在索科托制造混乱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Atiku while fielding questions from journalists in Abuja accused the leadership of the DSS, of recruiting protesters to create disorder in Sokoto and provide a pretext for imposing a curfew to stop the party’s campaign rally"
+    },
+    {
+     "fact": "DSS称其人员于2026年10月31日的一次袭击中救出ADC索科托州州长候选人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "its “operatives rescued the ADC governorship candidate in Sokoto State, Mannir Daniya, during an attack on October 31, 2026.”"
+    }
+   ],
+   "uncertainties": [
+    "阿提库关于DSS招募抗议者的指控尚未得到证实，DSS已否认该说法",
+    "目前仅单一来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚国家安全局否认阿提库关于扰乱ADC集会的指控并下令调查",
+   "summary_zh": "尼日利亚国家安全局（DSS）否认了前副总统、非洲民主大会党总统候选人阿提库·阿布巴卡尔关于该机构计划在索科托州组织抗议以扰乱其竞选集会的指控，并下令对此展开调查。DSS称该指控与其保护各党派政治人物的职责不符。阿提库此前在阿布贾对记者声称，DSS领导层招募抗议者制造混乱，以期为实施宵禁、阻止该党竞选集会提供借口。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "索科托州",
+    "city": null,
+    "site": null,
+    "raw_text": "Sokoto State"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚国家安全局否认阿提库关于其计划扰乱索科托集会的指控",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "DSS denies Atiku’s ADC rally disruption claim, orders probe"
+    },
+    {
+     "fact": "DSS总干事下令对该指控展开调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Department of State Services has ordered an investigation into an allegation by former Vice-President and African Democratic Congress presidential candidate, Atiku Abubakar"
+    },
+    {
+     "fact": "阿提库指控DSS领导层招募抗议者在索科托制造混乱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Atiku while fielding questions from journalists in Abuja accused the leadership of the DSS, of recruiting protesters to create disorder in Sokoto and provide a pretext for imposing a curfew to stop the party’s campaign rally"
+    },
+    {
+     "fact": "DSS称其人员于2026年10月31日的一次袭击中救出ADC索科托州州长候选人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "its “operatives rescued the ADC governorship candidate in Sokoto State, Mannir Daniya, during an attack on October 31, 2026.”"
+    }
+   ],
+   "uncertainties": [
+    "阿提库关于DSS招募抗议者的指控尚未得到证实，DSS已否认该说法",
+    "目前仅单一来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_3a01277c6b094915",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
