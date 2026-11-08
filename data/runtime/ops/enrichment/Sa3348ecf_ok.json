@@ -1,0 +1,136 @@
+{
+ "label": "Sa3348ecf",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "11d9a2b7bc2ae2951534b44dbe2977519a77627be44e35dcb1f38583f7722515",
+ "tokens": {
+  "input_tokens": 2665,
+  "output_tokens": 571,
+  "total_tokens": 3236
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"喀麦隆牛肉价格是否实际上涨及涨幅尚未证实，仅为担忧\", \"该报道为单一来源（Tchadinfos/EcoMatin），尚缺乏交叉验证\"]",
+    "after": "[\"喀麦隆牛肉价格是否实际上涨及涨幅尚未证实，仅为担忧\", \"该报道为单一来源（Tchadinfos/EcoMatin），尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得2028年起禁止活牛出口，喀麦隆担忧牛肉价格飙升",
+   "summary_zh": "据EcoMatin报道，喀麦隆担忧牛肉价格可能大幅上涨，原因是乍得决定自2028年1月1日起禁止活体牲畜出口。恩贾梅纳方面供应喀麦隆超过40%的牛只来源，今后希望出口加工肉类而非活畜。该政策方向见于总统穆罕默德·伊德里斯·代比·伊特诺于2026年7月31日签署的2027年财政法筹备通函。喀麦隆畜牧业部数据显示，2023年从乍得进口49606头牛，业内人士担忧供应短缺推高价格。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N'Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得决定自2028年1月1日起禁止活体牲畜出口",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la décision du Tchad d’interdire, dès le 1er janvier 2028, les exportations de bétail vivant"
+    },
+    {
+     "fact": "乍得供应喀麦隆超过40%的牛只来源",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "N’Djamena, qui fournit plus de 40 % de l’approvisionnement camerounais en bœufs"
+    },
+    {
+     "fact": "该政策方向见于2026年7月31日总统签署的2027年财政法筹备通函",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une lettre circulaire relative à la préparation de la loi de finances 2027, signée le 31 juillet 2026 par le président Mahamat Idriss Déby Itno"
+    },
+    {
+     "fact": "2023年喀麦隆从乍得进口49606头牛",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "49 606 têtes de bovins ont été importées du Tchad en 2023"
+    },
+    {
+     "fact": "2024年乍得牲畜出口收入2200亿中非法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En 2024, ces exportations ont rapporté 220 milliards de FCFA"
+    }
+   ],
+   "uncertainties": [
+    "喀麦隆牛肉价格是否实际上涨及涨幅尚未证实，仅为担忧",
+    "该报道为单一来源（Tchadinfos/EcoMatin），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得2028年起禁止活牛出口，喀麦隆担忧牛肉价格飙升",
+   "summary_zh": "据EcoMatin报道，喀麦隆担忧牛肉价格可能大幅上涨，原因是乍得决定自2028年1月1日起禁止活体牲畜出口。恩贾梅纳方面供应喀麦隆超过40%的牛只来源，今后希望出口加工肉类而非活畜。该政策方向见于总统穆罕默德·伊德里斯·代比·伊特诺于2026年7月31日签署的2027年财政法筹备通函。喀麦隆畜牧业部数据显示，2023年从乍得进口49606头牛，业内人士担忧供应短缺推高价格。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N'Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得决定自2028年1月1日起禁止活体牲畜出口",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la décision du Tchad d’interdire, dès le 1er janvier 2028, les exportations de bétail vivant"
+    },
+    {
+     "fact": "乍得供应喀麦隆超过40%的牛只来源",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "N’Djamena, qui fournit plus de 40 % de l’approvisionnement camerounais en bœufs"
+    },
+    {
+     "fact": "该政策方向见于2026年7月31日总统签署的2027年财政法筹备通函",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une lettre circulaire relative à la préparation de la loi de finances 2027, signée le 31 juillet 2026 par le président Mahamat Idriss Déby Itno"
+    },
+    {
+     "fact": "2023年喀麦隆从乍得进口49606头牛",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "49 606 têtes de bovins ont été importées du Tchad en 2023"
+    },
+    {
+     "fact": "2024年乍得牲畜出口收入2200亿中非法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En 2024, ces exportations ont rapporté 220 milliards de FCFA"
+    }
+   ],
+   "uncertainties": [
+    "喀麦隆牛肉价格是否实际上涨及涨幅尚未证实，仅为担忧",
+    "该报道为单一来源（Tchadinfos/EcoMatin），尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_087584fea3348ecf",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
