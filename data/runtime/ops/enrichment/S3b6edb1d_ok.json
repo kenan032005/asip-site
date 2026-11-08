@@ -1,0 +1,117 @@
+{
+ "label": "S3b6edb1d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "960b16042e2af0884093a63e48eb10f7b9460d6b5a48456cc1f3b5a86b016dcc",
+ "tokens": {
+  "input_tokens": 2314,
+  "output_tokens": 637,
+  "total_tokens": 2951
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克：据报恐怖分子在穆伊敦贝与穆埃达之间低洼地区杀害14人",
+   "summary_zh": "据独立媒体《莫桑比克信报》援引当地消息人士报道，伊斯兰极端分子上周在莫桑比克北部德尔加杜角省发动多轮暴力袭击，造成14人死亡，袭击发生在穆伊敦贝与穆埃达两区之间的低洼地带。消息人士称遇难者均来自穆伊敦贝区，并称他们曾随莫桑比克武装国防军队伍前往现场协助埋葬遗体。叛乱分子通过伊斯兰国宣传渠道声称对袭击负责，称以斩首方式杀害14名“基督徒”。上述死亡数字与袭击细节目前仅来自单一来源报道，尚未获得独立核实。",
+   "event_type": "terrorism",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "德尔加杜角省",
+    "city": null,
+    "site": "穆伊敦贝与穆埃达两区之间的低洼地带",
+    "raw_text": "low-lying area between the Muidumbe and Mueda districts, northern Mozambican province of Cabo Delgado"
+   },
+   "key_facts": [
+    {
+     "fact": "据当地消息人士称，德尔加杜角省北部多区发生的伊斯兰极端分子袭击上周造成14人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Waves of violence carried out by Islamist terrorists in some districts of northern Mozambican province of Cabo Delgado have caused the death of 14 people last week, according to local sources cited by the independent newsheet “Carta de Moçambique.”"
+    },
+    {
+     "fact": "袭击发生在穆伊敦贝与穆埃达两区之间的低洼地带，遇难者均来自穆伊敦贝区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sources point out that the attacks took place in the low-lying area between the Muidumbe and Mueda districts. The victims were all from Muidumbe district."
+    },
+    {
+     "fact": "叛乱分子通过伊斯兰国宣传渠道声称对袭击负责，称斩首杀害14名“基督徒”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The insurgents, through Islamic State propaganda channels, claimed responsibility for the attacks in that region, asserting that they had killed 14 Christians"
+    },
+    {
+     "fact": "消息人士称他们随莫桑比克武装国防军队伍前往现场协助埋葬遗体",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The sources also said last Sunday they joined a team from the Mozambican Armed Defense Forces (FADM) in an operation to assist people who had travelled to the site to bury the bodies."
+    }
+   ],
+   "uncertainties": [
+    "死亡人数14人及袭击细节仅来自单一来源报道，尚未获得独立核实",
+    "袭击责任方声称的说法来自其宣传渠道，未获独立确认",
+    "事件具体发生日期仅表述为“上周”，未明确"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克：据报恐怖分子在穆伊敦贝与穆埃达之间低洼地区杀害14人",
+   "summary_zh": "据独立媒体《莫桑比克信报》援引当地消息人士报道，伊斯兰极端分子上周在莫桑比克北部德尔加杜角省发动多轮暴力袭击，造成14人死亡，袭击发生在穆伊敦贝与穆埃达两区之间的低洼地带。消息人士称遇难者均来自穆伊敦贝区，并称他们曾随莫桑比克武装国防军队伍前往现场协助埋葬遗体。叛乱分子通过伊斯兰国宣传渠道声称对袭击负责，称以斩首方式杀害14名“基督徒”。上述死亡数字与袭击细节目前仅来自单一来源报道，尚未获得独立核实。",
+   "event_type": "terrorism",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "德尔加杜角省",
+    "city": null,
+    "site": "穆伊敦贝与穆埃达两区之间的低洼地带",
+    "raw_text": "low-lying area between the Muidumbe and Mueda districts, northern Mozambican province of Cabo Delgado"
+   },
+   "key_facts": [
+    {
+     "fact": "据当地消息人士称，德尔加杜角省北部多区发生的伊斯兰极端分子袭击上周造成14人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Waves of violence carried out by Islamist terrorists in some districts of northern Mozambican province of Cabo Delgado have caused the death of 14 people last week, according to local sources cited by the independent newsheet “Carta de Moçambique.”"
+    },
+    {
+     "fact": "袭击发生在穆伊敦贝与穆埃达两区之间的低洼地带，遇难者均来自穆伊敦贝区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sources point out that the attacks took place in the low-lying area between the Muidumbe and Mueda districts. The victims were all from Muidumbe district."
+    },
+    {
+     "fact": "叛乱分子通过伊斯兰国宣传渠道声称对袭击负责，称斩首杀害14名“基督徒”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The insurgents, through Islamic State propaganda channels, claimed responsibility for the attacks in that region, asserting that they had killed 14 Christians"
+    },
+    {
+     "fact": "消息人士称他们随莫桑比克武装国防军队伍前往现场协助埋葬遗体",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The sources also said last Sunday they joined a team from the Mozambican Armed Defense Forces (FADM) in an operation to assist people who had travelled to the site to bury the bodies."
+    }
+   ],
+   "uncertainties": [
+    "死亡人数14人及袭击细节仅来自单一来源报道，尚未获得独立核实",
+    "袭击责任方声称的说法来自其宣传渠道，未获独立确认",
+    "事件具体发生日期仅表述为“上周”，未明确"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_3c1499223b6edb1d",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

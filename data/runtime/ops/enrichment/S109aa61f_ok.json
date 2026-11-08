@@ -1,0 +1,138 @@
+{
+ "label": "S109aa61f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1c5776f5021f7b87347b306b03786f86eb190034ac86bee7d965b7021e71651e",
+ "tokens": {
+  "input_tokens": 2640,
+  "output_tokens": 542,
+  "total_tokens": 3182
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"主要嫌疑人仍在逃，尚未被捕\", \"警方称约十辆被盗摩托车可能已被转移至邻国转售，该说法尚未得到独立证实\", \"目前仅有一个来源报道此事，尚缺乏交叉验证\"]",
+    "after": "[\"主要嫌疑人仍在逃，尚未被捕\", \"警方称约十辆被盗摩托车可能已被转移至邻国转售，该说法尚未得到独立证实\", \"目前仅有一个来源报道此事，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁科托努发生入室盗窃和摩托车盗窃案，八人被逮捕",
+   "summary_zh": "贝宁科托努第一区警察局在打击犯罪行动中逮捕了八名嫌疑人，并查获电视机、笔记本电脑和摩托车零件等疑似被盗物品。据共和警察总局在脸书上发布的消息，该团伙主要嫌疑人仍在逃。警方称，该团伙涉嫌在科托努及周边地区实施入室盗窃和摩托车盗窃，调查仍在继续。目前已有四名受害者被正式确认。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "科托努",
+    "site": "第一区警察局辖区",
+    "raw_text": "Cotonou, quartier Yagbé, Agblangandan, Ekpè, 5e et 7e arrondissements de Cotonou"
+   },
+   "key_facts": [
+    {
+     "fact": "科托努第一区警察局在打击犯罪行动中逮捕八名嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Huit individus ont été interpellés par le commissariat du 1er arrondissement de Cotonou dans le cadre d’une opération de lutte contre le banditisme."
+    },
+    {
+     "fact": "警方查获电视机、笔记本电脑和摩托车零件等疑似被盗物品",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plusieurs objets présumés volés ont été saisis. Entre autres, un téléviseur, un ordinateur portable et des pièces de motos."
+    },
+    {
+     "fact": "该团伙主要嫌疑人仍在逃",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le principal suspect du réseau est toujours recherché."
+    },
+    {
+     "fact": "警方称该团伙涉嫌在科托努及周边地区实施入室盗窃和摩托车盗窃",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un groupe de malfaiteurs basé au quartier Yagbé et spécialisé dans les cambriolages et les vols de motos"
+    },
+    {
+     "fact": "目前已有四名受害者被正式确认",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À ce jour, quatre victimes ont été formellement identifiées."
+    }
+   ],
+   "uncertainties": [
+    "主要嫌疑人仍在逃，尚未被捕",
+    "警方称约十辆被盗摩托车可能已被转移至邻国转售，该说法尚未得到独立证实",
+    "目前仅有一个来源报道此事，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁科托努发生入室盗窃和摩托车盗窃案，八人被逮捕",
+   "summary_zh": "贝宁科托努第一区警察局在打击犯罪行动中逮捕了八名嫌疑人，并查获电视机、笔记本电脑和摩托车零件等疑似被盗物品。据共和警察总局在脸书上发布的消息，该团伙主要嫌疑人仍在逃。警方称，该团伙涉嫌在科托努及周边地区实施入室盗窃和摩托车盗窃，调查仍在继续。目前已有四名受害者被正式确认。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "科托努",
+    "site": "第一区警察局辖区",
+    "raw_text": "Cotonou, quartier Yagbé, Agblangandan, Ekpè, 5e et 7e arrondissements de Cotonou"
+   },
+   "key_facts": [
+    {
+     "fact": "科托努第一区警察局在打击犯罪行动中逮捕八名嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Huit individus ont été interpellés par le commissariat du 1er arrondissement de Cotonou dans le cadre d’une opération de lutte contre le banditisme."
+    },
+    {
+     "fact": "警方查获电视机、笔记本电脑和摩托车零件等疑似被盗物品",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plusieurs objets présumés volés ont été saisis. Entre autres, un téléviseur, un ordinateur portable et des pièces de motos."
+    },
+    {
+     "fact": "该团伙主要嫌疑人仍在逃",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le principal suspect du réseau est toujours recherché."
+    },
+    {
+     "fact": "警方称该团伙涉嫌在科托努及周边地区实施入室盗窃和摩托车盗窃",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un groupe de malfaiteurs basé au quartier Yagbé et spécialisé dans les cambriolages et les vols de motos"
+    },
+    {
+     "fact": "目前已有四名受害者被正式确认",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À ce jour, quatre victimes ont été formellement identifiées."
+    }
+   ],
+   "uncertainties": [
+    "主要嫌疑人仍在逃，尚未被捕",
+    "警方称约十辆被盗摩托车可能已被转移至邻国转售，该说法尚未得到独立证实",
+    "目前仅有一个来源报道此事，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_c509dec9109aa61f",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

@@ -1,0 +1,127 @@
+{
+ "label": "Sdc48228b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "432fa3cbe527d145fa48dd0b0391fe125842b8734366429737caf20c710956d7",
+ "tokens": {
+  "input_tokens": 2740,
+  "output_tokens": 617,
+  "total_tokens": 3357
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "埃博拉疫情：沙特关闭边境后，数百名肯尼亚劳工陷入不确定",
+   "summary_zh": "沙特阿拉伯于10月30日因肯尼亚境内出现埃博拉病例，对来自肯尼亚的旅客关闭边境，导致数百名已获沙特招募的肯尼亚劳工陷入不确定。10月2日（报道原文如此），300多名持有效许可的肯尼亚人在利雅得机场被扣留三天后遣返内罗毕。沙特称此举为“简单预防措施”，肯尼亚卫生部长则称其为“过度措施”。",
+   "event_type": "other_security",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": null,
+    "city": "内罗毕",
+    "site": "乔莫·肯雅塔国际机场（JKIA）",
+    "raw_text": "aéroport international Jommo Kenyatta (JKIA) à Nairobi"
+   },
+   "key_facts": [
+    {
+     "fact": "沙特阿拉伯于10月30日对来自肯尼亚的旅客关闭边境",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’Arabie saoudite a fermé ses frontières aux voyageurs en provenance du Kenya le 30 octobre"
+    },
+    {
+     "fact": "300多名持有效许可的肯尼亚人在利雅得机场被扣留三天后遣返内罗毕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Après avoir été retenus à l’aéroport de Riyad, pendant trois jours, plus de 300 travailleurs kenyans ont été renvoyés lundi à Nairobi"
+    },
+    {
+     "fact": "沙特宣布暂停肯尼亚方向航班、暂停向肯尼亚人发放签证并禁止21天内曾停留肯尼亚者入境",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "suspension des départs à destination du Kenya, suspension des visas pour les Kényans et interdiction d’entrée aux personnes ayant séjourné au Kenya, 21 jours avant la date d’arrivée"
+    },
+    {
+     "fact": "肯尼亚卫生部长称沙特措施“过度”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministre de la Santé kényan parle plutôt « de mesures excessives »"
+    },
+    {
+     "fact": "据内罗毕方面称，沙特是肯尼亚移民劳工首要目的地，已有近35万肯尼亚人居住在当地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon Nairobi, le Royaume reste la première destination des travailleurs migrants kényans avec près de 350 000 personnes qui y résident déjà"
+    }
+   ],
+   "uncertainties": [
+    "报道中“10月2日”与“10月30日”日期表述存在不一致，具体遣返日期有待核实",
+    "沙特方面所称“简单预防措施”与肯尼亚方面“过度措施”的说法存在分歧",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "埃博拉疫情：沙特关闭边境后，数百名肯尼亚劳工陷入不确定",
+   "summary_zh": "沙特阿拉伯于10月30日因肯尼亚境内出现埃博拉病例，对来自肯尼亚的旅客关闭边境，导致数百名已获沙特招募的肯尼亚劳工陷入不确定。10月2日（报道原文如此），300多名持有效许可的肯尼亚人在利雅得机场被扣留三天后遣返内罗毕。沙特称此举为“简单预防措施”，肯尼亚卫生部长则称其为“过度措施”。",
+   "event_type": "other_security",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": null,
+    "city": "内罗毕",
+    "site": "乔莫·肯雅塔国际机场（JKIA）",
+    "raw_text": "aéroport international Jommo Kenyatta (JKIA) à Nairobi"
+   },
+   "key_facts": [
+    {
+     "fact": "沙特阿拉伯于10月30日对来自肯尼亚的旅客关闭边境",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’Arabie saoudite a fermé ses frontières aux voyageurs en provenance du Kenya le 30 octobre"
+    },
+    {
+     "fact": "300多名持有效许可的肯尼亚人在利雅得机场被扣留三天后遣返内罗毕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Après avoir été retenus à l’aéroport de Riyad, pendant trois jours, plus de 300 travailleurs kenyans ont été renvoyés lundi à Nairobi"
+    },
+    {
+     "fact": "沙特宣布暂停肯尼亚方向航班、暂停向肯尼亚人发放签证并禁止21天内曾停留肯尼亚者入境",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "suspension des départs à destination du Kenya, suspension des visas pour les Kényans et interdiction d’entrée aux personnes ayant séjourné au Kenya, 21 jours avant la date d’arrivée"
+    },
+    {
+     "fact": "肯尼亚卫生部长称沙特措施“过度”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministre de la Santé kényan parle plutôt « de mesures excessives »"
+    },
+    {
+     "fact": "据内罗毕方面称，沙特是肯尼亚移民劳工首要目的地，已有近35万肯尼亚人居住在当地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon Nairobi, le Royaume reste la première destination des travailleurs migrants kényans avec près de 350 000 personnes qui y résident déjà"
+    }
+   ],
+   "uncertainties": [
+    "报道中“10月2日”与“10月30日”日期表述存在不一致，具体遣返日期有待核实",
+    "沙特方面所称“简单预防措施”与肯尼亚方面“过度措施”的说法存在分歧",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_bf20828ddc48228b",
+ "disease_event_id": null,
+ "country_code": "KE"
+}
