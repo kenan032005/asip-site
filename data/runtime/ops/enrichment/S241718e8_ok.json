@@ -1,0 +1,138 @@
+{
+ "label": "S241718e8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "73fc8f378d0dfef7d5cd179c062a0467edae8dd9ddae6ec74edebf5519f55e38",
+ "tokens": {
+  "input_tokens": 2498,
+  "output_tokens": 607,
+  "total_tokens": 3105
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"疫情结束日期12月7日为暂定，需经NCDC与世卫组织核验42天倒计时\", \"尼日利亚医学科学院提醒，患者临床好转不一定意味着不再具有传染性\", \"接触者监测仍在进行，后续是否出现新增病例尚不确定\"]",
+    "after": "[\"疫情结束日期12月7日为暂定，需经NCDC与世卫组织核验42天倒计时\", \"尼日利亚医学科学院提醒，患者临床好转不一定意味着不再具有传染性\", \"接触者监测仍在进行，后续是否出现新增病例尚不确定\", \"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚埃博拉患者撤离后持续开展监测",
+   "summary_zh": "尼日利亚输入性本迪布焦型埃博拉患者已撤离至瑞士，该国卫生应对从患者救治转向长期监测与社区动员。尼日利亚10月20日确认首例自乌干达输入的埃博拉病例，10月30日阿达马瓦州约拉报告的疑似病例经两轮检测为阴性。卫生部长表示，若无新增确诊或疑似病例，疫情或可于12月7日宣告结束，但该日期仍属暂定，需经NCDC与世卫组织核验42天倒计时。世卫组织非洲区域主任称尼日利亚将继续监测52名接触者。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚10月20日确认首例自乌干达输入的埃博拉病例（本迪布焦型）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria confirmed its first imported case of Ebola (Bundibugyo strain) from a traveler arriving from Uganda on Oct. 20"
+    },
+    {
+     "fact": "该患者已被撤离至瑞士，尼日利亚卫生应对转向长期监测",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "With Nigeria’s imported Bundibugyo Ebola patient now evacuated to Switzerland, the country’s health response has pivoted from active patient care to long-term monitoring"
+    },
+    {
+     "fact": "10月30日阿达马瓦州约拉报告的疑似病例经两轮检测为埃博拉阴性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "suspected cases reported in Yola, Adamawa, on Oct. 30, turned out negative for EVD after two rounds of testing"
+    },
+    {
+     "fact": "卫生部长称疫情或可于12月7日宣告结束，但日期为暂定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria could potentially declare the outbreak over by Dec. 7, provided no further confirmed or probable cases emerge. He said the date remained provisional"
+    },
+    {
+     "fact": "世卫组织非洲区域主任称尼日利亚将继续监测52名接触者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria would continue monitoring 52 contacts, while Switzerland would manage the patient and follow up her husband"
+    }
+   ],
+   "uncertainties": [
+    "疫情结束日期12月7日为暂定，需经NCDC与世卫组织核验42天倒计时",
+    "尼日利亚医学科学院提醒，患者临床好转不一定意味着不再具有传染性",
+    "接触者监测仍在进行，后续是否出现新增病例尚不确定"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚埃博拉患者撤离后持续开展监测",
+   "summary_zh": "尼日利亚输入性本迪布焦型埃博拉患者已撤离至瑞士，该国卫生应对从患者救治转向长期监测与社区动员。尼日利亚10月20日确认首例自乌干达输入的埃博拉病例，10月30日阿达马瓦州约拉报告的疑似病例经两轮检测为阴性。卫生部长表示，若无新增确诊或疑似病例，疫情或可于12月7日宣告结束，但该日期仍属暂定，需经NCDC与世卫组织核验42天倒计时。世卫组织非洲区域主任称尼日利亚将继续监测52名接触者。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚10月20日确认首例自乌干达输入的埃博拉病例（本迪布焦型）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria confirmed its first imported case of Ebola (Bundibugyo strain) from a traveler arriving from Uganda on Oct. 20"
+    },
+    {
+     "fact": "该患者已被撤离至瑞士，尼日利亚卫生应对转向长期监测",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "With Nigeria’s imported Bundibugyo Ebola patient now evacuated to Switzerland, the country’s health response has pivoted from active patient care to long-term monitoring"
+    },
+    {
+     "fact": "10月30日阿达马瓦州约拉报告的疑似病例经两轮检测为埃博拉阴性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "suspected cases reported in Yola, Adamawa, on Oct. 30, turned out negative for EVD after two rounds of testing"
+    },
+    {
+     "fact": "卫生部长称疫情或可于12月7日宣告结束，但日期为暂定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria could potentially declare the outbreak over by Dec. 7, provided no further confirmed or probable cases emerge. He said the date remained provisional"
+    },
+    {
+     "fact": "世卫组织非洲区域主任称尼日利亚将继续监测52名接触者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria would continue monitoring 52 contacts, while Switzerland would manage the patient and follow up her husband"
+    }
+   ],
+   "uncertainties": [
+    "疫情结束日期12月7日为暂定，需经NCDC与世卫组织核验42天倒计时",
+    "尼日利亚医学科学院提醒，患者临床好转不一定意味着不再具有传染性",
+    "接触者监测仍在进行，后续是否出现新增病例尚不确定",
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_aac42ee7241718e8",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
