@@ -1,0 +1,126 @@
+{
+ "label": "S05d9b2cf",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "75f4169556da45497816ad92a79e1773c3a324c099b771c91eaeb022ae1180ca",
+ "tokens": {
+  "input_tokens": 1991,
+  "output_tokens": 397,
+  "total_tokens": 2388
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"赎金支付情况仅为据报道，尚未获得独立证实\", \"事件目前仅有一个来源报道，缺乏交叉验证\"]",
+    "after": "[\"赎金支付情况仅为据报道，尚未获得独立证实\", \"事件目前仅有一个来源报道，缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚贝努埃州六名被绑架送葬者获释",
+   "summary_zh": "尼日利亚贝努埃州六名送葬者在运送遗体途中遭绑架，据报在家人支付250万奈拉赎金后获释。事件发生在奥图克波地方政府区阿多卡路一带，绑匪拦截车辆后弃置遗体并索要1500万奈拉赎金。上述赎金支付情况为据报道，尚未获得独立证实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Benue State",
+    "city": "Otukpo",
+    "site": "Adoka Road",
+    "raw_text": "Adoka Road in Otukpo Local Government Area, Benue State"
+   },
+   "key_facts": [
+    {
+     "fact": "六名送葬者在运送遗体途中被绑架后获释",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Six abducted Benue mourners regain freedom"
+    },
+    {
+     "fact": "据报家属支付了250万奈拉赎金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "following the reported payment of N2.5m ransom"
+    },
+    {
+     "fact": "绑架发生在周五晚8时左右奥图克波地方政府区阿多卡路",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "kidnapped around 8pm on Friday along Adoka Road in Otukpo Local Government Area"
+    },
+    {
+     "fact": "绑匪弃置遗体并索要1500万奈拉赎金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "abandoned the corpse on the highway and demanded N15m ransom"
+    }
+   ],
+   "uncertainties": [
+    "赎金支付情况仅为据报道，尚未获得独立证实",
+    "事件目前仅有一个来源报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚贝努埃州六名被绑架送葬者获释",
+   "summary_zh": "尼日利亚贝努埃州六名送葬者在运送遗体途中遭绑架，据报在家人支付250万奈拉赎金后获释。事件发生在奥图克波地方政府区阿多卡路一带，绑匪拦截车辆后弃置遗体并索要1500万奈拉赎金。上述赎金支付情况为据报道，尚未获得独立证实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Benue State",
+    "city": "Otukpo",
+    "site": "Adoka Road",
+    "raw_text": "Adoka Road in Otukpo Local Government Area, Benue State"
+   },
+   "key_facts": [
+    {
+     "fact": "六名送葬者在运送遗体途中被绑架后获释",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Six abducted Benue mourners regain freedom"
+    },
+    {
+     "fact": "据报家属支付了250万奈拉赎金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "following the reported payment of N2.5m ransom"
+    },
+    {
+     "fact": "绑架发生在周五晚8时左右奥图克波地方政府区阿多卡路",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "kidnapped around 8pm on Friday along Adoka Road in Otukpo Local Government Area"
+    },
+    {
+     "fact": "绑匪弃置遗体并索要1500万奈拉赎金",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "abandoned the corpse on the highway and demanded N15m ransom"
+    }
+   ],
+   "uncertainties": [
+    "赎金支付情况仅为据报道，尚未获得独立证实",
+    "事件目前仅有一个来源报道，缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_8181ed6305d9b2cf",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
