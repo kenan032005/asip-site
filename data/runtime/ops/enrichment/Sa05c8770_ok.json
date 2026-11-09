@@ -1,0 +1,125 @@
+{
+ "label": "Sa05c8770",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e93015af899743fcaa0646d0e81e7459be171322589d65b592b476e3ebdb61b5",
+ "tokens": {
+  "input_tokens": 2649,
+  "output_tokens": 481,
+  "total_tokens": 3130
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得政府宣布提供1.2万份检测试剂并动员30支干预队伍应对登革热",
+   "summary_zh": "乍得政府宣布提供1.2万份登革热诊断检测试剂，并动员30支干预队伍，以加强疫情防控。公共卫生与预防部长在国民议会上表示，这些检测试剂由世界银行和世界卫生组织等伙伴提供支持。据官方最新统计，截至11月3日，疫情已造成18人死亡、353例确诊病例和6275例疑似病例。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得政府宣布提供1.2万份登革热诊断检测试剂",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement tchadien a annoncé la mise à disposition de 12 000 tests de diagnostic"
+    },
+    {
+     "fact": "政府动员30支干预队伍加强疫情防控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la mobilisation de 30 équipes d’intervention pour renforcer la lutte contre l’épidémie de dengue"
+    },
+    {
+     "fact": "据官方统计，疫情已造成18人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "qui a officiellement fait 18 morts dans le pays"
+    },
+    {
+     "fact": "截至11月3日，累计353例确诊病例和6275例疑似病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’épidémie a causé 18 décès, pour 353 cas confirmés et 6 275 cas suspects"
+    },
+    {
+     "fact": "检测试剂由世界银行和世界卫生组织等伙伴提供支持",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les 12 000 tests avaient été fournis avec l’appui de partenaires, notamment la Banque mondiale et l’Organisation mondiale de la santé (OMS)"
+    }
+   ],
+   "uncertainties": [
+    "疫情数据为官方统计，尚未获得独立交叉验证",
+    "报道为单一来源（Tchadinfos），且不同来源存在时间差异"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得政府宣布提供1.2万份检测试剂并动员30支干预队伍应对登革热",
+   "summary_zh": "乍得政府宣布提供1.2万份登革热诊断检测试剂，并动员30支干预队伍，以加强疫情防控。公共卫生与预防部长在国民议会上表示，这些检测试剂由世界银行和世界卫生组织等伙伴提供支持。据官方最新统计，截至11月3日，疫情已造成18人死亡、353例确诊病例和6275例疑似病例。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得政府宣布提供1.2万份登革热诊断检测试剂",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement tchadien a annoncé la mise à disposition de 12 000 tests de diagnostic"
+    },
+    {
+     "fact": "政府动员30支干预队伍加强疫情防控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la mobilisation de 30 équipes d’intervention pour renforcer la lutte contre l’épidémie de dengue"
+    },
+    {
+     "fact": "据官方统计，疫情已造成18人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "qui a officiellement fait 18 morts dans le pays"
+    },
+    {
+     "fact": "截至11月3日，累计353例确诊病例和6275例疑似病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’épidémie a causé 18 décès, pour 353 cas confirmés et 6 275 cas suspects"
+    },
+    {
+     "fact": "检测试剂由世界银行和世界卫生组织等伙伴提供支持",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les 12 000 tests avaient été fournis avec l’appui de partenaires, notamment la Banque mondiale et l’Organisation mondiale de la santé (OMS)"
+    }
+   ],
+   "uncertainties": [
+    "疫情数据为官方统计，尚未获得独立交叉验证",
+    "报道为单一来源（Tchadinfos），且不同来源存在时间差异"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_0d6f1c64a05c8770",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
