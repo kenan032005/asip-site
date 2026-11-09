@@ -1,0 +1,115 @@
+{
+ "label": "Sc9b52e9d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "bc2aae86e54971cd44471c14ee66e07fee0838d117a660dafb6099f9e5af28a4",
+ "tokens": {
+  "input_tokens": 2694,
+  "output_tokens": 541,
+  "total_tokens": 3235
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得药剂师协会警告登革热期间勿自行用药",
+   "summary_zh": "面对登革热在乍得的传播，乍得国家药剂师协会（ONPT）于2026年11月3日发布公告，呼吁民众提高警惕并遵守预防措施，特别警告不要自行用药。协会建议出现发热、头痛或肌肉酸痛等症状者尽快就医，并提醒政府已决定自11月2日起在公立医疗机构免费诊治登革热。协会还明确不建议在疑似或确诊登革热时使用阿司匹林、布洛芬等非甾体抗炎药，以防出血并发症。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得国家药剂师协会呼吁民众警惕登革热并遵守预防措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Face à la propagation de la dengue au Tchad, l’Ordre national des pharmaciens du Tchad (ONPT) appelle la population à la vigilance et au respect des mesures de prévention."
+    },
+    {
+     "fact": "协会于2026年11月3日发布公告，警告自行用药风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans un communiqué publié le 3 novembre 2026 à, l’institution met particulièrement en garde contre l’automédication"
+    },
+    {
+     "fact": "政府于11月2日决定公立医疗机构免费诊治登革热",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il rappelle également la décision du gouvernement, prise le 2 novembre dernier, de rendre gratuite la prise en charge de la dengue dans les établissements sanitaires publics."
+    },
+    {
+     "fact": "协会明确不建议在疑似或确诊登革热时使用阿司匹林、布洛芬等非甾体抗炎药",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il déconseille formellement l’utilisation de l’aspirine, de l’ibuprofène et d’autres anti-inflammatoires non stéroïdiens en cas de dengue suspectée ou confirmée"
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（Le N'Djam Post）报道，尚缺乏交叉验证",
+    "登革热在乍得的具体传播规模与病例数未在文中给出"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得药剂师协会警告登革热期间勿自行用药",
+   "summary_zh": "面对登革热在乍得的传播，乍得国家药剂师协会（ONPT）于2026年11月3日发布公告，呼吁民众提高警惕并遵守预防措施，特别警告不要自行用药。协会建议出现发热、头痛或肌肉酸痛等症状者尽快就医，并提醒政府已决定自11月2日起在公立医疗机构免费诊治登革热。协会还明确不建议在疑似或确诊登革热时使用阿司匹林、布洛芬等非甾体抗炎药，以防出血并发症。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得国家药剂师协会呼吁民众警惕登革热并遵守预防措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Face à la propagation de la dengue au Tchad, l’Ordre national des pharmaciens du Tchad (ONPT) appelle la population à la vigilance et au respect des mesures de prévention."
+    },
+    {
+     "fact": "协会于2026年11月3日发布公告，警告自行用药风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans un communiqué publié le 3 novembre 2026 à, l’institution met particulièrement en garde contre l’automédication"
+    },
+    {
+     "fact": "政府于11月2日决定公立医疗机构免费诊治登革热",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il rappelle également la décision du gouvernement, prise le 2 novembre dernier, de rendre gratuite la prise en charge de la dengue dans les établissements sanitaires publics."
+    },
+    {
+     "fact": "协会明确不建议在疑似或确诊登革热时使用阿司匹林、布洛芬等非甾体抗炎药",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il déconseille formellement l’utilisation de l’aspirine, de l’ibuprofène et d’autres anti-inflammatoires non stéroïdiens en cas de dengue suspectée ou confirmée"
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（Le N'Djam Post）报道，尚缺乏交叉验证",
+    "登革热在乍得的具体传播规模与病例数未在文中给出"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_60292f5cc9b52e9d",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
