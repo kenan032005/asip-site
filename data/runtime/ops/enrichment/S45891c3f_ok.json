@@ -1,0 +1,115 @@
+{
+ "label": "S45891c3f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "93e6819f0dda943fe9bf3014b7967a8390c3c27ecb71a2cbe1e0a4bc12c47bb8",
+ "tokens": {
+  "input_tokens": 2629,
+  "output_tokens": 497,
+  "total_tokens": 3126
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "迪法：州长召集扩大特别地区安全会议",
+   "summary_zh": "尼日尔迪法地区州长、少将马哈马杜·易卜拉欣·巴加多马于2026年11月4日星期三在其办公室召集扩大特别地区安全委员会会议，参会者包括该地区所有省长、国防与安全部队（FDS）省级负责人及市镇代表行政官，以审议地区安全形势。会议唯一议程为地区总体安全形势。据尼日尔官方通讯社报道，当局持续通过国防与安全部队开展安保行动，包括NALEWA DOLÉ行动。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "迪法",
+    "city": "迪法",
+    "site": "州长办公室",
+    "raw_text": "Diffa, région de Diffa"
+   },
+   "key_facts": [
+    {
+     "fact": "迪法地区州长召集扩大特别地区安全委员会会议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Gouverneur de la région de Diffa, le Général de Division Mahamadou Ibrahim Bagadoma, a convoqué ce mercredi 4 Novembre 2026 à son cabinet, un Conseil régional de sécurité (CRS) extraordinaire"
+    },
+    {
+     "fact": "会议唯一议程为地区总体安全形势",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la situation sécuritaire générale de la région constituait l’unique point inscrit à l’ordre du jour de cette rencontre"
+    },
+    {
+     "fact": "国防与安全部队开展安保行动，包括NALEWA DOLÉ行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les FDS sont mobilisées à travers des opérations de sécurisation, de surveillance des zones sensibles et de protection des populations, notamment dans le cadre de l’opération NALEWA DOLÉ"
+    },
+    {
+     "fact": "会议于2026年11月4日举行",
+     "evidence_field": "event_time",
+     "evidence_excerpt": "2026-11-04 20:24:35"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（尼日尔官方通讯社ANP）报道，尚缺乏交叉验证",
+    "会议具体讨论内容与结论未在报道中披露"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "迪法：州长召集扩大特别地区安全会议",
+   "summary_zh": "尼日尔迪法地区州长、少将马哈马杜·易卜拉欣·巴加多马于2026年11月4日星期三在其办公室召集扩大特别地区安全委员会会议，参会者包括该地区所有省长、国防与安全部队（FDS）省级负责人及市镇代表行政官，以审议地区安全形势。会议唯一议程为地区总体安全形势。据尼日尔官方通讯社报道，当局持续通过国防与安全部队开展安保行动，包括NALEWA DOLÉ行动。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "迪法",
+    "city": "迪法",
+    "site": "州长办公室",
+    "raw_text": "Diffa, région de Diffa"
+   },
+   "key_facts": [
+    {
+     "fact": "迪法地区州长召集扩大特别地区安全委员会会议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Gouverneur de la région de Diffa, le Général de Division Mahamadou Ibrahim Bagadoma, a convoqué ce mercredi 4 Novembre 2026 à son cabinet, un Conseil régional de sécurité (CRS) extraordinaire"
+    },
+    {
+     "fact": "会议唯一议程为地区总体安全形势",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la situation sécuritaire générale de la région constituait l’unique point inscrit à l’ordre du jour de cette rencontre"
+    },
+    {
+     "fact": "国防与安全部队开展安保行动，包括NALEWA DOLÉ行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les FDS sont mobilisées à travers des opérations de sécurisation, de surveillance des zones sensibles et de protection des populations, notamment dans le cadre de l’opération NALEWA DOLÉ"
+    },
+    {
+     "fact": "会议于2026年11月4日举行",
+     "evidence_field": "event_time",
+     "evidence_excerpt": "2026-11-04 20:24:35"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（尼日尔官方通讯社ANP）报道，尚缺乏交叉验证",
+    "会议具体讨论内容与结论未在报道中披露"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_649919dd45891c3f",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
