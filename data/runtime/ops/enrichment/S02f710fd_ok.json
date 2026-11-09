@@ -1,0 +1,117 @@
+{
+ "label": "S02f710fd",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "7eb2be65448641fae92be292f69f419d3ad6dc08ea185a50f5b1d125a916226b",
+ "tokens": {
+  "input_tokens": 2224,
+  "output_tokens": 478,
+  "total_tokens": 2702
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹西加扎勒河州警方调查朱尔河县两起致命枪击事件",
+   "summary_zh": "南苏丹西加扎勒河州警方正在调查上个月朱尔河县发生的两起独立枪击事件，一名南苏丹人民国防军士兵和一名平民分别死亡。警方发言人表示，一名不明身份枪手于10月20日晚在士兵乘坐摩托车出租车前往马里亚尔拜镇途中将其枪杀，目前尚未逮捕任何人。另一起事件中，一名平民在因通奸指控引发的对峙中被枪击身亡。警方称两起案件调查仍在进行，并已部署安全人员协助追查嫌疑人。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "西加扎勒河州",
+    "city": "朱尔河县",
+    "site": null,
+    "raw_text": "Jur River County, Western Bahr el Ghazal State"
+   },
+   "key_facts": [
+    {
+     "fact": "西加扎勒河州警方正在调查朱尔河县两起独立枪击事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Police in Western Bahr el Ghazal State are investigating two separate shooting incidents in Jur River County last month"
+    },
+    {
+     "fact": "一名南苏丹人民国防军第五步兵师士兵于10月20日晚在乘坐摩托车出租车途中被不明身份枪手杀害",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "an unidentified gunman shot and killed a soldier on October 20 as he travelled on a motorcycle taxi"
+    },
+    {
+     "fact": "另一起枪击事件中一名平民在因通奸指控引发的对峙中被枪击身亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a civilian was killed during a confrontation reportedly triggered by an allegation of adultery"
+    },
+    {
+     "fact": "士兵被杀案尚未有人被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "No arrests had been made in connection with the killing"
+    }
+   ],
+   "uncertainties": [
+    "两起枪击事件的嫌疑人身份及作案动机尚未确认",
+    "士兵被杀案尚无逮捕，嫌疑人仍在逃",
+    "事件细节目前仅来自警方发言人的单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹西加扎勒河州警方调查朱尔河县两起致命枪击事件",
+   "summary_zh": "南苏丹西加扎勒河州警方正在调查上个月朱尔河县发生的两起独立枪击事件，一名南苏丹人民国防军士兵和一名平民分别死亡。警方发言人表示，一名不明身份枪手于10月20日晚在士兵乘坐摩托车出租车前往马里亚尔拜镇途中将其枪杀，目前尚未逮捕任何人。另一起事件中，一名平民在因通奸指控引发的对峙中被枪击身亡。警方称两起案件调查仍在进行，并已部署安全人员协助追查嫌疑人。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "西加扎勒河州",
+    "city": "朱尔河县",
+    "site": null,
+    "raw_text": "Jur River County, Western Bahr el Ghazal State"
+   },
+   "key_facts": [
+    {
+     "fact": "西加扎勒河州警方正在调查朱尔河县两起独立枪击事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Police in Western Bahr el Ghazal State are investigating two separate shooting incidents in Jur River County last month"
+    },
+    {
+     "fact": "一名南苏丹人民国防军第五步兵师士兵于10月20日晚在乘坐摩托车出租车途中被不明身份枪手杀害",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "an unidentified gunman shot and killed a soldier on October 20 as he travelled on a motorcycle taxi"
+    },
+    {
+     "fact": "另一起枪击事件中一名平民在因通奸指控引发的对峙中被枪击身亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a civilian was killed during a confrontation reportedly triggered by an allegation of adultery"
+    },
+    {
+     "fact": "士兵被杀案尚未有人被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "No arrests had been made in connection with the killing"
+    }
+   ],
+   "uncertainties": [
+    "两起枪击事件的嫌疑人身份及作案动机尚未确认",
+    "士兵被杀案尚无逮捕，嫌疑人仍在逃",
+    "事件细节目前仅来自警方发言人的单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_6a0ac24402f710fd",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

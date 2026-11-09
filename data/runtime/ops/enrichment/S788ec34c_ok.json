@@ -1,0 +1,127 @@
+{
+ "label": "S788ec34c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b32f17fd682e997667ddfd1a70463b2d4e60940a1b4c357b3d39b0024313e8a8",
+ "tokens": {
+  "input_tokens": 2664,
+  "output_tokens": 483,
+  "total_tokens": 3147
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "联合国南苏丹特派团在通季北部发生严重族群间暴力后迅速部署巡逻队",
+   "summary_zh": "联合国南苏丹特派团（UNMISS）在瓦拉普州大通季地区发生族群间暴力后迅速部署巡逻队。据报10月26日的袭击造成72人死亡、38人受伤，数千家庭逃离。通季北部救济与重建委员会估计超过1.2万户流离失所。当地武器泛滥、医疗设施受损，局势仍存在再次升级的风险。",
+   "event_type": "civil_unrest",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "瓦拉普州",
+    "city": "通季北部",
+    "site": "阿科普",
+    "raw_text": "WARRAP - Greater Tonj, Tonj North, Akop"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国南苏丹特派团在通季北部发生族群间暴力后迅速部署巡逻队",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "UNMISS rapidly deploys patrols to Tonj North following devastating intercommunal violence"
+    },
+    {
+     "fact": "据报大通季地区袭击造成72人死亡、38人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "deadly attacks in Greater Tonj that reportedly claimed 72 lives and injured 38"
+    },
+    {
+     "fact": "袭击发生于10月26日，并迫使数千家庭逃离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "forcing thousands of families to flee amid a cycle of retaliatory violence on 26 October"
+    },
+    {
+     "fact": "通季北部救济与重建委员会估计超过1.2万户流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Tonj North Relief and Rehabilitation Commission estimates that more than 12,000 households were displaced"
+    },
+    {
+     "fact": "当地武器泛滥，几乎每个年轻人都携带枪支",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "almost every young person is carrying a gun"
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字（72死38伤）为据报数据，尚未获得独立核实",
+    "流离失所户数为委员会估计值",
+    "目前仅单一来源（UNMISS）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "联合国南苏丹特派团在通季北部发生严重族群间暴力后迅速部署巡逻队",
+   "summary_zh": "联合国南苏丹特派团（UNMISS）在瓦拉普州大通季地区发生族群间暴力后迅速部署巡逻队。据报10月26日的袭击造成72人死亡、38人受伤，数千家庭逃离。通季北部救济与重建委员会估计超过1.2万户流离失所。当地武器泛滥、医疗设施受损，局势仍存在再次升级的风险。",
+   "event_type": "civil_unrest",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "瓦拉普州",
+    "city": "通季北部",
+    "site": "阿科普",
+    "raw_text": "WARRAP - Greater Tonj, Tonj North, Akop"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国南苏丹特派团在通季北部发生族群间暴力后迅速部署巡逻队",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "UNMISS rapidly deploys patrols to Tonj North following devastating intercommunal violence"
+    },
+    {
+     "fact": "据报大通季地区袭击造成72人死亡、38人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "deadly attacks in Greater Tonj that reportedly claimed 72 lives and injured 38"
+    },
+    {
+     "fact": "袭击发生于10月26日，并迫使数千家庭逃离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "forcing thousands of families to flee amid a cycle of retaliatory violence on 26 October"
+    },
+    {
+     "fact": "通季北部救济与重建委员会估计超过1.2万户流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Tonj North Relief and Rehabilitation Commission estimates that more than 12,000 households were displaced"
+    },
+    {
+     "fact": "当地武器泛滥，几乎每个年轻人都携带枪支",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "almost every young person is carrying a gun"
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字（72死38伤）为据报数据，尚未获得独立核实",
+    "流离失所户数为委员会估计值",
+    "目前仅单一来源（UNMISS）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_4d1e435d788ec34c",
+ "disease_event_id": null,
+ "country_code": "SS"
+}
