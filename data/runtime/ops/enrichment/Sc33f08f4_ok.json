@@ -1,0 +1,117 @@
+{
+ "label": "Sc33f08f4",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1dd2e031b40a598e3eb9e4a68c762e18194159855acf65f25853f68211942777",
+ "tokens": {
+  "input_tokens": 2047,
+  "output_tokens": 493,
+  "total_tokens": 2540
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚军队在科吉州击毙两名绑架嫌疑人并缴获5000发弹药",
+   "summary_zh": "尼日利亚陆军第12合成旅在科吉州伊加拉梅拉/奥多卢地方政府区的埃迪莫格博森林开展后续行动，击毙两名疑似绑架者并缴获武器弹药。军方称行动于2026年11月3日进行，此前11月2日已对该森林一处疑似绑架者藏身处实施突袭。军方公共关系代理助理主任哈桑·阿卜杜拉希中尉通过声明披露上述情况。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Kogi State",
+    "city": null,
+    "site": "Edimogbo Forest, Igalamela/Odolu Local Government Area",
+    "raw_text": "Edimogbo Forest, Igalamela/Odolu Local Government Area of Kogi State"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚陆军在科吉州击毙两名疑似绑架者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Troops of the 12 Composite Brigade of the Nigerian Army have killed two suspected kidnappers"
+    },
+    {
+     "fact": "行动中缴获武器和弹药",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "recovered arms and ammunition during a follow-up operation in Edimogbo Forest"
+    },
+    {
+     "fact": "行动地点位于科吉州伊加拉梅拉/奥多卢地方政府区埃迪莫格博森林",
+     "evidence_field": "location",
+     "evidence_excerpt": "Edimogbo Forest, Igalamela/Odolu Local Government Area of Kogi State"
+    },
+    {
+     "fact": "后续行动于2026年11月3日进行，此前11月2日已突袭疑似绑架者藏身处",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the operation, conducted on November 3, 2026, followed an earlier raid on a suspected kidnappers’ hideout in the forest on November 2"
+    }
+   ],
+   "uncertainties": [
+    "被击毙人员为疑似绑架者，身份尚未确认",
+    "目前仅单一来源（Punch）报道，尚缺乏交叉验证",
+    "缴获弹药的具体数量仅见于标题，正文未明确说明"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚军队在科吉州击毙两名绑架嫌疑人并缴获5000发弹药",
+   "summary_zh": "尼日利亚陆军第12合成旅在科吉州伊加拉梅拉/奥多卢地方政府区的埃迪莫格博森林开展后续行动，击毙两名疑似绑架者并缴获武器弹药。军方称行动于2026年11月3日进行，此前11月2日已对该森林一处疑似绑架者藏身处实施突袭。军方公共关系代理助理主任哈桑·阿卜杜拉希中尉通过声明披露上述情况。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Kogi State",
+    "city": null,
+    "site": "Edimogbo Forest, Igalamela/Odolu Local Government Area",
+    "raw_text": "Edimogbo Forest, Igalamela/Odolu Local Government Area of Kogi State"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚陆军在科吉州击毙两名疑似绑架者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Troops of the 12 Composite Brigade of the Nigerian Army have killed two suspected kidnappers"
+    },
+    {
+     "fact": "行动中缴获武器和弹药",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "recovered arms and ammunition during a follow-up operation in Edimogbo Forest"
+    },
+    {
+     "fact": "行动地点位于科吉州伊加拉梅拉/奥多卢地方政府区埃迪莫格博森林",
+     "evidence_field": "location",
+     "evidence_excerpt": "Edimogbo Forest, Igalamela/Odolu Local Government Area of Kogi State"
+    },
+    {
+     "fact": "后续行动于2026年11月3日进行，此前11月2日已突袭疑似绑架者藏身处",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the operation, conducted on November 3, 2026, followed an earlier raid on a suspected kidnappers’ hideout in the forest on November 2"
+    }
+   ],
+   "uncertainties": [
+    "被击毙人员为疑似绑架者，身份尚未确认",
+    "目前仅单一来源（Punch）报道，尚缺乏交叉验证",
+    "缴获弹药的具体数量仅见于标题，正文未明确说明"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_a450d1a6c33f08f4",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
