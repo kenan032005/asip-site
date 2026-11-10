@@ -1,0 +1,117 @@
+{
+ "label": "S833e11c6",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "8a22b9d21b02e3d5577bd6ec921b925fa4ade46407b1897caf41e7d57d679235",
+ "tokens": {
+  "input_tokens": 2029,
+  "output_tokens": 491,
+  "total_tokens": 2520
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚禁毒署称在卡杜纳-扎里亚公路挫败一起武装抢劫企图",
+   "summary_zh": "尼日利亚国家禁毒执法局表示，其执法人员挫败了卡杜纳-扎里亚公路上的一起武装抢劫企图，并与嫌疑人发生交火。该局公共关系官员称，事件发生在周日凌晨3时左右，地点靠近该局在扎里亚努胡·巴马利理工学院附近的检查站。一名驾车者从疑似劫匪处逃脱后报警，执法人员随即出动。目前该说法仅来自单一来源，尚未获得独立证实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "卡杜纳州",
+    "city": "扎里亚",
+    "site": "努胡·巴马利理工学院附近的禁毒署检查站",
+    "raw_text": "Kaduna-Zaria highway, near the agency's checkpoint close to Nuhu Bamalli Polytechnic, Zaria"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚国家禁毒执法局称挫败了卡杜纳-扎里亚公路上的一起武装抢劫企图",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The National Drug Law Enforcement Agency has confirmed that its operatives foiled an armed robbery attempt along the Kaduna-Zaria highway."
+    },
+    {
+     "fact": "事件发生在周日凌晨3时左右，地点靠近扎里亚努胡·巴马利理工学院附近的检查站",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the incident occurred at about 3am on Sunday near the agency’s checkpoint close to Nuhu Bamalli Polytechnic, Zaria"
+    },
+    {
+     "fact": "一名驾车者从疑似劫匪处逃脱后报警，执法人员随即出动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the operatives were alerted after one of the motorists reportedly escaped from the suspected robbers and raised the alarm"
+    },
+    {
+     "fact": "执法人员与嫌疑人发生交火",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "after engaging suspects in a gu"
+    }
+   ],
+   "uncertainties": [
+    "事件细节仅来自尼日利亚国家禁毒执法局单一来源，尚未获得独立证实",
+    "嫌疑人身份、人数及伤亡情况尚未公布",
+    "报道正文不完整，交火结果未获确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚禁毒署称在卡杜纳-扎里亚公路挫败一起武装抢劫企图",
+   "summary_zh": "尼日利亚国家禁毒执法局表示，其执法人员挫败了卡杜纳-扎里亚公路上的一起武装抢劫企图，并与嫌疑人发生交火。该局公共关系官员称，事件发生在周日凌晨3时左右，地点靠近该局在扎里亚努胡·巴马利理工学院附近的检查站。一名驾车者从疑似劫匪处逃脱后报警，执法人员随即出动。目前该说法仅来自单一来源，尚未获得独立证实。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "卡杜纳州",
+    "city": "扎里亚",
+    "site": "努胡·巴马利理工学院附近的禁毒署检查站",
+    "raw_text": "Kaduna-Zaria highway, near the agency's checkpoint close to Nuhu Bamalli Polytechnic, Zaria"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚国家禁毒执法局称挫败了卡杜纳-扎里亚公路上的一起武装抢劫企图",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The National Drug Law Enforcement Agency has confirmed that its operatives foiled an armed robbery attempt along the Kaduna-Zaria highway."
+    },
+    {
+     "fact": "事件发生在周日凌晨3时左右，地点靠近扎里亚努胡·巴马利理工学院附近的检查站",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the incident occurred at about 3am on Sunday near the agency’s checkpoint close to Nuhu Bamalli Polytechnic, Zaria"
+    },
+    {
+     "fact": "一名驾车者从疑似劫匪处逃脱后报警，执法人员随即出动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the operatives were alerted after one of the motorists reportedly escaped from the suspected robbers and raised the alarm"
+    },
+    {
+     "fact": "执法人员与嫌疑人发生交火",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "after engaging suspects in a gu"
+    }
+   ],
+   "uncertainties": [
+    "事件细节仅来自尼日利亚国家禁毒执法局单一来源，尚未获得独立证实",
+    "嫌疑人身份、人数及伤亡情况尚未公布",
+    "报道正文不完整，交火结果未获确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_9fc714de833e11c6",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
