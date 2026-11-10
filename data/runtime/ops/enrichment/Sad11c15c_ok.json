@@ -1,0 +1,105 @@
+{
+ "label": "Sad11c15c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4b610cf943323584f56da01477b4eeef118db2ecbe220177c7c9bf8c4580b732",
+ "tokens": {
+  "input_tokens": 2598,
+  "output_tokens": 375,
+  "total_tokens": 2973
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克解放阵线宣布支持马普托中央医院肿瘤科修复",
+   "summary_zh": "莫桑比克解放阵线（FRELIMO）政治局宣布捐款，支持修复上周日发生火灾的马普托中央医院（HCM）肿瘤科。该党呼吁党员、支持者及社会各界参与团结行动，帮助恢复该医疗服务。政治局同时鼓励政府继续调查火灾原因。上述信息目前仅来自单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "马普托省",
+    "city": "马普托",
+    "site": "马普托中央医院（HCM）",
+    "raw_text": "Hospital Central de Maputo (HCM)"
+   },
+   "key_facts": [
+    {
+     "fact": "FRELIMO政治局宣布捐款支持修复马普托中央医院肿瘤科",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A Comissão Política da FRELIMO anunciou uma contribuição para apoiar a restauração da Unidade de Oncologia do Hospital Central de Maputo (HCM)"
+    },
+    {
+     "fact": "马普托中央医院肿瘤科上周日发生火灾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "afectada por um incêndio no último domingo"
+    },
+    {
+     "fact": "FRELIMO鼓励政府继续调查火灾原因",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "encorajou o Governo a prosseguir com as investigações para apurar as causas do incidente"
+    }
+   ],
+   "uncertainties": [
+    "火灾原因尚未查明，仍有待调查",
+    "目前仅有一个来源（O País）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克解放阵线宣布支持马普托中央医院肿瘤科修复",
+   "summary_zh": "莫桑比克解放阵线（FRELIMO）政治局宣布捐款，支持修复上周日发生火灾的马普托中央医院（HCM）肿瘤科。该党呼吁党员、支持者及社会各界参与团结行动，帮助恢复该医疗服务。政治局同时鼓励政府继续调查火灾原因。上述信息目前仅来自单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "马普托省",
+    "city": "马普托",
+    "site": "马普托中央医院（HCM）",
+    "raw_text": "Hospital Central de Maputo (HCM)"
+   },
+   "key_facts": [
+    {
+     "fact": "FRELIMO政治局宣布捐款支持修复马普托中央医院肿瘤科",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A Comissão Política da FRELIMO anunciou uma contribuição para apoiar a restauração da Unidade de Oncologia do Hospital Central de Maputo (HCM)"
+    },
+    {
+     "fact": "马普托中央医院肿瘤科上周日发生火灾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "afectada por um incêndio no último domingo"
+    },
+    {
+     "fact": "FRELIMO鼓励政府继续调查火灾原因",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "encorajou o Governo a prosseguir com as investigações para apurar as causas do incidente"
+    }
+   ],
+   "uncertainties": [
+    "火灾原因尚未查明，仍有待调查",
+    "目前仅有一个来源（O País）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_5ee92fdcad11c15c",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}
