@@ -1,0 +1,113 @@
+{
+ "label": "S29a5cff8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a3717e08b5b9390d94a305aa3a68c3955201eb6622bede77c247dace3a2fd9dd",
+ "tokens": {
+  "input_tokens": 2196,
+  "output_tokens": 412,
+  "total_tokens": 2608
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "西加扎勒河州监狱过度拥挤",
+   "summary_zh": "南苏丹西加扎勒河州瓦乌中央监狱负责人表示，该州监狱设施过度拥挤，共有1025名在押人员，其中288人候审、146人等待执行死刑。他称拥挤部分源于北加扎勒河州和湖泊州的案件转入，并呼吁设立流动法庭加快审理。相关说法来自单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Western Bahr el Ghazal State",
+    "city": "Wau",
+    "site": "Wau Central Prison",
+    "raw_text": "Wau Central Prison, Western Bahr el Ghazal State"
+   },
+   "key_facts": [
+    {
+     "fact": "西加扎勒河州监狱共有1025名在押人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He said there are 1,025 inmates across the state, with 146 on death row awaiting execution."
+    },
+    {
+     "fact": "其中288人候审、146人等待执行死刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "288 have been remanded and are awaiting trial. ... I have 146 condemned prisoners in this main prison"
+    },
+    {
+     "fact": "监狱拥挤被归因于北加扎勒河州和湖泊州案件转入",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "congestion is due to the transfer of inmates from Northern Bahr el Ghazal and Lakes states"
+    },
+    {
+     "fact": "监狱负责人呼吁设立流动法庭加快审理候审案件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Gen. Majok urges the establishment of mobile courts to expedite the hearing of cases of those on remand"
+    }
+   ],
+   "uncertainties": [
+    "相关数据与原因说明均来自瓦乌中央监狱负责人单一来源，尚未获得独立交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "西加扎勒河州监狱过度拥挤",
+   "summary_zh": "南苏丹西加扎勒河州瓦乌中央监狱负责人表示，该州监狱设施过度拥挤，共有1025名在押人员，其中288人候审、146人等待执行死刑。他称拥挤部分源于北加扎勒河州和湖泊州的案件转入，并呼吁设立流动法庭加快审理。相关说法来自单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "Western Bahr el Ghazal State",
+    "city": "Wau",
+    "site": "Wau Central Prison",
+    "raw_text": "Wau Central Prison, Western Bahr el Ghazal State"
+   },
+   "key_facts": [
+    {
+     "fact": "西加扎勒河州监狱共有1025名在押人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He said there are 1,025 inmates across the state, with 146 on death row awaiting execution."
+    },
+    {
+     "fact": "其中288人候审、146人等待执行死刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "288 have been remanded and are awaiting trial. ... I have 146 condemned prisoners in this main prison"
+    },
+    {
+     "fact": "监狱拥挤被归因于北加扎勒河州和湖泊州案件转入",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "congestion is due to the transfer of inmates from Northern Bahr el Ghazal and Lakes states"
+    },
+    {
+     "fact": "监狱负责人呼吁设立流动法庭加快审理候审案件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Gen. Majok urges the establishment of mobile courts to expedite the hearing of cases of those on remand"
+    }
+   ],
+   "uncertainties": [
+    "相关数据与原因说明均来自瓦乌中央监狱负责人单一来源，尚未获得独立交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_1c7aefb429a5cff8",
+ "disease_event_id": null,
+ "country_code": "SS"
+}
