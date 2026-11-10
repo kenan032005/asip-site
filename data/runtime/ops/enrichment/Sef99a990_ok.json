@@ -1,0 +1,137 @@
+{
+ "label": "Sef99a990",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ad5be8897c37da7f9c80b417f2bab73a02e79221cf9fec1bd520c691d07c091e",
+ "tokens": {
+  "input_tokens": 2501,
+  "output_tokens": 530,
+  "total_tokens": 3031
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "一名英国男子在刚果（金）感染埃博拉，将被送回英国",
+   "summary_zh": "一名在刚果（金）检测出埃博拉病毒阳性的英国男子将被送回英国。这是近期刚果（金）埃博拉疫情中首例确诊的英国公民感染病例，该疫情已导致超过5000人死亡。英国政府发言人表示，英国公众面临的风险仍然很低。据路透社援引一份BBC未见的内部文件报道，该感染者是一名医护人员。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Democratic Republic of Congo"
+   },
+   "key_facts": [
+    {
+     "fact": "一名英国男子在刚果（金）检测出埃博拉病毒阳性，将被送回英国",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A British man who has tested positive for Ebola in the Democratic Republic of Congo will be flown back to the UK."
+    },
+    {
+     "fact": "这是近期刚果（金）埃博拉疫情中首例确诊的英国公民感染病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It is the first confirmed case of a UK national contracting Ebola during the most recent outbreak of the rare but deadly virus in DR Congo"
+    },
+    {
+     "fact": "该疫情已导致超过5000人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "which has so far led to more than 5,000 deaths"
+    },
+    {
+     "fact": "英国政府发言人表示英国公众面临的风险仍然很低",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The risk to the UK public from Ebola remains low."
+    },
+    {
+     "fact": "据路透社援引一份BBC未见的内部文件报道，感染者是一名医护人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Reuters news agency reported the infected man is a healthcare worker, citing an internal document BBC News has not seen."
+    },
+    {
+     "fact": "自5月疫情暴发以来已有超过1万例确诊病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "There have been more than 10,000 confirmed cases since the recent outbreak in DR Congo started in May"
+    }
+   ],
+   "uncertainties": [
+    "该感染者是医护人员的说法来自路透社援引的一份BBC未见的内部文件，尚未获独立确认",
+    "该男子被送回英国的具体时间尚不清楚",
+    "目前仅有一个来源（BBC）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "一名英国男子在刚果（金）感染埃博拉，将被送回英国",
+   "summary_zh": "一名在刚果（金）检测出埃博拉病毒阳性的英国男子将被送回英国。这是近期刚果（金）埃博拉疫情中首例确诊的英国公民感染病例，该疫情已导致超过5000人死亡。英国政府发言人表示，英国公众面临的风险仍然很低。据路透社援引一份BBC未见的内部文件报道，该感染者是一名医护人员。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Democratic Republic of Congo"
+   },
+   "key_facts": [
+    {
+     "fact": "一名英国男子在刚果（金）检测出埃博拉病毒阳性，将被送回英国",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A British man who has tested positive for Ebola in the Democratic Republic of Congo will be flown back to the UK."
+    },
+    {
+     "fact": "这是近期刚果（金）埃博拉疫情中首例确诊的英国公民感染病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It is the first confirmed case of a UK national contracting Ebola during the most recent outbreak of the rare but deadly virus in DR Congo"
+    },
+    {
+     "fact": "该疫情已导致超过5000人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "which has so far led to more than 5,000 deaths"
+    },
+    {
+     "fact": "英国政府发言人表示英国公众面临的风险仍然很低",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The risk to the UK public from Ebola remains low."
+    },
+    {
+     "fact": "据路透社援引一份BBC未见的内部文件报道，感染者是一名医护人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Reuters news agency reported the infected man is a healthcare worker, citing an internal document BBC News has not seen."
+    },
+    {
+     "fact": "自5月疫情暴发以来已有超过1万例确诊病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "There have been more than 10,000 confirmed cases since the recent outbreak in DR Congo started in May"
+    }
+   ],
+   "uncertainties": [
+    "该感染者是医护人员的说法来自路透社援引的一份BBC未见的内部文件，尚未获独立确认",
+    "该男子被送回英国的具体时间尚不清楚",
+    "目前仅有一个来源（BBC）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_ee3bdba4ef99a990",
+ "disease_event_id": null,
+ "country_code": "CD"
+}
