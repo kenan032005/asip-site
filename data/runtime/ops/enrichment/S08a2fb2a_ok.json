@@ -1,0 +1,126 @@
+{
+ "label": "S08a2fb2a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "58a16eeaadf4c7972cdf570deac055b4221e9b01d92f5890e33b527e8eab2fb9",
+ "tokens": {
+  "input_tokens": 2522,
+  "output_tokens": 521,
+  "total_tokens": 3043
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"无人机袭击的具体责任方尚未确认，特使呼吁进行独立调查以查明事实\", \"阿卜耶伊最终地位仍未解决，相关谈判进展不明\"]",
+    "after": "[\"无人机袭击的具体责任方尚未确认，特使呼吁进行独立调查以查明事实\", \"阿卜耶伊最终地位仍未解决，相关谈判进展不明\", \"据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "联合国特使称RSF寻求在阿卜耶伊地区发挥作用",
+   "summary_zh": "联合国非洲之角特使向安理会表示，准军事组织快速支援部队（RSF）试图介入争议地区阿卜耶伊的行政管理，包括在8月任命一名平行的联合监督委员会联合主席。特使称此举超出苏丹与南苏丹既有协议框架，并警告RSF、南苏丹人民国防军等武装力量在阿卜耶伊地区的活动增加，威胁该地区的非军事化地位。10月19日阿卜耶伊阿米埃特市场遭无人机袭击，造成大量平民伤亡。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "阿卜耶伊地区",
+    "city": null,
+    "site": "阿米埃特市场",
+    "raw_text": "Abyei region"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国特使称RSF寻求介入阿卜耶伊地区行政管理",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The paramilitary Rapid Support Forces (RSF) have sought to assert an interest in the administration of the disputed Abyei region"
+    },
+    {
+     "fact": "RSF于8月任命阿卜耶伊联合监督委员会平行联合主席，特使称其超出苏丹与南苏丹协议框架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "its appointment of an Abyei Joint Oversight Committee (AJOC) co-chair in August, falls outside the framework of agreements and established mechanisms between Sudan and South Sudan"
+    },
+    {
+     "fact": "10月19日阿米埃特市场遭无人机袭击，造成大量平民伤亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "On October 19, drone attacks on Amiet market caused mass civilian casualties in one of the deadliest incidents in Abyei's history"
+    },
+    {
+     "fact": "超过5万名南苏丹回返者、苏丹难民及其他寻求庇护者经阿卜耶伊进入南苏丹",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than 50,000 South Sudanese returnees, Sudanese refugees and other asylum seekers have crossed into South Sudan through Abyei"
+    }
+   ],
+   "uncertainties": [
+    "无人机袭击的具体责任方尚未确认，特使呼吁进行独立调查以查明事实",
+    "阿卜耶伊最终地位仍未解决，相关谈判进展不明"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 88
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "联合国特使称RSF寻求在阿卜耶伊地区发挥作用",
+   "summary_zh": "联合国非洲之角特使向安理会表示，准军事组织快速支援部队（RSF）试图介入争议地区阿卜耶伊的行政管理，包括在8月任命一名平行的联合监督委员会联合主席。特使称此举超出苏丹与南苏丹既有协议框架，并警告RSF、南苏丹人民国防军等武装力量在阿卜耶伊地区的活动增加，威胁该地区的非军事化地位。10月19日阿卜耶伊阿米埃特市场遭无人机袭击，造成大量平民伤亡。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "阿卜耶伊地区",
+    "city": null,
+    "site": "阿米埃特市场",
+    "raw_text": "Abyei region"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国特使称RSF寻求介入阿卜耶伊地区行政管理",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The paramilitary Rapid Support Forces (RSF) have sought to assert an interest in the administration of the disputed Abyei region"
+    },
+    {
+     "fact": "RSF于8月任命阿卜耶伊联合监督委员会平行联合主席，特使称其超出苏丹与南苏丹协议框架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "its appointment of an Abyei Joint Oversight Committee (AJOC) co-chair in August, falls outside the framework of agreements and established mechanisms between Sudan and South Sudan"
+    },
+    {
+     "fact": "10月19日阿米埃特市场遭无人机袭击，造成大量平民伤亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "On October 19, drone attacks on Amiet market caused mass civilian casualties in one of the deadliest incidents in Abyei's history"
+    },
+    {
+     "fact": "超过5万名南苏丹回返者、苏丹难民及其他寻求庇护者经阿卜耶伊进入南苏丹",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "More than 50,000 South Sudanese returnees, Sudanese refugees and other asylum seekers have crossed into South Sudan through Abyei"
+    }
+   ],
+   "uncertainties": [
+    "无人机袭击的具体责任方尚未确认，特使呼吁进行独立调查以查明事实",
+    "阿卜耶伊最终地位仍未解决，相关谈判进展不明",
+    "据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 88
+  }
+ },
+ "event_id": "EVT_4149812908a2fb2a",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

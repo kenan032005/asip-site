@@ -1,0 +1,127 @@
+{
+ "label": "S4681692b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0722b6658949b4b5a357433b7f0f8d5119e95f264796c448538a99fe24062e4b",
+ "tokens": {
+  "input_tokens": 2398,
+  "output_tokens": 561,
+  "total_tokens": 2959
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "塔拉巴州议会工人威胁发起新一轮全面罢工，誓言关闭议会建筑群",
+   "summary_zh": "尼日利亚议会工作人员协会（PASAN）塔拉巴州分会威胁于2026年11月10日恢复全面罢工，要求州政府与议会领导层解决财政自主权及综合立法薪资结构（CONLESS）落实问题。该协会警告将关闭整个塔拉巴州议会建筑群及议会委员会。协会称自2025年11月14日起已进行无限期罢工，并指塔拉巴州议会是少数尚未完全满足诉求的议会之一。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "塔拉巴州",
+    "city": null,
+    "site": "塔拉巴州议会建筑群",
+    "raw_text": "Taraba State House of Assembly Complex"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚议会工作人员协会塔拉巴州分会威胁于2026年11月10日恢复全面罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Parliamentary Staff Association of Nigeria (PASAN), Taraba State Chapter, has threatened to resume a total strike action on November 10, 2026."
+    },
+    {
+     "fact": "协会警告若诉求未获解决将关闭塔拉巴州议会建筑群及议会委员会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "it will shut down the entire Taraba State House of Assembly Complex and the House of Assembly Commission if the state government and Assembly leadership fail to address its demands"
+    },
+    {
+     "fact": "诉求为落实财政自主权及综合立法薪资结构（CONLESS）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "its demands for financial autonomy and the implementation of the Consolidated Legislative Salary Structure (CONLESS)"
+    },
+    {
+     "fact": "协会称自2025年11月14日起已进行无限期罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "PASAN members in Taraba State have been involved in an indefinite strike action since November 14, 2025"
+    },
+    {
+     "fact": "协会称塔拉巴州议会是少数尚未完全满足诉求的议会之一",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Taraba State House of Assembly remained among the few assemblies yet to fully address the demands"
+    }
+   ],
+   "uncertainties": [
+    "罢工是否于2026年11月10日如期全面启动尚未证实",
+    "协会所称其他州已落实CONLESS及财政自主权法案的情况未获独立核实",
+    "目前仅单一来源（Sahara Reporters）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "塔拉巴州议会工人威胁发起新一轮全面罢工，誓言关闭议会建筑群",
+   "summary_zh": "尼日利亚议会工作人员协会（PASAN）塔拉巴州分会威胁于2026年11月10日恢复全面罢工，要求州政府与议会领导层解决财政自主权及综合立法薪资结构（CONLESS）落实问题。该协会警告将关闭整个塔拉巴州议会建筑群及议会委员会。协会称自2025年11月14日起已进行无限期罢工，并指塔拉巴州议会是少数尚未完全满足诉求的议会之一。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "塔拉巴州",
+    "city": null,
+    "site": "塔拉巴州议会建筑群",
+    "raw_text": "Taraba State House of Assembly Complex"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚议会工作人员协会塔拉巴州分会威胁于2026年11月10日恢复全面罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Parliamentary Staff Association of Nigeria (PASAN), Taraba State Chapter, has threatened to resume a total strike action on November 10, 2026."
+    },
+    {
+     "fact": "协会警告若诉求未获解决将关闭塔拉巴州议会建筑群及议会委员会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "it will shut down the entire Taraba State House of Assembly Complex and the House of Assembly Commission if the state government and Assembly leadership fail to address its demands"
+    },
+    {
+     "fact": "诉求为落实财政自主权及综合立法薪资结构（CONLESS）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "its demands for financial autonomy and the implementation of the Consolidated Legislative Salary Structure (CONLESS)"
+    },
+    {
+     "fact": "协会称自2025年11月14日起已进行无限期罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "PASAN members in Taraba State have been involved in an indefinite strike action since November 14, 2025"
+    },
+    {
+     "fact": "协会称塔拉巴州议会是少数尚未完全满足诉求的议会之一",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Taraba State House of Assembly remained among the few assemblies yet to fully address the demands"
+    }
+   ],
+   "uncertainties": [
+    "罢工是否于2026年11月10日如期全面启动尚未证实",
+    "协会所称其他州已落实CONLESS及财政自主权法案的情况未获独立核实",
+    "目前仅单一来源（Sahara Reporters）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_8b43c1bc4681692b",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
