@@ -1,0 +1,138 @@
+{
+ "label": "S66767491",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "559c807e9ee189a1b31be21bc8f1c001c1e0c98c415b93ef0c9801b4afb3a0e0",
+ "tokens": {
+  "input_tokens": 2526,
+  "output_tokens": 666,
+  "total_tokens": 3192
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"2027年3月后基本供水卫生服务能否延续尚不确定\", \"马拉卡勒4万人供水及约900个厕所清污服务若无新资金可能停止\", \"当地卫生当局物资和人员短缺，填补服务缺口的能力有限\"]",
+    "after": "[\"2027年3月后基本供水卫生服务能否延续尚不确定\", \"马拉卡勒4万人供水及约900个厕所清污服务若无新资金可能停止\", \"当地卫生当局物资和人员短缺，填补服务缺口的能力有限\", \"据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "无国界医生：资金削减致本提乌与马拉卡勒约15万流离失所者面临疾病风险",
+   "summary_zh": "无国界医生警告，资金削减和援助组织撤离使南苏丹本提乌与马拉卡勒营地约15万流离失所者缺乏基本供水、卫生和医疗服务，面临霍乱等水传播疾病风险。上尼罗州和团结州的流离失所社区高度依赖外部援助，剩余机构正进一步缩减服务，供水、垃圾收集、厕所维护和基本医疗可能在数月内全面崩溃。无国界医生呼吁捐助方和人道组织立即行动，扭转资金缺口。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "团结州、上尼罗州",
+    "city": "本提乌、马拉卡勒",
+    "site": "流离失所者营地",
+    "raw_text": "Bentiu and Malakal camps in South Sudan"
+   },
+   "key_facts": [
+    {
+     "fact": "资金削减和援助组织撤离使本提乌与马拉卡勒营地约15万流离失所者缺乏基本供水、卫生和医疗服务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Funding cuts and the withdrawal of aid organizations have left around 150,000 displaced people living in the Bentiu and Malakal camps in South Sudan without basic water, sanitation, and general health services"
+    },
+    {
+     "fact": "无国界医生警告流离失所者面临霍乱等水传播疾病风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "increasingly exposing them to the risk of cholera and other waterborne diseases, warns MSF"
+    },
+    {
+     "fact": "本提乌营地约11.1万人，约60人共用一个可用厕所，全营地仅有109个洗手站",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Bentiu camp, home to about 111,000 people, is located in a flood-prone area, where an MSF assessment found that around 60 people share one functioning latrine, and only 109 handwashing stations serve the entire camp"
+    },
+    {
+     "fact": "2024年以来南苏丹全国记录近11万例霍乱病例和1970例相关死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Since 2024, South Sudan has recorded nearly 110,000 cholera cases and 1,970 cholera-related deaths nationwide"
+    },
+    {
+     "fact": "国际移民组织是本提乌目前唯一提供基本医疗和供水卫生服务的组织，但面临严重资金缺口",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In Bentiu, the IOM is currently the only organization providing basic healthcare and water, sanitation and hygiene (WASH) services in the camp, but it faces critical funding gaps following major cuts since 2024"
+    }
+   ],
+   "uncertainties": [
+    "2027年3月后基本供水卫生服务能否延续尚不确定",
+    "马拉卡勒4万人供水及约900个厕所清污服务若无新资金可能停止",
+    "当地卫生当局物资和人员短缺，填补服务缺口的能力有限"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "无国界医生：资金削减致本提乌与马拉卡勒约15万流离失所者面临疾病风险",
+   "summary_zh": "无国界医生警告，资金削减和援助组织撤离使南苏丹本提乌与马拉卡勒营地约15万流离失所者缺乏基本供水、卫生和医疗服务，面临霍乱等水传播疾病风险。上尼罗州和团结州的流离失所社区高度依赖外部援助，剩余机构正进一步缩减服务，供水、垃圾收集、厕所维护和基本医疗可能在数月内全面崩溃。无国界医生呼吁捐助方和人道组织立即行动，扭转资金缺口。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "团结州、上尼罗州",
+    "city": "本提乌、马拉卡勒",
+    "site": "流离失所者营地",
+    "raw_text": "Bentiu and Malakal camps in South Sudan"
+   },
+   "key_facts": [
+    {
+     "fact": "资金削减和援助组织撤离使本提乌与马拉卡勒营地约15万流离失所者缺乏基本供水、卫生和医疗服务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Funding cuts and the withdrawal of aid organizations have left around 150,000 displaced people living in the Bentiu and Malakal camps in South Sudan without basic water, sanitation, and general health services"
+    },
+    {
+     "fact": "无国界医生警告流离失所者面临霍乱等水传播疾病风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "increasingly exposing them to the risk of cholera and other waterborne diseases, warns MSF"
+    },
+    {
+     "fact": "本提乌营地约11.1万人，约60人共用一个可用厕所，全营地仅有109个洗手站",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Bentiu camp, home to about 111,000 people, is located in a flood-prone area, where an MSF assessment found that around 60 people share one functioning latrine, and only 109 handwashing stations serve the entire camp"
+    },
+    {
+     "fact": "2024年以来南苏丹全国记录近11万例霍乱病例和1970例相关死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Since 2024, South Sudan has recorded nearly 110,000 cholera cases and 1,970 cholera-related deaths nationwide"
+    },
+    {
+     "fact": "国际移民组织是本提乌目前唯一提供基本医疗和供水卫生服务的组织，但面临严重资金缺口",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In Bentiu, the IOM is currently the only organization providing basic healthcare and water, sanitation and hygiene (WASH) services in the camp, but it faces critical funding gaps following major cuts since 2024"
+    }
+   ],
+   "uncertainties": [
+    "2027年3月后基本供水卫生服务能否延续尚不确定",
+    "马拉卡勒4万人供水及约900个厕所清污服务若无新资金可能停止",
+    "当地卫生当局物资和人员短缺，填补服务缺口的能力有限",
+    "据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_843b2ecf66767491",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

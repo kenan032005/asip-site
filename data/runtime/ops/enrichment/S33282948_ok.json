@@ -1,0 +1,127 @@
+{
+ "label": "S33282948",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ea06bf06494672c06ccda0624b1b3cedf1cfa6145a89cfa20ca2d5cf19f46665",
+ "tokens": {
+  "input_tokens": 2901,
+  "output_tokens": 566,
+  "total_tokens": 3467
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得登革热疫情：卫生部长就数据质疑向议员作出解释",
+   "summary_zh": "2026年11月4日，乍得公共卫生与预防部长阿卜杜勒马吉德·阿卜杜拉希姆·马哈马特在国民议会就恩贾梅纳及部分省份的登革热疫情作出说明。多名议员质疑政府公布的死亡数字与近期恩贾梅纳实际记录不符，认为官方统计未反映真实情况。部长承认存在未纳入官方统计的社区死亡病例，并将部分死亡归因于自行用药。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": "国民议会",
+    "raw_text": "N'Djamena et dans certaines provinces"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得卫生部长就登革热疫情在国民议会接受议员质询",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministre de la Santé publique et de la Prévention, le Dr Abdelmadjid Abderahim Mahamat, s'est exprimé ce mercredi 4 novembre 2026 devant la représentation nationale sur la situation épidémique de la dengue"
+    },
+    {
+     "fact": "议员质疑政府公布的死亡数字与恩贾梅纳近期记录不符",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "de nombreuses interrogations ont été soulevées concernant les chiffres des décès annoncés par le gouvernement et ceux enregistrés ces derniers temps à N'Djamena"
+    },
+    {
+     "fact": "部长承认存在未获官方统计的死亡病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il a reconnu l'existence de cas de décès non recensés officiellement"
+    },
+    {
+     "fact": "部长称全国有2034名医生、805名助产士和1888名注册护士",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le pays compte par ailleurs 2 034 médecins, 805 sages-femmes et 1 888 infirmiers diplômés d'État"
+    },
+    {
+     "fact": "部长表示全国设有104个实验室",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "signalant la disponibilité de 104 laboratoires au niveau national"
+    }
+   ],
+   "uncertainties": [
+    "政府公布的登革热死亡数字是否反映真实情况存在争议，议员与官方说法不一",
+    "未纳入官方统计的社区死亡病例数量尚不明确",
+    "目前仅单一来源（Alwihda Info）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得登革热疫情：卫生部长就数据质疑向议员作出解释",
+   "summary_zh": "2026年11月4日，乍得公共卫生与预防部长阿卜杜勒马吉德·阿卜杜拉希姆·马哈马特在国民议会就恩贾梅纳及部分省份的登革热疫情作出说明。多名议员质疑政府公布的死亡数字与近期恩贾梅纳实际记录不符，认为官方统计未反映真实情况。部长承认存在未纳入官方统计的社区死亡病例，并将部分死亡归因于自行用药。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": "国民议会",
+    "raw_text": "N'Djamena et dans certaines provinces"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得卫生部长就登革热疫情在国民议会接受议员质询",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministre de la Santé publique et de la Prévention, le Dr Abdelmadjid Abderahim Mahamat, s'est exprimé ce mercredi 4 novembre 2026 devant la représentation nationale sur la situation épidémique de la dengue"
+    },
+    {
+     "fact": "议员质疑政府公布的死亡数字与恩贾梅纳近期记录不符",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "de nombreuses interrogations ont été soulevées concernant les chiffres des décès annoncés par le gouvernement et ceux enregistrés ces derniers temps à N'Djamena"
+    },
+    {
+     "fact": "部长承认存在未获官方统计的死亡病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il a reconnu l'existence de cas de décès non recensés officiellement"
+    },
+    {
+     "fact": "部长称全国有2034名医生、805名助产士和1888名注册护士",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le pays compte par ailleurs 2 034 médecins, 805 sages-femmes et 1 888 infirmiers diplômés d'État"
+    },
+    {
+     "fact": "部长表示全国设有104个实验室",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "signalant la disponibilité de 104 laboratoires au niveau national"
+    }
+   ],
+   "uncertainties": [
+    "政府公布的登革热死亡数字是否反映真实情况存在争议，议员与官方说法不一",
+    "未纳入官方统计的社区死亡病例数量尚不明确",
+    "目前仅单一来源（Alwihda Info）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_c613992533282948",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
