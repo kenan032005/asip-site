@@ -1,0 +1,117 @@
+{
+ "label": "Sf5c7c804",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b71478caba3db053730961b46b5b0f9513de7a04fb872e1691fd57b5871c16b7",
+ "tokens": {
+  "input_tokens": 2321,
+  "output_tokens": 595,
+  "total_tokens": 2916
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "加扎省发生交通事故致四人死亡、16人受伤",
+   "summary_zh": "莫桑比克加扎省林波波区希库姆巴内（Chicumbane）的1号国道上发生一起交通事故，一辆半集体客运车辆发生侧翻并翻滚。事故造成四人死亡、16人重伤，其中三名乘客当场死亡，六名重伤者被送往赛赛省医院。据加扎省国家陆路运输研究所（INATRO）代表称，事故原因尚未查明，警方尚未就此案表态。",
+   "event_type": "transport_disruption",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "加扎省",
+    "city": "希库姆巴内",
+    "site": "1号国道（EN1）万巴乌（Wambau）入口区域",
+    "raw_text": "Estrada Nacional Número 1 (EN1), em Chicumbane, distrito de Limpopo, província de Gaza, zona de Wambau"
+   },
+   "key_facts": [
+    {
+     "fact": "加扎省希库姆巴内1号国道发生客运车辆交通事故，造成四人死亡、16人重伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quatro pessoas morreram e outras 16 ficaram gravemente feridas na sequência de um acidente de viação envolvendo um transporte semi-colectivo de passageiros, na Estrada Nacional Número 1 (EN1), em Chicumbane"
+    },
+    {
+     "fact": "事故于上午11时左右发生在万巴乌入口区域，车辆失控冲出道路后翻滚",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "O acidente ocorreu por volta das 11 horas, na zona de Wambau, no aterro de Chicumbane... O acidente de viação é do tipo despiste, que culminou com o capotamento de um veículo de transporte de passageiros"
+    },
+    {
+     "fact": "三名乘客当场死亡，六名重伤者被送往赛赛省医院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Três passageiros morreram no local, enquanto outros seis, com ferimentos graves, foram transportados para o Hospital Provincial de Xai-Xai"
+    },
+    {
+     "fact": "事故原因尚未查明，警方尚未就此案表态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "As circunstâncias que terão provocado o despiste ainda não foram esclarecidas. A Polícia da República de Moçambique ainda não se pronunciou sobre o caso"
+    }
+   ],
+   "uncertainties": [
+    "事故原因尚未查明",
+    "警方尚未就案件表态，承诺稍后提供更多信息",
+    "目前仅有一个来源（O País）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "加扎省发生交通事故致四人死亡、16人受伤",
+   "summary_zh": "莫桑比克加扎省林波波区希库姆巴内（Chicumbane）的1号国道上发生一起交通事故，一辆半集体客运车辆发生侧翻并翻滚。事故造成四人死亡、16人重伤，其中三名乘客当场死亡，六名重伤者被送往赛赛省医院。据加扎省国家陆路运输研究所（INATRO）代表称，事故原因尚未查明，警方尚未就此案表态。",
+   "event_type": "transport_disruption",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "加扎省",
+    "city": "希库姆巴内",
+    "site": "1号国道（EN1）万巴乌（Wambau）入口区域",
+    "raw_text": "Estrada Nacional Número 1 (EN1), em Chicumbane, distrito de Limpopo, província de Gaza, zona de Wambau"
+   },
+   "key_facts": [
+    {
+     "fact": "加扎省希库姆巴内1号国道发生客运车辆交通事故，造成四人死亡、16人重伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quatro pessoas morreram e outras 16 ficaram gravemente feridas na sequência de um acidente de viação envolvendo um transporte semi-colectivo de passageiros, na Estrada Nacional Número 1 (EN1), em Chicumbane"
+    },
+    {
+     "fact": "事故于上午11时左右发生在万巴乌入口区域，车辆失控冲出道路后翻滚",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "O acidente ocorreu por volta das 11 horas, na zona de Wambau, no aterro de Chicumbane... O acidente de viação é do tipo despiste, que culminou com o capotamento de um veículo de transporte de passageiros"
+    },
+    {
+     "fact": "三名乘客当场死亡，六名重伤者被送往赛赛省医院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Três passageiros morreram no local, enquanto outros seis, com ferimentos graves, foram transportados para o Hospital Provincial de Xai-Xai"
+    },
+    {
+     "fact": "事故原因尚未查明，警方尚未就此案表态",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "As circunstâncias que terão provocado o despiste ainda não foram esclarecidas. A Polícia da República de Moçambique ainda não se pronunciou sobre o caso"
+    }
+   ],
+   "uncertainties": [
+    "事故原因尚未查明",
+    "警方尚未就案件表态，承诺稍后提供更多信息",
+    "目前仅有一个来源（O País）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_d1d692fff5c7c804",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}
