@@ -1,0 +1,116 @@
+{
+ "label": "S7b97b92b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "59ba4380c7a30176aeda7714b5ffcb14e77e8abd4923c202a73838731e6655c2",
+ "tokens": {
+  "input_tokens": 2550,
+  "output_tokens": 408,
+  "total_tokens": 2958
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"国民议会是否批准尚未确定\", \"目前仅单一来源（贝宁政府官网）报道，尚缺乏交叉验证\"]",
+    "after": "[\"国民议会是否批准尚未确定\", \"目前仅单一来源（贝宁政府官网）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁启动批准非洲联盟消除暴力侵害妇女公约的程序",
+   "summary_zh": "贝宁政府于2026年11月4日召开部长会议，决定将非洲联盟《消除暴力侵害妇女和女童公约》提交国民议会审议批准。该公约于2025年2月在亚的斯亚贝巴通过，是具有约束力的法律文书，要求缔约国预防和消除一切形式的暴力。家庭与社会行动部长表示，这是保护妇女和女童的重要一步，并呼吁议员批准。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "贝宁部长会议决定将非洲联盟消除暴力侵害妇女公约提交国民议会批准",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Conseil des ministres a décidé de transmettre à l'Assemblée nationale, pour autorisation de ratification, la Convention de l'Union africaine sur l'élimination de la violence à l'égard des femmes et des filles"
+    },
+    {
+     "fact": "该公约于2025年2月在亚的斯亚贝巴通过，属具有约束力的法律文书",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Adopté en février 2025 à Addis-Abeba, ce texte est un instrument juridique contraignant"
+    },
+    {
+     "fact": "家庭与社会行动部长称提交国民议会是保护妇女和女童的重要一步",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La transmission de cette Convention à l'Assemblée nationale constitue une étape importante pour notre pays"
+    }
+   ],
+   "uncertainties": [
+    "国民议会是否批准尚未确定",
+    "目前仅单一来源（贝宁政府官网）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁启动批准非洲联盟消除暴力侵害妇女公约的程序",
+   "summary_zh": "贝宁政府于2026年11月4日召开部长会议，决定将非洲联盟《消除暴力侵害妇女和女童公约》提交国民议会审议批准。该公约于2025年2月在亚的斯亚贝巴通过，是具有约束力的法律文书，要求缔约国预防和消除一切形式的暴力。家庭与社会行动部长表示，这是保护妇女和女童的重要一步，并呼吁议员批准。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "贝宁部长会议决定将非洲联盟消除暴力侵害妇女公约提交国民议会批准",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Conseil des ministres a décidé de transmettre à l'Assemblée nationale, pour autorisation de ratification, la Convention de l'Union africaine sur l'élimination de la violence à l'égard des femmes et des filles"
+    },
+    {
+     "fact": "该公约于2025年2月在亚的斯亚贝巴通过，属具有约束力的法律文书",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Adopté en février 2025 à Addis-Abeba, ce texte est un instrument juridique contraignant"
+    },
+    {
+     "fact": "家庭与社会行动部长称提交国民议会是保护妇女和女童的重要一步",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La transmission de cette Convention à l'Assemblée nationale constitue une étape importante pour notre pays"
+    }
+   ],
+   "uncertainties": [
+    "国民议会是否批准尚未确定",
+    "目前仅单一来源（贝宁政府官网）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_686ecbae7b97b92b",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
