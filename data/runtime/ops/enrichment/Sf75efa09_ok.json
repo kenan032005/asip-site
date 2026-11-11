@@ -1,0 +1,138 @@
+{
+ "label": "Sf75efa09",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "55dcaa6ed7cbe47a7a6c2485406993c8be5e2c2e10d3babf0eced5e7ff9a6866",
+ "tokens": {
+  "input_tokens": 2417,
+  "output_tokens": 486,
+  "total_tokens": 2903
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"州政府未落实津贴等指控为工会单方面说法，尚未获得政府方面回应或独立证实\", \"政府是否会在警告性罢工期间解决诉求尚不确定\", \"是否最终举行无限期罢工尚未确定\"]",
+    "after": "[\"州政府未落实津贴等指控为工会单方面说法，尚未获得政府方面回应或独立证实\", \"政府是否会在警告性罢工期间解决诉求尚不确定\", \"是否最终举行无限期罢工尚未确定\", \"据Sahara Reporters报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "塔拉巴州高等教育机构工人因津贴未付及十年停滞宣布为期两周罢工",
+   "summary_zh": "尼日利亚塔拉巴州高等教育机构联合行动委员会（JACTI）宣布自2026年11月4日午夜起举行为期两周的警告性罢工，涉及该州五所高等教育机构。工会称罢工原因是州政府被指未落实工人津贴、持续扣薪、扣留工会会费，以及十余年未发放年度加薪和晋升。工会表示若警告性罢工期间问题未解决，将考虑无限期罢工。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "塔拉巴州",
+    "city": null,
+    "site": null,
+    "raw_text": "Taraba State"
+   },
+   "key_facts": [
+    {
+     "fact": "塔拉巴州高等教育机构联合行动委员会宣布为期两周警告性罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Joint Action Committee of Tertiary Institutions in Taraba State (JACTI) has declared a two-week warning strike"
+    },
+    {
+     "fact": "罢工涉及该州五所高等教育机构",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "involving workers across five tertiary institutions in the state"
+    },
+    {
+     "fact": "罢工自2026年11月4日午夜开始",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "commenced at midnight on Wednesday, November 4, 2026"
+    },
+    {
+     "fact": "工会称工人十余年未获年度加薪或职级晋升",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "staff members across the affected tertiary institutions had not enjoyed annual salary increments or step movements for more than 10 years"
+    },
+    {
+     "fact": "工会警告若问题未解决将考虑无限期罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "if the state government failed to resolve the outstanding issues during the warning strike, it would consider the resolutions of its congresses to embark on an indefinite strike"
+    }
+   ],
+   "uncertainties": [
+    "州政府未落实津贴等指控为工会单方面说法，尚未获得政府方面回应或独立证实",
+    "政府是否会在警告性罢工期间解决诉求尚不确定",
+    "是否最终举行无限期罢工尚未确定"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "塔拉巴州高等教育机构工人因津贴未付及十年停滞宣布为期两周罢工",
+   "summary_zh": "尼日利亚塔拉巴州高等教育机构联合行动委员会（JACTI）宣布自2026年11月4日午夜起举行为期两周的警告性罢工，涉及该州五所高等教育机构。工会称罢工原因是州政府被指未落实工人津贴、持续扣薪、扣留工会会费，以及十余年未发放年度加薪和晋升。工会表示若警告性罢工期间问题未解决，将考虑无限期罢工。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "塔拉巴州",
+    "city": null,
+    "site": null,
+    "raw_text": "Taraba State"
+   },
+   "key_facts": [
+    {
+     "fact": "塔拉巴州高等教育机构联合行动委员会宣布为期两周警告性罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Joint Action Committee of Tertiary Institutions in Taraba State (JACTI) has declared a two-week warning strike"
+    },
+    {
+     "fact": "罢工涉及该州五所高等教育机构",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "involving workers across five tertiary institutions in the state"
+    },
+    {
+     "fact": "罢工自2026年11月4日午夜开始",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "commenced at midnight on Wednesday, November 4, 2026"
+    },
+    {
+     "fact": "工会称工人十余年未获年度加薪或职级晋升",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "staff members across the affected tertiary institutions had not enjoyed annual salary increments or step movements for more than 10 years"
+    },
+    {
+     "fact": "工会警告若问题未解决将考虑无限期罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "if the state government failed to resolve the outstanding issues during the warning strike, it would consider the resolutions of its congresses to embark on an indefinite strike"
+    }
+   ],
+   "uncertainties": [
+    "州政府未落实津贴等指控为工会单方面说法，尚未获得政府方面回应或独立证实",
+    "政府是否会在警告性罢工期间解决诉求尚不确定",
+    "是否最终举行无限期罢工尚未确定",
+    "据Sahara Reporters报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_0549012cf75efa09",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
