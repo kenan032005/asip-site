@@ -1,0 +1,130 @@
+{
+ "label": "Sf584c88a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f75811be633445578d728745dc22edcaf73d3b5e82d35cf509cf31906508d592",
+ "tokens": {
+  "input_tokens": 2036,
+  "output_tokens": 488,
+  "total_tokens": 2524
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"伤亡数字为初步统计，尚未最终确认\", \"冲突起因（水井争端）系当地消息来源说法，尚未获独立证实\", \"1994年同一地区冲突造成40多人死亡的说法来自当地证词，未获确认\", \"目前仅Tchadinfos单一来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"伤亡数字为初步统计，尚未最终确认\", \"冲突起因（水井争端）系当地消息来源说法，尚未获独立证实\", \"1994年同一地区冲突造成40多人死亡的说法来自当地证词，未获确认\", \"目前仅Tchadinfos单一来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得：哈杰尔-拉米斯省社区间冲突致七人死亡",
+   "summary_zh": "据Tchadinfos报道，乍得哈杰尔-拉米斯省恩古拉县伊斯内地区两个社区发生冲突，造成至少七人死亡、多人受伤。当地消息称，暴力事件与两社区长期争夺一口水井的使用权有关。安全部队已部署到现场以恢复秩序并防止暴力再次发生，伤亡数字仍为初步统计。",
+   "event_type": "civil_unrest",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "哈杰尔-拉米斯省",
+    "city": "伊斯内",
+    "site": null,
+    "raw_text": "Isné, département de Ngoura, province du Hadjer-Lamis"
+   },
+   "key_facts": [
+    {
+     "fact": "伊斯内两个社区发生冲突，造成至少七人死亡、多人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au moins sept personnes ont été tuées et plusieurs autres blessées dans un affrontement entre deux communautés à Isné, dans le département de Ngoura, province du Hadjer-Lamis"
+    },
+    {
+     "fact": "据当地消息，暴力事件与两社区长期争夺一口水井的使用权有关",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les violences seraient liées à un différend récurrent autour d’un puits dont les deux communautés se disputent l’usage"
+    },
+    {
+     "fact": "安全部队已部署到现场以恢复秩序并防止暴力再次发生",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les forces de sécurité ont été déployées sur les lieux afin de rétablir l’ordre et prévenir une reprise des violences"
+    },
+    {
+     "fact": "伤亡数字仍为初步统计",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le bilan des affrontements reste provisoire"
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字为初步统计，尚未最终确认",
+    "冲突起因（水井争端）系当地消息来源说法，尚未获独立证实",
+    "1994年同一地区冲突造成40多人死亡的说法来自当地证词，未获确认",
+    "目前仅Tchadinfos单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得：哈杰尔-拉米斯省社区间冲突致七人死亡",
+   "summary_zh": "据Tchadinfos报道，乍得哈杰尔-拉米斯省恩古拉县伊斯内地区两个社区发生冲突，造成至少七人死亡、多人受伤。当地消息称，暴力事件与两社区长期争夺一口水井的使用权有关。安全部队已部署到现场以恢复秩序并防止暴力再次发生，伤亡数字仍为初步统计。",
+   "event_type": "civil_unrest",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "哈杰尔-拉米斯省",
+    "city": "伊斯内",
+    "site": null,
+    "raw_text": "Isné, département de Ngoura, province du Hadjer-Lamis"
+   },
+   "key_facts": [
+    {
+     "fact": "伊斯内两个社区发生冲突，造成至少七人死亡、多人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au moins sept personnes ont été tuées et plusieurs autres blessées dans un affrontement entre deux communautés à Isné, dans le département de Ngoura, province du Hadjer-Lamis"
+    },
+    {
+     "fact": "据当地消息，暴力事件与两社区长期争夺一口水井的使用权有关",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les violences seraient liées à un différend récurrent autour d’un puits dont les deux communautés se disputent l’usage"
+    },
+    {
+     "fact": "安全部队已部署到现场以恢复秩序并防止暴力再次发生",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les forces de sécurité ont été déployées sur les lieux afin de rétablir l’ordre et prévenir une reprise des violences"
+    },
+    {
+     "fact": "伤亡数字仍为初步统计",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le bilan des affrontements reste provisoire"
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字为初步统计，尚未最终确认",
+    "冲突起因（水井争端）系当地消息来源说法，尚未获独立证实",
+    "1994年同一地区冲突造成40多人死亡的说法来自当地证词，未获确认",
+    "目前仅Tchadinfos单一来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_e4fe0c91f584c88a",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
