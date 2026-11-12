@@ -1,0 +1,125 @@
+{
+ "label": "S4ebdc8e9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c8593e894fac16f5b1c39720399bdaea661ec5cd31597dd4464b83d400f13d31",
+ "tokens": {
+  "input_tokens": 2474,
+  "output_tokens": 477,
+  "total_tokens": 2951
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚国防总部称加强多层级行动，击毙435名恐怖分子并解救717名人质",
+   "summary_zh": "尼日利亚国防总部表示，武装部队在全国各政治区域持续开展陆海空协同的多层级行动，9月至10月共执行588次安全行动。国防信息主管称，部队击毙435名恐怖分子和匪徒，逮捕809名嫌疑人，并解救717名被绑架者。上述数据由军方在阿布贾联合安全新闻发布会上公布，目前仅有一个来源报道。",
+   "event_type": "terrorism",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚国防总部称武装部队在全国各政治区域持续开展陆海空协同行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Defence Headquarters says the Armed Forces of Nigeria has sustained an unrelenting multi-layered campaign of coordinated land, air and maritime operations across all geo-political zones."
+    },
+    {
+     "fact": "军方称9月至10月执行588次安全行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "troops executed 588 distinct security operations in September and October"
+    },
+    {
+     "fact": "军方称击毙435名恐怖分子和匪徒",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "troops neutralised 435 terrorists and bandits"
+    },
+    {
+     "fact": "军方称逮捕809名嫌疑人并解救717名被绑架者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "troops arrested 809 suspects ... successfully liberated 717 kidnapped victims and captives"
+    },
+    {
+     "fact": "国防信息主管在阿布贾联合安全新闻发布会上公布上述数据",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Director of Defence Information, Maj.-Gen. Samaila Uba, said this on Thursday in Abuja, at the Joint Security Press Briefing"
+    }
+   ],
+   "uncertainties": [
+    "上述击毙、逮捕和解救数字均为尼日利亚军方单方面公布，尚未获得独立核实",
+    "目前仅有一个来源（尼日利亚通讯社）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚国防总部称加强多层级行动，击毙435名恐怖分子并解救717名人质",
+   "summary_zh": "尼日利亚国防总部表示，武装部队在全国各政治区域持续开展陆海空协同的多层级行动，9月至10月共执行588次安全行动。国防信息主管称，部队击毙435名恐怖分子和匪徒，逮捕809名嫌疑人，并解救717名被绑架者。上述数据由军方在阿布贾联合安全新闻发布会上公布，目前仅有一个来源报道。",
+   "event_type": "terrorism",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚国防总部称武装部队在全国各政治区域持续开展陆海空协同行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Defence Headquarters says the Armed Forces of Nigeria has sustained an unrelenting multi-layered campaign of coordinated land, air and maritime operations across all geo-political zones."
+    },
+    {
+     "fact": "军方称9月至10月执行588次安全行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "troops executed 588 distinct security operations in September and October"
+    },
+    {
+     "fact": "军方称击毙435名恐怖分子和匪徒",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "troops neutralised 435 terrorists and bandits"
+    },
+    {
+     "fact": "军方称逮捕809名嫌疑人并解救717名被绑架者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "troops arrested 809 suspects ... successfully liberated 717 kidnapped victims and captives"
+    },
+    {
+     "fact": "国防信息主管在阿布贾联合安全新闻发布会上公布上述数据",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Director of Defence Information, Maj.-Gen. Samaila Uba, said this on Thursday in Abuja, at the Joint Security Press Briefing"
+    }
+   ],
+   "uncertainties": [
+    "上述击毙、逮捕和解救数字均为尼日利亚军方单方面公布，尚未获得独立核实",
+    "目前仅有一个来源（尼日利亚通讯社）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_40d2d8924ebdc8e9",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

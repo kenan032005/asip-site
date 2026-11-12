@@ -1,0 +1,115 @@
+{
+ "label": "S31542046",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "61fce2c065d36df4713aa538dc5c1df2bd83f8f513c4995cca2abd5389133c3a",
+ "tokens": {
+  "input_tokens": 2754,
+  "output_tokens": 558,
+  "total_tokens": 3312
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔与马里总统重申加强萨赫勒国家联盟及反恐合作",
+   "summary_zh": "尼日尔总统蒂亚尼与马里总统戈伊塔在尼亚美举行会晤，重申巩固萨赫勒国家联盟（AES）、加大反恐力度并加强成员国间安全、外交与经济合作的决心。双方在联合公报中称赞AES联合部队在打击恐怖组织方面取得的成果，并谴责其所称的外部势力支持的雇佣兵破坏联盟国家稳定的企图。两国领导人还讨论了人员与货物自由流通、交通基础设施、农工业转型及能源矿产开发等经济一体化优先事项。",
+   "event_type": "terrorism",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": null,
+    "raw_text": "jeudi à Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔与马里总统在尼亚美会晤并发表联合公报，重申加强AES与反恐合作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les Présidents du Niger et du Mali, les Généraux d’Armée Abdourahamane Tiani et Assimi Goïta, ont réaffirmé, jeudi à Niamey, leur détermination à consolider la Confédération des États du Sahel (AES), à intensifier la lutte contre le terrorisme"
+    },
+    {
+     "fact": "两国领导人称赞AES联合部队在打击恐怖组织方面的成果",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les deux dirigeants se sont félicités des résultats obtenus par la Force unifiée de l’AES dans la lutte contre les groupes terroristes"
+    },
+    {
+     "fact": "两国领导人谴责其所称的外部势力支持的雇佣兵破坏联盟国家稳定的企图",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "condamné ce qu’ils qualifient de tentatives de déstabilisation des États de la Confédération par des mercenaires bénéficiant de soutiens étatiques étrangers"
+    },
+    {
+     "fact": "戈伊塔邀请蒂亚尼对马里进行正式访问，日期将通过外交渠道确定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Général d’Armée Assimi Goïta a invité son homologue nigérien à effectuer une visite officielle au Mali"
+    }
+   ],
+   "uncertainties": [
+    "关于外部势力支持雇佣兵破坏稳定的指控系两国领导人的说法，尚未提供证据或获独立证实",
+    "事件目前仅有一个来源（Aïr Info）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔与马里总统重申加强萨赫勒国家联盟及反恐合作",
+   "summary_zh": "尼日尔总统蒂亚尼与马里总统戈伊塔在尼亚美举行会晤，重申巩固萨赫勒国家联盟（AES）、加大反恐力度并加强成员国间安全、外交与经济合作的决心。双方在联合公报中称赞AES联合部队在打击恐怖组织方面取得的成果，并谴责其所称的外部势力支持的雇佣兵破坏联盟国家稳定的企图。两国领导人还讨论了人员与货物自由流通、交通基础设施、农工业转型及能源矿产开发等经济一体化优先事项。",
+   "event_type": "terrorism",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": null,
+    "raw_text": "jeudi à Niamey"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔与马里总统在尼亚美会晤并发表联合公报，重申加强AES与反恐合作",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les Présidents du Niger et du Mali, les Généraux d’Armée Abdourahamane Tiani et Assimi Goïta, ont réaffirmé, jeudi à Niamey, leur détermination à consolider la Confédération des États du Sahel (AES), à intensifier la lutte contre le terrorisme"
+    },
+    {
+     "fact": "两国领导人称赞AES联合部队在打击恐怖组织方面的成果",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les deux dirigeants se sont félicités des résultats obtenus par la Force unifiée de l’AES dans la lutte contre les groupes terroristes"
+    },
+    {
+     "fact": "两国领导人谴责其所称的外部势力支持的雇佣兵破坏联盟国家稳定的企图",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "condamné ce qu’ils qualifient de tentatives de déstabilisation des États de la Confédération par des mercenaires bénéficiant de soutiens étatiques étrangers"
+    },
+    {
+     "fact": "戈伊塔邀请蒂亚尼对马里进行正式访问，日期将通过外交渠道确定",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Général d’Armée Assimi Goïta a invité son homologue nigérien à effectuer une visite officielle au Mali"
+    }
+   ],
+   "uncertainties": [
+    "关于外部势力支持雇佣兵破坏稳定的指控系两国领导人的说法，尚未提供证据或获独立证实",
+    "事件目前仅有一个来源（Aïr Info）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_44ed56ee31542046",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
