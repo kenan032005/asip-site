@@ -1,0 +1,127 @@
+{
+ "label": "S182e9080",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b108f214b545583633cd4171fed60b38f14e03cb14d9901869edaf67d0c9241b",
+ "tokens": {
+  "input_tokens": 2592,
+  "output_tokens": 589,
+  "total_tokens": 3181
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚总统选举：法院裁定取消反对派候选人阿提库·阿布巴卡尔的参选资格",
+   "summary_zh": "尼日利亚阿布贾高等法院裁定，非洲民主大会党（ADC）主席戴维·马克作出的决定无效，其中包括指定前副总统、反对派人物阿提库·阿布巴卡尔为该党2027年1月16日总统选举候选人。此事发生在其竞选活动启动次日，起因是该党领导权纠纷。该党指责这是旨在削弱ADC的政治操作，并宣布将提起上诉；尼日利亚总统府则否认与执政党有任何牵连。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": "阿布贾高等法院",
+    "raw_text": "La Haute Cour de justice d’Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "阿布贾高等法院裁定阿提库·阿布巴卡尔的总统候选人资格无效",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Haute Cour de justice d’Abuja a déclaré invalides les décisions prises par David Mark, le président du Congrès démocratique africain, dont la désignation d’Atiku Abubakar comme candidat à la présidence."
+    },
+    {
+     "fact": "该裁决源于其所在政党的领导权纠纷",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "C’est la conséquence d’un conflit autour de la direction de son parti."
+    },
+    {
+     "fact": "ADC党指责这是旨在削弱该党的政治操作，并宣布将提起上诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le parti dénonce une manœuvre politique et annonce un recours"
+    },
+    {
+     "fact": "尼日利亚总统府否认与执政党有任何牵连",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "«  L’APC  [le Congrès des progressistes, NDLR]  n’est absolument pas impliqué  », se défend un porte-parole de la présidence nigériane cité par l’AFP."
+    },
+    {
+     "fact": "尚不确定最终判决能否在总统选举前作出",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Mais il n’est pas certain qu’un jugement définitif puisse être rendu   avant l’élection présidentielle  ."
+    }
+   ],
+   "uncertainties": [
+    "最终判决能否在2027年1月16日总统选举前作出尚不确定",
+    "ADC党关于“政治操作”的指控及总统府的否认均未获独立证实",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日利亚总统选举：法院裁定取消反对派候选人阿提库·阿布巴卡尔的参选资格",
+   "summary_zh": "尼日利亚阿布贾高等法院裁定，非洲民主大会党（ADC）主席戴维·马克作出的决定无效，其中包括指定前副总统、反对派人物阿提库·阿布巴卡尔为该党2027年1月16日总统选举候选人。此事发生在其竞选活动启动次日，起因是该党领导权纠纷。该党指责这是旨在削弱ADC的政治操作，并宣布将提起上诉；尼日利亚总统府则否认与执政党有任何牵连。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": "阿布贾高等法院",
+    "raw_text": "La Haute Cour de justice d’Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "阿布贾高等法院裁定阿提库·阿布巴卡尔的总统候选人资格无效",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Haute Cour de justice d’Abuja a déclaré invalides les décisions prises par David Mark, le président du Congrès démocratique africain, dont la désignation d’Atiku Abubakar comme candidat à la présidence."
+    },
+    {
+     "fact": "该裁决源于其所在政党的领导权纠纷",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "C’est la conséquence d’un conflit autour de la direction de son parti."
+    },
+    {
+     "fact": "ADC党指责这是旨在削弱该党的政治操作，并宣布将提起上诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le parti dénonce une manœuvre politique et annonce un recours"
+    },
+    {
+     "fact": "尼日利亚总统府否认与执政党有任何牵连",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "«  L’APC  [le Congrès des progressistes, NDLR]  n’est absolument pas impliqué  », se défend un porte-parole de la présidence nigériane cité par l’AFP."
+    },
+    {
+     "fact": "尚不确定最终判决能否在总统选举前作出",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Mais il n’est pas certain qu’un jugement définitif puisse être rendu   avant l’élection présidentielle  ."
+    }
+   ],
+   "uncertainties": [
+    "最终判决能否在2027年1月16日总统选举前作出尚不确定",
+    "ADC党关于“政治操作”的指控及总统府的否认均未获独立证实",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_dd03df79182e9080",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
