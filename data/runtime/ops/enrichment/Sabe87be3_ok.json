@@ -1,0 +1,127 @@
+{
+ "label": "Sabe87be3",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0877d1afb71b8bb28894b203672ccae8f569dd16b2a256f77767f991edac63ad",
+ "tokens": {
+  "input_tokens": 2341,
+  "output_tokens": 646,
+  "total_tokens": 2987
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "萨拉马特：哈拉泽曼盖涅省拦截3名疑似军火贩运者",
+   "summary_zh": "据安全部门消息，2026年11月4日星期三，3名疑似战争武器贩运者在前往曼盖涅途中被安比西林盖副省长与领土旅负责人拦截，其乘坐摩托车运送6件来自苏丹一侧福罗巴兰加的战争武器。3名嫌疑人及6件武器于11月5日星期四被移交给哈拉泽省长、上校Abdoulaye Abdelkerim Borgou。嫌疑人已被移交宪兵队接受深入调查。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "萨拉马特",
+    "city": "曼盖涅",
+    "site": "安比西林盖至曼盖涅途中",
+    "raw_text": "département de Haraze Mangueigne, Salamat"
+   },
+   "key_facts": [
+    {
+     "fact": "3名疑似战争武器贩运者在前往曼盖涅途中被拦截",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "trois présumés trafiquants d’armes de guerre ont été interceptés par le sous-préfet d’Ambissiringne, accompagné du chef de brigade territoriale, alors qu’ils se rendaient à Mangueigne"
+    },
+    {
+     "fact": "嫌疑人乘坐摩托车运送6件来自苏丹一侧福罗巴兰加的战争武器",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les trois trafiquants, qui se déplaçaient à bord d’une moto, transportaient six armes de guerre en provenance de Forobaranga, du côté du Soudan"
+    },
+    {
+     "fact": "3名嫌疑人及6件武器被移交给哈拉泽省长",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les trois suspects ainsi que les six armes ont été présentés au préfet de Haraze, le colonel Abdoulaye Abdelkerim Borgou, ce jeudi 5 novembre"
+    },
+    {
+     "fact": "缴获武器为折叠枪托AKM步枪，其中5件有编号、1件无编号",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il s’agit d’armes de marque AKM à crosse pliante, dont cinq sont numérotées et la sixième ne comporte aucun numéro"
+    },
+    {
+     "fact": "嫌疑人已被移交宪兵队接受深入调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les présumés auteurs de ce trafic ont été mis à la disposition de la gendarmerie pour des enquêtes approfondies, rapportent des sources sécuritaires"
+    }
+   ],
+   "uncertainties": [
+    "贩运者身份及贩运指控尚未经司法确认，仅为“疑似”",
+    "目前仅有一个来源（Tchadinfos）报道，尚缺乏交叉验证",
+    "武器来源细节（福罗巴兰加、苏丹一侧）未获独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "萨拉马特：哈拉泽曼盖涅省拦截3名疑似军火贩运者",
+   "summary_zh": "据安全部门消息，2026年11月4日星期三，3名疑似战争武器贩运者在前往曼盖涅途中被安比西林盖副省长与领土旅负责人拦截，其乘坐摩托车运送6件来自苏丹一侧福罗巴兰加的战争武器。3名嫌疑人及6件武器于11月5日星期四被移交给哈拉泽省长、上校Abdoulaye Abdelkerim Borgou。嫌疑人已被移交宪兵队接受深入调查。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "萨拉马特",
+    "city": "曼盖涅",
+    "site": "安比西林盖至曼盖涅途中",
+    "raw_text": "département de Haraze Mangueigne, Salamat"
+   },
+   "key_facts": [
+    {
+     "fact": "3名疑似战争武器贩运者在前往曼盖涅途中被拦截",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "trois présumés trafiquants d’armes de guerre ont été interceptés par le sous-préfet d’Ambissiringne, accompagné du chef de brigade territoriale, alors qu’ils se rendaient à Mangueigne"
+    },
+    {
+     "fact": "嫌疑人乘坐摩托车运送6件来自苏丹一侧福罗巴兰加的战争武器",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les trois trafiquants, qui se déplaçaient à bord d’une moto, transportaient six armes de guerre en provenance de Forobaranga, du côté du Soudan"
+    },
+    {
+     "fact": "3名嫌疑人及6件武器被移交给哈拉泽省长",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les trois suspects ainsi que les six armes ont été présentés au préfet de Haraze, le colonel Abdoulaye Abdelkerim Borgou, ce jeudi 5 novembre"
+    },
+    {
+     "fact": "缴获武器为折叠枪托AKM步枪，其中5件有编号、1件无编号",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il s’agit d’armes de marque AKM à crosse pliante, dont cinq sont numérotées et la sixième ne comporte aucun numéro"
+    },
+    {
+     "fact": "嫌疑人已被移交宪兵队接受深入调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les présumés auteurs de ce trafic ont été mis à la disposition de la gendarmerie pour des enquêtes approfondies, rapportent des sources sécuritaires"
+    }
+   ],
+   "uncertainties": [
+    "贩运者身份及贩运指控尚未经司法确认，仅为“疑似”",
+    "目前仅有一个来源（Tchadinfos）报道，尚缺乏交叉验证",
+    "武器来源细节（福罗巴兰加、苏丹一侧）未获独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_7e23e126abe87be3",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
