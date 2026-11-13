@@ -1,0 +1,121 @@
+{
+ "label": "S05418159",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4fee7c046de3173e4adf4d780cdeee3e2040e8dd260dab38de82bf024fdbea3d",
+ "tokens": {
+  "input_tokens": 2618,
+  "output_tokens": 440,
+  "total_tokens": 3058
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚失明运动员鲁卡亚特·苏莱蒙创造非洲历史",
+   "summary_zh": "尼日利亚运动员鲁卡亚特·苏莱蒙在2009年因青光眼失明后，克服孤立与支持不足，成为首位在世界桑搏杯夺冠的失明女性。她在2026年亚美尼亚世界桑搏杯女子54公斤级决赛中击败乌兹别克斯坦选手，首次参加国际赛事即夺金。她表示国际认可并未换来国内足够的支持，尼日利亚残障运动员普遍面临资金和设施不足的问题。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria / Yerevan, Armenia (competition venue)"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚运动员鲁卡亚特·苏莱蒙成为首位在世界桑搏杯夺冠的失明女性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In April, Rukayat Taiwo Suleimon became the first female blind sambist in the world to win a gold medal at a major international tournament"
+    },
+    {
+     "fact": "她在2026年亚美尼亚世界桑搏杯女子54公斤级决赛中击败乌兹别克斯坦选手",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Competing at the 2026 World Sambo Cup in Armenia, Suleimon defeated Uzbekistan's Charos Ortikova in the final of the women's 54kg category"
+    },
+    {
+     "fact": "她于2009年因青光眼失明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "After failed surgeries she lost her sight in 2009 because of glaucoma"
+    },
+    {
+     "fact": "她表示国际认可未换来国内足够支持",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Suleimon says the recognition she has earned internationally has not been matched by adequate \"support\" at home."
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚失明运动员鲁卡亚特·苏莱蒙创造非洲历史",
+   "summary_zh": "尼日利亚运动员鲁卡亚特·苏莱蒙在2009年因青光眼失明后，克服孤立与支持不足，成为首位在世界桑搏杯夺冠的失明女性。她在2026年亚美尼亚世界桑搏杯女子54公斤级决赛中击败乌兹别克斯坦选手，首次参加国际赛事即夺金。她表示国际认可并未换来国内足够的支持，尼日利亚残障运动员普遍面临资金和设施不足的问题。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria / Yerevan, Armenia (competition venue)"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚运动员鲁卡亚特·苏莱蒙成为首位在世界桑搏杯夺冠的失明女性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "In April, Rukayat Taiwo Suleimon became the first female blind sambist in the world to win a gold medal at a major international tournament"
+    },
+    {
+     "fact": "她在2026年亚美尼亚世界桑搏杯女子54公斤级决赛中击败乌兹别克斯坦选手",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Competing at the 2026 World Sambo Cup in Armenia, Suleimon defeated Uzbekistan's Charos Ortikova in the final of the women's 54kg category"
+    },
+    {
+     "fact": "她于2009年因青光眼失明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "After failed surgeries she lost her sight in 2009 because of glaucoma"
+    },
+    {
+     "fact": "她表示国际认可未换来国内足够支持",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Suleimon says the recognition she has earned internationally has not been matched by adequate \"support\" at home."
+    }
+   ],
+   "uncertainties": [
+    "据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_c73244db05418159",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
