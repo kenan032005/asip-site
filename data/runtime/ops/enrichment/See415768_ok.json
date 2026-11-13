@@ -1,0 +1,138 @@
+{
+ "label": "See415768",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "84a8cd62c43804c1c260097f5ecb70730c6eb9bc61c19ba1ca7ab6f09d6bb204",
+ "tokens": {
+  "input_tokens": 2641,
+  "output_tokens": 539,
+  "total_tokens": 3180
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"免税措施涉及的产品清单及实施细则尚未明确\", \"卫生部长承认社区中存在大量死亡，但因缺乏医学确认无法确定其与登革热的关联\", \"该报道为单一来源，尚缺乏交叉验证\"]",
+    "after": "[\"免税措施涉及的产品清单及实施细则尚未明确\", \"卫生部长承认社区中存在大量死亡，但因缺乏医学确认无法确定其与登革热的关联\", \"该报道为单一来源，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得：2027年卫生预算将增加近600亿中非法郎",
+   "summary_zh": "乍得政府计划在2027年将卫生预算增加近600亿中非法郎，并对用于预防和抗击登革热及疟疾的进口产品实施免税，该财政法案已在部长会议上通过。这些措施出台之际，该国正面临登革热疫情，恩贾梅纳的医疗机构因患者激增而承压。官方数据显示，乍得累计报告6275例疑似病例、353例确诊病例和18例死亡。该预算案仍需议会通过程序。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N’Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得政府计划2027年将卫生预算增加近600亿中非法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement tchadien prévoit une augmentation de près de 60 milliards de FCFA du budget de la santé en 2027"
+    },
+    {
+     "fact": "政府拟对预防和抗击登革热及疟疾的进口产品免税",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement entend défiscaliser les importations de produits destinés à la prévention et à la lutte contre la dengue et le paludisme"
+    },
+    {
+     "fact": "恩贾梅纳医疗机构因登革热患者激增而承压",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "particulièrement préoccupante à N’Djamena, où les structures sanitaires sont confrontées à un afflux de patients"
+    },
+    {
+     "fact": "官方报告6275例疑似病例、353例确诊病例和18例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Tchad comptabilisait 6 275 cas suspects, 353 cas confirmés et 18 décès attribués à la maladie"
+    },
+    {
+     "fact": "2027年财政法案尚需议会通过程序",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "doit encore être soumis à la procédure d’adoption parlementaire"
+    }
+   ],
+   "uncertainties": [
+    "免税措施涉及的产品清单及实施细则尚未明确",
+    "卫生部长承认社区中存在大量死亡，但因缺乏医学确认无法确定其与登革热的关联",
+    "该报道为单一来源，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得：2027年卫生预算将增加近600亿中非法郎",
+   "summary_zh": "乍得政府计划在2027年将卫生预算增加近600亿中非法郎，并对用于预防和抗击登革热及疟疾的进口产品实施免税，该财政法案已在部长会议上通过。这些措施出台之际，该国正面临登革热疫情，恩贾梅纳的医疗机构因患者激增而承压。官方数据显示，乍得累计报告6275例疑似病例、353例确诊病例和18例死亡。该预算案仍需议会通过程序。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N’Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得政府计划2027年将卫生预算增加近600亿中非法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement tchadien prévoit une augmentation de près de 60 milliards de FCFA du budget de la santé en 2027"
+    },
+    {
+     "fact": "政府拟对预防和抗击登革热及疟疾的进口产品免税",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement entend défiscaliser les importations de produits destinés à la prévention et à la lutte contre la dengue et le paludisme"
+    },
+    {
+     "fact": "恩贾梅纳医疗机构因登革热患者激增而承压",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "particulièrement préoccupante à N’Djamena, où les structures sanitaires sont confrontées à un afflux de patients"
+    },
+    {
+     "fact": "官方报告6275例疑似病例、353例确诊病例和18例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Tchad comptabilisait 6 275 cas suspects, 353 cas confirmés et 18 décès attribués à la maladie"
+    },
+    {
+     "fact": "2027年财政法案尚需议会通过程序",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "doit encore être soumis à la procédure d’adoption parlementaire"
+    }
+   ],
+   "uncertainties": [
+    "免税措施涉及的产品清单及实施细则尚未明确",
+    "卫生部长承认社区中存在大量死亡，但因缺乏医学确认无法确定其与登革热的关联",
+    "该报道为单一来源，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_783620c4ee415768",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
