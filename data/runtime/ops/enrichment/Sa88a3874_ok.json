@@ -1,0 +1,125 @@
+{
+ "label": "Sa88a3874",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "44b058de4a2b779cbbb63d840b2a5ca0f6df4bfa14340b1a3ce247918c543227",
+ "tokens": {
+  "input_tokens": 2734,
+  "output_tokens": 596,
+  "total_tokens": 3330
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得总统呼吁透明高效执行2027年预算",
+   "summary_zh": "乍得总统穆罕默德·伊德里斯·代比·伊特诺在部长会议上呼吁政府以有条理、透明的方式执行2027年国家预算，并要求自2027年初即启动执行、严格遵守公共采购程序。会议审议的2027年财政法案显示，国家总收入预计达30650亿中非法郎，较2026年增长35%，总支出预计30020亿中非法郎。总统还就部分地区反复出现的族群间冲突要求政府采取适当措施，保障民众安全与社会共处。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": "图迈宫",
+    "raw_text": "Palais Toumaï"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得总统在部长会议上呼吁透明、迅速地执行2027年预算",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a appelé le gouvernement à faire preuve de méthode et de transparence dans l’exécution du budget de l’État pour l’exercice 2027"
+    },
+    {
+     "fact": "2027年国家总收入预计为30650亿中非法郎，较2026年的22750亿增长35%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les ressources totales de l’État devraient atteindre 3 065 milliards de FCFA en 2027, contre 2 275 milliards en 2026, soit une progression de 35 %"
+    },
+    {
+     "fact": "2027年支出预计为30020亿中非法郎，较2026年的25310亿增长19%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les dépenses sont, quant à elles, estimées à 3 002 milliards de FCFA, contre 2 531 milliards en 2026, soit une hausse de 19 %"
+    },
+    {
+     "fact": "总统要求政府采取措施遏制部分地区反复出现的族群间冲突",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le président de la République a profité du Conseil des ministres pour revenir sur la situation sécuritaire, notamment les conflits intercommunautaires récurrents dans certaines régions du pays"
+    },
+    {
+     "fact": "部长会议于2026年11月5日星期四在图迈宫举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le jeudi 5 novembre 2026 au Palais Toumaï"
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（Alwihda Info）报道，尚缺乏交叉验证",
+    "预算数据为部长会议提交的预测值，尚未经最终确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得总统呼吁透明高效执行2027年预算",
+   "summary_zh": "乍得总统穆罕默德·伊德里斯·代比·伊特诺在部长会议上呼吁政府以有条理、透明的方式执行2027年国家预算，并要求自2027年初即启动执行、严格遵守公共采购程序。会议审议的2027年财政法案显示，国家总收入预计达30650亿中非法郎，较2026年增长35%，总支出预计30020亿中非法郎。总统还就部分地区反复出现的族群间冲突要求政府采取适当措施，保障民众安全与社会共处。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": "图迈宫",
+    "raw_text": "Palais Toumaï"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得总统在部长会议上呼吁透明、迅速地执行2027年预算",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a appelé le gouvernement à faire preuve de méthode et de transparence dans l’exécution du budget de l’État pour l’exercice 2027"
+    },
+    {
+     "fact": "2027年国家总收入预计为30650亿中非法郎，较2026年的22750亿增长35%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les ressources totales de l’État devraient atteindre 3 065 milliards de FCFA en 2027, contre 2 275 milliards en 2026, soit une progression de 35 %"
+    },
+    {
+     "fact": "2027年支出预计为30020亿中非法郎，较2026年的25310亿增长19%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les dépenses sont, quant à elles, estimées à 3 002 milliards de FCFA, contre 2 531 milliards en 2026, soit une hausse de 19 %"
+    },
+    {
+     "fact": "总统要求政府采取措施遏制部分地区反复出现的族群间冲突",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le président de la République a profité du Conseil des ministres pour revenir sur la situation sécuritaire, notamment les conflits intercommunautaires récurrents dans certaines régions du pays"
+    },
+    {
+     "fact": "部长会议于2026年11月5日星期四在图迈宫举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le jeudi 5 novembre 2026 au Palais Toumaï"
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（Alwihda Info）报道，尚缺乏交叉验证",
+    "预算数据为部长会议提交的预测值，尚未经最终确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_a831dae5a88a3874",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
