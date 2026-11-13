@@ -1,0 +1,127 @@
+{
+ "label": "S0b7d1401",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "425bac92a4914a708267f9662a34ef5a4b19bf5355770ce3c6d53c40385620fb",
+ "tokens": {
+  "input_tokens": 2003,
+  "output_tokens": 456,
+  "total_tokens": 2459
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚贝努埃州据称三人死亡、14人因饮用草药混合物住院",
+   "summary_zh": "尼日利亚贝努埃州奥朱地方政府区伊格德社区据称有人饮用疑似含有毒物质的草药混合物，至少三人死亡、14人住院。其中4名在奥朱综合医院接受治疗者据称情况危急。警方尚未确认该事件。据报，三名疑似兜售该草药混合物的男子在上周末奥朱镇伊希耶沃集市日将其售予居民。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "贝努埃州",
+    "city": "奥朱",
+    "site": "伊格德社区",
+    "raw_text": "Igede community, Oju Local Government Area of Benue State"
+   },
+   "key_facts": [
+    {
+     "fact": "据报至少三人死亡、14人住院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least three people have reportedly died, and 14 others were hospitalised"
+    },
+    {
+     "fact": "事件涉及饮用疑似含有毒物质的草药混合物",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "after allegedly consuming herbal mixtures suspected to contain poisonous substances"
+    },
+    {
+     "fact": "14名住院者中4人据报情况危急",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Four of the 14 people receiving treatment at the General Hospital in Oju are reportedly in critical condition"
+    },
+    {
+     "fact": "警方尚未确认该事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The police had, however, yet to confirm the incident"
+    },
+    {
+     "fact": "据报三名疑似兜售者在奥朱镇集市日向居民出售该草药混合物",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "three men suspected to be hawking the herbal mixtures sold them to residents during the Ihiejwo market day in Oju Township last weekend"
+    }
+   ],
+   "uncertainties": [
+    "死亡与住院人数均为据报，尚未获警方确认",
+    "草药混合物是否含有毒物质尚未证实",
+    "事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚贝努埃州据称三人死亡、14人因饮用草药混合物住院",
+   "summary_zh": "尼日利亚贝努埃州奥朱地方政府区伊格德社区据称有人饮用疑似含有毒物质的草药混合物，至少三人死亡、14人住院。其中4名在奥朱综合医院接受治疗者据称情况危急。警方尚未确认该事件。据报，三名疑似兜售该草药混合物的男子在上周末奥朱镇伊希耶沃集市日将其售予居民。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "贝努埃州",
+    "city": "奥朱",
+    "site": "伊格德社区",
+    "raw_text": "Igede community, Oju Local Government Area of Benue State"
+   },
+   "key_facts": [
+    {
+     "fact": "据报至少三人死亡、14人住院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "At least three people have reportedly died, and 14 others were hospitalised"
+    },
+    {
+     "fact": "事件涉及饮用疑似含有毒物质的草药混合物",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "after allegedly consuming herbal mixtures suspected to contain poisonous substances"
+    },
+    {
+     "fact": "14名住院者中4人据报情况危急",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Four of the 14 people receiving treatment at the General Hospital in Oju are reportedly in critical condition"
+    },
+    {
+     "fact": "警方尚未确认该事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The police had, however, yet to confirm the incident"
+    },
+    {
+     "fact": "据报三名疑似兜售者在奥朱镇集市日向居民出售该草药混合物",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "three men suspected to be hawking the herbal mixtures sold them to residents during the Ihiejwo market day in Oju Township last weekend"
+    }
+   ],
+   "uncertainties": [
+    "死亡与住院人数均为据报，尚未获警方确认",
+    "草药混合物是否含有毒物质尚未证实",
+    "事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_d71340a20b7d1401",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

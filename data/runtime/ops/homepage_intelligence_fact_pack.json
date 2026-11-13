@@ -1,15 +1,15 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-11-14T03:49:08+08:00",
+ "generated_at": "2026-11-14T04:35:41+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 56,
-  "signals_7d": 380,
-  "verified_events_24h": 56,
-  "verified_events_7d": 391,
+  "signals_24h": 55,
+  "signals_7d": 379,
+  "verified_events_24h": 55,
+  "verified_events_7d": 390,
   "multi_source_verified_events_7d": 4,
   "countries_with_activity_24h": 12,
   "total_countries_monitored": 22
@@ -56,7 +56,7 @@
  "country_distribution_7d": [
   {
    "value": "尼日利亚",
-   "count": 155
+   "count": 154
   },
   {
    "value": "贝宁",
@@ -106,7 +106,7 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 31
+   "count": 30
   },
   {
    "value": "恐怖袭击",
@@ -156,7 +156,7 @@
  "source_tier_distribution_7d": [
   {
    "value": "C",
-   "count": 636
+   "count": 634
   },
   {
    "value": "A",
@@ -214,21 +214,6 @@
    "severity": "medium"
   },
   {
-   "fact_id": "EVT_0492fbaab1001be8",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "13 injured in Lagos-Ibadan Expressway crash",
-   "category": "other_security",
-   "source": "Punch",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-06 20:34",
-   "importance": "high",
-   "severity": "medium"
-  },
-  {
    "fact_id": "EVT_f975ea0f4ecce4eb",
    "level": "verified_event",
    "evidence_tier": "single_source_published",
@@ -255,6 +240,21 @@
    "source_tier": "C",
    "source_role": "major_media",
    "time": "2026-11-07 01:05",
+   "importance": "high",
+   "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_def7b0e5184c5a7f",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "Nigerian teen jailed four years for dummy gun robbery",
+   "category": "serious_crime",
+   "source": "Punch",
+   "source_tier": "C",
+   "source_role": "major_media",
+   "time": "2026-11-07 00:52",
    "importance": "high",
    "severity": "medium"
   }
@@ -696,10 +696,16 @@
   }
  ],
  "existing_assessment": {
-  "status": "deterministic",
-  "based_on": "过去24小时/7日公开信息（确定性汇总）"
+  "status": "ai",
+  "overall_assessment": "已核实事件方面，尼日利亚占本周事件量首位，涉及选举集会暴力（三角洲州集会一死五伤、阿萨巴NDC集会遇袭）、绑架与警方枪击致死等；乍得曼杜尔路段交通事故多源核实致三人死亡，恩内迪西部总统处分军政官员并推动平民缴械；刚果（金）北基伍ADF袭击、贝宁性侵未成年人案、几内亚驱逐马里采金者等亦获核实。情报信号均为单源、尚待核实：乍得洛贡东区Kouh-Wété村武装袭击致一死一伤、布基纳法索对流亡记者发逮捕令、尼日利亚奥贡州ASUP罢工进入第三日、莫桑比克蒙德拉内案开庭。整体风险方向趋于恶化，需持续跟踪选举季暴力与萨赫勒跨境武装活动。",
+  "risk_direction": "worsening",
+  "confidence": "medium",
+  "generated_time": "2026-11-14T04:35:01+08:00",
+  "based_on": "过去24小时/7日公开信息",
+  "model": "",
+  "date": "20261114"
  },
- "fact_count": 771,
+ "fact_count": 769,
  "facts": {
   "news:f32f95cd112049b9": {
    "fact_id": "news:f32f95cd112049b9",
@@ -6386,21 +6392,6 @@
    "importance": "low",
    "why_it_matters": ""
   },
-  "news:ef093bd4562922d2": {
-   "fact_id": "news:ef093bd4562922d2",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "13 injured in Lagos-Ibadan Expressway crash",
-   "category": "other_security",
-   "source": "Punch",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-07 04:34",
-   "importance": "low",
-   "why_it_matters": ""
-  },
   "EVT_963d692675140629": {
    "fact_id": "EVT_963d692675140629",
    "level": "verified_event",
@@ -6443,21 +6434,6 @@
    "source_tier": "C",
    "source_role": "major_media",
    "time": "2026-11-06 20:48",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_0492fbaab1001be8": {
-   "fact_id": "EVT_0492fbaab1001be8",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "13 injured in Lagos-Ibadan Expressway crash",
-   "category": "other_security",
-   "source": "Punch",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-06 20:34",
    "importance": "high",
    "severity": "medium"
   },

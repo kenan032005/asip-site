@@ -1,0 +1,140 @@
+{
+ "label": "S56036fc7",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "8c671dd3d7c7e6f8c0371ea7a23ddabb8de43c156520ce098675124ab8d6c6af",
+ "tokens": {
+  "input_tokens": 2920,
+  "output_tokens": 727,
+  "total_tokens": 3647
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"FLA关于11月5日无人机袭击的说法为单方面声称，未获独立证实\", \"FLA关于空袭造成平民伤亡和民用设施损毁的指控未获核实\", \"马里军方未回应RFI的置评请求\", \"FLA与Jnim战斗人员在该地区的具体部署情况仅来自单一武装组织消息源\"]",
+    "after": "[\"FLA关于11月5日无人机袭击的说法为单方面声称，未获独立证实\", \"FLA关于空袭造成平民伤亡和民用设施损毁的指控未获核实\", \"马里军方未回应RFI的置评请求\", \"FLA与Jnim战斗人员在该地区的具体部署情况仅来自单一武装组织消息源\", \"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "马里：基达尔收复一个月后，军队为何在该地区不再推进",
+   "summary_zh": "在马里北部，军队与Africa Corps于11月6日收复基达尔满一个月。此前该市近六个月由阿扎瓦德解放阵线（FLA）独立派及其盟友、与基地组织有关联的“支持伊斯兰与穆斯林组织”（Jnim）圣战分子控制。马里士兵与俄方伙伴目前驻守基达尔、阿内菲斯和阿盖洛克，但未向阿尔及利亚边境附近的泰萨利特和廷扎瓦滕推进，转而持续进行空袭。FLA声称11月5日对阿内菲斯发动了无人机袭击。",
+   "event_type": "armed_conflict",
+   "country_iso3": "MLI",
+   "location": {
+    "country_iso3": "MLI",
+    "admin1": "基达尔地区",
+    "city": "基达尔",
+    "site": null,
+    "raw_text": "Kidal, dans le Nord du Mali"
+   },
+   "key_facts": [
+    {
+     "fact": "马里军队与Africa Corps于11月6日收复基达尔满一个月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cela fait tout juste un mois ce 6 novembre que l'armée et l'Africa Corps ont repris Kidal, dans le Nord"
+    },
+    {
+     "fact": "基达尔此前近六个月由FLA独立派及其Jnim圣战盟友控制",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La ville était contrôlée depuis près de six mois par les indépendantistes du Front de libération de l'Azawad (FLA) et leurs alliés jihadistes du Groupe de soutien à l'islam et aux musulmans (Jnim)"
+    },
+    {
+     "fact": "马里士兵与俄方伙伴驻守基达尔、阿内菲斯和阿盖洛克，未向泰萨利特和廷扎瓦滕推进",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les soldats maliens et leurs partenaires russes tiennent fermement Kidal, Anéfis et Aguelhoc, mais ils ne se sont toujours pas aventurés à Tessalit ni à Tinzaouatène"
+    },
+    {
+     "fact": "军队持续在泰萨利特和塔尔汉达克等地进行空袭，声称打击“恐怖分子聚集点”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "elle continue de mener régulièrement des frappes aériennes, dans les secteurs de Tessalit et Talhandak notamment. Dans ses communiqués, l'armée assure viser des « regroupements terroristes »"
+    },
+    {
+     "fact": "FLA声称11月5日对阿内菲斯的Africa Corps和马里武装部队阵地发动多次无人机袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les forces du FLA affirment avoir mené le 5 novembre 2026 plusieurs frappes de drones contre les positions de l'Africa Corps et des Forces armées maliennes (Fama) à Anéfis"
+    }
+   ],
+   "uncertainties": [
+    "FLA关于11月5日无人机袭击的说法为单方面声称，未获独立证实",
+    "FLA关于空袭造成平民伤亡和民用设施损毁的指控未获核实",
+    "马里军方未回应RFI的置评请求",
+    "FLA与Jnim战斗人员在该地区的具体部署情况仅来自单一武装组织消息源"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "马里：基达尔收复一个月后，军队为何在该地区不再推进",
+   "summary_zh": "在马里北部，军队与Africa Corps于11月6日收复基达尔满一个月。此前该市近六个月由阿扎瓦德解放阵线（FLA）独立派及其盟友、与基地组织有关联的“支持伊斯兰与穆斯林组织”（Jnim）圣战分子控制。马里士兵与俄方伙伴目前驻守基达尔、阿内菲斯和阿盖洛克，但未向阿尔及利亚边境附近的泰萨利特和廷扎瓦滕推进，转而持续进行空袭。FLA声称11月5日对阿内菲斯发动了无人机袭击。",
+   "event_type": "armed_conflict",
+   "country_iso3": "MLI",
+   "location": {
+    "country_iso3": "MLI",
+    "admin1": "基达尔地区",
+    "city": "基达尔",
+    "site": null,
+    "raw_text": "Kidal, dans le Nord du Mali"
+   },
+   "key_facts": [
+    {
+     "fact": "马里军队与Africa Corps于11月6日收复基达尔满一个月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cela fait tout juste un mois ce 6 novembre que l'armée et l'Africa Corps ont repris Kidal, dans le Nord"
+    },
+    {
+     "fact": "基达尔此前近六个月由FLA独立派及其Jnim圣战盟友控制",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La ville était contrôlée depuis près de six mois par les indépendantistes du Front de libération de l'Azawad (FLA) et leurs alliés jihadistes du Groupe de soutien à l'islam et aux musulmans (Jnim)"
+    },
+    {
+     "fact": "马里士兵与俄方伙伴驻守基达尔、阿内菲斯和阿盖洛克，未向泰萨利特和廷扎瓦滕推进",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les soldats maliens et leurs partenaires russes tiennent fermement Kidal, Anéfis et Aguelhoc, mais ils ne se sont toujours pas aventurés à Tessalit ni à Tinzaouatène"
+    },
+    {
+     "fact": "军队持续在泰萨利特和塔尔汉达克等地进行空袭，声称打击“恐怖分子聚集点”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "elle continue de mener régulièrement des frappes aériennes, dans les secteurs de Tessalit et Talhandak notamment. Dans ses communiqués, l'armée assure viser des « regroupements terroristes »"
+    },
+    {
+     "fact": "FLA声称11月5日对阿内菲斯的Africa Corps和马里武装部队阵地发动多次无人机袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les forces du FLA affirment avoir mené le 5 novembre 2026 plusieurs frappes de drones contre les positions de l'Africa Corps et des Forces armées maliennes (Fama) à Anéfis"
+    }
+   ],
+   "uncertainties": [
+    "FLA关于11月5日无人机袭击的说法为单方面声称，未获独立证实",
+    "FLA关于空袭造成平民伤亡和民用设施损毁的指控未获核实",
+    "马里军方未回应RFI的置评请求",
+    "FLA与Jnim战斗人员在该地区的具体部署情况仅来自单一武装组织消息源",
+    "据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_bb86607356036fc7",
+ "disease_event_id": null,
+ "country_code": "ML"
+}

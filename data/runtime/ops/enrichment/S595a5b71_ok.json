@@ -1,0 +1,125 @@
+{
+ "label": "S595a5b71",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "99df3d7d895f6aceae5b275c892922606c8c4094d8e9b5d54c5f1856272e64fe",
+ "tokens": {
+  "input_tokens": 2303,
+  "output_tokens": 658,
+  "total_tokens": 2961
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "世卫组织：尼日利亚等9个非洲国家报告67例黄热病确诊病例，18人死亡",
+   "summary_zh": "世界卫生组织表示，2026年1月1日至10月12日期间，尼日利亚及另外8个非洲国家共报告67例黄热病确诊病例，其中18人死亡。受影响国家包括布基纳法索、喀麦隆、中非共和国、科特迪瓦、加纳、几内亚、利比里亚、尼日利亚和多哥，近期疫情主要集中在布基纳法索、科特迪瓦、加纳和利比里亚。世卫组织将区域整体公共卫生风险评估为中等，全球风险评估为低。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria and eight other African countries (Burkina Faso, Cameroon, Central African Republic, Côte d’Ivoire, Ghana, Guinea, Liberia, Nigeria, Togo)"
+   },
+   "key_facts": [
+    {
+     "fact": "世卫组织称尼日利亚等9个非洲国家在2026年1月1日至10月12日期间报告67例黄热病确诊病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria and eight other African countries recorded 67 confirmed yellow fever cases, including 18 deaths, between Jan. 1 and Oct. 12, 2026."
+    },
+    {
+     "fact": "上述病例中包括18例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "67 confirmed yellow fever cases, including 18 deaths"
+    },
+    {
+     "fact": "受影响国家为布基纳法索、喀麦隆、中非共和国、科特迪瓦、加纳、几内亚、利比里亚、尼日利亚和多哥",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "WHO identified the affected countries as Burkina Faso, Cameroon, Central African Republic, Côte d’Ivoire, Ghana, Guinea, Liberia, Nigeria and Togo."
+    },
+    {
+     "fact": "近期疫情主要集中在布基纳法索、科特迪瓦、加纳和利比里亚，包括靠近国际边界的社区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "recent outbreak activities have been concentrated in Burkina Faso, Côte d’Ivoire, Ghana and Liberia, including communities located close to international borders."
+    },
+    {
+     "fact": "世卫组织将区域整体公共卫生风险评估为中等，全球风险评估为低",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "assessed the overall public health risk of the ongoing yellow fever situation as moderate at the regional level on Oct. 27, 2026. It, however, maintained that the global public health risk associated with the current yellow fever situation remained low."
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（尼日利亚通讯社）报道，尚缺乏交叉验证",
+    "病例与死亡数据为世卫组织报告口径，具体各国分布未在文中列明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "世卫组织：尼日利亚等9个非洲国家报告67例黄热病确诊病例，18人死亡",
+   "summary_zh": "世界卫生组织表示，2026年1月1日至10月12日期间，尼日利亚及另外8个非洲国家共报告67例黄热病确诊病例，其中18人死亡。受影响国家包括布基纳法索、喀麦隆、中非共和国、科特迪瓦、加纳、几内亚、利比里亚、尼日利亚和多哥，近期疫情主要集中在布基纳法索、科特迪瓦、加纳和利比里亚。世卫组织将区域整体公共卫生风险评估为中等，全球风险评估为低。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria and eight other African countries (Burkina Faso, Cameroon, Central African Republic, Côte d’Ivoire, Ghana, Guinea, Liberia, Nigeria, Togo)"
+   },
+   "key_facts": [
+    {
+     "fact": "世卫组织称尼日利亚等9个非洲国家在2026年1月1日至10月12日期间报告67例黄热病确诊病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nigeria and eight other African countries recorded 67 confirmed yellow fever cases, including 18 deaths, between Jan. 1 and Oct. 12, 2026."
+    },
+    {
+     "fact": "上述病例中包括18例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "67 confirmed yellow fever cases, including 18 deaths"
+    },
+    {
+     "fact": "受影响国家为布基纳法索、喀麦隆、中非共和国、科特迪瓦、加纳、几内亚、利比里亚、尼日利亚和多哥",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "WHO identified the affected countries as Burkina Faso, Cameroon, Central African Republic, Côte d’Ivoire, Ghana, Guinea, Liberia, Nigeria and Togo."
+    },
+    {
+     "fact": "近期疫情主要集中在布基纳法索、科特迪瓦、加纳和利比里亚，包括靠近国际边界的社区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "recent outbreak activities have been concentrated in Burkina Faso, Côte d’Ivoire, Ghana and Liberia, including communities located close to international borders."
+    },
+    {
+     "fact": "世卫组织将区域整体公共卫生风险评估为中等，全球风险评估为低",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "assessed the overall public health risk of the ongoing yellow fever situation as moderate at the regional level on Oct. 27, 2026. It, however, maintained that the global public health risk associated with the current yellow fever situation remained low."
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（尼日利亚通讯社）报道，尚缺乏交叉验证",
+    "病例与死亡数据为世卫组织报告口径，具体各国分布未在文中列明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_314453e4595a5b71",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
