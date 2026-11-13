@@ -1,0 +1,138 @@
+{
+ "label": "See86db27",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a138ff70d860f578348a110c625d350c9fa1e9389b4808acc9a26db05b5e1f1e",
+ "tokens": {
+  "input_tokens": 2851,
+  "output_tokens": 670,
+  "total_tokens": 3521
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"登革热实际病例与死亡数因监测系统覆盖不足而可能被低估，尚未获确认\", \"未经医学检查或确诊检测的死亡无法正式归因于特定疾病\", \"目前仅一个来源（乍得复兴门户）报道，尚缺乏交叉验证\"]",
+    "after": "[\"登革热实际病例与死亡数因监测系统覆盖不足而可能被低估，尚未获确认\", \"未经医学检查或确诊检测的死亡无法正式归因于特定疾病\", \"目前仅一个来源（乍得复兴门户）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得卫生部长在参议院介绍政府登革热应对措施",
+   "summary_zh": "2026年11月6日，乍得公共卫生与预防部长阿卜杜勒马吉德·阿卜德拉希姆在参议院就登革热疫情应对回答口头质询，介绍政府已部署的策略与行动。部长指出，居家治疗、自行用药及传统医治疗者常脱离卫生监测系统，未经医学检查或确诊检测的死亡无法正式归因于特定疾病。他还提到，疟疾仍是医疗机构内首要死因且正值传播高峰，霍乱自6月起在包括恩贾梅纳在内的四个省份流行并造成五十余例死亡，其中近半发生在家中。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "参议院",
+    "raw_text": "devant le Sénat"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得公共卫生与预防部长在参议院就登革热疫情应对回答口头质询",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministre de la Santé publique et de la Prévention, Dr Abdelmadjid Abderahim, a répondu, ce vendredi 6 novembre 2026, à une question orale avec débat sur la riposte contre l’épidémie de dengue au Tchad, devant les sénateurs."
+    },
+    {
+     "fact": "部长称居家治疗、自行用药或求助传统医治疗者常脱离卫生监测系统",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les personnes prises en charge à domicile, celles qui recourent à l’automédication ou aux soins des tradipraticiens échappent souvent au système de surveillance sanitaire"
+    },
+    {
+     "fact": "部长要求加强社区主动病例搜索并呼吁报告疑似死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a instruit le renforcement de la recherche active des cas dans les quartiers. Il a également appelé les familles et les autorités locales à collaborer avec les équipes sanitaires en signalant tout décès suspect"
+    },
+    {
+     "fact": "霍乱自6月起在包括恩贾梅纳在内的四个省份流行，造成五十余例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le choléra, présent depuis le mois de juin dernier dans quatre provinces, dont N’Djaména, et responsable de plus de cinquante décès"
+    },
+    {
+     "fact": "部长称疟疾仍是医疗机构内首要死因并正处于传播高峰",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le paludisme, qui demeure, selon le ministre, la première cause de décès dans les formations sanitaires et connaît actuellement un pic de transmission"
+    }
+   ],
+   "uncertainties": [
+    "登革热实际病例与死亡数因监测系统覆盖不足而可能被低估，尚未获确认",
+    "未经医学检查或确诊检测的死亡无法正式归因于特定疾病",
+    "目前仅一个来源（乍得复兴门户）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得卫生部长在参议院介绍政府登革热应对措施",
+   "summary_zh": "2026年11月6日，乍得公共卫生与预防部长阿卜杜勒马吉德·阿卜德拉希姆在参议院就登革热疫情应对回答口头质询，介绍政府已部署的策略与行动。部长指出，居家治疗、自行用药及传统医治疗者常脱离卫生监测系统，未经医学检查或确诊检测的死亡无法正式归因于特定疾病。他还提到，疟疾仍是医疗机构内首要死因且正值传播高峰，霍乱自6月起在包括恩贾梅纳在内的四个省份流行并造成五十余例死亡，其中近半发生在家中。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "参议院",
+    "raw_text": "devant le Sénat"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得公共卫生与预防部长在参议院就登革热疫情应对回答口头质询",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministre de la Santé publique et de la Prévention, Dr Abdelmadjid Abderahim, a répondu, ce vendredi 6 novembre 2026, à une question orale avec débat sur la riposte contre l’épidémie de dengue au Tchad, devant les sénateurs."
+    },
+    {
+     "fact": "部长称居家治疗、自行用药或求助传统医治疗者常脱离卫生监测系统",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les personnes prises en charge à domicile, celles qui recourent à l’automédication ou aux soins des tradipraticiens échappent souvent au système de surveillance sanitaire"
+    },
+    {
+     "fact": "部长要求加强社区主动病例搜索并呼吁报告疑似死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a instruit le renforcement de la recherche active des cas dans les quartiers. Il a également appelé les familles et les autorités locales à collaborer avec les équipes sanitaires en signalant tout décès suspect"
+    },
+    {
+     "fact": "霍乱自6月起在包括恩贾梅纳在内的四个省份流行，造成五十余例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le choléra, présent depuis le mois de juin dernier dans quatre provinces, dont N’Djaména, et responsable de plus de cinquante décès"
+    },
+    {
+     "fact": "部长称疟疾仍是医疗机构内首要死因并正处于传播高峰",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le paludisme, qui demeure, selon le ministre, la première cause de décès dans les formations sanitaires et connaît actuellement un pic de transmission"
+    }
+   ],
+   "uncertainties": [
+    "登革热实际病例与死亡数因监测系统覆盖不足而可能被低估，尚未获确认",
+    "未经医学检查或确诊检测的死亡无法正式归因于特定疾病",
+    "目前仅一个来源（乍得复兴门户）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_da277bb8ee86db27",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

@@ -1,0 +1,126 @@
+{
+ "label": "S0d4afdc2",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "89776c5d212ebe89a85697b577e50754fb2a37fec03356dac02a61b0daaa224b",
+ "tokens": {
+  "input_tokens": 2684,
+  "output_tokens": 494,
+  "total_tokens": 3178
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（Benin Web TV）报道，尚缺乏交叉验证\", \"案件细节主要依据“红帽子”运动发布的公告\"]",
+    "after": "[\"目前仅一个来源（Benin Web TV）报道，尚缺乏交叉验证\", \"案件细节主要依据“红帽子”运动发布的公告\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "科特迪瓦：卡希耶·昆塔被判处三个月实刑",
+   "summary_zh": "阿比让-高原初审法院于11月5日判处“红帽子”运动主席卡希耶·卡库·居伊·若埃尔（又名卡希耶·昆塔）三个月实刑，其被认定犯有扰乱公共秩序、辱骂及通过信息系统传播虚假新闻罪。他自10月27日起被羁押。据单一来源报道，该判决在其实施羁押九天后作出。",
+   "event_type": "political_instability",
+   "country_iso3": "CIV",
+   "location": {
+    "country_iso3": "CIV",
+    "admin1": "阿比让",
+    "city": "阿比让",
+    "site": "阿比让-高原初审法院",
+    "raw_text": "tribunal de première instance d’Abidjan-Plateau"
+   },
+   "key_facts": [
+    {
+     "fact": "阿比让-高原初审法院判处卡希耶·昆塔三个月实刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le tribunal de première instance d’Abidjan-Plateau a condamné jeudi 5 novembre Cahié Kakou Guy Joël, connu sous le nom de Cahié Kunta, à trois mois de prison ferme."
+    },
+    {
+     "fact": "卡希耶·昆塔被认定犯有扰乱公共秩序、辱骂及传播虚假新闻罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a été reconnu coupable de trouble à l’ordre public, d’invectives et de diffusion de fausses nouvelles au moyen d’un système d’information"
+    },
+    {
+     "fact": "卡希耶·昆塔自10月27日起被羁押",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le président du mouvement Les Chapeaux Rouges était détenu depuis le 27 octobre."
+    },
+    {
+     "fact": "该判决在其实施羁押九天后作出",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Son jugement est intervenu neuf jours après son placement sous mandat de dépôt."
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Benin Web TV）报道，尚缺乏交叉验证",
+    "案件细节主要依据“红帽子”运动发布的公告"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "科特迪瓦：卡希耶·昆塔被判处三个月实刑",
+   "summary_zh": "阿比让-高原初审法院于11月5日判处“红帽子”运动主席卡希耶·卡库·居伊·若埃尔（又名卡希耶·昆塔）三个月实刑，其被认定犯有扰乱公共秩序、辱骂及通过信息系统传播虚假新闻罪。他自10月27日起被羁押。据单一来源报道，该判决在其实施羁押九天后作出。",
+   "event_type": "political_instability",
+   "country_iso3": "CIV",
+   "location": {
+    "country_iso3": "CIV",
+    "admin1": "阿比让",
+    "city": "阿比让",
+    "site": "阿比让-高原初审法院",
+    "raw_text": "tribunal de première instance d’Abidjan-Plateau"
+   },
+   "key_facts": [
+    {
+     "fact": "阿比让-高原初审法院判处卡希耶·昆塔三个月实刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le tribunal de première instance d’Abidjan-Plateau a condamné jeudi 5 novembre Cahié Kakou Guy Joël, connu sous le nom de Cahié Kunta, à trois mois de prison ferme."
+    },
+    {
+     "fact": "卡希耶·昆塔被认定犯有扰乱公共秩序、辱骂及传播虚假新闻罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a été reconnu coupable de trouble à l’ordre public, d’invectives et de diffusion de fausses nouvelles au moyen d’un système d’information"
+    },
+    {
+     "fact": "卡希耶·昆塔自10月27日起被羁押",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le président du mouvement Les Chapeaux Rouges était détenu depuis le 27 octobre."
+    },
+    {
+     "fact": "该判决在其实施羁押九天后作出",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Son jugement est intervenu neuf jours après son placement sous mandat de dépôt."
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Benin Web TV）报道，尚缺乏交叉验证",
+    "案件细节主要依据“红帽子”运动发布的公告",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_39e5eb250d4afdc2",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
