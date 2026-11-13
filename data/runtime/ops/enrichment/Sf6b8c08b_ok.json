@@ -1,0 +1,105 @@
+{
+ "label": "Sf6b8c08b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "941faedf12e4a29014dbe4775b200a4f920a9f5a70e4ff9e3ab1a636838f4841",
+ "tokens": {
+  "input_tokens": 2178,
+  "output_tokens": 389,
+  "total_tokens": 2567
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "曾指控美国国际开发署资助博科圣地的美国共和党议员连任失败",
+   "summary_zh": "美国宾夕法尼亚州共和党众议员斯科特·佩里在中期选举中败给民主党挑战者贾内尔·斯特尔森。佩里此前曾声称美国国际开发署资助了博科圣地等恐怖组织，在尼日利亚引发争议。据美联社报道，斯特尔森获得56.5%的选票。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria (referenced in controversy); election in Pennsylvania, United States"
+   },
+   "key_facts": [
+    {
+     "fact": "共和党众议员斯科特·佩里在中期选举中连任失败",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A REPUBLICAN congressman Scott Perry ... has lost his re-election bid in Pennsylvania, United States."
+    },
+    {
+     "fact": "佩里曾声称美国国际开发署资助博科圣地等恐怖组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "after alleging that the United States Agency for International Development (USAID) funded Boko Haram and other terrorist groups"
+    },
+    {
+     "fact": "民主党挑战者斯特尔森以56.5%的得票率胜出",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Stelson secured 56.5 per cent of the votes, or 150,213, against Perry's 43.5 per cent"
+    }
+   ],
+   "uncertainties": [
+    "佩里关于美国国际开发署资助博科圣地的指控尚未得到证实",
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "曾指控美国国际开发署资助博科圣地的美国共和党议员连任失败",
+   "summary_zh": "美国宾夕法尼亚州共和党众议员斯科特·佩里在中期选举中败给民主党挑战者贾内尔·斯特尔森。佩里此前曾声称美国国际开发署资助了博科圣地等恐怖组织，在尼日利亚引发争议。据美联社报道，斯特尔森获得56.5%的选票。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria (referenced in controversy); election in Pennsylvania, United States"
+   },
+   "key_facts": [
+    {
+     "fact": "共和党众议员斯科特·佩里在中期选举中连任失败",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A REPUBLICAN congressman Scott Perry ... has lost his re-election bid in Pennsylvania, United States."
+    },
+    {
+     "fact": "佩里曾声称美国国际开发署资助博科圣地等恐怖组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "after alleging that the United States Agency for International Development (USAID) funded Boko Haram and other terrorist groups"
+    },
+    {
+     "fact": "民主党挑战者斯特尔森以56.5%的得票率胜出",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Stelson secured 56.5 per cent of the votes, or 150,213, against Perry's 43.5 per cent"
+    }
+   ],
+   "uncertainties": [
+    "佩里关于美国国际开发署资助博科圣地的指控尚未得到证实",
+    "该事件目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_ad454944f6b8c08b",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

@@ -1,0 +1,146 @@
+{
+ "label": "Sd8c633a4",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f196173d148b718c6bab299f402f86681bf4c58e2bce7484e435433dbcb2c566",
+ "tokens": {
+  "input_tokens": 2888,
+  "output_tokens": 764,
+  "total_tokens": 3652
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"联合公报中关于 destabilization 企图的指控归咎于雇佣兵及外国国家支持者，但未点名具体国家，相关指控尚未得到独立证实\", \"联合部队的初始兵力估计为5000人，该数字为估计值\"]",
+    "after": "[\"联合公报中关于 destabilization 企图的指控归咎于雇佣兵及外国国家支持者，但未点名具体国家，相关指控尚未得到独立证实\", \"联合部队的初始兵力估计为5000人，该数字为估计值\", \"据Niger Infos报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔与马里重申深化萨赫勒国家联盟合作并加强反恐",
+   "summary_zh": "马里过渡总统戈伊塔于2026年11月5日访问尼亚美，与尼日尔领导人蒂亚尼举行会谈，双方发表联合公报，重申巩固萨赫勒国家联盟并加大反恐力度。两国领导人赞扬联合部队在反恐方面取得的成果，并谴责外部势力支持的 destabilization 企图，但未点名具体国家。访问期间还讨论了人员自由流动、交通基础设施及能源矿产开发等议题。",
+   "event_type": "terrorism",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "迪奥里·哈马尼国际机场及总统府",
+    "raw_text": "aéroport international Diori Hamani de Niamey / palais de la présidence"
+   },
+   "key_facts": [
+    {
+     "fact": "马里过渡总统戈伊塔于2026年11月5日访问尼亚美，与尼日尔领导人蒂亚尼举行工作与友好访问",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le général d'armée Assimi Goïta a atterri jeudi 5 novembre 2026 vers 13 heures à l'aéroport international Diori Hamani de Niamey."
+    },
+    {
+     "fact": "双方发表联合公报，重申巩固萨赫勒国家联盟并加强反恐斗争",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un communiqué conjoint réaffirme l'engagement du Niger et du Mali à consolider la Confédération des États du Sahel et à intensifier la lutte contre le terrorisme."
+    },
+    {
+     "fact": "两国领导人赞扬联合部队在反恐领域取得的成功",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les deux dirigeants se sont félicités « des actions de la Force unifiée de la Confédération qui ont permis d'engranger des succès dans le domaine de la lutte contre le terrorisme »."
+    },
+    {
+     "fact": "联合公报谴责针对联盟国家的 destabilization 企图，归咎于雇佣兵及其外国国家支持者，但未点名任何国家",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le communiqué condamne les tentatives de déstabilisation visant les États de la Confédération, attribuées à des mercenaires et à leurs soutiens étatiques étrangers. Aucun pays n'est nommé."
+    },
+    {
+     "fact": "2026年1月29日，伊斯兰国大撒哈拉分支用无人机袭击尼亚美机场，为该组织在尼日尔首次此类行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le 29 janvier 2026, l'État islamique au Grand Sahara a frappé l'aéroport de Niamey avec un drone, une première pour ce groupe au Niger."
+    },
+    {
+     "fact": "2026年6月18日，另一起针对基础设施的袭击被国防安全部队挫败，15名袭击者被击毙",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le 18 juin, une nouvelle attaque contre l'infrastructure a été déjouée par les forces de défense et de sécurité, quinze assaillants neutralisés."
+    }
+   ],
+   "uncertainties": [
+    "联合公报中关于 destabilization 企图的指控归咎于雇佣兵及外国国家支持者，但未点名具体国家，相关指控尚未得到独立证实",
+    "联合部队的初始兵力估计为5000人，该数字为估计值"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔与马里重申深化萨赫勒国家联盟合作并加强反恐",
+   "summary_zh": "马里过渡总统戈伊塔于2026年11月5日访问尼亚美，与尼日尔领导人蒂亚尼举行会谈，双方发表联合公报，重申巩固萨赫勒国家联盟并加大反恐力度。两国领导人赞扬联合部队在反恐方面取得的成果，并谴责外部势力支持的 destabilization 企图，但未点名具体国家。访问期间还讨论了人员自由流动、交通基础设施及能源矿产开发等议题。",
+   "event_type": "terrorism",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": "尼亚美",
+    "site": "迪奥里·哈马尼国际机场及总统府",
+    "raw_text": "aéroport international Diori Hamani de Niamey / palais de la présidence"
+   },
+   "key_facts": [
+    {
+     "fact": "马里过渡总统戈伊塔于2026年11月5日访问尼亚美，与尼日尔领导人蒂亚尼举行工作与友好访问",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le général d'armée Assimi Goïta a atterri jeudi 5 novembre 2026 vers 13 heures à l'aéroport international Diori Hamani de Niamey."
+    },
+    {
+     "fact": "双方发表联合公报，重申巩固萨赫勒国家联盟并加强反恐斗争",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un communiqué conjoint réaffirme l'engagement du Niger et du Mali à consolider la Confédération des États du Sahel et à intensifier la lutte contre le terrorisme."
+    },
+    {
+     "fact": "两国领导人赞扬联合部队在反恐领域取得的成功",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les deux dirigeants se sont félicités « des actions de la Force unifiée de la Confédération qui ont permis d'engranger des succès dans le domaine de la lutte contre le terrorisme »."
+    },
+    {
+     "fact": "联合公报谴责针对联盟国家的 destabilization 企图，归咎于雇佣兵及其外国国家支持者，但未点名任何国家",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le communiqué condamne les tentatives de déstabilisation visant les États de la Confédération, attribuées à des mercenaires et à leurs soutiens étatiques étrangers. Aucun pays n'est nommé."
+    },
+    {
+     "fact": "2026年1月29日，伊斯兰国大撒哈拉分支用无人机袭击尼亚美机场，为该组织在尼日尔首次此类行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le 29 janvier 2026, l'État islamique au Grand Sahara a frappé l'aéroport de Niamey avec un drone, une première pour ce groupe au Niger."
+    },
+    {
+     "fact": "2026年6月18日，另一起针对基础设施的袭击被国防安全部队挫败，15名袭击者被击毙",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le 18 juin, une nouvelle attaque contre l'infrastructure a été déjouée par les forces de défense et de sécurité, quinze assaillants neutralisés."
+    }
+   ],
+   "uncertainties": [
+    "联合公报中关于 destabilization 企图的指控归咎于雇佣兵及外国国家支持者，但未点名具体国家，相关指控尚未得到独立证实",
+    "联合部队的初始兵力估计为5000人，该数字为估计值",
+    "据Niger Infos报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_b8781bc6d8c633a4",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
