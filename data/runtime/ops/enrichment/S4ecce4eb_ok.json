@@ -1,0 +1,127 @@
+{
+ "label": "S4ecce4eb",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "7aa06ff49e25fb29d023a2b53466fb5e12c5ab4b843fb0283bfa72c15cca88ad",
+ "tokens": {
+  "input_tokens": 3123,
+  "output_tokens": 594,
+  "total_tokens": 3717
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "科特迪瓦邦杜库市场火灾后商业活动缓慢恢复",
+   "summary_zh": "2026年7月12日至13日夜间，科特迪瓦东北部靠近加纳边境的邦杜库大市场发生猛烈火灾，造成重大损失，数百名商贩受灾。损失估计超过23亿非洲法郎，受灾商贩超过900人。约四个月后，受灾商贩被安置在临时场地，逐步尝试恢复经营，但恢复情况仍显缓慢。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "CIV",
+   "location": {
+    "country_iso3": "CIV",
+    "admin1": "邦杜库",
+    "city": "邦杜库",
+    "site": "邦杜库大市场",
+    "raw_text": "grand marché de Bondoukou, situé à 400 kilomètres au nord-est d'Abidjan, à la frontière avec le Ghana"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年7月12日至13日夜间，邦杜库大市场发生猛烈火灾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans la nuit du 12 au 13 juillet 2026, un violent incendie ravageait le grand marché de Bondoukou"
+    },
+    {
+     "fact": "火灾造成重大损失，数百名商贩受灾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le sinistre a causé d'importants dégâts et fait plusieurs centaines de commerçants sinistrés"
+    },
+    {
+     "fact": "损失估计超过23亿非洲法郎，受灾人数超过900人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les pertes sont estimées à plus de 2,3 milliards de francs CFA, le nombre de sinistrés à plus de 900"
+    },
+    {
+     "fact": "约四个月后商贩被安置在临时场地，恢复经营缓慢",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Près de quatre mois plus tard, ces derniers ont été relogés sur un site provisoire, où ils tentent peu à peu de reprendre leurs activités. Mais la reprise reste timide"
+    },
+    {
+     "fact": "2026年9月科特迪瓦当局向受灾商贩提供3250万非洲法郎财政援助",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au mois de septembre, les autorités ivoiriennes ont apporté une aide financière de 32,5 millions de francs CFA aux commerçants sinistrés"
+    }
+   ],
+   "uncertainties": [
+    "火灾具体起因尚未完全确认，报道提及人为疏忽及塑料、电池等物品助燃",
+    "新市场建筑重建时间表尚未确定",
+    "目前仅单一来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "科特迪瓦邦杜库市场火灾后商业活动缓慢恢复",
+   "summary_zh": "2026年7月12日至13日夜间，科特迪瓦东北部靠近加纳边境的邦杜库大市场发生猛烈火灾，造成重大损失，数百名商贩受灾。损失估计超过23亿非洲法郎，受灾商贩超过900人。约四个月后，受灾商贩被安置在临时场地，逐步尝试恢复经营，但恢复情况仍显缓慢。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "CIV",
+   "location": {
+    "country_iso3": "CIV",
+    "admin1": "邦杜库",
+    "city": "邦杜库",
+    "site": "邦杜库大市场",
+    "raw_text": "grand marché de Bondoukou, situé à 400 kilomètres au nord-est d'Abidjan, à la frontière avec le Ghana"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年7月12日至13日夜间，邦杜库大市场发生猛烈火灾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans la nuit du 12 au 13 juillet 2026, un violent incendie ravageait le grand marché de Bondoukou"
+    },
+    {
+     "fact": "火灾造成重大损失，数百名商贩受灾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le sinistre a causé d'importants dégâts et fait plusieurs centaines de commerçants sinistrés"
+    },
+    {
+     "fact": "损失估计超过23亿非洲法郎，受灾人数超过900人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les pertes sont estimées à plus de 2,3 milliards de francs CFA, le nombre de sinistrés à plus de 900"
+    },
+    {
+     "fact": "约四个月后商贩被安置在临时场地，恢复经营缓慢",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Près de quatre mois plus tard, ces derniers ont été relogés sur un site provisoire, où ils tentent peu à peu de reprendre leurs activités. Mais la reprise reste timide"
+    },
+    {
+     "fact": "2026年9月科特迪瓦当局向受灾商贩提供3250万非洲法郎财政援助",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au mois de septembre, les autorités ivoiriennes ont apporté une aide financière de 32,5 millions de francs CFA aux commerçants sinistrés"
+    }
+   ],
+   "uncertainties": [
+    "火灾具体起因尚未完全确认，报道提及人为疏忽及塑料、电池等物品助燃",
+    "新市场建筑重建时间表尚未确定",
+    "目前仅单一来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_f975ea0f4ecce4eb",
+ "disease_event_id": null,
+ "country_code": "GH"
+}
