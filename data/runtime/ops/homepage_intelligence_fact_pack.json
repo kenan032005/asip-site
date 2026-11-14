@@ -1,17 +1,17 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-11-15T00:30:54+08:00",
+ "generated_at": "2026-11-15T01:32:23+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 65,
-  "signals_7d": 385,
-  "verified_events_24h": 66,
-  "verified_events_7d": 396,
+  "signals_24h": 56,
+  "signals_7d": 384,
+  "verified_events_24h": 57,
+  "verified_events_7d": 395,
   "multi_source_verified_events_7d": 1,
-  "countries_with_activity_24h": 11,
+  "countries_with_activity_24h": 10,
   "total_countries_monitored": 22
  },
  "countries_24h": [
@@ -22,7 +22,6 @@
   "喀麦隆",
   "埃塞俄比亚",
   "尼日利亚",
-  "布基纳法索",
   "莫桑比克",
   "贝宁",
   "马里"
@@ -62,7 +61,7 @@
   },
   {
    "value": "乍得",
-   "count": 42
+   "count": 41
   },
   {
    "value": "莫桑比克",
@@ -104,18 +103,10 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 44
+   "count": 40
   },
   {
    "value": "严重犯罪",
-   "count": 4
-  },
-  {
-   "value": "恐怖袭击",
-   "count": 4
-  },
-  {
-   "value": "公共卫生",
    "count": 3
   },
   {
@@ -123,8 +114,12 @@
    "count": 3
   },
   {
-   "value": "民众骚乱",
+   "value": "恐怖袭击",
    "count": 3
+  },
+  {
+   "value": "公共卫生",
+   "count": 2
   },
   {
    "value": "election_security",
@@ -141,12 +136,16 @@
   {
    "value": "军事行动",
    "count": 1
+  },
+  {
+   "value": "民众骚乱",
+   "count": 1
   }
  ],
  "source_tier_distribution_7d": [
   {
    "value": "C",
-   "count": 670
+   "count": 668
   },
   {
    "value": "A",
@@ -686,10 +685,16 @@
   }
  ],
  "existing_assessment": {
-  "status": "deterministic",
-  "based_on": "过去24小时/7日公开信息（确定性汇总）"
+  "status": "ai",
+  "overall_assessment": "已核实事件层面，尼日利亚占主导：三角洲州NDC集会发生暴力，一人死亡、五人受伤，另有报道称一名协调员被刺伤；奥孙州因地方政府资金被扣留而罢工；奥贡、阿南布拉等地交通事故致死；卡诺、奥贡发生绑架与警方解救行动；EFCC称Adeboye被要求退还巨额非法捐款。乍得方面，Ennedi Ouest与Salamat出现安全整治与族群紧张；莫桑比克德尔加杜角十日内19人被杀；中非共和国政府宣布11月13日集会非法，并警示苏丹战事外溢；几内亚锡吉里取缔非法采金后逾1200人被拘。情报信号均为单源、尚待核实：尼日利亚2027选举相关表态与ADC对NBA的指控、乍得改革党大会、南苏丹阿科博地雷幸存者求助、贝宁媒体转述肯尼亚与塞内加尔伤亡事件。整体风险方向为恶化，尼日利亚选举周期暴力与治安压力是核心变量。",
+  "risk_direction": "worsening",
+  "confidence": "medium",
+  "generated_time": "2026-11-15T01:31:50+08:00",
+  "based_on": "过去24小时/7日公开信息",
+  "model": "",
+  "date": "20261115"
  },
- "fact_count": 781,
+ "fact_count": 779,
  "facts": {
   "news:90bad4bbd72adf72": {
    "fact_id": "news:90bad4bbd72adf72",
@@ -6451,21 +6456,6 @@
    "importance": "low",
    "why_it_matters": ""
   },
-  "news:9cd9a0febcfb2bac": {
-   "fact_id": "news:9cd9a0febcfb2bac",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "Tchad : le président sanctionne des responsables militaires et administratifs dans l'Ennedi Ouest",
-   "category": "armed_conflict",
-   "source": "Alwihda Info",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-11-08 00:54",
-   "importance": "low",
-   "why_it_matters": ""
-  },
   "EVT_c76b71d296a3bc9a": {
    "fact_id": "EVT_c76b71d296a3bc9a",
    "level": "verified_event",
@@ -6553,21 +6543,6 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-11-07 18:35",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_03d1f19294eb9de3": {
-   "fact_id": "EVT_03d1f19294eb9de3",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "Tchad : le président sanctionne des responsables militaires et administratifs dans l'Ennedi Ouest",
-   "category": "armed_conflict",
-   "source": "Alwihda Info",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-11-07 16:54",
    "importance": "high",
    "severity": "medium"
   },

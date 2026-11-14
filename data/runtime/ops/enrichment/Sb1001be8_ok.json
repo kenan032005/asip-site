@@ -1,0 +1,115 @@
+{
+ "label": "Sb1001be8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3358d09d48d1eba4f3a67d0cfdfef6e5014bfc02ef85919be9879aec3177bd48",
+ "tokens": {
+  "input_tokens": 2016,
+  "output_tokens": 498,
+  "total_tokens": 2514
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "拉各斯-伊巴丹高速公路发生车祸，13人受伤",
+   "summary_zh": "尼日利亚奥贡州拉各斯-伊巴丹高速公路上，一辆马自达巴士失控撞上混凝土护栏，造成13人受伤。事故发生在周五中午12时30分左右，地点位于雷莫北地方政府辖区高速公路拉各斯方向路段。奥贡州交通合规与执法局发言人巴巴通德在事故报告中披露了这一情况。此前，诺莱坞演员昆勒·阿福德曾就应急机构的响应提出关切。",
+   "event_type": "transport_disruption",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "奥贡州",
+    "city": null,
+    "site": "拉各斯-伊巴丹高速公路雷莫北地方政府辖区路段",
+    "raw_text": "Lagos-Ibadan Expressway in Ogun State, Remo North Local Government Area"
+   },
+   "key_facts": [
+    {
+     "fact": "一辆马自达巴士失控撞上混凝土护栏，造成13人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Thirteen people were injured on Friday when a Mazda bus lost control and crashed into a concrete barrier on the Lagos-Ibadan Expressway in Ogun State."
+    },
+    {
+     "fact": "事故发生在周五中午12时30分左右，地点位于雷莫北地方政府辖区高速公路拉各斯方向路段",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The accident occurred around 12:30 pm along the inward Lagos section of the expressway in Remo North Local Government Area."
+    },
+    {
+     "fact": "奥贡州交通合规与执法局发言人巴巴通德在事故报告中披露此事",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The spokesperson for the Ogun State Traffic Compliance and Enforcement Agency, Akinbiyi Babatunde, disclosed this in an accident report issued on Friday."
+    },
+    {
+     "fact": "诺莱坞演员昆勒·阿福德曾就应急机构响应提出关切",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The accident had earlier attracted attention after Nollywood actor Kunle Afod raised concerns over the response of emergency agencies to the accident"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Punch）报道，尚缺乏交叉验证",
+    "伤者具体伤情及后续情况尚未确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "拉各斯-伊巴丹高速公路发生车祸，13人受伤",
+   "summary_zh": "尼日利亚奥贡州拉各斯-伊巴丹高速公路上，一辆马自达巴士失控撞上混凝土护栏，造成13人受伤。事故发生在周五中午12时30分左右，地点位于雷莫北地方政府辖区高速公路拉各斯方向路段。奥贡州交通合规与执法局发言人巴巴通德在事故报告中披露了这一情况。此前，诺莱坞演员昆勒·阿福德曾就应急机构的响应提出关切。",
+   "event_type": "transport_disruption",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "奥贡州",
+    "city": null,
+    "site": "拉各斯-伊巴丹高速公路雷莫北地方政府辖区路段",
+    "raw_text": "Lagos-Ibadan Expressway in Ogun State, Remo North Local Government Area"
+   },
+   "key_facts": [
+    {
+     "fact": "一辆马自达巴士失控撞上混凝土护栏，造成13人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Thirteen people were injured on Friday when a Mazda bus lost control and crashed into a concrete barrier on the Lagos-Ibadan Expressway in Ogun State."
+    },
+    {
+     "fact": "事故发生在周五中午12时30分左右，地点位于雷莫北地方政府辖区高速公路拉各斯方向路段",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The accident occurred around 12:30 pm along the inward Lagos section of the expressway in Remo North Local Government Area."
+    },
+    {
+     "fact": "奥贡州交通合规与执法局发言人巴巴通德在事故报告中披露此事",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The spokesperson for the Ogun State Traffic Compliance and Enforcement Agency, Akinbiyi Babatunde, disclosed this in an accident report issued on Friday."
+    },
+    {
+     "fact": "诺莱坞演员昆勒·阿福德曾就应急机构响应提出关切",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The accident had earlier attracted attention after Nollywood actor Kunle Afod raised concerns over the response of emergency agencies to the accident"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Punch）报道，尚缺乏交叉验证",
+    "伤者具体伤情及后续情况尚未确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_0492fbaab1001be8",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

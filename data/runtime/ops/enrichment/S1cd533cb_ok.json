@@ -1,0 +1,105 @@
+{
+ "label": "S1cd533cb",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5da2b81089862540fec2af39964d6912d98e678bb99e7db1f071bccfe21ebe04",
+ "tokens": {
+  "input_tokens": 2088,
+  "output_tokens": 422,
+  "total_tokens": 2510
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "NDC候选人承诺提出法案，禁止将NYSC成员派往不安全地区",
+   "summary_zh": "尼日利亚民主大会党（NDC）奥雷多联邦选区众议员候选人Efosa Omo-Osagie承诺，将提出法案禁止把国家青年服务团（NYSC）成员派往受恐怖主义和匪盗威胁的州和社区。他还表示，该法案将惩罚在已有安全警示的情况下仍将成员派往不安全地区的官员。该承诺是在其于埃多州和阿布贾公布15点立法议程时作出的。",
+   "event_type": "terrorism",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Edo State",
+    "city": null,
+    "site": null,
+    "raw_text": "Edo State and Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "NDC候选人Efosa Omo-Osagie承诺提出法案，禁止将NYSC成员派往受恐怖主义和匪盗威胁的地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "has promised to sponsor a bill prohibiting the deployment of National Youth Service Corps members to states and communities threatened by terrorism and banditry"
+    },
+    {
+     "fact": "该法案拟惩罚在已有安全警示情况下仍将成员派往不安全地区的官员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the proposed legislation would also penalise officials who deploy corps members to areas affected by insecurity despite existing security advisories"
+    },
+    {
+     "fact": "该承诺是在埃多州和阿布贾与NDC利益相关方磋商、公布15点立法议程时作出的",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He made the pledge while unveiling his 15-point legislative agenda during consultation meetings with NDC stakeholders ... in Edo State and Abuja"
+    }
+   ],
+   "uncertainties": [
+    "该法案仅为候选人的承诺，尚未提出或通过",
+    "目前仅有一个来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "NDC候选人承诺提出法案，禁止将NYSC成员派往不安全地区",
+   "summary_zh": "尼日利亚民主大会党（NDC）奥雷多联邦选区众议员候选人Efosa Omo-Osagie承诺，将提出法案禁止把国家青年服务团（NYSC）成员派往受恐怖主义和匪盗威胁的州和社区。他还表示，该法案将惩罚在已有安全警示的情况下仍将成员派往不安全地区的官员。该承诺是在其于埃多州和阿布贾公布15点立法议程时作出的。",
+   "event_type": "terrorism",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Edo State",
+    "city": null,
+    "site": null,
+    "raw_text": "Edo State and Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "NDC候选人Efosa Omo-Osagie承诺提出法案，禁止将NYSC成员派往受恐怖主义和匪盗威胁的地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "has promised to sponsor a bill prohibiting the deployment of National Youth Service Corps members to states and communities threatened by terrorism and banditry"
+    },
+    {
+     "fact": "该法案拟惩罚在已有安全警示情况下仍将成员派往不安全地区的官员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the proposed legislation would also penalise officials who deploy corps members to areas affected by insecurity despite existing security advisories"
+    },
+    {
+     "fact": "该承诺是在埃多州和阿布贾与NDC利益相关方磋商、公布15点立法议程时作出的",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He made the pledge while unveiling his 15-point legislative agenda during consultation meetings with NDC stakeholders ... in Edo State and Abuja"
+    }
+   ],
+   "uncertainties": [
+    "该法案仅为候选人的承诺，尚未提出或通过",
+    "目前仅有一个来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_010d08a21cd533cb",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
