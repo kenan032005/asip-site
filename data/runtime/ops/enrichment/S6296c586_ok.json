@@ -1,0 +1,138 @@
+{
+ "label": "S6296c586",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "61e097071525b54882f9bb7cd3fc317b44cb75eb357aab3b33b043963818a1c2",
+ "tokens": {
+  "input_tokens": 2874,
+  "output_tokens": 564,
+  "total_tokens": 3438
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"难民希望返回的人数（约6.1万）系依据联合国难民署调查估算，尚未获独立确认\", \"首批遣返车队的具体出发时间尚未确定，仅称预计年底前\", \"目前仅有一个来源（RFI）报道，尚缺乏交叉验证\"]",
+    "after": "[\"难民希望返回的人数（约6.1万）系依据联合国难民署调查估算，尚未获独立确认\", \"首批遣返车队的具体出发时间尚未确定，仅称预计年底前\", \"目前仅有一个来源（RFI）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得：恩贾梅纳、班吉与联合国难民署签署中非共和国难民遣返协议",
+   "summary_zh": "据联合国难民署称，目前居住在乍得的14.7万名中非共和国难民中约有6.1万人希望返回家园；11月4日（周三），乍得、中非共和国与联合国难民署就自愿遣返的具体安排达成协议。遣返行动将分阶段进行，初期仅涉及乍得的一个省。首批遣返车队预计在年底前出发。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "恩贾梅纳",
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "Ndjamena, capitale tchadienne"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得、中非共和国与联合国难民署签署中非共和国难民自愿遣返的具体安排协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ndjamena, Bangui et le Haut Commissariat des Nations unies pour les réfugiés (HCR) ont signé les modalités pratiques de leur rapatriement volontaire, mercredi 4 novembre, dans la capitale tchadienne"
+    },
+    {
+     "fact": "据联合国难民署称，目前约有14.7万名中非共和国难民居住在乍得",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "près de 147 000 réfugiés centrafricains vivent actuellement au Tchad"
+    },
+    {
+     "fact": "据联合国难民署调查，约6.1万名难民希望返回家园",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "près de la moitié souhaiteraient désormais rentrer chez eux, selon les enquêtes du HCR qui estime leur nombre à 61 000 personnes environ"
+    },
+    {
+     "fact": "遣返行动初期仅涉及乍得的洛贡东省",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'opération ne concernera que le Logone oriental dans un premier temps"
+    },
+    {
+     "fact": "首批遣返车队预计在年底前出发",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les premiers convois de rapatriement sont attendus d'ici à la fin de l’année"
+    }
+   ],
+   "uncertainties": [
+    "难民希望返回的人数（约6.1万）系依据联合国难民署调查估算，尚未获独立确认",
+    "首批遣返车队的具体出发时间尚未确定，仅称预计年底前",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得：恩贾梅纳、班吉与联合国难民署签署中非共和国难民遣返协议",
+   "summary_zh": "据联合国难民署称，目前居住在乍得的14.7万名中非共和国难民中约有6.1万人希望返回家园；11月4日（周三），乍得、中非共和国与联合国难民署就自愿遣返的具体安排达成协议。遣返行动将分阶段进行，初期仅涉及乍得的一个省。首批遣返车队预计在年底前出发。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "恩贾梅纳",
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "Ndjamena, capitale tchadienne"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得、中非共和国与联合国难民署签署中非共和国难民自愿遣返的具体安排协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ndjamena, Bangui et le Haut Commissariat des Nations unies pour les réfugiés (HCR) ont signé les modalités pratiques de leur rapatriement volontaire, mercredi 4 novembre, dans la capitale tchadienne"
+    },
+    {
+     "fact": "据联合国难民署称，目前约有14.7万名中非共和国难民居住在乍得",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "près de 147 000 réfugiés centrafricains vivent actuellement au Tchad"
+    },
+    {
+     "fact": "据联合国难民署调查，约6.1万名难民希望返回家园",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "près de la moitié souhaiteraient désormais rentrer chez eux, selon les enquêtes du HCR qui estime leur nombre à 61 000 personnes environ"
+    },
+    {
+     "fact": "遣返行动初期仅涉及乍得的洛贡东省",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'opération ne concernera que le Logone oriental dans un premier temps"
+    },
+    {
+     "fact": "首批遣返车队预计在年底前出发",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les premiers convois de rapatriement sont attendus d'ici à la fin de l’année"
+    }
+   ],
+   "uncertainties": [
+    "难民希望返回的人数（约6.1万）系依据联合国难民署调查估算，尚未获独立确认",
+    "首批遣返车队的具体出发时间尚未确定，仅称预计年底前",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_86be65536296c586",
+ "disease_event_id": null,
+ "country_code": "CF"
+}
