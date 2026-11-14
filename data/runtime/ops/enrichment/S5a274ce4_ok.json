@@ -1,0 +1,118 @@
+{
+ "label": "S5a274ce4",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5e97161f7b6b69200a1e04e110409decb8001045961433404012194db786e028",
+ "tokens": {
+  "input_tokens": 2147,
+  "output_tokens": 374,
+  "total_tokens": 2521
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"火灾原因尚未确认\", \"人员伤亡与财产损失细节尚未确认\", \"目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\"]",
+    "after": "[\"火灾原因尚未确认\", \"人员伤亡与财产损失细节尚未确认\", \"目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "阿克拉阿博格巴一餐厅遭火灾焚毁",
+   "summary_zh": "加纳阿克拉阿博格巴地区一家餐厅发生大火，被完全烧毁。火灾地点位于知名的“黄色集装箱”地标附近。消防人员于2026年11月6日星期五到场扑救。目前仅有单一来源报道，暂无人员伤亡信息。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "大阿克拉地区",
+    "city": "阿克拉",
+    "site": "阿博格巴“黄色集装箱”地标附近餐厅",
+    "raw_text": "Agbogba in Accra, near the popular Yellow Container landmark"
+   },
+   "key_facts": [
+    {
+     "fact": "阿克拉阿博格巴一家餐厅发生火灾并被完全烧毁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Firefighters on Friday, November 6, 2026, battled a fiercely spreading inferno that completely destroyed a restaurant near the popular Yellow Container landmark at Agbogba in Accra."
+    },
+    {
+     "fact": "火灾地点位于阿克拉阿博格巴的“黄色集装箱”地标附近",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Fire destroys Agbogba restaurant near Yellow Container"
+    },
+    {
+     "fact": "消防人员于2026年11月6日星期五到场扑救",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Firefighters on Friday, November 6, 2026, battled a fiercely spreading inferno"
+    }
+   ],
+   "uncertainties": [
+    "火灾原因尚未确认",
+    "人员伤亡与财产损失细节尚未确认",
+    "目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "阿克拉阿博格巴一餐厅遭火灾焚毁",
+   "summary_zh": "加纳阿克拉阿博格巴地区一家餐厅发生大火，被完全烧毁。火灾地点位于知名的“黄色集装箱”地标附近。消防人员于2026年11月6日星期五到场扑救。目前仅有单一来源报道，暂无人员伤亡信息。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": "大阿克拉地区",
+    "city": "阿克拉",
+    "site": "阿博格巴“黄色集装箱”地标附近餐厅",
+    "raw_text": "Agbogba in Accra, near the popular Yellow Container landmark"
+   },
+   "key_facts": [
+    {
+     "fact": "阿克拉阿博格巴一家餐厅发生火灾并被完全烧毁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Firefighters on Friday, November 6, 2026, battled a fiercely spreading inferno that completely destroyed a restaurant near the popular Yellow Container landmark at Agbogba in Accra."
+    },
+    {
+     "fact": "火灾地点位于阿克拉阿博格巴的“黄色集装箱”地标附近",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Fire destroys Agbogba restaurant near Yellow Container"
+    },
+    {
+     "fact": "消防人员于2026年11月6日星期五到场扑救",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Firefighters on Friday, November 6, 2026, battled a fiercely spreading inferno"
+    }
+   ],
+   "uncertainties": [
+    "火灾原因尚未确认",
+    "人员伤亡与财产损失细节尚未确认",
+    "目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_4b8dbf8f5a274ce4",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

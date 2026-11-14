@@ -1,0 +1,114 @@
+{
+ "label": "S8e1d2b6e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b7f9831525d3aefd51de4677f093cfc13a61c9895ce1c140ef8e1a4da650e1ce",
+ "tokens": {
+  "input_tokens": 2161,
+  "output_tokens": 253,
+  "total_tokens": 2414
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"目前仅有一个来源报道该消息，尚缺乏交叉验证\"]",
+    "after": "[\"目前仅有一个来源报道该消息，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅有一个来源报道该消息，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "after": "[\"目前仅有一个来源报道该消息，尚缺乏交叉验证\", \"相关情况尚未证实。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "苏尼亚尼教学医院呼吁建设员工宿舍以支持扩建",
+   "summary_zh": "苏尼亚尼教学医院首席执行官Cardinal Newton博士呼吁政府、私人投资者和慈善人士支持建设员工宿舍，以满足该机构日益增长的需求。该消息目前仅来自单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "苏尼亚尼",
+    "site": "苏尼亚尼教学医院",
+    "raw_text": "Sunyani Teaching Hospital"
+   },
+   "key_facts": [
+    {
+     "fact": "苏尼亚尼教学医院首席执行官呼吁支持建设员工宿舍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Chief Executive Officer of the Sunyani Teaching Hospital, Dr Cardinal Newton, has called on the government, private investors, and philanthropists to support the construction of staff accommodation"
+    },
+    {
+     "fact": "建设宿舍旨在满足该机构日益增长的需求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "to meet the facility’s growing demand"
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源报道该消息，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "苏尼亚尼教学医院呼吁建设员工宿舍以支持扩建",
+   "summary_zh": "苏尼亚尼教学医院首席执行官Cardinal Newton博士呼吁政府、私人投资者和慈善人士支持建设员工宿舍，以满足该机构日益增长的需求。该消息目前仅来自单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "苏尼亚尼",
+    "site": "苏尼亚尼教学医院",
+    "raw_text": "Sunyani Teaching Hospital"
+   },
+   "key_facts": [
+    {
+     "fact": "苏尼亚尼教学医院首席执行官呼吁支持建设员工宿舍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Chief Executive Officer of the Sunyani Teaching Hospital, Dr Cardinal Newton, has called on the government, private investors, and philanthropists to support the construction of staff accommodation"
+    },
+    {
+     "fact": "建设宿舍旨在满足该机构日益增长的需求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "to meet the facility’s growing demand"
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源报道该消息，尚缺乏交叉验证",
+    "相关情况尚未证实。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_5c20ff938e1d2b6e",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

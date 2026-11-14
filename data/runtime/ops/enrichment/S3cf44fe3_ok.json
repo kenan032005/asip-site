@@ -1,0 +1,116 @@
+{
+ "label": "S3cf44fe3",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1126a7e0d81cefb470635bd6403a74fce465fe9a6cd2b8c6614607e5b276f893",
+ "tokens": {
+  "input_tokens": 2203,
+  "output_tokens": 304,
+  "total_tokens": 2507
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"活动具体举办地点与时间未在文中明确\"]",
+    "after": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"活动具体举办地点与时间未在文中明确\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"活动具体举办地点与时间未在文中明确\", \"相关情况尚未证实。\"]",
+    "after": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"活动具体举办地点与时间未在文中明确\", \"相关情况尚未证实。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "Zenith中小企业赋能实验室：呼吁中小企业识别经营风险并采取缓解策略以确保可持续性",
+   "summary_zh": "Zenith中小企业赋能实验室活动上，专家呼吁中小企业识别经营风险并采取缓解策略以确保可持续性。专家表示，企业韧性不仅在于应对危机，还需要以审慎且具战略性的方式识别潜在脆弱点、保护关键运营并落实应急措施。该报道来自单一来源MyJoyOnline。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "Zenith中小企业赋能实验室呼吁中小企业识别经营风险并采取缓解策略",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Zenith SME Business Empowerment Lab: SMEs urged to identify business risks and adopt mitigation strategies to ensure sustainability"
+    },
+    {
+     "fact": "专家称企业韧性不止于应对危机，需战略性识别潜在脆弱点并落实应急措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "business resilience goes beyond responding to crises. It requires a deliberate and strategic approach to identifying potential vulnerabilities, safeguarding critical operations and implementing contingency measures"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "活动具体举办地点与时间未在文中明确"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "Zenith中小企业赋能实验室：呼吁中小企业识别经营风险并采取缓解策略以确保可持续性",
+   "summary_zh": "Zenith中小企业赋能实验室活动上，专家呼吁中小企业识别经营风险并采取缓解策略以确保可持续性。专家表示，企业韧性不仅在于应对危机，还需要以审慎且具战略性的方式识别潜在脆弱点、保护关键运营并落实应急措施。该报道来自单一来源MyJoyOnline。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "Zenith中小企业赋能实验室呼吁中小企业识别经营风险并采取缓解策略",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Zenith SME Business Empowerment Lab: SMEs urged to identify business risks and adopt mitigation strategies to ensure sustainability"
+    },
+    {
+     "fact": "专家称企业韧性不止于应对危机，需战略性识别潜在脆弱点并落实应急措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "business resilience goes beyond responding to crises. It requires a deliberate and strategic approach to identifying potential vulnerabilities, safeguarding critical operations and implementing contingency measures"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "活动具体举办地点与时间未在文中明确",
+    "相关情况尚未证实。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_ea5888f73cf44fe3",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

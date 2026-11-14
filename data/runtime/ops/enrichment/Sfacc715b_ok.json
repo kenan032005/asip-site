@@ -1,0 +1,124 @@
+{
+ "label": "Sfacc715b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "13aa538934673dcae6fda7d251214480a2d2bc8deeeeba9bceb5f1f74e7a5fe6",
+ "tokens": {
+  "input_tokens": 2174,
+  "output_tokens": 325,
+  "total_tokens": 2499
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\"]",
+    "after": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "after": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"相关情况尚未证实。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "COP31：非洲谈判代表力争将适应资金增至三倍并补充绿色气候基金",
+   "summary_zh": "联合国气候变化大会（COP31）在土耳其安塔利亚开幕，非洲气候变化谈判代表小组（AGN）将气候适应资金列为议程首要事项。该小组的目标是将适应资金增至三倍，并推动绿色气候基金补充资金。相关报道为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "非洲气候变化谈判代表小组将气候适应资金列为COP31议程首要事项",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The African Group of Negotiators on Climate Change (AGN) is placing climate adaptation finance at the forefront of its agenda"
+    },
+    {
+     "fact": "COP31在土耳其安塔利亚开幕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "as the United Nations Climate Change Conference (COP31) opens in Antalya, Turkey, on November 9"
+    },
+    {
+     "fact": "非洲谈判代表的目标是将适应资金增至三倍并补充绿色气候基金",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "COP31: African negotiators target tripled adaptation finance and Green Climate Fund replenishment"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "COP31：非洲谈判代表力争将适应资金增至三倍并补充绿色气候基金",
+   "summary_zh": "联合国气候变化大会（COP31）在土耳其安塔利亚开幕，非洲气候变化谈判代表小组（AGN）将气候适应资金列为议程首要事项。该小组的目标是将适应资金增至三倍，并推动绿色气候基金补充资金。相关报道为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "非洲气候变化谈判代表小组将气候适应资金列为COP31议程首要事项",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The African Group of Negotiators on Climate Change (AGN) is placing climate adaptation finance at the forefront of its agenda"
+    },
+    {
+     "fact": "COP31在土耳其安塔利亚开幕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "as the United Nations Climate Change Conference (COP31) opens in Antalya, Turkey, on November 9"
+    },
+    {
+     "fact": "非洲谈判代表的目标是将适应资金增至三倍并补充绿色气候基金",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "COP31: African negotiators target tripled adaptation finance and Green Climate Fund replenishment"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "相关情况尚未证实。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_b898ce1ffacc715b",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
