@@ -1,0 +1,158 @@
+{
+ "label": "S32d18fc5",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "43ae8f9aeb72124a2bff9c972c55b2b087e2fa1763f5df51debfeaf3c1638c9d",
+ "tokens": {
+  "input_tokens": 2712,
+  "output_tokens": 614,
+  "total_tokens": 3326
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"官方死亡统计数据受到参议员质疑，尚未获独立核实\", \"确诊病例数和死亡率尚未公布\", \"目前仅单一来源（Alwihda Info）报道，缺乏交叉验证\"]",
+    "after": "[\"官方死亡统计数据受到参议员质疑，尚未获独立核实\", \"确诊病例数和死亡率尚未公布\", \"目前仅单一来源（Alwihda Info）报道，缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得登革热疫情：参议员扎拉·迪洛在参议院提出质询",
+   "summary_zh": "乍得参议员扎拉·迪洛就登革热疫情防控在参议院质询卫生部，指出预防措施缺位、对外部援助的依赖以及医护人员待遇等问题。她质疑官方死亡统计，要求公布确诊病例数并说明死亡率。报道称登革热已在乍得东部流行近两年，法达和哈贾尔-拉米斯等地亦受影响。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "参议院",
+    "raw_text": "Tchad / Sénat"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得参议员扎拉·迪洛就登革热疫情防控质询卫生部",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la sénatrice Zara Dillo a adressé une série de questions au ministère de la Santé publique"
+    },
+    {
+     "fact": "她指出缺乏快速预防措施，如喷洒和交通工具消毒",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La sénatrice s'est d'abord interrogée sur l'absence de mesures préventives rapides, telles que les opérations de pulvérisation et de désinfection des transports"
+    },
+    {
+     "fact": "报道称登革热在乍得东部流行已近两年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "alors que la dengue sévit dans l'est du pays depuis près de deux ans"
+    },
+    {
+     "fact": "她质疑官方死亡统计，要求公布确诊病例数",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Exprimant des réserves sur les statistiques officielles relatives aux décès"
+    },
+    {
+     "fact": "她指出法达和哈贾尔-拉米斯等地亦受疫情影响",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des localités réputées pour leur cadre sain, à l'instar de Fada ou du Hajar-Lamis, étaient également touchées"
+    },
+    {
+     "fact": "她提到合作伙伴提供了12000份检测试剂",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'octroi de 12 000 tests par des partenaires techniques et financiers"
+    },
+    {
+     "fact": "她要求说明2026年超过2230亿中非法郎预算中用于该卫生紧急状况的实际份额",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la part réelle du budget 2026 doté de plus de 223 milliards de francs CFA consacrée à cette urgence sanitaire"
+    }
+   ],
+   "uncertainties": [
+    "官方死亡统计数据受到参议员质疑，尚未获独立核实",
+    "确诊病例数和死亡率尚未公布",
+    "目前仅单一来源（Alwihda Info）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得登革热疫情：参议员扎拉·迪洛在参议院提出质询",
+   "summary_zh": "乍得参议员扎拉·迪洛就登革热疫情防控在参议院质询卫生部，指出预防措施缺位、对外部援助的依赖以及医护人员待遇等问题。她质疑官方死亡统计，要求公布确诊病例数并说明死亡率。报道称登革热已在乍得东部流行近两年，法达和哈贾尔-拉米斯等地亦受影响。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "参议院",
+    "raw_text": "Tchad / Sénat"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得参议员扎拉·迪洛就登革热疫情防控质询卫生部",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la sénatrice Zara Dillo a adressé une série de questions au ministère de la Santé publique"
+    },
+    {
+     "fact": "她指出缺乏快速预防措施，如喷洒和交通工具消毒",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La sénatrice s'est d'abord interrogée sur l'absence de mesures préventives rapides, telles que les opérations de pulvérisation et de désinfection des transports"
+    },
+    {
+     "fact": "报道称登革热在乍得东部流行已近两年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "alors que la dengue sévit dans l'est du pays depuis près de deux ans"
+    },
+    {
+     "fact": "她质疑官方死亡统计，要求公布确诊病例数",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Exprimant des réserves sur les statistiques officielles relatives aux décès"
+    },
+    {
+     "fact": "她指出法达和哈贾尔-拉米斯等地亦受疫情影响",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des localités réputées pour leur cadre sain, à l'instar de Fada ou du Hajar-Lamis, étaient également touchées"
+    },
+    {
+     "fact": "她提到合作伙伴提供了12000份检测试剂",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'octroi de 12 000 tests par des partenaires techniques et financiers"
+    },
+    {
+     "fact": "她要求说明2026年超过2230亿中非法郎预算中用于该卫生紧急状况的实际份额",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la part réelle du budget 2026 doté de plus de 223 milliards de francs CFA consacrée à cette urgence sanitaire"
+    }
+   ],
+   "uncertainties": [
+    "官方死亡统计数据受到参议员质疑，尚未获独立核实",
+    "确诊病例数和死亡率尚未公布",
+    "目前仅单一来源（Alwihda Info）报道，缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_63f7e0a732d18fc5",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

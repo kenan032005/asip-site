@@ -1,0 +1,117 @@
+{
+ "label": "S75140629",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "7111905665f6b7ee248d3e38fd8c46042099cf1e47728bc833d667ba1cc23427",
+ "tokens": {
+  "input_tokens": 2172,
+  "output_tokens": 521,
+  "total_tokens": 2693
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "马拉米与凯比州政府就竞选活动遇袭事件相互指责",
+   "summary_zh": "尼日利亚凯比州非洲民主大会党州长候选人阿布巴卡尔·马拉米与该州政府就近期总统竞选启动活动期间发生的袭击、恐吓和财产破坏指控相互指责。马拉米指控州政府纵容政治暴徒袭击ADC竞选车队并破坏媒体设备，州政府则否认参与，称反对党集会未受干扰。马拉米还呼吁对位于比尔宁凯比的马拉米压力集团总部遭拆除事件进行公正调查。相关指控尚未得到独立证实，目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Kebbi",
+    "city": "Birnin Kebbi",
+    "site": null,
+    "raw_text": "Birnin Kebbi, Kebbi State"
+   },
+   "key_facts": [
+    {
+     "fact": "凯比州非洲民主大会党州长候选人马拉米与州政府就竞选活动遇袭指控相互指责",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Kebbi State governorship candidate of the African Democratic Congress, Abubakar Malami, and the state government have traded words over alleged attacks, intimidation and destruction of property during the party’s recent presidential campaign flag-off in Birnin Kebbi."
+    },
+    {
+     "fact": "马拉米指控州政府纵容政治暴徒袭击ADC竞选车队并破坏媒体设备",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Malami accused the state government of allowing political thugs to attack members of the ADC campaign convoy and destroy media equipment."
+    },
+    {
+     "fact": "州政府否认参与，称反对党集会未受干扰",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "But the government denied any involvement, insisting that the opposition party held its rally and left without interference."
+    },
+    {
+     "fact": "马拉米呼吁对马拉米压力集团总部遭拆除事件进行公正调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Malami also called for an impartial investigation into the demolition of the Malami Pressure Group headquarters along Sani Abacha Bypass, Birnin Kebbi, describing the incident as a threat to democratic freedoms."
+    }
+   ],
+   "uncertainties": [
+    "袭击、恐吓和财产破坏指控尚未得到独立证实",
+    "州政府是否参与存在争议，政府予以否认",
+    "目前仅为单一来源报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "马拉米与凯比州政府就竞选活动遇袭事件相互指责",
+   "summary_zh": "尼日利亚凯比州非洲民主大会党州长候选人阿布巴卡尔·马拉米与该州政府就近期总统竞选启动活动期间发生的袭击、恐吓和财产破坏指控相互指责。马拉米指控州政府纵容政治暴徒袭击ADC竞选车队并破坏媒体设备，州政府则否认参与，称反对党集会未受干扰。马拉米还呼吁对位于比尔宁凯比的马拉米压力集团总部遭拆除事件进行公正调查。相关指控尚未得到独立证实，目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Kebbi",
+    "city": "Birnin Kebbi",
+    "site": null,
+    "raw_text": "Birnin Kebbi, Kebbi State"
+   },
+   "key_facts": [
+    {
+     "fact": "凯比州非洲民主大会党州长候选人马拉米与州政府就竞选活动遇袭指控相互指责",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Kebbi State governorship candidate of the African Democratic Congress, Abubakar Malami, and the state government have traded words over alleged attacks, intimidation and destruction of property during the party’s recent presidential campaign flag-off in Birnin Kebbi."
+    },
+    {
+     "fact": "马拉米指控州政府纵容政治暴徒袭击ADC竞选车队并破坏媒体设备",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Malami accused the state government of allowing political thugs to attack members of the ADC campaign convoy and destroy media equipment."
+    },
+    {
+     "fact": "州政府否认参与，称反对党集会未受干扰",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "But the government denied any involvement, insisting that the opposition party held its rally and left without interference."
+    },
+    {
+     "fact": "马拉米呼吁对马拉米压力集团总部遭拆除事件进行公正调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Malami also called for an impartial investigation into the demolition of the Malami Pressure Group headquarters along Sani Abacha Bypass, Birnin Kebbi, describing the incident as a threat to democratic freedoms."
+    }
+   ],
+   "uncertainties": [
+    "袭击、恐吓和财产破坏指控尚未得到独立证实",
+    "州政府是否参与存在争议，政府予以否认",
+    "目前仅为单一来源报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_963d692675140629",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

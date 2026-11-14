@@ -1,0 +1,125 @@
+{
+ "label": "S3e4a1921",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6a62f6d099af8a7bdfed0e03433db9a32c9602ec8623e0c63473a87f619dd08e",
+ "tokens": {
+  "input_tokens": 2455,
+  "output_tokens": 566,
+  "total_tokens": 3021
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得：CETEC与COFPP分包商工人在Ronier、Baobab和Daniela油田发起罢工",
+   "summary_zh": "2026年11月6日，超过150名分包商CETEC和COFPP的工人在乍得Ronier、Baobab和Daniela油田开始罢工。工人要求被纳入石油行业集体协议，该协议依据2024年11月25日联合令具有强制效力。罢工者主要要求将定期合同转为无固定期限合同、全面执行集体协议，并规范社保申报与工资支付方式。他们同时抗议工作不稳定、缺乏医疗保障及与CNPCIC直接雇员之间的薪资歧视。",
+   "event_type": "civil_unrest",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "Ronier、Baobab和Daniela油田",
+    "raw_text": "les sites pétroliers de Ronier, Baobab et Daniela"
+   },
+   "key_facts": [
+    {
+     "fact": "超过150名CETEC和COFPP分包商工人于2026年11月6日开始罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce vendredi 6 novembre 2026 plus de 150 travailleurs des sous-traitants, CETEC et COFPP ont entamé un mouvement de grève"
+    },
+    {
+     "fact": "工人要求被纳入石油行业集体协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils revendiquent leur prise en compte dans la Convention Collective-Type de Branche du secteur pétrolier"
+    },
+    {
+     "fact": "罢工地点为Ronier、Baobab和Daniela油田",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "sur les sites pétroliers de Ronier, Baobab et Daniela"
+    },
+    {
+     "fact": "工人要求将定期合同转为无固定期限合同并全面执行集体协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la requalification des contrats de travail (Cdd à renouvellement tacite abusif) en Cdi auprès de la Cnpcic ; application intégrale de la Convention Collective-Type de Branche"
+    },
+    {
+     "fact": "工人称未在CNPS登记且缺乏医疗保障",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nous ne sommes pas déclarés au niveau de la Cnps, nous n’avons pas de couverture sanitaire"
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（Le Pays Tchad）报道，尚缺乏交叉验证",
+    "罢工参与人数及持续时间未获独立确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得：CETEC与COFPP分包商工人在Ronier、Baobab和Daniela油田发起罢工",
+   "summary_zh": "2026年11月6日，超过150名分包商CETEC和COFPP的工人在乍得Ronier、Baobab和Daniela油田开始罢工。工人要求被纳入石油行业集体协议，该协议依据2024年11月25日联合令具有强制效力。罢工者主要要求将定期合同转为无固定期限合同、全面执行集体协议，并规范社保申报与工资支付方式。他们同时抗议工作不稳定、缺乏医疗保障及与CNPCIC直接雇员之间的薪资歧视。",
+   "event_type": "civil_unrest",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "Ronier、Baobab和Daniela油田",
+    "raw_text": "les sites pétroliers de Ronier, Baobab et Daniela"
+   },
+   "key_facts": [
+    {
+     "fact": "超过150名CETEC和COFPP分包商工人于2026年11月6日开始罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce vendredi 6 novembre 2026 plus de 150 travailleurs des sous-traitants, CETEC et COFPP ont entamé un mouvement de grève"
+    },
+    {
+     "fact": "工人要求被纳入石油行业集体协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils revendiquent leur prise en compte dans la Convention Collective-Type de Branche du secteur pétrolier"
+    },
+    {
+     "fact": "罢工地点为Ronier、Baobab和Daniela油田",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "sur les sites pétroliers de Ronier, Baobab et Daniela"
+    },
+    {
+     "fact": "工人要求将定期合同转为无固定期限合同并全面执行集体协议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la requalification des contrats de travail (Cdd à renouvellement tacite abusif) en Cdi auprès de la Cnpcic ; application intégrale de la Convention Collective-Type de Branche"
+    },
+    {
+     "fact": "工人称未在CNPS登记且缺乏医疗保障",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Nous ne sommes pas déclarés au niveau de la Cnps, nous n’avons pas de couverture sanitaire"
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（Le Pays Tchad）报道，尚缺乏交叉验证",
+    "罢工参与人数及持续时间未获独立确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_12a653263e4a1921",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
