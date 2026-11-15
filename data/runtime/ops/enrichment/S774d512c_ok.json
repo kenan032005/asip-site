@@ -1,0 +1,126 @@
+{
+ "label": "S774d512c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "724f8a20814f57121f063f96364d1f9074643961864b8a42dcb29741b4818d5f",
+ "tokens": {
+  "input_tokens": 2083,
+  "output_tokens": 485,
+  "total_tokens": 2568
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"事件细节目前仅来自单一来源（Punch）报道，尚缺乏交叉验证\", \"警方关于枪支走火及冲突背景的说法尚未获得独立确认\"]",
+    "after": "[\"事件细节目前仅来自单一来源（Punch）报道，尚缺乏交叉验证\", \"警方关于枪支走火及冲突背景的说法尚未获得独立确认\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "拉各斯警察开枪致一名女孩死亡、另一人受伤",
+   "summary_zh": "尼日利亚拉各斯州警察局一名助理警司在阿杰贡勒（Ajegunle）执行任务时枪支走火，造成两名女孩一死一伤。警方称事发时警员正应对两个团伙因收取过路费而发生的暴力冲突，涉事警员已被拘留。该事件目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "拉各斯州",
+    "city": "拉各斯",
+    "site": "阿杰贡勒 Nosamu 地区",
+    "raw_text": "Nosamu area of Ajegunle, Lagos"
+   },
+   "key_facts": [
+    {
+     "fact": "拉各斯州警察局一名助理警司 Omotayo Olajide 在阿杰贡勒执行任务时枪支走火，致两名女孩一死一伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Lagos State Police Command has detained an Assistant Superintendent of Police, Omotayo Olajide, after his firearm discharged during an operation in Ajegunle, killing a girl and injuring another."
+    },
+    {
+     "fact": "涉事警员已被拘留",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Lagos State Police Command has detained an Assistant Superintendent of Police, Omotayo Olajide"
+    },
+    {
+     "fact": "事发时间为11月5日周四晚9时30分至10时之间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The incident occurred on Thursday, November 5, between 9.30 pm and 10 pm, in the Nosamu area of Ajegunle"
+    },
+    {
+     "fact": "警方称警员系在接到两个团伙暴力冲突报警后出警",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the personnel had been deployed after a distress call about a violent clash between two rival groups, the Nosamu Boys and the Alayabiagba Boys, over toll collection"
+    }
+   ],
+   "uncertainties": [
+    "事件细节目前仅来自单一来源（Punch）报道，尚缺乏交叉验证",
+    "警方关于枪支走火及冲突背景的说法尚未获得独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "拉各斯警察开枪致一名女孩死亡、另一人受伤",
+   "summary_zh": "尼日利亚拉各斯州警察局一名助理警司在阿杰贡勒（Ajegunle）执行任务时枪支走火，造成两名女孩一死一伤。警方称事发时警员正应对两个团伙因收取过路费而发生的暴力冲突，涉事警员已被拘留。该事件目前为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "拉各斯州",
+    "city": "拉各斯",
+    "site": "阿杰贡勒 Nosamu 地区",
+    "raw_text": "Nosamu area of Ajegunle, Lagos"
+   },
+   "key_facts": [
+    {
+     "fact": "拉各斯州警察局一名助理警司 Omotayo Olajide 在阿杰贡勒执行任务时枪支走火，致两名女孩一死一伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Lagos State Police Command has detained an Assistant Superintendent of Police, Omotayo Olajide, after his firearm discharged during an operation in Ajegunle, killing a girl and injuring another."
+    },
+    {
+     "fact": "涉事警员已被拘留",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Lagos State Police Command has detained an Assistant Superintendent of Police, Omotayo Olajide"
+    },
+    {
+     "fact": "事发时间为11月5日周四晚9时30分至10时之间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The incident occurred on Thursday, November 5, between 9.30 pm and 10 pm, in the Nosamu area of Ajegunle"
+    },
+    {
+     "fact": "警方称警员系在接到两个团伙暴力冲突报警后出警",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the personnel had been deployed after a distress call about a violent clash between two rival groups, the Nosamu Boys and the Alayabiagba Boys, over toll collection"
+    }
+   ],
+   "uncertainties": [
+    "事件细节目前仅来自单一来源（Punch）报道，尚缺乏交叉验证",
+    "警方关于枪支走火及冲突背景的说法尚未获得独立确认",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_bb58a5b8774d512c",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

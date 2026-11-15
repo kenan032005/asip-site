@@ -1,0 +1,129 @@
+{
+ "label": "S82e1647b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "96cdf104cd528336e60ce53a28a35d25257fca31fc4abe916490dfaea8625be6",
+ "tokens": {
+  "input_tokens": 3034,
+  "output_tokens": 601,
+  "total_tokens": 3635
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "马达马：撒哈拉的“门户”",
+   "summary_zh": "法国国际广播电台（RFI）评论文章称，尼日尔北部撒哈拉沙漠中的马达马（Madama）前法国军事基地虽无人居住，却因地处要冲而成为多方争夺对象。文章称阿尔及利亚有意进驻该地，俄罗斯、利比亚哈夫塔尔势力以及当地图布人部落也在此角力。文章还称尼日尔政府将同一地点向多方出租，但已无法控制局面。上述内容为单一来源的评论分析，相关说法尚未获得其他来源证实。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": null,
+    "site": "马达马（Madama）前法国军事基地",
+    "raw_text": "Madama, ancienne base française au nord du Niger"
+   },
+   "key_facts": [
+    {
+     "fact": "马达马是尼日尔北部一处前法国军事基地，位于撒哈拉沙漠中，距最近地点约400公里",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "C'est un fort perdu dans le Sahara, à 400 km de tout. ... Madama, ancienne base française au nord du Niger."
+    },
+    {
+     "fact": "文章称法国于2023年12月撤离该基地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La France est partie en décembre 2023, mais ses satellites passent toujours."
+    },
+    {
+     "fact": "文章称阿尔及利亚有意进驻马达马，并于2026年10月25日调整政策",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aujourd'hui, l'Algérie veut s'y installer. ... Le 25 octobre 2026, Alger a basculé. Une première depuis 1973."
+    },
+    {
+     "fact": "文章称俄罗斯在尼亚美部署约200名“非洲军团”人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la Russie : 200 hommes d'Africa Corps à Niamey qui vendent de la sécurité low-cost à Tiani"
+    },
+    {
+     "fact": "文章称尼日尔政府将马达马向多方出租，但已无法控制局势",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Niamey loue son désert au plus offrant : Tiani promet Madama à Alger le matin, et jure l'inverse à Haftar l'après-midi."
+    }
+   ],
+   "uncertainties": [
+    "文章为RFI单一来源的评论分析，相关说法尚未获得其他来源交叉验证",
+    "阿尔及利亚是否实际进驻马达马尚未证实",
+    "尼日尔政府向多方出租马达马的说法未获官方确认",
+    "俄罗斯在尼亚美的兵力规模（约200人）未获独立证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 60
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "马达马：撒哈拉的“门户”",
+   "summary_zh": "法国国际广播电台（RFI）评论文章称，尼日尔北部撒哈拉沙漠中的马达马（Madama）前法国军事基地虽无人居住，却因地处要冲而成为多方争夺对象。文章称阿尔及利亚有意进驻该地，俄罗斯、利比亚哈夫塔尔势力以及当地图布人部落也在此角力。文章还称尼日尔政府将同一地点向多方出租，但已无法控制局面。上述内容为单一来源的评论分析，相关说法尚未获得其他来源证实。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": null,
+    "city": null,
+    "site": "马达马（Madama）前法国军事基地",
+    "raw_text": "Madama, ancienne base française au nord du Niger"
+   },
+   "key_facts": [
+    {
+     "fact": "马达马是尼日尔北部一处前法国军事基地，位于撒哈拉沙漠中，距最近地点约400公里",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "C'est un fort perdu dans le Sahara, à 400 km de tout. ... Madama, ancienne base française au nord du Niger."
+    },
+    {
+     "fact": "文章称法国于2023年12月撤离该基地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La France est partie en décembre 2023, mais ses satellites passent toujours."
+    },
+    {
+     "fact": "文章称阿尔及利亚有意进驻马达马，并于2026年10月25日调整政策",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aujourd'hui, l'Algérie veut s'y installer. ... Le 25 octobre 2026, Alger a basculé. Une première depuis 1973."
+    },
+    {
+     "fact": "文章称俄罗斯在尼亚美部署约200名“非洲军团”人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la Russie : 200 hommes d'Africa Corps à Niamey qui vendent de la sécurité low-cost à Tiani"
+    },
+    {
+     "fact": "文章称尼日尔政府将马达马向多方出租，但已无法控制局势",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Niamey loue son désert au plus offrant : Tiani promet Madama à Alger le matin, et jure l'inverse à Haftar l'après-midi."
+    }
+   ],
+   "uncertainties": [
+    "文章为RFI单一来源的评论分析，相关说法尚未获得其他来源交叉验证",
+    "阿尔及利亚是否实际进驻马达马尚未证实",
+    "尼日尔政府向多方出租马达马的说法未获官方确认",
+    "俄罗斯在尼亚美的兵力规模（约200人）未获独立证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 60
+  }
+ },
+ "event_id": "EVT_82011dca82e1647b",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
