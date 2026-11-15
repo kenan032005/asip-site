@@ -1,0 +1,117 @@
+{
+ "label": "Sa7436767",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "794b674436a3cde6678bd639a6b02929124eba7aaa6c61a21228fbad018ed0bd",
+ "tokens": {
+  "input_tokens": 2364,
+  "output_tokens": 577,
+  "total_tokens": 2941
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "曼杜尔省库姆拉-多巴公路发生交通事故致三人死亡",
+   "summary_zh": "2026年11月7日星期六，乍得曼杜尔省恩德吉吉（Nderguigui）附近的库姆拉-多巴公路上发生一起严重交通事故。据初步统计，事故造成三人死亡、多人受伤。据初步信息，一辆载有前往贝琼多（Béjondo）每周集市商贩的车辆因轮胎爆裂导致司机失控而翻车。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "曼杜尔省",
+    "city": "恩德吉吉",
+    "site": "库姆拉-多巴公路",
+    "raw_text": "Nderguigui, dans la province du Mandoul, sur l’axe Koumra-Doba"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年11月7日曼杜尔省库姆拉-多巴公路发生严重交通事故",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un grave accident de la circulation s’est produit ce samedi 7 novembre 2026 à Nderguigui, dans la province du Mandoul, sur l’axe Koumra-Doba."
+    },
+    {
+     "fact": "初步统计事故造成三人死亡、多人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le bilan provisoire fait état de trois morts et de plusieurs blessés."
+    },
+    {
+     "fact": "据初步信息，车辆因轮胎爆裂导致司机失控而翻车",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le véhicule transportant des commerçants en route pour le marché hebdomadaire de Béjondo s’est renversé après l’éclatement d’un pneu, entraînant la perte de contrôle du chauffeur"
+    },
+    {
+     "fact": "据曼杜尔中部省长Oumar Issaka Fouzari称，伤者被送往佩尼卫生中心，遇难者遗体被运往库姆拉太平间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D’après le préfet du Mandoul central, Oumar Issaka Fouzari, les blessés ont été évacués au centre de santé de Péni, tandis que les corps des victimes ont été transportés à la morgue de Koumra."
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字为初步统计，尚未最终确认",
+    "事故原因（轮胎爆裂）为初步信息，尚未获独立证实",
+    "目前仅有一个来源（Le N'Djam Post）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "曼杜尔省库姆拉-多巴公路发生交通事故致三人死亡",
+   "summary_zh": "2026年11月7日星期六，乍得曼杜尔省恩德吉吉（Nderguigui）附近的库姆拉-多巴公路上发生一起严重交通事故。据初步统计，事故造成三人死亡、多人受伤。据初步信息，一辆载有前往贝琼多（Béjondo）每周集市商贩的车辆因轮胎爆裂导致司机失控而翻车。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "曼杜尔省",
+    "city": "恩德吉吉",
+    "site": "库姆拉-多巴公路",
+    "raw_text": "Nderguigui, dans la province du Mandoul, sur l’axe Koumra-Doba"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年11月7日曼杜尔省库姆拉-多巴公路发生严重交通事故",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un grave accident de la circulation s’est produit ce samedi 7 novembre 2026 à Nderguigui, dans la province du Mandoul, sur l’axe Koumra-Doba."
+    },
+    {
+     "fact": "初步统计事故造成三人死亡、多人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le bilan provisoire fait état de trois morts et de plusieurs blessés."
+    },
+    {
+     "fact": "据初步信息，车辆因轮胎爆裂导致司机失控而翻车",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le véhicule transportant des commerçants en route pour le marché hebdomadaire de Béjondo s’est renversé après l’éclatement d’un pneu, entraînant la perte de contrôle du chauffeur"
+    },
+    {
+     "fact": "据曼杜尔中部省长Oumar Issaka Fouzari称，伤者被送往佩尼卫生中心，遇难者遗体被运往库姆拉太平间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D’après le préfet du Mandoul central, Oumar Issaka Fouzari, les blessés ont été évacués au centre de santé de Péni, tandis que les corps des victimes ont été transportés à la morgue de Koumra."
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字为初步统计，尚未最终确认",
+    "事故原因（轮胎爆裂）为初步信息，尚未获独立证实",
+    "目前仅有一个来源（Le N'Djam Post）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_78564991a7436767",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
