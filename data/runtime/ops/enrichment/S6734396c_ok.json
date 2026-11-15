@@ -1,0 +1,114 @@
+{
+ "label": "S6734396c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "2c7e48bbd42dbf3abf3b809019831484a1a9706ac98ba1639721b007ee94ca62",
+ "tokens": {
+  "input_tokens": 2157,
+  "output_tokens": 273,
+  "total_tokens": 2430
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\"]",
+    "after": "[\"目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "after": "[\"目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"相关情况尚未证实。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "美国大使馆说明加纳人如何获得紧急签证面谈",
+   "summary_zh": "美国驻阿克拉大使馆说明了非移民签证申请人在遇到突发紧急情况时申请提前面谈的程序，并敦促申请人遵循规定步骤、提供支持其请求的证据。该消息由单一来源MyJoyOnline报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "阿克拉",
+    "site": "美国大使馆",
+    "raw_text": "United States Embassy in Accra"
+   },
+   "key_facts": [
+    {
+     "fact": "美国驻阿克拉大使馆说明了非移民签证申请人因突发紧急情况申请提前面谈的程序",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The United States Embassy in Accra has outlined the procedure for nonimmigrant visa applicants seeking an earlier interview because of an unexpected emergency"
+    },
+    {
+     "fact": "大使馆敦促申请人遵循规定步骤并提供支持请求的证据",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "urging them to follow the required steps and provide evidence to support their requests"
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "美国大使馆说明加纳人如何获得紧急签证面谈",
+   "summary_zh": "美国驻阿克拉大使馆说明了非移民签证申请人在遇到突发紧急情况时申请提前面谈的程序，并敦促申请人遵循规定步骤、提供支持其请求的证据。该消息由单一来源MyJoyOnline报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": "阿克拉",
+    "site": "美国大使馆",
+    "raw_text": "United States Embassy in Accra"
+   },
+   "key_facts": [
+    {
+     "fact": "美国驻阿克拉大使馆说明了非移民签证申请人因突发紧急情况申请提前面谈的程序",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The United States Embassy in Accra has outlined the procedure for nonimmigrant visa applicants seeking an earlier interview because of an unexpected emergency"
+    },
+    {
+     "fact": "大使馆敦促申请人遵循规定步骤并提供支持请求的证据",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "urging them to follow the required steps and provide evidence to support their requests"
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "相关情况尚未证实。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_76d208de6734396c",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

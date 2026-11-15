@@ -1,0 +1,106 @@
+{
+ "label": "Sc5550492",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c5be730001f6a8614d0207f6f7d533e49b3f1b2f61d92c7af053c29525f364e1",
+ "tokens": {
+  "input_tokens": 2147,
+  "output_tokens": 262,
+  "total_tokens": 2409
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"案件细节与指控内容尚未获独立来源确认\", \"目前仅单一来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"案件细节与指控内容尚未获独立来源确认\", \"目前仅单一来源报道，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "梅根的父亲托马斯·马克尔因儿童性虐待材料指控出庭",
+   "summary_zh": "据MyJoyOnline报道，萨塞克斯公爵夫人梅根的父亲托马斯·马克尔因被控持有儿童性虐待材料而出庭。该报道为单一来源，目前尚缺乏交叉验证。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": "法院",
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "托马斯·马克尔因被控持有儿童性虐待材料而出庭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Thomas Markle, the father of Meghan, Duchess of Sussex, has appeared in court after being charged over possession of child sex abuse material."
+    },
+    {
+     "fact": "托马斯·马克尔是梅根的父亲",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Meghan’s father Thomas Markle appears in court over child sex abuse material"
+    }
+   ],
+   "uncertainties": [
+    "案件细节与指控内容尚未获独立来源确认",
+    "目前仅单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 60
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "梅根的父亲托马斯·马克尔因儿童性虐待材料指控出庭",
+   "summary_zh": "据MyJoyOnline报道，萨塞克斯公爵夫人梅根的父亲托马斯·马克尔因被控持有儿童性虐待材料而出庭。该报道为单一来源，目前尚缺乏交叉验证。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": "法院",
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "托马斯·马克尔因被控持有儿童性虐待材料而出庭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Thomas Markle, the father of Meghan, Duchess of Sussex, has appeared in court after being charged over possession of child sex abuse material."
+    },
+    {
+     "fact": "托马斯·马克尔是梅根的父亲",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Meghan’s father Thomas Markle appears in court over child sex abuse material"
+    }
+   ],
+   "uncertainties": [
+    "案件细节与指控内容尚未获独立来源确认",
+    "目前仅单一来源报道，尚缺乏交叉验证",
+    "相关情况尚未证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 60
+  }
+ },
+ "event_id": "EVT_0620f6ecc5550492",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
