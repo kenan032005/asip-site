@@ -1,0 +1,127 @@
+{
+ "label": "S311e6cb5",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d664e219a689684081fba3061cae2369e441d60cd6195d436ffee248e5e46cb0",
+ "tokens": {
+  "input_tokens": 2529,
+  "output_tokens": 571,
+  "total_tokens": 3100
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "中国将在赞比亚建设霍乱疫苗工厂",
+   "summary_zh": "赞比亚与中国企业将合作建设霍乱疫苗工厂，项目投资约1.9亿欧元。首期将耗资2400万美元，在卢萨卡南部经济区建设口服疫苗灌装和包装设施，设计年产能最高可达2000万剂。新成立的合资公司ZAMVAX由赞比亚公共集团IDC持股60%、中国合作伙伴Jijia持股40%，但项目仍取决于融资和监管审批。",
+   "event_type": "other_security",
+   "country_iso3": "ZMB",
+   "location": {
+    "country_iso3": "ZMB",
+    "admin1": null,
+    "city": "卢萨卡",
+    "site": "卢萨卡南部经济区",
+    "raw_text": "zone économique de Lusaka South"
+   },
+   "key_facts": [
+    {
+     "fact": "赞比亚与中国企业将建设霍乱疫苗工厂，项目投资约1.9亿欧元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le pays et une entreprise chinoise vont construire une usine de vaccins, un projet d’environ 190 millions d’euros"
+    },
+    {
+     "fact": "首期将耗资2400万美元，在卢萨卡南部经济区建设口服疫苗灌装和包装设施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La première phase va coûter 24 millions de dollars : une unité de remplissage et de conditionnement de vaccins oraux dans la zone économique de Lusaka South"
+    },
+    {
+     "fact": "该工厂设计年产能最高可达2000万剂",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce site pourra, à terme, préparer jusqu’à 20 millions de doses par an"
+    },
+    {
+     "fact": "新成立的合资公司ZAMVAX由赞比亚公共集团IDC持股60%、中国合作伙伴Jijia持股40%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ZAMVAX, à 60 % détenue par le groupe public zambien IDC et à 40 % par son partenaire chinois Jijia"
+    },
+    {
+     "fact": "赞比亚在2023-2024年疫情期间记录了超过2万例霍乱病例和近700例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Zambie a enregistré plus de 20 000 cas de choléra et près de 700 décès pendant la vague épidémique de 2023-2024"
+    }
+   ],
+   "uncertainties": [
+    "项目仍取决于融资和监管审批",
+    "出口部分需获得必要授权",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "中国将在赞比亚建设霍乱疫苗工厂",
+   "summary_zh": "赞比亚与中国企业将合作建设霍乱疫苗工厂，项目投资约1.9亿欧元。首期将耗资2400万美元，在卢萨卡南部经济区建设口服疫苗灌装和包装设施，设计年产能最高可达2000万剂。新成立的合资公司ZAMVAX由赞比亚公共集团IDC持股60%、中国合作伙伴Jijia持股40%，但项目仍取决于融资和监管审批。",
+   "event_type": "other_security",
+   "country_iso3": "ZMB",
+   "location": {
+    "country_iso3": "ZMB",
+    "admin1": null,
+    "city": "卢萨卡",
+    "site": "卢萨卡南部经济区",
+    "raw_text": "zone économique de Lusaka South"
+   },
+   "key_facts": [
+    {
+     "fact": "赞比亚与中国企业将建设霍乱疫苗工厂，项目投资约1.9亿欧元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le pays et une entreprise chinoise vont construire une usine de vaccins, un projet d’environ 190 millions d’euros"
+    },
+    {
+     "fact": "首期将耗资2400万美元，在卢萨卡南部经济区建设口服疫苗灌装和包装设施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La première phase va coûter 24 millions de dollars : une unité de remplissage et de conditionnement de vaccins oraux dans la zone économique de Lusaka South"
+    },
+    {
+     "fact": "该工厂设计年产能最高可达2000万剂",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce site pourra, à terme, préparer jusqu’à 20 millions de doses par an"
+    },
+    {
+     "fact": "新成立的合资公司ZAMVAX由赞比亚公共集团IDC持股60%、中国合作伙伴Jijia持股40%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ZAMVAX, à 60 % détenue par le groupe public zambien IDC et à 40 % par son partenaire chinois Jijia"
+    },
+    {
+     "fact": "赞比亚在2023-2024年疫情期间记录了超过2万例霍乱病例和近700例死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Zambie a enregistré plus de 20 000 cas de choléra et près de 700 décès pendant la vague épidémique de 2023-2024"
+    }
+   ],
+   "uncertainties": [
+    "项目仍取决于融资和监管审批",
+    "出口部分需获得必要授权",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_34af1603311e6cb5",
+ "disease_event_id": null,
+ "country_code": "ZM"
+}
