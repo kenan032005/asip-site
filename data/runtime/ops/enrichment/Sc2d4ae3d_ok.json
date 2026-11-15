@@ -1,0 +1,116 @@
+{
+ "label": "Sc2d4ae3d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "fb34560d0cba1751acdb90e4d189687eccac47c9da79e178885e9e8e5101214b",
+ "tokens": {
+  "input_tokens": 2198,
+  "output_tokens": 299,
+  "total_tokens": 2497
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"该报道为单一来源，尚缺乏交叉验证\", \"文章内容为音乐文化历史叙述，不涉及安全事件\"]",
+    "after": "[\"该报道为单一来源，尚缺乏交叉验证\", \"文章内容为音乐文化历史叙述，不涉及安全事件\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该报道为单一来源，尚缺乏交叉验证\", \"文章内容为音乐文化历史叙述，不涉及安全事件\", \"相关情况尚未证实。\"]",
+    "after": "[\"该报道为单一来源，尚缺乏交叉验证\", \"文章内容为音乐文化历史叙述，不涉及安全事件\", \"相关情况尚未证实。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "声音之子：Mfanstsipim如何孕育和培育加纳当代福音音乐",
+   "summary_zh": "文章回顾加纳当代福音音乐于20世纪70年代初兴起，称其为该国基督教音乐的重要发展。文章提到教会长期使用赞美诗、圣歌、清唱剧、本土歌曲和部分西方乐器，但许多保守福音派仍将摇滚、灵魂乐、迪斯科和电吉他视为世俗之物。该报道为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳当代福音音乐于20世纪70年代初出现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Contemporary gospel music emerged in Ghana in the early 1970s, marking a major development in the country’s Christian music."
+    },
+    {
+     "fact": "许多保守福音派仍将摇滚、灵魂乐、迪斯科和电吉他视为世俗之物",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "many conservative evangelicals still regarded rock, soul, disco and electric guitars as worldly"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚缺乏交叉验证",
+    "文章内容为音乐文化历史叙述，不涉及安全事件"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 20
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "声音之子：Mfanstsipim如何孕育和培育加纳当代福音音乐",
+   "summary_zh": "文章回顾加纳当代福音音乐于20世纪70年代初兴起，称其为该国基督教音乐的重要发展。文章提到教会长期使用赞美诗、圣歌、清唱剧、本土歌曲和部分西方乐器，但许多保守福音派仍将摇滚、灵魂乐、迪斯科和电吉他视为世俗之物。该报道为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳当代福音音乐于20世纪70年代初出现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Contemporary gospel music emerged in Ghana in the early 1970s, marking a major development in the country’s Christian music."
+    },
+    {
+     "fact": "许多保守福音派仍将摇滚、灵魂乐、迪斯科和电吉他视为世俗之物",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "many conservative evangelicals still regarded rock, soul, disco and electric guitars as worldly"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源，尚缺乏交叉验证",
+    "文章内容为音乐文化历史叙述，不涉及安全事件",
+    "相关情况尚未证实。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 20
+  }
+ },
+ "event_id": "EVT_d56494cac2d4ae3d",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

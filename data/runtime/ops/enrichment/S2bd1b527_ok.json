@@ -1,0 +1,126 @@
+{
+ "label": "S2bd1b527",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "cbcddbbcda1ca960d8b1c2b6e8dd5d97f75c8672fb8c254448cc42d09bad50c5",
+ "tokens": {
+  "input_tokens": 2169,
+  "output_tokens": 349,
+  "total_tokens": 2518
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"数字化监测系统的具体实施细节及生效时间尚未说明\"]",
+    "after": "[\"目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"数字化监测系统的具体实施细节及生效时间尚未说明\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"数字化监测系统的具体实施细节及生效时间尚未说明\", \"相关情况尚未证实。\"]",
+    "after": "[\"目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"数字化监测系统的具体实施细节及生效时间尚未说明\", \"相关情况尚未证实。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "COCOBOD首席执行官警告：挪用可可农资的日子已结束",
+   "summary_zh": "加纳可可委员会（COCOBOD）首席执行官对涉及挪用、囤积或非法出售免费化肥及其他农资的个人和官员发出严厉警告。他表示，新的数字化监测系统将更容易识别并起诉违规者。该消息由单一来源MyJoyOnline报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "COCOBOD首席执行官警告称，挪用可可农资的日子已经结束",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "‘Days of diverting cocoa inputs are over’ – COCOBOD CEO"
+    },
+    {
+     "fact": "COCOBOD对涉及挪用、囤积或非法出售免费化肥及其他农资的个人和官员发出严厉警告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Ghana Cocoa Board (COCOBOD) has issued a stern warning to individuals and officials involved in the diversion, hoarding or illegal sale of free fertiliser and other farm inputs"
+    },
+    {
+     "fact": "新的数字化监测系统将更容易识别并起诉违规者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a new digital monitoring system will make it easier to identify and prosecute offenders"
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "数字化监测系统的具体实施细节及生效时间尚未说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "COCOBOD首席执行官警告：挪用可可农资的日子已结束",
+   "summary_zh": "加纳可可委员会（COCOBOD）首席执行官对涉及挪用、囤积或非法出售免费化肥及其他农资的个人和官员发出严厉警告。他表示，新的数字化监测系统将更容易识别并起诉违规者。该消息由单一来源MyJoyOnline报道。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "COCOBOD首席执行官警告称，挪用可可农资的日子已经结束",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "‘Days of diverting cocoa inputs are over’ – COCOBOD CEO"
+    },
+    {
+     "fact": "COCOBOD对涉及挪用、囤积或非法出售免费化肥及其他农资的个人和官员发出严厉警告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Ghana Cocoa Board (COCOBOD) has issued a stern warning to individuals and officials involved in the diversion, hoarding or illegal sale of free fertiliser and other farm inputs"
+    },
+    {
+     "fact": "新的数字化监测系统将更容易识别并起诉违规者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a new digital monitoring system will make it easier to identify and prosecute offenders"
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "数字化监测系统的具体实施细节及生效时间尚未说明",
+    "相关情况尚未证实。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_d701e6cf2bd1b527",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

@@ -1,0 +1,124 @@
+{
+ "label": "Sc519595b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "9bf4515bdbe34dcf5fcc17eea385c3980ce5e54af044b9a271dda75550e00037",
+ "tokens": {
+  "input_tokens": 2215,
+  "output_tokens": 372,
+  "total_tokens": 2587
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "unconfirmed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\"]",
+    "after": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "rule_id": "SAFETY-CORR-B1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"相关情况尚未证实。\"]",
+    "after": "[\"目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证\", \"相关情况尚未证实。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加纳央行行长称2026年5月至9月维持14%政策利率旨在维护经济稳定",
+   "summary_zh": "加纳央行行长Johnson Asiama博士为货币政策委员会在2026年5月至9月期间将政策利率维持在14%的决定作出辩护。他表示，此举旨在在全球油价上涨和国内价格压力等不利外部条件下维护经济稳定。该报道来自单一来源MyJoyOnline。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳央行行长称2026年5月至9月维持14%政策利率旨在维护经济稳定",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Policy rate of 14% between May and September 2026 was meant to preserve economic stability – BoG Governor"
+    },
+    {
+     "fact": "加纳央行行长Johnson Asiama博士为货币政策委员会维持14%政策利率的决定辩护",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Bank of Ghana Governor, Dr. Johnson Asiama, has strongly defended the decision by the Monetary Policy Committee to hold the policy rate at 14% between May and September 2026."
+    },
+    {
+     "fact": "央行称此举旨在应对全球油价上涨和国内价格压力等不利外部条件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Committee’s action is to preserve economic stability despite unfavourable external conditions, including rising global oil prices and domestic price pressures"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加纳央行行长称2026年5月至9月维持14%政策利率旨在维护经济稳定",
+   "summary_zh": "加纳央行行长Johnson Asiama博士为货币政策委员会在2026年5月至9月期间将政策利率维持在14%的决定作出辩护。他表示，此举旨在在全球油价上涨和国内价格压力等不利外部条件下维护经济稳定。该报道来自单一来源MyJoyOnline。",
+   "event_type": "other_security",
+   "country_iso3": "GHA",
+   "location": {
+    "country_iso3": "GHA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "加纳央行行长称2026年5月至9月维持14%政策利率旨在维护经济稳定",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Policy rate of 14% between May and September 2026 was meant to preserve economic stability – BoG Governor"
+    },
+    {
+     "fact": "加纳央行行长Johnson Asiama博士为货币政策委员会维持14%政策利率的决定辩护",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Bank of Ghana Governor, Dr. Johnson Asiama, has strongly defended the decision by the Monetary Policy Committee to hold the policy rate at 14% between May and September 2026."
+    },
+    {
+     "fact": "央行称此举旨在应对全球油价上涨和国内价格压力等不利外部条件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Committee’s action is to preserve economic stability despite unfavourable external conditions, including rising global oil prices and domestic price pressures"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（MyJoyOnline）报道，尚缺乏交叉验证",
+    "相关情况尚未证实。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_b7eb0bcbc519595b",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
