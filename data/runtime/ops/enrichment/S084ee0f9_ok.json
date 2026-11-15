@@ -1,0 +1,127 @@
+{
+ "label": "S084ee0f9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3fe7eb7ae9bcce108d27d17520f8407f1a313c08d649bdb2d1da06858d8261e7",
+ "tokens": {
+  "input_tokens": 2176,
+  "output_tokens": 510,
+  "total_tokens": 2686
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "抗击登革热：世界银行向乍得移交9050份检测试剂",
+   "summary_zh": "世界银行通过卫生项目协调单位向乍得捐赠9050份登革热检测试剂，乍得药品与实验室管理局局长于2026年11月7日接收。当局表示这些试剂将提供给卫生机构用于登革热防控。此次援助正值登革热病例激增、卫生机构（尤其是公立机构）据报缺乏检测试剂之际。政府已宣布免费医疗，但面临人力、财力和物力资源不足的现实困难。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "世界银行向乍得捐赠9050份登革热检测试剂",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "9050 tests, pour la dengue, offerts par la Banque mondiale à travers l’unité de coordination des projets-santé"
+    },
+    {
+     "fact": "乍得药品与实验室管理局局长于2026年11月7日接收这批试剂",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le directeur général de la pharmacie, du médicament et des laboratoires, Dr Ayoub Moussa Abderamane a réceptionné ce samedi 7 novembre 2026"
+    },
+    {
+     "fact": "当局表示试剂将提供给卫生机构用于登革热防控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ces tests seront mis à la disposition des formations sanitaires dans le cadre de la riposte contre la dengue"
+    },
+    {
+     "fact": "此次援助正值登革热病例激增之际",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cet appui intervient dans un contexte de flambée de cas de la dengue"
+    },
+    {
+     "fact": "有证词称卫生机构缺乏检测试剂",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des témoignages ont fait état de manque de tests dans les structures de santé, notamment publiques"
+    }
+   ],
+   "uncertainties": [
+    "卫生机构缺乏检测试剂的说法来自证词，尚未获得独立核实",
+    "登革热病例激增的具体规模未在文中给出",
+    "目前仅有一个来源（Tchadinfos）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "抗击登革热：世界银行向乍得移交9050份检测试剂",
+   "summary_zh": "世界银行通过卫生项目协调单位向乍得捐赠9050份登革热检测试剂，乍得药品与实验室管理局局长于2026年11月7日接收。当局表示这些试剂将提供给卫生机构用于登革热防控。此次援助正值登革热病例激增、卫生机构（尤其是公立机构）据报缺乏检测试剂之际。政府已宣布免费医疗，但面临人力、财力和物力资源不足的现实困难。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "世界银行向乍得捐赠9050份登革热检测试剂",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "9050 tests, pour la dengue, offerts par la Banque mondiale à travers l’unité de coordination des projets-santé"
+    },
+    {
+     "fact": "乍得药品与实验室管理局局长于2026年11月7日接收这批试剂",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le directeur général de la pharmacie, du médicament et des laboratoires, Dr Ayoub Moussa Abderamane a réceptionné ce samedi 7 novembre 2026"
+    },
+    {
+     "fact": "当局表示试剂将提供给卫生机构用于登革热防控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ces tests seront mis à la disposition des formations sanitaires dans le cadre de la riposte contre la dengue"
+    },
+    {
+     "fact": "此次援助正值登革热病例激增之际",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cet appui intervient dans un contexte de flambée de cas de la dengue"
+    },
+    {
+     "fact": "有证词称卫生机构缺乏检测试剂",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des témoignages ont fait état de manque de tests dans les structures de santé, notamment publiques"
+    }
+   ],
+   "uncertainties": [
+    "卫生机构缺乏检测试剂的说法来自证词，尚未获得独立核实",
+    "登革热病例激增的具体规模未在文中给出",
+    "目前仅有一个来源（Tchadinfos）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_a3ed515b084ee0f9",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

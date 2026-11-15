@@ -1,0 +1,127 @@
+{
+ "label": "S7d41b327",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a0df0bc5acea5f6c20f1a3d3bf257fefd581225ad9f8235f6ef2d55cfdb7db77",
+ "tokens": {
+  "input_tokens": 2377,
+  "output_tokens": 599,
+  "total_tokens": 2976
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得：尼亚地区行政管辖权冲突致16人受伤",
+   "summary_zh": "乍得尼亚省本杰里村因行政管辖权争议爆发冲突，造成16人受伤，其中3人重伤。据称冲突起因是贝罗区区长任命两名新村长的举动。当地官员表示已采取纪律措施并呼吁保持冷静，称局势已得到控制。该事件目前为单一来源报道。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "尼亚省",
+    "city": "本杰里",
+    "site": "本杰里村",
+    "raw_text": "village de Bendjeri, dans le département de la Nya"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得尼亚省本杰里村因行政管辖权冲突造成16人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un conflit de compétences administratives a éclaté ce vendredi 6 novembre 2026 dans le village de Bendjeri, dans le département de la Nya... qui ont fait 16 blessés, dont trois grièvement atteints."
+    },
+    {
+     "fact": "据称冲突起因是贝罗区区长任命两名新村长",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'installation de deux nouveaux chefs de village par le chef de canton de Béro serait à l'origine de ces violences"
+    },
+    {
+     "fact": "伤者被送往多巴、米安杜姆和贝贝贾的医疗机构，据最新消息无生命危险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'altercation survenue à Bendjeri a nécessité la prise en charge des victimes dans les structures sanitaires de Doba, Miandoum et Bébédjia. Selon les dernières informations, le pronostic vital des blessés n'est pas engagé."
+    },
+    {
+     "fact": "尼亚省秘书长下令逮捕两名村长并罢免另外六名村长",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le secrétaire général a ordonné l'arrestation de deux chefs de village, ainsi que la destitution de six autres, accompagnée de l'enlèvement des drapeaux jusqu'à nouvel ordre"
+    },
+    {
+     "fact": "当地官员称局势已得到控制、平静已恢复",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D'après l'autorité administrative, la situation est désormais sous contrôle et le calme est revenu."
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（Alwihda Info）报道，尚缺乏交叉验证",
+    "冲突起因（贝罗区区长任命村长）为据称信息，尚未获独立确认",
+    "伤者伤情及局势是否真正恢复平静有待进一步核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得：尼亚地区行政管辖权冲突致16人受伤",
+   "summary_zh": "乍得尼亚省本杰里村因行政管辖权争议爆发冲突，造成16人受伤，其中3人重伤。据称冲突起因是贝罗区区长任命两名新村长的举动。当地官员表示已采取纪律措施并呼吁保持冷静，称局势已得到控制。该事件目前为单一来源报道。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "尼亚省",
+    "city": "本杰里",
+    "site": "本杰里村",
+    "raw_text": "village de Bendjeri, dans le département de la Nya"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得尼亚省本杰里村因行政管辖权冲突造成16人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un conflit de compétences administratives a éclaté ce vendredi 6 novembre 2026 dans le village de Bendjeri, dans le département de la Nya... qui ont fait 16 blessés, dont trois grièvement atteints."
+    },
+    {
+     "fact": "据称冲突起因是贝罗区区长任命两名新村长",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'installation de deux nouveaux chefs de village par le chef de canton de Béro serait à l'origine de ces violences"
+    },
+    {
+     "fact": "伤者被送往多巴、米安杜姆和贝贝贾的医疗机构，据最新消息无生命危险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'altercation survenue à Bendjeri a nécessité la prise en charge des victimes dans les structures sanitaires de Doba, Miandoum et Bébédjia. Selon les dernières informations, le pronostic vital des blessés n'est pas engagé."
+    },
+    {
+     "fact": "尼亚省秘书长下令逮捕两名村长并罢免另外六名村长",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le secrétaire général a ordonné l'arrestation de deux chefs de village, ainsi que la destitution de six autres, accompagnée de l'enlèvement des drapeaux jusqu'à nouvel ordre"
+    },
+    {
+     "fact": "当地官员称局势已得到控制、平静已恢复",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D'après l'autorité administrative, la situation est désormais sous contrôle et le calme est revenu."
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（Alwihda Info）报道，尚缺乏交叉验证",
+    "冲突起因（贝罗区区长任命村长）为据称信息，尚未获独立确认",
+    "伤者伤情及局势是否真正恢复平静有待进一步核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_c907e5d97d41b327",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

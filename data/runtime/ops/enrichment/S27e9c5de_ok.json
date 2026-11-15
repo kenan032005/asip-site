@@ -1,0 +1,117 @@
+{
+ "label": "S27e9c5de",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f25e6de765ce2f0879b05a06ad8091f5b11352305bf53915494a972a5d82a32d",
+ "tokens": {
+  "input_tokens": 2376,
+  "output_tokens": 582,
+  "total_tokens": 2958
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "芒杜尔：恩代尔吉吉发生严重交通事故，造成三人死亡、多人受伤",
+   "summary_zh": "据乍得新闻网站Tchadinfos报道，11月7日星期六，在芒杜尔地区连接库姆拉与多巴的公路上，恩代尔吉吉路口附近发生一起严重交通事故。据称，司机因轮胎爆裂失去对车辆的控制，导致车辆翻覆。死者为前往贝琼多每周集市途中的商贩。据芒杜尔中部省长奥马尔·伊萨卡·福扎里称，初步统计为三人死亡，伤者已被送往佩尼卫生中心。",
+   "event_type": "transport_disruption",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "芒杜尔",
+    "city": "恩代尔吉吉",
+    "site": "恩代尔吉吉路口附近，库姆拉至多巴公路沿线",
+    "raw_text": "Nderguigui, dans le Mandoul, sur l’axe reliant Koumra à Doba"
+   },
+   "key_facts": [
+    {
+     "fact": "11月7日星期六，芒杜尔地区恩代尔吉吉发生一起严重交通事故",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un grave accident de la circulation s’est produit ce samedi 07 novembre à Nderguigui, dans le Mandoul, sur l’axe reliant Koumra à Doba."
+    },
+    {
+     "fact": "事故据称因轮胎爆裂致司机失控、车辆翻覆",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le drame serait survenu avant le croisement de Nderguigui après que le chauffeur a perdu le contrôle suite à l’éclatement d’une roue. Ce qui a entraîné le renversement du véhicule."
+    },
+    {
+     "fact": "死者为前往贝琼多每周集市途中的商贩",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les victimes sont des commerçants qui se rendaient au marché hebdomadaire de Bedjondo."
+    },
+    {
+     "fact": "据芒杜尔中部省长称，初步统计为三人死亡，伤者被送往佩尼卫生中心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le bilan provisoire fait état de trois morts et des blessés déposés au centre de santé de Peni, selon le préfet du Mandoul central Oumar Issaka Fouzari."
+    }
+   ],
+   "uncertainties": [
+    "事故原因（轮胎爆裂）为据称说法，尚未获独立确认",
+    "伤亡数字为初步统计，可能变化",
+    "目前仅单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "芒杜尔：恩代尔吉吉发生严重交通事故，造成三人死亡、多人受伤",
+   "summary_zh": "据乍得新闻网站Tchadinfos报道，11月7日星期六，在芒杜尔地区连接库姆拉与多巴的公路上，恩代尔吉吉路口附近发生一起严重交通事故。据称，司机因轮胎爆裂失去对车辆的控制，导致车辆翻覆。死者为前往贝琼多每周集市途中的商贩。据芒杜尔中部省长奥马尔·伊萨卡·福扎里称，初步统计为三人死亡，伤者已被送往佩尼卫生中心。",
+   "event_type": "transport_disruption",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "芒杜尔",
+    "city": "恩代尔吉吉",
+    "site": "恩代尔吉吉路口附近，库姆拉至多巴公路沿线",
+    "raw_text": "Nderguigui, dans le Mandoul, sur l’axe reliant Koumra à Doba"
+   },
+   "key_facts": [
+    {
+     "fact": "11月7日星期六，芒杜尔地区恩代尔吉吉发生一起严重交通事故",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un grave accident de la circulation s’est produit ce samedi 07 novembre à Nderguigui, dans le Mandoul, sur l’axe reliant Koumra à Doba."
+    },
+    {
+     "fact": "事故据称因轮胎爆裂致司机失控、车辆翻覆",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le drame serait survenu avant le croisement de Nderguigui après que le chauffeur a perdu le contrôle suite à l’éclatement d’une roue. Ce qui a entraîné le renversement du véhicule."
+    },
+    {
+     "fact": "死者为前往贝琼多每周集市途中的商贩",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les victimes sont des commerçants qui se rendaient au marché hebdomadaire de Bedjondo."
+    },
+    {
+     "fact": "据芒杜尔中部省长称，初步统计为三人死亡，伤者被送往佩尼卫生中心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le bilan provisoire fait état de trois morts et des blessés déposés au centre de santé de Peni, selon le préfet du Mandoul central Oumar Issaka Fouzari."
+    }
+   ],
+   "uncertainties": [
+    "事故原因（轮胎爆裂）为据称说法，尚未获独立确认",
+    "伤亡数字为初步统计，可能变化",
+    "目前仅单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_439b2e1d27e9c5de",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
