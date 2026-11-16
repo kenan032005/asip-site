@@ -1,0 +1,117 @@
+{
+ "label": "S81d62ca4",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4afa27067ed1032105feebe462bfc7677e808489cd51a0b3339fd4f8bf23e474",
+ "tokens": {
+  "input_tokens": 2205,
+  "output_tokens": 568,
+  "total_tokens": 2773
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得曼杜勒省Nderguigui路段发生交通事故，造成三人死亡、多人受伤",
+   "summary_zh": "2026年11月7日，乍得曼杜勒省Nderguigui路段发生一起严重交通事故，造成三人死亡、多人受伤。据曼杜勒中部地区省长Oumar Issaka Fouzari称，事故由轮胎爆裂导致车辆失控翻覆。伤者主要为前往Bedjondo周市集的商贩，已被送往Péni卫生中心救治，死者遗体被转送至Koumra太平间。",
+   "event_type": "transport_disruption",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "曼杜勒省",
+    "city": null,
+    "site": "Nderguigui路段",
+    "raw_text": "sur l'axe Nderguigui, dans la province du Mandoul"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年11月7日乍得曼杜勒省Nderguigui路段发生严重交通事故，造成三人死亡、多人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un grave accident de la circulation s'est produit ce 7 novembre 2026 sur l'axe Nderguigui, dans la province du Mandoul, faisant trois morts et plusieurs blessés."
+    },
+    {
+     "fact": "据曼杜勒中部地区省长称，事故由轮胎爆裂导致车辆失控翻覆",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon le préfet du Mandoul central, Oumar Issaka Fouzari, le drame découle de l'éclatement d'un pneu. Cette défaillance technique a provoqué la perte de contrôle du véhicule, entraînant son renversement."
+    },
+    {
+     "fact": "伤者主要为前往Bedjondo周市集的商贩，被送往Péni卫生中心救治",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les victimes, principalement des commerçants se rendant au marché hebdomadaire de Bedjondo, ont été admises au centre de santé de Péni pour recevoir les premiers soins."
+    },
+    {
+     "fact": "死者遗体被转送至Koumra太平间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les corps des défunts ont quant à eux été transférés à la morgue de Koumra."
+    }
+   ],
+   "uncertainties": [
+    "事故原因由省长单方陈述，尚未获得独立核实",
+    "目前仅一个来源（Alwihda Info）报道，缺乏交叉验证",
+    "伤者具体人数未明确"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得曼杜勒省Nderguigui路段发生交通事故，造成三人死亡、多人受伤",
+   "summary_zh": "2026年11月7日，乍得曼杜勒省Nderguigui路段发生一起严重交通事故，造成三人死亡、多人受伤。据曼杜勒中部地区省长Oumar Issaka Fouzari称，事故由轮胎爆裂导致车辆失控翻覆。伤者主要为前往Bedjondo周市集的商贩，已被送往Péni卫生中心救治，死者遗体被转送至Koumra太平间。",
+   "event_type": "transport_disruption",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "曼杜勒省",
+    "city": null,
+    "site": "Nderguigui路段",
+    "raw_text": "sur l'axe Nderguigui, dans la province du Mandoul"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年11月7日乍得曼杜勒省Nderguigui路段发生严重交通事故，造成三人死亡、多人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un grave accident de la circulation s'est produit ce 7 novembre 2026 sur l'axe Nderguigui, dans la province du Mandoul, faisant trois morts et plusieurs blessés."
+    },
+    {
+     "fact": "据曼杜勒中部地区省长称，事故由轮胎爆裂导致车辆失控翻覆",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon le préfet du Mandoul central, Oumar Issaka Fouzari, le drame découle de l'éclatement d'un pneu. Cette défaillance technique a provoqué la perte de contrôle du véhicule, entraînant son renversement."
+    },
+    {
+     "fact": "伤者主要为前往Bedjondo周市集的商贩，被送往Péni卫生中心救治",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les victimes, principalement des commerçants se rendant au marché hebdomadaire de Bedjondo, ont été admises au centre de santé de Péni pour recevoir les premiers soins."
+    },
+    {
+     "fact": "死者遗体被转送至Koumra太平间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les corps des défunts ont quant à eux été transférés à la morgue de Koumra."
+    }
+   ],
+   "uncertainties": [
+    "事故原因由省长单方陈述，尚未获得独立核实",
+    "目前仅一个来源（Alwihda Info）报道，缺乏交叉验证",
+    "伤者具体人数未明确"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_bf4f16af81d62ca4",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

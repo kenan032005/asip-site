@@ -1,0 +1,138 @@
+{
+ "label": "S176721d8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "cdb53db874070f1568a10200f9f7d9dcab1cfee0132918598d44aff9c6a33c3e",
+ "tokens": {
+  "input_tokens": 2998,
+  "output_tokens": 553,
+  "total_tokens": 3551
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"死亡人数存在不同说法，官方记录6人，部分来源称更高\", \"被驱逐采金者的国籍构成细节尚未公布\", \"目前仅有一个来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"死亡人数存在不同说法，官方记录6人，部分来源称更高\", \"被驱逐采金者的国籍构成细节尚未公布\", \"目前仅有一个来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "马里：数万名被几内亚驱逐的采金者抵达马里并获安置",
+   "summary_zh": "数万名被几内亚驱逐的采金者近日抵达马里，此前科纳克里于11月2日采取措施取缔非法采金。马里过渡当局在国际伙伴支持下设立紧急安置机制，将这些人主要遣返至布基纳法索。据马里安全与民防部数据，超过10万人抵达巴马科地区，约6万人在几内亚与马里边境城市库雷马莱。官方记录6人死亡，部分消息来源称数字更高。",
+   "event_type": "other_security",
+   "country_iso3": "GIN",
+   "location": {
+    "country_iso3": "GIN",
+    "admin1": null,
+    "city": "库雷马莱",
+    "site": "库雷马莱边境地区",
+    "raw_text": "Kourémalé, ville frontière entre la Guinée et le Mali"
+   },
+   "key_facts": [
+    {
+     "fact": "数万名被几内亚驱逐的采金者近日抵达马里",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plusieurs dizaines de milliers d'orpailleurs expulsés de Guinée sont arrivés au Mali ces derniers jours"
+    },
+    {
+     "fact": "此次人员涌入源于科纳克里11月2日取缔非法采金的措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cet afflux massif fait suite aux mesures prises le 2 novembre par Conakry pour mettre fin à l'orpaillage illégal"
+    },
+    {
+     "fact": "据马里安全与民防部数据，超过10万人抵达巴马科地区，约6万人在库雷马莱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plus de 100 000 orpailleurs refoulés sont arrivés dans le district de Bamako et 60 000 sont actuellement à Kourémalé"
+    },
+    {
+     "fact": "官方记录6人死亡，部分消息来源称数字更高",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Six décès ont été officiellement enregistrés, certaines sources évoquent des chiffres supérieurs"
+    },
+    {
+     "fact": "马里在巴马科部署安全机制，对抵达者实施拦截、识别与集中安置",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un « dispositif de sécurité » a été mis en place à Bamako"
+    }
+   ],
+   "uncertainties": [
+    "死亡人数存在不同说法，官方记录6人，部分来源称更高",
+    "被驱逐采金者的国籍构成细节尚未公布",
+    "目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "马里：数万名被几内亚驱逐的采金者抵达马里并获安置",
+   "summary_zh": "数万名被几内亚驱逐的采金者近日抵达马里，此前科纳克里于11月2日采取措施取缔非法采金。马里过渡当局在国际伙伴支持下设立紧急安置机制，将这些人主要遣返至布基纳法索。据马里安全与民防部数据，超过10万人抵达巴马科地区，约6万人在几内亚与马里边境城市库雷马莱。官方记录6人死亡，部分消息来源称数字更高。",
+   "event_type": "other_security",
+   "country_iso3": "GIN",
+   "location": {
+    "country_iso3": "GIN",
+    "admin1": null,
+    "city": "库雷马莱",
+    "site": "库雷马莱边境地区",
+    "raw_text": "Kourémalé, ville frontière entre la Guinée et le Mali"
+   },
+   "key_facts": [
+    {
+     "fact": "数万名被几内亚驱逐的采金者近日抵达马里",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plusieurs dizaines de milliers d'orpailleurs expulsés de Guinée sont arrivés au Mali ces derniers jours"
+    },
+    {
+     "fact": "此次人员涌入源于科纳克里11月2日取缔非法采金的措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Cet afflux massif fait suite aux mesures prises le 2 novembre par Conakry pour mettre fin à l'orpaillage illégal"
+    },
+    {
+     "fact": "据马里安全与民防部数据，超过10万人抵达巴马科地区，约6万人在库雷马莱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plus de 100 000 orpailleurs refoulés sont arrivés dans le district de Bamako et 60 000 sont actuellement à Kourémalé"
+    },
+    {
+     "fact": "官方记录6人死亡，部分消息来源称数字更高",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Six décès ont été officiellement enregistrés, certaines sources évoquent des chiffres supérieurs"
+    },
+    {
+     "fact": "马里在巴马科部署安全机制，对抵达者实施拦截、识别与集中安置",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un « dispositif de sécurité » a été mis en place à Bamako"
+    }
+   ],
+   "uncertainties": [
+    "死亡人数存在不同说法，官方记录6人，部分来源称更高",
+    "被驱逐采金者的国籍构成细节尚未公布",
+    "目前仅有一个来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_261ea7a7176721d8",
+ "disease_event_id": null,
+ "country_code": "GN"
+}
