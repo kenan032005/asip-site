@@ -1,0 +1,125 @@
+{
+ "label": "S94eb9de3",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e25d618c7842ee87fca9a5750748e36b0a68fa57406ea72cb855fd952ba59142",
+ "tokens": {
+  "input_tokens": 2483,
+  "output_tokens": 629,
+  "total_tokens": 3112
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得总统在Ennedi Ouest省处分多名军政官员",
+   "summary_zh": "乍得总统穆罕默德·伊德里斯·代比·伊特诺在Ennedi Ouest省Torboul地区视察期间召开危机会议，讨论因牧场和水资源引发的潜在冲突。总统当场将负责Ennedi Est的第八防区指挥官Hamoda Mahamat Béchir将军降级并停职，还免去Torboul、Mourtcha两省省长及Am-Djirémé副省长职务，并下令立即解除当地平民武装。报道称当地紧张局势可能升级为公开冲突。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "Ennedi Ouest",
+    "city": "Torboul",
+    "site": null,
+    "raw_text": "Torboul, dans la province de l'Ennedi Ouest"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得总统在Ennedi Ouest省Torboul视察期间召开危机会议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Première étape de ce déplacement, la localité de Torboul, dans la province de l'Ennedi Ouest, a accueilli le chef de l'État ce samedi 7 novembre 2026."
+    },
+    {
+     "fact": "当地存在因牧场和水资源引发的潜在冲突，可能升级为公开对抗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un conflit latent lié aux pâturages et à l'accès à l'eau menace en effet de dégénérer en affrontement ouvert."
+    },
+    {
+     "fact": "第八防区指挥官Hamoda Mahamat Béchir将军被当场降级并停职",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le général Hamoda Mahamat Béchir a été dégradé séance tenante et suspendu de ses fonctions, son intérim devant être assuré par son adjoint."
+    },
+    {
+     "fact": "Torboul、Mourtcha省长及Am-Djirémé副省长被免职",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plusieurs autres responsables ont également été démis de leurs fonctions, notamment les préfets de Torboul et de Mourtcha, ainsi que le sous-préfet d'Am-Djirémé."
+    },
+    {
+     "fact": "总统指示DGSSIE负责人立即解除当地平民武装",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le directeur général des Services de sécurité des institutions de l'État (DGSSIE), le général Tahir Erda Tahiro, a reçu instruction de procéder sans délai au désarmement des civils dans la zone"
+    }
+   ],
+   "uncertainties": [
+    "冲突是否已实际爆发为公开对抗尚未证实",
+    "目前仅单一来源（Alwihda Info）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得总统在Ennedi Ouest省处分多名军政官员",
+   "summary_zh": "乍得总统穆罕默德·伊德里斯·代比·伊特诺在Ennedi Ouest省Torboul地区视察期间召开危机会议，讨论因牧场和水资源引发的潜在冲突。总统当场将负责Ennedi Est的第八防区指挥官Hamoda Mahamat Béchir将军降级并停职，还免去Torboul、Mourtcha两省省长及Am-Djirémé副省长职务，并下令立即解除当地平民武装。报道称当地紧张局势可能升级为公开冲突。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "Ennedi Ouest",
+    "city": "Torboul",
+    "site": null,
+    "raw_text": "Torboul, dans la province de l'Ennedi Ouest"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得总统在Ennedi Ouest省Torboul视察期间召开危机会议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Première étape de ce déplacement, la localité de Torboul, dans la province de l'Ennedi Ouest, a accueilli le chef de l'État ce samedi 7 novembre 2026."
+    },
+    {
+     "fact": "当地存在因牧场和水资源引发的潜在冲突，可能升级为公开对抗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un conflit latent lié aux pâturages et à l'accès à l'eau menace en effet de dégénérer en affrontement ouvert."
+    },
+    {
+     "fact": "第八防区指挥官Hamoda Mahamat Béchir将军被当场降级并停职",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le général Hamoda Mahamat Béchir a été dégradé séance tenante et suspendu de ses fonctions, son intérim devant être assuré par son adjoint."
+    },
+    {
+     "fact": "Torboul、Mourtcha省长及Am-Djirémé副省长被免职",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plusieurs autres responsables ont également été démis de leurs fonctions, notamment les préfets de Torboul et de Mourtcha, ainsi que le sous-préfet d'Am-Djirémé."
+    },
+    {
+     "fact": "总统指示DGSSIE负责人立即解除当地平民武装",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le directeur général des Services de sécurité des institutions de l'État (DGSSIE), le général Tahir Erda Tahiro, a reçu instruction de procéder sans délai au désarmement des civils dans la zone"
+    }
+   ],
+   "uncertainties": [
+    "冲突是否已实际爆发为公开对抗尚未证实",
+    "目前仅单一来源（Alwihda Info）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_03d1f19294eb9de3",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

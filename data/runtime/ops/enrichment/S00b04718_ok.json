@@ -1,0 +1,138 @@
+{
+ "label": "S00b04718",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "9f6442e5f15a2af9a830dda7cfe7f73ac5cc0ff00d0524ad088aed3fa2031c51",
+ "tokens": {
+  "input_tokens": 2381,
+  "output_tokens": 617,
+  "total_tokens": 2998
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"事故确切原因尚待查明\", \"轮胎爆裂说法仅为现场目击者证词，尚未证实\", \"目前为单一来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"事故确切原因尚待查明\", \"轮胎爆裂说法仅为现场目击者证词，尚未证实\", \"目前为单一来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "芒杜尔省库姆拉-恩代尔吉吉路段发生交通事故致三人死亡",
+   "summary_zh": "2026年11月7日星期六，乍得芒杜尔省库姆拉-恩代尔吉吉路段发生一起交通事故。一辆从库姆拉出发、载有前往贝琼多每周集市商贩的车辆卷入事故。据芒杜尔中部省长Oumar Issaka Fouzari称，事故造成三人死亡、多人受伤，伤者已被送往佩尼卫生中心救治。事故确切原因尚待查明。",
+   "event_type": "transport_disruption",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "芒杜尔省",
+    "city": null,
+    "site": "库姆拉-恩代尔吉吉路段",
+    "raw_text": "l’axe Koumra-Nderguigui, dans la province du Mandoul"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年11月7日库姆拉-恩代尔吉吉路段发生交通事故",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un accident de la circulation s’est produit ce samedi 7 novembre 2026 sur l’axe Koumra-Nderguigui, dans la province du Mandoul"
+    },
+    {
+     "fact": "涉事车辆载有前往贝琼多每周集市的商贩",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un véhicule en provenance de Koumra, qui transportait des commerçants se rendant au marché hebdomadaire de Bédjondo"
+    },
+    {
+     "fact": "据现场目击者称，车辆高速行驶时后轮胎可能爆裂导致失控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon les témoignages recueillis sur place, le véhicule roulait à vive allure lorsqu’un pneu arrière aurait éclaté, provoquant une perte de contrôle"
+    },
+    {
+     "fact": "据芒杜尔中部省长称，事故造成三人死亡、多人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D’après le préfet du Mandoul central, Oumar Issaka Fouzari, trois personnes ont perdu la vie dans cet accident, tandis que plusieurs autres ont été blessées"
+    },
+    {
+     "fact": "伤者被送往佩尼卫生中心救治，遗体运至库姆拉太平间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les dépouilles des victimes ont été acheminées à la morgue de Koumra. Les blessés, quant à eux, ont été évacués vers le centre de santé de Péni"
+    }
+   ],
+   "uncertainties": [
+    "事故确切原因尚待查明",
+    "轮胎爆裂说法仅为现场目击者证词，尚未证实",
+    "目前为单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "芒杜尔省库姆拉-恩代尔吉吉路段发生交通事故致三人死亡",
+   "summary_zh": "2026年11月7日星期六，乍得芒杜尔省库姆拉-恩代尔吉吉路段发生一起交通事故。一辆从库姆拉出发、载有前往贝琼多每周集市商贩的车辆卷入事故。据芒杜尔中部省长Oumar Issaka Fouzari称，事故造成三人死亡、多人受伤，伤者已被送往佩尼卫生中心救治。事故确切原因尚待查明。",
+   "event_type": "transport_disruption",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "芒杜尔省",
+    "city": null,
+    "site": "库姆拉-恩代尔吉吉路段",
+    "raw_text": "l’axe Koumra-Nderguigui, dans la province du Mandoul"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年11月7日库姆拉-恩代尔吉吉路段发生交通事故",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un accident de la circulation s’est produit ce samedi 7 novembre 2026 sur l’axe Koumra-Nderguigui, dans la province du Mandoul"
+    },
+    {
+     "fact": "涉事车辆载有前往贝琼多每周集市的商贩",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un véhicule en provenance de Koumra, qui transportait des commerçants se rendant au marché hebdomadaire de Bédjondo"
+    },
+    {
+     "fact": "据现场目击者称，车辆高速行驶时后轮胎可能爆裂导致失控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon les témoignages recueillis sur place, le véhicule roulait à vive allure lorsqu’un pneu arrière aurait éclaté, provoquant une perte de contrôle"
+    },
+    {
+     "fact": "据芒杜尔中部省长称，事故造成三人死亡、多人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D’après le préfet du Mandoul central, Oumar Issaka Fouzari, trois personnes ont perdu la vie dans cet accident, tandis que plusieurs autres ont été blessées"
+    },
+    {
+     "fact": "伤者被送往佩尼卫生中心救治，遗体运至库姆拉太平间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les dépouilles des victimes ont été acheminées à la morgue de Koumra. Les blessés, quant à eux, ont été évacués vers le centre de santé de Péni"
+    }
+   ],
+   "uncertainties": [
+    "事故确切原因尚待查明",
+    "轮胎爆裂说法仅为现场目击者证词，尚未证实",
+    "目前为单一来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_75b6785200b04718",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
