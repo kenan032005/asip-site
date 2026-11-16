@@ -1,0 +1,129 @@
+{
+ "label": "Sc58bf6a1",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1152ee4d6b6cb5528b10afbfa4b3e39a49b5220651bf7f870629756c5c6563f8",
+ "tokens": {
+  "input_tokens": 2447,
+  "output_tokens": 598,
+  "total_tokens": 3045
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "危地马拉：一名议员和三名警察在里奥翁多遭袭身亡",
+   "summary_zh": "危地马拉东部萨卡帕省里奥翁多11月6日发生武装袭击，国会议员胡利奥·塞萨尔·波蒂略·帕斯及三名负责其安保的国家民事警察被杀，议员重伤送医后不治。总统贝尔纳多·阿雷瓦洛要求安全部门配合检察机关调查。袭击动机和袭击者身份截至周六尚未公布，当局未确认此案与三周前前反腐检察官在危地马拉城遇害事件存在关联。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "GTM",
+   "location": {
+    "country_iso3": "GTM",
+    "admin1": "萨卡帕省",
+    "city": "里奥翁多",
+    "site": null,
+    "raw_text": "Río Hondo, dans le département de Zacapa, à l’est du Guatemala"
+   },
+   "key_facts": [
+    {
+     "fact": "危地马拉议员胡利奥·塞萨尔·波蒂略·帕斯与三名警察在里奥翁多遭武装袭击身亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le député guatémaltèque Julio César Portillo Paz et trois policiers ont été tués dans une attaque armée vendredi 6 novembre à Río Hondo, dans le département de Zacapa"
+    },
+    {
+     "fact": "议员重伤送医后死亡，三名国家民事警察当时负责其安保",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Grièvement blessé, le parlementaire est mort après son transfert à l’hôpital. Les trois agents de la Police nationale civile assuraient sa sécurité."
+    },
+    {
+     "fact": "总统阿雷瓦洛要求安全部队配合负责调查的检察机关",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le président Bernardo Arévalo a demandé aux forces de sécurité de coopérer avec le parquet chargé des investigations."
+    },
+    {
+     "fact": "袭击动机和袭击者身份截至周六尚未公布",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le mobile de l’attaque et l’identité de ses auteurs n’avaient pas été rendus publics samedi."
+    },
+    {
+     "fact": "当局未确认此案与三周前前反腐检察官遇害事件存在关联",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucun lien entre les deux attaques n’a été établi par les autorités."
+    }
+   ],
+   "uncertainties": [
+    "袭击动机尚未公布",
+    "袭击者身份尚未公布",
+    "此案与三周前前反腐检察官遇害案是否存在关联尚未获当局确认",
+    "目前仅单一来源（Benin Web TV）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "危地马拉：一名议员和三名警察在里奥翁多遭袭身亡",
+   "summary_zh": "危地马拉东部萨卡帕省里奥翁多11月6日发生武装袭击，国会议员胡利奥·塞萨尔·波蒂略·帕斯及三名负责其安保的国家民事警察被杀，议员重伤送医后不治。总统贝尔纳多·阿雷瓦洛要求安全部门配合检察机关调查。袭击动机和袭击者身份截至周六尚未公布，当局未确认此案与三周前前反腐检察官在危地马拉城遇害事件存在关联。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "GTM",
+   "location": {
+    "country_iso3": "GTM",
+    "admin1": "萨卡帕省",
+    "city": "里奥翁多",
+    "site": null,
+    "raw_text": "Río Hondo, dans le département de Zacapa, à l’est du Guatemala"
+   },
+   "key_facts": [
+    {
+     "fact": "危地马拉议员胡利奥·塞萨尔·波蒂略·帕斯与三名警察在里奥翁多遭武装袭击身亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le député guatémaltèque Julio César Portillo Paz et trois policiers ont été tués dans une attaque armée vendredi 6 novembre à Río Hondo, dans le département de Zacapa"
+    },
+    {
+     "fact": "议员重伤送医后死亡，三名国家民事警察当时负责其安保",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Grièvement blessé, le parlementaire est mort après son transfert à l’hôpital. Les trois agents de la Police nationale civile assuraient sa sécurité."
+    },
+    {
+     "fact": "总统阿雷瓦洛要求安全部队配合负责调查的检察机关",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le président Bernardo Arévalo a demandé aux forces de sécurité de coopérer avec le parquet chargé des investigations."
+    },
+    {
+     "fact": "袭击动机和袭击者身份截至周六尚未公布",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le mobile de l’attaque et l’identité de ses auteurs n’avaient pas été rendus publics samedi."
+    },
+    {
+     "fact": "当局未确认此案与三周前前反腐检察官遇害事件存在关联",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucun lien entre les deux attaques n’a été établi par les autorités."
+    }
+   ],
+   "uncertainties": [
+    "袭击动机尚未公布",
+    "袭击者身份尚未公布",
+    "此案与三周前前反腐检察官遇害案是否存在关联尚未获当局确认",
+    "目前仅单一来源（Benin Web TV）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_40971caec58bf6a1",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
