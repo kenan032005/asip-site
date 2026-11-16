@@ -1,0 +1,129 @@
+{
+ "label": "Se1c78b8b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "37cbf35be0f5d3032a155dac0f6df8b95cdc1c35878553333a05c3b31dc5ce11",
+ "tokens": {
+  "input_tokens": 2503,
+  "output_tokens": 642,
+  "total_tokens": 3145
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚阿萨巴NDC集会遭暴徒袭击，三角洲州“Obidient”运动协调员据称被匕首刺伤",
+   "summary_zh": "据Sahara Reporters报道，2026年11月7日尼日利亚三角洲州首府阿萨巴举行的尼日利亚民主大会党（NDC）支持者政治集会上，暴徒发动袭击，Obidient运动三角洲州副协调员“Noah同志”据称被匕首刺伤，正在联邦医疗中心接受治疗，另有数名成员受伤。全球Obidient运动全国协调员莫博士发表声明谴责袭击，并指称部分政治领导人发表煽动性言论、以AK-47威胁反对派，助长了政治暴力氛围。该组织要求立即调查并追究责任。上述袭击与指控目前仅有一个来源报道，尚未获得独立证实。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Delta State",
+    "city": "Asaba",
+    "site": "NDC政治集会现场",
+    "raw_text": "Asaba, Delta State capital"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年11月7日阿萨巴NDC支持者集会遭暴徒袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The attack occurred on Saturday, November 7, 2026, during a political rally by the Nigeria Democratic Congress (NDC) supporters in Asaba, Delta State capital."
+    },
+    {
+     "fact": "Obidient运动三角洲州副协调员“Noah同志”据称被匕首刺伤并接受治疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Delta State Deputy Coordinator of the Obidient Movement, simply identified as Comrade Noah, has been stabbed with daggers and is currently receiving medical treatment at the Federal Medical Centre (FMC)"
+    },
+    {
+     "fact": "袭击另致数名运动成员受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "following an attack that also left several other members of the movement injured"
+    },
+    {
+     "fact": "Obidient运动指称部分政治领导人发表煽动性言论并以AK-47威胁反对派",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Obidient Movement coordinator specifically referenced alleged threats by All Progressives Congress (APC) chieftains involving AK-47 rifles"
+    },
+    {
+     "fact": "该组织要求立即调查袭击并追究责任",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The group demanded an immediate investigation into the attack, insisting that those responsible must be identified and brought to justice."
+    }
+   ],
+   "uncertainties": [
+    "袭击细节及伤者情况目前仅有一个来源（Sahara Reporters）报道，尚未获得独立证实",
+    "“Noah同志”仅为简单身份识别，其全名未获确认",
+    "对政治领导人发表煽动性言论及以AK-47威胁反对派的说法属据称/指控，尚未证实",
+    "袭击者身份与动机尚未确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚阿萨巴NDC集会遭暴徒袭击，三角洲州“Obidient”运动协调员据称被匕首刺伤",
+   "summary_zh": "据Sahara Reporters报道，2026年11月7日尼日利亚三角洲州首府阿萨巴举行的尼日利亚民主大会党（NDC）支持者政治集会上，暴徒发动袭击，Obidient运动三角洲州副协调员“Noah同志”据称被匕首刺伤，正在联邦医疗中心接受治疗，另有数名成员受伤。全球Obidient运动全国协调员莫博士发表声明谴责袭击，并指称部分政治领导人发表煽动性言论、以AK-47威胁反对派，助长了政治暴力氛围。该组织要求立即调查并追究责任。上述袭击与指控目前仅有一个来源报道，尚未获得独立证实。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Delta State",
+    "city": "Asaba",
+    "site": "NDC政治集会现场",
+    "raw_text": "Asaba, Delta State capital"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年11月7日阿萨巴NDC支持者集会遭暴徒袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The attack occurred on Saturday, November 7, 2026, during a political rally by the Nigeria Democratic Congress (NDC) supporters in Asaba, Delta State capital."
+    },
+    {
+     "fact": "Obidient运动三角洲州副协调员“Noah同志”据称被匕首刺伤并接受治疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Delta State Deputy Coordinator of the Obidient Movement, simply identified as Comrade Noah, has been stabbed with daggers and is currently receiving medical treatment at the Federal Medical Centre (FMC)"
+    },
+    {
+     "fact": "袭击另致数名运动成员受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "following an attack that also left several other members of the movement injured"
+    },
+    {
+     "fact": "Obidient运动指称部分政治领导人发表煽动性言论并以AK-47威胁反对派",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Obidient Movement coordinator specifically referenced alleged threats by All Progressives Congress (APC) chieftains involving AK-47 rifles"
+    },
+    {
+     "fact": "该组织要求立即调查袭击并追究责任",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The group demanded an immediate investigation into the attack, insisting that those responsible must be identified and brought to justice."
+    }
+   ],
+   "uncertainties": [
+    "袭击细节及伤者情况目前仅有一个来源（Sahara Reporters）报道，尚未获得独立证实",
+    "“Noah同志”仅为简单身份识别，其全名未获确认",
+    "对政治领导人发表煽动性言论及以AK-47威胁反对派的说法属据称/指控，尚未证实",
+    "袭击者身份与动机尚未确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_2e637bcbe1c78b8b",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
