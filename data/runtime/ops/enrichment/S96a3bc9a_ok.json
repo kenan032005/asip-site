@@ -1,0 +1,113 @@
+{
+ "label": "S96a3bc9a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1e495a73eac81af58f5eb23e8386de7b50725ed161b74fed8e3ca5c03ed093c8",
+ "tokens": {
+  "input_tokens": 2352,
+  "output_tokens": 567,
+  "total_tokens": 2919
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "河流州州长在APC总统竞选集会上赞扬蒂努布在近期政治危机中的作用",
+   "summary_zh": "尼日利亚河流州州长富巴拉在哈科特港举行的全体进步大会党（APC）总统竞选集会上，称赞总统蒂努布对该州长期政治危机的干预，称其发挥了“政治家”的作用。富巴拉呼吁政治领导人及其支持者放下分歧，实现和解与团结。此前，他与前任州长、现任联邦首都区部长维克之间的政治争端引发立法冲突与弹劾威胁，蒂努布于2025年3月18日宣布河流州进入紧急状态并暂停州长等人职务，同年9月解除紧急状态。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "河流州",
+    "city": "哈科特港",
+    "site": "APC总统竞选集会",
+    "raw_text": "Port Harcourt"
+   },
+   "key_facts": [
+    {
+     "fact": "河流州州长富巴拉在哈科特港APC总统竞选集会上赞扬蒂努布干预该州政治危机",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Rivers State Governor, Siminalayi Fubara, has commended President Bola Tinubu for his intervention in the state's prolonged political crisis, describing his role as that of a \"statesman.\""
+    },
+    {
+     "fact": "富巴拉与前任州长维克的政治争端引发立法冲突、弹劾威胁和治理中断",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The dispute, which began months after Fubara assumed office in May 2023, triggered a prolonged confrontation between the governor and lawmakers loyal to Wike, resulting in legislative disagreements, impeachment threats and disruptions to governance in the state."
+    },
+    {
+     "fact": "蒂努布于2025年3月18日宣布河流州进入紧急状态，暂停州长、副州长及州议会议员职务六个月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The crisis eventually prompted President Tinubu to declare a state of emergency in Rivers State on March 18, 2025, suspending the governor, his deputy and members of the state House of Assembly for six months."
+    },
+    {
+     "fact": "蒂努布于2025年9月解除紧急状态，恢复民主治理",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Tinubu subsequently lifted the emergency rule in September 2025, restoring democratic governance and paving the way for Fubara's return to office."
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（Sahara Reporters）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "河流州州长在APC总统竞选集会上赞扬蒂努布在近期政治危机中的作用",
+   "summary_zh": "尼日利亚河流州州长富巴拉在哈科特港举行的全体进步大会党（APC）总统竞选集会上，称赞总统蒂努布对该州长期政治危机的干预，称其发挥了“政治家”的作用。富巴拉呼吁政治领导人及其支持者放下分歧，实现和解与团结。此前，他与前任州长、现任联邦首都区部长维克之间的政治争端引发立法冲突与弹劾威胁，蒂努布于2025年3月18日宣布河流州进入紧急状态并暂停州长等人职务，同年9月解除紧急状态。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "河流州",
+    "city": "哈科特港",
+    "site": "APC总统竞选集会",
+    "raw_text": "Port Harcourt"
+   },
+   "key_facts": [
+    {
+     "fact": "河流州州长富巴拉在哈科特港APC总统竞选集会上赞扬蒂努布干预该州政治危机",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Rivers State Governor, Siminalayi Fubara, has commended President Bola Tinubu for his intervention in the state's prolonged political crisis, describing his role as that of a \"statesman.\""
+    },
+    {
+     "fact": "富巴拉与前任州长维克的政治争端引发立法冲突、弹劾威胁和治理中断",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The dispute, which began months after Fubara assumed office in May 2023, triggered a prolonged confrontation between the governor and lawmakers loyal to Wike, resulting in legislative disagreements, impeachment threats and disruptions to governance in the state."
+    },
+    {
+     "fact": "蒂努布于2025年3月18日宣布河流州进入紧急状态，暂停州长、副州长及州议会议员职务六个月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The crisis eventually prompted President Tinubu to declare a state of emergency in Rivers State on March 18, 2025, suspending the governor, his deputy and members of the state House of Assembly for six months."
+    },
+    {
+     "fact": "蒂努布于2025年9月解除紧急状态，恢复民主治理",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Tinubu subsequently lifted the emergency rule in September 2025, restoring democratic governance and paving the way for Fubara's return to office."
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（Sahara Reporters）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_c76b71d296a3bc9a",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

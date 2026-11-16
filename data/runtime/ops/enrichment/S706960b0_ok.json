@@ -1,0 +1,107 @@
+{
+ "label": "S706960b0",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ce674d17ff025fbb134e21e3143150cbcc26b5eac377572a76129e5331125fdc",
+ "tokens": {
+  "input_tokens": 1967,
+  "output_tokens": 393,
+  "total_tokens": 2360
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "加沙强降雨致数万人失去住所",
+   "summary_zh": "加沙地带周六遭遇强降雨，数万名流离失所者的帐篷被淹，床垫和财物浸水。哈马斯管理的政府媒体办公室称，降雨首日约7万顶帐篷被淹，多处开裂墙壁和屋顶坍塌造成人员受伤，部分伤势严重。相关说法目前仅来自单一来源，尚未获得独立核实。",
+   "event_type": "natural_disaster",
+   "country_iso3": "PSE",
+   "location": {
+    "country_iso3": "PSE",
+    "admin1": "加沙地带",
+    "city": null,
+    "site": null,
+    "raw_text": "Gaza"
+   },
+   "key_facts": [
+    {
+     "fact": "加沙地带周六强降雨淹没数万名流离失所者的帐篷",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Heavy rain on Saturday flooded tens of thousands of displaced people's tents in war-devastated Gaza, Palestinian authorities said, leaving them without shelter."
+    },
+    {
+     "fact": "哈马斯管理的政府媒体办公室称降雨首日约7万顶帐篷被淹",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Hamas-run government media office said that about \"70,000 tents sheltering tens of thousands of displaced people were flooded on the first day\" of rains."
+    },
+    {
+     "fact": "多处开裂墙壁和屋顶坍塌造成人员受伤，部分伤势严重",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the \"collapse of dozens of cracked walls and roofs, which caused injuries,\" some critical, in various areas of the tiny territory."
+    }
+   ],
+   "uncertainties": [
+    "帐篷被淹数量及受伤情况由哈马斯管理的政府媒体办公室单方面发布，尚未获得独立核实",
+    "目前仅有一个来源（Africanews）报道，缺乏交叉验证",
+    "具体受伤人数未予说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "加沙强降雨致数万人失去住所",
+   "summary_zh": "加沙地带周六遭遇强降雨，数万名流离失所者的帐篷被淹，床垫和财物浸水。哈马斯管理的政府媒体办公室称，降雨首日约7万顶帐篷被淹，多处开裂墙壁和屋顶坍塌造成人员受伤，部分伤势严重。相关说法目前仅来自单一来源，尚未获得独立核实。",
+   "event_type": "natural_disaster",
+   "country_iso3": "PSE",
+   "location": {
+    "country_iso3": "PSE",
+    "admin1": "加沙地带",
+    "city": null,
+    "site": null,
+    "raw_text": "Gaza"
+   },
+   "key_facts": [
+    {
+     "fact": "加沙地带周六强降雨淹没数万名流离失所者的帐篷",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Heavy rain on Saturday flooded tens of thousands of displaced people's tents in war-devastated Gaza, Palestinian authorities said, leaving them without shelter."
+    },
+    {
+     "fact": "哈马斯管理的政府媒体办公室称降雨首日约7万顶帐篷被淹",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Hamas-run government media office said that about \"70,000 tents sheltering tens of thousands of displaced people were flooded on the first day\" of rains."
+    },
+    {
+     "fact": "多处开裂墙壁和屋顶坍塌造成人员受伤，部分伤势严重",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the \"collapse of dozens of cracked walls and roofs, which caused injuries,\" some critical, in various areas of the tiny territory."
+    }
+   ],
+   "uncertainties": [
+    "帐篷被淹数量及受伤情况由哈马斯管理的政府媒体办公室单方面发布，尚未获得独立核实",
+    "目前仅有一个来源（Africanews）报道，缺乏交叉验证",
+    "具体受伤人数未予说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_abc70fab706960b0",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}
