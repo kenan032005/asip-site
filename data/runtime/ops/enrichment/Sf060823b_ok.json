@@ -1,0 +1,138 @@
+{
+ "label": "Sf060823b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f67fe360a8ee70c408ee75cb0f63fc1509a3858f661d01782668fe27de020cd6",
+ "tokens": {
+  "input_tokens": 2936,
+  "output_tokens": 541,
+  "total_tokens": 3477
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"是否存在连环杀手尚未证实，仅为担忧\", \"系列谋杀案几乎均未告破，调查进展不明\", \"目前仅一个来源报道（单一来源），尚缺乏交叉验证\"]",
+    "after": "[\"是否存在连环杀手尚未证实，仅为担忧\", \"系列谋杀案几乎均未告破，调查进展不明\", \"目前仅一个来源报道（单一来源），尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "南非呼吁男性参与应对针对女性的暴力问题",
+   "summary_zh": "南非是全球女性被杀案发率最高的国家之一。近期约翰内斯堡地区发生一系列针对女性的谋杀案，引发对连环杀手存在的担忧，但调查进展缓慢，几乎无一案件告破。总统拉马福萨去年将基于性别的暴力称为“国家灾难”，并于近期呼吁男性主动参与应对这一问题。约翰内斯堡亚历山德拉镇的一个男性互助小组每周聚会，讨论男性气质与性别暴力问题。",
+   "event_type": "civil_unrest",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": "豪登省",
+    "city": "约翰内斯堡",
+    "site": "亚历山德拉镇",
+    "raw_text": "Township d'Alexandra (Johannesburg)"
+   },
+   "key_facts": [
+    {
+     "fact": "南非是全球女性被杀案发率最高的国家之一",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'Afrique du Sud est l'un des pays avec le plus haut taux de féminicides au monde."
+    },
+    {
+     "fact": "约翰内斯堡地区近期发生一系列针对女性的谋杀案，引发对连环杀手的担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Récemment, une série de meurtres a fait craindre la présence d'un tueur en série qui visait les femmes."
+    },
+    {
+     "fact": "这些谋杀案调查进展缓慢，几乎无一告破",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Mais l'enquête patine, et presque aucun de ces meurtres qui a frappé la région de Johannesburg n'a encore été élucidé."
+    },
+    {
+     "fact": "总统拉马福萨去年将基于性别的暴力称为“国家灾难”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce fléau des violences basées sur le genre a été hissé au rang de « catastrophe nationale » l'année dernière par le président Cyril Ramaphosa"
+    },
+    {
+     "fact": "约翰内斯堡亚历山德拉镇的男性每周举行互助小组讨论男性气质问题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Tous les mercredis, ces hommes du Township d'Alexandra (Johannesburg) se retrouvent pour échanger et questionner leur masculinité."
+    }
+   ],
+   "uncertainties": [
+    "是否存在连环杀手尚未证实，仅为担忧",
+    "系列谋杀案几乎均未告破，调查进展不明",
+    "目前仅一个来源报道（单一来源），尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "南非呼吁男性参与应对针对女性的暴力问题",
+   "summary_zh": "南非是全球女性被杀案发率最高的国家之一。近期约翰内斯堡地区发生一系列针对女性的谋杀案，引发对连环杀手存在的担忧，但调查进展缓慢，几乎无一案件告破。总统拉马福萨去年将基于性别的暴力称为“国家灾难”，并于近期呼吁男性主动参与应对这一问题。约翰内斯堡亚历山德拉镇的一个男性互助小组每周聚会，讨论男性气质与性别暴力问题。",
+   "event_type": "civil_unrest",
+   "country_iso3": "ZAF",
+   "location": {
+    "country_iso3": "ZAF",
+    "admin1": "豪登省",
+    "city": "约翰内斯堡",
+    "site": "亚历山德拉镇",
+    "raw_text": "Township d'Alexandra (Johannesburg)"
+   },
+   "key_facts": [
+    {
+     "fact": "南非是全球女性被杀案发率最高的国家之一",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'Afrique du Sud est l'un des pays avec le plus haut taux de féminicides au monde."
+    },
+    {
+     "fact": "约翰内斯堡地区近期发生一系列针对女性的谋杀案，引发对连环杀手的担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Récemment, une série de meurtres a fait craindre la présence d'un tueur en série qui visait les femmes."
+    },
+    {
+     "fact": "这些谋杀案调查进展缓慢，几乎无一告破",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Mais l'enquête patine, et presque aucun de ces meurtres qui a frappé la région de Johannesburg n'a encore été élucidé."
+    },
+    {
+     "fact": "总统拉马福萨去年将基于性别的暴力称为“国家灾难”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce fléau des violences basées sur le genre a été hissé au rang de « catastrophe nationale » l'année dernière par le président Cyril Ramaphosa"
+    },
+    {
+     "fact": "约翰内斯堡亚历山德拉镇的男性每周举行互助小组讨论男性气质问题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Tous les mercredis, ces hommes du Township d'Alexandra (Johannesburg) se retrouvent pour échanger et questionner leur masculinité."
+    }
+   ],
+   "uncertainties": [
+    "是否存在连环杀手尚未证实，仅为担忧",
+    "系列谋杀案几乎均未告破，调查进展不明",
+    "目前仅一个来源报道（单一来源），尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_4b5d987ff060823b",
+ "disease_event_id": null,
+ "country_code": "ZA"
+}

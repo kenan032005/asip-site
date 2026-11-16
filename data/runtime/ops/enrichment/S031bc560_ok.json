@@ -1,0 +1,127 @@
+{
+ "label": "S031bc560",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ae238044a84aef897cac83c9aa4c7fc891a75b438650da85c072faacfdea4e2f",
+ "tokens": {
+  "input_tokens": 2670,
+  "output_tokens": 558,
+  "total_tokens": 3228
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "也门：萨那附近遭空袭致33人死亡，袭击被指与利雅得有关",
+   "summary_zh": "据胡塞武装控制的卫生部通报，11月7日萨那附近遭空袭，造成33人死亡、39人受伤。胡塞武装指责沙特阿拉伯轰炸了民居，沙特方面表示正在核实相关信息。此前初步统计为27人死亡、36人受伤。",
+   "event_type": "armed_conflict",
+   "country_iso3": "YEM",
+   "location": {
+    "country_iso3": "YEM",
+    "admin1": "萨那省",
+    "city": "萨那",
+    "site": "巴尼胡沙伊什区Al-Shariya村",
+    "raw_text": "le village d'Al-Shariya, dans le district de Bani Hushaysh, à une quinzaine de kilomètres au nord-est de la capitale yéménite"
+   },
+   "key_facts": [
+    {
+     "fact": "胡塞武装控制的卫生部称11月7日萨那附近空袭造成33人死亡、39人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au moins 33 personnes ont été tuées et 39 autres blessées samedi 7 novembre 2026 dans des frappes près de Sanaa, selon un nouveau bilan communiqué par le ministère de la Santé contrôlé par les Houthis."
+    },
+    {
+     "fact": "空袭击中萨那东北约15公里处的Al-Shariya村",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les frappes ont touché le village d'Al-Shariya, dans le district de Bani Hushaysh, à une quinzaine de kilomètres au nord-est de la capitale yéménite."
+    },
+    {
+     "fact": "胡塞武装指责沙特阿拉伯轰炸民居",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les rebelles yéménites accusent l'Arabie saoudite d'avoir bombardé des habitations."
+    },
+    {
+     "fact": "沙特国际传播中心表示正在核实袭击相关信息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Centre saoudien de communication internationale a indiqué examiner les informations relatives à l'attaque."
+    },
+    {
+     "fact": "此前初步统计为27人死亡、36人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un premier bilan faisait état de 27 morts et 36 blessés."
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字来自胡塞武装控制的卫生部，尚未获得独立核实",
+    "沙特阿拉伯是否实施此次空袭尚未证实，沙特方面仅表示正在核实信息",
+    "目前为单一来源报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "也门：萨那附近遭空袭致33人死亡，袭击被指与利雅得有关",
+   "summary_zh": "据胡塞武装控制的卫生部通报，11月7日萨那附近遭空袭，造成33人死亡、39人受伤。胡塞武装指责沙特阿拉伯轰炸了民居，沙特方面表示正在核实相关信息。此前初步统计为27人死亡、36人受伤。",
+   "event_type": "armed_conflict",
+   "country_iso3": "YEM",
+   "location": {
+    "country_iso3": "YEM",
+    "admin1": "萨那省",
+    "city": "萨那",
+    "site": "巴尼胡沙伊什区Al-Shariya村",
+    "raw_text": "le village d'Al-Shariya, dans le district de Bani Hushaysh, à une quinzaine de kilomètres au nord-est de la capitale yéménite"
+   },
+   "key_facts": [
+    {
+     "fact": "胡塞武装控制的卫生部称11月7日萨那附近空袭造成33人死亡、39人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au moins 33 personnes ont été tuées et 39 autres blessées samedi 7 novembre 2026 dans des frappes près de Sanaa, selon un nouveau bilan communiqué par le ministère de la Santé contrôlé par les Houthis."
+    },
+    {
+     "fact": "空袭击中萨那东北约15公里处的Al-Shariya村",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les frappes ont touché le village d'Al-Shariya, dans le district de Bani Hushaysh, à une quinzaine de kilomètres au nord-est de la capitale yéménite."
+    },
+    {
+     "fact": "胡塞武装指责沙特阿拉伯轰炸民居",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les rebelles yéménites accusent l'Arabie saoudite d'avoir bombardé des habitations."
+    },
+    {
+     "fact": "沙特国际传播中心表示正在核实袭击相关信息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Centre saoudien de communication internationale a indiqué examiner les informations relatives à l'attaque."
+    },
+    {
+     "fact": "此前初步统计为27人死亡、36人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un premier bilan faisait état de 27 morts et 36 blessés."
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字来自胡塞武装控制的卫生部，尚未获得独立核实",
+    "沙特阿拉伯是否实施此次空袭尚未证实，沙特方面仅表示正在核实信息",
+    "目前为单一来源报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_e8adbfca031bc560",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

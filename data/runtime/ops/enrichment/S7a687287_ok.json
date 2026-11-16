@@ -1,0 +1,136 @@
+{
+ "label": "S7a687287",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "10004af93a3e9e48cbdb5912ea806ebbc588babf9ccb2a24ff05b912b1f42dca",
+ "tokens": {
+  "input_tokens": 2585,
+  "output_tokens": 604,
+  "total_tokens": 3189
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"袭击实施者身份尚未查明\", \"事件目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证\"]",
+    "after": "[\"袭击实施者身份尚未查明\", \"事件目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "哥伦比亚：无人机袭击军事基地致三名士兵死亡",
+   "summary_zh": "据哥伦比亚军方消息，11月7日星期六，哥伦比亚北部圣罗莎德尔苏尔一处军事基地遭无人机袭击，造成三名士兵死亡、至少十六人受伤。当局在周日上午尚表示未查明袭击实施者身份。哥伦比亚人权机构Defensoría del Pueblo指出，袭击发生时当地正在举行安全会议，并警告该地区人道主义局势恶化。",
+   "event_type": "armed_conflict",
+   "country_iso3": "COL",
+   "location": {
+    "country_iso3": "COL",
+    "admin1": "玻利瓦尔省",
+    "city": "圣罗莎德尔苏尔",
+    "site": "军事基地",
+    "raw_text": "Santa Rosa del Sur, dans le département de Bolívar, au pied de la chaîne montagneuse de San Lucas"
+   },
+   "key_facts": [
+    {
+     "fact": "哥伦比亚北部圣罗莎德尔苏尔一处军事基地遭无人机袭击，三名士兵死亡、至少十六人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Trois soldats ont été tués et au moins seize autres blessés samedi 7 novembre dans une attaque de drones contre une base militaire à Santa Rosa del Sur, dans le nord de la Colombie, selon les forces armées colombiennes."
+    },
+    {
+     "fact": "当局在周日上午尚表示未查明袭击实施者身份",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les autorités n’avaient pas identifié les auteurs de l’attaque dans les informations disponibles dimanche matin."
+    },
+    {
+     "fact": "总统阿贝拉多·德拉埃斯普列利亚谴责此次行动并承诺追查责任人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le président Abelardo de la Espriella a condamné l’opération et promis de poursuivre ses responsables."
+    },
+    {
+     "fact": "人权机构称袭击发生在市政厅举行安全会议期间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Defensoría del Pueblo, l’institution colombienne de défense des droits humains, indique que l’attaque est survenue pendant une réunion de sécurité à la mairie."
+    },
+    {
+     "fact": "2026年5月至9月，玻利瓦尔省南部记录到22起人道主义紧急事件，影响至少11135人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Entre mai et septembre 2026, la Defensoría dit avoir recensé dans le sud de Bolívar 22 urgences humanitaires liées à des confinements et à des déplacements forcés massifs, touchant au moins 11 135 personnes."
+    }
+   ],
+   "uncertainties": [
+    "袭击实施者身份尚未查明",
+    "事件目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "哥伦比亚：无人机袭击军事基地致三名士兵死亡",
+   "summary_zh": "据哥伦比亚军方消息，11月7日星期六，哥伦比亚北部圣罗莎德尔苏尔一处军事基地遭无人机袭击，造成三名士兵死亡、至少十六人受伤。当局在周日上午尚表示未查明袭击实施者身份。哥伦比亚人权机构Defensoría del Pueblo指出，袭击发生时当地正在举行安全会议，并警告该地区人道主义局势恶化。",
+   "event_type": "armed_conflict",
+   "country_iso3": "COL",
+   "location": {
+    "country_iso3": "COL",
+    "admin1": "玻利瓦尔省",
+    "city": "圣罗莎德尔苏尔",
+    "site": "军事基地",
+    "raw_text": "Santa Rosa del Sur, dans le département de Bolívar, au pied de la chaîne montagneuse de San Lucas"
+   },
+   "key_facts": [
+    {
+     "fact": "哥伦比亚北部圣罗莎德尔苏尔一处军事基地遭无人机袭击，三名士兵死亡、至少十六人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Trois soldats ont été tués et au moins seize autres blessés samedi 7 novembre dans une attaque de drones contre une base militaire à Santa Rosa del Sur, dans le nord de la Colombie, selon les forces armées colombiennes."
+    },
+    {
+     "fact": "当局在周日上午尚表示未查明袭击实施者身份",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les autorités n’avaient pas identifié les auteurs de l’attaque dans les informations disponibles dimanche matin."
+    },
+    {
+     "fact": "总统阿贝拉多·德拉埃斯普列利亚谴责此次行动并承诺追查责任人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le président Abelardo de la Espriella a condamné l’opération et promis de poursuivre ses responsables."
+    },
+    {
+     "fact": "人权机构称袭击发生在市政厅举行安全会议期间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Defensoría del Pueblo, l’institution colombienne de défense des droits humains, indique que l’attaque est survenue pendant une réunion de sécurité à la mairie."
+    },
+    {
+     "fact": "2026年5月至9月，玻利瓦尔省南部记录到22起人道主义紧急事件，影响至少11135人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Entre mai et septembre 2026, la Defensoría dit avoir recensé dans le sud de Bolívar 22 urgences humanitaires liées à des confinements et à des déplacements forcés massifs, touchant au moins 11 135 personnes."
+    }
+   ],
+   "uncertainties": [
+    "袭击实施者身份尚未查明",
+    "事件目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_142ef7077a687287",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
