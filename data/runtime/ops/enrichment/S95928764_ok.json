@@ -1,0 +1,117 @@
+{
+ "label": "S95928764",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "efb498d3b70948b9bd96f962c2ec4a22e8af6d34734618642ceb9eb75292574f",
+ "tokens": {
+  "input_tokens": 2676,
+  "output_tokens": 509,
+  "total_tokens": 3185
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "约贝州IPAC主席与秘书长拒绝接受弹劾",
+   "summary_zh": "尼日利亚约贝州政党间咨询委员会（IPAC）主席乌马尔·贾杰雷与秘书长穆斯塔法·加多拒绝接受针对他们的弹劾，称该程序无效。二人指称此次会议未达到法定人数、召集程序违规，且未履行纪律程序。此前该委员会代理秘书宣布解除二人职务，指控其未与成员党协商、并涉嫌以委员会名义为个人利益领取救济物资。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Yobe State",
+    "city": "Damaturu",
+    "site": null,
+    "raw_text": "Yobe State, Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "约贝州IPAC主席贾杰雷与秘书长加多拒绝接受针对二人的弹劾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Chairman of the Inter-Party Advisory Council in Yobe State, Umar Jajere, and its Secretary-General, Mustapha Gado, have rejected their purported impeachment, describing the exercise as invalid."
+    },
+    {
+     "fact": "二人称该会议未达到IPAC行为准则规定的法定人数",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The meeting did not satisfy the required quorum prescribed by the IPAC Code of Conduct."
+    },
+    {
+     "fact": "此前代理秘书哈比芭·乌马鲁在达马图鲁宣布解除二人职务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Jajere and Gado’s removal was announced by the council in a statement signed by its Acting Secretary, Habiba Umaru, following an emergency meeting held at its secretariat along Potiskum Road, Damaturu"
+    },
+    {
+     "fact": "委员会方面指称二人未与成员党协商并以委员会名义为个人利益领取救济物资",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The council also alleged that the former leaders used its name to receive quarterly palliatives from the North-East Development Commission and other government and non-governmental organisations for their personal benefit"
+    }
+   ],
+   "uncertainties": [
+    "弹劾是否有效尚未有独立裁决，双方各执一词",
+    "关于滥用救济物资的指控尚未经调查证实",
+    "目前仅单一来源（Punch）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "约贝州IPAC主席与秘书长拒绝接受弹劾",
+   "summary_zh": "尼日利亚约贝州政党间咨询委员会（IPAC）主席乌马尔·贾杰雷与秘书长穆斯塔法·加多拒绝接受针对他们的弹劾，称该程序无效。二人指称此次会议未达到法定人数、召集程序违规，且未履行纪律程序。此前该委员会代理秘书宣布解除二人职务，指控其未与成员党协商、并涉嫌以委员会名义为个人利益领取救济物资。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Yobe State",
+    "city": "Damaturu",
+    "site": null,
+    "raw_text": "Yobe State, Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "约贝州IPAC主席贾杰雷与秘书长加多拒绝接受针对二人的弹劾",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Chairman of the Inter-Party Advisory Council in Yobe State, Umar Jajere, and its Secretary-General, Mustapha Gado, have rejected their purported impeachment, describing the exercise as invalid."
+    },
+    {
+     "fact": "二人称该会议未达到IPAC行为准则规定的法定人数",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The meeting did not satisfy the required quorum prescribed by the IPAC Code of Conduct."
+    },
+    {
+     "fact": "此前代理秘书哈比芭·乌马鲁在达马图鲁宣布解除二人职务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Jajere and Gado’s removal was announced by the council in a statement signed by its Acting Secretary, Habiba Umaru, following an emergency meeting held at its secretariat along Potiskum Road, Damaturu"
+    },
+    {
+     "fact": "委员会方面指称二人未与成员党协商并以委员会名义为个人利益领取救济物资",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The council also alleged that the former leaders used its name to receive quarterly palliatives from the North-East Development Commission and other government and non-governmental organisations for their personal benefit"
+    }
+   ],
+   "uncertainties": [
+    "弹劾是否有效尚未有独立裁决，双方各执一词",
+    "关于滥用救济物资的指控尚未经调查证实",
+    "目前仅单一来源（Punch）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_d618b75295928764",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
