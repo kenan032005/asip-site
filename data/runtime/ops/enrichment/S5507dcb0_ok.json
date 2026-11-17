@@ -1,0 +1,137 @@
+{
+ "label": "S5507dcb0",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "140006b67d98cacbdd3696d8809969ccf437a7842433d8b4cf89b72bbbd32569",
+ "tokens": {
+  "input_tokens": 2697,
+  "output_tokens": 731,
+  "total_tokens": 3428
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "德尔加杜角省十天内至少19人遭恐怖分子杀害",
+   "summary_zh": "据ACLED于11月6日发布的11月《莫桑比克冲突监测》更新，10月21日至31日期间，德尔加杜角省Mueda与Muidumbe两区发生的袭击造成至少19人死亡，遇难者几乎全为平民。报告称伊斯兰国在莫桑比克的活动仍活跃于该省九个区，并指出莫桑比克武装部队在指挥、情报与后勤方面存在薄弱环节。国际移民组织数据显示，9月21日至10月13日期间，5794人因袭击及袭击威胁而流离失所。该信息目前为单一来源报道。",
+   "event_type": "armed_conflict",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "Cabo Delgado",
+    "city": null,
+    "site": "Mueda与Muidumbe两区交界地带",
+    "raw_text": "distritos de Mueda e Muidumbe, na província de Cabo Delgado"
+   },
+   "key_facts": [
+    {
+     "fact": "10月21日至31日，德尔加杜角省Mueda与Muidumbe两区发生的恐怖分子袭击造成至少19人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pelo menos 19 pessoas foram mortas em ataques protagonizados por terroristas nos distritos de Mueda e Muidumbe, na província de Cabo Delgado, entre 21 e 31 de Outubro."
+    },
+    {
+     "fact": "遇难者除一人外均为正在从事日常活动的平民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Todas as vítimas, à excepção de uma, eram civis que se encontravam a realizar as suas actividades quotidianas."
+    },
+    {
+     "fact": "袭击发生在Mueda与Muidumbe交界地区至少七个地点",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "os ataques ocorreram em pelo menos sete localidades situadas na região que faz fronteira entre os distritos de Mueda e Muidumbe"
+    },
+    {
+     "fact": "ACLED称伊斯兰国在莫桑比克10月期间于德尔加杜角省九个区保持活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "durante Outubro, o Estado Islâmico em Moçambique manteve actividade em nove distritos de Cabo Delgado"
+    },
+    {
+     "fact": "国际移民组织数据显示，9月21日至10月13日期间5794人（1785户家庭）离开原居住地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "5.794 pessoas, correspondentes a 1.785 famílias, abandonaram as suas zonas de residência entre 21 de Setembro e 13 de Outubro"
+    },
+    {
+     "fact": "欧盟驻莫桑比克军事援助团指挥官称，叛乱分子在6月至10月间发动了150多次袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "os insurgentes protagonizaram mais de 150 ataques entre Junho e Outubro deste ano"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（O País）报道，尚缺乏交叉验证",
+    "伤亡数字来自ACLED报告，未经独立核实",
+    "袭击的具体地点与细节未获其他来源确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "德尔加杜角省十天内至少19人遭恐怖分子杀害",
+   "summary_zh": "据ACLED于11月6日发布的11月《莫桑比克冲突监测》更新，10月21日至31日期间，德尔加杜角省Mueda与Muidumbe两区发生的袭击造成至少19人死亡，遇难者几乎全为平民。报告称伊斯兰国在莫桑比克的活动仍活跃于该省九个区，并指出莫桑比克武装部队在指挥、情报与后勤方面存在薄弱环节。国际移民组织数据显示，9月21日至10月13日期间，5794人因袭击及袭击威胁而流离失所。该信息目前为单一来源报道。",
+   "event_type": "armed_conflict",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "Cabo Delgado",
+    "city": null,
+    "site": "Mueda与Muidumbe两区交界地带",
+    "raw_text": "distritos de Mueda e Muidumbe, na província de Cabo Delgado"
+   },
+   "key_facts": [
+    {
+     "fact": "10月21日至31日，德尔加杜角省Mueda与Muidumbe两区发生的恐怖分子袭击造成至少19人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pelo menos 19 pessoas foram mortas em ataques protagonizados por terroristas nos distritos de Mueda e Muidumbe, na província de Cabo Delgado, entre 21 e 31 de Outubro."
+    },
+    {
+     "fact": "遇难者除一人外均为正在从事日常活动的平民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Todas as vítimas, à excepção de uma, eram civis que se encontravam a realizar as suas actividades quotidianas."
+    },
+    {
+     "fact": "袭击发生在Mueda与Muidumbe交界地区至少七个地点",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "os ataques ocorreram em pelo menos sete localidades situadas na região que faz fronteira entre os distritos de Mueda e Muidumbe"
+    },
+    {
+     "fact": "ACLED称伊斯兰国在莫桑比克10月期间于德尔加杜角省九个区保持活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "durante Outubro, o Estado Islâmico em Moçambique manteve actividade em nove distritos de Cabo Delgado"
+    },
+    {
+     "fact": "国际移民组织数据显示，9月21日至10月13日期间5794人（1785户家庭）离开原居住地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "5.794 pessoas, correspondentes a 1.785 famílias, abandonaram as suas zonas de residência entre 21 de Setembro e 13 de Outubro"
+    },
+    {
+     "fact": "欧盟驻莫桑比克军事援助团指挥官称，叛乱分子在6月至10月间发动了150多次袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "os insurgentes protagonizaram mais de 150 ataques entre Junho e Outubro deste ano"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（O País）报道，尚缺乏交叉验证",
+    "伤亡数字来自ACLED报告，未经独立核实",
+    "袭击的具体地点与细节未获其他来源确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_fa3c2a905507dcb0",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

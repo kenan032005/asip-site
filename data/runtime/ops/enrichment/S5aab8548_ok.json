@@ -1,0 +1,115 @@
+{
+ "label": "S5aab8548",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "96081438f131cb8234a9b647ea15c3c99d9d5aedb7aeb4726b2cb58d5784c814",
+ "tokens": {
+  "input_tokens": 2031,
+  "output_tokens": 484,
+  "total_tokens": 2515
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "奥巴桑乔呼吁尼日利亚解决不安全与失业问题",
+   "summary_zh": "尼日利亚前总统奥卢塞贡·奥巴桑乔在拉各斯举行的“Creative Africa Nexus Weekend 2026”一场专题讨论会上发言，呼吁采取紧急行动应对该国日益恶化的不安全、失业与贫困问题。他警告称，领导层的失职正迫使民众通过危险的移民途径前往国外寻求更好机会。他并表示必须提供就业机会，遏制有罪不罚、贫困、绑架和不安全现象的蔓延。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "拉各斯州",
+    "city": null,
+    "site": "Creative Africa Nexus Weekend 2026 专题讨论会",
+    "raw_text": "Lagos State"
+   },
+   "key_facts": [
+    {
+     "fact": "奥巴桑乔呼吁紧急应对尼日利亚不安全、失业与贫困问题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Former President Olusegun Obasanjo has called for urgent action to address worsening insecurity, unemployment and poverty in Nigeria"
+    },
+    {
+     "fact": "奥巴桑乔称领导层失职迫使民众通过危险移民途径出国",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "warning that leadership failures are forcing citizens to seek better opportunities abroad, often through dangerous migration routes"
+    },
+    {
+     "fact": "奥巴桑乔在拉各斯举行的Creative Africa Nexus Weekend 2026专题讨论会上发言",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Obasanjo spoke on Saturday during a panel session themed “Lest We Forget” at the Creative Africa Nexus Weekend 2026, organised by the African Export-Import Bank in Lagos State"
+    },
+    {
+     "fact": "奥巴桑乔呼吁提供就业机会并遏制绑架与不安全现象",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "“We just have to do what we should do to provide job opportunities, to stem the tide of impunity, to stem the tide of poverty, to stem the tide of kidnapping and insecurity,” he said"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Punch）报道，尚缺乏交叉验证",
+    "正文为部分提取（partial_body），内容可能不完整"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "奥巴桑乔呼吁尼日利亚解决不安全与失业问题",
+   "summary_zh": "尼日利亚前总统奥卢塞贡·奥巴桑乔在拉各斯举行的“Creative Africa Nexus Weekend 2026”一场专题讨论会上发言，呼吁采取紧急行动应对该国日益恶化的不安全、失业与贫困问题。他警告称，领导层的失职正迫使民众通过危险的移民途径前往国外寻求更好机会。他并表示必须提供就业机会，遏制有罪不罚、贫困、绑架和不安全现象的蔓延。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "拉各斯州",
+    "city": null,
+    "site": "Creative Africa Nexus Weekend 2026 专题讨论会",
+    "raw_text": "Lagos State"
+   },
+   "key_facts": [
+    {
+     "fact": "奥巴桑乔呼吁紧急应对尼日利亚不安全、失业与贫困问题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Former President Olusegun Obasanjo has called for urgent action to address worsening insecurity, unemployment and poverty in Nigeria"
+    },
+    {
+     "fact": "奥巴桑乔称领导层失职迫使民众通过危险移民途径出国",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "warning that leadership failures are forcing citizens to seek better opportunities abroad, often through dangerous migration routes"
+    },
+    {
+     "fact": "奥巴桑乔在拉各斯举行的Creative Africa Nexus Weekend 2026专题讨论会上发言",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Obasanjo spoke on Saturday during a panel session themed “Lest We Forget” at the Creative Africa Nexus Weekend 2026, organised by the African Export-Import Bank in Lagos State"
+    },
+    {
+     "fact": "奥巴桑乔呼吁提供就业机会并遏制绑架与不安全现象",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "“We just have to do what we should do to provide job opportunities, to stem the tide of impunity, to stem the tide of poverty, to stem the tide of kidnapping and insecurity,” he said"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Punch）报道，尚缺乏交叉验证",
+    "正文为部分提取（partial_body），内容可能不完整"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_3aa259435aab8548",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
