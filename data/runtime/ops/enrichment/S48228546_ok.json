@@ -1,0 +1,117 @@
+{
+ "label": "S48228546",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "54da37aa1b3423fb5ef43e75f1b7075f7a504ec243998e9a7ed0d2bebf482eac",
+ "tokens": {
+  "input_tokens": 2029,
+  "output_tokens": 451,
+  "total_tokens": 2480
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚三角洲州集会冲突致一死五伤，奥比要求调查",
+   "summary_zh": "尼日利亚三角洲州阿萨巴一场政治集会沿线发生冲突，造成一人死亡、五人受伤。警方称已就事件展开调查，并称事前曾收到可能发生暴力的情报、约谈集会组织者并建议不要举行公开游行。集会由Obedient/OK Movement组织，支持尼日利亚民主党总统候选人彼得·奥比。",
+   "event_type": "armed_conflict",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "三角洲州",
+    "city": "阿萨巴",
+    "site": "Nnebisi路",
+    "raw_text": "Asaba, Delta State, along Nnebisi Road"
+   },
+   "key_facts": [
+    {
+     "fact": "三角洲州阿萨巴一场政治集会发生冲突，造成一人死亡、五人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Delta State Police Command has commenced an investigation into a clash at a political rally in Asaba, which left one person dead and five others injured."
+    },
+    {
+     "fact": "事件发生在周六约12时15分，地点为Nnebisi路，游行由Obedient/OK Movement组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The incident occurred at about 12:15 pm on Saturday along Nnebisi Road during a procession organised by the Obedient/OK Movement"
+    },
+    {
+     "fact": "警方称事前收到可能发生暴力的情报，并约谈组织者建议不要举行公开游行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the police said they had received intelligence suggesting a likelihood of violence before the rally and invited the organisers to a security meeting"
+    },
+    {
+     "fact": "彼得·奥比要求对事件进行调查",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "One killed, five injured at Delta rally, Obi demands probe"
+    }
+   ],
+   "uncertainties": [
+    "冲突具体经过与责任方尚未确认",
+    "伤亡数字来自警方单一来源，尚缺乏交叉验证",
+    "警方所称事前暴力情报的细节未披露"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚三角洲州集会冲突致一死五伤，奥比要求调查",
+   "summary_zh": "尼日利亚三角洲州阿萨巴一场政治集会沿线发生冲突，造成一人死亡、五人受伤。警方称已就事件展开调查，并称事前曾收到可能发生暴力的情报、约谈集会组织者并建议不要举行公开游行。集会由Obedient/OK Movement组织，支持尼日利亚民主党总统候选人彼得·奥比。",
+   "event_type": "armed_conflict",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "三角洲州",
+    "city": "阿萨巴",
+    "site": "Nnebisi路",
+    "raw_text": "Asaba, Delta State, along Nnebisi Road"
+   },
+   "key_facts": [
+    {
+     "fact": "三角洲州阿萨巴一场政治集会发生冲突，造成一人死亡、五人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Delta State Police Command has commenced an investigation into a clash at a political rally in Asaba, which left one person dead and five others injured."
+    },
+    {
+     "fact": "事件发生在周六约12时15分，地点为Nnebisi路，游行由Obedient/OK Movement组织",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The incident occurred at about 12:15 pm on Saturday along Nnebisi Road during a procession organised by the Obedient/OK Movement"
+    },
+    {
+     "fact": "警方称事前收到可能发生暴力的情报，并约谈组织者建议不要举行公开游行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the police said they had received intelligence suggesting a likelihood of violence before the rally and invited the organisers to a security meeting"
+    },
+    {
+     "fact": "彼得·奥比要求对事件进行调查",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "One killed, five injured at Delta rally, Obi demands probe"
+    }
+   ],
+   "uncertainties": [
+    "冲突具体经过与责任方尚未确认",
+    "伤亡数字来自警方单一来源，尚缺乏交叉验证",
+    "警方所称事前暴力情报的细节未披露"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_a69b7ac648228546",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
