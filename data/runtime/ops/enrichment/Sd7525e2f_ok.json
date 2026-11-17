@@ -1,0 +1,138 @@
+{
+ "label": "Sd7525e2f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e57ea09b5f7b8877e56587b69a41cd48e2a2d29a60d87fd4270d47119cd9a695",
+ "tokens": {
+  "input_tokens": 2700,
+  "output_tokens": 520,
+  "total_tokens": 3220
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"伤亡人数为日本媒体援引美联社的报道，尚未获独立交叉验证\", \"日本气象厅测定震级为5.7，美国地质调查局测定为5.5，不同来源存在差异\", \"目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证\"]",
+    "after": "[\"伤亡人数为日本媒体援引美联社的报道，尚未获独立交叉验证\", \"日本气象厅测定震级为5.7，美国地质调查局测定为5.5，不同来源存在差异\", \"目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "日本静冈县发生5.7级地震，至少22人受伤",
+   "summary_zh": "据日本媒体援引美联社报道，日本中部静冈县西部于当地时间11月8日凌晨1时04分发生5.7级地震，造成至少22人受伤。日本气象厅表示震源深度约41公里，未引发海啸预警。商店橱窗玻璃破碎，部分居民在逃生时从楼梯跌落受伤，新干线列车在受影响区域减速运行。气象厅提醒未来数日可能发生余震。",
+   "event_type": "natural_disaster",
+   "country_iso3": "JPN",
+   "location": {
+    "country_iso3": "JPN",
+    "admin1": "静冈县",
+    "city": null,
+    "site": "静冈县西部",
+    "raw_text": "l’ouest de la préfecture de Shizuoka"
+   },
+   "key_facts": [
+    {
+     "fact": "日本静冈县西部发生5.7级地震",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un séisme de magnitude 5,7 a secoué le centre du Japon dimanche 8 novembre 2026"
+    },
+    {
+     "fact": "地震造成至少22人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "faisant au moins 22 blessés, selon des médias japonais cités par l’Associated Press"
+    },
+    {
+     "fact": "震源深度约41公里，未引发海啸预警",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le foyer a été localisé à 41 kilomètres de profondeur... sans provoquer d’alerte au tsunami"
+    },
+    {
+     "fact": "美国地质调查局评估震级为5.5",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’Institut d’études géologiques des États-Unis (USGS) a évalué sa magnitude à 5,5"
+    },
+    {
+     "fact": "气象厅提醒未来约一周警惕余震",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Elle appelle les habitants des secteurs les plus touchés à rester vigilants pendant environ une semaine"
+    }
+   ],
+   "uncertainties": [
+    "伤亡人数为日本媒体援引美联社的报道，尚未获独立交叉验证",
+    "日本气象厅测定震级为5.7，美国地质调查局测定为5.5，不同来源存在差异",
+    "目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "日本静冈县发生5.7级地震，至少22人受伤",
+   "summary_zh": "据日本媒体援引美联社报道，日本中部静冈县西部于当地时间11月8日凌晨1时04分发生5.7级地震，造成至少22人受伤。日本气象厅表示震源深度约41公里，未引发海啸预警。商店橱窗玻璃破碎，部分居民在逃生时从楼梯跌落受伤，新干线列车在受影响区域减速运行。气象厅提醒未来数日可能发生余震。",
+   "event_type": "natural_disaster",
+   "country_iso3": "JPN",
+   "location": {
+    "country_iso3": "JPN",
+    "admin1": "静冈县",
+    "city": null,
+    "site": "静冈县西部",
+    "raw_text": "l’ouest de la préfecture de Shizuoka"
+   },
+   "key_facts": [
+    {
+     "fact": "日本静冈县西部发生5.7级地震",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un séisme de magnitude 5,7 a secoué le centre du Japon dimanche 8 novembre 2026"
+    },
+    {
+     "fact": "地震造成至少22人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "faisant au moins 22 blessés, selon des médias japonais cités par l’Associated Press"
+    },
+    {
+     "fact": "震源深度约41公里，未引发海啸预警",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le foyer a été localisé à 41 kilomètres de profondeur... sans provoquer d’alerte au tsunami"
+    },
+    {
+     "fact": "美国地质调查局评估震级为5.5",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’Institut d’études géologiques des États-Unis (USGS) a évalué sa magnitude à 5,5"
+    },
+    {
+     "fact": "气象厅提醒未来约一周警惕余震",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Elle appelle les habitants des secteurs les plus touchés à rester vigilants pendant environ une semaine"
+    }
+   ],
+   "uncertainties": [
+    "伤亡人数为日本媒体援引美联社的报道，尚未获独立交叉验证",
+    "日本气象厅测定震级为5.7，美国地质调查局测定为5.5，不同来源存在差异",
+    "目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_568bbabcd7525e2f",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

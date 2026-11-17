@@ -1,0 +1,136 @@
+{
+ "label": "S3410ca40",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "8533060c34c1488afd1d13188325c088d6cbfcbe51f370be3344bc6f2f24a2ed",
+ "tokens": {
+  "input_tokens": 2641,
+  "output_tokens": 529,
+  "total_tokens": 3170
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"火灾原因和具体情况尚未查明，调查仍在进行中\", \"目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证\"]",
+    "after": "[\"火灾原因和具体情况尚未查明，调查仍在进行中\", \"目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "西班牙马德里附近一栋公寓楼发生火灾，造成一人死亡、十一人受伤",
+   "summary_zh": "据西班牙当地应急部门消息，2026年11月8日星期日，马德里西北部瓜达拉马镇一栋四层住宅楼发生火灾，造成一名62岁男子死亡，另有11人受伤，其中两人伤势严重。伤者中包括一名50岁女性和一名女童，两人已被送往马德里的La Paz医院。西班牙国民警卫队正在调查火灾原因。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "ESP",
+   "location": {
+    "country_iso3": "ESP",
+    "admin1": "马德里自治区",
+    "city": "瓜达拉马",
+    "site": "Nuevo Guadarrama街一栋四层住宅楼",
+    "raw_text": "Guadarrama, au nord-ouest de Madrid, rue Nuevo Guadarrama"
+   },
+   "key_facts": [
+    {
+     "fact": "火灾发生在马德里西北部瓜达拉马镇一栋四层住宅楼",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'incendie d'un immeuble d'habitation survenu dimanche 8 novembre 2026 à Guadarrama, au nord-ouest de Madrid"
+    },
+    {
+     "fact": "一名62岁男子在火灾中死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un homme de 62 ans a perdu la vie"
+    },
+    {
+     "fact": "另有11人受伤，其中两人伤势严重",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "onze personnes ont été blessées, dont deux grièvement"
+    },
+    {
+     "fact": "两名重伤者包括一名50岁女性和一名女童，已被送往马德里的La Paz医院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Parmi les blessés graves figurent une femme de 50 ans, épouse du défunt, et une fillette. Toutes deux ont été intubées et transportées à l'hôpital La Paz, à Madrid"
+    },
+    {
+     "fact": "西班牙国民警卫队负责调查火灾原因",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Garde civile espagnole est chargée de l'enquête sur les circonstances et l'origine du sinistre"
+    }
+   ],
+   "uncertainties": [
+    "火灾原因和具体情况尚未查明，调查仍在进行中",
+    "目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "西班牙马德里附近一栋公寓楼发生火灾，造成一人死亡、十一人受伤",
+   "summary_zh": "据西班牙当地应急部门消息，2026年11月8日星期日，马德里西北部瓜达拉马镇一栋四层住宅楼发生火灾，造成一名62岁男子死亡，另有11人受伤，其中两人伤势严重。伤者中包括一名50岁女性和一名女童，两人已被送往马德里的La Paz医院。西班牙国民警卫队正在调查火灾原因。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "ESP",
+   "location": {
+    "country_iso3": "ESP",
+    "admin1": "马德里自治区",
+    "city": "瓜达拉马",
+    "site": "Nuevo Guadarrama街一栋四层住宅楼",
+    "raw_text": "Guadarrama, au nord-ouest de Madrid, rue Nuevo Guadarrama"
+   },
+   "key_facts": [
+    {
+     "fact": "火灾发生在马德里西北部瓜达拉马镇一栋四层住宅楼",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'incendie d'un immeuble d'habitation survenu dimanche 8 novembre 2026 à Guadarrama, au nord-ouest de Madrid"
+    },
+    {
+     "fact": "一名62岁男子在火灾中死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un homme de 62 ans a perdu la vie"
+    },
+    {
+     "fact": "另有11人受伤，其中两人伤势严重",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "onze personnes ont été blessées, dont deux grièvement"
+    },
+    {
+     "fact": "两名重伤者包括一名50岁女性和一名女童，已被送往马德里的La Paz医院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Parmi les blessés graves figurent une femme de 50 ans, épouse du défunt, et une fillette. Toutes deux ont été intubées et transportées à l'hôpital La Paz, à Madrid"
+    },
+    {
+     "fact": "西班牙国民警卫队负责调查火灾原因",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Garde civile espagnole est chargée de l'enquête sur les circonstances et l'origine du sinistre"
+    }
+   ],
+   "uncertainties": [
+    "火灾原因和具体情况尚未查明，调查仍在进行中",
+    "目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_78b5c9e33410ca40",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
