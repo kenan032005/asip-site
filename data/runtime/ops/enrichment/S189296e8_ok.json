@@ -1,0 +1,127 @@
+{
+ "label": "S189296e8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e8b93c973c0326e6e82b19f35af6f7cf2a5fe828c84382236f11065165cfe512",
+ "tokens": {
+  "input_tokens": 2386,
+  "output_tokens": 543,
+  "total_tokens": 2929
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "加沙地带强降雨淹没约7万顶帐篷",
+   "summary_zh": "据葡萄牙语媒体《O País》报道，加沙地带周六遭遇强降雨，约7万顶帐篷被淹，数万名流离失所者受影响。加沙城及加沙地带中部和北部多处营地的数百个流离失所家庭在帐篷进水后逃离。民防部门发言人称，其团队夜间接到超过1500个求助电话，且该机构在没有任何设备的情况下运作。",
+   "event_type": "natural_disaster",
+   "country_iso3": "PSE",
+   "location": {
+    "country_iso3": "PSE",
+    "admin1": "加沙地带",
+    "city": "加沙城",
+    "site": null,
+    "raw_text": "Faixa de Gaza"
+   },
+   "key_facts": [
+    {
+     "fact": "加沙地带强降雨淹没约7万顶帐篷",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "As fortes chuvas registadas neste sábado, na Faixa de Gaza, inundaram cerca de 70 mil tendas"
+    },
+    {
+     "fact": "加沙城及加沙地带中部和北部营地的数百个流离失所家庭逃离被淹帐篷",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Centenas de famílias deslocadas foram vistas a fugir de campos em partes da Cidade de Gaza e nas áreas central e norte da Faixa"
+    },
+    {
+     "fact": "民防部门发言人称夜间接到超过1500个求助电话",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "as suas equipas receberam mais de 1.500 chamadas durante a noite de residentes a pedir assistência urgente"
+    },
+    {
+     "fact": "加沙地带沿海一处营地超过12.5万个家庭面临海水逼近的紧迫风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "mais de 125 mil famílias correm risco iminente com o avanço do mar sobre as tendas de plástico e pano"
+    },
+    {
+     "fact": "加沙城al-Shifa医疗中心急诊部门因污水溢流停运四小时",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "o sector de emergência ficou fora de serviço por quatro horas após o transbordo de água misturada ao esgoto"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（O País）报道，尚缺乏交叉验证",
+    "伤亡人数未获确认",
+    "当地政府与紧急委员会称急需20万套预制房屋和重型机械，该需求尚未获独立核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "加沙地带强降雨淹没约7万顶帐篷",
+   "summary_zh": "据葡萄牙语媒体《O País》报道，加沙地带周六遭遇强降雨，约7万顶帐篷被淹，数万名流离失所者受影响。加沙城及加沙地带中部和北部多处营地的数百个流离失所家庭在帐篷进水后逃离。民防部门发言人称，其团队夜间接到超过1500个求助电话，且该机构在没有任何设备的情况下运作。",
+   "event_type": "natural_disaster",
+   "country_iso3": "PSE",
+   "location": {
+    "country_iso3": "PSE",
+    "admin1": "加沙地带",
+    "city": "加沙城",
+    "site": null,
+    "raw_text": "Faixa de Gaza"
+   },
+   "key_facts": [
+    {
+     "fact": "加沙地带强降雨淹没约7万顶帐篷",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "As fortes chuvas registadas neste sábado, na Faixa de Gaza, inundaram cerca de 70 mil tendas"
+    },
+    {
+     "fact": "加沙城及加沙地带中部和北部营地的数百个流离失所家庭逃离被淹帐篷",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Centenas de famílias deslocadas foram vistas a fugir de campos em partes da Cidade de Gaza e nas áreas central e norte da Faixa"
+    },
+    {
+     "fact": "民防部门发言人称夜间接到超过1500个求助电话",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "as suas equipas receberam mais de 1.500 chamadas durante a noite de residentes a pedir assistência urgente"
+    },
+    {
+     "fact": "加沙地带沿海一处营地超过12.5万个家庭面临海水逼近的紧迫风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "mais de 125 mil famílias correm risco iminente com o avanço do mar sobre as tendas de plástico e pano"
+    },
+    {
+     "fact": "加沙城al-Shifa医疗中心急诊部门因污水溢流停运四小时",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "o sector de emergência ficou fora de serviço por quatro horas após o transbordo de água misturada ao esgoto"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（O País）报道，尚缺乏交叉验证",
+    "伤亡人数未获确认",
+    "当地政府与紧急委员会称急需20万套预制房屋和重型机械，该需求尚未获独立核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_a7d98348189296e8",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

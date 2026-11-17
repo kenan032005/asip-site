@@ -1,0 +1,128 @@
+{
+ "label": "S364e081c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "beedfaaef401872e3ba7504bd53ac588b838c51d67f192cef4f4cd6e75be9ace",
+ "tokens": {
+  "input_tokens": 2549,
+  "output_tokens": 480,
+  "total_tokens": 3029
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"死亡人数仍为临时数字，可能进一步变化\", \"目前仅有一名幸存者获救，其余人员情况尚不清楚\", \"该事件目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证\"]",
+    "after": "[\"死亡人数仍为临时数字，可能进一步变化\", \"目前仅有一名幸存者获救，其余人员情况尚不清楚\", \"该事件目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "塞内加尔：凯贝梅尔附近海域一艘独木舟沉没，至少21人死亡",
+   "summary_zh": "据塞内加尔内政部11月8日（周日）通报，一艘载有移民的独木舟在塞内加尔西北部凯贝梅尔附近海域沉没，造成至少21人死亡，该死亡人数仍为临时数字。目前已找到一名幸存者，搜救行动仍在继续。政府向遇难者家属表示哀悼，并重申将与邻国合作打击偷渡网络。",
+   "event_type": "other_security",
+   "country_iso3": "SEN",
+   "location": {
+    "country_iso3": "SEN",
+    "admin1": null,
+    "city": "凯贝梅尔",
+    "site": "凯贝梅尔附近海域",
+    "raw_text": "au large de Kébémer, dans le nord-ouest du Sénégal"
+   },
+   "key_facts": [
+    {
+     "fact": "一艘载有移民的独木舟在塞内加尔西北部凯贝梅尔附近海域沉没，造成至少21人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au moins 21 personnes sont mortes dans le naufrage d’une pirogue transportant des migrants au large de Kébémer, dans le nord-ouest du Sénégal"
+    },
+    {
+     "fact": "该死亡人数仍为临时数字",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce bilan reste provisoire."
+    },
+    {
+     "fact": "目前已找到一名幸存者，搜救行动仍在继续",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les opérations de recherche et de sauvetage se poursuivent. Un rescapé a été retrouvé, d’après le ministère."
+    },
+    {
+     "fact": "塞内加尔内政部于11月8日（周日）通报了这一消息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a annoncé dimanche 8 novembre le ministère de l’Intérieur"
+    }
+   ],
+   "uncertainties": [
+    "死亡人数仍为临时数字，可能进一步变化",
+    "目前仅有一名幸存者获救，其余人员情况尚不清楚",
+    "该事件目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "塞内加尔：凯贝梅尔附近海域一艘独木舟沉没，至少21人死亡",
+   "summary_zh": "据塞内加尔内政部11月8日（周日）通报，一艘载有移民的独木舟在塞内加尔西北部凯贝梅尔附近海域沉没，造成至少21人死亡，该死亡人数仍为临时数字。目前已找到一名幸存者，搜救行动仍在继续。政府向遇难者家属表示哀悼，并重申将与邻国合作打击偷渡网络。",
+   "event_type": "other_security",
+   "country_iso3": "SEN",
+   "location": {
+    "country_iso3": "SEN",
+    "admin1": null,
+    "city": "凯贝梅尔",
+    "site": "凯贝梅尔附近海域",
+    "raw_text": "au large de Kébémer, dans le nord-ouest du Sénégal"
+   },
+   "key_facts": [
+    {
+     "fact": "一艘载有移民的独木舟在塞内加尔西北部凯贝梅尔附近海域沉没，造成至少21人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au moins 21 personnes sont mortes dans le naufrage d’une pirogue transportant des migrants au large de Kébémer, dans le nord-ouest du Sénégal"
+    },
+    {
+     "fact": "该死亡人数仍为临时数字",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ce bilan reste provisoire."
+    },
+    {
+     "fact": "目前已找到一名幸存者，搜救行动仍在继续",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les opérations de recherche et de sauvetage se poursuivent. Un rescapé a été retrouvé, d’après le ministère."
+    },
+    {
+     "fact": "塞内加尔内政部于11月8日（周日）通报了这一消息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a annoncé dimanche 8 novembre le ministère de l’Intérieur"
+    }
+   ],
+   "uncertainties": [
+    "死亡人数仍为临时数字，可能进一步变化",
+    "目前仅有一名幸存者获救，其余人员情况尚不清楚",
+    "该事件目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_57ca924b364e081c",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

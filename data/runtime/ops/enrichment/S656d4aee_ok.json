@@ -1,0 +1,127 @@
+{
+ "label": "S656d4aee",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b6cd2165e2e09180d343bbab64abb3d1dc126b2a70c5f4fc1eb47fc58db55ae0",
+ "tokens": {
+  "input_tokens": 2765,
+  "output_tokens": 598,
+  "total_tokens": 3363
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "巴拉圭：圣地亚哥·培尼亚因Ueno银行案被审前羁押",
+   "summary_zh": "巴拉圭前总统圣地亚哥·培尼亚因Ueno银行倒闭案被法官下令审前羁押，检方指控其背信及为个人敛财而管理。培尼亚否认存在违规行为。央行宣布已向120万客户部分或全额退还存款，但仍有储户持续抗议。该事件目前仅有一个来源报道。",
+   "event_type": "political_instability",
+   "country_iso3": "PRY",
+   "location": {
+    "country_iso3": "PRY",
+    "admin1": null,
+    "city": "亚松森",
+    "site": "总统卫队团部",
+    "raw_text": "siège du régiment d’escorte présidentielle, une installation militaire à Asunción"
+   },
+   "key_facts": [
+    {
+     "fact": "巴拉圭前总统圣地亚哥·培尼亚于11月7日被审前羁押",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’ancien président paraguayen Santiago Peña a été placé en détention provisoire samedi 7 novembre dans l’enquête sur l’effondrement d’Ueno Bank."
+    },
+    {
+     "fact": "法官下令将其羁押在亚松森的总统卫队团部军事设施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le juge Humberto Otazu a ordonné son maintien au siège du régiment d’escorte présidentielle, une installation militaire à Asunción."
+    },
+    {
+     "fact": "检方指控培尼亚背信及为个人敛财而管理，他否认违规",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le parquet avait inculpé l’ancien chef de l’État pour abus de confiance et gestion à des fins d’enrichissement personnel. Santiago Peña nie avoir commis des irrégularités."
+    },
+    {
+     "fact": "央行称已有120万客户获得部分或全额存款退还",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La banque centrale a annoncé samedi que 1,2 million de clients avaient déjà obtenu un remboursement partiel ou intégral de leurs dépôts assurés."
+    },
+    {
+     "fact": "Ueno银行被接管后近300万客户无法动用储蓄或银行卡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Près de trois millions de clients se sont retrouvés privés d’accès à leur épargne ou à leur carte bancaire."
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证",
+    "培尼亚所涉指控尚未经法院判决确认",
+    "储户资金退还的完整进展尚不明确"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "巴拉圭：圣地亚哥·培尼亚因Ueno银行案被审前羁押",
+   "summary_zh": "巴拉圭前总统圣地亚哥·培尼亚因Ueno银行倒闭案被法官下令审前羁押，检方指控其背信及为个人敛财而管理。培尼亚否认存在违规行为。央行宣布已向120万客户部分或全额退还存款，但仍有储户持续抗议。该事件目前仅有一个来源报道。",
+   "event_type": "political_instability",
+   "country_iso3": "PRY",
+   "location": {
+    "country_iso3": "PRY",
+    "admin1": null,
+    "city": "亚松森",
+    "site": "总统卫队团部",
+    "raw_text": "siège du régiment d’escorte présidentielle, une installation militaire à Asunción"
+   },
+   "key_facts": [
+    {
+     "fact": "巴拉圭前总统圣地亚哥·培尼亚于11月7日被审前羁押",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’ancien président paraguayen Santiago Peña a été placé en détention provisoire samedi 7 novembre dans l’enquête sur l’effondrement d’Ueno Bank."
+    },
+    {
+     "fact": "法官下令将其羁押在亚松森的总统卫队团部军事设施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le juge Humberto Otazu a ordonné son maintien au siège du régiment d’escorte présidentielle, une installation militaire à Asunción."
+    },
+    {
+     "fact": "检方指控培尼亚背信及为个人敛财而管理，他否认违规",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le parquet avait inculpé l’ancien chef de l’État pour abus de confiance et gestion à des fins d’enrichissement personnel. Santiago Peña nie avoir commis des irrégularités."
+    },
+    {
+     "fact": "央行称已有120万客户获得部分或全额存款退还",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La banque centrale a annoncé samedi que 1,2 million de clients avaient déjà obtenu un remboursement partiel ou intégral de leurs dépôts assurés."
+    },
+    {
+     "fact": "Ueno银行被接管后近300万客户无法动用储蓄或银行卡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Près de trois millions de clients se sont retrouvés privés d’accès à leur épargne ou à leur carte bancaire."
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证",
+    "培尼亚所涉指控尚未经法院判决确认",
+    "储户资金退还的完整进展尚不明确"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_04e0db18656d4aee",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
