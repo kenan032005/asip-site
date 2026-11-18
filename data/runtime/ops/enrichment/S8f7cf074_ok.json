@@ -1,0 +1,115 @@
+{
+ "label": "S8f7cf074",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ffc6190237852fb5e3fe0f80b3b2298221eaf9bc3b40e57b632be741de49fe24",
+ "tokens": {
+  "input_tokens": 2118,
+  "output_tokens": 503,
+  "total_tokens": 2621
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "奥贡州警方解救10名被绑架乘客并击毙一名嫌疑人",
+   "summary_zh": "尼日利亚奥贡州警方在伊杰布东北地方政府区阿瓦-伊杰布的Orita Fufu地区解救10名被疑似绑匪绑架的乘客。警方称在持续的安全行动和情报主导的努力下，受害者于11月7日晚约8时30分安全获释。警方随后突袭嫌疑人藏身处并发生枪战，一名嫌疑人被击毙，其余嫌疑人带伤逃脱。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "奥贡州",
+    "city": "阿瓦-伊杰布",
+    "site": "Orita Fufu",
+    "raw_text": "Orita Fufu, Awa-Ijebu, in Ijebu North-East Local Government Area of Ogun State"
+   },
+   "key_facts": [
+    {
+     "fact": "奥贡州警方解救10名被疑似绑匪绑架的乘客",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Ogun State Police Command has rescued 10 passengers abducted by suspected kidnappers at Orita Fufu, Awa-Ijebu"
+    },
+    {
+     "fact": "受害者于11月3日在一辆商业巴士上被绑架，11月7日晚约8时30分安全获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The victims, who were abducted from a commercial bus on November 3, 2026, regained their freedom unharmed at about 8.30pm on Saturday, November 7"
+    },
+    {
+     "fact": "警方于11月8日凌晨约1时突袭嫌疑人藏身处并发生枪战，一名嫌疑人被击毙",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "operatives of the Anti-Kidnapping Unit subsequently stormed the suspected kidnappers’ hideout along the Ibadan-Ijebu Ode Road at about 1 am on November 8"
+    },
+    {
+     "fact": "其余嫌疑人带疑似枪伤逃脱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "one suspect was neutralised while others escaped with suspected gunshot wounds"
+    }
+   ],
+   "uncertainties": [
+    "嫌疑人身份及逃脱人数尚未确认",
+    "事件目前仅有一个来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "奥贡州警方解救10名被绑架乘客并击毙一名嫌疑人",
+   "summary_zh": "尼日利亚奥贡州警方在伊杰布东北地方政府区阿瓦-伊杰布的Orita Fufu地区解救10名被疑似绑匪绑架的乘客。警方称在持续的安全行动和情报主导的努力下，受害者于11月7日晚约8时30分安全获释。警方随后突袭嫌疑人藏身处并发生枪战，一名嫌疑人被击毙，其余嫌疑人带伤逃脱。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "奥贡州",
+    "city": "阿瓦-伊杰布",
+    "site": "Orita Fufu",
+    "raw_text": "Orita Fufu, Awa-Ijebu, in Ijebu North-East Local Government Area of Ogun State"
+   },
+   "key_facts": [
+    {
+     "fact": "奥贡州警方解救10名被疑似绑匪绑架的乘客",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Ogun State Police Command has rescued 10 passengers abducted by suspected kidnappers at Orita Fufu, Awa-Ijebu"
+    },
+    {
+     "fact": "受害者于11月3日在一辆商业巴士上被绑架，11月7日晚约8时30分安全获释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The victims, who were abducted from a commercial bus on November 3, 2026, regained their freedom unharmed at about 8.30pm on Saturday, November 7"
+    },
+    {
+     "fact": "警方于11月8日凌晨约1时突袭嫌疑人藏身处并发生枪战，一名嫌疑人被击毙",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "operatives of the Anti-Kidnapping Unit subsequently stormed the suspected kidnappers’ hideout along the Ibadan-Ijebu Ode Road at about 1 am on November 8"
+    },
+    {
+     "fact": "其余嫌疑人带疑似枪伤逃脱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "one suspect was neutralised while others escaped with suspected gunshot wounds"
+    }
+   ],
+   "uncertainties": [
+    "嫌疑人身份及逃脱人数尚未确认",
+    "事件目前仅有一个来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_b92cd4dc8f7cf074",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

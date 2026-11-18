@@ -1,0 +1,119 @@
+{
+ "label": "S34ad8e26",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6f60d8453d09c3b17b4e57b68af3020b745a9c1dd1dc5cad0ac184d5691ef411",
+ "tokens": {
+  "input_tokens": 2134,
+  "output_tokens": 425,
+  "total_tokens": 2559
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "奥约州APC声称遭袭击图谋，APM否认指控",
+   "summary_zh": "尼日利亚奥约州全体进步大会党（APC）参议员沙拉法丁·阿利竞选团队声称，疑似属于联合人民运动党（APM）的暴徒正策划袭击其支持者并破坏其广告牌。APM方面否认这一说法。该指控由竞选团队单方面发布，目前仅有一个来源报道。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Oyo State",
+    "city": "Ibadan",
+    "site": null,
+    "raw_text": "Oyo State, Ibadan"
+   },
+   "key_facts": [
+    {
+     "fact": "奥约州APC参议员阿利竞选团队声称暴徒策划袭击其支持者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "raised the alarm over alleged hoodlums suspected to be members of the Allied Peoples’ Movement planning a fresh attack on supporters of its governorship candidate"
+    },
+    {
+     "fact": "竞选团队还称其广告牌遭到破坏",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "and also vandalising his billboards"
+    },
+    {
+     "fact": "APM否认相关指控",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Oyo APC alleges attack plot, APM denies claim"
+    },
+    {
+     "fact": "竞选团队称10月伊巴丹一名APC成员在袭击中死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It follows a series of attacks which led to the death of an APC member in Ibadan in October"
+    }
+   ],
+   "uncertainties": [
+    "袭击图谋为APC竞选团队单方面声称，尚未证实",
+    "被指暴徒属于APM的说法为指控，APM已否认",
+    "10月APC成员死亡事件与本次指控的关联未经独立核实",
+    "目前仅有一个来源（Punch）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 62
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "奥约州APC声称遭袭击图谋，APM否认指控",
+   "summary_zh": "尼日利亚奥约州全体进步大会党（APC）参议员沙拉法丁·阿利竞选团队声称，疑似属于联合人民运动党（APM）的暴徒正策划袭击其支持者并破坏其广告牌。APM方面否认这一说法。该指控由竞选团队单方面发布，目前仅有一个来源报道。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Oyo State",
+    "city": "Ibadan",
+    "site": null,
+    "raw_text": "Oyo State, Ibadan"
+   },
+   "key_facts": [
+    {
+     "fact": "奥约州APC参议员阿利竞选团队声称暴徒策划袭击其支持者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "raised the alarm over alleged hoodlums suspected to be members of the Allied Peoples’ Movement planning a fresh attack on supporters of its governorship candidate"
+    },
+    {
+     "fact": "竞选团队还称其广告牌遭到破坏",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "and also vandalising his billboards"
+    },
+    {
+     "fact": "APM否认相关指控",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Oyo APC alleges attack plot, APM denies claim"
+    },
+    {
+     "fact": "竞选团队称10月伊巴丹一名APC成员在袭击中死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It follows a series of attacks which led to the death of an APC member in Ibadan in October"
+    }
+   ],
+   "uncertainties": [
+    "袭击图谋为APC竞选团队单方面声称，尚未证实",
+    "被指暴徒属于APM的说法为指控，APM已否认",
+    "10月APC成员死亡事件与本次指控的关联未经独立核实",
+    "目前仅有一个来源（Punch）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 62
+  }
+ },
+ "event_id": "EVT_e3df6db334ad8e26",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
