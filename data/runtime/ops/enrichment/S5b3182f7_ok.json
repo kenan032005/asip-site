@@ -1,0 +1,125 @@
+{
+ "label": "S5b3182f7",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f6f5a9c7b83b76fea3bddc89c3cd88d21b3a503ab2c592ffb7a343077d2a9780",
+ "tokens": {
+  "input_tokens": 2489,
+  "output_tokens": 577,
+  "total_tokens": 3066
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "克拉科夫枪击案嫌疑人医院死亡",
+   "summary_zh": "波兰警方宣布，克拉科夫集市广场枪击案嫌疑人已于2026年11月9日上午在医院死亡。该24岁男子在警方行动中受伤。检方此前已就集市广场六人死亡及多起谋杀未遂（包括针对警察）以恐怖主义立案调查。嫌疑人三名亲属（父亲、母亲和妹妹）被发现死于其家中，死因亦在调查中。",
+   "event_type": "terrorism",
+   "country_iso3": "POL",
+   "location": {
+    "country_iso3": "POL",
+    "admin1": null,
+    "city": "克拉科夫",
+    "site": "集市广场",
+    "raw_text": "place du Marché, dans le centre historique de cette ville du sud de la Pologne"
+   },
+   "key_facts": [
+    {
+     "fact": "克拉科夫集市广场枪击案嫌疑人于11月9日上午在医院死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le suspect de la fusillade qui a fait six morts samedi à Cracovie est décédé à l’hôpital dans la matinée du lundi 9 novembre 2026, a annoncé la police polonaise."
+    },
+    {
+     "fact": "该24岁男子在警方行动中受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le jeune homme de 24 ans avait été blessé lors de l’intervention des forces de l’ordre."
+    },
+    {
+     "fact": "袭击发生于11月7日15时前，地点为克拉科夫历史中心的集市广场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’attaque s’était produite le 7 novembre, peu avant 15 heures, heure locale, sur la place du Marché, dans le centre historique de cette ville du sud de la Pologne."
+    },
+    {
+     "fact": "检方就六起凶杀及多起谋杀未遂（包括针对警察）以恐怖主义立案调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le parquet avait ouvert dimanche une enquête pour terrorisme sur les six homicides et les tentatives de meurtre, notamment contre des policiers."
+    },
+    {
+     "fact": "嫌疑人父亲、母亲和妹妹被发现死于其家中，死因在调查中",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Trois autres corps avaient été découverts au domicile familial du suspect. La police les a identifiés comme ceux de son père de 53 ans, de sa mère de 52 ans et de sa sœur de 21 ans."
+    }
+   ],
+   "uncertainties": [
+    "嫌疑人三名亲属死亡的具体情况仍在调查中",
+    "目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "克拉科夫枪击案嫌疑人医院死亡",
+   "summary_zh": "波兰警方宣布，克拉科夫集市广场枪击案嫌疑人已于2026年11月9日上午在医院死亡。该24岁男子在警方行动中受伤。检方此前已就集市广场六人死亡及多起谋杀未遂（包括针对警察）以恐怖主义立案调查。嫌疑人三名亲属（父亲、母亲和妹妹）被发现死于其家中，死因亦在调查中。",
+   "event_type": "terrorism",
+   "country_iso3": "POL",
+   "location": {
+    "country_iso3": "POL",
+    "admin1": null,
+    "city": "克拉科夫",
+    "site": "集市广场",
+    "raw_text": "place du Marché, dans le centre historique de cette ville du sud de la Pologne"
+   },
+   "key_facts": [
+    {
+     "fact": "克拉科夫集市广场枪击案嫌疑人于11月9日上午在医院死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le suspect de la fusillade qui a fait six morts samedi à Cracovie est décédé à l’hôpital dans la matinée du lundi 9 novembre 2026, a annoncé la police polonaise."
+    },
+    {
+     "fact": "该24岁男子在警方行动中受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le jeune homme de 24 ans avait été blessé lors de l’intervention des forces de l’ordre."
+    },
+    {
+     "fact": "袭击发生于11月7日15时前，地点为克拉科夫历史中心的集市广场",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’attaque s’était produite le 7 novembre, peu avant 15 heures, heure locale, sur la place du Marché, dans le centre historique de cette ville du sud de la Pologne."
+    },
+    {
+     "fact": "检方就六起凶杀及多起谋杀未遂（包括针对警察）以恐怖主义立案调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le parquet avait ouvert dimanche une enquête pour terrorisme sur les six homicides et les tentatives de meurtre, notamment contre des policiers."
+    },
+    {
+     "fact": "嫌疑人父亲、母亲和妹妹被发现死于其家中，死因在调查中",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Trois autres corps avaient été découverts au domicile familial du suspect. La police les a identifiés comme ceux de son père de 53 ans, de sa mère de 52 ans et de sa sœur de 21 ans."
+    }
+   ],
+   "uncertainties": [
+    "嫌疑人三名亲属死亡的具体情况仍在调查中",
+    "目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_bb73a19d5b3182f7",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

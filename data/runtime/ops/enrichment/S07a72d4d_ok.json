@@ -1,0 +1,128 @@
+{
+ "label": "S07a72d4d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "580abcb3a85b0132c57a0c2f9721eb88f5e2ed0e5c2293d74a4f0232113de0e4",
+ "tokens": {
+  "input_tokens": 2709,
+  "output_tokens": 527,
+  "total_tokens": 3236
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"专家报告结论及文件真实性仍待法院裁定\", \"卡图姆比方面对程序合法性的异议尚未有结果\", \"目前仅RFI单一来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"专家报告结论及文件真实性仍待法院裁定\", \"卡图姆比方面对程序合法性的异议尚未有结果\", \"目前仅RFI单一来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "比利时专家确认卡图姆比-卡泰贝案涉案文件真实性",
+   "summary_zh": "据RFI查阅的一份由比利时宣誓司法专家撰写的报告，涉及刚果（金）反对派人士莫伊兹·卡图姆比与其兄弟房产纠纷的文件签名被认定为真实。卡图姆比正面临最高法院诉讼，可能面临监禁，若最终被判伪造文书罪成立，还可能在整个刑期内被剥夺参选资格。卡图姆比的律师团队对程序合法性提出异议，并要求重新开庭辩论，相关证据仍有待法院裁定。",
+   "event_type": "political_instability",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "RDC"
+   },
+   "key_facts": [
+    {
+     "fact": "比利时宣誓司法专家认定涉案七份文件由拉斐尔·卡泰贝·卡托托书写并签署",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "selon Françoise Coenraets, experte inscrite au registre national des experts de Belgique, les sept documents examinés ont été écrits et signés par Raphaël Katebe Katoto"
+    },
+    {
+     "fact": "卡图姆比因该房产纠纷在最高法院被起诉，可能面临监禁及剥夺参选资格",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le candidat à l’élection présidentielle de 2023 est poursuivi devant la Cour de cassation et risque une peine de prison et, en cas de condamnation irrévocable pour usage de faux, une peine d’inéligibilité"
+    },
+    {
+     "fact": "卡图姆比的律师对程序合法性提出异议并要求重新开庭辩论",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La défense conteste par ailleurs la régularité de la procédure et demande la réouverture des débats"
+    },
+    {
+     "fact": "卡泰贝·卡托托在法院宣判前拒绝就签名问题置评",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Interrogé par RFI sur ces signatures, Katebe Katoto refuse de commenter avant le prononcé de la Cour"
+    }
+   ],
+   "uncertainties": [
+    "专家报告结论及文件真实性仍待法院裁定",
+    "卡图姆比方面对程序合法性的异议尚未有结果",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "比利时专家确认卡图姆比-卡泰贝案涉案文件真实性",
+   "summary_zh": "据RFI查阅的一份由比利时宣誓司法专家撰写的报告，涉及刚果（金）反对派人士莫伊兹·卡图姆比与其兄弟房产纠纷的文件签名被认定为真实。卡图姆比正面临最高法院诉讼，可能面临监禁，若最终被判伪造文书罪成立，还可能在整个刑期内被剥夺参选资格。卡图姆比的律师团队对程序合法性提出异议，并要求重新开庭辩论，相关证据仍有待法院裁定。",
+   "event_type": "political_instability",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "RDC"
+   },
+   "key_facts": [
+    {
+     "fact": "比利时宣誓司法专家认定涉案七份文件由拉斐尔·卡泰贝·卡托托书写并签署",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "selon Françoise Coenraets, experte inscrite au registre national des experts de Belgique, les sept documents examinés ont été écrits et signés par Raphaël Katebe Katoto"
+    },
+    {
+     "fact": "卡图姆比因该房产纠纷在最高法院被起诉，可能面临监禁及剥夺参选资格",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le candidat à l’élection présidentielle de 2023 est poursuivi devant la Cour de cassation et risque une peine de prison et, en cas de condamnation irrévocable pour usage de faux, une peine d’inéligibilité"
+    },
+    {
+     "fact": "卡图姆比的律师对程序合法性提出异议并要求重新开庭辩论",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La défense conteste par ailleurs la régularité de la procédure et demande la réouverture des débats"
+    },
+    {
+     "fact": "卡泰贝·卡托托在法院宣判前拒绝就签名问题置评",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Interrogé par RFI sur ces signatures, Katebe Katoto refuse de commenter avant le prononcé de la Cour"
+    }
+   ],
+   "uncertainties": [
+    "专家报告结论及文件真实性仍待法院裁定",
+    "卡图姆比方面对程序合法性的异议尚未有结果",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_a2f1902407a72d4d",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

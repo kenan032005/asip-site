@@ -1,0 +1,117 @@
+{
+ "label": "S0dcd2325",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f808dc64f64b2f5af2326e0b58c159f561c823dfeb70f72774e31ad8592d19e2",
+ "tokens": {
+  "input_tokens": 2654,
+  "output_tokens": 598,
+  "total_tokens": 3252
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁：水稻、高粱和粟米遭食谷鸟类袭击",
+   "summary_zh": "贝宁马泰里镇达萨里区的农业生产者面临食谷鸟类袭击，可能危及收成。农业、畜牧和渔业部于2026年11月8日发布警报，呼吁民众采取紧急措施保护农田。涉事鸟类属奎利亚雀属，其出现已在彭贾里公园的受控占用区（ZOC）被报告，尤其是普里和达萨里中心。稻米、高粱和粟米作物尤其受影响，该部还担心袭击会向其他地区蔓延。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "马泰里",
+    "site": "达萨里区",
+    "raw_text": "arrondissement de Dassari, dans la commune de Matéri"
+   },
+   "key_facts": [
+    {
+     "fact": "贝宁马泰里镇达萨里区农业生产者面临食谷鸟类袭击，可能危及收成",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les producteurs agricoles de l’arrondissement de Dassari, dans la commune de Matéri, font face à des attaques d’oiseaux granivores susceptibles de compromettre leurs récoltes"
+    },
+    {
+     "fact": "农业、畜牧和渔业部于2026年11月8日发布警报，呼吁采取紧急措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le ministère de l’Agriculture, de l’Élevage et de la Pêche a lancé une alerte le dimanche 8 novembre 2026 et appelé les populations à prendre des mesures urgentes"
+    },
+    {
+     "fact": "涉事鸟类属奎利亚雀属，出现于彭贾里公园受控占用区的普里和达萨里中心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les oiseaux concernés appartiennent au genre Quélea. Leur présence a été signalée dans les zones d’occupation contrôlées (ZOC) du parc de la Pendjari, notamment à Pouri et à Dassari-centre"
+    },
+    {
+     "fact": "稻米、高粱和粟米作物尤其受影响，该部担心袭击向其他地区蔓延",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les cultures de riz, de sorgho et de mil sont particulièrement exposées. Le ministère redoute également une extension des attaques vers d’autres localités"
+    }
+   ],
+   "uncertainties": [
+    "袭击是否已造成实际收成损失尚未明确",
+    "袭击是否会向其他地区蔓延仅为该部担忧，尚未证实",
+    "目前仅单一来源（La Nouvelle Tribune）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁：水稻、高粱和粟米遭食谷鸟类袭击",
+   "summary_zh": "贝宁马泰里镇达萨里区的农业生产者面临食谷鸟类袭击，可能危及收成。农业、畜牧和渔业部于2026年11月8日发布警报，呼吁民众采取紧急措施保护农田。涉事鸟类属奎利亚雀属，其出现已在彭贾里公园的受控占用区（ZOC）被报告，尤其是普里和达萨里中心。稻米、高粱和粟米作物尤其受影响，该部还担心袭击会向其他地区蔓延。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "马泰里",
+    "site": "达萨里区",
+    "raw_text": "arrondissement de Dassari, dans la commune de Matéri"
+   },
+   "key_facts": [
+    {
+     "fact": "贝宁马泰里镇达萨里区农业生产者面临食谷鸟类袭击，可能危及收成",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les producteurs agricoles de l’arrondissement de Dassari, dans la commune de Matéri, font face à des attaques d’oiseaux granivores susceptibles de compromettre leurs récoltes"
+    },
+    {
+     "fact": "农业、畜牧和渔业部于2026年11月8日发布警报，呼吁采取紧急措施",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le ministère de l’Agriculture, de l’Élevage et de la Pêche a lancé une alerte le dimanche 8 novembre 2026 et appelé les populations à prendre des mesures urgentes"
+    },
+    {
+     "fact": "涉事鸟类属奎利亚雀属，出现于彭贾里公园受控占用区的普里和达萨里中心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les oiseaux concernés appartiennent au genre Quélea. Leur présence a été signalée dans les zones d’occupation contrôlées (ZOC) du parc de la Pendjari, notamment à Pouri et à Dassari-centre"
+    },
+    {
+     "fact": "稻米、高粱和粟米作物尤其受影响，该部担心袭击向其他地区蔓延",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les cultures de riz, de sorgho et de mil sont particulièrement exposées. Le ministère redoute également une extension des attaques vers d’autres localités"
+    }
+   ],
+   "uncertainties": [
+    "袭击是否已造成实际收成损失尚未明确",
+    "袭击是否会向其他地区蔓延仅为该部担忧，尚未证实",
+    "目前仅单一来源（La Nouvelle Tribune）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_6429fb680dcd2325",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
