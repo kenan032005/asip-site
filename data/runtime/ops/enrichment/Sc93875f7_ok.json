@@ -1,0 +1,136 @@
+{
+ "label": "Sc93875f7",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4f0da152ddc3dcb931afa0aca7e49c41d3fddfbfd7bed651b5036a3c0b66dce6",
+ "tokens": {
+  "input_tokens": 2909,
+  "output_tokens": 457,
+  "total_tokens": 3366
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"85%未获适当照护的比例为学会说法，尚未获独立确认\", \"心理健康计划的实际落实效果有待观察\"]",
+    "after": "[\"85%未获适当照护的比例为学会说法，尚未获独立确认\", \"心理健康计划的实际落实效果有待观察\", \"据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "摩洛哥心理健康：临床心理学会就青少年心理照护发出警告",
+   "summary_zh": "摩洛哥临床心理学会就本国心理健康状况发出警告，称约650万人患有精神障碍，其中近85%据称未能获得适当照护。该学会呼吁国家优先加强预防、早期筛查并扩大治疗可及性。儿童和青少年占受影响人口30%以上，约200万人。政府此前宣布了预算近3.6亿欧元的2030年心理健康计划。",
+   "event_type": "other_security",
+   "country_iso3": "MAR",
+   "location": {
+    "country_iso3": "MAR",
+    "admin1": null,
+    "city": "拉巴特",
+    "site": null,
+    "raw_text": "Rabat"
+   },
+   "key_facts": [
+    {
+     "fact": "摩洛哥约650万人患有精神障碍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Près de 6,5 millions de personnes souffrent de troubles psychiques dans le royaume"
+    },
+    {
+     "fact": "据称近85%的患者未获得适当照护",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "près de 85 % ne bénéficieraient pas d’une prise en charge adaptée"
+    },
+    {
+     "fact": "儿童和青少年占受影响人口30%以上，约200万人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les enfants et jeunes adolescents représentent plus de 30 % de la population concernée, soit environ deux millions de personnes"
+    },
+    {
+     "fact": "政府宣布2030年心理健康计划，预算近3.6亿欧元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le plan santé mentale 2030 prévoit une enveloppe budgétaire de près de 360 millions d’euros"
+    },
+    {
+     "fact": "摩洛哥公立教育系统没有专职学校心理学家岗位",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il n’y a pas de poste de psychologues scolaires titulaires"
+    }
+   ],
+   "uncertainties": [
+    "85%未获适当照护的比例为学会说法，尚未获独立确认",
+    "心理健康计划的实际落实效果有待观察"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "摩洛哥心理健康：临床心理学会就青少年心理照护发出警告",
+   "summary_zh": "摩洛哥临床心理学会就本国心理健康状况发出警告，称约650万人患有精神障碍，其中近85%据称未能获得适当照护。该学会呼吁国家优先加强预防、早期筛查并扩大治疗可及性。儿童和青少年占受影响人口30%以上，约200万人。政府此前宣布了预算近3.6亿欧元的2030年心理健康计划。",
+   "event_type": "other_security",
+   "country_iso3": "MAR",
+   "location": {
+    "country_iso3": "MAR",
+    "admin1": null,
+    "city": "拉巴特",
+    "site": null,
+    "raw_text": "Rabat"
+   },
+   "key_facts": [
+    {
+     "fact": "摩洛哥约650万人患有精神障碍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Près de 6,5 millions de personnes souffrent de troubles psychiques dans le royaume"
+    },
+    {
+     "fact": "据称近85%的患者未获得适当照护",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "près de 85 % ne bénéficieraient pas d’une prise en charge adaptée"
+    },
+    {
+     "fact": "儿童和青少年占受影响人口30%以上，约200万人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les enfants et jeunes adolescents représentent plus de 30 % de la population concernée, soit environ deux millions de personnes"
+    },
+    {
+     "fact": "政府宣布2030年心理健康计划，预算近3.6亿欧元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le plan santé mentale 2030 prévoit une enveloppe budgétaire de près de 360 millions d’euros"
+    },
+    {
+     "fact": "摩洛哥公立教育系统没有专职学校心理学家岗位",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il n’y a pas de poste de psychologues scolaires titulaires"
+    }
+   ],
+   "uncertainties": [
+    "85%未获适当照护的比例为学会说法，尚未获独立确认",
+    "心理健康计划的实际落实效果有待观察",
+    "据RFI Afrique报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_2afd92fdc93875f7",
+ "disease_event_id": null,
+ "country_code": "MA"
+}
