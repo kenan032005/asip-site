@@ -1,0 +1,137 @@
+{
+ "label": "S0e9c50b3",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "9c4b4f76bc8de3f2752d906d8d73745aedc7bb8a82e67c7d684da40aa53ca4cb",
+ "tokens": {
+  "input_tokens": 2802,
+  "output_tokens": 620,
+  "total_tokens": 3422
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "马里：罢课两周后，教师-研究人员无限期继续罢工",
+   "summary_zh": "马里高等教育与科研工会（Snesup）自10月26日发起的罢课已进入第三周，并于11月9日宣布转为无限期罢工。工会唯一诉求是政府支付近十年前法律规定的科研津贴，但至今未获满足。过渡当局尚未开启谈判，宗教人士与传统沟通者曾于11月7日会面调解，但未改变罢工号召。高等教育部长未回应媒体置评请求。",
+   "event_type": "civil_unrest",
+   "country_iso3": "MLI",
+   "location": {
+    "country_iso3": "MLI",
+    "admin1": null,
+    "city": "巴马科",
+    "site": "巴马科大学",
+    "raw_text": "Mali / Bamako (université de Bamako)"
+   },
+   "key_facts": [
+    {
+     "fact": "马里教师-研究人员自10月26日起罢课，11月9日进入第三周并转为无限期罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Mali, les enseignants-chercheurs entament leur troisième semaine de grève, ce lundi 9 novembre. Commencé le 26 octobre... le mouvement est cette fois reconduit de manière illimité."
+    },
+    {
+     "fact": "工会唯一诉求是支付近十年前法律规定的科研津贴",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "son unique revendication - le versement d'une prime de recherche prévue par la loi depuis près de dix ans mais dont les enseignants-chercheurs n'ont jamais vu la couleur"
+    },
+    {
+     "fact": "马里几乎所有大学和高等院校因罢课基本瘫痪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la quasi totalité des universités et grandes écoles du Mali sont largement paralysées par le mouvement depuis deux semaines"
+    },
+    {
+     "fact": "过渡当局尚未开启谈判",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les autorités de transition n'ont pour autant pas encore ouvert la porte aux négociations"
+    },
+    {
+     "fact": "11月7日宗教人士与传统沟通者代表团会见工会并提出协助调解",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Samedi 7 novembre, une délégation notamment composée de responsables religieux et de communicateurs traditionnels a rencontré le syndicat et proposé son aide"
+    },
+    {
+     "fact": "马里高等教育部长未回应RFI的置评请求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sollicité par RFI, le ministère malien de l'Enseignement supérieur n'a, lui, pas donné suite."
+    }
+   ],
+   "uncertainties": [
+    "报道为单一来源（RFI Afrique），尚缺乏其他独立来源交叉验证",
+    "工会所称行政当局对罢工者施压的说法未获独立证实",
+    "津贴金额、发放起始时间及欠款清偿方式均未明确"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "马里：罢课两周后，教师-研究人员无限期继续罢工",
+   "summary_zh": "马里高等教育与科研工会（Snesup）自10月26日发起的罢课已进入第三周，并于11月9日宣布转为无限期罢工。工会唯一诉求是政府支付近十年前法律规定的科研津贴，但至今未获满足。过渡当局尚未开启谈判，宗教人士与传统沟通者曾于11月7日会面调解，但未改变罢工号召。高等教育部长未回应媒体置评请求。",
+   "event_type": "civil_unrest",
+   "country_iso3": "MLI",
+   "location": {
+    "country_iso3": "MLI",
+    "admin1": null,
+    "city": "巴马科",
+    "site": "巴马科大学",
+    "raw_text": "Mali / Bamako (université de Bamako)"
+   },
+   "key_facts": [
+    {
+     "fact": "马里教师-研究人员自10月26日起罢课，11月9日进入第三周并转为无限期罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au Mali, les enseignants-chercheurs entament leur troisième semaine de grève, ce lundi 9 novembre. Commencé le 26 octobre... le mouvement est cette fois reconduit de manière illimité."
+    },
+    {
+     "fact": "工会唯一诉求是支付近十年前法律规定的科研津贴",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "son unique revendication - le versement d'une prime de recherche prévue par la loi depuis près de dix ans mais dont les enseignants-chercheurs n'ont jamais vu la couleur"
+    },
+    {
+     "fact": "马里几乎所有大学和高等院校因罢课基本瘫痪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la quasi totalité des universités et grandes écoles du Mali sont largement paralysées par le mouvement depuis deux semaines"
+    },
+    {
+     "fact": "过渡当局尚未开启谈判",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les autorités de transition n'ont pour autant pas encore ouvert la porte aux négociations"
+    },
+    {
+     "fact": "11月7日宗教人士与传统沟通者代表团会见工会并提出协助调解",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Samedi 7 novembre, une délégation notamment composée de responsables religieux et de communicateurs traditionnels a rencontré le syndicat et proposé son aide"
+    },
+    {
+     "fact": "马里高等教育部长未回应RFI的置评请求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sollicité par RFI, le ministère malien de l'Enseignement supérieur n'a, lui, pas donné suite."
+    }
+   ],
+   "uncertainties": [
+    "报道为单一来源（RFI Afrique），尚缺乏其他独立来源交叉验证",
+    "工会所称行政当局对罢工者施压的说法未获独立证实",
+    "津贴金额、发放起始时间及欠款清偿方式均未明确"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_116ff5b30e9c50b3",
+ "disease_event_id": null,
+ "country_code": "ML"
+}

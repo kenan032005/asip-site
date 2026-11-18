@@ -1,0 +1,138 @@
+{
+ "label": "S44775654",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "21b2eec7a318487fb792b9483a93875beb0c02a40b8fe990d451ce2d3dc36ef2",
+ "tokens": {
+  "input_tokens": 2791,
+  "output_tokens": 633,
+  "total_tokens": 3424
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"被拘留者的后续司法处理尚未明确\", \"马里方面接收约16万人的数字为巴马科单方面宣布，尚未获独立核实\", \"目前仅RFI单一来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"被拘留者的后续司法处理尚未明确\", \"马里方面接收约16万人的数字为巴马科单方面宣布，尚未获独立核实\", \"目前仅RFI单一来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "几内亚：锡吉里地区禁止非法采金后逾1200人被拘留",
+   "summary_zh": "几内亚当局在东北部主要产金区锡吉里禁止非法手工采金后展开大规模抓捕，据国防与安全部联合公报，共有1263人被拘留。被拘留者包括几内亚人以及布基纳法索、马里、多哥、尼日尔和科特迪瓦公民，均被转移至科纳克里，后续司法处理尚未明确。当局宣布在相关地区永久部署国防与安全力量并实行零容忍。此次行动还导致大量人员涌入马里，巴马科方面称已接收约16万名被遣返者。",
+   "event_type": "civil_unrest",
+   "country_iso3": "GIN",
+   "location": {
+    "country_iso3": "GIN",
+    "admin1": "锡吉里地区",
+    "city": "锡吉里",
+    "site": null,
+    "raw_text": "région de Siguiri, dans le nord-est de la Guinée"
+   },
+   "key_facts": [
+    {
+     "fact": "几内亚当局在锡吉里地区禁止非法采金后拘留1263人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon un communiqué conjoint des ministères de la Défense et de la Sécurité daté du samedi 7 novembre, 1263 personnes y ont été interpellées."
+    },
+    {
+     "fact": "被拘留者包括几内亚人及布基纳法索、马里、多哥、尼日尔和科特迪瓦公民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Parmi elles figurent notamment des Guinéens, des Burkinabè, des Maliens, des Togolais, des Nigériens et des Ivoiriens."
+    },
+    {
+     "fact": "被拘留者均被转移至科纳克里，司法处理尚未明确",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Si tous ont été conduits à Conakry, les suites judiciaires qui leur seront réservées n'ont pas encore été précisées."
+    },
+    {
+     "fact": "当局宣布在相关地区永久部署国防与安全力量并实行零容忍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'État a annoncé le déploiement permanent des forces de défense et de sécurité dans les zones concernées avec pour consigne d'appliquer une tolérance zéro."
+    },
+    {
+     "fact": "马里称自行动开始以来已接收约16万名被几内亚遣返者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Bamako a ainsi annoncé avoir accueilli quelque 160 000 personnes refoulées de Guinée depuis son lancement."
+    }
+   ],
+   "uncertainties": [
+    "被拘留者的后续司法处理尚未明确",
+    "马里方面接收约16万人的数字为巴马科单方面宣布，尚未获独立核实",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "几内亚：锡吉里地区禁止非法采金后逾1200人被拘留",
+   "summary_zh": "几内亚当局在东北部主要产金区锡吉里禁止非法手工采金后展开大规模抓捕，据国防与安全部联合公报，共有1263人被拘留。被拘留者包括几内亚人以及布基纳法索、马里、多哥、尼日尔和科特迪瓦公民，均被转移至科纳克里，后续司法处理尚未明确。当局宣布在相关地区永久部署国防与安全力量并实行零容忍。此次行动还导致大量人员涌入马里，巴马科方面称已接收约16万名被遣返者。",
+   "event_type": "civil_unrest",
+   "country_iso3": "GIN",
+   "location": {
+    "country_iso3": "GIN",
+    "admin1": "锡吉里地区",
+    "city": "锡吉里",
+    "site": null,
+    "raw_text": "région de Siguiri, dans le nord-est de la Guinée"
+   },
+   "key_facts": [
+    {
+     "fact": "几内亚当局在锡吉里地区禁止非法采金后拘留1263人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon un communiqué conjoint des ministères de la Défense et de la Sécurité daté du samedi 7 novembre, 1263 personnes y ont été interpellées."
+    },
+    {
+     "fact": "被拘留者包括几内亚人及布基纳法索、马里、多哥、尼日尔和科特迪瓦公民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Parmi elles figurent notamment des Guinéens, des Burkinabè, des Maliens, des Togolais, des Nigériens et des Ivoiriens."
+    },
+    {
+     "fact": "被拘留者均被转移至科纳克里，司法处理尚未明确",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Si tous ont été conduits à Conakry, les suites judiciaires qui leur seront réservées n'ont pas encore été précisées."
+    },
+    {
+     "fact": "当局宣布在相关地区永久部署国防与安全力量并实行零容忍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'État a annoncé le déploiement permanent des forces de défense et de sécurité dans les zones concernées avec pour consigne d'appliquer une tolérance zéro."
+    },
+    {
+     "fact": "马里称自行动开始以来已接收约16万名被几内亚遣返者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Bamako a ainsi annoncé avoir accueilli quelque 160 000 personnes refoulées de Guinée depuis son lancement."
+    }
+   ],
+   "uncertainties": [
+    "被拘留者的后续司法处理尚未明确",
+    "马里方面接收约16万人的数字为巴马科单方面宣布，尚未获独立核实",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_05c2086644775654",
+ "disease_event_id": null,
+ "country_code": "GN"
+}
