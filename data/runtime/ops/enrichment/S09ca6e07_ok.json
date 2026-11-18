@@ -1,0 +1,117 @@
+{
+ "label": "S09ca6e07",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6b30c20f9ea3ed4a1b6fc20e7d1f0ee497f9880286108a19d52fb0dd669b3b41",
+ "tokens": {
+  "input_tokens": 2076,
+  "output_tokens": 530,
+  "total_tokens": 2606
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "奥拉韦波-哈希姆呼吁国际社会关注368万尼日利亚流离失所者",
+   "summary_zh": "尼日利亚协议党总统候选人奥拉韦波-哈希姆就368万境内流离失所者的处境发出警告，呼吁加大国际干预，以应对不安全、宗教迫害和族群歧视问题。他还要求立即释放被指遭国家安全局非法拘留的豪萨文化活动人士迈桑戈。哈希姆援引联合国难民署数据称，截至2026年10月，尼日利亚境内流离失所人口约为368万。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚协议党总统候选人奥拉韦波-哈希姆就368万境内流离失所者处境发出警告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The presidential candidate of the Accord, Gbenga Olawepo-Hashim, has raised the alarm over the plight of 3.68 million internally displaced persons in Nigeria"
+    },
+    {
+     "fact": "哈希姆呼吁加大国际干预以应对不安全、宗教迫害和族群歧视",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "calling for increased international intervention to address insecurity, religious persecution and ethnic discrimination"
+    },
+    {
+     "fact": "哈希姆要求立即释放被指遭国家安全局非法拘留的豪萨文化活动人士迈桑戈",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Hashim also called for the immediate release of a Hausa cultural activist, Maisango, whom he alleged was being detained unlawfully by the Department of State Services"
+    },
+    {
+     "fact": "哈希姆援引联合国难民署数据称，截至2026年10月尼日利亚境内流离失所人口约为368万",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Citing the United Nations High Commissioner for Refugees figures, Hashim put Nigeria’s internally displaced population at approximately 3.68 million as of October 2026"
+    }
+   ],
+   "uncertainties": [
+    "迈桑戈被非法拘留的说法系哈希姆单方面指控，尚未获得独立证实",
+    "368万流离失所者数据为哈希姆援引联合国难民署的数字，报道未提供原始数据来源",
+    "目前仅有一个来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "奥拉韦波-哈希姆呼吁国际社会关注368万尼日利亚流离失所者",
+   "summary_zh": "尼日利亚协议党总统候选人奥拉韦波-哈希姆就368万境内流离失所者的处境发出警告，呼吁加大国际干预，以应对不安全、宗教迫害和族群歧视问题。他还要求立即释放被指遭国家安全局非法拘留的豪萨文化活动人士迈桑戈。哈希姆援引联合国难民署数据称，截至2026年10月，尼日利亚境内流离失所人口约为368万。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚协议党总统候选人奥拉韦波-哈希姆就368万境内流离失所者处境发出警告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The presidential candidate of the Accord, Gbenga Olawepo-Hashim, has raised the alarm over the plight of 3.68 million internally displaced persons in Nigeria"
+    },
+    {
+     "fact": "哈希姆呼吁加大国际干预以应对不安全、宗教迫害和族群歧视",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "calling for increased international intervention to address insecurity, religious persecution and ethnic discrimination"
+    },
+    {
+     "fact": "哈希姆要求立即释放被指遭国家安全局非法拘留的豪萨文化活动人士迈桑戈",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Hashim also called for the immediate release of a Hausa cultural activist, Maisango, whom he alleged was being detained unlawfully by the Department of State Services"
+    },
+    {
+     "fact": "哈希姆援引联合国难民署数据称，截至2026年10月尼日利亚境内流离失所人口约为368万",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Citing the United Nations High Commissioner for Refugees figures, Hashim put Nigeria’s internally displaced population at approximately 3.68 million as of October 2026"
+    }
+   ],
+   "uncertainties": [
+    "迈桑戈被非法拘留的说法系哈希姆单方面指控，尚未获得独立证实",
+    "368万流离失所者数据为哈希姆援引联合国难民署的数字，报道未提供原始数据来源",
+    "目前仅有一个来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_ac9968bf09ca6e07",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
