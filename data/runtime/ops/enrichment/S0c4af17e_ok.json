@@ -1,0 +1,127 @@
+{
+ "label": "S0c4af17e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "74cbd0fac5a85b095989ba176f5caadefe2d9003915214fe534acf8335274e24",
+ "tokens": {
+  "input_tokens": 2853,
+  "output_tokens": 630,
+  "total_tokens": 3483
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "中非共和国：苏丹战争恐致该国北部动荡",
+   "summary_zh": "国际危机组织10月29日发布的报告称，邻国苏丹持续三年半的冲突可能使中非共和国极北部的瓦卡加地区成为地区动荡策源地。该地区难民涌入、武装人员越境及武器流通，据称正助长中非武装团体重组壮大。报告还警告亲政府民兵在该地区的部署以及阿联酋影响力上升带来的地缘政治风险。相关分析目前仅来自单一来源。",
+   "event_type": "armed_conflict",
+   "country_iso3": "CAF",
+   "location": {
+    "country_iso3": "CAF",
+    "admin1": "瓦卡加",
+    "city": "比劳",
+    "site": null,
+    "raw_text": "région de la Vakaga, dans l'extrême nord de la Centrafrique"
+   },
+   "key_facts": [
+    {
+     "fact": "国际危机组织报告称苏丹战争可能使中非北部瓦卡加地区成为地区动荡策源地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Trois ans et demi de conflit dévastateur au Soudan voisin risquent de transformer la région de la Vakaga, dans l'extrême nord de la Centrafrique, en un foyer de déstabilisation régionale, affirme le dernier rapport de l'International Crisis Group"
+    },
+    {
+     "fact": "难民涌入、武装人员越境和武器流通据称助长中非武装团体重组",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'afflux de réfugiés, les incursions de combattants et la circulation des armes favorisent la reconstitution des groupes armés centrafricains"
+    },
+    {
+     "fact": "三年内瓦卡加首府比劳人口翻倍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "en trois ans, la population de Birao, chef-lieu de la Vakaga, a doublé"
+    },
+    {
+     "fact": "6月30日阿姆达福克镇遭袭造成约三十人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'attaque du 30 juin dernier contre la ville d'Am Dafock, qui a fait une trentaine de morts"
+    },
+    {
+     "fact": "报告警告亲政府民兵在该地区部署及阿联酋影响力上升的地缘政治风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le rapport alerte également sur le déploiement de milices progouvernementales dans la zone et sur les risques géopolitiques liés à l'influence croissante des Émirats arabes unis dans la région"
+    }
+   ],
+   "uncertainties": [
+    "相关分析来自国际危机组织报告，目前仅单一来源报道，尚缺乏交叉验证",
+    "阿联酋被指资助苏丹冲突的说法来自多方消息，尚未获独立确认",
+    "瓦卡加地区武装团体重组的具体规模与程度有待核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "中非共和国：苏丹战争恐致该国北部动荡",
+   "summary_zh": "国际危机组织10月29日发布的报告称，邻国苏丹持续三年半的冲突可能使中非共和国极北部的瓦卡加地区成为地区动荡策源地。该地区难民涌入、武装人员越境及武器流通，据称正助长中非武装团体重组壮大。报告还警告亲政府民兵在该地区的部署以及阿联酋影响力上升带来的地缘政治风险。相关分析目前仅来自单一来源。",
+   "event_type": "armed_conflict",
+   "country_iso3": "CAF",
+   "location": {
+    "country_iso3": "CAF",
+    "admin1": "瓦卡加",
+    "city": "比劳",
+    "site": null,
+    "raw_text": "région de la Vakaga, dans l'extrême nord de la Centrafrique"
+   },
+   "key_facts": [
+    {
+     "fact": "国际危机组织报告称苏丹战争可能使中非北部瓦卡加地区成为地区动荡策源地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Trois ans et demi de conflit dévastateur au Soudan voisin risquent de transformer la région de la Vakaga, dans l'extrême nord de la Centrafrique, en un foyer de déstabilisation régionale, affirme le dernier rapport de l'International Crisis Group"
+    },
+    {
+     "fact": "难民涌入、武装人员越境和武器流通据称助长中非武装团体重组",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l'afflux de réfugiés, les incursions de combattants et la circulation des armes favorisent la reconstitution des groupes armés centrafricains"
+    },
+    {
+     "fact": "三年内瓦卡加首府比劳人口翻倍",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "en trois ans, la population de Birao, chef-lieu de la Vakaga, a doublé"
+    },
+    {
+     "fact": "6月30日阿姆达福克镇遭袭造成约三十人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'attaque du 30 juin dernier contre la ville d'Am Dafock, qui a fait une trentaine de morts"
+    },
+    {
+     "fact": "报告警告亲政府民兵在该地区部署及阿联酋影响力上升的地缘政治风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le rapport alerte également sur le déploiement de milices progouvernementales dans la zone et sur les risques géopolitiques liés à l'influence croissante des Émirats arabes unis dans la région"
+    }
+   ],
+   "uncertainties": [
+    "相关分析来自国际危机组织报告，目前仅单一来源报道，尚缺乏交叉验证",
+    "阿联酋被指资助苏丹冲突的说法来自多方消息，尚未获独立确认",
+    "瓦卡加地区武装团体重组的具体规模与程度有待核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_75db3c820c4af17e",
+ "disease_event_id": null,
+ "country_code": "CF"
+}
