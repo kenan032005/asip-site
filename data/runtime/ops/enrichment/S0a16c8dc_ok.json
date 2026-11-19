@@ -1,0 +1,127 @@
+{
+ "label": "S0a16c8dc",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1df18764ec275ff8de2a4c0646bd42ed083215a71de8a8b80d067db0572be1c0",
+ "tokens": {
+  "input_tokens": 2551,
+  "output_tokens": 547,
+  "total_tokens": 3098
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹湖泊州伦拜克北部一名女孩遭兄弟殴打重伤",
+   "summary_zh": "南苏丹湖泊州伦拜克北部县一名14岁女孩因取水回家较晚，被醉酒兄弟殴打致臀部和大腿严重受伤，目前在伦拜克州立医院接受治疗。医院医疗官员证实她三周前入院，伤口较深，仍需接受皮肤移植手术。州性别与社会福利部官员及民间社会活动人士谴责该暴力行为，并指出当地针对女性的性别暴力案件日益常见。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "湖泊州",
+    "city": "伦拜克",
+    "site": "伦拜克州立医院",
+    "raw_text": "Rumbek North County, Lakes State; Akot cattle camp; Rumbek State Hospital"
+   },
+   "key_facts": [
+    {
+     "fact": "一名14岁女孩在伦拜克北部县被醉酒兄弟殴打致重伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A 14-year-old girl, only identified as a Gum, was mercilessly beaten by her brother for delaying her return home from a water point in Rumbek North County"
+    },
+    {
+     "fact": "女孩目前在伦拜克州立医院接受严重伤口治疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "is now receiving treatment for severe wounds at the Rumbek State Hospital in the Lakes State capital"
+    },
+    {
+     "fact": "医院医疗官员证实女孩三周前因臀部和大腿深伤口入院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "David Dak, the medical officer in charge of the surgical ward at Rumbek State Hospital, confirmed that the girl was admitted three weeks ago after sustaining deep wounds on both buttocks"
+    },
+    {
+     "fact": "女孩将在三四个月后接受皮肤移植，预计八个月后康复",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "she will get a skin graft after 3 or 4 months and will recover after eight months"
+    },
+    {
+     "fact": "州性别与社会福利部官员谴责该暴力行为并称其违反儿童权利",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Violence is totally against the law, and it is a violation of the rights of the child. I condemn this act in the strongest terms possible"
+    }
+   ],
+   "uncertainties": [
+    "事件发生时间约在一个月前，具体日期尚未确认",
+    "报道目前仅基于单一来源（Radio Tamazuj），尚缺乏交叉验证",
+    "施暴者是否被追究法律责任尚不明确"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹湖泊州伦拜克北部一名女孩遭兄弟殴打重伤",
+   "summary_zh": "南苏丹湖泊州伦拜克北部县一名14岁女孩因取水回家较晚，被醉酒兄弟殴打致臀部和大腿严重受伤，目前在伦拜克州立医院接受治疗。医院医疗官员证实她三周前入院，伤口较深，仍需接受皮肤移植手术。州性别与社会福利部官员及民间社会活动人士谴责该暴力行为，并指出当地针对女性的性别暴力案件日益常见。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "湖泊州",
+    "city": "伦拜克",
+    "site": "伦拜克州立医院",
+    "raw_text": "Rumbek North County, Lakes State; Akot cattle camp; Rumbek State Hospital"
+   },
+   "key_facts": [
+    {
+     "fact": "一名14岁女孩在伦拜克北部县被醉酒兄弟殴打致重伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A 14-year-old girl, only identified as a Gum, was mercilessly beaten by her brother for delaying her return home from a water point in Rumbek North County"
+    },
+    {
+     "fact": "女孩目前在伦拜克州立医院接受严重伤口治疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "is now receiving treatment for severe wounds at the Rumbek State Hospital in the Lakes State capital"
+    },
+    {
+     "fact": "医院医疗官员证实女孩三周前因臀部和大腿深伤口入院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "David Dak, the medical officer in charge of the surgical ward at Rumbek State Hospital, confirmed that the girl was admitted three weeks ago after sustaining deep wounds on both buttocks"
+    },
+    {
+     "fact": "女孩将在三四个月后接受皮肤移植，预计八个月后康复",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "she will get a skin graft after 3 or 4 months and will recover after eight months"
+    },
+    {
+     "fact": "州性别与社会福利部官员谴责该暴力行为并称其违反儿童权利",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Violence is totally against the law, and it is a violation of the rights of the child. I condemn this act in the strongest terms possible"
+    }
+   ],
+   "uncertainties": [
+    "事件发生时间约在一个月前，具体日期尚未确认",
+    "报道目前仅基于单一来源（Radio Tamazuj），尚缺乏交叉验证",
+    "施暴者是否被追究法律责任尚不明确"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_cba167b20a16c8dc",
+ "disease_event_id": null,
+ "country_code": "SS"
+}
