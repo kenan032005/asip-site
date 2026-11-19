@@ -1,0 +1,117 @@
+{
+ "label": "Se06f5f37",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5eef7cfa7a659485a7b3c0156b06ca435f3dfa186e8150d715147087d0b1d504",
+ "tokens": {
+  "input_tokens": 2226,
+  "output_tokens": 520,
+  "total_tokens": 2746
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "奥法抢劫案：夸拉州政府撤销20项指控中的18项，萨拉基作出回应",
+   "summary_zh": "尼日利亚前参议院议长布科拉·萨拉基指控夸拉州政府在2018年奥法银行抢劫案中滥用起诉权，该州政府已将针对他和前州长阿卜杜勒法塔赫·艾哈迈德的20项刑事指控中的18项撤销。萨拉基的回应源于赛义德·波普拉据称承认，他当年参与将萨拉基与抢劫案关联的政治活动，是为了了结政治恩怨。波普拉称部分全体进步大会党成员故意重启并政治化该抢劫指控，以削弱萨拉基在该州的政治影响力。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Kwara",
+    "city": "Offa",
+    "site": null,
+    "raw_text": "Offa, Kwara State, Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "夸拉州政府将针对萨拉基和艾哈迈德的20项指控中的18项撤销",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "it amended the criminal charges against him and former Governor Abdulfatah Ahmed over the 2018 Offa bank robbery, dropping 18 of the original 20 counts"
+    },
+    {
+     "fact": "萨拉基指控夸拉州政府滥用起诉权",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Bukola Saraki has accused the Kwara State Government of abusing its prosecutorial powers"
+    },
+    {
+     "fact": "波普拉据称承认参与将萨拉基与抢劫案关联的政治活动以了结政治恩怨",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "an alleged admission by Saheed Popoola ... that he participated in the political campaign linking the former Senate president to the robbery to settle political scores"
+    },
+    {
+     "fact": "波普拉称部分全体进步大会党成员故意重启并政治化该抢劫指控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "some APC members deliberately revived and politicised the robbery allegations to undermine Saraki’s political influence in the state"
+    }
+   ],
+   "uncertainties": [
+    "波普拉的承认仅为据称，尚未证实",
+    "萨拉基关于滥用起诉权的指控未获独立证实",
+    "目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "奥法抢劫案：夸拉州政府撤销20项指控中的18项，萨拉基作出回应",
+   "summary_zh": "尼日利亚前参议院议长布科拉·萨拉基指控夸拉州政府在2018年奥法银行抢劫案中滥用起诉权，该州政府已将针对他和前州长阿卜杜勒法塔赫·艾哈迈德的20项刑事指控中的18项撤销。萨拉基的回应源于赛义德·波普拉据称承认，他当年参与将萨拉基与抢劫案关联的政治活动，是为了了结政治恩怨。波普拉称部分全体进步大会党成员故意重启并政治化该抢劫指控，以削弱萨拉基在该州的政治影响力。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Kwara",
+    "city": "Offa",
+    "site": null,
+    "raw_text": "Offa, Kwara State, Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "夸拉州政府将针对萨拉基和艾哈迈德的20项指控中的18项撤销",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "it amended the criminal charges against him and former Governor Abdulfatah Ahmed over the 2018 Offa bank robbery, dropping 18 of the original 20 counts"
+    },
+    {
+     "fact": "萨拉基指控夸拉州政府滥用起诉权",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Bukola Saraki has accused the Kwara State Government of abusing its prosecutorial powers"
+    },
+    {
+     "fact": "波普拉据称承认参与将萨拉基与抢劫案关联的政治活动以了结政治恩怨",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "an alleged admission by Saheed Popoola ... that he participated in the political campaign linking the former Senate president to the robbery to settle political scores"
+    },
+    {
+     "fact": "波普拉称部分全体进步大会党成员故意重启并政治化该抢劫指控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "some APC members deliberately revived and politicised the robbery allegations to undermine Saraki’s political influence in the state"
+    }
+   ],
+   "uncertainties": [
+    "波普拉的承认仅为据称，尚未证实",
+    "萨拉基关于滥用起诉权的指控未获独立证实",
+    "目前仅有一个来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_bf09d0b6e06f5f37",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

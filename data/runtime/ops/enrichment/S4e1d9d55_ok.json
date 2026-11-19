@@ -1,0 +1,115 @@
+{
+ "label": "S4e1d9d55",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0611fa825534dd16144f3252717e5b568c5cdbc77548575a01741e5c0c41f1a7",
+ "tokens": {
+  "input_tokens": 2159,
+  "output_tokens": 503,
+  "total_tokens": 2662
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚奥孙州工人因地方政府拨款被扣发起罢工",
+   "summary_zh": "尼日利亚奥孙州政府办公室周一关闭，工人按尼日利亚劳工大会（NLC）州分会的指示举行为期三天的罢工。奥索博的政府秘书处、州议会及多个地方政府秘书处大门被锁，公立学校教师也加入罢工，学生被要求回家。NLC表示，此次罢工是对地方政府法定拨款持续被扣留所发出的七天最后通牒到期后的行动。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Osun",
+    "city": "Osogbo",
+    "site": "政府秘书处、州议会及地方政府秘书处",
+    "raw_text": "Osun Government Secretariat and the state House of Assembly in Osogbo; Olorunda Local Government Secretariat and Osogbo Local Government Secretariat"
+   },
+   "key_facts": [
+    {
+     "fact": "奥孙州政府办公室周一关闭，工人开始为期三天的罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "GOVERNMENT offices in Osun, were on Monday shut as workers embark on a three-day strike as directed by the state chapter of the Nigeria Labour Congress (NLC) on Sunday."
+    },
+    {
+     "fact": "奥索博的政府秘书处和州议会大门被锁，无工人或商业活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the gates to the Osun Government Secretariat and the state House of Assembly in Osogbo, were under lock with no worker or business activities ongoing in the premises."
+    },
+    {
+     "fact": "公立学校教师加入罢工，学生被要求回家",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Students of public schools in Osogbo were also asked to return home as teachers in public schools equally joined the strike."
+    },
+    {
+     "fact": "罢工源于地方政府法定拨款被扣留的七天最后通牒到期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the strike followed the expiration of the seven-day ultimatum issued to the Federal and Osun governments over the continued withholding of the state local government statutory allocations."
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（单一来源），尚缺乏交叉验证",
+    "罢工对州政府运作和公共服务的具体影响范围尚未获独立确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚奥孙州工人因地方政府拨款被扣发起罢工",
+   "summary_zh": "尼日利亚奥孙州政府办公室周一关闭，工人按尼日利亚劳工大会（NLC）州分会的指示举行为期三天的罢工。奥索博的政府秘书处、州议会及多个地方政府秘书处大门被锁，公立学校教师也加入罢工，学生被要求回家。NLC表示，此次罢工是对地方政府法定拨款持续被扣留所发出的七天最后通牒到期后的行动。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Osun",
+    "city": "Osogbo",
+    "site": "政府秘书处、州议会及地方政府秘书处",
+    "raw_text": "Osun Government Secretariat and the state House of Assembly in Osogbo; Olorunda Local Government Secretariat and Osogbo Local Government Secretariat"
+   },
+   "key_facts": [
+    {
+     "fact": "奥孙州政府办公室周一关闭，工人开始为期三天的罢工",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "GOVERNMENT offices in Osun, were on Monday shut as workers embark on a three-day strike as directed by the state chapter of the Nigeria Labour Congress (NLC) on Sunday."
+    },
+    {
+     "fact": "奥索博的政府秘书处和州议会大门被锁，无工人或商业活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the gates to the Osun Government Secretariat and the state House of Assembly in Osogbo, were under lock with no worker or business activities ongoing in the premises."
+    },
+    {
+     "fact": "公立学校教师加入罢工，学生被要求回家",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Students of public schools in Osogbo were also asked to return home as teachers in public schools equally joined the strike."
+    },
+    {
+     "fact": "罢工源于地方政府法定拨款被扣留的七天最后通牒到期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the strike followed the expiration of the seven-day ultimatum issued to the Federal and Osun governments over the continued withholding of the state local government statutory allocations."
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（单一来源），尚缺乏交叉验证",
+    "罢工对州政府运作和公共服务的具体影响范围尚未获独立确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_fde61dd34e1d9d55",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
