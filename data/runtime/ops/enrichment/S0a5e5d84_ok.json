@@ -1,0 +1,137 @@
+{
+ "label": "S0a5e5d84",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5269345abd4945e2ba93c9bbc83dbcae70b3d5eef357d230f1bc99bd22e22ae4",
+ "tokens": {
+  "input_tokens": 2589,
+  "output_tokens": 679,
+  "total_tokens": 3268
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "法国指控伊朗革命卫队对超市冰箱发动网络攻击",
+   "summary_zh": "法国指控伊朗革命卫队是10月导致数百家超市冰箱和冷柜失灵的 cyber 攻击幕后黑手。法国外长巴罗表示将在欧洲层面推动对相关责任人实施制裁。巴黎检察官同日宣布对革命卫队一支网络攻击部队负责人及其两名副手展开调查。报道称，攻击造成数百万欧元损失，超过100家Coopérative U门店及180家Intermarché和Netto门店受影响。",
+   "event_type": "other_security",
+   "country_iso3": "FRA",
+   "location": {
+    "country_iso3": "FRA",
+    "admin1": null,
+    "city": "巴黎",
+    "site": null,
+    "raw_text": "Paris"
+   },
+   "key_facts": [
+    {
+     "fact": "法国指控伊朗革命卫队发动了10月的超市冰箱网络攻击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La France accuse les Gardiens de la révolution iraniens d’être à l’origine des cyberattaques qui ont déréglé les réfrigérateurs et congélateurs de centaines de supermarchés en octobre."
+    },
+    {
+     "fact": "法国外长巴罗宣布将在欧洲层面推动制裁相关责任人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministre de l’Europe et des Affaires étrangères, Jean-Noël Barrot, a annoncé lundi 9 novembre que Paris entendait mettre en œuvre des sanctions au niveau européen contre les responsables."
+    },
+    {
+     "fact": "巴黎检察官宣布对一支网络攻击部队负责人及其两名副手展开调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La procureure de Paris, Laure Beccuau, a annoncé le même jour l’ouverture d’une enquête visant le chef d’une unité cyber offensive et ses deux adjoints."
+    },
+    {
+     "fact": "攻击造成数百万欧元的生鲜和冷冻产品损失",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Leur réchauffement a entraîné la perte de produits frais et surgelés, pour un montant estimé à plusieurs millions d’euros."
+    },
+    {
+     "fact": "超过100家Coopérative U门店及180家Intermarché和Netto门店受影响",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plus de 100 magasins de Coopérative U ont été touchés, ainsi que 180 points de vente d’Intermarché et de son enseigne Netto."
+    },
+    {
+     "fact": "11月1日至2日夜间七个欧洲国家数十家商店遭另一波攻击，但与10月法国攻击的关联尚未确立",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le lien entre ces incidents et les attaques françaises d’octobre n’est pas établi."
+    }
+   ],
+   "uncertainties": [
+    "伊朗革命卫队为攻击幕后黑手的指控由法国方面提出，尚未经独立证实",
+    "11月欧洲多国商店遭到的另一波攻击与10月法国攻击之间的关联尚未确立",
+    "目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "法国指控伊朗革命卫队对超市冰箱发动网络攻击",
+   "summary_zh": "法国指控伊朗革命卫队是10月导致数百家超市冰箱和冷柜失灵的 cyber 攻击幕后黑手。法国外长巴罗表示将在欧洲层面推动对相关责任人实施制裁。巴黎检察官同日宣布对革命卫队一支网络攻击部队负责人及其两名副手展开调查。报道称，攻击造成数百万欧元损失，超过100家Coopérative U门店及180家Intermarché和Netto门店受影响。",
+   "event_type": "other_security",
+   "country_iso3": "FRA",
+   "location": {
+    "country_iso3": "FRA",
+    "admin1": null,
+    "city": "巴黎",
+    "site": null,
+    "raw_text": "Paris"
+   },
+   "key_facts": [
+    {
+     "fact": "法国指控伊朗革命卫队发动了10月的超市冰箱网络攻击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La France accuse les Gardiens de la révolution iraniens d’être à l’origine des cyberattaques qui ont déréglé les réfrigérateurs et congélateurs de centaines de supermarchés en octobre."
+    },
+    {
+     "fact": "法国外长巴罗宣布将在欧洲层面推动制裁相关责任人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministre de l’Europe et des Affaires étrangères, Jean-Noël Barrot, a annoncé lundi 9 novembre que Paris entendait mettre en œuvre des sanctions au niveau européen contre les responsables."
+    },
+    {
+     "fact": "巴黎检察官宣布对一支网络攻击部队负责人及其两名副手展开调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La procureure de Paris, Laure Beccuau, a annoncé le même jour l’ouverture d’une enquête visant le chef d’une unité cyber offensive et ses deux adjoints."
+    },
+    {
+     "fact": "攻击造成数百万欧元的生鲜和冷冻产品损失",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Leur réchauffement a entraîné la perte de produits frais et surgelés, pour un montant estimé à plusieurs millions d’euros."
+    },
+    {
+     "fact": "超过100家Coopérative U门店及180家Intermarché和Netto门店受影响",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plus de 100 magasins de Coopérative U ont été touchés, ainsi que 180 points de vente d’Intermarché et de son enseigne Netto."
+    },
+    {
+     "fact": "11月1日至2日夜间七个欧洲国家数十家商店遭另一波攻击，但与10月法国攻击的关联尚未确立",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le lien entre ces incidents et les attaques françaises d’octobre n’est pas établi."
+    }
+   ],
+   "uncertainties": [
+    "伊朗革命卫队为攻击幕后黑手的指控由法国方面提出，尚未经独立证实",
+    "11月欧洲多国商店遭到的另一波攻击与10月法国攻击之间的关联尚未确立",
+    "目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_452084380a5e5d84",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

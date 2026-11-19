@@ -1,0 +1,115 @@
+{
+ "label": "S2a3e34d8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "eb984648c8a7b81de5449cfc564036052f0d262ea33a6c5e95f38cf23768bdfb",
+ "tokens": {
+  "input_tokens": 2760,
+  "output_tokens": 558,
+  "total_tokens": 3318
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）自2025年以来已有超500名军人被判刑，其中381人被判死刑",
+   "summary_zh": "据RFI统计，刚果（金）东部军事司法系统自2025年初以来已对至少507名军人作出判决，其中381人被判处死刑。11月6日，北基伍省瓦利卡莱的军事法庭判处66名刚果（金）武装部队士兵死刑，罪名包括临阵怯战、军事叛乱和拒绝服从命令。报道称，这些数字来自RFI对八起类似审判的汇总，属单一来源统计。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "北基伍省",
+    "city": "瓦利卡莱",
+    "site": "瓦利卡莱军事法庭",
+    "raw_text": "Walikale, dans la province du Nord-Kivu, dans l'est de la RDC"
+   },
+   "key_facts": [
+    {
+     "fact": "11月6日，北基伍省瓦利卡莱的军事法庭判处66名刚果（金）武装部队士兵死刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la justice militaire a condamné à mort 66 soldats de l'armée congolaise, vendredi 6 novembre à Walikale, dans la province du Nord-Kivu"
+    },
+    {
+     "fact": "指控罪名包括临阵怯战、军事叛乱和拒绝服从命令",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les poursuites portaient notamment sur la « lâcheté devant l'ennemi », la « révolte militaire » et le « refus d'obéir aux ordres »"
+    },
+    {
+     "fact": "据RFI统计，自2025年初以来至少507名军人被判刑，其中381人被判死刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "notre compilation de ces huit procès fait état d'au moins 507 condamnations de militaires depuis le début de 2025, dont 381 à mort"
+    },
+    {
+     "fact": "刚果（金）于2024年3月解除自2003年以来执行的死刑暂停令",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La RDC a levé en mars 2024 le moratoire sur les exécutions qui était observé depuis 2003"
+    }
+   ],
+   "uncertainties": [
+    "相关判决与统计数字目前仅来自RFI单一来源，尚缺乏交叉验证",
+    "报道称2025年未记录到实际执行死刑，但该情况未获独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）自2025年以来已有超500名军人被判刑，其中381人被判死刑",
+   "summary_zh": "据RFI统计，刚果（金）东部军事司法系统自2025年初以来已对至少507名军人作出判决，其中381人被判处死刑。11月6日，北基伍省瓦利卡莱的军事法庭判处66名刚果（金）武装部队士兵死刑，罪名包括临阵怯战、军事叛乱和拒绝服从命令。报道称，这些数字来自RFI对八起类似审判的汇总，属单一来源统计。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "北基伍省",
+    "city": "瓦利卡莱",
+    "site": "瓦利卡莱军事法庭",
+    "raw_text": "Walikale, dans la province du Nord-Kivu, dans l'est de la RDC"
+   },
+   "key_facts": [
+    {
+     "fact": "11月6日，北基伍省瓦利卡莱的军事法庭判处66名刚果（金）武装部队士兵死刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la justice militaire a condamné à mort 66 soldats de l'armée congolaise, vendredi 6 novembre à Walikale, dans la province du Nord-Kivu"
+    },
+    {
+     "fact": "指控罪名包括临阵怯战、军事叛乱和拒绝服从命令",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les poursuites portaient notamment sur la « lâcheté devant l'ennemi », la « révolte militaire » et le « refus d'obéir aux ordres »"
+    },
+    {
+     "fact": "据RFI统计，自2025年初以来至少507名军人被判刑，其中381人被判死刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "notre compilation de ces huit procès fait état d'au moins 507 condamnations de militaires depuis le début de 2025, dont 381 à mort"
+    },
+    {
+     "fact": "刚果（金）于2024年3月解除自2003年以来执行的死刑暂停令",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La RDC a levé en mars 2024 le moratoire sur les exécutions qui était observé depuis 2003"
+    }
+   ],
+   "uncertainties": [
+    "相关判决与统计数字目前仅来自RFI单一来源，尚缺乏交叉验证",
+    "报道称2025年未记录到实际执行死刑，但该情况未获独立确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_6e1ca3e12a3e34d8",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

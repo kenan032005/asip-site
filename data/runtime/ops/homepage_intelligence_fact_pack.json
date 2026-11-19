@@ -1,15 +1,15 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-11-20T03:34:23+08:00",
+ "generated_at": "2026-11-20T04:40:27+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 56,
-  "signals_7d": 404,
-  "verified_events_24h": 57,
-  "verified_events_7d": 412,
+  "signals_24h": 55,
+  "signals_7d": 402,
+  "verified_events_24h": 56,
+  "verified_events_7d": 410,
   "multi_source_verified_events_7d": 5,
   "countries_with_activity_24h": 13,
   "total_countries_monitored": 22
@@ -55,11 +55,11 @@
  "country_distribution_7d": [
   {
    "value": "尼日利亚",
-   "count": 179
+   "count": 178
   },
   {
    "value": "贝宁",
-   "count": 48
+   "count": 47
   },
   {
    "value": "莫桑比克",
@@ -105,7 +105,7 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 33
+   "count": 32
   },
   {
    "value": "民众骚乱",
@@ -155,7 +155,7 @@
  "source_tier_distribution_7d": [
   {
    "value": "C",
-   "count": 698
+   "count": 694
   },
   {
    "value": "A",
@@ -167,36 +167,6 @@
   }
  ],
  "top_verified_events": [
-  {
-   "fact_id": "EVT_6c35e64cbcd4b624",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "贝宁",
-   "title": "Inde : le déraillement d’un train express fait quatre blessés dans l’Assam",
-   "category": "other_security",
-   "source": "Benin Web TV",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-12 20:19",
-   "importance": "high",
-   "severity": "medium"
-  },
-  {
-   "fact_id": "EVT_e27ed1d0e9603a17",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "So This Happened (EP 442): Nigeria’s 112 emergency number fails live test on national television",
-   "category": "other_security",
-   "source": "Punch",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-12 19:34",
-   "importance": "high",
-   "severity": "medium"
-  },
   {
    "fact_id": "EVT_9f644b25010fd490",
    "level": "verified_event",
@@ -254,6 +224,36 @@
    "source_tier": "C",
    "source_role": "major_media",
    "time": "2026-11-13 02:20",
+   "importance": "high",
+   "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_7800e990e84e5c80",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "Journalists can help ensure peaceful elections – Ex-NIPR scribe",
+   "category": "other_security",
+   "source": "Punch",
+   "source_tier": "C",
+   "source_role": "major_media",
+   "time": "2026-11-13 01:46",
+   "importance": "high",
+   "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_04573f27f232c904",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "贝宁",
+   "title": "Affaire JonBenét Ramsey : la police face au risque d’épuiser les traces ADN",
+   "category": "other_security",
+   "source": "Benin Web TV",
+   "source_tier": "C",
+   "source_role": "major_media",
+   "time": "2026-11-13 06:49",
    "importance": "high",
    "severity": "medium"
   }
@@ -695,10 +695,16 @@
   }
  ],
  "existing_assessment": {
-  "status": "deterministic",
-  "based_on": "过去24小时/7日公开信息（确定性汇总）"
+  "status": "ai",
+  "overall_assessment": "已核实事件方面：刚果（金）东北部ADF新一轮袭击造成至少44名平民死亡，是本期最严重事件；南苏丹Duk县牛群遭劫致5人死亡、西赤道州SPLM代表遇袭致2人死亡；乍得洛贡东区村庄遭武装袭击1死1伤，另有两人因涉Boko Haram案被还押；莫桑比克在Pangane抓获6名涉恐嫌犯；尼日利亚卡齐纳部署1008名森林护卫，奥约、纳萨拉瓦等地多起绑架抢劫案告破。情报信号方面（均为单源、尚待核实）：尼日利亚INEC就选举暴力与操纵问题警告青年，FCT卫生工会发出7天罢工通知，阿布贾酒店因涉嫌贩卖新生儿被查封；塞内加尔一婴儿因割礼死亡。整体风险方向趋于恶化。",
+  "risk_direction": "worsening",
+  "confidence": "medium",
+  "generated_time": "2026-11-20T04:39:32+08:00",
+  "based_on": "过去24小时/7日公开信息",
+  "model": "",
+  "date": "20261120"
  },
- "fact_count": 816,
+ "fact_count": 812,
  "facts": {
   "news:6acd593c1fe74038": {
    "fact_id": "news:6acd593c1fe74038",
@@ -6729,66 +6735,6 @@
    "time": "2026-11-13 05:00",
    "importance": "low",
    "why_it_matters": ""
-  },
-  "news:c03a2a783f82ac80": {
-   "fact_id": "news:c03a2a783f82ac80",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "贝宁",
-   "title": "Inde : le déraillement d’un train express fait quatre blessés dans l’Assam",
-   "category": "other_security",
-   "source": "Benin Web TV",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-13 04:19",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:63b990416b5301c5": {
-   "fact_id": "news:63b990416b5301c5",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "So This Happened (EP 442): Nigeria’s 112 emergency number fails live test on national television",
-   "category": "other_security",
-   "source": "Punch",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-13 03:34",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "EVT_6c35e64cbcd4b624": {
-   "fact_id": "EVT_6c35e64cbcd4b624",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "贝宁",
-   "title": "Inde : le déraillement d’un train express fait quatre blessés dans l’Assam",
-   "category": "other_security",
-   "source": "Benin Web TV",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-12 20:19",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_e27ed1d0e9603a17": {
-   "fact_id": "EVT_e27ed1d0e9603a17",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "So This Happened (EP 442): Nigeria’s 112 emergency number fails live test on national television",
-   "category": "other_security",
-   "source": "Punch",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-12 19:34",
-   "importance": "high",
-   "severity": "medium"
   },
   "EVT_9f644b25010fd490": {
    "fact_id": "EVT_9f644b25010fd490",

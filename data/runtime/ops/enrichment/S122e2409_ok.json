@@ -1,0 +1,138 @@
+{
+ "label": "S122e2409",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4270cdd5410f666cbf446f3fea57fa45702facf2ef6e40d76b7638e03e4576a3",
+ "tokens": {
+  "input_tokens": 2802,
+  "output_tokens": 631,
+  "total_tokens": 3433
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"125套物资实际覆盖的家庭或村庄数量未说明\", \"报道为单一来源（Le N'Djam Post），尚未获得交叉验证\", \"霍乱病例数据引自区域会议介绍，未提供独立核实\"]",
+    "after": "[\"125套物资实际覆盖的家庭或村庄数量未说明\", \"报道为单一来源（Le N'Djam Post），尚未获得交叉验证\", \"霍乱病例数据引自区域会议介绍，未提供独立核实\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得湖地区霍乱疫情：向脆弱省份提供125套物资，援助有用但远不足够",
+   "summary_zh": "乍得社会行动部代表团于2026年11月9日向库尔基梅省省长移交125套食品和非食品物资，用于应对霍乱疫情。据官方数据，截至2026年10月30日乍得累计报告1431例病例，疫情已蔓延至湖省多个地区。报道指出，125套物资相对于该省数十万脆弱人口规模仍然有限，且未说明实际覆盖的家庭或村庄数量。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "Lac",
+    "city": null,
+    "site": "Koulkimé省",
+    "raw_text": "département de Koulkimé, province du Lac, Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得社会行动部代表团向库尔基梅省移交125套食品和非食品物资",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une délégation du ministère de l'Action sociale... a remis 125 kits de vivres et non vivres au préfet Ahmat Adoum Seid le lundi 9 novembre 2026"
+    },
+    {
+     "fact": "据官方数据，截至2026年10月30日乍得累计报告1431例霍乱病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fin octobre, le Tchad comptait 1 431 cas au 30 octobre 2026, selon les chiffres présentés à une réunion régionale"
+    },
+    {
+     "fact": "霍乱疫情于2026年6月中旬在乍得宣布，8月初蔓延至湖省",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le choléra, déclaré au Tchad à la mi-juin 2026, a gagné la province du Lac début août"
+    },
+    {
+     "fact": "湖省约有6万人因袭击和军事行动流离失所，全省有21.9万境内流离失所者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "quelque 60 000 personnes ont été déplacées à la suite d'attaques répétées et d'opérations militaires. Selon les données officielles, la province compte 219 000 déplacés internes"
+    },
+    {
+     "fact": "联合国难民署称2024年1月至2026年4月乍得湖盆地安全事件增加80%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une hausse de 80 % des incidents entre janvier 2024 et avril 2026"
+    }
+   ],
+   "uncertainties": [
+    "125套物资实际覆盖的家庭或村庄数量未说明",
+    "报道为单一来源（Le N'Djam Post），尚未获得交叉验证",
+    "霍乱病例数据引自区域会议介绍，未提供独立核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得湖地区霍乱疫情：向脆弱省份提供125套物资，援助有用但远不足够",
+   "summary_zh": "乍得社会行动部代表团于2026年11月9日向库尔基梅省省长移交125套食品和非食品物资，用于应对霍乱疫情。据官方数据，截至2026年10月30日乍得累计报告1431例病例，疫情已蔓延至湖省多个地区。报道指出，125套物资相对于该省数十万脆弱人口规模仍然有限，且未说明实际覆盖的家庭或村庄数量。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "Lac",
+    "city": null,
+    "site": "Koulkimé省",
+    "raw_text": "département de Koulkimé, province du Lac, Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得社会行动部代表团向库尔基梅省移交125套食品和非食品物资",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une délégation du ministère de l'Action sociale... a remis 125 kits de vivres et non vivres au préfet Ahmat Adoum Seid le lundi 9 novembre 2026"
+    },
+    {
+     "fact": "据官方数据，截至2026年10月30日乍得累计报告1431例霍乱病例",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fin octobre, le Tchad comptait 1 431 cas au 30 octobre 2026, selon les chiffres présentés à une réunion régionale"
+    },
+    {
+     "fact": "霍乱疫情于2026年6月中旬在乍得宣布，8月初蔓延至湖省",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le choléra, déclaré au Tchad à la mi-juin 2026, a gagné la province du Lac début août"
+    },
+    {
+     "fact": "湖省约有6万人因袭击和军事行动流离失所，全省有21.9万境内流离失所者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "quelque 60 000 personnes ont été déplacées à la suite d'attaques répétées et d'opérations militaires. Selon les données officielles, la province compte 219 000 déplacés internes"
+    },
+    {
+     "fact": "联合国难民署称2024年1月至2026年4月乍得湖盆地安全事件增加80%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une hausse de 80 % des incidents entre janvier 2024 et avril 2026"
+    }
+   ],
+   "uncertainties": [
+    "125套物资实际覆盖的家庭或村庄数量未说明",
+    "报道为单一来源（Le N'Djam Post），尚未获得交叉验证",
+    "霍乱病例数据引自区域会议介绍，未提供独立核实",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_beb7e622122e2409",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
