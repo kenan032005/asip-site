@@ -1,0 +1,121 @@
+{
+ "label": "S3148cc80",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "22952edbe018c01c55aa2ff9d2bf1adfd538179598e8e76841fe459ba243d46d",
+ "tokens": {
+  "input_tokens": 2504,
+  "output_tokens": 463,
+  "total_tokens": 2967
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "联合国妇女署称性别暴力威胁尼日利亚发展",
+   "summary_zh": "联合国妇女署驻尼日利亚代表Beatrice Eyong在阿布贾举行的220小时连续阅读马拉松启动仪式上表示，性别暴力严重制约尼日利亚发展，不仅限于配偶间肢体暴力，还包括童婚等剥夺女童教育与经济机会的做法。她指出公众对现行法律缺乏了解是应对性別暴力的主要挑战，呼吁政府机构、传统与宗教领袖、民间社会等共同行动。尼日利亚联邦司法部官员及残疾妇女网络创始人亦呼吁加强法律落实与无障碍司法服务。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国妇女署称性别暴力是尼日利亚发展的重大威胁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "UN Women has described Gender-Based Violence (GBV) as a major threat to Nigeria's development"
+    },
+    {
+     "fact": "联合国妇女署驻尼日利亚代表Beatrice Eyong在阿布贾举行的220小时连续阅读马拉松启动仪式上发言",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The UN Women Representative in Nigeria, Ms Beatrice Eyong, said this at the commencement of a 220-hour continuous reading marathon by Olubumi Oluba, on Monday, in Abuja."
+    },
+    {
+     "fact": "Eyong指出公众对现行法律缺乏了解是应对性別暴力的主要挑战",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eyong identified lack of public knowledge of existing laws as a major challenge in addressing Sexual and Gender-Based Violence (SGBV)."
+    },
+    {
+     "fact": "阅读马拉松旨在宣传尼日利亚及另外14个非洲国家的相关法律",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Oluba, a staff member of the Federal Ministry of Justice, is undertaking the marathon to raise awareness of SGBV through the public reading of relevant laws from Nigeria and 14 other African countries."
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "联合国妇女署称性别暴力威胁尼日利亚发展",
+   "summary_zh": "联合国妇女署驻尼日利亚代表Beatrice Eyong在阿布贾举行的220小时连续阅读马拉松启动仪式上表示，性别暴力严重制约尼日利亚发展，不仅限于配偶间肢体暴力，还包括童婚等剥夺女童教育与经济机会的做法。她指出公众对现行法律缺乏了解是应对性別暴力的主要挑战，呼吁政府机构、传统与宗教领袖、民间社会等共同行动。尼日利亚联邦司法部官员及残疾妇女网络创始人亦呼吁加强法律落实与无障碍司法服务。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国妇女署称性别暴力是尼日利亚发展的重大威胁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "UN Women has described Gender-Based Violence (GBV) as a major threat to Nigeria's development"
+    },
+    {
+     "fact": "联合国妇女署驻尼日利亚代表Beatrice Eyong在阿布贾举行的220小时连续阅读马拉松启动仪式上发言",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The UN Women Representative in Nigeria, Ms Beatrice Eyong, said this at the commencement of a 220-hour continuous reading marathon by Olubumi Oluba, on Monday, in Abuja."
+    },
+    {
+     "fact": "Eyong指出公众对现行法律缺乏了解是应对性別暴力的主要挑战",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Eyong identified lack of public knowledge of existing laws as a major challenge in addressing Sexual and Gender-Based Violence (SGBV)."
+    },
+    {
+     "fact": "阅读马拉松旨在宣传尼日利亚及另外14个非洲国家的相关法律",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Oluba, a staff member of the Federal Ministry of Justice, is undertaking the marathon to raise awareness of SGBV through the public reading of relevant laws from Nigeria and 14 other African countries."
+    }
+   ],
+   "uncertainties": [
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_6ffbe3f43148cc80",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
