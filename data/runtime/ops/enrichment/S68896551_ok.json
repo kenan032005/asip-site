@@ -1,0 +1,113 @@
+{
+ "label": "S68896551",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ae570e13a7e7425db9015bcd344195b462c188a7fbff15ad4a12ab2412cbaf7a",
+ "tokens": {
+  "input_tokens": 2716,
+  "output_tokens": 585,
+  "total_tokens": 3301
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "前国防部长托比亚斯·戴伊的遗体安葬于马尼卡",
+   "summary_zh": "莫桑比克前国防部长托比亚斯·若阿金·戴伊的遗体于本周一在其家乡马尼卡省马尼卡区马卡德拉地区安葬。葬礼上，政府官员、家属、朋友、老兵、政界人士及各机构代表出席致敬，强调其政治军事生涯及对国家的贡献。国防军总参谋长儒利奥·雅内等出席悼念。其子表示，安葬于马卡德拉是戴伊生前的明确意愿。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "马尼卡省",
+    "city": "希莫尤",
+    "site": "马卡德拉地区",
+    "raw_text": "região de Macadera, sua terra natal, no distrito de Manica, província de Manica"
+   },
+   "key_facts": [
+    {
+     "fact": "前国防部长托比亚斯·若阿金·戴伊的遗体安葬于马尼卡省马尼卡区马卡德拉地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Os restos mortais de Tobias Joaquim Dai, antigo ministro da Defesa Nacional... foram a enterrar esta segunda-feira, na região de Macadera, sua terra natal, no distrito de Manica, província de Manica."
+    },
+    {
+     "fact": "葬礼在希莫尤市Centro Hípico街区的前政府官员住所开始举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "As cerimónias tiveram início nas primeiras horas da manhã, na residência do antigo governante, localizada no bairro Centro Hípico, na cidade de Chimoio"
+    },
+    {
+     "fact": "国防军总参谋长儒利奥·雅内出席悼念并赞扬其领导武装部队的榜样作用",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "O Chefe do Estado-Maior General das Forças Armadas de Defesa de Moçambique, Júlio Jane, esteve entre as figuras que prestaram homenagem ao antigo ministro"
+    },
+    {
+     "fact": "其子若阿金·戴伊表示安葬于马卡德拉是戴伊生前的明确意愿",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a decisão de o pai ser sepultado em Macadera, na província de Manica, resultou de uma vontade expressa pelo próprio ainda em vida"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（O País）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "前国防部长托比亚斯·戴伊的遗体安葬于马尼卡",
+   "summary_zh": "莫桑比克前国防部长托比亚斯·若阿金·戴伊的遗体于本周一在其家乡马尼卡省马尼卡区马卡德拉地区安葬。葬礼上，政府官员、家属、朋友、老兵、政界人士及各机构代表出席致敬，强调其政治军事生涯及对国家的贡献。国防军总参谋长儒利奥·雅内等出席悼念。其子表示，安葬于马卡德拉是戴伊生前的明确意愿。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "马尼卡省",
+    "city": "希莫尤",
+    "site": "马卡德拉地区",
+    "raw_text": "região de Macadera, sua terra natal, no distrito de Manica, província de Manica"
+   },
+   "key_facts": [
+    {
+     "fact": "前国防部长托比亚斯·若阿金·戴伊的遗体安葬于马尼卡省马尼卡区马卡德拉地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Os restos mortais de Tobias Joaquim Dai, antigo ministro da Defesa Nacional... foram a enterrar esta segunda-feira, na região de Macadera, sua terra natal, no distrito de Manica, província de Manica."
+    },
+    {
+     "fact": "葬礼在希莫尤市Centro Hípico街区的前政府官员住所开始举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "As cerimónias tiveram início nas primeiras horas da manhã, na residência do antigo governante, localizada no bairro Centro Hípico, na cidade de Chimoio"
+    },
+    {
+     "fact": "国防军总参谋长儒利奥·雅内出席悼念并赞扬其领导武装部队的榜样作用",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "O Chefe do Estado-Maior General das Forças Armadas de Defesa de Moçambique, Júlio Jane, esteve entre as figuras que prestaram homenagem ao antigo ministro"
+    },
+    {
+     "fact": "其子若阿金·戴伊表示安葬于马卡德拉是戴伊生前的明确意愿",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a decisão de o pai ser sepultado em Macadera, na província de Manica, resultou de uma vontade expressa pelo próprio ainda em vida"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（O País）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_0389a6c368896551",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}
