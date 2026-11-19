@@ -1,0 +1,117 @@
+{
+ "label": "Se23ab8a0",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c6543a56167b13c150de855d4c4375686879f36fa8d7817ed16e759ad84e45d2",
+ "tokens": {
+  "input_tokens": 2084,
+  "output_tokens": 425,
+  "total_tokens": 2509
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克：警方在Infulene击毙三人，据称其企图抢劫住宅",
+   "summary_zh": "据莫桑比克共和国警察（PRM）称，周一上午在马托拉市南部Infulene街区，三名嫌疑人因涉嫌企图抢劫一处兼作小额信贷机构设施的住宅而被警方击毙。警方发言人表示，双方发生交火，嫌疑人在警方接近调查时先开枪。警方初步信息称，该团伙意图闯入该物业窃取一名亚裔业主的资金，该业主此前曾遭犯罪分子针对。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "马普托省",
+    "city": "马托拉",
+    "site": "Infulene街区",
+    "raw_text": "Infulene neighbourhood, southern municipality of Matola"
+   },
+   "key_facts": [
+    {
+     "fact": "三名嫌疑人被莫桑比克警方击毙",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "three individuals were shot dead by Mozambican Police (PRM), in the Infulene neighbourhood"
+    },
+    {
+     "fact": "警方称嫌疑人涉嫌企图抢劫一处兼作小额信贷机构设施的住宅",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "for allegedly attempting to rob a residence that also serves as a facility of microcredit establishment"
+    },
+    {
+     "fact": "警方发言人称嫌疑人在交火中死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the victims were shot dead during an exchange of gunfire with the Police"
+    },
+    {
+     "fact": "警方称嫌疑人先向接近调查的警员开枪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "As the officers approached to investigate, the suspects opened fire, and the Police retaliated"
+    }
+   ],
+   "uncertainties": [
+    "嫌疑人抢劫意图系警方指控，尚未经司法程序证实",
+    "事件细节目前仅来自警方单一来源，尚缺乏交叉验证",
+    "涉案团伙第四名成员的情况未获说明"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克：警方在Infulene击毙三人，据称其企图抢劫住宅",
+   "summary_zh": "据莫桑比克共和国警察（PRM）称，周一上午在马托拉市南部Infulene街区，三名嫌疑人因涉嫌企图抢劫一处兼作小额信贷机构设施的住宅而被警方击毙。警方发言人表示，双方发生交火，嫌疑人在警方接近调查时先开枪。警方初步信息称，该团伙意图闯入该物业窃取一名亚裔业主的资金，该业主此前曾遭犯罪分子针对。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "马普托省",
+    "city": "马托拉",
+    "site": "Infulene街区",
+    "raw_text": "Infulene neighbourhood, southern municipality of Matola"
+   },
+   "key_facts": [
+    {
+     "fact": "三名嫌疑人被莫桑比克警方击毙",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "three individuals were shot dead by Mozambican Police (PRM), in the Infulene neighbourhood"
+    },
+    {
+     "fact": "警方称嫌疑人涉嫌企图抢劫一处兼作小额信贷机构设施的住宅",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "for allegedly attempting to rob a residence that also serves as a facility of microcredit establishment"
+    },
+    {
+     "fact": "警方发言人称嫌疑人在交火中死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the victims were shot dead during an exchange of gunfire with the Police"
+    },
+    {
+     "fact": "警方称嫌疑人先向接近调查的警员开枪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "As the officers approached to investigate, the suspects opened fire, and the Police retaliated"
+    }
+   ],
+   "uncertainties": [
+    "嫌疑人抢劫意图系警方指控，尚未经司法程序证实",
+    "事件细节目前仅来自警方单一来源，尚缺乏交叉验证",
+    "涉案团伙第四名成员的情况未获说明"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_b4806398e23ab8a0",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}
