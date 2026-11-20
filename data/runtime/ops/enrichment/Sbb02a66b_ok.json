@@ -1,0 +1,116 @@
+{
+ "label": "Sbb02a66b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "343594060f4ef18d6b620e2b6209cc2e6c4b6541d6b007aa31884d0672643999",
+ "tokens": {
+  "input_tokens": 2070,
+  "output_tokens": 394,
+  "total_tokens": 2464
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"州长承诺的治理与修复措施能否落实尚未证实\", \"目前仅单一来源报道，尚缺乏交叉验证\"]",
+    "after": "[\"州长承诺的治理与修复措施能否落实尚未证实\", \"目前仅单一来源报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "奥克佩博洛承诺治理洪水并修复埃多州道路",
+   "summary_zh": "尼日利亚埃多州州长蒙迪·奥克佩博洛在视察道路项目时承诺，将治理因暴雨和侵蚀被淹的区域，并修复相关道路。他表示将修复埃克万蓄水区至格莱格莱的道路，并修建当地池塘以遏制洪水。此次视察是其2026年11月12日执政两周年活动的一部分。相关报道为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Edo State",
+    "city": null,
+    "site": null,
+    "raw_text": "Edo State"
+   },
+   "key_facts": [
+    {
+     "fact": "埃多州州长奥克佩博洛承诺治理被淹区域并修复道路",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Edo State Governor, Monday Okpebholo, has promised to reclaim all the areas flooded by erosion due to heavy rain, assuring that roads in the area will also be repaired."
+    },
+    {
+     "fact": "州长表示将修复埃克万蓄水区至格莱格莱的道路",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Ekhewan water retention to Gelegele road would be repaired to make life easier for the citizens in the area"
+    },
+    {
+     "fact": "此次视察是其2026年11月12日执政两周年活动的一部分",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "during an inspection tour of road projects as part of activities to mark his second anniversary on November 12, 2026"
+    }
+   ],
+   "uncertainties": [
+    "州长承诺的治理与修复措施能否落实尚未证实",
+    "目前仅单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "奥克佩博洛承诺治理洪水并修复埃多州道路",
+   "summary_zh": "尼日利亚埃多州州长蒙迪·奥克佩博洛在视察道路项目时承诺，将治理因暴雨和侵蚀被淹的区域，并修复相关道路。他表示将修复埃克万蓄水区至格莱格莱的道路，并修建当地池塘以遏制洪水。此次视察是其2026年11月12日执政两周年活动的一部分。相关报道为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Edo State",
+    "city": null,
+    "site": null,
+    "raw_text": "Edo State"
+   },
+   "key_facts": [
+    {
+     "fact": "埃多州州长奥克佩博洛承诺治理被淹区域并修复道路",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Edo State Governor, Monday Okpebholo, has promised to reclaim all the areas flooded by erosion due to heavy rain, assuring that roads in the area will also be repaired."
+    },
+    {
+     "fact": "州长表示将修复埃克万蓄水区至格莱格莱的道路",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Ekhewan water retention to Gelegele road would be repaired to make life easier for the citizens in the area"
+    },
+    {
+     "fact": "此次视察是其2026年11月12日执政两周年活动的一部分",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "during an inspection tour of road projects as part of activities to mark his second anniversary on November 12, 2026"
+    }
+   ],
+   "uncertainties": [
+    "州长承诺的治理与修复措施能否落实尚未证实",
+    "目前仅单一来源报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_3e9a0e63bb02a66b",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
