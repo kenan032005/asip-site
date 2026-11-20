@@ -1,0 +1,138 @@
+{
+ "label": "S20b15b01",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f07cb60780562a7c1ed9fd3d574492e871de46ee407ff937da8ee167925bfefd",
+ "tokens": {
+  "input_tokens": 2966,
+  "output_tokens": 643,
+  "total_tokens": 3609
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"事件目前仅有一个来源（RFI）报道，尚未获得交叉验证\", \"教师欠款金额为财政部长单方面说法，未获独立核实\", \"逮捕人数及伤情等细节尚未确认\"]",
+    "after": "[\"事件目前仅有一个来源（RFI）报道，尚未获得交叉验证\", \"教师欠款金额为财政部长单方面说法，未获独立核实\", \"逮捕人数及伤情等细节尚未确认\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "利比亚：教师罢工持续升级，政府宣布化解危机未果",
+   "summary_zh": "利比亚中小学教师自9月13日发起的罢工已蔓延至西部多座城市，包括首都的黎波里，大量公立学校停课。的黎波里政府11月7日宣布达成协议试图结束危机，但复课并未实现。11月9日，安全部队在阿布萨利姆地区驱散示威教师，多名女性被逮捕，现场曾出现装甲车辆。教师工会要求发放补贴、补发欠薪并实行统一工资标准，表示将继续罢工直至诉求得到满足。",
+   "event_type": "civil_unrest",
+   "country_iso3": "LBY",
+   "location": {
+    "country_iso3": "LBY",
+    "admin1": null,
+    "city": "的黎波里",
+    "site": "阿布萨利姆（Abou Slim/Abou Salim）",
+    "raw_text": "Libye, villes de l'ouest libyen, dont la capitale Tripoli; municipalité d'Abou Slim, en banlieue de Tripoli"
+   },
+   "key_facts": [
+    {
+     "fact": "利比亚教师自9月13日开始的罢工已扩展至西部多座城市",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Débuté le 13 septembre, il s'est largement étendu dans les villes de l'ouest libyen."
+    },
+    {
+     "fact": "的黎波里政府11月7日宣布达成结束危机的协议，但复课未实现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement a annoncé, samedi 7 novembre, un accord pour tenter de mettre fin à la crise, mais la reprise annoncée des cours n'a pas eu lieu."
+    },
+    {
+     "fact": "西部包括首都在内的大量公立学校停课",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un grand nombre d'écoles publiques sont fermées à l'ouest, y compris dans la capitale Tripoli."
+    },
+    {
+     "fact": "11月9日安全部队在阿布萨利姆驱散示威教师，多名女性被逮捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les forces sécuritaires ont visé des enseignantes qui manifestaient dans la municipalité d'Abou Slim, en banlieue de Tripoli. Plusieurs femmes ont été arrêtées et le rassemblement a été dispersé par la force."
+    },
+    {
+     "fact": "的黎波里政府财政部长称教师欠款约240亿第纳尔，近30亿美元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les arriérés financiers dus aux enseignants s'élevaient à environ 24 milliards de dinars, soit près de trois milliards de dollars"
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（RFI）报道，尚未获得交叉验证",
+    "教师欠款金额为财政部长单方面说法，未获独立核实",
+    "逮捕人数及伤情等细节尚未确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "利比亚：教师罢工持续升级，政府宣布化解危机未果",
+   "summary_zh": "利比亚中小学教师自9月13日发起的罢工已蔓延至西部多座城市，包括首都的黎波里，大量公立学校停课。的黎波里政府11月7日宣布达成协议试图结束危机，但复课并未实现。11月9日，安全部队在阿布萨利姆地区驱散示威教师，多名女性被逮捕，现场曾出现装甲车辆。教师工会要求发放补贴、补发欠薪并实行统一工资标准，表示将继续罢工直至诉求得到满足。",
+   "event_type": "civil_unrest",
+   "country_iso3": "LBY",
+   "location": {
+    "country_iso3": "LBY",
+    "admin1": null,
+    "city": "的黎波里",
+    "site": "阿布萨利姆（Abou Slim/Abou Salim）",
+    "raw_text": "Libye, villes de l'ouest libyen, dont la capitale Tripoli; municipalité d'Abou Slim, en banlieue de Tripoli"
+   },
+   "key_facts": [
+    {
+     "fact": "利比亚教师自9月13日开始的罢工已扩展至西部多座城市",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Débuté le 13 septembre, il s'est largement étendu dans les villes de l'ouest libyen."
+    },
+    {
+     "fact": "的黎波里政府11月7日宣布达成结束危机的协议，但复课未实现",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le gouvernement a annoncé, samedi 7 novembre, un accord pour tenter de mettre fin à la crise, mais la reprise annoncée des cours n'a pas eu lieu."
+    },
+    {
+     "fact": "西部包括首都在内的大量公立学校停课",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un grand nombre d'écoles publiques sont fermées à l'ouest, y compris dans la capitale Tripoli."
+    },
+    {
+     "fact": "11月9日安全部队在阿布萨利姆驱散示威教师，多名女性被逮捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les forces sécuritaires ont visé des enseignantes qui manifestaient dans la municipalité d'Abou Slim, en banlieue de Tripoli. Plusieurs femmes ont été arrêtées et le rassemblement a été dispersé par la force."
+    },
+    {
+     "fact": "的黎波里政府财政部长称教师欠款约240亿第纳尔，近30亿美元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les arriérés financiers dus aux enseignants s'élevaient à environ 24 milliards de dinars, soit près de trois milliards de dollars"
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（RFI）报道，尚未获得交叉验证",
+    "教师欠款金额为财政部长单方面说法，未获独立核实",
+    "逮捕人数及伤情等细节尚未确认",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_c4bbdeab20b15b01",
+ "disease_event_id": null,
+ "country_code": "LY"
+}

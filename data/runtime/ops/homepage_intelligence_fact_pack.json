@@ -1,15 +1,15 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-11-21T03:14:45+08:00",
+ "generated_at": "2026-11-21T03:48:53+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 47,
-  "signals_7d": 395,
-  "verified_events_24h": 47,
-  "verified_events_7d": 404,
+  "signals_24h": 45,
+  "signals_7d": 391,
+  "verified_events_24h": 45,
+  "verified_events_7d": 400,
   "multi_source_verified_events_7d": 5,
   "countries_with_activity_24h": 11,
   "total_countries_monitored": 22
@@ -52,11 +52,11 @@
  "country_distribution_7d": [
   {
    "value": "尼日利亚",
-   "count": 178
+   "count": 176
   },
   {
    "value": "贝宁",
-   "count": 50
+   "count": 49
   },
   {
    "value": "莫桑比克",
@@ -64,7 +64,7 @@
   },
   {
    "value": "乍得",
-   "count": 35
+   "count": 34
   },
   {
    "value": "南苏丹",
@@ -102,7 +102,7 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 27
+   "count": 25
   },
   {
    "value": "武装冲突",
@@ -152,7 +152,7 @@
  "source_tier_distribution_7d": [
   {
    "value": "C",
-   "count": 698
+   "count": 690
   },
   {
    "value": "A",
@@ -176,21 +176,6 @@
    "source_tier": "C",
    "source_role": "major_media",
    "time": "2026-11-13 19:49",
-   "importance": "high",
-   "severity": "medium"
-  },
-  {
-   "fact_id": "EVT_00e3aa78eda6d86d",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "贝宁",
-   "title": "Turquie : quatre militaires tués dans le crash d’un hélicoptère S-70 à Malatya",
-   "category": "other_security",
-   "source": "Benin Web TV",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-13 19:19",
    "importance": "high",
    "severity": "medium"
   },
@@ -240,17 +225,32 @@
    "severity": "medium"
   },
   {
-   "fact_id": "EVT_c7941ffb14fdc9e1",
+   "fact_id": "EVT_58fb1753ad477801",
    "level": "verified_event",
    "evidence_tier": "single_source_published",
    "source_count": 1,
    "country": "尼日利亚",
-   "title": "Oyo condemns attack on enforcement team",
+   "title": "COAS inaugurates 120 affordable homes, reserves 5% for wounded soldiers",
+   "category": "other_security",
+   "source": "News Agency of Nigeria",
+   "source_tier": "C",
+   "source_role": "major_media",
+   "time": "2026-11-13 22:57",
+   "importance": "high",
+   "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_981f16420c4c1273",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "Ex-Lagos civil servant found dead in UK home",
    "category": "other_security",
    "source": "Punch",
    "source_tier": "C",
    "source_role": "major_media",
-   "time": "2026-11-13 19:35",
+   "time": "2026-11-14 01:51",
    "importance": "high",
    "severity": "medium"
   }
@@ -692,16 +692,10 @@
   }
  ],
  "existing_assessment": {
-  "status": "ai",
-  "overall_assessment": "已核实事件方面，尼日利亚安全压力集中于多重犯罪与政治暴力：卡杜纳监狱内遥控抢劫团伙被查、里弗斯邪教杀害摩托车手、赞法拉绑架勒索、尼日尔州人质付赎金后仍被杀，并有报告称10月恐怖分子致835人死亡；2027年选前暴力与选举机构争议升温，欧盟2000万欧元军援谈判推进。乍得萨拉马特州长下令严打战争武器；马里塞古、莫皮提遭JNIM袭击平民；刚果（金）伊图里至少44名平民被杀；几内亚锡吉里采金冲突；南苏丹瓦乌解除武装监督受关注。情报信号层面（均为单源、尚待核实）：巴耶尔萨船只事故致4死24救、乍得朱纳火灾、尼日利亚前球员住所遇袭等。",
-  "risk_direction": "worsening",
-  "confidence": "medium",
-  "generated_time": "2026-11-21T03:13:45+08:00",
-  "based_on": "过去24小时/7日公开信息",
-  "model": "",
-  "date": "20261121"
+  "status": "deterministic",
+  "based_on": "过去24小时/7日公开信息（确定性汇总）"
  },
- "fact_count": 799,
+ "fact_count": 791,
  "facts": {
   "news:3c13928a78a5e3ae": {
    "fact_id": "news:3c13928a78a5e3ae",
@@ -6568,66 +6562,6 @@
    "importance": "low",
    "why_it_matters": ""
   },
-  "news:bb48b7a3bdb683b5": {
-   "fact_id": "news:bb48b7a3bdb683b5",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "Tchad : au Salamat, le chef de l'État ordonne la fermeté contre les armes de guerre",
-   "category": "other_security",
-   "source": "Alwihda Info",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-11-14 03:44",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:76894acd05c79aef": {
-   "fact_id": "news:76894acd05c79aef",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "Oyo condemns attack on enforcement team",
-   "category": "other_security",
-   "source": "Punch",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-14 03:35",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:5479e9b54727ba06": {
-   "fact_id": "news:5479e9b54727ba06",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "贝宁",
-   "title": "Turquie : quatre militaires tués dans le crash d’un hélicoptère S-70 à Malatya",
-   "category": "other_security",
-   "source": "Benin Web TV",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-14 03:19",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:69b03270bb2652fc": {
-   "fact_id": "news:69b03270bb2652fc",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "Evening recap: Tinubu orders crackdown on thuggery, Super Eagles win, other top stories",
-   "category": "other_security",
-   "source": "Punch",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-14 03:15",
-   "importance": "low",
-   "why_it_matters": ""
-  },
   "EVT_2f4ec9a9e6a2441d": {
    "fact_id": "EVT_2f4ec9a9e6a2441d",
    "level": "verified_event",
@@ -6640,21 +6574,6 @@
    "source_tier": "C",
    "source_role": "major_media",
    "time": "2026-11-13 19:49",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_00e3aa78eda6d86d": {
-   "fact_id": "EVT_00e3aa78eda6d86d",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "贝宁",
-   "title": "Turquie : quatre militaires tués dans le crash d’un hélicoptère S-70 à Malatya",
-   "category": "other_security",
-   "source": "Benin Web TV",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-13 19:19",
    "importance": "high",
    "severity": "medium"
   },
@@ -6700,51 +6619,6 @@
    "source_tier": "C",
    "source_role": "major_media",
    "time": "2026-11-13 20:04",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_c7941ffb14fdc9e1": {
-   "fact_id": "EVT_c7941ffb14fdc9e1",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "Oyo condemns attack on enforcement team",
-   "category": "other_security",
-   "source": "Punch",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-13 19:35",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_50342a93cef64333": {
-   "fact_id": "EVT_50342a93cef64333",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "Evening recap: Tinubu orders crackdown on thuggery, Super Eagles win, other top stories",
-   "category": "other_security",
-   "source": "Punch",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-13 19:15",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_0ea15a0918f91a9c": {
-   "fact_id": "EVT_0ea15a0918f91a9c",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "Tchad : au Salamat, le chef de l'État ordonne la fermeté contre les armes de guerre",
-   "category": "other_security",
-   "source": "Alwihda Info",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-11-13 19:44",
    "importance": "high",
    "severity": "medium"
   },
