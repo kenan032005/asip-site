@@ -1,0 +1,117 @@
+{
+ "label": "S54bb4835",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b8ca24a9a1c6fb5c2f3125a514872d4acd030fb2d72518305f2248f19197209c",
+ "tokens": {
+  "input_tokens": 3019,
+  "output_tokens": 515,
+  "total_tokens": 3534
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "马约特岛刚果（金）寻求庇护者等待时间漫长",
+   "summary_zh": "据RFI报道，逃离刚果（金）东部战争的刚果（金）移民抵达法国海外省马约特岛后申请庇护，但当地缺乏适配的接收机构，获得国际保护的程序等待时间极长。约1800人居住在Tsoundzou的非正式营地，生活条件极为艰难。报道称，法国国家服务部门因申请量过大而处理缓慢，寻求庇护者单一窗口（Guda）近月关闭进一步加剧积压，但该关闭未获省政府正式确认。目前共有2700人在马约特等待登记庇护申请。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "MYT",
+    "admin1": null,
+    "city": "马约特",
+    "site": "Tsoundzou非正式营地",
+    "raw_text": "À Mayotte, camp informel de Tsoundzou"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）移民逃离东部战争后抵达马约特申请庇护",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Après avoir fui la guerre dans l'est de la RDC, ils demandent l'asile à la France"
+    },
+    {
+     "fact": "约1800人居住在Tsoundzou非正式营地，生活条件极为艰难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ils sont 1 800 à vivre dans le camp informel de Tsoundzou, dans la plus grande précarité"
+    },
+    {
+     "fact": "共有2700人在马约特等待登记庇护申请",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au total, 2 700 personnes attendent à Mayotte pour faire enregistrer leur demande d'asile"
+    },
+    {
+     "fact": "寻求庇护者单一窗口（Guda）近月关闭，但未获省政府正式确认",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La fermeture du Guda n'a pas été officialisée par la préfecture. Contactée, elle n'a pas répondu à nos sollicitations"
+    }
+   ],
+   "uncertainties": [
+    "Guda关闭未获省政府正式确认，省政府未回应置评请求",
+    "报道为单一来源（RFI），尚缺乏交叉验证",
+    "等待登记人数与营地人数的统计口径及准确性有待核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "马约特岛刚果（金）寻求庇护者等待时间漫长",
+   "summary_zh": "据RFI报道，逃离刚果（金）东部战争的刚果（金）移民抵达法国海外省马约特岛后申请庇护，但当地缺乏适配的接收机构，获得国际保护的程序等待时间极长。约1800人居住在Tsoundzou的非正式营地，生活条件极为艰难。报道称，法国国家服务部门因申请量过大而处理缓慢，寻求庇护者单一窗口（Guda）近月关闭进一步加剧积压，但该关闭未获省政府正式确认。目前共有2700人在马约特等待登记庇护申请。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "MYT",
+    "admin1": null,
+    "city": "马约特",
+    "site": "Tsoundzou非正式营地",
+    "raw_text": "À Mayotte, camp informel de Tsoundzou"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）移民逃离东部战争后抵达马约特申请庇护",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Après avoir fui la guerre dans l'est de la RDC, ils demandent l'asile à la France"
+    },
+    {
+     "fact": "约1800人居住在Tsoundzou非正式营地，生活条件极为艰难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ils sont 1 800 à vivre dans le camp informel de Tsoundzou, dans la plus grande précarité"
+    },
+    {
+     "fact": "共有2700人在马约特等待登记庇护申请",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au total, 2 700 personnes attendent à Mayotte pour faire enregistrer leur demande d'asile"
+    },
+    {
+     "fact": "寻求庇护者单一窗口（Guda）近月关闭，但未获省政府正式确认",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La fermeture du Guda n'a pas été officialisée par la préfecture. Contactée, elle n'a pas répondu à nos sollicitations"
+    }
+   ],
+   "uncertainties": [
+    "Guda关闭未获省政府正式确认，省政府未回应置评请求",
+    "报道为单一来源（RFI），尚缺乏交叉验证",
+    "等待登记人数与营地人数的统计口径及准确性有待核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_7a70ff8054bb4835",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

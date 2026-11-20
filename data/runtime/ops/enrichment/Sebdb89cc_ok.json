@@ -1,0 +1,127 @@
+{
+ "label": "Sebdb89cc",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "952f1ef69e2e10c26fb321248734b4050179ce742861d77a0d692bf6f072b930",
+ "tokens": {
+  "input_tokens": 2049,
+  "output_tokens": 567,
+  "total_tokens": 2616
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "国际农业发展基金警告厄尔尼诺威胁尼日利亚粮食供应并推高农业成本",
+   "summary_zh": "国际农业发展基金（IFAD）在土耳其安塔利亚举行的COP31气候大会开幕时发布报告，警告正在发展的厄尔尼诺现象可能给尼日利亚及萨赫勒地区带来农业干旱、作物减产和粮食不安全加剧。报告指出，从塞内加尔经尼日利亚延伸至埃塞俄比亚和苏丹存在潜在农业干旱走廊，以往重大厄尔尼诺事件期间萨赫勒地区降雨量曾出现20%至35%的局部缺口。报告还提到能源和化肥价格上涨可能叠加影响，全球经济潜在损失估计达11万亿美元。该警告目前仅来自单一来源报道。",
+   "event_type": "natural_disaster",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria and other countries across the Sahel"
+   },
+   "key_facts": [
+    {
+     "fact": "IFAD报告警告厄尔尼诺现象威胁尼日利亚粮食供应",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A new IFAD report warns that the developing El Niño phenomenon threatens Nigeria's food supply with agricultural drought and declining crop yields"
+    },
+    {
+     "fact": "报告指出存在从塞内加尔经尼日利亚至埃塞俄比亚和苏丹的潜在农业干旱走廊",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The report identified a potential agricultural drought corridor stretching from Senegal through Nigeria to Ethiopia and Sudan"
+    },
+    {
+     "fact": "以往重大厄尔尼诺事件期间萨赫勒地区降雨量曾出现20%至35%的局部缺口",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "suppressed rainfall during major El Niño events had previously caused localised rainfall deficits of between 20 and 35 per cent across the Sahel"
+    },
+    {
+     "fact": "全球经济潜在损失估计达11万亿美元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "with potential losses to the global economy estimated at $11tn"
+    },
+    {
+     "fact": "报告在土耳其安塔利亚COP31开幕时发布",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "unveiled on Monday at the opening of the United Nations Climate Change Conference, COP31, in Antalya, Türkiye"
+    }
+   ],
+   "uncertainties": [
+    "厄尔尼诺对尼日利亚粮食供应和农业成本的具体影响尚未发生，属预测性警告",
+    "目前仅单一来源（Punch）报道，尚缺乏交叉验证",
+    "11万亿美元全球经济潜在损失为估计值，具体测算依据未在文中说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "国际农业发展基金警告厄尔尼诺威胁尼日利亚粮食供应并推高农业成本",
+   "summary_zh": "国际农业发展基金（IFAD）在土耳其安塔利亚举行的COP31气候大会开幕时发布报告，警告正在发展的厄尔尼诺现象可能给尼日利亚及萨赫勒地区带来农业干旱、作物减产和粮食不安全加剧。报告指出，从塞内加尔经尼日利亚延伸至埃塞俄比亚和苏丹存在潜在农业干旱走廊，以往重大厄尔尼诺事件期间萨赫勒地区降雨量曾出现20%至35%的局部缺口。报告还提到能源和化肥价格上涨可能叠加影响，全球经济潜在损失估计达11万亿美元。该警告目前仅来自单一来源报道。",
+   "event_type": "natural_disaster",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Nigeria and other countries across the Sahel"
+   },
+   "key_facts": [
+    {
+     "fact": "IFAD报告警告厄尔尼诺现象威胁尼日利亚粮食供应",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "A new IFAD report warns that the developing El Niño phenomenon threatens Nigeria's food supply with agricultural drought and declining crop yields"
+    },
+    {
+     "fact": "报告指出存在从塞内加尔经尼日利亚至埃塞俄比亚和苏丹的潜在农业干旱走廊",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The report identified a potential agricultural drought corridor stretching from Senegal through Nigeria to Ethiopia and Sudan"
+    },
+    {
+     "fact": "以往重大厄尔尼诺事件期间萨赫勒地区降雨量曾出现20%至35%的局部缺口",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "suppressed rainfall during major El Niño events had previously caused localised rainfall deficits of between 20 and 35 per cent across the Sahel"
+    },
+    {
+     "fact": "全球经济潜在损失估计达11万亿美元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "with potential losses to the global economy estimated at $11tn"
+    },
+    {
+     "fact": "报告在土耳其安塔利亚COP31开幕时发布",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "unveiled on Monday at the opening of the United Nations Climate Change Conference, COP31, in Antalya, Türkiye"
+    }
+   ],
+   "uncertainties": [
+    "厄尔尼诺对尼日利亚粮食供应和农业成本的具体影响尚未发生，属预测性警告",
+    "目前仅单一来源（Punch）报道，尚缺乏交叉验证",
+    "11万亿美元全球经济潜在损失为估计值，具体测算依据未在文中说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_160dbcb1ebdb89cc",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
