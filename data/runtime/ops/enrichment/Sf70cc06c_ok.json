@@ -1,0 +1,128 @@
+{
+ "label": "Sf70cc06c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d2dd1493e29871e4341db507accb271df28a3c699bac4ed61afd670ed7bbec0b",
+ "tokens": {
+  "input_tokens": 2782,
+  "output_tokens": 486,
+  "total_tokens": 3268
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"火灾具体原因尚未确定\", \"起火点位置系据中国公共电视台报道，尚未获官方最终确认\", \"目前仅有一个来源（贝宁Web TV）报道，尚缺乏交叉验证\"]",
+    "after": "[\"火灾具体原因尚未确定\", \"起火点位置系据中国公共电视台报道，尚未获官方最终确认\", \"目前仅有一个来源（贝宁Web TV）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "中国太原一高层建筑发生火灾，14人死亡、25人住院",
+   "summary_zh": "据贝宁Web TV报道，中国山西省太原市一栋40层建筑于周日发生火灾，造成14人死亡。周一仍有25人住院，其中9人伤势严重。当地政府通报称，火灾于傍晚在一处商住混合建筑群内发生，救援人员约两小时后控制住火势。目前火灾原因尚未确定，相关部门已展开调查。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "CHN",
+   "location": {
+    "country_iso3": "CHN",
+    "admin1": "山西省",
+    "city": "太原",
+    "site": "迎泽区一栋40层商住混合建筑",
+    "raw_text": "une tour de Taiyuan, capitale de la province chinoise du Shanxi; le quartier de Yingze à Taiyuan"
+   },
+   "key_facts": [
+    {
+     "fact": "太原一栋40层建筑发生火灾，造成14人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un incendie survenu dimanche 8 novembre 2026 dans une tour de Taiyuan, capitale de la province chinoise du Shanxi, a fait 14 morts."
+    },
+    {
+     "fact": "周一仍有25人住院，其中9人伤势严重",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Vingt-cinq personnes restaient hospitalisées lundi, dont neuf grièvement blessées, selon le bilan communiqué par les autorités locales."
+    },
+    {
+     "fact": "救援人员将38人送往医院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les services de secours ont conduit 38 personnes à l’hôpital au cours de leur intervention."
+    },
+    {
+     "fact": "火灾原因尚未确定，已展开调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une enquête a été ouverte pour déterminer l’origine du sinistre... Les autorités de Taiyuan n’avaient pas encore communiqué de cause définitive lundi 9 novembre."
+    }
+   ],
+   "uncertainties": [
+    "火灾具体原因尚未确定",
+    "起火点位置系据中国公共电视台报道，尚未获官方最终确认",
+    "目前仅有一个来源（贝宁Web TV）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "中国太原一高层建筑发生火灾，14人死亡、25人住院",
+   "summary_zh": "据贝宁Web TV报道，中国山西省太原市一栋40层建筑于周日发生火灾，造成14人死亡。周一仍有25人住院，其中9人伤势严重。当地政府通报称，火灾于傍晚在一处商住混合建筑群内发生，救援人员约两小时后控制住火势。目前火灾原因尚未确定，相关部门已展开调查。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "CHN",
+   "location": {
+    "country_iso3": "CHN",
+    "admin1": "山西省",
+    "city": "太原",
+    "site": "迎泽区一栋40层商住混合建筑",
+    "raw_text": "une tour de Taiyuan, capitale de la province chinoise du Shanxi; le quartier de Yingze à Taiyuan"
+   },
+   "key_facts": [
+    {
+     "fact": "太原一栋40层建筑发生火灾，造成14人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un incendie survenu dimanche 8 novembre 2026 dans une tour de Taiyuan, capitale de la province chinoise du Shanxi, a fait 14 morts."
+    },
+    {
+     "fact": "周一仍有25人住院，其中9人伤势严重",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Vingt-cinq personnes restaient hospitalisées lundi, dont neuf grièvement blessées, selon le bilan communiqué par les autorités locales."
+    },
+    {
+     "fact": "救援人员将38人送往医院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les services de secours ont conduit 38 personnes à l’hôpital au cours de leur intervention."
+    },
+    {
+     "fact": "火灾原因尚未确定，已展开调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une enquête a été ouverte pour déterminer l’origine du sinistre... Les autorités de Taiyuan n’avaient pas encore communiqué de cause définitive lundi 9 novembre."
+    }
+   ],
+   "uncertainties": [
+    "火灾具体原因尚未确定",
+    "起火点位置系据中国公共电视台报道，尚未获官方最终确认",
+    "目前仅有一个来源（贝宁Web TV）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_1c9ea41bf70cc06c",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
