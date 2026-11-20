@@ -1,0 +1,126 @@
+{
+ "label": "S3fbc815d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5ffe9ee59b2650fb5eb9dff3e60464adeb6315b4784e842885ffef09f945cc86",
+ "tokens": {
+  "input_tokens": 2819,
+  "output_tokens": 482,
+  "total_tokens": 3301
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"供应中断原因尚未证实，仅为业内人士说法\", \"价格走势及供应恢复时间尚不确定\"]",
+    "after": "[\"供应中断原因尚未证实，仅为业内人士说法\", \"价格走势及供应恢复时间尚不确定\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "科托努及周边走私汽油价格上涨且供应短缺",
+   "summary_zh": "贝宁科托努及周边地区走私汽油（俗称“kpayo”）价格在24小时内从每升800西非法郎涨至900西非法郎，阿波美-卡拉维部分地区甚至达到1200西非法郎。与此同时，多个加油站也出现供应困难，消费者和转售商需求旺盛加剧了库存压力。据业内人士称，当前困难可能与贝宁与尼日利亚边境地区供应中断有关。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "科托努",
+    "site": null,
+    "raw_text": "Cotonou et environs, Abomey-Calavi"
+   },
+   "key_facts": [
+    {
+     "fact": "科托努及周边走私汽油价格24小时内从每升800西非法郎涨至900西非法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En l’espace d’une journée, le prix du litre de « kpayo »... a connu une augmentation de 100 FCFA, passant de 800 à 900 FCFA."
+    },
+    {
+     "fact": "阿波美-卡拉维部分地区价格在900至1200西非法郎之间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À Abomey-Calavi... Les prix varient désormais entre 900 et 1 200 FCFA selon les points de vente et les disponibilités."
+    },
+    {
+     "fact": "多个加油站也出现供应困难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plusieurs stations-services connaissent également des difficultés d’approvisionnement."
+    },
+    {
+     "fact": "据业内人士称，困难可能与贝宁与尼日利亚边境供应中断有关",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les difficultés actuelles seraient liées aux perturbations de l’approvisionnement des vendeurs d’essence frelatée au niveau de la frontière entre le Bénin et le Nigeria."
+    }
+   ],
+   "uncertainties": [
+    "供应中断原因尚未证实，仅为业内人士说法",
+    "价格走势及供应恢复时间尚不确定"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "科托努及周边走私汽油价格上涨且供应短缺",
+   "summary_zh": "贝宁科托努及周边地区走私汽油（俗称“kpayo”）价格在24小时内从每升800西非法郎涨至900西非法郎，阿波美-卡拉维部分地区甚至达到1200西非法郎。与此同时，多个加油站也出现供应困难，消费者和转售商需求旺盛加剧了库存压力。据业内人士称，当前困难可能与贝宁与尼日利亚边境地区供应中断有关。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "科托努",
+    "site": null,
+    "raw_text": "Cotonou et environs, Abomey-Calavi"
+   },
+   "key_facts": [
+    {
+     "fact": "科托努及周边走私汽油价格24小时内从每升800西非法郎涨至900西非法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En l’espace d’une journée, le prix du litre de « kpayo »... a connu une augmentation de 100 FCFA, passant de 800 à 900 FCFA."
+    },
+    {
+     "fact": "阿波美-卡拉维部分地区价格在900至1200西非法郎之间",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À Abomey-Calavi... Les prix varient désormais entre 900 et 1 200 FCFA selon les points de vente et les disponibilités."
+    },
+    {
+     "fact": "多个加油站也出现供应困难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plusieurs stations-services connaissent également des difficultés d’approvisionnement."
+    },
+    {
+     "fact": "据业内人士称，困难可能与贝宁与尼日利亚边境供应中断有关",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les difficultés actuelles seraient liées aux perturbations de l’approvisionnement des vendeurs d’essence frelatée au niveau de la frontière entre le Bénin et le Nigeria."
+    }
+   ],
+   "uncertainties": [
+    "供应中断原因尚未证实，仅为业内人士说法",
+    "价格走势及供应恢复时间尚不确定",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_f0d873403fbc815d",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

@@ -1,0 +1,116 @@
+{
+ "label": "S36c0600d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5f7bd6f300d20325e8ecc7775d36db4bd7e5accc6a917d48a0b9afd91b4f892f",
+ "tokens": {
+  "input_tokens": 2014,
+  "output_tokens": 374,
+  "total_tokens": 2388
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"事件目前仅由单一来源Punch报道，尚缺乏交叉验证\", \"视频拍摄的具体时间及营地实际容纳人数尚未获独立确认\"]",
+    "after": "[\"事件目前仅由单一来源Punch报道，尚缺乏交叉验证\", \"视频拍摄的具体时间及营地实际容纳人数尚未获独立确认\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚奥贡州营地4300名队员过度拥挤引发众怒",
+   "summary_zh": "尼日利亚奥贡州萨加穆的国家青年服务团（NYSC）定向营地出现过度拥挤情况，一段病毒式传播的视频显示超过4300名准队员睡在多功能大厅地板上，床垫紧密排列。该视频在网上引发公众愤怒，尼日利亚人谴责居住条件并要求改善队员福利。目前该事件为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "奥贡州",
+    "city": "萨加穆",
+    "site": "NYSC定向营地",
+    "raw_text": "NYSC orientation camp in Sagamu, Ogun State"
+   },
+   "key_facts": [
+    {
+     "fact": "超过4300名准队员被安置在奥贡州萨加穆NYSC营地的多功能大厅内",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "showed graduates packed into a multipurpose hall, with mattresses placed closely together on the floor"
+    },
+    {
+     "fact": "视频显示准队员在过度拥挤条件下睡在地板上",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "prospective corps members sleeping in overcrowded conditions at its orientation camp in Sagamu, Ogun State"
+    },
+    {
+     "fact": "该视频在网上引发公众愤怒并要求改善福利",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The development sparked outrage on social media, with Nigerians condemning the living conditions and demanding improved welfare arrangements for corps members"
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅由单一来源Punch报道，尚缺乏交叉验证",
+    "视频拍摄的具体时间及营地实际容纳人数尚未获独立确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚奥贡州营地4300名队员过度拥挤引发众怒",
+   "summary_zh": "尼日利亚奥贡州萨加穆的国家青年服务团（NYSC）定向营地出现过度拥挤情况，一段病毒式传播的视频显示超过4300名准队员睡在多功能大厅地板上，床垫紧密排列。该视频在网上引发公众愤怒，尼日利亚人谴责居住条件并要求改善队员福利。目前该事件为单一来源报道。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "奥贡州",
+    "city": "萨加穆",
+    "site": "NYSC定向营地",
+    "raw_text": "NYSC orientation camp in Sagamu, Ogun State"
+   },
+   "key_facts": [
+    {
+     "fact": "超过4300名准队员被安置在奥贡州萨加穆NYSC营地的多功能大厅内",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "showed graduates packed into a multipurpose hall, with mattresses placed closely together on the floor"
+    },
+    {
+     "fact": "视频显示准队员在过度拥挤条件下睡在地板上",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "prospective corps members sleeping in overcrowded conditions at its orientation camp in Sagamu, Ogun State"
+    },
+    {
+     "fact": "该视频在网上引发公众愤怒并要求改善福利",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The development sparked outrage on social media, with Nigerians condemning the living conditions and demanding improved welfare arrangements for corps members"
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅由单一来源Punch报道，尚缺乏交叉验证",
+    "视频拍摄的具体时间及营地实际容纳人数尚未获独立确认",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_fcf7096d36c0600d",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
