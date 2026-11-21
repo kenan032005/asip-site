@@ -1,0 +1,115 @@
+{
+ "label": "Sf4eef319",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "2eb49c574e06cd86ec6914c4bf62bb62209eb19f9d02d4e2c0bef0c63e548a2e",
+ "tokens": {
+  "input_tokens": 2343,
+  "output_tokens": 511,
+  "total_tokens": 2854
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "马普托准备250块地块以安置受洪灾影响的家庭",
+   "summary_zh": "马普托市议会正在马图图伊内准备250块地块，用于安置仍住在收容中心的洪灾受灾家庭。该消息在马普托市日庆祝活动期间发布。据马普托市市长称，已安置在卡滕贝的家庭已获得公共照明、公共交通、卫生队、安保加强以及供水。市政府表示，收容中心应仅作为过渡场所，并计划为洪灾受害者建造住房。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "马普托市",
+    "city": "马普托",
+    "site": "马图图伊内",
+    "raw_text": "Matutuine, Maputo"
+   },
+   "key_facts": [
+    {
+     "fact": "马普托市议会正在马图图伊内准备250块地块用于安置洪灾受灾家庭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "O Conselho Municipal de Maputo está a preparar 250 talhões, em Matutuine, para o reassentamento de famílias afectadas pelas inundações"
+    },
+    {
+     "fact": "受灾家庭仍住在收容中心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "que continuam acolhidas nos centros de acomodação"
+    },
+    {
+     "fact": "已安置在卡滕贝的家庭已获得公共照明、公共交通、卫生队、安保加强和供水",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "as famílias reassentadas em Katembe já beneficiam de iluminação pública, transporte público, brigadas de saúde, reforço da segurança e acesso a água"
+    },
+    {
+     "fact": "市政府向收容中心受灾家庭提供了食品、卫生用品、衣物、鞋类、住所物资和蚊帐",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "apoiou famílias afectadas pelas inundações, acolhidas nos centros de acomodação, com alimentos, produtos de higiene, vestuário, calçado, material de abrigo e redes mosquiteiras"
+    }
+   ],
+   "uncertainties": [
+    "该信息目前仅有一个来源（O País）报道，尚缺乏交叉验证",
+    "安置住房建设及供水系统接入尚在筹备或施工中，完成时间未获确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "马普托准备250块地块以安置受洪灾影响的家庭",
+   "summary_zh": "马普托市议会正在马图图伊内准备250块地块，用于安置仍住在收容中心的洪灾受灾家庭。该消息在马普托市日庆祝活动期间发布。据马普托市市长称，已安置在卡滕贝的家庭已获得公共照明、公共交通、卫生队、安保加强以及供水。市政府表示，收容中心应仅作为过渡场所，并计划为洪灾受害者建造住房。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "马普托市",
+    "city": "马普托",
+    "site": "马图图伊内",
+    "raw_text": "Matutuine, Maputo"
+   },
+   "key_facts": [
+    {
+     "fact": "马普托市议会正在马图图伊内准备250块地块用于安置洪灾受灾家庭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "O Conselho Municipal de Maputo está a preparar 250 talhões, em Matutuine, para o reassentamento de famílias afectadas pelas inundações"
+    },
+    {
+     "fact": "受灾家庭仍住在收容中心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "que continuam acolhidas nos centros de acomodação"
+    },
+    {
+     "fact": "已安置在卡滕贝的家庭已获得公共照明、公共交通、卫生队、安保加强和供水",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "as famílias reassentadas em Katembe já beneficiam de iluminação pública, transporte público, brigadas de saúde, reforço da segurança e acesso a água"
+    },
+    {
+     "fact": "市政府向收容中心受灾家庭提供了食品、卫生用品、衣物、鞋类、住所物资和蚊帐",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "apoiou famílias afectadas pelas inundações, acolhidas nos centros de acomodação, com alimentos, produtos de higiene, vestuário, calçado, material de abrigo e redes mosquiteiras"
+    }
+   ],
+   "uncertainties": [
+    "该信息目前仅有一个来源（O País）报道，尚缺乏交叉验证",
+    "安置住房建设及供水系统接入尚在筹备或施工中，完成时间未获确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_e2e960eef4eef319",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

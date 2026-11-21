@@ -1,0 +1,129 @@
+{
+ "label": "S4ab17583",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "32527d94b1cab8e548905c44339a85a7a741e9bae53ed76a4cfbe5c2ced0505f",
+ "tokens": {
+  "input_tokens": 2351,
+  "output_tokens": 596,
+  "total_tokens": 2947
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克索法拉省一地方负责人据称遭戈龙戈萨公园巡查员殴打后死亡",
+   "summary_zh": "莫桑比克索法拉省Muanza区Mazamba地方负责人据称因涉嫌参与偷猎，被戈龙戈萨国家公园巡查员殴打，数日后在贝拉中央医院死亡。索法拉省省长Lourenço Bulha谴责使用暴力，称这是部分巡查员的个人行为，并非公园方面的指示。当局表示死因尚不清楚，相关情况仍在调查中，检察院已着手处理此案。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "索法拉省",
+    "city": "Muanza区Mazamba",
+    "site": "戈龙戈萨国家公园缓冲区",
+    "raw_text": "localidade de Mazamba, no distrito de Muanza, província de Sofala, zona tampão do Parque Nacional da Gorongosa"
+   },
+   "key_facts": [
+    {
+     "fact": "Mazamba地方负责人据称遭戈龙戈萨国家公园巡查员殴打，数日后死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "O chefe da localidade de Mazamba... morreu dias depois de ter sido alegadamente agredido por um grupo de fiscais do Parque Nacional da Gorongosa"
+    },
+    {
+     "fact": "巡查员实施殴打的原因据称是该负责人涉嫌参与偷猎活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Os fiscais terão agredido o responsável local por alegadamente estar envolvido em actividades de caça furtiva"
+    },
+    {
+     "fact": "索法拉省省长Lourenço Bulha谴责暴力，称这是部分巡查员的个人行为，并非公园方面的指示",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "trata-se de uma atitude de responsabilidade individual de um grupo de fiscais, e não de uma orientação do Parque Nacional da Gorongosa"
+    },
+    {
+     "fact": "该负责人被送往贝拉中央医院，数日后死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "o chefe da localidade foi encaminhado ao Hospital Central da Beira, onde acabou por perder a vida dias depois"
+    },
+    {
+     "fact": "死因尚不清楚，当局正在调查，检察院已着手处理此案",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Até ao momento, não são conhecidas as causas da morte, estando as circunstâncias do caso sob investigação das autoridades competentes"
+    }
+   ],
+   "uncertainties": [
+    "殴打行为仅为据称，尚未获确认",
+    "死因尚不清楚，有待调查",
+    "事件具体情况仍在当局调查中",
+    "目前仅单一来源（O País）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "莫桑比克索法拉省一地方负责人据称遭戈龙戈萨公园巡查员殴打后死亡",
+   "summary_zh": "莫桑比克索法拉省Muanza区Mazamba地方负责人据称因涉嫌参与偷猎，被戈龙戈萨国家公园巡查员殴打，数日后在贝拉中央医院死亡。索法拉省省长Lourenço Bulha谴责使用暴力，称这是部分巡查员的个人行为，并非公园方面的指示。当局表示死因尚不清楚，相关情况仍在调查中，检察院已着手处理此案。",
+   "event_type": "other_security",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "索法拉省",
+    "city": "Muanza区Mazamba",
+    "site": "戈龙戈萨国家公园缓冲区",
+    "raw_text": "localidade de Mazamba, no distrito de Muanza, província de Sofala, zona tampão do Parque Nacional da Gorongosa"
+   },
+   "key_facts": [
+    {
+     "fact": "Mazamba地方负责人据称遭戈龙戈萨国家公园巡查员殴打，数日后死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "O chefe da localidade de Mazamba... morreu dias depois de ter sido alegadamente agredido por um grupo de fiscais do Parque Nacional da Gorongosa"
+    },
+    {
+     "fact": "巡查员实施殴打的原因据称是该负责人涉嫌参与偷猎活动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Os fiscais terão agredido o responsável local por alegadamente estar envolvido em actividades de caça furtiva"
+    },
+    {
+     "fact": "索法拉省省长Lourenço Bulha谴责暴力，称这是部分巡查员的个人行为，并非公园方面的指示",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "trata-se de uma atitude de responsabilidade individual de um grupo de fiscais, e não de uma orientação do Parque Nacional da Gorongosa"
+    },
+    {
+     "fact": "该负责人被送往贝拉中央医院，数日后死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "o chefe da localidade foi encaminhado ao Hospital Central da Beira, onde acabou por perder a vida dias depois"
+    },
+    {
+     "fact": "死因尚不清楚，当局正在调查，检察院已着手处理此案",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Até ao momento, não são conhecidas as causas da morte, estando as circunstâncias do caso sob investigação das autoridades competentes"
+    }
+   ],
+   "uncertainties": [
+    "殴打行为仅为据称，尚未获确认",
+    "死因尚不清楚，有待调查",
+    "事件具体情况仍在当局调查中",
+    "目前仅单一来源（O País）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_e99b39b24ab17583",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

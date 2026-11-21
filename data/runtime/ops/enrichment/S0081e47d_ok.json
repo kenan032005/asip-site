@@ -1,0 +1,129 @@
+{
+ "label": "S0081e47d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "57734a5902161446852ecf7f187b067354b1569dbec1bddc45f0fb731d755f88",
+ "tokens": {
+  "input_tokens": 2736,
+  "output_tokens": 567,
+  "total_tokens": 3303
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "中非共和国：五名活动人士自10月中旬被拘留，律师对其健康状况发出警告",
+   "summary_zh": "中非共和国五名民间社会活动人士自10月15日被捕以来，一直被关押在班吉的鲁营军事监狱，目前仍在等待司法程序进展。他们的律师对部分被拘留者的健康状况恶化表示担忧。当局称他们涉嫌与政治人物和武装团体有联系，并策划推翻政权，但被告方否认这些指控。目前尚未正式宣布开庭日期。",
+   "event_type": "political_instability",
+   "country_iso3": "CAF",
+   "location": {
+    "country_iso3": "CAF",
+    "admin1": null,
+    "city": "班吉",
+    "site": "鲁营军事监狱",
+    "raw_text": "prison du camp de Roux, à Bangui"
+   },
+   "key_facts": [
+    {
+     "fact": "五名民间社会活动人士自10月15日被捕后仍被关押在班吉鲁营监狱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cinq acteurs de la société civile sont toujours détenus à la prison du camp de Roux, à Bangui, près d’un mois après leur arrestation. Interpellés le 15 octobre"
+    },
+    {
+     "fact": "律师称部分被拘留者健康状况恶化，其中一人患结核病被隔离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Barry Mardios, atteint de tuberculose, aurait été placé à l’isolement depuis le 9 novembre"
+    },
+    {
+     "fact": "五人被控扰乱公共秩序和煽动公民抗命",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les cinq hommes sont poursuivis notamment pour troubles à l’ordre public et incitation à la désobéissance civile"
+    },
+    {
+     "fact": "当局声称他们与政治人物和武装团体有联系并策划推翻政权，被告方否认",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les autorités évoquent des liens présumés avec des responsables politiques et des groupes armés, ainsi qu'un projet de renversement du pouvoir. Des accusations contestées par les mis en cause"
+    },
+    {
+     "fact": "尚未正式宣布开庭日期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "aucune date n’a encore été officiellement annoncée"
+    }
+   ],
+   "uncertainties": [
+    "当局关于与政治人物和武装团体有联系及推翻政权计划的说法属指控，被告方予以否认",
+    "被拘留者健康状况的严重程度仅来自律师说法，未获独立医疗确认",
+    "审判日期尚未公布",
+    "目前仅单一来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "中非共和国：五名活动人士自10月中旬被拘留，律师对其健康状况发出警告",
+   "summary_zh": "中非共和国五名民间社会活动人士自10月15日被捕以来，一直被关押在班吉的鲁营军事监狱，目前仍在等待司法程序进展。他们的律师对部分被拘留者的健康状况恶化表示担忧。当局称他们涉嫌与政治人物和武装团体有联系，并策划推翻政权，但被告方否认这些指控。目前尚未正式宣布开庭日期。",
+   "event_type": "political_instability",
+   "country_iso3": "CAF",
+   "location": {
+    "country_iso3": "CAF",
+    "admin1": null,
+    "city": "班吉",
+    "site": "鲁营军事监狱",
+    "raw_text": "prison du camp de Roux, à Bangui"
+   },
+   "key_facts": [
+    {
+     "fact": "五名民间社会活动人士自10月15日被捕后仍被关押在班吉鲁营监狱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "cinq acteurs de la société civile sont toujours détenus à la prison du camp de Roux, à Bangui, près d’un mois après leur arrestation. Interpellés le 15 octobre"
+    },
+    {
+     "fact": "律师称部分被拘留者健康状况恶化，其中一人患结核病被隔离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Barry Mardios, atteint de tuberculose, aurait été placé à l’isolement depuis le 9 novembre"
+    },
+    {
+     "fact": "五人被控扰乱公共秩序和煽动公民抗命",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les cinq hommes sont poursuivis notamment pour troubles à l’ordre public et incitation à la désobéissance civile"
+    },
+    {
+     "fact": "当局声称他们与政治人物和武装团体有联系并策划推翻政权，被告方否认",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les autorités évoquent des liens présumés avec des responsables politiques et des groupes armés, ainsi qu'un projet de renversement du pouvoir. Des accusations contestées par les mis en cause"
+    },
+    {
+     "fact": "尚未正式宣布开庭日期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "aucune date n’a encore été officiellement annoncée"
+    }
+   ],
+   "uncertainties": [
+    "当局关于与政治人物和武装团体有联系及推翻政权计划的说法属指控，被告方予以否认",
+    "被拘留者健康状况的严重程度仅来自律师说法，未获独立医疗确认",
+    "审判日期尚未公布",
+    "目前仅单一来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_f95abcc70081e47d",
+ "disease_event_id": null,
+ "country_code": "CF"
+}
