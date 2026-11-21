@@ -1,0 +1,125 @@
+{
+ "label": "S2600881f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1976b08fd9aca6d9b046f253ca503b9874bd3f64bc8418ec858334935eac1e7d",
+ "tokens": {
+  "input_tokens": 2511,
+  "output_tokens": 514,
+  "total_tokens": 3025
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "登革热疫情：约3000名卫生专业毕业生请求参与疫情防控",
+   "summary_zh": "乍得登革热疫情令卫生机构承压，约3000名公共卫生学校毕业生于11月10日致函公共卫生部长，请求被纳入疫情防控并呼吁增加医护人员编制。该集体提出可在48小时补充培训后快速签约部署，并希望借此实现长期进入公共卫生系统。报道指出，文件未详细说明实际可用毕业生人数、专业及地域分布。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "约3000名公共卫生学校毕业生致函乍得公共卫生部长，请求参与登革热疫情防控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "près de 3 000 diplômés des écoles publiques de santé attendant leur intégration pour exercer ont adressé au ministre de la Santé publique le 10 novembre 2026, une correspondance"
+    },
+    {
+     "fact": "该集体称约3000名毕业生可用但尚未纳入卫生机构",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ses représentants font état d'environ 3 000 diplômés disponibles, mais qui ne sont pas encore intégrés dans les structures sanitaires"
+    },
+    {
+     "fact": "登革热疫情正对乍得卫生机构造成压力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Alors que la dengue met sous pression les structures sanitaires au Tchad"
+    },
+    {
+     "fact": "该集体建议在48小时补充培训后通过紧急卫生机制快速签约部署",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il suggère une formation complémentaire de 48 heures sur les protocoles de prise en charge de la dengue"
+    },
+    {
+     "fact": "报道称文件未详述实际可用毕业生人数、专业及地域分布",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le nombre de diplômés effectivement disponibles, leurs spécialités et leur répartition géographique ne sont pas détaillés dans le document"
+    }
+   ],
+   "uncertainties": [
+    "实际可用毕业生人数、专业及地域分布未在文件中详细说明",
+    "目前仅单一来源（Le N'Djam Post）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "登革热疫情：约3000名卫生专业毕业生请求参与疫情防控",
+   "summary_zh": "乍得登革热疫情令卫生机构承压，约3000名公共卫生学校毕业生于11月10日致函公共卫生部长，请求被纳入疫情防控并呼吁增加医护人员编制。该集体提出可在48小时补充培训后快速签约部署，并希望借此实现长期进入公共卫生系统。报道指出，文件未详细说明实际可用毕业生人数、专业及地域分布。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "约3000名公共卫生学校毕业生致函乍得公共卫生部长，请求参与登革热疫情防控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "près de 3 000 diplômés des écoles publiques de santé attendant leur intégration pour exercer ont adressé au ministre de la Santé publique le 10 novembre 2026, une correspondance"
+    },
+    {
+     "fact": "该集体称约3000名毕业生可用但尚未纳入卫生机构",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ses représentants font état d'environ 3 000 diplômés disponibles, mais qui ne sont pas encore intégrés dans les structures sanitaires"
+    },
+    {
+     "fact": "登革热疫情正对乍得卫生机构造成压力",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Alors que la dengue met sous pression les structures sanitaires au Tchad"
+    },
+    {
+     "fact": "该集体建议在48小时补充培训后通过紧急卫生机制快速签约部署",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il suggère une formation complémentaire de 48 heures sur les protocoles de prise en charge de la dengue"
+    },
+    {
+     "fact": "报道称文件未详述实际可用毕业生人数、专业及地域分布",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le nombre de diplômés effectivement disponibles, leurs spécialités et leur répartition géographique ne sont pas détaillés dans le document"
+    }
+   ],
+   "uncertainties": [
+    "实际可用毕业生人数、专业及地域分布未在文件中详细说明",
+    "目前仅单一来源（Le N'Djam Post）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_59e774df2600881f",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
