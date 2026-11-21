@@ -1,0 +1,127 @@
+{
+ "label": "Sa77adf7a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "31775478ac5f2a5f50ae14ecab61fa02a190f4f582846a02d512f5a81d425b17",
+ "tokens": {
+  "input_tokens": 2825,
+  "output_tokens": 566,
+  "total_tokens": 3391
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "英国：拉塞尔·布兰德因强奸和性侵被判处十年半监禁",
+   "summary_zh": "英国演员兼喜剧演员拉塞尔·布兰德11月9日被伦敦南华克刑事法院判处十年半监禁，此前陪审团认定其强奸一名女性并对另外三名女性实施性侵，相关行为发生于2004年至2009年间。他将需在狱中服刑三分之二刑期后方可获有条件释放。伦敦警方表示，审判期间及之后有多人联系调查人员提供信息或报告可能的额外违法行为，目前正在审查，尚未宣布新的起诉。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "GBR",
+   "location": {
+    "country_iso3": "GBR",
+    "admin1": null,
+    "city": "伦敦",
+    "site": "南华克刑事法院",
+    "raw_text": "Southwark Crown Court de Londres"
+   },
+   "key_facts": [
+    {
+     "fact": "拉塞尔·布兰德被判处十年半监禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a été condamné lundi 9 novembre 2026 à dix ans et six mois de prison par la Southwark Crown Court de Londres"
+    },
+    {
+     "fact": "陪审团认定其强奸一名女性并对另外三名女性实施性侵",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le jury l’avait reconnu coupable jeudi du viol d’une femme et d’agressions sexuelles contre trois autres, pour des faits commis entre 2004 et 2009"
+    },
+    {
+     "fact": "他需在狱中服刑三分之二刑期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le condamné devrait purger les deux tiers de sa peine en détention avant une remise en liberté sous conditions"
+    },
+    {
+     "fact": "伦敦警方称多人提供可能额外违法的信息，正在审查且尚未宣布新起诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plusieurs personnes avaient contacté ses enquêteurs pendant et après le procès pour communiquer des informations ou signaler de possibles infractions supplémentaires. Ces signalements sont en cours d’examen et n’ont donné lieu à aucune nouvelle poursuite annoncée"
+    },
+    {
+     "fact": "警方另对两项强奸指控开展独立调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Metropolitan Police poursuit séparément des investigations sur deux autres accusations de viol"
+    }
+   ],
+   "uncertainties": [
+    "警方正在审查的额外违法信息尚未导致新的起诉",
+    "另两项强奸指控的调查结果尚未公布",
+    "目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "英国：拉塞尔·布兰德因强奸和性侵被判处十年半监禁",
+   "summary_zh": "英国演员兼喜剧演员拉塞尔·布兰德11月9日被伦敦南华克刑事法院判处十年半监禁，此前陪审团认定其强奸一名女性并对另外三名女性实施性侵，相关行为发生于2004年至2009年间。他将需在狱中服刑三分之二刑期后方可获有条件释放。伦敦警方表示，审判期间及之后有多人联系调查人员提供信息或报告可能的额外违法行为，目前正在审查，尚未宣布新的起诉。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "GBR",
+   "location": {
+    "country_iso3": "GBR",
+    "admin1": null,
+    "city": "伦敦",
+    "site": "南华克刑事法院",
+    "raw_text": "Southwark Crown Court de Londres"
+   },
+   "key_facts": [
+    {
+     "fact": "拉塞尔·布兰德被判处十年半监禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a été condamné lundi 9 novembre 2026 à dix ans et six mois de prison par la Southwark Crown Court de Londres"
+    },
+    {
+     "fact": "陪审团认定其强奸一名女性并对另外三名女性实施性侵",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le jury l’avait reconnu coupable jeudi du viol d’une femme et d’agressions sexuelles contre trois autres, pour des faits commis entre 2004 et 2009"
+    },
+    {
+     "fact": "他需在狱中服刑三分之二刑期",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le condamné devrait purger les deux tiers de sa peine en détention avant une remise en liberté sous conditions"
+    },
+    {
+     "fact": "伦敦警方称多人提供可能额外违法的信息，正在审查且尚未宣布新起诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plusieurs personnes avaient contacté ses enquêteurs pendant et après le procès pour communiquer des informations ou signaler de possibles infractions supplémentaires. Ces signalements sont en cours d’examen et n’ont donné lieu à aucune nouvelle poursuite annoncée"
+    },
+    {
+     "fact": "警方另对两项强奸指控开展独立调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Metropolitan Police poursuit séparément des investigations sur deux autres accusations de viol"
+    }
+   ],
+   "uncertainties": [
+    "警方正在审查的额外违法信息尚未导致新的起诉",
+    "另两项强奸指控的调查结果尚未公布",
+    "目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_ed62b2ffa77adf7a",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

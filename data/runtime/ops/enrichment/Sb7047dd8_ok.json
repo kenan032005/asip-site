@@ -1,0 +1,105 @@
+{
+ "label": "Sb7047dd8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0ff87ec769b6ed4b039d324084f8a489ec24500a695ec6b60916e560de369e8f",
+ "tokens": {
+  "input_tokens": 2062,
+  "output_tokens": 442,
+  "total_tokens": 2504
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚联邦政府拟对废金属交易商实施许可管理以遏制盗窃",
+   "summary_zh": "尼日利亚联邦政府着手收紧废金属行业监管，针对被盗金属非法交易及关键基础设施遭破坏问题，包括电缆、铁路部件和井盖被盗。政府表示正在制定监管框架，要求经营者取得相应许可证、核实废料来源并保存交易记录。钢铁发展部长奥杜在拉各斯举行的利益相关方意见征询会上披露上述内容。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "拉各斯",
+    "site": null,
+    "raw_text": "Lagos"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦政府着手收紧废金属行业监管，打击被盗金属非法交易和关键基础设施破坏行为",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Government has moved to tighten regulations in Nigeria’s scrap metal industry, targeting the illegal trade in stolen metals and the vandalism of critical infrastructure, including electricity cables, railway components and manhole covers."
+    },
+    {
+     "fact": "政府称正在制定监管框架，要求经营者取得许可证、核实废料来源并保存交易记录",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The government said it was developing a regulatory framework that would compel operators to obtain appropriate licences, verify the sources of scrap materials and maintain transaction records to prevent stolen metals from entering the recycling market."
+    },
+    {
+     "fact": "钢铁发展部长奥杜在拉各斯举行的利益相关方意见征询会上披露该消息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Minister of Steel Development, Shuaibu Audu, disclosed this in a statement issued by the ministry’s Head of Press and Public Relations, Maureen Tine-Iulun, on Tuesday."
+    }
+   ],
+   "uncertainties": [
+    "监管框架尚在制定和意见征询阶段，尚未正式出台",
+    "目前仅单一来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚联邦政府拟对废金属交易商实施许可管理以遏制盗窃",
+   "summary_zh": "尼日利亚联邦政府着手收紧废金属行业监管，针对被盗金属非法交易及关键基础设施遭破坏问题，包括电缆、铁路部件和井盖被盗。政府表示正在制定监管框架，要求经营者取得相应许可证、核实废料来源并保存交易记录。钢铁发展部长奥杜在拉各斯举行的利益相关方意见征询会上披露上述内容。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "拉各斯",
+    "site": null,
+    "raw_text": "Lagos"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚联邦政府着手收紧废金属行业监管，打击被盗金属非法交易和关键基础设施破坏行为",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Government has moved to tighten regulations in Nigeria’s scrap metal industry, targeting the illegal trade in stolen metals and the vandalism of critical infrastructure, including electricity cables, railway components and manhole covers."
+    },
+    {
+     "fact": "政府称正在制定监管框架，要求经营者取得许可证、核实废料来源并保存交易记录",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The government said it was developing a regulatory framework that would compel operators to obtain appropriate licences, verify the sources of scrap materials and maintain transaction records to prevent stolen metals from entering the recycling market."
+    },
+    {
+     "fact": "钢铁发展部长奥杜在拉各斯举行的利益相关方意见征询会上披露该消息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Minister of Steel Development, Shuaibu Audu, disclosed this in a statement issued by the ministry’s Head of Press and Public Relations, Maureen Tine-Iulun, on Tuesday."
+    }
+   ],
+   "uncertainties": [
+    "监管框架尚在制定和意见征询阶段，尚未正式出台",
+    "目前仅单一来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_3a936933b7047dd8",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

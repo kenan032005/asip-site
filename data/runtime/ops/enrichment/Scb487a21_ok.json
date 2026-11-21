@@ -1,0 +1,138 @@
+{
+ "label": "Scb487a21",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "cd9639b997540137330265e61761a0a7ce3c16f863a672d4b0e3aa9f69203d31",
+ "tokens": {
+  "input_tokens": 2711,
+  "output_tokens": 573,
+  "total_tokens": 3284
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"爆炸与枪击事件的具体关联及动机尚未查明\", \"枪击嫌疑人身份及下落尚未确认\", \"目前仅单一来源（Benin Web TV）报道，尚缺乏交叉验证\"]",
+    "after": "[\"爆炸与枪击事件的具体关联及动机尚未查明\", \"枪击嫌疑人身份及下落尚未确认\", \"目前仅单一来源（Benin Web TV）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "西班牙奥维耶多发生爆炸，一名警察死亡、另一名重伤",
+   "summary_zh": "西班牙北部奥维耶多一栋居民楼内发现可疑爆炸装置，警方在处置过程中装置发生爆炸，造成一名国家警察死亡、一名排爆警察重伤并截肢。当天早间该楼曾发生两个家庭间的枪击纠纷，一名年轻女子中弹受伤。当局正在调查爆炸与枪击的具体情况，并追捕枪击嫌疑人。",
+   "event_type": "other_security",
+   "country_iso3": "ESP",
+   "location": {
+    "country_iso3": "ESP",
+    "admin1": "阿斯图里亚斯",
+    "city": "奥维耶多",
+    "site": "Villafría区Rafael R. Urrustí街一栋居民楼",
+    "raw_text": "un immeuble d’Oviedo, dans le nord de l’Espagne, quartier de Villafría, rue Rafael R. Urrustí"
+   },
+   "key_facts": [
+    {
+     "fact": "西班牙奥维耶多一栋居民楼内可疑装置爆炸，一名国家警察死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un policier espagnol a été tué et un autre grièvement blessé mardi 10 novembre dans l’explosion d’un engin découvert dans un immeuble d’Oviedo"
+    },
+    {
+     "fact": "一名排爆警察重伤并接受腿部截肢",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un agent spécialisé dans le déminage a été très gravement blessé et a subi l’amputation d’une jambe"
+    },
+    {
+     "fact": "爆炸前当地曾发生枪击，一名年轻女子中弹受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Vers 7 heures, une jeune femme avait été blessée par balle lors d’un différend entre deux familles"
+    },
+    {
+     "fact": "警方在楼内大厅发现装有爆炸装置的袋子，装置在处置过程中爆炸",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les policiers ont découvert dans le hall de l’immeuble un sac contenant un dispositif explosif. L’engin a détoné au cours de l’intervention"
+    },
+    {
+     "fact": "警方仍在追捕枪击嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les recherches se poursuivaient mardi pour retrouver l’auteur présumé des coups de feu"
+    }
+   ],
+   "uncertainties": [
+    "爆炸与枪击事件的具体关联及动机尚未查明",
+    "枪击嫌疑人身份及下落尚未确认",
+    "目前仅单一来源（Benin Web TV）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "西班牙奥维耶多发生爆炸，一名警察死亡、另一名重伤",
+   "summary_zh": "西班牙北部奥维耶多一栋居民楼内发现可疑爆炸装置，警方在处置过程中装置发生爆炸，造成一名国家警察死亡、一名排爆警察重伤并截肢。当天早间该楼曾发生两个家庭间的枪击纠纷，一名年轻女子中弹受伤。当局正在调查爆炸与枪击的具体情况，并追捕枪击嫌疑人。",
+   "event_type": "other_security",
+   "country_iso3": "ESP",
+   "location": {
+    "country_iso3": "ESP",
+    "admin1": "阿斯图里亚斯",
+    "city": "奥维耶多",
+    "site": "Villafría区Rafael R. Urrustí街一栋居民楼",
+    "raw_text": "un immeuble d’Oviedo, dans le nord de l’Espagne, quartier de Villafría, rue Rafael R. Urrustí"
+   },
+   "key_facts": [
+    {
+     "fact": "西班牙奥维耶多一栋居民楼内可疑装置爆炸，一名国家警察死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un policier espagnol a été tué et un autre grièvement blessé mardi 10 novembre dans l’explosion d’un engin découvert dans un immeuble d’Oviedo"
+    },
+    {
+     "fact": "一名排爆警察重伤并接受腿部截肢",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un agent spécialisé dans le déminage a été très gravement blessé et a subi l’amputation d’une jambe"
+    },
+    {
+     "fact": "爆炸前当地曾发生枪击，一名年轻女子中弹受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Vers 7 heures, une jeune femme avait été blessée par balle lors d’un différend entre deux familles"
+    },
+    {
+     "fact": "警方在楼内大厅发现装有爆炸装置的袋子，装置在处置过程中爆炸",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les policiers ont découvert dans le hall de l’immeuble un sac contenant un dispositif explosif. L’engin a détoné au cours de l’intervention"
+    },
+    {
+     "fact": "警方仍在追捕枪击嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les recherches se poursuivaient mardi pour retrouver l’auteur présumé des coups de feu"
+    }
+   ],
+   "uncertainties": [
+    "爆炸与枪击事件的具体关联及动机尚未查明",
+    "枪击嫌疑人身份及下落尚未确认",
+    "目前仅单一来源（Benin Web TV）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_56c36ddbcb487a21",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
