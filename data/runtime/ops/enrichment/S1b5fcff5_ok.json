@@ -1,0 +1,125 @@
+{
+ "label": "S1b5fcff5",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c15c237f2eda599e6cd741853e2b3844b9b4746cecc69219800c2e9a1e5dd315",
+ "tokens": {
+  "input_tokens": 2580,
+  "output_tokens": 553,
+  "total_tokens": 3133
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）布尼亚机场关闭延长至2027年2月8日",
+   "summary_zh": "受刚果（金）东部埃博拉疫情影响，布尼亚国际机场将至少关闭至2027年2月8日，这一消息来自航空管理局的一份通知。自2026年5月23日以来，伊图里省首府布尼亚未再安排任何商业航班，仅允许人道主义、医疗和紧急航班起降。多个民间社会组织批评这一决定，指出雨季道路状况恶化以及武装团体存在使该省更加孤立。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "伊图里省",
+    "city": "布尼亚",
+    "site": "布尼亚国际机场",
+    "raw_text": "l’aéroport international de Bunia, capitale provinciale de l’Ituri"
+   },
+   "key_facts": [
+    {
+     "fact": "布尼亚国际机场将至少关闭至2027年2月8日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il va rester fermé au moins jusqu’au 8 février 2027, selon une note de la Régie des voies aériennes."
+    },
+    {
+     "fact": "此次关闭是刚果（金）东部埃博拉疫情的后果之一",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "C’est l’une des conséquences de l’épidémie d’Ebola qui frappe l’est de la République démocratique du Congo"
+    },
+    {
+     "fact": "自2026年5月23日起，布尼亚未再安排商业航班",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis le 23 mai dernier, plus aucun vol commercial n’a été programmé de ou vers la capitale provinciale de l’Ituri."
+    },
+    {
+     "fact": "仅人道主义、医疗和紧急航班仍被允许",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "seuls les vols humanitaires, sanitaires ou d’urgence restent autorisés"
+    },
+    {
+     "fact": "民间社会组织批评该决定，指出该省面临孤立",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plusieurs organisations de la société civile ont dénoncé cette nouvelle décision, mettant en avant l’isolement de la province."
+    }
+   ],
+   "uncertainties": [
+    "关闭决定据称是在外交压力下作出的，此说法来自安全、外交和人道主义方面的消息来源，尚未获得独立证实",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）布尼亚机场关闭延长至2027年2月8日",
+   "summary_zh": "受刚果（金）东部埃博拉疫情影响，布尼亚国际机场将至少关闭至2027年2月8日，这一消息来自航空管理局的一份通知。自2026年5月23日以来，伊图里省首府布尼亚未再安排任何商业航班，仅允许人道主义、医疗和紧急航班起降。多个民间社会组织批评这一决定，指出雨季道路状况恶化以及武装团体存在使该省更加孤立。",
+   "event_type": "other_security",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "伊图里省",
+    "city": "布尼亚",
+    "site": "布尼亚国际机场",
+    "raw_text": "l’aéroport international de Bunia, capitale provinciale de l’Ituri"
+   },
+   "key_facts": [
+    {
+     "fact": "布尼亚国际机场将至少关闭至2027年2月8日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Il va rester fermé au moins jusqu’au 8 février 2027, selon une note de la Régie des voies aériennes."
+    },
+    {
+     "fact": "此次关闭是刚果（金）东部埃博拉疫情的后果之一",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "C’est l’une des conséquences de l’épidémie d’Ebola qui frappe l’est de la République démocratique du Congo"
+    },
+    {
+     "fact": "自2026年5月23日起，布尼亚未再安排商业航班",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis le 23 mai dernier, plus aucun vol commercial n’a été programmé de ou vers la capitale provinciale de l’Ituri."
+    },
+    {
+     "fact": "仅人道主义、医疗和紧急航班仍被允许",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "seuls les vols humanitaires, sanitaires ou d’urgence restent autorisés"
+    },
+    {
+     "fact": "民间社会组织批评该决定，指出该省面临孤立",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plusieurs organisations de la société civile ont dénoncé cette nouvelle décision, mettant en avant l’isolement de la province."
+    }
+   ],
+   "uncertainties": [
+    "关闭决定据称是在外交压力下作出的，此说法来自安全、外交和人道主义方面的消息来源，尚未获得独立证实",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_0ab95ce91b5fcff5",
+ "disease_event_id": null,
+ "country_code": "CD"
+}

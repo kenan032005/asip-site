@@ -1,0 +1,142 @@
+{
+ "label": "S9c5718a5",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0abb9b7b3d27cf6f8d064faec5839dae00c0177e459f4754c2bd312c2e5886f0",
+ "tokens": {
+  "input_tokens": 2690,
+  "output_tokens": 570,
+  "total_tokens": 3260
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"袭击动机尚未公布\", \"是否与其他事件存在关联仍在调查中\", \"尚无逮捕消息\", \"涉事养老院完整名单未获警方披露\", \"该报道为单一来源，尚缺乏交叉验证\"]",
+    "after": "[\"袭击动机尚未公布\", \"是否与其他事件存在关联仍在调查中\", \"尚无逮捕消息\", \"涉事养老院完整名单未获警方披露\", \"该报道为单一来源，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "澳大利亚墨尔本养老院遭枪击后七家养老院受警方监控",
+   "summary_zh": "据贝宁媒体报道，澳大利亚墨尔本至少七家养老院在11月10日被置于警方加强监控之下。此前11月6日凌晨，两名男子在Maidstone区Hampstead Road向一家Arcare养老机构连开约十枪后驾车逃离，一颗子弹击中建筑，未造成人员受伤。维多利亚州警方证实加强巡逻，但未披露全部涉事机构；袭击动机尚未公布，也未有逮捕消息。该报道为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "AUS",
+   "location": {
+    "country_iso3": "AUS",
+    "admin1": "Victoria",
+    "city": "Melbourne",
+    "site": "Maidstone区Hampstead Road的Arcare养老机构",
+    "raw_text": "Hampstead Road, dans le quartier de Maidstone, Melbourne, Victoria"
+   },
+   "key_facts": [
+    {
+     "fact": "两名男子向墨尔本一家Arcare养老机构连开约十枪后逃离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "deux hommes vêtus de noir sont descendus d'un véhicule utilitaire sport blanc sur Hampstead Road, dans le quartier de Maidstone. Ils ont tiré une dizaine de coups de feu vers un établissement Arcare avant de prendre la fuite"
+    },
+    {
+     "fact": "一颗子弹击中建筑，未报告人员受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une balle a touché le bâtiment, sans faire de blessé."
+    },
+    {
+     "fact": "墨尔本至少七家养老院被置于警方加强监控之下",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au moins sept maisons de retraite de Melbourne sont placées sous surveillance policière renforcée, mardi 10 novembre 2026"
+    },
+    {
+     "fact": "维多利亚州警方证实加强巡逻，但未披露全部涉事机构",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La police a confirmé une intensification de ses patrouilles, sans détailler l'ensemble des établissements concernés."
+    },
+    {
+     "fact": "袭击动机尚未公布，当局未通报任何逮捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le mobile de l'attaque n'a pas été annoncé et aucune interpellation n'a été signalée par les autorités"
+    }
+   ],
+   "uncertainties": [
+    "袭击动机尚未公布",
+    "是否与其他事件存在关联仍在调查中",
+    "尚无逮捕消息",
+    "涉事养老院完整名单未获警方披露",
+    "该报道为单一来源，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "澳大利亚墨尔本养老院遭枪击后七家养老院受警方监控",
+   "summary_zh": "据贝宁媒体报道，澳大利亚墨尔本至少七家养老院在11月10日被置于警方加强监控之下。此前11月6日凌晨，两名男子在Maidstone区Hampstead Road向一家Arcare养老机构连开约十枪后驾车逃离，一颗子弹击中建筑，未造成人员受伤。维多利亚州警方证实加强巡逻，但未披露全部涉事机构；袭击动机尚未公布，也未有逮捕消息。该报道为单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "AUS",
+   "location": {
+    "country_iso3": "AUS",
+    "admin1": "Victoria",
+    "city": "Melbourne",
+    "site": "Maidstone区Hampstead Road的Arcare养老机构",
+    "raw_text": "Hampstead Road, dans le quartier de Maidstone, Melbourne, Victoria"
+   },
+   "key_facts": [
+    {
+     "fact": "两名男子向墨尔本一家Arcare养老机构连开约十枪后逃离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "deux hommes vêtus de noir sont descendus d'un véhicule utilitaire sport blanc sur Hampstead Road, dans le quartier de Maidstone. Ils ont tiré une dizaine de coups de feu vers un établissement Arcare avant de prendre la fuite"
+    },
+    {
+     "fact": "一颗子弹击中建筑，未报告人员受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une balle a touché le bâtiment, sans faire de blessé."
+    },
+    {
+     "fact": "墨尔本至少七家养老院被置于警方加强监控之下",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au moins sept maisons de retraite de Melbourne sont placées sous surveillance policière renforcée, mardi 10 novembre 2026"
+    },
+    {
+     "fact": "维多利亚州警方证实加强巡逻，但未披露全部涉事机构",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La police a confirmé une intensification de ses patrouilles, sans détailler l'ensemble des établissements concernés."
+    },
+    {
+     "fact": "袭击动机尚未公布，当局未通报任何逮捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le mobile de l'attaque n'a pas été annoncé et aucune interpellation n'a été signalée par les autorités"
+    }
+   ],
+   "uncertainties": [
+    "袭击动机尚未公布",
+    "是否与其他事件存在关联仍在调查中",
+    "尚无逮捕消息",
+    "涉事养老院完整名单未获警方披露",
+    "该报道为单一来源，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_cdc0a7e19c5718a5",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
