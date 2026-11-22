@@ -1,0 +1,148 @@
+{
+ "label": "S87ff39e3",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a0a541527912c88c12e37528c1de30997806d613d05682e4bf8ac564f1dda0d0",
+ "tokens": {
+  "input_tokens": 3056,
+  "output_tokens": 763,
+  "total_tokens": 3819
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅RFI单一来源报道，尚未获得其他独立来源交叉验证\", \"8名次区域国家公民被判处两年监禁一事系几内亚媒体转述，未获官方确认\", \"被捕者中未成年人具体人数（约160人）为报道估算，尚待核实\"]",
+    "after": "[\"目前仅RFI单一来源报道，尚未获得其他独立来源交叉验证\", \"8名次区域国家公民被判处两年监禁一事系几内亚媒体转述，未获官方确认\", \"被捕者中未成年人具体人数（约160人）为报道估算，尚待核实\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "几内亚：逾1200名非法采金者在下几内亚各法院受审",
+   "summary_zh": "据RFI报道，几内亚近日在上几内亚逮捕1412名非法采金者，其中1263人被分送至科纳克里及下几内亚多地法院审理。政府称被捕者属“拒不服从”人员，被告中除几内亚人外，还包括布基纳法索、马里、多哥、尼日尔、科特迪瓦和加纳等国公民。部分被告在科纳克里打击经济金融犯罪法院（CRIEF）受审，另有约160名未成年人将由科纳克里儿童法庭审理。报道称，科纳克里一家法院10日判处8名次区域国家公民两年监禁并五年内禁止入境。",
+   "event_type": "other_security",
+   "country_iso3": "GIN",
+   "location": {
+    "country_iso3": "GIN",
+    "admin1": "下几内亚",
+    "city": "科纳克里",
+    "site": "打击经济金融犯罪法院（CRIEF）",
+    "raw_text": "tribunaux de Basse-Guinée / Conakry / Coyah, Dubréka et Forécariah"
+   },
+   "key_facts": [
+    {
+     "fact": "上几内亚近日逮捕1412名非法采金者，其中1263人被分送至科纳克里及下几内亚各法院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sur les 1412 orpailleurs interpellés en Haute-Guinée ces derniers jours, 1 263 exactement sont répartis entre différents tribunaux de Conakry et de la Basse-Guinée."
+    },
+    {
+     "fact": "政府称被捕者因属“拒不服从”人员而被逮捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon le gouvernement, ils ont été arrêtés car ils sont « récalcitrants »."
+    },
+    {
+     "fact": "被告被控非法采矿、破坏环境、毁坏财物及污染水源",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils sont accusés d'« exploitation illégale des mines, dégradation de l'environnement, destructions diverses et pollution des eaux »."
+    },
+    {
+     "fact": "约160名被捕未成年人将由科纳克里儿童法庭审理",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le tribunal pour enfants de Conakry devra juger environ 160 mineurs interpellés."
+    },
+    {
+     "fact": "科纳克里一家法院10日判处8名次区域国家公民两年监禁并五年内禁止入境",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "huit ressortissants de la sous-région ont été condamnés pour les mêmes faits mardi à deux ans de prison et à cinq ans d'interdiction de territoire"
+    },
+    {
+     "fact": "政府9日宣布上几内亚近日又逮捕149名采金者，将由康康法院审理",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement a annoncé lundi 9 novembre que 149 orpailleurs supplémentaires ont été interpellés ces derniers jours en Haute-Guinée. Ils seront, eux, jugés par le tribunal de Kankan."
+    }
+   ],
+   "uncertainties": [
+    "目前仅RFI单一来源报道，尚未获得其他独立来源交叉验证",
+    "8名次区域国家公民被判处两年监禁一事系几内亚媒体转述，未获官方确认",
+    "被捕者中未成年人具体人数（约160人）为报道估算，尚待核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "几内亚：逾1200名非法采金者在下几内亚各法院受审",
+   "summary_zh": "据RFI报道，几内亚近日在上几内亚逮捕1412名非法采金者，其中1263人被分送至科纳克里及下几内亚多地法院审理。政府称被捕者属“拒不服从”人员，被告中除几内亚人外，还包括布基纳法索、马里、多哥、尼日尔、科特迪瓦和加纳等国公民。部分被告在科纳克里打击经济金融犯罪法院（CRIEF）受审，另有约160名未成年人将由科纳克里儿童法庭审理。报道称，科纳克里一家法院10日判处8名次区域国家公民两年监禁并五年内禁止入境。",
+   "event_type": "other_security",
+   "country_iso3": "GIN",
+   "location": {
+    "country_iso3": "GIN",
+    "admin1": "下几内亚",
+    "city": "科纳克里",
+    "site": "打击经济金融犯罪法院（CRIEF）",
+    "raw_text": "tribunaux de Basse-Guinée / Conakry / Coyah, Dubréka et Forécariah"
+   },
+   "key_facts": [
+    {
+     "fact": "上几内亚近日逮捕1412名非法采金者，其中1263人被分送至科纳克里及下几内亚各法院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sur les 1412 orpailleurs interpellés en Haute-Guinée ces derniers jours, 1 263 exactement sont répartis entre différents tribunaux de Conakry et de la Basse-Guinée."
+    },
+    {
+     "fact": "政府称被捕者因属“拒不服从”人员而被逮捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon le gouvernement, ils ont été arrêtés car ils sont « récalcitrants »."
+    },
+    {
+     "fact": "被告被控非法采矿、破坏环境、毁坏财物及污染水源",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils sont accusés d'« exploitation illégale des mines, dégradation de l'environnement, destructions diverses et pollution des eaux »."
+    },
+    {
+     "fact": "约160名被捕未成年人将由科纳克里儿童法庭审理",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le tribunal pour enfants de Conakry devra juger environ 160 mineurs interpellés."
+    },
+    {
+     "fact": "科纳克里一家法院10日判处8名次区域国家公民两年监禁并五年内禁止入境",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "huit ressortissants de la sous-région ont été condamnés pour les mêmes faits mardi à deux ans de prison et à cinq ans d'interdiction de territoire"
+    },
+    {
+     "fact": "政府9日宣布上几内亚近日又逮捕149名采金者，将由康康法院审理",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le gouvernement a annoncé lundi 9 novembre que 149 orpailleurs supplémentaires ont été interpellés ces derniers jours en Haute-Guinée. Ils seront, eux, jugés par le tribunal de Kankan."
+    }
+   ],
+   "uncertainties": [
+    "目前仅RFI单一来源报道，尚未获得其他独立来源交叉验证",
+    "8名次区域国家公民被判处两年监禁一事系几内亚媒体转述，未获官方确认",
+    "被捕者中未成年人具体人数（约160人）为报道估算，尚待核实",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_bdc58f9887ff39e3",
+ "disease_event_id": null,
+ "country_code": "GN"
+}

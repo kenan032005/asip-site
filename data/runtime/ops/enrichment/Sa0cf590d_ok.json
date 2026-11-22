@@ -1,0 +1,127 @@
+{
+ "label": "Sa0cf590d",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6254625b3b926b679f3a9dd26bae0e58e7e560235990ca03aff204b757d7e22c",
+ "tokens": {
+  "input_tokens": 2735,
+  "output_tokens": 630,
+  "total_tokens": 3365
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "黑海：货船遭袭后欧盟承诺提供5000万欧元",
+   "summary_zh": "欧盟委员会11月10日承诺提供5000万欧元，用于加快在保加利亚与罗马尼亚之间建立黑海海上安全中心。该中心将加强瓦尔纳与康斯坦察港口的合作，集中航行信息并监控威胁。据路透社报道，10月至少有九艘货船在罗马尼亚和保加利亚沿海附近遭海上无人机袭击，造成多名船员死亡、其他人失踪。罗马尼亚指责俄罗斯对民用航运实施系统性打击，但表示需专业鉴定才能确定每次袭击的责任方；保加利亚未指认责任方，莫斯科否认相关指控。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Mer Noire (Bulgarie, Roumanie)"
+   },
+   "key_facts": [
+    {
+     "fact": "欧盟委员会承诺提供5000万欧元加快建立黑海海上安全中心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Commission européenne a promis, mardi 10 novembre 2026, 50 millions d’euros pour accélérer la mise en place d’un centre de sécurité maritime en mer Noire, entre la Bulgarie et la Roumanie."
+    },
+    {
+     "fact": "据路透社报道，10月至少有九艘货船在罗马尼亚和保加利亚沿海附近遭海上无人机袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au moins neuf cargos ont été frappés par des drones navals en octobre à proximité des côtes roumaines et bulgares, selon Reuters."
+    },
+    {
+     "fact": "袭击造成多名船员死亡、其他人失踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plusieurs marins ont été tués et d’autres portés disparus."
+    },
+    {
+     "fact": "罗马尼亚指责俄罗斯对民用航运实施系统性打击，但称需专业鉴定才能确定每次袭击的责任方",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Roumanie accuse la Russie de mener des frappes systématiques contre la navigation civile, tout en indiquant qu’une expertise est nécessaire pour attribuer précisément chaque attaque."
+    },
+    {
+     "fact": "保加利亚未指认袭击责任方，莫斯科否认相关指控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Bulgarie n’a pas désigné de responsable pour ces incidents. Moscou rejette les accusations portées contre elle."
+    }
+   ],
+   "uncertainties": [
+    "袭击责任方尚未确认：罗马尼亚指责俄罗斯，但表示需专业鉴定；保加利亚未指认责任方；莫斯科否认指控",
+    "袭击次数与伤亡数据来自路透社单一来源，尚未获交叉验证",
+    "该事件目前仅有一个来源（Benin Web TV）报道"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "黑海：货船遭袭后欧盟承诺提供5000万欧元",
+   "summary_zh": "欧盟委员会11月10日承诺提供5000万欧元，用于加快在保加利亚与罗马尼亚之间建立黑海海上安全中心。该中心将加强瓦尔纳与康斯坦察港口的合作，集中航行信息并监控威胁。据路透社报道，10月至少有九艘货船在罗马尼亚和保加利亚沿海附近遭海上无人机袭击，造成多名船员死亡、其他人失踪。罗马尼亚指责俄罗斯对民用航运实施系统性打击，但表示需专业鉴定才能确定每次袭击的责任方；保加利亚未指认责任方，莫斯科否认相关指控。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Mer Noire (Bulgarie, Roumanie)"
+   },
+   "key_facts": [
+    {
+     "fact": "欧盟委员会承诺提供5000万欧元加快建立黑海海上安全中心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Commission européenne a promis, mardi 10 novembre 2026, 50 millions d’euros pour accélérer la mise en place d’un centre de sécurité maritime en mer Noire, entre la Bulgarie et la Roumanie."
+    },
+    {
+     "fact": "据路透社报道，10月至少有九艘货船在罗马尼亚和保加利亚沿海附近遭海上无人机袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au moins neuf cargos ont été frappés par des drones navals en octobre à proximité des côtes roumaines et bulgares, selon Reuters."
+    },
+    {
+     "fact": "袭击造成多名船员死亡、其他人失踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plusieurs marins ont été tués et d’autres portés disparus."
+    },
+    {
+     "fact": "罗马尼亚指责俄罗斯对民用航运实施系统性打击，但称需专业鉴定才能确定每次袭击的责任方",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Roumanie accuse la Russie de mener des frappes systématiques contre la navigation civile, tout en indiquant qu’une expertise est nécessaire pour attribuer précisément chaque attaque."
+    },
+    {
+     "fact": "保加利亚未指认袭击责任方，莫斯科否认相关指控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La Bulgarie n’a pas désigné de responsable pour ces incidents. Moscou rejette les accusations portées contre elle."
+    }
+   ],
+   "uncertainties": [
+    "袭击责任方尚未确认：罗马尼亚指责俄罗斯，但表示需专业鉴定；保加利亚未指认责任方；莫斯科否认指控",
+    "袭击次数与伤亡数据来自路透社单一来源，尚未获交叉验证",
+    "该事件目前仅有一个来源（Benin Web TV）报道"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_a5b759dfa0cf590d",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

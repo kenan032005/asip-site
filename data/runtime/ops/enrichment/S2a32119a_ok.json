@@ -1,0 +1,115 @@
+{
+ "label": "S2a32119a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "7a0154f192dba325e9e32346dd9c316148f04d3d48f0d97f6ab3ea3fc2c6ff73",
+ "tokens": {
+  "input_tokens": 1979,
+  "output_tokens": 384,
+  "total_tokens": 2363
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "拉各斯BRT与小型巴士相撞致五人受伤",
+   "summary_zh": "尼日利亚拉各斯州Asolo BRT走廊发生一起小型快速公交与商业小型巴士迎面相撞事故，造成至少五人不同程度受伤。拉各斯州交通管理局称，伤者已被疏散并送往最近医院救治。该消息目前仅来自单一来源。",
+   "event_type": "transport_disruption",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "拉各斯州",
+    "city": "拉各斯",
+    "site": "Asolo BRT走廊",
+    "raw_text": "Asolo BRT corridor in Lagos State"
+   },
+   "key_facts": [
+    {
+     "fact": "拉各斯州Asolo BRT走廊发生小型快速公交与商业小型巴士迎面相撞事故",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a head-on collision between a mini Rapid Transit bus and a commercial minibus, popularly known as Korope, along the Asolo BRT corridor in Lagos State"
+    },
+    {
+     "fact": "事故造成至少五人不同程度受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "No fewer than five people have sustained varying degrees of injuries"
+    },
+    {
+     "fact": "伤者已被疏散并送往最近医院救治",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the victims were evacuated and taken to the hospital for medical attention"
+    },
+    {
+     "fact": "消息由拉各斯州交通管理局在其X页面发布",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Lagos State Traffic Management Authority disclosed this in a post on its X page on Tuesday"
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（Punch）报道，尚缺乏交叉验证",
+    "伤者具体人数与伤情程度尚未获独立确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "拉各斯BRT与小型巴士相撞致五人受伤",
+   "summary_zh": "尼日利亚拉各斯州Asolo BRT走廊发生一起小型快速公交与商业小型巴士迎面相撞事故，造成至少五人不同程度受伤。拉各斯州交通管理局称，伤者已被疏散并送往最近医院救治。该消息目前仅来自单一来源。",
+   "event_type": "transport_disruption",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "拉各斯州",
+    "city": "拉各斯",
+    "site": "Asolo BRT走廊",
+    "raw_text": "Asolo BRT corridor in Lagos State"
+   },
+   "key_facts": [
+    {
+     "fact": "拉各斯州Asolo BRT走廊发生小型快速公交与商业小型巴士迎面相撞事故",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a head-on collision between a mini Rapid Transit bus and a commercial minibus, popularly known as Korope, along the Asolo BRT corridor in Lagos State"
+    },
+    {
+     "fact": "事故造成至少五人不同程度受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "No fewer than five people have sustained varying degrees of injuries"
+    },
+    {
+     "fact": "伤者已被疏散并送往最近医院救治",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the victims were evacuated and taken to the hospital for medical attention"
+    },
+    {
+     "fact": "消息由拉各斯州交通管理局在其X页面发布",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Lagos State Traffic Management Authority disclosed this in a post on its X page on Tuesday"
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（Punch）报道，尚缺乏交叉验证",
+    "伤者具体人数与伤情程度尚未获独立确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_d5e413192a32119a",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
