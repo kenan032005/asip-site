@@ -1,0 +1,148 @@
+{
+ "label": "S80140528",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "1dfd574e30cd232a4cba62916d82209956c19f4d4f44513eb6b89889334721a8",
+ "tokens": {
+  "input_tokens": 2426,
+  "output_tokens": 529,
+  "total_tokens": 2955
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"伦拜克和大通季地区死亡人数为据报数字，尚未获独立确认\", \"跨党派对话结果仍待公布，部分反对派未参与\", \"选举能否按计划于12月22日举行存在不确定性\"]",
+    "after": "[\"伦拜克和大通季地区死亡人数为据报数字，尚未获独立确认\", \"跨党派对话结果仍待公布，部分反对派未参与\", \"选举能否按计划于12月22日举行存在不确定性\", \"据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "联合国警告：南苏丹在选举前处于“关键节点”",
+   "summary_zh": "联合国秘书长特别代表兼联合国南苏丹特派团负责人向安理会表示，南苏丹在12月22日计划选举前处于关键节点，政治共识减弱、不安全局势上升、人道主义危机加深，威胁脆弱过渡进程。她指出，社区暴力占今年报告的平民伤亡六成以上，并提及伦拜克和大通季地区上月据报造成140多人死亡。特派团面临行动限制，人道准入受限同比上升38%。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "South Sudan"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国警告南苏丹在12月22日计划选举前处于关键节点",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South Sudan is at a critical juncture ahead of planned elections on December 22"
+    },
+    {
+     "fact": "联合国南苏丹特派团负责人称政治共识减弱，威胁2018年和平协议进展的可持续性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "political consensus had weakened, raising concerns about the sustainability of progress made under the 2018 peace agreement"
+    },
+    {
+     "fact": "社区暴力占今年报告的平民伤亡六成以上",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Communal violence accounted for more than 60% of reported civilian casualties this year"
+    },
+    {
+     "fact": "伦拜克和大通季地区上月暴力据报造成140多人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Violence in Rumbek and Greater Tonj counties last month, which reportedly killed more than 140 people"
+    },
+    {
+     "fact": "过去一年人道主义准入限制上升38%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Humanitarian access constraints had increased by 38% over the past year"
+    },
+    {
+     "fact": "8月琼莱地区行动中三名维和人员死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Three peacekeepers were killed during an operation in a conflict-affected area of Jonglei in August"
+    }
+   ],
+   "uncertainties": [
+    "伦拜克和大通季地区死亡人数为据报数字，尚未获独立确认",
+    "跨党派对话结果仍待公布，部分反对派未参与",
+    "选举能否按计划于12月22日举行存在不确定性"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "联合国警告：南苏丹在选举前处于“关键节点”",
+   "summary_zh": "联合国秘书长特别代表兼联合国南苏丹特派团负责人向安理会表示，南苏丹在12月22日计划选举前处于关键节点，政治共识减弱、不安全局势上升、人道主义危机加深，威胁脆弱过渡进程。她指出，社区暴力占今年报告的平民伤亡六成以上，并提及伦拜克和大通季地区上月据报造成140多人死亡。特派团面临行动限制，人道准入受限同比上升38%。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "South Sudan"
+   },
+   "key_facts": [
+    {
+     "fact": "联合国警告南苏丹在12月22日计划选举前处于关键节点",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "South Sudan is at a critical juncture ahead of planned elections on December 22"
+    },
+    {
+     "fact": "联合国南苏丹特派团负责人称政治共识减弱，威胁2018年和平协议进展的可持续性",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "political consensus had weakened, raising concerns about the sustainability of progress made under the 2018 peace agreement"
+    },
+    {
+     "fact": "社区暴力占今年报告的平民伤亡六成以上",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Communal violence accounted for more than 60% of reported civilian casualties this year"
+    },
+    {
+     "fact": "伦拜克和大通季地区上月暴力据报造成140多人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Violence in Rumbek and Greater Tonj counties last month, which reportedly killed more than 140 people"
+    },
+    {
+     "fact": "过去一年人道主义准入限制上升38%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Humanitarian access constraints had increased by 38% over the past year"
+    },
+    {
+     "fact": "8月琼莱地区行动中三名维和人员死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Three peacekeepers were killed during an operation in a conflict-affected area of Jonglei in August"
+    }
+   ],
+   "uncertainties": [
+    "伦拜克和大通季地区死亡人数为据报数字，尚未获独立确认",
+    "跨党派对话结果仍待公布，部分反对派未参与",
+    "选举能否按计划于12月22日举行存在不确定性",
+    "据Radio Tamazuj报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_ec2d655380140528",
+ "disease_event_id": null,
+ "country_code": "SS"
+}
