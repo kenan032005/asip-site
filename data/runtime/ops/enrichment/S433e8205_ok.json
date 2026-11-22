@@ -1,0 +1,126 @@
+{
+ "label": "S433e8205",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a1bc7e9e4f2eb8963db7c58b4a5ded5da39b552533ccff79d0157a1068beb778",
+ "tokens": {
+  "input_tokens": 2441,
+  "output_tokens": 548,
+  "total_tokens": 2989
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"上述数据为NAPTIP单方面公布，尚未获得独立核实\", \"论坛上引用的案件与定罪统计口径（累计与期间）存在交叉，具体分类有待核实\"]",
+    "after": "[\"上述数据为NAPTIP单方面公布，尚未获得独立核实\", \"论坛上引用的案件与定罪统计口径（累计与期间）存在交叉，具体分类有待核实\", \"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚反人口贩运机构称已解救28762名受害者并获857项定罪",
+   "summary_zh": "尼日利亚国家禁止人口贩运局（NAPTIP）表示，自成立以来已解救并支持28762名人口贩运受害者，获得857项定罪。该机构总干事Binta Adamu-Bello在阿布贾举行的第29届全国利益相关方磋商论坛上披露，2025年8月至2026年11月期间记录1508起人口贩运及相关案件，逮捕1434人。她表示该机构还启动65起涉及85名被告的法庭案件，并在此期间获得74项涉及97名罪犯的定罪。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "NAPTIP称自成立以来已解救并支持28762名人口贩运受害者，获得857项定罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The National Agency for the Prohibition of Trafficking in Persons (NAPTIP) says it has rescued and supported 28,762 victims of human trafficking and secured 857 convictions since its establishment."
+    },
+    {
+     "fact": "2025年8月至2026年11月期间记录1508起人口贩运及相关案件，导致1434人被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the agency recorded 1,508 cases of human trafficking and related offences between August 2025 and November 2026, leading to 1,434 arrests."
+    },
+    {
+     "fact": "该机构在此期间启动65起涉及85名被告的案件，并获得74项涉及97名罪犯的定罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the agency initiated 65 cases involving 85 accused persons in court and secured 74 convictions involving 97 offenders during the period."
+    },
+    {
+     "fact": "NAPTIP总干事在阿布贾举行的第29届全国利益相关方磋商论坛上披露上述数据",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "disclosed this at the opening of the 29th National Stakeholders’ Consultative Forum (NSCF) on Human Trafficking in Nigeria on Tuesday in Abuja."
+    }
+   ],
+   "uncertainties": [
+    "上述数据为NAPTIP单方面公布，尚未获得独立核实",
+    "论坛上引用的案件与定罪统计口径（累计与期间）存在交叉，具体分类有待核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚反人口贩运机构称已解救28762名受害者并获857项定罪",
+   "summary_zh": "尼日利亚国家禁止人口贩运局（NAPTIP）表示，自成立以来已解救并支持28762名人口贩运受害者，获得857项定罪。该机构总干事Binta Adamu-Bello在阿布贾举行的第29届全国利益相关方磋商论坛上披露，2025年8月至2026年11月期间记录1508起人口贩运及相关案件，逮捕1434人。她表示该机构还启动65起涉及85名被告的法庭案件，并在此期间获得74项涉及97名罪犯的定罪。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "NAPTIP称自成立以来已解救并支持28762名人口贩运受害者，获得857项定罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The National Agency for the Prohibition of Trafficking in Persons (NAPTIP) says it has rescued and supported 28,762 victims of human trafficking and secured 857 convictions since its establishment."
+    },
+    {
+     "fact": "2025年8月至2026年11月期间记录1508起人口贩运及相关案件，导致1434人被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the agency recorded 1,508 cases of human trafficking and related offences between August 2025 and November 2026, leading to 1,434 arrests."
+    },
+    {
+     "fact": "该机构在此期间启动65起涉及85名被告的案件，并获得74项涉及97名罪犯的定罪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the agency initiated 65 cases involving 85 accused persons in court and secured 74 convictions involving 97 offenders during the period."
+    },
+    {
+     "fact": "NAPTIP总干事在阿布贾举行的第29届全国利益相关方磋商论坛上披露上述数据",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "disclosed this at the opening of the 29th National Stakeholders’ Consultative Forum (NSCF) on Human Trafficking in Nigeria on Tuesday in Abuja."
+    }
+   ],
+   "uncertainties": [
+    "上述数据为NAPTIP单方面公布，尚未获得独立核实",
+    "论坛上引用的案件与定罪统计口径（累计与期间）存在交叉，具体分类有待核实",
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_605bdb0e433e8205",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
