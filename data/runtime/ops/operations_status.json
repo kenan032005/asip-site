@@ -2,90 +2,6 @@
  "schema": "stage8c-package3-v1",
  "runs": [
   {
-   "run_id": "44983520106",
-   "workflow": "asip-production-orchestrator",
-   "started_at": "2026-11-22T04:20:04Z",
-   "completed_at": "2026-11-22T04:20:53Z",
-   "status": "completed",
-   "sources_attempted": 0,
-   "sources_succeeded": 0,
-   "sources_failed": 0,
-   "candidates_new": 0,
-   "ai_attempted": 0,
-   "ai_succeeded": 0,
-   "ai_failed": 0,
-   "ai_held": 0,
-   "safety_checked": 0,
-   "safety_corrected": 0,
-   "safety_held": 0,
-   "reports_full": 0,
-   "reports_fallback": 0,
-   "reports_low_data": 0,
-   "reports_hold": 0,
-   "build_status": "not_executed",
-   "deploy_status": "not_executed",
-   "token_usage": {},
-   "notes": [
-    "trigger=external_scheduler",
-    "trigger_type=automation",
-    "automation=true",
-    "human=false",
-    "post_collection_queued_ai:social_ai",
-    "mode=post_collection",
-    "alert:deploy_stall"
-   ],
-   "ai_usage": {
-    "by_component": {},
-    "totals": {
-     "calls": 0,
-     "succeeded": 0,
-     "failed": 0,
-     "retries": 0,
-     "input_tokens": 0,
-     "output_tokens": 0,
-     "total_tokens": 0,
-     "cache_hit_tokens": 0,
-     "cache_tokens_available_calls": 0,
-     "estimated_cost": 0,
-     "estimated_cost_available": false,
-     "confirmed_cost": null
-    },
-    "pricing": {
-     "input_per_mtok": null,
-     "output_per_mtok": null,
-     "configured": false,
-     "currency": ""
-    },
-    "run_id": "44983520106",
-    "generated_at": "2026-11-22T04:20:53Z",
-    "records_for_run": 0,
-    "zero_calls_confirmed": true,
-    "verified": true,
-    "ok": true
-   },
-   "ai_ledger_verified": true,
-   "ai_calls_total": 0,
-   "ai_tokens_input": 0,
-   "ai_tokens_output": 0,
-   "ai_cache_hit_tokens": 0,
-   "ai_estimated_cost": 0,
-   "ai_cost_basis": "unpriced",
-   "deploy_requested": true,
-   "deploy_provenance": {
-    "trigger_type": "automation",
-    "trigger_source": "external_scheduler",
-    "automation": true,
-    "human": false,
-    "mode": "production",
-    "root_orchestrator_run_id": "44983520106",
-    "report_date": null,
-    "report_classification": null,
-    "deploy_requested_at": "2026-11-22T04:20:53Z",
-    "reason": "ai_publication_changed",
-    "publication_localized_events": 2131
-   }
-  },
-  {
    "run_id": "44985228311",
    "workflow": "asip-production-orchestrator",
    "started_at": "2026-11-22T04:42:42Z",
@@ -1857,6 +1773,143 @@
     "deploy_requested_at": "2026-11-22T18:57:42Z",
     "reason": "ai_publication_changed",
     "publication_localized_events": 2142
+   }
+  },
+  {
+   "run_id": "45058750079",
+   "workflow": "asip-production-orchestrator",
+   "started_at": "2026-11-22T19:19:27Z",
+   "completed_at": "2026-11-22T19:34:28Z",
+   "status": "completed",
+   "sources_attempted": 0,
+   "sources_succeeded": 0,
+   "sources_failed": 0,
+   "candidates_new": 0,
+   "ai_attempted": 4,
+   "ai_succeeded": 0,
+   "ai_failed": 0,
+   "ai_held": 0,
+   "safety_checked": 4,
+   "safety_corrected": 0,
+   "safety_held": 0,
+   "reports_full": 0,
+   "reports_fallback": 0,
+   "reports_low_data": 0,
+   "reports_hold": 0,
+   "build_status": "not_executed",
+   "deploy_status": "not_executed",
+   "token_usage": {
+    "social_enrichment": {
+     "calls": 4,
+     "input_tokens": 9824,
+     "output_tokens": 2520,
+     "total_tokens": 12344
+    }
+   },
+   "notes": [
+    "trigger=external_scheduler",
+    "trigger_type=automation",
+    "automation=true",
+    "human=false",
+    "post_collection_queued_ai:social_ai",
+    "mode=post_collection",
+    "alert:deploy_stall"
+   ],
+   "ai_usage": {
+    "by_component": {
+     "social_ai": {
+      "calls": 4,
+      "succeeded": 4,
+      "failed": 0,
+      "retries": 0,
+      "input_tokens": 9824,
+      "output_tokens": 2520,
+      "total_tokens": 12344,
+      "cache_hit_tokens": 4096,
+      "cache_tokens_available_calls": 4,
+      "estimated_cost": 0.0,
+      "models": {
+       "deepseek-flash": 4
+      }
+     },
+     "news_localization": {
+      "calls": 1,
+      "succeeded": 1,
+      "failed": 0,
+      "retries": 0,
+      "input_tokens": 1327,
+      "output_tokens": 812,
+      "total_tokens": 2139,
+      "cache_hit_tokens": 0,
+      "cache_tokens_available_calls": 1,
+      "estimated_cost": 0.0,
+      "models": {
+       "deepseek-flash": 1
+      }
+     },
+     "daily_assessment": {
+      "calls": 1,
+      "succeeded": 1,
+      "failed": 0,
+      "retries": 0,
+      "input_tokens": 10302,
+      "output_tokens": 690,
+      "total_tokens": 10992,
+      "cache_hit_tokens": 128,
+      "cache_tokens_available_calls": 1,
+      "estimated_cost": 0.0,
+      "models": {
+       "deepseek-flash": 1
+      }
+     }
+    },
+    "totals": {
+     "calls": 6,
+     "succeeded": 6,
+     "failed": 0,
+     "retries": 0,
+     "input_tokens": 21453,
+     "output_tokens": 4022,
+     "total_tokens": 25475,
+     "cache_hit_tokens": 4224,
+     "cache_tokens_available_calls": 6,
+     "estimated_cost": 0.0,
+     "estimated_cost_available": false,
+     "confirmed_cost": null
+    },
+    "pricing": {
+     "input_per_mtok": null,
+     "output_per_mtok": null,
+     "configured": false,
+     "currency": ""
+    },
+    "run_id": "45058750079",
+    "generated_at": "2026-11-22T19:34:28Z",
+    "records_for_run": 6,
+    "zero_calls_confirmed": false,
+    "verified": true,
+    "ok": true
+   },
+   "ai_ledger_verified": true,
+   "ai_calls_total": 6,
+   "ai_tokens_input": 21453,
+   "ai_tokens_output": 4022,
+   "ai_cache_hit_tokens": 4224,
+   "ai_estimated_cost": 0.0,
+   "ai_cost_basis": "unpriced",
+   "deploy_requested": true,
+   "deploy_provenance": {
+    "trigger_type": "automation",
+    "trigger_source": "external_scheduler",
+    "automation": true,
+    "human": false,
+    "mode": "production",
+    "root_orchestrator_run_id": "45058750079",
+    "report_date": null,
+    "report_classification": null,
+    "deploy_requested_at": "2026-11-22T19:34:28Z",
+    "reason": "ai_publication_changed",
+    "publication_localized_events": 2146
    }
   }
  ]

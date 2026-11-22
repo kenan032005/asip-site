@@ -1,0 +1,146 @@
+{
+ "label": "Sc88f7f70",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4d3bd3c96ab34b563c5b05165580695c7454f1b933f4b64672ed455efcd53f58",
+ "tokens": {
+  "input_tokens": 2831,
+  "output_tokens": 737,
+  "total_tokens": 3568
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"武装团体活动可能增加为FEWS NET的预测，尚未发生\", \"粮食援助需求人数为预测区间，尚未最终确认\"]",
+    "after": "[\"武装团体活动可能增加为FEWS NET的预测，尚未发生\", \"粮食援助需求人数为预测区间，尚未最终确认\", \"据Fraternite (官方日报)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁粮食不安全：北部2027年风险持续",
+   "summary_zh": "据饥荒早期预警系统网络（FEWS NET）最新展望，尽管有新收成，贝宁北部多个地区预计到2027年5月仍将面临粮食获取困难。武装暴力、人口流离失所和经济活动放缓是主要影响因素。2027年3月至5月，可能有10万至24.9999万人需要粮食援助。阿黎博里、阿塔科拉和博尔古部分地区风险尤为突出。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": "阿黎博里、阿塔科拉、博尔古",
+    "city": null,
+    "site": "靠近W-Arly-Pendjari综合体的边境市镇",
+    "raw_text": "Plusieurs localités du nord du Bénin ; L’Alibori, l’Atacora et certaines localités du Borgou ; Les communes frontalières proches du complexe W-Arly-Pendjari"
+   },
+   "key_facts": [
+    {
+     "fact": "贝宁北部多个地区预计到2027年5月仍将面临粮食获取困难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plusieurs localités du nord du Bénin devraient continuer à connaître des difficultés d’accès à l’alimentation jusqu’en mai 2027 malgré les nouvelles récoltes"
+    },
+    {
+     "fact": "FEWS NET指出武装暴力、人口流离失所和经济活动放缓的影响",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Réseau de systèmes d’alerte précoce contre la famine (FEWS NET) pointe les effets des violences armées, des déplacements de populations et du ralentissement des activités économiques"
+    },
+    {
+     "fact": "2027年3月至5月可能有10万至24.9999万人需要粮食援助",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Entre mars et mai 2027, 100 000 à 249 999 personnes pourraient avoir besoin d’une assistance alimentaire"
+    },
+    {
+     "fact": "阿黎博里、阿塔科拉和博尔古部分地区风险尤为突出",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’Alibori, l’Atacora et certaines localités du Borgou restent particulièrement exposés"
+    },
+    {
+     "fact": "截至2026年8月31日，贝宁有85998名被迫流离失所者，一年内增加约36%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au 31 août 2026, le Bénin comptait 85 998 personnes déplacées de force, contre environ 63 000 à la même période en 2025. Le nombre a augmenté d’environ 36 % en un an"
+    },
+    {
+     "fact": "武装团体继续在边境地区制造不安全，FEWS NET预计旱季其活动可能增加",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les groupes armés continuent d’y entretenir l’insécurité. FEWS NET prévoit même une possible recrudescence de leurs activités pendant la saison sèche"
+    }
+   ],
+   "uncertainties": [
+    "武装团体活动可能增加为FEWS NET的预测，尚未发生",
+    "粮食援助需求人数为预测区间，尚未最终确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁粮食不安全：北部2027年风险持续",
+   "summary_zh": "据饥荒早期预警系统网络（FEWS NET）最新展望，尽管有新收成，贝宁北部多个地区预计到2027年5月仍将面临粮食获取困难。武装暴力、人口流离失所和经济活动放缓是主要影响因素。2027年3月至5月，可能有10万至24.9999万人需要粮食援助。阿黎博里、阿塔科拉和博尔古部分地区风险尤为突出。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": "阿黎博里、阿塔科拉、博尔古",
+    "city": null,
+    "site": "靠近W-Arly-Pendjari综合体的边境市镇",
+    "raw_text": "Plusieurs localités du nord du Bénin ; L’Alibori, l’Atacora et certaines localités du Borgou ; Les communes frontalières proches du complexe W-Arly-Pendjari"
+   },
+   "key_facts": [
+    {
+     "fact": "贝宁北部多个地区预计到2027年5月仍将面临粮食获取困难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plusieurs localités du nord du Bénin devraient continuer à connaître des difficultés d’accès à l’alimentation jusqu’en mai 2027 malgré les nouvelles récoltes"
+    },
+    {
+     "fact": "FEWS NET指出武装暴力、人口流离失所和经济活动放缓的影响",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Réseau de systèmes d’alerte précoce contre la famine (FEWS NET) pointe les effets des violences armées, des déplacements de populations et du ralentissement des activités économiques"
+    },
+    {
+     "fact": "2027年3月至5月可能有10万至24.9999万人需要粮食援助",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Entre mars et mai 2027, 100 000 à 249 999 personnes pourraient avoir besoin d’une assistance alimentaire"
+    },
+    {
+     "fact": "阿黎博里、阿塔科拉和博尔古部分地区风险尤为突出",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’Alibori, l’Atacora et certaines localités du Borgou restent particulièrement exposés"
+    },
+    {
+     "fact": "截至2026年8月31日，贝宁有85998名被迫流离失所者，一年内增加约36%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Au 31 août 2026, le Bénin comptait 85 998 personnes déplacées de force, contre environ 63 000 à la même période en 2025. Le nombre a augmenté d’environ 36 % en un an"
+    },
+    {
+     "fact": "武装团体继续在边境地区制造不安全，FEWS NET预计旱季其活动可能增加",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les groupes armés continuent d’y entretenir l’insécurité. FEWS NET prévoit même une possible recrudescence de leurs activités pendant la saison sèche"
+    }
+   ],
+   "uncertainties": [
+    "武装团体活动可能增加为FEWS NET的预测，尚未发生",
+    "粮食援助需求人数为预测区间，尚未最终确认",
+    "据Fraternite (官方日报)报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_123ee2efc88f7f70",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
