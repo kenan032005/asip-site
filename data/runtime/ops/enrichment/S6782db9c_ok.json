@@ -1,0 +1,105 @@
+{
+ "label": "S6782db9c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "fd228f8326bd8112a424d8ed034b777eff5935680403a877cc921feb41ae58af",
+ "tokens": {
+  "input_tokens": 2203,
+  "output_tokens": 468,
+  "total_tokens": 2671
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔卡兰古电台2026年11月10日节目：土地保障、孕产妇医疗与塔瓦流离失所者状况",
+   "summary_zh": "尼日尔卡兰古电台2026年11月10日播出的节目讨论了尼日尔土地获取与土地保障问题，并采访了农村法规部门的Maman Sani Amadou。健康栏目关注迈内-索罗阿省Foulatari农村公社妇女因交通困难而难以获得医疗服务，尤其是孕期和分娩期间。地区回声栏目则前往塔瓦，当地四个省居住着超过8万名境内流离失所者和难民。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "Tahoua",
+    "city": "Tahoua",
+    "site": null,
+    "raw_text": "Tahoua, Niger; Foulatari, commune rurale du département de Maïné-Soroa"
+   },
+   "key_facts": [
+    {
+     "fact": "节目讨论尼日尔土地获取与土地保障问题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans l’entretien du jour, nous abordons l’accès à la terre et la sécurisation foncière au Niger."
+    },
+    {
+     "fact": "塔瓦四个省居住着超过8万名境内流离失所者和难民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’Écho des régions nous conduit ensuite à Tahoua, où vivent plus de 80 000 personnes déplacées internes et réfugiées, réparties dans quatre départements."
+    },
+    {
+     "fact": "Foulatari农村公社妇女因交通困难难以获得医疗服务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans cette localité, les difficultés de transport compliquent l’accès des femmes aux soins médicaux, particulièrement pendant la grossesse et l’accouchement."
+    }
+   ],
+   "uncertainties": [
+    "流离失所者与难民人数为节目引述，尚未获得独立来源交叉验证",
+    "目前仅一个来源（Studio Kalangou）报道"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 60
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔卡兰古电台2026年11月10日节目：土地保障、孕产妇医疗与塔瓦流离失所者状况",
+   "summary_zh": "尼日尔卡兰古电台2026年11月10日播出的节目讨论了尼日尔土地获取与土地保障问题，并采访了农村法规部门的Maman Sani Amadou。健康栏目关注迈内-索罗阿省Foulatari农村公社妇女因交通困难而难以获得医疗服务，尤其是孕期和分娩期间。地区回声栏目则前往塔瓦，当地四个省居住着超过8万名境内流离失所者和难民。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "Tahoua",
+    "city": "Tahoua",
+    "site": null,
+    "raw_text": "Tahoua, Niger; Foulatari, commune rurale du département de Maïné-Soroa"
+   },
+   "key_facts": [
+    {
+     "fact": "节目讨论尼日尔土地获取与土地保障问题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans l’entretien du jour, nous abordons l’accès à la terre et la sécurisation foncière au Niger."
+    },
+    {
+     "fact": "塔瓦四个省居住着超过8万名境内流离失所者和难民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’Écho des régions nous conduit ensuite à Tahoua, où vivent plus de 80 000 personnes déplacées internes et réfugiées, réparties dans quatre départements."
+    },
+    {
+     "fact": "Foulatari农村公社妇女因交通困难难以获得医疗服务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans cette localité, les difficultés de transport compliquent l’accès des femmes aux soins médicaux, particulièrement pendant la grossesse et l’accouchement."
+    }
+   ],
+   "uncertainties": [
+    "流离失所者与难民人数为节目引述，尚未获得独立来源交叉验证",
+    "目前仅一个来源（Studio Kalangou）报道"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 60
+  }
+ },
+ "event_id": "EVT_e5f355e16782db9c",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

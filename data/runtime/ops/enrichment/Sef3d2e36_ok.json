@@ -1,0 +1,125 @@
+{
+ "label": "Sef3d2e36",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "8b833b61a738b05cc8026ba1577c6a93c3dae6406217b2eb2deda8a0c1e00848",
+ "tokens": {
+  "input_tokens": 2893,
+  "output_tokens": 529,
+  "total_tokens": 3422
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "西班牙国王费利佩六世与王后莱蒂齐亚出席乌尔达列车事故遇难者悼念仪式",
+   "summary_zh": "西班牙国王费利佩六世与王后莱蒂齐亚于11月10日出席托莱多大教堂的宗教仪式，悼念10月28日乌尔达附近两列高速列车相撞事故中的69名遇难者。仪式由托莱多大主教主持，遇难者家属及多名政界人士参加，首相桑切斯未出席。事故还引发对西班牙铁路网络安全的担忧，交通大臣等官员已去职，事故原因调查仍在进行。",
+   "event_type": "transport_disruption",
+   "country_iso3": "ESP",
+   "location": {
+    "country_iso3": "ESP",
+    "admin1": "卡斯蒂利亚-拉曼恰",
+    "city": "托莱多",
+    "site": "托莱多大教堂",
+    "raw_text": "cathédrale de Tolède"
+   },
+   "key_facts": [
+    {
+     "fact": "西班牙国王费利佩六世与王后莱蒂齐亚出席托莱多大教堂悼念仪式",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le roi Felipe VI et la reine Letizia ont assisté, mardi 10 novembre 2026, à une cérémonie religieuse à la cathédrale de Tolède"
+    },
+    {
+     "fact": "10月28日乌尔达附近两列高速列车相撞造成69人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "deux trains à grande vitesse sont entrés en collision près d’Urda, au sud de Madrid... Le bilan s’est établi à 69 morts"
+    },
+    {
+     "fact": "事故还造成一百多人接受医院治疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plus d’une centaine de personnes ont reçu des soins hospitaliers après l’accident"
+    },
+    {
+     "fact": "交通大臣奥斯卡·普恩特于11月初去职",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Óscar Puente, alors ministre des Transports, a quitté ses fonctions début novembre"
+    },
+    {
+     "fact": "事故原因调查仍在进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’enquête sur les circonstances de la collision se poursuit"
+    }
+   ],
+   "uncertainties": [
+    "事故具体原因尚未查明，调查仍在进行",
+    "目前仅单一来源（Benin Web TV）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "西班牙国王费利佩六世与王后莱蒂齐亚出席乌尔达列车事故遇难者悼念仪式",
+   "summary_zh": "西班牙国王费利佩六世与王后莱蒂齐亚于11月10日出席托莱多大教堂的宗教仪式，悼念10月28日乌尔达附近两列高速列车相撞事故中的69名遇难者。仪式由托莱多大主教主持，遇难者家属及多名政界人士参加，首相桑切斯未出席。事故还引发对西班牙铁路网络安全的担忧，交通大臣等官员已去职，事故原因调查仍在进行。",
+   "event_type": "transport_disruption",
+   "country_iso3": "ESP",
+   "location": {
+    "country_iso3": "ESP",
+    "admin1": "卡斯蒂利亚-拉曼恰",
+    "city": "托莱多",
+    "site": "托莱多大教堂",
+    "raw_text": "cathédrale de Tolède"
+   },
+   "key_facts": [
+    {
+     "fact": "西班牙国王费利佩六世与王后莱蒂齐亚出席托莱多大教堂悼念仪式",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le roi Felipe VI et la reine Letizia ont assisté, mardi 10 novembre 2026, à une cérémonie religieuse à la cathédrale de Tolède"
+    },
+    {
+     "fact": "10月28日乌尔达附近两列高速列车相撞造成69人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "deux trains à grande vitesse sont entrés en collision près d’Urda, au sud de Madrid... Le bilan s’est établi à 69 morts"
+    },
+    {
+     "fact": "事故还造成一百多人接受医院治疗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plus d’une centaine de personnes ont reçu des soins hospitaliers après l’accident"
+    },
+    {
+     "fact": "交通大臣奥斯卡·普恩特于11月初去职",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Óscar Puente, alors ministre des Transports, a quitté ses fonctions début novembre"
+    },
+    {
+     "fact": "事故原因调查仍在进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’enquête sur les circonstances de la collision se poursuit"
+    }
+   ],
+   "uncertainties": [
+    "事故具体原因尚未查明，调查仍在进行",
+    "目前仅单一来源（Benin Web TV）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_64636701ef3d2e36",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
