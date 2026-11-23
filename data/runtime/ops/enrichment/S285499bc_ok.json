@@ -1,0 +1,127 @@
+{
+ "label": "S285499bc",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5b217acb4742d256c8f638c6b0e45ab9400f76359d8daaac7e7de6dcb348e315",
+ "tokens": {
+  "input_tokens": 2640,
+  "output_tokens": 618,
+  "total_tokens": 3258
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）反对派人士Prince Epenge案开庭审理",
+   "summary_zh": "刚果（金）反对派人士、ADD Congo党主席兼Lamuka平台发言人Prince Epenge的案件在金沙萨Gombe和平法庭开庭，他被控“散布虚假消息”。他此前声称活动人士Manassé Lomboto在9月15日一场示威期间遭杀害，而检方依据医学材料称该活动人士死于疾病。Epenge自10月25日被捕后一直被关押在Makala监狱，其律师称拘留条件不人道，并对其健康状况表示担忧。",
+   "event_type": "political_instability",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "金沙萨",
+    "city": "金沙萨",
+    "site": "Gombe和平法庭（庭审在Makala监狱内进行）",
+    "raw_text": "tribunal de paix de Kinshasa Gombe, en République démocratique du Congo"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）反对派人士Prince Epenge的案件在金沙萨Gombe和平法庭开庭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le procès de Prince Epenge doit s’ouvrir au tribunal de paix de Kinshasa Gombe, en République démocratique du Congo."
+    },
+    {
+     "fact": "Epenge被控“散布虚假消息”，最高可判处三年监禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’opposant est donc poursuivi pour « propagation de faux bruits » et il encourt une peine pouvant aller jusqu’à trois ans de prison."
+    },
+    {
+     "fact": "Epenge于10月25日被捕，10月31日被转押至金沙萨Makala监狱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'opposant, arrêté dimanche 25 octobre, a été transféré, samedi 31 octobre, à la prison de Makala, à Kinshasa"
+    },
+    {
+     "fact": "检方依据医学材料称活动人士Manassé Lomboto死于疾病",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministère public assure lui, sur la base de pièces médicales, que le militant est décédé des suites d’une maladie."
+    },
+    {
+     "fact": "Epenge的律师称其当事人被关押在非人道条件下，并对其健康状况表示担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "« Il est détenu dans des conditions inhumaines », explique son avocat"
+    }
+   ],
+   "uncertainties": [
+    "活动人士Manassé Lomboto的死因存在争议：Epenge声称其遭杀害，检方称其死于疾病，尚无法确认",
+    "Epenge一方称其从未收到传唤，此说法尚未获得独立证实",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）反对派人士Prince Epenge案开庭审理",
+   "summary_zh": "刚果（金）反对派人士、ADD Congo党主席兼Lamuka平台发言人Prince Epenge的案件在金沙萨Gombe和平法庭开庭，他被控“散布虚假消息”。他此前声称活动人士Manassé Lomboto在9月15日一场示威期间遭杀害，而检方依据医学材料称该活动人士死于疾病。Epenge自10月25日被捕后一直被关押在Makala监狱，其律师称拘留条件不人道，并对其健康状况表示担忧。",
+   "event_type": "political_instability",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "金沙萨",
+    "city": "金沙萨",
+    "site": "Gombe和平法庭（庭审在Makala监狱内进行）",
+    "raw_text": "tribunal de paix de Kinshasa Gombe, en République démocratique du Congo"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）反对派人士Prince Epenge的案件在金沙萨Gombe和平法庭开庭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le procès de Prince Epenge doit s’ouvrir au tribunal de paix de Kinshasa Gombe, en République démocratique du Congo."
+    },
+    {
+     "fact": "Epenge被控“散布虚假消息”，最高可判处三年监禁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’opposant est donc poursuivi pour « propagation de faux bruits » et il encourt une peine pouvant aller jusqu’à trois ans de prison."
+    },
+    {
+     "fact": "Epenge于10月25日被捕，10月31日被转押至金沙萨Makala监狱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L'opposant, arrêté dimanche 25 octobre, a été transféré, samedi 31 octobre, à la prison de Makala, à Kinshasa"
+    },
+    {
+     "fact": "检方依据医学材料称活动人士Manassé Lomboto死于疾病",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le ministère public assure lui, sur la base de pièces médicales, que le militant est décédé des suites d’une maladie."
+    },
+    {
+     "fact": "Epenge的律师称其当事人被关押在非人道条件下，并对其健康状况表示担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "« Il est détenu dans des conditions inhumaines », explique son avocat"
+    }
+   ],
+   "uncertainties": [
+    "活动人士Manassé Lomboto的死因存在争议：Epenge声称其遭杀害，检方称其死于疾病，尚无法确认",
+    "Epenge一方称其从未收到传唤，此说法尚未获得独立证实",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_8782dfe7285499bc",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
