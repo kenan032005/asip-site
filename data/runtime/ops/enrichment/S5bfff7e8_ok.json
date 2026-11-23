@@ -1,0 +1,131 @@
+{
+ "label": "S5bfff7e8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f1abba9c055221a4240ecd17117366f29df6711d7622446dfca48c6bea0de831",
+ "tokens": {
+  "input_tokens": 2323,
+  "output_tokens": 483,
+  "total_tokens": 2806
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据Ethiopian News Agency（ENA）报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "埃塞俄比亚总理阿比在COP31呼吁可预测气候融资与早期行动",
+   "summary_zh": "埃塞俄比亚总理阿比·艾哈迈德在土耳其安塔利亚举行的第31届联合国气候变化大会（COP31）开幕式上发言，呼吁国际社会提供可预测的气候融资，在灾害发生前惠及脆弱社区。他强调气候行动对埃塞俄比亚而言是经济政策，并提及干旱洪水威胁农业、水电依赖降雨、以及绿色遗产倡议已种植超560亿株树苗等举措。阿比还呼吁加强气候、发展、贸易与金融机构间的协调，并要求各国明确气候融资承诺的金额、时间和条件。",
+   "event_type": "other_security",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": null,
+    "city": "安塔利亚",
+    "site": "COP31开幕式",
+    "raw_text": "Türkiye's Mediterranean city of Antalya"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚总理阿比在土耳其安塔利亚COP31开幕式上呼吁可预测的气候融资",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Addressing the opening of the 31st United Nations Climate Change Conference (COP31) in Türkiye's Mediterranean city of Antalya"
+    },
+    {
+     "fact": "阿比称埃塞俄比亚逾90%电力来自水电，降雨模式对能源安全至关重要",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "more than 90 percent of Ethiopia's electricity comes from hydropower, making rainfall patterns critical not only to domestic energy security"
+    },
+    {
+     "fact": "绿色遗产倡议下埃塞俄比亚已种植超过560亿株树苗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "more than 56 billion seedlings planted to date"
+    },
+    {
+     "fact": "阿比称发展中国家每年在公共债务利息上支出近1万亿美元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "developing countries spend nearly one trillion US dollars annually on public debt interest"
+    },
+    {
+     "fact": "埃塞俄比亚已禁止进口汽油和柴油动力车辆",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the country has banned imports of petrol- and diesel-powered vehicles"
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "埃塞俄比亚总理阿比在COP31呼吁可预测气候融资与早期行动",
+   "summary_zh": "埃塞俄比亚总理阿比·艾哈迈德在土耳其安塔利亚举行的第31届联合国气候变化大会（COP31）开幕式上发言，呼吁国际社会提供可预测的气候融资，在灾害发生前惠及脆弱社区。他强调气候行动对埃塞俄比亚而言是经济政策，并提及干旱洪水威胁农业、水电依赖降雨、以及绿色遗产倡议已种植超560亿株树苗等举措。阿比还呼吁加强气候、发展、贸易与金融机构间的协调，并要求各国明确气候融资承诺的金额、时间和条件。",
+   "event_type": "other_security",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": null,
+    "city": "安塔利亚",
+    "site": "COP31开幕式",
+    "raw_text": "Türkiye's Mediterranean city of Antalya"
+   },
+   "key_facts": [
+    {
+     "fact": "埃塞俄比亚总理阿比在土耳其安塔利亚COP31开幕式上呼吁可预测的气候融资",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Addressing the opening of the 31st United Nations Climate Change Conference (COP31) in Türkiye's Mediterranean city of Antalya"
+    },
+    {
+     "fact": "阿比称埃塞俄比亚逾90%电力来自水电，降雨模式对能源安全至关重要",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "more than 90 percent of Ethiopia's electricity comes from hydropower, making rainfall patterns critical not only to domestic energy security"
+    },
+    {
+     "fact": "绿色遗产倡议下埃塞俄比亚已种植超过560亿株树苗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "more than 56 billion seedlings planted to date"
+    },
+    {
+     "fact": "阿比称发展中国家每年在公共债务利息上支出近1万亿美元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "developing countries spend nearly one trillion US dollars annually on public debt interest"
+    },
+    {
+     "fact": "埃塞俄比亚已禁止进口汽油和柴油动力车辆",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the country has banned imports of petrol- and diesel-powered vehicles"
+    }
+   ],
+   "uncertainties": [
+    "据Ethiopian News Agency（ENA）报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_00907af75bfff7e8",
+ "disease_event_id": null,
+ "country_code": "ET"
+}
