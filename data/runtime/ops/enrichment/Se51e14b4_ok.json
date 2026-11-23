@@ -1,0 +1,125 @@
+{
+ "label": "Se51e14b4",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "18a58a695bee5b0ef9b9b221c51736df8edf9a26f6eabe2ee382e8883e0e7e48",
+ "tokens": {
+  "input_tokens": 2152,
+  "output_tokens": 564,
+  "total_tokens": 2716
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚军方在索科托森林逮捕涉嫌恐怖活动的父子二人",
+   "summary_zh": "尼日利亚陆军部队在索科托州坦加扎地方政府区的巴乌尼森林逮捕了两名涉嫌恐怖活动的嫌疑人，二人为父子关系。行动由第248营执行，并有法国特种部队及国家安全顾问办公室反恐团队战术小组提供支援。据称在行动中缴获一支AK-47步枪、一个装有3发7.62毫米特种弹药的弹匣、9760奈拉及三个摩托车内胎。嫌疑人目前由第8军事情报营羁押，等待进一步调查。",
+   "event_type": "terrorism",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "索科托州",
+    "city": null,
+    "site": "巴乌尼森林",
+    "raw_text": "Bauni Forest in Tangaza Local Government Area, Sokoto State"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚陆军部队在索科托州逮捕两名涉嫌恐怖活动的嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Troops of the Nigerian Army have apprehended two suspected terrorists (father and son) in Sokoto State."
+    },
+    {
+     "fact": "嫌疑人身份为穆罕默德·阿里及其子乌马尔·阿里",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The suspects, identified as Muhammadu Ali and his son, Umaru Ali, were arrested at Bauni Forest in Tangaza Local Government Area."
+    },
+    {
+     "fact": "行动由第248营执行，并有法国特种部队及国家安全顾问办公室反恐团队战术小组支援",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the operation was conducted by troops of 248 Battalion, supported by the French Special Forces and NCTC-Office of the National Security Adviser tactical team."
+    },
+    {
+     "fact": "行动中缴获一支AK-47步枪、一个装有3发7.62毫米特种弹药的弹匣、9760奈拉及三个摩托车内胎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "items recovered during the operation included one AK-47 rifle, one magazine containing three rounds of 7.62mm special ammunition, ₦9,760 and three motorcycle tubes."
+    },
+    {
+     "fact": "嫌疑人目前由第8军事情报营羁押，等待进一步调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the suspects were in the custody of 8 Military Intelligence Battalion for further investigation."
+    }
+   ],
+   "uncertainties": [
+    "嫌疑人的恐怖活动指控尚未经司法程序证实",
+    "目前仅单一来源（尼日利亚通讯社）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚军方在索科托森林逮捕涉嫌恐怖活动的父子二人",
+   "summary_zh": "尼日利亚陆军部队在索科托州坦加扎地方政府区的巴乌尼森林逮捕了两名涉嫌恐怖活动的嫌疑人，二人为父子关系。行动由第248营执行，并有法国特种部队及国家安全顾问办公室反恐团队战术小组提供支援。据称在行动中缴获一支AK-47步枪、一个装有3发7.62毫米特种弹药的弹匣、9760奈拉及三个摩托车内胎。嫌疑人目前由第8军事情报营羁押，等待进一步调查。",
+   "event_type": "terrorism",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "索科托州",
+    "city": null,
+    "site": "巴乌尼森林",
+    "raw_text": "Bauni Forest in Tangaza Local Government Area, Sokoto State"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚陆军部队在索科托州逮捕两名涉嫌恐怖活动的嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Troops of the Nigerian Army have apprehended two suspected terrorists (father and son) in Sokoto State."
+    },
+    {
+     "fact": "嫌疑人身份为穆罕默德·阿里及其子乌马尔·阿里",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The suspects, identified as Muhammadu Ali and his son, Umaru Ali, were arrested at Bauni Forest in Tangaza Local Government Area."
+    },
+    {
+     "fact": "行动由第248营执行，并有法国特种部队及国家安全顾问办公室反恐团队战术小组支援",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the operation was conducted by troops of 248 Battalion, supported by the French Special Forces and NCTC-Office of the National Security Adviser tactical team."
+    },
+    {
+     "fact": "行动中缴获一支AK-47步枪、一个装有3发7.62毫米特种弹药的弹匣、9760奈拉及三个摩托车内胎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "items recovered during the operation included one AK-47 rifle, one magazine containing three rounds of 7.62mm special ammunition, ₦9,760 and three motorcycle tubes."
+    },
+    {
+     "fact": "嫌疑人目前由第8军事情报营羁押，等待进一步调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the suspects were in the custody of 8 Military Intelligence Battalion for further investigation."
+    }
+   ],
+   "uncertainties": [
+    "嫌疑人的恐怖活动指控尚未经司法程序证实",
+    "目前仅单一来源（尼日利亚通讯社）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_28cb779de51e14b4",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

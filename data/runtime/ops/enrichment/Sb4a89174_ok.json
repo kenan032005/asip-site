@@ -1,0 +1,127 @@
+{
+ "label": "Sb4a89174",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5e1d42b4a007e71330a30f55615e48d9607f6e85fca9833cf5eefb9a21858cc1",
+ "tokens": {
+  "input_tokens": 2675,
+  "output_tokens": 520,
+  "total_tokens": 3195
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "阿提库支持团体抗议判决书核证副本据称未获发放，并向首席大法官请愿",
+   "summary_zh": "尼日利亚联合支持阿提库之友（UFFA）周三在联邦高等法院举行和平抗议，指控法院迟迟未发放一份判决的核证副本（CTC）。该判决据称取消了参议员戴维·马克领导的非洲民主大会（ADC）领导层，并影响该党2027年大选候选人、前副总统阿提库·阿布巴卡尔的提名。抗议者向尼日利亚首席大法官等提交请愿，要求24小时内发放判决书，并威胁若诉求未获满足将再次举行更大规模抗议。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": "联邦高等法院",
+    "raw_text": "Federal High Court premises"
+   },
+   "key_facts": [
+    {
+     "fact": "UFFA支持团体周三在联邦高等法院举行和平抗议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "An interest group, United Friends for Atiku (UFFA), on Wednesday, staged a peaceful protest"
+    },
+    {
+     "fact": "抗议针对判决核证副本据称延迟发放",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "staged a peaceful protest over alleged delay in the release of the Certified True Copy (CTC) of the judgment"
+    },
+    {
+     "fact": "该判决据称取消戴维·马克领导的ADC领导层并影响阿提库提名",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the judgment nullifying the Sen. David Mark-led leadership of African Democratic Congress (ADC)"
+    },
+    {
+     "fact": "抗议者向首席大法官请愿并要求24小时内发放判决书",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "They gave the relevant authorities 24 hours to release the CTC and threatened to return with a stronger protest"
+    },
+    {
+     "fact": "抗议者还前往联合国办公室表达不满",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the protesters also took their action to the United Nations (UN) office to register their displeasure"
+    }
+   ],
+   "uncertainties": [
+    "判决核证副本延迟发放的原因尚未证实，相关指控仅为抗议方说法",
+    "是否存在对INEC施压的情况尚未证实",
+    "目前仅单一来源（尼日利亚通讯社）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "阿提库支持团体抗议判决书核证副本据称未获发放，并向首席大法官请愿",
+   "summary_zh": "尼日利亚联合支持阿提库之友（UFFA）周三在联邦高等法院举行和平抗议，指控法院迟迟未发放一份判决的核证副本（CTC）。该判决据称取消了参议员戴维·马克领导的非洲民主大会（ADC）领导层，并影响该党2027年大选候选人、前副总统阿提库·阿布巴卡尔的提名。抗议者向尼日利亚首席大法官等提交请愿，要求24小时内发放判决书，并威胁若诉求未获满足将再次举行更大规模抗议。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": "联邦高等法院",
+    "raw_text": "Federal High Court premises"
+   },
+   "key_facts": [
+    {
+     "fact": "UFFA支持团体周三在联邦高等法院举行和平抗议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "An interest group, United Friends for Atiku (UFFA), on Wednesday, staged a peaceful protest"
+    },
+    {
+     "fact": "抗议针对判决核证副本据称延迟发放",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "staged a peaceful protest over alleged delay in the release of the Certified True Copy (CTC) of the judgment"
+    },
+    {
+     "fact": "该判决据称取消戴维·马克领导的ADC领导层并影响阿提库提名",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the judgment nullifying the Sen. David Mark-led leadership of African Democratic Congress (ADC)"
+    },
+    {
+     "fact": "抗议者向首席大法官请愿并要求24小时内发放判决书",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "They gave the relevant authorities 24 hours to release the CTC and threatened to return with a stronger protest"
+    },
+    {
+     "fact": "抗议者还前往联合国办公室表达不满",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the protesters also took their action to the United Nations (UN) office to register their displeasure"
+    }
+   ],
+   "uncertainties": [
+    "判决核证副本延迟发放的原因尚未证实，相关指控仅为抗议方说法",
+    "是否存在对INEC施压的情况尚未证实",
+    "目前仅单一来源（尼日利亚通讯社）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_c20ef811b4a89174",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
