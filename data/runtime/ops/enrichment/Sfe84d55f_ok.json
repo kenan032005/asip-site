@@ -1,0 +1,115 @@
+{
+ "label": "Sfe84d55f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c4b9270f6e1d7208552699c47a416557ad5239a9721f24bcd3bc68e5bc42a1ce",
+ "tokens": {
+  "input_tokens": 2299,
+  "output_tokens": 546,
+  "total_tokens": 2845
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "德国支持卡焦-凯吉妇女韧性项目",
+   "summary_zh": "德国通过驻朱巴大使馆向当地组织“妇女正义与平等组织”（WOJE）提供资金，用于改善卡焦-凯吉县500名受冲突影响妇女和女童的心理社会福祉与韧性。项目名为“为卡焦-凯吉县受冲突影响妇女和女童恢复尊严并建设韧性”。德国方面表示将持续支持南苏丹人民，并称其为该国第二大双边捐助方。卡焦-凯吉县位于中赤道州，当地的不安全与暴力已导致数千平民流离失所。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "中赤道州",
+    "city": null,
+    "site": "卡焦-凯吉县",
+    "raw_text": "Kajo-Keji County, Central Equatoria State"
+   },
+   "key_facts": [
+    {
+     "fact": "德国通过驻朱巴大使馆向WOJE提供资金，用于支持500名受冲突影响的妇女和女童",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Republic of Germany, through its embassy in Juba, has provided funds to a local organization, Women for Justice and Equality (WOJE), to improve the psychosocial well-being and resilience of 500 conflict-affected women and girls"
+    },
+    {
+     "fact": "项目名为“为卡焦-凯吉县受冲突影响妇女和女童恢复尊严并建设韧性”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The project is dubbed “Restoring Dignity and Building Resilience for the conflict-affected women and girls in Kajo-Keji County.”"
+    },
+    {
+     "fact": "德国方面称其为南苏丹第二大双边捐助方",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Hofmann reaffirmed Germany’s continued commitment to the People of South Sudan, highlighting its position as the country’s second-largest bilateral donor."
+    },
+    {
+     "fact": "卡焦-凯吉县位于中赤道州，当地不安全与暴力已导致数千平民流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kajo-Keji County, Central Equatoria State, faces insecurity and violence that have led to the displacement of thousands of civilians, particularly women and children."
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（Radio Tamazuj）报道，尚缺乏交叉验证",
+    "卡焦-凯吉县流离失所人数的具体数字未在文中给出"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "德国支持卡焦-凯吉妇女韧性项目",
+   "summary_zh": "德国通过驻朱巴大使馆向当地组织“妇女正义与平等组织”（WOJE）提供资金，用于改善卡焦-凯吉县500名受冲突影响妇女和女童的心理社会福祉与韧性。项目名为“为卡焦-凯吉县受冲突影响妇女和女童恢复尊严并建设韧性”。德国方面表示将持续支持南苏丹人民，并称其为该国第二大双边捐助方。卡焦-凯吉县位于中赤道州，当地的不安全与暴力已导致数千平民流离失所。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "中赤道州",
+    "city": null,
+    "site": "卡焦-凯吉县",
+    "raw_text": "Kajo-Keji County, Central Equatoria State"
+   },
+   "key_facts": [
+    {
+     "fact": "德国通过驻朱巴大使馆向WOJE提供资金，用于支持500名受冲突影响的妇女和女童",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Federal Republic of Germany, through its embassy in Juba, has provided funds to a local organization, Women for Justice and Equality (WOJE), to improve the psychosocial well-being and resilience of 500 conflict-affected women and girls"
+    },
+    {
+     "fact": "项目名为“为卡焦-凯吉县受冲突影响妇女和女童恢复尊严并建设韧性”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The project is dubbed “Restoring Dignity and Building Resilience for the conflict-affected women and girls in Kajo-Keji County.”"
+    },
+    {
+     "fact": "德国方面称其为南苏丹第二大双边捐助方",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Hofmann reaffirmed Germany’s continued commitment to the People of South Sudan, highlighting its position as the country’s second-largest bilateral donor."
+    },
+    {
+     "fact": "卡焦-凯吉县位于中赤道州，当地不安全与暴力已导致数千平民流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Kajo-Keji County, Central Equatoria State, faces insecurity and violence that have led to the displacement of thousands of civilians, particularly women and children."
+    }
+   ],
+   "uncertainties": [
+    "事件目前仅有一个来源（Radio Tamazuj）报道，尚缺乏交叉验证",
+    "卡焦-凯吉县流离失所人数的具体数字未在文中给出"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_83d19489fe84d55f",
+ "disease_event_id": null,
+ "country_code": "SS"
+}
