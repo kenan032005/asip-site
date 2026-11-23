@@ -1,0 +1,117 @@
+{
+ "label": "S175cc362",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5a2c4a3f7d5a80644ac25e047e19a9fac27f14ff1ada437d3131a80cddbf5cd5",
+ "tokens": {
+  "input_tokens": 2317,
+  "output_tokens": 574,
+  "total_tokens": 2891
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "南非Pongolapoort大坝加大泄洪后，莫桑比克马普托河流域面临中等洪水风险",
+   "summary_zh": "莫桑比克国家水资源管理总局警告，南非Pongolapoort大坝于11月8日将泄洪流量提高至每秒700立方米后，马普托河流域的Catuane、Salamanga和Tinonganine面临中等洪水风险。预计影响可能在公告后48小时内显现，马普托河水位可能继续上涨并达到峰值。洪水可能加剧河岸农田受灾并扰乱道路交通。该局建议河岸社区避免渡河或进入被淹区域。",
+   "event_type": "natural_disaster",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "马普托省",
+    "city": null,
+    "site": "马普托河流域（Catuane、Salamanga、Tinonganine）",
+    "raw_text": "Catuane, Salamanga and Tinonganine, along the Maputo River basin, Matutuíne district, Maputo province, southern Mozambique"
+   },
+   "key_facts": [
+    {
+     "fact": "莫桑比克国家水资源管理总局警告马普托河流域存在中等洪水风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Mozambique’s National Directorate for Water Resources Management (DNGRH) yesterday warned of a moderate flood risk in Catuane, Salamanga and Tinonganine, along the Maputo River basin"
+    },
+    {
+     "fact": "南非Pongolapoort大坝于11月8日将泄洪流量提高至每秒700立方米",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pongolapoort Dam in South Africa increased its discharge rate to 700 m³/s on Saturday, 8 November"
+    },
+    {
+     "fact": "影响可能在公告后48小时内显现，马普托河水位可能继续上涨并达到峰值",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The directorate said the effects could be felt in Mozambique within 48 hours of the announcement, with the Maputo River expected to continue rising and potentially reach its peak during that period"
+    },
+    {
+     "fact": "洪水可能加剧河岸农田受灾并扰乱Catuane、Salamanga和Tinonganine的道路交通",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The increased flow could worsen flooding on riverside farmland and disrupt road traffic in Catuane, Salamanga and Tinonganine, in Matutuíne district, Maputo province, southern Mozambique"
+    }
+   ],
+   "uncertainties": [
+    "洪水实际影响程度尚未证实",
+    "水位峰值时间与高度为预测，尚未确认",
+    "目前仅单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "南非Pongolapoort大坝加大泄洪后，莫桑比克马普托河流域面临中等洪水风险",
+   "summary_zh": "莫桑比克国家水资源管理总局警告，南非Pongolapoort大坝于11月8日将泄洪流量提高至每秒700立方米后，马普托河流域的Catuane、Salamanga和Tinonganine面临中等洪水风险。预计影响可能在公告后48小时内显现，马普托河水位可能继续上涨并达到峰值。洪水可能加剧河岸农田受灾并扰乱道路交通。该局建议河岸社区避免渡河或进入被淹区域。",
+   "event_type": "natural_disaster",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "马普托省",
+    "city": null,
+    "site": "马普托河流域（Catuane、Salamanga、Tinonganine）",
+    "raw_text": "Catuane, Salamanga and Tinonganine, along the Maputo River basin, Matutuíne district, Maputo province, southern Mozambique"
+   },
+   "key_facts": [
+    {
+     "fact": "莫桑比克国家水资源管理总局警告马普托河流域存在中等洪水风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Mozambique’s National Directorate for Water Resources Management (DNGRH) yesterday warned of a moderate flood risk in Catuane, Salamanga and Tinonganine, along the Maputo River basin"
+    },
+    {
+     "fact": "南非Pongolapoort大坝于11月8日将泄洪流量提高至每秒700立方米",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pongolapoort Dam in South Africa increased its discharge rate to 700 m³/s on Saturday, 8 November"
+    },
+    {
+     "fact": "影响可能在公告后48小时内显现，马普托河水位可能继续上涨并达到峰值",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The directorate said the effects could be felt in Mozambique within 48 hours of the announcement, with the Maputo River expected to continue rising and potentially reach its peak during that period"
+    },
+    {
+     "fact": "洪水可能加剧河岸农田受灾并扰乱Catuane、Salamanga和Tinonganine的道路交通",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The increased flow could worsen flooding on riverside farmland and disrupt road traffic in Catuane, Salamanga and Tinonganine, in Matutuíne district, Maputo province, southern Mozambique"
+    }
+   ],
+   "uncertainties": [
+    "洪水实际影响程度尚未证实",
+    "水位峰值时间与高度为预测，尚未确认",
+    "目前仅单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_43976ef4175cc362",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}
