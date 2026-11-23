@@ -1,0 +1,119 @@
+{
+ "label": "Sf556418e",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3ae5547c50d32e97ce4f30946d841c5919d70b4b1d0d582195b54cff5a4197ca",
+ "tokens": {
+  "input_tokens": 2863,
+  "output_tokens": 511,
+  "total_tokens": 3374
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁走私汽油断供涨价，汽油商协会主席担忧局势恶化",
+   "summary_zh": "贝宁近日走私汽油价格上涨，据汽油商协会主席Henri Assogba称，原因可能是尼日利亚海关管理层变动导致对贝宁的燃油运输管控收紧、供应受阻。他称近一周无油品入境，科托努仅有一辆油罐车到货。他担忧若供应中断持续，局势可能进一步恶化；相关说法尚待核实。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "科托努",
+    "site": null,
+    "raw_text": "Cotonou, Bénin"
+   },
+   "key_facts": [
+    {
+     "fact": "贝宁近日走私汽油价格上涨，被归因于自尼日利亚供应困难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La hausse du prix de l’essence de contrebande observée ces derniers jours au Bénin serait liée aux difficultés d’approvisionnement depuis le Nigeria."
+    },
+    {
+     "fact": "汽油商协会主席称尼日利亚海关新负责人上任后加强了对输往贝宁的石油产品运输管控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la prise de fonction de nouveaux responsables à la douane nigériane aurait entraîné un durcissement des contrôles sur le transport des produits pétroliers vers le Bénin"
+    },
+    {
+     "fact": "他声称近一周没有油品进入贝宁，科托努仅有一辆油罐车到货",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "« Depuis près d’une semaine, aucun produit n’est rentré au Bénin »"
+    },
+    {
+     "fact": "他担忧若供应中断持续，后果可能在数周或数月内加重",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il redoute une aggravation de la situation si les perturbations persistent"
+    }
+   ],
+   "uncertainties": [
+    "涨价与供应中断的原因仅为汽油商协会主席单方面说法，尚未获官方或独立来源证实",
+    "尼日利亚海关管控收紧导致供应中断的说法有待核实",
+    "将国际市场紧张与尼日利亚市场扰动相联系的分析尚需与石油流通数据核对",
+    "目前仅一个来源（Fraternite）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 62
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "贝宁走私汽油断供涨价，汽油商协会主席担忧局势恶化",
+   "summary_zh": "贝宁近日走私汽油价格上涨，据汽油商协会主席Henri Assogba称，原因可能是尼日利亚海关管理层变动导致对贝宁的燃油运输管控收紧、供应受阻。他称近一周无油品入境，科托努仅有一辆油罐车到货。他担忧若供应中断持续，局势可能进一步恶化；相关说法尚待核实。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": "科托努",
+    "site": null,
+    "raw_text": "Cotonou, Bénin"
+   },
+   "key_facts": [
+    {
+     "fact": "贝宁近日走私汽油价格上涨，被归因于自尼日利亚供应困难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La hausse du prix de l’essence de contrebande observée ces derniers jours au Bénin serait liée aux difficultés d’approvisionnement depuis le Nigeria."
+    },
+    {
+     "fact": "汽油商协会主席称尼日利亚海关新负责人上任后加强了对输往贝宁的石油产品运输管控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la prise de fonction de nouveaux responsables à la douane nigériane aurait entraîné un durcissement des contrôles sur le transport des produits pétroliers vers le Bénin"
+    },
+    {
+     "fact": "他声称近一周没有油品进入贝宁，科托努仅有一辆油罐车到货",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "« Depuis près d’une semaine, aucun produit n’est rentré au Bénin »"
+    },
+    {
+     "fact": "他担忧若供应中断持续，后果可能在数周或数月内加重",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il redoute une aggravation de la situation si les perturbations persistent"
+    }
+   ],
+   "uncertainties": [
+    "涨价与供应中断的原因仅为汽油商协会主席单方面说法，尚未获官方或独立来源证实",
+    "尼日利亚海关管控收紧导致供应中断的说法有待核实",
+    "将国际市场紧张与尼日利亚市场扰动相联系的分析尚需与石油流通数据核对",
+    "目前仅一个来源（Fraternite）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 62
+  }
+ },
+ "event_id": "EVT_d0c89fa7f556418e",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

@@ -1,0 +1,136 @@
+{
+ "label": "Sc5e311c0",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c0a18724830a4c2e16912f074d680fc530e7a2c2aaf5c0b12cad293657e046fb",
+ "tokens": {
+  "input_tokens": 2863,
+  "output_tokens": 611,
+  "total_tokens": 3474
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"威廉王子是否支持某项长期倡议尚在考虑中，具体计划尚未宣布\", \"报道为单一来源（Benin Web TV），尚缺乏交叉验证\"]",
+    "after": "[\"威廉王子是否支持某项长期倡议尚在考虑中，具体计划尚未宣布\", \"报道为单一来源（Benin Web TV），尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "威廉王子关注英国军队性骚扰问题",
+   "summary_zh": "威尔士亲王威廉表示，他在过去一年中与英国陆军、皇家海军和皇家空军的女性军人交流，收集了她们遭遇不当言论和骚扰的证词，并已将相关关切转达给英国国防部门领导层。英国国防部2025年11月13日发布的官方调查显示，67%的女性正规军人在过去12个月内经历过至少一种性化行为，男性为34%。报道还提及19岁女兵Jaysley Beck于2021年自杀的案例，司法调查认定军方在处置其警报方面存在失职。",
+   "event_type": "other_security",
+   "country_iso3": "GBR",
+   "location": {
+    "country_iso3": "GBR",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Royaume-Uni"
+   },
+   "key_facts": [
+    {
+     "fact": "威廉王子称英国武装部队尚未为女性提供应有的安全与尊重条件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le prince William estime que les forces armées britanniques ne garantissent pas encore aux femmes les conditions de sécurité et de respect auxquelles elles ont droit."
+    },
+    {
+     "fact": "威廉王子过去一年会见了英国陆海空三军各军衔的女性军人并收集证词",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis un an, le prince de Galles a rencontré des femmes de tous grades dans l’armée de terre, la Royal Navy et la Royal Air Force"
+    },
+    {
+     "fact": "英国国防部2025年11月13日官方调查显示67%女性军人过去12个月经历过至少一种性化行为",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Parmi les femmes engagées dans les forces régulières, 67 % déclaraient avoir subi au moins un comportement sexualisé au cours des douze mois précédents, contre 34 % des hommes."
+    },
+    {
+     "fact": "19岁女兵Jaysley Beck于2021年自杀，司法调查认定军方处置其警报存在失职",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Jaysley Beck, une artilleuse de 19 ans morte par suicide en 2021 après avoir signalé des faits d’agression sexuelle"
+    },
+    {
+     "fact": "英国国防参谋长承认女性在军队的经历并非总符合机构要求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le maréchal de l’air Richard Knighton, reconnaît que l’expérience des femmes dans les forces armées n’a pas toujours été conforme aux exigences de l’institution"
+    }
+   ],
+   "uncertainties": [
+    "威廉王子是否支持某项长期倡议尚在考虑中，具体计划尚未宣布",
+    "报道为单一来源（Benin Web TV），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "威廉王子关注英国军队性骚扰问题",
+   "summary_zh": "威尔士亲王威廉表示，他在过去一年中与英国陆军、皇家海军和皇家空军的女性军人交流，收集了她们遭遇不当言论和骚扰的证词，并已将相关关切转达给英国国防部门领导层。英国国防部2025年11月13日发布的官方调查显示，67%的女性正规军人在过去12个月内经历过至少一种性化行为，男性为34%。报道还提及19岁女兵Jaysley Beck于2021年自杀的案例，司法调查认定军方在处置其警报方面存在失职。",
+   "event_type": "other_security",
+   "country_iso3": "GBR",
+   "location": {
+    "country_iso3": "GBR",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Royaume-Uni"
+   },
+   "key_facts": [
+    {
+     "fact": "威廉王子称英国武装部队尚未为女性提供应有的安全与尊重条件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le prince William estime que les forces armées britanniques ne garantissent pas encore aux femmes les conditions de sécurité et de respect auxquelles elles ont droit."
+    },
+    {
+     "fact": "威廉王子过去一年会见了英国陆海空三军各军衔的女性军人并收集证词",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis un an, le prince de Galles a rencontré des femmes de tous grades dans l’armée de terre, la Royal Navy et la Royal Air Force"
+    },
+    {
+     "fact": "英国国防部2025年11月13日官方调查显示67%女性军人过去12个月经历过至少一种性化行为",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Parmi les femmes engagées dans les forces régulières, 67 % déclaraient avoir subi au moins un comportement sexualisé au cours des douze mois précédents, contre 34 % des hommes."
+    },
+    {
+     "fact": "19岁女兵Jaysley Beck于2021年自杀，司法调查认定军方处置其警报存在失职",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Jaysley Beck, une artilleuse de 19 ans morte par suicide en 2021 après avoir signalé des faits d’agression sexuelle"
+    },
+    {
+     "fact": "英国国防参谋长承认女性在军队的经历并非总符合机构要求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le maréchal de l’air Richard Knighton, reconnaît que l’expérience des femmes dans les forces armées n’a pas toujours été conforme aux exigences de l’institution"
+    }
+   ],
+   "uncertainties": [
+    "威廉王子是否支持某项长期倡议尚在考虑中，具体计划尚未宣布",
+    "报道为单一来源（Benin Web TV），尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_1d4e4319c5e311c0",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

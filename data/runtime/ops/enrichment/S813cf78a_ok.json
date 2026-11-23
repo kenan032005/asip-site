@@ -1,0 +1,136 @@
+{
+ "label": "S813cf78a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b8c69ca09e710990c237ccf8e8058f8078d45b83721d8593a0e5c3e54057d882",
+ "tokens": {
+  "input_tokens": 2625,
+  "output_tokens": 573,
+  "total_tokens": 3198
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"遣返车队的具体启动日期尚未确定，仅称预计在2026年底前\", \"目前仅有一个来源（Le Pays Tchad）报道，尚缺乏交叉验证\"]",
+    "after": "[\"遣返车队的具体启动日期尚未确定，仅称预计在2026年底前\", \"目前仅有一个来源（Le Pays Tchad）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得与中非共和国：首批中非难民自愿返回预计在2026年底前启动",
+   "summary_zh": "据联合国难民署（HCR）调查，约6.1万名在乍得的中非难民表示希望返回祖国，首批自愿遣返车队预计在2026年底前组织。乍得、中非共和国与难民署三方委员会于11月4日在恩贾梅纳举行为期两天的会议，通过了行动的实际安排，包括各方责任、后勤与安全措施以及身份核查程序。乍得目前收容近14.7万名中非难民，首批行动预计涉及洛贡东部的难民。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N’Djaména"
+   },
+   "key_facts": [
+    {
+     "fact": "约6.1万名在乍得的中非难民表示希望返回祖国",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Environ 61 000 personnes ont exprimé le souhait de regagner leur pays, selon les enquêtes menées par le Haut-Commissariat des Nations unies pour les réfugiés (HCR)."
+    },
+    {
+     "fact": "三方委员会于11月4日在恩贾梅纳通过遣返行动的实际安排",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les modalités pratiques de cette opération ont été adoptées le 4 novembre à N’Djaména, à l’issue d’une première réunion de deux jours de la Commission tripartite"
+    },
+    {
+     "fact": "乍得目前收容近14.7万名中非难民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Tchad accueille actuellement près de 147 000 réfugiés centrafricains"
+    },
+    {
+     "fact": "首批遣返行动预计涉及洛贡东部的难民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans un premier temps, les opérations devraient concerner les réfugiés du Logone Oriental."
+    },
+    {
+     "fact": "遣返车队每批约200人，将用卡车运往中非境内的中转中心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les convois, qui compteront environ 200 personnes, seront acheminés par camion vers des centres de transit en territoire centrafricain."
+    }
+   ],
+   "uncertainties": [
+    "遣返车队的具体启动日期尚未确定，仅称预计在2026年底前",
+    "目前仅有一个来源（Le Pays Tchad）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得与中非共和国：首批中非难民自愿返回预计在2026年底前启动",
+   "summary_zh": "据联合国难民署（HCR）调查，约6.1万名在乍得的中非难民表示希望返回祖国，首批自愿遣返车队预计在2026年底前组织。乍得、中非共和国与难民署三方委员会于11月4日在恩贾梅纳举行为期两天的会议，通过了行动的实际安排，包括各方责任、后勤与安全措施以及身份核查程序。乍得目前收容近14.7万名中非难民，首批行动预计涉及洛贡东部的难民。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N’Djaména"
+   },
+   "key_facts": [
+    {
+     "fact": "约6.1万名在乍得的中非难民表示希望返回祖国",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Environ 61 000 personnes ont exprimé le souhait de regagner leur pays, selon les enquêtes menées par le Haut-Commissariat des Nations unies pour les réfugiés (HCR)."
+    },
+    {
+     "fact": "三方委员会于11月4日在恩贾梅纳通过遣返行动的实际安排",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les modalités pratiques de cette opération ont été adoptées le 4 novembre à N’Djaména, à l’issue d’une première réunion de deux jours de la Commission tripartite"
+    },
+    {
+     "fact": "乍得目前收容近14.7万名中非难民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Tchad accueille actuellement près de 147 000 réfugiés centrafricains"
+    },
+    {
+     "fact": "首批遣返行动预计涉及洛贡东部的难民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans un premier temps, les opérations devraient concerner les réfugiés du Logone Oriental."
+    },
+    {
+     "fact": "遣返车队每批约200人，将用卡车运往中非境内的中转中心",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les convois, qui compteront environ 200 personnes, seront acheminés par camion vers des centres de transit en territoire centrafricain."
+    }
+   ],
+   "uncertainties": [
+    "遣返车队的具体启动日期尚未确定，仅称预计在2026年底前",
+    "目前仅有一个来源（Le Pays Tchad）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_052b8bb7813cf78a",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
