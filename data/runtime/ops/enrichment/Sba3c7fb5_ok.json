@@ -1,0 +1,115 @@
+{
+ "label": "Sba3c7fb5",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "4d92903ad84be8537cb05eee13478cdf1e6bb9692fbf0d574e18623d32fd29ff",
+ "tokens": {
+  "input_tokens": 2655,
+  "output_tokens": 522,
+  "total_tokens": 3177
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "几内亚举办西芒杜矿业峰会，科纳克里展现成为矿业大国雄心",
+   "summary_zh": "科纳克里于11月11日举办西芒杜矿业峰会，恰逢西芒杜项目启动一周年；该项目位于几内亚森林地区，号称世界最大铁矿。峰会持续至11月14日，地点选在卡萨岛。总统马马迪·敦布亚在会上强调几内亚不能仅出口原材料，未来将建设钢厂加工西芒杜铁矿。报道指出，基础设施建设和民众实际收益方面的成果仍难以量化。",
+   "event_type": "other_security",
+   "country_iso3": "GIN",
+   "location": {
+    "country_iso3": "GIN",
+    "admin1": null,
+    "city": "科纳克里",
+    "site": "卡萨岛",
+    "raw_text": "l’île de Kassa, Conakry"
+   },
+   "key_facts": [
+    {
+     "fact": "科纳克里于11月11日举办西芒杜矿业峰会，恰逢西芒杜项目启动一周年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Conakry inaugure ce mercredi 11 novembre le Simandou Mining Summit, un an jour pour jour après le lancement du projet Simandou"
+    },
+    {
+     "fact": "峰会于11月11日至14日在卡萨岛举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les organisateurs ont choisi l’île de Kassa pour accueillir cet événement qui se tiendra du 11 au 14 novembre"
+    },
+    {
+     "fact": "总统敦布亚表示几内亚不能仅出口原材料，未来将建钢厂加工西芒杜铁矿",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le chef de l'État, le général Mamadi Doumbouya, a insisté sur le fait que la Guinée ne peut pas se contenter d’exporter ses ressources brutes. Dans un futur proche, une aciérie viendra transformer ce fer du Simandou"
+    },
+    {
+     "fact": "报道称基础设施建设和民众实际收益方面的成果仍难以量化",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les résultats en termes d'infrastructures et de réelles retombées pour les populations sont encore difficilement quantifiables"
+    }
+   ],
+   "uncertainties": [
+    "基础设施建设和民众实际收益方面的成果仍难以量化",
+    "目前仅一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "几内亚举办西芒杜矿业峰会，科纳克里展现成为矿业大国雄心",
+   "summary_zh": "科纳克里于11月11日举办西芒杜矿业峰会，恰逢西芒杜项目启动一周年；该项目位于几内亚森林地区，号称世界最大铁矿。峰会持续至11月14日，地点选在卡萨岛。总统马马迪·敦布亚在会上强调几内亚不能仅出口原材料，未来将建设钢厂加工西芒杜铁矿。报道指出，基础设施建设和民众实际收益方面的成果仍难以量化。",
+   "event_type": "other_security",
+   "country_iso3": "GIN",
+   "location": {
+    "country_iso3": "GIN",
+    "admin1": null,
+    "city": "科纳克里",
+    "site": "卡萨岛",
+    "raw_text": "l’île de Kassa, Conakry"
+   },
+   "key_facts": [
+    {
+     "fact": "科纳克里于11月11日举办西芒杜矿业峰会，恰逢西芒杜项目启动一周年",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Conakry inaugure ce mercredi 11 novembre le Simandou Mining Summit, un an jour pour jour après le lancement du projet Simandou"
+    },
+    {
+     "fact": "峰会于11月11日至14日在卡萨岛举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les organisateurs ont choisi l’île de Kassa pour accueillir cet événement qui se tiendra du 11 au 14 novembre"
+    },
+    {
+     "fact": "总统敦布亚表示几内亚不能仅出口原材料，未来将建钢厂加工西芒杜铁矿",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le chef de l'État, le général Mamadi Doumbouya, a insisté sur le fait que la Guinée ne peut pas se contenter d’exporter ses ressources brutes. Dans un futur proche, une aciérie viendra transformer ce fer du Simandou"
+    },
+    {
+     "fact": "报道称基础设施建设和民众实际收益方面的成果仍难以量化",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les résultats en termes d'infrastructures et de réelles retombées pour les populations sont encore difficilement quantifiables"
+    }
+   ],
+   "uncertainties": [
+    "基础设施建设和民众实际收益方面的成果仍难以量化",
+    "目前仅一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_c40cbfceba3c7fb5",
+ "disease_event_id": null,
+ "country_code": "GN"
+}
