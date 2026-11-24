@@ -1,0 +1,136 @@
+{
+ "label": "S1cac76a8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "7b62223e31403fa09658fe250f1a8d1c810abce5db01eefcdebd100314f65560",
+ "tokens": {
+  "input_tokens": 2491,
+  "output_tokens": 565,
+  "total_tokens": 3056
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"数据仅来自中国海关，目前仅一个来源（Alwihda Info）报道，尚缺乏交叉验证\", \"报道未说明出口激增对当地安全或治理的具体影响\"]",
+    "after": "[\"数据仅来自中国海关，目前仅一个来源（Alwihda Info）报道，尚缺乏交叉验证\", \"报道未说明出口激增对当地安全或治理的具体影响\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得对华石油出口激增逾350%",
+   "summary_zh": "据中国海关数据，2026年1月至9月，中国自乍得进口额达15亿美元，较2025年同期的约3.19亿美元增长358.4%。出口以原油为主，辅以阿拉伯胶，乍得对华贸易顺差创历史新高。报道称油价上涨与出口量增加是主要推动因素，中国石油天然气集团公司（CNPC）在乍得石油行业中扮演核心角色。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年1月至9月中国自乍得进口额达15亿美元，同比增长358.4%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les importations de Pékin en provenance du Tchad ont atteint 1,5 milliard de dollars de janvier à septembre 2026, contre environ 319 millions de dollars pour la même période en 2025. Cette progression représente une hausse de 358,4 %."
+    },
+    {
+     "fact": "2026年上半年乍得对华出口从2.21亿美元增至10.56亿美元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les exportations tchadiennes vers la Chine ont bondi de 221 millions à 1,056 milliard de dollars, soit une multiplication par près de cinq (+378 %)"
+    },
+    {
+     "fact": "乍得对华贸易顺差达7.385亿美元，创历史纪录",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Tchad dégage ainsi un excédent commercial record de 738,5 millions de dollars avec la Chine"
+    },
+    {
+     "fact": "出口以原油为主，辅以阿拉伯胶",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces flux sont ultra-dominés par le pétrole brut, complétés par des volumes de gomme arabique."
+    },
+    {
+     "fact": "中国石油天然气集团公司（CNPC）及其子公司在乍得石油行业扮演核心角色",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la China National Petroleum Corporation (CNPC) et ses filiales jouent un rôle central. Acteur dominant du secteur pétrolier tchadien"
+    }
+   ],
+   "uncertainties": [
+    "数据仅来自中国海关，目前仅一个来源（Alwihda Info）报道，尚缺乏交叉验证",
+    "报道未说明出口激增对当地安全或治理的具体影响"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得对华石油出口激增逾350%",
+   "summary_zh": "据中国海关数据，2026年1月至9月，中国自乍得进口额达15亿美元，较2025年同期的约3.19亿美元增长358.4%。出口以原油为主，辅以阿拉伯胶，乍得对华贸易顺差创历史新高。报道称油价上涨与出口量增加是主要推动因素，中国石油天然气集团公司（CNPC）在乍得石油行业中扮演核心角色。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年1月至9月中国自乍得进口额达15亿美元，同比增长358.4%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les importations de Pékin en provenance du Tchad ont atteint 1,5 milliard de dollars de janvier à septembre 2026, contre environ 319 millions de dollars pour la même période en 2025. Cette progression représente une hausse de 358,4 %."
+    },
+    {
+     "fact": "2026年上半年乍得对华出口从2.21亿美元增至10.56亿美元",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les exportations tchadiennes vers la Chine ont bondi de 221 millions à 1,056 milliard de dollars, soit une multiplication par près de cinq (+378 %)"
+    },
+    {
+     "fact": "乍得对华贸易顺差达7.385亿美元，创历史纪录",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Tchad dégage ainsi un excédent commercial record de 738,5 millions de dollars avec la Chine"
+    },
+    {
+     "fact": "出口以原油为主，辅以阿拉伯胶",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ces flux sont ultra-dominés par le pétrole brut, complétés par des volumes de gomme arabique."
+    },
+    {
+     "fact": "中国石油天然气集团公司（CNPC）及其子公司在乍得石油行业扮演核心角色",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la China National Petroleum Corporation (CNPC) et ses filiales jouent un rôle central. Acteur dominant du secteur pétrolier tchadien"
+    }
+   ],
+   "uncertainties": [
+    "数据仅来自中国海关，目前仅一个来源（Alwihda Info）报道，尚缺乏交叉验证",
+    "报道未说明出口激增对当地安全或治理的具体影响",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_1e18e8841cac76a8",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

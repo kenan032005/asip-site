@@ -1,0 +1,127 @@
+{
+ "label": "Sa04dd1a0",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "3f6c4137872adac60cae867fca4a7d91c5df6102485470a3515f7e0f0b9bffcf",
+ "tokens": {
+  "input_tokens": 2944,
+  "output_tokens": 637,
+  "total_tokens": 3581
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "意大利312所学校因炸弹威胁被疏散",
+   "summary_zh": "据贝宁Web TV报道，意大利于2026年11月11日疏散了312所学校，原因是有人发送电子邮件声称校内安放了炸弹。罗马、都灵、那不勒斯和米兰等多座城市进行了检查，未发现爆炸物。北爱尔兰也有300多所学校报告收到类似威胁邮件，当地警方初步调查后将其列为虚假警报，认为对公众风险较低。意大利总理梅洛尼表示未发现具体危险，并召集安全协调会议。",
+   "event_type": "terrorism",
+   "country_iso3": "ITA",
+   "location": {
+    "country_iso3": "ITA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Italie, notamment Rome, Turin, Naples et Milan"
+   },
+   "key_facts": [
+    {
+     "fact": "意大利疏散312所学校，原因是有邮件声称校内安放了炸弹",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’Italie a procédé mercredi 11 novembre 2026 à l’évacuation de 312 établissements scolaires après l’envoi de courriels annonçant la présence de bombes."
+    },
+    {
+     "fact": "罗马、都灵、那不勒斯和米兰等城市进行检查，未发现爆炸物",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des inspections ont été conduites dans plusieurs villes, notamment à Rome, Turin, Naples et Milan, sans découverte d’explosifs dans les lieux contrôlés."
+    },
+    {
+     "fact": "匿名邮件声称安放了遥控装置，并包含针对总理梅洛尼的威胁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le message anonyme, adressé à de nombreux chefs d’établissement, prétendait qu’un engin télécommandé avait été placé dans leurs locaux. Il contenait aussi une menace visant la Première ministre italienne Giorgia Meloni."
+    },
+    {
+     "fact": "北爱尔兰超过300所学校报告收到威胁邮件，警方将其列为虚假警报",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En Irlande du Nord, plus de 300 écoles ont signalé à la police la réception d’un courriel menaçant le même jour. Le Police Service of Northern Ireland a classé le message parmi les fausses alertes après ses premières investigations et évalué le risque pour le public comme faible."
+    },
+    {
+     "fact": "梅洛尼表示未发现具体危险，并召集协调会议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Giorgia Meloni a indiqué qu’aucun danger concret n’avait été identifié. La cheffe du gouvernement a convoqué pour mercredi à 16 heures une réunion de coordination à Rome"
+    }
+   ],
+   "uncertainties": [
+    "威胁邮件的发送者身份尚未确认",
+    "邮件所称炸弹装置是否真实存在尚未证实",
+    "目前仅有一个来源（贝宁Web TV）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "意大利312所学校因炸弹威胁被疏散",
+   "summary_zh": "据贝宁Web TV报道，意大利于2026年11月11日疏散了312所学校，原因是有人发送电子邮件声称校内安放了炸弹。罗马、都灵、那不勒斯和米兰等多座城市进行了检查，未发现爆炸物。北爱尔兰也有300多所学校报告收到类似威胁邮件，当地警方初步调查后将其列为虚假警报，认为对公众风险较低。意大利总理梅洛尼表示未发现具体危险，并召集安全协调会议。",
+   "event_type": "terrorism",
+   "country_iso3": "ITA",
+   "location": {
+    "country_iso3": "ITA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "Italie, notamment Rome, Turin, Naples et Milan"
+   },
+   "key_facts": [
+    {
+     "fact": "意大利疏散312所学校，原因是有邮件声称校内安放了炸弹",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’Italie a procédé mercredi 11 novembre 2026 à l’évacuation de 312 établissements scolaires après l’envoi de courriels annonçant la présence de bombes."
+    },
+    {
+     "fact": "罗马、都灵、那不勒斯和米兰等城市进行检查，未发现爆炸物",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des inspections ont été conduites dans plusieurs villes, notamment à Rome, Turin, Naples et Milan, sans découverte d’explosifs dans les lieux contrôlés."
+    },
+    {
+     "fact": "匿名邮件声称安放了遥控装置，并包含针对总理梅洛尼的威胁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le message anonyme, adressé à de nombreux chefs d’établissement, prétendait qu’un engin télécommandé avait été placé dans leurs locaux. Il contenait aussi une menace visant la Première ministre italienne Giorgia Meloni."
+    },
+    {
+     "fact": "北爱尔兰超过300所学校报告收到威胁邮件，警方将其列为虚假警报",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "En Irlande du Nord, plus de 300 écoles ont signalé à la police la réception d’un courriel menaçant le même jour. Le Police Service of Northern Ireland a classé le message parmi les fausses alertes après ses premières investigations et évalué le risque pour le public comme faible."
+    },
+    {
+     "fact": "梅洛尼表示未发现具体危险，并召集协调会议",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Giorgia Meloni a indiqué qu’aucun danger concret n’avait été identifié. La cheffe du gouvernement a convoqué pour mercredi à 16 heures une réunion de coordination à Rome"
+    }
+   ],
+   "uncertainties": [
+    "威胁邮件的发送者身份尚未确认",
+    "邮件所称炸弹装置是否真实存在尚未证实",
+    "目前仅有一个来源（贝宁Web TV）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_99a63afda04dd1a0",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
