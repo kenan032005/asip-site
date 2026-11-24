@@ -1,0 +1,111 @@
+{
+ "label": "Sddf688d9",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0bf5f0356a5c812921da1e3fbb1224cdebdea90ef6efc334c1c7a0291fe474c8",
+ "tokens": {
+  "input_tokens": 2411,
+  "output_tokens": 410,
+  "total_tokens": 2821
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[]",
+    "after": "[\"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "私营部门承诺6500万美元用于降低尼日利亚孕产妇死亡",
+   "summary_zh": "尼日利亚联邦政府表示，私营部门合作伙伴已承诺提供6500万美元现金和实物捐助，用于支持降低尼日利亚孕产妇和新生儿死亡的努力。卫生和社会福利统筹部长穆罕默德·帕特在阿布贾举行的孕产妇死亡率降低创新倡议（MAMII）私营部门契约平台启动仪式上宣布了这一消息。该平台由政府主导，并得到世界经济论坛、盖茨基金会、MTN基金会和MSD for Mothers的支持。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "私营部门合作伙伴承诺提供6500万美元现金和实物捐助，用于降低尼日利亚孕产妇和新生儿死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "private sector partners have committed 65 million dollars in cash and in-kind contributions to support efforts to reduce maternal and newborn deaths in Nigeria"
+    },
+    {
+     "fact": "卫生和社会福利统筹部长穆罕默德·帕特在阿布贾举行的MAMII私营部门契约平台启动仪式上宣布了这一消息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Coordinating Minister of Health and Social Welfare, Prof. Muhammad Pate, said this on Wednesday in Abuja during inauguration of the Maternal Mortality Reduction Innovation Initiative (MAMII) Private Sector Compact platform"
+    },
+    {
+     "fact": "该契约平台由政府主导，并得到世界经济论坛、盖茨基金会、MTN基金会和MSD for Mothers的支持",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The government-led compact, supported by the World Economic Forum, Gates Foundation, MTN Foundation and MSD for Mothers"
+    }
+   ],
+   "uncertainties": [],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "私营部门承诺6500万美元用于降低尼日利亚孕产妇死亡",
+   "summary_zh": "尼日利亚联邦政府表示，私营部门合作伙伴已承诺提供6500万美元现金和实物捐助，用于支持降低尼日利亚孕产妇和新生儿死亡的努力。卫生和社会福利统筹部长穆罕默德·帕特在阿布贾举行的孕产妇死亡率降低创新倡议（MAMII）私营部门契约平台启动仪式上宣布了这一消息。该平台由政府主导，并得到世界经济论坛、盖茨基金会、MTN基金会和MSD for Mothers的支持。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "私营部门合作伙伴承诺提供6500万美元现金和实物捐助，用于降低尼日利亚孕产妇和新生儿死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "private sector partners have committed 65 million dollars in cash and in-kind contributions to support efforts to reduce maternal and newborn deaths in Nigeria"
+    },
+    {
+     "fact": "卫生和社会福利统筹部长穆罕默德·帕特在阿布贾举行的MAMII私营部门契约平台启动仪式上宣布了这一消息",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Coordinating Minister of Health and Social Welfare, Prof. Muhammad Pate, said this on Wednesday in Abuja during inauguration of the Maternal Mortality Reduction Innovation Initiative (MAMII) Private Sector Compact platform"
+    },
+    {
+     "fact": "该契约平台由政府主导，并得到世界经济论坛、盖茨基金会、MTN基金会和MSD for Mothers的支持",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The government-led compact, supported by the World Economic Forum, Gates Foundation, MTN Foundation and MSD for Mothers"
+    }
+   ],
+   "uncertainties": [
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_afb5af47ddf688d9",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
