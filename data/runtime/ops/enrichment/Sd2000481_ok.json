@@ -1,0 +1,125 @@
+{
+ "label": "Sd2000481",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "9bab97b4404d496a81b81857f6387c9bb466e10e28afb362416332c0d755db4f",
+ "tokens": {
+  "input_tokens": 2987,
+  "output_tokens": 489,
+  "total_tokens": 3476
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "津德尔跨地区司法警察局捣毁四个犯罪团伙",
+   "summary_zh": "尼日尔津德尔跨地区司法警察局成功捣毁四个犯罪团伙，这些团伙分别涉嫌假钞贩运、毒品贩运和诈骗。警方于11月10日向媒体展示了涉案人员。据警方官员称，调查揭示了这些团伙的作案手法，包括利用儿童藏匿假钞、盗取汇款公司账户资金以及冒充身份实施电信诈骗等。警方在行动中缴获假钞、毒品和手机等物品。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "津德尔",
+    "city": "津德尔",
+    "site": null,
+    "raw_text": "Zinder"
+   },
+   "key_facts": [
+    {
+     "fact": "津德尔跨地区司法警察局捣毁四个犯罪团伙",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les éléments du Service inter-régional de la police judiciaire de Zinder ont réussi à démanteler quatre réseaux de malfaiteurs"
+    },
+    {
+     "fact": "这些团伙涉嫌假钞贩运、毒品贩运和诈骗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "spécialisés dans le trafic de faux billets, de stupéfiants et l’escroquerie"
+    },
+    {
+     "fact": "警方于11月10日向媒体展示涉案人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils ont été présentés ce mardi 10 novembre aux médias"
+    },
+    {
+     "fact": "警方缴获30万西非法郎假钞及毒品等物品",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une somme de 300.000 FCFA en coupures de faux billets"
+    },
+    {
+     "fact": "一名被指冒充身份实施电信诈骗的退役安全部队人员被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un agent des FDS révoqué, présumé-auteur d’escroquerie par un moyen de communication téléphonique avec usurpation d’identité"
+    }
+   ],
+   "uncertainties": [
+    "案件详情仅来自尼日尔官方通讯社单一来源，尚未获得交叉验证",
+    "涉案人员的司法处理结果尚未公布"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "津德尔跨地区司法警察局捣毁四个犯罪团伙",
+   "summary_zh": "尼日尔津德尔跨地区司法警察局成功捣毁四个犯罪团伙，这些团伙分别涉嫌假钞贩运、毒品贩运和诈骗。警方于11月10日向媒体展示了涉案人员。据警方官员称，调查揭示了这些团伙的作案手法，包括利用儿童藏匿假钞、盗取汇款公司账户资金以及冒充身份实施电信诈骗等。警方在行动中缴获假钞、毒品和手机等物品。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "津德尔",
+    "city": "津德尔",
+    "site": null,
+    "raw_text": "Zinder"
+   },
+   "key_facts": [
+    {
+     "fact": "津德尔跨地区司法警察局捣毁四个犯罪团伙",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les éléments du Service inter-régional de la police judiciaire de Zinder ont réussi à démanteler quatre réseaux de malfaiteurs"
+    },
+    {
+     "fact": "这些团伙涉嫌假钞贩运、毒品贩运和诈骗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "spécialisés dans le trafic de faux billets, de stupéfiants et l’escroquerie"
+    },
+    {
+     "fact": "警方于11月10日向媒体展示涉案人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils ont été présentés ce mardi 10 novembre aux médias"
+    },
+    {
+     "fact": "警方缴获30万西非法郎假钞及毒品等物品",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "une somme de 300.000 FCFA en coupures de faux billets"
+    },
+    {
+     "fact": "一名被指冒充身份实施电信诈骗的退役安全部队人员被捕",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un agent des FDS révoqué, présumé-auteur d’escroquerie par un moyen de communication téléphonique avec usurpation d’identité"
+    }
+   ],
+   "uncertainties": [
+    "案件详情仅来自尼日尔官方通讯社单一来源，尚未获得交叉验证",
+    "涉案人员的司法处理结果尚未公布"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_929caacad2000481",
+ "disease_event_id": null,
+ "country_code": "NE"
+}

@@ -1,0 +1,117 @@
+{
+ "label": "S6d4910c0",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c2de80cef2d20b85a8b4a29a3159563435acfc1d616172f1545d10adf3e86053",
+ "tokens": {
+  "input_tokens": 2300,
+  "output_tokens": 517,
+  "total_tokens": 2817
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔卡兰古电台2026年11月12日节目：土地获取、环境宣传与蒂拉贝里流离失所者共处",
+   "summary_zh": "尼日尔卡兰古电台2026年11月12日播出的节目讨论了尼日尔土地获取与土地权保障问题，并采访了农村法规部门的Maman Sani Amadou。环境栏目回顾了11月6日在尼亚美Bravia酒店由尼日尔环境青年志愿者组织举办的论坛，该论坛被介绍为COP31的筹备会议。节目还提到蒂拉贝里地区多个地点的不安全局势导致数千人流离失所，该地区首府多年来接收来自不同地区的流离失所者。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "Tillabéri",
+    "city": null,
+    "site": null,
+    "raw_text": "Tillabéry"
+   },
+   "key_facts": [
+    {
+     "fact": "蒂拉贝里地区多个地点的不安全局势导致数千人流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’Écho des régions nous conduit ensuite à Tillabéry, où l’insécurité dans plusieurs localités a provoqué le déplacement de milliers de personnes."
+    },
+    {
+     "fact": "蒂拉贝里地区首府多年来接收来自不同地区的流离失所者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le chef-lieu de la région accueille depuis plusieurs années des populations déplacées venues de différentes zones."
+    },
+    {
+     "fact": "节目讨论尼日尔土地获取与土地权保障问题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "nous abordons l’accès à la terre et la sécurisation foncière au Niger"
+    },
+    {
+     "fact": "尼亚美举办被介绍为COP31筹备会议的环境论坛",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Présentée comme une rencontre préparatoire à la COP31, cette initiative a permis d’aborder les enjeux environnementaux"
+    }
+   ],
+   "uncertainties": [
+    "蒂拉贝里地区流离失所者人数仅为“数千人”的笼统表述，未提供具体数字",
+    "不安全局势的具体地点和性质未在文中说明",
+    "目前仅有一个来源（Studio Kalangou），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 60
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔卡兰古电台2026年11月12日节目：土地获取、环境宣传与蒂拉贝里流离失所者共处",
+   "summary_zh": "尼日尔卡兰古电台2026年11月12日播出的节目讨论了尼日尔土地获取与土地权保障问题，并采访了农村法规部门的Maman Sani Amadou。环境栏目回顾了11月6日在尼亚美Bravia酒店由尼日尔环境青年志愿者组织举办的论坛，该论坛被介绍为COP31的筹备会议。节目还提到蒂拉贝里地区多个地点的不安全局势导致数千人流离失所，该地区首府多年来接收来自不同地区的流离失所者。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "Tillabéri",
+    "city": null,
+    "site": null,
+    "raw_text": "Tillabéry"
+   },
+   "key_facts": [
+    {
+     "fact": "蒂拉贝里地区多个地点的不安全局势导致数千人流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’Écho des régions nous conduit ensuite à Tillabéry, où l’insécurité dans plusieurs localités a provoqué le déplacement de milliers de personnes."
+    },
+    {
+     "fact": "蒂拉贝里地区首府多年来接收来自不同地区的流离失所者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le chef-lieu de la région accueille depuis plusieurs années des populations déplacées venues de différentes zones."
+    },
+    {
+     "fact": "节目讨论尼日尔土地获取与土地权保障问题",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "nous abordons l’accès à la terre et la sécurisation foncière au Niger"
+    },
+    {
+     "fact": "尼亚美举办被介绍为COP31筹备会议的环境论坛",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Présentée comme une rencontre préparatoire à la COP31, cette initiative a permis d’aborder les enjeux environnementaux"
+    }
+   ],
+   "uncertainties": [
+    "蒂拉贝里地区流离失所者人数仅为“数千人”的笼统表述，未提供具体数字",
+    "不安全局势的具体地点和性质未在文中说明",
+    "目前仅有一个来源（Studio Kalangou），尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 60
+  }
+ },
+ "event_id": "EVT_dc4f60cb6d4910c0",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
