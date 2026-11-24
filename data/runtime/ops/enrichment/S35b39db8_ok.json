@@ -1,0 +1,129 @@
+{
+ "label": "S35b39db8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "327d15e36a59bb87c7495aa7326f3153ae2cba78ddf62036ef8c7fc955566488",
+ "tokens": {
+  "input_tokens": 2429,
+  "output_tokens": 569,
+  "total_tokens": 2998
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹坦布拉县SPLM初选投票遭枪击干扰",
+   "summary_zh": "南苏丹西赤道州坦布拉县执政党SPLM初选投票期间发生枪击，约71名代表逃离投票现场未能投票。当地官员称枪击似意在恐吓选民、扰乱投票，而非直接袭击投票站。西赤道州信息部长指认疑似苏丹人民解放军反对派（SPLA-IO）武装发动射击，但SPLA-IO方面未予回应。官方称无人员受伤，局势已于当日下午恢复正常。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "西赤道州",
+    "city": "坦布拉县",
+    "site": "自由广场附近投票点",
+    "raw_text": "Tambura County, Western Equatoria State"
+   },
+   "key_facts": [
+    {
+     "fact": "坦布拉县SPLM初选投票期间发生枪击，71名代表逃离未能投票",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Gunfire disrupted voting in the ruling SPLM primaries in Tambura County, Western Equatoria State, on Wednesday, forcing 71 delegates to flee without voting"
+    },
+    {
+     "fact": "枪击发生在投票点约一英里外，时间约为上午11时30分",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the shooting occurred at around 11:30 a.m., about one mile from Freedom Square, where the voting was taking place"
+    },
+    {
+     "fact": "西赤道州信息部长指认疑似SPLA-IO武装发动射击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Western Equatoria State Information Minister Noah Issah Philip blamed suspected Sudan People’s Liberation Army in Opposition (SPLA-IO) forces for the shooting"
+    },
+    {
+     "fact": "官方称无人员受伤，局势于当日下午恢复正常",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "No injuries were reported, and the situation returned to normal by the afternoon"
+    },
+    {
+     "fact": "枪击前一日社交媒体出现自称SPLA-IO成员的袭击警告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The shooting followed warnings circulated on social media on Tuesday by individuals identifying themselves as members of the SPLA-IO"
+    }
+   ],
+   "uncertainties": [
+    "枪击发动方身份尚未证实，SPLA-IO方面未予回应",
+    "枪击具体时间说法不一：县长称约11时30分，州信息部长称约11时",
+    "枪击动机为恐吓选民属官员判断，尚未获独立证实",
+    "目前仅单一来源（Radio Tamazuj）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹坦布拉县SPLM初选投票遭枪击干扰",
+   "summary_zh": "南苏丹西赤道州坦布拉县执政党SPLM初选投票期间发生枪击，约71名代表逃离投票现场未能投票。当地官员称枪击似意在恐吓选民、扰乱投票，而非直接袭击投票站。西赤道州信息部长指认疑似苏丹人民解放军反对派（SPLA-IO）武装发动射击，但SPLA-IO方面未予回应。官方称无人员受伤，局势已于当日下午恢复正常。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "西赤道州",
+    "city": "坦布拉县",
+    "site": "自由广场附近投票点",
+    "raw_text": "Tambura County, Western Equatoria State"
+   },
+   "key_facts": [
+    {
+     "fact": "坦布拉县SPLM初选投票期间发生枪击，71名代表逃离未能投票",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Gunfire disrupted voting in the ruling SPLM primaries in Tambura County, Western Equatoria State, on Wednesday, forcing 71 delegates to flee without voting"
+    },
+    {
+     "fact": "枪击发生在投票点约一英里外，时间约为上午11时30分",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the shooting occurred at around 11:30 a.m., about one mile from Freedom Square, where the voting was taking place"
+    },
+    {
+     "fact": "西赤道州信息部长指认疑似SPLA-IO武装发动射击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Western Equatoria State Information Minister Noah Issah Philip blamed suspected Sudan People’s Liberation Army in Opposition (SPLA-IO) forces for the shooting"
+    },
+    {
+     "fact": "官方称无人员受伤，局势于当日下午恢复正常",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "No injuries were reported, and the situation returned to normal by the afternoon"
+    },
+    {
+     "fact": "枪击前一日社交媒体出现自称SPLA-IO成员的袭击警告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The shooting followed warnings circulated on social media on Tuesday by individuals identifying themselves as members of the SPLA-IO"
+    }
+   ],
+   "uncertainties": [
+    "枪击发动方身份尚未证实，SPLA-IO方面未予回应",
+    "枪击具体时间说法不一：县长称约11时30分，州信息部长称约11时",
+    "枪击动机为恐吓选民属官员判断，尚未获独立证实",
+    "目前仅单一来源（Radio Tamazuj）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_160efef335b39db8",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

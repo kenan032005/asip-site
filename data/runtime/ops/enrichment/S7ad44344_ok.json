@@ -1,0 +1,126 @@
+{
+ "label": "S7ad44344",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "66d27edd863e1c6b3ff9f7feb4ff33bac9bf3bf33ad0bca64590d33e33f74a9d",
+ "tokens": {
+  "input_tokens": 2004,
+  "output_tokens": 417,
+  "total_tokens": 2421
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"起火原因是否为燃气爆炸尚未证实，报道仅称“据报”发生燃气爆炸\", \"目前仅单一来源（Punch）报道，尚缺乏交叉验证\"]",
+    "after": "[\"起火原因是否为燃气爆炸尚未证实，报道仅称“据报”发生燃气爆炸\", \"目前仅单一来源（Punch）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "拉各斯一辆CNG公交车起火，17人获救、1人受伤",
+   "summary_zh": "尼日利亚拉各斯-伊巴丹高速公路上，一辆以压缩天然气（CNG）为动力的商业巴士在Berger公交站起火，拉各斯州交通管理局救出17人。一名乘客严重烧伤。据报，起火前发生了燃气爆炸，事发时车上共有18人（含司机）。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "拉各斯州",
+    "city": "拉各斯",
+    "site": "Berger Bus Stop（拉各斯-伊巴丹高速公路拉各斯方向路段）",
+    "raw_text": "Berger Bus Stop on the Lagos-bound section of the Lagos-Ibadan Expressway"
+   },
+   "key_facts": [
+    {
+     "fact": "一辆CNG动力商业巴士在拉各斯-伊巴丹高速公路Berger公交站起火",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a Compressed Natural Gas-powered commercial bus caught fire following a reported gas explosion along the Lagos-Ibadan Expressway"
+    },
+    {
+     "fact": "拉各斯州交通管理局救出17人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Lagos State Traffic Management Authority has rescued 17 people"
+    },
+    {
+     "fact": "一名乘客严重烧伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "One other passenger sustained severe burn injuries in the incident"
+    },
+    {
+     "fact": "事发时车上共有18人（含司机）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the bus, with registration number EKY 798 YK, was conveying 18 occupants, including the driver"
+    }
+   ],
+   "uncertainties": [
+    "起火原因是否为燃气爆炸尚未证实，报道仅称“据报”发生燃气爆炸",
+    "目前仅单一来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "拉各斯一辆CNG公交车起火，17人获救、1人受伤",
+   "summary_zh": "尼日利亚拉各斯-伊巴丹高速公路上，一辆以压缩天然气（CNG）为动力的商业巴士在Berger公交站起火，拉各斯州交通管理局救出17人。一名乘客严重烧伤。据报，起火前发生了燃气爆炸，事发时车上共有18人（含司机）。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "拉各斯州",
+    "city": "拉各斯",
+    "site": "Berger Bus Stop（拉各斯-伊巴丹高速公路拉各斯方向路段）",
+    "raw_text": "Berger Bus Stop on the Lagos-bound section of the Lagos-Ibadan Expressway"
+   },
+   "key_facts": [
+    {
+     "fact": "一辆CNG动力商业巴士在拉各斯-伊巴丹高速公路Berger公交站起火",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a Compressed Natural Gas-powered commercial bus caught fire following a reported gas explosion along the Lagos-Ibadan Expressway"
+    },
+    {
+     "fact": "拉各斯州交通管理局救出17人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Lagos State Traffic Management Authority has rescued 17 people"
+    },
+    {
+     "fact": "一名乘客严重烧伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "One other passenger sustained severe burn injuries in the incident"
+    },
+    {
+     "fact": "事发时车上共有18人（含司机）",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the bus, with registration number EKY 798 YK, was conveying 18 occupants, including the driver"
+    }
+   ],
+   "uncertainties": [
+    "起火原因是否为燃气爆炸尚未证实，报道仅称“据报”发生燃气爆炸",
+    "目前仅单一来源（Punch）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_dbe169cf7ad44344",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
