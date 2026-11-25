@@ -1,0 +1,125 @@
+{
+ "label": "S38ef2f61",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c33ecdd893fa1e6922cd7d29881b7b8b09bf1f0c10f2f26ec77a3a2f8df054c3",
+ "tokens": {
+  "input_tokens": 2277,
+  "output_tokens": 563,
+  "total_tokens": 2840
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得：受伤校警的诉讼被裁定不予起诉，开枪者仍下落不明",
+   "summary_zh": "乍得法尔查（Farcha）一所中学的校警遭一名被开除学生用自动武器射击受伤，其家属提起的诉讼已被检方裁定不予起诉。涉案的21岁学生目前仍下落不明，警方正由司法警察协调部门展开搜捕。受伤校警仍在住院，家属要求逮捕嫌疑人并将其绳之以法。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": "法尔查（Farcha）Mamadou Sidibe中学",
+    "raw_text": "lycée Mamadou Sidibe de Farcha, N'Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得法尔查一所中学的校警遭一名被开除学生用自动武器射击受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la plainte portée par la famille du surveillant blessé par des tirs d'arme automatique, effectués par un élève exclu de la cour du lycée Mamadou Sidibe de Farcha"
+    },
+    {
+     "fact": "检方已裁定对该家属的诉讼不予起诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le quatrième substitut du procureur de la République a classé sans suite la plainte portée par la famille du surveillant blessé"
+    },
+    {
+     "fact": "涉案的21岁学生目前仍下落不明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À N'Djamena, l'élève de 21 ans qui a ouvert le feu sur le surveillant demeure introuvable"
+    },
+    {
+     "fact": "警方在Djarmaya等地展开调查，但未能找到嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les investigations menées notamment à Djarmaya, où le téléphone du suspect avait été localisé avec l'appui des opérateurs de téléphonie mobile, n'ont pas permis de le retrouver"
+    },
+    {
+     "fact": "受伤校警仍在住院，家属要求逮捕嫌疑人并将其绳之以法",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la famille du surveillant, qui reste hospitalisé, exige l'arrestation du suspect et sa traduction en justice"
+    }
+   ],
+   "uncertainties": [
+    "嫌疑人下落尚未确认，仍在搜捕中",
+    "案件目前仅有一个来源（Alwihda Info）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得：受伤校警的诉讼被裁定不予起诉，开枪者仍下落不明",
+   "summary_zh": "乍得法尔查（Farcha）一所中学的校警遭一名被开除学生用自动武器射击受伤，其家属提起的诉讼已被检方裁定不予起诉。涉案的21岁学生目前仍下落不明，警方正由司法警察协调部门展开搜捕。受伤校警仍在住院，家属要求逮捕嫌疑人并将其绳之以法。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": "法尔查（Farcha）Mamadou Sidibe中学",
+    "raw_text": "lycée Mamadou Sidibe de Farcha, N'Djamena"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得法尔查一所中学的校警遭一名被开除学生用自动武器射击受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la plainte portée par la famille du surveillant blessé par des tirs d'arme automatique, effectués par un élève exclu de la cour du lycée Mamadou Sidibe de Farcha"
+    },
+    {
+     "fact": "检方已裁定对该家属的诉讼不予起诉",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le quatrième substitut du procureur de la République a classé sans suite la plainte portée par la famille du surveillant blessé"
+    },
+    {
+     "fact": "涉案的21岁学生目前仍下落不明",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À N'Djamena, l'élève de 21 ans qui a ouvert le feu sur le surveillant demeure introuvable"
+    },
+    {
+     "fact": "警方在Djarmaya等地展开调查，但未能找到嫌疑人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les investigations menées notamment à Djarmaya, où le téléphone du suspect avait été localisé avec l'appui des opérateurs de téléphonie mobile, n'ont pas permis de le retrouver"
+    },
+    {
+     "fact": "受伤校警仍在住院，家属要求逮捕嫌疑人并将其绳之以法",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la famille du surveillant, qui reste hospitalisé, exige l'arrestation du suspect et sa traduction en justice"
+    }
+   ],
+   "uncertainties": [
+    "嫌疑人下落尚未确认，仍在搜捕中",
+    "案件目前仅有一个来源（Alwihda Info）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_f96bb4da38ef2f61",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
