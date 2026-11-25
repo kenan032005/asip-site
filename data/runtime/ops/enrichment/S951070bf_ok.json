@@ -1,0 +1,137 @@
+{
+ "label": "S951070bf",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b7046454a115cf84e590e2ad8ea20f0f448607c6ed84cf047cc8f245475d7b24",
+ "tokens": {
+  "input_tokens": 2786,
+  "output_tokens": 660,
+  "total_tokens": 3446
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "南苏丹：国际特赦组织谴责阿比耶姆诺姆屠杀中平民保护失败",
+   "summary_zh": "国际特赦组织于2026年11月12日发布报告，针对2026年3月1日发生在南苏丹鲁旺行政区的阿比耶姆诺姆屠杀事件，谴责联合国及南苏丹政府在保护平民方面的失职。据报告，来自团结州马约姆县邻区的数百名武装努尔族青年在清晨发动袭击，造成200多人死亡。国际特赦组织指出，当局与联合国南苏丹特派团（Minuss）在事发前数日已获知袭击正在筹备。南苏丹特派团发言人表示，该特派团曾对预警信号作出反应，并在袭击最激烈时在其基地内保护了2800人。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "鲁旺行政区",
+    "city": "阿比耶姆诺姆",
+    "site": null,
+    "raw_text": "Abiemnom, zone administrative de Ruweng, au nord du pays, près de la frontière avec le Soudan"
+   },
+   "key_facts": [
+    {
+     "fact": "国际特赦组织发布关于阿比耶姆诺姆屠杀的报告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’ONG Amnesty International publie ce jeudi 12 novembre 2026 un rapport sur le massacre d’Abiemnom début mars"
+    },
+    {
+     "fact": "阿比耶姆诺姆于2026年3月1日清晨遭数百名武装努尔族青年袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "attaquée au petit matin le 1er mars 2026, par des centaines de jeunes Nuer armés, venus du comté voisin de Mayom"
+    },
+    {
+     "fact": "袭击造成200多人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plus de 200 personnes ont été tuées"
+    },
+    {
+     "fact": "国际特赦组织谴责联合国及南苏丹政府未能履行保护平民的义务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Amnesty dénonce un échec au devoir de protection des civils de la part de l’ONU comme du gouvernement"
+    },
+    {
+     "fact": "南苏丹特派团称在袭击最激烈时在其基地内保护了2800人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "affirme avoir protégé 2 800 personnes au sein de sa base au plus fort de l’attaque"
+    },
+    {
+     "fact": "政府承诺的调查尚未进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’enquête promise par le gouvernement n’a toujours pas eu lieu"
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字（200多人）来自国际特赦组织报告，尚未获得独立交叉验证",
+    "事件目前仅由单一来源（RFI）报道",
+    "南苏丹特派团与当局在预警及应对方面的说法存在分歧，尚无法确认具体责任"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "南苏丹：国际特赦组织谴责阿比耶姆诺姆屠杀中平民保护失败",
+   "summary_zh": "国际特赦组织于2026年11月12日发布报告，针对2026年3月1日发生在南苏丹鲁旺行政区的阿比耶姆诺姆屠杀事件，谴责联合国及南苏丹政府在保护平民方面的失职。据报告，来自团结州马约姆县邻区的数百名武装努尔族青年在清晨发动袭击，造成200多人死亡。国际特赦组织指出，当局与联合国南苏丹特派团（Minuss）在事发前数日已获知袭击正在筹备。南苏丹特派团发言人表示，该特派团曾对预警信号作出反应，并在袭击最激烈时在其基地内保护了2800人。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "鲁旺行政区",
+    "city": "阿比耶姆诺姆",
+    "site": null,
+    "raw_text": "Abiemnom, zone administrative de Ruweng, au nord du pays, près de la frontière avec le Soudan"
+   },
+   "key_facts": [
+    {
+     "fact": "国际特赦组织发布关于阿比耶姆诺姆屠杀的报告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’ONG Amnesty International publie ce jeudi 12 novembre 2026 un rapport sur le massacre d’Abiemnom début mars"
+    },
+    {
+     "fact": "阿比耶姆诺姆于2026年3月1日清晨遭数百名武装努尔族青年袭击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "attaquée au petit matin le 1er mars 2026, par des centaines de jeunes Nuer armés, venus du comté voisin de Mayom"
+    },
+    {
+     "fact": "袭击造成200多人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plus de 200 personnes ont été tuées"
+    },
+    {
+     "fact": "国际特赦组织谴责联合国及南苏丹政府未能履行保护平民的义务",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Amnesty dénonce un échec au devoir de protection des civils de la part de l’ONU comme du gouvernement"
+    },
+    {
+     "fact": "南苏丹特派团称在袭击最激烈时在其基地内保护了2800人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "affirme avoir protégé 2 800 personnes au sein de sa base au plus fort de l’attaque"
+    },
+    {
+     "fact": "政府承诺的调查尚未进行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’enquête promise par le gouvernement n’a toujours pas eu lieu"
+    }
+   ],
+   "uncertainties": [
+    "伤亡数字（200多人）来自国际特赦组织报告，尚未获得独立交叉验证",
+    "事件目前仅由单一来源（RFI）报道",
+    "南苏丹特派团与当局在预警及应对方面的说法存在分歧，尚无法确认具体责任"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_02d1493a951070bf",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

@@ -1,0 +1,115 @@
+{
+ "label": "S554c00d6",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f87d5bf31d29aee84029af4fe56955ff5e9690a0bea1a13e2feafabea10c84cc",
+ "tokens": {
+  "input_tokens": 2039,
+  "output_tokens": 416,
+  "total_tokens": 2455
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "世界银行批准向尼日利亚提供5亿美元贷款用于应对洪灾",
+   "summary_zh": "世界银行批准向尼日利亚提供5亿美元融资，用于应对洪灾、恢复退化农业用地，并减少北部地区农民、牧民与农村社区之间的冲突。该资金属于半干旱景观农业气候韧性项目，预计将支持19个北部州及联邦首都区恢复140万公顷土地，到2031年惠及约660万人。报道目前仅来自单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "19 northern states and the Federal Capital Territory, Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "世界银行批准向尼日利亚提供5亿美元贷款用于应对洪灾",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Floods: World Bank approves $500m Nigeria loan"
+    },
+    {
+     "fact": "资金用于应对洪灾、恢复退化农业用地并减少农民、牧民与农村社区之间的冲突",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "approved $500 million in financing for Nigeria to tackle flooding, restore degraded agricultural land and reduce conflicts between farmers, herders and rural communities"
+    },
+    {
+     "fact": "项目覆盖19个北部州及联邦首都区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "support agricultural productivity in 19 northern states and the Federal Capital Territory"
+    },
+    {
+     "fact": "预计恢复140万公顷土地，到2031年惠及约660万人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "support the restoration of 1.4 million hectares of land and benefit approximately 6.6 million people by 2031"
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（Punch）报道，尚缺乏交叉验证",
+    "正文为部分提取，项目细节可能不完整"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "世界银行批准向尼日利亚提供5亿美元贷款用于应对洪灾",
+   "summary_zh": "世界银行批准向尼日利亚提供5亿美元融资，用于应对洪灾、恢复退化农业用地，并减少北部地区农民、牧民与农村社区之间的冲突。该资金属于半干旱景观农业气候韧性项目，预计将支持19个北部州及联邦首都区恢复140万公顷土地，到2031年惠及约660万人。报道目前仅来自单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": "19 northern states and the Federal Capital Territory, Nigeria"
+   },
+   "key_facts": [
+    {
+     "fact": "世界银行批准向尼日利亚提供5亿美元贷款用于应对洪灾",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Floods: World Bank approves $500m Nigeria loan"
+    },
+    {
+     "fact": "资金用于应对洪灾、恢复退化农业用地并减少农民、牧民与农村社区之间的冲突",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "approved $500 million in financing for Nigeria to tackle flooding, restore degraded agricultural land and reduce conflicts between farmers, herders and rural communities"
+    },
+    {
+     "fact": "项目覆盖19个北部州及联邦首都区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "support agricultural productivity in 19 northern states and the Federal Capital Territory"
+    },
+    {
+     "fact": "预计恢复140万公顷土地，到2031年惠及约660万人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "support the restoration of 1.4 million hectares of land and benefit approximately 6.6 million people by 2031"
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（Punch）报道，尚缺乏交叉验证",
+    "正文为部分提取，项目细节可能不完整"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_c8f9116f554c00d6",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
