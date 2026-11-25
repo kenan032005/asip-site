@@ -1,0 +1,117 @@
+{
+ "label": "S2ac2cfdc",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "d5f2579b5c3c3e61c41cd8e1c64b3c9c796c79cd0ebd8894be4825574d766de2",
+ "tokens": {
+  "input_tokens": 2889,
+  "output_tokens": 577,
+  "total_tokens": 3466
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "沙特阿拉伯：拦截导弹碎片落入麦加地区",
+   "summary_zh": "据沙特民防部门称，11月11日（周三）两枚弹道导弹被摧毁，碎片落入麦加周边多个地点。沙特方面将此次发射归咎于也门胡塞武装，但胡塞武装此前已否认以麦加或麦地那为目标。相关消息目前仅来自单一来源。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SAU",
+   "location": {
+    "country_iso3": "SAU",
+    "admin1": "麦加省",
+    "city": "麦加",
+    "site": "麦加周边村庄（Sabuhah、Wadi al-Maghmas）",
+    "raw_text": "région de La Mecque, village de Sabuhah, Wadi al-Maghmas"
+   },
+   "key_facts": [
+    {
+     "fact": "沙特民防部门称11月11日两枚弹道导弹被摧毁，碎片落入麦加地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des fragments de deux missiles balistiques interceptés par les défenses saoudiennes sont tombés mercredi 11 novembre 2026 dans la région de La Mecque."
+    },
+    {
+     "fact": "沙特民防部门将此次发射归咎于也门胡塞武装",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La défense civile du royaume, qui a annoncé l'incident jeudi, attribue les tirs aux rebelles houthis du Yémen."
+    },
+    {
+     "fact": "碎片落入麦加东北的Sabuhah村和麦加以东的Wadi al-Maghmas",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les services de secours ont notamment constaté des retombées dans le village de Sabuhah, au nord-est de La Mecque. La télévision publique saoudienne a également mentionné Wadi al-Maghmas, à l'est de la Grande Mosquée."
+    },
+    {
+     "fact": "胡塞武装此前否认以麦加或麦地那为目标，称其袭击针对军事或战略目标",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les Houthis ont déjà rejeté les accusations saoudiennes selon lesquelles ils viseraient La Mecque ou Médine, affirmant diriger leurs attaques contre des objectifs militaires ou stratégiques du royaume."
+    }
+   ],
+   "uncertainties": [
+    "导弹发射方为胡塞武装系沙特方面指控，胡塞武装予以否认，尚未获独立确认",
+    "事件目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证",
+    "碎片落点及影响范围的具体细节有待核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "沙特阿拉伯：拦截导弹碎片落入麦加地区",
+   "summary_zh": "据沙特民防部门称，11月11日（周三）两枚弹道导弹被摧毁，碎片落入麦加周边多个地点。沙特方面将此次发射归咎于也门胡塞武装，但胡塞武装此前已否认以麦加或麦地那为目标。相关消息目前仅来自单一来源。",
+   "event_type": "armed_conflict",
+   "country_iso3": "SAU",
+   "location": {
+    "country_iso3": "SAU",
+    "admin1": "麦加省",
+    "city": "麦加",
+    "site": "麦加周边村庄（Sabuhah、Wadi al-Maghmas）",
+    "raw_text": "région de La Mecque, village de Sabuhah, Wadi al-Maghmas"
+   },
+   "key_facts": [
+    {
+     "fact": "沙特民防部门称11月11日两枚弹道导弹被摧毁，碎片落入麦加地区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des fragments de deux missiles balistiques interceptés par les défenses saoudiennes sont tombés mercredi 11 novembre 2026 dans la région de La Mecque."
+    },
+    {
+     "fact": "沙特民防部门将此次发射归咎于也门胡塞武装",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La défense civile du royaume, qui a annoncé l'incident jeudi, attribue les tirs aux rebelles houthis du Yémen."
+    },
+    {
+     "fact": "碎片落入麦加东北的Sabuhah村和麦加以东的Wadi al-Maghmas",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les services de secours ont notamment constaté des retombées dans le village de Sabuhah, au nord-est de La Mecque. La télévision publique saoudienne a également mentionné Wadi al-Maghmas, à l'est de la Grande Mosquée."
+    },
+    {
+     "fact": "胡塞武装此前否认以麦加或麦地那为目标，称其袭击针对军事或战略目标",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les Houthis ont déjà rejeté les accusations saoudiennes selon lesquelles ils viseraient La Mecque ou Médine, affirmant diriger leurs attaques contre des objectifs militaires ou stratégiques du royaume."
+    }
+   ],
+   "uncertainties": [
+    "导弹发射方为胡塞武装系沙特方面指控，胡塞武装予以否认，尚未获独立确认",
+    "事件目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证",
+    "碎片落点及影响范围的具体细节有待核实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_a29f474a2ac2cfdc",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

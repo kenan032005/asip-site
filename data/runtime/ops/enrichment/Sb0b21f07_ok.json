@@ -1,0 +1,128 @@
+{
+ "label": "Sb0b21f07",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ce8c36185076d527d2a7ef6b3fb3cfc706f84ffa06d037dad45bde51fe2d411f",
+ "tokens": {
+  "input_tokens": 2794,
+  "output_tokens": 608,
+  "total_tokens": 3402
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"倒塌时建筑内人数尚未立即确认\", \"倒塌原因仍在调查中\", \"目前仅单一来源（Benin Web TV）报道，尚缺乏交叉验证\"]",
+    "after": "[\"倒塌时建筑内人数尚未立即确认\", \"倒塌原因仍在调查中\", \"目前仅单一来源（Benin Web TV）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "纽约布鲁克林一栋建筑倒塌，造成两人死亡、17人受伤",
+   "summary_zh": "纽约布鲁克林Flatbush区一栋三层建筑于周三下午约16时在邻近工地基坑处倒塌，据当局通报，造成至少两人死亡、17人受伤，其中4人伤势危急。伤者中有7名儿童，一名消防员受轻伤。约250名消防和警察人员参与搜救，一名女子在被困两个多小时后获救，搜救工作持续至夜间。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "USA",
+   "location": {
+    "country_iso3": "USA",
+    "admin1": "纽约州",
+    "city": "纽约",
+    "site": "布鲁克林Flatbush区Flatbush大道1321号",
+    "raw_text": "1321 Flatbush Avenue, Brooklyn (New York)"
+   },
+   "key_facts": [
+    {
+     "fact": "布鲁克林Flatbush区一栋三层建筑倒塌，造成至少两人死亡、17人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un immeuble de trois étages s'est effondré mercredi 11 novembre 2026 dans le quartier de Flatbush, à Brooklyn (New York), faisant au moins deux morts et 17 blessés, selon le bilan communiqué par les autorités."
+    },
+    {
+     "fact": "建筑位于Flatbush大道1321号，底层为商铺、上层为住宅，约16时在邻近工地基坑处倒塌",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le bâtiment, situé au 1321 Flatbush Avenue, abritait des logements et un commerce au rez-de-chaussée. Il s'est écroulé vers 16 heures, heure locale, dans l'excavation d'un chantier voisin situé sur Bedford Avenue."
+    },
+    {
+     "fact": "伤者中有7名儿童，4人伤势危急，一名消防员受轻伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La commissaire des pompiers de New York, Lillian Bonsignore, a indiqué que sept enfants figuraient parmi les personnes touchées. Un pompier a subi des blessures légères pendant l'intervention."
+    },
+    {
+     "fact": "约250名消防和警察人员参与搜救，一名女子在被困两个多小时后获救",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Environ 250 pompiers et policiers ont été mobilisés pour rechercher d'éventuels survivants. Une femme a été sortie vivante des décombres vers 18 h 30, après plus de deux heures de recherches."
+    }
+   ],
+   "uncertainties": [
+    "倒塌时建筑内人数尚未立即确认",
+    "倒塌原因仍在调查中",
+    "目前仅单一来源（Benin Web TV）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "纽约布鲁克林一栋建筑倒塌，造成两人死亡、17人受伤",
+   "summary_zh": "纽约布鲁克林Flatbush区一栋三层建筑于周三下午约16时在邻近工地基坑处倒塌，据当局通报，造成至少两人死亡、17人受伤，其中4人伤势危急。伤者中有7名儿童，一名消防员受轻伤。约250名消防和警察人员参与搜救，一名女子在被困两个多小时后获救，搜救工作持续至夜间。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "USA",
+   "location": {
+    "country_iso3": "USA",
+    "admin1": "纽约州",
+    "city": "纽约",
+    "site": "布鲁克林Flatbush区Flatbush大道1321号",
+    "raw_text": "1321 Flatbush Avenue, Brooklyn (New York)"
+   },
+   "key_facts": [
+    {
+     "fact": "布鲁克林Flatbush区一栋三层建筑倒塌，造成至少两人死亡、17人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un immeuble de trois étages s'est effondré mercredi 11 novembre 2026 dans le quartier de Flatbush, à Brooklyn (New York), faisant au moins deux morts et 17 blessés, selon le bilan communiqué par les autorités."
+    },
+    {
+     "fact": "建筑位于Flatbush大道1321号，底层为商铺、上层为住宅，约16时在邻近工地基坑处倒塌",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le bâtiment, situé au 1321 Flatbush Avenue, abritait des logements et un commerce au rez-de-chaussée. Il s'est écroulé vers 16 heures, heure locale, dans l'excavation d'un chantier voisin situé sur Bedford Avenue."
+    },
+    {
+     "fact": "伤者中有7名儿童，4人伤势危急，一名消防员受轻伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La commissaire des pompiers de New York, Lillian Bonsignore, a indiqué que sept enfants figuraient parmi les personnes touchées. Un pompier a subi des blessures légères pendant l'intervention."
+    },
+    {
+     "fact": "约250名消防和警察人员参与搜救，一名女子在被困两个多小时后获救",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Environ 250 pompiers et policiers ont été mobilisés pour rechercher d'éventuels survivants. Une femme a été sortie vivante des décombres vers 18 h 30, après plus de deux heures de recherches."
+    }
+   ],
+   "uncertainties": [
+    "倒塌时建筑内人数尚未立即确认",
+    "倒塌原因仍在调查中",
+    "目前仅单一来源（Benin Web TV）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_15aaa465b0b21f07",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
