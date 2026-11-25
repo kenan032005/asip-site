@@ -1,0 +1,138 @@
+{
+ "label": "S7d3ea613",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "2f90ce55059be6143a4368df31a809b1b8d6c33a7d57d515ac2addcff90ecb11",
+ "tokens": {
+  "input_tokens": 2865,
+  "output_tokens": 487,
+  "total_tokens": 3352
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"米斯基战事的具体伤亡与规模未在文中说明\", \"和平协议执行前景及局势是否进一步升级尚不确定\", \"恩贾梅纳与尼亚美紧张关系的具体细节未获确认\"]",
+    "after": "[\"米斯基战事的具体伤亡与规模未在文中说明\", \"和平协议执行前景及局势是否进一步升级尚不确定\", \"恩贾梅纳与尼亚美紧张关系的具体细节未获确认\", \"据Le Pays Tchad报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   },
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"米斯基战事的具体伤亡与规模未在文中说明\", \"和平协议执行前景及局势是否进一步升级尚不确定\", \"恩贾梅纳与尼亚美紧张关系的具体细节未获确认\", \"据Le Pays Tchad报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "after": "[\"米斯基战事的具体伤亡与规模未在文中说明\", \"和平协议执行前景及局势是否进一步升级尚不确定\", \"恩贾梅纳与尼亚美紧张关系的具体细节未获确认\", \"据Le Pays Tchad报道，目前仅获单一来源支持，尚缺乏交叉验证。\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得反对党UNDR执行秘书谈米斯基战事、治理与尼日尔紧张局势",
+   "summary_zh": "乍得反对党UNDR执行秘书塞莱斯坦·托波纳·蒙加接受采访，就北部米斯基地区乍得军队与自卫委员会重启战事、2025年4月和平协议执行、地方治理与农牧民冲突等问题阐述该党立场。他称希望米斯基局势不会演变为新的内战策源地，并呼吁各方严格遵守已签署承诺、由共和国调解机制推动局势降温。报道同时提及恩贾梅纳与尼亚美之间的紧张关系。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "米斯基",
+    "site": null,
+    "raw_text": "Miski (dans le nord du Tchad)"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得军队与自卫委员会在北部米斯基地区重启战事",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les combats ont repris à Miski (dans le nord du Tchad) entre l’armée tchadienne et le comité d’autodéfense"
+    },
+    {
+     "fact": "UNDR执行秘书称希望米斯基局势不会预示新的内战策源地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "J’ose espérer que ce qui se passe à l’extrême nord du Tchad n’augure pas un nouveau foyer de guerre civile"
+    },
+    {
+     "fact": "2025年4月签署的和平协议未能阻止新一轮暴力升级",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’accord de paix signé en avril 2025 devait ouvrir la voie à un règlement durable du conflit"
+    },
+    {
+     "fact": "报道提及恩贾梅纳与尼亚美之间的紧张关系",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des tensions entre N’Djamena et Niamey"
+    }
+   ],
+   "uncertainties": [
+    "米斯基战事的具体伤亡与规模未在文中说明",
+    "和平协议执行前景及局势是否进一步升级尚不确定",
+    "恩贾梅纳与尼亚美紧张关系的具体细节未获确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得反对党UNDR执行秘书谈米斯基战事、治理与尼日尔紧张局势",
+   "summary_zh": "乍得反对党UNDR执行秘书塞莱斯坦·托波纳·蒙加接受采访，就北部米斯基地区乍得军队与自卫委员会重启战事、2025年4月和平协议执行、地方治理与农牧民冲突等问题阐述该党立场。他称希望米斯基局势不会演变为新的内战策源地，并呼吁各方严格遵守已签署承诺、由共和国调解机制推动局势降温。报道同时提及恩贾梅纳与尼亚美之间的紧张关系。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "米斯基",
+    "site": null,
+    "raw_text": "Miski (dans le nord du Tchad)"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得军队与自卫委员会在北部米斯基地区重启战事",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les combats ont repris à Miski (dans le nord du Tchad) entre l’armée tchadienne et le comité d’autodéfense"
+    },
+    {
+     "fact": "UNDR执行秘书称希望米斯基局势不会预示新的内战策源地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "J’ose espérer que ce qui se passe à l’extrême nord du Tchad n’augure pas un nouveau foyer de guerre civile"
+    },
+    {
+     "fact": "2025年4月签署的和平协议未能阻止新一轮暴力升级",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’accord de paix signé en avril 2025 devait ouvrir la voie à un règlement durable du conflit"
+    },
+    {
+     "fact": "报道提及恩贾梅纳与尼亚美之间的紧张关系",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des tensions entre N’Djamena et Niamey"
+    }
+   ],
+   "uncertainties": [
+    "米斯基战事的具体伤亡与规模未在文中说明",
+    "和平协议执行前景及局势是否进一步升级尚不确定",
+    "恩贾梅纳与尼亚美紧张关系的具体细节未获确认",
+    "据Le Pays Tchad报道，目前仅获单一来源支持，尚缺乏交叉验证。",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_2db6a93d7d3ea613",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

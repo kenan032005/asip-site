@@ -1,0 +1,117 @@
+{
+ "label": "Sf7023570",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c02805b17a30acec6dc16f89052d053ec6fe0c437c14a814482516d6f612d97a",
+ "tokens": {
+  "input_tokens": 2725,
+  "output_tokens": 566,
+  "total_tokens": 3291
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "登革热：3000名年轻毕业生向乍得卫生部提出支援",
+   "summary_zh": "乍得国家卫生与社会工作干部学校（ENASS）及各省卫生与社会事务学校（EPSAS）的毕业生团体呼吁将约3000名年轻毕业生纳入乍得卫生系统。该团体于2026年11月10日致函公共卫生与预防部长，提议动员这些专业人员加强登革热应对并缓解卫生人员短缺。据该团体称，约3000名由国家出资培养的毕业生目前可随时上岗。此消息目前仅来自单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N’Djamena et dans les provinces"
+   },
+   "key_facts": [
+    {
+     "fact": "毕业生团体呼吁将约3000名年轻毕业生纳入乍得卫生系统",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Collectif des lauréats de l’École nationale des agents sanitaires et sociaux (ENASS) et des Écoles provinciales de santé et des affaires sociales (EPSAS) plaide pour l’intégration de quelque 3 000 jeunes diplômés dans le système sanitaire tchadien."
+    },
+    {
+     "fact": "该团体于2026年11月10日致函公共卫生与预防部长提出支援",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans une correspondance adressée ce 10 novembre 2026 au ministre de la Santé publique et de la Prévention, le collectif propose de mobiliser ces professionnels pour renforcer la riposte contre la dengue"
+    },
+    {
+     "fact": "据该团体称约3000名毕业生目前可随时上岗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon le collectif, environ 3 000 diplômés, formés dans les établissements publics aux frais du contribuable, sont actuellement disponibles et aptes à servir."
+    },
+    {
+     "fact": "该团体提议在恩贾梅纳及各省受疫情影响地区支援卫生机构",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ils affirment être disponibles pour appuyer les structures sanitaires, notamment dans les zones les plus touchées, à N’Djamena et dans les provinces."
+    }
+   ],
+   "uncertainties": [
+    "毕业生人数约3000人为该团体单方面说法，尚未获官方确认",
+    "卫生部是否接受该提议尚未证实",
+    "目前仅一个来源（Tchadinfos）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "登革热：3000名年轻毕业生向乍得卫生部提出支援",
+   "summary_zh": "乍得国家卫生与社会工作干部学校（ENASS）及各省卫生与社会事务学校（EPSAS）的毕业生团体呼吁将约3000名年轻毕业生纳入乍得卫生系统。该团体于2026年11月10日致函公共卫生与预防部长，提议动员这些专业人员加强登革热应对并缓解卫生人员短缺。据该团体称，约3000名由国家出资培养的毕业生目前可随时上岗。此消息目前仅来自单一来源。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": "恩贾梅纳",
+    "site": null,
+    "raw_text": "N’Djamena et dans les provinces"
+   },
+   "key_facts": [
+    {
+     "fact": "毕业生团体呼吁将约3000名年轻毕业生纳入乍得卫生系统",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le Collectif des lauréats de l’École nationale des agents sanitaires et sociaux (ENASS) et des Écoles provinciales de santé et des affaires sociales (EPSAS) plaide pour l’intégration de quelque 3 000 jeunes diplômés dans le système sanitaire tchadien."
+    },
+    {
+     "fact": "该团体于2026年11月10日致函公共卫生与预防部长提出支援",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Dans une correspondance adressée ce 10 novembre 2026 au ministre de la Santé publique et de la Prévention, le collectif propose de mobiliser ces professionnels pour renforcer la riposte contre la dengue"
+    },
+    {
+     "fact": "据该团体称约3000名毕业生目前可随时上岗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon le collectif, environ 3 000 diplômés, formés dans les établissements publics aux frais du contribuable, sont actuellement disponibles et aptes à servir."
+    },
+    {
+     "fact": "该团体提议在恩贾梅纳及各省受疫情影响地区支援卫生机构",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "ils affirment être disponibles pour appuyer les structures sanitaires, notamment dans les zones les plus touchées, à N’Djamena et dans les provinces."
+    }
+   ],
+   "uncertainties": [
+    "毕业生人数约3000人为该团体单方面说法，尚未获官方确认",
+    "卫生部是否接受该提议尚未证实",
+    "目前仅一个来源（Tchadinfos）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 70
+  }
+ },
+ "event_id": "EVT_3a93842cf7023570",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
