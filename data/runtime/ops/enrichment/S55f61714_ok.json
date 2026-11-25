@@ -1,0 +1,127 @@
+{
+ "label": "S55f61714",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "57210d52a1a8db9bfe52849e4ff17829e321547763568656f2fc92e161ab5f63",
+ "tokens": {
+  "input_tokens": 2891,
+  "output_tokens": 630,
+  "total_tokens": 3521
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）反对派人士普林斯·埃彭格案庭审延期至11月25日",
+   "summary_zh": "刚果（金）反对派人士、ADD Congo党主席兼拉穆卡平台发言人普林斯·埃彭格的庭审于11月11日在金沙萨贡贝治安法庭短暂开庭。他因就本党一名活动人士9月15日死亡一事被控“散布虚假消息”。由于法庭未送达传票文书，首次庭审仅持续数分钟即延期至11月25日。埃彭格自10月31日起被关押在马卡拉监狱，其律师称他存在呼吸系统问题，家属要求将其送医治疗。",
+   "event_type": "political_instability",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "金沙萨",
+    "city": "金沙萨",
+    "site": "贡贝治安法庭及马卡拉监狱",
+    "raw_text": "tribunal de paix de Kinshasa-Gombe / prison de Makala"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）反对派人士普林斯·埃彭格的庭审于11月11日在金沙萨贡贝治安法庭短暂开庭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le procès de Prince Epenge s’est brièvement ouvert au tribunal de paix de Kinshasa-Gombe ce mercredi 11 novembre"
+    },
+    {
+     "fact": "埃彭格被控就本党一名活动人士9月15日死亡一事“散布虚假消息”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "est poursuivi pour « propagation de faux bruits » en rapport avec la mort d’un militant de son parti en marge d’une manifestation de l’opposition le 15 septembre dernier"
+    },
+    {
+     "fact": "因缺少传票文书，首次庭审仅持续数分钟即延期至11月25日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la cour a commencé par déclarer qu’elle n’avait pas l’exploit du procès... l’audience a donc été immédiatement renvoyée au 25 novembre prochain"
+    },
+    {
+     "fact": "埃彭格自10月31日起被关押在马卡拉监狱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il est détenu depuis le 31 octobre dernier à Makala"
+    },
+    {
+     "fact": "律师称埃彭格存在呼吸系统问题，家属要求将其送医",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils mettent en avant notamment des problèmes respiratoires. D’ailleurs les proches de Prince Epenge demandent qu’il soit hospitalisé"
+    }
+   ],
+   "uncertainties": [
+    "埃彭格健康状况的严重程度仅有其律师和家属说法，未获独立医疗确认",
+    "案件实体指控尚未经法庭审理认定",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "刚果（金）反对派人士普林斯·埃彭格案庭审延期至11月25日",
+   "summary_zh": "刚果（金）反对派人士、ADD Congo党主席兼拉穆卡平台发言人普林斯·埃彭格的庭审于11月11日在金沙萨贡贝治安法庭短暂开庭。他因就本党一名活动人士9月15日死亡一事被控“散布虚假消息”。由于法庭未送达传票文书，首次庭审仅持续数分钟即延期至11月25日。埃彭格自10月31日起被关押在马卡拉监狱，其律师称他存在呼吸系统问题，家属要求将其送医治疗。",
+   "event_type": "political_instability",
+   "country_iso3": "COD",
+   "location": {
+    "country_iso3": "COD",
+    "admin1": "金沙萨",
+    "city": "金沙萨",
+    "site": "贡贝治安法庭及马卡拉监狱",
+    "raw_text": "tribunal de paix de Kinshasa-Gombe / prison de Makala"
+   },
+   "key_facts": [
+    {
+     "fact": "刚果（金）反对派人士普林斯·埃彭格的庭审于11月11日在金沙萨贡贝治安法庭短暂开庭",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le procès de Prince Epenge s’est brièvement ouvert au tribunal de paix de Kinshasa-Gombe ce mercredi 11 novembre"
+    },
+    {
+     "fact": "埃彭格被控就本党一名活动人士9月15日死亡一事“散布虚假消息”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "est poursuivi pour « propagation de faux bruits » en rapport avec la mort d’un militant de son parti en marge d’une manifestation de l’opposition le 15 septembre dernier"
+    },
+    {
+     "fact": "因缺少传票文书，首次庭审仅持续数分钟即延期至11月25日",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la cour a commencé par déclarer qu’elle n’avait pas l’exploit du procès... l’audience a donc été immédiatement renvoyée au 25 novembre prochain"
+    },
+    {
+     "fact": "埃彭格自10月31日起被关押在马卡拉监狱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "il est détenu depuis le 31 octobre dernier à Makala"
+    },
+    {
+     "fact": "律师称埃彭格存在呼吸系统问题，家属要求将其送医",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils mettent en avant notamment des problèmes respiratoires. D’ailleurs les proches de Prince Epenge demandent qu’il soit hospitalisé"
+    }
+   ],
+   "uncertainties": [
+    "埃彭格健康状况的严重程度仅有其律师和家属说法，未获独立医疗确认",
+    "案件实体指控尚未经法庭审理认定",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_38401e1655f61714",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

@@ -1,0 +1,136 @@
+{
+ "label": "Sa93efbb0",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "da265210e2f270b654f24cef1d915296ab0795a6269d8818302d6a64db96db68",
+ "tokens": {
+  "input_tokens": 2412,
+  "output_tokens": 512,
+  "total_tokens": 2924
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"居民所述供电不足、露天睡觉及健康问题均为居民个人反映，尚未获得独立核实\", \"露天睡觉导致盗窃、蛇咬等风险为居民担忧，未报告具体事件\"]",
+    "after": "[\"居民所述供电不足、露天睡觉及健康问题均为居民个人反映，尚未获得独立核实\", \"露天睡觉导致盗窃、蛇咬等风险为居民担忧，未报告具体事件\", \"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "旱季来临：尼日利亚联邦首都区居民对火灾隐患、高温与健康风险表达担忧",
+   "summary_zh": "随着旱季逐渐到来，尼日利亚联邦首都区（FCT）居民对火灾隐患、恶劣天气和健康问题表示担忧。居民指出，气温升高、沙尘风以及电力供应不足使日常生活日益困难，部分人出现呼吸道不适等与天气相关的疾病。居民还提到，因电力不足，一些家庭夜间露天睡觉或门窗敞开，增加了治安和环境风险。他们呼吁改善供电并加强社区治安巡查。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "联邦首都区",
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Federal Capital Territory (FCT), Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "联邦首都区居民对旱季火灾隐患、恶劣天气和健康风险表达担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "residents of the Federal Capital Territory (FCT) are expressing concerns over increasing fire hazards, harsh weather conditions and health-related challenges"
+    },
+    {
+     "fact": "居民称气温升高、沙尘风和电力不足使日常生活更加困难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "many residents say rising temperatures, dusty winds and inadequate electricity supply are making daily life increasingly difficult"
+    },
+    {
+     "fact": "部分居民报告出现呼吸道不适、卡他症状、咳嗽等与天气相关的疾病",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Some residents also report experiencing weather-related illnesses, including respiratory discomfort, catarrh, cough and other ailments"
+    },
+    {
+     "fact": "居民称许多社区每天供电不足六小时",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "many communities, particularly those on the outskirts of the city centre, experience prolonged power outages, sometimes receiving fewer than six hours of electricity daily"
+    },
+    {
+     "fact": "有居民称部分家庭因高温露天睡觉或夜间门窗敞开，增加治安与环境风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "some families reportedly resort to sleeping outdoors or leaving their doors and windows open at night to enjoy fresh air"
+    }
+   ],
+   "uncertainties": [
+    "居民所述供电不足、露天睡觉及健康问题均为居民个人反映，尚未获得独立核实",
+    "露天睡觉导致盗窃、蛇咬等风险为居民担忧，未报告具体事件"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "旱季来临：尼日利亚联邦首都区居民对火灾隐患、高温与健康风险表达担忧",
+   "summary_zh": "随着旱季逐渐到来，尼日利亚联邦首都区（FCT）居民对火灾隐患、恶劣天气和健康问题表示担忧。居民指出，气温升高、沙尘风以及电力供应不足使日常生活日益困难，部分人出现呼吸道不适等与天气相关的疾病。居民还提到，因电力不足，一些家庭夜间露天睡觉或门窗敞开，增加了治安和环境风险。他们呼吁改善供电并加强社区治安巡查。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "联邦首都区",
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Federal Capital Territory (FCT), Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "联邦首都区居民对旱季火灾隐患、恶劣天气和健康风险表达担忧",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "residents of the Federal Capital Territory (FCT) are expressing concerns over increasing fire hazards, harsh weather conditions and health-related challenges"
+    },
+    {
+     "fact": "居民称气温升高、沙尘风和电力不足使日常生活更加困难",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "many residents say rising temperatures, dusty winds and inadequate electricity supply are making daily life increasingly difficult"
+    },
+    {
+     "fact": "部分居民报告出现呼吸道不适、卡他症状、咳嗽等与天气相关的疾病",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Some residents also report experiencing weather-related illnesses, including respiratory discomfort, catarrh, cough and other ailments"
+    },
+    {
+     "fact": "居民称许多社区每天供电不足六小时",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "many communities, particularly those on the outskirts of the city centre, experience prolonged power outages, sometimes receiving fewer than six hours of electricity daily"
+    },
+    {
+     "fact": "有居民称部分家庭因高温露天睡觉或夜间门窗敞开，增加治安与环境风险",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "some families reportedly resort to sleeping outdoors or leaving their doors and windows open at night to enjoy fresh air"
+    }
+   ],
+   "uncertainties": [
+    "居民所述供电不足、露天睡觉及健康问题均为居民个人反映，尚未获得独立核实",
+    "露天睡觉导致盗窃、蛇咬等风险为居民担忧，未报告具体事件",
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_3ff62f30a93efbb0",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
