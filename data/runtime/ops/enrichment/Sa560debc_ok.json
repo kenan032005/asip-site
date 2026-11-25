@@ -1,0 +1,117 @@
+{
+ "label": "Sa560debc",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ae65a9545f6de7ce929c3206d5fcc858df0b5ca328f7e7fd179ab6bc1b562532",
+ "tokens": {
+  "input_tokens": 2903,
+  "output_tokens": 527,
+  "total_tokens": 3430
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "锡吉里金矿开采案：前省长出庭否认对环境破坏负有责任",
+   "summary_zh": "几内亚锡吉里地区22名前地方行政官员因涉嫌腐败、非法敛财及共谋环境破坏在科纳克里Crief法院受审，所有被告在开庭时均作无罪辩护。11月11日庭审继续，前代理省长出庭否认相关指控，辩称环境破坏在其就任前已开始。该案还涉及200多名被控非法采矿和破坏环境的淘金者。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "GIN",
+   "location": {
+    "country_iso3": "GIN",
+    "admin1": "锡吉里",
+    "city": "科纳克里",
+    "site": "Crief法院",
+    "raw_text": "Siguiri / Crief, Conakry"
+   },
+   "key_facts": [
+    {
+     "fact": "22名锡吉里前地方行政官员因涉嫌腐败、非法敛财及共谋环境破坏出庭受审",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Vingt-deux anciens administrateurs territoriaux de Siguiri devant la Crief pour répondre de faits présumés de corruption, d'enrichissement illicite et de complicité dans la dégradation de l'environnement."
+    },
+    {
+     "fact": "所有被告在开庭时均作无罪辩护",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Tous ont plaidé non coupables à l'ouverture de leur procès."
+    },
+    {
+     "fact": "前代理省长出庭否认对其指控，称环境破坏在其就任前已开始",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À la barre, ils ont nié les faits qui leur sont reprochés, soutenant que la dégradation de l'environnement avait commencé avant leur prise de fonction."
+    },
+    {
+     "fact": "案件还涉及200多名被控非法开采矿产资源和破坏环境的淘金者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le dossier concerne également plus de 200 autres prévenus, des orpailleurs poursuivis pour exploitation illégale de substances minières et atteintes à l'environnement."
+    }
+   ],
+   "uncertainties": [
+    "相关指控为涉嫌性质，尚未经法院判决确认",
+    "被告方称案卷缺乏证据，指控存在争议",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "锡吉里金矿开采案：前省长出庭否认对环境破坏负有责任",
+   "summary_zh": "几内亚锡吉里地区22名前地方行政官员因涉嫌腐败、非法敛财及共谋环境破坏在科纳克里Crief法院受审，所有被告在开庭时均作无罪辩护。11月11日庭审继续，前代理省长出庭否认相关指控，辩称环境破坏在其就任前已开始。该案还涉及200多名被控非法采矿和破坏环境的淘金者。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "GIN",
+   "location": {
+    "country_iso3": "GIN",
+    "admin1": "锡吉里",
+    "city": "科纳克里",
+    "site": "Crief法院",
+    "raw_text": "Siguiri / Crief, Conakry"
+   },
+   "key_facts": [
+    {
+     "fact": "22名锡吉里前地方行政官员因涉嫌腐败、非法敛财及共谋环境破坏出庭受审",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Vingt-deux anciens administrateurs territoriaux de Siguiri devant la Crief pour répondre de faits présumés de corruption, d'enrichissement illicite et de complicité dans la dégradation de l'environnement."
+    },
+    {
+     "fact": "所有被告在开庭时均作无罪辩护",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Tous ont plaidé non coupables à l'ouverture de leur procès."
+    },
+    {
+     "fact": "前代理省长出庭否认对其指控，称环境破坏在其就任前已开始",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "À la barre, ils ont nié les faits qui leur sont reprochés, soutenant que la dégradation de l'environnement avait commencé avant leur prise de fonction."
+    },
+    {
+     "fact": "案件还涉及200多名被控非法开采矿产资源和破坏环境的淘金者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le dossier concerne également plus de 200 autres prévenus, des orpailleurs poursuivis pour exploitation illégale de substances minières et atteintes à l'environnement."
+    }
+   ],
+   "uncertainties": [
+    "相关指控为涉嫌性质，尚未经法院判决确认",
+    "被告方称案卷缺乏证据，指控存在争议",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_4e537463a560debc",
+ "disease_event_id": null,
+ "country_code": "GN"
+}

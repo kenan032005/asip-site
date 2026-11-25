@@ -1,0 +1,127 @@
+{
+ "label": "Sd0b7c5b8",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "395884812b5205ac4f0156f12e411de3d1a72137ff7c1b275d7f99624adb700e",
+ "tokens": {
+  "input_tokens": 2828,
+  "output_tokens": 625,
+  "total_tokens": 3453
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "肯尼亚议员就系列绑架案要求政府作出解释",
+   "summary_zh": "2026年11月11日，内罗毕米利马尼高等法院就两起绑架案开庭审理：坦桑尼亚反对派人士特瓦哈·姆瓦伊帕亚自10月25日起失踪，律师阿布希尔·艾哈迈德萨达克·阿卜迪于11月1日遭绑架。两案虽相互独立，但据称肯尼亚安全部门被怀疑为作案者。11月10日，参议员在全体会议上要求政府作出解释，使绑架问题政治化。内政部长此前否认政府与警察参与绑架，称可能存在腐败警员与犯罪分子勾结。据肯尼亚国际特赦组织统计，今年以来已记录22起强迫失踪案件。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": "内罗毕",
+    "city": "内罗毕",
+    "site": "米利马尼高等法院",
+    "raw_text": "Haute Cour de Milimani, à Nairobi"
+   },
+   "key_facts": [
+    {
+     "fact": "内罗毕米利马尼高等法院就两起绑架案开庭审理",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des audiences se tenaient mercredi 11 novembre 2026 à la Haute Cour de Milimani, à Nairobi, dans deux affaires d’enlèvements"
+    },
+    {
+     "fact": "坦桑尼亚反对派人士特瓦哈·姆瓦伊帕亚自2026年10月25日起失踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "celui de l’opposant tanzanien Twaha Mwaipaya, disparu depuis le 25 octobre 2026"
+    },
+    {
+     "fact": "律师阿布希尔·艾哈迈德萨达克·阿卜迪于2026年11月1日遭绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’avocat Abshir Ahmedsadak Abdi, kidnappé le 1er novembre 2026"
+    },
+    {
+     "fact": "参议员在全体会议上要求政府就绑架问题作出解释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des sénateurs, en séance plénière, ont demandé des explications"
+    },
+    {
+     "fact": "据肯尼亚国际特赦组织统计，今年以来已记录22起强迫失踪案件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D’après Amnesty International Kenya, 22 cas de disparitions forcées ont été recensés depuis le début de l’année"
+    }
+   ],
+   "uncertainties": [
+    "肯尼亚安全部门被怀疑为两起绑架案的作案者，但尚未证实",
+    "内政部长否认政府与警察参与绑架，称可能存在腐败警员与犯罪分子勾结",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "肯尼亚议员就系列绑架案要求政府作出解释",
+   "summary_zh": "2026年11月11日，内罗毕米利马尼高等法院就两起绑架案开庭审理：坦桑尼亚反对派人士特瓦哈·姆瓦伊帕亚自10月25日起失踪，律师阿布希尔·艾哈迈德萨达克·阿卜迪于11月1日遭绑架。两案虽相互独立，但据称肯尼亚安全部门被怀疑为作案者。11月10日，参议员在全体会议上要求政府作出解释，使绑架问题政治化。内政部长此前否认政府与警察参与绑架，称可能存在腐败警员与犯罪分子勾结。据肯尼亚国际特赦组织统计，今年以来已记录22起强迫失踪案件。",
+   "event_type": "crime_kidnapping",
+   "country_iso3": "KEN",
+   "location": {
+    "country_iso3": "KEN",
+    "admin1": "内罗毕",
+    "city": "内罗毕",
+    "site": "米利马尼高等法院",
+    "raw_text": "Haute Cour de Milimani, à Nairobi"
+   },
+   "key_facts": [
+    {
+     "fact": "内罗毕米利马尼高等法院就两起绑架案开庭审理",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Des audiences se tenaient mercredi 11 novembre 2026 à la Haute Cour de Milimani, à Nairobi, dans deux affaires d’enlèvements"
+    },
+    {
+     "fact": "坦桑尼亚反对派人士特瓦哈·姆瓦伊帕亚自2026年10月25日起失踪",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "celui de l’opposant tanzanien Twaha Mwaipaya, disparu depuis le 25 octobre 2026"
+    },
+    {
+     "fact": "律师阿布希尔·艾哈迈德萨达克·阿卜迪于2026年11月1日遭绑架",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’avocat Abshir Ahmedsadak Abdi, kidnappé le 1er novembre 2026"
+    },
+    {
+     "fact": "参议员在全体会议上要求政府就绑架问题作出解释",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "des sénateurs, en séance plénière, ont demandé des explications"
+    },
+    {
+     "fact": "据肯尼亚国际特赦组织统计，今年以来已记录22起强迫失踪案件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "D’après Amnesty International Kenya, 22 cas de disparitions forcées ont été recensés depuis le début de l’année"
+    }
+   ],
+   "uncertainties": [
+    "肯尼亚安全部门被怀疑为两起绑架案的作案者，但尚未证实",
+    "内政部长否认政府与警察参与绑架，称可能存在腐败警员与犯罪分子勾结",
+    "目前仅RFI单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_423e6d6ad0b7c5b8",
+ "disease_event_id": null,
+ "country_code": "KE"
+}

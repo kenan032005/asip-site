@@ -1,0 +1,127 @@
+{
+ "label": "S673b9975",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "b32cb90148f5523be66f5e280c9c708b7b114780056be4a4e475f5d8bd378aaa",
+ "tokens": {
+  "input_tokens": 2654,
+  "output_tokens": 587,
+  "total_tokens": 3241
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "科摩罗：一起谋杀案两名被判刑者相隔一周先后死亡",
+   "summary_zh": "科摩罗一起谋杀案的两名被判刑男子在判决后不到一个月内相隔一周先后死亡，两人此前被关押在莫罗尼监狱的一处附属设施。其中一人被判处25年刑事监禁，于11月4日死亡；另一人被判处死刑，于11月11日死亡。检方称，其中一人因健康状况恶化被紧急送医后死亡，但未说明另一人的死因。此前首例死亡曾被司法部门依据两份医学意见认定为自然死亡。",
+   "event_type": "other_security",
+   "country_iso3": "COM",
+   "location": {
+    "country_iso3": "COM",
+    "admin1": null,
+    "city": "莫罗尼",
+    "site": "莫罗尼监狱附属设施",
+    "raw_text": "une annexe de la prison de Moroni"
+   },
+   "key_facts": [
+    {
+     "fact": "科摩罗一起谋杀案的两名被判刑者相隔一周先后死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les deux hommes condamnés en octobre dernier pour ce crime et qui étaient détenus dans une annexe de la prison de Moroni sont morts à une semaine d'intervalle, moins d'un mois après le verdict."
+    },
+    {
+     "fact": "其中一人被判处25年刑事监禁，于11月4日死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le premier, condamné à 25 ans de réclusion criminelle, est décédé le 4 novembre."
+    },
+    {
+     "fact": "另一人被判处死刑，于11月11日死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le second, condamné à mort, est décédé mercredi 11 novembre."
+    },
+    {
+     "fact": "检方称其中一人因健康状况恶化被紧急送医后死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon le parquet, c'est à 8h30, mercredi, que la gendarmerie signale une dégradation de l'état de santé de Fahami Moustoifa. Le jeune homme est transféré en urgence à l'hôpital El-Maarouf, où il meurt quelques heures plus tard"
+    },
+    {
+     "fact": "首例死亡曾被司法部门依据两份医学意见认定为自然死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pour ce premier décès, la justice avait évoqué une mort naturelle, sur la base de deux avis médicaux."
+    }
+   ],
+   "uncertainties": [
+    "第二例死亡的具体原因尚未公布",
+    "两起死亡是否存在关联尚未证实",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "科摩罗：一起谋杀案两名被判刑者相隔一周先后死亡",
+   "summary_zh": "科摩罗一起谋杀案的两名被判刑男子在判决后不到一个月内相隔一周先后死亡，两人此前被关押在莫罗尼监狱的一处附属设施。其中一人被判处25年刑事监禁，于11月4日死亡；另一人被判处死刑，于11月11日死亡。检方称，其中一人因健康状况恶化被紧急送医后死亡，但未说明另一人的死因。此前首例死亡曾被司法部门依据两份医学意见认定为自然死亡。",
+   "event_type": "other_security",
+   "country_iso3": "COM",
+   "location": {
+    "country_iso3": "COM",
+    "admin1": null,
+    "city": "莫罗尼",
+    "site": "莫罗尼监狱附属设施",
+    "raw_text": "une annexe de la prison de Moroni"
+   },
+   "key_facts": [
+    {
+     "fact": "科摩罗一起谋杀案的两名被判刑者相隔一周先后死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les deux hommes condamnés en octobre dernier pour ce crime et qui étaient détenus dans une annexe de la prison de Moroni sont morts à une semaine d'intervalle, moins d'un mois après le verdict."
+    },
+    {
+     "fact": "其中一人被判处25年刑事监禁，于11月4日死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le premier, condamné à 25 ans de réclusion criminelle, est décédé le 4 novembre."
+    },
+    {
+     "fact": "另一人被判处死刑，于11月11日死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le second, condamné à mort, est décédé mercredi 11 novembre."
+    },
+    {
+     "fact": "检方称其中一人因健康状况恶化被紧急送医后死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Selon le parquet, c'est à 8h30, mercredi, que la gendarmerie signale une dégradation de l'état de santé de Fahami Moustoifa. Le jeune homme est transféré en urgence à l'hôpital El-Maarouf, où il meurt quelques heures plus tard"
+    },
+    {
+     "fact": "首例死亡曾被司法部门依据两份医学意见认定为自然死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Pour ce premier décès, la justice avait évoqué une mort naturelle, sur la base de deux avis médicaux."
+    }
+   ],
+   "uncertainties": [
+    "第二例死亡的具体原因尚未公布",
+    "两起死亡是否存在关联尚未证实",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_cb1ab5e4673b9975",
+ "disease_event_id": null,
+ "country_code": "KM"
+}
