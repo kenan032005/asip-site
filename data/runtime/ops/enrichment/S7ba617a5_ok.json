@@ -1,0 +1,128 @@
+{
+ "label": "S7ba617a5",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "60e7de59841a17477a517ef4fb967cebfaba47395d7af09e758102c429296ae6",
+ "tokens": {
+  "input_tokens": 2116,
+  "output_tokens": 529,
+  "total_tokens": 2645
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"袭击者身份为疑似暴徒，尚未确认\", \"事件目前仅有一个来源报道，尚缺乏交叉验证\", \"袭击者是否携带枪支仅为据报讨论内容，未获确认\"]",
+    "after": "[\"袭击者身份为疑似暴徒，尚未确认\", \"事件目前仅有一个来源报道，尚缺乏交叉验证\", \"袭击者是否携带枪支仅为据报讨论内容，未获确认\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "疑似暴徒袭击NDC支持者，扰乱拉各斯Peter Obi市民大会",
+   "summary_zh": "尼日利亚拉各斯州一场为总统候选人Peter Obi举办的市民大会上，疑似暴徒袭击了尼日利亚民主大会党（NDC）支持者。袭击发生于11月12日周四上午11时左右，地点在Ikeja的Oregun，袭击者持械闯入会场，导致会议中断、参与者逃离。据报道，袭击者携带砍刀、棍棒和石块，试图进入主会场时遭到NDC支持者抵抗。目前该事件为单一来源报道。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "拉各斯州",
+    "city": "拉各斯",
+    "site": "Ikeja Oregun",
+    "raw_text": "Oregun, Ikeja, Lagos State"
+   },
+   "key_facts": [
+    {
+     "fact": "疑似暴徒袭击了NDC支持者，扰乱为Peter Obi举办的市民大会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "SUSPECTED thugs have attacked supporters of the Nigeria Democratic Congress (NDC) during a town hall meeting organised for the party's presidential candidate, Peter Obi, in Lagos State."
+    },
+    {
+     "fact": "袭击发生于11月12日周四上午11时左右，地点在Ikeja的Oregun",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The attack, which occurred around 11am on Thursday, November 12, at Oregun, Ikeja, disrupted proceedings and forced participants to flee as the attackers invaded the venue with weapons."
+    },
+    {
+     "fact": "袭击者携带砍刀、棍棒和石块，试图进入主会场时遭到NDC支持者抵抗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The hoodlums, armed with cutlasses, cudgels and stones, attempted to gain access to the main hall but were initially resisted by NDC supporters"
+    },
+    {
+     "fact": "据报袭击者从Oregun的Kudirat Abiola路方向接近",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The newspaper reported seeing the attackers approach from Kudirat Abiola Road in Oregun."
+    }
+   ],
+   "uncertainties": [
+    "袭击者身份为疑似暴徒，尚未确认",
+    "事件目前仅有一个来源报道，尚缺乏交叉验证",
+    "袭击者是否携带枪支仅为据报讨论内容，未获确认"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "疑似暴徒袭击NDC支持者，扰乱拉各斯Peter Obi市民大会",
+   "summary_zh": "尼日利亚拉各斯州一场为总统候选人Peter Obi举办的市民大会上，疑似暴徒袭击了尼日利亚民主大会党（NDC）支持者。袭击发生于11月12日周四上午11时左右，地点在Ikeja的Oregun，袭击者持械闯入会场，导致会议中断、参与者逃离。据报道，袭击者携带砍刀、棍棒和石块，试图进入主会场时遭到NDC支持者抵抗。目前该事件为单一来源报道。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "拉各斯州",
+    "city": "拉各斯",
+    "site": "Ikeja Oregun",
+    "raw_text": "Oregun, Ikeja, Lagos State"
+   },
+   "key_facts": [
+    {
+     "fact": "疑似暴徒袭击了NDC支持者，扰乱为Peter Obi举办的市民大会",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "SUSPECTED thugs have attacked supporters of the Nigeria Democratic Congress (NDC) during a town hall meeting organised for the party's presidential candidate, Peter Obi, in Lagos State."
+    },
+    {
+     "fact": "袭击发生于11月12日周四上午11时左右，地点在Ikeja的Oregun",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The attack, which occurred around 11am on Thursday, November 12, at Oregun, Ikeja, disrupted proceedings and forced participants to flee as the attackers invaded the venue with weapons."
+    },
+    {
+     "fact": "袭击者携带砍刀、棍棒和石块，试图进入主会场时遭到NDC支持者抵抗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The hoodlums, armed with cutlasses, cudgels and stones, attempted to gain access to the main hall but were initially resisted by NDC supporters"
+    },
+    {
+     "fact": "据报袭击者从Oregun的Kudirat Abiola路方向接近",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The newspaper reported seeing the attackers approach from Kudirat Abiola Road in Oregun."
+    }
+   ],
+   "uncertainties": [
+    "袭击者身份为疑似暴徒，尚未确认",
+    "事件目前仅有一个来源报道，尚缺乏交叉验证",
+    "袭击者是否携带枪支仅为据报讨论内容，未获确认",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_b77cfaf47ba617a5",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

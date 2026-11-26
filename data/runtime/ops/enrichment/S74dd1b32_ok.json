@@ -1,0 +1,117 @@
+{
+ "label": "S74dd1b32",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a079883c830defc2af4849d3d260f24ef5a4ba6c1630e6640a1866a59ea79791",
+ "tokens": {
+  "input_tokens": 1944,
+  "output_tokens": 371,
+  "total_tokens": 2315
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "奥贡州萨加穆路段发生交通事故，多人受伤",
+   "summary_zh": "尼日利亚奥贡州萨加穆路段发生一起交通事故，多人受伤，应急人员到场救治伤者。现场视频显示有伤者躺倒在路面上，数名男子试图营救被困在严重受损商业巴士内的伤者。截至报道发出时，伤亡人数尚无法立即确认。",
+   "event_type": "transport_disruption",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Ogun State",
+    "city": "Sagamu",
+    "site": null,
+    "raw_text": "Sagamu axis of Ogun State"
+   },
+   "key_facts": [
+    {
+     "fact": "奥贡州萨加穆路段发生交通事故，多人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Many people were left injured following a road accident in the Sagamu axis of Ogun State"
+    },
+    {
+     "fact": "应急人员到场救治伤者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "with emergency responders attending to victims at the scene"
+    },
+    {
+     "fact": "现场视频显示伤者躺倒在路面上，有人试图营救被困在受损商业巴士内的伤者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Several men were also seen attempting to rescue victims trapped inside a badly damaged commercial bus."
+    },
+    {
+     "fact": "截至报道发出时伤亡人数尚无法立即确认",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The number of casualties could not be immediately ascertained as of the time of filing this report."
+    }
+   ],
+   "uncertainties": [
+    "伤亡人数尚未确认",
+    "事故原因未提及",
+    "目前仅有一个来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "奥贡州萨加穆路段发生交通事故，多人受伤",
+   "summary_zh": "尼日利亚奥贡州萨加穆路段发生一起交通事故，多人受伤，应急人员到场救治伤者。现场视频显示有伤者躺倒在路面上，数名男子试图营救被困在严重受损商业巴士内的伤者。截至报道发出时，伤亡人数尚无法立即确认。",
+   "event_type": "transport_disruption",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "Ogun State",
+    "city": "Sagamu",
+    "site": null,
+    "raw_text": "Sagamu axis of Ogun State"
+   },
+   "key_facts": [
+    {
+     "fact": "奥贡州萨加穆路段发生交通事故，多人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Many people were left injured following a road accident in the Sagamu axis of Ogun State"
+    },
+    {
+     "fact": "应急人员到场救治伤者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "with emergency responders attending to victims at the scene"
+    },
+    {
+     "fact": "现场视频显示伤者躺倒在路面上，有人试图营救被困在受损商业巴士内的伤者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Several men were also seen attempting to rescue victims trapped inside a badly damaged commercial bus."
+    },
+    {
+     "fact": "截至报道发出时伤亡人数尚无法立即确认",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The number of casualties could not be immediately ascertained as of the time of filing this report."
+    }
+   ],
+   "uncertainties": [
+    "伤亡人数尚未确认",
+    "事故原因未提及",
+    "目前仅有一个来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_5636066674dd1b32",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

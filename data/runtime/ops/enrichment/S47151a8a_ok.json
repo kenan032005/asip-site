@@ -1,0 +1,126 @@
+{
+ "label": "S47151a8a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "aed47bcc6072f65fc7f901f7ee81c469cac5f30d401a6e027e169c4df206896f",
+ "tokens": {
+  "input_tokens": 2391,
+  "output_tokens": 549,
+  "total_tokens": 2940
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"信息来自单一来源（Tchadinfos），尚缺乏交叉验证\", \"难民转移的具体时间节点与各收容点分布未详细说明\"]",
+    "after": "[\"信息来自单一来源（Tchadinfos），尚缺乏交叉验证\", \"难民转移的具体时间节点与各收容点分布未详细说明\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得：4万名苏丹难民被转移至远离高风险边境地区",
+   "summary_zh": "联合国难民署周三宣布，过去六个月约有4万名苏丹难民从高风险边境地区转移至乍得东部更安全的收容点。该行动由难民署及其合作伙伴在西非和中非区域人道基金资助下开展，旨在提升逃离苏丹冲突难民的安全并改善其基本服务获取。期间建成1万套家庭住所，4万名难民获得紧急资金援助，并安装30个供水点、改造两口钻井，另有63753名难民完成生物识别登记。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "乍得东部收容点",
+    "raw_text": "zones frontalières à haut risque vers des sites d’accueil plus sûrs dans l’est du Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "约4万名苏丹难民在过去六个月被转移至乍得东部更安全收容点",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quelque 40.000 réfugiés soudanais ont été transférés au cours des six derniers mois des zones frontalières à haut risque vers des sites d’accueil plus sûrs dans l’est du Tchad"
+    },
+    {
+     "fact": "该行动由联合国难民署及其合作伙伴在西非和中非区域人道基金资助下开展",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Menée par le HCR et ses partenaires avec le soutien financier du Fonds humanitaire régional pour l’Afrique de l’Ouest et du Centre"
+    },
+    {
+     "fact": "期间建成1万套家庭住所，4万名难民获得紧急资金援助",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "10.000 abris familiaux ont été construits et 40.000 réfugiés ont bénéficié d’une aide financière d’urgence"
+    },
+    {
+     "fact": "安装30个供水点并改造两口钻井，63753名难民完成生物识别登记",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’installation de 30 bornes-fontaines et l’aménagement de deux forages... 63.753 réfugiés ont été enregistrés biométriquement"
+    }
+   ],
+   "uncertainties": [
+    "信息来自单一来源（Tchadinfos），尚缺乏交叉验证",
+    "难民转移的具体时间节点与各收容点分布未详细说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得：4万名苏丹难民被转移至远离高风险边境地区",
+   "summary_zh": "联合国难民署周三宣布，过去六个月约有4万名苏丹难民从高风险边境地区转移至乍得东部更安全的收容点。该行动由难民署及其合作伙伴在西非和中非区域人道基金资助下开展，旨在提升逃离苏丹冲突难民的安全并改善其基本服务获取。期间建成1万套家庭住所，4万名难民获得紧急资金援助，并安装30个供水点、改造两口钻井，另有63753名难民完成生物识别登记。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": null,
+    "city": null,
+    "site": "乍得东部收容点",
+    "raw_text": "zones frontalières à haut risque vers des sites d’accueil plus sûrs dans l’est du Tchad"
+   },
+   "key_facts": [
+    {
+     "fact": "约4万名苏丹难民在过去六个月被转移至乍得东部更安全收容点",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quelque 40.000 réfugiés soudanais ont été transférés au cours des six derniers mois des zones frontalières à haut risque vers des sites d’accueil plus sûrs dans l’est du Tchad"
+    },
+    {
+     "fact": "该行动由联合国难民署及其合作伙伴在西非和中非区域人道基金资助下开展",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Menée par le HCR et ses partenaires avec le soutien financier du Fonds humanitaire régional pour l’Afrique de l’Ouest et du Centre"
+    },
+    {
+     "fact": "期间建成1万套家庭住所，4万名难民获得紧急资金援助",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "10.000 abris familiaux ont été construits et 40.000 réfugiés ont bénéficié d’une aide financière d’urgence"
+    },
+    {
+     "fact": "安装30个供水点并改造两口钻井，63753名难民完成生物识别登记",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "l’installation de 30 bornes-fontaines et l’aménagement de deux forages... 63.753 réfugiés ont été enregistrés biométriquement"
+    }
+   ],
+   "uncertainties": [
+    "信息来自单一来源（Tchadinfos），尚缺乏交叉验证",
+    "难民转移的具体时间节点与各收容点分布未详细说明",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_f8cf833247151a8a",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
