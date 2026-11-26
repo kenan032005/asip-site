@@ -1,0 +1,127 @@
+{
+ "label": "S2de3ba1c",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "fb1f6787f455dd073f0cce349fcc3ffca0a63da772f34b17126c1ad0fe8eb3fd",
+ "tokens": {
+  "input_tokens": 2180,
+  "output_tokens": 550,
+  "total_tokens": 2730
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹人民国防军向瓦乌县部署部队开展解除武装行动",
+   "summary_zh": "南苏丹人民国防军（SSPDF）周二向西加扎勒河州瓦乌县部署重装部队，执行总统萨尔瓦·基尔数月前下令的解除武装行动。SSPDF第五步兵师副指挥官沃尔·德尔·泰普少将表示，行动期间将同步宣布为期六个月的紧急状态，覆盖西加扎勒河州、瓦拉布州、湖泊州和团结州。他警告称，拒绝交出非法枪支者将被严厉处置。此次行动据称旨在改善瓦乌安全局势并为和平选举铺路。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "西加扎勒河州",
+    "city": "瓦乌县",
+    "site": null,
+    "raw_text": "Wau County in Western Bahr el Ghazal State"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹人民国防军周二向瓦乌县部署重装部队开展解除武装行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The South Sudan People’s Defense Forces (SSPDF) on Tuesday dispatched heavily armed troops to Wau County in Western Bahr el Ghazal State to carry out a disarmament exercise"
+    },
+    {
+     "fact": "行动系总统萨尔瓦·基尔数月前下令",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "as ordered by President Salva Kiir a few months ago"
+    },
+    {
+     "fact": "行动期间将同步宣布为期六个月的紧急状态，覆盖四个州",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The six-month state of emergency is a presidential directive, and it will be implemented in the four states of Western Bahr el Ghazal, Warrap, Lakes and Unity"
+    },
+    {
+     "fact": "军方警告拒绝交出非法枪支者将被严厉处置",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He warned that if they fail to surrender the guns, the SSPDF will deal with them without lenience."
+    },
+    {
+     "fact": "当局称行动旨在改善瓦乌安全并为和平选举铺路",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The disarmament operation is expected to improve security in Wau and pave the way for peaceful elections."
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（Radio Tamazuj）报道，尚缺乏交叉验证",
+    "紧急状态的具体实施时间与范围尚未获独立确认",
+    "解除武装行动的实际效果与是否引发冲突尚待观察"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "南苏丹人民国防军向瓦乌县部署部队开展解除武装行动",
+   "summary_zh": "南苏丹人民国防军（SSPDF）周二向西加扎勒河州瓦乌县部署重装部队，执行总统萨尔瓦·基尔数月前下令的解除武装行动。SSPDF第五步兵师副指挥官沃尔·德尔·泰普少将表示，行动期间将同步宣布为期六个月的紧急状态，覆盖西加扎勒河州、瓦拉布州、湖泊州和团结州。他警告称，拒绝交出非法枪支者将被严厉处置。此次行动据称旨在改善瓦乌安全局势并为和平选举铺路。",
+   "event_type": "other_security",
+   "country_iso3": "SSD",
+   "location": {
+    "country_iso3": "SSD",
+    "admin1": "西加扎勒河州",
+    "city": "瓦乌县",
+    "site": null,
+    "raw_text": "Wau County in Western Bahr el Ghazal State"
+   },
+   "key_facts": [
+    {
+     "fact": "南苏丹人民国防军周二向瓦乌县部署重装部队开展解除武装行动",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The South Sudan People’s Defense Forces (SSPDF) on Tuesday dispatched heavily armed troops to Wau County in Western Bahr el Ghazal State to carry out a disarmament exercise"
+    },
+    {
+     "fact": "行动系总统萨尔瓦·基尔数月前下令",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "as ordered by President Salva Kiir a few months ago"
+    },
+    {
+     "fact": "行动期间将同步宣布为期六个月的紧急状态，覆盖四个州",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The six-month state of emergency is a presidential directive, and it will be implemented in the four states of Western Bahr el Ghazal, Warrap, Lakes and Unity"
+    },
+    {
+     "fact": "军方警告拒绝交出非法枪支者将被严厉处置",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He warned that if they fail to surrender the guns, the SSPDF will deal with them without lenience."
+    },
+    {
+     "fact": "当局称行动旨在改善瓦乌安全并为和平选举铺路",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The disarmament operation is expected to improve security in Wau and pave the way for peaceful elections."
+    }
+   ],
+   "uncertainties": [
+    "目前仅单一来源（Radio Tamazuj）报道，尚缺乏交叉验证",
+    "紧急状态的具体实施时间与范围尚未获独立确认",
+    "解除武装行动的实际效果与是否引发冲突尚待观察"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_a403f3642de3ba1c",
+ "disease_event_id": null,
+ "country_code": "SS"
+}

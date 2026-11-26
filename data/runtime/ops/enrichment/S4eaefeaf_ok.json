@@ -1,0 +1,105 @@
+{
+ "label": "S4eaefeaf",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a67818e4d4162b34039d43bbd553158ff9edd1beee13c8a92ae65eecee9a9816",
+ "tokens": {
+  "input_tokens": 2120,
+  "output_tokens": 423,
+  "total_tokens": 2543
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得总统宣布在阿贝歇新建监狱和军事基地",
+   "summary_zh": "乍得总统穆罕默德·伊德里斯·代比·伊特诺在安全巡视期间访问阿贝歇，宣布为该市启动多项重大工程。项目包括建设40公里城市道路网、新建一所监狱以及设立一个新的军事基地。阿贝歇是瓦达伊省首府，此行是总统全国多省安全巡视的第三站。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "瓦达伊省",
+    "city": "阿贝歇",
+    "site": null,
+    "raw_text": "Abéché, chef-lieu de la province du Ouaddaï"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得总统在阿贝歇宣布建设新监狱和军事基地",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Tchad : le président annonce la construction d'une nouvelle prison et d'une base militaire à Abéché"
+    },
+    {
+     "fact": "阿贝歇是总统安全巡视的第三站",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Abéché, chef-lieu de la province du Ouaddaï, a constitué la troisième étape de la tournée sécuritaire menée par le maréchal du Tchad Mahamat Idriss Déby Itno"
+    },
+    {
+     "fact": "宣布的项目包括40公里城市道路网、新监狱和新军事基地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la construction d'un réseau routier urbain de 40 kilomètres, l'édification d'un nouvel établissement pénitentiaire ainsi que l'implantation d'une nouvelle base militaire"
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（Alwihda Info）报道，尚缺乏交叉验证",
+    "项目具体开工时间与资金来源未在报道中说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得总统宣布在阿贝歇新建监狱和军事基地",
+   "summary_zh": "乍得总统穆罕默德·伊德里斯·代比·伊特诺在安全巡视期间访问阿贝歇，宣布为该市启动多项重大工程。项目包括建设40公里城市道路网、新建一所监狱以及设立一个新的军事基地。阿贝歇是瓦达伊省首府，此行是总统全国多省安全巡视的第三站。",
+   "event_type": "infrastructure_incident",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "瓦达伊省",
+    "city": "阿贝歇",
+    "site": null,
+    "raw_text": "Abéché, chef-lieu de la province du Ouaddaï"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得总统在阿贝歇宣布建设新监狱和军事基地",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Tchad : le président annonce la construction d'une nouvelle prison et d'une base militaire à Abéché"
+    },
+    {
+     "fact": "阿贝歇是总统安全巡视的第三站",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Abéché, chef-lieu de la province du Ouaddaï, a constitué la troisième étape de la tournée sécuritaire menée par le maréchal du Tchad Mahamat Idriss Déby Itno"
+    },
+    {
+     "fact": "宣布的项目包括40公里城市道路网、新监狱和新军事基地",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la construction d'un réseau routier urbain de 40 kilomètres, l'édification d'un nouvel établissement pénitentiaire ainsi que l'implantation d'une nouvelle base militaire"
+    }
+   ],
+   "uncertainties": [
+    "目前仅有一个来源（Alwihda Info）报道，尚缺乏交叉验证",
+    "项目具体开工时间与资金来源未在报道中说明"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_311511694eaefeaf",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

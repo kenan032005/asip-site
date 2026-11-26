@@ -1,0 +1,115 @@
+{
+ "label": "Saa10ac84",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "07da83426037b7cbbf60a4591d228cc4ec8ffc928b234a4ecfd69fa15e93b169",
+ "tokens": {
+  "input_tokens": 2537,
+  "output_tokens": 533,
+  "total_tokens": 3070
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "ar",
+   "title_zh": "乍得东部苏丹难民持续涌入，人道危机加剧",
+   "summary_zh": "乍得东部持续接收苏丹难民，难民总数已超过98.3万人。2026年10月25日至11月1日期间，联合国难民署及其合作伙伴在蒂内、奥雷卡索尼和阿德里等入境点登记了2717名新抵达者。当地基础设施承受巨大压力，蒂内中转中心原设计容纳1000人，目前收容超过7505人。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "东部地区",
+    "city": null,
+    "site": "蒂内、奥雷卡索尼、阿德里入境点",
+    "raw_text": "شرق تشاد / نقاط الدخول في تيني وأوريه كاسوني وأدري"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得东部苏丹难民总数超过98.3万人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "منذ اندلاع الأزمة في أبريل 2023، تجاوز العدد الإجمالي للاجئين السودانيين الوافدين إلى تشاد 983 ألف شخص"
+    },
+    {
+     "fact": "2026年10月25日至11月1日期间登记2717名新抵达难民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "بين 25 أكتوبر و1 نوفمبر 2026 ... أحصت مفوضية الأمم المتحدة السامية لشؤون اللاجئين وشركاؤها وصول 2717 شخصاً جديداً"
+    },
+    {
+     "fact": "蒂内中转中心原设计容纳1000人，目前收容超过7505人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "يؤوي مركز العبور في تيني، المصمم أصلاً لاستيعاب ألف شخص، حالياً أكثر من 7505 أشخاص"
+    },
+    {
+     "fact": "难民中妇女和儿童占87%，未成年人占登记人数的67%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "تمثل النساء والأطفال 87% من هذا الإجمالي، بينما يشكل القصر وحدهم 67% من المسجلين"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（Alwihda Info）报道，尚缺乏交叉验证",
+    "塞拉省存在与脆弱性援助相关的局部紧张局势，具体细节未获确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "ar",
+   "title_zh": "乍得东部苏丹难民持续涌入，人道危机加剧",
+   "summary_zh": "乍得东部持续接收苏丹难民，难民总数已超过98.3万人。2026年10月25日至11月1日期间，联合国难民署及其合作伙伴在蒂内、奥雷卡索尼和阿德里等入境点登记了2717名新抵达者。当地基础设施承受巨大压力，蒂内中转中心原设计容纳1000人，目前收容超过7505人。",
+   "event_type": "other_security",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "东部地区",
+    "city": null,
+    "site": "蒂内、奥雷卡索尼、阿德里入境点",
+    "raw_text": "شرق تشاد / نقاط الدخول في تيني وأوريه كاسوني وأدري"
+   },
+   "key_facts": [
+    {
+     "fact": "乍得东部苏丹难民总数超过98.3万人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "منذ اندلاع الأزمة في أبريل 2023، تجاوز العدد الإجمالي للاجئين السودانيين الوافدين إلى تشاد 983 ألف شخص"
+    },
+    {
+     "fact": "2026年10月25日至11月1日期间登记2717名新抵达难民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "بين 25 أكتوبر و1 نوفمبر 2026 ... أحصت مفوضية الأمم المتحدة السامية لشؤون اللاجئين وشركاؤها وصول 2717 شخصاً جديداً"
+    },
+    {
+     "fact": "蒂内中转中心原设计容纳1000人，目前收容超过7505人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "يؤوي مركز العبور في تيني، المصمم أصلاً لاستيعاب ألف شخص، حالياً أكثر من 7505 أشخاص"
+    },
+    {
+     "fact": "难民中妇女和儿童占87%，未成年人占登记人数的67%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "تمثل النساء والأطفال 87% من هذا الإجمالي، بينما يشكل القصر وحدهم 67% من المسجلين"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（Alwihda Info）报道，尚缺乏交叉验证",
+    "塞拉省存在与脆弱性援助相关的局部紧张局势，具体细节未获确认"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_78eea9f2aa10ac84",
+ "disease_event_id": null,
+ "country_code": "TD"
+}
