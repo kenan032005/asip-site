@@ -1,0 +1,115 @@
+{
+ "label": "Scdec5d3f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f193582e70348ded52e309a1a4e4ed96b33fc4bf82469184a170e246d528452b",
+ "tokens": {
+  "input_tokens": 2577,
+  "output_tokens": 563,
+  "total_tokens": 3140
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "pt",
+   "title_zh": "美国公司协助莫桑比克警方应对N380和N1公路恐怖主义威胁",
+   "summary_zh": "美国安全公司Sincerus将在美国国务院资助的项目下，协助莫桑比克共和国警察（PRM）应对通往德尔加杜角省的N380和N1公路沿线的恐怖主义威胁。该项目名为“加强莫桑比克过境安全与经济保护”，资助金额最高达4933399美元（460万欧元），实施期为24个月。据Lusa报道，该项目旨在加强北部莫桑比克关键过境路线的安全，并保护美国经济利益。自2017年以来，德尔加杜角省一直遭受极端组织袭击，已造成超过6600人死亡、逾130万人流离失所。",
+   "event_type": "terrorism",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "德尔加杜角省",
+    "city": null,
+    "site": "N380和N1公路",
+    "raw_text": "N380 and N1 highways leading to Cabo Delgado"
+   },
+   "key_facts": [
+    {
+     "fact": "美国安全公司Sincerus将协助莫桑比克警方应对N380和N1公路沿线的恐怖主义威胁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "US security company Sincerus will support the Mozambique Republic Police (PRM) in countering terrorist threats along the N380 and N1 highways leading to Cabo Delgado"
+    },
+    {
+     "fact": "该项目由美国国务院资助，金额最高达4933399美元（460万欧元），实施期为24个月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It provides for funding of up to US$4,933,399 (€4.6 million) and an implementation period of 24 months."
+    },
+    {
+     "fact": "自2017年以来，德尔加杜角省遭受极端组织袭击，已造成超过6600人死亡、逾130万人流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Gas-rich Cabo Delgado province has faced attacks by extremist groups since 2017, which have left more than 6,600 people dead and displaced over 1.3 million."
+    },
+    {
+     "fact": "Sincerus公司已在德尔加杜角省彭巴市开始招聘人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sincerus Global Solutions, selected to implement the programme and which has already begun recruiting staff in Pemba, Cabo Delgado"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源（Lusa），尚缺乏交叉验证",
+    "项目具体实施效果及对恐怖主义威胁的实际影响尚未证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "pt",
+   "title_zh": "美国公司协助莫桑比克警方应对N380和N1公路恐怖主义威胁",
+   "summary_zh": "美国安全公司Sincerus将在美国国务院资助的项目下，协助莫桑比克共和国警察（PRM）应对通往德尔加杜角省的N380和N1公路沿线的恐怖主义威胁。该项目名为“加强莫桑比克过境安全与经济保护”，资助金额最高达4933399美元（460万欧元），实施期为24个月。据Lusa报道，该项目旨在加强北部莫桑比克关键过境路线的安全，并保护美国经济利益。自2017年以来，德尔加杜角省一直遭受极端组织袭击，已造成超过6600人死亡、逾130万人流离失所。",
+   "event_type": "terrorism",
+   "country_iso3": "MOZ",
+   "location": {
+    "country_iso3": "MOZ",
+    "admin1": "德尔加杜角省",
+    "city": null,
+    "site": "N380和N1公路",
+    "raw_text": "N380 and N1 highways leading to Cabo Delgado"
+   },
+   "key_facts": [
+    {
+     "fact": "美国安全公司Sincerus将协助莫桑比克警方应对N380和N1公路沿线的恐怖主义威胁",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "US security company Sincerus will support the Mozambique Republic Police (PRM) in countering terrorist threats along the N380 and N1 highways leading to Cabo Delgado"
+    },
+    {
+     "fact": "该项目由美国国务院资助，金额最高达4933399美元（460万欧元），实施期为24个月",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "It provides for funding of up to US$4,933,399 (€4.6 million) and an implementation period of 24 months."
+    },
+    {
+     "fact": "自2017年以来，德尔加杜角省遭受极端组织袭击，已造成超过6600人死亡、逾130万人流离失所",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Gas-rich Cabo Delgado province has faced attacks by extremist groups since 2017, which have left more than 6,600 people dead and displaced over 1.3 million."
+    },
+    {
+     "fact": "Sincerus公司已在德尔加杜角省彭巴市开始招聘人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Sincerus Global Solutions, selected to implement the programme and which has already begun recruiting staff in Pemba, Cabo Delgado"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源（Lusa），尚缺乏交叉验证",
+    "项目具体实施效果及对恐怖主义威胁的实际影响尚未证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_121c9ebbcdec5d3f",
+ "disease_event_id": null,
+ "country_code": "MZ"
+}

@@ -1,0 +1,117 @@
+{
+ "label": "S93a6bafa",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "54ad6cf95a41b7b297c40b00615644daff8b4aa2758a16e4e516ad4a1ac48ecb",
+ "tokens": {
+  "input_tokens": 2663,
+  "output_tokens": 433,
+  "total_tokens": 3096
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "韩国城南市一辆公交车撞上30多辆车，57人受伤",
+   "summary_zh": "据韩国救援部门消息，11月11日周三上午，一辆公交车在首尔以南城南市一个十字路口撞上30多辆停驶车辆，造成57人受伤，其中9人重伤。司机向警方声称事发时刹车失灵，初步检测未发现饮酒。调查人员将调取监控录像以查明事故确切情况。",
+   "event_type": "transport_disruption",
+   "country_iso3": "KOR",
+   "location": {
+    "country_iso3": "KOR",
+    "admin1": null,
+    "city": "城南市",
+    "site": "盆唐区十字路口",
+    "raw_text": "Seongnam, près de Séoul, quartier de Bundang"
+   },
+   "key_facts": [
+    {
+     "fact": "一辆公交车在城南市撞上30多辆车辆，造成57人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un autobus de ligne a percuté mercredi 11 novembre 2026 plus de trente véhicules arrêtés à un carrefour de Seongnam, au sud de Séoul, faisant 57 blessés"
+    },
+    {
+     "fact": "伤者中9人重伤，48人轻伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Parmi les 57 personnes blessées, 48 ont subi des blessures légères"
+    },
+    {
+     "fact": "司机声称事发时刹车失灵",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Entendu par la police, le conducteur a déclaré que ses freins ne fonctionnaient plus au moment de l'accident"
+    },
+    {
+     "fact": "初步检测未发现司机饮酒",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les premiers tests n'ont révélé aucune consommation d'alcool"
+    }
+   ],
+   "uncertainties": [
+    "事故确切原因尚未查明，有待调取监控录像核实",
+    "司机关于刹车失灵的说法尚未证实",
+    "目前仅单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "韩国城南市一辆公交车撞上30多辆车，57人受伤",
+   "summary_zh": "据韩国救援部门消息，11月11日周三上午，一辆公交车在首尔以南城南市一个十字路口撞上30多辆停驶车辆，造成57人受伤，其中9人重伤。司机向警方声称事发时刹车失灵，初步检测未发现饮酒。调查人员将调取监控录像以查明事故确切情况。",
+   "event_type": "transport_disruption",
+   "country_iso3": "KOR",
+   "location": {
+    "country_iso3": "KOR",
+    "admin1": null,
+    "city": "城南市",
+    "site": "盆唐区十字路口",
+    "raw_text": "Seongnam, près de Séoul, quartier de Bundang"
+   },
+   "key_facts": [
+    {
+     "fact": "一辆公交车在城南市撞上30多辆车辆，造成57人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Un autobus de ligne a percuté mercredi 11 novembre 2026 plus de trente véhicules arrêtés à un carrefour de Seongnam, au sud de Séoul, faisant 57 blessés"
+    },
+    {
+     "fact": "伤者中9人重伤，48人轻伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Parmi les 57 personnes blessées, 48 ont subi des blessures légères"
+    },
+    {
+     "fact": "司机声称事发时刹车失灵",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Entendu par la police, le conducteur a déclaré que ses freins ne fonctionnaient plus au moment de l'accident"
+    },
+    {
+     "fact": "初步检测未发现司机饮酒",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les premiers tests n'ont révélé aucune consommation d'alcool"
+    }
+   ],
+   "uncertainties": [
+    "事故确切原因尚未查明，有待调取监控录像核实",
+    "司机关于刹车失灵的说法尚未证实",
+    "目前仅单一来源报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_e3e931d193a6bafa",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

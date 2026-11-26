@@ -1,0 +1,136 @@
+{
+ "label": "Se142b14b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0204776d3f10516b5635d871c308445462d10448812023cff4d730703c091d14",
+ "tokens": {
+  "input_tokens": 2407,
+  "output_tokens": 575,
+  "total_tokens": 2982
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"报道未说明展会期间是否签署具体防务制造协议\", \"报道未提供尼日利亚国防进口依赖程度的具体数据\"]",
+    "after": "[\"报道未说明展会期间是否签署具体防务制造协议\", \"报道未提供尼日利亚国防进口依赖程度的具体数据\", \"据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "AFRIDEX 2026：尼日利亚推动结束国防进口依赖",
+   "summary_zh": "2026年10月26日至29日，非洲国际防务展（AFRIDEX 2026）在尼日利亚拉各斯Eko Atlantic City举行，政府官员、军方指挥官、制造商与投资者参会，探讨非洲防务生产与军工合作。尼日利亚联邦政府推动将尼日利亚国防工业公司（DICON）打造为本土防务制造引擎，参议院议长阿克帕比奥代表总统提努布呼吁以伙伴关系替代单纯采购。国防部长穆萨及与会专家强调技术转让、技术吸收与创新融资对实现防务自主的重要性。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "拉各斯州",
+    "city": "拉各斯",
+    "site": "Eko Atlantic City",
+    "raw_text": "Eko Atlantic City, Lagos"
+   },
+   "key_facts": [
+    {
+     "fact": "AFRIDEX 2026于10月26日至29日在拉各斯Eko Atlantic City举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Africa International Defence Exhibition (AFRIDEX) 2026, held from Oct. 26 to Oct. 29 at Eko Atlantic City, Lagos"
+    },
+    {
+     "fact": "尼日利亚政府推动将DICON打造为本土防务制造引擎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Federal Government’s determination to reposition the Defence Industries Corporation of Nigeria (DICON) as a driver of indigenous defence manufacturing"
+    },
+    {
+     "fact": "参议院议长阿克帕比奥代表总统提努布呼吁非洲国家以伙伴关系替代单纯采购",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Representing President Bola Tinubu at the opening ceremony, Senate President Godswill Akpabio called on African countries to replace standard buying practices with partnerships"
+    },
+    {
+     "fact": "国防部长穆萨呼吁加强国际伙伴关系与投资以加速本地生产",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Minister of Defence, retired Gen. Christopher Musa, reinforced the position, calling for stronger international partnerships and investment to accelerate local production"
+    },
+    {
+     "fact": "专家小组指出明确国防战略、技术吸收与创新融资是实现自主的关键",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "experts identified clear national defence strategies, technology absorption, and innovative financing as essential to achieving self-reliance"
+    }
+   ],
+   "uncertainties": [
+    "报道未说明展会期间是否签署具体防务制造协议",
+    "报道未提供尼日利亚国防进口依赖程度的具体数据"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "AFRIDEX 2026：尼日利亚推动结束国防进口依赖",
+   "summary_zh": "2026年10月26日至29日，非洲国际防务展（AFRIDEX 2026）在尼日利亚拉各斯Eko Atlantic City举行，政府官员、军方指挥官、制造商与投资者参会，探讨非洲防务生产与军工合作。尼日利亚联邦政府推动将尼日利亚国防工业公司（DICON）打造为本土防务制造引擎，参议院议长阿克帕比奥代表总统提努布呼吁以伙伴关系替代单纯采购。国防部长穆萨及与会专家强调技术转让、技术吸收与创新融资对实现防务自主的重要性。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "拉各斯州",
+    "city": "拉各斯",
+    "site": "Eko Atlantic City",
+    "raw_text": "Eko Atlantic City, Lagos"
+   },
+   "key_facts": [
+    {
+     "fact": "AFRIDEX 2026于10月26日至29日在拉各斯Eko Atlantic City举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Africa International Defence Exhibition (AFRIDEX) 2026, held from Oct. 26 to Oct. 29 at Eko Atlantic City, Lagos"
+    },
+    {
+     "fact": "尼日利亚政府推动将DICON打造为本土防务制造引擎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the Federal Government’s determination to reposition the Defence Industries Corporation of Nigeria (DICON) as a driver of indigenous defence manufacturing"
+    },
+    {
+     "fact": "参议院议长阿克帕比奥代表总统提努布呼吁非洲国家以伙伴关系替代单纯采购",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Representing President Bola Tinubu at the opening ceremony, Senate President Godswill Akpabio called on African countries to replace standard buying practices with partnerships"
+    },
+    {
+     "fact": "国防部长穆萨呼吁加强国际伙伴关系与投资以加速本地生产",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Minister of Defence, retired Gen. Christopher Musa, reinforced the position, calling for stronger international partnerships and investment to accelerate local production"
+    },
+    {
+     "fact": "专家小组指出明确国防战略、技术吸收与创新融资是实现自主的关键",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "experts identified clear national defence strategies, technology absorption, and innovative financing as essential to achieving self-reliance"
+    }
+   ],
+   "uncertainties": [
+    "报道未说明展会期间是否签署具体防务制造协议",
+    "报道未提供尼日利亚国防进口依赖程度的具体数据",
+    "据News Agency of Nigeria报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_373b281de142b14b",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
