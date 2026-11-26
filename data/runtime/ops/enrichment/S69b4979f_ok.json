@@ -1,0 +1,125 @@
+{
+ "label": "S69b4979f",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "14cb8ac86a97b07e71540fcd90f53575dd4028a3788456084936686e33786aaa",
+ "tokens": {
+  "input_tokens": 2465,
+  "output_tokens": 657,
+  "total_tokens": 3122
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "乍得东部面临新一轮苏丹难民涌入",
+   "summary_zh": "2026年10月底至11月初，乍得东部接收了逃离苏丹冲突的新一批难民，加剧了本已饱和的人道主义基础设施压力。据联合国难民署及合作伙伴统计，10月25日至11月1日期间，共有2717名新抵达者进入Tiné、Ouré-Cassoni和Adré三个入境点。自2023年4月危机爆发以来，乍得接收的苏丹难民总数已超过98.3万人。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "东部地区",
+    "city": null,
+    "site": "Tiné、Ouré-Cassoni和Adré入境点",
+    "raw_text": "l'Est du Tchad, points d'entrée de Tiné, d'Ouré-Cassoni et d'Adré"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年10月25日至11月1日期间，乍得东部三个入境点共记录到2717名新抵达难民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Entre le 25 octobre et le 1er novembre 2026... le HCR et ses partenaires ont recensé l'arrivée de 2 717 nouvelles personnes aux points d'entrée de Tiné, d'Ouré-Cassoni et d'Adré"
+    },
+    {
+     "fact": "自2023年4月危机以来，乍得接收的苏丹难民总数超过98.3万人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis le début de la crise en avril 2023, le nombre total de réfugiés soudanais accueillis au Tchad dépasse désormais 983 000"
+    },
+    {
+     "fact": "Tiné中转中心原设计容量为1000人，目前收容超过7500人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le centre de transit de Tiné, initialement calibré pour 1 000 personnes, en héberge actuellement plus de 7 500"
+    },
+    {
+     "fact": "难民中妇女和儿童占87%，未成年人占登记人数的67%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les femmes et les enfants représentent 87 % de cette population, les mineurs constituant à eux seuls 67 % des enregistrements"
+    },
+    {
+     "fact": "Sila地区围绕基于脆弱性的援助（ABVC）存在局部紧张",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "malgré un climat sécuritaire globalement calme marqué par des incidents mineurs et des tensions localisées dans le Sila autour de l'Assistance basée sur la vulnérabilité (ABVC)"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（Alwihda Info），尚缺乏交叉验证",
+    "难民人数及人道主义状况数据来自单一来源报道，有待其他机构核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "乍得东部面临新一轮苏丹难民涌入",
+   "summary_zh": "2026年10月底至11月初，乍得东部接收了逃离苏丹冲突的新一批难民，加剧了本已饱和的人道主义基础设施压力。据联合国难民署及合作伙伴统计，10月25日至11月1日期间，共有2717名新抵达者进入Tiné、Ouré-Cassoni和Adré三个入境点。自2023年4月危机爆发以来，乍得接收的苏丹难民总数已超过98.3万人。",
+   "event_type": "armed_conflict",
+   "country_iso3": "TCD",
+   "location": {
+    "country_iso3": "TCD",
+    "admin1": "东部地区",
+    "city": null,
+    "site": "Tiné、Ouré-Cassoni和Adré入境点",
+    "raw_text": "l'Est du Tchad, points d'entrée de Tiné, d'Ouré-Cassoni et d'Adré"
+   },
+   "key_facts": [
+    {
+     "fact": "2026年10月25日至11月1日期间，乍得东部三个入境点共记录到2717名新抵达难民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Entre le 25 octobre et le 1er novembre 2026... le HCR et ses partenaires ont recensé l'arrivée de 2 717 nouvelles personnes aux points d'entrée de Tiné, d'Ouré-Cassoni et d'Adré"
+    },
+    {
+     "fact": "自2023年4月危机以来，乍得接收的苏丹难民总数超过98.3万人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Depuis le début de la crise en avril 2023, le nombre total de réfugiés soudanais accueillis au Tchad dépasse désormais 983 000"
+    },
+    {
+     "fact": "Tiné中转中心原设计容量为1000人，目前收容超过7500人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le centre de transit de Tiné, initialement calibré pour 1 000 personnes, en héberge actuellement plus de 7 500"
+    },
+    {
+     "fact": "难民中妇女和儿童占87%，未成年人占登记人数的67%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les femmes et les enfants représentent 87 % de cette population, les mineurs constituant à eux seuls 67 % des enregistrements"
+    },
+    {
+     "fact": "Sila地区围绕基于脆弱性的援助（ABVC）存在局部紧张",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "malgré un climat sécuritaire globalement calme marqué par des incidents mineurs et des tensions localisées dans le Sila autour de l'Assistance basée sur la vulnérabilité (ABVC)"
+    }
+   ],
+   "uncertainties": [
+    "该事件目前仅有一个来源（Alwihda Info），尚缺乏交叉验证",
+    "难民人数及人道主义状况数据来自单一来源报道，有待其他机构核实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 75
+  }
+ },
+ "event_id": "EVT_d71ce09b69b4979f",
+ "disease_event_id": null,
+ "country_code": "TD"
+}

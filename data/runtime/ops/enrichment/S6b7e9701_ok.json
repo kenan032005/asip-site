@@ -1,0 +1,126 @@
+{
+ "label": "S6b7e9701",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "c645907cb9f49b4385bc71dbcf0879b18cef24c1843f6cf43d45635f1d6ba7f2",
+ "tokens": {
+  "input_tokens": 2935,
+  "output_tokens": 521,
+  "total_tokens": 3456
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"该报道为单一来源（Benin Web TV），尚未获得其他独立来源交叉验证\", \"研究结果基于特定队列样本，不代表对全体人口的重新普查\"]",
+    "after": "[\"该报道为单一来源（Benin Web TV），尚未获得其他独立来源交叉验证\", \"研究结果基于特定队列样本，不代表对全体人口的重新普查\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "一项针对844108名成年人的研究揭示BMI的盲区",
+   "summary_zh": "一项国际研究基于四国共844108名成年人的数据，比较了仅用体重指数（BMI）与结合腰围及腰高比的分类方式，发现BMI会低估部分成年人的肥胖程度，也会高估另一部分人。研究还区分了临床肥胖与临床前肥胖，并指出临床肥胖与更高的全因死亡风险相关。该研究于2026年11月11日发表在《自然》杂志上。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "研究涵盖844108名成年人，数据来自英国、美国、中国和西班牙四国",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’analyse réunit quatre ensembles de données, dont 436 203 participants au Royaume-Uni, 218 841 aux États-Unis, 137 795 en Chine et 51 269 en Espagne."
+    },
+    {
+     "fact": "BMI单独使用会低估5.2%至8.6%成年人的肥胖程度，高估1.2%至3.1%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’indice de masse corporelle (IMC) sous-estime l’obésité chez 5,2 à 8,6 % des adultes étudiés selon les cohortes, et la surestime chez 1,2 à 3,1 %."
+    },
+    {
+     "fact": "研究于2026年11月11日发表在《自然》杂志",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "publiée mercredi 11 novembre 2026 dans la revue scientifique Nature"
+    },
+    {
+     "fact": "临床肥胖的全因死亡风险比为1.69，临床前肥胖为1.19",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils s’élèvent à 1,69 pour l’obésité clinique et à 1,19 pour l’obésité préclinique"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源（Benin Web TV），尚未获得其他独立来源交叉验证",
+    "研究结果基于特定队列样本，不代表对全体人口的重新普查"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "一项针对844108名成年人的研究揭示BMI的盲区",
+   "summary_zh": "一项国际研究基于四国共844108名成年人的数据，比较了仅用体重指数（BMI）与结合腰围及腰高比的分类方式，发现BMI会低估部分成年人的肥胖程度，也会高估另一部分人。研究还区分了临床肥胖与临床前肥胖，并指出临床肥胖与更高的全因死亡风险相关。该研究于2026年11月11日发表在《自然》杂志上。",
+   "event_type": "other_security",
+   "country_iso3": "BEN",
+   "location": {
+    "country_iso3": "BEN",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "研究涵盖844108名成年人，数据来自英国、美国、中国和西班牙四国",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’analyse réunit quatre ensembles de données, dont 436 203 participants au Royaume-Uni, 218 841 aux États-Unis, 137 795 en Chine et 51 269 en Espagne."
+    },
+    {
+     "fact": "BMI单独使用会低估5.2%至8.6%成年人的肥胖程度，高估1.2%至3.1%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’indice de masse corporelle (IMC) sous-estime l’obésité chez 5,2 à 8,6 % des adultes étudiés selon les cohortes, et la surestime chez 1,2 à 3,1 %."
+    },
+    {
+     "fact": "研究于2026年11月11日发表在《自然》杂志",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "publiée mercredi 11 novembre 2026 dans la revue scientifique Nature"
+    },
+    {
+     "fact": "临床肥胖的全因死亡风险比为1.69，临床前肥胖为1.19",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils s’élèvent à 1,69 pour l’obésité clinique et à 1,19 pour l’obésité préclinique"
+    }
+   ],
+   "uncertainties": [
+    "该报道为单一来源（Benin Web TV），尚未获得其他独立来源交叉验证",
+    "研究结果基于特定队列样本，不代表对全体人口的重新普查",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "none",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_fe78f8a06b7e9701",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
