@@ -1,0 +1,115 @@
+{
+ "label": "Sa0233668",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "068f9821776cb07e24f23f28fa2ec511955f9503483fd599ece24e7663fe6fba",
+ "tokens": {
+  "input_tokens": 2500,
+  "output_tokens": 488,
+  "total_tokens": 2988
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚警方与CCAN合作，在2027年大选前打击虚假信息",
+   "summary_zh": "尼日利亚警察总监奥拉通吉·迪苏在阿布贾举行的犯罪记者协会（CCAN）年度会议暨颁奖典礼上承诺，将与CCAN合作，确保在2027年大选前及时、可靠地传播信息。他表示警方将建立核实渠道，并已责成国家网络犯罪中心监测网络虚假和煽动性内容。迪苏称已通过数字取证识别并逮捕制作虚假通知和视频的人员。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚警察总监迪苏承诺与CCAN合作，在2027年大选前确保信息及时可靠传播",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Inspector-General of Police (I-G), Mr Olatunji Disu, has pledged to partner with the Crime Correspondents Association of Nigeria (CCAN) to ensure prompt and reliable information dissemination ahead of the 2027 general elections."
+    },
+    {
+     "fact": "迪苏在阿布贾举行的CCAN年度会议暨颁奖典礼上作出上述承诺",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Disu made the pledge on Wednesday in Abuja at the association’s annual conference and awards ceremony"
+    },
+    {
+     "fact": "警方称已责成国家网络犯罪中心监测网络虚假和煽动性内容",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He said the Nigeria Police Force National Cybercrime Centre had been mandated to monitor online platforms for false and inciting content."
+    },
+    {
+     "fact": "迪苏称通过数字取证已识别并逮捕制作虚假通知和视频的人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Through digital forensics, we have identified and arrested individuals behind fabricated notices and videos."
+    }
+   ],
+   "uncertainties": [
+    "警方称已逮捕制作虚假通知和视频的人员，但未提供具体人数、时间或案件细节，尚未获独立证实",
+    "目前仅单一来源（尼日利亚通讯社）报道"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚警方与CCAN合作，在2027年大选前打击虚假信息",
+   "summary_zh": "尼日利亚警察总监奥拉通吉·迪苏在阿布贾举行的犯罪记者协会（CCAN）年度会议暨颁奖典礼上承诺，将与CCAN合作，确保在2027年大选前及时、可靠地传播信息。他表示警方将建立核实渠道，并已责成国家网络犯罪中心监测网络虚假和煽动性内容。迪苏称已通过数字取证识别并逮捕制作虚假通知和视频的人员。",
+   "event_type": "political_instability",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": "阿布贾",
+    "site": null,
+    "raw_text": "Abuja"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚警察总监迪苏承诺与CCAN合作，在2027年大选前确保信息及时可靠传播",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Inspector-General of Police (I-G), Mr Olatunji Disu, has pledged to partner with the Crime Correspondents Association of Nigeria (CCAN) to ensure prompt and reliable information dissemination ahead of the 2027 general elections."
+    },
+    {
+     "fact": "迪苏在阿布贾举行的CCAN年度会议暨颁奖典礼上作出上述承诺",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Disu made the pledge on Wednesday in Abuja at the association’s annual conference and awards ceremony"
+    },
+    {
+     "fact": "警方称已责成国家网络犯罪中心监测网络虚假和煽动性内容",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "He said the Nigeria Police Force National Cybercrime Centre had been mandated to monitor online platforms for false and inciting content."
+    },
+    {
+     "fact": "迪苏称通过数字取证已识别并逮捕制作虚假通知和视频的人员",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Through digital forensics, we have identified and arrested individuals behind fabricated notices and videos."
+    }
+   ],
+   "uncertainties": [
+    "警方称已逮捕制作虚假通知和视频的人员，但未提供具体人数、时间或案件细节，尚未获独立证实",
+    "目前仅单一来源（尼日利亚通讯社）报道"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_8e4e80e2a0233668",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

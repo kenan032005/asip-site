@@ -1,29 +1,31 @@
 {
  "schema": "homepage-intelligence-fact-pack-v1",
- "generated_at": "2026-11-27T01:43:32+08:00",
+ "generated_at": "2026-11-27T03:29:57+08:00",
  "windows": {
   "primary_hours": 24,
   "context_days": 7
  },
  "counts": {
-  "signals_24h": 56,
-  "signals_7d": 386,
-  "verified_events_24h": 58,
-  "verified_events_7d": 393,
+  "signals_24h": 47,
+  "signals_7d": 379,
+  "verified_events_24h": 61,
+  "verified_events_7d": 398,
   "multi_source_verified_events_7d": 5,
-  "countries_with_activity_24h": 9,
+  "countries_with_activity_24h": 11,
   "total_countries_monitored": 22
  },
  "countries_24h": [
   "乍得",
   "几内亚比绍",
   "南苏丹",
+  "塞内加尔",
   "尼日利亚",
   "尼日尔",
   "科特迪瓦",
   "莫桑比克",
   "贝宁",
-  "赞比亚"
+  "赞比亚",
+  "马里"
  ],
  "countries_7d": [
   "中非共和国",
@@ -58,19 +60,19 @@
  "country_distribution_7d": [
   {
    "value": "尼日利亚",
-   "count": 174
+   "count": 173
   },
   {
    "value": "贝宁",
-   "count": 52
+   "count": 50
   },
   {
    "value": "乍得",
-   "count": 43
+   "count": 42
   },
   {
    "value": "莫桑比克",
-   "count": 37
+   "count": 34
   },
   {
    "value": "南苏丹",
@@ -108,15 +110,11 @@
  "category_distribution_24h": [
   {
    "value": "其他安全",
-   "count": 32
+   "count": 25
   },
   {
    "value": "民众骚乱",
-   "count": 16
-  },
-  {
-   "value": "严重犯罪",
-   "count": 2
+   "count": 15
   },
   {
    "value": "election_security",
@@ -124,6 +122,10 @@
   },
   {
    "value": "军事行动",
+   "count": 1
+  },
+  {
+   "value": "严重犯罪",
    "count": 1
   },
   {
@@ -142,11 +144,11 @@
  "source_tier_distribution_7d": [
   {
    "value": "C",
-   "count": 642
+   "count": 637
   },
   {
    "value": "A",
-   "count": 97
+   "count": 100
   },
   {
    "value": "B",
@@ -154,36 +156,6 @@
   }
  ],
  "top_verified_events": [
-  {
-   "fact_id": "EVT_050c4ab2c5b53f46",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "贝宁",
-   "title": "Côte d’Ivoire : sept morts, dont un bébé, dans une collision sur l’axe Adzopé–Akoupé",
-   "category": "other_security",
-   "source": "Benin Web TV",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-19 18:58",
-   "importance": "high",
-   "severity": "medium"
-  },
-  {
-   "fact_id": "EVT_6a21e5f404ef5810",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "贝宁",
-   "title": "Guinée : Canal+ sommé de retirer la télévision burkinabè RTB de ses bouquets",
-   "category": "serious_crime",
-   "source": "Benin Web TV",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-19 18:57",
-   "importance": "high",
-   "severity": "medium"
-  },
   {
    "fact_id": "EVT_efff1f5afdad7938",
    "level": "verified_event",
@@ -241,6 +213,36 @@
    "source_tier": "C",
    "source_role": "major_media",
    "time": "2026-11-19 20:16",
+   "importance": "high",
+   "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_555e954122f9764a",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Sécurité régionale : le Nigeria obtient un droit de poursuite transfrontalier",
+   "category": "other_security",
+   "source": "Alwihda Info",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-11-19 19:54",
+   "importance": "high",
+   "severity": "medium"
+  },
+  {
+   "fact_id": "EVT_10f554cba8ec282d",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "布基纳法索",
+   "title": "International Crisis Group recommande des négociations entre les régimes militaires sahéliens et le Jnim",
+   "category": "terrorist_attack",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-11-20 00:03",
    "importance": "high",
    "severity": "medium"
   }
@@ -685,7 +687,7 @@
   "status": "deterministic",
   "based_on": "过去24小时/7日公开信息（确定性汇总）"
  },
- "fact_count": 779,
+ "fact_count": 777,
  "facts": {
   "news:f83d1f4d15aab8c6": {
    "fact_id": "news:f83d1f4d15aab8c6",
@@ -6372,141 +6374,6 @@
    "importance": "low",
    "why_it_matters": ""
   },
-  "news:caf4ec0969043006": {
-   "fact_id": "news:caf4ec0969043006",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "莫桑比克",
-   "title": "Mozambique: Chapo blames “enemies of the people” for post-election destruction, calls for vigilance in Namacurra",
-   "category": "election_security",
-   "source": "Club of Mozambique",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-20 03:10",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:9100ce368d7ebbd0": {
-   "fact_id": "news:9100ce368d7ebbd0",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "贝宁",
-   "title": "Côte d’Ivoire : sept morts, dont un bébé, dans une collision sur l’axe Adzopé–Akoupé",
-   "category": "other_security",
-   "source": "Benin Web TV",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-20 02:58",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:70aa0e85e010a2ae": {
-   "fact_id": "news:70aa0e85e010a2ae",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "贝宁",
-   "title": "Guinée : Canal+ sommé de retirer la télévision burkinabè RTB de ses bouquets",
-   "category": "serious_crime",
-   "source": "Benin Web TV",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-20 02:57",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:fcbf0b6b0065cf84": {
-   "fact_id": "news:fcbf0b6b0065cf84",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "Moyen-Chari : Danamadji renforce l’encadrement de la transhumance transfrontalière vers la RCA",
-   "category": "other_security",
-   "source": "Tachad.com",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-11-20 02:39",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:1750b2b6251ded25": {
-   "fact_id": "news:1750b2b6251ded25",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "莫桑比克",
-   "title": "Mozambique: Sweden provides US$3.6 million to support children and young people in Palma",
-   "category": "armed_conflict",
-   "source": "Club of Mozambique",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-20 02:33",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:01876e39503d4190": {
-   "fact_id": "news:01876e39503d4190",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "Mob kills accident survivor after crash claims two lives in Osun",
-   "category": "other_security",
-   "source": "Punch",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-20 02:04",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "news:d4d1cd9daa0ff2b1": {
-   "fact_id": "news:d4d1cd9daa0ff2b1",
-   "level": "news_signal",
-   "evidence_tier": "news_signal",
-   "source_count": 1,
-   "country": "莫桑比克",
-   "title": "Devastação de machambas deixa famílias em risco de fome em Massingir",
-   "category": "other_security",
-   "source": "O Pais",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-20 01:57",
-   "importance": "low",
-   "why_it_matters": ""
-  },
-  "EVT_050c4ab2c5b53f46": {
-   "fact_id": "EVT_050c4ab2c5b53f46",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "贝宁",
-   "title": "Côte d’Ivoire : sept morts, dont un bébé, dans une collision sur l’axe Adzopé–Akoupé",
-   "category": "other_security",
-   "source": "Benin Web TV",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-19 18:58",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_6a21e5f404ef5810": {
-   "fact_id": "EVT_6a21e5f404ef5810",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "贝宁",
-   "title": "Guinée : Canal+ sommé de retirer la télévision burkinabè RTB de ses bouquets",
-   "category": "serious_crime",
-   "source": "Benin Web TV",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-19 18:57",
-   "importance": "high",
-   "severity": "medium"
-  },
   "EVT_efff1f5afdad7938": {
    "fact_id": "EVT_efff1f5afdad7938",
    "level": "verified_event",
@@ -6564,36 +6431,6 @@
    "source_tier": "C",
    "source_role": "major_media",
    "time": "2026-11-19 20:16",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_75b863dfdd92a981": {
-   "fact_id": "EVT_75b863dfdd92a981",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "尼日利亚",
-   "title": "Mob kills accident survivor after crash claims two lives in Osun",
-   "category": "other_security",
-   "source": "Punch",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-19 18:04",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_b56c4c62a847e39d": {
-   "fact_id": "EVT_b56c4c62a847e39d",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "乍得",
-   "title": "Moyen-Chari : Danamadji renforce l’encadrement de la transhumance transfrontalière vers la RCA",
-   "category": "other_security",
-   "source": "Tachad.com",
-   "source_tier": "C",
-   "source_role": "local_signal",
-   "time": "2026-11-19 18:39",
    "importance": "high",
    "severity": "medium"
   },
@@ -6669,51 +6506,6 @@
    "source_tier": "C",
    "source_role": "major_media",
    "time": "2026-11-19 23:42",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_9a0913169695c610": {
-   "fact_id": "EVT_9a0913169695c610",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "莫桑比克",
-   "title": "Mozambique: Chapo blames “enemies of the people” for post-election destruction, calls for vigilance in Namacurra",
-   "category": "election_security",
-   "source": "Club of Mozambique",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-19 19:10",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_1394d53cdc9e0d6c": {
-   "fact_id": "EVT_1394d53cdc9e0d6c",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "莫桑比克",
-   "title": "Mozambique: Sweden provides US$3.6 million to support children and young people in Palma",
-   "category": "armed_conflict",
-   "source": "Club of Mozambique",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-19 18:33",
-   "importance": "high",
-   "severity": "medium"
-  },
-  "EVT_febb922f06286965": {
-   "fact_id": "EVT_febb922f06286965",
-   "level": "verified_event",
-   "evidence_tier": "single_source_published",
-   "source_count": 1,
-   "country": "莫桑比克",
-   "title": "Devastação de machambas deixa famílias em risco de fome em Massingir",
-   "category": "other_security",
-   "source": "O Pais",
-   "source_tier": "C",
-   "source_role": "major_media",
-   "time": "2026-11-19 17:57",
    "importance": "high",
    "severity": "medium"
   },
@@ -12369,6 +12161,186 @@
    "source_tier": "C",
    "source_role": "local_signal",
    "time": "2026-11-26 11:30",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_4182a6ca7499fde0": {
+   "fact_id": "EVT_4182a6ca7499fde0",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "贝宁",
+   "title": "Lutte contre le paludisme et appui à la vaccination : Des drones réceptionnés et un centre de vaccination moderne inauguré",
+   "category": "other_security",
+   "source": "Gouvernement du Benin",
+   "source_tier": "C",
+   "source_role": "official",
+   "time": "2026-11-27 02:21",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_2a16af87019db93c": {
+   "fact_id": "EVT_2a16af87019db93c",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "贝宁",
+   "title": "Mbappé ou Haaland ? Un chroniqueur espagnol tranche pour le Norvégien au Real Madrid",
+   "category": "other_security",
+   "source": "La Nouvelle Tribune",
+   "source_tier": "C",
+   "source_role": "major_media",
+   "time": "2026-11-26 15:02",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_2201342af6c8c776": {
+   "fact_id": "EVT_2201342af6c8c776",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "马里",
+   "title": "En visite au Mali, le nouveau directeur international de Barrick Mining tourne définitivement la page du conflit",
+   "category": "infrastructure_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-11-26 16:40",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_0630cc83f3ef0131": {
+   "fact_id": "EVT_0630cc83f3ef0131",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "50 Nigerian innovation teams advance to USPF Changemaker regional demo",
+   "category": "other_security",
+   "source": "News Agency of Nigeria",
+   "source_tier": "C",
+   "source_role": "major_media",
+   "time": "2026-11-26 16:40",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_b9c993e56bb08d1d": {
+   "fact_id": "EVT_b9c993e56bb08d1d",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "FCTA activates emergency operations centre to contain cholera outbreak",
+   "category": "public_health",
+   "source": "News Agency of Nigeria",
+   "source_tier": "C",
+   "source_role": "major_media",
+   "time": "2026-11-26 16:38",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_446d50e4190d9d98": {
+   "fact_id": "EVT_446d50e4190d9d98",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "Au Nigeria, cinq Mexicains arrêtés dans le cadre d’une opération contre un laboratoire de drogue de synthèse",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-11-26 15:01",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_267ba4ac0b6bdb06": {
+   "fact_id": "EVT_267ba4ac0b6bdb06",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "Delta prosecuting over 15 human trafficking cases — Official",
+   "category": "other_security",
+   "source": "Punch",
+   "source_tier": "C",
+   "source_role": "major_media",
+   "time": "2026-11-26 18:26",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_0d1b5d8943f2289b": {
+   "fact_id": "EVT_0d1b5d8943f2289b",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "17 victims of Plateau attack get mass burial",
+   "category": "other_security",
+   "source": "Punch",
+   "source_tier": "C",
+   "source_role": "major_media",
+   "time": "2026-11-26 18:11",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_ead489a827658de2": {
+   "fact_id": "EVT_ead489a827658de2",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "尼日利亚",
+   "title": "Fire Service CG condemns attacks on firefighters, warns perpetrators",
+   "category": "other_security",
+   "source": "Punch",
+   "source_tier": "C",
+   "source_role": "major_media",
+   "time": "2026-11-26 17:17",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_4565ae615b5a7fa3": {
+   "fact_id": "EVT_4565ae615b5a7fa3",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "塞内加尔",
+   "title": "En Afrique de l'Ouest et au Sahel, «la situation agropastorale 2026-2027 est alarmante»",
+   "category": "other_security",
+   "source": "RFI Afrique",
+   "source_tier": "A",
+   "source_role": "major_media",
+   "time": "2026-11-26 16:46",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_df0b8af2d7bb389a": {
+   "fact_id": "EVT_df0b8af2d7bb389a",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "南苏丹",
+   "title": "Calls for probe after deadly shooting in Kapoeta",
+   "category": "other_security",
+   "source": "Radio Tamazuj",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-11-26 18:20",
+   "importance": "high",
+   "severity": "medium"
+  },
+  "EVT_7572dc3fd23cb280": {
+   "fact_id": "EVT_7572dc3fd23cb280",
+   "level": "verified_event",
+   "evidence_tier": "single_source_published",
+   "source_count": 1,
+   "country": "乍得",
+   "title": "Tchad : la ministre de la Justice rappelle l’interdiction des gardes à vue dans les affaires civiles",
+   "category": "other_security",
+   "source": "Tchadinfos",
+   "source_tier": "C",
+   "source_role": "local_signal",
+   "time": "2026-11-26 14:33",
    "importance": "high",
    "severity": "medium"
   }
