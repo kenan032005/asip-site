@@ -1,0 +1,115 @@
+{
+ "label": "S8af557fd",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "f7d3dbacba6f1351c60305ed2125952de6ee8bb37baa98db2909788cbd4fd6fa",
+ "tokens": {
+  "input_tokens": 2775,
+  "output_tokens": 538,
+  "total_tokens": 3313
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "阿加德兹：矿业部长与手工采金业者座谈",
+   "summary_zh": "尼日尔矿业部长阿巴尔奇·乌斯曼上校在阿加德兹地区视察期间，于2026年11月10日下午在省长公署会议室会见地区及省级矿业部门负责人和手工采金业者。会议讨论了手工采金活动的组织与监管、经营者义务落实、矿区安全条件及环境保护等问题。部长强调手工开采须纳入法律框架，并呼吁建立政府、经营者与社区间的定期协商机制以预防冲突。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "阿加德兹",
+    "city": "阿加德兹",
+    "site": "省长公署会议室",
+    "raw_text": "région d’Agadez, salle de réunions du Gouvernorat"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔矿业部长在阿加德兹会见手工采金业者及矿业部门负责人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le ministre des Mines, le commissaire Colonel-major Abarchi Ousmane, a rencontré... les responsables régionaux et départementaux des services miniers ainsi que les différents acteurs intervenant dans le secteur, particulièrement les orpailleurs"
+    },
+    {
+     "fact": "会议于2026年11月10日下午在省长公署会议室举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "dans l’après-midi du mardi 10 novembre 2026... Cette rencontre, tenue dans la salle de réunions du Gouvernorat"
+    },
+    {
+     "fact": "部长要求将手工开采活动纳入法律框架并改善矿区安全条件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le ministre des Mines a réaffirmé la nécessité d’inscrire les activités d’exploitation artisanale dans le cadre légal, tout en améliorant les conditions de sécurité sur les sites"
+    },
+    {
+     "fact": "部长强调通过倾听民众诉求和及时处理关切来预防冲突、维护社会和平",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la prévention des conflits et la préservation de la paix sociale passent par une écoute permanente des populations et un traitement diligent de leurs préoccupations"
+    }
+   ],
+   "uncertainties": [
+    "报道为单一来源（ONEP NE），未获其他来源交叉验证",
+    "会议具体成果与后续措施尚未公布"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "阿加德兹：矿业部长与手工采金业者座谈",
+   "summary_zh": "尼日尔矿业部长阿巴尔奇·乌斯曼上校在阿加德兹地区视察期间，于2026年11月10日下午在省长公署会议室会见地区及省级矿业部门负责人和手工采金业者。会议讨论了手工采金活动的组织与监管、经营者义务落实、矿区安全条件及环境保护等问题。部长强调手工开采须纳入法律框架，并呼吁建立政府、经营者与社区间的定期协商机制以预防冲突。",
+   "event_type": "other_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "阿加德兹",
+    "city": "阿加德兹",
+    "site": "省长公署会议室",
+    "raw_text": "région d’Agadez, salle de réunions du Gouvernorat"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日尔矿业部长在阿加德兹会见手工采金业者及矿业部门负责人",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le ministre des Mines, le commissaire Colonel-major Abarchi Ousmane, a rencontré... les responsables régionaux et départementaux des services miniers ainsi que les différents acteurs intervenant dans le secteur, particulièrement les orpailleurs"
+    },
+    {
+     "fact": "会议于2026年11月10日下午在省长公署会议室举行",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "dans l’après-midi du mardi 10 novembre 2026... Cette rencontre, tenue dans la salle de réunions du Gouvernorat"
+    },
+    {
+     "fact": "部长要求将手工开采活动纳入法律框架并改善矿区安全条件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le ministre des Mines a réaffirmé la nécessité d’inscrire les activités d’exploitation artisanale dans le cadre légal, tout en améliorant les conditions de sécurité sur les sites"
+    },
+    {
+     "fact": "部长强调通过倾听民众诉求和及时处理关切来预防冲突、维护社会和平",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la prévention des conflits et la préservation de la paix sociale passent par une écoute permanente des populations et un traitement diligent de leurs préoccupations"
+    }
+   ],
+   "uncertainties": [
+    "报道为单一来源（ONEP NE），未获其他来源交叉验证",
+    "会议具体成果与后续措施尚未公布"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_3bb08b698af557fd",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
