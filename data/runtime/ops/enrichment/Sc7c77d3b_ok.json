@@ -1,0 +1,140 @@
+{
+ "label": "Sc7c77d3b",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "806820802853201f7dc16352a2ee12dcb310235ea600d9a3537f3e68e3a32e59",
+ "tokens": {
+  "input_tokens": 2571,
+  "output_tokens": 535,
+  "total_tokens": 3106
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "independent_source_count",
+    "marker": "single_source",
+    "field": "uncertainties",
+    "before": "[\"TPLF是否仍有能力反击尚不清楚\", \"提格雷当地信息难以核实，BBC无法在当地报道\", \"冲突死亡人数为据报数字，未获独立确认\", \"TPLF发言人称正筹备大规模反攻，尚未证实\"]",
+    "after": "[\"TPLF是否仍有能力反击尚不清楚\", \"提格雷当地信息难以核实，BBC无法在当地报道\", \"冲突死亡人数为据报数字，未获独立确认\", \"TPLF发言人称正筹备大规模反攻，尚未证实\", \"据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。\"]",
+    "rule_id": "SAFETY-CORR-D1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "提格雷战事未止：埃塞俄比亚最新冲突是否真正结束存疑",
+   "summary_zh": "埃塞俄比亚提格雷地区9月下旬爆发联邦军队与提格雷人民解放阵线（TPLF）之间的战斗，联邦军队在不到两周内进入首府默克莱，TPLF称其为“战略性撤退”。据报冲突已致数百人死亡，包括无人机和空袭造成的数十人死亡。提格雷部分地区居民称战斗仍在继续，但信息难以核实，BBC无法在当地报道。TPLF发言人否认战败，声称正筹备大规模反攻。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷州",
+    "city": "默克莱",
+    "site": null,
+    "raw_text": "Mekelle, capital of Ethiopia's troubled northern Tigray region"
+   },
+   "key_facts": [
+    {
+     "fact": "提格雷地区9月下旬爆发联邦军队与TPLF之间的战斗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fighting broke out in late September between the Tigray People's Liberation Front (TPLF)... and the national army"
+    },
+    {
+     "fact": "联邦军队在不到两周内进入提格雷首府默克莱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "within less than two weeks, federal forces marched triumphantly into Mekelle"
+    },
+    {
+     "fact": "据报冲突已致数百人死亡，包括无人机和空袭造成的数十人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Hundreds of people are reported to have died in the conflict, including dozens killed by drone strikes and bombing raids by the air force"
+    },
+    {
+     "fact": "TPLF称其从默克莱等主要城镇进行“战略性撤退”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The TPLF made what it called a \"strategic withdrawal\" from the city and Tigray's other main towns"
+    },
+    {
+     "fact": "提格雷部分地区居民称战斗仍在继续，涉及重炮和无人机打击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Residents in different parts of Tigray tell the BBC that fighting is continuing in central, northern and north-western parts of Tigray, with the use of heavy artillery and drone strikes"
+    }
+   ],
+   "uncertainties": [
+    "TPLF是否仍有能力反击尚不清楚",
+    "提格雷当地信息难以核实，BBC无法在当地报道",
+    "冲突死亡人数为据报数字，未获独立确认",
+    "TPLF发言人称正筹备大规模反攻，尚未证实"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "提格雷战事未止：埃塞俄比亚最新冲突是否真正结束存疑",
+   "summary_zh": "埃塞俄比亚提格雷地区9月下旬爆发联邦军队与提格雷人民解放阵线（TPLF）之间的战斗，联邦军队在不到两周内进入首府默克莱，TPLF称其为“战略性撤退”。据报冲突已致数百人死亡，包括无人机和空袭造成的数十人死亡。提格雷部分地区居民称战斗仍在继续，但信息难以核实，BBC无法在当地报道。TPLF发言人否认战败，声称正筹备大规模反攻。",
+   "event_type": "armed_conflict",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷州",
+    "city": "默克莱",
+    "site": null,
+    "raw_text": "Mekelle, capital of Ethiopia's troubled northern Tigray region"
+   },
+   "key_facts": [
+    {
+     "fact": "提格雷地区9月下旬爆发联邦军队与TPLF之间的战斗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Fighting broke out in late September between the Tigray People's Liberation Front (TPLF)... and the national army"
+    },
+    {
+     "fact": "联邦军队在不到两周内进入提格雷首府默克莱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "within less than two weeks, federal forces marched triumphantly into Mekelle"
+    },
+    {
+     "fact": "据报冲突已致数百人死亡，包括无人机和空袭造成的数十人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Hundreds of people are reported to have died in the conflict, including dozens killed by drone strikes and bombing raids by the air force"
+    },
+    {
+     "fact": "TPLF称其从默克莱等主要城镇进行“战略性撤退”",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The TPLF made what it called a \"strategic withdrawal\" from the city and Tigray's other main towns"
+    },
+    {
+     "fact": "提格雷部分地区居民称战斗仍在继续，涉及重炮和无人机打击",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Residents in different parts of Tigray tell the BBC that fighting is continuing in central, northern and north-western parts of Tigray, with the use of heavy artillery and drone strikes"
+    }
+   ],
+   "uncertainties": [
+    "TPLF是否仍有能力反击尚不清楚",
+    "提格雷当地信息难以核实，BBC无法在当地报道",
+    "冲突死亡人数为据报数字，未获独立确认",
+    "TPLF发言人称正筹备大规模反攻，尚未证实",
+    "据BBC News (Africa)报道，目前仅获单一来源支持，尚缺乏交叉验证。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 85
+  }
+ },
+ "event_id": "EVT_877d4593c7c77d3b",
+ "disease_event_id": null,
+ "country_code": "ET"
+}

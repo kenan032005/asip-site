@@ -1,0 +1,138 @@
+{
+ "label": "Saa4309ed",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "5102379d0695f2154f6f7acbda8302e7a8a59fed4460218126f362d21bf406b5",
+ "tokens": {
+  "input_tokens": 3075,
+  "output_tokens": 553,
+  "total_tokens": 3628
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"农作物受损面积和需援助人数均据地区当局说法，尚未获得独立核实\", \"目前仅有一个来源（RFI）报道，尚缺乏交叉验证\", \"当地居民担忧可能发生饥荒，但饥荒是否发生尚未证实\"]",
+    "after": "[\"农作物受损面积和需援助人数均据地区当局说法，尚未获得独立核实\", \"目前仅有一个来源（RFI）报道，尚缺乏交叉验证\", \"当地居民担忧可能发生饥荒，但饥荒是否发生尚未证实\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "提格雷地区遭遇严重干旱，农作物被烧毁和破坏",
+   "summary_zh": "埃塞俄比亚北部提格雷地区今年面临严重干旱，东部地区6月至8月降水量不足季节平均值的60%。据地区当局称，2026年超过25.25万公顷农作物被干旱烧毁或破坏，农民处境危急。据地区当局估计，提格雷目前有近400万人需要紧急粮食援助，超过该地区人口的一半。目前仅有一个来源报道此事，尚未获得交叉验证。",
+   "event_type": "natural_disaster",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷",
+    "city": "阿拉古雷",
+    "site": null,
+    "raw_text": "Tigré, est du Tigré, village d'Aragure"
+   },
+   "key_facts": [
+    {
+     "fact": "提格雷地区今年面临特别严重的干旱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Tigré, région du nord de l'Éthiopie, est confronté cette année à une sécheresse particulièrement grave"
+    },
+    {
+     "fact": "提格雷东部6月至8月降水量不足季节平均值的60%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les précipitations entre juin et août ont représenté moins de 60 % de la moyenne saisonnière"
+    },
+    {
+     "fact": "据地区当局称，2026年超过25.25万公顷农作物被干旱烧毁或破坏",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "selon les autorités régionales, en 2026, plus de 252 500 hectares de cultures auraient été brûlés ou détruits par la sécheresse"
+    },
+    {
+     "fact": "据地区当局称，提格雷近400万人需要紧急粮食援助",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "près de 4 millions de personnes ont actuellement besoin d'une aide alimentaire d'urgence au Tigré"
+    },
+    {
+     "fact": "干旱导致牲畜价格大幅下跌，牛价从12万比尔跌至2万比尔",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Avant, on vendait nos bœufs sur le marché pour 120 000 birrs (652 euros)... ils ne valent plus que 20 000 birrs (110 euros)"
+    }
+   ],
+   "uncertainties": [
+    "农作物受损面积和需援助人数均据地区当局说法，尚未获得独立核实",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证",
+    "当地居民担忧可能发生饥荒，但饥荒是否发生尚未证实"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "提格雷地区遭遇严重干旱，农作物被烧毁和破坏",
+   "summary_zh": "埃塞俄比亚北部提格雷地区今年面临严重干旱，东部地区6月至8月降水量不足季节平均值的60%。据地区当局称，2026年超过25.25万公顷农作物被干旱烧毁或破坏，农民处境危急。据地区当局估计，提格雷目前有近400万人需要紧急粮食援助，超过该地区人口的一半。目前仅有一个来源报道此事，尚未获得交叉验证。",
+   "event_type": "natural_disaster",
+   "country_iso3": "ETH",
+   "location": {
+    "country_iso3": "ETH",
+    "admin1": "提格雷",
+    "city": "阿拉古雷",
+    "site": null,
+    "raw_text": "Tigré, est du Tigré, village d'Aragure"
+   },
+   "key_facts": [
+    {
+     "fact": "提格雷地区今年面临特别严重的干旱",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "le Tigré, région du nord de l'Éthiopie, est confronté cette année à une sécheresse particulièrement grave"
+    },
+    {
+     "fact": "提格雷东部6月至8月降水量不足季节平均值的60%",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "les précipitations entre juin et août ont représenté moins de 60 % de la moyenne saisonnière"
+    },
+    {
+     "fact": "据地区当局称，2026年超过25.25万公顷农作物被干旱烧毁或破坏",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "selon les autorités régionales, en 2026, plus de 252 500 hectares de cultures auraient été brûlés ou détruits par la sécheresse"
+    },
+    {
+     "fact": "据地区当局称，提格雷近400万人需要紧急粮食援助",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "près de 4 millions de personnes ont actuellement besoin d'une aide alimentaire d'urgence au Tigré"
+    },
+    {
+     "fact": "干旱导致牲畜价格大幅下跌，牛价从12万比尔跌至2万比尔",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Avant, on vendait nos bœufs sur le marché pour 120 000 birrs (652 euros)... ils ne valent plus que 20 000 birrs (110 euros)"
+    }
+   ],
+   "uncertainties": [
+    "农作物受损面积和需援助人数均据地区当局说法，尚未获得独立核实",
+    "目前仅有一个来源（RFI）报道，尚缺乏交叉验证",
+    "当地居民担忧可能发生饥荒，但饥荒是否发生尚未证实",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_7f1ce399aa4309ed",
+ "disease_event_id": null,
+ "country_code": "ET"
+}
