@@ -1,0 +1,138 @@
+{
+ "label": "Sbcd4b624",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "a1aacf333ac0e7b59608998701c9e82be5a723ba3578b6b664be311632490270",
+ "tokens": {
+  "input_tokens": 2756,
+  "output_tokens": 543,
+  "total_tokens": 3299
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"伤亡人数前后说法不一：铁路部门最初称无伤者，随后首席部长称四人轻伤\", \"事故原因尚未确认，仅称司机未能控制车速\", \"目前仅单一来源（Benin Web TV）报道，尚缺乏交叉验证\"]",
+    "after": "[\"伤亡人数前后说法不一：铁路部门最初称无伤者，随后首席部长称四人轻伤\", \"事故原因尚未确认，仅称司机未能控制车速\", \"目前仅单一来源（Benin Web TV）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "印度阿萨姆邦一列特快列车脱轨，造成四人受伤",
+   "summary_zh": "印度阿萨姆邦古瓦哈提附近的迪加鲁发生列车脱轨事故，Kolkata–Sairang Express的机车及五节车厢脱轨，造成四人轻伤。铁路部门最初称未接到伤亡报告，阿萨姆邦首席部长随后表示有四人受轻伤并已送医。事故导致多趟列车运行调整，约300余名乘客被安排换乘。目前尚无死亡报告。",
+   "event_type": "transport_disruption",
+   "country_iso3": "IND",
+   "location": {
+    "country_iso3": "IND",
+    "admin1": "阿萨姆邦",
+    "city": "古瓦哈提",
+    "site": "迪加鲁车站入口",
+    "raw_text": "à Digaru, près de Guwahati, dans l’État indien de l’Assam"
+   },
+   "key_facts": [
+    {
+     "fact": "Kolkata–Sairang Express的机车及五节车厢在迪加鲁脱轨",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La locomotive et cinq voitures du train sont sorties des rails vers 6 h 54, heure locale, à l’entrée de la gare de Digaru."
+    },
+    {
+     "fact": "事故造成四人轻伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quatre personnes ont été légèrement blessées mercredi 11 novembre 2026 dans le déraillement du Kolkata–Sairang Express à Digaru"
+    },
+    {
+     "fact": "铁路部门最初称未接到伤亡报告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les responsables ferroviaires ont d’abord indiqué qu’aucun blessé n’avait été signalé."
+    },
+    {
+     "fact": "当局称事故后未报告死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucun décès n’a été signalé par les autorités après le déraillement."
+    },
+    {
+     "fact": "约300余名乘客来自西孟加拉邦各车站",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plus de 300 personnes parties de gares du Bengale-Occidental se trouvaient à bord de l’express, selon Eastern Railway."
+    }
+   ],
+   "uncertainties": [
+    "伤亡人数前后说法不一：铁路部门最初称无伤者，随后首席部长称四人轻伤",
+    "事故原因尚未确认，仅称司机未能控制车速",
+    "目前仅单一来源（Benin Web TV）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "印度阿萨姆邦一列特快列车脱轨，造成四人受伤",
+   "summary_zh": "印度阿萨姆邦古瓦哈提附近的迪加鲁发生列车脱轨事故，Kolkata–Sairang Express的机车及五节车厢脱轨，造成四人轻伤。铁路部门最初称未接到伤亡报告，阿萨姆邦首席部长随后表示有四人受轻伤并已送医。事故导致多趟列车运行调整，约300余名乘客被安排换乘。目前尚无死亡报告。",
+   "event_type": "transport_disruption",
+   "country_iso3": "IND",
+   "location": {
+    "country_iso3": "IND",
+    "admin1": "阿萨姆邦",
+    "city": "古瓦哈提",
+    "site": "迪加鲁车站入口",
+    "raw_text": "à Digaru, près de Guwahati, dans l’État indien de l’Assam"
+   },
+   "key_facts": [
+    {
+     "fact": "Kolkata–Sairang Express的机车及五节车厢在迪加鲁脱轨",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La locomotive et cinq voitures du train sont sorties des rails vers 6 h 54, heure locale, à l’entrée de la gare de Digaru."
+    },
+    {
+     "fact": "事故造成四人轻伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Quatre personnes ont été légèrement blessées mercredi 11 novembre 2026 dans le déraillement du Kolkata–Sairang Express à Digaru"
+    },
+    {
+     "fact": "铁路部门最初称未接到伤亡报告",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les responsables ferroviaires ont d’abord indiqué qu’aucun blessé n’avait été signalé."
+    },
+    {
+     "fact": "当局称事故后未报告死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucun décès n’a été signalé par les autorités après le déraillement."
+    },
+    {
+     "fact": "约300余名乘客来自西孟加拉邦各车站",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plus de 300 personnes parties de gares du Bengale-Occidental se trouvaient à bord de l’express, selon Eastern Railway."
+    }
+   ],
+   "uncertainties": [
+    "伤亡人数前后说法不一：铁路部门最初称无伤者，随后首席部长称四人轻伤",
+    "事故原因尚未确认，仅称司机未能控制车速",
+    "目前仅单一来源（Benin Web TV）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_6c35e64cbcd4b624",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}

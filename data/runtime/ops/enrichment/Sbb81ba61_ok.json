@@ -1,0 +1,117 @@
+{
+ "label": "Sbb81ba61",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "7ff04e6170fd3604cfc43236f7ac74ae7be68d5258252b0fda7fdbea5427a450",
+ "tokens": {
+  "input_tokens": 2036,
+  "output_tokens": 531,
+  "total_tokens": 2567
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚军方在卡齐纳和索科托开展行动，击毙一名疑似恐怖分子并逮捕一对父子",
+   "summary_zh": "尼日利亚西北部联合特遣部队“Fansan Yamma行动”于11月10日至11日在卡齐纳州和索科托州分别开展行动，击毙一名疑似恐怖分子，并逮捕一对父子。行动中还缴获两支AK-47步枪、弹药、一辆摩托车和三部手机。军方称，卡齐纳州行动依据情报展开，情报显示有武装恐怖分子据称正策划袭击当地社区居民。上述信息目前仅来自单一来源。",
+   "event_type": "terrorism",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "卡齐纳州",
+    "city": null,
+    "site": "马卢姆法希地方政府区Bada'u Gora",
+    "raw_text": "Bada'u Gora in Malumfashi Local Government Area of Katsina State; Sokoto State"
+   },
+   "key_facts": [
+    {
+     "fact": "军方在卡齐纳州击毙一名疑似恐怖分子",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Troops of the Joint Task Force, North West, under Operation Fansan Yamma, have killed a suspected terrorist"
+    },
+    {
+     "fact": "军方在索科托州逮捕一对父子",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Soldiers kill terrorist, arrest father, son in Katsina, Sokoto"
+    },
+    {
+     "fact": "行动于11月10日和11日进行，缴获两支AK-47步枪、弹药、一辆摩托车和三部手机",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The operations, conducted on November 10 and 11, also led to the recovery of two AK-47 rifles, ammunition, a motorcycle and three mobile phones."
+    },
+    {
+     "fact": "卡齐纳州行动依据情报展开，情报称武装恐怖分子据称正策划袭击社区居民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "troops of Sector 1 acted on credible intelligence about the presence of armed terrorists at Bada'u Gora in Malumfashi Local Government Area of Katsina State, who were allegedly planning attacks on members of the community."
+    }
+   ],
+   "uncertainties": [
+    "被击毙者身份及是否为恐怖分子尚未获独立确认",
+    "据称策划袭击社区的情报内容尚未证实",
+    "目前仅有一个来源（Punch）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚军方在卡齐纳和索科托开展行动，击毙一名疑似恐怖分子并逮捕一对父子",
+   "summary_zh": "尼日利亚西北部联合特遣部队“Fansan Yamma行动”于11月10日至11日在卡齐纳州和索科托州分别开展行动，击毙一名疑似恐怖分子，并逮捕一对父子。行动中还缴获两支AK-47步枪、弹药、一辆摩托车和三部手机。军方称，卡齐纳州行动依据情报展开，情报显示有武装恐怖分子据称正策划袭击当地社区居民。上述信息目前仅来自单一来源。",
+   "event_type": "terrorism",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "卡齐纳州",
+    "city": null,
+    "site": "马卢姆法希地方政府区Bada'u Gora",
+    "raw_text": "Bada'u Gora in Malumfashi Local Government Area of Katsina State; Sokoto State"
+   },
+   "key_facts": [
+    {
+     "fact": "军方在卡齐纳州击毙一名疑似恐怖分子",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Troops of the Joint Task Force, North West, under Operation Fansan Yamma, have killed a suspected terrorist"
+    },
+    {
+     "fact": "军方在索科托州逮捕一对父子",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Soldiers kill terrorist, arrest father, son in Katsina, Sokoto"
+    },
+    {
+     "fact": "行动于11月10日和11日进行，缴获两支AK-47步枪、弹药、一辆摩托车和三部手机",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The operations, conducted on November 10 and 11, also led to the recovery of two AK-47 rifles, ammunition, a motorcycle and three mobile phones."
+    },
+    {
+     "fact": "卡齐纳州行动依据情报展开，情报称武装恐怖分子据称正策划袭击社区居民",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "troops of Sector 1 acted on credible intelligence about the presence of armed terrorists at Bada'u Gora in Malumfashi Local Government Area of Katsina State, who were allegedly planning attacks on members of the community."
+    }
+   ],
+   "uncertainties": [
+    "被击毙者身份及是否为恐怖分子尚未获独立确认",
+    "据称策划袭击社区的情报内容尚未证实",
+    "目前仅有一个来源（Punch）报道，缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_a87de4aabb81ba61",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
