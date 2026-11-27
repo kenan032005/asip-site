@@ -1,0 +1,105 @@
+{
+ "label": "Se9603a17",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "e8f9062127badd881c95e04aed49a075c895e59fbd148bbc5b0daf12f5de7adf",
+ "tokens": {
+  "input_tokens": 2036,
+  "output_tokens": 345,
+  "total_tokens": 2381
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚112紧急号码在全国电视直播测试中未能接通",
+   "summary_zh": "尼日利亚112紧急号码在Channels Television直播节目中接受测试，APC总统竞选委员会发言人Alwan Hassan要求主播Seun Okinbaloye现场拨打该号码。据报演播室多次拨打均未能接通，尽管Hassan坚称可以接通。该事件使112紧急号码服务受到审视。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": "Channels Television演播室",
+    "raw_text": "Channels Television studio"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚112紧急号码在电视直播测试中未能接通",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Nigeria’s 112 emergency number fails live test on national television"
+    },
+    {
+     "fact": "APC总统竞选委员会发言人Alwan Hassan要求主播现场拨打112测试",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Alwan Hassan, an APC Presidential Campaign Council spokesperson, challenged Channels Television anchor Seun Okinbaloye to test the service during a live broadcast"
+    },
+    {
+     "fact": "据报演播室多次拨打该号码均失败",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "repeated attempts to call the number from the studio reportedly failed, despite Hassan’s insistence that it would connect"
+    }
+   ],
+   "uncertainties": [
+    "拨打失败的具体原因尚未说明",
+    "目前仅单一来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚112紧急号码在全国电视直播测试中未能接通",
+   "summary_zh": "尼日利亚112紧急号码在Channels Television直播节目中接受测试，APC总统竞选委员会发言人Alwan Hassan要求主播Seun Okinbaloye现场拨打该号码。据报演播室多次拨打均未能接通，尽管Hassan坚称可以接通。该事件使112紧急号码服务受到审视。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": "Channels Television演播室",
+    "raw_text": "Channels Television studio"
+   },
+   "key_facts": [
+    {
+     "fact": "尼日利亚112紧急号码在电视直播测试中未能接通",
+     "evidence_field": "title_original",
+     "evidence_excerpt": "Nigeria’s 112 emergency number fails live test on national television"
+    },
+    {
+     "fact": "APC总统竞选委员会发言人Alwan Hassan要求主播现场拨打112测试",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Alwan Hassan, an APC Presidential Campaign Council spokesperson, challenged Channels Television anchor Seun Okinbaloye to test the service during a live broadcast"
+    },
+    {
+     "fact": "据报演播室多次拨打该号码均失败",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "repeated attempts to call the number from the studio reportedly failed, despite Hassan’s insistence that it would connect"
+    }
+   ],
+   "uncertainties": [
+    "拨打失败的具体原因尚未说明",
+    "目前仅单一来源（Punch）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_e27ed1d0e9603a17",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

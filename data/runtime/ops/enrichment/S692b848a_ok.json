@@ -1,0 +1,119 @@
+{
+ "label": "S692b848a",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "6817df433df37774aadf457c9f7be590b2b37acfa86704df0721d7699d2db7e8",
+ "tokens": {
+  "input_tokens": 2033,
+  "output_tokens": 550,
+  "total_tokens": 2583
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚APC与NDC就拉各斯市政厅袭击事件相互指责",
+   "summary_zh": "尼日利亚民主大会党（NDC）与全体进步大会党（APC）就拉各斯州伊凯贾市政厅会议期间NDC支持者遭袭事件相互指责。NDC指控执政党煽动政治暴力、试图破坏民主，APC否认指控并称对方应处理内部问题。据称，持砍刀、棍棒和石块的暴徒闯入会场、掀翻座椅并迫使参会者逃离，随后与NDC支持者发生冲突。目前事件仅有单一来源报道。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "拉各斯州",
+    "city": "伊凯贾",
+    "site": "市政厅会议场所",
+    "raw_text": "Ikeja, Lagos State"
+   },
+   "key_facts": [
+    {
+     "fact": "APC与NDC就伊凯贾市政厅会议期间NDC支持者遭袭事件相互指责",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Nigeria Democratic Congress and the All Progressives Congress have traded accusations over the attack on NDC supporters by suspected political thugs during a town hall meeting in Ikeja, Lagos State."
+    },
+    {
+     "fact": "NDC指控执政党煽动政治暴力、试图破坏民主，APC否认指控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "While the NDC accused the ruling party of promoting political violence and attempting to undermine democracy, the APC denied the allegation and urged the opposition party to address its internal problems."
+    },
+    {
+     "fact": "据称持砍刀、棍棒和石块的暴徒闯入会场、掀翻座椅并迫使参会者逃离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "hoodlums armed with cutlasses, cudgels and stones reportedly invaded the venue, scattered chairs and forced participants to flee."
+    },
+    {
+     "fact": "袭击者与部分NDC支持者发生冲突，后者据称投掷座椅抵抗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The incident triggered a confrontation between the attackers and some NDC supporters, who reportedly resisted the invasion by throwing chairs at the hoodlums."
+    }
+   ],
+   "uncertainties": [
+    "袭击者身份仅为“疑似政治暴徒”，尚未证实",
+    "事件细节（暴徒持械、投掷座椅等）均来自“据称”表述，未获独立确认",
+    "目前仅单一来源（Punch）报道，缺乏交叉验证",
+    "伤亡情况未提及"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚APC与NDC就拉各斯市政厅袭击事件相互指责",
+   "summary_zh": "尼日利亚民主大会党（NDC）与全体进步大会党（APC）就拉各斯州伊凯贾市政厅会议期间NDC支持者遭袭事件相互指责。NDC指控执政党煽动政治暴力、试图破坏民主，APC否认指控并称对方应处理内部问题。据称，持砍刀、棍棒和石块的暴徒闯入会场、掀翻座椅并迫使参会者逃离，随后与NDC支持者发生冲突。目前事件仅有单一来源报道。",
+   "event_type": "civil_unrest",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": "拉各斯州",
+    "city": "伊凯贾",
+    "site": "市政厅会议场所",
+    "raw_text": "Ikeja, Lagos State"
+   },
+   "key_facts": [
+    {
+     "fact": "APC与NDC就伊凯贾市政厅会议期间NDC支持者遭袭事件相互指责",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The Nigeria Democratic Congress and the All Progressives Congress have traded accusations over the attack on NDC supporters by suspected political thugs during a town hall meeting in Ikeja, Lagos State."
+    },
+    {
+     "fact": "NDC指控执政党煽动政治暴力、试图破坏民主，APC否认指控",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "While the NDC accused the ruling party of promoting political violence and attempting to undermine democracy, the APC denied the allegation and urged the opposition party to address its internal problems."
+    },
+    {
+     "fact": "据称持砍刀、棍棒和石块的暴徒闯入会场、掀翻座椅并迫使参会者逃离",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "hoodlums armed with cutlasses, cudgels and stones reportedly invaded the venue, scattered chairs and forced participants to flee."
+    },
+    {
+     "fact": "袭击者与部分NDC支持者发生冲突，后者据称投掷座椅抵抗",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "The incident triggered a confrontation between the attackers and some NDC supporters, who reportedly resisted the invasion by throwing chairs at the hoodlums."
+    }
+   ],
+   "uncertainties": [
+    "袭击者身份仅为“疑似政治暴徒”，尚未证实",
+    "事件细节（暴徒持械、投掷座椅等）均来自“据称”表述，未获独立确认",
+    "目前仅单一来源（Punch）报道，缺乏交叉验证",
+    "伤亡情况未提及"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 72
+  }
+ },
+ "event_id": "EVT_4f7a9681692b848a",
+ "disease_event_id": null,
+ "country_code": "NG"
+}

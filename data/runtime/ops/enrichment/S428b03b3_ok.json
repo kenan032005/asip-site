@@ -1,0 +1,138 @@
+{
+ "label": "S428b03b3",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "0076a0d69399d0c100e2b94135bdcb0acf84ef1e3475c84ad0e79702658f51e8",
+ "tokens": {
+  "input_tokens": 2760,
+  "output_tokens": 599,
+  "total_tokens": 3359
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"事故原因尚未确定，警方未认定是意外还是蓄意行为\", \"司机为何驶离道路尚不清楚\", \"事件目前仅有一个来源（贝宁网络电视台）报道，尚缺乏交叉验证\"]",
+    "after": "[\"事故原因尚未确定，警方未认定是意外还是蓄意行为\", \"司机为何驶离道路尚不清楚\", \"事件目前仅有一个来源（贝宁网络电视台）报道，尚缺乏交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "洛杉矶地铁站附近一辆汽车撞向行人，三人死亡",
+   "summary_zh": "据贝宁网络电视台报道，2026年11月10日傍晚高峰时段，洛杉矶北好莱坞地铁站附近一辆白色汽车驶离车道冲上人行道，撞上行人和街头摊贩，造成三人当场死亡、三人重伤。警方尚未确定事故原因，也未认定是意外还是蓄意行为，正调取监控录像调查。洛杉矶市长表示遇难者包括街头摊贩和行人。该报道为单一来源，尚缺乏交叉验证。",
+   "event_type": "other_security",
+   "country_iso3": "USA",
+   "location": {
+    "country_iso3": "USA",
+    "admin1": "加利福尼亚州",
+    "city": "洛杉矶",
+    "site": "北好莱坞地铁站附近北兰克希姆大道与钱德勒大道交叉口",
+    "raw_text": "près de la station de métro North Hollywood, intersection de North Lankershim Boulevard et Chandler Boulevard, vallée de San Fernando, Los Angeles"
+   },
+   "key_facts": [
+    {
+     "fact": "一辆汽车在洛杉矶北好莱坞地铁站附近冲上人行道撞向行人和摊贩，造成三人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Trois personnes ont été tuées et trois autres grièvement blessées mardi 10 novembre 2026 à Los Angeles, lorsqu'un véhicule a percuté des piétons et des vendeurs ambulants près de la station de métro North Hollywood."
+    },
+    {
+     "fact": "三名死者被救援人员当场宣告死亡，两名行人和司机重伤送医",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les trois personnes décédées ont été déclarées mortes sur place par les secours. Deux piétons et le conducteur ont été transportés à l'hôpital dans un état critique"
+    },
+    {
+     "fact": "碰撞发生在当地时间约17时55分，正值高峰时段",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La collision s'est produite vers 17 h 55, heure locale"
+    },
+    {
+     "fact": "警方尚未确定车辆驶离道路的原因，未认定意外或蓄意",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils n'ont établi ni une cause accidentelle ni un acte délibéré."
+    },
+    {
+     "fact": "警方将调取该区域监控录像进行调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le chef de la police, Jim McDonnell, a annoncé que les images de vidéosurveillance du secteur seraient examinées."
+    }
+   ],
+   "uncertainties": [
+    "事故原因尚未确定，警方未认定是意外还是蓄意行为",
+    "司机为何驶离道路尚不清楚",
+    "事件目前仅有一个来源（贝宁网络电视台）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "洛杉矶地铁站附近一辆汽车撞向行人，三人死亡",
+   "summary_zh": "据贝宁网络电视台报道，2026年11月10日傍晚高峰时段，洛杉矶北好莱坞地铁站附近一辆白色汽车驶离车道冲上人行道，撞上行人和街头摊贩，造成三人当场死亡、三人重伤。警方尚未确定事故原因，也未认定是意外还是蓄意行为，正调取监控录像调查。洛杉矶市长表示遇难者包括街头摊贩和行人。该报道为单一来源，尚缺乏交叉验证。",
+   "event_type": "other_security",
+   "country_iso3": "USA",
+   "location": {
+    "country_iso3": "USA",
+    "admin1": "加利福尼亚州",
+    "city": "洛杉矶",
+    "site": "北好莱坞地铁站附近北兰克希姆大道与钱德勒大道交叉口",
+    "raw_text": "près de la station de métro North Hollywood, intersection de North Lankershim Boulevard et Chandler Boulevard, vallée de San Fernando, Los Angeles"
+   },
+   "key_facts": [
+    {
+     "fact": "一辆汽车在洛杉矶北好莱坞地铁站附近冲上人行道撞向行人和摊贩，造成三人死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Trois personnes ont été tuées et trois autres grièvement blessées mardi 10 novembre 2026 à Los Angeles, lorsqu'un véhicule a percuté des piétons et des vendeurs ambulants près de la station de métro North Hollywood."
+    },
+    {
+     "fact": "三名死者被救援人员当场宣告死亡，两名行人和司机重伤送医",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les trois personnes décédées ont été déclarées mortes sur place par les secours. Deux piétons et le conducteur ont été transportés à l'hôpital dans un état critique"
+    },
+    {
+     "fact": "碰撞发生在当地时间约17时55分，正值高峰时段",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "La collision s'est produite vers 17 h 55, heure locale"
+    },
+    {
+     "fact": "警方尚未确定车辆驶离道路的原因，未认定意外或蓄意",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Ils n'ont établi ni une cause accidentelle ni un acte délibéré."
+    },
+    {
+     "fact": "警方将调取该区域监控录像进行调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le chef de la police, Jim McDonnell, a annoncé que les images de vidéosurveillance du secteur seraient examinées."
+    }
+   ],
+   "uncertainties": [
+    "事故原因尚未确定，警方未认定是意外还是蓄意行为",
+    "司机为何驶离道路尚不清楚",
+    "事件目前仅有一个来源（贝宁网络电视台）报道，尚缺乏交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_08041411428b03b3",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
