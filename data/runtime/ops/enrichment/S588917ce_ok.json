@@ -1,0 +1,116 @@
+{
+ "label": "S588917ce",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "00dc2aab3c8e3a0241d5ea0a2d6a903dbf8796d73ff91d4e3f5b634244289644",
+ "tokens": {
+  "input_tokens": 2149,
+  "output_tokens": 389,
+  "total_tokens": 2538
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"四名学生死亡事件的具体经过尚未披露\", \"报道为单一来源，尚未获得交叉验证\"]",
+    "after": "[\"四名学生死亡事件的具体经过尚未披露\", \"报道为单一来源，尚未获得交叉验证\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚晚间新闻综述：法院未取消阿提库候选人资格，迈纳之子将入狱服刑",
+   "summary_zh": "尼日利亚Punch媒体发布晚间新闻综述，内容涉及ADC律师坚称联邦高等法院判决未使阿提库·阿布巴卡尔2027年总统候选人资格失效，以及法院下令费萨尔·迈纳之子开始服刑。综述还提到尼日利亚大学恩苏卡校区确认四名学生在一场校外聚会后死亡。上述内容为单一来源报道，具体细节尚未获得交叉验证。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "ADC律师坚称法院判决未取消阿提库2027年总统候选人资格",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "An ADC lawyer, Kalu Kalu, has insisted that the Federal High Court judgment nullifying the Mark-led leadership did not invalidate Atiku Abubakar’s candidacy for the 2027 presidential election."
+    },
+    {
+     "fact": "法院下令费萨尔·迈纳之子开始服刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a court order directing Faisal Maina’s son to begin his prison term"
+    },
+    {
+     "fact": "尼日利亚大学恩苏卡校区确认四名学生在一场校外聚会后死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the University of Nigeria, Nsukka’s confirmation that four students died after an off-campus gathering"
+    }
+   ],
+   "uncertainties": [
+    "四名学生死亡事件的具体经过尚未披露",
+    "报道为单一来源，尚未获得交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 55
+  },
+  "corrected_output": {
+   "source_language": "en",
+   "title_zh": "尼日利亚晚间新闻综述：法院未取消阿提库候选人资格，迈纳之子将入狱服刑",
+   "summary_zh": "尼日利亚Punch媒体发布晚间新闻综述，内容涉及ADC律师坚称联邦高等法院判决未使阿提库·阿布巴卡尔2027年总统候选人资格失效，以及法院下令费萨尔·迈纳之子开始服刑。综述还提到尼日利亚大学恩苏卡校区确认四名学生在一场校外聚会后死亡。上述内容为单一来源报道，具体细节尚未获得交叉验证。",
+   "event_type": "other_security",
+   "country_iso3": "NGA",
+   "location": {
+    "country_iso3": "NGA",
+    "admin1": null,
+    "city": null,
+    "site": null,
+    "raw_text": ""
+   },
+   "key_facts": [
+    {
+     "fact": "ADC律师坚称法院判决未取消阿提库2027年总统候选人资格",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "An ADC lawyer, Kalu Kalu, has insisted that the Federal High Court judgment nullifying the Mark-led leadership did not invalidate Atiku Abubakar’s candidacy for the 2027 presidential election."
+    },
+    {
+     "fact": "法院下令费萨尔·迈纳之子开始服刑",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "a court order directing Faisal Maina’s son to begin his prison term"
+    },
+    {
+     "fact": "尼日利亚大学恩苏卡校区确认四名学生在一场校外聚会后死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "the University of Nigeria, Nsukka’s confirmation that four students died after an off-campus gathering"
+    }
+   ],
+   "uncertainties": [
+    "四名学生死亡事件的具体经过尚未披露",
+    "报道为单一来源，尚未获得交叉验证",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 55
+  }
+ },
+ "event_id": "EVT_3225a91a588917ce",
+ "disease_event_id": null,
+ "country_code": "NG"
+}
