@@ -1,0 +1,136 @@
+{
+ "label": "Sf3217373",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "9cc6894c7dac27a32bed2b31204ed92b59e2815c788a01550bcf5168eacdfa81",
+ "tokens": {
+  "input_tokens": 2744,
+  "output_tokens": 571,
+  "total_tokens": 3315
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"目前仅一个来源（Benin Web TV）报道，尚缺乏交叉验证\", \"7名被告缺席受审，其具体情况未详\"]",
+    "after": "[\"目前仅一个来源（Benin Web TV）报道，尚缺乏交叉验证\", \"7名被告缺席受审，其具体情况未详\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "布基纳法索：12人因索伦佐镇长被杀案被判终身监禁",
+   "summary_zh": "布基纳法索代杜古法院11月11日判处12人终身监禁，罪名涉及参与非法集会、故意毁坏财物及谋杀索伦佐镇长迪比桑·库利巴利。另有2人因参与非法集会被判12个月监禁，6人获释。该案源于2024年11月底索伦佐发生的一起暴力示威。据单一来源报道，20名被告中13人出庭、7人缺席受审。",
+   "event_type": "civil_unrest",
+   "country_iso3": "BFA",
+   "location": {
+    "country_iso3": "BFA",
+    "admin1": "Boucle du Mouhoun",
+    "city": "Solenzo",
+    "site": "Sofitex会议室",
+    "raw_text": "Solenzo, ouest du Burkina Faso"
+   },
+   "key_facts": [
+    {
+     "fact": "布基纳法索法院判处12人终身监禁，罪名包括谋杀索伦佐镇长",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Douze personnes ont été condamnées à la réclusion criminelle à perpétuité au Burkina Faso pour le meurtre de Dibissan Coulibaly, chef de canton de Solenzo."
+    },
+    {
+     "fact": "判决由代杜古大审法院刑事庭于2026年11月11日作出",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le verdict a été rendu mercredi 11 novembre 2026 par la chambre criminelle du tribunal de grande instance de Dédougou"
+    },
+    {
+     "fact": "案件源于2024年11月底索伦佐发生的一起示威及暴力事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’affaire remonte à une manifestation organisée à Solenzo à la fin de novembre 2024."
+    },
+    {
+     "fact": "20名被告中13人出庭、7人缺席受审",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Treize des vingt accusés étaient présents à l’audience, tandis que sept ont été jugés en leur absence"
+    },
+    {
+     "fact": "12名被判谋杀罪者需连带赔偿7500万非洲法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la juridiction a condamné solidairement les douze personnes reconnues coupables de meurtre à verser 75 millions de francs CFA"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Benin Web TV）报道，尚缺乏交叉验证",
+    "7名被告缺席受审，其具体情况未详"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "布基纳法索：12人因索伦佐镇长被杀案被判终身监禁",
+   "summary_zh": "布基纳法索代杜古法院11月11日判处12人终身监禁，罪名涉及参与非法集会、故意毁坏财物及谋杀索伦佐镇长迪比桑·库利巴利。另有2人因参与非法集会被判12个月监禁，6人获释。该案源于2024年11月底索伦佐发生的一起暴力示威。据单一来源报道，20名被告中13人出庭、7人缺席受审。",
+   "event_type": "civil_unrest",
+   "country_iso3": "BFA",
+   "location": {
+    "country_iso3": "BFA",
+    "admin1": "Boucle du Mouhoun",
+    "city": "Solenzo",
+    "site": "Sofitex会议室",
+    "raw_text": "Solenzo, ouest du Burkina Faso"
+   },
+   "key_facts": [
+    {
+     "fact": "布基纳法索法院判处12人终身监禁，罪名包括谋杀索伦佐镇长",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Douze personnes ont été condamnées à la réclusion criminelle à perpétuité au Burkina Faso pour le meurtre de Dibissan Coulibaly, chef de canton de Solenzo."
+    },
+    {
+     "fact": "判决由代杜古大审法院刑事庭于2026年11月11日作出",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le verdict a été rendu mercredi 11 novembre 2026 par la chambre criminelle du tribunal de grande instance de Dédougou"
+    },
+    {
+     "fact": "案件源于2024年11月底索伦佐发生的一起示威及暴力事件",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "L’affaire remonte à une manifestation organisée à Solenzo à la fin de novembre 2024."
+    },
+    {
+     "fact": "20名被告中13人出庭、7人缺席受审",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Treize des vingt accusés étaient présents à l’audience, tandis que sept ont été jugés en leur absence"
+    },
+    {
+     "fact": "12名被判谋杀罪者需连带赔偿7500万非洲法郎",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "la juridiction a condamné solidairement les douze personnes reconnues coupables de meurtre à verser 75 millions de francs CFA"
+    }
+   ],
+   "uncertainties": [
+    "目前仅一个来源（Benin Web TV）报道，尚缺乏交叉验证",
+    "7名被告缺席受审，其具体情况未详",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "direct",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_69174058f3217373",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
