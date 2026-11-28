@@ -1,0 +1,125 @@
+{
+ "label": "S03015093",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "df53d1933ac13762166a87bf2687bce7d230f4e8d6581409a08ce75b282d6a1e",
+ "tokens": {
+  "input_tokens": 2670,
+  "output_tokens": 595,
+  "total_tokens": 3265
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "PASS",
+  "corrections": [],
+  "post_status": null,
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "伊利诺伊州：Amtrak列车与汽车相撞，两名小学生死亡",
+   "summary_zh": "美国伊利诺伊州芝加哥西郊的Western Springs一处铁路道口发生Amtrak列车与汽车相撞事故，造成两名小学生死亡，驾车女性重伤送医。列车上的35名乘客和乘务人员无人受伤。事故导致Metra BNSF线路双向交通中断数小时，当局表示事发时道口栏杆已放下，事故具体原因仍在调查中。",
+   "event_type": "transport_disruption",
+   "country_iso3": "USA",
+   "location": {
+    "country_iso3": "USA",
+    "admin1": "伊利诺伊州",
+    "city": "Western Springs",
+    "site": "Wolf Road铁路道口",
+    "raw_text": "Western Springs, dans l'Illinois, au passage à niveau de Wolf Road, à une trentaine de kilomètres à l'ouest de Chicago"
+   },
+   "key_facts": [
+    {
+     "fact": "Amtrak列车在伊利诺伊州Western Springs一处道口与汽车相撞，两名小学生死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Deux élèves d'une école primaire de la banlieue de Chicago ont été tués mercredi 11 novembre 2026 lorsqu'un train Amtrak a percuté la voiture dans laquelle ils se trouvaient à Western Springs, dans l'Illinois."
+    },
+    {
+     "fact": "驾车女性重伤并被送往医院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une femme qui conduisait le véhicule a été grièvement blessée et transportée à l'hôpital."
+    },
+    {
+     "fact": "列车上35名乘客和乘务人员无人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucun des 35 voyageurs et membres d'équipage qui se trouvaient à bord n'a été blessé."
+    },
+    {
+     "fact": "Metra BNSF线路双向交通中断数小时",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le trafic de la ligne BNSF de Metra, empruntée par les trains de banlieue, a été interrompu dans les deux sens pendant plusieurs heures."
+    },
+    {
+     "fact": "当局称事发时道口栏杆已放下，事故原因仍在调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les autorités de Western Springs ont indiqué que les barrières du passage à niveau étaient abaissées au moment de la collision. Les services de police et les enquêteurs ferroviaires examinent les circonstances exactes de l'accident."
+    }
+   ],
+   "uncertainties": [
+    "事故具体原因尚未查明，警方与铁路调查人员仍在调查",
+    "目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "伊利诺伊州：Amtrak列车与汽车相撞，两名小学生死亡",
+   "summary_zh": "美国伊利诺伊州芝加哥西郊的Western Springs一处铁路道口发生Amtrak列车与汽车相撞事故，造成两名小学生死亡，驾车女性重伤送医。列车上的35名乘客和乘务人员无人受伤。事故导致Metra BNSF线路双向交通中断数小时，当局表示事发时道口栏杆已放下，事故具体原因仍在调查中。",
+   "event_type": "transport_disruption",
+   "country_iso3": "USA",
+   "location": {
+    "country_iso3": "USA",
+    "admin1": "伊利诺伊州",
+    "city": "Western Springs",
+    "site": "Wolf Road铁路道口",
+    "raw_text": "Western Springs, dans l'Illinois, au passage à niveau de Wolf Road, à une trentaine de kilomètres à l'ouest de Chicago"
+   },
+   "key_facts": [
+    {
+     "fact": "Amtrak列车在伊利诺伊州Western Springs一处道口与汽车相撞，两名小学生死亡",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Deux élèves d'une école primaire de la banlieue de Chicago ont été tués mercredi 11 novembre 2026 lorsqu'un train Amtrak a percuté la voiture dans laquelle ils se trouvaient à Western Springs, dans l'Illinois."
+    },
+    {
+     "fact": "驾车女性重伤并被送往医院",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Une femme qui conduisait le véhicule a été grièvement blessée et transportée à l'hôpital."
+    },
+    {
+     "fact": "列车上35名乘客和乘务人员无人受伤",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Aucun des 35 voyageurs et membres d'équipage qui se trouvaient à bord n'a été blessé."
+    },
+    {
+     "fact": "Metra BNSF线路双向交通中断数小时",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le trafic de la ligne BNSF de Metra, empruntée par les trains de banlieue, a été interrompu dans les deux sens pendant plusieurs heures."
+    },
+    {
+     "fact": "当局称事发时道口栏杆已放下，事故原因仍在调查",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Les autorités de Western Springs ont indiqué que les barrières du passage à niveau étaient abaissées au moment de la collision. Les services de police et les enquêteurs ferroviaires examinent les circonstances exactes de l'accident."
+    }
+   ],
+   "uncertainties": [
+    "事故具体原因尚未查明，警方与铁路调查人员仍在调查",
+    "目前仅有一个来源（Benin Web TV）报道，尚缺乏交叉验证"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 82
+  }
+ },
+ "event_id": "EVT_067a1c2c03015093",
+ "disease_event_id": null,
+ "country_code": "BJ"
+}
