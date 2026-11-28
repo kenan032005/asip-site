@@ -1,0 +1,136 @@
+{
+ "label": "Sec2347a4",
+ "task_type": "stage4_event_enrichment",
+ "requested_model": "deepseek-v4-flash",
+ "returned_model": "deepseek-flash",
+ "provider_status": "succeeded",
+ "finish_reason": "stop",
+ "thinking_requested": "disabled",
+ "reasoning_tokens": null,
+ "cache_hit": false,
+ "ai_input_hash": "ac563dc3136054ef5bab1611f5312624091bbca783d545c6b854206cd8b5ed33",
+ "tokens": {
+  "input_tokens": 2691,
+  "output_tokens": 509,
+  "total_tokens": 3200
+ },
+ "schema_pass": true,
+ "status": "ok",
+ "safety": {
+  "gate": "PASS",
+  "pre_status": "FAIL",
+  "corrections": [
+   {
+    "fact_id": "<text>",
+    "marker": "alleged_claimed",
+    "field": "uncertainties",
+    "before": "[\"难民人数及登记比例由难民署单一来源提供，尚未获得交叉验证\", \"难民涌入对边境安全的具体影响尚未明确\"]",
+    "after": "[\"难民人数及登记比例由难民署单一来源提供，尚未获得交叉验证\", \"难民涌入对边境安全的具体影响尚未明确\", \"据称，尚未获得独立证实。\"]",
+    "rule_id": "SAFETY-CORR-A1",
+    "numeric_anchor": null
+   }
+  ],
+  "post_status": "PASS",
+  "publication_eligible": true,
+  "report_input_eligible": true,
+  "manual_review_required": false,
+  "original_ai_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔：年初以来逾6万尼日利亚难民越境进入",
+   "summary_zh": "联合国难民署（HCR）警告称，尼日利亚北部人道局势恶化，年初以来已有超过6万人越境进入尼日尔。大规模难民涌入给已收容逾50万境内流离失所者的尼日尔增添压力。难民署呼吁筹集超过1100万美元，其中200万美元用于紧急需求。",
+   "event_type": "border_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "迪法大区",
+    "city": null,
+    "site": "尼日尔与尼日利亚边境沿线",
+    "raw_text": "tout le long de la frontière avec le Niger, dans la région de Diffa, au sud-est du pays, et dans celle de Tahoua"
+   },
+   "key_facts": [
+    {
+     "fact": "年初以来超过6万尼日利亚人越境进入尼日尔",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plus de 60 000 personnes ont traversé la frontière en direction du Niger depuis le début de l'année"
+    },
+    {
+     "fact": "尼日尔境内已有超过50万境内流离失所者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un pays qui compte déjà plus de 500 000 déplacés internes"
+    },
+    {
+     "fact": "难民署呼吁筹集超过1100万美元，其中200万美元用于紧急需求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le HCR lance un appel pour réunir plus de 11 millions de dollars, dont 2 millions destinés aux besoins critiques immédiats"
+    },
+    {
+     "fact": "2026年1月以来已有超过2.3万名尼日利亚难民抵达迪法大区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plus de 23 000 réfugiés nigérians sont arrivés depuis janvier 2026 dans la région de Diffa"
+    },
+    {
+     "fact": "仅5%的尼日利亚难民完成正式登记",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Seuls 5 % de ces réfugiés nigérians ont pu être officiellement enregistrés"
+    }
+   ],
+   "uncertainties": [
+    "难民人数及登记比例由难民署单一来源提供，尚未获得交叉验证",
+    "难民涌入对边境安全的具体影响尚未明确"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  },
+  "corrected_output": {
+   "source_language": "fr",
+   "title_zh": "尼日尔：年初以来逾6万尼日利亚难民越境进入",
+   "summary_zh": "联合国难民署（HCR）警告称，尼日利亚北部人道局势恶化，年初以来已有超过6万人越境进入尼日尔。大规模难民涌入给已收容逾50万境内流离失所者的尼日尔增添压力。难民署呼吁筹集超过1100万美元，其中200万美元用于紧急需求。",
+   "event_type": "border_security",
+   "country_iso3": "NER",
+   "location": {
+    "country_iso3": "NER",
+    "admin1": "迪法大区",
+    "city": null,
+    "site": "尼日尔与尼日利亚边境沿线",
+    "raw_text": "tout le long de la frontière avec le Niger, dans la région de Diffa, au sud-est du pays, et dans celle de Tahoua"
+   },
+   "key_facts": [
+    {
+     "fact": "年初以来超过6万尼日利亚人越境进入尼日尔",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "plus de 60 000 personnes ont traversé la frontière en direction du Niger depuis le début de l'année"
+    },
+    {
+     "fact": "尼日尔境内已有超过50万境内流离失所者",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "un pays qui compte déjà plus de 500 000 déplacés internes"
+    },
+    {
+     "fact": "难民署呼吁筹集超过1100万美元，其中200万美元用于紧急需求",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Le HCR lance un appel pour réunir plus de 11 millions de dollars, dont 2 millions destinés aux besoins critiques immédiats"
+    },
+    {
+     "fact": "2026年1月以来已有超过2.3万名尼日利亚难民抵达迪法大区",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Plus de 23 000 réfugiés nigérians sont arrivés depuis janvier 2026 dans la région de Diffa"
+    },
+    {
+     "fact": "仅5%的尼日利亚难民完成正式登记",
+     "evidence_field": "body_extracted",
+     "evidence_excerpt": "Seuls 5 % de ces réfugiés nigérians ont pu être officiellement enregistrés"
+    }
+   ],
+   "uncertainties": [
+    "难民人数及登记比例由难民署单一来源提供，尚未获得交叉验证",
+    "难民涌入对边境安全的具体影响尚未明确",
+    "据称，尚未获得独立证实。"
+   ],
+   "security_relevance": "indirect",
+   "classification_confidence": 78
+  }
+ },
+ "event_id": "EVT_ef4f0416ec2347a4",
+ "disease_event_id": null,
+ "country_code": "NE"
+}
